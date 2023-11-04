@@ -4,12 +4,12 @@ Class {
 	#category : 'Bloc-Space - Frame'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrameDrawingValidationPhase >> name [
 	^ 'Drawing validation'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlSpaceFrameDrawingValidationPhase >> runOn: aSpace [
 
 	aSpace hasHostSpace

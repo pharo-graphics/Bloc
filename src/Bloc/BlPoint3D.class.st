@@ -18,7 +18,7 @@ Class {
 	#category : 'Bloc-Basic-Math'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlPoint3D class >> x: aX y: aY z: aZ [
 
 	^ self new
@@ -26,7 +26,7 @@ BlPoint3D class >> x: aX y: aY z: aZ [
 		yourself
 ]
 
-{ #category : #composition }
+{ #category : 'composition' }
 BlPoint3D >> @ aNumber [
 	"Return a new 4D point with x, y and z represented by components and given number as w."
 	<return: #BlPoint4D>
@@ -34,7 +34,7 @@ BlPoint3D >> @ aNumber [
 	^ BlPoint4D x: x y: y z: z w: aNumber
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlPoint3D >> initialize [
 	super initialize.
 	
@@ -43,7 +43,7 @@ BlPoint3D >> initialize [
 	z := 0.0
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlPoint3D >> isPoint [
 	"Return true if I represent a point, false otherwise"
 	<return: #Boolean>
@@ -51,7 +51,7 @@ BlPoint3D >> isPoint [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlPoint3D >> isPoint2D [
 	"Return true if I represent a 2D point, false otherwise"
 	<return: #Boolean>
@@ -59,7 +59,7 @@ BlPoint3D >> isPoint2D [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlPoint3D >> isPoint3D [
 	"Return true if I represent a 3D point, false otherwise"
 	<return: #Boolean>
@@ -67,7 +67,7 @@ BlPoint3D >> isPoint3D [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlPoint3D >> isZero [
 	"Return true if all my components are zeros, false otherwise"
 	<return: #Boolean>
@@ -75,7 +75,7 @@ BlPoint3D >> isZero [
 	^ x isZero and: [ y isZero and: [ z isZero ] ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlPoint3D >> printOn: aStream [
 	aStream nextPut: $(.
 	x printOn: aStream.
@@ -94,7 +94,7 @@ BlPoint3D >> printOn: aStream [
 	aStream nextPut: $).
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlPoint3D >> storeOn: aStream [ 
 	"x@y@z printed form is good for storing too"
 	aStream nextPut: $(.
@@ -102,14 +102,14 @@ BlPoint3D >> storeOn: aStream [
 	aStream nextPut: $).
 ]
 
-{ #category : #'matrix - transforming points' }
+{ #category : 'matrix - transforming points' }
 BlPoint3D >> transformedOn: aBlMatrix [
 	<return: #BlPoint>
 	
 	^ aBlMatrix transformPoint3D: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPoint3D >> x [
 	"Return my x component"
 	<return: #Number>
@@ -117,7 +117,7 @@ BlPoint3D >> x [
 	^ x
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlPoint3D >> x: aX y: aY z: aZ [
 
 	x := aX.
@@ -125,7 +125,7 @@ BlPoint3D >> x: aX y: aY z: aZ [
 	z := aZ
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPoint3D >> y [
 	"Return my y component"
 	<return: #Number>
@@ -133,7 +133,7 @@ BlPoint3D >> y [
 	^ y
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPoint3D >> z [
 	"Return my z component"
 	<return: #Number>

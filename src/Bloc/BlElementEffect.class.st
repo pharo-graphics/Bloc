@@ -13,7 +13,7 @@ Class {
 	#category : 'Bloc-Effect'
 }
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlElementEffect >> computeBounds: aBlBounds [
 	"Compute effect bounds based on provided geometry bounds.
 	Default implementation simply returns given bounds"
@@ -22,21 +22,21 @@ BlElementEffect >> computeBounds: aBlBounds [
 	^ aBlBounds
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlElementEffect >> effectBounds: aBlBounds of: anElement [
 	^ self computeBounds: (aBlBounds rectangle: anElement visualBounds)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementEffect >> isNullEffect [
 	^ false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementEffect >> on: anElement [
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementEffect >> wantsCompositionLayer [
 	^ false
 ]

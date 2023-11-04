@@ -8,17 +8,17 @@ Class {
 	#category : 'Bloc-Layouts-Support'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLayoutVertical >> isHorizontal [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLayoutVertical >> isVertical [
 	^ true
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlLayoutVertical >> of: anObject [
 	^ anObject vertical
 ]

@@ -11,24 +11,24 @@ Class {
 	#category : 'Bloc-Universe - Parallel'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseHostStartRequestSignal class >> label [
 	^ 'Request host start'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseHostStartRequestSignal class >> nextSignals [
 	^ { BlParallelUniverseHostStartedSignal }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseHostStartRequestSignal >> host [
 	<return: #'BlHost class'>
 	
 	^ host
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseHostStartRequestSignal >> host: aBlHostClass [
 	host := aBlHostClass
 ]

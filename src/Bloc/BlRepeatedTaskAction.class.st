@@ -7,24 +7,24 @@ Class {
 	#category : 'Bloc-Space - Tasks'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRepeatedTaskAction >> action [
 	^ action
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRepeatedTaskAction >> action: aBlock [
 	action := aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlRepeatedTaskAction >> initialize [
 	super initialize.
 	
 	action := [ :optionalThisTask | ]
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlRepeatedTaskAction >> onRun [
 	self action isClosure
 		ifTrue: [ self action cull: self ]

@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceRedrawRequestedEvent >> sendTo: anObject [
 	anObject spaceRedrawRequestedEvent: self
 ]

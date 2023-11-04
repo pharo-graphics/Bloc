@@ -8,7 +8,7 @@ Class {
 	#category : 'Bloc-Events-KeyBinding'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlKeyCombinationConverterCNF >> visitAlternative: aBlAlternativeCombination [
 	| combinations pairedCompulsories alternative |
 
@@ -40,7 +40,7 @@ BlKeyCombinationConverterCNF >> visitAlternative: aBlAlternativeCombination [
 	^ alternative accept: self.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlKeyCombinationConverterCNF >> visitCompulsory: aBlCompulsoryCombination [
 	| compulsory |
 
@@ -52,7 +52,7 @@ BlKeyCombinationConverterCNF >> visitCompulsory: aBlCompulsoryCombination [
 	^ compulsory
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlKeyCombinationConverterCNF >> visitKey: aBlKeyCodeCombination [
 	^ BlCompulsoryCombination new with: aBlKeyCodeCombination
 ]

@@ -24,35 +24,35 @@ Class {
 	#category : 'Bloc-Space - Events'
 }
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlSpaceShutdownOnCloseListener >> handleEvent: anEvent [
 	| aSpace |
 	aSpace := anEvent currentTarget.
 	aSpace universe snapshot: shouldSave andQuit: true.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpaceShutdownOnCloseListener >> initialize [
 	super initialize.
 	
 	shouldSave := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceShutdownOnCloseListener >> shouldSave [
 	<return: #Boolean>
 	
 	^ shouldSave
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceShutdownOnCloseListener >> shouldSave: aBoolean [	
 	"When set to true the image will be saved before quitting"
 
 	shouldSave := aBoolean
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlSpaceShutdownOnCloseListener >> wantsEvent: anEvent [
 	^ anEvent class == BlSpaceClosedEvent
 ]

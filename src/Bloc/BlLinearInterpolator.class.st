@@ -8,7 +8,7 @@ Class {
 	#category : 'Bloc-Basic-Interpolators'
 }
 
-{ #category : #interpolation }
+{ #category : 'interpolation' }
 BlLinearInterpolator >> interpolate: aNumber [
 	"f(x) = x"
 	<return: #Number>

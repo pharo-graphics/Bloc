@@ -13,13 +13,13 @@ Class {
 	#category : #'Bloc-Events-Type-Space'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceDestroyedEvent >> space [
 
 	^ space
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceDestroyedEvent >> space: aSpace [
 	space := aSpace
 ]

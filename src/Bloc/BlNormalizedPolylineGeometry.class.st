@@ -11,31 +11,31 @@ Class {
 	#category : 'Bloc-Basic-Geometry'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlNormalizedPolylineGeometry class >> vertices: aCollectionOfNormalizedPoints [
 	^ self new vertices: aCollectionOfNormalizedPoints
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlNormalizedPolylineGeometry >> initialize [
 	super initialize.
 	
 	vertices := #()
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlNormalizedPolylineGeometry >> matchExtent: aPoint [
 	"Resize geometry to exactly match provided extent as a Point"
 
 	extent := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNormalizedPolylineGeometry >> vertices [
 	^ vertices
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNormalizedPolylineGeometry >> vertices: anObject [
 	vertices := anObject
 ]

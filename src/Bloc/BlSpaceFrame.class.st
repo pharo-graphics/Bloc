@@ -11,43 +11,43 @@ Class {
 	#category : 'Bloc-Space - Frame'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlSpaceFrame >> addPhase: aFramePhase [
 
 	self phases add: aFramePhase
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlSpaceFrame >> addPhase: aPhase before: otherPhase [
 
 	self phases add: aPhase before: otherPhase
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlSpaceFrame >> addPhases: aCollectonOfPhases [
 	aCollectonOfPhases do: [ :aFramePhase | self addPhase: aFramePhase ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrame >> currentPhase [
 
 	^ currentPhaseLink value
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlSpaceFrame >> detectPhase: aBlock [
 
 	^ self phases detect: aBlock
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceFrame >> hasNextPhase [
 	<return: #Boolean>
 
 	^ currentPhaseLink nextLink isNotNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrame >> id [
 	"Return the frame id, which is a linearly increasing counter of frames"
 	<return: #Number>
@@ -55,12 +55,12 @@ BlSpaceFrame >> id [
 	^ id
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSpaceFrame >> incrementFrameId [
 	id := id + 1
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpaceFrame >> initialize [
 	super initialize.
 	
@@ -70,7 +70,7 @@ BlSpaceFrame >> initialize [
 	currentPhaseLink := phases firstLink
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpaceFrame >> initializePhases [
 
 	self addPhases: { 
@@ -83,7 +83,7 @@ BlSpaceFrame >> initializePhases [
 		BlSpaceFrameDrawingPhase new " drawing invalidate elements  "}
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSpaceFrame >> nextPhaseLink [
 	"Return the link with a next frame after the current one"
 	<return: #Link>
@@ -93,7 +93,7 @@ BlSpaceFrame >> nextPhaseLink [
 		ifFalse: [ phases firstLink ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrame >> phases [
 	"Return a collection of all phases"
 	<return: #Collection of: #BlSpaceFramePhase>
@@ -101,19 +101,19 @@ BlSpaceFrame >> phases [
 	^ phases
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 BlSpaceFrame >> removePhase: aFramePhase [
 
 	self phases remove: aFramePhase ifAbsent: [ Error signal: 'Phase not found']
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlSpaceFrame >> runCurrentPhaseOn: aSpace [
 
 	self currentPhase runOn: aSpace
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlSpaceFrame >> runOn: aSpace [
 	self incrementFrameId.
 	self runCurrentPhaseOn: aSpace.
@@ -126,7 +126,7 @@ BlSpaceFrame >> runOn: aSpace [
 	self switchToNextPhase
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlSpaceFrame >> switchToNextPhase [
 	"Switch to the next phase"
 

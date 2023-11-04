@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #'api - property' }
+{ #category : 'api - property' }
 BlElementLayoutVerticalResizerProperty >> applyOnElement: anElement [
 	anElement constraints vertical resizer = self resizer
 		ifTrue: [ ^ self ].
@@ -12,7 +12,7 @@ BlElementLayoutVerticalResizerProperty >> applyOnElement: anElement [
 	anElement constraintsDo: [ :c | c vertical resizer: self resizer ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementLayoutVerticalResizerProperty >> printOn: aStream [
 	aStream
 		nextPutAll: 'Horizontal resizer - ';

@@ -8,22 +8,22 @@ Class {
 	#category : 'Bloc-Events-Type-Element'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementAddedToSceneGraphEvent class >> disableIn: anObject [
 	anObject disableAddedToSceneGraph
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementAddedToSceneGraphEvent class >> enableIn: anObject [
 	anObject enableAddedToSceneGraph
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementAddedToSceneGraphEvent class >> wantedIn: anObject [
 	^ anObject wantsAddedToSceneGraph
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlElementAddedToSceneGraphEvent >> sendTo: anObject [
 	anObject elementAddedToSceneGraphEvent: self
 ]

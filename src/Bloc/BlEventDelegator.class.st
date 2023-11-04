@@ -14,7 +14,7 @@ Class {
 	#category : 'Bloc-Events-Handler'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlEventDelegator class >> delegate: anEventClass to: anEventTarget [
 	^ self new
 		eventClass: anEventClass;
@@ -22,32 +22,32 @@ BlEventDelegator class >> delegate: anEventClass to: anEventTarget [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventDelegator >> eventClass [
 	^ eventClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventDelegator >> eventClass: anObject [
 	eventClass := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventDelegator >> eventTarget [
 	^ eventTarget
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventDelegator >> eventTarget: anObject [
 	eventTarget := anObject
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlEventDelegator >> handleEvent: anEvent [
 	self eventTarget dispatchEvent: anEvent
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlEventDelegator >> wantsEvent: anEvent [
 	^ anEvent class == self eventClass or: [ anEvent class inheritsFrom: self eventClass ]
 ]

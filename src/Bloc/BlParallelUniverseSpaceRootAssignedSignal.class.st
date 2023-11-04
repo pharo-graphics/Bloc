@@ -8,12 +8,12 @@ Class {
 	#category : 'Bloc-Universe - Parallel'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseSpaceRootAssignedSignal class >> label [
 	^ 'Assign space to root element'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseSpaceRootAssignedSignal class >> nextSignals [
 	^ { BlParallelUniverseSpaceDispatchAddedToSceneSignal }
 ]

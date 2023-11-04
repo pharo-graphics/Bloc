@@ -7,23 +7,23 @@ Class {
 	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceResizedEvent >> extent [
 	"Return window size in screen coordinates"
 	^ extent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceResizedEvent >> extent: anObject [
 	extent := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceResizedEvent >> isSpaceResizedEvent [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlSpaceResizedEvent >> sendTo: anObject [
 	anObject spaceResizedEvent: self
 ]

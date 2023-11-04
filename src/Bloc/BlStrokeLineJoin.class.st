@@ -25,12 +25,12 @@ Class {
 	#category : 'Bloc-Paint-Support'
 }
 
-{ #category : #'predefined instances' }
+{ #category : 'predefined instances' }
 BlStrokeLineJoin class >> bevel [
 	^ bevel ifNil: [ bevel := BlStrokeLineBevelJoin new ]
 ]
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlStrokeLineJoin class >> cleanUp [
 	<script: 'self cleanUp'>
 	super cleanUp.
@@ -38,22 +38,22 @@ BlStrokeLineJoin class >> cleanUp [
 	bevel := miter := round := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeLineJoin class >> joinName [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'predefined instances' }
+{ #category : 'predefined instances' }
 BlStrokeLineJoin class >> miter [
 	^ miter ifNil: [ miter := BlStrokeLineMiterJoin new ]
 ]
 
-{ #category : #'predefined instances' }
+{ #category : 'predefined instances' }
 BlStrokeLineJoin class >> round [
 	^ round ifNil: [ round := BlStrokeLineRoundJoin new ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlStrokeLineJoin >> printOn: aStream [
 
 	self class ~= BlStrokeLineJoin

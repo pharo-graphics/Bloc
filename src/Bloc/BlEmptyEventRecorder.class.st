@@ -8,7 +8,7 @@ Class {
 	#category : 'Bloc-Space - Events'
 }
 
-{ #category : #'api - recording' }
+{ #category : 'api - recording' }
 BlEmptyEventRecorder >> record: anEvent [
 	"I ignore events"
 ]

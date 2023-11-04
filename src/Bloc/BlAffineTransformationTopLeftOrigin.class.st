@@ -8,7 +8,7 @@ Class {
 	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #math }
+{ #category : 'math' }
 BlAffineTransformationTopLeftOrigin >> originIn: anElement [
 
 	^ 0 @ 0

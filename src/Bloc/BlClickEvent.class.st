@@ -14,12 +14,12 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlClickEvent >> isClick [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlClickEvent >> sendTo: anObject [
 	anObject clickEvent: self
 ]

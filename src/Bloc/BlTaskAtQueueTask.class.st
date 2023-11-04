@@ -23,13 +23,13 @@ Class {
 	#category : 'Bloc-DataStructure - Priority Queue'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTaskAtQueueTask class >> valuable: aValuable at: aTime [
 
 	^self new initialize: aValuable at: aTime
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtQueueTask >> entryPriority [ 
 	"Answer the receiver's priority.
 	0 is highest, so earlier scheduled tasks have a higher priority"
@@ -38,19 +38,19 @@ BlTaskAtQueueTask >> entryPriority [
 
 ]
 
-{ #category : #handling }
+{ #category : 'handling' }
 BlTaskAtQueueTask >> handleNotScheduledBecauseOfPreviousTask: aBlTaskAtTask [
 	"subclasses can act on this event"
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTaskAtQueueTask >> initialize: aValuable at: aTime [
 
 	valuable := aValuable.
 	scheduledTime := aTime.
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTaskAtQueueTask >> printOn: aStream [
 
 	super printOn: aStream.
@@ -60,32 +60,32 @@ BlTaskAtQueueTask >> printOn: aStream [
 		<< ')'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtQueueTask >> queue [
 	^ queue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtQueueTask >> queue: anObject [
 	queue := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtQueueTask >> scheduledTime [
 	^ scheduledTime
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtQueueTask >> scheduledTime: aTime [
 	scheduledTime := aTime
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtQueueTask >> valuable [
 	^ valuable
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BlTaskAtQueueTask >> value [
 	"evaluate valuable"
 	^ self valuable value

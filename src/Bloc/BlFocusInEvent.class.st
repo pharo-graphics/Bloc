@@ -8,12 +8,12 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFocusInEvent >> isFocusIn [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlFocusInEvent >> sendTo: anObject [
 	anObject focusInEvent: self
 ]

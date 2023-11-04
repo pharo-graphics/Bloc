@@ -12,17 +12,17 @@ Class {
 	#category : 'Bloc-Space'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlDetachedSpaceReference class >> cleanUp [
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDetachedSpaceReference class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDetachedSpaceReference >> isDetachedFromSceneGraph [
 	^ true
 ]

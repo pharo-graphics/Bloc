@@ -4,12 +4,12 @@ Class {
 	#category : 'Bloc-Layouts-Alignment'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlStartAlignment class >> horizontal [
 	^ BlHorizontalAlignment start
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlStartAlignment class >> vertical [
 	^ BlVerticalAlignment top
 ]

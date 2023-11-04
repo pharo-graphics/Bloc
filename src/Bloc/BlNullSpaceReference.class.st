@@ -12,17 +12,17 @@ Class {
 	#category : 'Bloc-Space'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlNullSpaceReference class >> cleanUp [
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlNullSpaceReference class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlNullSpaceReference >> isNull [
 	^ true
 ]

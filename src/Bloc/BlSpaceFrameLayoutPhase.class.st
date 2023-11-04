@@ -4,17 +4,17 @@ Class {
 	#category : 'Bloc-Space - Frame'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceFrameLayoutPhase >> isLayoutPhase [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrameLayoutPhase >> name [
 	^ 'Layout'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlSpaceFrameLayoutPhase >> runOn: aSpace [
 	aSpace
 		dispatchTimeEvent: BlSpaceLayoutEndEvent

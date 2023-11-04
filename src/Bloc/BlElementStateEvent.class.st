@@ -7,12 +7,12 @@ Class {
 	#category : 'Bloc-Basic-State'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStateEvent >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStateEvent >> element: anObject [
 	element := anObject
 ]

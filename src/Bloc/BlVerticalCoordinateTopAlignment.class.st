@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Layouts-Alignment'
 }
 
-{ #category : #translation }
+{ #category : 'translation' }
 BlVerticalCoordinateTopAlignment >> translationOf: aBounds in: aContainerBounds [
 	| aRelativeDelta anExpectedTop |
 	

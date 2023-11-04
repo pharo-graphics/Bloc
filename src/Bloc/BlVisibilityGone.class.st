@@ -9,12 +9,12 @@ Class {
 	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlVisibilityGone >> isGone [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlVisibilityGone >> isHidden [
 	^ true
 ]

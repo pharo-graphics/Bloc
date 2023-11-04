@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Basic-Errors'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTaskErrorHandler >> matches: aFramePhase [
 	^ aFramePhase isTaskPhase
 ]

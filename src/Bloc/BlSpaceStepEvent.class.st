@@ -8,26 +8,26 @@ Class {
 	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceStepEvent >> end [
 	<return: #DateAndTime>
 
 	^ end
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceStepEvent >> end: aDateAndTime [
 	end := aDateAndTime
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceStepEvent >> start [
 	<return: #DateAndTime>
 
 	^ start
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceStepEvent >> start: aDateAndTime [
 	start := aDateAndTime
 ]

@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Basic-Errors'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEventErrorHandler >> matches: aFramePhase [
 	^ aFramePhase isEventPhase
 ]

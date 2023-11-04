@@ -4,14 +4,14 @@ Class {
 	#category : 'Bloc-Universe'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlKeyboardKeyTable >> initialize: aMapDictionary withKeys: aMapArray [
 
 	aMapArray pairsDo: [ :eachCode :eachKey |
 		aMapDictionary at: eachCode put: eachKey copy ]
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlKeyboardKeyTable >> keyFromVirtualCode: aScanCode [
 
 	^ self subclassResponsibility

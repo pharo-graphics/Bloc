@@ -7,12 +7,12 @@ Class {
 	#category : 'Bloc-Basic-State'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementDisabledStateWish >> enabled [
 	^ enabled
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementDisabledStateWish >> enabled: anObject [
 	enabled := anObject
 ]

@@ -7,26 +7,26 @@ Class {
 	#category : 'Bloc-Basic-Background'
 }
 
-{ #category : #building }
+{ #category : 'building' }
 BlImageBackgroundBuilder >> build [
 	<return: #BlBackground>
 
 	^ (BlImageBackground image: self form) opacity: self opacity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlImageBackgroundBuilder >> form [
 	<return: #Form>
 
 	^ form
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlImageBackgroundBuilder >> form: aForm [
 	form := aForm
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlImageBackgroundBuilder >> iconNamed: aSymbol [
 	self form: (Smalltalk ui icons iconNamed: aSymbol)
 ]

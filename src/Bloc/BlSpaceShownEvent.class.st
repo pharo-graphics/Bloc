@@ -24,12 +24,12 @@ Class {
 	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceShownEvent >> space [
 	^ space
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceShownEvent >> space: anObject [
 	space := anObject
 ]

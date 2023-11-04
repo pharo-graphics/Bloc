@@ -8,7 +8,7 @@ Class {
 	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlSpaceMouseLeaveEvent >> sendTo: anObject [
 	anObject spaceMouseLeaveEvent: self
 ]

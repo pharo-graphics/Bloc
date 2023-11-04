@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlCircle class >> isDeprecated [
 	^ true
 ]

@@ -4,11 +4,11 @@ Class {
 	#category : 'Bloc-Space - Frame'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrameUnknownPhase >> name [
 	^ 'Unknown'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlSpaceFrameUnknownPhase >> runOn: aSpace [
 ]

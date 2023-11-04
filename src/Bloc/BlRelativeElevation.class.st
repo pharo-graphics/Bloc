@@ -10,7 +10,7 @@ Class {
 	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRelativeElevation >> relatedTo: aNumber [
 	"Resulting elevation is a sum of a given and my relative one"
 

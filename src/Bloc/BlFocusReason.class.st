@@ -7,12 +7,12 @@ Class {
 	#category : 'Bloc-Space - Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusReason class >> cleanUp [
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusReason class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]

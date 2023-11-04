@@ -4,17 +4,17 @@ Class {
 	#category : 'Bloc-Basic-State'
 }
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlElementPressedState >> optionalEventHandlerDo: aBlock [
 	aBlock value: BlElementPressedStateEventHandler uniqueInstance
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlElementPressedState >> printOn: aStream [
 	aStream nextPutAll: 'pressed'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementPressedState >> priority [
 	^ 20
 ]

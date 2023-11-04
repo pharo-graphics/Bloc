@@ -16,35 +16,35 @@ Class {
 	#category : 'Bloc-Utilities - Equalizer'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlEqualizer class >> of: aCollectionOfTargetElements with: aCollectionOfSourceElements [
 	^ self new
 		sourceElements: aCollectionOfSourceElements;
 		targetElements: aCollectionOfTargetElements
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlEqualizer >> eventsToHandle [
 	^ { BlElementExtentChangedEvent }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEqualizer >> sourceElements [
 	^ sourceElements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEqualizer >> sourceElements: aCollection [
 	sourceElements := aCollection.
 	sourceElements do: [ :anElement | anElement addEventHandler: self ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEqualizer >> targetElements [
 	^ targetElements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEqualizer >> targetElements: anObject [
 	targetElements := anObject
 ]

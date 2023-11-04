@@ -8,7 +8,7 @@ Class {
 	#category : 'Bloc-Layouts-Alignment'
 }
 
-{ #category : #translation }
+{ #category : 'translation' }
 BlHorizontalCoordinateRightAlignment >> translationOf: aBounds in: aContainerBounds [
 	| aRelativeDelta anExpectedRight |
 		

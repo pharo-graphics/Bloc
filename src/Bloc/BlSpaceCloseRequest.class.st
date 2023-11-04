@@ -15,12 +15,12 @@ Class {
 	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceCloseRequest >> isSpaceCloseRequest [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlSpaceCloseRequest >> sendTo: anObject [
 	anObject spaceCloseRequest: self
 ]

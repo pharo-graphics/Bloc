@@ -7,17 +7,17 @@ Class {
 	#category : 'Bloc-DataStructure - Rope'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFileFinalizer >> binaryStream [
 	^ binaryStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFileFinalizer >> binaryStream: anObject [
 	binaryStream := anObject
 ]
 
-{ #category : #finalization }
+{ #category : 'finalization' }
 BlRopeableCollectionFileFinalizer >> finalize [ 
 
 	binaryStream close.

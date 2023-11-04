@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlSpaceWakeUpEvent >> sendTo: anObject [
 	anObject spaceWakeUpEvent: self
 ]

@@ -16,77 +16,77 @@ Class {
 	#category : 'Bloc-Settings'
 }
 
-{ #category : #assertions }
+{ #category : 'assertions' }
 Bloc class >> assertionsEnabled [
 	^ AssertionsEnabled ifNil: [ true ]
 ]
 
-{ #category : #assertions }
+{ #category : 'assertions' }
 Bloc class >> assertionsEnabled: aBoolean [
 	AssertionsEnabled := aBoolean
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 Bloc class >> debugModeEnabled [
 	^ DebugModeEnabled ifNil: [ false ]
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 Bloc class >> debugModeEnabled: aBoolean [
 	DebugModeEnabled := aBoolean
 ]
 
-{ #category : #children }
+{ #category : 'children' }
 Bloc class >> defaultChildrenDataStructure [
 	^ BlChildrenArray
 ]
 
-{ #category : #assertions }
+{ #category : 'assertions' }
 Bloc class >> disableAssertions [
 	self assertionsEnabled: false
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 Bloc class >> disableDebugMode [
 	self debugModeEnabled: false
 ]
 
-{ #category : #assertions }
+{ #category : 'assertions' }
 Bloc class >> enableAssertions [
 	self assertionsEnabled: true
 ]
 
-{ #category : #debugging }
+{ #category : 'debugging' }
 Bloc class >> enableDebugMode [
 	self debugModeEnabled: true
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 Bloc class >> groupSymbolForAppearance [
 
 	^ 	#appearance
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 Bloc class >> groupSymbolForBloc [
 
 	^ 	#Bloc
 ]
 
-{ #category : #children }
+{ #category : 'children' }
 Bloc class >> preferableChildrenDataStructure [
 	"Answer a `BlChildrenCollection class`."
 
 	^ PreferableChildrenDataStructure ifNil: [ self defaultChildrenDataStructure ]
 ]
 
-{ #category : #children }
+{ #category : 'children' }
 Bloc class >> preferableChildrenDataStructure: anChildrenCollectionClass [
 
 	PreferableChildrenDataStructure := anChildrenCollectionClass
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 Bloc class >> preferencesOn: aBuilder [
 	<systemsettings>
 	(aBuilder group: self groupSymbolForBloc)

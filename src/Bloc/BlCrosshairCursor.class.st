@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Space - Cursor'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlCrosshairCursor >> asForm [
 	^ Cursor crossHair
 ]

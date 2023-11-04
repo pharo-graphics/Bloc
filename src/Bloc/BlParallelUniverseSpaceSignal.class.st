@@ -7,19 +7,19 @@ Class {
 	#category : 'Bloc-Universe - Parallel'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlParallelUniverseSpaceSignal class >> isAbstract [
 	^ self = BlParallelUniverseSpaceSignal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseSpaceSignal >> spaceId [
 	<return: #Number>
 
 	^ spaceId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseSpaceSignal >> spaceId: aNumber [
 	spaceId := aNumber
 ]

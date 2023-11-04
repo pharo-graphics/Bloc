@@ -7,29 +7,29 @@ Class {
 	#category : 'Bloc-Layouts-Support'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlLayoutFitContentResizer class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutFitContentResizer class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 BlLayoutFitContentResizer >> ifFitContent: aBlock [
 	^ aBlock cull: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLayoutFitContentResizer >> isFitContent [
 	^ true
 ]
 
-{ #category : #'double dispatching' }
+{ #category : 'double dispatching' }
 BlLayoutFitContentResizer >> measurementAtMostWith: aNumber [
 	"Child wants to determine its own size. It may be bigger than us."
 	<return: #BlMeasurementSpec>
@@ -37,7 +37,7 @@ BlLayoutFitContentResizer >> measurementAtMostWith: aNumber [
 	^ BlMeasurementSpec unspecified
 ]
 
-{ #category : #'double dispatching' }
+{ #category : 'double dispatching' }
 BlLayoutFitContentResizer >> measurementExactlyWith: aNumber [
 	"Child wants to determine its own size. It may be bigger than us."
 	<return: #BlMeasurementSpec>
@@ -45,7 +45,7 @@ BlLayoutFitContentResizer >> measurementExactlyWith: aNumber [
 	^ BlMeasurementSpec unspecified
 ]
 
-{ #category : #'double dispatching' }
+{ #category : 'double dispatching' }
 BlLayoutFitContentResizer >> measurementUnspecifiedWith: aNumber [
 	"Child wants to determine its own size.... find out how big it should be"
 	<return: #BlMeasurementSpec>
@@ -53,12 +53,12 @@ BlLayoutFitContentResizer >> measurementUnspecifiedWith: aNumber [
 	^ BlMeasurementSpec unspecified: aNumber
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlLayoutFitContentResizer >> printOn: aStream [
 	aStream nextPutAll: 'Fit content'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutFitContentResizer >> requestedHeightIn: anElement [
 
 	| h |
@@ -68,7 +68,7 @@ BlLayoutFitContentResizer >> requestedHeightIn: anElement [
 	^ h
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutFitContentResizer >> requestedWidthIn: anElement [
 
 	| w |

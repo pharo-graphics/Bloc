@@ -15,46 +15,46 @@ Class {
 	#category : 'Bloc-Universe - Host'
 }
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHost class >> isRunning [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlHost class >> isSupported [
 
 	^ false
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlHost class >> label [
 	"Return a human readable title to identify myself."
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlHost class >> pickHost [
 	"Answer a new instance of the preferable host."
 	
 	^ self preferableHostClass new
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 BlHost class >> preferableHostClass [
 
 	^ PreferableHostClass ifNil: [
 		PreferableHostClass := self prioritaryHostClass ]
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 BlHost class >> preferableHostClass: aHostClass [
 	
 	PreferableHostClass := aHostClass
 
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlHost class >> prioritaryHostClass [
 	"Answer either the supported host with the lowest priority, or
 	`BlHeadlessHost` if there isn't any supported host."
@@ -64,7 +64,7 @@ BlHost class >> prioritaryHostClass [
 		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlHost class >> priority [
 	"Return host priority as positive number which influences host order
 	and selection of a default host.
@@ -73,7 +73,7 @@ BlHost class >> priority [
 	^ self subclassResponsibility
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 BlHost class >> settingsOn: aBuilder [
 	<systemsettings>
 
@@ -88,19 +88,19 @@ BlHost class >> settingsOn: aBuilder [
 
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHost class >> start [
 
 	self subclassResponsibility
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHost class >> stop [
 
 	self subclassResponsibility
 ]
 
-{ #category : #'driver selection' }
+{ #category : 'driver selection' }
 BlHost class >> supportedHostClasses [
 	"Return all supported Bloc host classes, sorted by priority (lowest first)."
 
@@ -109,24 +109,24 @@ BlHost class >> supportedHostClasses [
 			sort: [ :a :b | a priority < b priority ]
 ]
 
-{ #category : #'api - ui process' }
+{ #category : 'api - ui process' }
 BlHost class >> uiProcessDo: aBlock [
 	"Evaluate aBlock with the running UI Process of this host if any"
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : 'host space - accessing' }
 BlHost class >> universe [
 
 	^ BlParallelUniverse forHost: self
 ]
 
-{ #category : #'host - api' }
+{ #category : 'host - api' }
 BlHost >> createHostSpaceFor: aSpace [
 
 	self subclassResponsibility
 ]
 
-{ #category : #'host - api' }
+{ #category : 'host - api' }
 BlHost >> destroyHostSpaceFor: aSpace [
 	"Destroys host space window of a given space.
 	Note: in most cases under 'destroy host space' we mean 'close host window' and unregister it"
@@ -134,14 +134,14 @@ BlHost >> destroyHostSpaceFor: aSpace [
 	self subclassResponsibility
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHost >> isRunning [
 	"Return true if host is initialized and running"
 
 	^ self class isRunning
 ]
 
-{ #category : #'host - testing' }
+{ #category : 'host - testing' }
 BlHost >> isStillAvailable [
 	"Let's assume that a space is opened with me as a host.
 	I return true if I am still available host for the current system.
@@ -152,46 +152,46 @@ BlHost >> isStillAvailable [
 	^ true
 ]
 
-{ #category : #'paragraph - measuring' }
+{ #category : 'paragraph - measuring' }
 BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [ 
 	"Update the received paragraph with its measurement."
 
 	BlHostRenderer preferableClass offscreenMeasureTextParagraph: aBlTextParagraph
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHost >> start [
 
 	self class start
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlHost >> stop [
 
 	self class stop
 ]
 
-{ #category : #'host - testing' }
+{ #category : 'host - testing' }
 BlHost >> supportsBufferSurface [
 	"Return true if this host can work with buffer surface, false otherwise"
 	
 	^ false
 ]
 
-{ #category : #'host - testing' }
+{ #category : 'host - testing' }
 BlHost >> supportsFormSurface [
 	"Return true if this host can work with form surface, false otherwise"
 	
 	^ false
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlHost >> uiProcessDo: aBlock [
 
 	self class uiProcessDo: aBlock
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : 'host space - accessing' }
 BlHost >> universe [
 	
 	^ self class universe

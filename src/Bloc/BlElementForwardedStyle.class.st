@@ -7,7 +7,7 @@ Class {
 	#category : 'Bloc-Basic-Style'
 }
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlElementForwardedStyle >> applyOnElement: anElement [
 
 	(targetObject asBlocResolvedElementsFrom: anElement)
@@ -15,7 +15,7 @@ BlElementForwardedStyle >> applyOnElement: anElement [
 			eachTargetObject properties addProperties: self properties ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlElementForwardedStyle >> asForwarded: aTargetObject [
 
 	^ targetObject == aTargetObject
@@ -23,7 +23,7 @@ BlElementForwardedStyle >> asForwarded: aTargetObject [
 		  ifFalse: [ super asForwarded: aTargetObject ]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlElementForwardedStyle >> cleanUpOnElement: anElement [
 	
 	(targetObject asBlocResolvedElementsFrom: anElement)
@@ -31,19 +31,19 @@ BlElementForwardedStyle >> cleanUpOnElement: anElement [
 			eachTargetObject properties removeProperties: self properties ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementForwardedStyle >> isForwarded [
 
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementForwardedStyle >> targetObject [
 
 	^ targetObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementForwardedStyle >> targetObject: anObject [
 
 	targetObject := anObject

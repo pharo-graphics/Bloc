@@ -8,7 +8,7 @@ Class {
 	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlSpaceFocusInEvent >> sendTo: anObject [
 	anObject spaceFocusInEvent: self
 ]

@@ -15,14 +15,14 @@ Class {
 	#category : 'Bloc-Events-KeyBinding'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlKeyCombinationVisitor >> visitAlternative: aBlAlternativeCombination [
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlKeyCombinationVisitor >> visitCompulsory: aBlCompulsoryCombination [
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlKeyCombinationVisitor >> visitKey: aBlKeyCodeCombination [
 ]

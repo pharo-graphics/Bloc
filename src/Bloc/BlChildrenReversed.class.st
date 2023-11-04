@@ -11,34 +11,34 @@ Class {
 	#category : 'Bloc-Basic-Children'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlChildrenReversed class >> on: aBlChildren [
 	^ self new initializeFrom: aBlChildren
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildrenReversed >> at: anIndex [
 	<return: #BlElement>
 
 	^ super at: (self size - anIndex + 1)
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildrenReversed >> do: aBlock [
 	subsetArray reverseDo: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildrenReversed >> name [
 	^ 'Reversed'
 ]
 
-{ #category : #'children - subsets' }
+{ #category : 'children - subsets' }
 BlChildrenReversed >> reversed [
 	^ BlChildrenArray from: subsetArray
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlChildrenReversed >> subsetFrom: aBlChildren [
 	"Only convert the given collection to an array. Iteration is performed on reverse order on that array."
 	^ aBlChildren asArray

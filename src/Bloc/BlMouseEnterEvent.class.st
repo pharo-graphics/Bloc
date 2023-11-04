@@ -16,12 +16,12 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseEnterEvent >> isMouseEnter [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlMouseEnterEvent >> sendTo: anObject [
 	anObject mouseEnterEvent: self
 ]

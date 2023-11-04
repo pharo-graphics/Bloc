@@ -9,12 +9,12 @@ Class {
 	#category : 'Bloc-Layouts-Alignment'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlMiddleAlignment class >> horizontal [
 	^ BlHorizontalAlignment center
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlMiddleAlignment class >> vertical [
 	^ BlVerticalAlignment center
 ]

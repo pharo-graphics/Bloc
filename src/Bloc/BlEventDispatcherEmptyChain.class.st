@@ -12,24 +12,24 @@ Class {
 	#category : 'Bloc-Events-Dispatcher'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlEventDispatcherEmptyChain class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventDispatcherEmptyChain class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlEventDispatcherEmptyChain >> dispatchEvent: anEvent [
 	^ anEvent
 ]
 
-{ #category : #'api - adding' }
+{ #category : 'api - adding' }
 BlEventDispatcherEmptyChain >> withNext: aBlEventDispatcher [
 	^ BlEventDispatcherChain with: aBlEventDispatcher
 ]

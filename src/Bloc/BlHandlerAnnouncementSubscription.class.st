@@ -7,7 +7,7 @@ Class {
 	#category : 'Bloc-Events-Dispatcher'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlHandlerAnnouncementSubscription >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
@@ -16,44 +16,44 @@ BlHandlerAnnouncementSubscription >> = anotherObject [
 	^ anotherObject subscriber = self subscriber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandlerAnnouncementSubscription >> announcementClass [
 	"Polymorphic to ${method:AnnouncementSubscription>>#announcementClass}$"
 	^ self class
 ]
 
-{ #category : #announcing }
+{ #category : 'announcing' }
 BlHandlerAnnouncementSubscription >> deliver: anAnnouncement [
 
 	(self handlesAnnouncement: anAnnouncement)
 		ifTrue: [ self subscriber handleEvent: anAnnouncement ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHandlerAnnouncementSubscription >> handlesAnnouncement: anAnnouncement [
 	<return: #Boolean>
 
 	^ self subscriber wantsEvent: anAnnouncement
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlHandlerAnnouncementSubscription >> hash [
 	^ self class hash bitXor: self subscriber hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandlerAnnouncementSubscription >> subscriber [
 	<return: #BlBasicEventHandler>
 
 	^ subscriber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandlerAnnouncementSubscription >> subscriber: aTBlEventHandler [
 	subscriber := aTBlEventHandler
 ]
 
-{ #category : #announcing }
+{ #category : 'announcing' }
 BlHandlerAnnouncementSubscription >> unregister [
 
 	"Nothing, for compatibility with AnnouncementSubscription"

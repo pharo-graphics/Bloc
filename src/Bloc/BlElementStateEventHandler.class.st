@@ -7,7 +7,7 @@ Class {
 	#category : 'Bloc-Basic-State'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStateEventHandler class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]

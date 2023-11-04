@@ -12,29 +12,29 @@ Class {
 	#category : 'Bloc-Effect'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlClipOutGeometryEffect >> geometry [
 	^ geometry
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlClipOutGeometryEffect >> geometry: anObject [
 	geometry := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlClipOutGeometryEffect >> initialize [
 	super initialize.
 	
 	geometry := (0@0 extent: 0@0)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlClipOutGeometryEffect >> offset: aPoint [
 	offset := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlClipOutGeometryEffect >> offsetFor: anElement [
 	^ offset
 ]

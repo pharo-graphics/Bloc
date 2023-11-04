@@ -32,13 +32,13 @@ Class {
 	#category : 'Bloc-Space - Support'
 }
 
-{ #category : #filtering }
+{ #category : 'filtering' }
 BlSpaceRenderSignal class >> dontIgnore [
 
 	Ignore := false.
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSpaceRenderSignal class >> endSpace: aSpace [
 
 	^self new 
@@ -47,7 +47,7 @@ BlSpaceRenderSignal class >> endSpace: aSpace [
 		emit
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSpaceRenderSignal class >> for: aSpace block: aBlock [
 
 	Ignore == false ifFalse:
@@ -57,7 +57,7 @@ BlSpaceRenderSignal class >> for: aSpace block: aBlock [
 	self endSpace: aSpace.
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSpaceRenderSignal class >> fromSton: stonReader [
 
 	| signal |
@@ -74,14 +74,14 @@ BlSpaceRenderSignal class >> fromSton: stonReader [
 	^signal
 ]
 
-{ #category : #filtering }
+{ #category : 'filtering' }
 BlSpaceRenderSignal class >> ignore [
 	"Don't emit the signal"
 	
 	Ignore := true.
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSpaceRenderSignal class >> startSpace: aSpace [
 
 	^self new 
@@ -90,17 +90,17 @@ BlSpaceRenderSignal class >> startSpace: aSpace [
 		emit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceRenderSignal >> action [
 	^ action
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceRenderSignal >> action: anObject [
 	action := anObject
 ]
 
-{ #category : #'ston persistence' }
+{ #category : 'ston persistence' }
 BlSpaceRenderSignal >> asDictionary [
 
 	| spaceSton |
@@ -116,7 +116,7 @@ BlSpaceRenderSignal >> asDictionary [
 		yourself.
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlSpaceRenderSignal >> printOneLineContentsOn: stream [
 
 	stream
@@ -126,17 +126,17 @@ BlSpaceRenderSignal >> printOneLineContentsOn: stream [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceRenderSignal >> space [
 	^ space
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceRenderSignal >> space: anObject [
 	space := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceRenderSignal >> target [
 	"Answer the object that is the target of this signal"
 

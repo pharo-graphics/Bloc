@@ -8,12 +8,12 @@ Class {
 	#category : 'Bloc-Universe - Parallel'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseSpaceAddedSignal class >> label [
 	^ 'Add space'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseSpaceAddedSignal class >> nextSignals [
 	^ { BlParallelUniverseHostSpaceCreatedSignal }
 ]

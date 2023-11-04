@@ -4,15 +4,15 @@ Class {
 	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlElementUnresolvedProperties >> applyOnElement: anElement [
 ]
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlElementUnresolvedProperties >> flushPropertiesToRemove [
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementUnresolvedProperties >> propertyAt: aPropertyType ifFound: aFoundBlock ifNone: aNoneBlock [
 	^ aNoneBlock value
 ]

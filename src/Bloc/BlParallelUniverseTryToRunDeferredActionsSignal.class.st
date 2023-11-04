@@ -8,17 +8,17 @@ Class {
 	#category : 'Bloc-Universe - Parallel'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseTryToRunDeferredActionsSignal class >> isRepeatable [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseTryToRunDeferredActionsSignal class >> label [
 	^ 'Try to run deferred actions'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseTryToRunDeferredActionsSignal class >> nextSignals [
 	^ { BlParallelUniverseRunDeferredActionSignal }
 ]

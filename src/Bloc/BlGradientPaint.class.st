@@ -7,7 +7,7 @@ Class {
 	#category : 'Bloc-Paint'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGradientPaint >> from: aStartColor to: anEndColor [
 	"A convenience method to create a gradient consisting out of 2 colors"
 	
@@ -17,12 +17,12 @@ BlGradientPaint >> from: aStartColor to: anEndColor [
 	}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGradientPaint >> stops [
 	^ stops
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGradientPaint >> stops: anArray [
 	stops := anArray
 ]

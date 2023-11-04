@@ -12,45 +12,45 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMouseButton class >> code: aNumber [
 	^ BlMouseOtherButton code: aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMouseButton class >> middle [
 	^ BlMouseMiddleButton uniqueInstance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMouseButton class >> primary [
 	^ BlMousePrimaryButton uniqueInstance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMouseButton class >> secondary [
 	^ BlMouseSecondaryButton uniqueInstance
 ]
 
-{ #category : #'event creation' }
+{ #category : 'event creation' }
 BlMouseButton >> clickEventClass [
 
 	^ BlClickEvent 
 ]
 
-{ #category : #'action dispatching' }
+{ #category : 'action dispatching' }
 BlMouseButton >> ifPrimary: aPrimBlock secondary: aSecBlock middle: aMidBlock other: anotherBlock [
 
 	^ anotherBlock value
 ]
 
-{ #category : #'event creation' }
+{ #category : 'event creation' }
 BlMouseButton >> mouseDownEventClass [
 
 	^ BlMouseDownEvent 
 ]
 
-{ #category : #'event creation' }
+{ #category : 'event creation' }
 BlMouseButton >> mouseUpEventClass [
 
 	^ BlMouseUpEvent 

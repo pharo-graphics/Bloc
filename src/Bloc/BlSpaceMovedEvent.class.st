@@ -7,17 +7,17 @@ Class {
 	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceMovedEvent >> position [
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceMovedEvent >> position: anObject [
 	position := anObject
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlSpaceMovedEvent >> sendTo: anObject [
 	anObject spaceMovedEvent: self
 ]

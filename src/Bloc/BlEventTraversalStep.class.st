@@ -14,17 +14,17 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventTraversalStep class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventTraversalStep >> dispatcher [
 	^ self target eventDispatcher
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlEventTraversalStep >> printOn: stream [
 	super printOn: stream.
 	self target ifNotNil: [ 
@@ -33,17 +33,17 @@ BlEventTraversalStep >> printOn: stream [
 		stream nextPut: $). ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventTraversalStep >> target [
 	^ target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventTraversalStep >> target: anObject [
 	target := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventTraversalStep >> type [
 	<return: #String>
 	

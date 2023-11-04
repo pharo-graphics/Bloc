@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlLayoutNodeNullMeasurement >> measure: aLayoutChildNode with: anExtentSpecOrBlock [
 	<return: #BlLayoutNodeMeasurement>
 	

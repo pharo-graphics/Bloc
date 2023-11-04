@@ -10,22 +10,22 @@ Class {
 	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlElementProperties >> do: aBlock [
 	self properties do: aBlock
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementProperties >> isEmpty [
 	^ self properties isEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementProperties >> isNotEmpty [
 	^ self properties isNotEmpty
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlElementProperties >> printOn: aStream [
 	"Append a sequence of characters to aStream that identify the receiver."
 
@@ -35,12 +35,12 @@ BlElementProperties >> printOn: aStream [
 		print: self properties
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementProperties >> properties [
 	^ #()
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementProperties >> size [
 	^ self properties size
 ]

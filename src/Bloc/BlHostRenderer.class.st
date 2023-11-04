@@ -18,34 +18,34 @@ Class {
 	#category : 'Bloc-Universe - Renderer'
 }
 
-{ #category : #settings }
+{ #category : 'settings' }
 BlHostRenderer class >> availableClasses [
 
 	^ self allSubclasses
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostRenderer class >> label [
 	"Answer a human readable title to identify the class."
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #'host - api' }
+{ #category : 'host - api' }
 BlHostRenderer class >> newFormFrom: aBlElement [
 	"Answer a `Form` with the received element rendered on it."
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #'host - api' }
+{ #category : 'host - api' }
 BlHostRenderer class >> offscreenMeasureTextParagraph: aBlTextParagraph [
 	"Update the received paragraph with its measurement."
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 BlHostRenderer class >> preferableClass [
 
 	^ preferableClass ifNil: [
@@ -53,13 +53,13 @@ BlHostRenderer class >> preferableClass [
 			preferableClass := ac anyOne ] ]
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 BlHostRenderer class >> preferableClass: aBlHostRenderer [
 
 	preferableClass := aBlHostRenderer
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 BlHostRenderer class >> settingsOn: aBuilder [
 	<systemsettings>
 	
@@ -75,14 +75,14 @@ BlHostRenderer class >> settingsOn: aBuilder [
 
 ]
 
-{ #category : #'host - api' }
+{ #category : 'host - api' }
 BlHostRenderer class >> write: aBlElement asPngTo: aFileReference [
 	"Draw the element into a PNG at the specified location."
 
 	self subclassResponsibility
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 BlHostRenderer >> finishedRender: aSpace [
 	"Perform neccessary actions after rendering is complete.
 	By default I clear dirty areas of a given space"
@@ -90,7 +90,7 @@ BlHostRenderer >> finishedRender: aSpace [
 	aSpace clearDirtyElements
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHostRenderer >> hasResized: aHostSpace [
 	"Return true if host space resized since previous frame, otherwise false"
 	
@@ -102,7 +102,7 @@ BlHostRenderer >> hasResized: aHostSpace [
 		or: [ aHostSpace scaleFactor ~= surface scaleFactor ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHostRenderer >> initializeForHostSpace: aBlHostSpace [
 	"Initialize this renderer for a given host space.
 	Please note, that it I be called multiple times"
@@ -110,7 +110,7 @@ BlHostRenderer >> initializeForHostSpace: aBlHostSpace [
 	self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHostRenderer >> isValid [
 
 	session == Smalltalk session
@@ -125,13 +125,13 @@ BlHostRenderer >> isValid [
 	^ true
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 BlHostRenderer >> measureTextParagraph: aBlTextParagraph [
 
 	textMeasurer measureTextParagraph: aBlTextParagraph
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 BlHostRenderer >> render: aHostSpace [
 	"Render a given space according to its dirty areas.
 	Note: if there are no dirty areas nothing will happen, including window

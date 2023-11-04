@@ -8,7 +8,7 @@ Class {
 	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGlobalElevation >> relatedTo: aNumber [
 	"Global elevation is constant"
 

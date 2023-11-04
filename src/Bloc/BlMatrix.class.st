@@ -10,19 +10,19 @@ Class {
 	#category : 'Bloc-Basic-Math'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMatrix >> = anObject [
 	self subclassResponsibility
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMatrix >> asMatrixCollection [
 	<return: #Array2D>
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'matrix - mathematical functions' }
+{ #category : 'matrix - mathematical functions' }
 BlMatrix >> decomposition [
 	"Return a decomposition of the matrix"
 	<return: #BlMatrixDecomposition>
@@ -30,7 +30,7 @@ BlMatrix >> decomposition [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'matrix - mathematical functions' }
+{ #category : 'matrix - mathematical functions' }
 BlMatrix >> determinant [
 	"Compute and return my determinant"
 	<return: #Number>
@@ -38,12 +38,12 @@ BlMatrix >> determinant [
 	^ self subclassResponsibility
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMatrix >> hash [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'matrix - mathematical functions' }
+{ #category : 'matrix - mathematical functions' }
 BlMatrix >> interpolate: aFactor to: anotherMatrix [
 	"Perform a matrix interpolation with a given factor"
 	<return: #BlMatrix>
@@ -53,41 +53,41 @@ BlMatrix >> interpolate: aFactor to: anotherMatrix [
 		to: anotherMatrix decomposition) composition
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMatrix >> is2D [
 	"Return true if matrix is 2D, false otherwise"
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMatrix >> isIdentity [
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'matrix - transformations' }
+{ #category : 'matrix - transformations' }
 BlMatrix >> multiplyBy: aMatrix [
 	"Perform a right multiplication by a given matrix"
 	
 	self subclassResponsibility
 ]
 
-{ #category : #'matrix - transformations' }
+{ #category : 'matrix - transformations' }
 BlMatrix >> perspective: aDepth [
 	"Apply perspective by aDepth which should be positive"
 	
 	self subclassResponsibility
 ]
 
-{ #category : #'matrix - transformations' }
+{ #category : 'matrix - transformations' }
 BlMatrix >> reflectBy: aDiagonalVector [
 	"Apply a reflection transformation given by a diagonal vector"
 	
 	self subclassResponsibility
 ]
 
-{ #category : #'matrix - transformations' }
+{ #category : 'matrix - transformations' }
 BlMatrix >> rotateBy: aNumber [
 	"Apply a rotation transformation by a given amount of degrees around z-axis"
 	
@@ -96,28 +96,28 @@ BlMatrix >> rotateBy: aNumber [
 		around: BlVector zAxis
 ]
 
-{ #category : #'matrix - transformations' }
+{ #category : 'matrix - transformations' }
 BlMatrix >> rotateByDegrees: aNumber around: aBlVector [
 	"Apply a rotation transformation by a given amount of degrees around a provided axis vector"
 	
 	self rotateByRadians: aNumber degreesToRadians around: aBlVector
 ]
 
-{ #category : #'matrix - transformations' }
+{ #category : 'matrix - transformations' }
 BlMatrix >> rotateByRadians: aNumber around: aBlVector [
 	"Apply a rotation transformation by a given amount of radians around a provided axis vector"
 	
 	self subclassResponsibility
 ]
 
-{ #category : #'matrix - transformations' }
+{ #category : 'matrix - transformations' }
 BlMatrix >> scaleBy: aBlVector [
 	"Apply a scaling defined by a given vector"
 	
 	self subclassResponsibility
 ]
 
-{ #category : #'matrix - transforming points' }
+{ #category : 'matrix - transforming points' }
 BlMatrix >> transformBounds: aBlBounds [
 	"In-place transform given BlBounds according to my transformation.
 	(local to global transformation)"
@@ -126,7 +126,7 @@ BlMatrix >> transformBounds: aBlBounds [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'matrix - transforming points' }
+{ #category : 'matrix - transforming points' }
 BlMatrix >> transformPoint2D: aPoint2D [
 	"Transform a given 2D point (either a ==Point== or ==BlPoint2D==).
 	In any case return BlPoint2D"
@@ -135,7 +135,7 @@ BlMatrix >> transformPoint2D: aPoint2D [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'matrix - transforming points' }
+{ #category : 'matrix - transforming points' }
 BlMatrix >> transformPoint3D: aPoint3D [
 	"Transform a given 3D point according to this transformation matrix"
 	<return: #BlPoint3D>
@@ -143,7 +143,7 @@ BlMatrix >> transformPoint3D: aPoint3D [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'matrix - transforming points' }
+{ #category : 'matrix - transforming points' }
 BlMatrix >> transformPoint4D: aPoint4D [
 	"Transform a given 4D point according to this transformation matrix"
 	<return: #BlPoint4D>
@@ -151,7 +151,7 @@ BlMatrix >> transformPoint4D: aPoint4D [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'matrix - transforming points' }
+{ #category : 'matrix - transforming points' }
 BlMatrix >> transformPoint: aPoint [
 	"Transform a given point according to transformation matrix.
 	I perform a double dispatch to handle 2D/3D/4D points and 2D/3D matrices"
@@ -160,7 +160,7 @@ BlMatrix >> transformPoint: aPoint [
 	^ aPoint transformedOn: self
 ]
 
-{ #category : #'matrix - transformations' }
+{ #category : 'matrix - transformations' }
 BlMatrix >> translateBy: aBlVector [
 	"Apply a translation by a given vector"
 	

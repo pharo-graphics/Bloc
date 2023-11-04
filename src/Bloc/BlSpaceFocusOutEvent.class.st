@@ -8,7 +8,7 @@ Class {
 	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlSpaceFocusOutEvent >> sendTo: anObject [
 	anObject spaceFocusOutEvent: self
 ]

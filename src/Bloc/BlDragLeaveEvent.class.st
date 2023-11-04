@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlDragLeaveEvent >> sendTo: anObject [
 	anObject dragLeaveEvent: self
 ]

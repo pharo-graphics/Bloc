@@ -8,12 +8,12 @@ Class {
 	#category : 'Bloc-Basic-Support'
 }
 
-{ #category : #pool }
+{ #category : 'pool' }
 BlObjectPool >> acquire [
 	^ self subclassResponsibility
 ]
 
-{ #category : #pool }
+{ #category : 'pool' }
 BlObjectPool >> release: anObject [
 	^ self subclassResponsibility
 ]

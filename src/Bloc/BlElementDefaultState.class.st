@@ -4,17 +4,17 @@ Class {
 	#category : 'Bloc-Basic-State'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementDefaultState >> matches: aSetOfStates [
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlElementDefaultState >> printOn: aStream [
 	aStream nextPutAll: 'default'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementDefaultState >> priority [
 	^ 0
 ]

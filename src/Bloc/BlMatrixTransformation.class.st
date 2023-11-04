@@ -11,7 +11,7 @@ Class {
 	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMatrixTransformation class >> matrix: aBlMatrix [
 
 	^ self new
@@ -19,7 +19,7 @@ BlMatrixTransformation class >> matrix: aBlMatrix [
 		  yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMatrixTransformation >> initialize [
 
 	super initialize.
@@ -27,25 +27,25 @@ BlMatrixTransformation >> initialize [
 	matrix := BlMatrix2D new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMatrixTransformation >> is2D [
 
 	^ matrix is2D
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrixTransformation >> matrix [
 
 	^ matrix
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrixTransformation >> matrix: aBlMatrix [
 
 	matrix := aBlMatrix
 ]
 
-{ #category : #'mathematical functions' }
+{ #category : 'mathematical functions' }
 BlMatrixTransformation >> multiplyOn: aBlMatrix [
 
 	aBlMatrix multiplyBy: matrix

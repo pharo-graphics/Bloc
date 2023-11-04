@@ -12,7 +12,7 @@ Class {
 	#category : 'Bloc-Basic-Geometry'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlPolygonHitTester class >> doPolygonBy: vertices include: aPoint [
 
 	| inside testX testY i j size |

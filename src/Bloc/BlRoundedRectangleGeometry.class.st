@@ -19,7 +19,7 @@ Class {
 	#category : 'Bloc-Basic-Geometry'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlRoundedRectangleGeometry class >> cornerRadii: aBlCornerRadii [
 	"Create a rounded rectangle with given corner radii"
 
@@ -28,7 +28,7 @@ BlRoundedRectangleGeometry class >> cornerRadii: aBlCornerRadii [
 		yourself
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlRoundedRectangleGeometry class >> cornerRadius: aNumber [
 	"Change the radii of all corners to a given number.
 	aNumber must not be nil.
@@ -39,7 +39,7 @@ BlRoundedRectangleGeometry class >> cornerRadius: aNumber [
 		yourself
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlRoundedRectangleGeometry class >> new [
 
 	^ self basicNew
@@ -47,7 +47,7 @@ BlRoundedRectangleGeometry class >> new [
 		  yourself
 ]
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlRoundedRectangleGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 
 	| radii cornerRadius cornerX cornerY |
@@ -94,25 +94,25 @@ BlRoundedRectangleGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: a
 			< cornerRadius squared
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRoundedRectangleGeometry >> cornerRadii [
 
 	^ cornerRadii
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlRoundedRectangleGeometry >> hasCaps [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlRoundedRectangleGeometry >> hasJoins [
 
 	^ false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlRoundedRectangleGeometry >> initializeWith: aCornerRadii [
 
 	self initialize.
@@ -120,14 +120,14 @@ BlRoundedRectangleGeometry >> initializeWith: aCornerRadii [
 	cornerRadii := aCornerRadii
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlRoundedRectangleGeometry >> matchExtent: aPoint [
 
 	extent := aPoint.
 	center := aPoint / 2.0.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRoundedRectangleGeometry >> nonOverlappingCornersForBorderWidth: aNumber [
 	"Answer either current cornerRadii or a copy of it, that would work with any of the possible outskirts, and considering the current extent."
 

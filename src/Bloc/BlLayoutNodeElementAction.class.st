@@ -4,10 +4,10 @@ Class {
 	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BlLayoutNodeElementAction >> laidOut: aChildNode element: anElement [
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BlLayoutNodeElementAction >> measured: aChildNode element: anElement [
 ]

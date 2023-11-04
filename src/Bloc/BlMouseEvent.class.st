@@ -10,12 +10,12 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #constants }
+{ #category : 'constants' }
 BlMouseEvent class >> anyButton [
 	^ 7
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 BlMouseEvent class >> middleButton [
 	self 
 		deprecated: 'Use `BlMouseButton middle` instead'
@@ -24,7 +24,7 @@ BlMouseEvent class >> middleButton [
 	^ BlMouseButton middle
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 BlMouseEvent class >> primaryButton [
 	self 
 		deprecated: 'Use `BlMouseButton primary` instead'
@@ -33,7 +33,7 @@ BlMouseEvent class >> primaryButton [
 	^ BlMouseButton primary
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 BlMouseEvent class >> secondaryButton [
 	self 
 		deprecated: 'Use `BlMouseButton secondary` instead'
@@ -42,19 +42,19 @@ BlMouseEvent class >> secondaryButton [
 	^ BlMouseButton secondary
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseEvent >> anyButtonPressed [
 	^ button isNotNil
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMouseEvent >> asClickEvent [
 	^ self button clickEventClass new
 		copyFrom: self;
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMouseEvent >> asDictionaryForExport [
 	^ super asDictionaryForExport
 		at: #position put: position printString;
@@ -63,7 +63,7 @@ BlMouseEvent >> asDictionaryForExport [
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMouseEvent >> asDragEndEvent [
 	
 	^ BlDragEndEvent new
@@ -71,7 +71,7 @@ BlMouseEvent >> asDragEndEvent [
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMouseEvent >> asDragEnterEvent [
 	"Convert the receiver into a mouse move"
 
@@ -80,14 +80,14 @@ BlMouseEvent >> asDragEnterEvent [
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMouseEvent >> asDragEvent [
 	^ BlDragEvent new
 		copyFrom: self;
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMouseEvent >> asDragLeaveEvent [
 	"Convert the receiver into a mouse move"
 
@@ -96,7 +96,7 @@ BlMouseEvent >> asDragLeaveEvent [
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMouseEvent >> asDragStartEvent [
 	"Convert the receiver into a mouse move"
 
@@ -105,87 +105,87 @@ BlMouseEvent >> asDragStartEvent [
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMouseEvent >> asDropEvent [
 	^ BlDropEvent new
 		copyFrom: self;
 		yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseEvent >> asMouseEnterEvent [
 	^ BlMouseEnterEvent new
 		copyFrom: self;
 		yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseEvent >> asMouseLeaveEvent [
 	^ BlMouseLeaveEvent new
 		copyFrom: self;
 		yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseEvent >> asMouseOutEvent [
 	^ BlMouseOutEvent new
 		copyFrom: self;
 		yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseEvent >> asMouseOverEvent [
 	^ BlMouseOverEvent new
 		copyFrom: self;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMouseEvent >> button [
 	<return: #BlMouseButton>
 
 	^ button
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMouseEvent >> button: aBlMouseButton [
 	button := aBlMouseButton
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseEvent >> canFindTargetFrom: anElement [
 
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMouseEvent >> delta [
 	^ delta
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMouseEvent >> delta: aPoint [
 	delta := aPoint
 ]
 
-{ #category : #processing }
+{ #category : 'processing' }
 BlMouseEvent >> findTargetFrom: aSpaceOrElement [
 
 	^ (aSpaceOrElement findMouseEventTargetAt: self position) ifNil: [ aSpaceOrElement space root ]
 ]
 
-{ #category : #'action dispatching' }
+{ #category : 'action dispatching' }
 BlMouseEvent >> ifPrimary: aPrimBlock secondary: aSecBlock middle: aMidBlock other: anotherBlock [
 
 	^ self button ifPrimary: aPrimBlock secondary: aSecBlock middle: aMidBlock other: anotherBlock
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseEvent >> isMouse [
 	^ true
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlMouseEvent >> localPosition [
 	"Return an event position in local coordinates of a #currentTarget"
 	<return: #Point>
@@ -193,12 +193,12 @@ BlMouseEvent >> localPosition [
 	^ self currentTarget globalPointToLocal: self position
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseEvent >> middleButtonPressed [
 	^ button = BlMouseButton middle
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlMouseEvent >> parentPosition [
 	"Return an event position in parent coordinates of a #currentTarget"
 	<return: #Point>
@@ -206,22 +206,22 @@ BlMouseEvent >> parentPosition [
 	^ self currentTarget globalPointToParent: self position
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlMouseEvent >> position [
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMouseEvent >> position: anObject [
 	position := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseEvent >> primaryButtonPressed [
 	^ button = BlMouseButton primary
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlMouseEvent >> printOn: aStream [
 	aStream 
 		nextPutAll: self class name;
@@ -237,22 +237,22 @@ BlMouseEvent >> printOn: aStream [
 		nextPut:$)
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlMouseEvent >> screenPosition [
 	^ screenPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMouseEvent >> screenPosition: anObject [
 	screenPosition := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseEvent >> secondaryButtonPressed [
 	^ button = BlMouseButton secondary
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlMouseEvent >> sendTo: anObject [
 	anObject mouseEvent: self
 ]

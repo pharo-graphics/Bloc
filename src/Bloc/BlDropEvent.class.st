@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlDropEvent >> sendTo: anObject [
 	anObject dropEvent: self
 ]

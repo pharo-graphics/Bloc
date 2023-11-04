@@ -18,22 +18,22 @@ Class {
 	#category : 'Bloc-Events-Type-Element'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementBackgroundChangedEvent class >> disableIn: anObject [
 	anObject disableBackgroundChanged
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementBackgroundChangedEvent class >> enableIn: anObject [
 	anObject enableBackgroundChanged
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementBackgroundChangedEvent class >> wantedIn: anObject [
 	^ anObject wantsBackgroundChanged
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlElementBackgroundChangedEvent >> sendTo: anObject [
 	anObject elementBackgroundChangedEvent: self
 ]

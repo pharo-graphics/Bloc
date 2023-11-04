@@ -8,7 +8,7 @@ Class {
 	#category : 'Bloc-Layouts-Basic'
 }
 
-{ #category : #constraints }
+{ #category : 'constraints' }
 BlIgnoredLayout class >> constraints [
 	^ BlIgnoredLayoutConstraints new
 ]

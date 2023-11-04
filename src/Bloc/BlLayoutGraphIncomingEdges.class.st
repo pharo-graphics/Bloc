@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : #'api - enumeration' }
+{ #category : 'api - enumeration' }
 BlLayoutGraphIncomingEdges >> do: aBlock [
 	"Evaluate a given block with all incoming edges to the layout node"
 

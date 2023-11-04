@@ -7,34 +7,34 @@ Class {
 	#category : 'Bloc-Layouts-Support'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlLayoutFitContentLimitedResizer class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutFitContentLimitedResizer class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 BlLayoutFitContentLimitedResizer >> ifFitContent: aBlock [
 	^ aBlock cull: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLayoutFitContentLimitedResizer >> isFitContent [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLayoutFitContentLimitedResizer >> isFitContentLimited [
 	^ true
 ]
 
-{ #category : #'double dispatching' }
+{ #category : 'double dispatching' }
 BlLayoutFitContentLimitedResizer >> measurementAtMostWith: aNumber [
 	"Child wants to determine its own size. It can't be bigger than us."
 	<return: #BlMeasurementSpec>
@@ -42,7 +42,7 @@ BlLayoutFitContentLimitedResizer >> measurementAtMostWith: aNumber [
 	^ BlMeasurementSpec new beAtMost: aNumber
 ]
 
-{ #category : #'double dispatching' }
+{ #category : 'double dispatching' }
 BlLayoutFitContentLimitedResizer >> measurementExactlyWith: aNumber [
 	"Child wants to determine its own size. It can't be bigger than us."
 	<return: #BlMeasurementSpec>
@@ -50,7 +50,7 @@ BlLayoutFitContentLimitedResizer >> measurementExactlyWith: aNumber [
    ^ BlMeasurementSpec new beAtMost: aNumber
 ]
 
-{ #category : #'double dispatching' }
+{ #category : 'double dispatching' }
 BlLayoutFitContentLimitedResizer >> measurementUnspecifiedWith: aNumber [
 	"Child wants to determine its own size.... find out how big it should be"
 	<return: #BlMeasurementSpec>
@@ -58,7 +58,7 @@ BlLayoutFitContentLimitedResizer >> measurementUnspecifiedWith: aNumber [
 	^ BlMeasurementSpec unspecified: aNumber
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlLayoutFitContentLimitedResizer >> printOn: aStream [
 	aStream nextPutAll: 'Fit content limited'
 ]

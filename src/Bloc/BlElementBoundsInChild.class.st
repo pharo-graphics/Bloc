@@ -7,7 +7,7 @@ Class {
 	#category : 'Bloc-Basic-Bounds'
 }
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementBoundsInChild >> inParent [
 	<return: #BlElementBoundsInParent>
 
@@ -21,7 +21,7 @@ BlElementBoundsInChild >> inParent [
 		yourself
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementBoundsInChild >> inSpace [
 	<return: #BlElementBounds>
 
@@ -31,14 +31,14 @@ BlElementBoundsInChild >> inSpace [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBoundsInChild >> originalElement [
 	<return: #BlElement>
 
 	^ originalElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBoundsInChild >> originalElement: anElement [
 	originalElement := anElement
 ]

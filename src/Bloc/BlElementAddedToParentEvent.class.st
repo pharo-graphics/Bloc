@@ -22,22 +22,22 @@ Class {
 	#category : 'Bloc-Events-Type-Element'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementAddedToParentEvent class >> disableIn: anObject [
 	anObject disableAddedToParent
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementAddedToParentEvent class >> enableIn: anObject [
 	anObject enableAddedToParent
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementAddedToParentEvent class >> wantedIn: anObject [
 	^ anObject wantsAddedToParent
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlElementAddedToParentEvent >> sendTo: anObject [
 	anObject elementAddedToParentEvent: self
 ]

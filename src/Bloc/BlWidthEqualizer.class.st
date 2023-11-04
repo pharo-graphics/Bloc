@@ -7,7 +7,7 @@ Class {
 	#category : 'Bloc-Utilities - Equalizer'
 }
 
-{ #category : #'element handlers' }
+{ #category : 'element handlers' }
 BlWidthEqualizer >> elementExtentChangedEvent: anEvent [
 	| maxWidth |
 
@@ -15,14 +15,14 @@ BlWidthEqualizer >> elementExtentChangedEvent: anEvent [
 	self targetElements do: [ :anElement | widthBlock value: anElement value: maxWidth ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlWidthEqualizer >> initialize [
 	super initialize.
 	
 	widthBlock := [ :anElement :aWidth | anElement width: aWidth ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlWidthEqualizer >> width: aBlock [
 	widthBlock := aBlock
 ]

@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Effect'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlNullEffect >> isNullEffect [
 	^ true
 ]

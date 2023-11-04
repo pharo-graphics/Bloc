@@ -10,7 +10,7 @@ Class {
 	#category : 'Bloc-Paint-Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeLineRoundCap class >> capName [
 	^ 'Round'
 ]

@@ -12,7 +12,7 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlMouseOutEvent >> sendTo: anObject [
 	anObject mouseOutEvent: self
 ]

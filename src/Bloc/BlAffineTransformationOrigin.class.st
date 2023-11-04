@@ -9,7 +9,7 @@ Class {
 	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #math }
+{ #category : 'math' }
 BlAffineTransformationOrigin >> originIn: anElement [
 	"Return a point describing an origin of a transformation within a given element.
 	Origin can be either a 2D or 3D point (`Point` or `BlPoint3D`) and should be given in local coordinates of the element"

@@ -9,24 +9,24 @@ Class {
 	#category : 'Bloc-Layouts-Support'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMeasurementExactMode >> isExact [
 	^ true
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMeasurementExactMode >> measurement: aResizing with: aFloat [
 	<return: #BlMeasurementSpec>
 	
 	^ aResizing measurementExactlyWith: aFloat
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlMeasurementExactMode >> printOn: aStream [
 	aStream nextPutAll: 'Exact'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlMeasurementExactMode >> printOn: aStream size: aNumber [
 
 	self printOn: aStream.	
@@ -34,7 +34,7 @@ BlMeasurementExactMode >> printOn: aStream size: aNumber [
 	aStream nextPutAll: aNumber asString
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMeasurementExactMode >> size: aNumber min: aMinSizeFloat max: aMaxSizeFloat [
 	"aNumber should satisfy #isBlocFiniteFloat,
 	aMinSizeFloat and aMaxSizeFloat  #isBlocFiniteFloat"
@@ -43,7 +43,7 @@ BlMeasurementExactMode >> size: aNumber min: aMinSizeFloat max: aMaxSizeFloat [
 	^ BlMeasurementSpec exact: (aNumber min: aMaxSizeFloat max: aMinSizeFloat)
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMeasurementExactMode >> size: aNumber with: aSpecSize [
 	"aNumber should satisfy: #isBlocFiniteFloat"
 	<return: #Number>

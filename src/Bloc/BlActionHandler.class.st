@@ -6,6 +6,6 @@ Class {
 	#category : 'Bloc-Events-Handler'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlActionHandler >> actionPerformed [
 ]

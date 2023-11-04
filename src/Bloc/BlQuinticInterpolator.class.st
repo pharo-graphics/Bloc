@@ -15,7 +15,7 @@ Class {
 	#category : 'Bloc-Basic-Interpolators'
 }
 
-{ #category : #interpolation }
+{ #category : 'interpolation' }
 BlQuinticInterpolator >> interpolate: aNumber [
 	"f(x)
 		= x^5 - 5x^4 + 10x^3 - 10x^2 + 5x

@@ -4,12 +4,12 @@ Class {
 	#category : 'Bloc-Basic-State'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementDisjunctionState >> matches: aSetOfStates [
 	^ (self left matches: aSetOfStates) or: [ self right matches: aSetOfStates ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlElementDisjunctionState >> printOn: aStream [
 	aStream
 		nextPut: $(;

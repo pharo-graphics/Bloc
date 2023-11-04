@@ -11,24 +11,24 @@ Class {
 	#category : 'Bloc-Basic-Errors'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlAlreadyAddedAsChildError class >> element: anElement [
 	^ self new element: anElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAlreadyAddedAsChildError >> description [
 	^ 'Can not add child that is already added to another element!'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAlreadyAddedAsChildError >> element [
 	<return: #BlElement>
 
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAlreadyAddedAsChildError >> element: anElement [
 	element := anElement
 ]

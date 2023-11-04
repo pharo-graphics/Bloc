@@ -11,17 +11,17 @@ Class {
 	#category : 'Bloc-Layouts-Basic'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBasicLayout class >> cleanUp [
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBasicLayout class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlBasicLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdater [
 
 	anElement children accountedByLayout do: [ :child |
@@ -32,7 +32,7 @@ BlBasicLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdat
 	self layoutIgnored: anElement context: aBlElementBoundsUpdater
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlBasicLayout >> measure: anElement with: anExtentSpec [
 	super measure: anElement with: anExtentSpec.
 	

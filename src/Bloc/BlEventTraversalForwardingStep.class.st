@@ -8,7 +8,7 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventTraversalForwardingStep >> type [
 	<return: #String>
 	

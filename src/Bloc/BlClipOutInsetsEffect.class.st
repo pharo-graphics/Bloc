@@ -7,21 +7,21 @@ Class {
 	#category : 'Bloc-Effect'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlClipOutInsetsEffect >> initialize [
 	super initialize.
 	
 	insets := BlInsets empty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlClipOutInsetsEffect >> insets [
 	<return: #BlInsets>
 
 	^ insets
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlClipOutInsetsEffect >> insets: aBlInsets [
 	insets := aBlInsets
 ]

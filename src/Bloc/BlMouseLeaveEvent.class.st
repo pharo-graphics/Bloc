@@ -15,12 +15,12 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseLeaveEvent >> isMouseLeave [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlMouseLeaveEvent >> sendTo: anObject [
 	anObject mouseLeaveEvent: self
 ]

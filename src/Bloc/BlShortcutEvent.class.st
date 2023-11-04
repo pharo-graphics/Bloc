@@ -25,31 +25,31 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlShortcutEvent >> beRepeated [
 	isRepeated := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlShortcutEvent >> buffer [
 	<return: #BlKeyboardBuffer>
 
 	^ buffer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlShortcutEvent >> buffer: aBlKeyboardBuffer [
 	buffer := aBlKeyboardBuffer
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlShortcutEvent >> initialize [
 	super initialize.
 	
 	isRepeated := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlShortcutEvent >> isRepeated [
 	"Return true if this shortcut is a repeated event giving handlers a chance to ignore such shortcuts"
 	<return: #Boolean>
@@ -57,7 +57,7 @@ BlShortcutEvent >> isRepeated [
 	^ isRepeated
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlShortcutEvent >> sendTo: anObject [
 	anObject shortcutEvent: self
 ]

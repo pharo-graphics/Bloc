@@ -31,7 +31,7 @@ Class {
 	#category : 'Bloc-DataStructure - Priority Queue'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 SharedPriorityUniqueQueue >> basicNext [
 	"Answer the next highest priority item.
 	This should only be called within the monitor."
@@ -56,7 +56,7 @@ SharedPriorityUniqueQueue >> basicNext [
 	^item
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SharedPriorityUniqueQueue >> basicPeek [
 	"Answer the next highest priority item.
 	This should only be called within the monitor."
@@ -80,7 +80,7 @@ SharedPriorityUniqueQueue >> basicPeek [
 	^item
 ]
 
-{ #category : #flushing }
+{ #category : 'flushing' }
 SharedPriorityUniqueQueue >> flush [ 
 	"Remove from the queue all objects
 	Ensure that the operation isn't terminated while within the monitor"
@@ -88,7 +88,7 @@ SharedPriorityUniqueQueue >> flush [
 	^[ super flush ] valueNoContextSwitch
 ]
 
-{ #category : #flushing }
+{ #category : 'flushing' }
 SharedPriorityUniqueQueue >> flushAllSuchThat: aBlock [
 	"Remove from the queue all objects that satisfy aBlock.
 	Ensure that the operation isn't terminated while within the monitor"
@@ -96,7 +96,7 @@ SharedPriorityUniqueQueue >> flushAllSuchThat: aBlock [
 	^[ super flushAllSuchThat: aBlock ] valueNoContextSwitch 
 ]
 
-{ #category : #size }
+{ #category : 'size' }
 SharedPriorityUniqueQueue >> isEmpty [ 
 	"Answer a boolean indicating whether the receiver has no entries.
 	Ensure that the operation isn't terminated while within the monitor"
@@ -104,7 +104,7 @@ SharedPriorityUniqueQueue >> isEmpty [
 	^[ super isEmpty ] valueNoContextSwitch 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SharedPriorityUniqueQueue >> itemArray [ 
 	"Answer the number of entries in the receiver.
 	Ensure that the operation isn't terminated while within the monitor"
@@ -112,7 +112,7 @@ SharedPriorityUniqueQueue >> itemArray [
 	^[ super itemArray ] valueNoContextSwitch
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SharedPriorityUniqueQueue >> next [
 	^[ monitor critical: [
 		monitor waitWhile: [ items isEmpty ].
@@ -121,14 +121,14 @@ SharedPriorityUniqueQueue >> next [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SharedPriorityUniqueQueue >> nextOrNil [
 	^[ monitor critical: [
 		items isEmpty ifTrue: [ nil ] ifFalse: [ self basicNext ] ]
 			] valueNoContextSwitch
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SharedPriorityUniqueQueue >> nextOrNilSuchThat: aBlock [
 	"Answer the next object that satisfies aBlock, skipping any intermediate objects.
 	If no object has been sent, answer <nil> and leave me intact.
@@ -142,7 +142,7 @@ SharedPriorityUniqueQueue >> nextOrNilSuchThat: aBlock [
 	^ [ super nextOrNilSuchThat: aBlock ] valueNoContextSwitch
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SharedPriorityUniqueQueue >> nextPut: anObject [
 
 	^[ monitor critical: [ | result itemAdded |
@@ -159,7 +159,7 @@ SharedPriorityUniqueQueue >> nextPut: anObject [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SharedPriorityUniqueQueue >> peek [
 	"Answer the object that was sent through the receiver first and has not 
 	yet been received by anyone but do not remove it from the receiver. If 
@@ -169,7 +169,7 @@ SharedPriorityUniqueQueue >> peek [
 	^[ monitor critical: [ self basicPeek ] ] valueNoContextSwitch
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 SharedPriorityUniqueQueue >> postCopy [ 
 	"Finish off the copy operation.
 	Ensure that the operation isn't terminated while within the monitor"
@@ -177,7 +177,7 @@ SharedPriorityUniqueQueue >> postCopy [
 	^[ super postCopy ] valueNoContextSwitch
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SharedPriorityUniqueQueue >> removeAll [ 
 	"Empty the queue.
 	Ensure that the operation isn't terminated while within the monitor"
@@ -185,7 +185,7 @@ SharedPriorityUniqueQueue >> removeAll [
 	^[ super removeAll ] valueNoContextSwitch
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SharedPriorityUniqueQueue >> size [ 
 	"Answer the number of entries in the receiver.
 	Ensure that the operation isn't terminated while within the monitor"

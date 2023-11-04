@@ -14,28 +14,28 @@ Class {
 	#category : 'Bloc-Layouts-Support'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlExtentMeasurementSpec class >> atMost: anExtent [
 	^ self new
 		widthSpec: (BlMeasurementSpec atMost: anExtent x asFloat);
 		heightSpec: (BlMeasurementSpec atMost: anExtent y asFloat)
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlExtentMeasurementSpec class >> exact: anExtent [
 	^ self new
 		widthSpec: (BlMeasurementSpec exact: anExtent x asFloat);
 		heightSpec: (BlMeasurementSpec exact: anExtent y asFloat)
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlExtentMeasurementSpec class >> unspecified [
 	^ self new
 		widthSpec: BlMeasurementSpec unspecified;
 		heightSpec: BlMeasurementSpec unspecified
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlExtentMeasurementSpec >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
@@ -46,32 +46,32 @@ BlExtentMeasurementSpec >> = anotherObject [
 		and: [ anotherObject heightSpec = heightSpec ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlExtentMeasurementSpec >> hash [
 	^ heightSpec hash bitXor: widthSpec hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlExtentMeasurementSpec >> heightSpec [
 	^ heightSpec
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlExtentMeasurementSpec >> heightSpec: anObject [
 	heightSpec := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlExtentMeasurementSpec >> isExact [
 	^ self widthSpec isExact and: [ self heightSpec isExact ]
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlExtentMeasurementSpec >> min: aMinSize max: aMaxSize [
 	^ (self widthSpec min: aMinSize x max: aMaxSize x) @ (self heightSpec min: aMinSize y max: aMaxSize y)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlExtentMeasurementSpec >> printOn: aStream [
 	aStream nextPutAll: 'width: ('.
 	aStream nextPutAll: (self widthSpec asString).
@@ -80,7 +80,7 @@ BlExtentMeasurementSpec >> printOn: aStream [
 	aStream nextPutAll: ')'.
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlExtentMeasurementSpec >> sizeFor: anExtent [
 	| width height |
 	width := self widthSpec sizeFor: anExtent x.
@@ -88,13 +88,13 @@ BlExtentMeasurementSpec >> sizeFor: anExtent [
 	^ width @ height
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlExtentMeasurementSpec >> widthSpec [
 	<return: #BlMeasurementSpec>
 	^ widthSpec
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlExtentMeasurementSpec >> widthSpec: anObject [
 	widthSpec := anObject
 ]

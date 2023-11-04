@@ -8,12 +8,12 @@ Class {
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLine class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLine >> intersectionWith: anotherSegment [
 	"Copied from LineSegment>>intersectionWith:"
 	| det deltaPt alpha beta pt1Dir pt2Dir |

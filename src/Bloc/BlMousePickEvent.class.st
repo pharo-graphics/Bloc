@@ -4,13 +4,13 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMousePickEvent >> asMouseOutsideEvent [
 
 	^ self subclassResponsibility 
 ]
 
-{ #category : #processing }
+{ #category : 'processing' }
 BlMousePickEvent >> findTargetFrom: aSpaceOrElement [
 
 	^ (aSpaceOrElement findMousePickTargetFromEvent: self) ifNil: [ aSpaceOrElement space root ]

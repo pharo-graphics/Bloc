@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #focus }
+{ #category : 'focus' }
 BlFocusabilityAfter >> focusables: aBlFocusFinderCandidates along: aBlFocusSearchDirection of: anElement [
 	"We always add visible children and skip anElement itself if there are focusable descendants"
 	| focusablesCount |

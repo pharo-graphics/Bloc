@@ -10,7 +10,7 @@ Class {
 	#category : 'Bloc-Paint-Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeLineSquareCap class >> capName [
 	^ 'Square'
 ]

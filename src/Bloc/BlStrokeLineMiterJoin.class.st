@@ -11,7 +11,7 @@ Class {
 	#category : 'Bloc-Paint-Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeLineMiterJoin class >> joinName [
 	^ 'Miter'
 ]

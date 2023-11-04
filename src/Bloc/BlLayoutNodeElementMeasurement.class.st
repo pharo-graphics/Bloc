@@ -11,17 +11,17 @@ Class {
 	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutNodeElementMeasurement >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutNodeElementMeasurement >> element: anObject [
 	element := anObject
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlLayoutNodeElementMeasurement >> measure: aLayoutChildNode with: anExtentSpecOrBlock [
 	<return: #BlLayoutNodeMeasurement>
 

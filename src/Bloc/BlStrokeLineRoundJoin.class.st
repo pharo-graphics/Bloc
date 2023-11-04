@@ -10,7 +10,7 @@ Class {
 	#category : 'Bloc-Paint-Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeLineRoundJoin class >> joinName [
 	^ 'Round'
 ]

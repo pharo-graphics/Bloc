@@ -11,7 +11,7 @@ Class {
 	#category : 'Bloc-DataStructure - Rope'
 }
 
-{ #category : #'iterator - attributes' }
+{ #category : 'iterator - attributes' }
 BlAttributeRopeIterator >> attributes [
 	"Return a collection of rope attributes at a current position without duplicates"
 
@@ -19,22 +19,22 @@ BlAttributeRopeIterator >> attributes [
 		  rope attributes
 ]
 
-{ #category : #'iterator - testing' }
+{ #category : 'iterator - testing' }
 BlAttributeRopeIterator >> hasNext [
 	^ subIterator hasNext
 ]
 
-{ #category : #'iterator - testing' }
+{ #category : 'iterator - testing' }
 BlAttributeRopeIterator >> hasPrevious [
 	^ subIterator hasPrevious
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlAttributeRopeIterator >> next [
 	^ subIterator next
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlAttributeRopeIterator >> nextSpan [
 	| aSpan theAttributes |
 
@@ -46,41 +46,41 @@ BlAttributeRopeIterator >> nextSpan [
 	^ aSpan attributes: theAttributes
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlAttributeRopeIterator >> peek [
 	^ subIterator peek
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlAttributeRopeIterator >> peer [
 	^ subIterator peer
 ]
 
-{ #category : #'iterator - accessing' }
+{ #category : 'iterator - accessing' }
 BlAttributeRopeIterator >> position [
 	^ subIterator position
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlAttributeRopeIterator >> postCopy [
 	super postCopy.
 
 	subIterator := subIterator copy
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlAttributeRopeIterator >> previous [
 	^ subIterator previous
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlAttributeRopeIterator >> rope: aRope from: aStart to: anEnd [
 	super rope: aRope from: aStart to: anEnd.
 
 	subIterator := aRope rope iterator: aStart to: anEnd
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlAttributeRopeIterator >> skip: aNumber [
 	subIterator skip: aNumber
 ]

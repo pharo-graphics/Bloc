@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Basic-Interpolators'
 }
 
-{ #category : #interpolation }
+{ #category : 'interpolation' }
 BlEasingBounceIn >> interpolate: aProgress [
 	^ self computeBounce: aProgress
 ]

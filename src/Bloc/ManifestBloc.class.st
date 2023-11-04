@@ -24,7 +24,7 @@ Class {
 	#category : 'Bloc-Manifest'
 }
 
-{ #category : #'code-critics' }
+{ #category : 'code-critics' }
 ManifestBloc class >> ruleRBNotEliminationRuleV1FalsePositive [
 	^ #(#(#(#RGMethodDefinition #(#BlRope #isNotEmpty #false)) #'2019-01-05T19:54:41.211552+01:00') )
 ]

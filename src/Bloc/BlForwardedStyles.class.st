@@ -13,7 +13,7 @@ Class {
 	#category : 'Bloc-Basic-Style'
 }
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BlForwardedStyles >> newStyleForState: aBlElementState [
 
 	^ BlElementForwardedStyle new
@@ -21,7 +21,7 @@ BlForwardedStyles >> newStyleForState: aBlElementState [
 		  targetObject: targetObject
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BlForwardedStyles >> styleForState: aState ifFound: aFoundBlock ifNone: aNoneBlock [
 
 	^ styles
@@ -33,13 +33,13 @@ BlForwardedStyles >> styleForState: aState ifFound: aFoundBlock ifNone: aNoneBlo
 		ifNone: aNoneBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlForwardedStyles >> targetObject [
 
 	^ targetObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlForwardedStyles >> targetObject: anObject [
 
 	targetObject := anObject

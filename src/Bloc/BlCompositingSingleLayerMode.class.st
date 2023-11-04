@@ -9,7 +9,7 @@ Class {
 	#category : 'Bloc-Basic-Support'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlCompositingSingleLayerMode >> wantsBufferedLayer [
 	^ true
 ]

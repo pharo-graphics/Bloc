@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Basic-Support'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlCompositingWithLayerMode >> wantsCompositionLayer [
 	^ true
 ]

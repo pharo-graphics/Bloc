@@ -4,12 +4,12 @@ Class {
 	#category : 'Bloc-Basic-Children'
 }
 
-{ #category : #'children - subsets' }
+{ #category : 'children - subsets' }
 BlChildrenSortedByElevationReversed >> sortedByElevationReversed [
 	^ self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlChildrenSortedByElevationReversed >> subsetFrom: aBlChildren [
 	"Perform the sort when the instance is created."
 	^ aBlChildren asArray sorted: [ :a :b | 

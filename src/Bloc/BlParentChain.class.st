@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Space - Support'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlParentChain class >> of: anElement [
 	| aChain |
 	
@@ -15,7 +15,7 @@ BlParentChain class >> of: anElement [
 	^ aChain
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlParentChain class >> of: anElement upToExclusive: aParentElement [
 	| aChain |
 	

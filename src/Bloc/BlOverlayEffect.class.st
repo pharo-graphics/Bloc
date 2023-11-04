@@ -7,19 +7,19 @@ Class {
 	#category : 'Bloc-Effect'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlOverlayEffect >> initialize [
 	super initialize.
 	
 	paint := Color transparent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOverlayEffect >> paint [
 	^ paint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOverlayEffect >> paint: anObject [
 	paint := anObject
 ]

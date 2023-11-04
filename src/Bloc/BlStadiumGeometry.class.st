@@ -7,12 +7,12 @@ Class {
 	#category : 'Bloc-Basic-Geometry'
 }
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlStadiumGeometry >> matchExtent: aPoint [
 	extent := aPoint
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlStadiumGeometry >> radius [
 	"Compute the radius of the semicircles"
 	

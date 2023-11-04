@@ -9,7 +9,7 @@ Class {
 	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlVisibilityHidden >> isHidden [
 	^ true
 ]

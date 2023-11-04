@@ -16,7 +16,7 @@ Class {
 	#category : 'Bloc-Basic-Geometry'
 }
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlEllipseGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	| w h x y center xRadius yRadius normalized |
 	
@@ -36,19 +36,19 @@ BlEllipseGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement
 	^ ((normalized x squared / xRadius squared) + (normalized y squared / yRadius squared)) <= 1
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEllipseGeometry >> hasCaps [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlEllipseGeometry >> hasJoins [
 
 	^ false
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlEllipseGeometry >> matchExtent: anExtent [
 	self extent: anExtent
 ]

@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #focus }
+{ #category : 'focus' }
 BlFocusabilityBlock >> focusables: anOrderedCollection along: aBlFocusSearchDirection of: anElement [
 	"Block descendants and only add anElement"
 

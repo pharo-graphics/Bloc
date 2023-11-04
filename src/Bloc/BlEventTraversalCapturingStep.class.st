@@ -10,7 +10,7 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventTraversalCapturingStep >> type [
 	<return: #String>
 	

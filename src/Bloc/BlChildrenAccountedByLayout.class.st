@@ -11,17 +11,17 @@ Class {
 	#category : 'Bloc-Basic-Children'
 }
 
-{ #category : #'children - subsets' }
+{ #category : 'children - subsets' }
 BlChildrenAccountedByLayout >> accountedByLayout [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildrenAccountedByLayout >> name [
 	^ 'Accounted by layout'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlChildrenAccountedByLayout >> subsetFrom: aBlChildren [
 	^ aBlChildren select: [ :anElement |
 		anElement constraints ignoredByLayout not

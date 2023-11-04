@@ -9,24 +9,24 @@ Class {
 	#category : 'Bloc-Layouts-Support'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMeasurementAtMostMode >> isAtMost [
 	^ true
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMeasurementAtMostMode >> measurement: aResizing with: aFloat [	
 	<return: #BlMeasurementSpec>
 	
 	^ aResizing measurementAtMostWith: aFloat
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlMeasurementAtMostMode >> printOn: aStream [
 	aStream nextPutAll: 'At most'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlMeasurementAtMostMode >> printOn: aStream size: aNumber [
 
 	self printOn: aStream.	
@@ -34,7 +34,7 @@ BlMeasurementAtMostMode >> printOn: aStream size: aNumber [
 	aStream nextPutAll: aNumber asString
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMeasurementAtMostMode >> size: aNumber min: aMinSizeFloat max: aMaxSizeFloat [
 	"aNumber should satisfy #isBlocFiniteFloat,
 	aMinSizeFloat and aMaxSizeFloat  #isBlocFiniteFloat"
@@ -43,7 +43,7 @@ BlMeasurementAtMostMode >> size: aNumber min: aMinSizeFloat max: aMaxSizeFloat [
 	^ BlMeasurementSpec atMost: (aNumber min: aMaxSizeFloat)
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMeasurementAtMostMode >> size: aNumber with: aSpecSize [
 	"aNumber should satisfy #isBlocFiniteFloat"
 	<return: #Number>

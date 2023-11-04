@@ -11,7 +11,7 @@ Class {
 	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlAffineTransformationPositionOrigin class >> position: aPoint [
 
 	^ self new
@@ -19,19 +19,19 @@ BlAffineTransformationPositionOrigin class >> position: aPoint [
 		  yourself
 ]
 
-{ #category : #math }
+{ #category : 'math' }
 BlAffineTransformationPositionOrigin >> originIn: anElement [
 
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAffineTransformationPositionOrigin >> position [
 
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAffineTransformationPositionOrigin >> position: aPoint [
 
 	position := aPoint

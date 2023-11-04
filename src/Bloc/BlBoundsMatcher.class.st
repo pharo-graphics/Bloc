@@ -17,27 +17,27 @@ Class {
 	#category : 'Bloc-Basic-Bounds'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBoundsMatcher >> childEnd [
 	^ childEnd
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBoundsMatcher >> childEnd: anObject [
 	childEnd := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBoundsMatcher >> childStart [
 	^ childStart
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBoundsMatcher >> childStart: anObject [
 	childStart := anObject
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlBoundsMatcher >> compare: aNumber and: anotherNumber [
 	<return: #Number>
 	aNumber > anotherNumber
@@ -49,19 +49,19 @@ BlBoundsMatcher >> compare: aNumber and: anotherNumber [
 	^ BlBoundsMatcherConstraints Equal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBoundsMatcher >> constraints [
 	<return: #BlBoundsMatcherConstraints>
 
 	^ constraints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBoundsMatcher >> constraints: anObject [
 	constraints := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBoundsMatcher >> initialize [
 	super initialize.
 	
@@ -72,7 +72,7 @@ BlBoundsMatcher >> initialize [
 	parentEnd := 0
 ]
 
-{ #category : #'api - matcher' }
+{ #category : 'api - matcher' }
 BlBoundsMatcher >> matches [
 	"Returns whether the contraints of the matcher are correct"
 	<return: #Boolean>
@@ -100,22 +100,22 @@ BlBoundsMatcher >> matches [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBoundsMatcher >> parentEnd [
 	^ parentEnd
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBoundsMatcher >> parentEnd: anObject [
 	parentEnd := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBoundsMatcher >> parentStart [
 	^ parentStart
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBoundsMatcher >> parentStart: anObject [
 	parentStart := anObject
 ]

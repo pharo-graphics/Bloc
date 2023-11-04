@@ -4,14 +4,14 @@ Class {
 	#category : 'Bloc-Space - Frame'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrameStylePhase >> name [
 	<return: #String>
 	
 	^ 'Style'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlSpaceFrameStylePhase >> runOn: aSpace [
 	aSpace
 		dispatchTimeEvent: BlSpaceStyleEndEvent

@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEllipse class >> isDeprecated [
 	^ true
 ]

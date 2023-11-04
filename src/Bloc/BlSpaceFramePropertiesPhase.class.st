@@ -4,14 +4,14 @@ Class {
 	#category : 'Bloc-Space - Frame'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFramePropertiesPhase >> name [
 	<return: #String>
 	
 	^ 'Properties'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlSpaceFramePropertiesPhase >> runOn: aSpace [
 	aSpace
 		dispatchTimeEvent: BlSpacePropertiesEndEvent

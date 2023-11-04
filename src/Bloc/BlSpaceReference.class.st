@@ -20,36 +20,36 @@ Class {
 	#category : 'Bloc-Space'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceReference >> isAttachedToSceneGraph [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceReference >> isDetachedFromSceneGraph [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceReference >> isNull [
 	^ false
 ]
 
-{ #category : #'text input' }
+{ #category : 'text input' }
 BlSpaceReference >> isTextInputActive [
 	"Check whether or not Unicode text input events are enabled"
 	self spaceDo: [:sp | ^sp isTextInputActive].
 	^ false
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlSpaceReference >> spaceDo: aBlock [
 	"Evaluate a given block with a bloc space as an argument"
 	
 	
 ]
 
-{ #category : #'text input' }
+{ #category : 'text input' }
 BlSpaceReference >> startTextInput [
 	"Start accepting Unicode text input events.
 	I will start accepting Unicode text input events in the focused window, and start emitting text input and text editing events.
@@ -59,7 +59,7 @@ BlSpaceReference >> startTextInput [
 
 ]
 
-{ #category : #'text input' }
+{ #category : 'text input' }
 BlSpaceReference >> startTextInputAtRectangle: aRectangle [
 	"Start accepting Unicode text input events.
 	I will start accepting Unicode text input events in the focused window, and start emitting text input and text editing events.
@@ -69,7 +69,7 @@ BlSpaceReference >> startTextInputAtRectangle: aRectangle [
 
 ]
 
-{ #category : #'text input' }
+{ #category : 'text input' }
 BlSpaceReference >> stopTextInput [
 	"Stop receiving any text input events"
 	self spaceDo: [ :sp | sp stopTextInput ]

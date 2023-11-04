@@ -4,22 +4,22 @@ Class {
 	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceEvent >> isSpaceCloseRequest [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceEvent >> isSpaceEvent [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceEvent >> isSpaceResizedEvent [
 	^ false
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlSpaceEvent >> sendTo: anObject [
 	anObject spaceEvent: self
 ]

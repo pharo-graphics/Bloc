@@ -10,12 +10,12 @@ Class {
 	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceDetachedEvent >> space [
 	^ space
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceDetachedEvent >> space: anObject [
 	space := anObject
 ]

@@ -25,17 +25,17 @@ Class {
 	#category : 'Bloc-Paint-Support'
 }
 
-{ #category : #'predefined instances' }
+{ #category : 'predefined instances' }
 BlStrokeLineCap class >> butt [
 	^ butt ifNil: [ butt := BlStrokeLineButtCap new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeLineCap class >> capName [
 	^ self subclassResponsibility
 ]
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlStrokeLineCap class >> cleanUp [
 	<script: 'self cleanUp'>
 	super cleanUp.
@@ -43,17 +43,17 @@ BlStrokeLineCap class >> cleanUp [
 	square := round := butt := nil
 ]
 
-{ #category : #'predefined instances' }
+{ #category : 'predefined instances' }
 BlStrokeLineCap class >> round [
 	^ round ifNil: [ round := BlStrokeLineRoundCap new ]
 ]
 
-{ #category : #'predefined instances' }
+{ #category : 'predefined instances' }
 BlStrokeLineCap class >> square [
 	^ square ifNil: [ square := BlStrokeLineSquareCap new ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlStrokeLineCap >> printOn: aStream [
 
 	self class ~= BlStrokeLineCap

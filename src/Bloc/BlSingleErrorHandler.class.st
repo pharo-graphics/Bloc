@@ -7,42 +7,42 @@ Class {
 	#category : 'Bloc-Basic-Errors'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlSingleErrorHandler >> = anObject [
 	^ self class = anObject class
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSingleErrorHandler >> error [
 	<return: #BlHandledError>
 
 	^ error
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSingleErrorHandler >> error: aHandledError [
 	
 	error := aHandledError
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSingleErrorHandler >> errors [
 	^ { self error }
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSingleErrorHandler >> hasError [
 	<return: #Boolean>
 
 	^ error isNotNil
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlSingleErrorHandler >> hash [
 	^ self class hash
 ]
 
-{ #category : #'error handling' }
+{ #category : 'error handling' }
 BlSingleErrorHandler >> registerError: aHandledError [
 	"Register a given handled error for further debugging"
 

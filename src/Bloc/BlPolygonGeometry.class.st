@@ -18,19 +18,19 @@ Class {
 	#category : 'Bloc-Basic-Geometry'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlPolygonGeometry class >> vertices: aCollection [
 	^ self new vertices: aCollection
 ]
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlPolygonGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry."
 
 	^ BlPolygonHitTester doPolygonBy: self vertices include: aPoint
 ]
 
-{ #category : #'api - bounds' }
+{ #category : 'api - bounds' }
 BlPolygonGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
@@ -40,37 +40,37 @@ BlPolygonGeometry >> geometryBounds: aBlBounds [
 		corner: (self vertices ifEmpty: [0@0] ifNotEmpty: [self vertices max])
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlPolygonGeometry >> hasCaps [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlPolygonGeometry >> hasJoins [
 
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlPolygonGeometry >> initialize [ 
 
 	super initialize.
 	vertices := #()
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlPolygonGeometry >> matchExtent: anExtent [
 	extent := anExtent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPolygonGeometry >> vertices [
 
 	^ vertices
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPolygonGeometry >> vertices: aCollectionOfPoints [
 	| theNewVertices |
 	theNewVertices := aCollectionOfPoints collect: [ :eachPoint | eachPoint asFloatPoint ].

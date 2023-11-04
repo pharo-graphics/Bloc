@@ -13,25 +13,25 @@ Class {
 	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlElementCachedIdentityTransformation class >> cleanUp [
 
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementCachedIdentityTransformation class >> uniqueInstance [
 
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlElementCachedIdentityTransformation >> asElementTransformation [
 
 	^ BlElementIdentityTransformation uniqueInstance
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedIdentityTransformation >> boundingRectangle: aRectangle [
 	"The actual transformation matrix may depend on the element bounds due to potential non-zero transformation origin.
 	This message allows cached transformation to recompute the transformation matrix when bounds change.
@@ -39,7 +39,7 @@ BlElementCachedIdentityTransformation >> boundingRectangle: aRectangle [
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementCachedIdentityTransformation >> initialize [
 
 	super initialize.
@@ -48,7 +48,7 @@ BlElementCachedIdentityTransformation >> initialize [
 	identityMatrix beReadOnlyObject
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedIdentityTransformation >> inverseTransformBounds: aBlBounds [
 	"Transform the given bounds according to inverse of my cached transformation.
 	(Global to local transformation.)"
@@ -56,26 +56,26 @@ BlElementCachedIdentityTransformation >> inverseTransformBounds: aBlBounds [
 	^ aBlBounds
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedIdentityTransformation >> inverseTransformPoint: aPoint [
 	"Answer the `Point` that results from applying the inversed transformation on a given point."
 	
 	^ aPoint
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlElementCachedIdentityTransformation >> isIdentity [
 
 	^ true
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedIdentityTransformation >> matrix [
 	
 	^ identityMatrix
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedIdentityTransformation >> transformBounds: aBlBounds [
 	"Transform the given bounds according to my cached transformation.
 	(Local to global transformation.)"
@@ -83,7 +83,7 @@ BlElementCachedIdentityTransformation >> transformBounds: aBlBounds [
 	^ aBlBounds
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedIdentityTransformation >> transformPoint: aPoint [
 	"Transform a given 2D point according to my cached transformation.
 	(Local to global transformation.)"

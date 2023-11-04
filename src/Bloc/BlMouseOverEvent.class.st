@@ -14,7 +14,7 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlMouseOverEvent >> sendTo: anObject [
 	anObject mouseOverEvent: self
 ]

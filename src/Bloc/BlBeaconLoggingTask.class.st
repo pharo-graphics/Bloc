@@ -16,7 +16,7 @@ Class {
 	#category : 'Bloc-Space - Tasks'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlBeaconLoggingTask class >> subtask: aBlTask [
 	<return: #BlBeaconLoggingTask>
 	^ self new
@@ -24,38 +24,38 @@ BlBeaconLoggingTask class >> subtask: aBlTask [
 		callingMethod: thisContext sender sender blocMethodDefinition
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlBeaconLoggingTask >> asBeaconLoggingTask [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBeaconLoggingTask >> callingMethod [
 	^ callingMethod
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBeaconLoggingTask >> callingMethod: anObject [
 	callingMethod := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBeaconLoggingTask >> maySetName: aString [
 	name ifNotNil: [ ^ self ].
 	self name: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBeaconLoggingTask >> name [
 	^ name ifNil: [ '' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBeaconLoggingTask >> name: anObject [
 	name := anObject
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlBeaconLoggingTask >> onEnqueued: aBlSpace [
 	"Is self when a task is enqueued in a space.
 	It gives subclasses a possibility to synchronize time with the space"
@@ -63,7 +63,7 @@ BlBeaconLoggingTask >> onEnqueued: aBlSpace [
 	self subtask onEnqueued: aBlSpace
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlBeaconLoggingTask >> onEnqueuedInElement: aBlElement [
 	"Is sent when a task is enqueued in a element.
 	It gives subclasses a possibility to re-enqueue themselves in the same element"
@@ -71,20 +71,20 @@ BlBeaconLoggingTask >> onEnqueuedInElement: aBlElement [
 	self subtask onEnqueuedInElement: aBlElement
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlBeaconLoggingTask >> run [
 	BlBeaconTaskSignal new task: self subtask; name: self name message: #runBlocTask; callingMethod: callingMethod; emit.
 	self subtask run.
 	BlBeaconTaskSignal new task: self subtask; name: self name message: #doneBlocTask; callingMethod: callingMethod; emit.	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBeaconLoggingTask >> subtask [
 	<return: #BlTask>
 	^ subtask
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBeaconLoggingTask >> subtask: aBlTask [
 	subtask := aBlTask
 ]

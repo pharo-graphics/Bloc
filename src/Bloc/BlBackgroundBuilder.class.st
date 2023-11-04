@@ -9,35 +9,35 @@ Class {
 	#category : 'Bloc-Basic-Background'
 }
 
-{ #category : #building }
+{ #category : 'building' }
 BlBackgroundBuilder >> build [
 	<return: #BlBackground>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBackgroundBuilder >> initialize [
 	super initialize.
 	
 	opacity := 1.0
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 BlBackgroundBuilder >> isOpaque [
 	<return: #Boolean>
 
 	^ self opacity closeTo: 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBackgroundBuilder >> opacity [
 	<return: #Number>
 
 	^ opacity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBackgroundBuilder >> opacity: aNumber [
 	self
 		assert: [ aNumber between: 0.0 and: 1.0 ]

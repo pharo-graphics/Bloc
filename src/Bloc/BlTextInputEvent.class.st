@@ -13,22 +13,22 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextInputEvent >> isTextInput [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlTextInputEvent >> sendTo: anObject [
 	anObject textInputEvent: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextInputEvent >> text [
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextInputEvent >> text: anObject [
 	text := anObject
 ]

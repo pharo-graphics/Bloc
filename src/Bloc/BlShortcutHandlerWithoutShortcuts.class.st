@@ -7,17 +7,17 @@ Class {
 	#category : 'Bloc-Events-Handler'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlShortcutHandlerWithoutShortcuts class >> cleanUp [
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlShortcutHandlerWithoutShortcuts class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BlShortcutHandlerWithoutShortcuts >> addShortcut: aBlShortcut [
 	"Return a shortcut handler with an added given shortcut.
 	Note: The returned instance may or may not be the same as the receiver"
@@ -26,11 +26,11 @@ BlShortcutHandlerWithoutShortcuts >> addShortcut: aBlShortcut [
 	^ BlShortcutHandlerWithShortcuts new addShortcut: aBlShortcut
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlShortcutHandlerWithoutShortcuts >> handleEvent: aShortcutEvent [
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BlShortcutHandlerWithoutShortcuts >> removeAllWithCombination: aBlKeyCombination [
 	"Return a shortcut handler without all shortcuts with a given key combination.
 	Note: The returned instance may or may not be the same as the receiver"
@@ -39,7 +39,7 @@ BlShortcutHandlerWithoutShortcuts >> removeAllWithCombination: aBlKeyCombination
 	^ self
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BlShortcutHandlerWithoutShortcuts >> removeShortcut: aBlShortcut [
 	"Return a shortcut handler without a given shortcut.
 	Note: The returned instance may or may not be the same as the receiver"
@@ -48,14 +48,14 @@ BlShortcutHandlerWithoutShortcuts >> removeShortcut: aBlShortcut [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlShortcutHandlerWithoutShortcuts >> shortcuts [
 	<return: #Collection of: #BlBasicShortcut>
 
 	^ #()
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlShortcutHandlerWithoutShortcuts >> wantsEvent: anEvent [
 	^ false
 ]

@@ -11,13 +11,13 @@ Class {
 	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAffineTransformationCenterOrigin class >> defaultInstance [
 
 	^ defaultInstance ifNil: [ defaultInstance := self new ]
 ]
 
-{ #category : #math }
+{ #category : 'math' }
 BlAffineTransformationCenterOrigin >> originIn: anElement [
 
 	^ anElement extent / 2.0

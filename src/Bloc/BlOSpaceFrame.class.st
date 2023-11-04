@@ -22,7 +22,7 @@ Class {
 	#category : 'Bloc-Space - Frame'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlOSpaceFrame >> initializePhases [
 	self addPhases: { 
 		BlSpaceFrameIdlePhase new.

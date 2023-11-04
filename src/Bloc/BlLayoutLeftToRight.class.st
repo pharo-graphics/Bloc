@@ -8,33 +8,33 @@ Class {
 	#category : 'Bloc-Layouts-Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutLeftToRight >> inverted [
 
 	^ self class rightToLeft 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLayoutLeftToRight >> isLeftToRight [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLayoutLeftToRight >> isRightToLeft [
 	^ false
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlLayoutLeftToRight >> of: anObject [
 	^ anObject leftToRight
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlLayoutLeftToRight >> with: aCollection do: aBlock [
 	aCollection do: aBlock
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlLayoutLeftToRight >> with: aCollection inject: thisValue into: binaryBlock [
 	^ aCollection inject: thisValue into: binaryBlock
 ]

@@ -4,18 +4,18 @@ Class {
 	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlElementPropagatableProperties >> flushPropertiesToRemove [
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementPropagatableProperties >> initialize [
 	super initialize.
 	
 	properties := Dictionary new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementPropagatableProperties >> propertiesToPropagateToChildren [
 	^ self
 ]

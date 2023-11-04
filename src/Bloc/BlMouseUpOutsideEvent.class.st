@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Events-Type-Element'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlMouseUpOutsideEvent >> sendTo: anObject [
 
 	anObject mouseUpOutsideEvent: self

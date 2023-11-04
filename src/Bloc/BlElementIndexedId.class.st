@@ -8,7 +8,7 @@ Class {
 	#category : 'Bloc-Basic-Support'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementIndexedId >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -23,7 +23,7 @@ BlElementIndexedId >> = anObject [
 	^ self asSymbol = anObject asSymbol
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlElementIndexedId >> asSymbol [
 	^ Symbol streamContents: [ :aStream | 
 		aStream
@@ -32,31 +32,31 @@ BlElementIndexedId >> asSymbol [
 			print: self index ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementIndexedId >> index [
 	<return: #Number>
 
 	^ index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementIndexedId >> index: aNumber [
 	index := aNumber
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementIndexedId >> isIndexed [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementIndexedId >> prefixId [
 	<return: #BlElementId>
 
 	^ prefixId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementIndexedId >> prefixId: aBlElementId [
 	prefixId := aBlElementId
 ]

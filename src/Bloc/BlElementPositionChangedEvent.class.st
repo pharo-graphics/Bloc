@@ -10,22 +10,22 @@ Class {
 	#category : 'Bloc-Events-Type-Element'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementPositionChangedEvent class >> disableIn: anObject [
 	anObject disablePositionChanged
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementPositionChangedEvent class >> enableIn: anObject [
 	anObject enablePositionChanged
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementPositionChangedEvent class >> wantedIn: anObject [
 	^ anObject wantsPositionChanged
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlElementPositionChangedEvent >> sendTo: anObject [
 	anObject elementPositionChangedEvent: self
 ]

@@ -9,7 +9,7 @@ Class {
 	#category : 'Bloc-Events-KeyBinding'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlShortcut class >> isDeprecated [
 	^ true
 ]

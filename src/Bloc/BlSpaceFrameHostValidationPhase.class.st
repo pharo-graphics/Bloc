@@ -8,19 +8,19 @@ Class {
 	#category : 'Bloc-Space - Frame'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrameHostValidationPhase >> name [
 	<return: #String>
 	
 	^ 'Host validation'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlSpaceFrameHostValidationPhase >> reopenSpace: aSpace [
 	aSpace host: BlHost pickHost
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlSpaceFrameHostValidationPhase >> runOn: aSpace [
 	aSpace hasHostSpace
 		ifFalse: [ ^ self ].
@@ -30,7 +30,7 @@ BlSpaceFrameHostValidationPhase >> runOn: aSpace [
 		ifFalse: [ self reopenSpace: aSpace ]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlSpaceFrameHostValidationPhase >> validateHostSpace: aSpace [
 
 	aSpace hostSpace needsRebuild ifFalse: [ ^ self ].

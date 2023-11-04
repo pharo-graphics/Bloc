@@ -7,7 +7,7 @@ Class {
 	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementMarginProperty >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -18,24 +18,24 @@ BlElementMarginProperty >> = anObject [
 	^ margin = anObject margin
 ]
 
-{ #category : #'api - property' }
+{ #category : 'api - property' }
 BlElementMarginProperty >> applyOnElement: anElement [
 	anElement margin: self margin
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementMarginProperty >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ margin hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementMarginProperty >> margin [
 	^ margin
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementMarginProperty >> margin: anObject [
 	margin := anObject
 ]

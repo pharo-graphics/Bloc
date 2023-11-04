@@ -12,22 +12,22 @@ Class {
 	#category : 'Bloc-Space'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlAttachedCachedSpaceReference class >> forSpace: aBlSpace [
 	^ self new space: aBlSpace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAttachedCachedSpaceReference >> space [
 	^ space
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAttachedCachedSpaceReference >> space: aBlSpace [
 	space := aBlSpace
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlAttachedCachedSpaceReference >> spaceDo: aBlock [
 	"Evaluate a given block with a bloc space as an argument"
 	

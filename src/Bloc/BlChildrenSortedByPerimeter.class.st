@@ -8,17 +8,17 @@ Class {
 	#category : 'Bloc-Basic-Children'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildrenSortedByPerimeter >> name [
 	^ 'Sorted by permeter'
 ]
 
-{ #category : #'children - subsets' }
+{ #category : 'children - subsets' }
 BlChildrenSortedByPerimeter >> sortedByPerimeter [
 	^ self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlChildrenSortedByPerimeter >> subsetFrom: aBlChildren [
 	"Perform the sort when the instance is created."
 	^ aBlChildren asArray sorted: [ :a :b | a measuredBounds perimeter >= b measuredBounds perimeter ]

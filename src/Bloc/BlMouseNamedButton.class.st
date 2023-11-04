@@ -11,26 +11,26 @@ Class {
 	#category : 'Bloc-Events'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlMouseNamedButton class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMouseNamedButton class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMouseNamedButton >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
 	^ anotherObject class = self class
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMouseNamedButton >> hash [
 	^ self class hash
 ]

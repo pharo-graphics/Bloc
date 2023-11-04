@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Space - Telemetry'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlTelemetryTasks >> asTask [
 	^ self size = 1
 		ifTrue: [ self first ]
@@ -15,7 +15,7 @@ BlTelemetryTasks >> asTask [
 			tasks: self copy ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTelemetryTasks >> totalDuration [
 	^ self
 		ifEmpty: [ 0 seconds ]

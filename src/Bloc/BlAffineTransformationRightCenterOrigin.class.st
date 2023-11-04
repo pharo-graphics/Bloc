@@ -8,7 +8,7 @@ Class {
 	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #math }
+{ #category : 'math' }
 BlAffineTransformationRightCenterOrigin >> originIn: anElement [
 
 	^ anElement width @ (anElement height / 2.0)

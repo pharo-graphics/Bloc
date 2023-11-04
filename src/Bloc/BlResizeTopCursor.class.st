@@ -4,7 +4,7 @@ Class {
 	#category : 'Bloc-Space - Cursor'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlResizeTopCursor >> asForm [
 	^ Cursor resizeTop
 ]

@@ -4,13 +4,13 @@ Class {
 	#category : 'Bloc-Universe - Renderer'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHostSurfaceRenderer >> initializeForSurface: aSurface [
 
 	self subclassResponsibility
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 BlHostSurfaceRenderer >> renderSurface: aSurface damaged: aCollectionOfRectangles [
 	"Render a given surface on a host space"
 

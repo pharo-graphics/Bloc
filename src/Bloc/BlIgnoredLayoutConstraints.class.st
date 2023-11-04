@@ -4,17 +4,17 @@ Class {
 	#category : 'Bloc-Layouts-Basic'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlIgnoredLayoutConstraints >> alignment [
 	^ self horizontal alignment + self vertical alignment
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlIgnoredLayoutConstraints >> defaultHorizontal [
 	^ BlIgnoredLayoutConstraintsHorizontal new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlIgnoredLayoutConstraints >> defaultVertical [
 	^ BlIgnoredLayoutConstraintsVertical new
 ]
