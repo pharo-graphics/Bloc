@@ -3,23 +3,21 @@ I am a relative transformation origin which is attached to the center of an elem
 
 "
 Class {
-	#name : 'BlAffineTransformationCenterOrigin',
-	#superclass : 'BlAffineTransformationOrigin',
+	#name : #BlAffineTransformationCenterOrigin,
+	#superclass : #BlAffineTransformationOrigin,
 	#classInstVars : [
 		'defaultInstance'
 	],
-	#category : 'Bloc-Basic-Transformations',
-	#package : 'Bloc',
-	#tag : 'Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlAffineTransformationCenterOrigin class >> defaultInstance [
 
 	^ defaultInstance ifNil: [ defaultInstance := self new ]
 ]
 
-{ #category : 'math' }
+{ #category : #math }
 BlAffineTransformationCenterOrigin >> originIn: anElement [
 
 	^ anElement extent / 2.0

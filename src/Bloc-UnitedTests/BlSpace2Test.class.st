@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlSpace2Test',
-	#superclass : 'TestCase',
-	#category : 'Bloc-UnitedTests-Space',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Space'
+	#name : #BlSpace2Test,
+	#superclass : #TestCase,
+	#category : #'Bloc-UnitedTests-Space'
 }
 
-{ #category : 'test seed' }
+{ #category : #'test seed' }
 BlSpace2Test >> animatedElement [
 
 	<sampleInstance>
@@ -18,7 +16,7 @@ BlSpace2Test >> animatedElement [
 		  yourself
 ]
 
-{ #category : 'test seed' }
+{ #category : #'test seed' }
 BlSpace2Test >> iconElement [
 
 	<sampleInstance>
@@ -28,7 +26,7 @@ BlSpace2Test >> iconElement [
 		  geometry: BlCircleGeometry new
 ]
 
-{ #category : 'test seed' }
+{ #category : #'test seed' }
 BlSpace2Test >> iconStencil [
 
 	<sampleInstance>
@@ -38,7 +36,7 @@ BlSpace2Test >> iconStencil [
 	^ aStencil
 ]
 
-{ #category : 'test seed' }
+{ #category : #'test seed' }
 BlSpace2Test >> infiniteAnimation [
 
 	<sampleInstance>
@@ -50,29 +48,29 @@ BlSpace2Test >> infiniteAnimation [
 	^ anAnimation
 ]
 
-{ #category : 'test seed' }
+{ #category : #'test seed' }
 BlSpace2Test >> spaceWithSlownDownTime [
-
 	<sampleInstance>
+
 	| aTime aSpace |
 	aTime := BlFastForwardedTime new.
 	aTime speed: 0.2.
-	aSpace := BlOSpace new.
+	aSpace := BlSpace new.
 	aSpace time: aTime.
 	^ aSpace
 ]
 
-{ #category : 'test seed' }
+{ #category : #'test seed' }
 BlSpace2Test >> spaceWithSlownDownTimeAndAnimatedElement [
-
 	<sampleInstance>
+
 	| aSpace |
 	aSpace := self spaceWithSlownDownTime.
 	aSpace root addChild: self animatedElement.
 	^ aSpace
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSpace2Test >> testChangeIcon [
 
 	<sampleInstance>
@@ -94,12 +92,12 @@ BlSpace2Test >> testChangeIcon [
 	^ aSpace
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSpace2Test >> testEmptySpace [
 
 	<sampleInstance>
 	| aSpace |
-	aSpace := BlOSpace new.
+	aSpace := BlSpace new.
 	self assert: aSpace session equals: Smalltalk session.
 	self deny: aSpace root hasChildren.
 	self deny: aSpace hasDirtyElements.
@@ -122,7 +120,7 @@ BlSpace2Test >> testEmptySpace [
 	^ aSpace
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSpace2Test >> testFirstPulse [
 
 	<sampleInstance>

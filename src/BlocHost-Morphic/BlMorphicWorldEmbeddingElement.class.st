@@ -12,9 +12,9 @@ Class {
 { #category : #'instance creation' }
 BlMorphicWorldEmbeddingElement class >> open [
 	<script: 'self open'>
+
 	| aSpace |
-	
-	aSpace := BlOSpace new.
+	aSpace := BlSpace new.
 	aSpace title: 'Morph World'.
 	aSpace extent: 1280@800.
 	aSpace root: self new.
@@ -23,10 +23,10 @@ BlMorphicWorldEmbeddingElement class >> open [
 
 { #category : #'instance creation' }
 BlMorphicWorldEmbeddingElement class >> openMain [
-	<script: 'self open'>
+	<script: 'self openMain'>
+
 	| aSpace |
-	
-	aSpace := BlOSpace new.
+	aSpace := BlSpace new.
 	aSpace title: 'Morph World'.
 	aSpace extent: 1280@800.
 	aSpace root: self new beMain.

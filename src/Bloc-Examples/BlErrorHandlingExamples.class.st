@@ -114,9 +114,9 @@ BlErrorHandlingExamples >> sceneWith: aFaultyElement [
 
 	aContainer addChildren: { aLeftChild . aRightChild }.
 	
-	aSpace := BlOSpace new.
+	aSpace := BlSpace new.
 	aSpace host: BlMorphicWindowHost new.
-	aSpace addChild: aContainer.
+	aSpace root addChild: aContainer.
 	aSpace show.
 	aSpace pulse.
 	aSpace close.

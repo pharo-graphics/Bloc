@@ -11,19 +11,17 @@ https://developer.mozilla.org/en-US/docs/Web/Events/mouseenter
 
 "
 Class {
-	#name : 'BlMouseEnterEvent',
-	#superclass : 'BlMouseEvent',
-	#category : 'Bloc-Events',
-	#package : 'Bloc',
-	#tag : 'Events'
+	#name : #BlMouseEnterEvent,
+	#superclass : #BlMouseEvent,
+	#category : 'Bloc-Events'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlMouseEnterEvent >> isMouseEnter [
 	^ true
 ]
 
-{ #category : 'sending' }
+{ #category : #sending }
 BlMouseEnterEvent >> sendTo: anObject [
 	anObject mouseEnterEvent: self
 ]

@@ -1,6 +1,6 @@
-Extension { #name : 'Context' }
+Extension { #name : #Context }
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Context >> blocDefiningMethod [
 	"Return a CompiledMethod this context belongs to"
 	| anOuterMostContext aCompiledCode |
@@ -17,7 +17,7 @@ Context >> blocDefiningMethod [
 		ifFalse: [ anOuterMostContext blocDefiningMethod ]
 ]
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Context >> blocMethodDefinition [
 	"Return a Ring method definition for the CompiledMethod this context belongs to"
 

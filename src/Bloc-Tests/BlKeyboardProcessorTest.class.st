@@ -10,9 +10,10 @@ Class {
 
 { #category : #initialization }
 BlKeyboardProcessorTest >> setUp [
+
 	super setUp.
 	
-	space := BlOSpace new.
+	space := BlSpace new.
 	processor := BlKeyboardProcessor new.
 	processor space: space
 ]

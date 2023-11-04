@@ -28,8 +28,10 @@ BlSpaceEventExamples >> ignoreSpaceEventsAfterCloseRequest [
 { #category : #'instance creation' }
 BlSpaceEventExamples >> space [
 	<gtExample>
-	
-	^ BlOSpace new host: BlHeadlessHost new
+
+	^ BlSpace new
+		  host: BlHeadlessHost new;
+		  yourself
 ]
 
 { #category : #'show / close' }
