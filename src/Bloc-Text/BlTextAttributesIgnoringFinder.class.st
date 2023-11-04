@@ -3,7 +3,8 @@ Class {
 	#superclass : 'Object',
 	#traits : 'TBlTextAttributesFinder',
 	#classTraits : 'TBlTextAttributesFinder classTrait',
-	#category : 'Bloc-Text-Text-Attributes Finder',
+	#package : 'Bloc',
+	#tag : 'Text-Text-Attributes Finder',
 	#package : 'Bloc-Text',
 	#tag : 'Text-Attributes Finder'
 }

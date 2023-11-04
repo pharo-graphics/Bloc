@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'firedEvents'
 	],
-	#category : 'Bloc-Tests-Universe'
+	#package : 'Bloc',
+	#tag : 'Tests-Universe'
 }
 
 { #category : #'as yet unclassified' }

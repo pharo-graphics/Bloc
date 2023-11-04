@@ -7,7 +7,8 @@ Class {
 	#superclass : #TestCase,
 	#traits : 'TBlChildrenTest',
 	#classTraits : 'TBlChildrenTest classTrait',
-	#category : 'Bloc-UnitedTests-Rope'
+	#package : 'Bloc',
+	#tag : 'UnitedTests-Rope'
 }
 
 { #category : #fixture }

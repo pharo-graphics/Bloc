@@ -6,7 +6,8 @@
 Class {
 	#name : 'BlTextDecorationWavyStyle',
 	#superclass : 'BlTextDecorationStyle',
-	#category : 'Bloc-Text-Text-Decoration',
+	#package : 'Bloc',
+	#tag : 'Text-Text-Decoration',
 	#package : 'Bloc-Text',
 	#tag : 'Text-Decoration'
 }

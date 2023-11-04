@@ -4,7 +4,8 @@ I am an element with a broken drawing method that throws Error (ZeroDivide)
 Class {
 	#name : #BlElementWithBrokenDrawingMock,
 	#superclass : #BlElement,
-	#category : 'Bloc-UnitedTests-Errors'
+	#package : 'Bloc',
+	#tag : 'UnitedTests-Errors'
 }
 
 { #category : #drawing }

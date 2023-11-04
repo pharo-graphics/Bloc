@@ -5,7 +5,8 @@ I have been automatically converted and probably manually tweaked from BlBoundsM
 Class {
 	#name : #BlBoundsMatcherTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Bounds'
+	#package : 'Bloc',
+	#tag : 'UnitedTests-Bounds'
 }
 
 { #category : #tests }

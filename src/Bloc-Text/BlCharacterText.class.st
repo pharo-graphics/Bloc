@@ -8,7 +8,8 @@ Similar to the String I can not modified (insertion or deletions). Therefore
 Class {
 	#name : 'BlCharacterText',
 	#superclass : 'BlReadonlyText',
-	#category : 'Bloc-Text-Text',
+	#package : 'Bloc',
+	#tag : 'Text-Text',
 	#package : 'Bloc-Text',
 	#tag : 'Text'
 }

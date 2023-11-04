@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'states'
 	],
-	#category : 'Bloc-Tests-KeyBinding'
+	#package : 'Bloc',
+	#tag : 'Tests-KeyBinding'
 }
 
 { #category : #testing }

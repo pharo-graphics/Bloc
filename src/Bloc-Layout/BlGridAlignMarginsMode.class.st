@@ -1,7 +1,8 @@
 Class {
 	#name : #BlGridAlignMarginsMode,
 	#superclass : #BlGridAlignmentMode,
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#package : 'Bloc',
+	#tag : 'Layout-Grid-Utilities'
 }
 
 { #category : #testing }

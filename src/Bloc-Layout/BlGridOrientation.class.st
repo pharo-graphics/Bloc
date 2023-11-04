@@ -5,7 +5,8 @@ Class {
 		'HORIZONTAL',
 		'VERTICAL'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#package : 'Bloc',
+	#tag : 'Layout-Grid-Utilities'
 }
 
 { #category : #factory }

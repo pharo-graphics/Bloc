@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'block'
 	],
-	#category : 'Bloc-UnitedTests-Space'
+	#package : 'Bloc',
+	#tag : 'UnitedTests-Space'
 }
 
 { #category : #'api - converting' }

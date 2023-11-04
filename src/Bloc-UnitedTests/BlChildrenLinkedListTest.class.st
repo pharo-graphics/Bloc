@@ -7,10 +7,11 @@ Class {
 	#superclass : #TestCase,
 	#traits : 'TBlChildrenTest',
 	#classTraits : 'TBlChildrenTest classTrait',
-	#category : 'Bloc-UnitedTests-Children'
+	#package : 'Bloc',
+	#tag : 'UnitedTests-Children'
 }
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlChildrenLinkedListTest >> fill: aNumber [
 	| childrenArray |
 	childrenArray := self testEmptyChildren.
@@ -18,7 +19,7 @@ BlChildrenLinkedListTest >> fill: aNumber [
 	^ childrenArray
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlChildrenLinkedListTest >> newChildAt: anIndex [
 	| anElement |
 	anElement := BlElement new.
@@ -26,12 +27,12 @@ BlChildrenLinkedListTest >> newChildAt: anIndex [
 	^ anElement
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlChildrenLinkedListTest >> newChildrenCollection [
 	^ BlChildrenLinkedList new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testAdd [
 	
 	| theChildren indices |
@@ -47,7 +48,7 @@ BlChildrenLinkedListTest >> testAdd [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testAddAt [
 	
 	| theChildren indices |
@@ -71,7 +72,7 @@ BlChildrenLinkedListTest >> testAddAt [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testAsArray [
 	
 	| theChildren indices |
@@ -82,7 +83,7 @@ BlChildrenLinkedListTest >> testAsArray [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testAsArrayEmpty [
 	
 	| theChildren indices |
@@ -93,7 +94,7 @@ BlChildrenLinkedListTest >> testAsArrayEmpty [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testAt [
 	
 	| theChildren |
@@ -106,7 +107,7 @@ BlChildrenLinkedListTest >> testAt [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testAtIfAbsent [
 	
 	| theChildren |
@@ -135,7 +136,7 @@ BlChildrenLinkedListTest >> testAtIfAbsent [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testEmptyChildren [
 	
 	| theChildren |
@@ -146,7 +147,7 @@ BlChildrenLinkedListTest >> testEmptyChildren [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testEmptyChildrenExplicitCreation [
 	
 	| theChildren |
@@ -157,7 +158,7 @@ BlChildrenLinkedListTest >> testEmptyChildrenExplicitCreation [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testFirst [
 	
 	| theChildren |
@@ -166,7 +167,7 @@ BlChildrenLinkedListTest >> testFirst [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testIfEmpty [
 	
 	| theChildren |
@@ -175,7 +176,7 @@ BlChildrenLinkedListTest >> testIfEmpty [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testIfEmptyNot [
 	
 	| theChildren |
@@ -184,7 +185,7 @@ BlChildrenLinkedListTest >> testIfEmptyNot [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testIndexOf [
 	
 	| theChildren |
@@ -194,7 +195,7 @@ BlChildrenLinkedListTest >> testIndexOf [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testIndexOfUnknown [
 	
 	| theChildren |
@@ -203,7 +204,7 @@ BlChildrenLinkedListTest >> testIndexOfUnknown [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testIsEmpty [
 	
 	| theChildren |
@@ -214,7 +215,7 @@ BlChildrenLinkedListTest >> testIsEmpty [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testIsNotEmpty [
 	
 	| theChildren |
@@ -225,7 +226,7 @@ BlChildrenLinkedListTest >> testIsNotEmpty [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testLast [
 	
 	| theChildren |
@@ -234,7 +235,7 @@ BlChildrenLinkedListTest >> testLast [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testRemove [
 	
 	| theChildren indices |
@@ -246,7 +247,7 @@ BlChildrenLinkedListTest >> testRemove [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testRemoveAll [
 	
 	| theChildren indices |
@@ -262,7 +263,7 @@ BlChildrenLinkedListTest >> testRemoveAll [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testRemoveAt [
 	
 	| theChildren indices |
@@ -276,7 +277,7 @@ BlChildrenLinkedListTest >> testRemoveAt [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testSecond [
 	
 	| theChildren |
@@ -285,7 +286,7 @@ BlChildrenLinkedListTest >> testSecond [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testSize [
 	
 	| theChildren |
@@ -294,7 +295,7 @@ BlChildrenLinkedListTest >> testSize [
 	^ theChildren
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenLinkedListTest >> testSizeEmpty [
 	
 	| theChildren |

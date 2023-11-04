@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlTextDecorationLineThroughType',
 	#superclass : 'BlTextDecorationSingleType',
-	#category : 'Bloc-Text-Text-Decoration',
+	#package : 'Bloc',
+	#tag : 'Text-Text-Decoration',
 	#package : 'Bloc-Text',
 	#tag : 'Text-Decoration'
 }

@@ -6,7 +6,8 @@ Class {
 	#instVars : [
 		'text'
 	],
-	#category : 'Bloc-Text-Text-Attributes Finder',
+	#package : 'Bloc',
+	#tag : 'Text-Text-Attributes Finder',
 	#package : 'Bloc-Text',
 	#tag : 'Text-Attributes Finder'
 }

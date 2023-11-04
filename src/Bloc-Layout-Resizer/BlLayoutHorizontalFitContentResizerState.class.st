@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlLayoutHorizontalFitContentResizerState',
 	#superclass : 'BlLayoutHorizontalResizerState',
-	#category : 'Bloc-Layout-Resizer',
+	#package : 'Bloc',
+	#tag : 'Layout-Resizer',
 	#package : 'Bloc-Layout-Resizer'
 }
 

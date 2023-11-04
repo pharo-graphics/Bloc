@@ -6,7 +6,8 @@ I am a baseline which is computed based on ascent property of the paragraph
 Class {
 	#name : 'BlAscentLooseBaselineMeasurer',
 	#superclass : 'BlTextParagraphBaselineMeasurer',
-	#category : 'Bloc-Text-Text-Paragraph',
+	#package : 'Bloc',
+	#tag : 'Text-Text-Paragraph',
 	#package : 'Bloc-Text',
 	#tag : 'Text-Paragraph'
 }

@@ -19,7 +19,8 @@ Class {
 		'Thin',
 		'Weights'
 	],
-	#category : 'Bloc-Text-Font',
+	#package : 'Bloc',
+	#tag : 'Text-Font',
 	#package : 'Bloc-Text',
 	#tag : 'Font'
 }

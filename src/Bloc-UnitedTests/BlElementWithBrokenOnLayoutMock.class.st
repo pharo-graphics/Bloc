@@ -4,7 +4,8 @@ I am an element with a broken onLayout method that throws Error (SubscriptOutOfB
 Class {
 	#name : #BlElementWithBrokenOnLayoutMock,
 	#superclass : #BlElement,
-	#category : 'Bloc-UnitedTests-Errors'
+	#package : 'Bloc',
+	#tag : 'UnitedTests-Errors'
 }
 
 { #category : #layout }

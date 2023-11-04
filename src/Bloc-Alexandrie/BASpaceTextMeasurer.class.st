@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'spaceRenderer'
 	],
-	#category : 'Bloc-Alexandrie-Text',
+	#package : 'Bloc',
+	#tag : 'Alexandrie-Text',
 	#package : 'Bloc-Alexandrie',
 	#tag : 'Text'
 }

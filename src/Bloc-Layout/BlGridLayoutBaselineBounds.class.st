@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'size'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#package : 'Bloc',
+	#tag : 'Layout-Grid-Utilities'
 }
 
 { #category : #accessing }

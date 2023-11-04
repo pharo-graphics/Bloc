@@ -1,7 +1,8 @@
 Class {
 	#name : #BlColorPaintTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests-Paint'
+	#package : 'Bloc',
+	#tag : 'Tests-Paint'
 }
 
 { #category : #tests }

@@ -5,7 +5,8 @@ I have been automatically converted and probably manually tweaked from BlTransfo
 Class {
 	#name : #BlTransformationTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Math'
+	#package : 'Bloc',
+	#tag : 'UnitedTests-Math'
 }
 
 { #category : #'test seeds' }

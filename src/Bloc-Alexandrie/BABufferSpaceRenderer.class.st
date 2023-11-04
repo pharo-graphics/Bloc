@@ -1,7 +1,8 @@
 Class {
 	#name : 'BABufferSpaceRenderer',
 	#superclass : 'BASpaceRenderer',
-	#category : 'Bloc-Alexandrie-Renderer',
+	#package : 'Bloc',
+	#tag : 'Alexandrie-Renderer',
 	#package : 'Bloc-Alexandrie',
 	#tag : 'Renderer'
 }

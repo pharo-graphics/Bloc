@@ -4,7 +4,8 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Text-Text-Decoration',
+	#package : 'Bloc',
+	#tag : 'Text-Text-Decoration',
 	#package : 'Bloc-Text',
 	#tag : 'Text-Decoration'
 }

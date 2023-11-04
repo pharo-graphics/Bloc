@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlReadonlyText',
 	#superclass : 'BlWrappedText',
-	#category : 'Bloc-Text-Text',
+	#package : 'Bloc',
+	#tag : 'Text-Text',
 	#package : 'Bloc-Text',
 	#tag : 'Text'
 }

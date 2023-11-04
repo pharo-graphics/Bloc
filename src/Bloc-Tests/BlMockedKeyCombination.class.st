@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'shouldMatch'
 	],
-	#category : 'Bloc-Tests-KeyBinding'
+	#package : 'Bloc',
+	#tag : 'Tests-KeyBinding'
 }
 
 { #category : #visiting }

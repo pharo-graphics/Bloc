@@ -6,7 +6,8 @@ Both buffer and form host-spaces are supported.
 Class {
 	#name : 'BARenderer',
 	#superclass : 'BlHostRenderer',
-	#category : 'Bloc-Alexandrie-Renderer',
+	#package : 'Bloc',
+	#tag : 'Alexandrie-Renderer',
 	#package : 'Bloc-Alexandrie',
 	#tag : 'Renderer'
 }

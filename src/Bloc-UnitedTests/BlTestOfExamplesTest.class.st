@@ -1,7 +1,8 @@
 Class {
 	#name : #BlTestOfExamplesTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Examples'
+	#package : 'Bloc',
+	#tag : 'UnitedTests-Examples'
 }
 
 { #category : #running }

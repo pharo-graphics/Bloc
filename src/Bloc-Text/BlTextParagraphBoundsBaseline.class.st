@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlTextParagraphBoundsBaseline',
 	#superclass : 'BlBoundsBaselineMeasurer',
-	#category : 'Bloc-Text-Text-Paragraph-Deprecated',
+	#package : 'Bloc',
+	#tag : 'Text-Text-Paragraph-Deprecated',
 	#package : 'Bloc-Text',
 	#tag : 'Text-Paragraph-Deprecated'
 }

@@ -5,7 +5,8 @@ I have been automatically converted and probably manually tweaked from BlBasicEx
 Class {
 	#name : #BlBasicTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Basic'
+	#package : 'Bloc',
+	#tag : 'UnitedTests-Basic'
 }
 
 { #category : #tests }

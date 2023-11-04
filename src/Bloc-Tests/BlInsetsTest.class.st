@@ -1,7 +1,8 @@
 Class {
 	#name : #BlInsetsTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests-Basic-Support'
+	#package : 'Bloc',
+	#tag : 'Tests-Basic-Support'
 }
 
 { #category : #tests }

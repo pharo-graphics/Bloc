@@ -1,7 +1,8 @@
 Class {
 	#name : #BlFlowLayoutDirection,
 	#superclass : #Object,
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#package : 'Bloc',
+	#tag : 'Layout-Flow-Utilities'
 }
 
 { #category : #testing }

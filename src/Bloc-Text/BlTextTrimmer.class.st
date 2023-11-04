@@ -5,7 +5,8 @@ Class {
 		'leftTrimPatterns',
 		'rightTrimPatterns'
 	],
-	#category : 'Bloc-Text-Text-Operator',
+	#package : 'Bloc',
+	#tag : 'Text-Text-Operator',
 	#package : 'Bloc-Text',
 	#tag : 'Text-Operator'
 }

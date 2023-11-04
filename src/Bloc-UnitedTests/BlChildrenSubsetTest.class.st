@@ -5,7 +5,8 @@ I have been automatically converted and probably manually tweaked from BlChildre
 Class {
 	#name : #BlChildrenSubsetTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Children'
+	#package : 'Bloc',
+	#tag : 'UnitedTests-Children'
 }
 
 { #category : #tests }

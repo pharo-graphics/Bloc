@@ -10,7 +10,8 @@ Class {
 		'finalIntervals',
 		'requestedIntervals'
 	],
-	#category : 'Bloc-Text-Text-Events',
+	#package : 'Bloc',
+	#tag : 'Text-Text-Events',
 	#package : 'Bloc-Text',
 	#tag : 'Text-Events'
 }

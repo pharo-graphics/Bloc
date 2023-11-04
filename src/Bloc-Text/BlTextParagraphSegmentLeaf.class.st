@@ -10,7 +10,8 @@ Class {
 		'hostMeasurer',
 		'fontAndStyleBuilder'
 	],
-	#category : 'Bloc-Text-Text-Paragraph',
+	#package : 'Bloc',
+	#tag : 'Text-Text-Paragraph',
 	#package : 'Bloc-Text',
 	#tag : 'Text-Paragraph'
 }

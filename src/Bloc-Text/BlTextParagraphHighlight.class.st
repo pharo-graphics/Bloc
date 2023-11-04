@@ -10,7 +10,8 @@ Class {
 		'paint',
 		'selection'
 	],
-	#category : 'Bloc-Text-Text-Paragraph',
+	#package : 'Bloc',
+	#tag : 'Text-Text-Paragraph',
 	#package : 'Bloc-Text',
 	#tag : 'Text-Paragraph'
 }

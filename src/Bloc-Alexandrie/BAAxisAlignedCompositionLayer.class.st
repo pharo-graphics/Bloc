@@ -18,7 +18,8 @@ Class {
 		'element',
 		'pattern'
 	],
-	#category : 'Bloc-Alexandrie-Utility',
+	#package : 'Bloc',
+	#tag : 'Alexandrie-Utility',
 	#package : 'Bloc-Alexandrie',
 	#tag : 'Utility'
 }

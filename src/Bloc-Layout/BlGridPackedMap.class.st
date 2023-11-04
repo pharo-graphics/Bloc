@@ -6,7 +6,8 @@ Class {
 		'indices',
 		'keys'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#package : 'Bloc',
+	#tag : 'Layout-Grid-Utilities'
 }
 
 { #category : #'instance creation' }

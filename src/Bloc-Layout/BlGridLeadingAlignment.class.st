@@ -1,7 +1,8 @@
 Class {
 	#name : #BlGridLeadingAlignment,
 	#superclass : #BlGridAlignment,
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#package : 'Bloc',
+	#tag : 'Layout-Grid-Utilities'
 }
 
 { #category : #alignment }

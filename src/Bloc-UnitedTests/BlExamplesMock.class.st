@@ -9,7 +9,8 @@ Class {
 	#instVars : [
 		'enabled'
 	],
-	#category : 'Bloc-UnitedTests-Examples'
+	#package : 'Bloc',
+	#tag : 'UnitedTests-Examples'
 }
 
 { #category : #accessing }

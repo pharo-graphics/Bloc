@@ -1,7 +1,8 @@
 Class {
 	#name : #BlGridVerticalOrientation,
 	#superclass : #BlGridOrientation,
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#package : 'Bloc',
+	#tag : 'Layout-Grid-Utilities'
 }
 
 { #category : #testing }

@@ -6,7 +6,8 @@ Class {
 		'weight',
 		'display'
 	],
-	#category : 'Bloc-Layout-Flow'
+	#package : 'Bloc',
+	#tag : 'Layout-Flow'
 }
 
 { #category : #accessing }
