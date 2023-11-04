@@ -15,7 +15,7 @@ Class {
 	#classVars : [
 		'MinTextSizeForStylingInBackground'
 	],
-	#category : 'Bloc-Text-Text-Styler'
+	#category : #'Bloc-Text-Text-Styler'
 }
 
 { #category : #accessing }

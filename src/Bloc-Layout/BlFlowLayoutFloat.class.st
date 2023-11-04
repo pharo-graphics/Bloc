@@ -1,7 +1,7 @@
 Class {
 	#name : #BlFlowLayoutFloat,
 	#superclass : #BlFlowLayoutDisplay,
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
 { #category : #testing }

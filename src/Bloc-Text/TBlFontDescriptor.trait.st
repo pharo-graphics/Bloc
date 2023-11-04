@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBlFontDescriptor,
-	#category : 'Bloc-Text-Font'
+	#category : #'Bloc-Text-Font'
 }
 
 { #category : #'font - name' }

@@ -7,7 +7,7 @@ Class {
 		'attributes',
 		'interval'
 	],
-	#category : 'Bloc-Text-Text-Attributes Finder'
+	#category : #'Bloc-Text-Text-Attributes Finder'
 }
 
 { #category : #enumerating }

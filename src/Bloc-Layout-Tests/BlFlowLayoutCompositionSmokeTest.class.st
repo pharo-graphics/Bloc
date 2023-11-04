@@ -109,10 +109,10 @@ BlFlowLayoutCompositionSmokeTest class >> exampleText [
 
 { #category : #examples }
 BlFlowLayoutCompositionSmokeTest class >> floatingCells [
-	| aSpace |
 	<script: 'self floatingCells'>
 
-	aSpace := BlOSpace new.
+	| aSpace |
+	aSpace := BlSpace new.
 	aSpace root addChild: self new floatingCells.
 	aSpace root addEventHandler:
 			(BlEventHandler

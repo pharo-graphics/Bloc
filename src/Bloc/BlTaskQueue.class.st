@@ -7,7 +7,7 @@ Class {
 		'tasks',
 		'lock'
 	],
-	#category : 'Bloc-Space - Tasks'
+	#category : #'Bloc-Space - Tasks'
 }
 
 { #category : #private }

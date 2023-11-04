@@ -5,7 +5,7 @@ As a trait I am used in different parts of the system, thus by adding extension 
 "
 Trait {
 	#name : #TBlTextStyleable,
-	#category : 'Bloc-Text-Text-Support'
+	#category : #'Bloc-Text-Text-Support'
 }
 
 { #category : #accessing }

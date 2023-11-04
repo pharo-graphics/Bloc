@@ -1,7 +1,7 @@
 Class {
 	#name : #BlAscentTightBaselineMeasurer,
 	#superclass : #BlTextParagraphBaselineMeasurer,
-	#category : 'Bloc-Text-Text-Paragraph'
+	#category : #'Bloc-Text-Text-Paragraph'
 }
 
 { #category : #baseline }

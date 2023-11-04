@@ -5,7 +5,7 @@ Class {
 		'float',
 		'inline'
 	],
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
 { #category : #factory }

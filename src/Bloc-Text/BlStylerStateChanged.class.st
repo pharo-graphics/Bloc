@@ -1,5 +1,5 @@
 Class {
 	#name : #BlStylerStateChanged,
 	#superclass : #Announcement,
-	#category : 'Bloc-Text-Text-Styler'
+	#category : #'Bloc-Text-Text-Styler'
 }

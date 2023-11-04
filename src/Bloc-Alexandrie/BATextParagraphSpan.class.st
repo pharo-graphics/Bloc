@@ -4,7 +4,7 @@ I represent an Alexandrie specific measured span
 Class {
 	#name : #BATextParagraphSpan,
 	#superclass : #BATextParagraphLeaf,
-	#category : 'Bloc-Alexandrie-Text'
+	#category : #'Bloc-Alexandrie-Text'
 }
 
 { #category : #drawing }

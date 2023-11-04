@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBlLayoutResizable,
-	#category : 'Bloc-Layout-Resizer'
+	#category : #'Bloc-Layout-Resizer'
 }
 
 { #category : #'t  - layout resizeable' }

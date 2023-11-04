@@ -1,7 +1,7 @@
 Class {
 	#name : #BlEmptyTextIterator,
 	#superclass : #BlTextIterator,
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #'iterator - accessing' }

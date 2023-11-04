@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'collection'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #'instance creation' }

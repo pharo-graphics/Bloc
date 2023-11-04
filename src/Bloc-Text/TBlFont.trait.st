@@ -7,7 +7,7 @@ Trait {
 		'fontSlant',
 		'fontWeight'
 	],
-	#category : 'Bloc-Text-Font'
+	#category : #'Bloc-Text-Font'
 }
 
 { #category : #private }

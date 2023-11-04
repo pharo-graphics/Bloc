@@ -10,7 +10,7 @@ Class {
 		'finalIndices',
 		'requestedIndices'
 	],
-	#category : 'Bloc-Text-Text-Events'
+	#category : #'Bloc-Text-Text-Events'
 }
 
 { #category : #accessing }

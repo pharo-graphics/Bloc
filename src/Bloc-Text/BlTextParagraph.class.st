@@ -41,7 +41,7 @@ Class {
 		'session',
 		'baselineMeasurer'
 	],
-	#category : 'Bloc-Text-Text-Paragraph'
+	#category : #'Bloc-Text-Text-Paragraph'
 }
 
 { #category : #'paragraph - geometry' }

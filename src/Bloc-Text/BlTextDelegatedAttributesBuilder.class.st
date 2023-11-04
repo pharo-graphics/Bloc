@@ -10,7 +10,7 @@ Class {
 		'attributeAddedBlock',
 		'isOverwritableByStyler'
 	],
-	#category : 'Bloc-Text-Text-Support'
+	#category : #'Bloc-Text-Text-Support'
 }
 
 { #category : #accessing }

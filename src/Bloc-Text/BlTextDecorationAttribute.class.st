@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'decoration'
 	],
-	#category : 'Bloc-Text-Text-Attributes'
+	#category : #'Bloc-Text-Text-Attributes'
 }
 
 { #category : #accessing }

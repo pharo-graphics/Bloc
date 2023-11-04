@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'spans'
 	],
-	#category : 'Bloc-Text-Text-Paragraph'
+	#category : #'Bloc-Text-Text-Paragraph'
 }
 
 { #category : #adding }

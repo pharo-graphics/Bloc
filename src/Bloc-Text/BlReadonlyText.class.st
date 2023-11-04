@@ -1,7 +1,7 @@
 Class {
 	#name : #BlReadonlyText,
 	#superclass : #BlWrappedText,
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #'text - modifications' }

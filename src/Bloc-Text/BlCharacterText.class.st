@@ -8,7 +8,7 @@ Similar to the String I can not modified (insertion or deletions). Therefore
 Class {
 	#name : #BlCharacterText,
 	#superclass : #BlReadonlyText,
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #comparing }

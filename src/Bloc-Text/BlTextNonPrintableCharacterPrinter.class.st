@@ -4,7 +4,7 @@ Class {
 	#classVars : [
 		'CharacterMap'
 	],
-	#category : 'Bloc-Text-Text-Support'
+	#category : #'Bloc-Text-Text-Support'
 }
 
 { #category : #accessing }

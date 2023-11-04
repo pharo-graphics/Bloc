@@ -23,7 +23,7 @@ Class {
 	#classInstVars : [
 		'empty'
 	],
-	#category : 'Bloc-Basic-Border'
+	#category : #'Bloc-Basic-Border'
 }
 
 { #category : #'instance creation' }

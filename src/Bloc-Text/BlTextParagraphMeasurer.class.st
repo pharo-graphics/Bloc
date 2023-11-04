@@ -12,7 +12,7 @@ Class {
 		'line',
 		'hostTextMeasurer'
 	],
-	#category : 'Bloc-Text-Text-Paragraph'
+	#category : #'Bloc-Text-Text-Paragraph'
 }
 
 { #category : #measurement }

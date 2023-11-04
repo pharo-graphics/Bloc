@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBlChildrenTest,
-	#category : 'Bloc-UnitedTests-Children'
+	#category : #'Bloc-UnitedTests-Children'
 }
 
 { #category : #fixture }

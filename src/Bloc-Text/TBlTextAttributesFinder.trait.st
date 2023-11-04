@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBlTextAttributesFinder,
-	#category : 'Bloc-Text-Text-Attributes Finder'
+	#category : #'Bloc-Text-Text-Attributes Finder'
 }
 
 { #category : #enumerating }

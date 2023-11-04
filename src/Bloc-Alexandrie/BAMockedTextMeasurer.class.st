@@ -10,7 +10,7 @@ Class {
 		'measuredHeight',
 		'textOffset'
 	],
-	#category : 'Bloc-Alexandrie-Text-Mocked'
+	#category : #'Bloc-Alexandrie-Text-Mocked'
 }
 
 { #category : #accessing }

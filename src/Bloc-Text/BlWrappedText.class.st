@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'text'
 	],
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #testing }

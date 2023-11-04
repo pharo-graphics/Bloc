@@ -63,9 +63,10 @@ Class {
 		'errorHandler',
 		'userData',
 		'visuals',
-		'flags'
+		'flags',
+		'figure'
 	],
-	#category : 'Bloc-Basic'
+	#category : #'Bloc-Basic'
 }
 
 { #category : #'instance creation' }
@@ -3050,10 +3051,11 @@ BlElement >> opacity: aNumber [
 BlElement >> openInNewSpace [
 	"Add self to a new BlSpace and show it. Answer such space."
 	
-	^ BlOSpace new
-		  addChild: self;
-		  show;
-		  yourself
+	| aSpace |
+	aSpace := BlSpace new.
+	aSpace root addChild: self.
+	aSpace show.
+	^ aSpace
 ]
 
 { #category : #convenience }
@@ -3801,10 +3803,11 @@ BlElement >> size: aPoint [
 
 { #category : #accessing }
 BlElement >> space [
-	"Return space to which I belong. Direct reference boosts performance.
+	"Return space to which I belong, or nil of I don't belong to any space.
+	Direct reference boosts performance.
 	Each element has a reference to the current space which is set on demand."
-	<return: #BlOSpace or: nil>
 	
+	self flag: #todo. "Don't return nil!"
 	spaceReference spaceDo: [ :aSpace | ^ aSpace ].
 	
 	spaceReference isAttachedToSceneGraph

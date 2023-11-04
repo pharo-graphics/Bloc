@@ -37,7 +37,7 @@ Class {
 		'text',
 		'properties'
 	],
-	#category : 'Bloc-Text-Text-Support'
+	#category : #'Bloc-Text-Text-Support'
 }
 
 { #category : #'instance creation' }

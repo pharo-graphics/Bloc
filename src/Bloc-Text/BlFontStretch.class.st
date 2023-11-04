@@ -16,7 +16,7 @@ Class {
 		'UltraCondensed',
 		'UltraExpanded'
 	],
-	#category : 'Bloc-Text-Font'
+	#category : #'Bloc-Text-Font'
 }
 
 { #category : #accessing }

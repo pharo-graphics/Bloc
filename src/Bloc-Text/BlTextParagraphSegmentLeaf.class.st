@@ -10,7 +10,7 @@ Class {
 		'hostMeasurer',
 		'fontAndStyleBuilder'
 	],
-	#category : 'Bloc-Text-Text-Paragraph'
+	#category : #'Bloc-Text-Text-Paragraph'
 }
 
 { #category : #'accessing - span' }

@@ -6,7 +6,7 @@ Class {
 		'fromIndex',
 		'toIndex'
 	],
-	#category : 'Bloc-Text-Text-Events'
+	#category : #'Bloc-Text-Text-Events'
 }
 
 { #category : #'instance creation' }

@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlErrorHa
 Class {
 	#name : #BlErrorHandlingTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Errors'
+	#category : #'Bloc-UnitedTests-Errors'
 }
 
 { #category : #metadata }

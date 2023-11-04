@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTextDecorationType,
 	#superclass : #Object,
-	#category : 'Bloc-Text-Text-Decoration'
+	#category : #'Bloc-Text-Text-Decoration'
 }
 
 { #category : #testing }

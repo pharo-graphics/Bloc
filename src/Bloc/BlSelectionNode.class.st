@@ -16,7 +16,7 @@ Class {
 		'high',
 		'parent'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#category : #'Bloc-Utilities - Selection'
 }
 
 { #category : #'instance creation' }

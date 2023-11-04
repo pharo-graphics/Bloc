@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'any'
 	],
-	#category : 'Bloc-Layout-Resizer'
+	#category : #'Bloc-Layout-Resizer'
 }
 
 { #category : #accessing }

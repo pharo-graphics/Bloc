@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'text'
 	],
-	#category : 'Bloc-Text-Text-Attributes Finder'
+	#category : #'Bloc-Text-Text-Attributes Finder'
 }
 
 { #category : #enumerating }

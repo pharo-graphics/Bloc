@@ -26,7 +26,7 @@ Class {
 		'text',
 		'launcher'
 	],
-	#category : 'Bloc-Text-Text-Styler'
+	#category : #'Bloc-Text-Text-Styler'
 }
 
 { #category : #'api - text style' }

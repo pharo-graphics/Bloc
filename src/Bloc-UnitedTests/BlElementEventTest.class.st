@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlElement
 Class {
 	#name : #BlElementEventTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Event'
+	#category : #'Bloc-UnitedTests-Event'
 }
 
 { #category : #'test seed' }

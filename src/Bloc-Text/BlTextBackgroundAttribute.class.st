@@ -22,7 +22,7 @@ Class {
 	#instVars : [
 		'paint'
 	],
-	#category : 'Bloc-Text-Text-Attributes'
+	#category : #'Bloc-Text-Text-Attributes'
 }
 
 { #category : #'instance creation' }

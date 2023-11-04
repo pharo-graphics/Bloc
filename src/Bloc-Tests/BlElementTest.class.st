@@ -29,7 +29,7 @@ BlElementTest >> setUp [
 
 	super setUp.
 
-	space := BlOSpace new.
+	space := BlSpace new.
 	host := BlMockedHost new.
 
 	space host: host.

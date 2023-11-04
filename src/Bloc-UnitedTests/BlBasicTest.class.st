@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlBasicEx
 Class {
 	#name : #BlBasicTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Basic'
+	#category : #'Bloc-UnitedTests-Basic'
 }
 
 { #category : #tests }

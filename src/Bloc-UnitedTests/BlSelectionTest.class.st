@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlSelecti
 Class {
 	#name : #BlSelectionTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Selection'
+	#category : #'Bloc-UnitedTests-Selection'
 }
 
 { #category : #'test seed' }

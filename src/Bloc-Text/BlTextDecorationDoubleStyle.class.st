@@ -6,7 +6,7 @@
 Class {
 	#name : #BlTextDecorationDoubleStyle,
 	#superclass : #BlTextDecorationStyle,
-	#category : 'Bloc-Text-Text-Decoration'
+	#category : #'Bloc-Text-Text-Decoration'
 }
 
 { #category : #accessing }

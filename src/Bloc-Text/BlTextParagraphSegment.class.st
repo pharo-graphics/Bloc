@@ -19,7 +19,7 @@ Class {
 		'descent',
 		'baseline'
 	],
-	#category : 'Bloc-Text-Text-Paragraph'
+	#category : #'Bloc-Text-Text-Paragraph'
 }
 
 { #category : #accessing }

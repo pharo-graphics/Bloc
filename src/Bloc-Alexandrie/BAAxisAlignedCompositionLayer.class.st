@@ -18,7 +18,7 @@ Class {
 		'element',
 		'pattern'
 	],
-	#category : 'Bloc-Alexandrie-Utility'
+	#category : #'Bloc-Alexandrie-Utility'
 }
 
 { #category : #'instance creation' }

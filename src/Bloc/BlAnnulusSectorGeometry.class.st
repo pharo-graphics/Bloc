@@ -13,7 +13,7 @@ Class {
 		'innerRadius',
 		'outerRadius'
 	],
-	#category : 'Bloc-Basic-Geometry'
+	#category : #'Bloc-Basic-Geometry'
 }
 
 { #category : #'private - geometry' }

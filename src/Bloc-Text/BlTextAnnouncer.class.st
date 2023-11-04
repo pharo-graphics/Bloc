@@ -5,7 +5,7 @@ Class {
 		'suspendAll',
 		'suspendedAnnouncemets'
 	],
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #announce }

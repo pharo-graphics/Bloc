@@ -16,7 +16,7 @@ Class {
 		'canBePropagated',
 		'consumed'
 	],
-	#category : 'Bloc-Events'
+	#category : #'Bloc-Events'
 }
 
 { #category : #'api - enable / disable' }

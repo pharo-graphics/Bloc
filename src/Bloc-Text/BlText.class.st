@@ -32,7 +32,7 @@ Class {
 	#instVars : [
 		'announcer'
 	],
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #accessing }

@@ -14,7 +14,7 @@ Class {
 		'start',
 		'end'
 	],
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #'instance creation' }

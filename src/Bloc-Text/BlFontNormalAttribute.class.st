@@ -1,7 +1,7 @@
 Class {
 	#name : #BlFontNormalAttribute,
 	#superclass : #BlFontEmphasisAttribute,
-	#category : 'Bloc-Text-Text-Attributes'
+	#category : #'Bloc-Text-Text-Attributes'
 }
 
 { #category : #'text style' }

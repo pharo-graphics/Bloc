@@ -7,7 +7,7 @@ Class {
 		'style',
 		'type'
 	],
-	#category : 'Bloc-Text-Text-Decoration'
+	#category : #'Bloc-Text-Text-Decoration'
 }
 
 { #category : #accessing }

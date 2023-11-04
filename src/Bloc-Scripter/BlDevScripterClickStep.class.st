@@ -38,7 +38,7 @@ BlDevScripterClickStep >> omitDoubleClickOn: aScripter [
 BlDevScripterClickStep >> playOn: aScripter [
 	self omitDoubleClickOn: aScripter.
 	self
-		setMousePosition: (BlOSpace simulateClickOn: (self target findTargetStartingInScripter: aScripter))
+		setMousePosition: (BlSpace simulateClickOn: (self target findTargetStartingInScripter: aScripter))
 		in: aScripter.
 
 	aScripter pulse

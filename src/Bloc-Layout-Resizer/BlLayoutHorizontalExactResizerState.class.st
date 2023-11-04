@@ -1,5 +1,5 @@
 Class {
 	#name : #BlLayoutHorizontalExactResizerState,
 	#superclass : #BlLayoutHorizontalResizerState,
-	#category : 'Bloc-Layout-Resizer'
+	#category : #'Bloc-Layout-Resizer'
 }

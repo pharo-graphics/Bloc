@@ -5,7 +5,7 @@ Class {
 		'leftTrimPatterns',
 		'rightTrimPatterns'
 	],
-	#category : 'Bloc-Text-Text-Operator'
+	#category : #'Bloc-Text-Text-Operator'
 }
 
 { #category : #'api - configuration' }

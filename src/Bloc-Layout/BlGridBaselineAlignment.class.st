@@ -1,7 +1,7 @@
 Class {
 	#name : #BlGridBaselineAlignment,
 	#superclass : #BlGridAlignment,
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
 { #category : #alignment }

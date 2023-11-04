@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'aeCanvas'
 	],
-	#category : 'Bloc-Alexandrie-Renderer'
+	#category : #'Bloc-Alexandrie-Renderer'
 }
 
 { #category : #accessing }

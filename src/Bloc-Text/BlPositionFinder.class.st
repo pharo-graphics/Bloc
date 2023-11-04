@@ -13,7 +13,7 @@ Class {
 		'patterns',
 		'stepLength'
 	],
-	#category : 'Bloc-Text-Text-Operator'
+	#category : #'Bloc-Text-Text-Operator'
 }
 
 { #category : #'api - configuration' }

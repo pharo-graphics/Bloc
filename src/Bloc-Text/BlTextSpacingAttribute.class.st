@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'spacing'
 	],
-	#category : 'Bloc-Text-Text-Attributes'
+	#category : #'Bloc-Text-Text-Attributes'
 }
 
 { #category : #'instance creation' }

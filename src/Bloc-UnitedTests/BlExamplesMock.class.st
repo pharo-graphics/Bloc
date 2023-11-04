@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'enabled'
 	],
-	#category : 'Bloc-UnitedTests-Examples'
+	#category : #'Bloc-UnitedTests-Examples'
 }
 
 { #category : #accessing }

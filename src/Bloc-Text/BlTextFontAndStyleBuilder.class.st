@@ -9,7 +9,7 @@ Class {
 		'defaultFontSize',
 		'defaultFontFamilyName'
 	],
-	#category : 'Bloc-Text-Text-Support'
+	#category : #'Bloc-Text-Text-Support'
 }
 
 { #category : #'text - style' }

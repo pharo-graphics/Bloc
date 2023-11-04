@@ -21,7 +21,7 @@ Class {
 		'Universes',
 		'UniversesMutex'
 	],
-	#category : 'Bloc-Universe - Parallel'
+	#category : #'Bloc-Universe - Parallel'
 }
 
 { #category : #accessing }
@@ -478,7 +478,6 @@ BlParallelUniverse >> snapshot: save andQuit: quit [
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> spaces [
-	<return: #Collection of: #BlOSpace>
 
 	^ spaceManager spaces
 ]

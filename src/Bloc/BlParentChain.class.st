@@ -1,7 +1,7 @@
 Class {
 	#name : #BlParentChain,
 	#superclass : #DoubleLinkedList,
-	#category : 'Bloc-Space - Support'
+	#category : #'Bloc-Space - Support'
 }
 
 { #category : #'instance creation' }

@@ -9,10 +9,12 @@ Trait {
 { #category : #opening }
 TBlExample classSide >> openInWindow: anElement named: aTitleString extent: aPoint [
 	"Open a given element in a window of a provided extent and specified title"
+
 	| aSpace |
-	aSpace := BlOSpace new
+	aSpace := BlSpace new
 		extent: aPoint;
-		title: aTitleString.
+		title: aTitleString;
+		yourself.
 	
 	aSpace root background: self spaceBackground.
 	aSpace root addChild: anElement.

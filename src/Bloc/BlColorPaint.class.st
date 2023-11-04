@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'color'
 	],
-	#category : 'Bloc-Paint'
+	#category : #'Bloc-Paint'
 }
 
 { #category : #'instance creation' }

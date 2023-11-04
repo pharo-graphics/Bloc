@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'styledText'
 	],
-	#category : 'Bloc-Text-Text-Styler'
+	#category : #'Bloc-Text-Text-Styler'
 }
 
 { #category : #'text - styling' }

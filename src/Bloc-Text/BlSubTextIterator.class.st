@@ -5,7 +5,7 @@ Class {
 		'text',
 		'iterator'
 	],
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #initialization }

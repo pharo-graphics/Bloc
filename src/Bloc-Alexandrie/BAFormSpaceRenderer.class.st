@@ -1,7 +1,7 @@
 Class {
 	#name : #BAFormSpaceRenderer,
 	#superclass : #BASpaceRenderer,
-	#category : 'Bloc-Alexandrie-Renderer'
+	#category : #'Bloc-Alexandrie-Renderer'
 }
 
 { #category : #initialization }

@@ -22,7 +22,7 @@ Class {
 		'dashOffset',
 		'opacity'
 	],
-	#category : 'Bloc-Basic-Border'
+	#category : #'Bloc-Basic-Border'
 }
 
 { #category : #builder }

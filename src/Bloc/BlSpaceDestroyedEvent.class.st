@@ -10,12 +10,11 @@ Class {
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Events-Type-Space'
+	#category : #'Bloc-Events-Type-Space'
 }
 
 { #category : #accessing }
 BlSpaceDestroyedEvent >> space [
-	<return: #BlOSpace>
 
 	^ space
 ]

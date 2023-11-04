@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'isOverwritableByStyler'
 	],
-	#category : 'Bloc-Text-Text-Attributes'
+	#category : #'Bloc-Text-Text-Attributes'
 }
 
 { #category : #comparing }

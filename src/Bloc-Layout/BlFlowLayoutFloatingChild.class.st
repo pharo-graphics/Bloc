@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'lines'
 	],
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
 { #category : #adding }

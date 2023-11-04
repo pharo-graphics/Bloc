@@ -8,7 +8,7 @@ Class {
 	#classVars : [
 		'TabStopWidth'
 	],
-	#category : 'Bloc-Alexandrie-Text'
+	#category : #'Bloc-Alexandrie-Text'
 }
 
 { #category : #accessing }

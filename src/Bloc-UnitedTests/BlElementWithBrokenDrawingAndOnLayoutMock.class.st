@@ -4,7 +4,7 @@ I am an element with broken drawing and onLayout methods
 Class {
 	#name : #BlElementWithBrokenDrawingAndOnLayoutMock,
 	#superclass : #BlElement,
-	#category : 'Bloc-UnitedTests-Errors'
+	#category : #'Bloc-UnitedTests-Errors'
 }
 
 { #category : #drawing }

@@ -11,7 +11,7 @@ Class {
 		'Oblique',
 		'Slants'
 	],
-	#category : 'Bloc-Text-Font'
+	#category : #'Bloc-Text-Font'
 }
 
 { #category : #'instance creation' }

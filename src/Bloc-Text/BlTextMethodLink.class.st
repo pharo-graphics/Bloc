@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTextMethodLink,
 	#superclass : #BlTextLinkAttribute,
-	#category : 'Bloc-Text-Text-Attributes'
+	#category : #'Bloc-Text-Text-Attributes'
 }
 
 { #category : #accessing }

@@ -13,7 +13,7 @@ Class {
 	#classInstVars : [
 		'instance'
 	],
-	#category : 'Bloc-Alexandrie-Utility'
+	#category : #'Bloc-Alexandrie-Utility'
 }
 
 { #category : #accessing }

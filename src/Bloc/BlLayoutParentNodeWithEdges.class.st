@@ -7,7 +7,7 @@ Class {
 		'parentNode',
 		'children'
 	],
-	#category : 'Bloc-Layouts-Model'
+	#category : #'Bloc-Layouts-Model'
 }
 
 { #category : #accessing }

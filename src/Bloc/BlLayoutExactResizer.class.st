@@ -9,7 +9,7 @@ Class {
 		'fifty',
 		'hundred'
 	],
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #cleanup }

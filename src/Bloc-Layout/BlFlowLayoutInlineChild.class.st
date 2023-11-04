@@ -1,7 +1,7 @@
 Class {
 	#name : #BlFlowLayoutInlineChild,
 	#superclass : #BlFlowLayoutChild,
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
 { #category : #adding }

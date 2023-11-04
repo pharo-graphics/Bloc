@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSpace2Test,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Space'
+	#category : #'Bloc-UnitedTests-Space'
 }
 
 { #category : #'test seed' }
@@ -50,20 +50,20 @@ BlSpace2Test >> infiniteAnimation [
 
 { #category : #'test seed' }
 BlSpace2Test >> spaceWithSlownDownTime [
-
 	<sampleInstance>
+
 	| aTime aSpace |
 	aTime := BlFastForwardedTime new.
 	aTime speed: 0.2.
-	aSpace := BlOSpace new.
+	aSpace := BlSpace new.
 	aSpace time: aTime.
 	^ aSpace
 ]
 
 { #category : #'test seed' }
 BlSpace2Test >> spaceWithSlownDownTimeAndAnimatedElement [
-
 	<sampleInstance>
+
 	| aSpace |
 	aSpace := self spaceWithSlownDownTime.
 	aSpace root addChild: self animatedElement.
@@ -97,7 +97,7 @@ BlSpace2Test >> testEmptySpace [
 
 	<sampleInstance>
 	| aSpace |
-	aSpace := BlOSpace new.
+	aSpace := BlSpace new.
 	self assert: aSpace session equals: Smalltalk session.
 	self deny: aSpace root hasChildren.
 	self deny: aSpace hasDirtyElements.

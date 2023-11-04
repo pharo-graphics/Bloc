@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'text'
 	],
-	#category : 'Bloc-Text-Text-Operator'
+	#category : #'Bloc-Text-Text-Operator'
 }
 
 { #category : #accessing }

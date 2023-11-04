@@ -18,7 +18,7 @@ Class {
 		'styleTable',
 		'textAttributes'
 	],
-	#category : 'Bloc-Text-Text-Styler'
+	#category : #'Bloc-Text-Text-Styler'
 }
 
 { #category : #private }

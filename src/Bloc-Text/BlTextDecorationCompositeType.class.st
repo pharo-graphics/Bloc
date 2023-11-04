@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'types'
 	],
-	#category : 'Bloc-Text-Text-Decoration'
+	#category : #'Bloc-Text-Text-Decoration'
 }
 
 { #category : #comparing }

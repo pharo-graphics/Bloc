@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTextDecorationUnderlineType,
 	#superclass : #BlTextDecorationSingleType,
-	#category : 'Bloc-Text-Text-Decoration'
+	#category : #'Bloc-Text-Text-Decoration'
 }
 
 { #category : #accessing }

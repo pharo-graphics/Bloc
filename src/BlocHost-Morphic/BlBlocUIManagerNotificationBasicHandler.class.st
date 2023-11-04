@@ -13,11 +13,12 @@ BlBlocUIManagerNotificationBasicHandler class >> priority [
 
 { #category : #'private - displaying' }
 BlBlocUIManagerNotificationBasicHandler >> elementDoOrSpaceDo: aBlock [
+
 	| context |
 	context := thisContext.
 	[ context notNil ]
 		whileTrue: [ ((context receiver isKindOf: BlElement)
-				or: [ context receiver isKindOf: BlOSpace ])
+				or: [ context receiver isKindOf: BlSpace ])
 				ifTrue: [ ^ aBlock value: context receiver ].
 			context := context sender ]
 ]

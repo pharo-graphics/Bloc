@@ -1,7 +1,7 @@
 Class {
 	#name : #BlFontEmphasisAttribute,
 	#superclass : #BlTextAttribute,
-	#category : 'Bloc-Text-Text-Attributes'
+	#category : #'Bloc-Text-Text-Attributes'
 }
 
 { #category : #'instance creation' }

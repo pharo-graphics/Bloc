@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlElement
 Class {
 	#name : #BlElementLayoutBoundaryTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Layout'
+	#category : #'Bloc-UnitedTests-Layout'
 }
 
 { #category : #tests }
@@ -62,7 +62,7 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary02RequestLayoutChild [
 BlElementLayoutBoundaryTest >> testSpaceWithExactLayoutBoundary [
 	<sampleInstance>
 	| aSpace aContainer aLayoutBoundary aChild |
-	aSpace := BlOSpace new.
+	aSpace := BlSpace new.
 	aSpace extent: 500 @ 400.
 	aContainer := BlElement new size: 400 @ 300.
 	aLayoutBoundary := BlElement new size: 300 @ 200.

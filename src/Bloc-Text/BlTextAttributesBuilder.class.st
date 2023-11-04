@@ -19,7 +19,7 @@ Class {
 	#instVars : [
 		'attributes'
 	],
-	#category : 'Bloc-Text-Text-Support'
+	#category : #'Bloc-Text-Text-Support'
 }
 
 { #category : #hook }

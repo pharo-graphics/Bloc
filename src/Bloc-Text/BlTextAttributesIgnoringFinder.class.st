@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlTextAttributesFinder',
 	#classTraits : 'TBlTextAttributesFinder classTrait',
-	#category : 'Bloc-Text-Text-Attributes Finder'
+	#category : #'Bloc-Text-Text-Attributes Finder'
 }
 
 { #category : #enumerating }

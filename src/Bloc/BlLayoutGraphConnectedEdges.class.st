@@ -1,7 +1,7 @@
 Class {
 	#name : #BlLayoutGraphConnectedEdges,
 	#superclass : #BlLayoutGraphEdgesIterator,
-	#category : 'Bloc-Layouts-Model'
+	#category : #'Bloc-Layouts-Model'
 }
 
 { #category : #'api - enumeration' }

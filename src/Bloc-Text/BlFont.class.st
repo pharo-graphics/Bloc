@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlFontDescriptor + TBlFont',
 	#classTraits : 'TBlFontDescriptor classTrait + TBlFont classTrait',
-	#category : 'Bloc-Text-Font'
+	#category : #'Bloc-Text-Font'
 }
 
 { #category : #defaults }

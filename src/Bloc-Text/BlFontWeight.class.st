@@ -19,7 +19,7 @@ Class {
 		'Thin',
 		'Weights'
 	],
-	#category : 'Bloc-Text-Font'
+	#category : #'Bloc-Text-Font'
 }
 
 { #category : #accessing }

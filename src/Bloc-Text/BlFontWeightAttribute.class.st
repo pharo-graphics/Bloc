@@ -25,7 +25,7 @@ Class {
 	#instVars : [
 		'weight'
 	],
-	#category : 'Bloc-Text-Text-Attributes'
+	#category : #'Bloc-Text-Text-Attributes'
 }
 
 { #category : #'instance creation' }

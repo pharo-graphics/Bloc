@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'range'
 	],
-	#category : 'Bloc-Basic-Interpolators'
+	#category : #'Bloc-Basic-Interpolators'
 }
 
 { #category : #initialization }

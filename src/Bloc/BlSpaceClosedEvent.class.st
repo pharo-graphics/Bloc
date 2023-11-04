@@ -22,7 +22,7 @@ Class {
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Events-Type-Space'
+	#category : #'Bloc-Events-Type-Space'
 }
 
 { #category : #sending }
@@ -32,7 +32,6 @@ BlSpaceClosedEvent >> sendTo: anObject [
 
 { #category : #accessing }
 BlSpaceClosedEvent >> space [
-	<return: #BlOSpace>
 
 	^ space
 ]

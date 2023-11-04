@@ -15,7 +15,7 @@ element background: Color blue
 Class {
 	#name : #BlElementBackgroundChangedEvent,
 	#superclass : #BlElementEvent,
-	#category : 'Bloc-Events-Type-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }

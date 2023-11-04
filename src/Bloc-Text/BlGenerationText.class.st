@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'previousGeneration'
 	],
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #'instance creation' }

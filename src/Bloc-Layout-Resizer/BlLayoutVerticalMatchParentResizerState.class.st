@@ -1,7 +1,7 @@
 Class {
 	#name : #BlLayoutVerticalMatchParentResizerState,
 	#superclass : #BlLayoutVerticalResizerState,
-	#category : 'Bloc-Layout-Resizer'
+	#category : #'Bloc-Layout-Resizer'
 }
 
 { #category : #comparing }

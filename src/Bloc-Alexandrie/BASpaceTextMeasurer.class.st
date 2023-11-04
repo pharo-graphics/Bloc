@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'spaceRenderer'
 	],
-	#category : 'Bloc-Alexandrie-Text'
+	#category : #'Bloc-Alexandrie-Text'
 }
 
 { #category : #accessing }

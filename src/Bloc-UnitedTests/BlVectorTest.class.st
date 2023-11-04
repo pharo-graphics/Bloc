@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlVector2
 Class {
 	#name : #BlVectorTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Math'
+	#category : #'Bloc-UnitedTests-Math'
 }
 
 { #category : #'tests - conversions' }

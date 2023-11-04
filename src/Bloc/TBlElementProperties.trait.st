@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBlElementProperties,
-	#category : 'Bloc-Basic-Properties'
+	#category : #'Bloc-Basic-Properties'
 }
 
 { #category : #adding }
