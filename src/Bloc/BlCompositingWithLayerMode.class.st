@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlCompositingWithLayerMode',
-	#superclass : 'BlCompositingMode',
-	#category : 'Bloc-Basic-Support',
-	#package : 'Bloc',
-	#tag : 'Basic-Support'
+	#name : #BlCompositingWithLayerMode,
+	#superclass : #BlCompositingMode,
+	#category : #'Bloc-Basic-Support'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlCompositingWithLayerMode >> wantsCompositionLayer [
 	^ true
 ]

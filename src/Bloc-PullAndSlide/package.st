@@ -1,1 +1,1 @@
-Package { #name : 'Bloc-PullAndSlide' }
+Package { #name : #'Bloc-PullAndSlide' }

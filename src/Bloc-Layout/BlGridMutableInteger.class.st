@@ -3,47 +3,45 @@ A mutable Integer - used to avoid heap allocation during the layout operation
 
 "
 Class {
-	#name : 'BlGridMutableInteger',
-	#superclass : 'Object',
+	#name : #BlGridMutableInteger,
+	#superclass : #Object,
 	#instVars : [
 		'value'
 	],
 	#pools : [
 		'BlGridLayoutConstants'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities',
-	#package : 'Bloc-Layout',
-	#tag : 'Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlGridMutableInteger class >> value: aNumber [
 	^ self new value: aNumber
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlGridMutableInteger >> initialize [
 	super initialize.
 	
 	self reset
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlGridMutableInteger >> printOn: aStream [
 	aStream nextPutAll: self value asString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridMutableInteger >> reset [
 	value := UNDEFINED
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridMutableInteger >> value [
 	^ 	value
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridMutableInteger >> value: aNumber [
 	value := aNumber
 ]

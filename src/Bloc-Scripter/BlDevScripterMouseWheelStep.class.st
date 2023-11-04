@@ -1,47 +1,45 @@
 Class {
-	#name : 'BlDevScripterMouseWheelStep',
-	#superclass : 'BlDevScripterInteractionStep',
+	#name : #BlDevScripterMouseWheelStep,
+	#superclass : #BlDevScripterInteractionStep,
 	#instVars : [
 		'vector'
 	],
-	#category : 'Bloc-Scripter-Scripter-Steps',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMouseWheelStep >> by: aPoint [
 	self vector: aPoint asBlocVector
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMouseWheelStep >> defaultLabel [
 	^ 'Mouse wheel'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMouseWheelStep >> downBy: aNumber [
 	self horizontallyBy: aNumber abs negated
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMouseWheelStep >> horizontallyBy: aNumber [
 	self vector: (BlVector x: 0 y: aNumber)
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlDevScripterMouseWheelStep >> initialize [
 	super initialize.
 	
 	vector := (0@0) asBlocVector
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMouseWheelStep >> leftBy: aNumber [
 	self verticallyBy: aNumber abs negated
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlDevScripterMouseWheelStep >> playOn: aScripter [
 	| aTarget |
 	
@@ -54,27 +52,27 @@ BlDevScripterMouseWheelStep >> playOn: aScripter [
 	aScripter pulse
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMouseWheelStep >> rightBy: aNumber [
 	self verticallyBy: aNumber abs
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMouseWheelStep >> upBy: aNumber [
 	self horizontallyBy: aNumber abs
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMouseWheelStep >> vector [
 	^ vector
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMouseWheelStep >> vector: aBlVector [
 	vector := aBlVector asBlocVector
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMouseWheelStep >> verticallyBy: aNumber [
 	self vector: (BlVector x: aNumber y: 0)
 ]

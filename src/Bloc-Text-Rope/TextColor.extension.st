@@ -1,6 +1,6 @@
-Extension { #name : 'TextColor' }
+Extension { #name : #TextColor }
 
-{ #category : '*Bloc-Text-Rope' }
+{ #category : #'*Bloc-Text-Rope' }
 TextColor >> applyToBlText: aBlText [
 	"Apply the receiver to the supplied BlText"
 

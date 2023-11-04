@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlResizeRowCursor',
-	#superclass : 'BlNamedCursor',
-	#category : 'Bloc-Space - Cursor',
-	#package : 'Bloc',
-	#tag : 'Space - Cursor'
+	#name : #BlResizeRowCursor,
+	#superclass : #BlNamedCursor,
+	#category : #'Bloc-Space - Cursor'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlResizeRowCursor >> asForm [
 	^ Cursor resizeBottom
 ]

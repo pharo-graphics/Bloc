@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlSpaceSmokeTest',
-	#superclass : 'BlParameterizedHostTest',
-	#category : 'Bloc-Tests-Space',
-	#package : 'Bloc-Tests',
-	#tag : 'Space'
+	#name : #BlSpaceSmokeTest,
+	#superclass : #BlParameterizedHostTest,
+	#category : #'Bloc-Tests-Space'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSpaceSmokeTest >> testShowAfterClose [
 
 	| aSpace |
@@ -25,7 +23,7 @@ BlSpaceSmokeTest >> testShowAfterClose [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSpaceSmokeTest >> testShowAndClick [
 
 	| aSpace |

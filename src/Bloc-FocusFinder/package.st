@@ -1,1 +1,1 @@
-Package { #name : 'Bloc-FocusFinder' }
+Package { #name : #'Bloc-FocusFinder' }

@@ -7,23 +7,21 @@ I am a virtual keyboard to debug key press events
 
 "
 Class {
-	#name : 'BlDevKeyboard',
-	#superclass : 'BlElement',
+	#name : #BlDevKeyboard,
+	#superclass : #BlElement,
 	#instVars : [
 		'keymap'
 	],
-	#category : 'Bloc-DevTool-Tools',
-	#package : 'Bloc-DevTool',
-	#tag : 'Tools'
+	#category : #'Bloc-DevTool-Tools'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevKeyboard >> addButton: anElement key: aKey [
 	keymap at: aKey put: anElement.
 	self addChild: anElement
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevKeyboard >> initialize [
 	super initialize.
 	
@@ -38,7 +36,7 @@ BlDevKeyboard >> initialize [
 	self requestFocus
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevKeyboard >> initializeBottomRow [
 	
 	self addButton: (self simpleSmallKey: 'fn') key: KeyboardKey function.
@@ -55,7 +53,7 @@ BlDevKeyboard >> initializeBottomRow [
 	self addButton: (self simpleSmallKey: 'down') key: KeyboardKey down.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevKeyboard >> initializeEventListeners [
 	self
 		when: BlKeyDownEvent
@@ -79,7 +77,7 @@ BlDevKeyboard >> initializeEventListeners [
 				ifPresent: [ :aButton | aButton background: Color white ] ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevKeyboard >> initializeFirstRow [
 	| theKeys |
 	
@@ -93,7 +91,7 @@ BlDevKeyboard >> initializeFirstRow [
 	self addButton: (self simpleKey: '\') key: KeyboardKey backslash.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevKeyboard >> initializeKeys [
 	self initializeTopRow.
 	self initializeFirstRow.
@@ -102,7 +100,7 @@ BlDevKeyboard >> initializeKeys [
 	self initializeBottomRow
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevKeyboard >> initializeSecondRow [
 	| theKeys |
 	
@@ -116,7 +114,7 @@ BlDevKeyboard >> initializeSecondRow [
 	self addButton: (self wideKey: 'return' span: 1.8) key: KeyboardKey enter.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevKeyboard >> initializeThirdRow [
 	| theKeys |
 	
@@ -132,7 +130,7 @@ BlDevKeyboard >> initializeThirdRow [
 	self addButton: (self wideKey: 'shift' span: 2.42) key: KeyboardKey shiftRight.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevKeyboard >> initializeTopRow [
 	| theKeys |
 	
@@ -146,17 +144,17 @@ BlDevKeyboard >> initializeTopRow [
 	self addButton: (self wideKey: 'delete' span: 1.45) key: KeyboardKey backspace.
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlDevKeyboard >> keyboardHeight [
 	^ (5 * self rowHeight) + ((5 * 2 + 1) * self spacing)
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlDevKeyboard >> keyboardWidth [
 	^ self rowWidth
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlDevKeyboard >> newButton: anExtent [
 	^ BlElement new
 		size: anExtent;
@@ -168,17 +166,17 @@ BlDevKeyboard >> newButton: anExtent [
 		background: (Color white)
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlDevKeyboard >> rowHeight [
 	^ 35
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlDevKeyboard >> rowWidth [
 	^ (13 * self simpleKeyWidth) + (self wideWidth: 1.5) + ((14 * 2) * self spacing)
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlDevKeyboard >> simpleKey: aString [
 	| button label |
 
@@ -196,17 +194,17 @@ BlDevKeyboard >> simpleKey: aString [
 	^ button
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlDevKeyboard >> simpleKeyExtent [
 	^ self simpleKeyWidth @ self rowHeight
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlDevKeyboard >> simpleKeyWidth [
 	^ self rowHeight * 1.2
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlDevKeyboard >> simpleSmallKey: aString [
 	| button label |
 	
@@ -224,12 +222,12 @@ BlDevKeyboard >> simpleSmallKey: aString [
 	^ button
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlDevKeyboard >> spacing [
 	^ 5
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlDevKeyboard >> wideKey: aString span: aNumber [
 	| button label |
 	
@@ -247,7 +245,7 @@ BlDevKeyboard >> wideKey: aString span: aNumber [
 	^ button
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlDevKeyboard >> wideSmallKey: aString span: aNumber [
 	| button label |
 
@@ -265,7 +263,7 @@ BlDevKeyboard >> wideSmallKey: aString span: aNumber [
 	^ button
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlDevKeyboard >> wideWidth: aNumber [
 	^ ((self simpleKeyWidth * aNumber) + self spacing)
 ]

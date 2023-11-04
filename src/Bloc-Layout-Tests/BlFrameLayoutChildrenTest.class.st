@@ -3,13 +3,12 @@ I have been automatically converted and probably manually tweaked from BlFrameLa
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlFrameLayoutChildrenTest',
-	#superclass : 'BlRootLayoutTest',
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#name : #BlFrameLayoutChildrenTest,
+	#superclass : #BlRootLayoutTest,
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutChildrenTest >> testChildElementWithExactSize100per50 [
 	<sampleInstance>
 	| element |
@@ -24,7 +23,7 @@ BlFrameLayoutChildrenTest >> testChildElementWithExactSize100per50 [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize [
 	<sampleInstance>
 	| element |
@@ -34,7 +33,7 @@ BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize300per250 [
 	<sampleInstance>
 	| element |

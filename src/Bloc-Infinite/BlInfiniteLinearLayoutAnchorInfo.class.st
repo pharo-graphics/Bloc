@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlInfiniteLinearLayoutAnchorInfo',
-	#superclass : 'Object',
+	#name : #BlInfiniteLinearLayoutAnchorInfo,
+	#superclass : #Object,
 	#instVars : [
 		'position',
 		'coordinate',
@@ -10,12 +10,10 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-Layout-Linear-Support',
-	#package : 'Bloc-Infinite',
-	#tag : 'Layout-Linear-Support'
+	#category : #'Bloc-Infinite-Layout-Linear-Support'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLinearLayoutAnchorInfo >> assignCoordinateFromPaddingIn: aLinearLayout [ 
 	| anOrientation |
 	
@@ -25,7 +23,7 @@ BlInfiniteLinearLayoutAnchorInfo >> assignCoordinateFromPaddingIn: aLinearLayout
 		ifFalse: [ anOrientation startWithPadding ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLinearLayoutAnchorInfo >> assignFromElement: anElement in: aLinearLayout [
 	| anOrientation | 
 	anOrientation := aLinearLayout orientation.
@@ -37,7 +35,7 @@ BlInfiniteLinearLayoutAnchorInfo >> assignFromElement: anElement in: aLinearLayo
 	position := aLinearLayout childPositionOf: anElement
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLinearLayoutAnchorInfo >> assignFromElementAndKeepVisible: anElement in: aLinearLayout [ 
 
 	aLinearLayout orientation totalSpaceChange >= 0
@@ -50,7 +48,7 @@ BlInfiniteLinearLayoutAnchorInfo >> assignFromElementAndKeepVisible: anElement i
 		ifFalse: [ self assignFromElementAndKeepVisibleFromEnd: anElement in: aLinearLayout ].
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlInfiniteLinearLayoutAnchorInfo >> assignFromElementAndKeepVisibleFromEnd: anElement in: aLinearLayout [ 
 	| anOrientation aPreviousLayoutEnd aChildEnd aPreviousEndMargin |
 	
@@ -78,7 +76,7 @@ BlInfiniteLinearLayoutAnchorInfo >> assignFromElementAndKeepVisibleFromEnd: anEl
 				ifTrue: [ coordinate := coordinate + (aPreviousEndMargin min: aStartMargin negated) ] ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlInfiniteLinearLayoutAnchorInfo >> assignFromElementAndKeepVisibleFromStart: anElement in: aLinearLayout [ 
 	| anOrientation aChildStart aStartMargin |
 	
@@ -101,24 +99,24 @@ BlInfiniteLinearLayoutAnchorInfo >> assignFromElementAndKeepVisibleFromStart: an
 				ifTrue: [ coordinate := coordinate - (aStartMargin min: anEndMargin negated) ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutAnchorInfo >> coordinate [
 	^ coordinate 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutAnchorInfo >> coordinate: aNumber [
 	coordinate := aNumber 
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLinearLayoutAnchorInfo >> initialize [
 	super initialize.
 	
 	self reset 
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteLinearLayoutAnchorInfo >> isElementValidAsAnchor: anElement state: anInfiniteState [
 	| anInfiniteConstraints |
 	
@@ -129,38 +127,38 @@ BlInfiniteLinearLayoutAnchorInfo >> isElementValidAsAnchor: anElement state: anI
 			and: anInfiniteState itemCount ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutAnchorInfo >> isValid [
 	^ valid 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutAnchorInfo >> isValid: aBoolean [ 
 
 	valid := aBoolean
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutAnchorInfo >> layoutFromEnd [
 	^ layoutFromEnd 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutAnchorInfo >> layoutFromEnd: aBoolean [
 	layoutFromEnd := aBoolean 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutAnchorInfo >> position [
 	^ position 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutAnchorInfo >> position: aNumber [
 	position := aNumber 
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLinearLayoutAnchorInfo >> reset [
 	position := NoPosition.
 	coordinate := BlInfiniteLinearLayout invalidOffset.

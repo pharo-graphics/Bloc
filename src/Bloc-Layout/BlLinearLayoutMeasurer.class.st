@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlLinearLayoutMeasurer',
-	#superclass : 'Object',
+	#name : #BlLinearLayoutMeasurer,
+	#superclass : #Object,
 	#instVars : [
 		'isBaselineAligned',
 		'useLargestChild',
@@ -25,27 +25,25 @@ Class {
 		'layout',
 		'interSpacing'
 	],
-	#category : 'Bloc-Layout-Linear-Utilities',
-	#package : 'Bloc-Layout',
-	#tag : 'Linear-Utilities'
+	#category : #'Bloc-Layout-Linear-Utilities'
 }
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlLinearLayoutMeasurer >> baselineMeasure [
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayoutMeasurer >> breadthSpec [
 	^ breadthSpec
 ]
 
-{ #category : 'accessing - properties' }
+{ #category : #'accessing - properties' }
 BlLinearLayoutMeasurer >> cellSpacing [
 	^ cellSpacing
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlLinearLayoutMeasurer >> initialize [
 	super initialize.
 
@@ -67,7 +65,7 @@ BlLinearLayoutMeasurer >> initialize [
 	weightedMaxBreadth := 0.0
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlLinearLayoutMeasurer >> initializeWith: aParentElement layout: aLinearLayout extentSpec: anExtentSpec orientation: aBlLinearLayoutOrientation [
 
 	parent := aParentElement.
@@ -85,28 +83,28 @@ BlLinearLayoutMeasurer >> initializeWith: aParentElement layout: aLinearLayout e
 		collect: [ :aChildElement | BlLinearLayoutNode new initializeWith: aChildElement orientation: orientation ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayoutMeasurer >> interspace [
 
 	^ interSpacing
 ]
 
-{ #category : 'accessing - properties' }
+{ #category : #'accessing - properties' }
 BlLinearLayoutMeasurer >> isBaselineAligned [
 	^ isBaselineAligned
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlLinearLayoutMeasurer >> isBreadthExact [
 	^ self breadthSpec isExact
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlLinearLayoutMeasurer >> isLengthExact [
 	^ self lengthSpec isExact
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlLinearLayoutMeasurer >> largestMeasure [
 	"I re-measure my length for the case when we consider all weighted children to have the minimum size of the largest child"
 	
@@ -121,12 +119,12 @@ BlLinearLayoutMeasurer >> largestMeasure [
 	self nodes do: [ :aNode | self updateTotalLengthFromLargestChild: aNode ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayoutMeasurer >> lengthSpec [
 	^ lengthSpec
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlLinearLayoutMeasurer >> limitedMeasure [
 	| excessSpace remainingExcess remainingNodesCount theLimitedNodes totalLimitedLength maxEachLimitedLength theNodesToShrink totalShrinkedLength |
 	
@@ -181,7 +179,7 @@ BlLinearLayoutMeasurer >> limitedMeasure [
 	totalLength := totalLength - excessSpace.
 ]
 
-{ #category : 'private - measurement' }
+{ #category : #'private - measurement' }
 BlLinearLayoutMeasurer >> measureExactUsingExcessSpace: aNode [
 	"Optimization: don't bother measuring children who are only laid out using excess space.
 	These views will get measured later if we have space to distribute."
@@ -189,7 +187,7 @@ BlLinearLayoutMeasurer >> measureExactUsingExcessSpace: aNode [
 	self subclassResponsibility
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlLinearLayoutMeasurer >> measureOn: anElement [
 
 	anElement ignoreRequestLayoutDuring: [ self preMeasure ].
@@ -211,21 +209,21 @@ BlLinearLayoutMeasurer >> measureOn: anElement [
 	self uniformMeasure
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayoutMeasurer >> nodes [
 	<return: #Collection of: #BlLinearLayoutNode>
 
 	^ nodes
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayoutMeasurer >> parent [
 	<return: #BlElement>
 
 	^ parent
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlLinearLayoutMeasurer >> postMeasure [
 
 	(allFillParent not and: [ breadthSpec isExact not ])
@@ -239,7 +237,7 @@ BlLinearLayoutMeasurer >> postMeasure [
 	parent measuredExtent: (orientation extentBreadth: (breadthSpec sizeFor: maxBreadth) lengthSpec: measuredLength).
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlLinearLayoutMeasurer >> preMeasure [
 
 	"See how wide/tall everyone is. Also remember max breadth."
@@ -326,19 +324,19 @@ BlLinearLayoutMeasurer >> preMeasure [
 			ifTrue: [ totalLength := totalLength + self cellSpacing ] ]
 ]
 
-{ #category : 'private - measurement' }
+{ #category : #'private - measurement' }
 BlLinearLayoutMeasurer >> prepareForWeightedMeasure [
 	self subclassResponsibility
 ]
 
-{ #category : 'private - measurement' }
+{ #category : #'private - measurement' }
 BlLinearLayoutMeasurer >> processBaseline: aNode breadth: aChildBreadth [
 	"I process baseline of a given child node if it is supported."
 
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing - properties' }
+{ #category : #'accessing - properties' }
 BlLinearLayoutMeasurer >> remainingWeightSum [
 	<return: #Number>
 
@@ -347,7 +345,7 @@ BlLinearLayoutMeasurer >> remainingWeightSum [
 		ifFalse: [ totalWeight ]
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlLinearLayoutMeasurer >> uniformMeasure [
 	| uniformMeasureSpec |
 
@@ -379,31 +377,31 @@ BlLinearLayoutMeasurer >> uniformMeasure [
 			aNode lengthResizer: oldResizer ].
 ]
 
-{ #category : 'private - measurement' }
+{ #category : #'private - measurement' }
 BlLinearLayoutMeasurer >> updateTotalLengthAfterMeasuring: aNode [
 	"I update the total length after measuring a given node based on its measured length and margin"
 
 	self subclassResponsibility
 ]
 
-{ #category : 'private - measurement' }
+{ #category : #'private - measurement' }
 BlLinearLayoutMeasurer >> updateTotalLengthFromLargestChild: aNode [
 	"I update the total length taking into account the length of the largest child"
 
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing - properties' }
+{ #category : #'accessing - properties' }
 BlLinearLayoutMeasurer >> useLargestChild [
 	^ useLargestChild
 ]
 
-{ #category : 'accessing - properties' }
+{ #category : #'accessing - properties' }
 BlLinearLayoutMeasurer >> weightSum [
 	^ layout weightSum
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlLinearLayoutMeasurer >> weightedMeasure [
 	"I measure weighted children if there is enough excess space"	
 	| remainingExcess |

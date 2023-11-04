@@ -1,6 +1,6 @@
-Extension { #name : 'XMLElement' }
+Extension { #name : #XMLElement }
 
-{ #category : '*Bloc-SVG' }
+{ #category : #'*Bloc-SVG' }
 XMLElement >> attributeAt: aName ifPresent: aBlock [
 	"returns the value of the attribute whose full name matches aName or the
 	value of aBlock if there isn't any"
@@ -11,7 +11,7 @@ XMLElement >> attributeAt: aName ifPresent: aBlock [
 	aBlock cull: aValue
 ]
 
-{ #category : '*Bloc-SVG' }
+{ #category : #'*Bloc-SVG' }
 XMLElement >> attributeAt: aName ifPresent: aBlock ifAbsent: absentBlock [
 	"returns the value of the attribute whose full name matches aName or the
 	value of aBlock if there isn't any"
@@ -22,7 +22,7 @@ XMLElement >> attributeAt: aName ifPresent: aBlock ifAbsent: absentBlock [
 	^ aBlock cull: aValue
 ]
 
-{ #category : '*Bloc-SVG' }
+{ #category : #'*Bloc-SVG' }
 XMLElement >> inheriteAttributes [
 	self isRoot ifTrue: [ ^ self ].
 	
@@ -33,26 +33,26 @@ XMLElement >> inheriteAttributes [
 	self inheriteTransformAttribute.
 ]
 
-{ #category : '*Bloc-SVG' }
+{ #category : #'*Bloc-SVG' }
 XMLElement >> inheriteTransformAttribute [
 	self parent attributeAt: 'transform' ifAbsent: [ ^ self ].
 	
 	self attributeAt: 'transform' put: (self parent attributeAt: 'transform') , self transformAttribute
 ]
 
-{ #category : '*Bloc-SVG' }
+{ #category : #'*Bloc-SVG' }
 XMLElement >> shouldBeAddedToParent [
 	^ {'svg' . 'g' . 'use' . 'rect' . 'circle' . 'ellipse' . 'line' . 'polyline' . 'polygon' . 'path' . 'text' . 'tspan' . 'image'} includes: self name
 ]
 
-{ #category : '*Bloc-SVG' }
+{ #category : #'*Bloc-SVG' }
 XMLElement >> shouldInheriteAttribute: key [
 	"Note that the 'transform' attribute will still be inherited but through a special way."
 
 	^ ({'transform' . 'display' . 'x' . 'y' . 'height' . 'width' . 'id' . 'opacity'} includes: key) not
 ]
 
-{ #category : '*Bloc-SVG' }
+{ #category : #'*Bloc-SVG' }
 XMLElement >> splitStyleAttribute [
 	self attributeAt:'style' ifAbsent:[^self].
 	
@@ -61,13 +61,13 @@ XMLElement >> splitStyleAttribute [
 
 ]
 
-{ #category : '*Bloc-SVG' }
+{ #category : #'*Bloc-SVG' }
 XMLElement >> transformAttribute [
 	self attributeAt: 'transform' ifAbsent: [ ^'' ].
 	^self attributeAt: 'transform'
 ]
 
-{ #category : '*Bloc-SVG' }
+{ #category : #'*Bloc-SVG' }
 XMLElement >> translatedBy: aSVGFactory withParent: parentElement [
 	| translatedElement |
 	translatedElement := aSVGFactory generateElementFrom: self.

@@ -1,6 +1,6 @@
-Extension { #name : 'BlRope' }
+Extension { #name : #BlRope }
 
-{ #category : '*Bloc-Spec2' }
+{ #category : #'*Bloc-Spec2' }
 BlRope >> inspectionForStructure: aBuilder [
 	<inspectorPresentationOrder: 1 title: 'Tree structure'>
 

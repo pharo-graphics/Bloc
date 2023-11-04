@@ -5,19 +5,17 @@ To not completely break the UI thread we should catch the error and prevent the 
 
 "
 Class {
-	#name : 'BlDrawingErrorHandler',
-	#superclass : 'BlSingleErrorHandler',
-	#category : 'Bloc-Basic-Errors',
-	#package : 'Bloc',
-	#tag : 'Basic-Errors'
+	#name : #BlDrawingErrorHandler,
+	#superclass : #BlSingleErrorHandler,
+	#category : #'Bloc-Basic-Errors'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlDrawingErrorHandler >> matches: aFramePhase [
 	^ aFramePhase isDrawingPhase
 ]
 
-{ #category : 'error handling' }
+{ #category : #'error handling' }
 BlDrawingErrorHandler >> processError: aHandledError [
 
 	aHandledError element

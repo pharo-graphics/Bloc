@@ -5,20 +5,18 @@ So, that installing my instance as event handler for specific window would allow
 Later, the Morphic can be integrated with OSWindow API to avoid unnecessary conversion and thus eliminating the need in having this class.
 "
 Class {
-	#name : 'BlMorphicWorldEmbeddingEventHandler',
-	#superclass : 'BlEventListener',
+	#name : #BlMorphicWorldEmbeddingEventHandler,
+	#superclass : #BlEventListener,
 	#instVars : [
 		'buttons'
 	],
 	#classVars : [
 		'KeyCharacterMapping'
 	],
-	#category : 'BlocHost-Morphic-World',
-	#package : 'BlocHost-Morphic',
-	#tag : 'World'
+	#category : #'BlocHost-Morphic-World'
 }
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BlMorphicWorldEmbeddingEventHandler class >> initialize [
 	"
 	self initialize
@@ -57,7 +55,7 @@ BlMorphicWorldEmbeddingEventHandler class >> initialize [
 	} pairsDo: [ :key :val | KeyCharacterMapping at: (KeyboardKey perform: key) put: val ]
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlMorphicWorldEmbeddingEventHandler >> convertButton: aBlMouseButton [
 	aBlMouseButton = BlMouseButton primary
 		ifTrue: [ ^ MouseButtonEvent redButton ].
@@ -69,7 +67,7 @@ BlMorphicWorldEmbeddingEventHandler >> convertButton: aBlMouseButton [
 	^ 0
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlMorphicWorldEmbeddingEventHandler >> convertModifiers: modifiers [
 	| btns |
 	btns := 0.
@@ -88,7 +86,7 @@ BlMorphicWorldEmbeddingEventHandler >> convertModifiers: modifiers [
 	^ btns
 ]
 
-{ #category : 'events' }
+{ #category : #events }
 BlMorphicWorldEmbeddingEventHandler >> dispatchMorphicEvent: anEvent hand: aHandMorph [
 	aHandMorph
 		ifNotNil: [
@@ -96,7 +94,7 @@ BlMorphicWorldEmbeddingEventHandler >> dispatchMorphicEvent: anEvent hand: aHand
 		ifNil: [ NonInteractiveTranscript stderr show: ('Can not handle {1} because hand is nil' format: { anEvent }); cr ]
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BlMorphicWorldEmbeddingEventHandler >> keyDownEvent: anEvent [
 	| aHand aMorphicEvent aCharacter aKeyValue aCharCode |
 	
@@ -139,7 +137,7 @@ BlMorphicWorldEmbeddingEventHandler >> keyDownEvent: anEvent [
 	self dispatchMorphicEvent: aMorphicEvent hand: aHand
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BlMorphicWorldEmbeddingEventHandler >> keyUpEvent: anEvent [
 	| aHand aMorphicEvent |
 	
@@ -159,7 +157,7 @@ BlMorphicWorldEmbeddingEventHandler >> keyUpEvent: anEvent [
 	self dispatchMorphicEvent: aMorphicEvent hand: aHand
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BlMorphicWorldEmbeddingEventHandler >> mapKeyToCharacter: aKeyboardKey [
 	
 	^ KeyCharacterMapping
@@ -167,7 +165,7 @@ BlMorphicWorldEmbeddingEventHandler >> mapKeyToCharacter: aKeyboardKey [
 		ifAbsent: [ Character null ]
 ]
 
-{ #category : 'mouse handlers' }
+{ #category : #'mouse handlers' }
 BlMorphicWorldEmbeddingEventHandler >> mouseDownEvent: anEvent [
 	| aHand aMorphicEvent |
 
@@ -188,7 +186,7 @@ BlMorphicWorldEmbeddingEventHandler >> mouseDownEvent: anEvent [
 	self dispatchMorphicEvent: aMorphicEvent hand: aHand
 ]
 
-{ #category : 'mouse handlers' }
+{ #category : #'mouse handlers' }
 BlMorphicWorldEmbeddingEventHandler >> mouseMoveEvent: anEvent [
 	| aHand aMorphicEvent oldPos theButtons |
 
@@ -217,7 +215,7 @@ BlMorphicWorldEmbeddingEventHandler >> mouseMoveEvent: anEvent [
 	anEvent currentTarget world invalidRect: aHand bounds from: aHand
 ]
 
-{ #category : 'mouse handlers' }
+{ #category : #'mouse handlers' }
 BlMorphicWorldEmbeddingEventHandler >> mouseUpEvent: anEvent [
 	| aHand aMorphicEvent |
 
@@ -238,7 +236,7 @@ BlMorphicWorldEmbeddingEventHandler >> mouseUpEvent: anEvent [
 	self dispatchMorphicEvent: aMorphicEvent hand: aHand
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BlMorphicWorldEmbeddingEventHandler >> mouseWheelEvent: anEvent [
 	| vertical aHand aMorphicEvent |
 	
@@ -264,7 +262,7 @@ BlMorphicWorldEmbeddingEventHandler >> mouseWheelEvent: anEvent [
 	self dispatchMorphicEvent: aMorphicEvent hand: aHand
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BlMorphicWorldEmbeddingEventHandler >> textInputEvent: anEvent [
 	| aHand aMorphicEvent anInputString |
 

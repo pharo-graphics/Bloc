@@ -1,11 +1,10 @@
 Class {
-	#name : 'BlIgnoredLayoutTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#name : #BlIgnoredLayoutTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'examples - alignment' }
+{ #category : #'examples - alignment' }
 BlIgnoredLayoutTest >> testAlignmentIsStable [
 	<sampleInstance>
 	| aContainer aChild |

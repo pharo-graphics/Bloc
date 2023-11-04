@@ -3,13 +3,12 @@ I am a keyboard arrow press listener used by focus examples in order to move foc
 
 "
 Class {
-	#name : 'BlFocusExampleNavigationListener',
-	#superclass : 'BlEventListener',
-	#category : 'Bloc-FocusFinder-Examples',
-	#package : 'Bloc-FocusFinder-Examples'
+	#name : #BlFocusExampleNavigationListener,
+	#superclass : #BlEventListener,
+	#category : #'Bloc-FocusFinder-Examples'
 }
 
-{ #category : 'keyboard handlers' }
+{ #category : #'keyboard handlers' }
 BlFocusExampleNavigationListener >> keyDownEvent: anEvent [
 
 	| root focused focusFinder next direction |

@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlInfiniteDataSourceCommandTypeRemove',
-	#superclass : 'BlInfiniteDataSourceCommandType',
-	#category : 'Bloc-Infinite-DataSource',
-	#package : 'Bloc-Infinite',
-	#tag : 'DataSource'
+	#name : #BlInfiniteDataSourceCommandTypeRemove,
+	#superclass : #BlInfiniteDataSourceCommandType,
+	#category : #'Bloc-Infinite-DataSource'
 }
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeRemove >> apply: aCommand in: anInfiniteElement [
 	| command tmpStart tmpCount tmpEnd type position manager |
 	command := aCommand.
@@ -52,7 +50,7 @@ BlInfiniteDataSourceCommandTypeRemove >> apply: aCommand in: anInfiniteElement [
 		ifFalse: [ manager postponeAndUpdateElementHolders: command on: anInfiniteElement ]
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeRemove >> apply: aCommand onPosition: aPosition [
 	| newPosition |
 	newPosition := aPosition.
@@ -68,17 +66,17 @@ BlInfiniteDataSourceCommandTypeRemove >> apply: aCommand onPosition: aPosition [
 	^ newPosition
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeRemove >> continuous: aPosition start: start [
 	^ aPosition = start
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeRemove >> dispatch: aCommand toLayout: aLayout [
 	aLayout onItemsRemovedAt: aCommand positionStart count: aCommand itemCount
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlInfiniteDataSourceCommandTypeRemove >> dispatchOn: anInfiniteElement start: aStartPosition count: anItemCount [
 	| newCommand manager |
 	manager := anInfiniteElement dataSourceManager.
@@ -88,12 +86,12 @@ BlInfiniteDataSourceCommandTypeRemove >> dispatchOn: anInfiniteElement start: aS
 	manager dispatchAndUpdateElementHolders: newCommand on: anInfiniteElement.
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteDataSourceCommandTypeRemove >> isRemove [
 	^ true
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeRemove >> offsetPositions: aCommand in: anInfiniteElement [
 
 	anInfiniteElement dataSourceManager 
@@ -102,12 +100,12 @@ BlInfiniteDataSourceCommandTypeRemove >> offsetPositions: aCommand in: anInfinit
 		in: anInfiniteElement
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeRemove >> positionMultiplier [
 	^ 0
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlInfiniteDataSourceCommandTypeRemove >> postponeIn: anInfiniteElement start: aStartPosition count: anItemCount [
 
 	| newCommand manager |
@@ -121,7 +119,7 @@ BlInfiniteDataSourceCommandTypeRemove >> postponeIn: anInfiniteElement start: aS
 		on: anInfiniteElement
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeRemove >> updateElementHoldersIn: anInfiniteElement command: aCommand [
 	anInfiniteElement dataSourceManager
 		offsetPositions: aCommand positionStart
@@ -129,7 +127,7 @@ BlInfiniteDataSourceCommandTypeRemove >> updateElementHoldersIn: anInfiniteEleme
 		in: anInfiniteElement
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeRemove >> updateElementHoldersIn: anInfiniteElement offset: offsetStart command: aCommand [
 
 	anInfiniteElement dataSourceManager
@@ -138,7 +136,7 @@ BlInfiniteDataSourceCommandTypeRemove >> updateElementHoldersIn: anInfiniteEleme
 		in: anInfiniteElement
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeRemove >> updatePosition: aPosition with: aCommand from: myCommand [
 	| pos |
 	pos := aPosition.

@@ -1,27 +1,25 @@
 Class {
-	#name : 'BlGridFillAlignment',
-	#superclass : 'BlGridAlignment',
-	#category : 'Bloc-Layout-Grid-Utilities',
-	#package : 'Bloc-Layout',
-	#tag : 'Grid-Utilities'
+	#name : #BlGridFillAlignment,
+	#superclass : #BlGridAlignment,
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlGridFillAlignment >> alignmentValue: anElement viewSize: viewSize [
 	^ UNDEFINED
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlGridFillAlignment >> gravityOffset: anElement cellDelta: cellDelta [
 	^ 0
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlGridFillAlignment >> isFill [
 	^ true
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlGridFillAlignment >> sizeInCell: anElement viewSize: viewSize cellSize: cellSize [
 	^ cellSize
 ]

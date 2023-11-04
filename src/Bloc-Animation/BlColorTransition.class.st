@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlColorTransition',
-	#superclass : 'BlTransition',
-	#category : 'Bloc-Animation-Animation',
-	#package : 'Bloc-Animation',
-	#tag : 'Animation'
+	#name : #BlColorTransition,
+	#superclass : #BlTransition,
+	#category : #'Bloc-Animation-Animation'
 }
 
-{ #category : 'pulse' }
+{ #category : #pulse }
 BlColorTransition >> valueForStep: aNumber [
 
 	| r g b a |

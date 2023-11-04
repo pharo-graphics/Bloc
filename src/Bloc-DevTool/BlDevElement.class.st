@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlDevElement',
-	#superclass : 'BlElement',
-	#category : 'Bloc-DevTool-Core',
-	#package : 'Bloc-DevTool',
-	#tag : 'Core'
+	#name : #BlDevElement,
+	#superclass : #BlElement,
+	#category : #'Bloc-DevTool-Core'
 }
 
-{ #category : 'drawing' }
+{ #category : #drawing }
 BlDevElement >> drawDebugInfoOnSpartaCanvas: aCanvas [
 	| aWidth |
 
@@ -33,14 +31,14 @@ BlDevElement >> drawDebugInfoOnSpartaCanvas: aCanvas [
 		draw
 ]
 
-{ #category : 'drawing' }
+{ #category : #drawing }
 BlDevElement >> drawOnSpartaCanvas: aCanvas [
 	super drawOnSpartaCanvas: aCanvas.
 
 	self drawDebugInfoOnSpartaCanvas: aCanvas
 ]
 
-{ #category : 'geometry bounds' }
+{ #category : #'geometry bounds' }
 BlDevElement >> invalidationBounds: aBounds [
 	"I compute and load damaged area in my local coordinates that would be invalidated
 	if #invalidate would be sent to me"

@@ -1,45 +1,43 @@
 Class {
-	#name : 'BAHitTest',
-	#superclass : 'AePixelMatchTest',
-	#category : 'Bloc-Alexandrie-Tests-Base',
-	#package : 'Bloc-Alexandrie-Tests',
-	#tag : 'Base'
+	#name : #BAHitTest,
+	#superclass : #AePixelMatchTest,
+	#category : #'Bloc-Alexandrie-Tests-Base'
 }
 
-{ #category : 'exporting' }
+{ #category : #exporting }
 BAHitTest class >> allFormSelectors [
 
 	^ BlSpaceFixture allFixtureSelectors
 ]
 
-{ #category : 'convenience' }
+{ #category : #convenience }
 BAHitTest class >> exportAll [
 	<script: 'super exportAll' >
 
 	super exportAll
 ]
 
-{ #category : 'convenience' }
+{ #category : #convenience }
 BAHitTest class >> inspectAll [
 	<script: 'super inspectAll'>
 	
 	super inspectAll
 ]
 
-{ #category : 'convenience' }
+{ #category : #convenience }
 BAHitTest class >> inspectMismatches [
 	<script: 'super inspectMismatches'>
 	
 	super inspectMismatches
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BAHitTest >> actualForm [
 
 	^ self hitFormFor: formSelector host: BlOSWindowSDL2Host new
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BAHitTest >> expectedFormsDirectory [
 
 	| repo |
@@ -47,13 +45,13 @@ BAHitTest >> expectedFormsDirectory [
 	^ repo location / 'tests' / 'hit'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BAHitTest >> formBehavior [
 
 	^ BlSpaceFixture new
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BAHitTest >> hitFormFor: aSymbol host: aHost [
 		
 	| aSpace |

@@ -3,8 +3,8 @@ I provide a binding from an app-specific data set to elements that are displayed
 
 "
 Class {
-	#name : 'BlInfiniteDataSource',
-	#superclass : 'Object',
+	#name : #BlInfiniteDataSource,
+	#superclass : #Object,
 	#traits : 'TBlEventTarget + TBlDebug',
 	#classTraits : 'TBlEventTarget classTrait + TBlDebug classTrait',
 	#instVars : [
@@ -14,17 +14,15 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-DataSource',
-	#package : 'Bloc-Infinite',
-	#tag : 'DataSource'
+	#category : #'Bloc-Infinite-DataSource'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlInfiniteDataSource class >> noId [
 	^ NoId
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlInfiniteDataSource >> bindHolder: anElementHolder at: aPosition [
 
 	anElementHolder position: aPosition.
@@ -41,12 +39,12 @@ BlInfiniteDataSource >> bindHolder: anElementHolder at: aPosition [
 	anElementHolder itemElement constraints infinite insetsDirty: true
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlInfiniteDataSource >> createHolder: anInfiniteElement [ 
 	^ self onCreateHolder: anInfiniteElement
 ]
 
-{ #category : 'event management accessing' }
+{ #category : #'event management accessing' }
 BlInfiniteDataSource >> eventDispatcher [
 	"Return an object responsible for event dispatching"
 	<return: #BlDirectEventDispatcher>
@@ -54,7 +52,7 @@ BlInfiniteDataSource >> eventDispatcher [
 	^ eventDispatcher
 ]
 
-{ #category : 'event management testing' }
+{ #category : #'event management testing' }
 BlInfiniteDataSource >> hasEventHandlers [
 	"Returns true if one or more event handlers are attached to this data source"
 	<return: #Boolean>
@@ -62,7 +60,7 @@ BlInfiniteDataSource >> hasEventHandlers [
 	^ self eventDispatcher handlers handlers isNotEmpty
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteDataSource >> hasStableIds [
 	"Returns true if this data source publishes a unique value that can
 	act as a key for the item at a given position in the data set. If that item is relocated
@@ -72,7 +70,7 @@ BlInfiniteDataSource >> hasStableIds [
 	^ hasStableIds
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteDataSource >> initialize [
 	super initialize.
 	
@@ -80,7 +78,7 @@ BlInfiniteDataSource >> initialize [
 	hasStableIds := false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSource >> itemCount [
 	"Return the total number of items in the data set"
 	<return: #Number>
@@ -88,7 +86,7 @@ BlInfiniteDataSource >> itemCount [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSource >> itemIdAt: aPosition [
 	"Return the stable ID for the item at aPosition.
 	If #hasStableIds would return false this method should return ===NoId===.
@@ -98,7 +96,7 @@ BlInfiniteDataSource >> itemIdAt: aPosition [
 	^ NoId
 ]
 
-{ #category : 'event firing' }
+{ #category : #'event firing' }
 BlInfiniteDataSource >> notifyChanged [
 	"Notify any registered event handlers that the data set has changed.
 	There are two different classes of data change events, item changes and structural
@@ -114,7 +112,7 @@ BlInfiniteDataSource >> notifyChanged [
 		yourself)
 ]
 
-{ #category : 'event firing' }
+{ #category : #'event firing' }
 BlInfiniteDataSource >> notifyItems: anInterval event: anEvent [
 	"Notify any registered event handlers that the itemCount items starting at aPosition should receive a given event"
 	
@@ -124,7 +122,7 @@ BlInfiniteDataSource >> notifyItems: anInterval event: anEvent [
 		event: anEvent)
 ]
 
-{ #category : 'event firing' }
+{ #category : #'event firing' }
 BlInfiniteDataSource >> notifyItemsChanged: anInterval [
 	"Notify any registered event handlers that the itemCount items starting at aPosition have changed.
 	This is an item change event, not a structural change event. It indicates that
@@ -136,7 +134,7 @@ BlInfiniteDataSource >> notifyItemsChanged: anInterval [
 		itemCount: anInterval size)
 ]
 
-{ #category : 'event firing' }
+{ #category : #'event firing' }
 BlInfiniteDataSource >> notifyItemsInserted: anInterval [
 	"Notify any registered observers that the currently reflected ===anInterval size===
 	items starting at ===anInterval first=== have been newly inserted. The items
@@ -151,7 +149,7 @@ BlInfiniteDataSource >> notifyItemsInserted: anInterval [
 		itemCount: anInterval size)
 ]
 
-{ #category : 'event firing' }
+{ #category : #'event firing' }
 BlInfiniteDataSource >> notifyItemsRemoved: anInterval [
 	"Notify any registered event handlers that the ===anInterval size=== items previously
 	located at ===anInterval first=== have been removed from the data set. The items
@@ -165,7 +163,7 @@ BlInfiniteDataSource >> notifyItemsRemoved: anInterval [
 		itemCount: anInterval size)
 ]
 
-{ #category : 'event firing' }
+{ #category : #'event firing' }
 BlInfiniteDataSource >> notifyWithEvent: anEvent [
 	"Dispatch a given event assuming that it will happen in a UI Thread.
 	Note that it is a responsibility of a user to #notify* change events from within the UI
@@ -176,37 +174,37 @@ BlInfiniteDataSource >> notifyWithEvent: anEvent [
 	self dispatchEvent: anEvent
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlInfiniteDataSource >> onAttached: anInfiniteElement [
 	"Is sent by InfiniteElement when it starts observing this DataSource"
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlInfiniteDataSource >> onBindHolder: anElementHolder at: aPosition [
 	"Override to bind data to an element holder"
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlInfiniteDataSource >> onCreateHolder: anInfiniteElement [ 
 	"Override to create an ElementHolder for an item type.
 	use ===BlElementHolder of: element=== to create a holder for an element".
 	^ self subclassResponsibility
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlInfiniteDataSource >> onDetached: anInfiniteElement [
 
 	"Is sent by InfiniteElement when it stops observing this DataSource"
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlInfiniteDataSource >> onElementAttached: anElementHolder [
 	"Sent when an element created by this datasource has been attached to InfiniteElement.
 	This can be used as a reasonable signal that the element is about to be seen by the user.
 	If the datasource previously freed any resources in #onElementDetached: those resources should be restored here"
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlInfiniteDataSource >> onElementDetached: anElementHolder [
 	"Sent when an element created by this datasource has been detached from infinite element.
 	Becoming detached is not necessarily a permanent condition;

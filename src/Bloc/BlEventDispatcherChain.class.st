@@ -3,32 +3,30 @@ I am a chain of BlEventDispatchers
 
 "
 Class {
-	#name : 'BlEventDispatcherChain',
-	#superclass : 'Object',
+	#name : #BlEventDispatcherChain,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'previous',
 		'dispatcher'
 	],
-	#category : 'Bloc-Events-Dispatcher',
-	#package : 'Bloc',
-	#tag : 'Events-Dispatcher'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlEventDispatcherChain class >> empty [
 	<return: #BlEventDispatcherChain>
 	
 	^ BlEventDispatcherEmptyChain uniqueInstance
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlEventDispatcherChain class >> with: aBlEventDispatcher [
 	^ self new initializeWith: aBlEventDispatcher
 ]
 
-{ #category : 'api - event managing' }
+{ #category : #'api - event managing' }
 BlEventDispatcherChain >> dispatchEvent: anEvent [
 	"Dispatch a given event through the whole dispatcher chain"
 	| aPreviousChain |
@@ -40,34 +38,34 @@ BlEventDispatcherChain >> dispatchEvent: anEvent [
 	^ self dispatcher dispatchEvent: anEvent next: aPreviousChain
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BlEventDispatcherChain >> dispatcher [
 	
 	^ dispatcher
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlEventDispatcherChain >> first [
 	^ self hasPrevious
 		ifTrue: [ self previous first ]
 		ifFalse: [ self ]
 ]
 
-{ #category : 'private - testing' }
+{ #category : #'private - testing' }
 BlEventDispatcherChain >> hasDispatcher [
 	<return: #Boolean>
 	
 	^ dispatcher isNotNil
 ]
 
-{ #category : 'private - testing' }
+{ #category : #'private - testing' }
 BlEventDispatcherChain >> hasPrevious [
 	<return: #Boolean>
 	
 	^ previous isNotNil
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlEventDispatcherChain >> initializeWith: aBlEventDispatcher [
 
 	self
@@ -80,7 +78,7 @@ BlEventDispatcherChain >> initializeWith: aBlEventDispatcher [
 	previous := nil
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BlEventDispatcherChain >> previous [
 	<return: #BlEventDispatcherChain>
 	
@@ -91,7 +89,7 @@ BlEventDispatcherChain >> previous [
 	^ previous
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BlEventDispatcherChain >> previous: aBlEventDispatcherChain [
 	self
 		assert: [ self hasPrevious not ]
@@ -100,7 +98,7 @@ BlEventDispatcherChain >> previous: aBlEventDispatcherChain [
 	previous := aBlEventDispatcherChain
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BlEventDispatcherChain >> withAllPrevious [
 	<return: #SequenceableCollection of: #BlEventDispatcherChain>
 
@@ -113,7 +111,7 @@ BlEventDispatcherChain >> withAllPrevious [
 			aChain := aChain previous ] ]
 ]
 
-{ #category : 'api - adding' }
+{ #category : #'api - adding' }
 BlEventDispatcherChain >> withNext: aBlEventDispatcher [
 	| aNextChain |
 

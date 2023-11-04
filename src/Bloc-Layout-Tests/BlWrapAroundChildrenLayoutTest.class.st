@@ -3,13 +3,12 @@ I have been automatically converted and probably manually tweaked from BlWrapAro
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlWrapAroundChildrenLayoutTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#name : #BlWrapAroundChildrenLayoutTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlWrapAroundChildrenLayoutTest >> container [
 
 	<sampleInstance>
@@ -24,7 +23,7 @@ BlWrapAroundChildrenLayoutTest >> container [
 		  background: (Color gray alpha: 0.2)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlWrapAroundChildrenLayoutTest >> node [
 
 	<sampleInstance>
@@ -35,7 +34,7 @@ BlWrapAroundChildrenLayoutTest >> node [
 		  size: 20 @ 20
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlWrapAroundChildrenLayoutTest >> testContainerScaledWithNodes [
 
 	<sampleInstance>
@@ -63,7 +62,7 @@ BlWrapAroundChildrenLayoutTest >> testContainerScaledWithNodes [
 	^ aContainer
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlWrapAroundChildrenLayoutTest >> testContainerWithNodes [
 
 	<sampleInstance>

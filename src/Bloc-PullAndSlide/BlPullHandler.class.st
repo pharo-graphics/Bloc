@@ -26,8 +26,8 @@ element addEventHandler: BlPullHandler new.
 
 "
 Class {
-	#name : 'BlPullHandler',
-	#superclass : 'BlCustomEventHandler',
+	#name : #BlPullHandler,
+	#superclass : #BlCustomEventHandler,
 	#instVars : [
 		'direction',
 		'allowOutOfBounds',
@@ -40,51 +40,49 @@ Class {
 		'Horizontal',
 		'Vertical'
 	],
-	#category : 'Bloc-PullAndSlide-Handlers',
-	#package : 'Bloc-PullAndSlide',
-	#tag : 'Handlers'
+	#category : #'Bloc-PullAndSlide-Handlers'
 }
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BlPullHandler class >> initialize [	
 	Any := #any.
 	Vertical := #vertical.
 	Horizontal := #horizontal
 ]
 
-{ #category : 'api - pull handler' }
+{ #category : #'api - pull handler' }
 BlPullHandler >> allowOutOfBounds [
 	"Allow the pulled element to be pulled outside of the parent bounds."
 	
 	allowOutOfBounds := true
 ]
 
-{ #category : 'api - pull handler' }
+{ #category : #'api - pull handler' }
 BlPullHandler >> beFree [
 
 	direction := Any
 ]
 
-{ #category : 'api - pull handler' }
+{ #category : #'api - pull handler' }
 BlPullHandler >> beHorizontal [
 
 	direction := Horizontal
 ]
 
-{ #category : 'api - pull handler' }
+{ #category : #'api - pull handler' }
 BlPullHandler >> beVertical [
 
 	direction := Vertical
 ]
 
-{ #category : 'api - pull handler' }
+{ #category : #'api - pull handler' }
 BlPullHandler >> disallowOutOfBounds [
 	"Do not allow the pulled element to be pulled outside of the parent bounds."
 	
 	allowOutOfBounds := false
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlPullHandler >> dispatchPulledTo: currentPosition [
 
 	target dispatchEvent:
@@ -94,7 +92,7 @@ BlPullHandler >> dispatchPulledTo: currentPosition [
 			yourself)
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlPullHandler >> dragEndEvent: anEvent [
 
 	anEvent consumed: true.
@@ -102,7 +100,7 @@ BlPullHandler >> dragEndEvent: anEvent [
 	target dispatchEvent: BlPullEndEvent new
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlPullHandler >> dragEvent: aBlDragEvent [
 
 	| newPosition deltaFromStartPosition |
@@ -123,7 +121,7 @@ BlPullHandler >> dragEvent: aBlDragEvent [
 	self dispatchPulledTo: newPosition
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlPullHandler >> dragStartEvent: anEvent [
 
 	anEvent consumed: true.
@@ -135,7 +133,7 @@ BlPullHandler >> dragStartEvent: anEvent [
 	initialTargetPosition := target position.
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlPullHandler >> eventsToHandle [
 
 	^ {		BlDragStartEvent.
@@ -143,7 +141,7 @@ BlPullHandler >> eventsToHandle [
 			BlDragEndEvent }
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlPullHandler >> filteredDelta: aPoint [
 
 	direction = Vertical ifTrue: [ ^ 0 @ aPoint y ].
@@ -151,7 +149,7 @@ BlPullHandler >> filteredDelta: aPoint [
 	^ aPoint 	"direction = Any"
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlPullHandler >> initialize [
 
 	super initialize.
@@ -160,14 +158,14 @@ BlPullHandler >> initialize [
 	self beFree
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlPullHandler >> target [
 	"Answer the element that is moved according to the dragging motion."
 
 	^ target
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlPullHandler >> target: anElement [
 	"Set the element that is moved accordingly to the dragging motion. 
 	By default, this is the element that added myself as an event handler."

@@ -1,23 +1,21 @@
 Class {
-	#name : 'BlDevScripterStepFailureState',
-	#superclass : 'BlDevScripterStepState',
-	#category : 'Bloc-Scripter-Scripter-States',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-States'
+	#name : #BlDevScripterStepFailureState,
+	#superclass : #BlDevScripterStepState,
+	#category : #'Bloc-Scripter-Scripter-States'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterStepFailureState >> color [
 	"BrGlamorousColors errorBackgroundColor"
 	^ (Color r: 1.0 g: 0.4701857282502444 b: 0.458455522971652 alpha: 1.0)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterStepFailureState >> name [
 	^ 'failed'
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlDevScripterStepFailureState >> wasExecuted [
 	<return: #Boolean>
 	^ true

@@ -3,13 +3,12 @@ I have been automatically converted and probably manually tweaked from BlCollect
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlCollectionRopeIteratorTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Examples',
-	#package : 'Bloc-Examples'
+	#name : #BlCollectionRopeIteratorTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Examples'
 }
 
-{ #category : 'fixture' }
+{ #category : #fixture }
 BlCollectionRopeIteratorTest >> NextLineWithCr0 [
 
 	<sampleInstance>
@@ -37,13 +36,13 @@ BlCollectionRopeIteratorTest >> NextLineWithCr0 [
 	^ anIterator
 ]
 
-{ #category : 'metadata' }
+{ #category : #metadata }
 BlCollectionRopeIteratorTest >> originClassName [
 	"This test was generated from..."
 	^ 'BlCollectionRopeIteratorExamples'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf0 [
 
 	<gtExample>
@@ -71,7 +70,7 @@ BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf0 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf08 [
 
 	<gtExample>
@@ -97,7 +96,7 @@ BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf08 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf16 [
 
 	<gtExample>
@@ -124,7 +123,7 @@ BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf16 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf18 [
 
 	<gtExample>
@@ -150,7 +149,7 @@ BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf18 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithCr07 [
 
 	<gtExample>
@@ -176,7 +175,7 @@ BlCollectionRopeIteratorTest >> testNextLineWithCr07 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithCr14 [
 
 	<gtExample>
@@ -202,7 +201,7 @@ BlCollectionRopeIteratorTest >> testNextLineWithCr14 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithCr15 [
 
 	<gtExample>
@@ -228,7 +227,7 @@ BlCollectionRopeIteratorTest >> testNextLineWithCr15 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithCrlf [
 
 	<gtExample>
@@ -245,7 +244,7 @@ BlCollectionRopeIteratorTest >> testNextLineWithCrlf [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithLf0 [
 
 	<gtExample>
@@ -273,7 +272,7 @@ BlCollectionRopeIteratorTest >> testNextLineWithLf0 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithLf07 [
 
 	<gtExample>
@@ -299,7 +298,7 @@ BlCollectionRopeIteratorTest >> testNextLineWithLf07 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithLf14 [
 
 	<gtExample>
@@ -325,7 +324,7 @@ BlCollectionRopeIteratorTest >> testNextLineWithLf14 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithLf15 [
 
 	<gtExample>
@@ -351,7 +350,7 @@ BlCollectionRopeIteratorTest >> testNextLineWithLf15 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt0 [
 
 	<gtExample>
@@ -384,7 +383,7 @@ BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt0 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt3 [
 
 	<gtExample>
@@ -417,7 +416,7 @@ BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt3 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt5 [
 
 	<gtExample>
@@ -450,7 +449,7 @@ BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt5 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmall [
 
 	<gtExample>
@@ -467,7 +466,7 @@ BlCollectionRopeIteratorTest >> testSmall [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallNextAt0 [
 
 	<gtExample>
@@ -484,7 +483,7 @@ BlCollectionRopeIteratorTest >> testSmallNextAt0 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallNextAt1 [
 
 	<gtExample>
@@ -501,7 +500,7 @@ BlCollectionRopeIteratorTest >> testSmallNextAt1 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallNextAt2 [
 
 	<gtExample>
@@ -518,7 +517,7 @@ BlCollectionRopeIteratorTest >> testSmallNextAt2 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallNextAt3 [
 
 	<gtExample>
@@ -535,7 +534,7 @@ BlCollectionRopeIteratorTest >> testSmallNextAt3 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallNextAt4 [
 
 	<gtExample>
@@ -552,7 +551,7 @@ BlCollectionRopeIteratorTest >> testSmallNextAt4 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallNextAt5 [
 
 	<gtExample>
@@ -570,7 +569,7 @@ BlCollectionRopeIteratorTest >> testSmallNextAt5 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallNextSpanAt0 [
 
 	<gtExample>
@@ -584,7 +583,7 @@ BlCollectionRopeIteratorTest >> testSmallNextSpanAt0 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallNextSpanAt1 [
 
 	<gtExample>
@@ -598,7 +597,7 @@ BlCollectionRopeIteratorTest >> testSmallNextSpanAt1 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallNextSpanAt2 [
 
 	<gtExample>
@@ -612,7 +611,7 @@ BlCollectionRopeIteratorTest >> testSmallNextSpanAt2 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallNextSpanAt3 [
 
 	<gtExample>
@@ -626,7 +625,7 @@ BlCollectionRopeIteratorTest >> testSmallNextSpanAt3 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallNextSpanAt4 [
 
 	<gtExample>
@@ -640,7 +639,7 @@ BlCollectionRopeIteratorTest >> testSmallNextSpanAt4 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallNextSpanAt5 [
 
 	<gtExample>
@@ -658,7 +657,7 @@ BlCollectionRopeIteratorTest >> testSmallNextSpanAt5 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallPeekAt0 [
 
 	<gtExample>
@@ -675,7 +674,7 @@ BlCollectionRopeIteratorTest >> testSmallPeekAt0 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallPeekAt1 [
 
 	<gtExample>
@@ -692,7 +691,7 @@ BlCollectionRopeIteratorTest >> testSmallPeekAt1 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallPeekAt2 [
 
 	<gtExample>
@@ -709,7 +708,7 @@ BlCollectionRopeIteratorTest >> testSmallPeekAt2 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallPeekAt3 [
 
 	<gtExample>
@@ -726,7 +725,7 @@ BlCollectionRopeIteratorTest >> testSmallPeekAt3 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallPeekAt4 [
 
 	<gtExample>
@@ -743,7 +742,7 @@ BlCollectionRopeIteratorTest >> testSmallPeekAt4 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallPeekAt5 [
 
 	<gtExample>
@@ -761,7 +760,7 @@ BlCollectionRopeIteratorTest >> testSmallPeekAt5 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallPreviousAt0 [
 
 	<gtExample>
@@ -779,7 +778,7 @@ BlCollectionRopeIteratorTest >> testSmallPreviousAt0 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallPreviousAt1 [
 
 	<gtExample>
@@ -796,7 +795,7 @@ BlCollectionRopeIteratorTest >> testSmallPreviousAt1 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallPreviousAt2 [
 
 	<gtExample>
@@ -813,7 +812,7 @@ BlCollectionRopeIteratorTest >> testSmallPreviousAt2 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallPreviousAt3 [
 
 	<gtExample>
@@ -830,7 +829,7 @@ BlCollectionRopeIteratorTest >> testSmallPreviousAt3 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallPreviousAt4 [
 
 	<gtExample>
@@ -847,7 +846,7 @@ BlCollectionRopeIteratorTest >> testSmallPreviousAt4 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallPreviousAt5 [
 
 	<gtExample>
@@ -864,7 +863,7 @@ BlCollectionRopeIteratorTest >> testSmallPreviousAt5 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallSkip0At0 [
 
 	<gtExample>
@@ -877,7 +876,7 @@ BlCollectionRopeIteratorTest >> testSmallSkip0At0 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallSkip1At0 [
 
 	<gtExample>
@@ -890,7 +889,7 @@ BlCollectionRopeIteratorTest >> testSmallSkip1At0 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallSkip2At0 [
 
 	<gtExample>
@@ -903,7 +902,7 @@ BlCollectionRopeIteratorTest >> testSmallSkip2At0 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallSkip3At0 [
 
 	<gtExample>
@@ -916,7 +915,7 @@ BlCollectionRopeIteratorTest >> testSmallSkip3At0 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallSkip4At0 [
 
 	<gtExample>
@@ -929,7 +928,7 @@ BlCollectionRopeIteratorTest >> testSmallSkip4At0 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallSkip5At0 [
 
 	<gtExample>
@@ -942,7 +941,7 @@ BlCollectionRopeIteratorTest >> testSmallSkip5At0 [
 	^ anIterator
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlCollectionRopeIteratorTest >> testSmallSkip6At0 [
 
 	<gtExample>

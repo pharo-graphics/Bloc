@@ -4,19 +4,17 @@ I am a special case of StandardWindow that is used as host window for bloc space
 I provide helper methods to be used by event handler and moprhic host space
 "
 Class {
-	#name : 'BlMorphicWindow',
-	#superclass : 'StandardWindow',
+	#name : #BlMorphicWindow,
+	#superclass : #StandardWindow,
 	#instVars : [
 		'hostSpace',
 		'preventResize',
 		'spaceHostMorph'
 	],
-	#category : 'BlocHost-Morphic-Host - Window',
-	#package : 'BlocHost-Morphic',
-	#tag : 'Host - Window'
+	#category : #'BlocHost-Morphic-Host - Window'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWindow >> borderless: aBoolean [
 	"Make window borderless if true is given"
 	
@@ -31,19 +29,19 @@ BlMorphicWindow >> borderless: aBoolean [
 		]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWindow >> center [
 	"Center this window in #currentWorld. There is no effect before the window is open."
 
 	self position: self currentWorld extent - self extent // 2
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWindow >> form: aForm [
 	spaceHostMorph form: aForm
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWindow >> fullsize: aBoolean [
 	"Make window borderless if true is given"
 	
@@ -56,19 +54,19 @@ BlMorphicWindow >> fullsize: aBoolean [
 		]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWindow >> hostSpace [
 	^ hostSpace
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWindow >> hostSpace: aHostSpace [
 	
 	hostSpace := aHostSpace.
 	spaceHostMorph hostSpace: aHostSpace
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlMorphicWindow >> initialize [
 	super initialize.
 
@@ -77,7 +75,7 @@ BlMorphicWindow >> initialize [
 	preventResize := false
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlMorphicWindow >> resizeDuring: aBlock [
 	
 	preventResize
@@ -87,7 +85,7 @@ BlMorphicWindow >> resizeDuring: aBlock [
 	aBlock ensure: [ preventResize := false ]
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlMorphicWindow >> spaceExtent [
 	| aDelta |
 	
@@ -96,7 +94,7 @@ BlMorphicWindow >> spaceExtent [
 	^ self extent - aDelta
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlMorphicWindow >> spaceExtent: anExtent [
 
 	self resizeDuring: [
@@ -108,7 +106,7 @@ BlMorphicWindow >> spaceExtent: anExtent [
 				self extent: anExtent + aDelta ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWindow >> spaceHostMorph [
 	^ spaceHostMorph
 ]

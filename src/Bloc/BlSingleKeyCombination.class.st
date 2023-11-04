@@ -29,22 +29,20 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : 'BlSingleKeyCombination',
-	#superclass : 'BlKeyCombination',
+	#name : #BlSingleKeyCombination,
+	#superclass : #BlKeyCombination,
 	#instVars : [
 		'key'
 	],
-	#category : 'Bloc-Events-KeyBinding',
-	#package : 'Bloc',
-	#tag : 'Events-KeyBinding'
+	#category : #'Bloc-Events-KeyBinding'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSingleKeyCombination class >> key: aKey [
 	^ self new key: aKey
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlSingleKeyCombination >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -55,61 +53,61 @@ BlSingleKeyCombination >> = anObject [
 	^ key = anObject key
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 BlSingleKeyCombination >> accept: aKeyCombinationVisitor [
 	^ aKeyCombinationVisitor visitKey: self
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlSingleKeyCombination >> asBufferKeys [
 	^ { key } asSet
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlSingleKeyCombination >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ key hash
 ]
 
-{ #category : 'key matching' }
+{ #category : #'key matching' }
 BlSingleKeyCombination >> includes: aKey [
 	^ self key = aKey
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSingleKeyCombination >> key [
 	<return: #KeyboardKey>
 
 	^ key
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSingleKeyCombination >> key: aKey [
 
 	key := aKey
 ]
 
-{ #category : 'key matching' }
+{ #category : #'key matching' }
 BlSingleKeyCombination >> match: aKeyboardBuffer [
 	<return: #Number>
 
 	^ (self matches: aKeyboardBuffer) asBit
 ]
 
-{ #category : 'key matching' }
+{ #category : #'key matching' }
 BlSingleKeyCombination >> matches: aKeyboardBuffer [
 	<return: #Boolean>
 
 	^ aKeyboardBuffer hasExactlyAll: { self key }
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlSingleKeyCombination >> printOn: aStream [
 	aStream nextPutAll: self key name asString
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlSingleKeyCombination >> storeOn: aStream [
 	
 	aStream

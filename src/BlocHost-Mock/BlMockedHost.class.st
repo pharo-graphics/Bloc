@@ -3,41 +3,39 @@ I am a mocked host that looks like real but does not create any windows
 
 "
 Class {
-	#name : 'BlMockedHost',
-	#superclass : 'BlHost',
+	#name : #BlMockedHost,
+	#superclass : #BlHost,
 	#classVars : [
 		'isRunning'
 	],
-	#category : 'BlocHost-Mock-Host',
-	#package : 'BlocHost-Mock',
-	#tag : 'Host'
+	#category : #'BlocHost-Mock-Host'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlMockedHost class >> initialize [
 
 	isRunning := false
 ]
 
-{ #category : 'api - lifecycle' }
+{ #category : #'api - lifecycle' }
 BlMockedHost class >> isRunning [
 
 	^ isRunning
 ]
 
-{ #category : 'api - lifecycle' }
+{ #category : #'api - lifecycle' }
 BlMockedHost class >> start [
 
 	isRunning := true
 ]
 
-{ #category : 'api - lifecycle' }
+{ #category : #'api - lifecycle' }
 BlMockedHost class >> stop [
 
 	isRunning := false
 ]
 
-{ #category : 'host - api' }
+{ #category : #'host - api' }
 BlMockedHost >> createHostSpaceFor: aSpace [
 	| aHostSpace |
 
@@ -48,7 +46,7 @@ BlMockedHost >> createHostSpaceFor: aSpace [
 	aSpace hostSpace: aHostSpace
 ]
 
-{ #category : 'host - api' }
+{ #category : #'host - api' }
 BlMockedHost >> destroyHostSpaceFor: aSpace [
 	"Destroys host space window of a given space.
 	Note: in most cases under 'destroy host space' we mean 'close host window' and unregister it"

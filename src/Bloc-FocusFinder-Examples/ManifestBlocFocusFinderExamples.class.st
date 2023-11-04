@@ -3,9 +3,7 @@ I store metadata for this package. These meta data are used by other tools such 
 
 "
 Class {
-	#name : 'ManifestBlocFocusFinderExamples',
-	#superclass : 'PackageManifest',
-	#category : 'Bloc-FocusFinder-Examples-Manifest',
-	#package : 'Bloc-FocusFinder-Examples',
-	#tag : 'Manifest'
+	#name : #ManifestBlocFocusFinderExamples,
+	#superclass : #PackageManifest,
+	#category : #'Bloc-FocusFinder-Examples-Manifest'
 }

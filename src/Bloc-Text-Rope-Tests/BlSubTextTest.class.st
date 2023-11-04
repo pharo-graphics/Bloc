@@ -1,17 +1,16 @@
 Class {
-	#name : 'BlSubTextTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Text-Rope-Tests',
-	#package : 'Bloc-Text-Rope-Tests'
+	#name : #BlSubTextTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Text-Rope-Tests'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 BlSubTextTest >> helloWorldText [
 
 	^ BlRopedText string: 'HelloWorld'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSubTextTest >> testFromOneToZeroRepresentsEmptyText [
 
 	| aSubText |
@@ -25,7 +24,7 @@ BlSubTextTest >> testFromOneToZeroRepresentsEmptyText [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSubTextTest >> testFromZeroToZeroSignalsTextOutOfBoundsError [
 	"Detect it's not allowed"
 
@@ -39,7 +38,7 @@ BlSubTextTest >> testFromZeroToZeroSignalsTextOutOfBoundsError [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSubTextTest >> testInsertAtZero [
 
 	| aSubText |
@@ -55,7 +54,7 @@ BlSubTextTest >> testInsertAtZero [
 	self assert: aSubText size equals: 1.
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSubTextTest >> testInsertOutOfBoundsSignalsError [
 
 	| aSubText anError |
@@ -76,7 +75,7 @@ BlSubTextTest >> testInsertOutOfBoundsSignalsError [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSubTextTest >> testUtf8Encoded [
 
 	| aNumber aString aRopedText |

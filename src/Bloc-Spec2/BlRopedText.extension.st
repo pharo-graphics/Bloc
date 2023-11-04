@@ -1,6 +1,6 @@
-Extension { #name : 'BlRopedText' }
+Extension { #name : #BlRopedText }
 
-{ #category : '*Bloc-Spec2' }
+{ #category : #'*Bloc-Spec2' }
 BlRopedText >> inspectionForRope: aBuilder [
 	<inspectorPresentationOrder: 2 title: 'Rope tree'>
 	

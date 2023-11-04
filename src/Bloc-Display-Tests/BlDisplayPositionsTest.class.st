@@ -3,13 +3,12 @@ I have been automatically converted and probably manually tweaked from FensterLo
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlDisplayPositionsTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Display-Tests',
-	#package : 'Bloc-Display-Tests'
+	#name : #BlDisplayPositionsTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Display-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlDisplayPositionsTest >> testAsLogicalFromPhysical [
 
 	| aLogicalPosition |
@@ -19,7 +18,7 @@ BlDisplayPositionsTest >> testAsLogicalFromPhysical [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlDisplayPositionsTest >> testAsPhysical [
 
 	| aLogicalPosition aPhysicalPosition |
@@ -29,7 +28,7 @@ BlDisplayPositionsTest >> testAsPhysical [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlDisplayPositionsTest >> testDefault [
 
 	| aPosition |
@@ -40,7 +39,7 @@ BlDisplayPositionsTest >> testDefault [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlDisplayPositionsTest >> testFromPoint [
 
 	| aPosition aPoint |
@@ -53,7 +52,7 @@ BlDisplayPositionsTest >> testFromPoint [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlDisplayPositionsTest >> testPointAsLogicalPosition [
 	
 	| logical |
@@ -64,7 +63,7 @@ BlDisplayPositionsTest >> testPointAsLogicalPosition [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlDisplayPositionsTest >> testPointAsLogicalSize [
 	
 	| logical |
@@ -75,7 +74,7 @@ BlDisplayPositionsTest >> testPointAsLogicalSize [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlDisplayPositionsTest >> testPointAsPhysicalPosition [
 	
 	| logical |
@@ -86,7 +85,7 @@ BlDisplayPositionsTest >> testPointAsPhysicalPosition [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlDisplayPositionsTest >> testPointAsPhysicalSize [
 	
 	| logical |

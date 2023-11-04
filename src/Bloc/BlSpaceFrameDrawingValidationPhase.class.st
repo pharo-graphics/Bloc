@@ -1,17 +1,15 @@
 Class {
-	#name : 'BlSpaceFrameDrawingValidationPhase',
-	#superclass : 'BlSpaceFramePhase',
-	#category : 'Bloc-Space - Frame',
-	#package : 'Bloc',
-	#tag : 'Space - Frame'
+	#name : #BlSpaceFrameDrawingValidationPhase,
+	#superclass : #BlSpaceFramePhase,
+	#category : #'Bloc-Space - Frame'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSpaceFrameDrawingValidationPhase >> name [
 	^ 'Drawing validation'
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlSpaceFrameDrawingValidationPhase >> runOn: aSpace [
 
 	aSpace hasHostSpace

@@ -2,27 +2,25 @@
 A BlSvgExamplesTest is a test class for testing the behavior of BlSvgExamples
 "
 Class {
-	#name : 'BlSvgExamplesTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-SVG-Tests-Examples',
-	#package : 'Bloc-SVG-Tests',
-	#tag : 'Examples'
+	#name : #BlSvgExamplesTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-SVG-Tests-Examples'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSvgExamplesTest >> exampleSelectors [
 
 	^ (BlSvgExamples selectorsInProtocol: 'svg - converter') 
 		  copyWithoutAll: self exampleSelectorsWithErrors
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSvgExamplesTest >> exampleSelectorsWithErrors [
 	
 	^ #( pathTree transformations)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSvgExamplesTest >> testAllExamples [
 
 	| selectors exampleFactory |
@@ -41,7 +39,7 @@ BlSvgExamplesTest >> testAllExamples [
 "
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSvgExamplesTest >> testExcludedExamplesRaiseError [
 
 	| selectors exampleFactory |

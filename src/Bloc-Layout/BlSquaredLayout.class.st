@@ -1,37 +1,35 @@
 Class {
-	#name : 'BlSquaredLayout',
-	#superclass : 'BlLayout',
+	#name : #BlSquaredLayout,
+	#superclass : #BlLayout,
 	#instVars : [
 		'layout',
 		'isTight'
 	],
-	#category : 'Bloc-Layout-Squared',
-	#package : 'Bloc-Layout',
-	#tag : 'Squared'
+	#category : #'Bloc-Layout-Squared'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSquaredLayout class >> on: aBlLayout [
 	<return: #BlSquaredLayout>
 
 	^ self new layout: aBlLayout
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSquaredLayout >> beLoose [
 	"Will use the max(width, height) to compute the extent"
 
 	isTight := false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSquaredLayout >> beTight [
 	"Will use the min(width, height) to compute the extent"
 
 	isTight := true
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlSquaredLayout >> initialize [
 	super initialize.
 	
@@ -39,32 +37,32 @@ BlSquaredLayout >> initialize [
 	isTight := false "be loose by default"
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlSquaredLayout >> isLoose [
 	^ self isTight not
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlSquaredLayout >> isTight [
 	^ isTight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSquaredLayout >> layout [
 	^ layout
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSquaredLayout >> layout: aLayout [
 	layout := aLayout
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlSquaredLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	self layout layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlSquaredLayout >> measure: anElement with: anExtentSpec [
 	| aMeasuredExtent anExtent |
 	

@@ -1,16 +1,15 @@
 Class {
-	#name : 'BlTextElementMeasurementExamples',
-	#superclass : 'BlExampleTest',
-	#category : 'Bloc-Text-Alexandrie-Examples',
-	#package : 'Bloc-Text-Alexandrie-Examples'
+	#name : #BlTextElementMeasurementExamples,
+	#superclass : #BlExampleTest,
+	#category : #'Bloc-Text-Alexandrie-Examples'
 }
 
-{ #category : 'font - metrics' }
+{ #category : #'font - metrics' }
 BlTextElementMeasurementExamples >> ascent [
 	^ -50
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 BlTextElementMeasurementExamples >> customMeasurer [
 	<gtExample>
 	
@@ -21,29 +20,29 @@ BlTextElementMeasurementExamples >> customMeasurer [
 		glyphWidth: self glyphWidth
 ]
 
-{ #category : 'font - metrics' }
+{ #category : #'font - metrics' }
 BlTextElementMeasurementExamples >> descent [
 	^ 50
 ]
 
-{ #category : 'font - metrics' }
+{ #category : #'font - metrics' }
 BlTextElementMeasurementExamples >> glyphHeight [
 	^ self ascent abs + self descent - 20
 ]
 
-{ #category : 'font - metrics' }
+{ #category : #'font - metrics' }
 BlTextElementMeasurementExamples >> glyphWidth [
 	^ 60
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlTextElementMeasurementExamples >> helloWorldText [
 	<gtExample>
 
 	^ 'Hello world' asRopedText fontSize: 80
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlTextElementMeasurementExamples >> textElement [
 	<gtExample>
 	
@@ -53,7 +52,7 @@ BlTextElementMeasurementExamples >> textElement [
 		text: self helloWorldText
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 BlTextElementMeasurementExamples >> textElementWithCustomMeasurer [
 	<gtExample>
 	
@@ -61,7 +60,7 @@ BlTextElementMeasurementExamples >> textElementWithCustomMeasurer [
 		measurer: self customMeasurer
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 BlTextElementMeasurementExamples >> unspecifiedExtent [
 	<gtExample>
 	| aTextElement |
@@ -75,7 +74,7 @@ BlTextElementMeasurementExamples >> unspecifiedExtent [
 	^ aTextElement
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 BlTextElementMeasurementExamples >> unspecifiedExtentShouldRemeasure [
 	<gtExample>
 	| aTextElement |
@@ -87,7 +86,7 @@ BlTextElementMeasurementExamples >> unspecifiedExtentShouldRemeasure [
 	^ aTextElement
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxHeight [
 	<gtExample>
 	| aTextElement |
@@ -102,7 +101,7 @@ BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxHeight [
 	^ aTextElement
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxHeightShouldRemeasure [
 	<gtExample>
 	| aTextElement |
@@ -114,7 +113,7 @@ BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxHeightShouldRemeasur
 	^ aTextElement
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxWidth [
 	<gtExample>
 	| aTextElement |
@@ -129,7 +128,7 @@ BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxWidth [
 	^ aTextElement
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 BlTextElementMeasurementExamples >> unspecifiedExtentWithMaxWidthShouldRemeasure [
 	<gtExample>
 	| aTextElement |

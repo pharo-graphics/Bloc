@@ -1,1 +1,1 @@
-Package { #name : 'Bloc-Alexandrie-Exporter' }
+Package { #name : #'Bloc-Alexandrie-Exporter' }

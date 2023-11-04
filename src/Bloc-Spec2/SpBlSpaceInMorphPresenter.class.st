@@ -6,17 +6,16 @@ I provide a space that is already shown using a `BlMorphicHost` to embed it in a
 See class-side for an example.
 "
 Class {
-	#name : 'SpBlSpaceInMorphPresenter',
-	#superclass : 'SpPresenter',
+	#name : #SpBlSpaceInMorphPresenter,
+	#superclass : #SpPresenter,
 	#instVars : [
 		'space',
 		'morphPresenter'
 	],
-	#category : 'Bloc-Spec2',
-	#package : 'Bloc-Spec2'
+	#category : #'Bloc-Spec2'
 }
 
-{ #category : 'layout' }
+{ #category : #layout }
 SpBlSpaceInMorphPresenter class >> defaultLayout [
 
 	^ SpBoxLayout newTopToBottom
@@ -24,7 +23,7 @@ SpBlSpaceInMorphPresenter class >> defaultLayout [
 		yourself
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 SpBlSpaceInMorphPresenter class >> example [
 
 	| spacePresenter aSpace |
@@ -51,7 +50,7 @@ SpBlSpaceInMorphPresenter class >> example [
 	^ spacePresenter
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 SpBlSpaceInMorphPresenter >> initializePresenters [
 
 	super initializePresenters.
@@ -73,7 +72,7 @@ SpBlSpaceInMorphPresenter >> initializePresenters [
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 SpBlSpaceInMorphPresenter >> space [
 	"Answer a space ready to work."
 

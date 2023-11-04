@@ -1,18 +1,18 @@
-Extension { #name : 'OSWorldRenderer' }
+Extension { #name : #OSWorldRenderer }
 
-{ #category : '*BlocHost-Morphic' }
+{ #category : #'*BlocHost-Morphic' }
 OSWorldRenderer >> isTextInputActive [
 	"Check whether or not Unicode text input events are enabled"
 	^ osWindow isTextInputActive
 ]
 
-{ #category : '*BlocHost-Morphic' }
+{ #category : #'*BlocHost-Morphic' }
 OSWorldRenderer >> startTextInput [
 	
 	osWindow startTextInput
 ]
 
-{ #category : '*BlocHost-Morphic' }
+{ #category : #'*BlocHost-Morphic' }
 OSWorldRenderer >> startTextInputAtRectangle: aRectangle [
 
 	"Used by a morph to request text edition capabilities.
@@ -26,7 +26,7 @@ OSWorldRenderer >> startTextInputAtRectangle: aRectangle [
 	osWindow startTextInputAtRectangle: aRectangle
 ]
 
-{ #category : '*BlocHost-Morphic' }
+{ #category : #'*BlocHost-Morphic' }
 OSWorldRenderer >> stopTextInput [
 	
 	osWindow stopTextInput

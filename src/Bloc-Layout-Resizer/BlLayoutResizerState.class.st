@@ -1,11 +1,10 @@
 Class {
-	#name : 'BlLayoutResizerState',
-	#superclass : 'BlElementUniqueState',
-	#category : 'Bloc-Layout-Resizer',
-	#package : 'Bloc-Layout-Resizer'
+	#name : #BlLayoutResizerState,
+	#superclass : #BlElementUniqueState,
+	#category : #'Bloc-Layout-Resizer'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutResizerState >> priority [
 	^ UserPriority
 ]

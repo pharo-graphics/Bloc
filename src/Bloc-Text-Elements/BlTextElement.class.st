@@ -7,8 +7,8 @@ I support multiple measurement strategies. See examples for more detailed explan
 
 "
 Class {
-	#name : 'BlTextElement',
-	#superclass : 'BlElement',
+	#name : #BlTextElement,
+	#superclass : #BlElement,
 	#instVars : [
 		'text',
 		'paragraph',
@@ -25,16 +25,15 @@ Class {
 		'DefaultText',
 		'SelectionMatchParent'
 	],
-	#category : 'Bloc-Text-Elements',
-	#package : 'Bloc-Text-Elements'
+	#category : #'Bloc-Text-Elements'
 }
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BlTextElement class >> initialize [ 
 	DefaultText := 'Text' asRopedText readonly
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextElement class >> selectionColor [
 
 	^ Color
@@ -44,17 +43,17 @@ BlTextElement class >> selectionColor [
 		  alpha: 1.0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextElement class >> selectionMatchParent [
 	^ SelectionMatchParent ifNil: [ SelectionMatchParent := false ] 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextElement class >> selectionMatchParent: aBoolean [
 	SelectionMatchParent := aBoolean
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlTextElement class >> text: aBlText [
 
 	^ self new
@@ -62,7 +61,7 @@ BlTextElement class >> text: aBlText [
 		  yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextElement >> baseline [
 
 	self
@@ -74,32 +73,32 @@ BlTextElement >> baseline [
 	^ self baselineMeasurer
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextElement >> baselineMeasurer [
 	
 	^ baselineMeasurer
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextElement >> baselineMeasurer: aBlTextParagraphBaselineMeasurer [
 
 	baselineMeasurer := aBlTextParagraphBaselineMeasurer.
 	self textChanged
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlTextElement >> baselineOffset [
 	^ paragraph
 		ifNotNil: [ paragraph baseline y + self padding top ]
 		ifNil: [ 0 ]
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlTextElement >> basicMeasureParagraph: aBlTextParagraph [
 	measurer measureTextParagraph: aBlTextParagraph of: self
 ]
 
-{ #category : 'paragraph - geometry' }
+{ #category : #'paragraph - geometry' }
 BlTextElement >> characterBoundsAtIndex: aLocalIndex [
 
 	| startSpan startPos originIdx endPos endSpan cornerIdx extentToUse line cornerY origin |
@@ -117,7 +116,7 @@ BlTextElement >> characterBoundsAtIndex: aLocalIndex [
 	^ startPos x @ origin y corner: endPos x @ extentToUse y
 ]
 
-{ #category : 'paragraph - geometry' }
+{ #category : #'paragraph - geometry' }
 BlTextElement >> characterWidthAtIndex: aLocalIndex [
 
 	| startSpan startPos originIdx endPos endSpan cornerIdx  |
@@ -131,7 +130,7 @@ BlTextElement >> characterWidthAtIndex: aLocalIndex [
 	^ endPos x - startPos x 
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlTextElement >> computeMaxHeight: anExtentMeasurementSpec [
 	<return: #Number>
 	| aMaxHeight aHeightSpec aPadding |
@@ -148,7 +147,7 @@ BlTextElement >> computeMaxHeight: anExtentMeasurementSpec [
 	^ aMaxHeight
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlTextElement >> computeMaxWidth: anExtentMeasurementSpec [
 	<return: #Number>
 	| aMaxWidth aWidthSpec aPadding |
@@ -166,7 +165,7 @@ BlTextElement >> computeMaxWidth: anExtentMeasurementSpec [
 	^ aMaxWidth
 ]
 
-{ #category : 'api - font size' }
+{ #category : #'api - font size' }
 BlTextElement >> defaultFontSize: aNumber [	
 	defaultFontSize = aNumber
 		ifTrue: [ ^ self ].
@@ -177,18 +176,18 @@ BlTextElement >> defaultFontSize: aNumber [
 	self textChanged
 ]
 
-{ #category : 'api - highlighting' }
+{ #category : #'api - highlighting' }
 BlTextElement >> defaultHighlightCategory [
 
 	^ #default
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTextElement >> defaultMeasurer [
 	^ BlTextElementHostMeasurer uniqueInstance 
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTextElement >> defaultText [
 	"Return a default text I should be created with"
 	<return: #BlText>
@@ -196,7 +195,7 @@ BlTextElement >> defaultText [
 	^ DefaultText
 ]
 
-{ #category : 'selection - management' }
+{ #category : #'selection - management' }
 BlTextElement >> deselect: aFromIndex to: aToIndex [
 
 	self selection
@@ -206,19 +205,19 @@ BlTextElement >> deselect: aFromIndex to: aToIndex [
 	self invalidate
 ]
 
-{ #category : 'api - text' }
+{ #category : #'api - text' }
 BlTextElement >> editorMeasurement [
 
 	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance.
 	self baselineMeasurer: BlAscentLooseBaselineMeasurer uniqueInstance
 ]
 
-{ #category : 'selection - management' }
+{ #category : #'selection - management' }
 BlTextElement >> hasSelection [
 	^ self selection isNotEmpty
 ]
 
-{ #category : 'api - highlighting' }
+{ #category : #'api - highlighting' }
 BlTextElement >> highlightCategory: aHighlightCategorySymbol with: aParagraphHighlight [ 
 
 	| l |
@@ -227,7 +226,7 @@ BlTextElement >> highlightCategory: aHighlightCategorySymbol with: aParagraphHig
 	self invalidate
 ]
 
-{ #category : 'api - highlighting' }
+{ #category : #'api - highlighting' }
 BlTextElement >> highlightRectanglesOfCategory: aCategory [
 
 	^ Array streamContents: [ :stream | 
@@ -236,27 +235,27 @@ BlTextElement >> highlightRectanglesOfCategory: aCategory [
 				  (self selectionRectanglesFrom: eachHighlight selection) ] ]
 ]
 
-{ #category : 'api - highlighting' }
+{ #category : #'api - highlighting' }
 BlTextElement >> highlightWith: aParagraphHighlight [ 
 
 	self highlightCategory: self defaultHighlightCategory with: aParagraphHighlight. 
 
 ]
 
-{ #category : 'api - highlighting' }
+{ #category : #'api - highlighting' }
 BlTextElement >> highlights [
 
 	^ highlightsMap ifNotNil: [ :map | 
 		  Array streamContents: [ :stream | map valuesDo: [ :v | stream nextPutAll: v ] ] ]
 ]
 
-{ #category : 'api - highlighting' }
+{ #category : #'api - highlighting' }
 BlTextElement >> highlightsMap [
 
 	^ highlightsMap ifNil: [ highlightsMap := IdentityDictionary new ]
 ]
 
-{ #category : 'api - highlighting' }
+{ #category : #'api - highlighting' }
 BlTextElement >> highlightsOfCategory: aCategory [
 
 	^ highlightsMap
@@ -264,14 +263,14 @@ BlTextElement >> highlightsOfCategory: aCategory [
 		  ifNil: [ #(  ) ]
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlTextElement >> indexAtScreenPosition: aPoint [
 	<return: #Number>
 
 	^ self paragraph indexAtPosition: aPoint - self padding topLeft
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTextElement >> initialize [
 	super initialize.
 
@@ -291,12 +290,12 @@ BlTextElement >> initialize [
 	"self debug: true"
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlTextElement >> isTabulation [ 
 	^ text isNotEmpty and: [ text first = Character tab ]
 ]
 
-{ #category : 'api - text' }
+{ #category : #'api - text' }
 BlTextElement >> labelMeasurement [
 
 	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance.
@@ -310,7 +309,7 @@ BlTextElement >> labelMeasurement [
 	self baselineMeasurer: BlAscentTightBaselineMeasurer uniqueInstance
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlTextElement >> measureChildren: anExtentMeasurementSpec [
 
 	self layout measuredChildren: self do: [ :aChild |
@@ -339,7 +338,7 @@ BlTextElement >> measureChildren: anExtentMeasurementSpec [
 	self layout measureIgnored: self with: anExtentMeasurementSpec
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlTextElement >> measuredExtent: anExtentPoint [
 
 	super measuredExtent: (self isTabulation
@@ -347,44 +346,44 @@ BlTextElement >> measuredExtent: anExtentPoint [
 			 ifFalse: [ anExtentPoint ])
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextElement >> measurement [
 	<return: #BlTextElementMeasurementStrategy>
 
 	^ measurement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextElement >> measurement: aTextElementMeasurementStrategy [
 	measurement := aTextElementMeasurementStrategy.
 	self textChanged
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextElement >> measurer [
 	^ measurer
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextElement >> measurer: anObject [
 	measurer := anObject.
 	self textChanged
 ]
 
-{ #category : 'private - paragraph' }
+{ #category : #'private - paragraph' }
 BlTextElement >> newTextParagraph [
 	"Create a text paragraph used to measure and render text"
 
 	^ BlTextParagraph new 
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlTextElement >> offsetFromSegmentStart [
 	"computed and set during layout by AlbLineFlowLayout>>measure: with: "
 	^ self textFlow offsetFromSegmentStart
 ]
 
-{ #category : 'hooks - session' }
+{ #category : #'hooks - session' }
 BlTextElement >> onAddedToSceneGraph [
 	super onAddedToSceneGraph.
 	
@@ -395,7 +394,7 @@ BlTextElement >> onAddedToSceneGraph [
 		ifFalse: [ self textChanged ]
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlTextElement >> onMeasure: anExtentMeasurementSpec [
 
 	"Do the measuring job"
@@ -410,7 +409,7 @@ BlTextElement >> onMeasure: anExtentMeasurementSpec [
 	self measureChildren: anExtentMeasurementSpec
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlTextElement >> onParagraphMeasure: anExtentMeasurementSpec [
 
 	"If I am executed, it means that measurement specification changed.
@@ -432,7 +431,7 @@ BlTextElement >> onParagraphMeasure: anExtentMeasurementSpec [
 	"Pay attention that #onPostMeasure: must be sent after #onParagraphMeasure:"
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlTextElement >> onPostMeasure: anExtentMeasurementSpec [
 
 	"If I am executed it means that measurement specification changed.
@@ -463,20 +462,20 @@ BlTextElement >> onPostMeasure: anExtentMeasurementSpec [
 	self measuredExtent: (measuredWidth + padding width) @ (measuredHeight + padding height)
 ]
 
-{ #category : 'hooks - session' }
+{ #category : #'hooks - session' }
 BlTextElement >> onSessionChanged: aNewSession [
 	super onSessionChanged: aNewSession.
 	
 	self textChanged
 ]
 
-{ #category : 'private - paragraph' }
+{ #category : #'private - paragraph' }
 BlTextElement >> paragraph [
 
 	^ paragraph
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextElement >> rawParagraph [
 
 	self
@@ -488,24 +487,24 @@ BlTextElement >> rawParagraph [
 	^ self paragraph
 ]
 
-{ #category : 'private - paragraph' }
+{ #category : #'private - paragraph' }
 BlTextElement >> releaseParagraph [
 	paragraph := nil
 ]
 
-{ #category : 'api - font size' }
+{ #category : #'api - font size' }
 BlTextElement >> resetDefaultFontSize [
 	defaultFontSize := nil
 ]
 
-{ #category : 'api - highlighting' }
+{ #category : #'api - highlighting' }
 BlTextElement >> resetHighlightsMap [
 
 	highlightsMap := nil.
 	self invalidate
 ]
 
-{ #category : 'api - highlighting' }
+{ #category : #'api - highlighting' }
 BlTextElement >> resetHighlightsOfCategory: aHighlightCategorySymbol [
 
 	highlightsMap ifNil: [ ^self ].
@@ -513,7 +512,7 @@ BlTextElement >> resetHighlightsOfCategory: aHighlightCategorySymbol [
 	self invalidate
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlTextElement >> screenCornerAt: aTextIndex [
 
 	<return: #Point>
@@ -522,7 +521,7 @@ BlTextElement >> screenCornerAt: aTextIndex [
 	^ aScreenPosition x - self padding right @ (self height - self padding height)
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlTextElement >> screenOriginAt: aTextIndex [
 
 	<return: #Point>
@@ -531,7 +530,7 @@ BlTextElement >> screenOriginAt: aTextIndex [
 	^ aScreenPosition x + self padding left @ self padding height
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlTextElement >> screenPositionAt: aTextIndex [
 	<return: #Point>
 	| aScreenPosition |
@@ -540,7 +539,7 @@ BlTextElement >> screenPositionAt: aTextIndex [
 	^ (aScreenPosition x + self padding left) @ ((self height + self padding height) / 2.0)
 ]
 
-{ #category : 'selection - management' }
+{ #category : #'selection - management' }
 BlTextElement >> select: aFromIndex to: aToIndex [
 
 	self selection
@@ -550,7 +549,7 @@ BlTextElement >> select: aFromIndex to: aToIndex [
 	self invalidate
 ]
 
-{ #category : 'selection - management' }
+{ #category : #'selection - management' }
 BlTextElement >> selectNone [
 	self selection isEmpty
 		ifTrue: [ ^ self ].
@@ -558,7 +557,7 @@ BlTextElement >> selectNone [
 	self invalidate
 ]
 
-{ #category : 'selection - management' }
+{ #category : #'selection - management' }
 BlTextElement >> selectSet: aFromIndex to: aToIndex [
 
 	self selection
@@ -569,7 +568,7 @@ BlTextElement >> selectSet: aFromIndex to: aToIndex [
 	self invalidate
 ]
 
-{ #category : 'selection - management' }
+{ #category : #'selection - management' }
 BlTextElement >> selection [
 	<return: #BlSelection>
 	
@@ -580,13 +579,13 @@ BlTextElement >> selection [
 	^ selection
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlTextElement >> selectionRectangles [
 
 	^ self selectionRectanglesFrom: selection
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlTextElement >> selectionRectanglesFrom: aSelection [
 
 	| extentToUse origin cornerY |
@@ -617,7 +616,7 @@ BlTextElement >> selectionRectanglesFrom: aSelection [
 					   ifFalse: [ aSelectionStartPosition x @ origin y corner: aSelectionEndPosition x @ extentToUse y ]) ] ]
 ]
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 BlTextElement >> shouldMeasure: anExtentMeasurementSpec [
 
 	<return: #Boolean>
@@ -637,14 +636,14 @@ BlTextElement >> shouldMeasure: anExtentMeasurementSpec [
 	^ false
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlTextElement >> supportsBaseline [
 	<return: #Boolean>
 
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextElement >> text [
 	"Return the text I currently represent.
 	Note, that I work with immutable text (BlText), so if you want to change or style text
@@ -653,7 +652,7 @@ BlTextElement >> text [
 	^ text
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextElement >> text: aBlText [
 	"Change a text I represent"
 	text = aBlText ifTrue: [ ^ self ].
@@ -662,7 +661,7 @@ BlTextElement >> text: aBlText [
 	self textChanged
 ]
 
-{ #category : 'change reporting' }
+{ #category : #'change reporting' }
 BlTextElement >> textChanged [
 	"text layout is no more valid, remove it"
 	self releaseParagraph.
@@ -672,26 +671,26 @@ BlTextElement >> textChanged [
 	self invalidate
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextElement >> textDo: aBlock [
 	"Perform a given block with my current text model as an argument and invalidate text"
 	aBlock value: self text.
 	self textChanged
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlTextElement >> textFlow [
 	^ self constraints albumTextFlow.
 ]
 
-{ #category : 'api - text' }
+{ #category : #'api - text' }
 BlTextElement >> tightMeasurement [
 
 	self measurement: BlTextElementTightMeasurementStrategy uniqueInstance.
 	self baselineMeasurer: BlBoundsBaselineMeasurer uniqueInstance
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlTextElement >> tunedTabulationExtentFrom: anExtentPoint [
 
 	"Computed the size of a tabulation according to the tab-stop size."

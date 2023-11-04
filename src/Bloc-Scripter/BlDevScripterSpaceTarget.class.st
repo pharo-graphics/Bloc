@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlDevScripterSpaceTarget',
-	#superclass : 'BlDevScripterTarget',
-	#category : 'Bloc-Scripter-Scripter-Targets',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Targets'
+	#name : #BlDevScripterSpaceTarget,
+	#superclass : #BlDevScripterTarget,
+	#category : #'Bloc-Scripter-Scripter-Targets'
 }
 
-{ #category : 'searching' }
+{ #category : #searching }
 BlDevScripterSpaceTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 	self 
@@ -15,17 +13,17 @@ BlDevScripterSpaceTarget >> findTargetIn: anElement [
 	^ anElement space
 ]
 
-{ #category : 'searching' }
+{ #category : #searching }
 BlDevScripterSpaceTarget >> findTargetStartingInScripter: aScripter [
 	^ aScripter space
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterSpaceTarget >> identifier [
 	^ 'space'
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlDevScripterSpaceTarget >> printOn: aStream [
 	aStream nextPutAll: 'Scripter Space'.
 ]

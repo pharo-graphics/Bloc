@@ -7,13 +7,12 @@ How to:
 
 "
 Class {
-	#name : 'BlFocusExamples',
-	#superclass : 'BlExamplesTest',
-	#category : 'Bloc-FocusFinder-Examples',
-	#package : 'Bloc-FocusFinder-Examples'
+	#name : #BlFocusExamples,
+	#superclass : #BlExamplesTest,
+	#category : #'Bloc-FocusFinder-Examples'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlFocusExamples class >> composed [
 	<script: 'self composed'>
 	
@@ -22,7 +21,7 @@ BlFocusExamples class >> composed [
 		named: 'Composed'
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlFocusExamples class >> flow [
 	<script: 'self flow'>
 	
@@ -31,7 +30,7 @@ BlFocusExamples class >> flow [
 		named: 'Composed flow'
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlFocusExamples class >> grid [
 	<script: 'self grid'>
 	
@@ -40,7 +39,7 @@ BlFocusExamples class >> grid [
 		named: 'Grid'
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlFocusExamples class >> horizontal [
 	<script: 'self horizontal'>
 	
@@ -49,7 +48,7 @@ BlFocusExamples class >> horizontal [
 		named: 'Horizontal'
 ]
 
-{ #category : 'opening' }
+{ #category : #opening }
 BlFocusExamples class >> openInWindow: anElement named: aTitleString [
 	| aSpace |
 
@@ -66,7 +65,7 @@ BlFocusExamples class >> openInWindow: anElement named: aTitleString [
 	aSpace show
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlFocusExamples class >> vertical [
 	<script: 'self vertical'>
 	
@@ -75,7 +74,7 @@ BlFocusExamples class >> vertical [
 		named: 'Vertical'
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlFocusExamples >> cell [
 	<gtExample>
 	
@@ -89,7 +88,7 @@ BlFocusExamples >> cell [
 			anEvent target requestFocus ]
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlFocusExamples >> composed [
 	<gtExample>
 	| container children |
@@ -126,7 +125,7 @@ BlFocusExamples >> composed [
 	^ container
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlFocusExamples >> composedFlow [
 	<gtExample>
 	| container children |
@@ -162,7 +161,7 @@ BlFocusExamples >> composedFlow [
 	^ container
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlFocusExamples >> grid [
 	<gtExample>
 	| container children |
@@ -184,7 +183,7 @@ BlFocusExamples >> grid [
 	^ container
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlFocusExamples >> linearHorizontal [
 	<gtExample>
 	| container children |
@@ -204,7 +203,7 @@ BlFocusExamples >> linearHorizontal [
 	^ container
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlFocusExamples >> linearVertical [
 	<gtExample>
 	| container children |

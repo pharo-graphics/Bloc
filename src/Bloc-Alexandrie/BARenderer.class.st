@@ -4,32 +4,30 @@ I am a host-renderer to draw a space's elements on an `AeCanvas`.
 Both buffer and form host-spaces are supported.
 "
 Class {
-	#name : 'BARenderer',
-	#superclass : 'BlHostRenderer',
-	#category : 'Bloc-Alexandrie-Renderer',
-	#package : 'Bloc-Alexandrie',
-	#tag : 'Renderer'
+	#name : #BARenderer,
+	#superclass : #BlHostRenderer,
+	#category : #'Bloc-Alexandrie-Renderer'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BARenderer class >> label [
 
 	^ 'Alexandrie'
 ]
 
-{ #category : 'host - api' }
+{ #category : #'host - api' }
 BARenderer class >> newFormFrom: aBlElement [
 
 	^ aBlElement aeAsForm
 ]
 
-{ #category : 'host - api' }
+{ #category : #'host - api' }
 BARenderer class >> offscreenMeasureTextParagraph: aBlTextParagraph [
 
 	BAOffscreen instance measureTextParagraph: aBlTextParagraph
 ]
 
-{ #category : 'host - api' }
+{ #category : #'host - api' }
 BARenderer class >> write: aBlElement asPngTo: aFileReference [
 	"Draw the element into a PNG at the specified location."
 
@@ -39,19 +37,19 @@ BARenderer class >> write: aBlElement asPngTo: aFileReference [
 			export
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BARenderer >> createBufferSpaceRenderer [
 
 	^ BABufferSpaceRenderer new
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BARenderer >> createFormSpaceRenderer [
 
 	^ BAFormSpaceRenderer new
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BARenderer >> initializeForHostSpace: aBlHostSpace [
 	"Initialize this renderer for a given host space.
 	Please note, that it I be called multiple times"

@@ -2,14 +2,12 @@
 I contain examples of position change logging functionality
 "
 Class {
-	#name : 'BlElementPositionChangeTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Tests-Basic-Changes',
-	#package : 'Bloc-Tests',
-	#tag : 'Basic-Changes'
+	#name : #BlElementPositionChangeTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Tests-Basic-Changes'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementPositionChangeTest >> newElementTree [
 
 	| parent child subChild |
@@ -31,7 +29,7 @@ BlElementPositionChangeTest >> newElementTree [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementPositionChangeTest >> testParentPositionChanged [
 
 	| parent parentPositionChangedListener parentPositionInSpaceChangedListener parentPositionChanged parentPositionInSpaceChanged child childPositionChangedListener childPositionInSpaceChangedListener childPositionChanged childPositionInSpaceChanged subChild subChildPositionChangedListener subChildPositionInSpaceChangedListener subChildPositionChanged subChildPositionInSpaceChanged anUpdater |
@@ -130,7 +128,7 @@ BlElementPositionChangeTest >> testParentPositionChanged [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementPositionChangeTest >> testPositionChangeBoundsChange [
 
 	| element anUpdater |
@@ -174,7 +172,7 @@ BlElementPositionChangeTest >> testPositionChangeBoundsChange [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementPositionChangeTest >> testPositionChangeLoop [
 
 	| element positionChanged positionChangedListener positionInSpaceChanged positionInSpaceChangedListener anUpdater |

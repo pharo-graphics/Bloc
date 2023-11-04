@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlInfiniteScrollbarHelper',
-	#superclass : 'Object',
+	#name : #BlInfiniteScrollbarHelper,
+	#superclass : #Object,
 	#instVars : [
 		'state',
 		'layout',
@@ -10,12 +10,10 @@ Class {
 		'smoothScrollbarEnabled',
 		'isReversedLayout'
 	],
-	#category : 'Bloc-Infinite-Scroller',
-	#package : 'Bloc-Infinite',
-	#tag : 'Scroller'
+	#category : #'Bloc-Infinite-Scroller'
 }
 
-{ #category : 'scrollbar' }
+{ #category : #scrollbar }
 BlInfiniteScrollbarHelper >> computeScrollExtent [
 
 	| anExtent |
@@ -32,7 +30,7 @@ BlInfiniteScrollbarHelper >> computeScrollExtent [
 	^ orientation totalSpace min: anExtent
 ]
 
-{ #category : 'scrollbar' }
+{ #category : #scrollbar }
 BlInfiniteScrollbarHelper >> computeScrollOffset [
 
 	| startPosition endPosition minPosition maxPosition itemsBefore laidOutArea itemRange avgSizePerRow |
@@ -59,7 +57,7 @@ BlInfiniteScrollbarHelper >> computeScrollOffset [
 	^ (itemsBefore * avgSizePerRow) + (orientation startWithPadding - (orientation decoratedStart: startElement))
 ]
 
-{ #category : 'scrollbar' }
+{ #category : #scrollbar }
 BlInfiniteScrollbarHelper >> computeScrollRange [
 
 	| laidOutArea laidOutRange |
@@ -78,19 +76,19 @@ BlInfiniteScrollbarHelper >> computeScrollRange [
 	^ (laidOutArea / laidOutRange * state itemCount) asFloat
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteScrollbarHelper >> endElement [
 
 	^ endElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteScrollbarHelper >> endElement: aBlElement [
 
 	endElement := aBlElement
 ]
 
-{ #category : 'scrollbar' }
+{ #category : #scrollbar }
 BlInfiniteScrollbarHelper >> isEmpty [
 
 	^ layout childrenCount isZero
@@ -99,73 +97,73 @@ BlInfiniteScrollbarHelper >> isEmpty [
 				or: [ endElement isNil ] ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteScrollbarHelper >> isReversedLayout [
 
 	^ isReversedLayout
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteScrollbarHelper >> isReversedLayout: aBoolean [
 
 	isReversedLayout := aBoolean
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteScrollbarHelper >> layout [
 
 	^ layout
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteScrollbarHelper >> layout: aBlInfiniteLayout [
 
 	layout := aBlInfiniteLayout
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteScrollbarHelper >> orientation [
 
 	^ orientation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteScrollbarHelper >> orientation: anInfiniteLayoutOrientation [
 
 	orientation := anInfiniteLayoutOrientation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteScrollbarHelper >> smoothScrollbarEnabled [
 
 	^ smoothScrollbarEnabled
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteScrollbarHelper >> smoothScrollbarEnabled: aBoolean [
 
 	smoothScrollbarEnabled := aBoolean
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteScrollbarHelper >> startElement [
 
 	^ startElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteScrollbarHelper >> startElement: aBlElement [
 
 	startElement := aBlElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteScrollbarHelper >> state [
 
 	^ state
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteScrollbarHelper >> state: aBlInfiniteState [
 
 	state := aBlInfiniteState

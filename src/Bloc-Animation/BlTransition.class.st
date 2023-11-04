@@ -1,53 +1,51 @@
 Class {
-	#name : 'BlTransition',
-	#superclass : 'BlAnimation',
+	#name : #BlTransition,
+	#superclass : #BlAnimation,
 	#instVars : [
 		'from',
 		'to',
 		'stepAction'
 	],
-	#category : 'Bloc-Animation-Animation',
-	#package : 'Bloc-Animation',
-	#tag : 'Animation'
+	#category : #'Bloc-Animation-Animation'
 }
 
-{ #category : 'pulse' }
+{ #category : #pulse }
 BlTransition >> applyValue: aValue [
 
 	self stepAction valueWithEnoughArguments: { aValue. self target }
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTransition >> from [
 
 	^ from
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTransition >> from: anObject [
 
 	from := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTransition >> onStepDo: aBlock [
 
 	stepAction := aBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTransition >> stepAction [
 
 	^ stepAction
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTransition >> to [
 
 	^ to
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTransition >> to: anObject [
 
 	to := anObject

@@ -1,6 +1,6 @@
-Extension { #name : 'BlElementStates' }
+Extension { #name : #BlElementStates }
 
-{ #category : '*Bloc-Spec2' }
+{ #category : #'*Bloc-Spec2' }
 BlElementStates >> inspectionItems: aBuilder [
 	<inspectorPresentationOrder: 1 title: 'Items'>
 

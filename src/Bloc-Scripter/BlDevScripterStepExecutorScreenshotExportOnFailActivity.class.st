@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlDevScripterStepExecutorScreenshotExportOnFailActivity',
-	#superclass : 'BlDevScripterStepExecutorStepActivity',
-	#category : 'Bloc-Scripter-Scripter-Executors',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Executors'
+	#name : #BlDevScripterStepExecutorScreenshotExportOnFailActivity,
+	#superclass : #BlDevScripterStepExecutorStepActivity,
+	#category : #'Bloc-Scripter-Scripter-Executors'
 }
 
-{ #category : 'execution' }
+{ #category : #execution }
 BlDevScripterStepExecutorScreenshotExportOnFailActivity >> executePostPlayOnStep: aStep executor: anExecutor [
 	aStep state = BlDevScripterStepState success
 		ifTrue: [ ^ self ].

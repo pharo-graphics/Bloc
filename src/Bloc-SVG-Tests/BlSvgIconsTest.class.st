@@ -2,14 +2,12 @@
 A BlSvgIconsTest is a test class for testing the behavior of BlSvgIcons
 "
 Class {
-	#name : 'BlSvgIconsTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-SVG-Tests-Examples',
-	#package : 'Bloc-SVG-Tests',
-	#tag : 'Examples'
+	#name : #BlSvgIconsTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-SVG-Tests-Examples'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSvgIconsTest >> testAllIcons [
 
 	| selectors |

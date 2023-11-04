@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlScrollFlinger',
-	#superclass : 'BlTask',
+	#name : #BlScrollFlinger,
+	#superclass : #BlTask,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -13,12 +13,10 @@ Class {
 		'scrollable',
 		'shouldRequeueTask'
 	],
-	#category : 'Bloc-Infinite-Scrollable-Core',
-	#package : 'Bloc-Infinite',
-	#tag : 'Scrollable-Core'
+	#category : #'Bloc-Infinite-Scrollable-Core'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlScrollFlinger class >> on: aTOBlScrollable [
 
 	^ self basicNew
@@ -27,17 +25,17 @@ BlScrollFlinger class >> on: aTOBlScrollable [
 		yourself
 ]
 
-{ #category : 'private - state' }
+{ #category : #'private - state' }
 BlScrollFlinger >> beIdle [
 	self scrollable scrollState: #idle
 ]
 
-{ #category : 'private - state' }
+{ #category : #'private - state' }
 BlScrollFlinger >> beSettling [
 	self scrollable scrollState: #settling
 ]
 
-{ #category : 'private - physics' }
+{ #category : #'private - physics' }
 BlScrollFlinger >> computeScrollDurationFor: aVelocityPoint distance: aDeltaPoint [
 	<return: #Duration>
 
@@ -67,28 +65,28 @@ BlScrollFlinger >> computeScrollDurationFor: aVelocityPoint distance: aDeltaPoin
 	^ aDuration milliSeconds min: self maxScrollDuration
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScrollFlinger >> createScrollerFor: anInterpolator [
 	^ BlOvershootingScroller interpolator: interpolator
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScrollFlinger >> createState [
 	^ BlScrollFlingerState new
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScrollFlinger >> defaultInterpolator [
 	^ BlQuinticInterpolator default
 ]
 
-{ #category : 'private - scheduling' }
+{ #category : #'private - scheduling' }
 BlScrollFlinger >> disableRunOnAnimationRequests [
 	shouldRequeueTask := false.
 	eatRunOnAnimationRequest := true
 ]
 
-{ #category : 'private - physics' }
+{ #category : #'private - physics' }
 BlScrollFlinger >> distanceInfluenceForSnapDuration: aFactorNumber [
 	<return: #Number>
 	| f |
@@ -98,14 +96,14 @@ BlScrollFlinger >> distanceInfluenceForSnapDuration: aFactorNumber [
 	^ f sin
 ]
 
-{ #category : 'private - scheduling' }
+{ #category : #'private - scheduling' }
 BlScrollFlinger >> enableRunOnAnimationRequests [
 	eatRunOnAnimationRequest := false.
 	shouldRequeueTask
 		ifTrue: [ self postOnAnimation ]
 ]
 
-{ #category : 'api - scrolling' }
+{ #category : #'api - scrolling' }
 BlScrollFlinger >> flingBy: aVelocityPoint [
 	"Positive velocity means that the finger/cursor is moving down the screen, which means we want to scroll towards the top.
 	Initial velocity is given in points/second"
@@ -124,7 +122,7 @@ BlScrollFlinger >> flingBy: aVelocityPoint [
 	self postOnAnimation
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScrollFlinger >> initialize [
 	super initialize.
 	
@@ -136,7 +134,7 @@ BlScrollFlinger >> initialize [
 	shouldRequeueTask := false.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScrollFlinger >> initializeWith: aTOBlScrollable [
 
 	self
@@ -146,66 +144,66 @@ BlScrollFlinger >> initializeWith: aTOBlScrollable [
 	scrollable := aTOBlScrollable
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlinger >> interpolator [
 	<return: #BlInterpolator>
 	
 	^ interpolator
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BlScrollFlinger >> isIdle [
 	<return: #Boolean>
 
 	^ self scrollable scrollState = #idle
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlinger >> lastFlingPosition [
 	<return: #Point>
 	
 	^ lastFlingX @ lastFlingY
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScrollFlinger >> maxScrollDuration [
 	<return: #Duration>
 
 	^ 2 seconds
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlScrollFlinger >> onEnqueued: aBlSpace [
 	super onEnqueued: aBlSpace.
 	
 	self scroller time: aBlSpace time
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlScrollFlinger >> onFinished [
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlScrollFlinger >> onInitialized [
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlScrollFlinger >> onLayoutScrolled [
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlScrollFlinger >> onNotFinished [
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlScrollFlinger >> onPrepareToRun [
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlScrollFlinger >> onSmoothScrolled [
 ]
 
-{ #category : 'scheduling' }
+{ #category : #scheduling }
 BlScrollFlinger >> postOnAnimation [
 	self
 		assert: [ scrollable isNotNil ]
@@ -228,21 +226,21 @@ BlScrollFlinger >> postOnAnimation [
 									self scrollable enqueueTask: self ] ] ] ].
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlScrollFlinger >> pulse [
 	"To work with animation manager"
 
 	self run
 ]
 
-{ #category : 'private - testing' }
+{ #category : #'private - testing' }
 BlScrollFlinger >> requeueTaskAfterExecution [
 	"Answer a boolean indicating whether the receiver should be requeued after execution."
 
 	^ shouldRequeueTask
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlScrollFlinger >> run [
 	| aScroller aSmoothScroller |
 		
@@ -284,7 +282,7 @@ BlScrollFlinger >> run [
 	self enableRunOnAnimationRequests
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlScrollFlinger >> runFinalizeOn: anOverScroller with: aState [
 	| fullyConsumedHorizontal fullyConsumedVertical fullyConsumedAny |
 	
@@ -309,7 +307,7 @@ BlScrollFlinger >> runFinalizeOn: anOverScroller with: aState [
 			self onNotFinished ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlScrollFlinger >> runInitOn: anOverScroller [
 	<return: #BlScrollFlingerState>
 	| aState |
@@ -331,7 +329,7 @@ BlScrollFlinger >> runInitOn: anOverScroller [
 	^ aState
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlScrollFlinger >> runLayoutScrollWith: aState [
 	"A state is an instance of OBlScrollFlingerState"
 
@@ -346,7 +344,7 @@ BlScrollFlinger >> runLayoutScrollWith: aState [
 			aState overscrollY: aState dY - aState vResult ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlScrollFlinger >> runOverscrollOn: anOverScroller with: aState [
 	| aVelocity aVelocityX aVelocityY |
 	
@@ -392,7 +390,7 @@ BlScrollFlinger >> runOverscrollOn: anOverScroller with: aState [
 			ifTrue: [ anOverScroller finish ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlScrollFlinger >> runSmoothOn: aSmoothScroller with: aState [
 	| aDeltaPoint |
 
@@ -411,21 +409,21 @@ BlScrollFlinger >> runSmoothOn: aSmoothScroller with: aState [
 	aSmoothScroller scrollBy: aDeltaPoint
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlinger >> scrollable [
 	<return: #TBlScrollable>
 
 	^ scrollable
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlinger >> scroller [
 	<return: #BlOvershootingScroller>
 	
 	^ scroller
 ]
 
-{ #category : 'api - scrolling' }
+{ #category : #'api - scrolling' }
 BlScrollFlinger >> smoothScrollBy: aDeltaPoint [
 
 	self
@@ -433,7 +431,7 @@ BlScrollFlinger >> smoothScrollBy: aDeltaPoint [
 		velocity: 0@0
 ]
 
-{ #category : 'api - scrolling' }
+{ #category : #'api - scrolling' }
 BlScrollFlinger >> smoothScrollBy: aDeltaPoint during: aDuration [
 
 	self
@@ -442,7 +440,7 @@ BlScrollFlinger >> smoothScrollBy: aDeltaPoint during: aDuration [
 		with: self defaultInterpolator
 ]
 
-{ #category : 'api - scrolling' }
+{ #category : #'api - scrolling' }
 BlScrollFlinger >> smoothScrollBy: aDeltaPoint during: aDuration with: anInterpolator [
 
 	interpolator ~~ anInterpolator
@@ -458,7 +456,7 @@ BlScrollFlinger >> smoothScrollBy: aDeltaPoint during: aDuration with: anInterpo
 	self postOnAnimation
 ]
 
-{ #category : 'api - scrolling' }
+{ #category : #'api - scrolling' }
 BlScrollFlinger >> smoothScrollBy: aDeltaPoint velocity: aVelocityPoint [
 
 	self
@@ -466,12 +464,12 @@ BlScrollFlinger >> smoothScrollBy: aDeltaPoint velocity: aVelocityPoint [
 		during: (self computeScrollDurationFor: aVelocityPoint distance: aDeltaPoint)
 ]
 
-{ #category : 'api - scrolling' }
+{ #category : #'api - scrolling' }
 BlScrollFlinger >> stop [
 	scroller finish
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlScrollFlinger >> value [
 	"To support defer:"
 	self run

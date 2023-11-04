@@ -3,12 +3,11 @@ I store metadata for this package. These meta data are used by other tools such 
 
 "
 Class {
-	#name : 'ManifestBlocHostMock',
-	#superclass : 'PackageManifest',
-	#category : 'BlocHost-Mock',
-	#package : 'BlocHost-Mock'
+	#name : #ManifestBlocHostMock,
+	#superclass : #PackageManifest,
+	#category : #'BlocHost-Mock'
 }
 
-{ #category : 'meta-data' }
+{ #category : #'meta-data' }
 ManifestBlocHostMock class >> description [ ^ 'I contain a Mocked host used for testing purposes'
 ]

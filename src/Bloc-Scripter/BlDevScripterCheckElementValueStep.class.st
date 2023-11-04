@@ -1,33 +1,31 @@
 Class {
-	#name : 'BlDevScripterCheckElementValueStep',
-	#superclass : 'BlDevScripterCheckStep',
+	#name : #BlDevScripterCheckElementValueStep,
+	#superclass : #BlDevScripterCheckStep,
 	#instVars : [
 		'valueBlock',
 		'equalsBlock'
 	],
-	#category : 'Bloc-Scripter-Scripter-Steps',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCheckElementValueStep >> defaultLabel [
 	^ self valueBlock 
 		ifNotNil: [ :aBlock | aBlock printStringLimitedTo: 42 ] 
 		ifNil: [ self className ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCheckElementValueStep >> equalsBlock [
 	^ equalsBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCheckElementValueStep >> equalsBlock: anObject [
 	equalsBlock := anObject
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlDevScripterCheckElementValueStep >> playOn: aScripter [
 	| anElement |
 
@@ -43,12 +41,12 @@ BlDevScripterCheckElementValueStep >> playOn: aScripter [
 			ifFalse: [ self equalsBlock value ] )
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCheckElementValueStep >> valueBlock [
 	^ valueBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCheckElementValueStep >> valueBlock: anObject [
 	valueBlock := anObject
 ]

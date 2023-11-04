@@ -3,18 +3,17 @@ I have been automatically converted and probably manually tweaked from BlTransfo
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlTransformationAnimationTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Animation-Tests',
-	#package : 'Bloc-Animation-Tests'
+	#name : #BlTransformationAnimationTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Animation-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationAnimationTest >> animationElement [
 	^ self testAnimationElement
 ]
 
-{ #category : 'helpers' }
+{ #category : #helpers }
 BlTransformationAnimationTest >> assertNotStartedAnimation: animation [
 	self assert: animation isStarted not.
 	self assert: animation isRunning not.
@@ -22,37 +21,37 @@ BlTransformationAnimationTest >> assertNotStartedAnimation: animation [
 	self assert: animation loopCount equals: 0
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationAnimationTest >> containerElement [
 	^ self testContainerElement
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationAnimationTest >> containerWithOneElement [
 	<sampleInstance>	
 	^ self testContainerWithOneElement
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationAnimationTest >> linearTranslationAnimation [
 	<sampleInstance>	
 	^ self testLinearTranslationAnimation
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationAnimationTest >> linearTranslationAnimationWithDelayAndLoop [
 	<sampleInstance>
 	^ self testLinearTranslationAnimationWithDelayAndLoop
 	
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationAnimationTest >> linearTranslationAnimationWithDurationAndEasing [
 	<sampleInstance>
 	^ self testLinearTranslationAnimationWithDurationAndEasing
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationAnimationTest >> testAnimationElement [
 	<sampleInstance>
 	^ BlElement new
@@ -61,7 +60,7 @@ BlTransformationAnimationTest >> testAnimationElement [
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 5)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationAnimationTest >> testContainerElement [
 	<sampleInstance>
 	^ BlElement new
@@ -70,7 +69,7 @@ BlTransformationAnimationTest >> testContainerElement [
 		border: (BlBorder paint: Color gray width: 2)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationAnimationTest >> testContainerWithOneElement [
 	<sampleInstance>
 	| container element |
@@ -81,7 +80,7 @@ BlTransformationAnimationTest >> testContainerWithOneElement [
 	^ container
 ]
 
-{ #category : 'smoke tests' }
+{ #category : #'smoke tests' }
 BlTransformationAnimationTest >> testElementWithLinearTranslationAnimation [
 	<sampleInstance>
 	| container element animation |
@@ -94,7 +93,7 @@ BlTransformationAnimationTest >> testElementWithLinearTranslationAnimation [
 	^ container
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationAnimationTest >> testElementWithLinearTranslationAnimationWithDelayAndLoop [
 	<sampleInstance>
 	| container animation |
@@ -104,7 +103,7 @@ BlTransformationAnimationTest >> testElementWithLinearTranslationAnimationWithDe
 	^ container
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationAnimationTest >> testElementWithLinearTranslationAnimationWithDurationAndEasing [
 	<sampleInstance>
 	| container animation |
@@ -114,7 +113,7 @@ BlTransformationAnimationTest >> testElementWithLinearTranslationAnimationWithDu
 	^ container
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationAnimationTest >> testLinearTranslationAnimation [
 	<sampleInstance>
 	| animation |
@@ -130,7 +129,7 @@ BlTransformationAnimationTest >> testLinearTranslationAnimation [
 	^ animation
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationAnimationTest >> testLinearTranslationAnimationWithDelayAndLoop [
 	<sampleInstance>
 	| animation |
@@ -149,7 +148,7 @@ BlTransformationAnimationTest >> testLinearTranslationAnimationWithDelayAndLoop 
 	^ animation 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationAnimationTest >> testLinearTranslationAnimationWithDurationAndEasing [
 	<sampleInstance>
 	| animation |

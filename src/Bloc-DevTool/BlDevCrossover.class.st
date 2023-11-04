@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlDevCrossover',
-	#superclass : 'BlEventListener',
+	#name : #BlDevCrossover,
+	#superclass : #BlEventListener,
 	#instVars : [
 		'crossover',
 		'verticalLine',
@@ -9,12 +9,10 @@ Class {
 		'mousePositionText',
 		'targetElement'
 	],
-	#category : 'Bloc-DevTool-Tools',
-	#package : 'Bloc-DevTool',
-	#tag : 'Tools'
+	#category : #'Bloc-DevTool-Tools'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlDevCrossover class >> on: anElement [
 	| aCrossover |
 	
@@ -23,7 +21,7 @@ BlDevCrossover class >> on: anElement [
 	^ aCrossover
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevCrossover >> initialize [
 	super initialize.
 	
@@ -71,7 +69,7 @@ BlDevCrossover >> initialize [
 	crossover addChildren: { verticalLine . horizontalLine . topRightContainer }.
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BlDevCrossover >> mouseMoveEvent: anEvent [
 	verticalLine position: anEvent localPosition x @ 0.
 	horizontalLine position: 0 @ anEvent localPosition y.
@@ -83,7 +81,7 @@ BlDevCrossover >> mouseMoveEvent: anEvent [
 	mousePositionText text: (anEvent localPosition rounded asString asRopedText fontSize: 11; foreground: Color gray)
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BlDevCrossover >> onInstalledIn: anElement [
 
 	targetElement ifNotNil: [ targetElement removeEventFilter: self ].
@@ -91,7 +89,7 @@ BlDevCrossover >> onInstalledIn: anElement [
 	targetElement addChild: crossover
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BlDevCrossover >> onUninstalledIn: anElement [
 	crossover removeFromParent
 ]

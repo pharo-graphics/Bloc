@@ -1,7 +1,5 @@
 Class {
-	#name : 'BlZoomOutCursor',
-	#superclass : 'BlNamedCursor',
-	#category : 'Bloc-Space - Cursor',
-	#package : 'Bloc',
-	#tag : 'Space - Cursor'
+	#name : #BlZoomOutCursor,
+	#superclass : #BlNamedCursor,
+	#category : #'Bloc-Space - Cursor'
 }

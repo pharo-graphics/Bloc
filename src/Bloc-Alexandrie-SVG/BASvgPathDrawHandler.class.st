@@ -1,17 +1,16 @@
 Class {
-	#name : 'BASvgPathDrawHandler',
-	#superclass : 'Object',
+	#name : #BASvgPathDrawHandler,
+	#superclass : #Object,
 	#instVars : [
 		'cairoContext',
 		'lastControlPoint',
 		'currentPosition',
 		'isAbsolute'
 	],
-	#category : 'Bloc-Alexandrie-SVG',
-	#package : 'Bloc-Alexandrie-SVG'
+	#category : #'Bloc-Alexandrie-SVG'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BASvgPathDrawHandler class >> on: aeCairoContext [ 
 	
 	^ self basicNew
@@ -19,7 +18,7 @@ BASvgPathDrawHandler class >> on: aeCairoContext [
 		yourself
 ]
 
-{ #category : 'API' }
+{ #category : #API }
 BASvgPathDrawHandler >> closePath [
 	
 	cairoContext closePath.
@@ -28,7 +27,7 @@ BASvgPathDrawHandler >> closePath [
 	lastControlPoint := nil
 ]
 
-{ #category : 'API' }
+{ #category : #API }
 BASvgPathDrawHandler >> cubicBezierVia: p1 and: p2 to: aPoint [
 
 	| pt1 |
@@ -45,7 +44,7 @@ BASvgPathDrawHandler >> cubicBezierVia: p1 and: p2 to: aPoint [
 		y: currentPosition y
 ]
 
-{ #category : 'API' }
+{ #category : #API }
 BASvgPathDrawHandler >> ellipticalArcRotation: radiiPoint xAxisRotation: xAxisRotationInDegrees largeArcFlag: isLargeArc sweepFlag: isSweep to: toPosition [
 	"See: https://www.w3.org/TR/SVG2/paths.html#PathDataEllipticalArcCommands
 	Based on Athens-SVG-PathConverter"
@@ -137,7 +136,7 @@ BASvgPathDrawHandler >> ellipticalArcRotation: radiiPoint xAxisRotation: xAxisRo
 	currentPosition := absoluteToPosition
 ]
 
-{ #category : 'API' }
+{ #category : #API }
 BASvgPathDrawHandler >> horizontalLineTo: x [
 
 	self lineTo:
@@ -146,7 +145,7 @@ BASvgPathDrawHandler >> horizontalLineTo: x [
 			 ifFalse: [ x @ 0 ])
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BASvgPathDrawHandler >> initializeWith: aeCairoContext [ 
 	
 	self initialize.
@@ -156,13 +155,13 @@ BASvgPathDrawHandler >> initializeWith: aeCairoContext [
 	cairoContext := aeCairoContext
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BASvgPathDrawHandler >> isAbsolute: aBoolean [
 
 	isAbsolute := aBoolean
 ]
 
-{ #category : 'API' }
+{ #category : #API }
 BASvgPathDrawHandler >> lineTo: aPoint [
 
 	lastControlPoint := nil.
@@ -171,7 +170,7 @@ BASvgPathDrawHandler >> lineTo: aPoint [
 	cairoContext lineTo: currentPosition
 ]
 
-{ #category : 'API' }
+{ #category : #API }
 BASvgPathDrawHandler >> moveTo: aPoint [
 
 	lastControlPoint := nil.
@@ -180,7 +179,7 @@ BASvgPathDrawHandler >> moveTo: aPoint [
 	cairoContext moveTo: currentPosition
 ]
 
-{ #category : 'API' }
+{ #category : #API }
 BASvgPathDrawHandler >> quadraticBezierVia: p1 to: aPoint [
 
 	| startPoint |
@@ -194,7 +193,7 @@ BASvgPathDrawHandler >> quadraticBezierVia: p1 to: aPoint [
 		to: currentPosition
 ]
 
-{ #category : 'API' }
+{ #category : #API }
 BASvgPathDrawHandler >> smoothCubicBezierVia: p2 to: aPoint [
 
 	| startPoint firstControlPoint |
@@ -212,7 +211,7 @@ BASvgPathDrawHandler >> smoothCubicBezierVia: p2 to: aPoint [
 		to: currentPosition
 ]
 
-{ #category : 'API' }
+{ #category : #API }
 BASvgPathDrawHandler >> smoothQuadraticBezierTo: aPoint [
 
 	| startPoint |
@@ -229,7 +228,7 @@ BASvgPathDrawHandler >> smoothQuadraticBezierTo: aPoint [
 		to: currentPosition
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BASvgPathDrawHandler >> toAbsolute: aPoint [
 
 	^ isAbsolute
@@ -237,7 +236,7 @@ BASvgPathDrawHandler >> toAbsolute: aPoint [
 		  ifFalse: [ currentPosition + aPoint ]
 ]
 
-{ #category : 'API' }
+{ #category : #API }
 BASvgPathDrawHandler >> verticalLineTo: y [
 
 	self lineTo:

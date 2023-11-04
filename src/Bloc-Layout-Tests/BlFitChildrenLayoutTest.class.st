@@ -3,13 +3,12 @@ I have been automatically converted and probably manually tweaked from BlFitChil
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlFitChildrenLayoutTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#name : #BlFitChildrenLayoutTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'fixture' }
+{ #category : #fixture }
 BlFitChildrenLayoutTest >> graphNodesDataLayedOut [
 
 	^ {
@@ -115,7 +114,7 @@ BlFitChildrenLayoutTest >> graphNodesDataLayedOut [
 		  (720.5 @ 120.5 corner: 725.5 @ 125.5) }
 ]
 
-{ #category : 'fixture' }
+{ #category : #fixture }
 BlFitChildrenLayoutTest >> graphNodesDataRaw [
 
 	^ {
@@ -221,7 +220,7 @@ BlFitChildrenLayoutTest >> graphNodesDataRaw [
 		  (290.5 @ 110.5 corner: 295.5 @ 115.5) }
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFitChildrenLayoutTest >> testAtMostOneChildAt50x50Negated [
 
 	<sampleInstance>
@@ -253,7 +252,7 @@ BlFitChildrenLayoutTest >> testAtMostOneChildAt50x50Negated [
 	^ aParentNode
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFitChildrenLayoutTest >> testExactOneChildAt50x50Negated [
 
 	<sampleInstance>
@@ -285,7 +284,7 @@ BlFitChildrenLayoutTest >> testExactOneChildAt50x50Negated [
 	^ aParentNode
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFitChildrenLayoutTest >> testFitContentGraph [
 
 	<sampleInstance>
@@ -314,7 +313,7 @@ BlFitChildrenLayoutTest >> testFitContentGraph [
 	^ aParentNode
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFitChildrenLayoutTest >> testFitContentOneChildAt0x0 [
 
 	<sampleInstance>
@@ -345,7 +344,7 @@ BlFitChildrenLayoutTest >> testFitContentOneChildAt0x0 [
 	^ aParentNode
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFitChildrenLayoutTest >> testFitContentOneChildAt50x50 [
 
 	<sampleInstance>
@@ -376,7 +375,7 @@ BlFitChildrenLayoutTest >> testFitContentOneChildAt50x50 [
 	^ aParentNode
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFitChildrenLayoutTest >> testFitContentOneChildAt50x50Negated [
 
 	<sampleInstance>

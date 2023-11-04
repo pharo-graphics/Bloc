@@ -2,32 +2,30 @@
 I am a host that opens spaces as windows in the Morphic World.
 "
 Class {
-	#name : 'BlMorphicWindowHost',
-	#superclass : 'BlMorphicSteppingHost',
-	#category : 'BlocHost-Morphic-Host - Window',
-	#package : 'BlocHost-Morphic',
-	#tag : 'Host - Window'
+	#name : #BlMorphicWindowHost,
+	#superclass : #BlMorphicSteppingHost,
+	#category : #'BlocHost-Morphic-Host - Window'
 }
 
-{ #category : 'driver selection' }
+{ #category : #'driver selection' }
 BlMorphicWindowHost class >> isSupported [
 
 	^ true
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlMorphicWindowHost class >> label [
 
 	^ 'Morphic'
 ]
 
-{ #category : 'driver selection' }
+{ #category : #'driver selection' }
 BlMorphicWindowHost class >> priority [
 
 	^ 20
 ]
 
-{ #category : 'host - api' }
+{ #category : #'host - api' }
 BlMorphicWindowHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new morphic host space for given bloc space"
 
@@ -45,7 +43,7 @@ BlMorphicWindowHost >> createHostSpaceFor: aSpace [
 	aSpace hostSpace: aHostSpace
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlMorphicWindowHost >> createMorphicWindowFor: aSpace [
 	"Note, that I use given space only to find out what window properties to use for created window.
 	I do not create any strong or weak references to provided space"
@@ -59,7 +57,7 @@ BlMorphicWindowHost >> createMorphicWindowFor: aSpace [
 
 ]
 
-{ #category : 'host - api' }
+{ #category : #'host - api' }
 BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 
 	aSpace hostSpace
@@ -71,7 +69,7 @@ BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 	aSpace detachHostSpace
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlMorphicWindowHost >> isStillAvailable [
 
 	^ self class isSupported

@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlPhysicalDisplaySize',
-	#superclass : 'BlDisplaySize',
-	#category : 'Bloc-Display-Geometry',
-	#package : 'Bloc-Display',
-	#tag : 'Geometry'
+	#name : #BlPhysicalDisplaySize,
+	#superclass : #BlDisplaySize,
+	#category : #'Bloc-Display-Geometry'
 }
 
-{ #category : 'api - converting' }
+{ #category : #'api - converting' }
 BlPhysicalDisplaySize >> asLogical: aScaleFactor [
 	<return: #BlLogicalDisplaySize>
 	| aWidth aHeight |
@@ -20,7 +18,7 @@ BlPhysicalDisplaySize >> asLogical: aScaleFactor [
 	^ BlLogicalDisplaySize width: aWidth height: aHeight
 ]
 
-{ #category : 'api - converting' }
+{ #category : #'api - converting' }
 BlPhysicalDisplaySize >> asPhysical: aScaleFactor [
 	<return: #BlPhysicalDisplaySize>
 	

@@ -1,6 +1,6 @@
-Extension { #name : 'BlBorder' }
+Extension { #name : #BlBorder }
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlBorder >> aeApplyTo: aeCanvas element: aBlElement [
 
 	"No need to set any parameter as there is no border"
@@ -35,13 +35,13 @@ BlBorder >> aeApplyTo: aeCanvas element: aBlElement [
 		aeCanvas setBorderWidth: width ]
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlBorder >> aeApplyWithCenteredBorderTo: aeCanvas element: aBlElement [
 	
 	aeCanvas setOutskirtsCentered
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlBorder >> aeApplyWithInsideBorderTo: aeCanvas element: aBlElement [
 
 	aeCanvas setOutskirtsInside.
@@ -51,7 +51,7 @@ BlBorder >> aeApplyWithInsideBorderTo: aeCanvas element: aBlElement [
 		borderWidth: width
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlBorder >> aeApplyWithOutsideBorderTo: aeCanvas element: aBlElement [
 
 	aeCanvas setOutskirtsOutside.

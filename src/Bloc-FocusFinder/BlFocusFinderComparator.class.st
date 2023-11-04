@@ -3,19 +3,17 @@ I sort element according to their visual layout and geometry
 
 "
 Class {
-	#name : 'BlFocusFinderComparator',
-	#superclass : 'Object',
+	#name : #BlFocusFinderComparator,
+	#superclass : #Object,
 	#instVars : [
 		'rootElement',
 		'firstBounds',
 		'secondBounds'
 	],
-	#category : 'Bloc-FocusFinder-Core',
-	#package : 'Bloc-FocusFinder',
-	#tag : 'Core'
+	#category : #'Bloc-FocusFinder-Core'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 BlFocusFinderComparator >> bounds: aBlBounds of: anElement [
 	"Store and return visual bounds of a given element in root's coordinates
 	that will be used for comparison.
@@ -28,7 +26,7 @@ BlFocusFinderComparator >> bounds: aBlBounds of: anElement [
 	^ rootElement localBoundsToMine: aBlBounds fromChild: anElement
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlFocusFinderComparator >> initialize [
 	super initialize.
 	
@@ -36,21 +34,21 @@ BlFocusFinderComparator >> initialize [
 	secondBounds := BlBorder new
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlFocusFinderComparator >> isRightToLeft [
 	"Return true if I compare element in a context of right to left layout, false otherwise"
 
 	^ false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFocusFinderComparator >> rootElement [
 	"Return an element that plays a role of a root for a visual focus search"
 	
 	^ rootElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFocusFinderComparator >> rootElement: anElement [
 	"Set an element that should be considered a root during visual focus search.
 	Note: element are compared by their visual bounds transformed to local coordinates
@@ -59,7 +57,7 @@ BlFocusFinderComparator >> rootElement: anElement [
 	rootElement := anElement
 ]
 
-{ #category : 'evaluating' }
+{ #category : #evaluating }
 BlFocusFinderComparator >> value: aFirstElement value: aSecondElement [
 	" I sort elements according to the following strategy:
 	

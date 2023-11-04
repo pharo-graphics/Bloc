@@ -8,19 +8,17 @@ However for now I can also be used to handle just the case of the Morhic UI proc
 
 "
 Class {
-	#name : 'BlBlocUIManager',
-	#superclass : 'MorphicUIManager',
-	#category : 'BlocHost-Morphic-Support',
-	#package : 'BlocHost-Morphic',
-	#tag : 'Support'
+	#name : #BlBlocUIManager,
+	#superclass : #MorphicUIManager,
+	#category : #'BlocHost-Morphic-Support'
 }
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BlBlocUIManager class >> handledId [
 	^ self name
 ]
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BlBlocUIManager class >> initialize [
 	"has to be executed at the end of the user category"
 	SessionManager default 
@@ -29,7 +27,7 @@ BlBlocUIManager class >> initialize [
 		atPriority: SmallInteger maxVal + 1
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlBlocUIManager class >> isValidForCurrentSystemConfiguration [
 	| isHeadlessVM isInteractiveMode |
 	
@@ -45,7 +43,7 @@ BlBlocUIManager class >> isValidForCurrentSystemConfiguration [
 	^ isHeadlessVM and: [ isInteractiveMode ]
 ]
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BlBlocUIManager class >> shutdown: isImageQuitting [
 	"Prepare the shutdown and the next startup"
 
@@ -53,7 +51,7 @@ BlBlocUIManager class >> shutdown: isImageQuitting [
 	
 ]
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BlBlocUIManager class >> startup: isImageStarting [
 	"Install the right UIManager"
 	
@@ -62,14 +60,14 @@ BlBlocUIManager class >> startup: isImageStarting [
 		ifFalse: [ UIManager forCurrentSystemConfiguration ])
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlBlocUIManager class >> useAsDefault [
 	|uiManager|
 	uiManager := self new.
 	uiManager beDefault. 
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> abort: aStringOrText title: aString [
 	^ BlBlocUIManagerNotification
 		request: #abort:title:
@@ -79,7 +77,7 @@ BlBlocUIManager >> abort: aStringOrText title: aString [
 		default: [ true ]
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> alert: aStringOrText title: aString configure: aBlock [
 	^ BlBlocUIManagerNotification
 		request: #alert:title:configure:
@@ -90,7 +88,7 @@ BlBlocUIManager >> alert: aStringOrText title: aString configure: aBlock [
 		default: [ true ]
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> centeredAlert: aStringOrText title: aString configure: aBlock [
 	^ BlBlocUIManagerNotification
 		request: #centeredAlert:title:configure:
@@ -101,12 +99,12 @@ BlBlocUIManager >> centeredAlert: aStringOrText title: aString configure: aBlock
 		default: [ true ]
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> chooseColor: aColor [
 	^ self chooseColor: aColor title: 'Colour Selector' translated
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> chooseColor: aColor title: title [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #chooseColor:title:
@@ -115,7 +113,7 @@ BlBlocUIManager >> chooseColor: aColor title: title [
 			title}
 ]
 
-{ #category : 'ui requests' }
+{ #category : #'ui requests' }
 BlBlocUIManager >> chooseDirectory: label from: dir [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #chooseDirectory:from:
@@ -124,7 +122,7 @@ BlBlocUIManager >> chooseDirectory: label from: dir [
 			dir}
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> chooseDirectory: title path: path [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #chooseDirectory:path:
@@ -133,7 +131,7 @@ BlBlocUIManager >> chooseDirectory: title path: path [
 			path}
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> chooseDropList: aStringOrText title: aString list: aList [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #chooseDropList:title:list:
@@ -143,7 +141,7 @@ BlBlocUIManager >> chooseDropList: aStringOrText title: aString list: aList [
 			aList}
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> chooseExistingFileReference: title extensions: exts path: path preview: preview [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #chooseExistingFileReference:extensions:path:preview:
@@ -154,14 +152,14 @@ BlBlocUIManager >> chooseExistingFileReference: title extensions: exts path: pat
 			preview}
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> chooseFont: aFont [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #chooseFont:
 		with: {aFont}
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> chooseForSaveFileReference: title extensions: exts path: path preview: preview [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #chooseForSaveFileReference:extensions:path:preview:
@@ -172,7 +170,7 @@ BlBlocUIManager >> chooseForSaveFileReference: title extensions: exts path: path
 			preview}
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> chooseFrom: labelList values: valueList lines: linesArray message: messageString title: aString [
 	^ BlBlocUIManagerNotification
 		request: #chooseFrom:values:lines:message:title:
@@ -185,7 +183,7 @@ BlBlocUIManager >> chooseFrom: labelList values: valueList lines: linesArray mes
 		default: [ 0 ]
 ]
 
-{ #category : 'ui requests' }
+{ #category : #'ui requests' }
 BlBlocUIManager >> chooseFrom: labelList values: valueList lines: linesArray title: aString [
 	^ BlBlocUIManagerNotification
 		request: #chooseFrom:values:lines:title:
@@ -197,7 +195,7 @@ BlBlocUIManager >> chooseFrom: labelList values: valueList lines: linesArray tit
 		default: [ 0 ]
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> chooseFullFileName: title extensions: exts path: path preview: preview [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #chooseFullFileName:extensions:path:preview:
@@ -208,7 +206,7 @@ BlBlocUIManager >> chooseFullFileName: title extensions: exts path: path preview
 			preview}
 ]
 
-{ #category : 'ui requests' }
+{ #category : #'ui requests' }
 BlBlocUIManager >> chooseFullFileNameMatching: patterns label: label [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #chooseFullFileNameMatching:label:
@@ -217,7 +215,7 @@ BlBlocUIManager >> chooseFullFileNameMatching: patterns label: label [
 			label}
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> chooseOrRequestFrom: labelList values: valueList lines: linesArray title: aString [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #chooseOrRequestFrom:values:lines:title:
@@ -228,7 +226,7 @@ BlBlocUIManager >> chooseOrRequestFrom: labelList values: valueList lines: lines
 			aString}
 ]
 
-{ #category : 'ui requests' }
+{ #category : #'ui requests' }
 BlBlocUIManager >> confirm: questionStringOrText label: labelStringOrText [
 	^ BlBlocUIManagerNotification
 		request: #confirm:label:
@@ -238,7 +236,7 @@ BlBlocUIManager >> confirm: questionStringOrText label: labelStringOrText [
 		default: [ false ]
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> confirm: queryString label: title trueChoice: trueChoice falseChoice: falseChoice cancelChoice: cancelChoice default: defaultOption [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #confirm:label:trueChoice:falseChoice:cancelChoice:default:
@@ -251,7 +249,7 @@ BlBlocUIManager >> confirm: queryString label: title trueChoice: trueChoice fals
 			defaultOption}
 ]
 
-{ #category : 'ui requests' }
+{ #category : #'ui requests' }
 BlBlocUIManager >> confirm: aStringOrText orCancel: cancelBlock [
 	^ BlBlocUIManagerNotification
 		request: #confirm:orCancel:
@@ -261,7 +259,7 @@ BlBlocUIManager >> confirm: aStringOrText orCancel: cancelBlock [
 		default: cancelBlock
 ]
 
-{ #category : 'debug' }
+{ #category : #debug }
 BlBlocUIManager >> debugProcess: process context: context label: title fullView: bool notification: notificationString [
 	"Open the default debugger registered in the system as a result of the error."
 	self 
@@ -273,7 +271,7 @@ BlBlocUIManager >> debugProcess: process context: context label: title fullView:
 				openOn: debugSession withFullView: bool andNotification: notificationString ]
 ]
 
-{ #category : 'debug' }
+{ #category : #debug }
 BlBlocUIManager >> debugProcess: process context: context label: title spawningDebuggingUsing: debuggerSpawnBlock [
 	"I open the default debugger and add support for detecting if the 
 	debugged process is the Morphic or Bloc UI process.
@@ -319,7 +317,7 @@ BlBlocUIManager >> debugProcess: process context: context label: title spawningD
 	process suspend
 ]
 
-{ #category : 'ui process' }
+{ #category : #'ui process' }
 BlBlocUIManager >> defer: aBlock universe: aBlocUniverseIfAny [
 	"Defer aBloc in a given universe"
 	
@@ -328,7 +326,7 @@ BlBlocUIManager >> defer: aBlock universe: aBlocUniverseIfAny [
 		ifFalse: [ aBlocUniverseIfAny startUniverse ]
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> deny: aStringOrText title: aString [
 	^ BlBlocUIManagerNotification
 		request: #deny:title:
@@ -338,7 +336,7 @@ BlBlocUIManager >> deny: aStringOrText title: aString [
 		default: [ false ]
 ]
 
-{ #category : 'ui requests' }
+{ #category : #'ui requests' }
 BlBlocUIManager >> edit: aText label: labelString accept: aBlockOrNil [
 	^ BlBlocUIManagerNotification
 		request: #edit:label:accept:
@@ -348,7 +346,7 @@ BlBlocUIManager >> edit: aText label: labelString accept: aBlockOrNil [
 			aBlockOrNil}
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> enterOrRequestFrom: labelList values: valueList lines: linesArray title: aString [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #enterOrRequestFrom:values:lines:title:
@@ -359,14 +357,14 @@ BlBlocUIManager >> enterOrRequestFrom: labelList values: valueList lines: linesA
 			aString}
 ]
 
-{ #category : 'ui requests' }
+{ #category : #'ui requests' }
 BlBlocUIManager >> inform: aStringOrText [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #inform:
 		with: {aStringOrText}
 ]
 
-{ #category : 'ui process' }
+{ #category : #'ui process' }
 BlBlocUIManager >> isBlocUIProcess: aProcess [ 
 	"Check if the given process is a Bloc UI process.
 	We consider it a Bloc UI process if is the UI process of a Universe."
@@ -377,7 +375,7 @@ BlBlocUIManager >> isBlocUIProcess: aProcess [
 	^ false
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> longMessage: aStringOrText title: aString [
 	^ BlBlocUIManagerNotification
 		request: #longMessage:title:
@@ -387,7 +385,7 @@ BlBlocUIManager >> longMessage: aStringOrText title: aString [
 		default: [ false ]
 ]
 
-{ #category : 'ui requests' }
+{ #category : #'ui requests' }
 BlBlocUIManager >> merge: merger informing: aString [
 	^ BlBlocUIManagerNotification
 		request: #merge:informing:
@@ -396,7 +394,7 @@ BlBlocUIManager >> merge: merger informing: aString [
 			aString}
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> message: aStringOrText title: aString [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #message:title:
@@ -405,7 +403,7 @@ BlBlocUIManager >> message: aStringOrText title: aString [
 			aString}
 ]
 
-{ #category : 'ui requests' }
+{ #category : #'ui requests' }
 BlBlocUIManager >> multiLineRequest: queryString initialAnswer: defaultAnswer answerHeight: answerHeight [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #multiLineRequest:initialAnswer:answerHeight:
@@ -415,7 +413,7 @@ BlBlocUIManager >> multiLineRequest: queryString initialAnswer: defaultAnswer an
 			answerHeight}
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> proceed: aStringOrText title: aString [
 	^ BlBlocUIManagerNotification
 		request: #proceed:title:
@@ -425,7 +423,7 @@ BlBlocUIManager >> proceed: aStringOrText title: aString [
 		default: [ false ]
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> question: aStringOrText title: aString [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #question:title:
@@ -434,7 +432,7 @@ BlBlocUIManager >> question: aStringOrText title: aString [
 			aString}
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> questionWithoutCancel: aStringOrText title: aString [
 	^ BlBlocUIManagerNotification
 		request: #questionWithoutCancel:title:
@@ -444,7 +442,7 @@ BlBlocUIManager >> questionWithoutCancel: aStringOrText title: aString [
 		default: [ false ]
 ]
 
-{ #category : 'ui requests' }
+{ #category : #'ui requests' }
 BlBlocUIManager >> request: aStringOrText initialAnswer: defaultAnswer title: aTitle [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #request:initialAnswer:title:
@@ -454,7 +452,7 @@ BlBlocUIManager >> request: aStringOrText initialAnswer: defaultAnswer title: aT
 			aTitle}
 ]
 
-{ #category : 'ui requests' }
+{ #category : #'ui requests' }
 BlBlocUIManager >> request: aStringOrText initialAnswer: defaultAnswer title: aTitle entryCompletion: anEntryCompletion [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #request:initialAnswer:title:entryCompletion:
@@ -465,14 +463,14 @@ BlBlocUIManager >> request: aStringOrText initialAnswer: defaultAnswer title: aT
 			anEntryCompletion}
 ]
 
-{ #category : 'ui requests' }
+{ #category : #'ui requests' }
 BlBlocUIManager >> requestPassword: aStringOrText [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #requestPassword:
 		with: {aStringOrText}
 ]
 
-{ #category : 'ui process' }
+{ #category : #'ui process' }
 BlBlocUIManager >> resumeBlocUIProcess: aProcess [
 	"Adopt aProcess as the UI process for Bloc -- probably because of proceeding from a debugger"
 
@@ -490,7 +488,7 @@ BlBlocUIManager >> resumeBlocUIProcess: aProcess [
 		ifAbsent: [  ].
 ]
 
-{ #category : 'ui process' }
+{ #category : #'ui process' }
 BlBlocUIManager >> resumeMorphicUIProcess: aProcess [ 
 	"Adopt aProcess as the UI process for morphic -- probably because of proceeding from a debugger"
 
@@ -500,7 +498,7 @@ BlBlocUIManager >> resumeMorphicUIProcess: aProcess [
 	UIProcess resume
 ]
 
-{ #category : 'ui process' }
+{ #category : #'ui process' }
 BlBlocUIManager >> resumeUIProcess: aProcess [
 	"Adopt aProcess as the project process -- probably because of proceeding from a debugger"
 
@@ -514,20 +512,20 @@ BlBlocUIManager >> resumeUIProcess: aProcess [
 			self resumeMorphicUIProcess: aProcess ]
 ]
 
-{ #category : 'debug' }
+{ #category : #debug }
 BlBlocUIManager >> spawnNewBlocProcess: aUniverse [
 	aUniverse requestStopPulsation.
 	aUniverse hostClass forceStartNewUIProcess
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> syntaxErrorNotificationDefaultAction: anException [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #syntaxErrorNotificationDefaultAction:
 		with: {anException}
 ]
 
-{ #category : 'services' }
+{ #category : #services }
 BlBlocUIManager >> textEntry: aStringOrText title: aString entryText: defaultEntryText [
 	^ BlBlocUIManagerNotification
 		requestOrNil: #textEntry:title:entryText:
@@ -537,7 +535,7 @@ BlBlocUIManager >> textEntry: aStringOrText title: aString entryText: defaultEnt
 			defaultEntryText}
 ]
 
-{ #category : 'ui process' }
+{ #category : #'ui process' }
 BlBlocUIManager >> universeDo: aPresentBlock ifAbsent: anExceptionBlock [
 	| theUniversesWithUIProcess |
 	theUniversesWithUIProcess := (BlParallelUniverse all select: [ :eachUniverse |
@@ -551,7 +549,7 @@ BlBlocUIManager >> universeDo: aPresentBlock ifAbsent: anExceptionBlock [
 		ifNotEmpty: [ :theUniverses | aPresentBlock value: theUniverses first ]
 ]
 
-{ #category : 'ui process' }
+{ #category : #'ui process' }
 BlBlocUIManager >> universeForProcess: aProcess ifPresent: aPresentBlock ifAbsent: anExceptionBlock [
 	^ BlParallelUniverse all
 		detect: [ :eachUniverse |
@@ -564,7 +562,7 @@ BlBlocUIManager >> universeForProcess: aProcess ifPresent: aPresentBlock ifAbsen
 		ifNone: anExceptionBlock
 ]
 
-{ #category : 'ui process' }
+{ #category : #'ui process' }
 BlBlocUIManager >> universeForSession: debugSession ifPresent: aPresentBlock ifAbsent: anExceptionBlock [
 	^ BlParallelUniverse all
 		detect: [ :eachUniverse |

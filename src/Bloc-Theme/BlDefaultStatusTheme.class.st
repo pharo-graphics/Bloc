@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlDefaultStatusTheme',
-	#superclass : 'BlTheme',
+	#name : #BlDefaultStatusTheme,
+	#superclass : #BlTheme,
 	#instVars : [
 		'successBackgroundColor',
 		'successBorderColor',
@@ -11,51 +11,50 @@ Class {
 		'paleErrorBackgroundColor',
 		'failureBackgroundColor'
 	],
-	#category : 'Bloc-Theme',
-	#package : 'Bloc-Theme'
+	#category : #'Bloc-Theme'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> errorBackgroundColor [
 	^ errorBackgroundColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> errorBackgroundColor: anObject [
 	errorBackgroundColor := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> errorBorderColor [
 	^ errorBorderColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> errorBorderColor: anObject [
 	errorBorderColor := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> failureBackgroundColor [
 	^ failureBackgroundColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> failureBackgroundColor: anObject [
 	failureBackgroundColor := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> failureBorderColor [
 	^ failureBorderColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> failureBorderColor: anObject [
 	failureBorderColor := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDefaultStatusTheme >> initialize [
 	super initialize.
 	successBackgroundColor := BlDefaultColors successBackgroundColor.
@@ -69,42 +68,42 @@ BlDefaultStatusTheme >> initialize [
 	failureBackgroundColor := BlDefaultColors failureBackgroundColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> neutralBackgroundColor [
 	^ neutralBackgroundColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> neutralBackgroundColor: anObject [
 	neutralBackgroundColor := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> paleErrorBackgroundColor [
 	^ paleErrorBackgroundColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> paleErrorBackgroundColor: anObject [
 	paleErrorBackgroundColor := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> successBackgroundColor [
 	^ successBackgroundColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> successBackgroundColor: anObject [
 	successBackgroundColor := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> successBorderColor [
 	^ successBorderColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultStatusTheme >> successBorderColor: anObject [
 	successBorderColor := anObject
 ]

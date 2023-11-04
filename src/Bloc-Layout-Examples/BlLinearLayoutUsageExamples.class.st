@@ -4,14 +4,12 @@ I contain examples of a linear layout (both horizontal and vertical).
 I show how different resizing strategies work and how to use weight in order to distribute elements proportionally within parent.
 "
 Class {
-	#name : 'BlLinearLayoutUsageExamples',
-	#superclass : 'BlLinearLayoutExamples',
-	#category : 'Bloc-Layout-Examples-LinearMigrated',
-	#package : 'Bloc-Layout-Examples',
-	#tag : 'LinearMigrated'
+	#name : #BlLinearLayoutUsageExamples,
+	#superclass : #BlLinearLayoutExamples,
+	#category : #'Bloc-Layout-Examples-LinearMigrated'
 }
 
-{ #category : 'layout - space equalization' }
+{ #category : #'layout - space equalization' }
 BlLinearLayoutUsageExamples >> equalizingHeighAndWidth [
 	<gtExample>		
 	| parent |
@@ -22,7 +20,7 @@ BlLinearLayoutUsageExamples >> equalizingHeighAndWidth [
 	^ parent
 ]
 
-{ #category : 'layout - space equalization' }
+{ #category : #'layout - space equalization' }
 BlLinearLayoutUsageExamples >> equalizingWidth [
 	<gtExample>		
 	| parent |
@@ -33,7 +31,7 @@ BlLinearLayoutUsageExamples >> equalizingWidth [
 	^ parent
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalListFixedWidthLTR [
 	<gtExample>
 	| e1 e2 e3 el space |
@@ -68,7 +66,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalListFixedWidthLTR [
 	^ el
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalListFixedWidthRTL [
 	<gtExample>
 	| e1 e2 e3 el space |
@@ -103,7 +101,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalListFixedWidthRTL [
 	^ el
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalListLTR [
 	<gtExample>
 	| e1 e2 e3 el space|
@@ -135,7 +133,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalListLTR [
 	^ el
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalListRTL [
 	<gtExample>
 	| e1 e2 e3 el space|
@@ -167,7 +165,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalListRTL [
 	^ el
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalTopCenterBottomLTR [
 	<gtExample>
 	| e1 e2 e3 el space|
@@ -196,7 +194,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalTopCenterBottomLTR [
 	^ el
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalTopCenterBottomRTL [
 	<gtExample>
 	| e1 e2 e3 el space|
@@ -225,7 +223,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalTopCenterBottomRTL [
 	^ el
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalUsingWeightLTR [
 	<gtExample>
 	| e1 e2 e3 el space|
@@ -260,7 +258,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalUsingWeightLTR [
 	^ el
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalUsingWeightRTL [
 	<gtExample>
 	| e1 e2 e3 el space|
@@ -295,7 +293,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalUsingWeightRTL [
 	^ el
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutUsageExamples >> exampleVerticalLeftCenterRightLRT [
 	<gtExample>
 	| e1 e2 e3 el space|
@@ -327,7 +325,7 @@ BlLinearLayoutUsageExamples >> exampleVerticalLeftCenterRightLRT [
 	^ el
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutUsageExamples >> exampleVerticalLeftCenterRightRTL [
 	<gtExample>
 	| e1 e2 e3 el space|
@@ -359,7 +357,7 @@ BlLinearLayoutUsageExamples >> exampleVerticalLeftCenterRightRTL [
 	^ el
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutUsageExamples >> exampleVerticalList [
 	<gtExample>
 	| e1 e2 e3 el space|
@@ -395,7 +393,7 @@ BlLinearLayoutUsageExamples >> exampleVerticalList [
 	^ el
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutUsageExamples >> exampleVerticalListFixedHeight [
 	<gtExample>
 	| e1 e2 e3 el space|
@@ -425,7 +423,7 @@ BlLinearLayoutUsageExamples >> exampleVerticalListFixedHeight [
 	^ el
 ]
 
-{ #category : 'layout - fit content' }
+{ #category : #'layout - fit content' }
 BlLinearLayoutUsageExamples >> matchParentInFitContent [
 	<gtExample>
 	<description: 'If all children in the parent that fits content match parent then they should be measured with 0 size'>
@@ -455,7 +453,7 @@ BlLinearLayoutUsageExamples >> matchParentInFitContent [
 	^ parent
 ]
 
-{ #category : 'layout - fit content' }
+{ #category : #'layout - fit content' }
 BlLinearLayoutUsageExamples >> matchParentInFitContentChangeBackToMatchParent [
 	<gtExample>
 	<description: 'Changing back to match parent should reset size to 0'>
@@ -473,7 +471,7 @@ BlLinearLayoutUsageExamples >> matchParentInFitContentChangeBackToMatchParent [
 	^ parent
 ]
 
-{ #category : 'layout - fit content' }
+{ #category : #'layout - fit content' }
 BlLinearLayoutUsageExamples >> matchParentInFitContentChangeToExact [
 	<gtExample>
 	<description: 'Now we change size to exact and expect parent to resize'>
@@ -491,7 +489,7 @@ BlLinearLayoutUsageExamples >> matchParentInFitContentChangeToExact [
 	^ parent
 ]
 
-{ #category : 'layout - fit content limited' }
+{ #category : #'layout - fit content limited' }
 BlLinearLayoutUsageExamples >> oneChildWithFitContentLimited [
 	<gtExample>
 	| subChildren child parent |
@@ -526,7 +524,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimited [
 	^ parent
 ]
 
-{ #category : 'layout - fit content limited' }
+{ #category : #'layout - fit content limited' }
 BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedAndAnotherChild [
 	<gtExample>
 	| subChildren childA childB parent |
@@ -567,7 +565,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedAndAnotherChild [
 	^ parent
 ]
 
-{ #category : 'layout - fit content limited' }
+{ #category : #'layout - fit content limited' }
 BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedAndAnotherChildFitContent [
 	<gtExample>
 	| subChildren childA childB subChildB parent |
@@ -619,7 +617,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedAndAnotherChildFitCo
 	^ parent
 ]
 
-{ #category : 'layout - fit content limited' }
+{ #category : #'layout - fit content limited' }
 BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsAndThreeChildlren [
 	<gtExample>
 	| subChildren childA childB childC childD parent |
@@ -675,7 +673,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsAndThreeChild
 	^ parent
 ]
 
-{ #category : 'layout - fit content limited' }
+{ #category : #'layout - fit content limited' }
 BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsAndTwoChildlren [
 	<gtExample>
 	| subChildren childA childB childC parent |
@@ -723,7 +721,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsAndTwoChildlr
 	^ parent
 ]
 
-{ #category : 'layout - fit content limited' }
+{ #category : #'layout - fit content limited' }
 BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsNotAndThreeChildlren [
 	<gtExample>
 	| subChildren childA childB childC childD parent |
@@ -779,7 +777,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsNotAndThreeCh
 	^ parent
 ]
 
-{ #category : 'layout - fit content limited' }
+{ #category : #'layout - fit content limited' }
 BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsNotAndTwoChildlren [
 	<gtExample>
 	| subChildren childA childB childC parent |
@@ -827,7 +825,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsNotAndTwoChil
 	^ parent
 ]
 
-{ #category : 'layout - space equalization' }
+{ #category : #'layout - space equalization' }
 BlLinearLayoutUsageExamples >> twoChildrenMatchParentInFitContent [
 	<gtExample>	
 	| parent child child2 |
@@ -866,7 +864,7 @@ BlLinearLayoutUsageExamples >> twoChildrenMatchParentInFitContent [
 	^ parent
 ]
 
-{ #category : 'layout - examples' }
+{ #category : #'layout - examples' }
 BlLinearLayoutUsageExamples >> twoChildrenOnOppositeSidesWithSpan [
 	<gtExample>
 	| parent left span right |

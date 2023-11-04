@@ -1,17 +1,15 @@
 Trait {
-	#name : 'TBlElementStyles',
-	#category : 'Bloc-Basic-Style',
-	#package : 'Bloc',
-	#tag : 'Basic-Style'
+	#name : #TBlElementStyles,
+	#category : #'Bloc-Basic-Style'
 }
 
-{ #category : 'private - adding' }
+{ #category : #'private - adding' }
 TBlElementStyles >> basicAddStyle: aStyle [
 
 	self explicitRequirement
 ]
 
-{ #category : 'private - adding' }
+{ #category : #'private - adding' }
 TBlElementStyles >> newStyleForState: aBlElementState [
 
 	^ BlElementStyle new
@@ -19,7 +17,7 @@ TBlElementStyles >> newStyleForState: aBlElementState [
 		  yourself
 ]
 
-{ #category : 'private - adding' }
+{ #category : #'private - adding' }
 TBlElementStyles >> styleFor: aBlElementState [
 
 	^ self
@@ -32,7 +30,7 @@ TBlElementStyles >> styleFor: aBlElementState [
 			aNewStyle ]
 ]
 
-{ #category : 'private - adding' }
+{ #category : #'private - adding' }
 TBlElementStyles >> styleForState: aState ifFound: aFoundBlock ifNone: aNoneBlock [
 
 	self explicitRequirement

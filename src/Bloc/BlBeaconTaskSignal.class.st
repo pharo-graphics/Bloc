@@ -5,19 +5,17 @@ I inform about scheduling and executing of  {{gtClass:BlTask}}.
 
 "
 Class {
-	#name : 'BlBeaconTaskSignal',
-	#superclass : 'BeaconSignal',
+	#name : #BlBeaconTaskSignal,
+	#superclass : #BeaconSignal,
 	#instVars : [
 		'task',
 		'callingMethod',
 		'message'
 	],
-	#category : 'Bloc-Space - Tasks',
-	#package : 'Bloc',
-	#tag : 'Space - Tasks'
+	#category : #'Bloc-Space - Tasks'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlBeaconTaskSignal class >> fromSton: stonReader [
 	| aSignal |
 	aSignal := self new.
@@ -33,7 +31,7 @@ BlBeaconTaskSignal class >> fromSton: stonReader [
 	^aSignal
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlBeaconTaskSignal >> asDictionary [
 	^ super asDictionary 
 		at: #callingMethod put: callingMethod;
@@ -42,32 +40,32 @@ BlBeaconTaskSignal >> asDictionary [
 		yourself.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBeaconTaskSignal >> callingMethod [
 	^ callingMethod
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBeaconTaskSignal >> callingMethod: anObject [
 	callingMethod := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBeaconTaskSignal >> message [
 	^ message
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBeaconTaskSignal >> message: anObject [
 	message := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBeaconTaskSignal >> name: aString message: anObject [
 	self message: aString asString, ' ', anObject asString
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlBeaconTaskSignal >> printOneLineContentsOn: stream [
 
 	message ifNotNil: [ 
@@ -83,12 +81,12 @@ BlBeaconTaskSignal >> printOneLineContentsOn: stream [
 	
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBeaconTaskSignal >> task [
 	^ task
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBeaconTaskSignal >> task: anObject [
 	task := anObject
 ]

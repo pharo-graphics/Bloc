@@ -1,31 +1,29 @@
 Class {
-	#name : 'BlDevScripterDeepChildOfClassEventTarget',
-	#superclass : 'BlDevScripterEventTarget',
+	#name : #BlDevScripterDeepChildOfClassEventTarget,
+	#superclass : #BlDevScripterEventTarget,
 	#instVars : [
 		'elementClass'
 	],
-	#category : 'Bloc-Scripter-Scripter-Targets',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Targets'
+	#category : #'Bloc-Scripter-Scripter-Targets'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterDeepChildOfClassEventTarget class >> matchesWithInput: anObject [
 	<return: #Boolean>
 	^ anObject isClass
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterDeepChildOfClassEventTarget class >> newFromInput: anObject [
 	^ self new elementClass: anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterDeepChildOfClassEventTarget >> elementClass [
 	^ elementClass
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterDeepChildOfClassEventTarget >> elementClass: aClass [
 	self
 		assert: [ aClass notNil ]
@@ -47,7 +45,7 @@ BlDevScripterDeepChildOfClassEventTarget >> elementClass: aClass [
 	elementClass := aClass
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterDeepChildOfClassEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 
@@ -57,7 +55,7 @@ BlDevScripterDeepChildOfClassEventTarget >> findTargetIn: anElement [
 		ifNone: [ AssertionFailure signal: 'Cannot find target element of class ', self elementClass printString ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterDeepChildOfClassEventTarget >> identifier [
 	^ self elementClass ifNil: [ self ]
 ]

@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlElementEffectChangeTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Tests-Basic-Changes',
-	#package : 'Bloc-Tests',
-	#tag : 'Basic-Changes'
+	#name : #BlElementEffectChangeTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Tests-Basic-Changes'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementEffectChangeTest >> testShadowOffsetChangesInvalidationBounds [
 
 	| aSpace anElement |

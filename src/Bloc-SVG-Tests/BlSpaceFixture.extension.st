@@ -1,6 +1,6 @@
-Extension { #name : 'BlSpaceFixture' }
+Extension { #name : #BlSpaceFixture }
 
-{ #category : '*Bloc-SVG-Tests' }
+{ #category : #'*Bloc-SVG-Tests' }
 BlSpaceFixture >> buildSVGStrokes [
 
 	| parent |

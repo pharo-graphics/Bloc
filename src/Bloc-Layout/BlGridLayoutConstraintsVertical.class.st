@@ -1,22 +1,20 @@
 Class {
-	#name : 'BlGridLayoutConstraintsVertical',
-	#superclass : 'BlGridLayoutConstraintsAxis',
-	#category : 'Bloc-Layout-Grid',
-	#package : 'Bloc-Layout',
-	#tag : 'Grid'
+	#name : #BlGridLayoutConstraintsVertical,
+	#superclass : #BlGridLayoutConstraintsAxis,
+	#category : #'Bloc-Layout-Grid'
 }
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlGridLayoutConstraintsVertical >> alignBottom [
 	self specAlignment: BlGridAlignment bottom
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlGridLayoutConstraintsVertical >> alignCenter [
 	self specAlignment: BlGridAlignment center
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlGridLayoutConstraintsVertical >> alignTop [
 	self specAlignment: BlGridAlignment top
 ]

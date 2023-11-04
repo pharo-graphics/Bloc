@@ -3,17 +3,15 @@ I exemplify {{gtClass:BlDevScripter}}.
 
 "
 Class {
-	#name : 'BlDevScripterExamples',
-	#superclass : 'BlExampleTest',
+	#name : #BlDevScripterExamples,
+	#superclass : #BlExampleTest,
 	#instVars : [
 		'elementExamples'
 	],
-	#category : 'Bloc-Scripter-Examples',
-	#package : 'Bloc-Scripter',
-	#tag : 'Examples'
+	#category : #'Bloc-Scripter-Examples'
 }
 
-{ #category : 'examples - scripter' }
+{ #category : #'examples - scripter' }
 BlDevScripterExamples >> basicScripter [
 	<gtExample>
 	| aScript |
@@ -23,7 +21,7 @@ BlDevScripterExamples >> basicScripter [
 	^ aScript
 ]
 
-{ #category : 'examples - click check' }
+{ #category : #'examples - click check' }
 BlDevScripterExamples >> clickCheck [
 	<gtExample>
 
@@ -36,13 +34,13 @@ BlDevScripterExamples >> clickCheck [
 	^ aScript
 ]
 
-{ #category : 'examples - element' }
+{ #category : #'examples - element' }
 BlDevScripterExamples >> containerWithRectangle [
 	<gtExample>
 	^ elementExamples containerWithRectangle
 ]
 
-{ #category : 'examples - click check' }
+{ #category : #'examples - click check' }
 BlDevScripterExamples >> failingClickCheck [
 	<gtExample>
 	| anElement aScripter aScriptFailed |
@@ -64,7 +62,7 @@ BlDevScripterExamples >> failingClickCheck [
 	^ aScripter
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevScripterExamples >> initialize [
 	super initialize.
 	elementExamples := BlDevElementExamples new.

@@ -3,14 +3,12 @@ I contain examples of a collection rope
 
 "
 Class {
-	#name : 'BlCollectionRopeExamples',
-	#superclass : 'BlExampleTest',
-	#category : 'Bloc-Examples-Rope',
-	#package : 'Bloc-Examples',
-	#tag : 'Rope'
+	#name : #BlCollectionRopeExamples,
+	#superclass : #BlExampleTest,
+	#category : #'Bloc-Examples-Rope'
 }
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlCollectionRopeExamples >> attributes_empty_0_to_0 [
 	<gtExample>
 	| aRope anAttributedRope |
@@ -25,7 +23,7 @@ BlCollectionRopeExamples >> attributes_empty_0_to_0 [
 	^ anAttributedRope
 ]
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlCollectionRopeExamples >> attributes_small_0_to_0 [
 	<gtExample>
 	| aRope anAttributedRope |
@@ -41,7 +39,7 @@ BlCollectionRopeExamples >> attributes_small_0_to_0 [
 	^ anAttributedRope
 ]
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlCollectionRopeExamples >> attributes_small_0_to_1 [
 	<gtExample>
 	| aRope anAttributedRope |
@@ -57,7 +55,7 @@ BlCollectionRopeExamples >> attributes_small_0_to_1 [
 	^ anAttributedRope
 ]
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlCollectionRopeExamples >> attributes_small_0_to_5 [
 	<gtExample>
 	| aRope anAttributedRope |
@@ -71,7 +69,7 @@ BlCollectionRopeExamples >> attributes_small_0_to_5 [
 	^ anAttributedRope
 ]
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlCollectionRopeExamples >> attributes_small_2_to_2 [
 	<gtExample>
 	| aRope anAttributedRope |
@@ -89,7 +87,7 @@ BlCollectionRopeExamples >> attributes_small_2_to_2 [
 	^ anAttributedRope
 ]
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlCollectionRopeExamples >> attributes_small_4_to_5 [
 	<gtExample>
 	| aRope anAttributedRope |
@@ -105,7 +103,7 @@ BlCollectionRopeExamples >> attributes_small_4_to_5 [
 	^ anAttributedRope
 ]
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlCollectionRopeExamples >> attributes_small_5_to_5 [
 	<gtExample>
 	| aRope anAttributedRope |
@@ -121,7 +119,7 @@ BlCollectionRopeExamples >> attributes_small_5_to_5 [
 	^ anAttributedRope
 ]
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlCollectionRopeExamples >> clear_attributes_empty_0_to_0 [
 	<gtExample>
 	| anEmptyRope aRopeWithoutAttributes |
@@ -135,7 +133,7 @@ BlCollectionRopeExamples >> clear_attributes_empty_0_to_0 [
 	^ aRopeWithoutAttributes
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlCollectionRopeExamples >> small [
 	<gtExample>
 	<label: 'Creates an instance of the rope of size smaller than combineLength'>
@@ -152,7 +150,7 @@ BlCollectionRopeExamples >> small [
 	^ aRope
 ]
 
-{ #category : 'examples - accessing' }
+{ #category : #'examples - accessing' }
 BlCollectionRopeExamples >> small_at_each [
 	<gtExample>
 	| aRope |
@@ -168,7 +166,7 @@ BlCollectionRopeExamples >> small_at_each [
 	^ aRope
 ]
 
-{ #category : 'examples - accessing' }
+{ #category : #'examples - accessing' }
 BlCollectionRopeExamples >> small_children [
 	<gtExample>
 	| aRope |
@@ -180,7 +178,7 @@ BlCollectionRopeExamples >> small_children [
 	^ aRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlCollectionRopeExamples >> small_delete_0_to_0 [
 	<gtExample>
 	| aRope aNewRope |
@@ -193,7 +191,7 @@ BlCollectionRopeExamples >> small_delete_0_to_0 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlCollectionRopeExamples >> small_delete_0_to_1 [
 	<gtExample>
 	| aRope aNewRope |
@@ -207,7 +205,7 @@ BlCollectionRopeExamples >> small_delete_0_to_1 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlCollectionRopeExamples >> small_delete_0_to_5 [
 	<gtExample>
 	| aRope aNewRope |
@@ -221,7 +219,7 @@ BlCollectionRopeExamples >> small_delete_0_to_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlCollectionRopeExamples >> small_delete_1_to_1 [
 	<gtExample>
 	| aRope aNewRope |
@@ -234,7 +232,7 @@ BlCollectionRopeExamples >> small_delete_1_to_1 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlCollectionRopeExamples >> small_delete_1_to_3 [
 	<gtExample>
 	| aRope aNewRope |
@@ -248,7 +246,7 @@ BlCollectionRopeExamples >> small_delete_1_to_3 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlCollectionRopeExamples >> small_delete_1_to_5 [
 	<gtExample>
 	| aRope aNewRope |
@@ -262,7 +260,7 @@ BlCollectionRopeExamples >> small_delete_1_to_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlCollectionRopeExamples >> small_delete_4_to_5 [
 	<gtExample>
 	| aRope aNewRope |
@@ -276,7 +274,7 @@ BlCollectionRopeExamples >> small_delete_4_to_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlCollectionRopeExamples >> small_delete_5_to_5 [
 	<gtExample>
 	| aRope aNewRope |
@@ -289,7 +287,7 @@ BlCollectionRopeExamples >> small_delete_5_to_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - accessing' }
+{ #category : #'examples - accessing' }
 BlCollectionRopeExamples >> small_depth [
 	<gtExample>
 	| aRope |
@@ -301,7 +299,7 @@ BlCollectionRopeExamples >> small_depth [
 	^ aRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeExamples >> small_do [
 	<gtExample>
 	| aRope theIterated |
@@ -314,7 +312,7 @@ BlCollectionRopeExamples >> small_do [
 	^ theIterated
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlCollectionRopeExamples >> small_empty [
 	<gtExample>
 	| aRope anEmpty |
@@ -328,7 +326,7 @@ BlCollectionRopeExamples >> small_empty [
 	^ anEmpty
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BlCollectionRopeExamples >> small_from_0_to_0 [
 	<gtExample>
 	| aRope aNewRope |
@@ -342,7 +340,7 @@ BlCollectionRopeExamples >> small_from_0_to_0 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeExamples >> small_from_0_to_0_do [
 	<gtExample>
 	| aRope theIterated |
@@ -355,7 +353,7 @@ BlCollectionRopeExamples >> small_from_0_to_0_do [
 	^ theIterated
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BlCollectionRopeExamples >> small_from_0_to_1 [
 	<gtExample>
 	| aRope aNewRope |
@@ -369,7 +367,7 @@ BlCollectionRopeExamples >> small_from_0_to_1 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeExamples >> small_from_0_to_1_do [
 	<gtExample>
 	| aRope theIterated |
@@ -382,7 +380,7 @@ BlCollectionRopeExamples >> small_from_0_to_1_do [
 	^ theIterated
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BlCollectionRopeExamples >> small_from_0_to_5 [
 	<gtExample>
 	| aRope aNewRope |
@@ -395,7 +393,7 @@ BlCollectionRopeExamples >> small_from_0_to_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeExamples >> small_from_0_to_5_do [
 	<gtExample>
 	| aRope theIterated |
@@ -408,7 +406,7 @@ BlCollectionRopeExamples >> small_from_0_to_5_do [
 	^ theIterated
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BlCollectionRopeExamples >> small_from_1_to_1 [
 	<gtExample>
 	| aRope aNewRope |
@@ -422,7 +420,7 @@ BlCollectionRopeExamples >> small_from_1_to_1 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeExamples >> small_from_1_to_1_do [
 	<gtExample>
 	| aRope theIterated |
@@ -435,7 +433,7 @@ BlCollectionRopeExamples >> small_from_1_to_1_do [
 	^ theIterated
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BlCollectionRopeExamples >> small_from_1_to_2 [
 	<gtExample>
 	| aRope aNewRope |
@@ -449,7 +447,7 @@ BlCollectionRopeExamples >> small_from_1_to_2 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeExamples >> small_from_1_to_2_do [
 	<gtExample>
 	| aRope theIterated |
@@ -462,7 +460,7 @@ BlCollectionRopeExamples >> small_from_1_to_2_do [
 	^ theIterated
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BlCollectionRopeExamples >> small_from_1_to_5 [
 	<gtExample>
 	| aRope aNewRope |
@@ -476,7 +474,7 @@ BlCollectionRopeExamples >> small_from_1_to_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeExamples >> small_from_1_to_5_do [
 	<gtExample>
 	| aRope theIterated |
@@ -489,7 +487,7 @@ BlCollectionRopeExamples >> small_from_1_to_5_do [
 	^ theIterated
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BlCollectionRopeExamples >> small_from_3_to_5 [
 	<gtExample>
 	| aRope aNewRope |
@@ -503,7 +501,7 @@ BlCollectionRopeExamples >> small_from_3_to_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeExamples >> small_from_3_to_5_do [
 	<gtExample>
 	| aRope theIterated |
@@ -516,7 +514,7 @@ BlCollectionRopeExamples >> small_from_3_to_5_do [
 	^ theIterated
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BlCollectionRopeExamples >> small_insert_rope_123_at_0 [
 	<gtExample>
 	| aRope aNewRope |
@@ -530,7 +528,7 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_0 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BlCollectionRopeExamples >> small_insert_rope_123_at_1 [
 	<gtExample>
 	| aRope aNewRope |
@@ -544,7 +542,7 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_1 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BlCollectionRopeExamples >> small_insert_rope_123_at_2 [
 	<gtExample>
 	| aRope aNewRope |
@@ -558,7 +556,7 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_2 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BlCollectionRopeExamples >> small_insert_rope_123_at_3 [
 	<gtExample>
 	| aRope aNewRope |
@@ -572,7 +570,7 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_3 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BlCollectionRopeExamples >> small_insert_rope_123_at_4 [
 	<gtExample>
 	| aRope aNewRope |
@@ -586,7 +584,7 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_4 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BlCollectionRopeExamples >> small_insert_rope_123_at_5 [
 	<gtExample>
 	| aRope aNewRope |
@@ -600,7 +598,7 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BlCollectionRopeExamples >> small_insert_string_123_at_0 [
 	<gtExample>
 	| aRope aNewRope |
@@ -614,7 +612,7 @@ BlCollectionRopeExamples >> small_insert_string_123_at_0 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BlCollectionRopeExamples >> small_insert_string_123_at_1 [
 	<gtExample>
 	| aRope aNewRope |
@@ -628,7 +626,7 @@ BlCollectionRopeExamples >> small_insert_string_123_at_1 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BlCollectionRopeExamples >> small_insert_string_123_at_2 [
 	<gtExample>
 	| aRope aNewRope |
@@ -642,7 +640,7 @@ BlCollectionRopeExamples >> small_insert_string_123_at_2 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BlCollectionRopeExamples >> small_insert_string_123_at_3 [
 	<gtExample>
 	| aRope aNewRope |
@@ -656,7 +654,7 @@ BlCollectionRopeExamples >> small_insert_string_123_at_3 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BlCollectionRopeExamples >> small_insert_string_123_at_4 [
 	<gtExample>
 	| aRope aNewRope |
@@ -670,7 +668,7 @@ BlCollectionRopeExamples >> small_insert_string_123_at_4 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - insertion' }
+{ #category : #'examples - insertion' }
 BlCollectionRopeExamples >> small_insert_string_123_at_5 [
 	<gtExample>
 	| aRope aNewRope |
@@ -684,7 +682,7 @@ BlCollectionRopeExamples >> small_insert_string_123_at_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - testing' }
+{ #category : #'examples - testing' }
 BlCollectionRopeExamples >> small_isEmpty [
 	<gtExample>
 	| aRope |
@@ -696,7 +694,7 @@ BlCollectionRopeExamples >> small_isEmpty [
 	^ aRope
 ]
 
-{ #category : 'examples - testing' }
+{ #category : #'examples - testing' }
 BlCollectionRopeExamples >> small_isLeaf [
 	<gtExample>
 	| aRope |
@@ -708,7 +706,7 @@ BlCollectionRopeExamples >> small_isLeaf [
 	^ aRope
 ]
 
-{ #category : 'examples - testing' }
+{ #category : #'examples - testing' }
 BlCollectionRopeExamples >> small_isNotEmpty [
 	<gtExample>
 	| aRope |
@@ -720,7 +718,7 @@ BlCollectionRopeExamples >> small_isNotEmpty [
 	^ aRope
 ]
 
-{ #category : 'examples - accessing' }
+{ #category : #'examples - accessing' }
 BlCollectionRopeExamples >> small_size [
 	<gtExample>
 	| aRope |

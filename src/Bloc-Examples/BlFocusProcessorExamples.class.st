@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlFocusProcessorExamples',
-	#superclass : 'BlEventProcessorExamples',
-	#category : 'Bloc-Examples-Event',
-	#package : 'Bloc-Examples',
-	#tag : 'Event'
+	#name : #BlFocusProcessorExamples,
+	#superclass : #BlEventProcessorExamples,
+	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : 'private - instance creation' }
+{ #category : #'private - instance creation' }
 BlFocusProcessorExamples >> elementWithFocusHandler [
 	<gtExample>
 	| aTextStyler hasFocus isFocused aTextBuilder aLabel |
@@ -49,7 +47,7 @@ BlFocusProcessorExamples >> elementWithFocusHandler [
 			aLabel text: aTextBuilder value ]
 ]
 
-{ #category : 'examples - lose focus' }
+{ #category : #'examples - lose focus' }
 BlFocusProcessorExamples >> loseFocus_01_give_focus_to_child_1 [
 	<gtExample>
 	| aScripter |
@@ -149,7 +147,7 @@ BlFocusProcessorExamples >> loseFocus_01_give_focus_to_child_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - lose focus' }
+{ #category : #'examples - lose focus' }
 BlFocusProcessorExamples >> loseFocus_02_remove_child_1 [
 	<gtExample>
 	| aScripter aChild1 |
@@ -258,7 +256,7 @@ BlFocusProcessorExamples >> loseFocus_02_remove_child_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - lose focus' }
+{ #category : #'examples - lose focus' }
 BlFocusProcessorExamples >> loseFocus_03_add_back_child_1 [
 	<gtExample>
 	| aScripter aChild1 |
@@ -366,7 +364,7 @@ BlFocusProcessorExamples >> loseFocus_03_add_back_child_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - request focus' }
+{ #category : #'examples - request focus' }
 BlFocusProcessorExamples >> requestFocus_01_parent [
 	<gtExample>
 	| aScripter |
@@ -406,7 +404,7 @@ BlFocusProcessorExamples >> requestFocus_01_parent [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - request focus' }
+{ #category : #'examples - request focus' }
 BlFocusProcessorExamples >> requestFocus_02_container_1 [
 	<gtExample>
 	| aScripter |
@@ -465,7 +463,7 @@ BlFocusProcessorExamples >> requestFocus_02_container_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - request focus' }
+{ #category : #'examples - request focus' }
 BlFocusProcessorExamples >> requestFocus_03_container_2 [
 	<gtExample>
 	| aScripter |
@@ -544,7 +542,7 @@ BlFocusProcessorExamples >> requestFocus_03_container_2 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - request focus' }
+{ #category : #'examples - request focus' }
 BlFocusProcessorExamples >> requestFocus_04_child_1 [
 	<gtExample>
 	| aScripter |
@@ -643,7 +641,7 @@ BlFocusProcessorExamples >> requestFocus_04_child_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - request focus' }
+{ #category : #'examples - request focus' }
 BlFocusProcessorExamples >> requestFocus_05_child_4 [
 	<gtExample>
 	| aScripter |
@@ -762,7 +760,7 @@ BlFocusProcessorExamples >> requestFocus_05_child_4 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - request focus' }
+{ #category : #'examples - request focus' }
 BlFocusProcessorExamples >> requestFocus_06_container_1 [
 	<gtExample>
 	| aScripter |
@@ -881,7 +879,7 @@ BlFocusProcessorExamples >> requestFocus_06_container_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'private - instance creation' }
+{ #category : #'private - instance creation' }
 BlFocusProcessorExamples >> scripterElement [
 	<gtExample>
 	

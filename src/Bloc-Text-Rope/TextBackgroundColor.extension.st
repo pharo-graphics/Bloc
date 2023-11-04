@@ -1,6 +1,6 @@
-Extension { #name : 'TextBackgroundColor' }
+Extension { #name : #TextBackgroundColor }
 
-{ #category : '*Bloc-Text-Rope' }
+{ #category : #'*Bloc-Text-Rope' }
 TextBackgroundColor >> applyToBlText: aBlText [
 
 	aBlText background: color

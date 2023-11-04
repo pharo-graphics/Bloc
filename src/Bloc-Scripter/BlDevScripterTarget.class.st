@@ -1,34 +1,32 @@
 Class {
-	#name : 'BlDevScripterTarget',
-	#superclass : 'Object',
-	#category : 'Bloc-Scripter-Scripter-Targets',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Targets'
+	#name : #BlDevScripterTarget,
+	#superclass : #Object,
+	#category : #'Bloc-Scripter-Scripter-Targets'
 }
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlDevScripterTarget class >> null [
 	^ BlDevScripterNullTarget uniqueInstance
 ]
 
-{ #category : 'searching' }
+{ #category : #searching }
 BlDevScripterTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'searching' }
+{ #category : #searching }
 BlDevScripterTarget >> findTargetStartingInScripter: aScripter [
 	^ self findTargetIn: aScripter element
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterTarget >> identifier [
 	^ self className
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BlDevScripterTarget >> updateUsing: aScripterEventTarget on: aStep [
 	aStep target: aScripterEventTarget
 ]

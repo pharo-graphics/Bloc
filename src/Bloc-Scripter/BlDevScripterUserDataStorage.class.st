@@ -1,26 +1,24 @@
 Class {
-	#name : 'BlDevScripterUserDataStorage',
-	#superclass : 'BlDevScripterSetStepStorage',
+	#name : #BlDevScripterUserDataStorage,
+	#superclass : #BlDevScripterSetStepStorage,
 	#instVars : [
 		'key',
 		'value'
 	],
-	#category : 'Bloc-Scripter-Scripter-Storage',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Storage'
+	#category : #'Bloc-Scripter-Scripter-Storage'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterUserDataStorage >> key [
 	^ key
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterUserDataStorage >> key: anObject [
 	key := anObject
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlDevScripterUserDataStorage >> printOn: aStream [
 	self key ifNil: [ ^ super printOn: aStream ].
 	aStream 
@@ -28,7 +26,7 @@ BlDevScripterUserDataStorage >> printOn: aStream [
 		print: self key
 ]
 
-{ #category : 'storing' }
+{ #category : #storing }
 BlDevScripterUserDataStorage >> storeFrom: aTarget scripter: aScripter [
 	| aKey aValue |
 	aKey := self key value.
@@ -36,12 +34,12 @@ BlDevScripterUserDataStorage >> storeFrom: aTarget scripter: aScripter [
 	aScripter userData at: aKey put: aValue.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterUserDataStorage >> value [
 	^ value
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterUserDataStorage >> value: anObject [
 	value := anObject
 ]

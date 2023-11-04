@@ -4,21 +4,19 @@ I am a collection of examples that show conversions from SVG files to Bloc objec
 For now, use 'Cairo' as the preferable host for Bloc to display these examples properly.
 "
 Class {
-	#name : 'BlSvgExamples',
-	#superclass : 'Object',
-	#category : 'Bloc-SVG-Tests-Examples',
-	#package : 'Bloc-SVG-Tests',
-	#tag : 'Examples'
+	#name : #BlSvgExamples,
+	#superclass : #Object,
+	#category : #'Bloc-SVG-Tests-Examples'
 }
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> circle [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self circleSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> circleSVG [
 	<gtExample>
 
@@ -29,14 +27,14 @@ BlSvgExamples >> circleSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> curveCubicBezier [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self curveCubicBezierSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> curveCubicBezierSVG [
 	<gtExample>
 
@@ -45,14 +43,14 @@ BlSvgExamples >> curveCubicBezierSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> curveQuadraticBezier [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self curveQuadraticBezierSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> curveQuadraticBezierSVG [
 	<gtExample>
 
@@ -61,14 +59,14 @@ BlSvgExamples >> curveQuadraticBezierSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> defsAndUse [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self defsAndUseSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> defsAndUseSVG [
 	<gtExample>
 
@@ -82,14 +80,14 @@ BlSvgExamples >> defsAndUseSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> ellipse [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self ellipseSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> ellipseSVG [
 	<gtExample>
 
@@ -100,14 +98,14 @@ BlSvgExamples >> ellipseSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> ellipticalArc [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self ellipticalArcSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> ellipticalArcSVG [
 	<gtExample>
 	
@@ -121,14 +119,14 @@ BlSvgExamples >> ellipticalArcSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> group [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self groupSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> groupSVG [
 	<gtExample>
 
@@ -141,14 +139,14 @@ BlSvgExamples >> groupSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> line [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self lineSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> lineSVG [
 	<gtExample>
 
@@ -158,14 +156,14 @@ BlSvgExamples >> lineSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> linearGradient [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self linearGradientSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> linearGradientSVG [
 	<gtExample>
 
@@ -178,14 +176,14 @@ BlSvgExamples >> linearGradientSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> pathBatman [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self pathBatmanSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> pathBatmanSVG [
 	<gtExample>
 
@@ -207,14 +205,14 @@ BlSvgExamples >> pathBatmanSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> pathTiger [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self pathTigerSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> pathTigerSVG [
 	<gtExample>
 	
@@ -944,14 +942,14 @@ BlSvgExamples >> pathTigerSVG [
 </svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> pathTree [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self pathTreeSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> pathTreeSVG [
 	<gtExample>
 
@@ -963,14 +961,14 @@ BlSvgExamples >> pathTreeSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> polyLine [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self polyLineSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> polyLineSVG [
 	<gtExample>
 
@@ -980,14 +978,14 @@ BlSvgExamples >> polyLineSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> polygon [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self polygonSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> polygonSVG [
 	<gtExample>
 
@@ -998,14 +996,14 @@ BlSvgExamples >> polygonSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> radialGradient [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self radialGradientSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> radialGradientSVG [
 	<gtExample>
 
@@ -1018,14 +1016,14 @@ BlSvgExamples >> radialGradientSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> rectangle [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self rectangleSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> rectangleSVG [
 	<gtExample>
 
@@ -1036,14 +1034,14 @@ BlSvgExamples >> rectangleSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> svg [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self svgSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> svgSVG [
 	<gtExample>
 
@@ -1056,14 +1054,14 @@ BlSvgExamples >> svgSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> symbolAndUse [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self symbolAndUseSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> symbolAndUseSVG [
 	<gtExample>
 	
@@ -1089,14 +1087,14 @@ BlSvgExamples >> symbolAndUseSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> text [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self textSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> textSVG [
 	<gtExample>
 
@@ -1108,14 +1106,14 @@ BlSvgExamples >> textSVG [
   		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> transformations [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self transformationsSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> transformationsSVG [
 	<gtExample>
 
@@ -1143,14 +1141,14 @@ BlSvgExamples >> transformationsSVG [
 		</svg>'
 ]
 
-{ #category : 'svg - converter' }
+{ #category : #'svg - converter' }
 BlSvgExamples >> useSymbolRect [
 	<gtExample>
 
 	^ BlSvgConverter convertFromString: self useSymbolRectSVG
 ]
 
-{ #category : 'svg - string' }
+{ #category : #'svg - string' }
 BlSvgExamples >> useSymbolRectSVG [
 	<gtExample>
 

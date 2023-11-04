@@ -1,14 +1,12 @@
 Class {
-	#name : 'BlClickEventExamples',
-	#superclass : 'Object',
+	#name : #BlClickEventExamples,
+	#superclass : #Object,
 	#traits : 'TBlDevScripterExamples + TAssertable',
 	#classTraits : 'TBlDevScripterExamples classTrait + TAssertable classTrait',
-	#category : 'Bloc-Examples-Event',
-	#package : 'Bloc-Examples',
-	#tag : 'Event'
+	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BlClickEventExamples >> clickInHiddenChild [
 	<gtExample>
 	| aScripter |
@@ -35,7 +33,7 @@ BlClickEventExamples >> clickInHiddenChild [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BlClickEventExamples >> clickInHiddenChildAndVisibleClippedGrandchild [
 	<gtExample>
 	| aScripter |
@@ -64,7 +62,7 @@ BlClickEventExamples >> clickInHiddenChildAndVisibleClippedGrandchild [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BlClickEventExamples >> clickInHiddenChildAndVisibleGrandchild [
 	<gtExample>
 	| aScripter |
@@ -93,7 +91,7 @@ BlClickEventExamples >> clickInHiddenChildAndVisibleGrandchild [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BlClickEventExamples >> clickInHiddenChildAndVisibleUnclippedGrandchild [
 	<gtExample>
 	| aScripter |
@@ -122,7 +120,7 @@ BlClickEventExamples >> clickInHiddenChildAndVisibleUnclippedGrandchild [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BlClickEventExamples >> clickInParentWithGoneChild [
 	<gtExample>
 	| aScripter |
@@ -149,7 +147,7 @@ BlClickEventExamples >> clickInParentWithGoneChild [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BlClickEventExamples >> clickInVisibleChild [
 	<gtExample>
 	| aScripter |
@@ -170,7 +168,7 @@ BlClickEventExamples >> clickInVisibleChild [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - elements' }
+{ #category : #'examples - elements' }
 BlClickEventExamples >> element [
 	<gtExample>
 	^ BlElement new
@@ -182,7 +180,7 @@ BlClickEventExamples >> element [
 			c vertical matchParent ]
 ]
 
-{ #category : 'examples - elements' }
+{ #category : #'examples - elements' }
 BlClickEventExamples >> threeElements [
 	<gtExample>
 	^ self element
@@ -194,7 +192,7 @@ BlClickEventExamples >> threeElements [
 		id: #parent
 ]
 
-{ #category : 'examples - elements in scripter' }
+{ #category : #'examples - elements in scripter' }
 BlClickEventExamples >> threeElementsInScripter [
 	<gtExample>
 	^ self scripterWithElement: [ :aTarget :aScripter | 
@@ -217,7 +215,7 @@ BlClickEventExamples >> threeElementsInScripter [
 	]
 ]
 
-{ #category : 'examples - elements' }
+{ #category : #'examples - elements' }
 BlClickEventExamples >> threeElementsWithFalseChildClipping [
 	<gtExample>
 	| aParent aChild aGrandchild |
@@ -250,7 +248,7 @@ BlClickEventExamples >> threeElementsWithFalseChildClipping [
 	^ aParent
 ]
 
-{ #category : 'examples - elements in scripter' }
+{ #category : #'examples - elements in scripter' }
 BlClickEventExamples >> threeElementsWithFalseChildClippingInScripter [
 	<gtExample>
 	^ self scripterWithElement: [ :aTarget :aScripter | 
@@ -273,7 +271,7 @@ BlClickEventExamples >> threeElementsWithFalseChildClippingInScripter [
 	]
 ]
 
-{ #category : 'examples - elements' }
+{ #category : #'examples - elements' }
 BlClickEventExamples >> threeElementsWithTrueChildClipping [
 	<gtExample>
 	| aParent aChild |
@@ -285,7 +283,7 @@ BlClickEventExamples >> threeElementsWithTrueChildClipping [
 	^ aParent
 ]
 
-{ #category : 'examples - elements in scripter' }
+{ #category : #'examples - elements in scripter' }
 BlClickEventExamples >> threeElementsWithTrueChildClippingInScripter [
 	<gtExample>
 	^ self scripterWithElement: [ :aTarget :aScripter | 
@@ -308,7 +306,7 @@ BlClickEventExamples >> threeElementsWithTrueChildClippingInScripter [
 	]
 ]
 
-{ #category : 'examples - elements' }
+{ #category : #'examples - elements' }
 BlClickEventExamples >> twoElements [
 	<gtExample>
 	^ self element
@@ -317,7 +315,7 @@ BlClickEventExamples >> twoElements [
 		id: #parent
 ]
 
-{ #category : 'examples - elements in scripter' }
+{ #category : #'examples - elements in scripter' }
 BlClickEventExamples >> twoElementsInScripter [
 	<gtExample>
 	^ self scripterWithElement: [ :aTarget :aScripter | 

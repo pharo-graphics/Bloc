@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlFocusSearchDirectionBackward',
-	#superclass : 'BlFocusSearchDirectionRelative',
-	#category : 'Bloc-FocusFinder-Directions',
-	#package : 'Bloc-FocusFinder',
-	#tag : 'Directions'
+	#name : #BlFocusSearchDirectionBackward,
+	#superclass : #BlFocusSearchDirectionRelative,
+	#category : #'Bloc-FocusFinder-Directions'
 }
 
-{ #category : 'focus' }
+{ #category : #focus }
 BlFocusSearchDirectionBackward >> initFocusedBounds: aFocusedBounds root: aFocusRootElement [
 
 	aFocusRootElement layout isRightToLeft

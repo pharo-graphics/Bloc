@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlFileCollectionRopeExamples',
-	#superclass : 'BlCollectionRopeExamples',
-	#category : 'Bloc-Examples-Rope',
-	#package : 'Bloc-Examples',
-	#tag : 'Rope'
+	#name : #BlFileCollectionRopeExamples,
+	#superclass : #BlCollectionRopeExamples,
+	#category : #'Bloc-Examples-Rope'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlFileCollectionRopeExamples >> small [
 	<gtExample>
 	<label: 'Creates an instance of the rope of size smaller than combineLength'>

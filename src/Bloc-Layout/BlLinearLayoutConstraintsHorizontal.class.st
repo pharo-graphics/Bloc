@@ -1,40 +1,38 @@
 Class {
-	#name : 'BlLinearLayoutConstraintsHorizontal',
-	#superclass : 'BlLayoutConstraintsAxis',
+	#name : #BlLinearLayoutConstraintsHorizontal,
+	#superclass : #BlLayoutConstraintsAxis,
 	#instVars : [
 		'alignment'
 	],
-	#category : 'Bloc-Layout-Linear',
-	#package : 'Bloc-Layout',
-	#tag : 'Linear'
+	#category : #'Bloc-Layout-Linear'
 }
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlLinearLayoutConstraintsHorizontal >> alignCenter [
 	alignment := BlElementAlignment horizontal center
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlLinearLayoutConstraintsHorizontal >> alignLeft [
 	alignment := BlElementAlignment horizontal start
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlLinearLayoutConstraintsHorizontal >> alignRight [
 	alignment := BlElementAlignment horizontal end
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayoutConstraintsHorizontal >> alignment [
 	^ alignment
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayoutConstraintsHorizontal >> alignment: aBlElementAlignment [
 	alignment := aBlElementAlignment
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlLinearLayoutConstraintsHorizontal >> initialize [
 	super initialize.
 	

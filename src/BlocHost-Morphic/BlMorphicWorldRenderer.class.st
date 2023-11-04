@@ -2,55 +2,53 @@
 I know how to render the world in a Bloc element
 "
 Class {
-	#name : 'BlMorphicWorldRenderer',
-	#superclass : 'AbstractWorldRenderer',
+	#name : #BlMorphicWorldRenderer,
+	#superclass : #AbstractWorldRenderer,
 	#instVars : [
 		'element',
 		'display',
 		'spartaCanvas'
 	],
-	#category : 'BlocHost-Morphic-World',
-	#package : 'BlocHost-Morphic',
-	#tag : 'World'
+	#category : #'BlocHost-Morphic-World'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWorldRenderer class >> isApplicableFor: aWorld [
 
 	^ aWorld class = BlMorphicWorldMorph
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWorldRenderer class >> priority [ 
 
 	^ 3
 ]
 
-{ #category : 'operations' }
+{ #category : #operations }
 BlMorphicWorldRenderer >> activateCursor: aCursor withMask: maskForm [
 ]
 
-{ #category : 'activation' }
+{ #category : #activation }
 BlMorphicWorldRenderer >> actualScreenSize [
 	<return: #Point>
 
 	^ self element extent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWorldRenderer >> canvas [
 	^ display getCanvas
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWorldRenderer >> canvas: aCanvas [
 ]
 
-{ #category : 'activation' }
+{ #category : #activation }
 BlMorphicWorldRenderer >> deactivate [
 ]
 
-{ #category : 'activation' }
+{ #category : #activation }
 BlMorphicWorldRenderer >> doActivate [
 	| initialExtent |
 	
@@ -63,21 +61,21 @@ BlMorphicWorldRenderer >> doActivate [
 	world displayWorld
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWorldRenderer >> element [
 	^ element
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWorldRenderer >> element: anObject [
 	element := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWorldRenderer >> icon: aForm [
 ]
 
-{ #category : 'activation' }
+{ #category : #activation }
 BlMorphicWorldRenderer >> initialize [
 	super initialize.
 	

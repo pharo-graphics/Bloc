@@ -1,11 +1,10 @@
 Class {
-	#name : 'BlOSWindowSDL2HostSpace',
-	#superclass : 'BlOSWindowHostSpace',
-	#category : 'BlocHost-OSWindow-SDL2',
-	#package : 'BlocHost-OSWindow-SDL2'
+	#name : #BlOSWindowSDL2HostSpace,
+	#superclass : #BlOSWindowHostSpace,
+	#category : #'BlocHost-OSWindow-SDL2'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlOSWindowSDL2HostSpace >> createBufferSurfaceRenderer [
 	<return: #BlHostSurfaceRenderer>
 
@@ -14,7 +13,7 @@ BlOSWindowSDL2HostSpace >> createBufferSurfaceRenderer [
 		  yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlOSWindowSDL2HostSpace >> newBlHostRendererSurface [
 
 	^ BlHostRendererBufferSurface newForHostSpace: self

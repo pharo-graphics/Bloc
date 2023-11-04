@@ -1,40 +1,38 @@
 Class {
-	#name : 'BlDevScripterCollection',
-	#superclass : 'Object',
+	#name : #BlDevScripterCollection,
+	#superclass : #Object,
 	#instVars : [
 		'collection'
 	],
-	#category : 'Bloc-Scripter-Scripter-Utilities',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Utilities'
+	#category : #'Bloc-Scripter-Scripter-Utilities'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCollection >> at: anIndex [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCollection >> collection [
 	^ collection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCollection >> collection: anObject [
 	collection := anObject
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BlDevScripterCollection >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BlDevScripterCollection >> detect: aBlock ifNone: exceptionBlock [
 	^ self detect: aBlock ifFound: [ :anEvent | anEvent ] ifNone: exceptionBlock
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BlDevScripterCollection >> detectEventOfClass: anEventClass ifFound: aFoundBlock ifNone: aNoneBlock [
 	^ self 
 		detectEventOfClass: anEventClass 
@@ -43,7 +41,7 @@ BlDevScripterCollection >> detectEventOfClass: anEventClass ifFound: aFoundBlock
 		ifNone: aNoneBlock
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BlDevScripterCollection >> detectEventOfClass: anEventClass ifNone: aNoneBlock [
 	^ self 
 		detectEventOfClass: anEventClass 
@@ -52,7 +50,7 @@ BlDevScripterCollection >> detectEventOfClass: anEventClass ifNone: aNoneBlock [
 		ifNone: aNoneBlock
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BlDevScripterCollection >> detectEventOfClass: anEventClass satisfying: anOneArgBlock ifFound: aFoundBlock ifNone: aNoneBlock [
 	^ self 
 		detect: [ :eachEvent | eachEvent class = anEventClass and: [ anOneArgBlock value: eachEvent ] ] 
@@ -60,43 +58,43 @@ BlDevScripterCollection >> detectEventOfClass: anEventClass satisfying: anOneArg
 		ifNone: aNoneBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCollection >> first [
 	^ self at: 1
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlDevScripterCollection >> ifEmpty: aBlock [
 	^ self collection ifEmpty: aBlock
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlDevScripterCollection >> ifNotEmpty: aBlock [
 	^ self collection ifNotEmpty: aBlock
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevScripterCollection >> initialize [
 	super initialize.
 	collection := OrderedCollection new.
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlDevScripterCollection >> isEmpty [
 	^ self collection isEmpty
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlDevScripterCollection >> isNotEmpty [
 	^ self collection isNotEmpty
 ]
 
-{ #category : 'removing' }
+{ #category : #removing }
 BlDevScripterCollection >> removeAll [
 	collection removeAll
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCollection >> size [
 	^ self collection size
 ]

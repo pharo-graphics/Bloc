@@ -1,24 +1,23 @@
 Class {
-	#name : 'BlElementFontSizeProperty',
-	#superclass : 'BlElementProperty',
+	#name : #BlElementFontSizeProperty,
+	#superclass : #BlElementProperty,
 	#instVars : [
 		'fontSize'
 	],
-	#category : 'Bloc-Text-Elements',
-	#package : 'Bloc-Text-Elements'
+	#category : #'Bloc-Text-Elements'
 }
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlElementFontSizeProperty class >> default [
 	^ self new fontSize: self defaultFontSize
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlElementFontSizeProperty class >> defaultFontSize [
 	^ BlValueWithUnit pt: BlFont defaultFontSize
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlElementFontSizeProperty >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -29,46 +28,46 @@ BlElementFontSizeProperty >> = anObject [
 	^ fontSize = anObject fontSize
 ]
 
-{ #category : 'api - property' }
+{ #category : #'api - property' }
 BlElementFontSizeProperty >> applyOnElement: anElement [
 	(anElement respondsTo: #defaultFontSize:)
 		ifTrue: [
 			anElement defaultFontSize: self fontSize value ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlElementFontSizeProperty >> canPropagateToChildren [
 	^ true
 ]
 
-{ #category : 'api - property' }
+{ #category : #'api - property' }
 BlElementFontSizeProperty >> cleanUpOnElement: anElement [
 	(anElement respondsTo: #defaultFontSize:)
 		ifTrue: [ anElement defaultFontSize: BlFont defaultFontSize ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementFontSizeProperty >> fontSize [
 	<return: #BlValueWithUnit>
 
 	^ fontSize
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementFontSizeProperty >> fontSize: aBlElementPropertyLength [
 	fontSize := aBlElementPropertyLength isNumber
 		ifTrue: [ BlValueWithUnit pt: aBlElementPropertyLength ]
 		ifFalse: [ aBlElementPropertyLength ]
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlElementFontSizeProperty >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ fontSize hash
 ]
 
-{ #category : 'api - property' }
+{ #category : #'api - property' }
 BlElementFontSizeProperty >> resolveWithParentProperties: theParentProperties orGlobal: theGlobalProperties [
 	| aResolvedValue |
 

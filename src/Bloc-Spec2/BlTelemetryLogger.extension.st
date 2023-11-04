@@ -1,6 +1,6 @@
-Extension { #name : 'BlTelemetryLogger' }
+Extension { #name : #BlTelemetryLogger }
 
-{ #category : '*Bloc-Spec2' }
+{ #category : #'*Bloc-Spec2' }
 BlTelemetryLogger >> inspectorTreeIn: aBuilder [
 	<inspectorPresentationOrder: 3 title: 'Tasks Tree'>
 

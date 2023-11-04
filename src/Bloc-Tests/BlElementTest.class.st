@@ -1,16 +1,14 @@
 Class {
-	#name : 'BlElementTest',
-	#superclass : 'TestCase',
+	#name : #BlElementTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'space',
 		'host'
 	],
-	#category : 'Bloc-Tests-Basic',
-	#package : 'Bloc-Tests',
-	#tag : 'Basic'
+	#category : #'Bloc-Tests-Basic'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlElementTest >> element [
 
 	<sampleInstance>
@@ -19,14 +17,14 @@ BlElementTest >> element [
 		  yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlElementTest >> invisible [
 
 	<sampleInstance>
 	^ self element visibility: BlVisibility hidden
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlElementTest >> setUp [
 
 	super setUp.
@@ -38,7 +36,7 @@ BlElementTest >> setUp [
 	host createHostSpaceFor: space
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlElementTest >> tearDown [
 
 	super tearDown.
@@ -49,7 +47,7 @@ BlElementTest >> tearDown [
 	space := nil
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlElementTest >> testChildWithId [
 
 	| blElement blChild error |
@@ -71,7 +69,7 @@ BlElementTest >> testChildWithId [
 	self assert: (blElement childWithId: #aChild) equals: blChild
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlElementTest >> testChildWithIdIfFound [
 
 	| blElement blChild result |
@@ -99,7 +97,7 @@ BlElementTest >> testChildWithIdIfFound [
 	self assert: result
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlElementTest >> testChildWithIdIfFoundIfNone [
 
 	| blElement blChild result |
@@ -145,7 +143,7 @@ BlElementTest >> testChildWithIdIfFoundIfNone [
 	self assert: result
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlElementTest >> testChildWithIdIfNone [
 
 	| blElement blChild |
@@ -165,7 +163,7 @@ BlElementTest >> testChildWithIdIfNone [
 		equals: blChild
 ]
 
-{ #category : 'default' }
+{ #category : #default }
 BlElementTest >> testDefault [
 
 	| element |
@@ -175,7 +173,7 @@ BlElementTest >> testDefault [
 	self assert: element extent equals: 0 @ 0
 ]
 
-{ #category : 'focus testing' }
+{ #category : #'focus testing' }
 BlElementTest >> testHasFocus [
 
 	| element child |
@@ -198,7 +196,7 @@ BlElementTest >> testHasFocus [
 	self assert: child hasFocus
 ]
 
-{ #category : 'focus testing' }
+{ #category : #'focus testing' }
 BlElementTest >> testHasFocusable [
 
 	| element child |
@@ -226,7 +224,7 @@ BlElementTest >> testHasFocusable [
 	self assert: child hasFocusable
 ]
 
-{ #category : 'test' }
+{ #category : #test }
 BlElementTest >> testId [
 
 	| element |
@@ -236,7 +234,7 @@ BlElementTest >> testId [
 	self assert: element id equals: #anId.
 ]
 
-{ #category : 'test' }
+{ #category : #test }
 BlElementTest >> testIdConstructor [
 
 	| element |
@@ -245,7 +243,7 @@ BlElementTest >> testIdConstructor [
 	self assert: element id equals: #anId.
 ]
 
-{ #category : 'focus testing' }
+{ #category : #'focus testing' }
 BlElementTest >> testIsFocusable [
 
 	| element |
@@ -271,7 +269,7 @@ BlElementTest >> testIsFocusable [
 	self assert: element isFocusable
 ]
 
-{ #category : 'focus testing' }
+{ #category : #'focus testing' }
 BlElementTest >> testIsFocused [
 
 	| element |
@@ -284,7 +282,7 @@ BlElementTest >> testIsFocused [
 	self assert: element isFocused
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlElementTest >> testPrintOn [
 
 	| element hash |
@@ -294,7 +292,7 @@ BlElementTest >> testPrintOn [
 	self assert: element printString equals: ('BlElement @ ', hash printString)
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlElementTest >> testRemoveChildWithId [
 
 	| element child |
@@ -311,7 +309,7 @@ BlElementTest >> testRemoveChildWithId [
 
 ]
 
-{ #category : 'focus requesting' }
+{ #category : #'focus requesting' }
 BlElementTest >> testRequestFocus [
 
 	| element child another elementEvents childEvents anotherEvents |
@@ -391,7 +389,7 @@ BlElementTest >> testRequestFocus [
 	self assert: childEvents first target == child
 ]
 
-{ #category : 'children - enumerating' }
+{ #category : #'children - enumerating' }
 BlElementTest >> testSelectChildrenWithId [
 
 	| element child list child2 |
@@ -413,7 +411,7 @@ BlElementTest >> testSelectChildrenWithId [
 	self assert: list second identicalTo: child2.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlElementTest >> visible [
 
 	<sampleInstance>

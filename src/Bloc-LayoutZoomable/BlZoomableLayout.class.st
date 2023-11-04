@@ -1,40 +1,39 @@
 Class {
-	#name : 'BlZoomableLayout',
-	#superclass : 'BlCompositeLayout',
+	#name : #BlZoomableLayout,
+	#superclass : #BlCompositeLayout,
 	#instVars : [
 		'animationDuration',
 		'defaultScale'
 	],
-	#category : 'Bloc-LayoutZoomable',
-	#package : 'Bloc-LayoutZoomable'
+	#category : #'Bloc-LayoutZoomable'
 }
 
-{ #category : 'constraints' }
+{ #category : #constraints }
 BlZoomableLayout class >> constraints [
 	^ BlZoomableLayoutConstraints new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlZoomableLayout >> animationDuration [
 	^ animationDuration
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlZoomableLayout >> animationDuration: aDuration [
 	animationDuration := aDuration
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlZoomableLayout >> defaultScale [
 	^ defaultScale
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlZoomableLayout >> defaultScale: aNumber [
 	defaultScale := aNumber
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 BlZoomableLayout >> initialize [
 	super initialize.
 	
@@ -42,7 +41,7 @@ BlZoomableLayout >> initialize [
 	animationDuration := 0 milliSeconds
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlZoomableLayout >> measure: aParentLayoutNode [
 	| theCurrentZoomInterval theCurrentZoomFactor theBoundingBox aPreviousBoundingBox |
 
@@ -97,7 +96,7 @@ BlZoomableLayout >> measure: aParentLayoutNode [
 			ifTrue: [ eachChildNode constraints zoomable scaleFactor: theCurrentZoomFactor ] ]
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlZoomableLayout >> measureWithDefaultZoom: aParentLayoutNode [
 	| theBoundingBox aTransformation |
 	

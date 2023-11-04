@@ -3,33 +3,31 @@ I represent an abstract direction in which the next focusable element should be 
 
 "
 Class {
-	#name : 'BlFocusSearchDirection',
-	#superclass : 'Object',
-	#category : 'Bloc-FocusFinder-Directions',
-	#package : 'Bloc-FocusFinder',
-	#tag : 'Directions'
+	#name : #BlFocusSearchDirection,
+	#superclass : #Object,
+	#category : #'Bloc-FocusFinder-Directions'
 }
 
-{ #category : 'focus' }
+{ #category : #focus }
 BlFocusSearchDirection >> initFocusedBounds: aFocusedBounds root: aFocusRootElement [
 
 	self subclassResponsibility
 ]
 
-{ #category : 'focus' }
+{ #category : #focus }
 BlFocusSearchDirection >> name [
 
 	^ 'Uknown'
 ]
 
-{ #category : 'focus' }
+{ #category : #focus }
 BlFocusSearchDirection >> nextFocus: aFocusedElement in: aCollectionOfElements within: aFocusRootElement from: aFocusedBounds finder: aFocusFinder [
 	"Return a `BlElement` or nil with the next focus."
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlFocusSearchDirection >> vector [
 	"Return a vector that represents a direction of the search"
 

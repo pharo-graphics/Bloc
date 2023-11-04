@@ -19,8 +19,8 @@ The task state is currently not thread-safe, so the time between checking the ta
 
 "
 Class {
-	#name : 'BlDelayedTask',
-	#superclass : 'BlTask',
+	#name : #BlDelayedTask,
+	#superclass : #BlTask,
 	#instVars : [
 		'delay',
 		'element',
@@ -29,24 +29,22 @@ Class {
 		'startTime',
 		'requeue'
 	],
-	#category : 'Bloc-Space - Tasks',
-	#package : 'Bloc',
-	#tag : 'Space - Tasks'
+	#category : #'Bloc-Space - Tasks'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDelayedTask >> delay [
 	<return: #Duration>
 
 	^ delay
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDelayedTask >> delay: aDuration [
 	delay := aDuration
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlDelayedTask >> dequeue [
 
 	self
@@ -56,19 +54,19 @@ BlDelayedTask >> dequeue [
 	self element dequeueTask: self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDelayedTask >> element [
 	<return: #BlElement>
 
 	^ element
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDelayedTask >> element: aBlElement [
 	element := aBlElement
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlDelayedTask >> enqueue [
 
 	self
@@ -78,7 +76,7 @@ BlDelayedTask >> enqueue [
 	self element enqueueTask: self
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDelayedTask >> initialize [
 	super initialize.
 	
@@ -88,14 +86,14 @@ BlDelayedTask >> initialize [
 	requeue := false.
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BlDelayedTask >> isRunning [
 	<return: #Boolean>
 
 	^ isRunning
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlDelayedTask >> onEnqueued: aBlSpace [
 	super onEnqueued: aBlSpace.
 
@@ -106,24 +104,24 @@ BlDelayedTask >> onEnqueued: aBlSpace [
 		ifNil: [ startTime := self time now ]
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlDelayedTask >> onEnqueuedInElement: aBlElement [
 	self element: aBlElement
 ]
 
-{ #category : 'api - running' }
+{ #category : #'api - running' }
 BlDelayedTask >> onRun [
 	"Override me to implement a custom action"
 ]
 
-{ #category : 'private - testing' }
+{ #category : #'private - testing' }
 BlDelayedTask >> requeueTaskAfterExecution [
 	"Answer a boolean indicating whether the receiver should be requeued after execution."
 
 	^ requeue
 ]
 
-{ #category : 'api - running' }
+{ #category : #'api - running' }
 BlDelayedTask >> run [
 	self isRunning
 		ifFalse: [ ^ self ].
@@ -136,7 +134,7 @@ BlDelayedTask >> run [
 	self stop
 ]
 
-{ #category : 'api - running' }
+{ #category : #'api - running' }
 BlDelayedTask >> start [
 	self
 		assert: [ element isNotNil ]
@@ -151,7 +149,7 @@ BlDelayedTask >> start [
 	self enqueue
 ]
 
-{ #category : 'api - running' }
+{ #category : #'api - running' }
 BlDelayedTask >> startOrRestart [
 	"Ensure that the receiver is running and enqueued.
 	If already running, reset the start time (there is always the possibility that this will be called just after the task has started running, so will continue rather than waiting the full delay)."
@@ -167,7 +165,7 @@ BlDelayedTask >> startOrRestart [
 
 ]
 
-{ #category : 'api - running' }
+{ #category : #'api - running' }
 BlDelayedTask >> stop [
 	"Stop the task by dequeuing it"
 	(element isNotNil and: [ self isRunning ])
@@ -178,14 +176,14 @@ BlDelayedTask >> stop [
 	requeue := false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDelayedTask >> time [
 	<return: #BlTime>
 
 	^ time
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDelayedTask >> time: aBlTime [
 	time := aBlTime
 ]

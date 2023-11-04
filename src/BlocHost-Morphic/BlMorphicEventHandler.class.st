@@ -5,8 +5,8 @@ I am responsible for convertion of moprhic events to bloc events and their enque
 I know morphic window I belong to
 "
 Class {
-	#name : 'BlMorphicEventHandler',
-	#superclass : 'Object',
+	#name : #BlMorphicEventHandler,
+	#superclass : #Object,
 	#instVars : [
 		'morph',
 		'pressedKeys'
@@ -14,19 +14,17 @@ Class {
 	#classVars : [
 		'HorizontalScrolling'
 	],
-	#category : 'BlocHost-Morphic-Support',
-	#package : 'BlocHost-Morphic',
-	#tag : 'Support'
+	#category : #'BlocHost-Morphic-Support'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMorphicEventHandler class >> window: aMorphicWindow [
 	^ self new
 		window: aMorphicWindow;
 		yourself
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlMorphicEventHandler >> convertButtonFromMouseButtonEvent: aMorphicEvent [
 	<return: #BlMouseButton>
 
@@ -39,7 +37,7 @@ BlMorphicEventHandler >> convertButtonFromMouseButtonEvent: aMorphicEvent [
 	^ BlMouseButton code: aMorphicEvent whichButton
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlMorphicEventHandler >> convertKeyFromEvent: aMorphicEvent [
 
 	<return: #KeyboardKey>
@@ -55,7 +53,7 @@ BlMorphicEventHandler >> convertKeyFromEvent: aMorphicEvent [
 	^ aKey
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlMorphicEventHandler >> convertKeyModifiersFromEvent: aMorphicEvent [ 
 	| shift ctrl alt cmd |
 
@@ -74,7 +72,7 @@ BlMorphicEventHandler >> convertKeyModifiersFromEvent: aMorphicEvent [
 	^ BlKeyModifiers shift: shift ctrl: ctrl alt: alt cmd: cmd
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> convertMousePosition: anEvent andDo: aBlock [
 
 	"changes event position to be relative to the panelRect, not to the world"
@@ -82,7 +80,7 @@ BlMorphicEventHandler >> convertMousePosition: anEvent andDo: aBlock [
 	aBlock value: anEvent
 ]
 
-{ #category : 'private - actions' }
+{ #category : #'private - actions' }
 BlMorphicEventHandler >> dropFiles: anEvent [
 	"Handle a number of dropped files from the OS.
 	TODO:
@@ -97,7 +95,7 @@ BlMorphicEventHandler >> dropFiles: anEvent [
 		handler ifNotNil: [ aFileReference binaryWriteStreamDo: [ :stream | handler handle: stream in: self dropEvent: anEvent ] ]].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicEventHandler >> enqueue: aBlEvent [
 
 	self isClosed
@@ -109,12 +107,12 @@ BlMorphicEventHandler >> enqueue: aBlEvent [
 	self window hostSpace space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlMorphicEventHandler >> globalMousePositionForEvent: anEvent [
 	^ morph position + anEvent position
 ]
 
-{ #category : 'private - keyboard' }
+{ #category : #'private - keyboard' }
 BlMorphicEventHandler >> handleBackspaceDown: aMorphicEvent [
 	| aBlEvent |
 	
@@ -128,7 +126,7 @@ BlMorphicEventHandler >> handleBackspaceDown: aMorphicEvent [
 	self enqueue: aBlEvent
 ]
 
-{ #category : 'private - keyboard' }
+{ #category : #'private - keyboard' }
 BlMorphicEventHandler >> handleBackspaceUp: aMorphicEvent [
 	| aBlEvent |
 
@@ -142,7 +140,7 @@ BlMorphicEventHandler >> handleBackspaceUp: aMorphicEvent [
 	self enqueue: aBlEvent
 ]
 
-{ #category : 'private - keyboard' }
+{ #category : #'private - keyboard' }
 BlMorphicEventHandler >> handleDeleteDown: aMorphicEvent [
 	| aBlEvent |
 
@@ -157,7 +155,7 @@ BlMorphicEventHandler >> handleDeleteDown: aMorphicEvent [
 	self enqueue: aBlEvent
 ]
 
-{ #category : 'private - keyboard' }
+{ #category : #'private - keyboard' }
 BlMorphicEventHandler >> handleDeleteOrBackspaceDown: aMorphicEvent [
 
 	"we only allow either delete or backspace key"
@@ -174,7 +172,7 @@ BlMorphicEventHandler >> handleDeleteOrBackspaceDown: aMorphicEvent [
 		ifTrue: [ ^ self handleBackspaceDown: aMorphicEvent ]
 ]
 
-{ #category : 'private - keyboard' }
+{ #category : #'private - keyboard' }
 BlMorphicEventHandler >> handleDeleteOrBackspaceUp: aMorphicEvent [
 
 	(self hasPressedKey: KeyboardKey delete)
@@ -184,7 +182,7 @@ BlMorphicEventHandler >> handleDeleteOrBackspaceUp: aMorphicEvent [
 		ifTrue: [ ^ self handleBackspaceUp: aMorphicEvent ]
 ]
 
-{ #category : 'private - keyboard' }
+{ #category : #'private - keyboard' }
 BlMorphicEventHandler >> handleDeleteUp: aMorphicEvent [
 	| aBlEvent |
 
@@ -198,7 +196,7 @@ BlMorphicEventHandler >> handleDeleteUp: aMorphicEvent [
 	self enqueue: aBlEvent
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleDropFiles: anEvent [
 	"Handle a drop from the OS."
 	anEvent wasHandled ifTrue: [ ^ self ]. "not interested"
@@ -207,7 +205,7 @@ BlMorphicEventHandler >> handleDropFiles: anEvent [
 	self dropFiles: anEvent.
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleDropMorph: anEvent [
 	"| pos |
 	pos := anEvent position - self window position.
@@ -215,7 +213,7 @@ BlMorphicEventHandler >> handleDropMorph: anEvent [
 	self enqueue: anEvent"
 ]
 
-{ #category : 'events - keyboard' }
+{ #category : #'events - keyboard' }
 BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 	| aBlEvent aKey theModifiers |
 
@@ -251,7 +249,7 @@ BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 	self enqueue: aBlEvent
 ]
 
-{ #category : 'events - keyboard' }
+{ #category : #'events - keyboard' }
 BlMorphicEventHandler >> handleKeyUp: aMorphicEvent [
 	| aBlEvent aKey theModifiers |
 
@@ -281,7 +279,7 @@ BlMorphicEventHandler >> handleKeyUp: aMorphicEvent [
 	self enqueue: aBlEvent
 ]
 
-{ #category : 'events - keyboard' }
+{ #category : #'events - keyboard' }
 BlMorphicEventHandler >> handleKeystroke: aMorphicEvent [
 
 	| aBlEvent |
@@ -306,7 +304,7 @@ BlMorphicEventHandler >> handleKeystroke: aMorphicEvent [
 	self enqueue: aBlEvent
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleMouseDown: anEvent [
 
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
@@ -324,15 +322,15 @@ BlMorphicEventHandler >> handleMouseDown: anEvent [
 	morph takeKeyboardFocus
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleMouseEnter: anEvent [
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleMouseLeave: anEvent [
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleMouseMove: anEvent [
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent |
@@ -348,11 +346,11 @@ BlMorphicEventHandler >> handleMouseMove: anEvent [
 		self enqueue: aBlEvent ]
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleMouseOver: anEvent [
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleMouseUp: anEvent [
 	
 	morph
@@ -373,7 +371,7 @@ BlMorphicEventHandler >> handleMouseUp: anEvent [
 	morph ifNotNil: #takeKeyboardFocus
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleMouseWheel: anEvent [
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent vectorOffset vector |
@@ -394,7 +392,7 @@ BlMorphicEventHandler >> handleMouseWheel: anEvent [
 		self enqueue: aBlEvent ]
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleScrollLeft: anEvent [
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent |
@@ -408,7 +406,7 @@ BlMorphicEventHandler >> handleScrollLeft: anEvent [
 		self enqueue: aBlEvent ]
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleScrollRight: anEvent [
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent |
@@ -424,12 +422,12 @@ BlMorphicEventHandler >> handleScrollRight: anEvent [
 		self enqueue: aBlEvent ]
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleTextEditionEvent: anEvent [
 
 ]
 
-{ #category : 'events - keyboard' }
+{ #category : #'events - keyboard' }
 BlMorphicEventHandler >> handleTextInputEvent: aTextInputEvent [
 
 	| aBlEvent |
@@ -445,7 +443,7 @@ BlMorphicEventHandler >> handleTextInputEvent: aTextInputEvent [
 	self enqueue: aBlEvent
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleWindowClosed: aMorphicEvent [
 	| aBlEvent |
 
@@ -455,16 +453,16 @@ BlMorphicEventHandler >> handleWindowClosed: aMorphicEvent [
 	morph := nil
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleWindowEvent: anEvent [
 	
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleWindowOpened: aMorphicEvent [
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMorphicEventHandler >> handleWindowResize: aMorphicEvent [
 	| aBlEvent |
 	aBlEvent := BlSpaceResizedEvent new
@@ -476,18 +474,18 @@ BlMorphicEventHandler >> handleWindowResize: aMorphicEvent [
 	self window hostSpace space pulse
 ]
 
-{ #category : 'private - keyboard' }
+{ #category : #'private - keyboard' }
 BlMorphicEventHandler >> hasPressedKey: aKey [
 	^ pressedKeys includes: aKey
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicEventHandler >> horizontalScrolling [ 
 
 	^HorizontalScrolling ifNil: [ HorizontalScrolling := false ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlMorphicEventHandler >> initialize [
 	super initialize.
 
@@ -495,12 +493,12 @@ BlMorphicEventHandler >> initialize [
 	HorizontalScrolling := false.
 ]
 
-{ #category : 'private - testing' }
+{ #category : #'private - testing' }
 BlMorphicEventHandler >> isClosed [
 	^ morph isNil
 ]
 
-{ #category : 'private - testing' }
+{ #category : #'private - testing' }
 BlMorphicEventHandler >> isScrollEvent: aMorphicKeyEvent [
 	"Return true if a given morphic key event is in fact a scroll event.
 	It is a morphic issue, that mouse wheel or touchpad events are
@@ -516,45 +514,45 @@ BlMorphicEventHandler >> isScrollEvent: aMorphicKeyEvent [
 									or: [ aMorphicKeyEvent keyCharacter = Character null ] ] ] ] ] ] ])
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicEventHandler >> morph [
 	^ morph
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicEventHandler >> morph: aMorph [
 	morph := aMorph
 ]
 
-{ #category : 'private - keyboard' }
+{ #category : #'private - keyboard' }
 BlMorphicEventHandler >> registerPressedKey: aKey [
 	pressedKeys add: aKey
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicEventHandler >> time [
 	<return: #BlTime>
 
 	^ self window hostSpace space time
 ]
 
-{ #category : 'private - keyboard' }
+{ #category : #'private - keyboard' }
 BlMorphicEventHandler >> toggleHorizontalScrolling [
 
 	HorizontalScrolling := self horizontalScrolling not.
 ]
 
-{ #category : 'private - keyboard' }
+{ #category : #'private - keyboard' }
 BlMorphicEventHandler >> unregisterPressedKey: aKey [
 	pressedKeys remove: aKey
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicEventHandler >> window [
 	^ self morph
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicEventHandler >> window: aBlMorphicWindow [
 	self morph: aBlMorphicWindow
 ]

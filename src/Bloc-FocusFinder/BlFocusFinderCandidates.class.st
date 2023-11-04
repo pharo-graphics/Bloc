@@ -1,33 +1,31 @@
 Class {
-	#name : 'BlFocusFinderCandidates',
-	#superclass : 'Object',
+	#name : #BlFocusFinderCandidates,
+	#superclass : #Object,
 	#instVars : [
 		'candidates'
 	],
-	#category : 'Bloc-FocusFinder-Core',
-	#package : 'Bloc-FocusFinder',
-	#tag : 'Core'
+	#category : #'Bloc-FocusFinder-Core'
 }
 
-{ #category : 'adding' }
+{ #category : #adding }
 BlFocusFinderCandidates >> add: anElement [
 
 	candidates add: anElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFocusFinderCandidates >> candidates [
 
 	^ candidates
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BlFocusFinderCandidates >> do: aBlock [
 
 	candidates do: aBlock
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlFocusFinderCandidates >> initialize [
 
 	super initialize.
@@ -35,13 +33,13 @@ BlFocusFinderCandidates >> initialize [
 	candidates := OrderedCollection new
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlFocusFinderCandidates >> isEmpty [
 
 	^ self size isZero
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFocusFinderCandidates >> size [
 	
 	^ candidates size

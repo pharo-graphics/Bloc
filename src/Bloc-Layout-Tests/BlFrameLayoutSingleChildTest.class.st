@@ -3,13 +3,12 @@ I have been automatically converted and probably manually tweaked from BlFrameLa
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlFrameLayoutSingleChildTest',
-	#superclass : 'BlFrameLayoutChildrenTest',
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#name : #BlFrameLayoutSingleChildTest,
+	#superclass : #BlFrameLayoutChildrenTest,
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testChildElementMatchingParentWith25per50Percent [
 
 	<sampleInstance>
@@ -29,7 +28,7 @@ BlFrameLayoutSingleChildTest >> testChildElementMatchingParentWith25per50Percent
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testChildElementMatchingParentWith50per40Percent [
 
 	<sampleInstance>
@@ -49,7 +48,7 @@ BlFrameLayoutSingleChildTest >> testChildElementMatchingParentWith50per40Percent
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testChildElementMatchingWidthFitHeight [
 
 	<sampleInstance>
@@ -67,7 +66,7 @@ BlFrameLayoutSingleChildTest >> testChildElementMatchingWidthFitHeight [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testChildElementMatchingWidthFitLimitedHeight [
 
 	<sampleInstance>
@@ -85,7 +84,7 @@ BlFrameLayoutSingleChildTest >> testChildElementMatchingWidthFitLimitedHeight [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testEelementWithMaxWidthOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -102,7 +101,7 @@ BlFrameLayoutSingleChildTest >> testEelementWithMaxWidthOneChildMatchExactParent
 	^ aParent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementDocumentationWithOneExactChildAlignBottomRightInExactParent [
 
 	<sampleInstance>
@@ -124,7 +123,7 @@ BlFrameLayoutSingleChildTest >> testElementDocumentationWithOneExactChildAlignBo
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementForDocumentationWithOneChildMatchExactParentWithWeight [
 
 	<sampleInstance>
@@ -145,7 +144,7 @@ BlFrameLayoutSingleChildTest >> testElementForDocumentationWithOneChildMatchExac
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithMaxHeightOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -162,7 +161,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMaxHeightOneChildMatchExactParent
 	^ aParent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithMaxWidthOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -181,7 +180,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMaxWidthOneChildMatchExactParent 
 	^ aParent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithMinAndMaxHeightOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -200,7 +199,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinAndMaxHeightOneChildMatchExact
 	^ aParent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithMinAndMaxWidthOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -219,7 +218,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinAndMaxWidthOneChildMatchExactP
 	^ aParent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithMinHeightOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -236,7 +235,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinHeightOneChildMatchExactParent
 	^ aParent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithMinWidthOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -253,7 +252,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinWidthOneChildMatchExactParent 
 	^ aParent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -269,7 +268,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParent [
 	^ aParent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithPadding [
 
 	<sampleInstance>
@@ -293,7 +292,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithPaddi
 	^ aParent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithPaddingAndMargin [
 
 	<sampleInstance>
@@ -322,7 +321,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithPaddi
 	^ aParent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeight [
 
 	<sampleInstance>
@@ -338,7 +337,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeigh
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeightAndPadding [
 
 	<sampleInstance>
@@ -359,7 +358,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeigh
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeightAndPaddingAndMargin [
 
 	<sampleInstance>
@@ -385,7 +384,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeigh
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchWidthFitHeightParentExactWidthFitHeight [
 
 	<sampleInstance>
@@ -410,7 +409,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchWidthFitHeightParent
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchWidthFitLimitedHeightParentExactWidthFitHeight [
 
 	<sampleInstance>
@@ -436,7 +435,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchWidthFitLimitedHeigh
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildWithExactSizeParentWithWeight [
 
 	<sampleInstance>
@@ -457,7 +456,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildWithExactSizeParentWithWe
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterAndWithWeightInExactParent [
 
 	<sampleInstance>
@@ -478,7 +477,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterAnd
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterInExactParent [
 
 	<sampleInstance>
@@ -496,7 +495,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterInE
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterInExactParentWithPadding [
 
 	<sampleInstance>
@@ -519,7 +518,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterInE
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomLeftInExactParent [
 
 	<sampleInstance>
@@ -537,7 +536,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomLeftInExa
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomLeftInExactParentWithPadding [
 
 	<sampleInstance>
@@ -560,7 +559,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomLeftInExa
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomRightInExactParent [
 
 	<sampleInstance>
@@ -578,7 +577,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomRightInEx
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomRightInExactParentWithPadding [
 
 	<sampleInstance>
@@ -601,7 +600,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomRightInEx
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterInExactParent [
 
 	<sampleInstance>
@@ -619,7 +618,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterInExactPa
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterInExactParentWithPadding [
 
 	<sampleInstance>
@@ -642,7 +641,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterInExactPa
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterLeftInExactParent [
 
 	<sampleInstance>
@@ -660,7 +659,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterLeftInExa
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterLeftInExactParentWithPadding [
 
 	<sampleInstance>
@@ -683,7 +682,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterLeftInExa
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterRightInExactParent [
 
 	<sampleInstance>
@@ -701,7 +700,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterRightInEx
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterRightInExactParentWithPadding [
 
 	<sampleInstance>
@@ -724,7 +723,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterRightInEx
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignLeftInExactParent [
 
 	<sampleInstance>
@@ -741,7 +740,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignLeftInExactPare
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignRightInExactParentWithPadding [
 
 	<sampleInstance>
@@ -763,7 +762,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignRightInExactPar
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopCenterInExactParent [
 
 	<sampleInstance>
@@ -781,7 +780,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopCenterInExac
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopCenterInExactParentWithPadding [
 
 	<sampleInstance>
@@ -804,7 +803,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopCenterInExac
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopLeftInExactParent [
 
 	<sampleInstance>
@@ -822,7 +821,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopLeftInExactP
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopLeftInExactParentWithPadding [
 
 	<sampleInstance>
@@ -845,7 +844,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopLeftInExactP
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopRightInExactParent [
 
 	<sampleInstance>
@@ -863,7 +862,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopRightInExact
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopRightInExactParentWithPadding [
 
 	<sampleInstance>
@@ -886,7 +885,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopRightInExact
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAndFitContentParent [
 
 	<sampleInstance>
@@ -914,7 +913,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAndFitContentParent 
 	^ aParent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testElementWithOneMatchParentChildAndFitContentParent [
 
 	<sampleInstance>
@@ -942,7 +941,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneMatchParentChildAndFitContentP
 	^ aParent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testRelocateChildLargerWithPadding [
 
 	<sampleInstance>
@@ -966,7 +965,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildLargerWithPadding [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testRelocateChildSmallWithPadding [
 
 	<sampleInstance>
@@ -990,7 +989,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildSmallWithPadding [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testRelocateChildToZeroWithPadding [
 
 	<sampleInstance>
@@ -1013,7 +1012,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildToZeroWithPadding [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentLargerWithPadding [
 
 	<sampleInstance>
@@ -1040,7 +1039,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentLargerWithPaddi
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentSmallWithPadding [
 
 	<sampleInstance>
@@ -1067,7 +1066,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentSmallWithPaddin
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentToZeroWithPadding [
 
 	<sampleInstance>

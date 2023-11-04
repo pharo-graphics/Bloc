@@ -12,31 +12,29 @@ https://en.wikipedia.org/wiki/Rope_(data_structure)
 
 "
 Class {
-	#name : 'BlRope',
-	#superclass : 'Object',
+	#name : #BlRope,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-DataStructure - Rope',
-	#package : 'Bloc',
-	#tag : 'DataStructure - Rope'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
-{ #category : 'types' }
+{ #category : #types }
 BlRope class >> attributeRope [
 	^ BlAttributeRope
 ]
 
-{ #category : 'types' }
+{ #category : #types }
 BlRope class >> collectionRope [
 	^ BlCollectionRope
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlRope class >> combineLength [
 	^ 32
 ]
 
-{ #category : 'rope' }
+{ #category : #rope }
 BlRope class >> concatenate: aLeftRope and: aRightRope [
 	| totalSize |
 	
@@ -83,23 +81,23 @@ BlRope class >> concatenate: aLeftRope and: aRightRope [
 		right: aRightRope
 ]
 
-{ #category : 'types' }
+{ #category : #types }
 BlRope class >> concatenationRope [
 	^ BlConcatenationRope
 ]
 
-{ #category : 'types' }
+{ #category : #types }
 BlRope class >> subRope [
 	^ BlSubRope
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlRope >> allChildrenBreadthFirstDo: aBlock [ 
 	self children do: aBlock.
 	self children do: [ :eachRope | eachRope allChildrenBreadthFirstDo: aBlock ]
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlRope >> append: aRope [
 	"Create and return a new rope by append a given rope to the of end of me"
 	<return: #BlRope>
@@ -107,12 +105,12 @@ BlRope >> append: aRope [
 	^ self class concatenate: self and: aRope
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlRope >> asString [
 	^ self printStringLimitedTo: Float infinity
 ]
 
-{ #category : 'private - asserting' }
+{ #category : #'private - asserting' }
 BlRope >> assertAccessFrom: aStartIndex to: anEndIndex [
 	"I am an index invariant; I make sure that rope operation that require
 	access by index do not go out of rope bounds"
@@ -127,7 +125,7 @@ BlRope >> assertAccessFrom: aStartIndex to: anEndIndex [
 		ifFalse: [ self error: 'End index must be less or equal than the rope size' ]
 ]
 
-{ #category : 'private - asserting' }
+{ #category : #'private - asserting' }
 BlRope >> assertIndexForInsert: anIndex [
 	"I am an insertion index invariant; I make sure that insertion operations
 	do not go out of rope bounds"
@@ -136,7 +134,7 @@ BlRope >> assertIndexForInsert: anIndex [
 		ifTrue: [ self error: 'Insert index ', anIndex asString, ' is out of bounds' ]
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlRope >> at: anIndex [
 	"Return an item at an given index"
 	<return: #Object>
@@ -144,14 +142,14 @@ BlRope >> at: anIndex [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'rope - attributes' }
+{ #category : #'rope - attributes' }
 BlRope >> attributes: anAttributesCollection [
 
 	anAttributesCollection ifEmpty: [ ^self ].
 	^ self attributes: anAttributesCollection from: 0 to: self size
 ]
 
-{ #category : 'rope - attributes' }
+{ #category : #'rope - attributes' }
 BlRope >> attributes: anAttributesCollection from: aStart to: anEnd [
 	"Apply a given collection of attributes on the interval specified by aStart and anEnd indices.
 	aStart and anEnd are given in `cursor` coordinates. For example, assume we have the following text:
@@ -166,7 +164,7 @@ BlRope >> attributes: anAttributesCollection from: aStart to: anEnd [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlRope >> children [
 	"Return a collection of ropes that are my children"
 	<return: #Collection of: #BlRope>
@@ -174,24 +172,24 @@ BlRope >> children [
 	^ {  }
 ]
 
-{ #category : 'rope - attributes' }
+{ #category : #'rope - attributes' }
 BlRope >> clearAttributes: aStart to: anEnd [
 	"Clear all attributes"
 
 	^ self clearAttributes: aStart to: anEnd if: [ :each | true ]
 ]
 
-{ #category : 'rope - attributes' }
+{ #category : #'rope - attributes' }
 BlRope >> clearAttributes: aStart to: anEnd if: aBlock [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'rope - deleting' }
+{ #category : #'rope - deleting' }
 BlRope >> delete: aStart to: anEnd [
 	self subclassResponsibility
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlRope >> depth [
 	"Return the max tree height of this rope (composition depth)"
 	<return: #Number>
@@ -199,12 +197,12 @@ BlRope >> depth [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'rope - enumeration' }
+{ #category : #'rope - enumeration' }
 BlRope >> do: aBlock [
 	self from: 0 to: self size do: aBlock
 ]
 
-{ #category : 'rope - enumeration' }
+{ #category : #'rope - enumeration' }
 BlRope >> empty [
 	"Create and return an empty version of this rope"
 	<return: #BlRope>
@@ -212,19 +210,19 @@ BlRope >> empty [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlRope >> from: aStart to: anEnd [
 	<return: #BlRope>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'rope - enumeration' }
+{ #category : #'rope - enumeration' }
 BlRope >> from: aStart to: anEnd do: aBlock [
 	self subclassResponsibility
 ]
 
-{ #category : 'rope - enumeration' }
+{ #category : #'rope - enumeration' }
 BlRope >> indexOfSubCollection: aCollection startingAt: aStart ifAbsent: exceptionBlock [
 	"Answer the index of the receiver's first element, such that that element 
 	equals the first element of aCollection, and the next elements equal 
@@ -256,7 +254,7 @@ BlRope >> indexOfSubCollection: aCollection startingAt: aStart ifAbsent: excepti
 	^ exceptionBlock value
 ]
 
-{ #category : 'rope - inserting' }
+{ #category : #'rope - inserting' }
 BlRope >> insert: aRope at: anIndex [
 	"Insert aRope after anIndex"
 	anIndex = 0
@@ -271,7 +269,7 @@ BlRope >> insert: aRope at: anIndex [
 	^ ((self from: 0 to: anIndex) append: aRope) append: (self from: anIndex to: self size)
 ]
 
-{ #category : 'rope - inserting' }
+{ #category : #'rope - inserting' }
 BlRope >> insertItems: aCollection at: anIndex [
 	"Insert a given collection of items at a provided index.
 	anIndex is given in `cursor` coordinates. For example, assume we have the following collection of characters:
@@ -285,7 +283,7 @@ BlRope >> insertItems: aCollection at: anIndex [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'rope - testing' }
+{ #category : #'rope - testing' }
 BlRope >> isAttributed [
 	"Return true if I am an attributed rope"
 	<return: #Boolean>
@@ -293,12 +291,12 @@ BlRope >> isAttributed [
 	^ false
 ]
 
-{ #category : 'rope - testing' }
+{ #category : #'rope - testing' }
 BlRope >> isConcatenation [
 	^ false
 ]
 
-{ #category : 'rope - testing' }
+{ #category : #'rope - testing' }
 BlRope >> isEmpty [
 	"Return true if rope is empty, false otherwise"
 	<return: #Boolean>
@@ -306,12 +304,12 @@ BlRope >> isEmpty [
 	^ self size isZero
 ]
 
-{ #category : 'rope - testing' }
+{ #category : #'rope - testing' }
 BlRope >> isLeaf [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'rope - testing' }
+{ #category : #'rope - testing' }
 BlRope >> isNotEmpty [
 	"Return true if rope is not empty, false otherwise"
 	<return: #Boolean>
@@ -319,24 +317,24 @@ BlRope >> isNotEmpty [
 	^ self isEmpty not
 ]
 
-{ #category : 'rope - testing' }
+{ #category : #'rope - testing' }
 BlRope >> isScoped [
 	<return: #Boolean>
 	
 	^ false
 ]
 
-{ #category : 'rope - enumeration' }
+{ #category : #'rope - enumeration' }
 BlRope >> iterator [
 	^ self iterator: 0 to: self size
 ]
 
-{ #category : 'rope - enumeration' }
+{ #category : #'rope - enumeration' }
 BlRope >> iterator: aStart to: anEnd [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlRope >> last [
 	"Return the last item in the rope"
 	<return: #Object>
@@ -344,7 +342,7 @@ BlRope >> last [
 	^ self at: self size
 ]
 
-{ #category : 'rope - printing' }
+{ #category : #'rope - printing' }
 BlRope >> printOn: aStream [
 	
 	self do: [ :anItem | anItem isCharacter
@@ -352,23 +350,23 @@ BlRope >> printOn: aStream [
 		ifFalse: [ aStream nextPutAll: anItem asString ] ]
 ]
 
-{ #category : 'rope - streaming' }
+{ #category : #'rope - streaming' }
 BlRope >> putOn: aStream [
 	self putOn: aStream from: 0 to: self size
 ]
 
-{ #category : 'rope - streaming' }
+{ #category : #'rope - streaming' }
 BlRope >> putOn: aStream from: aStart to: anEnd [
 	self from: aStart to: anEnd do: [ :anItem | aStream nextPut: anItem ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlRope >> readStream [ 
 
 	^ self subclassResponsibility 
 ]
 
-{ #category : 'rope - replacing' }
+{ #category : #'rope - replacing' }
 BlRope >> replaceAll: aCollectionOfAssociations [
 	"Answer a copy of the receiver in which all occurrences of the collections as keys have been replaced by corresponding values.
 	I preserve text attributes"
@@ -389,7 +387,7 @@ BlRope >> replaceAll: aCollectionOfAssociations [
 	^ aNewRope
 ]
 
-{ #category : 'rope - replacing' }
+{ #category : #'rope - replacing' }
 BlRope >> replaceAll: oldSubCollection with: newCollection [
 	"Answer a copy of the receiver in which all occurrences of
 	oldSubCollection have been replaced by newCollection "
@@ -409,28 +407,28 @@ BlRope >> replaceAll: oldSubCollection with: newCollection [
 	^ aNewRope
 ]
 
-{ #category : 'rope - replacing' }
+{ #category : #'rope - replacing' }
 BlRope >> replaceFrom: aStart to: anEnd with: aCollection [ 
 	"Replace a piece of the rope with a given collection of items"
 
 	^ (self delete: aStart to: anEnd) insertItems: aCollection at: aStart
 ]
 
-{ #category : 'rope - replacing' }
+{ #category : #'rope - replacing' }
 BlRope >> simplified [
 	<return: #BlRope>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlRope >> size [
 	<return: #Number>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlRope >> withAllChildrenBreadthFirst [
 	<return: #Collection of: #BlRope>
 	

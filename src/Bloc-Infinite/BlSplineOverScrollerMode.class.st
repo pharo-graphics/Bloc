@@ -1,21 +1,19 @@
 Class {
-	#name : 'BlSplineOverScrollerMode',
-	#superclass : 'Object',
+	#name : #BlSplineOverScrollerMode,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Infinite-Scrollable-Helpers',
-	#package : 'Bloc-Infinite',
-	#tag : 'Scrollable-Helpers'
+	#category : #'Bloc-Infinite-Scrollable-Helpers'
 }
 
-{ #category : 'updating' }
+{ #category : #updating }
 BlSplineOverScrollerMode >> continueOn: aSplineOverScroller [
 	<return: #Boolean>
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BlSplineOverScrollerMode >> finishOn: aSplineOverScroller [
 	"Finish animation and finalize scroller state"
 
@@ -25,12 +23,12 @@ BlSplineOverScrollerMode >> finishOn: aSplineOverScroller [
 	aSplineOverScroller updateTime: nil.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlSplineOverScrollerMode >> initializeOn: aSplineOverScroller [
 	self subclassResponsibility
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BlSplineOverScrollerMode >> updateOn: aSplineOverScroller [
 	<return: #Boolean>
 

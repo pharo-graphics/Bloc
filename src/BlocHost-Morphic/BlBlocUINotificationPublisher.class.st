@@ -1,16 +1,14 @@
 Class {
-	#name : 'BlBlocUINotificationPublisher',
-	#superclass : 'Object',
+	#name : #BlBlocUINotificationPublisher,
+	#superclass : #Object,
 	#instVars : [
 		'notification',
 		'element'
 	],
-	#category : 'BlocHost-Morphic-Support',
-	#package : 'BlocHost-Morphic',
-	#tag : 'Support'
+	#category : #'BlocHost-Morphic-Support'
 }
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlBlocUINotificationPublisher class >> preferredPublisher [
 	| aSelectedClass |
 	aSelectedClass := BlBlocUINotificationBasicPublisher.
@@ -21,14 +19,14 @@ BlBlocUINotificationPublisher class >> preferredPublisher [
 	^ aSelectedClass
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlBlocUINotificationPublisher class >> priority [
 	<return: #Number>
 	"The higher the number, the higher the priority"
 	^ -100
 ]
 
-{ #category : 'api - instance creation' }
+{ #category : #'api - instance creation' }
 BlBlocUINotificationPublisher class >> showNotification: aNotification inElement: anElement [
 	^ self preferredPublisher new
 		element: anElement;
@@ -36,40 +34,40 @@ BlBlocUINotificationPublisher class >> showNotification: aNotification inElement
 		show
 ]
 
-{ #category : 'private - displaying' }
+{ #category : #'private - displaying' }
 BlBlocUINotificationPublisher >> addNotification [
 	self subclassResponsibility
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlBlocUINotificationPublisher >> element [
 	<return: #BlElement>
 	^ element
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlBlocUINotificationPublisher >> element: anElement [
 	element := anElement
 ]
 
-{ #category : 'private - displaying' }
+{ #category : #'private - displaying' }
 BlBlocUINotificationPublisher >> enqueueTaskAction: aBlock [
 	self element enqueueTask: (BlTaskAction new 
 		action: aBlock)
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlBlocUINotificationPublisher >> notification [
 	^ notification
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlBlocUINotificationPublisher >> notification: aNotification [
 	"aNotification must be an object that understands #asElement"
 	notification := aNotification
 ]
 
-{ #category : 'api - displaying' }
+{ #category : #'api - displaying' }
 BlBlocUINotificationPublisher >> show [
 	self enqueueTaskAction: [ self addNotification ]
 ]

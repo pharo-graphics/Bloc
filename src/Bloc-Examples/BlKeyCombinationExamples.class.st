@@ -3,35 +3,33 @@ I contain examples of how to use key combination
 
 "
 Class {
-	#name : 'BlKeyCombinationExamples',
-	#superclass : 'BlExampleTest',
-	#category : 'Bloc-Examples-KeyBinding',
-	#package : 'Bloc-Examples',
-	#tag : 'KeyBinding'
+	#name : #BlKeyCombinationExamples,
+	#superclass : #BlExampleTest,
+	#category : #'Bloc-Examples-KeyBinding'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlKeyCombinationExamples >> alternativeCombination [
 	<gtExample>
 	
 	^ BlAlternativeCombination new
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlKeyCombinationExamples >> arrowLeft [
 	<gtExample>
 	
 	^ KeyboardKey left
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlKeyCombinationExamples >> compulsoryCombination [
 	<gtExample>
 	
 	^ BlCompulsoryCombination new
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlKeyCombinationExamples >> keyLogger [
 
 	<sampleInstance>
@@ -76,21 +74,21 @@ BlKeyCombinationExamples >> keyLogger [
 		  yourself
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlKeyCombinationExamples >> leftMeta [
 
 	<gtExample>
 	^ KeyboardKey metaLeft
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlKeyCombinationExamples >> leftShift [
 
 	<gtExample>
 	^ KeyboardKey shiftLeft
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlKeyCombinationExamples >> meta: aKeyAlternative left: aLeftMeta right: aRightMeta [
 	
 	^ aKeyAlternative
@@ -99,21 +97,21 @@ BlKeyCombinationExamples >> meta: aKeyAlternative left: aLeftMeta right: aRightM
 		yourself
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlKeyCombinationExamples >> rightMeta [
 
 	<gtExample>
 	^ KeyboardKey metaRight
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlKeyCombinationExamples >> rightShift [
 
 	<gtExample>
 	^ KeyboardKey shiftLeft
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlKeyCombinationExamples >> shift: aShiftAlternative arrowLeft: anArrowLeft and: aCompulsoryCombination [
 	
 	^ aCompulsoryCombination
@@ -122,7 +120,7 @@ BlKeyCombinationExamples >> shift: aShiftAlternative arrowLeft: anArrowLeft and:
 		yourself
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlKeyCombinationExamples >> shift: aKeyAlternative left: aLeftShift right: aRightShift [
 	
 	^ aKeyAlternative

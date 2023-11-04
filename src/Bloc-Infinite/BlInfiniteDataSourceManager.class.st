@@ -27,8 +27,8 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : 'BlInfiniteDataSourceManager',
-	#superclass : 'Object',
+	#name : #BlInfiniteDataSourceManager,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -36,12 +36,10 @@ Class {
 		'postponedCommands',
 		'existingCommandTypes'
 	],
-	#category : 'Bloc-Infinite-DataSource',
-	#package : 'Bloc-Infinite',
-	#tag : 'DataSource'
+	#category : #'Bloc-Infinite-DataSource'
 }
 
-{ #category : 'commands processing' }
+{ #category : #'commands processing' }
 BlInfiniteDataSourceManager >> applyPendingCommandsOnPosition: aPosition [
 	"
 	When the position of a an ElementHolder is required.
@@ -58,7 +56,7 @@ BlInfiniteDataSourceManager >> applyPendingCommandsOnPosition: aPosition [
 	^ position
 ]
 
-{ #category : 'helper' }
+{ #category : #helper }
 BlInfiniteDataSourceManager >> canFindInPreLayout: aPosition [
 
 	postponedCommands withIndexDo: [ :command :index | 
@@ -76,13 +74,13 @@ BlInfiniteDataSourceManager >> canFindInPreLayout: aPosition [
 	^ false
 ]
 
-{ #category : 'helper' }
+{ #category : #helper }
 BlInfiniteDataSourceManager >> computePositionOffset: aPosition [
 
 	^ self computePositionOffset: aPosition firstPostponedItem: 1
 ]
 
-{ #category : 'helper' }
+{ #category : #helper }
 BlInfiniteDataSourceManager >> computePositionOffset: aPosition firstPostponedItem: firstPostponedItem [
 	" Sent when scrolling the infinite "
 
@@ -101,7 +99,7 @@ BlInfiniteDataSourceManager >> computePositionOffset: aPosition firstPostponedIt
 	^ position
 ]
 
-{ #category : 'commands processing' }
+{ #category : #'commands processing' }
 BlInfiniteDataSourceManager >> consumeCommandsInOnePassIn: anInfiniteElement [
 	"Skip pre-processing and perform all pending commands in one pass."
 
@@ -119,7 +117,7 @@ BlInfiniteDataSourceManager >> consumeCommandsInOnePassIn: anInfiniteElement [
 	existingCommandTypes clear
 ]
 
-{ #category : 'commands processing' }
+{ #category : #'commands processing' }
 BlInfiniteDataSourceManager >> consumePostponedCommandsIn: anInfiniteElement [
 
 	postponedCommands do: [ :command |
@@ -129,7 +127,7 @@ BlInfiniteDataSourceManager >> consumePostponedCommandsIn: anInfiniteElement [
 	existingCommandTypes clear
 ]
 
-{ #category : 'commands recycling' }
+{ #category : #'commands recycling' }
 BlInfiniteDataSourceManager >> createCommand: type positionStart: positionStart itemCount: itemCount [
 	"Return a data source command with specified parameters"
 	<return: #BlInfiniteDataSourceCommand>
@@ -140,7 +138,7 @@ BlInfiniteDataSourceManager >> createCommand: type positionStart: positionStart 
 			itemCount: itemCount
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlInfiniteDataSourceManager >> dispatchAndUpdateElementHolders: aCommand on: anInfiniteElement [
 	| tmpStart tmpCnt offsetPositionForPartial positionMultiplier |
 	tmpStart := self updatePosition: aCommand positionStart withPostponed: aCommand.
@@ -179,7 +177,7 @@ BlInfiniteDataSourceManager >> dispatchAndUpdateElementHolders: aCommand on: anI
 		self recycleCommand: tmpCommand ].
 ]
 
-{ #category : 'commands processing' }
+{ #category : #'commands processing' }
 BlInfiniteDataSourceManager >> dispatchCommand: aCommand to: anInfiniteElement [
 	"Dispatche data source update command to all interested objects,
 	in this case to infinite element's layout.
@@ -188,14 +186,14 @@ BlInfiniteDataSourceManager >> dispatchCommand: aCommand to: anInfiniteElement [
 	aCommand dispatchToLayout: anInfiniteElement layout
 ]
 
-{ #category : 'helper' }
+{ #category : #helper }
 BlInfiniteDataSourceManager >> dispatchFirstPassAndUpdateElementHolders: aCommand offset: offsetStart in: anInfiniteElement [
 
 	self dispatchCommand: aCommand to: anInfiniteElement.
 	aCommand updateElementHoldersIn: anInfiniteElement offset: offsetStart
 ]
 
-{ #category : 'testing - commands' }
+{ #category : #'testing - commands' }
 BlInfiniteDataSourceManager >> hasAddCommand [
 	"Return true if there are any add commands in the queue, false otherwise"
 	<return: #Boolean>
@@ -203,7 +201,7 @@ BlInfiniteDataSourceManager >> hasAddCommand [
 	^ existingCommandTypes hasAdd
 ]
 
-{ #category : 'testing - commands' }
+{ #category : #'testing - commands' }
 BlInfiniteDataSourceManager >> hasCommands [
 	"Return true if there are both pending and postponed commands,
 	otherwise false"
@@ -212,7 +210,7 @@ BlInfiniteDataSourceManager >> hasCommands [
 	^ self hasPendingCommands and: [ self hasPostponedCommands ]
 ]
 
-{ #category : 'testing - commands' }
+{ #category : #'testing - commands' }
 BlInfiniteDataSourceManager >> hasMoveCommand [
 	"Return true if there are any move commands in the queue, false otherwise"
 	<return: #Boolean>
@@ -220,7 +218,7 @@ BlInfiniteDataSourceManager >> hasMoveCommand [
 	^ existingCommandTypes hasMove
 ]
 
-{ #category : 'testing - commands' }
+{ #category : #'testing - commands' }
 BlInfiniteDataSourceManager >> hasOnlyUpdateCommand [
 	"Return true if there are only update commands in the queue, false otherwise"
 	<return: #Boolean>
@@ -231,7 +229,7 @@ BlInfiniteDataSourceManager >> hasOnlyUpdateCommand [
 				self hasMoveCommand ] ]) not ]
 ]
 
-{ #category : 'testing - commands' }
+{ #category : #'testing - commands' }
 BlInfiniteDataSourceManager >> hasPendingCommands [
 	"Return true if there are pending commands,
 	false otherwise"
@@ -240,7 +238,7 @@ BlInfiniteDataSourceManager >> hasPendingCommands [
 	^ pendingCommands isNotEmpty
 ]
 
-{ #category : 'testing - commands' }
+{ #category : #'testing - commands' }
 BlInfiniteDataSourceManager >> hasPostponedCommands [
 	"Return true if there are postponed commands,
 	false otherwise"
@@ -249,7 +247,7 @@ BlInfiniteDataSourceManager >> hasPostponedCommands [
 	^ postponedCommands isNotEmpty
 ]
 
-{ #category : 'testing - commands' }
+{ #category : #'testing - commands' }
 BlInfiniteDataSourceManager >> hasRemoveCommand [
 	"Return true if there are any remove commands in the queue, false otherwise"
 	<return: #Boolean>
@@ -257,7 +255,7 @@ BlInfiniteDataSourceManager >> hasRemoveCommand [
 	^ existingCommandTypes hasRemove
 ]
 
-{ #category : 'testing - commands' }
+{ #category : #'testing - commands' }
 BlInfiniteDataSourceManager >> hasUpdateCommand [
 	"Return true if there are any update commands in the queue, false otherwise"
 	<return: #Boolean>
@@ -265,7 +263,7 @@ BlInfiniteDataSourceManager >> hasUpdateCommand [
 	^ existingCommandTypes hasUpdate
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteDataSourceManager >> initialize [
 	super initialize.
 	
@@ -275,7 +273,7 @@ BlInfiniteDataSourceManager >> initialize [
 	existingCommandTypes := BlInfiniteDataSourceCommandTypeFlags new
 ]
 
-{ #category : 'manager -> element' }
+{ #category : #'manager -> element' }
 BlInfiniteDataSourceManager >> markElementHoldersUpdated: aPositionStart itemCount: anItemCount in: anInfiniteElement [
 
 	anInfiniteElement
@@ -285,7 +283,7 @@ BlInfiniteDataSourceManager >> markElementHoldersUpdated: aPositionStart itemCou
 	anInfiniteElement markItemsChanged
 ]
 
-{ #category : 'commands processing' }
+{ #category : #'commands processing' }
 BlInfiniteDataSourceManager >> offsetPositions: aStartPosition forAdd: anItemCount in: anInfiniteElement [
 	
 	anInfiniteElement
@@ -295,7 +293,7 @@ BlInfiniteDataSourceManager >> offsetPositions: aStartPosition forAdd: anItemCou
 	anInfiniteElement markItemsAddedOrRemoved
 ]
 
-{ #category : 'commands processing' }
+{ #category : #'commands processing' }
 BlInfiniteDataSourceManager >> offsetPositions: aStartPosition forRemovingInvisible: anItemCount in: anInfiniteElement [
 	| newDeletedCount |
 
@@ -310,7 +308,7 @@ BlInfiniteDataSourceManager >> offsetPositions: aStartPosition forRemovingInvisi
 	anInfiniteElement state deletedInvisibleItemCountSincePreviousLayout: newDeletedCount
 ]
 
-{ #category : 'commands processing' }
+{ #category : #'commands processing' }
 BlInfiniteDataSourceManager >> offsetPositions: aStartPosition forRemovingLaidOutOrNewElement: anItemCount in: anInfiniteElement [
 
 	anInfiniteElement
@@ -321,7 +319,7 @@ BlInfiniteDataSourceManager >> offsetPositions: aStartPosition forRemovingLaidOu
 	anInfiniteElement markItemsAddedOrRemoved
 ]
 
-{ #category : 'commands processing' }
+{ #category : #'commands processing' }
 BlInfiniteDataSourceManager >> offsetPositionsForMove: aFromPosition to: aToPosition in: anInfiniteElement [
 
 	anInfiniteElement
@@ -331,12 +329,12 @@ BlInfiniteDataSourceManager >> offsetPositionsForMove: aFromPosition to: aToPosi
 	anInfiniteElement markItemsAddedOrRemoved
 ]
 
-{ #category : 'commands processing' }
+{ #category : #'commands processing' }
 BlInfiniteDataSourceManager >> onCommandProcessed: aCommand in: anInfiniteElement [
 
 ]
 
-{ #category : 'data source updates' }
+{ #category : #'data source updates' }
 BlInfiniteDataSourceManager >> onItemRangeChanged: aPositionStart itemCount: anItemCount [
 	"Enqueues a new update pending command.
 	I am a part of public API and should be triggered by data source (directly or indirectly)
@@ -358,7 +356,7 @@ BlInfiniteDataSourceManager >> onItemRangeChanged: aPositionStart itemCount: anI
 	^ pendingCommands size = 1
 ]
 
-{ #category : 'data source updates' }
+{ #category : #'data source updates' }
 BlInfiniteDataSourceManager >> onItemRangeInserted: aPositionStart itemCount: anItemCount [
 	"Return true if pending commands should be processed,
 	otherwise false"
@@ -378,7 +376,7 @@ BlInfiniteDataSourceManager >> onItemRangeInserted: aPositionStart itemCount: an
 	^ pendingCommands size = 1
 ]
 
-{ #category : 'data source updates' }
+{ #category : #'data source updates' }
 BlInfiniteDataSourceManager >> onItemRangeMoved: aPositionStart to: aPositionEnd itemCount: anItemCount [
 	"Return true if pending commands should be processed,
 	otherwise false"
@@ -401,7 +399,7 @@ BlInfiniteDataSourceManager >> onItemRangeMoved: aPositionStart to: aPositionEnd
 	^ pendingCommands size = 1
 ]
 
-{ #category : 'data source updates' }
+{ #category : #'data source updates' }
 BlInfiniteDataSourceManager >> onItemRangeRemoved: aPositionStart itemCount: anItemCount [
 	"Return true if pending commands should be processed,
 	otherwise false"
@@ -421,14 +419,14 @@ BlInfiniteDataSourceManager >> onItemRangeRemoved: aPositionStart itemCount: anI
 	^ pendingCommands size = 1
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlInfiniteDataSourceManager >> postponeAndUpdateElementHolders: aCommand on: anInfiniteElement [
 
 	postponedCommands add: aCommand.
 	aCommand updateElementHoldersIn: anInfiniteElement.
 ]
 
-{ #category : 'commands processing' }
+{ #category : #'commands processing' }
 BlInfiniteDataSourceManager >> preProcessCommandsIn: anInfiniteElement [
 
 	"In case of scrolling, only for item change (no add-remove-move). Check
@@ -439,13 +437,13 @@ BlInfiniteDataSourceManager >> preProcessCommandsIn: anInfiniteElement [
 	pendingCommands removeAll
 ]
 
-{ #category : 'commands recycling' }
+{ #category : #'commands recycling' }
 BlInfiniteDataSourceManager >> recycleCommand: aCommand [
 	"Recycle aCommand if recycling enabled"
 
 ]
 
-{ #category : 'commands recycling' }
+{ #category : #'commands recycling' }
 BlInfiniteDataSourceManager >> recycleCommandsAndClearList: aCollectionOfCommands [
 	"Recycle and remove all commands from aCollectionOfCommands.
 	aCollectionOfCommands must not be nil"
@@ -457,7 +455,7 @@ BlInfiniteDataSourceManager >> recycleCommandsAndClearList: aCollectionOfCommand
 	aCollectionOfCommands removeAll
 ]
 
-{ #category : 'invalidate' }
+{ #category : #invalidate }
 BlInfiniteDataSourceManager >> resetCommands [
 	
 	self recycleCommandsAndClearList: pendingCommands.
@@ -465,7 +463,7 @@ BlInfiniteDataSourceManager >> resetCommands [
 	existingCommandTypes clear
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlInfiniteDataSourceManager >> updatePosition: aPosition withPostponed: aCommand [
 	|pos|
 	pos := aPosition.

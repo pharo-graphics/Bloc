@@ -1,29 +1,27 @@
 Class {
-	#name : 'BlBlocUIManagerNotificationHandler',
-	#superclass : 'Object',
+	#name : #BlBlocUIManagerNotificationHandler,
+	#superclass : #Object,
 	#instVars : [
 		'managerNotification'
 	],
 	#classVars : [
 		'NotificationHandlers'
 	],
-	#category : 'BlocHost-Morphic-Support',
-	#package : 'BlocHost-Morphic',
-	#tag : 'Support'
+	#category : #'BlocHost-Morphic-Support'
 }
 
-{ #category : 'api - instance creation' }
+{ #category : #'api - instance creation' }
 BlBlocUIManagerNotificationHandler class >> managerNotification: aManagerNotification [
 	^ self new managerNotification: aManagerNotification
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBlocUIManagerNotificationHandler class >> notificationHandlers [
 	^ NotificationHandlers
 		ifNil: [ NotificationHandlers := Dictionary new ]
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlBlocUIManagerNotificationHandler class >> preferredHandler [
 	| aSelectedClass |
 	aSelectedClass := BlBlocUIManagerNotificationBasicHandler.
@@ -34,19 +32,19 @@ BlBlocUIManagerNotificationHandler class >> preferredHandler [
 	^ aSelectedClass
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlBlocUIManagerNotificationHandler class >> priority [
 	<return: #Number>
 	"The higher the number, the higher the priority"
 	^ -100
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BlBlocUIManagerNotificationHandler >> arguments [
 	^ self managerNotification arguments
 ]
 
-{ #category : 'private - displaying' }
+{ #category : #'private - displaying' }
 BlBlocUIManagerNotificationHandler >> continue: debugSession with: anObject [
 	| context |
 	context := debugSession interruptedContext.
@@ -59,35 +57,35 @@ BlBlocUIManagerNotificationHandler >> continue: debugSession with: anObject [
 	debugSession resume
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BlBlocUIManagerNotificationHandler >> elementDoOrSpaceDo: aBlock [
 	"Provide an element or space and evaluate the block"
 	self subclassResponsibility
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BlBlocUIManagerNotificationHandler >> managerNotification [
 	<return: #BlBlocUIManagerNotification>
 	^ managerNotification
 ]
 
-{ #category : 'api - initialization' }
+{ #category : #'api - initialization' }
 BlBlocUIManagerNotificationHandler >> managerNotification: aManagerNotification [
 	managerNotification := aManagerNotification
 ]
 
-{ #category : 'private - accessing' }
+{ #category : #'private - accessing' }
 BlBlocUIManagerNotificationHandler >> request [
 	^ self managerNotification request
 ]
 
-{ #category : 'api - displaying' }
+{ #category : #'api - displaying' }
 BlBlocUIManagerNotificationHandler >> show [
 	self elementDoOrSpaceDo: [ :each | ^ self showNotificationIn: each ].
 	^ self unhandledAction
 ]
 
-{ #category : 'private - displaying' }
+{ #category : #'private - displaying' }
 BlBlocUIManagerNotificationHandler >> showNotificationIn: anElementOrSpace [
 	self class notificationHandlers
 		at: self request
@@ -109,7 +107,7 @@ BlBlocUIManagerNotificationHandler >> showNotificationIn: anElementOrSpace [
 	^ self unhandledAction
 ]
 
-{ #category : 'private - handling exceptions' }
+{ #category : #'private - handling exceptions' }
 BlBlocUIManagerNotificationHandler >> unhandledAction [
 	^ self managerNotification unhandledAction
 ]

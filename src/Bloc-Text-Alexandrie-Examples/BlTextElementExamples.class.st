@@ -1,25 +1,24 @@
 Class {
-	#name : 'BlTextElementExamples',
-	#superclass : 'BlExampleTest',
-	#category : 'Bloc-Text-Alexandrie-Examples',
-	#package : 'Bloc-Text-Alexandrie-Examples'
+	#name : #BlTextElementExamples,
+	#superclass : #BlExampleTest,
+	#category : #'Bloc-Text-Alexandrie-Examples'
 }
 
-{ #category : 'example' }
+{ #category : #example }
 BlTextElementExamples >> helloText [
 	<gtExample>
 
 	^ 'mama' asRopedText fontSize: 80
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 BlTextElementExamples >> loremIpsumText [
 	<gtExample>
 
 	^ (String loremIpsum: 50) asRopedText
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 BlTextElementExamples >> simpleText [
 	<gtExample>
 	
@@ -32,7 +31,7 @@ BlTextElementExamples >> simpleText [
 	^ textElement
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 BlTextElementExamples >> textAttributes [
 	<gtExample>
 	| text lineElements textElement |
@@ -65,7 +64,7 @@ BlTextElementExamples >> textAttributes [
 	^ textElement
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 BlTextElementExamples >> textElement [
 	<gtExample>
 	| text textElement |

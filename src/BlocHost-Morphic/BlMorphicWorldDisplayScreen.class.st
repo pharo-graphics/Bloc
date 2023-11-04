@@ -1,21 +1,19 @@
 Class {
-	#name : 'BlMorphicWorldDisplayScreen',
-	#superclass : 'Form',
-	#category : 'BlocHost-Morphic-World',
-	#package : 'BlocHost-Morphic',
-	#tag : 'World'
+	#name : #BlMorphicWorldDisplayScreen,
+	#superclass : #Form,
+	#category : #'BlocHost-Morphic-World'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlMorphicWorldDisplayScreen >> beDisplay [
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlMorphicWorldDisplayScreen >> isFullscreen [
 	^ false
 ]
 
-{ #category : 'other' }
+{ #category : #other }
 BlMorphicWorldDisplayScreen >> usableArea [
 	"Answer the usable area of the receiver."
 

@@ -15,19 +15,18 @@ element size: 400@200.
 ```
 "
 Class {
-	#name : 'BASvgExporter',
-	#superclass : 'BAFileExporter',
-	#category : 'Bloc-Alexandrie-Exporter',
-	#package : 'Bloc-Alexandrie-Exporter'
+	#name : #BASvgExporter,
+	#superclass : #BAFileExporter,
+	#category : #'Bloc-Alexandrie-Exporter'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BASvgExporter >> extension [
 
 	^ 'svg'
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BASvgExporter >> finishExport: aCanvas [
 	"Answer a file reference to the exported SVG."
 
@@ -37,7 +36,7 @@ BASvgExporter >> finishExport: aCanvas [
 	^ self target
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BASvgExporter >> newCanvas: anExtent [
 
 	| aSurface |

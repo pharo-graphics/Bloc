@@ -3,14 +3,12 @@ I have been automatically converted and probably manually tweaked from BlElement
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlElementLayoutBoundaryTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-UnitedTests-Layout',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Layout'
+	#name : #BlElementLayoutBoundaryTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-UnitedTests-Layout'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
 	<sampleInstance>
 	
@@ -34,7 +32,7 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
 	^ aSpace
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementLayoutBoundaryTest >> testExactLayoutBoundary02RequestLayoutChild [
 	<sampleInstance>
 	| aSpace |
@@ -60,7 +58,7 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary02RequestLayoutChild [
 	^ aSpace
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementLayoutBoundaryTest >> testSpaceWithExactLayoutBoundary [
 	<sampleInstance>
 	| aSpace aContainer aLayoutBoundary aChild |

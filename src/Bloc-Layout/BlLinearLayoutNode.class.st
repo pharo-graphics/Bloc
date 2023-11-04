@@ -1,39 +1,37 @@
 Class {
-	#name : 'BlLinearLayoutNode',
-	#superclass : 'Object',
+	#name : #BlLinearLayoutNode,
+	#superclass : #Object,
 	#instVars : [
 		'element',
 		'orientation',
 		'linearConstraints'
 	],
-	#category : 'Bloc-Layout-Linear-Utilities',
-	#package : 'Bloc-Layout',
-	#tag : 'Linear-Utilities'
+	#category : #'Bloc-Layout-Linear-Utilities'
 }
 
-{ #category : 'accessing - constraints' }
+{ #category : #'accessing - constraints' }
 BlLinearLayoutNode >> breadthConstraints [
 	^ self orientation breadthProperties: self element
 ]
 
-{ #category : 'accessing - properties' }
+{ #category : #'accessing - properties' }
 BlLinearLayoutNode >> breadthResizer [
 	^ self breadthConstraints resizer
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayoutNode >> constraints [
 	^ self element constraints
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayoutNode >> element [
 	<return: #BlElement>
 
 	^ element
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlLinearLayoutNode >> hasSpaceAfter [
 	"Return true if there should be a divider after this node"
 	<return: #Boolean>
@@ -41,7 +39,7 @@ BlLinearLayoutNode >> hasSpaceAfter [
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlLinearLayoutNode >> hasSpaceBefore [
 	"Return true if there should be a divider before this node"
 	<return: #Boolean>
@@ -49,84 +47,84 @@ BlLinearLayoutNode >> hasSpaceBefore [
 	^ true
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlLinearLayoutNode >> initializeWith: anElement orientation: aBlLinearLayoutOrientation [
 	element := anElement.
 	orientation := aBlLinearLayoutOrientation.
 	linearConstraints := anElement constraints linear.
 ]
 
-{ #category : 'accessing - constraints' }
+{ #category : #'accessing - constraints' }
 BlLinearLayoutNode >> lengthConstraints [
 	^ self orientation lengthProperties: self element
 ]
 
-{ #category : 'accessing - properties' }
+{ #category : #'accessing - properties' }
 BlLinearLayoutNode >> lengthResizer [
 	^ self lengthConstraints resizer
 ]
 
-{ #category : 'accessing - properties' }
+{ #category : #'accessing - properties' }
 BlLinearLayoutNode >> lengthResizer: aResizer [
 	self lengthConstraints resizer: aResizer
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayoutNode >> linearConstraints [
 	<return: #BlLinearLayoutConstraints>
 
 	^ linearConstraints
 ]
 
-{ #category : 'accessing - properties' }
+{ #category : #'accessing - properties' }
 BlLinearLayoutNode >> marginBreadth [
 	<return: #Number>
 
 	^ self orientation marginBreadth: self element
 ]
 
-{ #category : 'accessing - properties' }
+{ #category : #'accessing - properties' }
 BlLinearLayoutNode >> marginLength [
 	<return: #Number>
 
 	^ self orientation marginLength: self element
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlLinearLayoutNode >> measure: anExtentSpecOrBlock [
 	self element measure: anExtentSpecOrBlock value
 ]
 
-{ #category : 'accessing - properties' }
+{ #category : #'accessing - properties' }
 BlLinearLayoutNode >> measuredBreadth [
 	^ self orientation measuredBreadth: self element
 ]
 
-{ #category : 'accessing - properties' }
+{ #category : #'accessing - properties' }
 BlLinearLayoutNode >> measuredLength [
 	^ self orientation measuredLength: self element
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayoutNode >> orientation [
 	<return: #BlLinearLayoutOrientation>
 
 	^ orientation
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlLinearLayoutNode >> shouldUseExcessSpace [
 	<return: #Boolean>
 
 	^ self weight > 0
 ]
 
-{ #category : 'accessing - properties' }
+{ #category : #'accessing - properties' }
 BlLinearLayoutNode >> verticalAlignment [
 	^ self linearConstraints vertical alignment
 ]
 
-{ #category : 'accessing - properties' }
+{ #category : #'accessing - properties' }
 BlLinearLayoutNode >> weight [
 	"Weight is only applicable if a child matches parent"
 	<return: #Number>

@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlSpace2Test',
-	#superclass : 'TestCase',
-	#category : 'Bloc-UnitedTests-Space',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Space'
+	#name : #BlSpace2Test,
+	#superclass : #TestCase,
+	#category : #'Bloc-UnitedTests-Space'
 }
 
-{ #category : 'test seed' }
+{ #category : #'test seed' }
 BlSpace2Test >> animatedElement [
 
 	<sampleInstance>
@@ -18,7 +16,7 @@ BlSpace2Test >> animatedElement [
 		  yourself
 ]
 
-{ #category : 'test seed' }
+{ #category : #'test seed' }
 BlSpace2Test >> iconElement [
 
 	<sampleInstance>
@@ -28,7 +26,7 @@ BlSpace2Test >> iconElement [
 		  geometry: BlCircleGeometry new
 ]
 
-{ #category : 'test seed' }
+{ #category : #'test seed' }
 BlSpace2Test >> iconStencil [
 
 	<sampleInstance>
@@ -38,7 +36,7 @@ BlSpace2Test >> iconStencil [
 	^ aStencil
 ]
 
-{ #category : 'test seed' }
+{ #category : #'test seed' }
 BlSpace2Test >> infiniteAnimation [
 
 	<sampleInstance>
@@ -50,7 +48,7 @@ BlSpace2Test >> infiniteAnimation [
 	^ anAnimation
 ]
 
-{ #category : 'test seed' }
+{ #category : #'test seed' }
 BlSpace2Test >> spaceWithSlownDownTime [
 	<sampleInstance>
 
@@ -62,7 +60,7 @@ BlSpace2Test >> spaceWithSlownDownTime [
 	^ aSpace
 ]
 
-{ #category : 'test seed' }
+{ #category : #'test seed' }
 BlSpace2Test >> spaceWithSlownDownTimeAndAnimatedElement [
 	<sampleInstance>
 
@@ -72,7 +70,7 @@ BlSpace2Test >> spaceWithSlownDownTimeAndAnimatedElement [
 	^ aSpace
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSpace2Test >> testChangeIcon [
 
 	<sampleInstance>
@@ -94,7 +92,7 @@ BlSpace2Test >> testChangeIcon [
 	^ aSpace
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSpace2Test >> testEmptySpace [
 
 	<sampleInstance>
@@ -122,7 +120,7 @@ BlSpace2Test >> testEmptySpace [
 	^ aSpace
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSpace2Test >> testFirstPulse [
 
 	<sampleInstance>

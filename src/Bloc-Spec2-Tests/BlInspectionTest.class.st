@@ -1,14 +1,13 @@
 Class {
-	#name : 'BlInspectionTest',
-	#superclass : 'TestCase',
+	#name : #BlInspectionTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'objectInspector'
 	],
-	#category : 'Bloc-Spec2-Tests',
-	#package : 'Bloc-Spec2-Tests'
+	#category : #'Bloc-Spec2-Tests'
 }
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 BlInspectionTest >> assertCanSelectPageNamed: aString [
 
 	objectInspector trySelectAnyPageWithName: { aString }.
@@ -16,7 +15,7 @@ BlInspectionTest >> assertCanSelectPageNamed: aString [
 
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlInspectionTest >> setUp [
 
 	| triangle inspectorWindow |
@@ -33,7 +32,7 @@ BlInspectionTest >> setUp [
 
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlInspectionTest >> tearDown [
 
 	objectInspector withWindowDo: [ :w | w close ].
@@ -41,7 +40,7 @@ BlInspectionTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlInspectionTest >> testBlElement [
 
 	self
@@ -51,7 +50,7 @@ BlInspectionTest >> testBlElement [
 		assertCanSelectPageNamed: 'States'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlInspectionTest >> testBlSpace [
 
 	self assertCanSelectPageNamed: 'Tree'.

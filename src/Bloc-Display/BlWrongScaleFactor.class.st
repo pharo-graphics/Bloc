@@ -1,20 +1,18 @@
 Class {
-	#name : 'BlWrongScaleFactor',
-	#superclass : 'Error',
+	#name : #BlWrongScaleFactor,
+	#superclass : #Error,
 	#instVars : [
 		'scaleFactor'
 	],
-	#category : 'Bloc-Display-Errors',
-	#package : 'Bloc-Display',
-	#tag : 'Errors'
+	#category : #'Bloc-Display-Errors'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlWrongScaleFactor class >> scaleFactor: aNumber [
 	^ self new scaleFactor: aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlWrongScaleFactor >> description [
 
 	^ 'Wrong scale factor',  (scaleFactor
@@ -22,7 +20,7 @@ BlWrongScaleFactor >> description [
 		ifNil: [ '' ])
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlWrongScaleFactor >> scaleFactor: aNumber [
 	scaleFactor := aNumber
 ]

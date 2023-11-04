@@ -1,6 +1,6 @@
-Extension { #name : 'BlTransparentBackground' }
+Extension { #name : #BlTransparentBackground }
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlTransparentBackground >> aeApplyTo: aeCanvas [ 
 
 	aeCanvas setBackgroundOff

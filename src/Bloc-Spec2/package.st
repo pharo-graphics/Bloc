@@ -1,1 +1,1 @@
-Package { #name : 'Bloc-Spec2' }
+Package { #name : #'Bloc-Spec2' }

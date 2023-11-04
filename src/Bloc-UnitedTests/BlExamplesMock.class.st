@@ -4,43 +4,41 @@ I define examples with the goal of demonstrating and testing my superclass.
 See my references.
 "
 Class {
-	#name : 'BlExamplesMock',
-	#superclass : 'BlExampleTest',
+	#name : #BlExamplesMock,
+	#superclass : #BlExampleTest,
 	#instVars : [
 		'enabled'
 	],
-	#category : 'Bloc-UnitedTests-Examples',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Examples'
+	#category : #'Bloc-UnitedTests-Examples'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlExamplesMock >> enableRunning [
 
 	enabled := true
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlExamplesMock >> exampleError [
 	<sampleInstance>
 
 	self error
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlExamplesMock >> exampleFail [
 	<sampleInstance>
 
 	self fail
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlExamplesMock >> examplePass [
 	<sampleInstance>
 
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlExamplesMock >> exampleSkip [
 	<sampleInstance>
 	<noTest>
@@ -48,20 +46,20 @@ BlExamplesMock >> exampleSkip [
 	self error
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlExamplesMock >> exampleWithArgument: arg [
 	<gtExample>
 	
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlExamplesMock >> initialize [
 
 	super initialize.
 	enabled := false
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlExamplesMock >> performTest [
 
 	enabled ifTrue: [ super performTest ]

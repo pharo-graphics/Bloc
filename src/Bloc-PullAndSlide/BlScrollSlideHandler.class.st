@@ -1,28 +1,26 @@
 Class {
-	#name : 'BlScrollSlideHandler',
-	#superclass : 'BlCustomEventHandler',
+	#name : #BlScrollSlideHandler,
+	#superclass : #BlCustomEventHandler,
 	#instVars : [
 		'targetElement',
 		'sensitivity'
 	],
-	#category : 'Bloc-PullAndSlide-Handlers',
-	#package : 'Bloc-PullAndSlide',
-	#tag : 'Handlers'
+	#category : #'Bloc-PullAndSlide-Handlers'
 }
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlScrollSlideHandler >> eventsToHandle [
 	^ { BlMouseWheelEvent }
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScrollSlideHandler >> initialize [
 	super initialize.
 	
 	sensitivity := 0.8
 ]
 
-{ #category : 'mouse handlers' }
+{ #category : #'mouse handlers' }
 BlScrollSlideHandler >> mouseWheelEvent: anEvent [
 	| aTargetElement |
 	anEvent consumed: true.
@@ -38,22 +36,22 @@ BlScrollSlideHandler >> mouseWheelEvent: anEvent [
 		aChild relocate: aChild constraints position + ((aHorizontalScrollDelta @ aVerticalScrollDelta) * self sensitivity) ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollSlideHandler >> sensitivity [
 	^ sensitivity
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollSlideHandler >> sensitivity: anObject [
 	sensitivity := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollSlideHandler >> targetElement [
 	^ targetElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollSlideHandler >> targetElement: anObject [
 	targetElement := anObject
 ]

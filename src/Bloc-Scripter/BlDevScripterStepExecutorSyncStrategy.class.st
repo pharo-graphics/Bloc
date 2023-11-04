@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlDevScripterStepExecutorSyncStrategy',
-	#superclass : 'BlDevScripterStepExecutorStrategy',
-	#category : 'Bloc-Scripter-Scripter-Executors',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Executors'
+	#name : #BlDevScripterStepExecutorSyncStrategy,
+	#superclass : #BlDevScripterStepExecutorStrategy,
+	#category : #'Bloc-Scripter-Scripter-Executors'
 }
 
-{ #category : 'execution' }
+{ #category : #execution }
 BlDevScripterStepExecutorSyncStrategy >> startOnScripter: aScripter executor: anExecutor [
 	BlUseAsyncFeatures disableDuring: [ 
 		super startOnScripter: aScripter executor: anExecutor ]

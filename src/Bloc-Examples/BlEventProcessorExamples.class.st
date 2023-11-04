@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlEventProcessorExamples',
-	#superclass : 'BlExampleTest',
-	#category : 'Bloc-Examples-Event',
-	#package : 'Bloc-Examples',
-	#tag : 'Event'
+	#name : #BlEventProcessorExamples,
+	#superclass : #BlExampleTest,
+	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : 'examples - scripter' }
+{ #category : #'examples - scripter' }
 BlEventProcessorExamples >> scripter [
 	<gtExample>
 

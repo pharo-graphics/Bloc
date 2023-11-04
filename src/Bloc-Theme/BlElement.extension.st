@@ -1,6 +1,6 @@
-Extension { #name : 'BlElement' }
+Extension { #name : #BlElement }
 
-{ #category : '*Bloc-Theme' }
+{ #category : #'*Bloc-Theme' }
 BlElement >> theme [
 	^ self userData
 		at: #BlTheme
@@ -9,7 +9,7 @@ BlElement >> theme [
 				ifFalse: [ BlTheme default ] ]
 ]
 
-{ #category : '*Bloc-Theme' }
+{ #category : #'*Bloc-Theme' }
 BlElement >> theme: aTheme [
 	self userData at: #BlTheme put: aTheme.
 	self properties

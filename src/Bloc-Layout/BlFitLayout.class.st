@@ -5,14 +5,12 @@ I should be considered to be a root of graph or visualisation layouts. For that 
 
 "
 Class {
-	#name : 'BlFitLayout',
-	#superclass : 'BlLayout',
-	#category : 'Bloc-Layout-Fit',
-	#package : 'Bloc-Layout',
-	#tag : 'Fit'
+	#name : #BlFitLayout,
+	#superclass : #BlLayout,
+	#category : #'Bloc-Layout-Fit'
 }
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlFitLayout >> childrenBoundingBox: aParentNode [
 	<return: #Rectangle>
 	| aBoundingBox |
@@ -30,7 +28,7 @@ BlFitLayout >> childrenBoundingBox: aParentNode [
 	^ aBoundingBox expanded asRectangle
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlFitLayout >> computeAlignmentTranslation: aParentLayoutNode [
 	| boundingBox delta |
 
@@ -40,7 +38,7 @@ BlFitLayout >> computeAlignmentTranslation: aParentLayoutNode [
 	^ delta
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlFitLayout >> layout: aParentNode [
 	| aDelta |
 	aDelta := self computeAlignmentTranslation: aParentNode.
@@ -48,7 +46,7 @@ BlFitLayout >> layout: aParentNode [
 	aParentNode childrenDo: [ :eachChildNode | eachChildNode position: (eachChildNode position + aDelta) ]
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlFitLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdater [
 	| aParentNode |
 	
@@ -66,7 +64,7 @@ BlFitLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdater
 		eachChildNode element applyLayoutIn: eachChildNode layoutBounds context: aBlElementBoundsUpdater ]
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlFitLayout >> measure: aParentLayoutNode [
 	"Override me to implement a custom child position measurement algorithm.
 	Graph or visualisation layouts should implement me"
@@ -75,7 +73,7 @@ BlFitLayout >> measure: aParentLayoutNode [
 	self measureParentNode: aParentLayoutNode
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlFitLayout >> measure: anElement with: anExtentSpec [
 	| aParentNode |
 
@@ -95,13 +93,13 @@ BlFitLayout >> measure: anElement with: anExtentSpec [
 	self measureIgnored: anElement with: anExtentSpec
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlFitLayout >> measureChildrenPositions: aParentLayoutNode [
 	"Override me to implement a custom child position measurement algorithm.
 	Graph or visualisation layouts should implement me"
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlFitLayout >> measureParentNode: aParentNode [
 	"Compute the measured extent of the parent node based on the measured bounds of the children"
 	| boundingBox width height |

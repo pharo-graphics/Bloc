@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlLinearLayoutVerticalExamples',
-	#superclass : 'BlLinearLayoutExamples',
-	#category : 'Bloc-Layout-Examples-LinearMigrated',
-	#package : 'Bloc-Layout-Examples',
-	#tag : 'LinearMigrated'
+	#name : #BlLinearLayoutVerticalExamples,
+	#superclass : #BlLinearLayoutExamples,
+	#category : #'Bloc-Layout-Examples-LinearMigrated'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutVerticalExamples >> elementWithChildMatchInExactParentPadding [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
@@ -31,7 +29,7 @@ BlLinearLayoutVerticalExamples >> elementWithChildMatchInExactParentPadding [
 	^ parent
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutVerticalExamples >> elementWithChildrenMatchInExactParentPadding [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
@@ -60,7 +58,7 @@ BlLinearLayoutVerticalExamples >> elementWithChildrenMatchInExactParentPadding [
 	^ parent
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutVerticalExamples >> elementWithExactChildrenInFitContent [
 	<gtExample>
 	"Parent resizes to fit children"
@@ -87,7 +85,7 @@ BlLinearLayoutVerticalExamples >> elementWithExactChildrenInFitContent [
 	^ parent
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutVerticalExamples >> elementWithMatchChildrenInExactParent [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
@@ -118,7 +116,7 @@ BlLinearLayoutVerticalExamples >> elementWithMatchChildrenInExactParent [
 	^ parent
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutVerticalExamples >> elementWithOneChildMatchOneExactInFitParent [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
@@ -147,7 +145,7 @@ BlLinearLayoutVerticalExamples >> elementWithOneChildMatchOneExactInFitParent [
 	^ parent
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutVerticalExamples >> elementWithOneExactChildInExactParentMargin [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
@@ -171,7 +169,7 @@ BlLinearLayoutVerticalExamples >> elementWithOneExactChildInExactParentMargin [
 	^ parent
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutVerticalExamples >> elementWithThreeExactChildrenAlignInExactParentLTR [
 	<gtExample>
 	| parent childA childB childC |
@@ -205,7 +203,7 @@ BlLinearLayoutVerticalExamples >> elementWithThreeExactChildrenAlignInExactParen
 	^ parent
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutVerticalExamples >> elementWithThreeExactChildrenAlignInExactParentRTL [
 	<gtExample>
 	| parent childA childB childC |
@@ -241,7 +239,7 @@ BlLinearLayoutVerticalExamples >> elementWithThreeExactChildrenAlignInExactParen
 	^ parent
 ]
 
-{ #category : 'examples - visibility' }
+{ #category : #'examples - visibility' }
 BlLinearLayoutVerticalExamples >> one_child_set_visibility_gone [
 	<gtExample>
 	| aContainer aRed aBlue |
@@ -291,7 +289,7 @@ BlLinearLayoutVerticalExamples >> one_child_set_visibility_gone [
 	^ aContainer
 ]
 
-{ #category : 'examples - setup' }
+{ #category : #'examples - setup' }
 BlLinearLayoutVerticalExamples >> parentWithLinearHorizontalLayout [
 	<gtExample>
 	| element |

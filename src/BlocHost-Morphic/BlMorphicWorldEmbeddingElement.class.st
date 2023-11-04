@@ -1,17 +1,15 @@
 Class {
-	#name : 'BlMorphicWorldEmbeddingElement',
-	#superclass : 'BlElement',
+	#name : #BlMorphicWorldEmbeddingElement,
+	#superclass : #BlElement,
 	#instVars : [
 		'world',
 		'worldState',
 		'shouldBeMain'
 	],
-	#category : 'BlocHost-Morphic-World',
-	#package : 'BlocHost-Morphic',
-	#tag : 'World'
+	#category : #'BlocHost-Morphic-World'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMorphicWorldEmbeddingElement class >> open [
 	<script: 'self open'>
 
@@ -23,7 +21,7 @@ BlMorphicWorldEmbeddingElement class >> open [
 	aSpace show
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMorphicWorldEmbeddingElement class >> openMain [
 	<script: 'self openMain'>
 
@@ -35,7 +33,7 @@ BlMorphicWorldEmbeddingElement class >> openMain [
 	aSpace show
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWorldEmbeddingElement >> activeHand [
 	^ self world activeHand
 		ifNil: [
@@ -46,21 +44,21 @@ BlMorphicWorldEmbeddingElement >> activeHand [
 			aHand ]
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlMorphicWorldEmbeddingElement >> beMain [
 	shouldBeMain := true.
 	self isAttachedToSceneGraph
 		ifTrue: [ world beMain ]
 ]
 
-{ #category : 'drawing' }
+{ #category : #drawing }
 BlMorphicWorldEmbeddingElement >> drawOnSpartaCanvas: aCanvas [
 	super drawOnSpartaCanvas: aCanvas.
 
 	world drawOnSpartaCanvas: aCanvas
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlMorphicWorldEmbeddingElement >> initialize [
 	super initialize.
 
@@ -79,14 +77,14 @@ BlMorphicWorldEmbeddingElement >> initialize [
 	self enqueueTask: (BlRepeatedTaskAction new delay: 20 milliSeconds; action: [ world runStepMethods ])
 ]
 
-{ #category : 'hooks - children' }
+{ #category : #'hooks - children' }
 BlMorphicWorldEmbeddingElement >> onAddedToSceneGraph [ 
 	super onAddedToSceneGraph.
 	
 	shouldBeMain ifTrue: [ world beMain ]
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlMorphicWorldEmbeddingElement >> onLayout: aRectangle context: aBlElementBoundsUpdater [
 	super onLayout: aRectangle context: aBlElementBoundsUpdater.
 
@@ -99,7 +97,7 @@ BlMorphicWorldEmbeddingElement >> onLayout: aRectangle context: aBlElementBounds
 		ifFalse: [ world displayExtent: aRectangle extent ]
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlMorphicWorldEmbeddingElement >> onMeasure: anExtentMeasurementSpec [
 
 	super onMeasure: anExtentMeasurementSpec.
@@ -108,14 +106,14 @@ BlMorphicWorldEmbeddingElement >> onMeasure: anExtentMeasurementSpec [
 	world extent: self measuredExtent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWorldEmbeddingElement >> world [
 	<return: #WorldMorph>
 
 	^ world
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicWorldEmbeddingElement >> world: aWorldMorph [
 	world := aWorldMorph
 ]

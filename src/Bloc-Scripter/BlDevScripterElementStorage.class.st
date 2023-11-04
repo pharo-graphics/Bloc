@@ -27,27 +27,25 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : 'BlDevScripterElementStorage',
-	#superclass : 'BlDevScripterSetStepStorage',
+	#name : #BlDevScripterElementStorage,
+	#superclass : #BlDevScripterSetStepStorage,
 	#instVars : [
 		'block'
 	],
-	#category : 'Bloc-Scripter-Scripter-Storage',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Storage'
+	#category : #'Bloc-Scripter-Scripter-Storage'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterElementStorage >> block [
 	^ block
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterElementStorage >> block: anObject [
 	block := anObject
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlDevScripterElementStorage >> printOn: aStream [
 	self block ifNil: [ ^ super printOn: aStream ].
 	aStream 
@@ -55,7 +53,7 @@ BlDevScripterElementStorage >> printOn: aStream [
 		print: self block
 ]
 
-{ #category : 'storing' }
+{ #category : #storing }
 BlDevScripterElementStorage >> storeFrom: aTarget scripter: aScripter [
 	| anElement |
 	anElement := self block cull: aTarget cull: aScripter.

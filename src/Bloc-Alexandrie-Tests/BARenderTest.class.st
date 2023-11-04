@@ -1,39 +1,37 @@
 Class {
-	#name : 'BARenderTest',
-	#superclass : 'AePixelMatchTest',
-	#category : 'Bloc-Alexandrie-Tests-Base',
-	#package : 'Bloc-Alexandrie-Tests',
-	#tag : 'Base'
+	#name : #BARenderTest,
+	#superclass : #AePixelMatchTest,
+	#category : #'Bloc-Alexandrie-Tests-Base'
 }
 
-{ #category : 'exporting' }
+{ #category : #exporting }
 BARenderTest class >> allFormSelectors [
 
 	^ BlSpaceFixture allFixtureSelectors
 ]
 
-{ #category : 'convenience' }
+{ #category : #convenience }
 BARenderTest class >> exportAll [
 	<script: 'super exportAll' >
 
 	super exportAll
 ]
 
-{ #category : 'convenience' }
+{ #category : #convenience }
 BARenderTest class >> inspectAll [
 	<script: 'super inspectAll'>
 	
 	super inspectAll
 ]
 
-{ #category : 'convenience' }
+{ #category : #convenience }
 BARenderTest class >> inspectMismatches [
 	<script: 'super inspectMismatches'>
 	
 	super inspectMismatches
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BARenderTest >> actualForm [
 		
 	| aSpace |
@@ -44,7 +42,7 @@ BARenderTest >> actualForm [
 	^ aSpace aeAsForm
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BARenderTest >> expectedFormsDirectory [
 
 	| repo |
@@ -52,7 +50,7 @@ BARenderTest >> expectedFormsDirectory [
 	^ repo location / 'tests' / 'render'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BARenderTest >> formBehavior [
 
 	^ BlSpaceFixture new

@@ -1,27 +1,25 @@
 Class {
-	#name : 'BlRelativeLayoutConstraints',
-	#superclass : 'BlLayoutConstraints',
+	#name : #BlRelativeLayoutConstraints,
+	#superclass : #BlLayoutConstraints,
 	#instVars : [
 		'relativePosition'
 	],
-	#category : 'Bloc-Layout-Relative',
-	#package : 'Bloc-Layout',
-	#tag : 'Relative'
+	#category : #'Bloc-Layout-Relative'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlRelativeLayoutConstraints >> initialize [
 	super initialize.
 	
 	relativePosition := BlRelativeLayoutPositionUndefined new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlRelativeLayoutConstraints >> position [
 	^ relativePosition
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlRelativeLayoutConstraints >> position: anObject [
 	relativePosition := anObject
 ]

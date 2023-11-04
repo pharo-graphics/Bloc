@@ -26,97 +26,95 @@ My method ""fromString:"" allows me to choose myself the right instanciation met
 Not much to see on the instance side.
 "
 Class {
-	#name : 'BlSvgColor',
-	#superclass : 'Color',
+	#name : #BlSvgColor,
+	#superclass : #Color,
 	#classVars : [
 		'SVGColorRegistry'
 	],
-	#category : 'Bloc-SVG-Converter',
-	#package : 'Bloc-SVG',
-	#tag : 'Converter'
+	#category : #'Bloc-SVG-Converter'
 }
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> aliceblue [
 	^ SVGColorRegistry at: #aliceblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> antiquewhite [
 	^ SVGColorRegistry at: #antiquewhite
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> aqua [
 	^ SVGColorRegistry at: #aqua
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> aquamarine [
 	^ SVGColorRegistry at: #aquamarine
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> azure [
 	^ SVGColorRegistry at: #azure
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> beige [
 	^ SVGColorRegistry at: #beige
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> bisque [
 	^ SVGColorRegistry at: #bisque
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> black [
 	^ SVGColorRegistry at: #black
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> blanchedalmond [
 	^ SVGColorRegistry at: #blanchedalmond
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> blue [
 	^ SVGColorRegistry at: #blue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> blueviolet [
 	^ SVGColorRegistry at: #blueviolet
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> brown [
 	^ SVGColorRegistry at: #brown
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> burlywood [
 	^ SVGColorRegistry at: #burlywood
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> cadetblue [
 	^ SVGColorRegistry at: #cadetblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> chartreuse [
 	^ SVGColorRegistry at: #chartreuse
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> chocolate [
 	^ SVGColorRegistry at: #chocolate
 ]
 
-{ #category : 'initialize-release' }
+{ #category : #'initialize-release' }
 BlSvgColor class >> compileMethodforColor: colorName [
 	|stream|
 	stream := WriteStream with: colorName.
@@ -127,167 +125,167 @@ BlSvgColor class >> compileMethodforColor: colorName [
 	self class compile: stream contents classified: 'defaults'.
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> coral [
 	^ SVGColorRegistry at: #coral
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> cornflowerblue [
 	^ SVGColorRegistry at: #cornflowerblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> cornsilk [
 	^ SVGColorRegistry at: #cornsilk
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> crimson [
 	^ SVGColorRegistry at: #crimson
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> cyan [
 	^ SVGColorRegistry at: #cyan
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkblue [
 	^ SVGColorRegistry at: #darkblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkcyan [
 	^ SVGColorRegistry at: #darkcyan
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkgoldenrod [
 	^ SVGColorRegistry at: #darkgoldenrod
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkgray [
 	^ SVGColorRegistry at: #darkgray
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkgreen [
 	^ SVGColorRegistry at: #darkgreen
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkgrey [
 	^ SVGColorRegistry at: #darkgrey
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkkhaki [
 	^ SVGColorRegistry at: #darkkhaki
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkmagenta [
 	^ SVGColorRegistry at: #darkmagenta
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkolivegreen [
 	^ SVGColorRegistry at: #darkolivegreen
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkorange [
 	^ SVGColorRegistry at: #darkorange
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkorchid [
 	^ SVGColorRegistry at: #darkorchid
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkred [
 	^ SVGColorRegistry at: #darkred
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darksalmon [
 	^ SVGColorRegistry at: #darksalmon
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkseagreen [
 	^ SVGColorRegistry at: #darkseagreen
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkslateblue [
 	^ SVGColorRegistry at: #darkslateblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkslategray [
 	^ SVGColorRegistry at: #darkslategray
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkslategrey [
 	^ SVGColorRegistry at: #darkslategrey
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkturquoise [
 	^ SVGColorRegistry at: #darkturquoise
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> darkviolet [
 	^ SVGColorRegistry at: #darkviolet
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> deeppink [
 	^ SVGColorRegistry at: #deeppink
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> deepskyblue [
 	^ SVGColorRegistry at: #deepskyblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> dimgray [
 	^ SVGColorRegistry at: #dimgray
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> dimgrey [
 	^ SVGColorRegistry at: #dimgrey
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> dodgerblue [
 	^ SVGColorRegistry at: #dodgerblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> firebrick [
 	^ SVGColorRegistry at: #firebrick
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> floralwhite [
 	^ SVGColorRegistry at: #floralwhite
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> forestgreen [
 	^ SVGColorRegistry at: #forestgreen
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSvgColor class >> fromHexString: aColorHex [
 
 	| stream |
@@ -301,7 +299,7 @@ BlSvgColor class >> fromHexString: aColorHex [
 	^ super fromHexString: stream contents
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSvgColor class >> fromRgbString: aString [
 	|array|
 	array := ( ((aString withoutPrefix: 'rgb(') withoutSuffix: ')') substrings: ',' ) collect: [:stringValue |
@@ -311,12 +309,12 @@ BlSvgColor class >> fromRgbString: aString [
 	^self fromRgbTripletOnBase256: array
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSvgColor class >> fromRgbTripletOnBase256: array [
 	^ self r: (array first / 255) g: (array second / 255) b: (array last / 255)
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSvgColor class >> fromString: aString [
 	aString='none' ifTrue:[^self transparent].
 	"If aString is following the format: 'rgb(R,G,B)' or 'rgb(R%,G%,B%)':"
@@ -327,77 +325,77 @@ BlSvgColor class >> fromString: aString [
 	^super fromString:aString
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> fuchsia [
 	^ SVGColorRegistry at: #fuchsia
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> gainsboro [
 	^ SVGColorRegistry at: #gainsboro
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> ghostwhite [
 	^ SVGColorRegistry at: #ghostwhite
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> gold [
 	^ SVGColorRegistry at: #gold
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> goldenrod [
 	^ SVGColorRegistry at: #goldenrod
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> gray [
 	^ SVGColorRegistry at: #gray
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> green [
 	^ SVGColorRegistry at: #green
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> greenyellow [
 	^ SVGColorRegistry at: #greenyellow
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> grey [
 	^ SVGColorRegistry at: #grey
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> honeydew [
 	^ SVGColorRegistry at: #honeydew
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> hotpink [
 	^ SVGColorRegistry at: #hotpink
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> indianred [
 	^ SVGColorRegistry at: #indianred
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> indigo [
 	^ SVGColorRegistry at: #indigo
 ]
 
-{ #category : 'initialize-release' }
+{ #category : #'initialize-release' }
 BlSvgColor class >> initialize [
 	self initializeColorRegistry.
 ]
 
-{ #category : 'initialize-release' }
+{ #category : #'initialize-release' }
 BlSvgColor class >> initializeColorRegistry [
 	|values|
 	SVGColorRegistry := IdentityDictionary new.
@@ -415,317 +413,317 @@ BlSvgColor class >> initializeColorRegistry [
 	self compileMethodforColor: 'transparent'
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> ivory [
 	^ SVGColorRegistry at: #ivory
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> khaki [
 	^ SVGColorRegistry at: #khaki
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lavender [
 	^ SVGColorRegistry at: #lavender
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lavenderblush [
 	^ SVGColorRegistry at: #lavenderblush
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lawngreen [
 	^ SVGColorRegistry at: #lawngreen
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lemonchiffon [
 	^ SVGColorRegistry at: #lemonchiffon
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightblue [
 	^ SVGColorRegistry at: #lightblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightcoral [
 	^ SVGColorRegistry at: #lightcoral
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightcyan [
 	^ SVGColorRegistry at: #lightcyan
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightgoldenrodyellow [
 	^ SVGColorRegistry at: #lightgoldenrodyellow
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightgray [
 	^ SVGColorRegistry at: #lightgray
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightgreen [
 	^ SVGColorRegistry at: #lightgreen
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightgrey [
 	^ SVGColorRegistry at: #lightgrey
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightpink [
 	^ SVGColorRegistry at: #lightpink
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightsalmon [
 	^ SVGColorRegistry at: #lightsalmon
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightseagreen [
 	^ SVGColorRegistry at: #lightseagreen
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightskyblue [
 	^ SVGColorRegistry at: #lightskyblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightslategray [
 	^ SVGColorRegistry at: #lightslategray
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightslategrey [
 	^ SVGColorRegistry at: #lightslategrey
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightsteelblue [
 	^ SVGColorRegistry at: #lightsteelblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lightyellow [
 	^ SVGColorRegistry at: #lightyellow
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> lime [
 	^ SVGColorRegistry at: #lime
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> limegreen [
 	^ SVGColorRegistry at: #limegreen
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> linen [
 	^ SVGColorRegistry at: #linen
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> magenta [
 	^ SVGColorRegistry at: #magenta
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> maroon [
 	^ SVGColorRegistry at: #maroon
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> mediumaquamarine [
 	^ SVGColorRegistry at: #mediumaquamarine
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> mediumblue [
 	^ SVGColorRegistry at: #mediumblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> mediumorchid [
 	^ SVGColorRegistry at: #mediumorchid
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> mediumpurple [
 	^ SVGColorRegistry at: #mediumpurple
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> mediumseagreen [
 	^ SVGColorRegistry at: #mediumseagreen
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> mediumslateblue [
 	^ SVGColorRegistry at: #mediumslateblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> mediumspringgreen [
 	^ SVGColorRegistry at: #mediumspringgreen
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> mediumturquoise [
 	^ SVGColorRegistry at: #mediumturquoise
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> mediumvioletred [
 	^ SVGColorRegistry at: #mediumvioletred
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> midnightblue [
 	^ SVGColorRegistry at: #midnightblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> mintcream [
 	^ SVGColorRegistry at: #mintcream
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> mistyrose [
 	^ SVGColorRegistry at: #mistyrose
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> moccasin [
 	^ SVGColorRegistry at: #moccasin
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSvgColor class >> named: aColorName [
 	^ SVGColorRegistry  at: aColorName asSymbol ifAbsent: nil 
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> navajowhite [
 	^ SVGColorRegistry at: #navajowhite
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> navy [
 	^ SVGColorRegistry at: #navy
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> oldlace [
 	^ SVGColorRegistry at: #oldlace
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> olive [
 	^ SVGColorRegistry at: #olive
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> olivedrab [
 	^ SVGColorRegistry at: #olivedrab
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> orange [
 	^ SVGColorRegistry at: #orange
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> orangered [
 	^ SVGColorRegistry at: #orangered
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> orchid [
 	^ SVGColorRegistry at: #orchid
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> palegoldenrod [
 	^ SVGColorRegistry at: #palegoldenrod
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> palegreen [
 	^ SVGColorRegistry at: #palegreen
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> paleturquoise [
 	^ SVGColorRegistry at: #paleturquoise
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> palevioletred [
 	^ SVGColorRegistry at: #palevioletred
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> papayawhip [
 	^ SVGColorRegistry at: #papayawhip
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> peachpuff [
 	^ SVGColorRegistry at: #peachpuff
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> peru [
 	^ SVGColorRegistry at: #peru
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> pink [
 	^ SVGColorRegistry at: #pink
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> plum [
 	^ SVGColorRegistry at: #plum
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> powderblue [
 	^ SVGColorRegistry at: #powderblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> purple [
 	^ SVGColorRegistry at: #purple
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> red [
 	^ SVGColorRegistry at: #red
 ]
 
-{ #category : 'initialize-release' }
+{ #category : #'initialize-release' }
 BlSvgColor class >> registerColor: aColor named: aName [
 	SVGColorRegistry at: aName put: aColor.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSvgColor class >> registeredColorNames [
 	^ SVGColorRegistry keys collect: #asString 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSvgColor class >> registeredNameOf: aColor [ 
 	| colorName |
 	colorName := #unnamed.
@@ -733,87 +731,87 @@ BlSvgColor class >> registeredNameOf: aColor [
 	^ colorName 
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> rosybrown [
 	^ SVGColorRegistry at: #rosybrown
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> royalblue [
 	^ SVGColorRegistry at: #royalblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> saddlebrown [
 	^ SVGColorRegistry at: #saddlebrown
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> salmon [
 	^ SVGColorRegistry at: #salmon
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> sandybrown [
 	^ SVGColorRegistry at: #sandybrown
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> seagreen [
 	^ SVGColorRegistry at: #seagreen
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> seashell [
 	^ SVGColorRegistry at: #seashell
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> sienna [
 	^ SVGColorRegistry at: #sienna
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> silver [
 	^ SVGColorRegistry at: #silver
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> skyblue [
 	^ SVGColorRegistry at: #skyblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> slateblue [
 	^ SVGColorRegistry at: #slateblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> slategray [
 	^ SVGColorRegistry at: #slategray
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> slategrey [
 	^ SVGColorRegistry at: #slategrey
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> snow [
 	^ SVGColorRegistry at: #snow
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> springgreen [
 	^ SVGColorRegistry at: #springgreen
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> steelblue [
 	^ SVGColorRegistry at: #steelblue
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> svgColors1 [
 	^{ #aliceblue. 240. 248. 255.
 		#antiquewhite. 250. 235. 215.
@@ -892,7 +890,7 @@ BlSvgColor class >> svgColors1 [
 		}
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> svgColors2 [
 	^{ #lightpink. 255. 182. 193.
 		#lightsalmon. 255. 160. 122.
@@ -970,67 +968,67 @@ BlSvgColor class >> svgColors2 [
 		}
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> tan [
 	^ SVGColorRegistry at: #tan
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> teal [
 	^ SVGColorRegistry at: #teal
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> thistle [
 	^ SVGColorRegistry at: #thistle
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> tomato [
 	^ SVGColorRegistry at: #tomato
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> transparent [
 	^ SVGColorRegistry at: #transparent
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> turquoise [
 	^ SVGColorRegistry at: #turquoise
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSvgColor class >> unregisterColorNamed: aName [
 	SVGColorRegistry removeKey: aName ifAbsent: nil
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> violet [
 	^ SVGColorRegistry at: #violet
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> wheat [
 	^ SVGColorRegistry at: #wheat
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> white [
 	^ SVGColorRegistry at: #white
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> whitesmoke [
 	^ SVGColorRegistry at: #whitesmoke
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> yellow [
 	^ SVGColorRegistry at: #yellow
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 BlSvgColor class >> yellowgreen [
 	^ SVGColorRegistry at: #yellowgreen
 ]

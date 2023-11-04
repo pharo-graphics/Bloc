@@ -9,19 +9,17 @@ Here you can see how to configure a fire and check a click event on a child elem
 
 "
 Class {
-	#name : 'BlDevScripterClickStep',
-	#superclass : 'BlDevScripterInteractionStep',
-	#category : 'Bloc-Scripter-Scripter-Steps',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Steps'
+	#name : #BlDevScripterClickStep,
+	#superclass : #BlDevScripterInteractionStep,
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterClickStep >> defaultLabel [
 	^ 'Click'
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlDevScripterClickStep >> omitDoubleClickOn: aScripter [
 	| anEvent aDuration |
 
@@ -36,7 +34,7 @@ BlDevScripterClickStep >> omitDoubleClickOn: aScripter [
 	aScripter time wait: aDuration
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlDevScripterClickStep >> playOn: aScripter [
 	self omitDoubleClickOn: aScripter.
 	self

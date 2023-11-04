@@ -12,17 +12,15 @@ See example in class-side.
 
 "
 Class {
-	#name : 'BlMorphicHost',
-	#superclass : 'BlMorphicSteppingHost',
+	#name : #BlMorphicHost,
+	#superclass : #BlMorphicSteppingHost,
 	#instVars : [
 		'containerMorph'
 	],
-	#category : 'BlocHost-Morphic-Host - Morph',
-	#package : 'BlocHost-Morphic',
-	#tag : 'Host - Morph'
+	#category : #'BlocHost-Morphic-Host - Morph'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlMorphicHost class >> example [
 
 	| aMorph aHost aSpace |
@@ -55,39 +53,39 @@ BlMorphicHost class >> example [
 				yourself) ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlMorphicHost class >> isSupported [
 	"I can not be used as one of the default Bloc host because I require users to provide containerMorph"
 
 	^ false
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlMorphicHost class >> label [
 
 	^ 'Morphic - Embedded'
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlMorphicHost class >> priority [
 	"I have the lowest possible priority (I am also not supported)"
 
 	^ Float infinity
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicHost >> containerMorph [
 
 	^ containerMorph
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicHost >> containerMorph: aMorph [
 
 	containerMorph := aMorph
 ]
 
-{ #category : 'host - api' }
+{ #category : #'host - api' }
 BlMorphicHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new morphic host space for given bloc space"
 
@@ -105,7 +103,7 @@ BlMorphicHost >> createHostSpaceFor: aSpace [
 	aSpace hostSpace: aHostSpace
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlMorphicHost >> createMorphFor: aSpace [
 
 	^ BlMorphicSpaceHostMorph new
@@ -114,7 +112,7 @@ BlMorphicHost >> createMorphFor: aSpace [
 		  yourself
 ]
 
-{ #category : 'host - api' }
+{ #category : #'host - api' }
 BlMorphicHost >> destroyHostSpaceFor: aSpace [
 
 	aSpace hostSpace
@@ -126,7 +124,7 @@ BlMorphicHost >> destroyHostSpaceFor: aSpace [
 	aSpace detachHostSpace
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlMorphicHost >> initialize [
 
 	super initialize.

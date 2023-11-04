@@ -1,22 +1,20 @@
 Class {
-	#name : 'BlDevScripterTypeTextStep',
-	#superclass : 'BlDevScripterInteractionStep',
+	#name : #BlDevScripterTypeTextStep,
+	#superclass : #BlDevScripterInteractionStep,
 	#instVars : [
 		'text'
 	],
-	#category : 'Bloc-Scripter-Scripter-Steps',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterTypeTextStep >> defaultLabel [
 	^ self text 
 		ifNotNil: [ :aString | 'Type: ', aString asString ]
 		ifNil: [ self className ]
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlDevScripterTypeTextStep >> playOn: aScripter [
 	| aTarget anInputEvent |
 
@@ -32,13 +30,13 @@ BlDevScripterTypeTextStep >> playOn: aScripter [
 	aScripter pulse.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterTypeTextStep >> text [
 	<return: #String>
 	^ text
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterTypeTextStep >> text: aStringOrChar [
 	self 
 		assert: [ aStringOrChar isString or: [ aStringOrChar isCharacter ] ]

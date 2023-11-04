@@ -1,35 +1,33 @@
 Class {
-	#name : 'BlFlowLayoutConstraintsVertical',
-	#superclass : 'BlLayoutConstraintsAxis',
+	#name : #BlFlowLayoutConstraintsVertical,
+	#superclass : #BlLayoutConstraintsAxis,
 	#instVars : [
 		'alignment'
 	],
-	#category : 'Bloc-Layout-Flow',
-	#package : 'Bloc-Layout',
-	#tag : 'Flow'
+	#category : #'Bloc-Layout-Flow'
 }
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlFlowLayoutConstraintsVertical >> alignBottom [
 	alignment := BlElementAlignment vertical end
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlFlowLayoutConstraintsVertical >> alignCenter [
 	alignment := BlElementAlignment vertical center
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlFlowLayoutConstraintsVertical >> alignTop [
 	alignment := BlElementAlignment vertical start
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFlowLayoutConstraintsVertical >> alignment [
 	^ alignment
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlFlowLayoutConstraintsVertical >> initialize [
 	super initialize.
 	

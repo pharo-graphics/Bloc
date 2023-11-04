@@ -1,51 +1,49 @@
 Class {
-	#name : 'BlFontSizeDefaultAttribute',
-	#superclass : 'BlTextAttribute',
+	#name : #BlFontSizeDefaultAttribute,
+	#superclass : #BlTextAttribute,
 	#instVars : [
 		'size'
 	],
-	#category : 'Bloc-Text-Text-Attributes',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Attributes'
+	#category : #'Bloc-Text-Text-Attributes'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlFontSizeDefaultAttribute class >> size: aNumber [
 	^ self new
 		size: aNumber;
 		yourself
 ]
 
-{ #category : 'text style' }
+{ #category : #'text style' }
 BlFontSizeDefaultAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
 	aBlTextFontAndStyleBuilder defaultFontSizePt: self size value
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlFontSizeDefaultAttribute >> equals: anAnotherAttribute [
 	^ self size = anAnotherAttribute size
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlFontSizeDefaultAttribute >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ super hash bitXor: self size hash
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlFontSizeDefaultAttribute >> printOn: aStream [
 	aStream
 		nextPutAll: 'font-size-default: ';
 		nextPutAll: self size asString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontSizeDefaultAttribute >> size [
 	^ size
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontSizeDefaultAttribute >> size: aNumber [
 	self
 		assert: [ size isNil ]
@@ -54,7 +52,7 @@ BlFontSizeDefaultAttribute >> size: aNumber [
 	size := aNumber
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlFontSizeDefaultAttribute >> storeOn: aStream [
 	super storeOn: aStream.
 	

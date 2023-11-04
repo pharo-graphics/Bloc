@@ -1,14 +1,12 @@
 Class {
-	#name : 'BlDevScripterMultipleCheckStep',
-	#superclass : 'BlDevScripterCompositeStep',
+	#name : #BlDevScripterMultipleCheckStep,
+	#superclass : #BlDevScripterCompositeStep,
 	#traits : 'TBlDevScripterCheckStep + (TBlDevScripterCheckStepCreation - {#addStep:})',
 	#classTraits : 'TBlDevScripterCheckStep classTrait + TBlDevScripterCheckStepCreation classTrait',
-	#category : 'Bloc-Scripter-Scripter-Steps',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMultipleCheckStep >> defaultLabel [
 	^ 'Checks'
 ]

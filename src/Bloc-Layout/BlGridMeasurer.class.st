@@ -1,22 +1,20 @@
 Class {
-	#name : 'BlGridMeasurer',
-	#superclass : 'Object',
+	#name : #BlGridMeasurer,
+	#superclass : #Object,
 	#instVars : [
 		'element',
 		'layout'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities',
-	#package : 'Bloc-Layout',
-	#tag : 'Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
-{ #category : 'margin' }
+{ #category : #margin }
 BlGridMeasurer >> alignedMarginOf: aChildElement isHorizontal: isHorizontal isLeading: isLeading [
 
 	^ self layout alignment marginOf: aChildElement in: self layout isHorizontal: isHorizontal isLeading: isLeading
 ]
 
-{ #category : 'margin' }
+{ #category : #margin }
 BlGridMeasurer >> cellSpacingOf: aChildElement isHorizontal: isHorizontal isLeading: isLeading [
 	"Return cell spacing around aChildElement for the side defined by isHorizontal and isLeading.
 	First of all I determine if cell is on the edge and use it as additional parameter to allow more precise
@@ -40,7 +38,7 @@ BlGridMeasurer >> cellSpacingOf: aChildElement isHorizontal: isHorizontal isLead
 	^ self layout cellSpacingOf: aChildElement isAtEdge: isAtEdge isHorizontal: isHorizontal isLeading: isLeading
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlGridMeasurer >> improvedMeasureChild: aChildElement parentSpec: anExtentSpec [
 	| horizontal spec span axis locations cellSize childSize|
 	
@@ -70,17 +68,17 @@ BlGridMeasurer >> improvedMeasureChild: aChildElement parentSpec: anExtentSpec [
 			heightResizer: (BlLayoutResizer exact: childSize) ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridMeasurer >> layout [
 	^ layout
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridMeasurer >> layout: aGridLayout [
 	layout := aGridLayout
 ]
 
-{ #category : 'margin' }
+{ #category : #margin }
 BlGridMeasurer >> marginOf: aChildElement isHorizontal: isHorizontal isLeading: isLeading [
 	| margin |
 
@@ -93,7 +91,7 @@ BlGridMeasurer >> marginOf: aChildElement isHorizontal: isHorizontal isLeading: 
 		ifFalse: [ margin ]
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlGridMeasurer >> measureChild: anElement parentSpec: anExtentSpec widthResizer: widthResizer heightResizer: heightResizer [
 	| childWidthSpec childHeightSpec |
 
@@ -110,7 +108,7 @@ BlGridMeasurer >> measureChild: anElement parentSpec: anExtentSpec widthResizer:
 	anElement measure: (childWidthSpec @ childHeightSpec)
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlGridMeasurer >> measureChildren: anElement parentSpec: anExtentSpec isFirstPass: isFirstPass [
 
 	anElement children accountedByLayout do: [ :child |
@@ -119,7 +117,7 @@ BlGridMeasurer >> measureChildren: anElement parentSpec: anExtentSpec isFirstPas
 			ifFalse: [ self improvedMeasureChild: child parentSpec: anExtentSpec ] ]
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlGridMeasurer >> measurementOf: anElement isHorizontal: isHorizontal [
 	<return: #Number>
 	
@@ -128,14 +126,14 @@ BlGridMeasurer >> measurementOf: anElement isHorizontal: isHorizontal [
 		ifFalse: [ anElement measuredHeight ]
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlGridMeasurer >> measurementWithMarginOf: aChildElement isHorizontal: isHorizontal [
 	<return: #Number>
 
 	^ (self measurementOf: aChildElement isHorizontal: isHorizontal) + (self totalMarginOf: aChildElement isHorizontal: isHorizontal)
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlGridMeasurer >> naiveMeasureChild: aChildElement parentSpec: anExtentSpec [
 
 	self
@@ -145,7 +143,7 @@ BlGridMeasurer >> naiveMeasureChild: aChildElement parentSpec: anExtentSpec [
 		heightResizer: aChildElement constraints vertical resizer
 ]
 
-{ #category : 'margin' }
+{ #category : #margin }
 BlGridMeasurer >> totalMarginOf: aChildElement isHorizontal: isHorizontal [
 
 	^ (self alignedMarginOf: aChildElement isHorizontal: isHorizontal isLeading: true) + (self alignedMarginOf: aChildElement isHorizontal: isHorizontal isLeading: false)

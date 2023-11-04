@@ -3,14 +3,12 @@ The coordinate is measured from the left side of the outer bounds
 
 "
 Class {
-	#name : 'BlHorizontalCoordinateLeftAlignment',
-	#superclass : 'BlHorizontalCoordinateAlignment',
-	#category : 'Bloc-Layouts-Alignment',
-	#package : 'Bloc',
-	#tag : 'Layouts-Alignment'
+	#name : #BlHorizontalCoordinateLeftAlignment,
+	#superclass : #BlHorizontalCoordinateAlignment,
+	#category : #'Bloc-Layouts-Alignment'
 }
 
-{ #category : 'translation' }
+{ #category : #translation }
 BlHorizontalCoordinateLeftAlignment >> translationOf: aBounds in: aContainerBounds [
 	| aRelativeDelta anExpectedLeft |
 	

@@ -1,44 +1,42 @@
 Class {
-	#name : 'BlDevScripterCheckElementStep',
-	#superclass : 'BlDevScripterCheckStep',
+	#name : #BlDevScripterCheckElementStep,
+	#superclass : #BlDevScripterCheckStep,
 	#instVars : [
 		'block',
 		'description'
 	],
-	#category : 'Bloc-Scripter-Scripter-Steps',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCheckElementStep >> block [
 	<return: #BlockClosure>
 	^ block
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCheckElementStep >> block: anObject [
 	block := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCheckElementStep >> defaultLabel [
 	^ self block 
 		ifNotNil: [ :aBlock | aBlock printStringLimitedTo: 42 ] 
 		ifNil: [ self className ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCheckElementStep >> description [
 	^ description
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCheckElementStep >> description: anObject [
 	description := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCheckElementStep >> initialize [
 	super initialize.
 	description := [ :aTarget | 
@@ -46,7 +44,7 @@ BlDevScripterCheckElementStep >> initialize [
 		' is not satisfied: ', self block printString ].
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlDevScripterCheckElementStep >> playOn: aScripter [
 	| anElement |
 	anElement := self target findTargetStartingInScripter: aScripter.

@@ -5,14 +5,12 @@ See BlStrokeLineJoin for other types
 
 "
 Class {
-	#name : 'BlStrokeLineRoundJoin',
-	#superclass : 'BlStrokeLineJoin',
-	#category : 'Bloc-Paint-Support',
-	#package : 'Bloc',
-	#tag : 'Paint-Support'
+	#name : #BlStrokeLineRoundJoin,
+	#superclass : #BlStrokeLineJoin,
+	#category : #'Bloc-Paint-Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlStrokeLineRoundJoin class >> joinName [
 	^ 'Round'
 ]

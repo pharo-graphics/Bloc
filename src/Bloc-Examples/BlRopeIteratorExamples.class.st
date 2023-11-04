@@ -3,14 +3,12 @@ I contain examples of rope iterators
 
 "
 Class {
-	#name : 'BlRopeIteratorExamples',
-	#superclass : 'Object',
-	#category : 'Bloc-Examples-Rope',
-	#package : 'Bloc-Examples',
-	#tag : 'Rope'
+	#name : #BlRopeIteratorExamples,
+	#superclass : #Object,
+	#category : #'Bloc-Examples-Rope'
 }
 
-{ #category : 'examples - next span' }
+{ #category : #'examples - next span' }
 BlRopeIteratorExamples >> nextSpanFontColorOnA [
 	<gtExample>
 	| aRope anIterator aSpan |
@@ -25,7 +23,7 @@ BlRopeIteratorExamples >> nextSpanFontColorOnA [
 	^ aSpan
 ]
 
-{ #category : 'examples - next span' }
+{ #category : #'examples - next span' }
 BlRopeIteratorExamples >> nextSpanFontColorOnAWithColor [
 	<gtExample>
 	| aRope anIterator aSpan |
@@ -41,7 +39,7 @@ BlRopeIteratorExamples >> nextSpanFontColorOnAWithColor [
 	^ aSpan
 ]
 
-{ #category : 'examples - next span' }
+{ #category : #'examples - next span' }
 BlRopeIteratorExamples >> nextSpanFontColorOnHelloWorldWithColor [
 	<gtExample>
 	| aRope anIterator aSpan |
@@ -70,7 +68,7 @@ BlRopeIteratorExamples >> nextSpanFontColorOnHelloWorldWithColor [
 	^ aSpan
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlRopeIteratorExamples >> next_line_123Cr_at_0 [
 	<gtExample>
 	| anIterator |
@@ -87,7 +85,7 @@ BlRopeIteratorExamples >> next_line_123Cr_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlRopeIteratorExamples >> next_line_123Crabc_at_0 [
 	<gtExample>
 	| anIterator |
@@ -104,7 +102,7 @@ BlRopeIteratorExamples >> next_line_123Crabc_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlRopeIteratorExamples >> next_line_123Crabc_at_4 [
 	<gtExample>
 	| anIterator |
@@ -121,7 +119,7 @@ BlRopeIteratorExamples >> next_line_123Crabc_at_4 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlRopeIteratorExamples >> next_line_123_at_0 [
 	<gtExample>
 	| anIterator |
@@ -138,7 +136,7 @@ BlRopeIteratorExamples >> next_line_123_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlRopeIteratorExamples >> next_line_Cr123_at_0 [
 	<gtExample>
 	| anIterator |
@@ -155,7 +153,7 @@ BlRopeIteratorExamples >> next_line_Cr123_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlRopeIteratorExamples >> next_line_Cr123_at_1 [
 	<gtExample>
 	| anIterator |
@@ -172,7 +170,7 @@ BlRopeIteratorExamples >> next_line_Cr123_at_1 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlRopeIteratorExamples >> next_line_Cr1_at_0 [
 	<gtExample>
 	| anIterator |
@@ -189,7 +187,7 @@ BlRopeIteratorExamples >> next_line_Cr1_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlRopeIteratorExamples >> next_line_Cr1_at_1 [
 	<gtExample>
 	| anIterator |
@@ -206,7 +204,7 @@ BlRopeIteratorExamples >> next_line_Cr1_at_1 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlRopeIteratorExamples >> next_line_CrCr_at_0 [
 	<gtExample>
 	| anIterator |
@@ -223,7 +221,7 @@ BlRopeIteratorExamples >> next_line_CrCr_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlRopeIteratorExamples >> next_line_CrCr_at_1 [
 	<gtExample>
 	| anIterator |
@@ -240,7 +238,7 @@ BlRopeIteratorExamples >> next_line_CrCr_at_1 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlRopeIteratorExamples >> next_line_CrLf_at_0 [
 	<gtExample>
 	| anIterator |
@@ -257,7 +255,7 @@ BlRopeIteratorExamples >> next_line_CrLf_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlRopeIteratorExamples >> next_line_Cr_at_0 [
 	<gtExample>
 	| anIterator |
@@ -274,7 +272,7 @@ BlRopeIteratorExamples >> next_line_Cr_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlRopeIteratorExamples >> next_line_Lf_at_0 [
 	<gtExample>
 	| anIterator |
@@ -291,7 +289,7 @@ BlRopeIteratorExamples >> next_line_Lf_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next segment' }
+{ #category : #'examples - next segment' }
 BlRopeIteratorExamples >> next_segment_123abc_at_0 [
 	<gtExample>
 	| aRope anIterator aSegment |
@@ -307,7 +305,7 @@ BlRopeIteratorExamples >> next_segment_123abc_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next segment' }
+{ #category : #'examples - next segment' }
 BlRopeIteratorExamples >> next_segment_123abc_at_3 [
 	<gtExample>
 	| anIterator aSegment |
@@ -322,7 +320,7 @@ BlRopeIteratorExamples >> next_segment_123abc_at_3 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next segment' }
+{ #category : #'examples - next segment' }
 BlRopeIteratorExamples >> next_segment_123abc_at_6 [
 	<gtExample>
 	<label: 'Iterator throws an error when the end is reached'>
@@ -338,7 +336,7 @@ BlRopeIteratorExamples >> next_segment_123abc_at_6 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next segment' }
+{ #category : #'examples - next segment' }
 BlRopeIteratorExamples >> next_segment_a_at_0 [
 	<gtExample>
 	| aRope anIterator aSegment |
@@ -354,7 +352,7 @@ BlRopeIteratorExamples >> next_segment_a_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next segment' }
+{ #category : #'examples - next segment' }
 BlRopeIteratorExamples >> next_segment_abc_at_0 [
 	<gtExample>
 	| aRope anIterator aSegment |

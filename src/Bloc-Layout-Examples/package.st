@@ -1,1 +1,1 @@
-Package { #name : 'Bloc-Layout-Examples' }
+Package { #name : #'Bloc-Layout-Examples' }

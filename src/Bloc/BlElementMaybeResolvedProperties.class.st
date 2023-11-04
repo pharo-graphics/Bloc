@@ -1,17 +1,15 @@
 Class {
-	#name : 'BlElementMaybeResolvedProperties',
-	#superclass : 'BlElementProperties',
-	#category : 'Bloc-Basic-Properties',
-	#package : 'Bloc',
-	#tag : 'Basic-Properties'
+	#name : #BlElementMaybeResolvedProperties,
+	#superclass : #BlElementProperties,
+	#category : #'Bloc-Basic-Properties'
 }
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlElementMaybeResolvedProperties >> applyOnElement: anElement [
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementMaybeResolvedProperties >> propertyAt: aPropertyType ifFound: aFoundBlock [
 	^ self 
 		propertyAt: aPropertyType
@@ -19,12 +17,12 @@ BlElementMaybeResolvedProperties >> propertyAt: aPropertyType ifFound: aFoundBlo
 		ifNone: [ nil ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementMaybeResolvedProperties >> propertyAt: aPropertyType ifFound: aFoundBlock ifNone: aNoneBlock [
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementMaybeResolvedProperties >> propertyAt: aPropertyType ifNone: aNoneBlock [
 	^ self 
 		propertyAt: aPropertyType

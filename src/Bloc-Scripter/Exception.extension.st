@@ -1,6 +1,6 @@
-Extension { #name : 'Exception' }
+Extension { #name : #Exception }
 
-{ #category : '*Bloc-Scripter' }
+{ #category : #'*Bloc-Scripter' }
 Exception >> passWithScripter: aScripter [
 	self pass
 ]

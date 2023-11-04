@@ -5,14 +5,12 @@ See BlStrokeLineJoin for other types
 
 "
 Class {
-	#name : 'BlStrokeLineBevelJoin',
-	#superclass : 'BlStrokeLineJoin',
-	#category : 'Bloc-Paint-Support',
-	#package : 'Bloc',
-	#tag : 'Paint-Support'
+	#name : #BlStrokeLineBevelJoin,
+	#superclass : #BlStrokeLineJoin,
+	#category : #'Bloc-Paint-Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlStrokeLineBevelJoin class >> joinName [
 	^ 'Bevel'
 ]

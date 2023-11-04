@@ -1,11 +1,10 @@
 Class {
-	#name : 'BlTextElementEditorMeasurementStrategy',
-	#superclass : 'BlTextElementMeasurementStrategy',
-	#category : 'Bloc-Text-Elements',
-	#package : 'Bloc-Text-Elements'
+	#name : #BlTextElementEditorMeasurementStrategy,
+	#superclass : #BlTextElementMeasurementStrategy,
+	#category : #'Bloc-Text-Elements'
 }
 
-{ #category : 'measuring' }
+{ #category : #measuring }
 BlTextElementEditorMeasurementStrategy >> boundsOf: aParagraph [
 
 	| aMeasuredWidth aMeasuredHeight |

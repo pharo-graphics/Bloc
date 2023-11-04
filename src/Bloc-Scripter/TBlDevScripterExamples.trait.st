@@ -1,11 +1,9 @@
 Trait {
-	#name : 'TBlDevScripterExamples',
-	#category : 'Bloc-Scripter-Scripter',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter'
+	#name : #TBlDevScripterExamples,
+	#category : #'Bloc-Scripter-Scripter'
 }
 
-{ #category : 'examples - scripter' }
+{ #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripter [
 	<gtExample>
 	| aScripter |
@@ -16,7 +14,7 @@ TBlDevScripterExamples >> scripter [
 	^ aScripter
 ]
 
-{ #category : 'examples - scripter' }
+{ #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripter: aScripter withModel: aModelBlock [
 	<gtExample>
 	^ self 
@@ -25,7 +23,7 @@ TBlDevScripterExamples >> scripter: aScripter withModel: aModelBlock [
 		element: [ :aModel | aModel asElement ]
 ]
 
-{ #category : 'examples - scripter' }
+{ #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripter: aScripter withModel: aModelBlock element: anElementBlock [
 	<gtExample>
 	aScripter substep: 'Initialize Model and UI' do: [ :aStep | 
@@ -41,7 +39,7 @@ TBlDevScripterExamples >> scripter: aScripter withModel: aModelBlock element: an
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - scripter' }
+{ #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripterWithElement: anElementBlock [
 	<gtExample>
 	^ self 
@@ -50,7 +48,7 @@ TBlDevScripterExamples >> scripterWithElement: anElementBlock [
 		element: anElementBlock
 ]
 
-{ #category : 'examples - scripter' }
+{ #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripterWithModel: aModelBlock [
 	<gtExample>
 	^ self 
@@ -59,7 +57,7 @@ TBlDevScripterExamples >> scripterWithModel: aModelBlock [
 		element: [ :aModel | aModel asElement ]
 ]
 
-{ #category : 'examples - scripter' }
+{ #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripterWithModel: aModelBlock element: anElementBlock [
 	<gtExample>
 	^ self 

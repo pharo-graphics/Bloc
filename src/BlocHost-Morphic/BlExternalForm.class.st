@@ -20,34 +20,32 @@ form destroySurface.
 
 "
 Class {
-	#name : 'BlExternalForm',
-	#superclass : 'OSSDL2ExternalForm',
+	#name : #BlExternalForm,
+	#superclass : #OSSDL2ExternalForm,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'BlocHost-Morphic-Host - Common',
-	#package : 'BlocHost-Morphic',
-	#tag : 'Host - Common'
+	#category : #'BlocHost-Morphic-Host - Common'
 }
 
-{ #category : 'external resource management' }
+{ #category : #'external resource management' }
 BlExternalForm >> autoRelease [
 
 	^ self class finalizationRegistry add: self
 ]
 
-{ #category : 'finalization' }
+{ #category : #finalization }
 BlExternalForm >> finalize [
 
 	super finalize.
 	self isNull ifFalse: [ self destroySurface ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlExternalForm >> isNull [
 	^ pointer isNil or: [ pointer isNull ]
 ]
 
-{ #category : 'initialize' }
+{ #category : #initialize }
 BlExternalForm >> setExtent: extent depth: bitsPerPixel [
 	bits ifNotNil: [self error: 'bits are already set'].
 	bitsPerPixel == 32 ifFalse: [self error: 'only 32 bits for now'.  "see 'rowPitch' below"].

@@ -1,6 +1,6 @@
-Extension { #name : 'BlElement' }
+Extension { #name : #BlElement }
 
-{ #category : '*BlocHost-Morphic' }
+{ #category : #'*BlocHost-Morphic' }
 BlElement >> showNotification: aNotification [
 	self parent ifNotNil: [ :aParent | 
 		aParent showNotification: aNotification.

@@ -1,58 +1,56 @@
 Class {
-	#name : 'BlGridFlexibility',
-	#superclass : 'Object',
+	#name : #BlGridFlexibility,
+	#superclass : #Object,
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities',
-	#package : 'Bloc-Layout',
-	#tag : 'Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlGridFlexibility class >> canStretch [
 	^ BlGridCanStretch uniqueInstance
 ]
 
-{ #category : 'cleanup' }
+{ #category : #cleanup }
 BlGridFlexibility class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlGridFlexibility class >> inflexible [
 	^ BlGridInflexible uniqueInstance
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridFlexibility class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlGridFlexibility >> = anObject [
 	self == anObject ifTrue: [ ^ true ].
 	^ self class = anObject class
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlGridFlexibility >> and: aFlexibility [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlGridFlexibility >> andCanStretch: aFlexibility [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlGridFlexibility >> andInflexible: aFlexibility [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlGridFlexibility >> hash [
 	^ self class hash
 ]

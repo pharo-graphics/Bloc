@@ -5,19 +5,17 @@ Makes sure that the element wraps around its children, taking into account the p
 
 "
 Class {
-	#name : 'BlWrapAroundChildrenLayout',
-	#superclass : 'BlCompositeLayout',
-	#category : 'Bloc-Layout-Fit',
-	#package : 'Bloc-Layout',
-	#tag : 'Fit'
+	#name : #BlWrapAroundChildrenLayout,
+	#superclass : #BlCompositeLayout,
+	#category : #'Bloc-Layout-Fit'
 }
 
-{ #category : 'protected' }
+{ #category : #protected }
 BlWrapAroundChildrenLayout >> isInfluencedByTransformation [
 	^ true
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlWrapAroundChildrenLayout >> layout: aParentLayoutNode [
 	| anOrigin anOriginWithPadding |
 	super layout: aParentLayoutNode.
@@ -40,12 +38,12 @@ BlWrapAroundChildrenLayout >> layout: aParentLayoutNode [
 	aParentLayoutNode position: aParentLayoutNode constraints position + anOriginWithPadding
 ]
 
-{ #category : 'protected' }
+{ #category : #protected }
 BlWrapAroundChildrenLayout >> mayInfluencePosition [
 	^ true
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlWrapAroundChildrenLayout >> measure: aParentLayoutNode [
 	"Compute the measured extent of the parent node based on the measured bounds of the children"
 	| boundingBox width height |

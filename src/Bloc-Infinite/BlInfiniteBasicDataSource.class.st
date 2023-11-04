@@ -1,15 +1,13 @@
 Class {
-	#name : 'BlInfiniteBasicDataSource',
-	#superclass : 'BlInfiniteDataSource',
+	#name : #BlInfiniteBasicDataSource,
+	#superclass : #BlInfiniteDataSource,
 	#instVars : [
 		'layoutPositionsRange'
 	],
-	#category : 'Bloc-Infinite-DataSource',
-	#package : 'Bloc-Infinite',
-	#tag : 'DataSource'
+	#category : #'Bloc-Infinite-DataSource'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteBasicDataSource >> itemCount [
 	"There are no items in empty datasource"
 	<return: #Number>
@@ -17,7 +15,7 @@ BlInfiniteBasicDataSource >> itemCount [
 	^ 0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteBasicDataSource >> layoutPositionsRange: anInterval [
 	layoutPositionsRange := anInterval
 ]

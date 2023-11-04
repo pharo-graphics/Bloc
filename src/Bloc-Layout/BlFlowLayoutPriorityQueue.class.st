@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlFlowLayoutPriorityQueue',
-	#superclass : 'Object',
+	#name : #BlFlowLayoutPriorityQueue,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -8,19 +8,17 @@ Class {
 		'nodes',
 		'priorityBlock'
 	],
-	#category : 'Bloc-Layout-Flow-Utilities',
-	#package : 'Bloc-Layout',
-	#tag : 'Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlFlowLayoutPriorityQueue class >> priority: aPriorityBlock [
 	^ self new
 		priorityBlock: aPriorityBlock;
 		yourself
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlFlowLayoutPriorityQueue >> asDictionary [
 	| index lastPriority |
 	index := 0.
@@ -39,7 +37,7 @@ BlFlowLayoutPriorityQueue >> asDictionary [
 			key -> node value	 ]) asOrderedDictionary
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlFlowLayoutPriorityQueue >> cascadeDown: aNode [
 	| finalQueueIndex newParentNode |
 	finalQueueIndex := aNode queueIndex.
@@ -83,7 +81,7 @@ BlFlowLayoutPriorityQueue >> cascadeDown: aNode [
 	 ] repeat
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlFlowLayoutPriorityQueue >> cascadeUp: aNode [
 	| parentIndex |
 	parentIndex := (aNode queueIndex / 2) asInteger.
@@ -98,13 +96,13 @@ BlFlowLayoutPriorityQueue >> cascadeUp: aNode [
 		parentIndex := (aNode queueIndex / 2) asInteger ]
 ]
 
-{ #category : 'add / remove' }
+{ #category : #'add / remove' }
 BlFlowLayoutPriorityQueue >> dequeue [
 	"Removes node with highest priority"
 	^ self remove: nodes first
 ]
 
-{ #category : 'add / remove' }
+{ #category : #'add / remove' }
 BlFlowLayoutPriorityQueue >> enqueue: anObject [
 	| priority node |
 	priority := priorityBlock value: anObject.
@@ -124,7 +122,7 @@ BlFlowLayoutPriorityQueue >> enqueue: anObject [
 	^ node
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlFlowLayoutPriorityQueue >> hasHigherPriority: aNodeA than: aNodeB [
 
 	^ aNodeA priority < aNodeB priority
@@ -132,7 +130,7 @@ BlFlowLayoutPriorityQueue >> hasHigherPriority: aNodeA than: aNodeB [
 			and: [ aNodeA insertionIndex < aNodeB insertionIndex ] ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlFlowLayoutPriorityQueue >> initialize [
 	super initialize.
 	
@@ -140,7 +138,7 @@ BlFlowLayoutPriorityQueue >> initialize [
 	totalSize := 0
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlFlowLayoutPriorityQueue >> nodeUpdated: aNode [
 	| parentIndex parentNode |
 
@@ -152,7 +150,7 @@ BlFlowLayoutPriorityQueue >> nodeUpdated: aNode [
 		ifFalse: [ self cascadeDown: aNode ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFlowLayoutPriorityQueue >> priorityBlock: aPriorityBlock [
 
 	self assert: priorityBlock isNil.
@@ -160,7 +158,7 @@ BlFlowLayoutPriorityQueue >> priorityBlock: aPriorityBlock [
 	priorityBlock := aPriorityBlock
 ]
 
-{ #category : 'add / remove' }
+{ #category : #'add / remove' }
 BlFlowLayoutPriorityQueue >> remove: aNode [
 	<return: #BlFlowLayoutPriorityQueueNode>
 	
@@ -177,12 +175,12 @@ BlFlowLayoutPriorityQueue >> remove: aNode [
 	^ aNode value
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFlowLayoutPriorityQueue >> size [
 	^ nodes size
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlFlowLayoutPriorityQueue >> swap: aNodeA and: aNodeB [
 	| index |
 	
@@ -194,7 +192,7 @@ BlFlowLayoutPriorityQueue >> swap: aNodeA and: aNodeB [
 	aNodeB queueIndex: index
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFlowLayoutPriorityQueue >> top [
 	^ nodes first
 ]

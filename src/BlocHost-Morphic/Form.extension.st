@@ -1,6 +1,6 @@
-Extension { #name : 'Form' }
+Extension { #name : #Form }
 
-{ #category : '*BlocHost-Morphic' }
+{ #category : #'*BlocHost-Morphic' }
 Form >> stride [
 
 	| bitsPerPixel stride|

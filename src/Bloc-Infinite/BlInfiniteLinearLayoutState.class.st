@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlInfiniteLinearLayoutState',
-	#superclass : 'Object',
+	#name : #BlInfiniteLinearLayoutState,
+	#superclass : #Object,
 	#instVars : [
 		'allowRecycling',
 		'availableSpace',
@@ -19,12 +19,10 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-Layout-Linear-Support',
-	#package : 'Bloc-Infinite',
-	#tag : 'Layout-Linear-Support'
+	#category : #'Bloc-Infinite-Layout-Linear-Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> allowRecycling [
 	"Return true if recycling of children is allowed, false otherwise.
 	We may not want to recycle children in some cases (e.g. layout)"
@@ -33,17 +31,17 @@ BlInfiniteLinearLayoutState >> allowRecycling [
 	^ allowRecycling
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> allowRecycling: aBoolean [
 	allowRecycling := aBoolean
 ]
 
-{ #category : 'private - recycling' }
+{ #category : #'private - recycling' }
 BlInfiniteLinearLayoutState >> assignPositionFromScrapList [
 	self assignPositionFromScrapList: nil
 ]
 
-{ #category : 'private - recycling' }
+{ #category : #'private - recycling' }
 BlInfiniteLinearLayoutState >> assignPositionFromScrapList: anIgnoredElement [
 	| aClosestElement |
 	
@@ -53,7 +51,7 @@ BlInfiniteLinearLayoutState >> assignPositionFromScrapList: anIgnoredElement [
 		ifNotNil: [ :anElement | anElement constraints infinite elementLayoutPosition ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> availableSpace [
 	"Amount of space that we should fill, in the layout direction"
 	<return: #Number>
@@ -61,7 +59,7 @@ BlInfiniteLinearLayoutState >> availableSpace [
 	^ availableSpace
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> availableSpace: aNumber in: aLayout [
 
 	"uncomment if you get too many re-layouts.
@@ -74,19 +72,19 @@ BlInfiniteLinearLayoutState >> availableSpace: aNumber in: aLayout [
 	aLayout notifyAvailableSpaceChanged: aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> clearScrapList [
 	"must set to nil here"
 	scrapList := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> clearScrollingOffset [
 
 	scrollingOffset := Float negativeInfinity
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> currentPosition [
 	"Current position on the data source to get the next item"
 	<return: #Number>
@@ -94,12 +92,12 @@ BlInfiniteLinearLayoutState >> currentPosition [
 	^ currentPosition
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> currentPosition: aNumber [
 	currentPosition := aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> extraSpace [
 	"Used if you want to pre-layout items that are not yet visible.
 	The difference with availableSpace is that, when recycling, distance laid out for
@@ -109,12 +107,12 @@ BlInfiniteLinearLayoutState >> extraSpace [
 	^ extraSpace
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> extraSpace: aNumber [
 	extraSpace := aNumber
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteLinearLayoutState >> hasMoreItems: anInfiniteState [
 	"Return true if there are more items in the data source"
 	<return: #Boolean>
@@ -122,7 +120,7 @@ BlInfiniteLinearLayoutState >> hasMoreItems: anInfiniteState [
 	^ currentPosition between: 1 and: anInfiniteState itemCount
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteLinearLayoutState >> hasScrapList [
 	"Return true if a scrap list is set, false otherwise"
 	<return: #Boolean>
@@ -130,13 +128,13 @@ BlInfiniteLinearLayoutState >> hasScrapList [
 	^ scrapList isNotNil
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteLinearLayoutState >> hasScrollingOffset [
 
 	^ scrollingOffset ~= Float negativeInfinity
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLinearLayoutState >> initialize [
 	super initialize.
 
@@ -148,7 +146,7 @@ BlInfiniteLinearLayoutState >> initialize [
 	scrolledWhileFilling := false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> isInfinite [
 	"Return true if there is no limit in how many elements can be laid out"
 	<return: #Boolean>
@@ -156,12 +154,12 @@ BlInfiniteLinearLayoutState >> isInfinite [
 	^ isInfinite
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> isInfinite: aBoolean [
 	isInfinite := aBoolean
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteLinearLayoutState >> isLayoutEndDirection [
 	"Return true if the layout should be filled from the end"
 	<return: #Boolean>
@@ -169,7 +167,7 @@ BlInfiniteLinearLayoutState >> isLayoutEndDirection [
 	^ layoutDirection isEnd
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteLinearLayoutState >> isLayoutStartDirection [
 	"Return true if the layout should be filled from the start"
 	<return: #Boolean>
@@ -177,12 +175,12 @@ BlInfiniteLinearLayoutState >> isLayoutStartDirection [
 	^ layoutDirection isStart
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> isPreLayout: aBoolean [
 	isPreLayout := aBoolean
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> itemDirection [
 	"Return the direction in which the data source is traversed"
 	<return: #BlInfiniteLinearLayoutItemDirection>
@@ -190,12 +188,12 @@ BlInfiniteLinearLayoutState >> itemDirection [
 	^ itemDirection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> itemDirection: anItemDirection [
 	itemDirection := anItemDirection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> lastScrolledDelta [
 	"Return the most recent #scrollBy: amount"
 	<return: #Number>
@@ -203,12 +201,12 @@ BlInfiniteLinearLayoutState >> lastScrolledDelta [
 	^ lastScrolledDelta
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> lastScrolledDelta: aNumber [
 	lastScrolledDelta := aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> layoutDirection [
 	"Return a direction in which the layout is filled."
 	<return: #BlInfiniteLinearLayoutDirection>
@@ -216,12 +214,12 @@ BlInfiniteLinearLayoutState >> layoutDirection [
 	^ layoutDirection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> layoutDirection: aLayoutDirection [
 	layoutDirection := aLayoutDirection
 ]
 
-{ #category : 'recycling' }
+{ #category : #recycling }
 BlInfiniteLinearLayoutState >> nextElement: aRecycler in: anInfiniteElement [
 
 	"Get the element for the next item that we should layout.
@@ -238,7 +236,7 @@ BlInfiniteLinearLayoutState >> nextElement: aRecycler in: anInfiniteElement [
 			  anElement ]
 ]
 
-{ #category : 'private - recycling' }
+{ #category : #'private - recycling' }
 BlInfiniteLinearLayoutState >> nextElementFromScrapList [
 	"Return the next element from the scrap list or nil if there is not such"
 	<return: #BlElement or: nil>
@@ -256,7 +254,7 @@ BlInfiniteLinearLayoutState >> nextElementFromScrapList [
 	^ nil
 ]
 
-{ #category : 'private - recycling' }
+{ #category : #'private - recycling' }
 BlInfiniteLinearLayoutState >> nextElementInLimitedList: anIgnoredElement [
 	| aClosestElement aClosestDistance |
 	
@@ -285,7 +283,7 @@ BlInfiniteLinearLayoutState >> nextElementInLimitedList: anIgnoredElement [
 	^ aClosestElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> offset [
 	"An offset where layout should start"
 	<return: #Number>
@@ -293,30 +291,30 @@ BlInfiniteLinearLayoutState >> offset [
 	^ offset
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> offset: aNumber [
 	offset := aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> scrapList: aCollectionOfScrappedElement [
 
 	scrapList := aCollectionOfScrappedElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> scrolledWhileFilling [
 
 	^ scrolledWhileFilling
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> scrolledWhileFilling: aBoolean [
 
 	scrolledWhileFilling := aBoolean
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> scrollingOffset [
 	"Return the amount of scrolling we can make without creating a new element.
 	Taking me into account allows us to have efficient element recycling"
@@ -325,7 +323,7 @@ BlInfiniteLinearLayoutState >> scrollingOffset [
 	^ scrollingOffset
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutState >> scrollingOffset: aNumber [
 	scrollingOffset := aNumber
 ]

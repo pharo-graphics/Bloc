@@ -1,21 +1,19 @@
 Class {
-	#name : 'BACanvasTextMeasurer',
-	#superclass : 'BATextMeasurer',
+	#name : #BACanvasTextMeasurer,
+	#superclass : #BATextMeasurer,
 	#instVars : [
 		'aeCanvas'
 	],
-	#category : 'Bloc-Alexandrie-Text',
-	#package : 'Bloc-Alexandrie',
-	#tag : 'Text'
+	#category : #'Bloc-Alexandrie-Text'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BACanvasTextMeasurer >> canvas [
 	"return the Alexandrie canvas"
 	^ aeCanvas
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BACanvasTextMeasurer >> canvas: anAeCanvas [
 
 	aeCanvas := anAeCanvas

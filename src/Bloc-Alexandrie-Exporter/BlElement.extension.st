@@ -1,6 +1,6 @@
-Extension { #name : 'BlElement' }
+Extension { #name : #BlElement }
 
-{ #category : '*Bloc-Alexandrie-Exporter' }
+{ #category : #'*Bloc-Alexandrie-Exporter' }
 BlElement >> exportAsForm [
 	"Export the receiver's image as a Form. Answer a `Form`."
 
@@ -9,7 +9,7 @@ BlElement >> exportAsForm [
 		  export
 ]
 
-{ #category : '*Bloc-Alexandrie-Exporter' }
+{ #category : #'*Bloc-Alexandrie-Exporter' }
 BlElement >> exportAsJPEG [
 	"Export the receiver's image as a JPEG. Answer the target (a `FileReference`)."
 
@@ -18,7 +18,7 @@ BlElement >> exportAsJPEG [
 		  export
 ]
 
-{ #category : '*Bloc-Alexandrie-Exporter' }
+{ #category : #'*Bloc-Alexandrie-Exporter' }
 BlElement >> exportAsPDF [
 	"Export the receiver as a vector PDF. Answer the target (a `FileReference`)"
 
@@ -27,7 +27,7 @@ BlElement >> exportAsPDF [
 		  export
 ]
 
-{ #category : '*Bloc-Alexandrie-Exporter' }
+{ #category : #'*Bloc-Alexandrie-Exporter' }
 BlElement >> exportAsPNG [
 	"Export the receiver's image as a PNG. Answer the target (a `FileReference`)"
 
@@ -36,7 +36,7 @@ BlElement >> exportAsPNG [
 		  export
 ]
 
-{ #category : '*Bloc-Alexandrie-Exporter' }
+{ #category : #'*Bloc-Alexandrie-Exporter' }
 BlElement >> exportAsSVG [
 	"Export the receiver as a SVG. Answer the target (a `FileReference`)"
 

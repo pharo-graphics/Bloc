@@ -1,78 +1,76 @@
 Class {
-	#name : 'BlBaseDragEvent',
-	#superclass : 'BlMouseEvent',
+	#name : #BlBaseDragEvent,
+	#superclass : #BlMouseEvent,
 	#instVars : [
 		'gestureSource',
 		'gestureTarget',
 		'dragboard',
 		'startButtons'
 	],
-	#category : 'Bloc-Events',
-	#package : 'Bloc',
-	#tag : 'Events'
+	#category : #'Bloc-Events'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlBaseDragEvent >> asDragEvent [
 	^ self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBaseDragEvent >> dragboard [
 	^ dragboard
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBaseDragEvent >> dragboard: anObject [
 	dragboard := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBaseDragEvent >> gestureSource [
 	^ gestureSource
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBaseDragEvent >> gestureSource: anObject [
 	gestureSource := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBaseDragEvent >> gestureTarget [
 	^ gestureTarget
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBaseDragEvent >> gestureTarget: anObject [
 	gestureTarget := anObject
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlBaseDragEvent >> isBaseDrag [
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlBaseDragEvent >> isMiddleButtonDrag [
 	^ startButtons = self class middleButton
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlBaseDragEvent >> isPrimaryButtonDrag [
 	^ startButtons = self class primaryButton
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlBaseDragEvent >> isSecondaryButtonDrag [
 	^ startButtons = self class secondaryButton
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBaseDragEvent >> startButtons [
 	^ startButtons
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBaseDragEvent >> startButtons: anObject [
 	startButtons := anObject
 ]

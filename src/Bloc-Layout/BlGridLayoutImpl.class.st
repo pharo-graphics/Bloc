@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlGridLayoutImpl',
-	#superclass : 'BlLayout',
+	#name : #BlGridLayoutImpl,
+	#superclass : #BlLayout,
 	#instVars : [
 		'horizontalAxis',
 		'verticalAxis',
@@ -11,19 +11,17 @@ Class {
 	#pools : [
 		'BlGridLayoutConstants'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities',
-	#package : 'Bloc-Layout',
-	#tag : 'Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlGridLayoutImpl class >> on: aGridLayout [
 	^ self new
 		layout: aGridLayout;
 		yourself
 ]
 
-{ #category : 'private utilities' }
+{ #category : #'private utilities' }
 BlGridLayoutImpl >> adjust: aMeasurementSpec by: delta [
 
 	^ BlMeasurementSpec new
@@ -31,12 +29,12 @@ BlGridLayoutImpl >> adjust: aMeasurementSpec by: delta [
 		mode: aMeasurementSpec mode
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayoutImpl >> alignment [
 	^ layout alignment
 ]
 
-{ #category : 'private accessing' }
+{ #category : #'private accessing' }
 BlGridLayoutImpl >> axis: isHorizontal [
 	"Return an object that represents a horizontal axis if isHorizontal is true and vertical axis otherwise"
 	<return: #BlGridLayoutAxis>
@@ -46,12 +44,12 @@ BlGridLayoutImpl >> axis: isHorizontal [
 		ifFalse: [ verticalAxis ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayoutImpl >> cellSpacing [
 	^ layout cellSpacing
 ]
 
-{ #category : 'computation' }
+{ #category : #computation }
 BlGridLayoutImpl >> cellSpacingOf: aChildElement isAtEdge: isAtEdge isHorizontal: isHorizontal isLeading: isLeading [
 	"Return cell spacing around aChildElement at the side defined by isAtEdge, isHorizontal and isLeading.
 	isAtEdge is a boolean whose value is true if cell is located on the grid's edge, meaning that it
@@ -72,7 +70,7 @@ BlGridLayoutImpl >> cellSpacingOf: aChildElement isAtEdge: isAtEdge isHorizontal
 		ifFalse: [ self cellSpacing / 2.0 ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlGridLayoutImpl >> checkConsistency: anElement [
 
 	lastLayoutParamsHashCode
@@ -86,7 +84,7 @@ BlGridLayoutImpl >> checkConsistency: anElement [
 				self checkConsistency: anElement ] ]
 ]
 
-{ #category : 'private utilities' }
+{ #category : #'private utilities' }
 BlGridLayoutImpl >> clip: aBlGridLayoutInterval isDefined: isDefined count: count [
 	"Logic to avert infinite loops by ensuring that the cells can be placed somewhere."
 	<return: #Number>
@@ -104,23 +102,23 @@ BlGridLayoutImpl >> clip: aBlGridLayoutInterval isDefined: isDefined count: coun
 	^ size min: count - min
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayoutImpl >> columnCount: aNumber [
 	horizontalAxis count: aNumber
 ]
 
-{ #category : 'private utilities' }
+{ #category : #'private utilities' }
 BlGridLayoutImpl >> constraintsHashCode: anElement [
 	
 	^ anElement children accountedByLayout inject: 1 into: [ :hash :child | hash bitXor: child constraints hash ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlGridLayoutImpl >> defaultMeasurer [
 	^ BlGridMeasurer new
 ]
 
-{ #category : 'private utilities' }
+{ #category : #'private utilities' }
 BlGridLayoutImpl >> fill: anArray from: fromIndex to: toIndex with: aValue [
 	| aLength start end |
 	
@@ -134,7 +132,7 @@ BlGridLayoutImpl >> fill: anArray from: fromIndex to: toIndex with: aValue [
 	anArray atAll: (start + 1 to: end) put: aValue
 ]
 
-{ #category : 'private utilities' }
+{ #category : #'private utilities' }
 BlGridLayoutImpl >> fits: anArray from: fromIndex to: toIndex with: value [
 	"Return true if value fits inside array within interval
 	fromIndex to toIndex exclusive, false otherwise.
@@ -149,7 +147,7 @@ BlGridLayoutImpl >> fits: anArray from: fromIndex to: toIndex with: value [
 	^ (fromIndex to: toIndex - 1) allSatisfy: [ :anIndex | (anArray at: anIndex + 1) <= value ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlGridLayoutImpl >> initialize [
 	super initialize.
 
@@ -158,7 +156,7 @@ BlGridLayoutImpl >> initialize [
 	measurer := self defaultMeasurer
 ]
 
-{ #category : 'private invalidate' }
+{ #category : #'private invalidate' }
 BlGridLayoutImpl >> invalidateStructure [
 	lastLayoutParamsHashCode := nil.
 	horizontalAxis invalidateStructure.
@@ -166,18 +164,18 @@ BlGridLayoutImpl >> invalidateStructure [
 	self invalidateValues
 ]
 
-{ #category : 'private invalidate' }
+{ #category : #'private invalidate' }
 BlGridLayoutImpl >> invalidateValues [
 	horizontalAxis invalidateValues.
 	verticalAxis invalidateValues
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayoutImpl >> layout: aGridLayout [
 	layout := aGridLayout
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlGridLayoutImpl >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	| targetWidth targetHeight paddingLeft paddingTop paddingRight paddingBottom hLocations vLocations|
 	
@@ -253,7 +251,7 @@ BlGridLayoutImpl >> layout: anElement in: aRectangle context: aBlElementBoundsUp
 		child applyLayoutIn: (cx @ cy extent: width @ height) context: aBlElementBoundsUpdateContext ]
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlGridLayoutImpl >> measure: anElement with: anExtentSpec [
 	| widthSpec heightSpec hPadding vPadding widthSpecSansPadding heightSpecSansPadding widthSansPadding heightSansPadding measuredWidth measuredHeight |
 
@@ -301,22 +299,22 @@ BlGridLayoutImpl >> measure: anElement with: anExtentSpec [
 	anElement measuredExtent: (anExtentSpec sizeFor: measuredWidth @ measuredHeight)
 ]
 
-{ #category : 'private accessing' }
+{ #category : #'private accessing' }
 BlGridLayoutImpl >> measurer [
 	^ measurer
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayoutImpl >> orientation [
 	^ layout orientation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayoutImpl >> rowCount: aNumber [
 	verticalAxis count: aNumber
 ]
 
-{ #category : 'private utilities' }
+{ #category : #'private utilities' }
 BlGridLayoutImpl >> setGroup: child row: row span: rowSpan col: col span: colSpan [
 	| childConstraints |
 
@@ -325,7 +323,7 @@ BlGridLayoutImpl >> setGroup: child row: row span: rowSpan col: col span: colSpa
 	childConstraints horizontal specSpan: (BlGridLayoutInterval min: col max: col + colSpan)
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlGridLayoutImpl >> validateChildConstraints: aChildElement [
 	| childConstraints |
 	childConstraints := aChildElement constraints grid.
@@ -343,7 +341,7 @@ BlGridLayoutImpl >> validateChildConstraints: aChildElement [
 			childConstraints vertical specAlignment: BlGridAlignment fill ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlGridLayoutImpl >> validateLayoutParams: anElement [
 	"install default indices for cells that don't define them"
 	| isHorizontal anAxis aCount major minor maxSizes |

@@ -4,19 +4,17 @@ I make it possible to embed Bloc space within arbitrary morphs.
 For more information and example, please refer to BlMorphicHost.
 "
 Class {
-	#name : 'BlMorphicHostSpace',
-	#superclass : 'Object',
+	#name : #BlMorphicHostSpace,
+	#superclass : #Object,
 	#traits : 'TBlHostSpace + TBlSpaceProperties',
 	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
 	#instVars : [
 		'spaceHostMorph'
 	],
-	#category : 'BlocHost-Morphic-Host - Morph',
-	#package : 'BlocHost-Morphic',
-	#tag : 'Host - Morph'
+	#category : #'BlocHost-Morphic-Host - Morph'
 }
 
-{ #category : 'window - properties' }
+{ #category : #'window - properties' }
 BlMorphicHostSpace >> borderless [
 	"Return true if underlying window is now borderless, false otherwise"
 	<return: #Boolean>
@@ -24,30 +22,30 @@ BlMorphicHostSpace >> borderless [
 	^ false
 ]
 
-{ #category : 'window - properties' }
+{ #category : #'window - properties' }
 BlMorphicHostSpace >> borderless: aBoolean [
 	"Make host window borderless if true is given"
 ]
 
-{ #category : 'host space - displaying' }
+{ #category : #'host space - displaying' }
 BlMorphicHostSpace >> close [
 	self host containerMorph removeMorph: self spaceHostMorph
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlMorphicHostSpace >> createFormSurfaceRenderer [
 	<return: #BlHostSurfaceRenderer>
 	
 	^ BlMorphicFormSurfaceRenderer new spaceHostMorph: spaceHostMorph
 ]
 
-{ #category : 'host space - cursor' }
+{ #category : #'host space - cursor' }
 BlMorphicHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one"
 	World currentHand showTemporaryCursor: aCursor asForm
 ]
 
-{ #category : 'host space - geometry' }
+{ #category : #'host space - geometry' }
 BlMorphicHostSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch"
 	<return: #Number>
@@ -55,7 +53,7 @@ BlMorphicHostSpace >> densityDpi [
 	^ 96.0
 ]
 
-{ #category : 'window - properties' }
+{ #category : #'window - properties' }
 BlMorphicHostSpace >> fullsize [
 	"Return true if an underlying window is in fullsize mode,
 	false otherwise.
@@ -66,21 +64,21 @@ BlMorphicHostSpace >> fullsize [
 	^ true
 ]
 
-{ #category : 'window - properties' }
+{ #category : #'window - properties' }
 BlMorphicHostSpace >> fullsize: aBoolean [
 	"Switch underlying window to fullsize if true is given
 	and exit fullsize mode if false is given.
 	See ${method:TBlSpaceProperties>>#fullsize}"
 ]
 
-{ #category : 'host space - events' }
+{ #category : #'host space - events' }
 BlMorphicHostSpace >> generateEvents [
 	"Generate more complex state change events such as window scale event when resolution of the screen changes"
 	
 	spaceHostMorph world ifNil: [ spaceHostMorph announceDeleted ]
 ]
 
-{ #category : 'host space - geometry' }
+{ #category : #'host space - geometry' }
 BlMorphicHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
@@ -89,7 +87,7 @@ BlMorphicHostSpace >> logicalSize [
 	^ spaceHostMorph extent asLogicalSize
 ]
 
-{ #category : 'host space - testing' }
+{ #category : #'host space - testing' }
 BlMorphicHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
 	<return: #Boolean>
@@ -97,13 +95,13 @@ BlMorphicHostSpace >> needsRebuild [
 	^ false
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlMorphicHostSpace >> newBlHostRendererSurface [
 	
 	^ BlHostRendererFormSurface newForHostSpace: self
 ]
 
-{ #category : 'host space - geometry' }
+{ #category : #'host space - geometry' }
 BlMorphicHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
 	This size may differ from the logical size on high dpi (retina) screens.
@@ -112,7 +110,7 @@ BlMorphicHostSpace >> physicalSize [
 	^ (spaceHostMorph width @ spaceHostMorph height) asPhysicalSize
 ]
 
-{ #category : 'window - properties' }
+{ #category : #'window - properties' }
 BlMorphicHostSpace >> position [
 	"Return window's position in screen coordinates"
 	<return: #Point>
@@ -120,7 +118,7 @@ BlMorphicHostSpace >> position [
 	^ self spaceHostMorph position
 ]
 
-{ #category : 'window - properties' }
+{ #category : #'window - properties' }
 BlMorphicHostSpace >> position: aPoint [
 	"Change window's position to a given point in screen coordinates"
 	
@@ -128,33 +126,33 @@ BlMorphicHostSpace >> position: aPoint [
 
 ]
 
-{ #category : 'host space - rendering' }
+{ #category : #'host space - rendering' }
 BlMorphicHostSpace >> requestRedraw [
 	"Space needs to redraw the window"
 	
 	spaceHostMorph changed
 ]
 
-{ #category : 'host space - displaying' }
+{ #category : #'host space - displaying' }
 BlMorphicHostSpace >> show [
 	self spaceHostMorph position: self host containerMorph position.
 	self host containerMorph addMorphBack: self spaceHostMorph
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicHostSpace >> spaceHostMorph [
 	<return: #BlMorphicSpaceHostMorph>
 
 	^ spaceHostMorph
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMorphicHostSpace >> spaceHostMorph: aMorphicSpaceHostMorph [
 	spaceHostMorph := aMorphicSpaceHostMorph.
 	aMorphicSpaceHostMorph hostSpace: self
 ]
 
-{ #category : 'window - properties' }
+{ #category : #'window - properties' }
 BlMorphicHostSpace >> title [
 	"Return window's title as a string"
 	<return: #String>
@@ -162,12 +160,12 @@ BlMorphicHostSpace >> title [
 	^ ''
 ]
 
-{ #category : 'window - properties' }
+{ #category : #'window - properties' }
 BlMorphicHostSpace >> title: aString [
 	"Change window's title"
 ]
 
-{ #category : 'host space - geometry' }
+{ #category : #'host space - geometry' }
 BlMorphicHostSpace >> windowExtent: anExtent [
 	spaceHostMorph extent: anExtent
 ]

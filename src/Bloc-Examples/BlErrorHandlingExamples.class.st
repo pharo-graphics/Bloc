@@ -2,14 +2,12 @@
 I exemplify how Bloc handles errors in different parts of the BlElement such as drawing, layout or event handling
 "
 Class {
-	#name : 'BlErrorHandlingExamples',
-	#superclass : 'BlExampleTest',
-	#category : 'Bloc-Examples-Errors',
-	#package : 'Bloc-Examples',
-	#tag : 'Errors'
+	#name : #BlErrorHandlingExamples,
+	#superclass : #BlExampleTest,
+	#category : #'Bloc-Examples-Errors'
 }
 
-{ #category : 'error - examples' }
+{ #category : #'error - examples' }
 BlErrorHandlingExamples >> sceneElementThatHasBrokenDrawing [
 	<gtExample>
 	<noTest>
@@ -30,7 +28,7 @@ BlErrorHandlingExamples >> sceneElementThatHasBrokenDrawing [
 	^ aSceneElement
 ]
 
-{ #category : 'error - examples' }
+{ #category : #'error - examples' }
 BlErrorHandlingExamples >> sceneElementThatHasBrokenDrawingAndOnLayout [
 	<gtExample>
 	<noTest>
@@ -57,7 +55,7 @@ BlErrorHandlingExamples >> sceneElementThatHasBrokenDrawingAndOnLayout [
 	^ aSceneElement
 ]
 
-{ #category : 'error - examples' }
+{ #category : #'error - examples' }
 BlErrorHandlingExamples >> sceneElementThatHasBrokenOnLayout [
 	<gtExample>
 
@@ -78,7 +76,7 @@ BlErrorHandlingExamples >> sceneElementThatHasBrokenOnLayout [
 	^ aSceneElement
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlErrorHandlingExamples >> sceneWith: aFaultyElement [
 	"Create a visual scene with a faulty element embedded in it"
 	| aContainer aLeftChild aRightChild aSpace |

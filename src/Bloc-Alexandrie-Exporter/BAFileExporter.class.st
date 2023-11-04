@@ -4,30 +4,29 @@ I export a Bloc element to a file target.
 See my subclasses for different output formats.
 "
 Class {
-	#name : 'BAFileExporter',
-	#superclass : 'BAExporter',
+	#name : #BAFileExporter,
+	#superclass : #BAExporter,
 	#instVars : [
 		'target'
 	],
-	#category : 'Bloc-Alexandrie-Exporter',
-	#package : 'Bloc-Alexandrie-Exporter'
+	#category : #'Bloc-Alexandrie-Exporter'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 BAFileExporter >> defaultTarget [
 
 	^ Smalltalk imageDirectory /
 		(self element class name, '-', self element hash asString, '.' , self extension)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BAFileExporter >> extension [
 	"Return a String representing default file extension to be used during export"
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BAFileExporter >> fileName: aFileReference [
 
 	self
@@ -38,19 +37,19 @@ BAFileExporter >> fileName: aFileReference [
 	self target: aFileReference
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BAFileExporter >> finishExport: aeCanvas [
 
 	^ target
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BAFileExporter >> target [
 
 	^ target ifNil: [ target := self defaultTarget ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BAFileExporter >> target: aFileReference [
 
 	target := aFileReference

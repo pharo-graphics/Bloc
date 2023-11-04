@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlDefaultItemTheme',
-	#superclass : 'BlTheme',
+	#name : #BlDefaultItemTheme,
+	#superclass : #BlTheme,
 	#instVars : [
 		'selectedColor',
 		'deselectedColor',
@@ -12,62 +12,61 @@ Class {
 		'pressedBackgroundColor',
 		'selectedBlurredColor'
 	],
-	#category : 'Bloc-Theme',
-	#package : 'Bloc-Theme'
+	#category : #'Bloc-Theme'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> defaultBackgroundColor [
 	^ defaultBackgroundColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> defaultBackgroundColor: anObject [
 	defaultBackgroundColor := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDefaultItemTheme >> defaultBorderColor [
 
 	^ self deselectedColor 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> deselectedColor [
 	^ deselectedColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> deselectedColor: anObject [
 	deselectedColor := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> focusedBorderColor [
 	^ focusedBorderColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> focusedBorderColor: anObject [
 	focusedBorderColor := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> hoveredBackgroundColor [
 	^ hoveredBackgroundColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> hoveredBackgroundColor: anObject [
 	hoveredBackgroundColor := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> hoveredBorderColor [
 	^ hoveredBorderColor
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDefaultItemTheme >> initialize [
 	super initialize.
 	selectedColor := BlDefaultColors selectedListItemColor.
@@ -80,40 +79,40 @@ BlDefaultItemTheme >> initialize [
 	pressedBackgroundColor := BlDefaultColors pressedListItemColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> pressedBackgroundColor [
 	^ pressedBackgroundColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> pressedBackgroundColor: anObject [
 	pressedBackgroundColor := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> pressedBorderColor [
 
 	^ pressedBorderColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> pressedBorderColor: aColor [
 
 	pressedBorderColor := aColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> selectedBlurredColor [
 	^ selectedBlurredColor ifNil: [selectedBlurredColor := self selectedColor muchLighter ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> selectedColor [
 
 	^ selectedColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultItemTheme >> selectedColor: anObject [
 	selectedColor := anObject
 ]

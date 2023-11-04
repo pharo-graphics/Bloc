@@ -14,26 +14,24 @@ Example:
 
 "
 Class {
-	#name : 'BlOnceLayout',
-	#superclass : 'BlLayout',
+	#name : #BlOnceLayout,
+	#superclass : #BlLayout,
 	#instVars : [
 		'layout',
 		'isStopped',
 		'measuredExtent'
 	],
-	#category : 'Bloc-Layout-Once',
-	#package : 'Bloc-Layout',
-	#tag : 'Once'
+	#category : #'Bloc-Layout-Once'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlOnceLayout class >> on: aBlLayout [
 	<return: #BlOnceLayout>
 
 	^ self new layout: aBlLayout
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlOnceLayout >> initialize [
 	super initialize.
 
@@ -41,27 +39,27 @@ BlOnceLayout >> initialize [
 	layout := BlBasicLayout uniqueInstance
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlOnceLayout >> isStopped [
 	^ isStopped
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlOnceLayout >> isStopped: aBoolean [
 	isStopped := aBoolean
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlOnceLayout >> layout [
 	^ layout
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlOnceLayout >> layout: aBlLayout [
 	layout := aBlLayout
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlOnceLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	self isStopped
 		ifFalse: [ ^ self layout layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext ].
@@ -74,7 +72,7 @@ BlOnceLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdate
 	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlOnceLayout >> measure: anElement with: anExtentSpec [
 	self isStopped
 		ifFalse: [ ^ self layout measure: anElement with: anExtentSpec ].
@@ -83,7 +81,7 @@ BlOnceLayout >> measure: anElement with: anExtentSpec [
 	self measureIgnored: anElement with: anExtentSpec
 ]
 
-{ #category : 'hooks - layout' }
+{ #category : #'hooks - layout' }
 BlOnceLayout >> onLayoutDone: anElement [
 	super onLayoutDone: anElement.
 	

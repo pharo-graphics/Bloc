@@ -2,30 +2,28 @@
 I represent the vertical constraints of a `BlProportionalLayout`.
 "
 Class {
-	#name : 'BlProportionalLayoutConstraintsVertical',
-	#superclass : 'BlLayoutConstraintsAxis',
+	#name : #BlProportionalLayoutConstraintsVertical,
+	#superclass : #BlLayoutConstraintsAxis,
 	#instVars : [
 		'top',
 		'bottom'
 	],
-	#category : 'Bloc-Layout-Proportional',
-	#package : 'Bloc-Layout',
-	#tag : 'Proportional'
+	#category : #'Bloc-Layout-Proportional'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlProportionalLayoutConstraintsVertical >> bottom [
 
 	^ bottom
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlProportionalLayoutConstraintsVertical >> bottom: aNumber [
 
 	bottom := aNumber
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlProportionalLayoutConstraintsVertical >> initialize [
 
 	super initialize.
@@ -34,13 +32,13 @@ BlProportionalLayoutConstraintsVertical >> initialize [
 	bottom := 1.0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlProportionalLayoutConstraintsVertical >> top [
 
 	^ top
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlProportionalLayoutConstraintsVertical >> top: aNumber [
 
 	top := aNumber

@@ -3,20 +3,19 @@ I have been automatically converted and probably manually tweaked from BlSubText
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlSubTextTest2',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Text-Rope-Tests',
-	#package : 'Bloc-Text-Rope-Tests'
+	#name : #BlSubTextTest2,
+	#superclass : #TestCase,
+	#category : #'Bloc-Text-Rope-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSubTextTest2 >> testEmptyText [
 
 	<sampleInstance>
 	^ '' asRopedText
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSubTextTest2 >> testHelloWorldFrom0To0 [
 
 	<sampleInstance>
@@ -32,7 +31,7 @@ BlSubTextTest2 >> testHelloWorldFrom0To0 [
 	^ anError
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSubTextTest2 >> testHelloWorldFrom1To0 [
 
 	<sampleInstance>
@@ -49,7 +48,7 @@ BlSubTextTest2 >> testHelloWorldFrom1To0 [
 	^ aSubText
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSubTextTest2 >> testHelloWorldFrom2To1 [
 
 	<sampleInstance>
@@ -65,14 +64,14 @@ BlSubTextTest2 >> testHelloWorldFrom2To1 [
 	^ aSubText
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSubTextTest2 >> testHelloWorldText [
 
 	<sampleInstance>
 	^ 'HelloWorld' asRopedText
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSubTextTest2 >> testInsertInHelloWorldFrom1To0At0 [
 
 	<sampleInstance>
@@ -91,7 +90,7 @@ BlSubTextTest2 >> testInsertInHelloWorldFrom1To0At0 [
 	^ aSubText
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlSubTextTest2 >> testInsertInHelloWorldFrom1To0At1 [
 
 	<sampleInstance>

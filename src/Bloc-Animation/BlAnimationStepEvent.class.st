@@ -3,23 +3,21 @@ I am sent after every animation step with current progress as a parameter
 
 "
 Class {
-	#name : 'BlAnimationStepEvent',
-	#superclass : 'BlEvent',
+	#name : #BlAnimationStepEvent,
+	#superclass : #BlEvent,
 	#instVars : [
 		'progress'
 	],
-	#category : 'Bloc-Animation-Events',
-	#package : 'Bloc-Animation',
-	#tag : 'Events'
+	#category : #'Bloc-Animation-Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlAnimationStepEvent >> progress [
 
 	^ progress
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlAnimationStepEvent >> progress: aNumber [
 	"Establish the progress, which must be within interval [0...1]"
 

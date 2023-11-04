@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlInfiniteState',
-	#superclass : 'Object',
+	#name : #BlInfiniteState,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -21,12 +21,10 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-Core',
-	#package : 'Bloc-Infinite',
-	#tag : 'Core'
+	#category : #'Bloc-Infinite-Core'
 }
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 BlInfiniteState >> assertLayoutStep: aStep [
 	"Make sure that current layout step is aStep"
 	
@@ -35,7 +33,7 @@ BlInfiniteState >> assertLayoutStep: aStep [
 		description: [ 'Wrong layout state! It should be: ', aStep asString, ' but it is ', layoutStep value asString ]
 ]
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 BlInfiniteState >> assertLayoutStep: aStep or: anotherStep [
 	"Make sure that current layout step is aStep"
 
@@ -43,40 +41,40 @@ BlInfiniteState >> assertLayoutStep: aStep or: anotherStep [
 		ifFalse: [ self error: 'Wrong layout state! It should be: ', aStep asString, ' or ', anotherStep asString, ' but it is ', layoutStep value asString ]
 ]
 
-{ #category : 'adding/removing' }
+{ #category : #'adding/removing' }
 BlInfiniteState >> at: aResourceKey [
 
 	^ data at: aResourceKey ifAbsent: nil
 ]
 
-{ #category : 'adding/removing' }
+{ #category : #'adding/removing' }
 BlInfiniteState >> at: aResourceKey put: anObject [
 
 	data at: aResourceKey put: anObject
 ]
 
-{ #category : 'accessing - step' }
+{ #category : #'accessing - step' }
 BlInfiniteState >> beStepAnimations [
 
 	layoutStep clear.
 	layoutStep addAnimations
 ]
 
-{ #category : 'accessing - step' }
+{ #category : #'accessing - step' }
 BlInfiniteState >> beStepLayout [
 
 	layoutStep clear.
 	layoutStep addLayout
 ]
 
-{ #category : 'accessing - step' }
+{ #category : #'accessing - step' }
 BlInfiniteState >> beStepStart [
 
 	layoutStep clear.
 	layoutStep addStart
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteState >> defaultLayoutStep [
 
 	^ BlInfiniteLayoutStepFlags new
@@ -84,52 +82,52 @@ BlInfiniteState >> defaultLayoutStep [
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> deletedInvisibleItemCountSincePreviousLayout [
 	^ deletedInvisibleItemCountSincePreviousLayout
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> deletedInvisibleItemCountSincePreviousLayout: anObject [
 	deletedInvisibleItemCountSincePreviousLayout := anObject
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteState >> didStructureChange [
 	^ structureChanged
 ]
 
-{ #category : 'accessing - focus' }
+{ #category : #'accessing - focus' }
 BlInfiniteState >> focusedItemId [
 	^ focusedItemId
 ]
 
-{ #category : 'accessing - focus' }
+{ #category : #'accessing - focus' }
 BlInfiniteState >> focusedItemId: anObject [
 	focusedItemId := anObject
 ]
 
-{ #category : 'accessing - focus' }
+{ #category : #'accessing - focus' }
 BlInfiniteState >> focusedItemPosition [
 	^ focusedItemPosition
 ]
 
-{ #category : 'accessing - focus' }
+{ #category : #'accessing - focus' }
 BlInfiniteState >> focusedItemPosition: anObject [
 	focusedItemPosition := anObject
 ]
 
-{ #category : 'accessing - focus' }
+{ #category : #'accessing - focus' }
 BlInfiniteState >> focusedSubChild [
 	^ focusedSubChild
 ]
 
-{ #category : 'accessing - focus' }
+{ #category : #'accessing - focus' }
 BlInfiniteState >> focusedSubChild: anObject [
 	focusedSubChild := anObject
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteState >> hasTargetScrollPosition [
 	"Return true if current scroll has a target position, false otherwise"
 	<return: #Boolean>
@@ -137,7 +135,7 @@ BlInfiniteState >> hasTargetScrollPosition [
 	^ targetPosition ~= NoPosition
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteState >> initialize [
 	super initialize.
 	
@@ -161,64 +159,64 @@ BlInfiniteState >> initialize [
 	focusedSubChild := nil
 ]
 
-{ #category : 'testing - step' }
+{ #category : #'testing - step' }
 BlInfiniteState >> isLayoutStep [
 	^ layoutStep hasLayout
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> isMeasuring [
 	^ isMeasuring
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> isMeasuring: aBoolean [
 	isMeasuring := aBoolean
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> isPreLayout [
 	^ inPreLayout
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> isPreLayout: aBoolean [
 	inPreLayout := aBoolean
 ]
 
-{ #category : 'testing - step' }
+{ #category : #'testing - step' }
 BlInfiniteState >> isStartStep [
 	^ layoutStep hasStart
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> itemCount [
 	^ inPreLayout
 		ifTrue: [ previousLayoutItemCount - deletedInvisibleItemCountSincePreviousLayout ]
 		ifFalse: [ itemCount ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> itemCount: aNumber [
 	itemCount := aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> previousLayoutItemCount [
 	^ previousLayoutItemCount
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> previousLayoutItemCount: anObject [
 	previousLayoutItemCount := anObject
 ]
 
-{ #category : 'adding/removing' }
+{ #category : #'adding/removing' }
 BlInfiniteState >> remove: aResourceKey [
 	data removeKey: aResourceKey ifAbsent: [  ]
 ]
 
-{ #category : 'invalidate' }
+{ #category : #invalidate }
 BlInfiniteState >> reset [
 	targetPosition := NoPosition.
 	data removeAll.
@@ -226,34 +224,34 @@ BlInfiniteState >> reset [
 	structureChanged := false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> structureChanged: aBoolean [
 
 	structureChanged := aBoolean
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> targetPosition: aNumber [ 
 	targetPosition := aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> targetScrollPosition [
 	^ targetPosition
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> targetScrollPosition: aPosition [
 	targetPosition := aPosition
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> trackOldChangeHolders [
 
 	^ trackOldChangeHolders
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteState >> trackOldChangeHolders: aBoolean [
 	trackOldChangeHolders := aBoolean
 ]

@@ -3,13 +3,12 @@ I have been automatically converted and probably manually tweaked from BlLinearL
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlLinearLayoutHorizontalTest',
-	#superclass : 'BlLinearLayoutTest',
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#name : #BlLinearLayoutHorizontalTest,
+	#superclass : #BlLinearLayoutTest,
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithOneChildMatchInExactParentPadding [
 
 	<sampleInstance>
@@ -30,7 +29,7 @@ BlLinearLayoutHorizontalTest >> testElementWithOneChildMatchInExactParentPadding
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithOneChildMatchOneExactInFitParent [
 	"All children are distributed equally within parent's bounds"
 
@@ -55,7 +54,7 @@ BlLinearLayoutHorizontalTest >> testElementWithOneChildMatchOneExactInFitParent 
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithOneExactChildInExactParentMargin [
 	"All children are distributed equally within parent's bounds"
 
@@ -79,7 +78,7 @@ BlLinearLayoutHorizontalTest >> testElementWithOneExactChildInExactParentMargin 
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithThreeMatchChildrenInExactParent [
 	"All children are distributed equally within parent's bounds"
 
@@ -107,7 +106,7 @@ BlLinearLayoutHorizontalTest >> testElementWithThreeMatchChildrenInExactParent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithThreeMatchChildrenInExactParentRTL [
 	"All children are distributed equally within parent's bounds"
 
@@ -136,7 +135,7 @@ BlLinearLayoutHorizontalTest >> testElementWithThreeMatchChildrenInExactParentRT
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithTwoChildrenMatchInExactParentPadding [
 	"All children are distributed equally within parent's bounds"
 
@@ -161,7 +160,7 @@ BlLinearLayoutHorizontalTest >> testElementWithTwoChildrenMatchInExactParentPadd
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithTwoExactChildrenInFitContent [
 	"Parent resizes to fit children"
 
@@ -185,7 +184,7 @@ BlLinearLayoutHorizontalTest >> testElementWithTwoExactChildrenInFitContent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithTwoMatchChildrenInExactParent [
 	"All children are distributed equally within parent's bounds"
 
@@ -209,7 +208,7 @@ BlLinearLayoutHorizontalTest >> testElementWithTwoMatchChildrenInExactParent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testOneChildSetVisibilityGone [
 
 	<sampleInstance>
@@ -250,7 +249,7 @@ BlLinearLayoutHorizontalTest >> testOneChildSetVisibilityGone [
 	^ aContainer
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testParentWithLinearHorizontalLayout [
 
 	<sampleInstance>
@@ -267,7 +266,7 @@ BlLinearLayoutHorizontalTest >> testParentWithLinearHorizontalLayout [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testParentWithLinearHorizontalLayoutWithCellSpacing [
 
 	| element child1 child2 |
@@ -288,7 +287,7 @@ BlLinearLayoutHorizontalTest >> testParentWithLinearHorizontalLayoutWithCellSpac
 	self assert: child2 position x equals: 10
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testParentWithLinearLayoutWithCellSpacing [
 
 	| element child1 child2 |
@@ -318,7 +317,7 @@ BlLinearLayoutHorizontalTest >> testParentWithLinearLayoutWithCellSpacing [
 	self assert: child2 position y equals: 10
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testParentWithLinearLayoutWithCellSpacingChangingDirection [
 
 	| element child1 child2 |
@@ -364,7 +363,7 @@ BlLinearLayoutHorizontalTest >> testParentWithLinearLayoutWithCellSpacingChangin
 	self assert: child2 position x equals: 10
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testParentWithLinearVerticalLayoutWithCellSpacing [
 
 	| element child1 child2 |
