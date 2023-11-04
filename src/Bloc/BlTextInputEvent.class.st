@@ -10,7 +10,8 @@ Class {
 	#instVars : [
 		'text'
 	],
-	#category : 'Bloc-Events'
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
 { #category : 'testing' }

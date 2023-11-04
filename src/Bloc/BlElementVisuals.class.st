@@ -20,7 +20,8 @@ Class {
 		'DefaultOutskirts',
 		'DefaultVisibility'
 	],
-	#category : 'Bloc-Basic'
+	#package : 'Bloc',
+	#tag : 'Basic'
 }
 
 { #category : 'initialization' }

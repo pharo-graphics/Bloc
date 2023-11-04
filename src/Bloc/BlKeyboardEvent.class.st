@@ -5,7 +5,8 @@ Class {
 		'scanCode',
 		'key'
 	],
-	#category : 'Bloc-Events'
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
 { #category : 'converting' }

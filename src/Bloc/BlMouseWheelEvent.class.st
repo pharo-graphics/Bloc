@@ -17,7 +17,8 @@ Class {
 		'vector',
 		'isTouch'
 	],
-	#category : 'Bloc-Events'
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
 { #category : 'instance creation' }

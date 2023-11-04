@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'transfer'
 	],
-	#category : 'Bloc-Events'
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
 { #category : 'testing' }

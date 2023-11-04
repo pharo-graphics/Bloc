@@ -37,7 +37,8 @@ anElement := aStencil create.
 Class {
 	#name : 'BlStencil',
 	#superclass : 'Object',
-	#category : 'Bloc-Stencil'
+	#package : 'Bloc',
+	#tag : 'Stencil'
 }
 
 { #category : 'instance creation' }

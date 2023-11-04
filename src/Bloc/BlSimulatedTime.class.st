@@ -16,7 +16,8 @@ Class {
 	#instVars : [
 		'date'
 	],
-	#category : 'Bloc-Universe'
+	#package : 'Bloc',
+	#tag : 'Universe'
 }
 
 { #category : 'instance creation' }

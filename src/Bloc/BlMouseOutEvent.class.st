@@ -9,7 +9,8 @@ https://developer.mozilla.org/en-US/docs/Web/Events/mouseout
 Class {
 	#name : 'BlMouseOutEvent',
 	#superclass : 'BlMouseEvent',
-	#category : 'Bloc-Events'
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
 { #category : 'sending' }

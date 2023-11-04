@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'effects'
 	],
-	#category : 'Bloc-Effect'
+	#package : 'Bloc',
+	#tag : 'Effect'
 }
 
 { #category : 'as yet unclassified' }

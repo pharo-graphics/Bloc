@@ -5,7 +5,8 @@ I am a secondary mouse button. In most cases is bound to the right button and us
 Class {
 	#name : 'BlMouseSecondaryButton',
 	#superclass : 'BlMouseNamedButton',
-	#category : 'Bloc-Events'
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
 { #category : 'event creation' }

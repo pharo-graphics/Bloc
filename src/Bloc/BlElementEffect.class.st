@@ -10,7 +10,8 @@ Class {
 	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Effect'
+	#package : 'Bloc',
+	#tag : 'Effect'
 }
 
 { #category : 'geometry' }

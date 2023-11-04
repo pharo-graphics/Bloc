@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlDoubleClickEvent',
 	#superclass : 'BlMouseEvent',
-	#category : 'Bloc-Events'
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
 { #category : 'testing' }

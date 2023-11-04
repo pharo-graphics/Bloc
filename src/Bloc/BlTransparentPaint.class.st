@@ -11,7 +11,8 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Paint'
+	#package : 'Bloc',
+	#tag : 'Paint'
 }
 
 { #category : 'cleanup' }

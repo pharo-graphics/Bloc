@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlKeyboardKeyTable',
 	#superclass : 'Object',
-	#category : 'Bloc-Universe'
+	#package : 'Bloc',
+	#tag : 'Universe'
 }
 
 { #category : 'initialization' }

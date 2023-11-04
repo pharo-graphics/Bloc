@@ -10,7 +10,8 @@ Class {
 	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Paint'
+	#package : 'Bloc',
+	#tag : 'Paint'
 }
 
 { #category : 'instance creation' }

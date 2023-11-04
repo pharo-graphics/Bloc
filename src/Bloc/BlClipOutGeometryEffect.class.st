@@ -9,7 +9,8 @@ Class {
 		'geometry',
 		'offset'
 	],
-	#category : 'Bloc-Effect'
+	#package : 'Bloc',
+	#tag : 'Effect'
 }
 
 { #category : 'accessing' }

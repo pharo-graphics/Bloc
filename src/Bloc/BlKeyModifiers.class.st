@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'hashKey'
 	],
-	#category : 'Bloc-Events'
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
 { #category : 'as yet unclassified' }

@@ -13,7 +13,8 @@ https://developer.mozilla.org/en-US/docs/Web/Events/mouseenter
 Class {
 	#name : 'BlMouseEnterEvent',
 	#superclass : 'BlMouseEvent',
-	#category : 'Bloc-Events'
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
 { #category : 'testing' }

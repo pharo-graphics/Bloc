@@ -9,7 +9,8 @@ Class {
 	#instVars : [
 		'code'
 	],
-	#category : 'Bloc-Events'
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
 { #category : 'instance creation' }

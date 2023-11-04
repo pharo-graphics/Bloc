@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlMousePickEvent',
 	#superclass : 'BlMouseEvent',
-	#category : 'Bloc-Events'
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
 { #category : 'converting' }

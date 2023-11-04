@@ -9,7 +9,8 @@ Class {
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Space'
+	#package : 'Bloc',
+	#tag : 'Space'
 }
 
 { #category : 'instance creation' }

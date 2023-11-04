@@ -9,7 +9,8 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Space'
+	#package : 'Bloc',
+	#tag : 'Space'
 }
 
 { #category : 'cleanup' }

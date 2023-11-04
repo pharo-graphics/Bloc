@@ -21,7 +21,8 @@ Most recently, [feenk](https://feenk.com) has put in a ton of work, bringing the
 Class {
 	#name : 'ManifestBloc',
 	#superclass : 'PackageManifest',
-	#category : 'Bloc-Manifest'
+	#package : 'Bloc',
+	#tag : 'Manifest'
 }
 
 { #category : 'code-critics' }

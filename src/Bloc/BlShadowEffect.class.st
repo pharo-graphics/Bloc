@@ -9,7 +9,8 @@ Class {
 		'color',
 		'offset'
 	],
-	#category : 'Bloc-Effect'
+	#package : 'Bloc',
+	#tag : 'Effect'
 }
 
 { #category : 'accessing' }

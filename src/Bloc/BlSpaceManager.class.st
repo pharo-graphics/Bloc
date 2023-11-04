@@ -18,7 +18,8 @@ Class {
 	#instVars : [
 		'spaces'
 	],
-	#category : 'Bloc-Universe'
+	#package : 'Bloc',
+	#tag : 'Universe'
 }
 
 { #category : 'adding' }

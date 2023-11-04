@@ -9,7 +9,8 @@ Class {
 		'overlayElement',
 		'attachmentsCount'
 	],
-	#category : 'Bloc-Overlay'
+	#package : 'Bloc',
+	#tag : 'Overlay'
 }
 
 { #category : 'instance creation' }

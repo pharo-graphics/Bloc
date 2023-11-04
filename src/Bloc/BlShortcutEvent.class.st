@@ -22,7 +22,8 @@ Class {
 		'buffer',
 		'isRepeated'
 	],
-	#category : 'Bloc-Events'
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
 { #category : 'accessing' }

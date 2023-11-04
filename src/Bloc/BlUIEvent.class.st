@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'modifiers'
 	],
-	#category : 'Bloc-Events'
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
 { #category : 'converting' }

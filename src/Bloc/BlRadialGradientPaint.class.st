@@ -5,7 +5,8 @@ Class {
 		'center',
 		'radius'
 	],
-	#category : 'Bloc-Paint'
+	#package : 'Bloc',
+	#tag : 'Paint'
 }
 
 { #category : 'accessing' }

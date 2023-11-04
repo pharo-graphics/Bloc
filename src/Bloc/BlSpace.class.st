@@ -62,7 +62,8 @@ Class {
 	#classVars : [
 		'UniqueIdGenerator'
 	],
-	#category : 'Bloc-Space'
+	#package : 'Bloc',
+	#tag : 'Space'
 }
 
 { #category : 'private - change' }

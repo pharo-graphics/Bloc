@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'radius'
 	],
-	#category : 'Bloc-Effect'
+	#package : 'Bloc',
+	#tag : 'Effect'
 }
 
 { #category : 'accessing' }

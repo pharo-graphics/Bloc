@@ -5,7 +5,8 @@ Class {
 		'processor',
 		'upEvent'
 	],
-	#category : 'Bloc-Events'
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
 { #category : 'accessing' }

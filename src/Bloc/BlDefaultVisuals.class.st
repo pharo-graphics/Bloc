@@ -50,7 +50,8 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Basic'
+	#package : 'Bloc',
+	#tag : 'Basic'
 }
 
 { #category : 'accessing' }

@@ -11,7 +11,8 @@ I am a just a traditional real time.
 Class {
 	#name : 'BlRealTime',
 	#superclass : 'BlTime',
-	#category : 'Bloc-Universe'
+	#package : 'Bloc',
+	#tag : 'Universe'
 }
 
 { #category : 'private - time' }

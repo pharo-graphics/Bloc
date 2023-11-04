@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'form'
 	],
-	#category : 'Bloc-Paint'
+	#package : 'Bloc',
+	#tag : 'Paint'
 }
 
 { #category : 'as yet unclassified' }

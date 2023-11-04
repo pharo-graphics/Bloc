@@ -5,7 +5,8 @@ Class {
 		'start',
 		'end'
 	],
-	#category : 'Bloc-Paint'
+	#package : 'Bloc',
+	#tag : 'Paint'
 }
 
 { #category : 'instance creation' }
