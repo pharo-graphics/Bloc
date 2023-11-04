@@ -8,7 +8,8 @@ Class {
 	#instVars : [
 		'iconStencil'
 	],
-	#category : 'Bloc-Events-Type-Space'
+	#package : 'Bloc',
+	#tag : 'Events-Type-Space'
 }
 
 { #category : 'accessing' }

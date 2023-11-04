@@ -32,7 +32,8 @@ Class {
 		'ZAxis',
 		'Zero'
 	],
-	#category : 'Bloc-Basic-Math'
+	#package : 'Bloc',
+	#tag : 'Basic-Math'
 }
 
 { #category : 'cleanup' }

@@ -11,7 +11,8 @@ Class {
 	#instVars : [
 		'inputs'
 	],
-	#category : 'Bloc-Space - Events'
+	#package : 'Bloc',
+	#tag : 'Space - Events'
 }
 
 { #category : 'enumerating' }

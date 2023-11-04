@@ -29,7 +29,8 @@ Class {
 		'startTime',
 		'requeue'
 	],
-	#category : 'Bloc-Space - Tasks'
+	#package : 'Bloc',
+	#tag : 'Space - Tasks'
 }
 
 { #category : 'accessing' }

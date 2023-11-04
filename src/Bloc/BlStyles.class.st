@@ -29,7 +29,8 @@ Class {
 	#instVars : [
 		'styles'
 	],
-	#category : 'Bloc-Basic-Style'
+	#package : 'Bloc',
+	#tag : 'Basic-Style'
 }
 
 { #category : 'adding / removing' }

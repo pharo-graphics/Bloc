@@ -29,7 +29,8 @@ Class {
 		'combination',
 		'converter'
 	],
-	#category : 'Bloc-Events-KeyBinding'
+	#package : 'Bloc',
+	#tag : 'Events-KeyBinding'
 }
 
 { #category : 'keys - letters' }

@@ -15,7 +15,8 @@ Class {
 		'start',
 		'end'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#package : 'Bloc',
+	#tag : 'DataStructure - Rope'
 }
 
 { #category : 'instance creation' }

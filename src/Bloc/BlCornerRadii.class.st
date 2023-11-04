@@ -20,7 +20,8 @@ Class {
 	#classInstVars : [
 		'empty'
 	],
-	#category : 'Bloc-Basic-Support'
+	#package : 'Bloc',
+	#tag : 'Basic-Support'
 }
 
 { #category : 'cleanup' }

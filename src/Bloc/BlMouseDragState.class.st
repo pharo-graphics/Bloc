@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'button'
 	],
-	#category : 'Bloc-Space - Support'
+	#package : 'Bloc',
+	#tag : 'Space - Support'
 }
 
 { #category : 'comparing' }

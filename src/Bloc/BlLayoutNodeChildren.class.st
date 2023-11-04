@@ -2,7 +2,8 @@ Class {
 	#name : 'BlLayoutNodeChildren',
 	#superclass : 'Array',
 	#type : 'variable',
-	#category : 'Bloc-Layouts-Model'
+	#package : 'Bloc',
+	#tag : 'Layouts-Model'
 }
 
 { #category : 'api - geometry' }

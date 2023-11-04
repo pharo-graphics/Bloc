@@ -8,7 +8,8 @@ Class {
 	#instVars : [
 		'selections'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#package : 'Bloc',
+	#tag : 'Utilities - Selection'
 }
 
 { #category : 'instance creation' }

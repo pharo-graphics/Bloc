@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlBasicNodeBasedLayout',
 	#superclass : 'BlNodeBasedLayout',
-	#category : 'Bloc-Layouts-Basic'
+	#package : 'Bloc',
+	#tag : 'Layouts-Basic'
 }
 
 { #category : 'layout' }

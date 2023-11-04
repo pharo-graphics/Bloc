@@ -16,7 +16,8 @@ Class {
 		'container',
 		'selected'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#package : 'Bloc',
+	#tag : 'Utilities - Selection'
 }
 
 { #category : 'geometry' }

@@ -16,7 +16,8 @@ Class {
 	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-DataStructure - Rope'
+	#package : 'Bloc',
+	#tag : 'DataStructure - Rope'
 }
 
 { #category : 'types' }

@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlSpaceFrameEventPhase',
 	#superclass : 'BlSpaceFramePhase',
-	#category : 'Bloc-Space - Frame'
+	#package : 'Bloc',
+	#tag : 'Space - Frame'
 }
 
 { #category : 'testing' }

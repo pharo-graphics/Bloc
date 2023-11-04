@@ -16,7 +16,8 @@ Class {
 		'state',
 		'properties'
 	],
-	#category : 'Bloc-Basic-Style'
+	#package : 'Bloc',
+	#tag : 'Basic-Style'
 }
 
 { #category : 'adding / removing' }

@@ -5,7 +5,8 @@ Is sent after a host space is shown
 Class {
 	#name : 'BlParallelUniverseHostSpaceShownSignal',
 	#superclass : 'BlParallelUniverseSpaceSignal',
-	#category : 'Bloc-Universe - Parallel'
+	#package : 'Bloc',
+	#tag : 'Universe - Parallel'
 }
 
 { #category : 'accessing' }

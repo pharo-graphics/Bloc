@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'subscriber'
 	],
-	#category : 'Bloc-Events-Dispatcher'
+	#package : 'Bloc',
+	#tag : 'Events-Dispatcher'
 }
 
 { #category : 'comparing' }

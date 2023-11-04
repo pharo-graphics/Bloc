@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlIdleErrorHandler',
 	#superclass : 'BlSingleErrorHandler',
-	#category : 'Bloc-Basic-Errors'
+	#package : 'Bloc',
+	#tag : 'Basic-Errors'
 }
 
 { #category : 'testing' }

@@ -6,7 +6,8 @@ Class {
 		'left',
 		'right'
 	],
-	#category : 'Bloc-Layouts-Alignment'
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
 { #category : 'factory' }

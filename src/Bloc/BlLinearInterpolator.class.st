@@ -5,7 +5,8 @@ I am an interpolator where the rate of change is constant
 Class {
 	#name : 'BlLinearInterpolator',
 	#superclass : 'BlInterpolator',
-	#category : 'Bloc-Basic-Interpolators'
+	#package : 'Bloc',
+	#tag : 'Basic-Interpolators'
 }
 
 { #category : 'interpolation' }

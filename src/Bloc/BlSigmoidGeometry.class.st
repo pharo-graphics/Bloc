@@ -15,7 +15,8 @@ Class {
 		'HorizontalOrientation',
 		'VerticalOrientation'
 	],
-	#category : 'Bloc-Basic-Geometry'
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
 { #category : 'class initialization' }

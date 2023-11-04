@@ -16,7 +16,8 @@ Class {
 		'y',
 		'z'
 	],
-	#category : 'Bloc-Basic-Math'
+	#package : 'Bloc',
+	#tag : 'Basic-Math'
 }
 
 { #category : 'arithmetic' }

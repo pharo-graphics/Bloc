@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Space - Tasks'
+	#package : 'Bloc',
+	#tag : 'Space - Tasks'
 }
 
 { #category : 'instance creation' }

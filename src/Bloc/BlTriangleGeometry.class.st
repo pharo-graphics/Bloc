@@ -10,7 +10,8 @@ Class {
 		'Right',
 		'Top'
 	],
-	#category : 'Bloc-Basic-Geometry'
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
 { #category : 'class initialization' }

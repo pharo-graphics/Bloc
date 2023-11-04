@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlElementDefaultState',
 	#superclass : 'BlElementUniqueState',
-	#category : 'Bloc-Basic-State'
+	#package : 'Bloc',
+	#tag : 'Basic-State'
 }
 
 { #category : 'testing' }

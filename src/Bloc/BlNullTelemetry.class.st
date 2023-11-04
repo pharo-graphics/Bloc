@@ -4,7 +4,8 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Space - Telemetry'
+	#package : 'Bloc',
+	#tag : 'Space - Telemetry'
 }
 
 { #category : 'accessing' }

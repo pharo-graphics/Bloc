@@ -22,7 +22,8 @@ Class {
 		'dashOffset',
 		'opacity'
 	],
-	#category : 'Bloc-Basic-Border'
+	#package : 'Bloc',
+	#tag : 'Basic-Border'
 }
 
 { #category : 'builder' }

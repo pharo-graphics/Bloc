@@ -10,7 +10,8 @@ Class {
 	#instVars : [
 		'shortcuts'
 	],
-	#category : 'Bloc-Events-Handler'
+	#package : 'Bloc',
+	#tag : 'Events-Handler'
 }
 
 { #category : 'adding / removing' }

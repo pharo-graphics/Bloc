@@ -11,7 +11,8 @@ Class {
 		'from',
 		'to'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#package : 'Bloc',
+	#tag : 'Utilities - Selection'
 }
 
 { #category : 'instance creation' }

@@ -5,7 +5,8 @@ Class {
 		'tasks',
 		'tasksStack'
 	],
-	#category : 'Bloc-Space - Telemetry'
+	#package : 'Bloc',
+	#tag : 'Space - Telemetry'
 }
 
 { #category : 'tasks' }

@@ -5,7 +5,8 @@ Is sent when element's extent in local coordinates changes.
 Class {
 	#name : 'BlElementExtentChangedEvent',
 	#superclass : 'BlElementEvent',
-	#category : 'Bloc-Events-Type-Element'
+	#package : 'Bloc',
+	#tag : 'Events-Type-Element'
 }
 
 { #category : 'api - enable / disable' }

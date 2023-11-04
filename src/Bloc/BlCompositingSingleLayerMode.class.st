@@ -6,7 +6,8 @@ This may be useful for complex elements that rarely change, for example visualis
 Class {
 	#name : 'BlCompositingSingleLayerMode',
 	#superclass : 'BlCompositingWithLayerMode',
-	#category : 'Bloc-Basic-Support'
+	#package : 'Bloc',
+	#tag : 'Basic-Support'
 }
 
 { #category : 'testing' }

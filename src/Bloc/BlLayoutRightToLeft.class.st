@@ -5,7 +5,8 @@ I am a concrete right-to-left direction
 Class {
 	#name : 'BlLayoutRightToLeft',
 	#superclass : 'BlLayoutDirection',
-	#category : 'Bloc-Layouts-Support'
+	#package : 'Bloc',
+	#tag : 'Layouts-Support'
 }
 
 { #category : 'accessing' }

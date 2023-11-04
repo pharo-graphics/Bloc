@@ -5,7 +5,8 @@ Is sent when element is no longer within mouse selection rectangle
 Class {
 	#name : 'BlElementSelectionLostEvent',
 	#superclass : 'BlElementEvent',
-	#category : 'Bloc-Events-Type-Element'
+	#package : 'Bloc',
+	#tag : 'Events-Type-Element'
 }
 
 { #category : 'api - enable / disable' }

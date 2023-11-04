@@ -5,7 +5,8 @@ I sort a collection of children by perimeter in ascending order.
 Class {
 	#name : 'BlChildrenSortedByPerimeter',
 	#superclass : 'BlChildrenSubset',
-	#category : 'Bloc-Basic-Children'
+	#package : 'Bloc',
+	#tag : 'Basic-Children'
 }
 
 { #category : 'accessing' }

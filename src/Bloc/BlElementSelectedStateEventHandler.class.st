@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlElementSelectedStateEventHandler',
 	#superclass : 'BlElementStateEventHandler',
-	#category : 'Bloc-Basic-State'
+	#package : 'Bloc',
+	#tag : 'Basic-State'
 }
 
 { #category : 'private' }

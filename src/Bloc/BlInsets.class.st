@@ -18,7 +18,8 @@ Class {
 	#classVars : [
 		'Empty'
 	],
-	#category : 'Bloc-Basic-Support'
+	#package : 'Bloc',
+	#tag : 'Basic-Support'
 }
 
 { #category : 'instance creation' }

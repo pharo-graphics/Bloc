@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlVerticesFromRectanglesOperator',
 	#superclass : 'Object',
-	#category : 'Bloc-Basic-Geometry'
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
 { #category : 'accessing' }

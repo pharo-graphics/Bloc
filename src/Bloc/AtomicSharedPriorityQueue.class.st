@@ -27,7 +27,8 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : 'AtomicSharedPriorityQueue',
 	#superclass : 'AtomicSharedQueue',
-	#category : 'Bloc-DataStructure - Priority Queue'
+	#package : 'Bloc',
+	#tag : 'DataStructure - Priority Queue'
 }
 
 { #category : 'accessing' }

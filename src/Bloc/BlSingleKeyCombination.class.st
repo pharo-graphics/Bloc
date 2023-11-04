@@ -34,7 +34,8 @@ Class {
 	#instVars : [
 		'key'
 	],
-	#category : 'Bloc-Events-KeyBinding'
+	#package : 'Bloc',
+	#tag : 'Events-KeyBinding'
 }
 
 { #category : 'accessing' }

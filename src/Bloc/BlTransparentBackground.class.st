@@ -9,7 +9,8 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Basic-Background'
+	#package : 'Bloc',
+	#tag : 'Basic-Background'
 }
 
 { #category : 'cleanup' }

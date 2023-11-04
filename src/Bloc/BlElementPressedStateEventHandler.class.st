@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlElementPressedStateEventHandler',
 	#superclass : 'BlElementStateEventHandler',
-	#category : 'Bloc-Basic-State'
+	#package : 'Bloc',
+	#tag : 'Basic-State'
 }
 
 { #category : 'mouse handlers' }

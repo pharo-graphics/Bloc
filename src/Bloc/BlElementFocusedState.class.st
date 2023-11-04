@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlElementFocusedState',
 	#superclass : 'BlElementUniqueState',
-	#category : 'Bloc-Basic-State'
+	#package : 'Bloc',
+	#tag : 'Basic-State'
 }
 
 { #category : 'enumerating' }

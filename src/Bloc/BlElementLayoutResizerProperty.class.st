@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'resizer'
 	],
-	#category : 'Bloc-Basic-Properties'
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
 { #category : 'api - layout resizeable' }

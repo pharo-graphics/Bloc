@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlEasingQuad',
 	#superclass : 'BlEasing',
-	#category : 'Bloc-Basic-Interpolators'
+	#package : 'Bloc',
+	#tag : 'Basic-Interpolators'
 }
 
 { #category : 'interpolation' }

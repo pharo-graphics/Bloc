@@ -17,7 +17,8 @@ Class {
 		'action',
 		'eventClass'
 	],
-	#category : 'Bloc-Events-Handler'
+	#package : 'Bloc',
+	#tag : 'Events-Handler'
 }
 
 { #category : 'instance creation' }

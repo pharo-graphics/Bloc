@@ -20,7 +20,8 @@ Class {
 		'RightToLeft',
 		'TopToBottom'
 	],
-	#category : 'Bloc-Basic-Geometry'
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
 { #category : 'class initialization' }

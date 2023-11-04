@@ -6,7 +6,8 @@ Once set, element should be rendered and should participate in layout and take s
 Class {
 	#name : 'BlVisibilityVisible',
 	#superclass : 'BlVisibility',
-	#category : 'Bloc-Basic-Properties'
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
 { #category : 'testing' }

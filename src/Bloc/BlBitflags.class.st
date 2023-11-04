@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'value'
 	],
-	#category : 'Bloc-DataStructure - Bitflags'
+	#package : 'Bloc',
+	#tag : 'DataStructure - Bitflags'
 }
 
 { #category : 'private - class code' }

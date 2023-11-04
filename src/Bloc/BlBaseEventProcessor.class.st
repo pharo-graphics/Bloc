@@ -6,7 +6,8 @@ Class {
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Space - Events'
+	#package : 'Bloc',
+	#tag : 'Space - Events'
 }
 
 { #category : 'as yet unclassified' }

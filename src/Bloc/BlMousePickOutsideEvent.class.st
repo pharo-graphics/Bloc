@@ -5,7 +5,8 @@ Class {
 		'originalEvent',
 		'lastMouseDownEvent'
 	],
-	#category : 'Bloc-Events-Type-Element'
+	#package : 'Bloc',
+	#tag : 'Events-Type-Element'
 }
 
 { #category : 'api - enable / disable' }

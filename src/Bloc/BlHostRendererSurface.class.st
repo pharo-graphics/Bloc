@@ -11,7 +11,8 @@ Class {
 		'shouldUpdateEveryFrame',
 		'updateActions'
 	],
-	#category : 'Bloc-Universe - Renderer'
+	#package : 'Bloc',
+	#tag : 'Universe - Renderer'
 }
 
 { #category : 'testing' }

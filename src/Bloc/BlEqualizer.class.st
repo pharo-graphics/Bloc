@@ -13,7 +13,8 @@ Class {
 		'sourceElements',
 		'targetElements'
 	],
-	#category : 'Bloc-Utilities - Equalizer'
+	#package : 'Bloc',
+	#tag : 'Utilities - Equalizer'
 }
 
 { #category : 'instance creation' }

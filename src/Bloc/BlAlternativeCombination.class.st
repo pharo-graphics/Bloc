@@ -25,7 +25,8 @@ Class {
 	#instVars : [
 		'combinations'
 	],
-	#category : 'Bloc-Events-KeyBinding'
+	#package : 'Bloc',
+	#tag : 'Events-KeyBinding'
 }
 
 { #category : 'comparing' }

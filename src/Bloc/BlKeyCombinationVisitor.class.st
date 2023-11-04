@@ -12,7 +12,8 @@ Class {
 	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Events-KeyBinding'
+	#package : 'Bloc',
+	#tag : 'Events-KeyBinding'
 }
 
 { #category : 'visiting' }

@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlEmUnit',
 	#superclass : 'BlUnit',
-	#category : 'Bloc-Basic-Units'
+	#package : 'Bloc',
+	#tag : 'Basic-Units'
 }
 
 { #category : 'printing' }

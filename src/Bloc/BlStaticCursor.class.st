@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'image'
 	],
-	#category : 'Bloc-Space - Cursor'
+	#package : 'Bloc',
+	#tag : 'Space - Cursor'
 }
 
 { #category : 'converting' }

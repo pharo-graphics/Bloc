@@ -8,7 +8,8 @@ Class {
 	#instVars : [
 		'bounds'
 	],
-	#category : 'Bloc-Basic-Bounds'
+	#package : 'Bloc',
+	#tag : 'Basic-Bounds'
 }
 
 { #category : 'converting' }

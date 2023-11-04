@@ -7,7 +7,8 @@ Class {
 		'childNode',
 		'connectedEdges'
 	],
-	#category : 'Bloc-Layouts-Model'
+	#package : 'Bloc',
+	#tag : 'Layouts-Model'
 }
 
 { #category : 'api - edges' }

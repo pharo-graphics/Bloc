@@ -5,7 +5,8 @@ Class {
 		'alignment',
 		'weight'
 	],
-	#category : 'Bloc-Layouts-Basic'
+	#package : 'Bloc',
+	#tag : 'Layouts-Basic'
 }
 
 { #category : 'alignment' }

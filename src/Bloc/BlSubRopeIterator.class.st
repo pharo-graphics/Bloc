@@ -8,7 +8,8 @@ Class {
 	#instVars : [
 		'subIterator'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#package : 'Bloc',
+	#tag : 'DataStructure - Rope'
 }
 
 { #category : 'iterator - accessing' }

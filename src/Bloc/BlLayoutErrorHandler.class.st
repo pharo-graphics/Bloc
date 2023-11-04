@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlLayoutErrorHandler',
 	#superclass : 'BlSingleErrorHandler',
-	#category : 'Bloc-Basic-Errors'
+	#package : 'Bloc',
+	#tag : 'Basic-Errors'
 }
 
 { #category : 'testing' }

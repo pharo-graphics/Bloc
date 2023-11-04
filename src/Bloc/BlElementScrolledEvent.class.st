@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'delta'
 	],
-	#category : 'Bloc-Events-Type-Element'
+	#package : 'Bloc',
+	#tag : 'Events-Type-Element'
 }
 
 { #category : 'instance creation' }

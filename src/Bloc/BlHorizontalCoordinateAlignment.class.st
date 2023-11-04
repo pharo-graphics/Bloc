@@ -5,7 +5,8 @@ Class {
 		'coordinate',
 		'relativeAlignment'
 	],
-	#category : 'Bloc-Layouts-Alignment'
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
 { #category : 'accessing' }

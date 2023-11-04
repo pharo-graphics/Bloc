@@ -16,7 +16,8 @@ Class {
 		'cornerRadii',
 		'center'
 	],
-	#category : 'Bloc-Basic-Geometry'
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
 { #category : 'factory' }

@@ -19,7 +19,8 @@ parent addChild: child.
 Class {
 	#name : 'BlElementAddedToParentEvent',
 	#superclass : 'BlElementEvent',
-	#category : 'Bloc-Events-Type-Element'
+	#package : 'Bloc',
+	#tag : 'Events-Type-Element'
 }
 
 { #category : 'api - enable / disable' }

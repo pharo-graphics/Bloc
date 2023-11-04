@@ -3,7 +3,8 @@ Class {
 	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Events-Dispatcher'
+	#package : 'Bloc',
+	#tag : 'Events-Dispatcher'
 }
 
 { #category : 'api - event managing' }

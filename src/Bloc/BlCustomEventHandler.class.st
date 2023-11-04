@@ -6,7 +6,8 @@ Then for each interesting event a user should implement a corresponding event ha
 Class {
 	#name : 'BlCustomEventHandler',
 	#superclass : 'BlBasicEventHandler',
-	#category : 'Bloc-Events-Handler'
+	#package : 'Bloc',
+	#tag : 'Events-Handler'
 }
 
 { #category : 'api - accessing' }

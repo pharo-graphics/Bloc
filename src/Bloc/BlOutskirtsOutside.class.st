@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlOutskirtsOutside',
 	#superclass : 'BlOutskirts',
-	#category : 'Bloc-Basic-Border'
+	#package : 'Bloc',
+	#tag : 'Basic-Border'
 }
 
 { #category : 'visual bounds' }

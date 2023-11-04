@@ -13,7 +13,8 @@ Class {
 		'preferredConstraints',
 		'acceptableConstraints'
 	],
-	#category : 'Bloc-Basic-Bounds'
+	#package : 'Bloc',
+	#tag : 'Basic-Bounds'
 }
 
 { #category : 'accessing' }

@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'widthBlock'
 	],
-	#category : 'Bloc-Utilities - Equalizer'
+	#package : 'Bloc',
+	#tag : 'Utilities - Equalizer'
 }
 
 { #category : 'element handlers' }

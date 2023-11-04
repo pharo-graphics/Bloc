@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlLayoutNodeMeasurement',
 	#superclass : 'Object',
-	#category : 'Bloc-Layouts-Model'
+	#package : 'Bloc',
+	#tag : 'Layouts-Model'
 }
 
 { #category : 'accessing' }

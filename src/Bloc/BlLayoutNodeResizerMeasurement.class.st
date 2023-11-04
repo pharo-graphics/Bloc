@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlLayoutNodeResizerMeasurement',
 	#superclass : 'BlLayoutNodeMeasurement',
-	#category : 'Bloc-Layouts-Model'
+	#package : 'Bloc',
+	#tag : 'Layouts-Model'
 }
 
 { #category : 'measure' }

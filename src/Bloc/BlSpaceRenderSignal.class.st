@@ -29,7 +29,8 @@ Class {
 	#classVars : [
 		'Ignore'
 	],
-	#category : 'Bloc-Space - Support'
+	#package : 'Bloc',
+	#tag : 'Space - Support'
 }
 
 { #category : 'filtering' }

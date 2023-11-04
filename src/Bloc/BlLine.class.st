@@ -5,7 +5,8 @@ I define a geometry of a straight line
 Class {
 	#name : 'BlLine',
 	#superclass : 'BlLineGeometry',
-	#category : 'Bloc-Basic-Geometry-Deprecated'
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry-Deprecated'
 }
 
 { #category : 'testing' }

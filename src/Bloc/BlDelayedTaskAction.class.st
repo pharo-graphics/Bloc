@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'action'
 	],
-	#category : 'Bloc-Space - Tasks'
+	#package : 'Bloc',
+	#tag : 'Space - Tasks'
 }
 
 { #category : 'accessing' }

@@ -23,7 +23,8 @@ Class {
 		'LessThan',
 		'Mask'
 	],
-	#category : 'Bloc-Basic-Bounds'
+	#package : 'Bloc',
+	#tag : 'Basic-Bounds'
 }
 
 { #category : 'accessing - flags' }

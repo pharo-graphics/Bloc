@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlVerticalCenterAlignment',
 	#superclass : 'BlVerticalAlignment',
-	#category : 'Bloc-Layouts-Alignment'
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
 { #category : 'class initialization' }

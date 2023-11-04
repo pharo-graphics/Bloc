@@ -19,7 +19,8 @@ Class {
 		'pulseStartMS',
 		'pulseDurationMS'
 	],
-	#category : 'Bloc-Universe - Host'
+	#package : 'Bloc',
+	#tag : 'Universe - Host'
 }
 
 { #category : 'instance creation' }

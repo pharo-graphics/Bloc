@@ -11,7 +11,8 @@ Class {
 		'localStates',
 		'inheritedStates'
 	],
-	#category : 'Bloc-Basic-State'
+	#package : 'Bloc',
+	#tag : 'Basic-State'
 }
 
 { #category : 'adding' }

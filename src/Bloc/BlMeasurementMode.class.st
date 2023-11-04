@@ -19,7 +19,8 @@ Class {
 		'exact',
 		'unspecified'
 	],
-	#category : 'Bloc-Layouts-Support'
+	#package : 'Bloc',
+	#tag : 'Layouts-Support'
 }
 
 { #category : 'accessing' }

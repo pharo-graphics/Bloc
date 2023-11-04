@@ -42,7 +42,8 @@ Class {
 	#classVars : [
 		'Default'
 	],
-	#category : 'Bloc-DataStructure - Priority Queue'
+	#package : 'Bloc',
+	#tag : 'DataStructure - Priority Queue'
 }
 
 { #category : 'accessing' }

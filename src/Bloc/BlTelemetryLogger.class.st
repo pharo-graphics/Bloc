@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'telemetryClass'
 	],
-	#category : 'Bloc-Space - Telemetry'
+	#package : 'Bloc',
+	#tag : 'Space - Telemetry'
 }
 
 { #category : 'initialize' }

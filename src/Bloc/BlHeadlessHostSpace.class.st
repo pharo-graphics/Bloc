@@ -12,7 +12,8 @@ Class {
 		'position',
 		'title'
 	],
-	#category : 'Bloc-Universe - Host Headless'
+	#package : 'Bloc',
+	#tag : 'Universe - Host Headless'
 }
 
 { #category : 'window - properties' }

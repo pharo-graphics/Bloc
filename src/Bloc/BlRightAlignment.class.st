@@ -6,7 +6,8 @@ See BlLayoutAlignment for more info.
 Class {
 	#name : 'BlRightAlignment',
 	#superclass : 'BlHorizontalAlignment',
-	#category : 'Bloc-Layouts-Alignment'
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
 { #category : 'class initialization' }

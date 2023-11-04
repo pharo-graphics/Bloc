@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'announcer'
 	],
-	#category : 'Bloc-Events-Dispatcher'
+	#package : 'Bloc',
+	#tag : 'Events-Dispatcher'
 }
 
 { #category : 'testing' }

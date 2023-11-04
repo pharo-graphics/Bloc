@@ -12,7 +12,8 @@ Class {
 	#instVars : [
 		'events'
 	],
-	#category : 'Bloc-Space - Events'
+	#package : 'Bloc',
+	#tag : 'Space - Events'
 }
 
 { #category : 'adding / removing' }

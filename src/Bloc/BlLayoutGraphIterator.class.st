@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'layoutNode'
 	],
-	#category : 'Bloc-Layouts-Model'
+	#package : 'Bloc',
+	#tag : 'Layouts-Model'
 }
 
 { #category : 'instance creation' }

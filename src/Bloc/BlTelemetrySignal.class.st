@@ -5,7 +5,8 @@ Class {
 		'task',
 		'telemetry'
 	],
-	#category : 'Bloc-Space - Telemetry'
+	#package : 'Bloc',
+	#tag : 'Space - Telemetry'
 }
 
 { #category : 'accessing' }

@@ -12,7 +12,8 @@ Class {
 		'right',
 		'bottom'
 	],
-	#category : 'Bloc-Basic-Bounds'
+	#package : 'Bloc',
+	#tag : 'Basic-Bounds'
 }
 
 { #category : 'instance creation' }

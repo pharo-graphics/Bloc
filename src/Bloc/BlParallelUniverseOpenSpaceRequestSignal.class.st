@@ -8,7 +8,8 @@ Class {
 	#instVars : [
 		'isRunning'
 	],
-	#category : 'Bloc-Universe - Parallel'
+	#package : 'Bloc',
+	#tag : 'Universe - Parallel'
 }
 
 { #category : 'accessing' }

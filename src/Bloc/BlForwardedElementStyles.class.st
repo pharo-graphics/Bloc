@@ -9,7 +9,8 @@ Class {
 	#instVars : [
 		'targetObject'
 	],
-	#category : 'Bloc-Basic-Style'
+	#package : 'Bloc',
+	#tag : 'Basic-Style'
 }
 
 { #category : 'private - adding' }

@@ -28,7 +28,8 @@ Class {
 	#classVars : [
 		'UniqueIdGenerator'
 	],
-	#category : 'Bloc-Space - Tasks'
+	#package : 'Bloc',
+	#tag : 'Space - Tasks'
 }
 
 { #category : 'class initialization' }

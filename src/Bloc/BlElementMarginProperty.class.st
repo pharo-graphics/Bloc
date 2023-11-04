@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'margin'
 	],
-	#category : 'Bloc-Basic-Properties'
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
 { #category : 'comparing' }

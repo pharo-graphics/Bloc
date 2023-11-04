@@ -8,7 +8,8 @@ See BlStrokeLineCap for other types
 Class {
 	#name : 'BlStrokeLineButtCap',
 	#superclass : 'BlStrokeLineCap',
-	#category : 'Bloc-Paint-Support'
+	#package : 'Bloc',
+	#tag : 'Paint-Support'
 }
 
 { #category : 'accessing' }

@@ -11,7 +11,8 @@ Class {
 	#classVars : [
 		'PulseLoop'
 	],
-	#category : 'Bloc-Universe - Host Headless'
+	#package : 'Bloc',
+	#tag : 'Universe - Host Headless'
 }
 
 { #category : 'class initialization' }

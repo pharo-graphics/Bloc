@@ -12,7 +12,8 @@ Class {
 		'value',
 		'unit'
 	],
-	#category : 'Bloc-Basic-Units'
+	#package : 'Bloc',
+	#tag : 'Basic-Units'
 }
 
 { #category : 'instance creation' }

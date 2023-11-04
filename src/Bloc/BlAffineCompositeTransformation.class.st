@@ -9,7 +9,8 @@ Class {
 	#instVars : [
 		'transformations'
 	],
-	#category : 'Bloc-Basic-Transformations'
+	#package : 'Bloc',
+	#tag : 'Basic-Transformations'
 }
 
 { #category : 'adding' }

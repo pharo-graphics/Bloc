@@ -49,7 +49,8 @@ Class {
 		'previouslyAccessedConstraintsType',
 		'accountTransformation'
 	],
-	#category : 'Bloc-Layouts-Basic'
+	#package : 'Bloc',
+	#tag : 'Layouts-Basic'
 }
 
 { #category : 'api - constraints' }

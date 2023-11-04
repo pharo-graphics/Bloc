@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'action'
 	],
-	#category : 'Bloc-Events-Handler'
+	#package : 'Bloc',
+	#tag : 'Events-Handler'
 }
 
 { #category : 'as yet unclassified' }

@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'vertices'
 	],
-	#category : 'Bloc-Basic-Geometry'
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
 { #category : 'accessing' }

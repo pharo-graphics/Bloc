@@ -15,7 +15,8 @@ element border: (BlBorder paint: Color blue width: 20)
 Class {
 	#name : 'BlElementBorderChangedEvent',
 	#superclass : 'BlElementEvent',
-	#category : 'Bloc-Events-Type-Element'
+	#package : 'Bloc',
+	#tag : 'Events-Type-Element'
 }
 
 { #category : 'api - enable / disable' }

@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlNamedCursor',
 	#superclass : 'BlCursor',
-	#category : 'Bloc-Space - Cursor'
+	#package : 'Bloc',
+	#tag : 'Space - Cursor'
 }
 
 { #category : 'converting' }

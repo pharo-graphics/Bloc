@@ -5,7 +5,8 @@ I represent a pool of objects
 Class {
 	#name : 'BlObjectPool',
 	#superclass : 'Object',
-	#category : 'Bloc-Basic-Support'
+	#package : 'Bloc',
+	#tag : 'Basic-Support'
 }
 
 { #category : 'pool' }

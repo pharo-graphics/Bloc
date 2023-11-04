@@ -8,7 +8,8 @@ See BlStrokeLineJoin for other types
 Class {
 	#name : 'BlStrokeLineMiterJoin',
 	#superclass : 'BlStrokeLineJoin',
-	#category : 'Bloc-Paint-Support'
+	#package : 'Bloc',
+	#tag : 'Paint-Support'
 }
 
 { #category : 'accessing' }

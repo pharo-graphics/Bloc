@@ -10,7 +10,8 @@ Class {
 	#superclass : 'BlBasicEventHandler',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Events-Handler'
+	#package : 'Bloc',
+	#tag : 'Events-Handler'
 }
 
 { #category : 'api - adding / removing' }

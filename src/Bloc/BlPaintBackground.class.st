@@ -12,7 +12,8 @@ Class {
 	#instVars : [
 		'paint'
 	],
-	#category : 'Bloc-Basic-Background'
+	#package : 'Bloc',
+	#tag : 'Basic-Background'
 }
 
 { #category : 'instance creation' }

@@ -5,7 +5,8 @@ I transform composite key combination formula into a DNF (https://en.wikipedia.o
 Class {
 	#name : 'BlKeyCombinationConverterDNF',
 	#superclass : 'BlKeyCombinationVisitor',
-	#category : 'Bloc-Events-KeyBinding'
+	#package : 'Bloc',
+	#tag : 'Events-KeyBinding'
 }
 
 { #category : 'visiting' }

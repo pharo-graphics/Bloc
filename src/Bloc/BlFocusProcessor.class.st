@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'focusChain'
 	],
-	#category : 'Bloc-Space - Events'
+	#package : 'Bloc',
+	#tag : 'Space - Events'
 }
 
 { #category : 'event firing' }

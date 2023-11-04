@@ -8,7 +8,8 @@ Class {
 	#instVars : [
 		'element'
 	],
-	#category : 'Bloc-Basic-Errors'
+	#package : 'Bloc',
+	#tag : 'Basic-Errors'
 }
 
 { #category : 'instance creation' }

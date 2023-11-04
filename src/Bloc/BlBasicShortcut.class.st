@@ -22,7 +22,8 @@ Class {
 		'combination',
 		'repeatable'
 	],
-	#category : 'Bloc-Events-KeyBinding'
+	#package : 'Bloc',
+	#tag : 'Events-KeyBinding'
 }
 
 { #category : 'converting' }

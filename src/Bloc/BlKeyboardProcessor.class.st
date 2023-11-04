@@ -15,7 +15,8 @@ Class {
 		'previousShortcutTime',
 		'previousShortcutRepeatTime'
 	],
-	#category : 'Bloc-Space - Events'
+	#package : 'Bloc',
+	#tag : 'Space - Events'
 }
 
 { #category : 'accessing' }

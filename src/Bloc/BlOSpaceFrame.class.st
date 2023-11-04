@@ -19,7 +19,8 @@ Class {
 	#name : 'BlOSpaceFrame',
 	#superclass : 'BlSpaceFrame',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Space - Frame'
+	#package : 'Bloc',
+	#tag : 'Space - Frame'
 }
 
 { #category : 'initialization' }

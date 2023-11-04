@@ -10,7 +10,8 @@ Class {
 		'attributes',
 		'rope'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#package : 'Bloc',
+	#tag : 'DataStructure - Rope'
 }
 
 { #category : 'initialization' }

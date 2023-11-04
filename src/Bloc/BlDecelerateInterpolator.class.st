@@ -15,7 +15,8 @@ Class {
 	#instVars : [
 		'factor'
 	],
-	#category : 'Bloc-Basic-Interpolators'
+	#package : 'Bloc',
+	#tag : 'Basic-Interpolators'
 }
 
 { #category : 'instance creation' }

@@ -9,7 +9,8 @@ Class {
 	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Space - Cursor'
+	#package : 'Bloc',
+	#tag : 'Space - Cursor'
 }
 
 { #category : 'instance creation' }

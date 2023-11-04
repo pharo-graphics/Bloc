@@ -8,7 +8,8 @@ Class {
 		'from',
 		'to'
 	],
-	#category : 'Bloc-Basic-Geometry'
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
 { #category : 'instance creation' }

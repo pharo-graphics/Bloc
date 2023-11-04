@@ -12,7 +12,8 @@ Class {
 		'geometryBoundsInSpace',
 		'invalidationBounds'
 	],
-	#category : 'Bloc-Basic-Support'
+	#package : 'Bloc',
+	#tag : 'Basic-Support'
 }
 
 { #category : 'as yet unclassified' }

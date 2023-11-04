@@ -11,7 +11,8 @@ Class {
 	#instVars : [
 		'origin'
 	],
-	#category : 'Bloc-Basic-Transformations'
+	#package : 'Bloc',
+	#tag : 'Basic-Transformations'
 }
 
 { #category : 'converting' }

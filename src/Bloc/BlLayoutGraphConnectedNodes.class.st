@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'edges'
 	],
-	#category : 'Bloc-Layouts-Model'
+	#package : 'Bloc',
+	#tag : 'Layouts-Model'
 }
 
 { #category : 'instance creation' }

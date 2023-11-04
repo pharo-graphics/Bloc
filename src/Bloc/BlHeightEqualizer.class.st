@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'heightBlock'
 	],
-	#category : 'Bloc-Utilities - Equalizer'
+	#package : 'Bloc',
+	#tag : 'Utilities - Equalizer'
 }
 
 { #category : 'element handlers' }

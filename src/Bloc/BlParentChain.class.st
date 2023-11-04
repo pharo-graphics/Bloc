@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlParentChain',
 	#superclass : 'DoubleLinkedList',
-	#category : 'Bloc-Space - Support'
+	#package : 'Bloc',
+	#tag : 'Space - Support'
 }
 
 { #category : 'instance creation' }

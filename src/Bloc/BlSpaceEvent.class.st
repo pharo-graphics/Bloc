@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlSpaceEvent',
 	#superclass : 'BlEvent',
-	#category : 'Bloc-Events-Type-Space'
+	#package : 'Bloc',
+	#tag : 'Events-Type-Space'
 }
 
 { #category : 'testing' }

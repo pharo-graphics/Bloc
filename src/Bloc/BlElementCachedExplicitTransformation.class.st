@@ -10,7 +10,8 @@ Class {
 		'elementTransformation',
 		'boundingRectangle'
 	],
-	#category : 'Bloc-Basic-Transformations'
+	#package : 'Bloc',
+	#tag : 'Basic-Transformations'
 }
 
 { #category : 'instance creation' }

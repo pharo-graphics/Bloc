@@ -6,7 +6,8 @@ Once set, element should not be rendered but should participate in layout and ta
 Class {
 	#name : 'BlVisibilityHidden',
 	#superclass : 'BlVisibility',
-	#category : 'Bloc-Basic-Properties'
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
 { #category : 'testing' }

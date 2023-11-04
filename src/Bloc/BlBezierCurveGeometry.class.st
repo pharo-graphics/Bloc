@@ -8,7 +8,8 @@ Class {
 	#instVars : [
 		'controlPoints'
 	],
-	#category : 'Bloc-Basic-Geometry'
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
 { #category : 'instance creation' }

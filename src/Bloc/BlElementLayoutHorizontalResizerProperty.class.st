@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlElementLayoutHorizontalResizerProperty',
 	#superclass : 'BlElementLayoutResizerProperty',
-	#category : 'Bloc-Basic-Properties'
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
 { #category : 'api - property' }

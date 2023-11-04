@@ -10,7 +10,8 @@ Class {
 	#instVars : [
 		'range'
 	],
-	#category : 'Bloc-Basic-Interpolators'
+	#package : 'Bloc',
+	#tag : 'Basic-Interpolators'
 }
 
 { #category : 'initialization' }

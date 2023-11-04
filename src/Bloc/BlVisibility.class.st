@@ -19,7 +19,8 @@ Class {
 		'hidden',
 		'visible'
 	],
-	#category : 'Bloc-Basic-Properties'
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
 { #category : 'cleanup' }

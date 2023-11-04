@@ -10,7 +10,8 @@ Class {
 	#classInstVars : [
 		'empty'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#package : 'Bloc',
+	#tag : 'Utilities - Selection'
 }
 
 { #category : 'cleanup' }

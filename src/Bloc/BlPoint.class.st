@@ -3,7 +3,8 @@ Class {
 	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Basic-Math'
+	#package : 'Bloc',
+	#tag : 'Basic-Math'
 }
 
 { #category : 'comparing' }

@@ -24,7 +24,8 @@ Class {
 		'isDirty',
 		'element'
 	],
-	#category : 'Bloc-Basic-Style'
+	#package : 'Bloc',
+	#tag : 'Basic-Style'
 }
 
 { #category : 'private' }

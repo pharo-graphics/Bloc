@@ -10,7 +10,8 @@ Used mainly
 Class {
 	#name : 'BlHostTextMeasurer',
 	#superclass : 'Object',
-	#category : 'Bloc-Universe - Renderer'
+	#package : 'Bloc',
+	#tag : 'Universe - Renderer'
 }
 
 { #category : 'measurement' }

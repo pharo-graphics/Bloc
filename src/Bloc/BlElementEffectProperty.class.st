@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'effect'
 	],
-	#category : 'Bloc-Basic-Properties'
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
 { #category : 'comparing' }

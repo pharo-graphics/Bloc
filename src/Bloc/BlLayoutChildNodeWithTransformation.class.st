@@ -7,7 +7,8 @@ Class {
 		'childNode',
 		'transformation'
 	],
-	#category : 'Bloc-Layouts-Model'
+	#package : 'Bloc',
+	#tag : 'Layouts-Model'
 }
 
 { #category : 'api - transformation' }

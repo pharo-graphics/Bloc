@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'object'
 	],
-	#category : 'Bloc-Basic-Errors'
+	#package : 'Bloc',
+	#tag : 'Basic-Errors'
 }
 
 { #category : 'accessing' }

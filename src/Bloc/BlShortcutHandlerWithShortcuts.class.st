@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'shortcutRegistry'
 	],
-	#category : 'Bloc-Events-Handler'
+	#package : 'Bloc',
+	#tag : 'Events-Handler'
 }
 
 { #category : 'api - adding / removing' }

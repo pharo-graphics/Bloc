@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlEasingBounceOut',
 	#superclass : 'BlEasingBaseBounce',
-	#category : 'Bloc-Basic-Interpolators'
+	#package : 'Bloc',
+	#tag : 'Basic-Interpolators'
 }
 
 { #category : 'interpolation' }

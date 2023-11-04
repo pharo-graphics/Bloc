@@ -18,7 +18,8 @@ Class {
 		'handlers',
 		'shortcutHandler'
 	],
-	#category : 'Bloc-Events-Dispatcher'
+	#package : 'Bloc',
+	#tag : 'Events-Dispatcher'
 }
 
 { #category : 'instance creation' }

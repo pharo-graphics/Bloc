@@ -10,7 +10,8 @@ Class {
 		'offset',
 		'length'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#package : 'Bloc',
+	#tag : 'DataStructure - Rope'
 }
 
 { #category : 'instance creation' }

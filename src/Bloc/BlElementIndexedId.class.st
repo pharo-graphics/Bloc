@@ -5,7 +5,8 @@ Class {
 		'prefixId',
 		'index'
 	],
-	#category : 'Bloc-Basic-Support'
+	#package : 'Bloc',
+	#tag : 'Basic-Support'
 }
 
 { #category : 'comparing' }

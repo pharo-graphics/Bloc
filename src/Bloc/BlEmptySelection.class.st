@@ -5,7 +5,8 @@ I am an empty selection
 Class {
 	#name : 'BlEmptySelection',
 	#superclass : 'BlSelection',
-	#category : 'Bloc-Utilities - Selection'
+	#package : 'Bloc',
+	#tag : 'Utilities - Selection'
 }
 
 { #category : 'accessing' }

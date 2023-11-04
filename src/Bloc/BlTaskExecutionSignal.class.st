@@ -30,7 +30,8 @@ Class {
 		'Enabled',
 		'IgnoredTasks'
 	],
-	#category : 'Bloc-Space - Tasks'
+	#package : 'Bloc',
+	#tag : 'Space - Tasks'
 }
 
 { #category : 'filtering' }

@@ -7,7 +7,8 @@ I represent a subset of children that are ignored by layout.
 Class {
 	#name : 'BlChildrenIgnoredByLayout',
 	#superclass : 'BlChildrenSubset',
-	#category : 'Bloc-Basic-Children'
+	#package : 'Bloc',
+	#tag : 'Basic-Children'
 }
 
 { #category : 'children - subsets' }

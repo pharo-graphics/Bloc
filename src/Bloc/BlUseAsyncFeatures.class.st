@@ -14,7 +14,8 @@ In the cases where the async should be disabled, {{gtMethod:BlUseAsyncFeatures c
 Class {
 	#name : 'BlUseAsyncFeatures',
 	#superclass : 'DynamicVariable',
-	#category : 'Bloc-Space - Tasks'
+	#package : 'Bloc',
+	#tag : 'Space - Tasks'
 }
 
 { #category : 'controlling' }

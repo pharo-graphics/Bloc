@@ -12,7 +12,8 @@ It can be simplified to
 Class {
 	#name : 'BlQuinticInterpolator',
 	#superclass : 'BlInterpolator',
-	#category : 'Bloc-Basic-Interpolators'
+	#package : 'Bloc',
+	#tag : 'Basic-Interpolators'
 }
 
 { #category : 'interpolation' }

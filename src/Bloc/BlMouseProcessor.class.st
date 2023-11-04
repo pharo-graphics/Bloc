@@ -14,7 +14,8 @@ Class {
 		'lastMouseMoveEvent',
 		'lastMouseDownEvent'
 	],
-	#category : 'Bloc-Space - Events'
+	#package : 'Bloc',
+	#tag : 'Space - Events'
 }
 
 { #category : 'accessing' }

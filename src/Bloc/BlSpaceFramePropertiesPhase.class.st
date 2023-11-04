@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlSpaceFramePropertiesPhase',
 	#superclass : 'BlSpaceFramePhase',
-	#category : 'Bloc-Space - Frame'
+	#package : 'Bloc',
+	#tag : 'Space - Frame'
 }
 
 { #category : 'accessing' }

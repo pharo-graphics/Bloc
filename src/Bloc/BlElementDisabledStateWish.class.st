@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'enabled'
 	],
-	#category : 'Bloc-Basic-State'
+	#package : 'Bloc',
+	#tag : 'Basic-State'
 }
 
 { #category : 'accessing' }

@@ -15,7 +15,8 @@ element layout: BlBasicLayout new
 Class {
 	#name : 'BlElementLayoutChangedEvent',
 	#superclass : 'BlElementEvent',
-	#category : 'Bloc-Events-Type-Element'
+	#package : 'Bloc',
+	#tag : 'Events-Type-Element'
 }
 
 { #category : 'api - enable / disable' }

@@ -17,7 +17,8 @@ Class {
 		'vertical',
 		'horizontal'
 	],
-	#category : 'Bloc-Layouts-Basic'
+	#package : 'Bloc',
+	#tag : 'Layouts-Basic'
 }
 
 { #category : 'initialization' }

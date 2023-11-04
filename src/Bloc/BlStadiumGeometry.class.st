@@ -4,7 +4,8 @@ A stadium is a geometric figure consisting of a rectangle with top and bottom le
 Class {
 	#name : 'BlStadiumGeometry',
 	#superclass : 'BlElementVectorGeometry',
-	#category : 'Bloc-Basic-Geometry'
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
 { #category : 'geometry' }

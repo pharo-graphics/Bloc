@@ -23,7 +23,8 @@ Class {
 		'description',
 		'action'
 	],
-	#category : 'Bloc-Events-KeyBinding'
+	#package : 'Bloc',
+	#tag : 'Events-KeyBinding'
 }
 
 { #category : 'accessing' }

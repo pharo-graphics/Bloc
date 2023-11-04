@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlRelativeAlignment',
 	#superclass : 'BlElementAlignment',
-	#category : 'Bloc-Layouts-Alignment'
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
 { #category : 'factory' }

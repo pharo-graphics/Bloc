@@ -9,7 +9,8 @@ I am used by {{gtClass:BlFocusProcessor}} to properly send events
 Class {
 	#name : 'BlFocusChain',
 	#superclass : 'DoubleLinkedList',
-	#category : 'Bloc-Space - Support'
+	#package : 'Bloc',
+	#tag : 'Space - Support'
 }
 
 { #category : 'instance creation' }

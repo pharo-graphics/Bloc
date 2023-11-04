@@ -11,7 +11,8 @@ Hence the separation between my subclasses.
 Class {
 	#name : 'BlElementCachedTransformation',
 	#superclass : 'Object',
-	#category : 'Bloc-Basic-Transformations'
+	#package : 'Bloc',
+	#tag : 'Basic-Transformations'
 }
 
 { #category : 'api - converting' }

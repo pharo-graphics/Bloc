@@ -59,7 +59,8 @@ Class {
 		'bufferedSize',
 		'haveSize'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#package : 'Bloc',
+	#tag : 'DataStructure - Rope'
 }
 
 { #category : 'accessing' }

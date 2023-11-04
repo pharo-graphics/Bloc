@@ -6,7 +6,8 @@ Class {
 	#classInstVars : [
 		'DefaultTelemetryClass'
 	],
-	#category : 'Bloc-Space - Telemetry'
+	#package : 'Bloc',
+	#tag : 'Space - Telemetry'
 }
 
 { #category : 'accessing' }

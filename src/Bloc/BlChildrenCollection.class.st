@@ -19,7 +19,8 @@ Subclasses need to provide the implementation for methods adding and removing ch
 Class {
 	#name : 'BlChildrenCollection',
 	#superclass : 'BlChildren',
-	#category : 'Bloc-Basic-Children'
+	#package : 'Bloc',
+	#tag : 'Basic-Children'
 }
 
 { #category : 'children - adding' }

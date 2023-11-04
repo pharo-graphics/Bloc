@@ -22,7 +22,8 @@ Class {
 		'miter',
 		'round'
 	],
-	#category : 'Bloc-Paint-Support'
+	#package : 'Bloc',
+	#tag : 'Paint-Support'
 }
 
 { #category : 'predefined instances' }

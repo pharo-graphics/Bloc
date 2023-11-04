@@ -1,7 +1,8 @@
 Class {
 	#name : 'BlElementStatesSet',
 	#superclass : 'PluggableSet',
-	#category : 'Bloc-Basic-State'
+	#package : 'Bloc',
+	#tag : 'Basic-State'
 }
 
 { #category : 'testing' }

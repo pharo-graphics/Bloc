@@ -28,7 +28,8 @@ Class {
 		'offset',
 		'approximateSize'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#package : 'Bloc',
+	#tag : 'DataStructure - Rope'
 }
 
 { #category : 'arithmetic' }

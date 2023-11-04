@@ -5,7 +5,8 @@ Class {
 		'poolSize',
 		'pool'
 	],
-	#category : 'Bloc-Basic-Support'
+	#package : 'Bloc',
+	#tag : 'Basic-Support'
 }
 
 { #category : 'private' }
