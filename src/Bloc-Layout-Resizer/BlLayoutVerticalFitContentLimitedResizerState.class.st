@@ -1,16 +1,15 @@
 Class {
-	#name : 'BlLayoutVerticalFitContentLimitedResizerState',
-	#superclass : 'BlLayoutVerticalResizerState',
-	#category : 'Bloc-Layout-Resizer',
-	#package : 'Bloc-Layout-Resizer'
+	#name : #BlLayoutVerticalFitContentLimitedResizerState,
+	#superclass : #BlLayoutVerticalResizerState,
+	#category : 'Bloc-Layout-Resizer'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlLayoutVerticalFitContentLimitedResizerState >> = anotherState [
 	^ anotherState isKindOf: BlLayoutVerticalFitContentLimitedResizerState
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlLayoutVerticalFitContentLimitedResizerState >> hash [
 	^ BlLayoutVerticalFitContentLimitedResizerState hash
 ]

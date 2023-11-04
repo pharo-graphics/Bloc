@@ -3,19 +3,17 @@ I am an extended version of the attributes builder with an ability to delegate t
 
 "
 Class {
-	#name : 'BlTextDelegatedAttributesBuilder',
-	#superclass : 'BlTextAttributesBuilder',
+	#name : #BlTextDelegatedAttributesBuilder,
+	#superclass : #BlTextAttributesBuilder,
 	#instVars : [
 		'attributesTarget',
 		'attributeAddedBlock',
 		'isOverwritableByStyler'
 	],
-	#category : 'Bloc-Text-Text-Support',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Support'
+	#category : 'Bloc-Text-Text-Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDelegatedAttributesBuilder >> attribute: aTextAttribute [
 	
 	isOverwritableByStyler
@@ -31,30 +29,30 @@ BlTextDelegatedAttributesBuilder >> attribute: aTextAttribute [
 	attributeAddedBlock cull: aTextAttribute
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDelegatedAttributesBuilder >> attributesTarget [
 	<return: #TBlTextStyleable>
 
 	^ attributesTarget
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDelegatedAttributesBuilder >> attributesTarget: aTBlTextStyleable [
 	attributesTarget := aTBlTextStyleable.
 	self applyOn: attributesTarget
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDelegatedAttributesBuilder >> beNotOverwritableByStyler [
 	isOverwritableByStyler := false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDelegatedAttributesBuilder >> beOverwritableByStyler [
 	isOverwritableByStyler := true
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTextDelegatedAttributesBuilder >> initialize [
 	super initialize.
 	
@@ -62,7 +60,7 @@ BlTextDelegatedAttributesBuilder >> initialize [
 	isOverwritableByStyler := true
 ]
 
-{ #category : 'scripting' }
+{ #category : #scripting }
 BlTextDelegatedAttributesBuilder >> whenAdded: aBlock [
 	attributeAddedBlock := aBlock
 ]

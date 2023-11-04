@@ -3,8 +3,8 @@ I am text paragraph measurer. I keep track of available width, height, current m
 
 "
 Class {
-	#name : 'BlTextParagraphMeasurer',
-	#superclass : 'Object',
+	#name : #BlTextParagraphMeasurer,
+	#superclass : #Object,
 	#instVars : [
 		'maxHeight',
 		'maxWidth',
@@ -12,12 +12,10 @@ Class {
 		'line',
 		'hostTextMeasurer'
 	],
-	#category : 'Bloc-Text-Text-Paragraph',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Paragraph'
+	#category : 'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlTextParagraphMeasurer class >> hostTextMeasurer: aHostSpanMeasurer maxWidth: aWidth maxHeight: aHeight [
 
 	^ self new
@@ -27,31 +25,31 @@ BlTextParagraphMeasurer class >> hostTextMeasurer: aHostSpanMeasurer maxWidth: a
 		  yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphMeasurer >> accumulatedHeight [
 
 	^ line height
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphMeasurer >> accumulatedWidth [
 
 	^ line width
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlTextParagraphMeasurer >> availableHeight [
 
 	^ maxHeight - self accumulatedHeight
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlTextParagraphMeasurer >> availableWidth [
 
 	^ maxWidth - self accumulatedWidth
 ]
 
-{ #category : 'finalization' }
+{ #category : #finalization }
 BlTextParagraphMeasurer >> finalize [
 
 	super finalize.
@@ -60,14 +58,14 @@ BlTextParagraphMeasurer >> finalize [
 	line := nil
 ]
 
-{ #category : 'measurement - testing' }
+{ #category : #'measurement - testing' }
 BlTextParagraphMeasurer >> hasAvailableSpace [
 	"Return true if I have space available for more spans, false otherwise"
 
 	^ self availableWidth > 0 and: [ self availableHeight > 0 ]
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlTextParagraphMeasurer >> hostTextMeasurer: aBlHostTextMeasurer maxWidth: aWidth maxHeight: aHeight [
 
 	hostTextMeasurer := aBlHostTextMeasurer.
@@ -75,7 +73,7 @@ BlTextParagraphMeasurer >> hostTextMeasurer: aBlHostTextMeasurer maxWidth: aWidt
 	self maxHeight: aHeight
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTextParagraphMeasurer >> initialize [
 
 	maxWidth := Float infinity.
@@ -86,36 +84,36 @@ BlTextParagraphMeasurer >> initialize [
 	line := BlTextParagraphLine new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphMeasurer >> line [
 
 	^ line
 ]
 
-{ #category : 'paragraph - properties' }
+{ #category : #'paragraph - properties' }
 BlTextParagraphMeasurer >> maxHeight [
 
 	^ maxHeight
 ]
 
-{ #category : 'paragraph - properties' }
+{ #category : #'paragraph - properties' }
 BlTextParagraphMeasurer >> maxHeight: aFloat [
 
 	maxHeight := aFloat
 ]
 
-{ #category : 'paragraph - properties' }
+{ #category : #'paragraph - properties' }
 BlTextParagraphMeasurer >> maxWidth [
 
 	^ maxWidth
 ]
 
-{ #category : 'paragraph - properties' }
+{ #category : #'paragraph - properties' }
 BlTextParagraphMeasurer >> maxWidth: aFloat [
 	maxWidth := aFloat
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlTextParagraphMeasurer >> measureSpan: aBlSpan [
 
 	| aParagraphSpan |
@@ -127,25 +125,25 @@ BlTextParagraphMeasurer >> measureSpan: aBlSpan [
 	self pushSpan: aParagraphSpan
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphMeasurer >> movePosition: aNumber [
 
 	textPosition := aNumber
 ]
 
-{ #category : 'text - accessing' }
+{ #category : #'text - accessing' }
 BlTextParagraphMeasurer >> position [
 
 	^ textPosition
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphMeasurer >> pushPosition: aNumber [
 
 	textPosition := textPosition + aNumber
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 BlTextParagraphMeasurer >> pushSpan: aParagraphSpan [
 
 	line addSpan: aParagraphSpan.
@@ -154,7 +152,7 @@ BlTextParagraphMeasurer >> pushSpan: aParagraphSpan [
 	self pushPosition: aParagraphSpan spanLength - 1
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTextParagraphMeasurer >> reset [
 
 	textPosition := 0.

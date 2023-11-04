@@ -21,19 +21,17 @@ BlTextIndexEOS defers actual calculation of the index as long as possible, i.e. 
 
 "
 Class {
-	#name : 'BlTextIndexEOS',
-	#superclass : 'BlTextIndex',
+	#name : #BlTextIndexEOS,
+	#superclass : #BlTextIndex,
 	#instVars : [
 		'text',
 		'offset',
 		'approximateSize'
 	],
-	#category : 'Bloc-DataStructure - Rope',
-	#package : 'Bloc',
-	#tag : 'DataStructure - Rope'
+	#category : 'Bloc-DataStructure - Rope'
 }
 
-{ #category : 'arithmetic' }
+{ #category : #arithmetic }
 BlTextIndexEOS >> + aNumber [ 
 
 	^ self class new 
@@ -42,7 +40,7 @@ BlTextIndexEOS >> + aNumber [
 		yourself
 ]
 
-{ #category : 'arithmetic' }
+{ #category : #arithmetic }
 BlTextIndexEOS >> - aNumber [ 
 
 	^ self class new 
@@ -51,19 +49,19 @@ BlTextIndexEOS >> - aNumber [
 		yourself
 ]
 
-{ #category : 'arithmetic' }
+{ #category : #arithmetic }
 BlTextIndexEOS >> // aNumber [ 
 
 	^ self index // aNumber
 ]
 
-{ #category : 'arithmetic' }
+{ #category : #arithmetic }
 BlTextIndexEOS >> \\ aNumber [ 
 
 	^ self index \\ aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextIndexEOS >> approximateSize [
 	"Answer the receiver's text's approximate size.
 	While the text size is not known, use an approximation, e.g. the file size.
@@ -75,13 +73,13 @@ BlTextIndexEOS >> approximateSize [
 		ifFalse: [ approximateSize ifNil: [ approximateSize := text approximateSize ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextIndexEOS >> haveSize [
 
 	^ text isNotNil and: [ text haveSize ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextIndexEOS >> index [ 
 
 	^ text
@@ -89,24 +87,24 @@ BlTextIndexEOS >> index [
 		ifNotNil: [ self approximateSize + offset ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTextIndexEOS >> initialize [ 
 
 	super initialize.
 	offset := 0.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextIndexEOS >> offset [
 	^ offset
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextIndexEOS >> offset: anObject [
 	offset := anObject
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlTextIndexEOS >> printOn: aStream [
 
 	aStream
@@ -116,12 +114,12 @@ BlTextIndexEOS >> printOn: aStream [
 		<< ')'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextIndexEOS >> text [
 	^ text
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextIndexEOS >> text: anObject [
 	text := anObject
 ]

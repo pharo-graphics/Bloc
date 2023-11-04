@@ -1,6 +1,6 @@
-Extension { #name : 'BlStrokeLineButtCap' }
+Extension { #name : #BlStrokeLineButtCap }
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlStrokeLineButtCap >> aeApplyTo: aeCanvas [
 
 	aeCanvas setCapButt

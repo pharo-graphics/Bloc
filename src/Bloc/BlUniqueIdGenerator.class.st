@@ -1,16 +1,14 @@
 Class {
-	#name : 'BlUniqueIdGenerator',
-	#superclass : 'Object',
+	#name : #BlUniqueIdGenerator,
+	#superclass : #Object,
 	#instVars : [
 		'mutex',
 		'nextUniqueId'
 	],
-	#category : 'Bloc-Space - Support',
-	#package : 'Bloc',
-	#tag : 'Space - Support'
+	#category : 'Bloc-Space - Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlUniqueIdGenerator >> generateUniqueId [
 	^ mutex critical: [
 		| uniqueId |
@@ -20,7 +18,7 @@ BlUniqueIdGenerator >> generateUniqueId [
 		uniqueId ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlUniqueIdGenerator >> initialize [
 	super initialize.
 	

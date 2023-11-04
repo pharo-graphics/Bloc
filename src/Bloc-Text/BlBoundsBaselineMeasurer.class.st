@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlBoundsBaselineMeasurer',
-	#superclass : 'BlTextParagraphBaselineMeasurer',
-	#category : 'Bloc-Text-Text-Paragraph',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Paragraph'
+	#name : #BlBoundsBaselineMeasurer,
+	#superclass : #BlTextParagraphBaselineMeasurer,
+	#category : 'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : 'baseline' }
+{ #category : #baseline }
 BlBoundsBaselineMeasurer >> computedBaseline: aTextParagraph [
 	<return: #Point>
 

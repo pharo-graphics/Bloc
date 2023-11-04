@@ -1,6 +1,6 @@
-Extension { #name : 'BlFont' }
+Extension { #name : #BlFont }
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlFont >> asAeFTFace [
 
 	^ BAFontConverter uniqueInstance faceFor: self

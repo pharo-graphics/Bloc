@@ -1,6 +1,6 @@
-Extension { #name : 'BlSimpleShadowEffect' }
+Extension { #name : #BlSimpleShadowEffect }
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlSimpleShadowEffect >> aeDrawBelow: aBlElement on: aeCanvas [
 
 	aeCanvas setSourceColor: color.

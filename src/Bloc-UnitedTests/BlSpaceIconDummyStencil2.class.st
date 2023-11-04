@@ -1,26 +1,24 @@
 Class {
-	#name : 'BlSpaceIconDummyStencil2',
-	#superclass : 'Object',
+	#name : #BlSpaceIconDummyStencil2,
+	#superclass : #Object,
 	#instVars : [
 		'block'
 	],
-	#category : 'Bloc-UnitedTests-Space',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Space'
+	#category : 'Bloc-UnitedTests-Space'
 }
 
-{ #category : 'api - converting' }
+{ #category : #'api - converting' }
 BlSpaceIconDummyStencil2 >> asElement [
 	<return: #BlElement>
 	^ self block value
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlSpaceIconDummyStencil2 >> block [
 	^ block
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlSpaceIconDummyStencil2 >> block: anObject [
 	block := anObject
 ]

@@ -1,6 +1,6 @@
-Extension { #name : 'RBAssignmentToken' }
+Extension { #name : #RBAssignmentToken }
 
-{ #category : '*Bloc-Text' }
+{ #category : #'*Bloc-Text' }
 RBAssignmentToken >> acceptVisitor: aVisitor [
 
 	^ aVisitor visitAssignmentToken: self

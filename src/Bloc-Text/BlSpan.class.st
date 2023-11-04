@@ -4,17 +4,15 @@ I am data structure independent and rely only on BrText's public API
 
 "
 Class {
-	#name : 'BlSpan',
-	#superclass : 'BlReadonlyText',
+	#name : #BlSpan,
+	#superclass : #BlReadonlyText,
 	#instVars : [
 		'attributes'
 	],
-	#category : 'Bloc-Text-Text',
-	#package : 'Bloc-Text',
-	#tag : 'Text'
+	#category : 'Bloc-Text-Text'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSpan class >> text: aBlText attributes: theAttributes [
 
 	^ self basicNew
@@ -23,28 +21,28 @@ BlSpan class >> text: aBlText attributes: theAttributes [
 		yourself
 ]
 
-{ #category : 'span - accessing' }
+{ #category : #'span - accessing' }
 BlSpan >> attributes [
 	"Return a collection of attributes that apply on this span"
 
 	^ attributes
 ]
 
-{ #category : 'text - attributes' }
+{ #category : #'text - attributes' }
 BlSpan >> attributesFinder [
 	^ BlTextAttributesExplicitFinder new
 		initializeForAttributes: attributes
 		interval: ((1 min: self size) to: self size)
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlSpan >> isTabulation [
 
 	text ifEmpty: [ ^ false ].
 	^ text first == Character tab
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlSpan >> text: aBlText attributes: theAttributes [
 
 	text := aBlText.

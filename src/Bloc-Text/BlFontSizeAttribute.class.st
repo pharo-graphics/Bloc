@@ -17,53 +17,51 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : 'BlFontSizeAttribute',
-	#superclass : 'BlTextAttribute',
+	#name : #BlFontSizeAttribute,
+	#superclass : #BlTextAttribute,
 	#instVars : [
 		'size'
 	],
-	#category : 'Bloc-Text-Text-Attributes',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Attributes'
+	#category : 'Bloc-Text-Text-Attributes'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlFontSizeAttribute class >> size: aNumber [
 	^ self new
 		size: aNumber;
 		yourself
 ]
 
-{ #category : 'text style' }
+{ #category : #'text style' }
 BlFontSizeAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
 	aBlTextFontAndStyleBuilder fontSize: self size
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlFontSizeAttribute >> equals: anAnotherAttribute [
 	^ self size = anAnotherAttribute size
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlFontSizeAttribute >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ super hash bitXor: self size hash
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlFontSizeAttribute >> printOn: aStream [
 	aStream
 		nextPutAll: 'font-size: ';
 		nextPutAll: self size asString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontSizeAttribute >> size [
 	^ size
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontSizeAttribute >> size: aNumber [
 	self
 		assert: [ size isNil ]
@@ -72,7 +70,7 @@ BlFontSizeAttribute >> size: aNumber [
 	size := aNumber
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlFontSizeAttribute >> storeOn: aStream [
 	super storeOn: aStream.
 	

@@ -1,6 +1,6 @@
-Extension { #name : 'RBSpecialCharacterToken' }
+Extension { #name : #RBSpecialCharacterToken }
 
-{ #category : '*Bloc-Text' }
+{ #category : #'*Bloc-Text' }
 RBSpecialCharacterToken >> acceptVisitor: aVisitor [
 
 	^ aVisitor visitSpecialCharacterToken: self

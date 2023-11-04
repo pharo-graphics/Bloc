@@ -1,21 +1,19 @@
 Class {
-	#name : 'BlTelemetrySignal',
-	#superclass : 'BeaconSignal',
+	#name : #BlTelemetrySignal,
+	#superclass : #BeaconSignal,
 	#instVars : [
 		'task',
 		'telemetry'
 	],
-	#category : 'Bloc-Space - Telemetry',
-	#package : 'Bloc',
-	#tag : 'Space - Telemetry'
+	#category : 'Bloc-Space - Telemetry'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetrySignal >> duration [
 	^ self task duration
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetrySignal >> signal [
 	<objectGetter: #telemetrySignal>
 	<return: #BlTelemetrySignal>
@@ -23,24 +21,24 @@ BlTelemetrySignal >> signal [
 	^ self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetrySignal >> task [
 	<return: #BlTelemetryTask>
 
 	^ task
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetrySignal >> task: aBlTelemetryTask [
 	task := aBlTelemetryTask
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetrySignal >> telemetry [
 	^ telemetry
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetrySignal >> telemetry: anObject [
 	telemetry := anObject
 ]

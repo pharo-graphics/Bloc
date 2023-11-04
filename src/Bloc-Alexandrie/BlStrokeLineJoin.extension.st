@@ -1,6 +1,6 @@
-Extension { #name : 'BlStrokeLineJoin' }
+Extension { #name : #BlStrokeLineJoin }
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlStrokeLineJoin >> aeApplyTo: aeCanvas style: aBorderStyle [
 
 	self subclassResponsibility

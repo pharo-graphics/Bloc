@@ -1,39 +1,37 @@
 Class {
-	#name : 'BlClickAvortedEvent',
-	#superclass : 'BlMouseEvent',
+	#name : #BlClickAvortedEvent,
+	#superclass : #BlMouseEvent,
 	#instVars : [
 		'processor',
 		'upEvent'
 	],
-	#category : 'Bloc-Events',
-	#package : 'Bloc',
-	#tag : 'Events'
+	#category : 'Bloc-Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlClickAvortedEvent >> processor [
 
 	^ processor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlClickAvortedEvent >> processor: aMouseProcessor [
 
 	processor := aMouseProcessor
 ]
 
-{ #category : 'sending' }
+{ #category : #sending }
 BlClickAvortedEvent >> sendTo: anObject [
 	anObject clickAvortedEvent: self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlClickAvortedEvent >> upEvent [
 
 	^ upEvent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlClickAvortedEvent >> upEvent: anElement [
 
 	upEvent := anElement

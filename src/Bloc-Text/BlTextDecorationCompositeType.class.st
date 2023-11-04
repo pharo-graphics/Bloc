@@ -1,15 +1,13 @@
 Class {
-	#name : 'BlTextDecorationCompositeType',
-	#superclass : 'BlTextDecorationType',
+	#name : #BlTextDecorationCompositeType,
+	#superclass : #BlTextDecorationType,
 	#instVars : [
 		'types'
 	],
-	#category : 'Bloc-Text-Text-Decoration',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Decoration'
+	#category : 'Bloc-Text-Text-Decoration'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlTextDecorationCompositeType >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -20,31 +18,31 @@ BlTextDecorationCompositeType >> = anObject [
 	^ types = anObject types
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 BlTextDecorationCompositeType >> addType: aBlTextDecorationType [
 	types add: aBlTextDecorationType
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlTextDecorationCompositeType >> hasTypes [
 	^ types isNotEmpty
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlTextDecorationCompositeType >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ types hash
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTextDecorationCompositeType >> initialize [
 	super initialize.
 	
 	types := Set new
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlTextDecorationCompositeType >> printOn: aStream [
 	"Append a sequence of characters to aStream that identify the receiver."
 
@@ -61,7 +59,7 @@ BlTextDecorationCompositeType >> printOn: aStream [
 		nextPut: $}
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlTextDecorationCompositeType >> storeOn: aStream [
 	aStream
 		nextPut: $(.
@@ -81,37 +79,37 @@ BlTextDecorationCompositeType >> storeOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDecorationCompositeType >> typeCount [
 	^ types size
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDecorationCompositeType >> types [
 	^ types
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BlTextDecorationCompositeType >> typesDo: aBlock [
 	self types do: [ :eachType | eachType typesDo: aBlock ]
 ]
 
-{ #category : 'api - composition' }
+{ #category : #'api - composition' }
 BlTextDecorationCompositeType >> withLineThrough [
 	self addType: self class lineThrough
 ]
 
-{ #category : 'api - composition' }
+{ #category : #'api - composition' }
 BlTextDecorationCompositeType >> withOverline [
 	self addType: self class overline
 ]
 
-{ #category : 'api - composition' }
+{ #category : #'api - composition' }
 BlTextDecorationCompositeType >> withUnderline [
 	self addType: self class underline
 ]
 
-{ #category : 'logical operations' }
+{ #category : #'logical operations' }
 BlTextDecorationCompositeType >> | anOtherDecorationType [
 	^ self addType: anOtherDecorationType
 ]

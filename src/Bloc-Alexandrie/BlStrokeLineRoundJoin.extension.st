@@ -1,6 +1,6 @@
-Extension { #name : 'BlStrokeLineRoundJoin' }
+Extension { #name : #BlStrokeLineRoundJoin }
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlStrokeLineRoundJoin >> aeApplyTo: aeCanvas style: aBorderStyle [
 	
 	aeCanvas setJoinRound

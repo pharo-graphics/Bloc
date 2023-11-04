@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlResizeTopCursor',
-	#superclass : 'BlNamedCursor',
-	#category : 'Bloc-Space - Cursor',
-	#package : 'Bloc',
-	#tag : 'Space - Cursor'
+	#name : #BlResizeTopCursor,
+	#superclass : #BlNamedCursor,
+	#category : 'Bloc-Space - Cursor'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlResizeTopCursor >> asForm [
 	^ Cursor resizeTop
 ]

@@ -1,32 +1,30 @@
 Class {
-	#name : 'BlTextAnnouncer',
-	#superclass : 'Announcer',
+	#name : #BlTextAnnouncer,
+	#superclass : #Announcer,
 	#instVars : [
 		'suspendAll',
 		'suspendedAnnouncemets'
 	],
-	#category : 'Bloc-Text-Text',
-	#package : 'Bloc-Text',
-	#tag : 'Text'
+	#category : 'Bloc-Text-Text'
 }
 
-{ #category : 'announce' }
+{ #category : #announce }
 BlTextAnnouncer >> announce: anAnnouncement [
 	(self isAnnouncementSuspended: anAnnouncement) ifTrue: [ ^ anAnnouncement asAnnouncement ].
 	^ super announce: anAnnouncement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextAnnouncer >> announcer [ 
 	^ self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextAnnouncer >> glmSubscriptions [
 	^ registry glmSubscriptions
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlTextAnnouncer >> isAnnouncementSuspended: anAnnouncement [
 	^ self suspendAll or: [ |announcementType|
 		announcementType := anAnnouncement isClass 
@@ -36,23 +34,23 @@ BlTextAnnouncer >> isAnnouncementSuspended: anAnnouncement [
 			announcementType = anAnnouncementType or: [ announcementType  inheritsFrom: anAnnouncementType ]  ] ]
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 BlTextAnnouncer >> postCopy [
 	super postCopy.
 	registry := registry copy.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextAnnouncer >> resetAnnouncer [
 	registry reset
 ]
 
-{ #category : 'suspending' }
+{ #category : #suspending }
 BlTextAnnouncer >> suspendAll [
 	^ suspendAll ifNil: [ suspendAll := false ].
 ]
 
-{ #category : 'suspending' }
+{ #category : #suspending }
 BlTextAnnouncer >> suspendAll: aCollection while: aBlock [
 	| previousSuspendedAnnouncemets |
 	previousSuspendedAnnouncemets := suspendedAnnouncemets.
@@ -60,7 +58,7 @@ BlTextAnnouncer >> suspendAll: aCollection while: aBlock [
 	aBlock ensure: [suspendedAnnouncemets := previousSuspendedAnnouncemets] 
 ]
 
-{ #category : 'suspending' }
+{ #category : #suspending }
 BlTextAnnouncer >> suspendAllWhile: aBlock [
 	| previousSuspensionState |
 	previousSuspensionState := suspendAll.
@@ -69,7 +67,7 @@ BlTextAnnouncer >> suspendAllWhile: aBlock [
 	
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextAnnouncer >> suspendedAnnouncemets [
 	^ suspendedAnnouncemets ifNil: [ suspendedAnnouncemets := OrderedCollection new ].
 ]
