@@ -3,15 +3,15 @@ I allow users to provide a fixed normalized location (top left is 0@0 and bottom
 
 "
 Class {
-	#name : #BlAffineTransformationNormalizedPositionOrigin,
-	#superclass : #BlAffineTransformationOrigin,
+	#name : 'BlAffineTransformationNormalizedPositionOrigin',
+	#superclass : 'BlAffineTransformationOrigin',
 	#instVars : [
 		'position'
 	],
 	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlAffineTransformationNormalizedPositionOrigin class >> position: aPoint [
 
 	^ self new
@@ -19,7 +19,7 @@ BlAffineTransformationNormalizedPositionOrigin class >> position: aPoint [
 		  yourself
 ]
 
-{ #category : #math }
+{ #category : 'math' }
 BlAffineTransformationNormalizedPositionOrigin >> originIn: anElement [
 	"Return a point describing an origin of a transformation within a given element.
 	Origin can be either a 2D or 3D points and should be given in local coordinates of the element"
@@ -27,13 +27,13 @@ BlAffineTransformationNormalizedPositionOrigin >> originIn: anElement [
 	^ position * anElement extent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAffineTransformationNormalizedPositionOrigin >> position [
 
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAffineTransformationNormalizedPositionOrigin >> position: aPoint [
 
 	position := aPoint

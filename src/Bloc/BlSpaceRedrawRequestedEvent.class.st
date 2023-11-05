@@ -1,10 +1,10 @@
 Class {
-	#name : #BlSpaceRedrawRequestedEvent,
-	#superclass : #BlSpaceEvent,
+	#name : 'BlSpaceRedrawRequestedEvent',
+	#superclass : 'BlSpaceEvent',
 	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceRedrawRequestedEvent >> sendTo: anObject [
 	anObject spaceRedrawRequestedEvent: self
 ]

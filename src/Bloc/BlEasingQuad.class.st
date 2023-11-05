@@ -1,10 +1,10 @@
 Class {
-	#name : #BlEasingQuad,
-	#superclass : #BlEasing,
+	#name : 'BlEasingQuad',
+	#superclass : 'BlEasing',
 	#category : 'Bloc-Basic-Interpolators'
 }
 
-{ #category : #interpolation }
+{ #category : 'interpolation' }
 BlEasingQuad >> interpolate: aProgress [
 	^ aProgress raisedTo: 2
 ]

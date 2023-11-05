@@ -88,19 +88,29 @@ BlElement >> aeDrawGeometryOn: aeCanvas [
 	- Pre-condition: position and transformations are already applied on the canvas.
 	- Post-condition: position and transformations are maintanined intact."
 	
-	| myBackground |
-	self geometry aeApplyTo: aeCanvas element: self.
+	figure := nil.
+	figure ifNil: [
+"		| myBackground |
+		self geometry aeApplyTo: aeCanvas element: self.
 
-	myBackground := self background.
-	myBackground isTransparent
-		ifTrue: [ aeCanvas setBackgroundOff ]
-		ifFalse: [ myBackground aeApplyTo: aeCanvas ].
+		myBackground := self background.
+		myBackground isTransparent
+			ifTrue: [ aeCanvas setBackgroundOff ]
+			ifFalse: [ myBackground aeApplyTo: aeCanvas ].
+		self border aeApplyTo: aeCanvas element: self.
+"
+		self border setBAFigureWithBackgroundOn: self.
+		
+"		isTransparent
+			ifFalse: [ figure := AeBackgroundAndNoBorderFigure new ]
+			ifTrue: [ self error: 'must implement' ].
+		figure pathBlock: pathBlock.
+		
+		myBackground isTransparent ifFalse: [
+			figure background: myBackground asBABackground ]" ].
 
-	"Border may set stroke options, outskirts and geometry's border path"
-	self border aeApplyTo: aeCanvas element: self.
-
-	aeCanvas drawFigureAndPrepareToClip: (self hasChildren and: [ self clipChildren ]).
-
+	figure shouldClipAfterDrawingFigure: (self hasChildren and: [ self clipChildren ]).
+	figure drawOn: aeCanvas privateAeCairoContext.
 ]
 
 { #category : '*Bloc-Alexandrie' }

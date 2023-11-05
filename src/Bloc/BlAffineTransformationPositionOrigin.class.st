@@ -3,15 +3,15 @@ I allow users to provide a fixed location that should be used as transformation 
 
 "
 Class {
-	#name : #BlAffineTransformationPositionOrigin,
-	#superclass : #BlAffineTransformationOrigin,
+	#name : 'BlAffineTransformationPositionOrigin',
+	#superclass : 'BlAffineTransformationOrigin',
 	#instVars : [
 		'position'
 	],
 	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlAffineTransformationPositionOrigin class >> position: aPoint [
 
 	^ self new
@@ -19,19 +19,19 @@ BlAffineTransformationPositionOrigin class >> position: aPoint [
 		  yourself
 ]
 
-{ #category : #math }
+{ #category : 'math' }
 BlAffineTransformationPositionOrigin >> originIn: anElement [
 
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAffineTransformationPositionOrigin >> position [
 
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAffineTransformationPositionOrigin >> position: aPoint [
 
 	position := aPoint

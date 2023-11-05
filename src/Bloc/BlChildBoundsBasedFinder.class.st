@@ -5,8 +5,8 @@ I help users to find a child element within its parent based on the bounds const
 
 "
 Class {
-	#name : #BlChildBoundsBasedFinder,
-	#superclass : #Object,
+	#name : 'BlChildBoundsBasedFinder',
+	#superclass : 'Object',
 	#instVars : [
 		'fromIndex',
 		'toIndex',
@@ -16,37 +16,37 @@ Class {
 	#category : 'Bloc-Basic-Bounds'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildBoundsBasedFinder >> acceptableConstraints [
 
 	^ acceptableConstraints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildBoundsBasedFinder >> acceptableConstraints: aBlBoundsMatcherConstraints [
 
 	acceptableConstraints := aBlBoundsMatcherConstraints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildBoundsBasedFinder >> childAt: anIndex [
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildBoundsBasedFinder >> childEndOf: anElement [
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildBoundsBasedFinder >> childStartOf: anElement [
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - finder' }
+{ #category : 'api - finder' }
 BlChildBoundsBasedFinder >> detect [
 	<return: #BlElement or: nil>
 	
@@ -55,7 +55,7 @@ BlChildBoundsBasedFinder >> detect [
 		ifNone: [ nil ]
 ]
 
-{ #category : #'api - finder' }
+{ #category : 'api - finder' }
 BlChildBoundsBasedFinder >> detectIfFound: aFoundBlock ifNone: aNoneBlock [
 
 	| aMatcher anAcceptableMatch aStep |
@@ -94,49 +94,49 @@ BlChildBoundsBasedFinder >> detectIfFound: aFoundBlock ifNone: aNoneBlock [
 		ifNotNil: aFoundBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildBoundsBasedFinder >> fromIndex [
 
 	^ fromIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildBoundsBasedFinder >> fromIndex: anInteger [
 
 	fromIndex := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildBoundsBasedFinder >> parentEnd [
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildBoundsBasedFinder >> parentStart [
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildBoundsBasedFinder >> preferredConstraints [
 
 	^ preferredConstraints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildBoundsBasedFinder >> preferredConstraints: aBlBoundsMatcherConstraints [
 
 	preferredConstraints := aBlBoundsMatcherConstraints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildBoundsBasedFinder >> toIndex [
 
 	^ toIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildBoundsBasedFinder >> toIndex: anInteger [
 
 	toIndex := anInteger

@@ -1,25 +1,25 @@
 Class {
-	#name : #BlPaintBackgroundBuilder,
-	#superclass : #BlBackgroundBuilder,
+	#name : 'BlPaintBackgroundBuilder',
+	#superclass : 'BlBackgroundBuilder',
 	#instVars : [
 		'paint'
 	],
 	#category : 'Bloc-Basic-Background'
 }
 
-{ #category : #building }
+{ #category : 'building' }
 BlPaintBackgroundBuilder >> build [
 	<return: #BlBackground>
 
 	^ (BlPaintBackground paint: self paint) opacity: self opacity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPaintBackgroundBuilder >> paint [
 	^ paint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPaintBackgroundBuilder >> paint: aBlPaint [
 	paint := aBlPaint
 ]

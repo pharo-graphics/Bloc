@@ -5,12 +5,12 @@ See BlStrokeLineCap for other types
 
 "
 Class {
-	#name : #BlStrokeLineRoundCap,
-	#superclass : #BlStrokeLineCap,
+	#name : 'BlStrokeLineRoundCap',
+	#superclass : 'BlStrokeLineCap',
 	#category : 'Bloc-Paint-Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlStrokeLineRoundCap class >> capName [
 	^ 'Round'
 ]

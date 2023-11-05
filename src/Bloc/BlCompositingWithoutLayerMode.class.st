@@ -1,15 +1,15 @@
 Class {
-	#name : #BlCompositingWithoutLayerMode,
-	#superclass : #BlCompositingMode,
+	#name : 'BlCompositingWithoutLayerMode',
+	#superclass : 'BlCompositingMode',
 	#category : 'Bloc-Basic-Support'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlCompositingWithoutLayerMode >> wantsBufferedLayer [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlCompositingWithoutLayerMode >> wantsCompositionLayer [
 	^ false
 ]

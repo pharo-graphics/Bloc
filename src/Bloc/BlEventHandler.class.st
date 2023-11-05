@@ -11,8 +11,8 @@ BlEventHandler
 
 "
 Class {
-	#name : #BlEventHandler,
-	#superclass : #BlBasicEventHandler,
+	#name : 'BlEventHandler',
+	#superclass : 'BlBasicEventHandler',
 	#instVars : [
 		'action',
 		'eventClass'
@@ -20,7 +20,7 @@ Class {
 	#category : 'Bloc-Events-Handler'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlEventHandler class >> on: anEventClass do: aBlock [
 	^ self new
 		eventClass: anEventClass;
@@ -28,14 +28,14 @@ BlEventHandler class >> on: anEventClass do: aBlock [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlEventHandler class >> on: anEventClass sendTo: anObject [
 	^ self
 		on: anEventClass
 		do: [ :event | event sendTo: anObject ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlEventHandler >> = anotherObject [
 	self species == anotherObject species
 		ifFalse: [ ^ false ].
@@ -44,49 +44,49 @@ BlEventHandler >> = anotherObject [
 		and: [ anotherObject action = self action ]
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlEventHandler >> action [
 	^ action
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlEventHandler >> action: anObject [
 	action := anObject
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlEventHandler >> eventClass [
 	^ eventClass
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlEventHandler >> eventClass: anObject [
 	eventClass := anObject
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlEventHandler >> eventsToHandle [
 	^ { self eventClass }
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlEventHandler >> handleEvent: anEvent [
 	self action cull: anEvent
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlEventHandler >> hash [
 	^ self action hash bitXor: self eventClass hash
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlEventHandler >> printOn: aStream [
 	aStream
 		nextPutAll: 'Event handler of ';
 		nextPutAll: self eventClass name
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlEventHandler >> wantsEvent: anEvent [
 	^ anEvent class == self eventClass or: [ anEvent class inheritsFrom: self eventClass ]
 ]

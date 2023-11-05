@@ -20,8 +20,8 @@ To preserve the composition of iterators I hold a reference to the initial {{gtC
 
 "
 Class {
-	#name : #BlChildrenSubset,
-	#superclass : #BlChildren,
+	#name : 'BlChildrenSubset',
+	#superclass : 'BlChildren',
 	#instVars : [
 		'subsetArray',
 		'supersetChildren'
@@ -29,12 +29,12 @@ Class {
 	#category : 'Bloc-Basic-Children'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlChildrenSubset class >> on: aBlChildren [
 	^ self new initializeFrom: aBlChildren
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlChildrenSubset >> add: newObject [ 
 	"Include newObject as one of the receiver's elements. Answer newObject. 
 	ArrayedCollections cannot respond to this message."
@@ -42,14 +42,14 @@ BlChildrenSubset >> add: newObject [
 	self shouldNotImplement
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildrenSubset >> at: anIndex [
 	<return: #BlElement>
 
 	^ subsetArray at: anIndex
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildrenSubset >> do: aBlock [
 	"Evaluate a Block on all subset items. Uses Array>>to:do: as optimization."
 
@@ -57,14 +57,14 @@ BlChildrenSubset >> do: aBlock [
 		aBlock value: (subsetArray at: index) ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlChildrenSubset >> hasSuperset [
 	<return: #Boolean>
 
 	 ^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlChildrenSubset >> initializeFrom: aBlChildren [
 	"Store the given aBlChildren parametre to keep track of how iterators are composed and 
 	also store the actual subset of elements on which this iterator will operate."
@@ -72,12 +72,12 @@ BlChildrenSubset >> initializeFrom: aBlChildren [
 	supersetChildren := aBlChildren
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildrenSubset >> name [
 	^ 'Subset'
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 BlChildrenSubset >> remove: oldObject ifAbsent: anExceptionBlock [ 
 	"Remove oldObject from the receiver's elements. If several of the 
 	elements are equal to oldObject, only one is removed. If no element is 
@@ -88,21 +88,21 @@ BlChildrenSubset >> remove: oldObject ifAbsent: anExceptionBlock [
 	self shouldNotImplement
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildrenSubset >> size [
 	<return: #Number>
 
 	^ subsetArray size
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlChildrenSubset >> subsetFrom: aBlChildren [
 	<return: #Array of: #BlElement>
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildrenSubset >> superset [
 	"Return a superset of this children subset"
 	<return: #BlChildren>

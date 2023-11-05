@@ -1,5 +1,5 @@
 Class {
-	#name : #BlProgressCursor,
-	#superclass : #BlNamedCursor,
+	#name : 'BlProgressCursor',
+	#superclass : 'BlNamedCursor',
 	#category : 'Bloc-Space - Cursor'
 }

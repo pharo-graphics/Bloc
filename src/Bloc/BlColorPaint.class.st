@@ -5,20 +5,20 @@ Color paint is transparent then and only then when underlying color's alpha chan
 
 "
 Class {
-	#name : #BlColorPaint,
-	#superclass : #BlPaint,
+	#name : 'BlColorPaint',
+	#superclass : 'BlPaint',
 	#instVars : [
 		'color'
 	],
 	#category : 'Bloc-Paint'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlColorPaint class >> color: aColor [
 	^ self new color: aColor
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlColorPaint class >> transparent [
 	"Return an instance of a paint with transparent color"
 	<return: #BlColorPaint>
@@ -26,7 +26,7 @@ BlColorPaint class >> transparent [
 	^ BlTransparentPaint uniqueInstance
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlColorPaint >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
@@ -36,7 +36,7 @@ BlColorPaint >> = anotherObject [
 	^ anotherObject color = self color
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlColorPaint >> color [
 	"Return paint's underlying color.
 	color can not be nil"
@@ -49,7 +49,7 @@ BlColorPaint >> color [
 	^ color
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlColorPaint >> color: aColor [
 	"Initialize me with a given Color"
 	self
@@ -59,18 +59,18 @@ BlColorPaint >> color: aColor [
 	color := aColor
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlColorPaint >> hash [
 	^ self color hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlColorPaint >> isColorPaint [
 
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlColorPaint >> isOpaque [
 	"Color paint is opaque when underlying color is opaque
 	@see BlPaint>>#isOpaque"
@@ -79,7 +79,7 @@ BlColorPaint >> isOpaque [
 	^ color isOpaque
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlColorPaint >> isTransparent [
 	"Color paint is transparent when underlying color is transparent
 	@see BlPaint>>#isTransparent"
@@ -88,7 +88,7 @@ BlColorPaint >> isTransparent [
 	^ color isTransparent
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlColorPaint >> matchExtent: anExtent [
 	"do nothing for color paint"
 ]

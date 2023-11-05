@@ -28,8 +28,8 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #BlVerticalCoordinateAlignment,
-	#superclass : #BlVerticalAlignment,
+	#name : 'BlVerticalCoordinateAlignment',
+	#superclass : 'BlVerticalAlignment',
 	#instVars : [
 		'coordinate',
 		'relativeAlignment'
@@ -37,22 +37,22 @@ Class {
 	#category : 'Bloc-Layouts-Alignment'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlVerticalCoordinateAlignment >> coordinate [
 	^ coordinate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlVerticalCoordinateAlignment >> coordinate: anObject [
 	coordinate := anObject
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlVerticalCoordinateAlignment >> directed: aBlLayoutDirection [
 	^ aBlLayoutDirection of: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlVerticalCoordinateAlignment >> initialize [
 	super initialize.
 	
@@ -60,24 +60,24 @@ BlVerticalCoordinateAlignment >> initialize [
 	relativeAlignment := BlElementAlignment horizontal center
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlVerticalCoordinateAlignment >> leftToRight [
 	^ self class new
 		coordinate: coordinate;
 		relativeAlignment: relativeAlignment leftToRight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlVerticalCoordinateAlignment >> relativeAlignment [
 	^ relativeAlignment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlVerticalCoordinateAlignment >> relativeAlignment: anObject [
 	relativeAlignment := anObject
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlVerticalCoordinateAlignment >> rightToLeft [
 	^ self class new
 		coordinate: coordinate;

@@ -1,10 +1,10 @@
 Class {
-	#name : #BlLayoutNodeResizerMeasurement,
-	#superclass : #BlLayoutNodeMeasurement,
+	#name : 'BlLayoutNodeResizerMeasurement',
+	#superclass : 'BlLayoutNodeMeasurement',
 	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlLayoutNodeResizerMeasurement >> measure: aLayoutChildNode with: anExtentSpecOrBlock [
 	<return: #BlLayoutNodeMeasurement>
 	| anExtentSpec width measuredWidth height measuredHeight |

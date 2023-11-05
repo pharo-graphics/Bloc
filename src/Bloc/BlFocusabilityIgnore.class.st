@@ -1,10 +1,10 @@
 Class {
-	#name : #BlFocusabilityIgnore,
-	#superclass : #BlFocusability,
+	#name : 'BlFocusabilityIgnore',
+	#superclass : 'BlFocusability',
 	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #focus }
+{ #category : 'focus' }
 BlFocusabilityIgnore >> focusables: aBlFocusFinderCandidates along: aBlFocusSearchDirection of: anElement [
 	"I ignore myself and only add children"
 

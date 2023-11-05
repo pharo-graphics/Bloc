@@ -10,8 +10,8 @@ container addChild: overlay.
 
 "
 Class {
-	#name : #BlOverlayElement,
-	#superclass : #BlElement,
+	#name : 'BlOverlayElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'overlayListener',
 		'referenceElement'
@@ -19,12 +19,12 @@ Class {
 	#category : 'Bloc-Overlay'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlOverlayElement class >> on: anElement [
 	^ self new attachTo: anElement
 ]
 
-{ #category : #'api - attaching / detaching' }
+{ #category : 'api - attaching / detaching' }
 BlOverlayElement >> attachTo: anElement [
 	
 	referenceElement = anElement
@@ -37,7 +37,7 @@ BlOverlayElement >> attachTo: anElement [
 	anElement addEventHandler: overlayListener
 ]
 
-{ #category : #'api - attaching / detaching' }
+{ #category : 'api - attaching / detaching' }
 BlOverlayElement >> detach [
 	
 	self isAttached
@@ -47,13 +47,13 @@ BlOverlayElement >> detach [
 	referenceElement := nil
 ]
 
-{ #category : #'hook - geometry' }
+{ #category : 'hook - geometry' }
 BlOverlayElement >> extentFrom: anExtent [
 
 	^ anExtent
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlOverlayElement >> initialize [
 	super initialize.
 	
@@ -64,7 +64,7 @@ BlOverlayElement >> initialize [
 	self preventMouseEvents
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlOverlayElement >> isAttached [
 	"Return true if I am attached to any element, false otherwise"
 	<return: #Boolean>
@@ -72,7 +72,7 @@ BlOverlayElement >> isAttached [
 	^ referenceElement isNotNil
 ]
 
-{ #category : #'hooks - children' }
+{ #category : 'hooks - children' }
 BlOverlayElement >> onAddedToSceneGraph [
 	super onAddedToSceneGraph.
 	
@@ -83,7 +83,7 @@ BlOverlayElement >> onAddedToSceneGraph [
 	overlayListener resizeTo: referenceElement.
 ]
 
-{ #category : #'hook - geometry' }
+{ #category : 'hook - geometry' }
 BlOverlayElement >> positionFrom: aPosition [
 
 	^ aPosition

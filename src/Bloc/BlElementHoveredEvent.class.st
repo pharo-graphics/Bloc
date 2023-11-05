@@ -1,5 +1,5 @@
 Class {
-	#name : #BlElementHoveredEvent,
-	#superclass : #BlElementStateEvent,
+	#name : 'BlElementHoveredEvent',
+	#superclass : 'BlElementStateEvent',
 	#category : 'Bloc-Basic-State'
 }

@@ -15,8 +15,8 @@ BlTaskAtErrorSignal is used when BlTaskAtQueue encounters an error during execut
 
 "
 Class {
-	#name : #BlTaskAtErrorSignal,
-	#superclass : #BeaconSignal,
+	#name : 'BlTaskAtErrorSignal',
+	#superclass : 'BeaconSignal',
 	#instVars : [
 		'exception',
 		'message',
@@ -25,32 +25,32 @@ Class {
 	#category : 'Bloc-Space - Tasks'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtErrorSignal >> exception [
 	^ exception
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtErrorSignal >> exception: anObject [
 	exception := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtErrorSignal >> message [
 	^ message
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtErrorSignal >> message: anObject [
 	message := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtErrorSignal >> task [
 	^ task
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtErrorSignal >> task: anObject [
 	task := anObject
 ]

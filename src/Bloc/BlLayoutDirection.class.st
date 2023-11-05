@@ -6,8 +6,8 @@ I do not have any logic and can only used as direction flag. Layouts that have d
 
 "
 Class {
-	#name : #BlLayoutDirection,
-	#superclass : #Object,
+	#name : 'BlLayoutDirection',
+	#superclass : 'Object',
 	#classVars : [
 		'leftToRight',
 		'rightToLeft'
@@ -15,7 +15,7 @@ Class {
 	#category : 'Bloc-Layouts-Support'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlLayoutDirection class >> initialize [
 	super initialize.
 	
@@ -23,43 +23,43 @@ BlLayoutDirection class >> initialize [
 	rightToLeft := BlLayoutRightToLeft new
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlLayoutDirection class >> leftToRight [
 	^ leftToRight
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlLayoutDirection class >> rightToLeft [
 	^ rightToLeft
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutDirection >> inverted [
 
 	^ self subclassResponsibility 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLayoutDirection >> isLeftToRight [
 	^ self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLayoutDirection >> isRightToLeft [
 	^ self subclassResponsibility
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlLayoutDirection >> of: anObject [
 	^ self subclassResponsibility
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlLayoutDirection >> with: aCollection do: aBlock [
 	^ self subclassResponsibility
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlLayoutDirection >> with: aCollection inject: thisValue into: binaryBlock [
 	^ self subclassResponsibility
 ]

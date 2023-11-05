@@ -13,27 +13,27 @@ element border: (BlBorder paint: Color blue width: 20)
 
 "
 Class {
-	#name : #BlElementBorderChangedEvent,
-	#superclass : #BlElementEvent,
+	#name : 'BlElementBorderChangedEvent',
+	#superclass : 'BlElementEvent',
 	#category : 'Bloc-Events-Type-Element'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementBorderChangedEvent class >> disableIn: anObject [
 	anObject disableBorderChanged
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementBorderChangedEvent class >> enableIn: anObject [
 	anObject enableBorderChanged
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementBorderChangedEvent class >> wantedIn: anObject [
 	^ anObject wantsBorderChanged
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlElementBorderChangedEvent >> sendTo: anObject [
 
 	anObject elementBorderChangedEvent: self

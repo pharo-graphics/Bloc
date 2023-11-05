@@ -9,17 +9,17 @@ The order of fired events:
 
 "
 Class {
-	#name : #BlClickEvent,
-	#superclass : #BlMouseEvent,
+	#name : 'BlClickEvent',
+	#superclass : 'BlMouseEvent',
 	#category : 'Bloc-Events'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlClickEvent >> isClick [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlClickEvent >> sendTo: anObject [
 	anObject clickEvent: self
 ]

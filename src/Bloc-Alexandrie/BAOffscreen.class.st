@@ -13,9 +13,7 @@ Class {
 	#classInstVars : [
 		'instance'
 	],
-	#category : 'Bloc-Alexandrie-Utility',
-	#package : 'Bloc-Alexandrie',
-	#tag : 'Utility'
+	#category : 'Bloc-Alexandrie-Utility'
 }
 
 { #category : 'accessing' }

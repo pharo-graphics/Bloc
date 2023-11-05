@@ -4,15 +4,15 @@ My recommended maximum length (size) is defined in BrRope class>>#combineLength
 
 "
 Class {
-	#name : #BlCollectionRope,
-	#superclass : #BlRope,
+	#name : 'BlCollectionRope',
+	#superclass : 'BlRope',
 	#instVars : [
 		'collection'
 	],
 	#category : 'Bloc-DataStructure - Rope'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlCollectionRope class >> collection: aCollection [
 
 	^ self new
@@ -20,7 +20,7 @@ BlCollectionRope class >> collection: aCollection [
 		  yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlCollectionRope class >> from: leftCollectionRope and: rightCollectionRope [
 
 	| aNewSpecies |
@@ -34,7 +34,7 @@ BlCollectionRope class >> from: leftCollectionRope and: rightCollectionRope [
 		rightCollectionRope do: [ :eachItem | aStream nextPut: eachItem ] ])
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : 'rope - accessing' }
 BlCollectionRope >> at: anIndex [
 	"Return an item at a given index"
 	<return: #Object>
@@ -42,7 +42,7 @@ BlCollectionRope >> at: anIndex [
 	^ collection at: anIndex
 ]
 
-{ #category : #'rope - attributes' }
+{ #category : 'rope - attributes' }
 BlCollectionRope >> attributes: anAttributesCollection from: aStart to: anEnd [
 	"See BlRope>>#attributes:from:to: for the detailed explanation on start and end indices"
 	<return: #BlRope>
@@ -70,19 +70,19 @@ BlCollectionRope >> attributes: anAttributesCollection from: aStart to: anEnd [
 	^  (self from: 0 to: aStart) append: (anAttributeRope append: (self from: anEnd to: self size))
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : 'rope - accessing' }
 BlCollectionRope >> children [
 	<return: #Collection of: #BlRope>
 
 	^ { }
 ]
 
-{ #category : #'rope - attributes' }
+{ #category : 'rope - attributes' }
 BlCollectionRope >> clearAttributes: aStart to: anEnd if: aBlock [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCollectionRope >> collection [
 	"Return a collection behind this rope"
 	<return: #SequenceableCollection of: #Object>
@@ -90,12 +90,12 @@ BlCollectionRope >> collection [
 	^ collection
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlCollectionRope >> collection: aCollection [
 	collection := aCollection
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlCollectionRope >> copyFrom: aStart to: anEnd [
 	self assertAccessFrom: aStart to: anEnd.
 
@@ -106,7 +106,7 @@ BlCollectionRope >> copyFrom: aStart to: anEnd [
 	^ self class collection: (collection copyFrom: aStart + 1 to: anEnd)
 ]
 
-{ #category : #'rope - deleting' }
+{ #category : 'rope - deleting' }
 BlCollectionRope >> delete: aStart to: anEnd [
 	<return: #BlRope>
 	| newCollection |
@@ -146,7 +146,7 @@ BlCollectionRope >> delete: aStart to: anEnd [
 	^ self class collection: newCollection
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : 'rope - accessing' }
 BlCollectionRope >> depth [
 	"Return the max tree height of this rope (composition depth).
 	Collection rope is a leaf in a composition tree => depth is always 1"
@@ -155,12 +155,12 @@ BlCollectionRope >> depth [
 	^ 1
 ]
 
-{ #category : #'rope - enumeration' }
+{ #category : 'rope - enumeration' }
 BlCollectionRope >> do: aBlock [
 	collection do: aBlock
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : 'rope - accessing' }
 BlCollectionRope >> empty [
 	"Return an empty collection rope"
 	<return: #BlRope>
@@ -168,7 +168,7 @@ BlCollectionRope >> empty [
 	^ self class collection: (collection species new: 0)
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : 'rope - accessing' }
 BlCollectionRope >> from: aStart to: anEnd [
 	| aNewLegnth |
 	self assertAccessFrom: aStart to: anEnd.
@@ -184,7 +184,7 @@ BlCollectionRope >> from: aStart to: anEnd [
 		ifFalse: [ self class subRope rope: self offset: aStart length: aNewLegnth ]
 ]
 
-{ #category : #'rope - enumeration' }
+{ #category : 'rope - enumeration' }
 BlCollectionRope >> from: aStart to: anEnd do: aBlock [
 
 	aStart + 1
@@ -193,7 +193,7 @@ BlCollectionRope >> from: aStart to: anEnd do: aBlock [
 		do: [ :anIndex | aBlock value: (collection at: anIndex) ]
 ]
 
-{ #category : #'rope - inserting' }
+{ #category : 'rope - inserting' }
 BlCollectionRope >> insertItems: aCollection at: anIndex [
 	| anInsertionRope |
 
@@ -217,7 +217,7 @@ BlCollectionRope >> insertItems: aCollection at: anIndex [
 	^ (self from: 0 to: anIndex) append: (anInsertionRope append: (self from: anIndex to: self size))
 ]
 
-{ #category : #'rope - testing' }
+{ #category : 'rope - testing' }
 BlCollectionRope >> isLeaf [
 	"Collection rope can not contain other ropes (even if my collection consists of ropes,
 	we don't count them and don't take into account such case)"
@@ -226,12 +226,12 @@ BlCollectionRope >> isLeaf [
 	^ true
 ]
 
-{ #category : #'rope - enumeration' }
+{ #category : 'rope - enumeration' }
 BlCollectionRope >> iterator: aStart to: anEnd [
 	^ BlCollectionRopeIterator rope: self from: aStart to: anEnd
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlCollectionRope >> merge: aCollection at: anIndex [
 	| newCollection |
 	newCollection := anIndex = 0
@@ -261,7 +261,7 @@ BlCollectionRope >> merge: aCollection at: anIndex [
 	^ self class collectionRope collection: newCollection
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlCollectionRope >> mergeSplit: aCollection at: anIndex [
 	| leftArray rightArray middle totalSize leftAmountBeforeIndex leftAmountFromCollection leftAmountAfterIndex rightAmountBeforeIndex alreadyFilledAmount alreadyFilledAmountFromCollection rightAmountFromCollection rightAmountAfterIndex |
 	
@@ -334,21 +334,21 @@ BlCollectionRope >> mergeSplit: aCollection at: anIndex [
 		and: (self class collectionRope collection: rightArray)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCollectionRope >> readStream [ 
 	"Answer a read stream that iterates over the characters in the receiver's collection"
 
 	^ collection readStream
 ]
 
-{ #category : #'rope - replacing' }
+{ #category : 'rope - replacing' }
 BlCollectionRope >> simplified [
 	<return: #BlRope>
 	
 	^ self
 ]
 
-{ #category : #'rope - accessing' }
+{ #category : 'rope - accessing' }
 BlCollectionRope >> size [
 	"Return the amount of items in this rope, which is equal to the size of an underlying collection"
 	<return: #Number>

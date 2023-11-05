@@ -3,17 +3,17 @@ I define a geometry of a straight line
 
 "
 Class {
-	#name : #BlLine,
-	#superclass : #BlLineGeometry,
+	#name : 'BlLine',
+	#superclass : 'BlLineGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLine class >> isDeprecated [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLine >> intersectionWith: anotherSegment [
 	"Copied from LineSegment>>intersectionWith:"
 	| det deltaPt alpha beta pt1Dir pt2Dir |

@@ -5,8 +5,8 @@ See the {{gtMethod:name=BlRepeatedTask>>#run}} method.
 
 "
 Class {
-	#name : #BlRepeatedTask,
-	#superclass : #BlTask,
+	#name : 'BlRepeatedTask',
+	#superclass : 'BlTask',
 	#instVars : [
 		'delay',
 		'element',
@@ -17,19 +17,19 @@ Class {
 	#category : 'Bloc-Space - Tasks'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRepeatedTask >> delay [
 	<return: #Duration>
 
 	^ delay
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRepeatedTask >> delay: aDuration [
 	delay := aDuration
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRepeatedTask >> dequeue [
 
 	self
@@ -39,19 +39,19 @@ BlRepeatedTask >> dequeue [
 	self element dequeueTask: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRepeatedTask >> element [
 	<return: #BlElement>
 
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRepeatedTask >> element: aBlElement [
 	element := aBlElement
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRepeatedTask >> enqueue [
 
 	self
@@ -61,7 +61,7 @@ BlRepeatedTask >> enqueue [
 	self element enqueueTask: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlRepeatedTask >> initialize [
 	super initialize.
 	
@@ -70,31 +70,31 @@ BlRepeatedTask >> initialize [
 	isRunning := true
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlRepeatedTask >> isRunning [
 	<return: #Boolean>
 
 	^ isRunning
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlRepeatedTask >> onEnqueued: aBlSpace [
 	super onEnqueued: aBlSpace.
 	
 	self time: aBlSpace time
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlRepeatedTask >> onEnqueuedInElement: aBlElement [
 	self element: aBlElement
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlRepeatedTask >> onRun [
 	"Override me to implement a custom action"
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlRepeatedTask >> run [
 	"Enhancement: a repeated task should re-enqueue itself with 
 	its element when that element is removed from the scene graph. 
@@ -109,19 +109,19 @@ BlRepeatedTask >> run [
 		at: self time now + self delay
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlRepeatedTask >> stop [
 	isRunning := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRepeatedTask >> time [
 	<return: #BlTime>
 
 	^ time
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRepeatedTask >> time: aBlTime [
 	time := aBlTime
 ]

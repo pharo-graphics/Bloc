@@ -1,10 +1,10 @@
 Class {
-	#name : #BlCompositingSeparateLayerMode,
-	#superclass : #BlCompositingWithLayerMode,
+	#name : 'BlCompositingSeparateLayerMode',
+	#superclass : 'BlCompositingWithLayerMode',
 	#category : 'Bloc-Basic-Support'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlCompositingSeparateLayerMode >> wantsBufferedLayer [
 	^ false
 ]

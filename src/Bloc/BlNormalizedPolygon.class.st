@@ -1,10 +1,10 @@
 Class {
-	#name : #BlNormalizedPolygon,
-	#superclass : #BlNormalizedPolygonGeometry,
+	#name : 'BlNormalizedPolygon',
+	#superclass : 'BlNormalizedPolygonGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlNormalizedPolygon class >> isDeprecated [
 	^ true
 ]

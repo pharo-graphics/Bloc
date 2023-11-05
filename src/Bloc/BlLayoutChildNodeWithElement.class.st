@@ -4,8 +4,8 @@ Is used to keep track of the child node and its associated element
 
 "
 Class {
-	#name : #BlLayoutChildNodeWithElement,
-	#superclass : #BlLayoutNode,
+	#name : 'BlLayoutChildNodeWithElement',
+	#superclass : 'BlLayoutNode',
 	#traits : 'TBlLayoutNode + TBlLayoutChildNode',
 	#classTraits : 'TBlLayoutNode classTrait + TBlLayoutChildNode classTrait',
 	#instVars : [
@@ -15,37 +15,37 @@ Class {
 	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNodeWithElement >> childNode: aBlLayoutChildNode [
 	childNode := aBlLayoutChildNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNodeWithElement >> children [
 	^ { childNode }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNodeWithElement >> constraints [
 	^ childNode constraints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNodeWithElement >> constraints: aBlLayoutConstraints [
 	childNode constraints: aBlLayoutConstraints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNodeWithElement >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNodeWithElement >> element: anObject [
 	element := anObject
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutChildNodeWithElement >> extent [
 	"Return the size of the node in the parent coordinate system"
 	<return: #Point>
@@ -53,43 +53,43 @@ BlLayoutChildNodeWithElement >> extent [
 	^ childNode extent
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutChildNodeWithElement >> layoutBounds [
 	<return: #BlBounds>
 
 	^ childNode layoutBounds
 ]
 
-{ #category : #'api - measure' }
+{ #category : 'api - measure' }
 BlLayoutChildNodeWithElement >> measure: anExtentSpecOrBlock [
 	childNode measure: anExtentSpecOrBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNodeWithElement >> measurement: aBlLayoutNodeMeasurement [
 	childNode measurement: aBlLayoutNodeMeasurement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNodeWithElement >> parent [
 	<return: #BlLayoutParentNode>
 
 	^ childNode parent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNodeWithElement >> parent: aBlLayoutParentNode [
 	childNode parent: aBlLayoutParentNode
 ]
 
-{ #category : #'api - actions' }
+{ #category : 'api - actions' }
 BlLayoutChildNodeWithElement >> popAction [
 	<return: #BlLayoutNodeElementAction or: #nil>
 
 	^ childNode popAction
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutChildNodeWithElement >> position [
 	"Return a position of the top left corner in the parent coordinate system"
 	<return: #Point>
@@ -97,7 +97,7 @@ BlLayoutChildNodeWithElement >> position [
 	^ childNode position
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutChildNodeWithElement >> position: aPoint [
 	"Set position of the top left corner in the parent coordinate system"
 	<return: #Point>
@@ -105,7 +105,7 @@ BlLayoutChildNodeWithElement >> position: aPoint [
 	childNode position: aPoint
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlLayoutChildNodeWithElement >> printOn: aStream [
 	aStream
 		nextPutAll: 'Element position: ';
@@ -114,55 +114,55 @@ BlLayoutChildNodeWithElement >> printOn: aStream [
 		print: self element measuredBounds extent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNodeWithElement >> privateMeasurement [
 	<return: #BlLayoutNodeMeasurement>
 	
 	^ childNode privateMeasurement
 ]
 
-{ #category : #'api - actions' }
+{ #category : 'api - actions' }
 BlLayoutChildNodeWithElement >> pushAction: aBlLayoutNodeElementAction [
 	childNode pushAction: aBlLayoutNodeElementAction
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNodeWithElement >> transformationDo: aBlock [
 	childNode transformationDo: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutChildNodeWithElement >> userData [
 	<return: #Dictionary>
 	
 	^ childNode userData
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlLayoutChildNodeWithElement >> withEdges: aCollectionOfLayoutEdges [
 	^ BlLayoutChildNodeWithEdges new
 		childNode: self;
 		connectedEdges: aCollectionOfLayoutEdges
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlLayoutChildNodeWithElement >> withElement: aBlElement [
 	^ self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlLayoutChildNodeWithElement >> withTransformation: aBlElementTransformation [
 	^ self class new
 		childNode: (childNode withTransformation: aBlElementTransformation);
 		element: element
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlLayoutChildNodeWithElement >> withoutElement [
 	^ childNode
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlLayoutChildNodeWithElement >> withoutTransformation [
 	^ self class new
 		childNode: childNode withoutTransformation;

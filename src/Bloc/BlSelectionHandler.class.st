@@ -5,8 +5,8 @@ May be used to implement text selection or desktop like selection behaviour
 
 "
 Class {
-	#name : #BlSelectionHandler,
-	#superclass : #BlCustomEventHandler,
+	#name : 'BlSelectionHandler',
+	#superclass : 'BlCustomEventHandler',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -19,12 +19,12 @@ Class {
 	#category : 'Bloc-Utilities - Selection'
 }
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlSelectionHandler >> computeSelectionArea [
 	area origin: (origin min: corner) corner: (corner max: origin)
 ]
 
-{ #category : #'dnd handlers' }
+{ #category : 'dnd handlers' }
 BlSelectionHandler >> dragEndEvent: anEvent [	
 	anEvent consumed: true.
 		
@@ -33,7 +33,7 @@ BlSelectionHandler >> dragEndEvent: anEvent [
 	area left: 0 top: 0 right: 0 bottom: 0
 ]
 
-{ #category : #'dnd handlers' }
+{ #category : 'dnd handlers' }
 BlSelectionHandler >> dragEvent: anEvent [	
 	"For selection we want to handle only those drag events that began exactly
 	on the elemen I attached to"
@@ -49,14 +49,14 @@ BlSelectionHandler >> dragEvent: anEvent [
 	self selectionChanged
 ]
 
-{ #category : #'dnd handlers' }
+{ #category : 'dnd handlers' }
 BlSelectionHandler >> dragStartEvent: anEvent [
 	anEvent consumed: true.
 
 	origin := anEvent position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSelectionHandler >> eventsToHandle [
 	^ {
 		BlDragEvent.
@@ -65,12 +65,12 @@ BlSelectionHandler >> eventsToHandle [
 	}
 ]
 
-{ #category : #'selection - handling' }
+{ #category : 'selection - handling' }
 BlSelectionHandler >> handleDeselected: anElement [
 	anElement eventDispatcher dispatchSelectionLost
 ]
 
-{ #category : #'selection - handling' }
+{ #category : 'selection - handling' }
 BlSelectionHandler >> handleSelected: anElement in: anIntersection [
 	"we should make sure that we don't destroy existing BlBounds by performing destructive operation"
 	self
@@ -80,7 +80,7 @@ BlSelectionHandler >> handleSelected: anElement in: anIntersection [
 	^ anElement eventDispatcher dispatchSelectionAcquired: anIntersection encompass
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSelectionHandler >> hasOrigin [
 	"Return true if I know selection origin position, false otherwise"
 	<return: #Boolean>
@@ -88,7 +88,7 @@ BlSelectionHandler >> hasOrigin [
 	^ origin isNotNil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSelectionHandler >> initialize [
 	super initialize.
 	
@@ -96,7 +96,7 @@ BlSelectionHandler >> initialize [
 	selected := IdentityDictionary new
 ]
 
-{ #category : #selection }
+{ #category : 'selection' }
 BlSelectionHandler >> intersect: aChildElement in: aSelectionBounds ifNone: aNoneBlock [
 	"Return selection intersection bounds of a given element and provided
 	selection bounds in local child cordinates if intersection exists
@@ -110,14 +110,14 @@ BlSelectionHandler >> intersect: aChildElement in: aSelectionBounds ifNone: aNon
 		ifNone: aNoneBlock
 ]
 
-{ #category : #installation }
+{ #category : 'installation' }
 BlSelectionHandler >> onInstalledIn: anElement [
 	super onInstalledIn: anElement.
 	
 	container := anElement
 ]
 
-{ #category : #selection }
+{ #category : 'selection' }
 BlSelectionHandler >> selectedChildren: anElement in: aBlBounds do: aBlock [
 	"Evaluate a block with all children of an element that intersect with provided bounds.
 	aBlBounds is given in local coordinates of anElement"	
@@ -135,7 +135,7 @@ BlSelectionHandler >> selectedChildren: anElement in: aBlBounds do: aBlock [
 			do: aBlock ]
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlSelectionHandler >> selectionArea [
 	"Return bounds representing a selection area in global coordinates"
 	<return: #BlBounds>
@@ -146,7 +146,7 @@ BlSelectionHandler >> selectionArea [
 	^ area
 ]
 
-{ #category : #'selection - handling' }
+{ #category : 'selection - handling' }
 BlSelectionHandler >> selectionChanged [
 	"Is sent when #selectionArea changed"
 	| oldSelected |
@@ -184,7 +184,7 @@ BlSelectionHandler >> selectionChanged [
 	oldSelected keysDo: [ :anElement | self handleDeselected: anElement ]
 ]
 
-{ #category : #selection }
+{ #category : 'selection' }
 BlSelectionHandler >> shouldSelect: aChildElement in: aSelectionBounds [
 	"Return true if a child element should be selected taking into account
 	provided selection area bounds given int local coordinates of a child element"

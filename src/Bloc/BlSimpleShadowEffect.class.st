@@ -3,12 +3,12 @@ I am very simple shadow effect. I just render a plain flat colored geometry of a
 
 "
 Class {
-	#name : #BlSimpleShadowEffect,
-	#superclass : #BlShadowEffect,
+	#name : 'BlSimpleShadowEffect',
+	#superclass : 'BlShadowEffect',
 	#category : 'Bloc-Effect'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSimpleShadowEffect class >> color: aColor offset: anOffset [
 
 	^ self basicNew
@@ -16,7 +16,7 @@ BlSimpleShadowEffect class >> color: aColor offset: anOffset [
 		  yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSimpleShadowEffect class >> default [
 
 	self
@@ -26,13 +26,13 @@ BlSimpleShadowEffect class >> default [
 	^ self color: (Color black alpha: 0.3) offset: 10 @ 10
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSimpleShadowEffect class >> new [
 
 	^ self color: Color black offset: 0@0
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlSimpleShadowEffect >> copyWithColor: aColor [
 
 	^ self class
@@ -40,7 +40,7 @@ BlSimpleShadowEffect >> copyWithColor: aColor [
 		offset: offset
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlSimpleShadowEffect >> copyWithOffset: aPoint [
 
 	^ self class
@@ -48,7 +48,7 @@ BlSimpleShadowEffect >> copyWithOffset: aPoint [
 		offset: aPoint
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlSimpleShadowEffect >> extraShadowSpace [
 	"Compute extra space that should be freed for shadow around element.
 	Since I am not a gaussian shadow, the extra shadow space should be equal to the shadow width"
@@ -56,7 +56,7 @@ BlSimpleShadowEffect >> extraShadowSpace [
 	^ 0
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSimpleShadowEffect >> initializeColor: aColor offset: aPoint [
 
 	self initialize.

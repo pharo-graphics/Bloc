@@ -8,8 +8,8 @@ Note: Elevation is not influenced by transformation matrix!
 
 "
 Class {
-	#name : #BlElevation,
-	#superclass : #Object,
+	#name : 'BlElevation',
+	#superclass : 'Object',
 	#instVars : [
 		'elevation'
 	],
@@ -19,7 +19,7 @@ Class {
 	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlElevation class >> cleanUp [
 
 	super cleanUp.
@@ -27,7 +27,7 @@ BlElevation class >> cleanUp [
 	zero := nil
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlElevation class >> elevation: aNumber [
 
 	^ self basicNew
@@ -35,32 +35,32 @@ BlElevation class >> elevation: aNumber [
 		  yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElevation class >> isAbstract [
 
 	^ self == BlElevation
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlElevation class >> zero [
 
 	^ zero ifNil: [ zero := self elevation: 0 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElevation >> elevation [
 
 	^ elevation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElevation >> initializeWith: aNumber [
 
 	self initialize.
 	elevation := aNumber
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlElevation >> printOn: aStream [
 
 	super printOn: aStream.
@@ -71,7 +71,7 @@ BlElevation >> printOn: aStream [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElevation >> relatedTo: aNumber [
 	"Return a Number that represents the elevation related to the received value."
 	

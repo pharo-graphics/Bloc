@@ -1,10 +1,10 @@
 Class {
-	#name : #BlMultiPolyline,
-	#superclass : #BlMultiPolylineGeometry,
+	#name : 'BlMultiPolyline',
+	#superclass : 'BlMultiPolylineGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMultiPolyline class >> isDeprecated [
 	^ true
 ]

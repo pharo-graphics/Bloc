@@ -1,10 +1,10 @@
 Class {
-	#name : #BlBezierCurve,
-	#superclass : #BlBezierCurveGeometry,
+	#name : 'BlBezierCurve',
+	#superclass : 'BlBezierCurveGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBezierCurve class >> isDeprecated [
 	^ true
 ]

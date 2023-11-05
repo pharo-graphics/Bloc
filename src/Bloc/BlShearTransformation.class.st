@@ -1,59 +1,59 @@
 Class {
-	#name : #BlShearTransformation,
-	#superclass : #BlAffineTransformation,
+	#name : 'BlShearTransformation',
+	#superclass : 'BlAffineTransformation',
 	#instVars : [
 		'coefficient'
 	],
 	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlShearTransformation >> angleX: anAngleInDegrees [
 
 	self coefficient:
 		anAngleInDegrees degreesToRadians tan negated @ self coefficient y
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlShearTransformation >> angleY: anAngleInDegrees [
 
 	self coefficient:
 		self coefficient x @ anAngleInDegrees degreesToRadians tan negated
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlShearTransformation >> coefficient [
 
 	^ coefficient
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlShearTransformation >> coefficient: aPoint [
 
 	coefficient := aPoint
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlShearTransformation >> initialize [
 	super initialize.
 	
 	coefficient := 0.0@0.0
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlShearTransformation >> is2D [
 	"Return true if transformation happens in x-y plane, hence 2D"
 	
 	^ true
 ]
 
-{ #category : #'mathematical functions' }
+{ #category : 'mathematical functions' }
 BlShearTransformation >> multiplyOn: aBlMatrix [
 
 	aBlMatrix multiplyBy: (BlMatrix2D shear: coefficient)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlShearTransformation >> printOn: aStream [
 
 	aStream

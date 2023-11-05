@@ -1,10 +1,10 @@
 Class {
-	#name : #BlHandCursor,
-	#superclass : #BlNamedCursor,
+	#name : 'BlHandCursor',
+	#superclass : 'BlNamedCursor',
 	#category : 'Bloc-Space - Cursor'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlHandCursor >> asForm [
 	^ Cursor webLink
 ]

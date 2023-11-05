@@ -4,9 +4,7 @@ Class {
 	#instVars : [
 		'measurer'
 	],
-	#category : 'Bloc-Alexandrie-Text-Mocked',
-	#package : 'Bloc-Alexandrie',
-	#tag : 'Text-Mocked'
+	#category : 'Bloc-Alexandrie-Text-Mocked'
 }
 
 { #category : 'font - metrics' }

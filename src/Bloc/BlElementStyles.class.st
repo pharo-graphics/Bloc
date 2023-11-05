@@ -17,8 +17,8 @@ See the class comment of `BlStyles` to learn the details of how styles are remov
 
 "
 Class {
-	#name : #BlElementStyles,
-	#superclass : #BlStyles,
+	#name : 'BlElementStyles',
+	#superclass : 'BlStyles',
 	#instVars : [
 		'previousAppliedStyles',
 		'isDirty',
@@ -27,7 +27,7 @@ Class {
 	#category : 'Bloc-Basic-Style'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BlElementStyles >> applyStylesForStates: aCollectionOfStates [
 	| theNewAppliedStyles  |
 	
@@ -43,7 +43,7 @@ BlElementStyles >> applyStylesForStates: aCollectionOfStates [
 	isDirty := false
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlElementStyles >> asForwarded: aTargetObject [
 
 	^ BlForwardedElementStyles new
@@ -54,7 +54,7 @@ BlElementStyles >> asForwarded: aTargetObject [
 		  element: element
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BlElementStyles >> basicAddStyle: aStyle [
 
 	super basicAddStyle: aStyle.
@@ -66,7 +66,7 @@ BlElementStyles >> basicAddStyle: aStyle [
 	element requestStyle
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BlElementStyles >> basicRemovePropertiesOf: aStyleToRemove fromStyle: anExistingStyle [
 
 	| thePropertiesBefore |
@@ -89,7 +89,7 @@ BlElementStyles >> basicRemovePropertiesOf: aStyleToRemove fromStyle: anExisting
 	self element properties removeProperties: aStyleToRemove properties
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BlElementStyles >> basicRemoveStyle: aStyle [
 
 	super basicRemoveStyle: aStyle.
@@ -101,25 +101,25 @@ BlElementStyles >> basicRemoveStyle: aStyle [
 	element requestStyle
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementStyles >> createStylesCollection [
 
 	^ SortedCollection sortUsing: #priority ascending
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStyles >> element [
 
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStyles >> element: aBlElement [
 
 	element := aBlElement
 ]
 
-{ #category : #'api - styles' }
+{ #category : 'api - styles' }
 BlElementStyles >> for: aTargetObject [
 
 	^ BlForwardedElementStyles new
@@ -128,7 +128,7 @@ BlElementStyles >> for: aTargetObject [
 		  targetObject: aTargetObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementStyles >> initialize [
 
 	super initialize.
@@ -137,13 +137,13 @@ BlElementStyles >> initialize [
 	previousAppliedStyles := Set new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStyles >> markDirty [
 
 	isDirty := true
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlElementStyles >> matchingProperties [
 	"An utility debug method to get all currently matching properties"
 
@@ -151,14 +151,14 @@ BlElementStyles >> matchingProperties [
 		  flatCollect: [ :eachStyle | eachStyle properties ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlElementStyles >> matchingStyles [
 	"An utility debug method to get all currently matching styles"
 
 	^ self matchingStyles: element states allStates
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementStyles >> needsStyle [
 
 	^ isDirty

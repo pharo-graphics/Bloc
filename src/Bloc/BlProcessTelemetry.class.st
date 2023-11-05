@@ -1,6 +1,6 @@
 Class {
-	#name : #BlProcessTelemetry,
-	#superclass : #ProcessLocalVariable,
+	#name : 'BlProcessTelemetry',
+	#superclass : 'ProcessLocalVariable',
 	#traits : 'TBlTelemetry',
 	#classTraits : 'TBlTelemetry classTrait',
 	#classInstVars : [
@@ -9,12 +9,12 @@ Class {
 	#category : 'Bloc-Space - Telemetry'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlProcessTelemetry class >> defaultTelemetryClass [
 	^ DefaultTelemetryClass ifNil: [ BlNullTelemetry ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlProcessTelemetry class >> defaultTelemetryClass: aClass [
 	DefaultTelemetryClass := aClass.
 	
@@ -25,17 +25,17 @@ BlProcessTelemetry class >> defaultTelemetryClass: aClass [
 				put: nil ] ]
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 BlProcessTelemetry class >> emit [
 	^ self soleInstance emit
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 BlProcessTelemetry class >> reset [
 	^ self soleInstance reset
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 BlProcessTelemetry class >> rootTimeSync: aNameBlock during: aBlock [
 	| aTelemetry aResult |
 	"we store the telemetry on a stack to prevent it from being garbage collected"
@@ -50,17 +50,17 @@ BlProcessTelemetry class >> rootTimeSync: aNameBlock during: aBlock [
 	^ aResult
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 BlProcessTelemetry class >> timeSync: aNameBlock during: aBlock [
 	^ self soleInstance timeSync: aNameBlock during: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlProcessTelemetry >> default [
 	^ self class defaultTelemetryClass new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlProcessTelemetry >> ensureValue [
 	^ self valueOrNil
 		ifNil: [
@@ -71,22 +71,22 @@ BlProcessTelemetry >> ensureValue [
 			aNewTelemetry ]
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 BlProcessTelemetry >> finishSync [
 	self value finishSync
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 BlProcessTelemetry >> reset [	
 	self value reset
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 BlProcessTelemetry >> startSync: aNameBlock [
 	self value startSync: aNameBlock
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 BlProcessTelemetry >> tasks [
 	^ self value tasks
 ]

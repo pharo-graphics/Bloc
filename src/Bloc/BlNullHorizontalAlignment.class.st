@@ -1,6 +1,6 @@
 Class {
-	#name : #BlNullHorizontalAlignment,
-	#superclass : #BlNullAlignment,
+	#name : 'BlNullHorizontalAlignment',
+	#superclass : 'BlNullAlignment',
 	#classInstVars : [
 		'rightToLeft',
 		'leftToRight'
@@ -8,12 +8,12 @@ Class {
 	#category : 'Bloc-Layouts-Alignment'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlNullHorizontalAlignment class >> directed: aBlLayoutDirection [
 	^ aBlLayoutDirection of: self
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlNullHorizontalAlignment class >> initialize [
 	super initialize.
 	
@@ -21,37 +21,37 @@ BlNullHorizontalAlignment class >> initialize [
 	leftToRight := BlNullLeftAlignment new
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlNullHorizontalAlignment class >> leftToRight [
 	^ leftToRight
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlNullHorizontalAlignment class >> rightToLeft [
 	^ rightToLeft
 ]
 
-{ #category : #composition }
+{ #category : 'composition' }
 BlNullHorizontalAlignment >> + aVerticalAlignment [
 	^ BlCompositeAlignment horizontal: self vertical: aVerticalAlignment
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlNullHorizontalAlignment >> directed: aBlLayoutDirection [
 	^ self class directed: aBlLayoutDirection
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlNullHorizontalAlignment >> leftToRight [
 	^ self class leftToRight
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlNullHorizontalAlignment >> rightToLeft [
 	^ self class rightToLeft
 ]
 
-{ #category : #translation }
+{ #category : 'translation' }
 BlNullHorizontalAlignment >> translationOf: aBounds in: aContainerBounds [
 	^ 0 @ 0
 ]

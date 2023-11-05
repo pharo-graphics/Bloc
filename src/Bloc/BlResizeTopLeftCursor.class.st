@@ -1,10 +1,10 @@
 Class {
-	#name : #BlResizeTopLeftCursor,
-	#superclass : #BlNamedCursor,
+	#name : 'BlResizeTopLeftCursor',
+	#superclass : 'BlNamedCursor',
 	#category : 'Bloc-Space - Cursor'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlResizeTopLeftCursor >> asForm [
 	^ Cursor resizeTopLeft
 ]

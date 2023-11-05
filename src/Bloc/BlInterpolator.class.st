@@ -11,8 +11,8 @@ Example
 
 "
 Class {
-	#name : #BlInterpolator,
-	#superclass : #Object,
+	#name : 'BlInterpolator',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#classInstVars : [
@@ -21,20 +21,20 @@ Class {
 	#category : 'Bloc-Basic-Interpolators'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlInterpolator class >> cleanUp [
 	super cleanUp.
 	
 	default := nil
 ]
 
-{ #category : #'unique instance' }
+{ #category : 'unique instance' }
 BlInterpolator class >> default [
 	"I return a unique instance of an interpolator with default configuration"
 	^ default ifNil: [ default := self new ]
 ]
 
-{ #category : #interpolation }
+{ #category : 'interpolation' }
 BlInterpolator >> interpolate: aNumber [
 	^ self subclassResponsibility
 ]

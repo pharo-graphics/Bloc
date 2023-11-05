@@ -1,20 +1,20 @@
 Class {
-	#name : #BlSpaceFrameEventPhase,
-	#superclass : #BlSpaceFramePhase,
+	#name : 'BlSpaceFrameEventPhase',
+	#superclass : 'BlSpaceFramePhase',
 	#category : 'Bloc-Space - Frame'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceFrameEventPhase >> isEventPhase [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrameEventPhase >> name [
 	^ 'Event processing'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlSpaceFrameEventPhase >> runOn: aSpace [
 
 	aSpace

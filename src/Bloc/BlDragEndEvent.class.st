@@ -1,10 +1,10 @@
 Class {
-	#name : #BlDragEndEvent,
-	#superclass : #BlBaseDragEvent,
+	#name : 'BlDragEndEvent',
+	#superclass : 'BlBaseDragEvent',
 	#category : 'Bloc-Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlDragEndEvent >> sendTo: anObject [
 	anObject dragEndEvent: self
 ]

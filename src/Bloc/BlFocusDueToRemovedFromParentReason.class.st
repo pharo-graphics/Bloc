@@ -1,5 +1,5 @@
 Class {
-	#name : #BlFocusDueToRemovedFromParentReason,
-	#superclass : #BlFocusReason,
+	#name : 'BlFocusDueToRemovedFromParentReason',
+	#superclass : 'BlFocusReason',
 	#category : 'Bloc-Space - Support'
 }

@@ -1,10 +1,10 @@
 Class {
-	#name : #BlRectangleGeometry,
-	#superclass : #BlElementGeometry,
+	#name : 'BlRectangleGeometry',
+	#superclass : 'BlElementGeometry',
 	#category : 'Bloc-Basic-Geometry'
 }
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlRectangleGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Note: we have to pass BlElement in order to give geometry a chance to use element properties
 	as as border during the testing process"
@@ -16,7 +16,7 @@ BlRectangleGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlEleme
 		and: [ aPoint y < aBlElement height ]
 ]
 
-{ #category : #'api - bounds' }
+{ #category : 'api - bounds' }
 BlRectangleGeometry >> geometryBounds: aBlBounds of: aBlElement [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
@@ -29,39 +29,39 @@ BlRectangleGeometry >> geometryBounds: aBlBounds of: aBlElement [
 		bottom: aBlElement height
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlRectangleGeometry >> hasCaps [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlRectangleGeometry >> hasJoins [
 
 	^ true
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlRectangleGeometry >> matchElement: anElement [
 	"Adapt me to match the size of a given element"
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 BlRectangleGeometry >> releaseCache [
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 BlRectangleGeometry >> releaseStrokedBoundsCache [
 ]
 
-{ #category : #'visual bounds' }
+{ #category : 'visual bounds' }
 BlRectangleGeometry >> strokedBounds: aBlBounds of: anElement [
 	"Return stroked bounds of a geometry if it would be stroked according to element's outskirts."
 
 	^ anElement outskirts strokedBounds: aBlBounds of: anElement
 ]
 
-{ #category : #'visual bounds' }
+{ #category : 'visual bounds' }
 BlRectangleGeometry >> strokedBoundsCentered: aBlBounds of: aBlElement [
 
 	| aHalfWidth |
@@ -74,7 +74,7 @@ BlRectangleGeometry >> strokedBoundsCentered: aBlBounds of: aBlElement [
 		bottom: aBlElement height + aHalfWidth
 ]
 
-{ #category : #'visual bounds' }
+{ #category : 'visual bounds' }
 BlRectangleGeometry >> strokedBoundsInside: aBlBounds of: aBlElement [
 	"Stroked inside bounds property is equal to geometry bounds"
 
@@ -85,7 +85,7 @@ BlRectangleGeometry >> strokedBoundsInside: aBlBounds of: aBlElement [
 		bottom: aBlElement height
 ]
 
-{ #category : #'visual bounds' }
+{ #category : 'visual bounds' }
 BlRectangleGeometry >> strokedBoundsOutside: aBlBounds of: aBlElement [
 
 	| aBorderWidth |

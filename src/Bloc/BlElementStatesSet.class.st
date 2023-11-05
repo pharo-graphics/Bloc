@@ -1,17 +1,17 @@
 Class {
-	#name : #BlElementStatesSet,
-	#superclass : #PluggableSet,
+	#name : 'BlElementStatesSet',
+	#superclass : 'PluggableSet',
 	#category : 'Bloc-Basic-State'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementStatesSet >> hasState: aState [
 	^ (self
 		like: aState
 		ifAbsent: [ ^ false ]) = aState
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementStatesSet >> initialize: n [
 	super initialize: n.
 

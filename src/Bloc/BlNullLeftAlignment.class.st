@@ -1,5 +1,5 @@
 Class {
-	#name : #BlNullLeftAlignment,
-	#superclass : #BlNullHorizontalAlignment,
+	#name : 'BlNullLeftAlignment',
+	#superclass : 'BlNullHorizontalAlignment',
 	#category : 'Bloc-Layouts-Alignment'
 }

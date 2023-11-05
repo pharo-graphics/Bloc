@@ -1,17 +1,17 @@
 Class {
-	#name : #BlSpaceFramePropertiesPhase,
-	#superclass : #BlSpaceFramePhase,
+	#name : 'BlSpaceFramePropertiesPhase',
+	#superclass : 'BlSpaceFramePhase',
 	#category : 'Bloc-Space - Frame'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFramePropertiesPhase >> name [
 	<return: #String>
 	
 	^ 'Properties'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlSpaceFramePropertiesPhase >> runOn: aSpace [
 	aSpace
 		dispatchTimeEvent: BlSpacePropertiesEndEvent

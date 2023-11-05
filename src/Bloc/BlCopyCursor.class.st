@@ -1,5 +1,5 @@
 Class {
-	#name : #BlCopyCursor,
-	#superclass : #BlNamedCursor,
+	#name : 'BlCopyCursor',
+	#superclass : 'BlNamedCursor',
 	#category : 'Bloc-Space - Cursor'
 }

@@ -1,22 +1,22 @@
 Class {
-	#name : #BlLayoutGraphConnectedEdges,
-	#superclass : #BlLayoutGraphEdgesIterator,
+	#name : 'BlLayoutGraphConnectedEdges',
+	#superclass : 'BlLayoutGraphEdgesIterator',
 	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : #'api - enumeration' }
+{ #category : 'api - enumeration' }
 BlLayoutGraphConnectedEdges >> do: aBlock [
 	"Evaluate a given block with all connected edges of the graph element"
 	
 	self layoutNode connectedEdges do: aBlock
 ]
 
-{ #category : #'api - iterator' }
+{ #category : 'api - iterator' }
 BlLayoutGraphConnectedEdges >> incoming [
 	^ BlLayoutGraphIncomingEdges on: self layoutNode
 ]
 
-{ #category : #'api - iterator' }
+{ #category : 'api - iterator' }
 BlLayoutGraphConnectedEdges >> outgoing [
 	^ BlLayoutGraphOutgoingEdges on: self layoutNode
 ]

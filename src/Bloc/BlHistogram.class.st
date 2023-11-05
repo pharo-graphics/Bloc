@@ -1,10 +1,10 @@
 Class {
-	#name : #BlHistogram,
-	#superclass : #BlHistogramGeometry,
+	#name : 'BlHistogram',
+	#superclass : 'BlHistogramGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHistogram class >> isDeprecated [
 	^ true
 ]

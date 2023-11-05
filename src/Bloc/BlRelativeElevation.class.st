@@ -5,12 +5,12 @@ Note: Relative elevation can be negative!
 
 "
 Class {
-	#name : #BlRelativeElevation,
-	#superclass : #BlElevation,
+	#name : 'BlRelativeElevation',
+	#superclass : 'BlElevation',
 	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRelativeElevation >> relatedTo: aNumber [
 	"Resulting elevation is a sum of a given and my relative one"
 

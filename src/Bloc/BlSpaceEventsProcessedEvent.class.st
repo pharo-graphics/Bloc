@@ -1,10 +1,10 @@
 Class {
-	#name : #BlSpaceEventsProcessedEvent,
-	#superclass : #BlSpaceStepEvent,
+	#name : 'BlSpaceEventsProcessedEvent',
+	#superclass : 'BlSpaceStepEvent',
 	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlSpaceEventsProcessedEvent >> sendTo: anObject [
 	anObject spaceEventsProcessedEvent: self
 ]

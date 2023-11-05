@@ -6,8 +6,8 @@ I do not have any logic and can only used as orientation flag. Layouts that have
 
 "
 Class {
-	#name : #BlLayoutOrientation,
-	#superclass : #Object,
+	#name : 'BlLayoutOrientation',
+	#superclass : 'Object',
 	#classVars : [
 		'horizontal',
 		'vertical'
@@ -15,12 +15,12 @@ Class {
 	#category : 'Bloc-Layouts-Support'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlLayoutOrientation class >> horizontal [
 	^ horizontal
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlLayoutOrientation class >> initialize [
 	super initialize.
 	
@@ -28,22 +28,22 @@ BlLayoutOrientation class >> initialize [
 	vertical := BlLayoutVertical new
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlLayoutOrientation class >> vertical [
 	^ vertical
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLayoutOrientation >> isHorizontal [
 	^ self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLayoutOrientation >> isVertical [
 	^ self subclassResponsibility
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlLayoutOrientation >> of: anObject [
 	^ self subclassResponsibility
 ]

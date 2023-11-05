@@ -1,10 +1,10 @@
 Class {
-	#name : #BlNormalizedPolyline,
-	#superclass : #BlNormalizedPolylineGeometry,
+	#name : 'BlNormalizedPolyline',
+	#superclass : 'BlNormalizedPolylineGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlNormalizedPolyline class >> isDeprecated [
 	^ true
 ]

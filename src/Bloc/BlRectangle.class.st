@@ -1,10 +1,10 @@
 Class {
-	#name : #BlRectangle,
-	#superclass : #BlRoundedRectangleGeometry,
+	#name : 'BlRectangle',
+	#superclass : 'BlRoundedRectangleGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlRectangle class >> isDeprecated [
 	^ true
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #BlPrimaryMouseDownEvent,
-	#superclass : #BlMouseDownEvent,
+	#name : 'BlPrimaryMouseDownEvent',
+	#superclass : 'BlMouseDownEvent',
 	#category : 'Bloc-Events'
 }

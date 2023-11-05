@@ -20,15 +20,15 @@ BlAlternativeCombination new
 
 "
 Class {
-	#name : #BlAlternativeCombination,
-	#superclass : #BlKeyCombination,
+	#name : 'BlAlternativeCombination',
+	#superclass : 'BlKeyCombination',
 	#instVars : [
 		'combinations'
 	],
 	#category : 'Bloc-Events-KeyBinding'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlAlternativeCombination >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -39,36 +39,36 @@ BlAlternativeCombination >> = anObject [
 	^ combinations = anObject combinations
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 BlAlternativeCombination >> accept: aKeyCombinationVisitor [
 	^ aKeyCombinationVisitor visitAlternative: self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlAlternativeCombination >> asBufferKeys [
 	^ combinations first asBufferKeys
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAlternativeCombination >> combinations [
 	<return: #SequenceableCollection of: #BlKeyCombination>
 
 	^ combinations
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlAlternativeCombination >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ combinations hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAlternativeCombination >> includes: aKey [
 	^ self combinations anySatisfy: [ :aCombination | aCombination includes: aKey ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlAlternativeCombination >> initialize [
 	super initialize.
 	
@@ -76,17 +76,17 @@ BlAlternativeCombination >> initialize [
 	combinations := OrderedCollection new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAlternativeCombination >> isAlternative [
 	^ true
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlAlternativeCombination >> key: aKey [
 	self with: (BlSingleKeyCombination key: aKey)
 ]
 
-{ #category : #'key matching' }
+{ #category : 'key matching' }
 BlAlternativeCombination >> match: aKeyboardBuffer [
 	<return: #Number>
 	
@@ -95,7 +95,7 @@ BlAlternativeCombination >> match: aKeyboardBuffer [
 		into: [ :max :aCombination | max max: (aCombination match: aKeyboardBuffer) ]
 ]
 
-{ #category : #'key matching' }
+{ #category : 'key matching' }
 BlAlternativeCombination >> matches: aKeyboardBuffer [
 	<return: #Boolean>
 
@@ -103,14 +103,14 @@ BlAlternativeCombination >> matches: aKeyboardBuffer [
 		anySatisfy: [ :aCombination | aCombination matches: aKeyboardBuffer ]
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 BlAlternativeCombination >> or: anotherKeyCombination [
 	<return: #BlKeyCombination>
 
 	^ self with: anotherKeyCombination
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlAlternativeCombination >> printOn: aStream [
 	
 	aStream nextPut: $(.
@@ -122,7 +122,7 @@ BlAlternativeCombination >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlAlternativeCombination >> storeOn: aStream [
 	aStream nextPut: $(.
 
@@ -140,14 +140,14 @@ BlAlternativeCombination >> storeOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlAlternativeCombination >> with: aCombination [
 	aCombination isAlternative
 		ifTrue: [ self combinations addAll: aCombination combinations ]
 		ifFalse: [ self combinations add: aCombination ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlAlternativeCombination >> withAll: aCollectionOfCombinations [
 	self combinations addAll: aCollectionOfCombinations
 ]

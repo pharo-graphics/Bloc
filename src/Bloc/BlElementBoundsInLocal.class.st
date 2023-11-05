@@ -1,10 +1,10 @@
 Class {
-	#name : #BlElementBoundsInLocal,
-	#superclass : #BlElementComputedBounds,
+	#name : 'BlElementBoundsInLocal',
+	#superclass : 'BlElementComputedBounds',
 	#category : 'Bloc-Basic-Bounds'
 }
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementBoundsInLocal >> inParent [
 	<return: #BlElementBounds>
 
@@ -15,7 +15,7 @@ BlElementBoundsInLocal >> inParent [
 		yourself
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementBoundsInLocal >> inSpace [
 	<return: #BlElementBounds>
 

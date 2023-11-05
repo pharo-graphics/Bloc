@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLinearGradientPaint,
-	#superclass : #BlGradientPaint,
+	#name : 'BlLinearGradientPaint',
+	#superclass : 'BlGradientPaint',
 	#instVars : [
 		'start',
 		'end'
@@ -8,7 +8,7 @@ Class {
 	#category : 'Bloc-Paint'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLinearGradientPaint class >> direction: aPoint [
 	"Create a linear gradient in a given direction"
 
@@ -30,7 +30,7 @@ BlLinearGradientPaint class >> direction: aPoint [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLinearGradientPaint class >> horizontal [
 	"Create a horizontal linear gradient"
 
@@ -40,7 +40,7 @@ BlLinearGradientPaint class >> horizontal [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLinearGradientPaint class >> vertical [
 	"Create a vertical linear gradient"
 
@@ -50,17 +50,17 @@ BlLinearGradientPaint class >> vertical [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLinearGradientPaint >> end [
 	^ end
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLinearGradientPaint >> end: aPoint [
 	end := aPoint
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlLinearGradientPaint >> matchExtent: anExtent [
 	| aDirection aStart anEnd aDelta aScaleX aScaleY |
 	
@@ -88,12 +88,12 @@ BlLinearGradientPaint >> matchExtent: anExtent [
 	self end: anEnd - aDelta
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLinearGradientPaint >> start [
 	^ start
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLinearGradientPaint >> start: aPoint [
 	start := aPoint
 ]

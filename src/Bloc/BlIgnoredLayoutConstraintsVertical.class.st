@@ -1,6 +1,6 @@
 Class {
-	#name : #BlIgnoredLayoutConstraintsVertical,
-	#superclass : #BlLayoutConstraintsAxis,
+	#name : 'BlIgnoredLayoutConstraintsVertical',
+	#superclass : 'BlLayoutConstraintsAxis',
 	#instVars : [
 		'alignment',
 		'weight'
@@ -8,12 +8,12 @@ Class {
 	#category : 'Bloc-Layouts-Basic'
 }
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlIgnoredLayoutConstraintsVertical >> alignBottom [
 	alignment := BlElementAlignment vertical end
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlIgnoredLayoutConstraintsVertical >> alignBottomAt: aUnitCoordinateNumber [
 	"Align the bottom of the element vertically with a unit-coordinate inside of the parent"
 
@@ -22,12 +22,12 @@ BlIgnoredLayoutConstraintsVertical >> alignBottomAt: aUnitCoordinateNumber [
 		relativeAlignment: BlElementAlignment vertical end
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlIgnoredLayoutConstraintsVertical >> alignCenter [
 	alignment := BlElementAlignment vertical center
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlIgnoredLayoutConstraintsVertical >> alignCenterAt: aUnitCoordinateNumber [
 	"Align the center of the element vertically with a unit-coordinate inside of the parent"
 
@@ -36,17 +36,17 @@ BlIgnoredLayoutConstraintsVertical >> alignCenterAt: aUnitCoordinateNumber [
 		relativeAlignment: BlElementAlignment vertical center
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlIgnoredLayoutConstraintsVertical >> alignNone [
 	alignment := BlElementAlignment vertical null
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlIgnoredLayoutConstraintsVertical >> alignTop [
 	alignment := BlElementAlignment vertical start
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlIgnoredLayoutConstraintsVertical >> alignTopAt: aUnitCoordinateNumber [
 	"Align the top of the element vertically with a unit-coordinate inside of the parent"
 
@@ -55,12 +55,12 @@ BlIgnoredLayoutConstraintsVertical >> alignTopAt: aUnitCoordinateNumber [
 		relativeAlignment: BlElementAlignment vertical start
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlIgnoredLayoutConstraintsVertical >> alignment [
 	^ alignment
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlIgnoredLayoutConstraintsVertical >> initialize [
 	super initialize.
 	
@@ -68,14 +68,14 @@ BlIgnoredLayoutConstraintsVertical >> initialize [
 	weight := 1.0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlIgnoredLayoutConstraintsVertical >> weight [
 	<return: #Number>
 
 	^ weight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlIgnoredLayoutConstraintsVertical >> weight: aNumber [
 	self
 		assert: [ aNumber isNotNil ]

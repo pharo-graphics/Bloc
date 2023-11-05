@@ -1,6 +1,6 @@
 Class {
-	#name : #BlLayoutParentNodeWithFilter,
-	#superclass : #BlLayoutNode,
+	#name : 'BlLayoutParentNodeWithFilter',
+	#superclass : 'BlLayoutNode',
 	#traits : 'TBlLayoutNode + TBlLayoutParentNode',
 	#classTraits : 'TBlLayoutNode classTrait + TBlLayoutParentNode classTrait',
 	#instVars : [
@@ -11,87 +11,87 @@ Class {
 	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithFilter >> children [
 	<return: #Collection of: #BlLayoutNode>
 
 	^ children
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithFilter >> children: aBlLayoutNodeChildren [
 	children := aBlLayoutNodeChildren as: BlLayoutNodeChildren.
 	children do: [ :eachChild | eachChild parent: self parent ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithFilter >> constraints [
 	^ parentNode constraints
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithFilter >> constraints: aBlLayoutConstraints [
 	parentNode constraints: aBlLayoutConstraints
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutParentNodeWithFilter >> extent [
 	^ parentNode extent
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlLayoutParentNodeWithFilter >> extent: aPoint [
 	parentNode extent: aPoint
 ]
 
-{ #category : #'api - extent spec' }
+{ #category : 'api - extent spec' }
 BlLayoutParentNodeWithFilter >> extentSpec [
 	<return: #BlExtentMeasurementSpec>
 
 	^ parentNode extentSpec
 ]
 
-{ #category : #'api - extent spec' }
+{ #category : 'api - extent spec' }
 BlLayoutParentNodeWithFilter >> extentSpec: aBlExtentMeasurementSpec [
 	parentNode extentSpec: aBlExtentMeasurementSpec
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithFilter >> filterBlock: aBlockClosure [
 	filter := aBlockClosure
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithFilter >> parent [
 	^ parentNode parent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithFilter >> parentNode [
 	^ parentNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithFilter >> parentNode: anObject [
 	parentNode := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithFilter >> position [
 	^ parentNode position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithFilter >> position: aPoint [
 	parentNode position: aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutParentNodeWithFilter >> transformationDo: aBlock [
 	parentNode transformationDo: aBlock
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlLayoutParentNodeWithFilter >> withFilter: aSelectBlockOrFilterObject [
 	"implement filter as an object to support comparison and not filter twice"
 	filter = aSelectBlockOrFilterObject

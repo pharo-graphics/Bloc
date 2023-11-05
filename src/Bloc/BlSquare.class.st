@@ -1,10 +1,10 @@
 Class {
-	#name : #BlSquare,
-	#superclass : #BlSquareGeometry,
+	#name : 'BlSquare',
+	#superclass : 'BlSquareGeometry',
 	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSquare class >> isDeprecated [
 	^ true
 ]

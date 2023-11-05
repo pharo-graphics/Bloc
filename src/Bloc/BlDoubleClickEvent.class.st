@@ -1,15 +1,15 @@
 Class {
-	#name : #BlDoubleClickEvent,
-	#superclass : #BlMouseEvent,
+	#name : 'BlDoubleClickEvent',
+	#superclass : 'BlMouseEvent',
 	#category : 'Bloc-Events'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDoubleClickEvent >> isDoubleClick [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlDoubleClickEvent >> sendTo: anObject [
 	anObject doubleClickEvent: self
 ]

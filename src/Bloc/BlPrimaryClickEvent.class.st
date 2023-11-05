@@ -1,5 +1,5 @@
 Class {
-	#name : #BlPrimaryClickEvent,
-	#superclass : #BlClickEvent,
+	#name : 'BlPrimaryClickEvent',
+	#superclass : 'BlClickEvent',
 	#category : 'Bloc-Events'
 }

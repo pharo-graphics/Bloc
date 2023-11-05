@@ -1,40 +1,40 @@
 Class {
-	#name : #BlElementNoId,
-	#superclass : #BlElementId,
+	#name : 'BlElementNoId',
+	#superclass : 'BlElementId',
 	#classInstVars : [
 		'uniqueInstance'
 	],
 	#category : 'Bloc-Basic-Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementNoId class >> cleanUp [
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementNoId class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementNoId >> = anObject [
 
 	self == anObject ifTrue: [ ^ true ].
 	^ self class = anObject class
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlElementNoId >> asSymbol [
 	^ nil
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementNoId >> hash [
 	^ self class hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementNoId >> isNoId [
 	^ true
 ]

@@ -1,15 +1,15 @@
 Class {
-	#name : #BlDragEvent,
-	#superclass : #BlBaseDragEvent,
+	#name : 'BlDragEvent',
+	#superclass : 'BlBaseDragEvent',
 	#category : 'Bloc-Events'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDragEvent >> isDrag [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlDragEvent >> sendTo: anObject [
 	anObject dragEvent: self
 ]

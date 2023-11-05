@@ -4,9 +4,7 @@ Class {
 	#instVars : [
 		'aeCanvas'
 	],
-	#category : 'Bloc-Alexandrie-Text',
-	#package : 'Bloc-Alexandrie',
-	#tag : 'Text'
+	#category : 'Bloc-Alexandrie-Text'
 }
 
 { #category : 'accessing' }

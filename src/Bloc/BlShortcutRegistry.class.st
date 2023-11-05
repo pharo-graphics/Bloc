@@ -3,8 +3,8 @@ I am a shortcut registry and contain a collection of `=BlShortcut`=
 
 "
 Class {
-	#name : #BlShortcutRegistry,
-	#superclass : #Collection,
+	#name : 'BlShortcutRegistry',
+	#superclass : 'Collection',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -13,31 +13,31 @@ Class {
 	#category : 'Bloc-Events-Handler'
 }
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlShortcutRegistry >> add: aBlShortcut [
 	self shortcuts add: aBlShortcut
 ]
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlShortcutRegistry >> addAll: aCollectionOfaBlShortcut [
 	self shortcuts addAll: aCollectionOfaBlShortcut
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlShortcutRegistry >> do: aBlock [ 
 	"Evaluate aBlock with each of the receiver's elements as the argument."
 
 	self shortcuts do: aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlShortcutRegistry >> initialize [
 	super initialize.
 	
 	shortcuts := OrderedCollection new
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 BlShortcutRegistry >> remove: aBlShortcut ifAbsent: anExceptionBlock [ 
 	"Remove oldObject from the receiver's elements. If several of the 
 	elements are equal to oldObject, only one is removed. If no element is 
@@ -48,22 +48,22 @@ BlShortcutRegistry >> remove: aBlShortcut ifAbsent: anExceptionBlock [
 	self shortcuts remove: aBlShortcut ifAbsent: anExceptionBlock 
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 BlShortcutRegistry >> removeAllWithCombination: aBlKeyCombination [
 	self shortcuts removeAllSuchThat: [ :eachShortcut | eachShortcut combination = aBlKeyCombination ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlShortcutRegistry >> shortcuts [
 	^ shortcuts
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlShortcutRegistry >> shortcuts: anObject [
 	shortcuts := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlShortcutRegistry >> size [
 	^ shortcuts size
 ]
