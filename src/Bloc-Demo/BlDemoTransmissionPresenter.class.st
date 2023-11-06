@@ -7,7 +7,7 @@ Class {
 		'methods',
 		'code'
 	],
-	#category : #'Bloc-Demo'
+	#category : #'Bloc-Demo-Spec2'
 }
 
 { #category : #accessing }
@@ -25,18 +25,19 @@ BlDemoTransmissionPresenter >> connectClassesPresenter [
 
 	classes
 		transmitTo: protocols
-		transform: [ :aClass | 
+		transform: [ :aClass |
 			aClass
-				ifNotNil: [ 
-					aClass organization protocols
-						collect: [ :each | aClass -> each ]
-						as: OrderedCollection ]
+				ifNotNil: [
+					|demoProtocols|
+					demoProtocols := aClass organization protocols
+						select: [ :each | each name includesSubstring: 'demo' ].
+					demoProtocols collect: [ :each | aClass -> each ] as: OrderedCollection ]
 				ifNil: [ #(  ) ] ]
-		postTransmission: [ :destination :origin | destination selectIndex: 1 ].
-	
-	classes
-		transmitTo: code
-		transform: [ :aClass | aClass ifNotNil: [ aClass definitionString ] ifNil: [ '' ] ]
+		postTransmission: [ :destination :origin |
+		destination selectIndex: 1 ].
+
+	classes transmitTo: code transform: [ :aClass |
+		aClass ifNotNil: [ aClass definitionString ] ifNil: [ '' ] ]
 ]
 
 { #category : #initialization }
@@ -162,7 +163,7 @@ BlDemoTransmissionPresenter >> initializeProtocolsPresenter [
 { #category : #'as yet unclassified' }
 BlDemoTransmissionPresenter >> itemsClasses [
 
-	^ BlExampleTest allSubclasses  
+^ BlExampleTest allSubclasses select: [ :c | c name includesSubstring: 'Demo' ]
 ]
 
 { #category : #accessing }

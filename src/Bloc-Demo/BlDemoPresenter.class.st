@@ -6,8 +6,14 @@ Class {
 		'canva',
 		'errorMessage'
 	],
-	#category : #'Bloc-Demo'
+	#category : #'Bloc-Demo-Spec2'
 }
+
+{ #category : #running }
+BlDemoPresenter class >> run [ 
+	<script> 
+	self new open
+]
 
 { #category : #accessing }
 BlDemoPresenter >> canva [ 
