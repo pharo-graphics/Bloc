@@ -473,8 +473,13 @@ BlSvgFactory >> radialGradientFrom: node [
 
 	| aBlSVGGradientPaint |
 	aBlSVGGradientPaint := BlRadialGradientPaint new
-		                       center: (self radialGradientCenterFrom: node);
-		                       radius: (self radialGradientRadiusFrom: node);
+		                       innerCenter:
+			                       (self radialGradientCenterFrom: node);
+		                       innerRadius: 0;
+		                       outerCenter:
+			                       (self radialGradientCenterFrom: node);
+		                       outerRadius:
+			                       (self radialGradientRadiusFrom: node);
 		                       yourself.
 	self radialGradientFocalPointFrom: node on: aBlSVGGradientPaint.
 

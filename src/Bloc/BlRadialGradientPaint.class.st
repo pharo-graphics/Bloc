@@ -2,20 +2,36 @@ Class {
 	#name : #BlRadialGradientPaint,
 	#superclass : #BlGradientPaint,
 	#instVars : [
-		'center',
-		'radius'
+		'innerCenter',
+		'innerRadius',
+		'outerCenter',
+		'outerRadius'
 	],
 	#category : #'Bloc-Paint'
 }
 
 { #category : #accessing }
-BlRadialGradientPaint >> center [
-	^ center
+BlRadialGradientPaint >> innerCenter [
+
+	^ innerCenter
 ]
 
 { #category : #accessing }
-BlRadialGradientPaint >> center: aPoint [
-	center := aPoint
+BlRadialGradientPaint >> innerCenter: aPoint [
+
+	innerCenter := aPoint
+]
+
+{ #category : #accessing }
+BlRadialGradientPaint >> innerRadius [
+
+	^ innerRadius
+]
+
+{ #category : #accessing }
+BlRadialGradientPaint >> innerRadius: anObject [
+
+	innerRadius := anObject
 ]
 
 { #category : #geometry }
@@ -23,11 +39,25 @@ BlRadialGradientPaint >> matchExtent: anExtent [
 ]
 
 { #category : #accessing }
-BlRadialGradientPaint >> radius [
-	^ radius
+BlRadialGradientPaint >> outerCenter [
+
+	^ outerCenter
 ]
 
 { #category : #accessing }
-BlRadialGradientPaint >> radius: aNumber [
-	radius := aNumber
+BlRadialGradientPaint >> outerCenter: aPoint [
+
+	outerCenter := aPoint
+]
+
+{ #category : #accessing }
+BlRadialGradientPaint >> outerRadius [
+
+	^ outerRadius
+]
+
+{ #category : #accessing }
+BlRadialGradientPaint >> outerRadius: aNumber [
+
+	outerRadius := aNumber
 ]
