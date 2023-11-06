@@ -5,27 +5,29 @@ Position in space may change even if element's #position is still the same. It c
 
 "
 Class {
-	#name : #BlElementPositionInSpaceChangedEvent,
-	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events-Type-Element'
+	#name : 'BlElementPositionInSpaceChangedEvent',
+	#superclass : 'BlElementEvent',
+	#category : 'Bloc-Events-Type-Element',
+	#package : 'Bloc',
+	#tag : 'Events-Type-Element'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementPositionInSpaceChangedEvent class >> disableIn: anObject [
 	anObject disablePositionInSpaceChanged
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementPositionInSpaceChangedEvent class >> enableIn: anObject [
 	anObject enablePositionInSpaceChanged
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementPositionInSpaceChangedEvent class >> wantedIn: anObject [
 	^ anObject wantsPositionInSpaceChanged
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlElementPositionInSpaceChangedEvent >> sendTo: anObject [
 	anObject elementPositionInSpaceChangedEvent: self
 ]

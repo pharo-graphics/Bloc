@@ -1,17 +1,19 @@
 Class {
-	#name : #BlLayoutGraphEdgesIterator,
-	#superclass : #BlLayoutGraphIterator,
-	#category : #'Bloc-Layouts-Model'
+	#name : 'BlLayoutGraphEdgesIterator',
+	#superclass : 'BlLayoutGraphIterator',
+	#category : 'Bloc-Layouts-Model',
+	#package : 'Bloc',
+	#tag : 'Layouts-Model'
 }
 
-{ #category : #'api - enumeration' }
+{ #category : 'api - enumeration' }
 BlLayoutGraphEdgesIterator >> do: aBlock [
 	"Evaluate a given block with all iterator items"
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - iterator' }
+{ #category : 'api - iterator' }
 BlLayoutGraphEdgesIterator >> nodes [
 	^ BlLayoutGraphConnectedNodes on: self layoutNode from: self
 ]

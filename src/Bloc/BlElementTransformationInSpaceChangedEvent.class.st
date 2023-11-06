@@ -5,28 +5,30 @@ Transformation in space may change even if element's transformation is still the
 
 "
 Class {
-	#name : #BlElementTransformationInSpaceChangedEvent,
-	#superclass : #BlElementEvent,
-	#category : #'Bloc-Events-Type-Element'
+	#name : 'BlElementTransformationInSpaceChangedEvent',
+	#superclass : 'BlElementEvent',
+	#category : 'Bloc-Events-Type-Element',
+	#package : 'Bloc',
+	#tag : 'Events-Type-Element'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementTransformationInSpaceChangedEvent class >> disableIn: anEventDispatcher [
 
 	anEventDispatcher disableTransformationInSpaceChanged
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementTransformationInSpaceChangedEvent class >> enableIn: anEventDispatcher [
 	anEventDispatcher enableTransformationInSpaceChanged
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementTransformationInSpaceChangedEvent class >> wantedIn: anEventDispatcher [
 	^ anEventDispatcher wantsTransformationInSpaceChanged
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlElementTransformationInSpaceChangedEvent >> sendTo: anObject [
 	anObject elementTransformationInSpaceChangedEvent: self
 ]

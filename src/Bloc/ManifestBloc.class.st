@@ -19,12 +19,14 @@ Most recently, [feenk](https://feenk.com) has put in a ton of work, bringing the
 
 "
 Class {
-	#name : #ManifestBloc,
-	#superclass : #PackageManifest,
-	#category : #'Bloc-Manifest'
+	#name : 'ManifestBloc',
+	#superclass : 'PackageManifest',
+	#category : 'Bloc-Manifest',
+	#package : 'Bloc',
+	#tag : 'Manifest'
 }
 
-{ #category : #'code-critics' }
+{ #category : 'code-critics' }
 ManifestBloc class >> ruleRBNotEliminationRuleV1FalsePositive [
 	^ #(#(#(#RGMethodDefinition #(#BlRope #isNotEmpty #false)) #'2019-01-05T19:54:41.211552+01:00') )
 ]

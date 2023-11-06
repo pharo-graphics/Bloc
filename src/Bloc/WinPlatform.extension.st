@@ -1,12 +1,12 @@
-Extension { #name : #WinPlatform }
+Extension { #name : 'WinPlatform' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 WinPlatform >> defaultScrollingVelocity [
 
 	^ 100
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 WinPlatform >> primaryModifier [
 	^ BlAlternativeCombination new
 		key: KeyboardKey controlLeft;
@@ -14,7 +14,7 @@ WinPlatform >> primaryModifier [
 		yourself
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 WinPlatform >> secondaryModifier [
 	^ BlAlternativeCombination new
 		key: KeyboardKey altLeft;

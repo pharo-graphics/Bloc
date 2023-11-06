@@ -1,13 +1,15 @@
 Class {
-	#name : #BlElementBoundsInParent,
-	#superclass : #BlElementComputedBounds,
+	#name : 'BlElementBoundsInParent',
+	#superclass : 'BlElementComputedBounds',
 	#instVars : [
 		'originalElement'
 	],
-	#category : #'Bloc-Basic-Bounds'
+	#category : 'Bloc-Basic-Bounds',
+	#package : 'Bloc',
+	#tag : 'Basic-Bounds'
 }
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementBoundsInParent >> inChild: anElement [
 	<return: #BlElementBounds>
 	| aParentElement |
@@ -23,7 +25,7 @@ BlElementBoundsInParent >> inChild: anElement [
 		yourself
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementBoundsInParent >> inParent [
 	<return: #BlElementBoundsInParent>
 
@@ -37,14 +39,14 @@ BlElementBoundsInParent >> inParent [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBoundsInParent >> originalElement [
 	<return: #BlElement>
 
 	^ originalElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBoundsInParent >> originalElement: anElement [
 	originalElement := anElement
 ]

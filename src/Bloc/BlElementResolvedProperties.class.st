@@ -1,31 +1,33 @@
 Class {
-	#name : #BlElementResolvedProperties,
-	#superclass : #BlElementMaybeResolvedProperties,
+	#name : 'BlElementResolvedProperties',
+	#superclass : 'BlElementMaybeResolvedProperties',
 	#instVars : [
 		'properties'
 	],
-	#category : #'Bloc-Basic-Properties'
+	#category : 'Bloc-Basic-Properties',
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlElementResolvedProperties >> applyOnElement: anElement [
 	properties do: [ :eachPropertyWithStatus | eachPropertyWithStatus maybeCleanUpOnElement: anElement ].
 	properties do: [ :eachPropertyWithStatus | eachPropertyWithStatus maybeApplyOnElement: anElement ]
 ]
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlElementResolvedProperties >> flushPropertiesToRemove [
 	properties := properties reject: [ :eachPropertyWithStatus | eachPropertyWithStatus isToBeRemoved ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementResolvedProperties >> initialize [
 	super initialize.
 	
 	properties := Dictionary new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementResolvedProperties >> mergedWithProperties: aBlElementResolvedProperties [
 	| theProperties |
 
@@ -36,7 +38,7 @@ BlElementResolvedProperties >> mergedWithProperties: aBlElementResolvedPropertie
 	^ BlElementResolvedProperties new properties: theProperties
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementResolvedProperties >> mergedWithPropertiesWithStatus: aBlElementResolvedProperties [
 	| theProperties |
 
@@ -51,29 +53,29 @@ BlElementResolvedProperties >> mergedWithPropertiesWithStatus: aBlElementResolve
 	^ BlElementResolvedProperties new properties: theProperties
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlElementResolvedProperties >> postCopy [
 	properties := properties copy
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlElementResolvedProperties >> properties [
 	<return: #Dictionary>
 
 	^ properties
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlElementResolvedProperties >> properties: aDictionaryOfProperties [
 	properties := aDictionaryOfProperties
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlElementResolvedProperties >> propertiesAsArray [
 	^ properties values
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementResolvedProperties >> propertiesToPropagateToChildren [
 	
 	"only properties that are not to be removed should be propagated to children"
@@ -82,7 +84,7 @@ BlElementResolvedProperties >> propertiesToPropagateToChildren [
 		thenCollect: [ :eachPropertyWithStatus | eachPropertyWithStatus property ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementResolvedProperties >> propertyAt: aPropertyType ifFound: aFoundBlock ifNone: aNoneBlock [
 	^ properties
 		at: aPropertyType

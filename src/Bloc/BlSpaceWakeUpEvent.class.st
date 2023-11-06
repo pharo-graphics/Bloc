@@ -1,10 +1,12 @@
 Class {
-	#name : #BlSpaceWakeUpEvent,
-	#superclass : #BlSpaceEvent,
-	#category : #'Bloc-Events-Type-Space'
+	#name : 'BlSpaceWakeUpEvent',
+	#superclass : 'BlSpaceEvent',
+	#category : 'Bloc-Events-Type-Space',
+	#package : 'Bloc',
+	#tag : 'Events-Type-Space'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlSpaceWakeUpEvent >> sendTo: anObject [
 	anObject spaceWakeUpEvent: self
 ]

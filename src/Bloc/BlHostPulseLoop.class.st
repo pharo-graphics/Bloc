@@ -9,8 +9,8 @@ The opened spaces listen the pulse to be synchronized and to update their state 
 
 "
 Class {
-	#name : #BlHostPulseLoop,
-	#superclass : #Object,
+	#name : 'BlHostPulseLoop',
+	#superclass : 'Object',
 	#instVars : [
 		'hostClass',
 		'loopProcess',
@@ -19,10 +19,12 @@ Class {
 		'pulseStartMS',
 		'pulseDurationMS'
 	],
-	#category : #'Bloc-Universe - Host'
+	#category : 'Bloc-Universe - Host',
+	#package : 'Bloc',
+	#tag : 'Universe - Host'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlHostPulseLoop class >> forHost: aHostClass [
 
 	^ self basicNew
@@ -31,25 +33,25 @@ BlHostPulseLoop class >> forHost: aHostClass [
 		  yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlHostPulseLoop class >> new [
 
 	self error: 'Use #forHost: instead'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostPulseLoop class >> processId [
 
 	^ 'Bloc Main Loop'
 ]
 
-{ #category : #period }
+{ #category : 'period' }
 BlHostPulseLoop >> defaultPulsePeriod [
 
 	^ 15 milliSeconds
 ]
 
-{ #category : #debug }
+{ #category : 'debug' }
 BlHostPulseLoop >> forceStartNewUIProcess [
 	"I should only be used by the logic for opening the debugger.
 	
@@ -63,7 +65,7 @@ BlHostPulseLoop >> forceStartNewUIProcess [
 	loopProcess resume.
 ]
 
-{ #category : #debug }
+{ #category : 'debug' }
 BlHostPulseLoop >> forceStartOfUIProcess: aProces [
 	"I should only be used by the logic for closing the debugger."
 	
@@ -71,19 +73,19 @@ BlHostPulseLoop >> forceStartOfUIProcess: aProces [
 	loopProcess resume.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostPulseLoop >> hostClass [
 
 	^ hostClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostPulseLoop >> hostClass: aHostClass [
 
 	hostClass := aHostClass
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHostPulseLoop >> initialize [
 
 	super initialize.
@@ -91,25 +93,25 @@ BlHostPulseLoop >> initialize [
 	self pulsePeriod: self defaultPulsePeriod
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHostPulseLoop >> isRunning [
 
 	^ loopProcess isNotNil and: [ loopProcess isTerminated not ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHostPulseLoop >> isRunningInTheSameProcess [
 
 	^ Processor activeProcess effectiveProcess == loopProcess
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHostPulseLoop >> loopProcess [
 
 	^ loopProcess
 ]
 
-{ #category : #'loop process' }
+{ #category : 'loop process' }
 BlHostPulseLoop >> newLoopBlock [
 
 	^ [ [
@@ -124,7 +126,7 @@ BlHostPulseLoop >> newLoopBlock [
 		] doWhileTrue: [ loopProcess == Processor activeProcess ] ]
 ]
 
-{ #category : #'loop process' }
+{ #category : 'loop process' }
 BlHostPulseLoop >> newLoopProcess [
 
 	^ self newLoopBlock newProcess
@@ -133,32 +135,32 @@ BlHostPulseLoop >> newLoopProcess [
 		  yourself
 ]
 
-{ #category : #'loop process' }
+{ #category : 'loop process' }
 BlHostPulseLoop >> processId [
 
 	^ self class processId
 ]
 
-{ #category : #'loop process' }
+{ #category : 'loop process' }
 BlHostPulseLoop >> processPriority [
 
 	^ 40
 ]
 
-{ #category : #period }
+{ #category : 'period' }
 BlHostPulseLoop >> pulsePeriod [
 
 	^ pulsePeriodMS milliSeconds
 ]
 
-{ #category : #period }
+{ #category : 'period' }
 BlHostPulseLoop >> pulsePeriod: aDuration [
 
 	pulsePeriodMS := aDuration asMilliSeconds.
 	msToWaitForBackgroundProcess := (pulsePeriodMS // 2) min: 1.
 ]
 
-{ #category : #lifecycle }
+{ #category : 'lifecycle' }
 BlHostPulseLoop >> start [
 
 	self isRunning ifTrue: [ ^ self ].
@@ -167,7 +169,7 @@ BlHostPulseLoop >> start [
 	loopProcess resume
 ]
 
-{ #category : #lifecycle }
+{ #category : 'lifecycle' }
 BlHostPulseLoop >> stop [
 
 	| currentProcess |
@@ -179,7 +181,7 @@ BlHostPulseLoop >> stop [
 	currentProcess terminate
 ]
 
-{ #category : #period }
+{ #category : 'period' }
 BlHostPulseLoop >> waitUntilNextPulse [
 	"Wait the appropriate amount of time for the next pulse"
 

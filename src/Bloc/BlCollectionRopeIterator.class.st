@@ -3,15 +3,17 @@ I am a special iterator used to iterate over collection rope
 
 "
 Class {
-	#name : #BlCollectionRopeIterator,
-	#superclass : #BlRopeIterator,
+	#name : 'BlCollectionRopeIterator',
+	#superclass : 'BlRopeIterator',
 	#instVars : [
 		'position'
 	],
-	#category : #'Bloc-DataStructure - Rope'
+	#category : 'Bloc-DataStructure - Rope',
+	#package : 'Bloc',
+	#tag : 'DataStructure - Rope'
 }
 
-{ #category : #'private - asserting' }
+{ #category : 'private - asserting' }
 BlCollectionRopeIterator >> assertInvariant [
 	"I am a position invariant; I make sure that iterator operations do not go out of bounds"
 
@@ -22,12 +24,12 @@ BlCollectionRopeIterator >> assertInvariant [
 		ifFalse: [ self error: 'Position must always be less or equal than end' ].
 ]
 
-{ #category : #'iterator - attributes' }
+{ #category : 'iterator - attributes' }
 BlCollectionRopeIterator >> attributes [
 	^ #()
 ]
 
-{ #category : #'iterator - testing' }
+{ #category : 'iterator - testing' }
 BlCollectionRopeIterator >> hasNext [
 	<return: #Boolean>
 	self assertInvariant.
@@ -35,7 +37,7 @@ BlCollectionRopeIterator >> hasNext [
 	^ position < end
 ]
 
-{ #category : #'iterator - testing' }
+{ #category : 'iterator - testing' }
 BlCollectionRopeIterator >> hasPrevious [
 	<return: #Boolean>
 	self assertInvariant.
@@ -43,7 +45,7 @@ BlCollectionRopeIterator >> hasPrevious [
 	^ position > start
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlCollectionRopeIterator >> next [
 	<return: #Object>
 	
@@ -53,7 +55,7 @@ BlCollectionRopeIterator >> next [
 	^ rope at: (position := position + 1)
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlCollectionRopeIterator >> nextSpan [
 	<return: #BlRope>
 	| aSpan |
@@ -67,7 +69,7 @@ BlCollectionRopeIterator >> nextSpan [
 	^ aSpan
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlCollectionRopeIterator >> peek [
 	<return: #Object>
 
@@ -77,7 +79,7 @@ BlCollectionRopeIterator >> peek [
 	^ rope at: position + 1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlCollectionRopeIterator >> peer [
 	<return: #Object>
 
@@ -87,14 +89,14 @@ BlCollectionRopeIterator >> peer [
 	^ rope at: position
 ]
 
-{ #category : #'iterator - accessing' }
+{ #category : 'iterator - accessing' }
 BlCollectionRopeIterator >> position [
 	<return: #Number>
 
 	^ position
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlCollectionRopeIterator >> previous [
 	<return: #Object>
 	| anItem |
@@ -108,7 +110,7 @@ BlCollectionRopeIterator >> previous [
 	^ anItem
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlCollectionRopeIterator >> rope: aRope from: aStart to: anEnd [
 	super rope: aRope from: aStart to: anEnd.
 
@@ -116,7 +118,7 @@ BlCollectionRopeIterator >> rope: aRope from: aStart to: anEnd [
 	self assertInvariant
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlCollectionRopeIterator >> skip: aNumber [
 	| newPosition |
 	

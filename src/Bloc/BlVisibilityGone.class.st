@@ -4,17 +4,19 @@ Once set, element should not be rendered and should not participate in layout (s
 
 "
 Class {
-	#name : #BlVisibilityGone,
-	#superclass : #BlVisibility,
-	#category : #'Bloc-Basic-Properties'
+	#name : 'BlVisibilityGone',
+	#superclass : 'BlVisibility',
+	#category : 'Bloc-Basic-Properties',
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlVisibilityGone >> isGone [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlVisibilityGone >> isHidden [
 	^ true
 ]

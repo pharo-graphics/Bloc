@@ -1,10 +1,12 @@
 Class {
-	#name : #BlEasingBounceInOut,
-	#superclass : #BlEasingBaseBounce,
-	#category : #'Bloc-Basic-Interpolators'
+	#name : 'BlEasingBounceInOut',
+	#superclass : 'BlEasingBaseBounce',
+	#category : 'Bloc-Basic-Interpolators',
+	#package : 'Bloc',
+	#tag : 'Basic-Interpolators'
 }
 
-{ #category : #interpolation }
+{ #category : 'interpolation' }
 BlEasingBounceInOut >> interpolate: aProgress [
 	aProgress <= 0.5
 		ifTrue: [ ^ (self computeBounce: 2 * aProgress) / 2 ].

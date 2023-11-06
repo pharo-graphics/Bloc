@@ -3,22 +3,24 @@ I am a dynamic object pool that grows to acomodate a lot of objects
 
 "
 Class {
-	#name : #BlBagObjectPool,
-	#superclass : #BlObjectPool,
+	#name : 'BlBagObjectPool',
+	#superclass : 'BlObjectPool',
 	#instVars : [
 		'poolSize',
 		'maxPoolSize',
 		'pool'
 	],
-	#category : #'Bloc-Basic-Support'
+	#category : 'Bloc-Basic-Support',
+	#package : 'Bloc',
+	#tag : 'Basic-Support'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BlBagObjectPool class >> arrayType [
 	^ IdentitySet
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlBagObjectPool class >> new [
 	^ self basicNew
 		setPool: (self arrayType new);
@@ -26,7 +28,7 @@ BlBagObjectPool class >> new [
 		maxPoolSize: Float infinity
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlBagObjectPool class >> new: anInteger [
 	^ self basicNew
 		setPool: (self arrayType new: anInteger);
@@ -34,7 +36,7 @@ BlBagObjectPool class >> new: anInteger [
 		maxPoolSize: anInteger
 ]
 
-{ #category : #pool }
+{ #category : 'pool' }
 BlBagObjectPool >> acquire [
 	"Returns an object from the pool if there is one,
 	or nil otherwise"
@@ -48,7 +50,7 @@ BlBagObjectPool >> acquire [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBagObjectPool >> initialize [
 
 	super initialize.
@@ -57,7 +59,7 @@ BlBagObjectPool >> initialize [
 	maxPoolSize := 0
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBagObjectPool >> isInPool: anObject [
 	"Return true of anObject is currently in the pool,
 	false otherwise."
@@ -65,13 +67,13 @@ BlBagObjectPool >> isInPool: anObject [
 	^ pool includes: anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBagObjectPool >> maxPoolSize: aNumber [
 
 	maxPoolSize := aNumber
 ]
 
-{ #category : #pool }
+{ #category : 'pool' }
 BlBagObjectPool >> release: anObject [
 	"Adds anObject to the pool and return true if successfully added,
 	false otherwise."
@@ -88,7 +90,7 @@ BlBagObjectPool >> release: anObject [
 		ifFalse: [ false ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBagObjectPool >> setPool: aCollection [
 	pool := aCollection
 ]
