@@ -163,9 +163,9 @@ BlDemoTransmissionPresenter >> initializeProtocolsPresenter [
 { #category : #'as yet unclassified' }
 BlDemoTransmissionPresenter >> itemsClasses [
 
-	^ ((RPackageOrganizer default packageNamed: #'Bloc-Demo')
-		   definedClasses select: [ :e | e tags includes: 'Classes' ])
-		  asArray 
+	^((RPackageOrganizer default packageNamed: #'Bloc-Demo')
+		          definedClasses select: [ :e | e tags includes: 'Classes' ])
+		         asArray.
 ]
 
 { #category : #accessing }
