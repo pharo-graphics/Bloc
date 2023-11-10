@@ -160,7 +160,7 @@ BlSubRopeExamples >> readStreamSmall [
 { #category : #'instance creation' }
 BlSubRopeExamples >> small [
 	<gtExample>
-	<label: 'Creates an instance of the rope of size smaller than combineLength with one attribute applied on the whole rope'>
+	"Creates an instance of the rope of size smaller than combineLength with one attribute applied on the whole rope"
 	| aCollectionRope aRope |
 
 	aCollectionRope := BlCollectionRope collection: 'EarthHelloWorld'.

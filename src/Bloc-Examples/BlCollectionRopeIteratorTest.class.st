@@ -555,7 +555,7 @@ BlCollectionRopeIteratorTest >> testSmallNextAt4 [
 BlCollectionRopeIteratorTest >> testSmallNextAt5 [
 
 	<gtExample>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	anIterator := self small_next_at_4.
 
@@ -643,7 +643,7 @@ BlCollectionRopeIteratorTest >> testSmallNextSpanAt4 [
 BlCollectionRopeIteratorTest >> testSmallNextSpanAt5 [
 
 	<gtExample>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	anIterator := self small_next_at_4.
 
@@ -746,7 +746,7 @@ BlCollectionRopeIteratorTest >> testSmallPeekAt4 [
 BlCollectionRopeIteratorTest >> testSmallPeekAt5 [
 
 	<gtExample>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	anIterator := self small_next_at_4.
 
@@ -764,7 +764,7 @@ BlCollectionRopeIteratorTest >> testSmallPeekAt5 [
 BlCollectionRopeIteratorTest >> testSmallPreviousAt0 [
 
 	<gtExample>
-	<label: 'Iterator throws an error when the start is reached'>
+	"Iterator throws an error when the start is reached"
 	| anIterator anError |
 	anIterator := self small.
 
@@ -945,7 +945,7 @@ BlCollectionRopeIteratorTest >> testSmallSkip5At0 [
 BlCollectionRopeIteratorTest >> testSmallSkip6At0 [
 
 	<gtExample>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	anIterator := self small.
 

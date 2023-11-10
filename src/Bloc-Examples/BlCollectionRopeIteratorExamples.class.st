@@ -362,7 +362,7 @@ BlCollectionRopeIteratorExamples >> small_nextSpan_at_4 [
 { #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamples >> small_nextSpan_at_5 [
 	<gtExample>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	
 	anIterator := self small_next_at_4.
@@ -463,7 +463,7 @@ BlCollectionRopeIteratorExamples >> small_next_at_4 [
 { #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamples >> small_next_at_5 [
 	<gtExample>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	
 	anIterator := self small_next_at_4.
@@ -564,7 +564,7 @@ BlCollectionRopeIteratorExamples >> small_peek_at_4 [
 { #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamples >> small_peek_at_5 [
 	<gtExample>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	
 	anIterator := self small_next_at_4.
@@ -580,7 +580,7 @@ BlCollectionRopeIteratorExamples >> small_peek_at_5 [
 { #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamples >> small_previous_at_0 [
 	<gtExample>
-	<label: 'Iterator throws an error when the start is reached'>
+	"Iterator throws an error when the start is reached"
 	| anIterator anError |
 	
 	anIterator := self small.
@@ -759,7 +759,7 @@ BlCollectionRopeIteratorExamples >> small_skip_5_at_0 [
 { #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamples >> small_skip_6_at_0 [
 	<gtExample>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	
 	anIterator := self small.

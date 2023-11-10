@@ -323,7 +323,7 @@ BlRopeIteratorExamples >> next_segment_123abc_at_3 [
 { #category : #'examples - next segment' }
 BlRopeIteratorExamples >> next_segment_123abc_at_6 [
 	<gtExample>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 
 	anIterator := self next_segment_123abc_at_3.

@@ -136,7 +136,7 @@ BlCollectionRopeExamples >> clear_attributes_empty_0_to_0 [
 { #category : #'instance creation' }
 BlCollectionRopeExamples >> small [
 	<gtExample>
-	<label: 'Creates an instance of the rope of size smaller than combineLength'>
+	"Creates an instance of the rope of size smaller than combineLength"
 	| aRope |
 
 	aRope := BlCollectionRope collection: 'Hello'.
