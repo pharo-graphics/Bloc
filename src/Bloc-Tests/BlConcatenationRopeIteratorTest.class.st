@@ -459,7 +459,7 @@ BlConcatenationRopeIteratorTest >> testSmallNextAt1 [
 BlConcatenationRopeIteratorTest >> testSmallNextAt10 [
 
 	<sampleInstance>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	anIterator := self testSmallNextAt9.
 
@@ -681,7 +681,7 @@ BlConcatenationRopeIteratorTest >> testSmallNextSpanAt1 [
 BlConcatenationRopeIteratorTest >> testSmallNextSpanAt10 [
 
 	<sampleInstance>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	anIterator := self testSmallNextAt9.
 
@@ -851,7 +851,7 @@ BlConcatenationRopeIteratorTest >> testSmallPeekAt1 [
 BlConcatenationRopeIteratorTest >> testSmallPeekAt10 [
 
 	<sampleInstance>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	anIterator := self testSmallNextAt9.
 
@@ -1005,7 +1005,7 @@ BlConcatenationRopeIteratorTest >> testSmallPeekAt9 [
 BlConcatenationRopeIteratorTest >> testSmallPreviousAt0 [
 
 	<sampleInstance>
-	<label: 'Iterator throws an error when the start is reached'>
+	"Iterator throws an error when the start is reached"
 	| anIterator anError |
 	anIterator := self testSmall.
 
@@ -1281,7 +1281,7 @@ BlConcatenationRopeIteratorTest >> testSmallSkip10At0 [
 BlConcatenationRopeIteratorTest >> testSmallSkip11At0 [
 
 	<sampleInstance>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	anIterator := self testSmall.
 

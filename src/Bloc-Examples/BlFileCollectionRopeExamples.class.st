@@ -7,7 +7,7 @@ Class {
 { #category : #'instance creation' }
 BlFileCollectionRopeExamples >> small [
 	<gtExample>
-	<label: 'Creates an instance of the rope of size smaller than combineLength'>
+	"Creates an instance of the rope of size smaller than combineLength"
 	| aRope file |
 
 	file := FileReference newTempFilePrefix: 'BlFileCollectionRopeExamples-' suffix: '-small'.
