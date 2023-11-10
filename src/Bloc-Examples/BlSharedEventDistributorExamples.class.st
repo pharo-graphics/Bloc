@@ -10,57 +10,77 @@ Class {
 
 { #category : #'instance creation' }
 BlSharedEventDistributorExamples >> container [
-	<gtExample>
+
+	<sampleInstance>
 	^ self element
-		layout: BlLinearLayout horizontal;
-		background: Color veryLightGray lighter;
-		constraintsDo: [ :c |
-			c horizontal fitContent.
-			c vertical fitContent.
-			c margin: (BlInsets all: 3).
-			c padding: (BlInsets all: 3).
-		]
+		  layout: BlLinearLayout horizontal;
+		  background: Color veryLightGray lighter;
+		  constraintsDo: [ :c |
+			  c horizontal fitContent.
+			  c vertical fitContent.
+			  c margin: (BlInsets all: 3).
+			  c padding: (BlInsets all: 3) ]
 ]
 
 { #category : #'instance creation' }
 BlSharedEventDistributorExamples >> element [
-	<gtExample>
+
+	<sampleInstance>
 	^ BlElement new
 ]
 
 { #category : #'instance creation' }
 BlSharedEventDistributorExamples >> element100x100 [
-	<gtExample>
+
+	<sampleInstance>
 	| aBackgroundColor aHighlightColor anElement |
 	aBackgroundColor := self randomColor.
 	aHighlightColor := aBackgroundColor darker.
 	anElement := self element.
 	^ anElement
-		size: 100@100;
-		background: aBackgroundColor;
-		margin: (BlInsets all: 3);
-		addEventHandlerOn: BlClickEvent do: [ :anEvent | anElement background: Color random ];
-		addEventHandlerOn: BlMouseEnterEvent do: [ :anEvent | anElement background: aHighlightColor ];
-		addEventHandlerOn: BlMouseLeaveEvent do: [ :anEvent | anElement background: aBackgroundColor ].
+		  size: 100 @ 100;
+		  background: aBackgroundColor;
+		  margin: (BlInsets all: 3);
+		  addEventHandlerOn: BlClickEvent
+		  do: [ :anEvent | anElement background: Color random ];
+		  addEventHandlerOn: BlMouseEnterEvent
+		  do: [ :anEvent | anElement background: aHighlightColor ];
+		  addEventHandlerOn: BlMouseLeaveEvent
+		  do: [ :anEvent | anElement background: aBackgroundColor ]
 ]
 
 { #category : #'examples - sharing events' }
 BlSharedEventDistributorExamples >> example [
-	<gtExample>
+
+	<sampleInstance>
 	| aHandler anElements aContainer |
-	aHandler := self installTwoElements.
+	aHandler := self testInstallTwoElements.
 	anElements := aHandler elements.
 	aContainer := self container.
 	aContainer addChildren: anElements.
-	aHandler shareEvents: { BlMouseEnterEvent. BlMouseLeaveEvent. BlClickEvent }.
+	aHandler shareEvents: {
+			BlMouseEnterEvent.
+			BlMouseLeaveEvent.
+			BlClickEvent }.
 	^ aContainer
 ]
 
+{ #category : #'instance creation' }
+BlSharedEventDistributorExamples >> randomColor [
+
+	<sampleInstance>
+	^ {
+		  Color green.
+		  Color yellow.
+		  Color red } atRandom
+]
+
 { #category : #'examples - basic' }
-BlSharedEventDistributorExamples >> installOneElement [
-	<gtExample>
+BlSharedEventDistributorExamples >> testInstallOneElement [
+
+	<sampleInstance>
 	| aHandler anElement |
-	aHandler := self sharedEventDistributor.
+	aHandler := self testSharedEventDistributor.
 	anElement := self element100x100.
 	anElement addEventHandler: aHandler.
 	self assert: aHandler elements size equals: 1.
@@ -68,10 +88,11 @@ BlSharedEventDistributorExamples >> installOneElement [
 ]
 
 { #category : #'examples - basic' }
-BlSharedEventDistributorExamples >> installTwoElements [
-	<gtExample>
+BlSharedEventDistributorExamples >> testInstallTwoElements [
+
+	<sampleInstance>
 	| aHandler anElement |
-	aHandler := self installOneElement.
+	aHandler := self testInstallOneElement.
 	anElement := self element100x100.
 	anElement addEventHandler: aHandler.
 	self assert: aHandler elements size equals: 2.
@@ -79,45 +100,60 @@ BlSharedEventDistributorExamples >> installTwoElements [
 ]
 
 { #category : #'examples - sharing events' }
-BlSharedEventDistributorExamples >> mouseEnterEventOneOutOfTwoElements [
-	<gtExample>
+BlSharedEventDistributorExamples >> testMouseEnterEventOneOutOfTwoElements [
+
+	<sampleInstance>
 	| aHandler anElements aContainer aMouseEnterTwo aMouseEnterOne anElementOne anElementTwo |
 	aMouseEnterOne := aMouseEnterTwo := 0.
-	aHandler := self installTwoElements.
+	aHandler := self testInstallTwoElements.
 	anElements := aHandler elements.
 	aContainer := self container.
 	aContainer addChildren: anElements.
 	anElementOne := anElements first.
 	anElementTwo := anElements second.
 
-	aHandler shareEvents: { BlMouseEnterEvent. BlMouseLeaveEvent. BlClickEvent }.
-	anElementOne when: BlMouseEnterEvent do: [ aMouseEnterOne := aMouseEnterOne + 1 ].
-	anElementTwo when: BlMouseEnterEvent do: [ aMouseEnterTwo := aMouseEnterTwo + 1 ].
-	
-	BlSpace simulateMouseMoveInside: anElementOne.
+	aHandler shareEvents: {
+			BlMouseEnterEvent.
+			BlMouseLeaveEvent.
+			BlClickEvent }.
+	anElementOne
+		when: BlMouseEnterEvent
+		do: [ aMouseEnterOne := aMouseEnterOne + 1 ].
+	anElementTwo
+		when: BlMouseEnterEvent
+		do: [ aMouseEnterTwo := aMouseEnterTwo + 1 ].
+
+	BlOSpace simulateMouseMoveInside: anElementOne.
 
 	self assert: aMouseEnterOne equals: 1.
 	self assert: aMouseEnterTwo equals: 1.
-	
+
 	^ aContainer
 ]
 
 { #category : #'examples - sharing events' }
-BlSharedEventDistributorExamples >> mouseLeaveEventOneOutOfTwoElements [
-	<gtExample>
+BlSharedEventDistributorExamples >> testMouseLeaveEventOneOutOfTwoElements [
 
+	<sampleInstance>
 	| aHandler anElements aContainer aMouseLeaveTwo aMouseLeaveOne anElementOne anElementTwo |
 	aMouseLeaveOne := aMouseLeaveTwo := 0.
-	aHandler := self installTwoElements.
+	aHandler := self testInstallTwoElements.
 	anElements := aHandler elements.
 	aContainer := self container.
 	aContainer addChildren: anElements.
 	anElementOne := anElements first.
 	anElementTwo := anElements second.
 
-	aHandler shareEvents: { BlMouseEnterEvent. BlMouseLeaveEvent. BlClickEvent }.
-	anElementOne when: BlMouseLeaveEvent do: [ aMouseLeaveOne := aMouseLeaveOne + 1 ].
-	anElementTwo when: BlMouseLeaveEvent do: [ aMouseLeaveTwo := aMouseLeaveTwo + 1 ].
+	aHandler shareEvents: {
+			BlMouseEnterEvent.
+			BlMouseLeaveEvent.
+			BlClickEvent }.
+	anElementOne
+		when: BlMouseLeaveEvent
+		do: [ aMouseLeaveOne := aMouseLeaveOne + 1 ].
+	anElementTwo
+		when: BlMouseLeaveEvent
+		do: [ aMouseLeaveTwo := aMouseLeaveTwo + 1 ].
 
 	BlSpace
 		simulateEvents: {
@@ -133,19 +169,14 @@ BlSharedEventDistributorExamples >> mouseLeaveEventOneOutOfTwoElements [
 
 	self assert: aMouseLeaveOne equals: 1.
 	self assert: aMouseLeaveTwo equals: 1.
-	
+
 	^ aContainer
 ]
 
 { #category : #'instance creation' }
-BlSharedEventDistributorExamples >> randomColor [
-	<gtExample>
-	^ { Color green. Color yellow. Color red } atRandom
-]
+BlSharedEventDistributorExamples >> testSharedEventDistributor [
 
-{ #category : #'instance creation' }
-BlSharedEventDistributorExamples >> sharedEventDistributor [
-	<gtExample>
+	<sampleInstance>
 	| aHandler |
 	aHandler := BlSharedEventDistributor new.
 	self assert: aHandler elements isEmpty.
@@ -153,10 +184,11 @@ BlSharedEventDistributorExamples >> sharedEventDistributor [
 ]
 
 { #category : #'examples - basic' }
-BlSharedEventDistributorExamples >> uninstallOneElement [
-	<gtExample>
+BlSharedEventDistributorExamples >> testUninstallOneElement [
+
+	<sampleInstance>
 	| aHandler anElement |
-	aHandler := self installOneElement.
+	aHandler := self testInstallOneElement.
 	anElement := aHandler elements anyOne.
 	anElement removeEventHandler: aHandler.
 	self assert: aHandler elements size equals: 0.

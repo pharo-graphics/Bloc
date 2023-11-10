@@ -1,45 +1,43 @@
 Class {
-	#name : 'BlLayoutNodeComputedMeasurement',
-	#superclass : 'BlLayoutNodeMeasurement',
+	#name : #BlLayoutNodeComputedMeasurement,
+	#superclass : #BlLayoutNodeMeasurement,
 	#instVars : [
 		'position',
 		'extent'
 	],
-	#category : 'Bloc-Layouts-Model',
-	#package : 'Bloc',
-	#tag : 'Layouts-Model'
+	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutNodeComputedMeasurement >> extent [
 	^ extent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutNodeComputedMeasurement >> extent: anObject [
 	extent := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlLayoutNodeComputedMeasurement >> initialize [
 	super initialize.
 	
 	position := 0.0@0.0
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlLayoutNodeComputedMeasurement >> measure: aLayoutChildNode with: anExtentSpecOrBlock [
 	<return: #BlLayoutNodeMeasurement>
 	
 	^ self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutNodeComputedMeasurement >> position [
 	^ position
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutNodeComputedMeasurement >> position: aPoint [
 	position := aPoint
 ]

@@ -1,11 +1,11 @@
 Class {
-	#name : #BlMouseEventExamples,
-	#superclass : #BlExampleTest,
+	#name : #BlMouseEventExamplesTest,
+	#superclass : #TestCase,
 	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #private }
-BlMouseEventExamples >> bottomLeftText: anEvent [
+BlMouseEventExamplesTest >> bottomLeftText: anEvent [
 
 	self
 		pointToText: (self boundsOf: anEvent currentTarget parent) bottomLeft
@@ -13,7 +13,7 @@ BlMouseEventExamples >> bottomLeftText: anEvent [
 ]
 
 { #category : #private }
-BlMouseEventExamples >> bottomRightText: anEvent [
+BlMouseEventExamplesTest >> bottomRightText: anEvent [
 
 	self
 		pointToText: (self boundsOf: anEvent currentTarget parent) bottomRight
@@ -21,7 +21,7 @@ BlMouseEventExamples >> bottomRightText: anEvent [
 ]
 
 { #category : #private }
-BlMouseEventExamples >> boundsOf: anElement [
+BlMouseEventExamplesTest >> boundsOf: anElement [
 	| aRoot |
 
 	aRoot := anElement.
@@ -32,79 +32,89 @@ BlMouseEventExamples >> boundsOf: anElement [
 ]
 
 { #category : #'instance creation' }
-BlMouseEventExamples >> box [
-	<gtExample>
-	
+BlMouseEventExamplesTest >> box [
+
+	<sampleInstance>
 	^ BlElement new
-		addChild: (self label
-			constraintsDo: [ :c |
-				c ignored horizontal alignLeft.
-				c ignored vertical alignTop	];
-			when: BlElementPositionInSpaceChangedEvent do: [ :anEvent | self topLeftText: anEvent ]);
-		addChild: (self label
-			constraintsDo: [ :c |
-				c ignored horizontal alignRight.
-				c ignored vertical alignTop	];
-			when: BlElementPositionInSpaceChangedEvent do: [ :anEvent | self topRightText: anEvent ]);
-		addChild: (self label
-			constraintsDo: [ :c |
-				c ignored horizontal alignLeft.
-				c ignored vertical alignBottom	];
-			when: BlElementPositionInSpaceChangedEvent do: [ :anEvent | self bottomLeftText: anEvent ]);
-		addChild: (self label
-			constraintsDo: [ :c |
-				c ignored horizontal alignRight.
-				c ignored vertical alignBottom	];
-			when: BlElementPositionInSpaceChangedEvent do: [ :anEvent | self bottomRightText: anEvent ])
+		  addChild: (self label
+				   constraintsDo: [ :c |
+					   c ignored horizontal alignLeft.
+					   c ignored vertical alignTop ];
+				   when: BlElementPositionInSpaceChangedEvent
+				   do: [ :anEvent | self topLeftText: anEvent ]);
+		  addChild: (self label
+				   constraintsDo: [ :c |
+					   c ignored horizontal alignRight.
+					   c ignored vertical alignTop ];
+				   when: BlElementPositionInSpaceChangedEvent
+				   do: [ :anEvent | self topRightText: anEvent ]);
+		  addChild: (self label
+				   constraintsDo: [ :c |
+					   c ignored horizontal alignLeft.
+					   c ignored vertical alignBottom ];
+				   when: BlElementPositionInSpaceChangedEvent
+				   do: [ :anEvent | self bottomLeftText: anEvent ]);
+		  addChild: (self label
+				   constraintsDo: [ :c |
+					   c ignored horizontal alignRight.
+					   c ignored vertical alignBottom ];
+				   when: BlElementPositionInSpaceChangedEvent
+				   do: [ :anEvent | self bottomRightText: anEvent ])
 ]
 
 { #category : #'instance creation' }
-BlMouseEventExamples >> child [
-	<gtExample>
-	
+BlMouseEventExamplesTest >> child [
+
+	<sampleInstance>
 	^ self box
-		border: (BlBorder paint: Color red width: 1);
-		background: (Color red alpha: 0.3);
-		size: 400@300
+		  border: (BlBorder paint: Color red width: 1);
+		  background: (Color red alpha: 0.3);
+		  size: 400 @ 300
 ]
 
 { #category : #'instance creation' }
-BlMouseEventExamples >> grandChild [
-	<gtExample>
-	
+BlMouseEventExamplesTest >> grandChild [
+
+	<sampleInstance>
 	^ self box
-		border: (BlBorder paint: Color blue width: 1);
-		background: (Color blue alpha: 0.3);
-		size: 400@100
+		  border: (BlBorder paint: Color blue width: 1);
+		  background: (Color blue alpha: 0.3);
+		  size: 400 @ 100
 ]
 
 { #category : #'instance creation' }
-BlMouseEventExamples >> label [
-	<gtExample>
-	
+BlMouseEventExamplesTest >> label [
+
+	<sampleInstance>
 	^ BlTextElement new
-		preventMeAndChildrenMouseEvents; 
-		text: ((0@0) asRopedText fontSize: 10);
-		padding: (BlInsets all: 2);
-		constraintsDo: [ :c | c ignoreByLayout ]
+		  preventMeAndChildrenMouseEvents;
+		  text: ((0 @ 0) asRopedText fontSize: 10);
+		  padding: (BlInsets all: 2);
+		  constraintsDo: [ :c | c ignoreByLayout ]
 ]
 
 { #category : #'instance creation' }
-BlMouseEventExamples >> parent [
-	<gtExample>
-	
+BlMouseEventExamplesTest >> parent [
+
+	<sampleInstance>
 	^ self box
-		border: (BlBorder paint: Color gray width: 1);
-		background: (Color gray alpha: 0.3);
-		size: 300@250;
-		in: [ :anElement | anElement userData at: #blocEvents put: #parent ];
-		yourself
+		  border: (BlBorder paint: Color gray width: 1);
+		  background: (Color gray alpha: 0.3);
+		  size: 300 @ 250;
+		  in: [ :anElement |
+			  anElement userData at: #blocEvents put: #parent ];
+		  yourself
+]
+
+{ #category : #private }
+BlMouseEventExamplesTest >> pointToText: aPoint for: aTextElement [
+	aTextElement text: (aPoint asRopedText fontSize: 10; foreground: (aTextElement parent background paint color darker alpha: 1))
 ]
 
 { #category : #'examples - find event target' }
-BlMouseEventExamples >> parentWithClip [
+BlMouseEventExamplesTest >> testParentWithClip [
 
-	<gtExample>
+	<sampleInstance>
 	| gray red blue |
 	blue := self grandChild.
 	blue position: 100 @ 50.
@@ -143,9 +153,9 @@ BlMouseEventExamples >> parentWithClip [
 ]
 
 { #category : #'examples - find event target' }
-BlMouseEventExamples >> parentWithoutClipChildWithClip [
+BlMouseEventExamplesTest >> testParentWithoutClipChildWithClip [
 
-	<gtExample>
+	<sampleInstance>
 	| gray red blue |
 	blue := self grandChild.
 	blue position: 100 @ 50.
@@ -184,9 +194,9 @@ BlMouseEventExamples >> parentWithoutClipChildWithClip [
 ]
 
 { #category : #'examples - find event target' }
-BlMouseEventExamples >> parentWithoutClipChildWithoutClip [
+BlMouseEventExamplesTest >> testParentWithoutClipChildWithoutClip [
 
-	<gtExample>
+	<sampleInstance>
 	| gray red blue |
 	blue := self grandChild.
 	blue position: 100 @ 50.
@@ -226,12 +236,7 @@ BlMouseEventExamples >> parentWithoutClipChildWithoutClip [
 ]
 
 { #category : #private }
-BlMouseEventExamples >> pointToText: aPoint for: aTextElement [
-	aTextElement text: (aPoint asRopedText fontSize: 10; foreground: (aTextElement parent background paint color darker alpha: 1))
-]
-
-{ #category : #private }
-BlMouseEventExamples >> topLeftText: anEvent [
+BlMouseEventExamplesTest >> topLeftText: anEvent [
 
 	self
 		pointToText: (self boundsOf: anEvent currentTarget parent) topLeft
@@ -239,7 +244,7 @@ BlMouseEventExamples >> topLeftText: anEvent [
 ]
 
 { #category : #private }
-BlMouseEventExamples >> topRightText: anEvent [
+BlMouseEventExamplesTest >> topRightText: anEvent [
 
 	self
 		pointToText: (self boundsOf: anEvent currentTarget parent) topRight

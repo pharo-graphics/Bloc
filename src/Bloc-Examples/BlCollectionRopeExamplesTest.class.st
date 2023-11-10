@@ -3,17 +3,17 @@ I contain examples of a collection rope
 
 "
 Class {
-	#name : #BlCollectionRopeExamples,
-	#superclass : #BlExampleTest,
+	#name : #BlCollectionRopeExamplesTest,
+	#superclass : #TestCase,
 	#category : #'Bloc-Examples-Rope'
 }
 
 { #category : #'examples - attributes' }
-BlCollectionRopeExamples >> attributes_empty_0_to_0 [
+BlCollectionRopeExamplesTest >> testAttributes_empty_0_to_0 [
 	<gtExample>
 	| aRope anAttributedRope |
 	
-	aRope := self small_empty.
+	aRope := self testSmall_empty.
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 0.
 
 	self assert: anAttributedRope isNotEmpty.
@@ -24,11 +24,11 @@ BlCollectionRopeExamples >> attributes_empty_0_to_0 [
 ]
 
 { #category : #'examples - attributes' }
-BlCollectionRopeExamples >> attributes_small_0_to_0 [
+BlCollectionRopeExamplesTest >> testAttributes_small_0_to_0 [
 	<gtExample>
 	| aRope anAttributedRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 0.
 
 	self assert: anAttributedRope left attributes equals: { 1 }.
@@ -40,11 +40,11 @@ BlCollectionRopeExamples >> attributes_small_0_to_0 [
 ]
 
 { #category : #'examples - attributes' }
-BlCollectionRopeExamples >> attributes_small_0_to_1 [
+BlCollectionRopeExamplesTest >> testAttributes_small_0_to_1 [
 	<gtExample>
 	| aRope anAttributedRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 1.
 
 	self assert: anAttributedRope left attributes equals: { 1 }.
@@ -56,11 +56,11 @@ BlCollectionRopeExamples >> attributes_small_0_to_1 [
 ]
 
 { #category : #'examples - attributes' }
-BlCollectionRopeExamples >> attributes_small_0_to_5 [
+BlCollectionRopeExamplesTest >> testAttributes_small_0_to_5 [
 	<gtExample>
 	| aRope anAttributedRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 5.
 
 	self assert: anAttributedRope rope == aRope.
@@ -70,11 +70,11 @@ BlCollectionRopeExamples >> attributes_small_0_to_5 [
 ]
 
 { #category : #'examples - attributes' }
-BlCollectionRopeExamples >> attributes_small_2_to_2 [
+BlCollectionRopeExamplesTest >> testAttributes_small_2_to_2 [
 	<gtExample>
 	| aRope anAttributedRope |
 
-	aRope := self small.
+	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 2 to: 2.
 
 	self assert: anAttributedRope left asString equals: 'He'.
@@ -88,11 +88,11 @@ BlCollectionRopeExamples >> attributes_small_2_to_2 [
 ]
 
 { #category : #'examples - attributes' }
-BlCollectionRopeExamples >> attributes_small_4_to_5 [
+BlCollectionRopeExamplesTest >> testAttributes_small_4_to_5 [
 	<gtExample>
 	| aRope anAttributedRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 4 to: 5.
 
 	self assert: anAttributedRope left asString equals: 'Hell'.
@@ -104,11 +104,11 @@ BlCollectionRopeExamples >> attributes_small_4_to_5 [
 ]
 
 { #category : #'examples - attributes' }
-BlCollectionRopeExamples >> attributes_small_5_to_5 [
+BlCollectionRopeExamplesTest >> testAttributes_small_5_to_5 [
 	<gtExample>
 	| aRope anAttributedRope |
 
-	aRope := self small.
+	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 5 to: 5.
 
 	self assert: anAttributedRope left asString equals: 'Hello'.
@@ -120,11 +120,11 @@ BlCollectionRopeExamples >> attributes_small_5_to_5 [
 ]
 
 { #category : #'examples - attributes' }
-BlCollectionRopeExamples >> clear_attributes_empty_0_to_0 [
+BlCollectionRopeExamplesTest >> testClear_attributes_empty_0_to_0 [
 	<gtExample>
 	| anEmptyRope aRopeWithoutAttributes |
 	
-	anEmptyRope := self small_empty.
+	anEmptyRope := self testSmall_empty.
 	aRopeWithoutAttributes := anEmptyRope clearAttributes: 0 to: 0.
 
 	self assert: aRopeWithoutAttributes isEmpty.
@@ -134,7 +134,7 @@ BlCollectionRopeExamples >> clear_attributes_empty_0_to_0 [
 ]
 
 { #category : #'instance creation' }
-BlCollectionRopeExamples >> small [
+BlCollectionRopeExamplesTest >> testSmall [
 	<gtExample>
 	"Creates an instance of the rope of size smaller than combineLength"
 	| aRope |
@@ -151,11 +151,11 @@ BlCollectionRopeExamples >> small [
 ]
 
 { #category : #'examples - accessing' }
-BlCollectionRopeExamples >> small_at_each [
+BlCollectionRopeExamplesTest >> testSmall_at_each [
 	<gtExample>
 	| aRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 
 	self assert: (aRope at: 1) equals: $H.
 	self assert: (aRope at: 2) equals: $e.
@@ -167,11 +167,11 @@ BlCollectionRopeExamples >> small_at_each [
 ]
 
 { #category : #'examples - accessing' }
-BlCollectionRopeExamples >> small_children [
+BlCollectionRopeExamplesTest >> testSmall_children [
 	<gtExample>
 	| aRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 
 	self assert: aRope children equals: { }.
 
@@ -179,11 +179,11 @@ BlCollectionRopeExamples >> small_children [
 ]
 
 { #category : #'examples - deletion' }
-BlCollectionRopeExamples >> small_delete_0_to_0 [
+BlCollectionRopeExamplesTest >> testSmall_delete_0_to_0 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope delete: 0 to: 0.
 	
 	self assert: aNewRope == aRope.
@@ -192,11 +192,11 @@ BlCollectionRopeExamples >> small_delete_0_to_0 [
 ]
 
 { #category : #'examples - deletion' }
-BlCollectionRopeExamples >> small_delete_0_to_1 [
+BlCollectionRopeExamplesTest >> testSmall_delete_0_to_1 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope delete: 0 to: 1.
 	
 	self assert: aNewRope size equals: 4.
@@ -206,11 +206,11 @@ BlCollectionRopeExamples >> small_delete_0_to_1 [
 ]
 
 { #category : #'examples - deletion' }
-BlCollectionRopeExamples >> small_delete_0_to_5 [
+BlCollectionRopeExamplesTest >> testSmall_delete_0_to_5 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope delete: 0 to: 5.
 	
 	self assert: aNewRope size equals: 0.
@@ -220,11 +220,11 @@ BlCollectionRopeExamples >> small_delete_0_to_5 [
 ]
 
 { #category : #'examples - deletion' }
-BlCollectionRopeExamples >> small_delete_1_to_1 [
+BlCollectionRopeExamplesTest >> testSmall_delete_1_to_1 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope delete: 1 to: 1.
 	
 	self assert: aNewRope == aRope.
@@ -233,11 +233,11 @@ BlCollectionRopeExamples >> small_delete_1_to_1 [
 ]
 
 { #category : #'examples - deletion' }
-BlCollectionRopeExamples >> small_delete_1_to_3 [
+BlCollectionRopeExamplesTest >> testSmall_delete_1_to_3 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope delete: 1 to: 3.
 	
 	self assert: aNewRope size equals: 3.
@@ -247,11 +247,11 @@ BlCollectionRopeExamples >> small_delete_1_to_3 [
 ]
 
 { #category : #'examples - deletion' }
-BlCollectionRopeExamples >> small_delete_1_to_5 [
+BlCollectionRopeExamplesTest >> testSmall_delete_1_to_5 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope delete: 1 to: 5.
 	
 	self assert: aNewRope size equals: 1.
@@ -261,11 +261,11 @@ BlCollectionRopeExamples >> small_delete_1_to_5 [
 ]
 
 { #category : #'examples - deletion' }
-BlCollectionRopeExamples >> small_delete_4_to_5 [
+BlCollectionRopeExamplesTest >> testSmall_delete_4_to_5 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope delete: 4 to: 5.
 	
 	self assert: aNewRope size equals: 4.
@@ -275,11 +275,11 @@ BlCollectionRopeExamples >> small_delete_4_to_5 [
 ]
 
 { #category : #'examples - deletion' }
-BlCollectionRopeExamples >> small_delete_5_to_5 [
+BlCollectionRopeExamplesTest >> testSmall_delete_5_to_5 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope delete: 5 to: 5.
 	
 	self assert: aNewRope == aRope.
@@ -288,11 +288,11 @@ BlCollectionRopeExamples >> small_delete_5_to_5 [
 ]
 
 { #category : #'examples - accessing' }
-BlCollectionRopeExamples >> small_depth [
+BlCollectionRopeExamplesTest >> testSmall_depth [
 	<gtExample>
 	| aRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 
 	self assert: aRope depth equals: 1.
 
@@ -300,11 +300,11 @@ BlCollectionRopeExamples >> small_depth [
 ]
 
 { #category : #'examples - enumeration' }
-BlCollectionRopeExamples >> small_do [
+BlCollectionRopeExamplesTest >> testSmall_do [
 	<gtExample>
 	| aRope theIterated |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream | aRope do: [ :eachCharacter| aStream nextPut: eachCharacter ] ].
 
 	self assert: theIterated equals: 'Hello'.
@@ -313,11 +313,11 @@ BlCollectionRopeExamples >> small_do [
 ]
 
 { #category : #'instance creation' }
-BlCollectionRopeExamples >> small_empty [
+BlCollectionRopeExamplesTest >> testSmall_empty [
 	<gtExample>
 	| aRope anEmpty |
 
-	aRope := self small.
+	aRope := self testSmall.
 	anEmpty := aRope empty.
 
 	self assert: anEmpty size equals: 0.
@@ -327,11 +327,11 @@ BlCollectionRopeExamples >> small_empty [
 ]
 
 { #category : #'examples - from to' }
-BlCollectionRopeExamples >> small_from_0_to_0 [
+BlCollectionRopeExamplesTest >> testSmall_from_0_to_0 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope from: 0 to: 0.
 	
 	self assert: aNewRope size equals: 0.
@@ -341,11 +341,11 @@ BlCollectionRopeExamples >> small_from_0_to_0 [
 ]
 
 { #category : #'examples - enumeration' }
-BlCollectionRopeExamples >> small_from_0_to_0_do [
+BlCollectionRopeExamplesTest >> testSmall_from_0_to_0_do [
 	<gtExample>
 	| aRope theIterated |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream | aRope from: 0 to: 0 do: [ :eachCharacter| aStream nextPut: eachCharacter ] ].
 
 	self assert: theIterated equals: ''.
@@ -354,11 +354,11 @@ BlCollectionRopeExamples >> small_from_0_to_0_do [
 ]
 
 { #category : #'examples - from to' }
-BlCollectionRopeExamples >> small_from_0_to_1 [
+BlCollectionRopeExamplesTest >> testSmall_from_0_to_1 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope from: 0 to: 1.
 	
 	self assert: aNewRope size equals: 1.
@@ -368,11 +368,11 @@ BlCollectionRopeExamples >> small_from_0_to_1 [
 ]
 
 { #category : #'examples - enumeration' }
-BlCollectionRopeExamples >> small_from_0_to_1_do [
+BlCollectionRopeExamplesTest >> testSmall_from_0_to_1_do [
 	<gtExample>
 	| aRope theIterated |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream | aRope from: 0 to: 1 do: [ :eachCharacter| aStream nextPut: eachCharacter ] ].
 
 	self assert: theIterated equals: 'H'.
@@ -381,11 +381,11 @@ BlCollectionRopeExamples >> small_from_0_to_1_do [
 ]
 
 { #category : #'examples - from to' }
-BlCollectionRopeExamples >> small_from_0_to_5 [
+BlCollectionRopeExamplesTest >> testSmall_from_0_to_5 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope from: 0 to: 5.
 	
 	self assert: aNewRope == aRope.
@@ -394,11 +394,11 @@ BlCollectionRopeExamples >> small_from_0_to_5 [
 ]
 
 { #category : #'examples - enumeration' }
-BlCollectionRopeExamples >> small_from_0_to_5_do [
+BlCollectionRopeExamplesTest >> testSmall_from_0_to_5_do [
 	<gtExample>
 	| aRope theIterated |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream | aRope from: 0 to: 5 do: [ :eachCharacter| aStream nextPut: eachCharacter ] ].
 
 	self assert: theIterated equals: 'Hello'.
@@ -407,11 +407,11 @@ BlCollectionRopeExamples >> small_from_0_to_5_do [
 ]
 
 { #category : #'examples - from to' }
-BlCollectionRopeExamples >> small_from_1_to_1 [
+BlCollectionRopeExamplesTest >> testSmall_from_1_to_1 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope from: 1 to: 1.
 	
 	self assert: aNewRope size equals: 0.
@@ -421,11 +421,11 @@ BlCollectionRopeExamples >> small_from_1_to_1 [
 ]
 
 { #category : #'examples - enumeration' }
-BlCollectionRopeExamples >> small_from_1_to_1_do [
+BlCollectionRopeExamplesTest >> testSmall_from_1_to_1_do [
 	<gtExample>
 	| aRope theIterated |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream | aRope from: 1 to: 1 do: [ :eachCharacter| aStream nextPut: eachCharacter ] ].
 
 	self assert: theIterated equals: ''.
@@ -434,11 +434,11 @@ BlCollectionRopeExamples >> small_from_1_to_1_do [
 ]
 
 { #category : #'examples - from to' }
-BlCollectionRopeExamples >> small_from_1_to_2 [
+BlCollectionRopeExamplesTest >> testSmall_from_1_to_2 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope from: 1 to: 2.
 	
 	self assert: aNewRope size equals: 1.
@@ -448,11 +448,11 @@ BlCollectionRopeExamples >> small_from_1_to_2 [
 ]
 
 { #category : #'examples - enumeration' }
-BlCollectionRopeExamples >> small_from_1_to_2_do [
+BlCollectionRopeExamplesTest >> testSmall_from_1_to_2_do [
 	<gtExample>
 	| aRope theIterated |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream | aRope from: 1 to: 2 do: [ :eachCharacter| aStream nextPut: eachCharacter ] ].
 
 	self assert: theIterated equals: 'e'.
@@ -461,11 +461,11 @@ BlCollectionRopeExamples >> small_from_1_to_2_do [
 ]
 
 { #category : #'examples - from to' }
-BlCollectionRopeExamples >> small_from_1_to_5 [
+BlCollectionRopeExamplesTest >> testSmall_from_1_to_5 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope from: 1 to: 5.
 	
 	self assert: aNewRope size equals: 4.
@@ -475,11 +475,11 @@ BlCollectionRopeExamples >> small_from_1_to_5 [
 ]
 
 { #category : #'examples - enumeration' }
-BlCollectionRopeExamples >> small_from_1_to_5_do [
+BlCollectionRopeExamplesTest >> testSmall_from_1_to_5_do [
 	<gtExample>
 	| aRope theIterated |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream | aRope from: 1 to: 5 do: [ :eachCharacter| aStream nextPut: eachCharacter ] ].
 
 	self assert: theIterated equals: 'ello'.
@@ -488,11 +488,11 @@ BlCollectionRopeExamples >> small_from_1_to_5_do [
 ]
 
 { #category : #'examples - from to' }
-BlCollectionRopeExamples >> small_from_3_to_5 [
+BlCollectionRopeExamplesTest >> testSmall_from_3_to_5 [
 	<gtExample>
 	| aRope aNewRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	aNewRope := aRope from: 3 to: 5.
 	
 	self assert: aNewRope size equals: 2.
@@ -502,11 +502,11 @@ BlCollectionRopeExamples >> small_from_3_to_5 [
 ]
 
 { #category : #'examples - enumeration' }
-BlCollectionRopeExamples >> small_from_3_to_5_do [
+BlCollectionRopeExamplesTest >> testSmall_from_3_to_5_do [
 	<gtExample>
 	| aRope theIterated |
 	
-	aRope := self small.
+	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream | aRope from: 3 to: 5 do: [ :eachCharacter| aStream nextPut: eachCharacter ] ].
 
 	self assert: theIterated equals: 'lo'.
@@ -515,11 +515,11 @@ BlCollectionRopeExamples >> small_from_3_to_5_do [
 ]
 
 { #category : #'examples - insertion' }
-BlCollectionRopeExamples >> small_insert_rope_123_at_0 [
-	<gtExample>
-	| aRope aNewRope |
+BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_0 [
 
-	aRope := self small.
+	<sampleInstance>
+	| aRope aNewRope |
+	aRope := self testSmall.
 	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 0.
 
 	self assert: aNewRope size equals: 8.
@@ -529,11 +529,11 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_0 [
 ]
 
 { #category : #'examples - insertion' }
-BlCollectionRopeExamples >> small_insert_rope_123_at_1 [
-	<gtExample>
-	| aRope aNewRope |
+BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_1 [
 
-	aRope := self small.
+	<sampleInstance>
+	| aRope aNewRope |
+	aRope := self testSmall.
 	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 1.
 
 	self assert: aNewRope size equals: 8.
@@ -543,11 +543,11 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_1 [
 ]
 
 { #category : #'examples - insertion' }
-BlCollectionRopeExamples >> small_insert_rope_123_at_2 [
-	<gtExample>
-	| aRope aNewRope |
+BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_2 [
 
-	aRope := self small.
+	<sampleInstance>
+	| aRope aNewRope |
+	aRope := self testSmall.
 	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 2.
 
 	self assert: aNewRope size equals: 8.
@@ -557,11 +557,11 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_2 [
 ]
 
 { #category : #'examples - insertion' }
-BlCollectionRopeExamples >> small_insert_rope_123_at_3 [
-	<gtExample>
-	| aRope aNewRope |
+BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_3 [
 
-	aRope := self small.
+	<sampleInstance>
+	| aRope aNewRope |
+	aRope := self testSmall.
 	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 3.
 
 	self assert: aNewRope size equals: 8.
@@ -571,11 +571,11 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_3 [
 ]
 
 { #category : #'examples - insertion' }
-BlCollectionRopeExamples >> small_insert_rope_123_at_4 [
-	<gtExample>
-	| aRope aNewRope |
+BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_4 [
 
-	aRope := self small.
+	<sampleInstance>
+	| aRope aNewRope |
+	aRope := self testSmall.
 	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 4.
 
 	self assert: aNewRope size equals: 8.
@@ -585,11 +585,11 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_4 [
 ]
 
 { #category : #'examples - insertion' }
-BlCollectionRopeExamples >> small_insert_rope_123_at_5 [
-	<gtExample>
-	| aRope aNewRope |
+BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_5 [
 
-	aRope := self small.
+	<sampleInstance>
+	| aRope aNewRope |
+	aRope := self testSmall.
 	aNewRope := aRope insert: (BlCollectionRope collection: '123') at: 5.
 
 	self assert: aNewRope size equals: 8.
@@ -599,81 +599,81 @@ BlCollectionRopeExamples >> small_insert_rope_123_at_5 [
 ]
 
 { #category : #'examples - insertion' }
-BlCollectionRopeExamples >> small_insert_string_123_at_0 [
-	<gtExample>
-	| aRope aNewRope |
+BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_0 [
 
-	aRope := self small.
+	<sampleInstance>
+	| aRope aNewRope |
+	aRope := self testSmall.
 	aNewRope := aRope insertItems: '123' at: 0.
 
 	self assert: aNewRope size equals: 8.
 	self assert: aNewRope asString equals: '123Hello'.
-	
+
 	^ aNewRope
 ]
 
 { #category : #'examples - insertion' }
-BlCollectionRopeExamples >> small_insert_string_123_at_1 [
-	<gtExample>
-	| aRope aNewRope |
+BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_1 [
 
-	aRope := self small.
+	<sampleInstance>
+	| aRope aNewRope |
+	aRope := self testSmall.
 	aNewRope := aRope insertItems: '123' at: 1.
 
 	self assert: aNewRope size equals: 8.
 	self assert: aNewRope asString equals: 'H123ello'.
-	
+
 	^ aNewRope
 ]
 
 { #category : #'examples - insertion' }
-BlCollectionRopeExamples >> small_insert_string_123_at_2 [
-	<gtExample>
-	| aRope aNewRope |
+BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_2 [
 
-	aRope := self small.
+	<sampleInstance>
+	| aRope aNewRope |
+	aRope := self testSmall.
 	aNewRope := aRope insertItems: '123' at: 2.
 
 	self assert: aNewRope size equals: 8.
 	self assert: aNewRope asString equals: 'He123llo'.
-	
+
 	^ aNewRope
 ]
 
 { #category : #'examples - insertion' }
-BlCollectionRopeExamples >> small_insert_string_123_at_3 [
-	<gtExample>
-	| aRope aNewRope |
+BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_3 [
 
-	aRope := self small.
+	<sampleInstance>
+	| aRope aNewRope |
+	aRope := self testSmall.
 	aNewRope := aRope insertItems: '123' at: 3.
 
 	self assert: aNewRope size equals: 8.
 	self assert: aNewRope asString equals: 'Hel123lo'.
-	
+
 	^ aNewRope
 ]
 
 { #category : #'examples - insertion' }
-BlCollectionRopeExamples >> small_insert_string_123_at_4 [
-	<gtExample>
-	| aRope aNewRope |
+BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_4 [
 
-	aRope := self small.
+	<sampleInstance>
+	| aRope aNewRope |
+	aRope := self testSmall.
 	aNewRope := aRope insertItems: '123' at: 4.
 
 	self assert: aNewRope size equals: 8.
 	self assert: aNewRope asString equals: 'Hell123o'.
-	
+
 	^ aNewRope
 ]
 
 { #category : #'examples - insertion' }
-BlCollectionRopeExamples >> small_insert_string_123_at_5 [
-	<gtExample>
-	| aRope aNewRope |
+BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_5 [
 
-	aRope := self small.
+	<sampleInstance>
+	| aRope aNewRope |
+	aRope := self testSmall.
 	aNewRope := aRope insertItems: '123' at: 5.
 
 	self assert: aNewRope size equals: 8.
@@ -683,11 +683,11 @@ BlCollectionRopeExamples >> small_insert_string_123_at_5 [
 ]
 
 { #category : #'examples - testing' }
-BlCollectionRopeExamples >> small_isEmpty [
+BlCollectionRopeExamplesTest >> testSmall_isEmpty [
 	<gtExample>
 	| aRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 
 	self assert: aRope isEmpty not.
 
@@ -695,11 +695,11 @@ BlCollectionRopeExamples >> small_isEmpty [
 ]
 
 { #category : #'examples - testing' }
-BlCollectionRopeExamples >> small_isLeaf [
+BlCollectionRopeExamplesTest >> testSmall_isLeaf [
 	<gtExample>
 	| aRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 
 	self assert: aRope isLeaf.
 
@@ -707,11 +707,11 @@ BlCollectionRopeExamples >> small_isLeaf [
 ]
 
 { #category : #'examples - testing' }
-BlCollectionRopeExamples >> small_isNotEmpty [
+BlCollectionRopeExamplesTest >> testSmall_isNotEmpty [
 	<gtExample>
 	| aRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 
 	self assert: aRope isNotEmpty.
 
@@ -719,11 +719,11 @@ BlCollectionRopeExamples >> small_isNotEmpty [
 ]
 
 { #category : #'examples - accessing' }
-BlCollectionRopeExamples >> small_size [
+BlCollectionRopeExamplesTest >> testSmall_size [
 	<gtExample>
 	| aRope |
 	
-	aRope := self small.
+	aRope := self testSmall.
 
 	self assert: aRope size equals: 5.
 

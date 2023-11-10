@@ -8,32 +8,30 @@ Used mainly
 
 "
 Class {
-	#name : 'BlHostTextMeasurer',
-	#superclass : 'Object',
-	#category : 'Bloc-Universe - Renderer',
-	#package : 'Bloc',
-	#tag : 'Universe - Renderer'
+	#name : #BlHostTextMeasurer,
+	#superclass : #Object,
+	#category : 'Bloc-Universe - Renderer'
 }
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlHostTextMeasurer >> measureTextParagraph: aBlTextParagraph [
 
 	self subclassResponsibility
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlHostTextMeasurer >> measureTextSpan: aBlTextSpan [
 
 	self subclassResponsibility
 ]
 
-{ #category : 'paragraph span instance creation' }
+{ #category : #'paragraph span instance creation' }
 BlHostTextMeasurer >> newParagraphSpan [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlHostTextMeasurer >> newParagraphSpanFor: aBlSpan [
 
 	^ self newParagraphSpan

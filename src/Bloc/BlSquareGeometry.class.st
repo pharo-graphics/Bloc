@@ -1,22 +1,20 @@
 Class {
-	#name : 'BlSquareGeometry',
-	#superclass : 'BlElementVectorGeometry',
+	#name : #BlSquareGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'length',
 		'origin'
 	],
-	#category : 'Bloc-Basic-Geometry',
-	#package : 'Bloc',
-	#tag : 'Basic-Geometry'
+	#category : 'Bloc-Basic-Geometry'
 }
 
-{ #category : 'geometry testing' }
+{ #category : #'geometry testing' }
 BlSquareGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 
 	^ true
 ]
 
-{ #category : 'geometry bounds' }
+{ #category : #'geometry bounds' }
 BlSquareGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
@@ -26,24 +24,24 @@ BlSquareGeometry >> geometryBounds: aBlBounds [
 		extent: (self length * 2.0) asPoint
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlSquareGeometry >> hasCaps [
 
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlSquareGeometry >> hasJoins [
 
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSquareGeometry >> length [
 	^ length
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlSquareGeometry >> matchExtent: anExtent [
 	length := anExtent min / 2.0.
 	origin := (anExtent - anExtent min asPoint) / 2.0.
@@ -51,7 +49,7 @@ BlSquareGeometry >> matchExtent: anExtent [
 	self extent: anExtent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSquareGeometry >> origin [
 	^ origin
 ]

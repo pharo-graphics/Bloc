@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlVerticalCoordinateBottomAlignment',
-	#superclass : 'BlVerticalCoordinateAlignment',
-	#category : 'Bloc-Layouts-Alignment',
-	#package : 'Bloc',
-	#tag : 'Layouts-Alignment'
+	#name : #BlVerticalCoordinateBottomAlignment,
+	#superclass : #BlVerticalCoordinateAlignment,
+	#category : 'Bloc-Layouts-Alignment'
 }
 
-{ #category : 'translation' }
+{ #category : #translation }
 BlVerticalCoordinateBottomAlignment >> translationOf: aBounds in: aContainerBounds [
 	| aRelativeDelta anExpectedBottom |
 		
