@@ -3,19 +3,17 @@ I represent a pool of objects
 
 "
 Class {
-	#name : 'BlObjectPool',
-	#superclass : 'Object',
-	#category : 'Bloc-Basic-Support',
-	#package : 'Bloc',
-	#tag : 'Basic-Support'
+	#name : #BlObjectPool,
+	#superclass : #Object,
+	#category : 'Bloc-Basic-Support'
 }
 
-{ #category : 'pool' }
+{ #category : #pool }
 BlObjectPool >> acquire [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'pool' }
+{ #category : #pool }
 BlObjectPool >> release: anObject [
 	^ self subclassResponsibility
 ]

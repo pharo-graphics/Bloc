@@ -5,38 +5,36 @@ I allow `=BlKeyboardProcessor`= to sent key still pressed event every frame if t
 
 "
 Class {
-	#name : 'BlKeyboardBuffer',
-	#superclass : 'Object',
+	#name : #BlKeyboardBuffer,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'events'
 	],
-	#category : 'Bloc-Space - Events',
-	#package : 'Bloc',
-	#tag : 'Space - Events'
+	#category : 'Bloc-Space - Events'
 }
 
-{ #category : 'adding / removing' }
+{ #category : #'adding / removing' }
 BlKeyboardBuffer >> add: anEvent [
 	events at: anEvent key put: anEvent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlKeyboardBuffer >> eventAt: aKey [
 	<return: #BlKeyDownEvent>
 	
 	^ events at: aKey
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlKeyboardBuffer >> events [
 	<return: #Collection of: #BlKeyDownEvent>
 
 	^ events values
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlKeyboardBuffer >> hasEvent: aKey [
 	"Return true if there is a buffered event for a given key"
 	<return: #Boolean>
@@ -44,7 +42,7 @@ BlKeyboardBuffer >> hasEvent: aKey [
 	^ events includesKey: aKey
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlKeyboardBuffer >> hasExactlyAll: aCollectionOfKeys [
 	"Return true if the buffer has exactly a collection of given keys"
 	<return: #Boolean>
@@ -53,24 +51,24 @@ BlKeyboardBuffer >> hasExactlyAll: aCollectionOfKeys [
 	^ (events keys asSet reject: #isUnkownKey) = aCollectionOfKeys asSet
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlKeyboardBuffer >> initialize [
 	super initialize.
 	
 	events := Dictionary new
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlKeyboardBuffer >> isEmpty [
 	^ events isEmpty
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlKeyboardBuffer >> isNotEmpty [
 	^ events isNotEmpty
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlKeyboardBuffer >> isPressed: aKey [
 	"Return true if a given key is pressed, false otherwise"
 	<return: #Boolean>
@@ -78,7 +76,7 @@ BlKeyboardBuffer >> isPressed: aKey [
 	^ self hasEvent: aKey
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlKeyboardBuffer >> printOn: aStream [
 
 	aStream nextPut: $(.
@@ -88,7 +86,7 @@ BlKeyboardBuffer >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : 'adding / removing' }
+{ #category : #'adding / removing' }
 BlKeyboardBuffer >> remove: anEvent [
 	events removeKey: anEvent key
 ]

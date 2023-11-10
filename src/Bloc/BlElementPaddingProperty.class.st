@@ -1,15 +1,13 @@
 Class {
-	#name : 'BlElementPaddingProperty',
-	#superclass : 'BlElementProperty',
+	#name : #BlElementPaddingProperty,
+	#superclass : #BlElementProperty,
 	#instVars : [
 		'padding'
 	],
-	#category : 'Bloc-Basic-Properties',
-	#package : 'Bloc',
-	#tag : 'Basic-Properties'
+	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlElementPaddingProperty >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -20,24 +18,24 @@ BlElementPaddingProperty >> = anObject [
 	^ padding = anObject padding
 ]
 
-{ #category : 'api - property' }
+{ #category : #'api - property' }
 BlElementPaddingProperty >> applyOnElement: anElement [
 	anElement padding: self padding
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlElementPaddingProperty >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ padding hash
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementPaddingProperty >> padding [
 	^ padding
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementPaddingProperty >> padding: anObject [
 	padding := anObject
 ]

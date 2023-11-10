@@ -3,14 +3,12 @@ I have been automatically converted and probably manually tweaked from BlVector2
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlVectorTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-UnitedTests-Math',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Math'
+	#name : #BlVectorTest,
+	#superclass : #TestCase,
+	#category : 'Bloc-UnitedTests-Math'
 }
 
-{ #category : 'tests - conversions' }
+{ #category : #'tests - conversions' }
 BlVectorTest >> testAsBlocVector [
 	
 	| v |
@@ -20,7 +18,7 @@ BlVectorTest >> testAsBlocVector [
 	self assert: v y equals: 10.
 ]
 
-{ #category : 'tests - conversions' }
+{ #category : #'tests - conversions' }
 BlVectorTest >> testAsBlocVectorNumber [
 	
 	| v |
@@ -30,7 +28,7 @@ BlVectorTest >> testAsBlocVectorNumber [
 	self assert: v y equals: 10.
 ]
 
-{ #category : 'tests - conversions' }
+{ #category : #'tests - conversions' }
 BlVectorTest >> testAsBlocVectorPoint [
 	
 	| v |
@@ -40,7 +38,7 @@ BlVectorTest >> testAsBlocVectorPoint [
 	self assert: v y equals: 20.
 ]
 
-{ #category : 'tests - maths' }
+{ #category : #'tests - maths' }
 BlVectorTest >> testNormal [ 
 
 	| v norm |
@@ -51,7 +49,7 @@ BlVectorTest >> testNormal [
 	self assert: (v asPoint crossProduct: norm asPoint) equals: 1
 ]
 
-{ #category : 'tests - conversions' }
+{ #category : #'tests - conversions' }
 BlVectorTest >> testSign [
 	
 	| signVector | 
@@ -60,7 +58,7 @@ BlVectorTest >> testSign [
 	self assert: signVector y equals: -1.
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlVectorTest >> testSingleton [
 
 	| singletonSelectors |
@@ -76,7 +74,7 @@ BlVectorTest >> testSingleton [
 	
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlVectorTest >> testVector0degrees [
 	
 	| aVector |
@@ -86,7 +84,7 @@ BlVectorTest >> testVector0degrees [
 	^ aVector
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlVectorTest >> testVector180degrees [
 	
 	| aVector |
@@ -96,7 +94,7 @@ BlVectorTest >> testVector180degrees [
 	^ aVector
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlVectorTest >> testVector270degrees [
 	
 	| aVector |
@@ -106,7 +104,7 @@ BlVectorTest >> testVector270degrees [
 	^ aVector
 ]
 
-{ #category : 'tests - arithmetic' }
+{ #category : #'tests - arithmetic' }
 BlVectorTest >> testVector2DAddition [
 	
 	| aVector anotherVector sum |
@@ -118,7 +116,7 @@ BlVectorTest >> testVector2DAddition [
 	^ sum
 ]
 
-{ #category : 'tests - arithmetic' }
+{ #category : #'tests - arithmetic' }
 BlVectorTest >> testVector2DAdditionWith3D [
 	
 	| aVector anotherVector sum |
@@ -131,7 +129,7 @@ BlVectorTest >> testVector2DAdditionWith3D [
 	^ sum
 ]
 
-{ #category : 'tests - arithmetic' }
+{ #category : #'tests - arithmetic' }
 BlVectorTest >> testVector2DMultiplication [
 	
 	| aVector mul |
@@ -142,7 +140,7 @@ BlVectorTest >> testVector2DMultiplication [
 	^ mul
 ]
 
-{ #category : 'tests - arithmetic' }
+{ #category : #'tests - arithmetic' }
 BlVectorTest >> testVector2DMultiplicationConstantFirst [
 	
 	| aVector mul |
@@ -153,7 +151,7 @@ BlVectorTest >> testVector2DMultiplicationConstantFirst [
 	^ mul
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlVectorTest >> testVector346degrees [
 	
 	| aVector |
@@ -169,7 +167,7 @@ BlVectorTest >> testVector346degrees [
 	^ aVector
 ]
 
-{ #category : 'tests - arithmetic' }
+{ #category : #'tests - arithmetic' }
 BlVectorTest >> testVector3DAddition [
 
 	| aVector anotherVector sum |
@@ -182,7 +180,7 @@ BlVectorTest >> testVector3DAddition [
 	^ sum
 ]
 
-{ #category : 'tests - arithmetic' }
+{ #category : #'tests - arithmetic' }
 BlVectorTest >> testVector3DAdditionWith2D [
 
 	| aVector anotherVector sum |
@@ -195,7 +193,7 @@ BlVectorTest >> testVector3DAdditionWith2D [
 	^ sum
 ]
 
-{ #category : 'tests - arithmetic' }
+{ #category : #'tests - arithmetic' }
 BlVectorTest >> testVector3DMultiplication [
 
 	| aVector mul |
@@ -207,7 +205,7 @@ BlVectorTest >> testVector3DMultiplication [
 	^ mul
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlVectorTest >> testVector45degrees [
 	
 	| aVector |
@@ -220,7 +218,7 @@ BlVectorTest >> testVector45degrees [
 	^ aVector
 ]
 
-{ #category : 'tests - arithmetic' }
+{ #category : #'tests - arithmetic' }
 BlVectorTest >> testVectorMultiplicationConstantFirst [
 	
 	| aVector mul |

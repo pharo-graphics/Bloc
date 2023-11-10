@@ -3,14 +3,12 @@ I have been automatically converted and probably manually tweaked from BlElement
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlElementChildrenTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-UnitedTests-Children',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Children'
+	#name : #BlElementChildrenTest,
+	#superclass : #TestCase,
+	#category : 'Bloc-UnitedTests-Children'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> hierarchyChildren [
 	<sampleInstance>
 
@@ -35,7 +33,7 @@ BlElementChildrenTest >> hierarchyChildren [
 	^ aContainer
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> multipleChildren [
 
 	<sampleInstance>
@@ -50,21 +48,21 @@ BlElementChildrenTest >> multipleChildren [
 	^ aContainer
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> multipleChildrenDepth2 [
 
 	<sampleInstance>
 	^ self multipleChildrenDepth: 2
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> multipleChildrenDepth3 [
 
 	<sampleInstance>
 	^ self multipleChildrenDepth: 3
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> multipleChildrenDepth: aDepth [
 
 	| aContainer |
@@ -73,7 +71,7 @@ BlElementChildrenTest >> multipleChildrenDepth: aDepth [
 	^ aContainer
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> multipleChildrenIn: aContainer depth: aDepth [
 
 	<sampleInstance>
@@ -91,7 +89,7 @@ BlElementChildrenTest >> multipleChildrenIn: aContainer depth: aDepth [
 	^ aContainer
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> overlappingChildren [
 
 	<sampleInstance>
@@ -116,7 +114,7 @@ BlElementChildrenTest >> overlappingChildren [
 	^ aContainer
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testAllChildrenBreadthFirstWithDepthDo [
 
 	| aContainer allChildren founds all |
@@ -145,7 +143,7 @@ BlElementChildrenTest >> testAllChildrenBreadthFirstWithDepthDo [
 	
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testAllLeafChildrenAt100200 [
 
 	| aContainer theChildren |
@@ -155,7 +153,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt100200 [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testAllLeafChildrenAt200100 [
 
 	| aContainer theChildren |
@@ -165,7 +163,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt200100 [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testAllLeafChildrenAt200200 [
 
 	| aContainer theChildren |
@@ -177,7 +175,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt200200 [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testAllLeafChildrenAt5050 [
 
 	| aContainer theChildren |
@@ -187,7 +185,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt5050 [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testAllLeafChildrenAt600600 [
 
 	| aContainer theChildren |
@@ -197,7 +195,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt600600 [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testAllParentsDetectifFoundifNone1 [
 
 	| aContainer aChild |
@@ -219,7 +217,7 @@ BlElementChildrenTest >> testAllParentsDetectifFoundifNone1 [
 		ifNone: [ self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testAllParentsDetectifFoundifNone2 [
 
 	| aContainer aChild |
@@ -232,7 +230,7 @@ BlElementChildrenTest >> testAllParentsDetectifFoundifNone2 [
 		ifNone: [ self assert: false ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testAllParentsDo [
 
 	| aContainer aChild res |
@@ -258,7 +256,7 @@ BlElementChildrenTest >> testAllParentsDo [
 	self assert: res asArray equals: {  }
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testAllParentsReversedDo [
 
 	| aContainer aChild all |
@@ -282,7 +280,7 @@ BlElementChildrenTest >> testAllParentsReversedDo [
 			(aContainer childWithId: #shape_9) }
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testAllParentsToDo [
 
 	| aContainer res |
@@ -311,7 +309,7 @@ BlElementChildrenTest >> testAllParentsToDo [
 			aContainer }
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildAt [
 
 	| aContainer |
@@ -328,7 +326,7 @@ BlElementChildrenTest >> testChildAt [
 			ifFalse: [ self assert: false ] ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildIndexOf [
 
 	| aContainer aNonChild |
@@ -347,7 +345,7 @@ BlElementChildrenTest >> testChildIndexOf [
 	self assert: (aContainer childIndexOf: aNonChild) equals: 0
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildWithId [
 
 	| aContainer aChild1 aChild2 |
@@ -372,7 +370,7 @@ BlElementChildrenTest >> testChildWithId [
 	self assert: false ] onErrorDo: [ :err | self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildWithId1 [
 
 	<sampleInstance>
@@ -395,7 +393,7 @@ BlElementChildrenTest >> testChildWithId1 [
 	self assert: false ] onErrorDo: [ :err | self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildWithId2 [
 
 	<sampleInstance>
@@ -421,7 +419,7 @@ BlElementChildrenTest >> testChildWithId2 [
 	self assert: false ] onErrorDo: [ :err | self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildWithIdIfFound1 [
 
 	| aContainer |
@@ -440,7 +438,7 @@ BlElementChildrenTest >> testChildWithIdIfFound1 [
 		ifFound: [ self assert: false ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildWithIdIfFound2 [
 
 	| aContainer |
@@ -459,7 +457,7 @@ BlElementChildrenTest >> testChildWithIdIfFound2 [
 		ifFound: [ self assert: false ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildWithIdIfFoundifNone1 [
 
 	| aContainer |
@@ -482,7 +480,7 @@ BlElementChildrenTest >> testChildWithIdIfFoundifNone1 [
 		ifNone: [ self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildWithIdIfFoundifNone2 [
 
 	| aContainer |
@@ -505,7 +503,7 @@ BlElementChildrenTest >> testChildWithIdIfFoundifNone2 [
 		ifNone: [ self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildWithIdifNone1 [
 
 	| aContainer |
@@ -524,7 +522,7 @@ BlElementChildrenTest >> testChildWithIdifNone1 [
 		ifNone: [ self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildWithIdifNone2 [
 
 	| aContainer |
@@ -543,7 +541,7 @@ BlElementChildrenTest >> testChildWithIdifNone2 [
 		ifNone: [ self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildren1 [
 
 	| aContainer allChildren |
@@ -563,7 +561,7 @@ BlElementChildrenTest >> testChildren1 [
 		equals: (aContainer childWithId: #shape_10)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildren2 [
 
 	| aContainer allChildren |
@@ -577,7 +575,7 @@ BlElementChildrenTest >> testChildren2 [
 		equals: (aContainer childWithId: #shape_1)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildrenCount1 [
 
 	| aContainer |
@@ -585,7 +583,7 @@ BlElementChildrenTest >> testChildrenCount1 [
 	self assert: aContainer childrenCount equals: 10
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testChildrenCount2 [
 
 	<sampleInstance>
@@ -594,7 +592,7 @@ BlElementChildrenTest >> testChildrenCount2 [
 	self assert: aContainer childrenCount equals: 1
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlElementChildrenTest >> testDirectChildWithIdifFoundifNone [
 
 	| aContainer |
@@ -613,7 +611,7 @@ BlElementChildrenTest >> testDirectChildWithIdifFoundifNone [
 		ifNone: [ self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testFirstChild [
 
 	| aContainer anElementWithNoChild |
@@ -628,7 +626,7 @@ BlElementChildrenTest >> testFirstChild [
 	self assert: false ] onErrorDo: [ :err | self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testFirstCommonParentifFoundifNone [
 
 	| aContainer aChild1 aChild2 |
@@ -668,7 +666,7 @@ BlElementChildrenTest >> testFirstCommonParentifFoundifNone [
 		ifNone: [ self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testHasChildren [
 
 	| aContainer |
@@ -681,7 +679,7 @@ BlElementChildrenTest >> testHasChildren [
 	self assert: aContainer hasChildren.
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testIsFirstChild [
 
 	| aContainer aChild |
@@ -704,7 +702,7 @@ BlElementChildrenTest >> testIsFirstChild [
 	self assert: false ] onErrorDo: [ self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testIsLastChild [
 
 	| aContainer aChild |
@@ -727,7 +725,7 @@ BlElementChildrenTest >> testIsLastChild [
 	self assert: false ] onErrorDo: [ self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testNextSiblingDo [
 
 	| aContainer aChild |
@@ -742,7 +740,7 @@ BlElementChildrenTest >> testNextSiblingDo [
 	aChild nextSiblingDo: [ :next | self assert: false ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testNextSiblingSuchThatdo [
 
 	| aContainer aChild |
@@ -767,7 +765,7 @@ BlElementChildrenTest >> testNextSiblingSuchThatdo [
 		do: [ :next | self assert: false ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testOwner [
 
 	| aContainer |
@@ -784,7 +782,7 @@ BlElementChildrenTest >> testOwner [
 	self assert: aContainer owner equals: nil
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testParentDo [
 
 	| aContainer aChild res |
@@ -802,7 +800,7 @@ BlElementChildrenTest >> testParentDo [
 	self assert: res asArray equals: {  }
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testPreviousSiblingDo [
 
 	| aContainer aChild |
@@ -817,7 +815,7 @@ BlElementChildrenTest >> testPreviousSiblingDo [
 		self assert: next equals: (aContainer childWithId: #shape_9) ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testPreviousSiblingSuchThatdo [
 
 	| aContainer aChild |
@@ -842,7 +840,7 @@ BlElementChildrenTest >> testPreviousSiblingSuchThatdo [
 		self assert: next equals: (aContainer childWithId: #shape_8) ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testSiblingsDo [
 
 	| aContainer aChild found |
@@ -866,7 +864,7 @@ BlElementChildrenTest >> testSiblingsDo [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testTopMostParent [
 
 	| aContainer aChild |
@@ -875,7 +873,7 @@ BlElementChildrenTest >> testTopMostParent [
 	self assert: aChild topMostParent equals: aContainer
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testTopMostParentSuchThatifFoundifNone [
 
 	| aContainer aChild |
@@ -891,7 +889,7 @@ BlElementChildrenTest >> testTopMostParentSuchThatifFoundifNone [
 		ifNone: [ self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testWithAllParents [
 
 	| aContainer aChild |
@@ -911,7 +909,7 @@ BlElementChildrenTest >> testWithAllParents [
 			aContainer }
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testWithAllParentsDetectifFoundifNone [
 
 	| aContainer aChild |
@@ -935,7 +933,7 @@ BlElementChildrenTest >> testWithAllParentsDetectifFoundifNone [
 		ifNone: [ self assert: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testWithAllParentsDo [
 
 	| aContainer aChild res |
@@ -962,7 +960,7 @@ BlElementChildrenTest >> testWithAllParentsDo [
 	self assert: res asArray equals: { aContainer }
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testWithAllParentsReversedDo [
 
 	| aContainer aChild all |
@@ -987,7 +985,7 @@ BlElementChildrenTest >> testWithAllParentsReversedDo [
 			(aContainer childWithId: #shape_10) }
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testWithAllParentsUpToDo [
 
 	| aContainer res |
@@ -1017,7 +1015,7 @@ BlElementChildrenTest >> testWithAllParentsUpToDo [
 			aContainer }
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementChildrenTest >> testWithAllParentsUpTodetectifFoundIfNone [
 
 	| aContainer res |

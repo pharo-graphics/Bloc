@@ -3,16 +3,14 @@ I have been automatically converted and probably manually tweaked from BlChildre
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlChildrenOrderedCollectionTest',
-	#superclass : 'TestCase',
+	#name : #BlChildrenOrderedCollectionTest,
+	#superclass : #TestCase,
 	#traits : 'TBlChildrenTest',
 	#classTraits : 'TBlChildrenTest classTrait',
-	#category : 'Bloc-UnitedTests-Children',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Children'
+	#category : 'Bloc-UnitedTests-Children'
 }
 
-{ #category : 'fixture' }
+{ #category : #fixture }
 BlChildrenOrderedCollectionTest >> fill: aNumber [
 
 	| childrenArray |
@@ -22,7 +20,7 @@ BlChildrenOrderedCollectionTest >> fill: aNumber [
 	^ childrenArray
 ]
 
-{ #category : 'fixture' }
+{ #category : #fixture }
 BlChildrenOrderedCollectionTest >> newChildAt: anIndex [
 
 	| anElement |
@@ -31,13 +29,13 @@ BlChildrenOrderedCollectionTest >> newChildAt: anIndex [
 	^ anElement
 ]
 
-{ #category : 'fixture' }
+{ #category : #fixture }
 BlChildrenOrderedCollectionTest >> newChildrenCollection [
 
 	^ BlChildrenOrderedCollection new
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testEmptyChildren [
 
 	| theChildren |
@@ -48,7 +46,7 @@ BlChildrenOrderedCollectionTest >> testEmptyChildren [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testFirst [
 
 	<sampleInstance>
@@ -58,7 +56,7 @@ BlChildrenOrderedCollectionTest >> testFirst [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testIfEmpty [
 
 	| theChildren |
@@ -67,7 +65,7 @@ BlChildrenOrderedCollectionTest >> testIfEmpty [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testIfEmptyNot [
 
 	| theChildren |
@@ -76,7 +74,7 @@ BlChildrenOrderedCollectionTest >> testIfEmptyNot [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testIndexOf [
 
 	| theChildren |
@@ -86,7 +84,7 @@ BlChildrenOrderedCollectionTest >> testIndexOf [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testIndexOfUnknown [
 
 	| theChildren |
@@ -95,7 +93,7 @@ BlChildrenOrderedCollectionTest >> testIndexOfUnknown [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testIsEmpty [
 
 	| theChildren |
@@ -106,7 +104,7 @@ BlChildrenOrderedCollectionTest >> testIsEmpty [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testIsNotEmpty [
 
 	| theChildren |
@@ -117,7 +115,7 @@ BlChildrenOrderedCollectionTest >> testIsNotEmpty [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testLast [
 
 	| theChildren |
@@ -126,7 +124,7 @@ BlChildrenOrderedCollectionTest >> testLast [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testRemove [
 
 	| theChildren indices |
@@ -138,7 +136,7 @@ BlChildrenOrderedCollectionTest >> testRemove [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testRemoveAll [
 
 	| theChildren indices |
@@ -153,7 +151,7 @@ BlChildrenOrderedCollectionTest >> testRemoveAll [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testRemoveAt [
 
 	| theChildren indices |
@@ -167,7 +165,7 @@ BlChildrenOrderedCollectionTest >> testRemoveAt [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testSecond [
 
 	| theChildren |
@@ -176,7 +174,7 @@ BlChildrenOrderedCollectionTest >> testSecond [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testSize [
 
 	| theChildren |
@@ -185,7 +183,7 @@ BlChildrenOrderedCollectionTest >> testSize [
 	^ theChildren
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlChildrenOrderedCollectionTest >> testSizeEmpty [
 
 	| theChildren |

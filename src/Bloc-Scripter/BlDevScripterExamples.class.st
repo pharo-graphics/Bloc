@@ -28,8 +28,8 @@ BlDevScripterExamples >> clickCheck [
 	| anElement aScript |
 	anElement := BlDevElementExamples new containerWithRectangle.
 	aScript := self basicScripter element: anElement.
-	aScript click onChildAt: 1.
-	aScript check click onChildAt: 1.
+	aScript testClick onChildAt: 1.
+	aScript check testClick onChildAt: 1.
 	aScript play.
 	^ aScript
 ]
@@ -49,8 +49,8 @@ BlDevScripterExamples >> failingClickCheck [
 
 	aScripter := self basicScripter element: anElement.
 
-	aScripter click onChildAt: 1.
-	aScripter check click.
+	aScripter testClick onChildAt: 1.
+	aScripter check testClick.
 
 	aScriptFailed := false.
 	[ aScripter syncPlay ] 

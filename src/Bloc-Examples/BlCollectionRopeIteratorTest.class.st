@@ -75,7 +75,7 @@ BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf08 [
 
 	<gtExample>
 	| anIterator aNextLine |
-	anIterator := self nextLineIndicesWithCrlf_0.
+	anIterator := self testNextLineIndicesWithCrlf_0.
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -101,7 +101,7 @@ BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf16 [
 
 	<gtExample>
 	| anIterator aNextLine |
-	anIterator := self nextLineIndicesWithCrlf_08.
+	anIterator := self testNextLineIndicesWithCrlf_08.
 
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
@@ -128,7 +128,7 @@ BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf18 [
 
 	<gtExample>
 	| anIterator aNextLine |
-	anIterator := self nextLineIndicesWithCrlf_16.
+	anIterator := self testNextLineIndicesWithCrlf_16.
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -154,7 +154,7 @@ BlCollectionRopeIteratorTest >> testNextLineWithCr07 [
 
 	<gtExample>
 	| anIterator aNextLine |
-	anIterator := self nextLineWithCr_0.
+	anIterator := self testNextLineWithCr_0.
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -180,7 +180,7 @@ BlCollectionRopeIteratorTest >> testNextLineWithCr14 [
 
 	<gtExample>
 	| anIterator aNextLine |
-	anIterator := self nextLineWithCr_07.
+	anIterator := self testNextLineWithCr_07.
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -206,7 +206,7 @@ BlCollectionRopeIteratorTest >> testNextLineWithCr15 [
 
 	<gtExample>
 	| anIterator aNextLine |
-	anIterator := self nextLineWithCr_14.
+	anIterator := self testNextLineWithCr_14.
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -277,7 +277,7 @@ BlCollectionRopeIteratorTest >> testNextLineWithLf07 [
 
 	<gtExample>
 	| anIterator aNextLine |
-	anIterator := self nextLineWithLf_0.
+	anIterator := self testNextLineWithLf_0.
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -303,7 +303,7 @@ BlCollectionRopeIteratorTest >> testNextLineWithLf14 [
 
 	<gtExample>
 	| anIterator aNextLine |
-	anIterator := self nextLineWithLf_07.
+	anIterator := self testNextLineWithLf_07.
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -329,7 +329,7 @@ BlCollectionRopeIteratorTest >> testNextLineWithLf15 [
 
 	<gtExample>
 	| anIterator aNextLine |
-	anIterator := self nextLineWithLf_14.
+	anIterator := self testNextLineWithLf_14.
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -355,7 +355,7 @@ BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt0 [
 
 	<gtExample>
 	| anIterator aSegmentResult |
-	anIterator := self small.
+	anIterator := self testSmall.
 
 	aSegmentResult := anIterator
 		                  nextSegment: [ :aBuffer |
@@ -388,7 +388,7 @@ BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt3 [
 
 	<gtExample>
 	| anIterator aSegmentResult |
-	anIterator := self nextSegmentWithLookAhead_at_0.
+	anIterator := self testNextSegmentWithLookAhead_at_0.
 
 	aSegmentResult := anIterator
 		                  nextSegment: [ :aBuffer |
@@ -421,7 +421,7 @@ BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt5 [
 
 	<gtExample>
 	| anIterator aSegmentResult |
-	anIterator := self nextSegmentWithLookAhead_at_3.
+	anIterator := self testNextSegmentWithLookAhead_at_3.
 
 	aSegmentResult := anIterator
 		                  nextSegment: [ :aBuffer |
@@ -454,7 +454,7 @@ BlCollectionRopeIteratorTest >> testSmall [
 
 	<gtExample>
 	| anIterator |
-	anIterator := BlCollectionRopeExamples new small iterator: 0 to: 5.
+	anIterator := BlCollectionRopeExamplesTest new testSmall iterator: 0 to: 5.
 
 	self assert: anIterator position equals: 0.
 	self assert: anIterator start equals: 0.
@@ -471,7 +471,7 @@ BlCollectionRopeIteratorTest >> testSmallNextAt0 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small.
+	anIterator := self testSmall.
 
 	anItem := anIterator next.
 
@@ -488,7 +488,7 @@ BlCollectionRopeIteratorTest >> testSmallNextAt1 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_0.
+	anIterator := self testSmall_next_at_0.
 
 	anItem := anIterator next.
 
@@ -505,7 +505,7 @@ BlCollectionRopeIteratorTest >> testSmallNextAt2 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_1.
+	anIterator := self testSmall_next_at_1.
 
 	anItem := anIterator next.
 
@@ -522,7 +522,7 @@ BlCollectionRopeIteratorTest >> testSmallNextAt3 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_2.
+	anIterator := self testSmall_next_at_2.
 
 	anItem := anIterator next.
 
@@ -539,7 +539,7 @@ BlCollectionRopeIteratorTest >> testSmallNextAt4 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_3.
+	anIterator := self testSmall_next_at_3.
 
 	anItem := anIterator next.
 
@@ -557,7 +557,7 @@ BlCollectionRopeIteratorTest >> testSmallNextAt5 [
 	<gtExample>
 	"Iterator throws an error when the end is reached"
 	| anIterator anError |
-	anIterator := self small_next_at_4.
+	anIterator := self testSmall_next_at_4.
 
 	anError := nil.
 	[ anIterator next ]
@@ -574,7 +574,7 @@ BlCollectionRopeIteratorTest >> testSmallNextSpanAt0 [
 
 	<gtExample>
 	| anIterator aSpan |
-	anIterator := self small.
+	anIterator := self testSmall.
 	aSpan := anIterator nextSpan.
 
 	self assert: aSpan collection equals: 'Hello'.
@@ -588,7 +588,7 @@ BlCollectionRopeIteratorTest >> testSmallNextSpanAt1 [
 
 	<gtExample>
 	| anIterator aSpan |
-	anIterator := self small_next_at_0.
+	anIterator := self testSmall_next_at_0.
 	aSpan := anIterator nextSpan.
 
 	self assert: aSpan collection equals: 'ello'.
@@ -602,7 +602,7 @@ BlCollectionRopeIteratorTest >> testSmallNextSpanAt2 [
 
 	<gtExample>
 	| anIterator aSpan |
-	anIterator := self small_next_at_1.
+	anIterator := self testSmall_next_at_1.
 	aSpan := anIterator nextSpan.
 
 	self assert: aSpan collection equals: 'llo'.
@@ -616,7 +616,7 @@ BlCollectionRopeIteratorTest >> testSmallNextSpanAt3 [
 
 	<gtExample>
 	| anIterator aSpan |
-	anIterator := self small_next_at_2.
+	anIterator := self testSmall_next_at_2.
 	aSpan := anIterator nextSpan.
 
 	self assert: aSpan collection equals: 'lo'.
@@ -630,7 +630,7 @@ BlCollectionRopeIteratorTest >> testSmallNextSpanAt4 [
 
 	<gtExample>
 	| anIterator aSpan |
-	anIterator := self small_next_at_3.
+	anIterator := self testSmall_next_at_3.
 	aSpan := anIterator nextSpan.
 
 	self assert: aSpan collection equals: 'o'.
@@ -645,7 +645,7 @@ BlCollectionRopeIteratorTest >> testSmallNextSpanAt5 [
 	<gtExample>
 	"Iterator throws an error when the end is reached"
 	| anIterator anError |
-	anIterator := self small_next_at_4.
+	anIterator := self testSmall_next_at_4.
 
 	anError := nil.
 	[ anIterator nextSpan ]
@@ -662,7 +662,7 @@ BlCollectionRopeIteratorTest >> testSmallPeekAt0 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small.
+	anIterator := self testSmall.
 
 	anItem := anIterator peek.
 
@@ -679,7 +679,7 @@ BlCollectionRopeIteratorTest >> testSmallPeekAt1 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_0.
+	anIterator := self testSmall_next_at_0.
 
 	anItem := anIterator peek.
 
@@ -696,7 +696,7 @@ BlCollectionRopeIteratorTest >> testSmallPeekAt2 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_1.
+	anIterator := self testSmall_next_at_1.
 
 	anItem := anIterator peek.
 
@@ -713,7 +713,7 @@ BlCollectionRopeIteratorTest >> testSmallPeekAt3 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_2.
+	anIterator := self testSmall_next_at_2.
 
 	anItem := anIterator peek.
 
@@ -730,7 +730,7 @@ BlCollectionRopeIteratorTest >> testSmallPeekAt4 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_3.
+	anIterator := self testSmall_next_at_3.
 
 	anItem := anIterator peek.
 
@@ -748,7 +748,7 @@ BlCollectionRopeIteratorTest >> testSmallPeekAt5 [
 	<gtExample>
 	"Iterator throws an error when the end is reached"
 	| anIterator anError |
-	anIterator := self small_next_at_4.
+	anIterator := self testSmall_next_at_4.
 
 	anError := nil.
 	[ anIterator peek ]
@@ -766,7 +766,7 @@ BlCollectionRopeIteratorTest >> testSmallPreviousAt0 [
 	<gtExample>
 	"Iterator throws an error when the start is reached"
 	| anIterator anError |
-	anIterator := self small.
+	anIterator := self testSmall.
 
 	anError := nil.
 	[ anIterator previous ]
@@ -783,7 +783,7 @@ BlCollectionRopeIteratorTest >> testSmallPreviousAt1 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_0.
+	anIterator := self testSmall_next_at_0.
 
 	anItem := anIterator previous.
 
@@ -800,7 +800,7 @@ BlCollectionRopeIteratorTest >> testSmallPreviousAt2 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_1.
+	anIterator := self testSmall_next_at_1.
 
 	anItem := anIterator previous.
 
@@ -817,7 +817,7 @@ BlCollectionRopeIteratorTest >> testSmallPreviousAt3 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_2.
+	anIterator := self testSmall_next_at_2.
 
 	anItem := anIterator previous.
 
@@ -834,7 +834,7 @@ BlCollectionRopeIteratorTest >> testSmallPreviousAt4 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_3.
+	anIterator := self testSmall_next_at_3.
 
 	anItem := anIterator previous.
 
@@ -851,7 +851,7 @@ BlCollectionRopeIteratorTest >> testSmallPreviousAt5 [
 
 	<gtExample>
 	| anIterator anItem |
-	anIterator := self small_next_at_4.
+	anIterator := self testSmall_next_at_4.
 
 	anItem := anIterator previous.
 
@@ -868,7 +868,7 @@ BlCollectionRopeIteratorTest >> testSmallSkip0At0 [
 
 	<gtExample>
 	| anIterator |
-	anIterator := self small.
+	anIterator := self testSmall.
 	anIterator skip: 0.
 
 	self assert: anIterator position equals: 0.
@@ -881,7 +881,7 @@ BlCollectionRopeIteratorTest >> testSmallSkip1At0 [
 
 	<gtExample>
 	| anIterator |
-	anIterator := self small.
+	anIterator := self testSmall.
 	anIterator skip: 1.
 
 	self assert: anIterator position equals: 1.
@@ -894,7 +894,7 @@ BlCollectionRopeIteratorTest >> testSmallSkip2At0 [
 
 	<gtExample>
 	| anIterator |
-	anIterator := self small.
+	anIterator := self testSmall.
 	anIterator skip: 2.
 
 	self assert: anIterator position equals: 2.
@@ -907,7 +907,7 @@ BlCollectionRopeIteratorTest >> testSmallSkip3At0 [
 
 	<gtExample>
 	| anIterator |
-	anIterator := self small.
+	anIterator := self testSmall.
 	anIterator skip: 3.
 
 	self assert: anIterator position equals: 3.
@@ -920,7 +920,7 @@ BlCollectionRopeIteratorTest >> testSmallSkip4At0 [
 
 	<gtExample>
 	| anIterator |
-	anIterator := self small.
+	anIterator := self testSmall.
 	anIterator skip: 4.
 
 	self assert: anIterator position equals: 4.
@@ -933,7 +933,7 @@ BlCollectionRopeIteratorTest >> testSmallSkip5At0 [
 
 	<gtExample>
 	| anIterator |
-	anIterator := self small.
+	anIterator := self testSmall.
 	anIterator skip: 5.
 
 	self assert: anIterator position equals: 5.
@@ -947,7 +947,7 @@ BlCollectionRopeIteratorTest >> testSmallSkip6At0 [
 	<gtExample>
 	"Iterator throws an error when the end is reached"
 	| anIterator anError |
-	anIterator := self small.
+	anIterator := self testSmall.
 
 	anError := nil.
 	[ anIterator skip: 6 ]

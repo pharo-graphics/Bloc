@@ -26,7 +26,7 @@ BlEventTestCase >> child [
 
 { #category : #accessing }
 BlEventTestCase >> firedEvents [
-	^ space mouseProcessor firedEvents
+	^ space testMouseProcessor firedEvents
 ]
 
 { #category : #initialization }

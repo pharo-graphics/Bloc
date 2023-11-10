@@ -1,71 +1,82 @@
 Class {
 	#name : #BlAlternativeCombinationExamples,
-	#superclass : #BlKeyCombinationExamples,
+	#superclass : #BlKeyCombinationExamplesTest,
 	#category : #'Bloc-Examples-KeyBinding'
 }
 
 { #category : #'examples - combination' }
-BlAlternativeCombinationExamples >> combinationWithA [
-	<gtExample>
+BlAlternativeCombinationExamples >> testCombinationWithA [
+
+	<sampleInstance>
 	| aCombination |
-	
-	aCombination := self emptyCombination.
+	aCombination := self testEmptyCombination.
 	aCombination key: KeyboardKey A.
 
-	self assert: (aCombination combinations asArray collect: #key) equals: { KeyboardKey A }.
+	self
+		assert: (aCombination combinations asArray collect: #key)
+		equals: { KeyboardKey A }.
 	self assert: aCombination printString equals: '(A)'.
-	
+
 	^ aCombination
 ]
 
 { #category : #'examples - combination' }
-BlAlternativeCombinationExamples >> combinationWithAB [
-	<gtExample>
+BlAlternativeCombinationExamples >> testCombinationWithAB [
+
+	<sampleInstance>
 	| aCombination |
-	
-	aCombination := self combinationWithA.
+	aCombination := self testCombinationWithA.
 	aCombination key: KeyboardKey B.
 
-	self assert: (aCombination combinations asArray collect: #key) equals: { KeyboardKey A. KeyboardKey B }.
+	self
+		assert: (aCombination combinations asArray collect: #key)
+		equals: {
+				KeyboardKey A.
+				KeyboardKey B }.
 	self assert: aCombination printString equals: '(A | B)'.
-	
+
 	^ aCombination
 ]
 
 { #category : #'examples - combination' }
-BlAlternativeCombinationExamples >> combinationWithABC [
-	<gtExample>
+BlAlternativeCombinationExamples >> testCombinationWithABC [
+
+	<sampleInstance>
 	| aCombination |
-	
-	aCombination := self combinationWithAB.	
+	aCombination := self testCombinationWithAB.
 	aCombination key: KeyboardKey C.
 
-	self assert: (aCombination combinations asArray collect: #key) equals: { KeyboardKey A. KeyboardKey B. KeyboardKey C }.
+	self
+		assert: (aCombination combinations asArray collect: #key)
+		equals: {
+				KeyboardKey A.
+				KeyboardKey B.
+				KeyboardKey C }.
 	self assert: aCombination printString equals: '(A | B | C)'.
-	
+
 	^ aCombination
 ]
 
 { #category : #'examples - combination' }
-BlAlternativeCombinationExamples >> emptyCombination [
-	<gtExample>
+BlAlternativeCombinationExamples >> testEmptyCombination [
+
+	<sampleInstance>
 	| aCombination |
-	
 	aCombination := BlAlternativeCombination new.
 
 	self assert: aCombination isAlternative.
 	self assert: aCombination combinations isEmpty.
 	self assert: aCombination printString equals: '()'.
- 
+
 	^ aCombination
 ]
 
 { #category : #'examples - combination' }
-BlAlternativeCombinationExamples >> matchCombinationWithA [
+BlAlternativeCombinationExamples >> testMatchCombinationWithA [
 
-	<gtExample>
+	<sampleInstance>
 	| aCombination aBuffer |
-	aCombination := self combinationWithA.
+	aCombination := self testCombinationWithA.
 
 	aBuffer := BlMockedKeyboardBuffer new.
 	aBuffer pressed: true key: KeyboardKey A.
@@ -78,11 +89,11 @@ BlAlternativeCombinationExamples >> matchCombinationWithA [
 ]
 
 { #category : #'examples - combination' }
-BlAlternativeCombinationExamples >> matchCombinationWithAB [
+BlAlternativeCombinationExamples >> testMatchCombinationWithAB [
 
-	<gtExample>
+	<sampleInstance>
 	| aCombination aBuffer |
-	aCombination := self combinationWithAB.
+	aCombination := self testCombinationWithAB.
 
 	aBuffer := BlMockedKeyboardBuffer new.
 	aBuffer pressed: false key: KeyboardKey A.
@@ -104,11 +115,11 @@ BlAlternativeCombinationExamples >> matchCombinationWithAB [
 ]
 
 { #category : #'examples - combination' }
-BlAlternativeCombinationExamples >> noMatchCombinationWithA [
+BlAlternativeCombinationExamples >> testNoMatchCombinationWithA [
 
-	<gtExample>
+	<sampleInstance>
 	| aCombination aBuffer |
-	aCombination := self combinationWithA.
+	aCombination := self testCombinationWithA.
 
 	aBuffer := BlMockedKeyboardBuffer new.
 	aBuffer pressed: false key: KeyboardKey A.
@@ -121,11 +132,11 @@ BlAlternativeCombinationExamples >> noMatchCombinationWithA [
 ]
 
 { #category : #'examples - combination' }
-BlAlternativeCombinationExamples >> noMatchCombinationWithAB [
+BlAlternativeCombinationExamples >> testNoMatchCombinationWithAB [
 
-	<gtExample>
+	<sampleInstance>
 	| aCombination aBuffer |
-	aCombination := self combinationWithAB.
+	aCombination := self testCombinationWithAB.
 
 	aBuffer := BlMockedKeyboardBuffer new.
 	aBuffer pressed: true key: KeyboardKey A.
@@ -139,65 +150,74 @@ BlAlternativeCombinationExamples >> noMatchCombinationWithAB [
 ]
 
 { #category : #'examples - store' }
-BlAlternativeCombinationExamples >> storeCombinationWithA [
-	<gtExample>
+BlAlternativeCombinationExamples >> testStoreCombinationWithA [
+
+	<sampleInstance>
 	| aCombination aStoreString aRestoredCombination |
-	
-	aCombination := self combinationWithA.	
+	aCombination := self testCombinationWithA.
 	aStoreString := aCombination storeString.
 
-	self assert: aStoreString equals: '(BlAlternativeCombination new with: (BlKeyboardKey new setName: #A; setValue: nil) asKeyCombination)'.
-	
+	self
+		assert: aStoreString
+		equals:
+		'(BlAlternativeCombination new with: (BlKeyboardKey new setName: #A; setValue: nil) asKeyCombination)'.
+
 	aRestoredCombination := Object evaluate: aStoreString.
 	self assert: aRestoredCombination equals: aCombination.
-	
+
 	^ aStoreString
 ]
 
 { #category : #'examples - store' }
-BlAlternativeCombinationExamples >> storeCombinationWithAB [
-	<gtExample>
+BlAlternativeCombinationExamples >> testStoreCombinationWithAB [
+
+	<sampleInstance>
 	| aCombination aStoreString aRestoredCombination |
-	
-	aCombination := self combinationWithAB.	
+	aCombination := self testCombinationWithAB.
 	aStoreString := aCombination storeString.
 
-	self assert: aStoreString equals: '(((BlKeyboardKey new setName: #A; setValue: nil) asKeyCombination) or: (BlKeyboardKey new setName: #B; setValue: nil) asKeyCombination)'.
-	
+	self
+		assert: aStoreString
+		equals:
+		'(((BlKeyboardKey new setName: #A; setValue: nil) asKeyCombination) or: (BlKeyboardKey new setName: #B; setValue: nil) asKeyCombination)'.
+
 	aRestoredCombination := Object evaluate: aStoreString.
 	self assert: aRestoredCombination equals: aCombination.
-	
+
 	^ aStoreString
 ]
 
 { #category : #'examples - store' }
-BlAlternativeCombinationExamples >> storeCombinationWithABC [
-	<gtExample>
+BlAlternativeCombinationExamples >> testStoreCombinationWithABC [
+
+	<sampleInstance>
 	| aCombination aStoreString aRestoredCombination |
-	
-	aCombination := self combinationWithABC.	
+	aCombination := self testCombinationWithABC.
 	aStoreString := aCombination storeString.
 
-	self assert: aStoreString equals: '((((BlKeyboardKey new setName: #A; setValue: nil) asKeyCombination) or: (BlKeyboardKey new setName: #B; setValue: nil) asKeyCombination) or: (BlKeyboardKey new setName: #C; setValue: nil) asKeyCombination)'.
-	
+	self
+		assert: aStoreString
+		equals:
+		'((((BlKeyboardKey new setName: #A; setValue: nil) asKeyCombination) or: (BlKeyboardKey new setName: #B; setValue: nil) asKeyCombination) or: (BlKeyboardKey new setName: #C; setValue: nil) asKeyCombination)'.
+
 	aRestoredCombination := Object evaluate: aStoreString.
 	self assert: aRestoredCombination equals: aCombination.
-	
+
 	^ aStoreString
 ]
 
 { #category : #'examples - store' }
-BlAlternativeCombinationExamples >> storeEmptyCombination [
-	<gtExample>
+BlAlternativeCombinationExamples >> testStoreEmptyCombination [
+
+	<sampleInstance>
 	| aCombination aStoreString aRestoredCombination |
-	
-	aCombination := self emptyCombination.	
+	aCombination := self testEmptyCombination.
 	aStoreString := aCombination storeString.
 
 	self assert: aStoreString equals: '(BlAlternativeCombination new)'.
-	
+
 	aRestoredCombination := Object evaluate: aStoreString.
 	self assert: aRestoredCombination equals: aCombination.
-	
+
 	^ aStoreString
 ]

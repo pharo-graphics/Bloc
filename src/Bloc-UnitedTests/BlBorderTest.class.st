@@ -3,14 +3,12 @@ I have been automatically converted and probably manually tweaked from BlBorderE
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlBorderTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-UnitedTests-Basic',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Basic'
+	#name : #BlBorderTest,
+	#superclass : #TestCase,
+	#category : 'Bloc-UnitedTests-Basic'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBorderTest >> testChangeOpacityError [
 
 	<sampleInstance>
@@ -26,7 +24,7 @@ BlBorderTest >> testChangeOpacityError [
 	^ anError
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBorderTest >> testChangePaintError [
 
 	<sampleInstance>
@@ -42,7 +40,7 @@ BlBorderTest >> testChangePaintError [
 	^ anError
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBorderTest >> testChangeStyleError [
 	
 	<sampleInstance>
@@ -58,7 +56,7 @@ BlBorderTest >> testChangeStyleError [
 	^ anError
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBorderTest >> testChangeWidthError [
 
 	<sampleInstance>
@@ -74,7 +72,7 @@ BlBorderTest >> testChangeWidthError [
 	^ anError
 ]
 
-{ #category : 'test seed' }
+{ #category : #'test seed' }
 BlBorderTest >> testColorGrayBorder [
 
 	<sampleInstance>
@@ -97,7 +95,7 @@ BlBorderTest >> testColorGrayBorder [
 	^ aBorder
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBorderTest >> testColorGrayBorderWithExplicitWidth [
 
 	<sampleInstance>
@@ -120,7 +118,7 @@ BlBorderTest >> testColorGrayBorderWithExplicitWidth [
 	^ aBorder
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBorderTest >> testCopyWithOpacity [
 
 	<sampleInstance>
@@ -144,7 +142,7 @@ BlBorderTest >> testCopyWithOpacity [
 	^ aBorder
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBorderTest >> testCopyWithPaint [
 
 	<sampleInstance>
@@ -168,7 +166,7 @@ BlBorderTest >> testCopyWithPaint [
 	^ aBorder
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBorderTest >> testCopyWithStyle [
 
 	<sampleInstance>
@@ -192,7 +190,7 @@ BlBorderTest >> testCopyWithStyle [
 	^ aBorder
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBorderTest >> testCopyWithWidth [
 
 	<sampleInstance>
