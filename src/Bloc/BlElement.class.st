@@ -156,25 +156,17 @@ BlElement >> addChild: anElement at: anIndex [
 	anElement parent: self.
 
 	"actually add child"
-	self telemetry
-		timeSync: [ 'Add child {1} to {2} at {3}' format: { anElement . self . anIndex } ]
-		during: [ self children add: anElement at: anIndex ].
+	self children add: anElement at: anIndex.
 
 	"dispatch events/hooks after element has been added"
-	self telemetry
-		timeSync: [ 'Dispatch child added' ]
-		during: [ self dispatchChildAdded: anElement ].
+	self dispatchChildAdded: anElement.
 	
 	"only requesting layout is not enough, because if size or position does not change
 	there will be no invalidated bounds and nothing will be rendered"
-	self telemetry
-		timeSync: [ 'Invalidate child after adding it' ]
-		during: [ anElement invalidate ].
+	anElement invalidate.
 	
 	"We should request layout from newly added element to mark it as dirty too"
-	self telemetry
-		timeSync: [ 'Request child layout after adding it' ]
-		during: [ anElement requestLayout ].
+	anElement requestLayout.
 ]
 
 { #category : 'children add/remove' }
@@ -575,15 +567,7 @@ BlElement >> attachSpace [
 	propagation of the repainting request, elements wanting a composition layer
 	will not be repainted (https://github.com/feenkcom/gtoolkit/issues/1459)"
 	self needsPaint
-		ifTrue: [ self markNeedsPaintFrom: self ].
-
-	"Style and properties computation are not used and will be removed"
-	
-	"self needsStyle
-		ifTrue: [ self requestStyle ]."
-
-	"self needsPropertiesComputation
-		ifTrue: [ self requestPropertiesComputation ]"
+		ifTrue: [ self markNeedsPaintFrom: self ]
 ]
 
 { #category : 'api - look' }
@@ -1360,26 +1344,18 @@ BlElement >> dispatchAddedToSceneGraph [
 
 { #category : 'children dispatching' }
 BlElement >> dispatchChildAdded: anElement [
-	
 	"First send hook to myself"
-	self telemetry
-		timeSync: [ 'On child added {1}' format: { anElement } ]
-		during: [ self onChildAdded: anElement ].
+
+	self onChildAdded: anElement.
 
 	"If and only if I am attached to scene graph we let child know
 	that it is a part of the scene graph now"
-	self isAttachedToSceneGraph
-		ifTrue: [
-			self telemetry
-				timeSync: [ 'Dispatch added to scene graph {1}' format: { anElement } ]
-				during: [
-					anElement attachSpace.
-					anElement dispatchAddedToSceneGraph ] ].
+	self isAttachedToSceneGraph ifTrue: [
+		anElement attachSpace.
+		anElement dispatchAddedToSceneGraph ].
 
 	"Let child dispatch necessary events and hooks"
-	self telemetry
-		timeSync: [ 'Dispatch added to parent {1}' format: { anElement } ]
-		during: [ anElement dispatchAddedToParent ].
+	anElement dispatchAddedToParent
 ]
 
 { #category : 'children dispatching' }
