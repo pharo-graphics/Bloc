@@ -38,15 +38,15 @@ BlMouseProcessorExamples >> primaryMouseUpEvent [
 
 { #category : #'instance creation' }
 BlMouseProcessorExamples >> secondaryMouseDownEvent [
-	<gtExample>
 
+	<sampleInstance>
 	^ BlMouseDownEvent secondary
 ]
 
 { #category : #'instance creation' }
 BlMouseProcessorExamples >> secondaryMouseUpEvent [
-	<gtExample>
 
+	<sampleInstance>
 	^ BlMouseUpEvent secondary
 ]
 

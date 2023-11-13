@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'enabled'
 	],
-	#category : 'Bloc-UnitedTests-Examples'
+	#category : #'Bloc-UnitedTests-Examples'
 }
 
 { #category : #accessing }
@@ -20,35 +20,32 @@ BlExamplesMock >> enableRunning [
 
 { #category : #examples }
 BlExamplesMock >> exampleError [
-	<sampleInstance>
 
 	self error
 ]
 
 { #category : #examples }
 BlExamplesMock >> exampleFail [
-	<sampleInstance>
 
 	self fail
 ]
 
 { #category : #examples }
 BlExamplesMock >> examplePass [
-	<sampleInstance>
-
+ 
+	
 ]
 
 { #category : #examples }
 BlExamplesMock >> exampleSkip [
-	<sampleInstance>
+
 	<noTest>
-	
 	self error
 ]
 
 { #category : #examples }
 BlExamplesMock >> exampleWithArgument: arg [
-	<gtExample>
+
 	
 ]
 

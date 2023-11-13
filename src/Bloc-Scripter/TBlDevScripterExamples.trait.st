@@ -5,63 +5,68 @@ Trait {
 
 { #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripter [
-	<gtExample>
+
+	<sampleInstance>
 	| aScripter |
 	aScripter := BlDevScripter new.
-	
+
 	self assert: aScripter events isEmpty.
-	
+
 	^ aScripter
 ]
 
 { #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripter: aScripter withModel: aModelBlock [
-	<gtExample>
-	^ self 
-		scripter: aScripter 
-		withModel: aModelBlock 
-		element: [ :aModel | aModel asElement ]
+
+	<sampleInstance>
+	^ self
+		  scripter: aScripter
+		  withModel: aModelBlock
+		  element: [ :aModel | aModel asElement ]
 ]
 
 { #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripter: aScripter withModel: aModelBlock element: anElementBlock [
-	<gtExample>
-	aScripter substep: 'Initialize Model and UI' do: [ :aStep | 
-		aStep set 
+
+	<sampleInstance>
+	aScripter substep: 'Initialize Model and UI' do: [ :aStep |
+		aStep set
 			label: 'Initialize Model';
 			model: aModelBlock.
-		aStep set 
+		aStep set
 			label: 'Initialize UI';
 			element: anElementBlock;
 			onModel.
-		aStep wait forEmptySpaceTaskQueue.		
-	].
+		aStep wait forEmptySpaceTaskQueue ].
 	^ aScripter syncContinue
 ]
 
 { #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripterWithElement: anElementBlock [
-	<gtExample>
-	^ self 
-		scripter: self scripter 
-		withModel: [ nil ] 
-		element: anElementBlock
+
+	<sampleInstance>
+	^ self
+		  scripter: self scripter
+		  withModel: [ nil ]
+		  element: anElementBlock
 ]
 
 { #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripterWithModel: aModelBlock [
-	<gtExample>
-	^ self 
-		scripter: self scripter 
-		withModel: aModelBlock 
-		element: [ :aModel | aModel asElement ]
+
+	<sampleInstance>
+	^ self
+		  scripter: self scripter
+		  withModel: aModelBlock
+		  element: [ :aModel | aModel asElement ]
 ]
 
 { #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripterWithModel: aModelBlock element: anElementBlock [
-	<gtExample>
-	^ self 
-		scripter: self scripter 
-		withModel: aModelBlock 
-		element: anElementBlock
+
+	<sampleInstance>
+	^ self
+		  scripter: self scripter
+		  withModel: aModelBlock
+		  element: anElementBlock
 ]
