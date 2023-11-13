@@ -11,7 +11,7 @@ Class {
 { #category : #'examples - next span' }
 BlRopeIteratorExamplesTest >> testNextSpanFontColorOnA [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anIterator aSpan |
 	aRope := BlCollectionRope collection: 'A'.
 	anIterator := aRope iterator.
@@ -27,7 +27,7 @@ BlRopeIteratorExamplesTest >> testNextSpanFontColorOnA [
 { #category : #'examples - next span' }
 BlRopeIteratorExamplesTest >> testNextSpanFontColorOnAWithColor [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anIterator aSpan |
 	aRope := (BlCollectionRope collection: 'A') attributes:
 		         { (BlTextForegroundAttribute paint: Color red) }.
@@ -45,7 +45,7 @@ BlRopeIteratorExamplesTest >> testNextSpanFontColorOnAWithColor [
 { #category : #'examples - next span' }
 BlRopeIteratorExamplesTest >> testNextSpanFontColorOnHelloWorldWithColor [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anIterator aSpan |
 	aRope := BlCollectionRope collection: 'Hello World'.
 	aRope := aRope
@@ -85,7 +85,7 @@ BlRopeIteratorExamplesTest >> testNextSpanFontColorOnHelloWorldWithColor [
 { #category : #'examples - next line' }
 BlRopeIteratorExamplesTest >> testNext_line_123Cr_at_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator |
 	anIterator := (BlCollectionRope collection: '123' , String cr)
 		              iterator.
@@ -103,7 +103,7 @@ BlRopeIteratorExamplesTest >> testNext_line_123Cr_at_0 [
 { #category : #'examples - next line' }
 BlRopeIteratorExamplesTest >> testNext_line_123Crabc_at_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator |
 	anIterator := (BlCollectionRope collection: '123' , String cr , 'abc')
 		              iterator.
@@ -121,7 +121,7 @@ BlRopeIteratorExamplesTest >> testNext_line_123Crabc_at_0 [
 { #category : #'examples - next line' }
 BlRopeIteratorExamplesTest >> testNext_line_123Crabc_at_4 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator |
 	anIterator := self testNext_line_123Crabc_at_0.
 
@@ -138,7 +138,7 @@ BlRopeIteratorExamplesTest >> testNext_line_123Crabc_at_4 [
 { #category : #'examples - next line' }
 BlRopeIteratorExamplesTest >> testNext_line_123_at_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator |
 	anIterator := (BlCollectionRope collection: '123') iterator.
 
@@ -155,7 +155,7 @@ BlRopeIteratorExamplesTest >> testNext_line_123_at_0 [
 { #category : #'examples - next line' }
 BlRopeIteratorExamplesTest >> testNext_line_Cr123_at_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator |
 	anIterator := (BlCollectionRope collection: String cr , '123')
 		              iterator.
@@ -173,7 +173,7 @@ BlRopeIteratorExamplesTest >> testNext_line_Cr123_at_0 [
 { #category : #'examples - next line' }
 BlRopeIteratorExamplesTest >> testNext_line_Cr123_at_1 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator |
 	anIterator := self testNext_line_Cr123_at_0.
 
@@ -190,7 +190,7 @@ BlRopeIteratorExamplesTest >> testNext_line_Cr123_at_1 [
 { #category : #'examples - next line' }
 BlRopeIteratorExamplesTest >> testNext_line_Cr1_at_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator |
 	anIterator := (BlCollectionRope collection: String cr , '1') iterator.
 
@@ -207,7 +207,7 @@ BlRopeIteratorExamplesTest >> testNext_line_Cr1_at_0 [
 { #category : #'examples - next line' }
 BlRopeIteratorExamplesTest >> testNext_line_Cr1_at_1 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator |
 	anIterator := self testNext_line_Cr1_at_0.
 
@@ -224,7 +224,7 @@ BlRopeIteratorExamplesTest >> testNext_line_Cr1_at_1 [
 { #category : #'examples - next line' }
 BlRopeIteratorExamplesTest >> testNext_line_CrCr_at_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator |
 	anIterator := (BlCollectionRope collection: String cr , String cr)
 		              iterator.
@@ -242,7 +242,7 @@ BlRopeIteratorExamplesTest >> testNext_line_CrCr_at_0 [
 { #category : #'examples - next line' }
 BlRopeIteratorExamplesTest >> testNext_line_CrCr_at_1 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator |
 	anIterator := self testNext_line_CrCr_at_0.
 
@@ -259,7 +259,7 @@ BlRopeIteratorExamplesTest >> testNext_line_CrCr_at_1 [
 { #category : #'examples - next line' }
 BlRopeIteratorExamplesTest >> testNext_line_CrLf_at_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator |
 	anIterator := (BlCollectionRope collection: String crlf) iterator.
 
@@ -276,7 +276,7 @@ BlRopeIteratorExamplesTest >> testNext_line_CrLf_at_0 [
 { #category : #'examples - next line' }
 BlRopeIteratorExamplesTest >> testNext_line_Cr_at_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator |
 	anIterator := (BlCollectionRope collection: String cr) iterator.
 
@@ -293,7 +293,7 @@ BlRopeIteratorExamplesTest >> testNext_line_Cr_at_0 [
 { #category : #'examples - next line' }
 BlRopeIteratorExamplesTest >> testNext_line_Lf_at_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator |
 	anIterator := (BlCollectionRope collection: String lf) iterator.
 
@@ -310,7 +310,7 @@ BlRopeIteratorExamplesTest >> testNext_line_Lf_at_0 [
 { #category : #'examples - next segment' }
 BlRopeIteratorExamplesTest >> testNext_segment_123abc_at_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anIterator aSegment |
 	aRope := BlCollectionRope collection: '123abc'.
 	anIterator := aRope iterator.
@@ -326,7 +326,7 @@ BlRopeIteratorExamplesTest >> testNext_segment_123abc_at_0 [
 { #category : #'examples - next segment' }
 BlRopeIteratorExamplesTest >> testNext_segment_123abc_at_3 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator aSegment |
 	anIterator := self testNext_segment_123abc_at_0.
 
@@ -342,7 +342,7 @@ BlRopeIteratorExamplesTest >> testNext_segment_123abc_at_3 [
 BlRopeIteratorExamplesTest >> testNext_segment_123abc_at_6 [
 	"Iterator throws an error when the end is reached"
 
-	<simpleInstance>
+	<sampleInstance>
 	| anIterator anError |
 	anIterator := self testNext_segment_123abc_at_3.
 
@@ -359,7 +359,7 @@ BlRopeIteratorExamplesTest >> testNext_segment_123abc_at_6 [
 { #category : #'examples - next segment' }
 BlRopeIteratorExamplesTest >> testNext_segment_a_at_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anIterator aSegment |
 	aRope := BlCollectionRope collection: 'a'.
 	anIterator := aRope iterator.
@@ -375,7 +375,7 @@ BlRopeIteratorExamplesTest >> testNext_segment_a_at_0 [
 { #category : #'examples - next segment' }
 BlRopeIteratorExamplesTest >> testNext_segment_abc_at_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anIterator aSegment |
 	aRope := BlCollectionRope collection: 'abc'.
 	anIterator := aRope iterator.

@@ -19,7 +19,7 @@ BlSpaceExamplesMigratedTest class >> slownDownSpace [
 { #category : #'private - instance creation' }
 BlSpaceExamplesMigratedTest >> animatedElement [
 
-	<simpleInstance>
+	<sampleInstance>
 	^ BlElement new
 		  background: Color blue;
 		  size: 150 @ 150;
@@ -48,7 +48,7 @@ BlSpaceExamplesMigratedTest >> iconStencil [
 { #category : #'examples - time' }
 BlSpaceExamplesMigratedTest >> spaceWithSlownDownTimeAndAnimatedElement [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aSpace |
 	aSpace := self spaceWithSlownDownTime.
 	aSpace root addChild: self animatedElement.
@@ -59,7 +59,7 @@ BlSpaceExamplesMigratedTest >> spaceWithSlownDownTimeAndAnimatedElement [
 { #category : #'examples - icon' }
 BlSpaceExamplesMigratedTest >> testChangeIcon [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aSpace aCollection |
 	aSpace := self testEmptySpace.
 
@@ -85,7 +85,7 @@ BlSpaceExamplesMigratedTest >> testChangeIcon [
 { #category : #'instance creation' }
 BlSpaceExamplesMigratedTest >> testEmptySpace [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aSpace |
 	aSpace := BlOSpace new.
 	self assert: aSpace session equals: Smalltalk session.
@@ -113,7 +113,7 @@ BlSpaceExamplesMigratedTest >> testEmptySpace [
 { #category : #lifecycle }
 BlSpaceExamplesMigratedTest >> testFirstPulse [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aSpace |
 	aSpace := self testEmptySpace.
 	aSpace pulse.
@@ -127,13 +127,13 @@ BlSpaceExamplesMigratedTest >> testFirstPulse [
 
 { #category : #'private - instance creation' }
 BlSpaceExamplesMigratedTest >> testInfiniteAnimation [
+
 	<sampleInstance>
 	| anAnimation |
-
 	anAnimation := BlSequentialAnimation new.
 	anAnimation add: (BlTransformAnimation scale: 2) absolute.
 	anAnimation add: (BlTransformAnimation scale: 0.5) absolute.
 	anAnimation beInfinite.
-	
+
 	^ anAnimation
 ]

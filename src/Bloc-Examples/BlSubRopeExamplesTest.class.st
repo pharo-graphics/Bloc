@@ -7,7 +7,7 @@ Class {
 { #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testAttributes_empty_0_to_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall_empty.
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 0.
@@ -22,7 +22,7 @@ BlSubRopeExamplesTest >> testAttributes_empty_0_to_0 [
 { #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testAttributes_small_0_to_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 0.
@@ -38,7 +38,7 @@ BlSubRopeExamplesTest >> testAttributes_small_0_to_0 [
 { #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testAttributes_small_0_to_1 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 1.
@@ -60,7 +60,7 @@ BlSubRopeExamplesTest >> testAttributes_small_0_to_1 [
 { #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testAttributes_small_0_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 5.
@@ -74,7 +74,7 @@ BlSubRopeExamplesTest >> testAttributes_small_0_to_5 [
 { #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testAttributes_small_2_to_2 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 2 to: 2.
@@ -97,7 +97,7 @@ BlSubRopeExamplesTest >> testAttributes_small_2_to_2 [
 { #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testAttributes_small_4_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 4 to: 5.
@@ -117,7 +117,7 @@ BlSubRopeExamplesTest >> testAttributes_small_4_to_5 [
 { #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testAttributes_small_5_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 5 to: 5.
@@ -133,7 +133,7 @@ BlSubRopeExamplesTest >> testAttributes_small_5_to_5 [
 { #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testClear_attributes_empty_0_to_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| anEmptyRope aRopeWithoutAttributes |
 	anEmptyRope := self testSmall_empty.
 	aRopeWithoutAttributes := anEmptyRope clearAttributes: 0 to: 0.
@@ -160,7 +160,7 @@ BlSubRopeExamplesTest >> testReadStreamSmall [
 BlSubRopeExamplesTest >> testSmall [
 	"Creates an instance of the rope of size smaller than combineLength with one attribute applied on the whole rope"
 
-	<simpleInstance>
+	<sampleInstance>
 	| aCollectionRope aRope |
 	aCollectionRope := BlCollectionRope collection: 'EarthHelloWorld'.
 
@@ -180,7 +180,7 @@ BlSubRopeExamplesTest >> testSmall [
 { #category : #'examples - accessing' }
 BlSubRopeExamplesTest >> testSmall_at_each [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope |
 	aRope := self testSmall.
 
@@ -196,7 +196,7 @@ BlSubRopeExamplesTest >> testSmall_at_each [
 { #category : #'examples - accessing' }
 BlSubRopeExamplesTest >> testSmall_children [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope |
 	aRope := self testSmall.
 
@@ -208,7 +208,7 @@ BlSubRopeExamplesTest >> testSmall_children [
 { #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_0_to_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 0 to: 0.
@@ -221,7 +221,7 @@ BlSubRopeExamplesTest >> testSmall_delete_0_to_0 [
 { #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_0_to_1 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 0 to: 1.
@@ -235,7 +235,7 @@ BlSubRopeExamplesTest >> testSmall_delete_0_to_1 [
 { #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_0_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 0 to: 5.
@@ -249,7 +249,7 @@ BlSubRopeExamplesTest >> testSmall_delete_0_to_5 [
 { #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_1_to_1 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 1 to: 1.
@@ -262,7 +262,7 @@ BlSubRopeExamplesTest >> testSmall_delete_1_to_1 [
 { #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_1_to_3 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 1 to: 3.
@@ -276,7 +276,7 @@ BlSubRopeExamplesTest >> testSmall_delete_1_to_3 [
 { #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_1_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 1 to: 5.
@@ -290,7 +290,7 @@ BlSubRopeExamplesTest >> testSmall_delete_1_to_5 [
 { #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_4_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 4 to: 5.
@@ -304,7 +304,7 @@ BlSubRopeExamplesTest >> testSmall_delete_4_to_5 [
 { #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_5_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 5 to: 5.
@@ -317,7 +317,7 @@ BlSubRopeExamplesTest >> testSmall_delete_5_to_5 [
 { #category : #'examples - accessing' }
 BlSubRopeExamplesTest >> testSmall_depth [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope |
 	aRope := self testSmall.
 
@@ -329,7 +329,7 @@ BlSubRopeExamplesTest >> testSmall_depth [
 { #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -344,7 +344,7 @@ BlSubRopeExamplesTest >> testSmall_do [
 { #category : #'instance creation' }
 BlSubRopeExamplesTest >> testSmall_empty [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anEmpty |
 	aRope := self testSmall.
 	anEmpty := aRope empty.
@@ -358,7 +358,7 @@ BlSubRopeExamplesTest >> testSmall_empty [
 { #category : #'examples - from to' }
 BlSubRopeExamplesTest >> testSmall_from_0_to_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 0 to: 0.
@@ -372,7 +372,7 @@ BlSubRopeExamplesTest >> testSmall_from_0_to_0 [
 { #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_from_0_to_0_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -390,7 +390,7 @@ BlSubRopeExamplesTest >> testSmall_from_0_to_0_do [
 { #category : #'examples - from to' }
 BlSubRopeExamplesTest >> testSmall_from_0_to_1 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 0 to: 1.
@@ -405,7 +405,7 @@ BlSubRopeExamplesTest >> testSmall_from_0_to_1 [
 { #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_from_0_to_1_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -423,7 +423,7 @@ BlSubRopeExamplesTest >> testSmall_from_0_to_1_do [
 { #category : #'examples - from to' }
 BlSubRopeExamplesTest >> testSmall_from_0_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 0 to: 5.
@@ -436,7 +436,7 @@ BlSubRopeExamplesTest >> testSmall_from_0_to_5 [
 { #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_from_0_to_5_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -454,7 +454,7 @@ BlSubRopeExamplesTest >> testSmall_from_0_to_5_do [
 { #category : #'examples - from to' }
 BlSubRopeExamplesTest >> testSmall_from_1_to_1 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 1 to: 1.
@@ -468,7 +468,7 @@ BlSubRopeExamplesTest >> testSmall_from_1_to_1 [
 { #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_from_1_to_1_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -486,7 +486,7 @@ BlSubRopeExamplesTest >> testSmall_from_1_to_1_do [
 { #category : #'examples - from to' }
 BlSubRopeExamplesTest >> testSmall_from_1_to_2 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 1 to: 2.
@@ -501,7 +501,7 @@ BlSubRopeExamplesTest >> testSmall_from_1_to_2 [
 { #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_from_1_to_2_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -519,7 +519,7 @@ BlSubRopeExamplesTest >> testSmall_from_1_to_2_do [
 { #category : #'examples - from to' }
 BlSubRopeExamplesTest >> testSmall_from_1_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 1 to: 5.
@@ -534,7 +534,7 @@ BlSubRopeExamplesTest >> testSmall_from_1_to_5 [
 { #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_from_1_to_5_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -552,7 +552,7 @@ BlSubRopeExamplesTest >> testSmall_from_1_to_5_do [
 { #category : #'examples - from to' }
 BlSubRopeExamplesTest >> testSmall_from_3_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 3 to: 5.
@@ -567,7 +567,7 @@ BlSubRopeExamplesTest >> testSmall_from_3_to_5 [
 { #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_from_3_to_5_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -585,7 +585,7 @@ BlSubRopeExamplesTest >> testSmall_from_3_to_5_do [
 { #category : #'examples - testing' }
 BlSubRopeExamplesTest >> testSmall_isEmpty [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope |
 	aRope := self testSmall.
 
@@ -597,7 +597,7 @@ BlSubRopeExamplesTest >> testSmall_isEmpty [
 { #category : #'examples - testing' }
 BlSubRopeExamplesTest >> testSmall_isLeaf [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope |
 	aRope := self testSmall.
 
@@ -609,7 +609,7 @@ BlSubRopeExamplesTest >> testSmall_isLeaf [
 { #category : #'examples - testing' }
 BlSubRopeExamplesTest >> testSmall_isNotEmpty [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope |
 	aRope := self testSmall.
 
@@ -621,7 +621,7 @@ BlSubRopeExamplesTest >> testSmall_isNotEmpty [
 { #category : #'examples - accessing' }
 BlSubRopeExamplesTest >> testSmall_size [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope |
 	aRope := self testSmall.
 

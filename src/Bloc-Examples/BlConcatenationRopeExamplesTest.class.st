@@ -7,7 +7,7 @@ Class {
 { #category : #'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_0_to_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 0.
@@ -25,7 +25,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_0_to_0 [
 { #category : #'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_0_to_1 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 
@@ -44,7 +44,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_0_to_1 [
 { #category : #'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_0_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 
@@ -61,7 +61,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_0_to_5 [
 { #category : #'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_2_to_2 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 
@@ -88,7 +88,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_2_to_2 [
 { #category : #'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_2_to_3 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 
@@ -115,7 +115,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_2_to_3 [
 { #category : #'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_4_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 
@@ -134,7 +134,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_4_to_5 [
 { #category : #'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_4_to_6 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 
@@ -156,7 +156,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_4_to_6 [
 { #category : #'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_5_to_10 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 5 to: 10.
@@ -172,7 +172,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_5_to_10 [
 { #category : #'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_5_to_6 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 
@@ -191,7 +191,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_5_to_6 [
 { #category : #'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_6_to_6 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 
@@ -218,7 +218,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_6_to_6 [
 { #category : #'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_6_to_7 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 
@@ -245,7 +245,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_6_to_7 [
 { #category : #'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_9_to_10 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 9 to: 10.
@@ -276,7 +276,7 @@ BlConcatenationRopeExamplesTest >> testReadStreamSmall [
 BlConcatenationRopeExamplesTest >> testSmall [
 	"Creates an instance of the rope of size smaller than combineLength"
 
-	<simpleInstances>
+	<sampleInstance>
 	| aRope |
 	aRope := BlConcatenationRope
 		         left: (BlCollectionRope collection: 'Hello')
@@ -298,7 +298,7 @@ BlConcatenationRopeExamplesTest >> testSmall [
 { #category : #'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 0 to: 0.
@@ -311,7 +311,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_0 [
 { #category : #'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_1 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 0 to: 1.
@@ -324,7 +324,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_1 [
 { #category : #'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_10 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 0 to: 10.
@@ -338,7 +338,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_10 [
 { #category : #'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 0 to: 5.
@@ -351,7 +351,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_5 [
 { #category : #'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_10_to_10 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 10 to: 10.
@@ -364,7 +364,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_10_to_10 [
 { #category : #'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_1_to_2 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 1 to: 2.
@@ -378,7 +378,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_1_to_2 [
 { #category : #'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_4_to_4 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 4 to: 4.
@@ -391,7 +391,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_4_to_4 [
 { #category : #'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_4_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 4 to: 5.
@@ -404,7 +404,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_4_to_5 [
 { #category : #'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_4_to_6 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 4 to: 6.
@@ -417,7 +417,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_4_to_6 [
 { #category : #'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_5_to_10 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 5 to: 10.
@@ -430,7 +430,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_5_to_10 [
 { #category : #'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_5_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 5 to: 5.
@@ -443,7 +443,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_5_to_5 [
 { #category : #'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_5_to_6 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 5 to: 6.
@@ -456,7 +456,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_5_to_6 [
 { #category : #'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_6_to_7 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 6 to: 7.
@@ -469,7 +469,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_6_to_7 [
 { #category : #'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_9_to_10 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope delete: 9 to: 10.
@@ -482,7 +482,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_9_to_10 [
 { #category : #'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -497,7 +497,7 @@ BlConcatenationRopeExamplesTest >> testSmall_do [
 { #category : #'instance creation' }
 BlConcatenationRopeExamplesTest >> testSmall_empty [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anEmpty |
 	aRope := self testSmall.
 	anEmpty := aRope empty.
@@ -511,7 +511,7 @@ BlConcatenationRopeExamplesTest >> testSmall_empty [
 { #category : #'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_0_to_0 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 0 to: 0.
@@ -525,7 +525,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_0_to_0 [
 { #category : #'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_0_to_0_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -543,7 +543,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_0_to_0_do [
 { #category : #'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_0_to_10 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 0 to: 10.
@@ -556,7 +556,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_0_to_10 [
 { #category : #'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_0_to_10_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -574,7 +574,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_0_to_10_do [
 { #category : #'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_0_to_1_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -592,7 +592,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_0_to_1_do [
 { #category : #'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_0_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 0 to: 5.
@@ -605,7 +605,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_0_to_5 [
 { #category : #'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_0_to_5_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -623,7 +623,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_0_to_5_do [
 { #category : #'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_10_to_10 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 10 to: 10.
@@ -637,7 +637,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_10_to_10 [
 { #category : #'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_10_to_10_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -655,7 +655,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_10_to_10_do [
 { #category : #'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_1_to_1_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -673,7 +673,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_1_to_1_do [
 { #category : #'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_1_to_2 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 1 to: 2.
@@ -686,7 +686,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_1_to_2 [
 { #category : #'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_1_to_2_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -704,7 +704,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_1_to_2_do [
 { #category : #'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_1_to_5_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -722,7 +722,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_1_to_5_do [
 { #category : #'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_3_to_5_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -740,7 +740,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_3_to_5_do [
 { #category : #'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_4_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 4 to: 5.
@@ -753,7 +753,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_4_to_5 [
 { #category : #'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_4_to_6 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 4 to: 6.
@@ -766,7 +766,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_4_to_6 [
 { #category : #'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_5_to_10 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 5 to: 10.
@@ -779,7 +779,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_5_to_10 [
 { #category : #'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_5_to_10_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -797,7 +797,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_5_to_10_do [
 { #category : #'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_5_to_5 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 5 to: 5.
@@ -811,7 +811,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_5_to_5 [
 { #category : #'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_5_to_5_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -829,7 +829,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_5_to_5_do [
 { #category : #'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_5_to_6 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope aNewRope |
 	aRope := self testSmall.
 	aNewRope := aRope from: 5 to: 6.
@@ -842,7 +842,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_5_to_6 [
 { #category : #'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_5_to_6_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -860,7 +860,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_5_to_6_do [
 { #category : #'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_9_to_10_do [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope theIterated |
 	aRope := self testSmall.
 	theIterated := String streamContents: [ :aStream |
@@ -878,7 +878,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_9_to_10_do [
 { #category : #'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testSttributes_small_0_to_10 [
 
-	<simpleInstance>
+	<sampleInstance>
 	| aRope anAttributedRope |
 	aRope := self testSmall.
 	anAttributedRope := aRope attributes: { 1 } from: 0 to: 10.
