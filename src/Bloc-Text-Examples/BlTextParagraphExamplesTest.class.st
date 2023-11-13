@@ -3,228 +3,275 @@ I contain examples of a text paragraph
 
 "
 Class {
-	#name : #BlTextParagraphExamples,
-	#superclass : #BlExampleTest,
+	#name : #BlTextParagraphExamplesTest,
+	#superclass : #TestCase,
 	#category : #'Bloc-Text-Examples-Measurement'
 }
 
 { #category : #'font - metrics' }
-BlTextParagraphExamples >> ascent [
-	<gtExample>
+BlTextParagraphExamplesTest >> ascent [
 
+	<sampleInstance>
 	^ -10
 ]
 
 { #category : #'font - metrics' }
-BlTextParagraphExamples >> descent [
-	<gtExample>
+BlTextParagraphExamplesTest >> descent [
 
+	<sampleInstance>
 	^ 5
 ]
 
 { #category : #'instance creation' }
-BlTextParagraphExamples >> emoji [
-	<gtExample>
+BlTextParagraphExamplesTest >> emoji [
 
+	<sampleInstance>
 	^ '😃'
 ]
 
 { #category : #'instance creation' }
-BlTextParagraphExamples >> emojiParagraph [
-	<gtExample>
-	| aParagraph |
+BlTextParagraphExamplesTest >> emojiParagraph [
 
+	<sampleInstance>
+	| aParagraph |
 	aParagraph := self newParagraph.
 	aParagraph text: self emoji asRopedText.
-	
+
 	^ aParagraph
 ]
 
 { #category : #'instance creation' }
-BlTextParagraphExamples >> emptyParagraph [
-	<gtExample>
-	| aParagraph |
+BlTextParagraphExamplesTest >> emptyParagraph [
 
+	<sampleInstance>
+	| aParagraph |
 	aParagraph := self newParagraph.
 	aParagraph text: BlText empty.
-	
+
 	^ aParagraph
 ]
 
 { #category : #'font - metrics' }
-BlTextParagraphExamples >> glyphWidth [
-	<gtExample>
+BlTextParagraphExamplesTest >> glyphWidth [
 
+	<sampleInstance>
 	^ 10
 ]
 
 { #category : #'instance creation' }
-BlTextParagraphExamples >> haba [
-	<gtExample>
+BlTextParagraphExamplesTest >> haba [
 
+	<sampleInstance>
 	^ 'Haba'
 ]
 
 { #category : #'instance creation' }
-BlTextParagraphExamples >> habaParagraph [
-	<gtExample>
-	| aParagraph |
+BlTextParagraphExamplesTest >> habaParagraph [
 
+	<sampleInstance>
+	| aParagraph |
 	aParagraph := self newParagraph.
 	aParagraph text: self haba asRopedText.
-	
+
 	^ aParagraph
 ]
 
 { #category : #'font - metrics' }
-BlTextParagraphExamples >> height [
-	<gtExample>
+BlTextParagraphExamplesTest >> height [
 
+	<sampleInstance>
 	^ 12
 ]
 
 { #category : #'instance creation' }
-BlTextParagraphExamples >> helloWorldParagraph [
-	<gtExample>
-	| aParagraph |
+BlTextParagraphExamplesTest >> helloWorldParagraph [
 
+	<sampleInstance>
+	| aParagraph |
 	aParagraph := self newParagraph.
 	aParagraph text: self helloWorldText.
-	
+
 	^ aParagraph
 ]
 
 { #category : #'instance creation' }
-BlTextParagraphExamples >> helloWorldText [
-	<gtExample>
-	| aText |
+BlTextParagraphExamplesTest >> helloWorldText [
 
+	<sampleInstance>
+	| aText |
 	aText := 'HelloWorld' asRopedText.
 	(aText from: 1 to: 5) foreground: Color red.
 
 	^ aText
 ]
 
+{ #category : #'instance creation' }
+BlTextParagraphExamplesTest >> newParagraph [
+
+	<sampleInstance>
+	| aParagraph |
+	aParagraph := BlTextParagraph new.
+	^ aParagraph
+]
+
+{ #category : #'instance creation' }
+BlTextParagraphExamplesTest >> objectPrintOnText [
+
+	<sampleInstance>
+	| aText |
+	aText := 'Object>>#printOn:' asRopedText.
+	(aText from: 1 to: 6) foreground: Color blue.
+	(aText from: 9 to: aText size) foreground: Color magenta.
+
+	^ aText
+]
+
+{ #category : #'instance creation' }
+BlTextParagraphExamplesTest >> pointWithDotText [
+
+	<sampleInstance>
+	| aText |
+	aText := '100@100.' asRopedText.
+	(aText from: 1 to: 3) foreground: Color red.
+	(aText from: 5 to: 7) foreground: Color red.
+	(aText from: 8 to: 8) bold.
+
+	^ aText
+]
+
+{ #category : #'instance creation' }
+BlTextParagraphExamplesTest >> realMeasurer [
+
+	<sampleInstance>
+	self error: 'TODO: migrate from Sparta'
+	"^ BlSpartaCanvasTextMeasurer new canvas: Bloc preferableSpartaCanvas offscreen"
+]
+
 { #category : #'geometry - HelloWorld' }
-BlTextParagraphExamples >> indexAtBetweenAllCharacterInHelloWorld [
-	<gtExample>
+BlTextParagraphExamplesTest >> testIndexAtBetweenAllCharacterInHelloWorld [
+
+	<sampleInstance>
 	| aParagraph theIndices |
+	aParagraph := self testMeasuredHelloWorld.
 
-	aParagraph := self measuredHelloWorld.
-
-	theIndices := (0 to: aParagraph text size) collect: [ :anIndex | aParagraph indexAtPosition: (self glyphWidth * anIndex) @ self ascent ].
+	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
+		              aParagraph indexAtPosition:
+			              self glyphWidth * anIndex @ self ascent ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
 	^ aParagraph
 ]
 
 { #category : #'geometry - Object>>#printOn:' }
-BlTextParagraphExamples >> indexAtBetweenAllCharactersInObjectPrintOn [
-	<gtExample>
-	| aParagraph theIndices |
+BlTextParagraphExamplesTest >> testIndexAtBetweenAllCharactersInObjectPrintOn [
 
+	<sampleInstance>
+	| aParagraph theIndices |
 	aParagraph := self newParagraph.
 	aParagraph text: self objectPrintOnText.
-	aParagraph measureOn: self measurer.
-	
-	theIndices := (0 to: aParagraph text size) collect: [ :anIndex | aParagraph indexAtPosition: (self glyphWidth * anIndex) @ self ascent ].
+	aParagraph measureOn: self testMeasurer.
+
+	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
+		              aParagraph indexAtPosition:
+			              self glyphWidth * anIndex @ self ascent ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
 	^ theIndices
 ]
 
 { #category : #'geometry - 100@100.' }
-BlTextParagraphExamples >> indexAtBetweenAllCharactersInPointWithDot [
-	<gtExample>
-	| aParagraph theIndices |
+BlTextParagraphExamplesTest >> testIndexAtBetweenAllCharactersInPointWithDot [
 
+	<sampleInstance>
+	| aParagraph theIndices |
 	aParagraph := self newParagraph.
 	aParagraph text: self pointWithDotText.
-	aParagraph measureOn: self measurer.
-	
+	aParagraph measureOn: self testMeasurer.
+
 	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
-		| aPoint |
-		aPoint := aParagraph positionAt: anIndex.
-		aParagraph indexAtPosition: aPoint ].
+		              | aPoint |
+		              aPoint := aParagraph positionAt: anIndex.
+		              aParagraph indexAtPosition: aPoint ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
 	^ aParagraph
 ]
 
 { #category : #'geometry - 100@100.' }
-BlTextParagraphExamples >> indexAtBetweenAllCharactersInRealPointWithDot [
-	<gtExample>
-	| aParagraph theIndices |
+BlTextParagraphExamplesTest >> testIndexAtBetweenAllCharactersInRealPointWithDot [
 
+	<sampleInstance>
+	| aParagraph theIndices |
 	aParagraph := self newParagraph.
 	aParagraph text: self pointWithDotText.
 	aParagraph measureOn: self realMeasurer.
-	
+
 	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
-		| aPoint |
-		aPoint := aParagraph positionAt: anIndex.
-		aParagraph indexAtPosition: aPoint ].
+		              | aPoint |
+		              aPoint := aParagraph positionAt: anIndex.
+		              aParagraph indexAtPosition: aPoint ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
 	^ aParagraph
 ]
 
 { #category : #'geometry - tab tab' }
-BlTextParagraphExamples >> indexAtBetweenAllCharactersInRealTabTab [
-	<gtExample>
-	| aParagraph theIndices |
+BlTextParagraphExamplesTest >> testIndexAtBetweenAllCharactersInRealTabTab [
 
+	<sampleInstance>
+	| aParagraph theIndices |
 	aParagraph := self newParagraph.
-	aParagraph text: (String tab, String tab) asRopedText.
+	aParagraph text: (String tab , String tab) asRopedText.
 	aParagraph measureOn: self realMeasurer.
-	
+
 	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
-		| aPoint |
-		aPoint := aParagraph positionAt: anIndex.
-		aParagraph indexAtPosition: aPoint ].
+		              | aPoint |
+		              aPoint := aParagraph positionAt: anIndex.
+		              aParagraph indexAtPosition: aPoint ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
 	^ aParagraph
 ]
 
 { #category : #'geometry - tab tab' }
-BlTextParagraphExamples >> indexAtBetweenAllCharactersInTabTab [
-	<gtExample>
-	| aParagraph theIndices |
+BlTextParagraphExamplesTest >> testIndexAtBetweenAllCharactersInTabTab [
 
+	<sampleInstance>
+	| aParagraph theIndices |
 	aParagraph := self newParagraph.
-	aParagraph text: (String tab, String tab) asRopedText.
-	aParagraph measureOn: self measurer.
-	
+	aParagraph text: (String tab , String tab) asRopedText.
+	aParagraph measureOn: self testMeasurer.
+
 	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
-		| aPoint |
-		aPoint := aParagraph positionAt: anIndex.
-		aParagraph indexAtPosition: aPoint ].
+		              | aPoint |
+		              aPoint := aParagraph positionAt: anIndex.
+		              aParagraph indexAtPosition: aPoint ].
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
 
 	^ aParagraph
 ]
 
 { #category : #'geometry - haba' }
-BlTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInHaba [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtBetweenFirstAndSecondCharacterInHaba [
 
-	aParagraph := self measuredHaba.
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredHaba.
 	anIndex := aParagraph indexAtPosition: self glyphWidth @ self ascent.
-	
+
 	self assert: anIndex equals: 1.
 
 	^ anIndex
 ]
 
 { #category : #'geometry - HelloWorld' }
-BlTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInHelloWorld [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtBetweenFirstAndSecondCharacterInHelloWorld [
 
-	aParagraph := self measuredHelloWorld.
-	anIndex := aParagraph indexAtPosition: (self glyphWidth * 1) @ self ascent.
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredHelloWorld.
+	anIndex := aParagraph indexAtPosition:
+		           self glyphWidth * 1 @ self ascent.
 
 	self assert: anIndex equals: 1.
 
@@ -232,15 +279,16 @@ BlTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInHelloWorld [
 ]
 
 { #category : #'geometry - Object>>#printOn:' }
-BlTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInObjectPrintOn [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtBetweenFirstAndSecondCharacterInObjectPrintOn [
 
+	<sampleInstance>
+	| aParagraph anIndex |
 	aParagraph := self newParagraph.
 	aParagraph text: self objectPrintOnText.
-	aParagraph measureOn: self measurer.
-	
-	anIndex := aParagraph indexAtPosition: (self glyphWidth * 1) @ self ascent.
+	aParagraph measureOn: self testMeasurer.
+
+	anIndex := aParagraph indexAtPosition:
+		           self glyphWidth * 1 @ self ascent.
 
 	self assert: anIndex equals: 1.
 
@@ -248,12 +296,12 @@ BlTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInObjectPrintOn 
 ]
 
 { #category : #'geometry - HelloWorld' }
-BlTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInRealHelloWorld [
-	<gtExample>
-	| aParagraph anIndex aPosition |
+BlTextParagraphExamplesTest >> testIndexAtBetweenFirstAndSecondCharacterInRealHelloWorld [
 
-	aParagraph := self realMeasuredHelloWorld.
-	
+	<sampleInstance>
+	| aParagraph anIndex aPosition |
+	aParagraph := self testRealMeasuredHelloWorld.
+
 	aPosition := aParagraph positionAt: 1.
 	anIndex := aParagraph indexAtPosition: aPosition.
 
@@ -263,26 +311,28 @@ BlTextParagraphExamples >> indexAtBetweenFirstAndSecondCharacterInRealHelloWorld
 ]
 
 { #category : #'geometry - haba' }
-BlTextParagraphExamples >> indexAtBetweenHalfsOfFirstCharacterInHaba [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtBetweenHalfsOfFirstCharacterInHaba [
 
-	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: (self glyphWidth / 2.0) @ self ascent.
-	
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredHaba.
+	anIndex := aParagraph indexAtPosition:
+		           self glyphWidth / 2.0 @ self ascent.
+
 	self assert: anIndex equals: 0.
 
 	^ anIndex
 ]
 
 { #category : #'geometry - HelloWorld' }
-BlTextParagraphExamples >> indexAtBetweenSeventhAndEighthCharacterInHelloWorld [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtBetweenSeventhAndEighthCharacterInHelloWorld [
 
-	aParagraph := self measuredHelloWorld.
-	
-	anIndex := aParagraph indexAtPosition: (self glyphWidth * 7) @ self ascent.
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredHelloWorld.
+
+	anIndex := aParagraph indexAtPosition:
+		           self glyphWidth * 7 @ self ascent.
 
 	self assert: anIndex equals: 7.
 
@@ -290,15 +340,16 @@ BlTextParagraphExamples >> indexAtBetweenSeventhAndEighthCharacterInHelloWorld [
 ]
 
 { #category : #'geometry - Object>>#printOn:' }
-BlTextParagraphExamples >> indexAtBetweenSeventhAndEighthCharacterInObjectPrintOn [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtBetweenSeventhAndEighthCharacterInObjectPrintOn [
 
+	<sampleInstance>
+	| aParagraph anIndex |
 	aParagraph := self newParagraph.
 	aParagraph text: self objectPrintOnText.
-	aParagraph measureOn: self measurer.
-	
-	anIndex := aParagraph indexAtPosition: (self glyphWidth * 7) @ self ascent.
+	aParagraph measureOn: self testMeasurer.
+
+	anIndex := aParagraph indexAtPosition:
+		           self glyphWidth * 7 @ self ascent.
 
 	self assert: anIndex equals: 7.
 
@@ -306,12 +357,12 @@ BlTextParagraphExamples >> indexAtBetweenSeventhAndEighthCharacterInObjectPrintO
 ]
 
 { #category : #'geometry - HelloWorld' }
-BlTextParagraphExamples >> indexAtBetweenSeventhAndEighthCharacterInRealHelloWorld [
-	<gtExample>
-	| aParagraph anIndex aPosition |
+BlTextParagraphExamplesTest >> testIndexAtBetweenSeventhAndEighthCharacterInRealHelloWorld [
 
-	aParagraph := self realMeasuredHelloWorld.
-	
+	<sampleInstance>
+	| aParagraph anIndex aPosition |
+	aParagraph := self testRealMeasuredHelloWorld.
+
 	aPosition := aParagraph positionAt: 7.
 	anIndex := aParagraph indexAtPosition: aPosition.
 
@@ -321,184 +372,198 @@ BlTextParagraphExamples >> indexAtBetweenSeventhAndEighthCharacterInRealHelloWor
 ]
 
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> indexAtFarBottomLeftPointInEmpty [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtFarBottomLeftPointInEmpty [
 
-	aParagraph := self measuredEmpty.
-	anIndex := aParagraph indexAtPosition: (self ascent * 10) negated @ (self ascent * 10).
-	
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredEmpty.
+	anIndex := aParagraph indexAtPosition:
+		           (self ascent * 10) negated @ (self ascent * 10).
+
 	self assert: anIndex equals: 0.
-	
+
 	^ anIndex
 ]
 
 { #category : #'geometry - haba' }
-BlTextParagraphExamples >> indexAtFarBottomLeftPointInHaba [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtFarBottomLeftPointInHaba [
 
-	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: (self glyphWidth * self haba size * 10) negated @ (self ascent * 10).
-	
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredHaba.
+	anIndex := aParagraph indexAtPosition:
+		           (self glyphWidth * self haba size * 10) negated
+		           @ (self ascent * 10).
+
 	self assert: anIndex equals: 0.
-	
+
 	^ anIndex
 ]
 
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> indexAtFarBottomPointInEmpty [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtFarBottomPointInEmpty [
 
-	aParagraph := self measuredEmpty.
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredEmpty.
 	anIndex := aParagraph indexAtPosition: 0 @ (self ascent * 10).
-	
+
 	self assert: anIndex equals: 0.
-	
+
 	^ anIndex
 ]
 
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> indexAtFarBottomRightPointInEmpty [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtFarBottomRightPointInEmpty [
 
-	aParagraph := self measuredEmpty.
-	anIndex := aParagraph indexAtPosition: (self ascent * 10) @ (self ascent * 10).
-	
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredEmpty.
+	anIndex := aParagraph indexAtPosition:
+		           self ascent * 10 @ (self ascent * 10).
+
 	self assert: anIndex equals: 0.
-	
+
 	^ anIndex
 ]
 
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> indexAtFarTopLeftPointInEmpty [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtFarTopLeftPointInEmpty [
 
-	aParagraph := self measuredEmpty.
-	anIndex := aParagraph indexAtPosition: (self ascent * 10) asPoint negated.
-	
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredEmpty.
+	anIndex := aParagraph indexAtPosition:
+		           (self ascent * 10) asPoint negated.
+
 	self assert: anIndex equals: 0.
-	
+
 	^ anIndex
 ]
 
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> indexAtFarTopPointInEmpty [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtFarTopPointInEmpty [
 
-	aParagraph := self measuredEmpty.
-	anIndex := aParagraph indexAtPosition: 0@(self ascent * 10) negated.
-	
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredEmpty.
+	anIndex := aParagraph indexAtPosition: 0 @ (self ascent * 10) negated.
+
 	self assert: anIndex equals: 0.
-	
+
 	^ anIndex
 ]
 
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> indexAtFarTopRightPointInEmpty [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtFarTopRightPointInEmpty [
 
-	aParagraph := self measuredEmpty.
-	anIndex := aParagraph indexAtPosition: (self ascent * 10) @ (self ascent * 10) negated.
-	
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredEmpty.
+	anIndex := aParagraph indexAtPosition:
+		           self ascent * 10 @ (self ascent * 10) negated.
+
 	self assert: anIndex equals: 0.
-	
+
 	^ anIndex
 ]
 
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> indexAtFarZeroInEmpty [
-	<gtExample>
+BlTextParagraphExamplesTest >> testIndexAtFarZeroInEmpty [
+
+	<sampleInstance>
 	| aParagraph anIndex |
+	aParagraph := self testMeasuredEmpty.
+	anIndex := aParagraph indexAtPosition: 0 @ 0.
 
-	aParagraph := self measuredEmpty.
-	anIndex := aParagraph indexAtPosition: 0@0.
-	
-	self assert: anIndex equals: 0.
-	
-	^ anIndex
-]
-
-{ #category : #'geometry - haba' }
-BlTextParagraphExamples >> indexAtLeftHalfOfFirstCharacterInHaba [
-	<gtExample>
-	| aParagraph anIndex |
-
-	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: (self glyphWidth / 3.0) @ self ascent.
-	
 	self assert: anIndex equals: 0.
 
 	^ anIndex
 ]
 
 { #category : #'geometry - haba' }
-BlTextParagraphExamples >> indexAtLeftHalfOfForthCharacterInHaba [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtLeftHalfOfFirstCharacterInHaba [
 
-	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: ((self glyphWidth * 3) + (self glyphWidth / 3.0)) @ self ascent.
-	
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredHaba.
+	anIndex := aParagraph indexAtPosition:
+		           self glyphWidth / 3.0 @ self ascent.
+
+	self assert: anIndex equals: 0.
+
+	^ anIndex
+]
+
+{ #category : #'geometry - haba' }
+BlTextParagraphExamplesTest >> testIndexAtLeftHalfOfForthCharacterInHaba [
+
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredHaba.
+	anIndex := aParagraph indexAtPosition:
+		           self glyphWidth * 3 + (self glyphWidth / 3.0)
+		           @ self ascent.
+
 	self assert: anIndex equals: 3.
 
 	^ anIndex
 ]
 
 { #category : #'geometry - haba' }
-BlTextParagraphExamples >> indexAtLeftHalfOfSecondCharacterInHaba [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtLeftHalfOfSecondCharacterInHaba [
 
-	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: ((self glyphWidth * 1) + (self glyphWidth / 3.0)) @ self ascent.
-	
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredHaba.
+	anIndex := aParagraph indexAtPosition:
+		           self glyphWidth * 1 + (self glyphWidth / 3.0)
+		           @ self ascent.
+
 	self assert: anIndex equals: 1.
 
 	^ anIndex
 ]
 
 { #category : #'geometry - haba' }
-BlTextParagraphExamples >> indexAtLeftHalfOfThirdCharacterInHaba [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtLeftHalfOfThirdCharacterInHaba [
 
-	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: ((self glyphWidth * 2) + (self glyphWidth / 3.0)) @ self ascent.
-	
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredHaba.
+	anIndex := aParagraph indexAtPosition:
+		           self glyphWidth * 2 + (self glyphWidth / 3.0)
+		           @ self ascent.
+
 	self assert: anIndex equals: 2.
 
 	^ anIndex
 ]
 
 { #category : #'geometry - haba' }
-BlTextParagraphExamples >> indexAtRightHalfOfFirstCharacterInHaba [
-	<gtExample>
-	| aParagraph anIndex |
+BlTextParagraphExamplesTest >> testIndexAtRightHalfOfFirstCharacterInHaba [
 
-	aParagraph := self measuredHaba.
-	anIndex := aParagraph indexAtPosition: (self glyphWidth / 1.5) @ self ascent.
-	
+	<sampleInstance>
+	| aParagraph anIndex |
+	aParagraph := self testMeasuredHaba.
+	anIndex := aParagraph indexAtPosition:
+		           self glyphWidth / 1.5 @ self ascent.
+
 	self assert: anIndex equals: 1.
-	
+
 	^ anIndex
 ]
 
 { #category : #'paragraph - measuring' }
-BlTextParagraphExamples >> measuredEmoji [
-	<gtExample>
+BlTextParagraphExamplesTest >> testMeasuredEmoji [
+
+	<sampleInstance>
 	| aParagraph aLine aSpan |
-	
 	aParagraph := self emojiParagraph.
-	aParagraph measureOn: self measurer.
-	
+	aParagraph measureOn: self testMeasurer.
+
 	self assert: aParagraph measuredEnd equals: 1.
-	
+
 	aLine := aParagraph line.
 	self assert: aLine ascent equals: self ascent.
 	self assert: aLine baseline equals: 0 @ self ascent abs.
@@ -510,41 +575,41 @@ BlTextParagraphExamples >> measuredEmoji [
 	self assert: aLine to equals: 1.
 	self assert: aLine top equals: 0.
 	self assert: aLine width equals: self emoji size * self glyphWidth.
-	
+
 	aSpan := aLine spans first.
 	self assert: aSpan advance equals: self emoji size * self glyphWidth.
 	self assert: aSpan ascent equals: self ascent.
 	self assert: aSpan baseline equals: 0 @ self ascent abs.
 	self assert: aSpan descent equals: self descent.
-	self assert: aSpan from equals: 1. 
+	self assert: aSpan from equals: 1.
 	self assert: aSpan height equals: self height.
 	self assert: aSpan left equals: 0.
-	self assert: aSpan spanEnd equals: 1. 
+	self assert: aSpan spanEnd equals: 1.
 	self assert: aSpan spanStart equals: 1.
 	self assert: aSpan textRun equals: self emoji.
 	self assert: aSpan textRunEnd equals: 1.
 	self assert: aSpan textRunStart equals: 1.
 	self assert: aSpan to equals: 1.
 	self assert: aSpan top equals: 0.
-	self assert: aSpan width equals: (self emoji size * self glyphWidth).
-	
+	self assert: aSpan width equals: self emoji size * self glyphWidth.
+
 	self assert: aSpan spanLength equals: 1.
 	self assert: aSpan textRunLength equals: 1.
 	self assert: aSpan isSplitted not.
-	
+
 	^ aParagraph
 ]
 
 { #category : #'paragraph - measuring' }
-BlTextParagraphExamples >> measuredEmpty [
-	<gtExample>
+BlTextParagraphExamplesTest >> testMeasuredEmpty [
+
+	<sampleInstance>
 	| aParagraph aLine aSpan |
-	
 	aParagraph := self emptyParagraph.
-	aParagraph measureOn: self measurer.
-	
+	aParagraph measureOn: self testMeasurer.
+
 	self assert: aParagraph measuredEnd equals: 0.
-	
+
 	aLine := aParagraph line.
 	self assert: aLine ascent equals: self ascent.
 	self assert: aLine baseline equals: 0 @ self ascent abs.
@@ -556,41 +621,41 @@ BlTextParagraphExamples >> measuredEmpty [
 	self assert: aLine to equals: 0.
 	self assert: aLine top equals: 0.
 	self assert: aLine width equals: 0.
-	
+
 	aSpan := aLine spans first.
 	self assert: aSpan advance equals: 0.
 	self assert: aSpan ascent equals: self ascent.
 	self assert: aSpan baseline equals: 0 @ self ascent abs.
 	self assert: aSpan descent equals: self descent.
-	self assert: aSpan from equals: 0. 
+	self assert: aSpan from equals: 0.
 	self assert: aSpan height equals: 0.
 	self assert: aSpan left equals: 0.
-	self assert: aSpan spanEnd equals: 0. 
+	self assert: aSpan spanEnd equals: 0.
 	self assert: aSpan spanStart equals: 0.
 	self assert: aSpan textRun equals: ''.
-	self assert: aSpan textRunEnd equals: 0. 
+	self assert: aSpan textRunEnd equals: 0.
 	self assert: aSpan textRunStart equals: 0.
 	self assert: aSpan to equals: 0.
 	self assert: aSpan top equals: 0.
 	self assert: aSpan width equals: 0.
-	
+
 	self assert: aSpan spanLength equals: 0.
 	self assert: aSpan textRunLength equals: 0.
 	self assert: aSpan isSplitted not.
-	
+
 	^ aParagraph
 ]
 
 { #category : #'paragraph - measuring' }
-BlTextParagraphExamples >> measuredHaba [
-	<gtExample>
+BlTextParagraphExamplesTest >> testMeasuredHaba [
+
+	<sampleInstance>
 	| aParagraph aLine aSpan |
-	
 	aParagraph := self habaParagraph.
-	aParagraph measureOn: self measurer.
-	
+	aParagraph measureOn: self testMeasurer.
+
 	"self assert: aParagraph measuredEnd equals: 4."
-	
+
 	aLine := aParagraph line.
 	self assert: aLine ascent equals: self ascent.
 	self assert: aLine baseline equals: 0 @ self ascent abs.
@@ -602,45 +667,45 @@ BlTextParagraphExamples >> measuredHaba [
 	self assert: aLine to equals: 4.
 	self assert: aLine top equals: 0.
 	self assert: aLine width equals: self haba size * self glyphWidth.
-	
+
 	aSpan := aLine spans first.
 	self assert: aSpan advance equals: self haba size * self glyphWidth.
 	self assert: aSpan ascent equals: self ascent.
 	self assert: aSpan baseline equals: 0 @ self ascent abs.
 	self assert: aSpan descent equals: self descent.
-	self assert: aSpan from equals: 1. 
+	self assert: aSpan from equals: 1.
 	self assert: aSpan height equals: self height.
 	self assert: aSpan left equals: 0.
-	self assert: aSpan spanEnd equals: 4. 
+	self assert: aSpan spanEnd equals: 4.
 	self assert: aSpan spanStart equals: 1.
 	self assert: aSpan textRun equals: self haba.
 	self assert: aSpan textRunEnd equals: 4.
 	self assert: aSpan textRunStart equals: 1.
 	self assert: aSpan to equals: 4.
 	self assert: aSpan top equals: 0.
-	self assert: aSpan width equals: (self haba size * self glyphWidth).
-	
+	self assert: aSpan width equals: self haba size * self glyphWidth.
+
 	self assert: aSpan spanLength equals: 4.
 	self assert: aSpan textRunLength equals: 4.
 	self assert: aSpan isSplitted not.
-	
+
 	^ aParagraph
 ]
 
 { #category : #'paragraph - measuring' }
-BlTextParagraphExamples >> measuredHelloWorld [
-	<gtExample>
+BlTextParagraphExamplesTest >> testMeasuredHelloWorld [
+
+	<sampleInstance>
 	| aParagraph aLine aFirstSpan aSecondSpan aText aHello aWorld |
-	
 	aParagraph := self helloWorldParagraph.
-	aParagraph measureOn: self measurer.
-	
+	aParagraph measureOn: self testMeasurer.
+
 	aText := aParagraph text.
 	aHello := aText from: 1 to: 5.
 	aWorld := aText from: 6 to: 10.
-	
+
 	self assert: aParagraph measuredEnd equals: aText size.
-	
+
 	aLine := aParagraph line.
 	self assert: aLine ascent equals: self ascent.
 	self assert: aLine baseline equals: 0 @ self ascent abs.
@@ -652,272 +717,237 @@ BlTextParagraphExamples >> measuredHelloWorld [
 	self assert: aLine to equals: aText size.
 	self assert: aLine top equals: 0.
 	self assert: aLine width equals: aText size * self glyphWidth.
-	
+
 	"first span"
 	aFirstSpan := aLine spans first.
 	self assert: aFirstSpan advance equals: aHello size * self glyphWidth.
 	self assert: aFirstSpan ascent equals: self ascent.
 	self assert: aFirstSpan baseline equals: 0 @ self ascent abs.
 	self assert: aFirstSpan descent equals: self descent.
-	self assert: aFirstSpan from equals: 1. 
+	self assert: aFirstSpan from equals: 1.
 	self assert: aFirstSpan to equals: aHello size.
 	self assert: aFirstSpan height equals: self height.
 	self assert: aFirstSpan left equals: 0.
-	self assert: aFirstSpan spanEnd equals: aHello size. 
+	self assert: aFirstSpan spanEnd equals: aHello size.
 	self assert: aFirstSpan spanStart equals: 1.
 	self assert: aFirstSpan textRun equals: aHello asString.
 	self assert: aFirstSpan textRunEnd equals: aHello size.
 	self assert: aFirstSpan textRunStart equals: 1.
 	self assert: aFirstSpan top equals: 0.
-	self assert: aFirstSpan width equals: (aHello size * self glyphWidth).
+	self assert: aFirstSpan width equals: aHello size * self glyphWidth.
 	self assert: aFirstSpan spanLength equals: aHello size.
 	self assert: aFirstSpan textRunLength equals: aHello size.
 	self assert: aFirstSpan isSplitted not.
-	
+
 	"second span"
 	aSecondSpan := aLine spans second.
-	self assert: aSecondSpan advance equals: aWorld size * self glyphWidth.
+	self
+		assert: aSecondSpan advance
+		equals: aWorld size * self glyphWidth.
 	self assert: aSecondSpan ascent equals: self ascent.
-	self assert: aSecondSpan baseline equals: (aFirstSpan width @ self ascent abs).
+	self
+		assert: aSecondSpan baseline
+		equals: aFirstSpan width @ self ascent abs.
 	self assert: aSecondSpan descent equals: self descent.
-	self assert: aSecondSpan from equals: aHello size + 1. 
+	self assert: aSecondSpan from equals: aHello size + 1.
 	self assert: aSecondSpan to equals: aHello size + aWorld size.
 	self assert: aSecondSpan height equals: self height.
 	self assert: aSecondSpan left equals: 0.
-	self assert: aSecondSpan spanEnd equals: aWorld size. 
+	self assert: aSecondSpan spanEnd equals: aWorld size.
 	self assert: aSecondSpan spanStart equals: 1.
 	self assert: aSecondSpan textRun equals: aWorld asString.
 	self assert: aSecondSpan textRunEnd equals: aWorld size.
 	self assert: aSecondSpan textRunStart equals: 1.
 	self assert: aSecondSpan top equals: 0.
-	self assert: aSecondSpan width equals: (aWorld size * self glyphWidth).
+	self assert: aSecondSpan width equals: aWorld size * self glyphWidth.
 	self assert: aSecondSpan spanLength equals: aWorld size.
 	self assert: aSecondSpan textRunLength equals: aWorld size.
 	self assert: aSecondSpan isSplitted not.
-	
+
 	^ aParagraph
 ]
 
 { #category : #'instance creation' }
-BlTextParagraphExamples >> measurer [
-	<gtExample>
+BlTextParagraphExamplesTest >> testMeasurer [
 
+	<sampleInstance>
 	| aMeasurer |
 	aMeasurer := BAMockedTextMeasurer new
-		ascent: self ascent;
-		descent: self descent;
-		glyphWidth: self glyphWidth;
-		height: self height.
-	
+		             ascent: self ascent;
+		             descent: self descent;
+		             glyphWidth: self glyphWidth;
+		             height: self height.
+
 	self assert: aMeasurer ascent equals: self ascent.
 	self assert: aMeasurer descent equals: self descent.
 	self assert: aMeasurer glyphWidth equals: self glyphWidth.
 	self assert: aMeasurer height equals: self height.
-	
+
 	^ aMeasurer
 ]
 
-{ #category : #'instance creation' }
-BlTextParagraphExamples >> newParagraph [
-	<gtExample>
-	| aParagraph |
-
-	aParagraph := BlTextParagraph new.	
-	^ aParagraph
-]
-
-{ #category : #'instance creation' }
-BlTextParagraphExamples >> objectPrintOnText [
-	<gtExample>
-	| aText |
-
-	aText := 'Object>>#printOn:' asRopedText.
-	(aText from: 1 to: 6) foreground: Color blue.
-	(aText from: 9 to: aText size) foreground: Color magenta.
-
-	^ aText
-]
-
-{ #category : #'instance creation' }
-BlTextParagraphExamples >> pointWithDotText [
-	<gtExample>
-	| aText |
-
-	aText := '100@100.' asRopedText.
-	(aText from: 1 to: 3) foreground: Color red.
-	(aText from: 5 to: 7) foreground: Color red.
-	(aText from: 8 to: 8) bold.
-
-	^ aText
-]
-
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> positionAtIndexInEmpty [
-	<gtExample>
+BlTextParagraphExamplesTest >> testPositionAtIndexInEmpty [
+
+	<sampleInstance>
 	| aParagraph aPoint |
-	
-	aParagraph := self measuredEmpty.
+	aParagraph := self testMeasuredEmpty.
 	aPoint := aParagraph positionAt: 0.
-	
+
 	self assert: aPoint equals: 0 @ aParagraph baseline y.
-	
+
 	^ aPoint
 ]
 
 { #category : #'paragraph - measuring' }
-BlTextParagraphExamples >> realMeasuredHelloWorld [
-	<gtExample>
+BlTextParagraphExamplesTest >> testRealMeasuredHelloWorld [
+
+	<sampleInstance>
 	| aParagraph aLine aFirstSpan aSecondSpan aText aHello aWorld |
-	
 	aParagraph := self helloWorldParagraph.
 	aParagraph measureOn: self realMeasurer.
-	
+
 	aText := aParagraph text.
 	aHello := aText from: 1 to: 5.
 	aWorld := aText from: 6 to: 10.
-	
+
 	self assert: aParagraph measuredEnd equals: aText size.
-	
+
 	aLine := aParagraph line.
 	self assert: aLine from equals: 1.
 	self assert: aLine spans size equals: 2.
 	self assert: aLine to equals: aText size.
-	
+
 	"first span"
 	aFirstSpan := aLine spans first.
-	self assert: aFirstSpan from equals: 1. 
+	self assert: aFirstSpan from equals: 1.
 	self assert: aFirstSpan to equals: aHello size.
-	self assert: aFirstSpan spanEnd equals: aHello size. 
+	self assert: aFirstSpan spanEnd equals: aHello size.
 	self assert: aFirstSpan spanStart equals: 1.
 	self assert: aFirstSpan textRunEnd equals: aHello size.
 	self assert: aFirstSpan textRunStart equals: 1.
 	self assert: aFirstSpan spanLength equals: aHello size.
 	self assert: aFirstSpan textRunLength equals: aHello size.
 	self assert: aFirstSpan isSplitted not.
-	
+
 	"second span"
 	aSecondSpan := aLine spans second.
-	self assert: aSecondSpan from equals: aHello size + 1. 
+	self assert: aSecondSpan from equals: aHello size + 1.
 	self assert: aSecondSpan to equals: aHello size + aWorld size.
-	self assert: aSecondSpan spanEnd equals: aWorld size. 
+	self assert: aSecondSpan spanEnd equals: aWorld size.
 	self assert: aSecondSpan spanStart equals: 1.
 	self assert: aSecondSpan textRunEnd equals: aWorld size.
 	self assert: aSecondSpan textRunStart equals: 1.
 	self assert: aSecondSpan spanLength equals: aWorld size.
 	self assert: aSecondSpan textRunLength equals: aWorld size.
 	self assert: aSecondSpan isSplitted not.
-	
+
 	^ aParagraph
 ]
 
-{ #category : #'instance creation' }
-BlTextParagraphExamples >> realMeasurer [
-	<gtExample>
-
-	self error: 'TODO: migrate from Sparta'
-	"^ BlSpartaCanvasTextMeasurer new canvas: Bloc preferableSpartaCanvas offscreen"
-]
-
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> spanAtFarBottomLeftPointInEmpty [
-	<gtExample>
-	| aParagraph aSpan |
+BlTextParagraphExamplesTest >> testSpanAtFarBottomLeftPointInEmpty [
 
-	aParagraph := self measuredEmpty.
-	aSpan := aParagraph spanAtPoint: (self ascent * 10) negated @ (self ascent * 10).
-	
+	<sampleInstance>
+	| aParagraph aSpan |
+	aParagraph := self testMeasuredEmpty.
+	aSpan := aParagraph spanAtPoint:
+		         (self ascent * 10) negated @ (self ascent * 10).
+
 	self assert: aSpan equals: aParagraph line spans first.
-	
+
 	^ aSpan
 ]
 
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> spanAtFarBottomPointInEmpty [
-	<gtExample>
-	| aParagraph aSpan |
+BlTextParagraphExamplesTest >> testSpanAtFarBottomPointInEmpty [
 
-	aParagraph := self measuredEmpty.
+	<sampleInstance>
+	| aParagraph aSpan |
+	aParagraph := self testMeasuredEmpty.
 	aSpan := aParagraph spanAtPoint: 0 @ (self ascent * 10).
-	
+
 	self assert: aSpan equals: aParagraph line spans first.
-	
+
 	^ aSpan
 ]
 
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> spanAtFarBottomRightPointInEmpty [
-	<gtExample>
-	| aParagraph aSpan |
+BlTextParagraphExamplesTest >> testSpanAtFarBottomRightPointInEmpty [
 
-	aParagraph := self measuredEmpty.
-	aSpan := aParagraph spanAtPoint: (self ascent * 10) @ (self ascent * 10).
-	
+	<sampleInstance>
+	| aParagraph aSpan |
+	aParagraph := self testMeasuredEmpty.
+	aSpan := aParagraph spanAtPoint:
+		         self ascent * 10 @ (self ascent * 10).
+
 	self assert: aSpan equals: aParagraph line spans first.
-	
+
 	^ aSpan
 ]
 
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> spanAtFarTopLeftPointInEmpty [
-	<gtExample>
-	| aParagraph aSpan |
+BlTextParagraphExamplesTest >> testSpanAtFarTopLeftPointInEmpty [
 
-	aParagraph := self measuredEmpty.
+	<sampleInstance>
+	| aParagraph aSpan |
+	aParagraph := self testMeasuredEmpty.
 	aSpan := aParagraph spanAtPoint: (self ascent * 10) asPoint negated.
-	
+
 	self assert: aSpan equals: aParagraph line spans first.
-	
+
 	^ aSpan
 ]
 
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> spanAtFarTopPointInEmpty [
-	<gtExample>
-	| aParagraph aSpan |
+BlTextParagraphExamplesTest >> testSpanAtFarTopPointInEmpty [
 
-	aParagraph := self measuredEmpty.
-	aSpan := aParagraph spanAtPoint: 0@(self ascent * 10) negated.
-	
+	<sampleInstance>
+	| aParagraph aSpan |
+	aParagraph := self testMeasuredEmpty.
+	aSpan := aParagraph spanAtPoint: 0 @ (self ascent * 10) negated.
+
 	self assert: aSpan equals: aParagraph line spans first.
-	
+
 	^ aSpan
 ]
 
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> spanAtFarTopRightPointInEmpty [
-	<gtExample>
-	| aParagraph aSpan |
+BlTextParagraphExamplesTest >> testSpanAtFarTopRightPointInEmpty [
 
-	aParagraph := self measuredEmpty.
-	aSpan := aParagraph spanAtPoint: (self ascent * 10) @ (self ascent * 10) negated.
-	
+	<sampleInstance>
+	| aParagraph aSpan |
+	aParagraph := self testMeasuredEmpty.
+	aSpan := aParagraph spanAtPoint:
+		         self ascent * 10 @ (self ascent * 10) negated.
+
 	self assert: aSpan equals: aParagraph line spans first.
-	
+
 	^ aSpan
 ]
 
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> spanAtFarZeroInEmpty [
-	<gtExample>
-	| aParagraph aSpan |
+BlTextParagraphExamplesTest >> testSpanAtFarZeroInEmpty [
 
-	aParagraph := self measuredEmpty.
-	aSpan := aParagraph spanAtPoint: 0@0.
-	
+	<sampleInstance>
+	| aParagraph aSpan |
+	aParagraph := self testMeasuredEmpty.
+	aSpan := aParagraph spanAtPoint: 0 @ 0.
+
 	self assert: aSpan equals: aParagraph line spans first.
-	
+
 	^ aSpan
 ]
 
 { #category : #'geometry - empty' }
-BlTextParagraphExamples >> spanAtIndexInEmpty [
-	<gtExample>
+BlTextParagraphExamplesTest >> testSpanAtIndexInEmpty [
+
+	<sampleInstance>
 	| aParagraph aSpan |
-	
-	aParagraph := self measuredEmpty.
+	aParagraph := self testMeasuredEmpty.
 	aSpan := aParagraph spanAtIndex: 0.
-	
+
 	self assert: aSpan equals: aParagraph line spans first.
-	
+
 	^ aSpan
 ]

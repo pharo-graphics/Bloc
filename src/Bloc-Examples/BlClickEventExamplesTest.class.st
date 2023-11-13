@@ -6,151 +6,17 @@ Class {
 	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : #'examples - events' }
-BlClickEventExamplesTest >> clickInHiddenChildAndVisibleClippedGrandchild [
-	<gtExample>
-	| aScripter |
-	aScripter := self threeElementsWithTrueChildClippingInScripter.
-	
-	aScripter substeps: 'Click in hidden grandchild' do: [ :aStep |
-		
-		aStep do
-			label: 'Set child with hidden visibility';
-			block: [ :aChild | aChild visibility: BlVisibility hidden ];
-			onChildAt: 1.
-		
-		aStep testClick 
-			onChildAt: 1;
-			onChildAt: 1.
-		
-		aStep check 
-			label: 'Check the click was consumed by parent';
-			do: [
-				| aClickCollection |
-				aClickCollection := aScripter userData at: #clicks.
-				self assert: aClickCollection size equals: 1.
-				self assert: aClickCollection first equals: #parent. ] 
-	].
-	
-	^ aScripter syncContinue
-]
-
-{ #category : #'examples - events' }
-BlClickEventExamplesTest >> clickInHiddenChildAndVisibleGrandchild [
-	<gtExample>
-	| aScripter |
-	aScripter := self threeElementsInScripter.
-	
-	aScripter substeps: 'Click in hidden grandchild' do: [ :aStep |
-		
-		aStep do
-			label: 'Set child with hidden visibility';
-			block: [ :aChild | aChild visibility: BlVisibility hidden ];
-			onChildAt: 1.
-		
-		aStep testClick 
-			onChildAt: 1;
-			onChildAt: 1.
-		
-		aStep check 
-			label: 'Check the click was consumed by parent';
-			do: [
-				| aClickCollection |
-				aClickCollection := aScripter userData at: #clicks.
-				self assert: aClickCollection size equals: 1.
-				self assert: aClickCollection first equals: #parent. ] 
-	].
-	
-	^ aScripter syncContinue
-]
-
-{ #category : #'examples - events' }
-BlClickEventExamplesTest >> clickInHiddenChildAndVisibleUnclippedGrandchild [
-	<gtExample>
-	| aScripter |
-	aScripter := self threeElementsWithFalseChildClippingInScripter.
-	
-	aScripter substeps: 'Click in hidden grandchild' do: [ :aStep |
-		
-		aStep do
-			label: 'Set child with hidden visibility';
-			block: [ :aChild | aChild visibility: BlVisibility hidden ];
-			onChildAt: 1.
-		
-		aStep testClick 
-			onChildAt: 1;
-			onChildAt: 1.
-		
-		aStep check 
-			label: 'Check the click was consumed by parent';
-			do: [
-				| aClickCollection |
-				aClickCollection := aScripter userData at: #clicks.
-				self assert: aClickCollection size equals: 1.
-				self assert: aClickCollection first equals: #parent. ] 
-	].
-	
-	^ aScripter syncContinue
-]
-
-{ #category : #'examples - events' }
-BlClickEventExamplesTest >> clickInParentWithGoneChild [
-	<gtExample>
-	| aScripter |
-	aScripter := self twoElementsInScripter.
-	
-	aScripter substeps: 'Click in gone child' do: [ :aStep |
-		
-		aStep do
-			label: 'Set child with gone visibility';
-			block: [ :aChild | aChild visibility: BlVisibility gone ];
-			onChildAt: 1.
-		
-		aStep testClick.
-		
-		aStep check 
-			label: 'Check the click was consumed by parent';
-			do: [
-				| aClickCollection |
-				aClickCollection := aScripter userData at: #clicks.
-				self assert: aClickCollection size equals: 1.
-				self assert: aClickCollection first equals: #parent. ] 
-	].
-	
-	^ aScripter syncContinue
-]
-
-{ #category : #'examples - events' }
-BlClickEventExamplesTest >> clickInVisibleChild [
-	<gtExample>
-	| aScripter |
-	aScripter := self twoElementsInScripter.
-	
-	aScripter substeps: 'Click in visible child' do: [ :aStep |
-		aStep testClick onChildAt: 1.
-		
-		aStep check 
-			label: 'Check the click was consumed by child';
-			do: [
-				| aClickCollection |
-				aClickCollection := aScripter userData at: #clicks.
-				self assert: aClickCollection size equals: 1.
-				self assert: aClickCollection first equals: #child. ] 
-	].
-	
-	^ aScripter syncContinue
-]
-
 { #category : #'examples - elements' }
 BlClickEventExamplesTest >> element [
-	<gtExample>
+
+	<sampleInstance>
 	^ BlElement new
-		layout: BlLinearLayout vertical;
-		border: (BlBorder paint: Color gray width: 1);
-		background: Color purple muchLighter;
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ]
+		  layout: BlLinearLayout vertical;
+		  border: (BlBorder paint: Color gray width: 1);
+		  background: Color purple muchLighter;
+		  constraintsDo: [ :c |
+			  c horizontal matchParent.
+			  c vertical matchParent ]
 ]
 
 { #category : #'examples - events' }
@@ -175,6 +41,137 @@ BlClickEventExamplesTest >> testClickInHiddenChild [
 				aClickCollection := aScripter userData at: #clicks.
 				self assert: aClickCollection size equals: 1.
 				self assert: aClickCollection first equals: #parent ] ].
+
+	^ aScripter syncContinue
+]
+
+{ #category : #'examples - events' }
+BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleClippedGrandchild [
+
+	<sampleInstance>
+	| aScripter |
+	aScripter := self threeElementsWithTrueChildClippingInScripter.
+
+	aScripter substeps: 'Click in hidden grandchild' do: [ :aStep |
+		aStep do
+			label: 'Set child with hidden visibility';
+			block: [ :aChild | aChild visibility: BlVisibility hidden ];
+			onChildAt: 1.
+
+		aStep testClick
+			onChildAt: 1;
+			onChildAt: 1.
+
+		aStep check
+			label: 'Check the click was consumed by parent';
+			do: [
+				| aClickCollection |
+				aClickCollection := aScripter userData at: #clicks.
+				self assert: aClickCollection size equals: 1.
+				self assert: aClickCollection first equals: #parent ] ].
+
+	^ aScripter syncContinue
+]
+
+{ #category : #'examples - events' }
+BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleGrandchild [
+
+	<sampleInstance>
+	| aScripter |
+	aScripter := self threeElementsInScripter.
+
+	aScripter substeps: 'Click in hidden grandchild' do: [ :aStep |
+		aStep do
+			label: 'Set child with hidden visibility';
+			block: [ :aChild | aChild visibility: BlVisibility hidden ];
+			onChildAt: 1.
+
+		aStep testClick
+			onChildAt: 1;
+			onChildAt: 1.
+
+		aStep check
+			label: 'Check the click was consumed by parent';
+			do: [
+				| aClickCollection |
+				aClickCollection := aScripter userData at: #clicks.
+				self assert: aClickCollection size equals: 1.
+				self assert: aClickCollection first equals: #parent ] ].
+
+	^ aScripter syncContinue
+]
+
+{ #category : #'examples - events' }
+BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleUnclippedGrandchild [
+
+	<sampleInstance>
+	| aScripter |
+	aScripter := self threeElementsWithFalseChildClippingInScripter.
+
+	aScripter substeps: 'Click in hidden grandchild' do: [ :aStep |
+		aStep do
+			label: 'Set child with hidden visibility';
+			block: [ :aChild | aChild visibility: BlVisibility hidden ];
+			onChildAt: 1.
+
+		aStep testClick
+			onChildAt: 1;
+			onChildAt: 1.
+
+		aStep check
+			label: 'Check the click was consumed by parent';
+			do: [
+				| aClickCollection |
+				aClickCollection := aScripter userData at: #clicks.
+				self assert: aClickCollection size equals: 1.
+				self assert: aClickCollection first equals: #parent ] ].
+
+	^ aScripter syncContinue
+]
+
+{ #category : #'examples - events' }
+BlClickEventExamplesTest >> testClickInParentWithGoneChild [
+
+	<sampleInstance>
+	| aScripter |
+	aScripter := self twoElementsInScripter.
+
+	aScripter substeps: 'Click in gone child' do: [ :aStep |
+		aStep do
+			label: 'Set child with gone visibility';
+			block: [ :aChild | aChild visibility: BlVisibility gone ];
+			onChildAt: 1.
+
+		aStep testClick.
+
+		aStep check
+			label: 'Check the click was consumed by parent';
+			do: [
+				| aClickCollection |
+				aClickCollection := aScripter userData at: #clicks.
+				self assert: aClickCollection size equals: 1.
+				self assert: aClickCollection first equals: #parent ] ].
+
+	^ aScripter syncContinue
+]
+
+{ #category : #'examples - events' }
+BlClickEventExamplesTest >> testClickInVisibleChild [
+
+	<sampleInstance>
+	| aScripter |
+	aScripter := self twoElementsInScripter.
+
+	aScripter substeps: 'Click in visible child' do: [ :aStep |
+		aStep testClick onChildAt: 1.
+
+		aStep check
+			label: 'Check the click was consumed by child';
+			do: [
+				| aClickCollection |
+				aClickCollection := aScripter userData at: #clicks.
+				self assert: aClickCollection size equals: 1.
+				self assert: aClickCollection first equals: #child ] ].
 
 	^ aScripter syncContinue
 ]
