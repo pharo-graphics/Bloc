@@ -2,25 +2,23 @@
 I define a geometry of a straight line
 "
 Class {
-	#name : 'BlLineGeometry',
-	#superclass : 'BlElementVectorGeometry',
+	#name : #BlLineGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'from',
 		'to'
 	],
-	#category : 'Bloc-Basic-Geometry',
-	#package : 'Bloc',
-	#tag : 'Basic-Geometry'
+	#category : 'Bloc-Basic-Geometry'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlLineGeometry class >> from: aFromPoint to: aToPoint [
 	<return: #BlLineGeometry>
 	
 	^ self new from: aFromPoint to: aToPoint
 ]
 
-{ #category : 'geometry testing' }
+{ #category : #'geometry testing' }
 BlLineGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry"
 
@@ -30,7 +28,7 @@ BlLineGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 		within: aBlElement border width / 2
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLineGeometry >> from [
 	"Return start location of the line in owner element's local coordinate system"
 	<return: #Point>
@@ -38,12 +36,12 @@ BlLineGeometry >> from [
 	^ from
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLineGeometry >> from: aPoint [
 	self from: aPoint to: to
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlLineGeometry >> from: aFromPoint to: aToPoint [
 
 	(from = aFromPoint and: [ to = aToPoint ])
@@ -53,7 +51,7 @@ BlLineGeometry >> from: aFromPoint to: aToPoint [
 	to := aToPoint
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlLineGeometry >> geometryBounds: aBlBounds [
 
 	^ aBlBounds rectangle: 
@@ -62,19 +60,19 @@ BlLineGeometry >> geometryBounds: aBlBounds [
 			self to })
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlLineGeometry >> hasCaps [
 
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlLineGeometry >> hasJoins [
 
 	^ false
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlLineGeometry >> initialize [
 	super initialize.
 
@@ -82,12 +80,12 @@ BlLineGeometry >> initialize [
 	to := 0@0
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlLineGeometry >> matchExtent: aPoint [
 	extent := aPoint
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLineGeometry >> to [
 	"Return end location of the line in owner element's local coordinate system"
 	<return: #Point>
@@ -95,7 +93,7 @@ BlLineGeometry >> to [
 	^ to
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLineGeometry >> to: aPoint [
 	self from: from to: aPoint
 ]

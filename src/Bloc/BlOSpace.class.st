@@ -4,14 +4,12 @@ It should be removed as soon as we convert all the examples as tests and move ev
 
 "
 Class {
-	#name : 'BlOSpace',
-	#superclass : 'BlSpace',
-	#category : 'Bloc-Space',
-	#package : 'Bloc',
-	#tag : 'Space'
+	#name : #BlOSpace,
+	#superclass : #BlSpace,
+	#category : 'Bloc-Space'
 }
 
-{ #category : 'change - style' }
+{ #category : #'change - style' }
 BlOSpace class >> doStyle: anElement [
 	| theInheritedStates childSpecificStatesToInherit |
 			
@@ -30,7 +28,7 @@ BlOSpace class >> doStyle: anElement [
 	theInheritedStates do: [ :eachState | eachState finishedPropagateFrom: anElement ]
 ]
 
-{ #category : 'change - style' }
+{ #category : #'change - style' }
 BlOSpace class >> doStyle: anElement withInheritedStates: aCollectionOfStates [
 	| theStatesToInherit allNewStates newInheritedStates |
 
@@ -59,20 +57,20 @@ BlOSpace class >> doStyle: anElement withInheritedStates: aCollectionOfStates [
 	theStatesToInherit do: [ :eachState | eachState finishedPropagateFrom: anElement ]
 ]
 
-{ #category : 'api - adding children' }
+{ #category : #'api - adding children' }
 BlOSpace >> addChild: anElement [
 	"Add a given element as a direct child to the space root"
 	
 	self root addChild: anElement
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlOSpace >> children [
 
 	^ self root children
 ]
 
-{ #category : 'focus managing' }
+{ #category : #'focus managing' }
 BlOSpace >> looseFocusFor: anElement [
 			
 	self
@@ -84,7 +82,7 @@ BlOSpace >> looseFocusFor: anElement [
 	self loseFocusFor: anElement
 ]
 
-{ #category : 'api - adding children' }
+{ #category : #'api - adding children' }
 BlOSpace >> removeChild: anElement [
 	"Remove a given element from the space root"
 	

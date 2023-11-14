@@ -1,46 +1,44 @@
 Class {
-	#name : 'BlElementDynamicProperty',
-	#superclass : 'BlElementProperty',
+	#name : #BlElementDynamicProperty,
+	#superclass : #BlElementProperty,
 	#instVars : [
 		'applyAction',
 		'cleanAction'
 	],
-	#category : 'Bloc-Basic-Properties',
-	#package : 'Bloc',
-	#tag : 'Basic-Properties'
+	#category : 'Bloc-Basic-Properties'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementDynamicProperty >> applyAction [
 	^ applyAction
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementDynamicProperty >> applyAction: anObject [
 	applyAction := anObject
 ]
 
-{ #category : 'api - property' }
+{ #category : #'api - property' }
 BlElementDynamicProperty >> applyOnElement: anElement [
 	self applyAction cull: anElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementDynamicProperty >> cleanAction [
 	^ cleanAction
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementDynamicProperty >> cleanAction: anObject [
 	cleanAction := anObject
 ]
 
-{ #category : 'api - property' }
+{ #category : #'api - property' }
 BlElementDynamicProperty >> cleanUpOnElement: anElement [
 	self cleanAction cull: anElement
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlElementDynamicProperty >> initialize [
 	super initialize.
 	
@@ -48,7 +46,7 @@ BlElementDynamicProperty >> initialize [
 	cleanAction := [ :anElement | ]
 ]
 
-{ #category : 'generated' }
+{ #category : #generated }
 BlElementDynamicProperty >> type [
 	^ { self applyAction . self cleanAction }
 ]

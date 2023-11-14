@@ -3,20 +3,18 @@ I am a BlBackground builder.
 
 "
 Class {
-	#name : 'BlCompositeBackgroundBuilder',
-	#superclass : 'BlBackgroundBuilder',
+	#name : #BlCompositeBackgroundBuilder,
+	#superclass : #BlBackgroundBuilder,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'backgrounds',
 		'builders'
 	],
-	#category : 'Bloc-Basic-Background',
-	#package : 'Bloc',
-	#tag : 'Basic-Background'
+	#category : 'Bloc-Basic-Background'
 }
 
-{ #category : 'builder' }
+{ #category : #builder }
 BlCompositeBackgroundBuilder >> build [
 	<return: #BlBackground>
 	self
@@ -33,7 +31,7 @@ BlCompositeBackgroundBuilder >> build [
 					ifFalse: [ (BlCompositeBackground withAll: (builders collect: #build)) opacity: self opacity ] ] ]
 ]
 
-{ #category : 'builder' }
+{ #category : #builder }
 BlCompositeBackgroundBuilder >> image [
 	| aBuilder |
 	
@@ -43,19 +41,19 @@ BlCompositeBackgroundBuilder >> image [
 	^ aBuilder
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlCompositeBackgroundBuilder >> image: aForm [
 	builders add: (BlImageBackgroundBuilder new form: aForm)
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlCompositeBackgroundBuilder >> initialize [
 	super initialize.
 
 	builders := OrderedCollection new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlCompositeBackgroundBuilder >> opacity: aNumber [
 	"Change opacity of previously added background"
 	
@@ -66,7 +64,7 @@ BlCompositeBackgroundBuilder >> opacity: aNumber [
 	backgrounds last opacity: aNumber
 ]
 
-{ #category : 'builder' }
+{ #category : #builder }
 BlCompositeBackgroundBuilder >> paint [
 	| aBuilder |
 	
@@ -76,7 +74,7 @@ BlCompositeBackgroundBuilder >> paint [
 	^ aBuilder
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlCompositeBackgroundBuilder >> paint: aColorOrBlPaint [
 	builders add: (BlPaintBackgroundBuilder new paint: aColorOrBlPaint)
 ]

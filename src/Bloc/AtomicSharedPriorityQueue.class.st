@@ -25,14 +25,12 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : 'AtomicSharedPriorityQueue',
-	#superclass : 'AtomicSharedQueue',
-	#category : 'Bloc-DataStructure - Priority Queue',
-	#package : 'Bloc',
-	#tag : 'DataStructure - Priority Queue'
+	#name : #AtomicSharedPriorityQueue,
+	#superclass : #AtomicSharedQueue,
+	#category : 'Bloc-DataStructure - Priority Queue'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 AtomicSharedPriorityQueue >> next [ 
 
 	| result |
@@ -46,7 +44,7 @@ AtomicSharedPriorityQueue >> next [
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 AtomicSharedPriorityQueue >> nextIfNone: aBlock [
 	"Attempt to fetch the next highest priority item from queue (0 = highest priority). 
 	Evaluate a block if attempt is failed i.e. there is no items available or queue is locked by another process"
@@ -114,7 +112,7 @@ AtomicSharedPriorityQueue >> nextIfNone: aBlock [
 	] repeat.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 AtomicSharedPriorityQueue >> nextOrNilSuchThat: aBlock [
 	"Fetch an object from queue that satisfies aBlock, skipping (but not removing) any intermediate objects.
 	If no object has been found, answer <nil> and leave me intact.

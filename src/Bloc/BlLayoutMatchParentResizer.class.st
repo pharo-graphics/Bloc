@@ -1,37 +1,35 @@
 Class {
-	#name : 'BlLayoutMatchParentResizer',
-	#superclass : 'BlLayoutResizer',
+	#name : #BlLayoutMatchParentResizer,
+	#superclass : #BlLayoutResizer,
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Layouts-Support',
-	#package : 'Bloc',
-	#tag : 'Layouts-Support'
+	#category : 'Bloc-Layouts-Support'
 }
 
-{ #category : 'cleanup' }
+{ #category : #cleanup }
 BlLayoutMatchParentResizer class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutMatchParentResizer class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : 'controlling' }
+{ #category : #controlling }
 BlLayoutMatchParentResizer >> ifMatchParent: aBlock [
 	^ aBlock cull: self
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlLayoutMatchParentResizer >> isMatchParent [
 	^ true
 ]
 
-{ #category : 'double dispatching' }
+{ #category : #'double dispatching' }
 BlLayoutMatchParentResizer >> measurementAtMostWith: aNumber [
 	"Child wants to be our size, but our size is not fixed. Constrain child to not be bigger than us."
 	<return: #BlMeasurementSpec>
@@ -39,7 +37,7 @@ BlLayoutMatchParentResizer >> measurementAtMostWith: aNumber [
 	^ BlMeasurementSpec new beAtMost: aNumber
 ]
 
-{ #category : 'double dispatching' }
+{ #category : #'double dispatching' }
 BlLayoutMatchParentResizer >> measurementExactlyWith: aNumber [
 	"Parent has imposed an exact size on us, child wants to be our size. So be it."
 	<return: #BlMeasurementSpec>
@@ -47,7 +45,7 @@ BlLayoutMatchParentResizer >> measurementExactlyWith: aNumber [
 	^ BlMeasurementSpec new beExact: aNumber
 ]
 
-{ #category : 'double dispatching' }
+{ #category : #'double dispatching' }
 BlLayoutMatchParentResizer >> measurementUnspecifiedWith: aNumber [
 	"Child wants to be our size... find out how big it should be"
 	<return: #BlMeasurementSpec>
@@ -55,19 +53,19 @@ BlLayoutMatchParentResizer >> measurementUnspecifiedWith: aNumber [
 	^ BlMeasurementSpec unspecified: aNumber
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlLayoutMatchParentResizer >> printOn: aStream [
 	aStream nextPutAll: 'Match parent'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutMatchParentResizer >> requestedHeightIn: anElement [
 
 	anElement parent ifNil: [^ anElement height].
 	^ anElement parent requestedHeightIn: anElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutMatchParentResizer >> requestedWidthIn: anElement [
 
 	anElement parent ifNil: [^ anElement width].
