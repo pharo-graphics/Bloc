@@ -104,9 +104,12 @@ BlSvgFactory >> displayPropertyFrom: attributes on: aBlElement [
 BlSvgFactory >> ellipseFrom: node [
 
 	| ellipse |
-	ellipse := (BlEllipseGeometry new extent:
-		            (node attributeAt: 'rx') asNumber * 2
-		            @ ((node attributeAt: 'ry') asNumber * 2)) asElement.
+	ellipse :=
+		(BlEllipseGeometry new
+			extent:
+				((node attributeAt: 'rx') asNumber * 2) @
+				((node attributeAt: 'ry') asNumber * 2);
+			yourself) asElement.
 	ellipse position: (self ellipsePositionFrom: node).
 
 	self allPropertiesFrom: node attributes on: ellipse.
@@ -125,13 +128,14 @@ BlSvgFactory >> ellipsePositionFrom: node [
 	node
 		attributeAt: 'cy'
 		ifPresent: [ cy := (node attributeAt: 'cy') asNumber ].
-	^ (cx - (node attributeAt: 'rx') asNumber) @ (cy - (node attributeAt: 'ry') asNumber)
+
+	^ Point
+		x: (cx - (node attributeAt: 'rx') asNumber)
+		y: (cy - (node attributeAt: 'ry') asNumber)
 ]
 
 { #category : #groups }
 BlSvgFactory >> extentFrom: node on: aBlElement [
-
-	self flag: #todo. "Implement %"
 
 	node
 		attributeAt: 'width'
@@ -397,8 +401,8 @@ BlSvgFactory >> patternFrom: node [
 BlSvgFactory >> pointsFrom: node [
 
 	node attributeAt: 'points' ifPresent: [
-		^ ((node attributeAt: 'points') substrings: ' ') collect: [ :XAndY |
-			  (XAndY copyUpTo: $,) asNumber @ (XAndY copyAfter: $,) asNumber ] ]
+		^ ((node attributeAt: 'points') substrings: ' ') collect: [ :xAndY |
+			  (xAndY copyUpTo: $,) asNumber @ (xAndY copyAfter: $,) asNumber ] ]
 ]
 
 { #category : #'polyline & polygon' }
@@ -571,18 +575,19 @@ BlSvgFactory >> ropedTextFrom: node on: textElement [
 { #category : #transformations }
 BlSvgFactory >> rotateElement: aBlElement with: anOrderedCollection [
 
-	self flag: #todo.
-	self notYetImplemented
-"	| r cx cy |
+	| r cx cy |
 	cx := cy := 0.
 	r := anOrderedCollection first.
 	anOrderedCollection size = 3 ifTrue: [
 		cx := anOrderedCollection second.
 		cy := anOrderedCollection last ].
 
-	aBlElement
-		rotateByDegrees: r
-		center: cx - aBlElement position x @ (cy - aBlElement position y)"
+	aBlElement transformDo: [ :t |
+		| rotationCenter |
+		rotationCenter := cx - aBlElement position x @ (cy - aBlElement position y).
+		t inherit
+			origin: (BlAffineTransformationPositionOrigin position: rotationCenter);
+			rotateBy: r ]
 ]
 
 { #category : #transformations }
@@ -593,7 +598,7 @@ BlSvgFactory >> scaleElement: aBlElement with: anOrderedCollection [
 	anOrderedCollection size = 2 ifTrue: [
 		sy := anOrderedCollection last ].
 
-	aBlElement scaleBy: sx @ sy
+	aBlElement transformDo: [ :t | t inherit scaleBy: sx @ sy ]
 ]
 
 { #category : #text }
@@ -612,17 +617,19 @@ BlSvgFactory >> setAttributesForTextFrom: node [
 { #category : #transformations }
 BlSvgFactory >> skewXElement: aBlElement with: anOrderedCollection [
 
-	self flag: #todo.
-	self notYetImplemented
-"	aBlElement skewBy: anOrderedCollection first degreesToRadians @ 0"
+	| angle |
+	angle := anOrderedCollection first.
+
+	aBlElement transformDo: [ :t | t inherit skewX: angle ]
 ]
 
 { #category : #transformations }
 BlSvgFactory >> skewYElement: aBlElement with: anOrderedCollection [
 
-	self flag: #todo.
-	self notYetImplemented.
-	"aBlElement skewBy: 0 @ (anOrderedCollection first degreesToRadians)"
+	| angle |
+	angle := anOrderedCollection first.
+
+	aBlElement transformDo: [ :t | t inherit skewY: angle ]
 ]
 
 { #category : #'gradients & patterns' }
@@ -802,19 +809,16 @@ BlSvgFactory >> viewBoxFrom: node on: aBlElement [
 			offset := array first negated @ array second negated.
 			scale := (aBlElement width / array third)
 					@ (aBlElement height / array fourth).
-
-			#updateTransformationBlock traceCr.
-			scale traceCr.
-
 			aBlElement transformDo: [ :t |
-				t translateBy: offset.
-				t topLeftOrigin; scaleBy: scale ] ].
+				t
+					translateBy: offset;
+					topLeftOrigin;
+					scaleBy: scale ] ].
 		
 		aBlElement
 			whenLayoutedDoOnce: updateTransformationBlock.
 		aBlElement
 			addEventHandlerOn: BlElementExtentChangedEvent
 			do: [ :evt |
-				updateTransformationBlock value ].
-		"aBlElement forceLayout" ]
+				updateTransformationBlock value ] ]
 ]

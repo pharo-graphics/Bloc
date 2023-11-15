@@ -92,3 +92,14 @@ BlColorPaint >> isTransparent [
 BlColorPaint >> matchExtent: anExtent [
 	"do nothing for color paint"
 ]
+
+{ #category : #printing }
+BlColorPaint >> printOn: aStream [
+	"Generate a string representation of the receiver based on its instance variables."
+
+	super printOn: aStream.
+	aStream
+		nextPutAll: '(';
+		print: color;
+		nextPutAll: ')'
+]
