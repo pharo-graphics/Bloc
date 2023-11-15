@@ -11,7 +11,7 @@ Class {
 	#instVars : [
 		'inputs'
 	],
-	#category : 'Bloc-Space - Events'
+	#category : #'Bloc-Space - Events'
 }
 
 { #category : #enumerating }

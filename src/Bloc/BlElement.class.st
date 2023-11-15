@@ -66,7 +66,7 @@ Class {
 		'flags',
 		'figure'
 	],
-	#category : 'Bloc-Basic'
+	#category : #'Bloc-Basic'
 }
 
 { #category : #'instance creation' }

@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBlElementStyles,
-	#category : 'Bloc-Basic-Style'
+	#category : #'Bloc-Basic-Style'
 }
 
 { #category : #'private - adding' }

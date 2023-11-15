@@ -5,7 +5,7 @@ I'm an utility Trait for objects that own an Announcer.
 "
 Trait {
 	#name : #TBlAnnounceable,
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Support'
 }
 
 { #category : #'event management' }

@@ -32,7 +32,7 @@ Class {
 		'ZAxis',
 		'Zero'
 	],
-	#category : 'Bloc-Basic-Math'
+	#category : #'Bloc-Basic-Math'
 }
 
 { #category : #cleanup }

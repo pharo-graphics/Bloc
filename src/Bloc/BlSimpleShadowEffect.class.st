@@ -5,7 +5,7 @@ I am very simple shadow effect. I just render a plain flat colored geometry of a
 Class {
 	#name : #BlSimpleShadowEffect,
 	#superclass : #BlShadowEffect,
-	#category : 'Bloc-Effect'
+	#category : #'Bloc-Effect'
 }
 
 { #category : #'instance creation' }

@@ -12,7 +12,7 @@ Class {
 	#instVars : [
 		'events'
 	],
-	#category : 'Bloc-Space - Events'
+	#category : #'Bloc-Space - Events'
 }
 
 { #category : #'adding / removing' }

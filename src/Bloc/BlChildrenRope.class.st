@@ -13,7 +13,7 @@ Class {
 	#instVars : [
 		'rope'
 	],
-	#category : 'Bloc-Basic-Children'
+	#category : #'Bloc-Basic-Children'
 }
 
 { #category : #'children - adding' }

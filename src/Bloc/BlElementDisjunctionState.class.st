@@ -1,7 +1,7 @@
 Class {
 	#name : #BlElementDisjunctionState,
 	#superclass : #BlElementCompositeState,
-	#category : 'Bloc-Basic-State'
+	#category : #'Bloc-Basic-State'
 }
 
 { #category : #testing }

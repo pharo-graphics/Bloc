@@ -15,7 +15,7 @@ Class {
 	#instVars : [
 		'vertices'
 	],
-	#category : 'Bloc-Basic-Geometry'
+	#category : #'Bloc-Basic-Geometry'
 }
 
 { #category : #'instance creation' }

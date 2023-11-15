@@ -12,7 +12,7 @@ Class {
 	#classVars : [
 		'PreferableHostClass'
 	],
-	#category : 'Bloc-Universe - Host'
+	#category : #'Bloc-Universe - Host'
 }
 
 { #category : #'api - lifecycle' }

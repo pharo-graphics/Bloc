@@ -9,7 +9,7 @@ Class {
 		'activatedElementEvents',
 		'activatedGeneralEvents'
 	],
-	#category : 'Bloc-Events-Dispatcher'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #adding }

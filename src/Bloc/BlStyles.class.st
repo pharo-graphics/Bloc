@@ -29,7 +29,7 @@ Class {
 	#instVars : [
 		'styles'
 	],
-	#category : 'Bloc-Basic-Style'
+	#category : #'Bloc-Basic-Style'
 }
 
 { #category : #'adding / removing' }

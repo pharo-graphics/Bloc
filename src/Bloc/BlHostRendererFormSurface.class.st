@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'externalForm'
 	],
-	#category : 'Bloc-Universe - Renderer'
+	#category : #'Bloc-Universe - Renderer'
 }
 
 { #category : #testing }
