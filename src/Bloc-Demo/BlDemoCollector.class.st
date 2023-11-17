@@ -56,6 +56,12 @@ BlDemoCollector >> collectPackage: aRPackage [
 ]
 
 { #category : #'as yet unclassified' }
+BlDemoCollector >> collectPackages: anOrderedCollection [
+
+	anOrderedCollection do: [ :each | self collectPackage: each ].
+]
+
+{ #category : #'as yet unclassified' }
 BlDemoCollector >> ensureClassFor: aClass [
 
 	^ dict at: aClass ifAbsentPut: [BlDemoClassNode new item: aClass; yourself]

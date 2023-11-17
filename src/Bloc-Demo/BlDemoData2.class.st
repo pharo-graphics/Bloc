@@ -29,5 +29,5 @@ BlDemoData2 >> returnBlElement3 [
 BlDemoData2 >> returnBlElement4 [
 
 	<sampleInstance>
-	^ BlElement new background: Color blue
+	^ nil
 ]
