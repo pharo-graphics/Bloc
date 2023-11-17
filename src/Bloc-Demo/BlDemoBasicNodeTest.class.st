@@ -29,11 +29,28 @@ BlDemoBasicNodeTest >> testEnsureClassForWithSameClass [
 ]
 
 { #category : #tests }
+BlDemoBasicNodeTest >> testOneClassWithDifferentPragma [
+
+	| collector elt1 classNode |
+	
+	collector := BlDemoCollector new.
+	collector pragma: #sampleInstance2.
+	collector collectClass: BlDemoData.
+	classNode := collector classes first.
+	elt1 := classNode children first.
+	self assert: elt1 class equals: BlDemoMethodNode.
+	
+	
+]
+
+{ #category : #tests }
 BlDemoBasicNodeTest >> testOneClassWithTwoMethodsHasTwoNodes [
 
-	|classNode elt1 elt2|
+	| collector elt1 elt2 classNode |
 	
-	classNode := BlDemoCollector collectClass: BlDemoData.
+	collector := BlDemoCollector new.
+	collector collectClass: BlDemoData.
+	classNode := collector classes first.
 	elt1 := classNode children first.
 	self assert: elt1 class equals: BlDemoMethodNode.
 	elt2 := classNode children second.
@@ -44,10 +61,23 @@ BlDemoBasicNodeTest >> testOneClassWithTwoMethodsHasTwoNodes [
 ]
 
 { #category : #tests }
+BlDemoBasicNodeTest >> testOneClassWithoutPragma [
+
+	| collector  |
+	
+	collector := BlDemoCollector new.
+	collector pragma: #blabla.
+	collector collectClass: BlDemoData.
+	self assert: collector classes isEmpty
+]
+
+{ #category : #tests }
 BlDemoBasicNodeTest >> testOnePackageWithTwoClassesHasTwoNodes [
 
 	| collector classes |
-	collector := BlDemoCollector collectPackage:
+	collector := BlDemoCollector new 
+						pragma: #sampleInstance;
+						collectPackage:
 		             (RPackageOrganizer default packageNamed: #'Bloc-Demo').
 	classes := collector classes.
 	self assert:  classes size equals: 2.
@@ -57,4 +87,21 @@ BlDemoBasicNodeTest >> testOnePackageWithTwoClassesHasTwoNodes [
 	self
 		assert: classes first children first class
 		equals: BlDemoMethodNode
+]
+
+{ #category : #tests }
+BlDemoBasicNodeTest >> testOnePackageWithTwoClassesHasTwoNodesWithSample2 [
+
+	| collector classes |
+	collector := BlDemoCollector new 
+						pragma: #sampleInstance2;
+						collectPackage:
+		             (RPackageOrganizer default packageNamed: #'Bloc-Demo').
+	classes := collector classes.
+	self assert:  classes size equals: 1.
+
+	self assert: classes first class equals: BlDemoClassNode.
+	self
+		assert: classes first children size equals: 1.
+		
 ]

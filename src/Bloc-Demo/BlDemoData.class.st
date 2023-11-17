@@ -17,3 +17,10 @@ BlDemoData >> returnBlElement2 [
 	<sampleInstance>
 	^ BlElement new background: Color red
 ]
+
+{ #category : #'as yet unclassified' }
+BlDemoData >> returnBlElementWithADifferentPragma [
+
+	<sampleInstance2>
+	^ BlElement new background: Color blue
+]

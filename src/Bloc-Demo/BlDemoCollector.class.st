@@ -2,21 +2,21 @@ Class {
 	#name : #BlDemoCollector,
 	#superclass : #Object,
 	#instVars : [
-		'dict'
+		'dict',
+		'pragma'
 	],
 	#category : #'Bloc-Demo-Node'
 }
 
-{ #category : #instanceCreation }
+{ #category : #'instance creation' }
 BlDemoCollector class >> collectClass: aClass [ 
 	^ self new collectClass: aClass.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlDemoCollector class >> collectPackage: aPackage [
 
-	^ self new
-		  collectPackage: aPackage
+	^ self new collectPackage: aPackage
 ]
 
 { #category : #accessing }
@@ -28,10 +28,12 @@ BlDemoCollector >> classes [
 BlDemoCollector >> collectClass: aClass [ 
 	
 	| node pragmas |
-	pragmas := Pragma allNamed: #sampleInstance in: aClass.
-	node := BlDemoClassNode new item: aClass.
-	pragmas do: [ :pragma | node addChild: (BlDemoMethodNode new item: pragma method ) ].
-	^ node
+	pragmas := Pragma allNamed: pragma in: aClass.
+	pragmas ifEmpty: [ ^ self ].
+	node := self ensureClassFor: aClass.
+	pragmas do: [ :prag | node addChild: (BlDemoMethodNode new item: prag method ) ].
+	
+	
 ]
 
 { #category : #'as yet unclassified' }
@@ -40,7 +42,7 @@ BlDemoCollector >> collectPackage: aRPackage [
 	| classes |
 	classes := aRPackage classes do: [ :class |
 		           class methods do: [ :method |
-			           (method hasPragmaNamed: #sampleInstance) ifTrue: [
+			           (method hasPragmaNamed: pragma ) ifTrue: [
 				            ((self ensureClassFor: class)
 						            addChild: (BlDemoMethodNode new item: method);
 						            yourself) ] ] ].
@@ -53,6 +55,13 @@ BlDemoCollector >> ensureClassFor: aClass [
 ]
 
 { #category : #initialization }
-BlDemoCollector >> initialize [ 
+BlDemoCollector >> initialize [
+	super initialize.
+	pragma := #sampleInstance.
 	dict := IdentityDictionary new.
+]
+
+{ #category : #accessing }
+BlDemoCollector >> pragma: aString [ 
+	pragma := aString
 ]
