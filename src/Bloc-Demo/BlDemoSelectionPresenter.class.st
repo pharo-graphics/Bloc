@@ -35,12 +35,11 @@ BlDemoSelectionPresenter >> connectClassesPresenter [
 
 { #category : #initialization }
 BlDemoSelectionPresenter >> connectMethodsPresenter [
-	
-	methods whenSelectedItemChangedDo: [ :item | 
-			item ifNotNil: [  
+
+	methods whenSelectedItemChangedDo: [ :item |
+		item ifNotNil: [
 			code beForMethod: item item.
-			code text: item item sourceCode ]]
-	
+			code text: item sourceCode ] ]
 ]
 
 { #category : #initialization }
@@ -75,14 +74,12 @@ BlDemoSelectionPresenter >> defaultLayout [
 		  yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #operations }
 BlDemoSelectionPresenter >> executeCode [
 
-	| class method res |
-	class := self classes selectedItem.
-	method := self methods selectedItem.
-	res := class item new perform: method item selector asSymbol.
-	self owner drawOnCanva: res
+	| res |
+	res := self methods selectedItem execute.
+	self owner drawOnCanvas: res
 ]
 
 { #category : #initialization }
@@ -91,9 +88,9 @@ BlDemoSelectionPresenter >> initializeClassesPresenter [
 	classes := self newList.
 	classes
 		items: self collector classes;
-		display: [ :node | node item name ];
+		display: [ :node | node name ];
 		displayIcon: [ :aClass | self iconNamed: aClass systemIconName ];
-		sortingBlock: [ :a :b | a item name < b item name ]
+		sortingBlock: [ :a :b | a name < b name ]
 ]
 
 { #category : #initialization }
@@ -114,8 +111,8 @@ BlDemoSelectionPresenter >> initializeMethodsPresenter [
 
 	methods := self newList.
 	methods
-		display: [ :method | method item selector ];
-		sortingBlock: [ :a :b | a item selector < b item selector ];
+		display: [ :method | method selector ];
+		sortingBlock: [ :a :b | a selector < b selector ];
 		whenSelectedDo: [ :i | self executeCode ]
 ]
 
@@ -133,7 +130,7 @@ BlDemoSelectionPresenter >> methods [
 	^ methods
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 BlDemoSelectionPresenter >> packagesToCollect [
 
 	^ RPackageOrganizer default packages select: [ :each |

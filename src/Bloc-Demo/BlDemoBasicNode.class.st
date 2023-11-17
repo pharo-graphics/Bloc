@@ -52,6 +52,11 @@ BlDemoBasicNode >> item: anObject [
 ]
 
 { #category : #accessing }
+BlDemoBasicNode >> name [ 
+	^ item name
+]
+
+{ #category : #accessing }
 BlDemoBasicNode >> parent [ 
 	^ parent
 ]
