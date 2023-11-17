@@ -35,7 +35,7 @@ BlDemoPresenter >> defaultLayout [
 ]
 
 { #category : #'as yet unclassified' }
-BlDemoPresenter >> drawOnCanva: anElement [
+BlDemoPresenter >> drawOnCanvas: anElement [
 
 	| root |
 	root := self canva space root.
