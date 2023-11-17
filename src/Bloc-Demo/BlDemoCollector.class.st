@@ -19,6 +19,19 @@ BlDemoCollector class >> collectPackage: aPackage [
 	^ self new collectPackage: aPackage
 ]
 
+{ #category : #'as yet unclassified' }
+BlDemoCollector class >> collectPragma: aSymbol fromClass: aClass [
+
+	^ self new
+		  pragma: aSymbol;
+		  collectClass: aClass 
+]
+
+{ #category : #'as yet unclassified' }
+BlDemoCollector class >> collectPragma: aSymbol fromPackage: aPackage [ 
+	^ self new pragma: aSymbol; collectPackage: aPackage 
+]
+
 { #category : #accessing }
 BlDemoCollector >> classes [
 	^dict values
@@ -37,15 +50,9 @@ BlDemoCollector >> collectClass: aClass [
 ]
 
 { #category : #'as yet unclassified' }
-BlDemoCollector >> collectPackage: aRPackage [
-
-	| classes |
-	classes := aRPackage classes do: [ :class |
-		           class methods do: [ :method |
-			           (method hasPragmaNamed: pragma ) ifTrue: [
-				            ((self ensureClassFor: class)
-						            addChild: (BlDemoMethodNode new item: method);
-						            yourself) ] ] ].
+BlDemoCollector >> collectPackage: aRPackage [ 
+	
+	aRPackage classes do: [ :each | self collectClass: each ]
 ]
 
 { #category : #'as yet unclassified' }
