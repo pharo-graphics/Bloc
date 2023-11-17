@@ -106,7 +106,7 @@ BlDemoSelectionPresenter >> initializeCodePresenter [
 BlDemoSelectionPresenter >> initializeCollector [
 
 	collector := BlDemoCollector new.
-	collector collectPackage: self packageToCollect.
+	collector collectPackages: self packagesToCollect
 ]
 
 { #category : #initialization }
@@ -134,7 +134,9 @@ BlDemoSelectionPresenter >> methods [
 ]
 
 { #category : #'as yet unclassified' }
-BlDemoSelectionPresenter >> packageToCollect [
+BlDemoSelectionPresenter >> packagesToCollect [
 
-	^ RPackageOrganizer default packageNamed:  #'Bloc-Demo'
+	^ RPackageOrganizer default packages select: [ :each |
+		       each name includesSubstring: 'Bloc' ].
+	 
 ]
