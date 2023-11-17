@@ -92,7 +92,7 @@ BlDemoPresenter >> initializePresenters [
 { #category : #initialization }
 BlDemoPresenter >> initializeTransmissionPresenter [ 
 
-	transmissionPresenter := BlDemoTransmissionPresenter new
+	transmissionPresenter := BlDemoSelectionPresenter new
 ]
 
 { #category : #TOREMOVE }
