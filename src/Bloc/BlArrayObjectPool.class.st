@@ -1,34 +1,36 @@
 Class {
-	#name : #BlArrayObjectPool,
-	#superclass : #BlObjectPool,
+	#name : 'BlArrayObjectPool',
+	#superclass : 'BlObjectPool',
 	#instVars : [
 		'poolSize',
 		'pool'
 	],
-	#category : #'Bloc-Basic-Support'
+	#category : 'Bloc-Basic-Support',
+	#package : 'Bloc',
+	#tag : 'Basic-Support'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BlArrayObjectPool class >> arrayType [
 	^ Array
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlArrayObjectPool class >> defaultMaxPoolSize [
 	^ 10
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlArrayObjectPool class >> new [
 	^ self new: self defaultMaxPoolSize
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlArrayObjectPool class >> new: anInteger [
 	^ self basicNew setPool: (self arrayType new: anInteger); initialize
 ]
 
-{ #category : #pool }
+{ #category : 'pool' }
 BlArrayObjectPool >> acquire [
 	"Returns an object from the pool if there is one,
 	or nil otherwise"
@@ -44,14 +46,14 @@ BlArrayObjectPool >> acquire [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlArrayObjectPool >> initialize [
 	super initialize.
 
 	poolSize := 0
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlArrayObjectPool >> isInPool: anObject [
 	"Return true of anObject is currently in the pool,
 	false otherwise."
@@ -62,7 +64,7 @@ BlArrayObjectPool >> isInPool: anObject [
 	^ false
 ]
 
-{ #category : #pool }
+{ #category : 'pool' }
 BlArrayObjectPool >> release: anObject [
 	"Adds anObject to the pool and return true if successfully added,
 	false otherwise."
@@ -78,7 +80,7 @@ BlArrayObjectPool >> release: anObject [
 		ifFalse: [ false ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlArrayObjectPool >> setPool: anArray [
 	pool := anArray
 ]

@@ -3,7 +3,9 @@ I am signaled when matrix is singular and therefore can not be used for mathemat
 
 "
 Class {
-	#name : #BlSingularMatrixError,
-	#superclass : #ArithmeticError,
-	#category : #'Bloc-Basic-Math'
+	#name : 'BlSingularMatrixError',
+	#superclass : 'ArithmeticError',
+	#category : 'Bloc-Basic-Math',
+	#package : 'Bloc',
+	#tag : 'Basic-Math'
 }

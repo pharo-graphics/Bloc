@@ -3,26 +3,28 @@ I implement a basic infrastructure of event management.
 Any object that needs to be able to handle events should use me.
 "
 Trait {
-	#name : #TBlEventTarget,
-	#category : #'Bloc-Events-Dispatcher'
+	#name : 'TBlEventTarget',
+	#category : 'Bloc-Events-Dispatcher',
+	#package : 'Bloc',
+	#tag : 'Events-Dispatcher'
 }
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> addEventFilter: anEventHandler [
 	self eventDispatcher addEventFilter: anEventHandler
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> addEventFilterOn: anEventClass do: aBlock [
 	self addEventFilter: (BlEventHandler on: anEventClass do: aBlock)
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> addEventHandler: anEventHandler [
 	self eventDispatcher addEventHandler: anEventHandler
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> addEventHandlerIfNotPresent: anEventHandler [
 	(self hasEventHandler: anEventHandler)
 		ifTrue: [ ^ self ].
@@ -30,17 +32,17 @@ TBlEventTarget >> addEventHandlerIfNotPresent: anEventHandler [
 	self addEventHandler: anEventHandler
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> addEventHandlerOn: anEventClass do: aBlock [
 	self addEventHandler: (BlEventHandler on: anEventClass do: aBlock)
 ]
 
-{ #category : #'shortcut management' }
+{ #category : 'shortcut management' }
 TBlEventTarget >> addShortcut: aShortcut [
 	self eventDispatcher addShortcut: aShortcut
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> buildEventDispatchChain: aBlEventDispatcherChain [
 	"Note: Dispatcher chain is persistent - I return a new instance"
 	<return: #BlEventDispatcherChain>
@@ -55,7 +57,7 @@ TBlEventTarget >> buildEventDispatchChain: aBlEventDispatcherChain [
 	^ aResultChain
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> buildEventDispatchChain: aBlEventDispatcherChain upTo: anOtherEventTarget [
 	"Build an event dispatch chain up to but excluding a given other event target
 	Note: Dispatcher chain is persistent - I return a new instance"
@@ -71,7 +73,7 @@ TBlEventTarget >> buildEventDispatchChain: aBlEventDispatcherChain upTo: anOther
 	^ aResultChain
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> dispatchEvent: anEvent [
 	"I only call my event dispatcher, so the event can be only handled by my event handlers/filters"
 
@@ -85,7 +87,7 @@ TBlEventTarget >> dispatchEvent: anEvent [
 		ifTrue: [ self eventDispatcher dispatchEvent: anEvent ]
 ]
 
-{ #category : #'event management accessing' }
+{ #category : 'event management accessing' }
 TBlEventTarget >> eventDispatcher [
 	"Return an object responsible for event dispatching"
 	<return: #BlDirectEventDispatcher>
@@ -93,7 +95,7 @@ TBlEventTarget >> eventDispatcher [
 	^ self explicitRequirement
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> fireEvent: anEvent [
 	"I fire provided event building an event dispatcher chain
 	(from target to the root element) and dispatch the event with it."
@@ -109,17 +111,17 @@ TBlEventTarget >> fireEvent: anEvent [
 	aDispatcherChain dispatchEvent: anEvent
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> hasEventFilter: anEventHandler [
 	^ self eventDispatcher hasFilter: anEventHandler
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> hasEventHandler: anEventHandler [
 	^ self eventDispatcher hasHandler: anEventHandler
 ]
 
-{ #category : #'event management accessing' }
+{ #category : 'event management accessing' }
 TBlEventTarget >> hasNextEventTarget [
 	"Return true if this event target has a logical successor within a dispatch chain.
 	For example, in case of visual components next event target is a parent, meaning
@@ -130,7 +132,7 @@ TBlEventTarget >> hasNextEventTarget [
 	^ false
 ]
 
-{ #category : #'event management accessing' }
+{ #category : 'event management accessing' }
 TBlEventTarget >> nextEventTarget [
 	"Return next event target that should be contained in dispatch chain.
 	Note: returned object must use TBlEventTarget trait!"
@@ -139,49 +141,49 @@ TBlEventTarget >> nextEventTarget [
 	self error: 'Override me if there is a next event target.'
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> removeEventFilter: anEventHandler [
 	self eventDispatcher removeEventFilter: anEventHandler
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> removeEventFiltersSuchThat: aBlock [
 	self eventDispatcher removeEventFiltersSuchThat: aBlock
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> removeEventHandler: anEventHandler [
 	self eventDispatcher removeEventHandler: anEventHandler
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> removeEventHandlersSuchThat: aBlock [
 	self eventDispatcher removeEventHandlersSuchThat: aBlock
 ]
 
-{ #category : #'shortcut management' }
+{ #category : 'shortcut management' }
 TBlEventTarget >> removeShortcut: aShortcut [
 	self eventDispatcher removeShortcut: aShortcut
 ]
 
-{ #category : #'shortcut management' }
+{ #category : 'shortcut management' }
 TBlEventTarget >> removeShortcutsWithCombination: aBlKeyCombination [
 	self eventDispatcher removeAllShortcutsWithCombination: aBlKeyCombination
 ]
 
-{ #category : #'shortcut management' }
+{ #category : 'shortcut management' }
 TBlEventTarget >> shortcuts [
 	<return: #BlShortcutRegistry>
 
 	^ self eventDispatcher shortcutHandler shortcuts
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> when: anEventClass do: aBlock [
 	self addEventHandlerOn: anEventClass do: aBlock
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlEventTarget >> when: anEventClass doOnce: aBlock [
 	| anEventHandler |
 	

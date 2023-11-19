@@ -5,22 +5,24 @@ I represent a subset of children that are ignored by layout.
 
 "
 Class {
-	#name : #BlChildrenIgnoredByLayout,
-	#superclass : #BlChildrenSubset,
-	#category : #'Bloc-Basic-Children'
+	#name : 'BlChildrenIgnoredByLayout',
+	#superclass : 'BlChildrenSubset',
+	#category : 'Bloc-Basic-Children',
+	#package : 'Bloc',
+	#tag : 'Basic-Children'
 }
 
-{ #category : #'children - subsets' }
+{ #category : 'children - subsets' }
 BlChildrenIgnoredByLayout >> ignoredByLayout [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildrenIgnoredByLayout >> name [
 	^ 'Ignored by layout'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlChildrenIgnoredByLayout >> subsetFrom: aBlChildren [
 	^ aBlChildren select: [ :anElement |
 		anElement constraints ignoredByLayout

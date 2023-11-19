@@ -1,6 +1,6 @@
 Class {
-	#name : #BlElementPropertyWithStatus,
-	#superclass : #Object,
+	#name : 'BlElementPropertyWithStatus',
+	#superclass : 'Object',
 	#instVars : [
 		'property',
 		'status'
@@ -10,74 +10,76 @@ Class {
 		'JustAdded',
 		'ToBeRemoved'
 	],
-	#category : #'Bloc-Basic-Properties'
+	#category : 'Bloc-Basic-Properties',
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlElementPropertyWithStatus class >> initialize [
 	JustAdded := 1 << 0.
 	ToBeRemoved := 1 << 2.
 	Applied := 1 << 3.
 ]
 
-{ #category : #'private - status' }
+{ #category : 'private - status' }
 BlElementPropertyWithStatus >> addApplied [
 	status := status | Applied
 ]
 
-{ #category : #'private - status' }
+{ #category : 'private - status' }
 BlElementPropertyWithStatus >> addJustAdded [
 	status := status | JustAdded
 ]
 
-{ #category : #'private - status' }
+{ #category : 'private - status' }
 BlElementPropertyWithStatus >> addToBeRemoved [
 	status := status | ToBeRemoved
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementPropertyWithStatus >> canPropagateToChildren [
 	^ self property canPropagateToChildren and: [ self isToBeRemoved not ]
 ]
 
-{ #category : #'private - status' }
+{ #category : 'private - status' }
 BlElementPropertyWithStatus >> clearApplied [
 	status := status & Applied bitInvert
 ]
 
-{ #category : #'private - status' }
+{ #category : 'private - status' }
 BlElementPropertyWithStatus >> clearJustAdded [
 	status := status & JustAdded bitInvert
 ]
 
-{ #category : #'private - status' }
+{ #category : 'private - status' }
 BlElementPropertyWithStatus >> clearToBeRemoved [
 	status := status & ToBeRemoved bitInvert
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementPropertyWithStatus >> initialize [
 	super initialize.
 	
 	status := 0
 ]
 
-{ #category : #'private - status' }
+{ #category : 'private - status' }
 BlElementPropertyWithStatus >> isApplied [
 	^ 0 ~= (status & Applied) 
 ]
 
-{ #category : #'private - status' }
+{ #category : 'private - status' }
 BlElementPropertyWithStatus >> isJustAddded [
 	^ 0 ~= (status & JustAdded) 
 ]
 
-{ #category : #'private - status' }
+{ #category : 'private - status' }
 BlElementPropertyWithStatus >> isToBeRemoved [
 	^ 0 ~= (status & ToBeRemoved) 
 ]
 
-{ #category : #'api - property' }
+{ #category : 'api - property' }
 BlElementPropertyWithStatus >> maybeApplyOnElement: anElement [
 	self isToBeRemoved
 		ifFalse: [
@@ -87,7 +89,7 @@ BlElementPropertyWithStatus >> maybeApplyOnElement: anElement [
 					status := Applied ] ]
 ]
 
-{ #category : #'api - property' }
+{ #category : 'api - property' }
 BlElementPropertyWithStatus >> maybeCleanUpOnElement: anElement [
 	self isToBeRemoved
 		ifTrue: [
@@ -97,7 +99,7 @@ BlElementPropertyWithStatus >> maybeCleanUpOnElement: anElement [
 					self clearApplied ] ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlElementPropertyWithStatus >> printOn: aStream [
 	"Append a sequence of characters to aStream that identify the receiver."
 
@@ -110,17 +112,17 @@ BlElementPropertyWithStatus >> printOn: aStream [
 		print: status
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementPropertyWithStatus >> property [
 	^ property
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementPropertyWithStatus >> property: anObject [
 	property := anObject
 ]
 
-{ #category : #'api - property' }
+{ #category : 'api - property' }
 BlElementPropertyWithStatus >> resolveWithParentProperties: theParentProperties orGlobal: theGlobalProperties [
 	<return: #BlElementPropertyWithStatus>
 	| aResolvedProperty |

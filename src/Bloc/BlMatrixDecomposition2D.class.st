@@ -5,18 +5,20 @@ https://drafts.csswg.org/css-transforms/#interpolation-of-2d-matrices
 
 "
 Class {
-	#name : #BlMatrixDecomposition2D,
-	#superclass : #BlMatrixDecomposition,
+	#name : 'BlMatrixDecomposition2D',
+	#superclass : 'BlMatrixDecomposition',
 	#instVars : [
 		'translation',
 		'scale',
 		'angle',
 		'matrix'
 	],
-	#category : #'Bloc-Basic-Math'
+	#category : 'Bloc-Basic-Math',
+	#package : 'Bloc',
+	#tag : 'Basic-Math'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrixDecomposition2D >> angle [
 	"Return a decomposed rotation angle in degrees"
 	<return: #Number>
@@ -24,12 +26,12 @@ BlMatrixDecomposition2D >> angle [
 	^ angle
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrixDecomposition2D >> angle: aNumber [
 	angle := aNumber
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMatrixDecomposition2D >> asDictionary [
 	<return: #Dictionary>
 	^ { 
@@ -40,7 +42,7 @@ BlMatrixDecomposition2D >> asDictionary [
 	} asOrderedDictionary
 ]
 
-{ #category : #'matrix - mathematical functions' }
+{ #category : 'matrix - mathematical functions' }
 BlMatrixDecomposition2D >> composition [
 	<return: #BlMatrix2D>
 	| composedMatrix |
@@ -67,7 +69,7 @@ BlMatrixDecomposition2D >> composition [
 	^ composedMatrix
 ]
 
-{ #category : #'matrix - mathematical functions' }
+{ #category : 'matrix - mathematical functions' }
 BlMatrixDecomposition2D >> interpolate: aFactor to: anotherDecomposition [
 	"Algorithm is based on https://drafts.csswg.org/css-transforms/#interpolation-of-decomposed-2d-matrix-values"
 	<return: #BlMatrixDecomposition2D>
@@ -114,38 +116,38 @@ BlMatrixDecomposition2D >> interpolate: aFactor to: anotherDecomposition [
 		matrix: aMatrix
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrixDecomposition2D >> matrix [
 	<return: #Array2D>
 
 	^ matrix
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrixDecomposition2D >> matrix: aMatrix [
 	matrix := aMatrix
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrixDecomposition2D >> scale [
 	<return: #BlVector>
 
 	^ scale
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrixDecomposition2D >> scale: aVector [
 	scale := aVector
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrixDecomposition2D >> translation [
 	<return: #BlVector>
 	
 	^ translation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMatrixDecomposition2D >> translation: aVector [
 	translation := aVector
 ]

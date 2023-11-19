@@ -1,10 +1,12 @@
 Class {
-	#name : #BlAnnulusSector,
-	#superclass : #BlAnnulusSectorGeometry,
-	#category : #'Bloc-Basic-Geometry-Deprecated'
+	#name : 'BlAnnulusSector',
+	#superclass : 'BlAnnulusSectorGeometry',
+	#category : 'Bloc-Basic-Geometry-Deprecated',
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry-Deprecated'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAnnulusSector class >> isDeprecated [
 	^ true
 ]

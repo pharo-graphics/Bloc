@@ -5,27 +5,29 @@ See `BlElementEventExamples` for related examples.
 
 "
 Class {
-	#name : #BlElementEvent,
-	#superclass : #BlEvent,
-	#category : #'Bloc-Events-Type-Element'
+	#name : 'BlElementEvent',
+	#superclass : 'BlEvent',
+	#category : 'Bloc-Events-Type-Element',
+	#package : 'Bloc',
+	#tag : 'Events-Type-Element'
 }
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementEvent class >> disableIn: anEventDispatcher [
 	self subclassResponsibility
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementEvent class >> enableIn: anEventDispatcher [
 	self subclassResponsibility
 ]
 
-{ #category : #'api - enable / disable' }
+{ #category : 'api - enable / disable' }
 BlElementEvent class >> wantedIn: anEventDispatcher [
 	self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementEvent >> isElementEvent [
 	^ true
 ]

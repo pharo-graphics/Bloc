@@ -4,25 +4,27 @@ Attached space reference {{gtClass:BlSpaceReference}} is set when an element is 
 
 "
 Class {
-	#name : #BlAttachedSpaceReference,
-	#superclass : #BlSpaceReference,
+	#name : 'BlAttachedSpaceReference',
+	#superclass : 'BlSpaceReference',
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Space'
+	#category : 'Bloc-Space',
+	#package : 'Bloc',
+	#tag : 'Space'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlAttachedSpaceReference class >> cleanUp [
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAttachedSpaceReference class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAttachedSpaceReference >> isAttachedToSceneGraph [
 	^ true
 ]

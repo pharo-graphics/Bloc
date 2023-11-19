@@ -1,47 +1,49 @@
 Class {
-	#name : #BlElementIntendedProperties,
-	#superclass : #BlElementProperties,
+	#name : 'BlElementIntendedProperties',
+	#superclass : 'BlElementProperties',
 	#instVars : [
 		'properties'
 	],
-	#category : #'Bloc-Basic-Properties'
+	#category : 'Bloc-Basic-Properties',
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlElementIntendedProperties >> addProperties: aCollectionOfBlElementProperty [
 	aCollectionOfBlElementProperty do: [ :eachProperty | self addProperty: eachProperty ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlElementIntendedProperties >> addProperty: aBlElementProperty [
 	properties
 		at: aBlElementProperty type
 		put: aBlElementProperty
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementIntendedProperties >> initialize [
 	super initialize.
 	
 	properties := IdentityDictionary new
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlElementIntendedProperties >> postCopy [
 	properties := properties copy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementIntendedProperties >> properties [
 	^ properties
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 BlElementIntendedProperties >> removeProperties: aCollectionOfElementProperties [
 	aCollectionOfElementProperties do: [ :eachProperty | self removeProperty: eachProperty ]
 ]
 
-{ #category : #'adding / removing' }
+{ #category : 'adding / removing' }
 BlElementIntendedProperties >> removeProperty: aBlElementProperty [
 	properties
 		removeKey: aBlElementProperty type

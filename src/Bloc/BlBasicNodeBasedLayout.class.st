@@ -1,16 +1,18 @@
 Class {
-	#name : #BlBasicNodeBasedLayout,
-	#superclass : #BlNodeBasedLayout,
-	#category : #'Bloc-Layouts-Basic'
+	#name : 'BlBasicNodeBasedLayout',
+	#superclass : 'BlNodeBasedLayout',
+	#category : 'Bloc-Layouts-Basic',
+	#package : 'Bloc',
+	#tag : 'Layouts-Basic'
 }
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlBasicNodeBasedLayout >> layout: aParentNode [
 	aParentNode childrenDo: [ :eachChildNode |
 		eachChildNode position: eachChildNode constraints position ]
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlBasicNodeBasedLayout >> measure: aParentLayoutNode [
 	self preMeasureChildrenNodes: aParentLayoutNode
 ]
