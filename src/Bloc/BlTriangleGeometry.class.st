@@ -1,6 +1,6 @@
 Class {
-	#name : #BlTriangleGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlTriangleGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'orientation'
 	],
@@ -10,10 +10,12 @@ Class {
 		'Right',
 		'Top'
 	],
-	#category : #'Bloc-Basic-Geometry'
+	#category : 'Bloc-Basic-Geometry',
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlTriangleGeometry class >> initialize [
 	Top := #top.
 	Right := #right.
@@ -21,31 +23,31 @@ BlTriangleGeometry class >> initialize [
 	Left := #left
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlTriangleGeometry >> beBottom [
 	orientation := Bottom.
 	self releaseCache
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlTriangleGeometry >> beLeft [
 	orientation := Left.
 	self releaseCache
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlTriangleGeometry >> beRight [
 	orientation := Right.
 	self releaseCache
 ]
 
-{ #category : #'api - geometry' }
+{ #category : 'api - geometry' }
 BlTriangleGeometry >> beTop [
 	orientation := Top.
 	self releaseCache
 ]
 
-{ #category : #'private - geometry' }
+{ #category : 'private - geometry' }
 BlTriangleGeometry >> computeBottomVertices [
 	| aHeight aWidth aHalfWidth |
 	
@@ -60,7 +62,7 @@ BlTriangleGeometry >> computeBottomVertices [
 	}
 ]
 
-{ #category : #'private - geometry' }
+{ #category : 'private - geometry' }
 BlTriangleGeometry >> computeLeftVertices [
 	| aHeight aWidth aHalfHeight |
 	
@@ -75,7 +77,7 @@ BlTriangleGeometry >> computeLeftVertices [
 	}
 ]
 
-{ #category : #'private - geometry' }
+{ #category : 'private - geometry' }
 BlTriangleGeometry >> computeRightVertices [
 	| aHeight aWidth aHalfHeight |
 	
@@ -90,7 +92,7 @@ BlTriangleGeometry >> computeRightVertices [
 	}
 ]
 
-{ #category : #'private - geometry' }
+{ #category : 'private - geometry' }
 BlTriangleGeometry >> computeTopVertices [
 	| aHeight aWidth aHalfWidth |
 	
@@ -105,7 +107,7 @@ BlTriangleGeometry >> computeTopVertices [
 	}
 ]
 
-{ #category : #'private - geometry' }
+{ #category : 'private - geometry' }
 BlTriangleGeometry >> computeVertices [
 	^ self isTop
 		ifTrue: [ self computeTopVertices ]
@@ -121,52 +123,52 @@ BlTriangleGeometry >> computeVertices [
 								ifFalse: [ self error: ('Triangle has unsupported orientation ({1})' format: { orientation }) ] ] ] ]
 ]
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlTriangleGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 
 	^ BlPolygonHitTester doPolygonBy: self computeVertices include: aPoint
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTriangleGeometry >> hasCaps [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTriangleGeometry >> hasJoins [
 
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTriangleGeometry >> initialize [
 	super initialize.
 	
 	orientation := Right.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTriangleGeometry >> isBottom [
 	^ orientation = Bottom
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTriangleGeometry >> isLeft [
 	^ orientation = Left
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTriangleGeometry >> isRight [
 	^ orientation = Right
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTriangleGeometry >> isTop [
 	^ orientation = Top
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlTriangleGeometry >> matchExtent: aPoint [
 	extent := aPoint
 ]

@@ -1,17 +1,19 @@
 Class {
-	#name : #BlKeyboardKeyTable,
-	#superclass : #Object,
-	#category : #'Bloc-Universe'
+	#name : 'BlKeyboardKeyTable',
+	#superclass : 'Object',
+	#category : 'Bloc-Universe',
+	#package : 'Bloc',
+	#tag : 'Universe'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlKeyboardKeyTable >> initialize: aMapDictionary withKeys: aMapArray [
 
 	aMapArray pairsDo: [ :eachCode :eachKey |
 		aMapDictionary at: eachCode put: eachKey copy ]
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlKeyboardKeyTable >> keyFromVirtualCode: aScanCode [
 
 	^ self subclassResponsibility

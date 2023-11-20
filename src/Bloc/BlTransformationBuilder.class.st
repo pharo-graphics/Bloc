@@ -12,17 +12,19 @@ element transform
 
 "
 Class {
-	#name : #BlTransformationBuilder,
-	#superclass : #Object,
+	#name : 'BlTransformationBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'origin',
 		'target',
 		'affineCompositeTransformation'
 	],
-	#category : #'Bloc-Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations',
+	#package : 'Bloc',
+	#tag : 'Basic-Transformations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTransformationBuilder class >> on: anObject [
 
 	^ self new
@@ -30,7 +32,7 @@ BlTransformationBuilder class >> on: anObject [
 		  yourself
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> apply [
 	"Replace element's transformation chain with our new one that we just have built"
 
@@ -38,13 +40,13 @@ BlTransformationBuilder >> apply [
 		(BlElementLocalTransformation newWith: affineCompositeTransformation)
 ]
 
-{ #category : #origin }
+{ #category : 'origin' }
 BlTransformationBuilder >> centerOrigin [
 
 	self origin: BlAffineTransformationCenterOrigin defaultInstance
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> flipX [
 
 	affineCompositeTransformation addTransformation:
@@ -53,7 +55,7 @@ BlTransformationBuilder >> flipX [
 			 yourself)
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> flipY [
 
 	affineCompositeTransformation addTransformation:
@@ -62,7 +64,7 @@ BlTransformationBuilder >> flipY [
 			 yourself)
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> inherit [
 	"Append existing element's transformations to the new transformation list"
 
@@ -70,7 +72,7 @@ BlTransformationBuilder >> inherit [
 			affineCompositeTransformation addTransformation: each ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTransformationBuilder >> initialize [
 
 	super initialize.
@@ -79,7 +81,7 @@ BlTransformationBuilder >> initialize [
 	origin := BlAffineTransformationCenterOrigin defaultInstance
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> matrix: aMatrix [
 
 	"Note: matrix transformation is not influenced by origin (it is always top left corner or 0@0)"
@@ -90,7 +92,7 @@ BlTransformationBuilder >> matrix: aMatrix [
 			 yourself)
 ]
 
-{ #category : #origin }
+{ #category : 'origin' }
 BlTransformationBuilder >> normalizedOrigin: aPoint [
 	"Set a normalized position, where top-left is 0@0 and bottom-right is 1@1.
 	Negative and greater-than-one values are allowed."
@@ -98,7 +100,7 @@ BlTransformationBuilder >> normalizedOrigin: aPoint [
 	origin := BlAffineTransformationNormalizedPositionOrigin position: aPoint
 ]
 
-{ #category : #origin }
+{ #category : 'origin' }
 BlTransformationBuilder >> origin: anAffineTransformationOrigin [
 	"Change transformation origin for all future transformations.
 	Note: I do not change origins of already exisiting transformations"
@@ -106,13 +108,13 @@ BlTransformationBuilder >> origin: anAffineTransformationOrigin [
 	origin := anAffineTransformationOrigin
 ]
 
-{ #category : #origin }
+{ #category : 'origin' }
 BlTransformationBuilder >> rightCenterOrigin [
 
 	self origin: BlAffineTransformationRightCenterOrigin new
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> rotateBy: aDegreesAngle [
 
 	affineCompositeTransformation addTransformation:
@@ -123,7 +125,7 @@ BlTransformationBuilder >> rotateBy: aDegreesAngle [
 			 yourself)
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> rotateBy: aDegreesAngle around: aVector [
 
 	affineCompositeTransformation addTransformation:
@@ -134,7 +136,7 @@ BlTransformationBuilder >> rotateBy: aDegreesAngle around: aVector [
 			 yourself)
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> scaleBy: aVector [
 
 	| aScaleVector |
@@ -148,7 +150,7 @@ BlTransformationBuilder >> scaleBy: aVector [
 			 yourself)
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> shearBy: aCoefficientPoint [
 
 	affineCompositeTransformation addTransformation:
@@ -158,7 +160,7 @@ BlTransformationBuilder >> shearBy: aCoefficientPoint [
 			 yourself)
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> skewX: anAngleInDegrees [
 
 	affineCompositeTransformation addTransformation:
@@ -168,7 +170,7 @@ BlTransformationBuilder >> skewX: anAngleInDegrees [
 			 yourself)
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> skewY: anAngleInDegrees [
 
 	affineCompositeTransformation addTransformation:
@@ -178,7 +180,7 @@ BlTransformationBuilder >> skewY: anAngleInDegrees [
 			 yourself)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTransformationBuilder >> target [
 	"Return a target object whose transformation we build"
 	<return: #Object>
@@ -186,19 +188,19 @@ BlTransformationBuilder >> target [
 	^ target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTransformationBuilder >> target: anObject [
 
 	target := anObject
 ]
 
-{ #category : #origin }
+{ #category : 'origin' }
 BlTransformationBuilder >> topLeftOrigin [
 
 	self origin: BlAffineTransformationTopLeftOrigin new
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformationBuilder >> translateBy: aBlVector [
 	"Append a translation transformation by a given vector"
 

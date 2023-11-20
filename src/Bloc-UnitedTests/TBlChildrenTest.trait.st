@@ -270,6 +270,26 @@ TBlChildrenTest >> testSecond [
 ]
 
 { #category : #tests }
+TBlChildrenTest >> testSelectThenCollect [
+
+	| theChildren  collected |
+	theChildren := self fill: 4.
+	collected := theChildren select: [ :e | true ] thenCollect: [ :e | e ].
+	self assert: collected species = theChildren species.
+	self assert: collected size equals: theChildren size
+]
+
+{ #category : #tests }
+TBlChildrenTest >> testSelectThenCollectEmpty [
+
+	| theChildren  collected |
+	theChildren := self testEmptyChildren.
+	collected := theChildren select: [ :e | true ] thenCollect: [ :e | e ].
+	self assert: collected species = theChildren species.
+	self assert: collected isEmpty
+]
+
+{ #category : #tests }
 TBlChildrenTest >> testSize [
 
 	| theChildren |

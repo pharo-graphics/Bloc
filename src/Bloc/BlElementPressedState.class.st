@@ -1,20 +1,22 @@
 Class {
-	#name : #BlElementPressedState,
-	#superclass : #BlElementUniqueState,
-	#category : #'Bloc-Basic-State'
+	#name : 'BlElementPressedState',
+	#superclass : 'BlElementUniqueState',
+	#category : 'Bloc-Basic-State',
+	#package : 'Bloc',
+	#tag : 'Basic-State'
 }
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlElementPressedState >> optionalEventHandlerDo: aBlock [
 	aBlock value: BlElementPressedStateEventHandler uniqueInstance
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlElementPressedState >> printOn: aStream [
 	aStream nextPutAll: 'pressed'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementPressedState >> priority [
 	^ 20
 ]

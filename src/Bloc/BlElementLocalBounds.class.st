@@ -1,28 +1,30 @@
 Class {
-	#name : #BlElementLocalBounds,
-	#superclass : #BlElementBounds,
+	#name : 'BlElementLocalBounds',
+	#superclass : 'BlElementBounds',
 	#instVars : [
 		'extent',
 		'position'
 	],
-	#category : #'Bloc-Basic-Bounds'
+	#category : 'Bloc-Basic-Bounds',
+	#package : 'Bloc',
+	#tag : 'Basic-Bounds'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlElementLocalBounds >> asRectangle [
 	<return: #Rectangle>
 	
 	 ^ self position extent: self extent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementLocalBounds >> bounds [
 	<return: #BlBounds>
 
 	^ BlBounds origin: self position extent: self extent
 ]
 
-{ #category : #'geometry - accessing' }
+{ #category : 'geometry - accessing' }
 BlElementLocalBounds >> center [
 	"Return a point representing a geometrical center of this bounds"
 	<return: #Point>
@@ -30,28 +32,28 @@ BlElementLocalBounds >> center [
 	^ self position + (self extent / 2.0)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementLocalBounds >> extent [
 	<return: #Point>
 
 	^ extent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementLocalBounds >> extent: aPoint [
 	"aPoint should satisfy isBlocFiniteFloatPoint and isBlocPositivePoint"
 
 	extent := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementLocalBounds >> height [
 	<return: #Number>
 
 	^ self extent y
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementLocalBounds >> inChild: anElement [
 	<return: #BlElementBounds>
 
@@ -62,7 +64,7 @@ BlElementLocalBounds >> inChild: anElement [
 		yourself
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementLocalBounds >> inLocal [
 	<return: #BlElementBounds>
 
@@ -72,7 +74,7 @@ BlElementLocalBounds >> inLocal [
 		yourself
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementLocalBounds >> inParent [
 	<return: #BlElementBounds>
 	
@@ -83,7 +85,7 @@ BlElementLocalBounds >> inParent [
 		yourself
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementLocalBounds >> inParent: anElement [
 	<return: #BlElementBounds>
 	| subParent |
@@ -100,7 +102,7 @@ BlElementLocalBounds >> inParent: anElement [
 		yourself
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementLocalBounds >> inSpace [
 	<return: #BlElementBounds>
 	
@@ -110,7 +112,7 @@ BlElementLocalBounds >> inSpace [
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementLocalBounds >> initialize [
 	super initialize.
 
@@ -118,7 +120,7 @@ BlElementLocalBounds >> initialize [
 	extent := 0.0@0.0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementLocalBounds >> position [
 	"Return bounds position (an origin) as a Point"
 	<return: #Point>
@@ -126,21 +128,21 @@ BlElementLocalBounds >> position [
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementLocalBounds >> position: aPoint [
 	"aPoint should satisfy #isBlocFiniteFloatPoint"
 	
 	position := aPoint
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlElementLocalBounds >> transformed [
 	<return: #BlElementBounds>
 
 	^ self inLocal transformed
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementLocalBounds >> width [
 	<return: #Number>
 

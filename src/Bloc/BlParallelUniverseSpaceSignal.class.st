@@ -1,25 +1,27 @@
 Class {
-	#name : #BlParallelUniverseSpaceSignal,
-	#superclass : #BlParallelUniverseSignal,
+	#name : 'BlParallelUniverseSpaceSignal',
+	#superclass : 'BlParallelUniverseSignal',
 	#instVars : [
 		'spaceId'
 	],
-	#category : #'Bloc-Universe - Parallel'
+	#category : 'Bloc-Universe - Parallel',
+	#package : 'Bloc',
+	#tag : 'Universe - Parallel'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlParallelUniverseSpaceSignal class >> isAbstract [
 	^ self = BlParallelUniverseSpaceSignal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseSpaceSignal >> spaceId [
 	<return: #Number>
 
 	^ spaceId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverseSpaceSignal >> spaceId: aNumber [
 	spaceId := aNumber
 ]

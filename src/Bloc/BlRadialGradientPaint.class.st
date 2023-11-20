@@ -1,14 +1,22 @@
 Class {
-	#name : #BlRadialGradientPaint,
-	#superclass : #BlGradientPaint,
+	#name : 'BlRadialGradientPaint',
+	#superclass : 'BlGradientPaint',
 	#instVars : [
 		'innerCenter',
 		'innerRadius',
 		'outerCenter',
 		'outerRadius'
 	],
-	#category : #'Bloc-Paint'
+	#category : 'Bloc-Paint',
+	#package : 'Bloc',
+	#tag : 'Paint'
 }
+
+{ #category : #accessing }
+BlRadialGradientPaint >> center: aPoint [
+
+  innerCenter := outerCenter := aPoint
+]
 
 { #category : #accessing }
 BlRadialGradientPaint >> innerCenter [
@@ -29,9 +37,9 @@ BlRadialGradientPaint >> innerRadius [
 ]
 
 { #category : #accessing }
-BlRadialGradientPaint >> innerRadius: anObject [
+BlRadialGradientPaint >> innerRadius: aNumber [
 
-	innerRadius := anObject
+	innerRadius := aNumber
 ]
 
 { #category : #geometry }
@@ -59,5 +67,11 @@ BlRadialGradientPaint >> outerRadius [
 { #category : #accessing }
 BlRadialGradientPaint >> outerRadius: aNumber [
 
+	outerRadius := aNumber
+]
+
+{ #category : #accessing }
+BlRadialGradientPaint >> radius: aNumber [
+  innerRadius := 0.0.
 	outerRadius := aNumber
 ]

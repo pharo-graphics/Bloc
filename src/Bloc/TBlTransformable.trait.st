@@ -2,17 +2,19 @@
 I define an interface that transformable objects should implement in order to support affine transformations
 "
 Trait {
-	#name : #TBlTransformable,
-	#category : #'Bloc-Basic-Transformations'
+	#name : 'TBlTransformable',
+	#category : 'Bloc-Basic-Transformations',
+	#package : 'Bloc',
+	#tag : 'Basic-Transformations'
 }
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 TBlTransformable >> transform [
 	
 	^ BlTransformationBuilder on: self
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 TBlTransformable >> transformDo: aBlock [
 
 	| aTransformationBuilder |
@@ -21,7 +23,7 @@ TBlTransformable >> transformDo: aBlock [
 	aTransformationBuilder apply
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 TBlTransformable >> transformation [
 	"Return a `BlElementTransformation` that represents a description of my transformation.
 	It can either be a local transformation being a composition of affine transformations or
@@ -30,7 +32,7 @@ TBlTransformable >> transformation [
 	^ self explicitRequirement
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 TBlTransformable >> transformation: aBlElementTransformation [
 
 	self explicitRequirement

@@ -1,23 +1,25 @@
 Class {
-	#name : #BlRopeableCollectionFileFinalizer,
-	#superclass : #Object,
+	#name : 'BlRopeableCollectionFileFinalizer',
+	#superclass : 'Object',
 	#instVars : [
 		'binaryStream'
 	],
-	#category : #'Bloc-DataStructure - Rope'
+	#category : 'Bloc-DataStructure - Rope',
+	#package : 'Bloc',
+	#tag : 'DataStructure - Rope'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFileFinalizer >> binaryStream [
 	^ binaryStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRopeableCollectionFileFinalizer >> binaryStream: anObject [
 	binaryStream := anObject
 ]
 
-{ #category : #finalization }
+{ #category : 'finalization' }
 BlRopeableCollectionFileFinalizer >> finalize [ 
 
 	binaryStream close.
