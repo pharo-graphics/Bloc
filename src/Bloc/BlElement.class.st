@@ -63,8 +63,7 @@ Class {
 		'errorHandler',
 		'userData',
 		'visuals',
-		'flags',
-		'figure'
+		'flags'
 	],
 	#category : 'Bloc-Basic',
 	#package : 'Bloc',
