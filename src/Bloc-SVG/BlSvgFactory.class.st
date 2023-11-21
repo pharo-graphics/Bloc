@@ -444,9 +444,17 @@ BlSvgFactory >> positionFrom: node on: aBlElement [
 ]
 
 { #category : #'gradients & patterns' }
-BlSvgFactory >> radialGradientCenterFrom: node [
+BlSvgFactory >> radialGradientFrom: node [
 
-	| cx cy |
+	| aBlRadialGradientPaint r cx cy fx fy |
+	aBlRadialGradientPaint := BlRadialGradientPaint new.
+
+	r := 0.0.
+	node
+		attributeAt: 'r'
+		ifPresent: [ r := (node attributeAt: 'r') asNumber ].
+	aBlRadialGradientPaint radius: r.
+
 	cx := cy := 50.
 	node
 		attributeAt: 'cx'
@@ -454,35 +462,19 @@ BlSvgFactory >> radialGradientCenterFrom: node [
 	node
 		attributeAt: 'cy'
 		ifPresent: [ cy := (node attributeAt: 'cy') asNumber ].
-	^ cx @ cy
-]
+	aBlRadialGradientPaint outerCenter: cx @ cy.
 
-{ #category : #'gradients & patterns' }
-BlSvgFactory >> radialGradientFocalPointFrom: node on: aBlRadialGradientPaint [
-
-	| fx fy |
-	fx := aBlRadialGradientPaint center x.
-	fy := aBlRadialGradientPaint center y.
+	fx := cx.
+	fy := cy.
 	node
 		attributeAt: 'fx'
 		ifPresent: [ fx := (node attributeAt: 'fx') asNumber ].
 	node
 		attributeAt: 'fy'
 		ifPresent: [ fy := (node attributeAt: 'fy') asNumber ].
-	aBlRadialGradientPaint center: fx @ fy
-]
+	aBlRadialGradientPaint innerCenter: fx @ fy.
 
-{ #category : #'gradients & patterns' }
-BlSvgFactory >> radialGradientFrom: node [
-
-	| aBlSVGGradientPaint |
-	aBlSVGGradientPaint := BlRadialGradientPaint new
-		                       center: (self radialGradientCenterFrom: node);
-		                       radius: (self radialGradientRadiusFrom: node);
-		                       yourself.
-	self radialGradientFocalPointFrom: node on: aBlSVGGradientPaint.
-
-	self gradientFrom: node on: aBlSVGGradientPaint
+	self gradientFrom: node on: aBlRadialGradientPaint
 ]
 
 { #category : #'gradients & patterns' }

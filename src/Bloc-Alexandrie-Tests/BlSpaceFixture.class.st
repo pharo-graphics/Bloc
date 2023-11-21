@@ -592,8 +592,10 @@ BlSpaceFixture >> buildGradients [
 			yourself.
 
 	aRadialGradient := BlRadialGradientPaint new
-			center: 30 asPoint;
-			radius: 20;
+			innerCenter:  30 asPoint;
+			innerRadius:  0;
+			outerCenter: 30 asPoint;
+			outerRadius: 20;
 			stops: {
 				0.0 -> Color yellow.
 				0.4 -> Color white.
@@ -636,8 +638,10 @@ BlSpaceFixture >> buildGradientsInBorder [
 		border: (BlBorder paint: aLinearGradient width: borderWidth).
 
 	aRadialGradient := BlRadialGradientPaint new
-			center: extent;
-			radius: extent x;
+			innerCenter:  extent;
+			innerRadius:  0;
+			outerCenter: extent;
+			outerRadius: extent x;
 			stops: {
 				0.0 -> Color blue.
 				0.3 -> Color yellow.
