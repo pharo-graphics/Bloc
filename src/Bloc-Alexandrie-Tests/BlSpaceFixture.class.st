@@ -6,15 +6,17 @@ My methods with unary selectors that start with `build` add elements to a BlSpac
 
 "
 Class {
-	#name : #BlSpaceFixture,
-	#superclass : #Object,
+	#name : 'BlSpaceFixture',
+	#superclass : 'Object',
 	#instVars : [
 		'builder'
 	],
-	#category : #'Bloc-Alexandrie-Tests-Utilities'
+	#category : 'Bloc-Alexandrie-Tests-Utilities',
+	#package : 'Bloc-Alexandrie-Tests',
+	#tag : 'Utilities'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFixture class >> allFixtureSelectors [
 
 	^ (self allSelectors
@@ -22,7 +24,7 @@ BlSpaceFixture class >> allFixtureSelectors [
 		asSortedCollection
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> _buildTinyGeometries [
 	"It produces random rendering"
 
@@ -78,7 +80,7 @@ BlSpaceFixture >> _buildTinyGeometries [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildCapRoundDashedBorderOnClosedGeometry [
 	"Related to https://github.com/pharo-graphics/Bloc/issues/200"
 
@@ -114,7 +116,7 @@ BlSpaceFixture >> buildCapRoundDashedBorderOnClosedGeometry [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildClippingAbsolutelyTransparentElement [
 	"Add 3 elements, where only the last one should be clipped by it's transparent parent.
 	The output should be a blue rectangle surrounded by orange."
@@ -147,7 +149,7 @@ BlSpaceFixture >> buildClippingAbsolutelyTransparentElement [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildClippingMany [
 
 	| newElementBlock elementSize |
@@ -177,7 +179,7 @@ BlSpaceFixture >> buildClippingMany [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildClippingOutskirts [
 
 	| outskirts width positionGenerator addElementsBlock |
@@ -228,7 +230,7 @@ BlSpaceFixture >> buildClippingOutskirts [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildClippingWithoutBorders [
 
 	| elementA elementB elementC |
@@ -255,7 +257,7 @@ BlSpaceFixture >> buildClippingWithoutBorders [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildCompositeEffect [
 
 	| element compositeEffect |
@@ -276,7 +278,7 @@ BlSpaceFixture >> buildCompositeEffect [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildDashesInsideAndOutsideBuggyForPolygon [
 	"Register this undesired rendering in some geometries with dashed border and outside or inside outskirts"
 
@@ -305,7 +307,7 @@ BlSpaceFixture >> buildDashesInsideAndOutsideBuggyForPolygon [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildDashesInsideAndOutsideOkayForCircle [
 	"Geometries that establish a `AeCanvas>>#borderPathFactory:` in the canvas work well."
 
@@ -332,7 +334,7 @@ BlSpaceFixture >> buildDashesInsideAndOutsideOkayForCircle [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildElevation [
 
 	| elementA elementB elementC childD childE childF |
@@ -383,7 +385,7 @@ BlSpaceFixture >> buildElevation [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildEmptyGeometry [
 	"Note: green rectangle never shows, and blue only when clipping is OFF."
 
@@ -418,7 +420,7 @@ BlSpaceFixture >> buildEmptyGeometry [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildGaussianShadowsByCircleSector [
 
 	self buildVariantsOfCircleSectorAnglesCustomizedWith: [ :each |
@@ -429,7 +431,7 @@ BlSpaceFixture >> buildGaussianShadowsByCircleSector [
 					offset: -2 @ 3) ] 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildGaussianShadowsByGeometry [
 
 	| positionGenerator addElementBlock cellSize numberOfColumns shadowSize elementSize geometryBlocks |
@@ -504,7 +506,7 @@ BlSpaceFixture >> buildGaussianShadowsByGeometry [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildGaussianShadowsByOutskirt [
 
 	self buildVariantsOfOutskirtCustomizedWith: [ :anElement |
@@ -516,7 +518,7 @@ BlSpaceFixture >> buildGaussianShadowsByOutskirt [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildGaussianShadowsByStrokeStyle [
 
 	self buildStrokeStyleCustomizedWith: [ :each |
@@ -527,7 +529,7 @@ BlSpaceFixture >> buildGaussianShadowsByStrokeStyle [
 				offset: 0 @ -4) ]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildGaussianShadowsByTextTransformations [
 
 	self buildTextTransformationsCustomizedWith: [ :each |
@@ -538,7 +540,7 @@ BlSpaceFixture >> buildGaussianShadowsByTextTransformations [
 				offset: 0@0 ) ]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildGeometriesAsElement [
 
 	| geometries container |
@@ -577,7 +579,7 @@ BlSpaceFixture >> buildGeometriesAsElement [
 		container addChild: anElement ]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildGradients [
 
 	| aLinearGradient aRadialGradient anExtent |
@@ -592,8 +594,10 @@ BlSpaceFixture >> buildGradients [
 			yourself.
 
 	aRadialGradient := BlRadialGradientPaint new
-			center: 30 asPoint;
-			radius: 20;
+			innerCenter:  30 asPoint;
+			innerRadius:  0;
+			outerCenter: 30 asPoint;
+			outerRadius: 20;
 			stops: {
 				0.0 -> Color yellow.
 				0.4 -> Color white.
@@ -613,7 +617,7 @@ BlSpaceFixture >> buildGradients [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildGradientsInBorder [
 
 	| aLinearGradient aRadialGradient extent borderWidth |
@@ -636,8 +640,10 @@ BlSpaceFixture >> buildGradientsInBorder [
 		border: (BlBorder paint: aLinearGradient width: borderWidth).
 
 	aRadialGradient := BlRadialGradientPaint new
-			center: extent;
-			radius: extent x;
+			innerCenter:  extent;
+			innerRadius:  0;
+			outerCenter: extent;
+			outerRadius: extent x;
 			stops: {
 				0.0 -> Color blue.
 				0.3 -> Color yellow.
@@ -653,7 +659,7 @@ BlSpaceFixture >> buildGradientsInBorder [
 	builder spaceExtent: extent * 2
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildImagesAndTransformations [
 	
 	| outskirts positionGenerator addElementBlock |
@@ -728,7 +734,7 @@ BlSpaceFixture >> buildImagesAndTransformations [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildLinearLayoutWithPaddingAndMargin [
 
 	| container |
@@ -758,7 +764,7 @@ BlSpaceFixture >> buildLinearLayoutWithPaddingAndMargin [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildOpacities [
 
 	| size fillColor borderColor |
@@ -804,7 +810,7 @@ BlSpaceFixture >> buildOpacities [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildOutskirtsAndOpaqueBorders [
 
 	| outskirts positionGenerator addElementBlock |
@@ -845,7 +851,7 @@ BlSpaceFixture >> buildOutskirtsAndOpaqueBorders [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildOutskirtsAndTranslucentBorders [
 
 	| outskirts positionGenerator addElementBlock |
@@ -886,7 +892,7 @@ BlSpaceFixture >> buildOutskirtsAndTranslucentBorders [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildOutskirtsOfPolygons [
 
 	| outskirts width scale positionGenerator |
@@ -929,7 +935,7 @@ BlSpaceFixture >> buildOutskirtsOfPolygons [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildOverlappingCircles [
 
 	| elementA elementB |
@@ -946,7 +952,7 @@ BlSpaceFixture >> buildOverlappingCircles [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildOverlappingRectangles [
 	"Note: This code assumes that default geometry is a rectangle."
 
@@ -960,7 +966,7 @@ BlSpaceFixture >> buildOverlappingRectangles [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildOverlappingTriangles [
 
 	| elementA elementB |
@@ -979,7 +985,7 @@ BlSpaceFixture >> buildOverlappingTriangles [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildSimpleShadowsByCircleSector [
 
 	self buildVariantsOfCircleSectorAnglesCustomizedWith: [ :each |
@@ -989,7 +995,7 @@ BlSpaceFixture >> buildSimpleShadowsByCircleSector [
 				offset: -2 @ 3 ) ] 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildSimpleShadowsByGeometry [
 
 	| positionGenerator addElementBlock cellSize numberOfColumns shadowSize elementSize geometryBlocks |
@@ -1062,7 +1068,7 @@ BlSpaceFixture >> buildSimpleShadowsByGeometry [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildSimpleShadowsByOutskirt [
 
 	self buildVariantsOfOutskirtCustomizedWith: [ :anElement |
@@ -1073,7 +1079,7 @@ BlSpaceFixture >> buildSimpleShadowsByOutskirt [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildSimpleShadowsByStrokeStyle [
 
 	self buildStrokeStyleCustomizedWith: [ :each |
@@ -1083,7 +1089,7 @@ BlSpaceFixture >> buildSimpleShadowsByStrokeStyle [
 				offset: 0 @ -2) ]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildSimpleShadowsByTextTransformations [
 
 	self buildTextTransformationsCustomizedWith: [ :each |
@@ -1093,7 +1099,7 @@ BlSpaceFixture >> buildSimpleShadowsByTextTransformations [
 				offset: 1 @ 1 ) ]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildStrokeStyleCustomizedWith: aBlock [
 
 	self buildStrokeStyles.
@@ -1101,7 +1107,7 @@ BlSpaceFixture >> buildStrokeStyleCustomizedWith: aBlock [
 	builder space root allChildrenDepthFirstDo: aBlock
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildStrokeStyles [
 
 	| positionGenerator width |
@@ -1174,7 +1180,7 @@ BlSpaceFixture >> buildStrokeStyles [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildTextAttributes [
 
 	| container |
@@ -1211,7 +1217,7 @@ BlSpaceFixture >> buildTextAttributes [
 		to: container.
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildTextEmoji [
 
 	| emojiFont emojiString |
@@ -1240,7 +1246,7 @@ BlSpaceFixture >> buildTextEmoji [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildTextMeasurements [
 
 	| container |
@@ -1269,7 +1275,7 @@ BlSpaceFixture >> buildTextMeasurements [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildTextOpacities [
 
 	| container |
@@ -1316,7 +1322,7 @@ BlSpaceFixture >> buildTextOpacities [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildTextTransformations [
 
 	(builder addTextToRoot: (self ropedTextFor: '¡Hola!'))
@@ -1342,7 +1348,7 @@ BlSpaceFixture >> buildTextTransformations [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildTextTransformationsCustomizedWith: aBlock [
 
 	self buildTextTransformations.
@@ -1350,7 +1356,7 @@ BlSpaceFixture >> buildTextTransformationsCustomizedWith: aBlock [
 	builder space root allChildrenDepthFirstDo: aBlock
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildTransformRotate [
 
 	| elementA elementB elementC |
@@ -1377,7 +1383,7 @@ BlSpaceFixture >> buildTransformRotate [
 		yourself
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildTransformScale [
 
 	| elementA elementB elementC |
@@ -1408,7 +1414,7 @@ BlSpaceFixture >> buildTransformScale [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildTransformTranslate [
 
 	| elementA elementB elementC |
@@ -1433,7 +1439,7 @@ BlSpaceFixture >> buildTransformTranslate [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOf: aGeometryFactoryBlock [
 
 	| outskirts positionGenerator addElementBlock |
@@ -1506,7 +1512,7 @@ BlSpaceFixture >> buildVariantsOf: aGeometryFactoryBlock [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfAll: aBlElementGeometryCollection [
 
 	| positionGenerator |
@@ -1528,7 +1534,7 @@ BlSpaceFixture >> buildVariantsOfAll: aBlElementGeometryCollection [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfAnnulusSector [
 
 	self buildVariantsOf: 
@@ -1539,7 +1545,7 @@ BlSpaceFixture >> buildVariantsOfAnnulusSector [
 			outerRadius: 0.9]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfAnnulusSectorAngles [
 
 	| positionGenerator addElementBlock addAnnulusVariationsForAnglesBlock pixelSize numberOfColumns |
@@ -1608,7 +1614,7 @@ BlSpaceFixture >> buildVariantsOfAnnulusSectorAngles [
 			value: anAngle + 45 ]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfAnnulusSectorStartGreaterThanEnd [
 
 	self buildVariantsOf: 
@@ -1619,28 +1625,28 @@ BlSpaceFixture >> buildVariantsOfAnnulusSectorStartGreaterThanEnd [
 			outerRadius: 1.0]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfBezier2CPs [
 
 	self buildVariantsOfLinelikeGeometry:
 		(BlBezierCurveGeometry controlPoints: {5 @ 0. 35 @ 40})
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfBezier3CPs [
 
 	self buildVariantsOfLinelikeGeometry:
 		(BlBezierCurveGeometry controlPoints: { 5@0. 20@35. 35@40 })
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfBezier4CPs [
 
 	self buildVariantsOfLinelikeGeometry:
 		(BlBezierCurveGeometry controlPoints: { 5@0. 15@30. 25@10. 35@40 })
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfCircleSector [
 
 	self buildVariantsOf: 
@@ -1651,7 +1657,7 @@ BlSpaceFixture >> buildVariantsOfCircleSector [
 			outerRadius: 0.9]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfCircleSectorAngles [
 
 	| positionGenerator addElementBlock addAnnulusVariationsForAnglesBlock pixelSize numberOfColumns angles |
@@ -1707,7 +1713,7 @@ BlSpaceFixture >> buildVariantsOfCircleSectorAngles [
 			value: anAngle + 45 ]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfCircleSectorAnglesCustomizedWith: aBlock [
 
 	self buildVariantsOfCircleSectorAngles.
@@ -1715,7 +1721,7 @@ BlSpaceFixture >> buildVariantsOfCircleSectorAnglesCustomizedWith: aBlock [
 	builder space root allChildrenDepthFirstDo: aBlock
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfEllipse [
 
 	| positionGenerator |
@@ -1742,14 +1748,14 @@ BlSpaceFixture >> buildVariantsOfEllipse [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfLine [
 
 	self buildVariantsOfLinelikeGeometry:
 		(BlLineGeometry from: 5 @ 0 to: 35 @ 40)
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfLinelikeGeometry: aGeometry [
 
 	{	[ :t |
@@ -1780,7 +1786,7 @@ BlSpaceFixture >> buildVariantsOfLinelikeGeometry: aGeometry [
 			yourself ].
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfOutskirtCustomizedWith: aBlock [
 
 	| outskirts borderWidth scale positionGenerator addElementBlock |
@@ -1822,25 +1828,25 @@ BlSpaceFixture >> buildVariantsOfOutskirtCustomizedWith: aBlock [
 
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfPolygon [
 
 	self buildVariantsOf: [BlPolygonGeometry vertices: self hexagonVertices]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfPolyline [
 
 	self buildVariantsOf: [BlPolylineGeometry vertices: self hexagonVertices]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfRectangle [
 
 	self buildVariantsOf: [BlRectangleGeometry new]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfRoundedRectangle [
 
 	self buildVariantsOfAll: {
@@ -1927,7 +1933,7 @@ BlSpaceFixture >> buildVariantsOfRoundedRectangle [
 	
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfRoundedRectangleAndOutskirts [
 
 	self buildVariantsOf:
@@ -1940,13 +1946,13 @@ BlSpaceFixture >> buildVariantsOfRoundedRectangleAndOutskirts [
 				yourself)]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> buildVariantsOfSquare [
 
 	self buildVariantsOf: [BlSquareGeometry new]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSpaceFixture >> diagonalPositionGeneratorStartingAt: aPoint by: by [
 	
 	^ Generator on: [ :g | 
@@ -1956,7 +1962,7 @@ BlSpaceFixture >> diagonalPositionGeneratorStartingAt: aPoint by: by [
 			index := index + by ] repeat ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSpaceFixture >> gridPositionGeneratorStartingAt: offset by: by columns: numberOfColumns [
 	
 	^ Generator on: [ :g | 
@@ -1980,7 +1986,7 @@ BlSpaceFixture >> gridPositionGeneratorStartingAt: offset by: by columns: number
 		] repeat ]
 ]
 
-{ #category : #fixtures }
+{ #category : 'fixtures' }
 BlSpaceFixture >> hexagonVertices [
 
 	^ {	 30 @  0.
@@ -1992,14 +1998,14 @@ BlSpaceFixture >> hexagonVertices [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFixture >> host: aHost [
 	
 	builder host: aHost
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpaceFixture >> initialize [
 
 	super initialize.
@@ -2008,13 +2014,13 @@ BlSpaceFixture >> initialize [
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSpaceFixture >> monospacedFontFamilyName [
 		
 	^ 'Source Code Pro'
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSpaceFixture >> ropedTextFor: aString [
 
 	^ aString asRopedText
@@ -2022,13 +2028,13 @@ BlSpaceFixture >> ropedTextFor: aString [
 		  yourself
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSpaceFixture >> sansFontFamilyName [
 
 	^ 'Source Sans Pro'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFixture >> space [
 
 	^ builder buildSpace; space	

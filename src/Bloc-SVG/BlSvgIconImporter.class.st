@@ -2,17 +2,19 @@
 I am a helper class that makes it easier to import SVG icons
 "
 Class {
-	#name : #BlSvgIconImporter,
-	#superclass : #Object,
-	#category : #'Bloc-SVG-Converter'
+	#name : 'BlSvgIconImporter',
+	#superclass : 'Object',
+	#category : 'Bloc-SVG-Converter',
+	#package : 'Bloc-SVG',
+	#tag : 'Converter'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlSvgIconImporter class >> categoryNameFromFileName: aFileName [
 	^ ($- split: ($. split: aFileName) first) first asLowercase
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlSvgIconImporter class >> createIconClass: aClass withIcons: aCollection [
 	aCollection
 		do: [ :assoc | 
@@ -28,12 +30,12 @@ BlSvgIconImporter class >> createIconClass: aClass withIcons: aCollection [
 						classified: assoc value key ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlSvgIconImporter class >> iconNameFromFileName: aFileName [
 ^ (($.split: aFileName) first replaceAll:$-  with: Character space ) asCamelCase asValidSelector
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlSvgIconImporter class >> importIn: aClass fromDir: aString [
 	self
 		createIconClass:aClass withIcons:

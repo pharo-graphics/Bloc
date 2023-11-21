@@ -1,6 +1,6 @@
-Extension { #name : #BlTextDecorationAttribute }
+Extension { #name : 'BlTextDecorationAttribute' }
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlTextDecorationAttribute >> aeDrawAboveOn: aeCanvas span: aBASpan [
 
 	| fromY |

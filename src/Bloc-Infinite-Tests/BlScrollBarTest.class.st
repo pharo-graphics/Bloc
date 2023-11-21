@@ -1,6 +1,6 @@
 Class {
-	#name : #BlScrollBarTest,
-	#superclass : #BlParameterizedHostTest,
+	#name : 'BlScrollBarTest',
+	#superclass : 'BlParameterizedHostTest',
 	#instVars : [
 		'space',
 		'largeElement',
@@ -9,17 +9,18 @@ Class {
 		'vBar',
 		'scrollPane'
 	],
-	#category : #'Bloc-Infinite-Tests'
+	#category : 'Bloc-Infinite-Tests',
+	#package : 'Bloc-Infinite-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 BlScrollBarTest >> dragOn: anElement byAll: aSequenceOfDeltas [
 
 	BlSpace simulateDragOn: anElement byAll: aSequenceOfDeltas.
 	self waitTestingSpaces
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlScrollBarTest >> setUp [
 
 	| largeExtent gap |
@@ -34,8 +35,10 @@ BlScrollBarTest >> setUp [
 		size: largeExtent;
 		background: (BlRadialGradientPaint new
 			stops: { 0 -> Color blue. 1 -> Color red };
-			center: largeExtent // 2;
-			radius: largeExtent min;
+			innerCenter:  largeExtent // 2;
+			innerRadius: 0;
+			outerCenter: largeExtent //2;
+			outerRadius:  largeExtent min;
 			yourself);
 		yourself.
 
@@ -84,7 +87,7 @@ BlScrollBarTest >> setUp [
 	self waitTestingSpaces
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlScrollBarTest >> testHorizontalDragThumbBeyondBounds [
 
 	"Increase offset by a small distance"
@@ -101,7 +104,7 @@ BlScrollBarTest >> testHorizontalDragThumbBeyondBounds [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlScrollBarTest >> testHorizontalDragThumbReturn [
 
 	self
@@ -114,7 +117,7 @@ BlScrollBarTest >> testHorizontalDragThumbReturn [
 		equals: 120
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlScrollBarTest >> testHorizontalScrollInitialValues [
 
 	self assert: scrollableElement computeHorizontalScrollOffset isZero.
@@ -126,7 +129,7 @@ BlScrollBarTest >> testHorizontalScrollInitialValues [
 		equals: scrollableElement extent x
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlScrollBarTest >> testVerticalDragThumbBeyondBounds [
 
 	"Increase offset by a small distance"
@@ -142,7 +145,7 @@ BlScrollBarTest >> testVerticalDragThumbBeyondBounds [
 		equals: 300
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlScrollBarTest >> testVerticalDragThumbReturn [
 
 	self
@@ -155,7 +158,7 @@ BlScrollBarTest >> testVerticalDragThumbReturn [
 		equals: 300
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlScrollBarTest >> testVerticalScrollInitialValues [
 
 	self assert: scrollableElement computeVerticalScrollOffset isZero.

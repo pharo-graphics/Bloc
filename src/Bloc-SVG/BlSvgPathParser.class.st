@@ -4,8 +4,8 @@ I'm a parser for SVG path.
 See: https://www.w3.org/TR/SVG2/paths.html
 "
 Class {
-	#name : #BlSvgPathParser,
-	#superclass : #Object,
+	#name : 'BlSvgPathParser',
+	#superclass : 'Object',
 	#instVars : [
 		'absolute',
 		'stream',
@@ -13,10 +13,12 @@ Class {
 		'isFirstSegment',
 		'selectorByLowercasedCommand'
 	],
-	#category : #'Bloc-SVG-Geometry'
+	#category : 'Bloc-SVG-Geometry',
+	#package : 'Bloc-SVG',
+	#tag : 'Geometry'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSvgPathParser class >> on: aStream handler: aHandler [
 
 	^ self basicNew
@@ -24,7 +26,7 @@ BlSvgPathParser class >> on: aStream handler: aHandler [
 		  yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSvgPathParser >> initializeOnStream: aStream handler: aHandler [
 
 	self initialize.
@@ -51,7 +53,7 @@ BlSvgPathParser >> initializeOnStream: aStream handler: aHandler [
 			yourself
 ]
 
-{ #category : #'private - parsing' }
+{ #category : 'private - parsing' }
 BlSvgPathParser >> nextNumber [
 	"read the number from stream.
 	or answer nil if not successfull"
@@ -102,14 +104,14 @@ Within the SVG DOM, a <number> is represented as a float or an SVGAnimatedNumber
 
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlSvgPathParser >> readClosePath [
 	"See: https://www.w3.org/TR/SVG2/paths.html#PathDataClosePathCommand"
 
 	handler closePath
 ]
 
-{ #category : #'private - parsing' }
+{ #category : 'private - parsing' }
 BlSvgPathParser >> readCommandNamed: aCharacter [
 
 	| command |
@@ -123,7 +125,7 @@ BlSvgPathParser >> readCommandNamed: aCharacter [
 			self error: 'Invalid SVG command: ', aCharacter asString ]
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlSvgPathParser >> readCubicBezier [
 	"See: https://www.w3.org/TR/SVG2/paths.html#PathDataCubicBezierCommands"
 
@@ -149,7 +151,7 @@ BlSvgPathParser >> readCubicBezier [
 
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlSvgPathParser >> readEllipticalArc [ 
 	"See: https://www.w3.org/TR/SVG2/paths.html#PathDataEllipticalArcCommands"
 
@@ -180,7 +182,7 @@ BlSvgPathParser >> readEllipticalArc [
 	] repeat
 ]
 
-{ #category : #'private - parsing' }
+{ #category : 'private - parsing' }
 BlSvgPathParser >> readFraction [
 "
 read fraction, what is after the decimal point:
@@ -201,7 +203,7 @@ read fraction, what is after the decimal point:
 	^ result
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlSvgPathParser >> readHorizontalLine [
 	"See: https://www.w3.org/TR/SVG2/paths.html#PathDataLinetoCommands"
 
@@ -215,7 +217,7 @@ BlSvgPathParser >> readHorizontalLine [
 		whileTrue: [ handler horizontalLineTo: x ]
 ]
 
-{ #category : #'private - parsing' }
+{ #category : 'private - parsing' }
 BlSvgPathParser >> readInteger [
 
 	| result |
@@ -227,7 +229,7 @@ BlSvgPathParser >> readInteger [
 	^ result
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlSvgPathParser >> readLine [
 	"See: https://www.w3.org/TR/SVG2/paths.html#PathDataLinetoCommands"
 
@@ -241,7 +243,7 @@ BlSvgPathParser >> readLine [
 	[ pt := self readPoint. pt notNil ] whileTrue: [ handler lineTo: pt ]
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlSvgPathParser >> readMove [
 	"See: https://www.w3.org/TR/SVG2/paths.html#PathDataMovetoCommands"
 
@@ -254,7 +256,7 @@ BlSvgPathParser >> readMove [
 	[ pt := self readPoint. pt notNil ] whileTrue: [ handler lineTo: pt ]
 ]
 
-{ #category : #'private - parsing' }
+{ #category : 'private - parsing' }
 BlSvgPathParser >> readPoint [
 	"A path data permits specifying points without comma separator."
 	
@@ -270,7 +272,7 @@ BlSvgPathParser >> readPoint [
 	^ x @ y
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlSvgPathParser >> readQuadraticBezier [ 
 	"See: https://www.w3.org/TR/SVG2/paths.html#PathDataQuadraticBezierCommands"
 
@@ -291,7 +293,7 @@ BlSvgPathParser >> readQuadraticBezier [
 	] repeat
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlSvgPathParser >> readSmoothCubicBezier [
 	"See: https://www.w3.org/TR/SVG2/paths.html#PathDataCubicBezierCommands"
 
@@ -312,7 +314,7 @@ BlSvgPathParser >> readSmoothCubicBezier [
 	] repeat
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlSvgPathParser >> readSmoothQuadraticBezier [
 	"See: https://www.w3.org/TR/SVG2/paths.html#PathDataQuadraticBezierCommands"
 
@@ -332,14 +334,14 @@ BlSvgPathParser >> readSmoothQuadraticBezier [
 	] repeat
 ]
 
-{ #category : #API }
+{ #category : 'API' }
 BlSvgPathParser >> readUpToEnd [
 
 	[ self skipBlanks. stream atEnd ] whileFalse: [
 		self readCommandNamed: stream next ]
 ]
 
-{ #category : #'private - commands' }
+{ #category : 'private - commands' }
 BlSvgPathParser >> readVerticalLine [
 	"See: https://www.w3.org/TR/SVG2/paths.html#PathDataLinetoCommands"
 
@@ -354,14 +356,14 @@ BlSvgPathParser >> readVerticalLine [
 		whileTrue: [ handler verticalLineTo: y ]
 ]
 
-{ #category : #'private - parsing' }
+{ #category : 'private - parsing' }
 BlSvgPathParser >> skipBlanks [
 
 	[ stream atEnd not and: [ stream peek isSeparator ] ]
 		whileTrue: [ stream next ]
 ]
 
-{ #category : #'private - parsing' }
+{ #category : 'private - parsing' }
 BlSvgPathParser >> skipBlanksAndComma [
 	[ stream atEnd not and: [
 		stream peek isSeparator or: [

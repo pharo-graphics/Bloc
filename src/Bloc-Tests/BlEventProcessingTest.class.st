@@ -1,10 +1,12 @@
 Class {
-	#name : #BlEventProcessingTest,
-	#superclass : #BlEventTestCase,
-	#category : #'Bloc-Tests-Universe'
+	#name : 'BlEventProcessingTest',
+	#superclass : 'BlEventTestCase',
+	#category : 'Bloc-Tests-Universe',
+	#package : 'Bloc-Tests',
+	#tag : 'Universe'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlEventProcessingTest >> testClickCreation [
 	self sendInsideTargetEvent: (BlMouseDownEvent primary).
 	self assertFiredEventIs: BlMouseDownEvent target: self child withPropagation: true.
@@ -20,7 +22,7 @@ BlEventProcessingTest >> testClickCreation [
 	self assertFiredEventIs: BlMouseDownEvent target: self child withPropagation: true
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlEventProcessingTest >> testDblClickCreation [
 
 	self sendInsideTargetEvent: (BlMouseDownEvent primary).
@@ -38,7 +40,7 @@ BlEventProcessingTest >> testDblClickCreation [
 	self assertFiredEventIs:  BlDoubleClickEvent target: self child withPropagation: true.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlEventProcessingTest >> testDragCreation [
 	
 	"make child draggable"
@@ -67,7 +69,7 @@ BlEventProcessingTest >> testDragCreation [
 	self assertFiredEventIs: BlDropEvent target: self root withPropagation: true
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlEventProcessingTest >> testEnterExitCreation [
 
 	self sendOutsideTargetEvent: BlMouseMoveEvent new.
@@ -89,7 +91,7 @@ BlEventProcessingTest >> testEnterExitCreation [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlEventProcessingTest >> testMouseMove [
 	
 	self sendInsideTargetEvent: BlMouseMoveEvent primary.
@@ -105,7 +107,7 @@ BlEventProcessingTest >> testMouseMove [
 	self assertFiredEventIs: BlMouseMoveEvent target: self root withPropagation: true.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlEventProcessingTest >> testNotDraggable [
 	self sendInsideTargetEvent: BlMouseDownEvent primary.
 	self assertFiredEventIs: BlMouseDownEvent target: self child withPropagation: true.

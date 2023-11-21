@@ -1,6 +1,6 @@
-Extension { #name : #BlTextParagraph }
+Extension { #name : 'BlTextParagraph' }
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlTextParagraph >> aeDrawOn: aCanvas [	
 	line aeDrawOn: aCanvas
 ]

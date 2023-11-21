@@ -1,6 +1,6 @@
-Extension { #name : #BlElementCachedExplicitTransformation }
+Extension { #name : 'BlElementCachedExplicitTransformation' }
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlElementCachedExplicitTransformation >> aeApplyTo: aeCanvas [
 
 	self ensureMatrix.

@@ -26,19 +26,20 @@ Click on the buttons to the left from the rectangular element to see what happen
 
 "
 Class {
-	#name : #BlElementPropertyExample,
-	#superclass : #BlExampleTest,
-	#category : #'Bloc-Tests'
+	#name : 'BlElementPropertyExample',
+	#superclass : 'BlExampleTest',
+	#category : 'Bloc-Tests',
+	#package : 'Bloc-Tests'
 }
 
-{ #category : #properties }
+{ #category : 'properties' }
 BlElementPropertyExample >> backgroundProperty [
 
 	<sampleInstance>
 	^ BlElementBackgroundProperty new background: (Color gray alpha: 0.2)
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 BlElementPropertyExample >> borderProperty [
 
 	<sampleInstance>
@@ -46,7 +47,7 @@ BlElementPropertyExample >> borderProperty [
 		  (BlBorder paint: Color veryLightGray width: 2)
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlElementPropertyExample >> elementWithMultipleProperties [
 
 	<sampleInstance>
@@ -62,7 +63,7 @@ BlElementPropertyExample >> elementWithMultipleProperties [
 	^ anElement
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 BlElementPropertyExample >> geometryProperty [
 
 	<sampleInstance>
@@ -70,14 +71,14 @@ BlElementPropertyExample >> geometryProperty [
 		  (BlRoundedRectangleGeometry cornerRadius: 4)
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 BlElementPropertyExample >> heightProperty [
 
 	<sampleInstance>
 	^ BlElementLayoutVerticalResizerProperty new exact: 100
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlElementPropertyExample >> propertyCleanUp [
 
 	<sampleInstance>
@@ -124,7 +125,7 @@ BlElementPropertyExample >> propertyCleanUp [
 					   border: (BlBorder paint: Color veryLightGray width: 2)) }
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 BlElementPropertyExample >> widthProperty [
 
 	<sampleInstance>

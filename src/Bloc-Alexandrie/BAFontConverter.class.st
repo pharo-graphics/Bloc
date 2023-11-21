@@ -1,6 +1,6 @@
 Class {
-	#name : #BAFontConverter,
-	#superclass : #Object,
+	#name : 'BAFontConverter',
+	#superclass : 'Object',
 	#instVars : [
 		'slantTranslator',
 		'stretchTranslator',
@@ -9,16 +9,18 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Alexandrie-Fonts'
+	#category : 'Bloc-Alexandrie-Fonts',
+	#package : 'Bloc-Alexandrie',
+	#tag : 'Fonts'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BAFontConverter class >> uniqueInstance [
 
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BAFontConverter >> faceFor: aBlFont [
 
 	^ AeFontManager globalInstance
@@ -30,7 +32,7 @@ BAFontConverter >> faceFor: aBlFont [
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BAFontConverter >> initialize [
 
 	super initialize.
