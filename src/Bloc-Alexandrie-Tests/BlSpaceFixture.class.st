@@ -593,7 +593,7 @@ BlSpaceFixture >> buildGradients [
 
 	aRadialGradient := BlRadialGradientPaint new
 			innerCenter:  30 asPoint;
-			innerRadius:  20;
+			innerRadius:  0;
 			outerCenter: 30 asPoint;
 			outerRadius: 20;
 			stops: {
