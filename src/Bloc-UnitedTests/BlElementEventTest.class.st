@@ -12,6 +12,7 @@ Class {
 BlElementEventTest >> child [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  size: 100 @ 75;
 		  background: Color red
@@ -21,6 +22,7 @@ BlElementEventTest >> child [
 BlElementEventTest >> container [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  size: 500 @ 400;
 		  border: (BlBorder builder dashed
@@ -33,6 +35,7 @@ BlElementEventTest >> container [
 BlElementEventTest >> parent [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  size: 400 @ 300;
 		  background: (Color gray alpha: 0.3)
@@ -42,6 +45,7 @@ BlElementEventTest >> parent [
 BlElementEventTest >> testAddedToParent [
 
 	<sampleInstance>
+	<demo>
 	| wasAdded parent child container |
 	wasAdded := 0.
 
@@ -66,6 +70,7 @@ BlElementEventTest >> testAddedToParent [
 BlElementEventTest >> testBackgroundChanged [
 
 	<sampleInstance>
+	<demo>
 	| backgroundChanged element |
 	backgroundChanged := 0.
 
@@ -84,6 +89,7 @@ BlElementEventTest >> testBackgroundChanged [
 BlElementEventTest >> testBorderChanged [
 
 	<sampleInstance>
+	<demo>
 	| borderChanged element |
 	borderChanged := 0.
 
@@ -105,6 +111,7 @@ BlElementEventTest >> testBorderChanged [
 BlElementEventTest >> testExtentChanged [
 
 	<sampleInstance>
+	<demo>
 	| extentChanged element |
 	extentChanged := 0.
 
@@ -152,6 +159,7 @@ BlElementEventTest >> testExtentChangedChangingWithTheSameSizeDoesNotRaiseEvent 
 BlElementEventTest >> testLayoutChanged [
 
 	<sampleInstance>
+	<demo>
 	| layoutChanged element |
 	layoutChanged := 0.
 
@@ -170,6 +178,7 @@ BlElementEventTest >> testLayoutChanged [
 BlElementEventTest >> testPositionChanged [
 
 	<sampleInstance>
+	<demo>
 	| positionChanged parent child |
 	positionChanged := 0.
 

@@ -12,6 +12,7 @@ Class {
 BlFrameLayoutMultipleChildrenTest >> testChildElementWithExactSize140per140 [
 
 	<sampleInstance>
+	<demo>
 	| element |
 	element := self testChildElementWithVisualProperties.
 	element constraintsDo: [ :c |
@@ -27,6 +28,7 @@ BlFrameLayoutMultipleChildrenTest >> testChildElementWithExactSize140per140 [
 BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignLeftCenterAndExactChildCenter [
 
 	<sampleInstance>
+	<demo>
 	| parent childOne childTwo |
 	childOne := self testChildElementWithExactSize140per140.
 	childTwo := self testChildElementWithExactSize100per50.
@@ -54,6 +56,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignLeftCenterAnd
 BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignTopLeftAndExactChildRightCenter [
 
 	<sampleInstance>
+	<demo>
 	| parent childOne childTwo |
 	childOne := self testChildElementWithExactSize140per140.
 	childTwo := self testChildElementWithExactSize100per50.
@@ -78,6 +81,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignTopLeftAndExa
 BlFrameLayoutMultipleChildrenTest >> testElementWithNineExactChildrenWithAllAlignments [
 
 	<sampleInstance>
+	<demo>
 	| parent childTopLeft childTopCenter childTopRight childCenterLeft childCenterCenter childCenterRight childBottomLeft childBottomCenter childBottomRight |
 	childTopLeft := BlTextElement new
 		                text: 'Top Left' asRopedText;
@@ -154,6 +158,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithNineExactChildrenWithAllAlig
 BlFrameLayoutMultipleChildrenTest >> testElementWithTwoChildrenMatchingParentWithWeight [
 
 	<sampleInstance>
+	<demo>
 	| parent childOne childTwo |
 	childOne := self testChildElementMatchingParent.
 	childTwo := self testChildElementMatchingParent.
@@ -185,6 +190,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithTwoChildrenMatchingParentWit
 BlFrameLayoutMultipleChildrenTest >> testElementWithTwoExactChildrenAndFitContentParent [
 
 	<sampleInstance>
+	<demo>
 	| parent childOne childTwo |
 	childOne := self testChildElementWithVisualProperties.
 	childTwo := self testChildElementWithVisualProperties.
@@ -221,6 +227,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithTwoExactChildrenAndFitConten
 BlFrameLayoutMultipleChildrenTest >> testElementWithTwoExactChildrenAndNoAlignment [
 
 	<sampleInstance>
+	<demo>
 	| parent childOne childTwo |
 	childOne := self testChildElementWithExactSize140per140.
 	childTwo := self testChildElementWithExactSize100per50.

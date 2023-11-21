@@ -10,7 +10,9 @@ Class {
 
 { #category : #'test seed' }
 BlElementBoundsTest >> child [
+
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  size: self childExtent;
 		  position: self childPosition;
@@ -29,7 +31,9 @@ BlElementBoundsTest >> childPosition [
 
 { #category : #'test seed' }
 BlElementBoundsTest >> parent [
+
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  size: self parentExtent;
 		  position: self parentPosition;
@@ -48,10 +52,12 @@ BlElementBoundsTest >> parentPosition [
 
 { #category : #'test seed' }
 BlElementBoundsTest >> parentWithChild [
+
 	<sampleInstance>
+	<demo>
 	^ self parent
-		addChild: self child;
-		forceLayout
+		  addChild: self child;
+		  forceLayout
 ]
 
 { #category : #tests }

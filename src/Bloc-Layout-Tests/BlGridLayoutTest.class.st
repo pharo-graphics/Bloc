@@ -22,6 +22,7 @@ BlGridLayoutTest >> childExact: aPoint [
 BlGridLayoutTest >> matchWidthFitHeight [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new constraintsDo: [ :c |
 		  c horizontal matchParent.
 		  c vertical fitContent ]
@@ -31,6 +32,7 @@ BlGridLayoutTest >> matchWidthFitHeight [
 BlGridLayoutTest >> testExampleCellFitContent [
 
 	<sampleInstance>
+	<demo>
 	| parent child subchild |
 	parent := self testParentWithGridHorizontalLayout.
 	parent constraintsDo: [ :c |
@@ -66,6 +68,7 @@ BlGridLayoutTest >> testExampleCellFitContent [
 BlGridLayoutTest >> testExampleCellSpacingHorizontal1 [
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB |
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
@@ -96,6 +99,7 @@ BlGridLayoutTest >> testExampleCellSpacingHorizontal1 [
 BlGridLayoutTest >> testExampleCellSpacingVertical1 [
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB |
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
@@ -435,6 +439,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoInFourElements3 [
 BlGridLayoutTest >> testExampleOneCellExactChildInExactParent [
 
 	<sampleInstance>
+	<demo>
 	| parent child |
 	child := self childExact: 200 @ 300.
 
@@ -457,6 +462,7 @@ BlGridLayoutTest >> testExampleOneCellExactChildInExactParent [
 BlGridLayoutTest >> testExampleOneCellExactChildInFitParent [
 
 	<sampleInstance>
+	<demo>
 	| parent child |
 	child := self childExact: 200 @ 300.
 
@@ -479,6 +485,7 @@ BlGridLayoutTest >> testExampleOneCellExactChildInFitParent [
 BlGridLayoutTest >> testExampleOneCellMatchChildInExactParent [
 
 	<sampleInstance>
+	<demo>
 	| parent child |
 	child := self testChildElementMatchingParent.
 
@@ -501,6 +508,7 @@ BlGridLayoutTest >> testExampleOneCellMatchChildInExactParent [
 BlGridLayoutTest >> testExampleSpanDistributeOneColumn [
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB childC |
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
@@ -545,6 +553,7 @@ BlGridLayoutTest >> testExampleSpanDistributeOneColumn [
 BlGridLayoutTest >> testExampleSpanDistributeOneRow [
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB childC |
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
@@ -588,6 +597,7 @@ BlGridLayoutTest >> testExampleSpanDistributeOneRow [
 BlGridLayoutTest >> testParentWithGridHorizontalLayout [
 
 	<sampleInstance>
+	<demo>
 	| element |
 	element := BlElement new
 		           border: (BlBorder builder

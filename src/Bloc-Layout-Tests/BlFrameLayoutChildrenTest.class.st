@@ -10,13 +10,14 @@ Class {
 
 { #category : #tests }
 BlFrameLayoutChildrenTest >> testChildElementWithExactSize100per50 [
+
 	<sampleInstance>
+	<demo>
 	| element |
 	element := self testChildElementWithVisualProperties.
-	element
-		constraintsDo: [ :c | 
-			c horizontal exact: 100.
-			c vertical exact: 50 ].
+	element constraintsDo: [ :c |
+		c horizontal exact: 100.
+		c vertical exact: 50 ].
 	self assert: element position equals: 0 @ 0.
 	self assert: element extent equals: 0 @ 0.
 	self assertExactConstraint: 100 @ 50 forElement: element.
@@ -25,7 +26,9 @@ BlFrameLayoutChildrenTest >> testChildElementWithExactSize100per50 [
 
 { #category : #tests }
 BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize [
+
 	<sampleInstance>
+	<demo>
 	| element |
 	element := self parentWithFixedSize.
 	element layout: BlFrameLayout new.
@@ -35,18 +38,19 @@ BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize [
 
 { #category : #tests }
 BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize300per250 [
+
 	<sampleInstance>
+	<demo>
 	| element |
 	element := BlElement new
-		layout: BlFrameLayout new;
-		border:
-			(BlBorder builder
-				dashed;
-				paint: Color red;
-				width: 3;
-				build);
-		size: 300 @ 250;
-		yourself.
+		           layout: BlFrameLayout new;
+		           border: (BlBorder builder
+				            dashed;
+				            paint: Color red;
+				            width: 3;
+				            build);
+		           size: 300 @ 250;
+		           yourself.
 	self assert: element position equals: 0 @ 0.
 	self assert: element extent equals: 0 @ 0.
 	self assert: element constraints horizontal resizer size equals: 300.

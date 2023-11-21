@@ -12,6 +12,7 @@ Class {
 BlMetricsInspectorExample >> elementWithMetrics [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  margin: (BlInsets
 				   top: 1
@@ -45,6 +46,7 @@ BlMetricsInspectorExample >> metricsPhlowView [
 BlMetricsInspectorExample >> testBasicMetricsInspector [
 
 	<sampleInstance>
+	<demo>
 	| anInspector |
 	anInspector := BlMetricsInspector new.
 	self assert: anInspector childrenCount equals: 1.
@@ -55,6 +57,7 @@ BlMetricsInspectorExample >> testBasicMetricsInspector [
 BlMetricsInspectorExample >> testMetricsInspectorOnElementWithMetrics [
 
 	<sampleInstance>
+	<demo>
 	| anInspector anElement |
 	anInspector := self testBasicMetricsInspector.
 	anElement := self elementWithMetrics.
@@ -79,6 +82,7 @@ BlMetricsInspectorExample >> testMetricsInspectorOnElementWithMetrics [
 BlMetricsInspectorExample >> testMetricsInspectorOnUninitializedElement [
 
 	<sampleInstance>
+	<demo>
 	| anInspector anElement |
 	anInspector := self testBasicMetricsInspector.
 	anElement := BlElement new.

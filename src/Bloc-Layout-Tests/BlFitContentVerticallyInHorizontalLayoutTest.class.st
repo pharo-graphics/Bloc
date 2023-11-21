@@ -12,6 +12,7 @@ Class {
 BlFitContentVerticallyInHorizontalLayoutTest >> blue [
 
 	<sampleInstance>
+	<demo>
 	^ self box
 		  size: self blueWidth @ self blueHeight;
 		  border: (BlBorder paint: (Color blue alpha: 0.6) width: 1);
@@ -41,6 +42,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> blueWidth [
 BlFitContentVerticallyInHorizontalLayoutTest >> box [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 ]
 
@@ -54,6 +56,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> boxMargin [
 BlFitContentVerticallyInHorizontalLayoutTest >> container [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  constraintsDo: [ :c |
 			  c horizontal matchParent.
@@ -72,6 +75,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> containerPadding [
 BlFitContentVerticallyInHorizontalLayoutTest >> flow [
 
 	<sampleInstance>
+	<demo>
 	^ self container
 		  layout: BlFlowLayout horizontal;
 		  addChild: (self layoutLabel: 'Flow')
@@ -81,6 +85,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> flow [
 BlFitContentVerticallyInHorizontalLayoutTest >> green [
 
 	<sampleInstance>
+	<demo>
 	^ self box
 		  size: self greenWidth @ self greenHeight;
 		  border:
@@ -111,6 +116,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> greenWidth [
 BlFitContentVerticallyInHorizontalLayoutTest >> grid [
 
 	<sampleInstance>
+	<demo>
 	^ self container
 		  layout: BlGridLayout horizontal;
 		  addChild: (self layoutLabel: 'Grid')
@@ -131,6 +137,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> layoutLabel: aString [
 BlFitContentVerticallyInHorizontalLayoutTest >> list [
 
 	<sampleInstance>
+	<demo>
 	^ self container
 		  layout: BlLinearLayout horizontal;
 		  addChild: (self layoutLabel: 'List')
@@ -177,6 +184,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> oneColumnWidthDepth: aNumber [
 BlFitContentVerticallyInHorizontalLayoutTest >> red [
 
 	<sampleInstance>
+	<demo>
 	^ self box
 		  size: self redWidth @ self redHeight;
 		  background: (Color red alpha: 0.3);
@@ -210,6 +218,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> redWidth [
 BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlow [
 
 	<sampleInstance>
+	<demo>
 	| flow |
 	flow := self flow.
 	flow width: (self oneColumnWidthDepth: 1).
@@ -228,6 +237,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlow [
 BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowGridGrid [
 
 	<sampleInstance>
+	<demo>
 	| flow firstGrid secondGrid |
 	flow := self flow.
 	flow addChildren: {
@@ -254,6 +264,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowGridGrid [
 BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowList [
 
 	<sampleInstance>
+	<demo>
 	| flow list |
 	flow := self flow.
 	flow addChildren: {
@@ -279,6 +290,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowList [
 BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowListGrid [
 
 	<sampleInstance>
+	<demo>
 	| flow list grid |
 	flow := self flow.
 	flow addChildren: {
@@ -305,6 +317,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowListGrid [
 BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowListList [
 
 	<sampleInstance>
+	<demo>
 	| flow firstList secondList |
 	flow := self flow.
 	flow addChildren: {
@@ -331,6 +344,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowListList [
 BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowGridGrid [
 
 	<sampleInstance>
+	<demo>
 	| flow firstGrid secondGrid |
 	flow := self flow.
 	flow addChildren: {
@@ -361,6 +375,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowGridGrid [
 BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowListGrid [
 
 	<sampleInstance>
+	<demo>
 	| flow list grid |
 	flow := self flow.
 	flow addChildren: {
@@ -387,6 +402,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowListGrid [
 BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowListList [
 
 	<sampleInstance>
+	<demo>
 	| flow firstList secondList |
 	flow := self flow.
 	flow addChildren: {
@@ -417,6 +433,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowListList [
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlow [
 
 	<sampleInstance>
+	<demo>
 	| flow |
 	flow := self flow.
 	flow width: (self twoColumnWidthDepth: 1).
@@ -435,6 +452,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlow [
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowFlow [
 
 	<sampleInstance>
+	<demo>
 	| firstFlow secondFlow thirdFlow |
 	firstFlow := self flow.
 	firstFlow addChildren: {
@@ -461,6 +479,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowFlow [
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowList [
 
 	<sampleInstance>
+	<demo>
 	| firstFlow secondFlow list |
 	firstFlow := self flow.
 	firstFlow addChildren: {
@@ -487,6 +506,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowList [
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridGrid [
 
 	<sampleInstance>
+	<demo>
 	| flow firstGrid secondGrid |
 	flow := self flow.
 	flow addChildren: {
@@ -513,6 +533,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridGrid [
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridList [
 
 	<sampleInstance>
+	<demo>
 	| flow grid list |
 	flow := self flow.
 	flow addChildren: {
@@ -539,6 +560,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridList [
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowList [
 
 	<sampleInstance>
+	<demo>
 	| flow list |
 	flow := self flow.
 	flow addChildren: {
@@ -561,6 +583,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowList [
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowListGrid [
 
 	<sampleInstance>
+	<demo>
 	| flow list grid |
 	flow := self flow.
 	flow addChildren: {
@@ -587,6 +610,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowListGrid [
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowListList [
 
 	<sampleInstance>
+	<demo>
 	| flow firstList secondList |
 	flow := self flow.
 	flow addChildren: {
