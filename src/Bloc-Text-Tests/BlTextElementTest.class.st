@@ -33,6 +33,7 @@ BlTextElementTest >> testLoremIpsumText [
 BlTextElementTest >> testSimpleText [
 
 	<sampleInstance>
+	<demo>
 	| text textElement |
 	text := BlRopedText string: (String loremIpsum: 50).
 	textElement := BlTextElement new.
@@ -46,6 +47,7 @@ BlTextElementTest >> testSimpleText [
 BlTextElementTest >> testTextAttributes [
 
 	<sampleInstance>
+	<demo>
 	| text lineElements textElement |
 	text := ('Hello world!' , String cr , 'How are you?') asRopedText.
 	text
@@ -81,6 +83,7 @@ BlTextElementTest >> testTextAttributes [
 BlTextElementTest >> testTextElement [
 
 	<sampleInstance>
+	<demo>
 	| text textElement |
 	text := self testHelloText.
 	textElement := BlTextElement new.

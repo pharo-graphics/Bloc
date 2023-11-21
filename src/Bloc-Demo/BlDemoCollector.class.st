@@ -70,7 +70,7 @@ BlDemoCollector >> ensureClassFor: aClass [
 { #category : #initialization }
 BlDemoCollector >> initialize [
 	super initialize.
-	pragma := #sampleInstance.
+	pragma := #demo.
 	dict := IdentityDictionary new.
 ]
 
