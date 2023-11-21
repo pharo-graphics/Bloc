@@ -14,8 +14,9 @@ Class {
 
 { #category : #accessing }
 BlRadialGradientPaint >> center: aPoint [
+	"Set the innerCenter and outerCenter at the specified Point."
 
-  innerCenter := outerCenter := aPoint
+	innerCenter := outerCenter := aPoint
 ]
 
 { #category : #accessing }
@@ -72,6 +73,8 @@ BlRadialGradientPaint >> outerRadius: aNumber [
 
 { #category : #accessing }
 BlRadialGradientPaint >> radius: aNumber [
-  innerRadius := 0.0.
+	"Set the outerRadius. The innerRadius will be set to zero."
+
+	innerRadius := 0.0.
 	outerRadius := aNumber
 ]
