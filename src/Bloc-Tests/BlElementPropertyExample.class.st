@@ -81,6 +81,7 @@ BlElementPropertyExample >> heightProperty [
 BlElementPropertyExample >> propertyCleanUp [
 
 	<sampleInstance>
+	<demo>
 	| backgroundProperty |
 	backgroundProperty := self backgroundProperty.
 

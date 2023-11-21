@@ -3,14 +3,12 @@ I have been automatically converted and probably manually tweaked from BlBasicEx
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlBasicTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-UnitedTests-Basic',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Basic'
+	#name : #BlBasicTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-UnitedTests-Basic'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testAsForm [
 
 	| anElement |
@@ -32,7 +30,7 @@ BlBasicTest >> testAsForm [
 		equals: Color green
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testBorderRopedText [
 <sampleInstance>	
 | aText |
@@ -45,10 +43,11 @@ self assert: aText rope attributes equals: { (BlFontSizeAttribute size: 30).
 ^ aText
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testBorderTextElement [
 
 	<sampleInstance>
+	<demo>
 	| aText |
 	aText := self testBorderRopedText.
 
@@ -59,7 +58,7 @@ BlBasicTest >> testBorderTextElement [
 			  c frame horizontal alignCenter ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testBottomBorder [
 
 	<sampleInstance>
@@ -67,18 +66,22 @@ BlBasicTest >> testBottomBorder [
 		  c frame vertical alignBottom ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testButtons [
+
 	<sampleInstance>
+	<demo>
 	^ self testContainer
 		  addChild: (self testColoredButton position: 100 @ 100);
 		  addChild: (self testFabButton position: 300 @ 88);
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testCircle [
+
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  geometry: BlCircleGeometry new;
 		  background: (Color red alpha: 0.8);
@@ -86,10 +89,11 @@ BlBasicTest >> testCircle [
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testColoredButton [
 
 	<sampleInstance>
+	<demo>
 	| button labelText label |
 	button := BlElement new
 		          background: (Color
@@ -126,10 +130,11 @@ BlBasicTest >> testColoredButton [
 	^ button
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testContainer [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  background: Color white;
 		  constraintsDo: [ :c |
@@ -138,10 +143,11 @@ BlBasicTest >> testContainer [
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testElementWithAllBorders [
 
 	<sampleInstance>
+	<demo>
 	^ self testContainer
 		  layout: BlFrameLayout new;
 		  size: 300 @ 150;
@@ -152,10 +158,11 @@ BlBasicTest >> testElementWithAllBorders [
 		  addChild: (self testBottomBorder background: Color red)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testElementWithEllipticBorders [
 
 	<sampleInstance>
+	<demo>
 	^ self testContainer
 		  layout: BlFrameLayout new;
 		  size: 300 @ 150;
@@ -175,16 +182,17 @@ BlBasicTest >> testElementWithEllipticBorders [
 		  addChild: self testBorderTextElement
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testElementsWithShadow [
 
 	<sampleInstance>
+	<demo>
 	^ self testContainer addChildren: {
 			  (self testRectangleWithShadow position: 50 @ 100).
 			  (self testEllipseWithShadow position: 500 @ 100) }
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testEllipse [
 
 	<sampleInstance>
@@ -194,10 +202,11 @@ BlBasicTest >> testEllipse [
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testEllipseWithShadow [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  geometry: BlEllipseGeometry new;
 		  size: 300 @ 150;
@@ -208,10 +217,11 @@ BlBasicTest >> testEllipseWithShadow [
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testFabButton [
 
 	<sampleInstance>
+	<demo>
 	| button icon |
 	button := BlElement new
 		          background: (Color
@@ -253,7 +263,7 @@ BlBasicTest >> testFabButton [
 	^ button
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testHorizontalBorder [
 	<sampleInstance>
 	^ BlElement new constraintsDo: [ :c |
@@ -261,7 +271,7 @@ BlBasicTest >> testHorizontalBorder [
 		  c horizontal matchParent ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testLeftBorder [
 
 	<sampleInstance>
@@ -269,7 +279,7 @@ BlBasicTest >> testLeftBorder [
 		  c frame horizontal alignLeft ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testLinearGradient [
 
 	<sampleInstance>
@@ -283,10 +293,11 @@ BlBasicTest >> testLinearGradient [
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testPolygon [
 
 	<sampleInstance>
+	<demo>
 	^ (BlPolygonGeometry vertices: {
 				   (100 @ 10).
 				   (40 @ 198).
@@ -300,10 +311,11 @@ BlBasicTest >> testPolygon [
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testRectangle [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  geometry: BlRoundedRectangleGeometry new;
 		  size: 200 @ 100;
@@ -313,10 +325,11 @@ BlBasicTest >> testRectangle [
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testRectangleWithImage [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  size: 400 @ 200;
 		  position: 100 @ 100;
@@ -326,10 +339,11 @@ BlBasicTest >> testRectangleWithImage [
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testRectangleWithLinearGradient [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  size: 300 @ 200;
 		  position: 100 @ 100;
@@ -338,10 +352,11 @@ BlBasicTest >> testRectangleWithLinearGradient [
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testRectangleWithShadow [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  size: 300 @ 150;
 		  position: 50 @ 50;
@@ -351,7 +366,7 @@ BlBasicTest >> testRectangleWithShadow [
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testRightBorder [
 
 	<sampleInstance>
@@ -359,10 +374,11 @@ BlBasicTest >> testRightBorder [
 		  c frame horizontal alignRight ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testRoundedRectangle [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  geometry: (BlRoundedRectangleGeometry cornerRadius: 20);
 		  size: 150 @ 80;
@@ -371,16 +387,17 @@ BlBasicTest >> testRoundedRectangle [
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testShadowEffect [
 	<sampleInstance>
 	 
 	^ BlGaussianShadowEffect color: Color black width: 10 offset: 10 @ 10
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testShapes [
 
+	<sampleInstance>
 	^ self testContainer addChildren: {
 			  (self testCircle position: 250 @ 200).
 			  (self testEllipse position: 10 @ 20).
@@ -390,10 +407,11 @@ BlBasicTest >> testShapes [
 			  (self testSquare position: 400 @ 200) }
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testSquare [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  geometry: BlRoundedRectangleGeometry new;
 		  size: 80 @ 80;
@@ -402,7 +420,7 @@ BlBasicTest >> testSquare [
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testTopBorder [
 	<sampleInstance>
 	
@@ -410,7 +428,7 @@ BlBasicTest >> testTopBorder [
 		  c frame vertical alignTop ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicTest >> testVerticalBorder [
 
 	<sampleInstance>

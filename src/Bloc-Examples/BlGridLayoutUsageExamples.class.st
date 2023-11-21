@@ -14,6 +14,7 @@ Class {
 BlGridLayoutUsageExamples >> exampleDistributed2x2Grid [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 e4 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -57,6 +58,7 @@ BlGridLayoutUsageExamples >> exampleDistributed2x2Grid [
 BlGridLayoutUsageExamples >> exampleDistributedWithSpan2x2Grid [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -96,6 +98,7 @@ BlGridLayoutUsageExamples >> exampleDistributedWithSpan2x2Grid [
 BlGridLayoutUsageExamples >> exampleDistributedWithWeight2x2Grid [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 e4 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -141,6 +144,7 @@ BlGridLayoutUsageExamples >> exampleDistributedWithWeight2x2Grid [
 BlGridLayoutUsageExamples >> exampleHorizontal2x1Grid [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 el |
 	e1 := BlElement new
 		      size: 150 asPoint;
@@ -166,6 +170,7 @@ BlGridLayoutUsageExamples >> exampleHorizontal2x1Grid [
 BlGridLayoutUsageExamples >> exampleHorizontalSpacing2x1Grid [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -195,6 +200,7 @@ BlGridLayoutUsageExamples >> exampleHorizontalSpacing2x1Grid [
 BlGridLayoutUsageExamples >> exampleInCellAlignment2x2Grid [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -235,6 +241,7 @@ BlGridLayoutUsageExamples >> exampleInCellAlignment2x2Grid [
 BlGridLayoutUsageExamples >> exampleNautilusGrid [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 e4 e5 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -287,6 +294,7 @@ BlGridLayoutUsageExamples >> exampleNautilusGrid [
 BlGridLayoutUsageExamples >> exampleSimple2x2Grid [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 e4 el |
 	e1 := BlElement new
 		      size: 150 asPoint;
@@ -322,6 +330,7 @@ BlGridLayoutUsageExamples >> exampleSimple2x2Grid [
 BlGridLayoutUsageExamples >> exampleSpacing9x9Grid [
 
 	<sampleInstance>
+	<demo>
 	| children el dim |
 	dim := 9.
 
@@ -353,6 +362,7 @@ BlGridLayoutUsageExamples >> exampleSpacing9x9Grid [
 BlGridLayoutUsageExamples >> exampleVertical1x2Grid [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 el |
 	e1 := BlElement new
 		      size: 150 asPoint;
@@ -378,6 +388,7 @@ BlGridLayoutUsageExamples >> exampleVertical1x2Grid [
 BlGridLayoutUsageExamples >> exampleVerticalSpacing1x2Grid [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -407,6 +418,7 @@ BlGridLayoutUsageExamples >> exampleVerticalSpacing1x2Grid [
 BlGridLayoutUsageExamples >> verticalSpan [
 
 	<sampleInstance>
+	<demo>
 	| grid child1 child2 child3 |
 	grid := BlElement new.
 	grid size: 500 @ 400.

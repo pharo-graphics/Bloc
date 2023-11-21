@@ -3,14 +3,12 @@ I have been automatically converted and probably manually tweaked from BlEllipse
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlEllipseGeometryTest',
-	#superclass : 'BlGeometryTest',
-	#category : 'Bloc-UnitedTests-Geometry',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Geometry'
+	#name : #BlEllipseGeometryTest,
+	#superclass : #BlGeometryTest,
+	#category : 'Bloc-UnitedTests-Geometry'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEllipseGeometryTest >> testDefault [
 	<sampleInstance>
 	

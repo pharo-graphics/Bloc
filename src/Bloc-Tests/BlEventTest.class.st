@@ -52,6 +52,7 @@ BlEventTest >> simulateClickOnOverlapped [
 BlEventTest >> testBlueElement [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new background: Color blue
 ]
 
@@ -59,6 +60,7 @@ BlEventTest >> testBlueElement [
 BlEventTest >> testChildConsumesEventWithHandler [
 
 	<sampleInstance>
+	<demo>
 	| parent child clicks |
 	clicks := OrderedCollection new.
 
@@ -159,6 +161,7 @@ BlEventTest >> testFireCustomEventWithCustomTarget [
 BlEventTest >> testGrayElement [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new background: Color veryVeryLightGray
 ]
 
@@ -166,6 +169,7 @@ BlEventTest >> testGrayElement [
 BlEventTest >> testParentWithEventFilter [
 
 	<sampleInstance>
+	<demo>
 	| parent child clicks |
 	clicks := OrderedCollection new.
 
@@ -195,6 +199,7 @@ BlEventTest >> testParentWithEventFilter [
 BlEventTest >> testRedElement [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new background: Color red
 ]
 
@@ -230,6 +235,7 @@ BlEventTest >> testSimulateClick [
 BlEventTest >> testSimulateClickOnChildInDisabledParent [
 
 	<sampleInstance>
+	<demo>
 	| parent red mouseDown mouseUp click |
 	parent := self testGrayElement.
 	parent size: 300 @ 300.
@@ -347,6 +353,7 @@ BlEventTest >> testSimulateClickOnChildInUnresponsiveParent [
 BlEventTest >> testSimulateClickOnTransformedAndRelocated [
 
 	<sampleInstance>
+	<demo>
 	| element mouseDown mouseUp click |
 	element := self testSimulateClick.
 	element size: 10 @ 10.
@@ -385,6 +392,7 @@ BlEventTest >> testSimulateClickOnUnresponsiveOverlapped [
 	handle mouse down/up and click events"
 
 	<sampleInstance>
+	<demo>
 	| container blue red mouseDown mouseUp click |
 	container := self testGrayElement.
 	container size: 300 @ 300.

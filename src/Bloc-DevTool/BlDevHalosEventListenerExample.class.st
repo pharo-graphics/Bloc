@@ -43,6 +43,7 @@ BlDevHalosEventListenerExample >> basicHalosEventListener [
 BlDevHalosEventListenerExample >> container [
 
 	<sampleInstance>
+	<demo>
 	| anElement |
 	anElement := self element.
 	anElement
@@ -57,6 +58,7 @@ BlDevHalosEventListenerExample >> container [
 BlDevHalosEventListenerExample >> containerWithRectangle [
 
 	<sampleInstance>
+	<demo>
 	| anElement |
 	anElement := self container.
 	anElement addChild: self rectangle.
@@ -111,6 +113,7 @@ BlDevHalosEventListenerExample >> putInSpace: aBlElement [
 BlDevHalosEventListenerExample >> rectangle [
 
 	<sampleInstance>
+	<demo>
 	| anElement |
 	anElement := self element.
 	anElement

@@ -33,6 +33,7 @@ BlKeyCombinationExamples >> compulsoryCombination [
 BlKeyCombinationExamples >> keyLogger [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  size: 200 @ 200;
 		  background: Color red;

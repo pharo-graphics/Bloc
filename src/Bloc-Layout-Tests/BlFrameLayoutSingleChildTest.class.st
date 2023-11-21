@@ -12,6 +12,7 @@ Class {
 BlFrameLayoutSingleChildTest >> testChildElementMatchingParentWith25per50Percent [
 
 	<sampleInstance>
+	<demo>
 	| element |
 	element := self testChildElementWithVisualProperties.
 	element constraintsDo: [ :c |
@@ -32,6 +33,7 @@ BlFrameLayoutSingleChildTest >> testChildElementMatchingParentWith25per50Percent
 BlFrameLayoutSingleChildTest >> testChildElementMatchingParentWith50per40Percent [
 
 	<sampleInstance>
+	<demo>
 	| element |
 	element := self testChildElementWithVisualProperties.
 	element constraintsDo: [ :c |
@@ -52,6 +54,7 @@ BlFrameLayoutSingleChildTest >> testChildElementMatchingParentWith50per40Percent
 BlFrameLayoutSingleChildTest >> testChildElementMatchingWidthFitHeight [
 
 	<sampleInstance>
+	<demo>
 	| element |
 	element := self testChildElementWithVisualProperties.
 	element constraintsDo: [ :c |
@@ -70,6 +73,7 @@ BlFrameLayoutSingleChildTest >> testChildElementMatchingWidthFitHeight [
 BlFrameLayoutSingleChildTest >> testChildElementMatchingWidthFitLimitedHeight [
 
 	<sampleInstance>
+	<demo>
 	| element |
 	element := self testChildElementWithVisualProperties.
 	element constraintsDo: [ :c |
@@ -88,6 +92,7 @@ BlFrameLayoutSingleChildTest >> testChildElementMatchingWidthFitLimitedHeight [
 BlFrameLayoutSingleChildTest >> testEelementWithMaxWidthOneChildMatchExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child aParent |
 	child := self testChildElementMatchingParent.
 	aParent := self testParentWithFrameLayoutAndFixedSize.
@@ -105,6 +110,7 @@ BlFrameLayoutSingleChildTest >> testEelementWithMaxWidthOneChildMatchExactParent
 BlFrameLayoutSingleChildTest >> testElementDocumentationWithOneExactChildAlignBottomRightInExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithVisualProperties.
 	child constraintsDo: [ :c |
@@ -127,6 +133,7 @@ BlFrameLayoutSingleChildTest >> testElementDocumentationWithOneExactChildAlignBo
 BlFrameLayoutSingleChildTest >> testElementForDocumentationWithOneChildMatchExactParentWithWeight [
 
 	<sampleInstance>
+	<demo>
 	| parent child |
 	child := self testChildElementWithVisualProperties.
 	child constraintsDo: [ :c |
@@ -148,6 +155,7 @@ BlFrameLayoutSingleChildTest >> testElementForDocumentationWithOneChildMatchExac
 BlFrameLayoutSingleChildTest >> testElementWithMaxHeightOneChildMatchExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child aParent |
 	child := self testChildElementMatchingParent.
 	aParent := self testParentWithFrameLayoutAndFixedSize.
@@ -165,6 +173,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMaxHeightOneChildMatchExactParent
 BlFrameLayoutSingleChildTest >> testElementWithMaxWidthOneChildMatchExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child aParent |
 	child := self testChildElementMatchingParent.
 	aParent := self testParentWithFrameLayoutAndFixedSize.
@@ -184,6 +193,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMaxWidthOneChildMatchExactParent 
 BlFrameLayoutSingleChildTest >> testElementWithMinAndMaxHeightOneChildMatchExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child aParent |
 	child := self testChildElementMatchingParent.
 	aParent := self testParentWithFrameLayoutAndFixedSize.
@@ -203,6 +213,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinAndMaxHeightOneChildMatchExact
 BlFrameLayoutSingleChildTest >> testElementWithMinAndMaxWidthOneChildMatchExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child aParent |
 	child := self testChildElementMatchingParent.
 	aParent := self testParentWithFrameLayoutAndFixedSize.
@@ -222,6 +233,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinAndMaxWidthOneChildMatchExactP
 BlFrameLayoutSingleChildTest >> testElementWithMinHeightOneChildMatchExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child aParent |
 	child := self testChildElementMatchingParent.
 	aParent := self testParentWithFrameLayoutAndFixedSize.
@@ -239,6 +251,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinHeightOneChildMatchExactParent
 BlFrameLayoutSingleChildTest >> testElementWithMinWidthOneChildMatchExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child aParent |
 	child := self testChildElementMatchingParent.
 	aParent := self testParentWithFrameLayoutAndFixedSize.
@@ -256,6 +269,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinWidthOneChildMatchExactParent 
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child aParent |
 	child := self testChildElementMatchingParent.
 	aParent := self testParentWithFrameLayoutAndFixedSize.
@@ -272,6 +286,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParent [
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| aChild aParent |
 	aChild := self testChildElementWithVisualProperties.
 	aChild constraintsDo: [ :c |
@@ -296,6 +311,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithPaddi
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithPaddingAndMargin [
 
 	<sampleInstance>
+	<demo>
 	| aChild aParent |
 	aChild := self testChildElementWithVisualProperties.
 	aChild constraintsDo: [ :c |
@@ -325,6 +341,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithPaddi
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeight [
 
 	<sampleInstance>
+	<demo>
 	| parent child |
 	child := self testChildElementMatchingParentWith50per40Percent.
 	parent := self testParentWithFrameLayoutAndFixedSize.
@@ -341,6 +358,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeigh
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeightAndPadding [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementMatchingParentWith25per50Percent.
 	parent := self testParentWithFrameLayoutAndFixedSize.
@@ -362,6 +380,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeigh
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeightAndPaddingAndMargin [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementMatchingParentWith25per50Percent.
 	child margin: (BlInsets
@@ -388,6 +407,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeigh
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchWidthFitHeightParentExactWidthFitHeight [
 
 	<sampleInstance>
+	<demo>
 	| parent child subChild |
 	subChild := self testChildElementWithVisualProperties.
 	subChild constraintsDo: [ :c |
@@ -413,6 +433,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchWidthFitHeightParent
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchWidthFitLimitedHeightParentExactWidthFitHeight [
 
 	<sampleInstance>
+	<demo>
 	| parent child subChild |
 	subChild := self testChildElementWithVisualProperties.
 	subChild constraintsDo: [ :c |
@@ -439,6 +460,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchWidthFitLimitedHeigh
 BlFrameLayoutSingleChildTest >> testElementWithOneChildWithExactSizeParentWithWeight [
 
 	<sampleInstance>
+	<demo>
 	| parent child |
 	child := self testChildElementWithVisualProperties.
 	child constraintsDo: [ :c |
@@ -460,6 +482,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildWithExactSizeParentWithWe
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterAndWithWeightInExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraintsDo: [ :c |
@@ -481,6 +504,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterAnd
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterInExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignCenter.
@@ -499,6 +523,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterInE
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterInExactParentWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignCenter.
@@ -522,6 +547,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterInE
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomLeftInExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignLeft.
@@ -540,6 +566,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomLeftInExa
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomLeftInExactParentWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignLeft.
@@ -563,6 +590,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomLeftInExa
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomRightInExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignRight.
@@ -581,6 +609,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomRightInEx
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomRightInExactParentWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignRight.
@@ -604,6 +633,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomRightInEx
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterInExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignCenter.
@@ -622,6 +652,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterInExactPa
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterInExactParentWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignCenter.
@@ -645,6 +676,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterInExactPa
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterLeftInExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignLeft.
@@ -663,6 +695,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterLeftInExa
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterLeftInExactParentWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignLeft.
@@ -686,6 +719,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterLeftInExa
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterRightInExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignRight.
@@ -704,6 +738,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterRightInEx
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterRightInExactParentWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignRight.
@@ -727,6 +762,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterRightInEx
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignLeftInExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignLeft.
@@ -744,6 +780,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignLeftInExactPare
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignRightInExactParentWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignRight.
@@ -766,6 +803,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignRightInExactPar
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopCenterInExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignCenter.
@@ -784,6 +822,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopCenterInExac
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopCenterInExactParentWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignCenter.
@@ -807,6 +846,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopCenterInExac
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopLeftInExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignLeft.
@@ -825,6 +865,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopLeftInExactP
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopLeftInExactParentWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignLeft.
@@ -848,6 +889,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopLeftInExactP
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopRightInExactParent [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignRight.
@@ -866,6 +908,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopRightInExact
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopRightInExactParentWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| child parent |
 	child := self testChildElementWithExactSize100per50.
 	child constraints frame horizontal alignRight.
@@ -889,6 +932,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopRightInExact
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAndFitContentParent [
 
 	<sampleInstance>
+	<demo>
 	| child aParent |
 	child := self testChildElementWithVisualProperties.
 	child constraintsDo: [ :c |
@@ -917,6 +961,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAndFitContentParent 
 BlFrameLayoutSingleChildTest >> testElementWithOneMatchParentChildAndFitContentParent [
 
 	<sampleInstance>
+	<demo>
 	| child aParent |
 	child := self testChildElementWithVisualProperties.
 	child constraintsDo: [ :c |
@@ -945,6 +990,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneMatchParentChildAndFitContentP
 BlFrameLayoutSingleChildTest >> testRelocateChildLargerWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| parent child |
 	child := self testChildElementWithVisualProperties.
 	child size: 200 @ 100.
@@ -969,6 +1015,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildLargerWithPadding [
 BlFrameLayoutSingleChildTest >> testRelocateChildSmallWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| parent child |
 	child := self testChildElementWithVisualProperties.
 	child size: 200 @ 100.
@@ -993,6 +1040,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildSmallWithPadding [
 BlFrameLayoutSingleChildTest >> testRelocateChildToZeroWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| parent child |
 	child := self testChildElementWithVisualProperties.
 	child size: 200 @ 100.
@@ -1016,6 +1064,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildToZeroWithPadding [
 BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentLargerWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| parent child |
 	child := self testChildElementWithVisualProperties.
 	child constraintsDo: [ :c |
@@ -1043,6 +1092,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentLargerWithPaddi
 BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentSmallWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| parent child |
 	child := self testChildElementWithVisualProperties.
 	child constraintsDo: [ :c |
@@ -1070,6 +1120,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentSmallWithPaddin
 BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentToZeroWithPadding [
 
 	<sampleInstance>
+	<demo>
 	| parent child |
 	child := self testChildElementWithVisualProperties.
 	child constraintsDo: [ :c |
