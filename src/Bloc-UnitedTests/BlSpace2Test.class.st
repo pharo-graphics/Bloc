@@ -8,7 +8,6 @@ Class {
 BlSpace2Test >> animatedElement [
 
 	<sampleInstance>
-	<demo>
 	^ BlElement new
 		  background: Color blue;
 		  size: 150 @ 150;
