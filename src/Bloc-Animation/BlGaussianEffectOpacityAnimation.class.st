@@ -5,8 +5,7 @@ Class {
 		'to',
 		'from',
 		'color',
-		'width',
-		'widthTransition'
+		'width'
 	],
 	#category : 'Bloc-Animation-Animation',
 	#package : 'Bloc-Animation',
@@ -18,7 +17,7 @@ BlGaussianEffectOpacityAnimation >> applyValue: anOpacity [
 
 	self target effect: (BlGaussianShadowEffect
 			 color: (self color alpha: anOpacity)
-			 width: (self widthTransition ifTrue: [ self width * self progress ] ifFalse: [ self width ])
+			 width: self width
 			 offset: 0 @ 0).
 ]
 
@@ -67,18 +66,4 @@ BlGaussianEffectOpacityAnimation >> width [
 BlGaussianEffectOpacityAnimation >> width: aNumber [
 
 	width := aNumber
-]
-
-{ #category : 'accessing' }
-BlGaussianEffectOpacityAnimation >> widthTransition [
-	"Set desired widthTransition option. if true, then width increases on each step "
-
-	^ widthTransition ifNil: [ widthTransition := false ] 
-]
-
-{ #category : 'accessing' }
-BlGaussianEffectOpacityAnimation >> widthTransition: aBoolean [
-	"Set desired widthTransition option. if true, then width increases on each step "
-
-	widthTransition := aBoolean
 ]
