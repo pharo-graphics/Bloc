@@ -4,22 +4,24 @@ It is recommended to refer my unique instance since I am stateless and my superc
 
 "
 Class {
-	#name : #BlTransparentBackground,
-	#superclass : #BlBackground,
+	#name : 'BlTransparentBackground',
+	#superclass : 'BlBackground',
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Basic-Background'
+	#category : 'Bloc-Basic-Background',
+	#package : 'Bloc',
+	#tag : 'Basic-Background'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlTransparentBackground class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTransparentBackground class >> uniqueInstance [
 	"Return a unique instance of transparent backgrond.
 	It is preferable to use unique instance than create a new every time"
@@ -28,14 +30,14 @@ BlTransparentBackground class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTransparentBackground >> isTransparent [
 	"I am transparent by definition"
 	
 	^ true
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlTransparentBackground >> matchExtent: anExtent [
 	"Do nothing for the transparent background"
 ]

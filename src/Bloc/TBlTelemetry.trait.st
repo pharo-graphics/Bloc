@@ -1,9 +1,11 @@
 Trait {
-	#name : #TBlTelemetry,
-	#category : #'Bloc-Space - Telemetry'
+	#name : 'TBlTelemetry',
+	#category : 'Bloc-Space - Telemetry',
+	#package : 'Bloc',
+	#tag : 'Space - Telemetry'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 TBlTelemetry >> emit [
 	self tasks ifNotEmpty: [ :theTasks |
 		(BlTelemetrySignal new
@@ -12,24 +14,24 @@ TBlTelemetry >> emit [
 	self reset
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 TBlTelemetry >> finishSync [
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 TBlTelemetry >> reset [
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 TBlTelemetry >> startSync: aNameBlock [
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 TBlTelemetry >> tasks [
 	^ BlTelemetryTasks new
 ]
 
-{ #category : #tasks }
+{ #category : 'tasks' }
 TBlTelemetry >> timeSync: aNameBlock during: aBlock [
 	self startSync: aNameBlock.
 	^ aBlock ensure: [ self finishSync ]

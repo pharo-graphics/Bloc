@@ -4,15 +4,17 @@ Extends `BlElementStyles` by adding an ability to customise `BlForwardedElementS
 
 "
 Class {
-	#name : #BlForwardedElementStyles,
-	#superclass : #BlElementStyles,
+	#name : 'BlForwardedElementStyles',
+	#superclass : 'BlElementStyles',
 	#instVars : [
 		'targetObject'
 	],
-	#category : #'Bloc-Basic-Style'
+	#category : 'Bloc-Basic-Style',
+	#package : 'Bloc',
+	#tag : 'Basic-Style'
 }
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BlForwardedElementStyles >> newStyleForState: aBlElementState [
 
 	^ BlElementForwardedStyle new
@@ -20,7 +22,7 @@ BlForwardedElementStyles >> newStyleForState: aBlElementState [
 		  targetObject: targetObject
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BlForwardedElementStyles >> styleForState: aState ifFound: aFoundBlock ifNone: aNoneBlock [
 
 	^ styles
@@ -32,13 +34,13 @@ BlForwardedElementStyles >> styleForState: aState ifFound: aFoundBlock ifNone: a
 		ifNone: aNoneBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlForwardedElementStyles >> targetObject [
 
 	^ targetObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlForwardedElementStyles >> targetObject: anObject [
 
 	targetObject := anObject

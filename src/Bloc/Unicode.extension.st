@@ -1,6 +1,6 @@
-Extension { #name : #Unicode }
+Extension { #name : 'Unicode' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Unicode class >> isPrintable: aCharacter [
 	| value codeCat |
 

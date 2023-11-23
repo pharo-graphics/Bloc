@@ -1,15 +1,17 @@
 Class {
-	#name : #BlLayoutErrorHandler,
-	#superclass : #BlSingleErrorHandler,
-	#category : #'Bloc-Basic-Errors'
+	#name : 'BlLayoutErrorHandler',
+	#superclass : 'BlSingleErrorHandler',
+	#category : 'Bloc-Basic-Errors',
+	#package : 'Bloc',
+	#tag : 'Basic-Errors'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlLayoutErrorHandler >> matches: aFramePhase [
 	^ aFramePhase isLayoutPhase
 ]
 
-{ #category : #'error handling' }
+{ #category : 'error handling' }
 BlLayoutErrorHandler >> processError: aBlHandledError [
 	NonInteractiveTranscript stderr
 		show: aBlHandledError;
