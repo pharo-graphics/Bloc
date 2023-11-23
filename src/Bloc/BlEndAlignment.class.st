@@ -1,17 +1,15 @@
 Class {
-	#name : 'BlEndAlignment',
-	#superclass : 'BlRelativeAlignment',
-	#category : 'Bloc-Layouts-Alignment',
-	#package : 'Bloc',
-	#tag : 'Layouts-Alignment'
+	#name : #BlEndAlignment,
+	#superclass : #BlRelativeAlignment,
+	#category : #'Bloc-Layouts-Alignment'
 }
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlEndAlignment class >> horizontal [
 	^ BlHorizontalAlignment end
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlEndAlignment class >> vertical [
 	^ BlVerticalAlignment bottom
 ]

@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlTextCursor',
-	#superclass : 'BlNamedCursor',
-	#category : 'Bloc-Space - Cursor',
-	#package : 'Bloc',
-	#tag : 'Space - Cursor'
+	#name : #BlTextCursor,
+	#superclass : #BlNamedCursor,
+	#category : #'Bloc-Space - Cursor'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlTextCursor >> asForm [
 	^ Cursor overEditableText
 ]

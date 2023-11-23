@@ -1,31 +1,29 @@
 Class {
-	#name : 'BlHorizontalCoordinateAlignment',
-	#superclass : 'BlHorizontalAlignment',
+	#name : #BlHorizontalCoordinateAlignment,
+	#superclass : #BlHorizontalAlignment,
 	#instVars : [
 		'coordinate',
 		'relativeAlignment'
 	],
-	#category : 'Bloc-Layouts-Alignment',
-	#package : 'Bloc',
-	#tag : 'Layouts-Alignment'
+	#category : #'Bloc-Layouts-Alignment'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlHorizontalCoordinateAlignment >> coordinate [
 	^ coordinate
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlHorizontalCoordinateAlignment >> coordinate: anObject [
 	coordinate := anObject
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlHorizontalCoordinateAlignment >> directed: aBlLayoutDirection [
 	^ aBlLayoutDirection of: self
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlHorizontalCoordinateAlignment >> initialize [
 	super initialize.
 	
@@ -33,12 +31,12 @@ BlHorizontalCoordinateAlignment >> initialize [
 	relativeAlignment := BlElementAlignment horizontal center
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlHorizontalCoordinateAlignment >> relativeAlignment [
 	^ relativeAlignment
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlHorizontalCoordinateAlignment >> relativeAlignment: anObject [
 	relativeAlignment := anObject
 ]

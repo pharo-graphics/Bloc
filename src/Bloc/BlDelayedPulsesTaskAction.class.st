@@ -1,32 +1,30 @@
 Class {
-	#name : 'BlDelayedPulsesTaskAction',
-	#superclass : 'BlDelayPulsesTask',
+	#name : #BlDelayedPulsesTaskAction,
+	#superclass : #BlDelayPulsesTask,
 	#instVars : [
 		'action'
 	],
-	#category : 'Bloc-Space - Tasks',
-	#package : 'Bloc',
-	#tag : 'Space - Tasks'
+	#category : #'Bloc-Space - Tasks'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDelayedPulsesTaskAction >> action [
 	^ action
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDelayedPulsesTaskAction >> action: aBlock [
 	action := aBlock
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDelayedPulsesTaskAction >> initialize [
 	super initialize.
 	
 	action := [ :optionalThisTask | ]
 ]
 
-{ #category : 'api - running' }
+{ #category : #'api - running' }
 BlDelayedPulsesTaskAction >> onRun [
 	self action isClosure
 		ifTrue: [ self action cull: self ]

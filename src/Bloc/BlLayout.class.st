@@ -79,21 +79,19 @@ BlLayout allSubclasses
 
 "
 Class {
-	#name : 'BlLayout',
-	#superclass : 'Object',
+	#name : #BlLayout,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Layouts-Basic',
-	#package : 'Bloc',
-	#tag : 'Layouts-Basic'
+	#category : #'Bloc-Layouts-Basic'
 }
 
-{ #category : 'constraints' }
+{ #category : #constraints }
 BlLayout class >> constraints [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'private - alignment' }
+{ #category : #'private - alignment' }
 BlLayout >> align: anElement bounds: elementBounds in: theParentBounds with: aBlElementAlignment [
 	"I don't additionally take element margin or parent padding"
 	| aTranslation alignment |
@@ -105,7 +103,7 @@ BlLayout >> align: anElement bounds: elementBounds in: theParentBounds with: aBl
 	^ elementBounds translateBy: aTranslation
 ]
 
-{ #category : 'api - alignment' }
+{ #category : #'api - alignment' }
 BlLayout >> align: aChildElement horizontal: aBlAlignment [
 	"I should be used to dispatch children alignment configuration through layout to provide higher level uniform alignment api.	
 	Layouts that support children alignment should override me as follows:
@@ -115,7 +113,7 @@ BlLayout >> align: aChildElement horizontal: aBlAlignment [
 	"
 ]
 
-{ #category : 'private - alignment' }
+{ #category : #'private - alignment' }
 BlLayout >> align: elementBounds in: theParentBounds with: aBlElementAlignment [
 	"I don't additionally take element margin or parent padding"
 	| aTranslation alignment |
@@ -127,7 +125,7 @@ BlLayout >> align: elementBounds in: theParentBounds with: aBlElementAlignment [
 	^ elementBounds translateBy: aTranslation
 ]
 
-{ #category : 'api - alignment' }
+{ #category : #'api - alignment' }
 BlLayout >> align: aChildElement vertical: aBlAlignment [
 	"I should be used to dispatch children alignment configuration through layout to provide higher level uniform alignment api.	
 	Layouts that support children alignment should override me as follows:
@@ -137,19 +135,19 @@ BlLayout >> align: aChildElement vertical: aBlAlignment [
 	"
 ]
 
-{ #category : 'api - direction' }
+{ #category : #'api - direction' }
 BlLayout >> defaultDirection [
 	<return: #BlLayoutDirection>
 
 	^ BlLayoutDirection leftToRight
 ]
 
-{ #category : 'api - direction' }
+{ #category : #'api - direction' }
 BlLayout >> direction [
 	^ self defaultDirection
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlLayout >> findClosestChildOf: anElement to: aPoint [
 	"Find and return the closest direct child of a given element to a provided point in the coordinate system of anElement"
 	<return: #BlElement>
@@ -157,21 +155,21 @@ BlLayout >> findClosestChildOf: anElement to: aPoint [
 	^ anElement children first
 ]
 
-{ #category : 'protected' }
+{ #category : #protected }
 BlLayout >> isInfluencedByTransformation [
 	"Return true if the layout may be influenced by the element's transformation"
 
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlLayout >> isOrientable [
 
 	" can be vertical/horizontal ? "
 	^ false
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BlLayout >> layeredChildren: anElement do: aBlock [
 	"Evaluate a given block with all children of anElement
 	that should be layered out within anElement.
@@ -182,11 +180,11 @@ BlLayout >> layeredChildren: anElement do: aBlock [
 		thenDo: aBlock
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlLayout >> layoutIgnored: anElement context: aBlElementBoundsUpdateContext [
 	"Layout children ignored by layout so that their measured bounds
 	become actual bounds in parent"
@@ -215,14 +213,14 @@ BlLayout >> layoutIgnored: anElement context: aBlElementBoundsUpdateContext [
 			aChild applyLayoutIn: childBounds context: aBlElementBoundsUpdateContext ]
 ]
 
-{ #category : 'protected' }
+{ #category : #protected }
 BlLayout >> mayInfluencePosition [
 	"Return true if the layout may influence the position of the element with this layout"
 
 	^ false
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlLayout >> measure: anElement with: anExtentSpec [
 	"Default simple and naive implementation that does not support #fitContent resizing
 	strategy of the anElement that uses a layout with this version of measurement"
@@ -234,7 +232,7 @@ BlLayout >> measure: anElement with: anExtentSpec [
 			parentSpec: anExtentSpec ]
 ]
 
-{ #category : 'private - measurement' }
+{ #category : #'private - measurement' }
 BlLayout >> measureChild: aChildElement parentSpec: anExtentSpec [
 	"Measure a given child element allowing it to take as much space within parent
 	as it want *does not* taking child's margin and parent's padding into account.
@@ -247,7 +245,7 @@ BlLayout >> measureChild: aChildElement parentSpec: anExtentSpec [
 		heightUsed: 0.0
 ]
 
-{ #category : 'protected' }
+{ #category : #protected }
 BlLayout >> measureChild: anElement parentSpec: parentSpec widthUsed: widthUsed heightUsed: heightUsed [
 	"Measure anElement based on provided parent's extent measurement specification and used width and height.
 	used width and height can contain margin and/or padding.
@@ -264,7 +262,7 @@ BlLayout >> measureChild: anElement parentSpec: parentSpec widthUsed: widthUsed 
 			resizer: anElement constraints vertical resizer))
 ]
 
-{ #category : 'protected' }
+{ #category : #protected }
 BlLayout >> measureChildWithMargins: anElement parentSpec: parentSpec [
 	"Measure anElement based on provided parent's extent measurement specification
 	taking element's margin and parent's padding into account"
@@ -276,7 +274,7 @@ BlLayout >> measureChildWithMargins: anElement parentSpec: parentSpec [
 		heightUsed: 0
 ]
 
-{ #category : 'protected' }
+{ #category : #protected }
 BlLayout >> measureChildWithMargins: anElement parentSpec: parentSpec widthUsed: widthUsed heightUsed: heightUsed [
 	"Measure anElement based on provided parent's extent measurement specification and used width and height
 	taking element's margin and parent's padding into account"
@@ -288,7 +286,7 @@ BlLayout >> measureChildWithMargins: anElement parentSpec: parentSpec widthUsed:
 		heightUsed: anElement parent insets height + anElement outsets height + heightUsed
 ]
 
-{ #category : 'private - measurement' }
+{ #category : #'private - measurement' }
 BlLayout >> measureChildren: aCollectionOfChildren [
 	aCollectionOfChildren do: [ :aChild |
 		self
@@ -296,7 +294,7 @@ BlLayout >> measureChildren: aCollectionOfChildren [
 			parentSpec: BlExtentMeasurementSpec unspecified ]
 ]
 
-{ #category : 'private - measurement' }
+{ #category : #'private - measurement' }
 BlLayout >> measureIgnored: anElement with: anExtentSpec [
 	"Measure ignore children of a given parent allowing them to take as much space as they want"
 
@@ -319,7 +317,7 @@ BlLayout >> measureIgnored: anElement with: anExtentSpec [
 				parentSpec: aWidthSpec @ aHeightSpec ]
 ]
 
-{ #category : 'enumeration' }
+{ #category : #enumeration }
 BlLayout >> measuredChildren: anElement do: aBlock [
 	"Evaluate a given block with all children of anElement
 	that should be taken into account during measurement process.
@@ -330,7 +328,7 @@ BlLayout >> measuredChildren: anElement do: aBlock [
 		thenDo: aBlock
 ]
 
-{ #category : 'protected' }
+{ #category : #protected }
 BlLayout >> measurementSpecFor: parentSpec usedSize: usedSize resizer: childResizer [
 	"I determine what measurement specification my child should have
 	based on parent's measurement spec and child's resizer property.
@@ -358,13 +356,13 @@ BlLayout >> measurementSpecFor: parentSpec usedSize: usedSize resizer: childResi
 	^ parentSpec mode measurement: childResizer with: size
 ]
 
-{ #category : 'hooks - layout' }
+{ #category : #'hooks - layout' }
 BlLayout >> onCleanUp: anElement [
 	"Is sent when the layout caches should be cleaned up.
 	This happens for example when an element is removed from the scene"
 ]
 
-{ #category : 'hooks - layout' }
+{ #category : #'hooks - layout' }
 BlLayout >> onLayoutDone: anElement [
 	"Is sent after layout is completely computed.
 	All layout changes done within this hook will be performed during the next frame.

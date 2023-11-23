@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlDefaultCursor',
-	#superclass : 'BlNamedCursor',
-	#category : 'Bloc-Space - Cursor',
-	#package : 'Bloc',
-	#tag : 'Space - Cursor'
+	#name : #BlDefaultCursor,
+	#superclass : #BlNamedCursor,
+	#category : #'Bloc-Space - Cursor'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlDefaultCursor >> asForm [
 	^ Cursor normal
 ]

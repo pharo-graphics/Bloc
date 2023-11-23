@@ -1,14 +1,12 @@
 Class {
-	#name : 'BlPoint',
-	#superclass : 'Object',
+	#name : #BlPoint,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Basic-Math',
-	#package : 'Bloc',
-	#tag : 'Basic-Math'
+	#category : #'Bloc-Basic-Math'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlPoint >> < aPoint [
 	"Answer whether the receiver is above and to the left of aPoint."
 	<return: #Boolean>
@@ -16,7 +14,7 @@ BlPoint >> < aPoint [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlPoint >> asPoint2D [
 	"Return a projected version of this point on 2D plane"
 	<return: #BlPoint2D>
@@ -24,26 +22,26 @@ BlPoint >> asPoint2D [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlPoint >> isPoint [
 	^ true
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlPoint >> max: aBlPoint [
 	<return: #BlPoint>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlPoint >> min: aBlPoint [
 	<return: #BlPoint>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'matrix - transforming points' }
+{ #category : #'matrix - transforming points' }
 BlPoint >> transformedOn: aBlMatrix [
 	<return: #BlPoint>
 	

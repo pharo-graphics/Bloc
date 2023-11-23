@@ -1,25 +1,23 @@
 Class {
-	#name : 'BlSpaceMovedEvent',
-	#superclass : 'BlSpaceEvent',
+	#name : #BlSpaceMovedEvent,
+	#superclass : #BlSpaceEvent,
 	#instVars : [
 		'position'
 	],
-	#category : 'Bloc-Events-Type-Space',
-	#package : 'Bloc',
-	#tag : 'Events-Type-Space'
+	#category : #'Bloc-Events-Type-Space'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSpaceMovedEvent >> position [
 	^ position
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSpaceMovedEvent >> position: anObject [
 	position := anObject
 ]
 
-{ #category : 'sending' }
+{ #category : #sending }
 BlSpaceMovedEvent >> sendTo: anObject [
 	anObject spaceMovedEvent: self
 ]

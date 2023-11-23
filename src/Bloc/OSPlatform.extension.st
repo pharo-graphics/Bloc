@@ -1,17 +1,17 @@
-Extension { #name : 'OSPlatform' }
+Extension { #name : #OSPlatform }
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 OSPlatform >> defaultScrollingVelocity [
 
 	^ 20
 ]
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 OSPlatform >> primaryModifier [
 	^ self subclassResponsibility
 ]
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 OSPlatform >> secondaryModifier [
 	^ self subclassResponsibility
 ]

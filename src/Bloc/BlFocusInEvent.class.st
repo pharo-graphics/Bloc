@@ -3,19 +3,17 @@ The `=BlFocusInEvent`= event is sent to an element when it, or any element insid
 
 "
 Class {
-	#name : 'BlFocusInEvent',
-	#superclass : 'BlBaseFocusEvent',
-	#category : 'Bloc-Events',
-	#package : 'Bloc',
-	#tag : 'Events'
+	#name : #BlFocusInEvent,
+	#superclass : #BlBaseFocusEvent,
+	#category : #'Bloc-Events'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlFocusInEvent >> isFocusIn [
 	^ true
 ]
 
-{ #category : 'sending' }
+{ #category : #sending }
 BlFocusInEvent >> sendTo: anObject [
 	anObject focusInEvent: self
 ]

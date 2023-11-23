@@ -4,39 +4,37 @@ See BlLayoutAlignment for more info.
 
 "
 Class {
-	#name : 'BlLeftAlignment',
-	#superclass : 'BlHorizontalAlignment',
-	#category : 'Bloc-Layouts-Alignment',
-	#package : 'Bloc',
-	#tag : 'Layouts-Alignment'
+	#name : #BlLeftAlignment,
+	#superclass : #BlHorizontalAlignment,
+	#category : #'Bloc-Layouts-Alignment'
 }
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BlLeftAlignment class >> initialize [
 	super initialize.
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlLeftAlignment class >> leftToRight [
 	^ self left
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlLeftAlignment class >> rightToLeft [
 	^ self right
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlLeftAlignment >> inverted [
 	^ BlElementAlignment vertical start
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlLeftAlignment >> swap [
 	^ BlElementAlignment right
 ]
 
-{ #category : 'translation' }
+{ #category : #translation }
 BlLeftAlignment >> translationOf: aBounds in: aContainerBounds [
 	<return: #Point>
 
