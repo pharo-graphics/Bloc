@@ -6,7 +6,8 @@ Class {
 		'protocols',
 		'methods',
 		'code',
-		'collector'
+		'collector',
+		'tree'
 	],
 	#category : #'Bloc-Demo-Spec2'
 }
@@ -45,31 +46,35 @@ BlDemoSelectionPresenter >> connectMethodsPresenter [
 { #category : #initialization }
 BlDemoSelectionPresenter >> connectPresenters [
 
-	self connectClassesPresenter.
-	self connectMethodsPresenter
+	"self connectClassesPresenter.
+	self connectMethodsPresenter."
+	self connectTreePresenter
+]
+
+{ #category : #initialization }
+BlDemoSelectionPresenter >> connectTreePresenter [
+
+	tree whenSelectedItemChangedDo: [ :item |
+		item ifNotNil: [
+			item class = BlDemoMethodNode ifTrue: [
+				code beForMethod: item item.
+				code text: item sourceCode.
+				self executeCode  ] ] ]
 ]
 
 { #category : #layout }
 BlDemoSelectionPresenter >> defaultLayout [
 
-	| classesLayout methodsLayout |
-	classesLayout := SpBoxLayout newTopToBottom
-		                 add: 'Classes' expand: false;
-		                 add: classes;
-		                 yourself.
-
-	methodsLayout := SpBoxLayout newTopToBottom
-		                 add: 'Methods' expand: false;
-		                 add: methods;
-		                 yourself.
+	| treeLayout |
+	treeLayout := SpBoxLayout newTopToBottom
+		              add: tree;
+		              yourself.
 
 	^ SpBoxLayout newTopToBottom
 		  spacing: 5;
 		  add: (SpBoxLayout newLeftToRight
 				   spacing: 5;
-				   add: classesLayout;
-				   add: methodsLayout;
-				   yourself);
+				   add: treeLayout;yourself);
 		  add: code;
 		  yourself
 ]
@@ -78,7 +83,7 @@ BlDemoSelectionPresenter >> defaultLayout [
 BlDemoSelectionPresenter >> executeCode [
 
 	| res |
-	res := self methods selectedItem execute.
+	res := tree selectedItem execute.
 	self owner drawOnCanvas: res
 ]
 
@@ -117,12 +122,40 @@ BlDemoSelectionPresenter >> initializeMethodsPresenter [
 ]
 
 { #category : #initialization }
+BlDemoSelectionPresenter >> initializePathArray [
+
+	| firstPackage firstClass firstItem |
+	firstPackage := tree roots first.
+	firstClass := firstPackage children first.
+	firstItem := firstClass children first.
+	^ {
+		             firstPackage.
+		             firstClass.
+		             firstItem }.
+]
+
+{ #category : #initialization }
 BlDemoSelectionPresenter >> initializePresenters [
 
 	self initializeCollector.
-	self initializeClassesPresenter.
-	self initializeMethodsPresenter.
+	self initializeTreePresenter.
+	"self initializeClassesPresenter.
+	self initializeMethodsPresenter."
 	self initializeCodePresenter
+]
+
+{ #category : #initialization }
+BlDemoSelectionPresenter >> initializeTreePresenter [
+
+	| pathArray |
+	tree := SpTreePresenter new
+		        roots: self collector packages;
+		        children: [ :aPackageNode | aPackageNode children ];
+		        displayIcon: [ :aNode | self iconNamed: aNode icon ];
+		        display: [ :aPackageNode | aPackageNode name ];
+		        expandRoots.
+	pathArray := self initializePathArray.
+	tree selectPathByItems: pathArray scrollToSelection: true
 ]
 
 { #category : #accessing }

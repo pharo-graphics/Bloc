@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #accessing }
+BlDemoClassNode >> icon [
+
+	^ #class
+]
+
+{ #category : #accessing }
 BlDemoClassNode >> methods [ 
 	^ item methods
 ]

@@ -12,6 +12,17 @@ BlDemoMethodNode >> execute [
 ]
 
 { #category : #accessing }
+BlDemoMethodNode >> icon [
+
+	^ #glamorousGrayCircle
+]
+
+{ #category : #accessing }
+BlDemoMethodNode >> name [ 
+	^ self selector
+]
+
+{ #category : #accessing }
 BlDemoMethodNode >> selector [ 
 	^ item selector
 ]
