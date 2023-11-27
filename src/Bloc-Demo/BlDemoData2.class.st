@@ -7,27 +7,27 @@ Class {
 { #category : #'as yet unclassified' }
 BlDemoData2 >> returnBlElement [
 
-	<sampleInstance>
+	<demo>
 	^ BlElement new background: Color blue
 ]
 
 { #category : #'as yet unclassified' }
 BlDemoData2 >> returnBlElement2 [
 
-	<sampleInstance>
+	<demo>
 	^ BlElement new background: Color red
 ]
 
 { #category : #'as yet unclassified' }
 BlDemoData2 >> returnBlElement3 [
 
-	<sampleInstance>
+	<demo>
 	^ BlElement new background: Color blue
 ]
 
 { #category : #'as yet unclassified' }
 BlDemoData2 >> returnBlElement4 [
 
-	<sampleInstance>
+	<demo>
 	^ nil
 ]

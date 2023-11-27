@@ -2,7 +2,8 @@ Class {
 	#name : #BlDemoCollector,
 	#superclass : #Object,
 	#instVars : [
-		'dict',
+		'packageDict',
+		'classDict',
 		'pragma'
 	],
 	#category : #'Bloc-Demo-Node'
@@ -34,7 +35,7 @@ BlDemoCollector class >> collectPragma: aSymbol fromPackage: aPackage [
 
 { #category : #accessing }
 BlDemoCollector >> classes [
-	^dict values
+	^ classDict values
 ]
 
 { #category : #instanceCreation }
@@ -49,10 +50,19 @@ BlDemoCollector >> collectClass: aClass [
 	
 ]
 
-{ #category : #'as yet unclassified' }
-BlDemoCollector >> collectPackage: aRPackage [ 
-	
-	aRPackage classes do: [ :each | self collectClass: each ]
+{ #category : #instanceCreation }
+BlDemoCollector >> collectPackage: aRPackage [
+
+	| node classes |
+	classes := OrderedCollection new.
+	aRPackage classes do: [ :class |
+		| temp |
+		self collectClass: class.
+		temp := classDict at: class ifAbsent: [  ].
+		temp ifNotNil: [ classes add: temp ] ].
+	classes ifEmpty: [ ^ self ].
+	node := self ensurePackageFor: aRPackage.
+	classes do: [ :classNode | node addChild: classNode ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -64,14 +74,26 @@ BlDemoCollector >> collectPackages: anOrderedCollection [
 { #category : #'as yet unclassified' }
 BlDemoCollector >> ensureClassFor: aClass [
 
-	^ dict at: aClass ifAbsentPut: [BlDemoClassNode new item: aClass; yourself]
+	^ classDict at: aClass ifAbsentPut: [BlDemoClassNode new item: aClass; yourself]
+]
+
+{ #category : #'as yet unclassified' }
+BlDemoCollector >> ensurePackageFor: aPackage [ 
+
+	^ packageDict at: aPackage ifAbsentPut: [ BlDemoPackageNode new item: aPackage; yourself]
 ]
 
 { #category : #initialization }
 BlDemoCollector >> initialize [
 	super initialize.
 	pragma := #demo.
-	dict := IdentityDictionary new.
+	packageDict := IdentityDictionary new.
+	classDict := IdentityDictionary new
+]
+
+{ #category : #accessing }
+BlDemoCollector >> packages [
+	^ packageDict values
 ]
 
 { #category : #accessing }

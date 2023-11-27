@@ -7,20 +7,20 @@ Class {
 { #category : #'as yet unclassified' }
 BlDemoData >> returnBlElement [
 
-	<sampleInstance>
+	<demo>
 	^ BlElement new background: Color blue
 ]
 
 { #category : #'as yet unclassified' }
 BlDemoData >> returnBlElement2 [
 
-	<sampleInstance>
+	<demo>
 	^ BlElement new background: Color red
 ]
 
 { #category : #'as yet unclassified' }
 BlDemoData >> returnBlElementWithADifferentPragma [
 
-	<sampleInstance2>
+	<demo2>
 	^ BlElement new background: Color blue
 ]
