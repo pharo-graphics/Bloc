@@ -2,9 +2,11 @@ Class {
 	#name : #BlDemoPresenter,
 	#superclass : #SpPresenter,
 	#instVars : [
-		'transmissionPresenter',
 		'canva',
-		'errorMessage'
+		'errorMessage',
+		'code',
+		'collector',
+		'tree'
 	],
 	#category : #'Bloc-Demo-Spec2'
 }
@@ -25,13 +27,38 @@ BlDemoPresenter >> canva: aCanva [
 	canva := aCanva 
 ]
 
+{ #category : #accessing }
+BlDemoPresenter >> code [ 
+	^ code
+]
+
+{ #category : #accessing }
+BlDemoPresenter >> collector [ 
+	^ collector
+]
+
+{ #category : #initialization }
+BlDemoPresenter >> connectPresenters [
+
+	tree whenSelectedItemChangedDo: [ :item |
+		item ifNotNil: [
+			item class = BlDemoMethodNode
+				ifTrue: [
+					code beForMethod: item item.
+					code text: item sourceCode.
+					self executeCode ] ] ]
+]
+
 { #category : #layout }
 BlDemoPresenter >> defaultLayout [
-	^ SpPanedLayout newLeftToRight 
-		positionOfSlider: 600;
-		add: transmissionPresenter;
-		add: canva;
-		yourself
+
+	^ SpPanedLayout newTopToBottom
+		  add: (SpPanedLayout newLeftToRight
+				   positionOfSlider: 300;
+				   add: tree;
+				   add: canva yourself);
+		  add: code;
+		  yourself
 ]
 
 { #category : #'as yet unclassified' }
@@ -64,6 +91,14 @@ BlDemoPresenter >> errorMessage [
 						   c frame horizontal alignCenter ]) ]
 ]
 
+{ #category : #operations }
+BlDemoPresenter >> executeCode [
+
+	| res |
+	res := tree selectedItem execute.
+	self drawOnCanvas: res
+]
+
 { #category : #TOREMOVE }
 BlDemoPresenter >> initialExtent [
 
@@ -82,30 +117,62 @@ BlDemoPresenter >> initializeCanvaPresenter [
 ]
 
 { #category : #initialization }
-BlDemoPresenter >> initializePresenters [
+BlDemoPresenter >> initializeCodePresenter [
 
-	self initializeTransmissionPresenter.
-	self initializeCanvaPresenter.
-	
+	code := self newCode
 ]
 
 { #category : #initialization }
-BlDemoPresenter >> initializeTransmissionPresenter [ 
+BlDemoPresenter >> initializeCollector [
 
-	transmissionPresenter := BlDemoSelectionPresenter new
+	collector := BlDemoCollector new.
+	collector collectPackages: self packagesToCollect
+]
+
+{ #category : #initialization }
+BlDemoPresenter >> initializePathArray [
+
+	| firstPackage firstClass firstItem |
+	firstPackage := tree roots first.
+	firstClass := firstPackage children first.
+	firstItem := firstClass children first.
+	^ {
+		  firstPackage.
+		  firstClass.
+		  firstItem }
+]
+
+{ #category : #initialization }
+BlDemoPresenter >> initializePresenters [
+
+	self initializeCollector.
+	self initializeCanvaPresenter.
+	self initializeTreePresenter.
+	self initializeCodePresenter
+]
+
+{ #category : #initialization }
+BlDemoPresenter >> initializeTreePresenter [
+
+	| pathArray |
+	tree := SpTreePresenter new
+		        roots: self collector packages;
+		        children: [ :aPackageNode | aPackageNode children ];
+		        displayIcon: [ :aNode | self iconNamed: aNode icon ];
+		        display: [ :aPackageNode | aPackageNode name ];
+		        expandRoots.
+	pathArray := self initializePathArray.
+	tree selectPathByItems: pathArray scrollToSelection: true
+]
+
+{ #category : #accessing }
+BlDemoPresenter >> packagesToCollect [
+
+	^ RPackageOrganizer default packages select: [ :each |
+		  each name includesSubstring: 'Bloc' ]
 ]
 
 { #category : #TOREMOVE }
 BlDemoPresenter >> title [ 
 	^ 'Bloc UI Framework Demo'
-]
-
-{ #category : #accessing }
-BlDemoPresenter >> transmissionPresenter [ 
-	^ transmissionPresenter 
-]
-
-{ #category : #accessing }
-BlDemoPresenter >> transmissionPresenter: aPresenter [
-	transmissionPresenter := aPresenter 
 ]
