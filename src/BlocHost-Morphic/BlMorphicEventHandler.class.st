@@ -384,6 +384,7 @@ BlMorphicEventHandler >> handleMouseWheel: anEvent [
 			           aMorphicEvent direction = Character arrowRight ])
 			          ifTrue: [ BlVector x: vectorOffset y: 0 ]
 			          ifFalse: [ BlVector x: 0 y: vectorOffset ]. " self horizontalScrolling "
+
 		aBlEvent := BlMouseWheelEvent new
 			            vector: vector;
 			            modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);

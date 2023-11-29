@@ -442,6 +442,7 @@ BlInfiniteElement >> defaultLayoutCommonConstraints [
 
 { #category : #initialization }
 BlInfiniteElement >> defaultMouseScrollEventHandler [
+
 	^ BlInfiniteMouseScrollListener new
 ]
 
