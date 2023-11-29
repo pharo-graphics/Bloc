@@ -373,22 +373,24 @@ BlMorphicEventHandler >> handleMouseUp: anEvent [
 
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleMouseWheel: anEvent [
-	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
-		| aBlEvent vectorOffset vector |
 
-		vectorOffset := aMorphicEvent direction = Character arrowDown
-			ifTrue: [ -5 ] 
-			ifFalse: [ 5 ].
-		vector := self horizontalScrolling 
-			ifTrue: [ BlVector x: vectorOffset y: 0 ]
-			ifFalse: [ BlVector x: 0 y: vectorOffset ].
+	self convertMousePosition: anEvent andDo: [ :aMorphicEvent |
+		| aBlEvent vectorOffset vector |
+		vectorOffset := (aMorphicEvent direction = Character arrowDown or: [
+			                 aMorphicEvent direction = Character arrowLeft ])
+			                ifTrue: [ -5 ]
+			                ifFalse: [ 5 ].
+		vector := (aMorphicEvent direction = Character arrowLeft or: [
+			           aMorphicEvent direction = Character arrowRight ])
+			          ifTrue: [ BlVector x: vectorOffset y: 0 ]
+			          ifFalse: [ BlVector x: 0 y: vectorOffset ]. " self horizontalScrolling "
 		aBlEvent := BlMouseWheelEvent new
-			vector: vector;
-			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-			position: aMorphicEvent position;
-			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
-			timestamp: DateAndTime now.
-		
+			            vector: vector;
+			            modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
+			            position: aMorphicEvent position;
+			            screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
+			            timestamp: DateAndTime now.
+
 		self enqueue: aBlEvent ]
 ]
 
