@@ -1,25 +1,27 @@
 Class {
-	#name : #BlSplineOverScrollerNoneMode,
-	#superclass : #BlSplineOverScrollerMode,
-	#category : #'Bloc-Infinite-Scrollable-Helpers'
+	#name : 'BlSplineOverScrollerNoneMode',
+	#superclass : 'BlSplineOverScrollerMode',
+	#category : 'Bloc-Infinite-Scrollable-Helpers',
+	#package : 'Bloc-Infinite',
+	#tag : 'Scrollable-Helpers'
 }
 
-{ #category : #updating }
+{ #category : 'updating' }
 BlSplineOverScrollerNoneMode >> continueOn: aSplineOverScroller [
 	<return: #Boolean>
 	
 	^ false
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BlSplineOverScrollerNoneMode >> finishOn: aSplineOverScroller [
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSplineOverScrollerNoneMode >> initializeOn: aSplineOverScroller [
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BlSplineOverScrollerNoneMode >> updateOn: aSplineOverScroller [
 	<return: #Boolean>
 

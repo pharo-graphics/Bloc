@@ -1,15 +1,17 @@
 Class {
-	#name : #BlRecyclerPositionScrapFetcher,
-	#superclass : #BlInfiniteRecyclerFetcher,
-	#category : #'Bloc-Infinite-Recycler'
+	#name : 'BlRecyclerPositionScrapFetcher',
+	#superclass : 'BlInfiniteRecyclerFetcher',
+	#category : 'Bloc-Infinite-Recycler',
+	#package : 'Bloc-Infinite',
+	#tag : 'Recycler'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlRecyclerPositionScrapFetcher >> defaultNext [
 	^ BlRecyclerDataSourceFetcher uniqueInstance
 ]
 
-{ #category : #'element fetching' }
+{ #category : 'element fetching' }
 BlRecyclerPositionScrapFetcher >> elementFor: aPosition in: anInfiniteElement [
 
 	(self exactScrapFor: aPosition in: anInfiniteElement)
@@ -23,7 +25,7 @@ BlRecyclerPositionScrapFetcher >> elementFor: aPosition in: anInfiniteElement [
 	^ self nextFetcher elementFor: aPosition in: anInfiniteElement
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRecyclerPositionScrapFetcher >> exactScrapFor: aPosition in: anInfiniteElement [
 
 	^ anInfiniteElement recycler attachedScrap 
@@ -38,7 +40,7 @@ BlRecyclerPositionScrapFetcher >> exactScrapFor: aPosition in: anInfiniteElement
 		ifNone: [ nil ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlRecyclerPositionScrapFetcher >> validateHolder: aHolder in: anInfiniteElement [
 
 	aHolder isRemoved ifTrue: [ 

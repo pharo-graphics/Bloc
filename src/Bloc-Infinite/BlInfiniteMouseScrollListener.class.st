@@ -1,28 +1,30 @@
 Class {
-	#name : #BlInfiniteMouseScrollListener,
-	#superclass : #BlBasicEventHandler,
+	#name : 'BlInfiniteMouseScrollListener',
+	#superclass : 'BlBasicEventHandler',
 	#instVars : [
 		'restrictedByOrientation'
 	],
 	#classVars : [
 		'ScrollingVelocity'
 	],
-	#category : #'Bloc-Infinite-Scrollable-Core'
+	#category : 'Bloc-Infinite-Scrollable-Core',
+	#package : 'Bloc-Infinite',
+	#tag : 'Scrollable-Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteMouseScrollListener class >> scrollingVelocity [
 
 	^ ScrollingVelocity ifNil: [ ScrollingVelocity := 40 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteMouseScrollListener class >> scrollingVelocity: anInteger [
 
 	ScrollingVelocity := anInteger
 ]
 
-{ #category : #'mouse handlers' }
+{ #category : 'mouse handlers' }
 BlInfiniteMouseScrollListener >> canScrollDown: anInfiniteElement [
 	"Return true if an infinite element can be scrolled down"
 	<return: #Boolean>	
@@ -38,7 +40,7 @@ BlInfiniteMouseScrollListener >> canScrollDown: anInfiniteElement [
 	^ false
 ]
 
-{ #category : #'mouse handlers' }
+{ #category : 'mouse handlers' }
 BlInfiniteMouseScrollListener >> canScrollUp: anInfiniteElement [
 	"Return true if an infinite element can be scrolled up"
 	<return: #Boolean>	
@@ -54,17 +56,17 @@ BlInfiniteMouseScrollListener >> canScrollUp: anInfiniteElement [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteMouseScrollListener >> eventClass [
 	^ BlMouseWheelEvent
 ]
 
-{ #category : #'mouse handlers' }
+{ #category : 'mouse handlers' }
 BlInfiniteMouseScrollListener >> handleEvent: anEvent [
 	anEvent sendTo: self
 ]
 
-{ #category : #'mouse handlers' }
+{ #category : 'mouse handlers' }
 BlInfiniteMouseScrollListener >> mouseWheelEvent: anEvent [
 
 	| dX dY anInfiniteElement isHorizontal |
@@ -98,32 +100,32 @@ BlInfiniteMouseScrollListener >> mouseWheelEvent: anEvent [
 	anEvent consumed: dY isZero not
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlInfiniteMouseScrollListener >> printOn: aStream [
 	aStream 
 		nextPutAll: 'Event handler of ';
 		print: self eventClass.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteMouseScrollListener >> restrictedByOrientation [
 
 	^ restrictedByOrientation ifNil: [ restrictedByOrientation := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteMouseScrollListener >> restrictedByOrientation: aBoolean [
 
 	restrictedByOrientation := aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteMouseScrollListener >> scrollingVelocity [
 
 	^ self class scrollingVelocity
 ]
 
-{ #category : #events }
+{ #category : 'events' }
 BlInfiniteMouseScrollListener >> wantsEvent: anEvent [
 	^ anEvent class == self eventClass or: [ anEvent class inheritsFrom: self eventClass ]
 ]

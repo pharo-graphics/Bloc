@@ -10,8 +10,8 @@ Update command describes content or value change of one or multiple items in dat
 
 "
 Class {
-	#name : #BlInfiniteDataSourceCommand,
-	#superclass : #Object,
+	#name : 'BlInfiniteDataSourceCommand',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -19,10 +19,12 @@ Class {
 		'itemCount',
 		'type'
 	],
-	#category : #'Bloc-Infinite-DataSource'
+	#category : 'Bloc-Infinite-DataSource',
+	#package : 'Bloc-Infinite',
+	#tag : 'DataSource'
 }
 
-{ #category : #commands }
+{ #category : 'commands' }
 BlInfiniteDataSourceCommand >> applyIn: anInfiniteElement [
 
 
@@ -31,7 +33,7 @@ BlInfiniteDataSourceCommand >> applyIn: anInfiniteElement [
 	type apply: self in: anInfiniteElement
 ]
 
-{ #category : #commands }
+{ #category : 'commands' }
 BlInfiniteDataSourceCommand >> applyOnPosition: aPosition [
 	"When the position of an ElementHolder is required.
 	Determine how provided position will change. Return the position after command is processed"
@@ -39,127 +41,127 @@ BlInfiniteDataSourceCommand >> applyOnPosition: aPosition [
 	^ type apply: self onPosition: aPosition
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlInfiniteDataSourceCommand >> beAdd [
 	self type: BlInfiniteDataSourceCommandTypeAdd instance
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlInfiniteDataSourceCommand >> beMove [
 	self type: BlInfiniteDataSourceCommandTypeMove instance
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlInfiniteDataSourceCommand >> beRemove [
 	self type: BlInfiniteDataSourceCommandTypeRemove instance
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlInfiniteDataSourceCommand >> beUpdate [
 	self type: BlInfiniteDataSourceCommandTypeUpdate instance
 ]
 
-{ #category : #commands }
+{ #category : 'commands' }
 BlInfiniteDataSourceCommand >> continuous: aPosition start: start [
 	^ type continuous: aPosition start: start
 ]
 
-{ #category : #commands }
+{ #category : 'commands' }
 BlInfiniteDataSourceCommand >> dispatchToLayout: aLayout [
 	type dispatch: self toLayout: aLayout
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteDataSourceCommand >> initialize [
 	super initialize.
 	
 	type := BlInfiniteDataSourceCommandTypeNull instance
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteDataSourceCommand >> isAdd [
 	^ type isAdd
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteDataSourceCommand >> isMove [
 	^ type isMove
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteDataSourceCommand >> isRemove [
 	^ type isRemove
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteDataSourceCommand >> isUpdate [
 	^ type isUpdate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteDataSourceCommand >> itemCount [
 	^ itemCount
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteDataSourceCommand >> itemCount: anObject [
 	itemCount := anObject
 ]
 
-{ #category : #commands }
+{ #category : 'commands' }
 BlInfiniteDataSourceCommand >> offsetPositionsIn: anInfiniteElement [
 	type offsetPositions: self in: anInfiniteElement
 ]
 
-{ #category : #commands }
+{ #category : 'commands' }
 BlInfiniteDataSourceCommand >> positionMultiplier [
 	^ type positionMultiplier
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteDataSourceCommand >> positionStart [
 	^ positionStart
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteDataSourceCommand >> positionStart: anObject [
 	positionStart := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteDataSourceCommand >> type [
 	<return: #BlInfiniteDataSourceCommandType>
 
 	^ type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteDataSourceCommand >> type: aType [
 
 	type := aType
 ]
 
-{ #category : #enum }
+{ #category : 'enum' }
 BlInfiniteDataSourceCommand >> typeInvisible [
 	^ 0
 ]
 
-{ #category : #enum }
+{ #category : 'enum' }
 BlInfiniteDataSourceCommand >> typeNewOrLaidOut [
 	^ 1
 ]
 
-{ #category : #commands }
+{ #category : 'commands' }
 BlInfiniteDataSourceCommand >> updateElementHoldersIn: anInfiniteElement [
 	^ type updateElementHoldersIn: anInfiniteElement command: self
 ]
 
-{ #category : #commands }
+{ #category : 'commands' }
 BlInfiniteDataSourceCommand >> updateElementHoldersIn: anInfiniteElement offset: offsetStart [
 	type updateElementHoldersIn: anInfiniteElement offset: offsetStart command: self
 ]
 
-{ #category : #commands }
+{ #category : 'commands' }
 BlInfiniteDataSourceCommand >> updatePosition: aPosition with: aCommand [
 	^ type updatePosition: aPosition with: aCommand from: self
 ]

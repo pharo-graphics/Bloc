@@ -1,15 +1,17 @@
 Class {
-	#name : #BlInfiniteDataSourceCommandTypeMove,
-	#superclass : #BlInfiniteDataSourceCommandType,
-	#category : #'Bloc-Infinite-DataSource'
+	#name : 'BlInfiniteDataSourceCommandTypeMove',
+	#superclass : 'BlInfiniteDataSourceCommandType',
+	#category : 'Bloc-Infinite-DataSource',
+	#package : 'Bloc-Infinite',
+	#tag : 'DataSource'
 }
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlInfiniteDataSourceCommandTypeMove >> apply: aCommand in: anInfiniteElement [
 	anInfiniteElement dataSourceManager postponeAndUpdateElementHolders: aCommand on: anInfiniteElement
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlInfiniteDataSourceCommandTypeMove >> apply: aCommand onPosition: aPosition [
 	| newPosition |
 	
@@ -25,22 +27,22 @@ BlInfiniteDataSourceCommandTypeMove >> apply: aCommand onPosition: aPosition [
 	^ newPosition
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlInfiniteDataSourceCommandTypeMove >> continuous: aPosition start: start [
 	self shouldNotImplement
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlInfiniteDataSourceCommandTypeMove >> dispatch: aCommand toLayout: aLayout [
 	aLayout onItemsMovedFrom: aCommand positionStart to: aCommand itemCount itemCount: 1
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteDataSourceCommandTypeMove >> isMove [
 	^ true
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlInfiniteDataSourceCommandTypeMove >> offsetPositions: aCommand in: anInfiniteElement [
 
 	anInfiniteElement dataSourceManager
@@ -50,12 +52,12 @@ BlInfiniteDataSourceCommandTypeMove >> offsetPositions: aCommand in: anInfiniteE
 
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlInfiniteDataSourceCommandTypeMove >> positionMultiplier [
 	self shouldNotImplement
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlInfiniteDataSourceCommandTypeMove >> updateElementHoldersIn: anInfiniteElement command: aCommand [
 
 	anInfiniteElement dataSourceManager
@@ -64,12 +66,12 @@ BlInfiniteDataSourceCommandTypeMove >> updateElementHoldersIn: anInfiniteElement
 		in: anInfiniteElement 
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlInfiniteDataSourceCommandTypeMove >> updateElementHoldersIn: anInfiniteElement offset: offsetStart command: aCommand [
 	self shouldNotImplement
 ]
 
-{ #category : #dispatch }
+{ #category : 'dispatch' }
 BlInfiniteDataSourceCommandTypeMove >> updatePosition: aPosition with: aCommand from: myCommand [
 	|start end pos|
 	pos := aPosition.

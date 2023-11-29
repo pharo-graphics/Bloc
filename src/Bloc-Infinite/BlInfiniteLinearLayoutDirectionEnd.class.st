@@ -1,20 +1,22 @@
 Class {
-	#name : #BlInfiniteLinearLayoutDirectionEnd,
-	#superclass : #BlInfiniteLinearLayoutDirection,
-	#category : #'Bloc-Infinite-Layout-Linear-Support'
+	#name : 'BlInfiniteLinearLayoutDirectionEnd',
+	#superclass : 'BlInfiniteLinearLayoutDirection',
+	#category : 'Bloc-Infinite-Layout-Linear-Support',
+	#package : 'Bloc-Infinite',
+	#tag : 'Layout-Linear-Support'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteLinearLayoutDirectionEnd >> isEnd [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteLinearLayoutDirectionEnd >> isStart [
 	^ false
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlInfiniteLinearLayoutDirectionEnd >> multiplier [
 	<return: #Number>
 
