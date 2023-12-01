@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTestOfExamplesTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Examples'
+	#category : #'Bloc-UnitedTests-Examples'
 }
 
 { #category : #running }
@@ -18,7 +18,7 @@ BlTestOfExamplesTest >> testAllExamplesAreConsideredTests [
 
 	self
 		assertCollection: BlExamplesMock testSelectors
-		hasSameElements: #(examplePass exampleFail exampleError exampleSkip)
+		hasSameElements: #(#testExamplePass #testExampleFail #testExampleError #testExampleSkip)
 
 ]
 
@@ -27,7 +27,7 @@ BlTestOfExamplesTest >> testErrors [
 
 	self
 		assertCollection: (self examplesTestResult errors collect: [ :each | each selector ])
-		hasSameElements: #(exampleError)
+		hasSameElements: #(#testExampleError)
 
 ]
 
@@ -36,7 +36,7 @@ BlTestOfExamplesTest >> testFail [
 
 	self
 		assertCollection: (self examplesTestResult failures collect: [ :each | each selector ])
-		hasSameElements: #(exampleFail)
+		hasSameElements: #(#testExampleFail)
 
 ]
 
@@ -45,7 +45,7 @@ BlTestOfExamplesTest >> testPass [
 
 	self
 		assertCollection: (self examplesTestResult passed collect: [ :each | each selector ])
-		hasSameElements: #(examplePass)
+		hasSameElements: #(#testExamplePass)
 
 ]
 
@@ -54,6 +54,6 @@ BlTestOfExamplesTest >> testSkip [
 
 	self
 		assertCollection: (self examplesTestResult skipped collect: [ :each | each selector ])
-		hasSameElements: #(exampleSkip)
+		hasSameElements: #(#testExampleSkip)
 
 ]

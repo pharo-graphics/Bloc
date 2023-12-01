@@ -5,7 +5,7 @@ See my references.
 "
 Class {
 	#name : #BlExamplesMock,
-	#superclass : #BlExampleTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'enabled'
 	],
@@ -16,31 +16,6 @@ Class {
 BlExamplesMock >> enableRunning [
 
 	enabled := true
-]
-
-{ #category : #examples }
-BlExamplesMock >> exampleError [
-
-	self error
-]
-
-{ #category : #examples }
-BlExamplesMock >> exampleFail [
-
-	self fail
-]
-
-{ #category : #examples }
-BlExamplesMock >> examplePass [
- 
-	
-]
-
-{ #category : #examples }
-BlExamplesMock >> exampleSkip [
-
-	<noTest>
-	self error
 ]
 
 { #category : #examples }
@@ -60,4 +35,28 @@ BlExamplesMock >> initialize [
 BlExamplesMock >> performTest [
 
 	enabled ifTrue: [ super performTest ]
+]
+
+{ #category : #examples }
+BlExamplesMock >> testExampleError [
+
+	self error
+]
+
+{ #category : #examples }
+BlExamplesMock >> testExampleFail [
+
+	self fail
+]
+
+{ #category : #examples }
+BlExamplesMock >> testExamplePass [
+ 
+	
+]
+
+{ #category : #examples }
+BlExamplesMock >> testExampleSkip [
+
+	self skip
 ]
