@@ -72,6 +72,9 @@ BlInfiniteMouseScrollListener >> mouseWheelEvent: anEvent [
 	| dX dY anInfiniteElement isHorizontal |
 	anEvent vector isZero ifTrue: [ ^ self ].
 
+	anEvent currentTarget eventDispatcher wantsScrolledEvent ifFalse: [
+		^ self ].
+
 	self restrictedByOrientation ifTrue: [
 		anEvent currentTarget layout mouseWheelEvent: anEvent.
 		^ self ].
