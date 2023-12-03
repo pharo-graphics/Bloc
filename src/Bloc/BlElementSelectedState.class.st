@@ -1,22 +1,20 @@
 Class {
-	#name : 'BlElementSelectedState',
-	#superclass : 'BlElementUniqueState',
-	#category : 'Bloc-Basic-State',
-	#package : 'Bloc',
-	#tag : 'Basic-State'
+	#name : #BlElementSelectedState,
+	#superclass : #BlElementUniqueState,
+	#category : 'Bloc-Basic-State'
 }
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BlElementSelectedState >> optionalEventHandlerDo: aBlock [
 	aBlock value: BlElementSelectedStateEventHandler uniqueInstance
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlElementSelectedState >> printOn: aStream [
 	aStream nextPutAll: 'selected'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementSelectedState >> priority [
 	^ UserPriority
 ]

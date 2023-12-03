@@ -6,34 +6,32 @@ It is prefereable to refer my unique instance, since I am stateless
 
 "
 Class {
-	#name : 'BlTransparentPaint',
-	#superclass : 'BlColorPaint',
+	#name : #BlTransparentPaint,
+	#superclass : #BlColorPaint,
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Paint',
-	#package : 'Bloc',
-	#tag : 'Paint'
+	#category : 'Bloc-Paint'
 }
 
-{ #category : 'cleanup' }
+{ #category : #cleanup }
 BlTransparentPaint class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlTransparentPaint class >> color: aColor [
 	self shouldNotImplement
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlTransparentPaint class >> transparent [
 	self shouldNotImplement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTransparentPaint class >> uniqueInstance [
 	"Return a unique instance of transparent paint.
 	It is preferable to use unique instance than create a new every time"
@@ -42,19 +40,19 @@ BlTransparentPaint class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTransparentPaint >> color: aColor [
 	self shouldNotImplement
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTransparentPaint >> initialize [
 	super initialize.
 	
 	color := Color transparent
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlTransparentPaint >> isOpaque [
 	"I am transparent by definition and therefore always return false"
 	<return: #Boolean>
@@ -62,7 +60,7 @@ BlTransparentPaint >> isOpaque [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlTransparentPaint >> isTransparent [
 	"I am transparent by definition and therefore always return true"
 	<return: #Boolean>

@@ -1,11 +1,11 @@
-Extension { #name : 'Form' }
+Extension { #name : #Form }
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Form >> asBlBackground [
 	^ BlBackground image: self
 ]
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Form >> asElement [
 	^ BlElement new
 		size: self extent;
@@ -13,7 +13,7 @@ Form >> asElement [
 		yourself
 ]
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Form >> asForm [
 	^ self
 ]

@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlDragStartEvent',
-	#superclass : 'BlBaseDragEvent',
-	#category : 'Bloc-Events',
-	#package : 'Bloc',
-	#tag : 'Events'
+	#name : #BlDragStartEvent,
+	#superclass : #BlBaseDragEvent,
+	#category : 'Bloc-Events'
 }
 
-{ #category : 'sending' }
+{ #category : #sending }
 BlDragStartEvent >> sendTo: anObject [
 	anObject dragStartEvent: self
 ]

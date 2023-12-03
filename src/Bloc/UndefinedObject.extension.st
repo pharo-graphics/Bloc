@@ -1,6 +1,6 @@
-Extension { #name : 'UndefinedObject' }
+Extension { #name : #UndefinedObject }
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 UndefinedObject >> asBlocElementId [
 	^ BlElementId noId
 ]
