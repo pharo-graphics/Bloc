@@ -17,6 +17,6 @@ BlDevScripterStepFailureState >> name [
 
 { #category : #testing }
 BlDevScripterStepFailureState >> wasExecuted [
-	<return: #Boolean>
+	
 	^ true
 ]

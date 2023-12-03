@@ -182,8 +182,8 @@ BlBorder >> opacity: aNumber [
 
 { #category : #accessing }
 BlBorder >> paint [
-	<return: #BlPaint>
-
+	"Return the paing of the receiver, an instance of BlPaint or subclasses."
+	
 	^ paint
 ]
 

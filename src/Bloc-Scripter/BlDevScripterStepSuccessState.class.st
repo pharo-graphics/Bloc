@@ -17,6 +17,6 @@ BlDevScripterStepSuccessState >> name [
 
 { #category : #testing }
 BlDevScripterStepSuccessState >> wasExecuted [
-	<return: #Boolean>
+
 	^ true
 ]

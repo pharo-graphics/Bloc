@@ -12,7 +12,7 @@ Class {
 		'position',
 		'title'
 	],
-	#category : 'Bloc-Universe - Host Headless'
+	#category : #'Bloc-Universe - Host Headless'
 }
 
 { #category : #'window - properties' }
@@ -47,8 +47,7 @@ BlHeadlessHostSpace >> cursor: aCursor [
 
 { #category : #'host space - geometry' }
 BlHeadlessHostSpace >> densityDpi [
-	"Return the screen density expressed as dots-per-inch"
-	<return: #Number>
+	"Return the screen density expressed as dots-per-inch (a float)"
 	
 	^ 96.0
 ]
@@ -188,7 +187,6 @@ BlHeadlessHostSpace >> render: aSpace [
 { #category : #'window - properties' }
 BlHeadlessHostSpace >> resizable [
 	"Return true if underlying window is resizable, false otherwise"
-	<return: #Boolean>
 
 	^ true
 ]

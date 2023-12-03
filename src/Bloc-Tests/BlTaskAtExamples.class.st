@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlTaskAtExamples',
-	#superclass : 'Object',
-	#category : 'Bloc-Tests-Examples',
-	#package : 'Bloc-Tests',
-	#tag : 'Examples'
+	#name : #BlTaskAtExamples,
+	#superclass : #Object,
+	#category : 'Bloc-Tests-Examples'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTaskAtExamples >> checkQueueOrder [
 	"Ensure that tasks are retrieved from the queue in chronological order"
 	<gtExample>

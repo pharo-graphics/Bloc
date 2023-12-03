@@ -7,7 +7,7 @@ Class {
 		'childNode',
 		'connectedEdges'
 	],
-	#category : 'Bloc-Layouts-Model'
+	#category : #'Bloc-Layouts-Model'
 }
 
 { #category : #'api - edges' }
@@ -63,14 +63,12 @@ BlLayoutChildNodeWithEdges >> extent [
 
 { #category : #'api - edges' }
 BlLayoutChildNodeWithEdges >> hasNodesAlongIncomingEdges [
-	<return: #Boolean>
 
 	^ self nodesAlongIncomingEdges isNotEmpty
 ]
 
 { #category : #'api - edges' }
 BlLayoutChildNodeWithEdges >> hasNodesAlongOutgoingEdges [
-	<return: #Boolean>
 
 	^ self nodesAlongOutgoingEdges isNotEmpty
 ]

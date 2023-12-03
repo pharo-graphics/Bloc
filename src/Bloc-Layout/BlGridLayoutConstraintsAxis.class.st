@@ -43,9 +43,6 @@ BlGridLayoutConstraintsAxis >> spec [
 	"Return child's axis specification.
 	spec can not be nil"
 	<return: #BlGridLayoutSpec>
-	self
-		assert: spec isNotNil
-		description: [ 'Spec can not be nil' ].
 
 	^ spec
 ]

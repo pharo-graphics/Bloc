@@ -14,14 +14,12 @@ OSBackendWindow >> fullscreen [
 
 { #category : #'*BlocHost-OSWindow' }
 OSBackendWindow >> maximized [
-	<return: #Boolean>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'*BlocHost-OSWindow' }
 OSBackendWindow >> minimized [
-	<return: #Boolean>
 	
 	^ self subclassResponsibility
 ]

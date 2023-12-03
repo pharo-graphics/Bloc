@@ -14,7 +14,7 @@ Class {
 		'previousRunTime',
 		'isRunning'
 	],
-	#category : 'Bloc-Space - Tasks'
+	#category : #'Bloc-Space - Tasks'
 }
 
 { #category : #accessing }
@@ -72,7 +72,6 @@ BlRepeatedTask >> initialize [
 
 { #category : #'api - testing' }
 BlRepeatedTask >> isRunning [
-	<return: #Boolean>
 
 	^ isRunning
 ]

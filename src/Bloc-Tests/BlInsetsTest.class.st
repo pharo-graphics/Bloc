@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlInsetsTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Tests-Basic-Support',
-	#package : 'Bloc-Tests',
-	#tag : 'Basic-Support'
+	#name : #BlInsetsTest,
+	#superclass : #TestCase,
+	#category : 'Bloc-Tests-Basic-Support'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlInsetsTest >> assertInset: anInsets [
 	 
 	self 
@@ -20,14 +18,14 @@ BlInsetsTest >> assertInset: anInsets [
 	
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlInsetsTest >> testConstruction [
 
 	self assertInset: (BlInsets top: 1 right: 4 bottom: 3 left: 2).
 	self assertInset: (BlInsets top: 1 left: 2 bottom: 3 right: 4).
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlInsetsTest >> testEmpty [
 
 	| insets |
@@ -44,7 +42,7 @@ BlInsetsTest >> testEmpty [
 	
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlInsetsTest >> testEqual [
 	self
 		assert:
@@ -61,7 +59,7 @@ BlInsetsTest >> testEqual [
 						right: 4)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlInsetsTest >> testExpand [
 	| insets rectangle |
 	insets := BlInsets all: 10.
@@ -69,7 +67,7 @@ BlInsetsTest >> testExpand [
 	self assert: (insets expand: rectangle) = (-10 @ -10 corner: 110 @ 110)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlInsetsTest >> testExpandEmptyDoesNothing [
 	| insets rectangle |
 	insets := BlInsets empty.
@@ -78,7 +76,7 @@ BlInsetsTest >> testExpandEmptyDoesNothing [
 	self assert: (insets expand: rectangle) == rectangle.
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlInsetsTest >> testInset [
 	| insets rectangle |
 	insets := BlInsets all: 10.
@@ -86,7 +84,7 @@ BlInsetsTest >> testInset [
 	self assert: (insets inset: rectangle) = (10 @ 10 corner: 90 @ 90)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlInsetsTest >> testInsetEmptyDoesNothing [
 	| insets rectangle |
 	insets := BlInsets empty.
@@ -95,7 +93,7 @@ BlInsetsTest >> testInsetEmptyDoesNothing [
 	self assert: (insets inset: rectangle) == rectangle
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlInsetsTest >> testIsEmpty [
 
 	| insets |
@@ -112,7 +110,7 @@ BlInsetsTest >> testIsEmpty [
 	
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlInsetsTest >> testSubstraction [
 
 	| res |
@@ -122,7 +120,7 @@ BlInsetsTest >> testSubstraction [
 	self assert: res isEmpty
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlInsetsTest >> testSum [
 
 	| res |

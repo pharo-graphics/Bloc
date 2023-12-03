@@ -1,12 +1,10 @@
 Class {
-	#name : 'AtomicSharedPriorityQueueTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Tests-TaskIt',
-	#package : 'Bloc-Tests',
-	#tag : 'TaskIt'
+	#name : #AtomicSharedPriorityQueueTest,
+	#superclass : #TestCase,
+	#category : 'Bloc-Tests-TaskIt'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 AtomicSharedPriorityQueueTest >> testNextIfNone [
 
 	| queue |
@@ -51,7 +49,7 @@ AtomicSharedPriorityQueueTest >> testNextIfNone [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 AtomicSharedPriorityQueueTest >> testNextIfNoneOrdered [
 
 	| queue |

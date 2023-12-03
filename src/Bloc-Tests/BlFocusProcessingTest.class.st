@@ -1,17 +1,15 @@
 Class {
-	#name : 'BlFocusProcessingTest',
-	#superclass : 'BlEventTestCase',
-	#category : 'Bloc-Tests-Universe',
-	#package : 'Bloc-Tests',
-	#tag : 'Universe'
+	#name : #BlFocusProcessingTest,
+	#superclass : #BlEventTestCase,
+	#category : 'Bloc-Tests-Universe'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFocusProcessingTest >> firedEvents [
 	^ space focusProcessor firedEvents
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusProcessingTest >> testFocus [
 	self skip.
 	self flag: #toFix.
@@ -44,7 +42,7 @@ BlFocusProcessingTest >> testFocus [
 	self assert: self root focused.
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusProcessingTest >> testFocusLostOfRemovedChild [
 	| aChild |
 	self skip.

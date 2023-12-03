@@ -51,7 +51,6 @@ BlRopedTextIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anEx
 { #category : #'iterator - testing' }
 BlRopedTextIterator >> hasNext [
 	"Return true if there is a next text item (character) after a current position"
-	<return: #Boolean>
 	
 	^ iterator hasNext
 ]

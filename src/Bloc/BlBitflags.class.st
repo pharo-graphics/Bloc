@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'value'
 	],
-	#category : 'Bloc-DataStructure - Bitflags'
+	#category : #'Bloc-DataStructure - Bitflags'
 }
 
 { #category : #'private - class code' }
@@ -237,7 +237,6 @@ BlBitflags >> initializeWith: aValue [
 
 { #category : #testing }
 BlBitflags >> isEmpty [
-	<return: #Boolean>
 
 	^ self value isZero
 ]

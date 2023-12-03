@@ -6,7 +6,7 @@ By using this Trait in both Space and HostSpace we make sure that they have the 
 "
 Trait {
 	#name : #TBlSpaceProperties,
-	#category : 'Bloc-Space'
+	#category : #'Bloc-Space'
 }
 
 { #category : #'window - properties' }
@@ -87,7 +87,6 @@ TBlSpaceProperties >> position: aPoint [
 { #category : #'window - properties' }
 TBlSpaceProperties >> resizable [
 	"Return true if underlying window is resizable, false otherwise"
-	<return: #Boolean>
 
 	^ self explicitRequirement
 ]

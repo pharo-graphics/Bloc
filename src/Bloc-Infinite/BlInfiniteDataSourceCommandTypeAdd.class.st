@@ -3,19 +3,17 @@ I represent a concrete ""add"" command type
 
 "
 Class {
-	#name : 'BlInfiniteDataSourceCommandTypeAdd',
-	#superclass : 'BlInfiniteDataSourceCommandType',
-	#category : 'Bloc-Infinite-DataSource',
-	#package : 'Bloc-Infinite',
-	#tag : 'DataSource'
+	#name : #BlInfiniteDataSourceCommandTypeAdd,
+	#superclass : #BlInfiniteDataSourceCommandType,
+	#category : 'Bloc-Infinite-DataSource'
 }
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeAdd >> apply: aCommand in: anInfiniteElement [
 	anInfiniteElement dataSourceManager postponeAndUpdateElementHolders: aCommand on: anInfiniteElement
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeAdd >> apply: aCommand onPosition: aPosition [
 	|newPosition|
 	
@@ -26,22 +24,22 @@ BlInfiniteDataSourceCommandTypeAdd >> apply: aCommand onPosition: aPosition [
 	^ newPosition
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeAdd >> continuous: aPosition start: start [
 	self shouldNotImplement
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeAdd >> dispatch: aCommand toLayout: aLayout [
 	aLayout onItemsAddedAt: aCommand positionStart count: aCommand itemCount
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteDataSourceCommandTypeAdd >> isAdd [
 	^ true
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeAdd >> offsetPositions: aCommand in: anInfiniteElement [
 
 	anInfiniteElement dataSourceManager
@@ -50,12 +48,12 @@ BlInfiniteDataSourceCommandTypeAdd >> offsetPositions: aCommand in: anInfiniteEl
 		in: anInfiniteElement
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeAdd >> positionMultiplier [
 	self shouldNotImplement
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeAdd >> updateElementHoldersIn: anInfiniteElement command: aCommand [
 
 	anInfiniteElement dataSourceManager
@@ -64,12 +62,12 @@ BlInfiniteDataSourceCommandTypeAdd >> updateElementHoldersIn: anInfiniteElement 
 		in: anInfiniteElement
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeAdd >> updateElementHoldersIn: anInfiniteElement offset: offsetStart command: aCommand [
 	self shouldNotImplement
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeAdd >> updatePosition: aPosition with: aCommand from: myCommand [
 	| pos |
 	pos := aPosition.

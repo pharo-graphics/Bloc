@@ -14,7 +14,7 @@ Class {
 		'childStart',
 		'childEnd'
 	],
-	#category : 'Bloc-Basic-Bounds'
+	#category : #'Bloc-Basic-Bounds'
 }
 
 { #category : #accessing }
@@ -39,7 +39,7 @@ BlBoundsMatcher >> childStart: anObject [
 
 { #category : #private }
 BlBoundsMatcher >> compare: aNumber and: anotherNumber [
-	<return: #Number>
+	"Return a number telling the comparison of the two arguments. 1, 2 or 4"
 	aNumber > anotherNumber
 		ifTrue: [ ^ BlBoundsMatcherConstraints GreaterThan ].
 		
@@ -75,7 +75,6 @@ BlBoundsMatcher >> initialize [
 { #category : #'api - matcher' }
 BlBoundsMatcher >> matches [
 	"Returns whether the contraints of the matcher are correct"
-	<return: #Boolean>
 	
 	(constraints has: (BlBoundsMatcherConstraints Mask << BlBoundsMatcherConstraints ChildStartAndParentStart))
 		ifTrue: [

@@ -10,7 +10,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Paint'
+	#category : #'Bloc-Paint'
 }
 
 { #category : #'instance creation' }
@@ -42,7 +42,6 @@ BlPaint >> isOpaque [
 	"Return true if I am opaque, false otherwise.
 	It is important to implement paint specific logic in subclasses.
 	If paint is opeque we don't have to render elements behind it"
-	<return: #Boolean>
 
 	^ false
 ]

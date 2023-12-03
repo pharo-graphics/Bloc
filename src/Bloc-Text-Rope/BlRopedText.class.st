@@ -285,7 +285,6 @@ BlRopedText >> internalRepresentation [
 
 { #category : #'text - testing' }
 BlRopedText >> isEmpty [
-	<return: #Boolean>
 
 	^ self rope size = 0
 ]

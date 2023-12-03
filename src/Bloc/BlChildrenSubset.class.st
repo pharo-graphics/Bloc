@@ -26,7 +26,7 @@ Class {
 		'subsetArray',
 		'supersetChildren'
 	],
-	#category : 'Bloc-Basic-Children'
+	#category : #'Bloc-Basic-Children'
 }
 
 { #category : #'instance creation' }
@@ -59,8 +59,8 @@ BlChildrenSubset >> do: aBlock [
 
 { #category : #testing }
 BlChildrenSubset >> hasSuperset [
-	<return: #Boolean>
-
+	"I indicate whether or not the intent is to iterate over the complete set of children of an element."
+	
 	 ^ true
 ]
 

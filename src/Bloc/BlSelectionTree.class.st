@@ -20,7 +20,7 @@ Class {
 	#instVars : [
 		'root'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#category : #'Bloc-Utilities - Selection'
 }
 
 { #category : #comparing }
@@ -41,8 +41,7 @@ BlSelectionTree >> = anObject [
 { #category : #'tree - testing' }
 BlSelectionTree >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
-	<return: #Boolean>
-	
+
 	^ self hasRoot
 		ifTrue: [ self root contains: anIndex ]
 		ifFalse: [ false ]
@@ -51,7 +50,6 @@ BlSelectionTree >> contains: anIndex [
 { #category : #'tree - testing' }
 BlSelectionTree >> containsIndex: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
-	<return: #Boolean>
 	
 	^ self hasRoot
 		ifTrue: [ self root containsIndex: anIndex ]

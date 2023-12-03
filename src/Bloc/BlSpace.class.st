@@ -62,7 +62,7 @@ Class {
 	#classVars : [
 		'UniqueIdGenerator'
 	],
-	#category : 'Bloc-Space'
+	#category : #'Bloc-Space'
 }
 
 { #category : #'private - change' }
@@ -610,8 +610,8 @@ BlSpace >> defaultTitle [
 
 { #category : #'window - properties' }
 BlSpace >> densityDpi [
-	"Return the screen density expressed as dots-per-inch"
-	<return: #Number>
+	"Return the screen density expressed as dots-per-inch (a float)"
+
 
 	^ self
 		hostSpaceDo: [ :aHostSpace | aHostSpace densityDpi ]
@@ -1126,7 +1126,6 @@ BlSpace >> focusProcessor: aFocusProcessor [
 
 { #category : #'window - properties' }
 BlSpace >> focused [
-	<return: #Boolean>
 
 	^ focused
 ]
@@ -1227,7 +1226,6 @@ BlSpace >> hasInParentChain: anElement [
 { #category : #testing }
 BlSpace >> hasLayoutError [
 	"Return true if there was a layout error, false otherwise"
-	<return: #Boolean>
 
 	^ layoutError isNotNil
 ]
@@ -1446,7 +1444,6 @@ BlSpace >> isFocused [
 { #category : #'change - layout' }
 BlSpace >> isLayoutRequested [
 	"Indicates whether or not root element's layout needs to be updated next frame"
-	<return: #Boolean>
 	
 	^ self root isLayoutRequested or: [ self elementsNeedingLayout isNotEmpty ]
 ]
@@ -1492,7 +1489,6 @@ BlSpace >> knowsPosition [
 	"Return true if this space knows its position.
 	By default, spaces don't know their position and allow the window manager to choose one.
 	Setting an explicit position during space creation will result in a window created at a specified position"
-	<return: #Boolean>
 
 	^ position notNil
 ]
@@ -1587,7 +1583,6 @@ BlSpace >> needsPropertiesComputation: anElement [
 
 { #category : #'NOT-USED-change - style' }
 BlSpace >> needsStyleComputation [
-	<return: #Boolean>
 	
 	^ self elementsNeedingStyle isNotEmpty
 ]
@@ -1718,7 +1713,6 @@ BlSpace >> requestStyle: anElement [
 { #category : #'window - properties' }
 BlSpace >> resizable [
 	"Return true if underlying window is resizable, false otherwise"
-	<return: #Boolean>
 
 	^ self
 		hostSpaceDo: [ :aHostSpace | aHostSpace resizable ]

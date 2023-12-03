@@ -3,13 +3,12 @@ I have been automatically converted and probably manually tweaked from BlConcate
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlConcatenationRopeTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Tests',
-	#package : 'Bloc-Tests'
+	#name : #BlConcatenationRopeTest,
+	#superclass : #TestCase,
+	#category : 'Bloc-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testAttributesSmall0To0 [
 
 	<sampleInstance>
@@ -27,7 +26,7 @@ BlConcatenationRopeTest >> testAttributesSmall0To0 [
 	^ anAttributedRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testAttributesSmall0To1 [
 
 	<sampleInstance>
@@ -46,7 +45,7 @@ BlConcatenationRopeTest >> testAttributesSmall0To1 [
 	^ anAttributedRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testAttributesSmall0To10 [
 
 	<sampleInstance>
@@ -60,7 +59,7 @@ BlConcatenationRopeTest >> testAttributesSmall0To10 [
 	^ anAttributedRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testAttributesSmall0To5 [
 
 	<sampleInstance>
@@ -77,7 +76,7 @@ BlConcatenationRopeTest >> testAttributesSmall0To5 [
 	^ anAttributedRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testAttributesSmall2To2 [
 
 	<sampleInstance>
@@ -104,7 +103,7 @@ BlConcatenationRopeTest >> testAttributesSmall2To2 [
 	^ anAttributedRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testAttributesSmall2To3 [
 
 	<sampleInstance>
@@ -131,7 +130,7 @@ BlConcatenationRopeTest >> testAttributesSmall2To3 [
 	^ anAttributedRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testAttributesSmall4To5 [
 
 	<sampleInstance>
@@ -150,7 +149,7 @@ BlConcatenationRopeTest >> testAttributesSmall4To5 [
 	^ anAttributedRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testAttributesSmall4To6 [
 
 	<sampleInstance>
@@ -172,7 +171,7 @@ BlConcatenationRopeTest >> testAttributesSmall4To6 [
 	^ anAttributedRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testAttributesSmall5To10 [
 
 	<sampleInstance>
@@ -188,7 +187,7 @@ BlConcatenationRopeTest >> testAttributesSmall5To10 [
 	^ anAttributedRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testAttributesSmall5To6 [
 
 	<sampleInstance>
@@ -207,7 +206,7 @@ BlConcatenationRopeTest >> testAttributesSmall5To6 [
 	^ anAttributedRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testAttributesSmall6To6 [
 
 	<sampleInstance>
@@ -234,7 +233,7 @@ BlConcatenationRopeTest >> testAttributesSmall6To6 [
 	^ anAttributedRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testAttributesSmall6To7 [
 
 	<sampleInstance>
@@ -261,7 +260,7 @@ BlConcatenationRopeTest >> testAttributesSmall6To7 [
 	^ anAttributedRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testAttributesSmall9To10 [
 
 	<sampleInstance>
@@ -279,7 +278,7 @@ BlConcatenationRopeTest >> testAttributesSmall9To10 [
 	^ anAttributedRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testReadStreamSmall [
 
 	<sampleInstance>
@@ -292,7 +291,7 @@ BlConcatenationRopeTest >> testReadStreamSmall [
 	self assert: stream upToEnd asString equals: 'oWorld'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmall [
 
 	<sampleInstance>
@@ -316,7 +315,7 @@ BlConcatenationRopeTest >> testSmall [
 	^ aRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDelete0To0 [
 
 	<sampleInstance>
@@ -329,7 +328,7 @@ BlConcatenationRopeTest >> testSmallDelete0To0 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDelete0To1 [
 
 	<sampleInstance>
@@ -342,7 +341,7 @@ BlConcatenationRopeTest >> testSmallDelete0To1 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDelete0To10 [
 
 	<sampleInstance>
@@ -356,7 +355,7 @@ BlConcatenationRopeTest >> testSmallDelete0To10 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDelete0To5 [
 
 	<sampleInstance>
@@ -369,7 +368,7 @@ BlConcatenationRopeTest >> testSmallDelete0To5 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDelete10To10 [
 
 	<sampleInstance>
@@ -382,7 +381,7 @@ BlConcatenationRopeTest >> testSmallDelete10To10 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDelete1To2 [
 
 	<sampleInstance>
@@ -396,7 +395,7 @@ BlConcatenationRopeTest >> testSmallDelete1To2 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDelete4To4 [
 
 	<sampleInstance>
@@ -409,7 +408,7 @@ BlConcatenationRopeTest >> testSmallDelete4To4 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDelete4To5 [
 
 	<sampleInstance>
@@ -422,7 +421,7 @@ BlConcatenationRopeTest >> testSmallDelete4To5 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDelete4To6 [
 
 	<sampleInstance>
@@ -435,7 +434,7 @@ BlConcatenationRopeTest >> testSmallDelete4To6 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDelete5To10 [
 
 	<sampleInstance>
@@ -448,7 +447,7 @@ BlConcatenationRopeTest >> testSmallDelete5To10 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDelete5To5 [
 
 	<sampleInstance>
@@ -461,7 +460,7 @@ BlConcatenationRopeTest >> testSmallDelete5To5 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDelete5To6 [
 
 	<sampleInstance>
@@ -474,7 +473,7 @@ BlConcatenationRopeTest >> testSmallDelete5To6 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDelete6To7 [
 
 	<sampleInstance>
@@ -487,7 +486,7 @@ BlConcatenationRopeTest >> testSmallDelete6To7 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDelete9To10 [
 
 	<sampleInstance>
@@ -500,7 +499,7 @@ BlConcatenationRopeTest >> testSmallDelete9To10 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallDo [
 
 	<sampleInstance>
@@ -515,7 +514,7 @@ BlConcatenationRopeTest >> testSmallDo [
 	^ theIterated
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallEmpty [
 
 	<sampleInstance>
@@ -529,7 +528,7 @@ BlConcatenationRopeTest >> testSmallEmpty [
 	^ anEmpty
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom0To0 [
 
 	<sampleInstance>
@@ -543,7 +542,7 @@ BlConcatenationRopeTest >> testSmallFrom0To0 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom0To0Do [
 
 	<sampleInstance>
@@ -561,7 +560,7 @@ BlConcatenationRopeTest >> testSmallFrom0To0Do [
 	^ theIterated
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom0To10 [
 
 	<sampleInstance>
@@ -574,7 +573,7 @@ BlConcatenationRopeTest >> testSmallFrom0To10 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom0To10Do [
 
 	<sampleInstance>
@@ -592,7 +591,7 @@ BlConcatenationRopeTest >> testSmallFrom0To10Do [
 	^ theIterated
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom0To1Do [
 
 	<sampleInstance>
@@ -610,7 +609,7 @@ BlConcatenationRopeTest >> testSmallFrom0To1Do [
 	^ theIterated
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom0To5 [
 
 	<sampleInstance>
@@ -623,7 +622,7 @@ BlConcatenationRopeTest >> testSmallFrom0To5 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom0To5Do [
 
 	<sampleInstance>
@@ -641,7 +640,7 @@ BlConcatenationRopeTest >> testSmallFrom0To5Do [
 	^ theIterated
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom10To10 [
 
 	<sampleInstance>
@@ -655,7 +654,7 @@ BlConcatenationRopeTest >> testSmallFrom10To10 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom10To10Do [
 
 	<sampleInstance>
@@ -673,7 +672,7 @@ BlConcatenationRopeTest >> testSmallFrom10To10Do [
 	^ theIterated
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom1To1Do [
 
 	<sampleInstance>
@@ -691,7 +690,7 @@ BlConcatenationRopeTest >> testSmallFrom1To1Do [
 	^ theIterated
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom1To2 [
 
 	<sampleInstance>
@@ -704,7 +703,7 @@ BlConcatenationRopeTest >> testSmallFrom1To2 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom1To2Do [
 
 	<sampleInstance>
@@ -722,7 +721,7 @@ BlConcatenationRopeTest >> testSmallFrom1To2Do [
 	^ theIterated
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom1To5Do [
 
 	<sampleInstance>
@@ -740,7 +739,7 @@ BlConcatenationRopeTest >> testSmallFrom1To5Do [
 	^ theIterated
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom3To5Do [
 
 	<sampleInstance>
@@ -758,7 +757,7 @@ BlConcatenationRopeTest >> testSmallFrom3To5Do [
 	^ theIterated
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom4To5 [
 
 	<sampleInstance>
@@ -771,7 +770,7 @@ BlConcatenationRopeTest >> testSmallFrom4To5 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom4To6 [
 
 	<sampleInstance>
@@ -784,7 +783,7 @@ BlConcatenationRopeTest >> testSmallFrom4To6 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom5To10 [
 
 	<sampleInstance>
@@ -797,7 +796,7 @@ BlConcatenationRopeTest >> testSmallFrom5To10 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom5To10Do [
 
 	<sampleInstance>
@@ -815,7 +814,7 @@ BlConcatenationRopeTest >> testSmallFrom5To10Do [
 	^ theIterated
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom5To5 [
 
 	<sampleInstance>
@@ -829,7 +828,7 @@ BlConcatenationRopeTest >> testSmallFrom5To5 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom5To5Do [
 
 	<sampleInstance>
@@ -847,7 +846,7 @@ BlConcatenationRopeTest >> testSmallFrom5To5Do [
 	^ theIterated
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom5To6 [
 
 	<sampleInstance>
@@ -860,7 +859,7 @@ BlConcatenationRopeTest >> testSmallFrom5To6 [
 	^ aNewRope
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom5To6Do [
 
 	<sampleInstance>
@@ -878,7 +877,7 @@ BlConcatenationRopeTest >> testSmallFrom5To6Do [
 	^ theIterated
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlConcatenationRopeTest >> testSmallFrom9To10Do [
 
 	<sampleInstance>

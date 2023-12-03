@@ -9,7 +9,7 @@ Class {
 		'position',
 		'currentIterator'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #'private - asserting' }
@@ -58,9 +58,8 @@ BlConcatenationRopeIterator >> forwardIteratorAt: aPosition [
 
 { #category : #'iterator - testing' }
 BlConcatenationRopeIterator >> hasNext [
-	<return: #Boolean>
-	self assertInvariant.
 
+	self assertInvariant.
 	^ position < end
 ]
 
