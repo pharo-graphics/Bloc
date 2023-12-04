@@ -1,6 +1,6 @@
-Extension { #name : #BlGaussianShadowEffect }
+Extension { #name : 'BlGaussianShadowEffect' }
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlGaussianShadowEffect >> aeDrawBelow: aBlElement on: aeCanvas [
 
 	| alphaSurface shadowSpace visualBounds |

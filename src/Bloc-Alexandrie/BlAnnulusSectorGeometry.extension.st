@@ -1,6 +1,6 @@
-Extension { #name : #BlAnnulusSectorGeometry }
+Extension { #name : 'BlAnnulusSectorGeometry' }
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlAnnulusSectorGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
 	aeCanvas pathFactory: [ :cairoContext | 

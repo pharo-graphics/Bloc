@@ -13,30 +13,32 @@ Process explained:
     - the called method sets some specific properties on the BlElement, then calls (in most cases) 'allPropertiesFrom:on:' to set the 'rendering properties' and 'common properties' shared by most objects.
 "
 Class {
-	#name : #BlSvgFactory,
-	#superclass : #Object,
+	#name : 'BlSvgFactory',
+	#superclass : 'Object',
 	#instVars : [
 		'classes',
 		'definitions'
 	],
-	#category : #'Bloc-SVG-Converter'
+	#category : 'Bloc-SVG-Converter',
+	#package : 'Bloc-SVG',
+	#tag : 'Converter'
 }
 
-{ #category : #properties }
+{ #category : 'properties' }
 BlSvgFactory >> allPropertiesFrom: attributes on: aBlElement [
 
 	self renderingPropertiesFrom: attributes on: aBlElement.
 	self commonPropertiesFrom: attributes on: aBlElement
 ]
 
-{ #category : #definitions }
+{ #category : 'definitions' }
 BlSvgFactory >> altGlyphDefFrom: node [
 
 	self flag: #todo.
 	self notYetImplemented
 ]
 
-{ #category : #'circle & ellipse' }
+{ #category : 'circle & ellipse' }
 BlSvgFactory >> circleFrom: node [
 
 	node attributeAt: 'rx' put: (node attributeAt: 'r').
@@ -44,14 +46,14 @@ BlSvgFactory >> circleFrom: node [
 	^ self ellipseFrom: node
 ]
 
-{ #category : #definitions }
+{ #category : 'definitions' }
 BlSvgFactory >> clipPathFrom: node [
 
 	self flag: #todo.
 	self notYetImplemented
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 BlSvgFactory >> commonPropertiesFrom: attributes on: aBlElement [
 
 	aBlElement outskirts: BlOutskirts centered.
@@ -66,41 +68,41 @@ self flag: #todo. "		aBlElement svgName: (attributes at: 'id')."
 		self idHandlingFrom: attributes on: aBlElement ]
 ]
 
-{ #category : #definitions }
+{ #category : 'definitions' }
 BlSvgFactory >> cursorFrom: node [
 
 	self flag: #todo.
 	self notYetImplemented
 ]
 
-{ #category : #definitions }
+{ #category : 'definitions' }
 BlSvgFactory >> definitions [
 
 	^ definitions
 ]
 
-{ #category : #definitions }
+{ #category : 'definitions' }
 BlSvgFactory >> defsFrom: node [
 	"Behaves like a 'g' but won't be added to any parent because always contains references, see 'XMLElement >> translatedBy:withParent:' "
 
 	^ self gFrom: node
 ]
 
-{ #category : #metadata }
+{ #category : 'metadata' }
 BlSvgFactory >> descFrom: attributes [
 
 	self flag: #todo.
 	self notYetImplemented
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 BlSvgFactory >> displayPropertyFrom: attributes on: aBlElement [
 
 	(attributes at: 'display') = 'none' ifTrue: [
 		aBlElement visibility: BlVisibilityGone new ]
 ]
 
-{ #category : #'circle & ellipse' }
+{ #category : 'circle & ellipse' }
 BlSvgFactory >> ellipseFrom: node [
 
 	| ellipse |
@@ -117,7 +119,7 @@ BlSvgFactory >> ellipseFrom: node [
 	^ ellipse
 ]
 
-{ #category : #'circle & ellipse' }
+{ #category : 'circle & ellipse' }
 BlSvgFactory >> ellipsePositionFrom: node [
 
 	| cx cy |
@@ -134,7 +136,7 @@ BlSvgFactory >> ellipsePositionFrom: node [
 		y: (cy - (node attributeAt: 'ry') asNumber)
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 BlSvgFactory >> extentFrom: node on: aBlElement [
 
 	node
@@ -158,7 +160,7 @@ BlSvgFactory >> extentFrom: node on: aBlElement [
 			aBlElement constraints vertical matchParent "100%" ]
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 BlSvgFactory >> fillPropertiesFrom: attributes on: aBlElement [
 
 	| backgroundBuilder |
@@ -174,14 +176,14 @@ BlSvgFactory >> fillPropertiesFrom: attributes on: aBlElement [
 		aBlElement background: backgroundBuilder build ]
 ]
 
-{ #category : #definitions }
+{ #category : 'definitions' }
 BlSvgFactory >> filterFrom: node [
 
 	self flag: #todo.
 	self notYetImplemented
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 BlSvgFactory >> gFrom: node [
 
 	| groupElement |
@@ -196,7 +198,7 @@ BlSvgFactory >> gFrom: node [
 	^ groupElement
 ]
 
-{ #category : #translating }
+{ #category : 'translating' }
 BlSvgFactory >> generateElementFrom: node [
 
 	| symbol |
@@ -211,7 +213,7 @@ BlSvgFactory >> generateElementFrom: node [
 		ifFalse: [ ^ self metadataFrom: node ]
 ]
 
-{ #category : #'gradients & patterns' }
+{ #category : 'gradients & patterns' }
 BlSvgFactory >> gradientFrom: node on: aBlGradientPaint [
 
 	| stopCollection |
@@ -225,13 +227,13 @@ BlSvgFactory >> gradientFrom: node on: aBlGradientPaint [
 	self idHandlingFrom: node attributes on: aBlGradientPaint
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 BlSvgFactory >> idHandlingFrom: attributes on: anObject [
 
 	self definitions at: (attributes at: 'id') put: anObject
 ]
 
-{ #category : #image }
+{ #category : 'image' }
 BlSvgFactory >> imageFrom: node [
 
 	| imageElement |
@@ -244,7 +246,7 @@ BlSvgFactory >> imageFrom: node [
 	^ imageElement
 ]
 
-{ #category : #line }
+{ #category : 'line' }
 BlSvgFactory >> lineEndingPointFrom: node [
 
 	| x2 y2 |
@@ -258,7 +260,7 @@ BlSvgFactory >> lineEndingPointFrom: node [
 	^ x2 @ y2
 ]
 
-{ #category : #line }
+{ #category : 'line' }
 BlSvgFactory >> lineFrom: node [
 
 	| line |
@@ -273,7 +275,7 @@ BlSvgFactory >> lineFrom: node [
 	^ line
 ]
 
-{ #category : #line }
+{ #category : 'line' }
 BlSvgFactory >> lineStartingPointFrom: node [
 
 	| x1 y1 |
@@ -287,7 +289,7 @@ BlSvgFactory >> lineStartingPointFrom: node [
 	^ x1 @ y1
 ]
 
-{ #category : #'gradients & patterns' }
+{ #category : 'gradients & patterns' }
 BlSvgFactory >> linearGradientEndingPointFrom: node [
 
 	| x2 y2 |
@@ -302,7 +304,7 @@ BlSvgFactory >> linearGradientEndingPointFrom: node [
 	^ x2 @ y2
 ]
 
-{ #category : #'gradients & patterns' }
+{ #category : 'gradients & patterns' }
 BlSvgFactory >> linearGradientFrom: node [
 
 	| aBlGradientPaint |
@@ -314,7 +316,7 @@ BlSvgFactory >> linearGradientFrom: node [
 	self gradientFrom: node on: aBlGradientPaint
 ]
 
-{ #category : #'gradients & patterns' }
+{ #category : 'gradients & patterns' }
 BlSvgFactory >> linearGradientStartingPointFrom: node [
 
 	| x1 y1 |
@@ -328,21 +330,21 @@ BlSvgFactory >> linearGradientStartingPointFrom: node [
 	^ x1 @ y1
 ]
 
-{ #category : #definitions }
+{ #category : 'definitions' }
 BlSvgFactory >> markerFrom: node [
 
 	self flag: #todo.
 	self notYetImplemented
 ]
 
-{ #category : #definitions }
+{ #category : 'definitions' }
 BlSvgFactory >> maskFrom: node [
 
 	self flag: #todo.
 	self notYetImplemented
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlSvgFactory >> matrixElement: aBlElement with: anOrderedCollection [
 
 	aBlElement transformDo: [ :t |
@@ -356,14 +358,14 @@ BlSvgFactory >> matrixElement: aBlElement with: anOrderedCollection [
 				shy: (anOrderedCollection at: 2)) ]
 ]
 
-{ #category : #metadata }
+{ #category : 'metadata' }
 BlSvgFactory >> metadataFrom: attributes [
 
 	self flag: #todo.
 	self notYetImplemented
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 BlSvgFactory >> paintFrom: aString on: aBlElement [
 
 	^ (self definitions
@@ -373,7 +375,7 @@ BlSvgFactory >> paintFrom: aString on: aBlElement [
 			adaptedToElement: aBlElement
 ]
 
-{ #category : #path }
+{ #category : 'path' }
 BlSvgFactory >> pathFrom: node [
 
 	| pathString pathElement |
@@ -390,14 +392,14 @@ BlSvgFactory >> pathFrom: node [
 	^ pathElement
 ]
 
-{ #category : #'gradients & patterns' }
+{ #category : 'gradients & patterns' }
 BlSvgFactory >> patternFrom: node [
 
 	self flag: #todo.
 	self notYetImplemented
 ]
 
-{ #category : #'polyline & polygon' }
+{ #category : 'polyline & polygon' }
 BlSvgFactory >> pointsFrom: node [
 
 	node attributeAt: 'points' ifPresent: [
@@ -405,7 +407,7 @@ BlSvgFactory >> pointsFrom: node [
 			  (xAndY copyUpTo: $,) asNumber @ (xAndY copyAfter: $,) asNumber ] ]
 ]
 
-{ #category : #'polyline & polygon' }
+{ #category : 'polyline & polygon' }
 BlSvgFactory >> polygonFrom: node [
 
 	| polygon |
@@ -416,7 +418,7 @@ BlSvgFactory >> polygonFrom: node [
 	^ polygon
 ]
 
-{ #category : #'polyline & polygon' }
+{ #category : 'polyline & polygon' }
 BlSvgFactory >> polylineFrom: node [
 
 	| polyline points |
@@ -429,7 +431,7 @@ BlSvgFactory >> polylineFrom: node [
 	^ polyline
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 BlSvgFactory >> positionFrom: node on: aBlElement [
 
 	| x y |
@@ -443,7 +445,7 @@ BlSvgFactory >> positionFrom: node on: aBlElement [
 	aBlElement position: x @ y
 ]
 
-{ #category : #'gradients & patterns' }
+{ #category : 'gradients & patterns' }
 BlSvgFactory >> radialGradientFrom: node [
 
 	| aBlRadialGradientPaint r cx cy fx fy |
@@ -477,7 +479,7 @@ BlSvgFactory >> radialGradientFrom: node [
 	self gradientFrom: node on: aBlRadialGradientPaint
 ]
 
-{ #category : #'gradients & patterns' }
+{ #category : 'gradients & patterns' }
 BlSvgFactory >> radialGradientRadiusFrom: node [
 
 	| r |
@@ -488,7 +490,7 @@ BlSvgFactory >> radialGradientRadiusFrom: node [
 	^ r
 ]
 
-{ #category : #rectangle }
+{ #category : 'rectangle' }
 BlSvgFactory >> rectCornerRadiusFrom: node [
 
 	| rx ry maxRadius maxAllowed |
@@ -506,7 +508,7 @@ BlSvgFactory >> rectCornerRadiusFrom: node [
 	^ maxRadius min: maxAllowed
 ]
 
-{ #category : #rectangle }
+{ #category : 'rectangle' }
 BlSvgFactory >> rectFrom: node [
 
 	| rectangle |
@@ -522,7 +524,7 @@ BlSvgFactory >> rectFrom: node [
 	^ rectangle
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 BlSvgFactory >> renderingPropertiesFrom: attributes on: aBlElement [
 
 	self transformPropertiesFrom: attributes on: aBlElement.
@@ -535,14 +537,14 @@ BlSvgFactory >> renderingPropertiesFrom: attributes on: aBlElement [
 	self strokePropertiesFrom: attributes on: aBlElement
 ]
 
-{ #category : #definitions }
+{ #category : 'definitions' }
 BlSvgFactory >> reset [
 
 	definitions := WeakKeyDictionary new.
 	classes := WeakKeyDictionary new
 ]
 
-{ #category : #text }
+{ #category : 'text' }
 BlSvgFactory >> ropedTextFrom: node on: textElement [
 
 	| text textAttributes |
@@ -564,7 +566,7 @@ BlSvgFactory >> ropedTextFrom: node on: textElement [
 	textElement text: text
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlSvgFactory >> rotateElement: aBlElement with: anOrderedCollection [
 
 	| r cx cy |
@@ -582,7 +584,7 @@ BlSvgFactory >> rotateElement: aBlElement with: anOrderedCollection [
 			rotateBy: r ]
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlSvgFactory >> scaleElement: aBlElement with: anOrderedCollection [
 
 	| sx sy |
@@ -593,7 +595,7 @@ BlSvgFactory >> scaleElement: aBlElement with: anOrderedCollection [
 	aBlElement transformDo: [ :t | t inherit scaleBy: sx @ sy ]
 ]
 
-{ #category : #text }
+{ #category : 'text' }
 BlSvgFactory >> setAttributesForTextFrom: node [
 	"In svg the fill attribute from the text element commands the text color, not the background color.
 	That's why Bloc should treat this attribute the same way it does the stroke attribute from the other svg elements."
@@ -606,7 +608,7 @@ BlSvgFactory >> setAttributesForTextFrom: node [
 		node removeAttribute: 'fill-opacity' ]
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlSvgFactory >> skewXElement: aBlElement with: anOrderedCollection [
 
 	| angle |
@@ -615,7 +617,7 @@ BlSvgFactory >> skewXElement: aBlElement with: anOrderedCollection [
 	aBlElement transformDo: [ :t | t inherit skewX: angle ]
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlSvgFactory >> skewYElement: aBlElement with: anOrderedCollection [
 
 	| angle |
@@ -624,7 +626,7 @@ BlSvgFactory >> skewYElement: aBlElement with: anOrderedCollection [
 	aBlElement transformDo: [ :t | t inherit skewY: angle ]
 ]
 
-{ #category : #'gradients & patterns' }
+{ #category : 'gradients & patterns' }
 BlSvgFactory >> stopFrom: node [
 
 	| offsetString offset color |
@@ -641,7 +643,7 @@ BlSvgFactory >> stopFrom: node [
 	^ offset asFloat -> color
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 BlSvgFactory >> strokePropertiesFrom: attributes on: aBlElement [
 
 	| borderBuilder dashArray |
@@ -682,7 +684,7 @@ BlSvgFactory >> strokePropertiesFrom: attributes on: aBlElement [
 		aBlElement border: borderBuilder build ]
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 BlSvgFactory >> svgFrom: node [
 
 	| rootElement |
@@ -695,14 +697,14 @@ BlSvgFactory >> svgFrom: node [
 	^ rootElement
 ]
 
-{ #category : #definitions }
+{ #category : 'definitions' }
 BlSvgFactory >> symbolFrom: node [
 	"Behaves like a 'svg' but won't be added to any parent because is always a reference, see 'XMLElement >> translatedBy:withParent:' "
 
 	^ self svgFrom: node
 ]
 
-{ #category : #text }
+{ #category : 'text' }
 BlSvgFactory >> textFrom: node [
 
 	| textElement |
@@ -712,14 +714,14 @@ BlSvgFactory >> textFrom: node [
 	^ textElement
 ]
 
-{ #category : #metadata }
+{ #category : 'metadata' }
 BlSvgFactory >> titleFrom: attributes [
 
 	self flag: #todo.
 	self notYetImplemented
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 BlSvgFactory >> transformPropertiesFrom: attributes on: aBlElement [
 
 	| transformations |
@@ -743,7 +745,7 @@ BlSvgFactory >> transformPropertiesFrom: attributes on: aBlElement [
 			self perform: symbol with: aBlElement with: args ] ]
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlSvgFactory >> translateElement: aBlElement with: anOrderedCollection [
 
 	| x y |
@@ -754,7 +756,7 @@ BlSvgFactory >> translateElement: aBlElement with: anOrderedCollection [
 	aBlElement transformDo: [ :t | t inherit translateBy: x @ y ]
 ]
 
-{ #category : #text }
+{ #category : 'text' }
 BlSvgFactory >> tspanFrom: node [
 
 	| textElement |
@@ -773,7 +775,7 @@ BlSvgFactory >> tspanFrom: node [
 	^ textElement
 ]
 
-{ #category : #definitions }
+{ #category : 'definitions' }
 BlSvgFactory >> useFrom: node [
 
 	| element |
@@ -788,7 +790,7 @@ BlSvgFactory >> useFrom: node [
 	^ element
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 BlSvgFactory >> viewBoxFrom: node on: aBlElement [
 
 	| array updateTransformationBlock |

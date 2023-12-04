@@ -12,27 +12,29 @@ infiniteElement
 
 "
 Class {
-	#name : #BlInfiniteElementDetachedEvent,
-	#superclass : #BlEvent,
+	#name : 'BlInfiniteElementDetachedEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'element'
 	],
-	#category : #'Bloc-Infinite-Events'
+	#category : 'Bloc-Infinite-Events',
+	#package : 'Bloc-Infinite',
+	#tag : 'Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlInfiniteElementDetachedEvent class >> element: anElement [
 	^ self new
 		element: anElement;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteElementDetachedEvent >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteElementDetachedEvent >> element: anObject [
 	element := anObject
 ]

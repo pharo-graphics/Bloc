@@ -1,10 +1,12 @@
 Class {
-	#name : #BAFormSpaceRenderer,
-	#superclass : #BASpaceRenderer,
-	#category : #'Bloc-Alexandrie-Renderer'
+	#name : 'BAFormSpaceRenderer',
+	#superclass : 'BASpaceRenderer',
+	#category : 'Bloc-Alexandrie-Renderer',
+	#package : 'Bloc-Alexandrie',
+	#tag : 'Renderer'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BAFormSpaceRenderer >> initializeForSurface: aBlHostRendererFormSurface [ 
 
 	self

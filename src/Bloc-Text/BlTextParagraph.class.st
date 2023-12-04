@@ -248,6 +248,14 @@ BlTextParagraph >> measureOn: aBlHostTextMeasurer [
 
 ]
 
+{ #category : #accessing }
+BlTextParagraph >> measuredEnd [
+	"Return a text index of the last measured character.
+	Must be equal to the last character of the last span"
+	
+	^ end
+]
+
 { #category : #'paragraph - measuring' }
 BlTextParagraph >> newParagraphMeasurerOn: aHostSpanMeasurer [
 
@@ -350,6 +358,12 @@ BlTextParagraph >> spanAtPoint: aPoint ifFound: aFoundBlock ifNone: anExceptionB
 						ifFalse: [ 1 ] ] ]
 		do: [ :aParagraphSpan | aFoundBlock cull: aParagraphSpan ]
 		ifNone: [ :a :b | anExceptionBlock cull: (a ifNil: [ b ] ifNotNil: [ a ]) ]
+]
+
+{ #category : #accessing }
+BlTextParagraph >> text [ 
+
+	^ text
 ]
 
 { #category : #'api - instantiation' }

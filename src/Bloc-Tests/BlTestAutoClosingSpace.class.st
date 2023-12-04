@@ -2,26 +2,28 @@
 I am a space that closes itself after a given amount of frames
 "
 Class {
-	#name : #BlTestAutoClosingSpace,
-	#superclass : #BlOSpace,
+	#name : 'BlTestAutoClosingSpace',
+	#superclass : 'BlOSpace',
 	#instVars : [
 		'frames',
 		'frameCounter'
 	],
-	#category : #'Bloc-Tests-Examples'
+	#category : 'Bloc-Tests-Examples',
+	#package : 'Bloc-Tests',
+	#tag : 'Examples'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTestAutoClosingSpace >> frames [
 	^ frames
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTestAutoClosingSpace >> frames: aNumber [
 	frames := aNumber
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTestAutoClosingSpace >> initialize [
 	super initialize.
 	
@@ -29,7 +31,7 @@ BlTestAutoClosingSpace >> initialize [
 	frameCounter := 0
 ]
 
-{ #category : #pulse }
+{ #category : 'pulse' }
 BlTestAutoClosingSpace >> pulse [
 	super pulse.
 	

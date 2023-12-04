@@ -3,19 +3,20 @@ I have been automatically converted and probably manually tweaked from BlEventDi
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlEventDispatcherTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Tests'
+	#name : 'BlEventDispatcherTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Tests',
+	#package : 'Bloc-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlEventDispatcherTest >> testDirectDispatcher [
 
 	<sampleInstance>
 	^ BlDirectEventDispatcher on: BlElement new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlEventDispatcherTest >> testDirectDispatcherWithMouseDownFilter [
 
 	<sampleInstance>
@@ -26,7 +27,7 @@ BlEventDispatcherTest >> testDirectDispatcherWithMouseDownFilter [
 	^ aDispatcher
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlEventDispatcherTest >> testDirectDispatcherWithMouseDownFilterAndHandler [
 
 	<sampleInstance>
@@ -45,7 +46,7 @@ BlEventDispatcherTest >> testDirectDispatcherWithMouseDownFilterAndHandler [
 	^ aDispatcher
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlEventDispatcherTest >> testDirectDispatcherWithMouseDownFilterAndHandlerWithMouseUpHandler [
 
 	<sampleInstance>

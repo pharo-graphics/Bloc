@@ -1,6 +1,6 @@
-Extension { #name : #BlPaintBackground }
+Extension { #name : 'BlPaintBackground' }
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlPaintBackground >> aeApplyTo: aeCanvas [
 
 	self paint aeApplyAsBackgroundTo: aeCanvas opacity: self opacity

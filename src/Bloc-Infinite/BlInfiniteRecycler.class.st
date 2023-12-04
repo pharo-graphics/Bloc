@@ -28,17 +28,19 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #BlInfiniteRecycler,
-	#superclass : #Object,
+	#name : 'BlInfiniteRecycler',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'attachedScrap'
 	],
-	#category : #'Bloc-Infinite-Recycler'
+	#category : 'Bloc-Infinite-Recycler',
+	#package : 'Bloc-Infinite',
+	#tag : 'Recycler'
 }
 
-{ #category : #'accessing - cache' }
+{ #category : 'accessing - cache' }
 BlInfiniteRecycler >> attachedScrap [
 	"Return a collection of attached scrapped elements"
 	<return: #SequenceableCollection>
@@ -46,32 +48,32 @@ BlInfiniteRecycler >> attachedScrap [
 	^ attachedScrap
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteRecycler >> clear [
 	self removeScrap
 ]
 
-{ #category : #recycling }
+{ #category : 'recycling' }
 BlInfiniteRecycler >> clearOldPositions [
 
 	self attachedScrap do: [ :anElementHolder |
 		anElementHolder clearOldPosition ]
 ]
 
-{ #category : #'accessing - cache' }
+{ #category : 'accessing - cache' }
 BlInfiniteRecycler >> clearScrap [
 	"Removes all scrapped elements from corresponding pools"
 	
 	attachedScrap removeAll
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteRecycler >> defaultFetcher [
 	^ BlRecyclerPositionScrapFetcher uniqueInstance 
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlInfiniteRecycler >> elementFor: aPosition in: anInfiniteElement [
 	"I do a hard work obtaining element for the data at a position in data source.
 	@see elementFor: for more information"
@@ -110,27 +112,27 @@ BlInfiniteRecycler >> elementFor: aPosition in: anInfiniteElement [
 	^ itemElement
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlInfiniteRecycler >> fetcher [
 
 	^ self defaultFetcher
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteRecycler >> initialize [
 
 	super initialize.
 	attachedScrap := OrderedCollection new
 ]
 
-{ #category : #recycling }
+{ #category : 'recycling' }
 BlInfiniteRecycler >> quickRecycleScrap: anElement [
 	"Used as a fast path for unscrapping and recycling a an element during a bulk operation.
 	The sender must send #clearScrap when it's done to update the recycler's internal bookkeeping.
 	anElement must not be nil"
 ]
 
-{ #category : #recycling }
+{ #category : 'recycling' }
 BlInfiniteRecycler >> recycleElement: anElement in: anInfiniteElement [
 	"Recycle a detached element.
 	The specified element will be added to a pool of elements for later rebinding and reuse.
@@ -144,7 +146,7 @@ BlInfiniteRecycler >> recycleElement: anElement in: anInfiniteElement [
 		ifTrue: [ anElementHolder clearReturnedFromScrap ]
 ]
 
-{ #category : #recycling }
+{ #category : 'recycling' }
 BlInfiniteRecycler >> removeScrap [
 
 	"Remove all scrap elements out of this recycler.
@@ -153,7 +155,7 @@ BlInfiniteRecycler >> removeScrap [
 	attachedScrap removeAll
 ]
 
-{ #category : #'accessing - cache' }
+{ #category : 'accessing - cache' }
 BlInfiniteRecycler >> reverseScrapDo: aBlock [
 	| aScrapCount |
 	
@@ -167,7 +169,7 @@ BlInfiniteRecycler >> reverseScrapDo: aBlock [
 		anElement ifNotNil: [ aBlock cull: anElement cull: anIndex ] ]
 ]
 
-{ #category : #'accessing - cache' }
+{ #category : 'accessing - cache' }
 BlInfiniteRecycler >> scrapCount [
 	"Return amount of scrapped elements"
 	<return: #Number>
@@ -175,7 +177,7 @@ BlInfiniteRecycler >> scrapCount [
 	^ attachedScrap size
 ]
 
-{ #category : #recycling }
+{ #category : 'recycling' }
 BlInfiniteRecycler >> scrapElement: anElement in: anInfiniteElement [
 
 	"
@@ -196,7 +198,7 @@ BlInfiniteRecycler >> scrapElement: anElement in: anInfiniteElement [
 	attachedScrap add: anElementHolder
 ]
 
-{ #category : #'accessing - cache' }
+{ #category : 'accessing - cache' }
 BlInfiniteRecycler >> scrappedElementAt: anIndex [
 
 	"Return scrapped element at anIndex"
@@ -205,7 +207,7 @@ BlInfiniteRecycler >> scrappedElementAt: anIndex [
 	^ (attachedScrap at: anIndex) itemElement
 ]
 
-{ #category : #recycling }
+{ #category : 'recycling' }
 BlInfiniteRecycler >> unscrapHolder: anElementHolder [
 
 	"Remove a previously scrapped element holder from the pool of eligible scrap.

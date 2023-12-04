@@ -1,13 +1,13 @@
-Extension { #name : #BlTextElement }
+Extension { #name : 'BlTextElement' }
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlTextElement >> aeDrawBeneathOn: aeCanvas [
 
 	"Draw highlight attributes"
 	self aeDrawHighlightsOn: aeCanvas
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlTextElement >> aeDrawGeometryOn: aeCanvas [
 
 	paragraph ifNil: [ ^ self ].
@@ -18,7 +18,7 @@ BlTextElement >> aeDrawGeometryOn: aeCanvas [
 		paragraph aeDrawOn: aeCanvas ]
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlTextElement >> aeDrawHighlightsOn: aeCanvas [
 	highlightsMap ifNil: [ ^self ].
 	self highlights do: [ :eachHighlight |  
@@ -27,7 +27,7 @@ BlTextElement >> aeDrawHighlightsOn: aeCanvas [
 		self aeDrawRectangles: rectangles on: aeCanvas with: eachHighlight paint ]
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlTextElement >> aeDrawOn: aeCanvas [
 
 	aeCanvas restoreContextAfter: [  
@@ -37,7 +37,7 @@ BlTextElement >> aeDrawOn: aeCanvas [
 	super aeDrawOn: aeCanvas
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlTextElement >> aeDrawRectangles: anArrayOfrectangles on: aeCanvas with: aColor [
 
 	"TODO: refactor the following is the only Alexandrie-specific code"
@@ -59,13 +59,13 @@ BlTextElement >> aeDrawRectangles: anArrayOfrectangles on: aeCanvas with: aColor
 		aeCanvas drawFigure ]
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlTextElement >> aeDrawSelectionOn: aeCanvas [
 
 	"self aeDrawselection: selection on: aeCanvas color: self class selectionColor"
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlTextElement >> aeDrawselection: aSelection on: aeCanvas color: aColor [
 
 	| rectangles |

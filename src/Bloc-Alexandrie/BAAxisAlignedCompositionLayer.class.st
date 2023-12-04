@@ -11,17 +11,19 @@ There are two strategies for doing it:
 Note: Element effect's have wantsCompositionLayer on their API, which the element queries to decide if it has a composition layer. For example, BlGaussianShadowEffect answers true.
 "
 Class {
-	#name : #BAAxisAlignedCompositionLayer,
-	#superclass : #Object,
+	#name : 'BAAxisAlignedCompositionLayer',
+	#superclass : 'Object',
 	#instVars : [
 		'surface',
 		'element',
 		'pattern'
 	],
-	#category : #'Bloc-Alexandrie-Utility'
+	#category : 'Bloc-Alexandrie-Utility',
+	#package : 'Bloc-Alexandrie',
+	#tag : 'Utility'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BAAxisAlignedCompositionLayer class >> newFor: aBlElement [
 
 	^ self basicNew
@@ -29,7 +31,7 @@ BAAxisAlignedCompositionLayer class >> newFor: aBlElement [
 		yourself
 ]
 
-{ #category : #drawing }
+{ #category : 'drawing' }
 BAAxisAlignedCompositionLayer >> createSurfaceToBePaintedOn: aCanvas [
 
 	| scale layerCanvas |
@@ -48,7 +50,7 @@ BAAxisAlignedCompositionLayer >> createSurfaceToBePaintedOn: aCanvas [
 	layerCanvas flush
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BAAxisAlignedCompositionLayer >> ensureReadyToPaintOn: aCanvas [
 	"Ensure I'm ready to paint"
 
@@ -62,7 +64,7 @@ BAAxisAlignedCompositionLayer >> ensureReadyToPaintOn: aCanvas [
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BAAxisAlignedCompositionLayer >> initializeFor: aBlElement [
 
 	self initialize.
@@ -70,13 +72,13 @@ BAAxisAlignedCompositionLayer >> initializeFor: aBlElement [
 	element := aBlElement
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BAAxisAlignedCompositionLayer >> isValid [
 
 	^ surface notNil and: [ surface isNull not ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BAAxisAlignedCompositionLayer >> paintOn: aCanvas [ 
 	"Ensure the surface was drawn (with its transformation stack), "
 
@@ -95,7 +97,7 @@ BAAxisAlignedCompositionLayer >> paintOn: aCanvas [
 		aCanvas paint: pattern alpha: element opacity ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BAAxisAlignedCompositionLayer >> printOn: aStream [
 	"Generate a string representation of the receiver based on its instance variables."
 
@@ -110,13 +112,13 @@ BAAxisAlignedCompositionLayer >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 BAAxisAlignedCompositionLayer >> removeFromParent [
 	"This layer is being detached from it's element"
 
 ]
 
-{ #category : #drawing }
+{ #category : 'drawing' }
 BAAxisAlignedCompositionLayer >> updateSurfaceToBePaintedOn: aCanvas [
 	"We assume the layer exists and isValid, but needs to refresh its pixels."
 

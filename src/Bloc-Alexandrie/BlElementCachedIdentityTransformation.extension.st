@@ -1,6 +1,6 @@
-Extension { #name : #BlElementCachedIdentityTransformation }
+Extension { #name : 'BlElementCachedIdentityTransformation' }
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlElementCachedIdentityTransformation >> aeApplyTo: aeCanvas [
 	"Nothing to transform"
 ]

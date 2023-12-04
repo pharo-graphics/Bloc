@@ -7,12 +7,13 @@ These are the rules for test in subclasses:
 
 "
 Class {
-	#name : #BlExampleTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Tests'
+	#name : 'BlExampleTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Tests',
+	#package : 'Bloc-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlExampleTest class >> testSelectors [
 	| pragmas |
 	pragmas := #(#sampleInstance #gtExample).
@@ -23,7 +24,7 @@ BlExampleTest class >> testSelectors [
 		  thenCollect: [ :each | each selector ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlExampleTest >> performTest [ 
 
 	| testMethod |

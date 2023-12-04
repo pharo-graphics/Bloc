@@ -1,6 +1,6 @@
-Extension { #name : #BlRectangleGeometry }
+Extension { #name : 'BlRectangleGeometry' }
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlRectangleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
 	aeCanvas pathFactory: [ :cairoContext |
@@ -8,7 +8,7 @@ BlRectangleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlRectangleGeometry >> aeApplyWithInsideBorderTo: aeCanvas element: aBlElement borderWidth: aWidth [ 
 
 	aeCanvas borderPathFactory: [ :cairoContext |
@@ -21,7 +21,7 @@ BlRectangleGeometry >> aeApplyWithInsideBorderTo: aeCanvas element: aBlElement b
 			height: aBlElement height - aWidth ]
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlRectangleGeometry >> aeApplyWithOutsideBorderTo: aeCanvas element: aBlElement borderWidth: aWidth [ 
 
 	aeCanvas borderPathFactory: [ :cairoContext |

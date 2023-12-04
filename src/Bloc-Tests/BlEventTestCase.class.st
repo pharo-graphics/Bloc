@@ -1,13 +1,15 @@
 Class {
-	#name : #BlEventTestCase,
-	#superclass : #TestCase,
+	#name : 'BlEventTestCase',
+	#superclass : 'TestCase',
 	#instVars : [
 		'space'
 	],
-	#category : #'Bloc-Tests-Universe'
+	#category : 'Bloc-Tests-Universe',
+	#package : 'Bloc-Tests',
+	#tag : 'Universe'
 }
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 BlEventTestCase >> assertFiredEventIs: anEventClass target: aTarget withPropagation: aBoolean [
 	| evt |
 	evt := self firedEvents first.
@@ -19,40 +21,40 @@ BlEventTestCase >> assertFiredEventIs: anEventClass target: aTarget withPropagat
 	self firedEvents removeFirst
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventTestCase >> child [
 	^ self space root children at: 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventTestCase >> firedEvents [
 	^ space testMouseProcessor firedEvents
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventTestCase >> root [
 	^ self space root
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlEventTestCase >> sendEvent: anEvent [
 	anEvent timestamp: DateAndTime now.
 	space eventListener handleEvent: anEvent
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlEventTestCase >> sendInsideTargetEvent: anEvent [
 	anEvent position: 50 @ 50.
 	self sendEvent: anEvent
 ]
 
-{ #category : #'event firing' }
+{ #category : 'event firing' }
 BlEventTestCase >> sendOutsideTargetEvent: anEvent [
 	anEvent position: 150 @ 150.
 	self sendEvent: anEvent
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlEventTestCase >> setUp [
 	
 	super setUp.
@@ -65,7 +67,7 @@ BlEventTestCase >> setUp [
 	space pulse
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlEventTestCase >> space [
 	^ space
 ]

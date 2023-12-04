@@ -1,6 +1,6 @@
-Extension { #name : #BlCompositeBackgroundTest }
+Extension { #name : 'BlCompositeBackgroundTest' }
 
-{ #category : #'*Bloc-Alexandrie-Tests' }
+{ #category : '*Bloc-Alexandrie-Tests' }
 BlCompositeBackgroundTest >> testAeApplyTo [
 
 	| space background blElement backgroundList |

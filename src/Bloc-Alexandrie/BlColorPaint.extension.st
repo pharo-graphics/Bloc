@@ -1,6 +1,6 @@
-Extension { #name : #BlColorPaint }
+Extension { #name : 'BlColorPaint' }
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlColorPaint >> aeApplyAsBackgroundTo: aeCanvas opacity: backgroundOpacity [
 
 	self flag: #todo. "AeCanvas takes decisions based on alpha. Keep?"
@@ -9,7 +9,7 @@ BlColorPaint >> aeApplyAsBackgroundTo: aeCanvas opacity: backgroundOpacity [
 		alpha: backgroundOpacity * color alpha
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
+{ #category : '*Bloc-Alexandrie' }
 BlColorPaint >> aeApplyTo: aeCanvas [
 	
 	aeCanvas setSourceColor: self color

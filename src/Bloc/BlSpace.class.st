@@ -1740,6 +1740,7 @@ BlSpace >> root: anElement [
 	anElement must not be nil.
 	anElement must not be added to any scene graph"
 	
+
 	self
 		assert: [ anElement isNotNil ]
 		description: [ 'anElement must not be nil' ].
@@ -1748,11 +1749,15 @@ BlSpace >> root: anElement [
 		assert: [ anElement space isNil ]
 		description: [ 'New root must not be already have a space assigned!' ].
 
+	rootElement == anElement ifTrue: [ ^ self ].
+
 	anElement
 		space: self;
 		size: self extent.
 
-	rootElement := anElement
+	rootElement := anElement.
+	self dispatchEvent: BlSpaceRootChangeEvent new
+
 ]
 
 { #category : #accessing }

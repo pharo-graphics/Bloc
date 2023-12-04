@@ -1,1 +1,1 @@
-Package { #name : #'Bloc-Infinite-Tests' }
+Package { #name : 'Bloc-Infinite-Tests' }

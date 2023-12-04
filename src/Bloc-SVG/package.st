@@ -1,1 +1,1 @@
-Package { #name : #'Bloc-SVG' }
+Package { #name : 'Bloc-SVG' }

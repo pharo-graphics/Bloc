@@ -1,10 +1,12 @@
 Class {
-	#name : #BlSplineOverScrollerBallisticStep,
-	#superclass : #BlSplineOverScrollerStep,
-	#category : #'Bloc-Infinite-Scrollable-Helpers'
+	#name : 'BlSplineOverScrollerBallisticStep',
+	#superclass : 'BlSplineOverScrollerStep',
+	#category : 'Bloc-Infinite-Scrollable-Helpers',
+	#package : 'Bloc-Infinite',
+	#tag : 'Scrollable-Helpers'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlSplineOverScrollerBallisticStep >> onFinished: aSplineOverScroller [
 	"Scroller being in ballistic state should spring back, so we continue"
 	<return: #Boolean>

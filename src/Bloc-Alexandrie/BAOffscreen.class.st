@@ -4,8 +4,8 @@ I provide text measurement in an off-screen canvas.
 For time efficiency, I implement the singleton pattern, to reuse an instance along a Pharo session.
 "
 Class {
-	#name : #BAOffscreen,
-	#superclass : #Object,
+	#name : 'BAOffscreen',
+	#superclass : 'Object',
 	#instVars : [
 		'aeCanvas',
 		'textMeasurer'
@@ -13,30 +13,32 @@ Class {
 	#classInstVars : [
 		'instance'
 	],
-	#category : #'Bloc-Alexandrie-Utility'
+	#category : 'Bloc-Alexandrie-Utility',
+	#package : 'Bloc-Alexandrie',
+	#tag : 'Utility'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BAOffscreen class >> instance [
 
 	^ instance ifNil: [ instance := self new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BAOffscreen class >> resetInstance [
 	<script>
 
 	instance := nil
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 BAOffscreen >> canvas [
 
 	self ensureReady.
 	^ aeCanvas
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 BAOffscreen >> ensureReady [
 
 	(aeCanvas notNil and: [ aeCanvas isValid ]) ifTrue: [ ^ self ].
@@ -48,13 +50,13 @@ BAOffscreen >> ensureReady [
 							yourself
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 BAOffscreen >> measureTextParagraph: aBlTextParagraph [
 
 	self textMeasurer measureTextParagraph: aBlTextParagraph
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 BAOffscreen >> textMeasurer [
 
 	self ensureReady.

@@ -10,66 +10,66 @@ Class {
 	#category : 'Bloc-Paint'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRadialGradientPaint >> center: aPoint [
 	"Set the innerCenter and outerCenter at the specified Point."
 
 	innerCenter := outerCenter := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRadialGradientPaint >> innerCenter [
 
 	^ innerCenter
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRadialGradientPaint >> innerCenter: aPoint [
 
 	innerCenter := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRadialGradientPaint >> innerRadius [
 
 	^ innerRadius
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRadialGradientPaint >> innerRadius: aNumber [
 
 	innerRadius := aNumber
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlRadialGradientPaint >> matchExtent: anExtent [
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRadialGradientPaint >> outerCenter [
 
 	^ outerCenter
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRadialGradientPaint >> outerCenter: aPoint [
 
 	outerCenter := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRadialGradientPaint >> outerRadius [
 
 	^ outerRadius
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRadialGradientPaint >> outerRadius: aNumber [
 
 	outerRadius := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRadialGradientPaint >> radius: aNumber [
 	"Set the outerRadius. The innerRadius will be set to zero."
 
