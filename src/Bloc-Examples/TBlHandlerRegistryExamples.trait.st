@@ -6,60 +6,6 @@ Trait {
 	#category : #'Bloc-Examples-EventHandling'
 }
 
-{ #category : #'examples - add' }
-TBlHandlerRegistryExamples >> addMouseDown [
-	<gtExample>
-	| aRegistry |
-	
-	aRegistry := self emptyRegistry.
-	self assert: aRegistry numberOfHandlers equals: 0.
-	
-	aRegistry add: (BlExampleLoggingEventHandler on: BlMouseDownEvent).
-	
-	self assert: aRegistry numberOfHandlers equals: 1.
-	
-	^ aRegistry
-]
-
-{ #category : #'examples - add' }
-TBlHandlerRegistryExamples >> addMouseDownAndMouseUp [
-	<gtExample>
-	| aRegistry |
-
-	aRegistry := self addMouseDown.
-	aRegistry add: (BlExampleLoggingEventHandler on: BlMouseUpEvent).
-	
-	self assert: aRegistry numberOfHandlers equals: 2.
-	
-	^ aRegistry
-]
-
-{ #category : #'examples - add' }
-TBlHandlerRegistryExamples >> addMouseDownTwice [
-	<gtExample>
-	| aRegistry |
-	
-	aRegistry := self addMouseDown.	
-	aRegistry add: (BlExampleLoggingEventHandler on: BlMouseDownEvent).
-	
-	self assert: aRegistry numberOfHandlers equals: 2.
-	
-	^ aRegistry
-]
-
-{ #category : #'examples - add' }
-TBlHandlerRegistryExamples >> addMouseDownTwiceAndMouseUp [
-	<gtExample>
-	| aRegistry |
-	
-	aRegistry := self addMouseDownTwice.	
-	aRegistry add: (BlExampleLoggingEventHandler on: BlMouseUpEvent).
-	
-	self assert: aRegistry numberOfHandlers equals: 3.
-	
-	^ aRegistry
-]
-
 { #category : #'instance creation' }
 TBlHandlerRegistryExamples >> emptyRegistry [
 	<return: #BlHandlerRegistry>
@@ -67,54 +13,114 @@ TBlHandlerRegistryExamples >> emptyRegistry [
 	^ self explicitRequirement
 ]
 
-{ #category : #'examples - remove' }
-TBlHandlerRegistryExamples >> removeAllMouseDownFromTwice [
-	<gtExample>
+{ #category : #'examples - add' }
+TBlHandlerRegistryExamples >> testAddMouseDown [
+
+	<sampleInstance>
 	| aRegistry |
-	
-	aRegistry := self addMouseDownTwice.
-	aRegistry removeAllSuchThat: [ :aHandler | (aHandler isKindOf: BlEventHandler) and: [ aHandler eventClass = BlMouseDownEvent ] ].
-	
+	aRegistry := self emptyRegistry.
 	self assert: aRegistry numberOfHandlers equals: 0.
-	
-	^ aRegistry
-]
 
-{ #category : #'examples - remove' }
-TBlHandlerRegistryExamples >> removeAllMouseDownFromTwiceLeaveUp [
-	<gtExample>
-	| aRegistry |
-	
-	aRegistry := self addMouseDownTwiceAndMouseUp.
-	aRegistry removeAllSuchThat: [ :aHandler | (aHandler isKindOf: BlEventHandler) and: [ aHandler eventClass = BlMouseDownEvent ] ].
-	
+	aRegistry add: (BlExampleLoggingEventHandler on: BlMouseDownEvent).
+
 	self assert: aRegistry numberOfHandlers equals: 1.
-	
+
+	^ aRegistry
+]
+
+{ #category : #'examples - add' }
+TBlHandlerRegistryExamples >> testAddMouseDownAndMouseUp [
+
+	<sampleInstance>
+	| aRegistry |
+	aRegistry := self testAddMouseDown.
+	aRegistry add: (BlExampleLoggingEventHandler on: BlMouseUpEvent).
+
+	self assert: aRegistry numberOfHandlers equals: 2.
+
+	^ aRegistry
+]
+
+{ #category : #'examples - add' }
+TBlHandlerRegistryExamples >> testAddMouseDownTwice [
+
+	<sampleInstance>
+	| aRegistry |
+	aRegistry := self testAddMouseDown.
+	aRegistry add: (BlExampleLoggingEventHandler on: BlMouseDownEvent).
+
+	self assert: aRegistry numberOfHandlers equals: 2.
+
+	^ aRegistry
+]
+
+{ #category : #'examples - add' }
+TBlHandlerRegistryExamples >> testAddMouseDownTwiceAndMouseUp [
+
+	<sampleInstance>
+	| aRegistry |
+	aRegistry := self testAddMouseDownTwice.
+	aRegistry add: (BlExampleLoggingEventHandler on: BlMouseUpEvent).
+
+	self assert: aRegistry numberOfHandlers equals: 3.
+
 	^ aRegistry
 ]
 
 { #category : #'examples - remove' }
-TBlHandlerRegistryExamples >> removeMouseDownLeaveEmpty [
-	<gtExample>
+TBlHandlerRegistryExamples >> testRemoveAllMouseDownFromTwice [
+
+	<sampleInstance>
 	| aRegistry |
-	
-	aRegistry := self removeMouseUpLeaveMouseDown.
-	aRegistry remove: (aRegistry handlers detect: [ :aHandler | aHandler eventClass = BlMouseDownEvent]).
-	
+	aRegistry := self testAddMouseDownTwice.
+	aRegistry removeAllSuchThat: [ :aHandler |
+		(aHandler isKindOf: BlEventHandler) and: [
+			aHandler eventClass = BlMouseDownEvent ] ].
+
 	self assert: aRegistry numberOfHandlers equals: 0.
-	
+
 	^ aRegistry
 ]
 
 { #category : #'examples - remove' }
-TBlHandlerRegistryExamples >> removeMouseUpLeaveMouseDown [
-	<gtExample>
+TBlHandlerRegistryExamples >> testRemoveAllMouseDownFromTwiceLeaveUp [
+
+	<sampleInstance>
 	| aRegistry |
-	
-	aRegistry := self addMouseDownAndMouseUp.
-	aRegistry remove: (aRegistry handlers detect: [ :aHandler | aHandler eventClass = BlMouseUpEvent]).
-	
+	aRegistry := self testAddMouseDownTwiceAndMouseUp.
+	aRegistry removeAllSuchThat: [ :aHandler |
+		(aHandler isKindOf: BlEventHandler) and: [
+			aHandler eventClass = BlMouseDownEvent ] ].
+
 	self assert: aRegistry numberOfHandlers equals: 1.
-	
+
+	^ aRegistry
+]
+
+{ #category : #'examples - remove' }
+TBlHandlerRegistryExamples >> testRemoveMouseDownLeaveEmpty [
+
+	<sampleInstance>
+	| aRegistry |
+	aRegistry := self testRemoveMouseUpLeaveMouseDown.
+	aRegistry remove: (aRegistry handlers detect: [ :aHandler |
+			 aHandler eventClass = BlMouseDownEvent ]).
+
+	self assert: aRegistry numberOfHandlers equals: 0.
+
+	^ aRegistry
+]
+
+{ #category : #'examples - remove' }
+TBlHandlerRegistryExamples >> testRemoveMouseUpLeaveMouseDown [
+
+	<sampleInstance>
+	| aRegistry |
+	aRegistry := self testAddMouseDownAndMouseUp.
+	aRegistry remove: (aRegistry handlers detect: [ :aHandler |
+			 aHandler eventClass = BlMouseUpEvent ]).
+
+	self assert: aRegistry numberOfHandlers equals: 1.
+
 	^ aRegistry
 ]

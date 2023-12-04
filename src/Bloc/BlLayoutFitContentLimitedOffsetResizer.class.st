@@ -1,42 +1,40 @@
 Class {
-	#name : 'BlLayoutFitContentLimitedOffsetResizer',
-	#superclass : 'BlLayoutFitContentLimitedResizer',
+	#name : #BlLayoutFitContentLimitedOffsetResizer,
+	#superclass : #BlLayoutFitContentLimitedResizer,
 	#instVars : [
 		'offset'
 	],
-	#category : 'Bloc-Layouts-Support',
-	#package : 'Bloc',
-	#tag : 'Layouts-Support'
+	#category : 'Bloc-Layouts-Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutFitContentLimitedOffsetResizer class >> offset: aNumber [
 	^ self new
 		offset: aNumber;
 		yourself
 ]
 
-{ #category : 'double dispatching' }
+{ #category : #'double dispatching' }
 BlLayoutFitContentLimitedOffsetResizer >> measurementAtMostWith: aNumber [
 	^ super measurementAtMostWith: aNumber - offset
 ]
 
-{ #category : 'double dispatching' }
+{ #category : #'double dispatching' }
 BlLayoutFitContentLimitedOffsetResizer >> measurementExactlyWith: aNumber [
 	^ super measurementExactlyWith: aNumber - offset
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutFitContentLimitedOffsetResizer >> offset [
 	^ offset
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutFitContentLimitedOffsetResizer >> offset: anObject [
 	offset := anObject
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlLayoutFitContentLimitedOffsetResizer >> printOn: aStream [
 	aStream nextPutAll: 'Fit content limited offset: '.
 	offset printOn: aStream

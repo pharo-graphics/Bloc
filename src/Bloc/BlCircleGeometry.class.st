@@ -1,22 +1,20 @@
 Class {
-	#name : 'BlCircleGeometry',
-	#superclass : 'BlElementVectorGeometry',
+	#name : #BlCircleGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'radius',
 		'origin'
 	],
-	#category : 'Bloc-Basic-Geometry',
-	#package : 'Bloc',
-	#tag : 'Basic-Geometry'
+	#category : 'Bloc-Basic-Geometry'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlCircleGeometry >> = anObject [
 	self == anObject ifTrue: [ ^ true ].
 	^ self class = anObject class
 ]
 
-{ #category : 'geometry testing' }
+{ #category : #'geometry testing' }
 BlCircleGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 
 	| centerX centerY |
@@ -25,7 +23,7 @@ BlCircleGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement 
 	^ ((aPoint x - centerX) squared + (aPoint y - centerY) squared) < radius squared
 ]
 
-{ #category : 'geometry bounds' }
+{ #category : #'geometry bounds' }
 BlCircleGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
@@ -35,24 +33,24 @@ BlCircleGeometry >> geometryBounds: aBlBounds [
 		extent: (self radius * 2.0) asPoint
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlCircleGeometry >> hasCaps [
 
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlCircleGeometry >> hasJoins [
 
 	^ false
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlCircleGeometry >> hash [
 	^ self class hash
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlCircleGeometry >> initialize [
 	super initialize.
 	
@@ -60,7 +58,7 @@ BlCircleGeometry >> initialize [
 	origin := 0@0
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlCircleGeometry >> matchExtent: anExtent [
 	radius := anExtent min / 2.0.
 	origin := (anExtent - anExtent min asPoint) / 2.0.
@@ -68,12 +66,12 @@ BlCircleGeometry >> matchExtent: anExtent [
 	self extent: anExtent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlCircleGeometry >> origin [
 	^ origin
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlCircleGeometry >> radius [
 	^ radius
 ]

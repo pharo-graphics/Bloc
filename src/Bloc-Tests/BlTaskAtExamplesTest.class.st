@@ -1,18 +1,14 @@
 Class {
-	#name : 'BlTaskAtExamples',
-	#superclass : 'Object',
-	#category : 'Bloc-Tests-Examples',
-	#package : 'Bloc-Tests',
-	#tag : 'Examples'
+	#name : #BlTaskAtExamplesTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Tests-Examples'
 }
 
-{ #category : 'tests' }
-BlTaskAtExamples >> checkQueueOrder [
+{ #category : #tests }
+BlTaskAtExamplesTest >> testCheckQueueOrder [
 	"Ensure that tasks are retrieved from the queue in chronological order"
-	<gtExample>
 
 	| queue now entries |
-
 	queue := BlTaskAtQueue new.
 	now := DateAndTime now.
 	queue schedule: 1 at: now + 10 seconds.
@@ -27,8 +23,5 @@ BlTaskAtExamples >> checkQueueOrder [
 	entries := OrderedCollection new.
 	5 timesRepeat: [ entries add: queue next valuable ].
 
-	self
-		assert: entries asArray
-		equals: #(1 2 3 5 7).
-
+	self assert: entries asArray equals: #( 1 2 3 5 7 )
 ]

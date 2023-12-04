@@ -1,19 +1,17 @@
 Class {
-	#name : 'BlHostSpaceRenderer',
-	#superclass : 'Object',
-	#category : 'Bloc-Universe - Renderer',
-	#package : 'Bloc',
-	#tag : 'Universe - Renderer'
+	#name : #BlHostSpaceRenderer,
+	#superclass : #Object,
+	#category : 'Bloc-Universe - Renderer'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlHostSpaceRenderer >> initializeForSurface: aSurface [
 	"Initalize space renderer to be used with a given surface"
 
 	self subclassResponsibility
 ]
 
-{ #category : 'rendering' }
+{ #category : #rendering }
 BlHostSpaceRenderer >> renderSpace: aSpace [
 	"Render a space and return a collection of damaged rectangles."
 	

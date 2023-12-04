@@ -26,38 +26,43 @@ Now let's compare all text measurement strategies:
 
 "
 Class {
-	#name : #BlTextElementMeasurementStrategyExamples,
-	#superclass : #BlExampleTest,
+	#name : #BlTextElementMeasurementStrategyExamplesTest,
+	#superclass : #TestCase,
 	#category : #'Bloc-Text-Alexandrie-Examples'
 }
 
 { #category : #baselines }
-BlTextElementMeasurementStrategyExamples >> measurementDifference [
-	<gtExample>
-	| ascentTextElement boundsTextElement editorTextElement containerElement |
+BlTextElementMeasurementStrategyExamplesTest >> measurementDifference [
 
-	ascentTextElement := self textElementWithLabelMeasurement.
-	boundsTextElement := self textElementWithTightMeasurement.
-	editorTextElement := self textElementWithEditorMeasurement.
+	<sampleInstance>
+	| ascentTextElement boundsTextElement editorTextElement containerElement |
+	ascentTextElement := self testTextElementWithLabelMeasurement.
+	boundsTextElement := self testTextElementWithTightMeasurement.
+	editorTextElement := self testTextElementWithEditorMeasurement.
 
 	containerElement := BlElement new.
 	containerElement clipChildren: false.
-	containerElement layout: (BlGridLayout horizontal cellSpacing: 10; columnCount: 2).
+	containerElement layout: (BlGridLayout horizontal
+			 cellSpacing: 10;
+			 columnCount: 2).
 	containerElement constraintsDo: [ :c |
 		c horizontal fitContent.
 		c vertical fitContent ].
 
-	containerElement addChildren: { ascentTextElement . boundsTextElement . editorTextElement }.
+	containerElement addChildren: {
+			ascentTextElement.
+			boundsTextElement.
+			editorTextElement }.
 
 	^ containerElement
 ]
 
 { #category : #example }
-BlTextElementMeasurementStrategyExamples >> textElementWithEditorMeasurement [
-	<gtExample>
+BlTextElementMeasurementStrategyExamplesTest >> testTextElementWithEditorMeasurement [
 
+	<sampleInstance>
 	| textElement |
-	textElement := BlTextElementExamples new textElement.
+	textElement := BlTextElementExamples new testTextElement.
 	textElement border:
 		(BlBorder paint: (Color red darker alpha: 0.6) width: 1).
 	textElement text
@@ -77,11 +82,11 @@ BlTextElementMeasurementStrategyExamples >> textElementWithEditorMeasurement [
 ]
 
 { #category : #example }
-BlTextElementMeasurementStrategyExamples >> textElementWithLabelMeasurement [
-	<gtExample>
+BlTextElementMeasurementStrategyExamplesTest >> testTextElementWithLabelMeasurement [
 
+	<sampleInstance>
 	| textElement |
-	textElement := BlTextElementExamples new textElement.
+	textElement := BlTextElementExamples new testTextElement.
 	textElement border:
 		(BlBorder paint: (Color red darker alpha: 0.6) width: 1).
 	textElement text
@@ -104,11 +109,11 @@ BlTextElementMeasurementStrategyExamples >> textElementWithLabelMeasurement [
 ]
 
 { #category : #example }
-BlTextElementMeasurementStrategyExamples >> textElementWithTightMeasurement [
-	<gtExample>
+BlTextElementMeasurementStrategyExamplesTest >> testTextElementWithTightMeasurement [
 
+	<sampleInstance>
 	| textElement |
-	textElement := BlTextElementExamples new textElement.
+	textElement := BlTextElementExamples new testTextElement.
 	textElement border:
 		(BlBorder paint: (Color blue darker alpha: 0.6) width: 1).
 	textElement text
