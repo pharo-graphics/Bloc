@@ -31,6 +31,19 @@ BlTextElementExamples >> simpleText [
 	^ textElement
 ]
 
+{ #category : #tests }
+BlTextElementExamples >> testTextElement [
+
+	<sampleInstance>
+	| text textElement |
+	text := self helloText.
+	textElement := BlTextElement new.
+	textElement text: text.
+	textElement clipChildren: false.
+	self assert: textElement text equals: text.
+	^ textElement
+]
+
 { #category : #example }
 BlTextElementExamples >> textAttributes [
 
