@@ -10,15 +10,17 @@ I meant to be immutable, therefore factor can be only set using factory method #
 
 "
 Class {
-	#name : #BlDecelerateInterpolator,
-	#superclass : #BlInterpolator,
+	#name : 'BlDecelerateInterpolator',
+	#superclass : 'BlInterpolator',
 	#instVars : [
 		'factor'
 	],
-	#category : 'Bloc-Basic-Interpolators'
+	#category : 'Bloc-Basic-Interpolators',
+	#package : 'Bloc',
+	#tag : 'Basic-Interpolators'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlDecelerateInterpolator class >> factor: aNumber [
 	"Creates an instance of decelerate interpolator with custom factor number"
 	<return: #BlDecelerateInterpolator>
@@ -28,26 +30,26 @@ BlDecelerateInterpolator class >> factor: aNumber [
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDecelerateInterpolator >> defaultFactor [
 	^ 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDecelerateInterpolator >> factor [
 	<return: #Number>
 
 	^ factor
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDecelerateInterpolator >> initialize [
 	super initialize.
 	
 	factor := self defaultFactor
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDecelerateInterpolator >> initializeWith: aFactor [
 
 	self
@@ -57,7 +59,7 @@ BlDecelerateInterpolator >> initializeWith: aFactor [
 	factor := aFactor
 ]
 
-{ #category : #interpolation }
+{ #category : 'interpolation' }
 BlDecelerateInterpolator >> interpolate: aNumber [
 	"f(x) = 1 - (1 - x)^n, where n = 2 * factor"
 	

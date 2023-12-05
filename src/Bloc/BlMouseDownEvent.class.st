@@ -1,10 +1,12 @@
 Class {
-	#name : #BlMouseDownEvent,
-	#superclass : #BlMousePickEvent,
-	#category : 'Bloc-Events'
+	#name : 'BlMouseDownEvent',
+	#superclass : 'BlMousePickEvent',
+	#category : 'Bloc-Events',
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseDownEvent class >> button: aMouseButton [
 	"Create a sample button down event for a given button for testing purposes"
 	<return: #BlMouseDownEvent>
@@ -16,7 +18,7 @@ BlMouseDownEvent class >> button: aMouseButton [
 		timestamp: DateAndTime now
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseDownEvent class >> middle [
 	"Create a sample middle button down event for testing purposes"
 	<return: #BlMouseDownEvent>
@@ -24,7 +26,7 @@ BlMouseDownEvent class >> middle [
 	^ self button: BlMouseButton middle
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseDownEvent class >> primary [
 	"Create a sample primary button down event for testing purposes"
 	<return: #BlMouseDownEvent>
@@ -32,7 +34,7 @@ BlMouseDownEvent class >> primary [
 	^ self button: BlMouseButton primary
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseDownEvent class >> secondary [
 	"Create a sample secondary button down event for testing purposes"
 	<return: #BlMouseDownEvent>
@@ -40,18 +42,18 @@ BlMouseDownEvent class >> secondary [
 	^ self button: BlMouseButton secondary
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlMouseDownEvent >> asMouseOutsideEvent [
 
 	^ BlMouseDownOutsideEvent new originalEvent: self; canBePropagated: false; yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseDownEvent >> isMouseDown [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlMouseDownEvent >> sendTo: anObject [
 	anObject mouseDownEvent: self
 ]

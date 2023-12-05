@@ -10,20 +10,22 @@ BlPolyline vertices: {
 }
 "
 Class {
-	#name : #BlPolylineGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlPolylineGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'vertices'
 	],
-	#category : 'Bloc-Basic-Geometry'
+	#category : 'Bloc-Basic-Geometry',
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlPolylineGeometry class >> vertices: aCollection [
 	^ self new vertices: aCollection
 ]
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlPolylineGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry.
 	
@@ -35,7 +37,7 @@ BlPolylineGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElemen
 	^ false
 ]
 
-{ #category : #'geometry bounds' }
+{ #category : 'geometry bounds' }
 BlPolylineGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
@@ -45,31 +47,31 @@ BlPolylineGeometry >> geometryBounds: aBlBounds [
 		corner: self vertices max
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlPolylineGeometry >> hasCaps [
 
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlPolylineGeometry >> hasJoins [
 
 	^ vertices size > 2
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlPolylineGeometry >> matchExtent: anExtent [
 	extent := anExtent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPolylineGeometry >> vertices [
 	<return: #SequenceableCollection of: #Point>
 
 	^ vertices
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlPolylineGeometry >> vertices: aCollectionOfPoints [
 
 	vertices := aCollectionOfPoints.

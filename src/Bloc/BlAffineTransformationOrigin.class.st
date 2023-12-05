@@ -4,12 +4,14 @@ I can be very useful when users want to rotate / scale or shear an element about
 
 "
 Class {
-	#name : #BlAffineTransformationOrigin,
-	#superclass : #Object,
-	#category : 'Bloc-Basic-Transformations'
+	#name : 'BlAffineTransformationOrigin',
+	#superclass : 'Object',
+	#category : 'Bloc-Basic-Transformations',
+	#package : 'Bloc',
+	#tag : 'Basic-Transformations'
 }
 
-{ #category : #math }
+{ #category : 'math' }
 BlAffineTransformationOrigin >> originIn: anElement [
 	"Return a point describing an origin of a transformation within a given element.
 	Origin can be either a 2D or 3D point (`Point` or `BlPoint3D`) and should be given in local coordinates of the element"

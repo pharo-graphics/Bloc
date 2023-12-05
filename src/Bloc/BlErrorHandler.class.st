@@ -4,14 +4,16 @@ I am responsible for error handling that occur in the {{gtClass:BlElement}}
 
 "
 Class {
-	#name : #BlErrorHandler,
-	#superclass : #Object,
+	#name : 'BlErrorHandler',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Basic-Errors'
+	#category : 'Bloc-Basic-Errors',
+	#package : 'Bloc',
+	#tag : 'Basic-Errors'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BlErrorHandler >> convertToHandledError: anError in: anElement [
 	| aHandledError |
 
@@ -24,21 +26,21 @@ BlErrorHandler >> convertToHandledError: anError in: anElement [
 	^ aHandledError
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlErrorHandler >> errors [
 	<return: #Collection of: #BlHandledError>
 
 	^ #()
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlErrorHandler >> errorsForPhase: aFramePhase [
 	<return: #Collection of: #BlSpaceFramePhase>
 
 	^ self errors select: [ :aHandledError | aHandledError framePhase = aFramePhase ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlErrorHandler >> framePhaseOf: anElement [
 	<return: #BlSpaceFramePhase>
 
@@ -47,7 +49,7 @@ BlErrorHandler >> framePhaseOf: anElement [
 		ifFalse: [ BlSpaceFrameUnknownPhase new ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlErrorHandler >> handleCriticalError: aHandledError [
 	"Handle an error that no one know how to handle.
 	I stop the space and crash the system"
@@ -56,7 +58,7 @@ BlErrorHandler >> handleCriticalError: aHandledError [
 	[ aHandledError error debug ] fork
 ]
 
-{ #category : #'error handling' }
+{ #category : 'error handling' }
 BlErrorHandler >> handleError: anError in: anElement [
 	"Handle a given error that comes from a provided visual element"
 	| aHandledError |
@@ -67,40 +69,40 @@ BlErrorHandler >> handleError: anError in: anElement [
 	self processError: aHandledError
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlErrorHandler >> hasError [
 	<return: #Boolean>
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlErrorHandler >> matches: aFramePhase [
 	<return: #Boolean>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #'error handling' }
+{ #category : 'error handling' }
 BlErrorHandler >> processError: aHandledError [
 	self subclassResponsibility
 ]
 
-{ #category : #'error handling' }
+{ #category : 'error handling' }
 BlErrorHandler >> registerError: aHandledError [
 	"Register a given handled error for further debugging"
 
 	self subclassResponsibility
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlErrorHandler >> with: anElement do: aBlock [
 	"Evaluate a given block while handling errors"
 
 	self with: anElement do: aBlock failed: [  ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlErrorHandler >> with: anElement do: aBlock failed: aFailBlock [
 	"Evaluate a given block while handling errors"
 

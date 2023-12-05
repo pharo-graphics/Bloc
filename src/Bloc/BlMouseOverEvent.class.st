@@ -9,12 +9,14 @@ https://developer.mozilla.org/en-US/docs/Web/Events/mouseover
 
 "
 Class {
-	#name : #BlMouseOverEvent,
-	#superclass : #BlMouseEvent,
-	#category : 'Bloc-Events'
+	#name : 'BlMouseOverEvent',
+	#superclass : 'BlMouseEvent',
+	#category : 'Bloc-Events',
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlMouseOverEvent >> sendTo: anObject [
 	anObject mouseOverEvent: self
 ]

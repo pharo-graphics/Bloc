@@ -6,7 +6,9 @@ This also means that the matrix dimension (2D or 3D) should be determined dynami
 
 "
 Class {
-	#name : #BlElementDynamicTransformation,
-	#superclass : #BlElementTransformation,
-	#category : 'Bloc-Basic-Transformations'
+	#name : 'BlElementDynamicTransformation',
+	#superclass : 'BlElementTransformation',
+	#category : 'Bloc-Basic-Transformations',
+	#package : 'Bloc',
+	#tag : 'Basic-Transformations'
 }

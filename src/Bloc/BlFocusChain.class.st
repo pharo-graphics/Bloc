@@ -7,12 +7,14 @@ I am used by {{gtClass:BlFocusProcessor}} to properly send events
 
 "
 Class {
-	#name : #BlFocusChain,
-	#superclass : #DoubleLinkedList,
-	#category : 'Bloc-Space - Support'
+	#name : 'BlFocusChain',
+	#superclass : 'DoubleLinkedList',
+	#category : 'Bloc-Space - Support',
+	#package : 'Bloc',
+	#tag : 'Space - Support'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFocusChain class >> of: anElement [
 	| aChain |
 	
@@ -23,7 +25,7 @@ BlFocusChain class >> of: anElement [
 	^ aChain
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlFocusChain >> deepestAttachedElementDo: aBlock ifAbsent: ifAbsentBlock [
 	"Evaluate a given block with the first attached older parent of the focused element"
 
@@ -34,7 +36,7 @@ BlFocusChain >> deepestAttachedElementDo: aBlock ifAbsent: ifAbsentBlock [
 	^ ifAbsentBlock value
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlFocusChain >> leafsDo: aBlock [
 	"Evaluate a given block with all leaf elements in the chain starting from the focused element in reverse order"
 	| previousElementHadParent |

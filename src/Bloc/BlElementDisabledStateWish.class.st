@@ -1,18 +1,20 @@
 Class {
-	#name : #BlElementDisabledStateWish,
-	#superclass : #BlElementStateWish,
+	#name : 'BlElementDisabledStateWish',
+	#superclass : 'BlElementStateWish',
 	#instVars : [
 		'enabled'
 	],
-	#category : 'Bloc-Basic-State'
+	#category : 'Bloc-Basic-State',
+	#package : 'Bloc',
+	#tag : 'Basic-State'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementDisabledStateWish >> enabled [
 	^ enabled
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementDisabledStateWish >> enabled: anObject [
 	enabled := anObject
 ]

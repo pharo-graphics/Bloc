@@ -4,21 +4,23 @@ The use of gaussian shadow is quite expensive in terms of rendering. Therefore I
 
 "
 Class {
-	#name : #BlGaussianShadowEffect,
-	#superclass : #BlShadowEffect,
+	#name : 'BlGaussianShadowEffect',
+	#superclass : 'BlShadowEffect',
 	#instVars : [
 		'width'
 	],
-	#category : 'Bloc-Effect'
+	#category : 'Bloc-Effect',
+	#package : 'Bloc',
+	#tag : 'Effect'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlGaussianShadowEffect class >> color: aColor offset: anOffset width: aNumber [ 
 
 	^ self color: aColor width: aNumber offset: anOffset
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlGaussianShadowEffect class >> color: aColor width: aNumber offset: anOffset [
 
 	^ self basicNew
@@ -26,7 +28,7 @@ BlGaussianShadowEffect class >> color: aColor width: aNumber offset: anOffset [
 		  yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlGaussianShadowEffect class >> default [
 
 	self
@@ -39,7 +41,7 @@ BlGaussianShadowEffect class >> default [
 		offset: 10@20
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlGaussianShadowEffect class >> new [
 
 	^ self
@@ -48,7 +50,7 @@ BlGaussianShadowEffect class >> new [
 		offset: 0@0
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlGaussianShadowEffect >> copyWithColor: aColor [
 
 	^ self class
@@ -57,7 +59,7 @@ BlGaussianShadowEffect >> copyWithColor: aColor [
 		offset: self offset
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlGaussianShadowEffect >> copyWithOffset: aPoint [
 
 	^ self class
@@ -66,7 +68,7 @@ BlGaussianShadowEffect >> copyWithOffset: aPoint [
 		offset: aPoint
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlGaussianShadowEffect >> copyWithWidth: aNumber [
 
 	^ self class
@@ -75,7 +77,7 @@ BlGaussianShadowEffect >> copyWithWidth: aNumber [
 		offset: self offset
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlGaussianShadowEffect >> extraShadowSpace [
 	"Compute extra space that should be freed for shadow around element.
 	I depend on the width, and it is recommended to be 3 times of sigma (width) used for gaussian blur"
@@ -83,7 +85,7 @@ BlGaussianShadowEffect >> extraShadowSpace [
 	^ self width * 1.5
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGaussianShadowEffect >> initializeColor: aColor width: aWidth offset: aPoint [
 
 	self initialize.
@@ -93,13 +95,13 @@ BlGaussianShadowEffect >> initializeColor: aColor width: aWidth offset: aPoint [
 	offset := aPoint asPoint
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlGaussianShadowEffect >> wantsCompositionLayer [
 
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGaussianShadowEffect >> width [
 
 	^ width

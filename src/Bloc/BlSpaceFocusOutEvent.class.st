@@ -3,12 +3,14 @@ Is sent to the space when a window loses focus
 
 "
 Class {
-	#name : #BlSpaceFocusOutEvent,
-	#superclass : #BlSpaceEvent,
-	#category : 'Bloc-Events-Type-Space'
+	#name : 'BlSpaceFocusOutEvent',
+	#superclass : 'BlSpaceEvent',
+	#category : 'Bloc-Events-Type-Space',
+	#package : 'Bloc',
+	#tag : 'Events-Type-Space'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlSpaceFocusOutEvent >> sendTo: anObject [
 	anObject spaceFocusOutEvent: self
 ]

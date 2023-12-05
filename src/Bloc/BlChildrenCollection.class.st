@@ -17,47 +17,49 @@ Subclasses need to provide the implementation for methods adding and removing ch
 
 "
 Class {
-	#name : #BlChildrenCollection,
-	#superclass : #BlChildren,
-	#category : 'Bloc-Basic-Children'
+	#name : 'BlChildrenCollection',
+	#superclass : 'BlChildren',
+	#category : 'Bloc-Basic-Children',
+	#package : 'Bloc',
+	#tag : 'Basic-Children'
 }
 
-{ #category : #'children - adding' }
+{ #category : 'children - adding' }
 BlChildrenCollection >> add: anElement [
 	"Adds aChild as a last one in a collection"
 
 	self add: anElement at: self size + 1
 ]
 
-{ #category : #'children - adding' }
+{ #category : 'children - adding' }
 BlChildrenCollection >> add: anElement at: anIndex [
 	"Adds anElement at a given index moving existing children to the right"
 
 	self subclassResponsibility
 ]
 
-{ #category : #'children - adding' }
+{ #category : 'children - adding' }
 BlChildrenCollection >> addAll: aCollectionOfBlElement [
 	"Add all elements from a given collection appending them to the end"
 
 	self subclassResponsibility
 ]
 
-{ #category : #'children - adding' }
+{ #category : 'children - adding' }
 BlChildrenCollection >> addFirst: anElement [
 	"Add a given element as a first item moving all existing children to the right"
 
 	self add: anElement at: 1
 ]
 
-{ #category : #'children - removing' }
+{ #category : 'children - removing' }
 BlChildrenCollection >> remove: anElement [	
 	self
 		remove: anElement
 		ifAbsent: [ self errorNotFound: anElement ]
 ]
 
-{ #category : #'children - removing' }
+{ #category : 'children - removing' }
 BlChildrenCollection >> remove: anElement ifAbsent: anExceptionBlock [
 	| anIndex |
 
@@ -68,12 +70,12 @@ BlChildrenCollection >> remove: anElement ifAbsent: anExceptionBlock [
 	self removeAt: anIndex
 ]
 
-{ #category : #'children - removing' }
+{ #category : 'children - removing' }
 BlChildrenCollection >> removeAll: aCollectionOfBlElement [
 	self subclassResponsibility
 ]
 
-{ #category : #'children - removing' }
+{ #category : 'children - removing' }
 BlChildrenCollection >> removeAt: anIndex [
 	self subclassResponsibility
 ]

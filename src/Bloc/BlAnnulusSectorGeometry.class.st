@@ -5,39 +5,41 @@ See: https://en.wikipedia.org/wiki/Annulus_(mathematics)
 
 "
 Class {
-	#name : #BlAnnulusSectorGeometry,
-	#superclass : #BlElementVectorGeometry,
+	#name : 'BlAnnulusSectorGeometry',
+	#superclass : 'BlElementVectorGeometry',
 	#instVars : [
 		'startAngle',
 		'endAngle',
 		'innerRadius',
 		'outerRadius'
 	],
-	#category : 'Bloc-Basic-Geometry'
+	#category : 'Bloc-Basic-Geometry',
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
-{ #category : #'private - geometry' }
+{ #category : 'private - geometry' }
 BlAnnulusSectorGeometry >> absoluteInnerRadius [
 	<return: #Number>
 	
 	^ self radius * innerRadius
 ]
 
-{ #category : #'private - geometry' }
+{ #category : 'private - geometry' }
 BlAnnulusSectorGeometry >> absoluteOuterRadius [
 	<return: #Number>
 	
 	^ self radius * outerRadius
 ]
 
-{ #category : #'private - geometry' }
+{ #category : 'private - geometry' }
 BlAnnulusSectorGeometry >> center [
 	<return: #Point>
 	
 	^ self extent / 2.0
 ]
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlAnnulusSectorGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry.
 
@@ -61,30 +63,30 @@ BlAnnulusSectorGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlE
 		ifFalse: [ a <= n or: [ n <= b ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAnnulusSectorGeometry >> endAngle [
 	^ endAngle
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAnnulusSectorGeometry >> endAngle: anAngleInDegrees [
 	endAngle := anAngleInDegrees.
 	self releaseCache
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAnnulusSectorGeometry >> hasCaps [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlAnnulusSectorGeometry >> hasJoins [
 
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlAnnulusSectorGeometry >> initialize [
 	super initialize.
 	
@@ -94,7 +96,7 @@ BlAnnulusSectorGeometry >> initialize [
 	outerRadius := 1.0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAnnulusSectorGeometry >> innerRadius [
 	"An inner radius as a fraction of the max radius of the annulus [0..1]"
 	<return: #Number>
@@ -102,21 +104,21 @@ BlAnnulusSectorGeometry >> innerRadius [
 	^ innerRadius
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAnnulusSectorGeometry >> innerRadius: aNumber [
 	"Set inner radius as a fraction of the max radius of the annulus [0..1]"
 	innerRadius := aNumber min: 1.0 max: 0.0.
 	self releaseCache
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlAnnulusSectorGeometry >> matchExtent: aPoint [
 	"Resize geometry to exactly match provided extent as a Point"
 
 	extent := aPoint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAnnulusSectorGeometry >> outerRadius [
 	"An outer radius as a fraction of the max radius of the annulus [0..1]"
 	<return: #Number>
@@ -124,14 +126,14 @@ BlAnnulusSectorGeometry >> outerRadius [
 	^ outerRadius
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAnnulusSectorGeometry >> outerRadius: aNumber [
 	"Set outer radius as a fraction of the max radius of the annulus [0..1]"
 	outerRadius := aNumber min: 1.0 max: 0.0.
 	self releaseCache
 ]
 
-{ #category : #'private - geometry' }
+{ #category : 'private - geometry' }
 BlAnnulusSectorGeometry >> pointFromAngle: anAngleInRadians andRadius: aRadius around: aCenter [
 	"Convert from spherical coordinates to cartesian coordinates"
 	<return: #Point>
@@ -143,19 +145,19 @@ BlAnnulusSectorGeometry >> pointFromAngle: anAngleInRadians andRadius: aRadius a
 	^ aX @ aY
 ]
 
-{ #category : #'private - geometry' }
+{ #category : 'private - geometry' }
 BlAnnulusSectorGeometry >> radius [
 	<return: #Number>
 	
 	^ self extent min / 2.0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAnnulusSectorGeometry >> startAngle [
 	^ startAngle
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlAnnulusSectorGeometry >> startAngle: anAngleInDegrees [
 	startAngle := anAngleInDegrees.
 	self releaseCache

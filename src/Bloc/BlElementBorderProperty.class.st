@@ -1,13 +1,15 @@
 Class {
-	#name : #BlElementBorderProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementBorderProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'border'
 	],
-	#category : 'Bloc-Basic-Properties'
+	#category : 'Bloc-Basic-Properties',
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementBorderProperty >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -18,34 +20,34 @@ BlElementBorderProperty >> = anObject [
 	^ border = anObject border
 ]
 
-{ #category : #'api - property' }
+{ #category : 'api - property' }
 BlElementBorderProperty >> applyOnElement: anElement [
 	anElement border: self border
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBorderProperty >> border [
 	^ border
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementBorderProperty >> border: anObject [
 	border := anObject
 ]
 
-{ #category : #'api - property' }
+{ #category : 'api - property' }
 BlElementBorderProperty >> cleanUpOnElement: anElement [
 	anElement border: BlElementVisuals defaultBorder
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementBorderProperty >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ border hash
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlElementBorderProperty >> printOn: aStream [
 	aStream
 		nextPutAll: 'Border - ';

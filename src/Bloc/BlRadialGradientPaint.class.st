@@ -1,13 +1,15 @@
 Class {
-	#name : #BlRadialGradientPaint,
-	#superclass : #BlGradientPaint,
+	#name : 'BlRadialGradientPaint',
+	#superclass : 'BlGradientPaint',
 	#instVars : [
 		'innerCenter',
 		'innerRadius',
 		'outerCenter',
 		'outerRadius'
 	],
-	#category : 'Bloc-Paint'
+	#category : 'Bloc-Paint',
+	#package : 'Bloc',
+	#tag : 'Paint'
 }
 
 { #category : 'accessing' }

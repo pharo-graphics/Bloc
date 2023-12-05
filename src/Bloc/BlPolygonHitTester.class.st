@@ -7,12 +7,14 @@ See: https://wrfranklin.org/Research/Short_Notes/pnpoly.html
 
 "
 Class {
-	#name : #BlPolygonHitTester,
-	#superclass : #Object,
-	#category : 'Bloc-Basic-Geometry'
+	#name : 'BlPolygonHitTester',
+	#superclass : 'Object',
+	#category : 'Bloc-Basic-Geometry',
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlPolygonHitTester class >> doPolygonBy: vertices include: aPoint [
 
 	| inside testX testY i j size |

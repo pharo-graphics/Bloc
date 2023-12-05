@@ -3,12 +3,14 @@ I am a relative transformation origin which is attached to the right center of a
 
 "
 Class {
-	#name : #BlAffineTransformationRightCenterOrigin,
-	#superclass : #BlAffineTransformationOrigin,
-	#category : 'Bloc-Basic-Transformations'
+	#name : 'BlAffineTransformationRightCenterOrigin',
+	#superclass : 'BlAffineTransformationOrigin',
+	#category : 'Bloc-Basic-Transformations',
+	#package : 'Bloc',
+	#tag : 'Basic-Transformations'
 }
 
-{ #category : #math }
+{ #category : 'math' }
 BlAffineTransformationRightCenterOrigin >> originIn: anElement [
 
 	^ anElement width @ (anElement height / 2.0)

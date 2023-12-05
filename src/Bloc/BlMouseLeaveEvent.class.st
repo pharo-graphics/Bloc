@@ -10,17 +10,19 @@ https://developer.mozilla.org/en-US/docs/Web/Events/mouseleave
 
 "
 Class {
-	#name : #BlMouseLeaveEvent,
-	#superclass : #BlMouseEvent,
-	#category : 'Bloc-Events'
+	#name : 'BlMouseLeaveEvent',
+	#superclass : 'BlMouseEvent',
+	#category : 'Bloc-Events',
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMouseLeaveEvent >> isMouseLeave [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlMouseLeaveEvent >> sendTo: anObject [
 	anObject mouseLeaveEvent: self
 ]

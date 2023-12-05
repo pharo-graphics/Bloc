@@ -1,12 +1,14 @@
 Class {
-	#name : #BlElementGeometry,
-	#superclass : #Object,
+	#name : 'BlElementGeometry',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Basic-Geometry'
+	#category : 'Bloc-Basic-Geometry',
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlElementGeometry >> asElement [
 	"Answer an element with me as its geometry, with appropriate default values."
 
@@ -28,7 +30,7 @@ BlElementGeometry >> asElement [
 	^ anElement
 ]
 
-{ #category : #'geometry testing' }
+{ #category : 'geometry testing' }
 BlElementGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry.
 	Assume aPoint is already inside the geometry bounds rectangle."
@@ -36,7 +38,7 @@ BlElementGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - bounds' }
+{ #category : 'api - bounds' }
 BlElementGeometry >> geometryBounds: aBounds of: aBlElement [
 	"Load my geometry bounds for a given element in a mutable rectangle.
 	@see #geometryBounds for more info"
@@ -45,43 +47,43 @@ BlElementGeometry >> geometryBounds: aBounds of: aBlElement [
 	^ self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementGeometry >> hasCaps [
 	"Answer whether my path has caps, i.e. if I include an open line."
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementGeometry >> hasJoins [
 	"Answer whether I have joins, i.e. my path presents edges between a segment and another."
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlElementGeometry >> matchElement: anElement [
 	"Adapt me to match the size of a given element"
 
 	self subclassResponsibility
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 BlElementGeometry >> releaseCache [
 	self subclassResponsibility
 ]
 
-{ #category : #'api - cache' }
+{ #category : 'api - cache' }
 BlElementGeometry >> releaseStrokedBoundsCache [
 	self subclassResponsibility
 ]
 
-{ #category : #serialization }
+{ #category : 'serialization' }
 BlElementGeometry >> storeOn: aStream [
 	aStream nextPutAll: self class name; space; nextPutAll: 'new'
 ]
 
-{ #category : #'visual bounds' }
+{ #category : 'visual bounds' }
 BlElementGeometry >> strokedBounds: aBlBounds of: anElement [
 	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
 	Dispatch through outskirts first"

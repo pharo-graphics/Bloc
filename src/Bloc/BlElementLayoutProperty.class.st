@@ -1,13 +1,15 @@
 Class {
-	#name : #BlElementLayoutProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementLayoutProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'layout'
 	],
-	#category : 'Bloc-Basic-Properties'
+	#category : 'Bloc-Basic-Properties',
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementLayoutProperty >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -18,29 +20,29 @@ BlElementLayoutProperty >> = anObject [
 	^ layout = anObject layout
 ]
 
-{ #category : #'api - property' }
+{ #category : 'api - property' }
 BlElementLayoutProperty >> applyOnElement: anElement [
 	anElement layout: self layout
 ]
 
-{ #category : #'api - property' }
+{ #category : 'api - property' }
 BlElementLayoutProperty >> cleanUpOnElement: anElement [
 	anElement layout: anElement defaultLayout
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementLayoutProperty >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ layout hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementLayoutProperty >> layout [
 	^ layout
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementLayoutProperty >> layout: anObject [
 	layout := anObject
 ]
