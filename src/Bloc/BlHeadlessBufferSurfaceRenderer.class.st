@@ -9,7 +9,7 @@ Class {
 	#tag : 'Universe - Host Headless'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlHeadlessBufferSurfaceRenderer >> initializeForSurface: aSurface [
 
 	| aForm anExtent |
@@ -25,6 +25,6 @@ BlHeadlessBufferSurfaceRenderer >> initializeForSurface: aSurface [
 		extent: anExtent
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlHeadlessBufferSurfaceRenderer >> renderSurface: aSurface damaged: aCollectionOfRectangles [
 ]

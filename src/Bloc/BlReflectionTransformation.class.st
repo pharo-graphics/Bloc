@@ -12,17 +12,15 @@ Example:
 
 "
 Class {
-	#name : 'BlReflectionTransformation',
-	#superclass : 'BlAffineTransformation',
+	#name : #BlReflectionTransformation,
+	#superclass : #BlAffineTransformation,
 	#instVars : [
 		'reflection'
 	],
-	#category : 'Bloc-Basic-Transformations',
-	#package : 'Bloc',
-	#tag : 'Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlReflectionTransformation class >> horizontal [
 
 	^ self new
@@ -30,7 +28,7 @@ BlReflectionTransformation class >> horizontal [
 		  yourself
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlReflectionTransformation class >> vertical [
 
 	^ self new
@@ -38,25 +36,25 @@ BlReflectionTransformation class >> vertical [
 		  yourself
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlReflectionTransformation >> is2D [
 
 	^ true
 ]
 
-{ #category : 'mathematical functions' }
+{ #category : #'mathematical functions' }
 BlReflectionTransformation >> multiplyOn: aBlMatrix [
 
 	aBlMatrix reflectBy: reflection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlReflectionTransformation >> reflection [
 
 	^ reflection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlReflectionTransformation >> reflection: aBlVectorOrConvertible [
 
 	reflection := aBlVectorOrConvertible asBlocVector
