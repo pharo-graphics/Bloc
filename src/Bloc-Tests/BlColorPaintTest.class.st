@@ -1,10 +1,12 @@
 Class {
-	#name : #BlColorPaintTest,
-	#superclass : #TestCase,
-	#category : 'Bloc-Tests-Paint'
+	#name : 'BlColorPaintTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Tests-Paint',
+	#package : 'Bloc-Tests',
+	#tag : 'Paint'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlColorPaintTest >> testColor [
 	| paint |
 	
@@ -15,7 +17,7 @@ BlColorPaintTest >> testColor [
 	self assert: paint color equals: Color blue
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlColorPaintTest >> testIsTransparent [
 	| paint |
 	

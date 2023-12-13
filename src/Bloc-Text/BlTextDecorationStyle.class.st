@@ -4,67 +4,65 @@ Describes the style of the text {{gtClass:BlTextDecoration|label=decoration}} (l
 
 "
 Class {
-	#name : 'BlTextDecorationStyle',
-	#superclass : 'Object',
+	#name : #BlTextDecorationStyle,
+	#superclass : #Object,
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Text-Text-Decoration',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Decoration'
+	#category : #'Bloc-Text-Text-Decoration'
 }
 
-{ #category : 'cleanup' }
+{ #category : #cleanup }
 BlTextDecorationStyle class >> cleanUp [
 	uniqueInstance := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDecorationStyle class >> constructor [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'api - instance creation' }
+{ #category : #'api - instance creation' }
 BlTextDecorationStyle class >> dashed [
 	^ BlTextDecorationDashedStyle uniqueInstance
 ]
 
-{ #category : 'api - instance creation' }
+{ #category : #'api - instance creation' }
 BlTextDecorationStyle class >> dotted [
 	^ BlTextDecorationDottedStyle uniqueInstance
 ]
 
-{ #category : 'api - instance creation' }
+{ #category : #'api - instance creation' }
 BlTextDecorationStyle class >> double [
 	^ BlTextDecorationDoubleStyle uniqueInstance
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlTextDecorationStyle class >> isAbstract [
 	^ self = BlTextDecorationStyle
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDecorationStyle class >> label [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'api - instance creation' }
+{ #category : #'api - instance creation' }
 BlTextDecorationStyle class >> solid [
 	^ BlTextDecorationSolidStyle uniqueInstance
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDecorationStyle class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : 'api - instance creation' }
+{ #category : #'api - instance creation' }
 BlTextDecorationStyle class >> wavy [
 	^ BlTextDecorationWavyStyle uniqueInstance
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlTextDecorationStyle >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -73,19 +71,19 @@ BlTextDecorationStyle >> = anObject [
 	^ self class = anObject class
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlTextDecorationStyle >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ self class hash
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlTextDecorationStyle >> printOn: aStream [
 	aStream nextPutAll: self class label
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlTextDecorationStyle >> storeOn: aStream [
 	aStream
 		nextPutAll: BlTextDecorationStyle name;

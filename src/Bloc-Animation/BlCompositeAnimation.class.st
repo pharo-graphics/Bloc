@@ -1,13 +1,15 @@
 Class {
-	#name : #BlCompositeAnimation,
-	#superclass : #BlBaseAnimation,
+	#name : 'BlCompositeAnimation',
+	#superclass : 'BlBaseAnimation',
 	#instVars : [
 		'animations'
 	],
-	#category : #'Bloc-Animation-Basic'
+	#category : 'Bloc-Animation-Basic',
+	#package : 'Bloc-Animation',
+	#tag : 'Basic'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlCompositeAnimation class >> with: aCollectionOfAnimations [
 
 	self 
@@ -18,7 +20,7 @@ BlCompositeAnimation class >> with: aCollectionOfAnimations [
 	^ self new addAll: aCollectionOfAnimations
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlCompositeAnimation class >> with: anAnimation with: anotherAnimation [
 
 	^ self new
@@ -27,7 +29,7 @@ BlCompositeAnimation class >> with: anAnimation with: anotherAnimation [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlCompositeAnimation class >> withAll: aCollectionOfAnimations [
 
 	^ self new
@@ -35,7 +37,7 @@ BlCompositeAnimation class >> withAll: aCollectionOfAnimations [
 		  yourself
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlCompositeAnimation >> add: anAnimation [
 
 	anAnimation parent: self.
@@ -44,19 +46,19 @@ BlCompositeAnimation >> add: anAnimation [
 	animations add: anAnimation
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlCompositeAnimation >> addAll: theAnimations [
 
 	theAnimations do: [ :anAnimation | self add: anAnimation ]
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlCompositeAnimation >> animations [
 
 	^ animations
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlCompositeAnimation >> initialize [
 
 	super initialize.
@@ -64,7 +66,7 @@ BlCompositeAnimation >> initialize [
 	animations := OrderedCollection new
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlCompositeAnimation >> stop [
 
 	super stop.
@@ -72,7 +74,7 @@ BlCompositeAnimation >> stop [
 	self stopChildren
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlCompositeAnimation >> stopChildren [
 
 	animations
@@ -80,7 +82,7 @@ BlCompositeAnimation >> stopChildren [
 		thenDo: [ :anAnimation | anAnimation stop ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCompositeAnimation >> time: aBlTime [
 
 	super time: aBlTime.

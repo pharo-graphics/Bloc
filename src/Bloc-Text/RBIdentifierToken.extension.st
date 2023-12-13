@@ -1,6 +1,6 @@
-Extension { #name : 'RBIdentifierToken' }
+Extension { #name : #RBIdentifierToken }
 
-{ #category : '*Bloc-Text' }
+{ #category : #'*Bloc-Text' }
 RBIdentifierToken >> acceptVisitor: aVisitor [
 
 	^ aVisitor visitIdentifierToken: self

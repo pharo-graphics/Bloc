@@ -1,6 +1,6 @@
 Class {
-	#name : #BlInfiniteConstants,
-	#superclass : #SharedPool,
+	#name : 'BlInfiniteConstants',
+	#superclass : 'SharedPool',
 	#classVars : [
 		'NoId',
 		'NoPosition',
@@ -8,10 +8,12 @@ Class {
 		'ScrollIdle',
 		'ScrollSettling'
 	],
-	#category : #'Bloc-Infinite-Core'
+	#category : 'Bloc-Infinite-Core',
+	#package : 'Bloc-Infinite',
+	#tag : 'Core'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlInfiniteConstants class >> initialize [
 	super initialize.
 	

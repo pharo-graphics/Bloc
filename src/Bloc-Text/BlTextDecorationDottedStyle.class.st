@@ -4,19 +4,17 @@
 
 "
 Class {
-	#name : 'BlTextDecorationDottedStyle',
-	#superclass : 'BlTextDecorationStyle',
-	#category : 'Bloc-Text-Text-Decoration',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Decoration'
+	#name : #BlTextDecorationDottedStyle,
+	#superclass : #BlTextDecorationStyle,
+	#category : #'Bloc-Text-Text-Decoration'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDecorationDottedStyle class >> constructor [
 	^ #dotted
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDecorationDottedStyle class >> label [
 	^ 'Dotted'
 ]

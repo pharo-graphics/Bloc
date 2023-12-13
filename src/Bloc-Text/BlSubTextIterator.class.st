@@ -1,16 +1,14 @@
 Class {
-	#name : 'BlSubTextIterator',
-	#superclass : 'BlTextIterator',
+	#name : #BlSubTextIterator,
+	#superclass : #BlTextIterator,
 	#instVars : [
 		'text',
 		'iterator'
 	],
-	#category : 'Bloc-Text-Text',
-	#package : 'Bloc-Text',
-	#tag : 'Text'
+	#category : #'Bloc-Text-Text'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlSubTextIterator class >> text: aBrSubText from: aStartIndex to: anEndIndex [
 
 	^ self new
@@ -18,7 +16,7 @@ BlSubTextIterator class >> text: aBrSubText from: aStartIndex to: anEndIndex [
 		yourself
 ]
 
-{ #category : 'iterator - accessing' }
+{ #category : #'iterator - accessing' }
 BlSubTextIterator >> attributes [
 	"Return a collection of rope attributes at a current position without duplicates"
 	<return: #Collection of: #BlTextAttribute>
@@ -26,7 +24,7 @@ BlSubTextIterator >> attributes [
 	^ iterator attributes
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
 	If some element evaluates aBlock to true, then cull this element into 
@@ -37,7 +35,7 @@ BlSubTextIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExce
 	^ iterator detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExceptionBlock
 ]
 
-{ #category : 'iterator - testing' }
+{ #category : #'iterator - testing' }
 BlSubTextIterator >> doesAttributeEnd: anAttribute [
 	"Return true if a given attribute ends at the current position.
 	By `ends` we mean that this attribute is not present at the next position.
@@ -57,7 +55,7 @@ BlSubTextIterator >> doesAttributeEnd: anAttribute [
 	^ ((self text text attributesAt: self position + self text textOffset + 1) includes: anAttribute) not
 ]
 
-{ #category : 'iterator - testing' }
+{ #category : #'iterator - testing' }
 BlSubTextIterator >> hasNext [
 	"Return true if there is a next text item (character) after a current position"
 	<return: #Boolean>
@@ -65,7 +63,7 @@ BlSubTextIterator >> hasNext [
 	^ iterator hasNext
 ]
 
-{ #category : 'iterator - testing' }
+{ #category : #'iterator - testing' }
 BlSubTextIterator >> hasPrevious [
 	"Return true if there is a previous text item (character) before the current position"
 	<return: #Boolean>
@@ -73,7 +71,7 @@ BlSubTextIterator >> hasPrevious [
 	^ iterator hasNext
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> next [
 	"Return an item (character) at current position and move one to the right"
 	<return: #Character or: #Object>
@@ -81,7 +79,7 @@ BlSubTextIterator >> next [
 	^ iterator next
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> nextLine [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first carriage return character"
@@ -90,7 +88,7 @@ BlSubTextIterator >> nextLine [
 	^ iterator nextLine
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> nextLineIndicesDo: anIndicesBlock [
 	" execute anIndicesBlock with 3 arguments for each line:
 		- start index of line in text coordinates
@@ -104,14 +102,14 @@ BlSubTextIterator >> nextLineIndicesDo: anIndicesBlock [
 			value: aLineDelimiterEnd - self text textOffset ]
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> nextSegment: aBlock [
 	<return: #BlText>
 
 	^ iterator nextSegment: aBlock
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
 	"@see BlTextIterator>>#nextSegment:indicesDo:"
 	<return: #Object>
@@ -123,7 +121,7 @@ BlSubTextIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
 			cull: anInitialValue ]
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> nextSpan [
 	"Return a next homogeneous text span"
 	<return: #BlSpan>
@@ -131,7 +129,7 @@ BlSubTextIterator >> nextSpan [
 	^ iterator nextSpan
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> nextWhitespace [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first non-whitespace character without including it"
@@ -145,7 +143,7 @@ BlSubTextIterator >> nextWhitespace [
 	^ BlSubText text: text from: aStartPosition to: aStartPosition + aSegment size - 1
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> nextWord [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first space character"
@@ -154,7 +152,7 @@ BlSubTextIterator >> nextWord [
 	^ iterator nextWord
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> peek [
 	"Return an item (character) at current position"
 	<return: #Character or: #Object>
@@ -162,7 +160,7 @@ BlSubTextIterator >> peek [
 	^ iterator peek
 ]
 
-{ #category : 'iterator - accessing' }
+{ #category : #'iterator - accessing' }
 BlSubTextIterator >> position [
 	"Return current iterator position within a text"
 	<return: #Number>
@@ -170,7 +168,7 @@ BlSubTextIterator >> position [
 	^ iterator position - text start + 1
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> previous [
 	"Return an item (character) at current position and move one to the left"
 	<return: #Character or: #Object>
@@ -178,7 +176,7 @@ BlSubTextIterator >> previous [
 	^ iterator previous
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> selectAttributes: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument. 
 	Collect into a new collection like the receiver, only those elements for 
@@ -188,19 +186,19 @@ BlSubTextIterator >> selectAttributes: aBlock [
 	^ iterator selectAttributes: aBlock
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlSubTextIterator >> skip: aNumber [
 	"Move forward by aNumber characters"
 
 	iterator skip: aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSubTextIterator >> text [
 	^ text
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlSubTextIterator >> text: aBrSubText from: aStartIntegerIndex to: anEndIntegerIndex [
 	"aStartIntegerIndex and anEndIntegerIndex are integers."
 

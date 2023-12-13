@@ -1,10 +1,11 @@
 Class {
-	#name : #BlPaintBackgroundTest,
-	#superclass : #BlBackgroundTest,
-	#category : #'Bloc-Tests'
+	#name : 'BlPaintBackgroundTest',
+	#superclass : 'BlBackgroundTest',
+	#category : 'Bloc-Tests',
+	#package : 'Bloc-Tests'
 }
 
-{ #category : #'background - color' }
+{ #category : 'background - color' }
 BlPaintBackgroundTest >> testGrayColorBackground [
 
 	| aBackground |
@@ -18,7 +19,7 @@ BlPaintBackgroundTest >> testGrayColorBackground [
 	^ aBackground
 ]
 
-{ #category : #'background - color' }
+{ #category : 'background - color' }
 BlPaintBackgroundTest >> testGrayColorBackgroundExplicitInitializationWithPaint [
 
 	| aBackground |
@@ -32,7 +33,7 @@ BlPaintBackgroundTest >> testGrayColorBackgroundExplicitInitializationWithPaint 
 	^ aBackground
 ]
 
-{ #category : #'background - color' }
+{ #category : 'background - color' }
 BlPaintBackgroundTest >> testGrayColorBackgroundExplicitInstantiationWithColor [
 
 	| aBackground |
@@ -45,7 +46,7 @@ BlPaintBackgroundTest >> testGrayColorBackgroundExplicitInstantiationWithColor [
 	^ aBackground
 ]
 
-{ #category : #'background - color' }
+{ #category : 'background - color' }
 BlPaintBackgroundTest >> testGrayColorBackgroundExplicitInstantiationWithPaint [
 
 	| aBackground |
@@ -58,7 +59,7 @@ BlPaintBackgroundTest >> testGrayColorBackgroundExplicitInstantiationWithPaint [
 	^ aBackground
 ]
 
-{ #category : #'background - color' }
+{ #category : 'background - color' }
 BlPaintBackgroundTest >> testGrayColorWithLowOpacityBackground [
 	
 	| aBackground |
@@ -72,7 +73,7 @@ BlPaintBackgroundTest >> testGrayColorWithLowOpacityBackground [
 	^ aBackground
 ]
 
-{ #category : #'background - color' }
+{ #category : 'background - color' }
 BlPaintBackgroundTest >> testGrayColorWithZeroOpacityBackground [
 
 	| aBackground |
@@ -86,7 +87,7 @@ BlPaintBackgroundTest >> testGrayColorWithZeroOpacityBackground [
 	^ aBackground
 ]
 
-{ #category : #'background - gradient' }
+{ #category : 'background - gradient' }
 BlPaintBackgroundTest >> testLinearGradientBackground [
 
 	| aBackground |
@@ -107,7 +108,7 @@ BlPaintBackgroundTest >> testLinearGradientBackground [
 	^ aBackground
 ]
 
-{ #category : #'background - gradient' }
+{ #category : 'background - gradient' }
 BlPaintBackgroundTest >> testLinearGradientBackgroundWithOpacity [
 	<sampleInstance>
 	| aBackground |
@@ -130,7 +131,7 @@ BlPaintBackgroundTest >> testLinearGradientBackgroundWithOpacity [
 	^ aBackground
 ]
 
-{ #category : #'background - gradient' }
+{ #category : 'background - gradient' }
 BlPaintBackgroundTest >> testLinearPaintBackground [
 
 	| aBackground |
@@ -149,26 +150,28 @@ BlPaintBackgroundTest >> testLinearPaintBackground [
 	^ aBackground
 ]
 
-{ #category : #'background - gradient' }
+{ #category : 'background - gradient' }
 BlPaintBackgroundTest >> testRadiusGradientBackground [
 
 	| aBackground |
 	aBackground := BlPaintBackground new
 		paint: (BlRadialGradientPaint new
 			stops: { 0 -> Color blue . 1 -> Color red};
-			center: 100@100;
-			radius: 200).
+			innerCenter:  100@100;
+			innerRadius: 0;
+			outerCenter: 100@100;
+			outerRadius:  200).
 	self assert: (aBackground isKindOf: BlPaintBackground).	
 	self assert: aBackground opacity equals: 1.0.
 	self assert: aBackground isTransparent not.
 	self assert: (aBackground paint isKindOf: BlRadialGradientPaint).
-	self assert: aBackground paint center equals: 100@100.
-	self assert: aBackground paint radius equals: 200.
+	self assert: aBackground paint innerCenter equals: 100@100.
+	self assert: aBackground paint outerRadius  equals: 200.
 	self assert: aBackground paint stops size equals: 2.
 	^ aBackground
 ]
 
-{ #category : #'background - color' }
+{ #category : 'background - color' }
 BlPaintBackgroundTest >> testTransparentColorBackground [
 	
 	| aBackground |

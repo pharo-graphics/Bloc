@@ -20,16 +20,18 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #SharedPriorityQueueTestEntry,
-	#superclass : #Object,
+	#name : 'SharedPriorityQueueTestEntry',
+	#superclass : 'Object',
 	#instVars : [
 		'priority',
 		'entryIdentifier'
 	],
-	#category : #'Bloc-Tests-TaskIt'
+	#category : 'Bloc-Tests-TaskIt',
+	#package : 'Bloc-Tests',
+	#tag : 'TaskIt'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SharedPriorityQueueTestEntry class >> priority: aNumber [
 
 	^self new
@@ -37,7 +39,7 @@ SharedPriorityQueueTestEntry class >> priority: aNumber [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SharedPriorityQueueTestEntry class >> priority: aNumber identifier: anObject [
 
 	^self new
@@ -46,23 +48,23 @@ SharedPriorityQueueTestEntry class >> priority: aNumber identifier: anObject [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SharedPriorityQueueTestEntry >> entryIdentifier [
 	^ entryIdentifier
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SharedPriorityQueueTestEntry >> entryIdentifier: anObject [
 	entryIdentifier := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SharedPriorityQueueTestEntry >> entryPriority [
 	"Answer the priority of the receiver when submitted as a task to TaskIt. 0 is highest priority"
 	^ priority
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SharedPriorityQueueTestEntry >> printOn: aStream [
 
 	super printOn: aStream.
@@ -74,12 +76,12 @@ SharedPriorityQueueTestEntry >> printOn: aStream [
 		<< ')'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SharedPriorityQueueTestEntry >> priority [
 	^ priority
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SharedPriorityQueueTestEntry >> priority: anObject [
 	priority := anObject
 ]

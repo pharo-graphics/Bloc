@@ -12,7 +12,7 @@ Class {
 		'measurer',
 		'index'
 	],
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
 { #category : #'instance creation' }

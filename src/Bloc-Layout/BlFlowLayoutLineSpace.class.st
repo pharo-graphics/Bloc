@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'intervals'
 	],
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
 { #category : #initialization }

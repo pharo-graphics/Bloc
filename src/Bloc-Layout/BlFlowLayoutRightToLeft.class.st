@@ -1,7 +1,7 @@
 Class {
 	#name : #BlFlowLayoutRightToLeft,
 	#superclass : #BlFlowLayoutDirection,
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
 { #category : #testing }

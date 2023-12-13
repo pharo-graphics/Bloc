@@ -4,19 +4,17 @@
 
 "
 Class {
-	#name : 'BlTextDecorationDashedStyle',
-	#superclass : 'BlTextDecorationStyle',
-	#category : 'Bloc-Text-Text-Decoration',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Decoration'
+	#name : #BlTextDecorationDashedStyle,
+	#superclass : #BlTextDecorationStyle,
+	#category : #'Bloc-Text-Text-Decoration'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDecorationDashedStyle class >> constructor [
 	^ #dashed
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDecorationDashedStyle class >> label [
 	^ 'Dashed'
 ]

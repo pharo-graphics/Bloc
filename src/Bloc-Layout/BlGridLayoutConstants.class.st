@@ -4,7 +4,7 @@ Class {
 	#classVars : [
 		'UNDEFINED'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
 { #category : #'class initialization' }

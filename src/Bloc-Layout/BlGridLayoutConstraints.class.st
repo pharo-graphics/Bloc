@@ -1,7 +1,7 @@
 Class {
 	#name : #BlGridLayoutConstraints,
 	#superclass : #BlLayoutConstraints,
-	#category : 'Bloc-Layout-Grid'
+	#category : #'Bloc-Layout-Grid'
 }
 
 { #category : #'as yet unclassified' }

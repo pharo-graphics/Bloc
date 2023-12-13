@@ -78,7 +78,17 @@ BlChildrenCollection >> removeAt: anIndex [
 	self subclassResponsibility
 ]
 
-{ #category : #'children - swapping' }
+{ #category : 'enumerating' }
+BlChildrenCollection >> select: selectBlock thenCollect: collectBlock [
+	"working version replacing Collection>>#select:thenCollect:"
+
+	^ Array new: self size streamContents: [ :str |
+		  self
+			  select: selectBlock
+			  thenDo: [ :child | str nextPut: (collectBlock value: child) ] ]
+]
+
+{ #category : 'children - swapping' }
 BlChildrenCollection >> swapAt: aChildIndex with: anotherChildIndex [
 	| lesserIndex greaterIndex fristChild secondChild  | 
 	aChildIndex = anotherChildIndex

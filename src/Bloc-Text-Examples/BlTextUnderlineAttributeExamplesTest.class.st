@@ -12,18 +12,18 @@ In addition to the simple API an underline attribute can be customized and then 
 
 "
 Class {
-	#name : #BlTextUnderlineAttributeExamples,
-	#superclass : #BlExampleTest,
+	#name : #BlTextUnderlineAttributeExamplesTest,
+	#superclass : #TestCase,
 	#category : #'Bloc-Text-Examples-Model'
 }
 
 { #category : #attribute }
-BlTextUnderlineAttributeExamples >> lineOfUnderlineAttribute [
-	<gtExample>
+BlTextUnderlineAttributeExamplesTest >> lineOfUnderlineAttribute [
 
-	self error: 'TODO: migrate from Sparta'.
+	<sampleInstance>
+	self error: 'TODO: migrate from Sparta'
 
-"	| anAttribute aCanvas aSpan aLine |
+	"	| anAttribute aCanvas aSpan aLine |
 
 	anAttribute := self underlineAttribute.
 	aSpan := BlMockedTextParagraphSpan new
@@ -40,32 +40,49 @@ BlTextUnderlineAttributeExamples >> lineOfUnderlineAttribute [
 	^ aLine"
 ]
 
-{ #category : #accessing }
-BlTextUnderlineAttributeExamples >> text [
-	<gtExample>
+{ #category : #attribute }
+BlTextUnderlineAttributeExamplesTest >> testUnderlineAttribute [
 
-	^ 'Hello' asRopedText fontSize: 75; foreground: Color veryDarkGray
+	<sampleInstance>
+	| anAttribute |
+	anAttribute := BlTextDecorationAttribute new underline.
+
+	self assert: anAttribute thickness equals: 1.
+	self assert: anAttribute color equals: Color black.
+
+	^ anAttribute
 ]
 
 { #category : #accessing }
-BlTextUnderlineAttributeExamples >> textWithUnderlineDo [
-	<gtExample>
-	^ self text
-		underlineDo: [ :anUnderline | 
-			anUnderline
-				color: Color red;
-				thickness: 6 ]
+BlTextUnderlineAttributeExamplesTest >> text [
+
+	<sampleInstance>
+	^ 'Hello' asRopedText
+		  fontSize: 75;
+		  foreground: Color veryDarkGray
 ]
 
 { #category : #accessing }
-BlTextUnderlineAttributeExamples >> textWithUnderline_1_to_5 [
-	<gtExample>
+BlTextUnderlineAttributeExamplesTest >> textWithUnderlineDo [
+
+	<sampleInstance>
+	^ self text underlineDo: [ :anUnderline |
+		  anUnderline
+			  color: Color red;
+			  thickness: 6 ]
+]
+
+{ #category : #accessing }
+BlTextUnderlineAttributeExamplesTest >> textWithUnderline_1_to_5 [
+
+	<sampleInstance>
 	^ self text underlineColor: (Color red alpha: 0.5) thickness: 6
 ]
 
 { #category : #accessing }
-BlTextUnderlineAttributeExamples >> textWithUnderline_2_to_3 [
-	<gtExample>
+BlTextUnderlineAttributeExamplesTest >> textWithUnderline_2_to_3 [
+
+	<sampleInstance>
 	| aText |
 	aText := self text.
 	(aText from: 2 to: 3)
@@ -75,8 +92,9 @@ BlTextUnderlineAttributeExamples >> textWithUnderline_2_to_3 [
 ]
 
 { #category : #accessing }
-BlTextUnderlineAttributeExamples >> textWithUnderline_2_to_4 [
-	<gtExample>
+BlTextUnderlineAttributeExamplesTest >> textWithUnderline_2_to_4 [
+
+	<sampleInstance>
 	| aText |
 	aText := self text.
 	(aText from: 2 to: 4)
@@ -86,8 +104,9 @@ BlTextUnderlineAttributeExamples >> textWithUnderline_2_to_4 [
 ]
 
 { #category : #accessing }
-BlTextUnderlineAttributeExamples >> textWithUnderline_3_to_4 [
-	<gtExample>
+BlTextUnderlineAttributeExamplesTest >> textWithUnderline_3_to_4 [
+
+	<sampleInstance>
 	| aText |
 	aText := self text.
 	(aText from: 3 to: 4)
@@ -97,25 +116,13 @@ BlTextUnderlineAttributeExamples >> textWithUnderline_3_to_4 [
 ]
 
 { #category : #accessing }
-BlTextUnderlineAttributeExamples >> textWithUnderline_3_to_5 [
-	<gtExample>
+BlTextUnderlineAttributeExamplesTest >> textWithUnderline_3_to_5 [
+
+	<sampleInstance>
 	| aText |
 	aText := self text.
 	(aText from: 3 to: 5)
 		underlineColor: (Color red alpha: 0.5)
 		thickness: 6.
 	^ aText
-]
-
-{ #category : #attribute }
-BlTextUnderlineAttributeExamples >> underlineAttribute [
-	<gtExample>
-	| anAttribute |
-
-	anAttribute := BlTextDecorationAttribute new underline.
-	
-	self assert: anAttribute thickness equals: 1.
-	self assert: anAttribute color equals: Color black.
-
-	^ anAttribute
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #BlLinearGradientPaint }
+Extension { #name : 'BlLinearGradientPaint' }
 
-{ #category : #'*Bloc-SVG' }
+{ #category : '*Bloc-SVG' }
 BlLinearGradientPaint >> adaptedToElement: aBlElement [
 	"Sets the instance variables to match the BlElement size"
 	|corner|

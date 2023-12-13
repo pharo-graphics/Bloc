@@ -1093,10 +1093,10 @@ BlSpace >> findMousePickTargetFromEvent: anEvent [
 		:found | " test found because if the result is the root then it means that no element has been found "
 		found ~~ self root ifTrue: [ " ok, dispatch outside event through all the space elements "
 			" dispatch the mouse outside event to all alements of the scene graph "
-			self dispatchMousePickedOutside: ((anEvent newCopyFor: found) asMouseOutsideEvent lastMouseDownEvent: self mouseProcessor lastMouseDownEvent; yourself).
+			self dispatchMousePickedOutside: ((anEvent newCopyFor: found) asMouseOutsideEvent lastMouseDownEvent: self testMouseProcessor lastMouseDownEvent; yourself).
 			^ found ] ].
 	" no element found at all: all elements receive a outside event"
-	self dispatchMousePickedOutside: (anEvent clone asMouseOutsideEvent  lastMouseDownEvent: self mouseProcessor lastMouseDownEvent; yourself).
+	self dispatchMousePickedOutside: (anEvent clone asMouseOutsideEvent  lastMouseDownEvent: self testMouseProcessor lastMouseDownEvent; yourself).
 	^ nil
 ]
 
@@ -1554,9 +1554,8 @@ BlSpace >> minimized [
 
 { #category : #'accessing - processors' }
 BlSpace >> mouseProcessor [
-	<return: #BlMouseProcessor>
-
-	^ mouseProcessor
+	
+	^ mouseProcessor 
 ]
 
 { #category : #'accessing - processors' }
@@ -1747,6 +1746,7 @@ BlSpace >> root: anElement [
 	anElement must not be nil.
 	anElement must not be added to any scene graph"
 	
+
 	self
 		assert: [ anElement isNotNil ]
 		description: [ 'anElement must not be nil' ].
@@ -1755,11 +1755,15 @@ BlSpace >> root: anElement [
 		assert: [ anElement space isNil ]
 		description: [ 'New root must not be already have a space assigned!' ].
 
+	rootElement == anElement ifTrue: [ ^ self ].
+
 	anElement
 		space: self;
 		size: self extent.
 
-	rootElement := anElement
+	rootElement := anElement.
+	self dispatchEvent: BlSpaceRootChangeEvent new
+
 ]
 
 { #category : #accessing }
@@ -1864,7 +1868,14 @@ BlSpace >> telemetry: aBlTelemetry [
 	telemetry := aBlTelemetry
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - processors' }
+BlSpace >> testMouseProcessor [
+	<return: #BlMouseProcessor>
+
+	^ mouseProcessor
+]
+
+{ #category : #'accessing' }
 BlSpace >> time [
 	<return: #BlTime>
 	
@@ -1879,7 +1890,6 @@ BlSpace >> time: aBlTime [
 { #category : #'window - properties' }
 BlSpace >> title [
 	"Return window's title as a string"
-	<return: #String>
 
 	^ self
 		hostSpaceDo: [ :aHostSpace | aHostSpace title ]

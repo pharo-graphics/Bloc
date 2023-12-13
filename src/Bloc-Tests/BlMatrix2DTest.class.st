@@ -2,12 +2,14 @@
 A BlMatrix2DTest is a test class for testing the behavior of BlMatrix2D
 "
 Class {
-	#name : #BlMatrix2DTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Tests-Basic-Math'
+	#name : 'BlMatrix2DTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Tests-Basic-Math',
+	#package : 'Bloc-Tests',
+	#tag : 'Basic-Math'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMatrix2DTest >> testInitialize [
 
 	| matrix |
@@ -21,7 +23,7 @@ BlMatrix2DTest >> testInitialize [
 	self assert: matrix sy equals: 1.0.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMatrix2DTest >> testInverse [
 
 	| matrix |

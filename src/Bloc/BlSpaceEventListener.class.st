@@ -45,7 +45,7 @@ BlSpaceEventListener >> keyboardProcessor [
 { #category : #'mouse handlers' }
 BlSpaceEventListener >> mouseDownEvent: anEvent [
 
-	self mouseProcessor handleMouseDown: anEvent.
+	self testMouseProcessor handleMouseDown: anEvent.
 	self focusProcessor handleMouseDown: anEvent
 ]
 
@@ -56,7 +56,7 @@ BlSpaceEventListener >> mouseEvent: anEvent [
 
 { #category : #'mouse handlers' }
 BlSpaceEventListener >> mouseMoveEvent: anEvent [
-	self mouseProcessor handleMouseMove: anEvent
+	self testMouseProcessor handleMouseMove: anEvent
 ]
 
 { #category : #accessing }
@@ -68,13 +68,13 @@ BlSpaceEventListener >> mouseProcessor [
 { #category : #'mouse handlers' }
 BlSpaceEventListener >> mouseUpEvent: anEvent [
 
-	self mouseProcessor handleMouseUp: anEvent
+	self testMouseProcessor handleMouseUp: anEvent
 ]
 
 { #category : #'mouse handlers' }
 BlSpaceEventListener >> mouseWheelEvent: anEvent [
 
-	self mouseProcessor processMouseScroll: anEvent
+	self testMouseProcessor processMouseScroll: anEvent
 ]
 
 { #category : #accessing }
@@ -94,7 +94,7 @@ BlSpaceEventListener >> spaceCloseRequest: anEvent [
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceClosedEvent: anEvent [
-	self mouseProcessor onSpaceClosed
+	self testMouseProcessor onSpaceClosed
 ]
 
 { #category : #'drag and drop' }
@@ -137,23 +137,25 @@ BlSpaceEventListener >> spaceFocusOutEvent: anEvent [
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceMouseEnterEvent: anEvent [
-	self mouseProcessor handleMouseEntered: anEvent
+	self testMouseProcessor handleMouseEntered: anEvent
 ]
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceMouseLeaveEvent: anEvent [
 
-	self mouseProcessor handleMouseLeft: anEvent
+	self testMouseProcessor handleMouseLeft: anEvent
 ]
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceMovedEvent: anEvent [
-	self space setPosition: anEvent position
+
+  self space setPosition: anEvent position
 ]
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceRedrawRequestedEvent: anEvent [
-	self space
+
+  self space
 		invalidateAll;
 		requestNextPulse
 ]
@@ -167,17 +169,26 @@ BlSpaceEventListener >> spaceResizedEvent: anEvent [
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceScaleFactorChangedEvent: anEvent [
-	self space
+
+  self space
 		invalidateAll;
 		requestNextPulse
 ]
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceWakeUpEvent: anEvent [
-	self space requestNextPulse
+
+  self space requestNextPulse
+]
+
+{ #category : #'accessing' }
+BlSpaceEventListener >> testMouseProcessor [
+
+	^ self space testMouseProcessor
 ]
 
 { #category : #'keyboard handlers' }
 BlSpaceEventListener >> textInputEvent: anEvent [
+
 	self keyboardProcessor processTextInput: anEvent
 ]

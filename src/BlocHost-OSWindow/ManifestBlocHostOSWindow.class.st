@@ -4,7 +4,7 @@ I store metadata for this package. These meta data are used by other tools such 
 Class {
 	#name : #ManifestBlocHostOSWindow,
 	#superclass : #PackageManifest,
-	#category : 'BlocHost-OSWindow'
+	#category : #'BlocHost-OSWindow'
 }
 
 { #category : #'code-critics' }

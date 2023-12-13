@@ -1,27 +1,27 @@
 Class {
 	#name : #BlTextElementExamples,
-	#superclass : #BlExampleTest,
+	#superclass : #TestCase,
 	#category : #'Bloc-Text-Alexandrie-Examples'
 }
 
 { #category : #example }
 BlTextElementExamples >> helloText [
-	<gtExample>
 
+	<sampleInstance>
 	^ 'mama' asRopedText fontSize: 80
 ]
 
 { #category : #example }
 BlTextElementExamples >> loremIpsumText [
-	<gtExample>
 
+	<sampleInstance>
 	^ (String loremIpsum: 50) asRopedText
 ]
 
 { #category : #example }
 BlTextElementExamples >> simpleText [
-	<gtExample>
-	
+
+	<sampleInstance>
 	| text textElement |
 	text := (String loremIpsum: 50) asRopedText.
 	textElement := BlTextElement new.
@@ -31,47 +31,50 @@ BlTextElementExamples >> simpleText [
 	^ textElement
 ]
 
-{ #category : #example }
-BlTextElementExamples >> textAttributes [
-	<gtExample>
-	| text lineElements textElement |
-	text := ('Hello world!', String cr, 'How are you?') asRopedText.
-	text
-		fontSize: 16;
-		italic. "emphasis"
-	(text from: 1 to: 12)
-		foreground: Color red "text color";
-		bold "weight";
-		normal "emphasis".
-	(text from: 13 to: text size)
-		fontSize: 20;
-		monospace. "font-family"
+{ #category : #tests }
+BlTextElementExamples >> testTextElement [
 
-	lineElements := Array streamContents: [ :aStream | 
-		| anIterator |
-		anIterator := text iterator.
-		[ anIterator hasNext ]
-			whileTrue: [ aStream nextPut: (BlTextElement text: anIterator nextLine) ] ].
-
-	textElement := BlElement new
-	  layout: BlLinearLayout vertical;
-	  constraintsDo: [ :c | 
-	     c horizontal fitContent.
-	     c vertical fitContent ];
-		addChildren: lineElements;
-		yourself.
-
-	^ textElement
-]
-
-{ #category : #example }
-BlTextElementExamples >> textElement [
-	<gtExample>
+	<sampleInstance>
 	| text textElement |
 	text := self helloText.
 	textElement := BlTextElement new.
 	textElement text: text.
 	textElement clipChildren: false.
 	self assert: textElement text equals: text.
+	^ textElement
+]
+
+{ #category : #example }
+BlTextElementExamples >> textAttributes [
+
+	<sampleInstance>
+	| text lineElements textElement |
+	text := ('Hello world!' , String cr , 'How are you?') asRopedText.
+	text
+		fontSize: 16;
+		italic. "emphasis"
+	(text from: 1 to: 12)
+		foreground: Color red;
+		"weight"bold;
+		"emphasis"normal. "text color"
+	(text from: 13 to: text size)
+		fontSize: 20;
+		monospace. "font-family"
+
+	lineElements := Array streamContents: [ :aStream |
+		                | anIterator |
+		                anIterator := text iterator.
+		                [ anIterator hasNext ] whileTrue: [
+			                aStream nextPut:
+				                (BlTextElement text: anIterator nextLine) ] ].
+
+	textElement := BlElement new
+		               layout: BlLinearLayout vertical;
+		               constraintsDo: [ :c |
+			               c horizontal fitContent.
+			               c vertical fitContent ];
+		               addChildren: lineElements;
+		               yourself.
+
 	^ textElement
 ]

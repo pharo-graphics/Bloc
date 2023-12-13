@@ -15,7 +15,6 @@ Class {
 
 { #category : #accessing }
 BlSpaceDestroyedEvent >> space [
-	<return: #BlOSpace>
 
 	^ space
 ]

@@ -59,6 +59,12 @@ BlInsets class >> horizontal: aNumber [
 ]
 
 { #category : #'instance creation' }
+BlInsets class >> horizontal: aNumberForH vertical: aNumberForV [
+
+	^ self top: aNumberForV left: aNumberForH bottom: aNumberForV right: aNumberForH
+]
+
+{ #category : #'instance creation' }
 BlInsets class >> left: l [
 
 	^ self 

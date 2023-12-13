@@ -1,10 +1,11 @@
 Class {
-	#name : #BlBackgroundTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Tests'
+	#name : 'BlBackgroundTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Tests',
+	#package : 'Bloc-Tests'
 }
 
-{ #category : #'background - builder' }
+{ #category : 'background - builder' }
 BlBackgroundTest >> testBuildBackgroundWithImagesAndColor [
 
 	| aBackground aBuilder |	
@@ -35,7 +36,7 @@ BlBackgroundTest >> testBuildBackgroundWithImagesAndColor [
 	^ aBackground
 ]
 
-{ #category : #'background - transparent' }
+{ #category : 'background - transparent' }
 BlBackgroundTest >> testTransparentBackground [
 
 	| aBackground |

@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlFontStretch',
-	#superclass : 'SharedPool',
+	#name : #BlFontStretch,
+	#superclass : #SharedPool,
 	#instVars : [
 		'name',
 		'value'
@@ -16,32 +16,30 @@ Class {
 		'UltraCondensed',
 		'UltraExpanded'
 	],
-	#category : 'Bloc-Text-Font',
-	#package : 'Bloc-Text',
-	#tag : 'Font'
+	#category : #'Bloc-Text-Font'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontStretch class >> condensed [
 	^ Condensed
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontStretch class >> expanded [
 	^ Expanded
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontStretch class >> extraCondensed [
 	^ ExtraCondensed
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontStretch class >> extraExpanded [
 	^ ExtraExpanded
 ]
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BlFontStretch class >> initialize [
 	UltraCondensed := self stretch: 0 name: #ultraCondensed.
 	ExtraCondensed := self stretch: 1 name: #extraCondensed.
@@ -54,39 +52,39 @@ BlFontStretch class >> initialize [
 	UltraExpanded := self stretch: 8 name: #ultraExpanded.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontStretch class >> normal [
 	^ Normal
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontStretch class >> semiCondensed [
 	^ SemiCondensed
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontStretch class >> semiExpanded [
 	^ SemiExpanded
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlFontStretch class >> stretch: aStretchValue name: aStretchName [
 	^ self new
 		value: aStretchValue;
 		name: aStretchName
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontStretch class >> ultraCondensed [
 	^ UltraCondensed
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontStretch class >> ultraExpanded [
 	^ UltraExpanded
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlFontStretch >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -97,26 +95,26 @@ BlFontStretch >> = anObject [
 	^ value = anObject value
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlFontStretch >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ value hash
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontStretch >> name [
 	<return: #Symbol>
 
 	^ name
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontStretch >> name: aSymbol [
 	name := aSymbol
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlFontStretch >> printOn: aStream [
 	"Append a sequence of characters to aStream that identify the receiver."
 
@@ -129,14 +127,14 @@ BlFontStretch >> printOn: aStream [
 		print: value
 ]
 
-{ #category : 'evaluating' }
+{ #category : #evaluating }
 BlFontStretch >> value [
 	<return: #Number>
 
 	^ value
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontStretch >> value: aNumber [
 	value := aNumber
 ]

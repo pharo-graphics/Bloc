@@ -7,19 +7,17 @@ Essentially, I offer a scope that can be used  by upper layers, such as editors,
 
 "
 Class {
-	#name : 'BlSubText',
-	#superclass : 'BlText',
+	#name : #BlSubText,
+	#superclass : #BlText,
 	#instVars : [
 		'text',
 		'start',
 		'end'
 	],
-	#category : 'Bloc-Text-Text',
-	#package : 'Bloc-Text',
-	#tag : 'Text'
+	#category : #'Bloc-Text-Text'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSubText class >> empty: aBlText [
 	"Returns a sub-text that is backed up by an empty text"
 	<return: #BlSubText>
@@ -33,7 +31,7 @@ BlSubText class >> empty: aBlText [
 		to: 0
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSubText class >> text: aBlText [
 	"Answer a new instance from aBlText. The argument should not be a BlSubText"
 
@@ -42,7 +40,7 @@ BlSubText class >> text: aBlText [
 		yourself
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSubText class >> text: aBlText from: aStartIndex to: anEndIndex [
 
 	^ self new
@@ -50,7 +48,7 @@ BlSubText class >> text: aBlText from: aStartIndex to: anEndIndex [
 		yourself
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlSubText >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
@@ -62,12 +60,12 @@ BlSubText >> = anotherObject [
 			and: [ anotherObject text = self text ] ]
 ]
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 BlSubText >> assertInvariant [
 	self assertStart: start end: end
 ]
 
-{ #category : 'asserting' }
+{ #category : #asserting }
 BlSubText >> assertStart: aStartIndex end: anEndIndex [
 
 	aStartIndex isZero
@@ -88,7 +86,7 @@ BlSubText >> assertStart: aStartIndex end: anEndIndex [
 		description: [ 'If end index is zero then start index must be 1' ]
 ]
 
-{ #category : 'text - accessing' }
+{ #category : #'text - accessing' }
 BlSubText >> at: anIndex [
 	"Return a character at a given index"
 	<return: #Character>
@@ -96,14 +94,14 @@ BlSubText >> at: anIndex [
 	^ self text at: anIndex + start - 1
 ]
 
-{ #category : 'text - attributes' }
+{ #category : #'text - attributes' }
 BlSubText >> attributes: anAttributesCollection [
 	"Apply given attributes on the whole text"
 
 	self text attributes: anAttributesCollection from: start to: end
 ]
 
-{ #category : 'text - attributes' }
+{ #category : #'text - attributes' }
 BlSubText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex [ 
 
 	self
@@ -120,7 +118,7 @@ BlSubText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex [
 		to: start + aToIndex - 1
 ]
 
-{ #category : 'text - attributes' }
+{ #category : #'text - attributes' }
 BlSubText >> attributesAt: anIndex [
 	"Return a collection of text attributes without duplicates at a given text index"
 
@@ -129,12 +127,12 @@ BlSubText >> attributesAt: anIndex [
 	^ self text attributesAt: anIndex + start - 1
 ]
 
-{ #category : 'text - attributes' }
+{ #category : #'text - attributes' }
 BlSubText >> attributesFinder [
 	^ BlTextAttributesDynamicFinder new initializeForText: self
 ]
 
-{ #category : 'text - attributes' }
+{ #category : #'text - attributes' }
 BlSubText >> clearAttributes: aBlock [
 	text
 		clearAttributes: start
@@ -142,7 +140,7 @@ BlSubText >> clearAttributes: aBlock [
 		if: aBlock
 ]
 
-{ #category : 'text - attributes' }
+{ #category : #'text - attributes' }
 BlSubText >> clearAttributes: aFromIndex to: aToIndex if: aBlock [
 	text
 		clearAttributes: start + aFromIndex - 1
@@ -150,7 +148,7 @@ BlSubText >> clearAttributes: aFromIndex to: aToIndex if: aBlock [
 		if: aBlock
 ]
 
-{ #category : 'text - copying' }
+{ #category : #'text - copying' }
 BlSubText >> copyFrom: aStartIndex to: anEndIndex [
 	"Create a copy of this text within a given indices interval.
 	Note: I am different from ==#from:to:== in a sense that I don't create a sub-text that points
@@ -164,7 +162,7 @@ BlSubText >> copyFrom: aStartIndex to: anEndIndex [
 		to: (start + anEndIndex - 1)
 ]
 
-{ #category : 'text - modifications' }
+{ #category : #'text - modifications' }
 BlSubText >> deleteAll: aCollectionOfIntervals [
 
 	aCollectionOfIntervals
@@ -176,14 +174,14 @@ BlSubText >> deleteAll: aCollectionOfIntervals [
 	end := end - (aCollectionOfIntervals sum: #size)
 ]
 
-{ #category : 'text - enumeration' }
+{ #category : #'text - enumeration' }
 BlSubText >> do: aBlockClosure [ 
 	| anIterator |
 	anIterator := self iterator.
 	[ anIterator hasNext ] whileTrue: [ aBlockClosure value: anIterator next ]
 ]
 
-{ #category : 'text - accessing' }
+{ #category : #'text - accessing' }
 BlSubText >> empty [
 	"Return a similar (the same backend data structure) but empty text"
 	<return: #BlText>
@@ -191,21 +189,21 @@ BlSubText >> empty [
 	^ self text empty
 ]
 
-{ #category : 'text - converting' }
+{ #category : #'text - converting' }
 BlSubText >> encodeOn: aWriteStream with: aZnCharacterEncoder [
 
 	self do: [ :each | 
 		aZnCharacterEncoder nextPut: each toStream: aWriteStream ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSubText >> end [
 	<return: #Number>
 
 	^ end
 ]
 
-{ #category : 'text - accessing' }
+{ #category : #'text - accessing' }
 BlSubText >> from: aStart to: anEnd [
 	self assertInvariant.
 	
@@ -218,14 +216,14 @@ BlSubText >> from: aStart to: anEnd [
 		to: ((anEnd + start - 1) max: 0)
 ]
 
-{ #category : 'text - enumeration' }
+{ #category : #'text - enumeration' }
 BlSubText >> from: aFromIndex to: aToIndex do: aBlockClosure [
 	| anIterator |
 	anIterator := self iterator: aFromIndex to: aToIndex.
 	[ anIterator hasNext ] whileTrue: [ aBlockClosure value: anIterator next ]
 ]
 
-{ #category : 'text - copying' }
+{ #category : #'text - copying' }
 BlSubText >> generation [
 	"Return an object that uniquely represents this generation of text"
 	<return: #Object>
@@ -233,12 +231,12 @@ BlSubText >> generation [
 	^ self text generation
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlSubText >> hash [
 	^ ((self class hash bitXor: self start hash) bitXor: self end hash) bitXor: self text hash
 ]
 
-{ #category : 'text - modifications' }
+{ #category : #'text - modifications' }
 BlSubText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
 	| aPreviousSize aNewSize |
 	
@@ -255,17 +253,17 @@ BlSubText >> insertStrings: aCollectionOfStrings atAll: aCollectionOfIndices [
 	end := end + (aNewSize - aPreviousSize)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSubText >> insertText: arg1 at: arg2 [ 
 	^ self shouldBeImplemented
 ]
 
-{ #category : 'text - testing' }
+{ #category : #'text - testing' }
 BlSubText >> isEmpty [
 	^ self size isZero
 ]
 
-{ #category : 'text - enumeration' }
+{ #category : #'text - enumeration' }
 BlSubText >> iterator [
 	^ BlSubTextIterator
 		text: self
@@ -273,7 +271,7 @@ BlSubText >> iterator [
 		to: self size
 ]
 
-{ #category : 'text - enumeration' }
+{ #category : #'text - enumeration' }
 BlSubText >> iterator: aStartIndex to: anEndIndex [
 	^ BlSubTextIterator
 		text: self
@@ -281,20 +279,20 @@ BlSubText >> iterator: aStartIndex to: anEndIndex [
 		to: anEndIndex
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 BlSubText >> postCopy [
 	super postCopy.
 	text := text copy
 ]
 
-{ #category : 'text - converting' }
+{ #category : #'text - converting' }
 BlSubText >> printOn: aStream [
 
 	end > text size ifTrue: [ ^ aStream << 'BlSubText(end>text size)' ].
 	^ super printOn: aStream
 ]
 
-{ #category : 'text - accessing' }
+{ #category : #'text - accessing' }
 BlSubText >> size [
 	self assertInvariant.
 
@@ -303,14 +301,14 @@ BlSubText >> size [
 		ifFalse: [ end - start + 1 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSubText >> start [
 	<return: #Number>
 
 	^ start
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlSubText >> start: aStartIndex end: anEndIndex [
 	self assertStart: aStartIndex end: anEndIndex.
 
@@ -320,18 +318,18 @@ BlSubText >> start: aStartIndex end: anEndIndex [
 	self assertInvariant
 ]
 
-{ #category : 'text - notifying' }
+{ #category : #'text - notifying' }
 BlSubText >> suspendAnnouncementsWhile: aBlock [
 	super suspendAnnouncementsWhile: [
 		self text suspendAnnouncementsWhile: aBlock ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSubText >> text [
 	^ text
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlSubText >> text: aBlText from: aStartIndex to: anEndIndex [
 
 	text := aBlText.
@@ -341,7 +339,7 @@ BlSubText >> text: aBlText from: aStartIndex to: anEndIndex [
 	self assertInvariant
 ]
 
-{ #category : 'text - accessing' }
+{ #category : #'text - accessing' }
 BlSubText >> textOffset [
 	"Return absolute text offset to better deal with sub-texts"
 	<return: #Number>
@@ -349,7 +347,7 @@ BlSubText >> textOffset [
 	^ ((self start - 1) max: 0) + self text textOffset
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSubText >> unstyle: aFromIndex to: aToIndex [
 	self text unstyle: (start + aFromIndex - 1) to: (start + aToIndex - 1)
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlGridLayoutConstraintsHorizontal,
 	#superclass : #BlGridLayoutConstraintsAxis,
-	#category : 'Bloc-Layout-Grid'
+	#category : #'Bloc-Layout-Grid'
 }
 
 { #category : #alignment }

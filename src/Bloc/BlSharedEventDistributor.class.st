@@ -58,17 +58,20 @@ BlSharedEventDistributor >> adjustPosition: aNewEvent from: anOldEvent [
 
 { #category : #'api - event managing' }
 BlSharedEventDistributor >> dispatch: aBlEvent on: anElement [
-	| aNewEvent |
 
+	| aNewEvent |
 	shouldHandle ifFalse: [ ^ self ].
-	
+
 	aNewEvent := aBlEvent newCopyFor: anElement.
 	aBlEvent isMouse ifTrue: [
 		self adjustPosition: aNewEvent from: aBlEvent ].
 
 	shouldHandle := false.
-	[ anElement dispatchEvent: aNewEvent ]
-		ensure: [ shouldHandle := true ]
+	[ anElement dispatchEvent: aNewEvent ] ensure: [
+		shouldHandle := true ].
+	"Update the original event correctly if the event copy is consumed.
+	This is necessary if event processing depends on #isConsumed (e.g. dnd processing)"
+	aNewEvent isConsumed ifTrue: [ aBlEvent consumed: true ]
 ]
 
 { #category : #accessing }

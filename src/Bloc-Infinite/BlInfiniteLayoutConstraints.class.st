@@ -1,32 +1,34 @@
 Class {
-	#name : #BlInfiniteLayoutConstraints,
-	#superclass : #BlLayoutConstraints,
+	#name : 'BlInfiniteLayoutConstraints',
+	#superclass : 'BlLayoutConstraints',
 	#instVars : [
 		'holder',
 		'decorationInsets',
 		'insertsDirty',
 		'pendingInvalidate'
 	],
-	#category : #'Bloc-Infinite-Layout'
+	#category : 'Bloc-Infinite-Layout',
+	#package : 'Bloc-Infinite',
+	#tag : 'Layout'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteLayoutConstraints >> decorationInsets [
 	^ decorationInsets
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteLayoutConstraints >> decorationInsets: aBlInsets [
 	decorationInsets := aBlInsets
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 BlInfiniteLayoutConstraints >> defaultHolder [
 
 	^ BlInfiniteHolder new
 ]
 
-{ #category : #'accessing - position' }
+{ #category : 'accessing - position' }
 BlInfiniteLayoutConstraints >> elementDataSourcePosition [
 	"Returns the up-to-date datasource position that the element I am attached to corresponds to"
 	<return: #Number>
@@ -34,7 +36,7 @@ BlInfiniteLayoutConstraints >> elementDataSourcePosition [
 	^ holder dataSourcePosition
 ]
 
-{ #category : #'accessing - position' }
+{ #category : 'accessing - position' }
 BlInfiniteLayoutConstraints >> elementLayoutPosition [
 	"Returns the datasource position that the element I am attached to corresponds to as of latest layout calculation"
 	<return: #Number>
@@ -42,7 +44,7 @@ BlInfiniteLayoutConstraints >> elementLayoutPosition [
 	^ holder layoutPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteLayoutConstraints >> holder [
 	"Return an element holder of the element I am attached to.
 	holder can not be nil"
@@ -51,7 +53,7 @@ BlInfiniteLayoutConstraints >> holder [
 	^ holder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteLayoutConstraints >> holder: anElementHolder [
 	"Change an element holder of the element I am attached to.
 	anElement holder must not be nil"
@@ -63,7 +65,7 @@ BlInfiniteLayoutConstraints >> holder: anElementHolder [
 	holder := anElementHolder
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 BlInfiniteLayoutConstraints >> initialize [
 	super initialize.
 	
@@ -72,17 +74,17 @@ BlInfiniteLayoutConstraints >> initialize [
 	pendingInvalidate := false
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlInfiniteLayoutConstraints >> insetsDirty [
 	^ insertsDirty
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlInfiniteLayoutConstraints >> insetsDirty: aBoolean [
 	insertsDirty := aBoolean
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteLayoutConstraints >> isElementInvalid [
 	"Returns true if the element I am attached to is now representing potentially invalid data.
 	An InfiniteLayout should scrap/recycle it."
@@ -91,7 +93,7 @@ BlInfiniteLayoutConstraints >> isElementInvalid [
 	^ holder isInvalid
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteLayoutConstraints >> isElementNeedsUpdate [
 	"Returns true if the element I am attached to needs to have its content updated from the corresponding datasource"
 	<return: #Boolean>
@@ -99,7 +101,7 @@ BlInfiniteLayoutConstraints >> isElementNeedsUpdate [
 	^ holder needsUpdate
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteLayoutConstraints >> isItemChanged [
 	"Returns true if the datasource item corresponding to the element I am attached to has been changed in the data set.
 	An InfiniteElement may choose to treat it differently in order to animate its changing state."
@@ -108,7 +110,7 @@ BlInfiniteLayoutConstraints >> isItemChanged [
 	^ holder isChanged
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteLayoutConstraints >> isItemRemoved [
 	"Returns true if the datasource item corresponding to the element I am attached to has been removed from the data set.
 	An InfiniteLayout may choose to treat it differently in order to animate its outgoing or disappearing state"
@@ -117,12 +119,12 @@ BlInfiniteLayoutConstraints >> isItemRemoved [
 	^ holder isRemoved
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlInfiniteLayoutConstraints >> pendingInvalidate [
 	^ pendingInvalidate
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlInfiniteLayoutConstraints >> pendingInvalidate: aBoolean [
 	pendingInvalidate := aBoolean
 ]

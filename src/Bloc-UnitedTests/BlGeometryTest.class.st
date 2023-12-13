@@ -2,20 +2,18 @@
 An AkGroupTest is a test class for testing the behavior of AkGroup
 "
 Class {
-	#name : 'BlGeometryTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-UnitedTests-Geometry',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Geometry'
+	#name : #BlGeometryTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-UnitedTests-Geometry'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlGeometryTest class >> shouldInheritSelectors [
 	^ true
 	
 ]
 
-{ #category : 'contains tests' }
+{ #category : #'contains tests' }
 BlGeometryTest >> test3ElContainsPoint [
 
 	| g c1 c2 |
@@ -48,7 +46,7 @@ BlGeometryTest >> test3ElContainsPoint [
 	self assert: (c1 containsPoint: 50 @ 50)
 ]
 
-{ #category : 'any bounds tests' }
+{ #category : #'any bounds tests' }
 BlGeometryTest >> testElAnyBounds [
 
 	| g c1 c2 |
@@ -112,7 +110,7 @@ BlGeometryTest >> testElAnyBounds [
 		equals: (200 @ 200 corner: 400 @ 300)
 ]
 
-{ #category : 'bounds tests' }
+{ #category : #'bounds tests' }
 BlGeometryTest >> testElLocalAndGlobalBoundsConvertion [
 
 	| g |
@@ -142,7 +140,7 @@ BlGeometryTest >> testElLocalAndGlobalBoundsConvertion [
 		equals: (10 @ 10 corner: 110 @ 110)
 ]
 
-{ #category : 'position tests' }
+{ #category : #'position tests' }
 BlGeometryTest >> testElLocalAndGlobalPostionConvertion [
 
 	| g n |
@@ -166,7 +164,7 @@ BlGeometryTest >> testElLocalAndGlobalPostionConvertion [
 	self assert: (n parentPointToLocal: n position) equals: 0 @ 0
 ]
 
-{ #category : 'tx bounds tests' }
+{ #category : #'tx bounds tests' }
 BlGeometryTest >> testElTxBounds [
 
 	| g n |

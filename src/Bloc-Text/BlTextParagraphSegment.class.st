@@ -5,8 +5,8 @@ I an already measured abstract paragraph segment. I'm a composite to design line
 
 "
 Class {
-	#name : 'BlTextParagraphSegment',
-	#superclass : 'Object',
+	#name : #BlTextParagraphSegment,
+	#superclass : #Object,
 	#instVars : [
 		'from',
 		'to',
@@ -19,66 +19,64 @@ Class {
 		'descent',
 		'baseline'
 	],
-	#category : 'Bloc-Text-Text-Paragraph',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Paragraph'
+	#category : #'Bloc-Text-Text-Paragraph'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> advance [
 
 	^ advance
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> ascent [
 
 	^ ascent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> baseline [
 
 	^ baseline
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> baseline: aPoint [
 
 	baseline := aPoint
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> bounds [
 
 	^ self origin extent: self extent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> descent [
 
 	^ descent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> extent [
 
 	^ width @ height
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> from [
 
 	^ from
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> height [
 
 	^ height
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTextParagraphSegment >> initialize [
 	super initialize.
 
@@ -97,43 +95,43 @@ BlTextParagraphSegment >> initialize [
 	descent := 0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> left [
 	
 	^ left
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlTextParagraphSegment >> normalize: aScale [
 	"Normalize this segment to have rounded measurements"
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> origin [
 
 	^ left @ top
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> right [
 	
 	^ left + width
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> to [
 
 	^ to
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> top [
 	
 	^ top
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextParagraphSegment >> width [
 
 	^ width

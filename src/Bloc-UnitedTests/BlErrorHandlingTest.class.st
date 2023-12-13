@@ -3,20 +3,18 @@ I have been automatically converted and probably manually tweaked from BlErrorHa
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlErrorHandlingTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-UnitedTests-Errors',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Errors'
+	#name : #BlErrorHandlingTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-UnitedTests-Errors'
 }
 
-{ #category : 'metadata' }
+{ #category : #metadata }
 BlErrorHandlingTest >> originClassName [
 	"This test was generated from..."
 	^ 'BlErrorHandlingExamples'
 ]
 
-{ #category : 'fixture' }
+{ #category : #fixture }
 BlErrorHandlingTest >> sceneWith: aFaultyElement [
 
 	"Create a visual scene with a faulty element embedded in it"
@@ -80,7 +78,7 @@ BlErrorHandlingTest >> sceneWith: aFaultyElement [
 	^ aContainer
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlErrorHandlingTest >> testSceneElementThatHasBrokenDrawing [
 	<sampleInstance>
 	
@@ -104,7 +102,7 @@ BlErrorHandlingTest >> testSceneElementThatHasBrokenDrawing [
 	^ aSceneElement
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlErrorHandlingTest >> testSceneElementThatHasBrokenDrawingAndOnLayout [
 	<sampleInstance>
 
@@ -136,7 +134,7 @@ BlErrorHandlingTest >> testSceneElementThatHasBrokenDrawingAndOnLayout [
 	^ aSceneElement
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlErrorHandlingTest >> testSceneElementThatHasBrokenOnLayout [
 	<sampleInstance>
 

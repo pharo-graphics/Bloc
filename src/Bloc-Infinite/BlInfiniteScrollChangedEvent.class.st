@@ -1,25 +1,27 @@
 Class {
-	#name : #BlInfiniteScrollChangedEvent,
-	#superclass : #BlEvent,
+	#name : 'BlInfiniteScrollChangedEvent',
+	#superclass : 'BlEvent',
 	#instVars : [
 		'scrollState'
 	],
-	#category : #'Bloc-Infinite-Events'
+	#category : 'Bloc-Infinite-Events',
+	#package : 'Bloc-Infinite',
+	#tag : 'Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlInfiniteScrollChangedEvent class >> scrollState: aScrollState [
 	^ self new
 		scrollState: aScrollState;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteScrollChangedEvent >> scrollState [
 	^ scrollState
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteScrollChangedEvent >> scrollState: anObject [
 	scrollState := anObject
 ]

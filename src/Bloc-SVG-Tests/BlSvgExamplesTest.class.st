@@ -10,14 +10,7 @@ Class {
 { #category : #tests }
 BlSvgExamplesTest >> exampleSelectors [
 
-	^ (BlSvgExamples selectorsInProtocol: 'svg - converter') 
-		  copyWithoutAll: self exampleSelectorsWithErrors
-]
-
-{ #category : #tests }
-BlSvgExamplesTest >> exampleSelectorsWithErrors [
-	
-	^ #( pathTree transformations)
+	^ BlSvgExamples selectorsInProtocol: 'svg - converter'
 ]
 
 { #category : #tests }
@@ -37,20 +30,4 @@ BlSvgExamplesTest >> testAllExamples [
 "	
 	selectors collect: [ :each | each -> (BlSvgExamples new perform: each) ]
 "
-]
-
-{ #category : #tests }
-BlSvgExamplesTest >> testExcludedExamplesRaiseError [
-
-	| selectors exampleFactory |
-	selectors := self exampleSelectorsWithErrors.
-	exampleFactory := BlSvgExamples new.
-
-	selectors do: [ :each |
-		self
-			should:[ (exampleFactory perform: each) aeAsForm ]
-			raise: Error ].
-	
-	self deny: selectors isEmpty. "If this happens, we must remove this test"
-
 ]

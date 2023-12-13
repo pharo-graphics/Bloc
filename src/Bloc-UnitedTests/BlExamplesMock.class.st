@@ -4,65 +4,59 @@ I define examples with the goal of demonstrating and testing my superclass.
 See my references.
 "
 Class {
-	#name : 'BlExamplesMock',
-	#superclass : 'BlExampleTest',
+	#name : #BlExamplesMock,
+	#superclass : #TestCase,
 	#instVars : [
 		'enabled'
 	],
-	#category : 'Bloc-UnitedTests-Examples',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Examples'
+	#category : #'Bloc-UnitedTests-Examples'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlExamplesMock >> enableRunning [
 
 	enabled := true
 ]
 
-{ #category : 'examples' }
-BlExamplesMock >> exampleError [
-	<sampleInstance>
-
-	self error
-]
-
-{ #category : 'examples' }
-BlExamplesMock >> exampleFail [
-	<sampleInstance>
-
-	self fail
-]
-
-{ #category : 'examples' }
-BlExamplesMock >> examplePass [
-	<sampleInstance>
-
-]
-
-{ #category : 'examples' }
-BlExamplesMock >> exampleSkip [
-	<sampleInstance>
-	<noTest>
-	
-	self error
-]
-
-{ #category : 'examples' }
+{ #category : #examples }
 BlExamplesMock >> exampleWithArgument: arg [
-	<gtExample>
+
 	
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlExamplesMock >> initialize [
 
 	super initialize.
 	enabled := false
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlExamplesMock >> performTest [
 
 	enabled ifTrue: [ super performTest ]
+]
+
+{ #category : #examples }
+BlExamplesMock >> testExampleError [
+
+	self error
+]
+
+{ #category : #examples }
+BlExamplesMock >> testExampleFail [
+
+	self fail
+]
+
+{ #category : #examples }
+BlExamplesMock >> testExamplePass [
+ 
+	
+]
+
+{ #category : #examples }
+BlExamplesMock >> testExampleSkip [
+
+	self skip
 ]

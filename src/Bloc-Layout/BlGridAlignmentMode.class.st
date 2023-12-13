@@ -5,7 +5,7 @@ Class {
 		'ALIGN_BOUNDS',
 		'ALIGN_MARGINS'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
 { #category : #'alignment modes' }

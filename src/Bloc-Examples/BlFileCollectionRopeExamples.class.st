@@ -1,19 +1,21 @@
 Class {
 	#name : #BlFileCollectionRopeExamples,
-	#superclass : #BlCollectionRopeExamples,
+	#superclass : #BlCollectionRopeExamplesTest,
 	#category : #'Bloc-Examples-Rope'
 }
 
 { #category : #'instance creation' }
-BlFileCollectionRopeExamples >> small [
-	<gtExample>
-	<label: 'Creates an instance of the rope of size smaller than combineLength'>
-	| aRope file |
+BlFileCollectionRopeExamples >> testSmall [
+	"Creates an instance of the rope of size smaller than combineLength"
 
-	file := FileReference newTempFilePrefix: 'BlFileCollectionRopeExamples-' suffix: '-small'.
+	<sampleInstance>
+	| aRope file |
+	file := FileReference
+		        newTempFilePrefix: 'BlFileCollectionRopeExamples-'
+		        suffix: '-small'.
 	file writeStreamDo: [ :stream | stream << 'Hello' ].
-	aRope := BlCollectionRope collection: 
-					(BlRopeableCollectionFile new fileReference: file).
+	aRope := BlCollectionRope collection:
+		         (BlRopeableCollectionFile new fileReference: file).
 
 	self assert: aRope depth equals: 1.
 	self assert: aRope size equals: 5.

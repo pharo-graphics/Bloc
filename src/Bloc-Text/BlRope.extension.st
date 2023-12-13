@@ -1,6 +1,6 @@
-Extension { #name : 'BlRope' }
+Extension { #name : #BlRope }
 
-{ #category : '*Bloc-Text' }
+{ #category : #'*Bloc-Text' }
 BlRope >> encodeOn: aWriteStream with: aZnCharacterEncoder [
 	"Encode myself on a ByteString stream using the provided Zinc encoder."
 

@@ -1,13 +1,15 @@
 Class {
-	#name : #BlRowNumberDecoration,
-	#superclass : #BlInfinteSideDecoration,
+	#name : 'BlRowNumberDecoration',
+	#superclass : 'BlInfinteSideDecoration',
 	#instVars : [
 		'actualWidth'
 	],
-	#category : #'Bloc-Infinite-Core'
+	#category : 'Bloc-Infinite-Core',
+	#package : 'Bloc-Infinite',
+	#tag : 'Core'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlRowNumberDecoration >> aeCairoScaledFontOn: aeCanvas [
 
 	| fontAndStyleBuilder freeTypeFont |
@@ -16,7 +18,7 @@ BlRowNumberDecoration >> aeCairoScaledFontOn: aeCanvas [
 	^ aeCanvas scaledFontForFace: freeTypeFont size: 12
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlRowNumberDecoration >> aeDraw: anItemElement overOn: aeCanvas in: anInfiniteElement [
 
 	| holder index cairoScaledFont cairoGlyphsArray fontExtents h |
@@ -37,7 +39,7 @@ BlRowNumberDecoration >> aeDraw: anItemElement overOn: aeCanvas in: anInfiniteEl
 		aeCanvas drawText: cairoGlyphsArray font: cairoScaledFont ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlRowNumberDecoration >> aeDrawBackgroundOn: aeCanvas in: anInfiniteElement [
 
 	"draw the background beneath "
@@ -51,7 +53,7 @@ BlRowNumberDecoration >> aeDrawBackgroundOn: aeCanvas in: anInfiniteElement [
 	aeCanvas drawFigure
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlRowNumberDecoration >> aeDrawBeneathOn: aeCanvas in: anInfiniteElement [
 
 	"Update the actual width and draw the background beneath "
@@ -62,7 +64,7 @@ BlRowNumberDecoration >> aeDrawBeneathOn: aeCanvas in: anInfiniteElement [
 	super aeDrawBeneathOn: aeCanvas in: anInfiniteElement
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlRowNumberDecoration >> aeMeasureActualWidthFor: aNumber on: aeCanvas in: anInfiniteElement [
 	"Draw the background beneath "
 
@@ -83,7 +85,7 @@ BlRowNumberDecoration >> aeMeasureActualWidthFor: aNumber on: aeCanvas in: anInf
 				do: [ anInfiniteElement requestLayout ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlRowNumberDecoration >> aeMeasureActualWidthOn: aeCanvas in: anInfiniteElement [
 
 	| nb |
@@ -91,12 +93,12 @@ BlRowNumberDecoration >> aeMeasureActualWidthOn: aeCanvas in: anInfiniteElement 
 	self aeMeasureActualWidthFor: nb asString on: aeCanvas in: anInfiniteElement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlRowNumberDecoration >> defaultWidth [
 	^ 21
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlRowNumberDecoration >> initialize [
 	super initialize.
 	actualWidth := self defaultWidth.
@@ -104,14 +106,14 @@ BlRowNumberDecoration >> initialize [
 	priority := 0
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlRowNumberDecoration >> numberVerticalHeightIn: anItemElement fontHeight: fontHeight [
 
 	" By default, the row number is centered vertically"
 	^ (anItemElement height - fontHeight) / 2
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlRowNumberDecoration >> onActualWidthChangeWith: anInteger do: aBlock [
 
 	anInteger <= actualWidth ifTrue: [ ^ self ].
@@ -119,13 +121,13 @@ BlRowNumberDecoration >> onActualWidthChangeWith: anInteger do: aBlock [
 	aBlock value
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlRowNumberDecoration >> requiredInsetsOfChildElement: anElement in: anInfiniteElement [
 
 	^ BlInsets left: self requiredWidth + anInfiniteElement margin left
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlRowNumberDecoration >> requiredWidth [
 
 	^ actualWidth  
