@@ -16,37 +16,39 @@ Instance creation:
 
 "
 Class {
-	#name : #BlVector2D,
-	#superclass : #BlVector,
+	#name : 'BlVector2D',
+	#superclass : 'BlVector',
 	#instVars : [
 		'x',
 		'y'
 	],
-	#category : 'Bloc-Basic-Math'
+	#category : 'Bloc-Basic-Math',
+	#package : 'Bloc',
+	#tag : 'Basic-Math'
 }
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlVector2D >> * aScalar [
 	"Return a new vector as a multiplicate of the receiver by a given scalar (it can be a number, point, or vector)."
 	
 	^ aScalar scalarMultiplicate2D: self
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlVector2D >> + anotherVector [
 	"Answer a new vector that represents the addition of a given vector and me."
 
 	^ anotherVector add2D: self
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlVector2D >> - anotherVector [
 	"Answer a new vector that represents the subtraction of a given vector from me."
 
 	^ anotherVector subtract2D: self
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlVector2D >> / aVectorizable [
 	"Answer a new `BlVector2D` that represents the division of self by the argument, which can be either a `BlVector`, a `Point` or an `Integer`."
 
@@ -58,7 +60,7 @@ BlVector2D >> / aVectorizable [
 		y: y / vector y
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlVector2D >> = anObject [
 
 	self == anObject ifTrue: [ ^ true ].
@@ -67,21 +69,21 @@ BlVector2D >> = anObject [
 	^ x = anObject x and: [ y = anObject y ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlVector2D >> adaptToNumber: aNumber andSend: aSelector [
 	"If I am involved in arithmetic with an Integer, convert it to a Vector of the same dimension"
 
 	^ (self class x: aNumber y: aNumber) perform: aSelector with: self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlVector2D >> adaptToPoint: aPoint andSend: aSelector [
 	"If I am involved in arithmetic with an Point, convert me to a point and perform that operation"
 
 	^ aPoint perform: aSelector with: self asPoint
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlVector2D >> add2D: aVector2D [
 	"Answer a new vector that represents the addition of a given vector and me."
 
@@ -90,7 +92,7 @@ BlVector2D >> add2D: aVector2D [
 		y: aVector2D y + y
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlVector2D >> add3D: aVector3D [
 	"Answer a new 3D vector that represents the addition of a given vector and me."
 
@@ -100,76 +102,76 @@ BlVector2D >> add3D: aVector3D [
 		z: aVector3D z
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlVector2D >> asPoint [
 
 	^ x @ y
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlVector2D >> asScale3D [
 	"Return a 3D vector representing a scale factor."
 
 	^ BlVector3D x: x y: y z: 1
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlVector2D >> asTranslate3D [
 	"Return a 3D vector representing a translation vector."
 
 	^ BlVector3D x: x y: y z: 0
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlVector2D >> closeTo: anotherVector [
 
 	^ (x closeTo: anotherVector x) and: [ y closeTo: anotherVector y ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlVector2D >> degrees [
 	"Return the receiver degrees"
 	
 	^ self radians * 180.0 / Float pi
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlVector2D >> dotProduct2D: anotherVector [
 
 	^ x * anotherVector x + (y * anotherVector y)
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlVector2D >> dotProduct: anotherVector [
 
 	^ anotherVector dotProduct2D: self
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlVector2D >> hash [
 
 	^ x hash bitXor: y hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlVector2D >> isOne [
 
 	^ (x closeTo: 1.0) and: [ y closeTo: 1.0 ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlVector2D >> isZero [
 
 	^ x isZero and: [ y isZero ]
 ]
 
-{ #category : #'vector functions' }
+{ #category : 'vector functions' }
 BlVector2D >> length [
 
 	^ ((x * x) + (y * y)) sqrt
 ]
 
-{ #category : #'vector functions' }
+{ #category : 'vector functions' }
 BlVector2D >> negated [
 
 	^ self class
@@ -177,14 +179,14 @@ BlVector2D >> negated [
 		y: y negated
 ]
 
-{ #category : #'vector functions' }
+{ #category : 'vector functions' }
 BlVector2D >> normal [
 	"Return a unit vector rotated clockwise. For the zero length vector, return (-1, 0)."
 
 	^ self asPoint normal asBlocVector
 ]
 
-{ #category : #'vector functions' }
+{ #category : 'vector functions' }
 BlVector2D >> normalized [
 
 	| aLength |
@@ -198,7 +200,7 @@ BlVector2D >> normalized [
 		y: y / aLength
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlVector2D >> printOn: aStream [
 
 	aStream
@@ -209,7 +211,7 @@ BlVector2D >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlVector2D >> radians [
 	"Return vector radians"
 
@@ -228,7 +230,7 @@ BlVector2D >> radians [
 	^ aResult
 ]
 
-{ #category : #'vector functions' }
+{ #category : 'vector functions' }
 BlVector2D >> rotateBy: anAngleInRadians about: aCenterPoint [
 	"Rotate me by an angle in CCW radians.
 	Warning 1: Even though Point.theta is measured CW, this rotates with the more conventional CCW interpretateion of angle.
@@ -244,7 +246,7 @@ BlVector2D >> rotateBy: anAngleInRadians about: aCenterPoint [
 		y: aCenterPoint y asFloat - (r * theta sin)
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlVector2D >> scalarMultiplicate2D: aVector2D [
 	"Answer a new `BlVector2D` with the multiplication of me with the received argument."
 
@@ -253,14 +255,14 @@ BlVector2D >> scalarMultiplicate2D: aVector2D [
 		y: aVector2D y * y
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlVector2D >> sign [
 	"Returns a vector as the receiver sign."
 
 	^ self class x: x sign y: y sign
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlVector2D >> subtract2D: aVector2D [
 	"Answer a new `BlVector2D` with the substraction of self to the received argument."
 
@@ -269,7 +271,7 @@ BlVector2D >> subtract2D: aVector2D [
 		y: aVector2D y - self y
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlVector2D >> subtract3D: aVector3D [
 	"Answer a new `BlVector3D` with the substraction of self to the received argument."
 
@@ -279,20 +281,20 @@ BlVector2D >> subtract3D: aVector3D [
 		z: aVector3D z
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlVector2D >> x [
 
 	^ x
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlVector2D >> x: aX y: aY [
 
 	x := aX.
 	y := aY
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlVector2D >> y [
 
 	^ y

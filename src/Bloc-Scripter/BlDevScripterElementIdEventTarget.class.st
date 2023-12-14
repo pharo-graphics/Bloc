@@ -1,37 +1,39 @@
 Class {
-	#name : #BlDevScripterElementIdEventTarget,
-	#superclass : #BlDevScripterEventTarget,
+	#name : 'BlDevScripterElementIdEventTarget',
+	#superclass : 'BlDevScripterEventTarget',
 	#instVars : [
 		'elementId',
 		'index'
 	],
-	#category : #'Bloc-Scripter-Scripter-Targets'
+	#category : 'Bloc-Scripter-Scripter-Targets',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Targets'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDevScripterElementIdEventTarget class >> matchesWithInput: anObject [
 	<return: #Boolean>
 	^ anObject isString and: [ anObject isSymbol not ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlDevScripterElementIdEventTarget class >> newFromInput: anObject [
 	^ self new name: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterElementIdEventTarget >> elementId [
 	<return: #BlElementId>
 
 	^ elementId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterElementIdEventTarget >> elementId: aBlElementId [
 	elementId := aBlElementId asBlocElementId
 ]
 
-{ #category : #searching }
+{ #category : 'searching' }
 BlDevScripterElementIdEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 	| aCounter |
@@ -47,29 +49,29 @@ BlDevScripterElementIdEventTarget >> findTargetIn: anElement [
 	AssertionFailure signal: index asString, 'th element with id ', self elementId asSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterElementIdEventTarget >> identifier [
 	^ self elementId asSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterElementIdEventTarget >> index [
 	^ index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterElementIdEventTarget >> index: anObject [
 	index := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDevScripterElementIdEventTarget >> initialize [
 	super initialize.
 	
 	index := 1
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlDevScripterElementIdEventTarget >> printOn: aStream [
 	self elementId ifNil: [ ^ super printOn: aStream ].
 	aStream 

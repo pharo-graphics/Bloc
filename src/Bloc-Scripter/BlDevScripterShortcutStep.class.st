@@ -1,23 +1,25 @@
 Class {
-	#name : #BlDevScripterShortcutStep,
-	#superclass : #BlDevScripterInteractionStep,
+	#name : 'BlDevScripterShortcutStep',
+	#superclass : 'BlDevScripterInteractionStep',
 	#instVars : [
 		'combination'
 	],
-	#category : #'Bloc-Scripter-Scripter-Steps'
+	#category : 'Bloc-Scripter-Scripter-Steps',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Steps'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterShortcutStep >> combination [
 	^ combination
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterShortcutStep >> combination: anObject [
 	combination := anObject
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlDevScripterShortcutStep >> playOn: aScripter [
 	| aTarget aBuffer anEvent |
 	aTarget := self target findTargetStartingInScripter: aScripter.

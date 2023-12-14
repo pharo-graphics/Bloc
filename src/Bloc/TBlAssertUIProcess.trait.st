@@ -4,11 +4,13 @@ I should be used by ${class:BlElement}$.
 
 "
 Trait {
-	#name : #TBlAssertUIProcess,
-	#category : 'Bloc-Utilities - Debugging'
+	#name : 'TBlAssertUIProcess',
+	#category : 'Bloc-Utilities - Debugging',
+	#package : 'Bloc',
+	#tag : 'Utilities - Debugging'
 }
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 TBlAssertUIProcess >> assertUIProcess [
 	"Make sure that I am executing in a UI process"
 	| aCurrentProcess aUIProcess |

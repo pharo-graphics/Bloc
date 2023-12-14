@@ -1,13 +1,15 @@
 Class {
-	#name : #BlHeightEqualizer,
-	#superclass : #BlEqualizer,
+	#name : 'BlHeightEqualizer',
+	#superclass : 'BlEqualizer',
 	#instVars : [
 		'heightBlock'
 	],
-	#category : 'Bloc-Utilities - Equalizer'
+	#category : 'Bloc-Utilities - Equalizer',
+	#package : 'Bloc',
+	#tag : 'Utilities - Equalizer'
 }
 
-{ #category : #'element handlers' }
+{ #category : 'element handlers' }
 BlHeightEqualizer >> elementExtentChangedEvent: anEvent [
 	| maxHeight |
 
@@ -15,12 +17,12 @@ BlHeightEqualizer >> elementExtentChangedEvent: anEvent [
 	self targetElements do: [ :anElement | heightBlock value: anElement value: maxHeight ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHeightEqualizer >> height: aBlock [
 	heightBlock := aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHeightEqualizer >> initialize [
 	super initialize.
 	

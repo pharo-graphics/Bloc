@@ -1,30 +1,32 @@
 Class {
-	#name : #BlDevScripterBlockSelectorEventTarget,
-	#superclass : #BlDevScripterEventTarget,
+	#name : 'BlDevScripterBlockSelectorEventTarget',
+	#superclass : 'BlDevScripterEventTarget',
 	#instVars : [
 		'block'
 	],
-	#category : #'Bloc-Scripter-Scripter-Targets'
+	#category : 'Bloc-Scripter-Scripter-Targets',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Targets'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDevScripterBlockSelectorEventTarget class >> matchesWithInput: anObject [
 	<return: #Boolean>
 	^ anObject isKindOf: BlockClosure
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlDevScripterBlockSelectorEventTarget class >> newFromInput: anObject [
 	^ self new block: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterBlockSelectorEventTarget >> block [
 	<return: #BlockClosure>
 	^ block
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterBlockSelectorEventTarget >> block: anOneArgBlock [
 	self 
 		assert: [ anOneArgBlock isBlock and: [ anOneArgBlock argumentCount = 1 ] ] 
@@ -32,18 +34,18 @@ BlDevScripterBlockSelectorEventTarget >> block: anOneArgBlock [
 	block := anOneArgBlock
 ]
 
-{ #category : #searching }
+{ #category : 'searching' }
 BlDevScripterBlockSelectorEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 	^ self block value: anElement.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterBlockSelectorEventTarget >> identifier [
 	^ self block ifNil: [ self ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlDevScripterBlockSelectorEventTarget >> printOn: aStream [
 	self block ifNil: [ ^ super printOn: aStream ].
 	aStream 

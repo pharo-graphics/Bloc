@@ -1,23 +1,25 @@
 Class {
-	#name : #BlDevScripterModelStorage,
-	#superclass : #BlDevScripterSetStepStorage,
+	#name : 'BlDevScripterModelStorage',
+	#superclass : 'BlDevScripterSetStepStorage',
 	#instVars : [
 		'block'
 	],
-	#category : #'Bloc-Scripter-Scripter-Storage'
+	#category : 'Bloc-Scripter-Scripter-Storage',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Storage'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterModelStorage >> block [
 	^ block
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterModelStorage >> block: anObject [
 	block := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlDevScripterModelStorage >> printOn: aStream [
 	self block ifNil: [ ^ super printOn: aStream ].
 	aStream 
@@ -25,7 +27,7 @@ BlDevScripterModelStorage >> printOn: aStream [
 		print: self block
 ]
 
-{ #category : #storing }
+{ #category : 'storing' }
 BlDevScripterModelStorage >> storeFrom: aTarget scripter: aScripter [
 	| aModel |
 	aModel := self block cull: aTarget cull: aScripter.

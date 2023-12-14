@@ -1,20 +1,22 @@
 Class {
-	#name : #BlSpaceFrameEventPhase,
-	#superclass : #BlSpaceFramePhase,
-	#category : 'Bloc-Space - Frame'
+	#name : 'BlSpaceFrameEventPhase',
+	#superclass : 'BlSpaceFramePhase',
+	#category : 'Bloc-Space - Frame',
+	#package : 'Bloc',
+	#tag : 'Space - Frame'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceFrameEventPhase >> isEventPhase [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFrameEventPhase >> name [
 	^ 'Event processing'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlSpaceFrameEventPhase >> runOn: aSpace [
 
 	aSpace
@@ -42,5 +44,5 @@ BlSpaceFrameEventPhase >> runOn: aSpace [
 								theSpace eventDispatcher dispatchEvent: anEvent ] ]  ] ].
 				
 				theSpace hostSpaceDo: [ :aHostSpace | aHostSpace generateEvents ] ].
-			theSpace testMouseProcessor generateEvents ]
+			theSpace mouseProcessor generateEvents ]
 ]

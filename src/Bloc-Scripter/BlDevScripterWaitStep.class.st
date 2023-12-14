@@ -1,19 +1,21 @@
 Class {
-	#name : #BlDevScripterWaitStep,
-	#superclass : #BlDevScripterInteractionStep,
+	#name : 'BlDevScripterWaitStep',
+	#superclass : 'BlDevScripterInteractionStep',
 	#instVars : [
 		'waitingBlock',
 		'cycles'
 	],
-	#category : #'Bloc-Scripter-Scripter-Steps'
+	#category : 'Bloc-Scripter-Scripter-Steps',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Steps'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDevScripterWaitStep >> defaultLabel [
 	^ 'Wait'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDevScripterWaitStep >> forEmptySpaceTaskQueue [
 	self label: 'Wait for empty task queue'.
 	self onSpace.
@@ -26,7 +28,7 @@ BlDevScripterWaitStep >> forEmptySpaceTaskQueue [
 			do: [ aSpace pulse. self increaseCycle ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDevScripterWaitStep >> forEmptySpaceTaskQueueTimeout: aDuration [
 	self label: ('Wait for empty task queue with {1} timeout' format: { aDuration }).
 	self onSpace.
@@ -39,7 +41,7 @@ BlDevScripterWaitStep >> forEmptySpaceTaskQueueTimeout: aDuration [
 			do: [ aSpace pulse ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDevScripterWaitStep >> forEnqueuedSpaceTask [
 	self label: 'Wait for enqueued space task'.
 	self onSpace.
@@ -52,13 +54,13 @@ BlDevScripterWaitStep >> forEnqueuedSpaceTask [
 			do: [ aSpace pulse. self increaseCycle ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDevScripterWaitStep >> forSemaphore: aSemaphore [
 	self waitingBlock: [ :anObject | 
 		aSemaphore wait ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDevScripterWaitStep >> forSemaphore: aSemaphore timeoutSeconds: anInteger [
 	self waitingBlock: [ :anObject | 
 		| aTimeout |
@@ -70,28 +72,28 @@ BlDevScripterWaitStep >> forSemaphore: aSemaphore timeoutSeconds: anInteger [
 				': semaphore timeouted after ', anInteger asString, ' seconds' ] ]
 ]
 
-{ #category : #'private - adding' }
+{ #category : 'private - adding' }
 BlDevScripterWaitStep >> increaseCycle [
 	cycles := cycles + 1.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDevScripterWaitStep >> initialize [
 	super initialize.
 	cycles := 0.
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlDevScripterWaitStep >> playOn: aScripter [
 	self waitingBlock value: (self target findTargetStartingInScripter: aScripter)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterWaitStep >> waitingBlock [
 	^ waitingBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterWaitStep >> waitingBlock: anObject [
 	waitingBlock := anObject
 ]

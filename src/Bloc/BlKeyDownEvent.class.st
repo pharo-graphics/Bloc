@@ -1,10 +1,12 @@
 Class {
-	#name : #BlKeyDownEvent,
-	#superclass : #BlKeyboardEvent,
-	#category : 'Bloc-Events'
+	#name : 'BlKeyDownEvent',
+	#superclass : 'BlKeyboardEvent',
+	#category : 'Bloc-Events',
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlKeyDownEvent >> sendTo: anObject [
 	anObject keyDownEvent: self
 ]

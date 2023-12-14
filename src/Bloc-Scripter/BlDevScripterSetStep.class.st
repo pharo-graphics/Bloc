@@ -1,40 +1,42 @@
 Class {
-	#name : #BlDevScripterSetStep,
-	#superclass : #BlDevScripterTargetedStep,
+	#name : 'BlDevScripterSetStep',
+	#superclass : 'BlDevScripterTargetedStep',
 	#instVars : [
 		'storage'
 	],
-	#category : #'Bloc-Scripter-Scripter-Steps'
+	#category : 'Bloc-Scripter-Scripter-Steps',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Steps'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterSetStep >> defaultLabel [
 	^ self storage 
 		ifNil: [ 'Set' ]
 		ifNotNil: [ :aStorage | aStorage printString ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDevScripterSetStep >> defaultTarget [
 	^ BlDevScripterAsTarget new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterSetStep >> element: anOneArgBlock [
 	self storage: (BlDevScripterElementStorage new block: anOneArgBlock)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterSetStep >> key: aKeyBlock value: aValueBlock [
 	self storage: (BlDevScripterUserDataStorage new key: aKeyBlock; value: aValueBlock)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterSetStep >> model: anOneArgBlock [
 	self storage: (BlDevScripterModelStorage new block: anOneArgBlock)
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlDevScripterSetStep >> playOn: aScripter [
 	"Where do we get an information"
 	| aTarget |
@@ -42,12 +44,12 @@ BlDevScripterSetStep >> playOn: aScripter [
 	self storage storeFrom: aTarget scripter: aScripter.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterSetStep >> storage [
 	^ storage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterSetStep >> storage: anObject [
 	storage := anObject
 ]

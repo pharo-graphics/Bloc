@@ -3,15 +3,17 @@ I exemplify {{gtClass:BlDevScripter}}.
 
 "
 Class {
-	#name : #BlDevScripterExamplesTest,
-	#superclass : #TestCase,
+	#name : 'BlDevScripterExamplesTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'elementExamples'
 	],
-	#category : #'Bloc-Scripter-Examples'
+	#category : 'Bloc-Scripter-Examples',
+	#package : 'Bloc-Scripter',
+	#tag : 'Examples'
 }
 
-{ #category : #'examples - click check' }
+{ #category : 'examples - click check' }
 BlDevScripterExamplesTest >> clickCheck [
 
 	<sampleInstance>
@@ -24,20 +26,20 @@ BlDevScripterExamplesTest >> clickCheck [
 	^ aScript
 ]
 
-{ #category : #'examples - element' }
+{ #category : 'examples - element' }
 BlDevScripterExamplesTest >> containerWithRectangle [
 
 	<sampleInstance>
 	^ elementExamples containerWithRectangle
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDevScripterExamplesTest >> initialize [
 	super initialize.
 	elementExamples := BlDevElementExamples new.
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : 'examples - scripter' }
 BlDevScripterExamplesTest >> testBasicScripter [
 
 	<sampleInstance>
@@ -48,7 +50,7 @@ BlDevScripterExamplesTest >> testBasicScripter [
 	^ aScript
 ]
 
-{ #category : #'examples - click check' }
+{ #category : 'examples - click check' }
 BlDevScripterExamplesTest >> testFailingClickCheck [
 
 	<sampleInstance>

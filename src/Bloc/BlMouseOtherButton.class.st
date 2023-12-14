@@ -4,20 +4,22 @@ Nowadays there can be any number of mouse buttons, we have to support them
 
 "
 Class {
-	#name : #BlMouseOtherButton,
-	#superclass : #BlMouseButton,
+	#name : 'BlMouseOtherButton',
+	#superclass : 'BlMouseButton',
 	#instVars : [
 		'code'
 	],
-	#category : 'Bloc-Events'
+	#category : 'Bloc-Events',
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseOtherButton class >> code: aNumber [
 	^ self new code: aNumber
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMouseOtherButton >> = anotherObject [
 
 	self == anotherObject ifTrue: [ ^ true ].
@@ -26,7 +28,7 @@ BlMouseOtherButton >> = anotherObject [
 	^ anotherObject code = self code
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMouseOtherButton >> code [
 	"Return a numerical (integer) code of this mouse button"
 	<return: #Number>
@@ -34,7 +36,7 @@ BlMouseOtherButton >> code [
 	^ code
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMouseOtherButton >> code: aNumber [
 
 	self
@@ -44,7 +46,7 @@ BlMouseOtherButton >> code: aNumber [
 	code := aNumber
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMouseOtherButton >> hash [
 	^ self class hash bitXor: self code hash
 ]

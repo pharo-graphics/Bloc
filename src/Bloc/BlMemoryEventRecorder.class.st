@@ -3,22 +3,24 @@ I record events in a collection
 
 "
 Class {
-	#name : #BlMemoryEventRecorder,
-	#superclass : #BlSpaceEventRecorder,
+	#name : 'BlMemoryEventRecorder',
+	#superclass : 'BlSpaceEventRecorder',
 	#instVars : [
 		'events',
 		'time',
 		'pulseTimestamp'
 	],
-	#category : 'Bloc-Space - Events'
+	#category : 'Bloc-Space - Events',
+	#package : 'Bloc',
+	#tag : 'Space - Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMemoryEventRecorder >> events [
 	^ events
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMemoryEventRecorder >> initialize [
 	super initialize.
 
@@ -26,14 +28,14 @@ BlMemoryEventRecorder >> initialize [
 	time := BlTime real
 ]
 
-{ #category : #'api - recording' }
+{ #category : 'api - recording' }
 BlMemoryEventRecorder >> onPulse [
 	super onPulse.
 	
 	pulseTimestamp := self time now
 ]
 
-{ #category : #'api - recording' }
+{ #category : 'api - recording' }
 BlMemoryEventRecorder >> record: anEvent [
 	| aCopiedEvent |
 	
@@ -44,7 +46,7 @@ BlMemoryEventRecorder >> record: anEvent [
 	self events add: aCopiedEvent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMemoryEventRecorder >> time [
 	^ time
 ]

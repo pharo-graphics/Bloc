@@ -1,16 +1,18 @@
 Class {
-	#name : #BlDevScripterStepProperty,
-	#superclass : #Object,
-	#category : #'Bloc-Scripter-Scripter-Properties'
+	#name : 'BlDevScripterStepProperty',
+	#superclass : 'Object',
+	#category : 'Bloc-Scripter-Scripter-Properties',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Properties'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDevScripterStepProperty >> isReference [
 	<return: #Boolean>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDevScripterStepProperty >> isScreenshot [
 	^ false
 ]

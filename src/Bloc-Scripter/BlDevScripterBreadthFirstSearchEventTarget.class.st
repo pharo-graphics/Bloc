@@ -1,14 +1,16 @@
 Class {
-	#name : #BlDevScripterBreadthFirstSearchEventTarget,
-	#superclass : #BlDevScripterEventTarget,
+	#name : 'BlDevScripterBreadthFirstSearchEventTarget',
+	#superclass : 'BlDevScripterEventTarget',
 	#instVars : [
 		'target',
 		'elementClass'
 	],
-	#category : #'Bloc-Scripter-Scripter-Targets'
+	#category : 'Bloc-Scripter-Scripter-Targets',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Targets'
 }
 
-{ #category : #searching }
+{ #category : 'searching' }
 BlDevScripterBreadthFirstSearchEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 
@@ -22,12 +24,12 @@ BlDevScripterBreadthFirstSearchEventTarget >> findTargetIn: anElement [
 	 AssertionFailure signal: 'Cannot find target at ', self target printString.
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlDevScripterBreadthFirstSearchEventTarget >> postCopy [
 	self target: self target copy
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlDevScripterBreadthFirstSearchEventTarget >> printOn: aStream [
 	self target ifNil: [ ^ super printOn: aStream ].
 	aStream 
@@ -35,13 +37,13 @@ BlDevScripterBreadthFirstSearchEventTarget >> printOn: aStream [
 		print: self target.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterBreadthFirstSearchEventTarget >> target [
 	<return: #BlDevScripterEventTarget>
 	^ target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterBreadthFirstSearchEventTarget >> target: aBlDevScripterEventTarget [
 	self
 		assert: [ aBlDevScripterEventTarget isNotNil ]

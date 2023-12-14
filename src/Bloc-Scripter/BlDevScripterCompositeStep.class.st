@@ -1,50 +1,52 @@
 Class {
-	#name : #BlDevScripterCompositeStep,
-	#superclass : #BlDevScripterStep,
+	#name : 'BlDevScripterCompositeStep',
+	#superclass : 'BlDevScripterStep',
 	#traits : 'TBlDevScripterCompositeStepTarget + TBlDevScripterTarget',
 	#classTraits : 'TBlDevScripterCompositeStepTarget classTrait + TBlDevScripterTarget classTrait',
 	#instVars : [
 		'steps'
 	],
-	#category : #'Bloc-Scripter-Scripter-Steps'
+	#category : 'Bloc-Scripter-Scripter-Steps',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Steps'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlDevScripterCompositeStep >> addStep: aStep [
 	steps add: aStep.
 	^ aStep
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterCompositeStep >> defaultLabel [
 	^ 'Steps'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDevScripterCompositeStep >> initialize [
 	super initialize.
 	
 	steps := OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterCompositeStep >> label: aString [
 	self steps 
 		ifEmpty: [ super label: aString ] 
 		ifNotEmpty: [ self steps last label: aString ]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlDevScripterCompositeStep >> playOn: aScripter [
 	"self steps do: [ :eachTask | eachTask playIndicatingStateOn: aScripter ]"
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlDevScripterCompositeStep >> playOnExecutor: anExecutor [
 	self steps do: [ :eachStep | anExecutor executeStep: eachStep ]
 ]
 
-{ #category : #'targets - accessing and updating' }
+{ #category : 'targets - accessing and updating' }
 BlDevScripterCompositeStep >> previousTarget [
 	<return: #BlDevScripterEventTarget>
 	self 
@@ -53,18 +55,18 @@ BlDevScripterCompositeStep >> previousTarget [
 	^ (self steps at: self steps size - 1) target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterCompositeStep >> realTarget [
 	<return: #BlDevScripterTarget>
 	^ BlDevScripterTarget null
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterCompositeStep >> steps [
 	^ steps
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterCompositeStep >> subLabel: aString [
 	self
 		assert: [ self steps isNotEmpty ] 
@@ -72,7 +74,7 @@ BlDevScripterCompositeStep >> subLabel: aString [
 	self steps last label: aString
 ]
 
-{ #category : #'targets - accessing and updating' }
+{ #category : 'targets - accessing and updating' }
 BlDevScripterCompositeStep >> target [
 	"We access the target of the last sub-step.
 	It simplifies API as we can send a target definition message to me. 
@@ -90,7 +92,7 @@ BlDevScripterCompositeStep >> target [
 	^ self steps last target
 ]
 
-{ #category : #'targets - accessing and updating' }
+{ #category : 'targets - accessing and updating' }
 BlDevScripterCompositeStep >> target: aScripterEventTarget [
 	"We access the target of the last sub-step.
 	See #target message for the detailed explanation."

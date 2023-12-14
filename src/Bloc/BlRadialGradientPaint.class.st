@@ -1,13 +1,15 @@
 Class {
-	#name : #BlRadialGradientPaint,
-	#superclass : #BlGradientPaint,
+	#name : 'BlRadialGradientPaint',
+	#superclass : 'BlGradientPaint',
 	#instVars : [
 		'innerCenter',
 		'innerRadius',
 		'outerCenter',
 		'outerRadius'
 	],
-	#category : 'Bloc-Paint'
+	#category : 'Bloc-Paint',
+	#package : 'Bloc',
+	#tag : 'Paint'
 }
 
 { #category : 'accessing' }
@@ -41,7 +43,7 @@ BlRadialGradientPaint >> innerRadius: aNumber [
 	innerRadius := aNumber
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlRadialGradientPaint >> matchExtent: anExtent [
 ]
 
@@ -69,7 +71,7 @@ BlRadialGradientPaint >> outerRadius: aNumber [
 	outerRadius := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlRadialGradientPaint >> radius: aNumber [
 	"Set the outerRadius. The innerRadius will be set to zero."
 

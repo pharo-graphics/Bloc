@@ -1,29 +1,31 @@
 Class {
-	#name : #BlDevScripterReference,
-	#superclass : #BlDevScripterStepProperty,
-	#category : #'Bloc-Scripter-Scripter-Properties'
+	#name : 'BlDevScripterReference',
+	#superclass : 'BlDevScripterStepProperty',
+	#category : 'Bloc-Scripter-Scripter-Properties',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Properties'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlDevScripterReference class >> method: aRGMethorDefinition [
 	^ BlDevScripterMethodReference new definition: aRGMethorDefinition
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlDevScripterReference class >> null [
 	^ BlDevScripterNoReference uniqueInstance
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlDevScripterReference >> definitionDo: aBlock [
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 BlDevScripterReference >> gtReferenceFor: aView [
 	^ aView empty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDevScripterReference >> isReference [
 	<return: #Boolean>
 	^ true

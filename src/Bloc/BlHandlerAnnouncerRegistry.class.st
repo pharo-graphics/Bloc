@@ -1,30 +1,32 @@
 Class {
-	#name : #BlHandlerAnnouncerRegistry,
-	#superclass : #BlHandlerRegistry,
+	#name : 'BlHandlerAnnouncerRegistry',
+	#superclass : 'BlHandlerRegistry',
 	#instVars : [
 		'announcer'
 	],
-	#category : 'Bloc-Events-Dispatcher'
+	#category : 'Bloc-Events-Dispatcher',
+	#package : 'Bloc',
+	#tag : 'Events-Dispatcher'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHandlerAnnouncerRegistry class >> isSupported [
 	
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlHandlerAnnouncerRegistry class >> label [
 	^ 'Announcer'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlHandlerAnnouncerRegistry class >> priority [
 
 	^ 1
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BlHandlerAnnouncerRegistry >> add: aHandler [
 	"Adds a given event handler to the registry.
 	
@@ -33,21 +35,21 @@ BlHandlerAnnouncerRegistry >> add: aHandler [
 	self announcer subscriptions add: (BlHandlerAnnouncementSubscription new subscriber: aHandler)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandlerAnnouncerRegistry >> announcer [
 	<return: #Announcer>
 
 	^ announcer
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlHandlerAnnouncerRegistry >> dispatchEvent: anEvent [
 	"Dispatch a given event to all registered handlers that are interested in it"
 	
 	self announcer announce: anEvent
 ]
 
-{ #category : #'api - enumerating' }
+{ #category : 'api - enumerating' }
 BlHandlerAnnouncerRegistry >> do: aBlock [
 	"Evaluate aBlock with each registered handler as the argument"
 
@@ -55,7 +57,7 @@ BlHandlerAnnouncerRegistry >> do: aBlock [
 		self announcer subscriptions subscriptions do: [ :aSubscription | aBlock value: aSubscription subscriber ] ]
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlHandlerAnnouncerRegistry >> handlers [
 	"Return an immutable collection of all registered event handlers"
 	<return: #Array of: #BlBasicEventHandler>
@@ -63,14 +65,14 @@ BlHandlerAnnouncerRegistry >> handlers [
 	^ self subscriptions collect: #subscriber
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHandlerAnnouncerRegistry >> initialize [
 	super initialize.
 	
 	announcer := Announcer new
 ]
 
-{ #category : #'api - enumerating' }
+{ #category : 'api - enumerating' }
 BlHandlerAnnouncerRegistry >> numberOfHandlers [
 	"Return amount of registered event handlers"
 	<return: #Number>
@@ -78,7 +80,7 @@ BlHandlerAnnouncerRegistry >> numberOfHandlers [
 	^ self announcer numberOfSubscriptions
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BlHandlerAnnouncerRegistry >> remove: aHandler [
 	"Remove given event handler from my registry.
 	Provided handler must not be nil and must be registered"
@@ -86,7 +88,7 @@ BlHandlerAnnouncerRegistry >> remove: aHandler [
 	self announcer subscriptions removeSubscriber: aHandler
 ]
 
-{ #category : #'api - adding / removing' }
+{ #category : 'api - adding / removing' }
 BlHandlerAnnouncerRegistry >> removeAllSuchThat: aBlock [
 	"Remove all event handlers for which aBlock returns true.
 	Return a collection of removed handlers"
@@ -103,7 +105,7 @@ BlHandlerAnnouncerRegistry >> removeAllSuchThat: aBlock [
 	^ toBeRemoved asArray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlHandlerAnnouncerRegistry >> subscriptions [
 	<return: #Set of: #AnnouncementSubscription>
 

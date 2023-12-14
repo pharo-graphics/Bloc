@@ -1,28 +1,30 @@
 Class {
-	#name : #BlFocusTransferEvent,
-	#superclass : #BlBaseFocusEvent,
+	#name : 'BlFocusTransferEvent',
+	#superclass : 'BlBaseFocusEvent',
 	#instVars : [
 		'transfer'
 	],
-	#category : 'Bloc-Events'
+	#category : 'Bloc-Events',
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFocusTransferEvent >> hasTransfer [
 	^ transfer isNotNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFocusTransferEvent >> isFocusTransfer [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlFocusTransferEvent >> sendTo: anObject [
 	anObject focusTransferEvent: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusTransferEvent >> transfer [
 	self
 		assert: [ self hasTransfer ]
@@ -31,7 +33,7 @@ BlFocusTransferEvent >> transfer [
 	^ transfer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFocusTransferEvent >> transfer: anObject [
 	transfer := anObject
 ]

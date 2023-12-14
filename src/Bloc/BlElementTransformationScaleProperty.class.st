@@ -1,13 +1,15 @@
 Class {
-	#name : #BlElementTransformationScaleProperty,
-	#superclass : #BlElementProperty,
+	#name : 'BlElementTransformationScaleProperty',
+	#superclass : 'BlElementProperty',
 	#instVars : [
 		'scaleFactor'
 	],
-	#category : 'Bloc-Basic-Properties'
+	#category : 'Bloc-Basic-Properties',
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementTransformationScaleProperty >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -18,36 +20,36 @@ BlElementTransformationScaleProperty >> = anObject [
 	^ scaleFactor = anObject scaleFactor
 ]
 
-{ #category : #'api - property' }
+{ #category : 'api - property' }
 BlElementTransformationScaleProperty >> applyOnElement: anElement [
 	anElement transformDo: [ :t | t scaleBy: self scaleFactor ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementTransformationScaleProperty >> cleanUpOnElement: anElement [
 	anElement transformDo: [ :t | t scaleBy: 1 ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementTransformationScaleProperty >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ scaleFactor hash
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementTransformationScaleProperty >> initialize [
 	super initialize.
 	
 	scaleFactor := 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementTransformationScaleProperty >> scaleFactor [
 	^ scaleFactor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementTransformationScaleProperty >> scaleFactor: anObject [
 	scaleFactor := anObject
 ]

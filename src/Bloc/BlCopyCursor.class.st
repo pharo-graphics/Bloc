@@ -1,5 +1,7 @@
 Class {
-	#name : #BlCopyCursor,
-	#superclass : #BlNamedCursor,
-	#category : 'Bloc-Space - Cursor'
+	#name : 'BlCopyCursor',
+	#superclass : 'BlNamedCursor',
+	#category : 'Bloc-Space - Cursor',
+	#package : 'Bloc',
+	#tag : 'Space - Cursor'
 }

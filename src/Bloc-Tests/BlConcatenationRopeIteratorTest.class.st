@@ -16,7 +16,7 @@ BlConcatenationRopeIteratorTest >> originClassName [
 	^ 'BlConcatenationRopeIteratorExamples'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlConcatenationRopeIteratorTest >> testSmall [
 
 	<sampleInstance>

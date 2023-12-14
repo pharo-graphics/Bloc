@@ -1,10 +1,12 @@
 Class {
-	#name : #BlNullEffect,
-	#superclass : #BlElementEffect,
-	#category : 'Bloc-Effect'
+	#name : 'BlNullEffect',
+	#superclass : 'BlElementEffect',
+	#category : 'Bloc-Effect',
+	#package : 'Bloc',
+	#tag : 'Effect'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlNullEffect >> isNullEffect [
 	^ true
 ]

@@ -28,7 +28,7 @@ BlEventTestCase >> child [
 
 { #category : 'accessing' }
 BlEventTestCase >> firedEvents [
-	^ space testMouseProcessor firedEvents
+	^ space mouseProcessor firedEvents
 ]
 
 { #category : 'accessing' }

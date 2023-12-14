@@ -1,20 +1,22 @@
 Class {
-	#name : #BlDevScripterMouseProcessorTarget,
-	#superclass : #BlDevScripterEventProcessorTarget,
-	#category : #'Bloc-Scripter-Scripter-Targets'
+	#name : 'BlDevScripterMouseProcessorTarget',
+	#superclass : 'BlDevScripterEventProcessorTarget',
+	#category : 'Bloc-Scripter-Scripter-Targets',
+	#package : 'Bloc-Scripter',
+	#tag : 'Scripter-Targets'
 }
 
-{ #category : #searching }
+{ #category : 'searching' }
 BlDevScripterMouseProcessorTarget >> findTargetStartingInSpace: aSpace [
-	^ aSpace testMouseProcessor
+	^ aSpace mouseProcessor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDevScripterMouseProcessorTarget >> identifier [
 	^ 'mouse processor'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlDevScripterMouseProcessorTarget >> printOn: aStream [
 	aStream nextPutAll: 'Scripter Mouse Processor'.
 ]

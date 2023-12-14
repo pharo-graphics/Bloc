@@ -1,10 +1,12 @@
 Class {
-	#name : #BlFocusabilityBefore,
-	#superclass : #BlFocusability,
-	#category : 'Bloc-Basic-Properties'
+	#name : 'BlFocusabilityBefore',
+	#superclass : 'BlFocusability',
+	#category : 'Bloc-Basic-Properties',
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
-{ #category : #focus }
+{ #category : 'focus' }
 BlFocusabilityBefore >> focusables: aBlFocusFinderCandidates along: aBlFocusSearchDirection of: anElement [
 	"anElement should get focus before descendants"
 

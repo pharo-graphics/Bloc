@@ -3,15 +3,17 @@ I represent an absolute transformation defined only by transformation matrix
 
 "
 Class {
-	#name : #BlElementAbsoluteTransformation,
-	#superclass : #BlElementTransformation,
+	#name : 'BlElementAbsoluteTransformation',
+	#superclass : 'BlElementTransformation',
 	#instVars : [
 		'matrix'
 	],
-	#category : 'Bloc-Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations',
+	#package : 'Bloc',
+	#tag : 'Basic-Transformations'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementAbsoluteTransformation class >> matrix: aBlMatrix [
 
 	^ self basicNew
@@ -19,13 +21,13 @@ BlElementAbsoluteTransformation class >> matrix: aBlMatrix [
 		yourself
 ]
 
-{ #category : #computation }
+{ #category : 'computation' }
 BlElementAbsoluteTransformation >> computeMatrix: aBlMatrix in: aRectangle [
 
 	aBlMatrix multiplyBy: matrix
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementAbsoluteTransformation >> initializeWithMatrix: aBlMatrix [
 
 	self initialize.
@@ -33,41 +35,41 @@ BlElementAbsoluteTransformation >> initializeWithMatrix: aBlMatrix [
 	matrix := aBlMatrix
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementAbsoluteTransformation >> is2D [
 	"Return true if my current transformation is in 2D space, false otherwise"
 
 	^ matrix is2D
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementAbsoluteTransformation >> is3D [
 	"Return true if my current transformation is in 3D space, false otherwise"
 
 	^ matrix is3D
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementAbsoluteTransformation >> isIdentity [
 	"Return true if I represent an identity transformation, false otherwise"
 	
 	^ matrix isIdentity
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementAbsoluteTransformation >> isPureTranslation [
 	"Return true if the receiver specifies no rotation or scaling and represents only translation in xy 2D plane"
 	
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementAbsoluteTransformation >> matrix [
 
 	^ matrix
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementAbsoluteTransformation >> matrix: aBlMatrix [
 
 	matrix := aBlMatrix

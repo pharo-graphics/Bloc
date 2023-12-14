@@ -1,15 +1,17 @@
 Class {
-	#name : #BlVerticesFromRectanglesOperator,
-	#superclass : #Object,
-	#category : 'Bloc-Basic-Geometry'
+	#name : 'BlVerticesFromRectanglesOperator',
+	#superclass : 'Object',
+	#category : 'Bloc-Basic-Geometry',
+	#package : 'Bloc',
+	#tag : 'Basic-Geometry'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlVerticesFromRectanglesOperator class >> oppositeDelimiterBackgroundColor [
 	^ Color lightGray
 ]
 
-{ #category : #'private - vertices computing' }
+{ #category : 'private - vertices computing' }
 BlVerticesFromRectanglesOperator >> maxXRightCoord: yCoord fromRectangles: aListOfRectangles [
 	" optimized with compiled in-line primitives "
 
@@ -20,7 +22,7 @@ BlVerticesFromRectanglesOperator >> maxXRightCoord: yCoord fromRectangles: aList
 	^ mostRight
 ]
 
-{ #category : #'private - vertices computing' }
+{ #category : 'private - vertices computing' }
 BlVerticesFromRectanglesOperator >> minXLeftCoord: yCoord fromRectangles: aListOfRectangles [
 	"optimized with compiled in-line primitives "
 
@@ -31,7 +33,7 @@ BlVerticesFromRectanglesOperator >> minXLeftCoord: yCoord fromRectangles: aListO
 	^ mostLeft
 ]
 
-{ #category : #'private - vertices computing' }
+{ #category : 'private - vertices computing' }
 BlVerticesFromRectanglesOperator >> rectanglesAtY: anY fromRectangles: aListOfRectangles [
 
 	| rectsAtYExcBottomLines |
@@ -40,21 +42,21 @@ BlVerticesFromRectanglesOperator >> rectanglesAtY: anY fromRectangles: aListOfRe
 	^ self rectsAtYIncBottomLines: anY fromRectangles: aListOfRectangles
 ]
 
-{ #category : #'private - vertices computing' }
+{ #category : 'private - vertices computing' }
 BlVerticesFromRectanglesOperator >> rectsAtYExcBottomLines: anY fromRectangles: aListOfRectangles [
 
 	^ Array streamContents: [ :stream | aListOfRectangles do: [ :rect |
 			(rect top <= anY and: [ rect bottom > anY ]) ifTrue: [ stream nextPut: rect ] ]]
 ]
 
-{ #category : #'private - vertices computing' }
+{ #category : 'private - vertices computing' }
 BlVerticesFromRectanglesOperator >> rectsAtYIncBottomLines: anY fromRectangles: aListOfRectangles [
 
 	^ Array streamContents: [ :stream | aListOfRectangles do: [ :rect |
 			(rect top <= anY and: [ rect bottom = anY ]) ifTrue: [ stream nextPut: rect ] ]]
 ]
 
-{ #category : #'private - vertices computing' }
+{ #category : 'private - vertices computing' }
 BlVerticesFromRectanglesOperator >> verticesFromRectangles: aListOfRectangles [
 
 	| ret yCoords previousLeftCoord previousRightCoord |
@@ -80,7 +82,7 @@ BlVerticesFromRectanglesOperator >> verticesFromRectangles: aListOfRectangles [
 	^ ret
 ]
 
-{ #category : #'private - vertices computing' }
+{ #category : 'private - vertices computing' }
 BlVerticesFromRectanglesOperator >> yCoordsFromRectangles: aListOfRectangles [
 
 	| allBotoms allTops allCoords |
