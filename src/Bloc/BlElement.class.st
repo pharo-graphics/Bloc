@@ -4062,7 +4062,12 @@ BlElement >> wantsSeparateCompositingLayer [
 { #category : 'geometry hooks' }
 BlElement >> whenLayoutedDo: aBlock [
 
-	self when: BlElementLayoutComputedEvent do: [ :event | aBlock cull: event ].
+	" Evaluate aBlock after each layouting. To use with care and check carefully if you need it.
+	In particular, check that the evaluation of aBlock do not send requestLayout!  "
+
+	self addEventHandler: (BlEventHandler
+			 on: BlElementLayoutComputedEvent
+			 do: [ :event | aBlock cull: event ])
 ]
 
 { #category : 'geometry hooks' }
