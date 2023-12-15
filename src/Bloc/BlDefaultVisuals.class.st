@@ -45,32 +45,30 @@ The result could have been achieved by having an instance variable and a classVa
 	
 "
 Class {
-	#name : 'BlDefaultVisuals',
-	#superclass : 'BlElementVisuals',
+	#name : #BlDefaultVisuals,
+	#superclass : #BlElementVisuals,
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Basic',
-	#package : 'Bloc',
-	#tag : 'Basic'
+	#category : 'Bloc-Basic'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals class >> cleanUp [
 	uniqueInstance := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> background [
 	^ self defaultBackground
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> background: aBlBackground [
 	"Change the background and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
@@ -78,12 +76,12 @@ BlDefaultVisuals >> background: aBlBackground [
 	^ BlCustomVisuals new background: aBlBackground
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> border [
 	^ self defaultBorder
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> border: aBlBorder [
 	"Change the border and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
@@ -91,12 +89,12 @@ BlDefaultVisuals >> border: aBlBorder [
 	^ BlCustomVisuals new border: aBlBorder
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> clipChildren [
 	^ self defaultClipChildren
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> clipChildren: aBoolean [
 	"Change if children should be clipped and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
@@ -104,12 +102,12 @@ BlDefaultVisuals >> clipChildren: aBoolean [
 	^ BlCustomVisuals new clipChildren: aBoolean
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> compositingMode [
 	^ self defaultCompositingMode
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> compositingMode: aBlCompositingMode [
 	"Change the compositing mode and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
@@ -117,12 +115,12 @@ BlDefaultVisuals >> compositingMode: aBlCompositingMode [
 	^ BlCustomVisuals new compositingMode: aBlCompositingMode
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> effect [
 	^ self defaultEffect
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> effect: aBlElementEffect [
 	"Change the effect and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
@@ -130,12 +128,12 @@ BlDefaultVisuals >> effect: aBlElementEffect [
 	^ BlCustomVisuals new effect: aBlElementEffect
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> elevation [
 	^ self defaultElevation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> elevation: aBlElevation [
 	"Change the elevation and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 
@@ -144,12 +142,12 @@ BlDefaultVisuals >> elevation: aBlElevation [
 		  yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> focusability [
 	^ self defaultFocusability
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> focusability: aBlFocusability [
 	"Change the focusability and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
@@ -157,12 +155,12 @@ BlDefaultVisuals >> focusability: aBlFocusability [
 	^ BlCustomVisuals new focusability: aBlFocusability
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> focused [
 	^ self defaultFocused
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> focused: aBoolean [
 	"Change focused state and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
@@ -170,12 +168,12 @@ BlDefaultVisuals >> focused: aBoolean [
 	^ BlCustomVisuals new focused: aBoolean
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> geometry [
 	^ self defaultGeometry
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> geometry: aBlElementGeometry [
 	"Change the geometry and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
@@ -183,12 +181,12 @@ BlDefaultVisuals >> geometry: aBlElementGeometry [
 	^ BlCustomVisuals new geometry: aBlElementGeometry
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> mouseCursor [
 	^ self defaultMouseCursor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> mouseCursor: aBlCursor [
 	"Change the mouse cursor and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
@@ -196,12 +194,12 @@ BlDefaultVisuals >> mouseCursor: aBlCursor [
 	^ BlCustomVisuals new mouseCursor: aBlCursor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> opacity [
 	^ self defaultOpacity
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> opacity: aNumber [
 	"Change the opacity and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
@@ -209,12 +207,12 @@ BlDefaultVisuals >> opacity: aNumber [
 	^ BlCustomVisuals new opacity: aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> outskirts [
 	^ self defaultOutskirts
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> outskirts: aBlOutskirts [
 	"Change the outskirts and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
@@ -222,12 +220,12 @@ BlDefaultVisuals >> outskirts: aBlOutskirts [
 	^ BlCustomVisuals new outskirts: aBlOutskirts
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> visibility [
 	^ self defaultVisibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultVisuals >> visibility: aBlVisibility [
 	"Change the visibility and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>

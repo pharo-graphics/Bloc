@@ -1,22 +1,20 @@
 Class {
-	#name : 'BlIgnoredLayoutConstraints',
-	#superclass : 'BlLayoutConstraints',
-	#category : 'Bloc-Layouts-Basic',
-	#package : 'Bloc',
-	#tag : 'Layouts-Basic'
+	#name : #BlIgnoredLayoutConstraints,
+	#superclass : #BlLayoutConstraints,
+	#category : 'Bloc-Layouts-Basic'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlIgnoredLayoutConstraints >> alignment [
 	^ self horizontal alignment + self vertical alignment
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlIgnoredLayoutConstraints >> defaultHorizontal [
 	^ BlIgnoredLayoutConstraintsHorizontal new
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlIgnoredLayoutConstraints >> defaultVertical [
 	^ BlIgnoredLayoutConstraintsVertical new
 ]

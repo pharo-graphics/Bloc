@@ -3,19 +3,17 @@ I am a special type of rope that plays a role of a node in a binary tree and con
 
 "
 Class {
-	#name : 'BlConcatenationRope',
-	#superclass : 'BlRope',
+	#name : #BlConcatenationRope,
+	#superclass : #BlRope,
 	#instVars : [
 		'left',
 		'right',
 		'length'
 	],
-	#category : 'Bloc-DataStructure - Rope',
-	#package : 'Bloc',
-	#tag : 'DataStructure - Rope'
+	#category : 'Bloc-DataStructure - Rope'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlConcatenationRope class >> left: aLeftRope right: aRightRope [
 
 	^ self new
@@ -23,7 +21,7 @@ BlConcatenationRope class >> left: aLeftRope right: aRightRope [
 		yourself
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlConcatenationRope >> at: anIndex [
 	| leftSize |
 	
@@ -34,7 +32,7 @@ BlConcatenationRope >> at: anIndex [
 		ifFalse: [ right at: anIndex - leftSize ]
 ]
 
-{ #category : 'rope - attributes' }
+{ #category : #'rope - attributes' }
 BlConcatenationRope >> attributes: anAttributesCollection from: aStart to: anEnd [
 	| leftSize newLeft newRight |
 
@@ -69,12 +67,12 @@ BlConcatenationRope >> attributes: anAttributesCollection from: aStart to: anEnd
 		and: newRight
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlConcatenationRope >> children [
 	^ { left . right }
 ]
 
-{ #category : 'rope - attributes' }
+{ #category : #'rope - attributes' }
 BlConcatenationRope >> clearAttributes: aStart to: anEnd if: aBlock [
 	| leftSize newLeft newRight |
 	
@@ -118,13 +116,13 @@ BlConcatenationRope >> clearAttributes: aStart to: anEnd if: aBlock [
 				and: newRight ]
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 BlConcatenationRope >> copyFrom: startIndex to: endIndex [
 
 	^ self from: startIndex-1 to: endIndex
 ]
 
-{ #category : 'rope - deleting' }
+{ #category : #'rope - deleting' }
 BlConcatenationRope >> delete: aStart to: anEnd [
 	self assertAccessFrom: aStart to: anEnd.
 
@@ -149,20 +147,20 @@ BlConcatenationRope >> delete: aStart to: anEnd [
 					ifFalse: [ self from: 0 to: aStart ] ] ]
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlConcatenationRope >> depth [
 	<return: #Number>
 
 	^ (left depth max: right depth) + 1
 ]
 
-{ #category : 'rope - enumeration' }
+{ #category : #'rope - enumeration' }
 BlConcatenationRope >> do: aBlock [
 	left do: aBlock.
 	right do: aBlock
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlConcatenationRope >> empty [
 	"Create and return an empty version of this rope"
 	<return: #BlRope>
@@ -170,7 +168,7 @@ BlConcatenationRope >> empty [
 	^ self left empty
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlConcatenationRope >> from: aStart to: anEnd [
 	| leftSize |
 
@@ -191,7 +189,7 @@ BlConcatenationRope >> from: aStart to: anEnd [
 		and: (right from: 0 to: anEnd - leftSize)
 ]
 
-{ #category : 'rope - enumeration' }
+{ #category : #'rope - enumeration' }
 BlConcatenationRope >> from: aStart to: anEnd do: aBlock [
 	| leftSize isReversed |
 	
@@ -213,7 +211,7 @@ BlConcatenationRope >> from: aStart to: anEnd do: aBlock [
 				ifTrue: [ right from: ((aStart - leftSize) max: 0) to: anEnd - leftSize do: aBlock ] ]
 ]
 
-{ #category : 'rope - inserting' }
+{ #category : #'rope - inserting' }
 BlConcatenationRope >> insertItems: aCollection at: anIndex [
 	| leftSize aNewLeft aNewRight |
 	self assertIndexForInsert: anIndex.
@@ -231,42 +229,42 @@ BlConcatenationRope >> insertItems: aCollection at: anIndex [
 	^ self class concatenate: aNewLeft and: aNewRight
 ]
 
-{ #category : 'rope - testing' }
+{ #category : #'rope - testing' }
 BlConcatenationRope >> isConcatenation [
 	^ true
 ]
 
-{ #category : 'rope - testing' }
+{ #category : #'rope - testing' }
 BlConcatenationRope >> isLeaf [
 	^ false
 ]
 
-{ #category : 'rope - enumeration' }
+{ #category : #'rope - enumeration' }
 BlConcatenationRope >> iterator: aStart to: anEnd [
 	^ BlConcatenationRopeIterator rope: self from: aStart to: anEnd
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlConcatenationRope >> left [
 	<return: #BlRope>
 
 	^ left
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlConcatenationRope >> left: aLeftRope right: aRightRope [
 	left := aLeftRope.
 	right := aRightRope.
 	length := left size + right size
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlConcatenationRope >> readStream [ 
 
 	^ ReadStream on: self
 ]
 
-{ #category : 'rope - replacing' }
+{ #category : #'rope - replacing' }
 BlConcatenationRope >> replaceFrom: aStart to: anEnd with: aCollection [
 	"Replace a piece of the rope with a given collection of items"
 	<return: #BlRope>
@@ -299,14 +297,14 @@ BlConcatenationRope >> replaceFrom: aStart to: anEnd with: aCollection [
 	^ (self delete: aStart to: anEnd) insertItems: aCollection at: aStart
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlConcatenationRope >> right [
 	<return: #BlRope>
 
 	^ right
 ]
 
-{ #category : 'rope - replacing' }
+{ #category : #'rope - replacing' }
 BlConcatenationRope >> simplified [
 	<return: #BlRope>
 
@@ -315,7 +313,7 @@ BlConcatenationRope >> simplified [
 		and: right simplified
 ]
 
-{ #category : 'rope - accessing' }
+{ #category : #'rope - accessing' }
 BlConcatenationRope >> size [
 	^ length
 ]

@@ -6,16 +6,14 @@ I am a part of `=BlDirectEventDispatcher`=
 
 "
 Class {
-	#name : 'BlShortcutHandler',
-	#superclass : 'BlBasicEventHandler',
+	#name : #BlShortcutHandler,
+	#superclass : #BlBasicEventHandler,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Events-Handler',
-	#package : 'Bloc',
-	#tag : 'Events-Handler'
+	#category : 'Bloc-Events-Handler'
 }
 
-{ #category : 'api - adding / removing' }
+{ #category : #'api - adding / removing' }
 BlShortcutHandler >> addShortcut: aBlShortcut [
 	"Return a shortcut handler with an added given shortcut.
 	Note: The returned instance may or may not be the same as the receiver"
@@ -24,12 +22,12 @@ BlShortcutHandler >> addShortcut: aBlShortcut [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'api - event managing' }
+{ #category : #'api - event managing' }
 BlShortcutHandler >> handleEvent: aShortcutEvent [
 	self subclassResponsibility
 ]
 
-{ #category : 'api - adding / removing' }
+{ #category : #'api - adding / removing' }
 BlShortcutHandler >> removeAllWithCombination: aBlKeyCombination [
 	"Return a shortcut handler without all shortcuts with a given key combination.
 	Note: The returned instance may or may not be the same as the receiver"
@@ -38,7 +36,7 @@ BlShortcutHandler >> removeAllWithCombination: aBlKeyCombination [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'api - adding / removing' }
+{ #category : #'api - adding / removing' }
 BlShortcutHandler >> removeShortcut: aBlShortcut [
 	"Return a shortcut handler without a given shortcut.
 	Note: The returned instance may or may not be the same as the receiver"
@@ -47,14 +45,14 @@ BlShortcutHandler >> removeShortcut: aBlShortcut [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlShortcutHandler >> shortcuts [
 	<return: #Collection of: #BlBasicShortcut>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'api - event managing' }
+{ #category : #'api - event managing' }
 BlShortcutHandler >> wantsEvent: anEvent [
 	^ self subclassResponsibility
 ]
