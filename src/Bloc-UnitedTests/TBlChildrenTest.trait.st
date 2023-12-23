@@ -270,7 +270,6 @@ TBlChildrenTest >> testSecond [
 ]
 
 { #category : #tests }
-<<<<<<< HEAD
 TBlChildrenTest >> testSelectThenCollect [
 
 	| theChildren  collected |
@@ -291,8 +290,6 @@ TBlChildrenTest >> testSelectThenCollectEmpty [
 ]
 
 { #category : #tests }
-=======
->>>>>>> fda311343 (added demo pragma to most examples)
 TBlChildrenTest >> testSize [
 
 	| theChildren |
