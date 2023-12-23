@@ -946,6 +946,7 @@ BlSpace >> dragboard: anObject [
 
 { #category : 'change - layout' }
 BlSpace >> elementsNeedingLayout [
+
 	^ elementsNeedingLayout
 ]
 
@@ -1090,15 +1091,19 @@ BlSpace >> findMousePickTargetFromEvent: anEvent [
 	I may return nil if no such child is found and if I can not be event target either"
 
 	<return: #BlElement or: nil>
-
-	(self findMouseEventTargetAt: anEvent position) ifNotNil: [
-		:found | " test found because if the result is the root then it means that no element has been found "
-		found ~~ self root ifTrue: [ " ok, dispatch outside event through all the space elements "
-			" dispatch the mouse outside event to all alements of the scene graph "
-			self dispatchMousePickedOutside: ((anEvent newCopyFor: found) asMouseOutsideEvent lastMouseDownEvent: self mouseProcessor lastMouseDownEvent; yourself).
+	(self findMouseEventTargetAt: anEvent position) ifNotNil: [ :found | " test found because if the result is the root then it means that no element has been found "
+		found ~~ self root ifTrue: [ " dispatch the mouse outside event to all alements of the scene graph "
+			self mouseProcessor isDragging ifFalse: [
+				self dispatchMousePickedOutside:
+					((anEvent newCopyFor: found) asMouseOutsideEvent
+						 lastMouseDownEvent: self mouseProcessor lastMouseDownEvent;
+						 yourself) ].
 			^ found ] ].
 	" no element found at all: all elements receive a outside event"
-	self dispatchMousePickedOutside: (anEvent clone asMouseOutsideEvent  lastMouseDownEvent: self mouseProcessor lastMouseDownEvent; yourself).
+	self mouseProcessor isDragging ifFalse: [
+		self dispatchMousePickedOutside: (anEvent clone asMouseOutsideEvent
+				 lastMouseDownEvent: self mouseProcessor lastMouseDownEvent;
+				 yourself) ].
 	^ nil
 ]
 
@@ -1694,6 +1699,7 @@ BlSpace >> requestHostSpaceRedraw [
 
 { #category : 'change - layout' }
 BlSpace >> requestLayout: anElement [
+
 	elementsNeedingLayout add: anElement.
 	self requestNextPulse
 ]
