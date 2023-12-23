@@ -7,7 +7,8 @@ Class {
 { #category : #tests }
 BlBasicLayoutTest >> testForceLayoutOfMatchParent [
 
-	<sampleInstance> 
+	<sampleInstance>
+	<demo>
 	| anElement |
 	anElement := BlElement new.
 	anElement border: (BlBorder paint: Color gray width: 2).
@@ -23,7 +24,8 @@ BlBasicLayoutTest >> testForceLayoutOfMatchParent [
 { #category : #tests }
 BlBasicLayoutTest >> testParentWithChildExactSize [
 
-	<sampleInstance> 
+	<sampleInstance>
+	<demo>
 	| child parent |
 	child := BlElement new.
 	child layout: BlBasicLayout uniqueInstance.
@@ -53,7 +55,8 @@ BlBasicLayoutTest >> testParentWithChildExactSize [
 { #category : #tests }
 BlBasicLayoutTest >> testParentWithChildFitContent [
 
-	<sampleInstance> 
+	<sampleInstance>
+	<demo>
 	| child parent |
 	parent := self testParentWithChildExactSize.
 	child := parent children first.
@@ -69,7 +72,8 @@ BlBasicLayoutTest >> testParentWithChildFitContent [
 { #category : #tests }
 BlBasicLayoutTest >> testParentWithChildMatchParent [
 
-	<sampleInstance> 
+	<sampleInstance>
+	<demo>
 	| child parent |
 	parent := self testParentWithChildExactSize.
 	child := parent children first.

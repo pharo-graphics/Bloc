@@ -12,8 +12,8 @@ Class {
 BlLinearLayoutHorizontalTest >> testElementWithOneChildMatchInExactParentPadding [
 
 	<sampleInstance>
-	<description:
-	'A single child is distributed equally within the parent''s bounds'>
+	<demo>
+	"A single child is distributed equally within the parent's bounds"
 	| parent child |
 	child := self testChildElementMatchingParent.
 	parent := self testParentWithLinearHorizontalLayout.
@@ -34,6 +34,7 @@ BlLinearLayoutHorizontalTest >> testElementWithOneChildMatchOneExactInFitParent 
 	"All children are distributed equally within parent's bounds"
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB |
 	childA := self childExact: 300 @ 200.
 	childB := self childExactWidth: 200.
@@ -59,6 +60,7 @@ BlLinearLayoutHorizontalTest >> testElementWithOneExactChildInExactParentMargin 
 	"All children are distributed equally within parent's bounds"
 
 	<sampleInstance>
+	<demo>
 	| parent childA |
 	childA := self childExact: 20 @ 20.
 	childA margin: (BlInsets
@@ -83,6 +85,7 @@ BlLinearLayoutHorizontalTest >> testElementWithThreeMatchChildrenInExactParent [
 	"All children are distributed equally within parent's bounds"
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB childC |
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
@@ -111,6 +114,7 @@ BlLinearLayoutHorizontalTest >> testElementWithThreeMatchChildrenInExactParentRT
 	"All children are distributed equally within parent's bounds"
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB childC |
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
@@ -140,6 +144,7 @@ BlLinearLayoutHorizontalTest >> testElementWithTwoChildrenMatchInExactParentPadd
 	"All children are distributed equally within parent's bounds"
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB |
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
@@ -165,6 +170,7 @@ BlLinearLayoutHorizontalTest >> testElementWithTwoExactChildrenInFitContent [
 	"Parent resizes to fit children"
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB |
 	childA := self childExact: 200 @ 100.
 	childB := self childExact: 100 @ 200.
@@ -189,6 +195,7 @@ BlLinearLayoutHorizontalTest >> testElementWithTwoMatchChildrenInExactParent [
 	"All children are distributed equally within parent's bounds"
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB |
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
@@ -212,6 +219,7 @@ BlLinearLayoutHorizontalTest >> testElementWithTwoMatchChildrenInExactParent [
 BlLinearLayoutHorizontalTest >> testOneChildSetVisibilityGone [
 
 	<sampleInstance>
+	<demo>
 	| aContainer aRed aBlue |
 	aContainer := BlElement new
 		              layout: (BlLinearLayout horizontal cellSpacing: 20);
@@ -253,6 +261,7 @@ BlLinearLayoutHorizontalTest >> testOneChildSetVisibilityGone [
 BlLinearLayoutHorizontalTest >> testParentWithLinearHorizontalLayout [
 
 	<sampleInstance>
+	<demo>
 	| element |
 	element := BlElement new
 		           border: (BlBorder builder

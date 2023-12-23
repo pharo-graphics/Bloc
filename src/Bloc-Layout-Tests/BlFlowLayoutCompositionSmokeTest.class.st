@@ -125,6 +125,7 @@ BlFlowLayoutCompositionSmokeTest class >> floatingCells [
 BlFlowLayoutCompositionSmokeTest >> blueCell [
 
 	<sampleInstance>
+	<demo>
 	^ self cell
 		  background: (Color blue alpha: 0.5);
 		  yourself
@@ -134,6 +135,7 @@ BlFlowLayoutCompositionSmokeTest >> blueCell [
 BlFlowLayoutCompositionSmokeTest >> cell [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  constraintsDo: [ :c |
 			  c horizontal exact: 50.
@@ -150,6 +152,7 @@ BlFlowLayoutCompositionSmokeTest >> cell [
 BlFlowLayoutCompositionSmokeTest >> container [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  layout: BlFlowLayout new horizontal;
 		  border: (BlBorder paint: Color lightGray width: 8);
@@ -160,6 +163,7 @@ BlFlowLayoutCompositionSmokeTest >> container [
 BlFlowLayoutCompositionSmokeTest >> floatBlueCell [
 
 	<sampleInstance>
+	<demo>
 	^ self floatCell
 		  size: 50 @ 109;
 		  background: Color blue
@@ -169,6 +173,7 @@ BlFlowLayoutCompositionSmokeTest >> floatBlueCell [
 BlFlowLayoutCompositionSmokeTest >> floatCell [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new constraintsDo: [ :c |
 		  c flow float.
 		  c margin: (BlInsets
@@ -182,6 +187,7 @@ BlFlowLayoutCompositionSmokeTest >> floatCell [
 BlFlowLayoutCompositionSmokeTest >> floatRedCell [
 
 	<sampleInstance>
+	<demo>
 	^ self floatCell
 		  size: 103 @ 165;
 		  background: Color red
@@ -191,6 +197,7 @@ BlFlowLayoutCompositionSmokeTest >> floatRedCell [
 BlFlowLayoutCompositionSmokeTest >> floatingCells [
 
 	<sampleInstance>
+	<demo>
 	^ self container
 		  size: 560 @ 400;
 		  position: 100 @ 50;
@@ -206,6 +213,7 @@ BlFlowLayoutCompositionSmokeTest >> floatingCells [
 BlFlowLayoutCompositionSmokeTest >> grayCell [
 
 	<sampleInstance>
+	<demo>
 	^ self cell
 		  background: Color veryLightGray;
 		  yourself
@@ -215,6 +223,7 @@ BlFlowLayoutCompositionSmokeTest >> grayCell [
 BlFlowLayoutCompositionSmokeTest >> redCell [
 
 	<sampleInstance>
+	<demo>
 	^ self cell
 		  background: (Color red alpha: 0.5);
 		  yourself

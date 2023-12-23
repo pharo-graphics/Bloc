@@ -14,6 +14,7 @@ Class {
 BlFrameLayoutCompositionTest >> container [
 
 	<sampleInstance>
+	<demo>
 	^ self element
 		  padding: (BlInsets all: 10);
 		  background: Color blue
@@ -23,6 +24,7 @@ BlFrameLayoutCompositionTest >> container [
 BlFrameLayoutCompositionTest >> element [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 ]
 
@@ -30,6 +32,7 @@ BlFrameLayoutCompositionTest >> element [
 BlFrameLayoutCompositionTest >> green [
 
 	<sampleInstance>
+	<demo>
 	^ self element
 		  background: Color green;
 		  border: (BlBorder paint: Color black width: 4)
@@ -46,6 +49,7 @@ BlFrameLayoutCompositionTest >> originClassName [
 BlFrameLayoutCompositionTest >> red [
 
 	<sampleInstance>
+	<demo>
 	^ self element
 		  background: Color red;
 		  border: (BlBorder paint: Color lightGray width: 4)
@@ -55,6 +59,7 @@ BlFrameLayoutCompositionTest >> red [
 BlFrameLayoutCompositionTest >> testExample [
 
 	<sampleInstance>
+	<demo>
 	| yellow green red container |
 	yellow := self yellow constraintsDo: [ :c |
 		          c horizontal matchParent.
@@ -84,6 +89,7 @@ BlFrameLayoutCompositionTest >> testExample [
 BlFrameLayoutCompositionTest >> testExampleReverseOrder [
 
 	<sampleInstance>
+	<demo>
 	| yellow green red container |
 	yellow := self yellow constraintsDo: [ :c |
 		          c horizontal matchParent.
@@ -113,6 +119,7 @@ BlFrameLayoutCompositionTest >> testExampleReverseOrder [
 BlFrameLayoutCompositionTest >> yellow [
 
 	<sampleInstance>
+	<demo>
 	^ self element
 		  background: Color yellow;
 		  border: (BlBorder paint: Color darkGray width: 4)

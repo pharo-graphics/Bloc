@@ -12,6 +12,7 @@ Class {
 BlWrapAroundChildrenLayoutTest >> container [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  layout:
 			  (BlWrapAroundChildrenLayout new addLayout:
@@ -27,6 +28,7 @@ BlWrapAroundChildrenLayoutTest >> container [
 BlWrapAroundChildrenLayoutTest >> node [
 
 	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
 		  border: (BlBorder paint: Color black width: 2);
@@ -38,6 +40,7 @@ BlWrapAroundChildrenLayoutTest >> node [
 BlWrapAroundChildrenLayoutTest >> testContainerScaledWithNodes [
 
 	<sampleInstance>
+	<demo>
 	| aContainer aChildA aChildB aChildC |
 	aContainer := self container.
 	aContainer transformDo: [ :t | t scaleBy: 0.5 ].
@@ -66,6 +69,7 @@ BlWrapAroundChildrenLayoutTest >> testContainerScaledWithNodes [
 BlWrapAroundChildrenLayoutTest >> testContainerWithNodes [
 
 	<sampleInstance>
+	<demo>
 	| aContainer aChildA aChildB aChildC |
 	aContainer := self container.
 	aContainer addChild: (aChildA := self node position: 150 @ 50).

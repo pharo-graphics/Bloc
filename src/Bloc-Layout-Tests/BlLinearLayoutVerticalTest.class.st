@@ -13,6 +13,7 @@ BlLinearLayoutVerticalTest >> testElementWithChildMatchInExactParentPadding [
 	"All children are distributed equally within parent's bounds"
 
 	<sampleInstance>
+	<demo>
 	| parent childA |
 	childA := self testChildElementMatchingParent.
 	parent := self testParentWithLinearVerticalLayout.
@@ -33,6 +34,7 @@ BlLinearLayoutVerticalTest >> testElementWithChildrenMatchInExactParentPadding [
 	"All children are distributed equally within parent's bounds"
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB |
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
@@ -58,6 +60,7 @@ BlLinearLayoutVerticalTest >> testElementWithExactChildrenInFitContent [
 	"Parent resizes to fit children"
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB |
 	childA := self childExact: 200 @ 100.
 	childB := self childExact: 100 @ 200.
@@ -82,6 +85,7 @@ BlLinearLayoutVerticalTest >> testElementWithMatchChildrenInExactParent [
 	"All children are distributed equally within parent's bounds"
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB childC |
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
@@ -110,6 +114,7 @@ BlLinearLayoutVerticalTest >> testElementWithOneChildMatchOneExactInFitParent [
 	"All children are distributed equally within parent's bounds"
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB |
 	childA := self childExact: 200 @ 300.
 	childB := self childExactHeight: 200.
@@ -135,6 +140,7 @@ BlLinearLayoutVerticalTest >> testElementWithOneExactChildInExactParentMargin [
 	"All children are distributed equally within parent's bounds"
 
 	<sampleInstance>
+	<demo>
 	| parent childA |
 	childA := self childExact: 20 @ 20.
 	childA margin: (BlInsets
@@ -158,6 +164,7 @@ BlLinearLayoutVerticalTest >> testElementWithOneExactChildInExactParentMargin [
 BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParentLTR [
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB childC |
 	childA := self childExact: 100 @ 100.
 	childB := self childExact: 200 @ 100.
@@ -188,6 +195,7 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParentRTL [
 
 	<sampleInstance>
+	<demo>
 	| parent childA childB childC |
 	childA := self childExact: 100 @ 100.
 	childB := self childExact: 200 @ 100.
@@ -219,6 +227,7 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 BlLinearLayoutVerticalTest >> testOneChildSetVisibilityGone [
 
 	<sampleInstance>
+	<demo>
 	| aContainer aRed aBlue |
 	aContainer := BlElement new
 		              layout: (BlLinearLayout vertical cellSpacing: 20);
@@ -260,6 +269,7 @@ BlLinearLayoutVerticalTest >> testOneChildSetVisibilityGone [
 BlLinearLayoutVerticalTest >> testParentWithLinearVerticalLayout [
 
 	<sampleInstance>
+	<demo>
 	| element |
 	element := BlElement new
 		           border: (BlBorder builder

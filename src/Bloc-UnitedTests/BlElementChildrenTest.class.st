@@ -10,8 +10,9 @@ Class {
 
 { #category : #tests }
 BlElementChildrenTest >> hierarchyChildren [
-	<sampleInstance>
 
+	<sampleInstance>
+	<demo>
 	| aContainer current |
 	aContainer := BlElement new
 		              size: 400 @ 400;
@@ -37,6 +38,7 @@ BlElementChildrenTest >> hierarchyChildren [
 BlElementChildrenTest >> multipleChildren [
 
 	<sampleInstance>
+	<demo>
 	| aContainer |
 	aContainer := BlElement new
 		              size: 400 @ 400;
@@ -52,6 +54,7 @@ BlElementChildrenTest >> multipleChildren [
 BlElementChildrenTest >> multipleChildrenDepth2 [
 
 	<sampleInstance>
+	<demo>
 	^ self multipleChildrenDepth: 2
 ]
 
@@ -59,6 +62,7 @@ BlElementChildrenTest >> multipleChildrenDepth2 [
 BlElementChildrenTest >> multipleChildrenDepth3 [
 
 	<sampleInstance>
+	<demo>
 	^ self multipleChildrenDepth: 3
 ]
 
@@ -93,6 +97,7 @@ BlElementChildrenTest >> multipleChildrenIn: aContainer depth: aDepth [
 BlElementChildrenTest >> overlappingChildren [
 
 	<sampleInstance>
+	<demo>
 	| aContainer aRedChild aBlueChild |
 	aContainer := BlElement new
 		              size: 400 @ 400;

@@ -12,6 +12,7 @@ Class {
 BlLinearLayoutUsageTest >> testEqualizingHeighAndWidth [
 
 	<sampleInstance>
+	<demo>
 	| parent |
 	parent := self twoChildrenMatchParentInFitContent.
 	parent layoutDo: [ :aLayout | aLayout withSpaceEqualization ].
@@ -22,6 +23,7 @@ BlLinearLayoutUsageTest >> testEqualizingHeighAndWidth [
 BlLinearLayoutUsageTest >> testEqualizingWidth [
 
 	<sampleInstance>
+	<demo>
 	| parent |
 	"width is by default equalized"
 	parent := self twoChildrenMatchParentInFitContent.
@@ -32,7 +34,8 @@ BlLinearLayoutUsageTest >> testEqualizingWidth [
 BlLinearLayoutUsageTest >> testExampleHorizontalListFixedWidthLTR [
 
 	<sampleInstance>
-	| e1 e2 e3 el space |
+	<demo>
+	| e1 e2 e3 el |
 	e1 := BlElement new
 		      border: (BlBorder paint: Color darkGray width: 4);
 		      constraintsDo: [ :c |
@@ -68,6 +71,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListFixedWidthLTR [
 BlLinearLayoutUsageTest >> testExampleHorizontalListFixedWidthRTL [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      border: (BlBorder paint: Color darkGray width: 4);
@@ -104,6 +108,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListFixedWidthRTL [
 BlLinearLayoutUsageTest >> testExampleHorizontalListLTR [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -136,6 +141,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListLTR [
 BlLinearLayoutUsageTest >> testExampleHorizontalListRTL [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -168,6 +174,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListRTL [
 BlLinearLayoutUsageTest >> testExampleHorizontalTopCenterBottomLTR [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c | c linear vertical alignTop ];
@@ -194,6 +201,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalTopCenterBottomLTR [
 BlLinearLayoutUsageTest >> testExampleHorizontalTopCenterBottomRTL [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c | c linear vertical alignTop ];
@@ -220,6 +228,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalTopCenterBottomRTL [
 BlLinearLayoutUsageTest >> testExampleHorizontalUsingWeightLTR [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -255,6 +264,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalUsingWeightLTR [
 BlLinearLayoutUsageTest >> testExampleHorizontalUsingWeightRTL [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -290,6 +300,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalUsingWeightRTL [
 BlLinearLayoutUsageTest >> testExampleVerticalLeftCenterRightLRT [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -321,6 +332,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalLeftCenterRightLRT [
 BlLinearLayoutUsageTest >> testExampleVerticalLeftCenterRightRTL [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -352,6 +364,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalLeftCenterRightRTL [
 BlLinearLayoutUsageTest >> testExampleVerticalList [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -388,6 +401,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalList [
 BlLinearLayoutUsageTest >> testExampleVerticalListFixedHeight [
 
 	<sampleInstance>
+	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c | c horizontal matchParent ];
@@ -416,10 +430,10 @@ BlLinearLayoutUsageTest >> testExampleVerticalListFixedHeight [
 
 { #category : #tests }
 BlLinearLayoutUsageTest >> testMatchParentInFitContent [
+	"If all children in the parent that fits content match parent then they should be measured with 0 size"
 
 	<sampleInstance>
-	"If all children in the parent that fits content match parent then they should be measured with 0 size"
-	
+	<demo>
 	| child parent |
 	child := BlElement new.
 	child layout: BlBasicLayout new.
@@ -459,9 +473,10 @@ BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeBackToMatchParent [
 
 { #category : #tests }
 BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeToExact [
+	"Now we change size to exact and expect parent to resize"
 
 	<sampleInstance>
-	"Now we change size to exact and expect parent to resize"
+	<demo>
 	| parent child |
 	parent := self testMatchParentInFitContent.
 	child := parent children first.
@@ -476,6 +491,7 @@ BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeToExact [
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimited [
 
 	<sampleInstance>
+	<demo>
 	| subChildren child parent |
 	subChildren := 4 timesCollect: [
 		               BlElement new
@@ -507,6 +523,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimited [
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChild [
 
 	<sampleInstance>
+	<demo>
 	| subChildren childA childB parent |
 	subChildren := 4 timesCollect: [
 		               BlElement new
@@ -545,6 +562,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChild [
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChildFitContent [
 
 	<sampleInstance>
+	<demo>
 	| subChildren childA childB subChildB parent |
 	subChildren := 4 timesCollect: [
 		               BlElement new
@@ -591,6 +609,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChildFitCo
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndThreeChildlren [
 
 	<sampleInstance>
+	<demo>
 	| subChildren childA childB childC childD parent |
 	subChildren := 4 timesCollect: [
 		               BlElement new
@@ -644,6 +663,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndThreeChild
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndTwoChildlren [
 
 	<sampleInstance>
+	<demo>
 	| subChildren childA childB childC parent |
 	subChildren := 4 timesCollect: [
 		               BlElement new
@@ -689,6 +709,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndTwoChildlr
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndThreeChildlren [
 
 	<sampleInstance>
+	<demo>
 	| subChildren childA childB childC childD parent |
 	subChildren := 1 timesCollect: [
 		               BlElement new
@@ -742,6 +763,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndThreeCh
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndTwoChildlren [
 
 	<sampleInstance>
+	<demo>
 	| subChildren childA childB childC parent |
 	subChildren := 1 timesCollect: [
 		               BlElement new
@@ -787,6 +809,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndTwoChil
 BlLinearLayoutUsageTest >> testTwoChildrenMatchParentInFitContent [
 
 	<sampleInstance>
+	<demo>
 	| parent child child2 |
 	parent := BlElement new.
 	parent layout: BlLinearLayout vertical.
@@ -821,6 +844,7 @@ BlLinearLayoutUsageTest >> testTwoChildrenMatchParentInFitContent [
 BlLinearLayoutUsageTest >> testTwoChildrenOnOppositeSidesWithSpan [
 
 	<sampleInstance>
+	<demo>
 	| parent left span right |
 	parent := BlElement new.
 	parent background: (Color gray alpha: 0.3).
@@ -865,6 +889,7 @@ BlLinearLayoutUsageTest >> testTwoChildrenOnOppositeSidesWithSpan [
 BlLinearLayoutUsageTest >> twoChildrenMatchParentInFitContent [
 
 	<sampleInstance>
+	<demo>
 	| parent child child2 |
 	parent := BlElement new.
 	parent layout: BlLinearLayout vertical.
