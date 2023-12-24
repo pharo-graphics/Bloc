@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlStadium',
-	#superclass : 'BlStadiumGeometry',
-	#category : 'Bloc-Basic-Geometry-Deprecated',
-	#package : 'Bloc',
-	#tag : 'Basic-Geometry-Deprecated'
+	#name : #BlStadium,
+	#superclass : #BlStadiumGeometry,
+	#category : 'Bloc-Basic-Geometry-Deprecated'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlStadium class >> isDeprecated [
 	^ true
 ]

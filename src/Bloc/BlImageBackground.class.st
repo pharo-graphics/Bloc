@@ -8,29 +8,27 @@ Examples are provided by the class {{gtClass:BlImageBackgroundExamples}}.
 
 "
 Class {
-	#name : 'BlImageBackground',
-	#superclass : 'BlBackground',
+	#name : #BlImageBackground,
+	#superclass : #BlBackground,
 	#instVars : [
 		'image'
 	],
-	#category : 'Bloc-Basic-Background',
-	#package : 'Bloc',
-	#tag : 'Basic-Background'
+	#category : 'Bloc-Basic-Background'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlImageBackground class >> image: aForm [
 	^ self new image: aForm
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlImageBackground >> image [
 	<return: #Form>
 
 	^ image
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlImageBackground >> image: aForm [
 
 	image isNotNil
@@ -39,7 +37,7 @@ BlImageBackground >> image: aForm [
 	image := aForm
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlImageBackground >> isTransparent [
 	"Unfortunately there is no fast way to detect if a Form is completely transparent,
 	the only check we can afford to do is to see whether the extent of the form is positive"
@@ -47,7 +45,7 @@ BlImageBackground >> isTransparent [
 	^ (self opacity closeTo: 0) or: [ self image extent min = 0 ]
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlImageBackground >> matchExtent: anExtent [
 	"Not sure what we should do with image background.
 	Will implement later"
