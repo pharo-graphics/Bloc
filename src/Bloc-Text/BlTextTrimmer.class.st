@@ -87,6 +87,7 @@ BlTextTrimmer >> trim [
 BlTextTrimmer >> trimmed [
 	"I return a new copy of the text trimmed according to the configuration"
 	<return: #BlText>
+	
 	| left right |
 
 	left := 1.

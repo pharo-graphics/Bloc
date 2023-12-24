@@ -68,12 +68,12 @@ BlDevScripterStepState >> isHalt [
 
 { #category : 'accessing' }
 BlDevScripterStepState >> name [
-	<return: #String>
+	"Return the string representing the name of the receiver."
 	^ self subclassResponsibility
 ]
 
 { #category : 'testing' }
 BlDevScripterStepState >> wasExecuted [
-	<return: #Boolean>
+	
 	^ false
 ]

@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlRecyclerDataSourceFetcher',
-	#superclass : 'BlInfiniteRecyclerFetcher',
-	#category : 'Bloc-Infinite-Recycler',
-	#package : 'Bloc-Infinite',
-	#tag : 'Recycler'
+	#name : #BlRecyclerDataSourceFetcher,
+	#superclass : #BlInfiniteRecyclerFetcher,
+	#category : 'Bloc-Infinite-Recycler'
 }
 
-{ #category : 'element fetching' }
+{ #category : #'element fetching' }
 BlRecyclerDataSourceFetcher >> elementFor: aPosition in: anInfiniteElement [
 
 	^ anInfiniteElement dataSource createHolder: anInfiniteElement

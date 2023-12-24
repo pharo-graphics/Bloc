@@ -13,7 +13,7 @@ Class {
 		'angle',
 		'matrix'
 	],
-	#category : 'Bloc-Basic-Math'
+	#category : #'Bloc-Basic-Math'
 }
 
 { #category : #accessing }
@@ -140,7 +140,7 @@ BlMatrixDecomposition2D >> scale: aVector [
 
 { #category : #accessing }
 BlMatrixDecomposition2D >> translation [
-	<return: #BlVector>
+	"Return the vector (BlVector) corresponding to the translation."
 	
 	^ translation
 ]

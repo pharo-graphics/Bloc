@@ -29,7 +29,7 @@ Class {
 	#instVars : [
 		'backgrounds'
 	],
-	#category : 'Bloc-Basic-Background'
+	#category : #'Bloc-Basic-Background'
 }
 
 { #category : #'instance creation' }
@@ -39,21 +39,20 @@ BlCompositeBackground class >> withAll: aCollectionOfBackground [
 
 { #category : #accessing }
 BlCompositeBackground >> backgrounds [
-	<return: #Collection of: #BlBackground>
+	"Return the collection of backgrounds that the receiver represents."
 
 	^ backgrounds
 ]
 
 { #category : #initialization }
 BlCompositeBackground >> initialize [
+
 	super initialize.
-	
 	backgrounds := Array new
 ]
 
 { #category : #testing }
 BlCompositeBackground >> isTransparent [
-	<return: #Boolean>
 
 	^ (self opacity closeTo: 0.0) or: [ backgrounds allSatisfy: #isTransparent ]
 ]
@@ -65,10 +64,8 @@ BlCompositeBackground >> matchExtent: anExtent [
 
 { #category : #initialization }
 BlCompositeBackground >> withAll: aCollectionOfBackgrounds [
-
-	self
-		assert: [ aCollectionOfBackgrounds isNotEmpty ]
-		description: [ 'Collection of background must not be empty' ].
+	"Return a composite background based on the collection of background pass as argument. 
+	This collection of backgrounds must not be empty"
 
 	backgrounds := aCollectionOfBackgrounds asArray copy
 ]

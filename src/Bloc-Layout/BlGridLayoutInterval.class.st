@@ -55,14 +55,12 @@ BlGridLayoutInterval >> inversed [
 
 { #category : #accessing }
 BlGridLayoutInterval >> max [
-	<return: #Number>
 
 	^ max
 ]
 
 { #category : #accessing }
 BlGridLayoutInterval >> min [
-	<return: #Number>
 
 	^ min
 ]

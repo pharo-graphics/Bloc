@@ -7,7 +7,7 @@ Each phase knows about its start time and send a corresponding event once the ph
 Class {
 	#name : #BlSpaceFramePhase,
 	#superclass : #Object,
-	#category : 'Bloc-Space - Frame'
+	#category : #'Bloc-Space - Frame'
 }
 
 { #category : #testing }
@@ -37,7 +37,7 @@ BlSpaceFramePhase >> isTaskPhase [
 
 { #category : #accessing }
 BlSpaceFramePhase >> name [
-	<return: #String>
+	"Return the string representing the name of the receiver."
 	
 	^ self subclassResponsibility
 ]

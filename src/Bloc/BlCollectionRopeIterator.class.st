@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'position'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #'private - asserting' }
@@ -29,9 +29,8 @@ BlCollectionRopeIterator >> attributes [
 
 { #category : #'iterator - testing' }
 BlCollectionRopeIterator >> hasNext [
-	<return: #Boolean>
+	
 	self assertInvariant.
-
 	^ position < end
 ]
 

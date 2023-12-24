@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'selections'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#category : #'Bloc-Utilities - Selection'
 }
 
 { #category : #'instance creation' }
@@ -47,7 +47,6 @@ BlCompositeSelection >> children [
 { #category : #'api - testing' }
 BlCompositeSelection >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
-	<return: #Boolean>
 	
 	^ selections contains: anIndex
 ]
@@ -56,7 +55,6 @@ BlCompositeSelection >> contains: anIndex [
 BlCompositeSelection >> containsIndex: anIndex [
 	"Return true if selection indices include a given index, false otherwise.
 	I am conceptually same as (self indices includes: anIndex)"
-	<return: #Boolean>
 	
 	^ selections containsIndex: anIndex
 ]

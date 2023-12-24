@@ -16,7 +16,7 @@ Class {
 		'canBePropagated',
 		'consumed'
 	],
-	#category : 'Bloc-Events'
+	#category : #'Bloc-Events'
 }
 
 { #category : #'api - enable / disable' }
@@ -139,7 +139,6 @@ BlEvent >> bubblingTarget: aTBlEventTarget [
 
 { #category : #testing }
 BlEvent >> canBePropagated [
-	<return: #Boolean>
 
 	^ canBePropagated
 ]

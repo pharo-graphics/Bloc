@@ -18,7 +18,7 @@ Class {
 		'previousRealTime',
 		'previousSpeededUpTime'
 	],
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe'
 }
 
 { #category : #'private - time' }
@@ -71,7 +71,7 @@ BlFastForwardedTime >> initialize [
 
 { #category : #'api - accessing' }
 BlFastForwardedTime >> speed [
-	<return: #Number>
+	"Return a number representing the speed."
 
 	^ speed
 ]

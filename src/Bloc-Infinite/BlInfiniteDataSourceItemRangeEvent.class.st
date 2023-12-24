@@ -1,47 +1,45 @@
 Class {
-	#name : 'BlInfiniteDataSourceItemRangeEvent',
-	#superclass : 'BlInfiniteDataSourceEvent',
+	#name : #BlInfiniteDataSourceItemRangeEvent,
+	#superclass : #BlInfiniteDataSourceEvent,
 	#instVars : [
 		'position',
 		'itemCount',
 		'event'
 	],
-	#category : 'Bloc-Infinite-Events',
-	#package : 'Bloc-Infinite',
-	#tag : 'Events'
+	#category : 'Bloc-Infinite-Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSourceItemRangeEvent >> event [
 	^ event
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSourceItemRangeEvent >> event: anObject [
 	event := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSourceItemRangeEvent >> itemCount [
 	^ itemCount
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSourceItemRangeEvent >> itemCount: anObject [
 	itemCount := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSourceItemRangeEvent >> position [
 	^ position
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSourceItemRangeEvent >> position: anObject [
 	position := anObject
 ]
 
-{ #category : 'sending' }
+{ #category : #sending }
 BlInfiniteDataSourceItemRangeEvent >> sendTo: anObject [
 	anObject onItemsEvent: self
 ]

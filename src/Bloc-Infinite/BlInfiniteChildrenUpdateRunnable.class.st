@@ -1,22 +1,20 @@
 Class {
-	#name : 'BlInfiniteChildrenUpdateRunnable',
-	#superclass : 'BlTask',
+	#name : #BlInfiniteChildrenUpdateRunnable,
+	#superclass : #BlTask,
 	#instVars : [
 		'infiniteElement'
 	],
-	#category : 'Bloc-Infinite-Tasks',
-	#package : 'Bloc-Infinite',
-	#tag : 'Tasks'
+	#category : 'Bloc-Infinite-Tasks'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlInfiniteChildrenUpdateRunnable class >> on: anInfiniteElement [
 	^ self new
 		initializeWith: anInfiniteElement;
 		yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteChildrenUpdateRunnable >> initializeWith: anInfiniteElement [
 	
 	self
@@ -26,7 +24,7 @@ BlInfiniteChildrenUpdateRunnable >> initializeWith: anInfiniteElement [
 	infiniteElement := anInfiniteElement
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlInfiniteChildrenUpdateRunnable >> run [
 	(infiniteElement isFirstLayoutComplete not or: [
 		infiniteElement isLayoutRequested ])

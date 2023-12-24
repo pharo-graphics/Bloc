@@ -1,49 +1,47 @@
 Class {
-	#name : 'BlInfiniteDataSourceCommandTypeNull',
-	#superclass : 'BlInfiniteDataSourceCommandType',
-	#category : 'Bloc-Infinite-DataSource',
-	#package : 'Bloc-Infinite',
-	#tag : 'DataSource'
+	#name : #BlInfiniteDataSourceCommandTypeNull,
+	#superclass : #BlInfiniteDataSourceCommandType,
+	#category : 'Bloc-Infinite-DataSource'
 }
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeNull >> apply: aCommand in: anInfiniteElement [
 	
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeNull >> apply: aCommand onPosition: aPosition [
 	^ aPosition
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeNull >> continuous: aPosition start: start [
 	^ aPosition = (start + 1)
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeNull >> dispatch: aCommand toLayout: aLayout [
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeNull >> offsetPositions: aCommand in: anInfiniteElement [
 
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeNull >> positionMultiplier [
 	^ 1
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeNull >> updateElementHoldersIn: aContext command: aCommand [
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeNull >> updateElementHoldersIn: anInfiniteElement offset: offsetStart command: aCommand [
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeNull >> updatePosition: aPosition with: aCommand from: myCommand [
 	^ aPosition
 ]

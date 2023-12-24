@@ -13,7 +13,7 @@ Class {
 	#instVars : [
 		'image'
 	],
-	#category : 'Bloc-Basic-Background'
+	#category : #'Bloc-Basic-Background'
 }
 
 { #category : #'instance creation' }
@@ -23,7 +23,7 @@ BlImageBackground class >> image: aForm [
 
 { #category : #accessing }
 BlImageBackground >> image [
-	<return: #Form>
+	"Return the form that represents the visual of the background."
 
 	^ image
 ]

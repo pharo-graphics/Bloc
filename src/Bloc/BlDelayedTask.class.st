@@ -29,7 +29,7 @@ Class {
 		'startTime',
 		'requeue'
 	],
-	#category : 'Bloc-Space - Tasks'
+	#category : #'Bloc-Space - Tasks'
 }
 
 { #category : #accessing }
@@ -88,7 +88,6 @@ BlDelayedTask >> initialize [
 
 { #category : #'api - testing' }
 BlDelayedTask >> isRunning [
-	<return: #Boolean>
 
 	^ isRunning
 ]

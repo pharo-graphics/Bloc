@@ -34,8 +34,8 @@ BlBlocUIManagerNotificationHandler class >> preferredHandler [
 
 { #category : #'api - accessing' }
 BlBlocUIManagerNotificationHandler class >> priority [
-	<return: #Number>
-	"The higher the number, the higher the priority"
+	"Return an integer indicating the priority of the publisher. The higher the number, the higher the priority"
+	
 	^ -100
 ]
 

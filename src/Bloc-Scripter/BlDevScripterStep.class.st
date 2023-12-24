@@ -177,6 +177,6 @@ BlDevScripterStep >> target [
 
 { #category : 'testing' }
 BlDevScripterStep >> wasExecuted [
-	<return: #Boolean>
+
 	^ state wasExecuted
 ]

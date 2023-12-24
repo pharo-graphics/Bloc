@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlScrollFlingerState',
-	#superclass : 'Object',
+	#name : #BlScrollFlingerState,
+	#superclass : #Object,
 	#instVars : [
 		'x',
 		'y',
@@ -11,92 +11,90 @@ Class {
 		'overscrollX',
 		'overscrollY'
 	],
-	#category : 'Bloc-Infinite-Scrollable-Helpers',
-	#package : 'Bloc-Infinite',
-	#tag : 'Scrollable-Helpers'
+	#category : 'Bloc-Infinite-Scrollable-Helpers'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> dX [
 	^ dX
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> dX: anObject [
 	dX := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> dY [
 	^ dY
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> dY: anObject [
 	dY := anObject
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlScrollFlingerState >> didScroll [
 	^ hResult isZero not or: [ vResult isZero not ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> hResult [
 	^ hResult
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> hResult: anObject [
 	hResult := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> overscrollX [
 	^ overscrollX
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> overscrollX: anObject [
 	overscrollX := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> overscrollY [
 	^ overscrollY
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> overscrollY: anObject [
 	overscrollY := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> vResult [
 	^ vResult
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> vResult: anObject [
 	vResult := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> x [
 	^ x
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> x: anObject [
 	x := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> y [
 	^ y
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScrollFlingerState >> y: anObject [
 	y := anObject
 ]

@@ -20,6 +20,7 @@ BlDevScripterStepHaltState >> isHalt [
 
 { #category : 'accessing' }
 BlDevScripterStepHaltState >> name [
-	<return: #String>
+	"Return the string representing the name of the receiver."
+
 	^ 'halt'
 ]

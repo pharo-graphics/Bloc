@@ -58,7 +58,6 @@ BlSubTextIterator >> doesAttributeEnd: anAttribute [
 { #category : #'iterator - testing' }
 BlSubTextIterator >> hasNext [
 	"Return true if there is a next text item (character) after a current position"
-	<return: #Boolean>
 
 	^ iterator hasNext
 ]

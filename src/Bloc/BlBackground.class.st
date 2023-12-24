@@ -24,7 +24,7 @@ Class {
 	#instVars : [
 		'opacity'
 	],
-	#category : 'Bloc-Basic-Background'
+	#category : #'Bloc-Basic-Background'
 }
 
 { #category : #builder }
@@ -61,8 +61,7 @@ BlBackground >> asBlBackground [
 
 { #category : #initialization }
 BlBackground >> defaultOpacity [
-	"By default background is completely opaque"
-	<return: #Number>
+	"By default background is completely opaque so it returns a float indicating it: 1.0"
 
 	^ 1.0
 ]
@@ -70,13 +69,12 @@ BlBackground >> defaultOpacity [
 { #category : #testing }
 BlBackground >> isColorBackground [
 
-	^ self isPaintBackground and: [ self paint isColorPaint  ]
+	^ self isPaintBackground and: [ self paint isColorPaint ]
 ]
 
 { #category : #testing }
 BlBackground >> isOpaque [
 	"Return true if the whole background is opaque"
-	<return: #Boolean>
 	
 	^ false
 ]
@@ -90,7 +88,6 @@ BlBackground >> isPaintBackground [
 { #category : #testing }
 BlBackground >> isTransparent [
 	"Return true if background is transparent and should not be rendered, false otherwise"
-	<return: #Boolean>
 
 	^ self subclassResponsibility
 ]
@@ -105,24 +102,19 @@ BlBackground >> matchExtent: anExtent [
 
 { #category : #accessing }
 BlBackground >> opacity [
-	<return: #Number>
+	"Return a float representing the opacity of the receiver. 1.0 meaning that it is opaque and 0 that it is fully transparent."
 
 	^ opacity ifNil: [ self defaultOpacity ]
 ]
 
 { #category : #accessing }
 BlBackground >> opacity: aNumber [
-
-	self
-		assert: [ aNumber between: 0.0 and: 1.0 ]
-		description: [ 'Opacity value must be within interval [0..1]' ].
+	"Opacity value must be within interval [0..1]. 1.0 meaning that the receiver is opaque."
 
 	opacity isNotNil
 		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
-
 	self opacity = aNumber
 		ifTrue: [ ^ self ].
-
 	opacity := aNumber
 ]
 

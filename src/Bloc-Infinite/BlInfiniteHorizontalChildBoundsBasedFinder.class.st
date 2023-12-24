@@ -1,30 +1,28 @@
 Class {
-	#name : 'BlInfiniteHorizontalChildBoundsBasedFinder',
-	#superclass : 'BlInfiniteChildBoundsBasedFinder',
-	#category : 'Bloc-Infinite-Layout',
-	#package : 'Bloc-Infinite',
-	#tag : 'Layout'
+	#name : #BlInfiniteHorizontalChildBoundsBasedFinder,
+	#superclass : #BlInfiniteChildBoundsBasedFinder,
+	#category : 'Bloc-Infinite-Layout'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteHorizontalChildBoundsBasedFinder >> childEndOf: anElement [
 	
 	^ (layout decoratedRight: anElement) + anElement margin right
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteHorizontalChildBoundsBasedFinder >> childStartOf: anElement [
 	
 	^ (layout decoratedLeft: anElement) - anElement margin left
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteHorizontalChildBoundsBasedFinder >> parentEnd [
 	
 	^ layout width - layout paddingRight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteHorizontalChildBoundsBasedFinder >> parentStart [
 	
 	^ layout paddingLeft

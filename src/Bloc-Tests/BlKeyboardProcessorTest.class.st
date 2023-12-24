@@ -1,16 +1,14 @@
 Class {
-	#name : 'BlKeyboardProcessorTest',
-	#superclass : 'TestCase',
+	#name : #BlKeyboardProcessorTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'processor',
 		'space'
 	],
-	#category : 'Bloc-Tests-Universe',
-	#package : 'Bloc-Tests',
-	#tag : 'Universe'
+	#category : 'Bloc-Tests-Universe'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlKeyboardProcessorTest >> setUp [
 
 	super setUp.
@@ -20,7 +18,7 @@ BlKeyboardProcessorTest >> setUp [
 	processor space: space
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlKeyboardProcessorTest >> tearDown [
 	super tearDown.
 	
@@ -28,7 +26,7 @@ BlKeyboardProcessorTest >> tearDown [
 	space := nil
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlKeyboardProcessorTest >> testProcessKeyDown [
 	| eventA |
 

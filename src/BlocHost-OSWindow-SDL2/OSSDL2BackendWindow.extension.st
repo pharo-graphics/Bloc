@@ -20,14 +20,12 @@ OSSDL2BackendWindow >> fullscreen [
 
 { #category : #'*BlocHost-OSWindow-SDL2' }
 OSSDL2BackendWindow >> maximized [
-	<return: #Boolean>
 
 	^ sdl2Window getFlags anyMask: SDL_WINDOW_MAXIMIZED
 ]
 
 { #category : #'*BlocHost-OSWindow-SDL2' }
 OSSDL2BackendWindow >> minimized [
-	<return: #Boolean>
 
 	^ sdl2Window getFlags anyMask: SDL_WINDOW_MINIMIZED
 ]

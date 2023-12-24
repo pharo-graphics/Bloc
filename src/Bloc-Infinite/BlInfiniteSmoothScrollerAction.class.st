@@ -3,8 +3,8 @@ I hold information about a smooth scroll request by a SmoothScroller.
 
 "
 Class {
-	#name : 'BlInfiniteSmoothScrollerAction',
-	#superclass : 'Object',
+	#name : #BlInfiniteSmoothScrollerAction,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -19,41 +19,39 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-Scroller',
-	#package : 'Bloc-Infinite',
-	#tag : 'Scroller'
+	#category : 'Bloc-Infinite-Scroller'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteSmoothScrollerAction >> deltaX [
 	^ deltaX
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteSmoothScrollerAction >> deltaX: aNumber [
 	isChanged := true.
 	deltaX := aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteSmoothScrollerAction >> deltaY [
 	^ deltaY
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteSmoothScrollerAction >> deltaY: aNumber [
 	isChanged := true.
 	deltaY := aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteSmoothScrollerAction >> duration [
 	<return: #Duration>
 
 	^ duration
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteSmoothScrollerAction >> duration: aDuration [
 	self
 		assert: [ aDuration isNumber not ]
@@ -63,7 +61,7 @@ BlInfiniteSmoothScrollerAction >> duration: aDuration [
 	duration := aDuration
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteSmoothScrollerAction >> hasDuration [
 	"Return true if duration is defined, false otherwise"
 	<return: #Boolean>
@@ -71,14 +69,14 @@ BlInfiniteSmoothScrollerAction >> hasDuration [
 	^ duration isNotNil
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteSmoothScrollerAction >> hasJumpTarget [
 	<return: #Boolean>
 
 	^ jumpPosition > 0
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteSmoothScrollerAction >> initialize [
 	super initialize.
 	
@@ -90,23 +88,23 @@ BlInfiniteSmoothScrollerAction >> initialize [
 	consecutiveUpdates := 0.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteSmoothScrollerAction >> interpolator [
 	^ interpolator
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteSmoothScrollerAction >> interpolator: anInterpolator [
 	isChanged := true.
 	interpolator := anInterpolator
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 BlInfiniteSmoothScrollerAction >> jumpTo: aPosition [
 	jumpPosition := aPosition
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 BlInfiniteSmoothScrollerAction >> runIfNecessaryOn: anInfiniteElement [
 
 	self hasJumpTarget
@@ -145,7 +143,7 @@ BlInfiniteSmoothScrollerAction >> runIfNecessaryOn: anInfiniteElement [
 	isChanged := false
 ]
 
-{ #category : 'update' }
+{ #category : #update }
 BlInfiniteSmoothScrollerAction >> update: aDistance duration: aDuration interpolator: anInterpolator [
 	"Update the action with given parameters"
 	self
@@ -159,7 +157,7 @@ BlInfiniteSmoothScrollerAction >> update: aDistance duration: aDuration interpol
 	isChanged := true
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlInfiniteSmoothScrollerAction >> validate [
 	"I am a class invariant"
 	(interpolator isNotNil and: [ duration <= 0 seconds ])

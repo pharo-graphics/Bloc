@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlScrollbarElement',
-	#superclass : 'BlElement',
+	#name : #BlScrollbarElement,
+	#superclass : #BlElement,
 	#instVars : [
 		'scrollable',
 		'thumb',
@@ -11,12 +11,10 @@ Class {
 		'thumbDragHandler',
 		'thumbDragStartHandler'
 	],
-	#category : 'Bloc-Infinite-Scrollable-Core',
-	#package : 'Bloc-Infinite',
-	#tag : 'Scrollable-Core'
+	#category : 'Bloc-Infinite-Scrollable-Core'
 }
 
-{ #category : 'api - scrollbar' }
+{ #category : #'api - scrollbar' }
 BlScrollbarElement >> attachTo: aTOBlScrollable [
 	"Attach me to a given scrollable element (any element that implements TOBlScrollable trait)"
 
@@ -26,25 +24,25 @@ BlScrollbarElement >> attachTo: aTOBlScrollable [
 	scrollable := aTOBlScrollable
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScrollbarElement >> defaultPullHandler [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScrollbarElement >> defaultThumbBackground [
 
 	^ Color gray
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScrollbarElement >> defaultTrackBackground [
 
 	^ Color black alpha: 0.25
 ]
 
-{ #category : 'api - scrollbar' }
+{ #category : #'api - scrollbar' }
 BlScrollbarElement >> detach [
 	"Detach me from a scrollable element"
 
@@ -53,7 +51,7 @@ BlScrollbarElement >> detach [
 	self detachFrom: scrollable
 ]
 
-{ #category : 'api - scrollbar' }
+{ #category : #'api - scrollbar' }
 BlScrollbarElement >> detachFrom: aTOBlScrollable [
 	"Detach me from a given scrollable element (any element that implements TOBlScrollable trait)"
 
@@ -61,7 +59,7 @@ BlScrollbarElement >> detachFrom: aTOBlScrollable [
 	scrollable := nil
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScrollbarElement >> initialize [
 
 	super initialize.
@@ -90,33 +88,33 @@ BlScrollbarElement >> initialize [
 	self thumb: self newDefaultThumb
 ]
 
-{ #category : 'private - scrolling' }
+{ #category : #'private - scrolling' }
 BlScrollbarElement >> isAttachedToScrollable [
 
 	^ scrollable isNotNil
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScrollbarElement >> newDefaultThumb [
 	"Answer a `BlElement` that represents the default thumb."
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScrollbarElement >> newDefaultTrack [
 	"Answer a `BlElement` that represents the default track."
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : 'private - scrolling' }
+{ #category : #'private - scrolling' }
 BlScrollbarElement >> onDraggedThumbBy: aPoint [
 
 	self subclassResponsibility
 ]
 
-{ #category : 'private - thumb' }
+{ #category : #'private - thumb' }
 BlScrollbarElement >> registerThumb: anElement [
 
 	anElement
@@ -125,7 +123,7 @@ BlScrollbarElement >> registerThumb: anElement [
 		addEventHandler: thumbDragHandler
 ]
 
-{ #category : 'private - scrolling' }
+{ #category : #'private - scrolling' }
 BlScrollbarElement >> scrollableDeltaFromThumbDelta: thumbDelta range: scrollRange length: scrollbarLength [
 
 	| result |
@@ -140,13 +138,13 @@ BlScrollbarElement >> scrollableDeltaFromThumbDelta: thumbDelta range: scrollRan
 	^ result
 ]
 
-{ #category : 'api - scrollbar' }
+{ #category : #'api - scrollbar' }
 BlScrollbarElement >> thumb [
 
 	^ thumb
 ]
 
-{ #category : 'api - scrollbar' }
+{ #category : #'api - scrollbar' }
 BlScrollbarElement >> thumb: anElement [
 	
 	thumb
@@ -159,13 +157,13 @@ BlScrollbarElement >> thumb: anElement [
 	self registerThumb: thumb
 ]
 
-{ #category : 'api - scrollbar' }
+{ #category : #'api - scrollbar' }
 BlScrollbarElement >> track [
 
 	^ track
 ]
 
-{ #category : 'api - scrollbar' }
+{ #category : #'api - scrollbar' }
 BlScrollbarElement >> track: anElement [
 	
 	track
@@ -175,7 +173,7 @@ BlScrollbarElement >> track: anElement [
 	track := anElement
 ]
 
-{ #category : 'private - thumb' }
+{ #category : #'private - thumb' }
 BlScrollbarElement >> unregisterThumb: anElement [
 
 	anElement
@@ -184,7 +182,7 @@ BlScrollbarElement >> unregisterThumb: anElement [
 		removeEventHandler: thumbDragHandler
 ]
 
-{ #category : 'private - scrolling' }
+{ #category : #'private - scrolling' }
 BlScrollbarElement >> updateThumbPosition [
 
 	self subclassResponsibility

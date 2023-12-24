@@ -1,18 +1,16 @@
 Class {
-	#name : 'BlSmoothScroller',
-	#superclass : 'Object',
+	#name : #BlSmoothScroller,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'isRunning',
 		'pendingInitialRun'
 	],
-	#category : 'Bloc-Infinite-Scrollable-Core',
-	#package : 'Bloc-Infinite',
-	#tag : 'Scrollable-Core'
+	#category : 'Bloc-Infinite-Scrollable-Core'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlSmoothScroller >> initialize [
 	super initialize.
 	
@@ -20,17 +18,17 @@ BlSmoothScroller >> initialize [
 	pendingInitialRun := true
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BlSmoothScroller >> isPendingInitialRun [
 	^ pendingInitialRun
 ]
 
-{ #category : 'api - testing' }
+{ #category : #'api - testing' }
 BlSmoothScroller >> isRunning [
 	^ isRunning
 ]
 
-{ #category : 'api - scrolling' }
+{ #category : #'api - scrolling' }
 BlSmoothScroller >> scrollBy: aPoint [
 	self subclassResponsibility
 ]

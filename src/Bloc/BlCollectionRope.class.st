@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'collection'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #'instance creation' }
@@ -150,7 +150,6 @@ BlCollectionRope >> delete: aStart to: anEnd [
 BlCollectionRope >> depth [
 	"Return the max tree height of this rope (composition depth).
 	Collection rope is a leaf in a composition tree => depth is always 1"
-	<return: #Number>
 
 	^ 1
 ]
@@ -221,7 +220,6 @@ BlCollectionRope >> insertItems: aCollection at: anIndex [
 BlCollectionRope >> isLeaf [
 	"Collection rope can not contain other ropes (even if my collection consists of ropes,
 	we don't count them and don't take into account such case)"
-	<return: #Boolean>
 	
 	^ true
 ]

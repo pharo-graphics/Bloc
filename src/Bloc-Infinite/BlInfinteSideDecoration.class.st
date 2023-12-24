@@ -1,17 +1,15 @@
 Class {
-	#name : 'BlInfinteSideDecoration',
-	#superclass : 'BlInfiniteDecoration',
-	#category : 'Bloc-Infinite-Core',
-	#package : 'Bloc-Infinite',
-	#tag : 'Core'
+	#name : #BlInfinteSideDecoration,
+	#superclass : #BlInfiniteDecoration,
+	#category : 'Bloc-Infinite-Core'
 }
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfinteSideDecoration >> gap [
 	^ 0
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfinteSideDecoration >> requiredWidth [
 	^ self subclassResponsibility 
 ]

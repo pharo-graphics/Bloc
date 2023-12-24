@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'opacity'
 	],
-	#category : 'Bloc-Basic-Background'
+	#category : #'Bloc-Basic-Background'
 }
 
 { #category : #building }
@@ -25,7 +25,6 @@ BlBackgroundBuilder >> initialize [
 
 { #category : #building }
 BlBackgroundBuilder >> isOpaque [
-	<return: #Boolean>
 
 	^ self opacity closeTo: 1
 ]

@@ -47,8 +47,7 @@ BlMorphicHostSpace >> cursor: aCursor [
 
 { #category : #'host space - geometry' }
 BlMorphicHostSpace >> densityDpi [
-	"Return the screen density expressed as dots-per-inch"
-	<return: #Number>
+	"Return the screen density expressed as dots-per-inch (a float)"
 	
 	^ 96.0
 ]

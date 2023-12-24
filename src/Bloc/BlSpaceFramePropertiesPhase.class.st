@@ -1,12 +1,12 @@
 Class {
 	#name : #BlSpaceFramePropertiesPhase,
 	#superclass : #BlSpaceFramePhase,
-	#category : 'Bloc-Space - Frame'
+	#category : #'Bloc-Space - Frame'
 }
 
 { #category : #accessing }
 BlSpaceFramePropertiesPhase >> name [
-	<return: #String>
+	"Return the string representing the name of the receiver."
 	
 	^ 'Properties'
 ]

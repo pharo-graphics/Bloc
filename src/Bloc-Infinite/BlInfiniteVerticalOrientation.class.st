@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlInfiniteVerticalOrientation',
-	#superclass : 'BlInfiniteLayoutOrientation',
-	#category : 'Bloc-Infinite-Layout',
-	#package : 'Bloc-Infinite',
-	#tag : 'Layout'
+	#name : #BlInfiniteVerticalOrientation,
+	#superclass : #BlInfiniteLayoutOrientation,
+	#category : #'Bloc-Infinite-Layout'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteVerticalOrientation >> canScrollDown: anInfiniteElement [
 	"Return true if an infinite element can be scrolled down"
 	<return: #Boolean>	
@@ -22,10 +20,10 @@ BlInfiniteVerticalOrientation >> canScrollDown: anInfiniteElement [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteVerticalOrientation >> canScrollUp: anInfiniteElement [
 	"Return true if an infinite element can be scrolled up"
-	<return: #Boolean>	
+	
 	| aFirstChild |
 
 	aFirstChild := anInfiniteElement layout childAtPosition: 1.
@@ -38,76 +36,76 @@ BlInfiniteVerticalOrientation >> canScrollUp: anInfiniteElement [
 	^ false
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteVerticalOrientation >> decoratedEnd: anElement [
 	^ (self layout decoratedBottom: anElement) + anElement constraints margin bottom
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteVerticalOrientation >> decoratedEndInParent: anElement [
 
 	^ (self layout boundsInParent: anElement includeDecoration: true) bottom
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteVerticalOrientation >> decoratedMeasurement: anElement [
 	^ (self layout decoratedMeasuredHeight: anElement) + anElement constraints margin height
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteVerticalOrientation >> decoratedMeasurementInOther: anElement [
 	^ (self layout decoratedMeasuredWidth: anElement) + anElement constraints margin width
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteVerticalOrientation >> decoratedStart: anElement [
 	^ (self layout decoratedTop: anElement) - anElement constraints margin top
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteVerticalOrientation >> decoratedStartInParent: anElement [
 
 	^ (self layout boundsInParent: anElement includeDecoration: true) top
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteVerticalOrientation >> end [
 	^ self layout height
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteVerticalOrientation >> endWithPadding [
 	^ self layout height - self layout paddingBottom
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteVerticalOrientation >> isHorizontal [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteVerticalOrientation >> isVertical [
 	^ true
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteVerticalOrientation >> maximumSpace [
-	<return: #Number>
+	"Return a number representing the maximum space. Here the maximum height."
 
 	^ self layout maximumHeight
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteVerticalOrientation >> measurementSpec [
 	^ self layout heightSpec
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteVerticalOrientation >> measurementSpecInOther [
 	^ self layout widthSpec
 ]
 
-{ #category : 'mouse handlers' }
+{ #category : #'mouse handlers' }
 BlInfiniteVerticalOrientation >> mouseWheelEvent: anEvent [
 	| dY anInfiniteElement isHorizontal |
 
@@ -130,27 +128,27 @@ BlInfiniteVerticalOrientation >> mouseWheelEvent: anEvent [
 	anEvent consumed: true.
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteVerticalOrientation >> moveChild: anElement by: aNumber [
 	anElement position: anElement position x @ (anElement position y + aNumber)
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteVerticalOrientation >> moveChildrenBy: aNumber [
 	self layout offsetChildrenVerticallyBy: aNumber
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteVerticalOrientation >> paddingEnd [
 	^ self layout paddingBottom
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteVerticalOrientation >> paddingStart [
 	^ self layout paddingTop
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteVerticalOrientation >> startWithPadding [
 	^ self layout paddingTop
 ]

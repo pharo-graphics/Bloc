@@ -45,7 +45,7 @@ BlDevScripterSelectorChildEventTarget >> printOn: aStream [
 
 { #category : 'accessing' }
 BlDevScripterSelectorChildEventTarget >> selector [
-	<return: #Symbol>
+	
 	^ selector
 ]
 

@@ -8,7 +8,7 @@ Class {
 
 { #category : 'testing' }
 BlDevScripterStepProperty >> isReference [
-	<return: #Boolean>
+
 	^ false
 ]
 

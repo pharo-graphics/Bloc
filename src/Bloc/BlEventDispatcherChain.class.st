@@ -11,7 +11,7 @@ Class {
 		'previous',
 		'dispatcher'
 	],
-	#category : 'Bloc-Events-Dispatcher'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #'instance creation' }
@@ -53,7 +53,6 @@ BlEventDispatcherChain >> first [
 
 { #category : #'private - testing' }
 BlEventDispatcherChain >> hasDispatcher [
-	<return: #Boolean>
 	
 	^ dispatcher isNotNil
 ]

@@ -3,13 +3,12 @@ I have been automatically converted and probably manually tweaked from BlEventEx
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlEventTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Tests',
-	#package : 'Bloc-Tests'
+	#name : #BlEventTest,
+	#superclass : #TestCase,
+	#category : 'Bloc-Tests'
 }
 
-{ #category : 'fixture' }
+{ #category : #fixture }
 BlEventTest >> simulateClickOnOverlapped [
 	"I simulate a click on the element which is overlapped by another element.
 	Since element above does not consume click events, one below should succesfully
@@ -49,7 +48,7 @@ BlEventTest >> simulateClickOnOverlapped [
 	^ container
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testBlueElement [
 
 	<sampleInstance>
@@ -57,7 +56,7 @@ BlEventTest >> testBlueElement [
 	^ BlElement new background: Color blue
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testChildConsumesEventWithHandler [
 
 	<sampleInstance>
@@ -87,7 +86,7 @@ BlEventTest >> testChildConsumesEventWithHandler [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testChildDoesNotConsumeEventWithHandler [
 
 	<sampleInstance>
@@ -118,14 +117,14 @@ BlEventTest >> testChildDoesNotConsumeEventWithHandler [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testCustomEvent [
 
 	<sampleInstance>
 	^ BlExampleCustomEvent new payload: 'Hello world!'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testCustomEventListener [
 
 	<sampleInstance>
@@ -134,14 +133,14 @@ BlEventTest >> testCustomEventListener [
 		  do: [ :aCustomEvent | aCustomEvent consumed: true ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testCustomEventTarget [
 
 	<sampleInstance>
 	^ BlExampleCustomEventTarget new
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testFireCustomEventWithCustomTarget [
 
 	<sampleInstance>
@@ -158,7 +157,7 @@ BlEventTest >> testFireCustomEventWithCustomTarget [
 	^ target
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testGrayElement [
 
 	<sampleInstance>
@@ -166,7 +165,7 @@ BlEventTest >> testGrayElement [
 	^ BlElement new background: Color veryVeryLightGray
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testParentWithEventFilter [
 
 	<sampleInstance>
@@ -196,7 +195,7 @@ BlEventTest >> testParentWithEventFilter [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testRedElement [
 
 	<sampleInstance>
@@ -204,7 +203,7 @@ BlEventTest >> testRedElement [
 	^ BlElement new background: Color red
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testSimulateClick [
 
 	<sampleInstance>
@@ -232,7 +231,7 @@ BlEventTest >> testSimulateClick [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testSimulateClickOnChildInDisabledParent [
 
 	<sampleInstance>
@@ -266,7 +265,7 @@ BlEventTest >> testSimulateClickOnChildInDisabledParent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testSimulateClickOnChildInParentPreventingChildren [
 
 	<sampleInstance>
@@ -317,7 +316,7 @@ BlEventTest >> testSimulateClickOnChildInParentPreventingChildren [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testSimulateClickOnChildInUnresponsiveParent [
 
 	<sampleInstance>
@@ -350,7 +349,7 @@ BlEventTest >> testSimulateClickOnChildInUnresponsiveParent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testSimulateClickOnTransformedAndRelocated [
 
 	<sampleInstance>
@@ -385,7 +384,7 @@ BlEventTest >> testSimulateClickOnTransformedAndRelocated [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testSimulateClickOnUnresponsiveOverlapped [
 	"I simulate a click on the element which is overlapped by another element
 	which is unresponsive to mouse events (e.g. transparent to mouse events).
@@ -430,7 +429,7 @@ BlEventTest >> testSimulateClickOnUnresponsiveOverlapped [
 	^ container
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testSimulateClickOutside [
 
 	<sampleInstance>
@@ -458,7 +457,7 @@ BlEventTest >> testSimulateClickOutside [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testSimulateMouseMoveInside [
 
 	<sampleInstance>
@@ -485,7 +484,7 @@ BlEventTest >> testSimulateMouseMoveInside [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlEventTest >> testSimulateMouseMoveOutside [
 
 	<sampleInstance>

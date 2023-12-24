@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlHorizontalScrollbarElement',
-	#superclass : 'BlScrollbarElement',
-	#category : 'Bloc-Infinite-Scrollable-Core',
-	#package : 'Bloc-Infinite',
-	#tag : 'Scrollable-Core'
+	#name : #BlHorizontalScrollbarElement,
+	#superclass : #BlScrollbarElement,
+	#category : 'Bloc-Infinite-Scrollable-Core'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlHorizontalScrollbarElement >> defaultPullHandler [
 
 	^ BlPullHandler new
@@ -15,7 +13,7 @@ BlHorizontalScrollbarElement >> defaultPullHandler [
 		  yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlHorizontalScrollbarElement >> initialize [
 
 	super initialize.
@@ -25,7 +23,7 @@ BlHorizontalScrollbarElement >> initialize [
 		c horizontal matchParent ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlHorizontalScrollbarElement >> newDefaultThumb [
 
 	^ BlElement new
@@ -37,7 +35,7 @@ BlHorizontalScrollbarElement >> newDefaultThumb [
 		  yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlHorizontalScrollbarElement >> newDefaultTrack [
 
 	^ BlElement new
@@ -49,7 +47,7 @@ BlHorizontalScrollbarElement >> newDefaultTrack [
 		  yourself
 ]
 
-{ #category : 'private - scrolling' }
+{ #category : #'private - scrolling' }
 BlHorizontalScrollbarElement >> onDraggedThumbBy: aPoint [
 
 	| scrollableDelta |
@@ -65,7 +63,7 @@ BlHorizontalScrollbarElement >> onDraggedThumbBy: aPoint [
 	dragPosition := aPoint
 ]
 
-{ #category : 'private - scrolling' }
+{ #category : #'private - scrolling' }
 BlHorizontalScrollbarElement >> updateThumbPosition [
 
 	| contentLength scrollOffset scrollExtent thumbWeight thumbLeft |
