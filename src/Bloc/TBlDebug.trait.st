@@ -8,7 +8,7 @@ I contain useful debug utility methods that can be enabled / disabled with:
 "
 Trait {
 	#name : #TBlDebug,
-	#category : 'Bloc-Utilities - Debugging'
+	#category : #'Bloc-Utilities - Debugging'
 }
 
 { #category : #'debug - asserting' }
@@ -34,7 +34,6 @@ TBlDebug classSide >> assert: aBlock description: aStringOrBlock [
 
 { #category : #'debug - asserting' }
 TBlDebug classSide >> assertionsEnabled [
-	<return: #Boolean>
 
 	^ Bloc assertionsEnabled
 ]

@@ -33,7 +33,6 @@ BlEmptyTextIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anEx
 { #category : #testing }
 BlEmptyTextIterator >> hasNext [
 	"Return true if there is a next text item (character) after a current position"
-	<return: #Boolean>
 	
 	^ false
 ]

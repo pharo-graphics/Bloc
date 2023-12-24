@@ -11,7 +11,7 @@ Class {
 		'localStates',
 		'inheritedStates'
 	],
-	#category : 'Bloc-Basic-State'
+	#category : #'Bloc-Basic-State'
 }
 
 { #category : #adding }
@@ -93,7 +93,6 @@ BlElementStates >> initialize [
 
 { #category : #testing }
 BlElementStates >> isDisabled [
-	<return: #Boolean>
 
 	^ self hasState: BlElementState disabled
 ]

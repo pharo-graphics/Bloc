@@ -13,7 +13,7 @@ Class {
 	#instVars : [
 		'referenceElement'
 	],
-	#category : 'Bloc-Basic-Bounds'
+	#category : #'Bloc-Basic-Bounds'
 }
 
 { #category : #converting }
@@ -46,7 +46,7 @@ BlElementBounds >> bottomLeft [
 
 { #category : #'geometry - accessing' }
 BlElementBounds >> bottomRight [
-	<return: #Point>
+	"Return the bottom right point of the receiver."
 
 	^ self right @ self bottom
 ]

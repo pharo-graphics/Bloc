@@ -98,7 +98,7 @@ BlGridLayoutSpec class >> start: aStart size: aSize alignment: anAlignment [
 
 { #category : #'instance creation' }
 BlGridLayoutSpec class >> start: aStart size: aSize alignment: anAlignment weight: aWeight [
-	<return: #BlGridLayoutSpec>
+	"Return a new BlGridLayoutSpec isntance configured based on the arguments."
 
 	 ^ self basicNew
 		setAlignment: anAlignment
@@ -191,7 +191,6 @@ BlGridLayoutSpec >> flexibility [
 
 { #category : #testing }
 BlGridLayoutSpec >> hasWeight [
-	<return: #Boolean>
 
 	^ (self weight closeTo: 0.0) not
 ]
@@ -220,7 +219,6 @@ BlGridLayoutSpec >> span [
 
 { #category : #accessing }
 BlGridLayoutSpec >> startDefined [
-	<return: #Boolean>
 
 	^ startDefined
 ]

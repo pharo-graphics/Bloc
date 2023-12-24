@@ -25,7 +25,7 @@ Class {
 	#classVars : [
 		'PreferableHandlerRegistryClass'
 	],
-	#category : 'Bloc-Events-Dispatcher'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #testing }
@@ -137,7 +137,7 @@ BlHandlerRegistry >> hasHandler: anEventHandler [
 { #category : #'api - testing' }
 BlHandlerRegistry >> isEmpty [
 	"Return true if registry is empty (there are no handlers), false otherwise"
-	<return: #Boolean>
+	
 
 	^ self numberOfHandlers isZero
 ]

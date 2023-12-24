@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlVerticalScrollbarElement',
-	#superclass : 'BlScrollbarElement',
-	#category : 'Bloc-Infinite-Scrollable-Core',
-	#package : 'Bloc-Infinite',
-	#tag : 'Scrollable-Core'
+	#name : #BlVerticalScrollbarElement,
+	#superclass : #BlScrollbarElement,
+	#category : 'Bloc-Infinite-Scrollable-Core'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlVerticalScrollbarElement >> defaultPullHandler [
 
 	^ BlPullHandler new
@@ -15,7 +13,7 @@ BlVerticalScrollbarElement >> defaultPullHandler [
 		  yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlVerticalScrollbarElement >> initialize [
 
 	super initialize.
@@ -25,7 +23,7 @@ BlVerticalScrollbarElement >> initialize [
 		c vertical matchParent ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlVerticalScrollbarElement >> newDefaultThumb [
 
 	^ BlElement new
@@ -37,7 +35,7 @@ BlVerticalScrollbarElement >> newDefaultThumb [
 		  yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlVerticalScrollbarElement >> newDefaultTrack [
 
 	^ BlElement new
@@ -49,7 +47,7 @@ BlVerticalScrollbarElement >> newDefaultTrack [
 		  yourself
 ]
 
-{ #category : 'private - scrolling' }
+{ #category : #'private - scrolling' }
 BlVerticalScrollbarElement >> onDraggedThumbBy: aPoint [
 
 	| scrollableDelta |
@@ -65,7 +63,7 @@ BlVerticalScrollbarElement >> onDraggedThumbBy: aPoint [
 	dragPosition := aPoint
 ]
 
-{ #category : 'private - scrolling' }
+{ #category : #'private - scrolling' }
 BlVerticalScrollbarElement >> updateThumbPosition [
 
 	| contentLength scrollOffset scrollExtent thumbWeight thumbTop |

@@ -179,6 +179,7 @@ BlFrameLayout >> measureParentNode: aParentNode [
 { #category : #private }
 BlFrameLayout >> measurementSpecFor: aChildNode parentExtent: aParentExtent [
 	<return: #BlExtentMeasurementSpec>
+	
 	| aParentWidth aParentHeight childWidthMeasureSpec childHeightMeasureSpec |
 
 	aParentWidth := aParentExtent x.

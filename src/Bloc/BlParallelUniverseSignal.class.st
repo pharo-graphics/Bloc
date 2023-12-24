@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'universeId'
 	],
-	#category : 'Bloc-Universe - Parallel'
+	#category : #'Bloc-Universe - Parallel'
 }
 
 { #category : #testing }
@@ -15,7 +15,6 @@ BlParallelUniverseSignal class >> isAbstract [
 { #category : #accessing }
 BlParallelUniverseSignal class >> isRepeatable [
 	"Return true if this signal is expected to be emitted regularly"
-	<return: #Boolean>
 
 	^ false
 ]

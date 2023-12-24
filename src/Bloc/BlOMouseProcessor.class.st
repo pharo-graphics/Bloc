@@ -21,7 +21,7 @@ Class {
 		'dragState',
 		'previousMouseDownEvent'
 	],
-	#category : 'Bloc-Space - Events'
+	#category : #'Bloc-Space - Events'
 }
 
 { #category : #accessing }
@@ -328,7 +328,6 @@ BlOMouseProcessor >> initialize [
 { #category : #testing }
 BlOMouseProcessor >> isDragging [
 	"Return true if drag and drop is in process, false otherwise"
-	<return: #Boolean>
 	
 	^ dndInProgress
 ]
@@ -568,6 +567,7 @@ BlOMouseProcessor >> subprocessDragEnterExitEvent: aMouseEvent [
 BlOMouseProcessor >> tryDragStart: aMouseEvent [
 	"Try to start a drag and return true if drag actually started, otherwise false"
 	<return: #Boolean>
+	
 	| aDragTarget aDragStartEvent |
 	
 	aDragTarget := aMouseEvent target.

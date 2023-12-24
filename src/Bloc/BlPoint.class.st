@@ -3,13 +3,12 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Basic-Math'
+	#category : #'Bloc-Basic-Math'
 }
 
 { #category : #comparing }
 BlPoint >> < aPoint [
 	"Answer whether the receiver is above and to the left of aPoint."
-	<return: #Boolean>
 	
 	^ self subclassResponsibility
 ]

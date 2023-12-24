@@ -16,7 +16,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-DataStructure - Rope'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #types }
@@ -192,7 +192,6 @@ BlRope >> delete: aStart to: anEnd [
 { #category : #'rope - accessing' }
 BlRope >> depth [
 	"Return the max tree height of this rope (composition depth)"
-	<return: #Number>
 
 	^ self subclassResponsibility
 ]
@@ -299,7 +298,6 @@ BlRope >> isConcatenation [
 { #category : #'rope - testing' }
 BlRope >> isEmpty [
 	"Return true if rope is empty, false otherwise"
-	<return: #Boolean>
 
 	^ self size isZero
 ]
@@ -371,6 +369,7 @@ BlRope >> replaceAll: aCollectionOfAssociations [
 	"Answer a copy of the receiver in which all occurrences of the collections as keys have been replaced by corresponding values.
 	I preserve text attributes"
 	<return: #BlRope>
+	
 	| theSortedReplacements aNewRope |
 
 	aCollectionOfAssociations

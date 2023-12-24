@@ -5,12 +5,12 @@ I make sure that a host space is valid and re-create it if needed
 Class {
 	#name : #BlSpaceFrameHostValidationPhase,
 	#superclass : #BlSpaceFramePhase,
-	#category : 'Bloc-Space - Frame'
+	#category : #'Bloc-Space - Frame'
 }
 
 { #category : #accessing }
 BlSpaceFrameHostValidationPhase >> name [
-	<return: #String>
+	"Return the string representing the name of the receiver."
 	
 	^ 'Host validation'
 ]

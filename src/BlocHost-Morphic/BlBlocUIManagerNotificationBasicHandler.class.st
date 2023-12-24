@@ -6,8 +6,8 @@ Class {
 
 { #category : #'api - accessing' }
 BlBlocUIManagerNotificationBasicHandler class >> priority [
-	<return: #Number>
-	"Higher number, higher priority"
+	"Return an integer indicating the priority of the publisher. The higher the number, the higher the priority"
+	
 	^ 1
 ]
 

@@ -15,14 +15,12 @@ infiniteElement dataSource
 
 "
 Class {
-	#name : 'BlInfiniteDataSourceChanged',
-	#superclass : 'BlInfiniteDataSourceEvent',
-	#category : 'Bloc-Infinite-Events',
-	#package : 'Bloc-Infinite',
-	#tag : 'Events'
+	#name : #BlInfiniteDataSourceChanged,
+	#superclass : #BlInfiniteDataSourceEvent,
+	#category : 'Bloc-Infinite-Events'
 }
 
-{ #category : 'sending' }
+{ #category : #sending }
 BlInfiniteDataSourceChanged >> sendTo: anObject [
 	anObject onChanged: self
 ]

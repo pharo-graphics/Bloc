@@ -82,8 +82,7 @@ BlMockedHostSpace >> defaultPhysicalSize [
 
 { #category : #'host space - geometry' }
 BlMockedHostSpace >> densityDpi [
-	"Return the screen density expressed as dots-per-inch"
-	<return: #Number>
+	"Return the screen density expressed as dots-per-inch (a float)"
 	
 	^ densityDpi
 ]

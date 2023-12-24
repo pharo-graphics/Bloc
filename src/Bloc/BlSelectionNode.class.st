@@ -16,7 +16,7 @@ Class {
 		'high',
 		'parent'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#category : #'Bloc-Utilities - Selection'
 }
 
 { #category : #'instance creation' }
@@ -67,7 +67,6 @@ BlSelectionNode >> children [
 { #category : #'tree - testing' }
 BlSelectionNode >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
-	<return: #Boolean>
 
 	anIndex > self high
 		ifTrue: [ ^ false ].
@@ -87,7 +86,6 @@ BlSelectionNode >> contains: anIndex [
 { #category : #'tree - testing' }
 BlSelectionNode >> containsIndex: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
-	<return: #Boolean>
 
 	anIndex > self high
 		ifTrue: [ ^ false ].

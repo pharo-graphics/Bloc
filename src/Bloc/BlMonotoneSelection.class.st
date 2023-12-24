@@ -11,7 +11,7 @@ Class {
 		'from',
 		'to'
 	],
-	#category : 'Bloc-Utilities - Selection'
+	#category : #'Bloc-Utilities - Selection'
 }
 
 { #category : #'instance creation' }
@@ -106,7 +106,6 @@ BlMonotoneSelection >> complement: aMonotoneTextSelection [
 BlMonotoneSelection >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise.
 	If selection is [0.. 1] both 0 and 1 are within this selection"
-	<return: #Boolean>
 	
 	^ self rangeIncludes: anIndex
 ]
@@ -115,7 +114,6 @@ BlMonotoneSelection >> contains: anIndex [
 BlMonotoneSelection >> containsIndex: anIndex [
 	"Return true if selection indices include a given index, false otherwise.
 	I am conceptually same as (self indices includes: anIndex)"
-	<return: #Boolean>
 	
 	^ anIndex > self from
 		and: [ anIndex <= self to ]
@@ -223,7 +221,6 @@ BlMonotoneSelection >> invariant [
 { #category : #testing }
 BlMonotoneSelection >> isEmpty [
 	"Return true if selection is empty, false otherwise"
-	<return: #Boolean>
 
 	^ self to <= self from
 ]

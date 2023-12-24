@@ -10,7 +10,7 @@ Class {
 		'attributes',
 		'rope'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #initialization }
@@ -207,7 +207,6 @@ BlAttributeRope >> isAttributed [
 { #category : #'rope - testing' }
 BlAttributeRope >> isEmpty [
 	"Attribute rope is empty then and only then when attributes and underlying rope are empty"
-	<return: #Boolean>
 
 	^ self attributes isEmpty and: [ self rope isEmpty ]
 ]

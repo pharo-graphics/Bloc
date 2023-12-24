@@ -27,6 +27,6 @@ BlDevScripterReference >> gtReferenceFor: aView [
 
 { #category : 'testing' }
 BlDevScripterReference >> isReference [
-	<return: #Boolean>
+
 	^ true
 ]

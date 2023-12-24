@@ -5,99 +5,97 @@ For performance and memory reasons I provide a unique instance of me to be share
 
 "
 Class {
-	#name : 'BlInfiniteDataSourceCommandType',
-	#superclass : 'Object',
+	#name : #BlInfiniteDataSourceCommandType,
+	#superclass : #Object,
 	#pools : [
 		'BlInfiniteConstants'
 	],
 	#classInstVars : [
 		'instance'
 	],
-	#category : 'Bloc-Infinite-DataSource',
-	#package : 'Bloc-Infinite',
-	#tag : 'DataSource'
+	#category : 'Bloc-Infinite-DataSource'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSourceCommandType class >> cleanUp [
 	super cleanUp.
 	
 	instance := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSourceCommandType class >> instance [
 	^ instance ifNil: [ instance := self new ]
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandType >> apply: aCommand in: anInfiniteElement [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandType >> apply: aCommand onPosition: aPosition [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandType >> continuous: aPosition start: start [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandType >> dispatch: aCommand toLayout: aLayout [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSourceCommandType >> elementHolderAt: aPosition in: anInfiniteElement [
 	<return: #BlElement or: nil>
 
 	^ anInfiniteElement findElementHolderForPosition: aPosition checkNew: true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteDataSourceCommandType >> isAdd [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteDataSourceCommandType >> isMove [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteDataSourceCommandType >> isRemove [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteDataSourceCommandType >> isUpdate [
 	^ false
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandType >> offsetPositions: aCommand in: anInfiniteElement [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandType >> positionMultiplier [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandType >> updateElementHoldersIn: anInfiniteElement command: aCommand [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandType >> updateElementHoldersIn: anInfiniteElement offset: offsetStart command: aCommand [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandType >> updatePosition: aPosition with: aCommand from: myCommand [
 	^ self subclassResponsibility
 ]

@@ -12,7 +12,7 @@ Class {
 	#instVars : [
 		'events'
 	],
-	#category : 'Bloc-Space - Events'
+	#category : #'Bloc-Space - Events'
 }
 
 { #category : #'adding / removing' }
@@ -45,9 +45,7 @@ BlKeyboardBuffer >> hasEvent: aKey [
 { #category : #testing }
 BlKeyboardBuffer >> hasExactlyAll: aCollectionOfKeys [
 	"Return true if the buffer has exactly a collection of given keys"
-	<return: #Boolean>
 
-	"see https://github.com/feenkcom/gtoolkit/issues/1578"
 	^ (events keys asSet reject: #isUnkownKey) = aCollectionOfKeys asSet
 ]
 
@@ -71,7 +69,6 @@ BlKeyboardBuffer >> isNotEmpty [
 { #category : #testing }
 BlKeyboardBuffer >> isPressed: aKey [
 	"Return true if a given key is pressed, false otherwise"
-	<return: #Boolean>
 
 	^ self hasEvent: aKey
 ]

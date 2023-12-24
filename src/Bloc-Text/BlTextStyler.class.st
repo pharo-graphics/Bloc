@@ -83,8 +83,8 @@ BlTextStyler >> privateStyle: aText [
 
 { #category : #styling }
 BlTextStyler >> style: aBlText [
-
-	<return: #BlText>
+	"Return the styled text based on the argument. Announced the styling."
+	
 	| anUnstyledText aStyledText |
 	" it is important style a copy because of the BlText announcer. In the copied BlText, the announcer will not be initialize and no announcement will be sent "
 	anUnstyledText := aBlText copy unstyle.
