@@ -65,7 +65,7 @@ Class {
 		'visuals',
 		'flags'
 	],
-	#category : 'Bloc-Basic'
+	#category : #'Bloc-Basic'
 }
 
 { #category : #'instance creation' }
@@ -2838,7 +2838,7 @@ BlElement >> onAddedToParent [
 BlElement >> onAddedToSceneGraph [
 	"Sent after one of my parents or I was added to scene graph, e.g. root element.
 	At this point #isAttachedToSceneGraph results in true.
-	Note: Always send onAddedToSceneGraph to super class if you override me!"
+	Note: Always send onAddedToSceneGraph to superclass if you override me!"
 
 	self
 		assert: [ self isAttachedToSceneGraph ]
@@ -2850,13 +2850,13 @@ BlElement >> onAddedToSceneGraph [
 { #category : #'hooks - children' }
 BlElement >> onChildAdded: anElement [
 	"I am sent after anElement was added to me as my direct child.
-	Note: Always send onChildAdded: to super class if you override me!"
+	Note: Always send onChildAdded: to superclass if you override me!"
 ]
 
 { #category : #'hooks - children' }
 BlElement >> onChildRemoved: anElement [
 	"I am sent after anElement was ramoved from me and is no longer my direct child.
-	Note: Always send onChildRemoved: to super class if you override me!"
+	Note: Always send onChildRemoved: to superclass if you override me!"
 ]
 
 { #category : #'children dispatching' }
@@ -2865,6 +2865,7 @@ BlElement >> onChildToBeRemoved: anElement [
 	
 	"at this point we should make sure that the focus is transfered to me (its parent) if the removed
 	child (or one of its children) had focus"
+	
 	(self isAttachedToSceneGraph and: [ self space hasFocus: anElement ])
 		ifTrue: [
 			| aPreviousFocusOwner |
@@ -2899,8 +2900,7 @@ BlElement >> onLayout: aBounds context: aBlElementBoundsUpdateContext [
 	"I am sent then and only then when my extent changed as the result of a layout"
 	"By default let layout strategy do the layouting job.
 	If needed override this method to do some additional actions.
-	@see BlLayoutStrategy>>#layout: self in: aBounds - override if
-	custom layout strategy is needed"
+	See `BlLayoutStrategy>>#layout: self in: aBounds` - override if custom layout strategy is needed"
 
 	self layout layout: self in: aBounds context: aBlElementBoundsUpdateContext
 ]

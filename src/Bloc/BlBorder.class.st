@@ -23,23 +23,25 @@ Class {
 	#classInstVars : [
 		'empty'
 	],
-	#category : 'Bloc-Basic-Border'
+	#category : #'Bloc-Basic-Border'
 }
 
 { #category : #'instance creation' }
 BlBorder class >> builder [
+
 	^ BlBorderBuilder new
 ]
 
 { #category : #cleanup }
 BlBorder class >> cleanUp [
+
 	super cleanUp.
-	
 	empty := nil
 ]
 
 { #category : #accessing }
 BlBorder class >> empty [
+
 	^ empty ifNil: [ empty := self paint: BlPaint transparent width: 0 ]
 ]
 

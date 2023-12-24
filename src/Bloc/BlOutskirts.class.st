@@ -9,7 +9,7 @@ Class {
 		'Inside',
 		'Outside'
 	],
-	#category : 'Bloc-Basic-Border'
+	#category : #'Bloc-Basic-Border'
 }
 
 { #category : #'predefined instances' }
@@ -59,7 +59,6 @@ BlOutskirts >> strokedBounds: aBlBounds of: anElement [
 BlOutskirts >> wantsLayerOn: anElement [
 	"Return true if background and border should be rendered on a separate layer,
 	false otherwise"
-	<return: #Boolean>
 	
 	^ self subclassResponsibility
 ]
