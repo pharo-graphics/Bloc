@@ -7,6 +7,12 @@ Class {
 	#category : #'Bloc-Theme'
 }
 
+{ #category : #testing }
+BlThemeElementProperty class >> isDeprecated [ 
+
+	^ true
+]
+
 { #category : #accessing }
 BlThemeElementProperty >> = anObject [
 	self == anObject

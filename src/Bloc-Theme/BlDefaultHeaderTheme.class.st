@@ -11,6 +11,12 @@ Class {
 	#category : #'Bloc-Theme'
 }
 
+{ #category : #initialization }
+BlDefaultHeaderTheme class >> isDeprecated [ 
+
+	^ true
+]
+
 { #category : #accessing }
 BlDefaultHeaderTheme >> defaultBackgroundColor [
 	^ defaultBackgroundColor

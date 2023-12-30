@@ -38,6 +38,12 @@ BlTheme class >> default: aTheme [
 	default := aTheme
 ]
 
+{ #category : #initialization }
+BlTheme class >> isDeprecated [ 
+
+	^ true
+]
+
 { #category : #accessing }
 BlTheme class >> resetDefault [
 	<script>

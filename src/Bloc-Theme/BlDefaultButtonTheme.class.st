@@ -19,6 +19,12 @@ Class {
 	#category : #'Bloc-Theme'
 }
 
+{ #category : #initialization }
+BlDefaultButtonTheme class >> isDeprecated [ 
+
+	^ true
+]
+
 { #category : #accessing }
 BlDefaultButtonTheme >> defaultBackgroundColor [
 	^ defaultBackgroundColor

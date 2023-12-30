@@ -2,6 +2,9 @@ Extension { #name : #BlElement }
 
 { #category : #'*Bloc-Theme' }
 BlElement >> theme [
+
+	self deprecated: 'To be removed'.
+
 	^ self userData
 		at: #BlTheme
 		ifAbsent: [ self hasParent
@@ -11,6 +14,9 @@ BlElement >> theme [
 
 { #category : #'*Bloc-Theme' }
 BlElement >> theme: aTheme [
+
+	self deprecated: 'To be removed'.
+
 	self userData at: #BlTheme put: aTheme.
 	self properties
 		addProperty:

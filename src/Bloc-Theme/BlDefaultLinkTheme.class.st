@@ -8,6 +8,12 @@ Class {
 	#category : #'Bloc-Theme'
 }
 
+{ #category : #initialization }
+BlDefaultLinkTheme class >> isDeprecated [ 
+
+	^ true
+]
+
 { #category : #accessing }
 BlDefaultLinkTheme >> color [
 	^ color

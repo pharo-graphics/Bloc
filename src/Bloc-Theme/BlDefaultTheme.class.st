@@ -14,6 +14,12 @@ Class {
 	#category : #'Bloc-Theme'
 }
 
+{ #category : #initialization }
+BlDefaultTheme class >> isDeprecated [ 
+
+	^ true
+]
+
 { #category : #accessing }
 BlDefaultTheme >> button [
 	^ button

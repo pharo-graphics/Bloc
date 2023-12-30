@@ -14,6 +14,12 @@ Class {
 	#category : #'Bloc-Theme'
 }
 
+{ #category : #initialization }
+BlDefaultDividerTheme class >> isDeprecated [ 
+
+	^ true
+]
+
 { #category : #accessing }
 BlDefaultDividerTheme >> defaultBackgroundColor [
 	^ defaultBackgroundColor

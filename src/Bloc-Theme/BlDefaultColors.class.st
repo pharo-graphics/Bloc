@@ -511,6 +511,12 @@ BlDefaultColors class >> initialize [
 	LinkWithErrorColor := Color fromHexString: #cf1322.
 ]
 
+{ #category : #testing }
+BlDefaultColors class >> isDeprecated [ 
+
+	^ true
+]
+
 { #category : #accessing }
 BlDefaultColors class >> lightBorderColor [
 	^ LightBorderColor
