@@ -917,7 +917,7 @@ BlRBTextStyler >> privateStyle: aText [
 		            ifFalse: [ classOrMetaClass compiler ].
 	ast := compiler
 		       source: aText asString;
-		       isScripting: self isForWorkspace;
+		       "isScripting: self isForWorkspace;"
 		       options:
 			       #( #+ optionParseErrors #+ optionSkipSemanticWarnings );
 		       requestor: workspace;
