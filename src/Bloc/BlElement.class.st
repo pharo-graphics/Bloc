@@ -1164,6 +1164,12 @@ BlElement >> defaultErrorHandler [
 ]
 
 { #category : #initialization }
+BlElement >> defaultEventDispatcherClass [
+
+	^ BlElementEventDispatcher
+]
+
+{ #category : #initialization }
 BlElement >> defaultFocusability [
 	<return: #BlFocusability>
 
@@ -2059,7 +2065,8 @@ BlElement >> initialize [
 	bounds := BlElementLocalBounds new referenceElement: self.
 	measuredBounds := BlElementLocalBounds new referenceElement: self.
 
-	eventDispatcher := BlElementEventDispatcher on: self.
+	self initializeEventDispatcher.
+	
 	constraints := self defaultLayoutCommonConstraints.
 	self resetChildrenArray.
 
@@ -2078,6 +2085,12 @@ BlElement >> initialize [
 
 	taskQueue := BlTaskQueue new.
 	errorHandler := self defaultErrorHandler
+]
+
+{ #category : #initialization }
+BlElement >> initializeEventDispatcher [
+ 
+	eventDispatcher := self newEventDispatcher
 ]
 
 { #category : #'geometry bounds' }
@@ -2741,6 +2754,12 @@ BlElement >> needsPropertiesComputation [
 { #category : #'api - style' }
 BlElement >> needsStyle [
 	^ self styles needsStyle
+]
+
+{ #category : #initialization }
+BlElement >> newEventDispatcher [
+
+	^ self defaultEventDispatcherClass on: self
 ]
 
 { #category : #converting }
