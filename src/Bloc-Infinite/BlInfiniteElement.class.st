@@ -846,7 +846,9 @@ BlInfiniteElement >> initializeChildrenManager [
 
 { #category : #initialization }
 BlInfiniteElement >> initializeDataSource [
+
 	dataSource := self defaultDataSource.
+	dataSource onAttached: self.
 	dataSourceObserver := self defaultDataSourceObserver on: self.
 	dataSource addEventHandler: dataSourceObserver.
 	dataSourceManager := self defaultDataSourceManager
