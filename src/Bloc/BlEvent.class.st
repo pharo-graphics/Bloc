@@ -167,6 +167,12 @@ BlEvent >> copyFrom: anEvent [
 	consumed := false
 ]
 
+{ #category : #copying }
+BlEvent >> copySharedStatesFrom: anEvent [
+
+	" Update the receiver state from copied event after the copied event has been dispatched "
+]
+
 { #category : #'api - accessing' }
 BlEvent >> currentTarget [
 	"Identifies the current target for the event, as the event traverses the scene graph.
@@ -340,11 +346,6 @@ BlEvent >> newCopyFor: aTarget [
 		copyFrom: self;
 		target: aTarget;
 		yourself
-]
-
-{ #category : #copying }
-BlEvent >> postCopy [
-	super postCopy
 ]
 
 { #category : #sending }

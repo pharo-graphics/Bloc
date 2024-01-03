@@ -17,7 +17,7 @@ Class {
 		'handledEvents',
 		'shouldHandle'
 	],
-	#category : 'Bloc-Events-Handler'
+	#category : #'Bloc-Events-Handler'
 }
 
 { #category : #'instance creation' }
@@ -69,9 +69,11 @@ BlSharedEventDistributor >> dispatch: aBlEvent on: anElement [
 	shouldHandle := false.
 	[ anElement dispatchEvent: aNewEvent ] ensure: [
 		shouldHandle := true ].
-	"Update the original event correctly if the event copy is consumed.
-	This is necessary if event processing depends on #isConsumed (e.g. dnd processing)"
-	aNewEvent isConsumed ifTrue: [ aBlEvent consumed: true ]
+
+	"Update the original event from the copy .
+	This is necessary if event processing depends on #isConsumed 
+	as an example (e.g. dnd processing)"
+	aBlEvent copySharedStatesFrom: aNewEvent.
 ]
 
 { #category : #accessing }

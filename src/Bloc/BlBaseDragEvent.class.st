@@ -7,12 +7,20 @@ Class {
 		'dragboard',
 		'startButtons'
 	],
-	#category : 'Bloc-Events'
+	#category : #'Bloc-Events'
 }
 
 { #category : #converting }
 BlBaseDragEvent >> asDragEvent [
 	^ self
+]
+
+{ #category : #copying }
+BlBaseDragEvent >> copySharedStatesFrom: anEvent [
+
+	super copySharedStatesFrom: anEvent.
+	" Since the management of dnd relies on #isConsumed "
+	self consumed: anEvent isConsumed
 ]
 
 { #category : #accessing }
