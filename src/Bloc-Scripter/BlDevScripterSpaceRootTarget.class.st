@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlDevScripterSpaceRootTarget',
-	#superclass : 'BlDevScripterTarget',
-	#category : 'Bloc-Scripter-Scripter-Targets',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Targets'
+	#name : #BlDevScripterSpaceRootTarget,
+	#superclass : #BlDevScripterTarget,
+	#category : 'Bloc-Scripter-Scripter-Targets'
 }
 
-{ #category : 'searching' }
+{ #category : #searching }
 BlDevScripterSpaceRootTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 	self 
@@ -15,22 +13,22 @@ BlDevScripterSpaceRootTarget >> findTargetIn: anElement [
 	^ anElement space root
 ]
 
-{ #category : 'searching' }
+{ #category : #searching }
 BlDevScripterSpaceRootTarget >> findTargetStartingInScripter: aScripter [
 	^ aScripter space root
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterSpaceRootTarget >> identifier [
 	^ 'space root'
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlDevScripterSpaceRootTarget >> printOn: aStream [
 	aStream nextPutAll: 'Scripter Space Root'.
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BlDevScripterSpaceRootTarget >> updateUsing: aScripterEventTarget on: aStep [
 	| aNestedTarget |
 	aNestedTarget := BlDevScripterNestedChildEventTarget new.

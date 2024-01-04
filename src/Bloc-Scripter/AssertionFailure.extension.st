@@ -1,6 +1,6 @@
-Extension { #name : 'AssertionFailure' }
+Extension { #name : #AssertionFailure }
 
-{ #category : '*Bloc-Scripter' }
+{ #category : #'*Bloc-Scripter' }
 AssertionFailure >> passWithScripter: aScripter [
 	BlDevScripterAssertionFailure new
 		scripter: aScripter;

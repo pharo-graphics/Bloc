@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlDevScripterStepExecutorStepActivity',
-	#superclass : 'Object',
-	#category : 'Bloc-Scripter-Scripter-Executors',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Executors'
+	#name : #BlDevScripterStepExecutorStepActivity,
+	#superclass : #Object,
+	#category : 'Bloc-Scripter-Scripter-Executors'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterStepExecutorStepActivity class >> debugFileNameFor: aStep do: aBlock [
 	aStep reference definitionDo: [ :aCompiledMethod |
 		| aStepDirectory aSafeSelectorName aFileName |
@@ -20,12 +18,12 @@ BlDevScripterStepExecutorStepActivity class >> debugFileNameFor: aStep do: aBloc
 			value: aFileName ]
 ]
 
-{ #category : 'execution' }
+{ #category : #execution }
 BlDevScripterStepExecutorStepActivity >> executePostPlayOnStep: aStep executor: anExecutor [
 	
 ]
 
-{ #category : 'execution' }
+{ #category : #execution }
 BlDevScripterStepExecutorStepActivity >> executePrePlayOnStep: aStep executor: anExecutor [
 	
 ]

@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlDevScripterInteractionStep',
-	#superclass : 'BlDevScripterTargetedStep',
-	#category : 'Bloc-Scripter-Scripter-Steps',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Steps'
+	#name : #BlDevScripterInteractionStep,
+	#superclass : #BlDevScripterTargetedStep,
+	#category : 'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevScripterInteractionStep >> initialize [
 	super initialize.
 	

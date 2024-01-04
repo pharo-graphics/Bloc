@@ -45,7 +45,7 @@ BlAnimationExamplesTest class >> ballsAnim [
 				alp }.
 		els add: el ].
 
-	space := BlOSpace new.
+	space := BlSpace new.
 	space root addChildren: els.
 	space show.
 
@@ -86,7 +86,7 @@ BlAnimationExamplesTest class >> sequential [
 		           position: 100 @ 100.
 	element addAnimation: sequential.
 
-	space := BlOSpace new.
+	space := BlSpace new.
 	space root addChild: element.
 	space show
 ]
@@ -1210,7 +1210,7 @@ BlAnimationExamplesTest >> test_4_1_sequential_first_step_halfOfDuration [
 		equals: self exampleDate + self exampleDelay.
 
 	self assert: aFirstAnimation loops equals: self firstSequentialLoops.
-	self assert: aFirstAnimation repeats equals: 0.
+	self assert: aFirstAnimation loopCount equals: 0.
 	self assert: aFirstAnimation delay equals: 0 seconds.
 
 	aSecondAnimation := aSequentialAnimation animations second.

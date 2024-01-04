@@ -24,30 +24,28 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : 'BlDevScripterAsTarget',
-	#superclass : 'BlDevScripterTarget',
-	#category : 'Bloc-Scripter-Scripter-Targets',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Targets'
+	#name : #BlDevScripterAsTarget,
+	#superclass : #BlDevScripterTarget,
+	#category : 'Bloc-Scripter-Scripter-Targets'
 }
 
-{ #category : 'searching' }
+{ #category : #searching }
 BlDevScripterAsTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 	AssertionFailure signal: 'Scripter cannot be accessed from an element'
 ]
 
-{ #category : 'searching' }
+{ #category : #searching }
 BlDevScripterAsTarget >> findTargetStartingInScripter: aScripter [
 	^ aScripter
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterAsTarget >> identifier [
 	^ 'model'
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlDevScripterAsTarget >> printOn: aStream [
 	aStream nextPutAll: 'Scripter Model'.
 ]

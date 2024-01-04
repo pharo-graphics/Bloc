@@ -87,7 +87,7 @@ BlSpaceExamplesMigratedTest >> testEmptySpace [
 
 	<sampleInstance>
 	| aSpace |
-	aSpace := BlOSpace new.
+	aSpace := BlSpace new.
 	self assert: aSpace session equals: Smalltalk session.
 	self assert: aSpace root hasChildren not.
 	self deny: aSpace hasDirtyElements.

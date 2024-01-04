@@ -1,15 +1,13 @@
 Class {
-	#name : 'BlDevScripterTextAttributesAtTarget',
-	#superclass : 'BlDevScripterEventTarget',
+	#name : #BlDevScripterTextAttributesAtTarget,
+	#superclass : #BlDevScripterEventTarget,
 	#instVars : [
 		'index'
 	],
-	#category : 'Bloc-Scripter-Scripter-Targets',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Targets'
+	#category : 'Bloc-Scripter-Scripter-Targets'
 }
 
-{ #category : 'searching' }
+{ #category : #searching }
 BlDevScripterTextAttributesAtTarget >> findTargetIn: aText [
 	<return: #BlElement>
 
@@ -19,18 +17,18 @@ BlDevScripterTextAttributesAtTarget >> findTargetIn: aText [
 	^ aText attributesAt: self index
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterTextAttributesAtTarget >> identifier [
 	^ self index
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterTextAttributesAtTarget >> index [
 	<return: #Number>
 	^ index
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterTextAttributesAtTarget >> index: aNumber [
 	self 
 		assert: [ aNumber isInteger ]
@@ -41,7 +39,7 @@ BlDevScripterTextAttributesAtTarget >> index: aNumber [
 	index := aNumber
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlDevScripterTextAttributesAtTarget >> printOn: aStream [
 	self index ifNil: [ ^ super printOn: aStream ].
 	aStream 

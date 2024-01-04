@@ -3,15 +3,15 @@ I exemplify how Bloc handles errors in different parts of the BlElement such as 
 "
 Class {
 	#name : #BlErrorHandlingExamplesTest,
-	#superclass : #TestCase,
+	#superclass : #Object,
 	#category : #'Bloc-Examples-Errors'
 }
 
 { #category : #'instance creation' }
 BlErrorHandlingExamplesTest >> sceneWith: aFaultyElement [
 	"Create a visual scene with a faulty element embedded in it"
-	| aContainer aLeftChild aRightChild aSpace |
 
+	| aContainer aLeftChild aRightChild aSpace |
 	aContainer := BlElement new.
 	aContainer layout: BlLinearLayout horizontal.
 	aContainer constraintsDo: [ :c |
@@ -45,9 +45,9 @@ BlErrorHandlingExamplesTest >> sceneWith: aFaultyElement [
 
 	aContainer addChildren: { aLeftChild . aRightChild }.
 	
-	aSpace := BlOSpace new.
+	aSpace := BlSpace new.
 	aSpace host: BlMorphicWindowHost new.
-	aSpace addChild: aContainer.
+	aSpace root addChild: aContainer.
 	aSpace show.
 	aSpace pulse.
 	aSpace close.
@@ -59,8 +59,6 @@ BlErrorHandlingExamplesTest >> sceneWith: aFaultyElement [
 { #category : #'error - examples' }
 BlErrorHandlingExamplesTest >> testSceneElementThatHasBrokenDrawing [
 
-	<sampleInstance>
-	<noTest>
 	| aFaultyElement theErrors aSceneElement |
 	aFaultyElement := BlExampleElementWithBrokenDrawing new.
 	aFaultyElement background: Color gray.
@@ -74,16 +72,12 @@ BlErrorHandlingExamplesTest >> testSceneElementThatHasBrokenDrawing [
 		assert: theErrors first errorHandler
 		equals: aFaultyElement errorHandler.
 	self assert: theErrors first framePhase isDrawingPhase.
-	self assert: theErrors first element equals: aFaultyElement.
-
-	^ aSceneElement
+	self assert: theErrors first element equals: aFaultyElement
 ]
 
 { #category : #'error - examples' }
 BlErrorHandlingExamplesTest >> testSceneElementThatHasBrokenDrawingAndOnLayout [
 
-	<sampleInstance>
-	<noTest>
 	| aFaultyElement theErrors aSceneElement |
 	aFaultyElement := BlExampleElementWithBrokenDrawingAndOnLayout new.
 	aFaultyElement background: Color gray.
@@ -92,7 +86,6 @@ BlErrorHandlingExamplesTest >> testSceneElementThatHasBrokenDrawingAndOnLayout [
 
 	theErrors := aFaultyElement errorHandler errors.
 	self assert: theErrors size equals: 2.
-
 	self assert: (theErrors first error isKindOf: SubscriptOutOfBounds).
 	self
 		assert: theErrors first errorHandler
@@ -105,15 +98,12 @@ BlErrorHandlingExamplesTest >> testSceneElementThatHasBrokenDrawingAndOnLayout [
 		assert: theErrors second errorHandler
 		equals: aFaultyElement errorHandler.
 	self assert: theErrors second framePhase isDrawingPhase.
-	self assert: theErrors second element equals: aFaultyElement.
-
-	^ aSceneElement
+	self assert: theErrors second element equals: aFaultyElement
 ]
 
 { #category : #'error - examples' }
 BlErrorHandlingExamplesTest >> testSceneElementThatHasBrokenOnLayout [
 
-	<sampleInstance>
 	| aSceneElement aFaultyElement theErrors |
 	aFaultyElement := BlExampleElementWithBrokenOnLayout new.
 	aFaultyElement background: Color gray.
@@ -127,7 +117,5 @@ BlErrorHandlingExamplesTest >> testSceneElementThatHasBrokenOnLayout [
 		assert: theErrors first errorHandler
 		equals: aFaultyElement errorHandler.
 	self assert: theErrors first framePhase isLayoutPhase.
-	self assert: theErrors first element equals: aFaultyElement.
-
-	^ aSceneElement
+	self assert: theErrors first element equals: aFaultyElement
 ]

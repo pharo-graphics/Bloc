@@ -1,29 +1,27 @@
 Class {
-	#name : 'BlDevScripterFireEventStep',
-	#superclass : 'BlDevScripterInteractionStep',
+	#name : #BlDevScripterFireEventStep,
+	#superclass : #BlDevScripterInteractionStep,
 	#instVars : [
 		'event',
 		'position'
 	],
-	#category : 'Bloc-Scripter-Scripter-Steps',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Steps'
+	#category : 'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterFireEventStep >> defaultLabel [
 	^ self event
 		ifNotNil: [ :anEvent | 'Fire ', anEvent className ] 
 		ifNil: [ self ]
 ]
 
-{ #category : 'accessing - event' }
+{ #category : #'accessing - event' }
 BlDevScripterFireEventStep >> event [
 	<return: #BlEvent>
 	^ event
 ]
 
-{ #category : 'accessing - event' }
+{ #category : #'accessing - event' }
 BlDevScripterFireEventStep >> event: anEvent [
 	self 
 		assert: [ anEvent isKindOf: BlEvent ] 
@@ -31,48 +29,48 @@ BlDevScripterFireEventStep >> event: anEvent [
 	event := anEvent
 ]
 
-{ #category : 'accessing - event' }
+{ #category : #'accessing - event' }
 BlDevScripterFireEventStep >> eventOfClass: anEventClass [
 	self event: anEventClass new
 ]
 
-{ #category : 'accessing - position' }
+{ #category : #'accessing - position' }
 BlDevScripterFireEventStep >> inCenter [
 	self position: BlDevScripterEventCenteredPosition new
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevScripterFireEventStep >> initialize [
 	super initialize.
 	position := BlDevScripterEventPosition new.
 ]
 
-{ #category : 'accessing - event' }
+{ #category : #'accessing - event' }
 BlDevScripterFireEventStep >> mouseEnter [
 	self eventOfClass: BlMouseEnterEvent
 ]
 
-{ #category : 'accessing - event' }
+{ #category : #'accessing - event' }
 BlDevScripterFireEventStep >> mouseLeave [
 	self eventOfClass: BlMouseLeaveEvent
 ]
 
-{ #category : 'accessing - event' }
+{ #category : #'accessing - event' }
 BlDevScripterFireEventStep >> mouseOut [
 	self eventOfClass: BlMouseOutEvent
 ]
 
-{ #category : 'accessing - event' }
+{ #category : #'accessing - event' }
 BlDevScripterFireEventStep >> mouseOver [
 	self eventOfClass: BlMouseOverEvent
 ]
 
-{ #category : 'accessing - position' }
+{ #category : #'accessing - position' }
 BlDevScripterFireEventStep >> outside [
 	self position: BlDevScripterEventOutsidePosition new
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlDevScripterFireEventStep >> playOn: aScripter [
 	| aTarget |
 	aTarget := self target findTargetStartingInScripter: aScripter.
@@ -81,13 +79,13 @@ BlDevScripterFireEventStep >> playOn: aScripter [
 	aScripter pulse.
 ]
 
-{ #category : 'accessing - position' }
+{ #category : #'accessing - position' }
 BlDevScripterFireEventStep >> position [
 	<return: #BlDevScripterEventPosition>
 	^ position
 ]
 
-{ #category : 'accessing - position' }
+{ #category : #'accessing - position' }
 BlDevScripterFireEventStep >> position: aBlDevScripterEventPosition [
 	position := aBlDevScripterEventPosition
 ]

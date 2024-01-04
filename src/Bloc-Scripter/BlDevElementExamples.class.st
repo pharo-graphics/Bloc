@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlDevElementExamples',
-	#superclass : 'BlExampleTest',
-	#category : 'Bloc-Scripter-Examples',
-	#package : 'Bloc-Scripter',
-	#tag : 'Examples'
+	#name : #BlDevElementExamples,
+	#superclass : #BlExampleTest,
+	#category : 'Bloc-Scripter-Examples'
 }
 
-{ #category : 'examples - element' }
+{ #category : #'examples - element' }
 BlDevElementExamples >> container [
 
 	<sampleInstance>
@@ -20,7 +18,7 @@ BlDevElementExamples >> container [
 	^ anElement
 ]
 
-{ #category : 'examples - element' }
+{ #category : #'examples - element' }
 BlDevElementExamples >> containerWithRectangle [
 
 	<sampleInstance>
@@ -30,14 +28,14 @@ BlDevElementExamples >> containerWithRectangle [
 	^ anElement
 ]
 
-{ #category : 'examples - element' }
+{ #category : #'examples - element' }
 BlDevElementExamples >> element [
 
 	<sampleInstance>
 	^ BlElement new
 ]
 
-{ #category : 'examples - element' }
+{ #category : #'examples - element' }
 BlDevElementExamples >> rectangle [
 
 	<sampleInstance>

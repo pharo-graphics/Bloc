@@ -1,6 +1,6 @@
-Extension { #name : 'Color' }
+Extension { #name : #Color }
 
-{ #category : '*Bloc-Alexandrie-Tests' }
+{ #category : #'*Bloc-Alexandrie-Tests' }
 Color class >> random: aRandom [
 	"Return a random color that isn't too dark or under-saturated."
 

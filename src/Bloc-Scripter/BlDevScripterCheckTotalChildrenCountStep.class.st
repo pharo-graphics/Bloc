@@ -1,20 +1,18 @@
 Class {
-	#name : 'BlDevScripterCheckTotalChildrenCountStep',
-	#superclass : 'BlDevScripterCheckStep',
+	#name : #BlDevScripterCheckTotalChildrenCountStep,
+	#superclass : #BlDevScripterCheckStep,
 	#instVars : [
 		'totalChildrenCount'
 	],
-	#category : 'Bloc-Scripter-Scripter-Steps',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Steps'
+	#category : 'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCheckTotalChildrenCountStep >> defaultLabel [
 	^ 'Total Children'
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlDevScripterCheckTotalChildrenCountStep >> printOn: aStream [
 	super printOn: aStream.
 	aStream
@@ -22,17 +20,17 @@ BlDevScripterCheckTotalChildrenCountStep >> printOn: aStream [
 		nextPutAll: self totalChildrenCount asString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCheckTotalChildrenCountStep >> totalChildrenCount [
 	^ totalChildrenCount
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterCheckTotalChildrenCountStep >> totalChildrenCount: aNumber [
 	totalChildrenCount := aNumber
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlDevScripterCheckTotalChildrenCountStep >> validateOn: anElement [
 	self assert: anElement withAllChildrenBreadthFirst size - 1 equals: self totalChildrenCount
 ]
