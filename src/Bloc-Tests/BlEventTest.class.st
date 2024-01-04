@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlEventEx
 Class {
 	#name : #BlEventTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests'
+	#category : #'Bloc-Tests'
 }
 
 { #category : #fixture }
@@ -459,9 +459,8 @@ BlEventTest >> testSimulateClickOutside [
 
 { #category : #tests }
 BlEventTest >> testSimulateMouseMoveInside [
-
 	<sampleInstance>
-	<noTest>
+
 	| element mouseMove mouseEnter |
 	element := self testBlueElement.
 	element size: 100 @ 100.
