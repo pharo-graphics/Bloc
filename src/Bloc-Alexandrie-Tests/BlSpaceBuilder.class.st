@@ -175,9 +175,9 @@ BlSpaceBuilder >> newColorGenerator [
 	^ Generator
 		on: [ :generator |
 			| nextIndex |
-			nextIndex := 1.
-			[ generator yield: (randomColors at: nextIndex).
-			nextIndex := (nextIndex + 1) \\ randomColors size + 1 ] repeat ]
+			nextIndex := 0.
+			[ generator yield: (randomColors at: nextIndex + 1).
+			nextIndex := (nextIndex + 1) \\ randomColors size ] repeat ]
 ]
 
 { #category : #'instance creation' }
