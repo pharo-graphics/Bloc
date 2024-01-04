@@ -2,14 +2,12 @@
 My only purpose is creating a Form from a BlSpace, where each pixel tells what BlElement (or nil) would be hitted by the mouse pointer.
 "
 Class {
-	#name : 'BAHitFormFactory',
-	#superclass : 'Object',
-	#category : 'Bloc-Alexandrie-Tests-Utilities',
-	#package : 'Bloc-Alexandrie-Tests',
-	#tag : 'Utilities'
+	#name : #BAHitFormFactory,
+	#superclass : #Object,
+	#category : 'Bloc-Alexandrie-Tests-Utilities'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BAHitFormFactory class >> newFormFor: aSpace [
 
 	| allElements colors colorByElement aForm |
