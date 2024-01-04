@@ -1210,7 +1210,7 @@ BlAnimationExamplesTest >> test_4_1_sequential_first_step_halfOfDuration [
 		equals: self exampleDate + self exampleDelay.
 
 	self assert: aFirstAnimation loops equals: self firstSequentialLoops.
-	self assert: aFirstAnimation repeats equals: 0.
+	self assert: aFirstAnimation loopCount equals: 0.
 	self assert: aFirstAnimation delay equals: 0 seconds.
 
 	aSecondAnimation := aSequentialAnimation animations second.
