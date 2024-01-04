@@ -20,7 +20,7 @@ BlBaseDragEvent >> copySharedStatesFrom: anEvent [
 
 	super copySharedStatesFrom: anEvent.
 	" Since the management of dnd relies on #isConsumed "
-	self consumed: anEvent isConsumed
+	anEvent isConsumed ifTrue: [ self consumed: true ]
 ]
 
 { #category : #accessing }
