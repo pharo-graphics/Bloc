@@ -2,32 +2,30 @@
 I provide ${class:GtPhlowView|label=views}$ displaying ${class:BlDevScripter}$ information within an inspected ${class:Exception}$.
 "
 Trait {
-	#name : 'TBlDevScripterException',
+	#name : #TBlDevScripterException,
 	#instVars : [
 		'scripter',
 		'exception'
 	],
-	#category : 'Bloc-Scripter-Scripter-Exceptions',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Exceptions'
+	#category : 'Bloc-Scripter-Scripter-Exceptions'
 }
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 TBlDevScripterException >> exception [
 	^ exception
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 TBlDevScripterException >> exception: anObject [
 	exception := anObject
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 TBlDevScripterException >> passWithScripter: aScripter [
 	self pass
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 TBlDevScripterException >> printOn: aStream [
 	self exception ifNil: [ ^ super printOn: aStream ].
 	aStream
@@ -35,12 +33,12 @@ TBlDevScripterException >> printOn: aStream [
 		print: self exception
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 TBlDevScripterException >> scripter [
 	^ scripter
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 TBlDevScripterException >> scripter: anObject [
 	scripter := anObject
 ]

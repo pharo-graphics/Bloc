@@ -1,25 +1,23 @@
 Class {
-	#name : 'BlDevScripterNoReference',
-	#superclass : 'BlDevScripterReference',
+	#name : #BlDevScripterNoReference,
+	#superclass : #BlDevScripterReference,
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Scripter-Scripter-Properties',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Properties'
+	#category : 'Bloc-Scripter-Scripter-Properties'
 }
 
-{ #category : 'cleanup' }
+{ #category : #cleanup }
 BlDevScripterNoReference class >> cleanUp [
 	self resetUniqueInstance
 ]
 
-{ #category : 'cleanup' }
+{ #category : #cleanup }
 BlDevScripterNoReference class >> resetUniqueInstance [
 	uniqueInstance := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterNoReference class >> uniqueInstance [ 
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]

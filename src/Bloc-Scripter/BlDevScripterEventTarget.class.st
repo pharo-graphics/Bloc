@@ -1,23 +1,21 @@
 Class {
-	#name : 'BlDevScripterEventTarget',
-	#superclass : 'BlDevScripterTarget',
-	#category : 'Bloc-Scripter-Scripter-Targets',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Targets'
+	#name : #BlDevScripterEventTarget,
+	#superclass : #BlDevScripterTarget,
+	#category : 'Bloc-Scripter-Scripter-Targets'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlDevScripterEventTarget class >> isAbstract [
 	^ self name = #BlDevScripterEventTarget 
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlDevScripterEventTarget class >> matchesWithInput: anObject [
 	<return: #Boolean>
 	^ false
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BlDevScripterEventTarget class >> targetInstanceFor: anObject [
 	"I am used by ${class:BlDevScripterNestedChildEventTarget}$.
 	I return a subclass that handles given input."
@@ -27,7 +25,7 @@ BlDevScripterEventTarget class >> targetInstanceFor: anObject [
 	self error: 'Cannot find a suitable class for ', anObject printString.
 ]
 
-{ #category : 'updating' }
+{ #category : #updating }
 BlDevScripterEventTarget >> updateUsing: aScripterEventTarget on: aStep [
 	| aNestedTarget |
 	aNestedTarget := BlDevScripterNestedChildEventTarget new.

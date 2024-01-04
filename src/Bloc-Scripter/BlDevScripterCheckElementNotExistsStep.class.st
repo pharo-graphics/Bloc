@@ -1,15 +1,13 @@
 Class {
-	#name : 'BlDevScripterCheckElementNotExistsStep',
-	#superclass : 'BlDevScripterCheckStep',
+	#name : #BlDevScripterCheckElementNotExistsStep,
+	#superclass : #BlDevScripterCheckStep,
 	#instVars : [
 		'elementId'
 	],
-	#category : 'Bloc-Scripter-Scripter-Steps',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Steps'
+	#category : 'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlDevScripterCheckElementNotExistsStep >> playOn: aScripter [
 	| anElement |
 

@@ -1,42 +1,40 @@
 Class {
-	#name : 'BlDevScripterMouseMoveStep',
-	#superclass : 'BlDevScripterMouseStep',
+	#name : #BlDevScripterMouseMoveStep,
+	#superclass : #BlDevScripterMouseStep,
 	#instVars : [
 		'delta'
 	],
-	#category : 'Bloc-Scripter-Scripter-Steps',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Steps'
+	#category : 'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMouseMoveStep >> by: aPoint [
 	delta := aPoint
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMouseMoveStep >> defaultLabel [
 	^ 'Mouse move'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMouseMoveStep >> delta [
 	^ delta
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterMouseMoveStep >> delta: anObject [
 	delta := anObject
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlDevScripterMouseMoveStep >> initialize [
 	super initialize.
 	
 	delta := 0@0
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlDevScripterMouseMoveStep >> playOn: aScripter [
 	| anOldPositon aNewPosition |
 	

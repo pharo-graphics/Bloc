@@ -1,6 +1,6 @@
-Extension { #name : 'BlElement' }
+Extension { #name : #BlElement }
 
-{ #category : '*Bloc-Scripter' }
+{ #category : #'*Bloc-Scripter' }
 BlElement >> devScripterData [
 	<return: #BlDevScripterUserData>
 	self 

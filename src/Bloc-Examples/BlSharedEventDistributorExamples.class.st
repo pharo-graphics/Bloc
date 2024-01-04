@@ -123,7 +123,7 @@ BlSharedEventDistributorExamples >> testMouseEnterEventOneOutOfTwoElements [
 		when: BlMouseEnterEvent
 		do: [ aMouseEnterTwo := aMouseEnterTwo + 1 ].
 
-	BlOSpace simulateMouseMoveInside: anElementOne.
+	BlSpace simulateMouseMoveInside: anElementOne.
 
 	self assert: aMouseEnterOne equals: 1.
 	self assert: aMouseEnterTwo equals: 1.

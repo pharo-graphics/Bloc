@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlDevScripterFutureCheckStep',
-	#superclass : 'BlDevScripterCheckStep',
+	#name : #BlDevScripterFutureCheckStep,
+	#superclass : #BlDevScripterCheckStep,
 	#traits : 'TBlDevScripterCheckStep + TBlDevScripterCheckStepCreation + TBlDevScripterCompositeStepTarget',
 	#classTraits : 'TBlDevScripterCheckStep classTrait + TBlDevScripterCheckStepCreation classTrait + TBlDevScripterCompositeStepTarget classTrait',
 	#instVars : [
@@ -8,12 +8,10 @@ Class {
 		'hasCustomTarget',
 		'realStep'
 	],
-	#category : 'Bloc-Scripter-Scripter-Steps',
-	#package : 'Bloc-Scripter',
-	#tag : 'Scripter-Steps'
+	#category : 'Bloc-Scripter-Scripter-Steps'
 }
 
-{ #category : 'adding' }
+{ #category : #adding }
 BlDevScripterFutureCheckStep >> addStep: aScripterTask [
 	<return: #BlDevScripterStep>
 	self hasCustomLabel ifTrue: [ aScripterTask label: self label ].
@@ -22,59 +20,59 @@ BlDevScripterFutureCheckStep >> addStep: aScripterTask [
 	^ self parent addStep: aScripterTask.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterFutureCheckStep >> hasCustomTarget [
 	
 	^ hasCustomTarget
 ]
 
-{ #category : 'targets - accessing and updating' }
+{ #category : #'targets - accessing and updating' }
 BlDevScripterFutureCheckStep >> hasRealStep [
 	
 	^ realStep isNotNil
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDevScripterFutureCheckStep >> initialize [
 	super initialize.
 	hasCustomTarget := false.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterFutureCheckStep >> label: anObject [
 	self hasRealStep
 		ifFalse: [ super label: anObject ]
 		ifTrue: [ self realStep label: anObject ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterFutureCheckStep >> parent [
 	^ parent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterFutureCheckStep >> parent: anObject [
 	parent := anObject
 ]
 
-{ #category : 'targets - accessing and updating' }
+{ #category : #'targets - accessing and updating' }
 BlDevScripterFutureCheckStep >> previousTarget [
 	<return: #BlDevScripterEventTarget>
 	^ self parent previousTarget
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterFutureCheckStep >> realStep [
 	<return: #BlDevScripterStep>
 	^ realStep
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDevScripterFutureCheckStep >> realStep: aScripterTask [
 	realStep := aScripterTask
 ]
 
-{ #category : 'targets - accessing and updating' }
+{ #category : #'targets - accessing and updating' }
 BlDevScripterFutureCheckStep >> target: aScripterEventTarget [
 	self hasRealStep
 		ifFalse: [ 
@@ -84,7 +82,7 @@ BlDevScripterFutureCheckStep >> target: aScripterEventTarget [
 			self realStep target: aScripterEventTarget ]
 ]
 
-{ #category : 'targets - accessing and updating' }
+{ #category : #'targets - accessing and updating' }
 BlDevScripterFutureCheckStep >> updateTarget: aScripterEventTarget [
 	self hasRealStep 
 		ifFalse: [ super updateTarget: aScripterEventTarget ]
