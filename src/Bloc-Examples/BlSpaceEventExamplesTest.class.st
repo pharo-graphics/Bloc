@@ -10,16 +10,18 @@ Class {
 
 { #category : #'instance creation' }
 BlSpaceEventExamplesTest >> space [
-
 	<sampleInstance>
-	^ BlSpace new host: BlHeadlessHost new
+
+	^ BlSpace new
+		  host: BlHeadlessHost new;
+		  yourself
 ]
 
 { #category : #'event handling' }
 BlSpaceEventExamplesTest >> testIgnoreSpaceEventsAfterCloseRequest [
-
 	<sampleInstance>
-	<noTest>
+	<expectedFailure>
+
 	| aSpace |
 	aSpace := self space.
 	aSpace eventRecorder: BlMemoryEventRecorder new.
@@ -35,9 +37,9 @@ BlSpaceEventExamplesTest >> testIgnoreSpaceEventsAfterCloseRequest [
 
 { #category : #'show / close' }
 BlSpaceEventExamplesTest >> testSpaceClosed [
-
 	<sampleInstance>
-	<noTest>
+	<expectedFailure>
+
 	| aSpace spaceClosed |
 	spaceClosed := 0.
 
@@ -56,9 +58,9 @@ BlSpaceEventExamplesTest >> testSpaceClosed [
 
 { #category : #'show / close' }
 BlSpaceEventExamplesTest >> testSpaceDestroyed [
-
 	<sampleInstance>
-	<noTest>
+	<expectedFailure>
+
 	| aSpace events |
 	events := OrderedCollection new.
 
@@ -81,9 +83,9 @@ BlSpaceEventExamplesTest >> testSpaceDestroyed [
 
 { #category : #'show / close' }
 BlSpaceEventExamplesTest >> testSpaceShown [
-
 	<sampleInstance>
-	<noTest>
+	<expectedFailure>
+
 	| aSpace spaceShown |
 	spaceShown := 0.
 
