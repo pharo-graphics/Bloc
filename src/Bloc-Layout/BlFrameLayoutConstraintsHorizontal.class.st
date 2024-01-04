@@ -33,7 +33,7 @@ BlFrameLayoutConstraintsHorizontal >> alignLeft [
 BlFrameLayoutConstraintsHorizontal >> alignLeftAt: aUnitCoordinateNumber [
 	"Align the left of the element horizontally with a unit-coordinate inside of the parent"
 
-	alignment := BlHorizontalCoordinateStartAlignment new
+	alignment := BlHorizontalCoordinateLeftAlignment new
 		coordinate: aUnitCoordinateNumber;
 		relativeAlignment: BlElementAlignment horizontal start
 ]
@@ -52,7 +52,7 @@ BlFrameLayoutConstraintsHorizontal >> alignRight [
 BlFrameLayoutConstraintsHorizontal >> alignRightAt: aUnitCoordinateNumber [
 	"Align the right of the element horizontally with a unit-coordinate inside of the parent"
 
-	alignment := BlHorizontalCoordinateStartAlignment new
+	alignment := BlHorizontalCoordinateRightAlignment new
 		coordinate: aUnitCoordinateNumber;
 		relativeAlignment: BlElementAlignment horizontal end
 ]
