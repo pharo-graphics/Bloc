@@ -92,7 +92,7 @@ BlDevScripter >> element: anElement [
 	anElement addEventFilter: self eventHandler.
 	
 	anElement removeFromParent.
-	self space addChild: anElement.
+	self space root addChild: anElement.
 ]
 
 { #category : #'accessing - element' }
