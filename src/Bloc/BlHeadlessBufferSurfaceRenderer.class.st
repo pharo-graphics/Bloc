@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'thePixels'
 	],
-	#category : 'Bloc-Universe - Host Headless'
+	#category : #'Bloc-Universe - Host Headless'
 }
 
 { #category : #initialization }
@@ -15,7 +15,9 @@ BlHeadlessBufferSurfaceRenderer >> initializeForSurface: aSurface [
 	
 	aForm := Form extent: anExtent depth: 32.
 
-	thePixels := AeFFIUInt32Array newOf: aForm stride * aForm height.
+	thePixels := FFIExternalArray
+		newType: FFIUInt32
+		size: aForm stride * aForm height.
 
 	aSurface
 		buffer: thePixels getHandle;
