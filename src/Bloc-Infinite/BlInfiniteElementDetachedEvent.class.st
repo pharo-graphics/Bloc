@@ -17,7 +17,7 @@ Class {
 	#instVars : [
 		'element'
 	],
-	#category : 'Bloc-Infinite-Events'
+	#category : #'Bloc-Infinite-Events'
 }
 
 { #category : #'instance creation' }
@@ -35,4 +35,10 @@ BlInfiniteElementDetachedEvent >> element [
 { #category : #accessing }
 BlInfiniteElementDetachedEvent >> element: anObject [
 	element := anObject
+]
+
+{ #category : #sending }
+BlInfiniteElementDetachedEvent >> sendTo: anObject [
+
+	anObject infiniteElementDetachedEvent: self
 ]
