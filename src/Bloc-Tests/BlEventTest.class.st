@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlEventEx
 Class {
 	#name : #BlEventTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests'
+	#category : #'Bloc-Tests'
 }
 
 { #category : #fixture }
@@ -80,7 +80,7 @@ BlEventTest >> testChildConsumesEventWithHandler [
 
 	parent addChild: child.
 
-	BlOSpace simulateClickOn: child.
+	BlSpace simulateClickOn: child.
 	self assert: clicks equals: { Color blue } asOrderedCollection.
 
 	^ parent
@@ -189,7 +189,7 @@ BlEventTest >> testParentWithEventFilter [
 
 	parent addChild: child.
 
-	BlOSpace simulateClickOn: child.
+	BlSpace simulateClickOn: child.
 	self assert: clicks equals: { Color red } asOrderedCollection.
 
 	^ parent
@@ -256,7 +256,7 @@ BlEventTest >> testSimulateClickOnChildInDisabledParent [
 	red addEventHandlerOn: BlMouseUpEvent do: [ mouseUp := mouseUp + 1 ].
 	red addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
 
-	BlOSpace simulateClickOn: red.
+	BlSpace simulateClickOn: red.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -375,7 +375,7 @@ BlEventTest >> testSimulateClickOnTransformedAndRelocated [
 		do: [ mouseUp := mouseUp + 1 ].
 	element addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
 
-	BlOSpace simulateClickOn: element.
+	BlSpace simulateClickOn: element.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -420,7 +420,7 @@ BlEventTest >> testSimulateClickOnUnresponsiveOverlapped [
 	blue addEventHandlerOn: BlMouseUpEvent do: [ mouseUp := mouseUp + 1 ].
 	blue addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
 
-	BlOSpace simulateClickOn: blue.
+	BlSpace simulateClickOn: blue.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
