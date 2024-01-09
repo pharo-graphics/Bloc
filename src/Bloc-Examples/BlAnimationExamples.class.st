@@ -20,34 +20,34 @@ BlAnimationExamples class >> ballsAnim [
 	anims := OrderedCollection new.
 	els := OrderedCollection new.
 
-	(1 to: 100) do: [ :i |
-		| el tr alp ii |
-		ii := i % 25.
-		el := (BlEllipseGeometry new extent: 30 @ 30) asElement
+	1 to: 10 do: [ :i |
+		| el tr alp |
+		el := BlEllipseGeometry new asElement
 			      background: (Color white alpha: 0);
-			      position: ii * 15 @ 10.
+			      position: i * 15 @ 10;
+			      size: 50 @ 50.
 
 		tr := BlTransformAnimation new
 			      target: el;
 			      transformDo: [ :aBuilder |
 				      aBuilder translateBy:
-						      ii * 15 @ (500 - (30 * (i / 25) ceiling)) ];
+						      i * 15 @ (500 - (30 * (i / 25) ceiling)) ];
 			      delay: 80 milliSeconds * i;
-			      duration: 500 milliSeconds;
+			      duration: 5000 milliSeconds;
 			      easing: BlEasing bounceOut.
 
 		alp := BlColorTransition new
 			       from: (Color white alpha: 0);
 			       to: Color random;
 			       delay: 80 milliSeconds * i;
-			       duration: 100 milliSeconds;
+			       duration: 1000 milliSeconds;
 			       onStepDo: [ :c | el background: c ].
 		anims addAll: {
 				tr.
 				alp }.
 		els add: el ].
 
-	space := BlOSpace new.
+	space := BlSpace new.
 	space root addChildren: els.
 	space show.
 
