@@ -5,17 +5,17 @@ I have been automatically converted and probably manually tweaked from BlSelecti
 Class {
 	#name : #BlSelectionHandlerTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Selection'
+	#category : #'Bloc-UnitedTests-Selection'
 }
 
 { #category : #'instance creation' }
 BlSelectionHandlerTest class >> grid [
 	<script: 'self grid'>
+
 	| space element |
-	
 	element := self new testContainerWithOneGridAndVisualHandler.
 	
-	space := BlOSpace new.
+	space := BlSpace new.
 	space extent: 800@600.
 	space root addChild: element.
 	space show
@@ -24,11 +24,11 @@ BlSelectionHandlerTest class >> grid [
 { #category : #'instance creation' }
 BlSelectionHandlerTest class >> gridRow [
 	<script: 'self gridRow'>
+
 	| space element |
-	
 	element := self new testContainerWithThreeGridsAndVisualHandler.
 	
-	space := BlOSpace new.
+	space := BlSpace new.
 	space extent: 955@600.
 	space root addChild: element.
 	space show

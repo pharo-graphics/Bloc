@@ -25,7 +25,7 @@ BlDevHalosEventListenerExample >> activatedHalos [
 	anEvent modifiers
 		alt: true;
 		shift: true.
-	BlOSpace simulateEvent: anEvent on: (aContainer childAt: 1).
+	BlSpace simulateEvent: anEvent on: (aContainer childAt: 1).
 
 	theNewElements := aSpace children asArray.
 	"self assert: theNewElements size equals: thePriorElements size + 1."
@@ -88,7 +88,7 @@ BlDevHalosEventListenerExample >> newSpace [
 
 	<sampleInstance>
 	| aSpace |
-	aSpace := BlOSpace new.
+	aSpace := BlSpace new.
 	aSpace host: BlHeadlessHost new.
 	aSpace title: 'Async Element Examples'.
 	aSpace extent: 600 @ 400.
@@ -98,14 +98,14 @@ BlDevHalosEventListenerExample >> newSpace [
 
 { #category : #utility }
 BlDevHalosEventListenerExample >> putInSpace: aBlElement [
-
 	<sampleInstance>
+
 	| aSpace |
 	self
 		assert: [ aBlElement isNotNil ]
 		description: [ 'Element must be non-nil' ].
 	aSpace := self newSpace.
-	aSpace addChild: aBlElement.
+	aSpace root addChild: aBlElement.
 	^ aSpace
 ]
 

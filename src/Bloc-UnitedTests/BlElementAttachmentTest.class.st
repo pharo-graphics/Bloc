@@ -5,14 +5,14 @@ I have been automatically converted and probably manually tweaked from BlElement
 Class {
 	#name : #BlElementAttachmentTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-UnitedTests-Children'
+	#category : #'Bloc-UnitedTests-Children'
 }
 
 { #category : #tests }
 BlElementAttachmentTest >> testAddToSpace [
 	<sampleInstance>
 	| aSpace aContainer aChild addedToScene removedFromScene |
-	aSpace := BlOSpace new.
+	aSpace := BlSpace new.
 	aChild := BlElement new.
 	aContainer := BlElement new.
 	aContainer addChild: aChild.
@@ -32,7 +32,7 @@ BlElementAttachmentTest >> testAddToSpace [
 		do: [ :anEvent | removedFromScene add: anEvent currentTarget ].
 	self assert: aContainer isRemovedFromSceneGraph.
 	self assert: aChild isRemovedFromSceneGraph.
-	aSpace addChild: aContainer.
+	aSpace root addChild: aContainer.
 	self assert: aContainer isAttachedToSceneGraph.
 	self assert: aChild isAttachedToSceneGraph.
 	self

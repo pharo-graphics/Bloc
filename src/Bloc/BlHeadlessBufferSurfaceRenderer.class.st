@@ -1,21 +1,21 @@
 Class {
-	#name : 'BlHeadlessBufferSurfaceRenderer',
-	#superclass : 'BlHostSurfaceRenderer',
-	#category : 'Bloc-Universe - Host Headless',
-	#package : 'Bloc',
-	#tag : 'Universe - Host Headless'
+	#name : #BlHeadlessBufferSurfaceRenderer,
+	#superclass : #BlHostSurfaceRenderer,
+	#instVars : [
+		'thePixels'
+	],
+	#category : 'Bloc-Universe - Host Headless'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlHeadlessBufferSurfaceRenderer >> initializeForSurface: aSurface [
 
-	| aForm thePixels anExtent |
+	| aForm anExtent |
 	anExtent := aSurface physicalSize asPoint.
 	
 	aForm := Form extent: anExtent depth: 32.
 
-	thePixels := FFIExternalArray externalNewType: FFIUInt32 size: aForm stride * aForm height.
-	thePixels autoRelease.
+	thePixels := AeFFIUInt32Array newOf: aForm stride * aForm height.
 
 	aSurface
 		buffer: thePixels getHandle;
@@ -23,6 +23,6 @@ BlHeadlessBufferSurfaceRenderer >> initializeForSurface: aSurface [
 		extent: anExtent
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlHeadlessBufferSurfaceRenderer >> renderSurface: aSurface damaged: aCollectionOfRectangles [
 ]

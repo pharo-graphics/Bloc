@@ -29,20 +29,18 @@ text
 
 "
 Class {
-	#name : 'BlTextAttributesStyler',
-	#superclass : 'Object',
+	#name : #BlTextAttributesStyler,
+	#superclass : #Object,
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
 		'text',
 		'properties'
 	],
-	#category : 'Bloc-Text-Text-Support',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Support'
+	#category : 'Bloc-Text-Text-Support'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlTextAttributesStyler class >> on: aBlText [
 
 	^ self new
@@ -50,31 +48,31 @@ BlTextAttributesStyler class >> on: aBlText [
 		  yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextAttributesStyler >> attributesBuilder [
 	<return: #BlTextAttributesBuilder>
 	
 	^ properties
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTextAttributesStyler >> initialize [
 	super initialize.
 	
 	properties := BlTextAttributesBuilder new
 ]
 
-{ #category : 'api - text style' }
+{ #category : #'api - text style' }
 BlTextAttributesStyler >> style [
 	self attributesBuilder applyOn: self text
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextAttributesStyler >> text [
 	^ text
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextAttributesStyler >> text: anObject [
 	text := anObject
 ]

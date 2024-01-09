@@ -1,6 +1,6 @@
-Extension { #name : 'BlConcatenationRope' }
+Extension { #name : #BlConcatenationRope }
 
-{ #category : '*Bloc-Text' }
+{ #category : #'*Bloc-Text' }
 BlConcatenationRope >> encodeOn: aWriteStream with: aZnCharacterEncoder [
 	"Encode my two branches on a ByteString stream using the provided Zinc encoder."
 

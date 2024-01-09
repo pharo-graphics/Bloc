@@ -1,7 +1,7 @@
 Class {
 	#name : #BlPaintBackgroundTest,
 	#superclass : #BlBackgroundTest,
-	#category : #'Bloc-Tests'
+	#category : 'Bloc-Tests'
 }
 
 { #category : #'background - color' }
@@ -156,14 +156,16 @@ BlPaintBackgroundTest >> testRadiusGradientBackground [
 	aBackground := BlPaintBackground new
 		paint: (BlRadialGradientPaint new
 			stops: { 0 -> Color blue . 1 -> Color red};
-			center: 100@100;
-			radius: 200).
+			innerCenter:  100@100;
+			innerRadius: 0;
+			outerCenter: 100@100;
+			outerRadius:  200).
 	self assert: (aBackground isKindOf: BlPaintBackground).	
 	self assert: aBackground opacity equals: 1.0.
 	self assert: aBackground isTransparent not.
 	self assert: (aBackground paint isKindOf: BlRadialGradientPaint).
-	self assert: aBackground paint center equals: 100@100.
-	self assert: aBackground paint radius equals: 200.
+	self assert: aBackground paint innerCenter equals: 100@100.
+	self assert: aBackground paint outerRadius  equals: 200.
 	self assert: aBackground paint stops size equals: 2.
 	^ aBackground
 ]

@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBlChildrenTest,
-	#category : 'Bloc-UnitedTests-Children'
+	#category : #'Bloc-UnitedTests-Children'
 }
 
 { #category : #fixture }
@@ -267,6 +267,26 @@ TBlChildrenTest >> testSecond [
 	theChildren := self fill: 5.
 	self assert: (theChildren second userData at: #index) equals: 2.
 	^ theChildren
+]
+
+{ #category : #tests }
+TBlChildrenTest >> testSelectThenCollect [
+
+	| theChildren  collected |
+	theChildren := self fill: 4.
+	collected := theChildren select: [ :e | true ] thenCollect: [ :e | e ].
+	self assert: collected species = theChildren species.
+	self assert: collected size equals: theChildren size
+]
+
+{ #category : #tests }
+TBlChildrenTest >> testSelectThenCollectEmpty [
+
+	| theChildren  collected |
+	theChildren := self testEmptyChildren.
+	collected := theChildren select: [ :e | true ] thenCollect: [ :e | e ].
+	self assert: collected species = theChildren species.
+	self assert: collected isEmpty
 ]
 
 { #category : #tests }

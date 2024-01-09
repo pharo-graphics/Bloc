@@ -1,12 +1,10 @@
 Class {
-	#name : 'BAMockedTextParagraphSpan',
-	#superclass : 'BATextParagraphLeaf',
-	#category : 'Bloc-Alexandrie-Text-Mocked',
-	#package : 'Bloc-Alexandrie',
-	#tag : 'Text-Mocked'
+	#name : #BAMockedTextParagraphSpan,
+	#superclass : #BATextParagraphLeaf,
+	#category : 'Bloc-Alexandrie-Text-Mocked'
 }
 
-{ #category : 'drawing' }
+{ #category : #drawing }
 BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 
 	| characterWidth characterHeight aBlFont aFace |
@@ -82,7 +80,7 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 	self attributes do: [ :anAttribute | anAttribute aeDrawAboveOn: aeCanvas span: self ]
 ]
 
-{ #category : 'building' }
+{ #category : #building }
 BAMockedTextParagraphSpan >> measure [
 
 	width := hostMeasurer measuredWidth.

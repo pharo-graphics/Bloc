@@ -5,7 +5,7 @@ Class {
 		'space',
 		'host'
 	],
-	#category : #'Bloc-Tests-Basic'
+	#category : 'Bloc-Tests-Basic'
 }
 
 { #category : #initialization }
@@ -29,7 +29,7 @@ BlElementTest >> setUp [
 
 	super setUp.
 
-	space := BlOSpace new.
+	space := BlSpace new.
 	host := BlMockedHost new.
 
 	space host: host.

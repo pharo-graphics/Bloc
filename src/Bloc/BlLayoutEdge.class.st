@@ -1,16 +1,14 @@
 Class {
-	#name : 'BlLayoutEdge',
-	#superclass : 'Object',
+	#name : #BlLayoutEdge,
+	#superclass : #Object,
 	#instVars : [
 		'fromNode',
 		'toNode'
 	],
-	#category : 'Bloc-Layouts-Model',
-	#package : 'Bloc',
-	#tag : 'Layouts-Model'
+	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutEdge >> fromElement [
 	self
 		deprecated: 'Use #fromNode instead'
@@ -19,17 +17,17 @@ BlLayoutEdge >> fromElement [
 	^ self fromNode
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutEdge >> fromNode [
 	^ fromNode
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutEdge >> fromNode: anObject [
 	fromNode := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutEdge >> toElement [
 	self
 		deprecated: 'Use #toNode instead'
@@ -38,12 +36,12 @@ BlLayoutEdge >> toElement [
 	^ self toNode
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutEdge >> toNode [
 	^ toNode
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutEdge >> toNode: anObject [
 	toNode := anObject
 ]

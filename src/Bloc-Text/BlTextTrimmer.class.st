@@ -1,71 +1,69 @@
 Class {
-	#name : 'BlTextTrimmer',
-	#superclass : 'BlTextOperator',
+	#name : #BlTextTrimmer,
+	#superclass : #BlTextOperator,
 	#instVars : [
 		'leftTrimPatterns',
 		'rightTrimPatterns'
 	],
-	#category : 'Bloc-Text-Text-Operator',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Operator'
+	#category : 'Bloc-Text-Text-Operator'
 }
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BlTextTrimmer >> both: anOneArgBlock [
 	self left: anOneArgBlock.
 	self right: anOneArgBlock.
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BlTextTrimmer >> bothLineBreaks [
 	self leftLineBreaks; rightLineBreaks.
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BlTextTrimmer >> bothSeparators [
 	self leftSeparators; rightSeparators.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTextTrimmer >> initialize [
 	super initialize.
 	leftTrimPatterns := OrderedCollection new.
 	rightTrimPatterns := OrderedCollection new.
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BlTextTrimmer >> left: anOneArgBlock [
 
 	leftTrimPatterns add: anOneArgBlock
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BlTextTrimmer >> leftLineBreaks [
 	self left: [ :aCharacter | aCharacter isLineBreak ]
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BlTextTrimmer >> leftSeparators [
 	self left: [ :aCharacter | aCharacter isSeparator ]
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BlTextTrimmer >> right: anOneArgBlock [
 
 	rightTrimPatterns add: anOneArgBlock
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BlTextTrimmer >> rightLineBreaks [
 	self right: [ :aCharacter | aCharacter isLineBreak ]
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BlTextTrimmer >> rightSeparators [
 	self right: [ :aCharacter | aCharacter isSeparator ]
 ]
 
-{ #category : 'api - processing' }
+{ #category : #'api - processing' }
 BlTextTrimmer >> trim [
 	| left right |
 
@@ -85,7 +83,7 @@ BlTextTrimmer >> trim [
 		self text delete: 1 to: left - 1 ].
 ]
 
-{ #category : 'api - processing' }
+{ #category : #'api - processing' }
 BlTextTrimmer >> trimmed [
 	"I return a new copy of the text trimmed according to the configuration"
 	<return: #BlText>

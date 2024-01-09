@@ -4,20 +4,18 @@ Geometry path is created with the help of backend-specific path builder by BlGeo
 
 "
 Class {
-	#name : 'BlPathCache',
-	#superclass : 'Object',
+	#name : #BlPathCache,
+	#superclass : #Object,
 	#instVars : [
 		'session',
 		'geometry',
 		'geometryPath',
 		'strokedBounds'
 	],
-	#category : 'Bloc-Basic-Support',
-	#package : 'Bloc',
-	#tag : 'Basic-Support'
+	#category : 'Bloc-Basic-Support'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlPathCache class >> on: aGeometry [
 
 	^ self new
@@ -25,7 +23,7 @@ BlPathCache class >> on: aGeometry [
 		  yourself
 ]
 
-{ #category : 'session management' }
+{ #category : #'session management' }
 BlPathCache >> checkSession [
 
 	session == Smalltalk session ifTrue: [ ^ self ].
@@ -33,33 +31,33 @@ BlPathCache >> checkSession [
 	self releaseCache
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlPathCache >> geometry [
 	"Return a `BlElementVectorGeometry` whose path I cache."
 
 	^ geometry
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlPathCache >> geometry: aBlGeometry [
 	"Attach a geometry which path I should cache"
 
 	geometry := aBlGeometry
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlPathCache >> geometryPath [
 
 	^ geometryPath
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlPathCache >> geometryPath: anObject [
 
 	geometryPath := nil
 ]
 
-{ #category : 'session management' }
+{ #category : #'session management' }
 BlPathCache >> releaseCache [
 	"Release path caches requiring their fresh creation"
 
@@ -67,14 +65,14 @@ BlPathCache >> releaseCache [
 	self releaseStrokedBoundsCache
 ]
 
-{ #category : 'session management' }
+{ #category : #'session management' }
 BlPathCache >> releaseStrokedBoundsCache [
 	"Release stroked bounds to force its recomputation"
 
 	strokedBounds := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlPathCache >> strokedBounds: aBlBounds of: anElement [
 	"Return stroked bounds of a geometry if it would be stroked according to element's outskirts."
 

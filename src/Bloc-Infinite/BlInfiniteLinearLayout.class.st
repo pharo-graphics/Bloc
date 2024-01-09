@@ -13,7 +13,7 @@ Class {
 		'pendingScrollPositionOffset',
 		'anchorInfo'
 	],
-	#category : #'Bloc-Infinite-Layout-Linear'
+	#category : 'Bloc-Infinite-Layout-Linear'
 }
 
 { #category : #factory }
@@ -553,6 +553,12 @@ BlInfiniteLinearLayout >> initialize [
 	pendingScrollPositionOffset := self class invalidOffset
 ]
 
+{ #category : #orientation }
+BlInfiniteLinearLayout >> isHorizontal [
+
+	^ self orientation isHorizontal 
+]
+
 { #category : #testing }
 BlInfiniteLinearLayout >> isLayoutRTL [
 
@@ -563,6 +569,12 @@ BlInfiniteLinearLayout >> isLayoutRTL [
 BlInfiniteLinearLayout >> isOrientable [
 
 	^ true
+]
+
+{ #category : #orientation }
+BlInfiniteLinearLayout >> isVertical [
+
+	^ self isHorizontal not
 ]
 
 { #category : #'private - children' }

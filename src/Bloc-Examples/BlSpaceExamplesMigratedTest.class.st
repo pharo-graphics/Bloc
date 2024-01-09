@@ -2,13 +2,13 @@
 I contain example of how to use space
 "
 Class {
-	#name : #BlSpaceExamplesMigrated,
-	#superclass : #Object,
+	#name : #BlSpaceExamplesMigratedTest,
+	#superclass : #TestCase,
 	#category : #'Bloc-Examples-SpaceMigrated'
 }
 
 { #category : #script }
-BlSpaceExamplesMigrated class >> slownDownSpace [
+BlSpaceExamplesMigratedTest class >> slownDownSpace [
 	<script: 'self slownDownSpace'>
 	
 	self new spaceWithSlownDownTimeAndAnimatedElement
@@ -17,44 +17,76 @@ BlSpaceExamplesMigrated class >> slownDownSpace [
 ]
 
 { #category : #'private - instance creation' }
-BlSpaceExamplesMigrated >> animatedElement [
-	<gtExample>
-	
+BlSpaceExamplesMigratedTest >> animatedElement [
+
+	<sampleInstance>
 	^ BlElement new
-		background: Color blue;
-		size: 150@150;
-		position: 100@100;
-		addAnimation: self infiniteAnimation
+		  background: Color blue;
+		  size: 150 @ 150;
+		  position: 100 @ 100;
+		  addAnimation: self testInfiniteAnimation
 ]
 
 { #category : #'examples - icon' }
-BlSpaceExamplesMigrated >> changeIcon [
-	<gtExample>
+BlSpaceExamplesMigratedTest >> iconElement [
+	<sampleInstance>
+	^ BlElement new
+		size: 16@16;
+		background: (Color green alpha: 0.5);
+		geometry: BlCircleGeometry new.
+]
+
+{ #category : #'examples - icon' }
+BlSpaceExamplesMigratedTest >> iconStencil [
+	<sampleInstance>
+	| aStencil |
+	aStencil := BlSpaceIconDummyStencil new.
+	aStencil block: [ self iconElement ].
+	^ aStencil
+]
+
+{ #category : #'examples - time' }
+BlSpaceExamplesMigratedTest >> spaceWithSlownDownTimeAndAnimatedElement [
+
+	<sampleInstance>
+	| aSpace |
+	aSpace := self spaceWithSlownDownTime.
+	aSpace root addChild: self animatedElement.
+
+	^ aSpace
+]
+
+{ #category : #'examples - icon' }
+BlSpaceExamplesMigratedTest >> testChangeIcon [
+
+	<sampleInstance>
 	| aSpace aCollection |
-	aSpace := self emptySpace.
-	
+	aSpace := self testEmptySpace.
+
 	aCollection := OrderedCollection new.
-	aSpace 
-		when: BlSpaceIconChangedEvent 
+	aSpace
+		when: BlSpaceIconChangedEvent
 		do: [ :anEvent | aCollection add: anEvent ].
-	
+
 	aSpace icon: self iconStencil.
-	
+
 	self assert: aCollection size equals: 1.
 	self assert: aCollection first class equals: BlSpaceIconChangedEvent.
-	self assert: aCollection first iconStencil class equals: BlSpaceIconDummyStencil.
-	
+	self
+		assert: aCollection first iconStencil class
+		equals: BlSpaceIconDummyStencil.
+
 	aSpace icon: aSpace icon.
 	self assert: aCollection size equals: 1.
-	
+
 	^ aSpace
 ]
 
 { #category : #'instance creation' }
-BlSpaceExamplesMigrated >> emptySpace [
-	<gtExample>
+BlSpaceExamplesMigratedTest >> testEmptySpace [
+
+	<sampleInstance>
 	| aSpace |
-	
 	aSpace := BlOSpace new.
 	self assert: aSpace session equals: Smalltalk session.
 	self assert: aSpace root hasChildren not.
@@ -62,7 +94,7 @@ BlSpaceExamplesMigrated >> emptySpace [
 	self assert: aSpace extent equals: aSpace defaultExtent.
 	self assert: aSpace height equals: aSpace defaultExtent y.
 	self assert: aSpace width equals: aSpace defaultExtent x.
-	self assert: aSpace position equals: 0@0.
+	self assert: aSpace position equals: 0 @ 0.
 	self assert: aSpace resizable.
 	self assert: aSpace borderless not.
 	self assert: aSpace fullscreen not.
@@ -79,58 +111,29 @@ BlSpaceExamplesMigrated >> emptySpace [
 ]
 
 { #category : #lifecycle }
-BlSpaceExamplesMigrated >> firstPulse [
-	<gtExample>
+BlSpaceExamplesMigratedTest >> testFirstPulse [
+
+	<sampleInstance>
 	| aSpace |
-	
-	aSpace := self emptySpace.
+	aSpace := self testEmptySpace.
 	aSpace pulse.
-	
+
 	self deny: aSpace hasDirtyElements.
-	self assert: aSpace root position equals: 0@0.
+	self assert: aSpace root position equals: 0 @ 0.
 	self assert: aSpace root extent equals: aSpace extent.
 
 	^ aSpace
 ]
 
-{ #category : #'examples - icon' }
-BlSpaceExamplesMigrated >> iconElement [
-	<sampleInstance>
-	^ BlElement new
-		size: 16@16;
-		background: (Color green alpha: 0.5);
-		geometry: BlCircleGeometry new.
-]
-
-{ #category : #'examples - icon' }
-BlSpaceExamplesMigrated >> iconStencil [
-	<sampleInstance>
-	| aStencil |
-	aStencil := BlSpaceIconDummyStencil new.
-	aStencil block: [ self iconElement ].
-	^ aStencil
-]
-
 { #category : #'private - instance creation' }
-BlSpaceExamplesMigrated >> infiniteAnimation [
+BlSpaceExamplesMigratedTest >> testInfiniteAnimation [
+
 	<sampleInstance>
 	| anAnimation |
-
 	anAnimation := BlSequentialAnimation new.
 	anAnimation add: (BlTransformAnimation scale: 2) absolute.
 	anAnimation add: (BlTransformAnimation scale: 0.5) absolute.
 	anAnimation beInfinite.
-	
+
 	^ anAnimation
-]
-
-{ #category : #'examples - time' }
-BlSpaceExamplesMigrated >> spaceWithSlownDownTimeAndAnimatedElement [
-	<gtExample>
-	| aSpace |
-
-	aSpace := self spaceWithSlownDownTime.
-	aSpace root addChild: self animatedElement.
-
-	^ aSpace
 ]

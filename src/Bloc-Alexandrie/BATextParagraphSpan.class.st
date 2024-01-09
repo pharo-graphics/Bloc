@@ -2,14 +2,12 @@
 I represent an Alexandrie specific measured span
 "
 Class {
-	#name : 'BATextParagraphSpan',
-	#superclass : 'BATextParagraphLeaf',
-	#category : 'Bloc-Alexandrie-Text',
-	#package : 'Bloc-Alexandrie',
-	#tag : 'Text'
+	#name : #BATextParagraphSpan,
+	#superclass : #BATextParagraphLeaf,
+	#category : 'Bloc-Alexandrie-Text'
 }
 
-{ #category : 'drawing' }
+{ #category : #drawing }
 BATextParagraphSpan >> aeDrawOn: aeCanvas [
 
 	self span ifNil: [ ^ self ].
@@ -30,7 +28,7 @@ BATextParagraphSpan >> aeDrawOn: aeCanvas [
 			anAttribute aeDrawAboveOn: aeCanvas span: self ] ]
 ]
 
-{ #category : 'building' }
+{ #category : #building }
 BATextParagraphSpan >> measure [
 
 	"build an abstract font and resolve not yet resolved properties"

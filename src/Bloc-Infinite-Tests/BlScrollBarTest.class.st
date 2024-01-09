@@ -9,7 +9,7 @@ Class {
 		'vBar',
 		'scrollPane'
 	],
-	#category : #'Bloc-Infinite-Tests'
+	#category : 'Bloc-Infinite-Tests'
 }
 
 { #category : #running }
@@ -34,8 +34,10 @@ BlScrollBarTest >> setUp [
 		size: largeExtent;
 		background: (BlRadialGradientPaint new
 			stops: { 0 -> Color blue. 1 -> Color red };
-			center: largeExtent // 2;
-			radius: largeExtent min;
+			innerCenter:  largeExtent // 2;
+			innerRadius: 0;
+			outerCenter: largeExtent //2;
+			outerRadius:  largeExtent min;
 			yourself);
 		yourself.
 

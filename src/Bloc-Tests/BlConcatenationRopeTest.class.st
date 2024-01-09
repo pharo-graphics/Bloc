@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlConcate
 Class {
 	#name : #BlConcatenationRopeTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Tests'
+	#category : 'Bloc-Tests'
 }
 
 { #category : #tests }
@@ -280,7 +280,6 @@ BlConcatenationRopeTest >> testAttributesSmall9To10 [
 
 { #category : #tests }
 BlConcatenationRopeTest >> testReadStreamSmall [
-
 	<sampleInstance>
 	| rope stream |
 	rope := self testSmall.
@@ -293,10 +292,9 @@ BlConcatenationRopeTest >> testReadStreamSmall [
 
 { #category : #tests }
 BlConcatenationRopeTest >> testSmall [
-
-	<sampleInstance>
-	<label:
-	'Creates an instance of the rope of size smaller than combineLength'>
+	"Creates an instance of the rope of size smaller than combineLength"
+	
+	<sampleInstance>	
 	| aRope |
 	aRope := BlConcatenationRope
 		         left: (BlCollectionRope collection: 'Hello')

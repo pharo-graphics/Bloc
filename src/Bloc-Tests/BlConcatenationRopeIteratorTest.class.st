@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlConcate
 Class {
 	#name : #BlConcatenationRopeIteratorTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Tests'
+	#category : 'Bloc-Tests'
 }
 
 { #category : #metadata }
@@ -16,33 +16,11 @@ BlConcatenationRopeIteratorTest >> originClassName [
 ]
 
 { #category : #tests }
-BlConcatenationRopeIteratorTest >> small [
-
-	<sampleInstance>
-	| aRope anIterator |
-	aRope := BlConcatenationRopeExamples new attributes_small_5_to_10.
-	anIterator := aRope iterator: 0 to: 10.
-
-	self assert: anIterator position equals: 0.
-	self assert: anIterator start equals: 0.
-	self assert: anIterator end equals: 10.
-	self assert: anIterator rope == aRope.
-
-	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious not.
-
-	self assert: anIterator currentIterator rope == aRope left.
-	self assert: anIterator currentIterator position equals: 0.
-
-	^ anIterator
-]
-
-{ #category : #tests }
 BlConcatenationRopeIteratorTest >> testSmall [
 
 	<sampleInstance>
 	| aRope anIterator |
-	aRope := BlConcatenationRopeExamples new attributes_small_5_to_10.
+	aRope := BlConcatenationRopeExamplesTest new testAttributes_small_5_to_10.
 	anIterator := aRope iterator: 0 to: 10.
 
 	self assert: anIterator position equals: 0.
@@ -459,7 +437,7 @@ BlConcatenationRopeIteratorTest >> testSmallNextAt1 [
 BlConcatenationRopeIteratorTest >> testSmallNextAt10 [
 
 	<sampleInstance>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	anIterator := self testSmallNextAt9.
 
@@ -681,7 +659,7 @@ BlConcatenationRopeIteratorTest >> testSmallNextSpanAt1 [
 BlConcatenationRopeIteratorTest >> testSmallNextSpanAt10 [
 
 	<sampleInstance>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	anIterator := self testSmallNextAt9.
 
@@ -851,7 +829,7 @@ BlConcatenationRopeIteratorTest >> testSmallPeekAt1 [
 BlConcatenationRopeIteratorTest >> testSmallPeekAt10 [
 
 	<sampleInstance>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	anIterator := self testSmallNextAt9.
 
@@ -1005,7 +983,7 @@ BlConcatenationRopeIteratorTest >> testSmallPeekAt9 [
 BlConcatenationRopeIteratorTest >> testSmallPreviousAt0 [
 
 	<sampleInstance>
-	<label: 'Iterator throws an error when the start is reached'>
+	"Iterator throws an error when the start is reached"
 	| anIterator anError |
 	anIterator := self testSmall.
 
@@ -1281,7 +1259,7 @@ BlConcatenationRopeIteratorTest >> testSmallSkip10At0 [
 BlConcatenationRopeIteratorTest >> testSmallSkip11At0 [
 
 	<sampleInstance>
-	<label: 'Iterator throws an error when the end is reached'>
+	"Iterator throws an error when the end is reached"
 	| anIterator anError |
 	anIterator := self testSmall.
 

@@ -5,11 +5,11 @@ See my references.
 "
 Class {
 	#name : #BlExamplesMock,
-	#superclass : #BlExampleTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'enabled'
 	],
-	#category : 'Bloc-UnitedTests-Examples'
+	#category : #'Bloc-UnitedTests-Examples'
 }
 
 { #category : #accessing }
@@ -48,7 +48,7 @@ BlExamplesMock >> exampleSkip [
 
 { #category : #examples }
 BlExamplesMock >> exampleWithArgument: arg [
-	<gtExample>
+
 	
 ]
 
@@ -63,4 +63,28 @@ BlExamplesMock >> initialize [
 BlExamplesMock >> performTest [
 
 	enabled ifTrue: [ super performTest ]
+]
+
+{ #category : #examples }
+BlExamplesMock >> testExampleError [
+
+	self error
+]
+
+{ #category : #examples }
+BlExamplesMock >> testExampleFail [
+
+	self fail
+]
+
+{ #category : #examples }
+BlExamplesMock >> testExamplePass [
+ 
+	
+]
+
+{ #category : #examples }
+BlExamplesMock >> testExampleSkip [
+
+	self skip
 ]

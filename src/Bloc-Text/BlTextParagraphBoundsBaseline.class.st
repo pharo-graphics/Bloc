@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlTextParagraphBoundsBaseline',
-	#superclass : 'BlBoundsBaselineMeasurer',
-	#category : 'Bloc-Text-Text-Paragraph-Deprecated',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Paragraph-Deprecated'
+	#name : #BlTextParagraphBoundsBaseline,
+	#superclass : #BlBoundsBaselineMeasurer,
+	#category : 'Bloc-Text-Text-Paragraph-Deprecated'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlTextParagraphBoundsBaseline class >> isDeprecated [
 
 	^ true

@@ -3,36 +3,34 @@ I am a root class of all mouse buttons with a name, e.g. ""primary"", ""secondar
 
 "
 Class {
-	#name : 'BlMouseNamedButton',
-	#superclass : 'BlMouseButton',
+	#name : #BlMouseNamedButton,
+	#superclass : #BlMouseButton,
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Events',
-	#package : 'Bloc',
-	#tag : 'Events'
+	#category : 'Bloc-Events'
 }
 
-{ #category : 'cleanup' }
+{ #category : #cleanup }
 BlMouseNamedButton class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMouseNamedButton class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlMouseNamedButton >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
 	^ anotherObject class = self class
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlMouseNamedButton >> hash [
 	^ self class hash
 ]

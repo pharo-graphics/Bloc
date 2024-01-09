@@ -9,36 +9,34 @@ In the following example, {{gtClass:BlMouseOverEvent}}, {{gtClass:BlMouseOutEven
 
 "
 Class {
-	#name : 'BlSharedEventDistributor',
-	#superclass : 'BlBasicEventHandler',
+	#name : #BlSharedEventDistributor,
+	#superclass : #BlBasicEventHandler,
 	#instVars : [
 		'adjustMousePosition',
 		'elements',
 		'handledEvents',
 		'shouldHandle'
 	],
-	#category : 'Bloc-Events-Handler',
-	#package : 'Bloc',
-	#tag : 'Events-Handler'
+	#category : 'Bloc-Events-Handler'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSharedEventDistributor class >> shareEvent: anEventClass [
 	^ self shareEvents: { anEventClass }
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSharedEventDistributor class >> shareEvents: aCollectionOfEvents [
 	^ self new shareEvents: aCollectionOfEvents
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSharedEventDistributor >> adjustMousePosition: aBoolean [
 
 	adjustMousePosition := aBoolean
 ]
 
-{ #category : 'private - coordinates' }
+{ #category : #'private - coordinates' }
 BlSharedEventDistributor >> adjustPosition: aNewEvent from: anOldEvent [
 	| anOldBounds anOldDiagonal aNewBounds aNewDiagonal aRatio aNewPosition |
 	
@@ -58,32 +56,35 @@ BlSharedEventDistributor >> adjustPosition: aNewEvent from: anOldEvent [
 	aNewEvent screenPosition: (anOldEvent screenPosition ifNil: [ 0@0 ]) + (aNewPosition - anOldEvent position)
 ]
 
-{ #category : 'api - event managing' }
+{ #category : #'api - event managing' }
 BlSharedEventDistributor >> dispatch: aBlEvent on: anElement [
-	| aNewEvent |
 
+	| aNewEvent |
 	shouldHandle ifFalse: [ ^ self ].
-	
+
 	aNewEvent := aBlEvent newCopyFor: anElement.
 	aBlEvent isMouse ifTrue: [
 		self adjustPosition: aNewEvent from: aBlEvent ].
 
 	shouldHandle := false.
-	[ anElement dispatchEvent: aNewEvent ]
-		ensure: [ shouldHandle := true ]
+	[ anElement dispatchEvent: aNewEvent ] ensure: [
+		shouldHandle := true ].
+	"Update the original event correctly if the event copy is consumed.
+	This is necessary if event processing depends on #isConsumed (e.g. dnd processing)"
+	aNewEvent isConsumed ifTrue: [ aBlEvent consumed: true ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSharedEventDistributor >> elements [
 	^ elements asArray
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlSharedEventDistributor >> eventsToHandle [
 	^ handledEvents
 ]
 
-{ #category : 'api - event managing' }
+{ #category : #'api - event managing' }
 BlSharedEventDistributor >> handleEvent: anEvent [
 
 	shouldHandle
@@ -94,7 +95,7 @@ BlSharedEventDistributor >> handleEvent: anEvent [
 			ifFalse: [ self dispatch: anEvent on: eachElement ] ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlSharedEventDistributor >> initialize [
 	super initialize.
 	elements := Set new.
@@ -103,19 +104,19 @@ BlSharedEventDistributor >> initialize [
 	adjustMousePosition := true
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BlSharedEventDistributor >> onInstalledIn: anObject [
 	elements add: anObject
 ]
 
-{ #category : 'api - hooks' }
+{ #category : #'api - hooks' }
 BlSharedEventDistributor >> onUninstalledIn: anObject [
 	elements
 		remove: anObject
 		ifAbsent: [ "ignore" ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSharedEventDistributor >> shareEvents: aCollectionOfEvents [
 	self 
 		assert: [ aCollectionOfEvents isCollection ] 
@@ -127,7 +128,7 @@ BlSharedEventDistributor >> shareEvents: aCollectionOfEvents [
 	handledEvents := aCollectionOfEvents
 ]
 
-{ #category : 'api - event managing' }
+{ #category : #'api - event managing' }
 BlSharedEventDistributor >> wantsEvent: anEvent [
 	shouldHandle
 		ifFalse: [ ^ false ].

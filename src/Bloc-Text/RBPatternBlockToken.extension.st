@@ -1,6 +1,6 @@
-Extension { #name : 'RBPatternBlockToken' }
+Extension { #name : #RBPatternBlockToken }
 
-{ #category : '*Bloc-Text' }
+{ #category : #'*Bloc-Text' }
 RBPatternBlockToken >> acceptVisitor: aVisitor [
 
 	^ aVisitor visitPatternBlockToken: self

@@ -28,7 +28,7 @@ Click on the buttons to the left from the rectangular element to see what happen
 Class {
 	#name : #BlElementPropertyExample,
 	#superclass : #BlExampleTest,
-	#category : #'Bloc-Tests'
+	#category : 'Bloc-Tests'
 }
 
 { #category : #properties }

@@ -46,7 +46,7 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : #'Bloc-Infinite-Core'
+	#category : 'Bloc-Infinite-Core'
 }
 
 { #category : #'as yet unclassified' }
@@ -442,6 +442,7 @@ BlInfiniteElement >> defaultLayoutCommonConstraints [
 
 { #category : #initialization }
 BlInfiniteElement >> defaultMouseScrollEventHandler [
+
 	^ BlInfiniteMouseScrollListener new
 ]
 

@@ -1,13 +1,13 @@
-Extension { #name : 'Character' }
+Extension { #name : #Character }
 
-{ #category : '*Bloc-Text' }
+{ #category : #'*Bloc-Text' }
 Character class >> nel [
 	"Answer the Character representing next line."
 
 	^self value: 16r85
 ]
 
-{ #category : '*Bloc-Text' }
+{ #category : #'*Bloc-Text' }
 Character >> textRunOn: aStream [
 	"When rendering text we should convert logical items to something that will actually appear
 	on the screen and something that can be measured. For example a Tab can not be measured not

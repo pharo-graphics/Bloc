@@ -1,27 +1,25 @@
 Class {
-	#name : 'BlSpaceEvent',
-	#superclass : 'BlEvent',
-	#category : 'Bloc-Events-Type-Space',
-	#package : 'Bloc',
-	#tag : 'Events-Type-Space'
+	#name : #BlSpaceEvent,
+	#superclass : #BlEvent,
+	#category : 'Bloc-Events-Type-Space'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlSpaceEvent >> isSpaceCloseRequest [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlSpaceEvent >> isSpaceEvent [
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlSpaceEvent >> isSpaceResizedEvent [
 	^ false
 ]
 
-{ #category : 'sending' }
+{ #category : #sending }
 BlSpaceEvent >> sendTo: anObject [
 	anObject spaceEvent: self
 ]

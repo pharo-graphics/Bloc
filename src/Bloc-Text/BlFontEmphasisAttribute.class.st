@@ -1,34 +1,32 @@
 Class {
-	#name : 'BlFontEmphasisAttribute',
-	#superclass : 'BlTextAttribute',
-	#category : 'Bloc-Text-Text-Attributes',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Attributes'
+	#name : #BlFontEmphasisAttribute,
+	#superclass : #BlTextAttribute,
+	#category : 'Bloc-Text-Text-Attributes'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlFontEmphasisAttribute class >> italic [
 	^ BlFontItalicAttribute new
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlFontEmphasisAttribute class >> normal [
 	^ BlFontNormalAttribute new
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlFontEmphasisAttribute class >> oblique [
 	^ BlFontObliqueAttribute new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontEmphasisAttribute >> emphasisName [
 	<return: #String>
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlFontEmphasisAttribute >> printOn: aStream [
 	aStream
 		nextPutAll: 'font-style: ';

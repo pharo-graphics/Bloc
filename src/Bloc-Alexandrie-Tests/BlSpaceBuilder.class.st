@@ -11,7 +11,7 @@ Class {
 		'host',
 		'alphabetGenerator'
 	],
-	#category : #'Bloc-Alexandrie-Tests-Utilities'
+	#category : 'Bloc-Alexandrie-Tests-Utilities'
 }
 
 { #category : #convenience }
@@ -135,12 +135,18 @@ BlSpaceBuilder >> initialize [
 
 	super initialize.
 	
-	space := BlOSpace new.
+	space := BlSpace new.
 	spaceExtent := 100 asPoint.
 	host := BlOSWindowSDL2Host new.
 
 	random := Random seed: 7.
-	alphabetGenerator := Generator on: [ :generator |
+	alphabetGenerator := self newAlphabetGenerator
+]
+
+{ #category : #initialization }
+BlSpaceBuilder >> newAlphabetGenerator [
+
+	^ Generator on: [ :generator |
 		| index |
 		index := 1.
 		[ 	Character alphabet do: [ :each |
@@ -150,8 +156,7 @@ BlSpaceBuilder >> initialize [
 					ifTrue: [ '' ]
 					ifFalse: [ index asString ].
 				generator yield: next, suffix ].
-			index := index + 1 ] repeat ].
-
+			index := index + 1 ] repeat ]
 ]
 
 { #category : #'instance creation' }

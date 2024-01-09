@@ -4,8 +4,8 @@ I launch text styling process either by scheduling a process (if the element is 
 
 "
 Class {
-	#name : 'BlTextStylerLauncher',
-	#superclass : 'Object',
+	#name : #BlTextStylerLauncher,
+	#superclass : #Object,
 	#instVars : [
 		'monitor',
 		'isStylingRequested',
@@ -15,22 +15,20 @@ Class {
 	#classVars : [
 		'MinTextSizeForStylingInBackground'
 	],
-	#category : 'Bloc-Text-Text-Styler',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Styler'
+	#category : 'Bloc-Text-Text-Styler'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextStylerLauncher class >> minTextSizeForStylingInBackground [
 	^ MinTextSizeForStylingInBackground ifNil: [ MinTextSizeForStylingInBackground := 16000 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextStylerLauncher class >> minTextSizeForStylingInBackground: anInteger [
 	MinTextSizeForStylingInBackground := anInteger
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextStylerLauncher class >> settingsOn: aBuilder [
 	<systemsettings>
 	(aBuilder setting: #minTextSizeForStylingInBackground)
@@ -41,13 +39,13 @@ BlTextStylerLauncher class >> settingsOn: aBuilder [
 		label: 'Min text size for background styling'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextStylerLauncher >> backgroundProcess [ 
 
 	^ backgroundProcess 
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlTextStylerLauncher >> doStyleText: aText withStyler: aStyler [
 
 	"Style a given text with the provided styler"
@@ -55,7 +53,7 @@ BlTextStylerLauncher >> doStyleText: aText withStyler: aStyler [
 	aStyler style: aText
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlTextStylerLauncher >> enqueueStyleText: aText withStyler: aStyler inElement: anElement [
 
 	monitor critical: [ 
@@ -75,7 +73,7 @@ BlTextStylerLauncher >> enqueueStyleText: aText withStyler: aStyler inElement: a
 				 isStylingRequested := false ]) ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTextStylerLauncher >> initialize [
 
 	super initialize.
@@ -83,13 +81,13 @@ BlTextStylerLauncher >> initialize [
 	isStylingRequested := false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextStylerLauncher >> minTextSizeForStylingInBackground [
 
 	^ self class minTextSizeForStylingInBackground
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlTextStylerLauncher >> newProcessForStyling: aText withStyler: aStyler [
 
 	| process |
@@ -99,7 +97,7 @@ BlTextStylerLauncher >> newProcessForStyling: aText withStyler: aStyler [
 	^ process
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlTextStylerLauncher >> scheduleStyleText: aText withStyler: aStyler [ 
 
 	self terminateBackgroundStylingProcess.
@@ -107,7 +105,7 @@ BlTextStylerLauncher >> scheduleStyleText: aText withStyler: aStyler [
 	backgroundProcess resume
 ]
 
-{ #category : 'public - styling' }
+{ #category : #'public - styling' }
 BlTextStylerLauncher >> styleText: aText withStyler: aStyler inElement: anElement [
 
 	" Take care to schedule (with a fork) only if the editor is actually on the scene, otherwise, enqueue an editor task"
@@ -127,7 +125,7 @@ BlTextStylerLauncher >> styleText: aText withStyler: aStyler inElement: anElemen
 					ifFalse: [ self doStyleText: aText withStyler: aStyler ] ] ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlTextStylerLauncher >> terminateBackgroundStylingProcess [
 
 	backgroundProcess ifNotNil: [ 

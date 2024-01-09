@@ -5,14 +5,15 @@ Class {
 		'processor',
 		'space'
 	],
-	#category : #'Bloc-Tests-Universe'
+	#category : 'Bloc-Tests-Universe'
 }
 
 { #category : #initialization }
 BlKeyboardProcessorTest >> setUp [
+
 	super setUp.
 	
-	space := BlOSpace new.
+	space := BlSpace new.
 	processor := BlKeyboardProcessor new.
 	processor space: space
 ]

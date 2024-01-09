@@ -35,7 +35,7 @@ BlMorphicHost class >> example [
 	aHost := BlMorphicHost new.
 	aHost containerMorph: aMorph.
 
-	aSpace := BlOSpace new.
+	aSpace := BlSpace new.
 	aSpace host: aHost.
 	aSpace show.
 
@@ -44,12 +44,13 @@ BlMorphicHost class >> example [
 		layout: BlFlowLayout horizontal.
 
 	50 timesRepeat: [ 
-		aSpace addChild: (BlElement new
-			background: Color random translucent;
-			addEventHandlerOn: BlMouseEnterEvent
-				do: [ :evt | evt target
-					background: Color random ];
-			yourself).]
+		aSpace root addChild:
+			(BlElement new
+				background: Color random translucent;
+				addEventHandlerOn: BlMouseEnterEvent
+					do: [ :evt |
+						evt target background: Color random ];
+				yourself) ]
 ]
 
 { #category : #testing }

@@ -1,18 +1,16 @@
 Trait {
-	#name : 'TBlTextAttributesFinder',
-	#category : 'Bloc-Text-Text-Attributes Finder',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Attributes Finder'
+	#name : #TBlTextAttributesFinder,
+	#category : 'Bloc-Text-Text-Attributes Finder'
 }
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 TBlTextAttributesFinder >> attributesAndIndicesDo: aBlock [
 	self
 		findAttributesSuchThat: [ :eachAttribute | true ]
 		indicesDo: aBlock
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 TBlTextAttributesFinder >> attributesAndIndicesSuchThat: aFilterBlock [
 	^ Array streamContents: [ :aStream | 
 		  self
@@ -21,7 +19,7 @@ TBlTextAttributesFinder >> attributesAndIndicesSuchThat: aFilterBlock [
 				  aStream nextPut: anAttribute -> (aStart to: anEnd) ] ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 TBlTextAttributesFinder >> computeAttributesDictionaryFor: aBlText [
 	| anIterator theAttributes |
 
@@ -49,12 +47,12 @@ TBlTextAttributesFinder >> computeAttributesDictionaryFor: aBlText [
 	^ theAttributes
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 TBlTextAttributesFinder >> findAttribute: aBlTextAttribute indicesDo: aBlock [	
 	self explicitRequirement
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 TBlTextAttributesFinder >> findAttributes: aCollectionOfBlTextAttribute indicesDo: aBlock [	
 	
 	aCollectionOfBlTextAttribute do: [ :eachAttribute |
@@ -63,12 +61,12 @@ TBlTextAttributesFinder >> findAttributes: aCollectionOfBlTextAttribute indicesD
 			indicesDo: aBlock	]
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 TBlTextAttributesFinder >> findAttributesSuchThat: aFilterBlock indicesDo: anIterationBlock [
 	self explicitRequirement
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 TBlTextAttributesFinder >> hasAttribute: aBlTextAttribute [
 	<return: #Boolean>
 
@@ -79,7 +77,7 @@ TBlTextAttributesFinder >> hasAttribute: aBlTextAttribute [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 TBlTextAttributesFinder >> hasAttributeSuchThat: aComparisonBlock [
 	<return: #Boolean>
 

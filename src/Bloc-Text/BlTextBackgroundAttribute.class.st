@@ -17,41 +17,39 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : 'BlTextBackgroundAttribute',
-	#superclass : 'BlTextAttribute',
+	#name : #BlTextBackgroundAttribute,
+	#superclass : #BlTextAttribute,
 	#instVars : [
 		'paint'
 	],
-	#category : 'Bloc-Text-Text-Attributes',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Attributes'
+	#category : 'Bloc-Text-Text-Attributes'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlTextBackgroundAttribute class >> paint: aPaint [
 	^ self new
 		paint: aPaint;
 		yourself
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlTextBackgroundAttribute >> equals: anAnotherAttribute [
 	^ self paint = anAnotherAttribute paint
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlTextBackgroundAttribute >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ super hash bitXor: self paint hash
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextBackgroundAttribute >> paint [
 	^ paint
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextBackgroundAttribute >> paint: aPaint [
 	self
 		assert: [ paint isNil ]
@@ -60,7 +58,7 @@ BlTextBackgroundAttribute >> paint: aPaint [
 	paint := aPaint
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlTextBackgroundAttribute >> printOn: aStream [
 	aStream
 		nextPutAll: 'text-background: ';

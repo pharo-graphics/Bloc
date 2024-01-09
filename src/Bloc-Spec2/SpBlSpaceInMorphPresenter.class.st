@@ -37,12 +37,13 @@ SpBlSpaceInMorphPresenter class >> example [
 		layout: BlFlowLayout horizontal.
 
 	50 timesRepeat: [ 
-		aSpace addChild: (BlElement new
-			background: Color random translucent;
-			addEventHandlerOn: BlMouseEnterEvent
-				do: [ :evt | evt target
-					background: Color random ];
-			yourself) ].
+		aSpace root addChild:
+			(BlElement new
+				background: Color random translucent;
+				addEventHandlerOn: BlMouseEnterEvent
+					do: [ :evt | evt target
+						background: Color random ];
+				yourself) ].
 
 	spacePresenter open.
 
@@ -62,7 +63,7 @@ SpBlSpaceInMorphPresenter >> initializePresenters [
 				yourself);
 		yourself.
 
-	space := BlOSpace new
+	space := BlSpace new
 		host: (BlMorphicHost new
 			containerMorph: morphPresenter morph;
 			yourself);
