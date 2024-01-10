@@ -1038,6 +1038,15 @@ BlInfiniteElement >> minFlingVelocity [
 	^ 50
 ]
 
+{ #category : #'view - configuration' }
+BlInfiniteElement >> minHeight: aNumber [
+
+	"set maxHeight in constraints"
+	self constraintsDo: [ :c | c minHeight: aNumber ].
+	" arm a height update after next layout to allow scrollToIndex: to work as expected in a comboBox as an example"
+	self whenLayoutedDoOnce: [ self height: self measuredHeight ]
+]
+
 { #category : #notifying }
 BlInfiniteElement >> notifyChildAttached: anElement [
 	"Notify all event handlers that element is attached to InfiniteElement"
