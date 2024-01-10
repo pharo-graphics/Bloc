@@ -63,23 +63,28 @@ BlTransformAnimation >> applyValue: anElementTransformation [
 	self target transformation: anElementTransformation
 ]
 
-{ #category : #pulse }
+{ #category : #'private - running' }
 BlTransformAnimation >> initStart [
 
 	super initStart.
 
-	isAbsolute ifFalse: [ 
-		elementTransformation :=
-			BlElementCompositeTransformation new
-				add: self target transformation asElementTransformation;
-				add: elementTransformation asElementTransformation;
-				yourself ].
+	isAbsolute ifFalse: [
+		elementTransformation := BlElementCompositeTransformation new
+			                         add:
+				                         self target transformation
+					                         asElementTransformation;
+			                         add:
+				                         elementTransformation
+					                         asElementTransformation;
+			                         yourself ].
 	elementTransformation := elementTransformation asCachedTransformation.
 
 	"matrix depends on computed layout bounds, we should manually trigger layout recomputation"
-	self target space isLayoutRequested ifTrue: [ 
-		self target space doLayout ].
 	
+	(self target space isNotNil and: [
+		self target space isLayoutRequested ]) ifTrue: [
+		self target space doLayout ].
+
 	elementTransformation boundingRectangle:
 		self target bounds inLocal asRectangle.
 
