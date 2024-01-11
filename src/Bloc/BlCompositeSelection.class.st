@@ -88,7 +88,15 @@ BlCompositeSelection >> deselect: aFromIndex to: aToIndex [
 BlCompositeSelection >> deselectAll [
 	"Remove all "
 
-	self reverseDo: [ :aMonotoneSelection | self deselect: aMonotoneSelection from to: aMonotoneSelection to ].
+	self reverseDo: [ :aMonotoneSelection |
+		self deselect: aMonotoneSelection from to: aMonotoneSelection to ]
+]
+
+{ #category : #'api - selection' }
+BlCompositeSelection >> deselectIndex: anIndex [
+	"Remove a given selection"
+
+	self deselect: anIndex - 1 to: anIndex
 ]
 
 { #category : #'api - enumerating' }
@@ -198,10 +206,23 @@ BlCompositeSelection >> select: aFromIndex to: aToIndex [
 ]
 
 { #category : #'api - selection' }
+BlCompositeSelection >> selectAllIndexes: aCollection [
+
+	aCollection do: [ :idx | self selectIndex: idx ]
+]
+
+{ #category : #'api - selection' }
+BlCompositeSelection >> selectIndex: anIndex [
+	"add a given selection"
+
+	self select: anIndex - 1 to: anIndex
+]
+
+{ #category : #'api - selection' }
 BlCompositeSelection >> selectOnly: anIndex [
 
 	self deselectAll.
-	self select: anIndex - 1 to: anIndex
+	self selectIndex: anIndex
 ]
 
 { #category : #accessing }
