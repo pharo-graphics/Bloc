@@ -219,7 +219,7 @@ BlCompositeSelection >> selectIndex: anIndex [
 ]
 
 { #category : #'api - selection' }
-BlCompositeSelection >> selectOnly: anIndex [
+BlCompositeSelection >> selectOnlyIndex: anIndex [
 
 	self deselectAll.
 	self selectIndex: anIndex
