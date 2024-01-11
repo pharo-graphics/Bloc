@@ -84,6 +84,13 @@ BlCompositeSelection >> deselect: aFromIndex to: aToIndex [
 	self remove: (BlSelection from: aFromIndex to: aToIndex)
 ]
 
+{ #category : #'api - selection' }
+BlCompositeSelection >> deselectAll [
+	"Remove all "
+
+	self reverseDo: [ :aMonotoneSelection | self deselect: aMonotoneSelection from to: aMonotoneSelection to ].
+]
+
 { #category : #'api - enumerating' }
 BlCompositeSelection >> do: aBlock [
 	selections do: aBlock
@@ -188,6 +195,13 @@ BlCompositeSelection >> select: aFromIndex to: aToIndex [
 	"Add a new monotone selection merging it with existing ones within provided indices"
 	
 	self add: (BlSelection from: (aFromIndex max: 0) to: aToIndex)
+]
+
+{ #category : #'api - selection' }
+BlCompositeSelection >> selectOnly: anIndex [
+
+	self deselectAll.
+	self select: anIndex - 1 to: anIndex
 ]
 
 { #category : #accessing }
