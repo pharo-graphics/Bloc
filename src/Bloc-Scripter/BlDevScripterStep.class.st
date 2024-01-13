@@ -1,12 +1,14 @@
 Class {
 	#name : #BlDevScripterStep,
 	#superclass : #Object,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'state',
 		'label',
 		'properties'
 	],
-	#category : 'Bloc-Scripter-Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
 { #category : #'accessing - properties' }

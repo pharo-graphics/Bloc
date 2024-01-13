@@ -232,8 +232,9 @@ BlExampleEventsCountingElement >> incrementPositionInSpaceChangedCount [
 
 { #category : #initialization }
 BlExampleEventsCountingElement >> initialize [
+
 	super initialize.
-	
+
 	clickCount := 0.
 	mouseDownCount := 0.
 	mouseEnterCount := 0.
@@ -253,78 +254,112 @@ BlExampleEventsCountingElement >> initialize [
 	focusCount := 0.
 	blurCount := 0.
 	positionInSpaceChangedCount := 0.
-	
-	self when: BlClickEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget incrementClickCount ].
-	
-	self when: BlMouseEnterEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget incrementMouseEnterCount ].
-	
-	self when: BlMouseLeaveEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget incrementMouseLeaveCount ].
-	
-	self when: BlMouseMoveEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget incrementMouseMoveCount ].
-	
-	self when: BlMouseOverEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget incrementMouseOverCount ].
-	
-	self when: BlMouseOutEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget incrementMouseOutCount ].
-	
-	self when: BlMouseDownEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget incrementMouseDownCount ].
-	
-	self when: BlMouseUpEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget incrementMouseUpCount ].
-	
-	self when: BlDragStartEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget incrementDragStartCount ].
-	
-	self when: BlDragEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget incrementDragCount ].
-	
-	self when: BlDragEndEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget incrementDragEndCount ].
-	
-	self when: BlDragEnterEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget incrementDragEnterCount ].
-	
-	self when: BlDragLeaveEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget incrementDragLeaveCount ].
-	
-	self when: BlDropEvent do: [ :anEvent |
-		anEvent consumed: true.
-		anEvent currentTarget incrementDropCount ].
-	
-	self when: BlFocusInEvent do: [ :anEvent |
-		anEvent currentTarget incrementFocusInCount ].
-	
-	self when: BlFocusOutEvent do: [ :anEvent |
-		anEvent currentTarget incrementFocusOutCount ].
-	
-	self when: BlFocusEvent do: [ :anEvent |
-		anEvent currentTarget incrementFocusCount ].
-	
-	self when: BlBlurEvent do: [ :anEvent |
-		anEvent currentTarget incrementBlurCount ].
-	
-	self when: BlElementPositionInSpaceChangedEvent do: [ :anEvent |
-		anEvent currentTarget incrementPositionInSpaceChangedCount ].
-	
+
+	self addEventHandler: (BlEventHandler
+			 on: BlClickEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 anEvent currentTarget incrementClickCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlMouseEnterEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 anEvent currentTarget incrementMouseEnterCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlMouseLeaveEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 anEvent currentTarget incrementMouseLeaveCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlMouseMoveEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 anEvent currentTarget incrementMouseMoveCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlMouseOverEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 anEvent currentTarget incrementMouseOverCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlMouseOutEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 anEvent currentTarget incrementMouseOutCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlMouseDownEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 anEvent currentTarget incrementMouseDownCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlMouseUpEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 anEvent currentTarget incrementMouseUpCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlDragStartEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 anEvent currentTarget incrementDragStartCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlDragEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 anEvent currentTarget incrementDragCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlDragEndEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 anEvent currentTarget incrementDragEndCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlDragEnterEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 anEvent currentTarget incrementDragEnterCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlDragLeaveEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 anEvent currentTarget incrementDragLeaveCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlDropEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 anEvent currentTarget incrementDropCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlFocusInEvent
+			 do: [ :anEvent | anEvent currentTarget incrementFocusInCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlFocusOutEvent
+			 do: [ :anEvent | anEvent currentTarget incrementFocusOutCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlFocusEvent
+			 do: [ :anEvent | anEvent currentTarget incrementFocusCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlBlurEvent
+			 do: [ :anEvent | anEvent currentTarget incrementBlurCount ]).
+
+	self addEventHandler: (BlEventHandler
+			 on: BlElementPositionInSpaceChangedEvent
+			 do: [ :anEvent |
+				 anEvent currentTarget incrementPositionInSpaceChangedCount ]).
+
 	self background: Color veryVeryLightGray
 ]
 
