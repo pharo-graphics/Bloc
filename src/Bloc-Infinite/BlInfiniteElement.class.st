@@ -1028,9 +1028,7 @@ BlInfiniteElement >> maxFlingVelocity [
 BlInfiniteElement >> maxHeight: aNumber [
 
 	"set maxHeight in constraints"
-	self constraintsDo: [ :c | c maxHeight: aNumber ].
-	" arm a height update after next layout to allow scrollToIndex: to work as expected in a comboBox as an example"
-	self whenLayoutedDoOnce: [ self height: self measuredHeight ]
+	self constraintsDo: [ :c | c maxHeight: aNumber ]
 ]
 
 { #category : #'accessing - properties' }
@@ -1042,9 +1040,7 @@ BlInfiniteElement >> minFlingVelocity [
 BlInfiniteElement >> minHeight: aNumber [
 
 	"set maxHeight in constraints"
-	self constraintsDo: [ :c | c minHeight: aNumber ].
-	" arm a height update after next layout to allow scrollToIndex: to work as expected in a comboBox as an example"
-	self whenLayoutedDoOnce: [ self height: self measuredHeight ]
+	self constraintsDo: [ :c | c minHeight: aNumber ]
 ]
 
 { #category : #notifying }
