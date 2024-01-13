@@ -93,6 +93,12 @@ BlCompositeSelection >> deselectAll [
 ]
 
 { #category : #'api - selection' }
+BlCompositeSelection >> deselectAllIndexes: aCollection [
+
+	aCollection do: [ :idx | self deselectIndex: idx ]
+]
+
+{ #category : #'api - selection' }
 BlCompositeSelection >> deselectIndex: anIndex [
 	"Remove a given selection"
 
