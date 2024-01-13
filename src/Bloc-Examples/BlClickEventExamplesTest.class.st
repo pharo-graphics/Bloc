@@ -199,16 +199,22 @@ BlClickEventExamplesTest >> threeElementsInScripter [
 		  anEventCollection := aScripter userData
 			                       at: #clicks
 			                       ifAbsentPut: [ OrderedCollection new ].
-		  anElement when: BlClickEvent do: [ :anEvent |
-			  anEventCollection add: #parent.
-			  anEvent consumed: true ].
+		  anElement addEventHandler: (BlEventHandler
+				   on: BlClickEvent
+				   do: [ :anEvent |
+					   anEventCollection add: #parent.
+					   anEvent consumed: true ]).
 		  aChild := anElement childAt: 1.
-		  aChild when: BlClickEvent do: [ :anEvent |
-			  anEventCollection add: #child.
-			  anEvent consumed: true ].
-		  (aChild childAt: 1) when: BlClickEvent do: [ :anEvent |
-			  anEventCollection add: #grandchild.
-			  anEvent consumed: true ].
+		  aChild addEventHandler: (BlEventHandler
+				   on: BlClickEvent
+				   do: [ :anEvent |
+					   anEventCollection add: #child.
+					   anEvent consumed: true ]).
+		  (aChild childAt: 1) addEventHandler: (BlEventHandler
+				   on: BlClickEvent
+				   do: [ :anEvent |
+					   anEventCollection add: #grandchild.
+					   anEvent consumed: true ]).
 		  anElement ]
 ]
 
@@ -256,16 +262,22 @@ BlClickEventExamplesTest >> threeElementsWithFalseChildClippingInScripter [
 		  anEventCollection := aScripter userData
 			                       at: #clicks
 			                       ifAbsentPut: [ OrderedCollection new ].
-		  anElement when: BlClickEvent do: [ :anEvent |
-			  anEventCollection add: #parent.
-			  anEvent consumed: true ].
+		  anElement addEventHandler: (BlEventHandler
+				   on: BlClickEvent
+				   do: [ :anEvent |
+					   anEventCollection add: #parent.
+					   anEvent consumed: true ]).
 		  aChild := anElement childAt: 1.
-		  aChild when: BlClickEvent do: [ :anEvent |
-			  anEventCollection add: #child.
-			  anEvent consumed: true ].
-		  (aChild childAt: 1) when: BlClickEvent do: [ :anEvent |
-			  anEventCollection add: #grandchild.
-			  anEvent consumed: true ].
+		  aChild addEventHandler: (BlEventHandler
+				   on: BlClickEvent
+				   do: [ :anEvent |
+					   anEventCollection add: #child.
+					   anEvent consumed: true ]).
+		  (aChild childAt: 1) addEventHandler: (BlEventHandler
+				   on: BlClickEvent
+				   do: [ :anEvent |
+					   anEventCollection add: #grandchild.
+					   anEvent consumed: true ]).
 		  anElement ]
 ]
 
@@ -292,16 +304,22 @@ BlClickEventExamplesTest >> threeElementsWithTrueChildClippingInScripter [
 		  anEventCollection := aScripter userData
 			                       at: #clicks
 			                       ifAbsentPut: [ OrderedCollection new ].
-		  anElement when: BlClickEvent do: [ :anEvent |
-			  anEventCollection add: #parent.
-			  anEvent consumed: true ].
+		  anElement addEventHandler: (BlEventHandler
+				   on: BlClickEvent
+				   do: [ :anEvent |
+					   anEventCollection add: #parent.
+					   anEvent consumed: true ]).
 		  aChild := anElement childAt: 1.
-		  aChild when: BlClickEvent do: [ :anEvent |
-			  anEventCollection add: #child.
-			  anEvent consumed: true ].
-		  (aChild childAt: 1) when: BlClickEvent do: [ :anEvent |
-			  anEventCollection add: #grandchild.
-			  anEvent consumed: true ].
+		  aChild addEventHandler: (BlEventHandler
+				   on: BlClickEvent
+				   do: [ :anEvent |
+					   anEventCollection add: #child.
+					   anEvent consumed: true ]).
+		  (aChild childAt: 1) addEventHandler: (BlEventHandler
+				   on: BlClickEvent
+				   do: [ :anEvent |
+					   anEventCollection add: #grandchild.
+					   anEvent consumed: true ]).
 		  anElement ]
 ]
 
@@ -325,11 +343,15 @@ BlClickEventExamplesTest >> twoElementsInScripter [
 		  anEventCollection := aScripter userData
 			                       at: #clicks
 			                       ifAbsentPut: [ OrderedCollection new ].
-		  anElement when: BlClickEvent do: [ :anEvent |
-			  anEventCollection add: #parent.
-			  anEvent consumed: true ].
-		  (anElement childAt: 1) when: BlClickEvent do: [ :anEvent |
-			  anEventCollection add: #child.
-			  anEvent consumed: true ].
+		  anElement addEventHandler: (BlEventHandler
+				   on: BlClickEvent
+				   do: [ :anEvent |
+					   anEventCollection add: #parent.
+					   anEvent consumed: true ]).
+		  (anElement childAt: 1) addEventHandler: (BlEventHandler
+				   on: BlClickEvent
+				   do: [ :anEvent |
+					   anEventCollection add: #child.
+					   anEvent consumed: true ]).
 		  anElement ]
 ]

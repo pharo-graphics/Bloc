@@ -10,6 +10,7 @@ Class {
 
 { #category : #tests }
 BlElementAttachmentTest >> testAddToSpace [
+
 	<sampleInstance>
 	| aSpace aContainer aChild addedToScene removedFromScene |
 	aSpace := BlSpace new.
@@ -18,108 +19,109 @@ BlElementAttachmentTest >> testAddToSpace [
 	aContainer addChild: aChild.
 	addedToScene := OrderedCollection new.
 	removedFromScene := OrderedCollection new.
-	aContainer
-		when: BlElementAddedToSceneGraphEvent
-		do: [ :anEvent | addedToScene add: anEvent currentTarget ].
-	aContainer
-		when: BlElementRemovedFromSceneGraphEvent
-		do: [ :anEvent | removedFromScene add: anEvent currentTarget ].
-	aChild
-		when: BlElementAddedToSceneGraphEvent
-		do: [ :anEvent | addedToScene add: anEvent currentTarget ].
-	aChild
-		when: BlElementRemovedFromSceneGraphEvent
-		do: [ :anEvent | removedFromScene add: anEvent currentTarget ].
+	aContainer addEventHandler: (BlEventHandler
+			 on: BlElementAddedToSceneGraphEvent
+			 do: [ :anEvent | addedToScene add: anEvent currentTarget ]).
+	aContainer addEventHandler: (BlEventHandler
+			 on: BlElementRemovedFromSceneGraphEvent
+			 do: [ :anEvent | removedFromScene add: anEvent currentTarget ]).
+	aChild addEventHandler: (BlEventHandler
+			 on: BlElementAddedToSceneGraphEvent
+			 do: [ :anEvent | addedToScene add: anEvent currentTarget ]).
+	aChild addEventHandler: (BlEventHandler
+			 on: BlElementRemovedFromSceneGraphEvent
+			 do: [ :anEvent | removedFromScene add: anEvent currentTarget ]).
 	self assert: aContainer isRemovedFromSceneGraph.
 	self assert: aChild isRemovedFromSceneGraph.
 	aSpace root addChild: aContainer.
 	self assert: aContainer isAttachedToSceneGraph.
 	self assert: aChild isAttachedToSceneGraph.
-	self
-		assert: addedToScene asArray
-		equals:
-			{aContainer.
-			aChild}.
-	self assert: removedFromScene asArray equals: {}.
+	self assert: addedToScene asArray equals: {
+			aContainer.
+			aChild }.
+	self assert: removedFromScene asArray equals: {  }.
 	^ aContainer
 ]
 
 { #category : #tests }
 BlElementAttachmentTest >> testDetachAndAttachChild [
+
 	<sampleInstance>
 	| aContainer aChild addedToScene removedFromScene |
 	aContainer := self testAddToSpace.
 	aChild := aContainer children first.
 	addedToScene := OrderedCollection new.
 	removedFromScene := OrderedCollection new.
-	aContainer
-		when: BlElementAddedToSceneGraphEvent
-		do: [ :anEvent | addedToScene add: anEvent currentTarget ].
-	aContainer
-		when: BlElementRemovedFromSceneGraphEvent
-		do: [ :anEvent | removedFromScene add: anEvent currentTarget ].
-	aChild
-		when: BlElementAddedToSceneGraphEvent
-		do: [ :anEvent | addedToScene add: anEvent currentTarget ].
-	aChild
-		when: BlElementRemovedFromSceneGraphEvent
-		do: [ :anEvent | removedFromScene add: anEvent currentTarget ].
+	aContainer addEventHandler: (BlEventHandler
+			 on: BlElementAddedToSceneGraphEvent
+			 do: [ :anEvent | addedToScene add: anEvent currentTarget ]).
+	aContainer addEventHandler: (BlEventHandler
+			 on: BlElementRemovedFromSceneGraphEvent
+			 do: [ :anEvent | removedFromScene add: anEvent currentTarget ]).
+	aChild addEventHandler: (BlEventHandler
+			 on: BlElementAddedToSceneGraphEvent
+			 do: [ :anEvent | addedToScene add: anEvent currentTarget ]).
+	aChild addEventHandler: (BlEventHandler
+			 on: BlElementRemovedFromSceneGraphEvent
+			 do: [ :anEvent | removedFromScene add: anEvent currentTarget ]).
 	aContainer detachChild: aChild.
 	self assert: aContainer isAttachedToSceneGraph.
 	self assert: aChild isDetachedFromSceneGraph.
 	self assert: aChild space isNil.
 	self assert: aChild parent isNil.
-	self assert: addedToScene asArray equals: {}.
-	self assert: removedFromScene asArray equals: {}.
+	self assert: addedToScene asArray equals: {  }.
+	self assert: removedFromScene asArray equals: {  }.
 	aContainer attachChild: aChild.
 	self assert: aContainer isAttachedToSceneGraph.
 	self assert: aChild isAttachedToSceneGraph.
 	self assert: aChild space == aContainer space.
 	self assert: aChild parent == aContainer.
-	self assert: addedToScene asArray equals: {}.
-	self assert: removedFromScene asArray equals: {}.
+	self assert: addedToScene asArray equals: {  }.
+	self assert: removedFromScene asArray equals: {  }.
 	^ aContainer
 ]
 
 { #category : #tests }
 BlElementAttachmentTest >> testDetachAndRemoveChild [
+
 	<sampleInstance>
 	| aContainer aChild addedToScene removedFromScene |
 	aContainer := self testAddToSpace.
 	aChild := aContainer children first.
 	addedToScene := OrderedCollection new.
 	removedFromScene := OrderedCollection new.
-	aContainer
-		when: BlElementAddedToSceneGraphEvent
-		do: [ :anEvent | addedToScene add: anEvent currentTarget ].
-	aContainer
-		when: BlElementRemovedFromSceneGraphEvent
-		do: [ :anEvent | removedFromScene add: anEvent currentTarget ].
-	aChild
-		when: BlElementAddedToSceneGraphEvent
-		do: [ :anEvent | addedToScene add: anEvent currentTarget ].
-	aChild
-		when: BlElementRemovedFromSceneGraphEvent
-		do: [ :anEvent | removedFromScene add: anEvent currentTarget ].
+	aContainer addEventHandler: (BlEventHandler
+			 on: BlElementAddedToSceneGraphEvent
+			 do: [ :anEvent | addedToScene add: anEvent currentTarget ]).
+	aContainer addEventHandler: (BlEventHandler
+			 on: BlElementRemovedFromSceneGraphEvent
+			 do: [ :anEvent | removedFromScene add: anEvent currentTarget ]).
+	aChild addEventHandler: (BlEventHandler
+			 on: BlElementAddedToSceneGraphEvent
+			 do: [ :anEvent | addedToScene add: anEvent currentTarget ]).
+	aChild addEventHandler: (BlEventHandler
+			 on: BlElementRemovedFromSceneGraphEvent
+			 do: [ :anEvent | removedFromScene add: anEvent currentTarget ]).
 	aContainer detachChild: aChild.
 	self assert: aContainer isAttachedToSceneGraph.
 	self assert: aChild isDetachedFromSceneGraph.
 	self assert: aChild space isNil.
 	self assert: aChild parent isNil.
-	self assert: addedToScene asArray equals: {}.
-	self assert: removedFromScene asArray equals: {}.
+	self assert: addedToScene asArray equals: {  }.
+	self assert: removedFromScene asArray equals: {  }.
 	aContainer removeDetachedChild: aChild.
 	self assert: aContainer isAttachedToSceneGraph.
 	self assert: aChild isRemovedFromSceneGraph.
 	self assert: aChild space isNil.
 	self assert: aChild parent isNil.
-	self assert: addedToScene asArray equals: {}.
-	self assert: removedFromScene asArray equals: {aChild}.
+	self assert: addedToScene asArray equals: {  }.
+	self assert: removedFromScene asArray equals: { aChild }.
 	^ aContainer
 ]
 
 { #category : #tests }
 BlElementAttachmentTest >> testDetachAndRemoveContainer [
+
 	<sampleInstance>
 	| aRoot aContainer aChild addedToScene removedFromScene |
 	aContainer := self testAddToSpace.
@@ -127,18 +129,18 @@ BlElementAttachmentTest >> testDetachAndRemoveContainer [
 	aRoot := aContainer parent.
 	addedToScene := OrderedCollection new.
 	removedFromScene := OrderedCollection new.
-	aContainer
-		when: BlElementAddedToSceneGraphEvent
-		do: [ :anEvent | addedToScene add: anEvent currentTarget ].
-	aContainer
-		when: BlElementRemovedFromSceneGraphEvent
-		do: [ :anEvent | removedFromScene add: anEvent currentTarget ].
-	aChild
-		when: BlElementAddedToSceneGraphEvent
-		do: [ :anEvent | addedToScene add: anEvent currentTarget ].
-	aChild
-		when: BlElementRemovedFromSceneGraphEvent
-		do: [ :anEvent | removedFromScene add: anEvent currentTarget ].
+	aContainer addEventHandler: (BlEventHandler
+			 on: BlElementAddedToSceneGraphEvent
+			 do: [ :anEvent | addedToScene add: anEvent currentTarget ]).
+	aContainer addEventHandler: (BlEventHandler
+			 on: BlElementRemovedFromSceneGraphEvent
+			 do: [ :anEvent | removedFromScene add: anEvent currentTarget ]).
+	aChild addEventHandler: (BlEventHandler
+			 on: BlElementAddedToSceneGraphEvent
+			 do: [ :anEvent | addedToScene add: anEvent currentTarget ]).
+	aChild addEventHandler: (BlEventHandler
+			 on: BlElementRemovedFromSceneGraphEvent
+			 do: [ :anEvent | removedFromScene add: anEvent currentTarget ]).
 	aRoot detachChild: aContainer.
 	self assert: aContainer isDetachedFromSceneGraph.
 	self assert: aContainer space isNil.
@@ -146,8 +148,8 @@ BlElementAttachmentTest >> testDetachAndRemoveContainer [
 	self assert: aChild isDetachedFromSceneGraph.
 	self assert: aChild space isNil.
 	self assert: aChild parent == aContainer.
-	self assert: addedToScene asArray equals: {}.
-	self assert: removedFromScene asArray equals: {}.
+	self assert: addedToScene asArray equals: {  }.
+	self assert: removedFromScene asArray equals: {  }.
 	aRoot removeDetachedChild: aContainer.
 	self assert: aContainer isRemovedFromSceneGraph.
 	self assert: aContainer space isNil.
@@ -155,28 +157,27 @@ BlElementAttachmentTest >> testDetachAndRemoveContainer [
 	self assert: aChild isRemovedFromSceneGraph.
 	self assert: aChild space isNil.
 	self assert: aChild parent == aContainer.
-	self assert: addedToScene asArray equals: {}.
-	self
-		assert: removedFromScene asArray
-		equals:
-			{aContainer.
-			aChild}.
+	self assert: addedToScene asArray equals: {  }.
+	self assert: removedFromScene asArray equals: {
+			aContainer.
+			aChild }.
 	^ aContainer
 ]
 
 { #category : #tests }
 BlElementAttachmentTest >> testDetachRequestFocusAndAttachChild [
+
 	<sampleInstance>
 	| aContainer aChild focusEvents |
 	aContainer := self testAddToSpace.
 	aChild := aContainer children first.
 	focusEvents := OrderedCollection new.
-	aContainer
-		when: BlFocusInEvent
-		do: [ :anEvent | focusEvents add: anEvent currentTarget ].
-	aChild
-		when: BlFocusEvent
-		do: [ :anEvent | focusEvents add: anEvent currentTarget ].
+	aContainer addEventHandler: (BlEventHandler
+			 on: BlFocusInEvent
+			 do: [ :anEvent | focusEvents add: anEvent currentTarget ]).
+	aChild addEventHandler: (BlEventHandler
+			 on: BlFocusEvent
+			 do: [ :anEvent | focusEvents add: anEvent currentTarget ]).
 	self assert: aChild isFocused not.
 	aContainer detachChild: aChild.
 	aChild requestFocus.
@@ -186,15 +187,13 @@ BlElementAttachmentTest >> testDetachRequestFocusAndAttachChild [
 	self assert: aChild space isNil.
 	self assert: aChild parent isNil.
 	self assert: aChild isFocused.
-	self assert: focusEvents asArray equals: {}.
+	self assert: focusEvents asArray equals: {  }.
 	aContainer attachChild: aChild.
 	self assert: aContainer isAttachedToSceneGraph.
 	self assert: aChild isAttachedToSceneGraph.
 	self assert: aChild space focusOwner equals: aChild.
-	self
-		assert: focusEvents asArray
-		equals:
-			{aContainer.
-			aChild}.
+	self assert: focusEvents asArray equals: {
+			aContainer.
+			aChild }.
 	^ aContainer
 ]
