@@ -51,3 +51,22 @@ TBlDebug >> assert: aBlock description: aStringOrBlock [
 
 	self class assert: aBlock description: aStringOrBlock
 ]
+
+{ #category : #'debug - asserting' }
+TBlDebug >> assert: actual equals: expected [
+	^ self
+		assert: actual = expected
+		description: [self comparingStringBetween: actual and: expected]
+]
+
+{ #category : #'debug - asserting' }
+TBlDebug >> comparingStringBetween: actual and: expected [
+
+	^ String streamContents: [:stream |
+			stream
+				nextPutAll: 'Got ';
+				nextPutAll: actual fullPrintString;
+				nextPutAll: ' instead of ';
+				nextPutAll: expected fullPrintString;
+				nextPutAll: '.']
+]

@@ -41,13 +41,13 @@ BlMouseOverOutAndEnterLeaveEventExample >> basicMouseEnterAndLeave [
 	| aContainer |
 	aContainer := self elementWithoutChildren.
 
-	aContainer
-		when: BlMouseEnterEvent
-		do: [ :anEvent | self markElement: anEvent currentTarget ].
+	aContainer addEventHandler: (BlEventHandler
+			 on: BlMouseEnterEvent
+			 do: [ :anEvent | self markElement: anEvent currentTarget ]).
 
-	aContainer
-		when: BlMouseLeaveEvent
-		do: [ :anEvent | self unmarkElement: anEvent currentTarget ].
+	aContainer addEventHandler: (BlEventHandler
+			 on: BlMouseLeaveEvent
+			 do: [ :anEvent | self unmarkElement: anEvent currentTarget ]).
 
 	^ aContainer
 ]
@@ -60,13 +60,13 @@ BlMouseOverOutAndEnterLeaveEventExample >> basicMouseOverAndOut [
 	| aContainer |
 	aContainer := self elementWithoutChildren.
 
-	aContainer
-		when: BlMouseOverEvent
-		do: [ :anEvent | self markElement: anEvent currentTarget ].
+	aContainer addEventHandler: (BlEventHandler
+			 on: BlMouseOverEvent
+			 do: [ :anEvent | self markElement: anEvent currentTarget ]).
 
-	aContainer
-		when: BlMouseOutEvent
-		do: [ :anEvent | self unmarkElement: anEvent currentTarget ].
+	aContainer addEventHandler: (BlEventHandler
+			 on: BlMouseOutEvent
+			 do: [ :anEvent | self unmarkElement: anEvent currentTarget ]).
 
 	^ aContainer
 ]
