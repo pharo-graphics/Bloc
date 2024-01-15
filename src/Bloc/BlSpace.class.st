@@ -8,7 +8,6 @@ For now
 ## Comments from `BlSpace`
 I am the logical representation of a window in Bloc regardless of the current Host in use.
 Here are some of the important objects I use and talk to:
-- `BlCursor`
 - `BlTime`
 - Various `BlBaseEventProcessor` subclasses broker `BlEvent` types
 - `BlSpaceFrame`
@@ -548,10 +547,9 @@ BlSpace >> currentCursor [
 { #category : #'cursor managing' }
 BlSpace >> currentCursor: aCursor [
 
-	currentCursor ifNotNil: [ :cc | cc deactivateOn: self ].
 	currentCursor := aCursor.
-	currentCursor ifNil: [ ^ self updateCursor: BlCursor default ].
-	currentCursor activateOn: self
+	currentCursor ifNil: [ ^ self updateCursor: Cursor normal ].
+	self updateCursor: aCursor
 ]
 
 { #category : #initialization }
@@ -1394,7 +1392,7 @@ BlSpace >> initialize [
 	self title: self defaultTitle.
 	self focused: false.
 
-	self updateCursor: BlCursor default.
+	self updateCursor: Cursor normal.
 
 	self root space: self
 
@@ -1925,9 +1923,9 @@ BlSpace >> universe [
 ]
 
 { #category : #'cursor managing' }
-BlSpace >> updateCursor: aBlCursor [
+BlSpace >> updateCursor: aCursor [
 
-	self hostSpaceDo: [ :aHostSpace | aHostSpace cursor: aBlCursor ]
+	self hostSpaceDo: [ :aHostSpace | aHostSpace cursor: aCursor ]
 ]
 
 { #category : #accessing }

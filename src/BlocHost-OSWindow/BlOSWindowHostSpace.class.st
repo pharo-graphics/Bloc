@@ -42,9 +42,9 @@ BlOSWindowHostSpace >> close [
 ]
 
 { #category : #'host space - cursor' }
-BlOSWindowHostSpace >> cursor: aBlCursor [
+BlOSWindowHostSpace >> cursor: aCursor [
 
-	window setMouseCursor: aBlCursor asForm
+	window setMouseCursor: aCursor
 ]
 
 { #category : #'host space - geometry' }
