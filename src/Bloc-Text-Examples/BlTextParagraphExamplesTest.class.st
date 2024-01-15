@@ -11,28 +11,24 @@ Class {
 { #category : #'font - metrics' }
 BlTextParagraphExamplesTest >> ascent [
 
-	<sampleInstance>
 	^ -10
 ]
 
 { #category : #'font - metrics' }
 BlTextParagraphExamplesTest >> descent [
 
-	<sampleInstance>
 	^ 5
 ]
 
 { #category : #'instance creation' }
 BlTextParagraphExamplesTest >> emoji [
 
-	<sampleInstance>
 	^ '😃'
 ]
 
 { #category : #'instance creation' }
 BlTextParagraphExamplesTest >> emojiParagraph [
 
-	<sampleInstance>
 	| aParagraph |
 	aParagraph := self newParagraph.
 	aParagraph text: self emoji asRopedText.
@@ -43,7 +39,6 @@ BlTextParagraphExamplesTest >> emojiParagraph [
 { #category : #'instance creation' }
 BlTextParagraphExamplesTest >> emptyParagraph [
 
-	<sampleInstance>
 	| aParagraph |
 	aParagraph := self newParagraph.
 	aParagraph text: BlText empty.
@@ -54,14 +49,12 @@ BlTextParagraphExamplesTest >> emptyParagraph [
 { #category : #'font - metrics' }
 BlTextParagraphExamplesTest >> glyphWidth [
 
-	<sampleInstance>
 	^ 10
 ]
 
 { #category : #'instance creation' }
 BlTextParagraphExamplesTest >> haba [
 
-	<sampleInstance>
 	^ 'Haba'
 ]
 
@@ -79,7 +72,6 @@ BlTextParagraphExamplesTest >> habaParagraph [
 { #category : #'font - metrics' }
 BlTextParagraphExamplesTest >> height [
 
-	<sampleInstance>
 	^ 12
 ]
 
