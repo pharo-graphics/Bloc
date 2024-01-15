@@ -12,7 +12,7 @@ Class {
 		'right',
 		'bottom'
 	],
-	#category : 'Bloc-Basic-Bounds'
+	#category : #'Bloc-Basic-Bounds'
 }
 
 { #category : #'instance creation' }

@@ -12,7 +12,7 @@ Class {
 		'geometryPath',
 		'strokedBounds'
 	],
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Support'
 }
 
 { #category : #'instance creation' }

@@ -5,7 +5,7 @@ The coordinate is measured from the right side of the outer bounds
 Class {
 	#name : #BlHorizontalCoordinateRightAlignment,
 	#superclass : #BlHorizontalCoordinateAlignment,
-	#category : 'Bloc-Layouts-Alignment'
+	#category : #'Bloc-Layouts-Alignment'
 }
 
 { #category : #translation }

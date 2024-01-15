@@ -1,7 +1,7 @@
 Class {
 	#name : #BlLayoutNodeElementAction,
 	#superclass : #Object,
-	#category : 'Bloc-Layouts-Model'
+	#category : #'Bloc-Layouts-Model'
 }
 
 { #category : #evaluating }

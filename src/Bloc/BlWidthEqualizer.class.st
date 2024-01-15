@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'widthBlock'
 	],
-	#category : 'Bloc-Utilities - Equalizer'
+	#category : #'Bloc-Utilities - Equalizer'
 }
 
 { #category : #'element handlers' }

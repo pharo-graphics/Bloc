@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBlLayoutChildNode,
-	#category : 'Bloc-Layouts-Model'
+	#category : #'Bloc-Layouts-Model'
 }
 
 { #category : #'api - geometry' }

@@ -11,7 +11,7 @@ Class {
 		'eventClass',
 		'eventTarget'
 	],
-	#category : 'Bloc-Events-Handler'
+	#category : #'Bloc-Events-Handler'
 }
 
 { #category : #'instance creation' }

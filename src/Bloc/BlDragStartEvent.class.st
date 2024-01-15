@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDragStartEvent,
 	#superclass : #BlBaseDragEvent,
-	#category : 'Bloc-Events'
+	#category : #'Bloc-Events'
 }
 
 { #category : #sending }

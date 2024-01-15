@@ -5,7 +5,7 @@ Class {
 		'length',
 		'origin'
 	],
-	#category : 'Bloc-Basic-Geometry'
+	#category : #'Bloc-Basic-Geometry'
 }
 
 { #category : #'geometry testing' }
