@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'layoutPositionsRange'
 	],
-	#category : 'Bloc-Infinite-DataSource'
+	#category : #'Bloc-Infinite-DataSource'
 }
 
 { #category : #accessing }

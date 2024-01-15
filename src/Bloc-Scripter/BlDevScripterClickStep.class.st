@@ -11,7 +11,7 @@ Here you can see how to configure a fire and check a click event on a child elem
 Class {
 	#name : #BlDevScripterClickStep,
 	#superclass : #BlDevScripterInteractionStep,
-	#category : 'Bloc-Scripter-Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
 { #category : #accessing }

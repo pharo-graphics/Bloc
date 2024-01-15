@@ -2,14 +2,12 @@
 I am a BlLayout used to allow the BlElement to adopt the correct size to display its children.
 "
 Class {
-	#name : 'BlSvgGroupLayout',
-	#superclass : 'BlBasicLayout',
-	#category : 'Bloc-SVG-Layout',
-	#package : 'Bloc-SVG',
-	#tag : 'Layout'
+	#name : #BlSvgGroupLayout,
+	#superclass : #BlBasicLayout,
+	#category : #'Bloc-SVG-Layout'
 }
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlSvgGroupLayout >> layout: anElement in: aRectangle [
 	| visualBounds |
 	

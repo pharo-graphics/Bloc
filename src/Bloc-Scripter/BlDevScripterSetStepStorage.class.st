@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterSetStepStorage,
 	#superclass : #Object,
-	#category : 'Bloc-Scripter-Scripter-Storage'
+	#category : #'Bloc-Scripter-Scripter-Storage'
 }
 
 { #category : #storing }

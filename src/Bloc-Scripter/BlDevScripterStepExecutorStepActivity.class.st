@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterStepExecutorStepActivity,
 	#superclass : #Object,
-	#category : 'Bloc-Scripter-Scripter-Executors'
+	#category : #'Bloc-Scripter-Scripter-Executors'
 }
 
 { #category : #accessing }

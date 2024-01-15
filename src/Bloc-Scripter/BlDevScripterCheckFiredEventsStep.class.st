@@ -12,7 +12,7 @@ Class {
 	#instVars : [
 		'events'
 	],
-	#category : 'Bloc-Scripter-Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
 { #category : #asserting }

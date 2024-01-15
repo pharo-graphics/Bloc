@@ -8,7 +8,7 @@ Class {
 		'ScrollIdle',
 		'ScrollSettling'
 	],
-	#category : 'Bloc-Infinite-Core'
+	#category : #'Bloc-Infinite-Core'
 }
 
 { #category : #initialization }

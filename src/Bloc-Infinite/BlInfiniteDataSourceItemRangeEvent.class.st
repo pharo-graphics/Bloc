@@ -6,7 +6,7 @@ Class {
 		'itemCount',
 		'event'
 	],
-	#category : 'Bloc-Infinite-Events'
+	#category : #'Bloc-Infinite-Events'
 }
 
 { #category : #accessing }

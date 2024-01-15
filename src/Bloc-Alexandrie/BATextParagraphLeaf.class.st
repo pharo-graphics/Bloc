@@ -1,6 +1,6 @@
 Class {
-	#name : 'BATextParagraphLeaf',
-	#superclass : 'BlTextParagraphSegmentLeaf',
+	#name : #BATextParagraphLeaf,
+	#superclass : #BlTextParagraphSegmentLeaf,
 	#instVars : [
 		'cairoScaledFont',
 		'cairoGlyphsArray'
@@ -8,28 +8,26 @@ Class {
 	#classVars : [
 		'TabStopWidth'
 	],
-	#category : 'Bloc-Alexandrie-Text',
-	#package : 'Bloc-Alexandrie',
-	#tag : 'Text'
+	#category : #'Bloc-Alexandrie-Text'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BATextParagraphLeaf class >> tabStopWidth [
 	^ TabStopWidth ifNil: [ TabStopWidth := 36 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BATextParagraphLeaf class >> tabStopWidth: anInteger [
 	TabStopWidth := anInteger
 ]
 
-{ #category : 'drawing' }
+{ #category : #drawing }
 BATextParagraphLeaf >> aeDrawOn: aeCanvas [
 
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BATextParagraphLeaf >> tabStopWidth [
 	^ self class tabStopWidth
 ]

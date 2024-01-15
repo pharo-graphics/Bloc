@@ -5,7 +5,7 @@ I represent a concrete ""add"" command type
 Class {
 	#name : #BlInfiniteDataSourceCommandTypeAdd,
 	#superclass : #BlInfiniteDataSourceCommandType,
-	#category : 'Bloc-Infinite-DataSource'
+	#category : #'Bloc-Infinite-DataSource'
 }
 
 { #category : #dispatch }

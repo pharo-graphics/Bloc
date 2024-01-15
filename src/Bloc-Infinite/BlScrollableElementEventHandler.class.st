@@ -1,7 +1,7 @@
 Class {
 	#name : #BlScrollableElementEventHandler,
 	#superclass : #BlEventListener,
-	#category : 'Bloc-Infinite-Scrollable-Core'
+	#category : #'Bloc-Infinite-Scrollable-Core'
 }
 
 { #category : #'mouse handlers' }

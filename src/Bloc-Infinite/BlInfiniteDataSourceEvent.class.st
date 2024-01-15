@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'dataSource'
 	],
-	#category : 'Bloc-Infinite-Events'
+	#category : #'Bloc-Infinite-Events'
 }
 
 { #category : #accessing }

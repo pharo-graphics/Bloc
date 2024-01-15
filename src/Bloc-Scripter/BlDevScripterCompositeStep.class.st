@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'steps'
 	],
-	#category : 'Bloc-Scripter-Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
 { #category : #adding }

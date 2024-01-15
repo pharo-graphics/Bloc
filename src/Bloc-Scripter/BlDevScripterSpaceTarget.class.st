@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterSpaceTarget,
 	#superclass : #BlDevScripterTarget,
-	#category : 'Bloc-Scripter-Scripter-Targets'
+	#category : #'Bloc-Scripter-Scripter-Targets'
 }
 
 { #category : #searching }

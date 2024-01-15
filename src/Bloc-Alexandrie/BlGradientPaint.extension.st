@@ -1,6 +1,6 @@
-Extension { #name : 'BlGradientPaint' }
+Extension { #name : #BlGradientPaint }
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlGradientPaint >> aeApplyAsBackgroundTo: aeCanvas opacity: backgroundOpacity [
 
 	aeCanvas

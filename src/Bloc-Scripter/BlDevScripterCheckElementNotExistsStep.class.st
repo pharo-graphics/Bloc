@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'elementId'
 	],
-	#category : 'Bloc-Scripter-Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
 { #category : #actions }

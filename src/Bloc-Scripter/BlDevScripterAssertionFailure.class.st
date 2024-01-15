@@ -7,5 +7,5 @@ Class {
 	#superclass : #AssertionFailure,
 	#traits : 'TBlDevScripterException',
 	#classTraits : 'TBlDevScripterException classTrait',
-	#category : 'Bloc-Scripter-Scripter-Exceptions'
+	#category : #'Bloc-Scripter-Scripter-Exceptions'
 }

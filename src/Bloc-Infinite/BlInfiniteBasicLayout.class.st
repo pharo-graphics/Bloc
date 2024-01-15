@@ -1,7 +1,7 @@
 Class {
 	#name : #BlInfiniteBasicLayout,
 	#superclass : #BlInfiniteLayout,
-	#category : 'Bloc-Infinite-Layout'
+	#category : #'Bloc-Infinite-Layout'
 }
 
 { #category : #layout }

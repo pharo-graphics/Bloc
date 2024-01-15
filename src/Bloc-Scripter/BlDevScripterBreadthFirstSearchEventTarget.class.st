@@ -5,7 +5,7 @@ Class {
 		'target',
 		'elementClass'
 	],
-	#category : 'Bloc-Scripter-Scripter-Targets'
+	#category : #'Bloc-Scripter-Scripter-Targets'
 }
 
 { #category : #searching }

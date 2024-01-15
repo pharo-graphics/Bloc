@@ -3,7 +3,7 @@ I define very basic methods to create check steps using ${class:BlDevScripterMul
 "
 Trait {
 	#name : #TBlDevScripterCheckStepCreation,
-	#category : 'Bloc-Scripter-Scripter'
+	#category : #'Bloc-Scripter-Scripter'
 }
 
 { #category : #adding }

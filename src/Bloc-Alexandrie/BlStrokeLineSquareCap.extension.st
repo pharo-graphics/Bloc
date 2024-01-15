@@ -1,6 +1,6 @@
-Extension { #name : 'BlStrokeLineSquareCap' }
+Extension { #name : #BlStrokeLineSquareCap }
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlStrokeLineSquareCap >> aeApplyTo: aeCanvas [ 
 	
 	aeCanvas setCapSquare

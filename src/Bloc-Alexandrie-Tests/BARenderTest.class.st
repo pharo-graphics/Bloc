@@ -1,7 +1,7 @@
 Class {
 	#name : #BARenderTest,
 	#superclass : #AePixelMatchTest,
-	#category : 'Bloc-Alexandrie-Tests-Base'
+	#category : #'Bloc-Alexandrie-Tests-Base'
 }
 
 { #category : #exporting }

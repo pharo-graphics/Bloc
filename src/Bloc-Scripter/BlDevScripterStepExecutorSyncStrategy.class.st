@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterStepExecutorSyncStrategy,
 	#superclass : #BlDevScripterStepExecutorStrategy,
-	#category : 'Bloc-Scripter-Scripter-Executors'
+	#category : #'Bloc-Scripter-Scripter-Executors'
 }
 
 { #category : #execution }

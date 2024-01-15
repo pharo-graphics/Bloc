@@ -8,7 +8,7 @@ Class {
 		'hasCustomTarget',
 		'realStep'
 	],
-	#category : 'Bloc-Scripter-Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
 { #category : #adding }

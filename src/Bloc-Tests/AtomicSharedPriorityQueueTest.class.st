@@ -1,7 +1,7 @@
 Class {
 	#name : #AtomicSharedPriorityQueueTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests-TaskIt'
+	#category : #'Bloc-Tests-TaskIt'
 }
 
 { #category : #tests }

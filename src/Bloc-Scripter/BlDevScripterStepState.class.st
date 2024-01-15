@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Scripter-Scripter-States'
+	#category : #'Bloc-Scripter-Scripter-States'
 }
 
 { #category : #cleanup }

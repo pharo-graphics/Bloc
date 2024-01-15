@@ -7,7 +7,7 @@ Class {
 		'isRunning',
 		'pendingInitialRun'
 	],
-	#category : 'Bloc-Infinite-Scrollable-Core'
+	#category : #'Bloc-Infinite-Scrollable-Core'
 }
 
 { #category : #initialization }

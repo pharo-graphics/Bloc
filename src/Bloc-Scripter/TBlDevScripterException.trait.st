@@ -7,7 +7,7 @@ Trait {
 		'scripter',
 		'exception'
 	],
-	#category : 'Bloc-Scripter-Scripter-Exceptions'
+	#category : #'Bloc-Scripter-Scripter-Exceptions'
 }
 
 { #category : #'api - accessing' }

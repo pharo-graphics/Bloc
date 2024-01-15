@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterEventPosition,
 	#superclass : #Object,
-	#category : 'Bloc-Scripter-Scripter-Event Positions'
+	#category : #'Bloc-Scripter-Scripter-Event Positions'
 }
 
 { #category : #setup }

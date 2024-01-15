@@ -13,7 +13,7 @@ Class {
 	#classInstVars : [
 		'instance'
 	],
-	#category : 'Bloc-Infinite-DataSource'
+	#category : #'Bloc-Infinite-DataSource'
 }
 
 { #category : #accessing }

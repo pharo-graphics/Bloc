@@ -17,7 +17,7 @@ infiniteElement dataSource
 Class {
 	#name : #BlInfiniteDataSourceChanged,
 	#superclass : #BlInfiniteDataSourceEvent,
-	#category : 'Bloc-Infinite-Events'
+	#category : #'Bloc-Infinite-Events'
 }
 
 { #category : #sending }

@@ -1,34 +1,32 @@
 Class {
-	#name : 'BATextMeasurer',
-	#superclass : 'BlHostTextMeasurer',
+	#name : #BATextMeasurer,
+	#superclass : #BlHostTextMeasurer,
 	#instVars : [
 		'lineAdvance'
 	],
-	#category : 'Bloc-Alexandrie-Text',
-	#package : 'Bloc-Alexandrie',
-	#tag : 'Text'
+	#category : #'Bloc-Alexandrie-Text'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BATextMeasurer >> canvas [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BATextMeasurer >> measureTextParagraph: aBlTextParagraph [
 
 	aBlTextParagraph measureOn: self
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BATextMeasurer >> measureTextSpan: aBlSpan [
 	"Measure a given text span and return paragraph span with computed metrics"
 
 	^ self newParagraphSpanFor: aBlSpan
 ]
 
-{ #category : 'paragraph span instance creation' }
+{ #category : #'paragraph span instance creation' }
 BATextMeasurer >> newParagraphSpan [
 	^ BATextParagraphSpan new
 ]

@@ -46,7 +46,7 @@ Class {
 		'loopDoneTime',
 		'loops'
 	],
-	#category : 'Bloc-Animation-Basic'
+	#category : #'Bloc-Animation-Basic'
 }
 
 { #category : #'action  handling' }

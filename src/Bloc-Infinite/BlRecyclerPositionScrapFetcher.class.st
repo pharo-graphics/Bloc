@@ -1,7 +1,7 @@
 Class {
 	#name : #BlRecyclerPositionScrapFetcher,
 	#superclass : #BlInfiniteRecyclerFetcher,
-	#category : 'Bloc-Infinite-Recycler'
+	#category : #'Bloc-Infinite-Recycler'
 }
 
 { #category : #initialization }

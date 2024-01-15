@@ -3,7 +3,7 @@ Class {
 	#superclass : #BlElement,
 	#traits : 'TBlAlignable',
 	#classTraits : 'TBlAlignable classTrait',
-	#category : 'Bloc-Tests-Layouts-Alignment'
+	#category : #'Bloc-Tests-Layouts-Alignment'
 }
 
 { #category : #accessing }

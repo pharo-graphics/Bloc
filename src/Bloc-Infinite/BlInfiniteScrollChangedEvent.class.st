@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'scrollState'
 	],
-	#category : 'Bloc-Infinite-Events'
+	#category : #'Bloc-Infinite-Events'
 }
 
 { #category : #'instance creation' }

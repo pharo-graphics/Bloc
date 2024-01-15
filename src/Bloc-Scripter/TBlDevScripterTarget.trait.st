@@ -3,7 +3,7 @@ I define common step target definitions.
 "
 Trait {
 	#name : #TBlDevScripterTarget,
-	#category : 'Bloc-Scripter-Scripter'
+	#category : #'Bloc-Scripter-Scripter'
 }
 
 { #category : #'targets - converting' }

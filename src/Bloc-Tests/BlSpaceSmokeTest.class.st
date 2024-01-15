@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSpaceSmokeTest,
 	#superclass : #BlParameterizedHostTest,
-	#category : 'Bloc-Tests-Space'
+	#category : #'Bloc-Tests-Space'
 }
 
 { #category : #tests }

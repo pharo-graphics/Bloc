@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'actualWidth'
 	],
-	#category : 'Bloc-Infinite-Core'
+	#category : #'Bloc-Infinite-Core'
 }
 
 { #category : #'as yet unclassified' }

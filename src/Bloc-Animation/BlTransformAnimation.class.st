@@ -18,7 +18,7 @@ Class {
 		'isAbsolute',
 		'elementTransformation'
 	],
-	#category : 'Bloc-Animation-Animation'
+	#category : #'Bloc-Animation-Animation'
 }
 
 { #category : #'instance creation' }

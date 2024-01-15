@@ -12,8 +12,8 @@ Instance creation examples:
 
 "
 Class {
-	#name : 'BlSvgPath',
-	#superclass : 'BlElementVectorGeometry',
+	#name : #BlSvgPath,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'fillRule',
 		'pathString'
@@ -22,19 +22,17 @@ Class {
 		'EvenOdd',
 		'Winding'
 	],
-	#category : 'Bloc-SVG-Geometry',
-	#package : 'Bloc-SVG',
-	#tag : 'Geometry'
+	#category : #'Bloc-SVG-Geometry'
 }
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BlSvgPath class >> initialize [
 
 	EvenOdd := #evenOdd.
 	Winding := #winding
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSvgPath class >> pathString: aString [
 	
 	^ self new
@@ -42,7 +40,7 @@ BlSvgPath class >> pathString: aString [
 		yourself
 ]
 
-{ #category : 'geometry testing' }
+{ #category : #'geometry testing' }
 BlSvgPath >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	
 	self flag: #todo. "refine! should have a boolean flag to deknow if it's filled?"
@@ -50,7 +48,7 @@ BlSvgPath >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	^ true
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlSvgPath >> initialize [
 
 	super initialize.
@@ -58,25 +56,25 @@ BlSvgPath >> initialize [
 	self useWindingFillRule
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSvgPath >> matchExtent: anExtent [
 	"Ignored"
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSvgPath >> pathString: aString [
 
 	pathString := aString.
 	self releaseCache
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSvgPath >> useEvenOddFillRule [
 
 	fillRule := EvenOdd
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSvgPath >> useWindingFillRule [
 
 	fillRule := Winding

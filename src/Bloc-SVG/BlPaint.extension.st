@@ -1,6 +1,6 @@
-Extension { #name : 'BlPaint' }
+Extension { #name : #BlPaint }
 
-{ #category : '*Bloc-SVG' }
+{ #category : #'*Bloc-SVG' }
 BlPaint >> adaptedToElement: aBlElement [
 	"Does nothing if not a BlGradientPaint"
 	^self

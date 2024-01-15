@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'availableSpace'
 	],
-	#category : 'Bloc-Infinite-Layout-Linear'
+	#category : #'Bloc-Infinite-Layout-Linear'
 }
 
 { #category : #accessing }

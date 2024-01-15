@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterCheckElementExistsStep,
 	#superclass : #BlDevScripterCheckStep,
-	#category : 'Bloc-Scripter-Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
 { #category : #actions }

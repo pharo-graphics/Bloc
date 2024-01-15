@@ -6,7 +6,7 @@ Class {
 		'strategy',
 		'activities'
 	],
-	#category : 'Bloc-Scripter-Scripter-Executors'
+	#category : #'Bloc-Scripter-Scripter-Executors'
 }
 
 { #category : #accessing }

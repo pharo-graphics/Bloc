@@ -7,7 +7,7 @@ Class {
 		'color',
 		'width'
 	],
-	#category : 'Bloc-Animation-Animation'
+	#category : #'Bloc-Animation-Animation'
 }
 
 { #category : #pulse }

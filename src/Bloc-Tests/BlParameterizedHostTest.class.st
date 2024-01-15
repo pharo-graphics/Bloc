@@ -5,7 +5,7 @@ Class {
 		'testingSpaces',
 		'hostClass'
 	],
-	#category : 'Bloc-Tests'
+	#category : #'Bloc-Tests'
 }
 
 { #category : #private }

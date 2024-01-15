@@ -4,7 +4,7 @@ I contain examples of position change logging functionality
 Class {
 	#name : #BlElementPositionChangeTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests-Basic-Changes'
+	#category : #'Bloc-Tests-Basic-Changes'
 }
 
 { #category : #accessing }

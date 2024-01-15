@@ -5,7 +5,7 @@ Class {
 		'elementId',
 		'index'
 	],
-	#category : 'Bloc-Scripter-Scripter-Targets'
+	#category : #'Bloc-Scripter-Scripter-Targets'
 }
 
 { #category : #testing }

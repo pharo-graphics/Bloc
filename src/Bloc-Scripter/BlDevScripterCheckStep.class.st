@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterCheckStep,
 	#superclass : #BlDevScripterTargetedStep,
-	#category : 'Bloc-Scripter-Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
 { #category : #accessing }

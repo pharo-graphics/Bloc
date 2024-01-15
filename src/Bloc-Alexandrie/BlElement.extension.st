@@ -1,6 +1,6 @@
-Extension { #name : 'BlElement' }
+Extension { #name : #BlElement }
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeApplyClippingWithAllParentsOn: aCanvas [
 	"Apply clipping in the whole parent chain"
 
@@ -13,7 +13,7 @@ BlElement >> aeApplyClippingWithAllParentsOn: aCanvas [
 				aCanvas preparePathAndClip ] ] ]
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeAsForm [
 
 	| invalidationBounds aCanvas |
@@ -27,7 +27,7 @@ BlElement >> aeAsForm [
 	^ aCanvas asForm
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeCompositionLayersSortedByElevationDo: aBlock [
 
 	(self isTransparent or: [ self isVisible not ])
@@ -44,7 +44,7 @@ BlElement >> aeCompositionLayersSortedByElevationDo: aBlock [
 		(each aeCompositionLayersSortedByElevationDo: aBlock) ]
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawAsSeparatedLayerOn: layerCanvas [
 	"We assume the layer exists and isValid, and it's surface is clean."
 
@@ -56,7 +56,7 @@ BlElement >> aeDrawAsSeparatedLayerOn: layerCanvas [
 	self aeDrawIgnoringOpacityAndTransformationOn: layerCanvas
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawChildrenOn: aeCanvas [
 	"Draw my children that belong to same composition layer.
 	
@@ -67,19 +67,19 @@ BlElement >> aeDrawChildrenOn: aeCanvas [
 		each aeDrawInSameLayerOn: aeCanvas ].
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawEffectAboveGeometryOn: aeCanvas [
 
 	self effect aeDrawAbove: self on: aeCanvas
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawEffectBelowGeometryOn: aeCanvas [
 
 	self effect aeDrawBelow: self on: aeCanvas
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawGeometryOn: aeCanvas [
 	"Draw my geometry with the corresponding background and border.
 
@@ -103,7 +103,7 @@ BlElement >> aeDrawGeometryOn: aeCanvas [
 
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawIgnoringOpacityAndTransformationOn: aeCanvas [
 
 	self aeDrawEffectBelowGeometryOn: aeCanvas.
@@ -114,7 +114,7 @@ BlElement >> aeDrawIgnoringOpacityAndTransformationOn: aeCanvas [
 	self markDoesNotNeedPaint
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawInSameLayerOn: aCanvas [
 
 	(self isTransparent not and: [
@@ -123,7 +123,7 @@ BlElement >> aeDrawInSameLayerOn: aCanvas [
 		ifTrue: [ self aeDrawOn: aCanvas ]
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawOn: aeCanvas [
 
 	self aeDrawOn: aeCanvas with: [
@@ -136,7 +136,7 @@ BlElement >> aeDrawOn: aeCanvas [
 		self aeDrawIgnoringOpacityAndTransformationOn: aeCanvas ]
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawOn: aeCanvas with: aBlockClosure [
 	"Evaluate a block closure taking account my opacity.
 	The element opacity affects border and background, effects, and 
@@ -150,7 +150,7 @@ BlElement >> aeDrawOn: aeCanvas with: aBlockClosure [
 
 ]
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeFullDrawOn: aCanvas [
 	"Main entry point to draw myself and my children on an Alexandrie canvas."
 

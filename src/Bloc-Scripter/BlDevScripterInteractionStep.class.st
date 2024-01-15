@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterInteractionStep,
 	#superclass : #BlDevScripterTargetedStep,
-	#category : 'Bloc-Scripter-Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 
 { #category : #initialization }

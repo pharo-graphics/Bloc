@@ -4,7 +4,7 @@ I am an observer for watching changes to an DataSource
 Class {
 	#name : #BlInfiniteDataSourceObserver,
 	#superclass : #BlBasicEventHandler,
-	#category : 'Bloc-Infinite-DataSource'
+	#category : #'Bloc-Infinite-DataSource'
 }
 
 { #category : #events }

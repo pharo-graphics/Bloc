@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'targets'
 	],
-	#category : 'Bloc-Scripter-Scripter-Targets'
+	#category : #'Bloc-Scripter-Scripter-Targets'
 }
 
 { #category : #initialization }

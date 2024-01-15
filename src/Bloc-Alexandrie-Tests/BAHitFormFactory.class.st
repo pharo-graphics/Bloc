@@ -4,7 +4,7 @@ My only purpose is creating a Form from a BlSpace, where each pixel tells what B
 Class {
 	#name : #BAHitFormFactory,
 	#superclass : #Object,
-	#category : 'Bloc-Alexandrie-Tests-Utilities'
+	#category : #'Bloc-Alexandrie-Tests-Utilities'
 }
 
 { #category : #'instance creation' }

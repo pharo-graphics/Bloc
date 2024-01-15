@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'block'
 	],
-	#category : 'Bloc-Scripter-Scripter-Storage'
+	#category : #'Bloc-Scripter-Scripter-Storage'
 }
 
 { #category : #accessing }
