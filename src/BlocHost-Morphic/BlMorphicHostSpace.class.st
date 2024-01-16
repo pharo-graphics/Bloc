@@ -42,7 +42,8 @@ BlMorphicHostSpace >> createFormSurfaceRenderer [
 { #category : #'host space - cursor' }
 BlMorphicHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one"
-	World currentHand showTemporaryCursor: aCursor asForm
+
+	World currentHand showTemporaryCursor: aCursor
 ]
 
 { #category : #'host space - geometry' }
