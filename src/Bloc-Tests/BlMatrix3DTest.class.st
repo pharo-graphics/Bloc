@@ -4,7 +4,7 @@ A BlMatrix3DTest is a test class for testing the behavior of BlMatrix3D
 Class {
 	#name : #BlMatrix3DTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests-Basic-Math'
+	#category : #'Bloc-Tests-Basic-Math'
 }
 
 { #category : #tests }

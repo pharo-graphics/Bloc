@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'currentIndex'
 	],
-	#category : 'Bloc-Animation-Basic'
+	#category : #'Bloc-Animation-Basic'
 }
 
 { #category : #'api - running' }

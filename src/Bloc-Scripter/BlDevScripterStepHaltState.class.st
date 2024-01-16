@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterStepHaltState,
 	#superclass : #BlDevScripterStepState,
-	#category : 'Bloc-Scripter-Scripter-States'
+	#category : #'Bloc-Scripter-Scripter-States'
 }
 
 { #category : #accessing }

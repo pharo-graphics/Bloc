@@ -1,6 +1,6 @@
-Extension { #name : 'BlStrokeLineMiterJoin' }
+Extension { #name : #BlStrokeLineMiterJoin }
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlStrokeLineMiterJoin >> aeApplyTo: aeCanvas style: aBorderStyle [
 
 	aeCanvas setJoinMiter: aBorderStyle miterLimit

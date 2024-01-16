@@ -5,7 +5,7 @@ Class {
 		'combination',
 		'buffer'
 	],
-	#category : 'Bloc-Tests-KeyBinding'
+	#category : #'Bloc-Tests-KeyBinding'
 }
 
 { #category : #initialization }
@@ -20,17 +20,11 @@ BlCompulsoryCombinationTest >> setUp [
 { #category : #tests }
 BlCompulsoryCombinationTest >> testInitialize [
 
-	<sampleInstance>
-	self setUp.
-
 	self assert: combination combinations isEmpty
 ]
 
 { #category : #tests }
 BlCompulsoryCombinationTest >> testKey [
-
-	<sampleInstance>
-	self setUp.
 
 	self assert: combination combinations isEmpty.
 
@@ -58,10 +52,6 @@ BlCompulsoryCombinationTest >> testKey [
 { #category : #tests }
 BlCompulsoryCombinationTest >> testMatch [
 
-	<sampleInstance>
-	<noTest>
-	self setUp.
-
 	buffer pressed: false key: KeyboardKey A.
 	buffer pressed: true key: KeyboardKey B.
 	buffer pressed: true key: KeyboardKey C.
@@ -80,9 +70,6 @@ BlCompulsoryCombinationTest >> testMatch [
 
 { #category : #tests }
 BlCompulsoryCombinationTest >> testMatches [
-
-	<sampleInstance>
-	self setUp.
 
 	buffer pressed: true key: KeyboardKey A.
 	buffer pressed: false key: KeyboardKey B.

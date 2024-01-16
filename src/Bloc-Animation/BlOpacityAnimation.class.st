@@ -9,7 +9,7 @@ Class {
 		'to',
 		'from'
 	],
-	#category : 'Bloc-Animation-Animation'
+	#category : #'Bloc-Animation-Animation'
 }
 
 { #category : #pulse }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'infiniteElement'
 	],
-	#category : 'Bloc-Infinite-Tasks'
+	#category : #'Bloc-Infinite-Tasks'
 }
 
 { #category : #'instance creation' }

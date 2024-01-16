@@ -5,7 +5,7 @@ My users must also use ${class:TBlDevScripterCheckStepCreation}$
 "
 Trait {
 	#name : #TBlDevScripterActionStep,
-	#category : 'Bloc-Scripter-Scripter'
+	#category : #'Bloc-Scripter-Scripter'
 }
 
 { #category : #'steps - other' }

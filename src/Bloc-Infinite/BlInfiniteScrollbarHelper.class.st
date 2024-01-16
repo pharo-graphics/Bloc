@@ -10,7 +10,7 @@ Class {
 		'smoothScrollbarEnabled',
 		'isReversedLayout'
 	],
-	#category : 'Bloc-Infinite-Scroller'
+	#category : #'Bloc-Infinite-Scroller'
 }
 
 { #category : #scrollbar }

@@ -4,7 +4,7 @@ A BlMatrix2DTest is a test class for testing the behavior of BlMatrix2D
 Class {
 	#name : #BlMatrix2DTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests-Basic-Math'
+	#category : #'Bloc-Tests-Basic-Math'
 }
 
 { #category : #tests }

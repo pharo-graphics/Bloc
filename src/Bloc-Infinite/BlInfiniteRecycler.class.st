@@ -35,7 +35,7 @@ Class {
 	#instVars : [
 		'attachedScrap'
 	],
-	#category : 'Bloc-Infinite-Recycler'
+	#category : #'Bloc-Infinite-Recycler'
 }
 
 { #category : #'accessing - cache' }

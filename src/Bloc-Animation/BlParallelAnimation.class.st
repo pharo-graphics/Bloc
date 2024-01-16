@@ -6,7 +6,7 @@ My loops are as long as my longest children's loop.
 Class {
 	#name : #BlParallelAnimation,
 	#superclass : #BlCompositeAnimation,
-	#category : 'Bloc-Animation-Basic'
+	#category : #'Bloc-Animation-Basic'
 }
 
 { #category : #'api - running' }

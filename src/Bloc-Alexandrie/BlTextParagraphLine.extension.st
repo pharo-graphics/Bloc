@@ -1,6 +1,6 @@
-Extension { #name : 'BlTextParagraphLine' }
+Extension { #name : #BlTextParagraphLine }
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlTextParagraphLine >> aeDrawOn: aeCanvas [
 
 	self spans do: [ :aSpan | aSpan aeDrawOn: aeCanvas ]

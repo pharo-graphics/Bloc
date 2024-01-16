@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Infinite-Scrollable-Helpers'
+	#category : #'Bloc-Infinite-Scrollable-Helpers'
 }
 
 { #category : #updating }

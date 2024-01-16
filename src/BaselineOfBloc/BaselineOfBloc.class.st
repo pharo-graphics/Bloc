@@ -79,7 +79,7 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Alexandrie' with: [
 					spec requires: #('Alexandrie' 'Bloc' 'Bloc-Text') ];
 				package: #'Bloc-Alexandrie-Tests' with: [
-					spec requires: #('Bloc-Alexandrie') ];
+					spec requires: #('Bloc-Alexandrie' 'Bloc-Text-Examples') ];
 				package: #'Bloc-Text-Alexandrie-Examples' with: [
 					spec requires: #('Bloc-Alexandrie') ].
 			"Exporters depend on Alexandrie"
@@ -127,6 +127,8 @@ BaselineOfBloc >> baseline: spec [
 			spec
 				package: #'Bloc-Theme' with: [
 					spec requires: #(#'Bloc') ].
+				
+			spec package: #'Bloc-Demo' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-Spec2' #'Bloc-Text-Elements') ].
 
 			"SVG"
 			spec

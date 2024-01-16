@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'progress'
 	],
-	#category : 'Bloc-Animation-Events'
+	#category : #'Bloc-Animation-Events'
 }
 
 { #category : #accessing }

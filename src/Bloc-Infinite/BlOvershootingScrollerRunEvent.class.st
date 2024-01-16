@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'isFinished'
 	],
-	#category : 'Bloc-Infinite-Scrollable-Helpers'
+	#category : #'Bloc-Infinite-Scrollable-Helpers'
 }
 
 { #category : #accessing }

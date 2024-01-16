@@ -7,7 +7,7 @@ Class {
 		'focusable',
 		'consumedSpace'
 	],
-	#category : 'Bloc-Infinite-Layout-Linear-Support'
+	#category : #'Bloc-Infinite-Layout-Linear-Support'
 }
 
 { #category : #accessing }

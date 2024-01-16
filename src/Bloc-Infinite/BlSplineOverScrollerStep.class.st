@@ -6,7 +6,7 @@ Class {
 		'cubic',
 		'ballistic'
 	],
-	#category : 'Bloc-Infinite-Scrollable-Helpers'
+	#category : #'Bloc-Infinite-Scrollable-Helpers'
 }
 
 { #category : #accessing }

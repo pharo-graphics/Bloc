@@ -26,7 +26,7 @@ Class {
 		'priority',
 		'entryIdentifier'
 	],
-	#category : 'Bloc-Tests-TaskIt'
+	#category : #'Bloc-Tests-TaskIt'
 }
 
 { #category : #'instance creation' }

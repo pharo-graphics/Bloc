@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'animations'
 	],
-	#category : 'Bloc-Animation-Basic'
+	#category : #'Bloc-Animation-Basic'
 }
 
 { #category : #'instance creation' }

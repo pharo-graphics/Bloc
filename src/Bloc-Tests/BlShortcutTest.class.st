@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'shortcut'
 	],
-	#category : 'Bloc-Tests-KeyBinding'
+	#category : #'Bloc-Tests-KeyBinding'
 }
 
 { #category : #initialization }
@@ -16,8 +16,6 @@ BlShortcutTest >> setUp [
 
 { #category : #tests }
 BlShortcutTest >> testMatches [
-	<sampleInstance>
-	self setUp.
 
 	shortcut combination: (BlMockedKeyCombination new shouldMatch: false).
 	self assert: (shortcut matches: Object new) not.

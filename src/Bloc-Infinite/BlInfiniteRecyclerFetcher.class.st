@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Infinite-Recycler'
+	#category : #'Bloc-Infinite-Recycler'
 }
 
 { #category : #accessing }

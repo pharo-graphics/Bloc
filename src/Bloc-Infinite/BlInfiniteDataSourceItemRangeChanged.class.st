@@ -19,7 +19,7 @@ Class {
 		'position',
 		'itemCount'
 	],
-	#category : 'Bloc-Infinite-Events'
+	#category : #'Bloc-Infinite-Events'
 }
 
 { #category : #'instance creation' }

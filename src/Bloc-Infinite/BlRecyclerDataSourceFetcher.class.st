@@ -1,7 +1,7 @@
 Class {
 	#name : #BlRecyclerDataSourceFetcher,
 	#superclass : #BlInfiniteRecyclerFetcher,
-	#category : 'Bloc-Infinite-Recycler'
+	#category : #'Bloc-Infinite-Recycler'
 }
 
 { #category : #'element fetching' }

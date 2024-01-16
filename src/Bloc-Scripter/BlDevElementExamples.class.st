@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevElementExamples,
 	#superclass : #BlExampleTest,
-	#category : 'Bloc-Scripter-Examples'
+	#category : #'Bloc-Scripter-Examples'
 }
 
 { #category : #'examples - element' }

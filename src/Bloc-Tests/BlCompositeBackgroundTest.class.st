@@ -4,5 +4,5 @@ A BlCompositeBackgroundTest is a test class for testing the behavior of BlCompos
 Class {
 	#name : #BlCompositeBackgroundTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests-Basic-Background'
+	#category : #'Bloc-Tests-Basic-Background'
 }

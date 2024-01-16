@@ -6,7 +6,7 @@ I can be very useful when users want to rotate / scale or shear an element about
 Class {
 	#name : #BlAffineTransformationOrigin,
 	#superclass : #Object,
-	#category : 'Bloc-Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #math }

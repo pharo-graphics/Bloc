@@ -12,8 +12,21 @@ Class {
 }
 
 { #category : #running }
-BlDemoPresenter class >> run [ 
-	<script> 
+BlDemoPresenter class >> menuCommandOn: aBuilder [
+
+	<worldMenu>
+	(aBuilder item: #'Open Bloc Demo')
+		action: [ self open ];
+		parent: #Help;
+		help: 'Open a demo browser of Bloc to display multiple example of Bloc usages.';
+		iconName: #group;
+		withSeparatorAfter
+]
+
+{ #category : #running }
+BlDemoPresenter class >> open [
+
+	<script>
 	self new open
 ]
 

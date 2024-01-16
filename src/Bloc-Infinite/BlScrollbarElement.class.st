@@ -11,7 +11,7 @@ Class {
 		'thumbDragHandler',
 		'thumbDragStartHandler'
 	],
-	#category : 'Bloc-Infinite-Scrollable-Core'
+	#category : #'Bloc-Infinite-Scrollable-Core'
 }
 
 { #category : #'api - scrollbar' }

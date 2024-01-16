@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBlDevScripterExamples,
-	#category : 'Bloc-Scripter-Scripter'
+	#category : #'Bloc-Scripter-Scripter'
 }
 
 { #category : #'examples - scripter' }

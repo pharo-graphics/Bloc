@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Basic-Units'
+	#category : #'Bloc-Basic-Units'
 }
 
 { #category : #'instance creation' }

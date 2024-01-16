@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterStepPlayOnceExecutor,
 	#superclass : #BlDevScripterStepExecutor,
-	#category : 'Bloc-Scripter-Scripter-Executors'
+	#category : #'Bloc-Scripter-Scripter-Executors'
 }
 
 { #category : #asserting }

@@ -11,7 +11,7 @@ Class {
 		'overscrollX',
 		'overscrollY'
 	],
-	#category : 'Bloc-Infinite-Scrollable-Helpers'
+	#category : #'Bloc-Infinite-Scrollable-Helpers'
 }
 
 { #category : #accessing }

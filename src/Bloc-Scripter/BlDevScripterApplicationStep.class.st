@@ -1,5 +1,5 @@
 Class {
 	#name : #BlDevScripterApplicationStep,
 	#superclass : #BlDevScripterStep,
-	#category : 'Bloc-Scripter-Scripter-Steps'
+	#category : #'Bloc-Scripter-Scripter-Steps'
 }

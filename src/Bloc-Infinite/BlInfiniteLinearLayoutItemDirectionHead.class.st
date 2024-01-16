@@ -1,7 +1,7 @@
 Class {
 	#name : #BlInfiniteLinearLayoutItemDirectionHead,
 	#superclass : #BlInfiniteLinearLayoutItemDirection,
-	#category : 'Bloc-Infinite-Layout-Linear-Support'
+	#category : #'Bloc-Infinite-Layout-Linear-Support'
 }
 
 { #category : #converting }

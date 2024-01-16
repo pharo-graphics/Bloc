@@ -5,7 +5,7 @@ Class {
 		'key',
 		'value'
 	],
-	#category : 'Bloc-Scripter-Scripter-Storage'
+	#category : #'Bloc-Scripter-Scripter-Storage'
 }
 
 { #category : #accessing }

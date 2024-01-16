@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Tests-Universe'
+	#category : #'Bloc-Tests-Universe'
 }
 
 { #category : #asserting }

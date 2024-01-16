@@ -18,7 +18,7 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-Core'
+	#category : #'Bloc-Infinite-Core'
 }
 
 { #category : #'private - position' }

@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'infiniteElement'
 	],
-	#category : 'Bloc-Infinite-DataSource'
+	#category : #'Bloc-Infinite-DataSource'
 }
 
 { #category : #'instance creation' }

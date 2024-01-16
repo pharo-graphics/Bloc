@@ -6,7 +6,7 @@ Class {
 		'Layout',
 		'Start'
 	],
-	#category : 'Bloc-Infinite-Flags'
+	#category : #'Bloc-Infinite-Flags'
 }
 
 { #category : #'accessing - flags' }

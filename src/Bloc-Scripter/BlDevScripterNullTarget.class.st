@@ -29,7 +29,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Scripter-Scripter-Targets'
+	#category : #'Bloc-Scripter-Scripter-Targets'
 }
 
 { #category : #cleanup }

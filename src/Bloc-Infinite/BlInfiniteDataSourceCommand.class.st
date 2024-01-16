@@ -19,7 +19,7 @@ Class {
 		'itemCount',
 		'type'
 	],
-	#category : 'Bloc-Infinite-DataSource'
+	#category : #'Bloc-Infinite-DataSource'
 }
 
 { #category : #commands }

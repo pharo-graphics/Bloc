@@ -5,7 +5,7 @@ Class {
 		'space',
 		'host'
 	],
-	#category : 'Bloc-Tests-Space'
+	#category : #'Bloc-Tests-Space'
 }
 
 { #category : #initialization }

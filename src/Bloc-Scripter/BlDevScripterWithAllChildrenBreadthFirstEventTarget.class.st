@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterWithAllChildrenBreadthFirstEventTarget,
 	#superclass : #BlDevScripterEventTarget,
-	#category : 'Bloc-Scripter-Scripter-Targets'
+	#category : #'Bloc-Scripter-Scripter-Targets'
 }
 
 { #category : #searching }

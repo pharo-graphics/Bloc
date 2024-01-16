@@ -1,6 +1,6 @@
-Extension { #name : 'BlRadialGradientPaint' }
+Extension { #name : #BlRadialGradientPaint }
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlRadialGradientPaint >> aeApplyTo: aeCanvas [
 	"Apply self as a border to the canvas"
 

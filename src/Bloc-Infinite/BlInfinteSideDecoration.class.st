@@ -1,7 +1,7 @@
 Class {
 	#name : #BlInfinteSideDecoration,
 	#superclass : #BlInfiniteDecoration,
-	#category : 'Bloc-Infinite-Core'
+	#category : #'Bloc-Infinite-Core'
 }
 
 { #category : #geometry }

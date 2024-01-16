@@ -1,7 +1,7 @@
 Class {
 	#name : #BlColorTransition,
 	#superclass : #BlTransition,
-	#category : 'Bloc-Animation-Animation'
+	#category : #'Bloc-Animation-Animation'
 }
 
 { #category : #pulse }

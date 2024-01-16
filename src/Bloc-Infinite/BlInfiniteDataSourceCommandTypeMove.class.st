@@ -1,7 +1,7 @@
 Class {
 	#name : #BlInfiniteDataSourceCommandTypeMove,
 	#superclass : #BlInfiniteDataSourceCommandType,
-	#category : 'Bloc-Infinite-DataSource'
+	#category : #'Bloc-Infinite-DataSource'
 }
 
 { #category : #dispatch }

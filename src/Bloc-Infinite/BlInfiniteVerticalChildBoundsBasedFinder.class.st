@@ -1,7 +1,7 @@
 Class {
 	#name : #BlInfiniteVerticalChildBoundsBasedFinder,
 	#superclass : #BlInfiniteChildBoundsBasedFinder,
-	#category : 'Bloc-Infinite-Layout'
+	#category : #'Bloc-Infinite-Layout'
 }
 
 { #category : #accessing }

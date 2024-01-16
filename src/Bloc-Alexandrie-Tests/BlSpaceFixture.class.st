@@ -11,7 +11,7 @@ Class {
 	#instVars : [
 		'builder'
 	],
-	#category : 'Bloc-Alexandrie-Tests-Utilities'
+	#category : #'Bloc-Alexandrie-Tests-Utilities'
 }
 
 { #category : #accessing }

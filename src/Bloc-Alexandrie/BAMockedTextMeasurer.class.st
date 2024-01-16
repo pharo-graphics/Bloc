@@ -1,6 +1,6 @@
 Class {
-	#name : 'BAMockedTextMeasurer',
-	#superclass : 'BlHostTextMeasurer',
+	#name : #BAMockedTextMeasurer,
+	#superclass : #BlHostTextMeasurer,
 	#instVars : [
 		'ascent',
 		'descent',
@@ -10,19 +10,17 @@ Class {
 		'measuredHeight',
 		'textOffset'
 	],
-	#category : 'Bloc-Alexandrie-Text-Mocked',
-	#package : 'Bloc-Alexandrie',
-	#tag : 'Text-Mocked'
+	#category : #'Bloc-Alexandrie-Text-Mocked'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BAMockedTextMeasurer >> ascent [
 	<return: #Number>
 
 	^ ascent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BAMockedTextMeasurer >> ascent: aNumber [
 
 	self
@@ -32,14 +30,14 @@ BAMockedTextMeasurer >> ascent: aNumber [
 	ascent := aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BAMockedTextMeasurer >> descent [
 	<return: #Number>
 
 	^ descent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BAMockedTextMeasurer >> descent: aNumber [
 	self
 		assert: [ aNumber >= 0 ]
@@ -48,29 +46,29 @@ BAMockedTextMeasurer >> descent: aNumber [
 	descent := aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BAMockedTextMeasurer >> glyphWidth [
 	<return: #Number>
 
 	^ glyphWidth
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BAMockedTextMeasurer >> glyphWidth: aNumber [
 	glyphWidth := aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BAMockedTextMeasurer >> height [
 	^ height
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BAMockedTextMeasurer >> height: aNumber [
 	height := aNumber
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BAMockedTextMeasurer >> initialize [
 	super initialize.
 
@@ -81,13 +79,13 @@ BAMockedTextMeasurer >> initialize [
 	textOffset := 0
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BAMockedTextMeasurer >> measureTextParagraph: aBlTextParagraph [
 
 	aBlTextParagraph measureOn: self
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BAMockedTextMeasurer >> measureTextSpan: aBlSpan [
 	"Measure a given text span and return paragraph span with my fixed metrics"
 
@@ -97,28 +95,28 @@ BAMockedTextMeasurer >> measureTextSpan: aBlSpan [
 	^ self newParagraphSpanFor: aBlSpan
 ]
 
-{ #category : 'metrics' }
+{ #category : #metrics }
 BAMockedTextMeasurer >> measuredHeight [
 	^ measuredHeight
 ]
 
-{ #category : 'metrics' }
+{ #category : #metrics }
 BAMockedTextMeasurer >> measuredWidth [
 	^ measuredWidth
 ]
 
-{ #category : 'paragraph span instance creation' }
+{ #category : #'paragraph span instance creation' }
 BAMockedTextMeasurer >> newParagraphSpan [
 
 	^ BAMockedTextParagraphSpan new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BAMockedTextMeasurer >> textOffset [
 	^ textOffset
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BAMockedTextMeasurer >> textOffset: aNumber [
 	textOffset := aNumber
 ]

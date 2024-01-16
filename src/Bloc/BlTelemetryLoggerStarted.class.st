@@ -1,5 +1,5 @@
 Class {
 	#name : #BlTelemetryLoggerStarted,
 	#superclass : #Announcement,
-	#category : 'Bloc-Space - Telemetry'
+	#category : #'Bloc-Space - Telemetry'
 }

@@ -5,7 +5,7 @@ Class {
 		'scanCode',
 		'key'
 	],
-	#category : 'Bloc-Events'
+	#category : #'Bloc-Events'
 }
 
 { #category : #converting }

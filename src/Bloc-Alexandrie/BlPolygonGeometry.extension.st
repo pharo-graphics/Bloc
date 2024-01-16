@@ -1,6 +1,6 @@
-Extension { #name : 'BlPolygonGeometry' }
+Extension { #name : #BlPolygonGeometry }
 
-{ #category : '*Bloc-Alexandrie' }
+{ #category : #'*Bloc-Alexandrie' }
 BlPolygonGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
 	aeCanvas pathFactory: [ :cairoContext |

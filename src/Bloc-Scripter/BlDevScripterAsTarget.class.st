@@ -26,7 +26,7 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : #BlDevScripterAsTarget,
 	#superclass : #BlDevScripterTarget,
-	#category : 'Bloc-Scripter-Scripter-Targets'
+	#category : #'Bloc-Scripter-Scripter-Targets'
 }
 
 { #category : #searching }

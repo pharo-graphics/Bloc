@@ -36,18 +36,26 @@ BlFocusProcessorExamples >> elementWithFocusHandler [
 					             c ignoreByLayout.
 					             c ignored horizontal alignRight.
 					             c padding: (BlInsets top: 5 right: 5) ]);
-		  when: BlFocusInEvent do: [ :anEvent |
-		  hasFocus := true.
-		  aLabel text: aTextBuilder value ];
-		  when: BlFocusOutEvent do: [ :anEvent |
-		  hasFocus := false.
-		  aLabel text: aTextBuilder value ];
-		  when: BlFocusEvent do: [ :anEvent |
-		  isFocused := true.
-		  aLabel text: aTextBuilder value ];
-		  when: BlBlurEvent do: [ :anEvent |
-		  isFocused := false.
-		  aLabel text: aTextBuilder value ]
+		  addEventHandler: (BlEventHandler
+				   on: BlFocusInEvent
+				   do: [ :anEvent |
+					   hasFocus := true.
+					   aLabel text: aTextBuilder value ]);
+		  addEventHandler: (BlEventHandler
+				   on: BlFocusOutEvent
+				   do: [ :anEvent |
+					   hasFocus := false.
+					   aLabel text: aTextBuilder value ]);
+		  addEventHandler: (BlEventHandler
+				   on: BlFocusEvent
+				   do: [ :anEvent |
+					   isFocused := true.
+					   aLabel text: aTextBuilder value ]);
+		  addEventHandler: (BlEventHandler
+				   on: BlBlurEvent
+				   do: [ :anEvent |
+					   isFocused := false.
+					   aLabel text: aTextBuilder value ])
 ]
 
 { #category : #'examples - lose focus' }

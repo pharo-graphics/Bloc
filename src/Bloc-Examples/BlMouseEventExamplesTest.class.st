@@ -40,26 +40,30 @@ BlMouseEventExamplesTest >> box [
 				   constraintsDo: [ :c |
 					   c ignored horizontal alignLeft.
 					   c ignored vertical alignTop ];
-				   when: BlElementPositionInSpaceChangedEvent
-				   do: [ :anEvent | self topLeftText: anEvent ]);
+				   addEventHandler: (BlEventHandler
+						    on: BlElementPositionInSpaceChangedEvent
+						    do: [ :anEvent | self topLeftText: anEvent ]));
 		  addChild: (self label
 				   constraintsDo: [ :c |
 					   c ignored horizontal alignRight.
 					   c ignored vertical alignTop ];
-				   when: BlElementPositionInSpaceChangedEvent
-				   do: [ :anEvent | self topRightText: anEvent ]);
+				   addEventHandler: (BlEventHandler
+						    on: BlElementPositionInSpaceChangedEvent
+						    do: [ :anEvent | self topRightText: anEvent ]));
 		  addChild: (self label
 				   constraintsDo: [ :c |
 					   c ignored horizontal alignLeft.
 					   c ignored vertical alignBottom ];
-				   when: BlElementPositionInSpaceChangedEvent
-				   do: [ :anEvent | self bottomLeftText: anEvent ]);
+				   addEventHandler: (BlEventHandler
+						    on: BlElementPositionInSpaceChangedEvent
+						    do: [ :anEvent | self bottomLeftText: anEvent ]));
 		  addChild: (self label
 				   constraintsDo: [ :c |
 					   c ignored horizontal alignRight.
 					   c ignored vertical alignBottom ];
-				   when: BlElementPositionInSpaceChangedEvent
-				   do: [ :anEvent | self bottomRightText: anEvent ])
+				   addEventHandler: (BlEventHandler
+						    on: BlElementPositionInSpaceChangedEvent
+						    do: [ :anEvent | self bottomRightText: anEvent ]))
 ]
 
 { #category : #'instance creation' }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'by'
 	],
-	#category : 'Bloc-Animation-Animation'
+	#category : #'Bloc-Animation-Animation'
 }
 
 { #category : #accessing }

@@ -1,12 +1,10 @@
 Class {
-	#name : 'BABufferSpaceRenderer',
-	#superclass : 'BASpaceRenderer',
-	#category : 'Bloc-Alexandrie-Renderer',
-	#package : 'Bloc-Alexandrie',
-	#tag : 'Renderer'
+	#name : #BABufferSpaceRenderer,
+	#superclass : #BASpaceRenderer,
+	#category : #'Bloc-Alexandrie-Renderer'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BABufferSpaceRenderer >> initializeForSurface: aBlHostRendererBufferSurface [ 
 
 	self

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'dictionary'
 	],
-	#category : 'Bloc-Scripter-Scripter-Utilities'
+	#category : #'Bloc-Scripter-Scripter-Utilities'
 }
 
 { #category : #accessing }

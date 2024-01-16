@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterStepProperty,
 	#superclass : #Object,
-	#category : 'Bloc-Scripter-Scripter-Properties'
+	#category : #'Bloc-Scripter-Scripter-Properties'
 }
 
 { #category : #testing }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlAssertionsTraitTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests'
+	#category : #'Bloc-Tests'
 }
 
 { #category : #tests }

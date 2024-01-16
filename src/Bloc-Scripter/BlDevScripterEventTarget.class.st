@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterEventTarget,
 	#superclass : #BlDevScripterTarget,
-	#category : 'Bloc-Scripter-Scripter-Targets'
+	#category : #'Bloc-Scripter-Scripter-Targets'
 }
 
 { #category : #testing }

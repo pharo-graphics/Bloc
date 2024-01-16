@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'scripter'
 	],
-	#category : 'Bloc-Scripter-Scripter-Utilities'
+	#category : #'Bloc-Scripter-Scripter-Utilities'
 }
 
 { #category : #comparing }

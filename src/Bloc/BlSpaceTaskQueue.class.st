@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Space - Tasks'
+	#category : #'Bloc-Space - Tasks'
 }
 
 { #category : #'instance creation' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterFocusProcessorTarget,
 	#superclass : #BlDevScripterEventProcessorTarget,
-	#category : 'Bloc-Scripter-Scripter-Targets'
+	#category : #'Bloc-Scripter-Scripter-Targets'
 }
 
 { #category : #searching }

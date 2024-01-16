@@ -7,7 +7,7 @@ Class {
 		'distance',
 		'duration'
 	],
-	#category : 'Bloc-Infinite-Scrollable-Helpers'
+	#category : #'Bloc-Infinite-Scrollable-Helpers'
 }
 
 { #category : #updating }

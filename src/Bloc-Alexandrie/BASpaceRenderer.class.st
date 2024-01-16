@@ -1,21 +1,19 @@
 Class {
-	#name : 'BASpaceRenderer',
-	#superclass : 'BlHostSpaceRenderer',
+	#name : #BASpaceRenderer,
+	#superclass : #BlHostSpaceRenderer,
 	#instVars : [
 		'aeCanvas'
 	],
-	#category : 'Bloc-Alexandrie-Renderer',
-	#package : 'Bloc-Alexandrie',
-	#tag : 'Renderer'
+	#category : #'Bloc-Alexandrie-Renderer'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BASpaceRenderer >> aeCanvas [
 
 	^ aeCanvas
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BASpaceRenderer >> initializeForSurface: aBlHostRendererSurface and: aeCairoSurface [
 
 	aeCairoSurface deviceScale: aBlHostRendererSurface scaleFactor asPoint.
@@ -28,7 +26,7 @@ BASpaceRenderer >> initializeForSurface: aBlHostRendererSurface and: aeCairoSurf
 
 ]
 
-{ #category : 'rendering' }
+{ #category : #rendering }
 BASpaceRenderer >> renderSpace: aBlSpace [
 	"Render a space and return a collection of damaged rectangles"
 

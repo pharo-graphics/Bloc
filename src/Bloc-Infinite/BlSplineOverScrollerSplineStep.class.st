@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSplineOverScrollerSplineStep,
 	#superclass : #BlSplineOverScrollerStep,
-	#category : 'Bloc-Infinite-Scrollable-Helpers'
+	#category : #'Bloc-Infinite-Scrollable-Helpers'
 }
 
 { #category : #hooks }

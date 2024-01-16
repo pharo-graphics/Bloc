@@ -1,7 +1,7 @@
 Class {
 	#name : #BlInfiniteLinearLayoutDirectionStart,
 	#superclass : #BlInfiniteLinearLayoutDirection,
-	#category : 'Bloc-Infinite-Layout-Linear-Support'
+	#category : #'Bloc-Infinite-Layout-Linear-Support'
 }
 
 { #category : #testing }

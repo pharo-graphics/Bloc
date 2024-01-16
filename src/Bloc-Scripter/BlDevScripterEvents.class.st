@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterEvents,
 	#superclass : #BlDevScripterCollection,
-	#category : 'Bloc-Scripter-Scripter-Utilities'
+	#category : #'Bloc-Scripter-Scripter-Utilities'
 }
 
 { #category : #adding }

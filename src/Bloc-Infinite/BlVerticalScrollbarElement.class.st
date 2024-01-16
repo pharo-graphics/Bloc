@@ -1,7 +1,7 @@
 Class {
 	#name : #BlVerticalScrollbarElement,
 	#superclass : #BlScrollbarElement,
-	#category : 'Bloc-Infinite-Scrollable-Core'
+	#category : #'Bloc-Infinite-Scrollable-Core'
 }
 
 { #category : #initialization }

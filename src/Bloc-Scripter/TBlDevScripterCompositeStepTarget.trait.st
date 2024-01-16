@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBlDevScripterCompositeStepTarget,
-	#category : 'Bloc-Scripter-Scripter'
+	#category : #'Bloc-Scripter-Scripter'
 }
 
 { #category : #'targets - copying' }

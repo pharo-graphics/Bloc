@@ -4,7 +4,7 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-Scroller'
+	#category : #'Bloc-Infinite-Scroller'
 }
 
 { #category : #'instance creation' }

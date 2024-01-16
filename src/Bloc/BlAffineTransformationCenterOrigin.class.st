@@ -8,7 +8,7 @@ Class {
 	#classInstVars : [
 		'defaultInstance'
 	],
-	#category : 'Bloc-Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #accessing }

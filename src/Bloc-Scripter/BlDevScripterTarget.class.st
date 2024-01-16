@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDevScripterTarget,
 	#superclass : #Object,
-	#category : 'Bloc-Scripter-Scripter-Targets'
+	#category : #'Bloc-Scripter-Scripter-Targets'
 }
 
 { #category : #factory }

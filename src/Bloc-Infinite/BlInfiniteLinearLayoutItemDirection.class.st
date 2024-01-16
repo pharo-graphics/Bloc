@@ -5,7 +5,7 @@ Class {
 		'head',
 		'tail'
 	],
-	#category : 'Bloc-Infinite-Layout-Linear-Support'
+	#category : #'Bloc-Infinite-Layout-Linear-Support'
 }
 
 { #category : #cleanup }

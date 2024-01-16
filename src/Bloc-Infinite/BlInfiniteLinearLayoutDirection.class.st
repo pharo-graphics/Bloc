@@ -5,7 +5,7 @@ Class {
 		'start',
 		'end'
 	],
-	#category : 'Bloc-Infinite-Layout-Linear-Support'
+	#category : #'Bloc-Infinite-Layout-Linear-Support'
 }
 
 { #category : #accessing }

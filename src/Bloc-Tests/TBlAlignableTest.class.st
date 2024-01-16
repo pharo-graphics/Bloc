@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'element'
 	],
-	#category : 'Bloc-Tests-Layouts-Alignment'
+	#category : #'Bloc-Tests-Layouts-Alignment'
 }
 
 { #category : #running }

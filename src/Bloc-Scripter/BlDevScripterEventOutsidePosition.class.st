@@ -26,7 +26,7 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : #BlDevScripterEventOutsidePosition,
 	#superclass : #BlDevScripterEventPosition,
-	#category : 'Bloc-Scripter-Scripter-Event Positions'
+	#category : #'Bloc-Scripter-Scripter-Event Positions'
 }
 
 { #category : #'debug - simulation' }
