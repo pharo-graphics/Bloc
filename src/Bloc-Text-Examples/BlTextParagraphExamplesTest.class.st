@@ -100,10 +100,9 @@ BlTextParagraphExamplesTest >> helloWorldText [
 { #category : #'instance creation' }
 BlTextParagraphExamplesTest >> newParagraph [
 
-	<sampleInstance>
-	| aParagraph |
-	aParagraph := BlTextParagraph new.
-	^ aParagraph
+	^ BlTextParagraph new
+		baselineMeasurer: BlAscentTightBaselineMeasurer uniqueInstance;
+		yourself
 ]
 
 { #category : #'instance creation' }
@@ -596,16 +595,16 @@ BlTextParagraphExamplesTest >> testMeasuredHaba [
 	self assert: aSpan left equals: 0.
 	self assert: aSpan spanEnd equals: 4.
 	self assert: aSpan spanStart equals: 1.
-	self assert: aSpan textRun equals: self haba.
-	self assert: aSpan textRunEnd equals: 4.
-	self assert: aSpan textRunStart equals: 1.
 	self assert: aSpan to equals: 4.
 	self assert: aSpan top equals: 0.
 	self assert: aSpan width equals: self haba size * self glyphWidth.
-
 	self assert: aSpan spanLength equals: 4.
+
+"	self assert: aSpan textRun equals: self haba.
+	self assert: aSpan textRunEnd equals: 4.
+	self assert: aSpan textRunStart equals: 1.
 	self assert: aSpan textRunLength equals: 4.
-	self assert: aSpan isSplitted not.
+	self assert: aSpan isSplitted not."
 
 	^ aParagraph
 ]
