@@ -2,8 +2,8 @@
 My purpose is making easier to create BlSpaces with elements.
 "
 Class {
-	#name : #BlSpaceBuilder,
-	#superclass : #Object,
+	#name : 'BlSpaceBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'space',
 		'spaceExtent',
@@ -11,16 +11,18 @@ Class {
 		'alphabetGenerator',
 		'colorGenerator'
 	],
-	#category : #'Bloc-Alexandrie-Tests-Utilities'
+	#category : 'Bloc-Alexandrie-Tests-Utilities',
+	#package : 'Bloc-Alexandrie-Tests',
+	#tag : 'Utilities'
 }
 
-{ #category : #convenience }
+{ #category : 'convenience' }
 BlSpaceBuilder class >> newSpaceWith: aUnaryBlockClosure [
 
 	^ self new newSpaceWith: aUnaryBlockClosure
 ]
 
-{ #category : #'adding elements' }
+{ #category : 'adding elements' }
 BlSpaceBuilder >> addCircle [
 
 	^ self addToRoot
@@ -28,7 +30,7 @@ BlSpaceBuilder >> addCircle [
 		yourself
 ]
 
-{ #category : #'adding elements' }
+{ #category : 'adding elements' }
 BlSpaceBuilder >> addHexagonalPolygon [
 	"Answer an hexagon polygon."
 
@@ -47,7 +49,7 @@ BlSpaceBuilder >> addHexagonalPolygon [
 		yourself
 ]
 
-{ #category : #'adding elements' }
+{ #category : 'adding elements' }
 BlSpaceBuilder >> addPolyline [
 	"Answer a simple polyline of 3 vertices. Polylines are open, then don't look good with other outskirts than centered."
 
@@ -58,7 +60,7 @@ BlSpaceBuilder >> addPolyline [
 		yourself
 ]
 
-{ #category : #'adding elements' }
+{ #category : 'adding elements' }
 BlSpaceBuilder >> addText: aBlRopedText to: parentElement [
 
 	| anElement |
@@ -71,13 +73,13 @@ BlSpaceBuilder >> addText: aBlRopedText to: parentElement [
 
 ]
 
-{ #category : #'adding elements' }
+{ #category : 'adding elements' }
 BlSpaceBuilder >> addTextToRoot: aBlRopedText [
 
 	^ self addText: aBlRopedText to: space root
 ]
 
-{ #category : #'adding elements' }
+{ #category : 'adding elements' }
 BlSpaceBuilder >> addTo: parentElement [
 
 	| anElement |
@@ -90,13 +92,13 @@ BlSpaceBuilder >> addTo: parentElement [
 
 ]
 
-{ #category : #'adding elements' }
+{ #category : 'adding elements' }
 BlSpaceBuilder >> addToRoot [
 
 	^ self addTo: space root
 ]
 
-{ #category : #'adding elements' }
+{ #category : 'adding elements' }
 BlSpaceBuilder >> addTriangle [
 
 	^ self addToRoot
@@ -104,7 +106,7 @@ BlSpaceBuilder >> addTriangle [
 		yourself
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 BlSpaceBuilder >> buildSpace [
 	"Make last set up before user can use the space."
 
@@ -118,19 +120,19 @@ BlSpaceBuilder >> buildSpace [
 		forceLayout.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceBuilder >> host [
 
 	^ host
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceBuilder >> host: aBlHost [
 
 	host := aBlHost
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpaceBuilder >> initialize [
 
 	super initialize.
@@ -143,7 +145,7 @@ BlSpaceBuilder >> initialize [
 	alphabetGenerator := self newAlphabetGenerator
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpaceBuilder >> newAlphabetGenerator [
 
 	^ Generator on: [ :generator |
@@ -159,7 +161,7 @@ BlSpaceBuilder >> newAlphabetGenerator [
 			index := index + 1 ] repeat ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpaceBuilder >> newColorGenerator [
 
 	| randomColors |
@@ -180,7 +182,7 @@ BlSpaceBuilder >> newColorGenerator [
 			nextIndex := (nextIndex + 1) \\ randomColors size ] repeat ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSpaceBuilder >> newSpaceWith: aUnaryBlockClosure [
 
 	aUnaryBlockClosure value: self.
@@ -189,25 +191,25 @@ BlSpaceBuilder >> newSpaceWith: aUnaryBlockClosure [
 		  space
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceBuilder >> nextColor [
 
 	^ colorGenerator next
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceBuilder >> space [
 
 	^ space
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceBuilder >> spaceExtent [
 
 	^ spaceExtent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceBuilder >> spaceExtent: aPoint [
 
 	spaceExtent := aPoint
