@@ -5,12 +5,14 @@ I should be considered to be a parent of the graph or visualisation layouts
 
 "
 Class {
-	#name : #BlFitChildrenLayout,
-	#superclass : #BlCompositeLayout,
-	#category : #'Bloc-Layout-Fit'
+	#name : 'BlFitChildrenLayout',
+	#superclass : 'BlCompositeLayout',
+	#category : 'Bloc-Layout-Fit',
+	#package : 'Bloc-Layout',
+	#tag : 'Fit'
 }
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlFitChildrenLayout >> computeAlignmentTranslation: aParentLayoutNode [
 	| boundingBox delta |
 
@@ -20,7 +22,7 @@ BlFitChildrenLayout >> computeAlignmentTranslation: aParentLayoutNode [
 	^ delta
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 BlFitChildrenLayout >> layout: aParentNode [
 	| aTranslation |
 	super layout: aParentNode.
@@ -30,14 +32,14 @@ BlFitChildrenLayout >> layout: aParentNode [
 	aParentNode childrenDo: [ :eachChildNode | eachChildNode position: (eachChildNode position + aTranslation) ]
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlFitChildrenLayout >> measure: aParentLayoutNode [
 	super measure: aParentLayoutNode.
 
 	self measureParentNode: aParentLayoutNode
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlFitChildrenLayout >> measureParentNode: aParentLayoutNode [
 	"Compute the measured extent of the parent node based on the measured bounds of the children"
 	| boundingBox width height |

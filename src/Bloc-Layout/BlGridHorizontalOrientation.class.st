@@ -1,10 +1,12 @@
 Class {
-	#name : #BlGridHorizontalOrientation,
-	#superclass : #BlGridOrientation,
-	#category : #'Bloc-Layout-Grid-Utilities'
+	#name : 'BlGridHorizontalOrientation',
+	#superclass : 'BlGridOrientation',
+	#category : 'Bloc-Layout-Grid-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Grid-Utilities'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlGridHorizontalOrientation >> isHorizontal [
 	^ true
 ]

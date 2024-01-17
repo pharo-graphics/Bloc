@@ -1,13 +1,15 @@
 Class {
-	#name : #BlFlowLayoutLineSpace,
-	#superclass : #Object,
+	#name : 'BlFlowLayoutLineSpace',
+	#superclass : 'Object',
 	#instVars : [
 		'intervals'
 	],
-	#category : #'Bloc-Layout-Flow-Utilities'
+	#category : 'Bloc-Layout-Flow-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Flow-Utilities'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlFlowLayoutLineSpace >> initializeFor: aCollectionOfFloatingChildren maxLength: aNumber [
 	"By definition floating elements can not overlap"
 	| endOfOccupiedSpace maxLength |
@@ -29,12 +31,12 @@ BlFlowLayoutLineSpace >> initializeFor: aCollectionOfFloatingChildren maxLength:
 	intervals add: (endOfOccupiedSpace to: maxLength)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutLineSpace >> intervals [
 	^ intervals
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutLineSpace >> lineStart [
 	^ intervals first first
 ]

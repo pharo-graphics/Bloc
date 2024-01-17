@@ -1,10 +1,12 @@
 Class {
-	#name : #BlFlowLayoutInlineChild,
-	#superclass : #BlFlowLayoutChild,
-	#category : #'Bloc-Layout-Flow-Utilities'
+	#name : 'BlFlowLayoutInlineChild',
+	#superclass : 'BlFlowLayoutChild',
+	#category : 'Bloc-Layout-Flow-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Flow-Utilities'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlFlowLayoutInlineChild >> addToLine: aLine [
 	
 	(self orientation isHorizontal and: [ self direction isRightToLeft ])

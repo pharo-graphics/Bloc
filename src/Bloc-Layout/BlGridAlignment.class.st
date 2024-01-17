@@ -1,94 +1,96 @@
 Class {
-	#name : #BlGridAlignment,
-	#superclass : #Object,
+	#name : 'BlGridAlignment',
+	#superclass : 'Object',
 	#pools : [
 		'BlGridLayoutConstants'
 	],
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Layout-Grid-Utilities'
+	#category : 'Bloc-Layout-Grid-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Grid-Utilities'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlGridAlignment class >> baseline [
 	^ BlGridBaselineAlignment uniqueInstance
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlGridAlignment class >> bottom [
 	^ self trailing
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlGridAlignment class >> center [
 	^ BlGridCenterAlignment uniqueInstance
 ]
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlGridAlignment class >> cleanUp [
 	super cleanUp.
 	
 	uniqueInstance := nil
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlGridAlignment class >> end [
 	^ self trailing
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlGridAlignment class >> fill [
 	^ BlGridFillAlignment uniqueInstance
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlGridAlignment class >> leading [
 	^ BlGridLeadingAlignment uniqueInstance
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlGridAlignment class >> left [
 	^ self start
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlGridAlignment class >> right [
 	^ self end
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlGridAlignment class >> start [
 	^ self leading
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlGridAlignment class >> top [
 	^ self leading
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlGridAlignment class >> trailing [
 	^ BlGridTrailingAlignment uniqueInstance
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlGridAlignment class >> undefined [
 	^ BlGridUndefinedAlignment uniqueInstance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridAlignment class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlGridAlignment >> = anObject [
 	self == anObject ifTrue: [ ^ true ].
 	^ self class = anObject class
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlGridAlignment >> alignmentValue: anElement viewSize: viewSize [
 	"Returns an alignment value. In the case of vertical alignments the value
 	returned should indicate the distance from the top of the view to the
@@ -101,27 +103,27 @@ BlGridAlignment >> alignmentValue: anElement viewSize: viewSize [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridAlignment >> bounds [
 	^ BlGridLayoutBounds new
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlGridAlignment >> gravityOffset: anElement cellDelta: cellDelta [
 	^ self subclassResponsibility
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlGridAlignment >> hash [
 	^ self class hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlGridAlignment >> isFill [
 	^ false
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlGridAlignment >> sizeInCell: anElement viewSize: viewSize cellSize: cellSize [
 	"Returns the size of the view specified by this alignment.
 	In the case of vertical alignments this method should return a height; for

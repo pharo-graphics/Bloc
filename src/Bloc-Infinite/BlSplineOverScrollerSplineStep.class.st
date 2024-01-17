@@ -1,10 +1,12 @@
 Class {
-	#name : #BlSplineOverScrollerSplineStep,
-	#superclass : #BlSplineOverScrollerStep,
-	#category : #'Bloc-Infinite-Scrollable-Helpers'
+	#name : 'BlSplineOverScrollerSplineStep',
+	#superclass : 'BlSplineOverScrollerStep',
+	#category : 'Bloc-Infinite-Scrollable-Helpers',
+	#package : 'Bloc-Infinite',
+	#tag : 'Scrollable-Helpers'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlSplineOverScrollerSplineStep >> onFinished: aSplineOverScroller [
 	<return: #Boolean>
 	

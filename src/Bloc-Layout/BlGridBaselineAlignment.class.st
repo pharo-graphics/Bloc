@@ -1,20 +1,22 @@
 Class {
-	#name : #BlGridBaselineAlignment,
-	#superclass : #BlGridAlignment,
-	#category : #'Bloc-Layout-Grid-Utilities'
+	#name : 'BlGridBaselineAlignment',
+	#superclass : 'BlGridAlignment',
+	#category : 'Bloc-Layout-Grid-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Grid-Utilities'
 }
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlGridBaselineAlignment >> alignmentValue: anElement viewSize: viewSize [
 	^ UNDEFINED
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridBaselineAlignment >> bounds [
 	^ BlGridLayoutBaselineBounds new
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlGridBaselineAlignment >> gravityOffset: anElement cellDelta: cellDelta [
 	^ 0
 ]

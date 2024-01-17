@@ -1,20 +1,22 @@
 Class {
-	#name : #BlSplineOverScrollerStep,
-	#superclass : #Object,
+	#name : 'BlSplineOverScrollerStep',
+	#superclass : 'Object',
 	#classInstVars : [
 		'spline',
 		'cubic',
 		'ballistic'
 	],
-	#category : #'Bloc-Infinite-Scrollable-Helpers'
+	#category : 'Bloc-Infinite-Scrollable-Helpers',
+	#package : 'Bloc-Infinite',
+	#tag : 'Scrollable-Helpers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSplineOverScrollerStep class >> ballistic [
 	^ ballistic ifNil: [ ballistic := BlSplineOverScrollerBallisticStep new ]
 ]
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlSplineOverScrollerStep class >> cleanUp [
 	super cleanUp.
 	
@@ -23,28 +25,28 @@ BlSplineOverScrollerStep class >> cleanUp [
 	spline := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSplineOverScrollerStep class >> cubic [
 	^ cubic ifNil: [ cubic := BlSplineOverScrollerCubicStep new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSplineOverScrollerStep class >> spline [
 	^ spline ifNil: [ spline := BlSplineOverScrollerSplineStep new ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlSplineOverScrollerStep >> = anObject [
 	self == anObject ifTrue: [ ^ true ].
 	^ self class = anObject class
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlSplineOverScrollerStep >> hash [
 	^ self class hash
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlSplineOverScrollerStep >> onFinished: aSplineOverScroller [
 	"Is sent after animation duration is reached. It does not necessarily mean that scrolling should stop,
 	for example if we overshoot the target we should to bounce back.

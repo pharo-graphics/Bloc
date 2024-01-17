@@ -1,61 +1,63 @@
 Class {
-	#name : #BlFlowLayoutPriorityQueueNode,
-	#superclass : #Object,
+	#name : 'BlFlowLayoutPriorityQueueNode',
+	#superclass : 'Object',
 	#instVars : [
 		'value',
 		'priority',
 		'queueIndex',
 		'insertionIndex'
 	],
-	#category : #'Bloc-Layout-Flow-Utilities'
+	#category : 'Bloc-Layout-Flow-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Flow-Utilities'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlFlowLayoutPriorityQueueNode >> asAssociation [
 	^ self priority -> self value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutPriorityQueueNode >> insertionIndex [
 	^ insertionIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutPriorityQueueNode >> insertionIndex: anObject [
 	insertionIndex := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlFlowLayoutPriorityQueueNode >> printOn: aStream [
 	self asAssociation printOn: aStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutPriorityQueueNode >> priority [
 	^ priority
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutPriorityQueueNode >> priority: anObject [
 	priority := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutPriorityQueueNode >> queueIndex [
 	^ queueIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutPriorityQueueNode >> queueIndex: anObject [
 	queueIndex := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutPriorityQueueNode >> value [
 	^ value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutPriorityQueueNode >> value: anObject [
 	value := anObject
 ]

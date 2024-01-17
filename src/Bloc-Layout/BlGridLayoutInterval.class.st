@@ -12,23 +12,25 @@ I am used by {{gtClass:BlGridLayoutArc}}
 
 "
 Class {
-	#name : #BlGridLayoutInterval,
-	#superclass : #Object,
+	#name : 'BlGridLayoutInterval',
+	#superclass : 'Object',
 	#instVars : [
 		'min',
 		'max'
 	],
-	#category : #'Bloc-Layout-Grid-Utilities'
+	#category : 'Bloc-Layout-Grid-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Grid-Utilities'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlGridLayoutInterval class >> min: aMinValue max: aMaxValue [
 	<return: #BlGridLayoutInterval>
 
 	^ self new min: aMinValue max: aMaxValue
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlGridLayoutInterval >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -39,33 +41,33 @@ BlGridLayoutInterval >> = anObject [
 	^ min = anObject min and: [ max = anObject max ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlGridLayoutInterval >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ min hash bitXor: max hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutInterval >> inversed [
 	<return: #BlGridLayoutInterval>
 
 	^ self class min: max max: min
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutInterval >> max [
 
 	^ max
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutInterval >> min [
 
 	^ min
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGridLayoutInterval >> min: aMinValue max: aMaxValue [
 	"Construct a new interval"
 
@@ -76,7 +78,7 @@ BlGridLayoutInterval >> min: aMinValue max: aMaxValue [
 	max := aMaxValue
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlGridLayoutInterval >> printOn: aStream [
 	"Append a sequence of characters to aStream that identify the receiver."
 
@@ -89,7 +91,7 @@ BlGridLayoutInterval >> printOn: aStream [
 		print: max
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutInterval >> size [
 	<return: #Number>
 

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlScrollerConstants,
-	#superclass : #SharedPool,
+	#name : 'BlScrollerConstants',
+	#superclass : 'SharedPool',
 	#classVars : [
 		'Ballistic',
 		'Cubic',
@@ -18,12 +18,13 @@ Class {
 		'SplineTime',
 		'StartTension'
 	],
-	#category : #'Bloc-Infinite-Scrollable-Helpers'
+	#category : 'Bloc-Infinite-Scrollable-Helpers',
+	#package : 'Bloc-Infinite',
+	#tag : 'Scrollable-Helpers'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlScrollerConstants class >> initialize [
-	super initialize.
 	
 	DecelerationRate := 0.78 log / 0.9 log.
 	Gravity := 2000.0.
@@ -45,7 +46,7 @@ BlScrollerConstants class >> initialize [
 	self initializeSplines
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlScrollerConstants class >> initializeSplines [
 	"Precomputes spline position and time
 	https://en.wikipedia.org/wiki/Spline_interpolation

@@ -1,15 +1,16 @@
 Class {
-	#name : #BlGridLayoutConstants,
-	#superclass : #SharedPool,
+	#name : 'BlGridLayoutConstants',
+	#superclass : 'SharedPool',
 	#classVars : [
 		'UNDEFINED'
 	],
-	#category : #'Bloc-Layout-Grid-Utilities'
+	#category : 'Bloc-Layout-Grid-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Grid-Utilities'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlGridLayoutConstants class >> initialize [
-	super initialize.
 	
 	UNDEFINED := ((-2147483648) / 2 + 1) rounded
 ]

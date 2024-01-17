@@ -1,21 +1,23 @@
 Class {
-	#name : #BlFrameLayoutConstraintsHorizontal,
-	#superclass : #BlLayoutConstraintsAxis,
+	#name : 'BlFrameLayoutConstraintsHorizontal',
+	#superclass : 'BlLayoutConstraintsAxis',
 	#instVars : [
 		'alignment',
 		'weight'
 	],
-	#category : #'Bloc-Layout-Frame'
+	#category : 'Bloc-Layout-Frame',
+	#package : 'Bloc-Layout',
+	#tag : 'Frame'
 }
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlFrameLayoutConstraintsHorizontal >> alignCenter [
 	"I align the center of the child element horizontally with the center of the parent"
 
 	alignment := BlElementAlignment horizontal center
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlFrameLayoutConstraintsHorizontal >> alignCenterAt: aUnitCoordinateNumber [
 	"Align the center of the element horizontally with a unit-coordinate inside of the parent"
 
@@ -24,12 +26,12 @@ BlFrameLayoutConstraintsHorizontal >> alignCenterAt: aUnitCoordinateNumber [
 		relativeAlignment: BlElementAlignment horizontal center
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlFrameLayoutConstraintsHorizontal >> alignLeft [
 	alignment := BlElementAlignment horizontal start
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlFrameLayoutConstraintsHorizontal >> alignLeftAt: aUnitCoordinateNumber [
 	"Align the left of the element horizontally with a unit-coordinate inside of the parent"
 
@@ -38,17 +40,17 @@ BlFrameLayoutConstraintsHorizontal >> alignLeftAt: aUnitCoordinateNumber [
 		relativeAlignment: BlElementAlignment horizontal start
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlFrameLayoutConstraintsHorizontal >> alignNone [
 	alignment := BlElementAlignment horizontal null
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlFrameLayoutConstraintsHorizontal >> alignRight [
 	alignment := BlElementAlignment horizontal end
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlFrameLayoutConstraintsHorizontal >> alignRightAt: aUnitCoordinateNumber [
 	"Align the right of the element horizontally with a unit-coordinate inside of the parent"
 
@@ -57,17 +59,17 @@ BlFrameLayoutConstraintsHorizontal >> alignRightAt: aUnitCoordinateNumber [
 		relativeAlignment: BlElementAlignment horizontal end
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFrameLayoutConstraintsHorizontal >> alignment [
 	^ alignment
 ]
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlFrameLayoutConstraintsHorizontal >> alignment: aBlElementAlignment [
 	alignment := aBlElementAlignment
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlFrameLayoutConstraintsHorizontal >> initialize [
 	super initialize.
 	
@@ -75,14 +77,14 @@ BlFrameLayoutConstraintsHorizontal >> initialize [
 	weight := 1.0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFrameLayoutConstraintsHorizontal >> weight [
 	<return: #Number>
 
 	^ weight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFrameLayoutConstraintsHorizontal >> weight: aNumber [
 	"If the weight is zero, a child will have zero size along the corresponding axis"
 	self

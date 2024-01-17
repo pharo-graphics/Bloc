@@ -1,20 +1,22 @@
 Class {
-	#name : #BlFrameLayoutConstraints,
-	#superclass : #BlLayoutConstraints,
-	#category : #'Bloc-Layout-Frame'
+	#name : 'BlFrameLayoutConstraints',
+	#superclass : 'BlLayoutConstraints',
+	#category : 'Bloc-Layout-Frame',
+	#package : 'Bloc-Layout',
+	#tag : 'Frame'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFrameLayoutConstraints >> alignment [
 	^ self horizontal alignment + self vertical alignment
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlFrameLayoutConstraints >> defaultHorizontal [
 	^ BlFrameLayoutConstraintsHorizontal new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlFrameLayoutConstraints >> defaultVertical [
 	^ BlFrameLayoutConstraintsVertical new
 ]

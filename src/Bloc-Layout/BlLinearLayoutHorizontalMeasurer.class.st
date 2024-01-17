@@ -1,14 +1,16 @@
 Class {
-	#name : #BlLinearLayoutHorizontalMeasurer,
-	#superclass : #BlLinearLayoutMeasurer,
+	#name : 'BlLinearLayoutHorizontalMeasurer',
+	#superclass : 'BlLinearLayoutMeasurer',
 	#instVars : [
 		'maxAscent',
 		'maxDescent'
 	],
-	#category : #'Bloc-Layout-Linear-Utilities'
+	#category : 'Bloc-Layout-Linear-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Linear-Utilities'
 }
 
-{ #category : #measurement }
+{ #category : 'measurement' }
 BlLinearLayoutHorizontalMeasurer >> baselineMeasure [
 	"I adjust my max breadth based on current max ascent and descent"
 
@@ -20,7 +22,7 @@ BlLinearLayoutHorizontalMeasurer >> baselineMeasure [
 		maxBreadth := maxBreadth max: (anAscent + aDescent) ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlLinearLayoutHorizontalMeasurer >> initialize [
 	super initialize.
 
@@ -28,7 +30,7 @@ BlLinearLayoutHorizontalMeasurer >> initialize [
 	maxDescent := Dictionary new
 ]
 
-{ #category : #'private - measurement' }
+{ #category : 'private - measurement' }
 BlLinearLayoutHorizontalMeasurer >> measureExactUsingExcessSpace: aNode [
 	"Optimization: don't bother measuring children who are only laid out using excess space.
 	These views will get measured later if we have space to distribute."
@@ -45,7 +47,7 @@ BlLinearLayoutHorizontalMeasurer >> measureExactUsingExcessSpace: aNode [
 		ifFalse: [ skippedMeasure := true ]
 ]
 
-{ #category : #'private - measurement' }
+{ #category : 'private - measurement' }
 BlLinearLayoutHorizontalMeasurer >> prepareForWeightedMeasure [
 	maxAscent removeAll.
 	maxDescent removeAll.
@@ -56,7 +58,7 @@ BlLinearLayoutHorizontalMeasurer >> prepareForWeightedMeasure [
 	maxBreadth := 0.0.
 ]
 
-{ #category : #'private - measurement' }
+{ #category : 'private - measurement' }
 BlLinearLayoutHorizontalMeasurer >> processBaseline: aNode breadth: aChildBreadth [
 	"I process baseline of a given child node if it is supported. I update max ascent and max descent accordingly"
 	| childBaseline childAlignment |
@@ -77,7 +79,7 @@ BlLinearLayoutHorizontalMeasurer >> processBaseline: aNode breadth: aChildBreadt
 		ifAbsentPut: [ aChildBreadth - childBaseline ]
 ]
 
-{ #category : #'private - measurement' }
+{ #category : 'private - measurement' }
 BlLinearLayoutHorizontalMeasurer >> updateTotalLengthAfterMeasuring: aNode [
 	"I update the total length after measuring a given node based on its measured length and margin"
 	
@@ -88,7 +90,7 @@ BlLinearLayoutHorizontalMeasurer >> updateTotalLengthAfterMeasuring: aNode [
 		ifFalse: [ totalLength max: (totalLength + aNode measuredLength + aNode marginLength) ]
 ]
 
-{ #category : #'private - measurement' }
+{ #category : 'private - measurement' }
 BlLinearLayoutHorizontalMeasurer >> updateTotalLengthFromLargestChild: aNode [
 	"I update the total length taking into account the length of the largest child"
 

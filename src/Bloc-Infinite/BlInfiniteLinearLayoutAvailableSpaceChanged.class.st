@@ -1,20 +1,22 @@
 Class {
-	#name : #BlInfiniteLinearLayoutAvailableSpaceChanged,
-	#superclass : #BlInfiniteLinearLayoutAnnouncements,
+	#name : 'BlInfiniteLinearLayoutAvailableSpaceChanged',
+	#superclass : 'BlInfiniteLinearLayoutAnnouncements',
 	#instVars : [
 		'availableSpace'
 	],
-	#category : #'Bloc-Infinite-Layout-Linear'
+	#category : 'Bloc-Infinite-Layout-Linear',
+	#package : 'Bloc-Infinite',
+	#tag : 'Layout-Linear'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteLinearLayoutAvailableSpaceChanged >> availableSpace [
 	<return: #Number>
 
 	^ availableSpace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteLinearLayoutAvailableSpaceChanged >> availableSpace: aNumber [
 	availableSpace := aNumber
 ]

@@ -12,8 +12,8 @@ Instance Variables
 
 "
 Class {
-	#name : #BlGridLayoutArc,
-	#superclass : #Object,
+	#name : 'BlGridLayoutArc',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -21,24 +21,26 @@ Class {
 		'value',
 		'valid'
 	],
-	#category : #'Bloc-Layout-Grid-Utilities'
+	#category : 'Bloc-Layout-Grid-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Grid-Utilities'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlGridLayoutArc class >> span: span value: value [
 	^ self new
 		span: span;
 		value: value
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlGridLayoutArc >> initialize [
 	super initialize.
 	
 	valid := true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlGridLayoutArc >> printOn: aStream [
 	aStream
 		nextPutAll: self span asString;
@@ -48,14 +50,14 @@ BlGridLayoutArc >> printOn: aStream [
 		nextPutAll: self valid asString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutArc >> span [
 	<return: #BlGridLayoutInterval>
 
 	^ span
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutArc >> span: aBlGridLayoutInterval [
 	"Debugging internal implementation"
 	self
@@ -65,26 +67,26 @@ BlGridLayoutArc >> span: aBlGridLayoutInterval [
 	span := aBlGridLayoutInterval
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutArc >> valid [
 	<return: #Boolean>
 
 	^ valid
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutArc >> valid: aBoolean [
 	valid := aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutArc >> value [
 	<return: #BlGridMutableInteger>
 
 	^ value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlGridLayoutArc >> value: aBlGridMutableInteger [
 	value := aBlGridMutableInteger
 ]

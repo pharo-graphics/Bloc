@@ -1,16 +1,18 @@
 Class {
-	#name : #BlSplineOverScrollerScrollMode,
-	#superclass : #BlSplineOverScrollerMode,
+	#name : 'BlSplineOverScrollerScrollMode',
+	#superclass : 'BlSplineOverScrollerMode',
 	#instVars : [
 		'interpolator',
 		'startPosition',
 		'distance',
 		'duration'
 	],
-	#category : #'Bloc-Infinite-Scrollable-Helpers'
+	#category : 'Bloc-Infinite-Scrollable-Helpers',
+	#package : 'Bloc-Infinite',
+	#tag : 'Scrollable-Helpers'
 }
 
-{ #category : #updating }
+{ #category : 'updating' }
 BlSplineOverScrollerScrollMode >> continueOn: aSplineOverScroller [
 	"Simple scroll mode does not need to continue, animation can be finished"
 	<return: #Boolean>
@@ -18,24 +20,24 @@ BlSplineOverScrollerScrollMode >> continueOn: aSplineOverScroller [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSplineOverScrollerScrollMode >> distance [
 	^ distance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSplineOverScrollerScrollMode >> distance: anObject [
 	distance := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSplineOverScrollerScrollMode >> duration [
 	<return: #Duration>
 
 	^ duration
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSplineOverScrollerScrollMode >> duration: aDuration [
 
 	self
@@ -45,7 +47,7 @@ BlSplineOverScrollerScrollMode >> duration: aDuration [
 	duration := aDuration
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSplineOverScrollerScrollMode >> initializeOn: aSplineOverScroller [
 	aSplineOverScroller isFinished: false.
 	
@@ -63,27 +65,27 @@ BlSplineOverScrollerScrollMode >> initializeOn: aSplineOverScroller [
 	aSplineOverScroller startVelocity: 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSplineOverScrollerScrollMode >> interpolator [
 	^ interpolator
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSplineOverScrollerScrollMode >> interpolator: anObject [
 	interpolator := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSplineOverScrollerScrollMode >> startPosition [
 	^ startPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSplineOverScrollerScrollMode >> startPosition: anObject [
 	startPosition := anObject
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BlSplineOverScrollerScrollMode >> updateOn: aSplineOverScroller [
 	<return: #Boolean>
 	| aCurrentTime anElapsedTime aDuration |

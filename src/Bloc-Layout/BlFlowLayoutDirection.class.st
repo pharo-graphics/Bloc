@@ -1,15 +1,17 @@
 Class {
-	#name : #BlFlowLayoutDirection,
-	#superclass : #Object,
-	#category : #'Bloc-Layout-Flow-Utilities'
+	#name : 'BlFlowLayoutDirection',
+	#superclass : 'Object',
+	#category : 'Bloc-Layout-Flow-Utilities',
+	#package : 'Bloc-Layout',
+	#tag : 'Flow-Utilities'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFlowLayoutDirection >> isLeftToRight [
 	^ self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFlowLayoutDirection >> isRightToLeft [
 	^ self subclassResponsibility
 ]

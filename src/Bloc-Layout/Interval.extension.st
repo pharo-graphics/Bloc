@@ -1,6 +1,6 @@
-Extension { #name : #Interval }
+Extension { #name : 'Interval' }
 
-{ #category : #'*Bloc-Layout' }
+{ #category : '*Bloc-Layout' }
 Interval >> inversed [
 	^ self class from: stop to: start by: step
 ]

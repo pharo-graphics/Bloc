@@ -1,20 +1,22 @@
 Class {
-	#name : #BlRelativeLayout,
-	#superclass : #BlLayout,
-	#category : #'Bloc-Layout-Relative'
+	#name : 'BlRelativeLayout',
+	#superclass : 'BlLayout',
+	#category : 'Bloc-Layout-Relative',
+	#package : 'Bloc-Layout',
+	#tag : 'Relative'
 }
 
-{ #category : #constraints }
+{ #category : 'constraints' }
 BlRelativeLayout class >> constraints [
 	^ BlRelativeLayoutConstraints new
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlRelativeLayout >> layout: aParentLayoutNode [
 	self measureRelativePositions: aParentLayoutNode
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlRelativeLayout >> measure: aParentLayoutNode [
 	| aConstrainedExtentSpec |
 
@@ -28,7 +30,7 @@ BlRelativeLayout >> measure: aParentLayoutNode [
 	self measureRelativePositions: aParentLayoutNode
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlRelativeLayout >> measureRelativePositions: aParentLayoutNode [
 	| aLayoutNodeMap |
 	
@@ -50,7 +52,7 @@ BlRelativeLayout >> measureRelativePositions: aParentLayoutNode [
 						eachChildNode position: eachChildNode position + aTranslation ] ] ]
 ]
 
-{ #category : #measure }
+{ #category : 'measure' }
 BlRelativeLayout >> measurementSpecFor: aChildNode parentSpec: aParentSpec [
 	<return: #BlExtentMeasurementSpec>
 	| childWidthMeasureSpec childHeightMeasureSpec |

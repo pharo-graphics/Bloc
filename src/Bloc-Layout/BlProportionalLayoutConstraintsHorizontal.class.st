@@ -2,16 +2,18 @@
 I represent the horizontal constraints of a `BlProportionalLayout`.
 "
 Class {
-	#name : #BlProportionalLayoutConstraintsHorizontal,
-	#superclass : #BlLayoutConstraintsAxis,
+	#name : 'BlProportionalLayoutConstraintsHorizontal',
+	#superclass : 'BlLayoutConstraintsAxis',
 	#instVars : [
 		'left',
 		'right'
 	],
-	#category : #'Bloc-Layout-Proportional'
+	#category : 'Bloc-Layout-Proportional',
+	#package : 'Bloc-Layout',
+	#tag : 'Proportional'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlProportionalLayoutConstraintsHorizontal >> initialize [
 
 	super initialize.
@@ -20,25 +22,25 @@ BlProportionalLayoutConstraintsHorizontal >> initialize [
 	right := 1.0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlProportionalLayoutConstraintsHorizontal >> left [
 
 	^ left
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlProportionalLayoutConstraintsHorizontal >> left: aNumber [
 
 	left := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlProportionalLayoutConstraintsHorizontal >> right [
 
 	^ right
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlProportionalLayoutConstraintsHorizontal >> right: aNumber [
 
 	right := aNumber

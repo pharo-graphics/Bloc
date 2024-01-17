@@ -1,25 +1,27 @@
 Class {
-	#name : #BlInfiniteChildBoundsBasedFinder,
-	#superclass : #BlChildBoundsBasedFinder,
+	#name : 'BlInfiniteChildBoundsBasedFinder',
+	#superclass : 'BlChildBoundsBasedFinder',
 	#instVars : [
 		'layout'
 	],
-	#category : #'Bloc-Infinite-Layout'
+	#category : 'Bloc-Infinite-Layout',
+	#package : 'Bloc-Infinite',
+	#tag : 'Layout'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteChildBoundsBasedFinder >> childAt: anIndex [
 	
 	^ layout childAt: anIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteChildBoundsBasedFinder >> layout [
 
 	^ layout
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlInfiniteChildBoundsBasedFinder >> layout: anObject [
 
 	layout := anObject

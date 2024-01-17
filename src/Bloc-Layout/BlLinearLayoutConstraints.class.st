@@ -1,35 +1,37 @@
 Class {
-	#name : #BlLinearLayoutConstraints,
-	#superclass : #BlLayoutConstraints,
+	#name : 'BlLinearLayoutConstraints',
+	#superclass : 'BlLayoutConstraints',
 	#instVars : [
 		'weight'
 	],
-	#category : #'Bloc-Layout-Linear'
+	#category : 'Bloc-Layout-Linear',
+	#package : 'Bloc-Layout',
+	#tag : 'Linear'
 }
 
-{ #category : #alignment }
+{ #category : 'alignment' }
 BlLinearLayoutConstraints >> alignment [
 	^ self horizontal alignment + self vertical alignment
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlLinearLayoutConstraints >> defaultHorizontal [
 	^ BlLinearLayoutConstraintsHorizontal new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlLinearLayoutConstraints >> defaultVertical [
 	^ BlLinearLayoutConstraintsVertical new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlLinearLayoutConstraints >> initialize [
 	super initialize.
 	
 	weight := 1
 ]
 
-{ #category : #weight }
+{ #category : 'weight' }
 BlLinearLayoutConstraints >> weight [
 	"Return weight that defines how much space an element takes within parent's available space.
 	weight can not be nil and is always non negative"
@@ -38,7 +40,7 @@ BlLinearLayoutConstraints >> weight [
 	^ weight
 ]
 
-{ #category : #weight }
+{ #category : 'weight' }
 BlLinearLayoutConstraints >> weight: aNumber [
 	"Set new weight value that defines how much space an element takes within parent's available space.
 	aNumber must be non negative

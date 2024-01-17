@@ -1,10 +1,12 @@
 Class {
-	#name : #BlInfiniteHorizontalOrientation,
-	#superclass : #BlInfiniteLayoutOrientation,
-	#category : #'Bloc-Infinite-Layout'
+	#name : 'BlInfiniteHorizontalOrientation',
+	#superclass : 'BlInfiniteLayoutOrientation',
+	#category : 'Bloc-Infinite-Layout',
+	#package : 'Bloc-Infinite',
+	#tag : 'Layout'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteHorizontalOrientation >> canScrollLeft: anInfiniteElement [
 	"Return true if an infinite element can be scrolled left"
 	
@@ -20,7 +22,7 @@ BlInfiniteHorizontalOrientation >> canScrollLeft: anInfiniteElement [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteHorizontalOrientation >> canScrollRight: anInfiniteElement [
 	"Return true if an infinite element can be scrolled to the right"
 	<return: #Boolean>	
@@ -36,78 +38,78 @@ BlInfiniteHorizontalOrientation >> canScrollRight: anInfiniteElement [
 	^ false
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteHorizontalOrientation >> decoratedEnd: anElement [
 	^ (self layout decoratedRight: anElement) + anElement constraints margin right
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteHorizontalOrientation >> decoratedEndInParent: anElement [
 
 	^ (self layout boundsInParent: anElement includeDecoration: true) right
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteHorizontalOrientation >> decoratedMeasurement: anElement [
 	^ (self layout decoratedMeasuredWidth: anElement) + anElement constraints margin width
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteHorizontalOrientation >> decoratedMeasurementInOther: anElement [
 	^ (self layout decoratedMeasuredHeight: anElement) + anElement constraints margin height
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteHorizontalOrientation >> decoratedStart: anElement [
 	^ (self layout decoratedLeft: anElement) - anElement constraints margin left
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteHorizontalOrientation >> decoratedStartInParent: anElement [
 
 	^ (self layout boundsInParent: anElement includeDecoration: true) left
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlInfiniteHorizontalOrientation >> end [
 	^ self layout width
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlInfiniteHorizontalOrientation >> endWithPadding [
 	<return: #Number>
 
 	^ self layout width - self layout paddingRight
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteHorizontalOrientation >> isHorizontal [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlInfiniteHorizontalOrientation >> isVertical [
 	^ false
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlInfiniteHorizontalOrientation >> maximumSpace [
 	"Return a number representing the maximum space. Here the maximum width."
 
 	^ self layout maximumWidth
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteHorizontalOrientation >> measurementSpec [
 	^ self layout widthSpec
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteHorizontalOrientation >> measurementSpecInOther [
 	^ self layout heightSpec
 ]
 
-{ #category : #'mouse handlers' }
+{ #category : 'mouse handlers' }
 BlInfiniteHorizontalOrientation >> mouseWheelEvent: anEvent [
 	| dX anInfiniteElement isHorizontal |
 
@@ -132,27 +134,27 @@ BlInfiniteHorizontalOrientation >> mouseWheelEvent: anEvent [
 	anEvent consumed: true
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteHorizontalOrientation >> moveChild: anElement by: aNumber [
 	anElement position: (anElement position x + aNumber) @ anElement position y
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteHorizontalOrientation >> moveChildrenBy: aNumber [
 	self layout offsetChildrenHorizontallyBy: aNumber
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteHorizontalOrientation >> paddingEnd [
 	^ self layout paddingRight
 ]
 
-{ #category : #'children - geometry' }
+{ #category : 'children - geometry' }
 BlInfiniteHorizontalOrientation >> paddingStart [
 	^ self layout paddingLeft
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlInfiniteHorizontalOrientation >> startWithPadding [
 	<return: #Number>
 

@@ -1,10 +1,12 @@
 Class {
-	#name : #BlRelativeLayoutPositionUndefined,
-	#superclass : #BlRelativeLayoutPosition,
-	#category : #'Bloc-Layout-Relative'
+	#name : 'BlRelativeLayoutPositionUndefined',
+	#superclass : 'BlRelativeLayoutPosition',
+	#category : 'Bloc-Layout-Relative',
+	#package : 'Bloc-Layout',
+	#tag : 'Relative'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlRelativeLayoutPositionUndefined >> isUndefined [
 	^ true
 ]

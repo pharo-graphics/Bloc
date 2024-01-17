@@ -1,45 +1,47 @@
 Class {
-	#name : #BlFlowLayoutConstraints,
-	#superclass : #BlLayoutConstraints,
+	#name : 'BlFlowLayoutConstraints',
+	#superclass : 'BlLayoutConstraints',
 	#instVars : [
 		'newLine',
 		'weight',
 		'display'
 	],
-	#category : #'Bloc-Layout-Flow'
+	#category : 'Bloc-Layout-Flow',
+	#package : 'Bloc-Layout',
+	#tag : 'Flow'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutConstraints >> alignment [
 	^ self horizontal alignment + self vertical alignment
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlFlowLayoutConstraints >> defaultDisplay [
 	^ BlFlowLayoutDisplay inline
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlFlowLayoutConstraints >> defaultHorizontal [
 	^ BlFlowLayoutConstraintsHorizontal new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlFlowLayoutConstraints >> defaultVertical [
 	^ BlFlowLayoutConstraintsVertical new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutConstraints >> display [
 	^ display
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutConstraints >> float [
 	display := BlFlowLayoutDisplay float
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlFlowLayoutConstraints >> initialize [
 	super initialize.
 	
@@ -48,27 +50,27 @@ BlFlowLayoutConstraints >> initialize [
 	display := self defaultDisplay
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutConstraints >> inline [
 	display := BlFlowLayoutDisplay inline
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlFlowLayoutConstraints >> isNewLine [
 	^ newLine
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutConstraints >> newLine: aBoolean [
 	newLine := aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutConstraints >> weight [
 	^ weight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlFlowLayoutConstraints >> weight: aNumber [
 	weight := aNumber
 ]
