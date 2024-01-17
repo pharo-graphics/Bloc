@@ -4,11 +4,6 @@ Class {
 	#category : #'Bloc-Layouts-Alignment'
 }
 
-{ #category : #'class initialization' }
-BlHorizontalCenterAlignment class >> initialize [
-	super initialize.
-]
-
 { #category : #factory }
 BlHorizontalCenterAlignment class >> leftToRight [
 	^ self center

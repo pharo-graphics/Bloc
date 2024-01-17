@@ -51,7 +51,6 @@ BlElementAlignment class >> horizontal [
 
 { #category : #'class initialization' }
 BlElementAlignment class >> initialize [
-	super initialize.
 	
 	start := BlStartAlignment new.
 	middle := BlMiddleAlignment new.

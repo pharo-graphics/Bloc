@@ -17,7 +17,6 @@ Class {
 
 { #category : #'class initialization' }
 BlLayoutDirection class >> initialize [
-	super initialize.
 	
 	leftToRight := BlLayoutLeftToRight new.
 	rightToLeft := BlLayoutRightToLeft new

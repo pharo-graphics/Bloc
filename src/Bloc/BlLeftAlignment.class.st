@@ -9,11 +9,6 @@ Class {
 	#category : #'Bloc-Layouts-Alignment'
 }
 
-{ #category : #'class initialization' }
-BlLeftAlignment class >> initialize [
-	super initialize.
-]
-
 { #category : #factory }
 BlLeftAlignment class >> leftToRight [
 	^ self left

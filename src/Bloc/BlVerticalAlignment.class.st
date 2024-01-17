@@ -31,7 +31,6 @@ BlVerticalAlignment class >> end [
 
 { #category : #'class initialization' }
 BlVerticalAlignment class >> initialize [
-	super initialize.
 	
 	top := BlTopAlignment new.
 	center := BlVerticalCenterAlignment new.

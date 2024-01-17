@@ -21,13 +21,12 @@ BlHorizontalAlignment class >> directed: aBlLayoutDirection [
 
 { #category : #'class initialization' }
 BlHorizontalAlignment class >> initialize [
-	super initialize.
 	
 	left := BlLeftAlignment new.
 	right := BlRightAlignment new.
 	center := BlHorizontalCenterAlignment new.
 	start := BlHorizontalStartAlignment new.
-	end := BlHorizontalEndAlignment new.
+	end := BlHorizontalEndAlignment new
 ]
 
 { #category : #factory }

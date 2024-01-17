@@ -11,10 +11,9 @@ Class {
 
 { #category : #'class initialization' }
 BlNullAlignment class >> initialize [
-	super initialize.
 	
 	vertical := BlNullVerticalAlignment new.
-	horizontal := BlNullHorizontalAlignment new.
+	horizontal := BlNullHorizontalAlignment new
 ]
 
 { #category : #factory }

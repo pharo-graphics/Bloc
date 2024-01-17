@@ -10,9 +10,8 @@ Class {
 	#category : #'Bloc-Basic-Interpolators'
 }
 
-{ #category : #initialization }
+{ #category : #'class initialization' }
 BlViscousFluidInterpolator class >> initialize [
-	super initialize.
 	
 	InvertedExponent := 1.0 / Float e.
 	"Controls the viscous fluid effect (how much of it)"
