@@ -4,7 +4,7 @@ I am a SmoothScroller implementation which uses a LinearInterpolator until the t
 "
 Class {
 	#name : 'BlInfiniteLinearSmoothScroller',
-	#superclass : 'Object',
+	#superclass : 'BlInfiniteSmoothScroller',
 	#instVars : [
 		'targetVector',
 		'interimTarget',
