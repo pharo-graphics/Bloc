@@ -1,10 +1,12 @@
 Class {
-	#name : #BlBubblingEventDispatcher,
-	#superclass : #BlDirectEventDispatcher,
-	#category : #'Bloc-Events-Dispatcher'
+	#name : 'BlBubblingEventDispatcher',
+	#superclass : 'BlDirectEventDispatcher',
+	#category : 'Bloc-Events-Dispatcher',
+	#package : 'Bloc',
+	#tag : 'Events-Dispatcher'
 }
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BlBubblingEventDispatcher >> dispatchArrivedEvent: anEvent [
 	
 	anEvent arrivedTarget: self owner.
@@ -19,7 +21,7 @@ BlBubblingEventDispatcher >> dispatchArrivedEvent: anEvent [
 		ifTrue: [ shortcutHandler handleEvent: anEvent ]
 ]
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BlBubblingEventDispatcher >> dispatchBubblingEvent: anEvent [
 	
 	anEvent bubblingTarget: self owner.
@@ -34,7 +36,7 @@ BlBubblingEventDispatcher >> dispatchBubblingEvent: anEvent [
 		ifTrue: [ shortcutHandler handleEvent: anEvent ]
 ]
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BlBubblingEventDispatcher >> dispatchCapturingEvent: anEvent [
 	
 	anEvent capturingTarget: self owner.
@@ -44,7 +46,7 @@ BlBubblingEventDispatcher >> dispatchCapturingEvent: anEvent [
 		theFilters dispatchEvent: anEvent ]
 ]
 
-{ #category : #dispatching }
+{ #category : 'dispatching' }
 BlBubblingEventDispatcher >> dispatchEvent: anEvent next: aBlEventDispatcherChain [
 	<return: #BlEvent>
 	
@@ -70,7 +72,7 @@ BlBubblingEventDispatcher >> dispatchEvent: anEvent next: aBlEventDispatcherChai
 	^ anEvent
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlBubblingEventDispatcher >> type [
 	<return: #String>
 

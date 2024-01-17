@@ -3,39 +3,41 @@ I represent a text selection defined as interval [from...to]
 
 "
 Class {
-	#name : #BlSelection,
-	#superclass : #Object,
+	#name : 'BlSelection',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#classInstVars : [
 		'empty'
 	],
-	#category : #'Bloc-Utilities - Selection'
+	#category : 'Bloc-Utilities - Selection',
+	#package : 'Bloc',
+	#tag : 'Utilities - Selection'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlSelection class >> cleanUp [
 	super cleanUp.
 	
 	empty := nil
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSelection class >> empty [
 	^ empty ifNil: [ empty := BlEmptySelection new ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSelection class >> from: aFromIndex to: aToIndex [
 	^ BlMonotoneSelection from: aFromIndex to: aToIndex
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlSelection >> + aTextSelection [
 	^ BlMultipleSelection withAll: { self . aTextSelection }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSelection >> allSelections [
 	"Return a collection of all monotone selection intervals within this selection"
 	<return: #Collection of: #BlMonotoneSelection>
@@ -43,7 +45,7 @@ BlSelection >> allSelections [
 	^ Array streamContents: [ :aStream | self do: [ :aSelection | aStream nextPut: aSelection ] ]
 ]
 
-{ #category : #'api - enumerating' }
+{ #category : 'api - enumerating' }
 BlSelection >> anySatisfy: aBlock [
 	"Evaluate aBlock with the elements of the receiver.
 	If aBlock returns true for any element return true.
@@ -53,21 +55,21 @@ BlSelection >> anySatisfy: aBlock [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSelection >> children [
 	<return: #Collection of: #BlSelection>
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlSelection >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlSelection >> containsIndex: anIndex [
 	"Return true if selection indices include a given index, false otherwise.
 	I am conceptually same as (self indices includes: anIndex)"
@@ -75,36 +77,36 @@ BlSelection >> containsIndex: anIndex [
 	^ self subclassResponsibility
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlSelection >> copyFrom: aStartIndex to: anEndIndex [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - enumerating' }
+{ #category : 'api - enumerating' }
 BlSelection >> do: aBlock [
 	"Evaluate a given block with all recorded selection intervals"
 	
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSelection >> indices [
 	<return: #Collection of: #Number>
 
 	^ Array streamContents: [ :aStream | self do: [ :eachMonotoneSelection | aStream nextPutAll: eachMonotoneSelection indices ] ]
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlSelection >> isEmpty [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlSelection >> isNotEmpty [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - enumerating' }
+{ #category : 'api - enumerating' }
 BlSelection >> reverseDo: aBlock [
 	"Evaluate a given block with all recorded selection intervals in reverse direction"
 

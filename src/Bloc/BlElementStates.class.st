@@ -3,18 +3,20 @@
 
 "
 Class {
-	#name : #BlElementStates,
-	#superclass : #Object,
+	#name : 'BlElementStates',
+	#superclass : 'Object',
 	#instVars : [
 		'announcer',
 		'element',
 		'localStates',
 		'inheritedStates'
 	],
-	#category : #'Bloc-Basic-State'
+	#category : 'Bloc-Basic-State',
+	#package : 'Bloc',
+	#tag : 'Basic-State'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlElementStates >> addState: aBlElementState [
 	"Add a given local state overwriting any existing one of the same type"
 	(localStates hasState: aBlElementState)
@@ -32,7 +34,7 @@ BlElementStates >> addState: aBlElementState [
 	self onStatesChanged
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStates >> allStates [
 	<return: #BlElementStatesSet>
 	| theAllStates |
@@ -46,29 +48,29 @@ BlElementStates >> allStates [
 	^ theAllStates
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStates >> announcer [
 	^ announcer ifNil: [ announcer := Announcer new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStates >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStates >> element: anObject [
 	element := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementStates >> hasState: aBlElementState [
 	<return: #Boolean>
 
 	^ localStates hasState: aBlElementState
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStates >> inheritedStates: aSetOfStates [
 	self
 		assert: [ aSetOfStates isKindOf: BlElementStatesSet ]
@@ -78,12 +80,12 @@ BlElementStates >> inheritedStates: aSetOfStates [
 	self onStatesChanged
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStates >> inheritedStatesCopy [
 	^ inheritedStates copy
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementStates >> initialize [
 	super initialize.
 	
@@ -91,23 +93,23 @@ BlElementStates >> initialize [
 	inheritedStates := BlElementStatesSet new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementStates >> isDisabled [
 
 	^ self hasState: BlElementState disabled
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementStates >> isEnabled [
 	^ self isDisabled not
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStates >> localStatesCopy [
 	^ localStates copy
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlElementStates >> onStatesChanged [
 
 	"Just to keep it very simple"
@@ -116,12 +118,12 @@ BlElementStates >> onStatesChanged [
 	announcer announce: #statesChanged
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlElementStates >> privateLocalStates [
 	^ localStates
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlElementStates >> removeState: aBlElementState [
 	"remove all state of the same type"
 	| aRemovedState |
@@ -136,7 +138,7 @@ BlElementStates >> removeState: aBlElementState [
 	self onStatesChanged
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlElementStates >> removeStatesSuchThat: aBlock [
 	| toBeRemoved |
 	
@@ -151,7 +153,7 @@ BlElementStates >> removeStatesSuchThat: aBlock [
 	self onStatesChanged
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStates >> stateLike: aBlElementState ifFound: aFoundBlock ifNone: aNoneBlock [
 	^ (localStates
 		like: aBlElementState
@@ -160,7 +162,7 @@ BlElementStates >> stateLike: aBlElementState ifFound: aFoundBlock ifNone: aNone
 			ifNotNil: aFoundBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementStates >> statesToInherit [
 	<return: #BlElementStatesSet>
 	| theAllStates |
@@ -177,7 +179,7 @@ BlElementStates >> statesToInherit [
 	^ theAllStates
 ]
 
-{ #category : #'api - states' }
+{ #category : 'api - states' }
 BlElementStates >> withHover [
 	self element addEventHandlerIfNotPresent: BlElementHoveredStateEventHandler uniqueInstance
 ]

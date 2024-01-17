@@ -4,17 +4,25 @@ See BlLayoutAlignment for more info.
 
 "
 Class {
-	#name : #BlMiddleAlignment,
-	#superclass : #BlRelativeAlignment,
-	#category : #'Bloc-Layouts-Alignment'
+	#name : 'BlMiddleAlignment',
+	#superclass : 'BlRelativeAlignment',
+	#category : 'Bloc-Layouts-Alignment',
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlMiddleAlignment class >> horizontal [
 	^ BlHorizontalAlignment center
 ]
 
-{ #category : #factory }
+{ #category : 'class initialization' }
+BlMiddleAlignment class >> initialize [
+
+	self initializeSingletons
+]
+
+{ #category : 'factory' }
 BlMiddleAlignment class >> vertical [
 	^ BlVerticalAlignment center
 ]

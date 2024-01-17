@@ -1,10 +1,18 @@
 Class {
-	#name : #BlHorizontalCoordinateEndAlignment,
-	#superclass : #BlHorizontalCoordinateAlignment,
-	#category : #'Bloc-Layouts-Alignment'
+	#name : 'BlHorizontalCoordinateEndAlignment',
+	#superclass : 'BlHorizontalCoordinateAlignment',
+	#category : 'Bloc-Layouts-Alignment',
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
-{ #category : #factory }
+{ #category : 'class initialization' }
+BlHorizontalCoordinateEndAlignment class >> initialize [
+
+	self initializeSingletons
+]
+
+{ #category : 'factory' }
 BlHorizontalCoordinateEndAlignment >> leftToRight [
 	^ BlHorizontalCoordinateRightAlignment new
 		coordinate: coordinate;

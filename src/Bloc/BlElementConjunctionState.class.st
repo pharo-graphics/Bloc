@@ -1,15 +1,17 @@
 Class {
-	#name : #BlElementConjunctionState,
-	#superclass : #BlElementCompositeState,
-	#category : #'Bloc-Basic-State'
+	#name : 'BlElementConjunctionState',
+	#superclass : 'BlElementCompositeState',
+	#category : 'Bloc-Basic-State',
+	#package : 'Bloc',
+	#tag : 'Basic-State'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementConjunctionState >> matches: aSetOfStates [
 	^ (self left matches: aSetOfStates) and: [ self right matches: aSetOfStates ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlElementConjunctionState >> printOn: aStream [
 	aStream
 		nextPut: $(;

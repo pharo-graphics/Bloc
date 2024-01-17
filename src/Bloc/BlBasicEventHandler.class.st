@@ -1,22 +1,24 @@
 Class {
-	#name : #BlBasicEventHandler,
-	#superclass : #Object,
+	#name : 'BlBasicEventHandler',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Events-Handler'
+	#category : 'Bloc-Events-Handler',
+	#package : 'Bloc',
+	#tag : 'Events-Handler'
 }
 
-{ #category : #'api - hooks' }
+{ #category : 'api - hooks' }
 BlBasicEventHandler >> disableEventsIn: anElementEventDispatcher [
 	self eventsToHandle do: [ :eachEventClass | eachEventClass disableIn: anElementEventDispatcher ]
 ]
 
-{ #category : #'api - hooks' }
+{ #category : 'api - hooks' }
 BlBasicEventHandler >> enableEventsIn: anElementEventDispatcher [
 	self eventsToHandle do: [ :eachEventClass | eachEventClass enableIn: anElementEventDispatcher ]
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlBasicEventHandler >> eventsToHandle [
 	"I return a collection of element types I may be interested in"
 	<return: #Collection of: #'BlEvent class'>	
@@ -24,11 +26,11 @@ BlBasicEventHandler >> eventsToHandle [
 	^ #()
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlBasicEventHandler >> handleEvent: anEvent [
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBasicEventHandler >> hasOwner [
 	"Utility #*owner message makes it possible to have a polymorphic way to visualise a tree structure of the elements"
 	<return: #Boolean>
@@ -36,15 +38,15 @@ BlBasicEventHandler >> hasOwner [
 	^ false
 ]
 
-{ #category : #'api - hooks' }
+{ #category : 'api - hooks' }
 BlBasicEventHandler >> onInstalledIn: anObject [
 ]
 
-{ #category : #'api - hooks' }
+{ #category : 'api - hooks' }
 BlBasicEventHandler >> onUninstalledIn: anObject [
 ]
 
-{ #category : #'api - event managing' }
+{ #category : 'api - event managing' }
 BlBasicEventHandler >> wantsEvent: anEvent [
 	^ false
 ]

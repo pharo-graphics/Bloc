@@ -5,30 +5,32 @@ I usually represent a single character, but I can be composed of multiples code 
 
 "
 Class {
-	#name : #BlTextInputEvent,
-	#superclass : #BlUIEvent,
+	#name : 'BlTextInputEvent',
+	#superclass : 'BlUIEvent',
 	#instVars : [
 		'text'
 	],
-	#category : #'Bloc-Events'
+	#category : 'Bloc-Events',
+	#package : 'Bloc',
+	#tag : 'Events'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextInputEvent >> isTextInput [
 	^ true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlTextInputEvent >> sendTo: anObject [
 	anObject textInputEvent: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextInputEvent >> text [
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextInputEvent >> text: anObject [
 	text := anObject
 ]

@@ -1,30 +1,38 @@
 Class {
-	#name : #BlVerticalCenterAlignment,
-	#superclass : #BlVerticalAlignment,
-	#category : #'Bloc-Layouts-Alignment'
+	#name : 'BlVerticalCenterAlignment',
+	#superclass : 'BlVerticalAlignment',
+	#category : 'Bloc-Layouts-Alignment',
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
-{ #category : #factory }
+{ #category : 'class initialization' }
+BlVerticalCenterAlignment class >> initialize [
+
+	self initializeSingletons
+]
+
+{ #category : 'factory' }
 BlVerticalCenterAlignment class >> leftToRight [
 	^ self center
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlVerticalCenterAlignment class >> rightToLeft [
 	^ self center
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlVerticalCenterAlignment >> inverted [
 	^ BlElementAlignment horizontal center
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlVerticalCenterAlignment >> swap [
 	^ self
 ]
 
-{ #category : #translation }
+{ #category : 'translation' }
 BlVerticalCenterAlignment >> translationOf: aBounds in: aContainerBounds [
 	<return: #Point>
 	

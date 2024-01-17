@@ -16,8 +16,8 @@ both element and allowed bounds should be in element's parent coordinate system
 
 "
 Class {
-	#name : #BlElementAlignment,
-	#superclass : #Object,
+	#name : 'BlElementAlignment',
+	#superclass : 'Object',
 	#classInstVars : [
 		'end',
 		'horizontal',
@@ -26,32 +26,49 @@ Class {
 		'start',
 		'vertical'
 	],
-	#category : #'Bloc-Layouts-Alignment'
+	#category : 'Bloc-Layouts-Alignment',
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlElementAlignment class >> bottom [
 	^ self vertical end
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlElementAlignment class >> center [
 	^ self middle
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlElementAlignment class >> end [
 	^ end
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlElementAlignment class >> horizontal [
 	^ horizontal
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlElementAlignment class >> initialize [
+	"All subclasses duplicate this method to initialize singletons on load.
+
+	Compile in subclasses with:
 	
+	self allSubclassesDo: [ :c | (c classSide includesSelector: #initialize) ifFalse: [ c classSide compile: 'initialize
+
+	self initializeSingletons' classified: 'class initialization' ]  ].
+	"
+
+
+	self initializeSingletons
+]
+
+{ #category : 'class initialization' }
+BlElementAlignment class >> initializeSingletons [
+
 	start := BlStartAlignment new.
 	middle := BlMiddleAlignment new.
 	end := BlEndAlignment new.
@@ -60,68 +77,68 @@ BlElementAlignment class >> initialize [
 	vertical := BlVerticalAlignment new
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlElementAlignment class >> left [
 	^ self horizontal class left
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlElementAlignment class >> middle [
 	^ middle
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlElementAlignment class >> null [
 	^ null
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlElementAlignment class >> right [
 	^ self horizontal class right
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlElementAlignment class >> start [
 	^ start
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlElementAlignment class >> top [
 	^ self vertical start
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlElementAlignment class >> vertical [
 	^ vertical
 ]
 
-{ #category : #composition }
+{ #category : 'composition' }
 BlElementAlignment >> + anElementAlignment [
 	^ self subclassResponsibility
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementAlignment >> = anObject [
 	self == anObject ifTrue: [ ^ true ].
 	^ self class = anObject class
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementAlignment >> hash [
 	^ self class hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementAlignment >> ifNotNull: aBlock [
 	aBlock value
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementAlignment >> ifNull: aBlock [
 	"not null"
 ]
 
-{ #category : #translation }
+{ #category : 'translation' }
 BlElementAlignment >> translationOf: aBounds in: aContainerBounds [
 	^ self subclassResponsibility
 ]

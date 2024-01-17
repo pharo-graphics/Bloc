@@ -1,13 +1,15 @@
 Class {
-	#name : #BlHeadlessBufferSurfaceRenderer,
-	#superclass : #BlHostSurfaceRenderer,
+	#name : 'BlHeadlessBufferSurfaceRenderer',
+	#superclass : 'BlHostSurfaceRenderer',
 	#instVars : [
 		'thePixels'
 	],
-	#category : #'Bloc-Universe - Host Headless'
+	#category : 'Bloc-Universe - Host Headless',
+	#package : 'Bloc',
+	#tag : 'Universe - Host Headless'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHeadlessBufferSurfaceRenderer >> initializeForSurface: aSurface [
 
 	| aForm anExtent |
@@ -25,6 +27,6 @@ BlHeadlessBufferSurfaceRenderer >> initializeForSurface: aSurface [
 		extent: anExtent
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlHeadlessBufferSurfaceRenderer >> renderSurface: aSurface damaged: aCollectionOfRectangles [
 ]

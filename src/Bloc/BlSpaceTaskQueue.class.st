@@ -1,25 +1,27 @@
 Class {
-	#name : #BlSpaceTaskQueue,
-	#superclass : #BlTaskQueue,
+	#name : 'BlSpaceTaskQueue',
+	#superclass : 'BlTaskQueue',
 	#instVars : [
 		'space'
 	],
-	#category : #'Bloc-Space - Tasks'
+	#category : 'Bloc-Space - Tasks',
+	#package : 'Bloc',
+	#tag : 'Space - Tasks'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSpaceTaskQueue class >> space: aBlSpace [
 
 	^ self new initializeWith: aBlSpace
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpaceTaskQueue >> initializeWith: aBlSpace [
 
 	space := aBlSpace
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlSpaceTaskQueue >> requeue: aBlTask [
 
 	super requeue: aBlTask.
