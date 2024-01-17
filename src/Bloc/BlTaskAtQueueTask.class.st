@@ -1,5 +1,5 @@
 "
-BlTaskAtTask is the object added to the queue by BlTaskAtQueue.  It stores the valuable and scheduled execution time.
+I represent the objects added to the queue by `BlTaskAtQueue`. It stores the valuable and scheduled execution time.
 
 ## Internal Representation and Key Implementation Points.
 
@@ -13,7 +13,6 @@ BlTaskAtTask is the object added to the queue by BlTaskAtQueue.  It stores the v
 Class {
 	#name : 'BlTaskAtQueueTask',
 	#superclass : 'Object',
-	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'valuable',
@@ -28,13 +27,15 @@ Class {
 { #category : 'instance creation' }
 BlTaskAtQueueTask class >> valuable: aValuable at: aTime [
 
-	^self new initialize: aValuable at: aTime
+	^ self new
+		initialize: aValuable at: aTime;
+		yourself
 ]
 
 { #category : 'accessing' }
 BlTaskAtQueueTask >> entryPriority [ 
 	"Answer the receiver's priority.
-	0 is highest, so earlier scheduled tasks have a higher priority"
+	Zero is the highest priority, so earlier scheduled tasks have a higher priority."
 
 	^ (scheduledTime - queue processTime) asMilliSeconds max: 0
 
@@ -64,31 +65,36 @@ BlTaskAtQueueTask >> printOn: aStream [
 
 { #category : 'accessing' }
 BlTaskAtQueueTask >> queue [
+
 	^ queue
 ]
 
 { #category : 'accessing' }
-BlTaskAtQueueTask >> queue: anObject [
-	queue := anObject
+BlTaskAtQueueTask >> queue: aQueue [
+
+	queue := aQueue
 ]
 
 { #category : 'accessing' }
 BlTaskAtQueueTask >> scheduledTime [
+
 	^ scheduledTime
 ]
 
 { #category : 'accessing' }
 BlTaskAtQueueTask >> scheduledTime: aTime [
+
 	scheduledTime := aTime
 ]
 
 { #category : 'accessing' }
 BlTaskAtQueueTask >> valuable [
+
 	^ valuable
 ]
 
 { #category : 'evaluating' }
 BlTaskAtQueueTask >> value [
-	"evaluate valuable"
-	^ self valuable value
+
+	^ valuable value
 ]

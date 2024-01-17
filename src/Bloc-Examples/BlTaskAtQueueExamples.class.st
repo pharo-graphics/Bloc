@@ -16,12 +16,15 @@ BlTaskAtQueueExamples >> startTime [
 
 { #category : 'private' }
 BlTaskAtQueueExamples >> taskAtQueue [
-	"Answer the BlTaskAtQueue used for the examples.
+	"Answer the `BlTaskAtQueue` used for the examples.
 	The queue is configured to use a simulated clock with a fixed current time for reproduceable tests."
 
-	^ BlTaskAtQueue new 
-		clock: (BlSimulatedTime new 
-			date: self startTime)
+	^ BlTaskAtQueue new
+			clock:
+				(BlSimulatedTime new
+					date: self startTime;
+					yourself);
+			yourself
 ]
 
 { #category : 'examples' }
