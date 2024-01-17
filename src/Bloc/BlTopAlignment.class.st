@@ -1,35 +1,32 @@
 Class {
-	#name : #BlTopAlignment,
-	#superclass : #BlVerticalAlignment,
-	#category : #'Bloc-Layouts-Alignment'
+	#name : 'BlTopAlignment',
+	#superclass : 'Object',
+	#category : 'Bloc-Layouts-Alignment',
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
-{ #category : #'class initialization' }
-BlTopAlignment class >> initialize [
-	super initialize.
-]
-
-{ #category : #factory }
+{ #category : 'factory' }
 BlTopAlignment class >> leftToRight [
 	^ self top
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlTopAlignment class >> rightToLeft [
 	^ self top
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlTopAlignment >> inverted [
 	^ BlElementAlignment horizontal start
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlTopAlignment >> swap [
 	^ BlElementAlignment bottom
 ]
 
-{ #category : #translation }
+{ #category : 'translation' }
 BlTopAlignment >> translationOf: aBounds in: aContainerBounds [
 	<return: #Point>
 	

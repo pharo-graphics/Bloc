@@ -4,17 +4,19 @@ I'm an utility Trait for objects that own an Announcer.
 
 "
 Trait {
-	#name : #TBlAnnounceable,
-	#category : #'Bloc-Basic-Support'
+	#name : 'TBlAnnounceable',
+	#category : 'Bloc-Basic-Support',
+	#package : 'Bloc',
+	#tag : 'Basic-Support'
 }
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlAnnounceable >> announce: anAnnouncement [
 
 	self announcerDo: [ :ann | ann announce: anAnnouncement ]
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlAnnounceable >> announcerDo: aBlockClosure [
 
 	"Evaluate a given block closure with an announcer as an argument if it is initialized"
@@ -22,19 +24,19 @@ TBlAnnounceable >> announcerDo: aBlockClosure [
 	aBlockClosure value: self privateAnnouncer
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 TBlAnnounceable >> ensureAnnouncer [
 
 	self explicitRequirement 
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 TBlAnnounceable >> privateAnnouncer [
 
 	^ self explicitRequirement
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlAnnounceable >> unsubscribe: anObject [
 
 	"Unsubscribe all subscriptions of anObject from the receiver"
@@ -42,14 +44,14 @@ TBlAnnounceable >> unsubscribe: anObject [
 	self announcerDo: [ :anAnnouncer | anAnnouncer unsubscribe: anObject ]
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlAnnounceable >> whenAnnouncement: anAnnouncementClass do: aValuable [
 
 	self ensureAnnouncer.
 	self privateAnnouncer when: anAnnouncementClass do: aValuable
 ]
 
-{ #category : #'event management' }
+{ #category : 'event management' }
 TBlAnnounceable >> whenAnnouncement: anAnnouncementClass send: aSelector to: anObject [
 
 	self ensureAnnouncer.

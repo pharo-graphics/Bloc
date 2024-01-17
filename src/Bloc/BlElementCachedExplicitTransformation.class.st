@@ -3,17 +3,19 @@ I cache a `BlElementTransformation`.
 
 "
 Class {
-	#name : #BlElementCachedExplicitTransformation,
-	#superclass : #BlElementCachedTransformation,
+	#name : 'BlElementCachedExplicitTransformation',
+	#superclass : 'BlElementCachedTransformation',
 	#instVars : [
 		'matrix',
 		'elementTransformation',
 		'boundingRectangle'
 	],
-	#category : #'Bloc-Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations',
+	#package : 'Bloc',
+	#tag : 'Basic-Transformations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlElementCachedExplicitTransformation class >> forTransformation: aBlElementTransformation [
 
 	^ self basicNew
@@ -21,26 +23,26 @@ BlElementCachedExplicitTransformation class >> forTransformation: aBlElementTran
 		  yourself
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlElementCachedExplicitTransformation >> asElementTransformation [
 
 	^ elementTransformation
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlElementCachedExplicitTransformation >> boundingRectangle [
 
 	^ boundingRectangle
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedExplicitTransformation >> boundingRectangle: aRectangle [
 
 	boundingRectangle := aRectangle.
 	self invalidateMatrix
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlElementCachedExplicitTransformation >> bounds [
 
 	self
@@ -50,20 +52,20 @@ BlElementCachedExplicitTransformation >> bounds [
 	^ boundingRectangle
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlElementCachedExplicitTransformation >> elementTransformation [
 
 	^ elementTransformation
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlElementCachedExplicitTransformation >> ensureMatrix [
 
 	matrix ifNil: [
 		matrix := elementTransformation asMatrix: boundingRectangle ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementCachedExplicitTransformation >> initializeWith: aBlElementTransformation [
 
 	self initialize.
@@ -72,7 +74,7 @@ BlElementCachedExplicitTransformation >> initializeWith: aBlElementTransformatio
 	elementTransformation := aBlElementTransformation
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlElementCachedExplicitTransformation >> invalidateMatrix [
 	"Matrix is computed out of affine transformation composition
 	which may contain transformations that depend on element's properties
@@ -82,7 +84,7 @@ BlElementCachedExplicitTransformation >> invalidateMatrix [
 	matrix := nil
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedExplicitTransformation >> inverseTransformBounds: aBlBounds [
 	"Transform the given bounds according to inverse of my cached transformation.
 	(Global to local transformation.)"
@@ -90,7 +92,7 @@ BlElementCachedExplicitTransformation >> inverseTransformBounds: aBlBounds [
 	^ self matrix inverted transformBounds: aBlBounds
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedExplicitTransformation >> inverseTransformPoint: aPoint [
 	"Answer the `Point` that results from applying the inversed transformation on a given point.
 	Signal `BlSingularMatrixError` if the underlying matrix is singular."
@@ -98,38 +100,38 @@ BlElementCachedExplicitTransformation >> inverseTransformPoint: aPoint [
 	^ self matrix inverted transformPoint: aPoint
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlElementCachedExplicitTransformation >> invert [
 
 	matrix := self matrix inverted
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlElementCachedExplicitTransformation >> inverted [
 
 	^ self copy invert
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlElementCachedExplicitTransformation >> isIdentity [
 
 	^ elementTransformation isIdentity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementCachedExplicitTransformation >> isPureTranslation [
 
 	^ elementTransformation isPureTranslation
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedExplicitTransformation >> matrix [
 
 	self ensureMatrix.
 	^ matrix
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedExplicitTransformation >> transformBounds: aBlBounds [
 	"Transform the given bounds according to my cached transformation.
 	(Local to global transformation.)"
@@ -137,7 +139,7 @@ BlElementCachedExplicitTransformation >> transformBounds: aBlBounds [
 	^ self matrix transformBounds: aBlBounds
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedExplicitTransformation >> transformPoint: aPoint [
 	"Transform a given 2D point according to my cached transformation.
 	(Local to global transformation.)"
@@ -145,7 +147,7 @@ BlElementCachedExplicitTransformation >> transformPoint: aPoint [
 	^ self matrix transformPoint: aPoint
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlElementCachedExplicitTransformation >> transformation [
 
 	self

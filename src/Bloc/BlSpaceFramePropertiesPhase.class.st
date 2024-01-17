@@ -1,17 +1,19 @@
 Class {
-	#name : #BlSpaceFramePropertiesPhase,
-	#superclass : #BlSpaceFramePhase,
-	#category : #'Bloc-Space - Frame'
+	#name : 'BlSpaceFramePropertiesPhase',
+	#superclass : 'BlSpaceFramePhase',
+	#category : 'Bloc-Space - Frame',
+	#package : 'Bloc',
+	#tag : 'Space - Frame'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceFramePropertiesPhase >> name [
 	"Return the string representing the name of the receiver."
 	
 	^ 'Properties'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 BlSpaceFramePropertiesPhase >> runOn: aSpace [
 	aSpace
 		dispatchTimeEvent: BlSpacePropertiesEndEvent

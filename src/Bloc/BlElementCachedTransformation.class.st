@@ -9,24 +9,26 @@ Hence the separation between my subclasses.
 
 "
 Class {
-	#name : #BlElementCachedTransformation,
-	#superclass : #Object,
-	#category : #'Bloc-Basic-Transformations'
+	#name : 'BlElementCachedTransformation',
+	#superclass : 'Object',
+	#category : 'Bloc-Basic-Transformations',
+	#package : 'Bloc',
+	#tag : 'Basic-Transformations'
 }
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlElementCachedTransformation >> asCachedTransformation [
 
 	^ self
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlElementCachedTransformation >> asElementTransformation [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedTransformation >> boundingRectangle: aRectangle [
 	"The actual transformation matrix may depend on the element bounds due to potential non-zero transformation origin.
 	This message allows cached transformation to recompute the transformation matrix when bounds change."
@@ -34,7 +36,7 @@ BlElementCachedTransformation >> boundingRectangle: aRectangle [
 	self subclassResponsibility
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedTransformation >> bounds: aRectangle [
 	"The actual transformation matrix may depends on the element bounds due to
 	potential non zero transformation origin.
@@ -47,7 +49,7 @@ BlElementCachedTransformation >> bounds: aRectangle [
 	self boundingRectangle: aRectangle
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedTransformation >> inverseTransformBounds: aBlBounds [
 	"Transform the given bounds according to inverse of my cached transformation.
 	(Global to local transformation.)"
@@ -55,7 +57,7 @@ BlElementCachedTransformation >> inverseTransformBounds: aBlBounds [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedTransformation >> inverseTransformPoint: aPoint [
 	"Answer the point that results from applying my inverted transformation to a given point.
 	May signal `BlSingularMatrixError` if the underlying matrix is singular."
@@ -63,19 +65,19 @@ BlElementCachedTransformation >> inverseTransformPoint: aPoint [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlElementCachedTransformation >> isIdentity [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedTransformation >> matrix [
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedTransformation >> transformBounds: aBlBounds [
 	"Transform the given bounds according to my cached transformation.
 	(Local to global transformation.)"
@@ -83,7 +85,7 @@ BlElementCachedTransformation >> transformBounds: aBlBounds [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - transformation' }
+{ #category : 'api - transformation' }
 BlElementCachedTransformation >> transformPoint: aPoint [
 	"Transform a given 2D point according to my cached transformation.
 	(Local to global transformation.)"

@@ -3,8 +3,8 @@ I am a parallel Universe. There can exist multiple parallel universes
 
 "
 Class {
-	#name : #BlParallelUniverse,
-	#superclass : #Object,
+	#name : 'BlParallelUniverse',
+	#superclass : 'Object',
 	#traits : 'TBlEventTarget',
 	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [
@@ -21,17 +21,19 @@ Class {
 		'Universes',
 		'UniversesMutex'
 	],
-	#category : #'Bloc-Universe - Parallel'
+	#category : 'Bloc-Universe - Parallel',
+	#package : 'Bloc',
+	#tag : 'Universe - Parallel'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverse class >> all [
 	"Return a collection with all the registered instances"
 	
 	^ Universes
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlParallelUniverse class >> existsForHost: aHostClass [
 
 	^ UniversesMutex critical: [
@@ -41,7 +43,7 @@ BlParallelUniverse class >> existsForHost: aHostClass [
 			ifNone: [ false ] ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlParallelUniverse class >> forHost: aHostClass [
 
 	^ UniversesMutex critical: [
@@ -54,14 +56,14 @@ BlParallelUniverse class >> forHost: aHostClass [
 				aUniverse ] ]
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlParallelUniverse class >> initialize [
 	Universes := #().
 	UniversesMutex := Mutex new.
 	UniqueIdGenerator := BlUniqueIdGenerator new
 ]
 
-{ #category : #'api - spaces' }
+{ #category : 'api - spaces' }
 BlParallelUniverse >> attachSpace: aSpace [
 	"Attach a given space to the universe. It is assumed that the space was previously detached from another Universe.
 	Is useful for changing space host."
@@ -84,7 +86,7 @@ BlParallelUniverse >> attachSpace: aSpace [
 				isRunning: aSpace host isRunning) emit ]
 ]
 
-{ #category : #'private - spaces' }
+{ #category : 'private - spaces' }
 BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 	"Synchronously attach a given space to the Universe assuming that the message is sent from within the UI process
 	of this universe and the space was previously detached from another universe."
@@ -128,14 +130,14 @@ BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 		spaceId: aSpace id) emit
 ]
 
-{ #category : #'api - spaces' }
+{ #category : 'api - spaces' }
 BlParallelUniverse >> closeSpace: aSpace [
 	aSpace isOpened
 		ifFalse: [ ^ self ].
 	self defer: [ self closeSpaceSynchronously: aSpace ]
 ]
 
-{ #category : #'private - spaces' }
+{ #category : 'private - spaces' }
 BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 
 	| aHost |
@@ -196,22 +198,22 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 	aSpace dispatchEvent: (BlSpaceDestroyedEvent new space: aSpace).
 ]
 
-{ #category : #'api - spaces' }
+{ #category : 'api - spaces' }
 BlParallelUniverse >> closeSpaces [
 	self spaces copy do: [ :aSpace | self closeSpace: aSpace ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlParallelUniverse >> defaultEventDispatcher [
 	^ BlDirectEventDispatcher on: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlParallelUniverse >> defaultEventListener [
 	^ BlUniverseEventListener new
 ]
 
-{ #category : #'api - ui process' }
+{ #category : 'api - ui process' }
 BlParallelUniverse >> defer: aValuable [
 	"Enqueue a valuable from any process to be executed in the UI process at the beginning of the next pulse.
 	It is useful to update the UI states."
@@ -221,7 +223,7 @@ BlParallelUniverse >> defer: aValuable [
 	deferredActions nextPut: aValuable
 ]
 
-{ #category : #'api - spaces' }
+{ #category : 'api - spaces' }
 BlParallelUniverse >> detachSpace: aSpace [
 	"Detach a given space from this universe without actually closing the space. Space detaching is useful
 	for switching hosts and transferring spaces between universes."
@@ -231,7 +233,7 @@ BlParallelUniverse >> detachSpace: aSpace [
 	self defer: [ self detachSpaceSynchronously: aSpace ]
 ]
 
-{ #category : #'private - spaces' }
+{ #category : 'private - spaces' }
 BlParallelUniverse >> detachSpaceSynchronously: aSpace [
 	"Detaches a given space from this universe without closing that space."
 
@@ -280,7 +282,7 @@ BlParallelUniverse >> detachSpaceSynchronously: aSpace [
 	aSpace dispatchEvent: (BlSpaceDetachedEvent new space: aSpace).
 ]
 
-{ #category : #'event management accessing' }
+{ #category : 'event management accessing' }
 BlParallelUniverse >> eventDispatcher [
 	"Return an object responsible for event dispatching"
 	<return: #BlDirectEventDispatcher>
@@ -288,7 +290,7 @@ BlParallelUniverse >> eventDispatcher [
 	^ eventDispatcher
 ]
 
-{ #category : #'api - spaces' }
+{ #category : 'api - spaces' }
 BlParallelUniverse >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"
 	<return: #Boolean>
@@ -296,38 +298,38 @@ BlParallelUniverse >> hasSpace: aSpace [
 	^ spaceManager hasSpace: aSpace
 ]
 
-{ #category : #'api - spaces' }
+{ #category : 'api - spaces' }
 BlParallelUniverse >> hasSpaces [
 	"Return true if there are registered spaces, false otherwise"
 
 	^ spaceManager hasSpaces
 ]
 
-{ #category : #'api - ui process' }
+{ #category : 'api - ui process' }
 BlParallelUniverse >> hasUIProcess [
 
 	self uiProcessDo: [ :aUIProcess | ^ true ].
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverse >> hostClass [
 	^ hostClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverse >> hostClass: aHostClass [
 	hostClass := aHostClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverse >> id [
 	<return: #Number>
 	
 	^ id
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlParallelUniverse >> initialize [
 
 	super initialize.
@@ -343,18 +345,18 @@ BlParallelUniverse >> initialize [
 	self addEventHandler: self defaultEventListener
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlParallelUniverse >> isPulsing [
 
 	^ isPulsing
 ]
 
-{ #category : #'private - spaces' }
+{ #category : 'private - spaces' }
 BlParallelUniverse >> markAsNotPulsing [
 	isPulsing := false
 ]
 
-{ #category : #'api - spaces' }
+{ #category : 'api - spaces' }
 BlParallelUniverse >> openSpace: aSpace [
 	"It should be possible to add a space from the other thread"
 
@@ -381,7 +383,7 @@ BlParallelUniverse >> openSpace: aSpace [
 				isRunning: aSpace host isRunning) emit ]
 ]
 
-{ #category : #'private - spaces' }
+{ #category : 'private - spaces' }
 BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
 	aSpace isOpened
@@ -429,7 +431,7 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 		spaceId: aSpace id) emit
 ]
 
-{ #category : #'api - ui process' }
+{ #category : 'api - ui process' }
 BlParallelUniverse >> postpone: aValuable [
 	"#postpone: can be used from any thread to execute a valuable in the GUI thread
 	after the pulse is completed.
@@ -438,7 +440,7 @@ BlParallelUniverse >> postpone: aValuable [
 	postponedActions nextPut: aValuable
 ]
 
-{ #category : #pulse }
+{ #category : 'pulse' }
 BlParallelUniverse >> pulse [
 
 	isPulsing ifTrue: [ ^ self ].
@@ -448,7 +450,7 @@ BlParallelUniverse >> pulse [
 	[ self pulseSynchronously ] ensure: [ self requestStopPulsation ]
 ]
 
-{ #category : #'private - spaces' }
+{ #category : 'private - spaces' }
 BlParallelUniverse >> pulseSynchronously [
 	"deferred actions must be run before spaces"
 	[
@@ -457,7 +459,7 @@ BlParallelUniverse >> pulseSynchronously [
 	] ensure: [ self tryToRunPostponedActions ]
 ]
 
-{ #category : #'private - spaces' }
+{ #category : 'private - spaces' }
 BlParallelUniverse >> requestStopPulsation [
 
 		self uiProcessDo: [ :currentUIProcess | 
@@ -469,19 +471,19 @@ BlParallelUniverse >> requestStopPulsation [
 				ifTrue: [ self markAsNotPulsing ] ]
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : 'api - lifecycle' }
 BlParallelUniverse >> snapshot: save andQuit: quit [
 
 	self postpone: [ Smalltalk snapshot: save andQuit: quit ]
 ]
 
-{ #category : #'api - spaces' }
+{ #category : 'api - spaces' }
 BlParallelUniverse >> spaces [
 
 	^ spaceManager spaces
 ]
 
-{ #category : #'private - lifecycle' }
+{ #category : 'private - lifecycle' }
 BlParallelUniverse >> startUniverse [
 	"A universe must not be running here.
 	I am called outside of the UI loop (there is no UI loop yet)"
@@ -490,7 +492,7 @@ BlParallelUniverse >> startUniverse [
 	self hostClass start
 ]
 
-{ #category : #'private - lifecycle' }
+{ #category : 'private - lifecycle' }
 BlParallelUniverse >> stopUniverse [
 	"A universe must be running here.
 	I am called from the UI loop"
@@ -500,7 +502,7 @@ BlParallelUniverse >> stopUniverse [
 		ensure: [ self markAsNotPulsing ]
 ]
 
-{ #category : #'deferred message' }
+{ #category : 'deferred message' }
 BlParallelUniverse >> tryToRunDeferredActions [
 
 	| nextInQueue |
@@ -517,7 +519,7 @@ BlParallelUniverse >> tryToRunDeferredActions [
 		[ nextInQueue value ] on: UnhandledError fork: [ :ex | ex pass ] ]
 ]
 
-{ #category : #'deferred message' }
+{ #category : 'deferred message' }
 BlParallelUniverse >> tryToRunPostponedActions [
 
 	| nextInQueue |
@@ -525,7 +527,7 @@ BlParallelUniverse >> tryToRunPostponedActions [
 		[ nextInQueue value ] on: UnhandledError fork: [ :ex | ex pass ] ]
 ]
 
-{ #category : #'api - ui process' }
+{ #category : 'api - ui process' }
 BlParallelUniverse >> uiProcessDo: aBlock [
 
 	self hostClass uiProcessDo: aBlock

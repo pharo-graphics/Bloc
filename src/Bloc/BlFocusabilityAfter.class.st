@@ -1,10 +1,12 @@
 Class {
-	#name : #BlFocusabilityAfter,
-	#superclass : #BlFocusability,
-	#category : #'Bloc-Basic-Properties'
+	#name : 'BlFocusabilityAfter',
+	#superclass : 'BlFocusability',
+	#category : 'Bloc-Basic-Properties',
+	#package : 'Bloc',
+	#tag : 'Basic-Properties'
 }
 
-{ #category : #focus }
+{ #category : 'focus' }
 BlFocusabilityAfter >> focusables: aBlFocusFinderCandidates along: aBlFocusSearchDirection of: anElement [
 	"We always add visible children and skip anElement itself if there are focusable descendants"
 	| focusablesCount |
