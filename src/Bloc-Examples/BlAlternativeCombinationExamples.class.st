@@ -218,7 +218,7 @@ BlAlternativeCombinationExamples >> testStoreEmptyCombination [
 
 	self assert: aStoreString equals: '(BlAlternativeCombination new)'.
 
-	aRestoredCombination := Object evaluate: aStoreString.
+	aRestoredCombination := Object compiler evaluate: aStoreString.
 	self assert: aRestoredCombination equals: aCombination.
 
 	^ aStoreString

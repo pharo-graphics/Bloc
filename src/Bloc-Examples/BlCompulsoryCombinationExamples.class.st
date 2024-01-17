@@ -140,7 +140,7 @@ BlCompulsoryCombinationExamples >> testStoreEmptyCombination [
 
 	self assert: aStoreString equals: '(BlCompulsoryCombination new)'.
 
-	aRestoredCombination := Object evaluate: aStoreString.
+	aRestoredCombination := Object compiler evaluate: aStoreString.
 	self assert: aRestoredCombination equals: aCombination.
 
 	^ aStoreString
