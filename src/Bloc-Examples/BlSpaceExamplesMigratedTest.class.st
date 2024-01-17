@@ -2,12 +2,14 @@
 I contain example of how to use space
 "
 Class {
-	#name : #BlSpaceExamplesMigratedTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Examples-SpaceMigrated'
+	#name : 'BlSpaceExamplesMigratedTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Examples-SpaceMigrated',
+	#package : 'Bloc-Examples',
+	#tag : 'SpaceMigrated'
 }
 
-{ #category : #script }
+{ #category : 'script' }
 BlSpaceExamplesMigratedTest class >> slownDownSpace [
 	<script: 'self slownDownSpace'>
 	
@@ -16,7 +18,7 @@ BlSpaceExamplesMigratedTest class >> slownDownSpace [
 		show
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BlSpaceExamplesMigratedTest >> animatedElement [
 
 	<sampleInstance>
@@ -27,7 +29,7 @@ BlSpaceExamplesMigratedTest >> animatedElement [
 		  addAnimation: self testInfiniteAnimation
 ]
 
-{ #category : #'examples - icon' }
+{ #category : 'examples - icon' }
 BlSpaceExamplesMigratedTest >> iconElement [
 	<sampleInstance>
 	^ BlElement new
@@ -36,7 +38,7 @@ BlSpaceExamplesMigratedTest >> iconElement [
 		geometry: BlCircleGeometry new.
 ]
 
-{ #category : #'examples - icon' }
+{ #category : 'examples - icon' }
 BlSpaceExamplesMigratedTest >> iconStencil [
 	<sampleInstance>
 	| aStencil |
@@ -45,7 +47,7 @@ BlSpaceExamplesMigratedTest >> iconStencil [
 	^ aStencil
 ]
 
-{ #category : #'examples - time' }
+{ #category : 'examples - time' }
 BlSpaceExamplesMigratedTest >> spaceWithSlownDownTimeAndAnimatedElement [
 
 	<sampleInstance>
@@ -56,7 +58,7 @@ BlSpaceExamplesMigratedTest >> spaceWithSlownDownTimeAndAnimatedElement [
 	^ aSpace
 ]
 
-{ #category : #'examples - icon' }
+{ #category : 'examples - icon' }
 BlSpaceExamplesMigratedTest >> testChangeIcon [
 
 	<sampleInstance>
@@ -64,9 +66,9 @@ BlSpaceExamplesMigratedTest >> testChangeIcon [
 	aSpace := self testEmptySpace.
 
 	aCollection := OrderedCollection new.
-	aSpace
-		when: BlSpaceIconChangedEvent
-		do: [ :anEvent | aCollection add: anEvent ].
+	aSpace addEventHandler: (BlEventHandler
+			 on: BlSpaceIconChangedEvent
+			 do: [ :anEvent | aCollection add: anEvent ]).
 
 	aSpace icon: self iconStencil.
 
@@ -82,7 +84,7 @@ BlSpaceExamplesMigratedTest >> testChangeIcon [
 	^ aSpace
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSpaceExamplesMigratedTest >> testEmptySpace [
 
 	<sampleInstance>
@@ -110,7 +112,7 @@ BlSpaceExamplesMigratedTest >> testEmptySpace [
 	^ aSpace
 ]
 
-{ #category : #lifecycle }
+{ #category : 'lifecycle' }
 BlSpaceExamplesMigratedTest >> testFirstPulse [
 
 	<sampleInstance>
@@ -125,7 +127,7 @@ BlSpaceExamplesMigratedTest >> testFirstPulse [
 	^ aSpace
 ]
 
-{ #category : #'private - instance creation' }
+{ #category : 'private - instance creation' }
 BlSpaceExamplesMigratedTest >> testInfiniteAnimation [
 
 	<sampleInstance>

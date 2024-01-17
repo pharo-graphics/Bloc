@@ -3,12 +3,14 @@ I exemplify {{gtClass:BlSharedEventDistributor}}.
 
 "
 Class {
-	#name : #BlSharedEventDistributorExamples,
-	#superclass : #BlExampleTest,
-	#category : #'Bloc-Examples-EventHandling'
+	#name : 'BlSharedEventDistributorExamples',
+	#superclass : 'BlExampleTest',
+	#category : 'Bloc-Examples-EventHandling',
+	#package : 'Bloc-Examples',
+	#tag : 'EventHandling'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSharedEventDistributorExamples >> container [
 
 	<sampleInstance>
@@ -22,14 +24,14 @@ BlSharedEventDistributorExamples >> container [
 			  c padding: (BlInsets all: 3) ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSharedEventDistributorExamples >> element [
 
 	<sampleInstance>
 	^ BlElement new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSharedEventDistributorExamples >> element100x100 [
 
 	<sampleInstance>
@@ -49,7 +51,7 @@ BlSharedEventDistributorExamples >> element100x100 [
 		  do: [ :anEvent | anElement background: aBackgroundColor ]
 ]
 
-{ #category : #'examples - sharing events' }
+{ #category : 'examples - sharing events' }
 BlSharedEventDistributorExamples >> example [
 
 	<sampleInstance>
@@ -65,7 +67,7 @@ BlSharedEventDistributorExamples >> example [
 	^ aContainer
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSharedEventDistributorExamples >> randomColor [
 
 	<sampleInstance>
@@ -75,7 +77,7 @@ BlSharedEventDistributorExamples >> randomColor [
 		  Color red } atRandom
 ]
 
-{ #category : #'examples - basic' }
+{ #category : 'examples - basic' }
 BlSharedEventDistributorExamples >> testInstallOneElement [
 
 	<sampleInstance>
@@ -87,7 +89,7 @@ BlSharedEventDistributorExamples >> testInstallOneElement [
 	^ aHandler
 ]
 
-{ #category : #'examples - basic' }
+{ #category : 'examples - basic' }
 BlSharedEventDistributorExamples >> testInstallTwoElements [
 
 	<sampleInstance>
@@ -99,7 +101,7 @@ BlSharedEventDistributorExamples >> testInstallTwoElements [
 	^ aHandler
 ]
 
-{ #category : #'examples - sharing events' }
+{ #category : 'examples - sharing events' }
 BlSharedEventDistributorExamples >> testMouseEnterEventOneOutOfTwoElements [
 
 	<sampleInstance>
@@ -131,7 +133,7 @@ BlSharedEventDistributorExamples >> testMouseEnterEventOneOutOfTwoElements [
 	^ aContainer
 ]
 
-{ #category : #'examples - sharing events' }
+{ #category : 'examples - sharing events' }
 BlSharedEventDistributorExamples >> testMouseLeaveEventOneOutOfTwoElements [
 
 	<sampleInstance>
@@ -173,7 +175,7 @@ BlSharedEventDistributorExamples >> testMouseLeaveEventOneOutOfTwoElements [
 	^ aContainer
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSharedEventDistributorExamples >> testSharedEventDistributor [
 
 	<sampleInstance>
@@ -183,7 +185,7 @@ BlSharedEventDistributorExamples >> testSharedEventDistributor [
 	^ aHandler
 ]
 
-{ #category : #'examples - basic' }
+{ #category : 'examples - basic' }
 BlSharedEventDistributorExamples >> testUninstallOneElement [
 
 	<sampleInstance>

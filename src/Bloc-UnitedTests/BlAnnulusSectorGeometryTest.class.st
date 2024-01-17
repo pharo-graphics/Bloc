@@ -3,12 +3,14 @@ I have been automatically converted and probably manually tweaked from BlAnnulus
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlAnnulusSectorGeometryTest,
-	#superclass : #BlGeometryTest,
-	#category : #'Bloc-UnitedTests-Geometry'
+	#name : 'BlAnnulusSectorGeometryTest',
+	#superclass : 'BlGeometryTest',
+	#category : 'Bloc-UnitedTests-Geometry',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Geometry'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAnnulusSectorGeometryTest >> testAnnulus [
 
 	<sampleInstance>
@@ -28,7 +30,7 @@ BlAnnulusSectorGeometryTest >> testAnnulus [
 	^ aSector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAnnulusSectorGeometryTest >> testAnnulusSectorBottomLeft [
 
 	<sampleInstance>
@@ -50,7 +52,7 @@ BlAnnulusSectorGeometryTest >> testAnnulusSectorBottomLeft [
 	^ aSector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAnnulusSectorGeometryTest >> testAnnulusSectorBottomRight [
 
 	<sampleInstance>
@@ -72,7 +74,7 @@ BlAnnulusSectorGeometryTest >> testAnnulusSectorBottomRight [
 	^ aSector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAnnulusSectorGeometryTest >> testAnnulusSectorTopLeft [
 
 	<sampleInstance>
@@ -94,7 +96,7 @@ BlAnnulusSectorGeometryTest >> testAnnulusSectorTopLeft [
 	^ aSector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAnnulusSectorGeometryTest >> testAnnulusSectorTopRight [
 
 	<sampleInstance>
@@ -116,7 +118,7 @@ BlAnnulusSectorGeometryTest >> testAnnulusSectorTopRight [
 	^ aSector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAnnulusSectorGeometryTest >> testCircle [
 
 	<sampleInstance>
@@ -137,7 +139,7 @@ BlAnnulusSectorGeometryTest >> testCircle [
 	^ aSector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAnnulusSectorGeometryTest >> testCircleSector [
 
 	<sampleInstance>
@@ -158,7 +160,7 @@ BlAnnulusSectorGeometryTest >> testCircleSector [
 	^ aSector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAnnulusSectorGeometryTest >> testDefault [
 
 	<sampleInstance>
@@ -176,7 +178,7 @@ BlAnnulusSectorGeometryTest >> testDefault [
 	^ aSector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAnnulusSectorGeometryTest >> testOuterRadiusSmallerThanInner [
 
 	<sampleInstance>
@@ -196,7 +198,7 @@ BlAnnulusSectorGeometryTest >> testOuterRadiusSmallerThanInner [
 	^ aSector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAnnulusSectorGeometryTest >> testPacman [
 
 	<sampleInstance>
@@ -217,7 +219,7 @@ BlAnnulusSectorGeometryTest >> testPacman [
 	^ aSector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAnnulusSectorGeometryTest >> testRadiiOutsideOfValidInterval [
 
 	<sampleInstance>
@@ -237,7 +239,7 @@ BlAnnulusSectorGeometryTest >> testRadiiOutsideOfValidInterval [
 	^ aSector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAnnulusSectorGeometryTest >> testSameRadii [
 
 	<sampleInstance>

@@ -1,21 +1,23 @@
 Class {
-	#name : #BlTextDecoration,
-	#superclass : #Object,
+	#name : 'BlTextDecoration',
+	#superclass : 'Object',
 	#instVars : [
 		'thickness',
 		'color',
 		'style',
 		'type'
 	],
-	#category : #'Bloc-Text-Text-Decoration'
+	#category : 'Bloc-Text-Text-Decoration',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Decoration'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecoration class >> label [
 	^ self subclassResponsibility
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlTextDecoration >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -28,32 +30,32 @@ BlTextDecoration >> = anObject [
 				and: [ thickness = anObject thickness and: [ type = anObject type ] ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecoration >> color [
 	^ color
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlTextDecoration >> color: aColor [
 	color := aColor
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlTextDecoration >> dashed [
 	self style: BlTextDecorationStyle dashed
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlTextDecoration >> dotted [
 	self style: BlTextDecorationStyle dotted
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlTextDecoration >> double [
 	self style: BlTextDecorationStyle double
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlTextDecoration >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
@@ -61,7 +63,7 @@ BlTextDecoration >> hash [
 		bitXor: (style hash bitXor: (thickness hash bitXor: type hash))
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextDecoration >> initialize [
 	super initialize.
 	
@@ -71,7 +73,7 @@ BlTextDecoration >> initialize [
 	thickness := 1
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTextDecoration >> printOn: aStream [
 	"Append a sequence of characters to aStream that identify the receiver."
 
@@ -100,12 +102,12 @@ BlTextDecoration >> printOn: aStream [
 		nextPut: $}
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlTextDecoration >> solid [
 	self style: BlTextDecorationStyle solid
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTextDecoration >> storeOn: aStream [
 	aStream
 		nextPut: $(;
@@ -134,26 +136,26 @@ BlTextDecoration >> storeOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecoration >> style [
 	<return: #BlTextDecorationStyle>
 
 	^ style
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecoration >> style: aBlTextDecorationStyle [
 	style := aBlTextDecorationStyle
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecoration >> thickness [
 	<return: #Number>
 
 	^ thickness
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlTextDecoration >> thickness: aNumber [
 
 	self 
@@ -163,37 +165,37 @@ BlTextDecoration >> thickness: aNumber [
 	thickness := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecoration >> type [
 	^ type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecoration >> type: aBlTextDecorationType [
 	type := aBlTextDecorationType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextDecoration >> typesDo: aBlock [
 	self type typesDo: aBlock
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlTextDecoration >> wavy [
 	self style: BlTextDecorationStyle wavy
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlTextDecoration >> withLineThrough [
 	self type withLineThrough
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlTextDecoration >> withOverline [
 	self type withOverline
 ]
 
-{ #category : #'api - decoration' }
+{ #category : 'api - decoration' }
 BlTextDecoration >> withUnderline [
 	self type withUnderline
 ]

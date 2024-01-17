@@ -1,6 +1,6 @@
-Extension { #name : #BlCollectionRope }
+Extension { #name : 'BlCollectionRope' }
 
-{ #category : #'*Bloc-Text' }
+{ #category : '*Bloc-Text' }
 BlCollectionRope >> encodeOn: aWriteStream with: aZnCharacterEncoder [
 	"Encode my collection on a ByteString stream using the provided Zinc encoder."
 

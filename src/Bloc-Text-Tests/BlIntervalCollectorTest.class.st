@@ -2,33 +2,35 @@
 A BlIntervalCollectorTest is a test class for testing the behavior of BlIntervalCollector
 "
 Class {
-	#name : #BlIntervalCollectorTest,
-	#superclass : #TestCase,
+	#name : 'BlIntervalCollectorTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'collector'
 	],
-	#category : #'Bloc-Text-Tests-Text-Operator'
+	#category : 'Bloc-Text-Tests-Text-Operator',
+	#package : 'Bloc-Text-Tests',
+	#tag : 'Text-Operator'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlIntervalCollectorTest >> setUp [
 	super setUp.
 	collector := BlIntervalCollector new
 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlIntervalCollectorTest >> testWithNoText [
 	self assert: (collector searchAll:'AA') isEmpty
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlIntervalCollectorTest >> testWithTextNoSubstring [
 	collector text: 'XXXXXXXXX'.
 	self assert: (collector searchAll: 'AA') isEmpty
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlIntervalCollectorTest >> testWithTextOneSubstringAt_1 [
 	| result |
 	collector text: 'AAXXXXXXX'.
@@ -38,7 +40,7 @@ BlIntervalCollectorTest >> testWithTextOneSubstringAt_1 [
 	self assert: result first last equals: 2. 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlIntervalCollectorTest >> testWithTextOneSubstring_1 [
 	| result |
 	collector text: 'AAAAAA'.
@@ -52,7 +54,7 @@ BlIntervalCollectorTest >> testWithTextOneSubstring_1 [
 	self assert: result third last equals: 6
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlIntervalCollectorTest >> testWithTextOneSubstring_2 [
 	| result |
 	collector text: 'AA AA AA A'.
@@ -66,7 +68,7 @@ BlIntervalCollectorTest >> testWithTextOneSubstring_2 [
 	self assert: result third last equals: 8
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlIntervalCollectorTest >> testWithTextOneSubstring_3 [
 	| result |
 	collector text: ' AA AA AA A'.
@@ -77,7 +79,7 @@ BlIntervalCollectorTest >> testWithTextOneSubstring_3 [
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlIntervalCollectorTest >> testWithTextOneSubstring_4 [
 	| result |
 	collector text: ')))'.

@@ -3,54 +3,56 @@ I contain examples-tests of mouse processor
 
 "
 Class {
-	#name : #BlMouseProcessorExamples,
-	#superclass : #BlEventProcessorExamplesTest,
-	#category : #'Bloc-Examples-Event'
+	#name : 'BlMouseProcessorExamples',
+	#superclass : 'BlEventProcessorExamplesTest',
+	#category : 'Bloc-Examples-Event',
+	#package : 'Bloc-Examples',
+	#tag : 'Event'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseProcessorExamples >> middleMouseDownEvent [
 
 	<sampleInstance>
 	^ BlMouseDownEvent middle
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseProcessorExamples >> middleMouseUpEvent [
 
 	<sampleInstance>
 	^ BlMouseUpEvent middle
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseProcessorExamples >> primaryMouseDownEvent [
 
 	<sampleInstance>
 	^ BlMouseDownEvent primary
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseProcessorExamples >> primaryMouseUpEvent [
 
 	<sampleInstance>
 	^ BlMouseUpEvent primary
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseProcessorExamples >> secondaryMouseDownEvent [
 
 	<sampleInstance>
 	^ BlMouseDownEvent secondary
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseProcessorExamples >> secondaryMouseUpEvent [
 
 	<sampleInstance>
 	^ BlMouseUpEvent secondary
 ]
 
-{ #category : #'examples - sequence' }
+{ #category : 'examples - sequence' }
 BlMouseProcessorExamples >> testClick [
 
 	<sampleInstance>
@@ -65,7 +67,7 @@ BlMouseProcessorExamples >> testClick [
 	^ aMouseProcessor
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlMouseProcessorExamples >> testMiddleDown [
 
 	<sampleInstance>
@@ -82,7 +84,7 @@ BlMouseProcessorExamples >> testMiddleDown [
 	^ aMouseProcessor
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMouseProcessorExamples >> testMouseProcessor [
 
 	<sampleInstance>
@@ -96,7 +98,7 @@ BlMouseProcessorExamples >> testMouseProcessor [
 	^ aMouseProcessor
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlMouseProcessorExamples >> testPrimaryDown [
 
 	<sampleInstance>
@@ -113,7 +115,7 @@ BlMouseProcessorExamples >> testPrimaryDown [
 	^ aMouseProcessor
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlMouseProcessorExamples >> testPrimaryDownSecondaryDown [
 
 	<sampleInstance>
@@ -132,7 +134,7 @@ BlMouseProcessorExamples >> testPrimaryDownSecondaryDown [
 	^ aMouseProcessor
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlMouseProcessorExamples >> testPrimaryDownSecondaryDownPrimaryUp [
 
 	<sampleInstance>
@@ -149,7 +151,7 @@ BlMouseProcessorExamples >> testPrimaryDownSecondaryDownPrimaryUp [
 	^ aMouseProcessor
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlMouseProcessorExamples >> testPrimaryDownSecondaryDownPrimaryUpSecondaryUp [
 
 	<sampleInstance>
@@ -164,7 +166,7 @@ BlMouseProcessorExamples >> testPrimaryDownSecondaryDownPrimaryUpSecondaryUp [
 	^ aMouseProcessor
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlMouseProcessorExamples >> testSecondaryDown [
 
 	<sampleInstance>

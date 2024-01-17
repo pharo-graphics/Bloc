@@ -1,15 +1,17 @@
 Class {
-	#name : #BlTextClassLink,
-	#superclass : #BlTextLinkAttribute,
-	#category : #'Bloc-Text-Text-Attributes'
+	#name : 'BlTextClassLink',
+	#superclass : 'BlTextLinkAttribute',
+	#category : 'Bloc-Text-Text-Attributes',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Attributes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextClassLink class >> class: aClass [
 	^ self new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextClassLink class >> className: aString [
 	^ self new
 ]

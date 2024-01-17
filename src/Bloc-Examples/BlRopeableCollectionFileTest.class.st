@@ -1,13 +1,15 @@
 Class {
-	#name : #BlRopeableCollectionFileTest,
-	#superclass : #TestCase,
+	#name : 'BlRopeableCollectionFileTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'largeFile'
 	],
-	#category : #'Bloc-Examples-Rope'
+	#category : 'Bloc-Examples-Rope',
+	#package : 'Bloc-Examples',
+	#tag : 'Rope'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 BlRopeableCollectionFileTest >> deleteLargeFile [
 
 	largeFile ifNotNil: 
@@ -15,13 +17,13 @@ BlRopeableCollectionFileTest >> deleteLargeFile [
 		largeFile := nil ].
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlRopeableCollectionFileTest >> emptyFile [
 	
 	^ (FileSystem memory root / 'empty.file') ensureCreateFile 
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlRopeableCollectionFileTest >> largeFile [
 
 	^largeFile ifNil: 
@@ -34,19 +36,19 @@ BlRopeableCollectionFileTest >> largeFile [
 		largeFile ].
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlRopeableCollectionFileTest >> rope [
 
 	^ BlRopedText rope: (BlCollectionRope collection: self ropeableCollection)
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlRopeableCollectionFileTest >> ropeableCollection [
 
 	^ BlRopeableCollectionFile new fileReference: self largeFile
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlRopeableCollectionFileTest >> testAt [
 
 	self 
@@ -65,7 +67,7 @@ BlRopeableCollectionFileTest >> testAt [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlRopeableCollectionFileTest >> testCopyFromTo [
 
 	| expected |
@@ -79,7 +81,7 @@ BlRopeableCollectionFileTest >> testCopyFromTo [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlRopeableCollectionFileTest >> testEmptyFileSize [
 
 	| ropeSize |
@@ -87,7 +89,7 @@ BlRopeableCollectionFileTest >> testEmptyFileSize [
 	self assert: ropeSize equals: 0.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlRopeableCollectionFileTest >> testMapEntryForLarge [
 
 	| collection |
@@ -117,7 +119,7 @@ BlRopeableCollectionFileTest >> testMapEntryForLarge [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlRopeableCollectionFileTest >> testMapEntryForSmall [
 
 	| collection |

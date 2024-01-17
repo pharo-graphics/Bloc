@@ -3,12 +3,14 @@ I contain examples of space related events
 
 "
 Class {
-	#name : #BlSpaceEventExamplesTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Event'
+	#name : 'BlSpaceEventExamplesTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Examples-Event',
+	#package : 'Bloc-Examples',
+	#tag : 'Event'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlSpaceEventExamplesTest >> space [
 	<sampleInstance>
 
@@ -17,7 +19,7 @@ BlSpaceEventExamplesTest >> space [
 		  yourself
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlSpaceEventExamplesTest >> testIgnoreSpaceEventsAfterCloseRequest [
 	<sampleInstance>
 	<expectedFailure>
@@ -35,7 +37,7 @@ BlSpaceEventExamplesTest >> testIgnoreSpaceEventsAfterCloseRequest [
 	^ aSpace
 ]
 
-{ #category : #'show / close' }
+{ #category : 'show / close' }
 BlSpaceEventExamplesTest >> testSpaceClosed [
 	<sampleInstance>
 	<expectedFailure>
@@ -56,7 +58,7 @@ BlSpaceEventExamplesTest >> testSpaceClosed [
 	^ aSpace
 ]
 
-{ #category : #'show / close' }
+{ #category : 'show / close' }
 BlSpaceEventExamplesTest >> testSpaceDestroyed [
 	<sampleInstance>
 	<expectedFailure>
@@ -81,7 +83,7 @@ BlSpaceEventExamplesTest >> testSpaceDestroyed [
 	^ aSpace
 ]
 
-{ #category : #'show / close' }
+{ #category : 'show / close' }
 BlSpaceEventExamplesTest >> testSpaceShown [
 	<sampleInstance>
 	<expectedFailure>

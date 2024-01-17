@@ -1,10 +1,12 @@
 Class {
-	#name : #BlMouseProcessorClickExamples,
-	#superclass : #BlMouseProcessorExamples,
-	#category : #'Bloc-Examples-Event'
+	#name : 'BlMouseProcessorClickExamples',
+	#superclass : 'BlMouseProcessorExamples',
+	#category : 'Bloc-Examples-Event',
+	#package : 'Bloc-Examples',
+	#tag : 'Event'
 }
 
-{ #category : #'examples - scripter' }
+{ #category : 'examples - scripter' }
 BlMouseProcessorClickExamples >> click [
 
 	<sampleInstance>
@@ -42,7 +44,7 @@ BlMouseProcessorClickExamples >> click [
 	^ aScripter
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : 'examples - scripter' }
 BlMouseProcessorClickExamples >> mouseDown [
 
 	<sampleInstance>
@@ -77,7 +79,7 @@ BlMouseProcessorClickExamples >> mouseDown [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : 'examples - scripter' }
 BlMouseProcessorClickExamples >> mouseEnter [
 
 	<sampleInstance>
@@ -110,7 +112,7 @@ BlMouseProcessorClickExamples >> mouseEnter [
 	^ aScripter
 ]
 
-{ #category : #'examples - scripter' }
+{ #category : 'examples - scripter' }
 BlMouseProcessorClickExamples >> scripterElement [
 
 	<sampleInstance>

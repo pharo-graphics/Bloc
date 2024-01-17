@@ -5,15 +5,17 @@ My width is not a plain sum of width of all spans. The difference comes from the
 
 "
 Class {
-	#name : #BlTextParagraphLine,
-	#superclass : #BlTextParagraphSegment,
+	#name : 'BlTextParagraphLine',
+	#superclass : 'BlTextParagraphSegment',
 	#instVars : [
 		'spans'
 	],
-	#category : #'Bloc-Text-Text-Paragraph'
+	#category : 'Bloc-Text-Text-Paragraph',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Paragraph'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlTextParagraphLine >> addSpan: aBlTextParagraphLeaf [
 
 	spans add: aBlTextParagraphLeaf.
@@ -22,7 +24,7 @@ BlTextParagraphLine >> addSpan: aBlTextParagraphLeaf [
 		ifFalse: [ self spanAdded: spans last after: (spans at: spans size - 1) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphLine >> baseline: aPoint [
 
 	self moveSpansBy: self baseline negated.
@@ -30,34 +32,34 @@ BlTextParagraphLine >> baseline: aPoint [
 	self moveSpansBy: self baseline
 ]
 
-{ #category : #finalization }
+{ #category : 'finalization' }
 BlTextParagraphLine >> finalize [
 
 	spans ifNotNil: [ spans do: #finalize ].
 	spans reset
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextParagraphLine >> initialize [
 
 	super initialize.
 	spans := OrderedCollection new
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextParagraphLine >> isEmpty [
 	
 	^ spans isEmpty
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlTextParagraphLine >> moveSpansBy: aPoint [
 	"Move baseline of all spans by a given delta as a point"
 
 	spans do: [ :aSpan | aSpan baseline: aSpan baseline + aPoint ]
 ]
 
-{ #category : #measurement }
+{ #category : 'measurement' }
 BlTextParagraphLine >> normalize: aScale [
 	"Normalize this segment to have rounded measurements.
 	I don't change the baseline"
@@ -67,7 +69,7 @@ BlTextParagraphLine >> normalize: aScale [
 	self recomputeLineLayout
 ]
 
-{ #category : #measurement }
+{ #category : 'measurement' }
 BlTextParagraphLine >> recomputeLineLayout [
 
 	self spans ifEmpty: [ ^ self ].
@@ -79,14 +81,14 @@ BlTextParagraphLine >> recomputeLineLayout [
 			after: (self spans at: index - 1) ]
 ]
 
-{ #category : #finalization }
+{ #category : 'finalization' }
 BlTextParagraphLine >> reset [
 
 	self finalize
 
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlTextParagraphLine >> spanAdded: aSpan [
 	"React to a span added. Note: aSpan must be the first span."
 
@@ -105,7 +107,7 @@ BlTextParagraphLine >> spanAdded: aSpan [
 	aSpan baseline: self baseline
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlTextParagraphLine >> spanAdded: aLastSpan after: aPreviousSpan [
 
 	| previousBottom newBottom |
@@ -126,7 +128,7 @@ BlTextParagraphLine >> spanAdded: aLastSpan after: aPreviousSpan [
 	to := aLastSpan to
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextParagraphLine >> spans [
 
 	^ spans 

@@ -1,10 +1,12 @@
 Class {
-	#name : #BlSpace2Test,
-	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests-Space'
+	#name : 'BlSpace2Test',
+	#superclass : 'TestCase',
+	#category : 'Bloc-UnitedTests-Space',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Space'
 }
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlSpace2Test >> animatedElement [
 
 	<sampleInstance>
@@ -16,7 +18,7 @@ BlSpace2Test >> animatedElement [
 		  yourself
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlSpace2Test >> iconElement [
 
 	<sampleInstance>
@@ -26,7 +28,7 @@ BlSpace2Test >> iconElement [
 		  geometry: BlCircleGeometry new
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlSpace2Test >> iconStencil [
 
 	<sampleInstance>
@@ -36,7 +38,7 @@ BlSpace2Test >> iconStencil [
 	^ aStencil
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlSpace2Test >> infiniteAnimation [
 
 	<sampleInstance>
@@ -48,7 +50,7 @@ BlSpace2Test >> infiniteAnimation [
 	^ anAnimation
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlSpace2Test >> spaceWithSlownDownTime [
 	<sampleInstance>
 
@@ -60,7 +62,7 @@ BlSpace2Test >> spaceWithSlownDownTime [
 	^ aSpace
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlSpace2Test >> spaceWithSlownDownTimeAndAnimatedElement [
 	<sampleInstance>
 
@@ -70,16 +72,16 @@ BlSpace2Test >> spaceWithSlownDownTimeAndAnimatedElement [
 	^ aSpace
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSpace2Test >> testChangeIcon [
 
 	<sampleInstance>
 	| aSpace aCollection |
 	aSpace := self testEmptySpace.
 	aCollection := OrderedCollection new.
-	aSpace
-		when: BlSpaceIconChangedEvent
-		do: [ :anEvent | aCollection add: anEvent ].
+	aSpace addEventHandler: (BlEventHandler
+			 on: BlSpaceIconChangedEvent
+			 do: [ :anEvent | aCollection add: anEvent ]).
 	aSpace icon: self iconStencil.
 	self assert: aCollection size equals: 1.
 	self assert: aCollection first class equals: BlSpaceIconChangedEvent.
@@ -92,7 +94,7 @@ BlSpace2Test >> testChangeIcon [
 	^ aSpace
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSpace2Test >> testEmptySpace [
 
 	<sampleInstance>
@@ -120,7 +122,7 @@ BlSpace2Test >> testEmptySpace [
 	^ aSpace
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSpace2Test >> testFirstPulse [
 
 	<sampleInstance>
@@ -135,7 +137,7 @@ BlSpace2Test >> testFirstPulse [
 	^ aSpace
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlSpace2Test >> testInfiniteAnimation [
 
 	<sampleInstance>

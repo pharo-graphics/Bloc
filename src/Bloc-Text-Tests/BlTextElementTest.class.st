@@ -3,33 +3,34 @@ I have been automatically converted and probably manually tweaked from BlTextEle
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlTextElementTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Text-Tests'
+	#name : 'BlTextElementTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Text-Tests',
+	#package : 'Bloc-Text-Tests'
 }
 
-{ #category : #metadata }
+{ #category : 'metadata' }
 BlTextElementTest >> originClassName [
 	"This test was generated from..."
 
 	^ 'BlTextElementExamples'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextElementTest >> testHelloText [
 
 	<sampleInstance>
 	^ 'mama' asRopedText fontSize: 80
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextElementTest >> testLoremIpsumText [
 
 	<sampleInstance>
 	^ (String loremIpsum: 50) asRopedText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextElementTest >> testSimpleText [
 
 	<sampleInstance>
@@ -43,7 +44,7 @@ BlTextElementTest >> testSimpleText [
 	^ textElement
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextElementTest >> testTextAttributes [
 
 	<sampleInstance>
@@ -79,7 +80,7 @@ BlTextElementTest >> testTextAttributes [
 	^ textElement
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlTextElementTest >> testTextElement [
 
 	<sampleInstance>

@@ -1,10 +1,12 @@
 Class {
-	#name : #BlAscentTightBaselineMeasurer,
-	#superclass : #BlTextParagraphBaselineMeasurer,
-	#category : #'Bloc-Text-Text-Paragraph'
+	#name : 'BlAscentTightBaselineMeasurer',
+	#superclass : 'BlTextParagraphBaselineMeasurer',
+	#category : 'Bloc-Text-Text-Paragraph',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Paragraph'
 }
 
-{ #category : #baseline }
+{ #category : 'baseline' }
 BlAscentTightBaselineMeasurer >> computedBaseline: aTextParagraph [
 
 	^ aTextParagraph left negated @ aTextParagraph ascent abs
