@@ -3,26 +3,24 @@ I make sure that a host space is valid and re-create it if needed
 
 "
 Class {
-	#name : 'BlSpaceFrameHostValidationPhase',
-	#superclass : 'BlSpaceFramePhase',
-	#category : 'Bloc-Space - Frame',
-	#package : 'Bloc',
-	#tag : 'Space - Frame'
+	#name : #BlSpaceFrameHostValidationPhase,
+	#superclass : #BlSpaceFramePhase,
+	#category : #'Bloc-Space - Frame'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSpaceFrameHostValidationPhase >> name [
 	"Return the string representing the name of the receiver."
 	
 	^ 'Host validation'
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlSpaceFrameHostValidationPhase >> reopenSpace: aSpace [
 	aSpace host: BlHost pickHost
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlSpaceFrameHostValidationPhase >> runOn: aSpace [
 	aSpace hasHostSpace
 		ifFalse: [ ^ self ].
@@ -32,7 +30,7 @@ BlSpaceFrameHostValidationPhase >> runOn: aSpace [
 		ifFalse: [ self reopenSpace: aSpace ]
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlSpaceFrameHostValidationPhase >> validateHostSpace: aSpace [
 
 	aSpace hostSpace needsRebuild ifFalse: [ ^ self ].

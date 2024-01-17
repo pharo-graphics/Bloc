@@ -1,26 +1,24 @@
 Class {
-	#name : 'BlUniverseEventListener',
-	#superclass : 'BlBasicEventHandler',
+	#name : #BlUniverseEventListener,
+	#superclass : #BlBasicEventHandler,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'lastTime'
 	],
-	#category : 'Bloc-Universe - Parallel',
-	#package : 'Bloc',
-	#tag : 'Universe - Parallel'
+	#category : #'Bloc-Universe - Parallel'
 }
 
-{ #category : 'api - event managing' }
+{ #category : #'api - event managing' }
 BlUniverseEventListener >> handleEvent: anEvent [
 	anEvent sendTo: self
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlUniverseEventListener >> universeEventsArrived: anEvent [
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlUniverseEventListener >> universeEventsCleared: anEvent [
 	| nowTime |
 	"Once all events are handled it is time to tell spaces to redraw themselves"
@@ -42,15 +40,15 @@ BlUniverseEventListener >> universeEventsCleared: anEvent [
 	lastTime := nowTime
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlUniverseEventListener >> universeResumed: anEvent [
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlUniverseEventListener >> universeSuspended: anEvent [
 ]
 
-{ #category : 'api - event managing' }
+{ #category : #'api - event managing' }
 BlUniverseEventListener >> wantsEvent: anEvent [
 	^ anEvent isUniverseEvent
 ]

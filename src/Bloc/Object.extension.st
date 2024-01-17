@@ -1,6 +1,6 @@
-Extension { #name : 'Object' }
+Extension { #name : #Object }
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Object >> entryIdentifier [
 	"Answer the object used to identify this task.
 	nil = unidentified (and thus can be queued multiple times)"
@@ -8,13 +8,13 @@ Object >> entryIdentifier [
 	^nil
 ]
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Object >> isBlocElementId [
 
 	^ false
 ]
 
-{ #category : '*Bloc' }
+{ #category : #'*Bloc' }
 Object >> ropeAttributeType [
 	"Return an object that is used to compare attribute by type
 	The rule is the following: attributes of the same type must overwrite each other."

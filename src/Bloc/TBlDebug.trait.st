@@ -7,13 +7,11 @@ I contain useful debug utility methods that can be enabled / disabled with:
 ]]]
 "
 Trait {
-	#name : 'TBlDebug',
-	#category : 'Bloc-Utilities - Debugging',
-	#package : 'Bloc',
-	#tag : 'Utilities - Debugging'
+	#name : #TBlDebug,
+	#category : #'Bloc-Utilities - Debugging'
 }
 
-{ #category : 'debug - asserting' }
+{ #category : #'debug - asserting' }
 TBlDebug classSide >> assert: aBlock [
 	"Throw an assertion error if aBlock does not evaluates to true.
 	We check for true explicitly to make the assertion fail for non booleans.
@@ -24,7 +22,7 @@ TBlDebug classSide >> assert: aBlock [
 		ifTrue: [ aBlock value == true ifFalse: [ AssertionFailure signal: 'Assertion failed' ] ]
 ]
 
-{ #category : 'debug - asserting' }
+{ #category : #'debug - asserting' }
 TBlDebug classSide >> assert: aBlock description: aStringOrBlock [
 	"Throw an assertion error if aBlock does not evaluates to true.
 	
@@ -34,34 +32,34 @@ TBlDebug classSide >> assert: aBlock description: aStringOrBlock [
 		ifTrue: [ aBlock value == true ifFalse: [ AssertionFailure signal: aStringOrBlock value ] ]
 ]
 
-{ #category : 'debug - asserting' }
+{ #category : #'debug - asserting' }
 TBlDebug classSide >> assertionsEnabled [
 
 	^ Bloc assertionsEnabled
 ]
 
-{ #category : 'debug - asserting' }
+{ #category : #'debug - asserting' }
 TBlDebug >> assert: aBlock [
 	"Throw an assertion error if aBlock does not evaluates to true"
 	
 	self class assert: aBlock
 ]
 
-{ #category : 'debug - asserting' }
+{ #category : #'debug - asserting' }
 TBlDebug >> assert: aBlock description: aStringOrBlock [
 	"Throw an assertion error if aBlock does not evaluates to true."
 
 	self class assert: aBlock description: aStringOrBlock
 ]
 
-{ #category : 'debug - asserting' }
+{ #category : #'debug - asserting' }
 TBlDebug >> assert: actual equals: expected [
 	^ self
 		assert: actual = expected
 		description: [self comparingStringBetween: actual and: expected]
 ]
 
-{ #category : 'debug - asserting' }
+{ #category : #'debug - asserting' }
 TBlDebug >> comparingStringBetween: actual and: expected [
 
 	^ String streamContents: [:stream |

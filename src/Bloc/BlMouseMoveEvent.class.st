@@ -5,14 +5,12 @@ https://developer.mozilla.org/en-US/docs/Web/Events/mousemove
 
 "
 Class {
-	#name : 'BlMouseMoveEvent',
-	#superclass : 'BlMouseEvent',
-	#category : 'Bloc-Events',
-	#package : 'Bloc',
-	#tag : 'Events'
+	#name : #BlMouseMoveEvent,
+	#superclass : #BlMouseEvent,
+	#category : #'Bloc-Events'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMouseMoveEvent class >> button: aMouseButton [
 	"Create a sample button move event"
 	<return: #BlMouseMoveEvent>
@@ -24,7 +22,7 @@ BlMouseMoveEvent class >> button: aMouseButton [
 		timestamp: DateAndTime now
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMouseMoveEvent class >> middle [
 	"Create a mouse move event for testing purposes"
 	<return: #BlMouseMoveEvent>
@@ -32,7 +30,7 @@ BlMouseMoveEvent class >> middle [
 	^ self button: BlMouseButton middle
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMouseMoveEvent class >> primary [
 	"Create a mouse move event for testing purposes"
 	<return: #BlMouseMoveEvent>
@@ -40,7 +38,7 @@ BlMouseMoveEvent class >> primary [
 	^ self button: BlMouseButton primary
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMouseMoveEvent class >> secondary [
 	"Create a mouse move event for testing purposes"
 	<return: #BlMouseMoveEvent>
@@ -48,18 +46,18 @@ BlMouseMoveEvent class >> secondary [
 	^ self button: BlMouseButton secondary
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlMouseMoveEvent >> canFindTargetFrom: anElement [
 
 	^ anElement notNil and: [anElement containsGlobalPoint: self position]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlMouseMoveEvent >> isMouseMove [
 	^ true
 ]
 
-{ #category : 'sending' }
+{ #category : #sending }
 BlMouseMoveEvent >> sendTo: anObject [
 	anObject mouseMoveEvent: self
 ]

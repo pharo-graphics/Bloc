@@ -22,19 +22,17 @@ A `BlElementStyle` can be removed from the styles with the help of `BlStyles>>#r
 
 "
 Class {
-	#name : 'BlStyles',
-	#superclass : 'Object',
+	#name : #BlStyles,
+	#superclass : #Object,
 	#traits : 'TBlElementCommonStyles + TBlElementStyles',
 	#classTraits : 'TBlElementCommonStyles classTrait + TBlElementStyles classTrait',
 	#instVars : [
 		'styles'
 	],
-	#category : 'Bloc-Basic-Style',
-	#package : 'Bloc',
-	#tag : 'Basic-Style'
+	#category : #'Bloc-Basic-Style'
 }
 
-{ #category : 'adding / removing' }
+{ #category : #'adding / removing' }
 BlStyles >> addStyle: aStyle [
 
 	self
@@ -44,13 +42,13 @@ BlStyles >> addStyle: aStyle [
 		ifNone: [ self basicAddStyle: aStyle copy ]
 ]
 
-{ #category : 'adding / removing' }
+{ #category : #'adding / removing' }
 BlStyles >> addStyles: aCollectionOfStyles [
 
 	aCollectionOfStyles do: [ :eachStyle | self addStyle: eachStyle ]
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlStyles >> asForwarded: aTargetObject [
 
 	^ BlForwardedStyles new
@@ -61,19 +59,19 @@ BlStyles >> asForwarded: aTargetObject [
 		  yourself
 ]
 
-{ #category : 'private - adding' }
+{ #category : #'private - adding' }
 BlStyles >> basicAddStyle: aStyle [
 
 	styles add: aStyle
 ]
 
-{ #category : 'private - adding' }
+{ #category : #'private - adding' }
 BlStyles >> basicRemovePropertiesOf: aStyleToRemove fromStyle: anExistingStyle [
 
 	anExistingStyle removeProperties: aStyleToRemove properties
 ]
 
-{ #category : 'private - adding' }
+{ #category : #'private - adding' }
 BlStyles >> basicRemovePropertiesOrStyleOf: aStyleToRemove fromStyle: anExistingStyle [
 
 	self
@@ -84,19 +82,19 @@ BlStyles >> basicRemovePropertiesOrStyleOf: aStyleToRemove fromStyle: anExisting
 		self basicRemoveStyle: anExistingStyle ]
 ]
 
-{ #category : 'private - adding' }
+{ #category : #'private - adding' }
 BlStyles >> basicRemoveStyle: aStyle [
 
 	styles remove: aStyle ifAbsent: [  ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlStyles >> createStylesCollection [
 
 	^ OrderedCollection new: 10
 ]
 
-{ #category : 'api - styles' }
+{ #category : #'api - styles' }
 BlStyles >> for: aTargetObject [
 
 	^ BlForwardedStyles new
@@ -105,7 +103,7 @@ BlStyles >> for: aTargetObject [
 		  yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlStyles >> initialize [
 
 	super initialize.
@@ -113,13 +111,13 @@ BlStyles >> initialize [
 	styles := self createStylesCollection
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlStyles >> matchingStyles: theStates [
 
 	^ styles select: [ :aStyle | aStyle state matches: theStates ]
 ]
 
-{ #category : 'adding / removing' }
+{ #category : #'adding / removing' }
 BlStyles >> removeStyle: aStyle [
 
 	self
@@ -131,13 +129,13 @@ BlStyles >> removeStyle: aStyle [
 		ifNone: [  ]
 ]
 
-{ #category : 'adding / removing' }
+{ #category : #'adding / removing' }
 BlStyles >> removeStyles: aCollectionOfStyles [
 
 	aCollectionOfStyles do: [ :eachStyle | self removeStyle: eachStyle ]
 ]
 
-{ #category : 'private - adding' }
+{ #category : #'private - adding' }
 BlStyles >> styleForState: aState ifFound: aFoundBlock ifNone: aNoneBlock [
 	^ styles
 		detect: [ :eachStyle | eachStyle isForwarded not and: [ eachStyle state = aState ] ]
@@ -145,7 +143,7 @@ BlStyles >> styleForState: aState ifFound: aFoundBlock ifNone: aNoneBlock [
 		ifNone: aNoneBlock
 ]
 
-{ #category : 'private - adding' }
+{ #category : #'private - adding' }
 BlStyles >> styleForStyle: aStyle ifFound: aFoundBlock ifNone: aNoneBlock [
 	^ styles
 		detect: [ :eachStyle |
@@ -156,13 +154,13 @@ BlStyles >> styleForStyle: aStyle ifFound: aFoundBlock ifNone: aNoneBlock [
 		ifNone: aNoneBlock
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlStyles >> styles [
 
 	^ styles
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlStyles >> styles: aCollectionOfStyles [
 	"Private! #styles must be correctly initialized with a proper sorted collection"
 

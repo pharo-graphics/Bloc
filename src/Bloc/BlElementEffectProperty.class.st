@@ -1,15 +1,13 @@
 Class {
-	#name : 'BlElementEffectProperty',
-	#superclass : 'BlElementProperty',
+	#name : #BlElementEffectProperty,
+	#superclass : #BlElementProperty,
 	#instVars : [
 		'effect'
 	],
-	#category : 'Bloc-Basic-Properties',
-	#package : 'Bloc',
-	#tag : 'Basic-Properties'
+	#category : #'Bloc-Basic-Properties'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlElementEffectProperty >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -20,27 +18,27 @@ BlElementEffectProperty >> = anObject [
 	^ effect = anObject effect
 ]
 
-{ #category : 'api - property' }
+{ #category : #'api - property' }
 BlElementEffectProperty >> applyOnElement: anElement [
 	anElement effect: self effect
 ]
 
-{ #category : 'api - property' }
+{ #category : #'api - property' }
 BlElementEffectProperty >> cleanUpOnElement: anElement [
 	anElement effect: BlNullEffect new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementEffectProperty >> effect [
 	^ effect
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementEffectProperty >> effect: anObject [
 	effect := anObject
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlElementEffectProperty >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 

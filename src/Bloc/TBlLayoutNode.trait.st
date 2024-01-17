@@ -1,120 +1,118 @@
 Trait {
-	#name : 'TBlLayoutNode',
-	#category : 'Bloc-Layouts-Model',
-	#package : 'Bloc',
-	#tag : 'Layouts-Model'
+	#name : #TBlLayoutNode,
+	#category : #'Bloc-Layouts-Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 TBlLayoutNode >> constraints [
 	^ self explicitRequirement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 TBlLayoutNode >> constraints: aBlLayoutConstraints [
 	self explicitRequirement
 ]
 
-{ #category : 'api - resizer' }
+{ #category : #'api - resizer' }
 TBlLayoutNode >> fitContent [
 	self
 		hFitContent;
 		vFitContent
 ]
 
-{ #category : 'api - resizer' }
+{ #category : #'api - resizer' }
 TBlLayoutNode >> hExact: aNumber [
 	self constraints horizontal exact: aNumber
 ]
 
-{ #category : 'api - resizer' }
+{ #category : #'api - resizer' }
 TBlLayoutNode >> hFitContent [
 	self constraints horizontal fitContent
 ]
 
-{ #category : 'api - resizer' }
+{ #category : #'api - resizer' }
 TBlLayoutNode >> hMatchParent [
 	self constraints horizontal matchParent
 ]
 
-{ #category : 'api - resizer' }
+{ #category : #'api - resizer' }
 TBlLayoutNode >> horizontalResizer [
 	^ self constraints horizontal resizer
 ]
 
-{ #category : 'api - resizer' }
+{ #category : #'api - resizer' }
 TBlLayoutNode >> isHorizontalMatchParent [
 	^ self horizontalResizer isMatchParent
 ]
 
-{ #category : 'api - resizer' }
+{ #category : #'api - resizer' }
 TBlLayoutNode >> isVerticalMatchParent [
 	^ self verticalResizer isMatchParent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 TBlLayoutNode >> margin [
 	^ self constraints margin
 ]
 
-{ #category : 'api - resizer' }
+{ #category : #'api - resizer' }
 TBlLayoutNode >> matchParent [
 	self
 		hMatchParent;
 		vMatchParent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 TBlLayoutNode >> maxExtent [
 	^ self maxWidth @ self maxHeight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 TBlLayoutNode >> maxHeight [
 	^ self constraints maxHeight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 TBlLayoutNode >> maxWidth [
 	^ self constraints maxWidth
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 TBlLayoutNode >> minExtent [
 	^ self minWidth @ self minHeight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 TBlLayoutNode >> minHeight [
 	^ self constraints minHeight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 TBlLayoutNode >> minWidth [
 	^ self constraints minWidth
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 TBlLayoutNode >> padding [
 	^ self constraints padding
 ]
 
-{ #category : 'api - resizer' }
+{ #category : #'api - resizer' }
 TBlLayoutNode >> vExact: aNumber [
 	self constraints vertical exact: aNumber
 ]
 
-{ #category : 'api - resizer' }
+{ #category : #'api - resizer' }
 TBlLayoutNode >> vFitContent [
 	self constraints vertical fitContent
 ]
 
-{ #category : 'api - resizer' }
+{ #category : #'api - resizer' }
 TBlLayoutNode >> vMatchParent [
 	self constraints vertical matchParent
 ]
 
-{ #category : 'api - resizer' }
+{ #category : #'api - resizer' }
 TBlLayoutNode >> verticalResizer [
 	^ self constraints vertical resizer
 ]
