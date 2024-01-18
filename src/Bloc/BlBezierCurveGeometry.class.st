@@ -3,22 +3,20 @@ I define a geometry of a bezier curve with N control points (of order N)
 
 "
 Class {
-	#name : 'BlBezierCurveGeometry',
-	#superclass : 'BlElementVectorGeometry',
+	#name : #BlBezierCurveGeometry,
+	#superclass : #BlElementVectorGeometry,
 	#instVars : [
 		'controlPoints'
 	],
-	#category : 'Bloc-Basic-Geometry',
-	#package : 'Bloc',
-	#tag : 'Basic-Geometry'
+	#category : #'Bloc-Basic-Geometry'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlBezierCurveGeometry class >> controlPoints: aCollection [
 	^ self new controlPoints: aCollection
 ]
 
-{ #category : 'geometry testing' }
+{ #category : #'geometry testing' }
 BlBezierCurveGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry.
 
@@ -36,13 +34,13 @@ BlBezierCurveGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlEle
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBezierCurveGeometry >> controlPoints [
 
 	^ controlPoints
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBezierCurveGeometry >> controlPoints: aCollection [
 	"The collection can have between 2 and 4 points."
 
@@ -50,7 +48,7 @@ BlBezierCurveGeometry >> controlPoints: aCollection [
 	self releaseCache
 ]
 
-{ #category : 'geometry bounds' }
+{ #category : #'geometry bounds' }
 BlBezierCurveGeometry >> geometryBounds: aBlBounds [
 
 	^ aBlBounds rectangle:
@@ -60,31 +58,31 @@ BlBezierCurveGeometry >> geometryBounds: aBlBounds [
 				Rectangle encompassing: theControlPoints ])
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlBezierCurveGeometry >> hasCaps [
 
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlBezierCurveGeometry >> hasJoins [
 
 	^ false
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlBezierCurveGeometry >> initialize [
 	super initialize.
 
 	controlPoints := #()
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBezierCurveGeometry >> matchExtent: aPoint [
 	extent := aPoint
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBezierCurveGeometry >> order [
 	"Return an order of a bezier curve (how many control points it has)
 	(https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Specific_cases)"

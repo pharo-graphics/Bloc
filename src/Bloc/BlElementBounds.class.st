@@ -6,61 +6,59 @@ The reference element always corresponds to the element which was used to comput
 
 "
 Class {
-	#name : 'BlElementBounds',
-	#superclass : 'Object',
+	#name : #BlElementBounds,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'referenceElement'
 	],
-	#category : 'Bloc-Basic-Bounds',
-	#package : 'Bloc',
-	#tag : 'Basic-Bounds'
+	#category : #'Bloc-Basic-Bounds'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlElementBounds >> asRectangle [
 	<return: #Rectangle>
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> bottom [
 	<return: #Number>
 
 	^ self bounds bottom
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> bottomCenter [
 	<return: #Point>
 
 	^ self bounds bottomCenter
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> bottomLeft [
 	<return: #Point>
 
 	^ self bounds bottomLeft
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> bottomRight [
 	"Return the bottom right point of the receiver."
 
 	^ self right @ self bottom
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementBounds >> bounds [
 	<return: #BlBounds>
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : 'bounds conversion' }
+{ #category : #'bounds conversion' }
 BlElementBounds >> boundsInLocal: aBlBounds [
 	"I load my local bounds in the given mutable bounds and return it.
 	I do not rely on cache and always provide actual bounds.
@@ -77,7 +75,7 @@ BlElementBounds >> boundsInLocal: aBlBounds [
 		yourself
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> center [
 	"Return a point representing a geometrical center of this bounds"
 	<return: #Point>
@@ -85,21 +83,21 @@ BlElementBounds >> center [
 	^ self bounds center
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> centerLeft [
 	<return: #Point>
 
 	^ self bounds centerLeft
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> centerRight [
 	<return: #Point>
 
 	^ self bounds centerRight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementBounds >> extent [
 	"Return extent of current bounds"
 	<return: #Point>
@@ -107,56 +105,56 @@ BlElementBounds >> extent [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> height [
 	<return: #Number>
 
 	^ self extent y
 ]
 
-{ #category : 'geometry bounds' }
+{ #category : #'geometry bounds' }
 BlElementBounds >> inChild: anElement [
 	<return: #BlElementBounds>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'geometry bounds' }
+{ #category : #'geometry bounds' }
 BlElementBounds >> inLocal [
 	<return: #BlElementBounds>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'geometry bounds' }
+{ #category : #'geometry bounds' }
 BlElementBounds >> inParent [
 	<return: #BlElementBounds>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'geometry bounds' }
+{ #category : #'geometry bounds' }
 BlElementBounds >> inParent: anElement [
 	<return: #BlElementBounds>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'geometry bounds' }
+{ #category : #'geometry bounds' }
 BlElementBounds >> inSpace [
 	<return: #BlElementBounds>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> left [
 	<return: #Number>
 
 	^ self bounds left
 ]
 
-{ #category : 'bounds conversion' }
+{ #category : #'bounds conversion' }
 BlElementBounds >> localBoundsToParent: aBounds [
 	"In-place transform bounds from local coordinates to my parent's coordinates.
 	Note, that I do not return a new rectangle and instead mutate provided one,
@@ -174,7 +172,7 @@ BlElementBounds >> localBoundsToParent: aBounds [
 	^ aBounds
 ]
 
-{ #category : 'bounds conversion' }
+{ #category : #'bounds conversion' }
 BlElementBounds >> localBoundsToSpace: aBounds [
 	"In-place transform bounds from local coordinates to space coordinates.
 	Note, that I do not return a new rectangle and instead mutate provided one,
@@ -203,7 +201,7 @@ BlElementBounds >> localBoundsToSpace: aBounds [
 	^ aBounds
 ]
 
-{ #category : 'bounds conversion' }
+{ #category : #'bounds conversion' }
 BlElementBounds >> localBoundsToTransformed: aBounds [
 	"In-place transform bounds from local coordinates to my parent's coordinates.
 	Note, that I do not return a new rectangle and instead mutate provided one,
@@ -217,12 +215,12 @@ BlElementBounds >> localBoundsToTransformed: aBounds [
 	^ aBounds
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> perimeter [
 	^ (self width + self height) * 2
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementBounds >> position [
 	"Return bounds position (an origin) as a Point"
 	<return: #Point>
@@ -232,12 +230,12 @@ BlElementBounds >> position [
 
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlElementBounds >> printOn: aStream [
 	aStream print: self asRectangle
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementBounds >> referenceElement [
 	"Return a reference element that defines a coordinate system in which bounds are local.
 	Reference element can not be nil"
@@ -249,54 +247,54 @@ BlElementBounds >> referenceElement [
 	^ referenceElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementBounds >> referenceElement: aBlElement [
 	referenceElement := aBlElement
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> right [
 	<return: #Number>
 
 	^ self bounds right
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> top [
 	<return: #Number>
 
 	^ self bounds top
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> topCenter [
 	<return: #Point>
 
 	^ self bounds topCenter
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> topLeft [
 	<return: #Point>
 
 	^ self bounds topLeft
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> topRight [
 	<return: #Point>
 
 	^ self bounds topRight
 ]
 
-{ #category : 'geometry bounds' }
+{ #category : #'geometry bounds' }
 BlElementBounds >> transformed [
 	<return: #BlElementBounds>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'geometry - accessing' }
+{ #category : #'geometry - accessing' }
 BlElementBounds >> width [
 	<return: #Number>
 

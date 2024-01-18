@@ -1,24 +1,22 @@
 Class {
-	#name : 'BlTaskQueue',
-	#superclass : 'Object',
+	#name : #BlTaskQueue,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'tasks',
 		'lock'
 	],
-	#category : 'Bloc-Space - Tasks',
-	#package : 'Bloc',
-	#tag : 'Space - Tasks'
+	#category : #'Bloc-Space - Tasks'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 BlTaskQueue >> critical: aBlock [
 
 	^ lock critical: aBlock
 ]
 
-{ #category : 'api - enqueue' }
+{ #category : #'api - enqueue' }
 BlTaskQueue >> dequeue: aBlTask [	
 	"Remove the task from the queue.
 	If complete, mark the task as new so it may be reused."
@@ -30,7 +28,7 @@ BlTaskQueue >> dequeue: aBlTask [
 				aBlTask setNew ] ] ].
 ]
 
-{ #category : 'api - enqueue' }
+{ #category : #'api - enqueue' }
 BlTaskQueue >> enqueue: aBlTask [
 
 	| taskExists |
@@ -54,7 +52,7 @@ BlTaskQueue >> enqueue: aBlTask [
 
 ]
 
-{ #category : 'api - enqueue' }
+{ #category : #'api - enqueue' }
 BlTaskQueue >> enqueueAll: aCollectionOfBlTask [
 
 	| taskExists |
@@ -72,7 +70,7 @@ BlTaskQueue >> enqueueAll: aCollectionOfBlTask [
 
 ]
 
-{ #category : 'api - enqueue' }
+{ #category : #'api - enqueue' }
 BlTaskQueue >> enqueueFrom: aBlTaskQueue [
 	"Transfer a queue."
 
@@ -81,7 +79,7 @@ BlTaskQueue >> enqueueFrom: aBlTaskQueue [
 		aBlTaskQueue flush ]
 ]
 
-{ #category : 'api - enqueue' }
+{ #category : #'api - enqueue' }
 BlTaskQueue >> flush [
 	| theTasks |
 
@@ -94,27 +92,27 @@ BlTaskQueue >> flush [
 
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTaskQueue >> initialize [
 	super initialize.
 	
 	lock := Monitor new
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlTaskQueue >> isEmpty [
 
 	^ self critical: [ tasks isNil or: [ tasks isEmpty ] ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlTaskQueue >> newTasks [
 	"Answer a new collection for storing tasks"
 
 	^ OrderedCollection new.
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlTaskQueue >> printOn: aStream [
 
 	super printOn: aStream.
@@ -124,7 +122,7 @@ BlTaskQueue >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlTaskQueue >> requeue: aBlTask [
 	"Requeue the supplied task"
 
@@ -137,7 +135,7 @@ BlTaskQueue >> requeue: aBlTask [
 	self enqueue: aBlTask
 ]
 
-{ #category : 'api - running' }
+{ #category : #'api - running' }
 BlTaskQueue >> runOn: aSpace [
 	| theTasks |
 	
@@ -165,7 +163,7 @@ BlTaskQueue >> runOn: aSpace [
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTaskQueue >> size [
 
 	^ tasks
@@ -173,7 +171,7 @@ BlTaskQueue >> size [
 		ifNotNil: [ tasks size ]
 ]
 
-{ #category : 'api - accessing' }
+{ #category : #'api - accessing' }
 BlTaskQueue >> tasks [
 	"Return a new collection instance holding all my tasks"
 

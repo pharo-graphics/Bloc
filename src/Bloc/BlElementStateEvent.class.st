@@ -1,20 +1,18 @@
 Class {
-	#name : 'BlElementStateEvent',
-	#superclass : 'BlEvent',
+	#name : #BlElementStateEvent,
+	#superclass : #BlEvent,
 	#instVars : [
 		'element'
 	],
-	#category : 'Bloc-Basic-State',
-	#package : 'Bloc',
-	#tag : 'Basic-State'
+	#category : #'Bloc-Basic-State'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementStateEvent >> element [
 	^ element
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementStateEvent >> element: anObject [
 	element := anObject
 ]

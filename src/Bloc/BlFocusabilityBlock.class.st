@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlFocusabilityBlock',
-	#superclass : 'BlFocusability',
-	#category : 'Bloc-Basic-Properties',
-	#package : 'Bloc',
-	#tag : 'Basic-Properties'
+	#name : #BlFocusabilityBlock,
+	#superclass : #BlFocusability,
+	#category : #'Bloc-Basic-Properties'
 }
 
-{ #category : 'focus' }
+{ #category : #focus }
 BlFocusabilityBlock >> focusables: anOrderedCollection along: aBlFocusSearchDirection of: anElement [
 	"Block descendants and only add anElement"
 

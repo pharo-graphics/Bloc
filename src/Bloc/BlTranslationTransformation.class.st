@@ -6,17 +6,15 @@ https://drafts.csswg.org/css-transforms/#valdef-transform-translate
 
 "
 Class {
-	#name : 'BlTranslationTransformation',
-	#superclass : 'BlAffineTransformation',
+	#name : #BlTranslationTransformation,
+	#superclass : #BlAffineTransformation,
 	#instVars : [
 		'translation'
 	],
-	#category : 'Bloc-Basic-Transformations',
-	#package : 'Bloc',
-	#tag : 'Basic-Transformations'
+	#category : #'Bloc-Basic-Transformations'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlTranslationTransformation class >> translation: aBlVector [
 
 	^ self new
@@ -24,7 +22,7 @@ BlTranslationTransformation class >> translation: aBlVector [
 		  yourself
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlTranslationTransformation class >> x: aX y: aY z: aZ [
 
 	^ self new
@@ -32,7 +30,7 @@ BlTranslationTransformation class >> x: aX y: aY z: aZ [
 		  yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTranslationTransformation >> initialize [
 
 	super initialize.
@@ -40,25 +38,25 @@ BlTranslationTransformation >> initialize [
 	translation := BlVector zero
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlTranslationTransformation >> is2D [
 
 	^ translation z isZero
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlTranslationTransformation >> isTranslation [
 
 	^ true
 ]
 
-{ #category : 'mathematical functions' }
+{ #category : #'mathematical functions' }
 BlTranslationTransformation >> multiplyOn: aBlMatrix [
 
 	aBlMatrix translateBy: translation
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlTranslationTransformation >> printOn: aStream [
 
 	aStream nextPutAll: 'Translation by '.
@@ -66,13 +64,13 @@ BlTranslationTransformation >> printOn: aStream [
 	translation printOn: aStream
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTranslationTransformation >> translation [
 
 	^ translation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTranslationTransformation >> translation: aVector [
 
 	translation := aVector asTranslate3D

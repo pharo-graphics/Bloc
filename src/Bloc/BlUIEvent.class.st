@@ -1,46 +1,44 @@
 Class {
-	#name : 'BlUIEvent',
-	#superclass : 'BlEvent',
+	#name : #BlUIEvent,
+	#superclass : #BlEvent,
 	#instVars : [
 		'modifiers'
 	],
-	#category : 'Bloc-Events',
-	#package : 'Bloc',
-	#tag : 'Events'
+	#category : #'Bloc-Events'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlUIEvent >> asDictionaryForExport [
 	^ super asDictionaryForExport
 		at: #modifiers put: modifiers printString;
 		yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlUIEvent >> initialize [
 	super initialize.
 
 	modifiers := BlKeyModifiers new
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlUIEvent >> isUIEvent [
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlUIEvent >> modifiers [
 	<return: #BlKeyModifiers>
 
 	^ modifiers
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlUIEvent >> modifiers: aBlKeyModifiers [
 	 modifiers := aBlKeyModifiers
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlUIEvent >> printOn: aStream [
 	aStream 
 		nextPutAll: self class name;

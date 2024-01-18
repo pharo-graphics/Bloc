@@ -1,15 +1,13 @@
 Class {
-	#name : 'BlElementBoundsUpdater',
-	#superclass : 'Object',
+	#name : #BlElementBoundsUpdater,
+	#superclass : #Object,
 	#instVars : [
 		'changes'
 	],
-	#category : 'Bloc-Basic-Bounds',
-	#package : 'Bloc',
-	#tag : 'Basic-Bounds'
+	#category : #'Bloc-Basic-Bounds'
 }
 
-{ #category : 'api - changes' }
+{ #category : #'api - changes' }
 BlElementBoundsUpdater >> changeExtentFrom: aPreviousExtent to: aNewExtent of: anElement [
 	(changes
 		at: anElement
@@ -17,7 +15,7 @@ BlElementBoundsUpdater >> changeExtentFrom: aPreviousExtent to: aNewExtent of: a
 			changeExtentFrom: aPreviousExtent to: aNewExtent
 ]
 
-{ #category : 'api - changes' }
+{ #category : #'api - changes' }
 BlElementBoundsUpdater >> changePositionFrom: aPreviousPosition to: aNewPosition of: anElement [
 
 	(changes
@@ -26,7 +24,7 @@ BlElementBoundsUpdater >> changePositionFrom: aPreviousPosition to: aNewPosition
 			changePositionFrom: aPreviousPosition to: aNewPosition
 ]
 
-{ #category : 'change reporting' }
+{ #category : #'change reporting' }
 BlElementBoundsUpdater >> commitChanges [
 
 	| theAssociations theElements theRoots |
@@ -55,25 +53,25 @@ BlElementBoundsUpdater >> commitChanges [
 
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlElementBoundsUpdater >> hasChanges [ 
 
 	^ changes notEmpty
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlElementBoundsUpdater >> hasExtentChanges [ 
 
 	^ changes anySatisfy: [ :c | c isExtentChanged ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlElementBoundsUpdater >> hasPositionChanges [ 
 
 	^ changes anySatisfy: [ :c | c isPositionChanged ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlElementBoundsUpdater >> initialize [
 	super initialize.
 	

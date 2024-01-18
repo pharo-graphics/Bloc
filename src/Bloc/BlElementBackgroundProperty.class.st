@@ -1,15 +1,13 @@
 Class {
-	#name : 'BlElementBackgroundProperty',
-	#superclass : 'BlElementProperty',
+	#name : #BlElementBackgroundProperty,
+	#superclass : #BlElementProperty,
 	#instVars : [
 		'background'
 	],
-	#category : 'Bloc-Basic-Properties',
-	#package : 'Bloc',
-	#tag : 'Basic-Properties'
+	#category : #'Bloc-Basic-Properties'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlElementBackgroundProperty >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -20,34 +18,34 @@ BlElementBackgroundProperty >> = anObject [
 	^ background = anObject background
 ]
 
-{ #category : 'api - property' }
+{ #category : #'api - property' }
 BlElementBackgroundProperty >> applyOnElement: anElement [
 	anElement background: self background
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementBackgroundProperty >> background [
 	^ background
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementBackgroundProperty >> background: anObject [
 	background := anObject
 ]
 
-{ #category : 'api - property' }
+{ #category : #'api - property' }
 BlElementBackgroundProperty >> cleanUpOnElement: anElement [
 	anElement background: BlElementVisuals defaultBackground
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlElementBackgroundProperty >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ background hash
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlElementBackgroundProperty >> printOn: aStream [
 	aStream
 		nextPutAll: 'Background - ';

@@ -1,15 +1,13 @@
 Class {
-	#name : 'BlElementForegroundProperty',
-	#superclass : 'BlElementProperty',
+	#name : #BlElementForegroundProperty,
+	#superclass : #BlElementProperty,
 	#instVars : [
 		'foreground'
 	],
-	#category : 'Bloc-Basic-Properties',
-	#package : 'Bloc',
-	#tag : 'Basic-Properties'
+	#category : #'Bloc-Basic-Properties'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlElementForegroundProperty >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -20,23 +18,23 @@ BlElementForegroundProperty >> = anObject [
 	^ foreground = anObject foreground
 ]
 
-{ #category : 'api - property' }
+{ #category : #'api - property' }
 BlElementForegroundProperty >> applyOnElement: anElement [
 	(anElement respondsTo: #foreground:)
 		ifTrue: [ anElement foreground: self foreground ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementForegroundProperty >> foreground [
 	^ foreground
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementForegroundProperty >> foreground: anObject [
 	foreground := anObject
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlElementForegroundProperty >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 

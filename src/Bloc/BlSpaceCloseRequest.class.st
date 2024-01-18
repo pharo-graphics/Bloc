@@ -10,19 +10,17 @@ After that space sents an actual BlSpaceClosedEvent that indicates that windows 
 
 "
 Class {
-	#name : 'BlSpaceCloseRequest',
-	#superclass : 'BlSpaceEvent',
-	#category : 'Bloc-Events-Type-Space',
-	#package : 'Bloc',
-	#tag : 'Events-Type-Space'
+	#name : #BlSpaceCloseRequest,
+	#superclass : #BlSpaceEvent,
+	#category : #'Bloc-Events-Type-Space'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlSpaceCloseRequest >> isSpaceCloseRequest [
 	^ true
 ]
 
-{ #category : 'sending' }
+{ #category : #sending }
 BlSpaceCloseRequest >> sendTo: anObject [
 	anObject spaceCloseRequest: self
 ]
