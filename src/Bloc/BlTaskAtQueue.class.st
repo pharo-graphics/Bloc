@@ -37,7 +37,7 @@ Class {
 		'cutoffDuration',
 		'clock',
 		'processTime',
-		'timeoutAsMilliseconds'
+		'nextTimeoutDuration'
 	],
 	#classVars : [
 		'Default'
@@ -109,7 +109,7 @@ BlTaskAtQueue >> initialize [
 	queue := SharedPriorityUniqueQueue new.
 	scheduleSemaphore := Semaphore new.
 	cutoffDuration := 10 milliSeconds.
-	timeoutAsMilliseconds := 15 seconds asMilliSeconds.
+	nextTimeoutDuration := 15 seconds.
 	clock := BlTime real
 ]
 
@@ -125,28 +125,30 @@ BlTaskAtQueue >> next [
 BlTaskAtQueue >> processNextEntry [
 
 	| entry timeRemaining |
-	scheduleSemaphore waitTimeoutMilliseconds: timeoutAsMilliseconds.
+	scheduleSemaphore waitTimeoutMilliseconds: nextTimeoutDuration asMilliSeconds.
+
 	processTime := clock now.
 	[
 	entry := queue peek.
 	entry isNotNil and: [
 		timeRemaining := entry scheduledTime - processTime.
 		timeRemaining < cutoffDuration ] ] whileTrue: [
+
 		entry := queue next.
-		[
-		[ entry value ]
+		[ [ entry value ]
 			on: Error
 			do: [ :ex |
 				BlTaskAtErrorSignal new
 					exception: ex;
 					task: entry;
 					message: 'Entry execution exception - continuing';
-					emit ] ] on: Exception fork: [ :anException | anException pass ].
+					emit ] ]
+				on: Exception
+				fork: [ :anException | anException pass ].
 		processTime := clock now ].
 
 	entry := queue peek.
-
-	timeoutAsMilliseconds :=
+	nextTimeoutDuration :=
 		entry
 			ifNil: [ 1 hour ]
 			ifNotNil: [ entry scheduledTime - clock now ]
