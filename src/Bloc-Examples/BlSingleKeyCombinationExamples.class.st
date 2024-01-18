@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlSingleKeyCombinationExamples',
-	#superclass : 'BlKeyCombinationExamplesTest',
-	#category : 'Bloc-Examples-KeyBinding',
-	#package : 'Bloc-Examples',
-	#tag : 'KeyBinding'
+	#name : #BlSingleKeyCombinationExamples,
+	#superclass : #BlKeyCombinationExamplesTest,
+	#category : #'Bloc-Examples-KeyBinding'
 }
 
-{ #category : 'examples - combination' }
+{ #category : #'examples - combination' }
 BlSingleKeyCombinationExamples >> testArrowLeftCombination [
 
 	<sampleInstance>
@@ -18,7 +16,7 @@ BlSingleKeyCombinationExamples >> testArrowLeftCombination [
 	^ aKeyCombination
 ]
 
-{ #category : 'examples - store' }
+{ #category : #'examples - store' }
 BlSingleKeyCombinationExamples >> testStoreArrowLeftCombination [
 
 	<sampleInstance>

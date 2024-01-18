@@ -3,13 +3,12 @@ I have been automatically converted and probably manually tweaked from BlTextDec
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlTextDecorationStyleTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Text-Tests',
-	#package : 'Bloc-Text-Tests'
+	#name : #BlTextDecorationStyleTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Text-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTextDecorationStyleTest >> testDashed [
 
 	<sampleInstance>
@@ -30,7 +29,7 @@ BlTextDecorationStyleTest >> testDashed [
 	^ aStyle
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTextDecorationStyleTest >> testDotted [
 
 	<sampleInstance>
@@ -51,7 +50,7 @@ BlTextDecorationStyleTest >> testDotted [
 	^ aStyle
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTextDecorationStyleTest >> testDouble [
 
 	<sampleInstance>
@@ -72,7 +71,7 @@ BlTextDecorationStyleTest >> testDouble [
 	^ aStyle
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTextDecorationStyleTest >> testSolid [
 
 	<sampleInstance>
@@ -93,7 +92,7 @@ BlTextDecorationStyleTest >> testSolid [
 	^ aStyle
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTextDecorationStyleTest >> testWavy [
 
 	<sampleInstance>

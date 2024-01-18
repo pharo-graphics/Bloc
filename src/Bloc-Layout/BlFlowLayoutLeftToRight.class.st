@@ -1,17 +1,15 @@
 Class {
-	#name : 'BlFlowLayoutLeftToRight',
-	#superclass : 'BlFlowLayoutDirection',
-	#category : 'Bloc-Layout-Flow-Utilities',
-	#package : 'Bloc-Layout',
-	#tag : 'Flow-Utilities'
+	#name : #BlFlowLayoutLeftToRight,
+	#superclass : #BlFlowLayoutDirection,
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlFlowLayoutLeftToRight >> isLeftToRight [
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlFlowLayoutLeftToRight >> isRightToLeft [
 	^ false
 ]

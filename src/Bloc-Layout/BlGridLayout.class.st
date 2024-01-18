@@ -55,8 +55,8 @@ limitations under the License.
 
 "
 Class {
-	#name : 'BlGridLayout',
-	#superclass : 'BlLayout',
+	#name : #BlGridLayout,
+	#superclass : #BlLayout,
 	#instVars : [
 		'impl',
 		'cellSpacing',
@@ -66,82 +66,80 @@ Class {
 	#pools : [
 		'BlGridLayoutConstants'
 	],
-	#category : 'Bloc-Layout-Grid',
-	#package : 'Bloc-Layout',
-	#tag : 'Grid'
+	#category : #'Bloc-Layout-Grid'
 }
 
-{ #category : 'constraints' }
+{ #category : #constraints }
 BlGridLayout class >> constraints [
 	^ BlGridLayoutConstraints new
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlGridLayout class >> horizontal [
 	^ self new
 		horizontal;
 		yourself
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlGridLayout class >> vertical [
 	^ self new
 		vertical;
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayout >> alignBounds [
 	alignment := BlGridAlignmentMode alignBounds
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayout >> alignMargins [
 	alignment := BlGridAlignmentMode alignMargins
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayout >> alignment [
 	^ alignment
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayout >> cellSpacing [
 	^ cellSpacing
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayout >> cellSpacing: aNumber [
 	cellSpacing := aNumber asFloat
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayout >> columnCount: aNumber [
 	impl columnCount: aNumber
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlGridLayout >> defaultAlignment [
 	^ BlGridAlignmentMode alignMargins
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlGridLayout >> defaultCellSpacing [
 	^ 0.0
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlGridLayout >> defaultOrientation [
 	^ BlGridOrientation horizontal
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayout >> horizontal [
 	orientation := BlGridOrientation horizontal.
 	impl invalidateStructure
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlGridLayout >> initialize [
 	super initialize.
 	
@@ -152,30 +150,30 @@ BlGridLayout >> initialize [
 	impl := BlGridLayoutImpl on: self
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlGridLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	impl layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext.
 	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlGridLayout >> measure: anElement with: anExtentSpec [
 	impl measure: anElement with: anExtentSpec.
 
 	self measureIgnored: anElement with: (BlExtentMeasurementSpec exact: anElement measuredExtent)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayout >> orientation [
 	^ orientation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayout >> rowCount: aNumber [
 	impl rowCount: aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlGridLayout >> vertical [
 	orientation := BlGridOrientation vertical.
 	impl invalidateStructure

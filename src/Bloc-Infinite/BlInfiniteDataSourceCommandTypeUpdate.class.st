@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlInfiniteDataSourceCommandTypeUpdate',
-	#superclass : 'BlInfiniteDataSourceCommandType',
-	#category : 'Bloc-Infinite-DataSource',
-	#package : 'Bloc-Infinite',
-	#tag : 'DataSource'
+	#name : #BlInfiniteDataSourceCommandTypeUpdate,
+	#superclass : #BlInfiniteDataSourceCommandType,
+	#category : #'Bloc-Infinite-DataSource'
 }
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeUpdate >> apply: aCommand in: anInfiniteElement [
 	| command tmpStart tmpCount tmpEnd type position manager |
 	command := aCommand.
@@ -49,22 +47,22 @@ BlInfiniteDataSourceCommandTypeUpdate >> apply: aCommand in: anInfiniteElement [
 		ifFalse: [ manager postponeAndUpdateElementHolders: command on: anInfiniteElement ]
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeUpdate >> apply: aCommand onPosition: aPosition [
 	^ aPosition
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeUpdate >> continuous: aPosition start: start [
 	^ aPosition = (start + 1)
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeUpdate >> dispatch: aCommand toLayout: aLayout [
 	aLayout onItemsUpdatedAt: aCommand positionStart count: aCommand itemCount
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlInfiniteDataSourceCommandTypeUpdate >> dispatchOn: anInfiniteElement start: aStartPosition count: anItemCount [
 	| newCommand manager |
 	manager := anInfiniteElement dataSourceManager.
@@ -74,12 +72,12 @@ BlInfiniteDataSourceCommandTypeUpdate >> dispatchOn: anInfiniteElement start: aS
 	manager dispatchAndUpdateElementHolders: newCommand on: anInfiniteElement.
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteDataSourceCommandTypeUpdate >> isUpdate [
 	^ true
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeUpdate >> offsetPositions: aCommand in: anInfiniteElement [
 
 	anInfiniteElement dataSourceManager
@@ -89,12 +87,12 @@ BlInfiniteDataSourceCommandTypeUpdate >> offsetPositions: aCommand in: anInfinit
 
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeUpdate >> positionMultiplier [
 	^ 1
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlInfiniteDataSourceCommandTypeUpdate >> postponeOn: aContext start: aStartPosition count: anItemCount [ 
 	|newCommand|
 	newCommand := aContext dataSourceManager createCommand: self
@@ -103,7 +101,7 @@ BlInfiniteDataSourceCommandTypeUpdate >> postponeOn: aContext start: aStartPosit
 	aContext dataSourceManager postponeAndUpdateElementHolders: newCommand on: aContext
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeUpdate >> updateElementHoldersIn: anInfiniteElement command: aCommand [
 
 	anInfiniteElement dataSourceManager
@@ -112,7 +110,7 @@ BlInfiniteDataSourceCommandTypeUpdate >> updateElementHoldersIn: anInfiniteEleme
 		in: anInfiniteElement
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeUpdate >> updateElementHoldersIn: anInfiniteElement offset: offsetStart command: aCommand [
 
 	anInfiniteElement dataSourceManager
@@ -121,7 +119,7 @@ BlInfiniteDataSourceCommandTypeUpdate >> updateElementHoldersIn: anInfiniteEleme
 		in: anInfiniteElement
 ]
 
-{ #category : 'dispatch' }
+{ #category : #dispatch }
 BlInfiniteDataSourceCommandTypeUpdate >> updatePosition: aPosition with: aCommand from: myCommand [
 	^ aPosition
 ]

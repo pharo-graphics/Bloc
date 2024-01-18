@@ -1,17 +1,15 @@
 Class {
-	#name : 'BlGridUndefinedAlignment',
-	#superclass : 'BlGridAlignment',
-	#category : 'Bloc-Layout-Grid-Utilities',
-	#package : 'Bloc-Layout',
-	#tag : 'Grid-Utilities'
+	#name : #BlGridUndefinedAlignment,
+	#superclass : #BlGridAlignment,
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlGridUndefinedAlignment >> alignmentValue: anElement viewSize: viewSize [
 	^ UNDEFINED
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlGridUndefinedAlignment >> gravityOffset: anElement cellDelta: cellDelta [
 	^ UNDEFINED
 ]

@@ -1,21 +1,19 @@
 Class {
-	#name : 'BlFrameLayoutConstraintsVertical',
-	#superclass : 'BlLayoutConstraintsAxis',
+	#name : #BlFrameLayoutConstraintsVertical,
+	#superclass : #BlLayoutConstraintsAxis,
 	#instVars : [
 		'alignment',
 		'weight'
 	],
-	#category : 'Bloc-Layout-Frame',
-	#package : 'Bloc-Layout',
-	#tag : 'Frame'
+	#category : #'Bloc-Layout-Frame'
 }
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlFrameLayoutConstraintsVertical >> alignBottom [
 	alignment := BlElementAlignment vertical end
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlFrameLayoutConstraintsVertical >> alignBottomAt: aUnitCoordinateNumber [
 	"Align the bottom of the element vertically with a unit-coordinate inside of the parent"
 
@@ -24,14 +22,14 @@ BlFrameLayoutConstraintsVertical >> alignBottomAt: aUnitCoordinateNumber [
 		relativeAlignment: BlElementAlignment vertical end
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlFrameLayoutConstraintsVertical >> alignCenter [
 	"I align the center of the child element vertically with the center of the parent"
 
 	alignment := BlElementAlignment vertical center
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlFrameLayoutConstraintsVertical >> alignCenterAt: aUnitCoordinateNumber [
 	"Align the center of the element vertically with a unit-coordinate inside of the parent"
 
@@ -40,17 +38,17 @@ BlFrameLayoutConstraintsVertical >> alignCenterAt: aUnitCoordinateNumber [
 		relativeAlignment: BlElementAlignment vertical center
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlFrameLayoutConstraintsVertical >> alignNone [
 	alignment := BlElementAlignment vertical null
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlFrameLayoutConstraintsVertical >> alignTop [
 	alignment := BlElementAlignment vertical start
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlFrameLayoutConstraintsVertical >> alignTopAt: aUnitCoordinateNumber [
 	"Align the top of the element vertically with a unit-coordinate inside of the parent"
 
@@ -59,17 +57,17 @@ BlFrameLayoutConstraintsVertical >> alignTopAt: aUnitCoordinateNumber [
 		relativeAlignment: BlElementAlignment vertical start
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFrameLayoutConstraintsVertical >> alignment [
 	^ alignment
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlFrameLayoutConstraintsVertical >> alignment: aBlElementAlignment [
 	alignment := aBlElementAlignment
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlFrameLayoutConstraintsVertical >> initialize [
 	super initialize.
 
@@ -77,14 +75,14 @@ BlFrameLayoutConstraintsVertical >> initialize [
 	weight := 1.0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFrameLayoutConstraintsVertical >> weight [
 	<return: #Number>
 
 	^ weight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFrameLayoutConstraintsVertical >> weight: aNumber [
 	self
 		assert: [ aNumber isNotNil ]

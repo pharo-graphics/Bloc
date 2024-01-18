@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlGridVerticalOrientation',
-	#superclass : 'BlGridOrientation',
-	#category : 'Bloc-Layout-Grid-Utilities',
-	#package : 'Bloc-Layout',
-	#tag : 'Grid-Utilities'
+	#name : #BlGridVerticalOrientation,
+	#superclass : #BlGridOrientation,
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlGridVerticalOrientation >> isVertical [
 	^ true
 ]

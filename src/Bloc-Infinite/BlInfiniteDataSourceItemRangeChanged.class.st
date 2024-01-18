@@ -13,18 +13,16 @@ infiniteElement dataSource
 
 "
 Class {
-	#name : 'BlInfiniteDataSourceItemRangeChanged',
-	#superclass : 'BlInfiniteDataSourceEvent',
+	#name : #BlInfiniteDataSourceItemRangeChanged,
+	#superclass : #BlInfiniteDataSourceEvent,
 	#instVars : [
 		'position',
 		'itemCount'
 	],
-	#category : 'Bloc-Infinite-Events',
-	#package : 'Bloc-Infinite',
-	#tag : 'Events'
+	#category : #'Bloc-Infinite-Events'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlInfiniteDataSourceItemRangeChanged class >> position: aPosition itemCount: anItemCount [
 
 	^ self new
@@ -33,27 +31,27 @@ BlInfiniteDataSourceItemRangeChanged class >> position: aPosition itemCount: anI
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSourceItemRangeChanged >> itemCount [
 	^ itemCount
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSourceItemRangeChanged >> itemCount: anObject [
 	itemCount := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSourceItemRangeChanged >> position [
 	^ position
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteDataSourceItemRangeChanged >> position: anObject [
 	position := anObject
 ]
 
-{ #category : 'sending' }
+{ #category : #sending }
 BlInfiniteDataSourceItemRangeChanged >> sendTo: anObject [
 	anObject onItemsChanged: self
 ]

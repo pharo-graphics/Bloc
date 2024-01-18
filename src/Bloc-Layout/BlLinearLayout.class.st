@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlLinearLayout',
-	#superclass : 'BlLayout',
+	#name : #BlLinearLayout,
+	#superclass : #BlLayout,
 	#traits : 'TBlAlignable',
 	#classTraits : 'TBlAlignable classTrait',
 	#instVars : [
@@ -13,68 +13,66 @@ Class {
 		'direction',
 		'interspace'
 	],
-	#category : 'Bloc-Layout-Linear',
-	#package : 'Bloc-Layout',
-	#tag : 'Linear'
+	#category : #'Bloc-Layout-Linear'
 }
 
-{ #category : 'constraints' }
+{ #category : #constraints }
 BlLinearLayout class >> constraints [
 	^ BlLinearLayoutConstraints new
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlLinearLayout class >> horizontal [
 	^ self new beHorizontal
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlLinearLayout class >> vertical [
 	^ self new beVertical
 ]
 
-{ #category : 'api - alignment' }
+{ #category : #'api - alignment' }
 BlLinearLayout >> align: aChildElement horizontal: aBlAlignment [
 	aChildElement constraintsDo: [ :c | (c at: self class) horizontal alignment: aBlAlignment ]
 ]
 
-{ #category : 'api - alignment' }
+{ #category : #'api - alignment' }
 BlLinearLayout >> align: aChildElement vertical: aBlAlignment [
 	aChildElement constraintsDo: [ :c | (c at: self class) vertical alignment: aBlAlignment ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayout >> alignment [
 	^ (self horizontalAlignment + self verticalAlignment) directed: self direction
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayout >> beHorizontal [
 	"Change my orientation to horizontal"
 	
 	self orientation: BlLinearLayoutHorizontalOrientation new
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayout >> beVertical [
 	"Change my orientation to vertical"
 	
 	self orientation: BlLinearLayoutVerticalOrientation new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayout >> cellSpacing [
 	<return: #Number>
 	
 	^ cellSpacing
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayout >> cellSpacing: aNumber [	
 	cellSpacing := aNumber asFloat
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlLinearLayout >> defaultHorizontalAlignment [
 	"By default alignment should not influence on layout process,
 	so to not deal with nils use null object"
@@ -83,7 +81,7 @@ BlLinearLayout >> defaultHorizontalAlignment [
 	^ BlElementAlignment null horizontal
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlLinearLayout >> defaultOrientation [
 	"Return default orientation used by LinearLayout. If
 	instance of my class is created with #new a horizontal orientation
@@ -93,7 +91,7 @@ BlLinearLayout >> defaultOrientation [
 	^ BlLinearLayoutHorizontalOrientation new
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlLinearLayout >> defaultVerticalAlignment [
 	"By default alignment should not influence on layout process,
 	so to not deal with nils use null object"
@@ -102,7 +100,7 @@ BlLinearLayout >> defaultVerticalAlignment [
 	^ BlElementAlignment null vertical
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlLinearLayout >> defaultWeightSum [
 	"Default weight sum should be 0 to indicate that actual weight should be calculated
 	as arithmetic sum of childrens' weight"
@@ -111,29 +109,29 @@ BlLinearLayout >> defaultWeightSum [
 	^ 0
 ]
 
-{ #category : 'api - direction' }
+{ #category : #'api - direction' }
 BlLinearLayout >> direction [
 
 	^ direction ifNil: [ self defaultDirection ]
 ]
 
-{ #category : 'api - direction' }
+{ #category : #'api - direction' }
 BlLinearLayout >> direction: aBlLayoutDirection [
 
 	direction := aBlLayoutDirection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayout >> horizontalAlignment [
 	^ horizontalAlignment
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayout >> horizontalAlignment: anAlignment [
 	horizontalAlignment := anAlignment
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlLinearLayout >> initialize [
 
 	super initialize.
@@ -148,47 +146,47 @@ BlLinearLayout >> initialize [
 	self orientation: self defaultOrientation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayout >> interspace [
 	
 	^ interspace
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayout >> interspace: aNumber [	
 	
 	interspace := aNumber asFloat
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlLinearLayout >> isHorizontal [
 	^ self orientation isHorizontal
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlLinearLayout >> isOrientable [
 
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlLinearLayout >> isVertical [
 	^ self orientation isVertical
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlLinearLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	self orientation layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext.
 	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext
 ]
 
-{ #category : 'api - direction' }
+{ #category : #'api - direction' }
 BlLinearLayout >> leftToRight [
 
 	self direction: BlLayoutDirection leftToRight
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlLinearLayout >> measure: anElement with: anExtentSpec [
 	| aMeasurer |
 	"I measure a new extent of myself and my children"
@@ -208,24 +206,24 @@ BlLinearLayout >> measure: anElement with: anExtentSpec [
 	self measureIgnored: anElement with: (BlExtentMeasurementSpec exact: anElement measuredExtent)
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlLinearLayout >> newHorizontalMeasurer [ 
 
 	^ BlLinearLayoutHorizontalMeasurer new 
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlLinearLayout >> newVerticalMeasurer [ 
 
 	^ BlLinearLayoutVerticalMeasurer new 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayout >> orientation [
 	^ orientation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayout >> orientation: anOrientation [
 
 	anOrientation layout: self.
@@ -233,13 +231,13 @@ BlLinearLayout >> orientation: anOrientation [
 
 ]
 
-{ #category : 'api - direction' }
+{ #category : #'api - direction' }
 BlLinearLayout >> rightToLeft [
 
 	self direction: BlLayoutDirection rightToLeft
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlLinearLayout >> shouldUseLargestChild [
 	"When true, all children with a weight will be considered having the minimum size of the largest child.
 	If false, all children are measured normally."
@@ -248,29 +246,29 @@ BlLinearLayout >> shouldUseLargestChild [
 	^ shouldUseLargestChild
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayout >> verticalAlignment [
 	^ verticalAlignment
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayout >> verticalAlignment: anAlignment [
 	verticalAlignment := anAlignment
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayout >> weightSum [
 	<return: #Number>
 
 	^ weightSum
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLinearLayout >> weightSum: aNumber [
 	weightSum := aNumber asFloat
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BlLinearLayout >> withSpaceEqualization [
 	"When set to true, all children with a weight will be considered having the minimum size of the largest child.
 	If false, all children are measured normally.
@@ -279,7 +277,7 @@ BlLinearLayout >> withSpaceEqualization [
 	shouldUseLargestChild := true
 ]
 
-{ #category : 'api - configuration' }
+{ #category : #'api - configuration' }
 BlLinearLayout >> withoutSpaceEqualization [
 	"When set to true, all children with a weight will be considered having the minimum size of the largest child.
 	If false, all children are measured normally.

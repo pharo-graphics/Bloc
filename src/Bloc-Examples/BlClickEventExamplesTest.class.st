@@ -1,14 +1,12 @@
 Class {
-	#name : 'BlClickEventExamplesTest',
-	#superclass : 'TestCase',
+	#name : #BlClickEventExamplesTest,
+	#superclass : #TestCase,
 	#traits : 'TBlDevScripterExamples + TAssertable',
 	#classTraits : 'TBlDevScripterExamples classTrait + TAssertable classTrait',
-	#category : 'Bloc-Examples-Event',
-	#package : 'Bloc-Examples',
-	#tag : 'Event'
+	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : 'examples - elements' }
+{ #category : #'examples - elements' }
 BlClickEventExamplesTest >> element [
 
 	<sampleInstance>
@@ -21,7 +19,7 @@ BlClickEventExamplesTest >> element [
 			  c vertical matchParent ]
 ]
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BlClickEventExamplesTest >> testClickInHiddenChild [
 
 	<sampleInstance>
@@ -47,7 +45,7 @@ BlClickEventExamplesTest >> testClickInHiddenChild [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleClippedGrandchild [
 
 	<sampleInstance>
@@ -75,7 +73,7 @@ BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleClippedGrandchild [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleGrandchild [
 
 	<sampleInstance>
@@ -103,7 +101,7 @@ BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleGrandchild [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleUnclippedGrandchild [
 
 	<sampleInstance>
@@ -131,7 +129,7 @@ BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleUnclippedGrandchild 
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BlClickEventExamplesTest >> testClickInParentWithGoneChild [
 
 	<sampleInstance>
@@ -157,7 +155,7 @@ BlClickEventExamplesTest >> testClickInParentWithGoneChild [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - events' }
+{ #category : #'examples - events' }
 BlClickEventExamplesTest >> testClickInVisibleChild [
 
 	<sampleInstance>
@@ -178,7 +176,7 @@ BlClickEventExamplesTest >> testClickInVisibleChild [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'examples - elements' }
+{ #category : #'examples - elements' }
 BlClickEventExamplesTest >> threeElements [
 
 	<sampleInstance>
@@ -191,7 +189,7 @@ BlClickEventExamplesTest >> threeElements [
 		  id: #parent
 ]
 
-{ #category : 'examples - elements in scripter' }
+{ #category : #'examples - elements in scripter' }
 BlClickEventExamplesTest >> threeElementsInScripter [
 
 	<sampleInstance>
@@ -220,7 +218,7 @@ BlClickEventExamplesTest >> threeElementsInScripter [
 		  anElement ]
 ]
 
-{ #category : 'examples - elements' }
+{ #category : #'examples - elements' }
 BlClickEventExamplesTest >> threeElementsWithFalseChildClipping [
 
 	<sampleInstance>
@@ -254,7 +252,7 @@ BlClickEventExamplesTest >> threeElementsWithFalseChildClipping [
 	^ aParent
 ]
 
-{ #category : 'examples - elements in scripter' }
+{ #category : #'examples - elements in scripter' }
 BlClickEventExamplesTest >> threeElementsWithFalseChildClippingInScripter [
 
 	<sampleInstance>
@@ -283,7 +281,7 @@ BlClickEventExamplesTest >> threeElementsWithFalseChildClippingInScripter [
 		  anElement ]
 ]
 
-{ #category : 'examples - elements' }
+{ #category : #'examples - elements' }
 BlClickEventExamplesTest >> threeElementsWithTrueChildClipping [
 
 	<sampleInstance>
@@ -296,7 +294,7 @@ BlClickEventExamplesTest >> threeElementsWithTrueChildClipping [
 	^ aParent
 ]
 
-{ #category : 'examples - elements in scripter' }
+{ #category : #'examples - elements in scripter' }
 BlClickEventExamplesTest >> threeElementsWithTrueChildClippingInScripter [
 
 	<sampleInstance>
@@ -325,7 +323,7 @@ BlClickEventExamplesTest >> threeElementsWithTrueChildClippingInScripter [
 		  anElement ]
 ]
 
-{ #category : 'examples - elements' }
+{ #category : #'examples - elements' }
 BlClickEventExamplesTest >> twoElements [
 
 	<sampleInstance>
@@ -335,7 +333,7 @@ BlClickEventExamplesTest >> twoElements [
 		  id: #parent
 ]
 
-{ #category : 'examples - elements in scripter' }
+{ #category : #'examples - elements in scripter' }
 BlClickEventExamplesTest >> twoElementsInScripter [
 
 	<sampleInstance>

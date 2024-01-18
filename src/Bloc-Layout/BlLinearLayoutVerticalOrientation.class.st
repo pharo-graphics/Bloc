@@ -1,50 +1,48 @@
 Class {
-	#name : 'BlLinearLayoutVerticalOrientation',
-	#superclass : 'BlLinearLayoutOrientation',
-	#category : 'Bloc-Layout-Linear-Utilities',
-	#package : 'Bloc-Layout',
-	#tag : 'Linear-Utilities'
+	#name : #BlLinearLayoutVerticalOrientation,
+	#superclass : #BlLinearLayoutOrientation,
+	#category : #'Bloc-Layout-Linear-Utilities'
 }
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> breadthMode [
 	^ self layout cache widthMode
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> breadthProperties: anElement [
 	^ anElement constraints horizontal
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> breadthSpec: anExtentSpec [
 	^ anExtentSpec widthSpec
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> extentBreadth: breadth lengthSpec: length [
 	^ breadth @ length
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> extentSpecBreadth: breadthSpec lengthSpec: lengthSpec [
 	^ BlExtentMeasurementSpec new
 		widthSpec: breadthSpec;
 		heightSpec: lengthSpec
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlLinearLayoutVerticalOrientation >> inverted [
 
 	^ BlLinearLayoutHorizontalOrientation new
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlLinearLayoutVerticalOrientation >> isVertical [
 	^ true
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlLinearLayoutVerticalOrientation >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	|top right bottom left majorBounds elementInnerBounds turn theLayeredChildren |
 	"Layout subnodes vertically in column one by one
@@ -113,37 +111,37 @@ BlLinearLayoutVerticalOrientation >> layout: anElement in: aRectangle context: a
 			origin x @(origin y + child measuredHeight + self layout cellSpacing + (child outsets height max: 0.0)) ]
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> lengthLinearProperties: aChildElement [
 	^ aChildElement constraints linear vertical
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> lengthMode [
 	^ self layout cache heightMode
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> lengthProperties: aChildElement [
 	^ aChildElement constraints vertical
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> lengthSpec: anExtentSpec [
 	^ anExtentSpec heightSpec
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> marginBreadth: anElement [
 	^ anElement outsets width
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> marginLength: anElement [
 	^ anElement outsets height
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> measureChildWithMargin: child parentSpec: anExtentMeasurementSpec breadthUsed: breadthUsed lengthUsed: lengthUsed [
 	self layout
 		measureChildWithMargins: child
@@ -152,32 +150,32 @@ BlLinearLayoutVerticalOrientation >> measureChildWithMargin: child parentSpec: a
 		heightUsed: lengthUsed
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> measuredBreadth: anElement [
 	^ anElement measuredWidth
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> measuredLength: anElement [
 	^ anElement measuredHeight
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> minimalBreadth: anElement [
 	^ anElement constraints minWidth
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> minimalLength: anElement [
 	^ anElement constraints minHeight
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> paddingBreadth: anElement [
 	^ anElement insets width
 ]
 
-{ #category : 'orientation' }
+{ #category : #orientation }
 BlLinearLayoutVerticalOrientation >> paddingLength: anElement [
 	^ anElement insets height
 ]

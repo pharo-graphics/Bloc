@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlMouseEventExamplesTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Examples-Event',
-	#package : 'Bloc-Examples',
-	#tag : 'Event'
+	#name : #BlMouseEventExamplesTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 BlMouseEventExamplesTest >> bottomLeftText: anEvent [
 
 	self
@@ -14,7 +12,7 @@ BlMouseEventExamplesTest >> bottomLeftText: anEvent [
 		for: anEvent currentTarget
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlMouseEventExamplesTest >> bottomRightText: anEvent [
 
 	self
@@ -22,7 +20,7 @@ BlMouseEventExamplesTest >> bottomRightText: anEvent [
 		for: anEvent currentTarget
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlMouseEventExamplesTest >> boundsOf: anElement [
 	| aRoot |
 
@@ -33,7 +31,7 @@ BlMouseEventExamplesTest >> boundsOf: anElement [
 	^ anElement bounds inParent: aRoot
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMouseEventExamplesTest >> box [
 
 	<sampleInstance>
@@ -68,7 +66,7 @@ BlMouseEventExamplesTest >> box [
 						    do: [ :anEvent | self bottomRightText: anEvent ]))
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMouseEventExamplesTest >> child [
 
 	<sampleInstance>
@@ -78,7 +76,7 @@ BlMouseEventExamplesTest >> child [
 		  size: 400 @ 300
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMouseEventExamplesTest >> grandChild [
 
 	<sampleInstance>
@@ -88,7 +86,7 @@ BlMouseEventExamplesTest >> grandChild [
 		  size: 400 @ 100
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMouseEventExamplesTest >> label [
 
 	<sampleInstance>
@@ -99,7 +97,7 @@ BlMouseEventExamplesTest >> label [
 		  constraintsDo: [ :c | c ignoreByLayout ]
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMouseEventExamplesTest >> parent [
 
 	<sampleInstance>
@@ -112,12 +110,12 @@ BlMouseEventExamplesTest >> parent [
 		  yourself
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlMouseEventExamplesTest >> pointToText: aPoint for: aTextElement [
 	aTextElement text: (aPoint asRopedText fontSize: 10; foreground: (aTextElement parent background paint color darker alpha: 1))
 ]
 
-{ #category : 'examples - find event target' }
+{ #category : #'examples - find event target' }
 BlMouseEventExamplesTest >> testParentWithClip [
 
 	<sampleInstance>
@@ -158,7 +156,7 @@ BlMouseEventExamplesTest >> testParentWithClip [
 	^ gray
 ]
 
-{ #category : 'examples - find event target' }
+{ #category : #'examples - find event target' }
 BlMouseEventExamplesTest >> testParentWithoutClipChildWithClip [
 
 	<sampleInstance>
@@ -199,7 +197,7 @@ BlMouseEventExamplesTest >> testParentWithoutClipChildWithClip [
 	^ gray
 ]
 
-{ #category : 'examples - find event target' }
+{ #category : #'examples - find event target' }
 BlMouseEventExamplesTest >> testParentWithoutClipChildWithoutClip [
 
 	<sampleInstance>
@@ -241,7 +239,7 @@ BlMouseEventExamplesTest >> testParentWithoutClipChildWithoutClip [
 	^ gray
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlMouseEventExamplesTest >> topLeftText: anEvent [
 
 	self
@@ -249,7 +247,7 @@ BlMouseEventExamplesTest >> topLeftText: anEvent [
 		for: anEvent currentTarget
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlMouseEventExamplesTest >> topRightText: anEvent [
 
 	self

@@ -4,29 +4,27 @@ I am a data source observer registered by infinite element to support internal s
 
 "
 Class {
-	#name : 'BlInfiniteElementDataSourceObserver',
-	#superclass : 'BlInfiniteDataSourceObserver',
+	#name : #BlInfiniteElementDataSourceObserver,
+	#superclass : #BlInfiniteDataSourceObserver,
 	#instVars : [
 		'infiniteElement'
 	],
-	#category : 'Bloc-Infinite-DataSource',
-	#package : 'Bloc-Infinite',
-	#tag : 'DataSource'
+	#category : #'Bloc-Infinite-DataSource'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlInfiniteElementDataSourceObserver class >> on: anInfiniteElement [
 	^ self new
 		initializeWith: anInfiniteElement;
 		yourself
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlInfiniteElementDataSourceObserver >> assertNotInLayoutOrScroll [
 	infiniteElement assertNotInLayoutOrScroll
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteElementDataSourceObserver >> initializeWith: anInfiniteElement [
 	
 	self
@@ -36,7 +34,7 @@ BlInfiniteElementDataSourceObserver >> initializeWith: anInfiniteElement [
 	infiniteElement := anInfiniteElement
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlInfiniteElementDataSourceObserver >> onChanged: anEvent [
 
 
@@ -49,7 +47,7 @@ BlInfiniteElementDataSourceObserver >> onChanged: anEvent [
 		ifFalse: [ infiniteElement requestLayout ]
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlInfiniteElementDataSourceObserver >> onItemsChanged: anEvent [
 	| needsUpdate |
 	
@@ -64,7 +62,7 @@ BlInfiniteElementDataSourceObserver >> onItemsChanged: anEvent [
 		ifTrue: [ self triggerUpdateProcessor ]
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlInfiniteElementDataSourceObserver >> onItemsEvent: anEvent [
 	self assertNotInLayoutOrScroll.
 	anEvent position to: anEvent position + anEvent itemCount - 1 do: [ :anIndex |
@@ -73,7 +71,7 @@ BlInfiniteElementDataSourceObserver >> onItemsEvent: anEvent [
 		anElementHolder ifNotNil: [ anEvent event sendTo: anElementHolder ] ]
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlInfiniteElementDataSourceObserver >> onItemsInserted: anEvent [
 	| needsUpdate |
 	self assertNotInLayoutOrScroll.
@@ -86,7 +84,7 @@ BlInfiniteElementDataSourceObserver >> onItemsInserted: anEvent [
 		ifTrue: [ self triggerUpdateProcessor ]
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlInfiniteElementDataSourceObserver >> onItemsMoved: anEvent [
 	| needsUpdate |
 	self assertNotInLayoutOrScroll.
@@ -100,7 +98,7 @@ BlInfiniteElementDataSourceObserver >> onItemsMoved: anEvent [
 		ifTrue: [ self triggerUpdateProcessor ]
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlInfiniteElementDataSourceObserver >> onItemsRemoved: anEvent [
 	| needsUpdate |
 	self assertNotInLayoutOrScroll.
@@ -113,7 +111,7 @@ BlInfiniteElementDataSourceObserver >> onItemsRemoved: anEvent [
 		ifTrue: [ self triggerUpdateProcessor ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlInfiniteElementDataSourceObserver >> triggerUpdateProcessor [
 
 	infiniteElement postChildrenUpdater.

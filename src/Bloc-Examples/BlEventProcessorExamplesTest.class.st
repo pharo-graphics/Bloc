@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlEventProcessorExamplesTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Examples-Event',
-	#package : 'Bloc-Examples',
-	#tag : 'Event'
+	#name : #BlEventProcessorExamplesTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : 'examples - scripter' }
+{ #category : #'examples - scripter' }
 BlEventProcessorExamplesTest >> scripter [
 
 	<sampleInstance>

@@ -3,8 +3,8 @@ I am a SmoothScroller implementation which uses a LinearInterpolator until the t
 
 "
 Class {
-	#name : 'BlInfiniteLinearSmoothScroller',
-	#superclass : 'BlInfiniteSmoothScroller',
+	#name : #BlInfiniteLinearSmoothScroller,
+	#superclass : #BlInfiniteSmoothScroller,
 	#instVars : [
 		'targetVector',
 		'interimTarget',
@@ -16,12 +16,10 @@ Class {
 		'SnapToEnd',
 		'SnapToStart'
 	],
-	#category : 'Bloc-Infinite-Scroller',
-	#package : 'Bloc-Infinite',
-	#tag : 'Scroller'
+	#category : #'Bloc-Infinite-Scroller'
 }
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BlInfiniteLinearSmoothScroller class >> initialize [
 	
 	SnapToAny := #any.
@@ -29,7 +27,7 @@ BlInfiniteLinearSmoothScroller class >> initialize [
 	SnapToStart := #start
 ]
 
-{ #category : 'physics' }
+{ #category : #physics }
 BlInfiniteLinearSmoothScroller >> calculateDelta: aViewSize toFit: aBoxSize snap: aSnapPreference [
 	<return: #Number>
 	"view start = aViewSize x
@@ -58,7 +56,7 @@ BlInfiniteLinearSmoothScroller >> calculateDelta: aViewSize toFit: aBoxSize snap
 	self error: 'Unknown snap preference: ', aSnapPreference asString.
 ]
 
-{ #category : 'physics' }
+{ #category : #physics }
 BlInfiniteLinearSmoothScroller >> calculateDeltaXToMakeVisible: anElement snap: aSnapPreference [
 	"Calculates the horizontal scroll amount necessary to make the given element fully visible"
 	<return: #Number>
@@ -78,7 +76,7 @@ BlInfiniteLinearSmoothScroller >> calculateDeltaXToMakeVisible: anElement snap: 
 	^ self calculateDelta: aLeft @ aRight toFit: aStart @ anEnd snap: aSnapPreference
 ]
 
-{ #category : 'physics' }
+{ #category : #physics }
 BlInfiniteLinearSmoothScroller >> calculateDeltaYToMakeVisible: anElement snap: aSnapPreference [
 	"Calculates the vertical scroll amount necessary to make the given element fully visible"
 	<return: #Number>
@@ -98,7 +96,7 @@ BlInfiniteLinearSmoothScroller >> calculateDeltaYToMakeVisible: anElement snap: 
 	^ self calculateDelta: aTop @ aBottom toFit: aStart @ anEnd snap: aSnapPreference
 ]
 
-{ #category : 'physics' }
+{ #category : #physics }
 BlInfiniteLinearSmoothScroller >> calculateSpeedPerPixel [
 	"Calculate the time (in ms) it should take for each pixel. For instance,
 	if returned value is 2 ms, it means scrolling 1000 pixels with LinearInterpolation should take 2 seconds"
@@ -113,7 +111,7 @@ BlInfiniteLinearSmoothScroller >> calculateSpeedPerPixel [
 	^ self millisecondsPerInch / aDpi
 ]
 
-{ #category : 'physics' }
+{ #category : #physics }
 BlInfiniteLinearSmoothScroller >> calculateTimeForDeceleration: aDistance [
 	"Calculates the time for deceleration so that transition from LinearInterpolator to DecelerateInterpolator looks smooth.
 	We want to cover same area with the linear interpolator for the first 10% of the interpolation.
@@ -124,7 +122,7 @@ BlInfiniteLinearSmoothScroller >> calculateTimeForDeceleration: aDistance [
 	^ (self calculateTimeForScrolling: aDistance) / 0.3356
 ]
 
-{ #category : 'physics' }
+{ #category : #physics }
 BlInfiniteLinearSmoothScroller >> calculateTimeForScrolling: aDistance [
 	"Calculates the time it should take to scroll the given distance (in pixels)"
 	<return: #Duration>
@@ -132,7 +130,7 @@ BlInfiniteLinearSmoothScroller >> calculateTimeForScrolling: aDistance [
 	^ self millisecondsPerPixel * aDistance abs
 ]
 
-{ #category : 'physics' }
+{ #category : #physics }
 BlInfiniteLinearSmoothScroller >> clampApplyScroll: aTmpDelta to: aDelta [
 	<return: #Number>
 	| aBefore tmpDt |
@@ -147,7 +145,7 @@ BlInfiniteLinearSmoothScroller >> clampApplyScroll: aTmpDelta to: aDelta [
 	^ tmpDt
 ]
 
-{ #category : 'physics' }
+{ #category : #physics }
 BlInfiniteLinearSmoothScroller >> computeScrollVectorForPosition: aPosition [
 	"Compute the scroll vector for a given target position.
 	I can return null if the layout cannot calculate a scroll vector for the given position
@@ -161,24 +159,24 @@ BlInfiniteLinearSmoothScroller >> computeScrollVectorForPosition: aPosition [
 	^ self layout computeScrollVectorForPosition: aPosition
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLinearSmoothScroller >> defaultDecelerateInterpolator [
 	^ BlDecelerateInterpolator default
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLinearSmoothScroller >> defaultLinearInterpolator [
 	^ BlLinearInterpolator default
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteLinearSmoothScroller >> hasTargetVector [
 	"Return true if I already know a vector to target element, false otherwise"
 	
 	^ targetVector isNotNil
 ]
 
-{ #category : 'physics' }
+{ #category : #physics }
 BlInfiniteLinearSmoothScroller >> horizontalSnapPreference [
 	"When scrolling towards a child element, I define whether we should
 	align the left or the right edge of the child with the parent InfiniteElement"
@@ -191,7 +189,7 @@ BlInfiniteLinearSmoothScroller >> horizontalSnapPreference [
 			ifFalse: [ SnapToStart ] ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLinearSmoothScroller >> initialize [
 	super initialize.
 	
@@ -200,21 +198,21 @@ BlInfiniteLinearSmoothScroller >> initialize [
 	decelerateInterpolator := self defaultDecelerateInterpolator
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearSmoothScroller >> millisecondsPerInch [
 	<return: #Duration>
 
 	^ 25.0 milliSeconds
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearSmoothScroller >> millisecondsPerPixel [
 	<return: #Duration>
 
 	^ self calculateSpeedPerPixel
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlInfiniteLinearSmoothScroller >> onSeekTargetStep: aDeltaPoint action: aScrollerAction [
 
 	self childrenCount isZero
@@ -233,17 +231,17 @@ BlInfiniteLinearSmoothScroller >> onSeekTargetStep: aDeltaPoint action: aScrolle
 	"everything is valid, keep going"
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlInfiniteLinearSmoothScroller >> onStart [
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlInfiniteLinearSmoothScroller >> onStop [
 	interimTarget := 0@0.
 	targetVector := nil
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlInfiniteLinearSmoothScroller >> onTargetFound: anElement action: aScrollingAction [
 	| dX dY aDistance aTime |
 	
@@ -260,7 +258,7 @@ BlInfiniteLinearSmoothScroller >> onTargetFound: anElement action: aScrollingAct
 		interpolator: decelerateInterpolator
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearSmoothScroller >> targetSeekExtraScrollRatio [
 	"Trigger a scroll to a further distance than targetSeekScrollDistance so that if target
 	element is not laid out until interim target position is reached, we can detect the case before
@@ -270,19 +268,19 @@ BlInfiniteLinearSmoothScroller >> targetSeekExtraScrollRatio [
 	^ 1.2
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearSmoothScroller >> targetSeekScrollDistance [
 	^ 10000
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearSmoothScroller >> targetVector [
 	"Return a point representing the targetVector"
 
 	^ targetVector
 ]
 
-{ #category : 'physics' }
+{ #category : #physics }
 BlInfiniteLinearSmoothScroller >> updateActionForInterimTarget: aScrollerAction [
 	"When the target scroll position is not a child of the InfiniteElement,
 	I calculates a direction vector towards that child and trigger a smooth scroll"
@@ -306,7 +304,7 @@ BlInfiniteLinearSmoothScroller >> updateActionForInterimTarget: aScrollerAction 
 		interpolator: linearInterpolator
 ]
 
-{ #category : 'physics' }
+{ #category : #physics }
 BlInfiniteLinearSmoothScroller >> verticalSnapPreference [
 	"When scrolling towards a child element, I define whether we should
 	align the top or the bottom edge of the child with the parent InfiniteElement"

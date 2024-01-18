@@ -3,8 +3,8 @@ I am a base class for smooth scrolling. I handle basic tracking of the target el
 
 "
 Class {
-	#name : 'BlInfiniteSmoothScroller',
-	#superclass : 'BlSmoothScroller',
+	#name : #BlInfiniteSmoothScroller,
+	#superclass : #BlSmoothScroller,
 	#instVars : [
 		'infiniteElement',
 		'infiniteLayout',
@@ -15,12 +15,10 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-Scroller',
-	#package : 'Bloc-Infinite',
-	#tag : 'Scroller'
+	#category : #'Bloc-Infinite-Scroller'
 }
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlInfiniteSmoothScroller >> childAtPosition: aPosition [
 	"@see OBlInfiniteLayout>>#childAtPosition:"
 	<return: #BlElement or: nil>
@@ -28,7 +26,7 @@ BlInfiniteSmoothScroller >> childAtPosition: aPosition [
 	^ infiniteElement layout childAtPosition: aPosition
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlInfiniteSmoothScroller >> childPositionOf: anElement [
 	"@see OBlInfiniteElement>>#childLayoutPositionOf:"
 	<return: #Number>
@@ -36,7 +34,7 @@ BlInfiniteSmoothScroller >> childPositionOf: anElement [
 	^ infiniteElement childLayoutPositionOf: anElement
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlInfiniteSmoothScroller >> childrenCount [
 	"@see OBlInfiniteLayout>>#childrenCount"
 	<return: #Number>
@@ -44,24 +42,24 @@ BlInfiniteSmoothScroller >> childrenCount [
 	^ infiniteElement layout childrenCount
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteSmoothScroller >> defaultAction [
 	^ BlInfiniteSmoothScrollerAction new
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteSmoothScroller >> initialize [
 	super initialize.
 	
 	action := self defaultAction
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteSmoothScroller >> layout [
 	^ infiniteLayout
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlInfiniteSmoothScroller >> onChildAttached: anElement [
 	"Sent when an item element is attached to this InfiniteElement.
 	If attached element corresponds to my target position it becomes my target element"
@@ -71,7 +69,7 @@ BlInfiniteSmoothScroller >> onChildAttached: anElement [
 		ifTrue: [ targetElement := anElement ]
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 BlInfiniteSmoothScroller >> onScrollBy: aPoint [
 	| anInfiniteElement hadJumpTarget |
 	
@@ -106,7 +104,7 @@ BlInfiniteSmoothScroller >> onScrollBy: aPoint [
 					self stop ] ]
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlInfiniteSmoothScroller >> onSeekTargetStep: aDeltaPoint action: aScrollerAction [
 	"InfiniteElement will call me each time it scrolls until it can find the target position in the layout.
 	SmoothScroller should check aDeltaPoint and if scroll should be changed,
@@ -115,21 +113,21 @@ BlInfiniteSmoothScroller >> onSeekTargetStep: aDeltaPoint action: aScrollerActio
 	self subclassResponsibility
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlInfiniteSmoothScroller >> onStart [
 	"Sent when smooth scroll is started. This might be a good time to do setup."
 	
 	self subclassResponsibility
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlInfiniteSmoothScroller >> onStop [
 	"Sent when smooth scroller is stopped. This is a good place to cleanup your state etc."
 
 	self subclassResponsibility
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlInfiniteSmoothScroller >> onTargetFound: anElement action: aScrollingAction [
 	"Sent when the target position is laid out.
 	I am the last message sent SmoothScroller will receive and it should update
@@ -138,7 +136,7 @@ BlInfiniteSmoothScroller >> onTargetFound: anElement action: aScrollingAction [
 	self subclassResponsibility
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 BlInfiniteSmoothScroller >> scrollBy: aPoint [
 	| anItemCount |
 	
@@ -156,7 +154,7 @@ BlInfiniteSmoothScroller >> scrollBy: aPoint [
 	self onScrollBy: aPoint
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 BlInfiniteSmoothScroller >> startOn: anInfiniteElement [
 	"Starts a smooth scroll for the given target position (set using targetPosition:).
 	In each animation step, InfiniteElement will check for the target element and send either
@@ -182,7 +180,7 @@ BlInfiniteSmoothScroller >> startOn: anInfiniteElement [
 	infiniteElement postSmoothScroller
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 BlInfiniteSmoothScroller >> stop [
 
 	isRunning
@@ -203,12 +201,12 @@ BlInfiniteSmoothScroller >> stop [
 	infiniteElement := nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteSmoothScroller >> targetPosition [
 	^ targetPosition
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteSmoothScroller >> targetPosition: aPosition [
 	targetPosition := aPosition
 ]

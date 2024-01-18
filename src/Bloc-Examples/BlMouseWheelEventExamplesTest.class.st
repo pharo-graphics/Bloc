@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlMouseWheelEventExamplesTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Examples-Event',
-	#package : 'Bloc-Examples',
-	#tag : 'Event'
+	#name : #BlMouseWheelEventExamplesTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : 'examples - elements' }
+{ #category : #'examples - elements' }
 BlMouseWheelEventExamplesTest >> element [
 
 	<sampleInstance>
@@ -24,7 +22,7 @@ BlMouseWheelEventExamplesTest >> element [
 	^ anElement
 ]
 
-{ #category : 'examples - mouse wheel events' }
+{ #category : #'examples - mouse wheel events' }
 BlMouseWheelEventExamplesTest >> mouseWheelEventWithVector: aVector [
 
 	<sampleInstance>
@@ -39,7 +37,7 @@ BlMouseWheelEventExamplesTest >> mouseWheelEventWithVector: aVector [
 	^ anEvent
 ]
 
-{ #category : 'examples - mouse wheel events' }
+{ #category : #'examples - mouse wheel events' }
 BlMouseWheelEventExamplesTest >> testBasicMouseWheelEvent [
 
 	<sampleInstance>
@@ -49,7 +47,7 @@ BlMouseWheelEventExamplesTest >> testBasicMouseWheelEvent [
 	^ anEvent
 ]
 
-{ #category : 'examples - mouse wheel events' }
+{ #category : #'examples - mouse wheel events' }
 BlMouseWheelEventExamplesTest >> testMouseWheelEvent_0degrees [
 
 	<sampleInstance>
@@ -60,7 +58,7 @@ BlMouseWheelEventExamplesTest >> testMouseWheelEvent_0degrees [
 	^ event
 ]
 
-{ #category : 'examples - mouse wheel events' }
+{ #category : #'examples - mouse wheel events' }
 BlMouseWheelEventExamplesTest >> testMouseWheelEvent_180degrees [
 
 	<sampleInstance>
@@ -71,7 +69,7 @@ BlMouseWheelEventExamplesTest >> testMouseWheelEvent_180degrees [
 	^ event
 ]
 
-{ #category : 'examples - mouse wheel events' }
+{ #category : #'examples - mouse wheel events' }
 BlMouseWheelEventExamplesTest >> testMouseWheelEvent_270degrees [
 
 	<sampleInstance>
@@ -82,7 +80,7 @@ BlMouseWheelEventExamplesTest >> testMouseWheelEvent_270degrees [
 	^ event
 ]
 
-{ #category : 'examples - mouse wheel events' }
+{ #category : #'examples - mouse wheel events' }
 BlMouseWheelEventExamplesTest >> testMouseWheelEvent_346degrees [
 
 	<sampleInstance>
@@ -93,7 +91,7 @@ BlMouseWheelEventExamplesTest >> testMouseWheelEvent_346degrees [
 	^ event
 ]
 
-{ #category : 'examples - mouse wheel events' }
+{ #category : #'examples - mouse wheel events' }
 BlMouseWheelEventExamplesTest >> testMouseWheelEvent_45degrees [
 
 	<sampleInstance>

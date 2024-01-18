@@ -1,17 +1,16 @@
 Class {
-	#name : 'BATextMeasurerTest',
-	#superclass : 'BlTextParagraphExamplesTest',
-	#category : 'Bloc-Alexandrie-Tests',
-	#package : 'Bloc-Alexandrie-Tests'
+	#name : #BATextMeasurerTest,
+	#superclass : #BlTextParagraphExamplesTest,
+	#category : #'Bloc-Alexandrie-Tests'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BATextMeasurerTest >> realMeasurer [
 
 	^ BAOffscreen instance textMeasurer
 ]
 
-{ #category : 'geometry - 100@100.' }
+{ #category : #'geometry - 100@100.' }
 BATextMeasurerTest >> testIndexAtBetweenAllCharactersInRealPointWithDot [
 
 	| aParagraph theIndices |
@@ -26,7 +25,7 @@ BATextMeasurerTest >> testIndexAtBetweenAllCharactersInRealPointWithDot [
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray
 ]
 
-{ #category : 'geometry - tab tab' }
+{ #category : #'geometry - tab tab' }
 BATextMeasurerTest >> testIndexAtBetweenAllCharactersInRealTabTab [
 
 	| aParagraph theIndices |
@@ -41,7 +40,7 @@ BATextMeasurerTest >> testIndexAtBetweenAllCharactersInRealTabTab [
 	self assert: theIndices equals: #(0 2 2)
 ]
 
-{ #category : 'geometry - HelloWorld' }
+{ #category : #'geometry - HelloWorld' }
 BATextMeasurerTest >> testIndexAtBetweenFirstAndSecondCharacterInRealHelloWorld [
 
 	| aParagraph anIndex aPosition |
@@ -54,7 +53,7 @@ BATextMeasurerTest >> testIndexAtBetweenFirstAndSecondCharacterInRealHelloWorld 
 	self assert: anIndex equals: 1
 ]
 
-{ #category : 'geometry - HelloWorld' }
+{ #category : #'geometry - HelloWorld' }
 BATextMeasurerTest >> testIndexAtBetweenSeventhAndEighthCharacterInRealHelloWorld [
 
 	| aParagraph anIndex aPosition |
@@ -67,7 +66,7 @@ BATextMeasurerTest >> testIndexAtBetweenSeventhAndEighthCharacterInRealHelloWorl
 	self assert: anIndex equals: 7
 ]
 
-{ #category : 'paragraph - measuring' }
+{ #category : #'paragraph - measuring' }
 BATextMeasurerTest >> testRealMeasuredHelloWorld [
 
 	| aParagraph aLine aFirstSpan aSecondSpan aText aHello aWorld |

@@ -5,16 +5,14 @@ Use me for text enumeration purposes
 
 "
 Class {
-	#name : 'BlTextIterator',
-	#superclass : 'Object',
+	#name : #BlTextIterator,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Text-Text',
-	#package : 'Bloc-Text',
-	#tag : 'Text'
+	#category : #'Bloc-Text-Text'
 }
 
-{ #category : 'iterator - accessing' }
+{ #category : #'iterator - accessing' }
 BlTextIterator >> attributes [
 	"Return a collection of rope attributes at a current position without duplicates"
 	<return: #Collection of: #BlTextAttribute>
@@ -22,7 +20,7 @@ BlTextIterator >> attributes [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
 	If some element evaluates aBlock to true, then cull this element into 
@@ -33,7 +31,7 @@ BlTextIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExcepti
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - testing' }
+{ #category : #'iterator - testing' }
 BlTextIterator >> doesAttributeEnd: anAttribute [
 	"Return true if a given attribute ends at the current position.
 	By `ends` we mean that this attribute is not present at the next position.
@@ -53,14 +51,14 @@ BlTextIterator >> doesAttributeEnd: anAttribute [
 	^ ((self text attributesAt: self position + 1) includes: anAttribute) not
 ]
 
-{ #category : 'iterator - testing' }
+{ #category : #'iterator - testing' }
 BlTextIterator >> hasNext [
 	"Return true if there is a next text item (character) after a current position"
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - testing' }
+{ #category : #'iterator - testing' }
 BlTextIterator >> hasPrevious [
 	"Return true if there is a previous text item (character) before the current position"
 	<return: #Boolean>
@@ -68,7 +66,7 @@ BlTextIterator >> hasPrevious [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> next [
 	"Return an item (character) at current position and move one to the right"
 	<return: #Character or: #Object>
@@ -76,7 +74,7 @@ BlTextIterator >> next [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextAttributeStartAndEnd: aBlTextAttribute indicesDo: anIndicesBlock [
 	"Find and iterate over the start and end indices of the given attribute"	
 	
@@ -85,7 +83,7 @@ BlTextIterator >> nextAttributeStartAndEnd: aBlTextAttribute indicesDo: anIndice
 		indicesDo: anIndicesBlock
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextAttributeStartAndEndSuchThat: aComparisonBlock indicesDo: anIndicesBlock [
 	"Find and iterate over the start and end indices of the given attribute"	
 	| startPosition endPosition isAttributeStartFound isAttributeEndFound |
@@ -134,7 +132,7 @@ BlTextIterator >> nextAttributeStartAndEndSuchThat: aComparisonBlock indicesDo: 
 				value: endPosition ]
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextAttributedEnd: aBlock indicesDo: anIndicesBlock [
 	"Find and iterate over the last indices of the attributes for which aBlock returns true"	
 	| startPosition endPosition theEndedAttributes |
@@ -181,7 +179,7 @@ BlTextIterator >> nextAttributedEnd: aBlock indicesDo: anIndicesBlock [
 		value: theEndedAttributes
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextLine [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first carriage return character"
@@ -190,7 +188,7 @@ BlTextIterator >> nextLine [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextLineIndicesDo: anIndicesBlock [
 	" execute anIndicesBlock with 3 arguments for each line:
 		- start index of line
@@ -200,7 +198,7 @@ BlTextIterator >> nextLineIndicesDo: anIndicesBlock [
 	self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextLineIndicesDo: anIndicesBlock shouldMerge: aMergeBlock [
 	"Iterate over lines within current text and
 		execute aSplitBlock with the 3 arguments for each potential line:
@@ -250,14 +248,14 @@ BlTextIterator >> nextLineIndicesDo: anIndicesBlock shouldMerge: aMergeBlock [
 		value: actualDelimiterIndex
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextSegment: aBlock [
 	<return: #BlText>
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
 	"Evaluate aBlock with every item in the forward direction until aBlock returns a different value compared to the value
 	produced by evaluating aBlock with the first item in a sequence or until we run out of items to iterate over.
@@ -277,7 +275,7 @@ BlTextIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextSpan [
 	"Return a next homogeneous text span"
 	<return: #BlSpan>
@@ -285,7 +283,7 @@ BlTextIterator >> nextSpan [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextSpan: aBlock [
 	"Return a text whose attributes of each characters evaluate aBlock to the same value,
 	e.g. either false or true"
@@ -296,7 +294,7 @@ BlTextIterator >> nextSpan: aBlock [
 		indicesDo: [ :aStart :anEnd :hasValue | self text from: aStart to: anEnd	]
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextSpan: aBlock indicesDo: anIndicesBlock [
 	| theMatchedAttributes theMatchedAttributesSet startPosition endPosition |
 
@@ -337,7 +335,7 @@ BlTextIterator >> nextSpan: aBlock indicesDo: anIndicesBlock [
 		value: theMatchedAttributes
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextSpanAny: aBlock indicesDo: anIndicesBlock [
 	| initialValue startPosition endPosition |
 
@@ -371,7 +369,7 @@ BlTextIterator >> nextSpanAny: aBlock indicesDo: anIndicesBlock [
 		value: initialValue
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextWhitespace [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first non-whitespace character without including it"
@@ -380,7 +378,7 @@ BlTextIterator >> nextWhitespace [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> nextWord [
 	"Return an instance of BrText which represents a piece of text from current position
 	until the first space character"
@@ -389,7 +387,7 @@ BlTextIterator >> nextWord [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> peek [
 	"Return an item (character) at current position"
 	<return: #Character or: #Object>
@@ -397,7 +395,7 @@ BlTextIterator >> peek [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> peer [
 	"Return an item (character) before current position"
 	<return: #Character or: #Object>
@@ -405,7 +403,7 @@ BlTextIterator >> peer [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - accessing' }
+{ #category : #'iterator - accessing' }
 BlTextIterator >> position [
 	"Return current iterator position within a text"
 	<return: #Number>
@@ -413,7 +411,7 @@ BlTextIterator >> position [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> previous [
 	"Return an item (character) at current position and move one to the left"
 	<return: #Character or: #Object>
@@ -421,7 +419,7 @@ BlTextIterator >> previous [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> previousSegment: aBlock indicesDo: anIndicesBlock [
 	"Evaluate aBlock with every item in the backward direction until aBlock returns a different value compared to the value
 	produced by evaluating aBlock with the first item in a sequence or until we run out of items to iterate over.
@@ -441,7 +439,7 @@ BlTextIterator >> previousSegment: aBlock indicesDo: anIndicesBlock [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> selectAttributes: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument. 
 	Collect into a new collection like the receiver, only those elements for 
@@ -451,14 +449,14 @@ BlTextIterator >> selectAttributes: aBlock [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'iterator - enumeration' }
+{ #category : #'iterator - enumeration' }
 BlTextIterator >> skip: aNumber [
 	"Move forward by aNumber characters"
 
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextIterator >> text [
 	"Return an original text that I iterate over"
 	<return: #BlText>
@@ -466,7 +464,7 @@ BlTextIterator >> text [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextIterator >> text: arg1 from: arg2 to: arg3 [
 	^ self subclassResponsibility
 ]

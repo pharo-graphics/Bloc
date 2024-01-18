@@ -1,33 +1,31 @@
 Class {
-	#name : 'BlFlowLayoutDisplay',
-	#superclass : 'Object',
+	#name : #BlFlowLayoutDisplay,
+	#superclass : #Object,
 	#classInstVars : [
 		'float',
 		'inline'
 	],
-	#category : 'Bloc-Layout-Flow-Utilities',
-	#package : 'Bloc-Layout',
-	#tag : 'Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlFlowLayoutDisplay class >> float [
 	^ float
 ]
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BlFlowLayoutDisplay class >> initialize [
 	
 	inline := BlFlowLayoutInline new.
 	float := BlFlowLayoutFloat new
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlFlowLayoutDisplay class >> inline [
 	^ inline
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlFlowLayoutDisplay >> isFloating [
 	^ self subclassResponsibility
 ]

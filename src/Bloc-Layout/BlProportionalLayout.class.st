@@ -37,20 +37,18 @@ Example:
 ```
 "
 Class {
-	#name : 'BlProportionalLayout',
-	#superclass : 'BlLayout',
-	#category : 'Bloc-Layout-Proportional',
-	#package : 'Bloc-Layout',
-	#tag : 'Proportional'
+	#name : #BlProportionalLayout,
+	#superclass : #BlLayout,
+	#category : #'Bloc-Layout-Proportional'
 }
 
-{ #category : 'constraints' }
+{ #category : #constraints }
 BlProportionalLayout class >> constraints [
 
 	^ BlProportionalLayoutConstraints new
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlProportionalLayout >> boundsForChild: aChild in: parentBounds [
 
 	| result horizontalProportions verticalProportions |
@@ -67,7 +65,7 @@ BlProportionalLayout >> boundsForChild: aChild in: parentBounds [
 	^ result
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlProportionalLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdater [
 
 	| parentBounds |
@@ -84,7 +82,7 @@ BlProportionalLayout >> layout: anElement in: aRectangle context: aBlElementBoun
 	self layoutIgnored: anElement context: aBlElementBoundsUpdater
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlProportionalLayout >> measure: anElement with: anExtentSpec [
 	super measure: anElement with: anExtentSpec.
 	

@@ -64,14 +64,12 @@ The debugging mode is also possible to activate in the GT-Inspector's menu, next
 
 "
 Class {
-	#name : 'BlGeometryVisualAndLayoutBoundsExamples',
-	#superclass : 'BlExampleTest',
-	#category : 'Bloc-Examples-Basic',
-	#package : 'Bloc-Examples',
-	#tag : 'Basic'
+	#name : #BlGeometryVisualAndLayoutBoundsExamples,
+	#superclass : #BlExampleTest,
+	#category : #'Bloc-Examples-Basic'
 }
 
-{ #category : 'debugging triangle and text' }
+{ #category : #'debugging triangle and text' }
 BlGeometryVisualAndLayoutBoundsExamples >> alignedIcon [
 
 	<sampleInstance>
@@ -85,7 +83,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> alignedIcon [
 	^ aContainerElement
 ]
 
-{ #category : 'rectangle and start' }
+{ #category : #'rectangle and start' }
 BlGeometryVisualAndLayoutBoundsExamples >> centeredOutskirts [
 	"Rectangle and star elements with centered stroke"
 
@@ -98,7 +96,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> centeredOutskirts [
 	^ aContainer
 ]
 
-{ #category : 'bounds' }
+{ #category : #bounds }
 BlGeometryVisualAndLayoutBoundsExamples >> clippedTriangle [
 	"Clipped triangle polygon with layout bounds"
 
@@ -109,7 +107,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> clippedTriangle [
 	^ aContainer
 ]
 
-{ #category : 'rectangle and start' }
+{ #category : #'rectangle and start' }
 BlGeometryVisualAndLayoutBoundsExamples >> container [
 	"A container for the rectangle and the star"
 
@@ -125,7 +123,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> container [
 	^ aContainer
 ]
 
-{ #category : 'debugging triangle and text' }
+{ #category : #'debugging triangle and text' }
 BlGeometryVisualAndLayoutBoundsExamples >> debuggingAlignedIcon [
 
 	<sampleInstance>
@@ -134,7 +132,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> debuggingAlignedIcon [
 	^ aContainerElement
 ]
 
-{ #category : 'debugging triangle and text' }
+{ #category : #'debugging triangle and text' }
 BlGeometryVisualAndLayoutBoundsExamples >> debuggingMisalignedIcon [
 
 	<sampleInstance>
@@ -144,7 +142,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> debuggingMisalignedIcon [
 	^ aContainerElement
 ]
 
-{ #category : 'bounds' }
+{ #category : #bounds }
 BlGeometryVisualAndLayoutBoundsExamples >> debuggingMode [
 	"Triangle polygon with visual and geometry bounds"
 
@@ -154,7 +152,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> debuggingMode [
 	^ aContainer
 ]
 
-{ #category : 'debugging triangle and text' }
+{ #category : #'debugging triangle and text' }
 BlGeometryVisualAndLayoutBoundsExamples >> emptyIconElement [
 
 	<sampleInstance>
@@ -163,7 +161,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> emptyIconElement [
 		  background: Color green muchDarker
 ]
 
-{ #category : 'bounds' }
+{ #category : #bounds }
 BlGeometryVisualAndLayoutBoundsExamples >> fullyVisibleTriangle [
 	"Fully visible triangle polygon that exceeds layout bounds"
 
@@ -175,7 +173,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> fullyVisibleTriangle [
 	^ aContainer
 ]
 
-{ #category : 'debugging triangle and text' }
+{ #category : #'debugging triangle and text' }
 BlGeometryVisualAndLayoutBoundsExamples >> iconAndTextContainer [
 
 	<sampleInstance>
@@ -194,7 +192,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> iconAndTextContainer [
 	^ aContainerElement
 ]
 
-{ #category : 'rectangle and start' }
+{ #category : #'rectangle and start' }
 BlGeometryVisualAndLayoutBoundsExamples >> insideOutskirts [
 	"Rectangle and star elements with inside stroke"
 
@@ -207,7 +205,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> insideOutskirts [
 	^ aContainer
 ]
 
-{ #category : 'debugging triangle and text' }
+{ #category : #'debugging triangle and text' }
 BlGeometryVisualAndLayoutBoundsExamples >> misalignedIcon [
 
 	<sampleInstance>
@@ -222,7 +220,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> misalignedIcon [
 	^ aContainerElement
 ]
 
-{ #category : 'debugging triangle and text' }
+{ #category : #'debugging triangle and text' }
 BlGeometryVisualAndLayoutBoundsExamples >> misalignedTrianglePolygon [
 	"Triangle polygon"
 
@@ -233,7 +231,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> misalignedTrianglePolygon [
 			  (0 @ 12) }
 ]
 
-{ #category : 'rectangle and start' }
+{ #category : #'rectangle and start' }
 BlGeometryVisualAndLayoutBoundsExamples >> outsideOutskirts [
 	"Rectangle and star elements with outside stroke"
 
@@ -246,7 +244,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> outsideOutskirts [
 	^ aContainer
 ]
 
-{ #category : 'rectangle' }
+{ #category : #rectangle }
 BlGeometryVisualAndLayoutBoundsExamples >> rectanglePolygon [
 	"Rectangle polygon"
 
@@ -258,7 +256,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> rectanglePolygon [
 			  (50 @ 100) }
 ]
 
-{ #category : 'rectangle' }
+{ #category : #rectangle }
 BlGeometryVisualAndLayoutBoundsExamples >> rectangleWithSmallerGeometry [
 	"Rectangle element in debug mode, displaying bounds"
 
@@ -274,7 +272,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> rectangleWithSmallerGeometry [
 	^ aRectangleElement
 ]
 
-{ #category : 'rectangle' }
+{ #category : #rectangle }
 BlGeometryVisualAndLayoutBoundsExamples >> rectangleWithSmallerGeometryCentered [
 	"Rectangle element with centered stroke"
 
@@ -286,7 +284,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> rectangleWithSmallerGeometryCentered 
 	^ aRectangleElement
 ]
 
-{ #category : 'rectangle' }
+{ #category : #rectangle }
 BlGeometryVisualAndLayoutBoundsExamples >> rectangleWithSmallerGeometryInside [
 	"Rectangle element with inside stroke"
 
@@ -298,7 +296,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> rectangleWithSmallerGeometryInside [
 	^ aRectangleElement
 ]
 
-{ #category : 'rectangle' }
+{ #category : #rectangle }
 BlGeometryVisualAndLayoutBoundsExamples >> rectangleWithSmallerGeometryOutside [
 	"Rectangle element with outside stroke"
 
@@ -310,7 +308,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> rectangleWithSmallerGeometryOutside [
 	^ aRectangleElement
 ]
 
-{ #category : 'star' }
+{ #category : #star }
 BlGeometryVisualAndLayoutBoundsExamples >> starPolygon [
 	"Star polygon"
 
@@ -328,7 +326,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> starPolygon [
 			  (85 @ 90) }
 ]
 
-{ #category : 'star' }
+{ #category : #star }
 BlGeometryVisualAndLayoutBoundsExamples >> starWithSmallerGeometry [
 	"Star element in debug mode, displaying bounds"
 
@@ -343,7 +341,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> starWithSmallerGeometry [
 	^ aStarElement
 ]
 
-{ #category : 'star' }
+{ #category : #star }
 BlGeometryVisualAndLayoutBoundsExamples >> starWithSmallerGeometryCentered [
 	"Star element with centered stroke"
 
@@ -355,7 +353,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> starWithSmallerGeometryCentered [
 	^ aStarElement
 ]
 
-{ #category : 'star' }
+{ #category : #star }
 BlGeometryVisualAndLayoutBoundsExamples >> starWithSmallerGeometryInside [
 	"Star element with inside stroke"
 
@@ -367,7 +365,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> starWithSmallerGeometryInside [
 	^ aStarElement
 ]
 
-{ #category : 'star' }
+{ #category : #star }
 BlGeometryVisualAndLayoutBoundsExamples >> starWithSmallerGeometryOutside [
 	"Star element with outside stroke"
 
@@ -379,14 +377,14 @@ BlGeometryVisualAndLayoutBoundsExamples >> starWithSmallerGeometryOutside [
 	^ aStarElement
 ]
 
-{ #category : 'debugging triangle and text' }
+{ #category : #'debugging triangle and text' }
 BlGeometryVisualAndLayoutBoundsExamples >> textElementWithRunText [
 
 	<sampleInstance>
 	^ BlTextElement new text: 'Run' asRopedText
 ]
 
-{ #category : 'debugging triangle and text' }
+{ #category : #'debugging triangle and text' }
 BlGeometryVisualAndLayoutBoundsExamples >> trianglePolygon [
 	"Triangle polygon"
 
@@ -397,7 +395,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> trianglePolygon [
 			  (0 @ 12) }
 ]
 
-{ #category : 'bounds' }
+{ #category : #bounds }
 BlGeometryVisualAndLayoutBoundsExamples >> unclippedTriangle [
 	"Clipped triangle polygon with layount bounds"
 

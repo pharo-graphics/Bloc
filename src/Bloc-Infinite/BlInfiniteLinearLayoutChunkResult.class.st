@@ -1,69 +1,67 @@
 Class {
-	#name : 'BlInfiniteLinearLayoutChunkResult',
-	#superclass : 'Object',
+	#name : #BlInfiniteLinearLayoutChunkResult,
+	#superclass : #Object,
 	#instVars : [
 		'finished',
 		'ignoreConsumed',
 		'focusable',
 		'consumedSpace'
 	],
-	#category : 'Bloc-Infinite-Layout-Linear-Support',
-	#package : 'Bloc-Infinite',
-	#tag : 'Layout-Linear-Support'
+	#category : #'Bloc-Infinite-Layout-Linear-Support'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutChunkResult >> consumedSpace [
 	<return: #Number>
 
 	^ consumedSpace
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutChunkResult >> consumedSpace: aNumber [
 	consumedSpace := aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutChunkResult >> finished [
 	<return: #Boolean>
 
 	^ finished
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutChunkResult >> finished: aBoolean [
 	finished := aBoolean
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutChunkResult >> focusable [
 	^ focusable
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutChunkResult >> focusable: aBoolean [
 	focusable := aBoolean
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutChunkResult >> ignoreConsumed [
 	^ ignoreConsumed
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutChunkResult >> ignoreConsumed: aBoolean [
 	ignoreConsumed := aBoolean
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLinearLayoutChunkResult >> initialize [
 	super initialize.
 	
 	self reset
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLinearLayoutChunkResult >> reset [
 	consumedSpace := 0.
 	finished := false.

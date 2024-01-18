@@ -16,8 +16,8 @@ The default `BlInfiniteLayout` implementations for `BlInfiniteElement` handle al
 
 "
 Class {
-	#name : 'BlInfiniteLayout',
-	#superclass : 'BlLayout',
+	#name : #BlInfiniteLayout,
+	#superclass : #BlLayout,
 	#instVars : [
 		'infiniteElement',
 		'horizontalChildFinder',
@@ -35,17 +35,15 @@ Class {
 	#pools : [
 		'BlInfiniteConstants'
 	],
-	#category : 'Bloc-Infinite-Core',
-	#package : 'Bloc-Infinite',
-	#tag : 'Core'
+	#category : #'Bloc-Infinite-Core'
 }
 
-{ #category : 'constraints' }
+{ #category : #constraints }
 BlInfiniteLayout class >> constraints [
 	^ BlInfiniteLayoutConstraints new
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> addChild: anElement [
 	"Add an element to the currently attached infinite element if needed.
 	Infinite Layouts should use me to add elements obtained from a Recycler using Recycler>>#elementFor:"
@@ -53,14 +51,14 @@ BlInfiniteLayout >> addChild: anElement [
 	self addChild: anElement at: 0
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> addChild: anElement at: anIndex [
 	"If anIndex == 0 child will be added at the end"
 
 	self addChild: anElement at: anIndex disappearing: false
 ]
 
-{ #category : 'private - children' }
+{ #category : #'private - children' }
 BlInfiniteLayout >> addChild: anElement at: anIndex disappearing: isDisappearing [
 
 	"If anIndex == 0 child will be attached at the end"
@@ -98,7 +96,7 @@ BlInfiniteLayout >> addChild: anElement at: anIndex disappearing: isDisappearing
 		anInfiniteConstraints pendingInvalidate: false ]
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> addDisappearingChild: anElement [
 	"To be used only during #layoutChildren to add an element to the layout that is known to be going away,
 	either because it has been removed or because it is actually not in the visible portion of the container
@@ -107,7 +105,7 @@ BlInfiniteLayout >> addDisappearingChild: anElement [
 	self addDisappearingChild: anElement at: 0
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> addDisappearingChild: anElement at: anIndex [
 	"If anIndex == 0 child will be added at the end
 	@see #addDisappearingChild:"
@@ -115,12 +113,12 @@ BlInfiniteLayout >> addDisappearingChild: anElement at: anIndex [
 	self addChild: anElement at: anIndex disappearing: true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLayout >> announcer [
 	^ announcer ifNil: [ announcer := Announcer new ]
 ]
 
-{ #category : 'private - assertions' }
+{ #category : #'private - assertions' }
 BlInfiniteLayout >> assertNotInLayoutOrScroll [
 
 	"During layout initialization infinite element may still be not set"
@@ -128,20 +126,20 @@ BlInfiniteLayout >> assertNotInLayoutOrScroll [
 		anElement assertNotInLayoutOrScroll ]
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> attachChild: anElement [
 	"Reattach a previously detached child element at the end of the list"
 	self attachChild: anElement at: 0 in: infiniteElement 
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> attachChild: anElement at: anIndex [
 	"Reattach a previously detached child element.
 	If anIndex == 0 child will be attached at the end"
 	infiniteElement childrenManager attachChild: anElement at: anIndex in: infiniteElement
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> baseline [
 	"Returns offset of the Infinite elements's text baseline from the its top boundary.
 	Returns -1 if there is no baseline."
@@ -150,7 +148,7 @@ BlInfiniteLayout >> baseline [
 	^ -1
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteLayout >> bottomDecorationHeight: anElement [
 	"Returns the total width of item decorations applied to child's bottom"
 	<return: #Number>
@@ -160,7 +158,7 @@ BlInfiniteLayout >> bottomDecorationHeight: anElement [
 	^ anInsets bottom
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteLayout >> boundsInParent: anElement includeDecoration: shouldIncludeDecoration [
 	"Calculate the bounding box of the Element while taking into account its matrix changes
 	(translation, scale etc) with respect to the InfiniteElement.
@@ -176,7 +174,7 @@ BlInfiniteLayout >> boundsInParent: anElement includeDecoration: shouldIncludeDe
 	^ (anElement localBoundsToParent: (BlBounds fromRectangle: aLocalBounds)) asRectangle
 ]
 
-{ #category : 'measurement - computation' }
+{ #category : #'measurement - computation' }
 BlInfiniteLayout >> calculateChildMeasureSpec: aParentSize parentSpec: aParentSpec padding: aPadding childResizer: aChildResizer canScroll: canScroll [
 	"Calculate a MeasurementSpec for measuring a child element in one dimension"
 	<return: #BlMeasurementSpec>
@@ -213,7 +211,7 @@ BlInfiniteLayout >> calculateChildMeasureSpec: aParentSize parentSpec: aParentSp
 	^ BlMeasurementSpec unspecified
 ]
 
-{ #category : 'private - measurement' }
+{ #category : #'private - measurement' }
 BlInfiniteLayout >> calculateSize: aMeasurementSpec desired: aDesiredSize min: aMinSize [
 	"Answer the size from the given measurement specs and parameters that
 	is closer to the desired size and also complies with the spec.
@@ -229,14 +227,14 @@ BlInfiniteLayout >> calculateSize: aMeasurementSpec desired: aDesiredSize min: a
 	^ aDesiredSize max: aMinSize
 ]
 
-{ #category : 'scrolling - testing' }
+{ #category : #'scrolling - testing' }
 BlInfiniteLayout >> canScrollHorizontally [
 	"Return true if I can scroll the current contents horizontally, false otherwise"
 
 	^ false
 ]
 
-{ #category : 'scrolling - testing' }
+{ #category : #'scrolling - testing' }
 BlInfiniteLayout >> canScrollVertically [
 	"Return true if I can scroll the current contents vertically, false otherwise"
 	<return: #Boolean>
@@ -244,7 +242,7 @@ BlInfiniteLayout >> canScrollVertically [
 	^ false
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlInfiniteLayout >> childAt: anIndex [
 	"Return a child element at the given index"
 	<return: #BlElement>
@@ -252,7 +250,7 @@ BlInfiniteLayout >> childAt: anIndex [
 	^ infiniteElement childAt: anIndex
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlInfiniteLayout >> childAtPosition: aPosition [
 	"Finds the element which represents the given datasource position.
 	I traverse each child since I have no information about child order.
@@ -272,7 +270,7 @@ BlInfiniteLayout >> childAtPosition: aPosition [
 	^ nil
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlInfiniteLayout >> childContainingItemElement: anElement [
 	"Traverses the ancestors of the given element and returns the item view that contains it and
 	also my direct child. Returned element can be used to get the ElementHolder by sending #childHolderOf:
@@ -283,7 +281,7 @@ BlInfiniteLayout >> childContainingItemElement: anElement [
 	^ infiniteElement childContainingItemElement: anElement
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlInfiniteLayout >> childPositionOf: anElement [
 	"Returns the datasource position of the item represented by the given Element.
 	This does not contain any datasource changes that might have happened after the last layout"
@@ -291,7 +289,7 @@ BlInfiniteLayout >> childPositionOf: anElement [
 	^ anElement constraints infinite elementLayoutPosition
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlInfiniteLayout >> childrenCount [
 	"Return the current number of child elements attached to the parent infinite element.
 	This does not include children that were temporarily detached and/or scrapped."
@@ -299,14 +297,14 @@ BlInfiniteLayout >> childrenCount [
 	^ infiniteElement childrenCount
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlInfiniteLayout >> childrenDo: aBlock [
 
 	1 to: self childrenCount do: [ :anIndex |
 		aBlock cull: (self childAt: anIndex) cull: anIndex ]
 ]
 
-{ #category : 'scrolling - thumb' }
+{ #category : #'scrolling - thumb' }
 BlInfiniteLayout >> computeHorizontalScrollExtent [
 	"Compute and return the horizontal extent of the scrollbar's thumb.
 	Override me if you want to support scroll bars."
@@ -315,17 +313,17 @@ BlInfiniteLayout >> computeHorizontalScrollExtent [
 	^ 0
 ]
 
-{ #category : 'scrolling - thumb' }
+{ #category : #'scrolling - thumb' }
 BlInfiniteLayout >> computeHorizontalScrollOffset [
 	^ 0
 ]
 
-{ #category : 'scrolling - thumb' }
+{ #category : #'scrolling - thumb' }
 BlInfiniteLayout >> computeHorizontalScrollRange [
 	^ 0
 ]
 
-{ #category : 'scrolling - thumb' }
+{ #category : #'scrolling - thumb' }
 BlInfiniteLayout >> computeVerticalScrollExtent [
 	"Compute and return the vertical extent of the scrollbar's thumb.
 	Override me if you want to support scroll bars."
@@ -334,23 +332,23 @@ BlInfiniteLayout >> computeVerticalScrollExtent [
 	^ 0
 ]
 
-{ #category : 'scrolling - thumb' }
+{ #category : #'scrolling - thumb' }
 BlInfiniteLayout >> computeVerticalScrollOffset [
 
 	^ 0
 ]
 
-{ #category : 'scrolling - thumb' }
+{ #category : #'scrolling - thumb' }
 BlInfiniteLayout >> computeVerticalScrollRange [
 	^ 0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLayout >> dataSource [
 	^ infiniteElement dataSource
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteLayout >> decoratedBottom: anElement [
 	"Returns the bottom edge of the given child element within its parent, offset by any applied ItemDecoration"
 	<return: #Number>
@@ -358,7 +356,7 @@ BlInfiniteLayout >> decoratedBottom: anElement [
 	^ anElement bounds inParent bottom + (self bottomDecorationHeight: anElement)
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteLayout >> decoratedBoundsWithMargins: anElement [
 	"Returns the bounds of the child element including its decoration and margins"
 	<return: #Rectangle>
@@ -366,7 +364,7 @@ BlInfiniteLayout >> decoratedBoundsWithMargins: anElement [
 	^ infiniteElement decoratedBoundsWithMargins: anElement
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteLayout >> decoratedLeft: anElement [
 	"Returns the left edge of the given child element within its parent, offset by any applied ItemDecoration"
 	<return: #Number>
@@ -374,7 +372,7 @@ BlInfiniteLayout >> decoratedLeft: anElement [
 	^ anElement bounds inParent left - (self leftDecorationWidth: anElement)
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteLayout >> decoratedMeasuredHeight: anElement [
 	"Return the measured height of the given child, plus the additional size of any insets applied by ItemDecoration"
 	<return: #Number>
@@ -384,7 +382,7 @@ BlInfiniteLayout >> decoratedMeasuredHeight: anElement [
 	^ anElement measuredHeight + anInsets height
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteLayout >> decoratedMeasuredWidth: anElement [
 	"Return the measured width of the given child, plus the additional size of any insets applied by ItemDecoration"
 	<return: #Number>
@@ -394,7 +392,7 @@ BlInfiniteLayout >> decoratedMeasuredWidth: anElement [
 	^ anElement measuredWidth + anInsets width
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteLayout >> decoratedRight: anElement [
 	"Returns the right edge of the given child element within its parent, offset by any applied ItemDecoration"
 	<return: #Number>
@@ -402,7 +400,7 @@ BlInfiniteLayout >> decoratedRight: anElement [
 	^ anElement bounds inParent right + (self rightDecorationWidth: anElement)
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteLayout >> decoratedTop: anElement [
 	"Returns the top edge of the given child element within its parent, offset by any applied ItemDecoration"
 	<return: #Number>
@@ -410,12 +408,12 @@ BlInfiniteLayout >> decoratedTop: anElement [
 	^ anElement bounds inParent top - (self topDecorationHeight: anElement)
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLayout >> defaultAutoMeasure [
 	^ false
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlInfiniteLayout >> defaultMeasure: anElement with: anExtentSpec [
 	| aWidth aHeight |
 
@@ -436,7 +434,7 @@ BlInfiniteLayout >> defaultMeasure: anElement with: anExtentSpec [
 	anElement measuredExtent: aWidth @ aHeight
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> detachAndScrapAttachedChildren [
 	"Temporarily detach and scrap all currently attached child element.
 	Elements will be scrapped into the InfiniteRecycler.
@@ -446,21 +444,21 @@ BlInfiniteLayout >> detachAndScrapAttachedChildren [
 		self scrapOrRecycleChild: anElement at: anIndex ]
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> detachChild: anElement [
 	"Temporarily detach a child element"
 
 	self detachChildAt: (infiniteElement childIndexOf: anElement)
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> detachChildAt: anIndex [
 	"Temporarily detach a child element at the index"
 
 	infiniteElement childrenManager detachChildAt: anIndex in: infiniteElement
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlInfiniteLayout >> elementHolderOf: anElement [
 	"Return an element holder assigned to aChildElement.
 	Element holder can not be nil"
@@ -469,12 +467,12 @@ BlInfiniteLayout >> elementHolderOf: anElement [
 	^ infiniteElement elementHolderOf: anElement
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLayout >> exactMeasurementSpecFrom: anInfiniteElement [
 	self measurementSpec: (BlExtentMeasurementSpec exact: anInfiniteElement extent)
 ]
 
-{ #category : 'focus' }
+{ #category : #focus }
 BlInfiniteLayout >> focusedChild [
 	"Return direct child of infinite element which has focus or contains the focused child"
 	<return: #BlElement or: nil>
@@ -482,7 +480,7 @@ BlInfiniteLayout >> focusedChild [
 	^ infiniteElement focusedChild
 ]
 
-{ #category : 'children - testing' }
+{ #category : #'children - testing' }
 BlInfiniteLayout >> hasChildren [
 	"Return true if there are children attached to the parent infinite element"
 	<return: #Boolean>
@@ -490,7 +488,7 @@ BlInfiniteLayout >> hasChildren [
 	^ self childrenCount > 0
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteLayout >> hasFlexibleChildInBothOrientations [
 	"Return true if there are children with non-exact resizer"
 	<return: #Boolean>
@@ -502,14 +500,14 @@ BlInfiniteLayout >> hasFlexibleChildInBothOrientations [
 	^ false
 ]
 
-{ #category : 'focus' }
+{ #category : #focus }
 BlInfiniteLayout >> hasFocus [
 	"Return true if the infinite element I am bound to has or contains focus"
 	
 	^ infiniteElement hasFocus
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> height [
 	"Returns the height that is currently relevant to the layout.
 
@@ -523,7 +521,7 @@ BlInfiniteLayout >> height [
 	^ height
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> heightSpec [
 	"Return the height measurement spec of the infinite element"
 	<return: #BlMeasurementSpec>
@@ -531,7 +529,7 @@ BlInfiniteLayout >> heightSpec [
 	^ heightSpec
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLayout >> infiniteElement: anInfiniteElement [
 	"Attach infinite layout to its element.
 	It is only possible to attach infinite element once!
@@ -547,11 +545,11 @@ BlInfiniteLayout >> infiniteElement: anInfiniteElement [
 	heightSpec := BlMeasurementSpec exact: height
 ]
 
-{ #category : 'private - children' }
+{ #category : #'private - children' }
 BlInfiniteLayout >> infoRemoveHolder: anElementHolder [
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLayout >> initialize [
 
 	super initialize.
@@ -577,21 +575,21 @@ BlInfiniteLayout >> initialize [
 	smoothScroller := nil "when not running smoothScroller is nil"
 ]
 
-{ #category : 'focus' }
+{ #category : #focus }
 BlInfiniteLayout >> isFocused [
 	"Return true if the infinit element I am bound to has focus"
 	
 	^ infiniteElement isFocused
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteLayout >> isItemPrefetchEnabled [
 	<return: #Boolean>
 
 	^ itemPrefetchEnabled
 ]
 
-{ #category : 'measurement - testing' }
+{ #category : #'measurement - testing' }
 BlInfiniteLayout >> isMeasurementUpToDate: aMeasuredSize spec: aMeasurementSpec resizer: aResizer [
 	"Return true if measured child's size is up-to-date with measured specification and dimension"
 
@@ -610,7 +608,7 @@ BlInfiniteLayout >> isMeasurementUpToDate: aMeasuredSize spec: aMeasurementSpec 
 	^ false
 ]
 
-{ #category : 'scrolling - testing' }
+{ #category : #'scrolling - testing' }
 BlInfiniteLayout >> isSmoothScrolling [
 	"Return true if InfiniteElement is currently in the state of smooth scrolling,
 	false otherwise"
@@ -619,7 +617,7 @@ BlInfiniteLayout >> isSmoothScrolling [
 	^ smoothScroller isNotNil and: [ smoothScroller isRunning ]
 ]
 
-{ #category : 'items' }
+{ #category : #items }
 BlInfiniteLayout >> itemCount [
 	"Returns the number of items in the datasource bound to the parent infinite element.
 	Note that this number is not necessarily equal to BlInfiniteState>>#itemCount.
@@ -629,7 +627,7 @@ BlInfiniteLayout >> itemCount [
 	^ self dataSource itemCount
 ]
 
-{ #category : 'api - layout' }
+{ #category : #'api - layout' }
 BlInfiniteLayout >> layoutChildrenIn: aBlInfiniteRecycler state: aBlInfiniteState [
 	"Lay out all relevant child elements from the given datasource.
 	aBlInfiniteRecycler - a Recycler to use for fetching potentially cached item element for a position.
@@ -639,11 +637,11 @@ BlInfiniteLayout >> layoutChildrenIn: aBlInfiniteRecycler state: aBlInfiniteStat
 	self subclassResponsibility
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlInfiniteLayout >> layoutCompleted [
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlInfiniteLayout >> layoutDecoratedWithMargins: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	"Lay out the given child view within the infinite element using coordinates that
 	include any current ItemDecoration and take child margins into account.
@@ -657,7 +655,7 @@ BlInfiniteLayout >> layoutDecoratedWithMargins: anElement in: aRectangle context
 	anElement applyLayoutIn: (aMargin inset: (anInsets inset: aRectangle)) context: aBlElementBoundsUpdateContext
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteLayout >> leftDecorationWidth: anElement [
 	"Returns the total width of item decorations applied to child's left"
 	<return: #Number>
@@ -667,7 +665,7 @@ BlInfiniteLayout >> leftDecorationWidth: anElement [
 	^ anInsets left
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> maximumHeight [
 	"Return a maximum height of an infinite element"
 	<return: #Number>
@@ -675,7 +673,7 @@ BlInfiniteLayout >> maximumHeight [
 	^ infiniteElement constraints maxHeight
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> maximumWidth [
 	"Return a maximum width of an infinite element"
 	<return: #Number>
@@ -683,14 +681,14 @@ BlInfiniteLayout >> maximumWidth [
 	^ infiniteElement constraints maxWidth
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlInfiniteLayout >> measure: anElement with: anExtentSpec [
 	"Override me to customise!"
 	
 	self defaultMeasure: anElement with: anExtentSpec
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlInfiniteLayout >> measureBasedOnChildren: anExtentSpec [
 	"Measures infinite element based on children' bounding box.
 	Custom infinite layouts may want to override me to handle
@@ -719,7 +717,7 @@ BlInfiniteLayout >> measureBasedOnChildren: anExtentSpec [
 		with: anExtentSpec
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlInfiniteLayout >> measureChild: anElement widthUsed: aWidthUsed heightUsed: aHeightUsed [
 	"Measure a child element using standard measurement policy, taking the padding
 	of the parent InfiniteElement and any added item decorations into account.
@@ -751,7 +749,7 @@ BlInfiniteLayout >> measureChild: anElement widthUsed: aWidthUsed heightUsed: aH
 		ifTrue: [ anElement measure: anExtentSpec ]
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlInfiniteLayout >> measureChildWithMargins: anElement widthUsed: aWidthUsed heightUsed: aHeightUsed [
 	"Measure a child element using standard measurement policy, taking the padding
 	of the parent InfiniteElement, any added item decorations and the child margins
@@ -786,7 +784,7 @@ BlInfiniteLayout >> measureChildWithMargins: anElement widthUsed: aWidthUsed hei
 		ifTrue: [ anElement measure: anExtentSpec ]
 ]
 
-{ #category : 'measurement' }
+{ #category : #measurement }
 BlInfiniteLayout >> measuredBoundingBox: aChildrenBounds with: anExtentSpec [
 	"Sets the measured extent from the given bounding box of the children and the measurement specs"
 	| usedWidth usedHeight aMeasuredWidth aMeasuredHeight |
@@ -803,7 +801,7 @@ BlInfiniteLayout >> measuredBoundingBox: aChildrenBounds with: anExtentSpec [
 	infiniteElement measuredExtent: aMeasuredWidth @ aMeasuredHeight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLayout >> measurementCacheEnabled [
 	"Return true if measurement cache enabled, false otherwise"
 	<return: #Boolean>
@@ -811,14 +809,14 @@ BlInfiniteLayout >> measurementCacheEnabled [
 	^ measurementCacheEnabled
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLayout >> measurementCacheEnabled: aBoolean [
 	"Set if measurement cache is enabled"
 
 	measurementCacheEnabled := aBoolean
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlInfiniteLayout >> measurementSpec: anExtentMeasurementSpec [
 	"Update measurement specifications. I am sent from onMeasure: by infinite element.
 	anExtentMeasurementSpec must not be nil"
@@ -842,7 +840,7 @@ BlInfiniteLayout >> measurementSpec: anExtentMeasurementSpec [
 	height := height min: self maximumHeight
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> minimumHeight [
 	"Return a minimum height of an infinite element"
 	<return: #Number>
@@ -850,7 +848,7 @@ BlInfiniteLayout >> minimumHeight [
 	^ infiniteElement constraints minHeight
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> minimumWidth [
 	"Return a minimum width of an infinite element"
 	<return: #Number>
@@ -858,7 +856,7 @@ BlInfiniteLayout >> minimumWidth [
 	^ infiniteElement constraints minWidth
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> moveChildFrom: aFromIndex to: aToIndex [
 	"Moves a child element from one position to another"
 	| anElement |
@@ -872,49 +870,49 @@ BlInfiniteLayout >> moveChildFrom: aFromIndex to: aToIndex [
 	self attachChild: anElement at: aToIndex
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> offsetChildrenHorizontallyBy: aNumber [
 	"Offset all child elements attached to the parent infinite element by aNumber along the horizontal axis"
 
 	infiniteElement offsetChildrenHorizontallyBy: aNumber
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> offsetChildrenVerticallyBy: aNumber [
 	"Offset all child elements attached to the parent infinite element by aNumber along the vertical axis"
 
 	infiniteElement offsetChildrenVerticallyBy: aNumber
 ]
 
-{ #category : 'items - hooks' }
+{ #category : #'items - hooks' }
 BlInfiniteLayout >> onItemsAddedAt: positionStart count: itemCount [
 ]
 
-{ #category : 'items - hooks' }
+{ #category : #'items - hooks' }
 BlInfiniteLayout >> onItemsChanged [
 ]
 
-{ #category : 'items - hooks' }
+{ #category : #'items - hooks' }
 BlInfiniteLayout >> onItemsMovedFrom: fromPosition to: toPosition itemCount: count [
 	"Sent when an item is moved withing the datasource.
 	Note that, an item may also change position in response to another ADD/REMOVE/MOVE operation.
 	I am only sent if and only if BlInfiniteDataSource>>#notifyItemMoved is sent"
 ]
 
-{ #category : 'items - hooks' }
+{ #category : #'items - hooks' }
 BlInfiniteLayout >> onItemsRemovedAt: positionStart count: itemCount [
 ]
 
-{ #category : 'items - hooks' }
+{ #category : #'items - hooks' }
 BlInfiniteLayout >> onItemsUpdatedAt: positionStart count: itemCount [
 ]
 
-{ #category : 'scrolling - hooks' }
+{ #category : #'scrolling - hooks' }
 BlInfiniteLayout >> onScrollStateChanged: aScrollState [
 	"InfiniteElement sends me to notify InfiniteElement that scroll state has changed"
 ]
 
-{ #category : 'scrolling - hooks' }
+{ #category : #'scrolling - hooks' }
 BlInfiniteLayout >> onSmoothScrollerStopped: aSmoothScroller [
 	"Is sent when smooth scroller stop scrolling"
 
@@ -922,14 +920,14 @@ BlInfiniteLayout >> onSmoothScrollerStopped: aSmoothScroller [
 		ifTrue: [ smoothScroller := nil ]
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> paddingBottom [
 	"Return the bottom padding of an infinite element."
 	
 	^ infiniteElement constraints padding bottom
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> paddingEnd [
 	"Returns the end padding of infinite element depending on layout direction."
 	<return: #Number>
@@ -939,7 +937,7 @@ BlInfiniteLayout >> paddingEnd [
 		ifFalse: [ infiniteElement constraints padding left ]
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> paddingLeft [
 	"Return left padding of an infinite element"
 	<return: #Number>
@@ -947,7 +945,7 @@ BlInfiniteLayout >> paddingLeft [
 	^ infiniteElement constraints padding left
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> paddingRight [
 	"Return right padding of an infinite element"
 	<return: #Number>
@@ -955,7 +953,7 @@ BlInfiniteLayout >> paddingRight [
 	^ infiniteElement constraints padding right
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> paddingStart [
 	"Returns the start padding of infinite element depending on layout direction."
 	<return: #Number>
@@ -965,19 +963,19 @@ BlInfiniteLayout >> paddingStart [
 		ifFalse: [ infiniteElement constraints padding right ]
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> paddingTop [
 	"Return top padding (a number) of an infinite element"
 
 	^ infiniteElement constraints padding top
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLayout >> recycler [
 	^ infiniteElement recycler
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> removeAllChildren [
 	"Remove all elements from the currently attached infinite element.
 	This will not recycle any of the affected element; the InfiniteLayout is responsible for doing so if desired."
@@ -987,7 +985,7 @@ BlInfiniteLayout >> removeAllChildren [
 		infiniteElement childrenManager removeChildAt: anIndex in: infiniteElement ]
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> removeAndRecycleAllChildrenIn: aBlInfiniteRecycler [
 	"Remove all elements and recycle them using the given infinite recycler.
 	If you want to clean cached elements as well, you should sent #BlInfiniteRecycler>>#clear too.
@@ -998,7 +996,7 @@ BlInfiniteLayout >> removeAndRecycleAllChildrenIn: aBlInfiniteRecycler [
 			ifFalse: [ self removeAndRecycleChildAt: anIndex ] ]
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> removeAndRecycleChild: anElement [
 	"Remove a child element and recycle it using BlInfiniteRecycler."
 
@@ -1006,7 +1004,7 @@ BlInfiniteLayout >> removeAndRecycleChild: anElement [
 	self recycler recycleElement: anElement in: infiniteElement 
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> removeAndRecycleChildAt: anIndex [
 	"Remove a child element at anIndex and recycle it using BlInfiniteRecycler."
 	| anElement |
@@ -1016,7 +1014,7 @@ BlInfiniteLayout >> removeAndRecycleChildAt: anIndex [
 	self recycler recycleElement: anElement in: infiniteElement 
 ]
 
-{ #category : 'private - recycling' }
+{ #category : #'private - recycling' }
 BlInfiniteLayout >> removeAndRecycleScrap [
 	| aScrapCount |
 	
@@ -1046,7 +1044,7 @@ BlInfiniteLayout >> removeAndRecycleScrap [
 			infiniteElement invalidate ]
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> removeChild: anElement [
 	"Remove an element from the currently attached infinite element if needed.
 	InfiniteLayouts should use this method to completely remove a child view that is no longer needed.
@@ -1055,7 +1053,7 @@ BlInfiniteLayout >> removeChild: anElement [
 	infiniteElement childrenManager removeChild: anElement in: infiniteElement
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> removeChildAt: anIndex [
 	"Remove an element at the index from the currently attached infinite element if needed.
 	InfiniteLayouts should use this method to completely remove a child view that is no longer needed.
@@ -1065,21 +1063,21 @@ BlInfiniteLayout >> removeChildAt: anIndex [
 		ifNotNil: [ infiniteElement childrenManager removeChildAt: anIndex in: infiniteElement ]
 ]
 
-{ #category : 'children - add/remove' }
+{ #category : #'children - add/remove' }
 BlInfiniteLayout >> removeDetachedChild: anElement [
 	"Finish removing a child element that was previously temporarily detached"
 
 	infiniteElement removeDetachedChild: anElement
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlInfiniteLayout >> requestLayout [
 	"During layout initialization infinite element may still be not set"
 	infiniteElement
 		ifNotNil: [ :anElement | anElement requestLayout ]
 ]
 
-{ #category : 'children - accessing' }
+{ #category : #'children - accessing' }
 BlInfiniteLayout >> reverseChildrenDo: aBlock [
 
 	self childrenCount isZero
@@ -1089,7 +1087,7 @@ BlInfiniteLayout >> reverseChildrenDo: aBlock [
 		aBlock cull: (self childAt: anIndex) cull: anIndex ]
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteLayout >> rightDecorationWidth: anElement [
 	"Returns the total width of item decorations applied to child's right"
 	<return: #Number>
@@ -1099,7 +1097,7 @@ BlInfiniteLayout >> rightDecorationWidth: anElement [
 	^ anInsets right
 ]
 
-{ #category : 'private - children' }
+{ #category : #'private - children' }
 BlInfiniteLayout >> scrapOrRecycleChild: anElement at: anIndex [
 	| anElementHolder |
 	
@@ -1117,7 +1115,7 @@ BlInfiniteLayout >> scrapOrRecycleChild: anElement at: anIndex [
 			self recycler scrapElement: anElement in: infiniteElement ]
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 BlInfiniteLayout >> scrollHorizontallyBy: aNumber [
 	"Scroll horizontally by aNumber and return the distance traveled.
 	The default implementation does nothing and returns 0."
@@ -1126,7 +1124,7 @@ BlInfiniteLayout >> scrollHorizontallyBy: aNumber [
 	^ 0
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 BlInfiniteLayout >> scrollToPosition: aPositionInDataSource [
 	"Scroll to the specified data source position.
 	Actual position of the item on the screen depends on layout implementation"
@@ -1134,7 +1132,7 @@ BlInfiniteLayout >> scrollToPosition: aPositionInDataSource [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 BlInfiniteLayout >> scrollToPosition: aPositionInDataSource offset: anOffset [
 	"Scroll the InfiniteELement to make the datasource position visible with the given offset from resolved layout start.
 	For example, if layout is ===vertical=== and ===stackFromEnd=== is true,
@@ -1145,7 +1143,7 @@ BlInfiniteLayout >> scrollToPosition: aPositionInDataSource offset: anOffset [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 BlInfiniteLayout >> scrollVerticallyBy: aNumber [
 	"Scroll vertically by aNumber and return the distance traveled.
 	The default implementation does nothing and returns 0."
@@ -1153,13 +1151,13 @@ BlInfiniteLayout >> scrollVerticallyBy: aNumber [
 	^ 0
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteLayout >> shouldAutoMeasure [
 
 	^ autoMeasure
 ]
 
-{ #category : 'measurement - testing' }
+{ #category : #'measurement - testing' }
 BlInfiniteLayout >> shouldMeasureChild: anElement spec: anExtentSpec [
 	"Return true of a child element should be measured, false otherwise"
 	<return: #Boolean>
@@ -1168,7 +1166,7 @@ BlInfiniteLayout >> shouldMeasureChild: anElement spec: anExtentSpec [
 		self shouldReMeasureChild: anElement spec: anExtentSpec ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteLayout >> shouldMeasureTwice [
 	"Internal API to allow InfiniteElement to be measured twice in order to support
 	fit content in both horizontal and vertical directions"
@@ -1177,7 +1175,7 @@ BlInfiniteLayout >> shouldMeasureTwice [
 	^ false
 ]
 
-{ #category : 'measurement - testing' }
+{ #category : #'measurement - testing' }
 BlInfiniteLayout >> shouldReMeasureChild: anElement spec: anExtentSpec [
 	"Return true of a child element should be re-measured, false otherwise.
 	If measurement cache is enabled we check if child's measured dimensions
@@ -1195,7 +1193,7 @@ BlInfiniteLayout >> shouldReMeasureChild: anElement spec: anExtentSpec [
 						resizer: anElement constraints vertical resizer ] ]) not
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 BlInfiniteLayout >> smoothScrollToPosition: aPosition [
 	"Smooth scroll to the specified datasource position.
 	To support smooth scrolling, override me, create your SmoothScroller instance
@@ -1204,7 +1202,7 @@ BlInfiniteLayout >> smoothScrollToPosition: aPosition [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLayout >> smoothScroller [
 	"Return currently used smooth scroller or nil if I am not in a smooth scrolling state"
 	<return: #BlInfiniteSmoothScroller>
@@ -1212,7 +1210,7 @@ BlInfiniteLayout >> smoothScroller [
 	^ smoothScroller
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 BlInfiniteLayout >> startSmoothScroll: aSmoothScroller [
 	"Starts a smooth scroll using the provided SmoothScroller.
 	Calling me will cancel any previous smooth scroll request"
@@ -1226,12 +1224,12 @@ BlInfiniteLayout >> startSmoothScroll: aSmoothScroller [
 	smoothScroller startOn: infiniteElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlInfiniteLayout >> state [
 	^ infiniteElement state
 ]
 
-{ #category : 'children - state' }
+{ #category : #'children - state' }
 BlInfiniteLayout >> stopIgnoringChild: anElement [
 	"Element can be scrapped and recycled again.
 	Note that I remove all information in the element holder"
@@ -1243,21 +1241,21 @@ BlInfiniteLayout >> stopIgnoringChild: anElement [
 	anElementHolder flags addInvalid
 ]
 
-{ #category : 'scrolling' }
+{ #category : #scrolling }
 BlInfiniteLayout >> stopSmoothScroller [
 	"Ask current smooth scroller to stop scrolling"
 
 	smoothScroller ifNotNil: [ :aScroller | aScroller stop ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlInfiniteLayout >> supportsPredictiveItemAnimations [
 	<return: #Boolean>
 
 	^ false
 ]
 
-{ #category : 'children - geometry' }
+{ #category : #'children - geometry' }
 BlInfiniteLayout >> topDecorationHeight: anElement [
 	"Returns the total width of item decorations applied to child's top"
 	<return: #Number>
@@ -1267,23 +1265,23 @@ BlInfiniteLayout >> topDecorationHeight: anElement [
 	^ anInsets top
 ]
 
-{ #category : 'event management' }
+{ #category : #'event management' }
 BlInfiniteLayout >> unsubscribe: anObject [
 	"Unsubscribe all subscriptions of anObject from the receiver"
 	self announcer unsubscribe: anObject
 ]
 
-{ #category : 'event management' }
+{ #category : #'event management' }
 BlInfiniteLayout >> when: anAnnouncementClass do: aValuable [
 	self announcer when: anAnnouncementClass do: aValuable
 ]
 
-{ #category : 'event management' }
+{ #category : #'event management' }
 BlInfiniteLayout >> when: anAnnouncementClass send: aSelector to: anObject [
 	self announcer weak when: anAnnouncementClass send: aSelector to: anObject
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> width [
 	"Returns the width that is currently relevant to the layout.
 
@@ -1297,7 +1295,7 @@ BlInfiniteLayout >> width [
 	^ width
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlInfiniteLayout >> widthSpec [
 	"Return the width measurement spec of the infinite element"
 	<return: #BlMeasurementSpec>

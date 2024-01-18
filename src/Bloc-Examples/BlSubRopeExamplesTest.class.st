@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlSubRopeExamplesTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Examples-Rope',
-	#package : 'Bloc-Examples',
-	#tag : 'Rope'
+	#name : #BlSubRopeExamplesTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Examples-Rope'
 }
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testAttributes_empty_0_to_0 [
 
 	<sampleInstance>
@@ -21,7 +19,7 @@ BlSubRopeExamplesTest >> testAttributes_empty_0_to_0 [
 	^ anAttributedRope
 ]
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testAttributes_small_0_to_0 [
 
 	<sampleInstance>
@@ -37,7 +35,7 @@ BlSubRopeExamplesTest >> testAttributes_small_0_to_0 [
 	^ anAttributedRope
 ]
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testAttributes_small_0_to_1 [
 
 	<sampleInstance>
@@ -59,7 +57,7 @@ BlSubRopeExamplesTest >> testAttributes_small_0_to_1 [
 	^ anAttributedRope
 ]
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testAttributes_small_0_to_5 [
 
 	<sampleInstance>
@@ -73,7 +71,7 @@ BlSubRopeExamplesTest >> testAttributes_small_0_to_5 [
 	^ anAttributedRope
 ]
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testAttributes_small_2_to_2 [
 
 	<sampleInstance>
@@ -96,7 +94,7 @@ BlSubRopeExamplesTest >> testAttributes_small_2_to_2 [
 	^ anAttributedRope
 ]
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testAttributes_small_4_to_5 [
 
 	<sampleInstance>
@@ -116,7 +114,7 @@ BlSubRopeExamplesTest >> testAttributes_small_4_to_5 [
 	^ anAttributedRope
 ]
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testAttributes_small_5_to_5 [
 
 	<sampleInstance>
@@ -132,7 +130,7 @@ BlSubRopeExamplesTest >> testAttributes_small_5_to_5 [
 	^ anAttributedRope
 ]
 
-{ #category : 'examples - attributes' }
+{ #category : #'examples - attributes' }
 BlSubRopeExamplesTest >> testClear_attributes_empty_0_to_0 [
 
 	<sampleInstance>
@@ -146,7 +144,7 @@ BlSubRopeExamplesTest >> testClear_attributes_empty_0_to_0 [
 	^ aRopeWithoutAttributes
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlSubRopeExamplesTest >> testReadStreamSmall [
 
 	| rope stream |
@@ -158,7 +156,7 @@ BlSubRopeExamplesTest >> testReadStreamSmall [
 	self assert: stream upToEnd asString equals: 'o'
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSubRopeExamplesTest >> testSmall [
 	"Creates an instance of the rope of size smaller than combineLength with one attribute applied on the whole rope"
 
@@ -179,7 +177,7 @@ BlSubRopeExamplesTest >> testSmall [
 	^ aRope
 ]
 
-{ #category : 'examples - accessing' }
+{ #category : #'examples - accessing' }
 BlSubRopeExamplesTest >> testSmall_at_each [
 
 	<sampleInstance>
@@ -195,7 +193,7 @@ BlSubRopeExamplesTest >> testSmall_at_each [
 	^ aRope
 ]
 
-{ #category : 'examples - accessing' }
+{ #category : #'examples - accessing' }
 BlSubRopeExamplesTest >> testSmall_children [
 
 	<sampleInstance>
@@ -207,7 +205,7 @@ BlSubRopeExamplesTest >> testSmall_children [
 	^ aRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_0_to_0 [
 
 	<sampleInstance>
@@ -220,7 +218,7 @@ BlSubRopeExamplesTest >> testSmall_delete_0_to_0 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_0_to_1 [
 
 	<sampleInstance>
@@ -234,7 +232,7 @@ BlSubRopeExamplesTest >> testSmall_delete_0_to_1 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_0_to_5 [
 
 	<sampleInstance>
@@ -248,7 +246,7 @@ BlSubRopeExamplesTest >> testSmall_delete_0_to_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_1_to_1 [
 
 	<sampleInstance>
@@ -261,7 +259,7 @@ BlSubRopeExamplesTest >> testSmall_delete_1_to_1 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_1_to_3 [
 
 	<sampleInstance>
@@ -275,7 +273,7 @@ BlSubRopeExamplesTest >> testSmall_delete_1_to_3 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_1_to_5 [
 
 	<sampleInstance>
@@ -289,7 +287,7 @@ BlSubRopeExamplesTest >> testSmall_delete_1_to_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_4_to_5 [
 
 	<sampleInstance>
@@ -303,7 +301,7 @@ BlSubRopeExamplesTest >> testSmall_delete_4_to_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - deletion' }
+{ #category : #'examples - deletion' }
 BlSubRopeExamplesTest >> testSmall_delete_5_to_5 [
 
 	<sampleInstance>
@@ -316,7 +314,7 @@ BlSubRopeExamplesTest >> testSmall_delete_5_to_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - accessing' }
+{ #category : #'examples - accessing' }
 BlSubRopeExamplesTest >> testSmall_depth [
 
 	<sampleInstance>
@@ -328,7 +326,7 @@ BlSubRopeExamplesTest >> testSmall_depth [
 	^ aRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_do [
 
 	<sampleInstance>
@@ -343,7 +341,7 @@ BlSubRopeExamplesTest >> testSmall_do [
 	^ theIterated
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlSubRopeExamplesTest >> testSmall_empty [
 
 	<sampleInstance>
@@ -357,7 +355,7 @@ BlSubRopeExamplesTest >> testSmall_empty [
 	^ anEmpty
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BlSubRopeExamplesTest >> testSmall_from_0_to_0 [
 
 	<sampleInstance>
@@ -371,7 +369,7 @@ BlSubRopeExamplesTest >> testSmall_from_0_to_0 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_from_0_to_0_do [
 
 	<sampleInstance>
@@ -389,7 +387,7 @@ BlSubRopeExamplesTest >> testSmall_from_0_to_0_do [
 	^ theIterated
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BlSubRopeExamplesTest >> testSmall_from_0_to_1 [
 
 	<sampleInstance>
@@ -404,7 +402,7 @@ BlSubRopeExamplesTest >> testSmall_from_0_to_1 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_from_0_to_1_do [
 
 	<sampleInstance>
@@ -422,7 +420,7 @@ BlSubRopeExamplesTest >> testSmall_from_0_to_1_do [
 	^ theIterated
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BlSubRopeExamplesTest >> testSmall_from_0_to_5 [
 
 	<sampleInstance>
@@ -435,7 +433,7 @@ BlSubRopeExamplesTest >> testSmall_from_0_to_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_from_0_to_5_do [
 
 	<sampleInstance>
@@ -453,7 +451,7 @@ BlSubRopeExamplesTest >> testSmall_from_0_to_5_do [
 	^ theIterated
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BlSubRopeExamplesTest >> testSmall_from_1_to_1 [
 
 	<sampleInstance>
@@ -467,7 +465,7 @@ BlSubRopeExamplesTest >> testSmall_from_1_to_1 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_from_1_to_1_do [
 
 	<sampleInstance>
@@ -485,7 +483,7 @@ BlSubRopeExamplesTest >> testSmall_from_1_to_1_do [
 	^ theIterated
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BlSubRopeExamplesTest >> testSmall_from_1_to_2 [
 
 	<sampleInstance>
@@ -500,7 +498,7 @@ BlSubRopeExamplesTest >> testSmall_from_1_to_2 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_from_1_to_2_do [
 
 	<sampleInstance>
@@ -518,7 +516,7 @@ BlSubRopeExamplesTest >> testSmall_from_1_to_2_do [
 	^ theIterated
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BlSubRopeExamplesTest >> testSmall_from_1_to_5 [
 
 	<sampleInstance>
@@ -533,7 +531,7 @@ BlSubRopeExamplesTest >> testSmall_from_1_to_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_from_1_to_5_do [
 
 	<sampleInstance>
@@ -551,7 +549,7 @@ BlSubRopeExamplesTest >> testSmall_from_1_to_5_do [
 	^ theIterated
 ]
 
-{ #category : 'examples - from to' }
+{ #category : #'examples - from to' }
 BlSubRopeExamplesTest >> testSmall_from_3_to_5 [
 
 	<sampleInstance>
@@ -566,7 +564,7 @@ BlSubRopeExamplesTest >> testSmall_from_3_to_5 [
 	^ aNewRope
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlSubRopeExamplesTest >> testSmall_from_3_to_5_do [
 
 	<sampleInstance>
@@ -584,7 +582,7 @@ BlSubRopeExamplesTest >> testSmall_from_3_to_5_do [
 	^ theIterated
 ]
 
-{ #category : 'examples - testing' }
+{ #category : #'examples - testing' }
 BlSubRopeExamplesTest >> testSmall_isEmpty [
 
 	<sampleInstance>
@@ -596,7 +594,7 @@ BlSubRopeExamplesTest >> testSmall_isEmpty [
 	^ aRope
 ]
 
-{ #category : 'examples - testing' }
+{ #category : #'examples - testing' }
 BlSubRopeExamplesTest >> testSmall_isLeaf [
 
 	<sampleInstance>
@@ -608,7 +606,7 @@ BlSubRopeExamplesTest >> testSmall_isLeaf [
 	^ aRope
 ]
 
-{ #category : 'examples - testing' }
+{ #category : #'examples - testing' }
 BlSubRopeExamplesTest >> testSmall_isNotEmpty [
 
 	<sampleInstance>
@@ -620,7 +618,7 @@ BlSubRopeExamplesTest >> testSmall_isNotEmpty [
 	^ aRope
 ]
 
-{ #category : 'examples - accessing' }
+{ #category : #'examples - accessing' }
 BlSubRopeExamplesTest >> testSmall_size [
 
 	<sampleInstance>
