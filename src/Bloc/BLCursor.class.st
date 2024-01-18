@@ -9,7 +9,7 @@ Class {
 { #category : 'accessing' }
 BLCursor class >> crosshair [
 
-	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv crosshair' -> 'Cursor crosshair'.
+	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv crosshair' -> 'Cursor crossHair'.
 	^ Cursor crossHair
 ]
 
