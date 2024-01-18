@@ -48,9 +48,15 @@ Class {
 }
 
 { #category : 'accessing' }
-BlTaskAtQueue class >> default [ 
+BlTaskAtQueue class >> default [
 
-	^Default ifNil: [ Default := self new start ]
+	^ Default ifNil: [ Default := self new start; yourself ]
+]
+
+{ #category : 'accessing' }
+BlTaskAtQueue class >> resetDefault [
+
+	Default := nil
 ]
 
 { #category : 'accessing' }
@@ -87,7 +93,7 @@ BlTaskAtQueue >> forceProcess [
 	"Force #processNextEntry to scan the queue.
 	For testing purposes"
 
-	scheduleSemaphore signal.
+	scheduleSemaphore signal
 ]
 
 { #category : 'private' }
@@ -98,7 +104,7 @@ BlTaskAtQueue >> forkExecutorProcess [
 
 	executorProcess := [ self queueReaderLoop ]
 		forkAt: Processor userSchedulingPriority 
-		named: 'BlTaskAtQueue Executor'.
+		named: 'BlTaskAtQueue Executor'
 ]
 
 { #category : 'initialization' }
@@ -218,15 +224,15 @@ BlTaskAtQueue >> size [
 ]
 
 { #category : 'control' }
-BlTaskAtQueue >> start [ 
+BlTaskAtQueue >> start [
 
-	self forkExecutorProcess.
+	self forkExecutorProcess
 ]
 
 { #category : 'control' }
-BlTaskAtQueue >> stop [ 
+BlTaskAtQueue >> stop [
 
-	executorProcess ifNil: [ ^self ].
+	executorProcess ifNil: [ ^ self ].
 	executorProcess terminate.
 	executorProcess := nil
 ]
