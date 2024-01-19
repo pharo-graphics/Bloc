@@ -1,6 +1,6 @@
 Class {
 	#name : #BlFocusProcessorExamples,
-	#superclass : #BlEventProcessorExamplesTest,
+	#superclass : #TestCase,
 	#category : #'Bloc-Examples-Event'
 }
 
@@ -63,7 +63,7 @@ BlFocusProcessorExamples >> loseFocus_01_give_focus_to_child_1 [
 
 	<sampleInstance>
 	| aScripter |
-	aScripter := self scripter.
+	aScripter := BlDevScripter new.
 	aScripter element: self scripterElement.
 
 	aScripter substeps: 'Give focus to child-1' do: [ :aStep |
@@ -380,7 +380,7 @@ BlFocusProcessorExamples >> requestFocus_01_parent [
 
 	<sampleInstance>
 	| aScripter |
-	aScripter := self scripter.
+	aScripter := BlDevScripter new.
 	aScripter element: self scripterElement.
 
 	aScripter substeps: 'Request focus on parent' do: [ :aStep |

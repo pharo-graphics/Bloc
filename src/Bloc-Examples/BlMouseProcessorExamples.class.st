@@ -4,7 +4,7 @@ I contain examples-tests of mouse processor
 "
 Class {
 	#name : #BlMouseProcessorExamples,
-	#superclass : #BlEventProcessorExamplesTest,
+	#superclass : #TestCase,
 	#category : #'Bloc-Examples-Event'
 }
 

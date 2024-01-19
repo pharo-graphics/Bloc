@@ -9,7 +9,7 @@ BlMouseProcessorEnterLeaveExamples >> mouseEnter [
 
 	<sampleInstance>
 	| aScripter |
-	aScripter := self scripter.
+	aScripter := BlDevScripter new.
 	aScripter element: self scripterElement.
 
 	aScripter substeps: 'Mouse Enter' do: [ :aStep |
