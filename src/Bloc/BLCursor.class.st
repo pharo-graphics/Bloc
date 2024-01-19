@@ -1,5 +1,5 @@
 Class {
-	#name : 'BLCursor',
+	#name : 'BlCursor',
 	#superclass : 'Object',
 	#category : 'Bloc-Utilities - Selection',
 	#package : 'Bloc',
@@ -7,83 +7,83 @@ Class {
 }
 
 { #category : 'accessing' }
-BLCursor class >> crosshair [
+BlCursor class >> crosshair [
 
 	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv crosshair' -> 'Cursor crossHair'.
 	^ Cursor crossHair
 ]
 
 { #category : 'accessing' }
-BLCursor class >> default [
+BlCursor class >> default [
 
 	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv default' -> 'Cursor normal'.
 	^ Cursor normal
 ]
 
 { #category : 'accessing' }
-BLCursor class >> hand [
+BlCursor class >> hand [
 
 	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv hand' -> 'Cursor webLink'.
 	^ Cursor webLink
 ]
 
 { #category : 'testing' }
-BLCursor class >> isDeprecated [
+BlCursor class >> isDeprecated [
 
 	^ true
 ]
 
 { #category : 'accessing' }
-BLCursor class >> overEditableText [
+BlCursor class >> overEditableText [
 
 	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv overEditableText' -> 'Cursor overEditableText'.
 	^ Cursor overEditableText
 ]
 
 { #category : 'accessing' }
-BLCursor class >> resizeBottom [
+BlCursor class >> resizeBottom [
 
 	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv resizeBottom' -> 'Cursor resizeBottom'.
 	^ Cursor resizeBottom
 ]
 
 { #category : 'accessing' }
-BLCursor class >> resizeBottomLeft [
+BlCursor class >> resizeBottomLeft [
 
 	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv resizeBottomLeft' -> 'Cursor resizeBottomLeft'.
 	^ Cursor resizeBottomLeft
 ]
 
 { #category : 'accessing' }
-BLCursor class >> resizeBottomRight [
+BlCursor class >> resizeBottomRight [
 
 	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv resizeBottomRight' -> 'Cursor resizeBottomRight'.
 	^ Cursor resizeBottomRight
 ]
 
 { #category : 'accessing' }
-BLCursor class >> resizeTop [
+BlCursor class >> resizeTop [
 
 	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv resizeTop' -> 'Cursor resizeTop'.
 	^ Cursor resizeTop
 ]
 
 { #category : 'accessing' }
-BLCursor class >> resizeTopLeft [
+BlCursor class >> resizeTopLeft [
 
 	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv resizeTopLeft' -> 'Cursor resizeTopLeft'.
 	^ Cursor resizeTopLeft
 ]
 
 { #category : 'accessing' }
-BLCursor class >> resizeTopRight [
+BlCursor class >> resizeTopRight [
 
 	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv resizeTopRight' -> 'Cursor resizeTopRight'.
 	^ Cursor resizeTopRight
 ]
 
 { #category : 'accessing' }
-BLCursor class >> wait [
+BlCursor class >> wait [
 
 	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv wait' -> 'Cursor wait'.
 	^ Cursor wait

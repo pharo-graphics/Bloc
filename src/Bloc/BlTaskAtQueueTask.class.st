@@ -11,17 +11,19 @@ I represent the objects added to the queue by `BlTaskAtQueue`. It stores the val
 
 "
 Class {
-	#name : #BlTaskAtQueueTask,
-	#superclass : #Object,
+	#name : 'BlTaskAtQueueTask',
+	#superclass : 'Object',
 	#instVars : [
 		'valuable',
 		'scheduledTime',
 		'queue'
 	],
-	#category : #'Bloc-DataStructure - Priority Queue'
+	#category : 'Bloc-DataStructure - Priority Queue',
+	#package : 'Bloc',
+	#tag : 'DataStructure - Priority Queue'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTaskAtQueueTask class >> valuable: aValuable at: aTime [
 
 	^ self new
@@ -29,7 +31,7 @@ BlTaskAtQueueTask class >> valuable: aValuable at: aTime [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtQueueTask >> entryPriority [ 
 	"Answer the receiver's priority.
 	Zero is the highest priority, so earlier scheduled tasks have a higher priority."
@@ -38,19 +40,19 @@ BlTaskAtQueueTask >> entryPriority [
 
 ]
 
-{ #category : #handling }
+{ #category : 'handling' }
 BlTaskAtQueueTask >> handleNotScheduledBecauseOfPreviousTask: aBlTaskAtTask [
 	"subclasses can act on this event"
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTaskAtQueueTask >> initialize: aValuable at: aTime [
 
 	valuable := aValuable.
 	scheduledTime := aTime.
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlTaskAtQueueTask >> printOn: aStream [
 
 	super printOn: aStream.
@@ -60,37 +62,37 @@ BlTaskAtQueueTask >> printOn: aStream [
 		<< ')'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtQueueTask >> queue [
 
 	^ queue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtQueueTask >> queue: aQueue [
 
 	queue := aQueue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtQueueTask >> scheduledTime [
 
 	^ scheduledTime
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtQueueTask >> scheduledTime: aTime [
 
 	scheduledTime := aTime
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTaskAtQueueTask >> valuable [
 
 	^ valuable
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BlTaskAtQueueTask >> value [
 
 	^ valuable value

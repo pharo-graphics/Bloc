@@ -1,21 +1,23 @@
 Class {
-	#name : #BlNullVerticalAlignment,
-	#superclass : #BlNullAlignment,
-	#category : #'Bloc-Layouts-Alignment'
+	#name : 'BlNullVerticalAlignment',
+	#superclass : 'BlNullAlignment',
+	#category : 'Bloc-Layouts-Alignment',
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlNullVerticalAlignment class >> initialize [
 
 	self initializeSingletons
 ]
 
-{ #category : #composition }
+{ #category : 'composition' }
 BlNullVerticalAlignment >> + aHorizontalAlignment [
 	^ BlCompositeAlignment horizontal: aHorizontalAlignment vertical: self
 ]
 
-{ #category : #translation }
+{ #category : 'translation' }
 BlNullVerticalAlignment >> translationOf: aBounds in: aContainerBounds [
 	^ 0 @ 0
 ]

@@ -7,8 +7,8 @@ Negative values are not allowed.
 
 "
 Class {
-	#name : #BlCornerRadii,
-	#superclass : #Object,
+	#name : 'BlCornerRadii',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -20,10 +20,12 @@ Class {
 	#classInstVars : [
 		'empty'
 	],
-	#category : #'Bloc-Basic-Support'
+	#category : 'Bloc-Basic-Support',
+	#package : 'Bloc',
+	#tag : 'Basic-Support'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlCornerRadii class >> cleanUp [
 	<script: 'self cleanUp'>
 	super cleanUp.
@@ -31,19 +33,19 @@ BlCornerRadii class >> cleanUp [
 	empty := nil
 ]
 
-{ #category : #'predefined instances' }
+{ #category : 'predefined instances' }
 BlCornerRadii class >> empty [
 	^ empty ifNil: [ empty := self radius: 0 ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlCornerRadii class >> radius: aNumber [
 	^ self new
 		radius: aNumber;
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlCornerRadii >> = aBlCornerRadii [
 	self species == aBlCornerRadii species
 		ifFalse: [ ^ false ].
@@ -54,7 +56,7 @@ BlCornerRadii >> = aBlCornerRadii [
 				and: [ self topRight = aBlCornerRadii topRight ] ] ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlCornerRadii >> asArray [
 
 	^ { 
@@ -65,7 +67,7 @@ BlCornerRadii >> asArray [
 	}
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlCornerRadii >> asNonOverlappingCornerRadiiToFitWidth: aWidth height: aHeight [
 	"Answer either self or an adapted copy of self where corner curves do not overlap for the specified extent.
 	This follows the specification of 'Corner Overlap' subsection of 'CSS Backgrounds and Borders Module Level 3'.
@@ -81,12 +83,12 @@ BlCornerRadii >> asNonOverlappingCornerRadiiToFitWidth: aWidth height: aHeight [
 		ifFalse: [ self ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> bottomLeft [
 	^ bottomLeft
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> bottomLeft: aNumber [
 	"Initialize bottom left corner radius with a given number.
 	It can be done only once"
@@ -98,18 +100,18 @@ BlCornerRadii >> bottomLeft: aNumber [
 	bottomLeft := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> bottomRadii [
 
 	^ bottomLeft + bottomRight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> bottomRight [
 	^ bottomRight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> bottomRight: aNumber [
 	"Initialize bottom right corner radius with a given number.
 	It can be done only once"
@@ -121,7 +123,7 @@ BlCornerRadii >> bottomRight: aNumber [
 	bottomRight := aNumber
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlCornerRadii >> copyExpandedBy: aNumber [ 
 	"Answer a copy of myself with radii expanded by aNumber (or reduced, if negative).
 	Do not touch the radius if it's zero."
@@ -134,7 +136,7 @@ BlCornerRadii >> copyExpandedBy: aNumber [
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 BlCornerRadii >> dividedByScalar: aNumber [
 
 	^ self species new
@@ -145,27 +147,27 @@ BlCornerRadii >> dividedByScalar: aNumber [
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlCornerRadii >> hash [
 
 	^ bottomLeft hash bitXor:
 		  (bottomRight hash bitXor: (topLeft hash bitXor: topRight hash))
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> leftRadii [
 
 	^ topLeft + bottomLeft
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlCornerRadii >> max [
 	"Return the biggest corner radius among top left, top right, bottom left and bottom right"
 
 	^ topLeft max: (topRight max: (bottomLeft max: bottomRight))
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> maxOverlappingFactorForWidth: aWidth height: aHeight [
 	"Answer the 1/f as defined in 'Corner Overlap' subsection of 'CSS Backgrounds and Borders Module Level 3'.
 	See: https://w3c.github.io/csswg-drafts/css-backgrounds-3/#corner-overlap"
@@ -176,19 +178,19 @@ BlCornerRadii >> maxOverlappingFactorForWidth: aWidth height: aHeight [
 		 (self leftRadii   / aHeight)
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlCornerRadii >> min [
 	"Return the smallest corner radius among top left, top right, bottom left and bottom right"
 	
 	^ topLeft min: (topRight min: (bottomLeft min: bottomRight))
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlCornerRadii >> radius: aNumber [
 	topLeft := topRight := bottomLeft := bottomRight := aNumber
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlCornerRadii >> radius: aRadius expandedBy: aNumber [ 
 	"Answer aRadius expanded by aNumber (or reduced if negative). Do not touch if aRadius is zero."
 
@@ -197,18 +199,18 @@ BlCornerRadii >> radius: aRadius expandedBy: aNumber [
 		ifTrue: [ (aRadius + aNumber) max: 0.0 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> rightRadii [
 
 	^ topRight + bottomRight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> topLeft [
 	^ topLeft
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> topLeft: aNumber [
 	"Initialize top left corner radius with a given number.
 	It can be done only once"
@@ -220,18 +222,18 @@ BlCornerRadii >> topLeft: aNumber [
 	topLeft := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> topRadii [
 
 	^ topLeft + topRight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> topRight [
 	^ topRight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCornerRadii >> topRight: aNumber [
 	"Initialize top right corner radius with a given number.
 	It can be done only once"

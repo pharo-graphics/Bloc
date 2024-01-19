@@ -1,13 +1,15 @@
 Class {
-	#name : #BlElementNegationState,
-	#superclass : #BlElementState,
+	#name : 'BlElementNegationState',
+	#superclass : 'BlElementState',
 	#instVars : [
 		'state'
 	],
-	#category : #'Bloc-Basic-State'
+	#category : 'Bloc-Basic-State',
+	#package : 'Bloc',
+	#tag : 'Basic-State'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementNegationState >> = anotherState [
 	anotherState == self
 		ifTrue: [ ^ true ].
@@ -18,27 +20,27 @@ BlElementNegationState >> = anotherState [
 	^ self state = anotherState state
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlElementNegationState >> hash [
 	^ self class hash bitXor: self state hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementNegationState >> matches: aSetOfStates [
 	^ (self state matches: aSetOfStates) not
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 BlElementNegationState >> not [
 	^ self state
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlElementNegationState >> optionalEventHandlerDo: aBlock [
 	state optionalEventHandlerDo: aBlock
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlElementNegationState >> printOn: aStream [
 	aStream
 		nextPut: $(;
@@ -47,22 +49,22 @@ BlElementNegationState >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementNegationState >> priority [
 	^ self state priority
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementNegationState >> state [
 	^ state
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementNegationState >> state: anObject [
 	state := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlElementNegationState >> type [
 	"Return an object used to compare two states when adding to the collection of states in order to prevent
 	elements from having duplicated states"

@@ -4,18 +4,20 @@ See BlLayoutAlignment for more info.
 
 "
 Class {
-	#name : #BlNullAlignment,
-	#superclass : #BlElementAlignment,
-	#category : #'Bloc-Layouts-Alignment'
+	#name : 'BlNullAlignment',
+	#superclass : 'BlElementAlignment',
+	#category : 'Bloc-Layouts-Alignment',
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlNullAlignment class >> initialize [
 
 	self initializeSingletons
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlNullAlignment class >> initializeSingletons [
 
 	super initializeSingletons.
@@ -24,42 +26,42 @@ BlNullAlignment class >> initializeSingletons [
 	horizontal := BlNullHorizontalAlignment new
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlNullAlignment >> directed: aBlLayoutDirection [
 	^ self
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlNullAlignment >> horizontal [
 	^ self class horizontal
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlNullAlignment >> ifNotNull: aBlock [
 	"nothing"
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlNullAlignment >> ifNull: aBlock [
 	aBlock value
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlNullAlignment >> leftToRight [
 	^ self
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlNullAlignment >> oriented: aBlLayoutOrientation [
 	^ self
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlNullAlignment >> rightToLeft [
 	^ self
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlNullAlignment >> vertical [
 	^ self class vertical
 ]

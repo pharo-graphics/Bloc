@@ -1,31 +1,33 @@
 Class {
-	#name : #BlHorizontalAlignment,
-	#superclass : #BlElementAlignment,
+	#name : 'BlHorizontalAlignment',
+	#superclass : 'BlElementAlignment',
 	#classInstVars : [
 		'center',
 		'left',
 		'right'
 	],
-	#category : #'Bloc-Layouts-Alignment'
+	#category : 'Bloc-Layouts-Alignment',
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalAlignment class >> center [
 	^ center
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalAlignment class >> directed: aBlLayoutDirection [
 	^ aBlLayoutDirection of: self
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlHorizontalAlignment class >> initialize [
 
 	self initializeSingletons
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlHorizontalAlignment class >> initializeSingletons [
 
 	super initializeSingletons.
@@ -37,67 +39,67 @@ BlHorizontalAlignment class >> initializeSingletons [
 	end := BlHorizontalEndAlignment new
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalAlignment class >> left [
 	^ left
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalAlignment class >> leftToRight [
 	^ self subclassResponsibility
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalAlignment class >> null [
 	^ BlElementAlignment null horizontal
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalAlignment class >> right [
 	^ right
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalAlignment class >> rightToLeft [
 	^ self subclassResponsibility
 ]
 
-{ #category : #composition }
+{ #category : 'composition' }
 BlHorizontalAlignment >> + aVerticalAlignment [
 	^ BlCompositeAlignment horizontal: self vertical: aVerticalAlignment
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalAlignment >> center [
 	^ self class center
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalAlignment >> directed: aBlLayoutDirection [
 	^ self class directed: aBlLayoutDirection
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalAlignment >> end [
 	^ self class end
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalAlignment >> leftToRight [
 	^ self class leftToRight
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalAlignment >> null [
 	^ self class null
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalAlignment >> rightToLeft [
 	^ self class rightToLeft
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalAlignment >> start [
 	^ self class start
 ]

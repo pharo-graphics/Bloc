@@ -11,17 +11,19 @@ Here are some of my core operations:
 
 "
 Class {
-	#name : #BlSpaceManager,
-	#superclass : #Object,
+	#name : 'BlSpaceManager',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'spaces'
 	],
-	#category : #'Bloc-Universe'
+	#category : 'Bloc-Universe',
+	#package : 'Bloc',
+	#tag : 'Universe'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlSpaceManager >> addSpace: aSpace [
 
 	self
@@ -31,12 +33,12 @@ BlSpaceManager >> addSpace: aSpace [
 	spaces := spaces copyWith: aSpace
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlSpaceManager >> do: aBlock [
 	self spaces do: aBlock
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceManager >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"
 	<return: #Boolean>
@@ -44,21 +46,21 @@ BlSpaceManager >> hasSpace: aSpace [
 	^ self spaces includes: aSpace
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlSpaceManager >> hasSpaces [
 	"Return true if there are registered spaces, false otherwise"
 
 	^ self spaces isNotEmpty
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSpaceManager >> initialize [
 	super initialize.
 
 	spaces := #()
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlSpaceManager >> printOn: aStream [
 
 	super printOn: aStream.
@@ -69,12 +71,12 @@ BlSpaceManager >> printOn: aStream [
 
 ]
 
-{ #category : #pulse }
+{ #category : 'pulse' }
 BlSpaceManager >> pulse [
 	spaces do: [ :aSpace | aSpace pulse ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlSpaceManager >> removeSpace: aSpace [
 
 	self
@@ -84,7 +86,7 @@ BlSpaceManager >> removeSpace: aSpace [
 	spaces := spaces copyWithout: aSpace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceManager >> spaces [
 	"Return a collection of all existing spaces"
 	<return: #Array>

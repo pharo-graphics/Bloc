@@ -1,6 +1,6 @@
-Extension { #name : #Collection }
+Extension { #name : 'Collection' }
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Collection >> copyWithMergedAttributesWith: anotherCollectionOfAttributes [
 	"Answer the merge of two collections of attributes, letting
 	anotherCollectionOfAttributes to override attributes from self,
@@ -17,7 +17,7 @@ Collection >> copyWithMergedAttributesWith: anotherCollectionOfAttributes [
 	^ anOrderedDictionary values
 ]
 
-{ #category : #'*Bloc' }
+{ #category : '*Bloc' }
 Collection >> copyWithoutDuplicatedRopeAttributes [
 	"Answer a collection without duplicates from a given collection, preserving the original order"
 

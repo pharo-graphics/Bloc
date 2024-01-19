@@ -1,24 +1,26 @@
 Class {
-	#name : #BlChildDoesNotExistError,
-	#superclass : #Error,
+	#name : 'BlChildDoesNotExistError',
+	#superclass : 'Error',
 	#instVars : [
 		'parent',
 		'child'
 	],
-	#category : #'Bloc-Basic-Errors'
+	#category : 'Bloc-Basic-Errors',
+	#package : 'Bloc',
+	#tag : 'Basic-Errors'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildDoesNotExistError >> child [
 	^ child
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildDoesNotExistError >> child: anObject [
 	child := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildDoesNotExistError >> description [
 	^ 'An element {1} is not a direct child of {2}'
 		format: { 
@@ -27,12 +29,12 @@ BlChildDoesNotExistError >> description [
 		}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildDoesNotExistError >> parent [
 	^ parent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildDoesNotExistError >> parent: anObject [
 	parent := anObject
 ]

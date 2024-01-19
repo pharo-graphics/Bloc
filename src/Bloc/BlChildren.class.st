@@ -21,21 +21,23 @@ Important API methods:
 
 "
 Class {
-	#name : #BlChildren,
-	#superclass : #Collection,
+	#name : 'BlChildren',
+	#superclass : 'Collection',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Basic-Children'
+	#category : 'Bloc-Basic-Children',
+	#package : 'Bloc',
+	#tag : 'Basic-Children'
 }
 
-{ #category : #'children - subsets' }
+{ #category : 'children - subsets' }
 BlChildren >> accountedByLayout [
 	<return: #BlChildren>
 	
 	^ BlChildrenAccountedByLayout on: self
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildren >> all [
 	self 
 		deprecated: 'Use asArray instead'
@@ -44,7 +46,7 @@ BlChildren >> all [
 	^ self asArray
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildren >> anySatisfy: aBlock [
 	"Evaluate aBlock with the elements of the receiver.
 	If aBlock returns true for any element return true.
@@ -54,7 +56,7 @@ BlChildren >> anySatisfy: aBlock [
 	^ false
 ]
 
-{ #category : #'children - converting' }
+{ #category : 'children - converting' }
 BlChildren >> asArray [
 	<return: #Array of: #BlElement>
 	"Create an array containing all the children.
@@ -66,7 +68,7 @@ BlChildren >> asArray [
 			self do: [ :anElement | aStream nextPut: anElement ] ]
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildren >> at: anIndex [
 	"Return an element at a given index without taking zIndex into account"
 	<return: #BlElement>
@@ -74,7 +76,7 @@ BlChildren >> at: anIndex [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildren >> at: anIndex ifAbsent: exceptionBlock [ 
 	"Answer the element at my position index. If I do not contain an element 
 	at index, answer the result of evaluating the argument, exceptionBlock."
@@ -84,7 +86,7 @@ BlChildren >> at: anIndex ifAbsent: exceptionBlock [
 	^ exceptionBlock value
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildren >> collect: aBlock [ 
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
 	Collect the resulting values into a collection like the receiver. Answer  
@@ -95,7 +97,7 @@ BlChildren >> collect: aBlock [
 		self do: [ :anElement | aStream nextPut: (aBlock value: anElement) ] ]
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildren >> detect: aBlock ifFound: foundBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
 	If some element evaluates aBlock to true, then cull this element into 
@@ -110,7 +112,7 @@ BlChildren >> detect: aBlock ifFound: foundBlock [
 		ifNone: [ "Do nothing on purpose" ]
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildren >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
 	If some element evaluates aBlock to true, then cull this element into 
@@ -124,7 +126,7 @@ BlChildren >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
 	^ exceptionBlock value
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildren >> detect: aBlock ifNone: exceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
 	Answer the first element for which aBlock evaluates to true. If none  
@@ -137,33 +139,33 @@ BlChildren >> detect: aBlock ifNone: exceptionBlock [
 		ifNone: exceptionBlock
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildren >> do: aBlock [
 	self subclassResponsibility
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlChildren >> errorNotFound: anObject [
 	"Raise a NotFound exception."
 
 	NotFound signalFor: anObject
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildren >> fifth [
 	<return: #BlElement>
 
 	^ self at: 5
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildren >> first [
 	<return: #BlElement>
 
 	^ self at: 1
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildren >> flatCollect: aBlock [
 	"Evaluate aBlock for each of the receiver's elements and answer the
 	list of all resulting values flatten one level. Assumes that aBlock returns some kind
@@ -174,21 +176,21 @@ BlChildren >> flatCollect: aBlock [
 		self do: [ :anElement | aStream nextPutAll: (aBlock value: anElement) ] ]
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildren >> fourth [
 	<return: #BlElement>
 
 	^ self at: 4
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlChildren >> hasSuperset [
 	"I indicate whether or not the intent is to iterate over the complete set of children of an element."
 	
 	 ^ false
 ]
 
-{ #category : #'children - testing' }
+{ #category : 'children - testing' }
 BlChildren >> ifEmpty: aBlock [
 	"Evaluate the given block, answering its value if the receiver is empty, otherwise answer the receiver."
 	
@@ -199,14 +201,14 @@ BlChildren >> ifEmpty: aBlock [
 		ifFalse: [ self ]
 ]
 
-{ #category : #'children - subsets' }
+{ #category : 'children - subsets' }
 BlChildren >> ignoredByLayout [
 	<return: #BlChildren>
 	
 	^ BlChildrenIgnoredByLayout on: self
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildren >> indexOf: anElement [
 	"Answer the index of the first occurrence of anElement within the  
 	receiver. If the receiver does not contain anElement, answer 0."
@@ -215,7 +217,7 @@ BlChildren >> indexOf: anElement [
 	^ self indexOf: anElement ifAbsent: 0
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildren >> indexOf: anElement ifAbsent: exceptionBlock [
 	"Answer the index of the first occurence of anElement within the  
 	receiver. If the receiver does not contain anElement, answer the 
@@ -227,7 +229,7 @@ BlChildren >> indexOf: anElement ifAbsent: exceptionBlock [
 	^ exceptionBlock value
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildren >> inject: thisValue into: binaryBlock [
 	"Accumulate a running value associated with evaluating the argument, 
 	binaryBlock, with the current value of the argument, thisValue, and the 
@@ -241,37 +243,37 @@ BlChildren >> inject: thisValue into: binaryBlock [
 	^ nextValue
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlChildren >> isCollection [
 	^ true
 ]
 
-{ #category : #'children - testing' }
+{ #category : 'children - testing' }
 BlChildren >> isEmpty [
 
 	^ self size isZero
 ]
 
-{ #category : #'children - testing' }
+{ #category : 'children - testing' }
 BlChildren >> isNotEmpty [
 	<return: #Boolean>
 
 	^ self size isZero not
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildren >> last [
 	<return: #BlElement>
 
 	^ self at: self size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlChildren >> name [
 	^ 'Children'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlChildren >> printOn: aStream [
 	aStream
 		nextPutAll: self name;
@@ -281,7 +283,7 @@ BlChildren >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildren >> reject: aBlock [ 
 	"Evaluate aBlock with each of the receiver's elements as the argument. 
 	Collect into a new collection like the receiver only those elements for 
@@ -291,26 +293,26 @@ BlChildren >> reject: aBlock [
 	^ self select: [ :anElement | (aBlock value: anElement) == false ]
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildren >> reverseDo: aBlock [
 	self reversed do: aBlock
 ]
 
-{ #category : #'children - subsets' }
+{ #category : 'children - subsets' }
 BlChildren >> reversed [
 	<return: #BlChildren>
 	
 	^ BlChildrenReversed on: self
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildren >> second [
 	<return: #BlElement>
 
 	^ self at: 2
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildren >> select: aBlock [ 
 	"Evaluate aBlock with each of the receiver's elements as the argument. 
 	Collect into a new collection like the receiver, only those elements for 
@@ -323,7 +325,7 @@ BlChildren >> select: aBlock [
 					ifTrue: [ aStream nextPut: anElement ] ] ]
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildren >> select: selectBlock thenDo: doBlock [
 	"Utility method to improve readability.
 	Do not create the intermediate collection."
@@ -333,47 +335,47 @@ BlChildren >> select: selectBlock thenDo: doBlock [
 			ifTrue: [ doBlock value: anElement ] ]
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildren >> size [
 	<return: #Number>
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'children - subsets' }
+{ #category : 'children - subsets' }
 BlChildren >> sortedByElevation [
 	<return: #BlChildren>
 
 	^ BlChildrenSortedByElevation on: self
 ]
 
-{ #category : #'children - subsets' }
+{ #category : 'children - subsets' }
 BlChildren >> sortedByElevationReversed [
 	<return: #BlChildren>
 
 	^ BlChildrenSortedByElevationReversed on: self
 ]
 
-{ #category : #'children - subsets' }
+{ #category : 'children - subsets' }
 BlChildren >> sortedByPerimeter [
 	<return: #BlChildren>
 
 	^ BlChildrenSortedByPerimeter on: self
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlChildren >> species [
 	^ Array
 ]
 
-{ #category : #'children - accessing' }
+{ #category : 'children - accessing' }
 BlChildren >> third [
 	<return: #BlElement>
 
 	^ self at: 3
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : 'children - enumerating' }
 BlChildren >> withIndexDo: elementAndIndexBlock [ 
 	"Just like with:do: except that the iteration index supplies the second argument to the block."
 	| anIndex |
