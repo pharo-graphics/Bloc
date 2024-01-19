@@ -129,7 +129,10 @@ BlTaskAtQueue >> next [
 BlTaskAtQueue >> processNextEntry [
 
 	| entry timeRemaining |
-	scheduleSemaphore waitTimeoutMilliseconds: nextTimeoutDuration asMilliSeconds.
+	"See: https://github.com/pharo-project/pharo/issues/15988"
+	SystemVersion current major >= 12
+		ifTrue: [ scheduleSemaphore waitTimeoutMilliseconds: nextTimeoutDuration asMilliSeconds ]
+		ifFalse: [ scheduleSemaphore wait: nextTimeoutDuration ].
 
 	processTime := clock now.
 	[
