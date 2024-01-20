@@ -4,12 +4,20 @@ Class {
 	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : #'examples - scripter' }
-BlMouseProcessorClickExamples >> click [
+{ #category : #running }
+BlMouseProcessorClickExamples >> scripterElement [
 
-	<sampleInstance>
+	^ BlExampleEventsCountingElement new
+		  size: 100 @ 75;
+		  position: 50 @ 50;
+		  yourself
+]
+
+{ #category : #tests }
+BlMouseProcessorClickExamples >> testClick [
+
 	| aScripter |
-	aScripter := self mouseEnter.
+	aScripter := self testMouseEnter.
 
 	aScripter substeps: 'Click' do: [ :aStep |
 		aStep mouseDown.
@@ -42,12 +50,11 @@ BlMouseProcessorClickExamples >> click [
 	^ aScripter
 ]
 
-{ #category : #'examples - scripter' }
-BlMouseProcessorClickExamples >> mouseDown [
+{ #category : #tests }
+BlMouseProcessorClickExamples >> testMouseDown [
 
-	<sampleInstance>
 	| aScripter |
-	aScripter := self mouseEnter.
+	aScripter := self testMouseEnter.
 
 	aScripter substeps: 'Click' do: [ :aStep |
 		aStep mouseDown.
@@ -77,10 +84,9 @@ BlMouseProcessorClickExamples >> mouseDown [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - scripter' }
-BlMouseProcessorClickExamples >> mouseEnter [
+{ #category : #tests }
+BlMouseProcessorClickExamples >> testMouseEnter [
 
-	<sampleInstance>
 	| aScripter |
 	aScripter := BlDevScripter new.
 	aScripter element: self scripterElement.
@@ -108,13 +114,4 @@ BlMouseProcessorClickExamples >> mouseEnter [
 	aScripter syncContinue.
 
 	^ aScripter
-]
-
-{ #category : #'examples - scripter' }
-BlMouseProcessorClickExamples >> scripterElement [
-
-	<sampleInstance>
-	^ BlExampleEventsCountingElement new
-		  size: 100 @ 75;
-		  position: 50 @ 50
 ]

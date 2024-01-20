@@ -4,10 +4,18 @@ Class {
 	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : #'examples - scripter' }
-BlMouseProcessorEnterLeaveExamples >> mouseEnter [
+{ #category : #running }
+BlMouseProcessorEnterLeaveExamples >> scripterElement [
 
-	<sampleInstance>
+	^ BlExampleEventsCountingElement new
+		  size: 100 @ 75;
+		  position: 50 @ 50;
+		  yourself
+]
+
+{ #category : #tests }
+BlMouseProcessorEnterLeaveExamples >> testMouseEnter [
+
 	| aScripter |
 	aScripter := BlDevScripter new.
 	aScripter element: self scripterElement.
@@ -44,12 +52,11 @@ BlMouseProcessorEnterLeaveExamples >> mouseEnter [
 	^ aScripter
 ]
 
-{ #category : #'examples - scripter' }
-BlMouseProcessorEnterLeaveExamples >> mouseLeave [
+{ #category : #tests }
+BlMouseProcessorEnterLeaveExamples >> testMouseLeave [
 
-	<sampleInstance>
 	| aScripter |
-	aScripter := self mouseEnter.
+	aScripter := self testMouseEnter.
 
 	aScripter substeps: 'Mouse Leave' do: [ :aStep |
 		aStep mouseMove by: 100 @ 20.
@@ -78,12 +85,11 @@ BlMouseProcessorEnterLeaveExamples >> mouseLeave [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - scripter' }
-BlMouseProcessorEnterLeaveExamples >> mouseLeaveDueToRemovalFromScene [
+{ #category : #tests }
+BlMouseProcessorEnterLeaveExamples >> testMouseLeaveDueToRemovalFromScene [
 
-	<sampleInstance>
 	| aScripter |
-	aScripter := self mouseEnter.
+	aScripter := self testMouseEnter.
 
 	aScripter substeps: 'Remove from scene graph' do: [ :aStep |
 		aStep do
@@ -120,13 +126,4 @@ BlMouseProcessorEnterLeaveExamples >> mouseLeaveDueToRemovalFromScene [
 			onMouseProcessor ].
 
 	^ aScripter syncContinue
-]
-
-{ #category : #'examples - scripter' }
-BlMouseProcessorEnterLeaveExamples >> scripterElement [
-
-	<sampleInstance>
-	^ BlExampleEventsCountingElement new
-		  size: 100 @ 75;
-		  position: 50 @ 50
 ]
