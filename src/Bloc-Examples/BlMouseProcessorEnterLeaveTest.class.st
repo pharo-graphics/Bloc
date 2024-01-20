@@ -1,11 +1,11 @@
 Class {
-	#name : #BlMouseProcessorEnterLeaveExamples,
-	#superclass : #BlMouseProcessorExamples,
+	#name : #BlMouseProcessorEnterLeaveTest,
+	#superclass : #TestCase,
 	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #running }
-BlMouseProcessorEnterLeaveExamples >> scripterElement [
+BlMouseProcessorEnterLeaveTest >> newScripterElement [
 
 	^ BlExampleEventsCountingElement new
 		  size: 100 @ 75;
@@ -14,11 +14,11 @@ BlMouseProcessorEnterLeaveExamples >> scripterElement [
 ]
 
 { #category : #tests }
-BlMouseProcessorEnterLeaveExamples >> testMouseEnter [
+BlMouseProcessorEnterLeaveTest >> testMouseEnter [
 
 	| aScripter |
 	aScripter := BlDevScripter new.
-	aScripter element: self scripterElement.
+	aScripter element: self newScripterElement.
 
 	aScripter substeps: 'Mouse Enter' do: [ :aStep |
 		aStep mouseMove by: 30 @ 30.
@@ -53,7 +53,7 @@ BlMouseProcessorEnterLeaveExamples >> testMouseEnter [
 ]
 
 { #category : #tests }
-BlMouseProcessorEnterLeaveExamples >> testMouseLeave [
+BlMouseProcessorEnterLeaveTest >> testMouseLeave [
 
 	| aScripter |
 	aScripter := self testMouseEnter.
@@ -86,7 +86,7 @@ BlMouseProcessorEnterLeaveExamples >> testMouseLeave [
 ]
 
 { #category : #tests }
-BlMouseProcessorEnterLeaveExamples >> testMouseLeaveDueToRemovalFromScene [
+BlMouseProcessorEnterLeaveTest >> testMouseLeaveDueToRemovalFromScene [
 
 	| aScripter |
 	aScripter := self testMouseEnter.
