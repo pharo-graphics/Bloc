@@ -1,19 +1,12 @@
 Class {
-	#name : #BlTaskAtQueueExamples,
+	#name : #BlTaskAtQueueTest,
 	#superclass : #TestCase,
-	#traits : 'TAssertable',
 	#classTraits : 'TAssertable classTrait',
 	#category : #'Bloc-Examples-Tasks'
 }
 
-{ #category : #private }
-BlTaskAtQueueExamples >> startTime [
-
-	^ DateAndTime fromString: '2020-11-07T12:19:53.275521+01:00'
-]
-
-{ #category : #private }
-BlTaskAtQueueExamples >> taskAtQueue [
+{ #category : #running }
+BlTaskAtQueueTest >> newTaskAtQueue [
 	"Answer the `BlTaskAtQueue` used for the examples.
 	The queue is configured to use a simulated clock with a fixed current time for reproduceable tests."
 
@@ -25,12 +18,18 @@ BlTaskAtQueueExamples >> taskAtQueue [
 			yourself
 ]
 
-{ #category : #examples }
-BlTaskAtQueueExamples >> testRunNow [
+{ #category : #running }
+BlTaskAtQueueTest >> startTime [
+
+	^ DateAndTime fromString: '2020-11-07T12:19:53.275521+01:00'
+]
+
+{ #category : #tests }
+BlTaskAtQueueTest >> testRunNow [
 	"Queue a task that has a scheduled time in the past."
 
 	| queue taskRun |
-	queue := self taskAtQueue.
+	queue := self newTaskAtQueue.
 	taskRun := false.
 	queue schedule: [ taskRun := true ] at: self startTime.
 	self assert: queue size equals: 1.
@@ -38,13 +37,13 @@ BlTaskAtQueueExamples >> testRunNow [
 	self assert: taskRun
 ]
 
-{ #category : #examples }
-BlTaskAtQueueExamples >> testRunOneInOneSecond [
+{ #category : #tests }
+BlTaskAtQueueTest >> testRunOneInOneSecond [
 	"Queue a task that has a scheduled time in the past."
 
 	| queue taskRun currentTime |
+	queue := self newTaskAtQueue.
 	currentTime := self startTime.
-	queue := self taskAtQueue.
 	taskRun := false.
 	queue schedule: [ taskRun := true ] at: self startTime + 1 second.
 	self assert: queue size equals: 1.
@@ -57,12 +56,12 @@ BlTaskAtQueueExamples >> testRunOneInOneSecond [
 	self assert: taskRun
 ]
 
-{ #category : #examples }
-BlTaskAtQueueExamples >> testRunPastTime [
+{ #category : #tests }
+BlTaskAtQueueTest >> testRunPastTime [
 	"Queue a task that has a scheduled time in the past."
 
 	| queue taskRun |
-	queue := self taskAtQueue.
+	queue := self newTaskAtQueue.
 	taskRun := false.
 	queue schedule: [ taskRun := true ] at: self startTime - 1 second.
 	self assert: queue size equals: 1.
@@ -70,13 +69,13 @@ BlTaskAtQueueExamples >> testRunPastTime [
 	self assert: taskRun
 ]
 
-{ #category : #examples }
-BlTaskAtQueueExamples >> testRunTwoOneThree [
+{ #category : #tests }
+BlTaskAtQueueTest >> testRunTwoOneThree [
 	"Queue three tasks, out of order, and confirm correct execution."
 
 	| queue value currentTime |
+	queue := self newTaskAtQueue.
 	currentTime := self startTime.
-	queue := self taskAtQueue.
 	value := 0.
 	queue schedule: [ value := 2 ] at: self startTime + 2 second.
 	queue schedule: [ value := 1 ] at: self startTime + 1 second.
