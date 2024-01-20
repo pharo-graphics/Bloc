@@ -3,16 +3,13 @@ I exemplify {{gtClass:BlDevScripter}}.
 
 "
 Class {
-	#name : #BlDevScripterExamplesTest,
+	#name : #BlDevScripterTest,
 	#superclass : #TestCase,
-	#instVars : [
-		'elementExamples'
-	],
 	#category : #'Bloc-Scripter-Examples'
 }
 
 { #category : #running }
-BlDevScripterExamplesTest >> newContainer [
+BlDevScripterTest >> newContainer [
 
 	^ BlElement new
 		layout: BlFrameLayout new;
@@ -23,7 +20,7 @@ BlDevScripterExamplesTest >> newContainer [
 ]
 
 { #category : #running }
-BlDevScripterExamplesTest >> newContainerWithRectangle [
+BlDevScripterTest >> newContainerWithRectangle [
 
 	| anElement |
 	anElement := self newContainer.
@@ -32,7 +29,7 @@ BlDevScripterExamplesTest >> newContainerWithRectangle [
 ]
 
 { #category : #running }
-BlDevScripterExamplesTest >> newRectangle [
+BlDevScripterTest >> newRectangle [
 
 	^ BlElement new
 		size: 100 @ 100;
@@ -45,18 +42,17 @@ BlDevScripterExamplesTest >> newRectangle [
 ]
 
 { #category : #tests }
-BlDevScripterExamplesTest >> testClickCheckFailure [
+BlDevScripterTest >> testClickCheckFailure [
 
 	| anElement aScripter found |
 	anElement := self newContainerWithRectangle.
 	aScripter := BlDevScripter new.
 	aScripter element: anElement.
 
-1halt.
-	"Expect a click on the first child"
-	aScripter check testClick onChildAt: 1.
-	"But will do a click on the space's root"
+	"Expect a click on the first child.
+	But will do a click on the space's root"
 	aScripter testClick onSpaceRoot.
+	aScripter check testClick onChildAt: 1.
 
 	self should: [ aScripter syncPlay ] raise: AssertionFailure.
 
@@ -72,15 +68,15 @@ BlDevScripterExamplesTest >> testClickCheckFailure [
 ]
 
 { #category : #tests }
-BlDevScripterExamplesTest >> testClickCheckSuccess [
+BlDevScripterTest >> testClickCheckSuccess [
 
 	| anElement aScripter found |
 	anElement := self newContainerWithRectangle.
 	aScripter := BlDevScripter new.
 	aScripter element: anElement.
 
-	aScripter check testClick onChildAt: 1.
 	aScripter testClick onChildAt: 1.
+	aScripter check testClick onChildAt: 1.
 	aScripter syncPlay.
 
 	found := false.
@@ -94,12 +90,13 @@ BlDevScripterExamplesTest >> testClickCheckSuccess [
 ]
 
 { #category : #tests }
-BlDevScripterExamplesTest >> testSyncPlayProducesClick [
+BlDevScripterTest >> testSyncPlayProducesClick [
 
 	| anElement aScripter |
 	anElement := self newContainerWithRectangle.
 	aScripter := BlDevScripter new.
 	aScripter element: anElement.
+
 	aScripter testClick onChildAt: 1.
 
 	self assert: aScripter events isEmpty.
