@@ -11,16 +11,19 @@ Class {
 
 { #category : #accessing }
 BlDevScripterStepExecutor >> activities [
+
 	^ activities
 ]
 
 { #category : #accessing }
-BlDevScripterStepExecutor >> activities: anObject [
-	activities := anObject
+BlDevScripterStepExecutor >> activities: aCollection [
+
+	activities := aCollection
 ]
 
 { #category : #'initialization - activities' }
 BlDevScripterStepExecutor >> addActivity: aBlDevScripterStepExecutorStepActivity [
+
 	activities add: aBlDevScripterStepExecutorStepActivity
 ]
 
@@ -30,28 +33,33 @@ BlDevScripterStepExecutor >> assertExecutableStep: aStep [
 
 { #category : #'initialization - execution' }
 BlDevScripterStepExecutor >> async [
+
 	self strategy: BlDevScripterStepExecutorAsyncStrategy new
 ]
 
 { #category : #testing }
 BlDevScripterStepExecutor >> canBeExecuted: aStep [
+
 	^ true
 ]
 
 { #category : #'private - execution' }
 BlDevScripterStepExecutor >> executePostPlayActivitiesOnStep: aStep [
-	self activities do: [ :eachActivity | 
+
+	activities do: [ :eachActivity |
 		eachActivity executePostPlayOnStep: aStep executor: self ]
 ]
 
 { #category : #'private - execution' }
 BlDevScripterStepExecutor >> executePrePlayActivitiesOnStep: aStep [
-	self activities do: [ :eachActivity | 
+
+	activities do: [ :eachActivity |
 		eachActivity executePrePlayOnStep: aStep executor: self ]
 ]
 
 { #category : #actions }
 BlDevScripterStepExecutor >> executeRootStep: aStep [
+
 	self executePrePlayActivitiesOnStep: aStep.
 	[ 
 		aStep isHaltState ifTrue: [ self halt ].
@@ -69,13 +77,14 @@ BlDevScripterStepExecutor >> executeRootStep: aStep [
 
 { #category : #actions }
 BlDevScripterStepExecutor >> executeStep: aStep [
+
 	self assertExecutableStep: aStep.
 	(self canBeExecuted: aStep) ifFalse: [ ^ self ].
 	self executePrePlayActivitiesOnStep: aStep.
 	[ 
 		aStep isHaltState ifTrue: [ self halt ].
 		aStep setUnderExecution.
-		self strategy playStep: aStep executor: self.
+		strategy playStep: aStep executor: self.
 		aStep setSuccessExecution.
 		self executePostPlayActivitiesOnStep: aStep
 	] 
@@ -83,11 +92,12 @@ BlDevScripterStepExecutor >> executeStep: aStep [
 		do: [ :anException | 
 			aStep setFailedExecution.
 			self executePostPlayActivitiesOnStep: aStep.
-			anException passWithScripter: self scripter. ]
+			anException passWithScripter: scripter ]
 ]
 
 { #category : #initialization }
 BlDevScripterStepExecutor >> initialize [
+
 	super initialize.
 	self sync.
 	activities := OrderedCollection new.
@@ -98,45 +108,56 @@ BlDevScripterStepExecutor >> initialize [
 
 { #category : #actions }
 BlDevScripterStepExecutor >> play [
-	self strategy startOnScripter: self scripter executor: self.
+
+	strategy startOnScripter: scripter executor: self
 ]
 
 { #category : #accessing }
 BlDevScripterStepExecutor >> scripter [
+
 	^ scripter
 ]
 
 { #category : #accessing }
-BlDevScripterStepExecutor >> scripter: anObject [
-	scripter := anObject
+BlDevScripterStepExecutor >> scripter: aBlDevScripter [
+
+	scripter := aBlDevScripter
 ]
 
 { #category : #accessing }
 BlDevScripterStepExecutor >> strategy [
+
 	^ strategy
 ]
 
 { #category : #accessing }
-BlDevScripterStepExecutor >> strategy: anObject [
-	strategy := anObject
+BlDevScripterStepExecutor >> strategy: aBlDevScripterStepExecutorStrategy [
+
+	strategy := aBlDevScripterStepExecutorStrategy
 ]
 
 { #category : #'initialization - execution' }
 BlDevScripterStepExecutor >> sync [
+
 	self strategy: BlDevScripterStepExecutorSyncStrategy new
 ]
 
 { #category : #'initialization - activities' }
 BlDevScripterStepExecutor >> withEventsExportOnFailure [
-	self addActivity: BlDevScripterStepExecutorEventsExportOnFailActivity new
+
+	self addActivity:
+		BlDevScripterStepExecutorEventsExportOnFailActivity new
 ]
 
 { #category : #'initialization - activities' }
 BlDevScripterStepExecutor >> withScreenshotExportOnFailure [
-	self addActivity: BlDevScripterStepExecutorScreenshotExportOnFailActivity new
+
+	self addActivity:
+		BlDevScripterStepExecutorScreenshotExportOnFailActivity new
 ]
 
 { #category : #'initialization - activities' }
 BlDevScripterStepExecutor >> withScreenshots [
+
 	self addActivity: BlDevScripterStepExecutorScreenshotActivity new
 ]

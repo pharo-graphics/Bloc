@@ -6,6 +6,6 @@ Class {
 
 { #category : #testing }
 BlDevScripterStepContinueExecutor >> canBeExecuted: aStep [
-	<return: #Boolean>
+
 	^ aStep wasExecuted not
 ]

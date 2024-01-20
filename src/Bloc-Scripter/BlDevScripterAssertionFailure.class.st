@@ -1,5 +1,5 @@
 "
-I am an {{gtClass:AssertionFailure}} providing extra {{gtClass:BlDevScripter}} information.
+I am an `AssertionFailure` that provids extra `BlDevScripter` information.
 
 "
 Class {
