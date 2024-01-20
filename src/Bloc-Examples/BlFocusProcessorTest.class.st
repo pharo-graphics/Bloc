@@ -1,70 +1,182 @@
 Class {
-	#name : #BlFocusProcessorExamples,
+	#name : #BlFocusProcessorTest,
 	#superclass : #TestCase,
 	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : #'private - instance creation' }
-BlFocusProcessorExamples >> elementWithFocusHandler [
+{ #category : #running }
+BlFocusProcessorTest >> newElementWithFocusHandler [
 
-	<sampleInstance>
 	| aTextStyler hasFocus isFocused aTextBuilder aLabel |
 	hasFocus := isFocused := false.
 	aTextStyler := [ :aString | aString asRopedText light fontSize: 9 ].
 
 	aTextBuilder := [
-	                | aText |
-	                aText := '' asRopedText.
-	                aText append: (isFocused
-			                 ifTrue: [
-			                 (aTextStyler value: 'is focused') foreground:
-				                 Color blue ]
-			                 ifFalse: [ aTextStyler value: 'not focused' ]).
-	                aText append: (aTextStyler value: ' / ').
-	                aText append: (hasFocus
-			                 ifTrue: [
-			                 (aTextStyler value: 'has focus') foreground:
-				                 Color blue ]
-			                 ifFalse: [ aTextStyler value: 'no focus' ]).
-	                aText ].
+		| aText |
+		aText := '' asRopedText.
+		aText append:
+			(isFocused
+				ifTrue: [
+					(aTextStyler value: 'is focused') foreground: Color blue ]
+				ifFalse: [ aTextStyler value: 'not focused' ]).
+		aText append: (aTextStyler value: ' / ').
+		aText append:
+			(hasFocus
+				ifTrue: [
+					(aTextStyler value: 'has focus') foreground: Color blue ]
+				ifFalse: [ aTextStyler value: 'no focus' ]).
+		aText ].
 
-	aLabel := nil.
+	aLabel :=
+		BlTextElement new
+			text: aTextBuilder value;
+			constraintsDo: [ :c |
+				c ignoreByLayout.
+				c ignored horizontal alignRight.
+				c padding: (BlInsets top: 5 right: 5) ];
+			yourself.
+
 	^ BlExampleEventsCountingElement new
-		  addChild: (aLabel := BlTextElement new
-				             text: aTextBuilder value;
-				             constraintsDo: [ :c |
-					             c ignoreByLayout.
-					             c ignored horizontal alignRight.
-					             c padding: (BlInsets top: 5 right: 5) ]);
-		  addEventHandler: (BlEventHandler
-				   on: BlFocusInEvent
-				   do: [ :anEvent |
-					   hasFocus := true.
-					   aLabel text: aTextBuilder value ]);
-		  addEventHandler: (BlEventHandler
-				   on: BlFocusOutEvent
-				   do: [ :anEvent |
-					   hasFocus := false.
-					   aLabel text: aTextBuilder value ]);
-		  addEventHandler: (BlEventHandler
-				   on: BlFocusEvent
-				   do: [ :anEvent |
-					   isFocused := true.
-					   aLabel text: aTextBuilder value ]);
-		  addEventHandler: (BlEventHandler
-				   on: BlBlurEvent
-				   do: [ :anEvent |
-					   isFocused := false.
-					   aLabel text: aTextBuilder value ])
+		addChild: aLabel;
+		addEventHandler:
+			(BlEventHandler
+				on: BlFocusInEvent
+				do: [ :anEvent |
+					hasFocus := true.
+					aLabel text: aTextBuilder value ]);
+		addEventHandler:
+			(BlEventHandler
+				on: BlFocusOutEvent
+				do: [ :anEvent |
+					hasFocus := false.
+					aLabel text: aTextBuilder value ]);
+		addEventHandler:
+			(BlEventHandler
+				on: BlFocusEvent
+				do: [ :anEvent |
+					isFocused := true.
+					aLabel text: aTextBuilder value ]);
+		addEventHandler:
+			(BlEventHandler
+				on: BlBlurEvent
+				do: [ :anEvent |
+					isFocused := false.
+					aLabel text: aTextBuilder value ]);
+		yourself
 ]
 
-{ #category : #'examples - lose focus' }
-BlFocusProcessorExamples >> loseFocus_01_give_focus_to_child_1 [
+{ #category : #running }
+BlFocusProcessorTest >> newScripterElement [
 
-	<sampleInstance>
+	^ self newElementWithFocusHandler
+		size: 600 @ 400;
+		position: 50 @ 50;
+		border: (BlBorder paint: Color gray width: 1);
+		background: Color white;
+		id: #parent;
+
+		addChild:
+			(BlTextElement new
+				text: ('#parent' asRopedText light fontSize: 11);
+				position: 8 @ 5;
+				yourself);
+
+		addChild:
+			(self newElementWithFocusHandler
+				id: #'container-1';
+				size: 240 @ 320;
+				position: 40 @ 40;
+				border: (BlBorder paint: Color gray width: 1);
+				background: (Color gray alpha: 0.1);
+
+				addChild:
+					(BlTextElement new
+						text: ('#''container-1''' asRopedText light fontSize: 11);
+						position: 8 @ 5;
+						yourself);
+
+				addChild:
+					(self newElementWithFocusHandler
+						id: #'child-1';
+						size: 200 @ 130;
+						position: 20 @ 20;
+						background: (Color gray alpha: 0.3);
+						border: (BlBorder paint: Color lightGray width: 1);
+						addChild:
+							(BlTextElement new
+								text: ('#''child-1''' asRopedText light fontSize: 11);
+								position: 8 @ 5);
+								yourself;
+						yourself);
+
+				addChild:
+					(self newElementWithFocusHandler
+						id: #'child-2';
+						size: 200 @ 130;
+						position: 20 @ 170;
+						background: (Color gray alpha: 0.3);
+						border: (BlBorder paint: Color lightGray width: 1);
+						addChild:
+							(BlTextElement new
+								text: ('#''child-2''' asRopedText light fontSize: 11);
+								position: 8 @ 5;
+								yourself);
+						yourself);
+
+				yourself);
+
+		addChild:
+			(self newElementWithFocusHandler
+				id: #'container-2';
+				size: 240 @ 320;
+				position: 320 @ 40;
+				border: (BlBorder paint: Color gray width: 1);
+				background: (Color gray alpha: 0.1);
+
+				addChild:
+					(BlTextElement new
+						text: ('#''container-2''' asRopedText light fontSize: 11);
+						position: 8 @ 5;
+						yourself);
+
+				addChild:
+					(self newElementWithFocusHandler
+						id: #'child-3';
+						size: 200 @ 130;
+						position: 20 @ 20;
+						background: (Color gray alpha: 0.3);
+						border: (BlBorder paint: Color lightGray width: 1);
+						addChild:
+							(BlTextElement new
+								text: ('#''child-3''' asRopedText light fontSize: 11);
+								position: 8 @ 5;
+								yourself);
+						yourself);
+
+				addChild:
+					(self newElementWithFocusHandler
+						id: #'child-4';
+						size: 200 @ 130;
+						position: 20 @ 170;
+						background: (Color gray alpha: 0.3);
+						border: (BlBorder paint: Color lightGray width: 1);
+						addChild:
+							(BlTextElement new
+								text: ('#''child-4''' asRopedText light fontSize: 11);
+								position: 8 @ 5;
+								yourself);
+						yourself);
+
+				yourself);
+			yourself
+]
+
+{ #category : #'tests - lose focus' }
+BlFocusProcessorTest >> testLoseFocus01GiveFocusToChild1 [
+
 	| aScripter |
 	aScripter := BlDevScripter new.
-	aScripter element: self scripterElement.
+	aScripter element: self newScripterElement.
 
 	aScripter substeps: 'Give focus to child-1' do: [ :aStep |
 		aStep requestFocus onChildNamed: #'child-1'.
@@ -158,12 +270,11 @@ BlFocusProcessorExamples >> loseFocus_01_give_focus_to_child_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - lose focus' }
-BlFocusProcessorExamples >> loseFocus_02_remove_child_1 [
+{ #category : #'tests - lose focus' }
+BlFocusProcessorTest >> testLoseFocus02RemoveChild1 [
 
-	<sampleInstance>
 	| aScripter aChild1 |
-	aScripter := self loseFocus_01_give_focus_to_child_1.
+	aScripter := self testLoseFocus01GiveFocusToChild1.
 
 	aChild1 := aScripter root childWithId: #'child-1'.
 	aScripter set key: #'child-1' value: [ aChild1 ].
@@ -267,12 +378,11 @@ BlFocusProcessorExamples >> loseFocus_02_remove_child_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - lose focus' }
-BlFocusProcessorExamples >> loseFocus_03_add_back_child_1 [
+{ #category : #'tests - lose focus' }
+BlFocusProcessorTest >> testLoseFocus03AddBackChild1 [
 
-	<sampleInstance>
 	| aScripter aChild1 |
-	aScripter := self loseFocus_02_remove_child_1.
+	aScripter := self testLoseFocus02RemoveChild1.
 
 	aChild1 := aScripter userData at: #'child-1'.
 
@@ -375,13 +485,12 @@ BlFocusProcessorExamples >> loseFocus_03_add_back_child_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - request focus' }
-BlFocusProcessorExamples >> requestFocus_01_parent [
+{ #category : #'tests - request focus' }
+BlFocusProcessorTest >> testRequestFocus01Parent [
 
-	<sampleInstance>
 	| aScripter |
 	aScripter := BlDevScripter new.
-	aScripter element: self scripterElement.
+	aScripter element: self newScripterElement.
 
 	aScripter substeps: 'Request focus on parent' do: [ :aStep |
 		aStep requestFocus.
@@ -415,12 +524,11 @@ BlFocusProcessorExamples >> requestFocus_01_parent [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - request focus' }
-BlFocusProcessorExamples >> requestFocus_02_container_1 [
+{ #category : #'tests - request focus' }
+BlFocusProcessorTest >> testRequestFocus02Container1 [
 
-	<sampleInstance>
 	| aScripter |
-	aScripter := self requestFocus_01_parent.
+	aScripter := self testRequestFocus01Parent.
 
 	aScripter substeps: 'Request focus on container-1' do: [ :aStep |
 		aStep requestFocus onChildNamed: #'container-1'.
@@ -474,12 +582,11 @@ BlFocusProcessorExamples >> requestFocus_02_container_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - request focus' }
-BlFocusProcessorExamples >> requestFocus_03_container_2 [
+{ #category : #'tests - request focus' }
+BlFocusProcessorTest >> testRequestFocus03Container2 [
 
-	<sampleInstance>
 	| aScripter |
-	aScripter := self requestFocus_02_container_1.
+	aScripter := self testRequestFocus02Container1.
 
 	aScripter substeps: 'Request focus on container-2' do: [ :aStep |
 		aStep requestFocus onChildNamed: #'container-2'.
@@ -553,12 +660,11 @@ BlFocusProcessorExamples >> requestFocus_03_container_2 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - request focus' }
-BlFocusProcessorExamples >> requestFocus_04_child_1 [
+{ #category : #'tests - request focus' }
+BlFocusProcessorTest >> testRequestFocus04Child1 [
 
-	<sampleInstance>
 	| aScripter |
-	aScripter := self requestFocus_03_container_2.
+	aScripter := self testRequestFocus03Container2.
 
 	aScripter substeps: 'Request focus on child-1' do: [ :aStep |
 		aStep requestFocus onChildNamed: #'child-1'.
@@ -652,12 +758,11 @@ BlFocusProcessorExamples >> requestFocus_04_child_1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - request focus' }
-BlFocusProcessorExamples >> requestFocus_05_child_4 [
+{ #category : #'tests - request focus' }
+BlFocusProcessorTest >> testRequestFocus05Child4 [
 
-	<sampleInstance>
 	| aScripter |
-	aScripter := self requestFocus_04_child_1.
+	aScripter := self testRequestFocus04Child1.
 
 	aScripter substeps: 'Request focus on child-4' do: [ :aStep |
 		aStep requestFocus onChildNamed: #'child-4'.
@@ -771,12 +876,11 @@ BlFocusProcessorExamples >> requestFocus_05_child_4 [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - request focus' }
-BlFocusProcessorExamples >> requestFocus_06_container_1 [
+{ #category : #'tests - request focus' }
+BlFocusProcessorTest >> testRequestFocus06Container1 [
 
-	<sampleInstance>
 	| aScripter |
-	aScripter := self requestFocus_05_child_4.
+	aScripter := self testRequestFocus05Child4.
 
 	aScripter substeps: 'Request focus on container-1' do: [ :aStep |
 		aStep requestFocus onChildNamed: #'container-1'.
@@ -888,79 +992,4 @@ BlFocusProcessorExamples >> requestFocus_06_container_1 [
 			onFocusProcessor ].
 
 	^ aScripter syncContinue
-]
-
-{ #category : #'private - instance creation' }
-BlFocusProcessorExamples >> scripterElement [
-
-	<sampleInstance>
-	^ self elementWithFocusHandler
-		  size: 600 @ 400;
-		  position: 50 @ 50;
-		  border: (BlBorder paint: Color gray width: 1);
-		  background: Color white;
-		  id: #parent;
-		  addChild: (BlTextElement new
-				   text: ('#parent' asRopedText light fontSize: 11);
-				   position: 8 @ 5);
-		  addChildren: {
-				  (self elementWithFocusHandler
-					   id: #'container-1';
-					   size: 240 @ 320;
-					   position: 40 @ 40;
-					   border: (BlBorder paint: Color gray width: 1);
-					   background: (Color gray alpha: 0.1);
-					   addChild: (BlTextElement new
-							    text: ('#''container-1''' asRopedText light fontSize: 11);
-							    position: 8 @ 5);
-					   addChildren: {
-							   (self elementWithFocusHandler
-								    id: #'child-1';
-								    size: 200 @ 130;
-								    position: 20 @ 20;
-								    background: (Color gray alpha: 0.3);
-								    border: (BlBorder paint: Color lightGray width: 1);
-								    addChild: (BlTextElement new
-										     text: ('#''child-1''' asRopedText light fontSize: 11);
-										     position: 8 @ 5)).
-
-							   (self elementWithFocusHandler
-								    id: #'child-2';
-								    size: 200 @ 130;
-								    position: 20 @ 170;
-								    background: (Color gray alpha: 0.3);
-								    border: (BlBorder paint: Color lightGray width: 1);
-								    addChild: (BlTextElement new
-										     text: ('#''child-2''' asRopedText light fontSize: 11);
-										     position: 8 @ 5)) }).
-
-				  (self elementWithFocusHandler
-					   id: #'container-2';
-					   size: 240 @ 320;
-					   position: 320 @ 40;
-					   border: (BlBorder paint: Color gray width: 1);
-					   background: (Color gray alpha: 0.1);
-					   addChild: (BlTextElement new
-							    text: ('#''container-2''' asRopedText light fontSize: 11);
-							    position: 8 @ 5);
-					   addChildren: {
-							   (self elementWithFocusHandler
-								    id: #'child-3';
-								    size: 200 @ 130;
-								    position: 20 @ 20;
-								    background: (Color gray alpha: 0.3);
-								    border: (BlBorder paint: Color lightGray width: 1);
-								    addChild: (BlTextElement new
-										     text: ('#''child-3''' asRopedText light fontSize: 11);
-										     position: 8 @ 5)).
-
-							   (self elementWithFocusHandler
-								    id: #'child-4';
-								    size: 200 @ 130;
-								    position: 20 @ 170;
-								    background: (Color gray alpha: 0.3);
-								    border: (BlBorder paint: Color lightGray width: 1);
-								    addChild: (BlTextElement new
-										     text: ('#''child-4''' asRopedText light fontSize: 11);
-										     position: 8 @ 5)) }) }
 ]
