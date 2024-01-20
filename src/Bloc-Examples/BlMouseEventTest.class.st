@@ -1,11 +1,11 @@
 Class {
-	#name : #BlMouseEventExamplesTest,
+	#name : #BlMouseEventTest,
 	#superclass : #TestCase,
 	#category : #'Bloc-Examples-Event'
 }
 
 { #category : #running }
-BlMouseEventExamplesTest >> bottomLeftText: anEvent [
+BlMouseEventTest >> bottomLeftText: anEvent [
 
 	self
 		pointToText: (self boundsOf: anEvent currentTarget parent) bottomLeft
@@ -13,7 +13,7 @@ BlMouseEventExamplesTest >> bottomLeftText: anEvent [
 ]
 
 { #category : #running }
-BlMouseEventExamplesTest >> bottomRightText: anEvent [
+BlMouseEventTest >> bottomRightText: anEvent [
 
 	self
 		pointToText: (self boundsOf: anEvent currentTarget parent) bottomRight
@@ -21,7 +21,7 @@ BlMouseEventExamplesTest >> bottomRightText: anEvent [
 ]
 
 { #category : #running }
-BlMouseEventExamplesTest >> boundsOf: anElement [
+BlMouseEventTest >> boundsOf: anElement [
 
 	| aRoot |
 	aRoot := anElement.
@@ -34,7 +34,7 @@ BlMouseEventExamplesTest >> boundsOf: anElement [
 ]
 
 { #category : #'running - instance creation' }
-BlMouseEventExamplesTest >> newBox [
+BlMouseEventTest >> newBox [
 
 	^ BlElement new
 		  addChild: (self newLabel
@@ -69,7 +69,7 @@ BlMouseEventExamplesTest >> newBox [
 ]
 
 { #category : #'running - instance creation' }
-BlMouseEventExamplesTest >> newChild [
+BlMouseEventTest >> newChild [
 
 	^ self newBox
 		  border: (BlBorder paint: Color red width: 1);
@@ -79,7 +79,7 @@ BlMouseEventExamplesTest >> newChild [
 ]
 
 { #category : #'running - instance creation' }
-BlMouseEventExamplesTest >> newGrandChild [
+BlMouseEventTest >> newGrandChild [
 
 	^ self newBox
 		  border: (BlBorder paint: Color blue width: 1);
@@ -89,7 +89,7 @@ BlMouseEventExamplesTest >> newGrandChild [
 ]
 
 { #category : #'running - instance creation' }
-BlMouseEventExamplesTest >> newLabel [
+BlMouseEventTest >> newLabel [
 
 	^ BlTextElement new
 		  preventMeAndChildrenMouseEvents;
@@ -100,7 +100,7 @@ BlMouseEventExamplesTest >> newLabel [
 ]
 
 { #category : #'running - instance creation' }
-BlMouseEventExamplesTest >> newParent [
+BlMouseEventTest >> newParent [
 
 	^ self newBox
 		  border: (BlBorder paint: Color gray width: 1);
@@ -112,7 +112,7 @@ BlMouseEventExamplesTest >> newParent [
 ]
 
 { #category : #running }
-BlMouseEventExamplesTest >> pointToText: aPoint for: aTextElement [
+BlMouseEventTest >> pointToText: aPoint for: aTextElement [
 
 	aTextElement text: 
 		(aPoint asRopedText
@@ -122,9 +122,8 @@ BlMouseEventExamplesTest >> pointToText: aPoint for: aTextElement [
 ]
 
 { #category : #tests }
-BlMouseEventExamplesTest >> testParentWithClip [
+BlMouseEventTest >> testParentWithClip [
 
-	<sampleInstance>
 	| gray red blue |
 	blue := self newGrandChild.
 	blue position: 100 @ 50.
@@ -145,27 +144,24 @@ BlMouseEventExamplesTest >> testParentWithClip [
 	self assert: (gray findMouseEventTargetAt: 150 @ 150) equals: red.
 
 	"on red outside blue and gray"
-	self assert: (gray findMouseEventTargetAt: 200 @ 300) equals: nil.
+	self assert: (gray findMouseEventTargetAt: 200 @ 300) isNil.
 
 	"on blue inside red and gray"
 	self assert: (gray findMouseEventTargetAt: 250 @ 200) equals: blue.
 
 	"on blue inside red but outside gray"
-	self assert: (gray findMouseEventTargetAt: 350 @ 200) equals: nil.
+	self assert: (gray findMouseEventTargetAt: 350 @ 200) isNil.
 
 	"on blue outside red and gray"
-	self assert: (gray findMouseEventTargetAt: 550 @ 200) equals: nil.
+	self assert: (gray findMouseEventTargetAt: 550 @ 200) isNil.
 
 	"outside of all"
-	self assert: (gray findMouseEventTargetAt: 700 @ 500) equals: nil.
-
-	^ gray
+	self assert: (gray findMouseEventTargetAt: 700 @ 500) isNil
 ]
 
 { #category : #tests }
-BlMouseEventExamplesTest >> testParentWithoutClipChildWithClip [
+BlMouseEventTest >> testParentWithoutClipChildWithClip [
 
-	<sampleInstance>
 	| gray red blue |
 	blue := self newGrandChild.
 	blue position: 100 @ 50.
@@ -195,18 +191,15 @@ BlMouseEventExamplesTest >> testParentWithoutClipChildWithClip [
 	self assert: (gray findMouseEventTargetAt: 350 @ 200) equals: blue.
 
 	"on blue outside red and gray"
-	self assert: (gray findMouseEventTargetAt: 550 @ 200) equals: nil.
+	self assert: (gray findMouseEventTargetAt: 550 @ 200) isNil.
 
 	"outside of all"
-	self assert: (gray findMouseEventTargetAt: 700 @ 500) equals: nil.
-
-	^ gray
+	self assert: (gray findMouseEventTargetAt: 700 @ 500) isNil
 ]
 
 { #category : #tests }
-BlMouseEventExamplesTest >> testParentWithoutClipChildWithoutClip [
+BlMouseEventTest >> testParentWithoutClipChildWithoutClip [
 
-	<sampleInstance>
 	| gray red blue |
 	blue := self newGrandChild.
 	blue position: 100 @ 50.
@@ -240,13 +233,11 @@ BlMouseEventExamplesTest >> testParentWithoutClipChildWithoutClip [
 	self assert: (gray findMouseEventTargetAt: 550 @ 200) equals: blue.
 
 	"outside of all"
-	self assert: (gray findMouseEventTargetAt: 700 @ 500) equals: nil.
-
-	^ gray
+	self assert: (gray findMouseEventTargetAt: 700 @ 500) isNil
 ]
 
 { #category : #running }
-BlMouseEventExamplesTest >> topLeftText: anEvent [
+BlMouseEventTest >> topLeftText: anEvent [
 
 	self
 		pointToText: (self boundsOf: anEvent currentTarget parent) topLeft
@@ -254,7 +245,7 @@ BlMouseEventExamplesTest >> topLeftText: anEvent [
 ]
 
 { #category : #running }
-BlMouseEventExamplesTest >> topRightText: anEvent [
+BlMouseEventTest >> topRightText: anEvent [
 
 	self
 		pointToText: (self boundsOf: anEvent currentTarget parent) topRight
