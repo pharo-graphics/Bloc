@@ -1,5 +1,5 @@
 Class {
-	#name : #BlClickEventExamplesTest,
+	#name : #BlClickEventTest,
 	#superclass : #TestCase,
 	#traits : 'TBlDevScripterExamples',
 	#classTraits : 'TBlDevScripterExamples classTrait',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : #'running - elements' }
-BlClickEventExamplesTest >> element [
+BlClickEventTest >> element [
 
 	^ BlElement new
 		  layout: BlLinearLayout vertical;
@@ -20,7 +20,7 @@ BlClickEventExamplesTest >> element [
 ]
 
 { #category : #tests }
-BlClickEventExamplesTest >> testClickInHiddenChild [
+BlClickEventTest >> testClickInHiddenChild [
 
 	| aScripter |
 	aScripter := self twoElementsInScripter.
@@ -45,7 +45,7 @@ BlClickEventExamplesTest >> testClickInHiddenChild [
 ]
 
 { #category : #tests }
-BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleClippedGrandchild [
+BlClickEventTest >> testClickInHiddenChildAndVisibleClippedGrandchild [
 
 	| aScripter |
 	aScripter := self threeElementsWithTrueChildClippingInScripter.
@@ -72,7 +72,7 @@ BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleClippedGrandchild [
 ]
 
 { #category : #tests }
-BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleGrandchild [
+BlClickEventTest >> testClickInHiddenChildAndVisibleGrandchild [
 
 	| aScripter |
 	aScripter := self threeElementsInScripter.
@@ -99,7 +99,7 @@ BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleGrandchild [
 ]
 
 { #category : #tests }
-BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleUnclippedGrandchild [
+BlClickEventTest >> testClickInHiddenChildAndVisibleUnclippedGrandchild [
 
 	| aScripter |
 	aScripter := self threeElementsWithFalseChildClippingInScripter.
@@ -126,7 +126,7 @@ BlClickEventExamplesTest >> testClickInHiddenChildAndVisibleUnclippedGrandchild 
 ]
 
 { #category : #tests }
-BlClickEventExamplesTest >> testClickInParentWithGoneChild [
+BlClickEventTest >> testClickInParentWithGoneChild [
 
 	| aScripter |
 	aScripter := self twoElementsInScripter.
@@ -151,7 +151,7 @@ BlClickEventExamplesTest >> testClickInParentWithGoneChild [
 ]
 
 { #category : #tests }
-BlClickEventExamplesTest >> testClickInVisibleChild [
+BlClickEventTest >> testClickInVisibleChild [
 
 	| aScripter |
 	aScripter := self twoElementsInScripter.
@@ -171,7 +171,7 @@ BlClickEventExamplesTest >> testClickInVisibleChild [
 ]
 
 { #category : #'running - elements' }
-BlClickEventExamplesTest >> threeElements [
+BlClickEventTest >> threeElements [
 
 	^ self element
 		  addChild: (self element
@@ -184,7 +184,7 @@ BlClickEventExamplesTest >> threeElements [
 ]
 
 { #category : #'running - elements in scripter' }
-BlClickEventExamplesTest >> threeElementsInScripter [
+BlClickEventTest >> threeElementsInScripter [
 
 	^ self scripterWithElement: [ :aTarget :aScripter |
 		  | anElement aChild anEventCollection |
@@ -212,7 +212,7 @@ BlClickEventExamplesTest >> threeElementsInScripter [
 ]
 
 { #category : #'running - elements' }
-BlClickEventExamplesTest >> threeElementsWithFalseChildClipping [
+BlClickEventTest >> threeElementsWithFalseChildClipping [
 
 	| aParent aChild aGrandchild |
 	aParent := self element
@@ -248,7 +248,7 @@ BlClickEventExamplesTest >> threeElementsWithFalseChildClipping [
 ]
 
 { #category : #'running - elements in scripter' }
-BlClickEventExamplesTest >> threeElementsWithFalseChildClippingInScripter [
+BlClickEventTest >> threeElementsWithFalseChildClippingInScripter [
 
 	^ self scripterWithElement: [ :aTarget :aScripter |
 		  | anElement aChild anEventCollection |
@@ -276,7 +276,7 @@ BlClickEventExamplesTest >> threeElementsWithFalseChildClippingInScripter [
 ]
 
 { #category : #'running - elements' }
-BlClickEventExamplesTest >> threeElementsWithTrueChildClipping [
+BlClickEventTest >> threeElementsWithTrueChildClipping [
 
 	| aParent aChild |
 	aParent := self threeElementsWithFalseChildClipping.
@@ -288,7 +288,7 @@ BlClickEventExamplesTest >> threeElementsWithTrueChildClipping [
 ]
 
 { #category : #'running - elements in scripter' }
-BlClickEventExamplesTest >> threeElementsWithTrueChildClippingInScripter [
+BlClickEventTest >> threeElementsWithTrueChildClippingInScripter [
 
 	^ self scripterWithElement: [ :aTarget :aScripter |
 		  | anElement aChild anEventCollection |
@@ -316,7 +316,7 @@ BlClickEventExamplesTest >> threeElementsWithTrueChildClippingInScripter [
 ]
 
 { #category : #'running - elements' }
-BlClickEventExamplesTest >> twoElements [
+BlClickEventTest >> twoElements [
 
 	^ self element
 		  addChild: self element as: #child;
@@ -326,7 +326,7 @@ BlClickEventExamplesTest >> twoElements [
 ]
 
 { #category : #'running - elements in scripter' }
-BlClickEventExamplesTest >> twoElementsInScripter [
+BlClickEventTest >> twoElementsInScripter [
 
 	^ self scripterWithElement: [ :aTarget :aScripter |
 		  | anElement anEventCollection |
