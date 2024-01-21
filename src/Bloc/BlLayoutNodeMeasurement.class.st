@@ -1,29 +1,27 @@
 Class {
-	#name : 'BlLayoutNodeMeasurement',
-	#superclass : 'Object',
-	#category : 'Bloc-Layouts-Model',
-	#package : 'Bloc',
-	#tag : 'Layouts-Model'
+	#name : #BlLayoutNodeMeasurement,
+	#superclass : #Object,
+	#category : 'Bloc-Layouts-Model'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutNodeMeasurement >> bounds [
 	^ BlBounds origin: self position extent: self extent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutNodeMeasurement >> extent [
 	^ 0@0
 ]
 
-{ #category : 'measure' }
+{ #category : #measure }
 BlLayoutNodeMeasurement >> measure: aLayoutChildNode with: anExtentSpecOrBlock [
 	<return: #BlLayoutNodeMeasurement>
 	
 	^ self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlLayoutNodeMeasurement >> position [
 	^ 0@0
 ]

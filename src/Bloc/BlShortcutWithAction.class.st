@@ -16,65 +16,63 @@ BlShortcutWithAction new
 
 "
 Class {
-	#name : 'BlShortcutWithAction',
-	#superclass : 'BlBasicShortcut',
+	#name : #BlShortcutWithAction,
+	#superclass : #BlBasicShortcut,
 	#instVars : [
 		'name',
 		'description',
 		'action'
 	],
-	#category : 'Bloc-Events-KeyBinding',
-	#package : 'Bloc',
-	#tag : 'Events-KeyBinding'
+	#category : 'Bloc-Events-KeyBinding'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlShortcutWithAction >> action [
 	^ action
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlShortcutWithAction >> action: aBlockClosure [
 	"An action should be a block closure in a form [ :aShortcutEvent :aShortcut | ]"
 
 	action := aBlockClosure
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlShortcutWithAction >> description [
 	^ description
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlShortcutWithAction >> description: anObject [
 	description := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlShortcutWithAction >> initialize [
 	super initialize.
 
 	action := [ :aShortcutEvent :aShortcut | ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlShortcutWithAction >> name [
 	^ name
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlShortcutWithAction >> name: anObject [
 	name := anObject
 ]
 
-{ #category : 'evaluation' }
+{ #category : #evaluation }
 BlShortcutWithAction >> performDueTo: aShortcutEvent [
 	self action
 		cull: aShortcutEvent
 		cull: self
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlShortcutWithAction >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.

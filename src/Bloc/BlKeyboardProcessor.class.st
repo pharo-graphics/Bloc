@@ -4,8 +4,8 @@ Is responsible for processing {{gtClass:BlKeyboardEvent}} which are sent by the 
 
 "
 Class {
-	#name : 'BlKeyboardProcessor',
-	#superclass : 'BlBaseEventProcessor',
+	#name : #BlKeyboardProcessor,
+	#superclass : #BlBaseEventProcessor,
 	#instVars : [
 		'buffer',
 		'textInputBuffer',
@@ -15,19 +15,17 @@ Class {
 		'previousShortcutTime',
 		'previousShortcutRepeatTime'
 	],
-	#category : 'Bloc-Space - Events',
-	#package : 'Bloc',
-	#tag : 'Space - Events'
+	#category : 'Bloc-Space - Events'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlKeyboardProcessor >> buffer [
 	"Return the buffer usually instance of BlKeyboardBuffer or subclasses"
 
 	^ buffer
 ]
 
-{ #category : 'target detection' }
+{ #category : #'target detection' }
 BlKeyboardProcessor >> findTarget [
 	"Find and return an appropriate element target for a keyboard event.
 	By default a keyboard event target is currently focused element if exists
@@ -39,7 +37,7 @@ BlKeyboardProcessor >> findTarget [
 		ifFalse: [ self space root ]
 ]
 
-{ #category : 'event processing' }
+{ #category : #'event processing' }
 BlKeyboardProcessor >> handleSpaceEventProcessedEvent: anEvent [
 	| aShortcutEvent aTimeNow |
 	
@@ -65,7 +63,7 @@ BlKeyboardProcessor >> handleSpaceEventProcessedEvent: anEvent [
 	previousShortcutRepeatTime := self space time now
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlKeyboardProcessor >> initialize [
 	super initialize.
 	
@@ -80,7 +78,7 @@ BlKeyboardProcessor >> initialize [
 	previousShortcutRepeatTime := DateAndTime now. "when the last repeated shortcut was sent"
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlKeyboardProcessor >> keystrokesAllowed [
 	"Return true if keystrokes are allowed, false otherwise"
 	<return: #Boolean>
@@ -88,7 +86,7 @@ BlKeyboardProcessor >> keystrokesAllowed [
 	^ preventKeystrokes not
 ]
 
-{ #category : 'event processing' }
+{ #category : #'event processing' }
 BlKeyboardProcessor >> processBufferedTextInput [
 	| aTarget |
 
@@ -106,7 +104,7 @@ BlKeyboardProcessor >> processBufferedTextInput [
 	textInputBuffer reset
 ]
 
-{ #category : 'event processing' }
+{ #category : #'event processing' }
 BlKeyboardProcessor >> processKeyDown: anEvent [
 	| aTarget aShortcutEvent |
 
@@ -139,7 +137,7 @@ BlKeyboardProcessor >> processKeyDown: anEvent [
 	preventKeystrokes := aShortcutEvent isConsumed
 ]
 
-{ #category : 'event processing' }
+{ #category : #'event processing' }
 BlKeyboardProcessor >> processKeyUp: anEvent [
 	| aTarget |
 
@@ -162,7 +160,7 @@ BlKeyboardProcessor >> processKeyUp: anEvent [
 		ifTrue: [ preventKeystrokes := false ]
 ]
 
-{ #category : 'event processing' }
+{ #category : #'event processing' }
 BlKeyboardProcessor >> processTextInput: anEvent [	
 	self keystrokesAllowed
 		ifFalse: [ ^ self ].
@@ -172,7 +170,7 @@ BlKeyboardProcessor >> processTextInput: anEvent [
 		modifiers: anEvent modifiers
 ]
 
-{ #category : 'event processing' }
+{ #category : #'event processing' }
 BlKeyboardProcessor >> processWindowFocusOut: anEvent [
 
 	"Take all registered key down events from the buffer and send them as key up events to release keys"

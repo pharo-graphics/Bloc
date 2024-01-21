@@ -10,8 +10,8 @@ My components are named according to mathematical convention:
 
 "
 Class {
-	#name : 'BlMatrix2D',
-	#superclass : 'BlMatrix',
+	#name : #BlMatrix2D,
+	#superclass : #BlMatrix,
 	#instVars : [
 		'x',
 		'y',
@@ -20,12 +20,10 @@ Class {
 		'sx',
 		'sy'
 	],
-	#category : 'Bloc-Basic-Math',
-	#package : 'Bloc',
-	#tag : 'Basic-Math'
+	#category : 'Bloc-Basic-Math'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMatrix2D class >> reflection: aDiagonalVector [
 	"Return a matrix which corresponds to a reflection transformation with a given diagonal"
 
@@ -34,7 +32,7 @@ BlMatrix2D class >> reflection: aDiagonalVector [
 		  yourself
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMatrix2D class >> rotation: anAngle [
 	"Return a matrix which corresponds to a rotation transformation by given angle"
 
@@ -43,7 +41,7 @@ BlMatrix2D class >> rotation: anAngle [
 		  yourself
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMatrix2D class >> scale: aBlVector [
 	"Return a matrix which corresponds to a scale transformation by given factor"
 
@@ -52,7 +50,7 @@ BlMatrix2D class >> scale: aBlVector [
 		  yourself
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMatrix2D class >> shear: aCoefficientPoint [
 	"Return a matrix which corresponds to a shear transformation by given coefficient"
 
@@ -61,7 +59,7 @@ BlMatrix2D class >> shear: aCoefficientPoint [
 		  yourself
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlMatrix2D class >> translation: aBlVector [
 	"Return a matrix which corresponds to a translation transformation by given factor"
 
@@ -70,7 +68,7 @@ BlMatrix2D class >> translation: aBlVector [
 		  yourself
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlMatrix2D >> = anObject [
 	self == anObject
 		ifTrue: [ ^ true ].
@@ -86,7 +84,7 @@ BlMatrix2D >> = anObject [
 						and: [ self y = anObject y ] ] ] ] ]
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlMatrix2D >> asMatrixCollection [
 	^ Array2D rows: 3 columns: 3 contents: {
 		sx . shx . x.
@@ -95,7 +93,7 @@ BlMatrix2D >> asMatrixCollection [
 	}
 ]
 
-{ #category : 'matrix - mathematical functions' }
+{ #category : #'matrix - mathematical functions' }
 BlMatrix2D >> decomposition [
 	"Decompose this 2D Matrix into components and return a resulting decomposition.
 	Based on https://drafts.csswg.org/css-transforms/#decomposing-a-2d-matrix"
@@ -161,7 +159,7 @@ BlMatrix2D >> decomposition [
 		matrix: matrix
 ]
 
-{ #category : 'matrix - mathematical functions' }
+{ #category : #'matrix - mathematical functions' }
 BlMatrix2D >> determinant [
 	"Compute and return my determinant"
 	<return: #Number>
@@ -169,7 +167,7 @@ BlMatrix2D >> determinant [
 	^ (sx * sy) - (shy * shx)
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlMatrix2D >> hash [
 	^ ((((self sx hash bitXor: self shy hash)
 		bitXor: self shx hash)
@@ -178,7 +176,7 @@ BlMatrix2D >> hash [
 					bitXor: self y hash
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlMatrix2D >> initialize [
 	super initialize.
 	
@@ -190,7 +188,7 @@ BlMatrix2D >> initialize [
 	y := 0.0
 ]
 
-{ #category : 'matrix - mathematical functions' }
+{ #category : #'matrix - mathematical functions' }
 BlMatrix2D >> inverse [
 	"In-place inverse me.
 	Throw BlSingularMatrixError if matrix is singular (non-invertible or degenerate)"
@@ -217,7 +215,7 @@ BlMatrix2D >> inverse [
 	y := inverseDeterminant * f
 ]
 
-{ #category : 'matrix - mathematical functions' }
+{ #category : #'matrix - mathematical functions' }
 BlMatrix2D >> inverted [
 	"Return a new instance that is my inverse.
 	Signal a `BlSingularMatrixError` if matrix is singular (non-invertible or degenerate)"
@@ -225,14 +223,14 @@ BlMatrix2D >> inverted [
 	^ self copy inverse
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlMatrix2D >> is2D [
 	"Return true if matrix is 2D, false otherwise"
 	
 	^ true
 ]
 
-{ #category : 'matrix - testing' }
+{ #category : #'matrix - testing' }
 BlMatrix2D >> isIdentity [
 	"Return true if I represent an identity transformation, false otherwise"
 
@@ -244,7 +242,7 @@ BlMatrix2D >> isIdentity [
 						y = 0.0 ] ] ] ] ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlMatrix2D >> matrix: aMatrix [
 	"Copy matrix values"
 	
@@ -256,7 +254,7 @@ BlMatrix2D >> matrix: aMatrix [
 	y := aMatrix y
 ]
 
-{ #category : 'matrix - transformations' }
+{ #category : #'matrix - transformations' }
 BlMatrix2D >> multiplyBy: aMatrix2D [
 	"Perform a right multiplication by a given 2D matrix"
 	| r11 r12 r21 r22 r31 r32 |
@@ -276,17 +274,17 @@ BlMatrix2D >> multiplyBy: aMatrix2D [
 	y := r32
 ]
 
-{ #category : 'matrix - transformations' }
+{ #category : #'matrix - transformations' }
 BlMatrix2D >> perspective: aDepth [
 	"2D matrix does not have a perspective components"
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlMatrix2D >> printOn: aStream [
 	aStream print: self asMatrixCollection
 ]
 
-{ #category : 'matrix - transformations' }
+{ #category : #'matrix - transformations' }
 BlMatrix2D >> reflectBy: aDiagonalVector [
 	"Apply a reflection transformation given by a diagonal vector"
 		
@@ -294,7 +292,7 @@ BlMatrix2D >> reflectBy: aDiagonalVector [
 	self multiplyBy: (self class reflection: aDiagonalVector)
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlMatrix2D >> reflection: aDiagonalVector [
 	"Set me to be a 2D matrix representing a reflection defined by a given diagonal"
 
@@ -306,7 +304,7 @@ BlMatrix2D >> reflection: aDiagonalVector [
 	shy := 0
 ]
 
-{ #category : 'matrix - transformations' }
+{ #category : #'matrix - transformations' }
 BlMatrix2D >> rotateByRadians: anAngle around: aBlVector [
 	"Apply a rotation transformation by a given amount of radians around a provided axis vector"
 	self
@@ -321,7 +319,7 @@ BlMatrix2D >> rotateByRadians: anAngle around: aBlVector [
 	self multiplyBy: (self class rotation: anAngle)
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlMatrix2D >> rotation: anAngle [
 	"Set me to be a 2D matrix representing a rotation by a given angle in radians"
 
@@ -337,7 +335,7 @@ BlMatrix2D >> rotation: anAngle [
 	shy := aSin
 ]
 
-{ #category : 'matrix - transformations' }
+{ #category : #'matrix - transformations' }
 BlMatrix2D >> scaleBy: aBlVector [
 	| aScale3D |
 	"Apply a scaling defined by a given vector"
@@ -361,7 +359,7 @@ BlMatrix2D >> scaleBy: aBlVector [
 	y := y * aScale3D y
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlMatrix2D >> shear: aCoefficientPoint [
 	"Set me to be a 2D matrix representing a shear by a given coefficient (shx, shy)"
 	
@@ -373,7 +371,7 @@ BlMatrix2D >> shear: aCoefficientPoint [
 	shy := aCoefficientPoint y
 ]
 
-{ #category : 'matrix - accessing' }
+{ #category : #'matrix - accessing' }
 BlMatrix2D >> shx [
 	"Returns the X coordinate shearing element of the affine transformation matrix"
 	<return: #Number>
@@ -381,12 +379,12 @@ BlMatrix2D >> shx [
 	^ shx
 ]
 
-{ #category : 'matrix - accessing' }
+{ #category : #'matrix - accessing' }
 BlMatrix2D >> shx: anObject [
 	shx := anObject
 ]
 
-{ #category : 'matrix - accessing' }
+{ #category : #'matrix - accessing' }
 BlMatrix2D >> shy [
 	"Returns the Y coordinate shearing element of the affine transformation matrix"
 	<return: #Number>
@@ -394,12 +392,12 @@ BlMatrix2D >> shy [
 	^ shy
 ]
 
-{ #category : 'matrix - accessing' }
+{ #category : #'matrix - accessing' }
 BlMatrix2D >> shy: anObject [
 	shy := anObject
 ]
 
-{ #category : 'matrix - accessing' }
+{ #category : #'matrix - accessing' }
 BlMatrix2D >> sx [
 	"Returns the X coordinate scaling element of the affine transformation matrix"
 	<return: #Number>
@@ -407,24 +405,24 @@ BlMatrix2D >> sx [
 	^ sx
 ]
 
-{ #category : 'matrix - accessing' }
+{ #category : #'matrix - accessing' }
 BlMatrix2D >> sx: anObject [
 	sx := anObject
 ]
 
-{ #category : 'matrix - accessing' }
+{ #category : #'matrix - accessing' }
 BlMatrix2D >> sy [
 	"Returns the Y coordinate scaling element of the affine transformation matrix"
 
 	^ sy
 ]
 
-{ #category : 'matrix - accessing' }
+{ #category : #'matrix - accessing' }
 BlMatrix2D >> sy: anObject [
 	sy := anObject
 ]
 
-{ #category : 'matrix - transforming points' }
+{ #category : #'matrix - transforming points' }
 BlMatrix2D >> transformBounds: aBlBounds [
 	"In-place transform given BlBounds according to my transformation.
 	(local to global transformation)"
@@ -467,13 +465,13 @@ BlMatrix2D >> transformBounds: aBlBounds [
 	^ aBlBounds
 ]
 
-{ #category : 'matrix - transforming points' }
+{ #category : #'matrix - transforming points' }
 BlMatrix2D >> transformPoint2D: aPoint2D [
 	
 	^ self transformX: aPoint2D x Y: aPoint2D y
 ]
 
-{ #category : 'matrix - transforming points' }
+{ #category : #'matrix - transforming points' }
 BlMatrix2D >> transformX: aX Y: aY [
 	| newX newY |
 	
@@ -483,19 +481,19 @@ BlMatrix2D >> transformX: aX Y: aY [
 	^ newX @ newY
 ]
 
-{ #category : 'matrix - transforming points' }
+{ #category : #'matrix - transforming points' }
 BlMatrix2D >> transformX: aX withY: aY [
 
 	^ (aX * sx) + (aY * shx) + x
 ]
 
-{ #category : 'matrix - transforming points' }
+{ #category : #'matrix - transforming points' }
 BlMatrix2D >> transformY: aY withX: aX [
 
 	^ (aX * shy) + (aY * sy) + y
 ]
 
-{ #category : 'matrix - transformations' }
+{ #category : #'matrix - transformations' }
 BlMatrix2D >> translateBy: aBlVector [
 	"Apply a translation by a given vector"
 	| aTranslate3D |
@@ -514,7 +512,7 @@ BlMatrix2D >> translateBy: aBlVector [
 	y := y + aTranslate3D y.
 ]
 
-{ #category : 'matrix - accessing' }
+{ #category : #'matrix - accessing' }
 BlMatrix2D >> x [
 	"Returns the X coordinate of the translation element of the affine transformation matrix"
 	<return: #Number>
@@ -522,12 +520,12 @@ BlMatrix2D >> x [
 	^ x
 ]
 
-{ #category : 'matrix - accessing' }
+{ #category : #'matrix - accessing' }
 BlMatrix2D >> x: anObject [
 	x := anObject
 ]
 
-{ #category : 'matrix - accessing' }
+{ #category : #'matrix - accessing' }
 BlMatrix2D >> y [
 	"Returns the Y coordinate of the translation element of the affine transformation matrix"
 	<return: #Number>
@@ -535,7 +533,7 @@ BlMatrix2D >> y [
 	^ y
 ]
 
-{ #category : 'matrix - accessing' }
+{ #category : #'matrix - accessing' }
 BlMatrix2D >> y: anObject [
 	y := anObject
 ]

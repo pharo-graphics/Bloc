@@ -1,65 +1,63 @@
 Class {
-	#name : 'BlCompositeAlignment',
-	#superclass : 'BlElementAlignment',
+	#name : #BlCompositeAlignment,
+	#superclass : #BlElementAlignment,
 	#instVars : [
 		'vertical',
 		'horizontal',
 		'direction'
 	],
-	#category : 'Bloc-Layouts-Alignment',
-	#package : 'Bloc',
-	#tag : 'Layouts-Alignment'
+	#category : 'Bloc-Layouts-Alignment'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlCompositeAlignment class >> horizontal: aHorizontalAlignent vertical: aVerticalAlignment [
 	^ self new
 		horizontal: aHorizontalAlignent vertical: aVerticalAlignment;
 		yourself
 ]
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BlCompositeAlignment class >> initialize [
 
 	self initializeSingletons
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlCompositeAlignment >> directed: aBlLayoutDirection [
 	direction := aBlLayoutDirection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlCompositeAlignment >> horizontal [
 	^ horizontal
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlCompositeAlignment >> horizontal: aHorizontalAlignent vertical: aVerticalAlignment [
 	horizontal := aHorizontalAlignent.
 	vertical := aVerticalAlignment
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlCompositeAlignment >> initialize [
 	super initialize.
 	
 	self leftToRight
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlCompositeAlignment >> inverted [
 	^ (self class horizontal: (vertical inverted directed: direction) vertical: (horizontal directed: direction) inverted)
 		directed: direction;
 		yourself
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlCompositeAlignment >> leftToRight [
 	direction := BlLayoutDirection leftToRight
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlCompositeAlignment >> printOn: aStream [
 	aStream nextPut: $(.
 	horizontal printOn: aStream.
@@ -71,19 +69,19 @@ BlCompositeAlignment >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlCompositeAlignment >> rightToLeft [
 	direction := BlLayoutDirection rightToLeft
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlCompositeAlignment >> swap [
 	^ (self class horizontal: horizontal swap vertical: vertical swap)
 			directed: direction;
 			yourself
 ]
 
-{ #category : 'translation' }
+{ #category : #translation }
 BlCompositeAlignment >> translationOf: aBounds in: aContainerBounds [
 	| h v |
 	h := (horizontal directed: direction) translationOf: aBounds in: aContainerBounds.
@@ -91,7 +89,7 @@ BlCompositeAlignment >> translationOf: aBounds in: aContainerBounds [
 	^ h + v
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlCompositeAlignment >> vertical [
 	^ vertical
 ]
