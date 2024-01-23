@@ -34,8 +34,8 @@ BlFrameLayoutConstraintsHorizontal >> alignLeftAt: aUnitCoordinateNumber [
 	"Align the left of the element horizontally with a unit-coordinate inside of the parent"
 
 	alignment := BlHorizontalCoordinateLeftAlignment new
-		coordinate: aUnitCoordinateNumber;
-		relativeAlignment: BlElementAlignment horizontal start
+		             coordinate: aUnitCoordinateNumber;
+		             relativeAlignment: BlElementAlignment horizontal start
 ]
 
 { #category : #alignment }
