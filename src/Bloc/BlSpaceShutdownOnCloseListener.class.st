@@ -21,7 +21,7 @@ Class {
 	#instVars : [
 		'shouldSave'
 	],
-	#category : #'Bloc-Space - Events'
+	#category : 'Bloc-Space - Events'
 }
 
 { #category : #'api - event managing' }

@@ -11,7 +11,7 @@ Class {
 		'name',
 		'tasks'
 	],
-	#category : #'Bloc-Space - Telemetry'
+	#category : 'Bloc-Space - Telemetry'
 }
 
 { #category : #adding }

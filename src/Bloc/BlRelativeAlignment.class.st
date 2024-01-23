@@ -1,12 +1,18 @@
 Class {
 	#name : #BlRelativeAlignment,
 	#superclass : #BlElementAlignment,
-	#category : #'Bloc-Layouts-Alignment'
+	#category : 'Bloc-Layouts-Alignment'
 }
 
 { #category : #factory }
 BlRelativeAlignment class >> horizontal [
 	^ self subclassResponsibility
+]
+
+{ #category : #'class initialization' }
+BlRelativeAlignment class >> initialize [
+
+	self initializeSingletons
 ]
 
 { #category : #factory }

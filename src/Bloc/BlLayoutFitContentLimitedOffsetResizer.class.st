@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'offset'
 	],
-	#category : #'Bloc-Layouts-Support'
+	#category : 'Bloc-Layouts-Support'
 }
 
 { #category : #accessing }

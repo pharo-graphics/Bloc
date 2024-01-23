@@ -39,7 +39,7 @@ BARenderTest >> actualForm [
 		host: BlOSWindowSDL2Host new; 
 		perform: formSelector;
 		space.
-	^ aSpace aeAsForm
+	^ aSpace root aeAsForm
 ]
 
 { #category : #tests }

@@ -11,5 +11,5 @@ BlCompositeBackgroundTest >> testAeApplyTo [
 	blElement := BlElement new background: background; yourself.
 	space root addChild: blElement.
 	
-	space aeAsForm. "check no errors"
+	space root aeAsForm. "smoke test"
 ]

@@ -20,7 +20,7 @@ Class {
 		'DefaultOutskirts',
 		'DefaultVisibility'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
 { #category : #initialization }
@@ -243,7 +243,7 @@ BlElementVisuals >> mouseCursor [
 ]
 
 { #category : #accessing }
-BlElementVisuals >> mouseCursor: aBlCursor [
+BlElementVisuals >> mouseCursor: aCursor [
 	"Change the mouse cursor and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 

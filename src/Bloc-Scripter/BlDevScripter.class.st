@@ -106,7 +106,7 @@ BlDevScripter >> elementWithoutParent [
 
 { #category : #'private - accessing' }
 BlDevScripter >> eventHandler [
-	<return: #BlDevScripterEventCollectorHandler>
+
 	^ eventHandler
 ]
 
@@ -130,17 +130,21 @@ BlDevScripter >> extent: aPoint [
 
 { #category : #initialization }
 BlDevScripter >> initialize [
+
 	super initialize.
 	events := BlDevScripterEvents new.
 
 	rootStep := BlDevScripterRootStep new.
 	rootStep referenceHere.
 
-	eventHandler := BlDevScripterEventCollectorHandler new scripter: self.
+	eventHandler :=
+		BlDevScripterEventCollectorHandler new
+			scripter: self;
+			yourself.
 
 	space := self defaultSpace.
-	self space addEventFilter: self eventHandler.
-	self space root addEventFilter: self eventHandler
+	space addEventFilter: self eventHandler.
+	space root addEventFilter: self eventHandler
 ]
 
 { #category : #'accessing - data' }

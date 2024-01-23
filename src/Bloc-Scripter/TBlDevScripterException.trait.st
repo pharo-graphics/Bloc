@@ -1,5 +1,5 @@
 "
-I provide ${class:GtPhlowView|label=views}$ displaying ${class:BlDevScripter}$ information within an inspected ${class:Exception}$.
+I provide common API and state for `BlDevScripter` exceptions.
 "
 Trait {
 	#name : #TBlDevScripterException,
@@ -12,16 +12,19 @@ Trait {
 
 { #category : #'api - accessing' }
 TBlDevScripterException >> exception [
+
 	^ exception
 ]
 
 { #category : #'api - accessing' }
-TBlDevScripterException >> exception: anObject [
-	exception := anObject
+TBlDevScripterException >> exception: anException [
+
+	exception := anException
 ]
 
 { #category : #'api - accessing' }
 TBlDevScripterException >> passWithScripter: aScripter [
+
 	self pass
 ]
 
@@ -35,10 +38,12 @@ TBlDevScripterException >> printOn: aStream [
 
 { #category : #'api - accessing' }
 TBlDevScripterException >> scripter [
+
 	^ scripter
 ]
 
 { #category : #'api - accessing' }
-TBlDevScripterException >> scripter: anObject [
-	scripter := anObject
+TBlDevScripterException >> scripter: aBlDevScripter [
+
+	scripter := aBlDevScripter
 ]

@@ -50,7 +50,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Bloc-Basic'
+	#category : 'Bloc-Basic'
 }
 
 { #category : #accessing }
@@ -187,11 +187,11 @@ BlDefaultVisuals >> mouseCursor [
 ]
 
 { #category : #accessing }
-BlDefaultVisuals >> mouseCursor: aBlCursor [
+BlDefaultVisuals >> mouseCursor: aCursor [
 	"Change the mouse cursor and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
-	^ BlCustomVisuals new mouseCursor: aBlCursor
+	^ BlCustomVisuals new mouseCursor: aCursor
 ]
 
 { #category : #accessing }

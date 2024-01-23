@@ -6,15 +6,22 @@ See BlLayoutAlignment for more info.
 Class {
 	#name : #BlNullAlignment,
 	#superclass : #BlElementAlignment,
-	#category : #'Bloc-Layouts-Alignment'
+	#category : 'Bloc-Layouts-Alignment'
 }
 
 { #category : #'class initialization' }
 BlNullAlignment class >> initialize [
-	super initialize.
-	
+
+	self initializeSingletons
+]
+
+{ #category : #'class initialization' }
+BlNullAlignment class >> initializeSingletons [
+
+	super initializeSingletons.
+
 	vertical := BlNullVerticalAlignment new.
-	horizontal := BlNullHorizontalAlignment new.
+	horizontal := BlNullHorizontalAlignment new
 ]
 
 { #category : #factory }

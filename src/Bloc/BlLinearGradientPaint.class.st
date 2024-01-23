@@ -5,7 +5,7 @@ Class {
 		'start',
 		'end'
 	],
-	#category : #'Bloc-Paint'
+	#category : 'Bloc-Paint'
 }
 
 { #category : #'instance creation' }

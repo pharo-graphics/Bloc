@@ -13,7 +13,7 @@ Class {
 		'DebugModeEnabled',
 		'PreferableChildrenDataStructure'
 	],
-	#category : #'Bloc-Settings'
+	#category : 'Bloc-Settings'
 }
 
 { #category : #assertions }

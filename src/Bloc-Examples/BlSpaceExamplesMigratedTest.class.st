@@ -64,9 +64,9 @@ BlSpaceExamplesMigratedTest >> testChangeIcon [
 	aSpace := self testEmptySpace.
 
 	aCollection := OrderedCollection new.
-	aSpace
-		when: BlSpaceIconChangedEvent
-		do: [ :anEvent | aCollection add: anEvent ].
+	aSpace addEventHandler: (BlEventHandler
+			 on: BlSpaceIconChangedEvent
+			 do: [ :anEvent | aCollection add: anEvent ]).
 
 	aSpace icon: self iconStencil.
 

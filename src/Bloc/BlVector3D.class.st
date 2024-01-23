@@ -16,7 +16,7 @@ Class {
 		'y',
 		'z'
 	],
-	#category : #'Bloc-Basic-Math'
+	#category : 'Bloc-Basic-Math'
 }
 
 { #category : #arithmetic }

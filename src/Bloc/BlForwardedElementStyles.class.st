@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'targetObject'
 	],
-	#category : #'Bloc-Basic-Style'
+	#category : 'Bloc-Basic-Style'
 }
 
 { #category : #'private - adding' }

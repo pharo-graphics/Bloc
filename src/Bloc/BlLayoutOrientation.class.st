@@ -12,7 +12,7 @@ Class {
 		'horizontal',
 		'vertical'
 	],
-	#category : #'Bloc-Layouts-Support'
+	#category : 'Bloc-Layouts-Support'
 }
 
 { #category : #factory }
@@ -22,7 +22,6 @@ BlLayoutOrientation class >> horizontal [
 
 { #category : #'class initialization' }
 BlLayoutOrientation class >> initialize [
-	super initialize.
 	
 	horizontal := BlLayoutHorizontal new.
 	vertical := BlLayoutVertical new

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSpaceFrameIdlePhase,
 	#superclass : #BlSpaceFramePhase,
-	#category : #'Bloc-Space - Frame'
+	#category : 'Bloc-Space - Frame'
 }
 
 { #category : #testing }

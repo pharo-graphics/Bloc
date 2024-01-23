@@ -5,8 +5,14 @@ Class {
 		'coordinate',
 		'relativeAlignment'
 	],
-	#category : #'Bloc-Layouts-Alignment'
+	#category : 'Bloc-Layouts-Alignment'
 }
+
+{ #category : #'class initialization' }
+BlHorizontalCoordinateAlignment class >> initialize [
+
+	self initializeSingletons
+]
 
 { #category : #accessing }
 BlHorizontalCoordinateAlignment >> coordinate [

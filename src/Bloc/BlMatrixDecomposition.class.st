@@ -18,7 +18,7 @@ For example in case of 2D matrix they are:
 Class {
 	#name : #BlMatrixDecomposition,
 	#superclass : #Object,
-	#category : #'Bloc-Basic-Math'
+	#category : 'Bloc-Basic-Math'
 }
 
 { #category : #converting }

@@ -38,7 +38,7 @@ Click on the buttons to the left from the rectangular element to see what happen
 Class {
 	#name : #BlElementProperty,
 	#superclass : #Object,
-	#category : #'Bloc-Basic-Properties'
+	#category : 'Bloc-Basic-Properties'
 }
 
 { #category : #'api - property' }

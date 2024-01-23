@@ -1,12 +1,13 @@
 Class {
 	#name : #BlHorizontalCenterAlignment,
 	#superclass : #BlHorizontalAlignment,
-	#category : #'Bloc-Layouts-Alignment'
+	#category : 'Bloc-Layouts-Alignment'
 }
 
 { #category : #'class initialization' }
 BlHorizontalCenterAlignment class >> initialize [
-	super initialize.
+
+	self initializeSingletons
 ]
 
 { #category : #factory }

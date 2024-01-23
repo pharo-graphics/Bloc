@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'paint'
 	],
-	#category : #'Bloc-Effect'
+	#category : 'Bloc-Effect'
 }
 
 { #category : #initialization }

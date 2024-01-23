@@ -93,11 +93,10 @@ Class {
 
 { #category : #'class initialization' }
 BlGridLayoutAxis class >> initialize [
-	super initialize.
 	
 	NEW := 0.
 	PENDING := 1.
-	COMPLETE := 2.
+	COMPLETE := 2
 ]
 
 { #category : #'computing arcs' }

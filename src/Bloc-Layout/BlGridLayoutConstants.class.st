@@ -9,7 +9,6 @@ Class {
 
 { #category : #'class initialization' }
 BlGridLayoutConstants class >> initialize [
-	super initialize.
 	
 	UNDEFINED := ((-2147483648) / 2 + 1) rounded
 ]

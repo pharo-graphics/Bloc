@@ -1,16 +1,24 @@
 Class {
-	#name : #BlMouseProcessorEnterLeaveExamples,
-	#superclass : #BlMouseProcessorExamples,
+	#name : #BlMouseProcessorEnterLeaveTest,
+	#superclass : #TestCase,
 	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : #'examples - scripter' }
-BlMouseProcessorEnterLeaveExamples >> mouseEnter [
+{ #category : #running }
+BlMouseProcessorEnterLeaveTest >> newScripterElement [
 
-	<sampleInstance>
+	^ BlExampleEventsCountingElement new
+		  size: 100 @ 75;
+		  position: 50 @ 50;
+		  yourself
+]
+
+{ #category : #tests }
+BlMouseProcessorEnterLeaveTest >> testMouseEnter [
+
 	| aScripter |
-	aScripter := self scripter.
-	aScripter element: self scripterElement.
+	aScripter := BlDevScripter new.
+	aScripter element: self newScripterElement.
 
 	aScripter substeps: 'Mouse Enter' do: [ :aStep |
 		aStep mouseMove by: 30 @ 30.
@@ -44,12 +52,11 @@ BlMouseProcessorEnterLeaveExamples >> mouseEnter [
 	^ aScripter
 ]
 
-{ #category : #'examples - scripter' }
-BlMouseProcessorEnterLeaveExamples >> mouseLeave [
+{ #category : #tests }
+BlMouseProcessorEnterLeaveTest >> testMouseLeave [
 
-	<sampleInstance>
 	| aScripter |
-	aScripter := self mouseEnter.
+	aScripter := self testMouseEnter.
 
 	aScripter substeps: 'Mouse Leave' do: [ :aStep |
 		aStep mouseMove by: 100 @ 20.
@@ -78,12 +85,11 @@ BlMouseProcessorEnterLeaveExamples >> mouseLeave [
 	^ aScripter syncContinue
 ]
 
-{ #category : #'examples - scripter' }
-BlMouseProcessorEnterLeaveExamples >> mouseLeaveDueToRemovalFromScene [
+{ #category : #tests }
+BlMouseProcessorEnterLeaveTest >> testMouseLeaveDueToRemovalFromScene [
 
-	<sampleInstance>
 	| aScripter |
-	aScripter := self mouseEnter.
+	aScripter := self testMouseEnter.
 
 	aScripter substeps: 'Remove from scene graph' do: [ :aStep |
 		aStep do
@@ -120,13 +126,4 @@ BlMouseProcessorEnterLeaveExamples >> mouseLeaveDueToRemovalFromScene [
 			onMouseProcessor ].
 
 	^ aScripter syncContinue
-]
-
-{ #category : #'examples - scripter' }
-BlMouseProcessorEnterLeaveExamples >> scripterElement [
-
-	<sampleInstance>
-	^ BlExampleEventsCountingElement new
-		  size: 100 @ 75;
-		  position: 50 @ 50
 ]

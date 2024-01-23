@@ -7,7 +7,7 @@ Class {
 		'outerCenter',
 		'outerRadius'
 	],
-	#category : #'Bloc-Paint'
+	#category : 'Bloc-Paint'
 }
 
 { #category : #accessing }

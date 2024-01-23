@@ -15,10 +15,9 @@ BlGridOrientation class >> horizontal [
 
 { #category : #'class initialization' }
 BlGridOrientation class >> initialize [
-	super initialize.
 	
 	HORIZONTAL := BlGridHorizontalOrientation new.
-	VERTICAL := BlGridVerticalOrientation new.
+	VERTICAL := BlGridVerticalOrientation new
 ]
 
 { #category : #factory }

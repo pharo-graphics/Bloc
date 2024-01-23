@@ -38,7 +38,7 @@ BlDevScripterElementIdEventTarget >> findTargetIn: anElement [
 
 	aCounter := 0.
 	anElement allChildrenBreadthFirstDo: [ :aChild |
-		aChild id = elementId
+		aChild elementId = elementId
 			ifTrue: [
 				aCounter := aCounter + 1.
 				aCounter = index

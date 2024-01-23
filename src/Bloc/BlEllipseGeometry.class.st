@@ -13,7 +13,7 @@ In order to explicitely create an ellipse use extent:
 Class {
 	#name : #BlEllipseGeometry,
 	#superclass : #BlElementVectorGeometry,
-	#category : #'Bloc-Basic-Geometry'
+	#category : 'Bloc-Basic-Geometry'
 }
 
 { #category : #'geometry testing' }

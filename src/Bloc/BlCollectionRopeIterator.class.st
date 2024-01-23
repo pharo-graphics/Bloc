@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'position'
 	],
-	#category : #'Bloc-DataStructure - Rope'
+	#category : 'Bloc-DataStructure - Rope'
 }
 
 { #category : #'private - asserting' }

@@ -9,7 +9,7 @@ BlElementBoundsByScripterExamples >> bounds_in_space_0 [
 
 	<sampleInstance>
 	| aScripter |
-	aScripter := self scripter.
+	aScripter := BlDevScripter new.
 	aScripter element: self bounds_in_space_element_container.
 
 	^ aScripter syncContinue
@@ -157,11 +157,4 @@ BlElementBoundsByScripterExamples >> bounds_in_space_element_extent [
 
 	<sampleInstance>
 	^ 500 @ 400
-]
-
-{ #category : #'examples - scripter' }
-BlElementBoundsByScripterExamples >> scripter [
-
-	<sampleInstance>
-	^ BlDevScripter new
 ]

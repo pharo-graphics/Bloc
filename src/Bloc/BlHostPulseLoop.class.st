@@ -19,7 +19,7 @@ Class {
 		'pulseStartMS',
 		'pulseDurationMS'
 	],
-	#category : #'Bloc-Universe - Host'
+	#category : 'Bloc-Universe - Host'
 }
 
 { #category : #'instance creation' }

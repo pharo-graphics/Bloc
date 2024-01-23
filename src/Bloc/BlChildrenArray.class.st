@@ -14,7 +14,7 @@ Class {
 	#instVars : [
 		'array'
 	],
-	#category : #'Bloc-Basic-Children'
+	#category : 'Bloc-Basic-Children'
 }
 
 { #category : #'instance creation' }

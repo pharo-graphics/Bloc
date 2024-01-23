@@ -20,7 +20,6 @@ BlGridAlignmentMode class >> alignMargins [
 
 { #category : #'class initialization' }
 BlGridAlignmentMode class >> initialize [
-	super initialize.
 	
 	ALIGN_MARGINS := BlGridAlignMarginsMode new.
 	ALIGN_BOUNDS := BlGridAlignBoundsMode new

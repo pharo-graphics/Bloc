@@ -1,8 +1,14 @@
 Class {
 	#name : #BlNullVerticalAlignment,
 	#superclass : #BlNullAlignment,
-	#category : #'Bloc-Layouts-Alignment'
+	#category : 'Bloc-Layouts-Alignment'
 }
+
+{ #category : #'class initialization' }
+BlNullVerticalAlignment class >> initialize [
+
+	self initializeSingletons
+]
 
 { #category : #composition }
 BlNullVerticalAlignment >> + aHorizontalAlignment [

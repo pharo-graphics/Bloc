@@ -6,7 +6,8 @@ Class {
 
 { #category : #execution }
 BlDevScripterStepExecutorScreenshotActivity >> executePrePlayOnStep: aStep executor: anExecutor [
+
 	| aForm |
-	aForm := anExecutor scripter space asSpartaForm.
-	aStep addScreenshotForm: aForm.
+	aForm := anExecutor scripter space root asForm.
+	aStep addScreenshotForm: aForm
 ]

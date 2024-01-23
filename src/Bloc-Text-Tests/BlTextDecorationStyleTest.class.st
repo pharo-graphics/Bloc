@@ -22,7 +22,9 @@ BlTextDecorationStyleTest >> testDashed [
 	self assert: aStyle equals: aStyle class new.
 	self assert: aStyle hash equals: aStyle class hash.
 	self assert: aStyle printString equals: aStyle class label.
-	self assert: (Object evaluate: aStyle storeString) equals: aStyle.
+	self
+		assert: (Object compiler evaluate: aStyle storeString)
+		equals: aStyle.
 
 	^ aStyle
 ]
@@ -41,7 +43,9 @@ BlTextDecorationStyleTest >> testDotted [
 	self assert: aStyle equals: aStyle class new.
 	self assert: aStyle hash equals: aStyle class hash.
 	self assert: aStyle printString equals: aStyle class label.
-	self assert: (Object evaluate: aStyle storeString) equals: aStyle.
+	self
+		assert: (Object compiler evaluate: aStyle storeString)
+		equals: aStyle.
 
 	^ aStyle
 ]
@@ -60,7 +64,9 @@ BlTextDecorationStyleTest >> testDouble [
 	self assert: aStyle equals: aStyle class new.
 	self assert: aStyle hash equals: aStyle class hash.
 	self assert: aStyle printString equals: aStyle class label.
-	self assert: (Object evaluate: aStyle storeString) equals: aStyle.
+	self
+		assert: (Object compiler evaluate: aStyle storeString)
+		equals: aStyle.
 
 	^ aStyle
 ]
@@ -79,7 +85,9 @@ BlTextDecorationStyleTest >> testSolid [
 	self assert: aStyle equals: aStyle class new.
 	self assert: aStyle hash equals: aStyle class hash.
 	self assert: aStyle printString equals: aStyle class label.
-	self assert: (Object evaluate: aStyle storeString) equals: aStyle.
+	self
+		assert: (Object compiler evaluate: aStyle storeString)
+		equals: aStyle.
 
 	^ aStyle
 ]
@@ -98,7 +106,9 @@ BlTextDecorationStyleTest >> testWavy [
 	self assert: aStyle equals: aStyle class new.
 	self assert: aStyle hash equals: aStyle class hash.
 	self assert: aStyle printString equals: aStyle class label.
-	self assert: (Object evaluate: aStyle storeString) equals: aStyle.
+	self
+		assert: (Object compiler evaluate: aStyle storeString)
+		equals: aStyle.
 
 	^ aStyle
 ]

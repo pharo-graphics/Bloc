@@ -34,8 +34,14 @@ Class {
 		'coordinate',
 		'relativeAlignment'
 	],
-	#category : #'Bloc-Layouts-Alignment'
+	#category : 'Bloc-Layouts-Alignment'
 }
+
+{ #category : #'class initialization' }
+BlVerticalCoordinateAlignment class >> initialize [
+
+	self initializeSingletons
+]
 
 { #category : #accessing }
 BlVerticalCoordinateAlignment >> coordinate [

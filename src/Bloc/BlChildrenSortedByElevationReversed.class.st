@@ -1,7 +1,7 @@
 Class {
 	#name : #BlChildrenSortedByElevationReversed,
 	#superclass : #BlChildrenSubset,
-	#category : #'Bloc-Basic-Children'
+	#category : 'Bloc-Basic-Children'
 }
 
 { #category : #'children - subsets' }

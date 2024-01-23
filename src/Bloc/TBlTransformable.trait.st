@@ -3,7 +3,7 @@ I define an interface that transformable objects should implement in order to su
 "
 Trait {
 	#name : #TBlTransformable,
-	#category : #'Bloc-Basic-Transformations'
+	#category : 'Bloc-Basic-Transformations'
 }
 
 { #category : #transformations }

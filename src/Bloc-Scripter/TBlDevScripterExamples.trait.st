@@ -1,3 +1,6 @@
+"
+I provide useful API for classes that use `BlDevScripter`.
+"
 Trait {
 	#name : #TBlDevScripterExamples,
 	#category : #'Bloc-Scripter-Scripter'
@@ -6,19 +9,12 @@ Trait {
 { #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripter [
 
-	<sampleInstance>
-	| aScripter |
-	aScripter := BlDevScripter new.
-
-	self assert: aScripter events isEmpty.
-
-	^ aScripter
+	^ BlDevScripter new
 ]
 
 { #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripter: aScripter withModel: aModelBlock [
 
-	<sampleInstance>
 	^ self
 		  scripter: aScripter
 		  withModel: aModelBlock
@@ -28,7 +24,6 @@ TBlDevScripterExamples >> scripter: aScripter withModel: aModelBlock [
 { #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripter: aScripter withModel: aModelBlock element: anElementBlock [
 
-	<sampleInstance>
 	aScripter substep: 'Initialize Model and UI' do: [ :aStep |
 		aStep set
 			label: 'Initialize Model';
@@ -44,7 +39,6 @@ TBlDevScripterExamples >> scripter: aScripter withModel: aModelBlock element: an
 { #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripterWithElement: anElementBlock [
 
-	<sampleInstance>
 	^ self
 		  scripter: self scripter
 		  withModel: [ nil ]
@@ -54,7 +48,6 @@ TBlDevScripterExamples >> scripterWithElement: anElementBlock [
 { #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripterWithModel: aModelBlock [
 
-	<sampleInstance>
 	^ self
 		  scripter: self scripter
 		  withModel: aModelBlock
@@ -64,7 +57,6 @@ TBlDevScripterExamples >> scripterWithModel: aModelBlock [
 { #category : #'examples - scripter' }
 TBlDevScripterExamples >> scripterWithModel: aModelBlock element: anElementBlock [
 
-	<sampleInstance>
 	^ self
 		  scripter: self scripter
 		  withModel: aModelBlock

@@ -1,8 +1,14 @@
 Class {
 	#name : #BlVerticalCoordinateTopAlignment,
 	#superclass : #BlVerticalCoordinateAlignment,
-	#category : #'Bloc-Layouts-Alignment'
+	#category : 'Bloc-Layouts-Alignment'
 }
+
+{ #category : #'class initialization' }
+BlVerticalCoordinateTopAlignment class >> initialize [
+
+	self initializeSingletons
+]
 
 { #category : #translation }
 BlVerticalCoordinateTopAlignment >> translationOf: aBounds in: aContainerBounds [

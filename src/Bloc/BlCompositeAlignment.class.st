@@ -6,7 +6,7 @@ Class {
 		'horizontal',
 		'direction'
 	],
-	#category : #'Bloc-Layouts-Alignment'
+	#category : 'Bloc-Layouts-Alignment'
 }
 
 { #category : #'instance creation' }
@@ -14,6 +14,12 @@ BlCompositeAlignment class >> horizontal: aHorizontalAlignent vertical: aVertica
 	^ self new
 		horizontal: aHorizontalAlignent vertical: aVerticalAlignment;
 		yourself
+]
+
+{ #category : #'class initialization' }
+BlCompositeAlignment class >> initialize [
+
+	self initializeSingletons
 ]
 
 { #category : #factory }

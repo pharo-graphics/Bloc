@@ -5,7 +5,7 @@ I am a concrete vertical orientation
 Class {
 	#name : #BlLayoutVertical,
 	#superclass : #BlLayoutOrientation,
-	#category : #'Bloc-Layouts-Support'
+	#category : 'Bloc-Layouts-Support'
 }
 
 { #category : #testing }

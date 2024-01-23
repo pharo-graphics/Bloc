@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'modifiers'
 	],
-	#category : #'Bloc-Events'
+	#category : 'Bloc-Events'
 }
 
 { #category : #converting }

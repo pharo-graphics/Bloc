@@ -6,12 +6,13 @@ See BlLayoutAlignment for more info.
 Class {
 	#name : #BlRightAlignment,
 	#superclass : #BlHorizontalAlignment,
-	#category : #'Bloc-Layouts-Alignment'
+	#category : 'Bloc-Layouts-Alignment'
 }
 
 { #category : #'class initialization' }
 BlRightAlignment class >> initialize [
-	super initialize.
+
+	self initializeSingletons
 ]
 
 { #category : #factory }

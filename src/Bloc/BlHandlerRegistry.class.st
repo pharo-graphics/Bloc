@@ -25,7 +25,7 @@ Class {
 	#classVars : [
 		'PreferableHandlerRegistryClass'
 	],
-	#category : #'Bloc-Events-Dispatcher'
+	#category : 'Bloc-Events-Dispatcher'
 }
 
 { #category : #testing }

@@ -1,6 +1,6 @@
 Trait {
 	#name : #TBlLayoutParentNode,
-	#category : #'Bloc-Layouts-Model'
+	#category : 'Bloc-Layouts-Model'
 }
 
 { #category : #accessing }

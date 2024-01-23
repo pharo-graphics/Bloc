@@ -5,7 +5,7 @@ I should be used by ${class:BlElement}$.
 "
 Trait {
 	#name : #TBlAssertUIProcess,
-	#category : #'Bloc-Utilities - Debugging'
+	#category : 'Bloc-Utilities - Debugging'
 }
 
 { #category : #asserting }

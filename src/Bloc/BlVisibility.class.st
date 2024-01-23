@@ -19,7 +19,7 @@ Class {
 		'hidden',
 		'visible'
 	],
-	#category : #'Bloc-Basic-Properties'
+	#category : 'Bloc-Basic-Properties'
 }
 
 { #category : #cleanup }

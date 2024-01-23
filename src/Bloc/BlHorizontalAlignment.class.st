@@ -6,7 +6,7 @@ Class {
 		'left',
 		'right'
 	],
-	#category : #'Bloc-Layouts-Alignment'
+	#category : 'Bloc-Layouts-Alignment'
 }
 
 { #category : #factory }
@@ -21,13 +21,20 @@ BlHorizontalAlignment class >> directed: aBlLayoutDirection [
 
 { #category : #'class initialization' }
 BlHorizontalAlignment class >> initialize [
-	super initialize.
+
+	self initializeSingletons
+]
+
+{ #category : #'class initialization' }
+BlHorizontalAlignment class >> initializeSingletons [
+
+	super initializeSingletons.
 	
 	left := BlLeftAlignment new.
 	right := BlRightAlignment new.
 	center := BlHorizontalCenterAlignment new.
 	start := BlHorizontalStartAlignment new.
-	end := BlHorizontalEndAlignment new.
+	end := BlHorizontalEndAlignment new
 ]
 
 { #category : #factory }

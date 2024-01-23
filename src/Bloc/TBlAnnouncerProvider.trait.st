@@ -9,7 +9,7 @@ Trait {
 	],
 	#traits : 'TBlAnnounceable',
 	#classTraits : 'TBlAnnounceable classTrait',
-	#category : #'Bloc-Basic-Support'
+	#category : 'Bloc-Basic-Support'
 }
 
 { #category : #'event management' }

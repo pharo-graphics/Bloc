@@ -23,7 +23,6 @@ Class {
 
 { #category : #initialization }
 BlScrollerConstants class >> initialize [
-	super initialize.
 	
 	DecelerationRate := 0.78 log / 0.9 log.
 	Gravity := 2000.0.

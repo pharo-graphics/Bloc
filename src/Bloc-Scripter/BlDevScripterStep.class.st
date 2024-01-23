@@ -78,7 +78,8 @@ BlDevScripterStep >> playOn: aScripter [
 ]
 
 { #category : #actions }
-BlDevScripterStep >> playOnExecutor: anExecutor [ 
+BlDevScripterStep >> playOnExecutor: anExecutor [
+
 	self playOn: anExecutor scripter
 ]
 

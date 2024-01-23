@@ -22,7 +22,7 @@ Class {
 		'combination',
 		'repeatable'
 	],
-	#category : #'Bloc-Events-KeyBinding'
+	#category : 'Bloc-Events-KeyBinding'
 }
 
 { #category : #converting }

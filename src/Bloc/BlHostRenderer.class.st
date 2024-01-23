@@ -15,7 +15,7 @@ Class {
 	#classInstVars : [
 		'preferableClass'
 	],
-	#category : #'Bloc-Universe - Renderer'
+	#category : 'Bloc-Universe - Renderer'
 }
 
 { #category : #settings }

@@ -12,12 +12,11 @@ Class {
 		'leftToRight',
 		'rightToLeft'
 	],
-	#category : #'Bloc-Layouts-Support'
+	#category : 'Bloc-Layouts-Support'
 }
 
 { #category : #'class initialization' }
 BlLayoutDirection class >> initialize [
-	super initialize.
 	
 	leftToRight := BlLayoutLeftToRight new.
 	rightToLeft := BlLayoutRightToLeft new

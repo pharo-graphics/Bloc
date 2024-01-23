@@ -20,7 +20,7 @@ Class {
 	#instVars : [
 		'root'
 	],
-	#category : #'Bloc-Utilities - Selection'
+	#category : 'Bloc-Utilities - Selection'
 }
 
 { #category : #comparing }

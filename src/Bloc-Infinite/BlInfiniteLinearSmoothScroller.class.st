@@ -19,9 +19,8 @@ Class {
 	#category : #'Bloc-Infinite-Scroller'
 }
 
-{ #category : #initialization }
+{ #category : #'class initialization' }
 BlInfiniteLinearSmoothScroller class >> initialize [
-	super initialize.
 	
 	SnapToAny := #any.
 	SnapToEnd := #end.

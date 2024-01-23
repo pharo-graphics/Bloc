@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'scaleFactor'
 	],
-	#category : #'Bloc-Basic-Properties'
+	#category : 'Bloc-Basic-Properties'
 }
 
 { #category : #comparing }

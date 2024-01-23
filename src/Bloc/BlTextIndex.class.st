@@ -8,7 +8,7 @@ See BlTextIndexEOS.
 Class {
 	#name : #BlTextIndex,
 	#superclass : #Magnitude,
-	#category : #'Bloc-DataStructure - Rope'
+	#category : 'Bloc-DataStructure - Rope'
 }
 
 { #category : #testing }
