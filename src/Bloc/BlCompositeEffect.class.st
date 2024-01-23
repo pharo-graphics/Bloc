@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'effects'
 	],
-	#category : 'Bloc-Effect'
+	#category : #'Bloc-Effect'
 }
 
 { #category : #'as yet unclassified' }

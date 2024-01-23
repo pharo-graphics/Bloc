@@ -1,7 +1,7 @@
 Class {
 	#name : #BlFocusabilityNone,
 	#superclass : #BlFocusability,
-	#category : 'Bloc-Basic-Properties'
+	#category : #'Bloc-Basic-Properties'
 }
 
 { #category : #focus }

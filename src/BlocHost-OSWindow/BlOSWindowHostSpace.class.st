@@ -20,7 +20,7 @@ BlOSWindowHostSpace >> borderless [
 
 	self
 		deprecated: 'Use isBorderless instead of current one'
-		transformWith: '`@rcv borderless' -> '@rcv isBorderless'.
+		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
 
 	^ self isBorderless
 ]
@@ -87,7 +87,7 @@ BlOSWindowHostSpace >> fullscreen [
 
 	self
 		deprecated: 'Use isFullscreen instead of current one'
-		transformWith: '`@rcv fullscreen' -> '@rcv isFullscreen'.
+		transformWith: '`@rcv fullscreen' -> '`@rcv isFullscreen'.
 
 	^ self isFullscreen
 ]
@@ -251,7 +251,7 @@ BlOSWindowHostSpace >> resizable [
 
 	self
 		deprecated: 'Use isResizable instead of current one'
-		transformWith: '`@rcv resizable' -> '@rcv isResizable'.
+		transformWith: '`@rcv resizable' -> '`@rcv isResizable'.
 
 	^ self isResizable
 ]

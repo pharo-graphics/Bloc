@@ -61,7 +61,7 @@ Class {
 	#classVars : [
 		'UniqueIdGenerator'
 	],
-	#category : 'Bloc-Space'
+	#category : #'Bloc-Space'
 }
 
 { #category : #'private - change' }
@@ -482,7 +482,7 @@ BlSpace >> borderless [
 
 	self
 		deprecated: 'Use isBorderless instead of current one'
-		transformWith: '`@rcv borderless' -> '@rcv isBorderless'.
+		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
 
 	^ self isBorderless
 ]
@@ -1154,7 +1154,7 @@ BlSpace >> fullscreen [
 
 	self
 		deprecated: 'Use isFullscreen instead of current one'
-		transformWith: '`@rcv fullscreen' -> '@rcv isFullscreen'.
+		transformWith: '`@rcv fullscreen' -> '`@rcv isFullscreen'.
 
 	^ self isFullscreen
 ]
@@ -1173,7 +1173,7 @@ BlSpace >> fullsize [
 
 	self
 		deprecated: 'Use isFullsize instead of current one'
-		transformWith: '`@rcv fullsize' -> '@rcv isFullsize'.
+		transformWith: '`@rcv fullsize' -> '`@rcv isFullsize'.
 		
 	^ self isFullsize
 ]
@@ -1754,7 +1754,7 @@ BlSpace >> resizable [
 
 	self
 		deprecated: 'Use isResizable instead of current one'
-		transformWith: '`@rcv resizable' -> '@rcv isResizable'.
+		transformWith: '`@rcv resizable' -> '`@rcv isResizable'.
 
 	^ self isResizable
 ]

@@ -12,7 +12,7 @@ Class {
 		'position',
 		'title'
 	],
-	#category : 'Bloc-Universe - Host Headless'
+	#category : #'Bloc-Universe - Host Headless'
 }
 
 { #category : #'window - properties' }
@@ -20,7 +20,7 @@ BlHeadlessHostSpace >> borderless [
 
 	self
 		deprecated: 'Use isBorderless instead of current one'
-		transformWith: '`@rcv borderless' -> '@rcv isBorderless'.
+		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
 
 	^ self isBorderless
 ]
@@ -59,7 +59,7 @@ BlHeadlessHostSpace >> fullscreen [
 
 	self
 		deprecated: 'Use isFullscreen instead of current one'
-		transformWith: '`@rcv fullscreen' -> '@rcv isFullscreen'.
+		transformWith: '`@rcv fullscreen' -> '`@rcv isFullscreen'.
 
 	^ self isFullscreen
 ]
@@ -75,7 +75,7 @@ BlHeadlessHostSpace >> fullsize [
 
 	self
 		deprecated: 'Use isFullsize instead of current one'
-		transformWith: '`@rcv fullsize' -> '@rcv isFullsize'.
+		transformWith: '`@rcv fullsize' -> '`@rcv isFullsize'.
 		
 	^ self isFullsize
 ]
@@ -219,7 +219,7 @@ BlHeadlessHostSpace >> resizable [
 
 	self
 		deprecated: 'Use isResizable instead of current one'
-		transformWith: '`@rcv resizable' -> '@rcv isResizable'.
+		transformWith: '`@rcv resizable' -> '`@rcv isResizable'.
 
 	^ self isResizable
 ]

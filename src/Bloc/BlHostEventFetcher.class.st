@@ -11,7 +11,7 @@ Class {
 		'eventQueue',
 		'hostSpace'
 	],
-	#category : 'Bloc-Universe - Host'
+	#category : #'Bloc-Universe - Host'
 }
 
 { #category : #accessing }

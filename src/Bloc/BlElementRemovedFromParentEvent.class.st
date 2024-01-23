@@ -20,7 +20,7 @@ parent removeChild: child
 Class {
 	#name : #BlElementRemovedFromParentEvent,
 	#superclass : #BlElementEvent,
-	#category : 'Bloc-Events-Type-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }

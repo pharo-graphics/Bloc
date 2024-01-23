@@ -20,7 +20,7 @@ BlMorphicWindowHostSpace >> borderless [
 
 	self
 		deprecated: 'Use isBorderless instead of current one'
-		transformWith: '`@rcv borderless' -> '@rcv isBorderless'.
+		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
 
 	^ self isBorderless
 ]
@@ -70,7 +70,7 @@ BlMorphicWindowHostSpace >> fullsize [
 
 	self
 		deprecated: 'Use isFullsize instead of current one'
-		transformWith: '`@rcv fullsize' -> '@rcv isFullsize'.
+		transformWith: '`@rcv fullsize' -> '`@rcv isFullsize'.
 		
 	^ self isFullsize
 ]

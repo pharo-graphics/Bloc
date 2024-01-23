@@ -1,7 +1,7 @@
 Class {
 	#name : #BlRemUnit,
 	#superclass : #BlUnit,
-	#category : 'Bloc-Basic-Units'
+	#category : #'Bloc-Basic-Units'
 }
 
 { #category : #printing }

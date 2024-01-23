@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Space - Support'
+	#category : #'Bloc-Space - Support'
 }
 
 { #category : #accessing }

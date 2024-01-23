@@ -11,7 +11,7 @@ Class {
 		'userData',
 		'actions'
 	],
-	#category : 'Bloc-Layouts-Model'
+	#category : #'Bloc-Layouts-Model'
 }
 
 { #category : #accessing }

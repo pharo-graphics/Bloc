@@ -3,5 +3,5 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlTelemetry',
 	#classTraits : 'TBlTelemetry classTrait',
-	#category : 'Bloc-Space - Telemetry'
+	#category : #'Bloc-Space - Telemetry'
 }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlLayoutNodeNullMeasurement,
 	#superclass : #BlLayoutNodeMeasurement,
-	#category : 'Bloc-Layouts-Model'
+	#category : #'Bloc-Layouts-Model'
 }
 
 { #category : #measure }
