@@ -13,15 +13,14 @@ Class {
 		'postponedActions',
 		'eventDispatcher',
 		'hostClass',
-		'spaceManager',
-		'isPulsing'
+		'spaceManager'
 	],
 	#classVars : [
 		'UniqueIdGenerator',
 		'Universes',
 		'UniversesMutex'
 	],
-	#category : 'Bloc-Universe - Parallel'
+	#category : #'Bloc-Universe - Parallel'
 }
 
 { #category : #accessing }
@@ -288,6 +287,12 @@ BlParallelUniverse >> eventDispatcher [
 	^ eventDispatcher
 ]
 
+{ #category : #testing }
+BlParallelUniverse >> hasDeferredActions [
+	
+	^ deferredActions isEmpty not
+]
+
 { #category : #'api - spaces' }
 BlParallelUniverse >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"
@@ -337,21 +342,9 @@ BlParallelUniverse >> initialize [
 	hostClass := BlHeadlessHost.
 	deferredActions := WaitfreeQueue new.
 	postponedActions := WaitfreeQueue new.
-	isPulsing := false.
 
 	eventDispatcher := self defaultEventDispatcher.
 	self addEventHandler: self defaultEventListener
-]
-
-{ #category : #accessing }
-BlParallelUniverse >> isPulsing [
-
-	^ isPulsing
-]
-
-{ #category : #'private - spaces' }
-BlParallelUniverse >> markAsNotPulsing [
-	isPulsing := false
 ]
 
 { #category : #'api - spaces' }
@@ -441,32 +434,24 @@ BlParallelUniverse >> postpone: aValuable [
 { #category : #pulse }
 BlParallelUniverse >> pulse [
 
-	isPulsing ifTrue: [ ^ self ].
-
-	isPulsing := true.
-
-	[ self pulseSynchronously ] ensure: [ self requestStopPulsation ]
+	self pulseSynchronously
 ]
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> pulseSynchronously [
 	"deferred actions must be run before spaces"
+
 	[
 		self tryToRunDeferredActions.
-		spaceManager do: [ :eachSpace | eachSpace pulse ]
-	] ensure: [ self tryToRunPostponedActions ]
-]
-
-{ #category : #'private - spaces' }
-BlParallelUniverse >> requestStopPulsation [
-
-		self uiProcessDo: [ :currentUIProcess | 
-			"Only mark the universe as not pulsing in case the request comes from the current
-			UI process or from a process that was not the Bloc UI process previously. This avoids 
-			reseting the pulsing status when the debugger terminates a previously suspended UI process."
-			(Processor activeProcess == currentUIProcess or: [
-			Processor activeProcess name ~= BlHostPulseLoop processId ])
-				ifTrue: [ self markAsNotPulsing ] ]
+		spaceManager do: [ :eachSpace | eachSpace pulse ].
+		self tryToRunPostponedActions
+	] 
+		on: Exception 
+		do: [ :e | 
+				(BlParallelUniverseErrorDuringPulse new
+					signaledError: e;
+					yourself) emit.
+				e pass ]
 ]
 
 { #category : #'api - lifecycle' }
@@ -486,7 +471,6 @@ BlParallelUniverse >> startUniverse [
 	"A universe must not be running here.
 	I am called outside of the UI loop (there is no UI loop yet)"
 
-	self markAsNotPulsing.
 	self hostClass start
 ]
 
@@ -495,9 +479,7 @@ BlParallelUniverse >> stopUniverse [
 	"A universe must be running here.
 	I am called from the UI loop"
 	
-	"to make sure that isPulsing is set back to false even if this Process is terminated"
-	[ self hostClass stop ]
-		ensure: [ self markAsNotPulsing ]
+	self hostClass stop
 ]
 
 { #category : #'deferred message' }
@@ -514,7 +496,7 @@ BlParallelUniverse >> tryToRunDeferredActions [
 			universeId: self id;
 			yourself) emit.
 
-		[ nextInQueue value ] on: UnhandledError fork: [ :ex | ex pass ] ]
+		nextInQueue value ]
 ]
 
 { #category : #'deferred message' }
@@ -522,7 +504,7 @@ BlParallelUniverse >> tryToRunPostponedActions [
 
 	| nextInQueue |
 	[ (nextInQueue := postponedActions nextOrNil) isNotNil ] whileTrue: [ 
-		[ nextInQueue value ] on: UnhandledError fork: [ :ex | ex pass ] ]
+		nextInQueue value ]
 ]
 
 { #category : #'api - ui process' }

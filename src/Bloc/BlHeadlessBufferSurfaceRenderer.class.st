@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'thePixels'
 	],
-	#category : 'Bloc-Universe - Host Headless'
+	#category : #'Bloc-Universe - Host Headless'
 }
 
 { #category : #initialization }

@@ -7,7 +7,7 @@ Transformation in space may change even if element's transformation is still the
 Class {
 	#name : #BlElementTransformationInSpaceChangedEvent,
 	#superclass : #BlElementEvent,
-	#category : 'Bloc-Events-Type-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }

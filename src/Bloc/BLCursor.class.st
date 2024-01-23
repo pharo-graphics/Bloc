@@ -1,7 +1,7 @@
 Class {
 	#name : #BlCursor,
 	#superclass : #Object,
-	#category : 'Bloc-Utilities - Selection'
+	#category : #'Bloc-Utilities - Selection'
 }
 
 { #category : #accessing }

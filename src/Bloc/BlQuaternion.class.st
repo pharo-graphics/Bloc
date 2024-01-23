@@ -16,7 +16,7 @@ Class {
 		'z',
 		'w'
 	],
-	#category : 'Bloc-Basic-Math'
+	#category : #'Bloc-Basic-Math'
 }
 
 { #category : #'instance creation' }

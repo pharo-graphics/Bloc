@@ -1,7 +1,7 @@
 Class {
 	#name : #BlElementLayoutComputedEvent,
 	#superclass : #BlElementEvent,
-	#category : 'Bloc-Events-Type-Element'
+	#category : #'Bloc-Events-Type-Element'
 }
 
 { #category : #'api - enable / disable' }

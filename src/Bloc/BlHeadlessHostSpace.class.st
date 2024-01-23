@@ -12,7 +12,7 @@ Class {
 		'position',
 		'title'
 	],
-	#category : 'Bloc-Universe - Host Headless'
+	#category : #'Bloc-Universe - Host Headless'
 }
 
 { #category : #'window - properties' }

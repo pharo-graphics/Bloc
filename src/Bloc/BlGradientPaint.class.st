@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'stops'
 	],
-	#category : 'Bloc-Paint'
+	#category : #'Bloc-Paint'
 }
 
 { #category : #initialization }

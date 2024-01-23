@@ -1,7 +1,7 @@
 Class {
 	#name : #BlAnnulusSector,
 	#superclass : #BlAnnulusSectorGeometry,
-	#category : 'Bloc-Basic-Geometry-Deprecated'
+	#category : #'Bloc-Basic-Geometry-Deprecated'
 }
 
 { #category : #testing }

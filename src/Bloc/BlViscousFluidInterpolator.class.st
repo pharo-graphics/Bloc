@@ -7,7 +7,7 @@ Class {
 		'FluidScale',
 		'InvertedExponent'
 	],
-	#category : 'Bloc-Basic-Interpolators'
+	#category : #'Bloc-Basic-Interpolators'
 }
 
 { #category : #'class initialization' }
