@@ -37,6 +37,13 @@ BlHorizontalCoordinateAlignment >> initialize [
 	relativeAlignment := BlElementAlignment horizontal center
 ]
 
+{ #category : #factory }
+BlHorizontalCoordinateAlignment >> leftToRight [
+	^ self class new
+		coordinate: coordinate;
+		relativeAlignment: relativeAlignment leftToRight
+]
+
 { #category : #accessing }
 BlHorizontalCoordinateAlignment >> relativeAlignment [
 	^ relativeAlignment
@@ -45,4 +52,11 @@ BlHorizontalCoordinateAlignment >> relativeAlignment [
 { #category : #accessing }
 BlHorizontalCoordinateAlignment >> relativeAlignment: anObject [
 	relativeAlignment := anObject
+]
+
+{ #category : #factory }
+BlHorizontalCoordinateAlignment >> rightToLeft [
+	^ self class new
+		coordinate: coordinate;
+		relativeAlignment: relativeAlignment rightToLeft 
 ]
