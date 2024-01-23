@@ -15,6 +15,9 @@ BlHostPulseLoopTest >> testOpeningAnSpaceDeferingAnErrorKeepsLoopRunning [
 
 	| aSpace logger |
 
+	UIManager default class = MorphicUIManager 
+		ifFalse: [ ^ self skip ].
+
 	hostClass = BlOSWindowSDL2Host 
 		ifFalse: [ ^ self skip ].
 
