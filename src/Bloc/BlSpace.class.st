@@ -479,15 +479,19 @@ BlSpace >> becomeVisible [
 
 { #category : #'window - properties' }
 BlSpace >> borderless [
-	^ self
-		hostSpaceDo: [ :aHostSpace | aHostSpace borderless ]
-		ifAbsent: [ borderless ]
+
+	self
+		deprecated: 'Use isBorderless instead of current one'
+		transformWith: '`@rcv borderless' -> '@rcv isBorderless'.
+
+	^ self isBorderless
 ]
 
 { #category : #'window - properties' }
 BlSpace >> borderless: aBoolean [
+
 	borderless := aBoolean.
-	 self hostSpaceDo: [ :aHostSpace | aHostSpace borderless: aBoolean ].
+	self hostSpaceDo: [ :aHostSpace | aHostSpace borderless: aBoolean ]
 ]
 
 { #category : #accessing }
@@ -1147,13 +1151,12 @@ BlSpace >> frame [
 
 { #category : #'window - properties' }
 BlSpace >> fullscreen [
-	"Return true if an underlying window is in fullscreen mode,
-	false otherwise"
-	<return: #Boolean>
 
-	^ self 
-		hostSpaceDo: [ :aHostSpace | aHostSpace fullscreen ]
-		ifAbsent: [ fullscreen ]
+	self
+		deprecated: 'Use isFullscreen instead of current one'
+		transformWith: '`@rcv fullscreen' -> '@rcv isFullscreen'.
+
+	^ self isFullscreen
 ]
 
 { #category : #'window - properties' }
@@ -1167,15 +1170,12 @@ BlSpace >> fullscreen: aBoolean [
 
 { #category : #'window - properties' }
 BlSpace >> fullsize [
-	"Return true if an underlying window is in fullsize mode,
-	false otherwise.
-	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent
-	and has no window title"
-	<return: #Boolean>
 
-	^ self 
-		hostSpaceDo: [ :aHostSpace | aHostSpace fullsize ]
-		ifAbsent: [ fullsize ]
+	self
+		deprecated: 'Use isFullsize instead of current one'
+		transformWith: '`@rcv fullsize' -> '@rcv isFullsize'.
+		
+	^ self isFullsize
 ]
 
 { #category : #'window - properties' }
@@ -1439,9 +1439,36 @@ BlSpace >> invalidateAll [
 			self markNeedsPaint: each from: each ] ]
 ]
 
+{ #category : #'window - properties' }
+BlSpace >> isBorderless [
+
+	^ self
+		  hostSpaceDo: [ :aHostSpace | aHostSpace borderless ]
+		  ifAbsent: [ borderless ]
+]
+
 { #category : #testing }
 BlSpace >> isFocused [
 	^ self focused
+]
+
+{ #category : #'window - properties' }
+BlSpace >> isFullscreen [
+	"Return true if an underlying window is in fullscreen mode, false otherwise."
+
+	^ self 
+		hostSpaceDo: [ :aHostSpace | aHostSpace fullscreen ]
+		ifAbsent: [ fullscreen ]
+]
+
+{ #category : #'window - properties' }
+BlSpace >> isFullsize [
+	"Return true if an underlying window is in fullsize mode, false otherwise.
+	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent and has no window title."
+
+	^ self 
+		hostSpaceDo: [ :aHostSpace | aHostSpace fullsize ]
+		ifAbsent: [ fullsize ]
 ]
 
 { #category : #'change - layout' }
@@ -1459,6 +1486,15 @@ BlSpace >> isOpened [
 
 	^ (BlParallelUniverse existsForHost: self host class)
 		and: [ (BlParallelUniverse forHost: self host class) hasSpace: self ]
+]
+
+{ #category : #'window - properties' }
+BlSpace >> isResizable [
+	"Return true if underlying window is resizable, false otherwise"
+
+	^ self
+		hostSpaceDo: [ :aHostSpace | aHostSpace resizable ]
+		ifAbsent: [ resizable ]
 ]
 
 { #category : #'host space - text input' }
@@ -1715,11 +1751,12 @@ BlSpace >> requestStyle: anElement [
 
 { #category : #'window - properties' }
 BlSpace >> resizable [
-	"Return true if underlying window is resizable, false otherwise"
 
-	^ self
-		hostSpaceDo: [ :aHostSpace | aHostSpace resizable ]
-		ifAbsent: [ resizable ]
+	self
+		deprecated: 'Use isResizable instead of current one'
+		transformWith: '`@rcv resizable' -> '@rcv isResizable'.
+
+	^ self isResizable
 ]
 
 { #category : #'window - properties' }

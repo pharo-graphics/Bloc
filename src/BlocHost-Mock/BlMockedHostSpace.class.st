@@ -29,10 +29,12 @@ Class {
 
 { #category : #'window - properties' }
 BlMockedHostSpace >> borderless [
-	"Return true if underlying window is now borderless, false otherwise"
-	<return: #Boolean>
-	
-	^ borderless
+
+	self
+		deprecated: 'Use isBorderless instead of current one'
+		transformWith: '`@rcv borderless' -> '@rcv isBorderless'.
+
+	^ self isBorderless
 ]
 
 { #category : #'window - properties' }
@@ -94,11 +96,12 @@ BlMockedHostSpace >> densityDpi: aNumber [
 
 { #category : #'window - properties' }
 BlMockedHostSpace >> fullscreen [
-	"Return true if an underlying window is in fullscreen mode,
-	false otherwise"
-	<return: #Boolean>
 
-	^ isFullscreen
+	self
+		deprecated: 'Use isFullscreen instead of current one'
+		transformWith: '`@rcv fullscreen' -> '@rcv isFullscreen'.
+
+	^ self isFullscreen
 ]
 
 { #category : #'window - properties' }
@@ -111,11 +114,12 @@ BlMockedHostSpace >> fullscreen: aBoolean [
 
 { #category : #'window - properties' }
 BlMockedHostSpace >> fullsize [
-	"Return true if an underlying window is in fullsize mode,
-	false otherwise"
-	<return: #Boolean>
 
-	^ isFullsize
+	self
+		deprecated: 'Use isFullsize instead of current one'
+		transformWith: '`@rcv fullsize' -> '@rcv isFullsize'.
+		
+	^ self isFullsize
 ]
 
 { #category : #'window - properties' }
@@ -163,6 +167,27 @@ BlMockedHostSpace >> initialize [
 	logicalSize := self defaultLogicalSize.
 	densityDpi := self defaultDensityDpi.
 	renderCount := 0
+]
+
+{ #category : #'window - properties' }
+BlMockedHostSpace >> isBorderless [
+	"Return true if underlying window is now borderless, false otherwise"
+	
+	^ borderless
+]
+
+{ #category : #'window - properties' }
+BlMockedHostSpace >> isFullscreen [
+	"Return true if an underlying window is in fullscreen mode, false otherwise."
+
+	^ isFullscreen
+]
+
+{ #category : #'window - properties' }
+BlMockedHostSpace >> isFullsize [
+	"Return true if an underlying window is in fullsize mode, false otherwise."
+
+	^ isFullsize
 ]
 
 { #category : #'host space - testing' }

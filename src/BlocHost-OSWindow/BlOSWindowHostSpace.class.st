@@ -17,7 +17,12 @@ Class {
 
 { #category : #'window - properties' }
 BlOSWindowHostSpace >> borderless [
-	^ window borderless
+
+	self
+		deprecated: 'Use isBorderless instead of current one'
+		transformWith: '`@rcv borderless' -> '@rcv isBorderless'.
+
+	^ self isBorderless
 ]
 
 { #category : #'window - properties' }
@@ -79,11 +84,12 @@ BlOSWindowHostSpace >> fetchedEventsDo: aBlock [
 
 { #category : #'window - properties' }
 BlOSWindowHostSpace >> fullscreen [
-	"Return true if an underlying window is in fullscreen mode,
-	false otherwise"
-	<return: #Boolean>
 
-	^ window fullscreen
+	self
+		deprecated: 'Use isFullscreen instead of current one'
+		transformWith: '`@rcv fullscreen' -> '@rcv isFullscreen'.
+
+	^ self isFullscreen
 ]
 
 { #category : #'window - properties' }
@@ -121,6 +127,26 @@ BlOSWindowHostSpace >> initializeWithAttributes: initialAttributes [
 	window newBlocRenderer.
 	
 	(BlOSWindowCreatedSignal new window: window) emit
+]
+
+{ #category : #'window - properties' }
+BlOSWindowHostSpace >> isBorderless [
+
+	^ window borderless
+]
+
+{ #category : #'window - properties' }
+BlOSWindowHostSpace >> isFullscreen [
+	"Return true if an underlying window is in fullscreen mode, false otherwise."
+
+	^ window fullscreen
+]
+
+{ #category : #'window - properties' }
+BlOSWindowHostSpace >> isResizable [	
+	"Return true if underlying window is resizable, false otherwise"
+
+	^ window resizable
 ]
 
 { #category : #'window - text input' }
@@ -221,10 +247,13 @@ BlOSWindowHostSpace >> render: aSpace [
 ]
 
 { #category : #'window - properties' }
-BlOSWindowHostSpace >> resizable [	
-	"Return true if underlying window is resizable, false otherwise"
+BlOSWindowHostSpace >> resizable [
 
-	^ window resizable
+	self
+		deprecated: 'Use isResizable instead of current one'
+		transformWith: '`@rcv resizable' -> '@rcv isResizable'.
+
+	^ self isResizable
 ]
 
 { #category : #'window - properties' }

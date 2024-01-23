@@ -16,10 +16,12 @@ Class {
 
 { #category : #'window - properties' }
 BlMorphicHostSpace >> borderless [
-	"Return true if underlying window is now borderless, false otherwise"
-	<return: #Boolean>
-	
-	^ false
+
+	self
+		deprecated: 'Use isBorderless instead of current one'
+		transformWith: '`@rcv borderless' -> '@rcv isBorderless'.
+
+	^ self isBorderless
 ]
 
 { #category : #'window - properties' }
@@ -55,13 +57,12 @@ BlMorphicHostSpace >> densityDpi [
 
 { #category : #'window - properties' }
 BlMorphicHostSpace >> fullsize [
-	"Return true if an underlying window is in fullsize mode,
-	false otherwise.
-	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent
-	and has no window title"
-	<return: #Boolean>
 
-	^ true
+	self
+		deprecated: 'Use isFullsize instead of current one'
+		transformWith: '`@rcv fullsize' -> '@rcv isFullsize'.
+		
+	^ self isFullsize
 ]
 
 { #category : #'window - properties' }
@@ -76,6 +77,21 @@ BlMorphicHostSpace >> generateEvents [
 	"Generate more complex state change events such as window scale event when resolution of the screen changes"
 	
 	spaceHostMorph world ifNil: [ spaceHostMorph announceDeleted ]
+]
+
+{ #category : #'window - properties' }
+BlMorphicHostSpace >> isBorderless [
+	"Return true if underlying window is now borderless, false otherwise"
+	
+	^ false
+]
+
+{ #category : #'window - properties' }
+BlMorphicHostSpace >> isFullsize [
+	"Return true if an underlying window is in fullsize mode, false otherwise.
+	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent and has no window title"
+
+	^ true
 ]
 
 { #category : #'host space - geometry' }
