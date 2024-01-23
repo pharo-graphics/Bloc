@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'identifier'
 	],
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Support'
 }
 
 { #category : #comparing }

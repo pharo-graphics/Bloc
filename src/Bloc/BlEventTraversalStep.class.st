@@ -11,7 +11,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : 'Bloc-Events'
+	#category : #'Bloc-Events'
 }
 
 { #category : #accessing }

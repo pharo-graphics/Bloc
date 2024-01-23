@@ -11,7 +11,7 @@ Class {
 		'frozenTime',
 		'frozen'
 	],
-	#category : 'Bloc-Universe'
+	#category : #'Bloc-Universe'
 }
 
 { #category : #'instance creation' }

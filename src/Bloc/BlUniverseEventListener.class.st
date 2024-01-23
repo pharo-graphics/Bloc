@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'lastTime'
 	],
-	#category : 'Bloc-Universe - Parallel'
+	#category : #'Bloc-Universe - Parallel'
 }
 
 { #category : #'api - event managing' }

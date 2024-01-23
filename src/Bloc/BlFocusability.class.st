@@ -8,7 +8,7 @@ Class {
 		'none',
 		'ignore'
 	],
-	#category : 'Bloc-Basic-Properties'
+	#category : #'Bloc-Basic-Properties'
 }
 
 { #category : #accessing }

@@ -13,7 +13,7 @@ Trait {
 		'universe',
 		'renderer'
 	],
-	#category : 'Bloc-Universe - Host'
+	#category : #'Bloc-Universe - Host'
 }
 
 { #category : #'host space - displaying' }

@@ -22,7 +22,7 @@ Class {
 		'message',
 		'task'
 	],
-	#category : 'Bloc-Space - Tasks'
+	#category : #'Bloc-Space - Tasks'
 }
 
 { #category : #accessing }

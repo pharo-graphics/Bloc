@@ -8,7 +8,7 @@ Class {
 		'phases',
 		'currentPhaseLink'
 	],
-	#category : 'Bloc-Space - Frame'
+	#category : #'Bloc-Space - Frame'
 }
 
 { #category : #adding }

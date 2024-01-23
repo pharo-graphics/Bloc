@@ -12,7 +12,7 @@ Class {
 		'horizontal',
 		'vertical'
 	],
-	#category : 'Bloc-Layouts-Support'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #factory }

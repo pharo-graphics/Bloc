@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'insets'
 	],
-	#category : 'Bloc-Effect'
+	#category : #'Bloc-Effect'
 }
 
 { #category : #initialization }

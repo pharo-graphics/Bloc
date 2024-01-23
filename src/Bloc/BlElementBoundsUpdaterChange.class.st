@@ -9,7 +9,7 @@ Class {
 		'newExtent',
 		'compositionDepth'
 	],
-	#category : 'Bloc-Basic-Bounds'
+	#category : #'Bloc-Basic-Bounds'
 }
 
 { #category : #'api - changes' }

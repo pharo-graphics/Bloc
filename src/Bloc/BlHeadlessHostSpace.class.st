@@ -12,14 +12,17 @@ Class {
 		'position',
 		'title'
 	],
-	#category : 'Bloc-Universe - Host Headless'
+	#category : #'Bloc-Universe - Host Headless'
 }
 
 { #category : #'window - properties' }
 BlHeadlessHostSpace >> borderless [
-	"Return true if underlying window is now borderless, false otherwise"
-	
-	^ false
+
+	self
+		deprecated: 'Use isBorderless instead of current one'
+		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
+
+	^ self isBorderless
 ]
 
 { #category : #'window - properties' }
@@ -53,10 +56,12 @@ BlHeadlessHostSpace >> densityDpi [
 
 { #category : #'window - properties' }
 BlHeadlessHostSpace >> fullscreen [
-	"Return true if an underlying window is in fullscreen mode,
-	false otherwise"
 
-	^ false
+	self
+		deprecated: 'Use isFullscreen instead of current one'
+		transformWith: '`@rcv fullscreen' -> '`@rcv isFullscreen'.
+
+	^ self isFullscreen
 ]
 
 { #category : #'window - properties' }
@@ -67,10 +72,12 @@ BlHeadlessHostSpace >> fullscreen: aBoolean [
 
 { #category : #'window - properties' }
 BlHeadlessHostSpace >> fullsize [
-	"Return true if an underlying window is in fullsize mode,
-	false otherwise"
 
-	^ false
+	self
+		deprecated: 'Use isFullsize instead of current one'
+		transformWith: '`@rcv fullsize' -> '`@rcv isFullsize'.
+		
+	^ self isFullsize
 ]
 
 { #category : #'window - properties' }
@@ -96,6 +103,34 @@ BlHeadlessHostSpace >> initialize [
 	super initialize.
 
 	eventFetcher := BlHostEventFetcher hostSpace: self
+]
+
+{ #category : #'window - properties' }
+BlHeadlessHostSpace >> isBorderless [
+	"Return true if underlying window is now borderless, false otherwise"
+	
+	^ false
+]
+
+{ #category : #'window - properties' }
+BlHeadlessHostSpace >> isFullscreen [
+	"Return true if the underlying window is in fullscreen mode, false otherwise."
+
+	^ false
+]
+
+{ #category : #'window - properties' }
+BlHeadlessHostSpace >> isFullsize [
+	"Return true if the underlying window is in fullsize mode, false otherwise."
+
+	^ false
+]
+
+{ #category : #'window - properties' }
+BlHeadlessHostSpace >> isResizable [
+	"Return true if the underlying window is resizable, false otherwise."
+
+	^ true
 ]
 
 { #category : #'host space - testing' }
@@ -181,9 +216,12 @@ BlHeadlessHostSpace >> render: aSpace [
 
 { #category : #'window - properties' }
 BlHeadlessHostSpace >> resizable [
-	"Return true if underlying window is resizable, false otherwise"
 
-	^ true
+	self
+		deprecated: 'Use isResizable instead of current one'
+		transformWith: '`@rcv resizable' -> '`@rcv isResizable'.
+
+	^ self isResizable
 ]
 
 { #category : #'window - properties' }

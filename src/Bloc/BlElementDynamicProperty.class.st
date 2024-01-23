@@ -5,7 +5,7 @@ Class {
 		'applyAction',
 		'cleanAction'
 	],
-	#category : 'Bloc-Basic-Properties'
+	#category : #'Bloc-Basic-Properties'
 }
 
 { #category : #accessing }

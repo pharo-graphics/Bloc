@@ -5,7 +5,7 @@ Class {
 		'fromNode',
 		'toNode'
 	],
-	#category : 'Bloc-Layouts-Model'
+	#category : #'Bloc-Layouts-Model'
 }
 
 { #category : #accessing }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'binaryStream'
 	],
-	#category : 'Bloc-DataStructure - Rope'
+	#category : #'Bloc-DataStructure - Rope'
 }
 
 { #category : #accessing }

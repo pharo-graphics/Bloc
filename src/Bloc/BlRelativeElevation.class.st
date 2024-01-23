@@ -7,7 +7,7 @@ Note: Relative elevation can be negative!
 Class {
 	#name : #BlRelativeElevation,
 	#superclass : #BlElevation,
-	#category : 'Bloc-Basic-Properties'
+	#category : #'Bloc-Basic-Properties'
 }
 
 { #category : #accessing }
