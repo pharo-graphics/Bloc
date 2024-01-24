@@ -1,7 +1,7 @@
 Class {
 	#name : #BlIgnoredLayoutConstraints,
 	#superclass : #BlLayoutConstraints,
-	#category : 'Bloc-Layouts-Basic'
+	#category : #'Bloc-Layouts-Basic'
 }
 
 { #category : #accessing }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlTelemetryTasks,
 	#superclass : #LinkedList,
-	#category : 'Bloc-Space - Telemetry'
+	#category : #'Bloc-Space - Telemetry'
 }
 
 { #category : #converting }

@@ -29,7 +29,7 @@ Class {
 	#classVars : [
 		'Ignore'
 	],
-	#category : 'Bloc-Space - Support'
+	#category : #'Bloc-Space - Support'
 }
 
 { #category : #filtering }

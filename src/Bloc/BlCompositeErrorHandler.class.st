@@ -5,7 +5,7 @@ Class {
 		'errors',
 		'errorHandlers'
 	],
-	#category : 'Bloc-Basic-Errors'
+	#category : #'Bloc-Basic-Errors'
 }
 
 { #category : #'instance creation' }

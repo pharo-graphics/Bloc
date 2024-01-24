@@ -18,8 +18,8 @@ BlOSWindowHost >> createAttributesFor: aSpace [
 	theAttributes := OSWindowAttributes new
 		title: aSpace title;
 		extent: aSpace extent;
-		resizable: aSpace resizable;
-		borderless: aSpace borderless;
+		resizable: aSpace isResizable;
+		borderless: aSpace isBorderless;
 		visible: false; "There is a race before opening a window and setting the event handler."
 		yourself.
 

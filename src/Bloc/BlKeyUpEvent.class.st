@@ -1,7 +1,7 @@
 Class {
 	#name : #BlKeyUpEvent,
 	#superclass : #BlKeyboardEvent,
-	#category : 'Bloc-Events'
+	#category : #'Bloc-Events'
 }
 
 { #category : #sending }

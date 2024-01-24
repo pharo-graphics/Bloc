@@ -10,7 +10,7 @@ Class {
 		'time',
 		'pulseTimestamp'
 	],
-	#category : 'Bloc-Space - Events'
+	#category : #'Bloc-Space - Events'
 }
 
 { #category : #accessing }

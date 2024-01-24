@@ -7,7 +7,7 @@ Class {
 		'button',
 		'delta'
 	],
-	#category : 'Bloc-Events'
+	#category : #'Bloc-Events'
 }
 
 { #category : #constants }

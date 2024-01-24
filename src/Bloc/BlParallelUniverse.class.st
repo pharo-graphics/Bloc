@@ -21,7 +21,7 @@ Class {
 		'Universes',
 		'UniversesMutex'
 	],
-	#category : 'Bloc-Universe - Parallel'
+	#category : #'Bloc-Universe - Parallel'
 }
 
 { #category : #accessing }

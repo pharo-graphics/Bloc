@@ -25,7 +25,7 @@ Class {
 		'TransformationChanged',
 		'TransformationInSpaceChanged'
 	],
-	#category : 'Bloc-Events-Dispatcher'
+	#category : #'Bloc-Events-Dispatcher'
 }
 
 { #category : #'accessing - flags' }

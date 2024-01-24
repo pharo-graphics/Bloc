@@ -6,16 +6,8 @@ By using this Trait in both Space and HostSpace we make sure that they have the 
 "
 Trait {
 	#name : #TBlSpaceProperties,
-	#category : 'Bloc-Space'
+	#category : #'Bloc-Space'
 }
-
-{ #category : #'window - properties' }
-TBlSpaceProperties >> borderless [
-	"Return true if underlying window is now borderless, false otherwise"
-	<return: #Boolean>
-	
-	^ self explicitRequirement
-]
 
 { #category : #'window - properties' }
 TBlSpaceProperties >> borderless: aBoolean [
@@ -25,31 +17,11 @@ TBlSpaceProperties >> borderless: aBoolean [
 ]
 
 { #category : #'window - properties' }
-TBlSpaceProperties >> fullscreen [
-	"Return true if an underlying window is in fullscreen mode,
-	false otherwise"
-	<return: #Boolean>
-
-	^ self explicitRequirement
-]
-
-{ #category : #'window - properties' }
 TBlSpaceProperties >> fullscreen: aBoolean [
 	"Switch underlying window to fullscreen if true is given
 	and exit fullscreen mode if false is given"
 
 	self explicitRequirement
-]
-
-{ #category : #'window - properties' }
-TBlSpaceProperties >> fullsize [
-	"Return true if an underlying window is in fullsize mode,
-	false otherwise.
-	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent
-	and has no window title"
-	<return: #Boolean>
-
-	^ self explicitRequirement
 ]
 
 { #category : #'window - properties' }
@@ -69,6 +41,36 @@ TBlSpaceProperties >> icon: aForm [
 ]
 
 { #category : #'window - properties' }
+TBlSpaceProperties >> isBorderless [
+	"Return true if underlying window is now borderless, false otherwise"
+	
+	^ self explicitRequirement
+]
+
+{ #category : #'window - properties' }
+TBlSpaceProperties >> isFullscreen [
+	"Return true if an underlying window is in fullscreen mode,
+	false otherwise"
+
+	^ self explicitRequirement
+]
+
+{ #category : #'window - properties' }
+TBlSpaceProperties >> isFullsize [
+	"Return true if an underlying window is in fullsize mode, false otherwise.
+	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent and has no window title."
+
+	^ self explicitRequirement
+]
+
+{ #category : #'window - properties' }
+TBlSpaceProperties >> isResizable [
+	"Return true if underlying window is resizable, false otherwise"
+
+	^ self explicitRequirement
+]
+
+{ #category : #'window - properties' }
 TBlSpaceProperties >> position [
 	"Return window's position in screen coordinates"
 	<return: #Point>
@@ -82,13 +84,6 @@ TBlSpaceProperties >> position: aPoint [
 	
 	self explicitRequirement
 
-]
-
-{ #category : #'window - properties' }
-TBlSpaceProperties >> resizable [
-	"Return true if underlying window is resizable, false otherwise"
-
-	^ self explicitRequirement
 ]
 
 { #category : #'window - properties' }

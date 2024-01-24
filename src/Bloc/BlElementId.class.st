@@ -7,7 +7,7 @@ Allows to assign id to {{gtClass:BlElement}}. This allows us query a tree of ele
 Class {
 	#name : #BlElementId,
 	#superclass : #Object,
-	#category : 'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Support'
 }
 
 { #category : #'instance creation' }

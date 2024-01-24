@@ -8,7 +8,7 @@ I reverse an underlying collection of children.
 Class {
 	#name : #BlChildrenReversed,
 	#superclass : #BlChildrenSubset,
-	#category : 'Bloc-Basic-Children'
+	#category : #'Bloc-Basic-Children'
 }
 
 { #category : #'instance creation' }

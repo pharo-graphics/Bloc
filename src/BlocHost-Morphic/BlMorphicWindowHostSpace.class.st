@@ -17,10 +17,12 @@ Class {
 
 { #category : #'window - properties' }
 BlMorphicWindowHostSpace >> borderless [
-	"Return true if underlying window is now borderless, false otherwise"
-	<return: #Boolean>
-	
-	^ isBorderless
+
+	self
+		deprecated: 'Use isBorderless instead of current one'
+		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
+
+	^ self isBorderless
 ]
 
 { #category : #'window - properties' }
@@ -65,13 +67,12 @@ BlMorphicWindowHostSpace >> densityDpi [
 
 { #category : #'window - properties' }
 BlMorphicWindowHostSpace >> fullsize [
-	"Return true if an underlying window is in fullsize mode,
-	false otherwise.
-	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent
-	and has no window title"
-	<return: #Boolean>
 
-	^ isFullSize
+	self
+		deprecated: 'Use isFullsize instead of current one'
+		transformWith: '`@rcv fullsize' -> '`@rcv isFullsize'.
+		
+	^ self isFullsize
 ]
 
 { #category : #'window - properties' }
@@ -90,6 +91,21 @@ BlMorphicWindowHostSpace >> initialize [
 	
 	isBorderless := false.
 	isFullSize := false
+]
+
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> isBorderless [
+	"Return true if underlying window is now borderless, false otherwise"
+	
+	^ isBorderless
+]
+
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> isFullsize [
+	"Return true if an underlying window is in fullsize mode, false otherwise.
+	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent and has no window title"
+
+	^ isFullSize
 ]
 
 { #category : #'text input' }

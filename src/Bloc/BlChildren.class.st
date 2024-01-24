@@ -25,7 +25,7 @@ Class {
 	#superclass : #Collection,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : 'Bloc-Basic-Children'
+	#category : #'Bloc-Basic-Children'
 }
 
 { #category : #'children - subsets' }
