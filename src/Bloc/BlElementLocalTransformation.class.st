@@ -87,13 +87,3 @@ BlElementLocalTransformation >> postCopy [
 	super postCopy.
 	affineTransformation := affineTransformation copy
 ]
-
-{ #category : #accessing }
-BlElementLocalTransformation >> transformation [
-
-	self
-		deprecated: 'Use #affineTransformation instead'
-		transformWith: '`@receiver transformation' -> '`@receiver affineTransformation'.
-	
-	^ affineTransformation
-]

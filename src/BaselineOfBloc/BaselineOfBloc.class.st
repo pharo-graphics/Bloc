@@ -124,9 +124,6 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Layout-Tests' with: [
 					spec requires: #('Bloc-Layout' 'Bloc-Text' 'Bloc-DevTool') ].
 
-			spec
-				package: #'Bloc-Theme' with: [
-					spec requires: #(#'Bloc') ].
 				
 			spec package: #'Bloc-Demo' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-Spec2' #'Bloc-Text-Elements') ].
 
@@ -142,6 +139,8 @@ BaselineOfBloc >> baseline: spec [
 					spec requires: #(#'Bloc-SVG') ];
 				package: #'Bloc-Alexandrie-SVG' with: [
 					spec requires: #(#'Bloc-Alexandrie' #'Bloc-SVG') ].
+				
+		spec package: #'Bloc-Deprecated'  with: [ spec requires: #('Bloc' 'Bloc-Text') ]
 
 			]
 ]

@@ -707,22 +707,6 @@ BlElement >> boundsInLocal: aBounds [
 ]
 
 { #category : #'geometry bounds' }
-BlElement >> boundsInParent [
-	self deprecated: 'Use `element bounds inParent` instead'.
-
-	^ self bounds inParent asRectangle
-]
-
-{ #category : #'geometry bounds' }
-BlElement >> boundsInParent: aBounds [
-	<return: #BlBounds>
-	
-	self deprecated: 'Use `element bounds inParent` instead'.
-	
-	^ self localBoundsToParent: (self boundsInLocal: aBounds)
-]
-
-{ #category : #'geometry bounds' }
 BlElement >> boundsInSpace [
 	^ boundsCache boundsInSpace
 ]
@@ -765,44 +749,6 @@ BlElement >> childIndexOf: anElement [
 	<return: #Number>
 
 	^ self children indexOf: anElement
-]
-
-{ #category : #'children accessing' }
-BlElement >> childNamed: aChildName [
-	<return: #BlElement>
-	
-	self 
-		deprecated:  'Use childWithId: instead' 
-		transformWith: '`@receiver childNamed: `@statements1' -> '`@receiver childWithId: `@statements1'.
-
-	^ self childWithId: aChildName
-]
-
-{ #category : #'children accessing' }
-BlElement >> childNamed: aContainerName ifFound: ifFoundBlock [
-	<return: #BlElement>
-	
-	self 
-		deprecated:  'Use childWithId:ifFound: instead' 
-		transformWith: '`@receiver childNamed: `@statements1 ifFound: `@statements2' -> '`@receiver childWithId: `@statements1 ifFound: `@statements2'.
-
-	^ self
-		childWithId: aContainerName
-		ifFound: ifFoundBlock
-]
-
-{ #category : #'children accessing' }
-BlElement >> childNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock [
-	<return: #BlElement>
-	
-	self 
-		deprecated:  'Use childWithId:ifFound:ifNone: instead' 
-		transformWith: '`@receiver childNamed: `@statements1 ifFound: `@statements2 ifNone: `@statements3' -> '`@receiver childWithId: `@statements1 ifFound: `@statements2 ifNone: `@statements3'.
-
-	^ self
-		childWithId: aContainerName
-		ifFound: ifFoundBlock
-		ifNone: ifNoneBlock
 ]
 
 { #category : #'children accessing' }
@@ -1057,24 +1003,6 @@ BlElement >> constraintsDo: aBlock [
 	self requestLayout
 ]
 
-{ #category : #accessing }
-BlElement >> containerName [
-	<return: #Symbol or: nil>
-
-	self deprecated: 'Use #id instead. Cannot use auto rewriting because of very used method, see https://github.com/pharo-graphics/Bloc/issues/207'.
-	
-	^ self id
-]
-
-{ #category : #accessing }
-BlElement >> containerName: aSymbol [
-	"Give this element a container name (a Symbol) which can be used to find an element by its name"
-
-	self deprecated: 'Use #id: instead. Cannot use auto rewriting because of very used method, see https://github.com/pharo-graphics/Bloc/issues/207'.
-
-	self id: aSymbol
-]
-
 { #category : #'geometry testing' }
 BlElement >> containsGlobalPoint: aPoint [
 	(self geometryBoundsInSpace containsPoint: aPoint)
@@ -1286,17 +1214,6 @@ BlElement >> detachSpace [
 		description: [ 'Can not detach space when not attached' ].
 
 	spaceReference := BlDetachedSpaceReference uniqueInstance
-]
-
-{ #category : #'children accessing' }
-BlElement >> directChildNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock [
-	<return: #Object>
-		
-	self 
-		deprecated:  'Use directChildNamed:ifFound:ifNone: instead' 
-		transformWith: '`@receiver directChildNamed: `@statements1 ifFound: `@statements2 ifNone: `@statements3' -> '`@receiver directChildWithId: `@statements1 ifFound: `@statements2 ifNone: `@statements3'.
-
-	^ self directChildWithId: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock
 ]
 
 { #category : #'children accessing' }
@@ -1561,15 +1478,6 @@ BlElement >> extent [
 		flag:
 			'TODO as extent: is deprecated, should this be as well in favor of size?'.
 	^ self bounds extent
-]
-
-{ #category : #'geometry extent' }
-BlElement >> extent: aPoint [ 
-	self 
-		deprecated: 'Use size: instead'
-		on: 	'1 October 2017' 
-		in: 'Pharo-7.0-alpha.build.132.sha.4ea2f39a9f43185d31b844be5ad33b677f43bf17'.
-	^ self size: aPoint 
 ]
 
 { #category : #'event handling' }
@@ -2525,26 +2433,6 @@ BlElement >> localPointToParent: aPoint [
 ]
 
 { #category : #'focus requesting' }
-BlElement >> looseFocus [
-	self
-		deprecated: 'Use #loseFocus instead.'
-		transformWith: '`@receiver looseFocus' -> '`@receiver loseFocus'.
-
-	self loseFocus
-]
-
-{ #category : #'focus requesting' }
-BlElement >> looseFocus: aChildElement [
-	self
-		deprecated: 'Please use loseFocus: instead.'
-		transformWith:
-			'`@receiver looseFocus: `@statements1'
-				-> '`@receiver loseFocus: `@statements1'.
-
-	self loseFocus: aChildElement
-]
-
-{ #category : #'focus requesting' }
 BlElement >> loseFocus [
 	| anElementToLooseFocus |
 
@@ -3043,18 +2931,6 @@ BlElement >> openInNewSpace [
 ]
 
 { #category : #convenience }
-BlElement >> openInOBlSpace [
-	"Add self to a new BlSpace and show it. Answer such space."
-	
-	self 
-		deprecated:  'Use #openInSpace instead' 
-		transformWith: '`@receiver openInOBlSpace' -> '`@receiver openInSpace'.
-	
-	^ self openInSpace
-
-]
-
-{ #category : #convenience }
 BlElement >> openInSpace [
 	"Add self to a new BlSpace and show it. Answer such space."
 	| sp |
@@ -3361,15 +3237,6 @@ BlElement >> properties [
 				yourself ]
 ]
 
-{ #category : #'api - bounds' }
-BlElement >> relocate: aPoint [
-	
-	self 
-		deprecated:  'Use position:' 
-		transformWith: '`@receiver relocate: `@point' -> '`@receiver position: `@point'.
-	self position: aPoint
-]
-
 { #category : #'children add/remove' }
 BlElement >> removeChild: anElement [
 	"Request layout and redraw an area occupied by anElement.
@@ -3423,16 +3290,6 @@ BlElement >> removeChildAt: anIndex [
 	self invalidate.
 	"then we request layout update while element is not yet removed"
 	self requestLayout
-]
-
-{ #category : #'children add/remove' }
-BlElement >> removeChildNamed: aContainerName [
-
-	self 
-		deprecated:  'Use removeChildWithId: instead' 
-		transformWith: '`@receiver removeChildNamed: `@statements1' -> '`@receiver removeChildWithId: `@statements1'.
-
-	self removeChildWithId: aContainerName
 ]
 
 { #category : #'children add/remove' }
@@ -3842,15 +3699,6 @@ BlElement >> states [
 
 { #category : #'text input' }
 BlElement >> stopTextInput [
-]
-
-{ #category : #'api - style' }
-BlElement >> style [
-	self
-		deprecated: 'Please use #styles instead'
-		transformWith: '`@receiver style' -> '`@receiver styles'.
-
-	^ self styles
 ]
 
 { #category : #'api - style' }

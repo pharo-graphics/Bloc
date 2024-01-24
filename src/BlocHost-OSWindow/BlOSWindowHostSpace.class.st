@@ -16,16 +16,6 @@ Class {
 }
 
 { #category : #'window - properties' }
-BlOSWindowHostSpace >> borderless [
-
-	self
-		deprecated: 'Use isBorderless instead of current one'
-		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
-
-	^ self isBorderless
-]
-
-{ #category : #'window - properties' }
 BlOSWindowHostSpace >> borderless: aBoolean [
 	window borderless: aBoolean
 ]
@@ -80,16 +70,6 @@ BlOSWindowHostSpace >> fetchedEventsDo: aBlock [
 	"Flush event queue and evaluate a given block with every queued event as argument"
 	
 	self eventFetcher fetchedEventsDo: aBlock
-]
-
-{ #category : #'window - properties' }
-BlOSWindowHostSpace >> fullscreen [
-
-	self
-		deprecated: 'Use isFullscreen instead of current one'
-		transformWith: '`@rcv fullscreen' -> '`@rcv isFullscreen'.
-
-	^ self isFullscreen
 ]
 
 { #category : #'window - properties' }
@@ -244,16 +224,6 @@ BlOSWindowHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
 
 	OSWindowRenderThread uniqueInstance critical: [ self renderer render: self ]
-]
-
-{ #category : #'window - properties' }
-BlOSWindowHostSpace >> resizable [
-
-	self
-		deprecated: 'Use isResizable instead of current one'
-		transformWith: '`@rcv resizable' -> '`@rcv isResizable'.
-
-	^ self isResizable
 ]
 
 { #category : #'window - properties' }

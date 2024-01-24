@@ -15,33 +15,6 @@ BlMouseEvent class >> anyButton [
 	^ 7
 ]
 
-{ #category : #constants }
-BlMouseEvent class >> middleButton [
-	self 
-		deprecated: 'Use `BlMouseButton middle` instead'
-		on: 	'17 January 2018' 
-		in: 'Pharo-6.0-60520-'.
-	^ BlMouseButton middle
-]
-
-{ #category : #constants }
-BlMouseEvent class >> primaryButton [
-	self 
-		deprecated: 'Use `BlMouseButton primary` instead'
-		on: 	'17 January 2018' 
-		in: 'Pharo-6.0-60520-'.
-	^ BlMouseButton primary
-]
-
-{ #category : #constants }
-BlMouseEvent class >> secondaryButton [
-	self 
-		deprecated: 'Use `BlMouseButton secondary` instead'
-		on: 	'17 January 2018' 
-		in: 'Pharo-6.0-60520-'.
-	^ BlMouseButton secondary
-]
-
 { #category : #testing }
 BlMouseEvent >> anyButtonPressed [
 	^ button isNotNil

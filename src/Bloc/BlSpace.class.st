@@ -478,16 +478,6 @@ BlSpace >> becomeVisible [
 ]
 
 { #category : #'window - properties' }
-BlSpace >> borderless [
-
-	self
-		deprecated: 'Use isBorderless instead of current one'
-		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
-
-	^ self isBorderless
-]
-
-{ #category : #'window - properties' }
 BlSpace >> borderless: aBoolean [
 
 	borderless := aBoolean.
@@ -1150,32 +1140,12 @@ BlSpace >> frame [
 ]
 
 { #category : #'window - properties' }
-BlSpace >> fullscreen [
-
-	self
-		deprecated: 'Use isFullscreen instead of current one'
-		transformWith: '`@rcv fullscreen' -> '`@rcv isFullscreen'.
-
-	^ self isFullscreen
-]
-
-{ #category : #'window - properties' }
 BlSpace >> fullscreen: aBoolean [
 	"Switch underlying window to fullscreen if true is given
 	and exit fullscreen mode if false is given"
 
 	fullscreen := aBoolean.
 	 self hostSpaceDo: [ :aHostSpace | aHostSpace fullscreen: aBoolean ]
-]
-
-{ #category : #'window - properties' }
-BlSpace >> fullsize [
-
-	self
-		deprecated: 'Use isFullsize instead of current one'
-		transformWith: '`@rcv fullsize' -> '`@rcv isFullsize'.
-		
-	^ self isFullsize
 ]
 
 { #category : #'window - properties' }
@@ -1747,16 +1717,6 @@ BlSpace >> requestPropertiesComputation: anElement [
 BlSpace >> requestStyle: anElement [		
 	self elementsNeedingStyle add: anElement.
 	self requestNextPulse
-]
-
-{ #category : #'window - properties' }
-BlSpace >> resizable [
-
-	self
-		deprecated: 'Use isResizable instead of current one'
-		transformWith: '`@rcv resizable' -> '`@rcv isResizable'.
-
-	^ self isResizable
 ]
 
 { #category : #'window - properties' }

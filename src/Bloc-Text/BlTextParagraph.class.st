@@ -65,19 +65,6 @@ BlTextParagraph >> baseline [
 	^ baselineMeasurer computedBaseline: self
 ]
 
-{ #category : #'api - instantiation' }
-BlTextParagraph >> baseline: aBlTextParagraphBaselineMeasurer [
-
-	self
-		deprecated: 'Please use baselineMeasurer: instead.'
-		transformWith:
-			'`@receiver baseline: `@statements1'
-				-> '`@receiver baselineMeasurer: `@statements1'.
-
-	self baselineMeasurer: aBlTextParagraphBaselineMeasurer.
-
-]
-
 { #category : #'paragraph - geometry' }
 BlTextParagraph >> baselineChanged [
 	"I should be sent when baseline needs to be recomputed"

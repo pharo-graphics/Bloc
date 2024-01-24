@@ -62,18 +62,6 @@ BlTextElement class >> text: aBlText [
 ]
 
 { #category : #accessing }
-BlTextElement >> baseline [
-
-	self
-		deprecated: 'Please use baselineMeasurer instead.'
-		transformWith:
-			'`@receiver baseline'
-				-> '`@receiver baselineMeasurer'.
-	
-	^ self baselineMeasurer
-]
-
-{ #category : #accessing }
 BlTextElement >> baselineMeasurer [
 	
 	^ baselineMeasurer
@@ -473,18 +461,6 @@ BlTextElement >> onSessionChanged: aNewSession [
 BlTextElement >> paragraph [
 
 	^ paragraph
-]
-
-{ #category : #accessing }
-BlTextElement >> rawParagraph [
-
-	self
-		deprecated: 'Please use paragraph instead.'
-		transformWith:
-			'`@receiver rawParagraph'
-				-> '`@receiver paragraph'.
-	
-	^ self paragraph
 ]
 
 { #category : #'private - paragraph' }
