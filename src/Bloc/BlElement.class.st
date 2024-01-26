@@ -3788,17 +3788,6 @@ BlElement >> startTextInput [
 BlElement >> startTextInputAtRectangle: aRectangle [
 ]
 
-{ #category : #'api - style' }
-BlElement >> states [
-
-	"Style and properties computation are not used and will be removed"
-	^ nil
-
-	"^ self userData
-		at: #blocStates
-		ifAbsentPut: [ BlElementStates new element: self ]"
-]
-
 { #category : #'text input' }
 BlElement >> stopTextInput [
 ]
