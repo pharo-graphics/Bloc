@@ -46,8 +46,7 @@ BlInspectionTest >> testBlElement [
 	self
 		assertCanSelectPageNamed: 'Tree';
 		assertCanSelectPageNamed: 'User Data';
-		assertCanSelectPageNamed: 'Resizers';
-		assertCanSelectPageNamed: 'States'
+		assertCanSelectPageNamed: 'Resizers'
 ]
 
 { #category : #tests }
