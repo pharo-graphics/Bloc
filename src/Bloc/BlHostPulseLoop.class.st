@@ -103,6 +103,32 @@ BlHostPulseLoop >> isRunningInTheSameProcess [
 	^ Processor activeProcess effectiveProcess == loopProcess
 ]
 
+{ #category : #'loop process' }
+BlHostPulseLoop >> loop [
+
+	[ self loopIteration ] whileTrue
+]
+
+{ #category : #'loop process' }
+BlHostPulseLoop >> loopIteration [
+
+	| universe |
+
+	[
+		pulseStartMS := Time millisecondClockValue.
+		universe := BlParallelUniverse forHost: hostClass.
+		universe pulse.
+		pulseDurationMS := Time millisecondClockValue - pulseStartMS.
+		self waitUntilNextPulse. ]
+	on: Exception
+	do: [ :e |
+			self forceStartNewUIProcess.
+		e pass ].
+
+	"Returns true to continue looping"
+	^ self isRunningInTheSameProcess 
+]
+
 { #category : #accessing }
 BlHostPulseLoop >> loopProcess [
 
@@ -110,24 +136,9 @@ BlHostPulseLoop >> loopProcess [
 ]
 
 { #category : #'loop process' }
-BlHostPulseLoop >> newLoopBlock [
-
-	^ [ [
-			pulseStartMS := Time millisecondClockValue.
-
-			(BlParallelUniverse forHost: hostClass) pulse.
-
-			pulseDurationMS := Time millisecondClockValue - pulseStartMS.
-
-			self waitUntilNextPulse 
-		
-		] doWhileTrue: [ loopProcess == Processor activeProcess ] ]
-]
-
-{ #category : #'loop process' }
 BlHostPulseLoop >> newLoopProcess [
 
-	^ self newLoopBlock newProcess
+	^ [ self loop ] newProcess
 		  priority: self processPriority;
 		  name: self processId;
 		  yourself

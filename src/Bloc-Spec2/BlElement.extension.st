@@ -37,13 +37,6 @@ BlElement >> inspectionResizers: aBuilder [
 ]
 
 { #category : #'*Bloc-Spec2' }
-BlElement >> inspectionStates: aBuilder [
-	<inspectorPresentationOrder: 5 title: 'States'>
-
-	^ self states inspectionItems: aBuilder
-]
-
-{ #category : #'*Bloc-Spec2' }
 BlElement >> inspectionTree: aBuilder [
 	<inspectorPresentationOrder: 2 title: 'Tree'>
 

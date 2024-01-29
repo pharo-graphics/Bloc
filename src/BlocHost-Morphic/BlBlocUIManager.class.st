@@ -514,7 +514,6 @@ BlBlocUIManager >> resumeUIProcess: aProcess [
 
 { #category : #debug }
 BlBlocUIManager >> spawnNewBlocProcess: aUniverse [
-	aUniverse requestStopPulsation.
 	aUniverse hostClass forceStartNewUIProcess
 ]
 

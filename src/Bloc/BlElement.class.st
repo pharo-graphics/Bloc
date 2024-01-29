@@ -2744,18 +2744,6 @@ BlElement >> needsPaint [
 	^ flags hasNeedsPaint
 ]
 
-{ #category : #'api - properties' }
-BlElement >> needsPropertiesComputation [
-	<return: #Boolean>
-
-	^ self properties needsPropertiesComputation
-]
-
-{ #category : #'api - style' }
-BlElement >> needsStyle [
-	^ self styles needsStyle
-]
-
 { #category : #initialization }
 BlElement >> newEventDispatcher [
 
@@ -3350,17 +3338,6 @@ BlElement >> privateRequestingLayout: aBoolean [
 		ifFalse: [ flags clearNeedsLayout ]
 ]
 
-{ #category : #'api - properties' }
-BlElement >> properties [
-
-	^ self userData
-		at: #blocProperties
-		ifAbsentPut: [
-			BlElementCurrentProperties new
-				element: self;
-				yourself ]
-]
-
 { #category : #'api - bounds' }
 BlElement >> relocate: aPoint [
 	
@@ -3657,24 +3634,6 @@ BlElement >> requestParentLayout [
 	self parent requestLayout
 ]
 
-{ #category : #'api - properties' }
-BlElement >> requestPropertiesComputation [
-	self properties markDirty.
-
-	self isAttachedToSceneGraph
-		ifTrue: [ self space requestPropertiesComputation: self ]
-		ifFalse: [  ].
-]
-
-{ #category : #'api - style' }
-BlElement >> requestStyle [
-	self styles markDirty.
-
-	self isAttachedToSceneGraph
-		ifTrue: [ self space requestStyle: self ]
-		ifFalse: [  ].
-]
-
 { #category : #'geometry bounds' }
 BlElement >> requestedHeight [
 	" return the exact height. Use it only if you know what your are doing. 
@@ -3829,41 +3788,8 @@ BlElement >> startTextInput [
 BlElement >> startTextInputAtRectangle: aRectangle [
 ]
 
-{ #category : #'api - style' }
-BlElement >> states [
-
-	"Style and properties computation are not used and will be removed"
-	^ nil
-
-	"^ self userData
-		at: #blocStates
-		ifAbsentPut: [ BlElementStates new element: self ]"
-]
-
 { #category : #'text input' }
 BlElement >> stopTextInput [
-]
-
-{ #category : #'api - style' }
-BlElement >> style [
-	self
-		deprecated: 'Please use #styles instead'
-		transformWith: '`@receiver style' -> '`@receiver styles'.
-
-	^ self styles
-]
-
-{ #category : #'api - style' }
-BlElement >> styles [
-	"Return current element styles.
-	See ${class:BlStyles}$ to learn more about styles"
-	<return: #BlElementStyles>
-	
-	"Style and properties computation are not used and will be removed"
-	^ nil
-	"^ self userData
-		at: #blocStyles
-		ifAbsentPut: [ BlElementStyles new element: self ]"
 ]
 
 { #category : #layout }

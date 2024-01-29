@@ -751,39 +751,17 @@ BlInfiniteLinearLayout >> layoutChunkAdd [
 
 	<return: #BlElement>
 	| anElement |
-	anElement := layoutState
-		             nextElement: self recycler
-		             in: infiniteElement.
+	anElement := layoutState nextElement: self recycler in: infiniteElement.
 
 	layoutState hasScrapList
-		ifFalse: [ 
+		ifFalse: [
 			shouldReverseLayout = layoutState isLayoutStartDirection
 				ifTrue: [ "add child as first" self addChild: anElement ]
-				ifFalse: [ self addChild: anElement at: 1 ]
-			"add child as last" ]
-		ifTrue: [ 
+				ifFalse: [ "add child as last" self addChild: anElement at: 1 ] ]
+		ifTrue: [
 			shouldReverseLayout = layoutState isLayoutStartDirection
-				ifTrue: [ "add child as first" 
-				self addDisappearingChild: anElement ]
-				ifFalse: [ self addDisappearingChild: anElement at: 1 ]
-			"add child as last" ].
-
-	(infiniteElement isAttachedToSceneGraph and: [ 
-		 infiniteElement space notNil ]) ifTrue: [ 
-		(infiniteElement space needsStyleComputation: anElement) ifTrue: [ 
-			anElement ignoreRequestLayoutDuring: [ 
-				infiniteElement space doStyle: anElement ] ] ].
-
-	"we should check if an element is attached to the scene graph again, because styles may remove it from the space"
-	(infiniteElement isAttachedToSceneGraph and: [ 
-		 infiniteElement space notNil ]) ifTrue: [ 
-		self flag: #TODO.
-		"revisit needsPropertiesComputation:"
-		((infiniteElement space canComputeProperties: anElement) and: [ 
-			 true "infiniteElement space needsPropertiesComputation: anElement" ]) 
-			ifTrue: [ 
-				infiniteElement ignoreRequestLayoutDuring: [ 
-					infiniteElement space doComputePropertiesOf: { anElement } ] ] ].
+				ifTrue: [ "add child as first" self addDisappearingChild: anElement ]
+				ifFalse: [ "add child as last" self addDisappearingChild: anElement at: 1 ] ].
 
 	self notifyChunkAdded: anElement.
 
