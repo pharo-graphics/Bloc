@@ -4084,6 +4084,13 @@ BlElement >> withAllChildrenBreadthFirstDo: aBlock [
 ]
 
 { #category : #'api - children enumeration' }
+BlElement >> withAllChildrenDepthFirstDo: aBlock [
+	self childrenDo: [ :each | each allChildrenDepthFirstDo: aBlock ].
+	self childrenDo: aBlock.
+	aBlock value: self
+]
+
+{ #category : #'api - children enumeration' }
 BlElement >> withAllChildrenDo: aBlock [
 	"Evaluate aBlock with myself and each of my direct children as argument.
 	aBlock can not be nil.
