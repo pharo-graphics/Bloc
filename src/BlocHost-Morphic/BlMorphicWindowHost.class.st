@@ -49,12 +49,11 @@ BlMorphicWindowHost >> createMorphicWindowFor: aSpace [
 	I do not create any strong or weak references to provided space"
 
 	^ BlMorphicWindow new
-		spaceExtent: aSpace extent;
-		borderless: aSpace borderless;
-		fullsize: aSpace fullsize;
-		title: aSpace title;
-		yourself
-
+		  spaceExtent: aSpace extent;
+		  borderless: aSpace isBorderless;
+		  fullsize: aSpace isFullsize;
+		  title: aSpace title;
+		  yourself
 ]
 
 { #category : #'host - api' }

@@ -98,9 +98,9 @@ BlSpaceExamplesMigratedTest >> testEmptySpace [
 	self assert: aSpace height equals: aSpace defaultExtent y.
 	self assert: aSpace width equals: aSpace defaultExtent x.
 	self assert: aSpace position equals: 0 @ 0.
-	self assert: aSpace resizable.
-	self assert: aSpace borderless not.
-	self assert: aSpace fullscreen not.
+	self assert: aSpace isResizable.
+	self assert: aSpace isBorderless not.
+	self assert: aSpace isFullscreen not.
 	self assert: aSpace focused not.
 	self assert: aSpace hasHostSpace not.
 	self deny: aSpace hasDirtyElements.
