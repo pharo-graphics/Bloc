@@ -592,7 +592,7 @@ BlSpace >> defaultRootElevation [
 
 { #category : #initialization }
 BlSpace >> defaultRootLabel [
-	^ 'Space root'
+	^ #'space-root'
 ]
 
 { #category : #initialization }
