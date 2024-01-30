@@ -1,6 +1,6 @@
 Class {
-	#name : #BlDefaultColors,
-	#superclass : #SharedPool,
+	#name : 'BlDefaultColors',
+	#superclass : 'SharedPool',
 	#classVars : [
 		'ActiveColor',
 		'BackdropColor',
@@ -55,168 +55,169 @@ Class {
 		'TextHighlightColor',
 		'TextMarkupColor'
 	],
-	#category : #'Bloc-Theme'
+	#category : 'Bloc-Theme',
+	#package : 'Bloc-Theme'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultColors class >> backdropColor [
 	^ BackdropColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultColors class >> darkBorderColor [
 	^ DarkBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultColors class >> darkBorderColor: anObject [
 	DarkBorderColor := anObject
 ]
 
-{ #category : #'button - background' }
+{ #category : 'button - background' }
 BlDefaultColors class >> defaultButtonBackgroundColor [
 	^ ButtonBackgroundColor
 ]
 
-{ #category : #'button - background' }
+{ #category : 'button - background' }
 BlDefaultColors class >> defaultButtonBackgroundColor: anObject [
 	ButtonBackgroundColor := anObject
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BlDefaultColors class >> defaultButtonBorderColor [
 	^ ButtonBorderColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BlDefaultColors class >> defaultButtonBorderColor: anObject [
 	ButtonBorderColor := anObject
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BlDefaultColors class >> defaultButtonTextColor [
 	^ ButtonTextColor
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BlDefaultColors class >> defaultButtonTextColor: anObject [
 	ButtonTextColor := anObject
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> defaultDividerBackgroundColor [
 
 	^ DefaultDividerBackgroundColor
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> defaultDividerBackgroundColor: aColor [
 
 	DefaultDividerBackgroundColor := aColor
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> defaultDividerBorderColor [
 
 	^ DefaultDividerBorderColor
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> defaultDividerBorderColor: aColor [
 
 	DefaultDividerBorderColor := aColor
 ]
 
-{ #category : #'header - background' }
+{ #category : 'header - background' }
 BlDefaultColors class >> defaultHeaderBackgroundColor [
 	^ HeaderBackgroundColor
 ]
 
-{ #category : #'header - text' }
+{ #category : 'header - text' }
 BlDefaultColors class >> defaultHeaderTextColor [
 	^ HeaderTextColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BlDefaultColors class >> defaultListItemBackgroundColor [
 	^ self deselectedListItemColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultColors class >> defaultShadowColor [
 	^ ShadowColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BlDefaultColors class >> deselectedListItemColor [
 	^ DeselectedListItemBackgroundColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BlDefaultColors class >> deselectedtListItemColor: aColor [
 	DeselectedListItemBackgroundColor := aColor
 ]
 
-{ #category : #'button - background' }
+{ #category : 'button - background' }
 BlDefaultColors class >> disabledButtonBackgroundColor [
 	^ DisabledButtonBackgroundColor
 ]
 
-{ #category : #'button - background' }
+{ #category : 'button - background' }
 BlDefaultColors class >> disabledButtonBackgroundColor: anObject [
 	DisabledButtonBackgroundColor := anObject
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BlDefaultColors class >> disabledButtonBorderColor [
 	^ DisabledButtonBorderColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BlDefaultColors class >> disabledButtonBorderColor: anObject [
 	DisabledButtonBorderColor := anObject
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BlDefaultColors class >> disabledButtonTextColor [
 	^ DisabledButtonTextColor
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BlDefaultColors class >> disabledButtonTextColor: anObject [
 	DisabledButtonTextColor := anObject
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> disabledDividerBackgroundColor [
 
 	^ DisabledDividerBackgroundColor
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> disabledDividerBackgroundColor: aColor [
 
 	DisabledDividerBackgroundColor := aColor
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> disabledDividerBorderColor [
 
 	^ DisabledDividerBorderColor
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> disabledDividerBorderColor: aColor [
 
 	DisabledDividerBorderColor := aColor
 ]
 
-{ #category : #'header - text' }
+{ #category : 'header - text' }
 BlDefaultColors class >> disabledHeaderTextColor [
 	^ DisabledHeaderTextColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultColors class >> distinctTenLightColors [
 	"This is a list of 10 light colors that can be distinguished b
 	the typical human eye even when seen together in the same picture.
@@ -277,7 +278,7 @@ BlDefaultColors class >> distinctTenLightColors [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultColors class >> distinctTenStrongColors [
 	"This is a list of 10 light colors that can be distinguished b
 	the typical human eye even when seen together in the same picture.
@@ -298,138 +299,138 @@ BlDefaultColors class >> distinctTenStrongColors [
 			yourself
 ]
 
-{ #category : #'editor - border' }
+{ #category : 'editor - border' }
 BlDefaultColors class >> editorBorderColor [
 	^ EditorBorderColor
 ]
 
-{ #category : #'editor - border' }
+{ #category : 'editor - border' }
 BlDefaultColors class >> editorBorderColor: anObject [
 	EditorBorderColor := anObject
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BlDefaultColors class >> errorBackgroundColor [
 	^ ErrorBackgroundColor
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BlDefaultColors class >> errorBackgroundColor: aColor [
 	ErrorBackgroundColor := aColor
 ]
 
-{ #category : #'status - border' }
+{ #category : 'status - border' }
 BlDefaultColors class >> errorBorderColor [
 	^ ErrorBorderColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BlDefaultColors class >> expandCollapseTriangleBackgroundColor [
 	^ ExpandCollapseTriangleBackgroundColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BlDefaultColors class >> expandCollapseTriangleBackgroundColor: aColor [
 	ExpandCollapseTriangleBackgroundColor := aColor
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BlDefaultColors class >> failureBackgroundColor [
 	^ FailureBackgroundColor
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BlDefaultColors class >> failureBackgroundColor: aColor [
 	FailureBackgroundColor := aColor
 ]
 
-{ #category : #'status - border' }
+{ #category : 'status - border' }
 BlDefaultColors class >> failureBorderColor [
 	^ FailureBorderColor
 ]
 
-{ #category : #'editor - border' }
+{ #category : 'editor - border' }
 BlDefaultColors class >> focusedEditorBorderColor [
 	^ FocusedEditorBorderColor
 ]
 
-{ #category : #'editor - border' }
+{ #category : 'editor - border' }
 BlDefaultColors class >> focusedEditorBorderColor: anObject [
 	FocusedEditorBorderColor := anObject
 ]
 
-{ #category : #'list and tree items - border' }
+{ #category : 'list and tree items - border' }
 BlDefaultColors class >> focusedListItemBorder [
 	^ self primaryBorderColor
 ]
 
-{ #category : #'button - background' }
+{ #category : 'button - background' }
 BlDefaultColors class >> hoveredButtonBackgroundColor [
 
 	^ ButtonHoveredBackgroundColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BlDefaultColors class >> hoveredButtonBorderColor [
 	^ HoveredButtonBorderColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BlDefaultColors class >> hoveredButtonBorderColor: anObject [
 	HoveredButtonBorderColor := anObject
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BlDefaultColors class >> hoveredButtonTextColor [
 	^ HoveredButtonTextColor
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BlDefaultColors class >> hoveredButtonTextColor: anObject [
 	HoveredButtonTextColor := anObject
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> hoveredDividerBackgroundColor [
 
 	^ HoveredDividerBackgroundColor
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> hoveredDividerBackgroundColor: aColor [
 
 	HoveredDividerBackgroundColor := aColor
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> hoveredDividerBorderColor [
 
 	^ HoveredDividerBorderColor
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> hoveredDividerBorderColor: aColor [
 
 	HoveredDividerBorderColor := aColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BlDefaultColors class >> hoveredListItemBackgroundColor [
 	^ HoveredListItemBackgroundColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BlDefaultColors class >> hoveredListItemBackgroundColor: aColor [
 	HoveredListItemBackgroundColor := aColor
 ]
 
-{ #category : #'list and tree items - border' }
+{ #category : 'list and tree items - border' }
 BlDefaultColors class >> hoveredListItemBorderColor [
 
 	^ HoveredListItemBorderColor
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlDefaultColors class >> initialize [
 	LightBorderColor := Color fromHexString: #d9d9d9.
 	DarkBorderColor := Color darkGray.
@@ -511,169 +512,169 @@ BlDefaultColors class >> initialize [
 	LinkWithErrorColor := Color fromHexString: #cf1322.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlDefaultColors class >> isDeprecated [ 
 
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultColors class >> lightBorderColor [
 	^ LightBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultColors class >> lightBorderColor: anObject [
 	LightBorderColor := anObject
 ]
 
-{ #category : #links }
+{ #category : 'links' }
 BlDefaultColors class >> linkColor [
 	^ LinkColor
 ]
 
-{ #category : #links }
+{ #category : 'links' }
 BlDefaultColors class >> linkWithErrorColor [
 	^ LinkWithErrorColor
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BlDefaultColors class >> neutralBackgroundColor [
 	^ NeutralBackgroundColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultColors class >> newsBackgroundColor [
 	^ NewsBackgroundColor
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BlDefaultColors class >> paleErrorBackgroundColor [
 	^ PaleErrorBackgroundColor
 ]
 
-{ #category : #'button - background' }
+{ #category : 'button - background' }
 BlDefaultColors class >> pressedButtonBackgroundColor [
 
 	^ ButtonPressedBackgroundColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BlDefaultColors class >> pressedButtonBorderColor [
 	^ PressedButtonBorderColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BlDefaultColors class >> pressedButtonBorderColor: anObject [
 	PressedButtonBorderColor := anObject
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BlDefaultColors class >> pressedButtonTextColor [
 	^ PressedButtonTextColor
 ]
 
-{ #category : #'button - text' }
+{ #category : 'button - text' }
 BlDefaultColors class >> pressedButtonTextColor: anObject [
 	PressedButtonTextColor := anObject
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> pressedDividerBackgroundColor [
 
 	^ PressedDividerBackgroundColor
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> pressedDividerBackgroundColor: aColor [
 
 	PressedDividerBackgroundColor := aColor
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> pressedDividerBorderColor [
 
 	^ PressedDividerBorderColor
 ]
 
-{ #category : #divider }
+{ #category : 'divider' }
 BlDefaultColors class >> pressedDividerBorderColor: aColor [
 
 	PressedDividerBorderColor := aColor
 ]
 
-{ #category : #'list and tree items - border' }
+{ #category : 'list and tree items - border' }
 BlDefaultColors class >> pressedListItemBorderColor [
 
 	^ PressedListItemBorderColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BlDefaultColors class >> pressedListItemColor [
 	^ PressedListItemBackgroundColor 
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BlDefaultColors class >> pressedListItemColor: aColor [
 	PressedListItemBackgroundColor := aColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultColors class >> primaryBorderColor [
 	^ PrimaryBorderColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultColors class >> primaryBorderColor: anObject [
 	PrimaryBorderColor := anObject
 ]
 
-{ #category : #'header - background' }
+{ #category : 'header - background' }
 BlDefaultColors class >> secondaryHeaderBackgroundColor [
 	^ SecondaryHeaderBackgroundColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BlDefaultColors class >> selectedListItemColor [
 	^ SelectedListItemBackgroundColor
 ]
 
-{ #category : #'list and tree items - background' }
+{ #category : 'list and tree items - background' }
 BlDefaultColors class >> selectedListItemColor: aColor [
 	SelectedListItemBackgroundColor := aColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlDefaultColors class >> shadowColor [
 	^ ShadowColor
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BlDefaultColors class >> successBackgroundColor [
 	^ SuccessBackgroundColor
 ]
 
-{ #category : #'status - background' }
+{ #category : 'status - background' }
 BlDefaultColors class >> successBackgroundColor: aColor [
 	SuccessBackgroundColor := aColor
 ]
 
-{ #category : #'status - border' }
+{ #category : 'status - border' }
 BlDefaultColors class >> successBorderColor [
 	^ SuccessBorderColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BlDefaultColors class >> textHighlightColor [
 	^ TextHighlightColor
 ]
 
-{ #category : #'button - border' }
+{ #category : 'button - border' }
 BlDefaultColors class >> textHighlightColor: anObject [
 	TextHighlightColor := anObject
 ]
 
-{ #category : #'header - text' }
+{ #category : 'header - text' }
 BlDefaultColors class >> textMarkupColor [
 	^ TextMarkupColor
 ]

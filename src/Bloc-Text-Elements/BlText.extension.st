@@ -1,6 +1,6 @@
-Extension { #name : #BlText }
+Extension { #name : 'BlText' }
 
-{ #category : #'*Bloc-Text-Elements' }
+{ #category : '*Bloc-Text-Elements' }
 BlText >> asElement [
 
 	^ BlTextElement new
