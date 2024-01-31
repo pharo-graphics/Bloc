@@ -130,16 +130,21 @@ BaselineOfBloc >> baseline: spec [
 					spec requires: #('Bloc-Infinite') ];
 				package: #'Bloc-Layout-Tests' with: [
 					spec requires: #('Bloc-Layout' 'Bloc-Text' 'Bloc-DevTool') ];
+				package: #'Bloc-Layout-Examples' with: [
+					spec requires: #('Bloc-Layout' 'Bloc-Text-Elements') ];
 				package: #'Bloc-Overlay-Examples' with: [
 					spec requires: #('Bloc-Overlay') ];
 				package: #'Bloc-Scalable-Examples' with: [
-					spec requires: #('Bloc-Scalable') ].
+					spec requires: #('Bloc-Scalable') ];
+				package: #'Bloc-FocusFinder-Examples' with: [
+					spec requires: #('Bloc-FocusFinder') ].
 
 			spec
 				package: #'Bloc-Theme' with: [
 					spec requires: #(#'Bloc') ].
 				
-			spec package: #'Bloc-Demo' with: [ spec requires: #(#'Bloc-Layout' #'Bloc-Spec2' #'Bloc-Text-Elements') ].
+			spec package: #'Bloc-Demo' with: [
+				spec requires: #(#'Bloc-Layout' #'Bloc-Spec2' #'Bloc-Text-Elements') ].
 
 			"SVG"
 			spec
