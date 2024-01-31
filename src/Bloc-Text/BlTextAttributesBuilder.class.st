@@ -12,24 +12,26 @@ BlTextAttributesBuilder new
 
 "
 Class {
-	#name : #BlTextAttributesBuilder,
-	#superclass : #Object,
+	#name : 'BlTextAttributesBuilder',
+	#superclass : 'Object',
 	#traits : 'TBlTextStyleable',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
 		'attributes'
 	],
-	#category : #'Bloc-Text-Text-Support'
+	#category : 'Bloc-Text-Text-Support',
+	#package : 'Bloc-Text',
+	#tag : 'Text-Support'
 }
 
-{ #category : #hook }
+{ #category : 'hook' }
 BlTextAttributesBuilder >> applyOn: aBlText [
 	"Apply these text properties on a given text"
 
 	^ aBlText attributes: self attributes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextAttributesBuilder >> attribute: aTextAttribute [
 	| anExistingAttributeIndex |
 
@@ -42,26 +44,26 @@ BlTextAttributesBuilder >> attribute: aTextAttribute [
 		ifFalse: [ self attributes at: anExistingAttributeIndex put: aTextAttribute ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextAttributesBuilder >> attributes [
 	<return: #Collection of: #BlTextAttribute>
 	
 	^ attributes
 ]
 
-{ #category : #hook }
+{ #category : 'hook' }
 BlTextAttributesBuilder >> attributes: aCollectionOfAttributes [
 	aCollectionOfAttributes do: [ :eachAttribute | self attribute: eachAttribute ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlTextAttributesBuilder >> attributesBuilder [
 	<return: #BlTextAttributesBuilder>
 	
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlTextAttributesBuilder >> hasAttribute: anAttribute [
 	^ self attributes
 		detect: [ :eachAttribute | eachAttribute type = anAttribute type ]
@@ -69,7 +71,7 @@ BlTextAttributesBuilder >> hasAttribute: anAttribute [
 		ifNone: [ false ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTextAttributesBuilder >> initialize [
 	super initialize.
 	

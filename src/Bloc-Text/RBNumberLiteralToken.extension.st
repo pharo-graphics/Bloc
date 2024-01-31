@@ -1,6 +1,6 @@
-Extension { #name : #RBNumberLiteralToken }
+Extension { #name : 'RBNumberLiteralToken' }
 
-{ #category : #'*Bloc-Text' }
+{ #category : '*Bloc-Text' }
 RBNumberLiteralToken >> acceptVisitor: aVisitor [
 
 	^ aVisitor visitNumberLiteralToken: self
