@@ -6,8 +6,8 @@ I support forward and reverse directions of enumeration
 
 "
 Class {
-	#name : #BlRopeIterator,
-	#superclass : #Object,
+	#name : 'BlRopeIterator',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
@@ -15,17 +15,19 @@ Class {
 		'start',
 		'end'
 	],
-	#category : #'Bloc-DataStructure - Rope'
+	#category : 'Bloc-DataStructure - Rope',
+	#package : 'Bloc',
+	#tag : 'DataStructure - Rope'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlRopeIterator class >> rope: aRope from: aStart to: anEnd [
 	^ self new
 		rope: aRope from: aStart to: anEnd;
 		yourself
 ]
 
-{ #category : #'iterator - attributes' }
+{ #category : 'iterator - attributes' }
 BlRopeIterator >> attributes [
 	"Return a collection of rope attributes at the current *peek* position without duplicates"
 	<return: #Collection of: #Objects>
@@ -33,7 +35,7 @@ BlRopeIterator >> attributes [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'iterator - attributes' }
+{ #category : 'iterator - attributes' }
 BlRopeIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExceptionBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument.  
 	If some element evaluates aBlock to true, then cull this element into 
@@ -47,41 +49,41 @@ BlRopeIterator >> detectAttribute: aBlock ifFound: aFoundBlock ifNone: anExcepti
 		ifNone: anExceptionBlock
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlRopeIterator >> end [
 	<return: #Number>
 	
 	^ end
 ]
 
-{ #category : #'private - errors' }
+{ #category : 'private - errors' }
 BlRopeIterator >> errorOvershootsTheEnd [
 	self error: 'Overshoots the end of the iterator!'
 ]
 
-{ #category : #'private - errors' }
+{ #category : 'private - errors' }
 BlRopeIterator >> errorOvershootsTheStart [
 	self error: 'Reached the end of the rope iterator!'
 ]
 
-{ #category : #'private - errors' }
+{ #category : 'private - errors' }
 BlRopeIterator >> errorReachedTheEnd [
 	self error: 'Reached the end of the rope iterator!'
 ]
 
-{ #category : #'private - errors' }
+{ #category : 'private - errors' }
 BlRopeIterator >> errorReachedTheStart [
 	self error: 'Overshoots the start of the iterator!'
 ]
 
-{ #category : #'iterator - testing' }
+{ #category : 'iterator - testing' }
 BlRopeIterator >> hasNext [
 	"Return true if iterator is be able to return #next item in the rope, false otherwise"
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #'iterator - testing' }
+{ #category : 'iterator - testing' }
 BlRopeIterator >> hasPrevious [
 	"Return true if iterator is be able to return #previous item in the rope, false otherwise"
 	<return: #Boolean>
@@ -89,7 +91,7 @@ BlRopeIterator >> hasPrevious [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> next [
 	"Return next element in the rope"
 	<return: #Object>
@@ -97,7 +99,7 @@ BlRopeIterator >> next [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> nextLine [
 	"Return a next line without delimiters"
 	<return: #BlRope>
@@ -105,7 +107,7 @@ BlRopeIterator >> nextLine [
 	^ self nextLineIndicesDo: [ :aStart :anEnd :aLineEndWithDelimiters | self rope from: aStart to: anEnd ]
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> nextLineIndicesDo: anIndicesBlock [
 	" execute anIndicesBlock with 3 arguments for each line:
 		- start index of line in cursor coordinates
@@ -150,7 +152,7 @@ BlRopeIterator >> nextLineIndicesDo: anIndicesBlock [
 		value: aDelimitedLineEnd
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> nextSegment: aBlock [
 	"Return a segment of item for those aBlock uniformly returns equal value for each consequent item"
 	<return: #BlRope>
@@ -160,7 +162,7 @@ BlRopeIterator >> nextSegment: aBlock [
 		indicesDo: [ :aStart :anEnd :anInitialValue | self rope from: aStart to: anEnd ]
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
 	"Evaluate aBlock with every item in the forward direction until aBlock returns a different value compared to the value
 	produced by evaluating aBlock with the first item in a sequence or until we run out of items to iterate over.
@@ -193,7 +195,7 @@ BlRopeIterator >> nextSegment: aBlock indicesDo: anIndicesBlock [
 		cull: initialValue
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> nextSegment: aBlock indicesDo: anIndicesBlock lookahead: aLookaheadAmount [
 	"Evaluate aBlock with every item in the forward direction until aBlock returns a different value compared to the value
 	produced by evaluating aBlock with the first item in a sequence or until we run out of items to iterate over.
@@ -210,7 +212,7 @@ BlRopeIterator >> nextSegment: aBlock indicesDo: anIndicesBlock lookahead: aLook
 		breakWhen: [ :aSegmentValue | false ]
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> nextSegment: aBlock indicesDo: anIndicesBlock lookahead: aLookaheadAmount breakWhen: aBreakBlock [
 	"Evaluate aBlock with every item in the forward direction until aBlock returns a different value compared to the value
 	produced by evaluating aBlock with the first item in a sequence or until we run out of items to iterate over.
@@ -267,13 +269,13 @@ BlRopeIterator >> nextSegment: aBlock indicesDo: anIndicesBlock lookahead: aLook
 		cull: currentValue
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> nextSpan [
 	"Return a next homogeneous subrope based on attributes"
 	^ self subclassResponsibility
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> nextSpan: aBlock [
 	"Evaluate aBlock with each attribute from each span and return a span for which aBlock returns either true or false.
 	The key here is that we can redefine what homogeneity of the span mean"
@@ -298,21 +300,21 @@ BlRopeIterator >> nextSpan: aBlock [
 	^ self rope from: aStart to: anEnd
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> nextWhitespace [
 	<return: #BlRope>
 
 	^ self nextSegment: [ :item | item isCharacter not or: [ item isSeparator not ] ]
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> nextWord [
 	<return: #BlRope>
 
 	^ self nextSegment: [ :item | item isCharacter and: [ item isSeparator not ] ]
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> peek [
 	"Return an element at current #position without changing it.
 	(#peek item is the same that would be returned by #next).
@@ -322,7 +324,7 @@ BlRopeIterator >> peek [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> peer [
 	"Return an element before the current #position without moving the cursor.
 	(#peer item is the same that would be returned by #previous).
@@ -335,7 +337,7 @@ BlRopeIterator >> peer [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'iterator - accessing' }
+{ #category : 'iterator - accessing' }
 BlRopeIterator >> position [
 	"Return a *cursor* position.
 	
@@ -353,12 +355,12 @@ BlRopeIterator >> position [
 	^ self subclassResponsibility
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlRopeIterator >> postCopy [
 	
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> previous [
 	"Return previous element in the rope"
 	<return: #Object>
@@ -366,7 +368,7 @@ BlRopeIterator >> previous [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> previousSegment: aBlock indicesDo: anIndicesBlock [
 	"Evaluate aBlock with every item in the backward direction until aBlock returns a different value compared to the value
 	produced by evaluating aBlock with the first item in a sequence or until we run out of items to iterate over.
@@ -399,12 +401,12 @@ BlRopeIterator >> previousSegment: aBlock indicesDo: anIndicesBlock [
 		cull: initialValue
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlRopeIterator >> rope [
 	^ rope
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlRopeIterator >> rope: aRope from: aStart to: anEnd [
 	(aRope isNotEmpty and: [ aStart < 0 or: [ anEnd > aRope size ] ])
 		ifTrue: [ self error: 'Iterator interval out of bounds!' ].
@@ -416,7 +418,7 @@ BlRopeIterator >> rope: aRope from: aStart to: anEnd [
 	end := anEnd max: aStart.
 ]
 
-{ #category : #'iterator - attributes' }
+{ #category : 'iterator - attributes' }
 BlRopeIterator >> selectAttributes: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument. 
 	Collect into a new collection like the receiver, only those elements for 
@@ -426,7 +428,7 @@ BlRopeIterator >> selectAttributes: aBlock [
 	^ self attributes select: aBlock
 ]
 
-{ #category : #'iterator - enumeration' }
+{ #category : 'iterator - enumeration' }
 BlRopeIterator >> skip: aNumber [
 	"Skip given amount of items (that would be returned by #next or #prevous).
 	aNumber can be negative and positive, sign defines a direction of iteration"
@@ -434,7 +436,7 @@ BlRopeIterator >> skip: aNumber [
 	self subclassResponsibility
 ]
 
-{ #category : #'private - accessing' }
+{ #category : 'private - accessing' }
 BlRopeIterator >> start [
 	<return: #Number>
 	

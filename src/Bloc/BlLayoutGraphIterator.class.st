@@ -1,25 +1,27 @@
 Class {
-	#name : #BlLayoutGraphIterator,
-	#superclass : #Object,
+	#name : 'BlLayoutGraphIterator',
+	#superclass : 'Object',
 	#instVars : [
 		'layoutNode'
 	],
-	#category : #'Bloc-Layouts-Model'
+	#category : 'Bloc-Layouts-Model',
+	#package : 'Bloc',
+	#tag : 'Layouts-Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLayoutGraphIterator class >> new [
 	self error: '(Use on: instead) I must be always created in a context of a layout node'
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlLayoutGraphIterator class >> on: aBlLayoutChildNode [
 	^ self basicNew
 		initialize;
 		layoutNode: aBlLayoutChildNode
 ]
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlLayoutGraphIterator >> asArray [
 	"Return a collection of all items enumerable by this iterator"
 	<return: #Array of: #Object>
@@ -27,14 +29,14 @@ BlLayoutGraphIterator >> asArray [
 	^ Array streamContents: [ :aStream | self do: [ :anObject | aStream nextPut: anObject ] ]
 ]
 
-{ #category : #'api - enumeration' }
+{ #category : 'api - enumeration' }
 BlLayoutGraphIterator >> do: aBlock [
 	"Evaluate a given block with all iterator items"
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlLayoutGraphIterator >> hasAny [
 	"Return true if I have any items"
 	<return: #Boolean>
@@ -43,7 +45,7 @@ BlLayoutGraphIterator >> hasAny [
 	^ false
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlLayoutGraphIterator >> hasNone [
 	"Return true if I don't have any items, false otherwise"
 	
@@ -51,32 +53,32 @@ BlLayoutGraphIterator >> hasNone [
 	^ true
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlLayoutGraphIterator >> isEmpty [
 
 	^ self hasNone
 ]
 
-{ #category : #'api - testing' }
+{ #category : 'api - testing' }
 BlLayoutGraphIterator >> isNotEmpty [
 	<return: #Boolean>
 
 	^ self hasAny
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutGraphIterator >> layoutNode [
 	<return: #BlLayoutChildNode>
 
 	^ layoutNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlLayoutGraphIterator >> layoutNode: aBlLayoutChildNode [
 	layoutNode := aBlLayoutChildNode
 ]
 
-{ #category : #'api - enumeration' }
+{ #category : 'api - enumeration' }
 BlLayoutGraphIterator >> select: selectBlock thenDo: doBlock [
 	"Utility method to improve readability.
 	Do not create the intermediate collection."
@@ -86,7 +88,7 @@ BlLayoutGraphIterator >> select: selectBlock thenDo: doBlock [
 			ifTrue: [ doBlock value: anElement ] ]
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlLayoutGraphIterator >> size [
 	"Return amount of items that can be returned by this iterator.
 	Please note, I have to iterate over all items, so complexity is linear"

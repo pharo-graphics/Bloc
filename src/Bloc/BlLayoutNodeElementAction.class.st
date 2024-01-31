@@ -1,13 +1,15 @@
 Class {
-	#name : #BlLayoutNodeElementAction,
-	#superclass : #Object,
-	#category : #'Bloc-Layouts-Model'
+	#name : 'BlLayoutNodeElementAction',
+	#superclass : 'Object',
+	#category : 'Bloc-Layouts-Model',
+	#package : 'Bloc',
+	#tag : 'Layouts-Model'
 }
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BlLayoutNodeElementAction >> laidOut: aChildNode element: anElement [
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 BlLayoutNodeElementAction >> measured: aChildNode element: anElement [
 ]

@@ -1,10 +1,12 @@
 Class {
-	#name : #BlMouseDownOutsideEvent,
-	#superclass : #BlMousePickOutsideEvent,
-	#category : #'Bloc-Events-Type-Element'
+	#name : 'BlMouseDownOutsideEvent',
+	#superclass : 'BlMousePickOutsideEvent',
+	#category : 'Bloc-Events-Type-Element',
+	#package : 'Bloc',
+	#tag : 'Events-Type-Element'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlMouseDownOutsideEvent >> sendTo: anObject [
 
 	anObject mouseDownOutsideEvent: self

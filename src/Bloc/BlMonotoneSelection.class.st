@@ -5,38 +5,40 @@ Monotone selection can not be empty
 
 "
 Class {
-	#name : #BlMonotoneSelection,
-	#superclass : #BlSelection,
+	#name : 'BlMonotoneSelection',
+	#superclass : 'BlSelection',
 	#instVars : [
 		'from',
 		'to'
 	],
-	#category : #'Bloc-Utilities - Selection'
+	#category : 'Bloc-Utilities - Selection',
+	#package : 'Bloc',
+	#tag : 'Utilities - Selection'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMonotoneSelection class >> from: aFromIndex to: aToIndex [
 	^ self basicNew initialize from: aFromIndex to: aToIndex
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMonotoneSelection class >> new [
 	^ self error: 'Use from:to: instead'
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMonotoneSelection >> < aMonotoneTextSelection [
 
 	^ self from < aMonotoneTextSelection from
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMonotoneSelection >> <= aMonotoneTextSelection [
 
 	^ self from <= aMonotoneTextSelection from
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMonotoneSelection >> = anotherObject [
 
 	self == anotherObject
@@ -48,19 +50,19 @@ BlMonotoneSelection >> = anotherObject [
 		and: [ anotherObject to = self to ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMonotoneSelection >> > aMonotoneTextSelection [
 
 	^ self from > aMonotoneTextSelection from
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMonotoneSelection >> >= aMonotoneTextSelection [
 
 	^ self from >= aMonotoneTextSelection from
 ]
 
-{ #category : #invariant }
+{ #category : 'invariant' }
 BlMonotoneSelection >> assertInvariant [
 
 	self
@@ -68,14 +70,14 @@ BlMonotoneSelection >> assertInvariant [
 		description: [ 'Class invariant must always hold' ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMonotoneSelection >> children [
 	<return: #Collection of: #BlSelection>
 	
 	^ #()
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BlMonotoneSelection >> complement: aMonotoneTextSelection [
 	"Answer the complement of me and a given selection.
 	Note: I return an empty selection if complement is empty and composite text selection
@@ -102,7 +104,7 @@ BlMonotoneSelection >> complement: aMonotoneTextSelection [
 				ifFalse: [ self class from: (aMonotoneTextSelection to max: self from)  to: self to ]	]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMonotoneSelection >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise.
 	If selection is [0.. 1] both 0 and 1 are within this selection"
@@ -110,7 +112,7 @@ BlMonotoneSelection >> contains: anIndex [
 	^ self rangeIncludes: anIndex
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMonotoneSelection >> containsIndex: anIndex [
 	"Return true if selection indices include a given index, false otherwise.
 	I am conceptually same as (self indices includes: anIndex)"
@@ -119,7 +121,7 @@ BlMonotoneSelection >> containsIndex: anIndex [
 		and: [ anIndex <= self to ]
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 BlMonotoneSelection >> copyFrom: aStartIndex to: anEndIndex [
 	aStartIndex <= self to
 		ifTrue: [ ^ BlMonotoneSelection from: aStartIndex to: aStartIndex ].
@@ -132,12 +134,12 @@ BlMonotoneSelection >> copyFrom: aStartIndex to: anEndIndex [
 		to: (anEndIndex min: self to)
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlMonotoneSelection >> do: aBlock [
 	aBlock value: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMonotoneSelection >> from [
 	"Return a text index of the first selected character"
 	<return: #Number>
@@ -145,7 +147,7 @@ BlMonotoneSelection >> from [
 	^ from
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMonotoneSelection >> from: aFromIndex to: aToIndex [
 	self
 		assert: [ from isNil and: [ to isNil ] ]
@@ -161,12 +163,12 @@ BlMonotoneSelection >> from: aFromIndex to: aToIndex [
 	self assertInvariant
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMonotoneSelection >> hash [
 	^ self from hash bitXor: self to hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMonotoneSelection >> includes: aMonotoneTextSelection [
 	"Return true if I include a given selection, false otherwise"
 	<return: #Boolean>
@@ -175,7 +177,7 @@ BlMonotoneSelection >> includes: aMonotoneTextSelection [
 		and: [ aMonotoneTextSelection to <= self to ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMonotoneSelection >> indices [
 	"Return a collection of selection indices.
 	If the selection interval is [0..1] then selection indices will only contain
@@ -188,7 +190,7 @@ BlMonotoneSelection >> indices [
 	^ self from + 1 to: self to
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMonotoneSelection >> inside: aMonotoneTextSelection [
 	"Return true if I am fully inside a given selection, false otherwise"
 	<return: #Boolean>
@@ -197,7 +199,7 @@ BlMonotoneSelection >> inside: aMonotoneTextSelection [
 		and: [ self to <= aMonotoneTextSelection to ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMonotoneSelection >> interval [
 	"Return current text selection as interval"
 	<return: #Interval>
@@ -207,7 +209,7 @@ BlMonotoneSelection >> interval [
 	^ self from to: self to
 ]
 
-{ #category : #invariant }
+{ #category : 'invariant' }
 BlMonotoneSelection >> invariant [
 	"Return true if class invariant holds, false otherwise.
 	An invariant is that ===from=== must be always smaller or equal to ===to=== and both must not be negative"
@@ -218,14 +220,14 @@ BlMonotoneSelection >> invariant [
 			and: [ to >= 0 ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMonotoneSelection >> isEmpty [
 	"Return true if selection is empty, false otherwise"
 
 	^ self to <= self from
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMonotoneSelection >> isNotEmpty [
 	"Return true if selection is empty, false otherwise"
 	<return: #Boolean>
@@ -233,7 +235,7 @@ BlMonotoneSelection >> isNotEmpty [
 	^ self from < self to
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMonotoneSelection >> neighbours: aMonotoneTextSelection [
 	"Return true if I am a neighour of a given interval, false otherwise.
 	Overlapping intervals are not considered as neighbours"
@@ -245,7 +247,7 @@ BlMonotoneSelection >> neighbours: aMonotoneTextSelection [
 			or: [ self from = aMonotoneTextSelection to ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMonotoneSelection >> overlaps: aMonotoneTextSelection [
 	"Return true I overlap with a given monotone text selection, false otherwise.
 	Intervals such as [6, 7] and [7, 9] are considered to be overllaping,
@@ -258,7 +260,7 @@ BlMonotoneSelection >> overlaps: aMonotoneTextSelection [
 				or: [ (aMonotoneTextSelection rangeIncludes: self to) ] ] ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlMonotoneSelection >> printOn: aStream [
 	aStream nextPut: $[.
 	aStream nextPutAll: self from asString.
@@ -267,7 +269,7 @@ BlMonotoneSelection >> printOn: aStream [
 	aStream nextPut: $].
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMonotoneSelection >> rangeIncludes: aNumber [
 	"Return true if the number lies in the interval between from and to"
 	<return: #Boolean>
@@ -275,14 +277,14 @@ BlMonotoneSelection >> rangeIncludes: aNumber [
 	^ aNumber between: self from and: self to
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 BlMonotoneSelection >> reverseDo: aBlock [
 	"Evaluate a given block with all recorded selection intervals in reverse direction"
 
 	aBlock value: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMonotoneSelection >> to [
 	"Return a text index of the last selected character"
 	<return: #Number>

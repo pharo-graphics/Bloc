@@ -8,12 +8,13 @@ See BaselineOfBloc for more information about Bloc in general.
 
 "
 Class {
-	#name : #BaselineOfBloc,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfBloc
+	#name : 'BaselineOfBloc',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfBloc',
+	#package : 'BaselineOfBloc'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfBloc >> baseline: spec [
 	<baseline>
 	spec
@@ -34,10 +35,16 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Tests' with: [
 					spec requires: #(#Bloc 'BlocHost-Mock' ). ].
 
-			"Pull and slide"
-			spec package: #'Bloc-PullAndSlide'.
-			"Focus finder"
-			spec package: #'Bloc-FocusFinder'.
+			"Add-ons"
+			spec
+				package: #'Bloc-PullAndSlide' with: [
+					spec requires: #('Bloc') ];
+				package: #'Bloc-FocusFinder' with: [
+					spec requires: #('Bloc') ];
+				package: #'Bloc-Overlay' with: [
+					spec requires: #('Bloc') ];
+				package: #'Bloc-Scalable' with: [
+					spec requires: #('Bloc') ].
 			
 			"Animation"
 			spec 
@@ -122,7 +129,11 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Infinite-Tests' with: [
 					spec requires: #('Bloc-Infinite') ];
 				package: #'Bloc-Layout-Tests' with: [
-					spec requires: #('Bloc-Layout' 'Bloc-Text' 'Bloc-DevTool') ].
+					spec requires: #('Bloc-Layout' 'Bloc-Text' 'Bloc-DevTool') ];
+				package: #'Bloc-Overlay-Examples' with: [
+					spec requires: #('Bloc-Overlay') ];
+				package: #'Bloc-Scalable-Examples' with: [
+					spec requires: #('Bloc-Scalable') ].
 
 			spec
 				package: #'Bloc-Theme' with: [

@@ -1,31 +1,33 @@
 Class {
-	#name : #BlHorizontalEndAlignment,
-	#superclass : #BlHorizontalAlignment,
-	#category : #'Bloc-Layouts-Alignment'
+	#name : 'BlHorizontalEndAlignment',
+	#superclass : 'BlHorizontalAlignment',
+	#category : 'Bloc-Layouts-Alignment',
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlHorizontalEndAlignment class >> initialize [
 
 	self initializeSingletons
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalEndAlignment class >> leftToRight [
 	^ self right
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalEndAlignment class >> rightToLeft [
 	^ self left
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalEndAlignment >> inverted [
 	^ BlElementAlignment vertical end
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 BlHorizontalEndAlignment >> swap [
 	^ BlElementAlignment horizontal start
 ]

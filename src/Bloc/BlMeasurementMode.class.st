@@ -12,24 +12,26 @@ My main methods are
 
 "
 Class {
-	#name : #BlMeasurementMode,
-	#superclass : #Object,
+	#name : 'BlMeasurementMode',
+	#superclass : 'Object',
 	#classInstVars : [
 		'atMost',
 		'exact',
 		'unspecified'
 	],
-	#category : #'Bloc-Layouts-Support'
+	#category : 'Bloc-Layouts-Support',
+	#package : 'Bloc',
+	#tag : 'Layouts-Support'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMeasurementMode class >> atMost [
 	<return: #BlMeasurementMode>
 
 	^ atMost ifNil: [ atMost := BlMeasurementAtMostMode new ]
 ]
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 BlMeasurementMode class >> cleanUp [
 	super cleanUp.
 	
@@ -38,68 +40,68 @@ BlMeasurementMode class >> cleanUp [
 	unspecified := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMeasurementMode class >> exact [
 	<return: #BlMeasurementMode>
 	
 	^ exact ifNil: [ exact := BlMeasurementExactMode new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlMeasurementMode class >> unspecified [
 	<return: #BlMeasurementMode>
 	
 	^ unspecified ifNil: [ unspecified := BlMeasurementUnspecifiedMode new ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMeasurementMode >> = anotherObject [
 	self == anotherObject
 		ifTrue: [ ^ true ].
 	^ anotherObject class == self class
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlMeasurementMode >> hash [
 	^ self class hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMeasurementMode >> isAtMost [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMeasurementMode >> isExact [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlMeasurementMode >> isUnspecified [
 	^ false
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMeasurementMode >> measurement: aResizing with: aNumber [
 	<return: #BlMeasurementSpec>
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlMeasurementMode >> printOn: aStream size: aNumber [
 	"Prints measurement mode with taking a given size into account"
 	self subclassResponsibility
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMeasurementMode >> size: aNumber min: aMinSize max: aMaxSize [
 	<return: #BlMeasurementSpec>
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlMeasurementMode >> size: aNumber with: aSpecSize [
 	<return: #Number>
 	

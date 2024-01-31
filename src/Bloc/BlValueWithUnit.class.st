@@ -6,44 +6,46 @@ The {{gtMethod:BlValueWithUnit>>#value|label=value}} can be any object, but in m
 
 "
 Class {
-	#name : #BlValueWithUnit,
-	#superclass : #Object,
+	#name : 'BlValueWithUnit',
+	#superclass : 'Object',
 	#instVars : [
 		'value',
 		'unit'
 	],
-	#category : #'Bloc-Basic-Units'
+	#category : 'Bloc-Basic-Units',
+	#package : 'Bloc',
+	#tag : 'Basic-Units'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlValueWithUnit class >> em: aNumber [
 	^ self new
 		value: aNumber;
 		unit: BlUnit em
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlValueWithUnit class >> percent: aNumber [
 	^ self new
 		value: aNumber;
 		unit: BlUnit percent
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlValueWithUnit class >> pt: aNumber [
 	^ self new
 		value: aNumber;
 		unit: BlUnit pt
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlValueWithUnit class >> rem: aNumber [
 	^ self new
 		value: aNumber;
 		unit: BlUnit rem
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlValueWithUnit >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -54,14 +56,14 @@ BlValueWithUnit >> = anObject [
 	^ value = anObject value and: [ unit = anObject unit ]
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 BlValueWithUnit >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ value hash bitXor: unit hash
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlValueWithUnit >> initialize [
 	super initialize.
 	
@@ -69,31 +71,31 @@ BlValueWithUnit >> initialize [
 	unit := BlUnit pt.
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlValueWithUnit >> printOn: aStream [
 	aStream
 		print: self value;
 		print: self unit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlValueWithUnit >> unit [
 	<return: #BlUnit>
 
 	^ unit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlValueWithUnit >> unit: aBlUnit [
 	unit := aBlUnit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlValueWithUnit >> value [
 	^ value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlValueWithUnit >> value: anObject [
 	value := anObject
 ]

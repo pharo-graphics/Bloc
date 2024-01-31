@@ -9,12 +9,14 @@ I am a just a traditional real time.
 
 "
 Class {
-	#name : #BlRealTime,
-	#superclass : #BlTime,
-	#category : #'Bloc-Universe'
+	#name : 'BlRealTime',
+	#superclass : 'BlTime',
+	#category : 'Bloc-Universe',
+	#package : 'Bloc',
+	#tag : 'Universe'
 }
 
-{ #category : #'private - time' }
+{ #category : 'private - time' }
 BlRealTime >> currentTime [
 	"Return a 'current' date and time"
 	<return: #DateAndTime>
@@ -22,7 +24,7 @@ BlRealTime >> currentTime [
 	^ DateAndTime now
 ]
 
-{ #category : #'api - enumeration' }
+{ #category : 'api - enumeration' }
 BlRealTime >> every: aDuration while: aWhileBlock do: aDoBlock [
 	"Evaluate a aDoBlock while aWhileBlock evaluates to true waiting a given amount of time between executions.
 	The first evaluation of a aDoBlock is instant.
@@ -44,7 +46,7 @@ BlRealTime >> every: aDuration while: aWhileBlock do: aDoBlock [
 		0 seconds < aWaitingTime ifTrue: [ aWaitingTime wait ] ]
 ]
 
-{ #category : #'api - time' }
+{ #category : 'api - time' }
 BlRealTime >> wait: aDuration [
 	"Advance clock by waiting for a given amount of time"
 

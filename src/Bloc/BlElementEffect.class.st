@@ -6,14 +6,16 @@ I can influence the bounds of my owner (used to clip my owner).
 
 "
 Class {
-	#name : #BlElementEffect,
-	#superclass : #Object,
+	#name : 'BlElementEffect',
+	#superclass : 'Object',
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Effect'
+	#category : 'Bloc-Effect',
+	#package : 'Bloc',
+	#tag : 'Effect'
 }
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlElementEffect >> computeBounds: aBlBounds [
 	"Compute effect bounds based on provided geometry bounds.
 	Default implementation simply returns given bounds"
@@ -22,21 +24,21 @@ BlElementEffect >> computeBounds: aBlBounds [
 	^ aBlBounds
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlElementEffect >> effectBounds: aBlBounds of: anElement [
 	^ self computeBounds: (aBlBounds rectangle: anElement visualBounds)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementEffect >> isNullEffect [
 	^ false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlElementEffect >> on: anElement [
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlElementEffect >> wantsCompositionLayer [
 	^ false
 ]

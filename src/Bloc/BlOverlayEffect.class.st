@@ -1,25 +1,27 @@
 Class {
-	#name : #BlOverlayEffect,
-	#superclass : #BlElementEffect,
+	#name : 'BlOverlayEffect',
+	#superclass : 'BlElementEffect',
 	#instVars : [
 		'paint'
 	],
-	#category : #'Bloc-Effect'
+	#category : 'Bloc-Effect',
+	#package : 'Bloc',
+	#tag : 'Effect'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlOverlayEffect >> initialize [
 	super initialize.
 	
 	paint := Color transparent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOverlayEffect >> paint [
 	^ paint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlOverlayEffect >> paint: anObject [
 	paint := anObject
 ]

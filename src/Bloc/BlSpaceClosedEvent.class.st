@@ -17,26 +17,28 @@ space close
 
 "
 Class {
-	#name : #BlSpaceClosedEvent,
-	#superclass : #BlSpaceEvent,
+	#name : 'BlSpaceClosedEvent',
+	#superclass : 'BlSpaceEvent',
 	#instVars : [
 		'space'
 	],
-	#category : #'Bloc-Events-Type-Space'
+	#category : 'Bloc-Events-Type-Space',
+	#package : 'Bloc',
+	#tag : 'Events-Type-Space'
 }
 
-{ #category : #sending }
+{ #category : 'sending' }
 BlSpaceClosedEvent >> sendTo: anObject [
 	anObject spaceClosedEvent: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceClosedEvent >> space [
 
 	^ space
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlSpaceClosedEvent >> space: aSpace [
 	space := aSpace
 ]

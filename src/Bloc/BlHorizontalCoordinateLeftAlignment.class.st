@@ -3,18 +3,20 @@ The coordinate is measured from the left side of the outer bounds
 
 "
 Class {
-	#name : #BlHorizontalCoordinateLeftAlignment,
-	#superclass : #BlHorizontalCoordinateAlignment,
-	#category : #'Bloc-Layouts-Alignment'
+	#name : 'BlHorizontalCoordinateLeftAlignment',
+	#superclass : 'BlHorizontalCoordinateAlignment',
+	#category : 'Bloc-Layouts-Alignment',
+	#package : 'Bloc',
+	#tag : 'Layouts-Alignment'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlHorizontalCoordinateLeftAlignment class >> initialize [
 
 	self initializeSingletons
 ]
 
-{ #category : #translation }
+{ #category : 'translation' }
 BlHorizontalCoordinateLeftAlignment >> translationOf: aBounds in: aContainerBounds [
 	| aRelativeDelta anExpectedLeft |
 	

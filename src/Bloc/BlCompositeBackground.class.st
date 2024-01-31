@@ -27,39 +27,41 @@ Opacity example:
 ```
 "
 Class {
-	#name : #BlCompositeBackground,
-	#superclass : #BlBackground,
+	#name : 'BlCompositeBackground',
+	#superclass : 'BlBackground',
 	#instVars : [
 		'backgrounds'
 	],
-	#category : #'Bloc-Basic-Background'
+	#category : 'Bloc-Basic-Background',
+	#package : 'Bloc',
+	#tag : 'Basic-Background'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlCompositeBackground class >> withAll: aCollectionOfBackground [
 
 	^ self new withAll: aCollectionOfBackground
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlCompositeBackground >> backgrounds [
 	"Return the collection of backgrounds that the receiver represents."
 
 	^ backgrounds
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlCompositeBackground >> isTransparent [
 
 	^ (self opacity closeTo: 0.0) or: [ self backgrounds allSatisfy: #isTransparent ]
 ]
 
-{ #category : #geometry }
+{ #category : 'geometry' }
 BlCompositeBackground >> matchExtent: anExtent [
 	self backgrounds do: [ :aBackground | aBackground matchExtent: anExtent ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlCompositeBackground >> withAll: aCollectionOfBackgrounds [
 	"Return a composite background based on the collection of background pass as argument. 
 	This collection of backgrounds must not be empty"
