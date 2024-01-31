@@ -2221,12 +2221,12 @@ BlElement >> isFocusable [
 				and: [ self focusability ~= BlFocusability ignore ] ] ]
 ]
 
-{ #category : 'focus testing' }
+{ #category : 'private - accessing' }
 BlElement >> isFocused [
 	"Returns true if I am focused, false otherwise.
-	Note: It is possible that an element has focus but is not focused by itself"
+	Note: It is possible that an element has focus but is not focused by itself."
 
-	^ self focused
+	^ visuals isFocused
 ]
 
 { #category : 'testing' }

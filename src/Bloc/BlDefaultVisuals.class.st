@@ -158,11 +158,6 @@ BlDefaultVisuals >> focusability: aBlFocusability [
 ]
 
 { #category : 'accessing' }
-BlDefaultVisuals >> focused [
-	^ self defaultFocused
-]
-
-{ #category : 'accessing' }
 BlDefaultVisuals >> focused: aBoolean [
 	"Change focused state and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
@@ -181,6 +176,12 @@ BlDefaultVisuals >> geometry: aBlElementGeometry [
 	<return: #BlElementVisuals>
 
 	^ BlCustomVisuals new geometry: aBlElementGeometry
+]
+
+{ #category : 'testing' }
+BlDefaultVisuals >> isFocused [
+
+	^ self defaultFocused
 ]
 
 { #category : 'accessing' }

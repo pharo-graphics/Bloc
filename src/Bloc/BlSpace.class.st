@@ -967,11 +967,16 @@ BlSpace >> focusProcessor: aFocusProcessor [
 { #category : 'window - properties' }
 BlSpace >> focused [
 
+	self
+		deprecated: 'Use isFocused instead of current one'
+		transformWith: '`@rcv focused' -> '`@rcv isFocused'.
+
 	^ focused
 ]
 
 { #category : 'window - properties' }
 BlSpace >> focused: aBoolean [
+
 	focused := aBoolean
 ]
 
@@ -1023,6 +1028,7 @@ BlSpace >> fullsize: aBoolean [
 
 { #category : 'focus managing' }
 BlSpace >> grabFocus [
+
 	self focused: true
 ]
 
@@ -1278,9 +1284,10 @@ BlSpace >> isBorderless [
 		  ifAbsent: [ borderless ]
 ]
 
-{ #category : 'testing' }
+{ #category : 'window - properties' }
 BlSpace >> isFocused [
-	^ self focused
+
+	^ focused
 ]
 
 { #category : 'window - properties' }
@@ -1732,6 +1739,7 @@ BlSpace >> topMostParent [
 
 { #category : 'focus managing' }
 BlSpace >> ungrabFocus [
+
 	self focused: false
 ]
 

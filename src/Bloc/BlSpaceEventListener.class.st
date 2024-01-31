@@ -128,6 +128,7 @@ BlSpaceEventListener >> spaceEventsProcessedEvent: anEvent [
 
 { #category : 'window handlers' }
 BlSpaceEventListener >> spaceFocusInEvent: anEvent [
+
 	self focusProcessor processWindowFocusIn: anEvent
 ]
 
