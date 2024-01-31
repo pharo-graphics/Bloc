@@ -2,12 +2,13 @@
 Pay attention no assertion... smoke tests.
 "
 Class {
-	#name : #BlFlowLayoutCompositionSmokeTest,
-	#superclass : #BlExampleTest,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlFlowLayoutCompositionSmokeTest',
+	#superclass : 'BlExamplesTest',
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlFlowLayoutCompositionSmokeTest class >> exampleHorizontalList [
 	<gtExample>
 	| e1 e2 e3 e4 el space e5 |
@@ -48,7 +49,7 @@ BlFlowLayoutCompositionSmokeTest class >> exampleHorizontalList [
 	^ el
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlFlowLayoutCompositionSmokeTest class >> exampleText [
 	<gtExample>
 	| aText aLineIterator  theWords aParent aSpace floatA aFloatIndex |
@@ -107,7 +108,7 @@ BlFlowLayoutCompositionSmokeTest class >> exampleText [
 	^ aParent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlFlowLayoutCompositionSmokeTest class >> floatingCells [
 	<script: 'self floatingCells'>
 
@@ -121,7 +122,7 @@ BlFlowLayoutCompositionSmokeTest class >> floatingCells [
 	aSpace show
 ]
 
-{ #category : #'examples - setup' }
+{ #category : 'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> blueCell [
 
 	<sampleInstance>
@@ -131,7 +132,7 @@ BlFlowLayoutCompositionSmokeTest >> blueCell [
 		  yourself
 ]
 
-{ #category : #'examples - setup' }
+{ #category : 'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> cell [
 
 	<sampleInstance>
@@ -148,7 +149,7 @@ BlFlowLayoutCompositionSmokeTest >> cell [
 		  yourself
 ]
 
-{ #category : #'examples - setup' }
+{ #category : 'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> container [
 
 	<sampleInstance>
@@ -159,7 +160,7 @@ BlFlowLayoutCompositionSmokeTest >> container [
 		  background: Color white darker
 ]
 
-{ #category : #'examples - setup' }
+{ #category : 'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> floatBlueCell [
 
 	<sampleInstance>
@@ -169,7 +170,7 @@ BlFlowLayoutCompositionSmokeTest >> floatBlueCell [
 		  background: Color blue
 ]
 
-{ #category : #'examples - setup' }
+{ #category : 'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> floatCell [
 
 	<sampleInstance>
@@ -183,7 +184,7 @@ BlFlowLayoutCompositionSmokeTest >> floatCell [
 				   left: 10) ]
 ]
 
-{ #category : #'examples - setup' }
+{ #category : 'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> floatRedCell [
 
 	<sampleInstance>
@@ -193,7 +194,7 @@ BlFlowLayoutCompositionSmokeTest >> floatRedCell [
 		  background: Color red
 ]
 
-{ #category : #'examples - list with floats' }
+{ #category : 'examples - list with floats' }
 BlFlowLayoutCompositionSmokeTest >> floatingCells [
 
 	<sampleInstance>
@@ -209,7 +210,7 @@ BlFlowLayoutCompositionSmokeTest >> floatingCells [
 		  yourself
 ]
 
-{ #category : #'examples - setup' }
+{ #category : 'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> grayCell [
 
 	<sampleInstance>
@@ -219,7 +220,7 @@ BlFlowLayoutCompositionSmokeTest >> grayCell [
 		  yourself
 ]
 
-{ #category : #'examples - setup' }
+{ #category : 'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> redCell [
 
 	<sampleInstance>

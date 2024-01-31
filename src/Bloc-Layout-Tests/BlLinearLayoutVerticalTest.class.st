@@ -3,12 +3,13 @@ I have been automatically converted and probably manually tweaked from BlLinearL
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlLinearLayoutVerticalTest,
-	#superclass : #BlLinearLayoutTest,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlLinearLayoutVerticalTest',
+	#superclass : 'BlLinearLayoutTest',
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutVerticalTest >> testElementWithChildMatchInExactParentPadding [
 	"All children are distributed equally within parent's bounds"
 
@@ -29,7 +30,7 @@ BlLinearLayoutVerticalTest >> testElementWithChildMatchInExactParentPadding [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutVerticalTest >> testElementWithChildrenMatchInExactParentPadding [
 	"All children are distributed equally within parent's bounds"
 
@@ -55,7 +56,7 @@ BlLinearLayoutVerticalTest >> testElementWithChildrenMatchInExactParentPadding [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutVerticalTest >> testElementWithExactChildrenInFitContent [
 	"Parent resizes to fit children"
 
@@ -80,7 +81,7 @@ BlLinearLayoutVerticalTest >> testElementWithExactChildrenInFitContent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutVerticalTest >> testElementWithMatchChildrenInExactParent [
 	"All children are distributed equally within parent's bounds"
 
@@ -109,7 +110,7 @@ BlLinearLayoutVerticalTest >> testElementWithMatchChildrenInExactParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutVerticalTest >> testElementWithOneChildMatchOneExactInFitParent [
 	"All children are distributed equally within parent's bounds"
 
@@ -135,7 +136,7 @@ BlLinearLayoutVerticalTest >> testElementWithOneChildMatchOneExactInFitParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutVerticalTest >> testElementWithOneExactChildInExactParentMargin [
 	"All children are distributed equally within parent's bounds"
 
@@ -160,7 +161,7 @@ BlLinearLayoutVerticalTest >> testElementWithOneExactChildInExactParentMargin [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParentLTR [
 
 	<sampleInstance>
@@ -191,7 +192,7 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParentRTL [
 
 	<sampleInstance>
@@ -223,7 +224,7 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutVerticalTest >> testOneChildSetVisibilityGone [
 
 	<sampleInstance>
@@ -265,7 +266,7 @@ BlLinearLayoutVerticalTest >> testOneChildSetVisibilityGone [
 	^ aContainer
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutVerticalTest >> testParentWithLinearVerticalLayout [
 
 	<sampleInstance>

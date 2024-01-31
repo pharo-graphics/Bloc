@@ -1,10 +1,11 @@
 Class {
-	#name : #BlBasicLayoutTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlBasicLayoutTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicLayoutTest >> testForceLayoutOfMatchParent [
 
 	<sampleInstance>
@@ -21,7 +22,7 @@ BlBasicLayoutTest >> testForceLayoutOfMatchParent [
 	^ anElement
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicLayoutTest >> testParentWithChildExactSize [
 
 	<sampleInstance>
@@ -52,7 +53,7 @@ BlBasicLayoutTest >> testParentWithChildExactSize [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicLayoutTest >> testParentWithChildFitContent [
 
 	<sampleInstance>
@@ -69,7 +70,7 @@ BlBasicLayoutTest >> testParentWithChildFitContent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicLayoutTest >> testParentWithChildMatchParent [
 
 	<sampleInstance>

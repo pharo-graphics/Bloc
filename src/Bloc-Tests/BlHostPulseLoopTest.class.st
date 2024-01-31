@@ -1,16 +1,18 @@
 Class {
-	#name : #BlHostPulseLoopTest,
-	#superclass : #BlParameterizedHostTest,
-	#category : #'Bloc-Tests-Space'
+	#name : 'BlHostPulseLoopTest',
+	#superclass : 'BlParameterizedHostTest',
+	#category : 'Bloc-Tests-Space',
+	#package : 'Bloc-Tests',
+	#tag : 'Space'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 BlHostPulseLoopTest >> runCaseManaged [ 
 
 	^ self runCase
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlHostPulseLoopTest >> testOpeningAnSpaceDeferingAnErrorKeepsLoopRunning [
 
 	| aSpace logger |

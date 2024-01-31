@@ -1,10 +1,12 @@
 Class {
-	#name : #BlConcatenationRopeExamplesTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Rope'
+	#name : 'BlConcatenationRopeExamplesTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Examples-Rope',
+	#package : 'Bloc-Examples',
+	#tag : 'Rope'
 }
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_0_to_0 [
 
 	<sampleInstance>
@@ -22,7 +24,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_0_to_0 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_0_to_1 [
 
 	<sampleInstance>
@@ -41,7 +43,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_0_to_1 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_0_to_5 [
 
 	<sampleInstance>
@@ -58,7 +60,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_0_to_5 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_2_to_2 [
 
 	<sampleInstance>
@@ -85,7 +87,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_2_to_2 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_2_to_3 [
 
 	<sampleInstance>
@@ -112,7 +114,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_2_to_3 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_4_to_5 [
 
 	<sampleInstance>
@@ -131,7 +133,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_4_to_5 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_4_to_6 [
 
 	<sampleInstance>
@@ -153,7 +155,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_4_to_6 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_5_to_10 [
 
 	<sampleInstance>
@@ -169,7 +171,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_5_to_10 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_5_to_6 [
 
 	<sampleInstance>
@@ -188,7 +190,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_5_to_6 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_6_to_6 [
 
 	<sampleInstance>
@@ -215,7 +217,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_6_to_6 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_6_to_7 [
 
 	<sampleInstance>
@@ -242,7 +244,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_6_to_7 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testAttributes_small_9_to_10 [
 
 	<sampleInstance>
@@ -260,7 +262,7 @@ BlConcatenationRopeExamplesTest >> testAttributes_small_9_to_10 [
 	^ anAttributedRope
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlConcatenationRopeExamplesTest >> testReadStreamSmall [
 
 	| rope stream |
@@ -272,7 +274,7 @@ BlConcatenationRopeExamplesTest >> testReadStreamSmall [
 	self assert: stream upToEnd asString equals: 'oWorld'
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlConcatenationRopeExamplesTest >> testSmall [
 	"Creates an instance of the rope of size smaller than combineLength"
 
@@ -295,7 +297,7 @@ BlConcatenationRopeExamplesTest >> testSmall [
 	^ aRope
 ]
 
-{ #category : #'examples - delete' }
+{ #category : 'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_0 [
 
 	<sampleInstance>
@@ -308,7 +310,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_0 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - delete' }
+{ #category : 'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_1 [
 
 	<sampleInstance>
@@ -321,7 +323,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_1 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - delete' }
+{ #category : 'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_10 [
 
 	<sampleInstance>
@@ -335,7 +337,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_10 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - delete' }
+{ #category : 'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_5 [
 
 	<sampleInstance>
@@ -348,7 +350,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_0_to_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - delete' }
+{ #category : 'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_10_to_10 [
 
 	<sampleInstance>
@@ -361,7 +363,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_10_to_10 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - delete' }
+{ #category : 'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_1_to_2 [
 
 	<sampleInstance>
@@ -375,7 +377,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_1_to_2 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - delete' }
+{ #category : 'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_4_to_4 [
 
 	<sampleInstance>
@@ -388,7 +390,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_4_to_4 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - delete' }
+{ #category : 'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_4_to_5 [
 
 	<sampleInstance>
@@ -401,7 +403,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_4_to_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - delete' }
+{ #category : 'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_4_to_6 [
 
 	<sampleInstance>
@@ -414,7 +416,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_4_to_6 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - delete' }
+{ #category : 'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_5_to_10 [
 
 	<sampleInstance>
@@ -427,7 +429,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_5_to_10 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - delete' }
+{ #category : 'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_5_to_5 [
 
 	<sampleInstance>
@@ -440,7 +442,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_5_to_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - delete' }
+{ #category : 'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_5_to_6 [
 
 	<sampleInstance>
@@ -453,7 +455,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_5_to_6 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - delete' }
+{ #category : 'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_6_to_7 [
 
 	<sampleInstance>
@@ -466,7 +468,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_6_to_7 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - delete' }
+{ #category : 'examples - delete' }
 BlConcatenationRopeExamplesTest >> testSmall_delete_9_to_10 [
 
 	<sampleInstance>
@@ -479,7 +481,7 @@ BlConcatenationRopeExamplesTest >> testSmall_delete_9_to_10 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_do [
 
 	<sampleInstance>
@@ -494,7 +496,7 @@ BlConcatenationRopeExamplesTest >> testSmall_do [
 	^ theIterated
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlConcatenationRopeExamplesTest >> testSmall_empty [
 
 	<sampleInstance>
@@ -508,7 +510,7 @@ BlConcatenationRopeExamplesTest >> testSmall_empty [
 	^ anEmpty
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_0_to_0 [
 
 	<sampleInstance>
@@ -522,7 +524,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_0_to_0 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_0_to_0_do [
 
 	<sampleInstance>
@@ -540,7 +542,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_0_to_0_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_0_to_10 [
 
 	<sampleInstance>
@@ -553,7 +555,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_0_to_10 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_0_to_10_do [
 
 	<sampleInstance>
@@ -571,7 +573,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_0_to_10_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_0_to_1_do [
 
 	<sampleInstance>
@@ -589,7 +591,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_0_to_1_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_0_to_5 [
 
 	<sampleInstance>
@@ -602,7 +604,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_0_to_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_0_to_5_do [
 
 	<sampleInstance>
@@ -620,7 +622,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_0_to_5_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_10_to_10 [
 
 	<sampleInstance>
@@ -634,7 +636,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_10_to_10 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_10_to_10_do [
 
 	<sampleInstance>
@@ -652,7 +654,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_10_to_10_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_1_to_1_do [
 
 	<sampleInstance>
@@ -670,7 +672,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_1_to_1_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_1_to_2 [
 
 	<sampleInstance>
@@ -683,7 +685,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_1_to_2 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_1_to_2_do [
 
 	<sampleInstance>
@@ -701,7 +703,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_1_to_2_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_1_to_5_do [
 
 	<sampleInstance>
@@ -719,7 +721,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_1_to_5_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_3_to_5_do [
 
 	<sampleInstance>
@@ -737,7 +739,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_3_to_5_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_4_to_5 [
 
 	<sampleInstance>
@@ -750,7 +752,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_4_to_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_4_to_6 [
 
 	<sampleInstance>
@@ -763,7 +765,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_4_to_6 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_5_to_10 [
 
 	<sampleInstance>
@@ -776,7 +778,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_5_to_10 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_5_to_10_do [
 
 	<sampleInstance>
@@ -794,7 +796,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_5_to_10_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_5_to_5 [
 
 	<sampleInstance>
@@ -808,7 +810,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_5_to_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_5_to_5_do [
 
 	<sampleInstance>
@@ -826,7 +828,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_5_to_5_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlConcatenationRopeExamplesTest >> testSmall_from_5_to_6 [
 
 	<sampleInstance>
@@ -839,7 +841,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_5_to_6 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_5_to_6_do [
 
 	<sampleInstance>
@@ -857,7 +859,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_5_to_6_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlConcatenationRopeExamplesTest >> testSmall_from_9_to_10_do [
 
 	<sampleInstance>
@@ -875,7 +877,7 @@ BlConcatenationRopeExamplesTest >> testSmall_from_9_to_10_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlConcatenationRopeExamplesTest >> testSttributes_small_0_to_10 [
 
 	<sampleInstance>

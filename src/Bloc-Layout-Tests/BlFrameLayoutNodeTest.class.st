@@ -3,12 +3,13 @@ I have been automatically converted and probably manually tweaked from BlFrameLa
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlFrameLayoutNodeTest,
-	#superclass : #BlRootLayoutTest,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlFrameLayoutNodeTest',
+	#superclass : 'BlRootLayoutTest',
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutNodeTest >> testEmptyParentAtMost [
 
 	<sampleInstance>
@@ -22,7 +23,7 @@ BlFrameLayoutNodeTest >> testEmptyParentAtMost [
 	^ aParentNode
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutNodeTest >> testEmptyParentExact [
 
 	<sampleInstance>
@@ -36,7 +37,7 @@ BlFrameLayoutNodeTest >> testEmptyParentExact [
 	^ aParentNode
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutNodeTest >> testOneChildMatchParentExact [
 
 	<sampleInstance>
@@ -61,7 +62,7 @@ BlFrameLayoutNodeTest >> testOneChildMatchParentExact [
 	^ aParentNode
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutNodeTest >> testOneChildMatchParentFitContent [
 
 	<sampleInstance>
@@ -90,7 +91,7 @@ BlFrameLayoutNodeTest >> testOneChildMatchParentFitContent [
 	^ aParentNode
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutNodeTest >> testOneChildMatchParentMatrixExact [
 
 	<sampleInstance>
@@ -115,7 +116,7 @@ BlFrameLayoutNodeTest >> testOneChildMatchParentMatrixExact [
 	^ aParentNode
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutNodeTest >> testOneChildMatchWeightMatrixDownscacleAlignTopRightParentExact [
 
 	<sampleInstance>
@@ -147,7 +148,7 @@ BlFrameLayoutNodeTest >> testOneChildMatchWeightMatrixDownscacleAlignTopRightPar
 	^ aParentNode
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutNodeTest >> testOneChildMatchWeightMatrixUpscaleAlignTopRightParentExact [
 
 	<sampleInstance>
@@ -179,7 +180,7 @@ BlFrameLayoutNodeTest >> testOneChildMatchWeightMatrixUpscaleAlignTopRightParent
 	^ aParentNode
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutNodeTest >> testOneChildMatchWeightParentExact [
 
 	<sampleInstance>

@@ -14,22 +14,24 @@ The view is available for any {{gtExample:BlMetricsInspectorExamples>>#elementWi
 
 "
 Class {
-	#name : #BlMetricsInspector,
-	#superclass : #BlElement,
+	#name : 'BlMetricsInspector',
+	#superclass : 'BlElement',
 	#instVars : [
 		'marginMetric',
 		'paddingMetric',
 		'extentMetric'
 	],
-	#category : #'Bloc-DevTool-Metrics'
+	#category : 'Bloc-DevTool-Metrics',
+	#package : 'Bloc-DevTool',
+	#tag : 'Metrics'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMetricsInspector >> defaultLayout [
 	^ BlFrameLayout new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMetricsInspector >> extentTextFor: aPoint [
 	| string |
 	
@@ -37,13 +39,13 @@ BlMetricsInspector >> extentTextFor: aPoint [
 	^ BlRopedText string: string
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMetricsInspector >> for: anElement [	
 	anElement forceLayout.
 	self updateMetrics: anElement
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlMetricsInspector >> initialize [
 	super initialize.
 	
@@ -72,17 +74,17 @@ BlMetricsInspector >> initialize [
 	self addChild: marginMetric
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMetricsInspector >> newExtentMetric [
 	^ BlTextElement new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlMetricsInspector >> newMetric [
 	^ BlMetricsInspectorElement new
 ]
 
-{ #category : #updating }
+{ #category : 'updating' }
 BlMetricsInspector >> updateMetrics: anElement [
 
 	| geometryBounds |

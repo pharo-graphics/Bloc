@@ -3,12 +3,13 @@ I have been automatically converted and probably manually tweaked from BlFrameLa
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlFrameLayoutMultipleChildrenTest,
-	#superclass : #BlFrameLayoutChildrenTest,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlFrameLayoutMultipleChildrenTest',
+	#superclass : 'BlFrameLayoutChildrenTest',
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutMultipleChildrenTest >> testChildElementWithExactSize140per140 [
 
 	<sampleInstance>
@@ -24,7 +25,7 @@ BlFrameLayoutMultipleChildrenTest >> testChildElementWithExactSize140per140 [
 	^ element
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignLeftCenterAndExactChildCenter [
 
 	<sampleInstance>
@@ -52,7 +53,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignLeftCenterAnd
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignTopLeftAndExactChildRightCenter [
 
 	<sampleInstance>
@@ -77,7 +78,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignTopLeftAndExa
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutMultipleChildrenTest >> testElementWithNineExactChildrenWithAllAlignments [
 
 	<sampleInstance>
@@ -154,7 +155,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithNineExactChildrenWithAllAlig
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutMultipleChildrenTest >> testElementWithTwoChildrenMatchingParentWithWeight [
 
 	<sampleInstance>
@@ -186,7 +187,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithTwoChildrenMatchingParentWit
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutMultipleChildrenTest >> testElementWithTwoExactChildrenAndFitContentParent [
 
 	<sampleInstance>
@@ -223,7 +224,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithTwoExactChildrenAndFitConten
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutMultipleChildrenTest >> testElementWithTwoExactChildrenAndNoAlignment [
 
 	<sampleInstance>

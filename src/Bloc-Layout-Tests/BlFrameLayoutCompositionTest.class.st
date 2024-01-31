@@ -5,12 +5,13 @@ I have been automatically converted and probably manually tweaked from BlFrameLa
 Pay attention none of the methods contains assertions.
 "
 Class {
-	#name : #BlFrameLayoutCompositionTest,
-	#superclass : #BlRootLayoutTest,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlFrameLayoutCompositionTest',
+	#superclass : 'BlRootLayoutTest',
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 BlFrameLayoutCompositionTest >> container [
 
 	<sampleInstance>
@@ -20,7 +21,7 @@ BlFrameLayoutCompositionTest >> container [
 		  background: Color blue
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 BlFrameLayoutCompositionTest >> element [
 
 	<sampleInstance>
@@ -28,7 +29,7 @@ BlFrameLayoutCompositionTest >> element [
 	^ BlElement new
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 BlFrameLayoutCompositionTest >> green [
 
 	<sampleInstance>
@@ -38,14 +39,14 @@ BlFrameLayoutCompositionTest >> green [
 		  border: (BlBorder paint: Color black width: 4)
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 BlFrameLayoutCompositionTest >> originClassName [
 	"This test was generated from..."
 
 	^ 'BlFrameLayoutCompositionExamples'
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 BlFrameLayoutCompositionTest >> red [
 
 	<sampleInstance>
@@ -55,7 +56,7 @@ BlFrameLayoutCompositionTest >> red [
 		  border: (BlBorder paint: Color lightGray width: 4)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutCompositionTest >> testExample [
 
 	<sampleInstance>
@@ -85,7 +86,7 @@ BlFrameLayoutCompositionTest >> testExample [
 	^ container
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutCompositionTest >> testExampleReverseOrder [
 
 	<sampleInstance>
@@ -115,7 +116,7 @@ BlFrameLayoutCompositionTest >> testExampleReverseOrder [
 	^ container
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 BlFrameLayoutCompositionTest >> yellow [
 
 	<sampleInstance>

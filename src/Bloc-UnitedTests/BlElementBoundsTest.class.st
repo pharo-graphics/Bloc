@@ -4,7 +4,7 @@ I have been automatically converted and probably manually tweaked from BlElement
 "
 Class {
 	#name : 'BlElementBoundsTest',
-	#superclass : 'BlExampleTest',
+	#superclass : 'BlExamplesTest',
 	#category : 'Bloc-UnitedTests-Bounds',
 	#package : 'Bloc-UnitedTests',
 	#tag : 'Bounds'

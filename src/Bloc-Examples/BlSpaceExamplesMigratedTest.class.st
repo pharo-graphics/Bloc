@@ -2,12 +2,14 @@
 I contain example of how to use space
 "
 Class {
-	#name : #BlSpaceExamplesMigratedTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Space'
+	#name : 'BlSpaceExamplesMigratedTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Examples-Space',
+	#package : 'Bloc-Examples',
+	#tag : 'Space'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 BlSpaceExamplesMigratedTest >> newAnimatedElement [
 
 	| anAnimation |
@@ -24,7 +26,7 @@ BlSpaceExamplesMigratedTest >> newAnimatedElement [
 		  yourself
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlSpaceExamplesMigratedTest >> newIconElement [
 
 	^ BlElement new
@@ -34,7 +36,7 @@ BlSpaceExamplesMigratedTest >> newIconElement [
 		yourself
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlSpaceExamplesMigratedTest >> newIconStencil [
 
 	^ BlSpaceIconDummyStencil new
@@ -42,7 +44,7 @@ BlSpaceExamplesMigratedTest >> newIconStencil [
 			yourself
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlSpaceExamplesMigratedTest >> newSpaceWithSlownDownTime [
 
 	| aTime aSpace |
@@ -53,7 +55,7 @@ BlSpaceExamplesMigratedTest >> newSpaceWithSlownDownTime [
 	^ aSpace
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlSpaceExamplesMigratedTest >> newSpaceWithSlownDownTimeAndAnimatedElement [
 
 	| aSpace |
@@ -62,7 +64,7 @@ BlSpaceExamplesMigratedTest >> newSpaceWithSlownDownTimeAndAnimatedElement [
 	^ aSpace
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSpaceExamplesMigratedTest >> testChangeIcon [
 
 	| aSpace aCollection |
@@ -85,7 +87,7 @@ BlSpaceExamplesMigratedTest >> testChangeIcon [
 	self assert: aCollection size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSpaceExamplesMigratedTest >> testEmptySpace [
 
 	| aSpace |
@@ -111,7 +113,7 @@ BlSpaceExamplesMigratedTest >> testEmptySpace [
 	self assert: aSpace icon isNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlSpaceExamplesMigratedTest >> testFirstPulse [
 
 	| aSpace |

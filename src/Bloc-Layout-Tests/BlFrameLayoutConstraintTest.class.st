@@ -1,15 +1,16 @@
 Class {
-	#name : #BlFrameLayoutConstraintTest,
-	#superclass : #BlParameterizedHostTest,
+	#name : 'BlFrameLayoutConstraintTest',
+	#superclass : 'BlParameterizedHostTest',
 	#instVars : [
 		'child',
 		'parent',
 		'space'
 	],
-	#category : #'Bloc-Layout-Tests'
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 BlFrameLayoutConstraintTest >> setUp [
 
 	super setUp.
@@ -32,7 +33,7 @@ BlFrameLayoutConstraintTest >> setUp [
 	"space show"
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignLeft0Bottom0 [
 
 	child constraintsDo: [ :c |
@@ -43,7 +44,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft0Bottom0 [
 	self assert: child position equals: 0 @ 80
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignLeft0Bottom1 [
 
 	child constraintsDo: [ :c |
@@ -54,7 +55,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft0Bottom1 [
 	self assert: child position equals: 0 @ -20
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignLeft0Top0 [
 
 	child constraintsDo: [ :c |
@@ -65,7 +66,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft0Top0 [
 	self assert: child position equals: 0 @ 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignLeft0Top1 [
 
 	child constraintsDo: [ :c |
@@ -76,7 +77,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft0Top1 [
 	self assert: child position equals: 0 @ 100
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignLeft1Bottom0 [
 
 	child constraintsDo: [ :c |
@@ -87,7 +88,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft1Bottom0 [
 	self assert: child position equals: 100 @ 80
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignLeft1Bottom1 [
 
 	child constraintsDo: [ :c |
@@ -98,7 +99,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft1Bottom1 [
 	self assert: child position equals: 100 @ -20
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignLeft1Top0 [
 
 	child constraintsDo: [ :c |
@@ -109,7 +110,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft1Top0 [
 	self assert: child position equals: 100 @ 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignLeft1Top1 [
 
 	child constraintsDo: [ :c |
@@ -120,7 +121,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft1Top1 [
 	self assert: child position equals: 100 @ 100
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignRight0Bottom0 [
 
 	child constraintsDo: [ :c |
@@ -131,7 +132,7 @@ BlFrameLayoutConstraintTest >> testChildAlignRight0Bottom0 [
 	self assert: child position equals: 80 @ 80
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignRight0Bottom1 [
 
 	child constraintsDo: [ :c |
@@ -142,7 +143,7 @@ BlFrameLayoutConstraintTest >> testChildAlignRight0Bottom1 [
 	self assert: child position equals: 80 @ -20
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignRight0Top0 [
 
 	child constraintsDo: [ :c |
@@ -153,7 +154,7 @@ BlFrameLayoutConstraintTest >> testChildAlignRight0Top0 [
 	self assert: child position equals: 80 @ 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignRight0Top1 [
 
 	child constraintsDo: [ :c |
@@ -164,7 +165,7 @@ BlFrameLayoutConstraintTest >> testChildAlignRight0Top1 [
 	self assert: child position equals: 80 @ 100
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignRight1Bottom0 [
 
 	child constraintsDo: [ :c |
@@ -175,7 +176,7 @@ BlFrameLayoutConstraintTest >> testChildAlignRight1Bottom0 [
 	self assert: child position equals: -20 @ 80
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignRight1Bottom1 [
 
 	child constraintsDo: [ :c |
@@ -186,7 +187,7 @@ BlFrameLayoutConstraintTest >> testChildAlignRight1Bottom1 [
 	self assert: child position equals: -20 @ -20
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignRight1Top0 [
 
 	child constraintsDo: [ :c |
@@ -197,7 +198,7 @@ BlFrameLayoutConstraintTest >> testChildAlignRight1Top0 [
 	self assert: child position equals: -20 @ 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutConstraintTest >> testChildAlignRight1Top1 [
 
 	child constraintsDo: [ :c |

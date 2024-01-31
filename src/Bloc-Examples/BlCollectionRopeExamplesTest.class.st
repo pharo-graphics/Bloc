@@ -3,12 +3,14 @@ I contain examples of a collection rope
 
 "
 Class {
-	#name : #BlCollectionRopeExamplesTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Rope'
+	#name : 'BlCollectionRopeExamplesTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Examples-Rope',
+	#package : 'Bloc-Examples',
+	#tag : 'Rope'
 }
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlCollectionRopeExamplesTest >> testAttributes_empty_0_to_0 [
 
 	<sampleInstance>
@@ -23,7 +25,7 @@ BlCollectionRopeExamplesTest >> testAttributes_empty_0_to_0 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlCollectionRopeExamplesTest >> testAttributes_small_0_to_0 [
 
 	<sampleInstance>
@@ -39,7 +41,7 @@ BlCollectionRopeExamplesTest >> testAttributes_small_0_to_0 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlCollectionRopeExamplesTest >> testAttributes_small_0_to_1 [
 
 	<sampleInstance>
@@ -55,7 +57,7 @@ BlCollectionRopeExamplesTest >> testAttributes_small_0_to_1 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlCollectionRopeExamplesTest >> testAttributes_small_0_to_5 [
 
 	<sampleInstance>
@@ -69,7 +71,7 @@ BlCollectionRopeExamplesTest >> testAttributes_small_0_to_5 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlCollectionRopeExamplesTest >> testAttributes_small_2_to_2 [
 
 	<sampleInstance>
@@ -87,7 +89,7 @@ BlCollectionRopeExamplesTest >> testAttributes_small_2_to_2 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlCollectionRopeExamplesTest >> testAttributes_small_4_to_5 [
 
 	<sampleInstance>
@@ -103,7 +105,7 @@ BlCollectionRopeExamplesTest >> testAttributes_small_4_to_5 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlCollectionRopeExamplesTest >> testAttributes_small_5_to_5 [
 
 	<sampleInstance>
@@ -119,7 +121,7 @@ BlCollectionRopeExamplesTest >> testAttributes_small_5_to_5 [
 	^ anAttributedRope
 ]
 
-{ #category : #'examples - attributes' }
+{ #category : 'examples - attributes' }
 BlCollectionRopeExamplesTest >> testClear_attributes_empty_0_to_0 [
 
 	<sampleInstance>
@@ -133,7 +135,7 @@ BlCollectionRopeExamplesTest >> testClear_attributes_empty_0_to_0 [
 	^ aRopeWithoutAttributes
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlCollectionRopeExamplesTest >> testSmall [
 	"Creates an instance of the rope of size smaller than combineLength"
 
@@ -150,7 +152,7 @@ BlCollectionRopeExamplesTest >> testSmall [
 	^ aRope
 ]
 
-{ #category : #'examples - accessing' }
+{ #category : 'examples - accessing' }
 BlCollectionRopeExamplesTest >> testSmall_at_each [
 
 	<sampleInstance>
@@ -166,7 +168,7 @@ BlCollectionRopeExamplesTest >> testSmall_at_each [
 	^ aRope
 ]
 
-{ #category : #'examples - accessing' }
+{ #category : 'examples - accessing' }
 BlCollectionRopeExamplesTest >> testSmall_children [
 
 	<sampleInstance>
@@ -178,7 +180,7 @@ BlCollectionRopeExamplesTest >> testSmall_children [
 	^ aRope
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BlCollectionRopeExamplesTest >> testSmall_delete_0_to_0 [
 
 	<sampleInstance>
@@ -191,7 +193,7 @@ BlCollectionRopeExamplesTest >> testSmall_delete_0_to_0 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BlCollectionRopeExamplesTest >> testSmall_delete_0_to_1 [
 
 	<sampleInstance>
@@ -205,7 +207,7 @@ BlCollectionRopeExamplesTest >> testSmall_delete_0_to_1 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BlCollectionRopeExamplesTest >> testSmall_delete_0_to_5 [
 
 	<sampleInstance>
@@ -219,7 +221,7 @@ BlCollectionRopeExamplesTest >> testSmall_delete_0_to_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BlCollectionRopeExamplesTest >> testSmall_delete_1_to_1 [
 
 	<sampleInstance>
@@ -232,7 +234,7 @@ BlCollectionRopeExamplesTest >> testSmall_delete_1_to_1 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BlCollectionRopeExamplesTest >> testSmall_delete_1_to_3 [
 
 	<sampleInstance>
@@ -246,7 +248,7 @@ BlCollectionRopeExamplesTest >> testSmall_delete_1_to_3 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BlCollectionRopeExamplesTest >> testSmall_delete_1_to_5 [
 
 	<sampleInstance>
@@ -260,7 +262,7 @@ BlCollectionRopeExamplesTest >> testSmall_delete_1_to_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BlCollectionRopeExamplesTest >> testSmall_delete_4_to_5 [
 
 	<sampleInstance>
@@ -274,7 +276,7 @@ BlCollectionRopeExamplesTest >> testSmall_delete_4_to_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - deletion' }
+{ #category : 'examples - deletion' }
 BlCollectionRopeExamplesTest >> testSmall_delete_5_to_5 [
 
 	<sampleInstance>
@@ -287,7 +289,7 @@ BlCollectionRopeExamplesTest >> testSmall_delete_5_to_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - accessing' }
+{ #category : 'examples - accessing' }
 BlCollectionRopeExamplesTest >> testSmall_depth [
 
 	<sampleInstance>
@@ -299,7 +301,7 @@ BlCollectionRopeExamplesTest >> testSmall_depth [
 	^ aRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlCollectionRopeExamplesTest >> testSmall_do [
 
 	<sampleInstance>
@@ -314,7 +316,7 @@ BlCollectionRopeExamplesTest >> testSmall_do [
 	^ theIterated
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlCollectionRopeExamplesTest >> testSmall_empty [
 
 	<sampleInstance>
@@ -328,7 +330,7 @@ BlCollectionRopeExamplesTest >> testSmall_empty [
 	^ anEmpty
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlCollectionRopeExamplesTest >> testSmall_from_0_to_0 [
 
 	<sampleInstance>
@@ -342,7 +344,7 @@ BlCollectionRopeExamplesTest >> testSmall_from_0_to_0 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlCollectionRopeExamplesTest >> testSmall_from_0_to_0_do [
 
 	<sampleInstance>
@@ -360,7 +362,7 @@ BlCollectionRopeExamplesTest >> testSmall_from_0_to_0_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlCollectionRopeExamplesTest >> testSmall_from_0_to_1 [
 
 	<sampleInstance>
@@ -374,7 +376,7 @@ BlCollectionRopeExamplesTest >> testSmall_from_0_to_1 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlCollectionRopeExamplesTest >> testSmall_from_0_to_1_do [
 
 	<sampleInstance>
@@ -392,7 +394,7 @@ BlCollectionRopeExamplesTest >> testSmall_from_0_to_1_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlCollectionRopeExamplesTest >> testSmall_from_0_to_5 [
 
 	<sampleInstance>
@@ -405,7 +407,7 @@ BlCollectionRopeExamplesTest >> testSmall_from_0_to_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlCollectionRopeExamplesTest >> testSmall_from_0_to_5_do [
 
 	<sampleInstance>
@@ -423,7 +425,7 @@ BlCollectionRopeExamplesTest >> testSmall_from_0_to_5_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlCollectionRopeExamplesTest >> testSmall_from_1_to_1 [
 
 	<sampleInstance>
@@ -437,7 +439,7 @@ BlCollectionRopeExamplesTest >> testSmall_from_1_to_1 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlCollectionRopeExamplesTest >> testSmall_from_1_to_1_do [
 
 	<sampleInstance>
@@ -455,7 +457,7 @@ BlCollectionRopeExamplesTest >> testSmall_from_1_to_1_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlCollectionRopeExamplesTest >> testSmall_from_1_to_2 [
 
 	<sampleInstance>
@@ -469,7 +471,7 @@ BlCollectionRopeExamplesTest >> testSmall_from_1_to_2 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlCollectionRopeExamplesTest >> testSmall_from_1_to_2_do [
 
 	<sampleInstance>
@@ -487,7 +489,7 @@ BlCollectionRopeExamplesTest >> testSmall_from_1_to_2_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlCollectionRopeExamplesTest >> testSmall_from_1_to_5 [
 
 	<sampleInstance>
@@ -501,7 +503,7 @@ BlCollectionRopeExamplesTest >> testSmall_from_1_to_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlCollectionRopeExamplesTest >> testSmall_from_1_to_5_do [
 
 	<sampleInstance>
@@ -519,7 +521,7 @@ BlCollectionRopeExamplesTest >> testSmall_from_1_to_5_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - from to' }
+{ #category : 'examples - from to' }
 BlCollectionRopeExamplesTest >> testSmall_from_3_to_5 [
 
 	<sampleInstance>
@@ -533,7 +535,7 @@ BlCollectionRopeExamplesTest >> testSmall_from_3_to_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - enumeration' }
+{ #category : 'examples - enumeration' }
 BlCollectionRopeExamplesTest >> testSmall_from_3_to_5_do [
 
 	<sampleInstance>
@@ -551,7 +553,7 @@ BlCollectionRopeExamplesTest >> testSmall_from_3_to_5_do [
 	^ theIterated
 ]
 
-{ #category : #'examples - insertion' }
+{ #category : 'examples - insertion' }
 BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_0 [
 
 	<sampleInstance>
@@ -565,7 +567,7 @@ BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_0 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - insertion' }
+{ #category : 'examples - insertion' }
 BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_1 [
 
 	<sampleInstance>
@@ -579,7 +581,7 @@ BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_1 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - insertion' }
+{ #category : 'examples - insertion' }
 BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_2 [
 
 	<sampleInstance>
@@ -593,7 +595,7 @@ BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_2 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - insertion' }
+{ #category : 'examples - insertion' }
 BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_3 [
 
 	<sampleInstance>
@@ -607,7 +609,7 @@ BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_3 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - insertion' }
+{ #category : 'examples - insertion' }
 BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_4 [
 
 	<sampleInstance>
@@ -621,7 +623,7 @@ BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_4 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - insertion' }
+{ #category : 'examples - insertion' }
 BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_5 [
 
 	<sampleInstance>
@@ -635,7 +637,7 @@ BlCollectionRopeExamplesTest >> testSmall_insert_rope_123_at_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - insertion' }
+{ #category : 'examples - insertion' }
 BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_0 [
 
 	<sampleInstance>
@@ -649,7 +651,7 @@ BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_0 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - insertion' }
+{ #category : 'examples - insertion' }
 BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_1 [
 
 	<sampleInstance>
@@ -663,7 +665,7 @@ BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_1 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - insertion' }
+{ #category : 'examples - insertion' }
 BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_2 [
 
 	<sampleInstance>
@@ -677,7 +679,7 @@ BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_2 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - insertion' }
+{ #category : 'examples - insertion' }
 BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_3 [
 
 	<sampleInstance>
@@ -691,7 +693,7 @@ BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_3 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - insertion' }
+{ #category : 'examples - insertion' }
 BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_4 [
 
 	<sampleInstance>
@@ -705,7 +707,7 @@ BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_4 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - insertion' }
+{ #category : 'examples - insertion' }
 BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_5 [
 
 	<sampleInstance>
@@ -719,7 +721,7 @@ BlCollectionRopeExamplesTest >> testSmall_insert_string_123_at_5 [
 	^ aNewRope
 ]
 
-{ #category : #'examples - testing' }
+{ #category : 'examples - testing' }
 BlCollectionRopeExamplesTest >> testSmall_isEmpty [
 
 	<sampleInstance>
@@ -731,7 +733,7 @@ BlCollectionRopeExamplesTest >> testSmall_isEmpty [
 	^ aRope
 ]
 
-{ #category : #'examples - testing' }
+{ #category : 'examples - testing' }
 BlCollectionRopeExamplesTest >> testSmall_isLeaf [
 
 	<sampleInstance>
@@ -743,7 +745,7 @@ BlCollectionRopeExamplesTest >> testSmall_isLeaf [
 	^ aRope
 ]
 
-{ #category : #'examples - testing' }
+{ #category : 'examples - testing' }
 BlCollectionRopeExamplesTest >> testSmall_isNotEmpty [
 
 	<sampleInstance>
@@ -755,7 +757,7 @@ BlCollectionRopeExamplesTest >> testSmall_isNotEmpty [
 	^ aRope
 ]
 
-{ #category : #'examples - accessing' }
+{ #category : 'examples - accessing' }
 BlCollectionRopeExamplesTest >> testSmall_size [
 
 	<sampleInstance>

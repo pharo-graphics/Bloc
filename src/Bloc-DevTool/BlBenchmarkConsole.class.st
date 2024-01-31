@@ -1,33 +1,35 @@
 Class {
-	#name : #BlBenchmarkConsole,
-	#superclass : #BlElement,
+	#name : 'BlBenchmarkConsole',
+	#superclass : 'BlElement',
 	#instVars : [
 		'fpsShape',
 		'renderTimeShape',
 		'eventProcessingShape',
 		'layoutingShape'
 	],
-	#category : #'Bloc-DevTool-Core'
+	#category : 'Bloc-DevTool-Core',
+	#package : 'Bloc-DevTool',
+	#tag : 'Core'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlBenchmarkConsole class >> on: aStage [
 	^ self new
 		listenSpace: aStage;
 		yourself
 ]
 
-{ #category : #benchmark }
+{ #category : 'benchmark' }
 BlBenchmarkConsole >> eventProcessingTime: aNumber [
 	eventProcessingShape text: (BlRopedText string: 'event time: ', aNumber asString)
 ]
 
-{ #category : #benchmark }
+{ #category : 'benchmark' }
 BlBenchmarkConsole >> fps: aNumber [
 	fpsShape text: (BlRopedText string: 'fps: ', aNumber asString)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBenchmarkConsole >> initialize [
 	super initialize.
 	
@@ -66,12 +68,12 @@ BlBenchmarkConsole >> initialize [
 		addChild: renderTimeShape
 ]
 
-{ #category : #benchmark }
+{ #category : 'benchmark' }
 BlBenchmarkConsole >> layoutTime: aNumber [
 	layoutingShape text: (BlRopedText string: 'layout time: ', aNumber asString)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBenchmarkConsole >> listenSpace: aSpace [
 	| lastTime frames framesLimit |
 	lastTime := DateAndTime now.
@@ -96,7 +98,7 @@ BlBenchmarkConsole >> listenSpace: aSpace [
 					  ])
 ]
 
-{ #category : #benchmark }
+{ #category : 'benchmark' }
 BlBenchmarkConsole >> renderTime: aNumber [
 	renderTimeShape text: (BlRopedText string: 'render time: ', aNumber asString)
 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : #BlSelectionTool,
-	#superclass : #BlEventListener,
+	#name : 'BlSelectionTool',
+	#superclass : 'BlEventListener',
 	#instVars : [
 		'selectionRect',
 		'client',
@@ -8,10 +8,12 @@ Class {
 		'endPosition',
 		'currentSelections'
 	],
-	#category : #'Bloc-DevTool-Core'
+	#category : 'Bloc-DevTool-Core',
+	#package : 'Bloc-DevTool',
+	#tag : 'Core'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlSelectionTool >> buildSelection [
 	|area selectedNodes|
 	area := Rectangle origin: startPosition corner: endPosition.
@@ -20,25 +22,25 @@ BlSelectionTool >> buildSelection [
 	selectedNodes do: [ :each | currentSelections add: (BlElementSelection on: each)].
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlSelectionTool >> clickEvent: anEvent [
 	"self resetCurrentSelections."
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlSelectionTool >> dragEndEvent: anEvent [
 	endPosition := anEvent position.
 	client removeChild: selectionRect.
 	self buildSelection.
 ]
 
-{ #category : #'dnd handlers' }
+{ #category : 'dnd handlers' }
 BlSelectionTool >> dragEvent: anEvent [
 	selectionRect size: anEvent position - startPosition
 ]
 
-{ #category : #'dnd handlers' }
+{ #category : 'dnd handlers' }
 BlSelectionTool >> dragStartEvent: anEvent [
 	anEvent consumed: true.
 	
@@ -48,7 +50,7 @@ BlSelectionTool >> dragStartEvent: anEvent [
 	client addChild: selectionRect 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSelectionTool >> initialize [
 	super initialize.
 	currentSelections := OrderedCollection new.
@@ -63,12 +65,12 @@ BlSelectionTool >> initialize [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlSelectionTool >> onInstalledIn: anObject [
 	client := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlSelectionTool >> resetCurrentSelections [
 	currentSelections do: [ :each | each removeFromParent ].
 	currentSelections removeAll.
