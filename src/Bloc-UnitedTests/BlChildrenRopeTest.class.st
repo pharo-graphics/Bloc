@@ -3,27 +3,29 @@ I have been automatically converted and probably manually tweaked from BlChildre
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlChildrenRopeTest,
-	#superclass : #TestCase,
+	#name : 'BlChildrenRopeTest',
+	#superclass : 'TestCase',
 	#traits : 'TBlChildrenTest',
 	#classTraits : 'TBlChildrenTest classTrait',
-	#category : #'Bloc-UnitedTests-Rope'
+	#category : 'Bloc-UnitedTests-Rope',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Rope'
 }
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlChildrenRopeTest >> newChildrenCollection [
 
 	^ BlChildrenRope new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BlChildrenRopeTest >> originClassName [
 	"This test was generated from..."
 
 	^ 'BlChildrenRopeExamples'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlChildrenRopeTest >> testEmptyChildrenExplicitCreation [
 
 	<sampleInstance>

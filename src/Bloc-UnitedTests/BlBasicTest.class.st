@@ -3,12 +3,14 @@ I have been automatically converted and probably manually tweaked from BlBasicEx
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlBasicTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests-Basic'
+	#name : 'BlBasicTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-UnitedTests-Basic',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Basic'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testAsForm [
 
 	| anElement |
@@ -30,7 +32,7 @@ BlBasicTest >> testAsForm [
 		equals: Color green
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testBorderRopedText [
 <sampleInstance>	
 | aText |
@@ -43,7 +45,7 @@ self assert: aText rope attributes equals: { (BlFontSizeAttribute size: 30).
 ^ aText
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testBorderTextElement [
 
 	<sampleInstance>
@@ -58,7 +60,7 @@ BlBasicTest >> testBorderTextElement [
 			  c frame horizontal alignCenter ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testBottomBorder [
 
 	<sampleInstance>
@@ -66,7 +68,7 @@ BlBasicTest >> testBottomBorder [
 		  c frame vertical alignBottom ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testButtons [
 
 	<sampleInstance>
@@ -77,7 +79,7 @@ BlBasicTest >> testButtons [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testCircle [
 
 	<sampleInstance>
@@ -89,7 +91,7 @@ BlBasicTest >> testCircle [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testColoredButton [
 
 	<sampleInstance>
@@ -130,7 +132,7 @@ BlBasicTest >> testColoredButton [
 	^ button
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testContainer [
 
 	<sampleInstance>
@@ -143,7 +145,7 @@ BlBasicTest >> testContainer [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testElementWithAllBorders [
 
 	<sampleInstance>
@@ -158,7 +160,7 @@ BlBasicTest >> testElementWithAllBorders [
 		  addChild: (self testBottomBorder background: Color red)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testElementWithEllipticBorders [
 
 	<sampleInstance>
@@ -182,7 +184,7 @@ BlBasicTest >> testElementWithEllipticBorders [
 		  addChild: self testBorderTextElement
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testElementsWithShadow [
 
 	<sampleInstance>
@@ -192,7 +194,7 @@ BlBasicTest >> testElementsWithShadow [
 			  (self testEllipseWithShadow position: 500 @ 100) }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testEllipse [
 
 	<sampleInstance>
@@ -202,7 +204,7 @@ BlBasicTest >> testEllipse [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testEllipseWithShadow [
 
 	<sampleInstance>
@@ -217,7 +219,7 @@ BlBasicTest >> testEllipseWithShadow [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testFabButton [
 
 	<sampleInstance>
@@ -263,7 +265,7 @@ BlBasicTest >> testFabButton [
 	^ button
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testHorizontalBorder [
 	<sampleInstance>
 	^ BlElement new constraintsDo: [ :c |
@@ -271,7 +273,7 @@ BlBasicTest >> testHorizontalBorder [
 		  c horizontal matchParent ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testLeftBorder [
 
 	<sampleInstance>
@@ -279,7 +281,7 @@ BlBasicTest >> testLeftBorder [
 		  c frame horizontal alignLeft ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testLinearGradient [
 
 	<sampleInstance>
@@ -293,7 +295,7 @@ BlBasicTest >> testLinearGradient [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testPolygon [
 
 	<sampleInstance>
@@ -311,7 +313,7 @@ BlBasicTest >> testPolygon [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testRectangle [
 
 	<sampleInstance>
@@ -325,7 +327,7 @@ BlBasicTest >> testRectangle [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testRectangleWithImage [
 
 	<sampleInstance>
@@ -339,7 +341,7 @@ BlBasicTest >> testRectangleWithImage [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testRectangleWithLinearGradient [
 
 	<sampleInstance>
@@ -352,7 +354,7 @@ BlBasicTest >> testRectangleWithLinearGradient [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testRectangleWithShadow [
 
 	<sampleInstance>
@@ -366,7 +368,7 @@ BlBasicTest >> testRectangleWithShadow [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testRightBorder [
 
 	<sampleInstance>
@@ -374,7 +376,7 @@ BlBasicTest >> testRightBorder [
 		  c frame horizontal alignRight ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testRoundedRectangle [
 
 	<sampleInstance>
@@ -387,14 +389,14 @@ BlBasicTest >> testRoundedRectangle [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testShadowEffect [
 	<sampleInstance>
 	 
 	^ BlGaussianShadowEffect color: Color black width: 10 offset: 10 @ 10
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testShapes [
 
 	<sampleInstance>
@@ -407,7 +409,7 @@ BlBasicTest >> testShapes [
 			  (self testSquare position: 400 @ 200) }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testSquare [
 
 	<sampleInstance>
@@ -420,7 +422,7 @@ BlBasicTest >> testSquare [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testTopBorder [
 	<sampleInstance>
 	
@@ -428,7 +430,7 @@ BlBasicTest >> testTopBorder [
 		  c frame vertical alignTop ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicTest >> testVerticalBorder [
 
 	<sampleInstance>
