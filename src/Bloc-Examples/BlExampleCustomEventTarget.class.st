@@ -3,19 +3,17 @@ I am an example of a custom non-element event target that can be nicely integrat
 
 "
 Class {
-	#name : 'BlExampleCustomEventTarget',
-	#superclass : 'Object',
+	#name : #BlExampleCustomEventTarget,
+	#superclass : #Object,
 	#traits : 'TBlEventTarget',
 	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [
 		'eventDispatcher'
 	],
-	#category : 'Bloc-Examples-Event',
-	#package : 'Bloc-Examples',
-	#tag : 'Event'
+	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlExampleCustomEventTarget >> eventDispatcher [
 	"Return an object responsible for event dispatching"
 	<return: #BlDirectEventDispatcher>
@@ -23,7 +21,7 @@ BlExampleCustomEventTarget >> eventDispatcher [
 	^ eventDispatcher
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlExampleCustomEventTarget >> initialize [
 	super initialize.
 	

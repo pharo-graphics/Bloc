@@ -1,1 +1,1 @@
-Package { #name : 'Bloc-Overlay-Examples' }
+Package { #name : #'Bloc-Overlay-Examples' }

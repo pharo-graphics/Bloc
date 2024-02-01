@@ -5,14 +5,12 @@ It makes sense to use me if scalable element has fixed or match parent size, bot
 
 "
 Class {
-	#name : 'BlScalableFitAllStrategy',
-	#superclass : 'BlScalableStrategy',
-	#category : 'Bloc-Scalable-Strategies',
-	#package : 'Bloc-Scalable',
-	#tag : 'Strategies'
+	#name : #BlScalableFitAllStrategy,
+	#superclass : #BlScalableStrategy,
+	#category : #'Bloc-Scalable-Strategies'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlScalableFitAllStrategy >> = anotherObject [
 
 	self == anotherObject ifTrue: [ ^ true ].
@@ -20,12 +18,12 @@ BlScalableFitAllStrategy >> = anotherObject [
 	^ true
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlScalableFitAllStrategy >> hash [
 	^ self class hash
 ]
 
-{ #category : 'scale' }
+{ #category : #scale }
 BlScalableFitAllStrategy >> scale: aContentElement within: aScalableElement [
 	"Compute and return a scale factor of a content element within scalable element.
 	Note: I am used during measurement pass, so you must only rely on measured bounds!"

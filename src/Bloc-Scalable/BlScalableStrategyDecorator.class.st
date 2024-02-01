@@ -3,19 +3,17 @@ I am a decorator of a scalable strategy and allow users to have a deeper customi
 
 "
 Class {
-	#name : 'BlScalableStrategyDecorator',
-	#superclass : 'Object',
+	#name : #BlScalableStrategyDecorator,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'strategy'
 	],
-	#category : 'Bloc-Scalable-Strategies',
-	#package : 'Bloc-Scalable',
-	#tag : 'Strategies'
+	#category : #'Bloc-Scalable-Strategies'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlScalableStrategyDecorator class >> on: aScalableStrategy [
 	"Create a new decorator instance that decorates a given strategy."
 
@@ -24,7 +22,7 @@ BlScalableStrategyDecorator class >> on: aScalableStrategy [
 		  yourself
 ]
 
-{ #category : 'scale' }
+{ #category : #scale }
 BlScalableStrategyDecorator >> scale: aContentElement within: aScalableElement [
 	"Modify a scale factor of a content element within scalable element.
 	Note: I am used during measurement pass, so you must only rely on measured bounds!"
@@ -33,7 +31,7 @@ BlScalableStrategyDecorator >> scale: aContentElement within: aScalableElement [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableStrategyDecorator >> strategy [
 	"Return a strategy of the scalable element that I am decorating"
 	<return: #BlScalableStrategy>
@@ -41,7 +39,7 @@ BlScalableStrategyDecorator >> strategy [
 	^ strategy
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableStrategyDecorator >> strategy: aScalableStrategy [
 
 	strategy := aScalableStrategy

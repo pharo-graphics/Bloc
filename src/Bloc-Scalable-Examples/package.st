@@ -1,1 +1,1 @@
-Package { #name : 'Bloc-Scalable-Examples' }
+Package { #name : #'Bloc-Scalable-Examples' }

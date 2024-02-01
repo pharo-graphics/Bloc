@@ -3,16 +3,15 @@ I am a label that when the space is less than my width, I cut the text and add .
 
 "
 Class {
-	#name : 'BlShrinkingTextElement',
-	#superclass : 'BlTextElement',
+	#name : #BlShrinkingTextElement,
+	#superclass : #BlTextElement,
 	#instVars : [
 		'originalText'
 	],
-	#category : 'Bloc-Text-Elements',
-	#package : 'Bloc-Text-Elements'
+	#category : #'Bloc-Text-Elements'
 }
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlShrinkingTextElement >> onMeasure: anExtentMeasurementSpec [
 
 	super onMeasure: anExtentMeasurementSpec.
@@ -30,7 +29,7 @@ BlShrinkingTextElement >> onMeasure: anExtentMeasurementSpec [
 				super onMeasure: anExtentMeasurementSpec ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlShrinkingTextElement >> originalText [
 	^ originalText ifNil: [ originalText := self text copy ]
 ]

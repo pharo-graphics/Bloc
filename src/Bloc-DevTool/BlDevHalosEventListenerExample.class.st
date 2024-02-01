@@ -3,14 +3,12 @@ I exemplify {{gtClass:BlDevHalosEventListener}}.
 
 "
 Class {
-	#name : 'BlDevHalosEventListenerExample',
-	#superclass : 'BlExamplesTest',
-	#category : 'Bloc-DevTool-Examples',
-	#package : 'Bloc-DevTool',
-	#tag : 'Examples'
+	#name : #BlDevHalosEventListenerExample,
+	#superclass : #BlExamplesTest,
+	#category : #'Bloc-DevTool-Examples'
 }
 
-{ #category : 'examples - handler' }
+{ #category : #'examples - handler' }
 BlDevHalosEventListenerExample >> activatedHalos [
 
 	<sampleInstance>
@@ -34,14 +32,14 @@ BlDevHalosEventListenerExample >> activatedHalos [
 	^ aSpace
 ]
 
-{ #category : 'examples - handler' }
+{ #category : #'examples - handler' }
 BlDevHalosEventListenerExample >> basicHalosEventListener [
 
 	<sampleInstance>
 	^ BlDevHalosEventListener new
 ]
 
-{ #category : 'examples - element' }
+{ #category : #'examples - element' }
 BlDevHalosEventListenerExample >> container [
 
 	<sampleInstance>
@@ -56,7 +54,7 @@ BlDevHalosEventListenerExample >> container [
 	^ anElement
 ]
 
-{ #category : 'examples - element' }
+{ #category : #'examples - element' }
 BlDevHalosEventListenerExample >> containerWithRectangle [
 
 	<sampleInstance>
@@ -67,7 +65,7 @@ BlDevHalosEventListenerExample >> containerWithRectangle [
 	^ anElement
 ]
 
-{ #category : 'examples - handler' }
+{ #category : #'examples - handler' }
 BlDevHalosEventListenerExample >> containerWithRectangleWithHalos [
 
 	<sampleInstance>
@@ -78,14 +76,14 @@ BlDevHalosEventListenerExample >> containerWithRectangleWithHalos [
 	^ aContainer
 ]
 
-{ #category : 'examples - element' }
+{ #category : #'examples - element' }
 BlDevHalosEventListenerExample >> element [
 
 	<sampleInstance>
 	^ BlElement new
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlDevHalosEventListenerExample >> newSpace [
 
 	<sampleInstance>
@@ -98,7 +96,7 @@ BlDevHalosEventListenerExample >> newSpace [
 	^ aSpace
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 BlDevHalosEventListenerExample >> putInSpace: aBlElement [
 	<sampleInstance>
 
@@ -111,7 +109,7 @@ BlDevHalosEventListenerExample >> putInSpace: aBlElement [
 	^ aSpace
 ]
 
-{ #category : 'examples - element' }
+{ #category : #'examples - element' }
 BlDevHalosEventListenerExample >> rectangle [
 
 	<sampleInstance>

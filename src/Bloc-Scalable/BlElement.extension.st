@@ -1,6 +1,6 @@
-Extension { #name : 'BlElement' }
+Extension { #name : #BlElement }
 
-{ #category : '*Bloc-Scalable' }
+{ #category : #'*Bloc-Scalable' }
 BlElement >> asScalableElement [
 	| aScalableElement |
 	

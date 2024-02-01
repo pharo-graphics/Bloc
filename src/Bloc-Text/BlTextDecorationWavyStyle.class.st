@@ -4,19 +4,17 @@
 
 "
 Class {
-	#name : 'BlTextDecorationWavyStyle',
-	#superclass : 'BlTextDecorationStyle',
-	#category : 'Bloc-Text-Text-Decoration',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Decoration'
+	#name : #BlTextDecorationWavyStyle,
+	#superclass : #BlTextDecorationStyle,
+	#category : #'Bloc-Text-Text-Decoration'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDecorationWavyStyle class >> constructor [
 	^ #wavy
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDecorationWavyStyle class >> label [
 	^ 'Wavy'
 ]

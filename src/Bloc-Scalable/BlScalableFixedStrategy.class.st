@@ -3,22 +3,20 @@ I allow users to set a custom zoom level of content element within scalable elem
 
 "
 Class {
-	#name : 'BlScalableFixedStrategy',
-	#superclass : 'BlScalableStrategy',
+	#name : #BlScalableFixedStrategy,
+	#superclass : #BlScalableStrategy,
 	#instVars : [
 		'zoom'
 	],
-	#category : 'Bloc-Scalable-Strategies',
-	#package : 'Bloc-Scalable',
-	#tag : 'Strategies'
+	#category : #'Bloc-Scalable-Strategies'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlScalableFixedStrategy class >> zoom: aNumber [
 	^ self new zoom: aNumber
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlScalableFixedStrategy >> = anotherObject [
 
 	self == anotherObject ifTrue: [ ^ true ].
@@ -27,19 +25,19 @@ BlScalableFixedStrategy >> = anotherObject [
 	^ self zoom = anotherObject zoom
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlScalableFixedStrategy >> hash [
 	^ self class hash bitXor: self zoom hash
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScalableFixedStrategy >> initialize [
 	super initialize.
 	
 	zoom := 1.0
 ]
 
-{ #category : 'scale' }
+{ #category : #scale }
 BlScalableFixedStrategy >> scale: aContentElement within: aScalableElement [
 	"Compute and return a scale factor of a content element within scalable element.
 	Note: I am used during measurement pass, so you must only rely on measured bounds!"
@@ -48,14 +46,14 @@ BlScalableFixedStrategy >> scale: aContentElement within: aScalableElement [
 	^ self zoom
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableFixedStrategy >> zoom [
 	<return: #Number>
 
 	^ zoom
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableFixedStrategy >> zoom: aNumber [
 	zoom := aNumber
 ]

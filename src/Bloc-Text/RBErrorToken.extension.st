@@ -1,6 +1,6 @@
-Extension { #name : 'RBErrorToken' }
+Extension { #name : #RBErrorToken }
 
-{ #category : '*Bloc-Text' }
+{ #category : #'*Bloc-Text' }
 RBErrorToken >> acceptVisitor: aVisitor [
 
 	^ aVisitor visitErrorToken: self

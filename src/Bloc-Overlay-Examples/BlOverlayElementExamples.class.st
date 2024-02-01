@@ -1,11 +1,10 @@
 Class {
-	#name : 'BlOverlayElementExamples',
-	#superclass : 'BlExamplesTest',
-	#category : 'Bloc-Overlay-Examples',
-	#package : 'Bloc-Overlay-Examples'
+	#name : #BlOverlayElementExamples,
+	#superclass : #BlExamplesTest,
+	#category : #'Bloc-Overlay-Examples'
 }
 
-{ #category : 'examples - overlay' }
+{ #category : #'examples - overlay' }
 BlOverlayElementExamples >> overlayOnParent [
 	<gtExample>
 
@@ -22,7 +21,7 @@ BlOverlayElementExamples >> overlayOnParent [
 	^ aContainer
 ]
 
-{ #category : 'examples - overlay' }
+{ #category : #'examples - overlay' }
 BlOverlayElementExamples >> overlayOnParentInSpace [
 	<gtExample>
 
@@ -46,7 +45,7 @@ BlOverlayElementExamples >> overlayOnParentInSpace [
 	^ aSpace
 ]
 
-{ #category : 'examples - overlay' }
+{ #category : #'examples - overlay' }
 BlOverlayElementExamples >> overlayOnParentInSpaceWithOffset [
 	<gtExample>
 
@@ -71,7 +70,7 @@ BlOverlayElementExamples >> overlayOnParentInSpaceWithOffset [
 	^ aSpace
 ]
 
-{ #category : 'examples - overlay' }
+{ #category : #'examples - overlay' }
 BlOverlayElementExamples >> overlayOnSibling [
 	<gtExample>
 
@@ -94,7 +93,7 @@ BlOverlayElementExamples >> overlayOnSibling [
 	^ aContainer
 ]
 
-{ #category : 'examples - overlay' }
+{ #category : #'examples - overlay' }
 BlOverlayElementExamples >> overlayOnSiblingInSpace [
 	<gtExample>
 
@@ -118,7 +117,7 @@ BlOverlayElementExamples >> overlayOnSiblingInSpace [
 	^ aSpace
 ]
 
-{ #category : 'examples - overlay' }
+{ #category : #'examples - overlay' }
 BlOverlayElementExamples >> overlayOnSiblingInSpaceWithOffset [
 	<gtExample>
 

@@ -17,38 +17,36 @@ See `BlBackgroundBuilder` for the related examples.
 
 "
 Class {
-	#name : 'BlBackground',
-	#superclass : 'Object',
+	#name : #BlBackground,
+	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'opacity'
 	],
-	#category : 'Bloc-Basic-Background',
-	#package : 'Bloc',
-	#tag : 'Basic-Background'
+	#category : #'Bloc-Basic-Background'
 }
 
-{ #category : 'builder' }
+{ #category : #builder }
 BlBackground class >> builder [
 	^ BlCompositeBackgroundBuilder new
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlBackground class >> image: aForm [
 	<return: #BlBackground>
 	
 	^ BlImageBackground image: aForm
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlBackground class >> paint: aColorOrBlPaint [
 	<return: #BlBackground>
 
 	^ BlPaintBackground paint: aColorOrBlPaint
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlBackground class >> transparent [
 	"Return a completely transparent background"
 	<return: #BlBackground>
@@ -56,45 +54,45 @@ BlBackground class >> transparent [
 	^ BlTransparentBackground uniqueInstance
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlBackground >> asBlBackground [
 	^ self
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlBackground >> defaultOpacity [
 	"By default background is completely opaque so it returns a float indicating it: 1.0"
 
 	^ 1.0
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlBackground >> isColorBackground [
 
 	^ self isPaintBackground and: [ self paint isColorPaint ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlBackground >> isOpaque [
 	"Return true if the whole background is opaque"
 	
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlBackground >> isPaintBackground [
 
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlBackground >> isTransparent [
 	"Return true if background is transparent and should not be rendered, false otherwise"
 
 	^ self subclassResponsibility
 ]
 
-{ #category : 'geometry' }
+{ #category : #geometry }
 BlBackground >> matchExtent: anExtent [
 	"Resize background to match given extent.
 	Used to adapt image or gradient backgrounds to the element's extent"
@@ -102,14 +100,14 @@ BlBackground >> matchExtent: anExtent [
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBackground >> opacity [
 	"Return a float representing the opacity of the receiver. 1.0 meaning that it is opaque and 0 that it is fully transparent."
 
 	^ opacity ifNil: [ self defaultOpacity ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBackground >> opacity: aNumber [
 	"Opacity value must be within interval [0..1]. 1.0 meaning that the receiver is opaque."
 
@@ -120,7 +118,7 @@ BlBackground >> opacity: aNumber [
 	opacity := aNumber
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBackground >> paint [
 
 	^ nil

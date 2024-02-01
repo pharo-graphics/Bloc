@@ -1,21 +1,20 @@
 Class {
-	#name : 'BlParameterizedHostTest',
-	#superclass : 'ParametrizedTestCase',
+	#name : #BlParameterizedHostTest,
+	#superclass : #ParametrizedTestCase,
 	#instVars : [
 		'testingSpaces',
 		'hostClass'
 	],
-	#category : 'Bloc-Tests',
-	#package : 'Bloc-Tests'
+	#category : #'Bloc-Tests'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 BlParameterizedHostTest class >> isAbstract [
 
 	^ self == BlParameterizedHostTest
 ]
 
-{ #category : 'building suites' }
+{ #category : #'building suites' }
 BlParameterizedHostTest class >> testParameters [
 
 	^ ParametrizedTestMatrix new
@@ -23,19 +22,19 @@ BlParameterizedHostTest class >> testParameters [
 		addOptions: BlHost supportedHostClasses
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlParameterizedHostTest >> hostClass [
 
 	^ hostClass
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlParameterizedHostTest >> hostClass: aClass [
 
 	hostClass := aClass
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlParameterizedHostTest >> newTestingSpace [
 
 	| aSpace |
@@ -45,14 +44,14 @@ BlParameterizedHostTest >> newTestingSpace [
 	^ aSpace
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlParameterizedHostTest >> setUp [
 	super setUp.
 
 	testingSpaces := OrderedCollection new.
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlParameterizedHostTest >> tearDown [
 
 	self waitTestingSpaces.
@@ -63,7 +62,7 @@ BlParameterizedHostTest >> tearDown [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlParameterizedHostTest >> waitTestingSpaces [
 
 	testingSpaces do: [ :each |

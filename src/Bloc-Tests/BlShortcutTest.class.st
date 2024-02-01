@@ -1,22 +1,20 @@
 Class {
-	#name : 'BlShortcutTest',
-	#superclass : 'TestCase',
+	#name : #BlShortcutTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'shortcut'
 	],
-	#category : 'Bloc-Tests-KeyBinding',
-	#package : 'Bloc-Tests',
-	#tag : 'KeyBinding'
+	#category : #'Bloc-Tests-KeyBinding'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlShortcutTest >> setUp [
 	super setUp.
 	
 	shortcut := BlShortcutWithAction new
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlShortcutTest >> testMatches [
 
 	shortcut combination: (BlMockedKeyCombination new shouldMatch: false).

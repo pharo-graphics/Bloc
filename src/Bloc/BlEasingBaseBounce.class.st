@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlEasingBaseBounce',
-	#superclass : 'BlEasing',
-	#category : 'Bloc-Basic-Interpolators',
-	#package : 'Bloc',
-	#tag : 'Basic-Interpolators'
+	#name : #BlEasingBaseBounce,
+	#superclass : #BlEasing,
+	#category : #'Bloc-Basic-Interpolators'
 }
 
-{ #category : 'interpolation' }
+{ #category : #interpolation }
 BlEasingBaseBounce >> computeBounce: aProgress [
 	| a b |
 	a := 0.

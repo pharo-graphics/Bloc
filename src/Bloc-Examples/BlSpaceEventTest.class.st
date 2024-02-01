@@ -3,17 +3,15 @@ I contain examples of space related events
 
 "
 Class {
-	#name : 'BlSpaceEventTest',
-	#superclass : 'TestCase',
+	#name : #BlSpaceEventTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Examples-Event',
-	#package : 'Bloc-Examples',
-	#tag : 'Event'
+	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 BlSpaceEventTest >> setUp [
 	super setUp.
 
@@ -23,7 +21,7 @@ BlSpaceEventTest >> setUp [
 		  yourself
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlSpaceEventTest >> testIgnoreSpaceEventsAfterCloseRequest [
 	<expectedFailure>
 
@@ -36,7 +34,7 @@ BlSpaceEventTest >> testIgnoreSpaceEventsAfterCloseRequest [
 	self assert: space hasHostSpace not
 ]
 
-{ #category : 'show / close' }
+{ #category : #'show / close' }
 BlSpaceEventTest >> testSpaceClosed [
 	<expectedFailure>
 
@@ -53,7 +51,7 @@ BlSpaceEventTest >> testSpaceClosed [
 	self assert: count equals: 1
 ]
 
-{ #category : 'show / close' }
+{ #category : #'show / close' }
 BlSpaceEventTest >> testSpaceDestroyed [
 	<expectedFailure>
 
@@ -74,7 +72,7 @@ BlSpaceEventTest >> testSpaceDestroyed [
 	self assert: events asArray equals: #( closed destroyed )
 ]
 
-{ #category : 'show / close' }
+{ #category : #'show / close' }
 BlSpaceEventTest >> testSpaceShown [
 	<expectedFailure>
 

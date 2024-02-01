@@ -3,14 +3,12 @@ Ignore me :)
 
 "
 Class {
-	#name : 'BlIgnoredLayout',
-	#superclass : 'BlLayout',
-	#category : 'Bloc-Layouts-Basic',
-	#package : 'Bloc',
-	#tag : 'Layouts-Basic'
+	#name : #BlIgnoredLayout,
+	#superclass : #BlLayout,
+	#category : #'Bloc-Layouts-Basic'
 }
 
-{ #category : 'constraints' }
+{ #category : #constraints }
 BlIgnoredLayout class >> constraints [
 	^ BlIgnoredLayoutConstraints new
 ]

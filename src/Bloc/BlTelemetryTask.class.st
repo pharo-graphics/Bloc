@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlTelemetryTask',
-	#superclass : 'Object',
+	#name : #BlTelemetryTask,
+	#superclass : #Object,
 	#instVars : [
 		'startTime',
 		'endTime',
@@ -11,96 +11,94 @@ Class {
 		'name',
 		'tasks'
 	],
-	#category : 'Bloc-Space - Telemetry',
-	#package : 'Bloc',
-	#tag : 'Space - Telemetry'
+	#category : #'Bloc-Space - Telemetry'
 }
 
-{ #category : 'adding' }
+{ #category : #adding }
 BlTelemetryTask >> addTask: aTelemetryTask [
 	tasks add: aTelemetryTask
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> childrenOverhead [
 	^ self tasks
 		inject: 0
 		into: [ :aSum :eachTask | aSum + eachTask totalOverhead ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> duration [
 	^ self endTime - self startTime - self childrenOverhead
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlTelemetryTask >> durationInMilliseconds [
 	^ self duration / 1000.0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> endTime [
 	^ endTime
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> endTime: anObject [
 	endTime := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> gcDurationInMilliseconds [
 	^ (self gcEndTime - self gcStartTime)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> gcEndTime [
 	^ gcEndTime
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> gcEndTime: anObject [
 	gcEndTime := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> gcStartTime [
 	^ gcStartTime
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> gcStartTime: anObject [
 	gcStartTime := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTelemetryTask >> initialize [
 	super initialize.
 	
 	tasks := OrderedCollection new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> name [
 	^ name
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> name: anObject [
 	name := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> overhead [
 	^ (self realEndTime - self realStartTime) - (self endTime - self startTime)
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlTelemetryTask >> printDurationInMilliseconds [
 	^ self durationInMilliseconds asString, 'ms'
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlTelemetryTask >> printOn: aStream [
 	aStream
 		nextPutAll: self name; space;
@@ -109,47 +107,47 @@ BlTelemetryTask >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> realEndTime [
 	^ realEndTime
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> realEndTime: aNumberOfMicroseconds [
 	realEndTime := aNumberOfMicroseconds
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> realStartTime [
 	^ realStartTime
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> realStartTime: aNumberOfMicroseconds [
 	realStartTime := aNumberOfMicroseconds
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> startTime [
 	^ startTime
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> startTime: aNumberOfMicroseconds [
 	startTime := aNumberOfMicroseconds
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> tasks [
 	^ tasks
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> tasks: aCollectionOfTasks [
 	tasks := aCollectionOfTasks asOrderedCollection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTelemetryTask >> totalOverhead [
 	^ self overhead + self childrenOverhead
 ]

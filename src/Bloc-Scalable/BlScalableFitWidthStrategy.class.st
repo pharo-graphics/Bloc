@@ -5,14 +5,12 @@ It makes sense to use me if scalable element has fixed or matching parent horizo
 
 "
 Class {
-	#name : 'BlScalableFitWidthStrategy',
-	#superclass : 'BlScalableStrategy',
-	#category : 'Bloc-Scalable-Strategies',
-	#package : 'Bloc-Scalable',
-	#tag : 'Strategies'
+	#name : #BlScalableFitWidthStrategy,
+	#superclass : #BlScalableStrategy,
+	#category : #'Bloc-Scalable-Strategies'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlScalableFitWidthStrategy >> = anotherObject [
 
 	self == anotherObject ifTrue: [ ^ true ].
@@ -20,12 +18,12 @@ BlScalableFitWidthStrategy >> = anotherObject [
 	^ true
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlScalableFitWidthStrategy >> hash [
 	^ self class hash
 ]
 
-{ #category : 'scale' }
+{ #category : #scale }
 BlScalableFitWidthStrategy >> scale: aContentElement within: aScalableElement [
 	"Compute and return a scale factor of a content element within scalable element.
 	Note: I am used during measurement pass, so you must only rely on measured bounds!"

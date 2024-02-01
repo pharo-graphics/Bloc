@@ -1,23 +1,22 @@
 Class {
-	#name : 'BlAttributedTextElement',
-	#superclass : 'BlTextElement',
+	#name : #BlAttributedTextElement,
+	#superclass : #BlTextElement,
 	#traits : 'TBlTextStyleable - {#defaultFontSize:}',
 	#classTraits : 'TBlTextStyleable classTrait',
 	#instVars : [
 		'attributesBuilder'
 	],
-	#category : 'Bloc-Text-Elements',
-	#package : 'Bloc-Text-Elements'
+	#category : #'Bloc-Text-Elements'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlAttributedTextElement >> attributesBuilder [
 	<return: #BlTextAttributesBuilder>
 	
 	^ attributesBuilder
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlAttributedTextElement >> initialize [
 	super initialize.
 	
@@ -26,7 +25,7 @@ BlAttributedTextElement >> initialize [
 	attributesBuilder whenAdded: [ self textChanged ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlAttributedTextElement >> text: aText [
 	super text: aText.
 	

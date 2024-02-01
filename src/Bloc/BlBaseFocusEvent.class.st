@@ -1,22 +1,20 @@
 Class {
-	#name : 'BlBaseFocusEvent',
-	#superclass : 'BlUIEvent',
+	#name : #BlBaseFocusEvent,
+	#superclass : #BlUIEvent,
 	#instVars : [
 		'reason'
 	],
-	#category : 'Bloc-Events',
-	#package : 'Bloc',
-	#tag : 'Events'
+	#category : #'Bloc-Events'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlBaseFocusEvent >> asBlurEvent [
 	^ BlBlurEvent new
 		copyFrom: self;
 		yourself
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlBaseFocusEvent >> asFocusInEvent [
 	^ BlFocusInEvent new
 		copyFrom: self;
@@ -24,7 +22,7 @@ BlBaseFocusEvent >> asFocusInEvent [
 		yourself
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlBaseFocusEvent >> asFocusOutEvent [
 	^ BlFocusOutEvent new
 		copyFrom: self;
@@ -32,32 +30,32 @@ BlBaseFocusEvent >> asFocusOutEvent [
 		yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlBaseFocusEvent >> initialize [
 	super initialize.
 
 	reason := BlFocusUnknownReason uniqueInstance
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlBaseFocusEvent >> isBaseFocus [
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlBaseFocusEvent >> isDueToRemoval [
 	^ self reason = BlFocusDueToRemovedFromParentReason uniqueInstance
 		or: [ self reason = BlFocusDueToRemovedFromSpaceReason uniqueInstance ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBaseFocusEvent >> reason [
 	<return: #BlFocusReason>
 
 	^ reason
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlBaseFocusEvent >> reason: aBlFocusReason [
 	reason := aBlFocusReason
 ]

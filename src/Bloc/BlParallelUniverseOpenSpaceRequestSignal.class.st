@@ -3,32 +3,30 @@ Is signalled when someone requests a universe to open a space.
 
 "
 Class {
-	#name : 'BlParallelUniverseOpenSpaceRequestSignal',
-	#superclass : 'BlParallelUniverseSpaceSignal',
+	#name : #BlParallelUniverseOpenSpaceRequestSignal,
+	#superclass : #BlParallelUniverseSpaceSignal,
 	#instVars : [
 		'isRunning'
 	],
-	#category : 'Bloc-Universe - Parallel',
-	#package : 'Bloc',
-	#tag : 'Universe - Parallel'
+	#category : #'Bloc-Universe - Parallel'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlParallelUniverseOpenSpaceRequestSignal class >> label [
 	^ 'Request open space'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlParallelUniverseOpenSpaceRequestSignal class >> nextSignals [
 	^ { BlParallelUniverseDeferredActionAddedSignal }
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlParallelUniverseOpenSpaceRequestSignal >> isRunning [
 	^ isRunning
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlParallelUniverseOpenSpaceRequestSignal >> isRunning: anObject [
 	isRunning := anObject
 ]

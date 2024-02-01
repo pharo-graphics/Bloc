@@ -1,1 +1,1 @@
-Package { #name : 'Bloc-Theme' }
+Package { #name : #'Bloc-Theme' }

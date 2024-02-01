@@ -1,11 +1,10 @@
 Class {
-	#name : 'BlImageBackgroundTest',
-	#superclass : 'BlBackgroundTest',
-	#category : 'Bloc-Tests',
-	#package : 'Bloc-Tests'
+	#name : #BlImageBackgroundTest,
+	#superclass : #BlBackgroundTest,
+	#category : #'Bloc-Tests'
 }
 
-{ #category : 'background - image' }
+{ #category : #'background - image' }
 BlImageBackgroundTest >> testBlueImageBackgroundExplicitInitialization [
 	<sampleInstance>
 	| aBackground |
@@ -23,7 +22,7 @@ BlImageBackgroundTest >> testBlueImageBackgroundExplicitInitialization [
 	^ aBackground
 ]
 
-{ #category : 'background - image' }
+{ #category : #'background - image' }
 BlImageBackgroundTest >> testBlueImageBackgroundExplicitInstantiation [
 	<sampleInstance>
 	
@@ -41,7 +40,7 @@ BlImageBackgroundTest >> testBlueImageBackgroundExplicitInstantiation [
 	^ aBackground
 ]
 
-{ #category : 'background - image' }
+{ #category : #'background - image' }
 BlImageBackgroundTest >> testBlueImageWithPositiveExtentBackground [
 	<sampleInstance>
 	| aBackground |
@@ -58,7 +57,7 @@ BlImageBackgroundTest >> testBlueImageWithPositiveExtentBackground [
 	^ aBackground
 ]
 
-{ #category : 'background - image' }
+{ #category : #'background - image' }
 BlImageBackgroundTest >> testEmptyImageBackground [
 	<sampleInstance>
 	| aBackground |
@@ -73,7 +72,7 @@ BlImageBackgroundTest >> testEmptyImageBackground [
 	^ aBackground
 ]
 
-{ #category : 'background - image' }
+{ #category : #'background - image' }
 BlImageBackgroundTest >> testEmptyImageWithPositiveExtentBackground [
 	<sampleInstance>
 	| aBackground |
@@ -88,7 +87,7 @@ BlImageBackgroundTest >> testEmptyImageWithPositiveExtentBackground [
 	^ aBackground
 ]
 
-{ #category : 'background - icon' }
+{ #category : #'background - icon' }
 BlImageBackgroundTest >> testIconImageBackground [
 	<sampleInstance>
 	
@@ -101,7 +100,7 @@ BlImageBackgroundTest >> testIconImageBackground [
 	^ aBackground
 ]
 
-{ #category : 'background - icon' }
+{ #category : #'background - icon' }
 BlImageBackgroundTest >> testImageWithOpacityBackground [
 	<sampleInstance>
 	| aBackground |
@@ -117,7 +116,7 @@ BlImageBackgroundTest >> testImageWithOpacityBackground [
 	^ aBackground
 ]
 
-{ #category : 'background - icon' }
+{ #category : #'background - icon' }
 BlImageBackgroundTest >> testImageWithZeroOpacityBackground [
 	<sampleInstance>
 	| aBackground |
@@ -133,7 +132,7 @@ BlImageBackgroundTest >> testImageWithZeroOpacityBackground [
 	^ aBackground
 ]
 
-{ #category : 'background - icon' }
+{ #category : #'background - icon' }
 BlImageBackgroundTest >> testPharoLogoImageBackground [
 	<sampleInstance>
 	

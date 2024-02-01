@@ -3,14 +3,12 @@ I am one button inside of a Halos element. For more information about me, see {{
 
 "
 Class {
-	#name : 'BlElementSelectionButton',
-	#superclass : 'BlElement',
-	#category : 'Bloc-DevTool-Core',
-	#package : 'Bloc-DevTool',
-	#tag : 'Core'
+	#name : #BlElementSelectionButton,
+	#superclass : #BlElement,
+	#category : #'Bloc-DevTool-Core'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlElementSelectionButton class >> icon: anSvgIcon [
 
 	^ self new
@@ -18,7 +16,7 @@ BlElementSelectionButton class >> icon: anSvgIcon [
 		yourself
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlElementSelectionButton class >> icon: anSvgIcon extent: aPoint [
 
 	^ self new
@@ -27,7 +25,7 @@ BlElementSelectionButton class >> icon: anSvgIcon extent: aPoint [
 		yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlElementSelectionButton >> defaultBackground [
 	^ Color black
 ]

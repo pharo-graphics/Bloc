@@ -5,14 +5,12 @@ Concrete implementations should override #scale:within: and return a number that
 
 "
 Class {
-	#name : 'BlScalableStrategy',
-	#superclass : 'Object',
-	#category : 'Bloc-Scalable-Strategies',
-	#package : 'Bloc-Scalable',
-	#tag : 'Strategies'
+	#name : #BlScalableStrategy,
+	#superclass : #Object,
+	#category : #'Bloc-Scalable-Strategies'
 }
 
-{ #category : 'scale' }
+{ #category : #scale }
 BlScalableStrategy >> scale: aContentElement within: aScalableElement [
 	"Compute and return a scale factor of a content element within scalable element.
 	Note: I am used during measurement pass, so you must only rely on measured bounds!"

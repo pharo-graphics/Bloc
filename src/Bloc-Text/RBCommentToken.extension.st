@@ -1,6 +1,6 @@
-Extension { #name : 'RBCommentToken' }
+Extension { #name : #RBCommentToken }
 
-{ #category : '*Bloc-Text' }
+{ #category : #'*Bloc-Text' }
 RBCommentToken >> acceptVisitor: aVisitor [
 
 	^ aVisitor visitCommentToken: self

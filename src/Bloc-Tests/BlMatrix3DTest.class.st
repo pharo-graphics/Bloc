@@ -2,14 +2,12 @@
 A BlMatrix3DTest is a test class for testing the behavior of BlMatrix3D
 "
 Class {
-	#name : 'BlMatrix3DTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Tests-Basic-Math',
-	#package : 'Bloc-Tests',
-	#tag : 'Basic-Math'
+	#name : #BlMatrix3DTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Tests-Basic-Math'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlMatrix3DTest >> testInitialize [
 
 	| matrix |

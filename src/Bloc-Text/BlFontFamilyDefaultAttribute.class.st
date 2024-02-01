@@ -1,44 +1,42 @@
 Class {
-	#name : 'BlFontFamilyDefaultAttribute',
-	#superclass : 'BlTextAttribute',
+	#name : #BlFontFamilyDefaultAttribute,
+	#superclass : #BlTextAttribute,
 	#instVars : [
 		'name'
 	],
-	#category : 'Bloc-Text-Text-Attributes',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Attributes'
+	#category : #'Bloc-Text-Text-Attributes'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlFontFamilyDefaultAttribute class >> named: aString [
 	^ self new
 		name: aString;
 		yourself
 ]
 
-{ #category : 'text style' }
+{ #category : #'text style' }
 BlFontFamilyDefaultAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
 	aBlTextFontAndStyleBuilder defaultFamilyName: self name
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlFontFamilyDefaultAttribute >> equals: anAnotherAttribute [
 	^ self name = anAnotherAttribute name
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlFontFamilyDefaultAttribute >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ super hash bitXor: self name hash
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontFamilyDefaultAttribute >> name [
 	^ name
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFontFamilyDefaultAttribute >> name: aString [	
 	self
 		assert: [ name isNil ]
@@ -47,14 +45,14 @@ BlFontFamilyDefaultAttribute >> name: aString [
 	name := aString
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlFontFamilyDefaultAttribute >> printOn: aStream [
 	aStream
 		nextPutAll: 'font-family-default: ';
 		nextPutAll: self name printString
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlFontFamilyDefaultAttribute >> storeOn: aStream [
 	super storeOn: aStream.
 	

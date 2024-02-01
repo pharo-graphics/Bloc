@@ -5,35 +5,33 @@ Allows to assign id to {{gtClass:BlElement}}. This allows us query a tree of ele
 
 "
 Class {
-	#name : 'BlElementId',
-	#superclass : 'Object',
-	#category : 'Bloc-Basic-Support',
-	#package : 'Bloc',
-	#tag : 'Basic-Support'
+	#name : #BlElementId,
+	#superclass : #Object,
+	#category : #'Bloc-Basic-Support'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlElementId class >> named: aSymbol [
 	^ BlElementNamedId new
 		identifier: aSymbol asSymbol
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlElementId class >> noId [
 	^ BlElementNoId uniqueInstance
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlElementId >> asBlocElementId [
 	^ self
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlElementId >> asSymbol [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlElementId >> hash [
 	"Hash must always be based on the symbolm to support proper comparison between ids that are just
 	constructed differently but have same symbolic id"
@@ -41,7 +39,7 @@ BlElementId >> hash [
 	^ self asSymbol hash
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlElementId >> indexed: anIndex [
 	"Convert me to an indexed id with a given index"
 	<return: #BlElementId>
@@ -51,23 +49,23 @@ BlElementId >> indexed: anIndex [
 		index: anIndex
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlElementId >> isBlocElementId [
 
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlElementId >> isIndexed [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlElementId >> isNoId [
 	^ false
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlElementId >> printOn: aStream [
 	self class isAbstract
 		ifTrue: [ aStream print: self ]

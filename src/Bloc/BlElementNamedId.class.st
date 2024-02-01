@@ -1,15 +1,13 @@
 Class {
-	#name : 'BlElementNamedId',
-	#superclass : 'BlElementId',
+	#name : #BlElementNamedId,
+	#superclass : #BlElementId,
 	#instVars : [
 		'identifier'
 	],
-	#category : 'Bloc-Basic-Support',
-	#package : 'Bloc',
-	#tag : 'Basic-Support'
+	#category : #'Bloc-Basic-Support'
 }
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 BlElementNamedId >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -24,19 +22,19 @@ BlElementNamedId >> = anObject [
 	^ self asSymbol = anObject asSymbol
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 BlElementNamedId >> asSymbol [
 	^ self identifier
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementNamedId >> identifier [
 	<return: #Symbol>
 
 	^ identifier
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementNamedId >> identifier: aSymbol [
 	identifier
 		ifNotNil: [ (BlImmutableObjectChangeError object: self) signal ].

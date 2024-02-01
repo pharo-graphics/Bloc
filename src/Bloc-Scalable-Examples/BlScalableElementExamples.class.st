@@ -1,11 +1,10 @@
 Class {
-	#name : 'BlScalableElementExamples',
-	#superclass : 'BlExamplesTest',
-	#category : 'Bloc-Scalable-Examples',
-	#package : 'Bloc-Scalable-Examples'
+	#name : #BlScalableElementExamples,
+	#superclass : #BlExamplesTest,
+	#category : #'Bloc-Scalable-Examples'
 }
 
-{ #category : 'examples - instance creation' }
+{ #category : #'examples - instance creation' }
 BlScalableElementExamples >> contentElement [
 
 	^ BlElement new
@@ -15,7 +14,7 @@ BlScalableElementExamples >> contentElement [
 		yourself
 ]
 
-{ #category : 'examples - instance creation' }
+{ #category : #'examples - instance creation' }
 BlScalableElementExamples >> contentElementLarger [
 
 	^ self contentElement
@@ -23,7 +22,7 @@ BlScalableElementExamples >> contentElementLarger [
 		yourself
 ]
 
-{ #category : 'examples - instance creation' }
+{ #category : #'examples - instance creation' }
 BlScalableElementExamples >> contentElementMatchingParent [
 
 	^ self contentElement
@@ -33,7 +32,7 @@ BlScalableElementExamples >> contentElementMatchingParent [
 		yourself
 ]
 
-{ #category : 'examples - instance creation' }
+{ #category : #'examples - instance creation' }
 BlScalableElementExamples >> contentElementSmaller [
 
 	^ self contentElement
@@ -41,25 +40,25 @@ BlScalableElementExamples >> contentElementSmaller [
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableElementExamples >> contentExtentDifference [
 
 	^ 200 @ 100
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableElementExamples >> contentExtentLarger [
 
 	^ self scalableExtent + self contentExtentDifference
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableElementExamples >> contentExtentSmaller [
 
 	^ self scalableExtent - self contentExtentDifference
 ]
 
-{ #category : 'examples - scalable' }
+{ #category : #'examples - scalable' }
 BlScalableElementExamples >> exactContentLargerInExactScalableFitAll [
 	<gtExample>
 
@@ -81,7 +80,7 @@ BlScalableElementExamples >> exactContentLargerInExactScalableFitAll [
 	^ aScalable
 ]
 
-{ #category : 'examples - scalable' }
+{ #category : #'examples - scalable' }
 BlScalableElementExamples >> exactContentLargerInFitContentScalableFitAll [
 	<gtExample>
 
@@ -103,7 +102,7 @@ BlScalableElementExamples >> exactContentLargerInFitContentScalableFitAll [
 	^ aScalable
 ]
 
-{ #category : 'examples - scalable' }
+{ #category : #'examples - scalable' }
 BlScalableElementExamples >> exactContentSmallerInExactScalableFitAll [
 	<gtExample>
 
@@ -126,7 +125,7 @@ BlScalableElementExamples >> exactContentSmallerInExactScalableFitAll [
 	^ aScalable
 ]
 
-{ #category : 'examples - scalable' }
+{ #category : #'examples - scalable' }
 BlScalableElementExamples >> matchParentContentInExactScalableFitAll [
 	<gtExample>
 
@@ -148,7 +147,7 @@ BlScalableElementExamples >> matchParentContentInExactScalableFitAll [
 	^ aScalable
 ]
 
-{ #category : 'examples - scalable' }
+{ #category : #'examples - scalable' }
 BlScalableElementExamples >> matchParentContentInMatchParentScalableFitAll [
 	<gtExample>
 
@@ -178,7 +177,7 @@ BlScalableElementExamples >> matchParentContentInMatchParentScalableFitAll [
 	^ aContainer
 ]
 
-{ #category : 'examples - instance creation' }
+{ #category : #'examples - instance creation' }
 BlScalableElementExamples >> scalableElement [
 	<gtExample>
 
@@ -194,7 +193,7 @@ BlScalableElementExamples >> scalableElement [
 	^ aScalableElement
 ]
 
-{ #category : 'examples - instance creation' }
+{ #category : #'examples - instance creation' }
 BlScalableElementExamples >> scalableElementFitContent [
 	<gtExample>
 
@@ -205,7 +204,7 @@ BlScalableElementExamples >> scalableElementFitContent [
 		yourself
 ]
 
-{ #category : 'examples - instance creation' }
+{ #category : #'examples - instance creation' }
 BlScalableElementExamples >> scalableElementMatchingParent [
 	<gtExample>
 
@@ -216,7 +215,7 @@ BlScalableElementExamples >> scalableElementMatchingParent [
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableElementExamples >> scalableExtent [
 
 	^ 600 @ 400

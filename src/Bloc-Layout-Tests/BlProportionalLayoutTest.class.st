@@ -1,11 +1,10 @@
 Class {
-	#name : 'BlProportionalLayoutTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#name : #BlProportionalLayoutTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlProportionalLayoutTest >> testDefaultConstraints [
 
 	| aContainer aChild |
@@ -41,7 +40,7 @@ BlProportionalLayoutTest >> testDefaultConstraints [
 		equals: 1.0
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 
 	| aContainer aChild childFractions childMargin containerPadding containerExtent childMaxWidth childMaxHeight |
@@ -95,7 +94,7 @@ BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 			(containerExtent y - containerPadding bottom - childMargin bottom - (childMaxHeight * (1 - childFractions bottom))) ceiling
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlProportionalLayoutTest >> testHorizontalAndVerticalConstraints [
 
 	| aContainer aChild |
@@ -124,7 +123,7 @@ BlProportionalLayoutTest >> testHorizontalAndVerticalConstraints [
 	self assert: aChild extent equals: 80@60
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlProportionalLayoutTest >> testIgnoreByLayoutChild [
 
 	| aContainer aChild |
@@ -152,7 +151,7 @@ BlProportionalLayoutTest >> testIgnoreByLayoutChild [
 	self assert: aChild extent equals: 10 @ 20
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlProportionalLayoutTest >> testMultipleChildren [
 
 	| aContainer childA childB |

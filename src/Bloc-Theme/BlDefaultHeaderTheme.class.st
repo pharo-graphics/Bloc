@@ -1,6 +1,6 @@
 Class {
-	#name : 'BlDefaultHeaderTheme',
-	#superclass : 'BlTheme',
+	#name : #BlDefaultHeaderTheme,
+	#superclass : #BlTheme,
 	#instVars : [
 		'textMarkupColor',
 		'defaultBackgroundColor',
@@ -8,47 +8,46 @@ Class {
 		'defaultTextColor',
 		'secondaryBackgroundColor'
 	],
-	#category : 'Bloc-Theme',
-	#package : 'Bloc-Theme'
+	#category : #'Bloc-Theme'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDefaultHeaderTheme class >> isDeprecated [ 
 
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultHeaderTheme >> defaultBackgroundColor [
 	^ defaultBackgroundColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultHeaderTheme >> defaultBackgroundColor: anObject [
 	defaultBackgroundColor := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultHeaderTheme >> defaultTextColor [
 	^ defaultTextColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultHeaderTheme >> defaultTextColor: anObject [
 	defaultTextColor := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultHeaderTheme >> disabledTextColor [
 	^ disabledTextColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultHeaderTheme >> disabledTextColor: anObject [
 	disabledTextColor := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlDefaultHeaderTheme >> initialize [
 	super initialize.
 	textMarkupColor := BlDefaultColors textMarkupColor.
@@ -60,22 +59,22 @@ BlDefaultHeaderTheme >> initialize [
 		secondaryHeaderBackgroundColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultHeaderTheme >> secondaryBackgroundColor [
 	^ secondaryBackgroundColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultHeaderTheme >> secondaryBackgroundColor: anObject [
 	secondaryBackgroundColor := anObject
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultHeaderTheme >> textMarkupColor [
 	^ textMarkupColor
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlDefaultHeaderTheme >> textMarkupColor: anObject [
 	textMarkupColor := anObject
 ]

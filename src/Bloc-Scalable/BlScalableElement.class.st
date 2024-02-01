@@ -25,23 +25,21 @@ I'm a helper element that transforms its #contentElement in order to exactly #sc
 
 "
 Class {
-	#name : 'BlScalableElement',
-	#superclass : 'BlElement',
+	#name : #BlScalableElement,
+	#superclass : #BlElement,
 	#instVars : [
 		'contentElement',
 		'scaleStrategy'
 	],
-	#category : 'Bloc-Scalable-Core',
-	#package : 'Bloc-Scalable',
-	#tag : 'Core'
+	#category : #'Bloc-Scalable-Core'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlScalableElement class >> on: anElement [
 	^ self new contentElement: anElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableElement >> contentElement [
 	"Return a content element that is being scaled"
 	<return: #BlElement>
@@ -53,7 +51,7 @@ BlScalableElement >> contentElement [
 	^ contentElement
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableElement >> contentElement: anElement [
 	"Specify an element that should be scaled according to my size.
 	If I already have a content element, it will be replaced with a new one.
@@ -65,29 +63,29 @@ BlScalableElement >> contentElement: anElement [
 	self addChild: anElement
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScalableElement >> defaultScaleStrategy [
 	<return: #BlScalableStrategy>
 
 	^ BlScalableFitAllStrategy new
 ]
 
-{ #category : 'api - scaling' }
+{ #category : #'api - scaling' }
 BlScalableElement >> fitAll [
 	self scaleStrategy: BlScalableFitAllStrategy new
 ]
 
-{ #category : 'api - scaling' }
+{ #category : #'api - scaling' }
 BlScalableElement >> fitHeight [
 	self scaleStrategy: BlScalableFitHeightStrategy new
 ]
 
-{ #category : 'api - scaling' }
+{ #category : #'api - scaling' }
 BlScalableElement >> fitWidth [
 	self scaleStrategy: BlScalableFitWidthStrategy new
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlScalableElement >> hasContentElement [
 	"Return true if I have a content element, false otherwise"
 	<return: #Boolean>
@@ -95,19 +93,19 @@ BlScalableElement >> hasContentElement [
 	^ contentElement isNotNil
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScalableElement >> initialize [
 	super initialize.
 
 	scaleStrategy := self defaultScaleStrategy
 ]
 
-{ #category : 'api - scaling' }
+{ #category : #'api - scaling' }
 BlScalableElement >> maxScale: aNumber [
 	self scaleStrategy: ((BlScalableMaxDecorator on: self scaleStrategy) maxScale: aNumber)
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlScalableElement >> measureMatching: anExtentMeasurementSpec [
 	| widthSpec heightSpec aTransformedBounds |
 	
@@ -132,7 +130,7 @@ BlScalableElement >> measureMatching: anExtentMeasurementSpec [
 	self contentElement measure: widthSpec @ heightSpec
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlScalableElement >> measureScale [
 	"Compute and return a scale factor of the content element based on the current scale strategy"
 	| aScaleFactor |
@@ -150,12 +148,12 @@ BlScalableElement >> measureScale [
 	^ aScaleFactor
 ]
 
-{ #category : 'api - scaling' }
+{ #category : #'api - scaling' }
 BlScalableElement >> minScale: aNumber [
 	self scaleStrategy: ((BlScalableMinDecorator on: self scaleStrategy) minScale: aNumber)
 ]
 
-{ #category : 'hooks - children' }
+{ #category : #'hooks - children' }
 BlScalableElement >> onChildAdded: anElement [
 	"I make sure that there is only one child"
 	super onChildAdded: anElement.
@@ -168,7 +166,7 @@ BlScalableElement >> onChildAdded: anElement [
 	contentElement := anElement
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlScalableElement >> onLayout: aBounds context: aBlElementBoundsUpdateContext [
 	| aContentBounds |
 
@@ -181,7 +179,7 @@ BlScalableElement >> onLayout: aBounds context: aBlElementBoundsUpdateContext [
 	self contentElement applyLayoutIn: aContentBounds context: aBlElementBoundsUpdateContext
 ]
 
-{ #category : 'layout' }
+{ #category : #layout }
 BlScalableElement >> onMeasure: anExtentMeasurementSpec [
 	| aScaleFactor aTransformedExtent |
 	"First we perform a default measurement"
@@ -200,7 +198,7 @@ BlScalableElement >> onMeasure: anExtentMeasurementSpec [
 	self measuredExtent: (anExtentMeasurementSpec sizeFor: aTransformedExtent)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableElement >> scaleStrategy [
 	"Return scale strategy used to compute scaling factor of the content element"
 	self
@@ -210,7 +208,7 @@ BlScalableElement >> scaleStrategy [
 	^ scaleStrategy
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableElement >> scaleStrategy: aBlScalableStrategy [
 	"Set scale strategy used to compute scaling factor of the content element.
 	Note: I request layout update"

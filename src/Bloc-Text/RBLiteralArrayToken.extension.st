@@ -1,6 +1,6 @@
-Extension { #name : 'RBLiteralArrayToken' }
+Extension { #name : #RBLiteralArrayToken }
 
-{ #category : '*Bloc-Text' }
+{ #category : #'*Bloc-Text' }
 RBLiteralArrayToken >> acceptVisitor: aVisitor [
 
 	^ aVisitor visitLiteralArrayToken: self

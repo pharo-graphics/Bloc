@@ -1,6 +1,6 @@
-Extension { #name : 'BlElement' }
+Extension { #name : #BlElement }
 
-{ #category : '*Bloc-Theme' }
+{ #category : #'*Bloc-Theme' }
 BlElement >> theme [
 
 	self deprecated: 'To be removed'.
@@ -12,7 +12,7 @@ BlElement >> theme [
 				ifFalse: [ BlTheme default ] ]
 ]
 
-{ #category : '*Bloc-Theme' }
+{ #category : #'*Bloc-Theme' }
 BlElement >> theme: aTheme [
 
 	self deprecated: 'To be removed'.

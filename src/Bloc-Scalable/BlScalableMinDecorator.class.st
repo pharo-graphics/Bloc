@@ -5,24 +5,22 @@ Deafult min scale is set to 1.0
 
 "
 Class {
-	#name : 'BlScalableMinDecorator',
-	#superclass : 'BlScalableStrategyDecorator',
+	#name : #BlScalableMinDecorator,
+	#superclass : #BlScalableStrategyDecorator,
 	#instVars : [
 		'minScale'
 	],
-	#category : 'Bloc-Scalable-Strategies',
-	#package : 'Bloc-Scalable',
-	#tag : 'Strategies'
+	#category : #'Bloc-Scalable-Strategies'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScalableMinDecorator >> initialize [
 	super initialize.
 	
 	minScale := 1.0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableMinDecorator >> minScale [
 	"Return a minimum scale factor of the content element inside of scalable element"
 	<return: #Number>
@@ -30,7 +28,7 @@ BlScalableMinDecorator >> minScale [
 	^ minScale
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableMinDecorator >> minScale: aNumber [
 	self
 		assert: [ aNumber > 0 ]
@@ -39,7 +37,7 @@ BlScalableMinDecorator >> minScale: aNumber [
 	minScale := aNumber
 ]
 
-{ #category : 'scale' }
+{ #category : #scale }
 BlScalableMinDecorator >> scale: aContentElement within: aScalableElement [
 	"Modify a scale factor of a content element within scalable element.
 	Note: I am used during measurement pass, so you must only rely on measured bounds!"

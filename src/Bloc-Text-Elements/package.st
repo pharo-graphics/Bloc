@@ -1,1 +1,1 @@
-Package { #name : 'Bloc-Text-Elements' }
+Package { #name : #'Bloc-Text-Elements' }

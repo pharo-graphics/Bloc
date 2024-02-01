@@ -1,32 +1,30 @@
 Class {
-	#name : 'BlTaskAction',
-	#superclass : 'BlTask',
+	#name : #BlTaskAction,
+	#superclass : #BlTask,
 	#instVars : [
 		'action'
 	],
-	#category : 'Bloc-Space - Tasks',
-	#package : 'Bloc',
-	#tag : 'Space - Tasks'
+	#category : #'Bloc-Space - Tasks'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTaskAction >> action [
 	^ action
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTaskAction >> action: aBlock [
 	action := aBlock
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlTaskAction >> initialize [
 	super initialize.
 	
 	action := [ :optionalThisTask | ]
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlTaskAction >> printOn: aStream [
 	aStream
 		print: self class name;
@@ -36,7 +34,7 @@ BlTaskAction >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlTaskAction >> run [
 	self action isClosure
 		ifTrue: [ self action cull: self ]

@@ -3,32 +3,30 @@ I am a secondary mouse button. In most cases is bound to the right button and us
 
 "
 Class {
-	#name : 'BlMouseSecondaryButton',
-	#superclass : 'BlMouseNamedButton',
-	#category : 'Bloc-Events',
-	#package : 'Bloc',
-	#tag : 'Events'
+	#name : #BlMouseSecondaryButton,
+	#superclass : #BlMouseNamedButton,
+	#category : #'Bloc-Events'
 }
 
-{ #category : 'event creation' }
+{ #category : #'event creation' }
 BlMouseSecondaryButton >> clickEventClass [
 
 	^ BlSecondaryClickEvent 
 ]
 
-{ #category : 'action dispatching' }
+{ #category : #'action dispatching' }
 BlMouseSecondaryButton >> ifPrimary: aPrimBlock secondary: aSecBlock middle: aMidBlock other: anotherBlock [
 
 	^ aSecBlock value
 ]
 
-{ #category : 'event creation' }
+{ #category : #'event creation' }
 BlMouseSecondaryButton >> mouseDownEventClass [
 
 	^ BlSecondaryMouseDownEvent 
 ]
 
-{ #category : 'event creation' }
+{ #category : #'event creation' }
 BlMouseSecondaryButton >> mouseUpEventClass [
 
 	^ BlSecondaryMouseUpEvent 

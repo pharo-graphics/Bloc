@@ -3,14 +3,12 @@ I have been automatically converted and probably manually tweaked from BlBoundsM
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlBoundsMatcherTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-UnitedTests-Bounds',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Bounds'
+	#name : #BlBoundsMatcherTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-UnitedTests-Bounds'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBoundsMatcherTest >> testChildStartEqualParentStartWhenEquals [
 	<sampleInstance>
 	| aMatcher |
@@ -23,7 +21,7 @@ BlBoundsMatcherTest >> testChildStartEqualParentStartWhenEquals [
 	^ aMatcher
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBoundsMatcherTest >> testChildStartEqualParentStartWhenGreater [
 	<sampleInstance>
 	| aMatcher |
@@ -36,7 +34,7 @@ BlBoundsMatcherTest >> testChildStartEqualParentStartWhenGreater [
 	^ aMatcher
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBoundsMatcherTest >> testChildStartEqualParentStartWhenLess [
 	<sampleInstance>
 	| aMatcher |
@@ -49,7 +47,7 @@ BlBoundsMatcherTest >> testChildStartEqualParentStartWhenLess [
 	^ aMatcher
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBoundsMatcherTest >> testChildStartGreaterThanParentStartWhenEquals [
 	<sampleInstance>
 	| aMatcher |
@@ -62,7 +60,7 @@ BlBoundsMatcherTest >> testChildStartGreaterThanParentStartWhenEquals [
 	^ aMatcher
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBoundsMatcherTest >> testChildStartGreaterThanParentStartWhenGreater [
 	<sampleInstance>
 	| aMatcher |
@@ -75,7 +73,7 @@ BlBoundsMatcherTest >> testChildStartGreaterThanParentStartWhenGreater [
 	^ aMatcher
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBoundsMatcherTest >> testChildStartGreaterThanParentStartWhenLess [
 	<sampleInstance>
 	| aMatcher |
@@ -88,7 +86,7 @@ BlBoundsMatcherTest >> testChildStartGreaterThanParentStartWhenLess [
 	^ aMatcher
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBoundsMatcherTest >> testChildStartLessThanParentStartWhenEquals [
 	<sampleInstance>
 	| aMatcher |
@@ -101,7 +99,7 @@ BlBoundsMatcherTest >> testChildStartLessThanParentStartWhenEquals [
 	^ aMatcher
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBoundsMatcherTest >> testChildStartLessThanParentStartWhenGreater [
 	<sampleInstance>
 	| aMatcher |
@@ -114,7 +112,7 @@ BlBoundsMatcherTest >> testChildStartLessThanParentStartWhenGreater [
 	^ aMatcher
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBoundsMatcherTest >> testChildStartLessThanParentStartWhenLess [
 	<sampleInstance>
 	| aMatcher |

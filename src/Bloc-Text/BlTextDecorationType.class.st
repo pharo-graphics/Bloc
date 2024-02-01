@@ -1,37 +1,35 @@
 Class {
-	#name : 'BlTextDecorationType',
-	#superclass : 'Object',
-	#category : 'Bloc-Text-Text-Decoration',
-	#package : 'Bloc-Text',
-	#tag : 'Text-Decoration'
+	#name : #BlTextDecorationType,
+	#superclass : #Object,
+	#category : #'Bloc-Text-Text-Decoration'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlTextDecorationType class >> isAbstract [
 	^ self = BlTextDecorationType
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDecorationType class >> lineThrough [
 	^ BlTextDecorationLineThroughType uniqueInstance
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDecorationType class >> overline [
 	^ BlTextDecorationOverlineType uniqueInstance
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlTextDecorationType class >> underline [
 	^ BlTextDecorationUnderlineType uniqueInstance
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 BlTextDecorationType >> typesDo: aBlock [
 	
 ]
 
-{ #category : 'logical operations' }
+{ #category : #'logical operations' }
 BlTextDecorationType >> | anOtherDecorationType [
 	^ self subclassResponsibility
 ]

@@ -2,19 +2,17 @@
 I am an integration test of all key combinations
 "
 Class {
-	#name : 'BlKeyCombinationTest',
-	#superclass : 'TestCase',
+	#name : #BlKeyCombinationTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'buffer',
 		'event',
 		'handler'
 	],
-	#category : 'Bloc-Tests-KeyBinding',
-	#package : 'Bloc-Tests',
-	#tag : 'KeyBinding'
+	#category : #'Bloc-Tests-KeyBinding'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlKeyCombinationTest >> setUp [
 	super setUp.
 
@@ -23,7 +21,7 @@ BlKeyCombinationTest >> setUp [
 	handler := BlShortcutHandlerWithShortcuts new.
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlKeyCombinationTest >> testKeyCodeCombination [
 
 	| shortcut flag |
@@ -45,7 +43,7 @@ BlKeyCombinationTest >> testKeyCodeCombination [
 	self assert: flag.
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlKeyCombinationTest >> testNoMatchKeyCodeCombination [
 
 	| shortcut flag |

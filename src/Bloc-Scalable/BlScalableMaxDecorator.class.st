@@ -5,24 +5,22 @@ Deafult max scale is set to 1.0
 
 "
 Class {
-	#name : 'BlScalableMaxDecorator',
-	#superclass : 'BlScalableStrategyDecorator',
+	#name : #BlScalableMaxDecorator,
+	#superclass : #BlScalableStrategyDecorator,
 	#instVars : [
 		'maxScale'
 	],
-	#category : 'Bloc-Scalable-Strategies',
-	#package : 'Bloc-Scalable',
-	#tag : 'Strategies'
+	#category : #'Bloc-Scalable-Strategies'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlScalableMaxDecorator >> initialize [
 	super initialize.
 	
 	maxScale := 1.0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableMaxDecorator >> maxScale [
 	"Return a maximum scale factor of the content element inside of scalable element"
 	<return: #Number>
@@ -30,7 +28,7 @@ BlScalableMaxDecorator >> maxScale [
 	^ maxScale
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlScalableMaxDecorator >> maxScale: aNumber [
 	self
 		assert: [ aNumber > 0 ]
@@ -39,7 +37,7 @@ BlScalableMaxDecorator >> maxScale: aNumber [
 	maxScale := aNumber
 ]
 
-{ #category : 'scale' }
+{ #category : #scale }
 BlScalableMaxDecorator >> scale: aContentElement within: aScalableElement [
 	"Modify a scale factor of a content element within scalable element.
 	Note: I am used during measurement pass, so you must only rely on measured bounds!"

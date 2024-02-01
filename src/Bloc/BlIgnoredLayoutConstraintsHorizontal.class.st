@@ -1,21 +1,19 @@
 Class {
-	#name : 'BlIgnoredLayoutConstraintsHorizontal',
-	#superclass : 'BlLayoutConstraintsAxis',
+	#name : #BlIgnoredLayoutConstraintsHorizontal,
+	#superclass : #BlLayoutConstraintsAxis,
 	#instVars : [
 		'alignment',
 		'weight'
 	],
-	#category : 'Bloc-Layouts-Basic',
-	#package : 'Bloc',
-	#tag : 'Layouts-Basic'
+	#category : #'Bloc-Layouts-Basic'
 }
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlIgnoredLayoutConstraintsHorizontal >> alignCenter [
 	alignment := BlElementAlignment horizontal center
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlIgnoredLayoutConstraintsHorizontal >> alignCenterAt: aUnitCoordinateNumber [
 	"Align the center of the element vertically with a unit-coordinate inside of the parent"
 
@@ -24,12 +22,12 @@ BlIgnoredLayoutConstraintsHorizontal >> alignCenterAt: aUnitCoordinateNumber [
 		relativeAlignment: BlElementAlignment horizontal center
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlIgnoredLayoutConstraintsHorizontal >> alignLeft [
 	alignment := BlElementAlignment horizontal start
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlIgnoredLayoutConstraintsHorizontal >> alignLeftAt: aUnitCoordinateNumber [
 	"Align the left of the element horizontally with a unit-coordinate inside of the parent"
 
@@ -38,17 +36,17 @@ BlIgnoredLayoutConstraintsHorizontal >> alignLeftAt: aUnitCoordinateNumber [
 		relativeAlignment: BlElementAlignment horizontal start
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlIgnoredLayoutConstraintsHorizontal >> alignNone [
 	alignment := BlElementAlignment horizontal null
 ]
 
-{ #category : 'alignment' }
+{ #category : #alignment }
 BlIgnoredLayoutConstraintsHorizontal >> alignRight [
 	alignment := BlElementAlignment horizontal end
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlIgnoredLayoutConstraintsHorizontal >> alignRightAt: aUnitCoordinateNumber [
 	"Align the right of the element horizontally with a unit-coordinate inside of the parent"
 
@@ -57,12 +55,12 @@ BlIgnoredLayoutConstraintsHorizontal >> alignRightAt: aUnitCoordinateNumber [
 		relativeAlignment: BlElementAlignment horizontal end
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlIgnoredLayoutConstraintsHorizontal >> alignment [
 	^ alignment
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlIgnoredLayoutConstraintsHorizontal >> initialize [
 	super initialize.
 	
@@ -70,14 +68,14 @@ BlIgnoredLayoutConstraintsHorizontal >> initialize [
 	weight := 1.0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlIgnoredLayoutConstraintsHorizontal >> weight [
 	<return: #Number>
 
 	^ weight
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlIgnoredLayoutConstraintsHorizontal >> weight: aNumber [
 	self
 		assert: [ aNumber isNotNil ]
