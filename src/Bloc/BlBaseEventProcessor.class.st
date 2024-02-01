@@ -9,8 +9,9 @@ Class {
 	#category : #'Bloc-Space - Events'
 }
 
-{ #category : #'as yet unclassified' }
-BlBaseEventProcessor class >> space:  aSpace [
+{ #category : #'instance creation' }
+BlBaseEventProcessor class >> space: aSpace [
+
 	^ self new
 		space: aSpace;
 		yourself
@@ -48,13 +49,4 @@ BlBaseEventProcessor >> space [
 { #category : #accessing }
 BlBaseEventProcessor >> space: aSpace [
 	space := aSpace
-]
-
-{ #category : #accessing }
-BlBaseEventProcessor >> telemetry [
-	<return: #BlTelemetry>
-
-	^ self space
-		ifNil: [ BlNullTelemetry uniqueInstance ]
-		ifNotNil: [ :aSpace | aSpace telemetry ]
 ]

@@ -445,19 +445,25 @@ BlElement >> applyLayoutSafelyIn: aRectangle context: aBlElementBoundsUpdateCont
 	"Fast exit if I or any of my children did not request layout update
 	and if my current bounds are the same as aRectangle"
 	(self isLayoutRequested or: [
-		self layout mayInfluencePosition not
-			or: [ extentChanged or: [ newPosition ~= self position ] ] ])
+		self layout mayInfluencePosition not or: [
+			extentChanged or: [ newPosition ~= self position ] ] ])
 		ifFalse: [ ^ self ].
 
 	"! actually change my position and extent !"
-	self position: newPosition extent: newExtent context: aBlElementBoundsUpdateContext.
+	self
+		position: newPosition
+		extent: newExtent
+		context: aBlElementBoundsUpdateContext.
 
-	"if my extent did not change and if I or any of my children did not request layout we do nothing"
-	(extentChanged or: [ self isLayoutRequested or: [ self layout mayInfluencePosition ] ])
+	"if my extent did not change and if I or any of my children did not
+	request layout we do nothing"
+	(extentChanged or: [
+		self isLayoutRequested or: [
+			self layout mayInfluencePosition ] ])
 		ifTrue: [
-			self telemetry
-				timeSync: [ 'Layout ', self class name ]
-				during: [ self onLayout: aRectangle context: aBlElementBoundsUpdateContext ] ].
+			self
+				onLayout: aRectangle
+				context: aBlElementBoundsUpdateContext ].
 
 	"we are done, mark that there are no layout requests pending"
 	self privateRequestingLayout: false
@@ -3818,15 +3824,6 @@ BlElement >> taskQueue [
 	<return: #BlTaskQueue>
 	
 	^ taskQueue
-]
-
-{ #category : #accessing }
-BlElement >> telemetry [
-	<return: #BlTelemetry>
-
-	^ self space
-		ifNil: [ BlNullTelemetry uniqueInstance ]
-		ifNotNil: [ :aSpace | aSpace telemetry ]
 ]
 
 { #category : #'children accessing' }

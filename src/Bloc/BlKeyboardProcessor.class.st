@@ -113,24 +113,16 @@ BlKeyboardProcessor >> processKeyDown: anEvent [
 
 	self buffer add: anEvent.
 	
-	aTarget := self telemetry
-		timeSync: [ 'Find key down target ' ]
-		during: [ self findTarget ].
-
+	aTarget := self findTarget.
 	anEvent target: aTarget.
-	
-	self telemetry
-		timeSync: [ 'Fire key down event ' ]
-		during: [ self fireEvent: anEvent ].
+	self fireEvent: anEvent.
 
 	aShortcutEvent := BlShortcutEvent new.
 	aShortcutEvent buffer: self buffer.
 	aShortcutEvent target: aTarget.
 	aShortcutEvent modifiers: anEvent modifiers.
 
-	self telemetry
-		timeSync: [ 'Fire shortcut event ' ]
-		during: [ self fireEvent: aShortcutEvent ].
+	self fireEvent: aShortcutEvent.
 
 	previousShortcutTime := self space time now.
 
@@ -146,15 +138,9 @@ BlKeyboardProcessor >> processKeyUp: anEvent [
 	
 	self buffer remove: anEvent.
 	
-	aTarget := self telemetry
-		timeSync: [ 'Find key up target ' ]
-		during: [ self findTarget ].
-
+	aTarget := self findTarget.
 	anEvent target: aTarget.
-
-	self telemetry
-		timeSync: [ 'Fire key up event ' ]
-		during: [ self fireEvent: anEvent ].
+	self fireEvent: anEvent.
 
 	self buffer isEmpty
 		ifTrue: [ preventKeystrokes := false ]

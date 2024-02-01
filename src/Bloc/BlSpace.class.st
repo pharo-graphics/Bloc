@@ -50,7 +50,6 @@ Class {
 		'frame',
 		'elementsNeedingPaint',
 		'elementsNeedingLayout',
-		'telemetry',
 		'reference',
 		'iconStencil',
 		'rootElement',
@@ -1199,7 +1198,6 @@ BlSpace >> initialize [
 	tasks := BlSpaceTaskQueue space: self.
 	time := BlTime real.
 	frame := BlSpaceFrame new.
-	telemetry := BlNullTelemetry uniqueInstance.
 
 	rootElement := self defaultRoot.
 
@@ -1661,18 +1659,6 @@ BlSpace >> taskQueue [
 	<return: #BlSpaceTaskQueue>
 	
 	^ tasks
-]
-
-{ #category : #'NOT-USED-telemetry' }
-BlSpace >> telemetry [
-	<return: #BlTelemetry>
-	
-	^ telemetry
-]
-
-{ #category : #'NOT-USED-telemetry' }
-BlSpace >> telemetry: aBlTelemetry [
-	telemetry := aBlTelemetry
 ]
 
 { #category : #accessing }
