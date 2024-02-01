@@ -557,11 +557,6 @@ BlSpace >> defaultEventListener [
 ]
 
 { #category : #initialization }
-BlSpace >> defaultEventRecorder [
-	^ BlEmptyEventRecorder new
-]
-
-{ #category : #initialization }
 BlSpace >> defaultExtent [
 	^ 800@600
 ]
@@ -845,24 +840,14 @@ BlSpace >> eventDispatcher [
 
 { #category : #accessing }
 BlSpace >> eventListener [
+
 	^ eventListener
 ]
 
 { #category : #accessing }
-BlSpace >> eventListener: anObject [
-	eventListener := anObject
-]
+BlSpace >> eventListener: anEventListener [
 
-{ #category : #accessing }
-BlSpace >> eventRecorder [
-	<return: #BlSpaceEventRecorder>
-
-	^ eventRecorder
-]
-
-{ #category : #accessing }
-BlSpace >> eventRecorder: anEventRecorder [
-	eventRecorder := anEventRecorder
+	eventListener := anEventListener
 ]
 
 { #category : #'window - properties' }
@@ -1205,7 +1190,6 @@ BlSpace >> initialize [
 
 	eventDispatcher := self defaultEventDispatcher.
 	eventListener := self defaultEventListener.
-	eventRecorder := self defaultEventRecorder.
 	self initDispatcher.
 
 	mouseProcessor := BlMouseProcessor space: self.

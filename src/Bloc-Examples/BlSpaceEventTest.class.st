@@ -21,19 +21,6 @@ BlSpaceEventTest >> setUp [
 		  yourself
 ]
 
-{ #category : #'event handling' }
-BlSpaceEventTest >> testIgnoreSpaceEventsAfterCloseRequest [
-	<expectedFailure>
-
-	space eventRecorder: BlMemoryEventRecorder new.
-	space show.
-
-	space hostSpace enqueueEvent:
-		(BlSpaceCloseRequest new timestamp: DateAndTime now).
-
-	self assert: space hasHostSpace not
-]
-
 { #category : #'show / close' }
 BlSpaceEventTest >> testSpaceClosed [
 	<expectedFailure>

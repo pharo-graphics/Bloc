@@ -24,23 +24,18 @@ BlSpaceFrameEventPhase >> runOn: aSpace [
 			for example, will be handled by the wrong element"
 			aSpace doUpdateFocus.
 
-			theSpace hostSpaceDo: [ 
-				"Process events enqueued by host space and dispatch them to the scene graph"
-
-				theSpace eventRecorder onPulse.
-
-				theSpace hostSpaceDo: [ :aHostSpace |
-					aHostSpace fetchedEventsDo: [ :anEvent |
-					"we have to test for existance of the host space before handling each event because
-					it is possible that a space is closed due to an event"
-					
-					theSpace telemetry
-						timeSync: [ 'Process event {1}' format: { anEvent } ]
-						during: [
-							theSpace hostSpaceDo: [
-								theSpace eventRecorder record: anEvent.
-								theSpace eventDispatcher dispatchEvent: anEvent ] ]  ] ].
+			"Process events enqueued by host space and dispatch them to the scene graph"
+			theSpace hostSpaceDo: [ :aHostSpace |
+				aHostSpace fetchedEventsDo: [ :anEvent |
+				"we have to test for existance of the host space before handling each event because
+				it is possible that a space is closed due to an event"
 				
-				theSpace hostSpaceDo: [ :aHostSpace | aHostSpace generateEvents ] ].
+				theSpace telemetry
+					timeSync: [ 'Process event {1}' format: { anEvent } ]
+					during: [
+						theSpace hostSpaceDo: [
+							theSpace eventDispatcher dispatchEvent: anEvent ] ]  ] ].
+			
+			theSpace hostSpaceDo: [ :aHostSpace | aHostSpace generateEvents ].
 			theSpace mouseProcessor generateEvents ]
 ]
