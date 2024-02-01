@@ -1,43 +1,41 @@
 Class {
-	#name : 'BlRelativeAlignment',
-	#superclass : 'BlElementAlignment',
-	#category : 'Bloc-Layouts-Alignment',
-	#package : 'Bloc',
-	#tag : 'Layouts-Alignment'
+	#name : #BlRelativeAlignment,
+	#superclass : #BlElementAlignment,
+	#category : 'Bloc-Layouts-Alignment'
 }
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlRelativeAlignment class >> horizontal [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'class initialization' }
+{ #category : #'class initialization' }
 BlRelativeAlignment class >> initialize [
 
 	self initializeSingletons
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlRelativeAlignment class >> oriented: aBlLayoutOrientation [
 	^ aBlLayoutOrientation of: self
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlRelativeAlignment class >> vertical [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlRelativeAlignment >> horizontal [
 	^ self class horizontal
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlRelativeAlignment >> oriented: aBlLayoutOrientation [
 	^ self class oriented: aBlLayoutOrientation
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 BlRelativeAlignment >> vertical [
 	^ self class vertical
 ]

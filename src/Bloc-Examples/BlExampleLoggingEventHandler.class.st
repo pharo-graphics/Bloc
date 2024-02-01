@@ -3,32 +3,30 @@ I am a special event handler that increases `counter` every time I handle an eve
 
 "
 Class {
-	#name : 'BlExampleLoggingEventHandler',
-	#superclass : 'BlEventHandler',
+	#name : #BlExampleLoggingEventHandler,
+	#superclass : #BlEventHandler,
 	#instVars : [
 		'counter'
 	],
-	#category : 'Bloc-Examples-EventHandling',
-	#package : 'Bloc-Examples',
-	#tag : 'EventHandling'
+	#category : 'Bloc-Examples-EventHandling'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlExampleLoggingEventHandler class >> on: anEventClass [
 	^ self new eventClass: anEventClass
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlExampleLoggingEventHandler >> counter [
 	^ counter
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlExampleLoggingEventHandler >> counter: anObject [
 	counter := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 BlExampleLoggingEventHandler >> initialize [
 	super initialize.
 	

@@ -1,13 +1,11 @@
 Class {
-	#name : 'BlTaskAtQueueTest',
-	#superclass : 'TestCase',
+	#name : #BlTaskAtQueueTest,
+	#superclass : #TestCase,
 	#classTraits : 'TAssertable classTrait',
-	#category : 'Bloc-Examples-Tasks',
-	#package : 'Bloc-Examples',
-	#tag : 'Tasks'
+	#category : 'Bloc-Examples-Tasks'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 BlTaskAtQueueTest >> newTaskAtQueue [
 	"Answer the `BlTaskAtQueue` used for the examples.
 	The queue is configured to use a simulated clock with a fixed current time for reproduceable tests."
@@ -20,13 +18,13 @@ BlTaskAtQueueTest >> newTaskAtQueue [
 			yourself
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlTaskAtQueueTest >> startTime [
 
 	^ DateAndTime fromString: '2020-11-07T12:19:53.275521+01:00'
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTaskAtQueueTest >> testRunNow [
 	"Queue a task that has a scheduled time in the past."
 
@@ -39,7 +37,7 @@ BlTaskAtQueueTest >> testRunNow [
 	self assert: taskRun
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTaskAtQueueTest >> testRunOneInOneSecond [
 	"Queue a task that has a scheduled time in the past."
 
@@ -58,7 +56,7 @@ BlTaskAtQueueTest >> testRunOneInOneSecond [
 	self assert: taskRun
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTaskAtQueueTest >> testRunPastTime [
 	"Queue a task that has a scheduled time in the past."
 
@@ -71,7 +69,7 @@ BlTaskAtQueueTest >> testRunPastTime [
 	self assert: taskRun
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTaskAtQueueTest >> testRunTwoOneThree [
 	"Queue three tasks, out of order, and confirm correct execution."
 

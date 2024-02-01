@@ -3,19 +3,17 @@ Is sent after a host space is shown
 
 "
 Class {
-	#name : 'BlParallelUniverseHostSpaceShownSignal',
-	#superclass : 'BlParallelUniverseSpaceSignal',
-	#category : 'Bloc-Universe - Parallel',
-	#package : 'Bloc',
-	#tag : 'Universe - Parallel'
+	#name : #BlParallelUniverseHostSpaceShownSignal,
+	#superclass : #BlParallelUniverseSpaceSignal,
+	#category : 'Bloc-Universe - Parallel'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlParallelUniverseHostSpaceShownSignal class >> label [
 	^ 'Show space host'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlParallelUniverseHostSpaceShownSignal class >> nextSignals [
 	^ { BlParallelUniverseSpaceRootAssignedSignal }
 ]

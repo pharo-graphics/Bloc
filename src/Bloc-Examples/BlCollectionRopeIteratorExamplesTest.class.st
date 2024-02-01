@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlCollectionRopeIteratorExamplesTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Examples-Rope',
-	#package : 'Bloc-Examples',
-	#tag : 'Rope'
+	#name : #BlCollectionRopeIteratorExamplesTest,
+	#superclass : #TestCase,
+	#category : 'Bloc-Examples-Rope'
 }
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlCollectionRopeIteratorExamplesTest >> testNextLineIndicesWithCrlf_0 [
 
 	<sampleInstance>
@@ -34,7 +32,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextLineIndicesWithCrlf_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlCollectionRopeIteratorExamplesTest >> testNextLineIndicesWithCrlf_08 [
 
 	<sampleInstance>
@@ -60,7 +58,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextLineIndicesWithCrlf_08 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlCollectionRopeIteratorExamplesTest >> testNextLineIndicesWithCrlf_16 [
 
 	<sampleInstance>
@@ -87,7 +85,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextLineIndicesWithCrlf_16 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlCollectionRopeIteratorExamplesTest >> testNextLineIndicesWithCrlf_18 [
 
 	<sampleInstance>
@@ -113,7 +111,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextLineIndicesWithCrlf_18 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlCollectionRopeIteratorExamplesTest >> testNextLineWithCr_0 [
 
 	<sampleInstance>
@@ -141,7 +139,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextLineWithCr_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlCollectionRopeIteratorExamplesTest >> testNextLineWithCr_07 [
 
 	<sampleInstance>
@@ -167,7 +165,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextLineWithCr_07 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlCollectionRopeIteratorExamplesTest >> testNextLineWithCr_14 [
 
 	<sampleInstance>
@@ -193,7 +191,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextLineWithCr_14 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlCollectionRopeIteratorExamplesTest >> testNextLineWithCr_15 [
 
 	<sampleInstance>
@@ -219,7 +217,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextLineWithCr_15 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlCollectionRopeIteratorExamplesTest >> testNextLineWithCrlf [
 
 	<sampleInstance>
@@ -236,7 +234,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextLineWithCrlf [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlCollectionRopeIteratorExamplesTest >> testNextLineWithLf_0 [
 
 	<sampleInstance>
@@ -264,7 +262,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextLineWithLf_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlCollectionRopeIteratorExamplesTest >> testNextLineWithLf_07 [
 
 	<sampleInstance>
@@ -290,7 +288,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextLineWithLf_07 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlCollectionRopeIteratorExamplesTest >> testNextLineWithLf_14 [
 
 	<sampleInstance>
@@ -316,7 +314,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextLineWithLf_14 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next line' }
+{ #category : #'examples - next line' }
 BlCollectionRopeIteratorExamplesTest >> testNextLineWithLf_15 [
 
 	<sampleInstance>
@@ -342,7 +340,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextLineWithLf_15 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next segment' }
+{ #category : #'examples - next segment' }
 BlCollectionRopeIteratorExamplesTest >> testNextSegmentWithLookAhead_at_0 [
 
 	<sampleInstance>
@@ -375,7 +373,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextSegmentWithLookAhead_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next segment' }
+{ #category : #'examples - next segment' }
 BlCollectionRopeIteratorExamplesTest >> testNextSegmentWithLookAhead_at_3 [
 
 	<sampleInstance>
@@ -408,7 +406,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextSegmentWithLookAhead_at_3 [
 	^ anIterator
 ]
 
-{ #category : 'examples - next segment' }
+{ #category : #'examples - next segment' }
 BlCollectionRopeIteratorExamplesTest >> testNextSegmentWithLookAhead_at_5 [
 
 	<sampleInstance>
@@ -441,7 +439,7 @@ BlCollectionRopeIteratorExamplesTest >> testNextSegmentWithLookAhead_at_5 [
 	^ anIterator
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlCollectionRopeIteratorExamplesTest >> testSmall [
 
 	<sampleInstance>
@@ -460,7 +458,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_nextSpan_at_0 [
 
 	<sampleInstance>
@@ -474,7 +472,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_nextSpan_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_nextSpan_at_1 [
 
 	<sampleInstance>
@@ -488,7 +486,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_nextSpan_at_1 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_nextSpan_at_2 [
 
 	<sampleInstance>
@@ -502,7 +500,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_nextSpan_at_2 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_nextSpan_at_3 [
 
 	<sampleInstance>
@@ -516,7 +514,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_nextSpan_at_3 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_nextSpan_at_4 [
 
 	<sampleInstance>
@@ -530,7 +528,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_nextSpan_at_4 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_nextSpan_at_5 [
 	"Iterator throws an error when the end is reached"
 
@@ -548,7 +546,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_nextSpan_at_5 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_next_at_0 [
 
 	<sampleInstance>
@@ -565,7 +563,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_next_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_next_at_1 [
 
 	<sampleInstance>
@@ -582,7 +580,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_next_at_1 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_next_at_2 [
 
 	<sampleInstance>
@@ -599,7 +597,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_next_at_2 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_next_at_3 [
 
 	<sampleInstance>
@@ -616,7 +614,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_next_at_3 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_next_at_4 [
 
 	<sampleInstance>
@@ -633,7 +631,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_next_at_4 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_next_at_5 [
 	"Iterator throws an error when the end is reached"
 
@@ -651,7 +649,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_next_at_5 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_peek_at_0 [
 
 	<sampleInstance>
@@ -668,7 +666,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_peek_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_peek_at_1 [
 
 	<sampleInstance>
@@ -685,7 +683,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_peek_at_1 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_peek_at_2 [
 
 	<sampleInstance>
@@ -702,7 +700,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_peek_at_2 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_peek_at_3 [
 
 	<sampleInstance>
@@ -719,7 +717,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_peek_at_3 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_peek_at_4 [
 
 	<sampleInstance>
@@ -736,7 +734,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_peek_at_4 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_peek_at_5 [
 	"Iterator throws an error when the end is reached"
 
@@ -754,7 +752,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_peek_at_5 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_previous_at_0 [
 	"Iterator throws an error when the start is reached"
 
@@ -772,7 +770,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_previous_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_previous_at_1 [
 
 	<sampleInstance>
@@ -789,7 +787,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_previous_at_1 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_previous_at_2 [
 
 	<sampleInstance>
@@ -806,7 +804,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_previous_at_2 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_previous_at_3 [
 
 	<sampleInstance>
@@ -823,7 +821,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_previous_at_3 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_previous_at_4 [
 
 	<sampleInstance>
@@ -840,7 +838,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_previous_at_4 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_previous_at_5 [
 
 	<sampleInstance>
@@ -857,7 +855,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_previous_at_5 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_skip_0_at_0 [
 
 	<sampleInstance>
@@ -870,7 +868,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_skip_0_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_skip_1_at_0 [
 
 	<sampleInstance>
@@ -883,7 +881,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_skip_1_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_skip_2_at_0 [
 
 	<sampleInstance>
@@ -896,7 +894,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_skip_2_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_skip_3_at_0 [
 
 	<sampleInstance>
@@ -909,7 +907,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_skip_3_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_skip_4_at_0 [
 
 	<sampleInstance>
@@ -922,7 +920,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_skip_4_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_skip_5_at_0 [
 
 	<sampleInstance>
@@ -935,7 +933,7 @@ BlCollectionRopeIteratorExamplesTest >> testSmall_skip_5_at_0 [
 	^ anIterator
 ]
 
-{ #category : 'examples - enumeration' }
+{ #category : #'examples - enumeration' }
 BlCollectionRopeIteratorExamplesTest >> testSmall_skip_6_at_0 [
 	"Iterator throws an error when the end is reached"
 

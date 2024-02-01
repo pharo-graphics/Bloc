@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlMouseEventTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Examples-Event',
-	#package : 'Bloc-Examples',
-	#tag : 'Event'
+	#name : #BlMouseEventTest,
+	#superclass : #TestCase,
+	#category : 'Bloc-Examples-Event'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 BlMouseEventTest >> bottomLeftText: anEvent [
 
 	self
@@ -14,7 +12,7 @@ BlMouseEventTest >> bottomLeftText: anEvent [
 		for: anEvent currentTarget
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlMouseEventTest >> bottomRightText: anEvent [
 
 	self
@@ -22,7 +20,7 @@ BlMouseEventTest >> bottomRightText: anEvent [
 		for: anEvent currentTarget
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlMouseEventTest >> boundsOf: anElement [
 
 	| aRoot |
@@ -35,7 +33,7 @@ BlMouseEventTest >> boundsOf: anElement [
 	^ anElement bounds inParent: aRoot
 ]
 
-{ #category : 'running - instance creation' }
+{ #category : #'running - instance creation' }
 BlMouseEventTest >> newBox [
 
 	^ BlElement new
@@ -70,7 +68,7 @@ BlMouseEventTest >> newBox [
 		  yourself
 ]
 
-{ #category : 'running - instance creation' }
+{ #category : #'running - instance creation' }
 BlMouseEventTest >> newChild [
 
 	^ self newBox
@@ -80,7 +78,7 @@ BlMouseEventTest >> newChild [
 		  yourself
 ]
 
-{ #category : 'running - instance creation' }
+{ #category : #'running - instance creation' }
 BlMouseEventTest >> newGrandChild [
 
 	^ self newBox
@@ -90,7 +88,7 @@ BlMouseEventTest >> newGrandChild [
 		  yourself
 ]
 
-{ #category : 'running - instance creation' }
+{ #category : #'running - instance creation' }
 BlMouseEventTest >> newLabel [
 
 	^ BlTextElement new
@@ -101,7 +99,7 @@ BlMouseEventTest >> newLabel [
 		  yourself
 ]
 
-{ #category : 'running - instance creation' }
+{ #category : #'running - instance creation' }
 BlMouseEventTest >> newParent [
 
 	^ self newBox
@@ -113,7 +111,7 @@ BlMouseEventTest >> newParent [
 		  yourself
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlMouseEventTest >> pointToText: aPoint for: aTextElement [
 
 	aTextElement text: 
@@ -123,7 +121,7 @@ BlMouseEventTest >> pointToText: aPoint for: aTextElement [
 			 yourself)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlMouseEventTest >> testParentWithClip [
 
 	| gray red blue |
@@ -161,7 +159,7 @@ BlMouseEventTest >> testParentWithClip [
 	self assert: (gray findMouseEventTargetAt: 700 @ 500) isNil
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlMouseEventTest >> testParentWithoutClipChildWithClip [
 
 	| gray red blue |
@@ -199,7 +197,7 @@ BlMouseEventTest >> testParentWithoutClipChildWithClip [
 	self assert: (gray findMouseEventTargetAt: 700 @ 500) isNil
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlMouseEventTest >> testParentWithoutClipChildWithoutClip [
 
 	| gray red blue |
@@ -238,7 +236,7 @@ BlMouseEventTest >> testParentWithoutClipChildWithoutClip [
 	self assert: (gray findMouseEventTargetAt: 700 @ 500) isNil
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlMouseEventTest >> topLeftText: anEvent [
 
 	self
@@ -246,7 +244,7 @@ BlMouseEventTest >> topLeftText: anEvent [
 		for: anEvent currentTarget
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlMouseEventTest >> topRightText: anEvent [
 
 	self

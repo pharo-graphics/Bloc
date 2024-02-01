@@ -1,17 +1,15 @@
 Class {
-	#name : 'BlPtUnit',
-	#superclass : 'BlUnit',
-	#category : 'Bloc-Basic-Units',
-	#package : 'Bloc',
-	#tag : 'Basic-Units'
+	#name : #BlPtUnit,
+	#superclass : #BlUnit,
+	#category : 'Bloc-Basic-Units'
 }
 
-{ #category : 'printing' }
+{ #category : #printing }
 BlPtUnit >> printOn: aStream [
 	aStream nextPutAll: 'pt'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlPtUnit >> resolveLengthForValue: aCurrentValueOrBlock parent: aParentValueOrBlock global: aGlobalValueOrBlock [
 	<return: #Number>
 

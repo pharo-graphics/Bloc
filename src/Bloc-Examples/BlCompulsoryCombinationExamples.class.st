@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlCompulsoryCombinationExamples',
-	#superclass : 'BlKeyCombinationExamplesTest',
-	#category : 'Bloc-Examples-KeyBinding',
-	#package : 'Bloc-Examples',
-	#tag : 'KeyBinding'
+	#name : #BlCompulsoryCombinationExamples,
+	#superclass : #BlKeyCombinationExamplesTest,
+	#category : 'Bloc-Examples-KeyBinding'
 }
 
-{ #category : 'examples - combination' }
+{ #category : #'examples - combination' }
 BlCompulsoryCombinationExamples >> testCombinationWithA [
 
 	<sampleInstance>
@@ -22,7 +20,7 @@ BlCompulsoryCombinationExamples >> testCombinationWithA [
 	^ aCombination
 ]
 
-{ #category : 'examples - combination' }
+{ #category : #'examples - combination' }
 BlCompulsoryCombinationExamples >> testCombinationWithAB [
 
 	<sampleInstance>
@@ -40,7 +38,7 @@ BlCompulsoryCombinationExamples >> testCombinationWithAB [
 	^ aCombination
 ]
 
-{ #category : 'examples - combination' }
+{ #category : #'examples - combination' }
 BlCompulsoryCombinationExamples >> testCombinationWithABC [
 
 	<sampleInstance>
@@ -59,7 +57,7 @@ BlCompulsoryCombinationExamples >> testCombinationWithABC [
 	^ aCombination
 ]
 
-{ #category : 'examples - combination' }
+{ #category : #'examples - combination' }
 BlCompulsoryCombinationExamples >> testEmptyCombination [
 
 	<sampleInstance>
@@ -73,7 +71,7 @@ BlCompulsoryCombinationExamples >> testEmptyCombination [
 	^ aCombination
 ]
 
-{ #category : 'examples - store' }
+{ #category : #'examples - store' }
 BlCompulsoryCombinationExamples >> testStoreCombinationWithA [
 
 	<sampleInstance>
@@ -92,7 +90,7 @@ BlCompulsoryCombinationExamples >> testStoreCombinationWithA [
 	^ aStoreString
 ]
 
-{ #category : 'examples - store' }
+{ #category : #'examples - store' }
 BlCompulsoryCombinationExamples >> testStoreCombinationWithAB [
 
 	<sampleInstance>
@@ -111,7 +109,7 @@ BlCompulsoryCombinationExamples >> testStoreCombinationWithAB [
 	^ aStoreString
 ]
 
-{ #category : 'examples - store' }
+{ #category : #'examples - store' }
 BlCompulsoryCombinationExamples >> testStoreCombinationWithABC [
 
 	<sampleInstance>
@@ -130,7 +128,7 @@ BlCompulsoryCombinationExamples >> testStoreCombinationWithABC [
 	^ aStoreString
 ]
 
-{ #category : 'examples - store' }
+{ #category : #'examples - store' }
 BlCompulsoryCombinationExamples >> testStoreEmptyCombination [
 
 	<sampleInstance>

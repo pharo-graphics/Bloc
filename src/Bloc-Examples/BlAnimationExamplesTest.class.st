@@ -5,14 +5,12 @@ DOES NOT WORK
 
 "
 Class {
-	#name : 'BlAnimationExamplesTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Examples-Animation',
-	#package : 'Bloc-Examples',
-	#tag : 'Animation'
+	#name : #BlAnimationExamplesTest,
+	#superclass : #TestCase,
+	#category : 'Bloc-Examples-Animation'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlAnimationExamplesTest class >> ballsAnim [
 
 	<script: 'self ballsAnim'>
@@ -54,7 +52,7 @@ BlAnimationExamplesTest class >> ballsAnim [
 	space root addAnimation: (BlParallelAnimation new addAll: anims)
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlAnimationExamplesTest class >> bouncingText [
 	"Click on letters to start animation"
 	<script: 'self bouncingText'>
@@ -65,7 +63,7 @@ BlAnimationExamplesTest class >> bouncingText [
 		extent: 850 @ 520
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlAnimationExamplesTest class >> sequential [
 
 	<script: 'self sequential'>
@@ -93,7 +91,7 @@ BlAnimationExamplesTest class >> sequential [
 	space show
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlAnimationExamplesTest >> blueAt: anIndex [
 	| radians |
 	"0.0 <= anIndex <= 1.0"
@@ -104,7 +102,7 @@ BlAnimationExamplesTest >> blueAt: anIndex [
 	^ (radians - (Float pi / 2.0)) sin
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlAnimationExamplesTest >> bouncingText [
 	"Click on letters to start animation!"
 
@@ -139,7 +137,7 @@ BlAnimationExamplesTest >> bouncingText [
 	^ self frameContainer addChild: container
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlAnimationExamplesTest >> colorAt: anIndex [
 	| normalizedIndex |
 	"0.0 <= anIndex <= 1.0"
@@ -155,32 +153,32 @@ BlAnimationExamplesTest >> colorAt: anIndex [
 		b: (self blueAt: normalizedIndex)
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> exampleDate [
 	^ DateAndTime year: 2018 month: 3 day: 31
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> exampleDelay [
 	^ 0.5 seconds
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> exampleDuration [
 	^ 2 seconds
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> firstSequentialDuration [
 	^ 8 seconds
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> firstSequentialLoops [
 	^ 2
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlAnimationExamplesTest >> frameContainer [
 
 	<sampleInstance>
@@ -192,7 +190,7 @@ BlAnimationExamplesTest >> frameContainer [
 		  clipChildren: false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlAnimationExamplesTest >> greenAt: anIndex [
 	| radians |
 	"0.0 <= anIndex <= 1.0"
@@ -203,7 +201,7 @@ BlAnimationExamplesTest >> greenAt: anIndex [
 	^ radians sin
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlAnimationExamplesTest >> jiggleAnimation [
 
 	<sampleInstance>
@@ -222,7 +220,7 @@ BlAnimationExamplesTest >> jiggleAnimation [
 	^ anAnimation
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlAnimationExamplesTest >> radiansAt: anIndex [
 	"0.0 <= anIndex <= 1.0"
 	self assert: [ anIndex between: 0.0 and: 1.0 ].
@@ -230,7 +228,7 @@ BlAnimationExamplesTest >> radiansAt: anIndex [
 	^ anIndex * (Float pi * 3) / 2.0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlAnimationExamplesTest >> redAt: anIndex [
 	| radians |
 	"0.0 <= anIndex <= 1.0"
@@ -245,22 +243,22 @@ BlAnimationExamplesTest >> redAt: anIndex [
 	^ (radians + Float pi) sin
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> secondSequentialDelay [
 	^ 2 seconds
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> secondSequentialDuration [
 	^ 4 seconds
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> secondSequentialLoops [
 	^ 1
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> testBaseAnimation [
 
 	<sampleInstance>
@@ -279,7 +277,7 @@ BlAnimationExamplesTest >> testBaseAnimation [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> testBaseAnimationWithDelay [
 
 	<sampleInstance>
@@ -299,7 +297,7 @@ BlAnimationExamplesTest >> testBaseAnimationWithDelay [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> testBaseAnimationWithDelayAndDurationAndTwoLoops [
 
 	<sampleInstance>
@@ -321,7 +319,7 @@ BlAnimationExamplesTest >> testBaseAnimationWithDelayAndDurationAndTwoLoops [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> testBaseAnimationWithDelayAndTwoLoops [
 
 	<sampleInstance>
@@ -342,7 +340,7 @@ BlAnimationExamplesTest >> testBaseAnimationWithDelayAndTwoLoops [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> testInfiniteAnimation [
 
 	<sampleInstance>
@@ -363,7 +361,7 @@ BlAnimationExamplesTest >> testInfiniteAnimation [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> testSequentialAddFirstChild [
 	<sampleInstance>
 	
@@ -379,7 +377,7 @@ BlAnimationExamplesTest >> testSequentialAddFirstChild [
 	^ aSequentialAnimation
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> testSequentialAnimation [
 	<sampleInstance>
 	| aSequentialAnimation |
@@ -398,7 +396,7 @@ BlAnimationExamplesTest >> testSequentialAnimation [
 	^ aSequentialAnimation
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> testSequentialAnimationWithDelay [
 
 	<sampleInstance>
@@ -418,7 +416,7 @@ BlAnimationExamplesTest >> testSequentialAnimationWithDelay [
 	^ aSequentialAnimation
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> testSequentialAnimationWithDelayAndTwoLoops [
 
 	<sampleInstance>
@@ -440,7 +438,7 @@ BlAnimationExamplesTest >> testSequentialAnimationWithDelayAndTwoLoops [
 	^ aSequentialAnimation
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> test_1_1_sequential_addFirstChild [
 	<sampleInstance>
 	
@@ -456,7 +454,7 @@ BlAnimationExamplesTest >> test_1_1_sequential_addFirstChild [
 	^ aSequentialAnimation
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> test_1_2_sequential_addSecondChild [
 
 	<sampleInstance>
@@ -480,7 +478,7 @@ BlAnimationExamplesTest >> test_1_2_sequential_addSecondChild [
 	^ aSequentialAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> test_1_baseAnimation_start [
 
 	<sampleInstance>
@@ -506,7 +504,7 @@ BlAnimationExamplesTest >> test_1_baseAnimation_start [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - massive time delta - infinite' }
+{ #category : #'examples - massive time delta - infinite' }
 BlAnimationExamplesTest >> test_1_massive_infiniteAnimation_start [
 
 	<sampleInstance>
@@ -533,7 +531,7 @@ BlAnimationExamplesTest >> test_1_massive_infiniteAnimation_start [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - massive time delta - one' }
+{ #category : #'examples - massive time delta - one' }
 BlAnimationExamplesTest >> test_1_massive_oneLoopAnimation_start [
 
 	<sampleInstance>
@@ -558,7 +556,7 @@ BlAnimationExamplesTest >> test_1_massive_oneLoopAnimation_start [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - massive time delta - two' }
+{ #category : #'examples - massive time delta - two' }
 BlAnimationExamplesTest >> test_1_massive_twoLoopAnimation_start [
 
 	<sampleInstance>
@@ -584,7 +582,7 @@ BlAnimationExamplesTest >> test_1_massive_twoLoopAnimation_start [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> test_2_1_baseAnimation_step [
 
 	<sampleInstance>
@@ -611,7 +609,7 @@ BlAnimationExamplesTest >> test_2_1_baseAnimation_step [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - massive time delta - infinite' }
+{ #category : #'examples - massive time delta - infinite' }
 BlAnimationExamplesTest >> test_2_1_massive_infiniteAnimation_step_oneDuration [
 
 	<sampleInstance>
@@ -638,7 +636,7 @@ BlAnimationExamplesTest >> test_2_1_massive_infiniteAnimation_step_oneDuration [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - massive time delta - one' }
+{ #category : #'examples - massive time delta - one' }
 BlAnimationExamplesTest >> test_2_1_massive_oneLoopAnimation_step_oneDuration [
 
 	<sampleInstance>
@@ -664,7 +662,7 @@ BlAnimationExamplesTest >> test_2_1_massive_oneLoopAnimation_step_oneDuration [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - massive time delta - two' }
+{ #category : #'examples - massive time delta - two' }
 BlAnimationExamplesTest >> test_2_1_massive_twoLoopAnimation_step_oneDuration [
 
 	<sampleInstance>
@@ -690,7 +688,7 @@ BlAnimationExamplesTest >> test_2_1_massive_twoLoopAnimation_step_oneDuration [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> test_2_1_sequential_step [
 
 	<sampleInstance>
@@ -715,7 +713,7 @@ BlAnimationExamplesTest >> test_2_1_sequential_step [
 	^ aSequentialAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> test_2_2_baseAnimation_step_halfDelay [
 	"in this example we see what exactly happens when half of delay elapsed"
 
@@ -744,7 +742,7 @@ BlAnimationExamplesTest >> test_2_2_baseAnimation_step_halfDelay [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - massive time delta - infinite' }
+{ #category : #'examples - massive time delta - infinite' }
 BlAnimationExamplesTest >> test_2_2_massive_infiniteAnimation_step_twiceDuration [
 
 	<sampleInstance>
@@ -775,7 +773,7 @@ BlAnimationExamplesTest >> test_2_2_massive_infiniteAnimation_step_twiceDuration
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - massive time delta - one' }
+{ #category : #'examples - massive time delta - one' }
 BlAnimationExamplesTest >> test_2_2_massive_oneLoopAnimation_step_twiceDuration [
 
 	<sampleInstance>
@@ -801,7 +799,7 @@ BlAnimationExamplesTest >> test_2_2_massive_oneLoopAnimation_step_twiceDuration 
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - massive time delta - two' }
+{ #category : #'examples - massive time delta - two' }
 BlAnimationExamplesTest >> test_2_2_massive_twoLoopAnimation_step_twiceDuration [
 
 	<sampleInstance>
@@ -831,7 +829,7 @@ BlAnimationExamplesTest >> test_2_2_massive_twoLoopAnimation_step_twiceDuration 
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> test_2_3_baseAnimation_step_fullDelay [
 	"in this example we see what exactly happens when the whole delay elapsed"
 
@@ -860,7 +858,7 @@ BlAnimationExamplesTest >> test_2_3_baseAnimation_step_fullDelay [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - massive time delta - infinite' }
+{ #category : #'examples - massive time delta - infinite' }
 BlAnimationExamplesTest >> test_2_3_massive_infiniteAnimation_step_trippleDuration [
 
 	<sampleInstance>
@@ -891,7 +889,7 @@ BlAnimationExamplesTest >> test_2_3_massive_infiniteAnimation_step_trippleDurati
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - massive time delta - infinite' }
+{ #category : #'examples - massive time delta - infinite' }
 BlAnimationExamplesTest >> test_2_3_massive_infiniteAnimation_step_trippleDurationAndHalf [
 
 	<sampleInstance>
@@ -924,7 +922,7 @@ BlAnimationExamplesTest >> test_2_3_massive_infiniteAnimation_step_trippleDurati
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - massive time delta - one' }
+{ #category : #'examples - massive time delta - one' }
 BlAnimationExamplesTest >> test_2_3_massive_oneLoopAnimation_step_trippleDuration [
 
 	<sampleInstance>
@@ -950,7 +948,7 @@ BlAnimationExamplesTest >> test_2_3_massive_oneLoopAnimation_step_trippleDuratio
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - massive time delta - two' }
+{ #category : #'examples - massive time delta - two' }
 BlAnimationExamplesTest >> test_2_3_massive_twoLoopAnimation_step_trippleDuration [
 
 	<sampleInstance>
@@ -980,7 +978,7 @@ BlAnimationExamplesTest >> test_2_3_massive_twoLoopAnimation_step_trippleDuratio
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> test_3_1_baseAnimation_step_quarterOfDuration [
 	"in this example we see what exactly happens when one quarter of duration is passed"
 
@@ -1012,7 +1010,7 @@ BlAnimationExamplesTest >> test_3_1_baseAnimation_step_quarterOfDuration [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> test_3_1_sequential_step_halfDelay [
 	"in this example we see what exactly happens when a half of the delay elapsed"
 
@@ -1040,7 +1038,7 @@ BlAnimationExamplesTest >> test_3_1_sequential_step_halfDelay [
 	^ aSequentialAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> test_3_2_baseAnimation_step_halfOfDuration [
 	"in this example we see what exactly happens when half of the duration is passed"
 
@@ -1072,7 +1070,7 @@ BlAnimationExamplesTest >> test_3_2_baseAnimation_step_halfOfDuration [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> test_3_2_sequential_step_fullDelay [
 
 	<sampleInstance>
@@ -1099,7 +1097,7 @@ BlAnimationExamplesTest >> test_3_2_sequential_step_fullDelay [
 	^ aSequentialAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> test_3_3_baseAnimation_step_fullDuration [
 	"in this example we see what exactly happens when the whole duration is passed"
 
@@ -1138,7 +1136,7 @@ BlAnimationExamplesTest >> test_3_3_baseAnimation_step_fullDuration [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> test_4_1_baseAnimation_secondLoop_step_halfDelay [
 
 	<sampleInstance>
@@ -1168,7 +1166,7 @@ BlAnimationExamplesTest >> test_4_1_baseAnimation_secondLoop_step_halfDelay [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> test_4_1_sequential_first_step_halfOfDuration [
 
 	<sampleInstance>
@@ -1232,7 +1230,7 @@ BlAnimationExamplesTest >> test_4_1_sequential_first_step_halfOfDuration [
 	^ aSequentialAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> test_4_2_baseAnimation_secondLoop_step_fullDelay [
 
 	<sampleInstance>
@@ -1263,7 +1261,7 @@ BlAnimationExamplesTest >> test_4_2_baseAnimation_secondLoop_step_fullDelay [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> test_4_2_sequential_first_step_fullDuration [
 
 	<sampleInstance>
@@ -1327,7 +1325,7 @@ BlAnimationExamplesTest >> test_4_2_sequential_first_step_fullDuration [
 	^ aSequentialAnimation
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> test_4_2_sequential_first_step_fullDurationAndHalf [
 	"The animation state must be equal to _5_1_sequential_first_secondStep_halfDuration,
 	because we move time by the same amount"
@@ -1396,7 +1394,7 @@ BlAnimationExamplesTest >> test_4_2_sequential_first_step_fullDurationAndHalf [
 	^ aSequentialAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> test_4_3_baseAnimation_secondLoop_step_quarterOfDuration [
 
 	<sampleInstance>
@@ -1429,7 +1427,7 @@ BlAnimationExamplesTest >> test_4_3_baseAnimation_secondLoop_step_quarterOfDurat
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> test_4_4_baseAnimation_secondLoop_step_halfOfDuration [
 
 	<sampleInstance>
@@ -1462,7 +1460,7 @@ BlAnimationExamplesTest >> test_4_4_baseAnimation_secondLoop_step_halfOfDuration
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - base animation' }
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> test_4_5_baseAnimation_secondLoop_step_fullDuration [
 
 	<sampleInstance>
@@ -1504,7 +1502,7 @@ BlAnimationExamplesTest >> test_4_5_baseAnimation_secondLoop_step_fullDuration [
 	^ aBaseAnimation
 ]
 
-{ #category : 'examples - sequential animation' }
+{ #category : #'examples - sequential animation' }
 BlAnimationExamplesTest >> test_5_1_sequential_first_secondStep_halfDuration [
 
 	<sampleInstance>
@@ -1571,7 +1569,7 @@ BlAnimationExamplesTest >> test_5_1_sequential_first_secondStep_halfDuration [
 	^ aSequentialAnimation
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlAnimationExamplesTest >> textContainer [
 
 	<sampleInstance>
@@ -1583,7 +1581,7 @@ BlAnimationExamplesTest >> textContainer [
 		  clipChildren: false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlAnimationExamplesTest >> textElement: aCharacter [
 	| aText |
 	

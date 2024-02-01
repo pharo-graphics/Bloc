@@ -1,22 +1,20 @@
 Class {
-	#name : 'BlSpaceFrameDrawingPhase',
-	#superclass : 'BlSpaceFramePhase',
-	#category : 'Bloc-Space - Frame',
-	#package : 'Bloc',
-	#tag : 'Space - Frame'
+	#name : #BlSpaceFrameDrawingPhase,
+	#superclass : #BlSpaceFramePhase,
+	#category : 'Bloc-Space - Frame'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlSpaceFrameDrawingPhase >> isDrawingPhase [
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlSpaceFrameDrawingPhase >> name [
 	^ 'Drawing'
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 BlSpaceFrameDrawingPhase >> runOn: aSpace [
 	aSpace
 		dispatchTimeEvent: BlSpaceRenderEndEvent
