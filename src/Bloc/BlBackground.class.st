@@ -2,7 +2,7 @@
 # Background
 
 I represent a background of the `BlElement`. 
-**I am immutable and can not be changed once created.** To modify the background, create a new instance and set it by sending {{gtMethod:BlElement>>#background:}}
+**I am immutable and can not be changed once created.** To modify the background, create a new instance and set it by sending `BlElement>>#background:`
 
 ## Types of background
 

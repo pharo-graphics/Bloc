@@ -17,7 +17,7 @@ The alignment attribute controls the position of children within a FrameLayout. 
 - horizontally children can be aligned to left, center or right;
 - vertically children can be aligned to top, center or bottom.
 
-For example, below we align a fixed-size child horizontally to the right and vertically to the bottom. Alignment is a constraint specific to frame layouts, as it's not relevant to all layouts. To access frame-specific contraints, we send {{gtMethod:BlLayoutCommonConstraints>>#frame}} to the current constraint object, which returns an instance of `BlFrameLayoutConstraints` that we can use to set the desired alignment. Other constraints like the size of an element are common to all layouts and can be set directly without requesting a specific constraint object. Both cases are illustrated by the following example:
+For example, below we align a fixed-size child horizontally to the right and vertically to the bottom. Alignment is a constraint specific to frame layouts, as it's not relevant to all layouts. To access frame-specific contraints, we send `BlLayoutCommonConstraints>>#frame` to the current constraint object, which returns an instance of `BlFrameLayoutConstraints` that we can use to set the desired alignment. Other constraints like the size of an element are common to all layouts and can be set directly without requesting a specific constraint object. Both cases are illustrated by the following example:
 {{gtExample:BlFrameLayoutSingleChildExamples>>#elementDocumentationWithOneExactChildAlignBottomRightInExactParent|previewExpanded|previewHeight=400}}
 
 When using multiple children, if we do not specify any alignment they will be placed in the top-left corner in the order in which they were added to the parent.

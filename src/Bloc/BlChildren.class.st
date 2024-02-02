@@ -6,18 +6,18 @@ I define a data structure independent API for iterating and accessing bloc eleme
 ## API
 
 Subclasses need to overide the following abstract methods to provide access to the actual bloc elements:
-- {{gtMethod:BlChildren>>#at:}}
-- {{gtMethod:BlChildren>>#do:}}
-- {{gtMethod:BlChildren>>#size}}
+- `BlChildren>>#at:`
+- `BlChildren>>#do:`
+- `BlChildren>>#size`
 
 Additionally, I provide an API for selecting only subsets of children, or iterating over them in a differen order, like:
-- {{gtMethod:BlChildren>>#accountedByLayout}}
-- {{gtMethod:BlChildren>>#ignoredByLayout}}
-- {{gtMethod:BlChildren>>#reversed}}
-- {{gtMethod:BlChildren>>#sortedByElevation}}
+- `BlChildren>>#accountedByLayout`
+- `BlChildren>>#ignoredByLayout`
+- `BlChildren>>#reversed`
+- `BlChildren>>#sortedByElevation`
 
 Important API methods: 
-- {{gtMethod:BlChildren>>#asArray}}: returns an array with all the elements.
+- `BlChildren>>#asArray`: returns an array with all the elements.
 
 "
 Class {

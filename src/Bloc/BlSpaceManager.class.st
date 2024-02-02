@@ -5,9 +5,9 @@ I contain Bloc `BlSpace|label=spaces` which can be added or removed. I am also r
 
 I am used by `BlUniverse` so that it can support multiple `BlSpace|label=spaces`.
 Here are some of my core operations:
-- {{gtMethod:BlSpaceManager>>#addSpace:}}
-- {{gtMethod:BlSpaceManager>>#removeSpace:}}
-- {{gtMethod:BlSpaceManager>>#pulse}} - send a pulse message to all spaces
+- `BlSpaceManager>>#addSpace:`
+- `BlSpaceManager>>#removeSpace:`
+- `BlSpaceManager>>#pulse` - send a pulse message to all spaces
 
 "
 Class {

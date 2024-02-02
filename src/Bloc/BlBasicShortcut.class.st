@@ -6,8 +6,8 @@ Additionally, shortcut may provide its optional textual description and name.
 
 All shortcuts of an element are stored in `BlShortcutRegistry` and matched / triggered by `BlShortcutHandler`
 
-A shortcut can be added or removed from the element by using {{gtMethod:BlElement>>#addShortcut:}} or {{gtMethod:BlElement>>#removeShortcut:}} methods.
-{{gtMethod:BlElement>>#shortcuts}} message can be sent to an element in order to access a list of all registered shortcuts.
+A shortcut can be added or removed from the element by using `BlElement>>#addShortcut:` or `BlElement>>#removeShortcut:` methods.
+`BlElement>>#shortcuts` message can be sent to an element in order to access a list of all registered shortcuts.
 ## Public API and Key Messages
 
 - combination: get /set shortcut's key combination

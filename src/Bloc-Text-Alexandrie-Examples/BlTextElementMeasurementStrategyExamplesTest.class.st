@@ -5,17 +5,17 @@
 
 ## Label measurement
 
-The default text measurement strategy is so called `Label measurement`, {{gtMethod:BlTextElement>>#labelMeasurement}}. The height of the text element in this case is a sum of ascent and descent which is given by the font. It means that the height of the text is independent from the content. The width is given by the exact bounds of the element's text. `Label measurement` is useful for displaying labels and short pieces of text. Please note, that since the width is precise and depends on the content, whitespace is not taken into account when computing the width of the text element.
+The default text measurement strategy is so called `Label measurement`, `BlTextElement>>#labelMeasurement`. The height of the text element in this case is a sum of ascent and descent which is given by the font. It means that the height of the text is independent from the content. The width is given by the exact bounds of the element's text. `Label measurement` is useful for displaying labels and short pieces of text. Please note, that since the width is precise and depends on the content, whitespace is not taken into account when computing the width of the text element.
 {{gtExample:BlTextElementMeasurementStrategyExamples>>#textElementWithLabelMeasurement|noCode|previewShow=#gtLiveFor:|previewHeight=100}}
 
 ## Editor measurement
 
-A similar measurement strategy which is designed to be used in a text editor computes the width of the element using the `#advance` property of a text paragraph. The height is computed as a sum of ascent and descent. {{gtMethod:BlTextElement>>#editorMeasurement}}
+A similar measurement strategy which is designed to be used in a text editor computes the width of the element using the `#advance` property of a text paragraph. The height is computed as a sum of ascent and descent. `BlTextElement>>#editorMeasurement`
 {{gtExample:BlTextElementMeasurementStrategyExamples>>#textElementWithEditorMeasurement|noCode|previewShow=#gtLiveFor:|previewHeight=100}}
 
 ## Precise measurement
 
-However, sometimes we want to know the exact and precise text bounds. {{gtMethod:BlTextElement>>#tightMeasurement}} does exactly that and clips off any white space surrounding the text. It may be useful for displaying a short piece of a text, usually a word centered within a larger element.
+However, sometimes we want to know the exact and precise text bounds. `BlTextElement>>#tightMeasurement` does exactly that and clips off any white space surrounding the text. It may be useful for displaying a short piece of a text, usually a word centered within a larger element.
 {{gtExample:BlTextElementMeasurementStrategyExamples>>#textElementWithTightMeasurement|noCode|previewShow=#gtLiveFor:|previewHeight=75}}
 
 ## Conslusion

@@ -1,13 +1,13 @@
 "
 I am an `BlEventListener` event listener and I can display halos around an element. Halos then permits to inspect or delete.
 
-You can install me on any `BlSpace` (window) using {{gtMethod:BlSpace>>#withHalos}}.
+You can install me on any `BlSpace` (window) using `BlSpace>>#withHalos`.
 
-The {{gtMethod:BlDevHalosEventListener>>#mouseDownEvent:}} checks if `SHIFT` and `ALT` modifiers are pressed during a `BlMouseDownEvent`. You can try to click on the rectangle below while pressing `SHIFT` and `ALT`:
+The `BlDevHalosEventListener>>#mouseDownEvent:` checks if `SHIFT` and `ALT` modifiers are pressed during a `BlMouseDownEvent`. You can try to click on the rectangle below while pressing `SHIFT` and `ALT`:
 
 {{gtExample:BlDevHalosEventListenerExamples>>#containerWithRectangle|codeExpanded=false|previewExpanded=true|previewHeight=350|previewShow=#gtLiveFor:}}
 
-Available actions (see implementation at {{gtMethod:BlElementSelection>>#initializeActions}}:
+Available actions (see implementation at `BlElementSelection>>#initializeActions`:
 - The red button removes the selected element. 
 - The green button displays additional information.
 - The yellow button resizes the selected element.

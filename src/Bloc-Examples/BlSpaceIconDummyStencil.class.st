@@ -1,6 +1,6 @@
 "
 I am a dummy object used by `BlSpaceExamples`.
-I evaluate create an icon on {{gtMethod:BlSpaceIconDummyStencil>>#asElement|label=#selector}} call.
+I evaluate create an icon on `BlSpaceIconDummyStencil>>#asElement|label=#selector` call.
 
 
 "

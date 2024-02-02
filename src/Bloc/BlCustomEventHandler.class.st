@@ -1,5 +1,5 @@
 "
-I am a custom event handler. User must override me and implement {{gtMethod:BlBasicEventHandler>>#eventsToHandle}} to return a collection of event classes that I am interested in.
+I am a custom event handler. User must override me and implement `BlBasicEventHandler>>#eventsToHandle` to return a collection of event classes that I am interested in.
 Then for each interesting event a user should implement a corresponding event handling method. For example for `BlMouseDownEvent` it would be `mouseDownEvent:`
 
 "

@@ -1,5 +1,5 @@
 "
-I am fired by {{gtMethod:BlSpace>>#icon:}} when {{gtMethod:BlSpace>>#icon}} is changed.
+I am fired by `BlSpace>>#icon:` when `BlSpace>>#icon` is changed.
 
 "
 Class {

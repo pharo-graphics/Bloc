@@ -21,7 +21,7 @@ Bloc elements provide a set of methods to add and remove children.
 ### Adding children
 There are four ways to add some given element as a direct child to another element.
 
-The most commonly used way to add a child is to use {{gtMethod:BlElement>>#addChild:}} which adds a given element as the last child in the collection of children.
+The most commonly used way to add a child is to use `BlElement>>#addChild:` which adds a given element as the last child in the collection of children.
 ```
 | parent child |
 parent := BlElement new size: 100@100; background: Color veryVeryLightGray.
@@ -29,7 +29,7 @@ child := BlElement new size: 50@50; background: Color red lighter.
 parent addChild: child
 ```
 
-Users may also choose to add an element as the first child, for that purpose Bloc provides {{gtMethod:BlElement>>#addChildFirst:}}.
+Users may also choose to add an element as the first child, for that purpose Bloc provides `BlElement>>#addChildFirst:`.
 ## Geometry and bounds
 Every element is responsible for drawing itself. At the same time, every element has a `BlElementGeometry` that defines the bounds and the clipping. There are many types of geometry available:
 ```
