@@ -1,10 +1,10 @@
 "
-I am a holder that uses an {{gtClass:BlCollectionRope}} to store children of bloc elements.
+I am a holder that uses an `BlCollectionRope` to store children of bloc elements.
 
-Internally I maintain one single {{gtClass:BlCollectionRope}} intance. When children are added or removed I add or remove them from the wrapped rope. 
+Internally I maintain one single `BlCollectionRope` intance. When children are added or removed I add or remove them from the wrapped rope. 
 
 ## Examples
-Examples are provided by the class {{gtClass:BlChildrenRopeExamples}}
+Examples are provided by the class `BlChildrenRopeExamples`
 
 "
 Class {

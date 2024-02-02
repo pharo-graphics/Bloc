@@ -1,6 +1,6 @@
 "
 # Attached space reference
-Attached space reference {{gtClass:BlSpaceReference}} is set when an element is `attached` to the scene graph.
+Attached space reference `BlSpaceReference` is set when an element is `attached` to the scene graph.
 
 "
 Class {

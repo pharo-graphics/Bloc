@@ -1,5 +1,5 @@
 "
-I exemplify {{gtClass:BlDevScripter}}.
+I exemplify `BlDevScripter`.
 
 "
 Class {

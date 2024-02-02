@@ -1,9 +1,9 @@
 "
-I share {{gtClass:BlEvent}} instances (element events) among a given elements.
+I share `BlEvent` instances (element events) among a given elements.
 
 ## Example
 
-In the following example, {{gtClass:BlMouseOverEvent}}, {{gtClass:BlMouseOutEvent}}, and {{gtClass:BlClickEvent}} are shared between the two graphical elements. If you hover a mouse over any element, both elements get darker. If you click on any of two elements, both elements randomly change their background color.
+In the following example, `BlMouseOverEvent`, `BlMouseOutEvent`, and `BlClickEvent` are shared between the two graphical elements. If you hover a mouse over any element, both elements get darker. If you click on any of two elements, both elements randomly change their background color.
 {{gtExample:BlSharedEventDistributorExamples>>#example|codeExpanded=false|previewExpanded=true}}
 
 

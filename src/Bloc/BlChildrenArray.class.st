@@ -2,10 +2,10 @@
 I am a holder that uses an immutable array to store children of bloc elements.
 
 Every time a child is added or removed I create a new internal array to store children. 
-I optimize the method {{gtMethod:BlChildrenArray>>#asArray}} to directly return the internal array instead of creating a new one. In combination with other iterators that use this method (like {{gtClass:BlChildrenReversed}}) it can reduce the number of arrays created during layout operations, expecially for graph layouts.
+I optimize the method `BlChildrenArray>>#asArray` to directly return the internal array instead of creating a new one. In combination with other iterators that use this method (like `BlChildrenReversed`) it can reduce the number of arrays created during layout operations, expecially for graph layouts.
 
 ## Examples
-Examples are provided by the class {{gtClass:BlChildrenArrayExamples}}
+Examples are provided by the class `BlChildrenArrayExamples`
 
 "
 Class {

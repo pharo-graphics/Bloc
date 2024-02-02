@@ -1,5 +1,5 @@
 "
-I fire a {{gtClass:BlMouseDownEvent}}, {{gtClass:BlMouseUpEvent}}, and {{gtClass:BlClickEvent}}.
+I fire a `BlMouseDownEvent`, `BlMouseUpEvent`, and `BlClickEvent`.
 
 ## Example
 

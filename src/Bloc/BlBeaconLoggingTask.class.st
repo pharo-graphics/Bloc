@@ -1,7 +1,7 @@
 "
-I use {{gtClass:Beacon}} to log when a {{gtClass:BlTask}} is scheduled and executed..
-I emit {{gtClass:BlBeaconTaskSignal}}.
-I should be instantiated using {{gtMethod:BlBeaconLoggingTask class>>#subtask:}}.
+I use `Beacon` to log when a `BlTask` is scheduled and executed..
+I emit `BlBeaconTaskSignal`.
+I should be instantiated using `BlBeaconLoggingTask class>>#subtask:`.
 
 
 "

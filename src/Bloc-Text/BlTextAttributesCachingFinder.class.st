@@ -1,6 +1,6 @@
 "
 #Text attributes cache
-{{gtClass:BlText}} allows users to assign attributes on a text interval. In addition, it is important to to be able to query text attributes efficiently. The attributes cache is responsible for maintaining an association cache between text attributes and their corresponding interval in the text.
+`BlText` allows users to assign attributes on a text interval. In addition, it is important to to be able to query text attributes efficiently. The attributes cache is responsible for maintaining an association cache between text attributes and their corresponding interval in the text.
 "
 Class {
 	#name : #BlTextAttributesCachingFinder,

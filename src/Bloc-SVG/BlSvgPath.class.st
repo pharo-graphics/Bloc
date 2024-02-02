@@ -1,5 +1,5 @@
 "
-I am the {{gtClass:BlElementVectorGeometry}} used to represent a SVG Path, which allows to make complex drawings.
+I am the `BlElementVectorGeometry` used to represent a SVG Path, which allows to make complex drawings.
 
 A SVG Path is obtained through successives commands, which each symbolizes a movement of the virtual pen drawing the path.
 My instance variable'pathData' stores the list of commands used to obtain my final drawing.

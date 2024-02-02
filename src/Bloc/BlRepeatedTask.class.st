@@ -1,6 +1,6 @@
 "
 Enhancement: a repeated task should re-enqueue itself with its element when that element is removed from the scene graph. See <https://github.com/feenkcom/gtoolkit/issues/1840>.
-See the {{gtMethod:name=BlRepeatedTask>>#run}} method.
+See the `name=BlRepeatedTask>>#run` method.
 
 
 "

@@ -1,6 +1,6 @@
 "
 # Deprecated
-Use {{gtClass:BlShortcutWithAction}} instead
+Use `BlShortcutWithAction` instead
 
 "
 Class {

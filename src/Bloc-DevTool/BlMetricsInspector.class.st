@@ -9,7 +9,7 @@ On an element that is defined with the following margin and padding methics:
 I provide the following overview:
 {{gtExample:BlMetricsInspectorExamples>>#metricsInspectorOnElementWithMetrics|codeExpanded=false|previewExpanded=true}}
 
-The view is available for any {{gtExample:BlMetricsInspectorExamples>>#elementWithMetrics|label=#className}} instance throught {{gtMethod:BlElement>>#gtMetricsFor:}} inspector extension. You can find it when you inspect a view and switch to {{gtExample:BlMetricsInspectorExamples>>#metricsPhlowView|label=#title}} tab.
+The view is available for any {{gtExample:BlMetricsInspectorExamples>>#elementWithMetrics|label=#className}} instance throught `BlElement>>#gtMetricsFor:` inspector extension. You can find it when you inspect a view and switch to {{gtExample:BlMetricsInspectorExamples>>#metricsPhlowView|label=#title}} tab.
 
 
 "

@@ -5,11 +5,11 @@ One key property is that it relies on exactly one rendering tree at all times wi
 # Starting Points
 Here are some of the most important classes to get a feel for how Bloc works.
 ## Key Classes with Helpful Comments
-- {{gtClass:BlElement}} - the class you will probably use the most
-- {{gtClass:BlUniverse}} - Bloc's ""foundation"" which interacts with the underlying {{gtClass:BlHost|label=host}} system
-- {{gtClass:BlSpace}} - a logical window
-  - {{gtClass:BlTime}} - while time is internal to space, it is cool enough to mention here :)
-- {{gtClass:BrStencil}} - an element factory
+- `BlElement` - the class you will probably use the most
+- `BlUniverse` - Bloc's ""foundation"" which interacts with the underlying `BlHost|label=host` system
+- `BlSpace` - a logical window
+  - `BlTime` - while time is internal to space, it is cool enough to mention here :)
+- `BrStencil` - an element factory
 # History
 Bloc is inspired by the many lessons learned as Smalltalk has evolved through MVC, Morphic and others. It also incorporates many great ideas ""from the outside world"" (e.g. MVP, research papers). 
 
