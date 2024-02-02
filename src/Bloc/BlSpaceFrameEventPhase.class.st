@@ -30,11 +30,8 @@ BlSpaceFrameEventPhase >> runOn: aSpace [
 				"we have to test for existance of the host space before handling each event because
 				it is possible that a space is closed due to an event"
 				
-				theSpace telemetry
-					timeSync: [ 'Process event {1}' format: { anEvent } ]
-					during: [
-						theSpace hostSpaceDo: [
-							theSpace eventDispatcher dispatchEvent: anEvent ] ]  ] ].
+				theSpace hostSpaceDo: [
+					theSpace eventDispatcher dispatchEvent: anEvent ] ] ].
 			
 			theSpace hostSpaceDo: [ :aHostSpace | aHostSpace generateEvents ].
 			theSpace mouseProcessor generateEvents ]

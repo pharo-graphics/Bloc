@@ -137,30 +137,29 @@ BlTaskQueue >> requeue: aBlTask [
 
 { #category : #'api - running' }
 BlTaskQueue >> runOn: aSpace [
+
 	| theTasks |
-	
 	self critical: [
-		"We store reference to tasks Array because it is possible
+		"We store reference to the tasks Array because it is possible
 		that a random task is removed while enumerating a collection.
-		This switch can be made atomic without the lock, but is here since the tasks shouldn't be updated while another process has the lock."
+		This switch can be made atomic without the lock, but is here since
+		the tasks shouldn't be updated while another process has the lock."
+
 		theTasks := tasks.
 		tasks := nil.
 		"Mark all tasks as pending"
-		theTasks ifNotNil:
-			[ theTasks do: [ :task | task setPendingExecution ] ] ].
+		theTasks ifNotNil: [
+			theTasks do: [ :task | task setPendingExecution ] ] ].
 
-	"since we have an immutable reference to original array, there is need to execute task within a lock"
-	theTasks ifNotNil:
-		[ theTasks do: [ :aTask |
+	"Since we have an immutable reference to original array, there is
+	need to execute task within a lock."
+	theTasks ifNotNil: [
+		theTasks do: [ :aTask |
 			aTask setExecuting.
-			aSpace telemetry
-				timeSync: [ 'Run task {1} ({2})' format: { aTask class name . aTask } ]
-				during: [ BlTaskExecutionSignal for: aTask block: [ aTask run ] ].
-			aTask requeueTaskAfterExecution ifTrue: 
-				[ self requeue: aTask ]
-			ifFalse:
-				[ aTask setComplete ] ] ].
-
+			BlTaskExecutionSignal for: aTask block: [ aTask run ].
+			aTask requeueTaskAfterExecution
+				ifTrue: [ self requeue: aTask ]
+				ifFalse: [ aTask setComplete ] ] ]
 ]
 
 { #category : #accessing }
