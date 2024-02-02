@@ -1,5 +1,5 @@
 "
-I exemplify {{gtClass:BlSharedEventDistributor}}.
+I exemplify `BlSharedEventDistributor`.
 
 "
 Class {

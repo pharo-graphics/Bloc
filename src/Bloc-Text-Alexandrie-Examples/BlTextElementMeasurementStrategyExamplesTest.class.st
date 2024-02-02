@@ -1,7 +1,7 @@
 "
 # Text measurement strategies
 
-{{gtClass:BlTextElement}} provides different text measurement strategies, each suitable for a specific use case. There is no perfect strategy, therefore understanding the differences between them is an important step in learning how to work with Text in Bloc.
+`BlTextElement` provides different text measurement strategies, each suitable for a specific use case. There is no perfect strategy, therefore understanding the differences between them is an important step in learning how to work with Text in Bloc.
 
 ## Label measurement
 

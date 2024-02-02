@@ -9,17 +9,17 @@ In this explanation we will take a look at what happens when mouse moves between
 
 ### `BlMouseEnterEvent` and `BlMouseLeaveEvent`
 
-If you are looking for the simplest way to detect when a user hovers an element with the mouse use a combination of {{gtClass:BlMouseEnterEvent}} and {{gtClass:BlMouseLeaveEvent}}.
+If you are looking for the simplest way to detect when a user hovers an element with the mouse use a combination of `BlMouseEnterEvent` and `BlMouseLeaveEvent`.
 They trigger when the mouse pointer enters/leaves the element:
 *(mouse your mouse over the preview element below)*
 {{gtExample:BlMouseOverOutAndEnterLeaveEventExplanation>>#basicMouseEnterAndLeave|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=240}}
 
-{{gtClass:BlMouseEnterEvent}} and {{gtClass:BlMouseLeaveEvent}} are sent directly (`dispatched`) to the element, ignoring any mouse transitions inside the element, therefore both mouse enter and leave events do not bubble. In the example below, notice how parent container does not receive mouse leave event when mouse transitions between children:
+`BlMouseEnterEvent` and `BlMouseLeaveEvent` are sent directly (`dispatched`) to the element, ignoring any mouse transitions inside the element, therefore both mouse enter and leave events do not bubble. In the example below, notice how parent container does not receive mouse leave event when mouse transitions between children:
 {{gtExample:BlMouseOverOutAndEnterLeaveEventExplanation>>#mouseEnterAndLeaveConsumed|noCode=true|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=240}}
 
 ### `BlMouseOverEvent` and `BlMouseOutEvent`
 
-Similar to the mouse enter but a bit more advanced, {{gtClass:BlMouseOverEvent}} occurs when a mouse pointer comes over an element, and {{gtClass:BlMouseOutEvent}} – when it leaves:
+Similar to the mouse enter but a bit more advanced, `BlMouseOverEvent` occurs when a mouse pointer comes over an element, and `BlMouseOutEvent` – when it leaves:
 {{gtExample:BlMouseOverOutAndEnterLeaveEventExplanation>>#basicMouseOverAndOut|previewExpanded=true|previewShow=#gtLiveFor:|previewHeight=240}}
 
 An important feature of mouseout – it triggers, when the pointer moves from an element to its descendant, e.g. from #parent to #child. It also means that mouse over/out events bubble.

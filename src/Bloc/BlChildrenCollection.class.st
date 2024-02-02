@@ -1,5 +1,5 @@
 "
-I am an abstract collection of bloc elements that can be mutated. I am used by a {{gtClass:BlElement}} to store its children.
+I am an abstract collection of bloc elements that can be mutated. I am used by a `BlElement` to store its children.
 
 I provide a data structure independent API for adding and removing children. I assume an index-based way of working with children. My subclasses wrap concrete data structures for storing the actual children. Bloc elements work with children only in terms of the API that I provide. Hence, I only provide a minimum API needed to work with children, instead of the full collection API.
 
@@ -8,10 +8,10 @@ I allow elements to optimize working with children for different scenarious. For
 ## API
 
 The following subclasses can be used to store children: 
-- {{gtClass:BlChildrenArray}}: stores children using an {{gtClass:Array}} 
-- {{gtClass:BlChildrenLinkedList}}: stores children using a {{gtClass:LinkedList}}  
-- {{gtClass:BlChildrenOrderedCollection}}: stores children using a {{gtClass:OrderedCollection}}
-- {{gtClass:BlChildrenRope}}: stores children using a {{gtClass:BlCollectionRope}}
+- `BlChildrenArray`: stores children using an `Array` 
+- `BlChildrenLinkedList`: stores children using a `LinkedList`  
+- `BlChildrenOrderedCollection`: stores children using a `OrderedCollection`
+- `BlChildrenRope`: stores children using a `BlCollectionRope`
 
 Subclasses need to provide the implementation for methods adding and removing children.
 

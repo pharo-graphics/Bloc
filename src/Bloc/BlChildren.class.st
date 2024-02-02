@@ -1,5 +1,5 @@
 "
-I am an abstract root class designed for accessing and iterating over the children of a {{gtClass:BlElement}}. 
+I am an abstract root class designed for accessing and iterating over the children of a `BlElement`. 
 
 I define a data structure independent API for iterating and accessing bloc elements. I assume an index-based way of accessing bloc elements. Subclasses can filter elements or have different orders to iterate over them.
 

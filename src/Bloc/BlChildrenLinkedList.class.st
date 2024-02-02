@@ -1,10 +1,10 @@
 "
-I am a holder that uses a {{gtClass:LinkedList}} to store children of bloc elements.
+I am a holder that uses a `LinkedList` to store children of bloc elements.
 
-Internally I maintain one single {{gtClass:LinkedList}} instance. When children are added or removed I add or remove them from the wrapped list. 
+Internally I maintain one single `LinkedList` instance. When children are added or removed I add or remove them from the wrapped list. 
 
 ## Examples
-Examples are provided by the class {{gtClass:BlChildrenLinkedListExamples}}
+Examples are provided by the class `BlChildrenLinkedListExamples`
 
 "
 Class {

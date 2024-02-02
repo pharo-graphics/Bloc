@@ -1,7 +1,7 @@
 "
-I am a {{gtClass:BlMouseEvent}}.
+I am a `BlMouseEvent`.
 I am a mouse wheel scroll event.
-I use {{gtClass:BlVector2D}}, indicating the user scroll direction and length.
+I use `BlVector2D`, indicating the user scroll direction and length.
 ## Examples
 ### 45 Degrees
 {{gtExample:BlMouseWheelEventExamples>>#mouseWheelEvent_45degrees|codeExpanded=false|previewExpanded=true}}

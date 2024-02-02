@@ -1,5 +1,5 @@
 "
-I offer API compatible with {{gtClass:ReadStream}}.
+I offer API compatible with `ReadStream`.
 
 
 "

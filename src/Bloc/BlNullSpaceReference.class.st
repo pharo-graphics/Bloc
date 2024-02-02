@@ -1,6 +1,6 @@
 "
 # Null space reference
-Null space reference {{gtClass:BlSpaceReference}} is set when an element is `removed` from the scene graph.
+Null space reference `BlSpaceReference` is set when an element is `removed` from the scene graph.
 
 "
 Class {

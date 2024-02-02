@@ -7,7 +7,7 @@ The simplest way to apply an underline attribute on a whole text would be to use
 To add an underline to just a part of text it can be scoped with {{gtMethod:BlText>>#from:to:}}
 {{gtExample:BlTextUnderlineAttributeExamples>>#textWithUnderline_3_to_4|previewShow=#gtTextFor:|previewExpanded|previewHeight=100}}
 
-In addition to the simple API an underline attribute can be customized and then applied on a text using {{gtMethod:TBlTextStyleable>>#underlineDo:}} helper method. Users should pass a block that accepts {{gtClass:BlTextDecorationAttribute}} as an argument.
+In addition to the simple API an underline attribute can be customized and then applied on a text using {{gtMethod:TBlTextStyleable>>#underlineDo:}} helper method. Users should pass a block that accepts `BlTextDecorationAttribute` as an argument.
 {{gtExample:BlTextUnderlineAttributeExamples>>#textWithUnderlineDo|previewShow=#gtTextFor:|previewExpanded|previewHeight=100}}
 
 "

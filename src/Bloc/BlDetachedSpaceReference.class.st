@@ -1,6 +1,6 @@
 "
 # Detached space reference
-Detached space reference {{gtClass:BlSpaceReference}} is set when an element is temporarily `detached` from the scene graph.
+Detached space reference `BlSpaceReference` is set when an element is temporarily `detached` from the scene graph.
 
 "
 Class {

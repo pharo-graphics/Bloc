@@ -1,6 +1,6 @@
 "
 # Layout node
-Is a node that is laied out by {{gtClass:BlLayout}}
+Is a node that is laied out by `BlLayout`
 
 "
 Class {
