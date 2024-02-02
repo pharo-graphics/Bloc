@@ -59,6 +59,22 @@ BlCompositeSelection >> containsIndex: anIndex [
 	^ selections containsIndex: anIndex
 ]
 
+{ #category : #'api - testing' }
+BlCompositeSelection >> containsInterval: anInterval [
+	"Return true if selection  include a given interval, false otherwise "
+
+	^ selections containsMonotoneSelection: (BlMonotoneSelection
+			   from: (anInterval first min: anInterval last)
+			   to: (anInterval first max: anInterval last))
+]
+
+{ #category : #'api - testing' }
+BlCompositeSelection >> containsMonotoneSelection: aSelection [
+	"Return true if selection  include a given monotone selection , false otherwise "
+	
+	^ selections containsMonotoneSelection: aSelection
+]
+
 { #category : #copying }
 BlCompositeSelection >> copyFrom: aStartIndex to: anEndIndex [
 	| aNewSelection |

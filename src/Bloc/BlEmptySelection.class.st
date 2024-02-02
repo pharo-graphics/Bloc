@@ -30,6 +30,13 @@ BlEmptySelection >> containsIndex: anIndex [
 	^ false
 ]
 
+{ #category : #'api - testing' }
+BlEmptySelection >> containsMonotoneSelection: aSelection [
+	"Return true if selection  include a given monotone selection , false otherwise "
+	
+	^ false
+]
+
 { #category : #copying }
 BlEmptySelection >> copyFrom: aStartIndex to: anEndIndex [
 	^ self copy

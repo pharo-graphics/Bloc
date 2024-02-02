@@ -119,6 +119,14 @@ BlMonotoneSelection >> containsIndex: anIndex [
 		and: [ anIndex <= self to ]
 ]
 
+{ #category : #'api - testing' }
+BlMonotoneSelection >> containsMonotoneSelection: aSelection [
+	"Return true if selection interval include a given interval, false otherwise. "
+
+	^ self includes:
+		  (BlSelection from: aSelection from to: aSelection to)
+]
+
 { #category : #copying }
 BlMonotoneSelection >> copyFrom: aStartIndex to: anEndIndex [
 	aStartIndex <= self to

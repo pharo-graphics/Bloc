@@ -102,6 +102,24 @@ BlSelectionNode >> containsIndex: anIndex [
 	^ false
 ]
 
+{ #category : #'tree - testing' }
+BlSelectionNode >> containsMonotoneSelection: aSelection [
+	"Return true if selection interval include a given interval, false otherwise. "
+
+	aSelection from > self high ifTrue: [ ^ false ].
+
+	(self selection containsMonotoneSelection: aSelection) ifTrue: [
+		^ true ].
+
+	(self hasLeft and: [ aSelection to <= self left high ]) ifTrue: [
+		^ self left containsMonotoneSelection: aSelection ].
+
+	self hasRight ifTrue: [
+		^ self right containsMonotoneSelection: aSelection ].
+
+	^ false
+]
+
 { #category : #'instance creation' }
 BlSelectionNode >> createNode: aSelection [
 	^ (self class selection: aSelection)

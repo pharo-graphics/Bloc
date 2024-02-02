@@ -52,6 +52,14 @@ BlMultipleSelection >> containsIndex: anIndex [
 		eachSelection contains: anIndex ]
 ]
 
+{ #category : #'api - testing' }
+BlMultipleSelection >> containsMonotoneSelection: aSelection [
+	"Return true if selection interval include a given interval, false otherwise. "
+
+	^ selections anySatisfy: [ :eachSelection | 
+		eachSelection containsMonotoneSelection: aSelection ]
+]
+
 { #category : #copying }
 BlMultipleSelection >> copyFrom: aStartIndex to: anEndIndex [
 	| newSelectionsSet newSelection |

@@ -75,6 +75,13 @@ BlSelection >> containsIndex: anIndex [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'api - testing' }
+BlSelection >> containsMonotoneSelection: aSelection [
+	"Return true if selection  include a given monotone selection , false otherwise "
+
+	^ self subclassResponsibility
+]
+
 { #category : #copying }
 BlSelection >> copyFrom: aStartIndex to: anEndIndex [
 	^ self subclassResponsibility

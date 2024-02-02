@@ -56,6 +56,15 @@ BlSelectionTree >> containsIndex: anIndex [
 		ifFalse: [ false ]
 ]
 
+{ #category : #'tree - searching' }
+BlSelectionTree >> containsMonotoneSelection: aSelection [
+	"Return true if selection interval include a given interval, false otherwise. "
+	
+	self hasRoot
+		ifTrue: [ ^ self root containsMonotoneSelection: aSelection ]
+		ifFalse: [ ^ false ]
+]
+
 { #category : #'tree - deletion' }
 BlSelectionTree >> delete: aMonotoneTextSelection [
 	| theOverlapping |

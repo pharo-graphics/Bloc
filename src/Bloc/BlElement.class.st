@@ -1667,7 +1667,7 @@ BlElement >> focusables: aBlFocusFinderCandidates along: aBlFocusSearchDirection
 { #category : #'private - accessing' }
 BlElement >> focused [
 
-	^ visuals focused
+	^ visuals isFocused
 ]
 
 { #category : #'private - accessing' }
