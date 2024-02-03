@@ -3,54 +3,56 @@ I contain examples-tests of mouse processor
 
 "
 Class {
-	#name : #BlMouseProcessorTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Event'
+	#name : 'BlMouseProcessorTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Examples-Event',
+	#package : 'Bloc-Examples',
+	#tag : 'Event'
 }
 
-{ #category : #'running - instance creation' }
+{ #category : 'running - instance creation' }
 BlMouseProcessorTest >> middleMouseDownEvent [
 
 	^ BlMouseDownEvent middle
 ]
 
-{ #category : #'running - instance creation' }
+{ #category : 'running - instance creation' }
 BlMouseProcessorTest >> middleMouseUpEvent [
 
 	^ BlMouseUpEvent middle
 ]
 
-{ #category : #'running - instance creation' }
+{ #category : 'running - instance creation' }
 BlMouseProcessorTest >> newMouseProcessor [
 
 	^ BlMouseProcessor space: BlSpace new
 ]
 
-{ #category : #'running - instance creation' }
+{ #category : 'running - instance creation' }
 BlMouseProcessorTest >> primaryMouseDownEvent [
 
 	^ BlMouseDownEvent primary
 ]
 
-{ #category : #'running - instance creation' }
+{ #category : 'running - instance creation' }
 BlMouseProcessorTest >> primaryMouseUpEvent [
 
 	^ BlMouseUpEvent primary
 ]
 
-{ #category : #'running - instance creation' }
+{ #category : 'running - instance creation' }
 BlMouseProcessorTest >> secondaryMouseDownEvent [
 
 	^ BlMouseDownEvent secondary
 ]
 
-{ #category : #'running - instance creation' }
+{ #category : 'running - instance creation' }
 BlMouseProcessorTest >> secondaryMouseUpEvent [
 
 	^ BlMouseUpEvent secondary
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseProcessorTest >> testClick [
 
 	| aMouseProcessor |
@@ -64,7 +66,7 @@ BlMouseProcessorTest >> testClick [
 	^ aMouseProcessor
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseProcessorTest >> testMiddleDown [
 
 	| aMouseProcessor anEvent |
@@ -77,7 +79,7 @@ BlMouseProcessorTest >> testMiddleDown [
 	self assert: (aMouseProcessor pressedButtons includes: BlMouseButton middle)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseProcessorTest >> testMouseProcessorInitialState [
 
 	| aMouseProcessor aSpace |
@@ -90,7 +92,7 @@ BlMouseProcessorTest >> testMouseProcessorInitialState [
 	^ aMouseProcessor
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseProcessorTest >> testPrimaryDown [
 
 	| aMouseProcessor anEvent |
@@ -106,7 +108,7 @@ BlMouseProcessorTest >> testPrimaryDown [
 	^ aMouseProcessor
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseProcessorTest >> testPrimaryDownSecondaryDown [
 
 	| aMouseProcessor anEvent |
@@ -124,7 +126,7 @@ BlMouseProcessorTest >> testPrimaryDownSecondaryDown [
 	^ aMouseProcessor
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseProcessorTest >> testPrimaryDownSecondaryDownPrimaryUp [
 
 	| aMouseProcessor anEvent |
@@ -140,7 +142,7 @@ BlMouseProcessorTest >> testPrimaryDownSecondaryDownPrimaryUp [
 	^ aMouseProcessor
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseProcessorTest >> testPrimaryDownSecondaryDownPrimaryUpSecondaryUp [
 
 	| aMouseProcessor anEvent |
@@ -152,7 +154,7 @@ BlMouseProcessorTest >> testPrimaryDownSecondaryDownPrimaryUpSecondaryUp [
 	self assert: aMouseProcessor pressedButtons isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseProcessorTest >> testSecondaryDown [
 
 	| aMouseProcessor anEvent |

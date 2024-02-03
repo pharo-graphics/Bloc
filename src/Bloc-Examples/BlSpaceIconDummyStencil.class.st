@@ -5,26 +5,28 @@ I evaluate create an icon on `BlSpaceIconDummyStencil>>#asElement|label=#selecto
 
 "
 Class {
-	#name : #BlSpaceIconDummyStencil,
-	#superclass : #Object,
+	#name : 'BlSpaceIconDummyStencil',
+	#superclass : 'Object',
 	#instVars : [
 		'block'
 	],
-	#category : #'Bloc-Examples-Space'
+	#category : 'Bloc-Examples-Space',
+	#package : 'Bloc-Examples',
+	#tag : 'Space'
 }
 
-{ #category : #'api - converting' }
+{ #category : 'api - converting' }
 BlSpaceIconDummyStencil >> asElement [
 	<return: #BlElement>
 	^ self block value
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlSpaceIconDummyStencil >> block [
 	^ block
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlSpaceIconDummyStencil >> block: anObject [
 	block := anObject
 ]

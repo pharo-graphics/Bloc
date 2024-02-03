@@ -1,10 +1,12 @@
 Class {
-	#name : #BlMouseWheelEventTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Event'
+	#name : 'BlMouseWheelEventTest',
+	#superclass : 'TestCase',
+	#category : 'Bloc-Examples-Event',
+	#package : 'Bloc-Examples',
+	#tag : 'Event'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 BlMouseWheelEventTest >> mouseWheelEventWithVector: aVector [
 
 	| anElement |
@@ -25,7 +27,7 @@ BlMouseWheelEventTest >> mouseWheelEventWithVector: aVector [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseWheelEventTest >> testBasicMouseWheelEvent [
 
 	| anEvent |
@@ -33,7 +35,7 @@ BlMouseWheelEventTest >> testBasicMouseWheelEvent [
 	self assert: anEvent isConsumed not
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseWheelEventTest >> testMouseWheelEvent0degrees [
 
 	| vector event |
@@ -42,7 +44,7 @@ BlMouseWheelEventTest >> testMouseWheelEvent0degrees [
 	self assert: event vector equals: vector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseWheelEventTest >> testMouseWheelEvent180degrees [
 
 	| vector event |
@@ -51,7 +53,7 @@ BlMouseWheelEventTest >> testMouseWheelEvent180degrees [
 	self assert: event vector equals: vector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseWheelEventTest >> testMouseWheelEvent270degrees [
 
 	| vector event |
@@ -60,7 +62,7 @@ BlMouseWheelEventTest >> testMouseWheelEvent270degrees [
 	self assert: event vector equals: vector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseWheelEventTest >> testMouseWheelEvent346degrees [
 
 	| vector event |
@@ -69,7 +71,7 @@ BlMouseWheelEventTest >> testMouseWheelEvent346degrees [
 	self assert: event vector equals: vector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseWheelEventTest >> testMouseWheelEvent45degrees [
 
 	| vector event |
