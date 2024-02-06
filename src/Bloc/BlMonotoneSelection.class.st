@@ -196,6 +196,30 @@ BlMonotoneSelection >> indices [
 	^ self from + 1 to: self to
 ]
 
+{ #category : #accessing }
+BlMonotoneSelection >> indicesCollect: aBlock [
+	"Evaluate a collect on the indice interval
+	If the selection interval is [0..1] then selection indices will only contain
+	one index {1}"
+
+	self from
+		ifNil: [ ^ #() ].
+
+	^ (self from + 1 to: self to) collect: aBlock
+]
+
+{ #category : #accessing }
+BlMonotoneSelection >> indicesDo: aBlock [
+	"Evaluate a given block with all selection indices indices
+	If the selection interval is [0..1] then selection indices will only contain
+	one index {1}"
+
+	self from
+		ifNil: [ ^ self ].
+
+	self from + 1 to: self to do: aBlock
+]
+
 { #category : #testing }
 BlMonotoneSelection >> inside: aMonotoneTextSelection [
 	"Return true if I am fully inside a given selection, false otherwise"

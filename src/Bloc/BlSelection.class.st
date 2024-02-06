@@ -101,6 +101,22 @@ BlSelection >> indices [
 	^ Array streamContents: [ :aStream | self do: [ :eachMonotoneSelection | aStream nextPutAll: eachMonotoneSelection indices ] ]
 ]
 
+{ #category : #accessing }
+BlSelection >> indicesCollect: aBlock [
+	"Return the result of evaluating a #collect: with all recorded selection indices"
+
+	^ Array streamContents: [ :stream |
+		  self do: [ :eachMonotoneSelection |
+			  stream nextPutAll: (eachMonotoneSelection indicesCollect: aBlock) ] ]
+]
+
+{ #category : #accessing }
+BlSelection >> indicesDo: aBlock [
+	"Evaluate a given block with all recorded selection indices"
+
+	self do: [ :eachMonotoneSelection | eachMonotoneSelection indicesDo: aBlock ]
+]
+
 { #category : #'api - testing' }
 BlSelection >> isEmpty [
 	^ self subclassResponsibility

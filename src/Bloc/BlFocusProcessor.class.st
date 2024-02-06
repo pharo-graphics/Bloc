@@ -246,9 +246,6 @@ BlFocusProcessor >> processFocus: anElement dueToTransferFrom: aPreviousFocus [
 	focusChain := BlFocusChain of: self focusOwner.
 	anElement focused: true.
 
-	"(anElement id asSymbol = #'container-1')
-		ifTrue: [ self halt ]."
-
 	"then send events"	
 	focusChain leafsDo: [ :aLeafElement |
 		"if a new focused element is a child we don't have to send focus-in event"
