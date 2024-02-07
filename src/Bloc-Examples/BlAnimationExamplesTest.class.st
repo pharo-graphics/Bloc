@@ -110,33 +110,38 @@ BlAnimationExamplesTest >> bouncingText [
 
 	<sampleInstance>
 	| letters container animation clickHandler |
-	letters := 'bloc beta0.1'
-		           collect: [ :aCharacter | self newTextElementFor: aCharacter ]
-		           as: Array.
-	letters withIndexDo: [ :aTextElement :anIndex | "change text color according to index in color spectrum"
-		aTextElement text: (aTextElement text foreground:
-				 (self colorAt: (anIndex / letters size) asFloat)) ].
+	letters :=
+		'bloc beta0.1'
+			collect: [ :aCharacter | self newTextElementFor: aCharacter ]
+			as: Array.
+	letters withIndexDo: [ :aTextElement :anIndex |
+		"change text color according to index in color spectrum"
+		aTextElement text:
+			(aTextElement text
+				foreground: (self colorAt: (anIndex / letters size) asFloat);
+				yourself) ].
 
 	animation := BlParallelAnimation withAll:
-		             (letters withIndexCollect: [ :aChild :anIndex |
-			              | jiggle |
-			              jiggle := self newJiggleAnimation.
-			              jiggle delay: 20 milliSeconds * (anIndex - 1).
-			              jiggle target: aChild.
-			              jiggle ]).
+		(letters withIndexCollect: [ :aChild :anIndex |
+			self newJiggleAnimation
+				delay: 20 milliSeconds * (anIndex - 1);
+				target: aChild;
+				yourself ]).
 
 	container := self newTextContainer.
 	container addChildren: letters.
 
 	clickHandler := nil.
 	clickHandler := BlEventHandler
-		                on: BlClickEvent
-		                do: [
-			                container removeEventHandler: clickHandler.
-			                container addAnimation: animation ].
+		on: BlClickEvent
+		do: [
+			container removeEventHandler: clickHandler.
+			container addAnimation: animation ].
 	container addEventHandler: clickHandler.
 
-	^ self newFrameContainer addChild: container
+	^ self newFrameContainer
+		addChild: container;
+		yourself
 ]
 
 { #category : 'running' }
@@ -145,7 +150,6 @@ BlAnimationExamplesTest >> colorAt: anIndex [
 
 	| normalizedIndex |
 	normalizedIndex := anIndex.
-	"Because of float errors"
 	normalizedIndex > 1 ifTrue: [ normalizedIndex := 1 ].
 	normalizedIndex < 0 ifTrue: [ normalizedIndex := 0 ].
 	
@@ -194,6 +198,14 @@ BlAnimationExamplesTest >> greenAt: anIndex [
 	radians > Float pi ifTrue: [ ^ 0 ].
 
 	^ radians sin
+]
+
+{ #category : 'examples - base animation' }
+BlAnimationExamplesTest >> newExampleBlTime [
+
+	^ BlTime simulated
+		date: self exampleDate;
+		yourself
 ]
 
 { #category : 'running' }
@@ -296,7 +308,7 @@ BlAnimationExamplesTest >> testBaseAnimation [
 
 	| aBaseAnimation |
 	aBaseAnimation := BlAnimation new.
-	aBaseAnimation time: (BlTime simulated date: self exampleDate).
+	aBaseAnimation time: self newExampleBlTime.
 
 	self assert: aBaseAnimation loops equals: 1.
 	self assert: aBaseAnimation progress equals: 0.
@@ -314,7 +326,7 @@ BlAnimationExamplesTest >> testBaseAnimationWithDelay [
 
 	| aBaseAnimation |
 	aBaseAnimation := BlAnimation new.
-	aBaseAnimation time: (BlTime simulated date: self exampleDate).
+	aBaseAnimation time: self newExampleBlTime.
 
 	aBaseAnimation delay: self exampleDelay.
 
@@ -333,7 +345,7 @@ BlAnimationExamplesTest >> testBaseAnimationWithDelayAndDurationAndTwoLoops [
 
 	| aBaseAnimation |
 	aBaseAnimation := BlAnimation new.
-	aBaseAnimation time: (BlTime simulated date: self exampleDate).
+	aBaseAnimation time: self newExampleBlTime.
 
 	aBaseAnimation delay: self exampleDelay.
 	aBaseAnimation loops: 2.
@@ -354,7 +366,7 @@ BlAnimationExamplesTest >> testBaseAnimationWithDelayAndTwoLoops [
 
 	| aBaseAnimation |
 	aBaseAnimation := BlAnimation new.
-	aBaseAnimation time: (BlTime simulated date: self exampleDate).
+	aBaseAnimation time: self newExampleBlTime.
 
 	aBaseAnimation delay: self exampleDelay.
 	aBaseAnimation loops: 2.
@@ -374,7 +386,7 @@ BlAnimationExamplesTest >> testInfiniteAnimation [
 
 	| aBaseAnimation |
 	aBaseAnimation := BlAnimation new.
-	aBaseAnimation time: (BlTime simulated date: self exampleDate).
+	aBaseAnimation time: self newExampleBlTime.
 	aBaseAnimation beInfinite.
 
 	self assert: aBaseAnimation loops equals: Float infinity.
@@ -394,7 +406,11 @@ BlAnimationExamplesTest >> testSequentialAddFirstChild [
 
 	| aSequentialAnimation |
 	aSequentialAnimation := self testSequentialAnimationWithDelayAndTwoLoops.
-	aSequentialAnimation add: (BlAnimation new duration: self firstSequentialDuration; loops: self firstSequentialLoops).
+	aSequentialAnimation add:
+		(BlAnimation new
+			duration: self firstSequentialDuration;
+			loops: self firstSequentialLoops;
+			yourself).
 	
 	self 
 		assert: aSequentialAnimation duration 
@@ -408,7 +424,7 @@ BlAnimationExamplesTest >> testSequentialAnimation [
 
 	| aSequentialAnimation |
 	aSequentialAnimation := BlSequentialAnimation new.
-	aSequentialAnimation time: (BlTime simulated date: self exampleDate).
+	aSequentialAnimation time: self newExampleBlTime.
 
 	self assert: aSequentialAnimation duration equals: 0 seconds.
 	self assert: aSequentialAnimation delay equals: 0 seconds.
@@ -426,7 +442,7 @@ BlAnimationExamplesTest >> testSequentialAnimationWithDelay [
 
 	| aSequentialAnimation |
 	aSequentialAnimation := BlSequentialAnimation new.
-	aSequentialAnimation time: (BlTime simulated date: self exampleDate).
+	aSequentialAnimation time: self newExampleBlTime.
 
 	aSequentialAnimation delay: self exampleDelay.
 
@@ -445,7 +461,7 @@ BlAnimationExamplesTest >> testSequentialAnimationWithDelayAndTwoLoops [
 
 	| aSequentialAnimation |
 	aSequentialAnimation := BlSequentialAnimation new.
-	aSequentialAnimation time: (BlTime simulated date: self exampleDate).
+	aSequentialAnimation time: self newExampleBlTime.
 
 	aSequentialAnimation delay: self exampleDelay.
 	aSequentialAnimation loops: 2.
@@ -466,7 +482,11 @@ BlAnimationExamplesTest >> test_1_1_sequential_addFirstChild [
 	
 	| aSequentialAnimation |
 	aSequentialAnimation := self testSequentialAnimationWithDelayAndTwoLoops.
-	aSequentialAnimation add: (BlAnimation new duration: self firstSequentialDuration; loops: self firstSequentialLoops).
+	aSequentialAnimation add:
+		(BlAnimation new
+			duration: self firstSequentialDuration;
+			loops: self firstSequentialLoops;
+			yourself).
 	
 	self 
 		assert: aSequentialAnimation duration 
@@ -482,18 +502,15 @@ BlAnimationExamplesTest >> test_1_2_sequential_addSecondChild [
 	aSequentialAnimation := self test_1_1_sequential_addFirstChild.
 	aSequentialAnimation add:
 		(BlAnimation new
-			 duration: self secondSequentialDuration;
-			 loops: self secondSequentialLoops;
-			 delay: self secondSequentialDelay;
-			 yourself).
+			duration: self secondSequentialDuration;
+			loops: self secondSequentialLoops;
+			delay: self secondSequentialDelay;
+			yourself).
 
 	aTotalDuration :=
-		self firstSequentialDuration * self firstSequentialLoops.
-	aTotalDuration :=
-		aTotalDuration +
-		(self secondSequentialDuration +
-		self secondSequentialDelay *
-		self secondSequentialLoops).
+		(self firstSequentialDuration * self firstSequentialLoops) +
+		((self secondSequentialDuration + self secondSequentialDelay) *
+			self secondSequentialLoops).
 
 	self assert: aSequentialAnimation duration equals: aTotalDuration.
 
@@ -632,7 +649,6 @@ BlAnimationExamplesTest >> test_2_1_massive_infiniteAnimation_step_oneDuration [
 	| aBaseAnimation |
 	aBaseAnimation := self test_1_massive_infiniteAnimation_start.
 	aBaseAnimation time wait: self exampleDuration.
-
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 1.0.
@@ -642,8 +658,12 @@ BlAnimationExamplesTest >> test_2_1_massive_infiniteAnimation_step_oneDuration [
 	self assert: aBaseAnimation isRunning.
 	self assert: aBaseAnimation isInfinite.
 
-	self assert: aBaseAnimation startTime equals: self exampleDate.
-	self assert: aBaseAnimation delayedStartTime equals: self exampleDate.
+	self
+		assert: aBaseAnimation startTime
+		equals: self exampleDate.
+	self
+		assert: aBaseAnimation delayedStartTime
+		equals: self exampleDate.
 
 	self assert: aBaseAnimation loops equals: Float infinity.
 	self assert: aBaseAnimation delay equals: 0 seconds.
@@ -658,17 +678,20 @@ BlAnimationExamplesTest >> test_2_1_massive_oneLoopAnimation_step_oneDuration [
 	| aBaseAnimation |
 	aBaseAnimation := self test_1_massive_oneLoopAnimation_start.
 	aBaseAnimation time wait: self exampleDuration.
-
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 1.0.
 	self assert: aBaseAnimation elapsedTime equals: self exampleDuration.
 
 	self assert: aBaseAnimation isStarted.
-	self assert: aBaseAnimation isRunning not.
+	self deny: aBaseAnimation isRunning.
 
-	self assert: aBaseAnimation startTime equals: self exampleDate.
-	self assert: aBaseAnimation delayedStartTime equals: self exampleDate.
+	self
+		assert: aBaseAnimation startTime
+		equals: self exampleDate.
+	self
+		assert: aBaseAnimation delayedStartTime
+		equals: self exampleDate.
 
 	self assert: aBaseAnimation loops equals: 1.
 	self assert: aBaseAnimation delay equals: 0 seconds.
@@ -683,7 +706,6 @@ BlAnimationExamplesTest >> test_2_1_massive_twoLoopAnimation_step_oneDuration [
 	| aBaseAnimation |
 	aBaseAnimation := self test_1_massive_twoLoopAnimation_start.
 	aBaseAnimation time wait: self exampleDuration.
-
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 1.0.
@@ -692,8 +714,12 @@ BlAnimationExamplesTest >> test_2_1_massive_twoLoopAnimation_step_oneDuration [
 	self assert: aBaseAnimation isStarted.
 	self assert: aBaseAnimation isRunning.
 
-	self assert: aBaseAnimation startTime equals: self exampleDate.
-	self assert: aBaseAnimation delayedStartTime equals: self exampleDate.
+	self
+		assert: aBaseAnimation startTime
+		equals: self exampleDate.
+	self
+		assert: aBaseAnimation delayedStartTime
+		equals: self exampleDate.
 
 	self assert: aBaseAnimation loops equals: 2.
 	self assert: aBaseAnimation delay equals: 0 seconds.
@@ -715,7 +741,9 @@ BlAnimationExamplesTest >> test_2_1_sequential_step [
 	self assert: aSequentialAnimation isStarted.
 	self assert: aSequentialAnimation isRunning.
 
-	self assert: aSequentialAnimation startTime equals: self exampleDate.
+	self
+		assert: aSequentialAnimation startTime
+		equals: self exampleDate.
 	self
 		assert: aSequentialAnimation delayedStartTime
 		equals: self exampleDate + self exampleDelay.
@@ -733,7 +761,6 @@ BlAnimationExamplesTest >> test_2_2_baseAnimation_step_halfDelay [
 	| aBaseAnimation |
 	aBaseAnimation := self test_2_1_baseAnimation_step.
 	aBaseAnimation time wait: self exampleDelay / 2.0.
-
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 0.
@@ -742,7 +769,9 @@ BlAnimationExamplesTest >> test_2_2_baseAnimation_step_halfDelay [
 	self assert: aBaseAnimation isStarted.
 	self assert: aBaseAnimation isRunning.
 
-	self assert: aBaseAnimation startTime equals: self exampleDate.
+	self
+		assert: aBaseAnimation startTime
+		equals: self exampleDate.
 	self
 		assert: aBaseAnimation delayedStartTime
 		equals: self exampleDate + self exampleDelay.
@@ -790,17 +819,20 @@ BlAnimationExamplesTest >> test_2_2_massive_oneLoopAnimation_step_twiceDuration 
 	| aBaseAnimation |
 	aBaseAnimation := self test_1_massive_oneLoopAnimation_start.
 	aBaseAnimation time wait: self exampleDuration * 2.
-
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 1.0.
 	self assert: aBaseAnimation elapsedTime equals: self exampleDuration.
 
 	self assert: aBaseAnimation isStarted.
-	self assert: aBaseAnimation isRunning not.
+	self deny: aBaseAnimation isRunning.
 
-	self assert: aBaseAnimation startTime equals: self exampleDate.
-	self assert: aBaseAnimation delayedStartTime equals: self exampleDate.
+	self
+		assert: aBaseAnimation startTime
+		equals: self exampleDate.
+	self
+		assert: aBaseAnimation delayedStartTime
+		equals: self exampleDate.
 
 	self assert: aBaseAnimation loops equals: 1.
 	self assert: aBaseAnimation delay equals: 0 seconds.
@@ -815,7 +847,6 @@ BlAnimationExamplesTest >> test_2_2_massive_twoLoopAnimation_step_twiceDuration 
 	| aBaseAnimation |
 	aBaseAnimation := self test_1_massive_twoLoopAnimation_start.
 	aBaseAnimation time wait: self exampleDuration * 2.
-
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 1.0.
@@ -845,7 +876,6 @@ BlAnimationExamplesTest >> test_2_3_baseAnimation_step_fullDelay [
 	| aBaseAnimation |
 	aBaseAnimation := self test_2_2_baseAnimation_step_halfDelay.
 	aBaseAnimation time wait: self exampleDelay / 2.0.
-
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 0.
@@ -854,7 +884,9 @@ BlAnimationExamplesTest >> test_2_3_baseAnimation_step_fullDelay [
 	self assert: aBaseAnimation isStarted.
 	self assert: aBaseAnimation isRunning.
 
-	self assert: aBaseAnimation startTime equals: self exampleDate.
+	self
+		assert: aBaseAnimation startTime
+		equals: self exampleDate.
 	self
 		assert: aBaseAnimation delayedStartTime
 		equals: self exampleDate + self exampleDelay.
@@ -872,7 +904,6 @@ BlAnimationExamplesTest >> test_2_3_massive_infiniteAnimation_step_tripleDuratio
 	| aBaseAnimation |
 	aBaseAnimation := self test_1_massive_infiniteAnimation_start.
 	aBaseAnimation time wait: self exampleDuration * 3.
-
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 1.0.
@@ -902,7 +933,6 @@ BlAnimationExamplesTest >> test_2_3_massive_infiniteAnimation_step_tripleDuratio
 	| aBaseAnimation |
 	aBaseAnimation := self test_1_massive_infiniteAnimation_start.
 	aBaseAnimation time wait: self exampleDuration * 3.5.
-
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 0.5.
@@ -934,17 +964,20 @@ BlAnimationExamplesTest >> test_2_3_massive_oneLoopAnimation_step_tripleDuration
 	| aBaseAnimation |
 	aBaseAnimation := self test_1_massive_oneLoopAnimation_start.
 	aBaseAnimation time wait: self exampleDuration * 3.
-
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 1.0.
 	self assert: aBaseAnimation elapsedTime equals: self exampleDuration.
 
 	self assert: aBaseAnimation isStarted.
-	self assert: aBaseAnimation isRunning not.
+	self deny: aBaseAnimation isRunning.
 
-	self assert: aBaseAnimation startTime equals: self exampleDate.
-	self assert: aBaseAnimation delayedStartTime equals: self exampleDate.
+	self
+		assert: aBaseAnimation startTime
+		equals: self exampleDate.
+	self
+		assert: aBaseAnimation delayedStartTime
+		equals: self exampleDate.
 
 	self assert: aBaseAnimation loops equals: 1.
 	self assert: aBaseAnimation delay equals: 0 seconds.
@@ -959,7 +992,6 @@ BlAnimationExamplesTest >> test_2_3_massive_twoLoopAnimation_step_tripleDuration
 	| aBaseAnimation |
 	aBaseAnimation := self test_1_massive_twoLoopAnimation_start.
 	aBaseAnimation time wait: self exampleDuration * 3.
-
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 1.0.
@@ -989,7 +1021,6 @@ BlAnimationExamplesTest >> test_3_1_baseAnimation_step_quarterOfDuration [
 	| aBaseAnimation |
 	aBaseAnimation := self test_2_3_baseAnimation_step_fullDelay.
 	aBaseAnimation time wait: self exampleDuration / 4.0.
-
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 0.25.
@@ -1000,7 +1031,9 @@ BlAnimationExamplesTest >> test_3_1_baseAnimation_step_quarterOfDuration [
 	self assert: aBaseAnimation isStarted.
 	self assert: aBaseAnimation isRunning.
 
-	self assert: aBaseAnimation startTime equals: self exampleDate.
+	self
+		assert: aBaseAnimation startTime
+		equals: self exampleDate.
 	self
 		assert: aBaseAnimation delayedStartTime
 		equals: self exampleDate + self exampleDelay.
@@ -1019,7 +1052,6 @@ BlAnimationExamplesTest >> test_3_1_sequential_step_halfDelay [
 	| aSequentialAnimation |
 	aSequentialAnimation := self test_2_1_sequential_step.
 	aSequentialAnimation time wait: self exampleDelay / 2.0.
-
 	aSequentialAnimation run.
 
 	self assert: aSequentialAnimation progress equals: 0.
@@ -1028,7 +1060,9 @@ BlAnimationExamplesTest >> test_3_1_sequential_step_halfDelay [
 	self assert: aSequentialAnimation isStarted.
 	self assert: aSequentialAnimation isRunning.
 
-	self assert: aSequentialAnimation startTime equals: self exampleDate.
+	self
+		assert: aSequentialAnimation startTime
+		equals: self exampleDate.
 	self
 		assert: aSequentialAnimation delayedStartTime
 		equals: self exampleDate + self exampleDelay.
@@ -1046,7 +1080,6 @@ BlAnimationExamplesTest >> test_3_2_baseAnimation_step_halfOfDuration [
 	| aBaseAnimation |
 	aBaseAnimation := self test_3_1_baseAnimation_step_quarterOfDuration.
 	aBaseAnimation time wait: self exampleDuration / 4.0.
-
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 0.5.
@@ -1057,7 +1090,9 @@ BlAnimationExamplesTest >> test_3_2_baseAnimation_step_halfOfDuration [
 	self assert: aBaseAnimation isStarted.
 	self assert: aBaseAnimation isRunning.
 
-	self assert: aBaseAnimation startTime equals: self exampleDate.
+	self
+		assert: aBaseAnimation startTime
+		equals: self exampleDate.
 	self
 		assert: aBaseAnimation delayedStartTime
 		equals: self exampleDate + self exampleDelay.
@@ -1075,7 +1110,6 @@ BlAnimationExamplesTest >> test_3_2_sequential_step_fullDelay [
 	| aSequentialAnimation |
 	aSequentialAnimation := self test_3_1_sequential_step_halfDelay.
 	aSequentialAnimation time wait: self exampleDelay / 2.0.
-
 	aSequentialAnimation run.
 
 	self assert: aSequentialAnimation progress equals: 0.
@@ -1084,7 +1118,9 @@ BlAnimationExamplesTest >> test_3_2_sequential_step_fullDelay [
 	self assert: aSequentialAnimation isStarted.
 	self assert: aSequentialAnimation isRunning.
 
-	self assert: aSequentialAnimation startTime equals: self exampleDate.
+	self
+		assert: aSequentialAnimation startTime
+		equals: self exampleDate.
 	self
 		assert: aSequentialAnimation delayedStartTime
 		equals: self exampleDate + self exampleDelay.
@@ -1118,7 +1154,9 @@ BlAnimationExamplesTest >> test_3_3_baseAnimation_step_fullDuration [
 	self assert: aBaseAnimation isStarted.
 	self assert: aBaseAnimation isRunning.
 
-	self assert: aBaseAnimation startTime equals: self exampleDate.
+	self
+		assert: aBaseAnimation startTime
+		equals: self exampleDate.
 	self
 		assert: aBaseAnimation delayedStartTime
 		equals: self exampleDate + self exampleDelay.
@@ -1168,7 +1206,6 @@ BlAnimationExamplesTest >> test_4_1_sequential_first_step_halfOfDuration [
 	| aSequentialAnimation aFirstAnimation aSecondAnimation |
 	aSequentialAnimation := self test_3_2_sequential_step_fullDelay.
 	aSequentialAnimation time wait: self firstSequentialDuration / 2.0.
-
 	aSequentialAnimation run.
 
 	self assert: (aSequentialAnimation progress closeTo: 0.1818181).
@@ -1261,7 +1298,6 @@ BlAnimationExamplesTest >> test_4_2_sequential_first_step_fullDuration [
 	| aSequentialAnimation aFirstAnimation aSecondAnimation |
 	aSequentialAnimation := self test_4_1_sequential_first_step_halfOfDuration.
 	aSequentialAnimation time wait: self firstSequentialDuration / 2.0.
-
 	aSequentialAnimation run.
 
 	self assert: (aSequentialAnimation progress closeTo: 0.363636).
@@ -1272,7 +1308,9 @@ BlAnimationExamplesTest >> test_4_2_sequential_first_step_fullDuration [
 	self assert: aSequentialAnimation isStarted.
 	self assert: aSequentialAnimation isRunning.
 
-	self assert: aSequentialAnimation startTime equals: self exampleDate.
+	self
+		assert: aSequentialAnimation startTime
+		equals: self exampleDate.
 	self
 		assert: aSequentialAnimation delayedStartTime
 		equals: self exampleDate + self exampleDelay.
