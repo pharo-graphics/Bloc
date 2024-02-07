@@ -789,7 +789,6 @@ BlAnimationExamplesTest >> test_2_2_massive_infiniteAnimation_step_twiceDuration
 	| aBaseAnimation |
 	aBaseAnimation := self test_1_massive_infiniteAnimation_start.
 	aBaseAnimation time wait: self exampleDuration * 2.
-
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 1.0.
