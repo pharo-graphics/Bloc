@@ -2,14 +2,12 @@
 I exemplify how Bloc handles errors in different parts of the BlElement such as drawing, layout or event handling
 "
 Class {
-	#name : 'BlErrorHandlingExamplesTest',
-	#superclass : 'Object',
-	#category : 'Bloc-Examples-Errors',
-	#package : 'Bloc-Examples',
-	#tag : 'Errors'
+	#name : #BlErrorHandlingExamplesTest,
+	#superclass : #Object,
+	#category : #'Bloc-Examples-Errors'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlErrorHandlingExamplesTest >> sceneWith: aFaultyElement [
 	"Create a visual scene with a faulty element embedded in it"
 
@@ -58,7 +56,7 @@ BlErrorHandlingExamplesTest >> sceneWith: aFaultyElement [
 	^ aContainer
 ]
 
-{ #category : 'error - examples' }
+{ #category : #'error - examples' }
 BlErrorHandlingExamplesTest >> testSceneElementThatHasBrokenDrawing [
 
 	| aFaultyElement theErrors aSceneElement |
@@ -77,7 +75,7 @@ BlErrorHandlingExamplesTest >> testSceneElementThatHasBrokenDrawing [
 	self assert: theErrors first element equals: aFaultyElement
 ]
 
-{ #category : 'error - examples' }
+{ #category : #'error - examples' }
 BlErrorHandlingExamplesTest >> testSceneElementThatHasBrokenDrawingAndOnLayout [
 
 	| aFaultyElement theErrors aSceneElement |
@@ -103,7 +101,7 @@ BlErrorHandlingExamplesTest >> testSceneElementThatHasBrokenDrawingAndOnLayout [
 	self assert: theErrors second element equals: aFaultyElement
 ]
 
-{ #category : 'error - examples' }
+{ #category : #'error - examples' }
 BlErrorHandlingExamplesTest >> testSceneElementThatHasBrokenOnLayout [
 
 	| aSceneElement aFaultyElement theErrors |

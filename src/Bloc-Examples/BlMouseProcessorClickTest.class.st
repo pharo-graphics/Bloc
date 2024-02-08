@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlMouseProcessorClickTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Examples-Event',
-	#package : 'Bloc-Examples',
-	#tag : 'Event'
+	#name : #BlMouseProcessorClickTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 BlMouseProcessorClickTest >> newScripterElement [
 
 	^ BlExampleEventsCountingElement new
@@ -15,7 +13,7 @@ BlMouseProcessorClickTest >> newScripterElement [
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlMouseProcessorClickTest >> testClick [
 
 	| aScripter |
@@ -52,7 +50,7 @@ BlMouseProcessorClickTest >> testClick [
 	^ aScripter
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlMouseProcessorClickTest >> testMouseDown [
 
 	| aScripter |
@@ -86,7 +84,7 @@ BlMouseProcessorClickTest >> testMouseDown [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlMouseProcessorClickTest >> testMouseEnter [
 
 	| aScripter |

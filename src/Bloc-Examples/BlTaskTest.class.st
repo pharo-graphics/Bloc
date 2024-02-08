@@ -3,13 +3,12 @@ I have been automatically converted and probably manually tweaked from BlTaskExa
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlTaskTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Examples',
-	#package : 'Bloc-Examples'
+	#name : #BlTaskTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Examples'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTaskTest >> testAddElementWithTaskToSpace [
 	<sampleInstance>
 	
@@ -29,7 +28,7 @@ BlTaskTest >> testAddElementWithTaskToSpace [
 	^ aSpace
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTaskTest >> testAddTaskToTheElementWithoutSpace [
 
 	<sampleInstance>
@@ -52,7 +51,7 @@ BlTaskTest >> testAddTaskToTheElementWithoutSpace [
 	^ anElement
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTaskTest >> testPulseSpaceWithTask [
 
 	<sampleInstance>
