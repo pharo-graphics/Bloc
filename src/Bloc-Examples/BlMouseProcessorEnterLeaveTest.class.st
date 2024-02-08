@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlMouseProcessorEnterLeaveTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Examples-Event',
-	#package : 'Bloc-Examples',
-	#tag : 'Event'
+	#name : #BlMouseProcessorEnterLeaveTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 BlMouseProcessorEnterLeaveTest >> newScripterElement [
 
 	^ BlExampleEventsCountingElement new
@@ -15,7 +13,7 @@ BlMouseProcessorEnterLeaveTest >> newScripterElement [
 		  yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlMouseProcessorEnterLeaveTest >> testMouseEnter [
 
 	| aScripter |
@@ -54,7 +52,7 @@ BlMouseProcessorEnterLeaveTest >> testMouseEnter [
 	^ aScripter
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlMouseProcessorEnterLeaveTest >> testMouseLeave [
 
 	| aScripter |
@@ -87,7 +85,7 @@ BlMouseProcessorEnterLeaveTest >> testMouseLeave [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlMouseProcessorEnterLeaveTest >> testMouseLeaveDueToRemovalFromScene [
 
 	| aScripter |

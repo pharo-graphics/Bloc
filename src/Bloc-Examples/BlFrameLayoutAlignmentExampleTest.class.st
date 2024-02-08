@@ -1,11 +1,10 @@
 Class {
-	#name : 'BlFrameLayoutAlignmentExampleTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Examples',
-	#package : 'Bloc-Examples'
+	#name : #BlFrameLayoutAlignmentExampleTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Examples'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlFrameLayoutAlignmentExampleTest class >> cheatSheet [
 
 	<script>
@@ -17,7 +16,7 @@ BlFrameLayoutAlignmentExampleTest class >> cheatSheet [
 	space show
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlFrameLayoutAlignmentExampleTest >> cheatSheet [
 
 	<demo>
@@ -51,7 +50,7 @@ BlFrameLayoutAlignmentExampleTest >> cheatSheet [
 	^ parent
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFrameLayoutAlignmentExampleTest >> child [
 
 	^ BlElement new
@@ -60,7 +59,7 @@ BlFrameLayoutAlignmentExampleTest >> child [
 		  layout: BlLinearLayout vertical
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlFrameLayoutAlignmentExampleTest >> childLeft: aLeftIndex Bottom: aBottomIndex [
 
 	| child |
@@ -76,7 +75,7 @@ BlFrameLayoutAlignmentExampleTest >> childLeft: aLeftIndex Bottom: aBottomIndex 
 	^ child
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlFrameLayoutAlignmentExampleTest >> childLeft: aLeftIndex Top: aTopIndex [
 
 	| child |
@@ -93,7 +92,7 @@ BlFrameLayoutAlignmentExampleTest >> childLeft: aLeftIndex Top: aTopIndex [
 	^ child
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlFrameLayoutAlignmentExampleTest >> childRight: aRightIndex Bottom: aBottomIndex [
 
 	| child |
@@ -110,7 +109,7 @@ BlFrameLayoutAlignmentExampleTest >> childRight: aRightIndex Bottom: aBottomInde
 	^ child
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlFrameLayoutAlignmentExampleTest >> childRight: aRightIndex Top: aTopIndex [
 
 	| child |
@@ -127,7 +126,7 @@ BlFrameLayoutAlignmentExampleTest >> childRight: aRightIndex Top: aTopIndex [
 	^ child
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlFrameLayoutAlignmentExampleTest >> childrenLeft: aLeftCollection Bottom: aBottomCollection [
 
 	| children |
@@ -137,7 +136,7 @@ BlFrameLayoutAlignmentExampleTest >> childrenLeft: aLeftCollection Bottom: aBott
 	^ children
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlFrameLayoutAlignmentExampleTest >> childrenLeft: aLeftCollection Top: aTopCollection [
 
 	| children |
@@ -149,7 +148,7 @@ BlFrameLayoutAlignmentExampleTest >> childrenLeft: aLeftCollection Top: aTopColl
 	^ children
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlFrameLayoutAlignmentExampleTest >> childrenRight: aRightCollection Bottom: aBottomCollection [
 
 	| children |
@@ -162,7 +161,7 @@ BlFrameLayoutAlignmentExampleTest >> childrenRight: aRightCollection Bottom: aBo
 	^ children
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlFrameLayoutAlignmentExampleTest >> childrenRight: aRightCollection Top: aTopCollection [
 
 	| children |
@@ -173,7 +172,7 @@ BlFrameLayoutAlignmentExampleTest >> childrenRight: aRightCollection Top: aTopCo
 	^ children
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlFrameLayoutAlignmentExampleTest >> parent [
 
 	| parent line1 line2 |
@@ -214,7 +213,7 @@ BlFrameLayoutAlignmentExampleTest >> parent [
 	^ parent
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 BlFrameLayoutAlignmentExampleTest >> textElementWith: aString [
 
 	^ (BlTextElement new

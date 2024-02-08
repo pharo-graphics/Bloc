@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlFocusProcessorTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-Examples-Event',
-	#package : 'Bloc-Examples',
-	#tag : 'Event'
+	#name : #BlFocusProcessorTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Examples-Event'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 BlFocusProcessorTest >> newElementWithFocusHandler [
 
 	| aTextStyler hasFocus isFocused aTextBuilder aLabel |
@@ -67,7 +65,7 @@ BlFocusProcessorTest >> newElementWithFocusHandler [
 		yourself
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlFocusProcessorTest >> newScripterElement [
 
 	^ self newElementWithFocusHandler
@@ -173,7 +171,7 @@ BlFocusProcessorTest >> newScripterElement [
 			yourself
 ]
 
-{ #category : 'tests - lose focus' }
+{ #category : #'tests - lose focus' }
 BlFocusProcessorTest >> testLoseFocus01GiveFocusToChild1 [
 
 	| aScripter |
@@ -272,7 +270,7 @@ BlFocusProcessorTest >> testLoseFocus01GiveFocusToChild1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'tests - lose focus' }
+{ #category : #'tests - lose focus' }
 BlFocusProcessorTest >> testLoseFocus02RemoveChild1 [
 
 	| aScripter aChild1 |
@@ -380,7 +378,7 @@ BlFocusProcessorTest >> testLoseFocus02RemoveChild1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'tests - lose focus' }
+{ #category : #'tests - lose focus' }
 BlFocusProcessorTest >> testLoseFocus03AddBackChild1 [
 
 	| aScripter aChild1 |
@@ -487,7 +485,7 @@ BlFocusProcessorTest >> testLoseFocus03AddBackChild1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'tests - request focus' }
+{ #category : #'tests - request focus' }
 BlFocusProcessorTest >> testRequestFocus01Parent [
 
 	| aScripter |
@@ -526,7 +524,7 @@ BlFocusProcessorTest >> testRequestFocus01Parent [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'tests - request focus' }
+{ #category : #'tests - request focus' }
 BlFocusProcessorTest >> testRequestFocus02Container1 [
 
 	| aScripter |
@@ -584,7 +582,7 @@ BlFocusProcessorTest >> testRequestFocus02Container1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'tests - request focus' }
+{ #category : #'tests - request focus' }
 BlFocusProcessorTest >> testRequestFocus03Container2 [
 
 	| aScripter |
@@ -662,7 +660,7 @@ BlFocusProcessorTest >> testRequestFocus03Container2 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'tests - request focus' }
+{ #category : #'tests - request focus' }
 BlFocusProcessorTest >> testRequestFocus04Child1 [
 
 	| aScripter |
@@ -760,7 +758,7 @@ BlFocusProcessorTest >> testRequestFocus04Child1 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'tests - request focus' }
+{ #category : #'tests - request focus' }
 BlFocusProcessorTest >> testRequestFocus05Child4 [
 
 	| aScripter |
@@ -878,7 +876,7 @@ BlFocusProcessorTest >> testRequestFocus05Child4 [
 	^ aScripter syncContinue
 ]
 
-{ #category : 'tests - request focus' }
+{ #category : #'tests - request focus' }
 BlFocusProcessorTest >> testRequestFocus06Container1 [
 
 	| aScripter |

@@ -1,12 +1,10 @@
 Class {
-	#name : 'BlAlternativeCombinationExamples',
-	#superclass : 'BlKeyCombinationExamplesTest',
-	#category : 'Bloc-Examples-KeyBinding',
-	#package : 'Bloc-Examples',
-	#tag : 'KeyBinding'
+	#name : #BlAlternativeCombinationExamples,
+	#superclass : #BlKeyCombinationExamplesTest,
+	#category : #'Bloc-Examples-KeyBinding'
 }
 
-{ #category : 'examples - combination' }
+{ #category : #'examples - combination' }
 BlAlternativeCombinationExamples >> testCombinationWithA [
 
 	<sampleInstance>
@@ -22,7 +20,7 @@ BlAlternativeCombinationExamples >> testCombinationWithA [
 	^ aCombination
 ]
 
-{ #category : 'examples - combination' }
+{ #category : #'examples - combination' }
 BlAlternativeCombinationExamples >> testCombinationWithAB [
 
 	<sampleInstance>
@@ -40,7 +38,7 @@ BlAlternativeCombinationExamples >> testCombinationWithAB [
 	^ aCombination
 ]
 
-{ #category : 'examples - combination' }
+{ #category : #'examples - combination' }
 BlAlternativeCombinationExamples >> testCombinationWithABC [
 
 	<sampleInstance>
@@ -59,7 +57,7 @@ BlAlternativeCombinationExamples >> testCombinationWithABC [
 	^ aCombination
 ]
 
-{ #category : 'examples - combination' }
+{ #category : #'examples - combination' }
 BlAlternativeCombinationExamples >> testEmptyCombination [
 
 	<sampleInstance>
@@ -73,7 +71,7 @@ BlAlternativeCombinationExamples >> testEmptyCombination [
 	^ aCombination
 ]
 
-{ #category : 'examples - combination' }
+{ #category : #'examples - combination' }
 BlAlternativeCombinationExamples >> testMatchCombinationWithA [
 
 	<sampleInstance>
@@ -90,7 +88,7 @@ BlAlternativeCombinationExamples >> testMatchCombinationWithA [
 	^ aCombination
 ]
 
-{ #category : 'examples - combination' }
+{ #category : #'examples - combination' }
 BlAlternativeCombinationExamples >> testMatchCombinationWithAB [
 
 	<sampleInstance>
@@ -116,7 +114,7 @@ BlAlternativeCombinationExamples >> testMatchCombinationWithAB [
 	^ aCombination
 ]
 
-{ #category : 'examples - combination' }
+{ #category : #'examples - combination' }
 BlAlternativeCombinationExamples >> testNoMatchCombinationWithA [
 
 	<sampleInstance>
@@ -133,7 +131,7 @@ BlAlternativeCombinationExamples >> testNoMatchCombinationWithA [
 	^ aCombination
 ]
 
-{ #category : 'examples - combination' }
+{ #category : #'examples - combination' }
 BlAlternativeCombinationExamples >> testNoMatchCombinationWithAB [
 
 	<sampleInstance>
@@ -151,7 +149,7 @@ BlAlternativeCombinationExamples >> testNoMatchCombinationWithAB [
 	^ aCombination
 ]
 
-{ #category : 'examples - store' }
+{ #category : #'examples - store' }
 BlAlternativeCombinationExamples >> testStoreCombinationWithA [
 
 	<sampleInstance>
@@ -170,7 +168,7 @@ BlAlternativeCombinationExamples >> testStoreCombinationWithA [
 	^ aStoreString
 ]
 
-{ #category : 'examples - store' }
+{ #category : #'examples - store' }
 BlAlternativeCombinationExamples >> testStoreCombinationWithAB [
 
 	<sampleInstance>
@@ -189,7 +187,7 @@ BlAlternativeCombinationExamples >> testStoreCombinationWithAB [
 	^ aStoreString
 ]
 
-{ #category : 'examples - store' }
+{ #category : #'examples - store' }
 BlAlternativeCombinationExamples >> testStoreCombinationWithABC [
 
 	<sampleInstance>
@@ -208,7 +206,7 @@ BlAlternativeCombinationExamples >> testStoreCombinationWithABC [
 	^ aStoreString
 ]
 
-{ #category : 'examples - store' }
+{ #category : #'examples - store' }
 BlAlternativeCombinationExamples >> testStoreEmptyCombination [
 
 	<sampleInstance>
