@@ -47,47 +47,57 @@ BlSelectionHandlerTest >> testCell [
 		  size: 75 @ 75;
 		  background: Color random paler;
 		  addEventHandlerOn: BlElementSelectionAcquiredEvent
-		  do: [ :anEvent | 
-			  anEvent currentTarget border: (BlBorder builder
+			  do: [ :anEvent |
+				  anEvent currentTarget border: (BlBorder builder
 						   width: 2;
 						   paint: Color blue;
 						   build) ];
 		  addEventHandlerOn: BlElementSelectionLostEvent
-		  do: [ :anEvent | anEvent currentTarget border: BlBorder empty ]
+			  do: [ :anEvent | anEvent currentTarget border: BlBorder empty ];
+		  yourself
 ]
 
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testContainer [
 
 	^ BlElement new
-		  constraintsDo: [ :c | 
+		  constraintsDo: [ :c |
 			  c horizontal matchParent.
 			  c vertical matchParent ];
-		  background: Color white
+		  background: Color white;
+		  yourself
 ]
 
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testContainerWithOneGrid [
 
-	^ self testContainer addChild: self testGridWith11Cells
+	^ self testContainer
+		  addChild: self testGridWith11Cells;
+		  yourself
 ]
 
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testContainerWithOneGridAndVisualHandler [
 
-	^ self testContainerWithOneGrid addEventHandler: self testVisualHandler
+	^ self testContainerWithOneGrid
+		  addEventHandler: self testVisualHandler;
+		  yourself
 ]
 
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testContainerWithThreeGrids [
 
-	^ self testContainer addChild: self testThreeGrids
+	^ self testContainer
+		  addChild: self testThreeGrids;
+		  yourself
 ]
 
 { #category : #'smoke tests' }
 BlSelectionHandlerTest >> testContainerWithThreeGridsAndVisualHandler [
 
-	^ self testContainerWithThreeGrids addEventHandler: self testVisualHandler
+	^ self testContainerWithThreeGrids
+		  addEventHandler: self testVisualHandler;
+		  yourself
 ]
 
 { #category : #'smoke tests' }
@@ -102,7 +112,8 @@ BlSelectionHandlerTest >> testGrid [
 		  layoutDo: [ :l | 
 			  l
 				  cellSpacing: 20;
-				  rowCount: 5 ]
+				  rowCount: 5 ];
+			yourself
 ]
 
 { #category : #'smoke tests' }
@@ -122,7 +133,8 @@ BlSelectionHandlerTest >> testThreeGrids [
 		  addChildren: { 
 				  self testGridWith11Cells.
 				  self testGridWith11Cells.
-				  self testGridWith11Cells }
+				  self testGridWith11Cells };
+		  yourself
 ]
 
 { #category : #'smoke tests' }

@@ -85,7 +85,8 @@ BlFocusExamples >> cell [
 		addEventHandlerOn: BlBlurEvent do: [ :anEvent | anEvent target border: BlBorder empty ];
 		addEventHandlerOn: BlClickEvent do: [ :anEvent | 
 			anEvent consumed: true.
-			anEvent target requestFocus ]
+			anEvent target requestFocus ];
+		yourself
 ]
 
 { #category : #examples }
