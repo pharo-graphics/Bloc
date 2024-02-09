@@ -32,7 +32,17 @@ TBlEventTarget >> addEventHandlerIfNotPresent: anEventHandler [
 
 { #category : #'event management' }
 TBlEventTarget >> addEventHandlerOn: anEventClass do: aBlock [
-	self addEventHandler: (BlEventHandler on: anEventClass do: aBlock)
+	"Add a new event handler for the received event class, and answer the new handler."
+	
+	| newEventHandler |
+	newEventHandler :=
+		BlEventHandler
+			on: anEventClass
+			do: aBlock.
+
+	self addEventHandler: newEventHandler.
+
+	^ newEventHandler
 ]
 
 { #category : #'shortcut management' }
@@ -179,12 +189,11 @@ TBlEventTarget >> shortcuts [
 { #category : #'event management' }
 TBlEventTarget >> when: anEventClass do: aBlock [
 
-
 	self
-		deprecated: 'Don t use it, this method cannot provide a determinist management of handler. Use add/remove event handler'
-		transformWith: '`@rcv when: `@arg1 do: `@arg2' -> '`@rcv addEventHandler: ( BlEventHandler on: `@arg1 do: `@arg2 )'.
-		
-	self addEventHandler: (BlEventHandler on: anEventClass do: aBlock)
+		deprecated: 'Use instead #addEventHandlerOn:do:'
+		transformWith: '`@rcv when: `@arg1 do: `@arg2' -> '`@rcv addEventHandlerOn: `@arg1 do: `@arg2'.
+
+	^ self addEventHandlerOn: anEventClass do: aBlock
 ]
 
 { #category : #'event management' }

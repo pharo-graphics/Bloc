@@ -204,6 +204,32 @@ BlEventTest >> testRedElement [
 ]
 
 { #category : #tests }
+BlEventTest >> testRemoveEventHandlerAnsweredByAddEventHandlerOnDo [
+
+	| event target handler countA countB handlerA handlerB |
+	target := self testCustomEventTarget.
+	countA := countB := 0.
+	handlerA :=
+		target
+			addEventHandlerOn: BlExampleCustomEvent
+			do: [ :_ | countA := countA + 1 ].
+	handlerB :=
+		target
+			addEventHandlerOn: BlExampleCustomEvent
+			do: [ :_ | countB := countB + 1 ].
+	target dispatchEvent: BlExampleCustomEvent new.
+	self assert: countA equals: 1.
+	self assert: countB equals: 1.
+
+	target removeEventHandler: handlerA.
+
+	target removeEventHandler: handlerA.
+	target dispatchEvent: BlExampleCustomEvent new.
+	self assert: countA equals: 1.
+	self assert: countB equals: 2
+]
+
+{ #category : #tests }
 BlEventTest >> testSimulateClick [
 
 	<sampleInstance>
