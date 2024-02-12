@@ -507,6 +507,10 @@ BlSpace >> center [
 { #category : #'children - accessing' }
 BlSpace >> children [
 
+	self
+		deprecated: 'Talk directly to root'
+		transformWith: '`@rcv children' -> '`@rcv root children'.
+		
 	^ self root children
 ]
 
@@ -527,7 +531,10 @@ BlSpace >> close [
 { #category : #'composition layer' }
 BlSpace >> compositionLayer [
 	"Return my composition layer if I have one or nil otherwise"
-	<return: #BlCompositionLayer or: nil>
+
+	self
+		deprecated: 'Talk directly to root'
+		transformWith: '`@rcv compositionLayer' -> '`@rcv root compositionLayer'.
 
 	^ self root compositionLayer
 ]
@@ -1702,6 +1709,11 @@ BlSpace >> toFront [
 
 { #category : #accessing }
 BlSpace >> topMostParent [
+
+	self
+		deprecated: 'Talk directly to root'
+		transformWith: '`@rcv topMostParent' -> '`@rcv root'.
+
 	^ self root
 ]
 
@@ -1779,13 +1791,20 @@ BlSpace >> windowScale [
 
 { #category : #'api - children enumeration' }
 BlSpace >> withAllChildrenBreadthFirst [
-	<return: #Collection of: #BlElement>
+
+	self
+		deprecated: 'Talk directly to root'
+		transformWith: '`@rcv withAllChildrenBreadthFirst' -> '`@rcv root withAllChildrenBreadthFirst'.
 	
 	^ self root withAllChildrenBreadthFirst
 ]
 
 { #category : #'api - children enumeration' }
 BlSpace >> withAllChildrenBreadthFirstDo: aBlock [ 
-	
+
+	self
+		deprecated: 'Talk directly to root'
+		transformWith: '`@rcv withAllChildrenBreadthFirstDo: `@arg' -> '`@rcv root withAllChildrenBreadthFirstDo: `@arg'.
+
 	^ self root withAllChildrenBreadthFirstDo: aBlock 
 ]
