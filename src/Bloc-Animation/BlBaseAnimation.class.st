@@ -49,12 +49,6 @@ Class {
 	#category : #'Bloc-Animation-Basic'
 }
 
-{ #category : #'action  handling' }
-BlBaseAnimation >> addOnFinishedHandler: anActionHandler [
-
-	actionHandlers add: anActionHandler
-]
-
 { #category : #'private - testing' }
 BlBaseAnimation >> atLeastOneLoopDone [
 	
@@ -150,7 +144,6 @@ BlBaseAnimation >> initialize [
 
 	super initialize.
 	
-	actionHandlers := OrderedCollection new.
 	eventDispatcher := BlDirectEventDispatcher on: self.
 	
 	delay := 0 milliSeconds.
@@ -237,7 +230,8 @@ BlBaseAnimation >> notifyLoopDone [
 BlBaseAnimation >> notifyOnFinishedHandlers [
 
 	self onFinished.
-	actionHandlers do: [ :each | each actionPerformed ]
+	
+	self dispatchEvent: BlAnimationStoppedEvent new
 ]
 
 { #category : #hooks }
@@ -255,7 +249,9 @@ BlBaseAnimation >> onFinished [
 { #category : #'action  handling' }
 BlBaseAnimation >> onFinishedDo: aBlock [
 
-	self addOnFinishedHandler: (BlOnActionHandler do: aBlock)
+	self
+		addEventHandlerOn: BlAnimationStoppedEvent 
+		do: aBlock
 ]
 
 { #category : #hooks }
@@ -308,12 +304,6 @@ BlBaseAnimation >> progress [
 	1 - animation loop is done"
 
 	^ progress
-]
-
-{ #category : #'action  handling' }
-BlBaseAnimation >> removeOnFinishedHandler: anActionHandler [
-
-	actionHandlers remove: anActionHandler
 ]
 
 { #category : #'private - testing' }
