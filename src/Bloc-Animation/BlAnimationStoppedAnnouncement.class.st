@@ -1,5 +1,5 @@
 Class {
-	#name : #BlAnimationStoppedEvent,
+	#name : #BlAnimationStoppedAnnouncement,
 	#superclass : #BlAnimationAnnouncement,
 	#category : #'Bloc-Animation-Events'
 }

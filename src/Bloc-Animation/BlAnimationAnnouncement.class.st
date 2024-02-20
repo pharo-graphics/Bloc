@@ -29,6 +29,22 @@ BlAnimationAnnouncement >> animation: anObject [
 	animation := anObject
 ]
 
+{ #category : #printing }
+BlAnimationAnnouncement >> printOn: aStream [
+	"Generate a string representation of the receiver based on its instance variables."
+
+	super printOn: aStream.
+	aStream
+		nextPutAll: ' animation: ';
+		print: animation.
+	aStream
+		nextPutAll: ' timestamp: ';
+		print: timestamp.
+	aStream
+		nextPutAll: ' progress: ';
+		print: progress
+]
+
 { #category : #accessing }
 BlAnimationAnnouncement >> progress [
 

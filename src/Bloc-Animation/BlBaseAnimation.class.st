@@ -221,7 +221,7 @@ BlBaseAnimation >> nextLoopStartTime [
 BlBaseAnimation >> notifyLoopDone [
 
 	announcer announce:
-		(BlAnimationLoopDoneEvent new
+		(BlAnimationLoopDoneAnnouncement new
 			animation: self;
 			yourself)
 ]
@@ -232,7 +232,7 @@ BlBaseAnimation >> notifyOnFinishedHandlers [
 	self onFinished.
 	
 	announcer announce:
-		(BlAnimationStoppedEvent new
+		(BlAnimationStoppedAnnouncement new
 			animation: self;
 			yourself)
 ]
@@ -253,7 +253,7 @@ BlBaseAnimation >> onFinished [
 BlBaseAnimation >> onFinishedDo: aBlock [
 
 	announcer
-		when: BlAnimationStoppedEvent 
+		when: BlAnimationStoppedAnnouncement 
 		do: aBlock
 		for: self
 ]
@@ -272,7 +272,7 @@ BlBaseAnimation >> onLoopDone [
 BlBaseAnimation >> onStep [
 
 	announcer announce:
-		(BlAnimationStepEvent new
+		(BlAnimationStepAnnouncement new
 			 animation: self;
 			 yourself)
 ]

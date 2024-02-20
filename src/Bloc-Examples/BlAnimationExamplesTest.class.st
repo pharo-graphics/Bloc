@@ -1132,16 +1132,16 @@ BlAnimationExamplesTest >> test_3_2_sequential_step_fullDelay [
 BlAnimationExamplesTest >> test_3_3_baseAnimation_step_fullDuration [
 	"in this example we see what exactly happens when the whole duration is passed"
 
-	| aBaseAnimation loopDoneListener loopDoneCount |
+	| aBaseAnimation announcerSubscription loopDoneCount |
 	aBaseAnimation := self test_3_2_baseAnimation_step_halfOfDuration.
 	aBaseAnimation time wait: self exampleDuration / 2.0.
 
 	loopDoneCount := 0.
-	loopDoneListener :=
-		BlEventHandler
-			on: BlAnimationLoopDoneEvent
-			do: [ :anEvent | loopDoneCount := loopDoneCount + 1 ].
-	aBaseAnimation addEventHandler: loopDoneListener.
+	announcerSubscription :=
+		aBaseAnimation announcer
+			when: BlAnimationLoopDoneAnnouncement
+			do: [ :_ | loopDoneCount := loopDoneCount + 1 ]
+			for: self.
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 1.
@@ -1162,7 +1162,7 @@ BlAnimationExamplesTest >> test_3_3_baseAnimation_step_fullDuration [
 	self assert: aBaseAnimation delay equals: self exampleDelay.
 	self assert: aBaseAnimation duration equals: self exampleDuration.
 
-	aBaseAnimation removeEventHandler: loopDoneListener.
+	aBaseAnimation announcer removeSubscription: announcerSubscription.
 
 	^ aBaseAnimation
 ]
@@ -1483,16 +1483,16 @@ BlAnimationExamplesTest >> test_4_4_baseAnimation_secondLoop_step_halfOfDuration
 { #category : #'examples - base animation' }
 BlAnimationExamplesTest >> test_4_5_baseAnimation_secondLoop_step_fullDuration [
 
-	| aBaseAnimation loopDoneCount loopDoneListener |
+	| aBaseAnimation loopDoneCount announcerSubscription |
 	aBaseAnimation := self test_4_4_baseAnimation_secondLoop_step_halfOfDuration.
 	aBaseAnimation time wait: self exampleDuration / 2.0.
 
 	loopDoneCount := 0.
-	loopDoneListener :=
-		BlEventHandler
-			on: BlAnimationLoopDoneEvent
-			do: [ :anEvent | loopDoneCount := loopDoneCount + 1 ].
-	aBaseAnimation addEventHandler: loopDoneListener.
+	announcerSubscription :=
+		aBaseAnimation announcer
+			when: BlAnimationLoopDoneAnnouncement
+			do: [ :_ | loopDoneCount := loopDoneCount + 1 ]
+			for: self.
 	aBaseAnimation run.
 
 	self assert: aBaseAnimation progress equals: 1.
@@ -1514,7 +1514,7 @@ BlAnimationExamplesTest >> test_4_5_baseAnimation_secondLoop_step_fullDuration [
 	self assert: aBaseAnimation delay equals: self exampleDelay.
 	self assert: aBaseAnimation duration equals: self exampleDuration.
 
-	aBaseAnimation removeEventHandler: loopDoneListener.
+	aBaseAnimation announcer removeSubscription: announcerSubscription.
 
 	^ aBaseAnimation
 ]
