@@ -223,7 +223,10 @@ BlBaseAnimation >> nextLoopStartTime [
 { #category : #'private - notifying' }
 BlBaseAnimation >> notifyLoopDone [
 
-	self dispatchEvent: BlAnimationLoopDoneEvent new
+	self dispatchEvent:
+		(BlAnimationLoopDoneEvent new
+			timestamp: time now;
+			yourself)
 ]
 
 { #category : #'private - notifying' }
