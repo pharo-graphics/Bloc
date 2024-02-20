@@ -270,6 +270,7 @@ BlBaseAnimation >> onStep [
 	self fireEvent:
 		(BlAnimationStepEvent new
 			 progress: progress;
+			 timestamp: time now;
 			 yourself)
 ]
 
