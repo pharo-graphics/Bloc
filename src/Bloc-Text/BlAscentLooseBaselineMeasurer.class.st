@@ -13,5 +13,5 @@ Class {
 BlAscentLooseBaselineMeasurer >> computedBaseline: aTextParagraph [
 	<return: #Point>
 
-	^ 0 @ aTextParagraph ascent abs
+	^ 0 @ aTextParagraph ascent abs 
 ]

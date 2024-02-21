@@ -1,10 +1,8 @@
 "
 # Text element
 
-**I am independent from Sparta **
-
-I support multiple measurement strategies, see examples for more detailed explanation:
-{{gtClass:BlTextElementMeasurementStrategyExamples}}
+I support multiple measurement strategies. See examples for more detailed explanation on:
+`BlTextElementMeasurementStrategyExamples`.
 
 
 "
@@ -19,10 +17,13 @@ Class {
 		'measurer',
 		'defaultFontSize',
 		'baselineMeasurer',
-		'highlightsMap'
+		'highlightsMap',
+		'fillSize',
+		'tabOffset'
 	],
 	#classVars : [
-		'DefaultText'
+		'DefaultText',
+		'SelectionMatchParent'
 	],
 	#category : #'Bloc-Text-Elements'
 }
@@ -30,6 +31,26 @@ Class {
 { #category : #'class initialization' }
 BlTextElement class >> initialize [ 
 	DefaultText := 'Text' asRopedText readonly
+]
+
+{ #category : #accessing }
+BlTextElement class >> selectionColor [
+
+	^ Color
+		  r: 0.9530791788856305
+		  g: 0.8084066471163245
+		  b: 0.1906158357771261
+		  alpha: 1.0
+]
+
+{ #category : #accessing }
+BlTextElement class >> selectionMatchParent [
+	^ SelectionMatchParent ifNil: [ SelectionMatchParent := false ] 
+]
+
+{ #category : #accessing }
+BlTextElement class >> selectionMatchParent: aBoolean [
+	SelectionMatchParent := aBoolean
 ]
 
 { #category : #'instance creation' }
@@ -50,19 +71,6 @@ BlTextElement >> baseline [
 				-> '`@receiver baselineMeasurer'.
 	
 	^ self baselineMeasurer
-]
-
-{ #category : #accessing }
-BlTextElement >> baseline: aBlTextParagraphBaselineMeasurer [
-
-	self
-		deprecated: 'Please use baselineMeasurer: instead.'
-		transformWith:
-			'`@receiver baseline: `@statements1'
-				-> '`@receiver baselineMeasurer: `@statements1'.
-
-	self baselineMeasurer: aBlTextParagraphBaselineMeasurer.
-
 ]
 
 { #category : #accessing }
@@ -88,6 +96,38 @@ BlTextElement >> baselineOffset [
 { #category : #layout }
 BlTextElement >> basicMeasureParagraph: aBlTextParagraph [
 	measurer measureTextParagraph: aBlTextParagraph of: self
+]
+
+{ #category : #'paragraph - geometry' }
+BlTextElement >> characterBoundsAtIndex: aLocalIndex [
+
+	| startSpan startPos originIdx endPos endSpan cornerIdx extentToUse line cornerY origin |
+	line := self textFlow assignedLine.
+	origin := line origin.
+	cornerY := origin y + self textFlow assignedLine height.
+	extentToUse :=  (fillSize max: self extent x) @ cornerY.
+	originIdx := (aLocalIndex - 1 max: 0) min: text size.
+	startSpan := paragraph spanAtIndex: originIdx.
+	startPos := startSpan positionAt: originIdx.
+
+	cornerIdx := originIdx + 1 min: text size.
+	endSpan := paragraph spanAtIndex: cornerIdx.
+	endPos := endSpan positionAt: cornerIdx.
+	^ startPos x @ origin y corner: endPos x @ extentToUse y
+]
+
+{ #category : #'paragraph - geometry' }
+BlTextElement >> characterWidthAtIndex: aLocalIndex [
+
+	| startSpan startPos originIdx endPos endSpan cornerIdx  |
+	originIdx := (aLocalIndex - 1 max: 0) min: text size.
+	startSpan := paragraph spanAtIndex: originIdx.
+	startPos := startSpan positionAt: originIdx.
+
+	cornerIdx := originIdx + 1 min: text size.
+	endSpan := paragraph spanAtIndex: cornerIdx.
+	endPos := endSpan positionAt: cornerIdx.
+	^ endPos x - startPos x 
 ]
 
 { #category : #layout }
@@ -125,13 +165,6 @@ BlTextElement >> computeMaxWidth: anExtentMeasurementSpec [
 	^ aMaxWidth
 ]
 
-{ #category : #'private - paragraph' }
-BlTextElement >> createTextParagraph [
-	"Create a text paragraph used to measure and render text"
-
-	^ BlTextParagraph new 
-]
-
 { #category : #'api - font size' }
 BlTextElement >> defaultFontSize: aNumber [	
 	defaultFontSize = aNumber
@@ -151,7 +184,7 @@ BlTextElement >> defaultHighlightCategory [
 
 { #category : #initialization }
 BlTextElement >> defaultMeasurer [
-	^ BlTextElementHostMeasurer new
+	^ BlTextElementHostMeasurer uniqueInstance 
 ]
 
 { #category : #initialization }
@@ -175,8 +208,7 @@ BlTextElement >> deselect: aFromIndex to: aToIndex [
 { #category : #'api - text' }
 BlTextElement >> editorMeasurement [
 
-	self measurement:
-		BlTextElementEditorMeasurementStrategy uniqueInstance.
+	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance.
 	self baselineMeasurer: BlAscentLooseBaselineMeasurer uniqueInstance
 ]
 
@@ -192,6 +224,15 @@ BlTextElement >> highlightCategory: aHighlightCategorySymbol with: aParagraphHig
 	l := self highlightsMap at: aHighlightCategorySymbol ifAbsentPut: [OrderedCollection new].
 	l add: aParagraphHighlight.
 	self invalidate
+]
+
+{ #category : #'api - highlighting' }
+BlTextElement >> highlightRectanglesOfCategory: aCategory [
+
+	^ Array streamContents: [ :stream | 
+		  (self highlightsOfCategory: aCategory) do: [ :eachHighlight | 
+			  stream nextPutAll:
+				  (self selectionRectanglesFrom: eachHighlight selection) ] ]
 ]
 
 { #category : #'api - highlighting' }
@@ -214,6 +255,14 @@ BlTextElement >> highlightsMap [
 	^ highlightsMap ifNil: [ highlightsMap := IdentityDictionary new ]
 ]
 
+{ #category : #'api - highlighting' }
+BlTextElement >> highlightsOfCategory: aCategory [
+
+	^ highlightsMap
+		  ifNotNil: [ :map | map at: aCategory ifAbsent: [ #(  ) ] ]
+		  ifNil: [ #(  ) ]
+]
+
 { #category : #geometry }
 BlTextElement >> indexAtScreenPosition: aPoint [
 	<return: #Number>
@@ -227,9 +276,9 @@ BlTextElement >> initialize [
 
 	self tightMeasurement.
 
+	tabOffset := 0.
 	text := self defaultText.
 	"Text layout is created during measurement in onMeasure:"
-	paragraph := nil.
 	measurer := self defaultMeasurer.
 
 	self constraintsDo: [ :c | 
@@ -249,32 +298,40 @@ BlTextElement >> isTabulation [
 { #category : #'api - text' }
 BlTextElement >> labelMeasurement [
 
-	self measurement:
-		BlTextElementLabelMeasurementStrategy uniqueInstance.
+	self measurement: BlTextElementEditorMeasurementStrategy uniqueInstance.
+
+	self flag: 'To be reviewed'.
+	"For the record: int the Bloc original version, BlTextElementLabelMeasurementStrategy is used. 
+	Changed to BlTextElementEditorMeasurementStrategy to make multiline ToLabel working correctly.
+	This will maybe be changed back to BlTextElementLabelMeasurementStrategy later
+	"
+
 	self baselineMeasurer: BlAscentTightBaselineMeasurer uniqueInstance
 ]
 
 { #category : #layout }
-BlTextElement >> measureChildren: anExtentMeasurementSpec [	
+BlTextElement >> measureChildren: anExtentMeasurementSpec [
+
 	self layout measuredChildren: self do: [ :aChild |
-		| aWidthResizer aHeightResizer aWidthSpec aHeightSpec  |
+		| aWidthResizer aHeightResizer aWidthSpec aHeightSpec |
 		
 		aWidthResizer := aChild constraints horizontal resizer.
-		aHeightResizer := aChild constraints vertical resizer.
-		
-		aWidthResizer isMatchParent
-			ifTrue: [ aWidthSpec := BlMeasurementSpec exact: self measuredWidth ]
-			ifFalse: [ aWidthSpec := self layout
-				measurementSpecFor: anExtentMeasurementSpec widthSpec
-				usedSize: 0.0
-				resizer: aWidthResizer ].
+		aWidthSpec := aWidthResizer isMatchParent
+			ifTrue: [ BlMeasurementSpec exact: self measuredWidth ]
+			ifFalse: [
+				self layout
+					measurementSpecFor: anExtentMeasurementSpec widthSpec
+					usedSize: 0.0
+					resizer: aWidthResizer ].
 
-		aHeightResizer isMatchParent
-			ifTrue: [ aHeightSpec := BlMeasurementSpec exact: self measuredHeight ]
-			ifFalse: [ aHeightSpec := self layout
-				measurementSpecFor: anExtentMeasurementSpec heightSpec
-				usedSize: 0.0
-				resizer: aHeightResizer ].
+		aHeightResizer := aChild constraints vertical resizer.
+		aHeightSpec := aHeightResizer isMatchParent
+			ifTrue: [ BlMeasurementSpec exact: self measuredHeight ]
+			ifFalse: [
+				self layout
+					measurementSpecFor: anExtentMeasurementSpec heightSpec
+					usedSize: 0.0
+					resizer: aHeightResizer ].
 	
 		aChild measure: aWidthSpec @ aHeightSpec ].
 	
@@ -282,74 +339,11 @@ BlTextElement >> measureChildren: anExtentMeasurementSpec [
 ]
 
 { #category : #layout }
-BlTextElement >> measureParagraph: anExtentMeasurementSpec [
+BlTextElement >> measuredExtent: anExtentPoint [
 
-	"If I am executed it means that measurement specification changed.
-	We have to recreate a text layout with new parameters"
-
-	| aMaxWidth aMaxHeight aWidthSpec aHeightSpec aPadding aMeasuredWidth aMeasuredHeight aMeasuredExtent aMeasuredBounds |
-	aWidthSpec := anExtentMeasurementSpec widthSpec.
-	aHeightSpec := anExtentMeasurementSpec heightSpec.
-	aPadding := self constraints padding.
-
-	aMaxWidth := self computeMaxWidth: anExtentMeasurementSpec.
-	aMaxHeight := self computeMaxHeight: anExtentMeasurementSpec.
-
-	paragraph
-		ifNil: [ paragraph := self createTextParagraph ]
-		ifNotNil: [ paragraph reset ].
-	"Create a new text layout"
-	paragraph
-		baselineMeasurer: self baselineMeasurer;
-		text: self text;
-		maxWidth: aMaxWidth;
-		maxHeight: aMaxHeight;
-		scale: self globalScale.
-
-	self telemetry
-		timeSync: [ 'Paragraph measureOn: ' , self class name ]
-		during: [ self basicMeasureParagraph: paragraph ].
-
-	"text layout is measured at this point"
-	aMeasuredBounds := measurement boundsOf: paragraph.
-	aMeasuredWidth := aMeasuredBounds width min: aMaxWidth.
-	aMeasuredHeight := aMeasuredBounds height min: aMaxHeight.
-
-	"If measurement spec is exact I must ignore size measured by textLayout"
-	aWidthSpec isExact ifTrue: [ aMeasuredWidth := aWidthSpec size ].
-	aHeightSpec isExact ifTrue: [ aMeasuredHeight := aHeightSpec size ].
-
-	"Take minimal width and height into account"
-	aMeasuredWidth := aMeasuredWidth max:
-		                  self constraints minWidth - aPadding width.
-	aMeasuredHeight := aMeasuredHeight max:
-		                   self constraints minHeight - aPadding height.
-	aMeasuredExtent := aMeasuredWidth @ aMeasuredHeight.
-	"Take padding into account"
-	aMeasuredExtent := aMeasuredExtent
-	                   + (aPadding width @ aPadding height).
-
-	"Finally set measured extent"
-	self measuredExtent: aMeasuredExtent
-]
-
-{ #category : #layout }
-BlTextElement >> measuredMaxLineHeight [
-	
-	| h |
-	h := self height.
-	self previousSiblingDo: [ :s | h := h max: s measuredBounds height ].
-	self nextSiblingDo: [ :s | h := h max: s measuredBounds height ].
-	^  h
-	
-]
-
-{ #category : #layout }
-BlTextElement >> measuredWidthFromLineStart [
-	
-	self previousSiblingDo: [ :s | ^ s measuredWidthFromLineStart + s measuredWidth  ].
-	^  0
-	
+	super measuredExtent: (self isTabulation
+			 ifTrue: [ self tunedTabulationExtentFrom: anExtentPoint ]
+			 ifFalse: [ anExtentPoint ])
 ]
 
 { #category : #accessing }
@@ -376,6 +370,19 @@ BlTextElement >> measurer: anObject [
 	self textChanged
 ]
 
+{ #category : #'private - paragraph' }
+BlTextElement >> newTextParagraph [
+	"Create a text paragraph used to measure and render text"
+
+	^ BlTextParagraph new 
+]
+
+{ #category : #layout }
+BlTextElement >> offsetFromSegmentStart [
+	"computed and set during layout by AlbLineFlowLayout>>measure: with: "
+	^ self textFlow offsetFromSegmentStart
+]
+
 { #category : #'hooks - session' }
 BlTextElement >> onAddedToSceneGraph [
 	super onAddedToSceneGraph.
@@ -390,20 +397,69 @@ BlTextElement >> onAddedToSceneGraph [
 { #category : #layout }
 BlTextElement >> onMeasure: anExtentMeasurementSpec [
 
-	self isTabulation
-		ifTrue: [ 
-			| tabParagraph tabSpec w tabW |
-			tabParagraph := self createTextParagraph.
-			tabParagraph text: text.
-			self basicMeasureParagraph: tabParagraph.
-			w := self measuredWidthFromLineStart.
-			tabW := tabParagraph advance - (w\\tabParagraph advance).
-			tabSpec := (anExtentMeasurementSpec widthSpec beExact: tabW) @ anExtentMeasurementSpec heightSpec.
-			self measureParagraph: tabSpec ]
-		ifFalse: [ (self shouldMeasure: anExtentMeasurementSpec) 
-			ifTrue: [ self measureParagraph: anExtentMeasurementSpec ] ].
-		
+	"Do the measuring job"
+
+	"fillSize is used to ensure that the selection works with tabulation. 
+	In case of a tabulation, it is computed in #tunedTabulationExtentFrom:"
+
+	fillSize := 0.
+
+	self onParagraphMeasure: anExtentMeasurementSpec.
+	self onPostMeasure: anExtentMeasurementSpec.
 	self measureChildren: anExtentMeasurementSpec
+]
+
+{ #category : #layout }
+BlTextElement >> onParagraphMeasure: anExtentMeasurementSpec [
+
+	"If I am executed, it means that measurement specification changed.
+	We have to recreate a text paragraph with new parameters"
+
+	| aMaxWidth aMaxHeight |
+
+	aMaxWidth := self computeMaxWidth: anExtentMeasurementSpec.
+	aMaxHeight := self computeMaxHeight: anExtentMeasurementSpec.
+
+	paragraph := self newTextParagraph
+		text: self text;
+		baselineMeasurer: self baselineMeasurer;
+		maxWidth: aMaxWidth;
+		maxHeight: aMaxHeight;
+		yourself.
+
+	self basicMeasureParagraph: paragraph.
+	"Pay attention that #onPostMeasure: must be sent after #onParagraphMeasure:"
+]
+
+{ #category : #layout }
+BlTextElement >> onPostMeasure: anExtentMeasurementSpec [
+
+	"If I am executed it means that measurement specification changed.
+	We have to recreate a text layout with new parameters"
+
+	| measuredWidth measuredHeight maxWidth maxHeight widthSpec heightSpec padding paragraphBounds |
+	widthSpec := anExtentMeasurementSpec widthSpec.
+	heightSpec := anExtentMeasurementSpec heightSpec.
+	paragraphBounds := measurement boundsOf: paragraph.
+
+	"If measurement spec is exact I must ignore size measured by textLayout"
+	widthSpec isExact
+		ifTrue: [ measuredWidth := widthSpec size ]
+		ifFalse: [
+			maxWidth := self computeMaxWidth: anExtentMeasurementSpec.
+			measuredWidth := paragraphBounds width min: maxWidth ].
+	heightSpec isExact
+		ifTrue: [ measuredHeight := heightSpec size ]
+		ifFalse: [
+			maxHeight := self computeMaxHeight: anExtentMeasurementSpec.
+			measuredHeight := paragraphBounds height min: maxHeight ].
+
+	"Take minimal width and height into account"
+	padding := self constraints padding.
+	measuredWidth := measuredWidth max: self constraints minWidth - padding width.
+	measuredHeight := measuredHeight max: self constraints minHeight - padding height.
+	"Take padding into account to finally set measured extent"
+	self measuredExtent: (measuredWidth + padding width) @ (measuredHeight + padding height)
 ]
 
 { #category : #'hooks - session' }
@@ -431,13 +487,6 @@ BlTextElement >> rawParagraph [
 	^ self paragraph
 ]
 
-{ #category : #'private - pool' }
-BlTextElement >> recycledFrom: aStencilBuilder [
-
-	self removeFromParent.
-	self selectNone
-]
-
 { #category : #'private - paragraph' }
 BlTextElement >> releaseParagraph [
 	paragraph := nil
@@ -461,6 +510,24 @@ BlTextElement >> resetHighlightsOfCategory: aHighlightCategorySymbol [
 	highlightsMap ifNil: [ ^self ].
 	highlightsMap removeKey: aHighlightCategorySymbol ifAbsent: [^self].
 	self invalidate
+]
+
+{ #category : #geometry }
+BlTextElement >> screenCornerAt: aTextIndex [
+
+	<return: #Point>
+	| aScreenPosition |
+	aScreenPosition := self paragraph positionAt: aTextIndex.
+	^ aScreenPosition x - self padding right @ (self height - self padding height)
+]
+
+{ #category : #geometry }
+BlTextElement >> screenOriginAt: aTextIndex [
+
+	<return: #Point>
+	| aScreenPosition |
+	aScreenPosition := self paragraph positionAt: (aTextIndex max: 0).
+	^ aScreenPosition x + self padding left @ self padding height
 ]
 
 { #category : #geometry }
@@ -512,34 +579,58 @@ BlTextElement >> selection [
 	^ selection
 ]
 
-{ #category : #'private - paragraph' }
-BlTextElement >> setupParagraphBeforeDrawing [
+{ #category : #geometry }
+BlTextElement >> selectionRectangles [
 
-	paragraph containerExtent: (self isLastChild
-			 ifTrue: [ self parent extent x @ self extent y ]
-			 ifFalse: [ self extent ]).
-	paragraph selection: self selection.
-	paragraph padding: self padding.
-	" highligh is lazy, do not use the accessor"
-	paragraph highlights: self highlights
+	^ self selectionRectanglesFrom: selection
 ]
 
-{ #category : #layout }
+{ #category : #geometry }
+BlTextElement >> selectionRectanglesFrom: aSelection [
+
+	| extentToUse origin cornerY |
+	(aSelection isNil or: [ aSelection isEmpty ]) ifTrue: [ ^ #(  ) ].
+	origin := self textFlow assignedLine origin.
+	cornerY := origin y + self textFlow assignedLine height.
+	extentToUse :=  (fillSize max: self extent x) @ cornerY.
+	^ Array streamContents: [ :stream | 
+		  aSelection do: [ :currSelection | 
+			  | aStart anEnd aSelectionStartSpan aSelectionEndSpan aSelectionStartPosition aSelectionEndPosition |
+			  aStart := currSelection from min: text size.
+			  anEnd := currSelection to min: text size.
+
+			  aSelectionStartSpan := paragraph spanAtIndex: aStart.
+			  aSelectionEndSpan := paragraph spanAtIndex: anEnd.
+
+			  aSelectionStartPosition := aStart isZero
+				                             ifTrue: [ 0 @ origin y ]
+				                             ifFalse: [ (aSelectionStartSpan positionAt: aStart) + (self padding left @ origin y) ].
+
+			  aSelectionEndPosition := anEnd = text size
+				                           ifTrue: [ (aSelectionEndSpan positionAt: anEnd) + (self padding width - tabOffset @ cornerY) ]
+				                           ifFalse: [ (aSelectionEndSpan positionAt: anEnd) + (self padding left - tabOffset @ cornerY) ].
+
+			  "containerExtent includes padding"
+			  stream nextPut: (currSelection to > text size
+					   ifTrue: [ aSelectionStartPosition x @ origin y corner: extentToUse ]
+					   ifFalse: [ aSelectionStartPosition x @ origin y corner: aSelectionEndPosition x @ extentToUse y ]) ] ]
+]
+
+{ #category : #asserting }
 BlTextElement >> shouldMeasure: anExtentMeasurementSpec [
 
-	paragraph
-		ifNil: [ ^ true ].
-		
-	paragraph isEmpty
-		ifTrue: [ ^ true ].
+	<return: #Boolean>
+	paragraph ifNil: [ ^ true ].
 
-	(self privatePreviousMeasurementSpec = anExtentMeasurementSpec)
+	paragraph isEmpty ifTrue: [ ^ true ].
+
+	self privatePreviousMeasurementSpec = anExtentMeasurementSpec 
 		ifFalse: [ ^ true ].
 
-	paragraph maxWidth = (self computeMaxWidth: anExtentMeasurementSpec)
+	paragraph maxWidth = (self computeMaxWidth: anExtentMeasurementSpec) 
 		ifFalse: [ ^ true ].
 
-	paragraph maxHeight = (self computeMaxHeight: anExtentMeasurementSpec)
+	paragraph maxHeight = (self computeMaxHeight: anExtentMeasurementSpec) 
 		ifFalse: [ ^ true ].
 
 	^ false
@@ -587,9 +678,27 @@ BlTextElement >> textDo: aBlock [
 	self textChanged
 ]
 
+{ #category : #layout }
+BlTextElement >> textFlow [
+	^ self constraints albumTextFlow.
+]
+
 { #category : #'api - text' }
 BlTextElement >> tightMeasurement [
 
 	self measurement: BlTextElementTightMeasurementStrategy uniqueInstance.
 	self baselineMeasurer: BlBoundsBaselineMeasurer uniqueInstance
+]
+
+{ #category : #layout }
+BlTextElement >> tunedTabulationExtentFrom: anExtentPoint [
+
+	"Computed the size of a tabulation according to the tab-stop size."
+	
+	"record the fill size for the selection to work in case of #shouldFillLine answers true"
+	fillSize := anExtentPoint x.
+	"compute and record the offset used to draw the selection on a tab"
+	tabOffset := self offsetFromSegmentStart \\ paragraph advance.
+	"adapt the extent to correctly measure a tab according to the tab-stop"
+	^ paragraph advance - tabOffset @ anExtentPoint y
 ]

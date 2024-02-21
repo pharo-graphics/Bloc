@@ -1,16 +1,16 @@
 "
 # Background
 
-I represent a background of the {{gtClass:BlElement}}. 
-**I am immutable and can not be changed once created.** To modify the background, create a new instance and set it by sending {{gtMethod:BlElement>>#background:}}
+I represent a background of the `BlElement`. 
+**I am immutable and can not be changed once created.** To modify the background, create a new instance and set it by sending `BlElement>>#background:`
 
 ## Types of background
 
 There are multiple pre-built types of background:
- - paint background {{gtClass:BlPaintBackground}} which allows users to use any {{gtClass:BlPaint}} as a background
- - image background {{gtClass:BlImageBackground}} to use a bitmap {{gtClass:Form}}
- - composite background {{gtClass:BlCompositeBackground}} letting users to compose different types of background into one more complex background
- - transparent background {{gtClass:BlTransparentBackground}} as a special type of background that 
+ - paint background `BlPaintBackground` which allows users to use any `BlPaint` as a background
+ - image background `BlImageBackground` to use a bitmap `Form`
+ - composite background `BlCompositeBackground` letting users to compose different types of background into one more complex background
+ - transparent background `BlTransparentBackground` as a special type of background that 
 
 Background can be instantiated and composed directly or with the help of `BlBackgroundBuilder`.
 See `BlBackgroundBuilder` for the related examples.
@@ -61,24 +61,33 @@ BlBackground >> asBlBackground [
 
 { #category : #initialization }
 BlBackground >> defaultOpacity [
-	"By default background is completely opaque"
-	<return: #Number>
+	"By default background is completely opaque so it returns a float indicating it: 1.0"
 
 	^ 1.0
 ]
 
 { #category : #testing }
+BlBackground >> isColorBackground [
+
+	^ self isPaintBackground and: [ self paint isColorPaint ]
+]
+
+{ #category : #testing }
 BlBackground >> isOpaque [
 	"Return true if the whole background is opaque"
-	<return: #Boolean>
 	
+	^ false
+]
+
+{ #category : #testing }
+BlBackground >> isPaintBackground [
+
 	^ false
 ]
 
 { #category : #testing }
 BlBackground >> isTransparent [
 	"Return true if background is transparent and should not be rendered, false otherwise"
-	<return: #Boolean>
 
 	^ self subclassResponsibility
 ]
@@ -93,23 +102,24 @@ BlBackground >> matchExtent: anExtent [
 
 { #category : #accessing }
 BlBackground >> opacity [
-	<return: #Number>
+	"Return a float representing the opacity of the receiver. 1.0 meaning that it is opaque and 0 that it is fully transparent."
 
 	^ opacity ifNil: [ self defaultOpacity ]
 ]
 
 { #category : #accessing }
 BlBackground >> opacity: aNumber [
-
-	self
-		assert: [ aNumber between: 0.0 and: 1.0 ]
-		description: [ 'Opacity value must be within interval [0..1]' ].
+	"Opacity value must be within interval [0..1]. 1.0 meaning that the receiver is opaque."
 
 	opacity isNotNil
 		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
-
 	self opacity = aNumber
 		ifTrue: [ ^ self ].
-
 	opacity := aNumber
+]
+
+{ #category : #accessing }
+BlBackground >> paint [
+
+	^ nil
 ]

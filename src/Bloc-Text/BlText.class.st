@@ -7,7 +7,7 @@ I define a public API of the text model. User must only talk with me using provi
 
 I only store string and corresponding attributes. I don't know anything about text layout or paragraphs. I should be used together with BrTextParagraph in order to be measured, layered out and rendered. 
 
-Once a piece of string is converted {{gtClass:name=BlText}} users must not make any assumption on the internat structure of that string inside of the text. For example I replace all occurrences of `CrLf` with a special marker that is exactly one item instead of two characters (`Cr` and `Lf`)
+Once a piece of string is converted `name=BlText` users must not make any assumption on the internat structure of that string inside of the text. For example I replace all occurrences of `CrLf` with a special marker that is exactly one item instead of two characters (`Cr` and `Lf`)
 
 I provide a fluent text styling api:
 
@@ -21,7 +21,7 @@ text
 
 ## Attributes
 
-- {{gtClass:BlTextUnderlineAttribute}}
+- `BlTextUnderlineAttribute`
 
 "
 Class {
@@ -452,11 +452,17 @@ BlText >> insertText: aString at: anIndex [
 	^ self subclassResponsibility
 ]
 
+{ #category : #copying }
+BlText >> internalRepresentation [
+
+	" gives direct acces to how the text is privately represented - to be used with caution for optimization purpose"
+	^ self subclassResponsibility 
+]
+
 { #category : #'text - testing' }
 BlText >> isEmpty [
 	"Return true if this text is empty, false otherwise.
 	Note: Override me to provide performance optimized implementation"
-	<return: #Boolean>
 
 	^ self subclassResponsibility
 ]
@@ -666,6 +672,13 @@ BlText >> suspendAnnouncementsWhile: aBlock [
 	announcer
 		ifNil: aBlock
 		ifNotNil: [ :anAnnouncer | anAnnouncer suspendAllWhile: aBlock ]
+]
+
+{ #category : #copying }
+BlText >> takeInternalRepresentationOf: anotherText [
+
+	" To be used with caution because the receiver and the argument text must have the same internal representation"
+	self subclassResponsibility 
 ]
 
 { #category : #'text - accessing' }

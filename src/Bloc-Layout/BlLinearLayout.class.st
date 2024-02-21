@@ -1,15 +1,17 @@
 Class {
 	#name : #BlLinearLayout,
 	#superclass : #BlLayout,
-	#traits : 'TBlAlignable + TBlDirectionalLayout',
-	#classTraits : 'TBlAlignable classTrait + TBlDirectionalLayout classTrait',
+	#traits : 'TBlAlignable',
+	#classTraits : 'TBlAlignable classTrait',
 	#instVars : [
 		'weightSum',
 		'verticalAlignment',
 		'horizontalAlignment',
 		'orientation',
 		'shouldUseLargestChild',
-		'cellSpacing'
+		'cellSpacing',
+		'direction',
+		'interspace'
 	],
 	#category : #'Bloc-Layout-Linear'
 }
@@ -27,23 +29,6 @@ BlLinearLayout class >> horizontal [
 { #category : #factory }
 BlLinearLayout class >> vertical [
 	^ self new beVertical
-]
-
-{ #category : #comparing }
-BlLinearLayout >> = anObject [
-	"Answer whether the receiver and anObject represent the same object."
-
-	self == anObject
-		ifTrue: [ ^ true ].
-	self class = anObject class
-		ifFalse: [ ^ false ].
-	^ weightSum = anObject weightSum
-		and: [ verticalAlignment = anObject verticalAlignment
-				and: [ shouldUseLargestChild = anObject shouldUseLargestChild
-						and: [ orientation = anObject orientation
-								and: [ horizontalAlignment = anObject horizontalAlignment
-										and: [ direction = anObject direction
-												and: [ cellSpacing = anObject cellSpacing ] ] ] ] ] ]
 ]
 
 { #category : #'api - alignment' }
@@ -124,20 +109,16 @@ BlLinearLayout >> defaultWeightSum [
 	^ 0
 ]
 
-{ #category : #comparing }
-BlLinearLayout >> hash [
-	"Answer an integer value that is related to the identity of the receiver."
+{ #category : #'api - direction' }
+BlLinearLayout >> direction [
 
-	^ weightSum hash
-		bitXor:
-			(verticalAlignment hash
-				bitXor:
-					(shouldUseLargestChild hash
-						bitXor:
-							(orientation hash
-								bitXor:
-									(horizontalAlignment hash
-										bitXor: (direction hash bitXor: cellSpacing hash)))))
+	^ direction ifNil: [ self defaultDirection ]
+]
+
+{ #category : #'api - direction' }
+BlLinearLayout >> direction: aBlLayoutDirection [
+
+	direction := aBlLayoutDirection
 ]
 
 { #category : #accessing }
@@ -152,20 +133,40 @@ BlLinearLayout >> horizontalAlignment: anAlignment [
 
 { #category : #initialization }
 BlLinearLayout >> initialize [
+
 	super initialize.
-	
+
 	weightSum := self defaultWeightSum.
 	shouldUseLargestChild := false.
 	cellSpacing := 0.0.
+	interspace := 0.0.
 	verticalAlignment := self defaultVerticalAlignment.
 	horizontalAlignment := self defaultHorizontalAlignment.
+
+	self orientation: self defaultOrientation
+]
+
+{ #category : #accessing }
+BlLinearLayout >> interspace [
 	
-	self orientation: self defaultOrientation.
+	^ interspace
+]
+
+{ #category : #accessing }
+BlLinearLayout >> interspace: aNumber [	
+	
+	interspace := aNumber asFloat
 ]
 
 { #category : #testing }
 BlLinearLayout >> isHorizontal [
 	^ self orientation isHorizontal
+]
+
+{ #category : #testing }
+BlLinearLayout >> isOrientable [
+
+	^ true
 ]
 
 { #category : #testing }
@@ -179,14 +180,20 @@ BlLinearLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpda
 	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext
 ]
 
+{ #category : #'api - direction' }
+BlLinearLayout >> leftToRight [
+
+	self direction: BlLayoutDirection leftToRight
+]
+
 { #category : #measure }
 BlLinearLayout >> measure: anElement with: anExtentSpec [
 	| aMeasurer |
 	"I measure a new extent of myself and my children"
 	
 	aMeasurer := self orientation isHorizontal
-		ifTrue: [ BlLinearLayoutHorizontalMeasurer new ]
-		ifFalse: [ BlLinearLayoutVerticalMeasurer new ].
+		ifTrue: [ self newHorizontalMeasurer ]
+		ifFalse: [ self newVerticalMeasurer ].
 		
 	aMeasurer
 		initializeWith: anElement
@@ -199,6 +206,18 @@ BlLinearLayout >> measure: anElement with: anExtentSpec [
 	self measureIgnored: anElement with: (BlExtentMeasurementSpec exact: anElement measuredExtent)
 ]
 
+{ #category : #measure }
+BlLinearLayout >> newHorizontalMeasurer [ 
+
+	^ BlLinearLayoutHorizontalMeasurer new 
+]
+
+{ #category : #measure }
+BlLinearLayout >> newVerticalMeasurer [ 
+
+	^ BlLinearLayoutVerticalMeasurer new 
+]
+
 { #category : #accessing }
 BlLinearLayout >> orientation [
 	^ orientation
@@ -206,8 +225,16 @@ BlLinearLayout >> orientation [
 
 { #category : #accessing }
 BlLinearLayout >> orientation: anOrientation [
+
+	anOrientation layout: self.
 	orientation := anOrientation.
-	anOrientation layout: self
+
+]
+
+{ #category : #'api - direction' }
+BlLinearLayout >> rightToLeft [
+
+	self direction: BlLayoutDirection rightToLeft
 ]
 
 { #category : #testing }

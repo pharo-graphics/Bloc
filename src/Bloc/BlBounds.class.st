@@ -17,22 +17,29 @@ Class {
 
 { #category : #'instance creation' }
 BlBounds class >> fromRectangle: aRectangle [
+
 	^ self new
-		rectangle: aRectangle;
-		yourself
+		  rectangle: aRectangle;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlBounds class >> left: aLeft top: aTop right: aRight bottom: aBottom [
-	<return: #BlBounds>
 
-	^ self new left: aLeft top: aTop right: aRight bottom: aBottom
+	^ self new
+		  left: aLeft
+		  top: aTop
+		  right: aRight
+		  bottom: aBottom;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlBounds class >> origin: anOrigin corner: aCorner [
 
-	^ self new origin: anOrigin corner: aCorner
+	^ self new
+		  origin: anOrigin corner: aCorner;
+		  yourself
 ]
 
 { #category : #'instance creation' }
@@ -63,7 +70,6 @@ BlBounds >> asRectangle [
 	"Convert me to immutable Rectangle.
 	Note, that using left:right:top:bottom: is the fastest way to create
 	a rectangle from set of numbers (faster than Point#>>corner:)"
-	<return: #Rectangle>
 
 	^ Rectangle left: left right: right top: top bottom: bottom
 ]
@@ -82,6 +88,7 @@ BlBounds >> atRandom [
 
 { #category : #accessing }
 BlBounds >> bottom [
+
 	^ bottom
 ]
 
@@ -95,7 +102,6 @@ BlBounds >> bottom: aNumber [
 { #category : #accessing }
 BlBounds >> bottomCenter [
 	"Answer the point at the center of the receiver's bottom horizontal line."
-	<return: #Point>
 
 	^ self center x @ self bottom
 ]
@@ -103,7 +109,6 @@ BlBounds >> bottomCenter [
 { #category : #accessing }
 BlBounds >> bottomLeft [
 	"Answer the point at the left edge of the bottom horizontal line of the receiver."
-	<return: #Point>
 
 	^ self origin x @ self corner y
 ]
@@ -111,13 +116,13 @@ BlBounds >> bottomLeft [
 { #category : #accessing }
 BlBounds >> bottomRight [
 	"Answer the point at the right edge of the bottom horizontal line of the receiver."
-	<return: #Point>
 
 	^ self corner
 ]
 
 { #category : #initialization }
 BlBounds >> bounds: aBlBounds [
+
 	self
 		left: aBlBounds left
 		top: aBlBounds top
@@ -127,28 +132,24 @@ BlBounds >> bounds: aBlBounds [
 
 { #category : #accessing }
 BlBounds >> center [
-	<return: #Point>
 
 	^ ((left / 2.0) + (right / 2.0)) @ ((top / 2.0) + (bottom / 2.0))
 ]
 
 { #category : #accessing }
 BlBounds >> centerLeft [
-	<return: #Point>
 
 	^ self left @ self center y
 ]
 
 { #category : #accessing }
 BlBounds >> centerRight [
-	<return: #Point>
 
 	^ self right @ self center y
 ]
 
 { #category : #'vector functions' }
 BlBounds >> clamp: aPoint [
-	<return: #Point>
 
 	^ (aPoint min: self corner) max: self origin
 ]
@@ -168,7 +169,6 @@ BlBounds >> clockwiseEdges [
 { #category : #testing }
 BlBounds >> closeTo: aBlBounds [
 	"Return true if I am close to the given bounds"
-	<return: #Boolean>
 	
 	^ (self left closeTo: aBlBounds left)
 		and: [ (self right closeTo: aBlBounds right)
@@ -186,9 +186,8 @@ BlBounds >> closestEdgeTo: aPoint [
 { #category : #testing }
 BlBounds >> containedInRect: aRectangle [
 	"Answer whether a receiver is within a aRectangle"
-	<return: #Boolean>
+
 	| aLeft aTop aRight aBottom |
-	
 	aLeft := aRectangle left.
 	aTop := aRectangle top.
 	aRight := aRectangle right.
@@ -203,7 +202,6 @@ BlBounds >> containedInRect: aRectangle [
 { #category : #testing }
 BlBounds >> containsPoint: aPoint [ 
 	"Answer whether aPoint is within the receiver."
-	<return: #Boolean>
 
 	^ self origin <= aPoint and: [ aPoint < self corner ]
 ]
@@ -211,9 +209,8 @@ BlBounds >> containsPoint: aPoint [
 { #category : #testing }
 BlBounds >> containsRect: aRectangle [
 	"Answer whether aRectangle is within the receiver"
-	<return: #Boolean>
+
 	| aLeft aTop aRight aBottom |
-	
 	aLeft := aRectangle left.
 	aTop := aRectangle top.
 	aRight := aRectangle right.
@@ -227,6 +224,7 @@ BlBounds >> containsRect: aRectangle [
 
 { #category : #accessing }
 BlBounds >> corner [
+
 	^ right @ bottom
 ]
 
@@ -256,8 +254,8 @@ BlBounds >> counterClockwiseEdges [
 
 { #category : #accessing }
 BlBounds >> encompass [
+
 	| newLeft newTop newRight newBottom |
-	
 	newLeft := left min: right.
 	newTop := top min: bottom.
 	newRight := left max: right.
@@ -304,7 +302,8 @@ BlBounds >> expandByLeft: aLeft top: aTop right: aRight bottom: aBottom [
 ]
 
 { #category : #'rectangle functions' }
-BlBounds >> expandByMargin: aMargin [ 	
+BlBounds >> expandByMargin: aMargin [
+
 	self
 		left: left - aMargin left
 		top: top - aMargin top
@@ -324,6 +323,7 @@ BlBounds >> expandByNumber: aNumber [
 
 { #category : #'rectangle functions' }
 BlBounds >> expandByPoint: aPoint [
+
 	self
 		left: left - aPoint x
 		top: top - aPoint y
@@ -351,6 +351,7 @@ BlBounds >> extent [
 
 { #category : #initialization }
 BlBounds >> extent: aPoint [
+
 	self
 		left: left
 		top: top
@@ -360,16 +361,19 @@ BlBounds >> extent: aPoint [
 
 { #category : #testing }
 BlBounds >> hasPositiveExtent [
+
 	^ right > left and: [ bottom > top ]
 ]
 
 { #category : #accessing }
 BlBounds >> height [
+
 	^ bottom - top
 ]
 
 { #category : #initialization }
 BlBounds >> initialize [
+
 	super initialize.
 	
 	left := 0.0.
@@ -382,11 +386,11 @@ BlBounds >> initialize [
 BlBounds >> intersect: aRectangle ifNone: aBlock [
 	"Answer a Rectangle that is the area in which the receiver overlaps with 
 	aRectangle. 
-	If there's no overlap, evaluate the block instead"
+	If there's no overlap, evaluate the block instead."
+
 	| aLeft aTop aRight aBottom newLeft newTop newRight newBottom |
 
-	(self intersects: aRectangle)
-		ifFalse: [ ^ aBlock value ].
+	(self intersects: aRectangle) ifFalse: [ ^ aBlock value ].
 	
 	aLeft := aRectangle left.
 	aTop := aRectangle top.
@@ -408,9 +412,8 @@ BlBounds >> intersect: aRectangle ifNone: aBlock [
 { #category : #testing }
 BlBounds >> intersects: aRectangle [ 
 	"Answer whether aRectangle intersects the receiver anywhere"
-	<return: #Boolean>
+
 	| aLeft aTop aRight aBottom |
-	
 	aLeft := aRectangle left.
 	aTop := aRectangle top.
 	aRight := aRectangle right.
@@ -420,11 +423,13 @@ BlBounds >> intersects: aRectangle [
 	aBottom <= top ifTrue: [ ^ false ].
 	aLeft >= right ifTrue: [ ^ false ].
 	aTop >= bottom ifTrue: [ ^ false ].
+
 	^ true
 ]
 
 { #category : #accessing }
 BlBounds >> left [
+
 	^ left
 ]
 
@@ -436,7 +441,8 @@ BlBounds >> left: aNumber [
 ]
 
 { #category : #initialization }
-BlBounds >> left: aLeft top: aTop corner: aCorner [	
+BlBounds >> left: aLeft top: aTop corner: aCorner [
+
 	self
 		left: aLeft
 		top: aTop
@@ -455,62 +461,35 @@ BlBounds >> left: aLeft top: aTop right: aRight bottom: aBottom [
 ]
 
 { #category : #'rectangle functions' }
-BlBounds >> merge: aRectangle [ 
+BlBounds >> merge: aRectangle [
 	"Merge provided rectangle into me."
 
-	| useRcvr aLeft aTop aRight aBottom minX maxX minY maxY |
-
-	useRcvr := true.
-
-	aLeft := aRectangle left.
-	aTop := aRectangle top.
-	aRight := aRectangle right.
-	aBottom := aRectangle bottom.
-
-	minX := aLeft < left
-		ifTrue: 
-			[ useRcvr := false.
-			aLeft ]
-		ifFalse: [ left ].
-	maxX := aRight > right
-		ifTrue: 
-			[ useRcvr := false.
-			aRight ]
-		ifFalse: [ right ].
-	minY := aTop < top
-		ifTrue: 
-			[ useRcvr := false.
-			aTop ]
-		ifFalse: [ top ].
-	maxY := aBottom > bottom
-		ifTrue: 
-			[ useRcvr := false.
-			aBottom ]
-		ifFalse: [ bottom ].
-	
-	"no need to merge do nothing"
-	useRcvr 
-		ifTrue: [ ^ self ].
-	
-	left := minX.
-	top := minY.
-	right := maxX.
-	bottom := maxY.
-	
 	self
-		left: minX
-		top: minY
-		right: maxX
-		bottom: maxY
+		mergeLeft: aRectangle left
+		top: aRectangle top
+		right: aRectangle right
+		bottom: aRectangle bottom
+]
+
+{ #category : #'rectangle functions' }
+BlBounds >> mergeLeft: aLeft top: aTop right: aRight bottom: aBottom [
+	"Merge provided rectangle into me."
+
+	aLeft < left ifTrue: [ left := aLeft ].
+	aRight > right ifTrue: [ right := aRight ].
+	aTop < top ifTrue: [ top := aTop ].
+	aBottom > bottom ifTrue: [ bottom := aBottom ]
 ]
 
 { #category : #accessing }
 BlBounds >> origin [
+
 	^ left @ top
 ]
 
 { #category : #initialization }
 BlBounds >> origin: anOrigin corner: aCorner [
+
 	self
 		left: anOrigin x
 		top: anOrigin y
@@ -520,6 +499,7 @@ BlBounds >> origin: anOrigin corner: aCorner [
 
 { #category : #initialization }
 BlBounds >> origin: anOrigin extent: anExtent [
+
 	self
 		left: anOrigin x
 		top: anOrigin y
@@ -530,8 +510,8 @@ BlBounds >> origin: anOrigin extent: anExtent [
 { #category : #'vector functions' }
 BlBounds >> outsideNormalCloseTo: aPoint [
 	<return: #BlRay>
+
 	| anEdge aProjection aNormal |
-	
 	anEdge := self closestEdgeTo: aPoint.
 	aProjection := anEdge projection: aPoint.
 	aNormal := anEdge vector normal.
@@ -541,7 +521,6 @@ BlBounds >> outsideNormalCloseTo: aPoint [
 
 { #category : #accessing }
 BlBounds >> position [
-	<return: #Point>
 
 	^ self origin
 ]
@@ -557,6 +536,7 @@ BlBounds >> printOn: aStream [
 
 { #category : #initialization }
 BlBounds >> rectangle: aRectangle [
+
 	self
 		left: aRectangle left
 		top: aRectangle top
@@ -566,6 +546,7 @@ BlBounds >> rectangle: aRectangle [
 
 { #category : #accessing }
 BlBounds >> right [
+
 	^ right
 ]
 
@@ -579,7 +560,6 @@ BlBounds >> right: aNumber [
 { #category : #accessing }
 BlBounds >> rightCenter [
 	"Answer the point at the center of the receiver's right vertical line."
-	<return: #Point>
 
 	^ self right @ self center y
 ]
@@ -604,6 +584,15 @@ BlBounds >> scaleX: aX Y: aY [
 	bottom := bottom * aY
 ]
 
+{ #category : #'rectangle functions' }
+BlBounds >> shrinkByLeft: aLeft top: aTop right: aRight bottom: aBottom [
+	
+	left := left + aLeft.
+	top := top + aTop.
+	right := right - aRight.
+	bottom := bottom - aBottom
+]
+
 { #category : #printing }
 BlBounds >> storeOn: aStream [ 
 	"printed form is good for storing too"
@@ -615,6 +604,7 @@ BlBounds >> storeOn: aStream [
 
 { #category : #accessing }
 BlBounds >> top [
+
 	^ top
 ]
 
@@ -628,7 +618,6 @@ BlBounds >> top: aNumber [
 { #category : #accessing }
 BlBounds >> topCenter [
 	"Answer the point at the center of the receiver's top horizontal line."
-	<return: #Point>
 
 	^ self center x @ self top
 ]
@@ -636,7 +625,6 @@ BlBounds >> topCenter [
 { #category : #accessing }
 BlBounds >> topLeft [
 	"Answer the point at the top left corner of the receiver's top horizontal line"
-	<return: #Point>
 
 	^ left @ top
 ]
@@ -644,7 +632,6 @@ BlBounds >> topLeft [
 { #category : #accessing }
 BlBounds >> topRight [
 	"Answer the point at the top right corner of the receiver's top horizontal line."
-	<return: #Point>
 
 	^ self corner x @ self origin y
 ]
@@ -667,5 +654,6 @@ BlBounds >> translateX: aX Y: aY [
 
 { #category : #accessing }
 BlBounds >> width [
+
 	^ right - left
 ]

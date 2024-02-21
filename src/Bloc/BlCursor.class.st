@@ -1,98 +1,88 @@
-"
-I represent the cursor used in the space.
-
-There are two general types of a cursor: {{gtClass:BlNamedCursor}} and {{gtClass:BlStaticCursor}}
-
-"
 Class {
 	#name : #BlCursor,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
-	#category : #'Bloc-Space - Cursor'
+	#category : #'Bloc-Utilities - Selection'
 }
 
-{ #category : #'instance creation' }
+{ #category : #accessing }
 BlCursor class >> crosshair [
-	^ BlCrosshairCursor new
+
+	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv crosshair' -> 'Cursor crossHair'.
+	^ Cursor crossHair
 ]
 
-{ #category : #'instance creation' }
+{ #category : #accessing }
 BlCursor class >> default [
-	^ BlDefaultCursor new
+
+	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv default' -> 'Cursor normal'.
+	^ Cursor normal
 ]
 
-{ #category : #'instance creation' }
-BlCursor class >> overEditableText [ 
-	^ BlTextCursor new
+{ #category : #accessing }
+BlCursor class >> hand [
+
+	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv hand' -> 'Cursor webLink'.
+	^ Cursor webLink
 ]
 
-{ #category : #'instance creation' }
+{ #category : #testing }
+BlCursor class >> isDeprecated [
+
+	^ true
+]
+
+{ #category : #accessing }
+BlCursor class >> overEditableText [
+
+	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv overEditableText' -> 'Cursor overEditableText'.
+	^ Cursor overEditableText
+]
+
+{ #category : #accessing }
 BlCursor class >> resizeBottom [
-	^ BlResizeBottomCursor new
+
+	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv resizeBottom' -> 'Cursor resizeBottom'.
+	^ Cursor resizeBottom
 ]
 
-{ #category : #'instance creation' }
+{ #category : #accessing }
 BlCursor class >> resizeBottomLeft [
-	^ BlResizeBottomLeftCursor new
+
+	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv resizeBottomLeft' -> 'Cursor resizeBottomLeft'.
+	^ Cursor resizeBottomLeft
 ]
 
-{ #category : #'instance creation' }
+{ #category : #accessing }
 BlCursor class >> resizeBottomRight [
-	^ BlResizeBottomRightCursor new
+
+	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv resizeBottomRight' -> 'Cursor resizeBottomRight'.
+	^ Cursor resizeBottomRight
 ]
 
-{ #category : #'instance creation' }
-BlCursor class >> resizeLeft [
-	^ BlResizeLeftCursor new
-]
-
-{ #category : #'instance creation' }
-BlCursor class >> resizeRight [
-	^ BlResizeRightCursor new
-]
-
-{ #category : #'instance creation' }
+{ #category : #accessing }
 BlCursor class >> resizeTop [
-	^ BlResizeTopCursor new
+
+	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv resizeTop' -> 'Cursor resizeTop'.
+	^ Cursor resizeTop
 ]
 
-{ #category : #'instance creation' }
+{ #category : #accessing }
 BlCursor class >> resizeTopLeft [
-	^ BlResizeTopLeftCursor new
+
+	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv resizeTopLeft' -> 'Cursor resizeTopLeft'.
+	^ Cursor resizeTopLeft
 ]
 
-{ #category : #'instance creation' }
+{ #category : #accessing }
 BlCursor class >> resizeTopRight [
-	^ BlResizeTopRightCursor new
+
+	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv resizeTopRight' -> 'Cursor resizeTopRight'.
+	^ Cursor resizeTopRight
 ]
 
-{ #category : #'instance creation' }
+{ #category : #accessing }
 BlCursor class >> wait [
-	^ BlWaitCursor new
-]
 
-{ #category : #'instance creation' }
-BlCursor class >> zoomIn [
-	^ BlZoomInCursor new
-]
-
-{ #category : #'instance creation' }
-BlCursor class >> zoomOut [
-	^ BlZoomOutCursor new
-]
-
-{ #category : #'api - cursor' }
-BlCursor >> activateOn: aSpace [
-	aSpace updateCursor: self
-]
-
-{ #category : #converting }
-BlCursor >> asForm [
-	^ self subclassResponsibility
-]
-
-{ #category : #'api - cursor' }
-BlCursor >> deactivateOn: aSpace [
-	
+	self deprecated: 'Use Cursor instead.' transformWith: '`@rcv wait' -> 'Cursor wait'.
+	^ Cursor wait
 ]

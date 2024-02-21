@@ -1,7 +1,7 @@
 Extension { #name : #BlOutskirtsOutside }
 
 { #category : #'*Bloc-Alexandrie' }
-BlOutskirtsOutside >> aeApplyTo: aeCanvas [ 
+BlOutskirtsOutside >> aeApplyTo: aeCanvas element: aBlElement border: aBlBorder [
 
-	aeCanvas setOutskirtsOutside
+	aBlBorder aeApplyWithOutsideBorderTo: aeCanvas element: aBlElement
 ]

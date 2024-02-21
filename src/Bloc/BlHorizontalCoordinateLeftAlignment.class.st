@@ -8,6 +8,12 @@ Class {
 	#category : #'Bloc-Layouts-Alignment'
 }
 
+{ #category : #'class initialization' }
+BlHorizontalCoordinateLeftAlignment class >> initialize [
+
+	self initializeSingletons
+]
+
 { #category : #translation }
 BlHorizontalCoordinateLeftAlignment >> translationOf: aBounds in: aContainerBounds [
 	| aRelativeDelta anExpectedLeft |

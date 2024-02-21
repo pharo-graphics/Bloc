@@ -13,5 +13,5 @@ BAFormSpaceRenderer >> initializeForSurface: aBlHostRendererFormSurface [
 					newForData: aBlHostRendererFormSurface pointer
 					extent: aBlHostRendererFormSurface extent
 					stride: aBlHostRendererFormSurface stride
-					format: AeCairoSurfaceFormat CAIRO_FORMAT_ARGB32)
+					format: AeCairoSurfaceFormat argb32)
 ]

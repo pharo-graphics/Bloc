@@ -29,9 +29,8 @@ BlCollectionRopeIterator >> attributes [
 
 { #category : #'iterator - testing' }
 BlCollectionRopeIterator >> hasNext [
-	<return: #Boolean>
+	
 	self assertInvariant.
-
 	^ position < end
 ]
 

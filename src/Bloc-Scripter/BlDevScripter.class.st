@@ -69,10 +69,12 @@ BlDevScripter >> continue [
 
 { #category : #initialization }
 BlDevScripter >> defaultSpace [
+
 	^ BlSpace new
-		title: 'Scripter';
-		extent: 800 @ 600;
-		host: BlMockedHost new.
+		  title: 'Scripter';
+		  extent: 800 @ 600;
+		  host: BlMockedHost new;
+		  yourself
 ]
 
 { #category : #'accessing - element' }
@@ -90,7 +92,7 @@ BlDevScripter >> element: anElement [
 	anElement addEventFilter: self eventHandler.
 	
 	anElement removeFromParent.
-	self space addChild: anElement.
+	self space root addChild: anElement.
 ]
 
 { #category : #'accessing - element' }
@@ -104,7 +106,7 @@ BlDevScripter >> elementWithoutParent [
 
 { #category : #'private - accessing' }
 BlDevScripter >> eventHandler [
-	<return: #BlDevScripterEventCollectorHandler>
+
 	^ eventHandler
 ]
 
@@ -128,17 +130,21 @@ BlDevScripter >> extent: aPoint [
 
 { #category : #initialization }
 BlDevScripter >> initialize [
+
 	super initialize.
 	events := BlDevScripterEvents new.
 
 	rootStep := BlDevScripterRootStep new.
 	rootStep referenceHere.
 
-	eventHandler := BlDevScripterEventCollectorHandler new scripter: self.
+	eventHandler :=
+		BlDevScripterEventCollectorHandler new
+			scripter: self;
+			yourself.
 
 	space := self defaultSpace.
-	self space addEventFilter: self eventHandler.
-	self space root addEventFilter: self eventHandler
+	space addEventFilter: self eventHandler.
+	space root addEventFilter: self eventHandler
 ]
 
 { #category : #'accessing - data' }
@@ -181,7 +187,7 @@ BlDevScripter >> showSpace [
 
 { #category : #'accessing - space' }
 BlDevScripter >> space [
-	<return: #BlSpace>
+
 	^ space
 ]
 
@@ -192,10 +198,10 @@ BlDevScripter >> spaceTasks [
 
 { #category : #'accessing - space' }
 BlDevScripter >> spaceWithElement [
-	"Return ${class:BlSpace}$ and ensure that the ==element== is its child
+	"Return a space and ensure that the element is its child
 	Useful when someone wants to display the resulting space (window) with the element.
 	It cannot be used during the script execution."
-	<return: #BlSpace>
+
 	self element space = self space ifFalse: [ 
 		self space addChild: self elementWithoutParent ].
 	^ self space

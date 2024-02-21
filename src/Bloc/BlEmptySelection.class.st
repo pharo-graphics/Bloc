@@ -18,7 +18,6 @@ BlEmptySelection >> children [
 { #category : #'api - testing' }
 BlEmptySelection >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
-	<return: #Boolean>
 	
 	^ false
 ]
@@ -27,7 +26,13 @@ BlEmptySelection >> contains: anIndex [
 BlEmptySelection >> containsIndex: anIndex [
 	"Return true if selection indices include a given index, false otherwise.
 	I am conceptually same as (self indices includes: anIndex)"
-	<return: #Boolean>
+	
+	^ false
+]
+
+{ #category : #'api - testing' }
+BlEmptySelection >> containsMonotoneSelection: aSelection [
+	"Return true if selection  include a given monotone selection , false otherwise "
 	
 	^ false
 ]

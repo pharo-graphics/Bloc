@@ -23,6 +23,11 @@ Class {
 }
 
 { #category : #'api - enable / disable' }
+BlElementAddedToParentEvent class >> disableIn: anObject [
+	anObject disableAddedToParent
+]
+
+{ #category : #'api - enable / disable' }
 BlElementAddedToParentEvent class >> enableIn: anObject [
 	anObject enableAddedToParent
 ]

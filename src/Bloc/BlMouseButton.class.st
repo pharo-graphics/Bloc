@@ -31,3 +31,27 @@ BlMouseButton class >> primary [
 BlMouseButton class >> secondary [
 	^ BlMouseSecondaryButton uniqueInstance
 ]
+
+{ #category : #'event creation' }
+BlMouseButton >> clickEventClass [
+
+	^ BlClickEvent 
+]
+
+{ #category : #'action dispatching' }
+BlMouseButton >> ifPrimary: aPrimBlock secondary: aSecBlock middle: aMidBlock other: anotherBlock [
+
+	^ anotherBlock value
+]
+
+{ #category : #'event creation' }
+BlMouseButton >> mouseDownEventClass [
+
+	^ BlMouseDownEvent 
+]
+
+{ #category : #'event creation' }
+BlMouseButton >> mouseUpEventClass [
+
+	^ BlMouseUpEvent 
+]

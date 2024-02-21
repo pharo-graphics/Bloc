@@ -1,6 +1,6 @@
 "
 # Shortcut with action
-Extends {{gtClass:BlBasicShortcut}} with ability to specify a runtime action that should be evaluated when shortcut is performed.
+Extends `BlBasicShortcut` with ability to specify a runtime action that should be evaluated when shortcut is performed.
 In addition to that, shortcuts with action allow users to customise the name and description of the shortcut.
 ## Public API and Key Messages
 

@@ -14,12 +14,14 @@ BlLayoutErrorHandler >> processError: aBlHandledError [
 	NonInteractiveTranscript stderr
 		show: aBlHandledError;
 		cr.
-		
+	self flag: 'crappy'. 
 	"Temporary reset the layout of the parent if it's an infinite element.
 	Should be replaced with a more generic solution."
 	aBlHandledError element
 		withAllParentsDo: [ :aParentElement | 
-			(aParentElement isKindOf: #BlInfiniteElement asClass)
+			"(aParentElement isKindOf: #BlInfiniteElement asClass)
+				ifTrue: [ aParentElement state beStepStart ]."
+			(aParentElement isKindOf: BlInfiniteElement)
 				ifTrue: [ aParentElement state beStepStart ] ].
 
 	aBlHandledError debug

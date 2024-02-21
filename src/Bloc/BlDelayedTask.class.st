@@ -88,7 +88,6 @@ BlDelayedTask >> initialize [
 
 { #category : #'api - testing' }
 BlDelayedTask >> isRunning [
-	<return: #Boolean>
 
 	^ isRunning
 ]

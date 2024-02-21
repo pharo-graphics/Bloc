@@ -135,17 +135,17 @@ BlOSWindowEventHandler >> visitMainEventsCleared: anEvent [
 
 { #category : #'visiting - mouse' }
 BlOSWindowEventHandler >> visitMouseButtonPressEvent: anEvent [
-	| aBlocEvent |
+	| aBlocEvent button |
 
 	"we handle touch events separately, therefore ignore `touch` based mouse events"
 	"anEvent isTouch
 		ifTrue: [ ^ self ]."
-
-	aBlocEvent := BlMouseDownEvent new
+	button := self convertButton: anEvent button.
+	aBlocEvent := button mouseDownEventClass new
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
 		delta: anEvent delta;
-		button: (self convertButton: anEvent button);
+		button: button;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		timestamp: self time now.
 
@@ -154,17 +154,17 @@ BlOSWindowEventHandler >> visitMouseButtonPressEvent: anEvent [
 
 { #category : #'visiting - mouse' }
 BlOSWindowEventHandler >> visitMouseButtonReleaseEvent: anEvent [
-	| aBlocEvent |
+	| aBlocEvent button |
 	
 	"we handle touch events separately, therefore ignore `touch` based mouse events"
 	"anEvent isTouch
 		ifTrue: [ ^ self ]."
-
-	aBlocEvent := BlMouseUpEvent new
+	button := self convertButton: anEvent button.
+	aBlocEvent := button mouseUpEventClass new
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
 		delta: anEvent delta;
-		button: (self convertButton: anEvent button);
+		button: button;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		timestamp: self time now.
 		
@@ -226,84 +226,27 @@ BlOSWindowEventHandler >> visitTextInputEvent: anEvent [
 
 { #category : #'visiting - touch' }
 BlOSWindowEventHandler >> visitTouchActionPointerDownEvent: anEvent [
-	| aBlocEvent |
-	
-	true ifTrue: [ ^ self ].
-	
-	aBlocEvent := BlTouchDownEvent new
-		position: window windowExtent * anEvent position;
-		screenPosition: window position + (window windowExtent * anEvent position);
-		delta: window windowExtent * anEvent delta;
-		timestamp: DateAndTime now;
-		pointerId: anEvent fingerId;
-		pressure: anEvent pressure;
-		yourself.
-	
-	self enqueue: aBlocEvent
+
 ]
 
 { #category : #'visiting - touch' }
 BlOSWindowEventHandler >> visitTouchActionPointerMoveEvent: anEvent [
-	| aBlocEvent |
-	
-	true ifTrue: [ ^ self ].
 
-	aBlocEvent := BlTouchMoveEvent new
-		position:
-			window logicalSize width @ window logicalSize height
-				* anEvent position;
-		screenPosition:
-			window position
-				+
-					(window logicalSize width @ window logicalSize height
-						* anEvent position);
-		delta: window logicalSize width @ window logicalSize height * anEvent delta;
-		timestamp: DateAndTime now;
-		pointerId: anEvent fingerId;
-		pressure: anEvent pressure;
-		yourself.
-	self enqueue: aBlocEvent
 ]
 
 { #category : #'visiting - touch' }
 BlOSWindowEventHandler >> visitTouchActionPointerUpEvent: anEvent [
-	| aBlocEvent |
 
-	true ifTrue: [ ^ self ].
-
-	aBlocEvent := BlTouchUpEvent new
-		position: window windowExtent * anEvent position;
-		screenPosition: window position + (window windowExtent * anEvent position);
-		delta: window windowExtent * anEvent delta;
-		timestamp: DateAndTime now;
-		pointerId: anEvent fingerId;
-		pressure: anEvent pressure;
-		yourself.
-
-	self enqueue: aBlocEvent
 ]
 
 { #category : #'visiting - gestures' }
 BlOSWindowEventHandler >> visitTouchTwoFingersPinchBeginEvent: anEvent [
-	"anEvent inspect"
+
 ]
 
 { #category : #'visiting - gestures' }
 BlOSWindowEventHandler >> visitTouchTwoFingersPinchMoveEvent: anEvent [
-	| aBlocEvent |
 
-	true ifTrue: [ ^ self ].
-
-	aBlocEvent := BlGesturePinchEvent new
-		distance: anEvent dDist;
-		position: anEvent position;
-		screenPosition: window position + anEvent position;
-		delta: anEvent delta;
-		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		timestamp: self time now;
-		yourself.
-
-	self enqueue: aBlocEvent
 ]
 
 { #category : #'visiting - gestures' }
@@ -312,19 +255,7 @@ BlOSWindowEventHandler >> visitTouchTwoFingersScrollBeginEvent: anEvent [
 
 { #category : #'visiting - gestures' }
 BlOSWindowEventHandler >> visitTouchTwoFingersScrollMoveEvent: anEvent [
-	"| aBlocEvent horizontal vertical |
-	
-	horizontal := (anEvent dDist abs * anEvent vector) x negated.
-	vertical := (anEvent dDist abs * anEvent vector) y.
 
-	aBlocEvent := BlGestureScrollEvent new
-		position: mousePosition;
-		screenPosition: window position + mousePosition;
-		vector: (BlVector x: horizontal y: vertical);
-		timestamp: self time now;
-		yourself.
-
-	self enqueue: aBlocEvent"
 ]
 
 { #category : #visiting }

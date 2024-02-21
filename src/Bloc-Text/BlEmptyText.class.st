@@ -103,7 +103,6 @@ BlEmptyText >> insertText: aString at: anIndex [
 
 { #category : #'text - testing' }
 BlEmptyText >> isEmpty [
-	<return: #Boolean>
 
 	^ true
 ]

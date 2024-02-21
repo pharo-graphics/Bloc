@@ -4,6 +4,12 @@ Class {
 	#category : #'Bloc-Layouts-Alignment'
 }
 
+{ #category : #'class initialization' }
+BlVerticalCoordinateTopAlignment class >> initialize [
+
+	self initializeSingletons
+]
+
 { #category : #translation }
 BlVerticalCoordinateTopAlignment >> translationOf: aBounds in: aContainerBounds [
 	| aRelativeDelta anExpectedTop |

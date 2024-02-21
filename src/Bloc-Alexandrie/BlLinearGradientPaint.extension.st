@@ -1,13 +1,11 @@
 Extension { #name : #BlLinearGradientPaint }
 
 { #category : #'*Bloc-Alexandrie' }
-BlLinearGradientPaint >> aeApplyTo: aeCanvas opacity: backgroundOpacity [
+BlLinearGradientPaint >> aeApplyTo: aeCanvas [
+	"Apply self as a border to the canvas"
 
 	aeCanvas
-		setBackgroundWith: [ 
-			aeCanvas
-				setSourceLinearPatternStops: stops
-				start: start
-				end: end ]
-		alpha: backgroundOpacity
+		setSourceLinearPatternStops: stops
+		start: start
+		end: end
 ]

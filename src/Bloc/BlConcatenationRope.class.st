@@ -149,7 +149,6 @@ BlConcatenationRope >> delete: aStart to: anEnd [
 
 { #category : #'rope - accessing' }
 BlConcatenationRope >> depth [
-	<return: #Number>
 
 	^ (left depth max: right depth) + 1
 ]

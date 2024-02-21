@@ -1,20 +1,3 @@
-"
-# Frame model
-
-I represent one frame in a space. There are usually 60 frames per second, which means that ideally a frame should take less than 16ms to go through all phases.
-
-My phases are:
-- event handling
-- scheduled tasks processing / animation
-- layout
-- rendering
-- idle
-
-I know my currentPhase which is one of the registered phases.
-
-The list of default phases is initialized in {{gtMethod:BlSpaceFrame>>#initializePhases}}
-
-"
 Class {
 	#name : #BlSpaceFrame,
 	#superclass : #Object,
@@ -35,6 +18,12 @@ BlSpaceFrame >> addPhase: aFramePhase [
 ]
 
 { #category : #adding }
+BlSpaceFrame >> addPhase: aPhase before: otherPhase [
+
+	self phases add: aPhase before: otherPhase
+]
+
+{ #category : #adding }
 BlSpaceFrame >> addPhases: aCollectonOfPhases [
 	aCollectonOfPhases do: [ :aFramePhase | self addPhase: aFramePhase ]
 ]
@@ -43,6 +32,12 @@ BlSpaceFrame >> addPhases: aCollectonOfPhases [
 BlSpaceFrame >> currentPhase [
 
 	^ currentPhaseLink value
+]
+
+{ #category : #enumerating }
+BlSpaceFrame >> detectPhase: aBlock [
+
+	^ self phases detect: aBlock
 ]
 
 { #category : #testing }
@@ -77,31 +72,15 @@ BlSpaceFrame >> initialize [
 
 { #category : #initialization }
 BlSpaceFrame >> initializePhases [
+
 	self addPhases: { 
 		BlSpaceFrameIdlePhase new.
 		BlSpaceFrameHostValidationPhase new.
-		BlSpaceFrameTaskPhase new.
-		BlSpaceFrameEventPhase new.
-		BlSpaceFrameStylePhase new.
-		BlSpaceFramePropertiesPhase new.
+		BlSpaceFrameTaskPhase new. " animation as an example "
+		BlSpaceFrameEventPhase new. " generate BlMouse events from host mouse event as an example "
 		BlSpaceFrameDrawingValidationPhase new.
-		BlSpaceFrameLayoutPhase new.
-		BlSpaceFrameDrawingPhase new }
-]
-
-{ #category : #testing }
-BlSpaceFrame >> isAtFirstPhase [
-	<return: #Boolean>
-	
-	^ currentPhaseLink == phases firstLink
-]
-
-{ #category : #accessing }
-BlSpaceFrame >> nextPhase [
-	"Return the next frame after the current one"
-	<return: #BlSpaceFramePhase>
-	
-	^ self nextPhaseLink value
+		BlSpaceFrameLayoutPhase new. " layouting all elements that requested layout "
+		BlSpaceFrameDrawingPhase new " drawing invalidate elements  "}
 ]
 
 { #category : #private }
@@ -122,11 +101,16 @@ BlSpaceFrame >> phases [
 	^ phases
 ]
 
+{ #category : #removing }
+BlSpaceFrame >> removePhase: aFramePhase [
+
+	self phases remove: aFramePhase ifAbsent: [ Error signal: 'Phase not found']
+]
+
 { #category : #running }
 BlSpaceFrame >> runCurrentPhaseOn: aSpace [
-	aSpace telemetry
-		timeSync: self currentPhase name
-		during: [ self currentPhase runOn: aSpace ]
+
+	self currentPhase runOn: aSpace
 ]
 
 { #category : #running }

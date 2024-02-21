@@ -1,5 +1,5 @@
 "
-I am an animation responsible for changing #opacity parameter of the target element during specified period of time.
+I gradually change the opacity of a `BlElement` from its initial value until a specified opacity (see my accessing protocol).
 
 "
 Class {
@@ -13,23 +13,27 @@ Class {
 }
 
 { #category : #pulse }
-BlOpacityAnimation >> applyValue: aValue [
-	self target opacity: aValue
+BlOpacityAnimation >> applyValue: anOpacity [
+
+	self target opacity: anOpacity
 ]
 
 { #category : #pulse }
 BlOpacityAnimation >> initStart [
+
 	super initStart.
-	from := self target opacity.
+	from := self target opacity
 ]
 
 { #category : #accessing }
 BlOpacityAnimation >> opacity: aNumber [
 	"Set desired opacity of an element at the end of animation"
+
 	to := aNumber
 ]
 
 { #category : #pulse }
-BlOpacityAnimation >> valueForStep: aDelta [
-	^ ((to - from ) * aDelta) + from
+BlOpacityAnimation >> valueForStep: aNumber [
+
+	^ ((to - from ) * aNumber) + from
 ]

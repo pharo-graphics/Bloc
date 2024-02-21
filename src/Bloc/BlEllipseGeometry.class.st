@@ -17,7 +17,7 @@ Class {
 }
 
 { #category : #'geometry testing' }
-BlEllipseGeometry >> containsPoint: aPoint in: aBlElement [
+BlEllipseGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	| w h x y center xRadius yRadius normalized |
 	
 	w := self extent x.
@@ -34,6 +34,18 @@ BlEllipseGeometry >> containsPoint: aPoint in: aBlElement [
 
 	normalized := (aPoint x - center x) @ (aPoint y - center y).
 	^ ((normalized x squared / xRadius squared) + (normalized y squared / yRadius squared)) <= 1
+]
+
+{ #category : #testing }
+BlEllipseGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlEllipseGeometry >> hasJoins [
+
+	^ false
 ]
 
 { #category : #geometry }

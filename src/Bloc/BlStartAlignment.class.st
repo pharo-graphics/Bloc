@@ -9,6 +9,12 @@ BlStartAlignment class >> horizontal [
 	^ BlHorizontalAlignment start
 ]
 
+{ #category : #'class initialization' }
+BlStartAlignment class >> initialize [
+
+	self initializeSingletons
+]
+
 { #category : #factory }
 BlStartAlignment class >> vertical [
 	^ BlVerticalAlignment top

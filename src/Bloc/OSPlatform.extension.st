@@ -1,11 +1,9 @@
 Extension { #name : #OSPlatform }
 
 { #category : #'*Bloc' }
-OSPlatform >> blocKeyFor: aKeyValue in: aKeyTable [
-	<return: #BlKeyboardKey>
-	self deprecated: 'No more specific system keyboard management in bloc'.
+OSPlatform >> defaultScrollingVelocity [
 
-	^ self subclassResponsibility
+	^ 20
 ]
 
 { #category : #'*Bloc' }

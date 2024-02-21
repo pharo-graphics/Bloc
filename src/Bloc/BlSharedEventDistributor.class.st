@@ -1,9 +1,9 @@
 "
-I share {{gtClass:BlEvent}} instances (element events) among a given elements.
+I share `BlEvent` instances (element events) among a given elements.
 
 ## Example
 
-In the following example, {{gtClass:BlMouseOverEvent}}, {{gtClass:BlMouseOutEvent}}, and {{gtClass:BlClickEvent}} are shared between the two graphical elements. If you hover a mouse over any element, both elements get darker. If you click on any of two elements, both elements randomly change their background color.
+In the following example, `BlMouseOverEvent`, `BlMouseOutEvent`, and `BlClickEvent` are shared between the two graphical elements. If you hover a mouse over any element, both elements get darker. If you click on any of two elements, both elements randomly change their background color.
 {{gtExample:BlSharedEventDistributorExamples>>#example|codeExpanded=false|previewExpanded=true}}
 
 
@@ -12,6 +12,7 @@ Class {
 	#name : #BlSharedEventDistributor,
 	#superclass : #BlBasicEventHandler,
 	#instVars : [
+		'adjustMousePosition',
 		'elements',
 		'handledEvents',
 		'shouldHandle'
@@ -29,12 +30,19 @@ BlSharedEventDistributor class >> shareEvents: aCollectionOfEvents [
 	^ self new shareEvents: aCollectionOfEvents
 ]
 
+{ #category : #accessing }
+BlSharedEventDistributor >> adjustMousePosition: aBoolean [
+
+	adjustMousePosition := aBoolean
+]
+
 { #category : #'private - coordinates' }
 BlSharedEventDistributor >> adjustPosition: aNewEvent from: anOldEvent [
 	| anOldBounds anOldDiagonal aNewBounds aNewDiagonal aRatio aNewPosition |
 	
 	(anOldEvent currentTarget isKindOf: BlElement)
 		ifFalse: [ ^ self ].
+	adjustMousePosition ifFalse: [ ^self ].
 	
 	anOldBounds := anOldEvent currentTarget boundsInSpace.
 	anOldDiagonal := anOldBounds topLeft - anOldBounds bottomRight.
@@ -50,17 +58,22 @@ BlSharedEventDistributor >> adjustPosition: aNewEvent from: anOldEvent [
 
 { #category : #'api - event managing' }
 BlSharedEventDistributor >> dispatch: aBlEvent on: anElement [
-	| aNewEvent |
 
+	| aNewEvent |
 	shouldHandle ifFalse: [ ^ self ].
-	
+
 	aNewEvent := aBlEvent newCopyFor: anElement.
-	aBlEvent isUIEvent ifTrue: [
+	aBlEvent isMouse ifTrue: [
 		self adjustPosition: aNewEvent from: aBlEvent ].
 
 	shouldHandle := false.
-	[ anElement dispatchEvent: aNewEvent ]
-		ensure: [ shouldHandle := true ]
+	[ anElement dispatchEvent: aNewEvent ] ensure: [
+		shouldHandle := true ].
+
+	"Update the original event from the copy .
+	This is necessary if event processing depends on #isConsumed 
+	as an example (e.g. dnd processing)"
+	aBlEvent copySharedStatesFrom: aNewEvent.
 ]
 
 { #category : #accessing }
@@ -89,7 +102,8 @@ BlSharedEventDistributor >> initialize [
 	super initialize.
 	elements := Set new.
 	handledEvents := #().
-	shouldHandle := true
+	shouldHandle := true.
+	adjustMousePosition := true
 ]
 
 { #category : #'api - hooks' }
@@ -121,5 +135,5 @@ BlSharedEventDistributor >> wantsEvent: anEvent [
 	shouldHandle
 		ifFalse: [ ^ false ].
 
-	^ handledEvents includes: anEvent class
+	^ handledEvents anySatisfy: [ :cls | anEvent isKindOf: cls ]
 ]

@@ -37,7 +37,6 @@ BlMultipleSelection >> children [
 { #category : #'api - testing' }
 BlMultipleSelection >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
-	<return: #Boolean>
 	
 	^ selections anySatisfy: [ :eachSelection | 
 		eachSelection contains: anIndex ]
@@ -47,10 +46,18 @@ BlMultipleSelection >> contains: anIndex [
 BlMultipleSelection >> containsIndex: anIndex [
 	"Return true if selection indices include a given index, false otherwise.
 	I am conceptually same as (self indices includes: anIndex)"
-	<return: #Boolean>
+
 	
 	^ selections anySatisfy: [ :eachSelection | 
 		eachSelection contains: anIndex ]
+]
+
+{ #category : #'api - testing' }
+BlMultipleSelection >> containsMonotoneSelection: aSelection [
+	"Return true if selection interval include a given interval, false otherwise. "
+
+	^ selections anySatisfy: [ :eachSelection | 
+		eachSelection containsMonotoneSelection: aSelection ]
 ]
 
 { #category : #copying }

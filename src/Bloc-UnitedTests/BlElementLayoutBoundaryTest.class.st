@@ -5,18 +5,13 @@ I have been automatically converted and probably manually tweaked from BlElement
 Class {
 	#name : #BlElementLayoutBoundaryTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests'
+	#category : #'Bloc-UnitedTests-Layout'
 }
-
-{ #category : #metadata }
-BlElementLayoutBoundaryTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlElementLayoutBoundaryExamples'
-]
 
 { #category : #tests }
 BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
-	<gtExample>
+	<sampleInstance>
+	
 	| aSpace |
 	aSpace := self testSpaceWithExactLayoutBoundary.
 	self assert: aSpace isLayoutRequested.
@@ -24,13 +19,13 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
 	aSpace pulse.
 	self assert: aSpace root extent equals: 500 @ 400.
 	self
-		assert: (aSpace root childNamed: #container) extent
+		assert: (aSpace root childWithId: #container) extent
 		equals: 400 @ 300.
 	self
-		assert: (aSpace root childNamed: #boundary) extent
+		assert: (aSpace root childWithId: #boundary) extent
 		equals: 300 @ 200.
 	self
-		assert: (aSpace root childNamed: #child) extent
+		assert: (aSpace root childWithId: #child) extent
 		equals: 300 @ 200.
 	self assert: aSpace isLayoutRequested not.
 	self assert: aSpace elementsNeedingLayout isEmpty.
@@ -39,24 +34,24 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
 
 { #category : #tests }
 BlElementLayoutBoundaryTest >> testExactLayoutBoundary02RequestLayoutChild [
-	<gtExample>
+	<sampleInstance>
 	| aSpace |
 	aSpace := self testExactLayoutBoundary01Pulse.
-	(aSpace root childNamed: #child) requestLayout.
+	(aSpace root childWithId: #child) requestLayout.
 	self assert: aSpace isLayoutRequested.
 	self
 		assert: aSpace elementsNeedingLayout
-		equals: {(aSpace root childNamed: #boundary)} asSet.
+		equals: {(aSpace root childWithId: #boundary)} asSet.
 	aSpace pulse.
 	self assert: aSpace root extent equals: 500 @ 400.
 	self
-		assert: (aSpace root childNamed: #container) extent
+		assert: (aSpace root childWithId: #container) extent
 		equals: 400 @ 300.
 	self
-		assert: (aSpace root childNamed: #boundary) extent
+		assert: (aSpace root childWithId: #boundary) extent
 		equals: 300 @ 200.
 	self
-		assert: (aSpace root childNamed: #child) extent
+		assert: (aSpace root childWithId: #child) extent
 		equals: 300 @ 200.
 	self assert: aSpace isLayoutRequested not.
 	self assert: aSpace elementsNeedingLayout isEmpty.
@@ -65,7 +60,7 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary02RequestLayoutChild [
 
 { #category : #tests }
 BlElementLayoutBoundaryTest >> testSpaceWithExactLayoutBoundary [
-	<gtExample>
+	<sampleInstance>
 	| aSpace aContainer aLayoutBoundary aChild |
 	aSpace := BlSpace new.
 	aSpace extent: 500 @ 400.

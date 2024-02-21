@@ -48,6 +48,13 @@ BlMouseEvent >> anyButtonPressed [
 ]
 
 { #category : #converting }
+BlMouseEvent >> asClickEvent [
+	^ self button clickEventClass new
+		copyFrom: self;
+		yourself
+]
+
+{ #category : #converting }
 BlMouseEvent >> asDictionaryForExport [
 	^ super asDictionaryForExport
 		at: #position put: position printString;
@@ -145,6 +152,12 @@ BlMouseEvent >> button: aBlMouseButton [
 	button := aBlMouseButton
 ]
 
+{ #category : #testing }
+BlMouseEvent >> canFindTargetFrom: anElement [
+
+	^ false
+]
+
 { #category : #accessing }
 BlMouseEvent >> delta [
 	^ delta
@@ -153,6 +166,18 @@ BlMouseEvent >> delta [
 { #category : #accessing }
 BlMouseEvent >> delta: aPoint [
 	delta := aPoint
+]
+
+{ #category : #processing }
+BlMouseEvent >> findTargetFrom: aSpaceOrElement [
+
+	^ (aSpaceOrElement findMouseEventTargetAt: self position) ifNil: [ aSpaceOrElement space root ]
+]
+
+{ #category : #'action dispatching' }
+BlMouseEvent >> ifPrimary: aPrimBlock secondary: aSecBlock middle: aMidBlock other: anotherBlock [
+
+	^ self button ifPrimary: aPrimBlock secondary: aSecBlock middle: aMidBlock other: anotherBlock
 ]
 
 { #category : #testing }

@@ -28,18 +28,20 @@ Class {
 
 { #category : #'instance creation' }
 BlBorder class >> builder [
+
 	^ BlBorderBuilder new
 ]
 
 { #category : #cleanup }
 BlBorder class >> cleanUp [
+
 	super cleanUp.
-	
 	empty := nil
 ]
 
 { #category : #accessing }
 BlBorder class >> empty [
+
 	^ empty ifNil: [ empty := self paint: BlPaint transparent width: 0 ]
 ]
 
@@ -76,6 +78,12 @@ BlBorder >> = anObject [
 	^ opacity = anObject opacity
 		and: [ paint = anObject paint
 				and: [ style = anObject style and: [ width = anObject width ] ] ]
+]
+
+{ #category : #converting }
+BlBorder >> asBlBorder [
+
+	^ self
 ]
 
 { #category : #copy }
@@ -174,16 +182,15 @@ BlBorder >> opacity: aNumber [
 
 { #category : #accessing }
 BlBorder >> paint [
-	<return: #BlPaint>
-
+	"Return the paing of the receiver, an instance of BlPaint or subclasses."
+	
 	^ paint
 ]
 
 { #category : #accessing }
 BlBorder >> paint: aBlPaint [
 
-	paint isNotNil
-		ifTrue: [ (BlImmutableObjectChangeError object: self) signal ].
+	paint ifNotNil: [ (BlImmutableObjectChangeError object: self) signal ].
 
 	paint := aBlPaint asBlPaint
 ]

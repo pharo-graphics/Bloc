@@ -44,6 +44,12 @@ BlLinearLayoutOrientation >> hash [
 	^ self class hash
 ]
 
+{ #category : #accessing }
+BlLinearLayoutOrientation >> inverted [ 
+
+	^ self subclassResponsibility 
+]
+
 { #category : #testing }
 BlLinearLayoutOrientation >> isHorizontal [
 	^ false

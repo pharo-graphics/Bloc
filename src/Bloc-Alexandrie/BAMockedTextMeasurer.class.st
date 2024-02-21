@@ -87,23 +87,12 @@ BAMockedTextMeasurer >> measureTextParagraph: aBlTextParagraph [
 
 { #category : #measurement }
 BAMockedTextMeasurer >> measureTextSpan: aBlSpan [
-	| paragraphSpan |
+	"Measure a given text span and return paragraph span with my fixed metrics"
 
-	paragraphSpan := self createParagraphSpan.
-	paragraphSpan span: aBlSpan.
 	measuredWidth := aBlSpan size * self glyphWidth.
 	measuredHeight := self height * aBlSpan size isZero not asBit.
-	
-	self
-		assert: [ measuredWidth >= 0 ]
-		description: [ 'Width must be positive' ].
-		
-	self
-		assert: [ measuredHeight >= 0 ]
-		description: [ 'Height must be positive' ].
-	paragraphSpan applyFixedMetrics: self.
-	paragraphSpan fontAndStyleBuilder: BlTextFontAndStyleBuilder new.
-	^ paragraphSpan
+
+	^ self newParagraphSpanFor: aBlSpan
 ]
 
 { #category : #metrics }
@@ -118,7 +107,8 @@ BAMockedTextMeasurer >> measuredWidth [
 
 { #category : #'paragraph span instance creation' }
 BAMockedTextMeasurer >> newParagraphSpan [
-	^ BAMockedTextParagraphSpan new 
+
+	^ BAMockedTextParagraphSpan new
 ]
 
 { #category : #accessing }

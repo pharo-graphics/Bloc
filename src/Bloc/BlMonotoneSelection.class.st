@@ -106,7 +106,6 @@ BlMonotoneSelection >> complement: aMonotoneTextSelection [
 BlMonotoneSelection >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise.
 	If selection is [0.. 1] both 0 and 1 are within this selection"
-	<return: #Boolean>
 	
 	^ self rangeIncludes: anIndex
 ]
@@ -115,10 +114,17 @@ BlMonotoneSelection >> contains: anIndex [
 BlMonotoneSelection >> containsIndex: anIndex [
 	"Return true if selection indices include a given index, false otherwise.
 	I am conceptually same as (self indices includes: anIndex)"
-	<return: #Boolean>
 	
 	^ anIndex > self from
 		and: [ anIndex <= self to ]
+]
+
+{ #category : #'api - testing' }
+BlMonotoneSelection >> containsMonotoneSelection: aSelection [
+	"Return true if selection interval include a given interval, false otherwise. "
+
+	^ self includes:
+		  (BlSelection from: aSelection from to: aSelection to)
 ]
 
 { #category : #copying }
@@ -190,6 +196,30 @@ BlMonotoneSelection >> indices [
 	^ self from + 1 to: self to
 ]
 
+{ #category : #accessing }
+BlMonotoneSelection >> indicesCollect: aBlock [
+	"Evaluate a collect on the indice interval
+	If the selection interval is [0..1] then selection indices will only contain
+	one index {1}"
+
+	self from
+		ifNil: [ ^ #() ].
+
+	^ (self from + 1 to: self to) collect: aBlock
+]
+
+{ #category : #accessing }
+BlMonotoneSelection >> indicesDo: aBlock [
+	"Evaluate a given block with all selection indices indices
+	If the selection interval is [0..1] then selection indices will only contain
+	one index {1}"
+
+	self from
+		ifNil: [ ^ self ].
+
+	self from + 1 to: self to do: aBlock
+]
+
 { #category : #testing }
 BlMonotoneSelection >> inside: aMonotoneTextSelection [
 	"Return true if I am fully inside a given selection, false otherwise"
@@ -223,7 +253,6 @@ BlMonotoneSelection >> invariant [
 { #category : #testing }
 BlMonotoneSelection >> isEmpty [
 	"Return true if selection is empty, false otherwise"
-	<return: #Boolean>
 
 	^ self to <= self from
 ]

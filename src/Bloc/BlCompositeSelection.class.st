@@ -47,7 +47,6 @@ BlCompositeSelection >> children [
 { #category : #'api - testing' }
 BlCompositeSelection >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
-	<return: #Boolean>
 	
 	^ selections contains: anIndex
 ]
@@ -56,9 +55,24 @@ BlCompositeSelection >> contains: anIndex [
 BlCompositeSelection >> containsIndex: anIndex [
 	"Return true if selection indices include a given index, false otherwise.
 	I am conceptually same as (self indices includes: anIndex)"
-	<return: #Boolean>
 	
 	^ selections containsIndex: anIndex
+]
+
+{ #category : #'api - testing' }
+BlCompositeSelection >> containsInterval: anInterval [
+	"Return true if selection  include a given interval, false otherwise "
+
+	^ selections containsMonotoneSelection: (BlMonotoneSelection
+			   from: (anInterval first min: anInterval last)
+			   to: (anInterval first max: anInterval last))
+]
+
+{ #category : #'api - testing' }
+BlCompositeSelection >> containsMonotoneSelection: aSelection [
+	"Return true if selection  include a given monotone selection , false otherwise "
+	
+	^ selections containsMonotoneSelection: aSelection
 ]
 
 { #category : #copying }
@@ -84,6 +98,27 @@ BlCompositeSelection >> deselect: aFromIndex to: aToIndex [
 	"Remove a monotone selection within provided indices"
 	
 	self remove: (BlSelection from: aFromIndex to: aToIndex)
+]
+
+{ #category : #'api - selection' }
+BlCompositeSelection >> deselectAll [
+	"Remove all "
+
+	self reverseDo: [ :aMonotoneSelection |
+		self deselect: aMonotoneSelection from to: aMonotoneSelection to ]
+]
+
+{ #category : #'api - selection' }
+BlCompositeSelection >> deselectAllIndexes: aCollection [
+
+	aCollection do: [ :idx | self deselectIndex: idx ]
+]
+
+{ #category : #'api - selection' }
+BlCompositeSelection >> deselectIndex: anIndex [
+	"Remove a given selection"
+
+	self deselect: anIndex - 1 to: anIndex
 ]
 
 { #category : #'api - enumerating' }
@@ -190,6 +225,26 @@ BlCompositeSelection >> select: aFromIndex to: aToIndex [
 	"Add a new monotone selection merging it with existing ones within provided indices"
 	
 	self add: (BlSelection from: (aFromIndex max: 0) to: aToIndex)
+]
+
+{ #category : #'api - selection' }
+BlCompositeSelection >> selectAllIndexes: aCollection [
+
+	aCollection do: [ :idx | self selectIndex: idx ]
+]
+
+{ #category : #'api - selection' }
+BlCompositeSelection >> selectIndex: anIndex [
+	"add a given selection"
+
+	self select: anIndex - 1 to: anIndex
+]
+
+{ #category : #'api - selection' }
+BlCompositeSelection >> selectOnlyIndex: anIndex [
+
+	self deselectAll.
+	self selectIndex: anIndex
 ]
 
 { #category : #accessing }

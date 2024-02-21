@@ -8,35 +8,43 @@ Class {
 	#category : #'Bloc-Effect'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlSimpleShadowEffect class >> color: aColor offset: anOffset [
+
 	^ self basicNew
-		initializeColor: aColor
-		offset: anOffset
+		  initializeColor: aColor offset: anOffset;
+		  yourself
 ]
 
-{ #category : #accessing }
+{ #category : #'instance creation' }
 BlSimpleShadowEffect class >> default [
-	^ self
-		color: (Color black alpha: 0.3)
-		offset: 10@10
+
+	self
+		deprecated: 'Use #new instead'
+		transformWith: '`@receiver default' -> '`@receiver new'.
+
+	^ self color: (Color black alpha: 0.3) offset: 10 @ 10
+]
+
+{ #category : #'instance creation' }
+BlSimpleShadowEffect class >> new [
+
+	^ self color: Color black offset: 0@0
 ]
 
 { #category : #copying }
 BlSimpleShadowEffect >> copyWithColor: aColor [
-	<return: #BlShadowEffect>
 
 	^ self class
 		color: aColor
-		offset: self offset
+		offset: offset
 ]
 
 { #category : #copying }
 BlSimpleShadowEffect >> copyWithOffset: aPoint [
-	<return: #BlShadowEffect>
 
 	^ self class
-		color: self color
+		color: color
 		offset: aPoint
 ]
 
@@ -50,13 +58,8 @@ BlSimpleShadowEffect >> extraShadowSpace [
 
 { #category : #initialization }
 BlSimpleShadowEffect >> initializeColor: aColor offset: aPoint [
-	self
-		assert: [ color isNil ]
-		description: [ 'Can not change a color! Shadow is immutable' ].
-		
-	self
-		assert: [ offset isNil ]
-		description: [ 'Can not change an offset! Shadow is immutable' ].
+
+	self initialize.
 
 	color := aColor.
 	offset := aPoint asPoint

@@ -63,7 +63,6 @@ BlSelection >> children [
 { #category : #'api - testing' }
 BlSelection >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
-	<return: #Boolean>
 	
 	^ self subclassResponsibility
 ]
@@ -72,7 +71,13 @@ BlSelection >> contains: anIndex [
 BlSelection >> containsIndex: anIndex [
 	"Return true if selection indices include a given index, false otherwise.
 	I am conceptually same as (self indices includes: anIndex)"
-	<return: #Boolean>
+
+	^ self subclassResponsibility
+]
+
+{ #category : #'api - testing' }
+BlSelection >> containsMonotoneSelection: aSelection [
+	"Return true if selection  include a given monotone selection , false otherwise "
 
 	^ self subclassResponsibility
 ]
@@ -94,6 +99,22 @@ BlSelection >> indices [
 	<return: #Collection of: #Number>
 
 	^ Array streamContents: [ :aStream | self do: [ :eachMonotoneSelection | aStream nextPutAll: eachMonotoneSelection indices ] ]
+]
+
+{ #category : #accessing }
+BlSelection >> indicesCollect: aBlock [
+	"Return the result of evaluating a #collect: with all recorded selection indices"
+
+	^ Array streamContents: [ :stream |
+		  self do: [ :eachMonotoneSelection |
+			  stream nextPutAll: (eachMonotoneSelection indicesCollect: aBlock) ] ]
+]
+
+{ #category : #accessing }
+BlSelection >> indicesDo: aBlock [
+	"Evaluate a given block with all recorded selection indices"
+
+	self do: [ :eachMonotoneSelection | eachMonotoneSelection indicesDo: aBlock ]
 ]
 
 { #category : #'api - testing' }

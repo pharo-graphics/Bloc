@@ -24,6 +24,12 @@ BlReadonlyText >> readonly [
 	^ self
 ]
 
+{ #category : #copying }
+BlReadonlyText >> takeInternalRepresentationOf: anotherText [
+
+	self shouldNotImplement 
+]
+
 { #category : #'text - copying' }
 BlReadonlyText >> writable [
 	"Convert me to a writable text if I am readonly"

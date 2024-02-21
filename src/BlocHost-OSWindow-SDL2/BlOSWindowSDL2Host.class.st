@@ -1,3 +1,6 @@
+"
+I am a host that opens spaces as OSWindow SDL2 windows.
+"
 Class {
 	#name : #BlOSWindowSDL2Host,
 	#superclass : #BlOSWindowHost,
@@ -22,22 +25,19 @@ BlOSWindowSDL2Host class >> isSupported [
 	^ true
 ]
 
-{ #category : #'driver selection' }
+{ #category : #printing }
 BlOSWindowSDL2Host class >> label [
+
 	^ 'SDL2'
 ]
 
 { #category : #'driver selection' }
 BlOSWindowSDL2Host class >> priority [
-	"Return host priority as positive number which influences host order
-	and selection of a default host.
-	Lower value - more likely host becomes a default"
-	<return: #Number>
 	
-	^ 400
+	^ 10
 ]
 
-{ #category : #accessing }
+{ #category : #'api - lifecycle' }
 BlOSWindowSDL2Host class >> pulsePeriod: aDuration [
 
 	PulseLoop pulsePeriod: aDuration
@@ -64,6 +64,17 @@ BlOSWindowSDL2Host class >> uiProcessDo: aBlock [
 BlOSWindowSDL2Host >> createHostSpace [
 
 	^ BlOSWindowSDL2HostSpace new
+]
+
+{ #category : #'host - api' }
+BlOSWindowSDL2Host >> createHostSpaceFor: aSpace [
+	"Create and assign a new host space for given bloc space"
+
+	| aHostSpace|
+	aHostSpace := self createWindowSpaceFor: aSpace.
+	aHostSpace renderer: BlHostRenderer preferableClass new.
+
+	aSpace hostSpace: aHostSpace
 ]
 
 { #category : #initialization }

@@ -1,5 +1,5 @@
 "
-I am an event handler that is used for Halos element. For more information about me, see {{gtClass:BlDevHalosEventListener}}.
+I am an event handler that is used for Halos element. For more information about me, see `BlDevHalosEventListener`.
 
 "
 Class {
@@ -27,7 +27,8 @@ BlElementSelectionListener >> elementExtentChangedEvent: anEvent [
 { #category : #'element handlers' }
 BlElementSelectionListener >> elementPositionChangedEvent: anEvent [
 
-	self selection relocate: anEvent target positionInSpace - self selection padding topLeft
+	self selection position:
+		anEvent target positionInSpace - self selection padding topLeft
 ]
 
 { #category : #'element handlers' }

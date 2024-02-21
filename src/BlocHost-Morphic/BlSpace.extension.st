@@ -7,7 +7,7 @@ BlSpace >> showNotification: aNotification [
 ]
 
 { #category : #'*BlocHost-Morphic' }
-BlSpace >> useSpartaMorphicWindowHost [
+BlSpace >> useMorphicHost [
 	
 	self host: BlMorphicWindowHost new
 ]

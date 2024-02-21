@@ -13,7 +13,8 @@ Class {
 	#name : #BlRoundedRectangleGeometry,
 	#superclass : #BlElementVectorGeometry,
 	#instVars : [
-		'cornerRadii'
+		'cornerRadii',
+		'center'
 	],
 	#category : #'Bloc-Basic-Geometry'
 }
@@ -32,11 +33,6 @@ BlRoundedRectangleGeometry class >> cornerRadius: aNumber [
 	"Change the radii of all corners to a given number.
 	aNumber must not be nil.
 	aNumber must be non-negative"
-	<return: #BlRoundedRectangleGeometry>
-
-	self
-		assert: [ aNumber >= 0 ]
-		description: [ 'Corner radius must be non-negative!' ].
 
 	^ self basicNew
 		initializeWith: (BlCornerRadii radius: aNumber);
@@ -52,46 +48,68 @@ BlRoundedRectangleGeometry class >> new [
 ]
 
 { #category : #'geometry testing' }
-BlRoundedRectangleGeometry >> containsPoint: aPoint in: aBlElement [
-	"Answer whether aPoint is in the rounded rectangle."
+BlRoundedRectangleGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 
-	| w h isBottomSide isRightSide center radius maxRadius |
-	w := self extent x.
-	h := self extent y.
-	maxRadius := self cornerRadii max.
-	"check if aPoint is in the rectangle minus the corner radius"
-	(aPoint x > maxRadius and: [ aPoint x <= (w - maxRadius) ])
-		ifTrue: [ ^ true ].
-	(aPoint y > maxRadius and: [ aPoint y <= (h - maxRadius) ])
-		ifTrue: [ ^ true ].
-	"check if aPoint is in the corner triangles"
-	isRightSide := aPoint x > (w / 2).
-	isBottomSide := aPoint y > (h / 2).
-	"top left circle"
-	(isRightSide not and: isBottomSide not)
-		ifTrue: [ center := self cornerRadii topLeft asPoint.
-			radius := self cornerRadii topLeft ].
-	"top right circle"
-	(isRightSide and: isBottomSide not)
-		ifTrue: [ center := w @ 0 + (self cornerRadii topRight negated @ self cornerRadii topRight).
-			radius := self cornerRadii topRight ].
-	"bottom right circle"
-	(isRightSide and: isBottomSide)
-		ifTrue: [ center := (w@h)- self cornerRadii bottomRight asPoint.
-			radius := self cornerRadii bottomRight ].
-	"bottom left circle"
-	(isRightSide not and: isBottomSide)
-		ifTrue: [ center := 0 @ h + (self cornerRadii bottomLeft @ self cornerRadii bottomLeft negated).
-			radius := self cornerRadii bottomLeft ].
-	"check if it is in the defined circle"
-	^ (aPoint x - center x) squared + (aPoint y - center y) squared <= radius squared
+	| radii cornerRadius cornerX cornerY |
+	radii := self nonOverlappingCornersForBorderWidth: aBlElement border width.
+
+	aPoint x <= center x
+		ifTrue: [
+			"The point is in a left quadrant"
+			aPoint y <= center y
+				ifTrue: [
+					"The point is in top-left quadrant"
+					cornerRadius := radii topLeft.
+					cornerX := radii topLeft.
+					cornerY := radii topLeft.
+					(aPoint x >= cornerX or: [ aPoint y >= cornerY ])
+						ifTrue: [ ^ true ] ]
+				ifFalse: [
+					"The point is in bottom-left quadrant"
+					cornerRadius := radii bottomLeft.
+					cornerX := radii bottomLeft.
+					cornerY := extent y - radii bottomLeft.
+					(aPoint x >= cornerX or: [ aPoint y <= cornerY ])
+						ifTrue: [ ^ true ] ] ]
+		ifFalse: [
+			"The point is in a right quadrant"
+			aPoint y <= center y
+				ifTrue: [
+					"The point is in top-right quadrant"
+					cornerRadius := radii topRight.
+					cornerX := extent x - radii topRight.
+					cornerY := radii topRight.
+					(aPoint x <= cornerX or: [ aPoint y >= cornerY ])
+						ifTrue: [ ^ true ] ]
+				ifFalse: [
+					"The point is in bottom-right quadrant"
+					cornerRadius := radii bottomRight.
+					cornerX := extent x - radii bottomRight.
+					cornerY := extent y - radii bottomRight.
+					(aPoint x <= cornerX or: [ aPoint y <= cornerY ])
+						ifTrue: [ ^ true ] ] ].
+			
+	^ ((aPoint x - cornerX) squared
+		+ (aPoint y - cornerY) squared)
+			< cornerRadius squared
 ]
 
 { #category : #accessing }
 BlRoundedRectangleGeometry >> cornerRadii [
-	<return: #BlCornerRadii>
 
 	^ cornerRadii
+]
+
+{ #category : #testing }
+BlRoundedRectangleGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlRoundedRectangleGeometry >> hasJoins [
+
+	^ false
 ]
 
 { #category : #initialization }
@@ -104,5 +122,16 @@ BlRoundedRectangleGeometry >> initializeWith: aCornerRadii [
 
 { #category : #geometry }
 BlRoundedRectangleGeometry >> matchExtent: aPoint [
-	extent := aPoint
+
+	extent := aPoint.
+	center := aPoint / 2.0.
+]
+
+{ #category : #private }
+BlRoundedRectangleGeometry >> nonOverlappingCornersForBorderWidth: aNumber [
+	"Answer either current cornerRadii or a copy of it, that would work with any of the possible outskirts, and considering the current extent."
+
+	^ cornerRadii
+		  asNonOverlappingCornerRadiiToFitWidth: ((extent x - aNumber) max: 0.0)
+		  height: ((extent y - aNumber) max: 0.0)
 ]

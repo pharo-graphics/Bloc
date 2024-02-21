@@ -2,30 +2,22 @@ Class {
 	#name : #BlNumberTransition,
 	#superclass : #BlTransition,
 	#instVars : [
-		'by',
-		'previousValue'
+		'by'
 	],
-	#category : 'Bloc-Animation-Animation'
+	#category : #'Bloc-Animation-Animation'
 }
 
-{ #category : #pulse }
-BlNumberTransition >> applyValue: aValue [
-	previousValue = aValue
-		ifTrue: [ ^ self ].
-	previousValue := aValue.
-	super applyValue: aValue
-]
-
 { #category : #accessing }
-BlNumberTransition >> by: anObject [
-	by := anObject
+BlNumberTransition >> by: aNumber [
+
+	by := aNumber
 ]
 
 { #category : #pulse }
-BlNumberTransition >> valueForStep: aDelta [
+BlNumberTransition >> valueForStep: aNumber [
+
 	| aValue |
-	
-	aValue := (to - from) * aDelta + from.
+	aValue := (to - from) * aNumber + from.
 	^ by
 		ifNil: [ aValue ]
 		ifNotNil: [ (aValue / by) floor * by ]

@@ -9,17 +9,11 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
+	#classVars : [
+		'PreferableHostClass'
+	],
 	#category : #'Bloc-Universe - Host'
 }
-
-{ #category : #'driver selection' }
-BlHost class >> availableHostClasses [
-	"Return all available bloc host classes sorted by their priority"
-	<return: #Collection>
-
-	^ (self allSubclasses select: [ :aHostClass | aHostClass isSupported ])
-		sort: [ :a :b | a priority < b priority ]
-]
 
 { #category : #'api - lifecycle' }
 BlHost class >> isRunning [
@@ -28,57 +22,91 @@ BlHost class >> isRunning [
 
 { #category : #'driver selection' }
 BlHost class >> isSupported [
+
 	^ false
 ]
 
 { #category : #'driver selection' }
 BlHost class >> label [
-	"Return a host name that we can refer to. May be used for settings"
-	<return: #String>
+	"Return a human readable title to identify myself."
 
 	^ self subclassResponsibility
 ]
 
 { #category : #'driver selection' }
 BlHost class >> pickHost [
-	"Find and instantiate a first supported host.
-	Return a special null one if there are no available hosts"
-	<return: #BlHost>
+	"Answer a new instance of the preferable host."
 	
-	"If setting is not set dispatches to back to me returning #defaultHostClass"
-	^ Bloc preferableHostClass new
+	^ self preferableHostClass new
+]
+
+{ #category : #settings }
+BlHost class >> preferableHostClass [
+
+	^ PreferableHostClass ifNil: [
+		PreferableHostClass := self prioritaryHostClass ]
+]
+
+{ #category : #settings }
+BlHost class >> preferableHostClass: aHostClass [
+	
+	PreferableHostClass := aHostClass
+
+]
+
+{ #category : #'driver selection' }
+BlHost class >> prioritaryHostClass [
+	"Answer either the supported host with the lowest priority, or
+	`BlHeadlessHost` if there isn't any supported host."
+
+	^ self supportedHostClasses
+		ifEmpty: [ BlHeadlessHost ]
+		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
 ]
 
 { #category : #'driver selection' }
 BlHost class >> priority [
 	"Return host priority as positive number which influences host order
 	and selection of a default host.
-	Lower value - more likely host becomes a default"
-	<return: #Number>
+	A lower value is more likely to become the default host."
 	
 	^ self subclassResponsibility
 ]
 
+{ #category : #settings }
+BlHost class >> settingsOn: aBuilder [
+	<systemsettings>
+
+	(aBuilder pickOne: #preferableHostClass)
+		parent: Bloc groupSymbolForBloc;
+		target: self;
+		order: 1;
+		label: 'Preferable host';
+		domainValues: (self supportedHostClasses
+			collect: [ :aHostClass | aHostClass label -> aHostClass ]);
+		description: 'Choose the option that spaces will use to open, unless they have a particular host.'.
+
+]
+
 { #category : #'api - lifecycle' }
 BlHost class >> start [
+
 	self subclassResponsibility
 ]
 
 { #category : #'api - lifecycle' }
 BlHost class >> stop [
+
 	self subclassResponsibility
 ]
 
 { #category : #'driver selection' }
-BlHost class >> suitableHostClass [
-	"Find a default bloc host among all available.
-	Return a special null one if there are no available hosts"
-	<return: #'BlHost class'>
+BlHost class >> supportedHostClasses [
+	"Return all supported Bloc host classes, sorted by priority (lowest first)."
 
-	^ self availableHostClasses
-		"There are no availbale hosts, return a null one"
-		ifEmpty: [ BlHeadlessHost ]
-		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
+	^ (self allSubclasses
+			select: [ :aHostClass | aHostClass isSupported ])
+			sort: [ :a :b | a priority < b priority ]
 ]
 
 { #category : #'api - ui process' }
@@ -88,13 +116,13 @@ BlHost class >> uiProcessDo: aBlock [
 
 { #category : #'host space - accessing' }
 BlHost class >> universe [
-	<return: #BlParallelUniverse>
 
 	^ BlParallelUniverse forHost: self
 ]
 
 { #category : #'host - api' }
 BlHost >> createHostSpaceFor: aSpace [
+
 	self subclassResponsibility
 ]
 
@@ -109,7 +137,6 @@ BlHost >> destroyHostSpaceFor: aSpace [
 { #category : #'api - lifecycle' }
 BlHost >> isRunning [
 	"Return true if host is initialized and running"
-	<return: #Boolean>
 
 	^ self class isRunning
 ]
@@ -121,25 +148,32 @@ BlHost >> isStillAvailable [
 	For example if a space is opened in a native window with a headless VM
 	and then reopened with a headfull VM all those spaces should be re-opened
 	with a different host, for example morphic"
-	<return: #Boolean>
 
 	^ true
 ]
 
+{ #category : #'paragraph - measuring' }
+BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [ 
+	"Update the received paragraph with its measurement."
+
+	BlHostRenderer preferableClass offscreenMeasureTextParagraph: aBlTextParagraph
+]
+
 { #category : #'api - lifecycle' }
 BlHost >> start [
+
 	self class start
 ]
 
 { #category : #'api - lifecycle' }
 BlHost >> stop [
+
 	self class stop
 ]
 
 { #category : #'host - testing' }
 BlHost >> supportsBufferSurface [
 	"Return true if this host can work with buffer surface, false otherwise"
-	<return: #Boolean>
 	
 	^ false
 ]
@@ -147,27 +181,18 @@ BlHost >> supportsBufferSurface [
 { #category : #'host - testing' }
 BlHost >> supportsFormSurface [
 	"Return true if this host can work with form surface, false otherwise"
-	<return: #Boolean>
-	
-	^ false
-]
-
-{ #category : #'host - testing' }
-BlHost >> supportsOpenGLSurface [
-	"Return true if this host can work with OpenGL surface, false otherwise"
-	<return: #Boolean>
 	
 	^ false
 ]
 
 { #category : #enumerating }
 BlHost >> uiProcessDo: aBlock [
+
 	self class uiProcessDo: aBlock
 ]
 
 { #category : #'host space - accessing' }
 BlHost >> universe [
-	<return: #BlParallelUniverse>
 	
 	^ self class universe
 ]

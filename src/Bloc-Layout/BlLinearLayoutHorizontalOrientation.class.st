@@ -31,6 +31,12 @@ BlLinearLayoutHorizontalOrientation >> extentSpecBreadth: breadthSpec lengthSpec
 		heightSpec: breadthSpec
 ]
 
+{ #category : #factory }
+BlLinearLayoutHorizontalOrientation >> inverted [
+
+	^ BlLinearLayoutVerticalOrientation new
+]
+
 { #category : #testing }
 BlLinearLayoutHorizontalOrientation >> isHorizontal [
 	^ true
@@ -38,7 +44,7 @@ BlLinearLayoutHorizontalOrientation >> isHorizontal [
 
 { #category : #layout }
 BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
-	|top right bottom left majorBounds elementInnerBounds theLayeredChildren |
+	|top right bottom left majorBounds elementInnerBounds theLayeredChildren turn |
 	"Layout subnodes vertically in column one by one
 	based on previousely measured extent"
 
@@ -67,11 +73,12 @@ BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle context:
 	left := majorBounds left.
 	top := majorBounds top.
 	
+	turn := 1.
 	self layout direction
 		with: theLayeredChildren
 		inject: left @ top
 		into: [ :origin :child |
-			| childBounds childMarginBounds childConstraints |
+			| childBounds childMarginBounds childConstraints interspacing |
 			childConstraints := child constraints linear.
 			childBounds := origin + (child outsets topLeft max: 0.0@0.0) extent: child measuredExtent.
 			childMarginBounds := origin extent: child measuredExtent + (child outsets extent max: 0.0@0.0).  
@@ -89,12 +96,17 @@ BlLinearLayoutHorizontalOrientation >> layout: anElement in: aRectangle context:
 				childBounds := childBounds translateBy: translation ].
 			
 			childBounds := childBounds translateBy: (self layout cellSpacing @ 0.0).
+			interspacing := turn = 1
+			                ifTrue: [ 0.0 ]
+			                ifFalse: [ self layout interspace ].
+			interspacing > 0.0 ifTrue: [ childBounds := childBounds translateBy: interspacing @ 0.0 ].
 			
 			"telling each subnode what bounds to use for layouting process.
 			Because measuring process does not modify actual extent
 			we need to use a measured one"
 			child applyLayoutIn: childBounds context: aBlElementBoundsUpdateContext.
 			"translating origin horizontally right for next subnode"
+			turn := turn + 1.
 			(origin x + child measuredWidth + (child outsets width max: 0.0) + self layout cellSpacing) @ origin y ]
 ]
 

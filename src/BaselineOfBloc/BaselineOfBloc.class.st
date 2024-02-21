@@ -13,46 +13,59 @@ Class {
 	#category : #BaselineOfBloc
 }
 
-{ #category : #baseline }
+{ #category : #baselines }
 BaselineOfBloc >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
 		do: [
 
-			"Fenster"
+			"Bloc-Display"
 			spec
-				package: 'Fenster';
-				package: 'Fenster-Tests' with: [ spec requires: #(Fenster) ].
+				package: 'Bloc-Display';
+				package: 'Bloc-Display-Tests' with: [ spec requires: #('Bloc-Display') ].
 
 			"Core"
 			spec 
 				package: #Bloc with: [
-					spec requires: #(#Fenster) ];
+					spec requires: #('Bloc-Display') ];
 				package: #'BlocHost-Mock' with: [
 					spec requires: #(#Bloc) ];
 				package: #'Bloc-Tests' with: [
 					spec requires: #(#Bloc 'BlocHost-Mock' ). ].
 
+			"Add-ons"
+			spec
+				package: #'Bloc-PullAndSlide' with: [
+					spec requires: #('Bloc') ];
+				package: #'Bloc-FocusFinder' with: [
+					spec requires: #('Bloc') ];
+				package: #'Bloc-Overlay' with: [
+					spec requires: #('Bloc') ];
+				package: #'Bloc-Scalable' with: [
+					spec requires: #('Bloc') ].
+			
 			"Animation"
 			spec 
 				package: #'Bloc-Animation' with: [
-					spec requires: #('Bloc') ].
+					spec requires: #('Bloc') ];
+				package: #'Bloc-Animation-Tests' with: [
+					spec requires: #('Bloc-Animation') ].
 
 			"Morphic host"
 			spec 
 				package: #'BlocHost-Morphic' with: [
-					spec requires: #('Bloc' 'Fenster') ] .
+					spec requires: #('Bloc') ] .
 
 			"OSWindow host"
 			spec
 				package: #'BlocHost-OSWindow' with: [
-					spec requires: #('Bloc' 'Fenster'). ];
+					spec requires: #('Bloc'). ];
 				package: #'BlocHost-OSWindow-SDL2' with: [
 					spec requires: #('BlocHost-OSWindow'). ].
 
 			"Text"
-			spec 
+			spec
 				package: #'Bloc-Text' with: [
 					spec requires: #('Bloc'). ];
 				package: #'Bloc-Text-Rope' with: [
@@ -60,17 +73,9 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Text-Elements' with: [
 					spec requires: #('Bloc' 'Bloc-Text') ];
 				package: #'Bloc-Text-Rope-Tests' with: [
-					spec requires: #('Bloc-Text-Rope') ].
-
-			"Sparta canvas"
-			spec
-				baseline: 'Sparta' with: [
-					spec repository: 'github://pharo-graphics/Sparta:master/src' ].
-			spec
-				package: #'Bloc-Compositor' with: [
-					spec requires: #('Bloc' 'Sparta') ];
-				package: #'Bloc-Sparta' with: [
-					spec requires: #('Sparta' 'Bloc' 'Bloc-Text' 'Bloc-Compositor') ].
+					spec requires: #('Bloc-Text-Rope') ];
+				package: #'Bloc-Text-Tests' with: [
+					spec requires: #('Bloc-Text') ].
 
 			"Alexandrie canvas"
 			spec
@@ -80,45 +85,78 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Alexandrie' with: [
 					spec requires: #('Alexandrie' 'Bloc' 'Bloc-Text') ];
 				package: #'Bloc-Alexandrie-Tests' with: [
+					spec requires: #('Bloc-Alexandrie' 'Bloc-Text-Examples') ];
+				package: #'Bloc-Text-Alexandrie-Examples' with: [
+					spec requires: #('Bloc-Alexandrie') ].
+			"Exporters depend on Alexandrie"
+			spec 
+				package: #'Bloc-Alexandrie-Exporter' with: [
 					spec requires: #('Bloc-Alexandrie') ].
 
 			"Layout"
 			spec 
 				package: #'Bloc-Layout' with: [
 					spec requires: #('Bloc') ];
+				package: #'Bloc-Layout-Resizer' with: [
+					spec requires: #('Bloc-Layout' ) ];
 				package: #'Bloc-LayoutZoomable' with: [
-					spec requires: #('Bloc-Layout' 'Bloc-Animation') ];
+					spec requires: #('Bloc-Layout' 'Bloc-Animation') ].
 				"Layout depends also on compositor. See https://github.com/pharo-graphics/Bloc/issues/87"
-				package: #'Bloc-Layout-Tests' with: [
-					spec requires: #('Bloc-Layout' 'Bloc-Text') ].
-				"package: #'Bloc-Layout-Examples' with: [
-					spec requires: #('Bloc-Layout') ]."
 
-			"Calypso & Spec2 Extensions"
+			"Infinite"
+			spec 
+				package: #'Bloc-Infinite' with: [
+					spec requires: #('Bloc') ].
+			
+			"Development tools, examples and tests"
 			spec 
 				package: #'Bloc-Spec2';
 				package: #'Bloc-PharoExtensions';
 				package: #'Bloc-Spec2-Tests' with: [
 					spec requires: #('Bloc-Spec2') ].
-				
-			"Extra"
 			spec 
 				package: #'Bloc-UnitedTests' with: [
 					spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Animation') ];
-				package: #'Bloc-Exporter' with: [
-					spec requires: #('Sparta') ];
 				package: #'Bloc-DevTool' with: [
 					spec requires: #('Bloc-Layout' 'Bloc-UnitedTests') ];
 				package: #'Bloc-Scripter' with: [
-					spec requires: #('Bloc-Layout' 'Bloc-Exporter' 'BlocHost-Mock' 'Bloc-UnitedTests') ]"
-
-			spec
+					spec requires: #('Bloc-Layout' 'BlocHost-Mock' 'Bloc-UnitedTests') ];
 				package: #'Bloc-Examples' with: [
 					spec requires: #(#'Bloc-DevTool') ];
-				package: #'Bloc-Compositor-Examples' with: [
-					spec requires: #(#'Bloc-Examples') ];
 				package: #'Bloc-Text-Examples' with: [
-					spec requires: #(#'Bloc-Examples') ]"
+					spec requires: #(#'Bloc-Examples') ];
+				package: #'Bloc-Infinite-Tests' with: [
+					spec requires: #('Bloc-Infinite') ];
+				package: #'Bloc-Layout-Tests' with: [
+					spec requires: #('Bloc-Layout' 'Bloc-Text' 'Bloc-DevTool') ];
+				package: #'Bloc-Layout-Examples' with: [
+					spec requires: #('Bloc-Layout' 'Bloc-Text-Elements') ];
+				package: #'Bloc-Overlay-Examples' with: [
+					spec requires: #('Bloc-Overlay') ];
+				package: #'Bloc-Scalable-Examples' with: [
+					spec requires: #('Bloc-Scalable') ];
+				package: #'Bloc-FocusFinder-Examples' with: [
+					spec requires: #('Bloc-FocusFinder') ].
 
-			].
+			spec
+				package: #'Bloc-Theme' with: [
+					spec requires: #(#'Bloc') ].
+				
+			spec package: #'Bloc-Demo' with: [
+				spec requires: #(#'Bloc-Layout' #'Bloc-Spec2' #'Bloc-Text-Elements') ].
+
+			"SVG"
+			spec
+				baseline: 'XMLParser' with: [
+					spec
+						repository: 'github://pharo-contributions/XML-XMLParser';
+						loads: #(Core) ];
+				package: #'Bloc-SVG' with: [
+					spec requires: #(#'Bloc' #'XMLParser') ];
+				package: #'Bloc-SVG-Tests' with: [
+					spec requires: #(#'Bloc-SVG') ];
+				package: #'Bloc-Alexandrie-SVG' with: [
+					spec requires: #(#'Bloc-Alexandrie' #'Bloc-SVG') ].
+
+			]
 ]

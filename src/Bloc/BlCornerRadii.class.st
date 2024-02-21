@@ -56,13 +56,29 @@ BlCornerRadii >> = aBlCornerRadii [
 
 { #category : #converting }
 BlCornerRadii >> asArray [
-	<return: #Array of: #Number>
+
 	^ { 
 		topLeft.
 		topRight.
 		bottomRight.
 		bottomLeft
 	}
+]
+
+{ #category : #converting }
+BlCornerRadii >> asNonOverlappingCornerRadiiToFitWidth: aWidth height: aHeight [
+	"Answer either self or an adapted copy of self where corner curves do not overlap for the specified extent.
+	This follows the specification of 'Corner Overlap' subsection of 'CSS Backgrounds and Borders Module Level 3'.
+	See: https://w3c.github.io/csswg-drafts/css-backgrounds-3/#corner-overlap"
+
+	| aFactor |
+	(aWidth isZero or: [ aHeight isZero ]) ifTrue: [ ^ self class empty ].
+
+	aFactor := self maxOverlappingFactorForWidth: aWidth height: aHeight.
+
+	^ aFactor > 1.0
+		ifTrue: [ self dividedByScalar: aFactor ]
+		ifFalse: [ self ]
 ]
 
 { #category : #accessing }
@@ -83,6 +99,12 @@ BlCornerRadii >> bottomLeft: aNumber [
 ]
 
 { #category : #accessing }
+BlCornerRadii >> bottomRadii [
+
+	^ bottomLeft + bottomRight
+]
+
+{ #category : #accessing }
 BlCornerRadii >> bottomRight [
 	^ bottomRight
 ]
@@ -99,23 +121,64 @@ BlCornerRadii >> bottomRight: aNumber [
 	bottomRight := aNumber
 ]
 
+{ #category : #converting }
+BlCornerRadii >> copyExpandedBy: aNumber [ 
+	"Answer a copy of myself with radii expanded by aNumber (or reduced, if negative).
+	Do not touch the radius if it's zero."
+
+	^ self species new
+		topLeft: (self radius: topLeft expandedBy: aNumber);
+		topRight: (self radius: topRight expandedBy: aNumber);
+		bottomRight: (self radius: bottomRight expandedBy: aNumber);
+		bottomLeft: (self radius: bottomLeft expandedBy: aNumber);
+		yourself
+]
+
+{ #category : #converting }
+BlCornerRadii >> dividedByScalar: aNumber [
+
+	^ self species new
+		topLeft: topLeft / aNumber;
+		topRight: topRight / aNumber;
+		bottomRight: bottomRight / aNumber;
+		bottomLeft: bottomLeft / aNumber;
+		yourself
+]
+
 { #category : #comparing }
 BlCornerRadii >> hash [
-	^ bottomLeft hash bitXor: (bottomRight hash bitXor: (topLeft hash bitXor: topLeft))
+
+	^ bottomLeft hash bitXor:
+		  (bottomRight hash bitXor: (topLeft hash bitXor: topRight hash))
+]
+
+{ #category : #accessing }
+BlCornerRadii >> leftRadii [
+
+	^ topLeft + bottomLeft
 ]
 
 { #category : #arithmetic }
 BlCornerRadii >> max [
 	"Return the biggest corner radius among top left, top right, bottom left and bottom right"
-	<return: #Number>
 
 	^ topLeft max: (topRight max: (bottomLeft max: bottomRight))
+]
+
+{ #category : #accessing }
+BlCornerRadii >> maxOverlappingFactorForWidth: aWidth height: aHeight [
+	"Answer the 1/f as defined in 'Corner Overlap' subsection of 'CSS Backgrounds and Borders Module Level 3'.
+	See: https://w3c.github.io/csswg-drafts/css-backgrounds-3/#corner-overlap"
+
+	^ (((self topRadii    / aWidth ) max:
+		 (self rightRadii  / aHeight)) max: 
+		 (self bottomRadii / aWidth )) max:
+		 (self leftRadii   / aHeight)
 ]
 
 { #category : #arithmetic }
 BlCornerRadii >> min [
 	"Return the smallest corner radius among top left, top right, bottom left and bottom right"
-	<return: #Number>
 	
 	^ topLeft min: (topRight min: (bottomLeft min: bottomRight))
 ]
@@ -123,6 +186,21 @@ BlCornerRadii >> min [
 { #category : #private }
 BlCornerRadii >> radius: aNumber [
 	topLeft := topRight := bottomLeft := bottomRight := aNumber
+]
+
+{ #category : #private }
+BlCornerRadii >> radius: aRadius expandedBy: aNumber [ 
+	"Answer aRadius expanded by aNumber (or reduced if negative). Do not touch if aRadius is zero."
+
+	^ aRadius > 0.0
+		ifFalse: [ 0.0 ]
+		ifTrue: [ (aRadius + aNumber) max: 0.0 ]
+]
+
+{ #category : #accessing }
+BlCornerRadii >> rightRadii [
+
+	^ topRight + bottomRight
 ]
 
 { #category : #accessing }
@@ -140,6 +218,12 @@ BlCornerRadii >> topLeft: aNumber [
 		description: [ 'Can not change top left radius, I am immutable!' ].
 
 	topLeft := aNumber
+]
+
+{ #category : #accessing }
+BlCornerRadii >> topRadii [
+
+	^ topLeft + topRight
 ]
 
 { #category : #accessing }

@@ -19,6 +19,11 @@ Class {
 }
 
 { #category : #'api - enable / disable' }
+BlElementBackgroundChangedEvent class >> disableIn: anObject [
+	anObject disableBackgroundChanged
+]
+
+{ #category : #'api - enable / disable' }
 BlElementBackgroundChangedEvent class >> enableIn: anObject [
 	anObject enableBackgroundChanged
 ]

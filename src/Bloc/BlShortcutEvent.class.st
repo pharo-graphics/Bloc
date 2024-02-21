@@ -32,7 +32,7 @@ BlShortcutEvent >> beRepeated [
 
 { #category : #accessing }
 BlShortcutEvent >> buffer [
-	<return: #BlKeyboardBuffer>
+	"Return the buffer usually instance of BlKeyboardBuffer or subclasses"
 
 	^ buffer
 ]

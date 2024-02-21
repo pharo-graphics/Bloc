@@ -9,19 +9,31 @@ Class {
 }
 
 { #category : #'geometry testing' }
-BlSquareGeometry >> containsPoint: aPoint in: aBlElement [
-	^ (self geometryBounds: BlBounds new) containsPoint: aPoint
+BlSquareGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
+
+	^ true
 ]
 
 { #category : #'geometry bounds' }
-BlSquareGeometry >> geometryBounds: aBounds [
+BlSquareGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
-	<return: #BlBounds>
 
-	^ aBounds
+	^ aBlBounds
 		origin: self origin
 		extent: (self length * 2.0) asPoint
+]
+
+{ #category : #testing }
+BlSquareGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlSquareGeometry >> hasJoins [
+
+	^ true
 ]
 
 { #category : #accessing }

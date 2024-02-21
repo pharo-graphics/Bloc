@@ -13,6 +13,7 @@ Class {
 { #category : #measure }
 BlFitLayout >> childrenBoundingBox: aParentNode [
 	<return: #Rectangle>
+	
 	| aBoundingBox |
 
 	aParentNode children isEmpty

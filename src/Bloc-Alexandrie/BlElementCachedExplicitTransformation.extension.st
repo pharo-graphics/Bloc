@@ -4,9 +4,10 @@ Extension { #name : #BlElementCachedExplicitTransformation }
 BlElementCachedExplicitTransformation >> aeApplyTo: aeCanvas [
 
 	self ensureMatrix.
+
 	aeCanvas pathTransform:
 		(AeCairoMatrix
-			 x: matrix x
+			 newX: matrix x
 			 y: matrix y
 			 sx: matrix sx
 			 sy: matrix sy

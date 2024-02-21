@@ -28,13 +28,6 @@ TBlDevScripterCheckStep >> childrenCount: aNumber [
 ]
 
 { #category : #'steps - checks' }
-TBlDevScripterCheckStep >> click [
-	^ self addStep: (BlDevScripterCheckFiredEventsStep new 
-		event: BlClickEvent;
-		referenceSender)
-]
-
-{ #category : #'steps - checks' }
 TBlDevScripterCheckStep >> do: anOneArgBlock [
 	^ self addStep: (BlDevScripterCheckDoStep new block: anOneArgBlock; referenceSender)
 ]
@@ -84,6 +77,13 @@ TBlDevScripterCheckStep >> satisfies: anOneArgBlock description: aDescriptionOne
 	^ self addStep: (BlDevScripterCheckElementStep new 
 		block: anOneArgBlock; 
 		description: aDescriptionOneArgBlock;
+		referenceSender)
+]
+
+{ #category : #'steps - checks' }
+TBlDevScripterCheckStep >> testClick [
+	^ self addStep: (BlDevScripterCheckFiredEventsStep new 
+		event: BlClickEvent;
 		referenceSender)
 ]
 

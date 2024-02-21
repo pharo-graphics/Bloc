@@ -4,29 +4,42 @@ Class {
 	#category : #'Bloc-Alexandrie-Tests-Base'
 }
 
-{ #category : #tests }
-BARenderTest >> actualFormFor: aSymbol [
-		
-	| aSpace |
-	aSpace := BlSpaceFixture new
-		host: BAOSWindowSDL2Host new; 
-		perform: aSymbol;
-		space.
-	^ aSpace root aeAsForm
-
-]
-
 { #category : #exporting }
-BARenderTest >> allFormSelectors [
+BARenderTest class >> allFormSelectors [
 
 	^ BlSpaceFixture allFixtureSelectors
 ]
 
 { #category : #convenience }
-BARenderTest >> deleteAllExports [
-	<script: 'self new deleteAllExports' >
+BARenderTest class >> exportAll [
+	<script: 'super exportAll' >
 
-	super deleteAllExports
+	super exportAll
+]
+
+{ #category : #convenience }
+BARenderTest class >> inspectAll [
+	<script: 'super inspectAll'>
+	
+	super inspectAll
+]
+
+{ #category : #convenience }
+BARenderTest class >> inspectMismatches [
+	<script: 'super inspectMismatches'>
+	
+	super inspectMismatches
+]
+
+{ #category : #hooks }
+BARenderTest >> actualForm [
+		
+	| aSpace |
+	aSpace := self formBehavior
+		host: BlOSWindowSDL2Host new; 
+		perform: formSelector;
+		space.
+	^ aSpace root aeAsForm
 ]
 
 { #category : #tests }
@@ -37,9 +50,8 @@ BARenderTest >> expectedFormsDirectory [
 	^ repo location / 'tests' / 'render'
 ]
 
-{ #category : #convenience }
-BARenderTest >> exportAll [
-	<script: 'self new exportAll' >
+{ #category : #tests }
+BARenderTest >> formBehavior [
 
-	super exportAll
+	^ BlSpaceFixture new
 ]

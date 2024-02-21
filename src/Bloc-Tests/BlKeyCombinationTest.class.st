@@ -23,9 +23,8 @@ BlKeyCombinationTest >> setUp [
 
 { #category : #tests }
 BlKeyCombinationTest >> testKeyCodeCombination [
+
 	| shortcut flag |
-	<gtExample>
-	self setUp.
 	flag := false.
 	
 	buffer pressed: true key: KeyboardKey controlLeft.
@@ -46,9 +45,8 @@ BlKeyCombinationTest >> testKeyCodeCombination [
 
 { #category : #tests }
 BlKeyCombinationTest >> testNoMatchKeyCodeCombination [
+
 	| shortcut flag |
-	<gtExample>
-	self setUp.
 	flag := false.
 	
 	buffer pressed: false key: KeyboardKey controlLeft.

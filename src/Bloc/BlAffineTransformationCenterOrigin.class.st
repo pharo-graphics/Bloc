@@ -5,13 +5,20 @@ I am a relative transformation origin which is attached to the center of an elem
 Class {
 	#name : #BlAffineTransformationCenterOrigin,
 	#superclass : #BlAffineTransformationOrigin,
+	#classInstVars : [
+		'defaultInstance'
+	],
 	#category : #'Bloc-Basic-Transformations'
 }
 
+{ #category : #accessing }
+BlAffineTransformationCenterOrigin class >> defaultInstance [
+
+	^ defaultInstance ifNil: [ defaultInstance := self new ]
+]
+
 { #category : #math }
 BlAffineTransformationCenterOrigin >> originIn: anElement [
-	"@see Method comment BlAffineTransformationOrigin>>#originIn:"
-	<return: #Point or: #BlPoint3D>
 
 	^ anElement extent / 2.0
 ]

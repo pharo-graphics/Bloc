@@ -1,6 +1,6 @@
 "
 I am an event dispatcher that directly dispatches events to the registered event handlers.
-I do not support event bubbling. If you need events to be dispatched through a composition tree you might want to use {{gtClass:BlBubblingEventDispatcher}}.
+I do not support event bubbling. If you need events to be dispatched through a composition tree you might want to use `BlBubblingEventDispatcher`.
 
 Example:
 
@@ -70,12 +70,14 @@ BlDirectEventDispatcher >> addShortcut: aBlShortcut [
 
 { #category : #initialization }
 BlDirectEventDispatcher >> defaultFilterRegistry [
-	^ Bloc preferableEventHandlerRegistry new
+
+	^ BlHandlerRegistry preferableHandlerRegistryClass new
 ]
 
 { #category : #initialization }
 BlDirectEventDispatcher >> defaultHandlerRegistry [
-	^ Bloc preferableEventHandlerRegistry new
+
+	^ BlHandlerRegistry preferableHandlerRegistryClass new
 ]
 
 { #category : #'api - event managing' }
@@ -122,6 +124,17 @@ BlDirectEventDispatcher >> handlersDo: aBlock [
 	"Evaulate a given block with every event handler as an argument"
 
 	handlers ifNotNil: [ :aRegistry | aRegistry handlers do: aBlock ]
+]
+
+{ #category : #'api - accessing' }
+BlDirectEventDispatcher >> hasEventFilterSuchThat: aBlock [
+	<return: #Boolean>
+
+	self filtersDo: [ :eachfilter |
+		(aBlock value: eachfilter)
+			ifTrue: [ ^ true ] ].
+		
+	^ false
 ]
 
 { #category : #'api - testing' }

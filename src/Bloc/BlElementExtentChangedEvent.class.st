@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #'api - enable / disable' }
+BlElementExtentChangedEvent class >> disableIn: anObject [
+	anObject disableExtentChanged
+]
+
+{ #category : #'api - enable / disable' }
 BlElementExtentChangedEvent class >> enableIn: anObject [
 	anObject enableExtentChanged
 ]

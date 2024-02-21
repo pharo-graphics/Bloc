@@ -65,10 +65,15 @@ BlColorPaint >> hash [
 ]
 
 { #category : #testing }
+BlColorPaint >> isColorPaint [
+
+	^ true
+]
+
+{ #category : #testing }
 BlColorPaint >> isOpaque [
 	"Color paint is opaque when underlying color is opaque
-	@see BlPaint>>#isOpaque"
-	<return: #Boolean>
+	@see `BlPaint>>#isOpaque`"
 
 	^ color isOpaque
 ]
@@ -85,4 +90,15 @@ BlColorPaint >> isTransparent [
 { #category : #geometry }
 BlColorPaint >> matchExtent: anExtent [
 	"do nothing for color paint"
+]
+
+{ #category : #printing }
+BlColorPaint >> printOn: aStream [
+	"Generate a string representation of the receiver based on its instance variables."
+
+	super printOn: aStream.
+	aStream
+		nextPutAll: '(';
+		print: color;
+		nextPutAll: ')'
 ]

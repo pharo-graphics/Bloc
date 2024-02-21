@@ -1,7 +1,7 @@
 Class {
 	#name : #BlGridInflexible,
 	#superclass : #BlGridFlexibility,
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
 { #category : #comparing }

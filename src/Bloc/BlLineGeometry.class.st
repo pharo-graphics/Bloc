@@ -18,6 +18,16 @@ BlLineGeometry class >> from: aFromPoint to: aToPoint [
 	^ self new from: aFromPoint to: aToPoint
 ]
 
+{ #category : #'geometry testing' }
+BlLineGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
+	"Answer whether aPoint is contained by this geometry"
+
+	^ aPoint
+		onLineFrom: from
+		to: to
+		within: aBlElement border width / 2
+]
+
 { #category : #accessing }
 BlLineGeometry >> from [
 	"Return start location of the line in owner element's local coordinate system"
@@ -42,8 +52,24 @@ BlLineGeometry >> from: aFromPoint to: aToPoint [
 ]
 
 { #category : #geometry }
-BlLineGeometry >> geometryBounds: aBounds [
-	^ (aBounds rectangle: (Rectangle encompassing: { self from . self to}))
+BlLineGeometry >> geometryBounds: aBlBounds [
+
+	^ aBlBounds rectangle: 
+		(Rectangle encompassing: { 
+			self from.
+			self to })
+]
+
+{ #category : #testing }
+BlLineGeometry >> hasCaps [
+
+	^ true
+]
+
+{ #category : #testing }
+BlLineGeometry >> hasJoins [
+
+	^ false
 ]
 
 { #category : #initialization }

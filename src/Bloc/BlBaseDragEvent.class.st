@@ -15,6 +15,14 @@ BlBaseDragEvent >> asDragEvent [
 	^ self
 ]
 
+{ #category : #copying }
+BlBaseDragEvent >> copySharedStatesFrom: anEvent [
+
+	super copySharedStatesFrom: anEvent.
+	" Since the management of dnd relies on #isConsumed "
+	anEvent isConsumed ifTrue: [ self consumed: true ]
+]
+
 { #category : #accessing }
 BlBaseDragEvent >> dragboard [
 	^ dragboard

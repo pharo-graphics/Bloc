@@ -53,7 +53,6 @@ BlEventDispatcherChain >> first [
 
 { #category : #'private - testing' }
 BlEventDispatcherChain >> hasDispatcher [
-	<return: #Boolean>
 	
 	^ dispatcher isNotNil
 ]

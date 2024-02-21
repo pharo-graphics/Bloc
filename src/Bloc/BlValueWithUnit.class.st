@@ -2,7 +2,7 @@
 # Value with unit
 
 Represents a `dimensioned quantity` or `dimensioned number`, for example `10pt` or `30%`.
-The {{gtMethod:BlValueWithUnit>>#value|label=value}} can be any object, but in most cases it is a number, the {{gtMethod:BlValueWithUnit>>#unit|label=unit}} is an instance of a concrete subclass of {{gtClass:BlUnit}}
+The `BlValueWithUnit>>#value|label=value` can be any object, but in most cases it is a number, the `BlValueWithUnit>>#unit|label=unit` is an instance of a concrete subclass of `BlUnit`
 
 "
 Class {

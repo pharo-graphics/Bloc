@@ -17,7 +17,12 @@ Class {
 
 { #category : #'window - properties' }
 BlOSWindowHostSpace >> borderless [
-	^ window borderless
+
+	self
+		deprecated: 'Use isBorderless instead of current one'
+		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
+
+	^ self isBorderless
 ]
 
 { #category : #'window - properties' }
@@ -42,15 +47,14 @@ BlOSWindowHostSpace >> close [
 ]
 
 { #category : #'host space - cursor' }
-BlOSWindowHostSpace >> cursor: aBlCursor [
+BlOSWindowHostSpace >> cursor: aCursor [
 
-	window setMouseCursor: aBlCursor asForm
+	window setMouseCursor: aCursor
 ]
 
 { #category : #'host space - geometry' }
 BlOSWindowHostSpace >> densityDpi [
-	"Return the screen density expressed as dots-per-inch"
-	<return: #Number>
+	"Return the screen density expressed as dots-per-inch (a float)"
 	
 	^ 96.0
 ]
@@ -80,11 +84,12 @@ BlOSWindowHostSpace >> fetchedEventsDo: aBlock [
 
 { #category : #'window - properties' }
 BlOSWindowHostSpace >> fullscreen [
-	"Return true if an underlying window is in fullscreen mode,
-	false otherwise"
-	<return: #Boolean>
 
-	^ window fullscreen
+	self
+		deprecated: 'Use isFullscreen instead of current one'
+		transformWith: '`@rcv fullscreen' -> '`@rcv isFullscreen'.
+
+	^ self isFullscreen
 ]
 
 { #category : #'window - properties' }
@@ -124,6 +129,26 @@ BlOSWindowHostSpace >> initializeWithAttributes: initialAttributes [
 	(BlOSWindowCreatedSignal new window: window) emit
 ]
 
+{ #category : #'window - properties' }
+BlOSWindowHostSpace >> isBorderless [
+
+	^ window borderless
+]
+
+{ #category : #'window - properties' }
+BlOSWindowHostSpace >> isFullscreen [
+	"Return true if an underlying window is in fullscreen mode, false otherwise."
+
+	^ window fullscreen
+]
+
+{ #category : #'window - properties' }
+BlOSWindowHostSpace >> isResizable [	
+	"Return true if underlying window is resizable, false otherwise"
+
+	^ window resizable
+]
+
 { #category : #'window - text input' }
 BlOSWindowHostSpace >> isTextInputActive [
 	"Check whether or not Unicode text input events are enabled"
@@ -155,7 +180,6 @@ BlOSWindowHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
-	<return: #FensterLogicalSize>
 
 	^ window extent asLogicalSize
 ]
@@ -198,7 +222,6 @@ BlOSWindowHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
 	This size may differ from the logical size on high dpi (retina) screens.
 	In most cases physical size is x2 larger than logical size on retina screens."
-	<return: #FensterPhysicalSize>
 
 	^ window canvasExtent asPhysicalSize
 ]
@@ -224,11 +247,13 @@ BlOSWindowHostSpace >> render: aSpace [
 ]
 
 { #category : #'window - properties' }
-BlOSWindowHostSpace >> resizable [	
-	"Return true if underlying window is resizable, false otherwise"
-	<return: #Boolean>
+BlOSWindowHostSpace >> resizable [
 
-	^ window resizable
+	self
+		deprecated: 'Use isResizable instead of current one'
+		transformWith: '`@rcv resizable' -> '`@rcv isResizable'.
+
+	^ self isResizable
 ]
 
 { #category : #'window - properties' }

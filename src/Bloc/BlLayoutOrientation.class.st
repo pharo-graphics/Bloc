@@ -22,7 +22,6 @@ BlLayoutOrientation class >> horizontal [
 
 { #category : #'class initialization' }
 BlLayoutOrientation class >> initialize [
-	super initialize.
 	
 	horizontal := BlLayoutHorizontal new.
 	vertical := BlLayoutVertical new

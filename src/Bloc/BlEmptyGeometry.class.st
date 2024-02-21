@@ -5,10 +5,7 @@ Class {
 }
 
 { #category : #'geometry testing' }
-BlEmptyGeometry >> containsPoint: aPoint in: aBlElement [
-	"Note: we have to pass BlElement in order to give geometry a chance to use element properties
-	as as border during the testing process"
-	<return: #Boolean>
+BlEmptyGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	
 	^ false
 ]
@@ -26,6 +23,18 @@ BlEmptyGeometry >> geometryBounds: aBlBounds of: aBlElement [
 		bottom: aBlElement height
 ]
 
+{ #category : #testing }
+BlEmptyGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlEmptyGeometry >> hasJoins [
+
+	^ false
+]
+
 { #category : #geometry }
 BlEmptyGeometry >> matchElement: anElement [
 	"Adapt me to match the size of a given element"
@@ -37,4 +46,16 @@ BlEmptyGeometry >> releaseCache [
 
 { #category : #'api - cache' }
 BlEmptyGeometry >> releaseStrokedBoundsCache [
+]
+
+{ #category : #'visual bounds' }
+BlEmptyGeometry >> strokedBounds: aBlBounds of: anElement [
+	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
+	Dispatch through outskirts first"
+	
+	^ aBlBounds
+		left: 0
+		top: 0
+		right: anElement width
+		bottom: anElement height
 ]

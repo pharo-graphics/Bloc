@@ -1,13 +1,18 @@
 Extension { #name : #BlSpace }
 
 { #category : #'*Bloc-Alexandrie' }
-BlSpace >> useAlexandrieMorphicWindowHost [
+BlSpace >> aeAsForm [
+
+	self
+		deprecated: 'Send #aeAsForm to my root instead'
+		transformWith: '`@rcv aeAsForm' -> '`@rcv root aeAsForm'.
 	
-	self host: BAMorphicWindowHost new
+	^ self root aeAsForm
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlSpace >> useAlexandrieOSWindowSDL2Host [
-	
-	self host: BAOSWindowSDL2Host new
+BlSpace >> aeFullDrawOn: aeCanvas [
+
+	self root aeFullDrawOn: aeCanvas
+
 ]

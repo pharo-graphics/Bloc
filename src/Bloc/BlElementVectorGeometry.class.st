@@ -11,8 +11,17 @@ Class {
 	#category : #'Bloc-Basic-Geometry'
 }
 
+{ #category : #converting }
+BlElementVectorGeometry >> asElement [
+
+	^ super asElement
+		size: self extent;
+		yourself
+]
+
 { #category : #accessing }
 BlElementVectorGeometry >> extent [
+
 	^ extent
 ]
 
@@ -30,18 +39,16 @@ BlElementVectorGeometry >> geometryBounds [
 	"Return my pure geometry bounds (fill bounds).
 	This property is different from #visualBounds in the sense that I don't take stroke into account.
 	Override geometryBounds: to customize computation"
-	<return: #Rectangle>
 
 	^ (self geometryBounds: BlBounds new) asRectangle
 ]
 
 { #category : #'api - bounds' }
-BlElementVectorGeometry >> geometryBounds: aBounds [
+BlElementVectorGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
-	<return: #BlBounds>
 
-	^ aBounds
+	^ aBlBounds
 		origin: 0.0@0.0
 		extent: self extent
 ]
@@ -91,4 +98,36 @@ BlElementVectorGeometry >> releaseCache [
 { #category : #'api - cache' }
 BlElementVectorGeometry >> releaseStrokedBoundsCache [
 	pathCache releaseStrokedBoundsCache
+]
+
+{ #category : #'visual bounds' }
+BlElementVectorGeometry >> strokedBounds: aBlBounds of: anElement [
+	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
+	Dispatch through outskirts first"
+
+	^ aBlBounds rectangle:
+		  (pathCache strokedBounds: aBlBounds of: anElement)
+]
+
+{ #category : #'visual bounds' }
+BlElementVectorGeometry >> strokedBoundsCentered: aBlBounds of: aBlElement [
+	"Answer my bounds as if the border with centered outskirts.
+	Particular geometries may answer a more precise answer."
+
+	^ (self geometryBounds: aBlBounds) expandBy: aBlElement border width / 2.0
+]
+
+{ #category : #'visual bounds' }
+BlElementVectorGeometry >> strokedBoundsInside: aBlBounds of: anElement [
+	"Stroked inside bounds property is equal to geometry bounds"
+
+	^ self geometryBounds: aBlBounds
+]
+
+{ #category : #'visual bounds' }
+BlElementVectorGeometry >> strokedBoundsOutside: aBlBounds of: aBlElement [
+	"Answer my bounds as if the border outside. 
+	Particular geometries may answer a more precise answer."
+
+	^ (self geometryBounds: aBlBounds) expandBy: aBlElement border width
 ]

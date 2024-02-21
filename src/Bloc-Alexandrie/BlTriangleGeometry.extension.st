@@ -3,7 +3,7 @@ Extension { #name : #BlTriangleGeometry }
 { #category : #'*Bloc-Alexandrie' }
 BlTriangleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
-	aeCanvas drawClosedPathWith: [ :cairoContext |
+	aeCanvas pathFactory: [ :cairoContext |
 		| thePoints |
 		thePoints := self computeVertices.
 
@@ -11,12 +11,6 @@ BlTriangleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 			moveTo: thePoints first;
 			lineTo: thePoints second;
 			lineTo: thePoints third;
-			primClosePath ]
+			closePath ]
 
-]
-
-{ #category : #'*Bloc-Alexandrie' }
-BlTriangleGeometry >> aeContainsPoint: aPoint in: aBlElement [
-
-	^ BAPolygonHitTester doPolygonBy: self computeVertices include: aPoint
 ]

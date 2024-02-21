@@ -1,7 +1,7 @@
 "
 I forward events to another event handler while making it look like the event is sent from `eventTarget` as current target.
 
-I am very useful if a user want to transfer an event handler from one dispatcher to the other. It is not possible to do it directly, because then the `currentTarget` of the received event will be different those two event dispatchers. To solve this problem {{gtClass:BlEventForwarder}} can reference a specific event target that will be used as `currentTarget` for all forwarded events. This way the decorated event handler will receive events with consistent `currentTarget`
+I am very useful if a user want to transfer an event handler from one dispatcher to the other. It is not possible to do it directly, because then the `currentTarget` of the received event will be different those two event dispatchers. To solve this problem `BlEventForwarder` can reference a specific event target that will be used as `currentTarget` for all forwarded events. This way the decorated event handler will receive events with consistent `currentTarget`
 
 ```
 BlEventForwarder

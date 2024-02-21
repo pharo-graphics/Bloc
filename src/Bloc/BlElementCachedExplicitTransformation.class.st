@@ -1,73 +1,75 @@
 "
-# Cached element transformation
-Builds upon the {{gtClass:BlElementTransformation}} to provide the matrix caching posibility.
+I cache a `BlElementTransformation`.
 
 "
 Class {
 	#name : #BlElementCachedExplicitTransformation,
 	#superclass : #BlElementCachedTransformation,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'transformation',
-		'bounds',
-		'matrix'
+		'matrix',
+		'elementTransformation',
+		'boundingRectangle'
 	],
 	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #'instance creation' }
 BlElementCachedExplicitTransformation class >> forTransformation: aBlElementTransformation [
-	^ self new initializeWith: aBlElementTransformation
+
+	^ self basicNew
+		  initializeWith: aBlElementTransformation;
+		  yourself
 ]
 
 { #category : #'api - converting' }
 BlElementCachedExplicitTransformation >> asElementTransformation [
-	^ self transformation
+
+	^ elementTransformation
 ]
 
 { #category : #'private - accessing' }
-BlElementCachedExplicitTransformation >> bounds [
-	^ bounds
+BlElementCachedExplicitTransformation >> boundingRectangle [
+
+	^ boundingRectangle
 ]
 
 { #category : #'api - transformation' }
-BlElementCachedExplicitTransformation >> bounds: aRectangle [
-	bounds := aRectangle.
+BlElementCachedExplicitTransformation >> boundingRectangle: aRectangle [
+
+	boundingRectangle := aRectangle.
 	self invalidateMatrix
 ]
 
 { #category : #'private - accessing' }
+BlElementCachedExplicitTransformation >> bounds [
+
+	self
+		deprecated: 'Use #boundingRectangle instead'
+		transformWith: '`@receiver bounds' -> '`@receiver boundingRectangle'.
+
+	^ boundingRectangle
+]
+
+{ #category : #'private - accessing' }
+BlElementCachedExplicitTransformation >> elementTransformation [
+
+	^ elementTransformation
+]
+
+{ #category : #'private - accessing' }
 BlElementCachedExplicitTransformation >> ensureMatrix [
-	self hasMatrix
-		ifTrue: [ ^ self ].
 
-	matrix := self transformation asMatrix: bounds
-]
-
-{ #category : #'private - testing' }
-BlElementCachedExplicitTransformation >> hasMatrix [
-	"Return true if any of 2D or 3D matrices exist, false otherwise.
-	Note: I am useful for fast exits"
-	<return: #Boolean>
-
-	^ matrix isNotNil
-]
-
-{ #category : #initialization }
-BlElementCachedExplicitTransformation >> initialize [
-	super initialize.
-	
-	bounds := 0.0@0.0 extent: 0.0@0.0
+	matrix ifNil: [
+		matrix := elementTransformation asMatrix: boundingRectangle ]
 ]
 
 { #category : #initialization }
 BlElementCachedExplicitTransformation >> initializeWith: aBlElementTransformation [
-	self
-		assert: [ transformation isNil ]
-		description: [ 'Transfomation can not be changed once set' ].
 
-	transformation := aBlElementTransformation
+	self initialize.
+	
+	boundingRectangle := 0.0@0.0 extent: 0.0@0.0.
+	elementTransformation := aBlElementTransformation
 ]
 
 { #category : #'private - accessing' }
@@ -81,75 +83,74 @@ BlElementCachedExplicitTransformation >> invalidateMatrix [
 ]
 
 { #category : #'api - transformation' }
-BlElementCachedExplicitTransformation >> inverseTransformBounds: aBounds [
-	"In-place transform given BlBounds according to my transformation.
-	(global to local transformation)"
-	<return: #BlBounds>
+BlElementCachedExplicitTransformation >> inverseTransformBounds: aBlBounds [
+	"Transform the given bounds according to inverse of my cached transformation.
+	(Global to local transformation.)"
 
-	^ self matrix inverted transformBounds: aBounds
+	^ self matrix inverted transformBounds: aBlBounds
 ]
 
 { #category : #'api - transformation' }
 BlElementCachedExplicitTransformation >> inverseTransformPoint: aPoint [
-	"Apply an inversed transformation on a given point and return a result.
-	Note: Throws BlSingularMatrixError if underlying matrix is singular"
-	<return: #Point>
-
-	aPoint isPoint
-		ifFalse: [ self error: 'Only points can be transformed!' ].
+	"Answer the `Point` that results from applying the inversed transformation on a given point.
+	Signal `BlSingularMatrixError` if the underlying matrix is singular."
 
 	^ self matrix inverted transformPoint: aPoint
 ]
 
 { #category : #'private - accessing' }
 BlElementCachedExplicitTransformation >> invert [
+
 	matrix := self matrix inverted
 ]
 
 { #category : #'private - accessing' }
 BlElementCachedExplicitTransformation >> inverted [
+
 	^ self copy invert
 ]
 
 { #category : #'api - testing' }
 BlElementCachedExplicitTransformation >> isIdentity [
-	^ self transformation isIdentity
+
+	^ elementTransformation isIdentity
 ]
 
 { #category : #accessing }
 BlElementCachedExplicitTransformation >> isPureTranslation [
-	^ self transformation isPureTranslation
+
+	^ elementTransformation isPureTranslation
 ]
 
 { #category : #'api - transformation' }
 BlElementCachedExplicitTransformation >> matrix [
-	<return: #BlMatrix>
 
 	self ensureMatrix.
 	^ matrix
 ]
 
 { #category : #'api - transformation' }
-BlElementCachedExplicitTransformation >> transformBounds: aBounds [
-	"In-place transform given BlBounds according to my transformation.
-	(local to global transformation)"
-	<return: #BlBounds>
+BlElementCachedExplicitTransformation >> transformBounds: aBlBounds [
+	"Transform the given bounds according to my cached transformation.
+	(Local to global transformation.)"
 
-	^ self matrix transformBounds: aBounds
+	^ self matrix transformBounds: aBlBounds
 ]
 
 { #category : #'api - transformation' }
 BlElementCachedExplicitTransformation >> transformPoint: aPoint [
-	"Transform given 2D point according to my transformation and return a transformed result point.
-	(local to global transformation)"
-	<return: #Point>
+	"Transform a given 2D point according to my cached transformation.
+	(Local to global transformation.)"
 	
 	^ self matrix transformPoint: aPoint
 ]
 
 { #category : #'private - accessing' }
 BlElementCachedExplicitTransformation >> transformation [
-	<return: #BlElementTransformation>
 
-	^ transformation
+	self
+		deprecated: 'Use #elementTransformation instead'
+		transformWith: '`@receiver transformation' -> '`@receiver elementTransformation'.
+	
+	^ elementTransformation
 ]

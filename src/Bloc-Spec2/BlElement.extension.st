@@ -3,7 +3,7 @@ Extension { #name : #BlElement }
 { #category : #'*Bloc-Spec2' }
 BlElement >> asPreviewMorph [
 
-	^ self asSpartaForm asMorph
+	^ self asForm asMorph
 ]
 
 { #category : #'*Bloc-Spec2' }
@@ -34,13 +34,6 @@ BlElement >> inspectionResizers: aBuilder [
 			title: 'Element'
 			evaluated: [ :anElement | anElement ]);
 		yourself
-]
-
-{ #category : #'*Bloc-Spec2' }
-BlElement >> inspectionStates: aBuilder [
-	<inspectorPresentationOrder: 5 title: 'States'>
-
-	^ self states inspectionItems: aBuilder
 ]
 
 { #category : #'*Bloc-Spec2' }

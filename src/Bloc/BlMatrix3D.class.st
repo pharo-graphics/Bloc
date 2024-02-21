@@ -36,28 +36,53 @@ Class {
 
 { #category : #'instance creation' }
 BlMatrix3D class >> flushToZero: aFloat [
+
 	^ (aFloat closeTo: 0.0)
-		ifTrue: [ 0.0 ]
-		ifFalse: [ aFloat ]
+		  ifTrue: [ 0.0 ]
+		  ifFalse: [ aFloat ]
 ]
 
 { #category : #'instance creation' }
 BlMatrix3D class >> fromQuaternion: aQuaternion [
 	"Return a new 3D rotation matrix from a given rotation quaternion"
-	<return: #BlMatrix3D>
 
 	^ self new
-		quaternion: aQuaternion
+		  quaternion: aQuaternion;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlMatrix3D class >> rotation: aTheta axis: aVector [
 	"Create a 3D matrix representing a rotation about a given axis vector
 	by aTheta radians"
-	<return: #BlMatrix3D>
-	
+
 	^ self new
-		rotation: aTheta axis: aVector
+		  rotation: aTheta axis: aVector;
+		  yourself
+]
+
+{ #category : #comparing }
+BlMatrix3D >> = anObject [
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	
+	self sx = anObject sx ifFalse:[ ^ false ].
+	self shy0 = anObject shy0 ifFalse:[ ^ false ].
+	self shz0 = anObject shz0 ifFalse:[ ^ false ].
+	self wx = anObject wx ifFalse:[ ^ false ].
+	self shx0 = anObject shx0 ifFalse:[ ^ false ].
+	self shz1 = anObject shz1 ifFalse:[ ^ false ].
+	self wy = anObject wy ifFalse:[ ^ false ].
+	self shx1 = anObject shx1 ifFalse:[ ^ false ].
+	self shy1 = anObject shy1 ifFalse:[ ^ false ].
+	self sz = anObject sz ifFalse:[ ^ false ].
+	self wz = anObject wz ifFalse:[ ^ false ].
+	self x = anObject x ifFalse:[ ^ false ].
+	self y = anObject y ifFalse:[ ^ false ].
+	self z = anObject z ifFalse:[ ^ false ].
+	self w = anObject w ifFalse:[ ^ false ].
+
+	^true
 ]
 
 { #category : #converting }
@@ -98,9 +123,37 @@ BlMatrix3D >> initialize [
 { #category : #testing }
 BlMatrix3D >> is2D [
 	"Return true if matrix is 2D, false otherwise"
-	<return: #Boolean>
 	
 	^ false
+]
+
+{ #category : #testing }
+BlMatrix3D >> isIdentity [
+
+	"scale"
+	(sx = 1.0 and: [
+	 sy = 1.0 and: [
+	 sz = 1.0 ]]) ifFalse: [ ^ false ].
+	
+	"translate"
+	(x = 0.0 and: [
+	 y = 0.0 and: [
+	 z = 0.0 ]]) ifFalse: [ ^ false ].
+	
+	"shear"
+	(shx0 = 0.0 and: [
+	 shx1 = 0.0 and: [
+	 shy0 = 0.0 and: [
+	 shy1 = 0.0 and: [
+	 shz0 = 0.0 and: [
+	 shz1 = 0.0 ]]]]]) ifFalse: [ ^ false ].
+
+	(w  = 1.0 and: [
+	 wx = 0.0 and: [
+	 wy = 0.0 and: [
+	 wz = 0.0 ]]]) ifFalse: [ ^ false ].
+
+	^ true
 ]
 
 { #category : #'matrix - transformations' }

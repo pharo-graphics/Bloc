@@ -16,10 +16,12 @@ Class {
 
 { #category : #'window - properties' }
 BlMorphicHostSpace >> borderless [
-	"Return true if underlying window is now borderless, false otherwise"
-	<return: #Boolean>
-	
-	^ false
+
+	self
+		deprecated: 'Use isBorderless instead of current one'
+		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
+
+	^ self isBorderless
 ]
 
 { #category : #'window - properties' }
@@ -42,26 +44,25 @@ BlMorphicHostSpace >> createFormSurfaceRenderer [
 { #category : #'host space - cursor' }
 BlMorphicHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one"
-	World currentHand showTemporaryCursor: aCursor asForm
+
+	World currentHand showTemporaryCursor: aCursor
 ]
 
 { #category : #'host space - geometry' }
 BlMorphicHostSpace >> densityDpi [
-	"Return the screen density expressed as dots-per-inch"
-	<return: #Number>
+	"Return the screen density expressed as dots-per-inch (a float)"
 	
 	^ 96.0
 ]
 
 { #category : #'window - properties' }
 BlMorphicHostSpace >> fullsize [
-	"Return true if an underlying window is in fullsize mode,
-	false otherwise.
-	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent
-	and has no window title"
-	<return: #Boolean>
 
-	^ true
+	self
+		deprecated: 'Use isFullsize instead of current one'
+		transformWith: '`@rcv fullsize' -> '`@rcv isFullsize'.
+		
+	^ self isFullsize
 ]
 
 { #category : #'window - properties' }
@@ -78,12 +79,26 @@ BlMorphicHostSpace >> generateEvents [
 	spaceHostMorph world ifNil: [ spaceHostMorph announceDeleted ]
 ]
 
+{ #category : #'window - properties' }
+BlMorphicHostSpace >> isBorderless [
+	"Return true if underlying window is now borderless, false otherwise"
+	
+	^ false
+]
+
+{ #category : #'window - properties' }
+BlMorphicHostSpace >> isFullsize [
+	"Return true if an underlying window is in fullsize mode, false otherwise.
+	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent and has no window title"
+
+	^ true
+]
+
 { #category : #'host space - geometry' }
 BlMorphicHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
-	<return: #FensterLogicalSize>
 
 	^ spaceHostMorph extent asLogicalSize
 ]
@@ -96,12 +111,17 @@ BlMorphicHostSpace >> needsRebuild [
 	^ false
 ]
 
+{ #category : #initialization }
+BlMorphicHostSpace >> newBlHostRendererSurface [
+	
+	^ BlHostRendererFormSurface newForHostSpace: self
+]
+
 { #category : #'host space - geometry' }
 BlMorphicHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
 	This size may differ from the logical size on high dpi (retina) screens.
 	In most cases physical size is x2 larger than logical size on retina screens."
-	<return: #FensterPhysicalSize>
 
 	^ (spaceHostMorph width @ spaceHostMorph height) asPhysicalSize
 ]

@@ -8,78 +8,92 @@ Class {
 	#name : #BlElementLocalTransformation,
 	#superclass : #BlElementDynamicTransformation,
 	#instVars : [
-		'transformation'
+		'affineTransformation'
 	],
 	#category : #'Bloc-Basic-Transformations'
 }
 
 { #category : #'instance creation' }
-BlElementLocalTransformation class >> with: anAfineTransformation [
+BlElementLocalTransformation class >> new [
+
+	^ self newWith: BlAffineCompositeTransformation new
+]
+
+{ #category : #'instance creation' }
+BlElementLocalTransformation class >> newWith: aBlAffineTransformation [
+
 	^ self basicNew
-		initializeWith: anAfineTransformation
+		  initializeWith: aBlAffineTransformation;
+		  yourself
+]
+
+{ #category : #accessing }
+BlElementLocalTransformation >> affineTransformation [
+
+	^ affineTransformation
+]
+
+{ #category : #enumerating }
+BlElementLocalTransformation >> affineTransformationsDo: aBlockClosure [ 
+
+	affineTransformation do: aBlockClosure
 ]
 
 { #category : #computation }
 BlElementLocalTransformation >> computeMatrix: aBlMatrix in: aRectangle [
-	transformation multiplyOn: aBlMatrix in: aRectangle
+
+	affineTransformation multiplyOn: aBlMatrix in: aRectangle
 ]
 
 { #category : #initialization }
-BlElementLocalTransformation >> initialize [
-	super initialize.
-	
-	transformation := BlAffineCompositeTransformation new
-]
+BlElementLocalTransformation >> initializeWith: aBlAffineTransformation [
 
-{ #category : #initialization }
-BlElementLocalTransformation >> initializeWith: aTransformation [
-	super initialize.
-
-	transformation := aTransformation
+	self initialize.
+	affineTransformation := aBlAffineTransformation
 ]
 
 { #category : #testing }
 BlElementLocalTransformation >> is2D [
 	"Return true if my current transformation is in 2D space, false otherwise"
-	<return: #Boolean>
 
-	^ self transformation is2D
+	^ affineTransformation is2D
 ]
 
 { #category : #testing }
 BlElementLocalTransformation >> is3D [
 	"Return true if my current transformation is in 3D space, false otherwise"
-	<return: #Boolean>
 
-	^ self transformation is3D
+	^ affineTransformation is3D
 ]
 
 { #category : #testing }
 BlElementLocalTransformation >> isIdentity [
+
 	"Return true if I represent an identity transformation, false otherwise"
-	<return: #Boolean>
-	
-	^ self transformation isIdentity
+
+	^ affineTransformation isIdentity
 ]
 
 { #category : #testing }
 BlElementLocalTransformation >> isPureTranslation [
 	"Return true if I represent an pure translation, false otherwise"
-	<return: #Boolean>
-	
-	^ self transformation isTranslation
+
+	^ affineTransformation isTranslation
 ]
 
 { #category : #copying }
 BlElementLocalTransformation >> postCopy [
-	super postCopy.
 
-	transformation := transformation copy
+	super postCopy.
+	affineTransformation := affineTransformation copy
 ]
 
 { #category : #accessing }
 BlElementLocalTransformation >> transformation [
-	<return: #BlAffineCompositeTransformation>
 
-	^ transformation
+	self
+		deprecated: 'Use #affineTransformation instead'
+		transformWith: '`@receiver transformation' -> '`@receiver affineTransformation'.
+	
+	^ affineTransformation
 ]

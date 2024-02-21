@@ -15,8 +15,15 @@ BlNullHorizontalAlignment class >> directed: aBlLayoutDirection [
 
 { #category : #'class initialization' }
 BlNullHorizontalAlignment class >> initialize [
-	super initialize.
-	
+
+	self initializeSingletons
+]
+
+{ #category : #'class initialization' }
+BlNullHorizontalAlignment class >> initializeSingletons [
+
+	super initializeSingletons.
+
 	rightToLeft := BlNullRightAlignment new.
 	leftToRight := BlNullLeftAlignment new
 ]

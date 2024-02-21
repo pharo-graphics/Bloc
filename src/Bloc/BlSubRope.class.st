@@ -110,7 +110,6 @@ BlSubRope >> delete: aStart to: anEnd [
 
 { #category : #'rope - accessing' }
 BlSubRope >> depth [
-	<return: #Number>
 
 	^ rope depth
 ]
@@ -164,7 +163,6 @@ BlSubRope >> insertItems: aCollection at: anIndex [
 
 { #category : #'rope - testing' }
 BlSubRope >> isLeaf [
-	<return: #Boolean>
 
 	^ false
 ]

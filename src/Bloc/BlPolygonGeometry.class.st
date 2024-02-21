@@ -23,15 +23,40 @@ BlPolygonGeometry class >> vertices: aCollection [
 	^ self new vertices: aCollection
 ]
 
-{ #category : #'geometry bounds' }
-BlPolygonGeometry >> geometryBounds: aBounds [
+{ #category : #'geometry testing' }
+BlPolygonGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
+	"Answer whether aPoint is contained by this geometry."
+
+	^ BlPolygonHitTester doPolygonBy: self vertices include: aPoint
+]
+
+{ #category : #'api - bounds' }
+BlPolygonGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
-	<return: #BlBounds>
 
-	^ aBounds
-		origin: self vertices min
-		corner: self vertices max
+	^ aBlBounds
+		origin: (self vertices ifEmpty: [0@0] ifNotEmpty: [self vertices min])
+		corner: (self vertices ifEmpty: [0@0] ifNotEmpty: [self vertices max])
+]
+
+{ #category : #testing }
+BlPolygonGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlPolygonGeometry >> hasJoins [
+
+	^ true
+]
+
+{ #category : #initialization }
+BlPolygonGeometry >> initialize [ 
+
+	super initialize.
+	vertices := #()
 ]
 
 { #category : #geometry }
@@ -41,7 +66,6 @@ BlPolygonGeometry >> matchExtent: anExtent [
 
 { #category : #accessing }
 BlPolygonGeometry >> vertices [
-	<return: #SequenceableCollection of: #Point>
 
 	^ vertices
 ]
@@ -55,6 +79,6 @@ BlPolygonGeometry >> vertices: aCollectionOfPoints [
 		ifTrue: [ ^ self ].
 	
 	vertices := theNewVertices.
-	extent := vertices max.
+	extent := vertices ifEmpty: [ 0@0 ] ifNotEmpty: [vertices max].
 	self releaseCache
 ]

@@ -15,7 +15,7 @@ Class {
 
 { #category : #'instance creation' }
 BlStrokeStyle class >> dashed [
-	<gtExample>
+	<sampleInstance>
 	^ self new
 		lineCap: BlStrokeLineCap butt;
 		lineJoin: BlStrokeLineJoin miter;
@@ -26,7 +26,7 @@ BlStrokeStyle class >> dashed [
 
 { #category : #'instance creation' }
 BlStrokeStyle class >> default [
-	<gtExample>
+	<sampleInstance>
 	^ self new
 		lineCap: BlStrokeLineCap butt;
 		lineJoin: BlStrokeLineJoin miter;
@@ -87,6 +87,12 @@ BlStrokeStyle >> hash [
 		bitXor:
 			(dashArray hash
 				bitXor: (dashOffset hash bitXor: (lineCap hash bitXor: lineJoin hash)))
+]
+
+{ #category : #testing }
+BlStrokeStyle >> isDashed [
+
+	^ dashArray notEmpty
 ]
 
 { #category : #accessing }

@@ -1,8 +1,6 @@
 Class {
 	#name : #BlFocusability,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#classInstVars : [
 		'after',
 		'before',

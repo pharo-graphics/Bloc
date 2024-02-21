@@ -7,7 +7,7 @@ Class {
 		'queueIndex',
 		'insertionIndex'
 	],
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
 { #category : #converting }

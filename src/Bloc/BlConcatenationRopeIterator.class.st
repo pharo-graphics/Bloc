@@ -58,9 +58,8 @@ BlConcatenationRopeIterator >> forwardIteratorAt: aPosition [
 
 { #category : #'iterator - testing' }
 BlConcatenationRopeIterator >> hasNext [
-	<return: #Boolean>
-	self assertInvariant.
 
+	self assertInvariant.
 	^ position < end
 ]
 

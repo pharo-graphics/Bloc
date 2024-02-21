@@ -8,8 +8,6 @@ https://en.wikipedia.org/wiki/Affine_transformation
 Class {
 	#name : #BlAffineTransformation,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'origin'
 	],
@@ -18,7 +16,7 @@ Class {
 
 { #category : #converting }
 BlAffineTransformation >> asMatrix [
-	<return: #BlMatrix>
+
 	| aMatrix |
 	
 	aMatrix := self is2D
@@ -26,25 +24,27 @@ BlAffineTransformation >> asMatrix [
 		ifFalse: [ BlMatrix3D new ].
 		
 	self multiplyOn: aMatrix.
+
 	^ aMatrix
 ]
 
 { #category : #enumerating }
 BlAffineTransformation >> do: aBlock [
+
 	aBlock value: self
 ]
 
 { #category : #initialization }
 BlAffineTransformation >> initialize [
+
 	super initialize.
 	
-	origin := BlAffineTransformationCenterOrigin new
+	origin := BlAffineTransformationCenterOrigin defaultInstance
 ]
 
 { #category : #testing }
 BlAffineTransformation >> is2D [
 	"Return true if transformation happens in x-y plane, hence 2D"
-	<return: #Boolean>
 	
 	^ self subclassResponsibility
 ]
@@ -52,7 +52,6 @@ BlAffineTransformation >> is2D [
 { #category : #testing }
 BlAffineTransformation >> is3D [
 	"Return true if transformation happens in x-y-z plane, hence 3D"
-	<return: #Boolean>
 	
 	^ self is2D not
 ]
@@ -60,7 +59,6 @@ BlAffineTransformation >> is3D [
 { #category : #testing }
 BlAffineTransformation >> isIdentity [
 	"Return true if thiss transformation is identity"
-	<return: #Boolean>
 	
 	^ false
 ]
@@ -68,36 +66,35 @@ BlAffineTransformation >> isIdentity [
 { #category : #testing }
 BlAffineTransformation >> isTranslation [
 	"Return true if this transformation is translation"
-	<return: #Boolean>
 	
 	^ false
 ]
 
 { #category : #'mathematical functions' }
 BlAffineTransformation >> multiplyOn: aBlMatrix [
+
 	self subclassResponsibility
 ]
 
 { #category : #'mathematical functions' }
 BlAffineTransformation >> multiplyOn: aBlMatrix in: aBlElement [
-	| anOriginPoint aVector |
 
-	anOriginPoint := self origin originIn: aBlElement.
-	aVector := anOriginPoint asBlocVector.
+	| aBlVector |
+	aBlVector := (self origin originIn: aBlElement) asBlocVector.
 	
-	aBlMatrix translateBy: aVector negated.
+	aBlMatrix translateBy: aBlVector negated.
 	self multiplyOn: aBlMatrix.
-	aBlMatrix translateBy: aVector
+	aBlMatrix translateBy: aBlVector
 ]
 
 { #category : #accessing }
 BlAffineTransformation >> origin [
-	<return: #BlAffineTransformationOrigin>
 
 	^ origin
 ]
 
 { #category : #accessing }
 BlAffineTransformation >> origin: aBlAffineTransformationOrigin [
+
 	origin := aBlAffineTransformationOrigin
 ]

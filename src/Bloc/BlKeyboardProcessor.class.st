@@ -1,6 +1,6 @@
 "
 # Keyboard event processor
-Is responsible for processing {{gtClass:BlKeyboardEvent}} which are sent by the {{gtClass:TBlHostSpace}} to the {{gtClass:BlSpace}}. In addition, the `keyboard event processor` generates additional events such as {{gtClass:BlShortcutEvent}} 
+Is responsible for processing `BlKeyboardEvent` which are sent by the `TBlHostSpace` to the `BlSpace`. In addition, the `keyboard event processor` generates additional events such as `BlShortcutEvent` 
 
 "
 Class {
@@ -20,7 +20,7 @@ Class {
 
 { #category : #accessing }
 BlKeyboardProcessor >> buffer [
-	<return: #BlKeyboardBuffer>
+	"Return the buffer usually instance of BlKeyboardBuffer or subclasses"
 
 	^ buffer
 ]
@@ -31,7 +31,6 @@ BlKeyboardProcessor >> findTarget [
 	By default a keyboard event target is currently focused element if exists
 	or space's root element otherwise.
 	Note: target can not be nil"
-	<return: #BlElement>
 
 	^ (self space focusProcessor hasFocusOwner and: [ self space focusProcessor focusOwner isAttachedToSceneGraph ])
 		ifTrue: [ self space focusProcessor focusOwner ]
@@ -114,23 +113,16 @@ BlKeyboardProcessor >> processKeyDown: anEvent [
 
 	self buffer add: anEvent.
 	
-	aTarget := self telemetry
-		timeSync: [ 'Find key down target ' ]
-		during: [ self findTarget ].
-
+	aTarget := self findTarget.
 	anEvent target: aTarget.
-	
-	self telemetry
-		timeSync: [ 'Fire key down event ' ]
-		during: [ self fireEvent: anEvent ].
+	self fireEvent: anEvent.
 
 	aShortcutEvent := BlShortcutEvent new.
 	aShortcutEvent buffer: self buffer.
 	aShortcutEvent target: aTarget.
+	aShortcutEvent modifiers: anEvent modifiers.
 
-	self telemetry
-		timeSync: [ 'Fire shortcut event ' ]
-		during: [ self fireEvent: aShortcutEvent ].
+	self fireEvent: aShortcutEvent.
 
 	previousShortcutTime := self space time now.
 
@@ -146,15 +138,9 @@ BlKeyboardProcessor >> processKeyUp: anEvent [
 	
 	self buffer remove: anEvent.
 	
-	aTarget := self telemetry
-		timeSync: [ 'Find key up target ' ]
-		during: [ self findTarget ].
-
+	aTarget := self findTarget.
 	anEvent target: aTarget.
-
-	self telemetry
-		timeSync: [ 'Fire key up event ' ]
-		during: [ self fireEvent: anEvent ].
+	self fireEvent: anEvent.
 
 	self buffer isEmpty
 		ifTrue: [ preventKeystrokes := false ]

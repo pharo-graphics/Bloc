@@ -11,27 +11,18 @@ Class {
 { #category : #'test seed' }
 BlSelectionTest >> compositeSelection [
 
-	<gtExample>
 	^ BlCompositeSelection new
 ]
 
-{ #category : #tests }
+{ #category : #'test seed' }
 BlSelectionTest >> monotoneSelection [
 
-	<gtExample>
 	^ BlMonotoneSelection
-]
-
-{ #category : #metadata }
-BlSelectionTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlSelectionExamples'
 ]
 
 { #category : #tests }
 BlSelectionTest >> testCompositeSelectFrom0To1 [
 
-	<gtExample>
 	| aCompositeSelection |
 	aCompositeSelection := self compositeSelection.
 	aCompositeSelection select: 0 to: 1.
@@ -41,7 +32,7 @@ BlSelectionTest >> testCompositeSelectFrom0To1 [
 	self assert: aCompositeSelection displayString equals: '[0,1]'.
 	self assert: aCompositeSelection printString equals: '[0,1]'.
 	self assert: aCompositeSelection isNotEmpty.
-	self assert: aCompositeSelection isEmpty not.
+	self deny: aCompositeSelection isEmpty.
 
 	self
 		assert: aCompositeSelection allSelections
@@ -51,9 +42,23 @@ BlSelectionTest >> testCompositeSelectFrom0To1 [
 ]
 
 { #category : #tests }
+BlSelectionTest >> testCompositeSelectFrom0To1ContainsInterval [
+
+	| aCompositeSelection |
+	aCompositeSelection := self compositeSelection.
+	aCompositeSelection select: 0 to: 1.
+
+	self assert: (aCompositeSelection containsInterval: (0 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 2)).
+	self deny: (aCompositeSelection containsInterval: (2 to: 0)).
+	self deny: (aCompositeSelection containsInterval: (2 to: 5)).
+
+	^ aCompositeSelection
+]
+
+{ #category : #tests }
 BlSelectionTest >> testCompositeSelectFrom1To1 [
 
-	<gtExample>
 	| aCompositeSelection |
 	aCompositeSelection := self compositeSelection.
 	aCompositeSelection select: 1 to: 1.
@@ -68,9 +73,26 @@ BlSelectionTest >> testCompositeSelectFrom1To1 [
 ]
 
 { #category : #tests }
+BlSelectionTest >> testCompositeSelectFrom1To1ContainsInterval [
+
+	| aCompositeSelection |
+	aCompositeSelection := self compositeSelection.
+	aCompositeSelection select: 1 to: 1.
+	" contains nothing since the selection is empty "
+	self deny: (aCompositeSelection containsInterval: (1 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 2)).
+	self deny: (aCompositeSelection containsInterval: (2 to: 0)).
+	self deny: (aCompositeSelection containsInterval: (2 to: 5)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 0)).
+
+
+	^ aCompositeSelection
+]
+
+{ #category : #tests }
 BlSelectionTest >> testCompositeSelectFrom1To3 [
 
-	<gtExample>
 	| aCompositeSelection |
 	aCompositeSelection := self compositeSelection.
 	aCompositeSelection select: 1 to: 3.
@@ -92,7 +114,6 @@ BlSelectionTest >> testCompositeSelectFrom1To3 [
 { #category : #tests }
 BlSelectionTest >> testCompositeSelectFrom1To3And2To6 [
 
-	<gtExample>
 	| aCompositeSelection |
 	aCompositeSelection := self compositeSelection.
 	aCompositeSelection select: 1 to: 3.
@@ -113,9 +134,38 @@ BlSelectionTest >> testCompositeSelectFrom1To3And2To6 [
 ]
 
 { #category : #tests }
+BlSelectionTest >> testCompositeSelectFrom1To3And2To6ContainsInterval [
+
+	| aCompositeSelection |
+	aCompositeSelection := self compositeSelection.
+	aCompositeSelection select: 1 to: 3.
+	aCompositeSelection select: 2 to: 6.
+
+	self assert: aCompositeSelection printString equals: '[1,6]'.
+
+	self assert: (aCompositeSelection containsInterval: (1 to: 1)).
+	self assert: (aCompositeSelection containsInterval: (1 to: 2)).
+	self assert: (aCompositeSelection containsInterval: (1 to: 3)).
+	self assert: (aCompositeSelection containsInterval: (2 to: 1)).
+	self assert: (aCompositeSelection containsInterval: (3 to: 1)).
+	self assert: (aCompositeSelection containsInterval: (1 to: 4)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 3)).
+	self deny: (aCompositeSelection containsInterval: (3 to: 0)).
+	self assert: (aCompositeSelection containsInterval: (4 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 2)).
+	self deny: (aCompositeSelection containsInterval: (2 to: 0)).
+	self assert: (aCompositeSelection containsInterval: (2 to: 5)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 0)).
+	self deny: (aCompositeSelection containsInterval: (8 to: 9)).
+	self deny: (aCompositeSelection containsInterval: (100 to: 9)).
+
+	^ aCompositeSelection
+]
+
+{ #category : #tests }
 BlSelectionTest >> testCompositeSelectFrom1To3And4To6 [
 
-	<gtExample>
 	| aCompositeSelection |
 	aCompositeSelection := self compositeSelection.
 	aCompositeSelection select: 1 to: 3.
@@ -136,9 +186,37 @@ BlSelectionTest >> testCompositeSelectFrom1To3And4To6 [
 ]
 
 { #category : #tests }
+BlSelectionTest >> testCompositeSelectFrom1To3And4To6ContainsInterval [
+
+	| aCompositeSelection |
+	aCompositeSelection := self compositeSelection.
+	aCompositeSelection select: 1 to: 3.
+	aCompositeSelection select: 4 to: 6.
+
+	self assert: aCompositeSelection printString equals: '[1,3][4,6]'.
+	self assert: (aCompositeSelection containsInterval: (1 to: 1)).
+	self assert: (aCompositeSelection containsInterval: (1 to: 2)).
+	self assert: (aCompositeSelection containsInterval: (1 to: 3)).
+	self assert: (aCompositeSelection containsInterval: (2 to: 1)).
+	self assert: (aCompositeSelection containsInterval: (3 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (1 to: 4)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 3)).
+	self deny: (aCompositeSelection containsInterval: (3 to: 0)).
+	self deny: (aCompositeSelection containsInterval: (4 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 2)).
+	self deny: (aCompositeSelection containsInterval: (2 to: 0)).
+	self deny: (aCompositeSelection containsInterval: (2 to: 5)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 0)).
+	self deny: (aCompositeSelection containsInterval: (8 to: 9)).
+	self deny: (aCompositeSelection containsInterval: (100 to: 9)).
+
+	^ aCompositeSelection
+]
+
+{ #category : #tests }
 BlSelectionTest >> testCompositeSelectFrom1To3And5To6 [
 
-	<gtExample>
 	| aCompositeSelection |
 	aCompositeSelection := self compositeSelection.
 	aCompositeSelection select: 1 to: 3.
@@ -149,7 +227,7 @@ BlSelectionTest >> testCompositeSelectFrom1To3And5To6 [
 	self assert: aCompositeSelection displayString equals: '[1,3][5,6]'.
 	self assert: aCompositeSelection printString equals: '[1,3][5,6]'.
 	self assert: aCompositeSelection isNotEmpty.
-	self assert: aCompositeSelection isEmpty not.
+	self deny: aCompositeSelection isEmpty.
 
 	self assert: aCompositeSelection allSelections equals: { 
 			(BlMonotoneSelection from: 1 to: 3).
@@ -159,9 +237,67 @@ BlSelectionTest >> testCompositeSelectFrom1To3And5To6 [
 ]
 
 { #category : #tests }
+BlSelectionTest >> testCompositeSelectFrom1To3And5To6ContainsInterval [
+
+	| aCompositeSelection |
+	aCompositeSelection := self compositeSelection.
+	aCompositeSelection select: 1 to: 3.
+	aCompositeSelection select: 5 to: 6.
+
+	self assert: aCompositeSelection printString equals: '[1,3][5,6]'.
+	self assert: (aCompositeSelection containsInterval: (1 to: 1)).
+	self assert: (aCompositeSelection containsInterval: (1 to: 2)).
+	self assert: (aCompositeSelection containsInterval: (1 to: 3)).
+	self assert: (aCompositeSelection containsInterval: (2 to: 1)).
+	self assert: (aCompositeSelection containsInterval: (3 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (1 to: 4)).
+	self deny: (aCompositeSelection containsInterval: (4 to: 5)).
+	self deny: (aCompositeSelection containsInterval: (5 to: 4)).
+	self deny: (aCompositeSelection containsInterval: (3 to: 4)).
+	self deny: (aCompositeSelection containsInterval: (3 to: 5)).
+	self deny: (aCompositeSelection containsInterval: (4 to: 4)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 3)).
+	self deny: (aCompositeSelection containsInterval: (3 to: 0)).
+	self deny: (aCompositeSelection containsInterval: (4 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 2)).
+	self deny: (aCompositeSelection containsInterval: (2 to: 0)).
+	self deny: (aCompositeSelection containsInterval: (2 to: 5)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 0)).
+	self deny: (aCompositeSelection containsInterval: (8 to: 9)).
+	self deny: (aCompositeSelection containsInterval: (100 to: 9)).
+
+	^ aCompositeSelection
+]
+
+{ #category : #tests }
+BlSelectionTest >> testCompositeSelectFrom1To3ContainsInterval [
+
+	| aCompositeSelection |
+	aCompositeSelection := self compositeSelection.
+	aCompositeSelection select: 1 to: 3.
+	
+	self assert: (aCompositeSelection containsInterval: (1 to: 1)).
+	self assert: (aCompositeSelection containsInterval: (1 to: 2)).
+	self assert: (aCompositeSelection containsInterval: (1 to: 3)).
+	self assert: (aCompositeSelection containsInterval: (2 to: 1)).
+	self assert: (aCompositeSelection containsInterval: (3 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (1 to: 4)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 3)).
+	self deny: (aCompositeSelection containsInterval: (3 to: 0)).
+	self deny: (aCompositeSelection containsInterval: (4 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 2)).
+	self deny: (aCompositeSelection containsInterval: (2 to: 0)).
+	self deny: (aCompositeSelection containsInterval: (2 to: 5)).
+	self deny: (aCompositeSelection containsInterval: (0 to: 0)).
+
+	^ aCompositeSelection
+]
+
+{ #category : #tests }
 BlSelectionTest >> testCompositeSelectFrom1To4And4To6 [
 
-	<gtExample>
 	| aCompositeSelection |
 	aCompositeSelection := self compositeSelection.
 	aCompositeSelection select: 1 to: 4.
@@ -182,9 +318,43 @@ BlSelectionTest >> testCompositeSelectFrom1To4And4To6 [
 ]
 
 { #category : #tests }
+BlSelectionTest >> testCompositeSelectFrom20To15And5To10ContainsInterval [
+
+	| aCompositeSelection |
+	aCompositeSelection := self compositeSelection.
+	aCompositeSelection select: 15 to: 20.
+	aCompositeSelection select: 5 to: 10.
+
+	self assert: aCompositeSelection printString equals: '[5,10][15,20]'.
+
+	self deny: (aCompositeSelection containsInterval: (1 to: 1)).
+	self deny: (aCompositeSelection containsInterval: (1 to: 4)).
+	self deny: (aCompositeSelection containsInterval: (1 to: 5)).
+	self deny: (aCompositeSelection containsInterval: (1 to: 6)).
+	self assert: (aCompositeSelection containsInterval: (5 to: 5)).
+	self assert: (aCompositeSelection containsInterval: (5 to: 10)).
+	self assert: (aCompositeSelection containsInterval: (6 to: 9)).
+	self deny: (aCompositeSelection containsInterval: (6 to: 11)).
+	self deny: (aCompositeSelection containsInterval: (6 to: 14)).
+	self deny: (aCompositeSelection containsInterval: (11 to: 14)).
+	self deny: (aCompositeSelection containsInterval: (11 to: 15)).
+	self deny: (aCompositeSelection containsInterval: (11 to: 16)).
+	self assert: (aCompositeSelection containsInterval: (15 to: 16)).
+	self assert: (aCompositeSelection containsInterval: (16 to: 19)).
+	self assert: (aCompositeSelection containsInterval: (15 to: 20)).
+	self deny: (aCompositeSelection containsInterval: (14 to: 21)).
+	self deny: (aCompositeSelection containsInterval: (15 to: 21)).
+	self deny: (aCompositeSelection containsInterval: (21 to: 22)).
+	self assert: (aCompositeSelection containsInterval: (20 to: 20)).
+	self deny: (aCompositeSelection containsInterval: (21 to: 21)).
+
+
+	^ aCompositeSelection
+]
+
+{ #category : #tests }
 BlSelectionTest >> testCompositeSelectFrom5To6And1To3 [
 
-	<gtExample>
 	| aCompositeSelection |
 	aCompositeSelection := self compositeSelection.
 	aCompositeSelection select: 5 to: 6.
@@ -207,14 +377,12 @@ BlSelectionTest >> testCompositeSelectFrom5To6And1To3 [
 { #category : #tests }
 BlSelectionTest >> testCompositeSelection [
 
-	<gtExample>
 	^ BlCompositeSelection new
 ]
 
 { #category : #tests }
 BlSelectionTest >> testMonotoneContainsIn1To1 [
 
-	<gtExample>
 	| aMonotoneSelection |
 	aMonotoneSelection := self testMonotoneSelectFrom1To1.
 
@@ -228,7 +396,6 @@ BlSelectionTest >> testMonotoneContainsIn1To1 [
 { #category : #tests }
 BlSelectionTest >> testMonotoneContainsIndexIn1To1 [
 
-	<gtExample>
 	| aMonotoneSelection |
 	aMonotoneSelection := self testMonotoneSelectFrom1To1.
 
@@ -242,7 +409,6 @@ BlSelectionTest >> testMonotoneContainsIndexIn1To1 [
 { #category : #tests }
 BlSelectionTest >> testMonotoneNeighbours1To1And3To4 [
 
-	<gtExample>
 	| from1to1 from3to4 |
 	from1to1 := self testMonotoneSelectFrom1To1.
 	from3to4 := self testMonotoneSelectFrom3To4.
@@ -256,7 +422,6 @@ BlSelectionTest >> testMonotoneNeighbours1To1And3To4 [
 { #category : #tests }
 BlSelectionTest >> testMonotoneNeighbours1To3And1To1 [
 
-	<gtExample>
 	| from1to3 from1to1 |
 	from1to3 := self testMonotoneSelectFrom1To3.
 	from1to1 := self testMonotoneSelectFrom1To1.
@@ -270,7 +435,6 @@ BlSelectionTest >> testMonotoneNeighbours1To3And1To1 [
 { #category : #tests }
 BlSelectionTest >> testMonotoneNeighbours1To3And3To4 [
 
-	<gtExample>
 	| from1to3 from3to4 |
 	from1to3 := self testMonotoneSelectFrom1To3.
 	from3to4 := self testMonotoneSelectFrom3To4.
@@ -284,7 +448,6 @@ BlSelectionTest >> testMonotoneNeighbours1To3And3To4 [
 { #category : #tests }
 BlSelectionTest >> testMonotoneNeighbours1To3And4To6 [
 
-	<gtExample>
 	| from1to3 from4to6 |
 	from1to3 := self testMonotoneSelectFrom1To3.
 	from4to6 := self testMonotoneSelectFrom4To6.
@@ -298,7 +461,6 @@ BlSelectionTest >> testMonotoneNeighbours1To3And4To6 [
 { #category : #tests }
 BlSelectionTest >> testMonotoneNeighbours1To4And4To6 [
 
-	<gtExample>
 	| from1to4 from4to6 |
 	from1to4 := self testMonotoneSelectFrom1To4.
 	from4to6 := self testMonotoneSelectFrom4To6.
@@ -312,7 +474,6 @@ BlSelectionTest >> testMonotoneNeighbours1To4And4To6 [
 { #category : #tests }
 BlSelectionTest >> testMonotoneRangeIncludesIn1To1 [
 
-	<gtExample>
 	| aMonotoneSelection |
 	aMonotoneSelection := self testMonotoneSelectFrom1To1.
 
@@ -326,7 +487,6 @@ BlSelectionTest >> testMonotoneRangeIncludesIn1To1 [
 { #category : #tests }
 BlSelectionTest >> testMonotoneRangeIncludesIn1To3 [
 
-	<gtExample>
 	| aMonotoneSelection |
 	aMonotoneSelection := self testMonotoneSelectFrom1To3.
 
@@ -342,7 +502,6 @@ BlSelectionTest >> testMonotoneRangeIncludesIn1To3 [
 { #category : #tests }
 BlSelectionTest >> testMonotoneRangeIncludesIn4To6 [
 
-	<gtExample>
 	| aMonotoneSelection |
 	aMonotoneSelection := self testMonotoneSelectFrom4To6.
 
@@ -361,7 +520,6 @@ BlSelectionTest >> testMonotoneRangeIncludesIn4To6 [
 { #category : #tests }
 BlSelectionTest >> testMonotoneSelectFrom1To1 [
 
-	<gtExample>
 	| aMonotoneSelection |
 	aMonotoneSelection := self monotoneSelection from: 1 to: 1.
 
@@ -379,7 +537,6 @@ BlSelectionTest >> testMonotoneSelectFrom1To1 [
 { #category : #tests }
 BlSelectionTest >> testMonotoneSelectFrom1To3 [
 
-	<gtExample>
 	| aMonotoneSelection |
 	aMonotoneSelection := self monotoneSelection from: 1 to: 3.
 
@@ -400,7 +557,6 @@ BlSelectionTest >> testMonotoneSelectFrom1To3 [
 { #category : #tests }
 BlSelectionTest >> testMonotoneSelectFrom1To4 [
 
-	<gtExample>
 	| aMonotoneSelection |
 	aMonotoneSelection := self monotoneSelection from: 1 to: 4.
 
@@ -421,7 +577,6 @@ BlSelectionTest >> testMonotoneSelectFrom1To4 [
 { #category : #tests }
 BlSelectionTest >> testMonotoneSelectFrom3To4 [
 
-	<gtExample>
 	| aMonotoneSelection |
 	aMonotoneSelection := self monotoneSelection from: 3 to: 4.
 
@@ -442,7 +597,6 @@ BlSelectionTest >> testMonotoneSelectFrom3To4 [
 { #category : #tests }
 BlSelectionTest >> testMonotoneSelectFrom4To6 [
 
-	<gtExample>
 	| aMonotoneSelection |
 	aMonotoneSelection := self monotoneSelection from: 4 to: 6.
 
@@ -458,11 +612,4 @@ BlSelectionTest >> testMonotoneSelectFrom4To6 [
 		equals: { (BlMonotoneSelection from: 4 to: 6) }.
 
 	^ aMonotoneSelection
-]
-
-{ #category : #tests }
-BlSelectionTest >> testMonotoneSelection [
-
-	<gtExample>
-	^ BlMonotoneSelection
 ]

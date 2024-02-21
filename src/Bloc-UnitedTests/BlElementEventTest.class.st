@@ -11,7 +11,8 @@ Class {
 { #category : #'test seed' }
 BlElementEventTest >> child [
 
-	<gtExample>
+	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  size: 100 @ 75;
 		  background: Color red
@@ -20,7 +21,8 @@ BlElementEventTest >> child [
 { #category : #'test seed' }
 BlElementEventTest >> container [
 
-	<gtExample>
+	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  size: 500 @ 400;
 		  border: (BlBorder builder dashed
@@ -29,16 +31,11 @@ BlElementEventTest >> container [
 				   build)
 ]
 
-{ #category : #metadata }
-BlElementEventTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlElementEventExamples'
-]
-
 { #category : #'test seed' }
 BlElementEventTest >> parent [
 
-	<gtExample>
+	<sampleInstance>
+	<demo>
 	^ BlElement new
 		  size: 400 @ 300;
 		  background: (Color gray alpha: 0.3)
@@ -46,8 +43,9 @@ BlElementEventTest >> parent [
 
 { #category : #tests }
 BlElementEventTest >> testAddedToParent [
-	<gtExample>
-	
+
+	<sampleInstance>
+	<demo>
 	| wasAdded parent child container |
 	wasAdded := 0.
 
@@ -71,7 +69,8 @@ BlElementEventTest >> testAddedToParent [
 { #category : #tests }
 BlElementEventTest >> testBackgroundChanged [
 
-	<gtExample>
+	<sampleInstance>
+	<demo>
 	| backgroundChanged element |
 	backgroundChanged := 0.
 
@@ -89,7 +88,8 @@ BlElementEventTest >> testBackgroundChanged [
 { #category : #tests }
 BlElementEventTest >> testBorderChanged [
 
-	<gtExample>
+	<sampleInstance>
+	<demo>
 	| borderChanged element |
 	borderChanged := 0.
 
@@ -110,7 +110,8 @@ BlElementEventTest >> testBorderChanged [
 { #category : #tests }
 BlElementEventTest >> testExtentChanged [
 
-	<gtExample>
+	<sampleInstance>
+	<demo>
 	| extentChanged element |
 	extentChanged := 0.
 
@@ -137,7 +138,7 @@ BlElementEventTest >> testExtentChanged [
 { #category : #tests }
 BlElementEventTest >> testExtentChangedChangingWithTheSameSizeDoesNotRaiseEvent [
 
-	<gtExample>
+	<sampleInstance>
 	| extentChanged element |
 	extentChanged := 0.
 	element := self child.
@@ -157,7 +158,8 @@ BlElementEventTest >> testExtentChangedChangingWithTheSameSizeDoesNotRaiseEvent 
 { #category : #tests }
 BlElementEventTest >> testLayoutChanged [
 
-	<gtExample>
+	<sampleInstance>
+	<demo>
 	| layoutChanged element |
 	layoutChanged := 0.
 
@@ -175,7 +177,8 @@ BlElementEventTest >> testLayoutChanged [
 { #category : #tests }
 BlElementEventTest >> testPositionChanged [
 
-	<gtExample>
+	<sampleInstance>
+	<demo>
 	| positionChanged parent child |
 	positionChanged := 0.
 
@@ -188,12 +191,12 @@ BlElementEventTest >> testPositionChanged [
 		addEventHandlerOn: BlElementPositionChangedEvent
 		do: [ positionChanged := positionChanged + 1 ].
 
-	child relocate: child position + (20 @ 20).
+	child position: child position + (20 @ 20).
 	child forceLayout.
 	self assert: positionChanged equals: 1.
 
 	"relocating child to the same position should not trigger an event"
-	child relocate: child position.
+	child position: child position.
 	child forceLayout.
 	self assert: positionChanged equals: 1.
 
@@ -203,7 +206,7 @@ BlElementEventTest >> testPositionChanged [
 { #category : #tests }
 BlElementEventTest >> testPositionChangedRelocatingOnSamePositionDoesNotRaiseEvent [
 
-	<gtExample>
+	<sampleInstance>
 	| positionChanged parent child |
 	positionChanged := 0.
 
@@ -217,7 +220,7 @@ BlElementEventTest >> testPositionChangedRelocatingOnSamePositionDoesNotRaiseEve
 		do: [ positionChanged := positionChanged + 1 ].
 
 
-	child relocate: child position.
+	child position: child position.
 	child forceLayout.
 	self assert: positionChanged equals: 0.
 
@@ -226,8 +229,8 @@ BlElementEventTest >> testPositionChangedRelocatingOnSamePositionDoesNotRaiseEve
 
 { #category : #tests }
 BlElementEventTest >> testRemovedFromParent [
-	<gtExample>
-	
+
+	<sampleInstance>
 	| wasRemoved parent child container |
 	wasRemoved := 0.
 	child := self child.

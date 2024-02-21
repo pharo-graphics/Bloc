@@ -11,7 +11,8 @@ Class {
 
 { #category : #'class initialization' }
 BlRightAlignment class >> initialize [
-	super initialize.
+
+	self initializeSingletons
 ]
 
 { #category : #factory }

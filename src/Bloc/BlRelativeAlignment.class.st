@@ -9,6 +9,12 @@ BlRelativeAlignment class >> horizontal [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'class initialization' }
+BlRelativeAlignment class >> initialize [
+
+	self initializeSingletons
+]
+
 { #category : #factory }
 BlRelativeAlignment class >> oriented: aBlLayoutOrientation [
 	^ aBlLayoutOrientation of: self

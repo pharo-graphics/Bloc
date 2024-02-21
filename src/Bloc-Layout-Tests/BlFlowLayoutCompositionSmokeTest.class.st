@@ -3,7 +3,7 @@ Pay attention no assertion... smoke tests.
 "
 Class {
 	#name : #BlFlowLayoutCompositionSmokeTest,
-	#superclass : #TestCase,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-Layout-Tests'
 }
 
@@ -40,7 +40,7 @@ BlFlowLayoutCompositionSmokeTest class >> exampleHorizontalList [
 	el := BlElement new
 		layout: BlFlowLayout new horizontal;
 		size: 166@300;
-		relocate: 200 @ 100;
+		position: 200 @ 100;
 		background: Color veryLightGray;
 		border: (BlBorder paint: Color lightGray width: 8);
 		padding: (BlInsets all: 8);
@@ -99,7 +99,7 @@ BlFlowLayoutCompositionSmokeTest class >> exampleText [
 			c horizontal exact: 600.
 			c vertical fitContent.
 			c padding: (BlInsets all: 10) ];
-		relocate: 100 @ 50;
+		position: 100 @ 50;
 		background: Color veryVeryLightGray;
 		border: (BlBorder paint: Color lightGray width: 8);
 		addChildren: theWords;
@@ -109,9 +109,9 @@ BlFlowLayoutCompositionSmokeTest class >> exampleText [
 
 { #category : #examples }
 BlFlowLayoutCompositionSmokeTest class >> floatingCells [
-	| aSpace |
 	<script: 'self floatingCells'>
 
+	| aSpace |
 	aSpace := BlSpace new.
 	aSpace root addChild: self new floatingCells.
 	aSpace root addEventHandler:
@@ -123,92 +123,108 @@ BlFlowLayoutCompositionSmokeTest class >> floatingCells [
 
 { #category : #'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> blueCell [
-	<gtExample>
 
+	<sampleInstance>
+	<demo>
 	^ self cell
-		background: (Color blue alpha: 0.5);
-		yourself
+		  background: (Color blue alpha: 0.5);
+		  yourself
 ]
 
 { #category : #'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> cell [
-	<gtExample>
-	
+
+	<sampleInstance>
+	<demo>
 	^ BlElement new
-		constraintsDo: [ :c | 
-			c horizontal exact: 50.
-			c vertical exact: 25.
-			c margin: (BlInsets top: 10 right: 0 bottom: 0 left: 10) ];
-		yourself
+		  constraintsDo: [ :c |
+			  c horizontal exact: 50.
+			  c vertical exact: 25.
+			  c margin: (BlInsets
+						   top: 10
+						   right: 0
+						   bottom: 0
+						   left: 10) ];
+		  yourself
 ]
 
 { #category : #'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> container [
-	<gtExample>
-	
+
+	<sampleInstance>
+	<demo>
 	^ BlElement new
-		layout: BlFlowLayout new horizontal;
-		border: (BlBorder paint: Color lightGray width: 8);
-		background: Color white darker
+		  layout: BlFlowLayout new horizontal;
+		  border: (BlBorder paint: Color lightGray width: 8);
+		  background: Color white darker
 ]
 
 { #category : #'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> floatBlueCell [
-	<gtExample>
 
+	<sampleInstance>
+	<demo>
 	^ self floatCell
-		size: 50@109;
-		background: Color blue
+		  size: 50 @ 109;
+		  background: Color blue
 ]
 
 { #category : #'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> floatCell [
-	<gtExample>
 
-	^ BlElement new
-		constraintsDo: [ :c | 
-			c flow float.
-			c margin: (BlInsets top: 10 right: 0 bottom: 0 left: 10) ]
+	<sampleInstance>
+	<demo>
+	^ BlElement new constraintsDo: [ :c |
+		  c flow float.
+		  c margin: (BlInsets
+				   top: 10
+				   right: 0
+				   bottom: 0
+				   left: 10) ]
 ]
 
 { #category : #'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> floatRedCell [
-	<gtExample>
 
+	<sampleInstance>
+	<demo>
 	^ self floatCell
-		size: 103@165;
-		background: Color red
+		  size: 103 @ 165;
+		  background: Color red
 ]
 
 { #category : #'examples - list with floats' }
 BlFlowLayoutCompositionSmokeTest >> floatingCells [
-	<gtExample>
-	
+
+	<sampleInstance>
+	<demo>
 	^ self container
-		size: 560@400;
-		relocate: 100 @ 50;
-		addChildren: (2 timesCollect: [ self grayCell ]);
-		addChild: self floatRedCell;
-		addChildren: (30 timesCollect: [ self redCell ]);
-		addChild: self floatBlueCell;
-		addChildren: (4 timesCollect: [ self blueCell ]);
-		yourself
+		  size: 560 @ 400;
+		  position: 100 @ 50;
+		  addChildren: (2 timesCollect: [ self grayCell ]);
+		  addChild: self floatRedCell;
+		  addChildren: (30 timesCollect: [ self redCell ]);
+		  addChild: self floatBlueCell;
+		  addChildren: (4 timesCollect: [ self blueCell ]);
+		  yourself
 ]
 
 { #category : #'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> grayCell [
-	<gtExample>
 
+	<sampleInstance>
+	<demo>
 	^ self cell
-		background: Color veryLightGray;
-		yourself
+		  background: Color veryLightGray;
+		  yourself
 ]
 
 { #category : #'examples - setup' }
 BlFlowLayoutCompositionSmokeTest >> redCell [
-	<gtExample>
 
+	<sampleInstance>
+	<demo>
 	^ self cell
-		background: (Color red alpha: 0.5);
-		yourself
+		  background: (Color red alpha: 0.5);
+		  yourself
 ]

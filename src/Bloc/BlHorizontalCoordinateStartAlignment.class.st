@@ -4,6 +4,12 @@ Class {
 	#category : #'Bloc-Layouts-Alignment'
 }
 
+{ #category : #'class initialization' }
+BlHorizontalCoordinateStartAlignment class >> initialize [
+
+	self initializeSingletons
+]
+
 { #category : #factory }
 BlHorizontalCoordinateStartAlignment >> leftToRight [
 	^ BlHorizontalCoordinateLeftAlignment new

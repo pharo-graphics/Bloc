@@ -22,13 +22,13 @@ BlDevScripterFutureCheckStep >> addStep: aScripterTask [
 
 { #category : #accessing }
 BlDevScripterFutureCheckStep >> hasCustomTarget [
-	<return: #Boolean>
+	
 	^ hasCustomTarget
 ]
 
 { #category : #'targets - accessing and updating' }
 BlDevScripterFutureCheckStep >> hasRealStep [
-	<return: #Boolean>
+	
 	^ realStep isNotNil
 ]
 

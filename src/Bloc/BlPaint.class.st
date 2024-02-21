@@ -32,11 +32,16 @@ BlPaint >> asBlPaint [
 ]
 
 { #category : #testing }
+BlPaint >> isColorPaint [
+
+	^ false
+]
+
+{ #category : #testing }
 BlPaint >> isOpaque [
 	"Return true if I am opaque, false otherwise.
 	It is important to implement paint specific logic in subclasses.
 	If paint is opeque we don't have to render elements behind it"
-	<return: #Boolean>
 
 	^ false
 ]

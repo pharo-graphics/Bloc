@@ -140,7 +140,7 @@ BlMatrixDecomposition2D >> scale: aVector [
 
 { #category : #accessing }
 BlMatrixDecomposition2D >> translation [
-	<return: #BlVector>
+	"Return the vector (BlVector) corresponding to the translation."
 	
 	^ translation
 ]

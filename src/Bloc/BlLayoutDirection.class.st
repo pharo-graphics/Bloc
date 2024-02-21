@@ -17,7 +17,6 @@ Class {
 
 { #category : #'class initialization' }
 BlLayoutDirection class >> initialize [
-	super initialize.
 	
 	leftToRight := BlLayoutLeftToRight new.
 	rightToLeft := BlLayoutRightToLeft new
@@ -31,6 +30,12 @@ BlLayoutDirection class >> leftToRight [
 { #category : #factory }
 BlLayoutDirection class >> rightToLeft [
 	^ rightToLeft
+]
+
+{ #category : #accessing }
+BlLayoutDirection >> inverted [
+
+	^ self subclassResponsibility 
 ]
 
 { #category : #testing }

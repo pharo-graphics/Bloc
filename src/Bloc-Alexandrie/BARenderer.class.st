@@ -1,8 +1,41 @@
+"
+I am a host-renderer to draw a space's elements on an `AeCanvas`.
+
+Both buffer and form host-spaces are supported.
+"
 Class {
 	#name : #BARenderer,
 	#superclass : #BlHostRenderer,
 	#category : #'Bloc-Alexandrie-Renderer'
 }
+
+{ #category : #accessing }
+BARenderer class >> label [
+
+	^ 'Alexandrie'
+]
+
+{ #category : #'host - api' }
+BARenderer class >> newFormFrom: aBlElement [
+
+	^ aBlElement aeAsForm
+]
+
+{ #category : #'host - api' }
+BARenderer class >> offscreenMeasureTextParagraph: aBlTextParagraph [
+
+	BAOffscreen instance measureTextParagraph: aBlTextParagraph
+]
+
+{ #category : #'host - api' }
+BARenderer class >> write: aBlElement asPngTo: aFileReference [
+	"Draw the element into a PNG at the specified location."
+
+	BAExporter png
+			target: aFileReference;
+			element: aBlElement;
+			export
+]
 
 { #category : #initialization }
 BARenderer >> createBufferSpaceRenderer [
@@ -20,6 +53,8 @@ BARenderer >> createFormSpaceRenderer [
 BARenderer >> initializeForHostSpace: aBlHostSpace [
 	"Initialize this renderer for a given host space.
 	Please note, that it I be called multiple times"
+
+	self initialize.
 
 	session := Smalltalk session.
 	

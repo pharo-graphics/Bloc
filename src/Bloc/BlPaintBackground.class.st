@@ -2,7 +2,7 @@
 I am a background that uses a `=BlPaint`=. A paint can be either a simple color or a type of gradient.
 
 ## Examples
-Examples are provided by the class {{gtClass:BlPaintBackgroundExamples}}.
+Examples are provided by the class `BlPaintBackgroundExamples`.
 
 
 "
@@ -32,32 +32,37 @@ BlPaintBackground >> = anotherObject [
 
 { #category : #comparing }
 BlPaintBackground >> hash [
+
 	^ self paint hash bitXor: self class hash
 ]
 
 { #category : #testing }
 BlPaintBackground >> isOpaque [
-	<return: #Boolean>
 
 	^ (self opacity closeTo: 1) and: [ self paint isOpaque ]
 ]
 
 { #category : #testing }
+BlPaintBackground >> isPaintBackground [ 
+
+	^ true
+]
+
+{ #category : #testing }
 BlPaintBackground >> isTransparent [
 	"Paint background is transparent then and only then when paint is transparent or opacity is close to 0"
-	<return: #Boolean>
 
-	^ (self opacity closeTo: 0) or: [ self paint isTransparent ]
+	^ (self opacity closeTo: 0.0) or: [ self paint isTransparent ]
 ]
 
 { #category : #geometry }
 BlPaintBackground >> matchExtent: anExtent [
+
 	self paint matchExtent: anExtent
 ]
 
 { #category : #accessing }
 BlPaintBackground >> paint [
-	<return: #BlPaint>
 
 	^ paint
 ]

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'alignment'
 	],
-	#category : 'Bloc-Layout-Flow'
+	#category : #'Bloc-Layout-Flow'
 }
 
 { #category : #alignment }

@@ -10,7 +10,6 @@ Number >> asBlocVector [
 { #category : #'*Bloc' }
 Number >> asScale3D [
 	"Return a 3D vector representing a scale factor"
-	<return: #BlVector3D>
 
 	^ BlVector x: self y: self z: 1
 ]
@@ -18,7 +17,6 @@ Number >> asScale3D [
 { #category : #'*Bloc' }
 Number >> asTranslate3D [
 	"Return a 3D vector representing a translation vector"
-	<return: #BlVector3D>
 
 	^ BlVector x: self y: self z: 0
 ]
@@ -28,26 +26,6 @@ Number >> closeTo: num epsilon: anEpsilon [
 	"are these two numbers close?"
 
 	^ (self - num) abs <= anEpsilon
-]
-
-{ #category : #'*Bloc' }
-Number >> isBlocFinite [
-	^ self isInfinite not and: [ self isNaN not ]
-]
-
-{ #category : #'*Bloc' }
-Number >> isBlocFiniteFloat [
-	^ self isFloat and: [ self isInfinite not and: [ self isNaN not ] ]
-]
-
-{ #category : #'*Bloc' }
-Number >> isBlocPositive [
-	^ self >= 0.0
-]
-
-{ #category : #'*Bloc' }
-Number >> isBlocPositiveFloat [
-	^ self isFloat and: [ self >= 0.0 ]
 ]
 
 { #category : #'*Bloc' }

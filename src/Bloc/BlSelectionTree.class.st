@@ -1,7 +1,7 @@
 "
 I represent an augmented search binary tree to store intervals  described in Cormen et al. (2009, Section 14.3: Interval trees, pp. 348–354)[1]
 
-I am used by {{gtClass:BlCompositeSelection}}
+I am used by `BlCompositeSelection`
 
 I do not allow overlapping intervals to be stored in the same tree. Before every insertions I find overlapping and neighbouring intervals, merge them and replace all merged intervals with a single one.
 
@@ -41,8 +41,7 @@ BlSelectionTree >> = anObject [
 { #category : #'tree - testing' }
 BlSelectionTree >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
-	<return: #Boolean>
-	
+
 	^ self hasRoot
 		ifTrue: [ self root contains: anIndex ]
 		ifFalse: [ false ]
@@ -51,11 +50,19 @@ BlSelectionTree >> contains: anIndex [
 { #category : #'tree - testing' }
 BlSelectionTree >> containsIndex: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
-	<return: #Boolean>
 	
 	^ self hasRoot
 		ifTrue: [ self root containsIndex: anIndex ]
 		ifFalse: [ false ]
+]
+
+{ #category : #'tree - searching' }
+BlSelectionTree >> containsMonotoneSelection: aSelection [
+	"Return true if selection interval include a given interval, false otherwise. "
+	
+	self hasRoot
+		ifTrue: [ ^ self root containsMonotoneSelection: aSelection ]
+		ifFalse: [ ^ false ]
 ]
 
 { #category : #'tree - deletion' }

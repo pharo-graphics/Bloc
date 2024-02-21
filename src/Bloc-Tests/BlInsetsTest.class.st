@@ -1,7 +1,7 @@
 Class {
 	#name : #BlInsetsTest,
 	#superclass : #TestCase,
-	#category : 'Bloc-Tests-Basic-Support'
+	#category : #'Bloc-Tests-Basic-Support'
 }
 
 { #category : #tests }

@@ -10,32 +10,53 @@ Note: Elevation is not influenced by transformation matrix!
 Class {
 	#name : #BlElevation,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'elevation'
+	],
+	#classInstVars : [
+		'zero'
 	],
 	#category : #'Bloc-Basic-Properties'
 }
 
+{ #category : #cleanup }
+BlElevation class >> cleanUp [
+
+	super cleanUp.
+	
+	zero := nil
+]
+
 { #category : #'instance creation' }
 BlElevation class >> elevation: aNumber [
-	^ self new elevation: aNumber
+
+	^ self basicNew
+		  initializeWith: aNumber;
+		  yourself
+]
+
+{ #category : #testing }
+BlElevation class >> isAbstract [
+
+	^ self == BlElevation
+]
+
+{ #category : #'instance creation' }
+BlElevation class >> zero [
+
+	^ zero ifNil: [ zero := self elevation: 0 ]
 ]
 
 { #category : #accessing }
 BlElevation >> elevation [
-	<return: #Number>
 
 	^ elevation
 ]
 
 { #category : #accessing }
-BlElevation >> elevation: aNumber [
-	self
-		assert: [ elevation isNil ]
-		description: [ 'I am immutable and can not be changed' ].
+BlElevation >> initializeWith: aNumber [
 
+	self initialize.
 	elevation := aNumber
 ]
 
@@ -52,8 +73,7 @@ BlElevation >> printOn: aStream [
 
 { #category : #accessing }
 BlElevation >> relatedTo: aNumber [
-	"Compute and return a resulting elevation related to the elevation represented as a number"
-	<return: #Number>
+	"Return a Number that represents the elevation related to the received value."
 	
 	^ self subclassResponsibility
 ]

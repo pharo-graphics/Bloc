@@ -1,7 +1,7 @@
 "
-I am a {{gtClass:Beacon}} signal.
-I am emitted by {{gtClass:BlBeaconLoggingTask}}.
-I inform about scheduling and executing of  {{gtClass:BlTask}}.
+I am a `Beacon` signal.
+I am emitted by `BlBeaconLoggingTask`.
+I inform about scheduling and executing of  `BlTask`.
 
 "
 Class {

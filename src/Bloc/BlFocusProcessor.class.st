@@ -100,7 +100,6 @@ BlFocusProcessor >> hasFocusOwner [
 	"Return true if there is an element holding focus, false otherwise.
 	When there are no elements interested in focus it is given to the root element.
 	Note: focus owner may not exist during space initialization or inbetween blur and focus events"
-	<return: #Boolean>
 
 	^ self focusOwner notNil
 ]
@@ -246,9 +245,6 @@ BlFocusProcessor >> processFocus: anElement dueToTransferFrom: aPreviousFocus [
 	self focusOwner: anElement.
 	focusChain := BlFocusChain of: self focusOwner.
 	anElement focused: true.
-
-	"(anElement id asSymbol = #'container-1')
-		ifTrue: [ self halt ]."
 
 	"then send events"	
 	focusChain leafsDo: [ :aLeafElement |

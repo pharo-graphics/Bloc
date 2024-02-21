@@ -61,6 +61,13 @@ BlMorphicSpaceHostMorph >> handlesKeyboard: evt [
 	^ true
 ]
 
+{ #category : #'event handling' }
+BlMorphicSpaceHostMorph >> handlesTextInputEvent: evt [
+	"Do I want to receive text edition events?" 
+
+	^true
+]
+
 { #category : #accessing }
 BlMorphicSpaceHostMorph >> hostSpace [
 	^ hostSpace
@@ -179,6 +186,11 @@ BlMorphicSpaceHostMorph >> takesKeyboardFocus [
 	"Answer whether the receiver can normally take keyboard focus."
 
 	^ true
+]
+
+{ #category : #'event handling' }
+BlMorphicSpaceHostMorph >> textInput: aTextInputEvent [
+	aTextInputEvent sentTo: eventHandler
 ]
 
 { #category : #testing }

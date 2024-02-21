@@ -71,7 +71,7 @@ BlFastForwardedTime >> initialize [
 
 { #category : #'api - accessing' }
 BlFastForwardedTime >> speed [
-	<return: #Number>
+	"Return a number representing the speed."
 
 	^ speed
 ]

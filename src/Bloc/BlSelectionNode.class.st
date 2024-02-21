@@ -67,7 +67,6 @@ BlSelectionNode >> children [
 { #category : #'tree - testing' }
 BlSelectionNode >> contains: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
-	<return: #Boolean>
 
 	anIndex > self high
 		ifTrue: [ ^ false ].
@@ -87,7 +86,6 @@ BlSelectionNode >> contains: anIndex [
 { #category : #'tree - testing' }
 BlSelectionNode >> containsIndex: anIndex [
 	"Return true if this selection interval includes a given index, false otherwise"
-	<return: #Boolean>
 
 	anIndex > self high
 		ifTrue: [ ^ false ].
@@ -101,6 +99,24 @@ BlSelectionNode >> containsIndex: anIndex [
 	(self hasRight and: [ anIndex <= self right high ])
 		ifTrue: [ ^ self right containsIndex: anIndex ].
 		
+	^ false
+]
+
+{ #category : #'tree - testing' }
+BlSelectionNode >> containsMonotoneSelection: aSelection [
+	"Return true if selection interval include a given interval, false otherwise. "
+
+	aSelection from > self high ifTrue: [ ^ false ].
+
+	(self selection containsMonotoneSelection: aSelection) ifTrue: [
+		^ true ].
+
+	(self hasLeft and: [ aSelection to <= self left high ]) ifTrue: [
+		^ self left containsMonotoneSelection: aSelection ].
+
+	self hasRight ifTrue: [
+		^ self right containsMonotoneSelection: aSelection ].
+
 	^ false
 ]
 

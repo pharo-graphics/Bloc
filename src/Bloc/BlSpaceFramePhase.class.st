@@ -37,7 +37,7 @@ BlSpaceFramePhase >> isTaskPhase [
 
 { #category : #accessing }
 BlSpaceFramePhase >> name [
-	<return: #String>
+	"Return the string representing the name of the receiver."
 	
 	^ self subclassResponsibility
 ]

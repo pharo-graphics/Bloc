@@ -46,8 +46,8 @@ BlOSWindowSDL2BufferSurfaceRenderer >> renderSurface: aBlHostRendererBufferSurfa
 		pixels: aBlHostRendererBufferSurface buffer
 		pitch: aBlHostRendererBufferSurface stride.
 
+	"No need to clear the renderer as texture has no blending and covers all pixels"
 	sdlRenderer
-		clear;
 		copy: texture;
 		present
 ]

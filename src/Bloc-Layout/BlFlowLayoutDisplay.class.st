@@ -5,7 +5,7 @@ Class {
 		'float',
 		'inline'
 	],
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
 { #category : #factory }
@@ -15,7 +15,6 @@ BlFlowLayoutDisplay class >> float [
 
 { #category : #'class initialization' }
 BlFlowLayoutDisplay class >> initialize [
-	super initialize.
 	
 	inline := BlFlowLayoutInline new.
 	float := BlFlowLayoutFloat new
@@ -28,10 +27,5 @@ BlFlowLayoutDisplay class >> inline [
 
 { #category : #testing }
 BlFlowLayoutDisplay >> isFloating [
-	^ self subclassResponsibility
-]
-
-{ #category : #testing }
-BlFlowLayoutDisplay >> isInline [
 	^ self subclassResponsibility
 ]

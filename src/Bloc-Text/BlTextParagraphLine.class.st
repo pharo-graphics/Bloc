@@ -15,6 +15,7 @@ Class {
 
 { #category : #adding }
 BlTextParagraphLine >> addSpan: aBlTextParagraphLeaf [
+
 	spans add: aBlTextParagraphLeaf.
 	spans size = 1
 		ifTrue: [ self spanAdded: spans first ]
@@ -23,6 +24,7 @@ BlTextParagraphLine >> addSpan: aBlTextParagraphLeaf [
 
 { #category : #accessing }
 BlTextParagraphLine >> baseline: aPoint [
+
 	self moveSpansBy: self baseline negated.
 	super baseline: aPoint.
 	self moveSpansBy: self baseline
@@ -31,12 +33,13 @@ BlTextParagraphLine >> baseline: aPoint [
 { #category : #finalization }
 BlTextParagraphLine >> finalize [
 
-	spans do: #finalize.
+	spans ifNotNil: [ spans do: #finalize ].
 	spans reset
 ]
 
 { #category : #initialization }
 BlTextParagraphLine >> initialize [
+
 	super initialize.
 	spans := OrderedCollection new
 ]
@@ -44,19 +47,18 @@ BlTextParagraphLine >> initialize [
 { #category : #testing }
 BlTextParagraphLine >> isEmpty [
 	
-	^ self spans isEmpty
+	^ spans isEmpty
 ]
 
 { #category : #private }
 BlTextParagraphLine >> moveSpansBy: aPoint [
 	"Move baseline of all spans by a given delta as a point"
 
-	self spans do: [ :aSpan | aSpan baseline: aSpan baseline + aPoint ]
+	spans do: [ :aSpan | aSpan baseline: aSpan baseline + aPoint ]
 ]
 
 { #category : #measurement }
 BlTextParagraphLine >> normalize: aScale [
-
 	"Normalize this segment to have rounded measurements.
 	I don't change the baseline"
 
@@ -126,7 +128,6 @@ BlTextParagraphLine >> spanAdded: aLastSpan after: aPreviousSpan [
 
 { #category : #accessing }
 BlTextParagraphLine >> spans [
-	<return: #SequenceableCollection of: #BlTextParagraphLeaf>
 
 	^ spans 
 ]

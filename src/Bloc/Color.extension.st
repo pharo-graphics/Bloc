@@ -6,6 +6,11 @@ Color >> asBlBackground [
 ]
 
 { #category : #'*Bloc' }
+Color >> asBlBorder [
+	^ BlBorder paint: self
+]
+
+{ #category : #'*Bloc' }
 Color >> asBlPaint [
 	^ BlColorPaint color: self
 ]

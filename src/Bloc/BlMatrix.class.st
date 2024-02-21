@@ -56,7 +56,12 @@ BlMatrix >> interpolate: aFactor to: anotherMatrix [
 { #category : #testing }
 BlMatrix >> is2D [
 	"Return true if matrix is 2D, false otherwise"
-	<return: #Boolean>
+	
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
+BlMatrix >> isIdentity [
 	
 	^ self subclassResponsibility
 ]

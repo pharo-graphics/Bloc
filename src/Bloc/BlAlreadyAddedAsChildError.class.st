@@ -1,5 +1,5 @@
 "
-I am signalled when user tries to add an {{gtClass:BlElement}}, that is already added to some other element as its child, to some other element.
+I am signalled when user tries to add an `BlElement`, that is already added to some other element as its child, to some other element.
 
 "
 Class {

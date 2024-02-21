@@ -5,7 +5,7 @@ Class {
 		'suspendAll',
 		'suspendedAnnouncemets'
 	],
-	#category : 'Bloc-Text-Text'
+	#category : #'Bloc-Text-Text'
 }
 
 { #category : #announce }
@@ -17,11 +17,6 @@ BlTextAnnouncer >> announce: anAnnouncement [
 { #category : #accessing }
 BlTextAnnouncer >> announcer [ 
 	^ self
-]
-
-{ #category : #accessing }
-BlTextAnnouncer >> glmSubscriptions [
-	^ registry glmSubscriptions
 ]
 
 { #category : #testing }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BlFrameLayoutConstraints,
 	#superclass : #BlLayoutConstraints,
-	#category : 'Bloc-Layout-Frame'
+	#category : #'Bloc-Layout-Frame'
 }
 
 { #category : #accessing }

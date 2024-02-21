@@ -15,7 +15,7 @@ BlCircleGeometry >> = anObject [
 ]
 
 { #category : #'geometry testing' }
-BlCircleGeometry >> containsPoint: aPoint in: aBlElement [
+BlCircleGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 
 	| centerX centerY |
 	centerX := origin x + radius.
@@ -24,14 +24,25 @@ BlCircleGeometry >> containsPoint: aPoint in: aBlElement [
 ]
 
 { #category : #'geometry bounds' }
-BlCircleGeometry >> geometryBounds: aBounds [
+BlCircleGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
-	<return: #BlBounds>
 
-	^ aBounds
+	^ aBlBounds
 		origin: self origin
 		extent: (self radius * 2.0) asPoint
+]
+
+{ #category : #testing }
+BlCircleGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlCircleGeometry >> hasJoins [
+
+	^ false
 ]
 
 { #category : #comparing }

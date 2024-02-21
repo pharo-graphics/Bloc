@@ -31,7 +31,6 @@ BlTransparentBackground class >> uniqueInstance [
 { #category : #testing }
 BlTransparentBackground >> isTransparent [
 	"I am transparent by definition"
-	<return: #Boolean>
 	
 	^ true
 ]

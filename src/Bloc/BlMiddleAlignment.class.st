@@ -14,6 +14,12 @@ BlMiddleAlignment class >> horizontal [
 	^ BlHorizontalAlignment center
 ]
 
+{ #category : #'class initialization' }
+BlMiddleAlignment class >> initialize [
+
+	self initializeSingletons
+]
+
 { #category : #factory }
 BlMiddleAlignment class >> vertical [
 	^ BlVerticalAlignment center

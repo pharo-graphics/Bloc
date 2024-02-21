@@ -14,7 +14,7 @@ Class {
 		'measurer',
 		'display'
 	],
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
 { #category : #'instance creation' }

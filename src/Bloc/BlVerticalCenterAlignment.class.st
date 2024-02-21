@@ -6,7 +6,8 @@ Class {
 
 { #category : #'class initialization' }
 BlVerticalCenterAlignment class >> initialize [
-	super initialize
+
+	self initializeSingletons
 ]
 
 { #category : #factory }

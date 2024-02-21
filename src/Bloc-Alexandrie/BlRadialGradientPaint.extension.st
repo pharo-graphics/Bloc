@@ -1,13 +1,13 @@
 Extension { #name : #BlRadialGradientPaint }
 
 { #category : #'*Bloc-Alexandrie' }
-BlRadialGradientPaint >> aeApplyTo: aeCanvas opacity: backgroundOpacity [
+BlRadialGradientPaint >> aeApplyTo: aeCanvas [
+	"Apply self as a border to the canvas"
 
 	aeCanvas
-		setBackgroundWith: [ 
-			aeCanvas
-				setSourceRadialPatternStops: stops
-				center: center
-				radius: radius ]
-		alpha: backgroundOpacity
+		setSourceRadialPatternStops: stops
+		innerCenter: innerCenter
+		innerRadius: innerRadius
+		outerCenter: outerCenter
+		outerRadius: outerRadius
 ]

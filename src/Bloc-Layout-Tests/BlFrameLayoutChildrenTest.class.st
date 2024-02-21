@@ -8,21 +8,16 @@ Class {
 	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : #metadata }
-BlFrameLayoutChildrenTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlFrameLayoutChildrenExamples'
-]
-
 { #category : #tests }
 BlFrameLayoutChildrenTest >> testChildElementWithExactSize100per50 [
-	<gtExample>
+
+	<sampleInstance>
+	<demo>
 	| element |
 	element := self testChildElementWithVisualProperties.
-	element
-		constraintsDo: [ :c | 
-			c horizontal exact: 100.
-			c vertical exact: 50 ].
+	element constraintsDo: [ :c |
+		c horizontal exact: 100.
+		c vertical exact: 50 ].
 	self assert: element position equals: 0 @ 0.
 	self assert: element extent equals: 0 @ 0.
 	self assertExactConstraint: 100 @ 50 forElement: element.
@@ -31,7 +26,9 @@ BlFrameLayoutChildrenTest >> testChildElementWithExactSize100per50 [
 
 { #category : #tests }
 BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize [
-	<gtExample>
+
+	<sampleInstance>
+	<demo>
 	| element |
 	element := self parentWithFixedSize.
 	element layout: BlFrameLayout new.
@@ -41,18 +38,19 @@ BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize [
 
 { #category : #tests }
 BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize300per250 [
-	<gtExample>
+
+	<sampleInstance>
+	<demo>
 	| element |
 	element := BlElement new
-		layout: BlFrameLayout new;
-		border:
-			(BlBorder builder
-				dashed;
-				paint: Color red;
-				width: 3;
-				build);
-		size: 300 @ 250;
-		yourself.
+		           layout: BlFrameLayout new;
+		           border: (BlBorder builder
+				            dashed;
+				            paint: Color red;
+				            width: 3;
+				            build);
+		           size: 300 @ 250;
+		           yourself.
 	self assert: element position equals: 0 @ 0.
 	self assert: element extent equals: 0 @ 0.
 	self assert: element constraints horizontal resizer size equals: 300.

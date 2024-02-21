@@ -1,6 +1,6 @@
 Class {
 	#name : #BlMouseUpEvent,
-	#superclass : #BlMouseEvent,
+	#superclass : #BlMousePickEvent,
 	#category : #'Bloc-Events'
 }
 
@@ -9,7 +9,7 @@ BlMouseUpEvent class >> button: aMouseButton [
 	"Create a sample button up event for a given button for testing purposes"
 	<return: #BlMouseUpEvent>
 	
-	^ self new
+	^ aMouseButton mouseUpEventClass new
 		button: aMouseButton;
 		position: 0@0;
 		screenPosition: 0@0;
@@ -41,17 +41,16 @@ BlMouseUpEvent class >> secondary [
 ]
 
 { #category : #converting }
-BlMouseUpEvent >> asClickEvent [
-	^ BlClickEvent new
+BlMouseUpEvent >> asDoubleClickEvent [
+	^ BlDoubleClickEvent new
 		copyFrom: self;
 		yourself
 ]
 
 { #category : #converting }
-BlMouseUpEvent >> asDoubleClickEvent [
-	^ BlDoubleClickEvent new
-		copyFrom: self;
-		yourself
+BlMouseUpEvent >> asMouseOutsideEvent [
+
+	^ BlMouseUpOutsideEvent new originalEvent: self; canBePropagated: false; yourself
 ]
 
 { #category : #testing }

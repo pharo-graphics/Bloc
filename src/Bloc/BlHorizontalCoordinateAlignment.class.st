@@ -8,6 +8,12 @@ Class {
 	#category : #'Bloc-Layouts-Alignment'
 }
 
+{ #category : #'class initialization' }
+BlHorizontalCoordinateAlignment class >> initialize [
+
+	self initializeSingletons
+]
+
 { #category : #accessing }
 BlHorizontalCoordinateAlignment >> coordinate [
 	^ coordinate
@@ -25,10 +31,18 @@ BlHorizontalCoordinateAlignment >> directed: aBlLayoutDirection [
 
 { #category : #initialization }
 BlHorizontalCoordinateAlignment >> initialize [
+
 	super initialize.
-	
+
 	coordinate := 0.0.
-	relativeAlignment := BlElementAlignment horizontal center
+	relativeAlignment := BlElementAlignment vertical center
+]
+
+{ #category : #factory }
+BlHorizontalCoordinateAlignment >> leftToRight [
+	^ self class new
+		coordinate: coordinate;
+		relativeAlignment: relativeAlignment leftToRight
 ]
 
 { #category : #accessing }
@@ -39,4 +53,11 @@ BlHorizontalCoordinateAlignment >> relativeAlignment [
 { #category : #accessing }
 BlHorizontalCoordinateAlignment >> relativeAlignment: anObject [
 	relativeAlignment := anObject
+]
+
+{ #category : #factory }
+BlHorizontalCoordinateAlignment >> rightToLeft [
+	^ self class new
+		coordinate: coordinate;
+		relativeAlignment: relativeAlignment rightToLeft 
 ]

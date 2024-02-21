@@ -132,6 +132,11 @@ BlLayoutCommonConstraints >> ignoredByLayout [
 	^ ignoredByLayout
 ]
 
+{ #category : #'api - layouts' }
+BlLayoutCommonConstraints >> infinite [
+	^ self at: BlInfiniteLayout
+]
+
 { #category : #initialization }
 BlLayoutCommonConstraints >> initialize [
 	super initialize.
@@ -271,6 +276,30 @@ BlLayoutCommonConstraints >> position [
 { #category : #'api - constraints' }
 BlLayoutCommonConstraints >> position: aPoint [
 	position := aPoint
+]
+
+{ #category : #'api - layouts' }
+BlLayoutCommonConstraints >> proportional [
+
+	^ self at: BlProportionalLayout
+]
+
+{ #category : #'api - layouts' }
+BlLayoutCommonConstraints >> requestedHeightIn: anElement [
+
+	^ self vertical requestedHeightIn: anElement 
+]
+
+{ #category : #'api - layouts' }
+BlLayoutCommonConstraints >> requestedSizeIn: anElement [
+
+	^ (self requestedWidthIn: anElement) @ (self requestedHeightIn: anElement)
+]
+
+{ #category : #'api - layouts' }
+BlLayoutCommonConstraints >> requestedWidthIn: anElement [
+
+	^ self horizontal requestedWidthIn: anElement 
 ]
 
 { #category : #testing }

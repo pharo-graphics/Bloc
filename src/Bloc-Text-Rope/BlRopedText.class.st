@@ -85,7 +85,7 @@ BlRopedText >> attributes: anAttributesCollection from: aFromIndex to: aToIndex 
 		assert: [ self isNotEmpty or: [ aFromIndex = 1 and: [ aToIndex isZero ] ] ]
 		description: [ 'If I am empty then start must be 1 and end must be zero' ].
 	
-	aNewRope := rope attributes: anAttributesCollection from: ((aFromIndex - 1) max: 0) to: aToIndex.	
+	aNewRope := rope attributes: anAttributesCollection from: ((aFromIndex - 1) max: 0) to: (aToIndex min: self size).	
 	aNewRope == rope
 		ifTrue: [ ^ self ].
 	
@@ -277,9 +277,14 @@ BlRopedText >> insertText: aBlText at: anIndex [
 		requested: { anIndex }
 ]
 
+{ #category : #copying }
+BlRopedText >> internalRepresentation [
+
+	^ self rope
+]
+
 { #category : #'text - testing' }
 BlRopedText >> isEmpty [
-	<return: #Boolean>
 
 	^ self rope size = 0
 ]
@@ -387,6 +392,13 @@ BlRopedText >> storeOn: aStream [
 			aStream cr; nextPut: $} ].
 		aStream nextPut: $)
 	]
+]
+
+{ #category : #copying }
+BlRopedText >> takeInternalRepresentationOf: anotherText [
+
+" To be used with caution because the receiver and the argument text must have the same internal representation - another text must be a kind of roped text "
+	self rope: anotherText internalRepresentation
 ]
 
 { #category : #'text - attributes' }

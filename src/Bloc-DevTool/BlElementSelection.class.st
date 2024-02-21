@@ -1,5 +1,5 @@
 "
-I am a Halos element. For more information about me, see {{gtClass:BlDevHalosEventListener}}.
+I am a Halos element. For more information about me, see `BlDevHalosEventListener`.
 
 "
 Class {
@@ -72,7 +72,7 @@ BlElementSelection >> hasInformation [
 BlElementSelection >> hideInfo [
 
 	self padding: BlInsets empty.
-	self relocate: self selectionPosition.
+	self position: self selectionPosition.
 	self size: self selectionExtent.
 	
 	self effect: BlNullEffect new.
@@ -144,54 +144,47 @@ BlElementSelection >> initializeClientListener [
 
 { #category : #initialization }
 BlElementSelection >> initializeHandlers [
-	self
-		addEventHandler:
-			(BlEventHandler
-				on: BlDoubleClickEvent
-				do: [ :anEvent | 
-					anEvent consumed: true.
-					self close ]).
-	self
-		addEventHandler:
-			(BlEventHandler
-				on: BlClickEvent
-				do: [ :anEvent |
-					anEvent modifiers isShift ifTrue: [ 
-						anEvent consumed: true.
-						self client hasParent
-							ifTrue: [
-								BlElementSelection on: self client parent.
-								self close ] ] ]).
-	self
-		addEventHandler:
-			(BlEventHandler
-				on: BlDragStartEvent
-				do: [ :anEvent |
-					| aClientOldGlobalPosition aClientNewGlobalPosition |
-					anEvent consumed: true.
-					
-					aClientOldGlobalPosition := self client positionInSpace.
-					aClientNewGlobalPosition := self space root globalPointToLocal: aClientOldGlobalPosition.
-					aClientNewGlobalPosition := aClientNewGlobalPosition.
-					
-					"detach client from its current owner and attach it to the space root"
-					self client invalidate.
-					self client parent detachChild: self client.
-					self space root attachChild: self client.
-					self client relocate: aClientNewGlobalPosition.
-					self client invalidate.
-					
-					"store drag start offset to allow us smooth dragging"
-					self dragOffset: anEvent position - aClientNewGlobalPosition ]).
-	self
-		addEventHandler:
-			(BlEventHandler
-				on: BlDragEvent
-				do: [ :anEvent | 
-					| aPosition |
-					anEvent consumed: true.
-					aPosition := anEvent position - self dragOffset.
-					self client relocate: aPosition ])
+
+	self addEventHandler: (BlEventHandler
+			 on: BlDoubleClickEvent
+			 do: [ :anEvent |
+				 anEvent consumed: true.
+				 self close ]).
+	self addEventHandler: (BlEventHandler
+			 on: BlClickEvent
+			 do: [ :anEvent |
+				 anEvent modifiers isShift ifTrue: [
+					 anEvent consumed: true.
+					 self client hasParent ifTrue: [
+						 BlElementSelection on: self client parent.
+						 self close ] ] ]).
+	self addEventHandler: (BlEventHandler
+			 on: BlDragStartEvent
+			 do: [ :anEvent |
+				 | aClientOldGlobalPosition aClientNewGlobalPosition |
+				 anEvent consumed: true.
+
+				 aClientOldGlobalPosition := self client positionInSpace.
+				 aClientNewGlobalPosition := self space root globalPointToLocal:
+					                             aClientOldGlobalPosition.
+				 aClientNewGlobalPosition := aClientNewGlobalPosition.
+
+				 "detach client from its current owner and attach it to the space root"
+				 self client invalidate.
+				 self client parent detachChild: self client.
+				 self space root attachChild: self client.
+				 self client position: aClientNewGlobalPosition.
+				 self client invalidate.
+
+				 "store drag start offset to allow us smooth dragging"
+				 self dragOffset: anEvent position - aClientNewGlobalPosition ]).
+	self addEventHandler: (BlEventHandler
+			 on: BlDragEvent
+			 do: [ :anEvent |
+				 | aPosition |
+				 anEvent consumed: true.
+				 aPosition := anEvent position - self dragOffset.
+				 self client position: aPosition ])
 ]
 
 { #category : #layout }
@@ -226,10 +219,9 @@ BlElementSelection >> show [
 
 { #category : #'showing / hiding' }
 BlElementSelection >> showOn: anElement [
-
 	"we don't want to add selection to the root element"
-	anElement isRoot
-		ifTrue: [ ^ self ].
+
+	anElement isRoot ifTrue: [ ^ self ].
 
 	self
 		assert: [ client isNil ]
@@ -242,7 +234,7 @@ BlElementSelection >> showOn: anElement [
 	client := anElement.
 	client addEventHandler: clientListener.
 	client space root addChild: self.
-	
-	self relocate: self selectionPosition.
-	self size: self selectionExtent.
+
+	self position: self selectionPosition.
+	self size: self selectionExtent
 ]

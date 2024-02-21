@@ -1,11 +1,9 @@
 Extension { #name : #WinPlatform }
 
 { #category : #'*Bloc' }
-WinPlatform >> blocKeyFor: aKeyValue in: aKeyTable [
-	<return: #BlKeyboardKey>
-	self deprecated: 'No more specific system keyboard management in bloc'.
+WinPlatform >> defaultScrollingVelocity [
 
-	^ aKeyTable valueForWindowsPlatform: aKeyValue
+	^ 100
 ]
 
 { #category : #'*Bloc' }

@@ -4,17 +4,19 @@ I have been automatically converted and probably manually tweaked from BlElement
 "
 Class {
 	#name : #BlElementBoundsTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests'
+	#superclass : #BlExamplesTest,
+	#category : #'Bloc-UnitedTests-Bounds'
 }
 
 { #category : #'test seed' }
 BlElementBoundsTest >> child [
-	<gtExample>
+
+	<sampleInstance>
+	<demo>
 	^ BlElement new
-		size: self childExtent;
-		relocate: self childPosition;
-		background: Color red
+		  size: self childExtent;
+		  position: self childPosition;
+		  background: Color red
 ]
 
 { #category : #helpers }
@@ -27,19 +29,15 @@ BlElementBoundsTest >> childPosition [
 	^ 200 @ 150
 ]
 
-{ #category : #metadata }
-BlElementBoundsTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlElementBoundsExamples'
-]
-
 { #category : #'test seed' }
 BlElementBoundsTest >> parent [
-	<gtExample>
+
+	<sampleInstance>
+	<demo>
 	^ BlElement new
-		size: self parentExtent;
-		relocate: self parentPosition;
-		background: (Color gray alpha: 0.3)
+		  size: self parentExtent;
+		  position: self parentPosition;
+		  background: (Color gray alpha: 0.3)
 ]
 
 { #category : #helpers }
@@ -54,17 +52,19 @@ BlElementBoundsTest >> parentPosition [
 
 { #category : #'test seed' }
 BlElementBoundsTest >> parentWithChild [
-	<gtExample>
+
+	<sampleInstance>
+	<demo>
 	^ self parent
-		addChild: self child;
-		forceLayout
+		  addChild: self child;
+		  forceLayout
 ]
 
 { #category : #tests }
 BlElementBoundsTest >> testBounds [
 	"Element bounds consist of position and extent"
-
-	<gtExample>
+	<sampleInstance>
+	
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -81,7 +81,7 @@ BlElementBoundsTest >> testBounds [
 BlElementBoundsTest >> testBoundsInLocal [
 	"Bounds in local always have position 0@0"
 
-	<gtExample>
+	<sampleInstance>
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -96,7 +96,8 @@ BlElementBoundsTest >> testBoundsInLocal [
 
 { #category : #tests }
 BlElementBoundsTest >> testBoundsInLocalInLocal [
-	<gtExample>
+	<sampleInstance>
+	
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -111,7 +112,8 @@ BlElementBoundsTest >> testBoundsInLocalInLocal [
 
 { #category : #tests }
 BlElementBoundsTest >> testBoundsInLocalInParent [
-	<gtExample>
+	
+	<sampleInstance>
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -132,7 +134,8 @@ BlElementBoundsTest >> testBoundsInLocalInParent [
 
 { #category : #tests }
 BlElementBoundsTest >> testBoundsInLocalInSpace [
-	<gtExample>
+
+	<sampleInstance>
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -153,7 +156,8 @@ BlElementBoundsTest >> testBoundsInLocalInSpace [
 
 { #category : #tests }
 BlElementBoundsTest >> testBoundsInParent [
-	<gtExample>
+	
+	<sampleInstance>
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -170,7 +174,8 @@ BlElementBoundsTest >> testBoundsInParent [
 
 { #category : #tests }
 BlElementBoundsTest >> testBoundsInParentInLocal [
-	<gtExample>
+	
+	<sampleInstance>
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -191,7 +196,8 @@ BlElementBoundsTest >> testBoundsInParentInLocal [
 
 { #category : #tests }
 BlElementBoundsTest >> testBoundsInParentInParent [
-	<gtExample>
+	
+	<sampleInstance>
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -212,7 +218,8 @@ BlElementBoundsTest >> testBoundsInParentInParent [
 
 { #category : #tests }
 BlElementBoundsTest >> testBoundsInParentInParentInParent [
-	<gtExample>
+	
+	<sampleInstance>
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -233,7 +240,8 @@ BlElementBoundsTest >> testBoundsInParentInParentInParent [
 
 { #category : #tests }
 BlElementBoundsTest >> testBoundsInSpace [
-	<gtExample>
+	
+	<sampleInstance>
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -250,7 +258,8 @@ BlElementBoundsTest >> testBoundsInSpace [
 
 { #category : #tests }
 BlElementBoundsTest >> testBoundsInSpaceInLocal [
-	<gtExample>
+	
+	<sampleInstance>
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -271,7 +280,8 @@ BlElementBoundsTest >> testBoundsInSpaceInLocal [
 
 { #category : #tests }
 BlElementBoundsTest >> testBoundsInSpaceInParent [
-	<gtExample>
+	
+	<sampleInstance>
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -292,7 +302,8 @@ BlElementBoundsTest >> testBoundsInSpaceInParent [
 
 { #category : #tests }
 BlElementBoundsTest >> testBoundsInSpecificChild [
-	<gtExample>
+	
+	<sampleInstance>
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -315,7 +326,8 @@ BlElementBoundsTest >> testBoundsInSpecificChild [
 
 { #category : #tests }
 BlElementBoundsTest >> testBoundsInSpecificChildInSpecificParent [
-	<gtExample>
+	
+	<sampleInstance>
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -342,7 +354,8 @@ BlElementBoundsTest >> testBoundsInSpecificChildInSpecificParent [
 
 { #category : #tests }
 BlElementBoundsTest >> testBoundsInSpecificParent [
-	<gtExample>
+	
+	<sampleInstance>
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -365,7 +378,8 @@ BlElementBoundsTest >> testBoundsInSpecificParent [
 
 { #category : #tests }
 BlElementBoundsTest >> testBoundsInSpecificParentInSpecificChild [
-	<gtExample>
+	
+	<sampleInstance>
 	| parent child |
 	parent := self parentWithChild.
 	child := parent children first.
@@ -392,9 +406,11 @@ BlElementBoundsTest >> testBoundsInSpecificParentInSpecificChild [
 
 { #category : #tests }
 BlElementBoundsTest >> testShadowEffectBoundsWithoutOffset [
-	<gtExample>
-	| parent child shadowWidth |
+	
+	<sampleInstance>
+	| parent child shadowWidth shadowMultiplier |
 	shadowWidth := 20.
+	shadowMultiplier := 1.5.
 	parent := self parentWithChild.
 	child := parent children first.
 	child
@@ -406,14 +422,14 @@ BlElementBoundsTest >> testShadowEffectBoundsWithoutOffset [
 	self
 		assert: child effectBounds
 		equals:
-			(shadowWidth * 3 asPoint negated
-				corner: self childExtent + (shadowWidth * 3 asPoint)).
+			(shadowWidth * shadowMultiplier asPoint negated
+				corner: self childExtent + (shadowWidth * shadowMultiplier asPoint)).
 	child size: self childExtent * 2.
 	child forceLayout.
 	self
 		assert: child effectBounds
 		equals:
-			(shadowWidth * 3 asPoint negated
-				corner: self childExtent * 2 + (shadowWidth * 3 asPoint)).
+			(shadowWidth * shadowMultiplier asPoint negated
+				corner: self childExtent * 2 + (shadowWidth * shadowMultiplier asPoint)).
 	^ parent
 ]

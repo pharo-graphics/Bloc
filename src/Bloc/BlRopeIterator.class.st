@@ -77,7 +77,6 @@ BlRopeIterator >> errorReachedTheStart [
 { #category : #'iterator - testing' }
 BlRopeIterator >> hasNext [
 	"Return true if iterator is be able to return #next item in the rope, false otherwise"
-	<return: #Boolean>
 
 	^ self subclassResponsibility
 ]

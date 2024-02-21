@@ -9,8 +9,6 @@ I provide several creation methods but usually four points are necessary to full
 Class {
 	#name : #BlInsets,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'top',
 		'left',
@@ -25,6 +23,7 @@ Class {
 
 { #category : #'instance creation' }
 BlInsets class >> all: aNumber [
+
 	^ self
 		top: aNumber
 		right: aNumber
@@ -33,7 +32,8 @@ BlInsets class >> all: aNumber [
 ]
 
 { #category : #'instance creation' }
-BlInsets class >> bottom: b [ 
+BlInsets class >> bottom: b [
+
 	^ self 
 		top: 0
 		right: 0
@@ -43,11 +43,13 @@ BlInsets class >> bottom: b [
 
 { #category : #'instance creation' }
 BlInsets class >> empty [
-	^ Empty ifNil: [ Empty := self
-		top: 0
-		right: 0
-		bottom: 0
-		left: 0 ]
+
+	^ Empty ifNil: [
+		Empty := self
+			top: 0
+			right: 0
+			bottom: 0
+			left: 0 ]
 ]
 
 { #category : #'instance creation' }
@@ -57,7 +59,14 @@ BlInsets class >> horizontal: aNumber [
 ]
 
 { #category : #'instance creation' }
+BlInsets class >> horizontal: aNumberForH vertical: aNumberForV [
+
+	^ self top: aNumberForV left: aNumberForH bottom: aNumberForV right: aNumberForH
+]
+
+{ #category : #'instance creation' }
 BlInsets class >> left: l [
+
 	^ self 
 		top: 0
 		right: 0
@@ -66,7 +75,8 @@ BlInsets class >> left: l [
 ]
 
 { #category : #'instance creation' }
-BlInsets class >> left: l right:r [
+BlInsets class >> left: l right: r [
+
 	^ self 
 		top: 0
 		right: r
@@ -76,7 +86,8 @@ BlInsets class >> left: l right:r [
 
 { #category : #'instance creation' }
 BlInsets class >> right: r [
-	^ self 
+
+	^ self
 		top: 0
 		right: r
 		bottom: 0
@@ -84,7 +95,8 @@ BlInsets class >> right: r [
 ]
 
 { #category : #'instance creation' }
-BlInsets class >> top: t [ 
+BlInsets class >> top: t [
+
 	^ self 
 		top: t
 		right: 0
@@ -94,6 +106,7 @@ BlInsets class >> top: t [
 
 { #category : #'instance creation' }
 BlInsets class >> top: t bottom: b [
+
 	^ self 
 		top: t
 		right: 0
@@ -103,6 +116,7 @@ BlInsets class >> top: t bottom: b [
 
 { #category : #'instance creation' }
 BlInsets class >> top: t left: l [
+
 	^ self 
 		top: t
 		right: 0
@@ -111,16 +125,19 @@ BlInsets class >> top: t left: l [
 ]
 
 { #category : #'instance creation' }
-BlInsets class >> top: t left: l bottom: b right: r [ 
-	^ self new
-		top: t
-		right: r
-		bottom: b
-		left: l
+BlInsets class >> top: t left: l bottom: b right: r [
+
+	^ self basicNew
+		initializeTop: t
+			right: r
+			bottom: b
+			left: l;
+		yourself
 ]
 
 { #category : #'instance creation' }
 BlInsets class >> top: t right: r [
+
 	^ self 
 		top: t
 		right: r
@@ -130,11 +147,13 @@ BlInsets class >> top: t right: r [
 
 { #category : #'instance creation' }
 BlInsets class >> top: t right: r bottom: b left: l [
-	^ self new
-		top: t
-		right: r
-		bottom: b
-		left: l
+
+	^ self basicNew
+		  initializeTop: t
+		  right: r
+		  bottom: b
+		  left: l;
+		  yourself
 ]
 
 { #category : #'instance creation' }
@@ -145,6 +164,7 @@ BlInsets class >> vertical: aNumber [
 
 { #category : #converting }
 BlInsets >> + anInsets [
+
 	^ BlInsets
 		top: top + anInsets top
 		right: right + anInsets right
@@ -154,6 +174,7 @@ BlInsets >> + anInsets [
 
 { #category : #converting }
 BlInsets >> - anInsets [
+
 	^ BlInsets
 		top: (top - anInsets top max: 0)
 		right: (right - anInsets right max: 0)
@@ -163,10 +184,9 @@ BlInsets >> - anInsets [
 
 { #category : #testing }
 BlInsets >> = anObject [
-	self == anObject
-		ifTrue: [ ^ true ].
-	self class = anObject class
-		ifFalse: [ ^ false ].
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
 	
 	^ left = anObject left
 		and: [ right = anObject right
@@ -176,28 +196,24 @@ BlInsets >> = anObject [
 
 { #category : #converting }
 BlInsets >> asMargin [
-	<return: #Margin>
 
 	^ Margin top: top left: left bottom: bottom right: right
 ]
 
 { #category : #accessing }
 BlInsets >> bottom [
-	<return: #Number>
 
 	^ bottom
 ]
 
 { #category : #accessing }
 BlInsets >> bottomLeft [
-	<return: #Point>
 
 	^ left @ bottom
 ]
 
 { #category : #accessing }
 BlInsets >> bottomRight [
-	<return: #Point>
 
 	^ right @ bottom
 ]
@@ -206,7 +222,6 @@ BlInsets >> bottomRight [
 BlInsets >> expand: aRectangle [
 	"Answer a rectangle whose size has been expanded by the receiver which represents each rectangle corner."
 	"Optimisation: fast return if I don't modify bounds. gives 10x speed boost"
-	<return: #Rectangle>
 
 	self isEmpty
 		ifTrue: [ ^ aRectangle ].
@@ -216,21 +231,31 @@ BlInsets >> expand: aRectangle [
 
 { #category : #accessing }
 BlInsets >> extent [
+
 	^ self width @ self height
 ]
 
 { #category : #accessing }
 BlInsets >> height [
-	<return: #Number>
 
 	^ top + bottom
+]
+
+{ #category : #initialization }
+BlInsets >> initializeTop: aTop right: aRight bottom: aBottom left: aLeft [
+	"Initialize all values. None of the values should be changed afterwards."
+
+	self initialize.
+	top := aTop asFloat.
+	right := aRight asFloat.
+	bottom := aBottom asFloat.
+	left := aLeft asFloat
 ]
 
 { #category : #converting }
 BlInsets >> inset: aRectangle [
 	"Answer a rectangle whose size has been reduced by the receiver."
 	"Optimisation: fast return if I don't modify bounds. gives 10x speed boost"
-	<return: #Rectangle>
 
 	self isEmpty
 		ifTrue: [ ^ aRectangle ].
@@ -243,7 +268,6 @@ BlInsets >> inset: aRectangle [
 BlInsets >> isEmpty [
 	"Return true if insets is empty and does not influence bounds, false otherwise.
 	Note: comparing the sum of width and height may lead to unexpected results when insets are negative"
-	<return: #Boolean>
 
 	^ self top isZero
 		and: [ self right isZero
@@ -254,7 +278,6 @@ BlInsets >> isEmpty [
 { #category : #testing }
 BlInsets >> isUniform [
 	"Return true if all insets (right, left, top, bottom) are same"
-	<return: #Boolean>
 
 	^ (self top closeTo: self right)
 		and: [ (self right closeTo: self bottom)
@@ -264,18 +287,19 @@ BlInsets >> isUniform [
 
 { #category : #accessing }
 BlInsets >> left [
-	<return: #Number>
 
 	^ left
 ]
 
 { #category : #accessing }
 BlInsets >> max [
+
 	^ self top max: (self right max: (self bottom max: self left))
 ]
 
 { #category : #converting }
 BlInsets >> negated [
+
 	^ self class
 		top: self top negated
 		right: self right negated
@@ -314,62 +338,37 @@ BlInsets >> printOn: aStream [
 
 { #category : #accessing }
 BlInsets >> right [
-	<return: #Number>
 
 	^ right
 ]
 
 { #category : #accessing }
 BlInsets >> top [
-	<return: #Number>
 
 	^ top
 ]
 
-{ #category : #initialization }
-BlInsets >> top: aTop right: aRight bottom: aBottom left: aLeft [
-	self
-		assert: [ top isNil ]
-		description: [ 'Insets is immutable and can not be changed' ].
-	self
-		assert: [ right isNil ]
-		description: [ 'Insets is immutable and can not be changed' ].
-	self
-		assert: [ bottom isNil ]
-		description: [ 'Insets is immutable and can not be changed' ].
-	self
-		assert: [ left isNil ]
-		description: [ 'Insets is immutable and can not be changed' ].
-
-	top := aTop asFloat.
-	right := aRight asFloat.
-	bottom := aBottom asFloat.
-	left := aLeft asFloat
-]
-
 { #category : #accessing }
 BlInsets >> topLeft [
-	<return: #Point>
 
 	^ left @ top
 ]
 
 { #category : #accessing }
 BlInsets >> topRight [
-	<return: #Point>
 
 	^ right @ top
 ]
 
 { #category : #accessing }
 BlInsets >> width [
-	<return: #Number>
 
 	^ left + right
 ]
 
 { #category : #accessing }
 BlInsets >> withBottom: aBottom [
+
 	^ self class
 		top: self top
 		right: self right
@@ -379,6 +378,7 @@ BlInsets >> withBottom: aBottom [
 
 { #category : #accessing }
 BlInsets >> withExtraBottom: aBottom [
+
 	^ self class
 		top: self top
 		right: self right
@@ -388,6 +388,7 @@ BlInsets >> withExtraBottom: aBottom [
 
 { #category : #accessing }
 BlInsets >> withLeft: aLeft [
+
 	^ self class
 		top: self top
 		right: self right
@@ -397,6 +398,7 @@ BlInsets >> withLeft: aLeft [
 
 { #category : #accessing }
 BlInsets >> withRight: aRight [
+
 	^ self class
 		top: self top
 		right: aRight
@@ -406,6 +408,7 @@ BlInsets >> withRight: aRight [
 
 { #category : #accessing }
 BlInsets >> withTop: aTop [
+
 	^ self class
 		top: aTop
 		right: self right

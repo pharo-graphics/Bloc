@@ -26,41 +26,46 @@ Class {
 { #category : #'instance creation' }
 BlMatrix2D class >> reflection: aDiagonalVector [
 	"Return a matrix which corresponds to a reflection transformation with a given diagonal"
-	<return: #BlMatrix2D>
 
-	^ self new reflection: aDiagonalVector
+	^ self new
+		  reflection: aDiagonalVector;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlMatrix2D class >> rotation: anAngle [
 	"Return a matrix which corresponds to a rotation transformation by given angle"
-	<return: #BlMatrix2D>
 
-	^ self new rotation: anAngle
+	^ self new
+		  rotation: anAngle;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlMatrix2D class >> scale: aBlVector [
 	"Return a matrix which corresponds to a scale transformation by given factor"
-	<return: #BlMatrix2D>
 
-	^ self new scaleBy: aBlVector
+	^ self new
+		  scaleBy: aBlVector;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlMatrix2D class >> shear: aCoefficientPoint [
 	"Return a matrix which corresponds to a shear transformation by given coefficient"
-	<return: #BlMatrix2D>
 
-	^ self new shear: aCoefficientPoint
+	^ self new
+		  shear: aCoefficientPoint;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlMatrix2D class >> translation: aBlVector [
 	"Return a matrix which corresponds to a translation transformation by given factor"
-	<return: #BlMatrix2D>
 
-	^ self new translateBy: aBlVector
+	^ self new
+		  translateBy: aBlVector;
+		  yourself
 ]
 
 { #category : #comparing }
@@ -212,9 +217,8 @@ BlMatrix2D >> inverse [
 
 { #category : #'matrix - mathematical functions' }
 BlMatrix2D >> inverted [
-	"Return a new instance of matrix which is an inverse of me.
-	Throw BlSingularMatrixError if matrix is singular (non-invertible or degenerate)"
-	<return: #BlMatrix2D>
+	"Return a new instance that is my inverse.
+	Signal a `BlSingularMatrixError` if matrix is singular (non-invertible or degenerate)"
 	
 	^ self copy inverse
 ]
@@ -222,7 +226,6 @@ BlMatrix2D >> inverted [
 { #category : #testing }
 BlMatrix2D >> is2D [
 	"Return true if matrix is 2D, false otherwise"
-	<return: #Boolean>
 	
 	^ true
 ]
@@ -230,7 +233,6 @@ BlMatrix2D >> is2D [
 { #category : #'matrix - testing' }
 BlMatrix2D >> isIdentity [
 	"Return true if I represent an identity transformation, false otherwise"
-	<return: #Boolean>
 
 	^ sx = 1.0 and: [
 		shy = 0.0 and: [
@@ -320,10 +322,10 @@ BlMatrix2D >> rotateByRadians: anAngle around: aBlVector [
 { #category : #initialization }
 BlMatrix2D >> rotation: anAngle [
 	"Set me to be a 2D matrix representing a rotation by a given angle in radians"
-	| aSin aCos |
 
-	aSin := anAngle sin reduce asFloat.
-	aCos := anAngle cos reduce asFloat.
+	| aSin aCos |
+	aSin := anAngle sin.
+	aCos := anAngle cos.
 	
 	x := 0.0.
 	y := 0.0.
@@ -411,7 +413,6 @@ BlMatrix2D >> sx: anObject [
 { #category : #'matrix - accessing' }
 BlMatrix2D >> sy [
 	"Returns the Y coordinate scaling element of the affine transformation matrix"
-	<return: #Number>
 
 	^ sy
 ]

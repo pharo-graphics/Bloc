@@ -125,11 +125,6 @@ BlCustomVisuals >> focusability: aBlFocusability [
 ]
 
 { #category : #accessing }
-BlCustomVisuals >> focused [
-	^ focused ifNil: [ self defaultFocused ]
-]
-
-{ #category : #accessing }
 BlCustomVisuals >> focused: aBoolean [
 	"Change focused state and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
@@ -150,17 +145,23 @@ BlCustomVisuals >> geometry: aBlElementGeometry [
 	geometry := aBlElementGeometry
 ]
 
+{ #category : #testing }
+BlCustomVisuals >> isFocused [
+
+	^ focused ifNil: [ self defaultFocused ]
+]
+
 { #category : #accessing }
 BlCustomVisuals >> mouseCursor [
 	^ mouseCursor ifNil: [ self defaultMouseCursor ]
 ]
 
 { #category : #accessing }
-BlCustomVisuals >> mouseCursor: aBlCursor [
+BlCustomVisuals >> mouseCursor: aCursor [
 	"Change the mouse cursor and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
-	mouseCursor := aBlCursor
+	mouseCursor := aCursor
 ]
 
 { #category : #accessing }

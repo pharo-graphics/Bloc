@@ -4,7 +4,7 @@ I am a special image type background given as Form.
 Note: I am never #isTransparent even if all Form pixels are transparent. The reason for this is the fact that ther is no fast way to detect if a Form is completly transparent without checking all pixels.
 
 ## Examples 
-Examples are provided by the class {{gtClass:BlImageBackgroundExamples}}.
+Examples are provided by the class `BlImageBackgroundExamples`.
 
 "
 Class {
@@ -23,7 +23,7 @@ BlImageBackground class >> image: aForm [
 
 { #category : #accessing }
 BlImageBackground >> image [
-	<return: #Form>
+	"Return the form that represents the visual of the background."
 
 	^ image
 ]
@@ -41,7 +41,6 @@ BlImageBackground >> image: aForm [
 BlImageBackground >> isTransparent [
 	"Unfortunately there is no fast way to detect if a Form is completely transparent,
 	the only check we can afford to do is to see whether the extent of the form is positive"
-	<return: #Boolean>
 
 	^ (self opacity closeTo: 0) or: [ self image extent min = 0 ]
 ]

@@ -5,7 +5,7 @@ Class {
 		'ALIGN_BOUNDS',
 		'ALIGN_MARGINS'
 	],
-	#category : 'Bloc-Layout-Grid-Utilities'
+	#category : #'Bloc-Layout-Grid-Utilities'
 }
 
 { #category : #'alignment modes' }
@@ -20,7 +20,6 @@ BlGridAlignmentMode class >> alignMargins [
 
 { #category : #'class initialization' }
 BlGridAlignmentMode class >> initialize [
-	super initialize.
 	
 	ALIGN_MARGINS := BlGridAlignMarginsMode new.
 	ALIGN_BOUNDS := BlGridAlignBoundsMode new

@@ -1,13 +1,13 @@
 "
 # Shortcut
-Represents a keyboard shortcut that can be registered to any arbitrary {{gtClass:BlElement}}.
-Shortcut consist of an Action that is evaluated when a Shortcut is triggered and {{gtClass:BlKeyCombination}} that describes when shortcut should be triggered. A combination is a logical formula expression that is composed of various key combinations such as alternative, compulsory or single key. See subclasses of {{gtClass:BlKeyCombination}}.
+Represents a keyboard shortcut that can be registered to any arbitrary `BlElement`.
+Shortcut consist of an Action that is evaluated when a Shortcut is triggered and `BlKeyCombination` that describes when shortcut should be triggered. A combination is a logical formula expression that is composed of various key combinations such as alternative, compulsory or single key. See subclasses of `BlKeyCombination`.
 Additionally, shortcut may provide its optional textual description and name.
 
-All shortcuts of an element are stored in {{gtClass:BlShortcutRegistry}} and matched / triggered by {{gtClass:BlShortcutHandler}}
+All shortcuts of an element are stored in `BlShortcutRegistry` and matched / triggered by `BlShortcutHandler`
 
-A shortcut can be added or removed from the element by using {{gtMethod:BlElement>>#addShortcut:}} or {{gtMethod:BlElement>>#removeShortcut:}} methods.
-{{gtMethod:BlElement>>#shortcuts}} message can be sent to an element in order to access a list of all registered shortcuts.
+A shortcut can be added or removed from the element by using `BlElement>>#addShortcut:` or `BlElement>>#removeShortcut:` methods.
+`BlElement>>#shortcuts` message can be sent to an element in order to access a list of all registered shortcuts.
 ## Public API and Key Messages
 
 - combination: get /set shortcut's key combination

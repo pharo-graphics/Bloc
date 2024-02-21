@@ -49,8 +49,9 @@ BATextElementMockedMeasurer >> glyphWidth: aNumber [
 
 { #category : #initialization }
 BATextElementMockedMeasurer >> initialize [
+
 	super initialize.
-	
+
 	measurer := BAMockedTextMeasurer new.
 	measurer ascent: -10.
 	measurer descent: 5.
@@ -60,6 +61,7 @@ BATextElementMockedMeasurer >> initialize [
 
 { #category : #initialization }
 BATextElementMockedMeasurer >> measureTextParagraph: aBlTextParagraph of: aTextElement [
+
 	measurer measureTextParagraph: aBlTextParagraph
 ]
 

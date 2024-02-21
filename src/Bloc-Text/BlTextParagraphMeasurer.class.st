@@ -16,8 +16,13 @@ Class {
 }
 
 { #category : #measurement }
-BlTextParagraphMeasurer class >> hostTextMeasurer: aHostSpanMeasurer emptySpan: anEmptySpan [
-	^ self new hostTextMeasurer: aHostSpanMeasurer emptySpan: anEmptySpan
+BlTextParagraphMeasurer class >> hostTextMeasurer: aHostSpanMeasurer maxWidth: aWidth maxHeight: aHeight [
+
+	^ self new
+		  hostTextMeasurer: aHostSpanMeasurer
+		  maxWidth: aWidth
+		  maxHeight: aHeight;
+		  yourself
 ]
 
 { #category : #accessing }
@@ -44,17 +49,12 @@ BlTextParagraphMeasurer >> availableWidth [
 	^ maxWidth - self accumulatedWidth
 ]
 
-{ #category : #measurement }
-BlTextParagraphMeasurer >> emptySpan [
-	^ BlSpan text: BlText empty attributes: #().
-]
-
 { #category : #finalization }
 BlTextParagraphMeasurer >> finalize [
 
 	super finalize.
 	hostTextMeasurer := nil.
-	line finalize.
+	line ifNotNil: [line finalize].
 	line := nil
 ]
 
@@ -66,10 +66,11 @@ BlTextParagraphMeasurer >> hasAvailableSpace [
 ]
 
 { #category : #measurement }
-BlTextParagraphMeasurer >> hostTextMeasurer: aBlHostTextMeasurer emptySpan: anEmptySpan [
+BlTextParagraphMeasurer >> hostTextMeasurer: aBlHostTextMeasurer maxWidth: aWidth maxHeight: aHeight [
 
 	hostTextMeasurer := aBlHostTextMeasurer.
-	self measureSpan: anEmptySpan.
+	self maxWidth: aWidth.
+	self maxHeight: aHeight
 ]
 
 { #category : #initialization }

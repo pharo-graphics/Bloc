@@ -9,22 +9,28 @@ Class {
 
 { #category : #accessing }
 BlShearTransformation >> angleX: anAngleInDegrees [
-	self coefficient: (anAngleInDegrees degreesToRadians) tan negated @ self coefficient y
+
+	self coefficient:
+		anAngleInDegrees degreesToRadians tan negated @ self coefficient y
 ]
 
 { #category : #accessing }
 BlShearTransformation >> angleY: anAngleInDegrees [
-	self coefficient: self coefficient x @ (anAngleInDegrees degreesToRadians) tan negated
+
+	self coefficient:
+		self coefficient x @ anAngleInDegrees degreesToRadians tan negated
 ]
 
 { #category : #accessing }
 BlShearTransformation >> coefficient [
+
 	^ coefficient
 ]
 
 { #category : #accessing }
-BlShearTransformation >> coefficient: anObject [
-	coefficient := anObject
+BlShearTransformation >> coefficient: aPoint [
+
+	coefficient := aPoint
 ]
 
 { #category : #initialization }
@@ -37,7 +43,6 @@ BlShearTransformation >> initialize [
 { #category : #testing }
 BlShearTransformation >> is2D [
 	"Return true if transformation happens in x-y plane, hence 2D"
-	<return: #Boolean>
 	
 	^ true
 ]
@@ -45,12 +50,13 @@ BlShearTransformation >> is2D [
 { #category : #'mathematical functions' }
 BlShearTransformation >> multiplyOn: aBlMatrix [
 
-	aBlMatrix multiplyBy: (BlMatrix2D shear: self coefficient)
+	aBlMatrix multiplyBy: (BlMatrix2D shear: coefficient)
 ]
 
 { #category : #printing }
 BlShearTransformation >> printOn: aStream [
+
 	aStream
 		nextPutAll: 'Shear by ';
-		nextPutAll: self coefficient asString
+		nextPutAll: coefficient asString
 ]

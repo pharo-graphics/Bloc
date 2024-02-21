@@ -13,22 +13,25 @@ ClyGtExampleScript class >> canBeProvidedByMethod: aMethod [
 
 { #category : #'script detection' }
 ClyGtExampleScript class >> isImplementedByMethod: aMethod [
-	^ (aMethod hasPragmaNamed: #gtExample) and: [ (aMethod isTestMethod) not ]
+	^ ((aMethod hasPragmaNamed: #gtExample) or: [ (aMethod hasPragmaNamed: #sampleInstance) ]) and: [ (aMethod isTestMethod) not ]
 ]
 
 { #category : #accessing }
 ClyGtExampleScript >> description [
-	^ 'Run the gtexample'
+	^ 'Run the gtExample'
 ]
 
 { #category : #accessing }
 ClyGtExampleScript >> executeOn: aClass [
-	"Execute the corresponding method of the argument."
-	
-	| res |
-	res := aClass instanceSide new  perform: implementorMethod selector.
-	res inspect.
-	^ res
+
+	| exampleResult |
+	exampleResult := aClass instanceSide new perform: implementorMethod selector.
+
+	exampleResult class = BlElement
+		ifTrue: [ exampleResult openInNewSpace ]
+		ifFalse: [ exampleResult inspect ].
+
+	^ exampleResult
 ]
 
 { #category : #accessing }

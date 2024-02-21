@@ -25,7 +25,6 @@ BlBackgroundBuilder >> initialize [
 
 { #category : #building }
 BlBackgroundBuilder >> isOpaque [
-	<return: #Boolean>
 
 	^ self opacity closeTo: 1
 ]

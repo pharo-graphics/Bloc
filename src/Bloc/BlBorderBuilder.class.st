@@ -27,6 +27,7 @@ Class {
 
 { #category : #builder }
 BlBorderBuilder >> build [
+
 	^ BlBorder basicNew
 		initialize;
 		paint: self paint;
@@ -38,6 +39,7 @@ BlBorderBuilder >> build [
 
 { #category : #builder }
 BlBorderBuilder >> buildStyle [
+
 	^ BlStrokeStyle new
 		lineCap: self lineCap;
 		lineJoin: self lineJoin;
@@ -48,73 +50,87 @@ BlBorderBuilder >> buildStyle [
 
 { #category : #styles }
 BlBorderBuilder >> capButt [
+
 	self lineCap: BlStrokeLineCap butt
 ]
 
 { #category : #styles }
 BlBorderBuilder >> capRound [
+
 	self lineCap: BlStrokeLineCap round
 ]
 
 { #category : #styles }
 BlBorderBuilder >> capSquare [
+
 	self lineCap: BlStrokeLineCap square
 ]
 
 { #category : #accessing }
 BlBorderBuilder >> dashArray [
+
 	^ dashArray
 ]
 
 { #category : #accessing }
 BlBorderBuilder >> dashArray: anObject [
+
 	dashArray := anObject
 ]
 
 { #category : #accessing }
 BlBorderBuilder >> dashOffset [
+
 	^ dashOffset
 ]
 
 { #category : #accessing }
 BlBorderBuilder >> dashOffset: anObject [
+
 	dashOffset := anObject
 ]
 
 { #category : #styles }
 BlBorderBuilder >> dashed [
+
 	dashOffset := 0.
 	dashArray := #(6 4.2)
 ]
 
 { #category : #styles }
 BlBorderBuilder >> dashedSmall [
+
 	dashOffset := 0.
 	dashArray := #(3 2)
 ]
 
 { #category : #initialization }
 BlBorderBuilder >> defaultDashArray [
+
 	^ #()
 ]
 
 { #category : #initialization }
 BlBorderBuilder >> defaultDashOffset [
+
 	^ 0.0
 ]
 
 { #category : #initialization }
 BlBorderBuilder >> defaultLineCap [
+
 	^ BlStrokeLineCap butt
 ]
 
 { #category : #initialization }
 BlBorderBuilder >> defaultLineJoin [
+
 	^ BlStrokeLineJoin miter
 ]
 
 { #category : #initialization }
 BlBorderBuilder >> defaultMiterLimit [
+
 	^ 4.0
 ]
 
@@ -198,36 +214,43 @@ BlBorderBuilder >> miterLimit: anObject [
 
 { #category : #accessing }
 BlBorderBuilder >> opacity [
+
 	^ opacity
 ]
 
 { #category : #accessing }
 BlBorderBuilder >> opacity: anObject [
+
 	opacity := anObject
 ]
 
 { #category : #accessing }
 BlBorderBuilder >> paint [
+
 	^ paint
 ]
 
 { #category : #accessing }
 BlBorderBuilder >> paint: anObject [
+
 	paint := anObject
 ]
 
 { #category : #styles }
 BlBorderBuilder >> solid [
+
 	dashOffset := 0.0.
 	dashArray := #()
 ]
 
 { #category : #accessing }
 BlBorderBuilder >> width [
+
 	^ width
 ]
 
 { #category : #accessing }
 BlBorderBuilder >> width: anObject [
+
 	width := anObject
 ]

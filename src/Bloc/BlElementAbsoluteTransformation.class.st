@@ -13,59 +13,62 @@ Class {
 
 { #category : #accessing }
 BlElementAbsoluteTransformation class >> matrix: aBlMatrix [
-	^ self new matrix: aBlMatrix
+
+	^ self basicNew
+		initializeWithMatrix: aBlMatrix;
+		yourself
 ]
 
 { #category : #computation }
 BlElementAbsoluteTransformation >> computeMatrix: aBlMatrix in: aRectangle [
-	aBlMatrix multiplyBy: self matrix
+
+	aBlMatrix multiplyBy: matrix
 ]
 
 { #category : #initialization }
-BlElementAbsoluteTransformation >> initialize [
-	super initialize.
+BlElementAbsoluteTransformation >> initializeWithMatrix: aBlMatrix [
+
+	self initialize.
 	
-	matrix := BlMatrix2D new
+	matrix := aBlMatrix
 ]
 
 { #category : #testing }
 BlElementAbsoluteTransformation >> is2D [
 	"Return true if my current transformation is in 2D space, false otherwise"
-	<return: #Boolean>
 
-	^ self matrix is2D
+	^ matrix is2D
 ]
 
 { #category : #testing }
 BlElementAbsoluteTransformation >> is3D [
 	"Return true if my current transformation is in 3D space, false otherwise"
-	<return: #Boolean>
 
-	^ self matrix is3D
+	^ matrix is3D
 ]
 
 { #category : #testing }
 BlElementAbsoluteTransformation >> isIdentity [
 	"Return true if I represent an identity transformation, false otherwise"
-	<return: #Boolean>
 	
-	^ self matrix isIdentity
+	^ matrix isIdentity
 ]
 
 { #category : #testing }
 BlElementAbsoluteTransformation >> isPureTranslation [
 	"Return true if the receiver specifies no rotation or scaling and represents only translation in xy 2D plane"
-	<return: #Boolean>
 	
 	^ false
 ]
 
 { #category : #accessing }
 BlElementAbsoluteTransformation >> matrix [
+
 	^ matrix
 ]
 
 { #category : #accessing }
 BlElementAbsoluteTransformation >> matrix: aBlMatrix [
+
 	matrix := aBlMatrix
 ]

@@ -51,8 +51,22 @@ BlElementAlignment class >> horizontal [
 
 { #category : #'class initialization' }
 BlElementAlignment class >> initialize [
-	super initialize.
+	"All subclasses duplicate this method to initialize singletons on load.
+
+	Compile in subclasses with:
 	
+	self allSubclassesDo: [ :c | (c classSide includesSelector: #initialize) ifFalse: [ c classSide compile: 'initialize
+
+	self initializeSingletons' classified: 'class initialization' ]  ].
+	"
+
+
+	self initializeSingletons
+]
+
+{ #category : #'class initialization' }
+BlElementAlignment class >> initializeSingletons [
+
 	start := BlStartAlignment new.
 	middle := BlMiddleAlignment new.
 	end := BlEndAlignment new.
@@ -64,6 +78,11 @@ BlElementAlignment class >> initialize [
 { #category : #factory }
 BlElementAlignment class >> left [
 	^ self horizontal class left
+]
+
+{ #category : #factory }
+BlElementAlignment class >> middle [
+	^ middle
 ]
 
 { #category : #factory }

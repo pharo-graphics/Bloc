@@ -13,10 +13,10 @@ Class {
 	#traits : 'TBlTransformable',
 	#classTraits : 'TBlTransformable classTrait',
 	#instVars : [
-		'transformation',
 		'fromMatrix',
 		'toMatrix',
-		'isAbsolute'
+		'isAbsolute',
+		'elementTransformation'
 	],
 	#category : #'Bloc-Animation-Animation'
 }
@@ -53,66 +53,77 @@ BlTransformAnimation class >> translate: aVector [
 
 { #category : #builder }
 BlTransformAnimation >> absolute [
+
 	isAbsolute := true
 ]
 
 { #category : #pulse }
 BlTransformAnimation >> applyValue: anElementTransformation [
+
 	self target transformation: anElementTransformation
 ]
 
-{ #category : #pulse }
+{ #category : #'private - running' }
 BlTransformAnimation >> initStart [
+
 	super initStart.
 
-	isAbsolute
-		ifTrue: [ transformation := transformation asCachedTransformation ]
-		ifFalse: [
-			| aCompositeTransformation |
-			aCompositeTransformation := BlElementCompositeTransformation new.
-			aCompositeTransformation add: self target transformation asElementTransformation.
-			aCompositeTransformation add: transformation.
-			transformation := aCompositeTransformation asCachedTransformation ].
-	
-	"matrix depends on computed layout bounds, we should manually trigger layout recomputation"
-	self target space isLayoutRequested
-		ifTrue: [ self target space doLayout ].
-	
-	transformation bounds: self target bounds inLocal asRectangle.
+	isAbsolute ifFalse: [
+		elementTransformation := BlElementCompositeTransformation new
+			                         add:
+				                         self target transformation
+					                         asElementTransformation;
+			                         add:
+				                         elementTransformation
+					                         asElementTransformation;
+			                         yourself ].
+	elementTransformation := elementTransformation asCachedTransformation.
 
-	fromMatrix := self target transformation matrix.
-	toMatrix := transformation matrix
+	"matrix depends on computed layout bounds, we should manually trigger layout recomputation"
+	
+	(self target space isNotNil and: [
+		self target space isLayoutRequested ]) ifTrue: [
+		self target space doLayout ].
+
+	elementTransformation boundingRectangle:
+		self target bounds inLocal asRectangle.
+
+	"Calculate matrix only on start of first loop"
+	fromMatrix ifNil: [
+		fromMatrix := self target transformation matrix copy.
+		toMatrix := elementTransformation matrix ]
 ]
 
 { #category : #initialization }
 BlTransformAnimation >> initialize [
+
 	super initialize.
-	
+
 	isAbsolute := false.
-	transformation := BlElementLocalTransformation new
+	elementTransformation := BlElementLocalTransformation new
 ]
 
 { #category : #builder }
 BlTransformAnimation >> relative [
+
 	isAbsolute := false
 ]
 
 { #category : #transformations }
 BlTransformAnimation >> transformation [
-	<return: #BlElementTransformation>
 
-	^ transformation
+	^ elementTransformation
 ]
 
 { #category : #transformations }
-BlTransformAnimation >> transformation: anElementTransformation [
-	transformation := anElementTransformation
+BlTransformAnimation >> transformation: aBlElementTransformation [
+
+	elementTransformation := aBlElementTransformation
 ]
 
 { #category : #pulse }
-BlTransformAnimation >> valueForStep: aDelta [
-	
-	"we should recompute destination matrix every step because transformation origins may have changed"
-	toMatrix := (transformation bounds: self target bounds inLocal asRectangle) matrix.
-	^ BlElementAbsoluteTransformation matrix: (fromMatrix interpolate: aDelta to: toMatrix)
+BlTransformAnimation >> valueForStep: aNumber [
+
+	^ BlElementAbsoluteTransformation matrix:
+		  (fromMatrix interpolate: aNumber to: toMatrix)
 ]

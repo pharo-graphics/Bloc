@@ -1,33 +1,36 @@
 Class {
 	#name : #BlSingleKeyCombinationExamples,
-	#superclass : #BlKeyCombinationExamples,
+	#superclass : #BlKeyCombinationExamplesTest,
 	#category : #'Bloc-Examples-KeyBinding'
 }
 
 { #category : #'examples - combination' }
-BlSingleKeyCombinationExamples >> arrowLeftCombination [
-	<gtExample>
+BlSingleKeyCombinationExamples >> testArrowLeftCombination [
+
+	<sampleInstance>
 	| aKeyCombination |
-	
 	aKeyCombination := self arrowLeft asKeyCombination.
 	self assert: (aKeyCombination isKindOf: BlSingleKeyCombination).
 	self assert: aKeyCombination key equals: self arrowLeft.
-	
+
 	^ aKeyCombination
 ]
 
 { #category : #'examples - store' }
-BlSingleKeyCombinationExamples >> storeArrowLeftCombination [
-	<gtExample>
+BlSingleKeyCombinationExamples >> testStoreArrowLeftCombination [
+
+	<sampleInstance>
 	| aKeyCombination aStoreString aRestoredKeyCombination |
-	
-	aKeyCombination := self arrowLeftCombination.
+	aKeyCombination := self testArrowLeftCombination.
 	aStoreString := aKeyCombination storeString.
-	
-	self assert: aStoreString equals: '(BlKeyboardKey new setName: #ArrowLeft; setValue: nil) asKeyCombination'.
-	
+
+	self
+		assert: aStoreString
+		equals:
+		'(BlKeyboardKey new setName: #ArrowLeft; setValue: nil) asKeyCombination'.
+
 	aRestoredKeyCombination := Object evaluate: aStoreString.
 	self assert: aRestoredKeyCombination equals: aKeyCombination.
-	
+
 	^ aStoreString
 ]

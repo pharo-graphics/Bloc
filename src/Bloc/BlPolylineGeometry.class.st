@@ -23,22 +23,38 @@ BlPolylineGeometry class >> vertices: aCollection [
 	^ self new vertices: aCollection
 ]
 
-{ #category : #converting }
-BlPolylineGeometry >> asElement [
-	^ super asElement
-		background: Color transparent;
-		outskirts: BlOutskirts centered
+{ #category : #'geometry testing' }
+BlPolylineGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
+	"Answer whether aPoint is contained by this geometry.
+	
+	Based on RSPolyline>>#basicIncludesPoint:"
+
+	vertices overlappingPairsDo: [ :a :b | 
+		(aPoint onLineFrom: a to: b within: aBlElement border width / 2) 
+			ifTrue: [ ^ true ] ].
+	^ false
 ]
 
 { #category : #'geometry bounds' }
-BlPolylineGeometry >> geometryBounds: aBounds [
+BlPolylineGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
-	<return: #BlBounds>
 
-	^ aBounds
+	^ aBlBounds
 		origin: self vertices min
 		corner: self vertices max
+]
+
+{ #category : #testing }
+BlPolylineGeometry >> hasCaps [
+
+	^ true
+]
+
+{ #category : #testing }
+BlPolylineGeometry >> hasJoins [
+
+	^ vertices size > 2
 ]
 
 { #category : #geometry }

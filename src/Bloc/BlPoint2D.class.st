@@ -17,7 +17,6 @@ BlPoint2D class >> x: aX y: aY [
 { #category : #comparing }
 BlPoint2D >> < aPoint [
 	"Answer whether the receiver is above and to the left of aPoint."
-	<return: #Boolean>
 
 	^ x < aPoint x and: [ y < aPoint y ]
 ]

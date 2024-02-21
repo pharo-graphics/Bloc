@@ -29,10 +29,12 @@ Class {
 
 { #category : #'window - properties' }
 BlMockedHostSpace >> borderless [
-	"Return true if underlying window is now borderless, false otherwise"
-	<return: #Boolean>
-	
-	^ borderless
+
+	self
+		deprecated: 'Use isBorderless instead of current one'
+		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
+
+	^ self isBorderless
 ]
 
 { #category : #'window - properties' }
@@ -82,8 +84,7 @@ BlMockedHostSpace >> defaultPhysicalSize [
 
 { #category : #'host space - geometry' }
 BlMockedHostSpace >> densityDpi [
-	"Return the screen density expressed as dots-per-inch"
-	<return: #Number>
+	"Return the screen density expressed as dots-per-inch (a float)"
 	
 	^ densityDpi
 ]
@@ -95,11 +96,12 @@ BlMockedHostSpace >> densityDpi: aNumber [
 
 { #category : #'window - properties' }
 BlMockedHostSpace >> fullscreen [
-	"Return true if an underlying window is in fullscreen mode,
-	false otherwise"
-	<return: #Boolean>
 
-	^ isFullscreen
+	self
+		deprecated: 'Use isFullscreen instead of current one'
+		transformWith: '`@rcv fullscreen' -> '`@rcv isFullscreen'.
+
+	^ self isFullscreen
 ]
 
 { #category : #'window - properties' }
@@ -112,11 +114,12 @@ BlMockedHostSpace >> fullscreen: aBoolean [
 
 { #category : #'window - properties' }
 BlMockedHostSpace >> fullsize [
-	"Return true if an underlying window is in fullsize mode,
-	false otherwise"
-	<return: #Boolean>
 
-	^ isFullsize
+	self
+		deprecated: 'Use isFullsize instead of current one'
+		transformWith: '`@rcv fullsize' -> '`@rcv isFullsize'.
+		
+	^ self isFullsize
 ]
 
 { #category : #'window - properties' }
@@ -166,6 +169,27 @@ BlMockedHostSpace >> initialize [
 	renderCount := 0
 ]
 
+{ #category : #'window - properties' }
+BlMockedHostSpace >> isBorderless [
+	"Return true if underlying window is now borderless, false otherwise"
+	
+	^ borderless
+]
+
+{ #category : #'window - properties' }
+BlMockedHostSpace >> isFullscreen [
+	"Return true if an underlying window is in fullscreen mode, false otherwise."
+
+	^ isFullscreen
+]
+
+{ #category : #'window - properties' }
+BlMockedHostSpace >> isFullsize [
+	"Return true if an underlying window is in fullsize mode, false otherwise."
+
+	^ isFullsize
+]
+
 { #category : #'host space - testing' }
 BlMockedHostSpace >> isVisible [
 	"Return true if underlying window is shown, false otherwise.
@@ -181,7 +205,6 @@ BlMockedHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
-	<return: #FensterLogicalSize>
 
 	^ logicalSize
 ]
@@ -231,7 +254,6 @@ BlMockedHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
 	This size may differ from the logical size on high dpi (retina) screens.
 	In most cases physical size is x2 larger than logical size on retina screens."
-	<return: #FensterPhysicalSize>
 
 	^ physicalSize
 ]
@@ -257,7 +279,7 @@ BlMockedHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
 
 	renderCount := renderCount + 1.
-	aSpace clearDirtyAreas
+	aSpace clearDirtyElements
 ]
 
 { #category : #'host space - accessing' }

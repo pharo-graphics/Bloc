@@ -37,6 +37,30 @@ BlAnnulusSectorGeometry >> center [
 	^ self extent / 2.0
 ]
 
+{ #category : #'geometry testing' }
+BlAnnulusSectorGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
+	"Answer whether aPoint is contained by this geometry.
+
+	Adapted from RSPieSlice>>#preciseIncludesPoint:"
+
+	| p d n a b |
+	
+	"Check if distance is between right interval"
+	p := aPoint - self center.
+	d := p distanceTo: 0.0@0.0.
+	(d between: self absoluteInnerRadius and: self absoluteOuterRadius)
+		ifFalse: [ ^ false ].
+
+	"Check the angle"
+	n := p angle radiansToDegrees % 360.
+	a := self startAngle % 360.
+	b := self endAngle % 360.
+
+	^ a < b
+		ifTrue: [ n between: a and: b ]
+		ifFalse: [ a <= n or: [ n <= b ] ]
+]
+
 { #category : #accessing }
 BlAnnulusSectorGeometry >> endAngle [
 	^ endAngle
@@ -46,6 +70,18 @@ BlAnnulusSectorGeometry >> endAngle [
 BlAnnulusSectorGeometry >> endAngle: anAngleInDegrees [
 	endAngle := anAngleInDegrees.
 	self releaseCache
+]
+
+{ #category : #testing }
+BlAnnulusSectorGeometry >> hasCaps [
+
+	^ false
+]
+
+{ #category : #testing }
+BlAnnulusSectorGeometry >> hasJoins [
+
+	^ true
 ]
 
 { #category : #initialization }

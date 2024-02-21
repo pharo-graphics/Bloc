@@ -16,6 +16,12 @@ BlCompositeAlignment class >> horizontal: aHorizontalAlignent vertical: aVertica
 		yourself
 ]
 
+{ #category : #'class initialization' }
+BlCompositeAlignment class >> initialize [
+
+	self initializeSingletons
+]
+
 { #category : #factory }
 BlCompositeAlignment >> directed: aBlLayoutDirection [
 	direction := aBlLayoutDirection

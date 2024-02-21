@@ -8,6 +8,12 @@ Class {
 	#category : #'Bloc-Layouts-Support'
 }
 
+{ #category : #accessing }
+BlLayoutRightToLeft >> inverted [
+
+	^ self class leftToRight
+]
+
 { #category : #testing }
 BlLayoutRightToLeft >> isLeftToRight [
 	^ false

@@ -8,27 +8,22 @@ Class {
 	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : #metadata }
-BlOnceLayoutTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlOnceLayoutExamples'
-]
-
 { #category : #tests }
 BlOnceLayoutTest >> testOnceLinearLayoutExact [
-	<gtExample>
+
+	<sampleInstance>
+	<demo>
 	| aContainer aChildA aChildB aChildC |
 	aContainer := self parentWithFixedSize.
-	aContainer
-		layout: (BlOnceLayout on: (BlLinearLayout vertical cellSpacing: 10)).
+	aContainer layout:
+		(BlOnceLayout on: (BlLinearLayout vertical cellSpacing: 10)).
 	aChildA := self childExact: 150 @ 80.
 	aChildB := self childExact: 250 @ 80.
 	aChildC := self childExact: 200 @ 80.
-	aContainer
-		addChildren:
-			{aChildA.
+	aContainer addChildren: {
+			aChildA.
 			aChildB.
-			aChildC}.
+			aChildC }.
 	aContainer forceLayout.
 	self assert: aContainer layout isStopped.
 	self
@@ -69,19 +64,20 @@ BlOnceLayoutTest >> testOnceLinearLayoutExact [
 
 { #category : #tests }
 BlOnceLayoutTest >> testOnceLinearLayoutMatchParent [
-	<gtExample>
+
+	<sampleInstance>
+	<demo>
 	| aContainer aChildA aChildB aChildC |
 	aContainer := self parentWithFixedSize.
-	aContainer
-		layout: (BlOnceLayout on: (BlLinearLayout vertical cellSpacing: 15)).
+	aContainer layout:
+		(BlOnceLayout on: (BlLinearLayout vertical cellSpacing: 15)).
 	aChildA := self testChildElementMatchingParent.
 	aChildB := self testChildElementMatchingParent.
 	aChildC := self testChildElementMatchingParent.
-	aContainer
-		addChildren:
-			{aChildA.
+	aContainer addChildren: {
+			aChildA.
 			aChildB.
-			aChildC}.
+			aChildC }.
 	aContainer forceLayout.
 	self assert: aContainer layout isStopped.
 	self

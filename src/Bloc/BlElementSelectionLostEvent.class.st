@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #'api - enable / disable' }
+BlElementSelectionLostEvent class >> disableIn: anObject [
+	anObject disableSelectionLost
+]
+
+{ #category : #'api - enable / disable' }
 BlElementSelectionLostEvent class >> enableIn: anObject [
 	anObject enableSelectionLost
 ]

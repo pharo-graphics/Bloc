@@ -3,7 +3,7 @@ I provide a solution for handling the opening of the debugger that supports both
 
 I assume there is only one UI Process either in Bloc or Morphic. If the error happened in either one of these processes, I restart the correct one. If both Bloc and Morphic have two distinct UI processes I will not work correctly.
 
-Normally I should only be used when running Bloc natively. When running Bloc using inside the Morphic UI process the a {{gtClass:MorphicUIManager}} can be used instead.
+Normally I should only be used when running Bloc natively. When running Bloc using inside the Morphic UI process the a `MorphicUIManager` can be used instead.
 However for now I can also be used to handle just the case of the Morhic UI process. Later I should be simplified to take into account only the Bloc UI process.
 
 "
@@ -413,22 +413,6 @@ BlBlocUIManager >> multiLineRequest: queryString initialAnswer: defaultAnswer an
 			answerHeight}
 ]
 
-{ #category : #events }
-BlBlocUIManager >> onPrimitiveError: aString [ 
-	| message |
-
-	message := String
-				streamContents: [:s | 
-					| context |
-					s nextPutAll: '*** System error handling failed ***'.
-					s cr; nextPutAll: aString.
-					context := thisContext sender sender.
-					20
-						timesRepeat: [context == nil
-								ifFalse: [s cr; print: (context := context sender)]]].
-	Smalltalk tools emergencyDebugger askForEmergencyEvaluatorOrExitWithText: message.
-]
-
 { #category : #services }
 BlBlocUIManager >> proceed: aStringOrText title: aString [
 	^ BlBlocUIManagerNotification
@@ -530,7 +514,6 @@ BlBlocUIManager >> resumeUIProcess: aProcess [
 
 { #category : #debug }
 BlBlocUIManager >> spawnNewBlocProcess: aUniverse [
-	aUniverse requestStopPulsation.
 	aUniverse hostClass forceStartNewUIProcess
 ]
 

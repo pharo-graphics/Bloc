@@ -22,29 +22,67 @@ Class {
 	#superclass : #Object,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
+	#classVars : [
+		'PreferableHandlerRegistryClass'
+	],
 	#category : #'Bloc-Events-Dispatcher'
 }
 
-{ #category : #accessing }
-BlHandlerRegistry class >> availableRegistryClasses [
-	<return: #Collection of: #'BlHandlerRegistry class'>
-
-	^ self allSubclasses select: [ :aRegistryClass | aRegistryClass isSupported ]
-]
-
 { #category : #testing }
 BlHandlerRegistry class >> isSupported [
-	<return: #Boolean>
 	
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : #printing }
 BlHandlerRegistry class >> label [
-	"Return a name of the registry, can be used for Settings frameworks"
-	<return: #String>
+	"Return a human-readable name to identify myself."
 
 	^ self subclassResponsibility
+]
+
+{ #category : #settings }
+BlHandlerRegistry class >> preferableHandlerRegistryClass [
+
+	^ PreferableHandlerRegistryClass ifNil: [
+		PreferableHandlerRegistryClass := self supportedRegistryClasses first ]
+]
+
+{ #category : #settings }
+BlHandlerRegistry class >> preferableHandlerRegistryClass: aBlHandlerRegistryClass [
+
+	PreferableHandlerRegistryClass := aBlHandlerRegistryClass
+]
+
+{ #category : #accessing }
+BlHandlerRegistry class >> priority [
+	"Return priority as positive number: The lower the value, the
+	more likely to be selected."
+
+	^ self subclassResponsibility
+]
+
+{ #category : #settings }
+BlHandlerRegistry class >> settingsOn: aBuilder [
+	<systemsettings>
+	
+	(aBuilder pickOne: #preferableHandlerRegistryClass)
+		parent: Bloc groupSymbolForBloc;
+		target: self;
+		order: 3;
+		label: 'Preferable event handler registry' ;
+		domainValues: (self supportedRegistryClasses
+			collect: [ :aClass | aClass label -> aClass ]);
+		description: 'Choose the class to be used for event handler registry'
+]
+
+{ #category : #settings }
+BlHandlerRegistry class >> supportedRegistryClasses [
+	"Answer all supported `BlHandlerRegistry` classes, sorted by their priority (lowest first)."
+
+	^ (self allSubclasses
+		select: [ :aRegistryClass | aRegistryClass isSupported ])
+		sort: [ :a :b | a priority < b priority ]
 ]
 
 { #category : #'api - adding / removing' }
@@ -99,7 +137,7 @@ BlHandlerRegistry >> hasHandler: anEventHandler [
 { #category : #'api - testing' }
 BlHandlerRegistry >> isEmpty [
 	"Return true if registry is empty (there are no handlers), false otherwise"
-	<return: #Boolean>
+	
 
 	^ self numberOfHandlers isZero
 ]

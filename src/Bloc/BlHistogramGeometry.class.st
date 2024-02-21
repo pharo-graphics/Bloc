@@ -4,7 +4,7 @@
 I represent a class of historgram-like geometry.
 {{gtExample:BlHistogramExamples>>#default|codeExpanded=false|previewShow=#gtLiveFor:|previewExpanded=true|previewHeight=100}}
 
-See {{gtClass:BlHistogramExamples}} for more examples
+See `BlHistogramExamples` for more examples
 
 "
 Class {

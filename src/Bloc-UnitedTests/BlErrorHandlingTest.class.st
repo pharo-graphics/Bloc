@@ -61,20 +61,27 @@ BlErrorHandlingTest >> sceneWith: aFaultyElement [
 
 	aSpace := BlSpace new.
 	aSpace host: BlMorphicWindowHost new.
-	aSpace addChild: aContainer.
+	aSpace root addChild: aContainer.
 	aSpace show.
-	aSpace pulse.
+
+	self assert: (BlSpace
+			pulseUntilEmptyTaskQueue: aSpace
+			timeout: 200 milliSeconds).
+
 	aSpace close.
 	aContainer removeFromParent.
+
+	self assert: (BlSpace
+			pulseUntilEmptyTaskQueue: aSpace
+			timeout: 200 milliSeconds).
 
 	^ aContainer
 ]
 
 { #category : #tests }
 BlErrorHandlingTest >> testSceneElementThatHasBrokenDrawing [
-	<gtExample>
-	<noTest>
-
+	<sampleInstance>
+	
 	| aFaultyElement theErrors aSceneElement |
 	self skip.
 	
@@ -97,8 +104,7 @@ BlErrorHandlingTest >> testSceneElementThatHasBrokenDrawing [
 
 { #category : #tests }
 BlErrorHandlingTest >> testSceneElementThatHasBrokenDrawingAndOnLayout [
-	<gtExample>
-	<noTest>
+	<sampleInstance>
 
 	| aFaultyElement theErrors aSceneElement |
 	self skip.
@@ -130,8 +136,7 @@ BlErrorHandlingTest >> testSceneElementThatHasBrokenDrawingAndOnLayout [
 
 { #category : #tests }
 BlErrorHandlingTest >> testSceneElementThatHasBrokenOnLayout [
-	<gtExample>
-	<noTest>
+	<sampleInstance>
 
 	| aSceneElement aFaultyElement theErrors |
 	self skip.

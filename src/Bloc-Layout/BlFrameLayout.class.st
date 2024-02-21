@@ -4,7 +4,7 @@
 I am a layout designed to block out an area on the screen to display a single child. 
 
 I should be mainly used to display a single child, as it can be difficult to display multiple children at different positions on the screen without overlapping each other. 
-However, elements with a frame layout can have multiple child elements. The `'weight'` and `'alignment'` attributes can be used to control the position of children. However, weight only works when the child matches the parent; if it fits content or has an exact size, the weight attribute is ignored. I rely on custom layout constraints for setting  attributes (see {{gtClass:BlFrameLayoutConstraints}}, {{gtClass:BlFrameLayoutConstraintsHorizontal}} and {{gtClass:BlFrameLayoutConstraintsVertical}}).
+However, elements with a frame layout can have multiple child elements. The `'weight'` and `'alignment'` attributes can be used to control the position of children. However, weight only works when the child matches the parent; if it fits content or has an exact size, the weight attribute is ignored. I rely on custom layout constraints for setting  attributes (see `BlFrameLayoutConstraints`, `BlFrameLayoutConstraintsHorizontal` and `BlFrameLayoutConstraintsVertical`).
 
 I position each child element based on the top left of the screen. Child elements are stacked on top of each other, with the most recently added child on top. An important property is that the location of a child is independent from the location of other children. 
 
@@ -17,7 +17,7 @@ The alignment attribute controls the position of children within a FrameLayout. 
 - horizontally children can be aligned to left, center or right;
 - vertically children can be aligned to top, center or bottom.
 
-For example, below we align a fixed-size child horizontally to the right and vertically to the bottom. Alignment is a constraint specific to frame layouts, as it's not relevant to all layouts. To access frame-specific contraints, we send {{gtMethod:BlLayoutCommonConstraints>>#frame}} to the current constraint object, which returns an instance of {{gtClass:BlFrameLayoutConstraints}} that we can use to set the desired alignment. Other constraints like the size of an element are common to all layouts and can be set directly without requesting a specific constraint object. Both cases are illustrated by the following example:
+For example, below we align a fixed-size child horizontally to the right and vertically to the bottom. Alignment is a constraint specific to frame layouts, as it's not relevant to all layouts. To access frame-specific contraints, we send `BlLayoutCommonConstraints>>#frame` to the current constraint object, which returns an instance of `BlFrameLayoutConstraints` that we can use to set the desired alignment. Other constraints like the size of an element are common to all layouts and can be set directly without requesting a specific constraint object. Both cases are illustrated by the following example:
 {{gtExample:BlFrameLayoutSingleChildExamples>>#elementDocumentationWithOneExactChildAlignBottomRightInExactParent|previewExpanded|previewHeight=400}}
 
 When using multiple children, if we do not specify any alignment they will be placed in the top-left corner in the order in which they were added to the parent.
@@ -68,9 +68,9 @@ However, this will not work when the parent uses ""fit content"" and the child u
 
 ## More examples
 For more example on how to use frame layouts, check out these classes:
-- {{gtClass:BlFrameLayoutSingleChildExamples}}
-- {{gtClass:BlFrameLayoutMultipleChildrenExamples}}
-- {{gtClass:BlFrameLayoutCompositionExamples}}
+- `BlFrameLayoutSingleChildExamples`
+- `BlFrameLayoutMultipleChildrenExamples`
+- `BlFrameLayoutCompositionExamples`
 
 
 "
@@ -179,6 +179,7 @@ BlFrameLayout >> measureParentNode: aParentNode [
 { #category : #private }
 BlFrameLayout >> measurementSpecFor: aChildNode parentExtent: aParentExtent [
 	<return: #BlExtentMeasurementSpec>
+	
 	| aParentWidth aParentHeight childWidthMeasureSpec childHeightMeasureSpec |
 
 	aParentWidth := aParentExtent x.
@@ -188,7 +189,7 @@ BlFrameLayout >> measurementSpecFor: aChildNode parentExtent: aParentExtent [
 		ifTrue: [ 
 			| weight width |
 			weight := (aChildNode constraints frame horizontal weight max: 0.0).
-			width := ((aParentWidth - aChildNode parent padding width - aChildNode margin width) * weight) max: 0.0.
+			width := ((aParentWidth - aChildNode parent padding width - aChildNode margin width) * weight) max: aChildNode constraints minWidth.
 			childWidthMeasureSpec := BlMeasurementSpec exact: width ]
 		ifFalse: [ 
 			childWidthMeasureSpec := self
@@ -200,7 +201,7 @@ BlFrameLayout >> measurementSpecFor: aChildNode parentExtent: aParentExtent [
 		ifTrue: [ 
 			| weight height |
 			weight := (aChildNode  constraints frame vertical weight max: 0.0).
-			height := ((aParentHeight - aChildNode parent padding height - aChildNode margin height) * weight) max: 0.0.
+			height := ((aParentHeight - aChildNode parent padding height - aChildNode margin height) * weight) max: aChildNode constraints minHeight.
 			childHeightMeasureSpec := BlMeasurementSpec exact: height ]
 		ifFalse: [ 
 			childHeightMeasureSpec := self

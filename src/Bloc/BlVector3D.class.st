@@ -88,7 +88,6 @@ BlVector3D >> add3D: aVector3D [
 { #category : #converting }
 BlVector3D >> asScale3D [
 	"Return a 3D vector representing a scale factor"
-	<return: #BlVector3D>
 	
 	^ self
 ]
@@ -96,7 +95,6 @@ BlVector3D >> asScale3D [
 { #category : #converting }
 BlVector3D >> asTranslate3D [
 	"Return a 3D vector representing a translation vector"
-	<return: #BlVector3D>
 
 	^ self
 ]
@@ -108,7 +106,6 @@ BlVector3D >> hash [
 
 { #category : #testing }
 BlVector3D >> isOne [
-	<return: #Boolean>
 	
 	^ (self x closeTo: 1) and: [ (self y closeTo: 1) and: [ self z closeTo: 1 ] ]
 ]
@@ -132,18 +129,17 @@ BlVector3D >> negated [
 
 { #category : #'vector functions' }
 BlVector3D >> normalized [
-	<return: #BlVector>
+
 	| aLength |
 	
 	aLength := self length.
-	self
-		assert: [ aLength isZero not ]
-		description: [ 'It is not possible to normalize a zero vector' ].
+	aLength isZero ifTrue: [
+		self error: 'It is not possible to normalize a zero-length vector' ].
 
 	^ self class
-		x: self x / aLength
-		y: self y / aLength
-		z: self z / aLength
+		x: x / aLength
+		y: y / aLength
+		z: z / aLength
 ]
 
 { #category : #printing }

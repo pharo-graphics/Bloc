@@ -1,7 +1,7 @@
 Class {
 	#name : #BlFlowLayoutHorizontal,
 	#superclass : #BlFlowLayoutOrientation,
-	#category : 'Bloc-Layout-Flow-Utilities'
+	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
 { #category : #measuring }

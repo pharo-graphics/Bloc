@@ -35,7 +35,8 @@ BlMorphicSteppingHost class >> start [
 
 { #category : #'private - stepping' }
 BlMorphicSteppingHost class >> step [
-	(BlParallelUniverse forHost: self) pulse
+	[(BlParallelUniverse forHost: self) pulse] 
+		on: Exception do: [ :e | self start. e pass ]
 ]
 
 { #category : #'api - lifecycle' }
@@ -52,5 +53,6 @@ BlMorphicSteppingHost class >> uiProcessDo: aBlock [
 
 { #category : #'host - testing' }
 BlMorphicSteppingHost >> supportsFormSurface [
+
 	^ true
 ]

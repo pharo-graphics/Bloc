@@ -1,7 +1,7 @@
 "
-I am a {{gtClass:BlMouseEvent}}.
+I am a `BlMouseEvent`.
 I am a mouse wheel scroll event.
-I use {{gtClass:BlVector2D}}, indicating the user scroll direction and length.
+I use `BlVector2D`, indicating the user scroll direction and length.
 ## Examples
 ### 45 Degrees
 {{gtExample:BlMouseWheelEventExamples>>#mouseWheelEvent_45degrees|codeExpanded=false|previewExpanded=true}}
@@ -72,7 +72,6 @@ BlMouseWheelEvent >> isScrollDown [
 	"We scroll down when direction vector has negative y component,
 	because the content should move in the same direction as a hand on a touchpad.
 	When hand is moved up (down scroll) the content that is below the viewport should become visible"
-	<return: #Boolean>
 
 	^ vector y < 0
 ]
@@ -99,10 +98,10 @@ BlMouseWheelEvent >> isScrollRight [
 
 { #category : #testing }
 BlMouseWheelEvent >> isScrollUp [
-	"We scroll up when direction vector has positive y component,
+	"Return if we scroll up.
+	We scroll up when direction vector has positive y component,
 	because the content should move in the same direction as a hand on a touchpad.
 	When hand is moved down (up scroll) the content that is above the viewport should become visible"
-	<return: #Boolean>
 
 	^ vector y > 0
 ]

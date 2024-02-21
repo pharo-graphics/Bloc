@@ -8,23 +8,30 @@ Class {
 
 { #category : #converting }
 BlElementGeometry >> asElement [
-	"Create an appropriate element with me as its geometry.
-	By default create an instance of the basic BlElement simply setting its
-	geometry to me. Subclasses may be converted to more specific elements"
-	<return: #BlElement>
+	"Answer an element with me as its geometry, with appropriate default values."
 
-	^ BlElement new
-		size: self extent;
-		background: (Color gray alpha: 0.4);
-		border: (BlBorder builder paint: Color gray; width: 2; build);
-		geometry: self
+	| anElement |
+	anElement := BlElement new
+		geometry: self;
+		border: (BlBorder paint: Color gray width: 2);
+		yourself.
+
+	self hasCaps
+		ifTrue: [
+			anElement
+				background: Color transparent;
+				outskirts: BlOutskirts centered ]
+		ifFalse: [
+			anElement
+				background: (Color gray alpha: 0.4) ].
+
+	^ anElement
 ]
 
 { #category : #'geometry testing' }
-BlElementGeometry >> containsPoint: aPoint in: aBlElement [
-	"Note: we have to pass BlElement in order to give geometry a chance to use element properties
-	as as border during the testing process"
-	<return: #Boolean>
+BlElementGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
+	"Answer whether aPoint is contained by this geometry.
+	Assume aPoint is already inside the geometry bounds rectangle."
 	
 	^ self subclassResponsibility
 ]
@@ -35,6 +42,20 @@ BlElementGeometry >> geometryBounds: aBounds of: aBlElement [
 	@see #geometryBounds for more info"
 	<return: #BlBounds>
 	
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
+BlElementGeometry >> hasCaps [
+	"Answer whether my path has caps, i.e. if I include an open line."
+
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
+BlElementGeometry >> hasJoins [
+	"Answer whether I have joins, i.e. my path presents edges between a segment and another."
+
 	^ self subclassResponsibility
 ]
 
@@ -58,4 +79,13 @@ BlElementGeometry >> releaseStrokedBoundsCache [
 { #category : #serialization }
 BlElementGeometry >> storeOn: aStream [
 	aStream nextPutAll: self class name; space; nextPutAll: 'new'
+]
+
+{ #category : #'visual bounds' }
+BlElementGeometry >> strokedBounds: aBlBounds of: anElement [
+	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
+	Dispatch through outskirts first"
+	<return: #BlBounds>
+	
+	^ self subclassResponsibility
 ]

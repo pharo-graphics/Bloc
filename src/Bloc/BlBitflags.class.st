@@ -237,7 +237,6 @@ BlBitflags >> initializeWith: aValue [
 
 { #category : #testing }
 BlBitflags >> isEmpty [
-	<return: #Boolean>
 
 	^ self value isZero
 ]

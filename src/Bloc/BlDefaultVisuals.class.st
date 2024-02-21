@@ -136,9 +136,10 @@ BlDefaultVisuals >> elevation [
 { #category : #accessing }
 BlDefaultVisuals >> elevation: aBlElevation [
 	"Change the elevation and return new visuals to be used instead of the previous one (not necessarily a new instance)"
-	<return: #BlElementVisuals>
 
-	^ BlCustomVisuals new elevation: aBlElevation
+	^ BlCustomVisuals new
+		  elevation: aBlElevation;
+		  yourself
 ]
 
 { #category : #accessing }
@@ -152,11 +153,6 @@ BlDefaultVisuals >> focusability: aBlFocusability [
 	<return: #BlElementVisuals>
 
 	^ BlCustomVisuals new focusability: aBlFocusability
-]
-
-{ #category : #accessing }
-BlDefaultVisuals >> focused [
-	^ self defaultFocused
 ]
 
 { #category : #accessing }
@@ -180,17 +176,23 @@ BlDefaultVisuals >> geometry: aBlElementGeometry [
 	^ BlCustomVisuals new geometry: aBlElementGeometry
 ]
 
+{ #category : #testing }
+BlDefaultVisuals >> isFocused [
+
+	^ self defaultFocused
+]
+
 { #category : #accessing }
 BlDefaultVisuals >> mouseCursor [
 	^ self defaultMouseCursor
 ]
 
 { #category : #accessing }
-BlDefaultVisuals >> mouseCursor: aBlCursor [
+BlDefaultVisuals >> mouseCursor: aCursor [
 	"Change the mouse cursor and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
-	^ BlCustomVisuals new mouseCursor: aBlCursor
+	^ BlCustomVisuals new mouseCursor: aCursor
 ]
 
 { #category : #accessing }

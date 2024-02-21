@@ -1,6 +1,8 @@
 Class {
 	#name : #BlDevScripterStep,
 	#superclass : #Object,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'state',
 		'label',
@@ -76,7 +78,8 @@ BlDevScripterStep >> playOn: aScripter [
 ]
 
 { #category : #actions }
-BlDevScripterStep >> playOnExecutor: anExecutor [ 
+BlDevScripterStep >> playOnExecutor: anExecutor [
+
 	self playOn: anExecutor scripter
 ]
 
@@ -175,6 +178,6 @@ BlDevScripterStep >> target [
 
 { #category : #testing }
 BlDevScripterStep >> wasExecuted [
-	<return: #Boolean>
+
 	^ state wasExecuted
 ]

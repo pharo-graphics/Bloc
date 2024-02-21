@@ -17,8 +17,7 @@ BASpaceRenderer >> aeCanvas [
 BASpaceRenderer >> initializeForSurface: aBlHostRendererSurface and: aeCairoSurface [
 
 	aeCairoSurface deviceScale: aBlHostRendererSurface scaleFactor asPoint.
-
-	aeCanvas := 	AeCanvas newFor: aeCairoSurface.
+	aeCanvas := AeCanvas newFor: aeCairoSurface.
 
 	"On High DPI displays, high quality is not visible enough, and often 
 	much larger surface areas are painted."
@@ -31,7 +30,6 @@ BASpaceRenderer >> initializeForSurface: aBlHostRendererSurface and: aeCairoSurf
 BASpaceRenderer >> renderSpace: aBlSpace [
 	"Render a space and return a collection of damaged rectangles"
 
-	aeCanvas fullDraw: aBlSpace root.
-
+	aBlSpace aeFullDrawOn: aeCanvas.
 	^ #()
 ]

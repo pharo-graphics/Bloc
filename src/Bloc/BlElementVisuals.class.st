@@ -213,7 +213,12 @@ BlElementVisuals >> focusability: aBlFocusability [
 
 { #category : #accessing }
 BlElementVisuals >> focused [
-	^ self subclassResponsibility
+
+	self
+		deprecated: 'Use isFocused instead of current one'
+		transformWith: '`@rcv focused' -> '`@rcv isFocused'.
+
+	^ self isFocused
 ]
 
 { #category : #accessing }
@@ -237,13 +242,19 @@ BlElementVisuals >> geometry: aBlElementGeometry [
 	^ self subclassResponsibility
 ]
 
+{ #category : #testing }
+BlElementVisuals >> isFocused [
+
+	^ self subclassResponsibility
+]
+
 { #category : #accessing }
 BlElementVisuals >> mouseCursor [
 	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
-BlElementVisuals >> mouseCursor: aBlCursor [
+BlElementVisuals >> mouseCursor: aCursor [
 	"Change the mouse cursor and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>
 
