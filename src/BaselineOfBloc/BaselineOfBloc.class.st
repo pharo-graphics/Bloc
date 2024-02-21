@@ -80,7 +80,7 @@ BaselineOfBloc >> baseline: spec [
 			"Alexandrie canvas"
 			spec
 				baseline: 'Alexandrie' with: [
-					spec repository: 'github://pharo-graphics/Alexandrie:dev/src' ].
+					spec repository: 'github://pharo-graphics/Alexandrie:master/src' ].
 			spec
 				package: #'Bloc-Alexandrie' with: [
 					spec requires: #('Alexandrie' 'Bloc' 'Bloc-Text') ];
