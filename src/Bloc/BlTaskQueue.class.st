@@ -155,11 +155,12 @@ BlTaskQueue >> runOn: aSpace [
 	need to execute task within a lock."
 	theTasks ifNotNil: [
 		theTasks do: [ :aTask |
-			aTask setExecuting.
-			BlTaskExecutionSignal for: aTask block: [ aTask run ].
-			aTask requeueTaskAfterExecution
-				ifTrue: [ self requeue: aTask ]
-				ifFalse: [ aTask setComplete ] ] ]
+			(aTask
+				setExecuting;
+				run;
+				requeueTaskAfterExecution)
+					ifTrue: [ self requeue: aTask ]
+					ifFalse: [ aTask setComplete ] ] ]
 ]
 
 { #category : #accessing }
