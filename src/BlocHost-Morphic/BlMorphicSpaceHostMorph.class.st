@@ -23,7 +23,7 @@ BlMorphicSpaceHostMorph >> drawOn: aCanvas [
 		ifTrue: [ ^ self ].
 	hostSpace ifNotNil: [ 
 		aCanvas clipBy: self fullBounds during: [ :aClippedCanvas |
-			aClippedCanvas drawImage: spaceForm at: self position ] ]
+			aClippedCanvas drawFormSet: (FormSet extent: self extent depth: spaceForm depth forms: { spaceForm }) at: self position ] ]
 ]
 
 { #category : #geometry }
