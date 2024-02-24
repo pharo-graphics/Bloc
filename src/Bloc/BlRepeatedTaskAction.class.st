@@ -4,7 +4,6 @@ I am a repeated task that evaluates a block each time.
 Class {
 	#name : #BlRepeatedTaskAction,
 	#superclass : #BlRepeatedTask,
-	#classTraits : '{} + TraitedClass',
 	#instVars : [
 		'action'
 	],
