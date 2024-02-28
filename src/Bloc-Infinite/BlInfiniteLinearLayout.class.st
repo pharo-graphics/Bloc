@@ -1402,7 +1402,7 @@ BlInfiniteLinearLayout >> updateAnchorFromPendingData: anAnchorInfo state: aBlIn
 	anAnchorInfo coordinate: (shouldReverseLayout
 		ifTrue: [ self orientation endWithPadding - pendingScrollPositionOffset ]
 		ifFalse: [ self orientation startWithPadding + pendingScrollPositionOffset ]).
-'6' traceCr.			
+	
 	^ true
 ]
 
