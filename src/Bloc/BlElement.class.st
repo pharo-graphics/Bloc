@@ -2628,6 +2628,20 @@ BlElement >> markNeedsPaintFrom: anElement [
 					self space markNeedsPaint: self from: anElement ] ]
 ]
 
+{ #category : #'view - configuration' }
+BlElement >> maxHeight [
+
+	"get maxHeight in constraints"
+	^ self constraints maxHeight
+]
+
+{ #category : #'view - configuration' }
+BlElement >> maxHeight: aNumber [
+
+	"set maxHeight in constraints"
+	self constraintsDo: [ :c | c maxHeight: aNumber ]
+]
+
 { #category : #layout }
 BlElement >> measure: anExtentMeasurementSpec [
 	<return: #Point>
@@ -2730,6 +2744,20 @@ BlElement >> measuredWidth [
 	<return: #Number>
 	
 	^ self measuredBounds width
+]
+
+{ #category : #'view - configuration' }
+BlElement >> minHeight [
+
+	"get minHeight in constraints"
+	^ self constraints minHeight
+]
+
+{ #category : #'view - configuration' }
+BlElement >> minHeight: aNumber [
+
+	"set maxHeight in constraints"
+	self constraintsDo: [ :c | c minHeight: aNumber ]
 ]
 
 { #category : #accessing }

@@ -121,7 +121,7 @@ BlInfiniteLinearLayout >> computeExtraLayoutSpace [
 		ifFalse: [
 			anExtraForStart := anExtraSpace.
 			anExtraForEnd := 0 ].
-
+	
 	anExtraForStart := anExtraForStart + self orientation startWithPadding.
 	anExtraForEnd := anExtraForEnd + self orientation paddingEnd.
 
@@ -717,7 +717,7 @@ BlInfiniteLinearLayout >> layoutChildrenIn: aBlInfiniteRecycler state: aBlInfini
 	
 	(self hasPendingScrollPosition
 		and: [ aBlInfiniteState itemCount isZero ])
-			ifTrue: [ ^ self removeAndRecycleAllChildrenIn: aBlInfiniteRecycler ].
+			ifTrue: [^ self removeAndRecycleAllChildrenIn: aBlInfiniteRecycler ].
 
 	layoutState allowRecycling: false.
 	"resolve layout direction"
@@ -1381,23 +1381,20 @@ BlInfiniteLinearLayout >> updateAnchorFromPendingData: anAnchorInfo state: aBlIn
 
 	(aBlInfiniteState isPreLayout or: [ self hasPendingScrollPosition not ])
 		ifTrue: [ ^ false ].
-	
+
 	"validate scroll position"
 	(pendingScrollPosition between: 1 and: aBlInfiniteState itemCount)
 		ifFalse: [ 
 			pendingScrollPosition := NoPosition.
 			pendingScrollPositionOffset := self class invalidOffset.
 			^ false ].
-
 	"if child is visible, try to make it a reference child and ensure it is fully visible.
 	if child is not visible, align it depending on its virtual position."
 	anAnchorInfo position: pendingScrollPosition.
-	
 	pendingScrollPositionOffset = self class invalidOffset
 		ifTrue: [ 
 			self updateAnchorFromPendingDataInvalidOffset: anAnchorInfo.
 			^ true ].
-	
 	"override layout from end values for consistency"
 	anAnchorInfo layoutFromEnd: shouldReverseLayout.
 	
@@ -1405,7 +1402,7 @@ BlInfiniteLinearLayout >> updateAnchorFromPendingData: anAnchorInfo state: aBlIn
 	anAnchorInfo coordinate: (shouldReverseLayout
 		ifTrue: [ self orientation endWithPadding - pendingScrollPositionOffset ]
 		ifFalse: [ self orientation startWithPadding + pendingScrollPositionOffset ]).
-	
+'6' traceCr.			
 	^ true
 ]
 
@@ -1416,9 +1413,9 @@ BlInfiniteLinearLayout >> updateAnchorFromPendingDataInvalidOffset: anAnchorInfo
 	anElement := self childAtPosition: pendingScrollPosition.
 	anElement
 		"Item is not visible"
-		ifNotNil: [ self updateAnchor: anAnchorInfo fromChild: anElement ]
+		ifNotNil: [self updateAnchor: anAnchorInfo fromChild: anElement ]
 		"Item is visible"
-		ifNil: [
+		ifNil: [ 
 			self hasChildren
 				ifTrue: [ | aPosition |
 					aPosition := self childPositionOf: (self childAt: 1).

@@ -1024,23 +1024,9 @@ BlInfiniteElement >> maxFlingVelocity [
 	^ 8000
 ]
 
-{ #category : #'view - configuration' }
-BlInfiniteElement >> maxHeight: aNumber [
-
-	"set maxHeight in constraints"
-	self constraintsDo: [ :c | c maxHeight: aNumber ]
-]
-
 { #category : #'accessing - properties' }
 BlInfiniteElement >> minFlingVelocity [
 	^ 50
-]
-
-{ #category : #'view - configuration' }
-BlInfiniteElement >> minHeight: aNumber [
-
-	"set maxHeight in constraints"
-	self constraintsDo: [ :c | c minHeight: aNumber ]
 ]
 
 { #category : #notifying }
