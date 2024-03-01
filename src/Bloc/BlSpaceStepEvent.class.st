@@ -9,6 +9,12 @@ Class {
 }
 
 { #category : #accessing }
+BlSpaceStepEvent >> duration [
+
+	^ end - start
+]
+
+{ #category : #accessing }
 BlSpaceStepEvent >> end [
 	<return: #DateAndTime>
 
