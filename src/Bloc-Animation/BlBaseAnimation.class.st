@@ -158,8 +158,7 @@ BlBaseAnimation >> initialize [
 	
 	time := BlTime real.
 
-	self reset.
-	
+	self reset
 ]
 
 { #category : #testing }
