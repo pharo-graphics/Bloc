@@ -100,7 +100,7 @@ BlInfiniteElementDataSourceObserver >> onItemsRemoved: anEvent [
 { #category : #private }
 BlInfiniteElementDataSourceObserver >> triggerUpdateProcessor [
 
-	"infiniteElement postChildrenUpdater."
+	
 	(infiniteElement hasFixedSize and: [ infiniteElement isAttached ])
 		ifTrue: [ infiniteElement postChildrenUpdater ]
 		ifFalse: [
