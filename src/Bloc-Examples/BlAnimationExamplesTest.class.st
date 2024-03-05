@@ -7,7 +7,7 @@ DOES NOT WORK
 Class {
 	#name : #BlAnimationExamplesTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Animation'
+	#category : #'Bloc-Examples-Tasks'
 }
 
 { #category : #examples }

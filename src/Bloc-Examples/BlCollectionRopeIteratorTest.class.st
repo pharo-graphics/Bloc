@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlCollect
 Class {
 	#name : #BlCollectionRopeIteratorTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples'
+	#category : #'Bloc-Examples-Rope'
 }
 
 { #category : #running }
