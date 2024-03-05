@@ -1,7 +1,6 @@
 Class {
 	#name : #BlInfiniteDataSourceAddCommand,
-	#superclass : #BlInfiniteDataSourceStructuralChangeCommand,
-	#classTraits : 'TBlDebug classTrait',
+	#superclass : #BlInfiniteDataSourceCommand,
 	#category : #'Bloc-Infinite-DataSource'
 }
 

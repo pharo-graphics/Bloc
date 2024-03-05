@@ -11,8 +11,7 @@ Update command describes content or value change of one or multiple items in dat
 "
 Class {
 	#name : #BlInfiniteDataSourceCommand,
-	#superclass : #BlInfiniteCommand,
-	#classTraits : 'TBlDebug classTrait',
+	#superclass : #Object,
 	#instVars : [
 		'positionStart',
 		'itemCount'

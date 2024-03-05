@@ -24,8 +24,9 @@ BlInfiniteChildrenUpdateRunnable >> initializeWith: anInfiniteElement [
 	infiniteElement := anInfiniteElement
 ]
 
-{ #category : #running }
+{ #category : #'api - running' }
 BlInfiniteChildrenUpdateRunnable >> run [
+
 	(infiniteElement isFirstLayoutComplete not or: [
 		infiniteElement isLayoutRequested ])
 			"a layout request will happen, we should not do layout here."

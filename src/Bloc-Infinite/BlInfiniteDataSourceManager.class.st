@@ -283,7 +283,7 @@ BlInfiniteDataSourceManager >> onItemRangeChanged: aPositionStart itemCount: anI
 			 itemCount: anItemCount;
 			 yourself).
 
-	^ pendingCommands size = 1
+	^ pendingCommands notEmpty
 ]
 
 { #category : #'data source updates' }
@@ -301,7 +301,7 @@ BlInfiniteDataSourceManager >> onItemRangeInserted: aPositionStart itemCount: an
 			positionStart: aPositionStart;
 			itemCount: anItemCount).
 
-	^ pendingCommands size = 1
+	^ pendingCommands notEmpty
 ]
 
 { #category : #'data source updates' }
@@ -320,7 +320,7 @@ BlInfiniteDataSourceManager >> onItemRangeRemoved: aPositionStart itemCount: anI
 		itemCount: anItemCount;
 		yourself).
 		
-	^ pendingCommands size = 1
+	^ pendingCommands notEmpty
 ]
 
 { #category : #accessing }
@@ -341,7 +341,6 @@ BlInfiniteDataSourceManager >> preProcessCommandsIn: anInfiniteElement [
 
 	"In case of scrolling, only for item change (no add-remove-move). Check
 	if any of the visible items is affected and if not, just ignore the change."
-	'applyPendingCommandsOnPosition: ' trace. postponedCommands size trace.' ' trace. pendingCommands size traceCr.
 	pendingCommands do: [ :command |
 		command applyIn: anInfiniteElement.
 		self onCommandProcessed: command in: anInfiniteElement].

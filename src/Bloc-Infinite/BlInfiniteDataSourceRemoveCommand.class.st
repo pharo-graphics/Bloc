@@ -1,6 +1,6 @@
 Class {
 	#name : #BlInfiniteDataSourceRemoveCommand,
-	#superclass : #BlInfiniteDataSourceStructuralChangeCommand,
+	#superclass : #BlInfiniteDataSourceCommand,
 	#category : #'Bloc-Infinite-DataSource'
 }
 
