@@ -41,6 +41,7 @@ BlInfiniteScrollFlinger >> onNotFinished [
 
 { #category : #hooks }
 BlInfiniteScrollFlinger >> onPrepareToRun [
+
 	self scrollable consumePendingDataSourceCommands
 ]
 

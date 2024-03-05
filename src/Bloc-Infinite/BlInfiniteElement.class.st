@@ -280,31 +280,29 @@ BlInfiniteElement >> computeVerticalScrollRange [
 
 { #category : #'private - commands' }
 BlInfiniteElement >> consumePendingDataSourceCommands [
-	"I help to reflect data changes to the state.
+	" I'm sent before scrolling.
+	I help to reflect data changes to the state.
 	DataSource changes during a scroll may trigger a crash because scroll assumes no data change but data actually changed.
 	I consume all deferred changes to avoid that case."
 
 	(firstLayoutComplete not or: [ dataSourceChangedAfterLayout ])
 		ifTrue: [ ^ self dispatchLayout ].
-	
-	dataSourceManager hasPendingCommands
-		ifFalse: [ ^ self ].
+
+	dataSourceManager hasPendingCommands ifFalse: [ ^ self ].
 
 	"if it is only an item change (no add-remove-move) we can check
 	if any of the visible items is affected and if not, just ignore the change."
 	dataSourceManager hasOnlyUpdateCommand
-		ifTrue: [ 
+		ifTrue: [
 			self eatRequestLayout.
 			dataSourceManager preProcessCommandsIn: self.
-			layoutRequestEaten ifFalse: [ 
+			layoutRequestEaten ifFalse: [
 				self hasUpdatedChild
 					ifTrue: [ self dispatchLayout ]
-					"no need to layout, clean state"
-					ifFalse: [ dataSourceManager consumePostponedCommandsIn: self ] ].
+					ifFalse: [ "no need to layout, clean state"
+						dataSourceManager consumePostponedCommandsIn: self ] ].
 			self resumeRequestLayout: true ]
-		ifFalse: [
-			 dataSourceManager hasPendingCommands
-				ifTrue: [ self dispatchLayout ] ]
+		ifFalse: [ self dispatchLayout ]
 ]
 
 { #category : #accessing }
@@ -1108,38 +1106,6 @@ BlInfiniteElement >> offsetPositionRecordsForInsert: aStartPosition itemCount: a
 				state structureChanged: true ] ]
 		in: self.
 	self requestLayout
-]
-
-{ #category : #'private - commands' }
-BlInfiniteElement >> offsetPositionRecordsForMove: aFromPosition to: aToPosition [
-
-	| aStart anEnd anInBetweenOffset |
-	aFromPosition < aToPosition
-		ifTrue: [ 
-			aStart := aFromPosition.
-			anEnd := aToPosition.
-			anInBetweenOffset := -1 ]
-		ifFalse: [ 
-			aStart := aToPosition.
-			anEnd := aFromPosition.
-			anInBetweenOffset := 1 ].
-
-	childrenManager
-		unfilteredChildrenDo: [ :anElement | 
-			| anElementHolder |
-			anElementHolder := self elementHolderOf: anElement.
-			(anElementHolder position between: aStart and: anEnd) ifTrue: [ 
-				anElementHolder position = aFromPosition
-					ifTrue: [ 
-						anElementHolder
-							offsetPositionBy: aToPosition - aFromPosition
-							applyToPreLayout: false ]
-					ifFalse: [ 
-						anElementHolder
-							offsetPositionBy: anInBetweenOffset
-							applyToPreLayout: false ].
-				state structureChanged: true ] ]
-		in: self
 ]
 
 { #category : #'private - commands' }
