@@ -10,6 +10,15 @@ Class {
 	#category : #'BlocHost-OSWindow-SDL2'
 }
 
+{ #category : #cleanup }
+BlOSWindowSDL2Host class >> cleanUp [
+	"CleanUp Host"
+
+	self universe closeSpaces.
+	self stop.
+	self start
+]
+
 { #category : #'class initialization' }
 BlOSWindowSDL2Host class >> initialize [
 	PulseLoop := BlHostPulseLoop forHost: self
