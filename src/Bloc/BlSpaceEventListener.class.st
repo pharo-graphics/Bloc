@@ -1,8 +1,9 @@
+"
+I handle Bloc space events (`BlSpaceEvent`).
+"
 Class {
 	#name : #BlSpaceEventListener,
 	#superclass : #BlEventListener,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'space',
 		'mouseDragListener',
@@ -11,7 +12,7 @@ Class {
 	#category : #'Bloc-Space - Events'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlSpaceEventListener class >> space: aStage [
 	^ self new
 		space: aStage;

@@ -1,3 +1,8 @@
+"
+I handle common `BlSpace` and `BlElement` events following the Null-Object design pattern.
+
+My subclasses can override my methods to define specific behavior.
+"
 Class {
 	#name : #BlEventListener,
 	#superclass : #BlBasicEventHandler,
