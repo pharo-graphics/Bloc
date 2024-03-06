@@ -16,7 +16,15 @@ BlOSWindowSDL2Host class >> cleanUp [
 
 	self universe closeSpaces.
 	self stop.
-	self start
+	self start.
+
+	"Destroy all SDL windows except the Pharo IDE (assuming its title ends with '.image')"
+	SDL_Window allInstances
+		reject: [ :each | each isNull or: [ each title endsWith: '.image' ] ]
+		thenDo: [ :each |
+			each
+				hide;
+				destroy ]
 ]
 
 { #category : #'class initialization' }
