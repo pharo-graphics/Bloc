@@ -1,3 +1,6 @@
+"
+I represent events happened to a `BlSpace`.
+"
 Class {
 	#name : #BlSpaceEvent,
 	#superclass : #BlEvent,
