@@ -559,6 +559,7 @@ BlSpace >> defaultEventDispatcher [
 
 { #category : #initialization }
 BlSpace >> defaultEventListener [
+
 	^ BlSpaceEventListener space: self
 ]
 
