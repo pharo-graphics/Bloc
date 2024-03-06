@@ -138,10 +138,6 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-FocusFinder-Examples' with: [
 					spec requires: #('Bloc-FocusFinder') ].
 
-			spec
-				package: #'Bloc-Theme' with: [
-					spec requires: #(#'Bloc') ].
-				
 			spec package: #'Bloc-Demo' with: [
 				spec requires: #(#'Bloc-Layout' #'Bloc-Spec2' #'Bloc-Text-Elements') ].
 
