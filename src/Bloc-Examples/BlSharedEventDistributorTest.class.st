@@ -3,13 +3,13 @@ I exemplify `BlSharedEventDistributor`.
 
 "
 Class {
-	#name : #BlSharedEventDistributorExamples,
+	#name : #BlSharedEventDistributorTest,
 	#superclass : #TestCase,
 	#category : #'Bloc-Examples-EventHandling'
 }
 
 { #category : #'examples - sharing events' }
-BlSharedEventDistributorExamples >> example [
+BlSharedEventDistributorTest >> example [
 	<sampleInstance>
 
 	| aHandler anElements aContainer |
@@ -25,7 +25,7 @@ BlSharedEventDistributorExamples >> example [
 ]
 
 { #category : #'instance creation' }
-BlSharedEventDistributorExamples >> newContainer [
+BlSharedEventDistributorTest >> newContainer [
 
 	^ BlElement new
 		layout: BlLinearLayout horizontal;
@@ -39,7 +39,7 @@ BlSharedEventDistributorExamples >> newContainer [
 ]
 
 { #category : #'instance creation' }
-BlSharedEventDistributorExamples >> newSquaredElement [
+BlSharedEventDistributorTest >> newSquaredElement [
 
 	| aBackgroundColor aHighlightColor anElement |
 	aBackgroundColor := {
@@ -64,7 +64,7 @@ BlSharedEventDistributorExamples >> newSquaredElement [
 ]
 
 { #category : #'examples - basic' }
-BlSharedEventDistributorExamples >> testInstallOneElement [
+BlSharedEventDistributorTest >> testInstallOneElement [
 
 	| aHandler anElement |
 	aHandler := BlSharedEventDistributor new.
@@ -75,7 +75,7 @@ BlSharedEventDistributorExamples >> testInstallOneElement [
 ]
 
 { #category : #'examples - basic' }
-BlSharedEventDistributorExamples >> testInstallTwoElements [
+BlSharedEventDistributorTest >> testInstallTwoElements [
 
 	| aHandler anElement |
 	aHandler := self testInstallOneElement.
@@ -86,7 +86,7 @@ BlSharedEventDistributorExamples >> testInstallTwoElements [
 ]
 
 { #category : #'examples - sharing events' }
-BlSharedEventDistributorExamples >> testMouseEnterEventOneOutOfTwoElements [
+BlSharedEventDistributorTest >> testMouseEnterEventOneOutOfTwoElements [
 
 	| aHandler anElements aContainer aMouseEnterTwo aMouseEnterOne anElementOne anElementTwo |
 	aMouseEnterOne := aMouseEnterTwo := 0.
@@ -117,7 +117,7 @@ BlSharedEventDistributorExamples >> testMouseEnterEventOneOutOfTwoElements [
 ]
 
 { #category : #'examples - sharing events' }
-BlSharedEventDistributorExamples >> testMouseLeaveEventOneOutOfTwoElements [
+BlSharedEventDistributorTest >> testMouseLeaveEventOneOutOfTwoElements [
 
 	| aHandler anElements aContainer aMouseLeaveTwo aMouseLeaveOne anElementOne anElementTwo |
 	aMouseLeaveOne := aMouseLeaveTwo := 0.
@@ -158,7 +158,7 @@ BlSharedEventDistributorExamples >> testMouseLeaveEventOneOutOfTwoElements [
 ]
 
 { #category : #'examples - basic' }
-BlSharedEventDistributorExamples >> testUninstallOneElement [
+BlSharedEventDistributorTest >> testUninstallOneElement [
 
 	| aHandler anElement |
 	aHandler := self testInstallOneElement.
