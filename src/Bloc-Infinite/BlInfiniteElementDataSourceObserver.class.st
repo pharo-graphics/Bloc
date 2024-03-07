@@ -85,20 +85,6 @@ BlInfiniteElementDataSourceObserver >> onItemsInserted: anEvent [
 ]
 
 { #category : #'event handling' }
-BlInfiniteElementDataSourceObserver >> onItemsMoved: anEvent [
-	| needsUpdate |
-	self assertNotInLayoutOrScroll.
-	
-	needsUpdate := infiniteElement dataSourceManager
-		onItemRangeMoved: anEvent from
-		to: anEvent to
-		itemCount: 1.
-
-	needsUpdate
-		ifTrue: [ self triggerUpdateProcessor ]
-]
-
-{ #category : #'event handling' }
 BlInfiniteElementDataSourceObserver >> onItemsRemoved: anEvent [
 	| needsUpdate |
 	self assertNotInLayoutOrScroll.
@@ -114,10 +100,10 @@ BlInfiniteElementDataSourceObserver >> onItemsRemoved: anEvent [
 { #category : #private }
 BlInfiniteElementDataSourceObserver >> triggerUpdateProcessor [
 
-	infiniteElement postChildrenUpdater.
-	"(infiniteElement hasFixedSize and: [ infiniteElement isAttached ])
+	
+	(infiniteElement hasFixedSize and: [ infiniteElement isAttached ])
 		ifTrue: [ infiniteElement postChildrenUpdater ]
 		ifFalse: [
 			infiniteElement markDataSourceChangeDuringMeasure.
-			infiniteElement requestLayout ]"
+			infiniteElement requestLayout ]
 ]

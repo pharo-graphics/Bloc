@@ -1,5 +1,5 @@
 Class {
-	#name : #BlClickAvortedEvent,
+	#name : #BlClickAbortedEvent,
 	#superclass : #BlMouseEvent,
 	#instVars : [
 		'processor',
@@ -9,30 +9,30 @@ Class {
 }
 
 { #category : #accessing }
-BlClickAvortedEvent >> processor [
+BlClickAbortedEvent >> processor [
 
 	^ processor
 ]
 
 { #category : #accessing }
-BlClickAvortedEvent >> processor: aMouseProcessor [
+BlClickAbortedEvent >> processor: aMouseProcessor [
 
 	processor := aMouseProcessor
 ]
 
 { #category : #sending }
-BlClickAvortedEvent >> sendTo: anObject [
-	anObject clickAvortedEvent: self
+BlClickAbortedEvent >> sendTo: anObject [
+	anObject clickAbortedEvent: self
 ]
 
 { #category : #accessing }
-BlClickAvortedEvent >> upEvent [
+BlClickAbortedEvent >> upEvent [
 
 	^ upEvent
 ]
 
 { #category : #accessing }
-BlClickAvortedEvent >> upEvent: anElement [
+BlClickAbortedEvent >> upEvent: anElement [
 
 	upEvent := anElement
 ]

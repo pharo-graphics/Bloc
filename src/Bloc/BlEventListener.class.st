@@ -14,7 +14,7 @@ BlEventListener >> blurEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }
-BlEventListener >> clickAvortedEvent: anEvent [
+BlEventListener >> clickAbortedEvent: anEvent [
 	"a mouse down followed by a mouse up but in different a target"
 ]
 
