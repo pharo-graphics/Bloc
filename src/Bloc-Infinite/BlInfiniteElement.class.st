@@ -58,11 +58,19 @@ BlInfiniteElement >> aeDrawChildrenOn: aCanvas [
 ]
 
 { #category : #'as yet unclassified' }
+BlInfiniteElement >> aeDrawItemDecorationsOn: aCanvas [
+	" draw then decorate eventually (between the background and the childrens)"
+	self itemDecorationsDo: [ :d | 
+		d aeDrawBeneathOn: aCanvas in: self ].
+
+
+]
+
+{ #category : #'as yet unclassified' }
 BlInfiniteElement >> aeDrawOn: aCanvas [
 	" draw then decorate eventually (between the background and the childrens)"
 	super aeDrawOn: aCanvas.
-	self itemDecorationsDo: [ :d | 
-		d aeDrawBeneathOn: aCanvas in: self ].
+	self aeDrawItemDecorationsOn: aCanvas
 
 
 ]
@@ -287,22 +295,8 @@ BlInfiniteElement >> consumePendingDataSourceCommands [
 
 	(firstLayoutComplete not or: [ dataSourceChangedAfterLayout ])
 		ifTrue: [ ^ self dispatchLayout ].
-
 	dataSourceManager hasPendingCommands ifFalse: [ ^ self ].
-
-	"if it is only an item change (no add-remove-move) we can check
-	if any of the visible items is affected and if not, just ignore the change."
-	dataSourceManager hasOnlyUpdateCommand
-		ifTrue: [
-			self eatRequestLayout.
-			dataSourceManager preProcessCommandsIn: self.
-			layoutRequestEaten ifFalse: [
-				self hasUpdatedChild
-					ifTrue: [ self dispatchLayout ]
-					ifFalse: [ "no need to layout, clean state"
-						dataSourceManager consumePostponedCommandsIn: self ] ].
-			self resumeRequestLayout: true ]
-		ifFalse: [ self dispatchLayout ]
+	self dispatchLayout
 ]
 
 { #category : #accessing }
@@ -502,14 +496,14 @@ BlInfiniteElement >> dispatchLayout [
 
 	self state isMeasuring: false.
 	self state isStartStep
-		ifTrue: [ 
+		ifTrue: [
 			self dispatchLayoutFirstStep.
 			self layout exactMeasurementSpecFrom: self.
 			self dispatchLayoutSecondStep ]
-		ifFalse: [ 
+		ifFalse: [
 			self layout exactMeasurementSpecFrom: self.
-			(dataSourceManager hasCommands or: [ 
-				 layout width ~= self width or: [ layout height ~= self height ] ]) 
+			(dataSourceManager hasCommands or: [
+				 layout width ~= self width or: [ layout height ~= self height ] ])
 				ifTrue: [ self dispatchLayoutSecondStep ] ].
 	self dispatchLayoutThirdStep
 ]
@@ -789,20 +783,6 @@ BlInfiniteElement >> hasFixedSize: aBoolean [
 { #category : #'item decorations - testing' }
 BlInfiniteElement >> hasItemDecorations [
 	^ itemDecorations isNotEmpty
-]
-
-{ #category : #'private - testing' }
-BlInfiniteElement >> hasUpdatedChild [
-	"Return true if any of existing elemnts holder needs to be updated"
-	<return: #Boolean>
-
-	self childrenDo: [ :anElement |
-		| anElementHolder |
-		anElementHolder := self elementHolderOf: anElement.
-		(anElementHolder shouldIgnore not and:[
-			anElementHolder isUpdated ])
-				ifTrue: [ ^ true ] ].
-	^ false 
 ]
 
 { #category : #initialization }

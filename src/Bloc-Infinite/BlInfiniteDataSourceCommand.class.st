@@ -16,6 +16,9 @@ Class {
 		'positionStart',
 		'itemCount'
 	],
+	#pools : [
+		'BlInfiniteConstants'
+	],
 	#category : #'Bloc-Infinite-DataSource'
 }
 
@@ -28,22 +31,9 @@ BlInfiniteDataSourceCommand >> applyOnPosition: aPosition [
 ]
 
 { #category : #commands }
-BlInfiniteDataSourceCommand >> continuous: aPosition start: start [
-
-	^ self subclassResponsibility 
-]
-
-{ #category : #commands }
 BlInfiniteDataSourceCommand >> dispatchToLayout: aLayout [
 
 	self subclassResponsibility 
-]
-
-{ #category : #accessing }
-BlInfiniteDataSourceCommand >> elementHolderAt: aPosition in: anInfiniteElement [
-	<return: #BlElement or: nil>
-
-	^ anInfiniteElement findElementHolderForPosition: aPosition checkNew: true
 ]
 
 { #category : #testing }
@@ -82,12 +72,6 @@ BlInfiniteDataSourceCommand >> offsetPositionsIn: anInfiniteElement [
 	self subclassResponsibility 
 ]
 
-{ #category : #commands }
-BlInfiniteDataSourceCommand >> positionMultiplier [
-
-	^ 	self subclassResponsibility 
-]
-
 { #category : #accessing }
 BlInfiniteDataSourceCommand >> positionStart [
 
@@ -98,34 +82,4 @@ BlInfiniteDataSourceCommand >> positionStart [
 BlInfiniteDataSourceCommand >> positionStart: anObject [
 
 	positionStart := anObject
-]
-
-{ #category : #enum }
-BlInfiniteDataSourceCommand >> typeInvisible [
-
-	^ 0
-]
-
-{ #category : #enum }
-BlInfiniteDataSourceCommand >> typeNewOrLaidOut [
-
-	^ 1
-]
-
-{ #category : #commands }
-BlInfiniteDataSourceCommand >> updateElementHoldersIn: anInfiniteElement [
-
-	^ self subclassResponsibility 
-]
-
-{ #category : #commands }
-BlInfiniteDataSourceCommand >> updateElementHoldersIn: anInfiniteElement offset: offsetStart [
-
-	self subclassResponsibility 
-]
-
-{ #category : #commands }
-BlInfiniteDataSourceCommand >> updatePosition: aPosition with: aCommand [
-
-	^ self subclassResponsibility 
 ]
