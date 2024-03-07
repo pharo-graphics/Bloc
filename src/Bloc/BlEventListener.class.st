@@ -168,11 +168,6 @@ BlEventListener >> spaceMovedEvent: anEvent [
 ]
 
 { #category : #'space handlers' }
-BlEventListener >> spaceRedrawRequestedEvent: anEvent [
-	"Is sent by the host indicating that the space should be re-rendered"
-]
-
-{ #category : #'space handlers' }
 BlEventListener >> spaceResizedEvent: anEvent [
 	"Is sent after window size was changed"
 ]

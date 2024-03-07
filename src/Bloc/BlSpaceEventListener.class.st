@@ -5,9 +5,7 @@ Class {
 	#name : #BlSpaceEventListener,
 	#superclass : #BlEventListener,
 	#instVars : [
-		'space',
-		'mouseDragListener',
-		'dragCollectionElement'
+		'space'
 	],
 	#category : #'Bloc-Space - Events'
 }
@@ -22,10 +20,6 @@ BlSpaceEventListener class >> space: aStage [
 { #category : #accessing }
 BlSpaceEventListener >> focusProcessor [
 	^ self space focusProcessor
-]
-
-{ #category : #'other handlers' }
-BlSpaceEventListener >> inputMethodEvent: anEvent [
 ]
 
 { #category : #'keyboard handlers' }
@@ -98,28 +92,6 @@ BlSpaceEventListener >> spaceClosedEvent: anEvent [
 	self mouseProcessor onSpaceClosed
 ]
 
-{ #category : #'drag and drop' }
-BlSpaceEventListener >> spaceDragCancelEvent: anEvent [
-	anEvent delegate cancel: anEvent position.
-	self space removeEventHandler: mouseDragListener
-]
-
-{ #category : #'drag and drop' }
-BlSpaceEventListener >> spaceDragLiftEvent: anEvent [
-	| aDelegate aPosition |
-
-	aDelegate := anEvent delegate.
-	aPosition := anEvent position.
-
-	aDelegate lift: aPosition in: self space root.
-
-	mouseDragListener := BlEventHandler
-		on: BlMouseMoveEvent
-		do: [ :aMouseMoveEvent | aDelegate drag: aMouseMoveEvent position ].
-
-	self space addEventHandler: mouseDragListener
-]
-
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceEventsProcessedEvent: anEvent [
 	self space keyboardProcessor handleSpaceEventProcessedEvent: anEvent
@@ -155,32 +127,10 @@ BlSpaceEventListener >> spaceMovedEvent: anEvent [
 ]
 
 { #category : #'window handlers' }
-BlSpaceEventListener >> spaceRedrawRequestedEvent: anEvent [
-
-  self space
-		invalidateAll;
-		requestNextPulse
-]
-
-{ #category : #'window handlers' }
 BlSpaceEventListener >> spaceResizedEvent: anEvent [
 	"Is sent after window size was changed"
 
 	self space setExtent: anEvent extent
-]
-
-{ #category : #'window handlers' }
-BlSpaceEventListener >> spaceScaleFactorChangedEvent: anEvent [
-
-  self space
-		invalidateAll;
-		requestNextPulse
-]
-
-{ #category : #'window handlers' }
-BlSpaceEventListener >> spaceWakeUpEvent: anEvent [
-
-  self space requestNextPulse
 ]
 
 { #category : #'keyboard handlers' }
