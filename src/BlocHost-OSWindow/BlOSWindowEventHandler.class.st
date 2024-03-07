@@ -64,6 +64,28 @@ BlOSWindowEventHandler >> enqueue: anEvent [
 	self window enqueueEvent: anEvent
 ]
 
+{ #category : #'visiting - window' }
+BlOSWindowEventHandler >> enqueueSpaceResized: aPoint [
+
+	| aBlocEvent |
+	aBlocEvent := BlSpaceResizedEvent new
+		extent: aPoint;
+		timestamp: time now;
+		yourself.
+		
+	self enqueue: aBlocEvent
+]
+
+{ #category : #'visiting - window' }
+BlOSWindowEventHandler >> enqueueSpaceResized: aBlSpaceResizedEvent extent: aPoint [
+
+	aBlSpaceResizedEvent
+		extent: aPoint;
+		timestamp: time now.
+		
+	self enqueue: aBlSpaceResizedEvent
+]
+
 { #category : #events }
 BlOSWindowEventHandler >> handleEvent: anEvent [
 	anEvent accept: self
@@ -374,16 +396,4 @@ BlOSWindowEventHandler >> window [
 { #category : #'api - accessing' }
 BlOSWindowEventHandler >> window: aBlOSWindowSpace [
 	window := aBlOSWindowSpace
-]
-
-{ #category : #'visiting - window' }
-BlOSWindowEventHandler >> windowResized: aPoint [
-
-	| aBlocEvent |
-	aBlocEvent := BlSpaceResizedEvent new
-		extent: aPoint;
-		timestamp: time now;
-		yourself.
-		
-	self enqueue: aBlocEvent
 ]
