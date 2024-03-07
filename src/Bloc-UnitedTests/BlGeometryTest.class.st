@@ -187,3 +187,225 @@ BlGeometryTest >> testElTxBounds [
 	self assert: n transformedBounds equals: (0 @ 0 corner: 100 @ 100).
 	self assert: g transformedBounds equals: (0 @ 0 corner: 100 @ 100)
 ]
+
+{ #category : #tests }
+BlGeometryTest >> testEqualityBlAnnulusSectorGeometry [
+
+	self
+		assert: (BlAnnulusSectorGeometry new
+				 startAngle: 0;
+				 endAngle: 90;
+				 innerRadius: 0.5;
+				 outerRadius: 1.0)
+		equals: (BlAnnulusSectorGeometry new
+				 startAngle: 0;
+				 endAngle: 90;
+				 innerRadius: 0.5;
+				 outerRadius: 1.0).
+	self
+		deny: (BlAnnulusSectorGeometry new
+				 startAngle: 10;
+				 endAngle: 90;
+				 innerRadius: 0.5;
+				 outerRadius: 1.0)
+		equals: (BlAnnulusSectorGeometry new
+				 startAngle: 0;
+				 endAngle: 90;
+				 innerRadius: 0.5;
+				 outerRadius: 1.0).
+	self
+		deny: (BlAnnulusSectorGeometry new
+				 startAngle: 0;
+				 endAngle: 80;
+				 innerRadius: 0.5;
+				 outerRadius: 1.0)
+		equals: (BlAnnulusSectorGeometry new
+				 startAngle: 0;
+				 endAngle: 90;
+				 innerRadius: 0.5;
+				 outerRadius: 1.0).
+	self
+		deny: (BlAnnulusSectorGeometry new
+				 startAngle: 0;
+				 endAngle: 90;
+				 innerRadius: 0.6;
+				 outerRadius: 1.0)
+		equals: (BlAnnulusSectorGeometry new
+				 startAngle: 0;
+				 endAngle: 90;
+				 innerRadius: 0.5;
+				 outerRadius: 1.0).
+	self
+		deny: (BlAnnulusSectorGeometry new
+				 startAngle: 0;
+				 endAngle: 90;
+				 innerRadius: 0.5;
+				 outerRadius: 0.9)
+		equals: (BlAnnulusSectorGeometry new
+				 startAngle: 0;
+				 endAngle: 90;
+				 innerRadius: 0.5;
+				 outerRadius: 1.0)
+]
+
+{ #category : #tests }
+BlGeometryTest >> testEqualityBlBezierCurveGeometry [
+
+	self
+		assert: (BlBezierCurveGeometry controlPoints: {
+					 (0 @ 0).
+					 (100 @ 100).
+					 (0 @ 50) })
+		equals: (BlBezierCurveGeometry controlPoints: {
+					 (0 @ 0).
+					 (100 @ 100).
+					 (0 @ 50) }).
+	self
+		deny: (BlBezierCurveGeometry controlPoints: {
+					 (0 @ 0).
+					 (100 @ 100).
+					 (50 @ 0) })
+		equals: (BlBezierCurveGeometry controlPoints: {
+					 (0 @ 0).
+					 (100 @ 100).
+					 (0 @ 50) })
+]
+
+{ #category : #tests }
+BlGeometryTest >> testEqualityBlCircleGeometry [
+
+	self assert: BlCircleGeometry new equals: BlCircleGeometry new
+]
+
+{ #category : #tests }
+BlGeometryTest >> testEqualityBlEllipseGeometry [
+
+	self assert: BlEllipseGeometry new equals: BlEllipseGeometry new
+]
+
+{ #category : #tests }
+BlGeometryTest >> testEqualityBlEmptyGeometry [
+
+	self assert: BlEmptyGeometry new equals: BlEmptyGeometry new
+]
+
+{ #category : #tests }
+BlGeometryTest >> testEqualityBlLineGeometry [
+
+	self
+		assert: (BlLineGeometry from: 0 @ 0 to: 100 @ 100)
+		equals: (BlLineGeometry from: 0 @ 0 to: 100 @ 100).
+	self
+		deny: (BlLineGeometry from: 0 @ 0 to: 100 @ 100)
+		equals: (BlLineGeometry from: 0 @ 0 to: 0 @ 100)
+]
+
+{ #category : #tests }
+BlGeometryTest >> testEqualityBlPolygonGeometry [
+
+	self
+		assert: (BlPolygonGeometry vertices: {
+					 (0 @ 0).
+					 (100 @ 100).
+					 (0 @ 50) })
+		equals: (BlPolygonGeometry vertices: {
+					 (0 @ 0).
+					 (100 @ 100).
+					 (0 @ 50) }).
+	self
+		deny: (BlPolygonGeometry vertices: {
+					 (0 @ 0).
+					 (100 @ 100).
+					 (50 @ 0) })
+		equals: (BlPolygonGeometry vertices: {
+					 (0 @ 0).
+					 (100 @ 100).
+					 (0 @ 50) })
+]
+
+{ #category : #tests }
+BlGeometryTest >> testEqualityBlPolylineGeometry [
+
+	self
+		assert: (BlPolylineGeometry vertices: {0@0 . 100@100 . 0 @ 50})
+		equals: (BlPolylineGeometry vertices: {0@0 . 100@100 . 0 @ 50}).
+	self
+		deny: (BlPolylineGeometry vertices: {0@0 . 100@100 . 50 @ 0})
+		equals: (BlPolylineGeometry vertices: {0@0 . 100@100 . 0 @ 50}).
+]
+
+{ #category : #tests }
+BlGeometryTest >> testEqualityBlRectangleGeometry [
+
+	self assert: BlRectangleGeometry new equals: BlRectangleGeometry new
+]
+
+{ #category : #tests }
+BlGeometryTest >> testEqualityBlRoundedRectangleGeometry [
+
+	self assert: (BlRoundedRectangleGeometry cornerRadius: 5) equals: (BlRoundedRectangleGeometry cornerRadius: 5).
+	self deny: (BlRoundedRectangleGeometry cornerRadius: 4) equals: (BlRoundedRectangleGeometry cornerRadius: 5)
+]
+
+{ #category : #tests }
+BlGeometryTest >> testEqualityBlSquareGeometry [
+
+	self assert: BlSquareGeometry new equals: BlSquareGeometry new
+]
+
+{ #category : #tests }
+BlGeometryTest >> testEqualityBlTriangleGeometry [
+
+	self
+		assert: BlTriangleGeometry new beBottom
+		equals: BlTriangleGeometry new beBottom.
+	self
+		assert: BlTriangleGeometry new beLeft
+		equals: BlTriangleGeometry new beLeft.
+	self
+		assert: BlTriangleGeometry new beRight
+		equals: BlTriangleGeometry new beRight.
+	self
+		assert: BlTriangleGeometry new beTop
+		equals: BlTriangleGeometry new beTop.
+
+	self
+		deny: BlTriangleGeometry new beBottom
+		equals: BlTriangleGeometry new beLeft.
+	self
+		deny: BlTriangleGeometry new beBottom
+		equals: BlTriangleGeometry new beRight.
+	self
+		deny: BlTriangleGeometry new beBottom
+		equals: BlTriangleGeometry new beTop.
+
+	self
+		deny: BlTriangleGeometry new beLeft
+		equals: BlTriangleGeometry new beBottom.
+	self
+		deny: BlTriangleGeometry new beLeft
+		equals: BlTriangleGeometry new beRight.
+	self
+		deny: BlTriangleGeometry new beLeft
+		equals: BlTriangleGeometry new beTop.
+
+	self
+		deny: BlTriangleGeometry new beRight
+		equals: BlTriangleGeometry new beLeft.
+	self
+		deny: BlTriangleGeometry new beRight
+		equals: BlTriangleGeometry new beBottom.
+	self
+		deny: BlTriangleGeometry new beRight
+		equals: BlTriangleGeometry new beTop.
+
+	self
+		deny: BlTriangleGeometry new beTop
+		equals: BlTriangleGeometry new beLeft.
+	self
+		deny: BlTriangleGeometry new beTop
+		equals: BlTriangleGeometry new beRight.
+	self
+		deny: BlTriangleGeometry new beTop
+		equals: BlTriangleGeometry new beBottom
+]

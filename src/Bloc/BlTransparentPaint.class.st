@@ -40,6 +40,13 @@ BlTransparentPaint class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
+{ #category : #comparing }
+BlTransparentPaint >> = anotherObject [
+
+	self == anotherObject ifTrue: [ ^ true ].
+	^ (anotherObject isKindOf: self class)
+]
+
 { #category : #accessing }
 BlTransparentPaint >> color: aColor [
 	self shouldNotImplement

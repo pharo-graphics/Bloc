@@ -1,7 +1,7 @@
 Class {
 	#name : #BlBackgroundTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Tests'
+	#category : #'Bloc-Tests-Basic-Background'
 }
 
 { #category : #'background - builder' }
@@ -33,6 +33,308 @@ BlBackgroundTest >> testBuildBackgroundWithImagesAndColor [
 	self assert: aBackground backgrounds third paint color equals: Color gray.
 
 	^ aBackground
+]
+
+{ #category : #'background - builder' }
+BlBackgroundTest >> testEqualityBlCompositeBackground [
+
+	| background |
+	background := BlCompositeBackground new withAll: {
+			              (BlPaintBackground new paint:
+				               (BlColorPaint new color: Color blue)).
+			              (BlImageBackground new image:
+				               (Smalltalk ui icons iconNamed: #pharoIcon)) }.
+	self assert: background equals: background.
+
+	self
+		assert: (BlCompositeBackground new withAll: {
+					 (BlPaintBackground new paint:
+						  (BlColorPaint new color: Color blue)).
+					 (BlImageBackground new image:
+						  (Smalltalk ui icons iconNamed: #pharoIcon)) })
+		equals: (BlCompositeBackground new withAll: {
+					 (BlPaintBackground new paint:
+						  (BlColorPaint new color: Color blue)).
+					 (BlImageBackground new image:
+						  (Smalltalk ui icons iconNamed: #pharoIcon)) }).
+	"Not the same size"
+	self
+		deny: (BlCompositeBackground new withAll: {
+			              (BlPaintBackground new paint:
+				               (BlColorPaint new color: Color blue)).
+			              (BlImageBackground new image:
+				               (Smalltalk ui icons iconNamed: #pharoIcon)) })
+		equals: (BlCompositeBackground new withAll: {
+			              (BlPaintBackground new paint:
+				               (BlColorPaint new color: Color blue))}).
+	"Not the same backgrounds"
+	self
+		deny: (BlCompositeBackground new withAll: {
+			              (BlPaintBackground new paint:
+				               (BlColorPaint new color: Color blue)).
+			              (BlImageBackground new image:
+				               (Smalltalk ui icons iconNamed: #pharoIcon)) })
+		equals: (BlCompositeBackground new withAll: {
+			              (BlPaintBackground new paint:
+				               (BlColorPaint new color: Color red)).
+			              (BlImageBackground new image:
+				               (Smalltalk ui icons iconNamed: #pharoIcon)) }).
+]
+
+{ #category : #'background - builder' }
+BlBackgroundTest >> testEqualityBlImageBackground [
+
+	| background |
+	background := BlImageBackground new image: (Smalltalk ui icons iconNamed: #pharoIcon).
+	self assert: background equals: background.
+
+	self
+		assert: (BlImageBackground new image: (Smalltalk ui icons iconNamed: #pharoIcon))
+		equals: (BlImageBackground new image: (Smalltalk ui icons iconNamed: #pharoIcon)).
+	self
+		deny: (BlImageBackground new image: (Smalltalk ui icons iconNamed: #pharoIcon))
+		equals: (BlImageBackground new image: (Smalltalk ui icons iconNamed: #smallPaint))
+]
+
+{ #category : #'background - builder' }
+BlBackgroundTest >> testEqualityBlPaintBackground1 [
+
+	| background |
+	background := BlPaintBackground new paint:
+		              (BlColorPaint new color: Color blue).
+	self assert: background equals: background.
+
+	self
+		assert:
+		(BlPaintBackground new paint: (BlColorPaint new color: Color blue))
+		equals:
+		(BlPaintBackground new paint: (BlColorPaint new color: Color blue)).
+	self
+		deny:
+		(BlPaintBackground new paint: (BlColorPaint new color: Color blue))
+		equals:
+		(BlPaintBackground new paint: (BlColorPaint new color: Color red)).
+]
+
+{ #category : #'background - builder' }
+BlBackgroundTest >> testEqualityBlPaintBackground2 [
+
+	| background |
+	background := BlPaintBackground new paint: BlTransparentPaint new.
+	self assert: background equals: background.
+
+	self
+		assert: (BlPaintBackground new paint: BlTransparentPaint new)
+		equals: (BlPaintBackground new paint: BlTransparentPaint new).
+]
+
+{ #category : #'background - builder' }
+BlBackgroundTest >> testEqualityBlPaintBackground3 [
+
+	| background |
+	background := BlPaintBackground new paint:
+		              (BlLinearGradientPaint new
+			               stops: {
+					               (0 -> Color blue).
+					               (1 -> Color red) };
+			               start: 0 @ 1;
+			               end: 1 @ 0).
+	self assert: background equals: background.
+
+	self
+		assert: (BlPaintBackground new paint: (BlLinearGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  start: 0 @ 1;
+					  end: 1 @ 0))
+		equals: (BlPaintBackground new paint: (BlLinearGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  start: 0 @ 1;
+					  end: 1 @ 0)).
+
+	self
+		deny: (BlPaintBackground new paint: (BlLinearGradientPaint new
+					  stops: {
+							  (0 -> Color yellow).
+							  (1 -> Color green) };
+					  start: 0 @ 1;
+					  end: 1 @ 0))
+		equals: (BlPaintBackground new paint: (BlLinearGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  start: 0 @ 1;
+					  end: 1 @ 0)).
+
+	self
+		deny: (BlPaintBackground new paint: (BlLinearGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  start: 1 @ 1;
+					  end: 1 @ 0))
+		equals: (BlPaintBackground new paint: (BlLinearGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  start: 0 @ 1;
+					  end: 1 @ 0)).
+
+	self
+		deny: (BlPaintBackground new paint: (BlLinearGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  start: 0 @ 1;
+					  end: 1 @ 0))
+		equals: (BlPaintBackground new paint: (BlLinearGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  start: 0 @ 1;
+					  end: 1 @ 1)).
+]
+
+{ #category : #'background - builder' }
+BlBackgroundTest >> testEqualityBlPaintBackground4 [
+
+	| background |
+	background := BlPaintBackground new paint:
+		              (BlRadialGradientPaint new
+			               stops: {
+					               (0 -> Color blue).
+					               (1 -> Color red) };
+			               innerCenter: 100 @ 100;
+			               innerRadius: 0;
+			               outerCenter: 100 @ 100;
+			               outerRadius: 200).
+	self assert: background equals: background.
+
+	self
+		assert: (BlPaintBackground new paint: (BlRadialGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  innerCenter: 100 @ 100;
+					  innerRadius: 0;
+					  outerCenter: 100 @ 100;
+					  outerRadius: 200))
+		equals: (BlPaintBackground new paint: (BlRadialGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  innerCenter: 100 @ 100;
+					  innerRadius: 0;
+					  outerCenter: 100 @ 100;
+					  outerRadius: 200)).
+
+	"stops"
+	self
+		deny: (BlPaintBackground new paint: (BlRadialGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  innerCenter: 100 @ 100;
+					  innerRadius: 0;
+					  outerCenter: 100 @ 100;
+					  outerRadius: 200))
+		equals: (BlPaintBackground new paint: (BlRadialGradientPaint new
+					  stops: {
+							  (0 -> Color green).
+							  (1 -> Color yellow) };
+					  innerCenter: 100 @ 100;
+					  innerRadius: 0;
+					  outerCenter: 100 @ 100;
+					  outerRadius: 200)).
+				
+					"innerCenter"
+	self
+		deny: (BlPaintBackground new paint: (BlRadialGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  innerCenter: 150 @ 100;
+					  innerRadius: 0;
+					  outerCenter: 100 @ 100;
+					  outerRadius: 200))
+		equals: (BlPaintBackground new paint: (BlRadialGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  innerCenter: 100 @ 100;
+					  innerRadius: 0;
+					  outerCenter: 100 @ 100;
+					  outerRadius: 200)).
+					
+									"innerRadius"
+	self
+		deny: (BlPaintBackground new paint: (BlRadialGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  innerCenter: 100 @ 100;
+					  innerRadius: 0;
+					  outerCenter: 100 @ 100;
+					  outerRadius: 200))
+		equals: (BlPaintBackground new paint: (BlRadialGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  innerCenter: 100 @ 100;
+					  innerRadius: 50;
+					  outerCenter: 100 @ 100;
+					  outerRadius: 200)).
+					
+								"outerCenter"
+	self
+		deny: (BlPaintBackground new paint: (BlRadialGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  innerCenter: 100 @ 100;
+					  innerRadius: 0;
+					  outerCenter: 100 @ 100;
+					  outerRadius: 200))
+		equals: (BlPaintBackground new paint: (BlRadialGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  innerCenter: 100 @ 100;
+					  innerRadius: 0;
+					  outerCenter: 200 @ 100;
+					  outerRadius: 200)).
+					
+									"outerRadius"
+	self
+		deny: (BlPaintBackground new paint: (BlRadialGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  innerCenter: 100 @ 100;
+					  innerRadius: 0;
+					  outerCenter: 100 @ 100;
+					  outerRadius: 200))
+		equals: (BlPaintBackground new paint: (BlRadialGradientPaint new
+					  stops: {
+							  (0 -> Color blue).
+							  (1 -> Color red) };
+					  innerCenter: 100 @ 100;
+					  innerRadius: 0;
+					  outerCenter: 100 @ 100;
+					  outerRadius: 300))
+]
+
+{ #category : #'background - builder' }
+BlBackgroundTest >> testEqualityBlTransparentBackground [
+
+	| background |
+	background := BlTransparentBackground new.
+	self assert: background equals: background.
+	
+	self assert: BlTransparentBackground new equals: BlTransparentBackground new.
 ]
 
 { #category : #'background - transparent' }

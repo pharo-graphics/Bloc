@@ -1,7 +1,7 @@
 Class {
 	#name : #BlImageBackgroundTest,
 	#superclass : #BlBackgroundTest,
-	#category : #'Bloc-Tests'
+	#category : #'Bloc-Tests-Basic-Background'
 }
 
 { #category : #'background - image' }
