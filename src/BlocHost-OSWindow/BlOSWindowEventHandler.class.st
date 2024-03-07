@@ -336,14 +336,20 @@ BlOSWindowEventHandler >> visitWindowFocusOutEvent: anEvent [
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting - window' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitWindowMaximizedEvent: anEvent [
-	self windowResized: anEvent window extent
+
+	self
+		enqueueSpaceResized: BlSpaceMaximizedEvent new
+		extent: anEvent window extent
 ]
 
-{ #category : #'visiting - window' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitWindowMinimizedEvent: anEvent [
-	self windowResized: anEvent window extent
+
+	self
+		enqueueSpaceResized: BlSpaceMinimizedEvent new
+		extent: anEvent window extent
 ]
 
 { #category : #'visiting - window' }
@@ -380,9 +386,12 @@ BlOSWindowEventHandler >> visitWindowMoveEvent: anEvent [
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting - window' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitWindowResizeEvent: anEvent [
-	self windowResized: anEvent width @ anEvent height.
+
+	self
+		enqueueSpaceResized: BlSpaceResizedEvent new
+		extent: anEvent width @ anEvent height.
 	self window space pulse
 ]
 
