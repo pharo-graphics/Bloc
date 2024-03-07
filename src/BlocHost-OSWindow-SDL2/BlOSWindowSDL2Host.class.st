@@ -10,23 +10,6 @@ Class {
 	#category : #'BlocHost-OSWindow-SDL2'
 }
 
-{ #category : #cleanup }
-BlOSWindowSDL2Host class >> cleanUp [
-	"CleanUp Host"
-
-	self universe closeSpaces.
-	self stop.
-	self start.
-
-	"Destroy all SDL windows except the Pharo IDE (assuming its title ends with '.image')"
-	SDL_Window allInstances
-		reject: [ :each | each isNull or: [ each title endsWith: '.image' ] ]
-		thenDo: [ :each |
-			each
-				hide;
-				destroy ]
-]
-
 { #category : #'class initialization' }
 BlOSWindowSDL2Host class >> initialize [
 	PulseLoop := BlHostPulseLoop forHost: self

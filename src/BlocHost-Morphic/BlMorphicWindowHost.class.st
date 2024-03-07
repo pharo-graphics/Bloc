@@ -7,15 +7,6 @@ Class {
 	#category : #'BlocHost-Morphic-Host - Window'
 }
 
-{ #category : #cleanup }
-BlMorphicWindowHost class >> cleanUp [
-	"CleanUp Host"
-
-	self universe closeSpaces.
-	self stop.
-	self start
-]
-
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> isSupported [
 
