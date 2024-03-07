@@ -1,3 +1,6 @@
+"
+I represent the execution of a space frame phase.
+"
 Class {
 	#name : #BlSpaceStepEvent,
 	#superclass : #BlSpaceEvent,
