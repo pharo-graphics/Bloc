@@ -10,6 +10,7 @@ Class {
 
 { #category : #comparing }
 BlCircleGeometry >> = anObject [
+
 	self == anObject ifTrue: [ ^ true ].
 	^ self class = anObject class
 ]

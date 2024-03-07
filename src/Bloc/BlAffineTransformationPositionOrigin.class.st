@@ -19,6 +19,13 @@ BlAffineTransformationPositionOrigin class >> position: aPoint [
 		  yourself
 ]
 
+{ #category : #comparing }
+BlAffineTransformationPositionOrigin >> = anObject [
+
+	super = anObject ifFalse: [ ^ false ].
+	^ self position = anObject position
+]
+
 { #category : #math }
 BlAffineTransformationPositionOrigin >> originIn: anElement [
 

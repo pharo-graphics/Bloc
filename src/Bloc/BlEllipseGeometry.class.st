@@ -16,6 +16,13 @@ Class {
 	#category : #'Bloc-Basic-Geometry'
 }
 
+{ #category : #comparing }
+BlEllipseGeometry >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	^ self class = anObject class
+]
+
 { #category : #'geometry testing' }
 BlEllipseGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	| w h x y center xRadius yRadius normalized |

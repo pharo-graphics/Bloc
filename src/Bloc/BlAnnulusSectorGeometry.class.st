@@ -16,6 +16,18 @@ Class {
 	#category : #'Bloc-Basic-Geometry'
 }
 
+{ #category : #comparing }
+BlAnnulusSectorGeometry >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+
+	^ self startAngle = anObject startAngle and: [
+		  self endAngle = anObject endAngle and: [
+			  self innerRadius = anObject innerRadius and: [
+				  self outerRadius = anObject outerRadius ] ] ].
+]
+
 { #category : #'private - geometry' }
 BlAnnulusSectorGeometry >> absoluteInnerRadius [
 	<return: #Number>

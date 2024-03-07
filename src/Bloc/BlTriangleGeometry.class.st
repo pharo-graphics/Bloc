@@ -21,6 +21,17 @@ BlTriangleGeometry class >> initialize [
 	Left := #left
 ]
 
+{ #category : #comparing }
+BlTriangleGeometry >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	^ (self isBottom and: [ anObject isBottom ]) or: [
+		  (self isLeft and: [ anObject isLeft ]) or: [
+			  (self isRight and: [ anObject isRight ]) or: [
+				  self isTop and: [ anObject isTop ] ] ] ].
+]
+
 { #category : #'api - geometry' }
 BlTriangleGeometry >> beBottom [
 	orientation := Bottom.

@@ -8,6 +8,13 @@ Class {
 	#category : #'Bloc-Basic-Geometry'
 }
 
+{ #category : #comparing }
+BlSquareGeometry >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	^ self class = anObject class
+]
+
 { #category : #'geometry testing' }
 BlSquareGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 

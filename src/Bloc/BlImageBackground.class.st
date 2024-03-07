@@ -21,6 +21,15 @@ BlImageBackground class >> image: aForm [
 	^ self new image: aForm
 ]
 
+{ #category : #comparing }
+BlImageBackground >> = anotherObject [
+
+	self == anotherObject ifTrue: [ ^ true ].
+	(anotherObject isKindOf: self class) ifFalse: [ ^ false ].
+
+	^ anotherObject image = self image
+]
+
 { #category : #accessing }
 BlImageBackground >> image [
 	"Return the form that represents the visual of the background."

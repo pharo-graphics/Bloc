@@ -18,6 +18,14 @@ BlLineGeometry class >> from: aFromPoint to: aToPoint [
 	^ self new from: aFromPoint to: aToPoint
 ]
 
+{ #category : #comparing }
+BlLineGeometry >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	^ self from = anObject from and: [ self to = anObject to ]
+]
+
 { #category : #'geometry testing' }
 BlLineGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry"
