@@ -24,6 +24,14 @@ BlScalingTransformation class >> scale: aVector [
 		  yourself
 ]
 
+{ #category : #comparing }
+BlScalingTransformation >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	^ self scale = anObject scale
+]
+
 { #category : #initialization }
 BlScalingTransformation >> initialize [
 
