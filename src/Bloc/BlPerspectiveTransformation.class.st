@@ -15,6 +15,14 @@ BlPerspectiveTransformation class >> depth: aNumber [
 		  yourself
 ]
 
+{ #category : #comparing }
+BlPerspectiveTransformation >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	^ self depth = anObject depth
+]
+
 { #category : #accessing }
 BlPerspectiveTransformation >> depth [
 
