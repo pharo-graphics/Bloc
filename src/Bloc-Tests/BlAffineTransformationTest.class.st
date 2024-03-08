@@ -8,6 +8,40 @@ Class {
 }
 
 { #category : #tests }
+BlAffineTransformationTest >> testEqualityBlAffineCompositeTransformation [
+
+	self
+		assert: (BlAffineCompositeTransformation new
+				 addTransformation: (BlShearTransformation new angleX: 80);
+				 addTransformation: (BlRotationTransformation new angle: 80);
+				 yourself)
+		equals: (BlAffineCompositeTransformation new
+				 addTransformation: (BlShearTransformation new angleX: 80);
+				 addTransformation: (BlRotationTransformation new angle: 80);
+				 yourself).
+	"Same transform but in different order should be ko"
+	self
+		deny: (BlAffineCompositeTransformation new
+		 addTransformation: (BlRotationTransformation new angle: 80);
+				 addTransformation: (BlShearTransformation new angleX: 80);
+				 yourself)
+		equals: (BlAffineCompositeTransformation new
+				 addTransformation: (BlShearTransformation new angleX: 80);
+				 addTransformation: (BlRotationTransformation new angle: 80);
+				 yourself).
+	
+	self
+		deny: (BlAffineCompositeTransformation new
+				 addTransformation: (BlShearTransformation new angleX: 80);
+				 addTransformation: (BlRotationTransformation new angle: 80);
+				 yourself)
+		equals: (BlAffineCompositeTransformation new
+				 addTransformation: (BlShearTransformation new angleX: 80);
+				 addTransformation: (BlRotationTransformation new angle: 70);
+				 yourself)
+]
+
+{ #category : #tests }
 BlAffineTransformationTest >> testEqualityBlMatrixTransformation [
 
 	self
