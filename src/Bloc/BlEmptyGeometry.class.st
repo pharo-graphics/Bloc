@@ -4,6 +4,13 @@ Class {
 	#category : #'Bloc-Basic-Geometry'
 }
 
+{ #category : #comparing }
+BlEmptyGeometry >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	^ self class = anObject class
+]
+
 { #category : #'geometry testing' }
 BlEmptyGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	

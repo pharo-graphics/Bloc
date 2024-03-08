@@ -10,6 +10,13 @@ Class {
 	#category : #'Bloc-Paint'
 }
 
+{ #category : #comparing }
+BlRadialGradientPaint >> = aBlPaint [
+
+	super = aBlPaint ifFalse: [ ^ false ].
+	^ self innerCenter = aBlPaint innerCenter and: [ self innerRadius = aBlPaint innerRadius and: [ self outerCenter = aBlPaint outerCenter and: [ self outerRadius = aBlPaint outerRadius ] ] ]
+]
+
 { #category : #accessing }
 BlRadialGradientPaint >> center: aPoint [
 	"Set the innerCenter and outerCenter at the specified Point."

@@ -16,6 +16,15 @@ BlBezierCurveGeometry class >> controlPoints: aCollection [
 	^ self new controlPoints: aCollection
 ]
 
+{ #category : #comparing }
+BlBezierCurveGeometry >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	
+	^ self controlPoints = anObject controlPoints
+]
+
 { #category : #'geometry testing' }
 BlBezierCurveGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry.

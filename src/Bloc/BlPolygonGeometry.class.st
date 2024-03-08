@@ -23,6 +23,14 @@ BlPolygonGeometry class >> vertices: aCollection [
 	^ self new vertices: aCollection
 ]
 
+{ #category : #comparing }
+BlPolygonGeometry >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	^ self vertices = anObject vertices
+]
+
 { #category : #'geometry testing' }
 BlPolygonGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry."
