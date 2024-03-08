@@ -91,6 +91,13 @@ BlLayout class >> constraints [
 	^ self subclassResponsibility
 ]
 
+{ #category : #comparing }
+BlLayout >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	^ self class = anObject class
+]
+
 { #category : #'private - alignment' }
 BlLayout >> align: anElement bounds: elementBounds in: theParentBounds with: aBlElementAlignment [
 	"I don't additionally take element margin or parent padding"

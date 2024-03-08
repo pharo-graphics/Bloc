@@ -5,51 +5,91 @@ I have been automatically converted and probably manually tweaked from BlCollect
 Class {
 	#name : #BlCollectionRopeIteratorTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples'
+	#category : #'Bloc-Examples-Rope'
 }
 
-{ #category : #fixture }
-BlCollectionRopeIteratorTest >> NextLineWithCr0 [
+{ #category : #running }
+BlCollectionRopeIteratorTest >> newHelloIterator [
 
-	<sampleInstance>
-	| anIterator aNextLine |
-	anIterator := (BlCollectionRope collection:
-		               'Line 1' , String cr , 'Line 2' , String cr
-		               , String cr , 'Line 4') iterator.
-	aNextLine := anIterator nextLineIndicesDo: [
-		             :aLineStart
-		             :aLineEnd
-		             :aDelimitedEnd |
-		             {
-			             aLineStart.
-			             aLineEnd.
-			             aDelimitedEnd } ].
-
-	self assert: anIterator position equals: 7.
-	self assert: aNextLine equals: { 0. 6. 7 }.
-	self
-		assert:
-		(anIterator rope from: aNextLine first to: aNextLine second)
-			asString
-		equals: 'Line 1'.
-
-	^ anIterator
+	^ (BlCollectionRope collection: 'Hello') iterator: 0 to: 5
 ]
 
-{ #category : #metadata }
-BlCollectionRopeIteratorTest >> originClassName [
-	"This test was generated from..."
-	^ 'BlCollectionRopeIteratorExamples'
+{ #category : #tests }
+BlCollectionRopeIteratorTest >> testInitialState [
+
+	| anIterator |
+	anIterator := self newHelloIterator.
+
+	self assert: anIterator position equals: 0.
+	self assert: anIterator start equals: 0.
+	self assert: anIterator end equals: 5.
+
+	self assert: anIterator hasNext.
+	self deny: anIterator hasPrevious
+]
+
+{ #category : #tests }
+BlCollectionRopeIteratorTest >> testNextAt0 [
+
+	| anIterator anItem |
+	anIterator := self newHelloIterator.
+
+	anItem := anIterator next.
+
+	self assert: anItem equals: $H.
+	self assert: anIterator position equals: 1.
+	self assert: anIterator hasNext.
+	self assert: anIterator hasPrevious
+]
+
+{ #category : #tests }
+BlCollectionRopeIteratorTest >> testNextAt1 [
+
+	| anIterator anItem |
+	anIterator := self newHelloIterator.
+	anIterator next.
+
+	anItem := anIterator next.
+
+	self assert: anItem equals: $e.
+	self assert: anIterator position equals: 2.
+	self assert: anIterator hasNext.
+	self assert: anIterator hasPrevious
+]
+
+{ #category : #tests }
+BlCollectionRopeIteratorTest >> testNextAt4 [
+
+	| anIterator anItem |
+	anIterator := self newHelloIterator.
+	4 timesRepeat: [ anIterator next ].
+
+	anItem := anIterator next.
+
+	self assert: anItem equals: $o.
+	self assert: anIterator position equals: 5.
+	self deny: anIterator hasNext.
+	self assert: anIterator hasPrevious
+]
+
+{ #category : #tests }
+BlCollectionRopeIteratorTest >> testNextAt5 [
+	"Iterator throws an error when the end is reached"
+
+	| anIterator |
+	anIterator := self newHelloIterator.
+	5 timesRepeat: [ anIterator next ].
+
+	self should: [ anIterator next ] raise: Error
 ]
 
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf0 [
 
-	<sampleInstance>
-	| anIterator aNextLine |
-	anIterator := (BlCollectionRope collection:
-		               'Line 1' , String crlf , 'Line 2' , String crlf
-		               , String crlf , 'Line 4') iterator.
+	| aString anIterator aNextLine |
+	aString := 'Line 1', String crlf, 'Line 2', String crlf, String crlf, 'Line 4'.
+	anIterator := (BlCollectionRope collection: aString) iterator.
+
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -73,9 +113,9 @@ BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf0 [
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf08 [
 
-	<sampleInstance>
 	| anIterator aNextLine |
-	anIterator := self testNextLineIndicesWithCrlf_0.
+	anIterator := self testNextLineIndicesWithCrlf0.
+
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -99,9 +139,8 @@ BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf08 [
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf16 [
 
-	<sampleInstance>
 	| anIterator aNextLine |
-	anIterator := self testNextLineIndicesWithCrlf_08.
+	anIterator := self testNextLineIndicesWithCrlf08.
 
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
@@ -126,9 +165,9 @@ BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf16 [
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf18 [
 
-	<sampleInstance>
 	| anIterator aNextLine |
-	anIterator := self testNextLineIndicesWithCrlf_16.
+	anIterator := self testNextLineIndicesWithCrlf16.
+
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -142,9 +181,35 @@ BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf18 [
 	self assert: aNextLine equals: { 18. 24. 24 }.
 	self
 		assert:
+			(anIterator rope
+				from: aNextLine first
+				to: aNextLine second) asString
+		equals: 'Line 4'
+]
+
+{ #category : #tests }
+BlCollectionRopeIteratorTest >> testNextLineWithCr0 [
+
+	| aString anIterator aNextLine |
+	aString := 'Line 1', String cr, 'Line 2', String cr, String cr, 'Line 4'.
+	anIterator := (BlCollectionRope collection: aString) iterator.
+
+	aNextLine := anIterator nextLineIndicesDo: [
+		             :aLineStart
+		             :aLineEnd
+		             :aDelimitedEnd |
+		             {
+			             aLineStart.
+			             aLineEnd.
+			             aDelimitedEnd } ].
+
+	self assert: anIterator position equals: 7.
+	self assert: aNextLine equals: { 0. 6. 7 }.
+	self
+		assert:
 		(anIterator rope from: aNextLine first to: aNextLine second)
 			asString
-		equals: 'Line 4'.
+		equals: 'Line 1'.
 
 	^ anIterator
 ]
@@ -152,9 +217,9 @@ BlCollectionRopeIteratorTest >> testNextLineIndicesWithCrlf18 [
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithCr07 [
 
-	<sampleInstance>
 	| anIterator aNextLine |
-	anIterator := self testNextLineWithCr_0.
+	anIterator := self testNextLineWithCr0.
+
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -178,9 +243,9 @@ BlCollectionRopeIteratorTest >> testNextLineWithCr07 [
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithCr14 [
 
-	<sampleInstance>
 	| anIterator aNextLine |
-	anIterator := self testNextLineWithCr_07.
+	anIterator := self testNextLineWithCr07.
+	
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -204,9 +269,9 @@ BlCollectionRopeIteratorTest >> testNextLineWithCr14 [
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithCr15 [
 
-	<sampleInstance>
 	| anIterator aNextLine |
-	anIterator := self testNextLineWithCr_14.
+	anIterator := self testNextLineWithCr14.
+	
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -222,42 +287,34 @@ BlCollectionRopeIteratorTest >> testNextLineWithCr15 [
 		assert:
 		(anIterator rope from: aNextLine first to: aNextLine second)
 			asString
-		equals: 'Line 4'.
-
-	^ anIterator
+		equals: 'Line 4'
 ]
 
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithCrlf [
 
-	<sampleInstance>
-	| anIterator |
-	anIterator := (BlCollectionRope collection:
-		               'Line 1' , String crlf , 'Line 2' , String crlf
-		               , String crlf , 'Line 4') iterator.
+	| aString anIterator |
+	aString := 'Line 1', String crlf, 'Line 2', String crlf, String crlf, 'Line 4'.
+	anIterator := (BlCollectionRope collection: aString) iterator.
 
 	self assert: anIterator nextLine asString equals: 'Line 1'.
 	self assert: anIterator nextLine asString equals: 'Line 2'.
 	self assert: anIterator nextLine asString equals: ''.
-	self assert: anIterator nextLine asString equals: 'Line 4'.
-
-	^ anIterator
+	self assert: anIterator nextLine asString equals: 'Line 4'
 ]
 
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithLf0 [
 
-	<sampleInstance>
-	| anIterator aNextLine |
-	anIterator := (BlCollectionRope collection:
-		               'Line 1' , String lf , 'Line 2' , String lf
-		               , String lf , 'Line 4') iterator.
+	| aString anIterator aNextLine |
+	aString := 'Line 1', String lf, 'Line 2', String lf, String lf, 'Line 4'.
+	anIterator := (BlCollectionRope collection: aString) iterator.
+
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
 		             :aDelimitedEnd |
-		             {
-			             aLineStart.
+		             {  aLineStart.
 			             aLineEnd.
 			             aDelimitedEnd } ].
 
@@ -265,8 +322,9 @@ BlCollectionRopeIteratorTest >> testNextLineWithLf0 [
 	self assert: aNextLine equals: { 0. 6. 7 }.
 	self
 		assert:
-		(anIterator rope from: aNextLine first to: aNextLine second)
-			asString
+			(anIterator rope
+				from: aNextLine first
+				to: aNextLine second) asString
 		equals: 'Line 1'.
 
 	^ anIterator
@@ -275,15 +333,14 @@ BlCollectionRopeIteratorTest >> testNextLineWithLf0 [
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithLf07 [
 
-	<sampleInstance>
 	| anIterator aNextLine |
-	anIterator := self testNextLineWithLf_0.
+	anIterator := self testNextLineWithLf0.
+	
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
 		             :aDelimitedEnd |
-		             {
-			             aLineStart.
+		             {  aLineStart.
 			             aLineEnd.
 			             aDelimitedEnd } ].
 
@@ -291,8 +348,9 @@ BlCollectionRopeIteratorTest >> testNextLineWithLf07 [
 	self assert: aNextLine equals: { 7. 13. 14 }.
 	self
 		assert:
-		(anIterator rope from: aNextLine first to: aNextLine second)
-			asString
+			(anIterator rope
+				from: aNextLine first
+				to: aNextLine second) asString
 		equals: 'Line 2'.
 
 	^ anIterator
@@ -301,15 +359,14 @@ BlCollectionRopeIteratorTest >> testNextLineWithLf07 [
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithLf14 [
 
-	<sampleInstance>
 	| anIterator aNextLine |
-	anIterator := self testNextLineWithLf_07.
+	anIterator := self testNextLineWithLf07.
+	
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
 		             :aDelimitedEnd |
-		             {
-			             aLineStart.
+		             {  aLineStart.
 			             aLineEnd.
 			             aDelimitedEnd } ].
 
@@ -317,8 +374,9 @@ BlCollectionRopeIteratorTest >> testNextLineWithLf14 [
 	self assert: aNextLine equals: { 14. 14. 15 }.
 	self
 		assert:
-		(anIterator rope from: aNextLine first to: aNextLine second)
-			asString
+			(anIterator rope
+				from: aNextLine first
+				to: aNextLine second) asString
 		equals: ''.
 
 	^ anIterator
@@ -327,9 +385,9 @@ BlCollectionRopeIteratorTest >> testNextLineWithLf14 [
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextLineWithLf15 [
 
-	<sampleInstance>
 	| anIterator aNextLine |
-	anIterator := self testNextLineWithLf_14.
+	anIterator := self testNextLineWithLf14.
+	
 	aNextLine := anIterator nextLineIndicesDo: [
 		             :aLineStart
 		             :aLineEnd
@@ -343,23 +401,21 @@ BlCollectionRopeIteratorTest >> testNextLineWithLf15 [
 	self assert: aNextLine equals: { 15. 21. 21 }.
 	self
 		assert:
-		(anIterator rope from: aNextLine first to: aNextLine second)
-			asString
-		equals: 'Line 4'.
-
-	^ anIterator
+			(anIterator rope
+				from: aNextLine first
+				to: aNextLine second) asString
+		equals: 'Line 4'
 ]
 
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt0 [
 
-	<sampleInstance>
 	| anIterator aSegmentResult |
-	anIterator := self testSmall.
+	anIterator := self newHelloIterator.
 
 	aSegmentResult := anIterator
 		                  nextSegment: [ :aBuffer |
-		                  aBuffer first = aBuffer second ]
+			                  aBuffer first = aBuffer second ]
 		                  indicesDo: [
 			                  :aFromIndex
 			                  :aToIndex
@@ -386,13 +442,12 @@ BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt0 [
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt3 [
 
-	<sampleInstance>
 	| anIterator aSegmentResult |
-	anIterator := self testNextSegmentWithLookAhead_at_0.
+	anIterator := self testNextSegmentWithLookAheadAt0.
 
 	aSegmentResult := anIterator
 		                  nextSegment: [ :aBuffer |
-		                  aBuffer first = aBuffer second ]
+			                  aBuffer first = aBuffer second ]
 		                  indicesDo: [
 			                  :aFromIndex
 			                  :aToIndex
@@ -419,20 +474,18 @@ BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt3 [
 { #category : #tests }
 BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt5 [
 
-	<sampleInstance>
 	| anIterator aSegmentResult |
-	anIterator := self testNextSegmentWithLookAhead_at_3.
+	anIterator := self testNextSegmentWithLookAheadAt3.
 
 	aSegmentResult := anIterator
 		                  nextSegment: [ :aBuffer |
-		                  aBuffer first = aBuffer second ]
+			                  aBuffer first = aBuffer second ]
 		                  indicesDo: [
 			                  :aFromIndex
 			                  :aToIndex
 			                  :anInitialValue
 			                  :aFinalValue |
-			                  {
-				                  aFromIndex.
+			                  {	aFromIndex.
 				                  aToIndex.
 				                  anInitialValue.
 				                  aFinalValue } ]
@@ -444,519 +497,190 @@ BlCollectionRopeIteratorTest >> testNextSegmentWithLookAheadAt5 [
 			(anIterator rope
 				 from: aSegmentResult first
 				 to: aSegmentResult second) asString
-		equals: 'lo'.
-
-	^ anIterator
+		equals: 'lo'
 ]
 
 { #category : #tests }
-BlCollectionRopeIteratorTest >> testSmall [
+BlCollectionRopeIteratorTest >> testNextSpanAt0 [
 
-	<sampleInstance>
-	| anIterator |
-	anIterator := BlCollectionRopeExamplesTest new testSmall
-		              iterator: 0
-		              to: 5.
-
-	self assert: anIterator position equals: 0.
-	self assert: anIterator start equals: 0.
-	self assert: anIterator end equals: 5.
-
-	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious not.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallNextAt0 [
-
-	<sampleInstance>
-	| anIterator anItem |
-	anIterator := self testSmall.
-
-	anItem := anIterator next.
-
-	self assert: anItem equals: $H.
-	self assert: anIterator position equals: 1.
-	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallNextAt1 [
-
-	<sampleInstance>
-	| anIterator anItem |
-	anIterator := self testSmall_next_at_0.
-
-	anItem := anIterator next.
-
-	self assert: anItem equals: $e.
-	self assert: anIterator position equals: 2.
-	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallNextAt2 [
-
-	<sampleInstance>
-	| anIterator anItem |
-	anIterator := self testSmall_next_at_1.
-
-	anItem := anIterator next.
-
-	self assert: anItem equals: $l.
-	self assert: anIterator position equals: 3.
-	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallNextAt3 [
-
-	<sampleInstance>
-	| anIterator anItem |
-	anIterator := self testSmall_next_at_2.
-
-	anItem := anIterator next.
-
-	self assert: anItem equals: $l.
-	self assert: anIterator position equals: 4.
-	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallNextAt4 [
-
-	<sampleInstance>
-	| anIterator anItem |
-	anIterator := self testSmall_next_at_3.
-
-	anItem := anIterator next.
-
-	self assert: anItem equals: $o.
-	self assert: anIterator position equals: 5.
-	self assert: anIterator hasNext not.
-	self assert: anIterator hasPrevious.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallNextAt5 [
-	"Iterator throws an error when the end is reached"
-
-	<sampleInstance>
-	| anIterator anError |
-	anIterator := self testSmall_next_at_4.
-
-	anError := nil.
-	[ anIterator next ]
-		on: Error
-		do: [ :e | anError := e ].
-
-	self assert: anError isNotNil.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallNextSpanAt0 [
-
-	<sampleInstance>
 	| anIterator aSpan |
-	anIterator := self testSmall.
+	anIterator := self newHelloIterator.
 	aSpan := anIterator nextSpan.
 
 	self assert: aSpan collection equals: 'Hello'.
-	self assert: anIterator position equals: 5.
-
-	^ anIterator
+	self assert: anIterator position equals: 5
 ]
 
 { #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallNextSpanAt1 [
+BlCollectionRopeIteratorTest >> testNextSpanAt1 [
 
-	<sampleInstance>
 	| anIterator aSpan |
-	anIterator := self testSmall_next_at_0.
+	anIterator := self newHelloIterator.
+	anIterator next.
+
 	aSpan := anIterator nextSpan.
 
 	self assert: aSpan collection equals: 'ello'.
-	self assert: anIterator position equals: 5.
-
-	^ anIterator
+	self assert: anIterator position equals: 5
 ]
 
 { #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallNextSpanAt2 [
-
-	<sampleInstance>
-	| anIterator aSpan |
-	anIterator := self testSmall_next_at_1.
-	aSpan := anIterator nextSpan.
-
-	self assert: aSpan collection equals: 'llo'.
-	self assert: anIterator position equals: 5.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallNextSpanAt3 [
-
-	<sampleInstance>
-	| anIterator aSpan |
-	anIterator := self testSmall_next_at_2.
-	aSpan := anIterator nextSpan.
-
-	self assert: aSpan collection equals: 'lo'.
-	self assert: anIterator position equals: 5.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallNextSpanAt4 [
-
-	<sampleInstance>
-	| anIterator aSpan |
-	anIterator := self testSmall_next_at_3.
-	aSpan := anIterator nextSpan.
-
-	self assert: aSpan collection equals: 'o'.
-	self assert: anIterator position equals: 5.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallNextSpanAt5 [
+BlCollectionRopeIteratorTest >> testNextSpanAt5 [
 	"Iterator throws an error when the end is reached"
 
-	<sampleInstance>
-	| anIterator anError |
-	anIterator := self testSmall_next_at_4.
+	| anIterator |
+	anIterator := self newHelloIterator.
+	5 timesRepeat: [ anIterator next ].
 
-	anError := nil.
-	[ anIterator nextSpan ]
-		on: Error
-		do: [ :e | anError := e ].
-
-	self assert: anError isNotNil.
-
-	^ anIterator
+	self should: [ anIterator nextSpan ] raise: Error
 ]
 
 { #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallPeekAt0 [
+BlCollectionRopeIteratorTest >> testPeekAt0 [
 
-	<sampleInstance>
 	| anIterator anItem |
-	anIterator := self testSmall.
+	anIterator := self newHelloIterator.
 
 	anItem := anIterator peek.
 
 	self assert: anItem equals: $H.
 	self assert: anIterator position equals: 0.
 	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious not.
-
-	^ anIterator
+	self deny: anIterator hasPrevious
 ]
 
 { #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallPeekAt1 [
+BlCollectionRopeIteratorTest >> testPeekAt4 [
 
-	<sampleInstance>
 	| anIterator anItem |
-	anIterator := self testSmall_next_at_0.
-
-	anItem := anIterator peek.
-
-	self assert: anItem equals: $e.
-	self assert: anIterator position equals: 1.
-	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallPeekAt2 [
-
-	<sampleInstance>
-	| anIterator anItem |
-	anIterator := self testSmall_next_at_1.
-
-	anItem := anIterator peek.
-
-	self assert: anItem equals: $l.
-	self assert: anIterator position equals: 2.
-	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallPeekAt3 [
-
-	<sampleInstance>
-	| anIterator anItem |
-	anIterator := self testSmall_next_at_2.
-
-	anItem := anIterator peek.
-
-	self assert: anItem equals: $l.
-	self assert: anIterator position equals: 3.
-	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallPeekAt4 [
-
-	<sampleInstance>
-	| anIterator anItem |
-	anIterator := self testSmall_next_at_3.
+	anIterator := self newHelloIterator.
+	4 timesRepeat: [ anIterator next ].
 
 	anItem := anIterator peek.
 
 	self assert: anItem equals: $o.
 	self assert: anIterator position equals: 4.
 	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious.
-
-	^ anIterator
+	self assert: anIterator hasPrevious
 ]
 
 { #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallPeekAt5 [
+BlCollectionRopeIteratorTest >> testPeekAt5 [
 	"Iterator throws an error when the end is reached"
 
-	<sampleInstance>
-	| anIterator anError |
-	anIterator := self testSmall_next_at_4.
+	| anIterator |
+	anIterator := self newHelloIterator.
+	5 timesRepeat: [ anIterator next ].
 
-	anError := nil.
-	[ anIterator peek ]
-		on: Error
-		do: [ :e | anError := e ].
-
-	self assert: anError isNotNil.
-
-	^ anIterator
+	self should: [ anIterator peek ] raise: Error
 ]
 
 { #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallPreviousAt0 [
+BlCollectionRopeIteratorTest >> testPreviousAt0RaisesError [
 	"Iterator throws an error when the start is reached"
 
-	<sampleInstance>
-	| anIterator anError |
-	anIterator := self testSmall.
+	| anIterator |
+	anIterator := self newHelloIterator.
 
-	anError := nil.
-	[ anIterator previous ]
-		on: Error
-		do: [ :e | anError := e ].
-
-	self assert: anError isNotNil.
-
-	^ anIterator
+	self should: [ anIterator previous ] raise: Error
 ]
 
 { #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallPreviousAt1 [
+BlCollectionRopeIteratorTest >> testPreviousFrom1To0 [
 
-	<sampleInstance>
 	| anIterator anItem |
-	anIterator := self testSmall_next_at_0.
+	anIterator := self newHelloIterator.
+	anIterator next.
 
 	anItem := anIterator previous.
 
 	self assert: anItem equals: $H.
 	self assert: anIterator position equals: 0.
 	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious not.
-
-	^ anIterator
+	self deny: anIterator hasPrevious
 ]
 
 { #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallPreviousAt2 [
+BlCollectionRopeIteratorTest >> testPreviousFrom2To1 [
 
-	<sampleInstance>
 	| anIterator anItem |
-	anIterator := self testSmall_next_at_1.
+	anIterator := self newHelloIterator.
+	2 timesRepeat: [ anIterator next ].
+
+	self assert: anIterator position equals: 2.
 
 	anItem := anIterator previous.
 
 	self assert: anItem equals: $e.
 	self assert: anIterator position equals: 1.
-	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious.
 
-	^ anIterator
 ]
 
 { #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallPreviousAt3 [
+BlCollectionRopeIteratorTest >> testPreviousFrom5To0 [
 
-	<sampleInstance>
-	| anIterator anItem |
-	anIterator := self testSmall_next_at_2.
-
-	anItem := anIterator previous.
-
-	self assert: anItem equals: $l.
-	self assert: anIterator position equals: 2.
-	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallPreviousAt4 [
-
-	<sampleInstance>
-	| anIterator anItem |
-	anIterator := self testSmall_next_at_3.
-
-	anItem := anIterator previous.
-
-	self assert: anItem equals: $l.
-	self assert: anIterator position equals: 3.
-	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallPreviousAt5 [
-
-	<sampleInstance>
-	| anIterator anItem |
-	anIterator := self testSmall_next_at_4.
-
-	anItem := anIterator previous.
-
-	self assert: anItem equals: $o.
-	self assert: anIterator position equals: 4.
-	self assert: anIterator hasNext.
-	self assert: anIterator hasPrevious.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallSkip0At0 [
-
-	<sampleInstance>
 	| anIterator |
-	anIterator := self testSmall.
-	anIterator skip: 0.
+	anIterator := self newHelloIterator.
+	5 timesRepeat: [ anIterator next ].
+
+	self assert: anIterator position equals: 5.
+	self deny: anIterator hasNext.
+	self assert: anIterator hasPrevious.
+	
+	self assert: anIterator previous equals: $o.
+	self assert: anIterator previous equals: $l.
+	self assert: anIterator previous equals: $l.
+	self assert: anIterator previous equals: $e.
+	self assert: anIterator previous equals: $H.
 
 	self assert: anIterator position equals: 0.
-
-	^ anIterator
+	self assert: anIterator hasNext.
+	self deny: anIterator hasPrevious
 ]
 
 { #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallSkip1At0 [
+BlCollectionRopeIteratorTest >> testSkip [
 
-	<sampleInstance>
 	| anIterator |
-	anIterator := self testSmall.
+	anIterator := self newHelloIterator.
+
 	anIterator skip: 1.
 
 	self assert: anIterator position equals: 1.
 
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallSkip2At0 [
-
-	<sampleInstance>
-	| anIterator |
-	anIterator := self testSmall.
-	anIterator skip: 2.
-
-	self assert: anIterator position equals: 2.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallSkip3At0 [
-
-	<sampleInstance>
-	| anIterator |
-	anIterator := self testSmall.
 	anIterator skip: 3.
-
-	self assert: anIterator position equals: 3.
-
-	^ anIterator
-]
-
-{ #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallSkip4At0 [
-
-	<sampleInstance>
-	| anIterator |
-	anIterator := self testSmall.
-	anIterator skip: 4.
 
 	self assert: anIterator position equals: 4.
 
-	^ anIterator
+	anIterator skip: 1.
+
+	self assert: anIterator position equals: 5
 ]
 
 { #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallSkip5At0 [
+BlCollectionRopeIteratorTest >> testSkipOutOfBoundsRaisesError [
 
-	<sampleInstance>
 	| anIterator |
-	anIterator := self testSmall.
-	anIterator skip: 5.
+	anIterator := self newHelloIterator.
 
-	self assert: anIterator position equals: 5.
+	self should: [ anIterator skip: 6 ] raise: Error.
 
-	^ anIterator
+	anIterator skip: 4.
+
+	self should: [ anIterator skip: 2 ] raise: Error.
+
+	anIterator skip: 1
 ]
 
 { #category : #tests }
-BlCollectionRopeIteratorTest >> testSmallSkip6At0 [
-	"Iterator throws an error when the end is reached"
+BlCollectionRopeIteratorTest >> testSkipZeroDoesntChangePosition [
 
-	<sampleInstance>
-	| anIterator anError |
-	anIterator := self testSmall.
+	| anIterator |
+	anIterator := self newHelloIterator.
+	anIterator next.
+	self assert: anIterator position equals: 1.
+	
+	anIterator skip: 0.
 
-	anError := nil.
-	[ anIterator skip: 6 ]
-		on: Error
-		do: [ :e | anError := e ].
-
-	self assert: anError isNotNil.
-
-	^ anIterator
+	self assert: anIterator position equals: 1
 ]

@@ -5,5 +5,5 @@ I have been automatically converted and probably manually tweaked from BlGridLay
 Class {
 	#name : #BlGridLayoutUsageTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples'
+	#category : #'Bloc-Examples-Layouts'
 }

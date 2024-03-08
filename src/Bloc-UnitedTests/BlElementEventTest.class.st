@@ -1,99 +1,84 @@
-"
-I have been automatically converted and probably manually tweaked from BlElementEventExamples. Pay attention there is an important design decision in such tests. First to let GT people execute them, the tests and helpers are tagged with <gtExample> do not remove them, let also the <label:...>.
-	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
-"
 Class {
 	#name : #BlElementEventTest,
 	#superclass : #TestCase,
 	#category : #'Bloc-UnitedTests-Event'
 }
 
-{ #category : #'test seed' }
-BlElementEventTest >> child [
+{ #category : #running }
+BlElementEventTest >> newChild [
 
-	<sampleInstance>
-	<demo>
 	^ BlElement new
 		  size: 100 @ 75;
-		  background: Color red
+		  background: Color red;
+		  yourself
 ]
 
-{ #category : #'test seed' }
-BlElementEventTest >> container [
+{ #category : #running }
+BlElementEventTest >> newContainer [
 
-	<sampleInstance>
-	<demo>
 	^ BlElement new
 		  size: 500 @ 400;
-		  border: (BlBorder builder dashed
+		  border:
+				(BlBorder builder dashed
 				   width: 2;
 				   paint: Color red;
-				   build)
+				   build);
+		  yourself
 ]
 
-{ #category : #'test seed' }
-BlElementEventTest >> parent [
+{ #category : #running }
+BlElementEventTest >> newParent [
 
-	<sampleInstance>
-	<demo>
 	^ BlElement new
 		  size: 400 @ 300;
-		  background: (Color gray alpha: 0.3)
+		  background: (Color gray alpha: 0.3);
+		  yourself
 ]
 
 { #category : #tests }
 BlElementEventTest >> testAddedToParent [
 
-	<sampleInstance>
-	<demo>
 	| wasAdded parent child container |
 	wasAdded := 0.
 
-	child := self child.
+	child := self newChild.
 	child
 		addEventHandlerOn: BlElementAddedToParentEvent
 		do: [ wasAdded := wasAdded + 1 ].
 
-	parent := self parent.
-	container := self container.
+	parent := self newParent.
+	container := self newContainer.
 
 	"is sent only when child is added to the parent"
 	parent addChild: child.
 	"will not be sent when adding parent to a container"
 	container addChild: parent.
 
-	self assert: wasAdded equals: 1.
-	^ container
+	self assert: wasAdded equals: 1
 ]
 
 { #category : #tests }
 BlElementEventTest >> testBackgroundChanged [
 
-	<sampleInstance>
-	<demo>
 	| backgroundChanged element |
 	backgroundChanged := 0.
 
-	element := self child.
+	element := self newChild.
 	element
 		addEventHandlerOn: BlElementBackgroundChangedEvent
 		do: [ backgroundChanged := backgroundChanged + 1 ].
 
 	element background: Color blue.
-	self assert: backgroundChanged equals: 1.
-
-	^ element
+	self assert: backgroundChanged equals: 1
 ]
 
 { #category : #tests }
 BlElementEventTest >> testBorderChanged [
 
-	<sampleInstance>
-	<demo>
 	| borderChanged element |
 	borderChanged := 0.
 
-	element := self child.
+	element := self newChild.
 	element
 		addEventHandlerOn: BlElementBorderChangedEvent
 		do: [ borderChanged := borderChanged + 1 ].
@@ -102,20 +87,16 @@ BlElementEventTest >> testBorderChanged [
 			 paint: Color gray;
 			 width: 5;
 			 build).
-	self assert: borderChanged equals: 1.
-
-	^ element
+	self assert: borderChanged equals: 1
 ]
 
 { #category : #tests }
 BlElementEventTest >> testExtentChanged [
 
-	<sampleInstance>
-	<demo>
 	| extentChanged element |
 	extentChanged := 0.
 
-	element := self child.
+	element := self newChild.
 	"make sure initial extent is computed"
 	element forceLayout.
 	element
@@ -130,18 +111,15 @@ BlElementEventTest >> testExtentChanged [
 	"requesting the same size should not trigger event"
 	element size: element extent.
 	element forceLayout.
-	self assert: extentChanged equals: 1.
-
-	^ element
+	self assert: extentChanged equals: 1
 ]
 
 { #category : #tests }
 BlElementEventTest >> testExtentChangedChangingWithTheSameSizeDoesNotRaiseEvent [
 
-	<sampleInstance>
 	| extentChanged element |
 	extentChanged := 0.
-	element := self child.
+	element := self newChild.
 	"make sure initial extent is computed"
 	element forceLayout.
 	element
@@ -150,40 +128,32 @@ BlElementEventTest >> testExtentChangedChangingWithTheSameSizeDoesNotRaiseEvent 
 
 	element size: element extent.
 	element forceLayout.
-	self assert: extentChanged equals: 0.
-
-	^ element
+	self assert: extentChanged equals: 0
 ]
 
 { #category : #tests }
 BlElementEventTest >> testLayoutChanged [
 
-	<sampleInstance>
-	<demo>
 	| layoutChanged element |
 	layoutChanged := 0.
 
-	element := self child.
+	element := self newChild.
 	element
 		addEventHandlerOn: BlElementLayoutChangedEvent
 		do: [ layoutChanged := layoutChanged + 1 ].
 
 	element layout: BlLinearLayout vertical.
-	self assert: layoutChanged equals: 1.
-
-	^ element
+	self assert: layoutChanged equals: 1
 ]
 
 { #category : #tests }
 BlElementEventTest >> testPositionChanged [
 
-	<sampleInstance>
-	<demo>
 	| positionChanged parent child |
 	positionChanged := 0.
 
-	child := self child.
-	parent := self parent.
+	child := self newChild.
+	parent := self newParent.
 	parent addChild: child.
 	parent forceLayout.
 
@@ -198,20 +168,17 @@ BlElementEventTest >> testPositionChanged [
 	"relocating child to the same position should not trigger an event"
 	child position: child position.
 	child forceLayout.
-	self assert: positionChanged equals: 1.
-
-	^ parent
+	self assert: positionChanged equals: 1
 ]
 
 { #category : #tests }
 BlElementEventTest >> testPositionChangedRelocatingOnSamePositionDoesNotRaiseEvent [
 
-	<sampleInstance>
 	| positionChanged parent child |
 	positionChanged := 0.
 
-	child := self child.
-	parent := self parent.
+	child := self newChild.
+	parent := self newParent.
 	parent addChild: child.
 	parent forceLayout.
 
@@ -222,23 +189,20 @@ BlElementEventTest >> testPositionChangedRelocatingOnSamePositionDoesNotRaiseEve
 
 	child position: child position.
 	child forceLayout.
-	self assert: positionChanged equals: 0.
-
-	^ parent
+	self assert: positionChanged equals: 0
 ]
 
 { #category : #tests }
 BlElementEventTest >> testRemovedFromParent [
 
-	<sampleInstance>
 	| wasRemoved parent child container |
 	wasRemoved := 0.
-	child := self child.
+	child := self newChild.
 	child
 		addEventHandlerOn: BlElementRemovedFromParentEvent
 		do: [ wasRemoved := wasRemoved + 1 ].
-	parent := self parent.
-	container := self container.
+	parent := self newParent.
+	container := self newContainer.
 
 	parent addChild: child.
 	container addChild: parent.
@@ -246,6 +210,5 @@ BlElementEventTest >> testRemovedFromParent [
 	container removeChild: parent.
 	parent removeChild: child.
 
-	self assert: wasRemoved equals: 1.
-	^ container
+	self assert: wasRemoved equals: 1
 ]

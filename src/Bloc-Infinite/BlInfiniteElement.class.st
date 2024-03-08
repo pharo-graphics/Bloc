@@ -58,11 +58,19 @@ BlInfiniteElement >> aeDrawChildrenOn: aCanvas [
 ]
 
 { #category : #'as yet unclassified' }
+BlInfiniteElement >> aeDrawItemDecorationsOn: aCanvas [
+	" draw then decorate eventually (between the background and the childrens)"
+	self itemDecorationsDo: [ :d | 
+		d aeDrawBeneathOn: aCanvas in: self ].
+
+
+]
+
+{ #category : #'as yet unclassified' }
 BlInfiniteElement >> aeDrawOn: aCanvas [
 	" draw then decorate eventually (between the background and the childrens)"
 	super aeDrawOn: aCanvas.
-	self itemDecorationsDo: [ :d | 
-		d aeDrawBeneathOn: aCanvas in: self ].
+	self aeDrawItemDecorationsOn: aCanvas
 
 
 ]
@@ -280,31 +288,15 @@ BlInfiniteElement >> computeVerticalScrollRange [
 
 { #category : #'private - commands' }
 BlInfiniteElement >> consumePendingDataSourceCommands [
-	"I help to reflect data changes to the state.
+	" I'm sent before scrolling.
+	I help to reflect data changes to the state.
 	DataSource changes during a scroll may trigger a crash because scroll assumes no data change but data actually changed.
 	I consume all deferred changes to avoid that case."
 
 	(firstLayoutComplete not or: [ dataSourceChangedAfterLayout ])
 		ifTrue: [ ^ self dispatchLayout ].
-	
-	dataSourceManager hasPendingCommands
-		ifFalse: [ ^ self ].
-
-	"if it is only an item change (no add-remove-move) we can check
-	if any of the visible items is affected and if not, just ignore the change."
-	dataSourceManager hasOnlyUpdateCommand
-		ifTrue: [ 
-			self eatRequestLayout.
-			dataSourceManager preProcessCommandsIn: self.
-			layoutRequestEaten ifFalse: [ 
-				self hasUpdatedChild
-					ifTrue: [ self dispatchLayout ]
-					"no need to layout, clean state"
-					ifFalse: [ dataSourceManager consumePostponedCommandsIn: self ] ].
-			self resumeRequestLayout: true ]
-		ifFalse: [
-			 dataSourceManager hasPendingCommands
-				ifTrue: [ self dispatchLayout ] ]
+	dataSourceManager hasPendingCommands ifFalse: [ ^ self ].
+	self dispatchLayout
 ]
 
 { #category : #accessing }
@@ -504,14 +496,14 @@ BlInfiniteElement >> dispatchLayout [
 
 	self state isMeasuring: false.
 	self state isStartStep
-		ifTrue: [ 
+		ifTrue: [
 			self dispatchLayoutFirstStep.
 			self layout exactMeasurementSpecFrom: self.
 			self dispatchLayoutSecondStep ]
-		ifFalse: [ 
+		ifFalse: [
 			self layout exactMeasurementSpecFrom: self.
-			(dataSourceManager hasCommands or: [ 
-				 layout width ~= self width or: [ layout height ~= self height ] ]) 
+			(dataSourceManager hasCommands or: [
+				 layout width ~= self width or: [ layout height ~= self height ] ])
 				ifTrue: [ self dispatchLayoutSecondStep ] ].
 	self dispatchLayoutThirdStep
 ]
@@ -791,20 +783,6 @@ BlInfiniteElement >> hasFixedSize: aBoolean [
 { #category : #'item decorations - testing' }
 BlInfiniteElement >> hasItemDecorations [
 	^ itemDecorations isNotEmpty
-]
-
-{ #category : #'private - testing' }
-BlInfiniteElement >> hasUpdatedChild [
-	"Return true if any of existing elemnts holder needs to be updated"
-	<return: #Boolean>
-
-	self childrenDo: [ :anElement |
-		| anElementHolder |
-		anElementHolder := self elementHolderOf: anElement.
-		(anElementHolder shouldIgnore not and:[
-			anElementHolder isUpdated ])
-				ifTrue: [ ^ true ] ].
-	^ false 
 ]
 
 { #category : #initialization }
@@ -1108,38 +1086,6 @@ BlInfiniteElement >> offsetPositionRecordsForInsert: aStartPosition itemCount: a
 				state structureChanged: true ] ]
 		in: self.
 	self requestLayout
-]
-
-{ #category : #'private - commands' }
-BlInfiniteElement >> offsetPositionRecordsForMove: aFromPosition to: aToPosition [
-
-	| aStart anEnd anInBetweenOffset |
-	aFromPosition < aToPosition
-		ifTrue: [ 
-			aStart := aFromPosition.
-			anEnd := aToPosition.
-			anInBetweenOffset := -1 ]
-		ifFalse: [ 
-			aStart := aToPosition.
-			anEnd := aFromPosition.
-			anInBetweenOffset := 1 ].
-
-	childrenManager
-		unfilteredChildrenDo: [ :anElement | 
-			| anElementHolder |
-			anElementHolder := self elementHolderOf: anElement.
-			(anElementHolder position between: aStart and: anEnd) ifTrue: [ 
-				anElementHolder position = aFromPosition
-					ifTrue: [ 
-						anElementHolder
-							offsetPositionBy: aToPosition - aFromPosition
-							applyToPreLayout: false ]
-					ifFalse: [ 
-						anElementHolder
-							offsetPositionBy: anInBetweenOffset
-							applyToPreLayout: false ].
-				state structureChanged: true ] ]
-		in: self
 ]
 
 { #category : #'private - commands' }

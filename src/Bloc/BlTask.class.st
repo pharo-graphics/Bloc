@@ -36,11 +36,6 @@ BlTask class >> initialize [
 	UniqueIdGenerator := BlUniqueIdGenerator new
 ]
 
-{ #category : #converting }
-BlTask >> asBeaconLoggingTask [
-	^ BlBeaconLoggingTask subtask: self
-]
-
 { #category : #accessing }
 BlTask >> id [
 	"Return a unique id of this task"

@@ -19,6 +19,14 @@ BlMatrixTransformation class >> matrix: aBlMatrix [
 		  yourself
 ]
 
+{ #category : #comparing }
+BlMatrixTransformation >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	^ self matrix = anObject matrix
+]
+
 { #category : #initialization }
 BlMatrixTransformation >> initialize [
 

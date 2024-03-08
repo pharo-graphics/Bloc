@@ -75,7 +75,13 @@ BlInfiniteVerticalOrientation >> end [
 
 { #category : #geometry }
 BlInfiniteVerticalOrientation >> endWithPadding [
-	^ self layout height - self layout paddingBottom
+
+	| height |
+	height := self layout lastExactSize
+		          ifNil: [ self layout height ]
+		          ifNotNil: [ :size | size y ].
+
+	^ (height max: self layout minimumHeight) - self layout paddingBottom
 ]
 
 { #category : #testing }

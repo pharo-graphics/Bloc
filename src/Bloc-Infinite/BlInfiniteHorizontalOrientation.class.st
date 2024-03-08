@@ -75,9 +75,13 @@ BlInfiniteHorizontalOrientation >> end [
 
 { #category : #geometry }
 BlInfiniteHorizontalOrientation >> endWithPadding [
-	<return: #Number>
 
-	^ self layout width - self layout paddingRight
+	| width |
+	width := self layout lastExactSize
+		         ifNil: [ self layout width ]
+		         ifNotNil: [ :size | size x ].
+
+	^ (width max: self layout minimumWidth) - self layout paddingRight
 ]
 
 { #category : #testing }

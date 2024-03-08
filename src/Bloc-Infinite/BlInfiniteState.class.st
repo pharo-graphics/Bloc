@@ -27,10 +27,15 @@ Class {
 { #category : #asserting }
 BlInfiniteState >> assertLayoutStep: aStep [
 	"Make sure that current layout step is aStep"
-	
-	self
-		assert: [ layoutStep has: aStep ]
-		description: [ 'Wrong layout state! It should be: ', aStep asString, ' but it is ', layoutStep value asString ]
+
+	| m |
+	m := 'Wrong layout state! It should be: ' , aStep asString
+	     , ' but it is ' , layoutStep value asString.
+
+	Bloc debugModeEnabled ifFalse: [ 
+		(layoutStep has: aStep) ifFalse: [ m traceCr ].
+		^ self ].
+	self assert: [ layoutStep has: aStep ] description: [ m ]
 ]
 
 { #category : #asserting }

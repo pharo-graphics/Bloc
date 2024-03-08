@@ -1,7 +1,7 @@
 Class {
 	#name : #BlFrameLayoutAlignmentExampleTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples'
+	#category : #'Bloc-Examples-Layouts'
 }
 
 { #category : #'as yet unclassified' }

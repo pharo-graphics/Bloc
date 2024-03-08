@@ -60,6 +60,7 @@ BlMorphicWorldEmbeddingElement >> drawOnSpartaCanvas: aCanvas [
 
 { #category : #initialization }
 BlMorphicWorldEmbeddingElement >> initialize [
+
 	super initialize.
 
 	self constraintsDo: [ :c |
@@ -67,14 +68,26 @@ BlMorphicWorldEmbeddingElement >> initialize [
 		c vertical matchParent ].
 
 	shouldBeMain := false.
-	worldState := BlMorphicWorldState new element: self.
+	worldState :=
+		BlMorphicWorldState new
+			element: self;
+			yourself.
+
 	world := BlMorphicWorldMorph worldState: worldState.
-	world worldState worldRenderer: (BlMorphicWorldRenderer new element: self; world: world).
+	world worldState worldRenderer:
+		(BlMorphicWorldRenderer new
+			element: self;
+			world: world;
+			yourself).
 
 	self addEventHandler: BlMorphicWorldEmbeddingEventHandler new.
-	self when: BlMouseDownEvent do: [ self requestFocus ].
+	self addEventHandlerOn: BlMouseDownEvent do: [ self requestFocus ].
 
-	self enqueueTask: (BlRepeatedTaskAction new delay: 20 milliSeconds; action: [ world runStepMethods ])
+	self enqueueTask:
+		(BlRepeatedTaskAction new
+			delay: 20 milliSeconds;
+			action: [ world runStepMethods ];
+			yourself)
 ]
 
 { #category : #'hooks - children' }

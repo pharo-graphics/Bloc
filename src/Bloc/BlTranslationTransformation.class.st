@@ -30,6 +30,14 @@ BlTranslationTransformation class >> x: aX y: aY z: aZ [
 		  yourself
 ]
 
+{ #category : #comparing }
+BlTranslationTransformation >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [^ false ].
+	^ self translation = anObject translation
+]
+
 { #category : #initialization }
 BlTranslationTransformation >> initialize [
 
