@@ -18,29 +18,36 @@ BlInfiniteDataSourceObserver >> handleEvent: anEvent [
 ]
 
 { #category : #'event handling' }
-BlInfiniteDataSourceObserver >> onChanged: anEvent [
+BlInfiniteDataSourceObserver >> infiniteDataSourceChanged: anEvent [
 	"@see BlInfiniteDataSourceChanged"
 
 	self subclassResponsibility
 ]
 
 { #category : #'event handling' }
-BlInfiniteDataSourceObserver >> onItemsChanged: anEvent [
+BlInfiniteDataSourceObserver >> infiniteDataSourceItemRangeChanged: anEvent [
 	"@see BlInfiniteDataSourceItemRangeChanged"
 
 	self subclassResponsibility
 ]
 
 { #category : #'event handling' }
-BlInfiniteDataSourceObserver >> onItemsEvent: anEvent [
+BlInfiniteDataSourceObserver >> infiniteDataSourceItemRangeEvent: anEvent [
 	"@see BlInfiniteDataSourceItemRangeEvent"
 
 	self subclassResponsibility
 ]
 
 { #category : #'event handling' }
-BlInfiniteDataSourceObserver >> onItemsInserted: anEvent [
+BlInfiniteDataSourceObserver >> infiniteDataSourceItemRangeInserted: anEvent [
 	"@see BlInfiniteDataSourceItemRangeInserted"
+
+	self subclassResponsibility
+]
+
+{ #category : #'event handling' }
+BlInfiniteDataSourceObserver >> infiniteDataSourceItemRangeRemoved: anEvent [
+	"@see BlInfiniteDataSourceItemRangeRemoved"
 
 	self subclassResponsibility
 ]
@@ -48,13 +55,6 @@ BlInfiniteDataSourceObserver >> onItemsInserted: anEvent [
 { #category : #'event handling' }
 BlInfiniteDataSourceObserver >> onItemsMoved: anEvent [
 	"@see BlInfiniteDataSourceItemRangeMoved"
-
-	self subclassResponsibility
-]
-
-{ #category : #'event handling' }
-BlInfiniteDataSourceObserver >> onItemsRemoved: anEvent [
-	"@see BlInfiniteDataSourceItemRangeRemoved"
 
 	self subclassResponsibility
 ]

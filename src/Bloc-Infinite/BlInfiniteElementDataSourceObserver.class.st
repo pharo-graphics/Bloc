@@ -24,31 +24,20 @@ BlInfiniteElementDataSourceObserver >> assertNotInLayoutOrScroll [
 	infiniteElement assertNotInLayoutOrScroll
 ]
 
-{ #category : #initialization }
-BlInfiniteElementDataSourceObserver >> initializeWith: anInfiniteElement [
-	
-	self
-		assert: [ infiniteElement isNil ]
-		description: [ 'I can be initialized only once!' ].
-	
-	infiniteElement := anInfiniteElement
-]
-
 { #category : #'event handling' }
-BlInfiniteElementDataSourceObserver >> onChanged: anEvent [
+BlInfiniteElementDataSourceObserver >> infiniteDataSourceChanged: anEvent [
 
 
 	self assertNotInLayoutOrScroll.
 	
 	infiniteElement state structureChanged: true.
 	infiniteElement setDataSourceChangedAfterLayout.
-
 	infiniteElement dataSourceManager hasPendingCommands
 		ifFalse: [ infiniteElement requestLayout ]
 ]
 
 { #category : #'event handling' }
-BlInfiniteElementDataSourceObserver >> onItemsChanged: anEvent [
+BlInfiniteElementDataSourceObserver >> infiniteDataSourceItemRangeChanged: anEvent [
 	| needsUpdate |
 	
 
@@ -63,7 +52,7 @@ BlInfiniteElementDataSourceObserver >> onItemsChanged: anEvent [
 ]
 
 { #category : #'event handling' }
-BlInfiniteElementDataSourceObserver >> onItemsEvent: anEvent [
+BlInfiniteElementDataSourceObserver >> infiniteDataSourceItemRangeEvent: anEvent [
 	self assertNotInLayoutOrScroll.
 	anEvent position to: anEvent position + anEvent itemCount - 1 do: [ :anIndex |
 		| anElementHolder |
@@ -72,7 +61,7 @@ BlInfiniteElementDataSourceObserver >> onItemsEvent: anEvent [
 ]
 
 { #category : #'event handling' }
-BlInfiniteElementDataSourceObserver >> onItemsInserted: anEvent [
+BlInfiniteElementDataSourceObserver >> infiniteDataSourceItemRangeInserted: anEvent [
 	| needsUpdate |
 	self assertNotInLayoutOrScroll.
 	
@@ -85,7 +74,7 @@ BlInfiniteElementDataSourceObserver >> onItemsInserted: anEvent [
 ]
 
 { #category : #'event handling' }
-BlInfiniteElementDataSourceObserver >> onItemsRemoved: anEvent [
+BlInfiniteElementDataSourceObserver >> infiniteDataSourceItemRangeRemoved: anEvent [
 	| needsUpdate |
 	self assertNotInLayoutOrScroll.
 	
@@ -95,6 +84,16 @@ BlInfiniteElementDataSourceObserver >> onItemsRemoved: anEvent [
 
 	needsUpdate
 		ifTrue: [ self triggerUpdateProcessor ]
+]
+
+{ #category : #initialization }
+BlInfiniteElementDataSourceObserver >> initializeWith: anInfiniteElement [
+	
+	self
+		assert: [ infiniteElement isNil ]
+		description: [ 'I can be initialized only once!' ].
+	
+	infiniteElement := anInfiniteElement
 ]
 
 { #category : #private }

@@ -54,5 +54,6 @@ BlInfiniteDataSourceItemRangeRemoved >> position: anObject [
 
 { #category : #sending }
 BlInfiniteDataSourceItemRangeRemoved >> sendTo: anObject [
-	anObject onItemsRemoved: self
+
+	anObject infiniteDataSourceItemRangeRemoved: self
 ]

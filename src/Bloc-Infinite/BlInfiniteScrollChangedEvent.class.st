@@ -9,6 +9,7 @@ Class {
 
 { #category : #'instance creation' }
 BlInfiniteScrollChangedEvent class >> scrollState: aScrollState [
+
 	^ self new
 		scrollState: aScrollState;
 		yourself
