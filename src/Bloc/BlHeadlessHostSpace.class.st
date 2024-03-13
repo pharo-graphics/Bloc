@@ -37,7 +37,6 @@ BlHeadlessHostSpace >> close [
 
 { #category : #initialization }
 BlHeadlessHostSpace >> createBufferSurfaceRenderer [
-	<return: #BlHostSurfaceRenderer>
 	
 	^ BlHeadlessBufferSurfaceRenderer new
 ]
@@ -178,6 +177,12 @@ BlHeadlessHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
 	
 	^ false
+]
+
+{ #category : #initialization }
+BlHeadlessHostSpace >> newBlHostRendererSurface [
+	
+	^ BlHostRendererBufferSurface newForHostSpace: self
 ]
 
 { #category : #'host space - displaying' }
