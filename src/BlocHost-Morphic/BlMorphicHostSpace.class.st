@@ -36,9 +36,10 @@ BlMorphicHostSpace >> close [
 
 { #category : #initialization }
 BlMorphicHostSpace >> createFormSurfaceRenderer [
-	<return: #BlHostSurfaceRenderer>
-	
-	^ BlMorphicFormSurfaceRenderer new spaceHostMorph: spaceHostMorph
+
+	^ BlMorphicFormSurfaceRenderer new
+			spaceHostMorph: spaceHostMorph;
+			yourself
 ]
 
 { #category : #'host space - cursor' }
