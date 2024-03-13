@@ -5,13 +5,11 @@ I am a parallel Universe. There can exist multiple parallel universes
 Class {
 	#name : #BlParallelUniverse,
 	#superclass : #Object,
-	#traits : 'TBlEventTarget',
 	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [
 		'id',
 		'deferredActions',
 		'postponedActions',
-		'eventDispatcher',
 		'hostClass',
 		'spaceManager'
 	],
@@ -200,16 +198,6 @@ BlParallelUniverse >> closeSpaces [
 	self spaces copy do: [ :aSpace | self closeSpace: aSpace ]
 ]
 
-{ #category : #initialization }
-BlParallelUniverse >> defaultEventDispatcher [
-	^ BlDirectEventDispatcher on: self
-]
-
-{ #category : #initialization }
-BlParallelUniverse >> defaultEventListener [
-	^ BlUniverseEventListener new
-]
-
 { #category : #'api - ui process' }
 BlParallelUniverse >> defer: aValuable [
 	"Enqueue a valuable from any process to be executed in the UI process at the beginning of the next pulse.
@@ -341,10 +329,7 @@ BlParallelUniverse >> initialize [
 	spaceManager := BlSpaceManager new.
 	hostClass := BlHeadlessHost.
 	deferredActions := WaitfreeQueue new.
-	postponedActions := WaitfreeQueue new.
-
-	eventDispatcher := self defaultEventDispatcher.
-	self addEventHandler: self defaultEventListener
+	postponedActions := WaitfreeQueue new
 ]
 
 { #category : #'api - spaces' }
