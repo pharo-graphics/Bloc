@@ -21,9 +21,8 @@ BlSpaceEventTest >> setUp [
 		  yourself
 ]
 
-{ #category : #'show / close' }
+{ #category : #tests }
 BlSpaceEventTest >> testSpaceClosed [
-	<expectedFailure>
 
 	| count |
 	count := 0.
@@ -33,14 +32,16 @@ BlSpaceEventTest >> testSpaceClosed [
 		do: [ count := count + 1 ].
 
 	space show.
+	self waitPulses.
 	self assert: count equals: 0.
+
 	space close.
+	self waitPulses.
 	self assert: count equals: 1
 ]
 
-{ #category : #'show / close' }
+{ #category : #tests }
 BlSpaceEventTest >> testSpaceDestroyed [
-	<expectedFailure>
 
 	| events |
 	events := OrderedCollection new.
@@ -53,26 +54,36 @@ BlSpaceEventTest >> testSpaceDestroyed [
 		do: [ events add: #destroyed ].
 
 	space show.
+	self waitPulses.
 	self assert: events size equals: 0.
+
 	space close.
+	self waitPulses.
 	self assert: events size equals: 2.
 	self assert: events asArray equals: #( closed destroyed )
 ]
 
-{ #category : #'show / close' }
+{ #category : #tests }
 BlSpaceEventTest >> testSpaceShown [
-	<expectedFailure>
 
-	| spaceShown |
-	spaceShown := 0.
+	| count |
+	count := 0.
 
 	space
 		addEventHandlerOn: BlSpaceShownEvent
-		do: [ spaceShown := spaceShown + 1 ].
+		do: [ count := count + 1 ].
 
 	space show.
-	self assert: spaceShown equals: 1.
+	self waitPulses.
+	self assert: count equals: 1.
 
 	space close.
-	self assert: spaceShown equals: 1
+	self waitPulses.
+	self assert: count equals: 1
+]
+
+{ #category : #running }
+BlSpaceEventTest >> waitPulses [
+
+	BlSpace pulseUntilEmptyTaskQueue: space timeout: 50 milliSeconds
 ]
