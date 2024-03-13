@@ -267,14 +267,6 @@ BlParallelUniverse >> detachSpaceSynchronously: aSpace [
 	aSpace dispatchEvent: (BlSpaceDetachedEvent new space: aSpace).
 ]
 
-{ #category : #'event management accessing' }
-BlParallelUniverse >> eventDispatcher [
-	"Return an object responsible for event dispatching"
-	<return: #BlDirectEventDispatcher>
-
-	^ eventDispatcher
-]
-
 { #category : #testing }
 BlParallelUniverse >> hasDeferredActions [
 	
