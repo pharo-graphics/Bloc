@@ -1328,6 +1328,7 @@ BlElement >> dispatchAddedToParent [
 	"Sent after I was added to another element as direct child.
 	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
 
+	boundsCache invalidateBoundsInSpace.
 	self onAddedToParent.
 	self eventDispatcher dispatchAddedToParent
 ]
