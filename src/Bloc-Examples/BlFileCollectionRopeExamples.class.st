@@ -5,14 +5,35 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlFileCollectionRopeExamples >> testSmall [
-	"Creates an instance of the rope of size smaller than combineLength"
+BlFileCollectionRopeExamples >> testBufferedIndexes [
+	"Test that buffering + index calculations work"
 
-	<sampleInstance>
+	| rope result file |
+	file := FileSystem memory / 'test.txt'.
+	file writeStreamDo: [ :stream | stream << 'foobarbaz' ].
+	rope :=
+		BlRopeableCollectionFile new
+			bufferSize: 3;
+			fileReference: file.	
+
+	"The following test uses an explicit whileTrue: loop instead of to:do: since `rope size` can be different every time"
+	result :=
+		String streamContents: [ :str | 
+			| i |
+			i := 1.
+			[ i <= rope size ] whileTrue: [
+				str nextPut: (rope at: i).
+				i := i + 1 ] ].
+
+	self assert: result equals: 'foobarbaz'
+]
+
+{ #category : #'instance creation' }
+BlFileCollectionRopeExamples >> testSmall [
+	"Test a rope of size smaller than combineLength"
+
 	| aRope file |
-	file := FileReference
-		        newTempFilePrefix: 'BlFileCollectionRopeExamples-'
-		        suffix: '-small'.
+	file := FileSystem memory / 'test.txt'.
 	file writeStreamDo: [ :stream | stream << 'Hello' ].
 	aRope := BlCollectionRope collection:
 		         (BlRopeableCollectionFile new fileReference: file).
