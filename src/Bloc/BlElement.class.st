@@ -545,7 +545,7 @@ BlElement >> attachChild: anElement at: anIndex [
 				eachElement isRemovedFromSceneGraph
 					ifTrue: [
 						eachElement attachSpace.
-						eachElement onAddedToSceneGraph ] ] ]
+						eachElement dispatchAddedToSceneGraph ] ] ]
 ]
 
 { #category : #'api - space' }
@@ -1343,6 +1343,8 @@ BlElement >> dispatchAddedToSceneGraph [
 		description: [ 'I must already be attached to the scene graph' ].
 
 	self onAddedToSceneGraph.
+	self eventDispatcher dispatchAddedToSceneGraph.
+
 	self childrenDo: [ :anElement |
 
 		anElement isAttachedToSceneGraph
@@ -2865,11 +2867,6 @@ BlElement >> onAddedToSceneGraph [
 	At this point #isAttachedToSceneGraph results in true.
 	Note: Always send onAddedToSceneGraph to superclass if you override me!"
 
-	self
-		assert: [ self isAttachedToSceneGraph ]
-		description: [ 'I must already be attached to the scene graph' ].
-
-	self eventDispatcher dispatchAddedToSceneGraph
 ]
 
 { #category : #'hooks - children' }
