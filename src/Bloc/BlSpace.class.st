@@ -469,10 +469,10 @@ BlSpace >> asReference [
 ]
 
 { #category : #'api - displaying' }
-BlSpace >> becomeVisible [
+BlSpace >> attachRootToSceneGraph [
 	"Notify root element that it is now visible to the user"
-	self root space: self
 
+	rootElement attachToSceneGraph: self
 ]
 
 { #category : #'window - properties' }
@@ -625,15 +625,6 @@ BlSpace >> detachHostSpace [
 	"Detach my current host space if I have one"
 
 	hostSpace := nil
-]
-
-{ #category : #'children dispatching' }
-BlSpace >> dispatchAddedToSceneGraph [
-	"Sent after any of my parents or I was added to scene graph.
-	I dispatch or fire all necessary events, clean internal caches and send a corresponding hooks"
-
-	self root dispatchAddedToSceneGraph
-
 ]
 
 { #category : #'event handling' }
@@ -1221,7 +1212,7 @@ BlSpace >> initialize [
 
 	self updateCursor: Cursor normal.
 
-	self root space: self
+	self attachRootToSceneGraph
 ]
 
 { #category : #'focus managing' }
@@ -1576,6 +1567,7 @@ BlSpace >> root: anElement [
 		size: self extent.
 
 	rootElement := anElement.
+	self attachRootToSceneGraph.
 	self dispatchEvent: BlSpaceRootChangeEvent new
 
 ]

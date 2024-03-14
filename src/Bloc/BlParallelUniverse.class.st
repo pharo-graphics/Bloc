@@ -386,13 +386,11 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 	aSpace dispatchEvent: (BlSpaceShownEvent new space: self).
 
 	"Notify root element that it is now visible to the user"
-	aSpace becomeVisible.
+	aSpace attachRootToSceneGraph.
 	
 	(BlParallelUniverseSpaceRootAssignedSignal new
 		universeId: self id;
 		spaceId: aSpace id) emit.
-	
-	aSpace dispatchAddedToSceneGraph.
 	
 	(BlParallelUniverseSpaceDispatchAddedToSceneSignal new
 		universeId: self id;

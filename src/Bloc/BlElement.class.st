@@ -543,9 +543,7 @@ BlElement >> attachChild: anElement at: anIndex [
 			ifTrue: [ eachElement attachSpace ]
 			ifFalse: [
 				eachElement isRemovedFromSceneGraph
-					ifTrue: [
-						eachElement attachSpace.
-						eachElement dispatchAddedToSceneGraph ] ] ]
+					ifTrue: [ eachElement attachToSceneGraph ] ] ]
 ]
 
 { #category : #'api - space' }
@@ -571,6 +569,24 @@ BlElement >> attachSpace [
 	will not be repainted (https://github.com/feenkcom/gtoolkit/issues/1459)"
 	self needsPaint
 		ifTrue: [ self markNeedsPaintFrom: self ]
+]
+
+{ #category : #'api - space' }
+BlElement >> attachToSceneGraph [
+	"Attach me to the scene graph assuming I am added as a direct child to an already attached element"
+
+	self isAttachedToSceneGraph ifFalse: [ self attachSpace ].
+
+	self dispatchAddedToSceneGraph
+]
+
+{ #category : #'api - space' }
+BlElement >> attachToSceneGraph: aSpace [
+	"Attaches the root of the scene graph to a given Space."
+
+	self space: aSpace.
+	self attachSpace.
+	self dispatchAddedToSceneGraph
 ]
 
 { #category : #'api - look' }
@@ -1345,12 +1361,7 @@ BlElement >> dispatchAddedToSceneGraph [
 	self onAddedToSceneGraph.
 	self eventDispatcher dispatchAddedToSceneGraph.
 
-	self childrenDo: [ :anElement |
-
-		anElement isAttachedToSceneGraph
-			ifFalse: [ anElement attachSpace ].
-		
-		anElement dispatchAddedToSceneGraph ]
+	self childrenDo: [ :anElement | anElement attachToSceneGraph ]
 ]
 
 { #category : #'children dispatching' }
@@ -1361,9 +1372,7 @@ BlElement >> dispatchChildAdded: anElement [
 
 	"If and only if I am attached to scene graph we let child know
 	that it is a part of the scene graph now"
-	self isAttachedToSceneGraph ifTrue: [
-		anElement attachSpace.
-		anElement dispatchAddedToSceneGraph ].
+	self isAttachedToSceneGraph ifTrue: [ anElement attachToSceneGraph ].
 
 	"Let child dispatch necessary events and hooks"
 	anElement dispatchAddedToParent
