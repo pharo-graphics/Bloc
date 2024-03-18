@@ -27,6 +27,13 @@ Class {
 	#category : #'Bloc-Space - Tasks'
 }
 
+{ #category : #testing }
+BlDelayPulsesTask class >> isDeprecated [
+	"Deprecated only because it is not used and its purpose was debugging."
+
+	^ true
+]
+
 { #category : #accessing }
 BlDelayPulsesTask >> count [
 	^ count
