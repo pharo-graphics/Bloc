@@ -54,5 +54,6 @@ BlInfiniteDataSourceItemRangeInserted >> position: anObject [
 
 { #category : #sending }
 BlInfiniteDataSourceItemRangeInserted >> sendTo: anObject [
-	anObject onItemsInserted: self
+
+	anObject infiniteDataSourceItemRangeInserted: self
 ]

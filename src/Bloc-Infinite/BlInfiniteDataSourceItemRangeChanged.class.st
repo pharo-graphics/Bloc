@@ -53,5 +53,6 @@ BlInfiniteDataSourceItemRangeChanged >> position: anObject [
 
 { #category : #sending }
 BlInfiniteDataSourceItemRangeChanged >> sendTo: anObject [
-	anObject onItemsChanged: self
+
+	anObject infiniteDataSourceItemRangeChanged: self
 ]
