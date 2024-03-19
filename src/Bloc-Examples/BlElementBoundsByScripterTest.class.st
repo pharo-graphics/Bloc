@@ -78,6 +78,7 @@ BlElementBoundsByScripterTest >> testBoundsInSpace1 [
 
 	| aScripter |
 	aScripter := self newDevScripter.
+
 	aScripter check
 		id: #parent_1;
 		value: [ :anElement | anElement extent ]
@@ -101,30 +102,21 @@ BlElementBoundsByScripterTest >> testBoundsInSpace1 [
 		value: [ :anElement | anElement positionInSpaceChangedCount ]
 			equals: [ 0 ].
 
-	^ aScripter syncContinue
+	aScripter syncContinue
 ]
 
 { #category : #tests }
-BlElementBoundsByScripterTest >> testBoundsInSpace2 [
+BlElementBoundsByScripterTest >> testBoundsInSpace2AddChildAgain [
 
 	| aScripter |
-	aScripter := self testBoundsInSpace1.
-
+	aScripter := self newDevScripter.
+	
 	aScripter do action: [ :anElement |
 		| aChild |
 		aChild := anElement childWithId: #child.
 		aChild removeFromParent.
 		(anElement childWithId: #parent_2) addChild: aChild ].
-
-	^ aScripter syncContinue
-]
-
-{ #category : #tests }
-BlElementBoundsByScripterTest >> testBoundsInSpace3 [
-
-	| aScripter |
-	aScripter := self testBoundsInSpace2.
-
+	
 	aScripter check
 		id: #parent_1;
 		value: [ :anElement | anElement extent ]
@@ -148,5 +140,5 @@ BlElementBoundsByScripterTest >> testBoundsInSpace3 [
 		value: [ :anElement | anElement positionInSpaceChangedCount ]
 			equals: [ 1 ].
 
-	^ aScripter syncContinue
+	aScripter syncContinue
 ]
