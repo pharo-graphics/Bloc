@@ -1,3 +1,6 @@
+"
+I'm a TaskIt runner associated with a Bloc space.
+"
 Class {
 	#name : #TKTBlSpaceRunner,
 	#superclass : #TKTRunner,
