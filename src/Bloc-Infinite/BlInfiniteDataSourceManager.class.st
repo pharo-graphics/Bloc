@@ -46,28 +46,21 @@ BlInfiniteDataSourceManager >> applyPendingCommandsOnPosition: aPosition [
 	position will change.	Return new position if all commands would be actually performed"
 
 	| position |
-
 	position := aPosition.
 	pendingCommands do: [ :command |
 		position := command applyOnPosition: position ].
-	
+
 	^ position
 ]
 
 { #category : #helper }
 BlInfiniteDataSourceManager >> computePositionOffset: aPosition [
-
-	^ self computePositionOffset: aPosition firstPostponedItem: 1
-]
-
-{ #category : #helper }
-BlInfiniteDataSourceManager >> computePositionOffset: aPosition firstPostponedItem: firstPostponedItem [
 	" Sent when scrolling the infinite "
 
 	| position |
 	position := aPosition.
 
-	firstPostponedItem to: postponedCommands size - 1 do: [ :index |
+	1 to: postponedCommands size - 1 do: [ :index |
 		| command |
 		command := postponedCommands at: index.
 		command positionStart <= position ifTrue: [
@@ -80,29 +73,25 @@ BlInfiniteDataSourceManager >> computePositionOffset: aPosition firstPostponedIt
 ]
 
 { #category : #'commands processing' }
-BlInfiniteDataSourceManager >> consumeCommandsInOnePassIn: anInfiniteElement [
+BlInfiniteDataSourceManager >> consumeCommandsIn: anInfiniteElement [
 	"Skip pre-processing and perform all pending commands in one pass."
 
 	"we still consume postponed updates (if there is) in case there was a pre-process call
 	w/o a matching consumePostponedUpdates."
-		
-	self consumePostponedCommandsIn: anInfiniteElement.
 
-	pendingCommands do: [ :command |
-		self dispatchCommand: command to: anInfiniteElement.
-		command offsetPositionsIn: anInfiniteElement.
-		self onCommandProcessed: command in: anInfiniteElement].
+	[ postponedCommands isEmpty ] whileFalse: [
+		| cmd |
+		cmd := postponedCommands removeFirst.
+		self dispatchCommand: cmd to: anInfiniteElement.
+		self recycleCommand: cmd ].
 
-	self recycleCommandsAndClearList: pendingCommands
-]
-
-{ #category : #'commands processing' }
-BlInfiniteDataSourceManager >> consumePostponedCommandsIn: anInfiniteElement [
-
-	postponedCommands do: [ :command |
-		self dispatchCommand: command to: anInfiniteElement].
-
-	self recycleCommandsAndClearList: postponedCommands
+	[ pendingCommands isEmpty ] whileFalse: [
+		| cmd |
+		cmd := pendingCommands removeFirst.
+		self dispatchCommand: cmd to: anInfiniteElement.
+		cmd offsetPositionsIn: anInfiniteElement.
+		self onCommandProcessed: cmd in: anInfiniteElement.
+		self recycleCommand: cmd ]
 ]
 
 { #category : #'commands processing' }
@@ -153,9 +142,7 @@ BlInfiniteDataSourceManager >> markElementHoldersUpdated: aPositionStart itemCou
 
 	anInfiniteElement
 		elementRangeUpdate: aPositionStart
-		itemCount: anItemCount.
-		
-	anInfiniteElement markItemsChanged
+		itemCount: anItemCount
 ]
 
 { #category : #'commands processing' }
@@ -163,9 +150,7 @@ BlInfiniteDataSourceManager >> offsetPositions: aStartPosition forAdd: anItemCou
 	
 	anInfiniteElement
 		offsetPositionRecordsForInsert: aStartPosition
-		itemCount: anItemCount.
-		
-	anInfiniteElement markItemsAddedOrRemoved
+		itemCount: anItemCount
 ]
 
 { #category : #'commands processing' }
@@ -177,8 +162,6 @@ BlInfiniteDataSourceManager >> offsetPositions: aStartPosition forRemovingInvisi
 		itemCount: anItemCount
 		applyToPreLayout: true.
 	
-	anInfiniteElement markItemsAddedOrRemoved.
-
 	newDeletedCount := anInfiniteElement state deletedInvisibleItemCountSincePreviousLayout + anItemCount.
 	anInfiniteElement state deletedInvisibleItemCountSincePreviousLayout: newDeletedCount
 ]
@@ -258,21 +241,9 @@ BlInfiniteDataSourceManager >> recycleCommand: aCommand [
 
 ]
 
-{ #category : #'commands recycling' }
-BlInfiniteDataSourceManager >> recycleCommandsAndClearList: aCollectionOfCommands [
-	"Recycle and remove all commands from aCollectionOfCommands.
-	aCollectionOfCommands must not be nil"
-	self assert: aCollectionOfCommands isNotNil.
-	
-	aCollectionOfCommands do: [ :command |
-		self recycleCommand: command ].
-
-	aCollectionOfCommands removeAll
-]
-
 { #category : #invalidate }
 BlInfiniteDataSourceManager >> resetCommands [
 	
-	self recycleCommandsAndClearList: pendingCommands.
-	self recycleCommandsAndClearList: postponedCommands.
+	pendingCommands removeAll.
+	postponedCommands removeAll.
 ]

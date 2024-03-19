@@ -346,10 +346,7 @@ BlScrollFlinger >> runLayoutScrollWith: aState [
 { #category : #private }
 BlScrollFlinger >> runOverscrollOn: anOverScroller with: aState [
 	| aVelocity aVelocityX aVelocityY |
-	
-	self scrollable overScrollMode ~= BlOverScrollMode never
-		ifTrue: [ self scrollable considerReleasingGlowsOnScroll: aState dX @ aState dY ].
-	
+		
 	"Should not overscroll if distances in both directions are zero"
 	(aState overscrollX isZero and: [
 		aState overscrollY isZero ])
@@ -374,11 +371,7 @@ BlScrollFlinger >> runOverscrollOn: anOverScroller with: aState [
 				ifFalse: [ (aState overscrollY > 0)
 					ifTrue: [ aVelocity y ]
 					ifFalse: [ 0 ] ] ].
-	
-	"Overscroll happened, make sure glows are notified"
-	(self scrollable overScrollMode ~= BlOverScrollMode never)
-		ifTrue: [ self scrollable absorbGlows: aVelocityX @ aVelocityY ].
-	
+		
 	"Check if we need to finish scrolling"
 	((aVelocityX isZero not or: [
 		aState overscrollX = aState x or: [ 

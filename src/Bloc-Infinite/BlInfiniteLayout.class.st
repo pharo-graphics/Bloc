@@ -27,7 +27,6 @@ Class {
 		'heightSpec',
 		'widthSpec',
 		'autoMeasure',
-		'itemPrefetchEnabled',
 		'measurementCacheEnabled',
 		'smoothScroller',
 		'announcer',
@@ -569,9 +568,7 @@ BlInfiniteLayout >> initialize [
 	"InfiniteLayout has its own more strict measurement cache to avoid re-measuring a child
 	if the space that will be given to it is already larger than what it has measured before"
 	measurementCacheEnabled := true.
-	
-	"disable until not implemented"
-	itemPrefetchEnabled := false.
+
 	
 	smoothScroller := nil "when not running smoothScroller is nil"
 ]
@@ -581,13 +578,6 @@ BlInfiniteLayout >> isFocused [
 	"Return true if the infinit element I am bound to has focus"
 	
 	^ infiniteElement isFocused
-]
-
-{ #category : #testing }
-BlInfiniteLayout >> isItemPrefetchEnabled [
-	<return: #Boolean>
-
-	^ itemPrefetchEnabled
 ]
 
 { #category : #'measurement - testing' }
