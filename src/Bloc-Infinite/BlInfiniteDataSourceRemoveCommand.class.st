@@ -35,8 +35,13 @@ BlInfiniteDataSourceRemoveCommand >> isRemove [
 { #category : #commands }
 BlInfiniteDataSourceRemoveCommand >> offsetPositionsIn: anInfiniteElement [
 
-	anInfiniteElement dataSourceManager 
-		offsetPositions: self positionStart
-		forRemovingInvisible: self itemCount
-		in: anInfiniteElement
+	| newDeletedCount |
+	anInfiniteElement
+		offsetPositionRecordsForRemove: self positionStart
+		itemCount: self itemCount.
+	newDeletedCount := anInfiniteElement state
+		                   deletedInvisibleItemCountSincePreviousLayout
+	                   + self itemCount.
+	anInfiniteElement state
+		deletedInvisibleItemCountSincePreviousLayout: newDeletedCount
 ]

@@ -89,14 +89,13 @@ BlInfiniteDataSourceManager >> consumeCommandsIn: anInfiniteElement [
 		| cmd |
 		cmd := pendingCommands removeFirst.
 		self dispatchCommand: cmd to: anInfiniteElement.
-		cmd offsetPositionsIn: anInfiniteElement.
 		self onCommandProcessed: cmd in: anInfiniteElement.
 		self recycleCommand: cmd ]
 ]
 
 { #category : #'commands processing' }
 BlInfiniteDataSourceManager >> dispatchCommand: aCommand to: anInfiniteElement [
-	"Dispatche data source update command to all interested objects,
+	"Dispatch data source update command to all interested objects,
 	in this case to infinite element's layout.
 	aCommand must not be nil"
 	
@@ -137,38 +136,10 @@ BlInfiniteDataSourceManager >> initialize [
 	pendingCommands := OrderedCollection new
 ]
 
-{ #category : #'manager -> element' }
-BlInfiniteDataSourceManager >> markElementHoldersUpdated: aPositionStart itemCount: anItemCount in: anInfiniteElement [
-
-	anInfiniteElement
-		elementRangeUpdate: aPositionStart
-		itemCount: anItemCount
-]
-
-{ #category : #'commands processing' }
-BlInfiniteDataSourceManager >> offsetPositions: aStartPosition forAdd: anItemCount in: anInfiniteElement [
-	
-	anInfiniteElement
-		offsetPositionRecordsForInsert: aStartPosition
-		itemCount: anItemCount
-]
-
-{ #category : #'commands processing' }
-BlInfiniteDataSourceManager >> offsetPositions: aStartPosition forRemovingInvisible: anItemCount in: anInfiniteElement [
-	| newDeletedCount |
-
-	anInfiniteElement
-		offsetPositionRecordsForRemove: aStartPosition
-		itemCount: anItemCount
-		applyToPreLayout: true.
-	
-	newDeletedCount := anInfiniteElement state deletedInvisibleItemCountSincePreviousLayout + anItemCount.
-	anInfiniteElement state deletedInvisibleItemCountSincePreviousLayout: newDeletedCount
-]
-
 { #category : #'commands processing' }
 BlInfiniteDataSourceManager >> onCommandProcessed: aCommand in: anInfiniteElement [
 
+	aCommand offsetPositionsIn: anInfiniteElement.
 ]
 
 { #category : #'data source updates' }

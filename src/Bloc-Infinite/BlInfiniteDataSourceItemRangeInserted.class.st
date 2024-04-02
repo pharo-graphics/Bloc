@@ -15,42 +15,9 @@ infiniteElement dataSource
 "
 Class {
 	#name : #BlInfiniteDataSourceItemRangeInserted,
-	#superclass : #BlInfiniteDataSourceEvent,
-	#instVars : [
-		'position',
-		'itemCount'
-	],
+	#superclass : #BlInfiniteDataSourceRangeChanged,
 	#category : #'Bloc-Infinite-Events'
 }
-
-{ #category : #'instance creation' }
-BlInfiniteDataSourceItemRangeInserted class >> position: aPosition itemCount: anItemCount [
-
-	^ self new
-		position: aPosition;
-		itemCount: anItemCount;
-		yourself
-]
-
-{ #category : #accessing }
-BlInfiniteDataSourceItemRangeInserted >> itemCount [
-	^ itemCount
-]
-
-{ #category : #accessing }
-BlInfiniteDataSourceItemRangeInserted >> itemCount: anObject [
-	itemCount := anObject
-]
-
-{ #category : #accessing }
-BlInfiniteDataSourceItemRangeInserted >> position [
-	^ position
-]
-
-{ #category : #accessing }
-BlInfiniteDataSourceItemRangeInserted >> position: anObject [
-	position := anObject
-]
 
 { #category : #sending }
 BlInfiniteDataSourceItemRangeInserted >> sendTo: anObject [

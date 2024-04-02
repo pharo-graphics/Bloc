@@ -1030,7 +1030,7 @@ BlInfiniteElement >> offsetPositionRecordsForInsert: aStartPosition itemCount: a
 ]
 
 { #category : #'private - commands' }
-BlInfiniteElement >> offsetPositionRecordsForRemove: aPositionStart itemCount: anItemCount applyToPreLayout: applyToPreLayout [
+BlInfiniteElement >> offsetPositionRecordsForRemove: aPositionStart itemCount: anItemCount [
 
 	| aPositionEnd |
 	aPositionEnd := aPositionStart + anItemCount.
@@ -1044,14 +1044,14 @@ BlInfiniteElement >> offsetPositionRecordsForRemove: aPositionStart itemCount: a
 					ifTrue: [ 
 						anElementHolder
 							offsetPositionBy: anItemCount negated
-							applyToPreLayout: applyToPreLayout.
+							applyToPreLayout: true.
 						state structureChanged: true ]
 					ifFalse: [ 
 						anElementHolder position >= aPositionStart ifTrue: [ 
 							anElementHolder
 								flagRemovedAndOffsetPosition: aPositionStart - 1
 								by: anItemCount negated
-								applyToPreLayout: applyToPreLayout.
+								applyToPreLayout: true.
 							state structureChanged: true ] ] ] ]
 		in: self
 ]
