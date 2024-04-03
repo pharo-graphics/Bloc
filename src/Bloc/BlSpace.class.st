@@ -680,8 +680,7 @@ BlSpace >> doLayout [
 			self doUpdateLayout.
 			layoutCounter := layoutCounter + 1.
 			layoutCounter = 50 ifTrue: [
-				self class name trace.
-				': Warning: Layout was performed 50 times per frame!' traceCr ] ].
+				'Warning: Layout was performed 50 times per frame!' traceCr ] ].
 
 	self root dispatchLayoutDone
 
