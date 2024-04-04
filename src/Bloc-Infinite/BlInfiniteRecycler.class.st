@@ -75,11 +75,12 @@ BlInfiniteRecycler >> defaultFetcher [
 BlInfiniteRecycler >> elementFor: aPosition in: anInfiniteElement [
 	"I do a hard work obtaining element for the data at a position in data source.
 	@see elementFor: for more information"
+
 	<return: #BlElement>
 	| holder fromScrap bound itemElement anInfiniteConstraints |
-
-	(aPosition < 1 or: [ aPosition > anInfiniteElement  dataSource itemCount ])
-		ifTrue: [ Error signal: 'Position is out of bounds!' ].
+	(aPosition < 1 or: [
+		 aPosition > anInfiniteElement dataSource itemCount ]) ifTrue: [
+		Error signal: 'Position is out of bounds!' ].
 
 	holder := self fetcher elementFor: aPosition in: anInfiniteElement.
 	fromScrap := holder wasReturnedFromScrap.
@@ -88,21 +89,19 @@ BlInfiniteRecycler >> elementFor: aPosition in: anInfiniteElement [
 	self assert: fromScrap isNotNil.
 
 	bound := false.
-	(anInfiniteElement state isPreLayout and: [ holder isBound ])
-		ifTrue: [ holder preLayoutPosition: aPosition ]
-		ifFalse: [
-			(holder isBound not or: [ holder needsUpdate or: [ holder isInvalid ] ]) ifTrue: [
-				| offsetPosition |
-				holder isRemoved ifTrue: [ Error signal: 'Removed holder should come here only in pre-layout!' ].
-				offsetPosition := anInfiniteElement dataSourceManager computePositionOffset: aPosition.
-				holder infiniteElement: anInfiniteElement.
-				
-				anInfiniteElement dataSource bindHolder: holder at: offsetPosition.
-				
-				bound := true.
-				anInfiniteElement state isPreLayout
-					ifTrue: [ holder preLayoutPosition: aPosition ] ] ].
-	
+	(holder isBound not or: [
+		 holder needsUpdate or: [ holder isInvalid ] ]) ifTrue: [
+		| offsetPosition |
+		holder isRemoved ifTrue: [
+			Error signal: 'Removed holder should come here only in pre-layout!' ].
+		offsetPosition := anInfiniteElement dataSourceManager
+			                  computePositionOffset: aPosition.
+		holder infiniteElement: anInfiniteElement.
+
+		anInfiniteElement dataSource bindHolder: holder at: offsetPosition.
+
+		bound := true ].
+
 	itemElement := holder itemElement.
 	anInfiniteConstraints := itemElement constraints infinite.
 	anInfiniteConstraints holder: holder.
@@ -178,20 +177,13 @@ BlInfiniteRecycler >> scrapCount [
 { #category : #recycling }
 BlInfiniteRecycler >> scrapElement: anElement in: anInfiniteElement [
 
-	"
-	(anElementHolder isInvalid and: [ 
-		 anElementHolder isRemoved not and: [ 
-			 anInfiniteElement dataSource hasStableIds not ] ]) ifTrue: [ 
-		self error:
-			'Can not scrap invalid elements, because they can not be reused from scrap and should be rebound from recycler pool instead' ].
-	"
-
 	| anElementHolder |
 	anElementHolder := anInfiniteElement elementHolderOf: anElement.
 
-	(anElementHolder isRemoved or: [ anElementHolder isInvalid or: [ anElementHolder isUpdated not ] ]) 
+	(anElementHolder isRemoved or: [
+		 anElementHolder isInvalid or: [ anElementHolder isUpdated not ] ])
 		ifFalse: [ ^ self ].
-			
+
 	anElementHolder detachRecycler.
 	attachedScrap add: anElementHolder
 ]
