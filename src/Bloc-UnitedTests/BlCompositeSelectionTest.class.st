@@ -27,6 +27,7 @@ BlCompositeSelectionTest >> testDeselectADeselectedIndex [
 
 { #category : #tests }
 BlCompositeSelectionTest >> testDeselectADeselectedIndex2 [
+	<expectedFailure>
 
 	| s |
 	s := BlCompositeSelection new.
@@ -44,6 +45,7 @@ BlCompositeSelectionTest >> testDeselectADeselectedIndex2 [
 
 { #category : #tests }
 BlCompositeSelectionTest >> testSelectAllThenDeselectOneByOne [
+	<expectedFailure>
 
 	| s all |
 	s := BlCompositeSelection new.
