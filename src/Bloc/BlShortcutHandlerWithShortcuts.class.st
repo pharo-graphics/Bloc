@@ -48,7 +48,7 @@ BlShortcutHandlerWithShortcuts >> handleEvent: aShortcutEvent [
 			| aShortcut |
 			aShortcut := theShortcuts first key.
 			"let users explicitely set consumed to false so it bubbles up"
-			aShortcutEvent consumed: true.
+			aShortcutEvent consume.
 			aShortcut performDueTo: aShortcutEvent ]
 ]
 
