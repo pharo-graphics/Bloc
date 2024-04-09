@@ -238,7 +238,7 @@ BlBasicTest >> testFabButton [
 				           width: 1
 				           offset: 0 @ 2).
 
-	icon := (BlPolygon vertices: ({
+	icon := (BlPolygonGeometry vertices: ({
 			          (36 @ 0).
 			          (48 @ 0).
 			          (48 @ 36).
