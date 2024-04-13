@@ -17,7 +17,7 @@ BlFocusFinderExamples >> cell [
 			  anEvent currentTarget border:
 					  (BlBorder paint: Color gray width: 1) ];
 		  addEventHandlerOn: BlClickEvent do: [ :anEvent |
-			  anEvent consumed: true.
+			  anEvent consume.
 			  anEvent currentTarget requestFocus ];
 		yourself
 ]

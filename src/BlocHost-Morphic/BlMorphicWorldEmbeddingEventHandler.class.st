@@ -98,7 +98,7 @@ BlMorphicWorldEmbeddingEventHandler >> dispatchMorphicEvent: anEvent hand: aHand
 BlMorphicWorldEmbeddingEventHandler >> keyDownEvent: anEvent [
 	| aHand aMorphicEvent aCharacter aKeyValue aCharCode |
 	
-	anEvent consumed: true.
+	anEvent consume.
 	aHand := anEvent currentTarget activeHand.
 	
 	aCharacter := self mapKeyToCharacter: anEvent key.
@@ -141,7 +141,7 @@ BlMorphicWorldEmbeddingEventHandler >> keyDownEvent: anEvent [
 BlMorphicWorldEmbeddingEventHandler >> keyUpEvent: anEvent [
 	| aHand aMorphicEvent |
 	
-	anEvent consumed: true.
+	anEvent consume.
 	aHand := anEvent currentTarget activeHand.
 
 	aMorphicEvent := KeyboardEvent new
@@ -169,7 +169,7 @@ BlMorphicWorldEmbeddingEventHandler >> mapKeyToCharacter: aKeyboardKey [
 BlMorphicWorldEmbeddingEventHandler >> mouseDownEvent: anEvent [
 	| aHand aMorphicEvent |
 
-	anEvent consumed: true.
+	anEvent consume.
 	
 	aHand := anEvent currentTarget activeHand.
 	
@@ -190,7 +190,7 @@ BlMorphicWorldEmbeddingEventHandler >> mouseDownEvent: anEvent [
 BlMorphicWorldEmbeddingEventHandler >> mouseMoveEvent: anEvent [
 	| aHand aMorphicEvent oldPos theButtons |
 
-	anEvent consumed: true.
+	anEvent consume.
 	
 	aHand := anEvent currentTarget activeHand.
 	oldPos := aHand position.
@@ -219,7 +219,7 @@ BlMorphicWorldEmbeddingEventHandler >> mouseMoveEvent: anEvent [
 BlMorphicWorldEmbeddingEventHandler >> mouseUpEvent: anEvent [
 	| aHand aMorphicEvent |
 
-	anEvent consumed: true.
+	anEvent consume.
 
 	aHand := anEvent currentTarget activeHand.
 	
@@ -240,7 +240,7 @@ BlMorphicWorldEmbeddingEventHandler >> mouseUpEvent: anEvent [
 BlMorphicWorldEmbeddingEventHandler >> mouseWheelEvent: anEvent [
 	| vertical aHand aMorphicEvent |
 	
-	anEvent consumed: true.
+	anEvent consume.
 	
 	anEvent currentTarget world beCursorOwner.
 
@@ -266,7 +266,7 @@ BlMorphicWorldEmbeddingEventHandler >> mouseWheelEvent: anEvent [
 BlMorphicWorldEmbeddingEventHandler >> textInputEvent: anEvent [
 	| aHand aMorphicEvent anInputString |
 
-	anEvent consumed: true.
+	anEvent consume.
 	
 	(anEvent text allSatisfy: [ :aCharacter | Unicode isPrintable: aCharacter ])
 		ifFalse: [ ^ self ].

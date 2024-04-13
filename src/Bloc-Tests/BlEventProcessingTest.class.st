@@ -42,7 +42,9 @@ BlEventProcessingTest >> testDblClickCreation [
 BlEventProcessingTest >> testDragCreation [
 	
 	"make child draggable"
-	self child addEventHandlerOn: BlDragStartEvent do: [ :anEvent | anEvent consumed: true ].
+	self child
+		addEventHandlerOn: BlDragStartEvent
+		do: [ :anEvent | anEvent consume ].
 
 	self sendInsideTargetEvent: BlMouseDownEvent primary.
 	self assertFiredEventIs: BlMouseDownEvent target: self child withPropagation: true.
