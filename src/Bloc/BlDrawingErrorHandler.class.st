@@ -26,6 +26,6 @@ BlDrawingErrorHandler >> processError: aHandledError [
 			border: (BlBorder paint: Color gray width: 1);
 			background: Color red;
 			when: BlClickEvent do: [ :anEvent |
-				anEvent consumed: true.
+				anEvent consume.
 				aHandledError error debug ])
 ]

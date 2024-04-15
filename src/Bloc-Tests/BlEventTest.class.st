@@ -68,14 +68,14 @@ BlEventTest >> testChildConsumesEventWithHandler [
 	parent position: 100 @ 100.
 	parent size: 100 @ 100.
 	parent addEventHandlerOn: BlClickEvent do: [ :anEvent |
-		anEvent consumed: true.
+		anEvent consume.
 		clicks add: Color red ].
 
 	child := self testBlueElement.
 	child position: 10 @ 10.
 	child size: 50 @ 50.
 	child addEventHandlerOn: BlClickEvent do: [ :anEvent |
-		anEvent consumed: true.
+		anEvent consume.
 		clicks add: Color blue ].
 
 	parent addChild: child.
@@ -97,14 +97,14 @@ BlEventTest >> testChildDoesNotConsumeEventWithHandler [
 	parent position: 100 @ 100.
 	parent size: 100 @ 100.
 	parent addEventHandlerOn: BlClickEvent do: [ :anEvent |
-		anEvent consumed: true.
+		anEvent consume.
 		clicks add: Color red ].
 
 	child := self testBlueElement.
 	child position: 10 @ 10.
 	child size: 50 @ 50.
 	child addEventHandlerOn: BlClickEvent do: [ :anEvent |
-		anEvent consumed: false.
+		anEvent consume.
 		clicks add: Color blue ].
 
 	parent addChild: child.
@@ -130,7 +130,7 @@ BlEventTest >> testCustomEventListener [
 	<sampleInstance>
 	^ BlEventHandler
 		  on: BlExampleCustomEvent
-		  do: [ :aCustomEvent | aCustomEvent consumed: true ]
+		  do: [ :aCustomEvent | aCustomEvent consume ]
 ]
 
 { #category : #tests }
@@ -177,14 +177,14 @@ BlEventTest >> testParentWithEventFilter [
 	parent position: 100 @ 100.
 	parent size: 100 @ 100.
 	parent addEventFilterOn: BlClickEvent do: [ :anEvent |
-		anEvent consumed: true.
+		anEvent consume.
 		clicks add: Color red ].
 
 	child := self testBlueElement.
 	child position: 10 @ 10.
 	child size: 50 @ 50.
 	child addEventHandlerOn: BlClickEvent do: [ :anEvent |
-		anEvent consumed: true.
+		anEvent consume.
 		clicks add: Color blue ].
 
 	parent addChild: child.

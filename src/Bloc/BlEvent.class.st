@@ -155,7 +155,14 @@ BlEvent >> capturingTarget: aTBlEventTarget [
 ]
 
 { #category : #testing }
+BlEvent >> consume [
+
+	consumed := true
+]
+
+{ #category : #testing }
 BlEvent >> consumed: aBoolean [
+
 	consumed := aBoolean
 ]
 

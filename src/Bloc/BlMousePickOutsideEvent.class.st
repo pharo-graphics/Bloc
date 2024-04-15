@@ -53,7 +53,7 @@ BlMousePickOutsideEvent >> originalEvent [
 { #category : #accessing }
 BlMousePickOutsideEvent >> originalEvent: aBlEvent [
 
-	aBlEvent consumed: true.
+	aBlEvent consume.
 	originalEvent := aBlEvent
 ]
 

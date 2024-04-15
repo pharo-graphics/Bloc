@@ -133,7 +133,7 @@ BlInfiniteHorizontalOrientation >> mouseWheelEvent: anEvent [
 	dX isZero ifTrue: [ ^ self ].
 
 	anInfiniteElement smoothScrollBy: (dX @ 0) * 200.
-	anEvent consumed: true
+	anEvent consume
 ]
 
 { #category : #'children - geometry' }
