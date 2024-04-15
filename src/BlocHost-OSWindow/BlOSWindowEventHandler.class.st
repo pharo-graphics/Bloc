@@ -391,8 +391,7 @@ BlOSWindowEventHandler >> visitWindowResizeEvent: anEvent [
 
 	self
 		enqueueSpaceResized: BlSpaceResizedEvent new
-		extent: anEvent width @ anEvent height.
-	self window space pulse
+		extent: anEvent width @ anEvent height
 ]
 
 { #category : #'api - accessing' }

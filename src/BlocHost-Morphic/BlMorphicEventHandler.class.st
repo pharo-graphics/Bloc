@@ -472,9 +472,7 @@ BlMorphicEventHandler >> handleWindowResize: aMorphicEvent [
 		extent: aMorphicEvent width @ aMorphicEvent height;
 		timestamp: DateAndTime now;
 		yourself.
-	self enqueue: aBlEvent.
-	
-	self window hostSpace space pulse
+	self enqueue: aBlEvent
 ]
 
 { #category : #'private - keyboard' }
