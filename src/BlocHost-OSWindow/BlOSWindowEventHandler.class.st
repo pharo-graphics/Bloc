@@ -152,15 +152,6 @@ BlOSWindowEventHandler >> visitKeyUpEvent: anEvent [
 	self enqueue: aBlEvent
 ]
 
-{ #category : #'visiting - universe' }
-BlOSWindowEventHandler >> visitMainEventsCleared: anEvent [
-	self window space pulse.
-	3 milliSeconds wait.
-	
-
-	
-]
-
 { #category : #'visiting - mouse' }
 BlOSWindowEventHandler >> visitMouseButtonPressEvent: anEvent [
 
