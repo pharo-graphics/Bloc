@@ -2,7 +2,7 @@ Class {
 	#name : #BlInfiniteLayoutStepFlags,
 	#superclass : #BlBitflags,
 	#classVars : [
-		'Animations',
+		'Final',
 		'Layout',
 		'Start'
 	],
@@ -10,9 +10,9 @@ Class {
 }
 
 { #category : #'accessing - flags' }
-BlInfiniteLayoutStepFlags class >> Animations [
+BlInfiniteLayoutStepFlags class >> Final [
 	"This method was automatically generated"
-	^ Animations value
+	^ Final value
 ]
 
 { #category : #'accessing - flags' }
@@ -35,7 +35,7 @@ BlInfiniteLayoutStepFlags class >> flagsDecl [
 	^ {
 		#START.
 		#LAYOUT.
-		#ANIMATIONS.
+		#FINAL.
 	}
 ]
 
@@ -45,9 +45,9 @@ BlInfiniteLayoutStepFlags class >> initialize [
 ]
 
 { #category : #'flags - add' }
-BlInfiniteLayoutStepFlags >> addAnimations [
+BlInfiniteLayoutStepFlags >> addFinal [
 	"This method was automatically generated"
-	value := value | Animations value
+	value := value | Final value
 ]
 
 { #category : #'flags - add' }
@@ -63,9 +63,9 @@ BlInfiniteLayoutStepFlags >> addStart [
 ]
 
 { #category : #'flags - clear' }
-BlInfiniteLayoutStepFlags >> clearAnimations [
+BlInfiniteLayoutStepFlags >> clearFinal [
 	"This method was automatically generated"
-	value := value & (Animations value bitInvert)
+	value := value & (Final value bitInvert)
 ]
 
 { #category : #'flags - clear' }
@@ -81,9 +81,9 @@ BlInfiniteLayoutStepFlags >> clearStart [
 ]
 
 { #category : #'flags - testing' }
-BlInfiniteLayoutStepFlags >> hasAnimations [
+BlInfiniteLayoutStepFlags >> hasFinal [
 	"This method was automatically generated"
-	^ (value & Animations value) ~= 0
+	^ (value & Final value) ~= 0
 ]
 
 { #category : #'flags - testing' }

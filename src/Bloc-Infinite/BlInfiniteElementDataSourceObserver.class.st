@@ -29,26 +29,21 @@ BlInfiniteElementDataSourceObserver >> infiniteDataSourceChanged: anEvent [
 
 
 	self assertNotInLayoutOrScroll.
-	
-	infiniteElement state structureChanged: true.
 	infiniteElement setDataSourceChangedAfterLayout.
 	infiniteElement dataSourceManager hasPendingCommands
 		ifFalse: [ infiniteElement requestLayout ]
 ]
 
 { #category : #'event handling' }
-BlInfiniteElementDataSourceObserver >> infiniteDataSourceItemRangeChanged: anEvent [
-	| needsUpdate |
-	
+BlInfiniteElementDataSourceObserver >> infiniteDataSourceItemRangeChanged: anEvent [	
 
 	self assertNotInLayoutOrScroll.
 
-	needsUpdate := infiniteElement dataSourceManager
+	infiniteElement dataSourceManager
 		onItemRangeChanged: anEvent position
 		itemCount: anEvent itemCount.
 
-	needsUpdate
-		ifTrue: [ self triggerUpdateProcessor ]
+	self triggerUpdateProcessor
 ]
 
 { #category : #'event handling' }
@@ -62,28 +57,25 @@ BlInfiniteElementDataSourceObserver >> infiniteDataSourceItemRangeEvent: anEvent
 
 { #category : #'event handling' }
 BlInfiniteElementDataSourceObserver >> infiniteDataSourceItemRangeInserted: anEvent [
-	| needsUpdate |
 	self assertNotInLayoutOrScroll.
 	
-	needsUpdate := infiniteElement dataSourceManager
+	infiniteElement dataSourceManager
 		onItemRangeInserted: anEvent position
 		itemCount: anEvent itemCount.
 
-	needsUpdate
-		ifTrue: [ self triggerUpdateProcessor ]
+	self triggerUpdateProcessor
 ]
 
 { #category : #'event handling' }
 BlInfiniteElementDataSourceObserver >> infiniteDataSourceItemRangeRemoved: anEvent [
-	| needsUpdate |
+
 	self assertNotInLayoutOrScroll.
 	
-	needsUpdate := infiniteElement dataSourceManager
+	infiniteElement dataSourceManager
 		onItemRangeRemoved: anEvent position
 		itemCount: anEvent itemCount.
 
-	needsUpdate
-		ifTrue: [ self triggerUpdateProcessor ]
+	self triggerUpdateProcessor
 ]
 
 { #category : #initialization }
@@ -99,10 +91,6 @@ BlInfiniteElementDataSourceObserver >> initializeWith: anInfiniteElement [
 { #category : #private }
 BlInfiniteElementDataSourceObserver >> triggerUpdateProcessor [
 
-	
-	(infiniteElement hasFixedSize and: [ infiniteElement isAttached ])
-		ifTrue: [ infiniteElement postChildrenUpdater ]
-		ifFalse: [
-			infiniteElement markDataSourceChangeDuringMeasure.
-			infiniteElement requestLayout ]
+	infiniteElement markDataSourceChangeDuringMeasure.
+	infiniteElement requestLayout
 ]
