@@ -20,16 +20,17 @@ BlKeyboardProcessorTest >> setUp [
 
 { #category : #running }
 BlKeyboardProcessorTest >> tearDown [
+
 	super tearDown.
-	
+
 	processor := nil.
 	space := nil
 ]
 
 { #category : #tests }
 BlKeyboardProcessorTest >> testProcessKeyDown [
-	| eventA |
 
+	| eventA |
 	eventA := BlKeyDownEvent new.
 	eventA key: KeyboardKey A.
 
