@@ -8,179 +8,66 @@ Class {
 	#category : #'Bloc-Tests'
 }
 
-{ #category : #fixture }
-BlEventTest >> simulateClickOnOverlapped [
-	"I simulate a click on the element which is overlapped by another element.
-	Since element above does not consume click events, one below should succesfully
-	handle mouse down/up and click events"
+{ #category : #tests }
+BlEventTest >> newBlueElement [
 
-	| container blue red mouseDown mouseUp click |
-	container := self testGrayElement.
-	container size: 300 @ 300.
-
-	red := self testRedElement.
-	red size: 200 @ 200.
-	red opacity: 0.2.
-
-	"blue is below the red element"
-	blue := self testBlueElement.
-	blue size: 100 @ 100.
-	blue opacity: 0.2.
-
-	container addChildren: {
-			blue.
-			red }.
-
-	mouseDown := mouseUp := click := 0.
-
-	blue
-		addEventHandlerOn: BlMouseDownEvent
-		do: [ mouseDown := mouseDown + 1 ].
-	blue addEventHandlerOn: BlMouseUpEvent do: [ mouseUp := mouseUp + 1 ].
-	blue addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
-
-	BlSpace simulateClickOn: blue.
-
-	self assert: mouseDown equals: 1.
-	self assert: mouseUp equals: 1.
-	self assert: click equals: 1.
-
-	^ container
+	^ BlElement new
+		  background: Color blue;
+		  yourself
 ]
 
 { #category : #tests }
-BlEventTest >> testBlueElement [
+BlEventTest >> newCustomEvent [
 
-	<sampleInstance>
-	<demo>
-	^ BlElement new background: Color blue
+	^ BlExampleCustomEvent new
+		  payload: 'Hello world!';
+		  yourself
 ]
 
 { #category : #tests }
-BlEventTest >> testChildConsumesEventWithHandler [
+BlEventTest >> newCustomEventListener [
 
-	<sampleInstance>
-	<demo>
-	| parent child clicks |
-	clicks := OrderedCollection new.
-
-	parent := self testRedElement.
-	parent position: 100 @ 100.
-	parent size: 100 @ 100.
-	parent addEventHandlerOn: BlClickEvent do: [ :anEvent |
-		anEvent consume.
-		clicks add: Color red ].
-
-	child := self testBlueElement.
-	child position: 10 @ 10.
-	child size: 50 @ 50.
-	child addEventHandlerOn: BlClickEvent do: [ :anEvent |
-		anEvent consume.
-		clicks add: Color blue ].
-
-	parent addChild: child.
-
-	BlSpace simulateClickOn: child.
-	self assert: clicks equals: { Color blue } asOrderedCollection.
-
-	^ parent
-]
-
-{ #category : #tests }
-BlEventTest >> testChildDoesNotConsumeEventWithHandler [
-
-	<sampleInstance>
-	| parent child clicks |
-	clicks := OrderedCollection new.
-
-	parent := self testRedElement.
-	parent position: 100 @ 100.
-	parent size: 100 @ 100.
-	parent addEventHandlerOn: BlClickEvent do: [ :anEvent |
-		anEvent consume.
-		clicks add: Color red ].
-
-	child := self testBlueElement.
-	child position: 10 @ 10.
-	child size: 50 @ 50.
-	child addEventHandlerOn: BlClickEvent do: [ :anEvent |
-		anEvent consume.
-		clicks add: Color blue ].
-
-	parent addChild: child.
-
-	BlSpace simulateClickOn: child.
-	self assert: clicks equals: {
-			Color blue.
-			Color red } asOrderedCollection.
-
-	^ parent
-]
-
-{ #category : #tests }
-BlEventTest >> testCustomEvent [
-
-	<sampleInstance>
-	^ BlExampleCustomEvent new payload: 'Hello world!'
-]
-
-{ #category : #tests }
-BlEventTest >> testCustomEventListener [
-
-	<sampleInstance>
 	^ BlEventHandler
 		  on: BlExampleCustomEvent
 		  do: [ :aCustomEvent | aCustomEvent consume ]
 ]
 
 { #category : #tests }
-BlEventTest >> testCustomEventTarget [
+BlEventTest >> newCustomEventTarget [
 
-	<sampleInstance>
 	^ BlExampleCustomEventTarget new
 ]
 
 { #category : #tests }
-BlEventTest >> testFireCustomEventWithCustomTarget [
+BlEventTest >> newGrayElement [
 
-	<sampleInstance>
-	| event target handler |
-	event := self testCustomEvent.
-	target := self testCustomEventTarget.
-	handler := self testCustomEventListener.
-
-	target addEventHandler: handler.
-	target dispatchEvent: event.
-
-	self assert: event isConsumed.
-
-	^ target
+	^ BlElement new
+		  background: Color veryVeryLightGray;
+		  yourself
 ]
 
 { #category : #tests }
-BlEventTest >> testGrayElement [
+BlEventTest >> newRedElement [
 
-	<sampleInstance>
-	<demo>
-	^ BlElement new background: Color veryVeryLightGray
+	^ BlElement new
+		  background: Color red;
+		  yourself
 ]
 
 { #category : #tests }
-BlEventTest >> testParentWithEventFilter [
+BlEventTest >> testChildConsumesEventWithHandler [
 
-	<sampleInstance>
-	<demo>
 	| parent child clicks |
 	clicks := OrderedCollection new.
 
-	parent := self testRedElement.
+	parent := self newRedElement.
 	parent position: 100 @ 100.
 	parent size: 100 @ 100.
-	parent addEventFilterOn: BlClickEvent do: [ :anEvent |
+	parent addEventHandlerOn: BlClickEvent do: [ :anEvent |
 		anEvent consume.
 		clicks add: Color red ].
 
-	child := self testBlueElement.
+	child := self newBlueElement.
 	child position: 10 @ 10.
 	child size: 50 @ 50.
 	child addEventHandlerOn: BlClickEvent do: [ :anEvent |
@@ -190,24 +77,84 @@ BlEventTest >> testParentWithEventFilter [
 	parent addChild: child.
 
 	BlSpace simulateClickOn: child.
-	self assert: clicks equals: { Color red } asOrderedCollection.
-
-	^ parent
+	self assert: clicks equals: { Color blue } asOrderedCollection
 ]
 
 { #category : #tests }
-BlEventTest >> testRedElement [
+BlEventTest >> testChildDoesNotConsumeEventWithHandler [
 
-	<sampleInstance>
-	<demo>
-	^ BlElement new background: Color red
+	| parent child clicks |
+	clicks := OrderedCollection new.
+
+	parent := self newRedElement.
+	parent position: 100 @ 100.
+	parent size: 100 @ 100.
+	parent addEventHandlerOn: BlClickEvent do: [ :anEvent |
+		anEvent consume.
+		clicks add: Color red ].
+
+	child := self newBlueElement.
+	child position: 10 @ 10.
+	child size: 50 @ 50.
+	child addEventHandlerOn: BlClickEvent do: [ :anEvent |
+		anEvent consumed: false.
+		clicks add: Color blue ].
+
+	parent addChild: child.
+
+	BlSpace simulateClickOn: child.
+	self
+		assert: clicks
+		equals: {
+			Color blue.
+			Color red } asOrderedCollection
+]
+
+{ #category : #tests }
+BlEventTest >> testFireCustomEventWithCustomTarget [
+
+	| event target handler |
+	event := self newCustomEvent.
+	target := self newCustomEventTarget.
+	handler := self newCustomEventListener.
+
+	target addEventHandler: handler.
+	target dispatchEvent: event.
+
+	self assert: event isConsumed
+]
+
+{ #category : #tests }
+BlEventTest >> testParentWithEventFilter [
+
+	| parent child clicks |
+	clicks := OrderedCollection new.
+
+	parent := self newRedElement.
+	parent position: 100 @ 100.
+	parent size: 100 @ 100.
+	parent addEventFilterOn: BlClickEvent do: [ :anEvent |
+		anEvent consume.
+		clicks add: Color red ].
+
+	child := self newBlueElement.
+	child position: 10 @ 10.
+	child size: 50 @ 50.
+	child addEventHandlerOn: BlClickEvent do: [ :anEvent |
+		anEvent consume.
+		clicks add: Color blue ].
+
+	parent addChild: child.
+
+	BlSpace simulateClickOn: child.
+	self assert: clicks equals: { Color red } asOrderedCollection
 ]
 
 { #category : #tests }
 BlEventTest >> testRemoveEventHandlerAnsweredByAddEventHandlerOnDo [
 
 	| target handlerA handlerB countA countB |
-	target := self testCustomEventTarget.
+	target := self newCustomEventTarget.
 	countA := countB := 0.
 
 	"Add two handlers that increase a counter on each handled event."
@@ -233,9 +180,8 @@ BlEventTest >> testRemoveEventHandlerAnsweredByAddEventHandlerOnDo [
 { #category : #tests }
 BlEventTest >> testSimulateClick [
 
-	<sampleInstance>
 	| element mouseDown mouseUp click |
-	element := self testBlueElement.
+	element := self newBlueElement.
 	element size: 100 @ 100.
 	element position: 0 @ 0.
 
@@ -247,29 +193,27 @@ BlEventTest >> testSimulateClick [
 	element
 		addEventHandlerOn: BlMouseUpEvent
 		do: [ mouseUp := mouseUp + 1 ].
-	element addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
+	element
+		addEventHandlerOn: BlClickEvent
+		do: [ click := click + 1 ].
 
 	BlSpace simulateClickOn: element.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
-	self assert: click equals: 1.
-
-	^ element
+	self assert: click equals: 1
 ]
 
 { #category : #tests }
 BlEventTest >> testSimulateClickOnChildInDisabledParent [
 
-	<sampleInstance>
-	<demo>
 	| parent red mouseDown mouseUp click |
-	parent := self testGrayElement.
+	parent := self newGrayElement.
 	parent size: 300 @ 300.
 	"make parent element be unresponsive to mouse events"
 	parent preventMouseEvents.
 
-	red := self testRedElement.
+	red := self newRedElement.
 	red size: 200 @ 200.
 	red opacity: 0.2.
 
@@ -280,29 +224,30 @@ BlEventTest >> testSimulateClickOnChildInDisabledParent [
 	red
 		addEventHandlerOn: BlMouseDownEvent
 		do: [ mouseDown := mouseDown + 1 ].
-	red addEventHandlerOn: BlMouseUpEvent do: [ mouseUp := mouseUp + 1 ].
-	red addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
+	red
+		addEventHandlerOn: BlMouseUpEvent
+		do: [ mouseUp := mouseUp + 1 ].
+	red
+		addEventHandlerOn: BlClickEvent
+		do: [ click := click + 1 ].
 
 	BlSpace simulateClickOn: red.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
-	self assert: click equals: 1.
-
-	^ parent
+	self assert: click equals: 1
 ]
 
 { #category : #tests }
 BlEventTest >> testSimulateClickOnChildInParentPreventingChildren [
 
-	<sampleInstance>
 	| parent red childMouseDown childMouseUp childClick parentMouseDown parentMouseUp parentClick |
-	parent := self testGrayElement.
+	parent := self newGrayElement.
 	parent size: 300 @ 300.
 	"make parent element and children be unresponsive to mouse events"
 	parent preventChildrenMouseEvents.
 
-	red := self testRedElement.
+	red := self newRedElement.
 	red size: 200 @ 200.
 	red opacity: 0.2.
 
@@ -338,22 +283,19 @@ BlEventTest >> testSimulateClickOnChildInParentPreventingChildren [
 
 	self assert: parentMouseDown equals: 1.
 	self assert: parentMouseUp equals: 1.
-	self assert: parentClick equals: 1.
-
-	^ parent
+	self assert: parentClick equals: 1
 ]
 
 { #category : #tests }
 BlEventTest >> testSimulateClickOnChildInUnresponsiveParent [
 
-	<sampleInstance>
 	| parent red mouseDown mouseUp click |
-	parent := self testGrayElement.
+	parent := self newGrayElement.
 	parent size: 300 @ 300.
 	"make parent element and children be unresponsive to mouse events"
 	parent preventMeAndChildrenMouseEvents.
 
-	red := self testRedElement.
+	red := self newRedElement.
 	red size: 200 @ 200.
 	red opacity: 0.2.
 
@@ -364,25 +306,55 @@ BlEventTest >> testSimulateClickOnChildInUnresponsiveParent [
 	red
 		addEventHandlerOn: BlMouseDownEvent
 		do: [ mouseDown := mouseDown + 1 ].
-	red addEventHandlerOn: BlMouseUpEvent do: [ mouseUp := mouseUp + 1 ].
-	red addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
+	red
+		addEventHandlerOn: BlMouseUpEvent
+		do: [ mouseUp := mouseUp + 1 ].
+	red
+		addEventHandlerOn: BlClickEvent
+		do: [ click := click + 1 ].
 
 	BlSpace simulateClickOn: red.
 
 	self assert: mouseDown equals: 0.
 	self assert: mouseUp equals: 0.
-	self assert: click equals: 0.
+	self assert: click equals: 0
+]
 
-	^ parent
+{ #category : #fixture }
+BlEventTest >> testSimulateClickOnOverlapped [
+	"By default, the blue element would be below the red element, but elevation inverts it."
+
+	| container blue red clickOnBlue |
+	container := self newGrayElement.
+	container size: 300 @ 300.
+
+	blue := self newBlueElement.
+	blue size: 200 @ 200.
+	blue opacity: 0.2.
+	blue elevation: (BlGlobalElevation elevation: 10).
+	container addChild: blue.
+
+	red := self newRedElement.
+	red size: 200 @ 200.
+	red opacity: 0.2.
+	red elevation: (BlGlobalElevation elevation: 1).
+	container addChild: red.
+
+	clickOnBlue := 0.
+	blue
+		addEventHandlerOn: BlClickEvent
+		do: [ clickOnBlue := clickOnBlue + 1 ].
+
+	BlSpace simulateClickOn: red.
+
+	self assert: clickOnBlue equals: 1
 ]
 
 { #category : #tests }
 BlEventTest >> testSimulateClickOnTransformedAndRelocated [
 
-	<sampleInstance>
-	<demo>
 	| element mouseDown mouseUp click |
-	element := self testSimulateClick.
+	element := self newBlueElement.
 	element size: 10 @ 10.
 	element position: 500 @ 300.
 	element transform
@@ -400,15 +372,15 @@ BlEventTest >> testSimulateClickOnTransformedAndRelocated [
 	element
 		addEventHandlerOn: BlMouseUpEvent
 		do: [ mouseUp := mouseUp + 1 ].
-	element addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
+	element
+		addEventHandlerOn: BlClickEvent
+		do: [ click := click + 1 ].
 
 	BlSpace simulateClickOn: element.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
-	self assert: click equals: 1.
-
-	^ element
+	self assert: click equals: 1
 ]
 
 { #category : #tests }
@@ -418,20 +390,18 @@ BlEventTest >> testSimulateClickOnUnresponsiveOverlapped [
 	Since element above does not consume click events, one below should succesfully
 	handle mouse down/up and click events"
 
-	<sampleInstance>
-	<demo>
 	| container blue red mouseDown mouseUp click |
-	container := self testGrayElement.
+	container := self newGrayElement.
 	container size: 300 @ 300.
 
-	red := self testRedElement.
+	red := self newRedElement.
 	red size: 200 @ 200.
 	red opacity: 0.2.
 	"make red element unresponsive to mouse events"
 	red preventMouseEvents.
 
 	"blue is below the red element"
-	blue := self testBlueElement.
+	blue := self newBlueElement.
 	blue size: 100 @ 100.
 	blue opacity: 0.2.
 
@@ -451,17 +421,14 @@ BlEventTest >> testSimulateClickOnUnresponsiveOverlapped [
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
-	self assert: click equals: 1.
-
-	^ container
+	self assert: click equals: 1
 ]
 
 { #category : #tests }
 BlEventTest >> testSimulateClickOutside [
 
-	<sampleInstance>
 	| element mouseDown mouseUp click |
-	element := self testBlueElement.
+	element := self newBlueElement.
 	element size: 100 @ 100.
 	element position: 100 @ 100.
 
@@ -473,23 +440,22 @@ BlEventTest >> testSimulateClickOutside [
 	element
 		addEventHandlerOn: BlMouseUpEvent
 		do: [ mouseUp := mouseUp + 1 ].
-	element addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
+	element
+		addEventHandlerOn: BlClickEvent
+		do: [ click := click + 1 ].
 
 	BlSpace simulateClickOutside: element.
 
 	self assert: mouseDown equals: 0.
 	self assert: mouseUp equals: 0.
-	self assert: click equals: 0.
-
-	^ element
+	self assert: click equals: 0
 ]
 
 { #category : #tests }
 BlEventTest >> testSimulateMouseMoveInside [
-	<sampleInstance>
 
 	| element mouseMove mouseEnter |
-	element := self testBlueElement.
+	element := self newBlueElement.
 	element size: 100 @ 100.
 	element position: 100 @ 100.
 
@@ -505,17 +471,14 @@ BlEventTest >> testSimulateMouseMoveInside [
 	BlSpace simulateMouseMoveInside: element.
 
 	self assert: mouseMove equals: 1.
-	self assert: mouseEnter equals: 1.
-
-	^ element
+	self assert: mouseEnter equals: 1
 ]
 
 { #category : #tests }
 BlEventTest >> testSimulateMouseMoveOutside [
 
-	<sampleInstance>
 	| element mouseLeave mouseMove mouseEnter |
-	element := self testBlueElement.
+	element := self newBlueElement.
 	element size: 100 @ 100.
 	element position: 100 @ 100.
 
@@ -535,7 +498,5 @@ BlEventTest >> testSimulateMouseMoveOutside [
 
 	self assert: mouseMove equals: 0.
 	self assert: mouseEnter equals: 0.
-	self assert: mouseLeave equals: 0.
-
-	^ element
+	self assert: mouseLeave equals: 0
 ]
