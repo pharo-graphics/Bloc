@@ -706,7 +706,6 @@ BlInfiniteLinearLayout >> layoutChildrenIn: aBlInfiniteRecycler state: aBlInfini
 	layoutState scrolledWhileFilling: false.
 	anOffsetSpace := self layoutChildrenFill: anExtraSpace.
 	anOffsetSpace := self layoutChildrenFixGaps: anOffsetSpace.
-	"self layoutChildrenForPredictiveAnimations: anOffsetSpace."
 	
 	self orientation layoutCompleted.
 		
