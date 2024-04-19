@@ -927,14 +927,14 @@ BlInfiniteElement >> notifyChildAttached: anElement [
 BlInfiniteElement >> notifyChildDetached: anElement [
 	"Notify all event handlers that element is detached from InfiniteElement"
 
-	self fireEvent: (BlInfiniteElementDetachedEvent element: anElement)
+	self dispatchEvent: (BlInfiniteElementDetachedEvent element: anElement)
 ]
 
 { #category : #notifying }
 BlInfiniteElement >> notifyScrollStateChanged: aScrollState [
 	"Notify all event handlers that scroll state of InfiniteElement has been changed"
 
-	self fireEvent: (BlInfiniteScrollChangedEvent scrollState: aScrollState)
+	self dispatchEvent: (BlInfiniteScrollChangedEvent scrollState: aScrollState)
 ]
 
 { #category : #'api - scrolling notifying' }

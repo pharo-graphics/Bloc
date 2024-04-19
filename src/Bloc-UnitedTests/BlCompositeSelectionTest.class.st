@@ -14,7 +14,7 @@ BlCompositeSelectionTest >> deselectedIndexesIn: aCompositeSelection among: sele
 ]
 
 { #category : #tests }
-BlCompositeSelectionTest >> testDeselectADeselectedIndex [
+BlCompositeSelectionTest >> testDeselectAndDeselectedIndex [
 
 	| s |
 	s := BlCompositeSelection new.
@@ -26,7 +26,7 @@ BlCompositeSelectionTest >> testDeselectADeselectedIndex [
 ]
 
 { #category : #tests }
-BlCompositeSelectionTest >> testDeselectADeselectedIndex2 [
+BlCompositeSelectionTest >> testDeselectAndDeselectedIndex2 [
 	<expectedFailure>
 
 	| s |
@@ -41,6 +41,19 @@ BlCompositeSelectionTest >> testDeselectADeselectedIndex2 [
 	s selectIndex: 1.
 	s deselectIndex: 4.
 	self assert: s indices equals: #(1 5 8 12 16)
+]
+
+{ #category : #tests }
+BlCompositeSelectionTest >> testDeselectAndDeselectedIndex3 [
+
+	| s |
+	s := BlCompositeSelection new.
+	s select: 0 to: 8.
+	self assert: s indices equals: #( 1 2 3 4 5 6 7 8 ).
+	s deselectIndexes: #( 2 4 6 ).
+	self assert: s indices equals: #( 1 3 5 7 8 ).
+	s deselectIndexes: #( 2 4 6 ).
+	self assert: s indices equals: #( 1 3 5 7 8 )
 ]
 
 { #category : #tests }
