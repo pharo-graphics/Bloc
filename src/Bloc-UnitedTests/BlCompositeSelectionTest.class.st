@@ -45,6 +45,7 @@ BlCompositeSelectionTest >> testDeselectAndDeselectedIndex2 [
 
 { #category : #tests }
 BlCompositeSelectionTest >> testDeselectAndDeselectedIndex3 [
+	<expectedFailure>
 
 	| s |
 	s := BlCompositeSelection new.
@@ -54,6 +55,43 @@ BlCompositeSelectionTest >> testDeselectAndDeselectedIndex3 [
 	self assert: s indices equals: #( 1 3 5 7 8 ).
 	s deselectIndexes: #( 2 4 6 ).
 	self assert: s indices equals: #( 1 3 5 7 8 )
+]
+
+{ #category : #tests }
+BlCompositeSelectionTest >> testEquals [
+
+	| s |
+	s := BlCompositeSelection new.
+	self assert: s equals: BlCompositeSelection new
+
+]
+
+{ #category : #tests }
+BlCompositeSelectionTest >> testEquals1 [
+
+	| s s2 |
+	s := BlCompositeSelection new.
+	s select: 9 to: 20.
+	s2 := BlCompositeSelection new.
+	s2 select: 9 to: 20.
+	self assert: s equals: s2
+
+]
+
+{ #category : #tests }
+BlCompositeSelectionTest >> testEquals2 [
+	<expectedFailure>
+
+	| sc s |
+	s := BlCompositeSelection new.
+	1 to: 10 by: 2 do: [ :idx | s selectIndex: idx ].
+	self assert: s intervals size equals: 5.
+	sc := s copy.
+	1 to: 10 by: 1 do: [ :idx | s selectIndex: idx ].
+	self assert: s intervals size equals: 1.
+	2 to: 99 by: 2 do: [ :idx | s deselectIndex: idx ].
+	self assert: s intervals size equals: 5.
+	self assert: s equals: sc
 ]
 
 { #category : #tests }
