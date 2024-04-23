@@ -53,10 +53,10 @@ BlRowNumberDecoration >> aeMeasuredWidthOn: aeCanvas in: anInfiniteElement [
 	nb := anInfiniteElement hasChildren
 		      ifTrue: [
 			      (anInfiniteElement childHolderOf:
-				       anInfiniteElement children last) layoutPosition ]
-		      ifFalse: [ 99 ].
+				       anInfiniteElement children last) position ]
+		      ifFalse: [ 0 ].
 	^ self
-		aeMeasuredActualWidthFor: nb asString
+		aeMeasuredActualWidthFor: (nb max: 99)
 		on: aeCanvas
 		in: anInfiniteElement
 ]

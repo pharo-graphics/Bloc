@@ -66,7 +66,7 @@ BlSideBackgroundDecoration >> aeUpdateWidthOn: aeCanvas in: anInfiniteElement [
 	| width |
 	width := self aeMeasuredWidthOn: aeCanvas in: anInfiniteElement.
 	width = self actualWidth ifTrue: [ ^ self ].
-	actualWidth := width.
+	actualWidth := width max: actualWidth.
 	anInfiniteElement requestLayout
 ]
 
