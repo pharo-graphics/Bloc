@@ -20,7 +20,7 @@ BlRowNumberDecoration >> aeDraw: anItemElement overOn: aeCanvas in: anInfiniteEl
 			     numberVerticalHeightIn: anItemElement
 			     fontHeight: fontExtents height.
 		aeCanvas pathTranslate:
-			4 @ (anItemElement bounds inParent top + fontExtents ascent + h).
+			self numberLeftGap @ (anItemElement bounds inParent top + fontExtents ascent + h).
 		aeCanvas setSourceColor: Color gray darker.
 		cairoGlyphsArray := cairoScaledFont glyphArrayForString:
 			                    index asString.
@@ -59,6 +59,13 @@ BlRowNumberDecoration >> aeMeasuredWidthOn: aeCanvas in: anInfiniteElement [
 		aeMeasuredActualWidthFor: (nb max: 99)
 		on: aeCanvas
 		in: anInfiniteElement
+]
+
+{ #category : #geometry }
+BlRowNumberDecoration >> numberLeftGap [
+	" the gap between the row number background left and the row number"
+
+	^ 4
 ]
 
 { #category : #geometry }
