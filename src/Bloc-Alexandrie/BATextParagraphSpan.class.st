@@ -11,20 +11,19 @@ Class {
 BATextParagraphSpan >> aeDrawOn: aeCanvas [
 
 	self span ifNil: [ ^ self ].
-	aeCanvas restoreContextAfter: [ 
+	aeCanvas restoreContextAfter: [
 		aeCanvas pathTranslate: self baseline.
 		self flag: #todo. "Default color?"
 		aeCanvas setSourceColor: (fontAndStyleBuilder hasCustomColor
 				 ifTrue: [ fontAndStyleBuilder color ]
 				 ifFalse: [ Color black ]).
 
-		self attributes do: [ :anAttribute | 
-			anAttribute aeDrawBelowOn: aeCanvas span: self
-			"			anAttribute aeApplyTo: aeCanvas " ].
+		self attributes do: [ :anAttribute |
+			anAttribute aeDrawBelowOn: aeCanvas span: self ].
 
-		aeCanvas drawText: cairoGlyphsArray font: cairoScaledFont.
+		aeCanvas drawGlyphs: cairoGlyphsArray font: cairoScaledFont.
 
-		self attributes do: [ :anAttribute | 
+		self attributes do: [ :anAttribute |
 			anAttribute aeDrawAboveOn: aeCanvas span: self ] ]
 ]
 

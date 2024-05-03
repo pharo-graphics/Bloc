@@ -24,7 +24,7 @@ BlRowNumberDecoration >> aeDraw: anItemElement overOn: aeCanvas in: anInfiniteEl
 		aeCanvas setSourceColor: Color gray darker.
 		cairoGlyphsArray := cairoScaledFont glyphArrayForString:
 			                    index asString.
-		aeCanvas drawText: cairoGlyphsArray font: cairoScaledFont ]
+		aeCanvas drawGlyphs: cairoGlyphsArray font: cairoScaledFont ]
 ]
 
 { #category : #'as yet unclassified' }
