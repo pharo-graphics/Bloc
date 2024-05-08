@@ -87,7 +87,7 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Alexandrie-Tests' with: [
 					spec requires: #('Bloc-Alexandrie' 'Bloc-Text-Examples') ];
 				package: #'Bloc-Text-Alexandrie-Examples' with: [
-					spec requires: #('Bloc-Alexandrie') ].
+					spec requires: #('Bloc-Alexandrie' 'Bloc-Layout') ].
 			"Exporters depend on Alexandrie"
 			spec 
 				package: #'Bloc-Alexandrie-Exporter' with: [
