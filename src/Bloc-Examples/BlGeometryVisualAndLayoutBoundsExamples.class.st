@@ -414,7 +414,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> unclippedTriangle [
 
 	aPolygonElement := BlElement new.
 	aPolygonElement size: 8 @ 11.
-	aPolygonElement geometry: (BlPolygon vertices: {
+	aPolygonElement geometry: (BlPolygonGeometry vertices: {
 				 (0 @ 0).
 				 (8 @ 5.5).
 				 (0 @ 11) }).
