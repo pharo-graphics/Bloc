@@ -25,9 +25,7 @@ BlInfiniteDataSourceUpdateCommand >> isUpdate [
 { #category : #commands }
 BlInfiniteDataSourceUpdateCommand >> offsetPositionsIn: anInfiniteElement [
 
-	anInfiniteElement dataSourceManager
-		markElementHoldersUpdated: self positionStart
+	anInfiniteElement
+		elementRangeUpdate: self positionStart
 		itemCount: self itemCount
-		in: anInfiniteElement
-
 ]

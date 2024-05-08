@@ -122,14 +122,14 @@ BlElementSelection >> initializeActions [
 	resizeButton addEventHandler: (BlEventHandler on: BlDragStartEvent do: [ :evt |
 		initialPosition := evt position.
 		initialSize := self client extent.
-		evt consumed: true ]).
-	resizeButton addEventHandler: (BlEventHandler on: BlDragEndEvent do: [ :evt |  evt consumed: true.]).
+		evt consume ]).
+	resizeButton addEventHandler: (BlEventHandler on: BlDragEndEvent do: [ :evt |  evt consume.]).
 	resizeButton addEventHandler: (BlEventHandler on: BlDragEvent do: [ :evt |
-		evt consumed: true.
+		evt consume.
 		self client size: (initialSize + evt position - initialPosition) ]).
 
 	inspectButton addEventHandler: (BlEventHandler on: BlClickEvent do: [ :evt | 
-		evt consumed: true.
+		evt consume.
 		self client inspect]).
 	
 	self addChild: removeButton.
@@ -148,13 +148,13 @@ BlElementSelection >> initializeHandlers [
 	self addEventHandler: (BlEventHandler
 			 on: BlDoubleClickEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 self close ]).
 	self addEventHandler: (BlEventHandler
 			 on: BlClickEvent
 			 do: [ :anEvent |
 				 anEvent modifiers isShift ifTrue: [
-					 anEvent consumed: true.
+					 anEvent consume.
 					 self client hasParent ifTrue: [
 						 BlElementSelection on: self client parent.
 						 self close ] ] ]).
@@ -162,7 +162,7 @@ BlElementSelection >> initializeHandlers [
 			 on: BlDragStartEvent
 			 do: [ :anEvent |
 				 | aClientOldGlobalPosition aClientNewGlobalPosition |
-				 anEvent consumed: true.
+				 anEvent consume.
 
 				 aClientOldGlobalPosition := self client positionInSpace.
 				 aClientNewGlobalPosition := self space root globalPointToLocal:
@@ -182,7 +182,7 @@ BlElementSelection >> initializeHandlers [
 			 on: BlDragEvent
 			 do: [ :anEvent |
 				 | aPosition |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 aPosition := anEvent position - self dragOffset.
 				 self client position: aPosition ])
 ]

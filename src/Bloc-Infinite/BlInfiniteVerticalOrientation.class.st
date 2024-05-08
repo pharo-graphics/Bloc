@@ -131,7 +131,7 @@ BlInfiniteVerticalOrientation >> mouseWheelEvent: anEvent [
 	dY isZero ifTrue: [ ^ self ].
 
 	anInfiniteElement smoothScrollBy: (0 @ dY) * 200.
-	anEvent consumed: true.
+	anEvent consume
 ]
 
 { #category : #'children - geometry' }

@@ -136,8 +136,9 @@ BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
 	aSpace time
 		every: 5 milliSeconds
 		while: [
-			(aSpace taskQueue isEmpty or: [
-				aSpace time now >= deadline ]) not ]
+			aSpace universe hasDeferredActions or: [
+				(aSpace taskQueue isEmpty or: [
+					aSpace time now >= deadline ]) not ] ]
 		do: [ aSpace pulse ].
 
 	aSpace pulse.

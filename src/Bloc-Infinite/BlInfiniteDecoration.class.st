@@ -99,10 +99,6 @@ BlInfiniteDecoration >> onLayoutDoneIn: anEditorElement remaining: remainingRect
 	^ remainingRectangle
 ]
 
-{ #category : #updating }
-BlInfiniteDecoration >> onScrollDoneIn: anEditorElement [
-]
-
 { #category : #accessing }
 BlInfiniteDecoration >> priority [
 	^ priority ifNil: [ priority := 0 ]

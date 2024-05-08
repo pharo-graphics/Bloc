@@ -22,5 +22,6 @@ Class {
 
 { #category : #sending }
 BlInfiniteDataSourceChanged >> sendTo: anObject [
-	anObject onChanged: self
+
+	anObject infiniteDataSourceChanged: self
 ]

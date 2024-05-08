@@ -125,30 +125,6 @@ BlInfiniteLinearLayout >> computeExtraLayoutSpace [
 	anExtraForStart := anExtraForStart + self orientation startWithPadding.
 	anExtraForEnd := anExtraForEnd + self orientation paddingEnd.
 
-	(self state isPreLayout and: [
-		self hasPendingScrollPosition and: [
-			self hasPendingScrollPositionOffset ] ])
-		ifTrue: [
-			"if the child is visible and we are going to move it around, we should layout
-			extra items in the opposite direction to make sure new items animate nicely
-			instead of just fading in"
-			(self childAtPosition: pendingScrollPosition) ifNotNil: [ :anElement |
-				| aCurrentOffset anUpcomingOffset |
-				aCurrentOffset := 0.
-				anUpcomingOffset := 0.
-
-				shouldReverseLayout
-					ifTrue: [
-						aCurrentOffset := self orientation endWithPadding - (self orientation decoratedEnd: anElement).
-						anUpcomingOffset := aCurrentOffset - pendingScrollPositionOffset ]
-					ifFalse: [
-						aCurrentOffset := (self orientation decoratedStart: anElement) - self orientation startWithPadding.
-						anUpcomingOffset := pendingScrollPositionOffset - aCurrentOffset ].
-
-					anUpcomingOffset > 0
-						ifTrue: [ anExtraForStart := anExtraForStart + anUpcomingOffset ]
-						ifFalse: [ anExtraForEnd := anExtraForEnd - anUpcomingOffset ] ] ].
-
 	^ anExtraForStart @ anExtraForEnd
 ]
 
@@ -287,10 +263,6 @@ BlInfiniteLinearLayout >> extraLayoutSpace [
 	hand, in places like smooth scrolling to an unknown location, this extra content helps
 	InfiniteLayout to calculate a much smoother scrolling; which improves user experience.
 	You can also use this if you are trying to pre-layout your upcoming elements"
-	<return: #Number>
-
-	self state hasTargetScrollPosition
-		ifTrue: [ ^ self orientation totalSpace ].
 
 	^ 0
 ]
@@ -348,22 +320,21 @@ BlInfiniteLinearLayout >> fillLayoutChunkResult: aResult [
 ]
 
 { #category : #layout }
-BlInfiniteLinearLayout >> fillLayoutConsumeSpace: aResult [	
+BlInfiniteLinearLayout >> fillLayoutConsumeSpace: aResult [
 	"Consume the available space if:
 		layoutChunk did not request to be ignored
 		OR we are laying out scrap children
 		OR we are not doing pre-layout"
 
-	^ (aResult ignoreConsumed not or: [
-		layoutState hasScrapList or: [ 
-			self state isPreLayout not ] ])
-		ifTrue: [ 
-			layoutState
-				availableSpace: layoutState availableSpace - aResult consumedSpace
-				in: self.
-			"we keep a separate remaining space because availableSpace is important for recycling"
-			aResult consumedSpace negated ]
-		ifFalse: [ 0 ]
+	^ aResult ignoreConsumed
+		  ifFalse: [
+			  layoutState
+				  availableSpace:
+				  layoutState availableSpace - aResult consumedSpace
+				  in: self.
+			  "we keep a separate remaining space because availableSpace is important for recycling"
+			  aResult consumedSpace negated ]
+		  ifTrue: [ 0 ]
 ]
 
 { #category : #layout }
@@ -731,16 +702,12 @@ BlInfiniteLinearLayout >> layoutChildrenIn: aBlInfiniteRecycler state: aBlInfini
 	
 	self detachAndScrapAttachedChildren.
 	layoutState isInfinite: self resolveIsInfinite.
-	layoutState isPreLayout: self state isPreLayout.
 
 	layoutState scrolledWhileFilling: false.
 	anOffsetSpace := self layoutChildrenFill: anExtraSpace.
 	anOffsetSpace := self layoutChildrenFixGaps: anOffsetSpace.
-	"self layoutChildrenForPredictiveAnimations: anOffsetSpace."
 	
-	self state isPreLayout
-		ifTrue: [ anchorInfo reset ]
-		ifFalse: [ self orientation layoutCompleted ].
+	self orientation layoutCompleted.
 		
 	lastStackFromEnd := stackFromEnd.
 	self validateChildrenOrder
@@ -1324,21 +1291,8 @@ BlInfiniteLinearLayout >> updateAnchor: anAnchorInfo fromChild: anElement [
 
 { #category : #'layout - anchor' }
 BlInfiniteLinearLayout >> updateAnchor: anAnchorInfo fromReferenceChild: anElement [
-	
-	anAnchorInfo assignFromElement: anElement in: self.
-	"If all visible elements are removed in 1 pass, reference child might be out of bounds.
-	If that is the case, offset it back to 0 so that we use these pre-layout children."
-	(self state isPreLayout not and: [ self supportsPredictiveItemAnimations ])
-		ifTrue: [ 
-			| isNotVisible | 
-			"validate reference element is at least partially visible. if not, offset it to start"
-			isNotVisible := (self orientation decoratedStart: anElement) >= self orientation endWithPadding or: [ 
-				(self orientation decoratedEnd: anElement) < self orientation startWithPadding ].
-			isNotVisible
-				ifTrue: [ 
-					anAnchorInfo coordinate: (anAnchorInfo layoutFromEnd
-						ifTrue: [ self orientation endWithPadding ]
-						ifFalse: [ self orientation startWithPadding ]) ] ]
+
+	anAnchorInfo assignFromElement: anElement in: self
 ]
 
 { #category : #'private - layout anchor' }
@@ -1377,32 +1331,32 @@ BlInfiniteLinearLayout >> updateAnchorFromChildren: anAnchorInfo recycler: aBlIn
 BlInfiniteLinearLayout >> updateAnchorFromPendingData: anAnchorInfo state: aBlInfiniteState [
 	"If there is a pending scroll position, updates the anchor info from that data and returns true.
 	false otherwise"
-	<return: #Boolean>
 
-	(aBlInfiniteState isPreLayout or: [ self hasPendingScrollPosition not ])
-		ifTrue: [ ^ false ].
+	<return: #Boolean>
+	self hasPendingScrollPosition ifFalse: [ ^ false ].
 
 	"validate scroll position"
 	(pendingScrollPosition between: 1 and: aBlInfiniteState itemCount)
-		ifFalse: [ 
+		ifFalse: [
 			pendingScrollPosition := NoPosition.
 			pendingScrollPositionOffset := self class invalidOffset.
 			^ false ].
 	"if child is visible, try to make it a reference child and ensure it is fully visible.
 	if child is not visible, align it depending on its virtual position."
 	anAnchorInfo position: pendingScrollPosition.
-	pendingScrollPositionOffset = self class invalidOffset
-		ifTrue: [ 
-			self updateAnchorFromPendingDataInvalidOffset: anAnchorInfo.
-			^ true ].
+	pendingScrollPositionOffset = self class invalidOffset ifTrue: [
+		self updateAnchorFromPendingDataInvalidOffset: anAnchorInfo.
+		^ true ].
 	"override layout from end values for consistency"
 	anAnchorInfo layoutFromEnd: shouldReverseLayout.
-	
+
 	"if this changes, we should update prepareForDrop as well"
 	anAnchorInfo coordinate: (shouldReverseLayout
-		ifTrue: [ self orientation endWithPadding - pendingScrollPositionOffset ]
-		ifFalse: [ self orientation startWithPadding + pendingScrollPositionOffset ]).
-	
+			 ifTrue: [
+			 self orientation endWithPadding - pendingScrollPositionOffset ]
+			 ifFalse: [
+			 self orientation startWithPadding + pendingScrollPositionOffset ]).
+
 	^ true
 ]
 

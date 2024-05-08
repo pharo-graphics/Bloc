@@ -22,15 +22,13 @@ BlInfiniteScrollFlinger >> onFinished [
 
 { #category : #hooks }
 BlInfiniteScrollFlinger >> onInitialized [
-	self scrollable eatRequestLayout.
 	self scrollable onEnterLayoutOrScroll
 ]
 
 { #category : #hooks }
 BlInfiniteScrollFlinger >> onLayoutScrolled [
 	self scrollable repositionShadowingElements.
-	self scrollable onExitLayoutOrScroll.
-	self scrollable resumeRequestLayout: false
+	self scrollable onExitLayoutOrScroll
 ]
 
 { #category : #hooks }

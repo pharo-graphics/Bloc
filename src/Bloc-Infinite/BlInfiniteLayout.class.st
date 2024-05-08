@@ -27,7 +27,6 @@ Class {
 		'heightSpec',
 		'widthSpec',
 		'autoMeasure',
-		'itemPrefetchEnabled',
 		'measurementCacheEnabled',
 		'smoothScroller',
 		'announcer',
@@ -256,17 +255,15 @@ BlInfiniteLayout >> childAtPosition: aPosition [
 	"Finds the element which represents the given datasource position.
 	I traverse each child since I have no information about child order.
 	Override me to improve performance if your infinite layout keeps data about child elements"
+
 	<return: #BlElement or: nil>
-	
 	1 to: self childrenCount do: [ :anIndex |
 		| anElement anElementHolder |
 		anElement := self childAt: anIndex.
 		anElementHolder := self elementHolderOf: anElement.
-		anElementHolder ifNotNil: [ :aHolder | 
+		anElementHolder ifNotNil: [ :aHolder |
 			(aHolder layoutPosition = aPosition and: [
-				aHolder shouldIgnore not and: [ 
-					self state isPreLayout or: [ 
-						aHolder isRemoved not ] ] ])
+				 aHolder shouldIgnore not and: [ aHolder isRemoved not ] ])
 				ifTrue: [ ^ anElement ] ] ].
 	^ nil
 ]
@@ -569,9 +566,7 @@ BlInfiniteLayout >> initialize [
 	"InfiniteLayout has its own more strict measurement cache to avoid re-measuring a child
 	if the space that will be given to it is already larger than what it has measured before"
 	measurementCacheEnabled := true.
-	
-	"disable until not implemented"
-	itemPrefetchEnabled := false.
+
 	
 	smoothScroller := nil "when not running smoothScroller is nil"
 ]
@@ -581,13 +576,6 @@ BlInfiniteLayout >> isFocused [
 	"Return true if the infinit element I am bound to has focus"
 	
 	^ infiniteElement isFocused
-]
-
-{ #category : #testing }
-BlInfiniteLayout >> isItemPrefetchEnabled [
-	<return: #Boolean>
-
-	^ itemPrefetchEnabled
 ]
 
 { #category : #'measurement - testing' }

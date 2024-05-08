@@ -31,15 +31,18 @@ TBlLayoutResizable >> fitContentLimited [
 
 { #category : #'t  - layout resizeable' }
 TBlLayoutResizable >> hExact: aNumber [
-
 	"we have to set the size in the constraints because the resizer state is stateless and does not propagate the actual size value"
-	self resizableConstraintsDo: [ :c | c horizontal exact: aNumber ]
+
+	self resizableConstraintsDo: [ :c |
+		(c horizontal isExact and: [ c horizontal resizer size = aNumber ])
+			ifFalse: [ c horizontal exact: aNumber ] ]
 ]
 
 { #category : #'t  - layout resizeable' }
 TBlLayoutResizable >> hFitContent [
 
-	self resizableConstraintsDo: [ :c | c horizontal fitContent ]
+	self resizableConstraintsDo: [ :c |
+		c horizontal isFitContent ifFalse: [ c horizontal fitContent ] ]
 ]
 
 { #category : #'t  - layout resizeable' }
@@ -50,8 +53,9 @@ TBlLayoutResizable >> hFitContentLimited [
 
 { #category : #'t  - layout resizeable' }
 TBlLayoutResizable >> hMatchParent [
-	
-	self resizableConstraintsDo: [ :c | c horizontal matchParent ]
+
+	self resizableConstraintsDo: [ :c |
+		c horizontal isMatchParent ifFalse: [ c horizontal matchParent ] ]
 ]
 
 { #category : #'t  - layout resizeable' }
@@ -80,15 +84,18 @@ TBlLayoutResizable >> resizableConstraintsDo: aBlock [
 
 { #category : #'t  - layout resizeable' }
 TBlLayoutResizable >> vExact: aNumber [
-	
 	"we have to set the size in the constraints because the resizer state is stateless and does not propagate the actual size value"
-	self resizableConstraintsDo: [ :c | c vertical exact: aNumber ]
+
+	self resizableConstraintsDo: [ :c |
+		(c vertical isExact and: [ c vertical resizer size = aNumber ])
+			ifFalse: [ c vertical exact: aNumber ] ]
 ]
 
 { #category : #'t  - layout resizeable' }
 TBlLayoutResizable >> vFitContent [
-	
-	self resizableConstraintsDo: [ :c | c vertical fitContent ]
+
+	self resizableConstraintsDo: [ :c |
+		c vertical isFitContent ifFalse: [ c vertical fitContent ] ]
 ]
 
 { #category : #'t  - layout resizeable' }
@@ -99,6 +106,7 @@ TBlLayoutResizable >> vFitContentLimited [
 
 { #category : #'t  - layout resizeable' }
 TBlLayoutResizable >> vMatchParent [
-	
-	self resizableConstraintsDo: [ :c | c vertical matchParent ]
+
+	self resizableConstraintsDo: [ :c |
+		c vertical isMatchParent ifFalse: [ c vertical matchParent ] ]
 ]

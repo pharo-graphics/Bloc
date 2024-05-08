@@ -33,8 +33,7 @@ BlInfiniteDataSourceAddCommand >> isAdd [
 { #category : #commands }
 BlInfiniteDataSourceAddCommand >> offsetPositionsIn: anInfiniteElement [
 
-	anInfiniteElement dataSourceManager
-		offsetPositions: self positionStart
-		forAdd: self itemCount
-		in: anInfiniteElement
+	anInfiniteElement
+		offsetPositionRecordsForInsert: self positionStart
+		itemCount: self itemCount
 ]
