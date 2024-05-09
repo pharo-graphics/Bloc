@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlEventDi
 Class {
 	#name : #BlEventDispatcherTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Tests'
+	#category : #'Bloc-Tests-Events'
 }
 
 { #category : #tests }

@@ -3,20 +3,20 @@ I am an example of a custom bloc event
 
 "
 Class {
-	#name : #BlExampleCustomEvent,
+	#name : #BlMockedEvent,
 	#superclass : #BlEvent,
 	#instVars : [
 		'payload'
 	],
-	#category : #'Bloc-Examples-Event'
+	#category : #'Bloc-Tests-Events'
 }
 
 { #category : #accessing }
-BlExampleCustomEvent >> payload [
+BlMockedEvent >> payload [
 	^ payload
 ]
 
 { #category : #accessing }
-BlExampleCustomEvent >> payload: anObject [
+BlMockedEvent >> payload: anObject [
 	payload := anObject
 ]
