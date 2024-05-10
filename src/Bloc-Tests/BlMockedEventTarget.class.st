@@ -16,7 +16,6 @@ Class {
 { #category : #accessing }
 BlMockedEventTarget >> eventDispatcher [
 	"Return an object responsible for event dispatching"
-	<return: #BlDirectEventDispatcher>
 
 	^ eventDispatcher
 ]

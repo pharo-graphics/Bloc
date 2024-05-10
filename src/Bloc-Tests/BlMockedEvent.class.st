@@ -13,10 +13,12 @@ Class {
 
 { #category : #accessing }
 BlMockedEvent >> payload [
+
 	^ payload
 ]
 
 { #category : #accessing }
 BlMockedEvent >> payload: anObject [
+
 	payload := anObject
 ]
