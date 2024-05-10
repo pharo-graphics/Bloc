@@ -57,6 +57,7 @@ BlMorphicWorldEmbeddingEventHandler class >> initialize [
 
 { #category : #converting }
 BlMorphicWorldEmbeddingEventHandler >> convertButton: aBlMouseButton [
+
 	aBlMouseButton = BlMouseButton primary
 		ifTrue: [ ^ MouseButtonEvent redButton ].
 	aBlMouseButton = BlMouseButton middle
@@ -69,6 +70,7 @@ BlMorphicWorldEmbeddingEventHandler >> convertButton: aBlMouseButton [
 
 { #category : #converting }
 BlMorphicWorldEmbeddingEventHandler >> convertModifiers: modifiers [
+
 	| btns |
 	btns := 0.
 	
@@ -88,16 +90,21 @@ BlMorphicWorldEmbeddingEventHandler >> convertModifiers: modifiers [
 
 { #category : #events }
 BlMorphicWorldEmbeddingEventHandler >> dispatchMorphicEvent: anEvent hand: aHandMorph [
+
 	aHandMorph
-		ifNotNil: [
-			aHandMorph handleEvent: anEvent ]
-		ifNil: [ NonInteractiveTranscript stderr show: ('Can not handle {1} because hand is nil' format: { anEvent }); cr ]
+		ifNotNil: [ aHandMorph handleEvent: anEvent ]
+		ifNil: [
+			NonInteractiveTranscript stderr
+				show: ('Can not handle {1} because hand is nil'
+					format: { anEvent });
+				cr ]
 ]
 
-{ #category : #visiting }
+{ #category : #'keyboard handlers' }
 BlMorphicWorldEmbeddingEventHandler >> keyDownEvent: anEvent [
+
 	| aHand aMorphicEvent aCharacter aKeyValue aCharCode |
-	
+
 	anEvent consume.
 	aHand := anEvent currentTarget activeHand.
 	
@@ -137,8 +144,9 @@ BlMorphicWorldEmbeddingEventHandler >> keyDownEvent: anEvent [
 	self dispatchMorphicEvent: aMorphicEvent hand: aHand
 ]
 
-{ #category : #visiting }
+{ #category : #'keyboard handlers' }
 BlMorphicWorldEmbeddingEventHandler >> keyUpEvent: anEvent [
+
 	| aHand aMorphicEvent |
 	
 	anEvent consume.
@@ -167,6 +175,7 @@ BlMorphicWorldEmbeddingEventHandler >> mapKeyToCharacter: aKeyboardKey [
 
 { #category : #'mouse handlers' }
 BlMorphicWorldEmbeddingEventHandler >> mouseDownEvent: anEvent [
+
 	| aHand aMorphicEvent |
 
 	anEvent consume.
@@ -188,6 +197,7 @@ BlMorphicWorldEmbeddingEventHandler >> mouseDownEvent: anEvent [
 
 { #category : #'mouse handlers' }
 BlMorphicWorldEmbeddingEventHandler >> mouseMoveEvent: anEvent [
+
 	| aHand aMorphicEvent oldPos theButtons |
 
 	anEvent consume.
@@ -217,6 +227,7 @@ BlMorphicWorldEmbeddingEventHandler >> mouseMoveEvent: anEvent [
 
 { #category : #'mouse handlers' }
 BlMorphicWorldEmbeddingEventHandler >> mouseUpEvent: anEvent [
+
 	| aHand aMorphicEvent |
 
 	anEvent consume.
@@ -236,8 +247,9 @@ BlMorphicWorldEmbeddingEventHandler >> mouseUpEvent: anEvent [
 	self dispatchMorphicEvent: aMorphicEvent hand: aHand
 ]
 
-{ #category : #visiting }
+{ #category : #'mouse handlers' }
 BlMorphicWorldEmbeddingEventHandler >> mouseWheelEvent: anEvent [
+
 	| vertical aHand aMorphicEvent |
 	
 	anEvent consume.
@@ -262,8 +274,9 @@ BlMorphicWorldEmbeddingEventHandler >> mouseWheelEvent: anEvent [
 	self dispatchMorphicEvent: aMorphicEvent hand: aHand
 ]
 
-{ #category : #visiting }
+{ #category : #'keyboard handlers' }
 BlMorphicWorldEmbeddingEventHandler >> textInputEvent: anEvent [
+
 	| aHand aMorphicEvent anInputString |
 
 	anEvent consume.

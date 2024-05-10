@@ -10,6 +10,7 @@ BlMorphicWorldDisplayScreen >> beDisplay [
 
 { #category : #testing }
 BlMorphicWorldDisplayScreen >> isFullscreen [
+
 	^ false
 ]
 

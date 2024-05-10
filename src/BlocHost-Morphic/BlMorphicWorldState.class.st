@@ -10,52 +10,59 @@ Class {
 
 { #category : #accessing }
 BlMorphicWorldState >> display [
-	<return: #Form>
 
 	^ display
 ]
 
 { #category : #accessing }
 BlMorphicWorldState >> display: aForm [
+
 	display := aForm
 ]
 
 { #category : #'update cycle' }
 BlMorphicWorldState >> displayWorld: aWorld submorphs: submorphs [
-	element invalidRect: (BlBounds fromRectangle: (0@0 extent: aWorld extent))
+
+	element invalidRect:
+		(BlBounds fromRectangle: (0 @ 0 extent: aWorld extent))
 ]
 
 { #category : #'update cycle' }
-BlMorphicWorldState >> doOneCycleFor: aWorld [		
+BlMorphicWorldState >> doOneCycleFor: aWorld [
+
 	self doOneCycleNowFor: aWorld
 ]
 
 { #category : #'update cycle' }
 BlMorphicWorldState >> doOneCycleNowFor: aWorld [
-	self element isAttachedToSceneGraph
-		ifTrue: [
-			self element space host universe pulseSynchronously.
-			10 milliSeconds wait ]
+
+	self element isAttachedToSceneGraph ifFalse: [ ^ self ].
+	self element space host universe pulseSynchronously.
+	10 milliSeconds wait
 ]
 
 { #category : #accessing }
 BlMorphicWorldState >> element [
+
 	^ element
 ]
 
 { #category : #accessing }
 BlMorphicWorldState >> element: anObject [
+
 	element := anObject
 ]
 
 { #category : #initialization }
 BlMorphicWorldState >> initialize [
+
 	super initialize.
-	
+
 	self currentCursor: Cursor normal
 ]
 
 { #category : #canvas }
 BlMorphicWorldState >> recordDamagedRect: damageRect [
+
 	element invalidRect: (BlBounds fromRectangle: damageRect)
 ]

@@ -11,7 +11,10 @@ Class {
 
 { #category : #accessing }
 BlMorphicWorldMorph class >> worldState: aWorldState [
-	^ self basicNew initializeWith: aWorldState
+
+	^ self basicNew
+		  initializeWith: aWorldState;
+		  yourself
 ]
 
 { #category : #actions }
@@ -34,24 +37,23 @@ BlMorphicWorldMorph >> beMain [
 		MorphicUIManager classVarNamed: #UIProcess put: aProcess ]
 ]
 
-{ #category : #accessing }
+{ #category : #api }
 BlMorphicWorldMorph >> display [
-	<return: #Form>
 
 	^ display
 ]
 
 { #category : #initialization }
 BlMorphicWorldMorph >> displayExtent [
+
 	^ display extent
 ]
 
 { #category : #initialization }
 BlMorphicWorldMorph >> displayExtent: aPoint [
-	display
-		setExtent: aPoint
-		depth: display depth.
-		
+
+	display setExtent: aPoint depth: display depth.
+
 	self changed
 ]
 
@@ -92,13 +94,14 @@ BlMorphicWorldMorph >> drawOnSpartaCanvas: aCanvas [
 
 { #category : #accessing }
 BlMorphicWorldMorph >> drawingCache [
+
 	^ drawingCache ifNil: [ drawingCache := IdentityDictionary new ]
 ]
 
 { #category : #initialization }
 BlMorphicWorldMorph >> initializeMenubar [
-	| oldWorld oldActiveWorld |
 
+	| oldWorld oldActiveWorld |
 	oldWorld := World.
 	oldActiveWorld := ActiveWorld.
 	World := self.
@@ -114,6 +117,7 @@ BlMorphicWorldMorph >> initializeMenubar [
 
 { #category : #initialization }
 BlMorphicWorldMorph >> initializeWith: aWorldState [
+
 	| aHand |
 	self initialize.
 
@@ -139,19 +143,19 @@ BlMorphicWorldMorph >> initializeWith: aWorldState [
 
 { #category : #'change reporting' }
 BlMorphicWorldMorph >> invalidRect: damageRect from: aMorph [
+
 	| myChild |
 	super invalidRect: damageRect from: aMorph.
 	
-	aMorph == self
-		ifTrue: [ ^ self ].
+	aMorph == self ifTrue: [ ^ self ].
 		
 	myChild := aMorph.
 	
 	[ myChild isNotNil and: [ myChild owner ~~ self ] ]
 		whileTrue: [ myChild := myChild owner ].
 
-	myChild owner == self
-		ifTrue: [ self drawingCache removeKey: myChild ifAbsent: [ ] ]
+	myChild owner == self ifTrue: [
+		self drawingCache removeKey: myChild ifAbsent: [ ] ]
 ]
 
 { #category : #recategorized }

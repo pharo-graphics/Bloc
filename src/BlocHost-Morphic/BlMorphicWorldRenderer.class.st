@@ -30,13 +30,13 @@ BlMorphicWorldRenderer >> activateCursor: aCursor withMask: maskForm [
 
 { #category : #activation }
 BlMorphicWorldRenderer >> actualScreenSize [
-	<return: #Point>
 
 	^ self element extent
 ]
 
 { #category : #accessing }
 BlMorphicWorldRenderer >> canvas [
+
 	^ display getCanvas
 ]
 
@@ -50,9 +50,10 @@ BlMorphicWorldRenderer >> deactivate [
 
 { #category : #activation }
 BlMorphicWorldRenderer >> doActivate [
+
 	| initialExtent |
-	
-	initialExtent := world worldState realWindowExtent ifNil: [976@665].
+	initialExtent := world worldState realWindowExtent
+		ifNil: [ 976@665 ].
 	
 	display := Form extent: initialExtent depth: 32.
 	world extent: initialExtent.
@@ -63,21 +64,24 @@ BlMorphicWorldRenderer >> doActivate [
 
 { #category : #accessing }
 BlMorphicWorldRenderer >> element [
+
 	^ element
 ]
 
 { #category : #accessing }
-BlMorphicWorldRenderer >> element: anObject [
-	element := anObject
+BlMorphicWorldRenderer >> element: aBlElement [
+
+	element := aBlElement
 ]
 
 { #category : #accessing }
 BlMorphicWorldRenderer >> icon: aForm [
 ]
 
-{ #category : #activation }
+{ #category : #initialization }
 BlMorphicWorldRenderer >> initialize [
+
 	super initialize.
-	
+
 	element := BlElement new
 ]

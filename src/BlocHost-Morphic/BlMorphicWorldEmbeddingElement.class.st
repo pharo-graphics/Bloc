@@ -35,17 +35,17 @@ BlMorphicWorldEmbeddingElement class >> openMain [
 
 { #category : #accessing }
 BlMorphicWorldEmbeddingElement >> activeHand [
-	^ self world activeHand
-		ifNil: [
-			| aHand |
-			
-			aHand := world hands anyOne.
-			world activeHand: aHand.
-			aHand ]
+
+	^ self world activeHand ifNil: [
+		| aHand |
+		aHand := world hands anyOne.
+		world activeHand: aHand.
+		aHand ]
 ]
 
 { #category : #actions }
 BlMorphicWorldEmbeddingElement >> beMain [
+
 	shouldBeMain := true.
 	self isAttachedToSceneGraph
 		ifTrue: [ world beMain ]
@@ -81,7 +81,9 @@ BlMorphicWorldEmbeddingElement >> initialize [
 			yourself).
 
 	self addEventHandler: BlMorphicWorldEmbeddingEventHandler new.
-	self addEventHandlerOn: BlMouseDownEvent do: [ self requestFocus ].
+	self
+		addEventHandlerOn: BlMouseDownEvent
+		do: [ self requestFocus ].
 
 	self enqueueTask:
 		(BlRepeatedTaskAction new
@@ -92,6 +94,7 @@ BlMorphicWorldEmbeddingElement >> initialize [
 
 { #category : #'hooks - children' }
 BlMorphicWorldEmbeddingElement >> onAddedToSceneGraph [ 
+
 	super onAddedToSceneGraph.
 	
 	shouldBeMain ifTrue: [ world beMain ]
@@ -99,6 +102,7 @@ BlMorphicWorldEmbeddingElement >> onAddedToSceneGraph [
 
 { #category : #layout }
 BlMorphicWorldEmbeddingElement >> onLayout: aRectangle context: aBlElementBoundsUpdater [
+
 	super onLayout: aRectangle context: aBlElementBoundsUpdater.
 
 	world fullBounds.
@@ -121,12 +125,12 @@ BlMorphicWorldEmbeddingElement >> onMeasure: anExtentMeasurementSpec [
 
 { #category : #accessing }
 BlMorphicWorldEmbeddingElement >> world [
-	<return: #WorldMorph>
 
 	^ world
 ]
 
 { #category : #accessing }
 BlMorphicWorldEmbeddingElement >> world: aWorldMorph [
+
 	world := aWorldMorph
 ]
