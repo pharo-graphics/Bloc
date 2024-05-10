@@ -495,18 +495,6 @@ BlElement >> asForm [
 	^ BlHostRenderer preferableClass newFormFrom: self
 ]
 
-{ #category : #converting }
-BlElement >> asScrollableElement [
-	| scrollable |
-	self removeFromParent.
-	scrollable := self newScrollableParent.
-	scrollable constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent ].
-	scrollable addChild: self.
-	^ scrollable
-]
-
 { #category : #'children add/remove' }
 BlElement >> attachChild: anElement [
 	"Attaches previously detached element as my last direct child.
@@ -2782,12 +2770,6 @@ BlElement >> needsPaint [
 BlElement >> newEventDispatcher [
 
 	^ self defaultEventDispatcherClass on: self
-]
-
-{ #category : #converting }
-BlElement >> newScrollableParent [
-
-	^ BlScrollableElement new
 ]
 
 { #category : #'event management accessing' }

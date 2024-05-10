@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlEventEx
 Class {
 	#name : #BlEventTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Tests'
+	#category : #'Bloc-Tests-Events'
 }
 
 { #category : #tests }
@@ -19,7 +19,7 @@ BlEventTest >> newBlueElement [
 { #category : #tests }
 BlEventTest >> newCustomEvent [
 
-	^ BlExampleCustomEvent new
+	^ BlMockedEvent new
 		  payload: 'Hello world!';
 		  yourself
 ]
@@ -28,14 +28,14 @@ BlEventTest >> newCustomEvent [
 BlEventTest >> newCustomEventListener [
 
 	^ BlEventHandler
-		  on: BlExampleCustomEvent
+		  on: BlMockedEvent
 		  do: [ :aCustomEvent | aCustomEvent consume ]
 ]
 
 { #category : #tests }
 BlEventTest >> newCustomEventTarget [
 
-	^ BlExampleCustomEventTarget new
+	^ BlMockedEventTarget new
 ]
 
 { #category : #tests }
@@ -160,19 +160,19 @@ BlEventTest >> testRemoveEventHandlerAnsweredByAddEventHandlerOnDo [
 	"Add two handlers that increase a counter on each handled event."
 	handlerA :=
 		target
-			addEventHandlerOn: BlExampleCustomEvent
+			addEventHandlerOn: BlMockedEvent
 			do: [ :_ | countA := countA + 1 ].
 	handlerB :=
 		target
-			addEventHandlerOn: BlExampleCustomEvent
+			addEventHandlerOn: BlMockedEvent
 			do: [ :_ | countB := countB + 1 ].
-	target dispatchEvent: BlExampleCustomEvent new.
+	target dispatchEvent: BlMockedEvent new.
 	self assert: countA equals: 1.
 	self assert: countB equals: 1.
 
 	"After removing handlerA, countA doesn't increase."
 	target removeEventHandler: handlerA.
-	target dispatchEvent: BlExampleCustomEvent new.
+	target dispatchEvent: BlMockedEvent new.
 	self assert: countA equals: 1.
 	self assert: countB equals: 2
 ]

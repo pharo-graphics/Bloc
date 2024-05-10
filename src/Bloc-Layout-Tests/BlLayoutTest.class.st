@@ -4,7 +4,7 @@ A BlLayoutTest is a test class for testing the behavior of BlLayout
 Class {
 	#name : #BlLayoutTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Tests-Layouts-Basic'
+	#category : #'Bloc-Layout-Tests'
 }
 
 { #category : #tests }
