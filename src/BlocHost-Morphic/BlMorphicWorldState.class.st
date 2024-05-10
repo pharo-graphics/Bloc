@@ -8,17 +8,6 @@ Class {
 	#category : #'BlocHost-Morphic-World'
 }
 
-{ #category : #canvas }
-BlMorphicWorldState >> assuredCanvas [
-
-	(self canvas isNil or: [(self canvas extent ~= self viewBox extent) or: [self canvas form depth ~= Display depth]])
-		ifTrue:
-			["allocate a new offscreen canvas the size of the window"
-			self canvas: (display defaultCanvasClass extent: self viewBox extent)].
-
-	^ self canvas
-]
-
 { #category : #accessing }
 BlMorphicWorldState >> display [
 	<return: #Form>
