@@ -17,7 +17,7 @@ Class {
 	#instVars : [
 		'containerMorph'
 	],
-	#category : #'BlocHost-Morphic-Host - Morph'
+	#category : #'BlocHost-Morphic-Embedded'
 }
 
 { #category : #testing }

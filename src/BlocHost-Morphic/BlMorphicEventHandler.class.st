@@ -14,7 +14,7 @@ Class {
 	#classVars : [
 		'HorizontalScrolling'
 	],
-	#category : #'BlocHost-Morphic-Support'
+	#category : #'BlocHost-Morphic-Common - Events'
 }
 
 { #category : #'instance creation' }

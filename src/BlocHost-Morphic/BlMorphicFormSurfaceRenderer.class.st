@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'spaceHostMorph'
 	],
-	#category : #'BlocHost-Morphic-Host - Common'
+	#category : #'BlocHost-Morphic-Common'
 }
 
 { #category : #initialization }
