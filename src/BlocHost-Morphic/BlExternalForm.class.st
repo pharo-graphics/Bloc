@@ -24,7 +24,7 @@ Class {
 	#superclass : #OSSDL2ExternalForm,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
-	#category : #'BlocHost-Morphic-Host - Common'
+	#category : #'BlocHost-Morphic-Common'
 }
 
 { #category : #'external resource management' }

@@ -10,7 +10,7 @@ Class {
 		'preventResize',
 		'hostSpace'
 	],
-	#category : #'BlocHost-Morphic-Host - Common'
+	#category : #'BlocHost-Morphic-Common'
 }
 
 { #category : #drawing }

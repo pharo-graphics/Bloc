@@ -8,7 +8,7 @@ Class {
 		'width',
 		'height'
 	],
-	#category : #'BlocHost-Morphic-Events'
+	#category : #'BlocHost-Morphic-Common - Events'
 }
 
 { #category : #accessing }

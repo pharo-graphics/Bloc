@@ -4,7 +4,7 @@ I am a host that lives in a Morphic World's UI thread and uses stepping mechanis
 Class {
 	#name : #BlMorphicSteppingHost,
 	#superclass : #BlHost,
-	#category : #'BlocHost-Morphic-Host - Common'
+	#category : #'BlocHost-Morphic-Common'
 }
 
 { #category : #'api - ui process' }
