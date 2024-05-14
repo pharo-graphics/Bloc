@@ -132,6 +132,15 @@ BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
 
 	| deadline |
 	deadline := aSpace time now + aDuration.
+
+	"A non-opened space needs a special wait."
+	aSpace isOpened ifFalse: [
+		| aSemaphore |
+		aSemaphore := Semaphore new.
+		aSpace
+			when: BlSpaceShownEvent
+			doOnce: [ :event | aSemaphore signal ].
+		aSemaphore wait: aDuration ].
 	
 	aSpace time
 		every: 5 milliSeconds
