@@ -19,7 +19,7 @@ BlLayoutErrorHandler >> processError: aBlHandledError [
 	"Temporary reset the layout of the parent if it's an infinite element.
 	Should be replaced with a more generic solution."
 	aBlHandledError element withAllParentsDo: [ :aParentElement | 
-		(aParentElement class name equals: #BlInfiniteElement)
+		(aParentElement class name = #BlInfiniteElement)
 			ifTrue: [ aParentElement state beStepStart ] ].
 
 	aBlHandledError debug
