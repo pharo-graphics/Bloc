@@ -61,39 +61,39 @@ BlInfiniteLayout >> addChild: anElement at: anIndex [
 { #category : #'private - children' }
 BlInfiniteLayout >> addChild: anElement at: anIndex disappearing: isDisappearing [
 
-	"If anIndex == 0 child will be attached at the end"
-
 	| anElementHolder anInfiniteConstraints |
 	anElementHolder := self elementHolderOf: anElement.
-
 	anInfiniteConstraints := anElement constraints infinite.
-
-	(anElementHolder wasReturnedFromScrap )
-		ifTrue: [ 
+	anElementHolder wasReturnedFromScrap
+		ifTrue: [
 			anElementHolder clearReturnedFromScrap.
-			infiniteElement childrenManager attachChild: anElement at: anIndex in: infiniteElement ]
-		ifFalse: [ 
+			infiniteElement 
+				attachChild: anElement
+				at: anIndex ]
+		ifFalse: [
 			anElement parent == infiniteElement
-				ifTrue: [ 
+				ifTrue: [
 					| currentIndex index |
 					index := anIndex = 0
 						         ifTrue: [ self childrenCount ]
 						         ifFalse: [ anIndex ].
 					currentIndex := infiniteElement childIndexOf: anElement.
-					currentIndex <= 0 ifTrue: [ 
-						self error: 'Added element has infinite element as parent but is not a direct child of it' ].
-					currentIndex ~= index ifTrue: [ self moveChildFrom: currentIndex to: index ] ]
-				ifFalse: [ 
-					infiniteElement childrenManager addChild: anElement at: anIndex in: infiniteElement.
+					currentIndex <= 0 ifTrue: [
+						self error:
+							'Added element has infinite element as parent but is not a direct child of it' ].
+					currentIndex ~= index ifTrue: [
+						self moveChildFrom: currentIndex to: index ] ]
+				ifFalse: [
+					infiniteElement
+						addChild: anElement
+						at: anIndex.
 					anInfiniteConstraints insetsDirty: true.
-					"If smooth scroller is currently running, let it know that a new element was attached"
-					self smoothScroller ifNotNil: [ :aSmoothScroller | 
-						aSmoothScroller isRunning ifTrue: [ aSmoothScroller onChildAttached: anElement ] ] ] ].
+					self smoothScroller ifNotNil: [ :aSmoothScroller |
+						aSmoothScroller isRunning ifTrue: [
+							aSmoothScroller onChildAttached: anElement ] ] ] ].
 
-	anInfiniteConstraints pendingInvalidate ifTrue: [ 
-		self flag: 'Do we need to request layout here?'.
-		"anElementHolder itemElement invalidate."
-		anInfiniteConstraints pendingInvalidate: false ]
+	anInfiniteConstraints pendingInvalidate ifFalse: [ ^ self ].
+	anInfiniteConstraints pendingInvalidate: false
 ]
 
 { #category : #'children - add/remove' }
@@ -127,16 +127,10 @@ BlInfiniteLayout >> assertNotInLayoutOrScroll [
 ]
 
 { #category : #'children - add/remove' }
-BlInfiniteLayout >> attachChild: anElement [
-	"Reattach a previously detached child element at the end of the list"
-	self attachChild: anElement at: 0 in: infiniteElement 
-]
-
-{ #category : #'children - add/remove' }
 BlInfiniteLayout >> attachChild: anElement at: anIndex [
 	"Reattach a previously detached child element.
 	If anIndex == 0 child will be attached at the end"
-	infiniteElement childrenManager attachChild: anElement at: anIndex in: infiniteElement
+	infiniteElement attachChild: anElement at: anIndex
 ]
 
 { #category : #geometry }
@@ -453,7 +447,7 @@ BlInfiniteLayout >> detachChild: anElement [
 BlInfiniteLayout >> detachChildAt: anIndex [
 	"Temporarily detach a child element at the index"
 
-	infiniteElement childrenManager detachChildAt: anIndex in: infiniteElement
+	infiniteElement detachChildAt: anIndex
 ]
 
 { #category : #'children - accessing' }
@@ -971,9 +965,8 @@ BlInfiniteLayout >> removeAllChildren [
 	"Remove all elements from the currently attached infinite element.
 	This will not recycle any of the affected element; the InfiniteLayout is responsible for doing so if desired."
 
-	"Only remove non-animating elements"
 	self reverseChildrenDo: [ :anElement :anIndex |
-		infiniteElement childrenManager removeChildAt: anIndex in: infiniteElement ]
+		infiniteElement removeChildAt: anIndex ]
 ]
 
 { #category : #'children - add/remove' }
@@ -1041,7 +1034,7 @@ BlInfiniteLayout >> removeChild: anElement [
 	InfiniteLayouts should use this method to completely remove a child view that is no longer needed.
    Note: InfiniteLayouts should strongly consider recycling removed views using BlInfiniteRecycler#recycleElement:"
 
-	infiniteElement childrenManager removeChild: anElement in: infiniteElement
+	infiniteElement removeChild: anElement
 ]
 
 { #category : #'children - add/remove' }
@@ -1051,7 +1044,7 @@ BlInfiniteLayout >> removeChildAt: anIndex [
    Note: InfiniteLayouts should strongly consider recycling removed views using BlInfiniteRecycler#recycleElement:"
 
 	(self childAt: anIndex)
-		ifNotNil: [ infiniteElement childrenManager removeChildAt: anIndex in: infiniteElement ]
+		ifNotNil: [ infiniteElement removeChildAt: anIndex ]
 ]
 
 { #category : #'children - add/remove' }
