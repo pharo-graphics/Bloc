@@ -11,34 +11,6 @@ Class {
 	#category : #'Bloc-Taskit-Objects'
 }
 
-{ #category : #examples }
-TKTBlSpaceService class >> example1 [
-
-	| space service |
-	space := BlSpace new.
-	space
-		extent: 100@100;
-		show.
-
-	service := TKTBlSpaceService on: space.
-
-	service step: [ space root background: Color random ].
-	service stepDelay:	250 milliSeconds.
-	service start.
-	
-	[  3 seconds wait.
-		service stop.
-		space close ] fork
-
-"  We kind of emulate this:
-	space
-		enqueueTask:
-			(BlRepeatedTaskAction new
-				delay: 250 milliSeconds;
-				action: [ space root background: Color random ];
-				yourself)."
-]
-
 { #category : #'instance creation' }
 TKTBlSpaceService class >> on: aBlSpace [
 	
