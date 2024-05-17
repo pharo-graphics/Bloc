@@ -30,6 +30,12 @@ TBlTextStyleable >> bold [
 	self attributesBuilder attribute: BlFontWeightAttribute bold
 ]
 
+{ #category : #'api - text style' }
+TBlTextStyleable >> border: aBlBorder [
+
+	self attributesBuilder attribute: (BlTextBorderAttribute border: aBlBorder)
+]
+
 { #category : #'api - text decoration' }
 TBlTextStyleable >> decorationDo: aBlock [
 	| anAttribute |

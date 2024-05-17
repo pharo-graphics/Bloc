@@ -27,6 +27,12 @@ BATextParagraphSpan >> aeDrawOn: aeCanvas [
 			anAttribute aeDrawAboveOn: aeCanvas span: self ] ]
 ]
 
+{ #category : #drawing }
+BATextParagraphSpan >> appendPathOn: aeCanvas [
+
+	aeCanvas appendGlyphsPath: cairoGlyphsArray font: cairoScaledFont
+]
+
 { #category : #building }
 BATextParagraphSpan >> measure [
 
