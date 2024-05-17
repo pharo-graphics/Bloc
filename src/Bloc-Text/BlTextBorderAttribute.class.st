@@ -59,8 +59,8 @@ BlTextBorderAttribute >> isAbove [
 BlTextBorderAttribute >> printOn: aStream [
 
 	aStream nextPutAll: (isAbove
-		ifTrue: [ 'border-below: ' ]
-		ifFalse: [ 'border-above: ' ]).
+		ifTrue: [ 'border-above: ' ]
+		ifFalse: [ 'border-below: ' ]).
 
 	aStream print: border
 ]
