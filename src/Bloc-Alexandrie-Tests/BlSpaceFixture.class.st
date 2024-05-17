@@ -1378,6 +1378,30 @@ BlSpaceFixture >> buildTextWithBorder [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildTextWithBorderAbove [
+	"Text border can be drawn above or below the text."
+
+	| aText |
+	builder spaceExtent: 60 @ 100.
+
+	aText :=
+		'll' asRopedText
+			fontSize: 110;
+			foreground: (Color blue alpha: 0.5);
+			yourself.
+
+	(aText from: 1 to: 1)
+		border: (BlBorder paint: Color red width: 8)
+		above: false.
+
+	(aText from: 2 to: 2)
+		border: (BlBorder paint: Color red width: 8)
+		above: true.
+
+	(builder addTextToRoot: aText) padding: (BlInsets all: 10)
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildTextWithDashedBorder [
 	"Each character has a different dashes on its attribute."
 

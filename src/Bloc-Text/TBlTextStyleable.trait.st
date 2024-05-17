@@ -33,7 +33,14 @@ TBlTextStyleable >> bold [
 { #category : #'api - text style' }
 TBlTextStyleable >> border: aBlBorder [
 
-	self attributesBuilder attribute: (BlTextBorderAttribute border: aBlBorder)
+	self border: aBlBorder above: false
+]
+
+{ #category : #'api - text style' }
+TBlTextStyleable >> border: aBlBorder above: aBoolean [
+
+	self attributesBuilder attribute:
+		(BlTextBorderAttribute border: aBlBorder above: aBoolean)
 ]
 
 { #category : #'api - text decoration' }

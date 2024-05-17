@@ -3,14 +3,14 @@ Extension { #name : #BlTextBorderAttribute }
 { #category : #'*Bloc-Alexandrie' }
 BlTextBorderAttribute >> aeDrawAboveOn: aeCanvas span: aBASpan [
 
-	drawAbove ifFalse: [ ^ self ].
+	isAbove ifFalse: [ ^ self ].
 	self aeDrawOn: aeCanvas span: aBASpan
 ]
 
 { #category : #'*Bloc-Alexandrie' }
 BlTextBorderAttribute >> aeDrawBelowOn: aeCanvas span: aBASpan [
 
-	drawAbove ifTrue: [ ^ self ].
+	isAbove ifTrue: [ ^ self ].
 	self aeDrawOn: aeCanvas span: aBASpan
 ]
 

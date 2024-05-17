@@ -3,17 +3,24 @@ Class {
 	#superclass : #BlTextAttribute,
 	#instVars : [
 		'border',
-		'drawAbove'
+		'isAbove'
 	],
 	#category : #'Bloc-Text-Text-Attributes'
 }
 
 { #category : #'instance creation' }
-BlTextBorderAttribute class >> border: aBlBorder [
+BlTextBorderAttribute class >> border: aBlBorder above: aBoolean [
 
 	^ self new
 		border: aBlBorder;
+		above: aBoolean;
 		yourself
+]
+
+{ #category : #testing }
+BlTextBorderAttribute >> above: aBoolean [
+
+	isAbove := aBoolean
 ]
 
 { #category : #accessing }
@@ -28,16 +35,10 @@ BlTextBorderAttribute >> border: aBlBorder [
 	border := aBlBorder
 ]
 
-{ #category : #testing }
-BlTextBorderAttribute >> drawAbove: aBoolean [
-
-	drawAbove := aBoolean
-]
-
 { #category : #comparing }
-BlTextBorderAttribute >> equals: anAnotherAttribute [
+BlTextBorderAttribute >> equals: anotherAttribute [
 
-	^ border = anAnotherAttribute border
+	^ border = anotherAttribute border and: [ isAbove = anotherAttribute isAbove ]
 ]
 
 { #category : #initialization }
@@ -45,19 +46,21 @@ BlTextBorderAttribute >> initialize [
 
 	super initialize.
 	
-	drawAbove := false
+	isAbove := false
 ]
 
 { #category : #testing }
-BlTextBorderAttribute >> isDrawAbove [
+BlTextBorderAttribute >> isAbove [
 
-	^ drawAbove
+	^ isAbove
 ]
 
 { #category : #printing }
 BlTextBorderAttribute >> printOn: aStream [
 
-	aStream
-		nextPutAll: 'border: ';
-		print: border
+	aStream nextPutAll: (isAbove
+		ifTrue: [ 'border-below: ' ]
+		ifFalse: [ 'border-above: ' ]).
+
+	aStream print: border
 ]
