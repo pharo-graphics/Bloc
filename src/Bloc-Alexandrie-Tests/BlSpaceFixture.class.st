@@ -1378,6 +1378,54 @@ BlSpaceFixture >> buildTextWithBorder [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildTextWithDashedBorder [
+	"Each character has a different dashes on its attribute."
+
+	| aText |
+	builder spaceExtent: 90 @ 100.
+
+	aText := 'iii' asRopedText
+		fontSize: 110;
+		foreground: (Color yellow alpha: 0.5);
+		yourself.
+
+	(aText from: 1 to: 1)
+		border: (BlBorder builder
+			paint: Color blue;
+			width: 6;
+			dashArray: #(0 7);
+			dashOffset: 1;
+			capSquare;
+			joinBevel;
+			build).
+
+	(aText from: 2 to: 2)
+		border: (BlBorder builder
+			paint: Color blue;
+			width: 6;
+			dashArray: #(1 1);
+			dashOffset: 1;
+			capButt;
+			joinMiter;
+			miterLimit: 1.5;
+			build).
+
+	(aText from: 3 to: 3)
+		border: (BlBorder builder
+			paint: Color blue;
+			width: 6;
+			dashArray: #(0 7);
+			dashOffset: 1;
+			capRound;
+			joinRound;
+			build).
+
+	(builder addTextToRoot: aText)
+		padding: (BlInsets all: 10)
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildTextWithOverlappingBorder [
 	"First subrope 'Bloc' is rendered behind the border of the second subrope."
 
