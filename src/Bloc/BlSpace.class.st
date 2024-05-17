@@ -147,6 +147,27 @@ BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
 ]
 
 { #category : #'debug - simulation' }
+BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDuration [
+	"Wait until a BlSpace doesn't have available tasks to execute. 
+	
+	Inspired on BlDevScripterWaitStep>>#forEmptySpaceTaskQueueTimeout:"
+
+	| deadline |
+	deadline := aSpace time now + aDuration.
+
+	"A non-opened space needs a special wait."
+	aSpace isOpened ifFalse: [
+		| aSemaphore |
+		aSemaphore := Semaphore new.
+		aSpace
+			when: BlSpaceShownEvent
+			doOnce: [ :event | aSemaphore signal ].
+		aSemaphore wait: aDuration ].
+	
+	^ self pulseUntilEmptyTaskQueue: aSpace timeout: aDuration
+]
+
+{ #category : #'debug - simulation' }
 BlSpace class >> simulateClickOn: anElement [
 	"Simulate a click event in the middle of a given element by
 	performing mouse down and mouse up events in a sequence"
