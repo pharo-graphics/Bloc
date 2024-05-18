@@ -7,6 +7,13 @@ Class {
 { #category : #examples }
 TKTBlocExamples >> runnerExample [
 	<sampleInstance>
+"  This is equivalent to:
+	space
+		enqueueTask:
+			(BlRepeatedTaskAction new
+				delay: 200 milliSeconds;
+				action: [ space root background: Color random ];
+				yourself)."
 
 	| space runner |
 	space := BlSpace new.
@@ -19,23 +26,21 @@ TKTBlocExamples >> runnerExample [
 	[	17 timesRepeat: [
 			runner schedule: [
 				space root background: Color random ] asTask.
-			250 milliSeconds wait ].
+			200 milliSeconds wait ] ] fork.
 
-		runner stop.
-		space close ] fork
-
-"  We kind of emulate this:
-	space
-		enqueueTask:
-			(BlRepeatedTaskAction new
-				delay: 250 milliSeconds;
-				action: [ space root background: Color random ];
-				yourself)."
+	^ space
 ]
 
 { #category : #examples }
 TKTBlocExamples >> serviceExample [
 	<sampleInstance>
+	"This example is equivalent to:
+	space
+		enqueueTask:
+			(BlRepeatedTaskAction new
+				delay: 100 milliSeconds;
+				action: [ space root background: Color random ];
+				yourself)."
 
 	| space service |
 	space := BlSpace new.
@@ -44,20 +49,12 @@ TKTBlocExamples >> serviceExample [
 		show.
 
 	service := TKTBlSpaceService on: space.
-
 	service step: [ space root background: Color random ].
-	service stepDelay:	250 milliSeconds.
+	service stepDelay: 100 milliSeconds.
 	service start.
-	
-	[  3 seconds wait.
-		service stop.
-		space close ] fork
 
-"  We kind of emulate this:
-	space
-		enqueueTask:
-			(BlRepeatedTaskAction new
-				delay: 250 milliSeconds;
-				action: [ space root background: Color random ];
-				yourself)."
+	[	2 seconds wait.
+		service stop waitForCompletion: 1 second ] fork.
+	
+	^ space
 ]
