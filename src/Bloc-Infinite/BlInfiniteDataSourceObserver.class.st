@@ -52,13 +52,6 @@ BlInfiniteDataSourceObserver >> infiniteDataSourceItemRangeRemoved: anEvent [
 	self subclassResponsibility
 ]
 
-{ #category : #'event handling' }
-BlInfiniteDataSourceObserver >> onItemsMoved: anEvent [
-	"@see BlInfiniteDataSourceItemRangeMoved"
-
-	self subclassResponsibility
-]
-
 { #category : #events }
 BlInfiniteDataSourceObserver >> wantsEvent: anEvent [
 	^ anEvent class == self eventClass or: [ anEvent class inheritsFrom: self eventClass ]

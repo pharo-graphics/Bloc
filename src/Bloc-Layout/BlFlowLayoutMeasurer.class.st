@@ -126,73 +126,82 @@ BlFlowLayoutMeasurer >> direction [
 
 { #category : #calculating }
 BlFlowLayoutMeasurer >> fillLines: theLines with: theChildren [
+
 	| currentLine floatingQueue lineLength availableSpace totalBreadth currentSpaceIndex currentSpace |
 	self flag: 'This is something horrible!!!!'.
 	self flag: 'REFACTOR ME!!!'.
 	self flag: 'p.s. but first cover with unit tests :)'.
-	
+
 	currentLine := BlFlowLayoutLine for: self.
 	theLines add: currentLine.
 
-	floatingQueue := SortedCollection sortBlock: [ :a :b | a startLength < b startLength ].
+	floatingQueue := SortedCollection sortBlock: [ :a :b |
+		                 a startLength < b startLength ].
 	lineLength := 0.
 	totalBreadth := 0.
-	availableSpace := BlFlowLayoutLineSpace new initializeFor: floatingQueue maxLength: self maxLength.
+	availableSpace := BlFlowLayoutLineSpace new
+		                  initializeFor: floatingQueue
+		                  maxLength: self maxLength.
 	currentSpaceIndex := 1.
 	currentSpace := availableSpace intervals at: currentSpaceIndex.
 
 	theChildren do: [ :aChild |
 		| newLine |
-		[ (lineLength + aChild totalLength > currentSpace last)
-			and: [ currentSpaceIndex <= availableSpace intervals size ] ]
-			whileTrue: [
-				currentSpaceIndex := currentSpaceIndex + 1.
-				(currentSpaceIndex <= availableSpace intervals size)
-					ifTrue: [
-						currentSpace := availableSpace intervals at: currentSpaceIndex.
-						lineLength := currentSpace first.
-						currentLine length: lineLength ] ].
-		
-		newLine := aChild isNewLine or: [ self isCheckCanFit and: [ (currentLine canFit: aChild) not ] ].
+		[
+		lineLength + aChild totalLength > currentSpace last and: [
+			currentSpaceIndex <= availableSpace intervals size ] ] whileTrue: [
+			currentSpaceIndex := currentSpaceIndex + 1.
+			currentSpaceIndex <= availableSpace intervals size ifTrue: [
+				currentSpace := availableSpace intervals at: currentSpaceIndex.
+				lineLength := currentSpace first.
+				currentLine length: lineLength ] ].
+
+		newLine := aChild isNewLine or: [
+			           self isCheckCanFit and: [
+				           (currentLine canFit: aChild) not ] ].
 		"we create and add new line to the list making it current one"
-		newLine ifTrue: [ 
+		newLine ifTrue: [
 			| previousLine |
 			previousLine := currentLine.
-			(previousLine children allSatisfy: [ :aLineChild | aLineChild isFloating ])
-				ifTrue: [
-					previousLine breadth: (previousLine children inject: 0 into: [ :aTotalBreadth :aFloatingChild |
-						aTotalBreadth max: aFloatingChild totalBreadth ]) ].
+			(previousLine children allSatisfy: [ :aLineChild |
+				 aLineChild isFloating ]) ifTrue: [
+				previousLine breadth: (previousLine children
+						 inject: 0
+						 into: [ :aTotalBreadth :aFloatingChild |
+							 aTotalBreadth max: aFloatingChild totalBreadth ]) ].
 			totalBreadth := totalBreadth + previousLine breadth.
 			"remove obsolete floating elements here"
 			floatingQueue := floatingQueue select: [ :aFloatingChild |
-				aFloatingChild excessBreadth > 0 ].
-			availableSpace := BlFlowLayoutLineSpace new initializeFor: floatingQueue maxLength: self maxLength.
+				                 aFloatingChild excessBreadth > 0 ].
+			availableSpace := BlFlowLayoutLineSpace new
+				                  initializeFor: floatingQueue
+				                  maxLength: self maxLength.
 			currentSpaceIndex := 1.
 			currentSpace := availableSpace intervals at: currentSpaceIndex.
 			currentLine := BlFlowLayoutLine for: self.
 			currentLine addTo: theLines.
-			floatingQueue do: [ :aFloatingChild | aFloatingChild addToLine: currentLine ].
+			floatingQueue do: [ :aFloatingChild |
+				aFloatingChild addToLine: currentLine ].
 			currentLine startBreadth: totalBreadth.
-			
+
 			lineLength := 0.
-			[ ((lineLength < currentSpace first) or: [ lineLength + aChild totalLength > currentSpace last ])
-				and: [ currentSpaceIndex <= availableSpace intervals size ] ]
-			whileTrue: [
-				(currentSpaceIndex <= availableSpace intervals size)
-					ifTrue: [
-						currentSpace := availableSpace intervals at: currentSpaceIndex.
-						lineLength := currentSpace first.
-						currentLine length: lineLength ].
+			[
+			(lineLength < currentSpace first or: [
+				 lineLength + aChild totalLength > currentSpace last ]) and: [
+				currentSpaceIndex <= availableSpace intervals size ] ] whileTrue: [
+				currentSpaceIndex <= availableSpace intervals size ifTrue: [
+					currentSpace := availableSpace intervals at: currentSpaceIndex.
+					lineLength := currentSpace first.
+					currentLine length: lineLength ].
 				currentSpaceIndex := currentSpaceIndex + 1 ].
-			currentSpaceIndex > 1 ifTrue: [ currentSpaceIndex := currentSpaceIndex - 1 ].
-			].
+			currentSpaceIndex > 1 ifTrue: [
+				currentSpaceIndex := currentSpaceIndex - 1 ] ].
 
 		aChild addToLine: currentLine.
 		aChild startLength: lineLength.
 		lineLength := lineLength + aChild length + aChild spacingLength.
 
-		aChild isFloating
-			ifTrue: [ floatingQueue add: aChild ] ]
+		aChild isFloating ifTrue: [ floatingQueue add: aChild ] ]
 ]
 
 { #category : #accessing }
@@ -258,19 +267,21 @@ BlFlowLayoutMeasurer >> maxWidth [
 
 { #category : #measure }
 BlFlowLayoutMeasurer >> measure: anElement with: anExtentSpec [
-	| lastLine contentLength contentBreadth parentLength parentBreadth totalContentWidth totalContentHeight |
-	
+
+	| lastLine contentLength contentBreadth parentLength parentBreadth totalContentWidth totalContentHeight measureAgain |
 	children removeAll.
 	lines removeAll.
-	
+
 	anElement children accountedByLayout do: [ :aChildElement |
 		| child childConstraints childType |
 		childConstraints := aChildElement constraints flow.
-		layout measureChildWithMargins: aChildElement parentSpec: anExtentSpec.
+		layout
+			measureChildWithMargins: aChildElement
+			parentSpec: anExtentSpec.
 
 		childType := childConstraints display isFloating
-			ifTrue: [ BlFlowLayoutFloatingChild ]
-			ifFalse: [ BlFlowLayoutInlineChild ].
+			             ifTrue: [ BlFlowLayoutFloatingChild ]
+			             ifFalse: [ BlFlowLayoutInlineChild ].
 
 		child := childType measurer: self element: aChildElement.
 		child width: aChildElement measuredWidth.
@@ -285,36 +296,61 @@ BlFlowLayoutMeasurer >> measure: anElement with: anExtentSpec [
 	widthMode := anExtentSpec widthSpec.
 	heightMode := anExtentSpec heightSpec.
 
-	maxWidth := (widthMode size ifNil: [ Float infinity ]) - anElement padding width.
-	maxHeight := (heightMode size ifNil: [ Float infinity ]) - anElement padding height.
-	
+	maxWidth := (widthMode size ifNil: [ Float infinity ])
+	            - anElement padding width.
+	maxHeight := (heightMode size ifNil: [ Float infinity ])
+	             - anElement padding height.
+
 	checkCanFit := self lengthMode isUnspecified not.
-	
+
 	self fillLines: lines with: children.
 	self calculatePositions: lines.
-	
+
 	lastLine := lines last.
-	
-	contentLength := lines inject: 0.0 into: [ :aContentLength :aLine | aContentLength max: aLine length ].
+
+	contentLength := lines
+		                 inject: 0.0
+		                 into: [ :aContentLength :aLine |
+		                 aContentLength max: aLine length ].
 	contentBreadth := lastLine startBreadth + lastLine breadth.
-	
-	parentLength := self size: contentLength max: self maxLength for: anExtentSpec widthSpec.
-	parentBreadth := self size: contentBreadth max: self maxBreadth for: anExtentSpec heightSpec.
-	
+
+	parentLength := self
+		                size: contentLength
+		                max: self maxLength
+		                for: anExtentSpec widthSpec.
+	parentBreadth := self
+		                 size: contentBreadth
+		                 max: self maxBreadth
+		                 for: anExtentSpec heightSpec.
+
 	self alignLines: lines within: parentLength @ parentBreadth.
 	lines do: [ :aLine | self measureLine: aLine ].
 
 	totalContentWidth := anElement padding width.
 	totalContentHeight := anElement padding height.
-	
-	self orientation isHorizontal ifTrue: [ 
+
+	self orientation isHorizontal ifTrue: [
 		totalContentWidth := totalContentWidth + contentLength.
 		totalContentHeight := totalContentHeight + contentBreadth ].
-	self orientation isVertical ifTrue: [ 
+	self orientation isVertical ifTrue: [
 		totalContentWidth := totalContentWidth + contentBreadth.
 		totalContentHeight := totalContentHeight + contentLength ].
-	
-	anElement measuredExtent: (anExtentSpec sizeFor: totalContentWidth @ totalContentHeight)
+
+	anElement measuredExtent:
+		(anExtentSpec sizeFor: totalContentWidth @ totalContentHeight).
+
+	layout lineUniformWidth ifFalse: [ ^ self ].
+	measureAgain := false.
+	lines do: [ :aLine |
+		| lwidth |
+		lwidth := 0.
+		aLine children do: [ :aChild | lwidth := lwidth max: aChild width ].
+		aLine children do: [ :aChild |
+			aChild width: lwidth.
+			aChild element measuredWidth = lwidth ifFalse: [
+				measureAgain := true ].
+			aChild element width: lwidth ] ].
+	measureAgain ifTrue: [ self measure: anElement with: anExtentSpec ]
 ]
 
 { #category : #calculating }

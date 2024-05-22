@@ -7,7 +7,8 @@ Class {
 		'measurer',
 		'orientation',
 		'horizontalAlignment',
-		'verticalAlignment'
+		'verticalAlignment',
+		'lineUniformWidth'
 	],
 	#category : #'Bloc-Layout-Flow'
 }
@@ -39,6 +40,7 @@ BlFlowLayout >> = anObject [
 	self orientation = anObject orientation ifFalse: [ ^ false ].
 	self horizontalAlignment = anObject horizontalAlignment ifFalse: [ ^ false ].
 	self verticalAlignment = anObject verticalAlignment ifFalse: [ ^ false ].
+	self lineUniformWidth = anObject lineUniformWidth ifFalse: [ ^ false ].
 	^ true
 ]
 
@@ -106,6 +108,18 @@ BlFlowLayout >> isOrientable [
 BlFlowLayout >> layout: anElement in: newBounds context: aBlElementBoundsUpdateContext [
 	measurer layout: anElement in: newBounds context: aBlElementBoundsUpdateContext.
 	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext
+]
+
+{ #category : #accessing }
+BlFlowLayout >> lineUniformWidth [
+
+	^ lineUniformWidth ifNil: [ lineUniformWidth := false ]
+]
+
+{ #category : #accessing }
+BlFlowLayout >> lineUniformWidth: aBoolean [
+	" an option that set the same width to all elements of a line "
+	lineUniformWidth := aBoolean
 ]
 
 { #category : #measure }

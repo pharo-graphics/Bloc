@@ -67,9 +67,7 @@ BlInfiniteLayout >> addChild: anElement at: anIndex disappearing: isDisappearing
 	anElementHolder wasReturnedFromScrap
 		ifTrue: [
 			anElementHolder clearReturnedFromScrap.
-			infiniteElement 
-				attachChild: anElement
-				at: anIndex ]
+			infiniteElement attachChild: anElement at: anIndex ]
 		ifFalse: [
 			anElement parent == infiniteElement
 				ifTrue: [
@@ -84,9 +82,7 @@ BlInfiniteLayout >> addChild: anElement at: anIndex disappearing: isDisappearing
 					currentIndex ~= index ifTrue: [
 						self moveChildFrom: currentIndex to: index ] ]
 				ifFalse: [
-					infiniteElement
-						addChild: anElement
-						at: anIndex.
+					infiniteElement addChild: anElement at: anIndex.
 					anInfiniteConstraints insetsDirty: true.
 					self smoothScroller ifNotNil: [ :aSmoothScroller |
 						aSmoothScroller isRunning ifTrue: [
