@@ -94,6 +94,12 @@ BlScrollableElement >> computeVerticalScrollRange [
 ]
 
 { #category : #initialization }
+BlScrollableElement >> defaultEventHandler [
+
+	^ BlScrollableElementEventHandler new
+]
+
+{ #category : #initialization }
 BlScrollableElement >> defaultHorizontalAlignment [
 	"By default alignment should not influence on layout process,
 	so to not deal with nils use null object"
@@ -105,6 +111,13 @@ BlScrollableElement >> defaultHorizontalAlignment [
 { #category : #initialization }
 BlScrollableElement >> defaultLayout [
 	^ BlFrameLayout new
+]
+
+{ #category : #initialization }
+BlScrollableElement >> defaultScrollFlinger [
+
+	"Return class, actuall instantiation happens in initialize"
+	^ BlScrollFlinger
 ]
 
 { #category : #initialization }
@@ -143,13 +156,12 @@ BlScrollableElement >> horizontalAlignment: aBlElementAlignment [
 BlScrollableElement >> initialize [
 	super initialize.
 
-	scrollFlinger := BlScrollFlinger on: self.
+	scrollFlinger := self defaultScrollFlinger on: self.
 	scrollPosition := 0.0@0.0.
 	scrollState := #idle.
 	horizontalAlignment := self defaultHorizontalAlignment.
 	verticalAlignment := self defaultVerticalAlignment.
-
-	self addEventHandler: BlScrollableElementEventHandler new
+	self addEventHandler: self defaultEventHandler
 ]
 
 { #category : #layout }
