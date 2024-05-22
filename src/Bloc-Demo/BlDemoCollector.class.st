@@ -42,7 +42,8 @@ BlDemoCollector >> classes [
 BlDemoCollector >> collectClass: aClass [ 
 	
 	| node pragmas |
-	pragmas := Pragma allNamed: pragma in: aClass.
+	pragmas := (Pragma allNamed: pragma in: aClass) asOrderedCollection.
+	pragmas addAll: (Pragma allNamed: pragma in: aClass class).
 	pragmas ifEmpty: [ ^ self ].
 	node := self ensureClassFor: aClass.
 	pragmas do: [ :prag | node addChild: (BlDemoMethodNode new item: prag method ) ].
