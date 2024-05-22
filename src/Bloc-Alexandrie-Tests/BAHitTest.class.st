@@ -62,3 +62,28 @@ BAHitTest >> hitFormFor: aSymbol host: aHost [
 
 	^ BAHitFormFactory newFormFor: aSpace
 ]
+
+{ #category : #tests }
+BAHitTest >> testFormSelector [
+
+	| aPixelComparison tolerance |
+	aPixelComparison := self newPixelComparison.
+	tolerance := 0.001.
+	
+	aPixelComparison mismatchingPixelRatio <= tolerance ifFalse: [
+		self fuelOutMismatch: aPixelComparison ].
+	
+	self
+		assert: aPixelComparison isMatch
+		description: 'Pixel mismatch: #', formSelector.
+	
+"DEBUG?
+
+		aPixelComparison inspect.
+
+		self formMethod browse.
+		
+		self exportAsExpected.
+"
+
+]

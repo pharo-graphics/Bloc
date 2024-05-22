@@ -1,3 +1,8 @@
+"
+I handle common `BlSpace` and `BlElement` events following the Null-Object design pattern.
+
+My subclasses can override my methods to define specific behavior.
+"
 Class {
 	#name : #BlEventListener,
 	#superclass : #BlBasicEventHandler,
@@ -9,7 +14,7 @@ BlEventListener >> blurEvent: anEvent [
 ]
 
 { #category : #'mouse handlers' }
-BlEventListener >> clickAvortedEvent: anEvent [
+BlEventListener >> clickAbortedEvent: anEvent [
 	"a mouse down followed by a mouse up but in different a target"
 ]
 
@@ -160,11 +165,6 @@ BlEventListener >> spaceMouseLeaveEvent: anEvent [
 
 { #category : #'space handlers' }
 BlEventListener >> spaceMovedEvent: anEvent [
-]
-
-{ #category : #'space handlers' }
-BlEventListener >> spaceRedrawRequestedEvent: anEvent [
-	"Is sent by the host indicating that the space should be re-rendered"
 ]
 
 { #category : #'space handlers' }

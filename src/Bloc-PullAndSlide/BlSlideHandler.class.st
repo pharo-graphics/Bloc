@@ -11,10 +11,10 @@ Class {
 
 { #category : #'dnd handlers' }
 BlSlideHandler >> dragEvent: anEvent [
+
 	| aStartPosition aCurrentPosition aDelta aTargetElement |
-	anEvent consumed: true.
-	
-	aTargetElement := targetElement ifNil: anEvent currentTarget.
+	anEvent consume.
+	aTargetElement := targetElement ifNil: [ anEvent currentTarget ].
 
 	aStartPosition := aTargetElement globalPointToChildren: dragStartPosition.
 	aCurrentPosition := aTargetElement globalPointToChildren: anEvent position.
@@ -33,13 +33,17 @@ BlSlideHandler >> dragEvent: anEvent [
 
 { #category : #'dnd handlers' }
 BlSlideHandler >> dragStartEvent: anEvent [
-	anEvent consumed: true.
+
+	anEvent consume.
 
 	"drag start position in space"
 	dragStartPosition := anEvent position.
 	
-	(targetElement ifNil: anEvent currentTarget) children accountedByLayout
-		do: [ :aChild | aChild userData at: #slideHandlerStartPosition put: aChild constraints position ]
+	(targetElement ifNil: [ anEvent currentTarget ]) children accountedByLayout
+		do: [ :aChild |
+			aChild userData
+				at: #slideHandlerStartPosition
+				put: aChild constraints position ]
 ]
 
 { #category : #accessing }

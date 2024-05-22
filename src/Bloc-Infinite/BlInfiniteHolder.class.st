@@ -22,6 +22,12 @@ Class {
 }
 
 { #category : #'private - position' }
+BlInfiniteHolder >> bindAtPosition: aPosition [
+
+	position := aPosition
+]
+
+{ #category : #'private - position' }
 BlInfiniteHolder >> clearOldPosition [
 
 	preLayoutPosition := NoPosition
@@ -46,13 +52,8 @@ BlInfiniteHolder >> dataSourcePosition [
 ]
 
 { #category : #private }
-BlInfiniteHolder >> detachInfiniteElement [
-
-	infiniteElement := nil
-]
-
-{ #category : #private }
 BlInfiniteHolder >> detachRecycler [
+
 	"Set returned from scrap flag to false"
 	self clearReturnedFromScrap
 ]
@@ -67,6 +68,7 @@ BlInfiniteHolder >> flagRemovedAndOffsetPosition: aNewPosition by: anOffset appl
 
 { #category : #accessing }
 BlInfiniteHolder >> flags [
+
 	^ flags
 ]
 
@@ -90,8 +92,9 @@ BlInfiniteHolder >> infiniteElement: anInfiniteElement [
 
 { #category : #initialization }
 BlInfiniteHolder >> initialize [
+
 	super initialize.
-	
+
 	position := NoPosition.
 	preLayoutPosition := NoPosition.
 	itemId := NoId.
@@ -130,26 +133,26 @@ BlInfiniteHolder >> isUpdated [
 
 { #category : #accessing }
 BlInfiniteHolder >> itemElement [
+
 	^ itemElement
 ]
 
 { #category : #accessing }
 BlInfiniteHolder >> itemId [
 	"Returns The itemId represented by this ElementHolder if datasource has stable ids, `BlInfiniteElement noId` otherwise"
-	<return: #Number>
 
 	^ itemId
 ]
 
 { #category : #'private - accessing' }
 BlInfiniteHolder >> itemId: anIdemId [
+
 	itemId := anIdemId
 ]
 
 { #category : #accessing }
 BlInfiniteHolder >> layoutPosition [
 	"Returns the position of the ElementHolder in terms of the latest layout pass"
-	<return: #Number>
 
 	^ preLayoutPosition = NoPosition
 		ifTrue: [ position ]
@@ -180,18 +183,6 @@ BlInfiniteHolder >> position [
 	<return: #Number>
 
 	^ position
-]
-
-{ #category : #'private - position' }
-BlInfiniteHolder >> position: aPosition [
-	"For inner use ONLY!"
-	position := aPosition
-]
-
-{ #category : #'private - position' }
-BlInfiniteHolder >> preLayoutPosition: aPosition [
-	"For inner use ONLY!"
-	preLayoutPosition := aPosition
 ]
 
 { #category : #'private - invalidate' }

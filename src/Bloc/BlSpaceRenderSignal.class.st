@@ -57,23 +57,6 @@ BlSpaceRenderSignal class >> for: aSpace block: aBlock [
 	self endSpace: aSpace.
 ]
 
-{ #category : #'instance creation' }
-BlSpaceRenderSignal class >> fromSton: stonReader [
-
-	| signal |
-
-	signal := self new.
-	stonReader parseListDo: [ :each :idx |
-		idx = 1 ifFalse: [ self error: 'Invalid STON' ].
-		signal
-			basicTimestamp: (each at: #timestamp);
-			basicProcessId: (each at: #processId);
-			basicProperties: (each at: #properties);
-			space: (each at: #space);
-			action: (each at: #action) ].
-	^signal
-]
-
 { #category : #filtering }
 BlSpaceRenderSignal class >> ignore [
 	"Don't emit the signal"

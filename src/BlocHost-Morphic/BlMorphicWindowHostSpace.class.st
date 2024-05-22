@@ -12,7 +12,7 @@ Class {
 		'isFullSize',
 		'isBorderless'
 	],
-	#category : #'BlocHost-Morphic-Host - Window'
+	#category : #'BlocHost-Morphic-Window'
 }
 
 { #category : #'window - properties' }
@@ -46,9 +46,10 @@ BlMorphicWindowHostSpace >> close [
 
 { #category : #initialization }
 BlMorphicWindowHostSpace >> createFormSurfaceRenderer [
-	<return: #BlHostSurfaceRenderer>
-	
-	^ BlMorphicFormSurfaceRenderer new spaceHostMorph: morphicWindow spaceHostMorph
+
+	^ BlMorphicFormSurfaceRenderer new
+			spaceHostMorph: morphicWindow spaceHostMorph;
+			yourself
 ]
 
 { #category : #'host space - cursor' }

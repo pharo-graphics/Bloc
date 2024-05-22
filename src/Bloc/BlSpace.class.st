@@ -136,13 +136,35 @@ BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
 	aSpace time
 		every: 5 milliSeconds
 		while: [
-			(aSpace taskQueue isEmpty or: [
-				aSpace time now >= deadline ]) not ]
+			aSpace universe hasDeferredActions or: [
+				(aSpace taskQueue isEmpty or: [
+					aSpace time now >= deadline ]) not ] ]
 		do: [ aSpace pulse ].
 
 	aSpace pulse.
 
 	^ aSpace taskQueue isEmpty
+]
+
+{ #category : #'debug - simulation' }
+BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDuration [
+	"Wait until a BlSpace doesn't have available tasks to execute. 
+	
+	Inspired on BlDevScripterWaitStep>>#forEmptySpaceTaskQueueTimeout:"
+
+	| deadline |
+	deadline := aSpace time now + aDuration.
+
+	"A non-opened space needs a special wait."
+	aSpace isOpened ifFalse: [
+		| aSemaphore |
+		aSemaphore := Semaphore new.
+		aSpace
+			when: BlSpaceShownEvent
+			doOnce: [ :event | aSemaphore signal ].
+		aSemaphore wait: aDuration ].
+	
+	^ self pulseUntilEmptyTaskQueue: aSpace timeout: aDuration
 ]
 
 { #category : #'debug - simulation' }
@@ -559,6 +581,7 @@ BlSpace >> defaultEventDispatcher [
 
 { #category : #initialization }
 BlSpace >> defaultEventListener [
+
 	^ BlSpaceEventListener space: self
 ]
 

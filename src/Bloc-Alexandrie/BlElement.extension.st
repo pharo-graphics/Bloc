@@ -126,28 +126,27 @@ BlElement >> aeDrawInSameLayerOn: aCanvas [
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawOn: aeCanvas [
 
-	self aeDrawOn: aeCanvas with: [
+	aeCanvas
+		restoreContextAfterPaintAlpha: self opacity
+		with: [
+			"My position is applied before my transformation matrix,
+			which may have an additional translation."
+			aeCanvas pathTranslate: self position.
+			self transformation aeApplyTo: aeCanvas.
 
-		"My position is applied before my transformation matrix,
-		which may have an additional translation."
-		aeCanvas pathTranslate: self position.
-		self transformation aeApplyTo: aeCanvas.
-
-		self aeDrawIgnoringOpacityAndTransformationOn: aeCanvas ]
+			self aeDrawIgnoringOpacityAndTransformationOn: aeCanvas ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawOn: aeCanvas with: aBlockClosure [
-	"Evaluate a block closure taking account my opacity.
-	The element opacity affects border and background, effects, and 
-	recursively to children elements.
-	When I have opaque opacity (1.0) I take the fastest branch, restoring
-	the Cairo context afterwards."
 
-	self opacity < 1.0
-		ifTrue: [ aeCanvas paintGroupWith: aBlockClosure alpha: self opacity ]
-		ifFalse: [ aeCanvas restoreContextAfter: aBlockClosure ]
+	self
+		deprecated: 'Use AeCanvas API directly'
+		transformWith:
+			'`@rcv aeDrawOn: `@arg1 with: `@arg2' ->
+			'`@arg1 restoreContextAfterPaintAlpha: `@rcv opacity with: `@arg2'.
 
+	aeCanvas restoreContextAfterPaintAlpha: self opacity with: aBlockClosure
 ]
 
 { #category : #'*Bloc-Alexandrie' }

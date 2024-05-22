@@ -18,14 +18,13 @@ BlDrawingErrorHandler >> matches: aFramePhase [
 { #category : #'error handling' }
 BlDrawingErrorHandler >> processError: aHandledError [
 
-	aHandledError element
-		addChild: (BlElement new
-			size: 100@40;
-			id: #error;
-			geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
-			border: (BlBorder paint: Color gray width: 1);
-			background: Color red;
-			when: BlClickEvent do: [ :anEvent |
-				anEvent consumed: true.
-				aHandledError error debug ])
+	aHandledError element addChild: (BlElement new
+			 size: 100 @ 40;
+			 id: #error;
+			 geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
+			 border: (BlBorder paint: Color gray width: 1);
+			 background: Color red;
+			 addEventHandlerOn: BlClickEvent do: [ :anEvent |
+				 anEvent consume.
+				 aHandledError error debug ])
 ]

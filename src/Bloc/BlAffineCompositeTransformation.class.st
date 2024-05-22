@@ -12,6 +12,14 @@ Class {
 	#category : #'Bloc-Basic-Transformations'
 }
 
+{ #category : #comparing }
+BlAffineCompositeTransformation >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	^ self transformations = anObject transformations
+]
+
 { #category : #adding }
 BlAffineCompositeTransformation >> addTransformation: aBlAffineTransformation [
 	"There can be only one transformation instance per type"

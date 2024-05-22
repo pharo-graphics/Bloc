@@ -50,7 +50,7 @@ BlSubTextTest >> testInsertAtZero [
 
 	self assert: aSubText start equals: 1.
 	self assert: aSubText end equals: 1.
-	self assert: aSubText isEmpty not.
+	self deny: aSubText isEmpty.
 	self assert: aSubText size equals: 1.
 ]
 

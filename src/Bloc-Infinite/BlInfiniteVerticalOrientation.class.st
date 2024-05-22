@@ -75,7 +75,13 @@ BlInfiniteVerticalOrientation >> end [
 
 { #category : #geometry }
 BlInfiniteVerticalOrientation >> endWithPadding [
-	^ self layout height - self layout paddingBottom
+
+	| height |
+	height := self layout lastExactSize
+		          ifNil: [ self layout height ]
+		          ifNotNil: [ :size | size y ].
+
+	^ (height max: self layout minimumHeight) - self layout paddingBottom
 ]
 
 { #category : #testing }
@@ -125,7 +131,7 @@ BlInfiniteVerticalOrientation >> mouseWheelEvent: anEvent [
 	dY isZero ifTrue: [ ^ self ].
 
 	anInfiniteElement smoothScrollBy: (0 @ dY) * 200.
-	anEvent consumed: true.
+	anEvent consume
 ]
 
 { #category : #'children - geometry' }

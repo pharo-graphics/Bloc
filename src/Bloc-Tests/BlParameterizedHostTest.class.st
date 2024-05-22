@@ -63,6 +63,15 @@ BlParameterizedHostTest >> tearDown [
 ]
 
 { #category : #tests }
+BlParameterizedHostTest >> waitTestingOpenedSpaces [
+
+	testingSpaces do: [ :each |
+		self assert: (BlSpace
+			pulseUntilSpaceOpenedAndEmptyTaskQueue: each
+			timeout: 200 milliSeconds) ]
+]
+
+{ #category : #tests }
 BlParameterizedHostTest >> waitTestingSpaces [
 
 	testingSpaces do: [ :each |

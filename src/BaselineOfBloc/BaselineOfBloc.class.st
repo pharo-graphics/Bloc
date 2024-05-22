@@ -87,7 +87,7 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Alexandrie-Tests' with: [
 					spec requires: #('Bloc-Alexandrie' 'Bloc-Text-Examples') ];
 				package: #'Bloc-Text-Alexandrie-Examples' with: [
-					spec requires: #('Bloc-Alexandrie') ].
+					spec requires: #('Bloc-Alexandrie' 'Bloc-Layout') ].
 			"Exporters depend on Alexandrie"
 			spec 
 				package: #'Bloc-Alexandrie-Exporter' with: [
@@ -137,11 +137,9 @@ BaselineOfBloc >> baseline: spec [
 					spec requires: #('Bloc-Scalable') ];
 				package: #'Bloc-FocusFinder-Examples' with: [
 					spec requires: #('Bloc-FocusFinder') ].
-
-			spec
-				package: #'Bloc-Theme' with: [
-					spec requires: #(#'Bloc') ].
-				
+			
+			spec package: #'Bloc-Rules' with: [ spec requires: #(#Bloc) ].
+			
 			spec package: #'Bloc-Demo' with: [
 				spec requires: #(#'Bloc-Layout' #'Bloc-Spec2' #'Bloc-Text-Elements') ].
 
@@ -149,7 +147,7 @@ BaselineOfBloc >> baseline: spec [
 			spec
 				baseline: 'XMLParser' with: [
 					spec
-						repository: 'github://pharo-contributions/XML-XMLParser';
+						repository: 'github://pharo-contributions/XML-XMLParser:master/src';
 						loads: #(Core) ];
 				package: #'Bloc-SVG' with: [
 					spec requires: #(#'Bloc' #'XMLParser') ];

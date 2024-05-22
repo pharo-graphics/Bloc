@@ -258,85 +258,85 @@ BlExampleEventsCountingElement >> initialize [
 	self addEventHandler: (BlEventHandler
 			 on: BlClickEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 anEvent currentTarget incrementClickCount ]).
 
 	self addEventHandler: (BlEventHandler
 			 on: BlMouseEnterEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 anEvent currentTarget incrementMouseEnterCount ]).
 
 	self addEventHandler: (BlEventHandler
 			 on: BlMouseLeaveEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 anEvent currentTarget incrementMouseLeaveCount ]).
 
 	self addEventHandler: (BlEventHandler
 			 on: BlMouseMoveEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 anEvent currentTarget incrementMouseMoveCount ]).
 
 	self addEventHandler: (BlEventHandler
 			 on: BlMouseOverEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 anEvent currentTarget incrementMouseOverCount ]).
 
 	self addEventHandler: (BlEventHandler
 			 on: BlMouseOutEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 anEvent currentTarget incrementMouseOutCount ]).
 
 	self addEventHandler: (BlEventHandler
 			 on: BlMouseDownEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 anEvent currentTarget incrementMouseDownCount ]).
 
 	self addEventHandler: (BlEventHandler
 			 on: BlMouseUpEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 anEvent currentTarget incrementMouseUpCount ]).
 
 	self addEventHandler: (BlEventHandler
 			 on: BlDragStartEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 anEvent currentTarget incrementDragStartCount ]).
 
 	self addEventHandler: (BlEventHandler
 			 on: BlDragEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 anEvent currentTarget incrementDragCount ]).
 
 	self addEventHandler: (BlEventHandler
 			 on: BlDragEndEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 anEvent currentTarget incrementDragEndCount ]).
 
 	self addEventHandler: (BlEventHandler
 			 on: BlDragEnterEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 anEvent currentTarget incrementDragEnterCount ]).
 
 	self addEventHandler: (BlEventHandler
 			 on: BlDragLeaveEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 anEvent currentTarget incrementDragLeaveCount ]).
 
 	self addEventHandler: (BlEventHandler
 			 on: BlDropEvent
 			 do: [ :anEvent |
-				 anEvent consumed: true.
+				 anEvent consume.
 				 anEvent currentTarget incrementDropCount ]).
 
 	self addEventHandler: (BlEventHandler

@@ -4,7 +4,7 @@ I am a host that opens spaces as windows in the Morphic World.
 Class {
 	#name : #BlMorphicWindowHost,
 	#superclass : #BlMorphicSteppingHost,
-	#category : #'BlocHost-Morphic-Host - Window'
+	#category : #'BlocHost-Morphic-Window'
 }
 
 { #category : #'driver selection' }

@@ -1,3 +1,6 @@
+"
+I represent the execution of a space frame phase.
+"
 Class {
 	#name : #BlSpaceStepEvent,
 	#superclass : #BlSpaceEvent,
@@ -7,6 +10,12 @@ Class {
 	],
 	#category : #'Bloc-Events-Type-Space'
 }
+
+{ #category : #accessing }
+BlSpaceStepEvent >> duration [
+
+	^ end - start
+]
 
 { #category : #accessing }
 BlSpaceStepEvent >> end [

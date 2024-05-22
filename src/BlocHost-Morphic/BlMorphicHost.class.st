@@ -17,41 +17,8 @@ Class {
 	#instVars : [
 		'containerMorph'
 	],
-	#category : #'BlocHost-Morphic-Host - Morph'
+	#category : #'BlocHost-Morphic-Embedded'
 }
-
-{ #category : #examples }
-BlMorphicHost class >> example [
-
-	| aMorph aHost aSpace |
-	aMorph := Morph new.
-	"container morph could also have #spaceFill resizing"
-	aMorph extent: 400 asPoint.
-	"Specify a layout policy so the Bloc space fills the whole
-	extent (including Morph resizing)."
-	aMorph layoutPolicy: TableLayout new.
-	aMorph openInWindowLabeled: 'Resize window to layout. Hover squares to color.'.
-
-	aHost := BlMorphicHost new.
-	aHost containerMorph: aMorph.
-
-	aSpace := BlSpace new.
-	aSpace host: aHost.
-	aSpace show.
-
-	aSpace root
-		background: Color paleBlue;
-		layout: BlFlowLayout horizontal.
-
-	50 timesRepeat: [ 
-		aSpace root addChild:
-			(BlElement new
-				background: Color random translucent;
-				addEventHandlerOn: BlMouseEnterEvent
-					do: [ :evt |
-						evt target background: Color random ];
-				yourself) ]
-]
 
 { #category : #testing }
 BlMorphicHost class >> isSupported [
@@ -97,7 +64,7 @@ BlMorphicHost >> createHostSpaceFor: aSpace [
 		universe: self universe;
 		host: self;
 		space: aSpace;
-		renderer: BARenderer new;
+		renderer: BlHostRenderer preferableClass new;
 		yourself.
 
 	aSpace hostSpace: aHostSpace

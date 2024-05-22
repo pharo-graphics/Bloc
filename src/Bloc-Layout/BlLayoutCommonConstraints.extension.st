@@ -21,6 +21,12 @@ BlLayoutCommonConstraints >> linear [
 ]
 
 { #category : #'*Bloc-Layout' }
+BlLayoutCommonConstraints >> proportional [
+
+	^ self at: BlProportionalLayout
+]
+
+{ #category : #'*Bloc-Layout' }
 BlLayoutCommonConstraints >> relative [
 	^ self at: BlRelativeLayout
 ]

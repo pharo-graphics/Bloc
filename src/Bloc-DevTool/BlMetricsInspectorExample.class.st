@@ -8,60 +8,17 @@ Class {
 	#category : #'Bloc-DevTool-Examples'
 }
 
-{ #category : #'examples - inspector' }
-BlMetricsInspectorExample >> elementWithMetrics [
-
+{ #category : #examples }
+BlMetricsInspectorExample >> metricsInspectorOnElementWithMetrics [
 	<sampleInstance>
 	<demo>
-	^ BlElement new
-		  margin: (BlInsets
-				   top: 1
-				   right: 2
-				   bottom: 3
-				   left: 4);
-		  padding: (BlInsets
-				   top: 5
-				   right: 6
-				   bottom: 7
-				   left: 8);
-		  size: 300 @ 100;
-		  background: Color lightGray;
-		  border: (BlBorder paint: Color black width: 2)
-]
 
-{ #category : #'examples - helpers' }
-BlMetricsInspectorExample >> metricsPhlowView [
-	"<gtExample>"
-
-	| anElement aPhlowClass aPhlow |
-	anElement := self elementWithMetrics.
-	aPhlowClass := self class environment
-		               at: #GtPhlowView
-		               ifAbsent: [ ^ self ].
-	aPhlow := anElement gtMetricsFor: aPhlowClass empty.
-	^ aPhlow
-]
-
-{ #category : #'examples - inspector' }
-BlMetricsInspectorExample >> testBasicMetricsInspector [
-
-	<sampleInstance>
-	<demo>
-	| anInspector |
-	anInspector := BlMetricsInspector new.
-	self assert: anInspector childrenCount equals: 1.
-	^ anInspector
-]
-
-{ #category : #'examples - inspector' }
-BlMetricsInspectorExample >> testMetricsInspectorOnElementWithMetrics [
-
-	<sampleInstance>
-	<demo>
 	| anInspector anElement |
-	anInspector := self testBasicMetricsInspector.
-	anElement := self elementWithMetrics.
+	anElement := self newElementWithMarginAndPadding.
+
+	anInspector := BlMetricsInspector new.
 	anInspector for: anElement.
+
 	self assert: anInspector childrenCount equals: 1.
 	self
 		assert: ((anInspector childAt: 1) childAt: 2) text asString
@@ -78,15 +35,17 @@ BlMetricsInspectorExample >> testMetricsInspectorOnElementWithMetrics [
 	^ anInspector
 ]
 
-{ #category : #'examples - inspector' }
-BlMetricsInspectorExample >> testMetricsInspectorOnUninitializedElement [
-
+{ #category : #examples }
+BlMetricsInspectorExample >> metricsInspectorOnUninitializedElement [
 	<sampleInstance>
 	<demo>
+
 	| anInspector anElement |
-	anInspector := self testBasicMetricsInspector.
 	anElement := BlElement new.
+
+	anInspector := BlMetricsInspector new.
 	anInspector for: anElement.
+
 	self assert: anInspector childrenCount equals: 1.
 	self
 		assert: ((anInspector childAt: 1) childAt: 1) text asString
@@ -97,8 +56,22 @@ BlMetricsInspectorExample >> testMetricsInspectorOnUninitializedElement [
 	^ anInspector
 ]
 
-{ #category : #'examples - helpers' }
-BlMetricsInspectorExample >> title [
+{ #category : #examples }
+BlMetricsInspectorExample >> newElementWithMarginAndPadding [
 
-	^ '<Phlow is not installed>'
+	^ BlElement new
+		  margin: (BlInsets
+				   top: 1
+				   right: 2
+				   bottom: 3
+				   left: 4);
+		  padding: (BlInsets
+				   top: 5
+				   right: 6
+				   bottom: 7
+				   left: 8);
+		  size: 300 @ 100;
+		  background: Color lightGray;
+		  border: (BlBorder paint: Color black width: 2);
+		  yourself
 ]

@@ -495,18 +495,6 @@ BlElement >> asForm [
 	^ BlHostRenderer preferableClass newFormFrom: self
 ]
 
-{ #category : #converting }
-BlElement >> asScrollableElement [
-	| scrollable |
-	self removeFromParent.
-	scrollable := self newScrollableParent.
-	scrollable constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent ].
-	scrollable addChild: self.
-	^ scrollable
-]
-
 { #category : #'children add/remove' }
 BlElement >> attachChild: anElement [
 	"Attaches previously detached element as my last direct child.
@@ -2628,6 +2616,20 @@ BlElement >> markNeedsPaintFrom: anElement [
 					self space markNeedsPaint: self from: anElement ] ]
 ]
 
+{ #category : #'view - configuration' }
+BlElement >> maxHeight [
+
+	"get maxHeight in constraints"
+	^ self constraints maxHeight
+]
+
+{ #category : #'view - configuration' }
+BlElement >> maxHeight: aNumber [
+
+	"set maxHeight in constraints"
+	self constraintsDo: [ :c | c maxHeight: aNumber ]
+]
+
 { #category : #layout }
 BlElement >> measure: anExtentMeasurementSpec [
 	<return: #Point>
@@ -2732,6 +2734,20 @@ BlElement >> measuredWidth [
 	^ self measuredBounds width
 ]
 
+{ #category : #'view - configuration' }
+BlElement >> minHeight [
+
+	"get minHeight in constraints"
+	^ self constraints minHeight
+]
+
+{ #category : #'view - configuration' }
+BlElement >> minHeight: aNumber [
+
+	"set maxHeight in constraints"
+	self constraintsDo: [ :c | c minHeight: aNumber ]
+]
+
 { #category : #accessing }
 BlElement >> mouseCursor [
 	^ visuals mouseCursor 
@@ -2754,12 +2770,6 @@ BlElement >> needsPaint [
 BlElement >> newEventDispatcher [
 
 	^ self defaultEventDispatcherClass on: self
-]
-
-{ #category : #converting }
-BlElement >> newScrollableParent [
-
-	^ BlScrollableElement new
 ]
 
 { #category : #'event management accessing' }

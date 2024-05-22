@@ -210,7 +210,7 @@ BlMouseProcessor >> fireAsMouseOverEvent: aMouseEvent [
 BlMouseProcessor >> fireClickAvortedEventFrom: aMouseUpEvent [
 	"Click avorted is useful to let the mouse down target decide if it can be a click or not "
 
-	lastMouseDownEvent target fireEvent: (BlClickAvortedEvent new
+	lastMouseDownEvent target fireEvent: (BlClickAbortedEvent new
 			 copyFrom: lastMouseDownEvent;
 			 upEvent: aMouseUpEvent;
 			 processor: self;

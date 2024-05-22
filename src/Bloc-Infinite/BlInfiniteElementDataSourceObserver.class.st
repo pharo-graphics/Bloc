@@ -24,6 +24,60 @@ BlInfiniteElementDataSourceObserver >> assertNotInLayoutOrScroll [
 	infiniteElement assertNotInLayoutOrScroll
 ]
 
+{ #category : #'event handling' }
+BlInfiniteElementDataSourceObserver >> infiniteDataSourceChanged: anEvent [
+
+
+	self assertNotInLayoutOrScroll.
+	infiniteElement setDataSourceChangedAfterLayout.
+	infiniteElement dataSourceManager hasPendingCommands
+		ifFalse: [ infiniteElement requestLayout ]
+]
+
+{ #category : #'event handling' }
+BlInfiniteElementDataSourceObserver >> infiniteDataSourceItemRangeChanged: anEvent [	
+
+	self assertNotInLayoutOrScroll.
+
+	infiniteElement dataSourceManager
+		onItemRangeChanged: anEvent position
+		itemCount: anEvent itemCount.
+
+	self triggerUpdateProcessor
+]
+
+{ #category : #'event handling' }
+BlInfiniteElementDataSourceObserver >> infiniteDataSourceItemRangeEvent: anEvent [
+	self assertNotInLayoutOrScroll.
+	anEvent position to: anEvent position + anEvent itemCount - 1 do: [ :anIndex |
+		| anElementHolder |
+		anElementHolder := (infiniteElement findElementHolderForDataSourcePosition: anIndex).
+		anElementHolder ifNotNil: [ anEvent event sendTo: anElementHolder ] ]
+]
+
+{ #category : #'event handling' }
+BlInfiniteElementDataSourceObserver >> infiniteDataSourceItemRangeInserted: anEvent [
+	self assertNotInLayoutOrScroll.
+	
+	infiniteElement dataSourceManager
+		onItemRangeInserted: anEvent position
+		itemCount: anEvent itemCount.
+
+	self triggerUpdateProcessor
+]
+
+{ #category : #'event handling' }
+BlInfiniteElementDataSourceObserver >> infiniteDataSourceItemRangeRemoved: anEvent [
+
+	self assertNotInLayoutOrScroll.
+	
+	infiniteElement dataSourceManager
+		onItemRangeRemoved: anEvent position
+		itemCount: anEvent itemCount.
+
+	self triggerUpdateProcessor
+]
+
 { #category : #initialization }
 BlInfiniteElementDataSourceObserver >> initializeWith: anInfiniteElement [
 	
@@ -34,90 +88,9 @@ BlInfiniteElementDataSourceObserver >> initializeWith: anInfiniteElement [
 	infiniteElement := anInfiniteElement
 ]
 
-{ #category : #'event handling' }
-BlInfiniteElementDataSourceObserver >> onChanged: anEvent [
-
-
-	self assertNotInLayoutOrScroll.
-	
-	infiniteElement state structureChanged: true.
-	infiniteElement setDataSourceChangedAfterLayout.
-
-	infiniteElement dataSourceManager hasPendingCommands
-		ifFalse: [ infiniteElement requestLayout ]
-]
-
-{ #category : #'event handling' }
-BlInfiniteElementDataSourceObserver >> onItemsChanged: anEvent [
-	| needsUpdate |
-	
-
-	self assertNotInLayoutOrScroll.
-
-	needsUpdate := infiniteElement dataSourceManager
-		onItemRangeChanged: anEvent position
-		itemCount: anEvent itemCount.
-
-	needsUpdate
-		ifTrue: [ self triggerUpdateProcessor ]
-]
-
-{ #category : #'event handling' }
-BlInfiniteElementDataSourceObserver >> onItemsEvent: anEvent [
-	self assertNotInLayoutOrScroll.
-	anEvent position to: anEvent position + anEvent itemCount - 1 do: [ :anIndex |
-		| anElementHolder |
-		anElementHolder := (infiniteElement findElementHolderForDataSourcePosition: anIndex).
-		anElementHolder ifNotNil: [ anEvent event sendTo: anElementHolder ] ]
-]
-
-{ #category : #'event handling' }
-BlInfiniteElementDataSourceObserver >> onItemsInserted: anEvent [
-	| needsUpdate |
-	self assertNotInLayoutOrScroll.
-	
-	needsUpdate := infiniteElement dataSourceManager
-		onItemRangeInserted: anEvent position
-		itemCount: anEvent itemCount.
-
-	needsUpdate
-		ifTrue: [ self triggerUpdateProcessor ]
-]
-
-{ #category : #'event handling' }
-BlInfiniteElementDataSourceObserver >> onItemsMoved: anEvent [
-	| needsUpdate |
-	self assertNotInLayoutOrScroll.
-	
-	needsUpdate := infiniteElement dataSourceManager
-		onItemRangeMoved: anEvent from
-		to: anEvent to
-		itemCount: 1.
-
-	needsUpdate
-		ifTrue: [ self triggerUpdateProcessor ]
-]
-
-{ #category : #'event handling' }
-BlInfiniteElementDataSourceObserver >> onItemsRemoved: anEvent [
-	| needsUpdate |
-	self assertNotInLayoutOrScroll.
-	
-	needsUpdate := infiniteElement dataSourceManager
-		onItemRangeRemoved: anEvent position
-		itemCount: anEvent itemCount.
-
-	needsUpdate
-		ifTrue: [ self triggerUpdateProcessor ]
-]
-
 { #category : #private }
 BlInfiniteElementDataSourceObserver >> triggerUpdateProcessor [
 
-	infiniteElement postChildrenUpdater.
-	"(infiniteElement hasFixedSize and: [ infiniteElement isAttached ])
-		ifTrue: [ infiniteElement postChildrenUpdater ]
-		ifFalse: [
-			infiniteElement markDataSourceChangeDuringMeasure.
-			infiniteElement requestLayout ]"
+	infiniteElement markDataSourceChangeDuringMeasure.
+	infiniteElement requestLayout
 ]
