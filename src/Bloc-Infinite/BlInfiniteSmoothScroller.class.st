@@ -186,7 +186,6 @@ BlInfiniteSmoothScroller >> stop [
 		ifFalse: [ ^ self ].
 	
 	self onStop.
-	infiniteElement state targetPosition: NoPosition.
 	targetElement := nil.
 	targetPosition :=  NoPosition.
 	pendingInitialRun := false.

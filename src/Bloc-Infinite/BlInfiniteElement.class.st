@@ -1251,11 +1251,6 @@ BlInfiniteElement >> removeDetachedChild: anElement [
 	super removeDetachedChild: anElement
 ]
 
-{ #category : #'children add/remove' }
-BlInfiniteElement >> repositionShadowingElements [
-	"self shouldBeImplemented"
-]
-
 { #category : #layout }
 BlInfiniteElement >> requestLayout: anElement [
 	
@@ -1344,7 +1339,6 @@ BlInfiniteElement >> scrollByInternal: aDeltaPoint from: anEventPoint [
 			consumedY := self layout scrollVerticallyBy: aDeltaPoint y.
 			unconsumedY := aDeltaPoint y - consumedY ].
 	
-	self repositionShadowingElements.
 	self onExitLayoutOrScroll.
 	
 	(consumedX isZero and: [ consumedY isZero ])

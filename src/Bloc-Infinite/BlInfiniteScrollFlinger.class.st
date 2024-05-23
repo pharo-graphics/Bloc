@@ -27,7 +27,7 @@ BlInfiniteScrollFlinger >> onInitialized [
 
 { #category : #hooks }
 BlInfiniteScrollFlinger >> onLayoutScrolled [
-	self scrollable repositionShadowingElements.
+
 	self scrollable onExitLayoutOrScroll
 ]
 
