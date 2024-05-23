@@ -2630,6 +2630,33 @@ BlElement >> maxHeight: aNumber [
 	self constraintsDo: [ :c | c maxHeight: aNumber ]
 ]
 
+{ #category : #'view - configuration' }
+BlElement >> maxSize [
+
+	"get maxSize in constraints"
+	^ self maxWidth @ self maxHeight
+]
+
+{ #category : #'view - configuration' }
+BlElement >> maxSize: aPoint [
+
+	self constraintsDo: [ :c |
+		c maxWidth: aPoint x.
+		c maxHeight: aPoint y ]
+]
+
+{ #category : #'view - configuration' }
+BlElement >> maxWidth [
+
+	^ self constraints maxWidth
+]
+
+{ #category : #'view - configuration' }
+BlElement >> maxWidth: aNumber [
+
+	self constraintsDo: [ :c | c maxWidth: aNumber ]
+]
+
 { #category : #layout }
 BlElement >> measure: anExtentMeasurementSpec [
 	<return: #Point>
@@ -2744,8 +2771,35 @@ BlElement >> minHeight [
 { #category : #'view - configuration' }
 BlElement >> minHeight: aNumber [
 
-	"set maxHeight in constraints"
 	self constraintsDo: [ :c | c minHeight: aNumber ]
+]
+
+{ #category : #'view - configuration' }
+BlElement >> minSize [
+
+	"get maxSize in constraints"
+	^ self minWidth @ self minHeight
+]
+
+{ #category : #'view - configuration' }
+BlElement >> minSize: aPoint [
+
+	self constraintsDo: [ :c |
+		c minWidth: aPoint x.
+		c minHeight: aPoint y ]
+]
+
+{ #category : #'view - configuration' }
+BlElement >> minWidth [
+
+	"get from constraints"
+	^ self constraints minWidth
+]
+
+{ #category : #'view - configuration' }
+BlElement >> minWidth: aNumber [
+
+	self constraintsDo: [ :c | c minWidth: aNumber ]
 ]
 
 { #category : #accessing }
