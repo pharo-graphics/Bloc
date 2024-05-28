@@ -104,12 +104,11 @@ BlSvgFactory >> displayPropertyFrom: attributes on: aBlElement [
 BlSvgFactory >> ellipseFrom: node [
 
 	| ellipse |
-	ellipse :=
-		(BlEllipseGeometry new
-			extent:
-				((node attributeAt: 'rx') asNumber * 2) @
-				((node attributeAt: 'ry') asNumber * 2);
-			yourself) asElement.
+	ellipse := self newElement.
+	ellipse geometry: BlEllipseGeometry new.
+	ellipse extent:
+		((node attributeAt: 'rx') asNumber * 2) @
+		((node attributeAt: 'ry') asNumber * 2).
 	ellipse position: (self ellipsePositionFrom: node).
 
 	self allPropertiesFrom: node attributes on: ellipse.
@@ -363,6 +362,16 @@ BlSvgFactory >> metadataFrom: attributes [
 	self notYetImplemented
 ]
 
+{ #category : #'instance creation' }
+BlSvgFactory >> newElement [
+	"Answer an element with the default visual SVG properties"
+
+	^ BlElement new
+		background: Color black;
+		outskirts: BlOutskirts centered;
+		yourself
+]
+
 { #category : #properties }
 BlSvgFactory >> paintFrom: aString on: aBlElement [
 
@@ -409,7 +418,8 @@ BlSvgFactory >> pointsFrom: node [
 BlSvgFactory >> polygonFrom: node [
 
 	| polygon |
-	polygon := (BlPolygonGeometry vertices: (self pointsFrom: node)) asElement.
+	polygon := self newElement.
+	polygon geometry: (BlPolygonGeometry vertices: (self pointsFrom: node)).
 
 	self allPropertiesFrom: node attributes on: polygon.
 
@@ -510,11 +520,13 @@ BlSvgFactory >> rectCornerRadiusFrom: node [
 BlSvgFactory >> rectFrom: node [
 
 	| rectangle |
-	rectangle := ((BlRoundedRectangleGeometry cornerRadius:
-			               (self rectCornerRadiusFrom: node))
-		              extent: (node attributeAt: 'width') asNumber
-			              @ (node attributeAt: 'height') asNumber;
-		              yourself) asElement.
+	rectangle := self newElement.
+	rectangle geometry:
+		(BlRoundedRectangleGeometry cornerRadius:
+			(self rectCornerRadiusFrom: node)).
+	rectangle extent:
+		(node attributeAt: 'width') asNumber @
+		(node attributeAt: 'height') asNumber.
 	self positionFrom: node on: rectangle.
 
 	self allPropertiesFrom: node attributes on: rectangle.
