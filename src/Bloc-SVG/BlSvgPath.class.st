@@ -40,6 +40,16 @@ BlSvgPath class >> pathString: aString [
 		yourself
 ]
 
+{ #category : #converting }
+BlSvgPath >> asElement [
+	"Answer the default element for this geometry. The answer should comply the SVG default style."
+
+	^ super asElement
+		background: Color black;
+		border: BlBorder empty;
+		yourself
+]
+
 { #category : #'geometry testing' }
 BlSvgPath >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	
