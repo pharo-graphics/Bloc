@@ -11,6 +11,7 @@ Class {
 
 { #category : #arrow }
 BlSvgIcons class >> arrowExpandAllIcon [
+	<sampleInstance>
 
 	^ self arrowExpandAllSvg asElement
 ]
@@ -29,6 +30,7 @@ BlSvgIcons class >> arrowExpandAllSvg [
 
 { #category : #close }
 BlSvgIcons class >> closeCircleIcon [
+	<sampleInstance>
 
 	^ self closeCircleSvg asElement
 ]
@@ -52,15 +54,14 @@ BlSvgIcons class >> iconSelectors [
 
 { #category : #accessing }
 BlSvgIcons class >> icons [
-	"
-	self icons
-	"
+	<sampleInstance>
 
 	^ self iconSelectors collect: [ :each | self perform: each ]
 ]
 
 { #category : #rotate }
 BlSvgIcons class >> rotateLeftIcon [
+	<sampleInstance>
 
 	^ self rotateLeftSvg asElement
 ]
@@ -79,6 +80,7 @@ BlSvgIcons class >> rotateLeftSvg [
 
 { #category : #settings }
 BlSvgIcons class >> settingsIcon [
+	<sampleInstance>
 
 	^ self settingsSvg asElement
 ]
