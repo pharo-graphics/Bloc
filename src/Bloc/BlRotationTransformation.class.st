@@ -15,6 +15,14 @@ Class {
 	#category : #'Bloc-Basic-Transformations'
 }
 
+{ #category : #comparing }
+BlRotationTransformation >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	^ self angle = anObject angle and: [ self axis = anObject axis ]
+]
+
 { #category : #accessing }
 BlRotationTransformation >> angle [
 

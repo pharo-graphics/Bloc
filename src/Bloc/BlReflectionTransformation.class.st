@@ -36,6 +36,14 @@ BlReflectionTransformation class >> vertical [
 		  yourself
 ]
 
+{ #category : #comparing }
+BlReflectionTransformation >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	^ self reflection = anObject reflection
+]
+
 { #category : #testing }
 BlReflectionTransformation >> is2D [
 
