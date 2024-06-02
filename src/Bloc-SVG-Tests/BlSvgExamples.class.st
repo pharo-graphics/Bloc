@@ -19,7 +19,6 @@ BlSvgExamples >> circle [
 { #category : #'svg - string' }
 BlSvgExamples >> circleSVG [
 
-	<sampleInstance>
 	^ ' <svg width="450" height="150">
 			<circle cx="75" cy="75" r="50" style="fill: firebrick; stroke: goldenrod; stroke-width: 5; stroke-dasharray: 10,5" />
 			<circle cx="225" cy="75" r="50" style="fill: navy"/>
@@ -37,7 +36,6 @@ BlSvgExamples >> curveCubicBezier [
 { #category : #'svg - string' }
 BlSvgExamples >> curveCubicBezierSVG [
 
-	<sampleInstance>
 	^ '<svg width="500" height="400">	
 			<path d="M100,200 C100,100 250,100 250,200 S400,300 400,200" style="fill:none; stroke:red; stroke-width:5"/>
 		</svg>'
@@ -53,7 +51,6 @@ BlSvgExamples >> curveQuadraticBezier [
 { #category : #'svg - string' }
 BlSvgExamples >> curveQuadraticBezierSVG [
 
-	<sampleInstance>
 	^ '<svg width="500" height="400">
 			<path d="M100,200 Q175,50 250,200 T400,200" style="fill:none; stroke:red; stroke-width:5"/>
 		</svg>'
@@ -69,7 +66,6 @@ BlSvgExamples >> defsAndUse [
 { #category : #'svg - string' }
 BlSvgExamples >> defsAndUseSVG [
 
-	<sampleInstance>
 	^ '<svg width="800" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<defs>
 				<rect id="MyRect" x="00" y="00" height="100" width="200" style="fill: red; stroke: white; stroke-width: 4"/>
@@ -90,7 +86,6 @@ BlSvgExamples >> ellipse [
 { #category : #'svg - string' }
 BlSvgExamples >> ellipseSVG [
 
-	<sampleInstance>
 	^ '<svg width="670" height="150">
 			<ellipse cx="110" cy="75" rx="100" ry="40" style="fill: firebrick; stroke: goldenrod; stroke-width: 5; stroke-dasharray: 9,5" />
 			<ellipse cx="335" cy="75" rx="100" ry="40" style="fill: navy"/>
@@ -108,7 +103,6 @@ BlSvgExamples >> ellipticalArc [
 { #category : #'svg - string' }
 BlSvgExamples >> ellipticalArcSVG [
 
-	<sampleInstance>
 	^ '<svg width="450" height="150" xmlns="http://www.w3.org/2000/svg">
 			<g style="fill:none; stroke:red; stroke-width:5">
   				<path d="M25 50 a 50 50, 0, 0, 0, 50 50"/>
@@ -129,7 +123,6 @@ BlSvgExamples >> group [
 { #category : #'svg - string' }
 BlSvgExamples >> groupSVG [
 
-	<sampleInstance>
 	^ '<svg width="610" height="210">
 			<g style="fill:red; stroke:white; stroke-width: 4">
 				<rect x="10" y="50" height="100" width="200"/>
@@ -149,7 +142,6 @@ BlSvgExamples >> line [
 { #category : #'svg - string' }
 BlSvgExamples >> lineSVG [
 
-	<sampleInstance>
 	^ '<svg width="420" height="210">
   			<line x1="10" y1="10" x2="200" y2="200" style="stroke: red; stroke-width: 2" />
 			<line x1="210" y1="10" x2="400" y2="200" style="stroke: red; stroke-width: 2; stroke-dasharray: 10,10" />
@@ -166,7 +158,6 @@ BlSvgExamples >> linearGradient [
 { #category : #'svg - string' }
 BlSvgExamples >> linearGradientSVG [
 
-	<sampleInstance>
 	^ '<svg width="240" height="200">
 			<linearGradient id="MyGradient" x2="100" y2="100">
 				<stop offset="0.0" stop-color="yellow" />
@@ -186,7 +177,6 @@ BlSvgExamples >> pathBatman [
 { #category : #'svg - string' }
 BlSvgExamples >> pathBatmanSVG [
 
-	<sampleInstance>
 	^ '	<svg height="200" width="200">
 			<g transform="translate(-205,-295)">
 				<rect x="205" y="295" width="200" height="200" style="fill: white"/>
@@ -215,8 +205,7 @@ BlSvgExamples >> pathTiger [
 { #category : #'svg - string' }
 BlSvgExamples >> pathTigerSVG [
 
-	<sampleInstance>
-	^ ' <svg id="svg2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" version="1.1">
+	^ '<svg id="svg2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" version="1.1">
  <g id="g4" fill="none" transform="matrix(1.7656463,0,0,1.7656463,324.90716,255.00942)">
   <g id="g6" stroke-width="0.17200001" stroke="#000" fill="#FFF">
    <path id="path8" d="m-122.3,84.285s0.1,1.894-0.73,1.875c-0.82-0.019-17.27-48.094-37.8-45.851,0,0,17.78-7.353,38.53,43.976z"/>
@@ -952,7 +941,6 @@ BlSvgExamples >> pathTree [
 { #category : #'svg - string' }
 BlSvgExamples >> pathTreeSVG [
 
-	<sampleInstance>
 	^ '<svg height="600" width="600">
 			<g transform="scale(0.3,0.3)" style="stroke:green;fill:lime;stroke-width:10;">
 				<path d="M1000,200 Q950,400 800,500 Q600,600 750,650 T700,850 Q400,1100 600,1100 T500,1400   Q250,1600 450,1600 L850,1600 Q950,1600 950,1700 h95"/>
@@ -971,7 +959,6 @@ BlSvgExamples >> polyLine [
 { #category : #'svg - string' }
 BlSvgExamples >> polyLineSVG [
 
-	<sampleInstance>
 	^ '<svg width="470" height="220">
 			<polyline points="10,210 60,10 110,110 160,10 210,210" style="stroke: red; stroke-width: 4" />
   			<polyline points="260,210 310,10 360,110 410,10 460,210" style="stroke: red; stroke-width: 4; stroke-dasharray: 10,10" />
@@ -988,7 +975,6 @@ BlSvgExamples >> polygon [
 { #category : #'svg - string' }
 BlSvgExamples >> polygonSVG [
 
-	<sampleInstance>
 	^ '<svg width="600" height="210">
  			<polygon points="100,10 40,198 190,78 10,78 160,198" style="fill: firebrick; stroke: goldenrod; stroke-width: 2; stroke-dasharray: 10,10" />
 			<polygon points="300,10 240,198 390,78 210,78 360,198" style="fill: navy"/>
@@ -1006,7 +992,6 @@ BlSvgExamples >> radialGradient [
 { #category : #'svg - string' }
 BlSvgExamples >> radialGradientSVG [
 
-	<sampleInstance>
 	^ '<svg width="240" height="200">
 			<radialGradient id="MyGradient">
 				<stop offset="0.0" stop-color="yellow" />
@@ -1026,7 +1011,6 @@ BlSvgExamples >> rectangle [
 { #category : #'svg - string' }
 BlSvgExamples >> rectangleSVG [
 
-	<sampleInstance>
 	^ '<svg width="610" height="200">
 			<rect x="10" y="50" height="100" width="200" style="fill: firebrick; stroke: goldenrod; stroke-width: 4; stroke-dasharray: 10,10 "/>
 			<rect x="250" y="25" width="150" height="150" style="fill: navy" />
@@ -1044,7 +1028,6 @@ BlSvgExamples >> svg [
 { #category : #'svg - string' }
 BlSvgExamples >> svgSVG [
 
-	<sampleInstance>
 	^ '<svg width="610" height="210">
 			<svg style="fill:red; stroke:white; stroke-width: 4">
 				<rect x="10" y="50" height="100" width="200"/>
@@ -1064,7 +1047,6 @@ BlSvgExamples >> symbolAndUse [
 { #category : #'svg - string' }
 BlSvgExamples >> symbolAndUseSVG [
 
-	<sampleInstance>
 	^ '<svg width="900" height="300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<symbol id="Batman" transform="translate(-205,-295)">
 				<path d="M305.378,347.01c48.53,0,87.874,22.104,87.874,49.368c0,27.265-39.344,49.367-87.874,49.367
@@ -1097,7 +1079,6 @@ BlSvgExamples >> text [
 { #category : #'svg - string' }
 BlSvgExamples >> textSVG [
 
-	<sampleInstance>
 	^ '<svg height="150" width="150">
 			<text x="45" y="50" fill="red">
   				I love Bloc
@@ -1116,7 +1097,6 @@ BlSvgExamples >> transformations [
 { #category : #'svg - string' }
 BlSvgExamples >> transformationsSVG [
 
-	<sampleInstance>
 	^ '<svg width="1200" height="550" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<defs>			
 				<rect id="MyRectangle" x="20" y="50" height="100" width="200" style="fill: darkorange; stroke: red; stroke-width: 3"/>
@@ -1151,7 +1131,6 @@ BlSvgExamples >> useSymbolRect [
 { #category : #'svg - string' }
 BlSvgExamples >> useSymbolRectSVG [
 
-	<sampleInstance>
 	^ '<svg width="800" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<symbol id="MyRect">
 				<rect x="00" y="00" height="100" width="200" style="fill: red; stroke: white; stroke-width: 4"/>
