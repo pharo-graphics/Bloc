@@ -60,25 +60,73 @@ BlBackgroundTest >> testEqualityBlCompositeBackground [
 	"Not the same size"
 	self
 		deny: (BlCompositeBackground new withAll: {
-			              (BlPaintBackground new paint:
-				               (BlColorPaint new color: Color blue)).
-			              (BlImageBackground new image:
-				               (Smalltalk ui icons iconNamed: #pharoIcon)) })
-		equals: (BlCompositeBackground new withAll: {
-			              (BlPaintBackground new paint:
-				               (BlColorPaint new color: Color blue))}).
+					 (BlPaintBackground new paint:
+						  (BlColorPaint new color: Color blue)).
+					 (BlImageBackground new image:
+						  (Smalltalk ui icons iconNamed: #pharoIcon)) })
+		equals: (BlCompositeBackground new withAll:
+				 { (BlPaintBackground new paint:
+					  (BlColorPaint new color: Color blue)) }).
 	"Not the same backgrounds"
 	self
 		deny: (BlCompositeBackground new withAll: {
-			              (BlPaintBackground new paint:
-				               (BlColorPaint new color: Color blue)).
-			              (BlImageBackground new image:
-				               (Smalltalk ui icons iconNamed: #pharoIcon)) })
+					 (BlPaintBackground new paint:
+						  (BlColorPaint new color: Color blue)).
+					 (BlImageBackground new image:
+						  (Smalltalk ui icons iconNamed: #pharoIcon)) })
 		equals: (BlCompositeBackground new withAll: {
-			              (BlPaintBackground new paint:
-				               (BlColorPaint new color: Color red)).
-			              (BlImageBackground new image:
-				               (Smalltalk ui icons iconNamed: #pharoIcon)) }).
+					 (BlPaintBackground new paint:
+						  (BlColorPaint new color: Color red)).
+					 (BlImageBackground new image:
+						  (Smalltalk ui icons iconNamed: #pharoIcon)) }).
+
+	self
+		assert: (BlCompositeBackground new
+				 withAll: {
+						 (BlPaintBackground new paint:
+								  (BlColorPaint new color: Color blue)).
+						 (BlImageBackground new image:
+								  (Smalltalk ui icons iconNamed: #pharoIcon)) };
+				 opacity: 0.5)
+		equals: (BlCompositeBackground new
+				 withAll: {
+						 (BlPaintBackground new paint:
+								  (BlColorPaint new color: Color blue)).
+						 (BlImageBackground new image:
+								  (Smalltalk ui icons iconNamed: #pharoIcon)) };
+				 opacity: 0.5).
+	"Test opacity"
+	self
+		assert: (BlCompositeBackground new
+				 withAll: {
+						 (BlPaintBackground new paint:
+								  (BlColorPaint new color: Color blue)).
+						 (BlImageBackground new image:
+								  (Smalltalk ui icons iconNamed: #pharoIcon)) };
+				 opacity: 0.5)
+		equals: (BlCompositeBackground new
+				 withAll: {
+						 (BlPaintBackground new paint:
+								  (BlColorPaint new color: Color blue)).
+						 (BlImageBackground new image:
+								  (Smalltalk ui icons iconNamed: #pharoIcon)) };
+				 opacity: 0.5).
+	
+	self
+		deny: (BlCompositeBackground new
+				 withAll: {
+						 (BlPaintBackground new paint:
+								  (BlColorPaint new color: Color blue)).
+						 (BlImageBackground new image:
+								  (Smalltalk ui icons iconNamed: #pharoIcon)) };
+				 opacity: 1.0)
+		equals: (BlCompositeBackground new
+				 withAll: {
+						 (BlPaintBackground new paint:
+								  (BlColorPaint new color: Color blue)).
+						 (BlImageBackground new image:
+								  (Smalltalk ui icons iconNamed: #pharoIcon)) };
+				 opacity: 0.5)
 ]
 
 { #category : #'background - builder' }
@@ -99,11 +147,26 @@ BlBackgroundTest >> testEqualityBlImageBackground [
 				 (Smalltalk ui icons iconNamed: #pharoIcon))
 		equals: (BlImageBackground new image:
 				 (Smalltalk ui icons iconNamed: #smallPaint)).
+	
+	"Test opacity"
 	self
-		deny: (BlImageBackground new image:
-				 (Smalltalk ui icons iconNamed: #pharoIcon); opacity: 0.5; yourself)
-		equals: (BlImageBackground new image:
-				 (Smalltalk ui icons iconNamed: #pharoIcon); opacity: 1.0; yourself)
+		assert: (BlImageBackground new
+				 image: (Smalltalk ui icons iconNamed: #pharoIcon);
+				 opacity: 1.0;
+				 yourself)
+		equals: (BlImageBackground new
+				 image: (Smalltalk ui icons iconNamed: #pharoIcon);
+				 opacity: 1.0;
+				 yourself).
+	self
+		deny: (BlImageBackground new
+				 image: (Smalltalk ui icons iconNamed: #pharoIcon);
+				 opacity: 0.5;
+				 yourself)
+		equals: (BlImageBackground new
+				 image: (Smalltalk ui icons iconNamed: #pharoIcon);
+				 opacity: 1.0;
+				 yourself)
 ]
 
 { #category : #'background - builder' }
