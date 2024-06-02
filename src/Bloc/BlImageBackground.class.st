@@ -27,7 +27,7 @@ BlImageBackground >> = anotherObject [
 	self == anotherObject ifTrue: [ ^ true ].
 	(anotherObject isKindOf: self class) ifFalse: [ ^ false ].
 
-	^ anotherObject image = self image
+	^ anotherObject image = self image and: [ anotherObject opacity = self opacity ]
 ]
 
 { #category : #accessing }

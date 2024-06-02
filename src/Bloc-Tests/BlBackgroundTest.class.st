@@ -85,15 +85,25 @@ BlBackgroundTest >> testEqualityBlCompositeBackground [
 BlBackgroundTest >> testEqualityBlImageBackground [
 
 	| background |
-	background := BlImageBackground new image: (Smalltalk ui icons iconNamed: #pharoIcon).
+	background := BlImageBackground new image:
+		              (Smalltalk ui icons iconNamed: #pharoIcon).
 	self assert: background equals: background.
 
 	self
-		assert: (BlImageBackground new image: (Smalltalk ui icons iconNamed: #pharoIcon))
-		equals: (BlImageBackground new image: (Smalltalk ui icons iconNamed: #pharoIcon)).
+		assert: (BlImageBackground new image:
+				 (Smalltalk ui icons iconNamed: #pharoIcon))
+		equals: (BlImageBackground new image:
+				 (Smalltalk ui icons iconNamed: #pharoIcon)).
 	self
-		deny: (BlImageBackground new image: (Smalltalk ui icons iconNamed: #pharoIcon))
-		equals: (BlImageBackground new image: (Smalltalk ui icons iconNamed: #smallPaint))
+		deny: (BlImageBackground new image:
+				 (Smalltalk ui icons iconNamed: #pharoIcon))
+		equals: (BlImageBackground new image:
+				 (Smalltalk ui icons iconNamed: #smallPaint)).
+	self
+		deny: (BlImageBackground new image:
+				 (Smalltalk ui icons iconNamed: #pharoIcon); opacity: 0.5; yourself)
+		equals: (BlImageBackground new image:
+				 (Smalltalk ui icons iconNamed: #pharoIcon); opacity: 1.0; yourself)
 ]
 
 { #category : #'background - builder' }
@@ -114,6 +124,16 @@ BlBackgroundTest >> testEqualityBlPaintBackground1 [
 		(BlPaintBackground new paint: (BlColorPaint new color: Color blue))
 		equals:
 		(BlPaintBackground new paint: (BlColorPaint new color: Color red)).
+	self
+		assert:
+		(BlPaintBackground new paint: (BlColorPaint new color: Color blue); opacity: 0.5)
+		equals:
+		(BlPaintBackground new paint: (BlColorPaint new color: Color blue); opacity: 0.5).
+	self
+		deny:
+		(BlPaintBackground new paint: (BlColorPaint new color: Color blue); opacity: 1.0)
+		equals:
+		(BlPaintBackground new paint: (BlColorPaint new color: Color blue); opacity: 0.5).
 ]
 
 { #category : #'background - builder' }
@@ -126,6 +146,13 @@ BlBackgroundTest >> testEqualityBlPaintBackground2 [
 	self
 		assert: (BlPaintBackground new paint: BlTransparentPaint new)
 		equals: (BlPaintBackground new paint: BlTransparentPaint new).
+	self
+		deny: (BlPaintBackground new
+				 paint: BlTransparentPaint new;
+				 opacity: 1.0)
+		equals: (BlPaintBackground new
+				 paint: BlTransparentPaint new;
+				 opacity: 0.5)
 ]
 
 { #category : #'background - builder' }
@@ -333,8 +360,13 @@ BlBackgroundTest >> testEqualityBlTransparentBackground [
 	| background |
 	background := BlTransparentBackground new.
 	self assert: background equals: background.
-	
-	self assert: BlTransparentBackground new equals: BlTransparentBackground new.
+
+	self
+		assert: BlTransparentBackground new
+		equals: BlTransparentBackground new.
+	self
+		assert: (BlTransparentBackground new opacity: 0.5; yourself)
+		equals: (BlTransparentBackground new opacity: 1.0; yourself)
 ]
 
 { #category : #'background - transparent' }
