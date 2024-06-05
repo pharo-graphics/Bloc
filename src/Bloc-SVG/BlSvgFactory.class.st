@@ -800,9 +800,12 @@ BlSvgFactory >> tspanFrom: node [
 { #category : #definitions }
 BlSvgFactory >> useFrom: node [
 
-	| element |
-	element := (self definitions
-		at: ((node attributeAt: 'xlink:href') withoutPrefix: '#')) veryDeepCopy.
+	| key element |
+	"xlink:href is deprecated in the SVG 2 spec
+	(https://svgwg.org/svg2-draft/struct.html#UseElement)"
+	key := node attributeAt: 'href' ifAbsent: [
+		node attributeAt: 'xlink:href' ].
+	element := (definitions at: (key withoutPrefix: '#')) veryDeepCopy.
 	element parent: nil.
 
 	self positionFrom: node on: element.
