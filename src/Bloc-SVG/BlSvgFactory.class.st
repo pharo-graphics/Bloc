@@ -57,13 +57,8 @@ BlSvgFactory >> commonPropertiesFrom: attributes on: aBlElement [
 	aBlElement outskirts: BlOutskirts centered.
 	aBlElement layout: BlSvgGroupLayout new.
 
-	attributes
-		at: 'display'
-		ifPresent: [ self displayPropertyFrom: attributes on: aBlElement ].
-
-	attributes at: 'id' ifPresent: [ 
-self flag: #todo. "		aBlElement svgName: (attributes at: 'id')."
-		self idHandlingFrom: attributes on: aBlElement ]
+	self displayPropertyFrom: attributes on: aBlElement.
+	self idHandlingFrom: attributes on: aBlElement
 ]
 
 { #category : #definitions }
@@ -96,8 +91,11 @@ BlSvgFactory >> descFrom: attributes [
 { #category : #properties }
 BlSvgFactory >> displayPropertyFrom: attributes on: aBlElement [
 
-	(attributes at: 'display') = 'none' ifTrue: [
-		aBlElement visibility: BlVisibilityGone new ]
+	attributes
+		at: 'display'
+		ifPresent: [ :display |
+			display = 'none' ifTrue: [
+				aBlElement visibility: BlVisibility gone ]]
 ]
 
 { #category : #'circle & ellipse' }
@@ -161,14 +159,14 @@ BlSvgFactory >> extentFrom: node on: aBlElement [
 BlSvgFactory >> fillPropertiesFrom: attributes on: aBlElement [
 
 	| backgroundBuilder |
-	attributes at: 'fill' ifPresent: [ 
+	attributes at: 'fill' ifPresent: [ :fill |
 		backgroundBuilder := BlPaintBackgroundBuilder new.
 		backgroundBuilder paint:
-			(self paintFrom: (attributes at: 'fill') on: aBlElement).
+			(self paintFrom: fill on: aBlElement).
 		attributes
 			at: 'fill-opacity'
-			ifPresent: [ 
-			backgroundBuilder opacity: (attributes at: 'fill-opacity') asNumber ].
+			ifPresent: [ :fillOpacity |
+				backgroundBuilder opacity: fillOpacity asNumber ].
 
 		aBlElement background: backgroundBuilder build ]
 ]
@@ -227,7 +225,9 @@ BlSvgFactory >> gradientFrom: node on: aBlGradientPaint [
 { #category : #properties }
 BlSvgFactory >> idHandlingFrom: attributes on: anObject [
 
-	self definitions at: (attributes at: 'id') put: anObject
+	attributes
+		at: 'id'
+		ifPresent: [ :id | definitions at: id put: anObject ]
 ]
 
 { #category : #image }
@@ -375,7 +375,7 @@ BlSvgFactory >> newElement [
 { #category : #properties }
 BlSvgFactory >> paintFrom: aString on: aBlElement [
 
-	^ (self definitions
+	^ (definitions
 		at: ((aString withoutPrefix: 'url(#') withoutSuffix: ')')
 		ifPresent: [ :aBlPaint | aBlPaint veryDeepCopy ]
 		ifAbsent: [ BlColorPaint color: (BlSvgColor fromString: aString) ])
@@ -541,8 +541,9 @@ BlSvgFactory >> renderingPropertiesFrom: attributes on: aBlElement [
 
 	attributes
 		at: 'opacity'
-		ifPresent: [
-			aBlElement opacity: (attributes at: 'opacity') asNumber ].
+		ifPresent: [ :opacity |
+			aBlElement opacity: opacity asNumber ].
+
 	self fillPropertiesFrom: attributes on: aBlElement.
 	self strokePropertiesFrom: attributes on: aBlElement
 ]
@@ -561,16 +562,22 @@ BlSvgFactory >> ropedTextFrom: node on: textElement [
 	text := BlRopedText string: node nodes first string trimBoth.
 
 	textAttributes := OrderedCollection new.
-	node attributes at: 'font-family' ifPresent: [
-		textAttributes add:
-			(BlFontFamilyAttribute named: (node attributeAt: 'font-family')) ].
-	node attributes at: 'font-size' ifPresent: [
-		textAttributes add:
-			(BlFontSizeAttribute size: (node attributeAt: 'font-size') asNumber) ].
-	node attributes at: 'font-color' ifPresent: [
-		textAttributes add: (BlTextForegroundAttribute paint:
-				 (self paintFrom: (node attributeAt: 'font-color') on: textElement)
-					 color) ].
+	node attributes
+		at: 'font-family'
+		ifPresent: [ :value |
+			textAttributes add:
+				(BlFontFamilyAttribute named: value) ].
+	node attributes
+		at: 'font-size'
+		ifPresent: [ :value |
+			textAttributes add:
+				(BlFontSizeAttribute size: value asNumber) ].
+	node attributes
+		at: 'font-color'
+		ifPresent: [ :value |
+			textAttributes add:
+				(BlTextForegroundAttribute paint:
+					(self paintFrom: value on: textElement) color) ].
 	text attributes: textAttributes.
 
 	textElement text: text
@@ -610,11 +617,11 @@ BlSvgFactory >> setAttributesForTextFrom: node [
 	"In svg the fill attribute from the text element commands the text color, not the background color.
 	That's why Bloc should treat this attribute the same way it does the stroke attribute from the other svg elements."
 
-	node attributes at: 'fill' ifPresent: [
-		node attributeAt: 'font-color' put: (node attributeAt: 'fill').
+	node attributes at: 'fill' ifPresent: [ :fill |
+		node attributeAt: 'font-color' put: fill.
 		node removeAttribute: 'fill' ].
-	node attributes at: 'fill-opacity' ifPresent: [
-		node attributeAt: 'opacity' put: (node attributeAt: 'fill-opacity').
+	node attributes at: 'fill-opacity' ifPresent: [ :fillOpacity |
+		node attributeAt: 'opacity' put: fillOpacity.
 		node removeAttribute: 'fill-opacity' ]
 ]
 
@@ -656,40 +663,48 @@ BlSvgFactory >> stopFrom: node [
 { #category : #properties }
 BlSvgFactory >> strokePropertiesFrom: attributes on: aBlElement [
 
-	| borderBuilder dashArray |
-	attributes at: 'stroke' ifPresent: [
+	attributes at: 'stroke' ifPresent: [ :stroke |
+		| borderBuilder |
 		borderBuilder := BlBorderBuilder new.
-		borderBuilder paint:
-			(self paintFrom: (attributes at: 'stroke') on: aBlElement).
+		borderBuilder paint: (self paintFrom: stroke on: aBlElement).
 		attributes
 			at: 'stroke-width'
-			ifPresent: [
-			borderBuilder width: (attributes at: 'stroke-width') asNumber ].
+			ifPresent: [ :strokeWidth |
+				borderBuilder width: strokeWidth asNumber ].
 		attributes
 			at: 'stroke-opacity'
-			ifPresent: [
-			borderBuilder opacity: (attributes at: 'stroke-opacity') asNumber ].
+			ifPresent: [ :strokeOpacity |
+				borderBuilder opacity: strokeOpacity asNumber ].
 
-		attributes at: 'stroke-linecap' ifPresent: [
-			borderBuilder lineCap:
-				(BlStrokeLineCap perform:
-					 (attributes at: 'stroke-linecap') asSymbol) ].
-		attributes at: 'stroke-linejoin' ifPresent: [
-			borderBuilder lineJoin:
-				(BlStrokeLineJoin perform:
-					 (attributes at: 'stroke-linejoin') asSymbol) ].
-		attributes at: 'stroke-miterlimit' ifPresent: [
-			borderBuilder miterLimit:
-				(attributes at: 'stroke-miterlimit') asNumber ].
+		attributes
+			at: 'stroke-linecap'
+			ifPresent: [ :lineCap |
+				borderBuilder lineCap:
+					(BlStrokeLineCap perform: lineCap asSymbol) ].
+		attributes
+			at: 'stroke-linejoin'
+			ifPresent: [ :lineJoin |
+				borderBuilder lineJoin:
+					(BlStrokeLineJoin perform: lineJoin asSymbol) ].
+		attributes
+			at: 'stroke-miterlimit'
+			ifPresent: [ :miterLimit |
+				borderBuilder miterLimit: miterLimit asNumber ].
 
-		attributes at: 'stroke-dasharray' ifPresent: [
-			dashArray := ((attributes at: 'stroke-dasharray') substrings: {
-					              Character space.
-					              $, }) collect: [ :value | value asNumber ].
-			borderBuilder dashArray: dashArray ].
-		attributes at: 'stroke-dashoffset' ifPresent: [
-			borderBuilder dashOffset:
-				(attributes at: 'stroke-dashoffset') asNumber ].
+		attributes
+			at: 'stroke-dasharray'
+			ifPresent: [ :dashes |
+				| dashArray |
+				dashArray :=
+					(dashes substrings: {
+						Character space.
+						$, }) collect: [ :each | each asNumber ].
+				borderBuilder dashArray: dashArray ].
+
+		attributes
+			at: 'stroke-dashoffset'
+			ifPresent: [ :offset |
+				borderBuilder dashOffset: offset asNumber ].
 
 		aBlElement border: borderBuilder build ]
 ]
@@ -735,13 +750,10 @@ BlSvgFactory >> titleFrom: attributes [
 BlSvgFactory >> transformPropertiesFrom: attributes on: aBlElement [
 
 	| transformations |
-	attributes
+	transformations := attributes
 		at: 'transform'
-		ifPresent: [
-		transformations := (attributes at: 'transform') substrings: ' ' ].
-	transformations ifNil: [ ^ self ].
-
-	transformations do: [ :transformation |
+		ifAbsent: [ ^ self ].
+	(transformations substrings: ' ') do: [ :transformation |
 		| sel args symbol |
 		sel := nil.
 		args := OrderedCollection new.
@@ -750,7 +762,7 @@ BlSvgFactory >> transformPropertiesFrom: attributes on: aBlElement [
 				ifNil: [ sel := string ]
 				ifNotNil: [ args add: string asNumber ] ].
 
-		symbol := (sel , 'Element:with:') asSymbol.
+		symbol := (sel, 'Element:with:') asSymbol.
 		(self respondsTo: symbol) ifTrue: [
 			self perform: symbol with: aBlElement with: args ] ]
 ]
