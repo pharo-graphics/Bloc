@@ -121,10 +121,10 @@ BlSvgFactory >> ellipsePositionFrom: node [
 	cx := cy := 0.
 	node
 		attributeAt: 'cx'
-		ifPresent: [ cx := (node attributeAt: 'cx') asNumber ].
+		ifPresent: [ :value | cx := value asNumber ].
 	node
 		attributeAt: 'cy'
-		ifPresent: [ cy := (node attributeAt: 'cy') asNumber ].
+		ifPresent: [ :value | cy := value asNumber ].
 
 	^ Point
 		x: (cx - (node attributeAt: 'rx') asNumber)
@@ -136,9 +136,7 @@ BlSvgFactory >> extentFrom: node on: aBlElement [
 
 	node
 		attributeAt: 'width'
-		ifPresent: [
-			| width |
-			width := node attributeAt: 'width'.
+		ifPresent: [ :width |
 			width trim last = $% ifTrue: [ self notYetImplemented ].
 			aBlElement constraints horizontal exact: width asNumber ]
 		ifAbsent: [
@@ -146,9 +144,7 @@ BlSvgFactory >> extentFrom: node on: aBlElement [
 
 	node
 		attributeAt: 'height'
-		ifPresent: [
-			| height |
-			height := node attributeAt: 'height'.
+		ifPresent: [ :height |
 			height trim last = $% ifTrue: [ self notYetImplemented ].
 			aBlElement constraints vertical exact: height asNumber ]
 		ifAbsent: [
@@ -236,9 +232,10 @@ BlSvgFactory >> imageFrom: node [
 	| imageElement |
 	imageElement := self rectFrom: node.
 
-	node attributeAt: 'xlink:href' ifPresent: [
-		imageElement background: (BlImagePatternPaint form:
-				 (Form fromFileNamed: (node attributeAt: 'xlink:href'))) ].
+	node attributeAt: 'xlink:href' ifPresent: [ :value |
+		imageElement background:
+			(BlImagePatternPaint form:
+				(Form fromFileNamed: value)) ].
 
 	^ imageElement
 ]
@@ -250,10 +247,10 @@ BlSvgFactory >> lineEndingPointFrom: node [
 	x2 := y2 := 0.
 	node
 		attributeAt: 'x2'
-		ifPresent: [ x2 := (node attributeAt: 'x2') asNumber ].
+		ifPresent: [ :value | x2 := value asNumber ].
 	node
 		attributeAt: 'y2'
-		ifPresent: [ y2 := (node attributeAt: 'y2') asNumber ].
+		ifPresent: [ :value | y2 := value asNumber ].
 	^ x2 @ y2
 ]
 
@@ -279,10 +276,10 @@ BlSvgFactory >> lineStartingPointFrom: node [
 	x1 := y1 := 0.
 	node
 		attributeAt: 'x1'
-		ifPresent: [ x1 := (node attributeAt: 'x1') asNumber ].
+		ifPresent: [ :value | x1 := value asNumber ].
 	node
 		attributeAt: 'y1'
-		ifPresent: [ y1 := (node attributeAt: 'y1') asNumber ].
+		ifPresent: [ :value | y1 := value asNumber ].
 	^ x1 @ y1
 ]
 
@@ -294,10 +291,10 @@ BlSvgFactory >> linearGradientEndingPointFrom: node [
 	y2 := 0.
 	node
 		attributeAt: 'x2'
-		ifPresent: [ x2 := (node attributeAt: 'x2') asNumber ].
+		ifPresent: [ :value | x2 := value asNumber ].
 	node
 		attributeAt: 'y2'
-		ifPresent: [ y2 := (node attributeAt: 'y2') asNumber ].
+		ifPresent: [ :value | y2 := value asNumber ].
 	^ x2 @ y2
 ]
 
@@ -320,10 +317,10 @@ BlSvgFactory >> linearGradientStartingPointFrom: node [
 	x1 := y1 := 0.
 	node
 		attributeAt: 'x1'
-		ifPresent: [ x1 := (node attributeAt: 'x1') asNumber ].
+		ifPresent: [ :value | x1 := value asNumber ].
 	node
 		attributeAt: 'y1'
-		ifPresent: [ y1 := (node attributeAt: 'y1') asNumber ].
+		ifPresent: [ :value | y1 := value asNumber ].
 	^ x1 @ y1
 ]
 
@@ -409,9 +406,10 @@ BlSvgFactory >> patternFrom: node [
 { #category : #'polyline & polygon' }
 BlSvgFactory >> pointsFrom: node [
 
-	node attributeAt: 'points' ifPresent: [
-		^ ((node attributeAt: 'points') substrings: ' ') collect: [ :xAndY |
-			  (xAndY copyUpTo: $,) asNumber @ (xAndY copyAfter: $,) asNumber ] ]
+	node attributeAt: 'points' ifPresent: [ :value |
+		^ (value substrings: ' ') collect: [ :xAndY |
+			(xAndY copyUpTo: $,) asNumber @
+			(xAndY copyAfter: $,) asNumber ] ]
 ]
 
 { #category : #'polyline & polygon' }
@@ -446,10 +444,10 @@ BlSvgFactory >> positionFrom: node on: aBlElement [
 	x := y := 0.
 	node
 		attributeAt: 'x'
-		ifPresent: [ x := (node attributeAt: 'x') asNumber ].
+		ifPresent: [ :value | x := value asNumber ].
 	node
 		attributeAt: 'y'
-		ifPresent: [ y := (node attributeAt: 'y') asNumber ].
+		ifPresent: [ :value | y := value asNumber ].
 	aBlElement position: x @ y
 ]
 
@@ -462,26 +460,26 @@ BlSvgFactory >> radialGradientFrom: node [
 	r := 0.0.
 	node
 		attributeAt: 'r'
-		ifPresent: [ r := (node attributeAt: 'r') asNumber ].
+		ifPresent: [ :value | r := value asNumber ].
 	aBlRadialGradientPaint radius: r.
 
 	cx := cy := 50.
 	node
 		attributeAt: 'cx'
-		ifPresent: [ cx := (node attributeAt: 'cx') asNumber ].
+		ifPresent: [ :value | cx := value asNumber ].
 	node
 		attributeAt: 'cy'
-		ifPresent: [ cy := (node attributeAt: 'cy') asNumber ].
+		ifPresent: [ :value | cy := value asNumber ].
 	aBlRadialGradientPaint outerCenter: cx @ cy.
 
 	fx := cx.
 	fy := cy.
 	node
 		attributeAt: 'fx'
-		ifPresent: [ fx := (node attributeAt: 'fx') asNumber ].
+		ifPresent: [ :value | fx := value asNumber ].
 	node
 		attributeAt: 'fy'
-		ifPresent: [ fy := (node attributeAt: 'fy') asNumber ].
+		ifPresent: [ :value | fy := value asNumber ].
 	aBlRadialGradientPaint innerCenter: fx @ fy.
 
 	self gradientFrom: node on: aBlRadialGradientPaint
@@ -494,7 +492,7 @@ BlSvgFactory >> radialGradientRadiusFrom: node [
 	r := 50.
 	node
 		attributeAt: 'r'
-		ifPresent: [ r := (node attributeAt: 'r') asNumber ].
+		ifPresent: [ :value | r := value asNumber ].
 	^ r
 ]
 
@@ -505,14 +503,16 @@ BlSvgFactory >> rectCornerRadiusFrom: node [
 	rx := ry := 0.
 	node
 		attributeAt: 'rx'
-		ifPresent: [ rx := (node attributeAt: 'rx') asNumber ].
+		ifPresent: [ :value | rx := value asNumber ].
 	node
 		attributeAt: 'ry'
-		ifPresent: [ rx := (node attributeAt: 'ry') asNumber ].
+		ifPresent: [ :value | rx := value asNumber ].
 
 	maxRadius := rx max: ry.
-	maxAllowed := ((node attributeAt: 'width') asNumber min:
-		               (node attributeAt: 'height') asNumber) / 2.
+	maxAllowed :=
+		((node attributeAt: 'width') asNumber min:
+			(node attributeAt: 'height') asNumber) / 2.
+
 	^ maxRadius min: maxAllowed
 ]
 
@@ -819,8 +819,8 @@ BlSvgFactory >> useFrom: node [
 BlSvgFactory >> viewBoxFrom: node on: aBlElement [
 
 	| array updateTransformationBlock |
-	node attributeAt: 'viewBox' ifPresent: [
-		array := ((node attributeAt: 'viewBox') substrings: ' ,')
+	node attributeAt: 'viewBox' ifPresent: [ :value |
+		array := (value substrings: ' ,')
 			collect: [ :valueString | valueString asNumber ].
 
 		updateTransformationBlock := [
