@@ -83,7 +83,7 @@ BaselineOfBloc >> baseline: spec [
 					spec repository: 'github://pharo-graphics/Alexandrie:master/src' ].
 			spec
 				package: #'Bloc-Alexandrie' with: [
-					spec requires: #('Alexandrie' 'Bloc' 'Bloc-Text') ];
+					spec requires: #('Alexandrie' 'Bloc' 'Bloc-Text' 'Bloc-Infinite' ) ];
 				package: #'Bloc-Alexandrie-Tests' with: [
 					spec requires: #('Bloc-Alexandrie' 'Bloc-Text-Examples') ];
 				package: #'Bloc-Text-Alexandrie-Examples' with: [
