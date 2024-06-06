@@ -5,7 +5,7 @@ For now, use 'Cairo' as the preferable host for Bloc to display these examples p
 "
 Class {
 	#name : #BlSvgExamples,
-	#superclass : #Object,
+	#superclass : #BlExamplesTest,
 	#category : #'Bloc-SVG-Tests-Examples'
 }
 
