@@ -9,64 +9,40 @@ Class {
 	#category : #'Bloc-SVG-Tests-Examples'
 }
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> circle [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self circleSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> circleSVG [
-
-	^ ' <svg width="450" height="150">
+	^ self newElementConvertedFrom: ' <svg width="450" height="150">
 			<circle cx="75" cy="75" r="50" style="fill: firebrick; stroke: goldenrod; stroke-width: 5; stroke-dasharray: 10,5" />
 			<circle cx="225" cy="75" r="50" style="fill: navy"/>
 			<circle cx="375" cy="75" r="50" style="fill: green; stroke: silver; stroke-width: 5" />
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> curveCubicBezier [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self curveCubicBezierSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> curveCubicBezierSVG [
-
-	^ '<svg width="500" height="400">	
+	^ self newElementConvertedFrom: '<svg width="500" height="400">	
 			<path d="M100,200 C100,100 250,100 250,200 S400,300 400,200" style="fill:none; stroke:red; stroke-width:5"/>
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> curveQuadraticBezier [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self curveQuadraticBezierSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> curveQuadraticBezierSVG [
-
-	^ '<svg width="500" height="400">
+	^ self newElementConvertedFrom: '<svg width="500" height="400">
 			<path d="M100,200 Q175,50 250,200 T400,200" style="fill:none; stroke:red; stroke-width:5"/>
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> defsAndUse [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self defsAndUseSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> defsAndUseSVG [
-
-	^ '<svg width="800" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	^ self newElementConvertedFrom: '<svg width="800" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<defs>
 				<rect id="MyRect" x="00" y="00" height="100" width="200" style="fill: red; stroke: white; stroke-width: 4"/>
 			</defs>
@@ -76,34 +52,22 @@ BlSvgExamples >> defsAndUseSVG [
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> ellipse [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self ellipseSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> ellipseSVG [
-
-	^ '<svg width="670" height="150">
+	^ self newElementConvertedFrom: '<svg width="670" height="150">
 			<ellipse cx="110" cy="75" rx="100" ry="40" style="fill: firebrick; stroke: goldenrod; stroke-width: 5; stroke-dasharray: 9,5" />
 			<ellipse cx="335" cy="75" rx="100" ry="40" style="fill: navy"/>
 			<ellipse cx="560" cy="75" rx="100" ry="40" style="fill: green; stroke: silver; stroke-width: 5" />
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> ellipticalArc [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self ellipticalArcSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> ellipticalArcSVG [
-
-	^ '<svg width="450" height="150" xmlns="http://www.w3.org/2000/svg">
+	^ self newElementConvertedFrom: '<svg width="450" height="150" xmlns="http://www.w3.org/2000/svg">
 			<g style="fill:none; stroke:red; stroke-width:5">
   				<path d="M25 50 a 50 50, 0, 0, 0, 50 50"/>
 				<path d="M100 50 a 50 50, 0, 0, 1, 50 50"/>
@@ -113,17 +77,11 @@ BlSvgExamples >> ellipticalArcSVG [
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> group [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self groupSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> groupSVG [
-
-	^ '<svg width="610" height="210">
+	^ self newElementConvertedFrom: '<svg width="610" height="210">
 			<g style="fill:red; stroke:white; stroke-width: 4">
 				<rect x="10" y="50" height="100" width="200"/>
 				<circle cx="325" cy="100" r="75"/>
@@ -132,33 +90,21 @@ BlSvgExamples >> groupSVG [
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> line [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self lineSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> lineSVG [
-
-	^ '<svg width="420" height="210">
+	^ self newElementConvertedFrom: '<svg width="420" height="210">
   			<line x1="10" y1="10" x2="200" y2="200" style="stroke: red; stroke-width: 2" />
 			<line x1="210" y1="10" x2="400" y2="200" style="stroke: red; stroke-width: 2; stroke-dasharray: 10,10" />
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> linearGradient [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self linearGradientSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> linearGradientSVG [
-
-	^ '<svg width="240" height="200">
+	^ self newElementConvertedFrom: '<svg width="240" height="200">
 			<linearGradient id="MyGradient" x2="100" y2="100">
 				<stop offset="0.0" stop-color="yellow" />
 				<stop offset="1.0" stop-color="red" />
@@ -167,17 +113,17 @@ BlSvgExamples >> linearGradientSVG [
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
-BlSvgExamples >> pathBatman [
+{ #category : #private }
+BlSvgExamples >> newElementConvertedFrom: svgSource [
 
-	<sampleInstance>
-	^ BlSvgConverter convertFromString: self pathBatmanSVG
+	^ BlSvgConverter convertFromString: svgSource
 ]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> pathBatmanSVG [
+{ #category : #examples }
+BlSvgExamples >> pathBatman [
+	<sampleInstance>
 
-	^ '	<svg height="200" width="200">
+	^ self newElementConvertedFrom: '	<svg height="200" width="200">
 			<g transform="translate(-205,-295)">
 				<rect x="205" y="295" width="200" height="200" style="fill: white"/>
 				<path d="M305.378,347.01c48.53,0,87.874,22.104,87.874,49.368c0,27.265-39.344,49.367-87.874,49.367
@@ -195,17 +141,11 @@ BlSvgExamples >> pathBatmanSVG [
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> pathTiger [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self pathTigerSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> pathTigerSVG [
-
-	^ '<svg id="svg2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" version="1.1">
+	^ self newElementConvertedFrom: '<svg id="svg2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" version="1.1">
  <g id="g4" fill="none" transform="matrix(1.7656463,0,0,1.7656463,324.90716,255.00942)">
   <g id="g6" stroke-width="0.17200001" stroke="#000" fill="#FFF">
    <path id="path8" d="m-122.3,84.285s0.1,1.894-0.73,1.875c-0.82-0.019-17.27-48.094-37.8-45.851,0,0,17.78-7.353,38.53,43.976z"/>
@@ -931,17 +871,11 @@ BlSvgExamples >> pathTigerSVG [
 </svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> pathTree [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self pathTreeSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> pathTreeSVG [
-
-	^ '<svg height="600" width="600">
+	^ self newElementConvertedFrom: '<svg height="600" width="600">
 			<g transform="scale(0.3,0.3)" style="stroke:green;fill:lime;stroke-width:10;">
 				<path d="M1000,200 Q950,400 800,500 Q600,600 750,650 T700,850 Q400,1100 600,1100 T500,1400   Q250,1600 450,1600 L850,1600 Q950,1600 950,1700 h95"/>
   				<path d="m 1041.1111,1700 q 0,-100 100,-100 l 400,0 q 200,0 -50,-200 -300,-300 -100,-300 200,0 -100,-250 -200,-150 -50,-200 150,-50 -50,-150 -150,-100 -200,-300"/>
@@ -949,50 +883,32 @@ BlSvgExamples >> pathTreeSVG [
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> polyLine [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self polyLineSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> polyLineSVG [
-
-	^ '<svg width="470" height="220">
+	^ self newElementConvertedFrom: '<svg width="470" height="220">
 			<polyline points="10,210 60,10 110,110 160,10 210,210" style="stroke: red; stroke-width: 4" />
   			<polyline points="260,210 310,10 360,110 410,10 460,210" style="stroke: red; stroke-width: 4; stroke-dasharray: 10,10" />
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> polygon [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self polygonSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> polygonSVG [
-
-	^ '<svg width="600" height="210">
+	^ self newElementConvertedFrom: '<svg width="600" height="210">
  			<polygon points="100,10 40,198 190,78 10,78 160,198" style="fill: firebrick; stroke: goldenrod; stroke-width: 2; stroke-dasharray: 10,10" />
 			<polygon points="300,10 240,198 390,78 210,78 360,198" style="fill: navy"/>
 			<polygon points="500,10 440,198 590,78 410,78 560,198" style="fill: green; stroke: silver; stroke-width: 3" />
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> radialGradient [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self radialGradientSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> radialGradientSVG [
-
-	^ '<svg width="240" height="200">
+	^ self newElementConvertedFrom: '<svg width="240" height="200">
 			<radialGradient id="MyGradient">
 				<stop offset="0.0" stop-color="yellow" />
 				<stop offset="1.0" stop-color="red" />
@@ -1001,34 +917,22 @@ BlSvgExamples >> radialGradientSVG [
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> rectangle [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self rectangleSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> rectangleSVG [
-
-	^ '<svg width="610" height="200">
+	^ self newElementConvertedFrom: '<svg width="610" height="200">
 			<rect x="10" y="50" height="100" width="200" style="fill: firebrick; stroke: goldenrod; stroke-width: 4; stroke-dasharray: 10,10 "/>
 			<rect x="250" y="25" width="150" height="150" style="fill: navy" />
 			<rect x="450" y="25" rx="20" ry="20" width="150" height="150" style="fill: green; stroke: silver; stroke-width: 5" />
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> svg [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self svgSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> svgSVG [
-
-	^ '<svg width="610" height="210">
+	^ self newElementConvertedFrom: '<svg width="610" height="210">
 			<svg style="fill:red; stroke:white; stroke-width: 4">
 				<rect x="10" y="50" height="100" width="200"/>
 				<circle cx="325" cy="100" r="75"/>
@@ -1037,17 +941,11 @@ BlSvgExamples >> svgSVG [
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> symbolAndUse [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self symbolAndUseSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> symbolAndUseSVG [
-
-	^ '<svg width="900" height="300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	^ self newElementConvertedFrom: '<svg width="900" height="300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<symbol id="Batman" transform="translate(-205,-295)">
 				<path d="M305.378,347.01c48.53,0,87.874,22.104,87.874,49.368c0,27.265-39.344,49.367-87.874,49.367
 					c-48.531,0-87.874-22.103-87.874-49.367C217.504,369.114,256.847,347.01,305.378,347.01L305.378,347.01z"/>
@@ -1069,17 +967,11 @@ BlSvgExamples >> symbolAndUseSVG [
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> text [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self textSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> textSVG [
-
-	^ '<svg height="150" width="150">
+	^ self newElementConvertedFrom: '<svg height="150" width="150">
 			<text x="45" y="50" fill="red">
   				I love Bloc
 				<tspan x="50" y="70">and SVG !</tspan>
@@ -1087,17 +979,11 @@ BlSvgExamples >> textSVG [
   		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> transformations [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self transformationsSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> transformationsSVG [
-
-	^ '<svg width="1200" height="550" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	^ self newElementConvertedFrom: '<svg width="1200" height="550" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<defs>			
 				<rect id="MyRectangle" x="20" y="50" height="100" width="200" style="fill: darkorange; stroke: red; stroke-width: 3"/>
 			</defs>
@@ -1121,17 +1007,11 @@ BlSvgExamples >> transformationsSVG [
 		</svg>'
 ]
 
-{ #category : #'svg - converter' }
+{ #category : #examples }
 BlSvgExamples >> useSymbolRect [
-
 	<sampleInstance>
-	^ BlSvgConverter convertFromString: self useSymbolRectSVG
-]
 
-{ #category : #'svg - string' }
-BlSvgExamples >> useSymbolRectSVG [
-
-	^ '<svg width="800" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	^ self newElementConvertedFrom: '<svg width="800" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<symbol id="MyRect">
 				<rect x="00" y="00" height="100" width="200" style="fill: red; stroke: white; stroke-width: 4"/>
 			</symbol>
