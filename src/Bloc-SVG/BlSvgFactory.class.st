@@ -369,6 +369,24 @@ BlSvgFactory >> newElement [
 		yourself
 ]
 
+{ #category : #'instance creation' }
+BlSvgFactory >> newShapeElement [
+	"Answer an element with the default properties for a SVG shape"
+
+	^ self newTransparentElement
+		background: Color black;
+		yourself
+]
+
+{ #category : #'instance creation' }
+BlSvgFactory >> newTransparentElement [
+
+	^ BlElement new
+		beOutskirtsCentered;
+		clipChildren: false;
+		yourself
+]
+
 { #category : #properties }
 BlSvgFactory >> paintFrom: aString on: aBlElement [
 
@@ -429,10 +447,12 @@ BlSvgFactory >> polylineFrom: node [
 
 	| polyline points |
 	points := self pointsFrom: node.
-	polyline := BlElement new.
-	polyline geometry: (BlPolylineGeometry vertices: points).
 
-	self commonPropertiesFrom: node attributes on: polyline.
+	polyline := self newShapeElement
+		geometry: (BlPolylineGeometry vertices: points);
+		yourself.
+
+	self allPropertiesFrom: node attributes on: polyline.
 
 	^ polyline
 ]
