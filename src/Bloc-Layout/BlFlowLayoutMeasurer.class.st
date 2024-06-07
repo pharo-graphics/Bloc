@@ -268,7 +268,7 @@ BlFlowLayoutMeasurer >> maxWidth [
 { #category : #measure }
 BlFlowLayoutMeasurer >> measure: anElement with: anExtentSpec [
 
-	| lastLine contentLength contentBreadth parentLength parentBreadth totalContentWidth totalContentHeight measureAgain |
+	| lastLine contentLength contentBreadth parentLength parentBreadth totalContentWidth totalContentHeight |
 	children removeAll.
 	lines removeAll.
 
@@ -337,20 +337,7 @@ BlFlowLayoutMeasurer >> measure: anElement with: anExtentSpec [
 		totalContentHeight := totalContentHeight + contentLength ].
 
 	anElement measuredExtent:
-		(anExtentSpec sizeFor: totalContentWidth @ totalContentHeight).
-
-	layout lineUniformWidth ifFalse: [ ^ self ].
-	measureAgain := false.
-	lines do: [ :aLine |
-		| lwidth |
-		lwidth := 0.
-		aLine children do: [ :aChild | lwidth := lwidth max: aChild width ].
-		aLine children do: [ :aChild |
-			aChild width: lwidth.
-			aChild element measuredWidth = lwidth ifFalse: [
-				measureAgain := true ].
-			aChild element width: lwidth ] ].
-	measureAgain ifTrue: [ self measure: anElement with: anExtentSpec ]
+		(anExtentSpec sizeFor: totalContentWidth @ totalContentHeight)
 ]
 
 { #category : #calculating }

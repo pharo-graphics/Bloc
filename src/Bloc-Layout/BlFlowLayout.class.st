@@ -7,8 +7,7 @@ Class {
 		'measurer',
 		'orientation',
 		'horizontalAlignment',
-		'verticalAlignment',
-		'lineUniformWidth'
+		'verticalAlignment'
 	],
 	#category : #'Bloc-Layout-Flow'
 }
@@ -40,7 +39,6 @@ BlFlowLayout >> = anObject [
 	self orientation = anObject orientation ifFalse: [ ^ false ].
 	self horizontalAlignment = anObject horizontalAlignment ifFalse: [ ^ false ].
 	self verticalAlignment = anObject verticalAlignment ifFalse: [ ^ false ].
-	self lineUniformWidth = anObject lineUniformWidth ifFalse: [ ^ false ].
 	^ true
 ]
 
@@ -72,6 +70,14 @@ BlFlowLayout >> defaultVerticalAlignment [
 	^ BlElementAlignment start vertical
 ]
 
+{ #category : #comparing }
+BlFlowLayout >> hash [
+
+	^ ((self class hash bitXor: self orientation hash) bitXor:
+		   self horizontalAlignment hash) bitXor:
+		  self verticalAlignment hash
+]
+
 { #category : #accessing }
 BlFlowLayout >> horizontal [
 	orientation := BlLayoutOrientation horizontal.
@@ -94,7 +100,7 @@ BlFlowLayout >> initialize [
 	
 	verticalAlignment := self defaultVerticalAlignment.
 	horizontalAlignment := self defaultHorizontalAlignment.
-	measurer := BlFlowLayoutMeasurer for: self.
+	measurer := self newMeasurer.
 	self orientation: self defaultOrientation
 ]
 
@@ -110,22 +116,16 @@ BlFlowLayout >> layout: anElement in: newBounds context: aBlElementBoundsUpdateC
 	self layoutIgnored: anElement context: aBlElementBoundsUpdateContext
 ]
 
-{ #category : #accessing }
-BlFlowLayout >> lineUniformWidth [
-
-	^ lineUniformWidth ifNil: [ lineUniformWidth := false ]
-]
-
-{ #category : #accessing }
-BlFlowLayout >> lineUniformWidth: aBoolean [
-	" an option that set the same width to all elements of a line "
-	lineUniformWidth := aBoolean
-]
-
 { #category : #measure }
 BlFlowLayout >> measure: anElement with: anExtentSpec [
 	measurer measure: anElement with: anExtentSpec.
 	self measureIgnored: anElement with: anExtentSpec
+]
+
+{ #category : #initialization }
+BlFlowLayout >> newMeasurer [
+
+	^ BlFlowLayoutMeasurer for: self
 ]
 
 { #category : #accessing }
