@@ -39,8 +39,12 @@ BlSvgFactory >> altGlyphDefFrom: node [
 { #category : #'circle & ellipse' }
 BlSvgFactory >> circleFrom: node [
 
-	node attributeAt: 'rx' put: (node attributeAt: 'r').
-	node attributeAt: 'ry' put: (node attributeAt: 'r').
+	| radius |
+	radius := node attributeAt: 'r'.
+	node
+		attributeAt: 'rx' put: radius;
+		attributeAt: 'ry' put: radius.
+
 	^ self ellipseFrom: node
 ]
 
@@ -53,9 +57,6 @@ BlSvgFactory >> clipPathFrom: node [
 
 { #category : #properties }
 BlSvgFactory >> commonPropertiesFrom: attributes on: aBlElement [
-
-	aBlElement outskirts: BlOutskirts centered.
-	aBlElement layout: BlSvgGroupLayout new.
 
 	self displayPropertyFrom: attributes on: aBlElement.
 	self idHandlingFrom: attributes on: aBlElement
@@ -102,9 +103,9 @@ BlSvgFactory >> displayPropertyFrom: attributes on: aBlElement [
 BlSvgFactory >> ellipseFrom: node [
 
 	| ellipse |
-	ellipse := self newElement.
+	ellipse := self newShapeElement.
 	ellipse geometry: BlEllipseGeometry new.
-	ellipse extent:
+	ellipse size:
 		((node attributeAt: 'rx') asNumber * 2) @
 		((node attributeAt: 'ry') asNumber * 2).
 	ellipse position: (self ellipsePositionFrom: node).
@@ -178,30 +179,14 @@ BlSvgFactory >> filterFrom: node [
 BlSvgFactory >> gFrom: node [
 
 	| groupElement |
-	groupElement := BlElement new.
-	groupElement clipChildren: false.
+	groupElement := self newTransparentElement.
 
 	self commonPropertiesFrom: node attributes on: groupElement.
 
 	node nodesDo: [ :child |
-		child translatedBy: self withParent: groupElement ].
+		child readElementBy: self withParent: groupElement ].
 
 	^ groupElement
-]
-
-{ #category : #translating }
-BlSvgFactory >> generateElementFrom: node [
-
-	| symbol |
-	node
-		splitStyleAttribute;
-		inheriteAttributes.
-
-	symbol := (node name asString , 'From:') asSymbol.
-
-	(self respondsTo: symbol)
-		ifTrue: [ ^ self perform: symbol with: node ]
-		ifFalse: [ ^ self metadataFrom: node ]
 ]
 
 { #category : #'gradients & patterns' }
@@ -211,7 +196,7 @@ BlSvgFactory >> gradientFrom: node on: aBlGradientPaint [
 	stopCollection := OrderedCollection new.
 	node nodesDo: [ :child |
 		| keyAndValue |
-		keyAndValue := child translatedBy: self withParent: aBlGradientPaint.
+		keyAndValue := child readElementBy: self withParent: aBlGradientPaint.
 		keyAndValue ifNotNil: [ stopCollection add: keyAndValue ] ].
 	aBlGradientPaint stops: stopCollection.
 
@@ -219,11 +204,11 @@ BlSvgFactory >> gradientFrom: node on: aBlGradientPaint [
 ]
 
 { #category : #properties }
-BlSvgFactory >> idHandlingFrom: attributes on: anObject [
+BlSvgFactory >> idHandlingFrom: attributes on: aBlElement [
 
 	attributes
 		at: 'id'
-		ifPresent: [ :id | definitions at: id put: anObject ]
+		ifPresent: [ :id | definitions at: id put: aBlElement ]
 ]
 
 { #category : #image }
@@ -258,7 +243,7 @@ BlSvgFactory >> lineEndingPointFrom: node [
 BlSvgFactory >> lineFrom: node [
 
 	| line |
-	line := BlElement new.
+	line := self newShapeElement.
 	line geometry:
 		(BlLineGeometry
 			from: (self lineStartingPointFrom: node)
@@ -360,16 +345,6 @@ BlSvgFactory >> metadataFrom: attributes [
 ]
 
 { #category : #'instance creation' }
-BlSvgFactory >> newElement [
-	"Answer an element with the default visual SVG properties"
-
-	^ BlElement new
-		background: Color black;
-		outskirts: BlOutskirts centered;
-		yourself
-]
-
-{ #category : #'instance creation' }
 BlSvgFactory >> newShapeElement [
 	"Answer an element with the default properties for a SVG shape"
 
@@ -402,11 +377,8 @@ BlSvgFactory >> pathFrom: node [
 
 	| pathString pathElement |
 	pathString := node attributeAt: 'd'.
-	pathElement := BlElement new
+	pathElement := self newShapeElement
 		geometry: (BlSvgPath pathString: pathString);
-		beOutskirtsCentered;
-		background: Color black;
-		border: (BlBorder paint: Color gray width: 2);
 		yourself.
 
 	self allPropertiesFrom: node attributes on: pathElement.
@@ -434,7 +406,7 @@ BlSvgFactory >> pointsFrom: node [
 BlSvgFactory >> polygonFrom: node [
 
 	| polygon |
-	polygon := self newElement.
+	polygon := self newShapeElement.
 	polygon geometry: (BlPolygonGeometry vertices: (self pointsFrom: node)).
 
 	self allPropertiesFrom: node attributes on: polygon.
@@ -477,13 +449,13 @@ BlSvgFactory >> radialGradientFrom: node [
 	| aBlRadialGradientPaint r cx cy fx fy |
 	aBlRadialGradientPaint := BlRadialGradientPaint new.
 
-	r := 0.0.
+	r := 0.5.
 	node
 		attributeAt: 'r'
 		ifPresent: [ :value | r := value asNumber ].
 	aBlRadialGradientPaint radius: r.
 
-	cx := cy := 50.
+	cx := cy := 0.0.
 	node
 		attributeAt: 'cx'
 		ifPresent: [ :value | cx := value asNumber ].
@@ -516,6 +488,21 @@ BlSvgFactory >> radialGradientRadiusFrom: node [
 	^ r
 ]
 
+{ #category : #translating }
+BlSvgFactory >> readElementFrom: aXMLNode [
+
+	| symbol |
+	aXMLNode
+		splitStyleAttribute;
+		inheritAttributes.
+
+	symbol := (aXMLNode name asString , 'From:') asSymbol.
+
+	^ (self respondsTo: symbol)
+		ifTrue: [ self perform: symbol with: aXMLNode ]
+		ifFalse: [ self metadataFrom: aXMLNode ]
+]
+
 { #category : #rectangle }
 BlSvgFactory >> rectCornerRadiusFrom: node [
 
@@ -540,11 +527,11 @@ BlSvgFactory >> rectCornerRadiusFrom: node [
 BlSvgFactory >> rectFrom: node [
 
 	| rectangle |
-	rectangle := self newElement.
+	rectangle := self newShapeElement.
 	rectangle geometry:
 		(BlRoundedRectangleGeometry cornerRadius:
 			(self rectCornerRadiusFrom: node)).
-	rectangle extent:
+	rectangle size:
 		(node attributeAt: 'width') asNumber @
 		(node attributeAt: 'height') asNumber.
 	self positionFrom: node on: rectangle.
@@ -805,10 +792,12 @@ BlSvgFactory >> tspanFrom: node [
 	self setAttributesForTextFrom: node.
 
 	textElement := BlTextElement new
-		               constraintsDo: [ :c |
-			               c horizontal fitContent.
-			               c vertical fitContent ];
-		               yourself.
+							constraintsDo: [ :c |
+								c horizontal fitContent.
+								c vertical fitContent ];
+							beOutskirtsCentered;
+							clipChildren: false;
+							yourself.
 	self ropedTextFrom: node on: textElement.
 	self positionFrom: node on: textElement.
 
