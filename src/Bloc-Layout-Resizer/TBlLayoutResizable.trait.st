@@ -72,14 +72,17 @@ TBlLayoutResizable >> resizableConstraintsDo: aBlock [
 	Note: After evaluation I request a layout update!
 	aBlock must not be nil.
 	aBlock must accept exactly one argument
-	
-	Can be basically defined with #resizableConstraintsDo: aBlock.
-	
-	Introduced a an explicit requirement to let user
-	implement additional actions when resizing is changed
-	
+	user can implement additional actions by handling the BlLayoutConstraintsChangedEvent
 	"
-	self explicitRequirement 
+
+	| hr vr |
+	hr := self constraints horizontal resizer.
+	vr := self constraints vertical resizer.
+	aBlock value: self constraints.
+	(hr = self constraints horizontal resizer and: [
+		 vr = self constraints vertical resizer ]) ifTrue: [ ^ self ].
+	self dispatchEvent: BlLayoutConstraintsChangedEvent new.
+	self requestLayout
 ]
 
 { #category : #'t  - layout resizeable' }
