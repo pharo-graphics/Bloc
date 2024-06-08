@@ -39,8 +39,12 @@ BlSvgFactory >> altGlyphDefFrom: node [
 { #category : #'circle & ellipse' }
 BlSvgFactory >> circleFrom: node [
 
-	node attributeAt: 'rx' put: (node attributeAt: 'r').
-	node attributeAt: 'ry' put: (node attributeAt: 'r').
+	| radius |
+	radius := node attributeAt: 'r'.
+	node
+		attributeAt: 'rx' put: radius;
+		attributeAt: 'ry' put: radius.
+
 	^ self ellipseFrom: node
 ]
 
@@ -54,16 +58,8 @@ BlSvgFactory >> clipPathFrom: node [
 { #category : #properties }
 BlSvgFactory >> commonPropertiesFrom: attributes on: aBlElement [
 
-	aBlElement outskirts: BlOutskirts centered.
-	aBlElement layout: BlSvgGroupLayout new.
-
-	attributes
-		at: 'display'
-		ifPresent: [ self displayPropertyFrom: attributes on: aBlElement ].
-
-	attributes at: 'id' ifPresent: [ 
-self flag: #todo. "		aBlElement svgName: (attributes at: 'id')."
-		self idHandlingFrom: attributes on: aBlElement ]
+	self displayPropertyFrom: attributes on: aBlElement.
+	self idHandlingFrom: attributes on: aBlElement
 ]
 
 { #category : #definitions }
@@ -96,17 +92,20 @@ BlSvgFactory >> descFrom: attributes [
 { #category : #properties }
 BlSvgFactory >> displayPropertyFrom: attributes on: aBlElement [
 
-	(attributes at: 'display') = 'none' ifTrue: [
-		aBlElement visibility: BlVisibilityGone new ]
+	attributes
+		at: 'display'
+		ifPresent: [ :display |
+			display = 'none' ifTrue: [
+				aBlElement visibility: BlVisibility gone ]]
 ]
 
 { #category : #'circle & ellipse' }
 BlSvgFactory >> ellipseFrom: node [
 
 	| ellipse |
-	ellipse := self newElement.
+	ellipse := self newShapeElement.
 	ellipse geometry: BlEllipseGeometry new.
-	ellipse extent:
+	ellipse size:
 		((node attributeAt: 'rx') asNumber * 2) @
 		((node attributeAt: 'ry') asNumber * 2).
 	ellipse position: (self ellipsePositionFrom: node).
@@ -123,10 +122,10 @@ BlSvgFactory >> ellipsePositionFrom: node [
 	cx := cy := 0.
 	node
 		attributeAt: 'cx'
-		ifPresent: [ cx := (node attributeAt: 'cx') asNumber ].
+		ifPresent: [ :value | cx := value asNumber ].
 	node
 		attributeAt: 'cy'
-		ifPresent: [ cy := (node attributeAt: 'cy') asNumber ].
+		ifPresent: [ :value | cy := value asNumber ].
 
 	^ Point
 		x: (cx - (node attributeAt: 'rx') asNumber)
@@ -138,9 +137,7 @@ BlSvgFactory >> extentFrom: node on: aBlElement [
 
 	node
 		attributeAt: 'width'
-		ifPresent: [
-			| width |
-			width := node attributeAt: 'width'.
+		ifPresent: [ :width |
 			width trim last = $% ifTrue: [ self notYetImplemented ].
 			aBlElement constraints horizontal exact: width asNumber ]
 		ifAbsent: [
@@ -148,9 +145,7 @@ BlSvgFactory >> extentFrom: node on: aBlElement [
 
 	node
 		attributeAt: 'height'
-		ifPresent: [
-			| height |
-			height := node attributeAt: 'height'.
+		ifPresent: [ :height |
 			height trim last = $% ifTrue: [ self notYetImplemented ].
 			aBlElement constraints vertical exact: height asNumber ]
 		ifAbsent: [
@@ -161,14 +156,14 @@ BlSvgFactory >> extentFrom: node on: aBlElement [
 BlSvgFactory >> fillPropertiesFrom: attributes on: aBlElement [
 
 	| backgroundBuilder |
-	attributes at: 'fill' ifPresent: [ 
+	attributes at: 'fill' ifPresent: [ :fill |
 		backgroundBuilder := BlPaintBackgroundBuilder new.
 		backgroundBuilder paint:
-			(self paintFrom: (attributes at: 'fill') on: aBlElement).
+			(self paintFrom: fill on: aBlElement).
 		attributes
 			at: 'fill-opacity'
-			ifPresent: [ 
-			backgroundBuilder opacity: (attributes at: 'fill-opacity') asNumber ].
+			ifPresent: [ :fillOpacity |
+				backgroundBuilder opacity: fillOpacity asNumber ].
 
 		aBlElement background: backgroundBuilder build ]
 ]
@@ -184,30 +179,14 @@ BlSvgFactory >> filterFrom: node [
 BlSvgFactory >> gFrom: node [
 
 	| groupElement |
-	groupElement := BlElement new.
-	groupElement clipChildren: false.
+	groupElement := self newTransparentElement.
 
 	self commonPropertiesFrom: node attributes on: groupElement.
 
 	node nodesDo: [ :child |
-		child translatedBy: self withParent: groupElement ].
+		child readElementBy: self withParent: groupElement ].
 
 	^ groupElement
-]
-
-{ #category : #translating }
-BlSvgFactory >> generateElementFrom: node [
-
-	| symbol |
-	node
-		splitStyleAttribute;
-		inheriteAttributes.
-
-	symbol := (node name asString , 'From:') asSymbol.
-
-	(self respondsTo: symbol)
-		ifTrue: [ ^ self perform: symbol with: node ]
-		ifFalse: [ ^ self metadataFrom: node ]
 ]
 
 { #category : #'gradients & patterns' }
@@ -217,7 +196,7 @@ BlSvgFactory >> gradientFrom: node on: aBlGradientPaint [
 	stopCollection := OrderedCollection new.
 	node nodesDo: [ :child |
 		| keyAndValue |
-		keyAndValue := child translatedBy: self withParent: aBlGradientPaint.
+		keyAndValue := child readElementBy: self withParent: aBlGradientPaint.
 		keyAndValue ifNotNil: [ stopCollection add: keyAndValue ] ].
 	aBlGradientPaint stops: stopCollection.
 
@@ -225,9 +204,11 @@ BlSvgFactory >> gradientFrom: node on: aBlGradientPaint [
 ]
 
 { #category : #properties }
-BlSvgFactory >> idHandlingFrom: attributes on: anObject [
+BlSvgFactory >> idHandlingFrom: attributes on: aBlElement [
 
-	self definitions at: (attributes at: 'id') put: anObject
+	attributes
+		at: 'id'
+		ifPresent: [ :id | definitions at: id put: aBlElement ]
 ]
 
 { #category : #image }
@@ -236,9 +217,10 @@ BlSvgFactory >> imageFrom: node [
 	| imageElement |
 	imageElement := self rectFrom: node.
 
-	node attributeAt: 'xlink:href' ifPresent: [
-		imageElement background: (BlImagePatternPaint form:
-				 (Form fromFileNamed: (node attributeAt: 'xlink:href'))) ].
+	node attributeAt: 'xlink:href' ifPresent: [ :value |
+		imageElement background:
+			(BlImagePatternPaint form:
+				(Form fromFileNamed: value)) ].
 
 	^ imageElement
 ]
@@ -250,10 +232,10 @@ BlSvgFactory >> lineEndingPointFrom: node [
 	x2 := y2 := 0.
 	node
 		attributeAt: 'x2'
-		ifPresent: [ x2 := (node attributeAt: 'x2') asNumber ].
+		ifPresent: [ :value | x2 := value asNumber ].
 	node
 		attributeAt: 'y2'
-		ifPresent: [ y2 := (node attributeAt: 'y2') asNumber ].
+		ifPresent: [ :value | y2 := value asNumber ].
 	^ x2 @ y2
 ]
 
@@ -261,7 +243,7 @@ BlSvgFactory >> lineEndingPointFrom: node [
 BlSvgFactory >> lineFrom: node [
 
 	| line |
-	line := BlElement new.
+	line := self newShapeElement.
 	line geometry:
 		(BlLineGeometry
 			from: (self lineStartingPointFrom: node)
@@ -279,10 +261,10 @@ BlSvgFactory >> lineStartingPointFrom: node [
 	x1 := y1 := 0.
 	node
 		attributeAt: 'x1'
-		ifPresent: [ x1 := (node attributeAt: 'x1') asNumber ].
+		ifPresent: [ :value | x1 := value asNumber ].
 	node
 		attributeAt: 'y1'
-		ifPresent: [ y1 := (node attributeAt: 'y1') asNumber ].
+		ifPresent: [ :value | y1 := value asNumber ].
 	^ x1 @ y1
 ]
 
@@ -294,10 +276,10 @@ BlSvgFactory >> linearGradientEndingPointFrom: node [
 	y2 := 0.
 	node
 		attributeAt: 'x2'
-		ifPresent: [ x2 := (node attributeAt: 'x2') asNumber ].
+		ifPresent: [ :value | x2 := value asNumber ].
 	node
 		attributeAt: 'y2'
-		ifPresent: [ y2 := (node attributeAt: 'y2') asNumber ].
+		ifPresent: [ :value | y2 := value asNumber ].
 	^ x2 @ y2
 ]
 
@@ -320,10 +302,10 @@ BlSvgFactory >> linearGradientStartingPointFrom: node [
 	x1 := y1 := 0.
 	node
 		attributeAt: 'x1'
-		ifPresent: [ x1 := (node attributeAt: 'x1') asNumber ].
+		ifPresent: [ :value | x1 := value asNumber ].
 	node
 		attributeAt: 'y1'
-		ifPresent: [ y1 := (node attributeAt: 'y1') asNumber ].
+		ifPresent: [ :value | y1 := value asNumber ].
 	^ x1 @ y1
 ]
 
@@ -363,19 +345,27 @@ BlSvgFactory >> metadataFrom: attributes [
 ]
 
 { #category : #'instance creation' }
-BlSvgFactory >> newElement [
-	"Answer an element with the default visual SVG properties"
+BlSvgFactory >> newShapeElement [
+	"Answer an element with the default properties for a SVG shape"
+
+	^ self newTransparentElement
+		background: Color black;
+		yourself
+]
+
+{ #category : #'instance creation' }
+BlSvgFactory >> newTransparentElement [
 
 	^ BlElement new
-		background: Color black;
-		outskirts: BlOutskirts centered;
+		beOutskirtsCentered;
+		clipChildren: false;
 		yourself
 ]
 
 { #category : #properties }
 BlSvgFactory >> paintFrom: aString on: aBlElement [
 
-	^ (self definitions
+	^ (definitions
 		at: ((aString withoutPrefix: 'url(#') withoutSuffix: ')')
 		ifPresent: [ :aBlPaint | aBlPaint veryDeepCopy ]
 		ifAbsent: [ BlColorPaint color: (BlSvgColor fromString: aString) ])
@@ -387,11 +377,8 @@ BlSvgFactory >> pathFrom: node [
 
 	| pathString pathElement |
 	pathString := node attributeAt: 'd'.
-	pathElement := BlElement new
+	pathElement := self newShapeElement
 		geometry: (BlSvgPath pathString: pathString);
-		beOutskirtsCentered;
-		background: Color black;
-		border: (BlBorder paint: Color gray width: 2);
 		yourself.
 
 	self allPropertiesFrom: node attributes on: pathElement.
@@ -409,16 +396,17 @@ BlSvgFactory >> patternFrom: node [
 { #category : #'polyline & polygon' }
 BlSvgFactory >> pointsFrom: node [
 
-	node attributeAt: 'points' ifPresent: [
-		^ ((node attributeAt: 'points') substrings: ' ') collect: [ :xAndY |
-			  (xAndY copyUpTo: $,) asNumber @ (xAndY copyAfter: $,) asNumber ] ]
+	node attributeAt: 'points' ifPresent: [ :value |
+		^ (value substrings: ' ') collect: [ :xAndY |
+			(xAndY copyUpTo: $,) asNumber @
+			(xAndY copyAfter: $,) asNumber ] ]
 ]
 
 { #category : #'polyline & polygon' }
 BlSvgFactory >> polygonFrom: node [
 
 	| polygon |
-	polygon := self newElement.
+	polygon := self newShapeElement.
 	polygon geometry: (BlPolygonGeometry vertices: (self pointsFrom: node)).
 
 	self allPropertiesFrom: node attributes on: polygon.
@@ -431,10 +419,12 @@ BlSvgFactory >> polylineFrom: node [
 
 	| polyline points |
 	points := self pointsFrom: node.
-	polyline := BlElement new.
-	polyline geometry: (BlPolylineGeometry vertices: points).
 
-	self commonPropertiesFrom: node attributes on: polyline.
+	polyline := self newShapeElement
+		geometry: (BlPolylineGeometry vertices: points);
+		yourself.
+
+	self allPropertiesFrom: node attributes on: polyline.
 
 	^ polyline
 ]
@@ -446,10 +436,10 @@ BlSvgFactory >> positionFrom: node on: aBlElement [
 	x := y := 0.
 	node
 		attributeAt: 'x'
-		ifPresent: [ x := (node attributeAt: 'x') asNumber ].
+		ifPresent: [ :value | x := value asNumber ].
 	node
 		attributeAt: 'y'
-		ifPresent: [ y := (node attributeAt: 'y') asNumber ].
+		ifPresent: [ :value | y := value asNumber ].
 	aBlElement position: x @ y
 ]
 
@@ -459,29 +449,29 @@ BlSvgFactory >> radialGradientFrom: node [
 	| aBlRadialGradientPaint r cx cy fx fy |
 	aBlRadialGradientPaint := BlRadialGradientPaint new.
 
-	r := 0.0.
+	r := 0.5.
 	node
 		attributeAt: 'r'
-		ifPresent: [ r := (node attributeAt: 'r') asNumber ].
+		ifPresent: [ :value | r := value asNumber ].
 	aBlRadialGradientPaint radius: r.
 
-	cx := cy := 50.
+	cx := cy := 0.0.
 	node
 		attributeAt: 'cx'
-		ifPresent: [ cx := (node attributeAt: 'cx') asNumber ].
+		ifPresent: [ :value | cx := value asNumber ].
 	node
 		attributeAt: 'cy'
-		ifPresent: [ cy := (node attributeAt: 'cy') asNumber ].
+		ifPresent: [ :value | cy := value asNumber ].
 	aBlRadialGradientPaint outerCenter: cx @ cy.
 
 	fx := cx.
 	fy := cy.
 	node
 		attributeAt: 'fx'
-		ifPresent: [ fx := (node attributeAt: 'fx') asNumber ].
+		ifPresent: [ :value | fx := value asNumber ].
 	node
 		attributeAt: 'fy'
-		ifPresent: [ fy := (node attributeAt: 'fy') asNumber ].
+		ifPresent: [ :value | fy := value asNumber ].
 	aBlRadialGradientPaint innerCenter: fx @ fy.
 
 	self gradientFrom: node on: aBlRadialGradientPaint
@@ -494,8 +484,23 @@ BlSvgFactory >> radialGradientRadiusFrom: node [
 	r := 50.
 	node
 		attributeAt: 'r'
-		ifPresent: [ r := (node attributeAt: 'r') asNumber ].
+		ifPresent: [ :value | r := value asNumber ].
 	^ r
+]
+
+{ #category : #translating }
+BlSvgFactory >> readElementFrom: aXMLNode [
+
+	| symbol |
+	aXMLNode
+		splitStyleAttribute;
+		inheritAttributes.
+
+	symbol := (aXMLNode name asString , 'From:') asSymbol.
+
+	^ (self respondsTo: symbol)
+		ifTrue: [ self perform: symbol with: aXMLNode ]
+		ifFalse: [ self metadataFrom: aXMLNode ]
 ]
 
 { #category : #rectangle }
@@ -505,14 +510,16 @@ BlSvgFactory >> rectCornerRadiusFrom: node [
 	rx := ry := 0.
 	node
 		attributeAt: 'rx'
-		ifPresent: [ rx := (node attributeAt: 'rx') asNumber ].
+		ifPresent: [ :value | rx := value asNumber ].
 	node
 		attributeAt: 'ry'
-		ifPresent: [ rx := (node attributeAt: 'ry') asNumber ].
+		ifPresent: [ :value | rx := value asNumber ].
 
 	maxRadius := rx max: ry.
-	maxAllowed := ((node attributeAt: 'width') asNumber min:
-		               (node attributeAt: 'height') asNumber) / 2.
+	maxAllowed :=
+		((node attributeAt: 'width') asNumber min:
+			(node attributeAt: 'height') asNumber) / 2.
+
 	^ maxRadius min: maxAllowed
 ]
 
@@ -520,11 +527,11 @@ BlSvgFactory >> rectCornerRadiusFrom: node [
 BlSvgFactory >> rectFrom: node [
 
 	| rectangle |
-	rectangle := self newElement.
+	rectangle := self newShapeElement.
 	rectangle geometry:
 		(BlRoundedRectangleGeometry cornerRadius:
 			(self rectCornerRadiusFrom: node)).
-	rectangle extent:
+	rectangle size:
 		(node attributeAt: 'width') asNumber @
 		(node attributeAt: 'height') asNumber.
 	self positionFrom: node on: rectangle.
@@ -541,8 +548,9 @@ BlSvgFactory >> renderingPropertiesFrom: attributes on: aBlElement [
 
 	attributes
 		at: 'opacity'
-		ifPresent: [
-			aBlElement opacity: (attributes at: 'opacity') asNumber ].
+		ifPresent: [ :opacity |
+			aBlElement opacity: opacity asNumber ].
+
 	self fillPropertiesFrom: attributes on: aBlElement.
 	self strokePropertiesFrom: attributes on: aBlElement
 ]
@@ -561,16 +569,22 @@ BlSvgFactory >> ropedTextFrom: node on: textElement [
 	text := BlRopedText string: node nodes first string trimBoth.
 
 	textAttributes := OrderedCollection new.
-	node attributes at: 'font-family' ifPresent: [
-		textAttributes add:
-			(BlFontFamilyAttribute named: (node attributeAt: 'font-family')) ].
-	node attributes at: 'font-size' ifPresent: [
-		textAttributes add:
-			(BlFontSizeAttribute size: (node attributeAt: 'font-size') asNumber) ].
-	node attributes at: 'font-color' ifPresent: [
-		textAttributes add: (BlTextForegroundAttribute paint:
-				 (self paintFrom: (node attributeAt: 'font-color') on: textElement)
-					 color) ].
+	node attributes
+		at: 'font-family'
+		ifPresent: [ :value |
+			textAttributes add:
+				(BlFontFamilyAttribute named: value) ].
+	node attributes
+		at: 'font-size'
+		ifPresent: [ :value |
+			textAttributes add:
+				(BlFontSizeAttribute size: value asNumber) ].
+	node attributes
+		at: 'font-color'
+		ifPresent: [ :value |
+			textAttributes add:
+				(BlTextForegroundAttribute paint:
+					(self paintFrom: value on: textElement) color) ].
 	text attributes: textAttributes.
 
 	textElement text: text
@@ -610,11 +624,11 @@ BlSvgFactory >> setAttributesForTextFrom: node [
 	"In svg the fill attribute from the text element commands the text color, not the background color.
 	That's why Bloc should treat this attribute the same way it does the stroke attribute from the other svg elements."
 
-	node attributes at: 'fill' ifPresent: [
-		node attributeAt: 'font-color' put: (node attributeAt: 'fill').
+	node attributes at: 'fill' ifPresent: [ :fill |
+		node attributeAt: 'font-color' put: fill.
 		node removeAttribute: 'fill' ].
-	node attributes at: 'fill-opacity' ifPresent: [
-		node attributeAt: 'opacity' put: (node attributeAt: 'fill-opacity').
+	node attributes at: 'fill-opacity' ifPresent: [ :fillOpacity |
+		node attributeAt: 'opacity' put: fillOpacity.
 		node removeAttribute: 'fill-opacity' ]
 ]
 
@@ -656,40 +670,48 @@ BlSvgFactory >> stopFrom: node [
 { #category : #properties }
 BlSvgFactory >> strokePropertiesFrom: attributes on: aBlElement [
 
-	| borderBuilder dashArray |
-	attributes at: 'stroke' ifPresent: [
+	attributes at: 'stroke' ifPresent: [ :stroke |
+		| borderBuilder |
 		borderBuilder := BlBorderBuilder new.
-		borderBuilder paint:
-			(self paintFrom: (attributes at: 'stroke') on: aBlElement).
+		borderBuilder paint: (self paintFrom: stroke on: aBlElement).
 		attributes
 			at: 'stroke-width'
-			ifPresent: [
-			borderBuilder width: (attributes at: 'stroke-width') asNumber ].
+			ifPresent: [ :strokeWidth |
+				borderBuilder width: strokeWidth asNumber ].
 		attributes
 			at: 'stroke-opacity'
-			ifPresent: [
-			borderBuilder opacity: (attributes at: 'stroke-opacity') asNumber ].
+			ifPresent: [ :strokeOpacity |
+				borderBuilder opacity: strokeOpacity asNumber ].
 
-		attributes at: 'stroke-linecap' ifPresent: [
-			borderBuilder lineCap:
-				(BlStrokeLineCap perform:
-					 (attributes at: 'stroke-linecap') asSymbol) ].
-		attributes at: 'stroke-linejoin' ifPresent: [
-			borderBuilder lineJoin:
-				(BlStrokeLineJoin perform:
-					 (attributes at: 'stroke-linejoin') asSymbol) ].
-		attributes at: 'stroke-miterlimit' ifPresent: [
-			borderBuilder miterLimit:
-				(attributes at: 'stroke-miterlimit') asNumber ].
+		attributes
+			at: 'stroke-linecap'
+			ifPresent: [ :lineCap |
+				borderBuilder lineCap:
+					(BlStrokeLineCap perform: lineCap asSymbol) ].
+		attributes
+			at: 'stroke-linejoin'
+			ifPresent: [ :lineJoin |
+				borderBuilder lineJoin:
+					(BlStrokeLineJoin perform: lineJoin asSymbol) ].
+		attributes
+			at: 'stroke-miterlimit'
+			ifPresent: [ :miterLimit |
+				borderBuilder miterLimit: miterLimit asNumber ].
 
-		attributes at: 'stroke-dasharray' ifPresent: [
-			dashArray := ((attributes at: 'stroke-dasharray') substrings: {
-					              Character space.
-					              $, }) collect: [ :value | value asNumber ].
-			borderBuilder dashArray: dashArray ].
-		attributes at: 'stroke-dashoffset' ifPresent: [
-			borderBuilder dashOffset:
-				(attributes at: 'stroke-dashoffset') asNumber ].
+		attributes
+			at: 'stroke-dasharray'
+			ifPresent: [ :dashes |
+				| dashArray |
+				dashArray :=
+					(dashes substrings: {
+						Character space.
+						$, }) collect: [ :each | each asNumber ].
+				borderBuilder dashArray: dashArray ].
+
+		attributes
+			at: 'stroke-dashoffset'
+			ifPresent: [ :offset |
+				borderBuilder dashOffset: offset asNumber ].
 
 		aBlElement border: borderBuilder build ]
 ]
@@ -735,13 +757,10 @@ BlSvgFactory >> titleFrom: attributes [
 BlSvgFactory >> transformPropertiesFrom: attributes on: aBlElement [
 
 	| transformations |
-	attributes
+	transformations := attributes
 		at: 'transform'
-		ifPresent: [
-		transformations := (attributes at: 'transform') substrings: ' ' ].
-	transformations ifNil: [ ^ self ].
-
-	transformations do: [ :transformation |
+		ifAbsent: [ ^ self ].
+	(transformations substrings: ' ') do: [ :transformation |
 		| sel args symbol |
 		sel := nil.
 		args := OrderedCollection new.
@@ -750,7 +769,7 @@ BlSvgFactory >> transformPropertiesFrom: attributes on: aBlElement [
 				ifNil: [ sel := string ]
 				ifNotNil: [ args add: string asNumber ] ].
 
-		symbol := (sel , 'Element:with:') asSymbol.
+		symbol := (sel, 'Element:with:') asSymbol.
 		(self respondsTo: symbol) ifTrue: [
 			self perform: symbol with: aBlElement with: args ] ]
 ]
@@ -773,10 +792,12 @@ BlSvgFactory >> tspanFrom: node [
 	self setAttributesForTextFrom: node.
 
 	textElement := BlTextElement new
-		               constraintsDo: [ :c |
-			               c horizontal fitContent.
-			               c vertical fitContent ];
-		               yourself.
+							constraintsDo: [ :c |
+								c horizontal fitContent.
+								c vertical fitContent ];
+							beOutskirtsCentered;
+							clipChildren: false;
+							yourself.
 	self ropedTextFrom: node on: textElement.
 	self positionFrom: node on: textElement.
 
@@ -788,9 +809,12 @@ BlSvgFactory >> tspanFrom: node [
 { #category : #definitions }
 BlSvgFactory >> useFrom: node [
 
-	| element |
-	element := (self definitions
-		at: ((node attributeAt: 'xlink:href') withoutPrefix: '#')) veryDeepCopy.
+	| key element |
+	"xlink:href is deprecated in the SVG 2 spec
+	(https://svgwg.org/svg2-draft/struct.html#UseElement)"
+	key := node attributeAt: 'href' ifAbsent: [
+		node attributeAt: 'xlink:href' ].
+	element := (definitions at: (key withoutPrefix: '#')) veryDeepCopy.
 	element parent: nil.
 
 	self positionFrom: node on: element.
@@ -804,8 +828,8 @@ BlSvgFactory >> useFrom: node [
 BlSvgFactory >> viewBoxFrom: node on: aBlElement [
 
 	| array updateTransformationBlock |
-	node attributeAt: 'viewBox' ifPresent: [
-		array := ((node attributeAt: 'viewBox') substrings: ' ,')
+	node attributeAt: 'viewBox' ifPresent: [ :value |
+		array := (value substrings: ' ,')
 			collect: [ :valueString | valueString asNumber ].
 
 		updateTransformationBlock := [
