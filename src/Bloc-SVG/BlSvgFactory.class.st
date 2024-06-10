@@ -29,13 +29,6 @@ BlSvgFactory >> allPropertiesFrom: attributes on: aBlElement [
 	self commonPropertiesFrom: attributes on: aBlElement
 ]
 
-{ #category : #definitions }
-BlSvgFactory >> altGlyphDefFrom: node [
-
-	self flag: #todo.
-	self notYetImplemented
-]
-
 { #category : #'circle & ellipse' }
 BlSvgFactory >> circleFrom: node [
 
@@ -48,25 +41,11 @@ BlSvgFactory >> circleFrom: node [
 	^ self ellipseFrom: node
 ]
 
-{ #category : #definitions }
-BlSvgFactory >> clipPathFrom: node [
-
-	self flag: #todo.
-	self notYetImplemented
-]
-
 { #category : #properties }
 BlSvgFactory >> commonPropertiesFrom: attributes on: aBlElement [
 
 	self displayPropertyFrom: attributes on: aBlElement.
 	self idHandlingFrom: attributes on: aBlElement
-]
-
-{ #category : #definitions }
-BlSvgFactory >> cursorFrom: node [
-
-	self flag: #todo.
-	self notYetImplemented
 ]
 
 { #category : #definitions }
@@ -80,13 +59,6 @@ BlSvgFactory >> defsFrom: node [
 	"Behaves like a 'g' but won't be added to any parent because always contains references, see 'XMLElement >> translatedBy:withParent:' "
 
 	^ self gFrom: node
-]
-
-{ #category : #metadata }
-BlSvgFactory >> descFrom: attributes [
-
-	self flag: #todo.
-	self notYetImplemented
 ]
 
 { #category : #properties }
@@ -166,13 +138,6 @@ BlSvgFactory >> fillPropertiesFrom: attributes on: aBlElement [
 				backgroundBuilder opacity: fillOpacity asNumber ].
 
 		aBlElement background: backgroundBuilder build ]
-]
-
-{ #category : #definitions }
-BlSvgFactory >> filterFrom: node [
-
-	self flag: #todo.
-	self notYetImplemented
 ]
 
 { #category : #groups }
@@ -309,20 +274,6 @@ BlSvgFactory >> linearGradientStartingPointFrom: node [
 	^ x1 @ y1
 ]
 
-{ #category : #definitions }
-BlSvgFactory >> markerFrom: node [
-
-	self flag: #todo.
-	self notYetImplemented
-]
-
-{ #category : #definitions }
-BlSvgFactory >> maskFrom: node [
-
-	self flag: #todo.
-	self notYetImplemented
-]
-
 { #category : #transformations }
 BlSvgFactory >> matrixElement: aBlElement with: anOrderedCollection [
 
@@ -335,13 +286,6 @@ BlSvgFactory >> matrixElement: aBlElement with: anOrderedCollection [
 				sy: (anOrderedCollection at: 4);
 				shx: (anOrderedCollection at: 3);
 				shy: (anOrderedCollection at: 2)) ]
-]
-
-{ #category : #metadata }
-BlSvgFactory >> metadataFrom: attributes [
-
-	self flag: #todo.
-	self notYetImplemented
 ]
 
 { #category : #'instance creation' }
@@ -384,13 +328,6 @@ BlSvgFactory >> pathFrom: node [
 	self allPropertiesFrom: node attributes on: pathElement.
 
 	^ pathElement
-]
-
-{ #category : #'gradients & patterns' }
-BlSvgFactory >> patternFrom: node [
-
-	self flag: #todo.
-	self notYetImplemented
 ]
 
 { #category : #'polyline & polygon' }
@@ -744,13 +681,6 @@ BlSvgFactory >> textFrom: node [
 	textElement addChild: (self tspanFrom: node).
 
 	^ textElement
-]
-
-{ #category : #metadata }
-BlSvgFactory >> titleFrom: attributes [
-
-	self flag: #todo.
-	self notYetImplemented
 ]
 
 { #category : #properties }
