@@ -435,9 +435,7 @@ BlSvgFactory >> readElementFrom: aXMLNode [
 
 	symbol := (aXMLNode name asString , 'From:') asSymbol.
 
-	^ (self respondsTo: symbol)
-		ifTrue: [ self perform: symbol with: aXMLNode ]
-		ifFalse: [ self metadataFrom: aXMLNode ]
+	^ self perform: symbol with: aXMLNode
 ]
 
 { #category : #rectangle }
