@@ -107,13 +107,13 @@ BlInfiniteHolder >> isBound [
 ]
 
 { #category : #'private - flags testing' }
-BlInfiniteHolder >> isChanged [
-	^ self flags hasUpdate
+BlInfiniteHolder >> isInvalid [
+	^ self flags hasInvalid
 ]
 
 { #category : #'private - flags testing' }
-BlInfiniteHolder >> isInvalid [
-	^ self flags hasInvalid
+BlInfiniteHolder >> isItemUpdated [
+	^ self flags hasUpdate
 ]
 
 { #category : #'private - flags testing' }
@@ -124,11 +124,6 @@ BlInfiniteHolder >> isRemoved [
 { #category : #'private - flags testing' }
 BlInfiniteHolder >> isTmpDetached [
 	^ self flags hasTmpDetached
-]
-
-{ #category : #'private - flags testing' }
-BlInfiniteHolder >> isUpdated [
-	^ self flags hasUpdate
 ]
 
 { #category : #accessing }
@@ -157,11 +152,6 @@ BlInfiniteHolder >> layoutPosition [
 	^ preLayoutPosition = NoPosition
 		ifTrue: [ position ]
 		ifFalse: [ preLayoutPosition ]
-]
-
-{ #category : #'private - flags testing' }
-BlInfiniteHolder >> needsUpdate [
-	^ self flags hasUpdate
 ]
 
 { #category : #private }

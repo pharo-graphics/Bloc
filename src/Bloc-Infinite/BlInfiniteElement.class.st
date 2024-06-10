@@ -603,20 +603,19 @@ BlInfiniteElement >> elementHolderOf: anElement [
 { #category : #'private - commands' }
 BlInfiniteElement >> elementRangeUpdate: aPositionStart itemCount: anItemCount [
 	"Rebind existing elements for the given range, or create new as needed"
-	| aPositionEnd |
 
+	| aPositionEnd |
 	aPositionEnd := aPositionStart + anItemCount.
 	self unfilteredChildrenDo: [ :anElement |
 		| anElementHolder |
 		anElementHolder := self elementHolderOf: anElement.
-		anElementHolder shouldIgnore
-			ifFalse: [ 
-				(anElementHolder position >= aPositionStart and: [ anElementHolder position < aPositionEnd ])
-					ifTrue: [ 
-						"We re-bind these elements holders after pre-processing is complete so that
+		anElementHolder shouldIgnore ifFalse: [
+			(anElementHolder position >= aPositionStart and: [
+				 anElementHolder position < aPositionEnd ]) ifTrue: [ 
+					"We re-bind these elements holders after pre-processing is complete so that
 						ElementHolders have their final positions assigned."
-						anElementHolder flags addUpdate.
-						anElement constraints infinite insetsDirty: true ] ] ]
+				anElementHolder flags addUpdate.
+				anElement constraints infinite insetsDirty: true ] ] ]
 ]
 
 { #category : #'children - accessing' }

@@ -90,7 +90,7 @@ BlInfiniteRecycler >> elementFor: aPosition in: anInfiniteElement [
 
 	bound := false.
 	(holder isBound not or: [
-		 holder needsUpdate or: [ holder isInvalid ] ]) ifTrue: [
+		 holder isItemUpdated or: [ holder isInvalid ] ]) ifTrue: [
 		| offsetPosition |
 		holder isRemoved ifTrue: [
 			Error signal: 'Removed holder should come here only in pre-layout!' ].
@@ -181,7 +181,7 @@ BlInfiniteRecycler >> scrapElement: anElement in: anInfiniteElement [
 	anElementHolder := anInfiniteElement elementHolderOf: anElement.
 
 	(anElementHolder isRemoved or: [
-		 anElementHolder isInvalid or: [ anElementHolder isUpdated not ] ])
+		 anElementHolder isInvalid or: [ anElementHolder isItemUpdated not ] ])
 		ifFalse: [ ^ self ].
 
 	anElementHolder detachRecycler.

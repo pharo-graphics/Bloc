@@ -754,7 +754,7 @@ BlInfiniteLinearLayout >> layoutChunkContext: aBlElementBoundsUpdateContext [
 	
 	anInfiniteConstraints := anElement constraints infinite.
 	"Consume the available space if the element is not removed OR changed"
-	(anInfiniteConstraints isItemRemoved or: [ anInfiniteConstraints isItemChanged ])
+	(anInfiniteConstraints isItemRemoved or: [ anInfiniteConstraints isItemUpdated ])
 		ifTrue: [ aResult ignoreConsumed: true ].
 
 	aResult focusable: anElement isFocusable.
