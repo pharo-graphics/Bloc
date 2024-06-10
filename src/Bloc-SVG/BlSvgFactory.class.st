@@ -465,7 +465,7 @@ BlSvgFactory >> rectCornerRadiusFrom: node [
 	maxRadius := rx max: ry.
 	maxAllowed :=
 		((node attributeAt: 'width') asNumber min:
-			(node attributeAt: 'height') asNumber) / 2.
+		(node attributeAt: 'height') asNumber) / 2.
 
 	^ maxRadius min: maxAllowed
 ]
@@ -549,7 +549,7 @@ BlSvgFactory >> rotateElement: aBlElement with: anOrderedCollection [
 
 	aBlElement transformDo: [ :t |
 		| rotationCenter |
-		rotationCenter := cx - aBlElement position x @ (cy - aBlElement position y).
+		rotationCenter := (cx - aBlElement position x) @ (cy - aBlElement position y).
 		t inherit
 			origin: (BlAffineTransformationPositionOrigin position: rotationCenter);
 			rotateBy: r ]
@@ -776,8 +776,8 @@ BlSvgFactory >> viewBoxFrom: node on: aBlElement [
 		updateTransformationBlock := [
 			| offset scale |
 			offset := array first negated @ array second negated.
-			scale := (aBlElement width / array third)
-					@ (aBlElement height / array fourth).
+			scale := (aBlElement width / array third) @
+					   (aBlElement height / array fourth).
 			aBlElement transformDo: [ :t |
 				t
 					translateBy: offset;
@@ -788,6 +788,5 @@ BlSvgFactory >> viewBoxFrom: node on: aBlElement [
 			whenLayoutedDoOnce: updateTransformationBlock.
 		aBlElement
 			addEventHandlerOn: BlElementExtentChangedEvent
-			do: [ :evt |
-				updateTransformationBlock value ] ]
+			do: [ :evt | updateTransformationBlock value ] ]
 ]
