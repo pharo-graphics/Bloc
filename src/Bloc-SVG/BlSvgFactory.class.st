@@ -168,6 +168,18 @@ BlSvgFactory >> gradientFrom: node on: aBlGradientPaint [
 	self idHandlingFrom: node attributes on: aBlGradientPaint
 ]
 
+{ #category : #definitions }
+BlSvgFactory >> hrefFrom: node ifAbsent: absentBlock [
+	"Answer the href string from the node. This might be the value either in the 'xlink:href' or the 'href' attribute. The former was deprecated in the SVG 2 spec (https://svgwg.org/svg2-draft/struct.html#UseElement)."
+
+	^ node
+		attributeAt: 'href'
+		ifAbsent: [
+			node
+				attributeAt: 'xlink:href'
+				ifAbsent: absentBlock ]
+]
+
 { #category : #properties }
 BlSvgFactory >> idHandlingFrom: attributes on: aBlElement [
 
@@ -179,13 +191,13 @@ BlSvgFactory >> idHandlingFrom: attributes on: aBlElement [
 { #category : #image }
 BlSvgFactory >> imageFrom: node [
 
-	| imageElement |
+	| imageElement href |
 	imageElement := self rectFrom: node.
 
-	node attributeAt: 'xlink:href' ifPresent: [ :value |
-		imageElement background:
-			(BlImagePatternPaint form:
-				(Form fromFileNamed: value)) ].
+	href := self hrefFrom: node ifAbsent: [ ^ imageElement ].
+
+	imageElement background:
+		(BlImagePatternPaint form: (Form fromFileNamed: href)).
 
 	^ imageElement
 ]
@@ -737,12 +749,13 @@ BlSvgFactory >> tspanFrom: node [
 { #category : #definitions }
 BlSvgFactory >> useFrom: node [
 
-	| key element |
-	"xlink:href is deprecated in the SVG 2 spec
-	(https://svgwg.org/svg2-draft/struct.html#UseElement)"
-	key := node attributeAt: 'href' ifAbsent: [
-		node attributeAt: 'xlink:href' ].
-	element := (definitions at: (key withoutPrefix: '#')) veryDeepCopy.
+	| href element |
+	href := self hrefFrom: node ifAbsent: [ self error ].
+
+	"We assume the href value starts with # and
+	it is the id of a previously defined shape."
+	element := definitions at: (href withoutPrefix: '#').
+	element := element veryDeepCopy.
 	element parent: nil.
 
 	self positionFrom: node on: element.
