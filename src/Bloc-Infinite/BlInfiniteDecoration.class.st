@@ -45,20 +45,20 @@ BlInfiniteDecoration >> initialize [
 ]
 
 { #category : #updating }
-BlInfiniteDecoration >> onLayoutDoneIn: anEditorElement remaining: remainingRectangle [
+BlInfiniteDecoration >> onLayoutDoneIn: anInfiniteElement remaining: remainingRectangle [
 
 	| insets rbnds |
 	insets := self decorationInsets.
 	rbnds := remainingRectangle.
 	insets left isZero ifFalse: [ | insetsLeft |
 		insetsLeft := insets left .
-		computedBounds := rbnds origin corner: rbnds left + insetsLeft @ rbnds bottom.
+		self updateComputedBoundsIn: anInfiniteElement with: (rbnds origin corner: rbnds left + insetsLeft @ rbnds bottom).
 		^ rbnds left + insetsLeft @ rbnds top extent: rbnds extent ].
 	insets top isZero ifFalse: [ 
 		^ rbnds left @ rbnds top + insets top corner: rbnds corner ].
 	insets right isZero ifFalse: [ | insetsRight |
-		insetsRight := insets right + anEditorElement border width.
-		computedBounds := rbnds right - insetsRight @ rbnds top corner: rbnds corner.
+		insetsRight := insets right + anInfiniteElement border width.
+		self updateComputedBoundsIn: anInfiniteElement with: (rbnds right - insetsRight @ rbnds top corner: rbnds corner).
 		^ rbnds origin corner: rbnds right - insetsRight @ rbnds bottom ].
 	insets bottom isZero ifFalse: [ ^ rbnds origin corner: rbnds corner right @ rbnds bottom - insets bottom ].
 	^ remainingRectangle
@@ -90,4 +90,15 @@ BlInfiniteDecoration >> requiredInsetsOfChildElement: anElement in: anInfiniteEl
 	<return: #BlInsets>
 	
 	^ BlInsets empty
+]
+
+{ #category : #updating }
+BlInfiniteDecoration >> updateComputedBoundsIn: anInfiniteElement with: aBounds [
+
+	computedBounds = aBounds ifTrue: [ ^ self ].
+	computedBounds := aBounds.
+	anInfiniteElement dispatchEvent:
+		(BlInfiniteDecorationBoundsChangedEvent new
+			 decoration: self;
+			 yourself)
 ]

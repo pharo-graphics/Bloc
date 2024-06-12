@@ -1072,10 +1072,11 @@ BlInfiniteElement >> onLayoutDone [
 	"update decorations bounds after layout"
 
 	| remainingBounds |
-	super onLayoutDone.
 	remainingBounds := self bounds asRectangle.
 	self itemDecorationsDo: [ :d |
 		remainingBounds := d onLayoutDoneIn: self remaining: remainingBounds ].
+	super onLayoutDone.
+
 
 ]
 

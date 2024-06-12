@@ -676,7 +676,7 @@ BlInfiniteLinearLayout >> layoutChildrenFixGaps: anOffsetSpace [
 	^ aStartOffset @ anEndOffset
 ]
 
-{ #category : #layout }
+{ #category : #'api - layout' }
 BlInfiniteLinearLayout >> layoutChildrenIn: aBlInfiniteRecycler state: aBlInfiniteState [
 	"layout algorithm:
   			1) by checking children and other variables, find an anchor coordinate and an anchor item position.
