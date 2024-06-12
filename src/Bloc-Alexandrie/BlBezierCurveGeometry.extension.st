@@ -21,8 +21,8 @@ BlBezierCurveGeometry >> aeDrawAccordingToControlPointsOn: cairoContext [
 	controlPoints size = 3 ifTrue: [ 
 		cairoContext
 			moveTo: controlPoints first;
-			quadraticCurveFrom: controlPoints first
-				controlPoint: controlPoints second
+			quadraticCurveFromCurrentPoint: controlPoints first
+				via: controlPoints second
 				to: controlPoints third.
 		^ self ].
 
