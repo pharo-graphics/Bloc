@@ -24,8 +24,7 @@ BlImageBackground class >> image: aForm [
 { #category : #comparing }
 BlImageBackground >> = anotherObject [
 
-	self == anotherObject ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class) ifFalse: [ ^ false ].
+	super = anotherObject ifFalse: [ ^ false ].
 
 	^ anotherObject image = self image
 ]

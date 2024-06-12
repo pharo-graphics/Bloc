@@ -54,6 +54,14 @@ BlBackground class >> transparent [
 	^ BlTransparentBackground uniqueInstance
 ]
 
+{ #category : #comparing }
+BlBackground >> = anotherObject [
+
+	self == anotherObject ifTrue: [ ^ true ].
+	(anotherObject isKindOf: self class) ifFalse: [ ^ false ].
+	^ anotherObject opacity = self opacity
+]
+
 { #category : #converting }
 BlBackground >> asBlBackground [
 	^ self

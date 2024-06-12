@@ -22,11 +22,9 @@ BlPaintBackground class >> paint: aBlPaint [
 
 { #category : #comparing }
 BlPaintBackground >> = anotherObject [
-	self == anotherObject
-		ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class)
-		ifFalse: [ ^ false ].
-	
+
+	super = anotherObject ifFalse: [ ^ false ].
+
 	^ anotherObject paint = self paint
 ]
 
