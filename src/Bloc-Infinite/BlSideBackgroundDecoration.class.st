@@ -55,6 +55,7 @@ BlSideBackgroundDecoration >> initialize [
 { #category : #geometry }
 BlSideBackgroundDecoration >> requiredInsetsOfChildElement: anElement in: anInfiniteElement [
 
+	self flag: 'To be finished. this current implementation only work for the left side'.
 	^ BlInsets left: self requiredWidth + anInfiniteElement margin left
 ]
 
