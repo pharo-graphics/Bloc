@@ -21,6 +21,19 @@ BlSvgExamples >> circle [
 ]
 
 { #category : #examples }
+BlSvgExamples >> currentColor [
+	<sampleInstance>
+
+	^ self newElementConvertedFrom: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 3">
+  <rect width="10" height="3" fill="green"/>
+    <rect x="1" y="1" height="1" width="1" fill="currentColor"/>
+    <rect x="3" y="1" height="1" width="1" style="fill:currentColor"/>
+    <rect x="5" y="1" height="1" width="1" stroke="currentColor"/>
+    <rect x="8" y="1" height="1" width="1" style="stroke:currentColor"/>
+</svg>'
+]
+
+{ #category : #examples }
 BlSvgExamples >> curveCubicBezier [
 	<sampleInstance>
 
