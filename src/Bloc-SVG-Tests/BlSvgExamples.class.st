@@ -91,6 +91,80 @@ BlSvgExamples >> ellipticalArc [
 ]
 
 { #category : #examples }
+BlSvgExamples >> fillRuleInPath [
+	"Default value is nonzero; evenodd must leave a triangle hole in the shape."
+	<sampleInstance>
+
+	^ self newElementConvertedFrom:
+'<svg viewBox="0 0 40 20">
+  <path d="M10,3 l5,10 h-10 z  m0,5 l5,10 h-10" fill-rule="evenodd" fill="red"/>
+  <path d="M20,3 l5,10 h-10 z  m0,5 l5,10 h-10" fill-rule="nonzero" fill="green"/>
+  <path d="M30,3 l5,10 h-10 z  m0,5 l5,10 h-10" fill="blue" />
+</svg>'
+]
+
+{ #category : #examples }
+BlSvgExamples >> fillRuleInPolygon [
+	"Default value is nonzero; evenodd must leave a triangle hole in the shape."
+	<sampleInstance>
+
+	^ self newElementConvertedFrom:
+'<svg viewBox="-2 -2 44 14">
+  <defs>
+  <polygon
+      id="p"
+      points="0,0 10,0 10,5 0,5  5,0 5,10 0,10"
+      stroke="lime"/>
+  </defs>
+  <use
+      href="#p"
+      fill-rule="evenodd"
+      fill="red"
+      transform="translate(0,0)"/>
+  <use
+      href="#p"
+      fill-rule="nonzero"
+      fill="green"
+      transform="translate(12,0)"/>
+  <use
+      href="#p"
+      fill="blue"
+      transform="translate(24,0)"/>
+</svg>
+'
+]
+
+{ #category : #examples }
+BlSvgExamples >> fillRuleInPolyline [
+	"Default value is nonzero; evenodd must leave a triangle hole in the shape."
+	<sampleInstance>
+
+	^ self newElementConvertedFrom:
+'<svg viewBox="-2 -2 44 14">
+  <defs>
+  <polyline
+      id="p"
+      points="0,0 10,0 10,5 0,5  5,0 5,10 0,10"
+      stroke="pink"/>
+  </defs>
+  <use
+      href="#p"
+      fill-rule="evenodd"
+      fill="red"
+      transform="translate(0,0)"/>
+  <use
+      href="#p"
+      fill-rule="nonzero"
+      fill="green"
+      transform="translate(12,0)"/>
+  <use
+      href="#p"
+      fill="blue"
+      transform="translate(24,0)"/>
+</svg>'
+]
+
+{ #category : #examples }
 BlSvgExamples >> group [
 	<sampleInstance>
 
