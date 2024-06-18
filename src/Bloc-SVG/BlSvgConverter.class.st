@@ -41,7 +41,7 @@ BlSvgConverter class >> convertFromURL: anUrl [
 	^ self convertXMLDocument: doc
 ]
 
-{ #category : #converting }
+{ #category : #'instance creation' }
 BlSvgConverter class >> convertXMLDocument: doc [
 
 	| nodeElements aConverter |

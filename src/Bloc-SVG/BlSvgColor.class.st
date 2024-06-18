@@ -41,20 +41,18 @@ Each hexadecimal digit, in the range 0 to F, represents one sRGB color component
 
 	See: https://www.w3.org/TR/SVGColor12/"
 
-	| stream |
-	stream := WriteStream on: ''.
-	aColorHex do: [ :each |
-		2 timesRepeat: [ stream nextPut: each ] ].
-
-	^ Color fromHexString: stream contents
-]
-
-{ #category : #'instance creation' }
-BlSvgColor class >> fromHexString: aColorHex [
-
-	^ aColorHex size = 3
-		ifTrue: [ self from3DigitHexString: aColorHex ]
-		ifFalse: [ Color fromHexString: aColorHex ]
+	| readStream |
+	readStream := aColorHex readStream.
+	readStream next. "consume #"
+	
+	^ Color fromHexString:
+		(String streamContents: [ :writeStream |
+			[ readStream atEnd ] whileFalse: [
+				| aCharacter |
+				aCharacter := readStream next.
+				writeStream
+					nextPut: aCharacter;
+					nextPut: aCharacter ]])
 ]
 
 { #category : #'instance creation' }
