@@ -370,13 +370,19 @@ BlSvgConverter >> paintFrom: aString on: aBlElement [
 { #category : #path }
 BlSvgConverter >> pathFrom: node [
 
-	| pathString pathElement |
-	pathString := node attributeAt: 'd'.
-	pathElement := self newShapeElement
-		geometry: (BlSvgPath pathString: pathString);
-		yourself.
+	| aGeometry pathElement |
+	aGeometry := BlSvgPath pathString: (node attributeAt: 'd').
+
+	pathElement := self newShapeElement.
+	pathElement geometry: aGeometry.
 
 	self allPropertiesFrom: node attributes on: pathElement.
+
+	"Only apply if value is not the default"
+	node attributes
+		at: 'fill-rule'
+		ifPresent: [ :value |
+			value = 'evenodd' ifTrue: [ aGeometry useEvenOddFillRule ] ].
 
 	^ pathElement
 ]
