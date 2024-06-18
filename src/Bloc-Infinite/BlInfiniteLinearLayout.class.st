@@ -43,6 +43,12 @@ BlInfiniteLinearLayout >> beVertical [
 	self orientation: BlInfiniteVerticalOrientation new
 ]
 
+{ #category : #scrolling }
+BlInfiniteLinearLayout >> boundsUpdaterHasChanges [
+
+	^ layoutState boundsUpdaterHasChanges
+]
+
 { #category : #'scrolling - testing' }
 BlInfiniteLinearLayout >> canScrollHorizontally [
 	"@see BlInfiniteLayout>>canScrollHorizontally"
@@ -304,7 +310,7 @@ BlInfiniteLinearLayout >> fillLayout: shouldStopOnFocusable [
 	
 	aBoundsUpdater commitChanges.
 	aBoundsUpdater hasChanges 
-		ifTrue: [ layoutState scrolledWhileFilling: true ].
+		ifTrue: [ layoutState boundsUpdaterHasChanges: true ].
 	^ aStart - layoutState availableSpace
 ]
 
@@ -703,7 +709,7 @@ BlInfiniteLinearLayout >> layoutChildrenIn: aBlInfiniteRecycler state: aBlInfini
 	self detachAndScrapAttachedChildren.
 	layoutState isInfinite: self resolveIsInfinite.
 
-	layoutState scrolledWhileFilling: false.
+	layoutState boundsUpdaterHasChanges: false.
 	anOffsetSpace := self layoutChildrenFill: anExtraSpace.
 	anOffsetSpace := self layoutChildrenFixGaps: anOffsetSpace.
 	
@@ -1202,12 +1208,6 @@ BlInfiniteLinearLayout >> scrollVerticallyBy: aNumber [
 		ifTrue: [ ^ 0 ].
 
 	^ self scrollBy: aNumber
-]
-
-{ #category : #scrolling }
-BlInfiniteLinearLayout >> scrolledWhileFilling [
-
-	^ layoutState scrolledWhileFilling
 ]
 
 { #category : #testing }

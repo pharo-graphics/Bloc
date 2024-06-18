@@ -113,6 +113,12 @@ BlInfiniteElement >> attachChild: aChildElement at: anIndex [
 	super attachChild: aChildElement at: anOffset
 ]
 
+{ #category : #layout }
+BlInfiniteElement >> boundsUpdaterHasChanges [
+
+	^ self layout boundsUpdaterHasChanges
+]
+
 { #category : #'api - scrolling testing' }
 BlInfiniteElement >> canScrollHorizontally [
 	"Return true if I can scroll the current contents horizontally, false otherwise"
@@ -517,10 +523,10 @@ BlInfiniteElement >> dispatchLayoutFinalStep [
 
 	layout layoutCompleted.
 	self onExitLayoutOrScroll.
-
-	((self didChildPositionsRangeChange: layoutPositionsRange) or: [
-		 self scrolledWhileFilling ]) ifTrue: [
+	(self didChildPositionsRangeChange: layoutPositionsRange) ifTrue: [
 		self dispatchOnScrolled: 0 @ 0 ].
+	self boundsUpdaterHasChanges ifTrue: [
+		self dispatchEvent: BlBoundsUpdaterHasChangesDuringLayoutEvent new ].
 	self recoverFocusFromState.
 	self resetFocusInfo
 ]
@@ -1420,12 +1426,6 @@ BlInfiniteElement >> scrollVerticallyBy: aNumber [
 	The default implementation does nothing and returns 0."
 
 	^ self layout scrollVerticallyBy: aNumber
-]
-
-{ #category : #layout }
-BlInfiniteElement >> scrolledWhileFilling [
-
-	^ self layout scrolledWhileFilling
 ]
 
 { #category : #'private - invalidation' }

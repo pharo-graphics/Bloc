@@ -14,7 +14,7 @@ Class {
 		'isInfinite',
 		'layoutDirection',
 		'offset',
-		'scrolledWhileFilling'
+		'boundsUpdaterHasChanges'
 	],
 	#pools : [
 		'BlInfiniteConstants'
@@ -70,6 +70,18 @@ BlInfiniteLinearLayoutState >> availableSpace: aNumber in: aLayout [
 
 	availableSpace := aNumber.
 	aLayout notifyAvailableSpaceChanged: aNumber
+]
+
+{ #category : #accessing }
+BlInfiniteLinearLayoutState >> boundsUpdaterHasChanges [
+
+	^ boundsUpdaterHasChanges
+]
+
+{ #category : #accessing }
+BlInfiniteLinearLayoutState >> boundsUpdaterHasChanges: aBoolean [
+
+	boundsUpdaterHasChanges := aBoolean
 ]
 
 { #category : #accessing }
@@ -142,7 +154,7 @@ BlInfiniteLinearLayoutState >> initialize [
 	availableSpace := 0.
 	isPreLayout := false.
 	lastScrolledDelta := 0.
-	scrolledWhileFilling := false
+	boundsUpdaterHasChanges := false
 ]
 
 { #category : #accessing }
@@ -297,18 +309,6 @@ BlInfiniteLinearLayoutState >> offset: aNumber [
 BlInfiniteLinearLayoutState >> scrapList: aCollectionOfScrappedElement [
 
 	scrapList := aCollectionOfScrappedElement
-]
-
-{ #category : #accessing }
-BlInfiniteLinearLayoutState >> scrolledWhileFilling [
-
-	^ scrolledWhileFilling
-]
-
-{ #category : #accessing }
-BlInfiniteLinearLayoutState >> scrolledWhileFilling: aBoolean [
-
-	scrolledWhileFilling := aBoolean
 ]
 
 { #category : #accessing }
