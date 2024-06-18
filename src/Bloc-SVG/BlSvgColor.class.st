@@ -82,13 +82,14 @@ BlSvgColor class >> fromRgbTripletOnBase256: array [
 { #category : #'instance creation' }
 BlSvgColor class >> fromString: aString [
 
-	aString = 'none' ifTrue: [ ^ Color transparent ].
+	"If aString is following the format: '#RRGGBB' or '#RGB':"
+	(aString beginsWith: '#') ifTrue: [
+		^ aString size = 4
+			ifTrue: [ self from3DigitHexString: aString ]
+			ifFalse: [ Color fromHexString: aString ] ].
 
 	"If aString is following the format: 'rgb(R,G,B)' or 'rgb(R%,G%,B%)':"
 	(aString beginsWith: 'rgb(') ifTrue: [ ^ self fromRgbString: aString ].
-
-	"If aString is following the format: '#RRGGBB' or '#RGB':"
-	(aString beginsWith: '#') ifTrue: [ ^ self fromHexString: aString allButFirst ].
 
 	"If aString is a color keyword"
 	^ SVGColorRegistry at: aString trimBoth
@@ -105,7 +106,9 @@ BlSvgColor class >> initialize [
 			put: (Color fromHexString: each second) ].
 	
 	SVGColorRegistry
-			at: 'transparent'
+		at: 'none'
+			put: Color transparent;
+		at: 'transparent'
 			put: Color transparent
 ]
 
