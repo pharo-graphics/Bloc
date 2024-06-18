@@ -107,7 +107,11 @@ BlSvgColor class >> initialize [
 		at: 'none'
 			put: Color transparent;
 		at: 'transparent'
-			put: Color transparent
+			put: Color transparent;
+		at: 'currentColor'
+			put: Color white "a workaround until Issue #530 is fixed"
+
+
 ]
 
 { #category : #'initialize-release' }
