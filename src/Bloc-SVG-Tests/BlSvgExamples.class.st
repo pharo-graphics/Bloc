@@ -1114,3 +1114,11 @@ BlSvgExamples >> useSymbolRect [
 			<use x="550" y="50" xlink:href="#MyRect" />
 		</svg>'
 ]
+
+{ #category : #examples }
+BlSvgExamples >> viewBox [
+	"The viewBox can have negative position."
+	<sampleInstance>
+
+	^ self newElementConvertedFrom: '<svg viewBox="-10 -5 3 3"><rect x="-9" y="-4" width="1" height="1"/></svg>'
+]
