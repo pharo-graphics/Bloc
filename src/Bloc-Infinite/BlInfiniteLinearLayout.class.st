@@ -270,7 +270,9 @@ BlInfiniteLinearLayout >> extraLayoutSpace [
 	InfiniteLayout to calculate a much smoother scrolling; which improves user experience.
 	You can also use this if you are trying to pre-layout your upcoming elements"
 
-	^ 0
+	" should be at least 1"
+
+	^ self orientation totalSpace
 ]
 
 { #category : #layout }
@@ -285,7 +287,8 @@ BlInfiniteLinearLayout >> fillLayout: shouldStopOnFocusable [
 	layoutState hasScrollingOffset
 		ifTrue: [
 			layoutState availableSpace < 0
-				ifTrue: [ layoutState scrollingOffset: layoutState scrollingOffset + layoutState availableSpace ]. 
+				ifTrue: [ 
+					layoutState scrollingOffset: layoutState scrollingOffset + layoutState availableSpace ]. 
 			self recycleChildren ].
 
 	aRemainingSpace := layoutState availableSpace + layoutState extraSpace.
@@ -352,7 +355,6 @@ BlInfiniteLinearLayout >> fillLayoutResultScroll: aResult [
 	layoutState scrollingOffset: layoutState scrollingOffset + aResult consumedSpace.
 	layoutState availableSpace < 0
 		ifTrue: [ layoutState scrollingOffset: layoutState scrollingOffset + layoutState availableSpace ].
-	
 	self recycleChildren
 ]
 
@@ -724,19 +726,13 @@ BlInfiniteLinearLayout >> layoutChunkAdd [
 
 	<return: #BlElement>
 	| anElement |
-	anElement := layoutState nextElement: self recycler in: infiniteElement.
+	anElement := layoutState
+		             nextElement: self recycler
+		             in: infiniteElement.
 
-	layoutState hasScrapList
-		ifFalse: [
-			shouldReverseLayout = layoutState isLayoutStartDirection
-				ifTrue: [ "add child as first" self addChild: anElement ]
-				ifFalse: [ "add child as last" self addChild: anElement at: 1 ] ]
-		ifTrue: [
-			shouldReverseLayout = layoutState isLayoutStartDirection
-				ifTrue: [ "add child as first" self addDisappearingChild: anElement ]
-				ifFalse: [ "add child as last" self addDisappearingChild: anElement at: 1 ] ].
-
-	self notifyChunkAdded: anElement.
+	shouldReverseLayout = layoutState isLayoutStartDirection
+		ifTrue: [ "add child as first" self addChild: anElement ]
+		ifFalse: [ "add child as last" self addChild: anElement at: 1 ].
 
 	^ anElement
 ]
@@ -858,24 +854,6 @@ BlInfiniteLinearLayout >> newScrollbarHelper [
 		yourself
 ]
 
-{ #category : #'layout - notifying' }
-BlInfiniteLinearLayout >> notifyAvailableSpaceChanged: aNumber [
-
-	self announcer announce:
-		(BlInfiniteLinearLayoutAvailableSpaceChanged new
-			availableSpace: aNumber;
-			yourself)
-]
-
-{ #category : #'layout - notifying' }
-BlInfiniteLinearLayout >> notifyChunkAdded: anElement [
-
-	self announcer announce:
-		(BlInfiniteLinearLayoutChunkAdded new
-			element: anElement;
-			yourself)
-]
-
 { #category : #'layout - hooks' }
 BlInfiniteLinearLayout >> onAnchorReady: anAnchorInfo firstLayoutItemDirection: aBlInfiniteLinearLayoutItemDirection [
 	"Is called when Anchor position is decided.
@@ -952,13 +930,11 @@ BlInfiniteLinearLayout >> recycleChildrenFromEnd: anOffset [
 	Checks both layout position and visible position to guarantee that the element is not visible"
 	| aLimit aChildCount aStep aStart anEnd |
 
+		
+	
 	anOffset < 0
 		ifTrue: [ ^ self ].
-		
-	self
-		assert: [ anOffset >= 0 ]
-		description: 'anOffset must not be negative'.
-	
+
 	aLimit := self orientation end - anOffset.
 	aChildCount := self childrenCount.
 	aChildCount isZero
@@ -994,10 +970,6 @@ BlInfiniteLinearLayout >> recycleChildrenFromStart: anOffset [
 	
 	anOffset < 0
 		ifTrue: [ ^ self ].
-	
-	self
-		assert: [ anOffset >= 0 ]
-		description: 'anOffset must not be negative'.
 	
 	aLimit := anOffset.
 	aChildCount := self childrenCount.
@@ -1405,6 +1377,7 @@ BlInfiniteLinearLayout >> updateLayoutState: aLayoutDirection requiredSpace: aRe
 	aScrollingOffset := (aLayoutDirection isStart
 		ifTrue: [ self updateLayoutStateStart ]
 		ifFalse: [self updateLayoutStateEnd ]).
+		
 	layoutState availableSpace: aRequiredSpace in: self.
 	canUseExistingSpace
 		ifTrue: [ layoutState availableSpace: layoutState availableSpace - aScrollingOffset in: self ].

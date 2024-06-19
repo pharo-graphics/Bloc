@@ -2,7 +2,6 @@ Class {
 	#name : #BlInfiniteElementHolderFlags,
 	#superclass : #BlBitflags,
 	#classVars : [
-		'AppearedInPreLayout',
 		'BouncedFromHiddenList',
 		'Bound',
 		'DataSourceFullUpdate',
@@ -19,12 +18,6 @@ Class {
 	],
 	#category : #'Bloc-Infinite-Flags'
 }
-
-{ #category : #'accessing - flags' }
-BlInfiniteElementHolderFlags class >> AppearedInPreLayout [
-	"This method was automatically generated"
-	^ AppearedInPreLayout value
-]
 
 { #category : #'accessing - flags' }
 BlInfiniteElementHolderFlags class >> BouncedFromHiddenList [
@@ -121,7 +114,6 @@ BlInfiniteElementHolderFlags class >> flagsDecl [
 		#DATA_SOURCE_POSITION_UNKNOWN.
 		#DATA_SOURCE_FULL_UPDATE.
 		#MOVED.
-		#APPEARED_IN_PRE_LAYOUT.
 		#BOUNCED_FROM_HIDDEN_LIST.
 		#PENDING_ACCESSIBILITY_STATE_NOT_SET -> (-1).
 	}
@@ -130,12 +122,6 @@ BlInfiniteElementHolderFlags class >> flagsDecl [
 { #category : #initialization }
 BlInfiniteElementHolderFlags class >> initialize [
 	super initialize
-]
-
-{ #category : #'flags - add' }
-BlInfiniteElementHolderFlags >> addAppearedInPreLayout [
-	"This method was automatically generated"
-	value := value | AppearedInPreLayout value
 ]
 
 { #category : #'flags - add' }
@@ -217,12 +203,6 @@ BlInfiniteElementHolderFlags >> addUpdate [
 ]
 
 { #category : #'flags - clear' }
-BlInfiniteElementHolderFlags >> clearAppearedInPreLayout [
-	"This method was automatically generated"
-	value := value & (AppearedInPreLayout value bitInvert)
-]
-
-{ #category : #'flags - clear' }
 BlInfiniteElementHolderFlags >> clearBouncedFromHiddenList [
 	"This method was automatically generated"
 	value := value & (BouncedFromHiddenList value bitInvert)
@@ -298,12 +278,6 @@ BlInfiniteElementHolderFlags >> clearTmpDetached [
 BlInfiniteElementHolderFlags >> clearUpdate [
 	"This method was automatically generated"
 	value := value & (Update value bitInvert)
-]
-
-{ #category : #'flags - testing' }
-BlInfiniteElementHolderFlags >> hasAppearedInPreLayout [
-	"This method was automatically generated"
-	^ (value & AppearedInPreLayout value) ~= 0
 ]
 
 { #category : #'flags - testing' }

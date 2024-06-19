@@ -11,7 +11,6 @@ Class {
 		'itemElement',
 		'position',
 		'itemId',
-		'preLayoutPosition',
 		'flags',
 		'infiniteElement'
 	],
@@ -25,12 +24,6 @@ Class {
 BlInfiniteHolder >> bindAtPosition: aPosition [
 
 	position := aPosition
-]
-
-{ #category : #'private - position' }
-BlInfiniteHolder >> clearOldPosition [
-
-	preLayoutPosition := NoPosition
 ]
 
 { #category : #'private - flags changing' }
@@ -96,7 +89,6 @@ BlInfiniteHolder >> initialize [
 	super initialize.
 
 	position := NoPosition.
-	preLayoutPosition := NoPosition.
 	itemId := NoId.
 	flags := BlInfiniteElementHolderFlags new
 ]
@@ -149,9 +141,7 @@ BlInfiniteHolder >> itemId: anIdemId [
 BlInfiniteHolder >> layoutPosition [
 	"Returns the position of the ElementHolder in terms of the latest layout pass"
 
-	^ preLayoutPosition = NoPosition
-		ifTrue: [ position ]
-		ifFalse: [ preLayoutPosition ]
+	^ position 
 ]
 
 { #category : #private }

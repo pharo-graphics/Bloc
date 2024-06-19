@@ -51,13 +51,6 @@ BlInfiniteRecycler >> clear [
 	self removeScrap
 ]
 
-{ #category : #recycling }
-BlInfiniteRecycler >> clearOldPositions [
-
-	self attachedScrap do: [ :anElementHolder |
-		anElementHolder clearOldPosition ]
-]
-
 { #category : #'accessing - cache' }
 BlInfiniteRecycler >> clearScrap [
 	"Removes all scrapped elements from corresponding pools"

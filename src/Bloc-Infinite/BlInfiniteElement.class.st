@@ -198,18 +198,6 @@ BlInfiniteElement >> childLayoutPositionOf: anElement [
 
 ]
 
-{ #category : #'private - positions' }
-BlInfiniteElement >> clearOldPositions [
-
-	self
-		unfilteredChildrenDo: [ :anElement | 
-			| anElementHolder |
-			anElementHolder := self elementHolderOf: anElement.
-			anElementHolder shouldIgnore ifFalse: [ anElementHolder clearOldPosition ] ].
-
-	recycler clearOldPositions
-]
-
 { #category : #'api - scrolling thumb' }
 BlInfiniteElement >> computeHorizontalScrollExtent [
 	"Compute the horizontal extent of the horizontal scrollbar's thumb within the horizontal range.
@@ -545,7 +533,7 @@ BlInfiniteElement >> dispatchLayoutFirstStep [
 	state itemCount: self dataSource itemCount.
 	self layoutPositionsRange: self findMinMaxChildLayoutPositions.
 	
-	self clearOldPositions.
+	"self clearOldPositions."
 	self onExitLayoutOrScroll.
 	state beStepLayout
 ]
