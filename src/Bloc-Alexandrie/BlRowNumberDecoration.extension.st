@@ -9,7 +9,7 @@ BlRowNumberDecoration >> aeDraw: anItemElement overOn: aeCanvas in: anInfiniteEl
 	anItemElement height < 1 ifTrue: [ ^ self ].
 	aeCanvas restoreContextAfter: [
 		holder := anInfiniteElement childHolderOf: anItemElement.
-		index := holder layoutPosition.
+		index := holder position.
 		cairoScaledFont := self aeCairoScaledFontOn: aeCanvas in: anInfiniteElement.
 		fontExtents := cairoScaledFont fontExtents.
 		h := self

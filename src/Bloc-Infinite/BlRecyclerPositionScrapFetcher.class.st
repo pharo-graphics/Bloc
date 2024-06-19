@@ -28,7 +28,7 @@ BlRecyclerPositionScrapFetcher >> exactScrapFor: aPosition in: anInfiniteElement
 
 	^ anInfiniteElement recycler attachedScrap 
 		detect: [ :holder | (holder wasReturnedFromScrap not
-			and: [ holder layoutPosition = aPosition 
+			and: [ holder position = aPosition 
 				and: [ holder isInvalid not
 					and: [ holder isRemoved not ] ] ] ) ]
 		ifFound: [ :holder |

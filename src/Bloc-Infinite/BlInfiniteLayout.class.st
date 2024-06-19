@@ -92,23 +92,6 @@ BlInfiniteLayout >> addChild: anElement at: anIndex disappearing: isDisappearing
 	anInfiniteConstraints pendingInvalidate: false
 ]
 
-{ #category : #'children - add/remove' }
-BlInfiniteLayout >> addDisappearingChild: anElement [
-	"To be used only during #layoutChildren to add an element to the layout that is known to be going away,
-	either because it has been removed or because it is actually not in the visible portion of the container
-	but is being laid out in order to inform infinite element in how to animate the item out of view."
-
-	self addDisappearingChild: anElement at: 0
-]
-
-{ #category : #'children - add/remove' }
-BlInfiniteLayout >> addDisappearingChild: anElement at: anIndex [
-	"If anIndex == 0 child will be added at the end
-	@see #addDisappearingChild:"
-
-	self addChild: anElement at: anIndex disappearing: true
-]
-
 { #category : #accessing }
 BlInfiniteLayout >> announcer [
 	^ announcer ifNil: [ announcer := Announcer new ]
@@ -252,7 +235,7 @@ BlInfiniteLayout >> childAtPosition: aPosition [
 		anElement := self childAt: anIndex.
 		anElementHolder := self elementHolderOf: anElement.
 		anElementHolder ifNotNil: [ :aHolder |
-			(aHolder layoutPosition = aPosition and: [
+			(aHolder position = aPosition and: [
 				 aHolder shouldIgnore not and: [ aHolder isRemoved not ] ])
 				ifTrue: [ ^ anElement ] ] ].
 	^ nil

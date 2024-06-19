@@ -194,20 +194,8 @@ BlInfiniteElement >> childLayoutPositionOf: anElement [
 	This position may not be equal to Item's datasource position if there are pending changes
 	in the datasource which have not been reflected to the layout yet"
 
-	^ (self elementHolderOf: anElement) layoutPosition
+	^ (self elementHolderOf: anElement) position
 
-]
-
-{ #category : #'private - positions' }
-BlInfiniteElement >> clearOldPositions [
-
-	self
-		unfilteredChildrenDo: [ :anElement | 
-			| anElementHolder |
-			anElementHolder := self elementHolderOf: anElement.
-			anElementHolder shouldIgnore ifFalse: [ anElementHolder clearOldPosition ] ].
-
-	recycler clearOldPositions
 ]
 
 { #category : #'api - scrolling thumb' }
@@ -545,7 +533,7 @@ BlInfiniteElement >> dispatchLayoutFirstStep [
 	state itemCount: self dataSource itemCount.
 	self layoutPositionsRange: self findMinMaxChildLayoutPositions.
 	
-	self clearOldPositions.
+	"self clearOldPositions."
 	self onExitLayoutOrScroll.
 	state beStepLayout
 ]
@@ -648,28 +636,6 @@ BlInfiniteElement >> findElementHolderForItemId: anId [
 	self shouldBeImplemented
 ]
 
-{ #category : #'children - accessing' }
-BlInfiniteElement >> findElementHolderForPosition: aPosition checkNew: shouldCheckNewPosition [
-
-	<return: #BlInfiniteHolder or: nil>
-	self
-		unfilteredChildrenDo: [ :anElement | 
-			| anElementHolder |
-			anElementHolder := self elementHolderOf: anElement.
-			anElementHolder isRemoved ifFalse: [ 
-				| shouldSkip |
-				shouldSkip := shouldCheckNewPosition
-					              ifTrue: [ anElementHolder position ~= aPosition ]
-					              ifFalse: [ 
-					              anElementHolder layoutPosition ~= aPosition ].
-				shouldSkip ifFalse: [ ^ anElementHolder ] ] ].
-
-	"We should not query cached element. It creates a problem during data source updates
-	when we are dealing with already laid out elements. Also, for the public use, it is more
-	reasonable to return null if position is not laid out"
-	^ nil
-]
-
 { #category : #'private - positions' }
 BlInfiniteElement >> findMinMaxChildLayoutPositions [
 	<return: #Interval>
@@ -687,7 +653,7 @@ BlInfiniteElement >> findMinMaxChildLayoutPositions [
 		anElementHolder := self elementHolderOf: anElement.
 		anElementHolder shouldIgnore ifFalse: [ 
 			| aPosition |
-			aPosition := anElementHolder layoutPosition.
+			aPosition := anElementHolder position.
 			minPositionPreLayout := minPositionPreLayout min: aPosition.
 			maxPositionPreLayout := maxPositionPreLayout max: aPosition ] ].
 	^ minPositionPreLayout to: maxPositionPreLayout
@@ -993,15 +959,12 @@ BlInfiniteElement >> offsetChildrenVerticallyBy: aNumber [
 { #category : #'private - commands' }
 BlInfiniteElement >> offsetPositionRecordsForInsert: aStartPosition itemCount: anItemCount [
 
-	self
-		unfilteredChildrenDo: [ :anElement |
-			| anElementHolder |
-			anElementHolder := self elementHolderOf: anElement.
-			(anElementHolder shouldIgnore not and: [
-				 anElementHolder position >= aStartPosition ]) ifTrue: [
-				anElementHolder
-					offsetPositionBy: anItemCount
-					applyToPreLayout: false ] ].
+	self unfilteredChildrenDo: [ :anElement |
+		| anElementHolder |
+		anElementHolder := self elementHolderOf: anElement.
+		(anElementHolder shouldIgnore not and: [
+			 anElementHolder position >= aStartPosition ]) ifTrue: [
+			anElementHolder offsetPositionBy: anItemCount ] ].
 	self requestLayout
 ]
 
@@ -1019,14 +982,12 @@ BlInfiniteElement >> offsetPositionRecordsForRemove: aPositionStart itemCount: a
 				anElementHolder position >= aPositionEnd
 					ifTrue: [
 						anElementHolder
-							offsetPositionBy: anItemCount negated
-							applyToPreLayout: true ]
+							offsetPositionBy: anItemCount negated ]
 					ifFalse: [
 						anElementHolder position >= aPositionStart ifTrue: [
 							anElementHolder
 								flagRemovedAndOffsetPosition: aPositionStart - 1
-								by: anItemCount negated
-								applyToPreLayout: true ] ] ] ]
+								by: anItemCount negated ] ] ] ]
 ]
 
 { #category : #'hooks - children' }
