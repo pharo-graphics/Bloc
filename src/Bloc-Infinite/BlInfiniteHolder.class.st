@@ -52,10 +52,10 @@ BlInfiniteHolder >> detachRecycler [
 ]
 
 { #category : #private }
-BlInfiniteHolder >> flagRemovedAndOffsetPosition: aNewPosition by: anOffset applyToPreLayout: applyToPreLayout [
+BlInfiniteHolder >> flagRemovedAndOffsetPosition: aNewPosition by: anOffset [
 
 	self flags addRemoved.
-	self offsetPositionBy: anOffset applyToPreLayout: applyToPreLayout.
+	itemElement constraints infinite insetsDirty: true.
 	position := aNewPosition
 ]
 
@@ -137,21 +137,8 @@ BlInfiniteHolder >> itemId: anIdemId [
 	itemId := anIdemId
 ]
 
-{ #category : #accessing }
-BlInfiniteHolder >> layoutPosition [
-	"Returns the position of the ElementHolder in terms of the latest layout pass"
-
-	^ position 
-]
-
 { #category : #private }
-BlInfiniteHolder >> offsetPositionBy: anOffset applyToPreLayout: shouldApplyOnPreLayout [
-	
-	preLayoutPosition = NoPosition
-		ifTrue: [ preLayoutPosition := position ].
-	
-	shouldApplyOnPreLayout
-		ifTrue: [ preLayoutPosition := preLayoutPosition + anOffset ].
+BlInfiniteHolder >> offsetPositionBy: anOffset [ 
 	
 	position := position + anOffset.
 	itemElement constraints infinite insetsDirty: true
@@ -170,8 +157,7 @@ BlInfiniteHolder >> reset [
 
 	flags clear.
 	position := NoPosition.
-	itemId := NoId.
-	preLayoutPosition := NoPosition
+	itemId := NoId
 ]
 
 { #category : #'private - flags testing' }

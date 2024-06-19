@@ -235,7 +235,7 @@ BlInfiniteLayout >> childAtPosition: aPosition [
 		anElement := self childAt: anIndex.
 		anElementHolder := self elementHolderOf: anElement.
 		anElementHolder ifNotNil: [ :aHolder |
-			(aHolder layoutPosition = aPosition and: [
+			(aHolder position = aPosition and: [
 				 aHolder shouldIgnore not and: [ aHolder isRemoved not ] ])
 				ifTrue: [ ^ anElement ] ] ].
 	^ nil

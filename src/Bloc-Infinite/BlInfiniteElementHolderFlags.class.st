@@ -2,15 +2,10 @@ Class {
 	#name : #BlInfiniteElementHolderFlags,
 	#superclass : #BlBitflags,
 	#classVars : [
-		'BouncedFromHiddenList',
 		'Bound',
-		'DataSourceFullUpdate',
 		'DataSourcePositionUnknown',
 		'Ignore',
 		'Invalid',
-		'Moved',
-		'NotRecyclable',
-		'PendingAccessibilityStateNotSet',
 		'Removed',
 		'ReturnedFromScrap',
 		'TmpDetached',
@@ -20,21 +15,9 @@ Class {
 }
 
 { #category : #'accessing - flags' }
-BlInfiniteElementHolderFlags class >> BouncedFromHiddenList [
-	"This method was automatically generated"
-	^ BouncedFromHiddenList value
-]
-
-{ #category : #'accessing - flags' }
 BlInfiniteElementHolderFlags class >> Bound [
 	"This method was automatically generated"
 	^ Bound value
-]
-
-{ #category : #'accessing - flags' }
-BlInfiniteElementHolderFlags class >> DataSourceFullUpdate [
-	"This method was automatically generated"
-	^ DataSourceFullUpdate value
 ]
 
 { #category : #'accessing - flags' }
@@ -53,24 +36,6 @@ BlInfiniteElementHolderFlags class >> Ignore [
 BlInfiniteElementHolderFlags class >> Invalid [
 	"This method was automatically generated"
 	^ Invalid value
-]
-
-{ #category : #'accessing - flags' }
-BlInfiniteElementHolderFlags class >> Moved [
-	"This method was automatically generated"
-	^ Moved value
-]
-
-{ #category : #'accessing - flags' }
-BlInfiniteElementHolderFlags class >> NotRecyclable [
-	"This method was automatically generated"
-	^ NotRecyclable value
-]
-
-{ #category : #'accessing - flags' }
-BlInfiniteElementHolderFlags class >> PendingAccessibilityStateNotSet [
-	"This method was automatically generated"
-	^ PendingAccessibilityStateNotSet value
 ]
 
 { #category : #'accessing - flags' }
@@ -102,21 +67,9 @@ BlInfiniteElementHolderFlags class >> flagsDecl [
 	"
 	self rebuildFlagsAccessors
 	"
-	^ {
-		#BOUND.
-		#UPDATE.
-		#INVALID.
-		#REMOVED.
-		#NOT_RECYCLABLE.
-		#RETURNED_FROM_SCRAP.
-		#IGNORE.
-		#TMP_DETACHED.
-		#DATA_SOURCE_POSITION_UNKNOWN.
-		#DATA_SOURCE_FULL_UPDATE.
-		#MOVED.
-		#BOUNCED_FROM_HIDDEN_LIST.
-		#PENDING_ACCESSIBILITY_STATE_NOT_SET -> (-1).
-	}
+
+	^ { #REMOVED. #INVALID. #RETURNED_FROM_SCRAP. #BOUND. #DATA_SOURCE_POSITION_UNKNOWN.
+	  #IGNORE. #UPDATE. #TMP_DETACHED }
 ]
 
 { #category : #initialization }
@@ -125,21 +78,9 @@ BlInfiniteElementHolderFlags class >> initialize [
 ]
 
 { #category : #'flags - add' }
-BlInfiniteElementHolderFlags >> addBouncedFromHiddenList [
-	"This method was automatically generated"
-	value := value | BouncedFromHiddenList value
-]
-
-{ #category : #'flags - add' }
 BlInfiniteElementHolderFlags >> addBound [
 	"This method was automatically generated"
 	value := value | Bound value
-]
-
-{ #category : #'flags - add' }
-BlInfiniteElementHolderFlags >> addDataSourceFullUpdate [
-	"This method was automatically generated"
-	value := value | DataSourceFullUpdate value
 ]
 
 { #category : #'flags - add' }
@@ -158,24 +99,6 @@ BlInfiniteElementHolderFlags >> addIgnore [
 BlInfiniteElementHolderFlags >> addInvalid [
 	"This method was automatically generated"
 	value := value | Invalid value
-]
-
-{ #category : #'flags - add' }
-BlInfiniteElementHolderFlags >> addMoved [
-	"This method was automatically generated"
-	value := value | Moved value
-]
-
-{ #category : #'flags - add' }
-BlInfiniteElementHolderFlags >> addNotRecyclable [
-	"This method was automatically generated"
-	value := value | NotRecyclable value
-]
-
-{ #category : #'flags - add' }
-BlInfiniteElementHolderFlags >> addPendingAccessibilityStateNotSet [
-	"This method was automatically generated"
-	value := value | PendingAccessibilityStateNotSet value
 ]
 
 { #category : #'flags - add' }
@@ -203,21 +126,9 @@ BlInfiniteElementHolderFlags >> addUpdate [
 ]
 
 { #category : #'flags - clear' }
-BlInfiniteElementHolderFlags >> clearBouncedFromHiddenList [
-	"This method was automatically generated"
-	value := value & (BouncedFromHiddenList value bitInvert)
-]
-
-{ #category : #'flags - clear' }
 BlInfiniteElementHolderFlags >> clearBound [
 	"This method was automatically generated"
 	value := value & (Bound value bitInvert)
-]
-
-{ #category : #'flags - clear' }
-BlInfiniteElementHolderFlags >> clearDataSourceFullUpdate [
-	"This method was automatically generated"
-	value := value & (DataSourceFullUpdate value bitInvert)
 ]
 
 { #category : #'flags - clear' }
@@ -236,24 +147,6 @@ BlInfiniteElementHolderFlags >> clearIgnore [
 BlInfiniteElementHolderFlags >> clearInvalid [
 	"This method was automatically generated"
 	value := value & (Invalid value bitInvert)
-]
-
-{ #category : #'flags - clear' }
-BlInfiniteElementHolderFlags >> clearMoved [
-	"This method was automatically generated"
-	value := value & (Moved value bitInvert)
-]
-
-{ #category : #'flags - clear' }
-BlInfiniteElementHolderFlags >> clearNotRecyclable [
-	"This method was automatically generated"
-	value := value & (NotRecyclable value bitInvert)
-]
-
-{ #category : #'flags - clear' }
-BlInfiniteElementHolderFlags >> clearPendingAccessibilityStateNotSet [
-	"This method was automatically generated"
-	value := value & (PendingAccessibilityStateNotSet value bitInvert)
 ]
 
 { #category : #'flags - clear' }
@@ -281,21 +174,9 @@ BlInfiniteElementHolderFlags >> clearUpdate [
 ]
 
 { #category : #'flags - testing' }
-BlInfiniteElementHolderFlags >> hasBouncedFromHiddenList [
-	"This method was automatically generated"
-	^ (value & BouncedFromHiddenList value) ~= 0
-]
-
-{ #category : #'flags - testing' }
 BlInfiniteElementHolderFlags >> hasBound [
 	"This method was automatically generated"
 	^ (value & Bound value) ~= 0
-]
-
-{ #category : #'flags - testing' }
-BlInfiniteElementHolderFlags >> hasDataSourceFullUpdate [
-	"This method was automatically generated"
-	^ (value & DataSourceFullUpdate value) ~= 0
 ]
 
 { #category : #'flags - testing' }
@@ -314,24 +195,6 @@ BlInfiniteElementHolderFlags >> hasIgnore [
 BlInfiniteElementHolderFlags >> hasInvalid [
 	"This method was automatically generated"
 	^ (value & Invalid value) ~= 0
-]
-
-{ #category : #'flags - testing' }
-BlInfiniteElementHolderFlags >> hasMoved [
-	"This method was automatically generated"
-	^ (value & Moved value) ~= 0
-]
-
-{ #category : #'flags - testing' }
-BlInfiniteElementHolderFlags >> hasNotRecyclable [
-	"This method was automatically generated"
-	^ (value & NotRecyclable value) ~= 0
-]
-
-{ #category : #'flags - testing' }
-BlInfiniteElementHolderFlags >> hasPendingAccessibilityStateNotSet [
-	"This method was automatically generated"
-	^ (value & PendingAccessibilityStateNotSet value) ~= 0
 ]
 
 { #category : #'flags - testing' }
