@@ -42,7 +42,3 @@ BlInfiniteScrollFlinger >> onPrepareToRun [
 
 	self scrollable consumePendingDataSourceCommands
 ]
-
-{ #category : #hooks }
-BlInfiniteScrollFlinger >> onSmoothScrolled [
-]

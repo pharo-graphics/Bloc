@@ -8,7 +8,6 @@ Class {
 		'scroller',
 		'lastFlingX',
 		'lastFlingY',
-		'step',
 		'eatRunOnAnimationRequest',
 		'scrollable',
 		'shouldRequeueTask'
@@ -459,10 +458,4 @@ BlScrollFlinger >> smoothScrollBy: aDeltaPoint velocity: aVelocityPoint [
 { #category : #'api - scrolling' }
 BlScrollFlinger >> stop [
 	scroller finish
-]
-
-{ #category : #running }
-BlScrollFlinger >> value [
-	"To support defer:"
-	self run
 ]

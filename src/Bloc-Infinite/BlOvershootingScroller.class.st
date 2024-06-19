@@ -218,12 +218,6 @@ BlOvershootingScroller >> isFinished [
 ]
 
 { #category : #'api - testing' }
-BlOvershootingScroller >> isFlywheel [
-	
-	^ isFlywheel
-]
-
-{ #category : #'api - testing' }
 BlOvershootingScroller >> isOverScrolled [
 	"Returns whether the current Scroller is currently returning to a valid position.
 	Valid bounds were provided by the ==#fling:==method.

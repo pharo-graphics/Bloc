@@ -7,7 +7,6 @@ Class {
 		'scrollState',
 		'scrollFlinger',
 		'scrollPosition',
-		'scrollAlignment',
 		'horizontalAlignment',
 		'verticalAlignment'
 	],
