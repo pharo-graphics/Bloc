@@ -37,7 +37,7 @@ BlSelectionHandler >> dragEndEvent: anEvent [
 { #category : #'dnd handlers' }
 BlSelectionHandler >> dragEvent: anEvent [	
 	"For selection we want to handle only those drag events that began exactly
-	on the elemen I attached to"
+	on the element I attached to"
 		
 	self hasOrigin
 		ifFalse: [ ^ self ].
@@ -100,7 +100,7 @@ BlSelectionHandler >> initialize [
 { #category : #selection }
 BlSelectionHandler >> intersect: aChildElement in: aSelectionBounds ifNone: aNoneBlock [
 	"Return selection intersection bounds of a given element and provided
-	selection bounds in local child cordinates if intersection exists
+	selection bounds in local child coordinates if intersection exists
 	or evaluate a none block otherwise.
 	Note: you should override me to modify selection area detection, for example
 	for the case of text selection intersection is not just plain intersection"
@@ -188,7 +188,7 @@ BlSelectionHandler >> selectionChanged [
 { #category : #selection }
 BlSelectionHandler >> shouldSelect: aChildElement in: aSelectionBounds [
 	"Return true if a child element should be selected taking into account
-	provided selection area bounds given int local coordinates of a child element"
+	provided selection area bounds given in local coordinates of a child element"
 	<return: #Boolean>
 	
 	^ (self
