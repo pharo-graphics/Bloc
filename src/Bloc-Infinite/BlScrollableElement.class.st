@@ -239,20 +239,18 @@ BlScrollableElement >> onChildAdded: anElement [
 
 { #category : #layout }
 BlScrollableElement >> onLayout: aBounds context: aBlElementBoundsUpdater [
-	| aPreviousScrollPosition aLayoutNode |
-	self scrollFlinger isIdle
-		ifFalse: [ ^ super onLayout: aBounds context: aBlElementBoundsUpdater ].
-		
-	self hasScrolledElement
-		ifFalse: [ ^ self ].
-		
-	aLayoutNode := self userData
-		at: #layoutNode
-		ifAbsent: [ ^ self ].
-	
+
+	| aPreviousScrollPosition aLayoutNode scrollGap |
+	self scrollFlinger isIdle ifFalse: [
+		^ super onLayout: aBounds context: aBlElementBoundsUpdater ].
+
+	self hasScrolledElement ifFalse: [ ^ self ].
+
+	aLayoutNode := self userData at: #layoutNode ifAbsent: [ ^ self ].
+
 	aPreviousScrollPosition := scrollPosition.
-	
-	"first we fix a gap"	
+
+	"first we fix a gap"
 	self layoutFixGap: aLayoutNode.
 
 	"now clamp position"
@@ -262,8 +260,11 @@ BlScrollableElement >> onLayout: aBounds context: aBlElementBoundsUpdater [
 	self layoutApplyAlignment: aLayoutNode.
 
 	super onLayout: aBounds context: aBlElementBoundsUpdater.
-	
-	self dispatchOnScrolled: scrollPosition - aPreviousScrollPosition
+
+	scrollGap := scrollPosition - aPreviousScrollPosition.
+	aBlElementBoundsUpdater hasChanges ifTrue: [
+		self dispatchEvent: BlBoundsHasChangedDuringScrollingEvent new ].
+	self dispatchOnScrolled: scrollGap
 ]
 
 { #category : #scrolling }

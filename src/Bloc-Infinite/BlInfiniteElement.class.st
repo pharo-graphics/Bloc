@@ -508,7 +508,7 @@ BlInfiniteElement >> dispatchLayoutFinalStep [
 	(self didChildPositionsRangeChange: layoutPositionsRange) ifTrue: [
 		self dispatchOnScrolled: 0 @ 0 ].
 	self boundsUpdaterHasChanges ifTrue: [
-		self dispatchEvent: BlBoundsUpdaterHasChangesDuringLayoutEvent new ].
+		self dispatchEvent: BlBoundsHasChangedDuringScrollingEvent new ].
 	self recoverFocusFromState.
 	self resetFocusInfo
 ]
