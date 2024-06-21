@@ -337,20 +337,20 @@ BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 ]
 
 { #category : #'debug - simulation' }
-BlSpace class >> simulateKeyDownOn: anElement key: aBlKeyboardKey [
+BlSpace class >> simulateKeyDownOn: anElement key: aKeyboardKey [
 	"Simulate a key down event"
 
 	self
-		simulateEvents: { BlKeyDownEvent new key: aBlKeyboardKey; yourself }
+		simulateEvents: { BlKeyDownEvent new key: aKeyboardKey; yourself }
 		on: anElement
 ]
 
 { #category : #'debug - simulation' }
-BlSpace class >> simulateKeyUpOn: anElement key: aBlKeyboardKey [
+BlSpace class >> simulateKeyUpOn: anElement key: aKeyboardKey [
 	"Simulate a key up event"
 
 	self
-		simulateEvents: { BlKeyUpEvent new key: aBlKeyboardKey; yourself }
+		simulateEvents: { BlKeyUpEvent new key: aKeyboardKey; yourself }
 		on: anElement
 ]
 

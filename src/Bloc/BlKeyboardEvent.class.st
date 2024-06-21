@@ -29,8 +29,9 @@ BlKeyboardEvent >> key [
 ]
 
 { #category : #'key - accessing' }
-BlKeyboardEvent >> key: aBlKeyboardKey [
-	key := aBlKeyboardKey
+BlKeyboardEvent >> key: aKeyboardKey [
+
+	key := aKeyboardKey
 ]
 
 { #category : #printing }

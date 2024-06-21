@@ -226,12 +226,6 @@ BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 		[ self toggleHorizontalScrolling.
 		^self ].
 
-	self flag: 'No need to consider a special case for delete and backspace'.
-	"we ignore `delete` keydown event because it is not distinguishable from backspace.
-	we create keydown event in keystroke:"
-	"(aKey = BlKeyboardKey delete or: [ aKey = BlKeyboardKey backspace ])
-		ifTrue: [^ self handleDeleteOrBackspaceDown: aMorphicEvent]."
-	
 	"we ignore already pressed keys"
 	(self hasPressedKey: aKey)
 		ifTrue: [ ^ self ].
@@ -257,12 +251,6 @@ BlMorphicEventHandler >> handleKeyUp: aMorphicEvent [
 		ifTrue: [ ^ self ].
 
 	aKey := self convertKeyFromEvent: aMorphicEvent.
-	
-	self flag: 'No need to consider a special case for delete and backspace'.
-	"we can not differentiate between delete and backspace. However, we previously
-	logged which exact key was pressed, so now we can nicely send a corresponding keyup event"
-	"(aKey = BlKeyboardKey delete or: [ aKey = BlKeyboardKey backspace ])
-		ifTrue: [ ^ self handleDeleteOrBackspaceUp: aMorphicEvent ]."
 	
 	theModifiers := self convertKeyModifiersFromEvent: aMorphicEvent.
 

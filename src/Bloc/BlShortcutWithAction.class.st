@@ -1,17 +1,21 @@
 "
-# Shortcut with action
-Extends `BlBasicShortcut` with ability to specify a runtime action that should be evaluated when shortcut is performed.
+I'm a shortcut with action.
+
+I extend `BlBasicShortcut` with ability to specify a runtime action that should be evaluated when shortcut is performed.
 In addition to that, shortcuts with action allow users to customise the name and description of the shortcut.
+
 ## Public API and Key Messages
 
 - action: get / set action should be executed when shortcut is triggered
 - description: get / set shortcut's description text
 - name: get / set a name of a shortcut
+
 ## Example of a shortcut that is triggered when user presses shift + meta + arrowLeft:
 ```
 BlShortcutWithAction new
-	combination: (BlKeyCombination builder shift; meta; key: BlKeyboardKey arrowLeft; build);
-	action: [ :aShortcutEvent :aShortcut | self inform: 'Triggered ', aShortcut combination asString ]
+	combination: (BlKeyCombination builder shift; meta; key: KeyboardKey left; build);
+	action: [ :aShortcutEvent :aShortcut |
+		self inform: 'Triggered ', aShortcut combination asString ]
 ```
 
 "
