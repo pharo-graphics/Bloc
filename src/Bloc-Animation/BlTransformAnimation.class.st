@@ -6,10 +6,13 @@ Transform animation can be absolute or relative.
  - #relative builds on existing element transformation
  - #absolute defines new element independent transformation
 
+BlTransformAnimation use BlElementAbsoluteTransformation to manage the transformation matrix, even if each transformation use BlElementLocalTransformation for its defintion.  This transformation works by updating its transformation matrix, from IdentityMatrix, to target matrix, through interpolation computed at each animation step (fromMatrix interpolate: aNumber to: toMatrix)
+
+This transformation doesn't use an origin point. Instead, It'll apply a translation, so that your shape still look like it's in the element bound. This translation is added to your transformation definition (boundingRectangle:)
 "
 Class {
-	#name : #BlTransformAnimation,
-	#superclass : #BlAnimation,
+	#name : 'BlTransformAnimation',
+	#superclass : 'BlAnimation',
 	#traits : 'TBlTransformable',
 	#classTraits : 'TBlTransformable classTrait',
 	#instVars : [
@@ -18,10 +21,12 @@ Class {
 		'isAbsolute',
 		'elementTransformation'
 	],
-	#category : #'Bloc-Animation-Animation'
+	#category : 'Bloc-Animation-Animation',
+	#package : 'Bloc-Animation',
+	#tag : 'Animation'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTransformAnimation class >> rotate: anAngleInDegrees [
 	"Create a rotation transformation by a given angle in degrees"
 	<return: #BlTransformAnimation>
@@ -31,7 +36,7 @@ BlTransformAnimation class >> rotate: anAngleInDegrees [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTransformAnimation class >> scale: aVector [
 	"Create a scaling transformation by a given factor defined by a vector"
 	<return: #BlTransformAnimation>
@@ -41,7 +46,7 @@ BlTransformAnimation class >> scale: aVector [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlTransformAnimation class >> translate: aVector [
 	"Create a translation transformation by a given vector"
 	<return: #BlTransformAnimation>
@@ -51,19 +56,19 @@ BlTransformAnimation class >> translate: aVector [
 		yourself
 ]
 
-{ #category : #builder }
+{ #category : 'builder' }
 BlTransformAnimation >> absolute [
 
 	isAbsolute := true
 ]
 
-{ #category : #pulse }
+{ #category : 'pulse' }
 BlTransformAnimation >> applyValue: anElementTransformation [
 
 	self target transformation: anElementTransformation
 ]
 
-{ #category : #'private - running' }
+{ #category : 'private - running' }
 BlTransformAnimation >> initStart [
 
 	super initStart.
@@ -94,7 +99,7 @@ BlTransformAnimation >> initStart [
 		toMatrix := elementTransformation matrix ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlTransformAnimation >> initialize [
 
 	super initialize.
@@ -103,25 +108,25 @@ BlTransformAnimation >> initialize [
 	elementTransformation := BlElementLocalTransformation new
 ]
 
-{ #category : #builder }
+{ #category : 'builder' }
 BlTransformAnimation >> relative [
 
 	isAbsolute := false
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformAnimation >> transformation [
 
 	^ elementTransformation
 ]
 
-{ #category : #transformations }
+{ #category : 'transformations' }
 BlTransformAnimation >> transformation: aBlElementTransformation [
 
 	elementTransformation := aBlElementTransformation
 ]
 
-{ #category : #pulse }
+{ #category : 'pulse' }
 BlTransformAnimation >> valueForStep: aNumber [
 
 	^ BlElementAbsoluteTransformation matrix:
