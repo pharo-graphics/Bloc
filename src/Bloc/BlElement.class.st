@@ -4059,7 +4059,14 @@ BlElement >> whenLayoutedDo: aBlock [
 
 { #category : #'geometry hooks' }
 BlElement >> whenLayoutedDoOnce: aBlock [
-
+	"As an example of use, imagine you need to get the actual size of an element.
+	The size is computed by the layout.
+	Thus, if one need to get the size of an element one have to be sure that its layout applied.
+	This is the purpose of #whenLayoutedDoOne: (when layout applied do once) which intention is to run 	the block passed as argument only one time just after the layout applied.
+		
+	** notice ** that my use is not encouraged except for debugging or for particular purposes 
+	ouside usual Bloc coding
+	"
 	self when: BlElementLayoutComputedEvent doOnce: [ :event | aBlock cull: event ].
 ]
 
