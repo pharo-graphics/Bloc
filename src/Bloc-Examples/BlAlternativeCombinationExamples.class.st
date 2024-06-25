@@ -160,9 +160,9 @@ BlAlternativeCombinationExamples >> testStoreCombinationWithA [
 	self
 		assert: aStoreString
 		equals:
-		'(BlAlternativeCombination new with: (BlKeyboardKey new setName: #A; setValue: nil) asKeyCombination)'.
+		'(BlAlternativeCombination basicNew instVarAt: 1 put: ((OrderedCollection new) add: (BlSingleKeyCombination basicNew instVarAt: 1 put: (KeyboardKey basicNew instVarAt: 1 put: 65; instVarAt: 2 put: #A; yourself); yourself); yourself); yourself)'.
 
-	aRestoredCombination := Object evaluate: aStoreString.
+	aRestoredCombination := self class compiler evaluate: aStoreString.
 	self assert: aRestoredCombination equals: aCombination.
 
 	^ aStoreString
@@ -171,7 +171,6 @@ BlAlternativeCombinationExamples >> testStoreCombinationWithA [
 { #category : #'examples - store' }
 BlAlternativeCombinationExamples >> testStoreCombinationWithAB [
 
-	<sampleInstance>
 	| aCombination aStoreString aRestoredCombination |
 	aCombination := self testCombinationWithAB.
 	aStoreString := aCombination storeString.
@@ -179,18 +178,15 @@ BlAlternativeCombinationExamples >> testStoreCombinationWithAB [
 	self
 		assert: aStoreString
 		equals:
-		'(((BlKeyboardKey new setName: #A; setValue: nil) asKeyCombination) or: (BlKeyboardKey new setName: #B; setValue: nil) asKeyCombination)'.
+		'(BlAlternativeCombination basicNew instVarAt: 1 put: ((OrderedCollection new) add: (BlSingleKeyCombination basicNew instVarAt: 1 put: (KeyboardKey basicNew instVarAt: 1 put: 65; instVarAt: 2 put: #A; yourself); yourself); add: (BlSingleKeyCombination basicNew instVarAt: 1 put: (KeyboardKey basicNew instVarAt: 1 put: 66; instVarAt: 2 put: #B; yourself); yourself); yourself); yourself)'.
 
-	aRestoredCombination := Object evaluate: aStoreString.
-	self assert: aRestoredCombination equals: aCombination.
-
-	^ aStoreString
+	aRestoredCombination := self class compiler evaluate: aStoreString.
+	self assert: aRestoredCombination equals: aCombination
 ]
 
 { #category : #'examples - store' }
 BlAlternativeCombinationExamples >> testStoreCombinationWithABC [
 
-	<sampleInstance>
 	| aCombination aStoreString aRestoredCombination |
 	aCombination := self testCombinationWithABC.
 	aStoreString := aCombination storeString.
@@ -198,26 +194,24 @@ BlAlternativeCombinationExamples >> testStoreCombinationWithABC [
 	self
 		assert: aStoreString
 		equals:
-		'((((BlKeyboardKey new setName: #A; setValue: nil) asKeyCombination) or: (BlKeyboardKey new setName: #B; setValue: nil) asKeyCombination) or: (BlKeyboardKey new setName: #C; setValue: nil) asKeyCombination)'.
+		'(BlAlternativeCombination basicNew instVarAt: 1 put: ((OrderedCollection new) add: (BlSingleKeyCombination basicNew instVarAt: 1 put: (KeyboardKey basicNew instVarAt: 1 put: 65; instVarAt: 2 put: #A; yourself); yourself); add: (BlSingleKeyCombination basicNew instVarAt: 1 put: (KeyboardKey basicNew instVarAt: 1 put: 66; instVarAt: 2 put: #B; yourself); yourself); add: (BlSingleKeyCombination basicNew instVarAt: 1 put: (KeyboardKey basicNew instVarAt: 1 put: 67; instVarAt: 2 put: #C; yourself); yourself); yourself); yourself)'.
 
-	aRestoredCombination := Object evaluate: aStoreString.
-	self assert: aRestoredCombination equals: aCombination.
-
-	^ aStoreString
+	aRestoredCombination := self class compiler evaluate: aStoreString.
+	self assert: aRestoredCombination equals: aCombination
 ]
 
 { #category : #'examples - store' }
 BlAlternativeCombinationExamples >> testStoreEmptyCombination [
 
-	<sampleInstance>
 	| aCombination aStoreString aRestoredCombination |
 	aCombination := self testEmptyCombination.
 	aStoreString := aCombination storeString.
 
-	self assert: aStoreString equals: '(BlAlternativeCombination new)'.
+	self
+		assert: aStoreString
+		equals:
+		'(BlAlternativeCombination basicNew instVarAt: 1 put: ((OrderedCollection new)); yourself)'.
 
-	aRestoredCombination := Object compiler evaluate: aStoreString.
-	self assert: aRestoredCombination equals: aCombination.
-
-	^ aStoreString
+	aRestoredCombination := self class compiler evaluate: aStoreString.
+	self assert: aRestoredCombination equals: aCombination
 ]
