@@ -106,12 +106,3 @@ BlSingleKeyCombination >> matches: aKeyboardBuffer [
 BlSingleKeyCombination >> printOn: aStream [
 	aStream nextPutAll: self key name asString
 ]
-
-{ #category : #printing }
-BlSingleKeyCombination >> storeOn: aStream [
-	
-	aStream
-		store: key;
-		space;
-		nextPutAll: #asKeyCombination
-]
