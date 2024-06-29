@@ -5,15 +5,17 @@ My loop consists on a loop of each of my children's loop.
 Note: An infinite child animation would make that no subsequent animations are run.
 "
 Class {
-	#name : #BlSequentialAnimation,
-	#superclass : #BlCompositeAnimation,
+	#name : 'BlSequentialAnimation',
+	#superclass : 'BlCompositeAnimation',
 	#instVars : [
 		'currentIndex'
 	],
-	#category : #'Bloc-Animation-Basic'
+	#category : 'Bloc-Animation-Basic',
+	#package : 'Bloc-Animation',
+	#tag : 'Basic'
 }
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlSequentialAnimation >> doStep [
 
 	| shouldStartNext aCurrentAnimation |
@@ -38,7 +40,7 @@ BlSequentialAnimation >> doStep [
 	aCurrentAnimation run.
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlSequentialAnimation >> duration [
 	"Return animation duration. Duration can not necessarily be set manually, in case
 	of composite animations it is computed on-fly based on durations of their sub-animations"
@@ -50,7 +52,7 @@ BlSequentialAnimation >> duration [
 				  anAnimation duration + anAnimation delay * anAnimation loops ] ]
 ]
 
-{ #category : #'private - running' }
+{ #category : 'private - running' }
 BlSequentialAnimation >> initStart [
 
 	super initStart.
@@ -59,7 +61,7 @@ BlSequentialAnimation >> initStart [
 	animations do: [ :anAnimation | anAnimation reset ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlSequentialAnimation >> initialize [
 
 	super initialize.

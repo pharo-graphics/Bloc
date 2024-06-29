@@ -26,8 +26,8 @@ Such element will be considered, in that case, the target of all its sub-animati
 
 "
 Class {
-	#name : #BlBaseAnimation,
-	#superclass : #BlTask,
+	#name : 'BlBaseAnimation',
+	#superclass : 'BlTask',
 	#traits : 'TBlEventTarget',
 	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [
@@ -46,41 +46,43 @@ Class {
 		'loopDoneTime',
 		'loops'
 	],
-	#category : #'Bloc-Animation-Basic'
+	#category : 'Bloc-Animation-Basic',
+	#package : 'Bloc-Animation',
+	#tag : 'Basic'
 }
 
-{ #category : #'action  handling' }
+{ #category : 'action  handling' }
 BlBaseAnimation >> addOnFinishedHandler: anActionHandler [
 
 	actionHandlers add: anActionHandler
 ]
 
-{ #category : #'private - testing' }
+{ #category : 'private - testing' }
 BlBaseAnimation >> atLeastOneLoopDone [
 	
 	^ loopDoneTime isNotNil
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlBaseAnimation >> beInfinite [
 
 	loops := Float infinity
 ]
 
-{ #category : #'private - testing' }
+{ #category : 'private - testing' }
 BlBaseAnimation >> canHaveNextLoop [
 
 	^ self isInfinite or: [ loopCount < loops ]
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlBaseAnimation >> delay [
 	"Return a delay duration which should be waited before animation actually starts"
 
 	^ delay
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlBaseAnimation >> delay: aDuration [
 	"Establish the delay to wait before animation actually starts.
 	The duration must not be negative."
@@ -88,7 +90,7 @@ BlBaseAnimation >> delay: aDuration [
 	delay := aDuration
 ]
 
-{ #category : #'api - time' }
+{ #category : 'api - time' }
 BlBaseAnimation >> delayedStartTime [
 	"Return a `DateAndTime` at which this animation should start, taking delay into account.
 	Precondition: `self isStarted = true`."
@@ -96,14 +98,14 @@ BlBaseAnimation >> delayedStartTime [
 	^ self startTime + self delay
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlBaseAnimation >> doStep [
 	"Execute an actual animation step. My subclasses define this hook, and assume it's executed after my internal state has been updated, for example, progress."
 
 	self subclassResponsibility
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlBaseAnimation >> duration [
 	"Return animation duration. Duration can not necessarily be set manually, in case
 	of composite animations it is computed on-fly based on durations of their sub-animations.
@@ -112,26 +114,26 @@ BlBaseAnimation >> duration [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'time management' }
+{ #category : 'time management' }
 BlBaseAnimation >> elapsedTime [
 
 	^ elapsedTime
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlBaseAnimation >> enqueue [
 
 	self target ifNotNil: [ :aBlElement | aBlElement enqueueTask: self ]
 ]
 
-{ #category : #'event management accessing' }
+{ #category : 'event management accessing' }
 BlBaseAnimation >> eventDispatcher [
 	"Return an object responsible for event dispatching"
 
 	^ eventDispatcher
 ]
 
-{ #category : #'private - running' }
+{ #category : 'private - running' }
 BlBaseAnimation >> initStart [
 
 	"new loop should start exactly when previous ends"
@@ -145,7 +147,7 @@ BlBaseAnimation >> initStart [
 	isStarted := true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBaseAnimation >> initialize [
 
 	super initialize.
@@ -161,26 +163,26 @@ BlBaseAnimation >> initialize [
 	self reset
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBaseAnimation >> isInfinite [
 	"Return whether this animation is infinite, i.e. has unlimited amount of loops."
 
 	^ loops isInfinite
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBaseAnimation >> isRunning [
 
 	^ isRunning
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBaseAnimation >> isStarted [
 
 	^ isStarted
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlBaseAnimation >> isSubAnimation [
 	"Return true if I am a sub animation, e.g. added to composite animation,
 	false otherwise"
@@ -188,14 +190,14 @@ BlBaseAnimation >> isSubAnimation [
 	^ self parent isNotNil
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlBaseAnimation >> loopCount [
 	"Return how many times animation was already repeated (loop count)"
 
 	^ loopCount
 ]
 
-{ #category : #'api - time' }
+{ #category : 'api - time' }
 BlBaseAnimation >> loopDoneTime [
 	"Answer a `DateAndTime` indicating the last time a loop ended.
 	Preconditions: Requires #atLeastOneLoopDone to be true."
@@ -203,7 +205,7 @@ BlBaseAnimation >> loopDoneTime [
 	^ loopDoneTime
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlBaseAnimation >> loops [
 	"Return how many times animation should be repeated.
 	If animation is infinite, return `Float infinity`."
@@ -211,14 +213,14 @@ BlBaseAnimation >> loops [
 	^ loops
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BlBaseAnimation >> loops: aPositiveNumber [
 	"Establish how many times animation should be repeated."
 
 	loops := aPositiveNumber
 ]
 
-{ #category : #'api - time' }
+{ #category : 'api - time' }
 BlBaseAnimation >> nextLoopStartTime [
 	"Return a `DateAndTime` at which the next animation repeat is supposed to start without taking delay of the next step into account.
 	Precondition: #isStarted to be true."
@@ -226,20 +228,20 @@ BlBaseAnimation >> nextLoopStartTime [
 	^ self delayedStartTime + self duration
 ]
 
-{ #category : #'private - notifying' }
+{ #category : 'private - notifying' }
 BlBaseAnimation >> notifyLoopDone [
 
 	self dispatchEvent: BlAnimationLoopDoneEvent new
 ]
 
-{ #category : #'private - notifying' }
+{ #category : 'private - notifying' }
 BlBaseAnimation >> notifyOnFinishedHandlers [
 
 	self onFinished.
 	actionHandlers do: [ :each | each actionPerformed ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlBaseAnimation >> onEnqueued: aBlSpace [
 
 	super onEnqueued: aBlSpace.
@@ -247,17 +249,17 @@ BlBaseAnimation >> onEnqueued: aBlSpace [
 	self time: aBlSpace time
 ]
 
-{ #category : #'action  handling' }
+{ #category : 'action  handling' }
 BlBaseAnimation >> onFinished [
 ]
 
-{ #category : #'action  handling' }
+{ #category : 'action  handling' }
 BlBaseAnimation >> onFinishedDo: aBlock [
 
 	self addOnFinishedHandler: (BlOnActionHandler do: aBlock)
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 BlBaseAnimation >> onLoopDone [
 	"Is sent right after a current loop is done"
 
@@ -267,7 +269,7 @@ BlBaseAnimation >> onLoopDone [
 	self notifyLoopDone
 ]
 
-{ #category : #'action  handling' }
+{ #category : 'action  handling' }
 BlBaseAnimation >> onStep [
 
 	self fireEvent:
@@ -276,19 +278,19 @@ BlBaseAnimation >> onStep [
 			 yourself)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBaseAnimation >> parent [
 
 	^ parent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBaseAnimation >> parent: anotherAnimation [
 
 	parent := anotherAnimation
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BlBaseAnimation >> printOn: aStream [
 	super printOn: aStream.
 
@@ -300,7 +302,7 @@ BlBaseAnimation >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #'api - accessing' }
+{ #category : 'api - accessing' }
 BlBaseAnimation >> progress [
 	"Return a normalized number within [0..1] representing animation progress.
 	0 - means animation is not yet started.
@@ -309,19 +311,19 @@ BlBaseAnimation >> progress [
 	^ progress
 ]
 
-{ #category : #'action  handling' }
+{ #category : 'action  handling' }
 BlBaseAnimation >> removeOnFinishedHandler: anActionHandler [
 
 	actionHandlers remove: anActionHandler
 ]
 
-{ #category : #'private - testing' }
+{ #category : 'private - testing' }
 BlBaseAnimation >> requeueTaskAfterExecution [
 
 	^ isRunning
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlBaseAnimation >> reset [
 
 	elapsedTime := 0 milliSeconds.
@@ -333,7 +335,7 @@ BlBaseAnimation >> reset [
 	loopDoneTime := nil
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlBaseAnimation >> run [
 
 	isStarted ifFalse: [ self start ].
@@ -345,7 +347,7 @@ BlBaseAnimation >> run [
 
 ]
 
-{ #category : #'private - testing' }
+{ #category : 'private - testing' }
 BlBaseAnimation >> shouldStartNextLoop [
 
 	^ progress >= 1.0
@@ -353,13 +355,13 @@ BlBaseAnimation >> shouldStartNextLoop [
 			and: [ time now > self nextLoopStartTime ] ]
 ]
 
-{ #category : #'private - testing' }
+{ #category : 'private - testing' }
 BlBaseAnimation >> shouldStop [
 
 	^ progress >= 1.0 and: [ self canHaveNextLoop not ]
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlBaseAnimation >> start [
 
 	isRunning ifTrue: [
@@ -368,7 +370,7 @@ BlBaseAnimation >> start [
 	self initStart
 ]
 
-{ #category : #'api - time' }
+{ #category : 'api - time' }
 BlBaseAnimation >> startTime [
 	"Return a ´DateAndTime´ at which the current animation loop was started.
 	Precondition: `self isStarted = true`"
@@ -376,7 +378,7 @@ BlBaseAnimation >> startTime [
 	^ startTime
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlBaseAnimation >> step [
 
 	| actualElapsedTime |
@@ -407,7 +409,7 @@ BlBaseAnimation >> step [
 			ifTrue: [ self step ]
 ]
 
-{ #category : #'api - running' }
+{ #category : 'api - running' }
 BlBaseAnimation >> stop [
 
 	isRunning ifFalse: [
@@ -419,26 +421,26 @@ BlBaseAnimation >> stop [
 	self notifyOnFinishedHandlers
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBaseAnimation >> target [
 
 	^ target ifNil: [ parent ifNotNil: [ :p | p target ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBaseAnimation >> target: aBlElement [
 
 	target := aBlElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBaseAnimation >> time [
 	"Answer the `BlTime` that I query to calculate progress."
 	
 	^ time
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlBaseAnimation >> time: aBlTime [
 
 	time := aBlTime
