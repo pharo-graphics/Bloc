@@ -95,6 +95,7 @@ BlTextElement >> baselineOffset [
 
 { #category : #layout }
 BlTextElement >> basicMeasureParagraph: aBlTextParagraph [
+
 	measurer measureTextParagraph: aBlTextParagraph of: self
 ]
 
@@ -184,6 +185,7 @@ BlTextElement >> defaultHighlightCategory [
 
 { #category : #initialization }
 BlTextElement >> defaultMeasurer [
+
 	^ BlTextElementHostMeasurer uniqueInstance 
 ]
 
@@ -274,8 +276,7 @@ BlTextElement >> indexAtScreenPosition: aPoint [
 BlTextElement >> initialize [
 	super initialize.
 
-	self tightMeasurement.
-
+	self initializeMeasurement.
 	tabOffset := 0.
 	text := self defaultText.
 	"Text layout is created during measurement in onMeasure:"
@@ -288,6 +289,12 @@ BlTextElement >> initialize [
 	selection := BlCompositeSelection new.
 
 	"self debug: true"
+]
+
+{ #category : #initialization }
+BlTextElement >> initializeMeasurement [
+
+	self tightMeasurement
 ]
 
 { #category : #layout }
@@ -355,6 +362,7 @@ BlTextElement >> measurement [
 
 { #category : #accessing }
 BlTextElement >> measurement: aTextElementMeasurementStrategy [
+
 	measurement := aTextElementMeasurementStrategy.
 	self textChanged
 ]
