@@ -95,8 +95,9 @@ BlGaussianShadowEffect >> initializeColor: aColor width: aWidth offset: aPoint [
 
 { #category : #testing }
 BlGaussianShadowEffect >> wantsCompositionLayer [
+	"See: https://github.com/pharo-graphics/Bloc/issues/543"
 
-	^ true
+	^ false
 ]
 
 { #category : #accessing }
