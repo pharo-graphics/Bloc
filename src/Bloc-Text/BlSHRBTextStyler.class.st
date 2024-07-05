@@ -81,7 +81,10 @@ BlSHRBTextStyler >> style: aText ast: ast [
 
 	text := aText.
 	text attributes: (self attributesFor: #default).
+
 	bracketLevel := 0.
 	parentheseLevel := 0.
+	braceLevel := 0.
+
 	[ self visitNode: ast ] ensure: [ text := nil ]
 ]
