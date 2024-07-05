@@ -25,13 +25,11 @@ BlSHRBTextStyler class >> attributeArrayForColor: aColorOrNil emphasis: anEmphas
 		]
 ]
 
-{ #category : #cleanup }
-BlSHRBTextStyler class >> cleanUp [
+{ #category : #attributes }
+BlSHRBTextStyler class >> attributeArrayForColor: aColorOrNil emphasis: anEmphasisOrArrayOrNil font: font [
+	"This is for backwards-compatibility with Pharo 11"
 
-	super cleanUp.
-
-	styleTable := nil.
-	textAttributes := nil
+	^ self attributeArrayForColor: aColorOrNil emphasis: anEmphasisOrArrayOrNil
 ]
 
 { #category : #attributes }
@@ -65,13 +63,6 @@ BlSHRBTextStyler class >> foregroundAttributeFor: aPaint [
 	itself to an actual paint using double dispatch."
 
 	^ BlTextForegroundAttribute paint: aPaint
-]
-
-{ #category : #'class initialization' }
-BlSHRBTextStyler class >> initialize [
-
-	styleTable := nil.
-	textAttributes := nil
 ]
 
 { #category : #formatting }
