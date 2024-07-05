@@ -1767,12 +1767,6 @@ BlSpace >> userData [
 	^ userData ifNil: [ userData := IdentityDictionary new ]
 ]
 
-{ #category : #'composition layer' }
-BlSpace >> wantsSeparateCompositingLayer [
-
-	^ false
-]
-
 { #category : #'window - properties' }
 BlSpace >> width [
 	<return: #Number>
