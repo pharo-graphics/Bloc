@@ -23,7 +23,7 @@ BATextMeasurerTest >> testIndexAtBetweenAllCharactersInRealPointWithDot [
 			collect: [ :anIndex |
 				| aPoint |
 				aPoint := aParagraph positionAt: anIndex.
-				aParagraph indexAtPosition: aPoint ceiling ].
+				aParagraph indexAtPosition: aPoint floor ].
 
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray
 ]
