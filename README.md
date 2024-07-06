@@ -32,7 +32,12 @@ You can replace `master` by:
 
 
 ## Getting Started
-Open a new window (a Bloc _space_) 
+
+We count with [a great tutorial](https://github.com/SquareBracketAssociates/Booklet-ASimpleMemoryGame) to get your first journey in Bloc by creating a simple memory game.
+
+Additionally, we provide the following sequence of scripts, as a first glance on Bloc basic concepts, terminology and API:
+
+1. Open a new window (a Bloc _space_, `BlSpace`):
 ```smalltalk
 aSpace := BlSpace new.
 aSpace show.
@@ -42,7 +47,7 @@ aSpace title: 'Bloc basics'.
 aSpace extent: 800 @ 600.
 ```
 
-Draw an element (a `BlElement`)
+2. Add a first _element_ (`BlElement`) to the space's _root_:
 ```smalltalk
 "Create a red rectangle"
 rectangle := BlElement new 
@@ -60,22 +65,27 @@ rectangle
 	border: (BlBorder paint: Color blue width: 10).
 ```
 
-Nesting elements
+3. Nest an element with circle _geometry_ (in `BlElementGeometry` hierarchy):
 ```smalltalk
-"Create a circle using a geometry (a BlElementGeometry subclass)"
 circle := BlElement new
 	background: Color blue;
 	geometry: BlCircleGeometry new;
 	size: 80 @ 80;
 	yourself.
 rectangle addChild: circle.
-
-"Use a transformation to resize and show child element's overflow"
-circle transformDo: [ :builder | builder scaleBy: 1.2 ].
-rectangle clipChildren: false
 ```
 
-Animating
+4. Turn off _clipping_ to show children overflow:
+```smalltalk
+rectangle clipChildren: false.
+```
+
+5. Transform child (to resize it):
+```smalltalk
+circle transformDo: [ :builder | builder scaleBy: 1.2 ].
+```
+
+6. Play some _animations_:
 ```smalltalk
 "Animate opacity"
 rectangle addAnimation: (BlOpacityAnimation new opacity: 0.5).
@@ -86,24 +96,23 @@ rectangle addAnimation: fallAnimation.
 climbAnimation := (BlTransformAnimation translate: 0 @ 0) absolute.
 rectangle addAnimation: climbAnimation.
 
-"Create sequence of animations"
-animationSequence := (BlSequentialAnimation withAll: {fallAnimation . climbAnimation})
-	beInfinite;
-	yourself.
+"Create a sequence of animations"
+animationSequence := BlSequentialAnimation withAll: { fallAnimation. climbAnimation }.
+animationSequence beInfinite.
 rectangle addAnimation: animationSequence
 ```
 
-Handling Events
+7. Handle some _events_:
 ```smalltalk
 "Change color on click"
 rectangle addEventHandlerOn: BlClickEvent do: [ :event | event target background: Color lightGray ].
 
-"Animate on hover/blur"
+"Animate on hover"
 rectangle 
 	addEventHandlerOn: BlMouseEnterEvent
-	do: [ :event | event target addAnimation: (BlOpacityAnimation new opacity: 0.2)];
+	do: [ :event | event target addAnimation: (BlOpacityAnimation new opacity: 0.2) ];
 	addEventHandlerOn: BlMouseLeaveEvent 
-	do: [ :event | event target addAnimation: (BlOpacityAnimation new opacity: 0.8)] 
+	do: [ :event | event target addAnimation: (BlOpacityAnimation new opacity: 1.0) ] 
 ```
 
 ## License and Contributing
