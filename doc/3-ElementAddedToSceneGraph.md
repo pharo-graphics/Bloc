@@ -1,4 +1,4 @@
-## Understanding `BlElement>>#onAddedToSceneGraph`
+# Understanding `BlElement>>#onAddedToSceneGraph`
 
 As we know, `BlElement` and `BlSpace` play central roles in Bloc. When `BlElement` is added to a `BlSpace`, the space is referenced by the element with the help of `BlAttachedCachedSpaceReference`, which denotes that the space is attached to the element.
 
