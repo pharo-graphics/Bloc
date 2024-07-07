@@ -18,3 +18,10 @@ In the process, the project was split along three main components:
 - Sparta is the underlying rendering canvas, currently supporting two backends: Morphic+Cairo and SDL2+Moz2D.
 - Bloc is the core user interface framework, including low level code.
 - Brick is the widget layer.
+
+Then, Sparta-Skia was introduced by feencom and it became the first backend option.
+
+In 2021, we started to work on a Bloc version that to be included in the future in Pharo.
+This codebase started to retrofit a part of the development made at feenkcom, to focus on core features and stability.
+
+In 2022, we introduced Alexandrie, a replacement of Sparta that uses Cairo much more efficiently and doesn't need the complexity of the bindings to Skia.
