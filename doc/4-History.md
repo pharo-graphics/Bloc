@@ -1,3 +1,5 @@
+# History
+
 Bloc is a long term project for revamping the Pharo graphical interface.
 
 The project was originally started by Alain Plantec from the Université de Bretagne Occidentale in collaboration with Stéphane Ducasse from RMOD/Inria. Bloc is the follow up of the Miro and Miro2 prototypes developed by Alain Plantec. Glenn Cavarle, at the time a PhD of Alain at Université de Bretagne Occidentale, was also a contributor. The work was also based on previous work of Igor Stasenko on the Athens canvas, OSWindow (made by Ronie Salgado and Igor Stasenko) and txText (a first cut at a new text editor). The work of Alain Plantec was paid by the University of Bretagne Occidental, while the work of Igor Stasenko by the RMOD Inria team.  

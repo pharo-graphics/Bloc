@@ -16,8 +16,8 @@ The project can be loaded as usual via Metacello, using the `BaselineOfBloc` spe
 ## Documentation:
 
 * [Getting Started](doc/1-GettingStarted.md)
-* [Mouse Events](doc/2-MouseEvent.md)
-* [Element added to scene graph](doc/3-ElementAddedToSceneGraph.md)
+* [About Mouse Events](doc/2-MouseEvent.md)
+* [Understanding `BlElement>>#onAddedToSceneGraph`](doc/3-ElementAddedToSceneGraph.md)
 * [History](doc/4-History.md)
 
 These pages can be browsed via Pharo IDE -> World Menu -> Help -> Documentation Browser -> Bloc/doc (after loading the project).

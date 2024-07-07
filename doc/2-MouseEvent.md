@@ -1,4 +1,4 @@
-## About Mouse Events
+# About Mouse Events
 
 ### Mouse over/out and enter/leave events
 Let us take a look at what happens when mouse moves between elements and what is the difference between two families of mouse events: enter/leave and over/out.
