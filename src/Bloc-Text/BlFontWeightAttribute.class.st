@@ -1,6 +1,6 @@
 "
 I represent a font weight attribute.
-I am used together with BrText and BrTextStyler to style text.
+I am used together with `BlText` and `BlTextStyler` to style text.
 
 Public API and Key Messages
 
@@ -8,10 +8,10 @@ Public API and Key Messages
 
 Example:
 
-	BrFontWeightAttribute weight: 400.
-	BrFontWeightAttribute bold.
-	BrFontWeightAttribute normal.
-	BrFontWeightAttribute thin
+	BlFontWeightAttribute weight: 400.
+	BlFontWeightAttribute bold.
+	BlFontWeightAttribute normal.
+	BlFontWeightAttribute thin
  
 Internal Representation and Key Implementation Points.
 

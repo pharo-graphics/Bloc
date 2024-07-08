@@ -60,7 +60,7 @@ BlTextReadStream >> next: anAmount [
 
 { #category : #accessing }
 BlTextReadStream >> nextLine [
-	"Return an instance of BrText which represents a piece of text from current position
+	"Return an instance of `BlText` which represents a piece of text from current position
 	until the first carriage return character"
 	<return: #BlText>
 	^ self iterator nextLine
