@@ -272,7 +272,8 @@ BlInfiniteLinearLayout >> extraLayoutSpace [
 
 	" should be at least 1"
 
-	^ self orientation totalSpace
+	"^ self orientation totalSpace"
+	^ 1
 ]
 
 { #category : #layout }
