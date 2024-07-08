@@ -9,10 +9,10 @@ Class {
 }
 
 { #category : #initialization }
-BlSubTextIterator class >> text: aBrSubText from: aStartIndex to: anEndIndex [
+BlSubTextIterator class >> text: aBlSubText from: aStartIndex to: anEndIndex [
 
 	^ self new
-		text: aBrSubText from: aStartIndex to: anEndIndex;
+		text: aBlSubText from: aStartIndex to: anEndIndex;
 		yourself
 ]
 
@@ -80,7 +80,7 @@ BlSubTextIterator >> next [
 
 { #category : #'iterator - enumeration' }
 BlSubTextIterator >> nextLine [
-	"Return an instance of BrText which represents a piece of text from current position
+	"Return an instance of `BlText` which represents a piece of text from current position
 	until the first carriage return character"
 	<return: #BlText>
 
@@ -130,7 +130,7 @@ BlSubTextIterator >> nextSpan [
 
 { #category : #'iterator - enumeration' }
 BlSubTextIterator >> nextWhitespace [
-	"Return an instance of BrText which represents a piece of text from current position
+	"Return an instance of `BlText` which represents a piece of text from current position
 	until the first non-whitespace character without including it"
 	<return: #BlText>
 
@@ -144,7 +144,7 @@ BlSubTextIterator >> nextWhitespace [
 
 { #category : #'iterator - enumeration' }
 BlSubTextIterator >> nextWord [
-	"Return an instance of BrText which represents a piece of text from current position
+	"Return an instance of `BlText` which represents a piece of text from current position
 	until the first space character"
 	<return: #BlText>
 
@@ -198,25 +198,25 @@ BlSubTextIterator >> text [
 ]
 
 { #category : #initialization }
-BlSubTextIterator >> text: aBrSubText from: aStartIntegerIndex to: anEndIntegerIndex [
+BlSubTextIterator >> text: aBlSubText from: aStartIntegerIndex to: anEndIntegerIndex [
 	"aStartIntegerIndex and anEndIntegerIndex are integers."
 
 	self
-		assert: [ aStartIntegerIndex between: 1 and: (aBrSubText size + 1) ]
+		assert: [ aStartIntegerIndex between: 1 and: (aBlSubText size + 1) ]
 		description: [ 'Sub-text start index is out of bounds!' ].
 	self
-		assert: [ anEndIntegerIndex between: 0 and: aBrSubText size ]
+		assert: [ anEndIntegerIndex between: 0 and: aBlSubText size ]
 		description: [ 'Sub-text end index is out of bounds!' ].
 	self
-		assert: [ aBrSubText isNotEmpty or: [ aStartIntegerIndex = 1 and: [ anEndIntegerIndex isZero ] ] ]
+		assert: [ aBlSubText isNotEmpty or: [ aStartIntegerIndex = 1 and: [ anEndIntegerIndex isZero ] ] ]
 		description: [ 'If text is empty, start must be 1 and end index must be Zero!' ].
 	self
 		assert: [ anEndIntegerIndex isZero not or: [ aStartIntegerIndex = 1 ] ]
 		description: [ 'If end index is zero then start index must be one' ].
 
-	text := aBrSubText.
+	text := aBlSubText.
 	
-	iterator := aBrSubText text
+	iterator := aBlSubText text
 		iterator: ((aStartIntegerIndex + text start - 1) max: 0)
 		to: ((anEndIntegerIndex + text start - 1) max: 0)
 ]
