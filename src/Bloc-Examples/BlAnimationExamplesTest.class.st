@@ -1,8 +1,5 @@
 "
-I contain examples of bloc's Animation framework.
-
-DOES NOT WORK
-
+I contain examples of Bloc animation framework.
 "
 Class {
 	#name : #BlAnimationExamplesTest,
@@ -11,84 +8,50 @@ Class {
 }
 
 { #category : #examples }
-BlAnimationExamplesTest class >> ballsAnim [
+BlAnimationExamplesTest >> ballsAnim [
+	<sampleInstance>
+	<demo>
 
-	<script: 'self ballsAnim'>
-	| space els anims |
-	anims := OrderedCollection new.
-	els := OrderedCollection new.
+	| elements animations |
+	animations := OrderedCollection new.
+	elements := OrderedCollection new.
 
-	1 to: 10 do: [ :i |
-		| el tr alp |
-		el := BlEllipseGeometry new asElement
-			      background: (Color white alpha: 0);
-			      position: i * 15 @ 10;
-			      size: 50 @ 50.
+	1 to: 12 do: [ :i |
+		| anElement bounceAnimation colorizeAnimation |
+		anElement :=
+			BlEllipseGeometry new asElement
+			      background: Color white;
+			      position: (i * 10) @ 0;
+			      size: 50 @ 50;
+			      yourself.
 
-		tr := BlTransformAnimation new
-			      target: el;
+		bounceAnimation :=
+			BlTransformAnimation new
+			      target: anElement;
 			      transformDo: [ :aBuilder |
 				      aBuilder translateBy:
-						      i * 15 @ (500 - (30 * (i / 25) ceiling)) ];
-			      delay: 80 milliSeconds * i;
-			      duration: 5000 milliSeconds;
-			      easing: BlEasing bounceOut.
+							0 @ 100 ];
+			      delay: 100 milliSeconds * i;
+			      duration: 2 seconds;
+			      easing: BlEasing bounceOut;
+			      yourself.
 
-		alp := BlColorTransition new
-			       from: (Color white alpha: 0);
+		colorizeAnimation :=
+			BlColorTransition new
+			       from: Color white;
 			       to: Color random;
-			       delay: 80 milliSeconds * i;
-			       duration: 1000 milliSeconds;
-			       onStepDo: [ :c | el background: c ].
-		anims addAll: {
-				tr.
-				alp }.
-		els add: el ].
+			       delay: 100 milliSeconds * i;
+			       duration: 1 second;
+			       onStepDo: [ :c | anElement background: c ];
+			       yourself.
 
-	space := BlSpace new.
-	space root addChildren: els.
-	space show.
+		animations addAll: { bounceAnimation. colorizeAnimation }.
+		elements add: anElement ].
 
-	space root addAnimation: (BlParallelAnimation new addAll: anims)
-]
-
-{ #category : #examples }
-BlAnimationExamplesTest class >> bouncingText [
-	"Click on letters to start animation"
-	<script: 'self bouncingText'>
-
-	self
-		openInWindow: self new bouncingText
-		named: 'Bouncing text (Click on letters)'
-		extent: 850 @ 520
-]
-
-{ #category : #examples }
-BlAnimationExamplesTest class >> sequential [
-
-	<script: 'self sequential'>
-	| space element translation scale sequential |
-	translation := (BlTransformAnimation translate: 300 @ 300)
-		               easing: BlEasing bounceOut;
-		               duration: 2 seconds.
-
-	scale := (BlTransformAnimation scale: 2 @ 2)
-		         easing: BlEasing bounceOut;
-		         duration: 2 seconds.
-
-	sequential := BlSequentialAnimation new addAll: {
-			              translation.
-			              scale }.
-
-	element := BlElement new
-		           background: Color blue;
-		           size: 100 @ 100;
-		           position: 100 @ 100.
-	element addAnimation: sequential.
-
-	space := BlSpace new.
-	space root addChild: element.
-	space show
+	^ self newFrameContainer
+		addChildren: elements;
+		addAnimation: (BlParallelAnimation withAll: animations);
+		yourself
 ]
 
 { #category : #running }
@@ -105,11 +68,12 @@ BlAnimationExamplesTest >> blueAt: anIndex [
 { #category : #examples }
 BlAnimationExamplesTest >> bouncingText [
 	"Click on letters to start animation!"
-
 	<sampleInstance>
+	<demo>
+
 	| letters container animation clickHandler |
 	letters :=
-		'bloc beta0.1'
+		'click on me'
 			collect: [ :aCharacter | self newTextElementFor: aCharacter ]
 			as: Array.
 	letters withIndexDo: [ :aTextElement :anIndex |
@@ -299,6 +263,33 @@ BlAnimationExamplesTest >> secondSequentialDuration [
 BlAnimationExamplesTest >> secondSequentialLoops [
 
 	^ 1
+]
+
+{ #category : #examples }
+BlAnimationExamplesTest >> sequential [
+	<sampleInstance>
+	<demo>
+
+	| element translation scale sequential |
+	translation := (BlTransformAnimation translate: 100 @ 100)
+		               easing: BlEasing bounceOut;
+		               duration: 2 seconds.
+
+	scale := (BlTransformAnimation scale: 2 @ 2)
+		         easing: BlEasing bounceOut;
+		         duration: 2 seconds.
+
+	sequential :=
+		BlSequentialAnimation withAll: { translation. scale }.
+
+	element := BlElement new
+		           background: Color blue;
+		           size: 100 @ 100;
+		           position: 100 @ 50;
+		           addAnimation: sequential;
+		           yourself.
+
+	^ element
 ]
 
 { #category : #'examples - base animation' }
