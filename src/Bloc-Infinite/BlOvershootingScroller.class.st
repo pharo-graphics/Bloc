@@ -380,8 +380,8 @@ BlOvershootingScroller >> time: aTime [
 
 { #category : #accessing }
 BlOvershootingScroller >> timePassed [
-	"Returns the time elapsed since the beginning of the scrolling."
-	<return: #Duration>
+	"Returns a `Duration` that represents the time elapsed since the beginning of the scrolling."
+
 	| aTime aStartTime |
 	
 	aTime := DateAndTime millisecondClockValue.

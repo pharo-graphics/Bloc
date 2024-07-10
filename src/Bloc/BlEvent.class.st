@@ -392,8 +392,7 @@ BlEvent >> target: aTBlEventTarget [
 
 { #category : #'api - accessing' }
 BlEvent >> timestamp [
-	"Returns the time at which the event was created."
-	<return: #DateAndTime>
+	"Returns the `DateAndTime` at which the event was created."
 
 	^ timestamp
 ]

@@ -966,7 +966,6 @@ BlSpace >> focusOwner: anElement [
 
 { #category : #'accessing - processors' }
 BlSpace >> focusProcessor [
-	<return: #BlFocusProcessor>
 
 	^ focusProcessor
 ]
@@ -1217,6 +1216,10 @@ BlSpace >> initialize [
 	elementsNeedingPaint := Set new.
 	elementsNeedingLayout := Set new.
 
+	tasks := BlSpaceTaskQueue space: self.
+	time := BlTime real.
+	frame := BlSpaceFrame new.
+
 	eventDispatcher := self defaultEventDispatcher.
 	eventListener := self defaultEventListener.
 	self initDispatcher.
@@ -1224,10 +1227,6 @@ BlSpace >> initialize [
 	mouseProcessor := BlMouseProcessor space: self.
 	focusProcessor := BlFocusProcessor space: self.
 	keyboardProcessor := BlKeyboardProcessor space: self.
-
-	tasks := BlSpaceTaskQueue space: self.
-	time := BlTime real.
-	frame := BlSpaceFrame new.
 
 	rootElement := self defaultRoot.
 
@@ -1361,7 +1360,6 @@ BlSpace >> isVisible [
 
 { #category : #'accessing - processors' }
 BlSpace >> keyboardProcessor [
-	<return: #BlKeyboardProcessor>
 
 	^ keyboardProcessor
 ]

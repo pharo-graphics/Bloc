@@ -65,17 +65,22 @@ BlKeyboardProcessor >> handleSpaceEventProcessedEvent: anEvent [
 
 { #category : #initialization }
 BlKeyboardProcessor >> initialize [
+
 	super initialize.
-	
+
 	buffer := BlKeyboardBuffer new.
 	textInputBuffer := BlTextInputBuffer new.
 	preventKeystrokes := false.
 
-	shortcutRepeatInterval := 100 milliSeconds. "how often a shortcut even should be sent while user still presses keys"
-	shortcutRepeatDelay := 500 milliSeconds. "how much we should wait until starting to repeat a shortcut"
+	"how often a shortcut even should be sent while user still presses keys"
+	shortcutRepeatInterval := 100 milliSeconds.
+	"how much we should wait until starting to repeat a shortcut"
+	shortcutRepeatDelay := 500 milliSeconds.
 
-	previousShortcutTime := DateAndTime now. "when the previous main shortcut event was sent"
-	previousShortcutRepeatTime := DateAndTime now. "when the last repeated shortcut was sent"
+	"when the previous main shortcut event was sent"
+	previousShortcutTime := space time now. 
+	"when the last repeated shortcut was sent"
+	previousShortcutRepeatTime := space time now
 ]
 
 { #category : #testing }

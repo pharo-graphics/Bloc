@@ -26,7 +26,7 @@ BlTestFocusProcessor >> firedEvents [
 
 { #category : #initialization }
 BlTestFocusProcessor >> initialize [
+
 	super initialize.
-	firedEvents := LinkedList new.
-	
+	firedEvents := LinkedList new
 ]

@@ -24,9 +24,9 @@ BlTestMouseEventProcessor >> firedEvents [
 	^ firedEvents
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 BlTestMouseEventProcessor >> initialize [
+
 	super initialize.
-	firedEvents := LinkedList new.
-	
+	firedEvents := LinkedList new
 ]
