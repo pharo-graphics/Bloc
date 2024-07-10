@@ -71,7 +71,7 @@ BaselineOfBloc >> baseline: spec [
 				package: #'Bloc-Text-Rope' with: [
 					spec requires: #('Bloc' 'Bloc-Text') ];
 				package: #'Bloc-Text-Elements' with: [
-					spec requires: #('Bloc' 'Bloc-Text') ];
+					spec requires: #('Bloc' 'Bloc-Text' 'Bloc-Layout-Resizer') ];
 				package: #'Bloc-Text-Rope-Tests' with: [
 					spec requires: #('Bloc-Text-Rope') ];
 				package: #'Bloc-Text-Tests' with: [
