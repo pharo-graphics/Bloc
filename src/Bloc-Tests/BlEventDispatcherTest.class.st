@@ -35,9 +35,10 @@ BlEventDispatcherTest >> testDirectDispatcherWithMouseDownFilterAndHandler [
 
 	mouseDownHandled := false.
 
-	aDispatcher addEventHandler: (BlEventHandler
-			 on: BlMouseDownEvent
-			 do: [ mouseDownHandled := true ]).
+	aDispatcher
+		addEventHandlerOn: BlMouseDownEvent
+		do: [ mouseDownHandled := true ].
+
 	aDispatcher dispatchEvent: BlMouseDownEvent primary.
 
 	self assert: mouseDownHandled not.

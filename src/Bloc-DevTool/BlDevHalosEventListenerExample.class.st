@@ -24,7 +24,9 @@ BlDevHalosEventListenerExample >> activatedHalos [
 
 	"shift+alt+click on the element shows the halo"
 	aPosition := aContainer bounds inSpace center.
-	anEvent := BlMouseDownEvent primary position: aPosition.
+	anEvent := BlMouseDownEvent primary
+		position: aPosition;
+		yourself.
 	anEvent modifiers
 		alt: true;
 		shift: true.

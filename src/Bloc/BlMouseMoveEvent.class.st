@@ -13,19 +13,17 @@ Class {
 { #category : #'instance creation' }
 BlMouseMoveEvent class >> button: aMouseButton [
 	"Create a sample button move event"
-	<return: #BlMouseMoveEvent>
 
 	^ self new
 		button: aMouseButton;
 		position: 0@0;
 		screenPosition: 0@0;
-		timestamp: DateAndTime now
+		yourself
 ]
 
 { #category : #'instance creation' }
 BlMouseMoveEvent class >> middle [
 	"Create a mouse move event for testing purposes"
-	<return: #BlMouseMoveEvent>
 
 	^ self button: BlMouseButton middle
 ]
@@ -33,7 +31,6 @@ BlMouseMoveEvent class >> middle [
 { #category : #'instance creation' }
 BlMouseMoveEvent class >> primary [
 	"Create a mouse move event for testing purposes"
-	<return: #BlMouseMoveEvent>
 	
 	^ self button: BlMouseButton primary
 ]
@@ -41,7 +38,6 @@ BlMouseMoveEvent class >> primary [
 { #category : #'instance creation' }
 BlMouseMoveEvent class >> secondary [
 	"Create a mouse move event for testing purposes"
-	<return: #BlMouseMoveEvent>
 	
 	^ self button: BlMouseButton secondary
 ]
