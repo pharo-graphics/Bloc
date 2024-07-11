@@ -36,13 +36,17 @@ BlSpaceTest >> tearDown [
 
 { #category : #tests }
 BlSpaceTest >> testEnqueueEvent [
+
 	self skip.
 	space pulse.
 	self assert: space pulseRequested not.
-	
-	space hostSpace enqueueEvent: (BlMouseMoveEvent new position: 20@20).
+
+	space hostSpace enqueueEvent:
+		(BlMouseMoveEvent new
+			 position: 20 @ 20;
+			 yourself).
 	self assert: space pulseRequested.
-	
+
 	space pulse.
 	self assert: space pulseRequested not
 ]

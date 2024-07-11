@@ -8,14 +8,13 @@ Class {
 	#category : #'Bloc-Tests-Universe'
 }
 
-{ #category : #initialization }
+{ #category : #running }
 BlKeyboardProcessorTest >> setUp [
 
 	super setUp.
 	
 	space := BlSpace new.
-	processor := BlKeyboardProcessor new.
-	processor space: space
+	processor := BlKeyboardProcessor space: space
 ]
 
 { #category : #running }

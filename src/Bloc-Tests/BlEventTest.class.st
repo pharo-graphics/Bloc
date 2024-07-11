@@ -405,17 +405,19 @@ BlEventTest >> testSimulateClickOnUnresponsiveOverlapped [
 	blue size: 100 @ 100.
 	blue opacity: 0.2.
 
-	container addChildren: {
-			blue.
-			red }.
+	container addChildren: { blue. red }.
 
 	mouseDown := mouseUp := click := 0.
 
 	blue
 		addEventHandlerOn: BlMouseDownEvent
 		do: [ mouseDown := mouseDown + 1 ].
-	blue addEventHandlerOn: BlMouseUpEvent do: [ mouseUp := mouseUp + 1 ].
-	blue addEventHandlerOn: BlClickEvent do: [ click := click + 1 ].
+	blue
+		addEventHandlerOn: BlMouseUpEvent
+		do: [ mouseUp := mouseUp + 1 ].
+	blue
+		addEventHandlerOn: BlClickEvent
+		do: [ click := click + 1 ].
 
 	BlSpace simulateClickOn: blue.
 

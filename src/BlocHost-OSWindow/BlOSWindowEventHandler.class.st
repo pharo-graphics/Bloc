@@ -343,34 +343,34 @@ BlOSWindowEventHandler >> visitWindowMinimizedEvent: anEvent [
 		extent: anEvent window extent
 ]
 
-{ #category : #'visiting - window' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitWindowMouseEnterEvent: anEvent [
-	| aBlocEvent |
 
+	| aBlocEvent |
 	aBlocEvent := BlSpaceMouseEnterEvent new
-		timestamp: DateAndTime now;
+		timestamp: time now;
 		yourself.
 		
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting - window' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitWindowMouseLeaveEvent: anEvent [
-	| aBlocEvent |
 
+	| aBlocEvent |
 	aBlocEvent := BlSpaceMouseLeaveEvent new
-		timestamp: DateAndTime now;
+		timestamp: time now;
 		yourself.
 		
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting - window' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitWindowMoveEvent: anEvent [
-	| aBlocEvent |
 
+	| aBlocEvent |
 	aBlocEvent := BlSpaceMovedEvent new
-		timestamp: DateAndTime now;
+		timestamp: time now;
 		position: self window position;
 		yourself.
 		

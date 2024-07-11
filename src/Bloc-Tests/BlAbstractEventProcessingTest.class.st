@@ -63,7 +63,7 @@ BlAbstractEventProcessingTest >> root [
 { #category : #'event firing' }
 BlAbstractEventProcessingTest >> sendEvent: anEvent [
 
-	anEvent timestamp: DateAndTime now.
+	anEvent timestamp: space time now.
 	space eventListener handleEvent: anEvent
 ]
 
