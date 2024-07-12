@@ -34,11 +34,13 @@ BlFlowLayout class >> vertical [
 { #category : #comparing }
 BlFlowLayout >> = anObject [
 
-	self == anObject ifTrue: [ ^ true ].
-	self class = anObject class ifFalse: [ ^ false ].
+	super = anObject ifFalse: [ ^ false ].
 	self orientation = anObject orientation ifFalse: [ ^ false ].
-	self horizontalAlignment = anObject horizontalAlignment ifFalse: [ ^ false ].
-	self verticalAlignment = anObject verticalAlignment ifFalse: [ ^ false ].
+	self horizontalAlignment = anObject horizontalAlignment ifFalse: [
+		^ false ].
+	self alignment = anObject alignment ifFalse: [ ^ false ].
+	self verticalAlignment = anObject verticalAlignment ifFalse: [
+		^ false ].
 	^ true
 ]
 
