@@ -93,10 +93,8 @@ BlGridLayout >> = anObject [
 
 	super = anObject ifFalse: [ ^ false ].
 	self orientation = anObject orientation ifFalse: [ ^ false ].
-	self alignMargins = anObject alignMargins ifFalse: [ ^ false ].
 	self alignment = anObject alignment ifFalse: [ ^ false ].
 	self cellSpacing = anObject cellSpacing ifFalse: [ ^ false ].
-	self alignBounds = anObject alignBounds ifFalse: [ ^ false ].
 	^ true
 ]
 
