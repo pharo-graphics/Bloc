@@ -31,6 +31,16 @@ BlOnceLayout class >> on: aBlLayout [
 	^ self new layout: aBlLayout
 ]
 
+{ #category : #comparing }
+BlOnceLayout >> = anObject [
+
+	super = anObject ifFalse: [ ^ false ].
+	self isStopped = anObject isStopped ifFalse: [ ^ false ].
+	self layout = anObject layout ifFalse: [ ^ false ].
+	^ true
+
+]
+
 { #category : #initialization }
 BlOnceLayout >> initialize [
 	super initialize.
