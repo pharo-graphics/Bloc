@@ -250,13 +250,6 @@ BlLayoutTest >> testEqualityBlSquaredLayout [
 ]
 
 { #category : #tests }
-BlLayoutTest >> testEqualityBlSvgGroupLayout [
-
-	self assert: BlSvgGroupLayout new equals: BlSvgGroupLayout new.
-	self assert: BlSvgGroupLayout new hash equals: BlSvgGroupLayout new hash.
-]
-
-{ #category : #tests }
 BlLayoutTest >> testEqualityBlWrapAroundChildrenLayout [
 
 	self
