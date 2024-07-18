@@ -47,6 +47,66 @@ TBlLayoutResizable >> hMatchParent [
 	self resizerDo: [ :c | self requestHMatchParentOn: c ]
 ]
 
+{ #category : #'t - layout resizable - testing' }
+TBlLayoutResizable >> isExact [
+
+	^ self isHExact and: [ self isVExact ]
+]
+
+{ #category : #'t - layout resizable - testing' }
+TBlLayoutResizable >> isHExact [
+
+	^ self constraints horizontal resizer isExact
+]
+
+{ #category : #'t - layout resizable - testing' }
+TBlLayoutResizable >> isHFitContent [
+
+	^ self constraints horizontal resizer isFitContent
+]
+
+{ #category : #'t - layout resizable - testing' }
+TBlLayoutResizable >> isHFitContentLimited [
+
+	^ self constraints horizontal resizer isFitContentLimited
+]
+
+{ #category : #'t - layout resizable - testing' }
+TBlLayoutResizable >> isHMatchParent [
+
+	^ self constraints horizontal resizer isMatchParent
+]
+
+{ #category : #'t - layout resizable - testing' }
+TBlLayoutResizable >> isMatchParent [
+
+	^ self isHMatchParent and: [ self isVMatchParent ]
+]
+
+{ #category : #'t - layout resizable - testing' }
+TBlLayoutResizable >> isVExact [
+
+	^ self constraints vertical resizer isExact
+]
+
+{ #category : #'t - layout resizable - testing' }
+TBlLayoutResizable >> isVFitContent [
+
+	^ self constraints vertical resizer isFitContent
+]
+
+{ #category : #'t - layout resizable - testing' }
+TBlLayoutResizable >> isVFitContentLimited [
+
+	^ self constraints vertical resizer isFitContentLimited
+]
+
+{ #category : #'t - layout resizable - testing' }
+TBlLayoutResizable >> isVMatchParent [
+
+	^ self constraints vertical resizer isMatchParent
+]
+
 { #category : #'t - layout resizeable' }
 TBlLayoutResizable >> matchParent [
 
