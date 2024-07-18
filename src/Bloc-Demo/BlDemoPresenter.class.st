@@ -74,7 +74,7 @@ BlDemoPresenter >> defaultLayout [
 		  yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #drawing }
 BlDemoPresenter >> drawOnCanvas: anElement [
 
 	| root |
@@ -181,7 +181,7 @@ BlDemoPresenter >> initializeTreePresenter [
 { #category : #accessing }
 BlDemoPresenter >> packagesToCollect [
 
-	^ RPackageOrganizer default packages select: [ :each |
+	^ self class packageOrganizer packages select: [ :each |
 		  each name includesSubstring: 'Bloc' ]
 ]
 
