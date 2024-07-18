@@ -200,14 +200,18 @@ BlSpace class >> simulateClickOn: anElement button: aButton [
 BlSpace class >> simulateClickOutside: anElement [
 	"Simulate a click event in outside of a given element by
 	performing mouse down and mouse up events in a sequence"
+
 	| aPosition |
-	
 	aPosition := self locationOutside: anElement.
 	"we simulate a click with a sequence of low level mouse down/up events"
 	self
 		simulateEvents: {
-			BlMouseDownEvent primary position: aPosition.
-			BlMouseUpEvent primary position: aPosition }
+				(BlMouseDownEvent primary
+					 position: aPosition;
+					 yourself).
+				(BlMouseUpEvent primary
+					 position: aPosition;
+					 yourself) }
 		on: anElement
 ]
 
@@ -215,19 +219,27 @@ BlSpace class >> simulateClickOutside: anElement [
 BlSpace class >> simulateDoubleClickOn: anElement [
 	"Simulate a double click event in the middle of a given element by
 	performing mouse down and mouse up events in a sequence"
+
 	| aPosition |
-	
 	"we never know if an element was already layered out"
 	anElement topMostParent forceLayout.
 	aPosition := anElement bounds inSpace center.
-	
+
 	"we simulate a double click with a sequence of low level mouse down/up events"
 	self
 		simulateEvents: {
-			BlMouseDownEvent primary position: aPosition.
-			BlMouseUpEvent primary position: aPosition.
-			BlMouseDownEvent primary position: aPosition.
-			BlMouseUpEvent primary position: aPosition. }
+				(BlMouseDownEvent primary
+					 position: aPosition;
+					 yourself).
+				(BlMouseUpEvent primary
+					 position: aPosition;
+					 yourself).
+				(BlMouseDownEvent primary
+					 position: aPosition;
+					 yourself).
+				(BlMouseUpEvent primary
+					 position: aPosition;
+					 yourself) }
 		on: anElement
 ]
 
@@ -235,20 +247,29 @@ BlSpace class >> simulateDoubleClickOn: anElement [
 BlSpace class >> simulateDragOn: anElement by: aBlVector [
 	"Simulate a click event in the middle of a given element by
 	performing mouse down and mouse up events in a sequence"
-	| aPosition aDelta |
 
+	| aPosition aDelta |
 	"we never know if an element was already layered out"
 	anElement topMostParent forceLayout.
 	aPosition := anElement bounds inSpace center.
-	
-	aDelta := (anElement localBoundsToGlobal: (BlBounds origin: 0.0@0.0 extent: aBlVector)) extent.
-	
+
+	aDelta :=
+		(anElement localBoundsToGlobal:
+			(BlBounds origin: 0.0 @ 0.0 extent: aBlVector)) extent.
+
 	"we simulate a click with a sequence of low level mouse down/up events"
 	self
 		simulateEvents: {
-			BlMouseDownEvent primary position: aPosition; yourself.
-			BlMouseMoveEvent primary position: aPosition + aDelta; delta: aDelta; yourself.
-			BlMouseUpEvent primary position: aPosition + aDelta; yourself }
+				(BlMouseDownEvent primary
+					 position: aPosition;
+					 yourself).
+				(BlMouseMoveEvent primary
+					 position: aPosition + aDelta;
+					 delta: aDelta;
+					 yourself).
+				(BlMouseUpEvent primary
+					 position: aPosition + aDelta;
+					 yourself) }
 		on: anElement
 ]
 
@@ -309,31 +330,24 @@ BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 	by asking any element to #fireEvent: or #dispatchEvent:
 	Note: UI mouse events require to set #position: given in space coordinates or in root most parent
 	coordinates of the provided element"
-	
-	"we should update timestamps"
-	aCollectionOfEvents do: [ :anEvent | anEvent timestamp: DateAndTime now ].
-	
+
+	| aSpace topMostElement |
 	anElement isAttachedToSceneGraph
-		ifTrue: [
-			| aSpace |
-			"element may be removed from the space."
-			aSpace := anElement space.
-			aSpace pulse.
-			aCollectionOfEvents do: [ :anEvent | aSpace dispatchEvent: anEvent ].
-			aSpace dispatchEvent: BlSpaceEventsProcessedEvent new.
-			aSpace pulse ]
-		ifFalse: [ 
-			| temporarySpace topMostElement |
+		ifTrue: [ aSpace := anElement space ]
+		ifFalse: [
 			topMostElement := anElement topMostParent.
-			[ 
-				temporarySpace := self new.
-				temporarySpace root addChild: topMostElement.
-				temporarySpace pulse.
-				aCollectionOfEvents do: [ :anEvent | temporarySpace dispatchEvent: anEvent ].
-				temporarySpace dispatchEvent: BlSpaceEventsProcessedEvent new.
-				temporarySpace pulse
-			] ensure: [ topMostElement removeFromParent ] ]
-	
+			aSpace := self new.
+			aSpace root addChild: topMostElement ].
+
+	aCollectionOfEvents do: [ :anEvent |
+		anEvent timestamp: aSpace time now ].
+
+	aSpace pulse.
+	aCollectionOfEvents do: [ :anEvent | aSpace dispatchEvent: anEvent ].
+	aSpace dispatchEvent: BlSpaceEventsProcessedEvent new.
+	aSpace pulse.
+
+	topMostElement ifNotNil: [ topMostElement removeFromParent ]
 ]
 
 { #category : #'debug - simulation' }
@@ -424,14 +438,17 @@ BlSpace class >> simulateMouseMoveOutside: anElement [
 { #category : #'debug - simulation' }
 BlSpace class >> simulateMouseUpOn: anElement [
 	"Simulate a mouse up event in the middle of a given element"
+
 	| aPosition |
-	
 	"we never know if an element was already layered out"
 	anElement topMostParent forceLayout.
 	aPosition := anElement bounds inSpace center.
 
 	self
-		simulateEvents: { BlMouseUpEvent primary position: aPosition }
+		simulateEvent:
+			(BlMouseUpEvent primary
+				 position: aPosition;
+				 yourself)
 		on: anElement
 ]
 
@@ -440,7 +457,10 @@ BlSpace class >> simulateMouseUpOn: anElement at: aPoint [
 	"Simulate a mouse up event at a given location in the space of the element"
 
 	self
-		simulateEvents: { BlMouseUpEvent primary position: aPoint }
+		simulateEvent:
+			(BlMouseUpEvent primary
+				 position: aPoint;
+				 yourself)
 		on: anElement
 ]
 
@@ -966,7 +986,6 @@ BlSpace >> focusOwner: anElement [
 
 { #category : #'accessing - processors' }
 BlSpace >> focusProcessor [
-	<return: #BlFocusProcessor>
 
 	^ focusProcessor
 ]
@@ -1217,6 +1236,10 @@ BlSpace >> initialize [
 	elementsNeedingPaint := Set new.
 	elementsNeedingLayout := Set new.
 
+	tasks := BlSpaceTaskQueue space: self.
+	time := BlTime real.
+	frame := BlSpaceFrame new.
+
 	eventDispatcher := self defaultEventDispatcher.
 	eventListener := self defaultEventListener.
 	self initDispatcher.
@@ -1224,10 +1247,6 @@ BlSpace >> initialize [
 	mouseProcessor := BlMouseProcessor space: self.
 	focusProcessor := BlFocusProcessor space: self.
 	keyboardProcessor := BlKeyboardProcessor space: self.
-
-	tasks := BlSpaceTaskQueue space: self.
-	time := BlTime real.
-	frame := BlSpaceFrame new.
 
 	rootElement := self defaultRoot.
 
@@ -1361,7 +1380,6 @@ BlSpace >> isVisible [
 
 { #category : #'accessing - processors' }
 BlSpace >> keyboardProcessor [
-	<return: #BlKeyboardProcessor>
 
 	^ keyboardProcessor
 ]

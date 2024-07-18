@@ -74,7 +74,7 @@ BlBenchmarkConsole >> layoutTime: aNumber [
 { #category : #initialization }
 BlBenchmarkConsole >> listenSpace: aSpace [
 	| lastTime frames framesLimit |
-	lastTime := DateAndTime now.
+	lastTime := aSpace time now.
 	frames := 0.
 	framesLimit := 120.
 	aSpace eventDispatcher addEventHandler: 

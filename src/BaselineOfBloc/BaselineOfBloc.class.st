@@ -147,7 +147,7 @@ BaselineOfBloc >> baseline: spec [
 			spec
 				baseline: 'XMLParser' with: [
 					spec
-						repository: 'github://pharo-contributions/XML-XMLParser:v3.6.2/src';
+						repository: 'github://pharo-contributions/XML-XMLParser:master/src';
 						loads: #(Core) ];
 				package: #'Bloc-SVG' with: [
 					spec requires: #(#'Bloc' #'XMLParser') ];

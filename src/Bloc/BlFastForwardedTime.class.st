@@ -24,7 +24,7 @@ Class {
 { #category : #'private - time' }
 BlFastForwardedTime >> currentTime [
 	"Return a 'current' date and time"
-	<return: #DateAndTime>
+
 	| aSpeededTime aDelta aCurrentRealTime |
 	
 	aCurrentRealTime := DateAndTime now.

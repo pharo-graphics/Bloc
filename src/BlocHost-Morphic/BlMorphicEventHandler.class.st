@@ -120,7 +120,7 @@ BlMorphicEventHandler >> handleBackspaceDown: aMorphicEvent [
 		key: KeyboardKey backspace;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: self time now.
+		timestamp: self timestampNow.
 
 	self registerPressedKey: KeyboardKey backspace.
 	self enqueue: aBlEvent
@@ -134,7 +134,7 @@ BlMorphicEventHandler >> handleBackspaceUp: aMorphicEvent [
 		key: KeyboardKey backspace;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: self time now.
+		timestamp: self timestampNow.
 
 	self unregisterPressedKey: KeyboardKey backspace.
 	self enqueue: aBlEvent
@@ -148,7 +148,7 @@ BlMorphicEventHandler >> handleDeleteDown: aMorphicEvent [
 		key: KeyboardKey delete;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: self time now.
+		timestamp: self timestampNow.
 
 	self registerPressedKey: KeyboardKey delete.
 
@@ -190,7 +190,7 @@ BlMorphicEventHandler >> handleDeleteUp: aMorphicEvent [
 		key: KeyboardKey delete;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: self time now.
+		timestamp: self timestampNow.
 	
 	self unregisterPressedKey: KeyboardKey delete.
 	self enqueue: aBlEvent
@@ -236,7 +236,7 @@ BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 		key: aKey;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: theModifiers;
-		timestamp: self time now.
+		timestamp: self timestampNow.
 	
 	self registerPressedKey: aKey.
 
@@ -261,7 +261,7 @@ BlMorphicEventHandler >> handleKeyUp: aMorphicEvent [
 		key: aKey;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: theModifiers;
-		timestamp: self time now.
+		timestamp: self timestampNow.
 
 	self unregisterPressedKey: aKey.
 	self enqueue: aBlEvent
@@ -271,23 +271,19 @@ BlMorphicEventHandler >> handleKeyUp: aMorphicEvent [
 BlMorphicEventHandler >> handleKeystroke: aMorphicEvent [
 
 	| aBlEvent |
-	(aMorphicEvent shiftPressed and: [ aMorphicEvent controlKeyPressed ]) 
-		ifTrue: [ 
-			aMorphicEvent keyCharacter = Character arrowLeft ifTrue: [ 
+	(aMorphicEvent shiftPressed and: [ aMorphicEvent controlKeyPressed ])
+		ifTrue: [
+			aMorphicEvent keyCharacter = Character arrowLeft ifTrue: [
 				^ self handleScrollLeft: aMorphicEvent ].
-			aMorphicEvent keyCharacter = Character arrowRight ifTrue: [ 
+			aMorphicEvent keyCharacter = Character arrowRight ifTrue: [
 				^ self handleScrollRight: aMorphicEvent ] ].
-
-	self flag: 'keystrokeEvent is not created for delete and backspace; no need to handle them '.
-	"(aMorphicEvent keyCharacter = Character delete
-		or: [ aMorphicEvent keyCharacter = Character backspace ])
-			ifTrue: [ ^ self handleDeleteOrBackspaceDown: aMorphicEvent ]."
 
 	aBlEvent := BlTextInputEvent new
 		            text: aMorphicEvent keyCharacter asString;
 		            modifiers:
 			            (self convertKeyModifiersFromEvent: aMorphicEvent);
-		            timestamp: DateAndTime now.
+		            timestamp: self timestampNow;
+		            yourself.
 
 	self enqueue: aBlEvent
 ]
@@ -298,13 +294,15 @@ BlMorphicEventHandler >> handleMouseDown: anEvent [
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent button |
 		button := self convertButtonFromMouseButtonEvent: aMorphicEvent.
+
 		aBlEvent := button mouseDownEventClass new
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			button: button;
-			timestamp: DateAndTime now;
+			timestamp: self timestampNow;
 			yourself.
+
 		self enqueue: aBlEvent ].
 	
 	morph takeKeyboardFocus
@@ -328,7 +326,7 @@ BlMorphicEventHandler >> handleMouseMove: anEvent [
 			delta: aMorphicEvent position - (self window pointToSpace: aMorphicEvent startPoint);
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-			timestamp: self time now;
+			timestamp: self timestampNow;
 			yourself.
 
 		self enqueue: aBlEvent ]
@@ -341,22 +339,23 @@ BlMorphicEventHandler >> handleMouseOver: anEvent [
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleMouseUp: anEvent [
 	
-	morph
-		ifNil: [ ^ self ].
+	morph ifNil: [ ^ self ].
 	
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent button |
 		button := self convertButtonFromMouseButtonEvent: aMorphicEvent.
+
 		aBlEvent := button mouseUpEventClass new
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			button: button;
-			timestamp: DateAndTime now;
+			timestamp: self timestampNow;
 			yourself.
+
 		self enqueue: aBlEvent ].
 	
-	morph ifNotNil: #takeKeyboardFocus
+	morph ifNotNil: [ morph takeKeyboardFocus ]
 ]
 
 { #category : #'event handling' }
@@ -375,16 +374,20 @@ BlMorphicEventHandler >> handleMouseWheel: anEvent [
 
 		aBlEvent := BlMouseWheelEvent new
 			            vector: vector;
-			            modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
+			            modifiers:
+				            (self convertKeyModifiersFromEvent: aMorphicEvent);
 			            position: aMorphicEvent position;
-			            screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
-			            timestamp: DateAndTime now.
+			            screenPosition:
+				            (self globalMousePositionForEvent: aMorphicEvent);
+			            timestamp: self timestampNow;
+			            yourself.
 
 		self enqueue: aBlEvent ]
 ]
 
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleScrollLeft: anEvent [
+
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent |
 		aBlEvent := BlMouseWheelEvent new
@@ -393,22 +396,25 @@ BlMorphicEventHandler >> handleScrollLeft: anEvent [
 			button: (BlMouseButton code: aMorphicEvent buttons);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
-			timestamp: DateAndTime now.
+			timestamp: self timestampNow;
+			yourself.
+
 		self enqueue: aBlEvent ]
 ]
 
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleScrollRight: anEvent [
+
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent |
-
 		aBlEvent := BlMouseWheelEvent new
 			vector: (BlVector x: 5 y: 0);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			button: (BlMouseButton code: aMorphicEvent buttons);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
-			timestamp: DateAndTime now.
+			timestamp: self timestampNow;
+			yourself.
 		
 		self enqueue: aBlEvent ]
 ]
@@ -429,16 +435,19 @@ BlMorphicEventHandler >> handleTextInputEvent: aTextInputEvent [
 				             ctrl: false
 				             alt: false
 				             cmd: false);
-		            timestamp: DateAndTime now.
+		            timestamp: self timestampNow;
+		            yourself.
 
 	self enqueue: aBlEvent
 ]
 
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleWindowClosed: aMorphicEvent [
-	| aBlEvent |
 
-	aBlEvent := BlSpaceCloseRequest new timestamp: DateAndTime now.
+	| aBlEvent |
+	aBlEvent := BlSpaceCloseRequest new
+		            timestamp: self timestampNow;
+		            yourself.
 	self enqueue: aBlEvent.
 
 	morph := nil
@@ -455,11 +464,13 @@ BlMorphicEventHandler >> handleWindowOpened: aMorphicEvent [
 
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleWindowResize: aMorphicEvent [
+
 	| aBlEvent |
 	aBlEvent := BlSpaceResizedEvent new
 		extent: aMorphicEvent width @ aMorphicEvent height;
-		timestamp: DateAndTime now;
+		timestamp: self timestampNow;
 		yourself.
+
 	self enqueue: aBlEvent
 ]
 
@@ -519,10 +530,10 @@ BlMorphicEventHandler >> registerPressedKey: aKey [
 ]
 
 { #category : #accessing }
-BlMorphicEventHandler >> time [
-	<return: #BlTime>
+BlMorphicEventHandler >> timestampNow [
+	"Answer the `DateAndTime` from our space"
 
-	^ self window hostSpace space time
+	^ self window hostSpace space time now
 ]
 
 { #category : #'private - keyboard' }
