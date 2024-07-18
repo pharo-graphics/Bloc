@@ -9,8 +9,6 @@ I support multiple measurement strategies. See examples for more detailed explan
 Class {
 	#name : #BlTextElement,
 	#superclass : #BlElement,
-	#traits : 'TBlLayoutResizable',
-	#classTraits : 'TBlLayoutResizable classTrait',
 	#instVars : [
 		'text',
 		'paragraph',
@@ -166,12 +164,6 @@ BlTextElement >> computeMaxWidth: anExtentMeasurementSpec [
 	aMaxWidth := (aMaxWidth - aPadding width) max: 0.
 	
 	^ aMaxWidth
-]
-
-{ #category : #'api - layout' }
-BlTextElement >> constraintsDo: aBlock [
-
-	self sizeConstraintsDo: aBlock
 ]
 
 { #category : #'api - font size' }
