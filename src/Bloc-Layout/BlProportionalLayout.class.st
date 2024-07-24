@@ -5,19 +5,23 @@ I was initially inspired on Morphic's ProportionalLayout.
 
 Example:
 ```
-	| aContainer childA childB |
+	| aContainer childA childB gap |
+	gap := 5.
+
 	childA := BlElement new
 		id: #childA;
 		background: Color red;
 		constraintsDo: [ :c |
-			c proportional horizontal rightFraction: 0.5 ];
+			c proportional horizontal right: 0.5.
+			c margin: (BlInsets all: gap) ];
 		yourself.
 
 	childB := BlElement new
 		id: #childB;
 		background: Color green;
 		constraintsDo: [ :c |
-			c proportional horizontal leftFraction: 0.5 ];
+			c proportional horizontal left: 0.5.
+			c margin: (BlInsets all: gap) ];
 		yourself.
 
 	aContainer := BlElement new
@@ -30,10 +34,10 @@ Example:
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent ];
-		padding: (BlInsets all: 5);
+		padding: (BlInsets all: gap);
 		yourself.
 	
-	aContainer openInNewSpace.
+	aContainer openInNewSpace
 ```
 "
 Class {
@@ -51,17 +55,26 @@ BlProportionalLayout class >> constraints [
 { #category : #measure }
 BlProportionalLayout >> boundsForChild: aChild in: parentBounds [
 
-	| result horizontalProportions verticalProportions |
+	| horizontalProportions verticalProportions result |
 	horizontalProportions := aChild constraints proportional horizontal.
 	verticalProportions := aChild constraints proportional vertical.
 
-	result := BlBounds fromRectangle: (aChild margin inset: parentBounds).
+	result := BlBounds fromRectangle: parentBounds.
+	
 	result
-		shrinkByLeft: result width * horizontalProportions left
-		top: result height * verticalProportions top
-		right: result width * (1.0 - horizontalProportions right)
-		bottom: result height * (1.0 - verticalProportions bottom).
-	result expanded. "Ensure integer values"
+		shrinkByLeft: parentBounds width * horizontalProportions left
+		top: parentBounds height * verticalProportions top
+		right: parentBounds width * (1.0 - horizontalProportions right)
+		bottom: parentBounds height * (1.0 - verticalProportions bottom).
+
+	result
+		shrinkByLeft: aChild margin left
+		top: aChild margin top
+		right: aChild margin right
+		bottom: aChild margin bottom.
+
+	result expanded. "Convert to integer values"
+
 	^ result
 ]
 
