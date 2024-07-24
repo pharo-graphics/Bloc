@@ -67,7 +67,7 @@ BAExporter >> element: aBlElement [
 BAExporter >> export [
 
 	| aCanvas aBounds |
-	element forceLayout.
+	element isLayoutRequested ifTrue: [ element forceLayout ].
 
 	aBounds := element invalidationBoundsInParent.
 
