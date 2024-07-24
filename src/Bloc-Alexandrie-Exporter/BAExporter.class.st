@@ -65,20 +65,20 @@ BAExporter >> element: aBlElement [
 
 { #category : #'api - exporting' }
 BAExporter >> export [
-	
+
 	| aCanvas aBounds |
 	element forceLayout.
 
-	aBounds := element invalidationBoundsInSpace.
-	
-	aCanvas := self newCanvas: (aBounds extent * scale).
+	aBounds := element invalidationBoundsInParent.
+
+	aCanvas := self newCanvas: aBounds extent * scale.
 
 	aCanvas
 		clear: self background;
 		pathScale: scale asPoint;
 		pathTranslate: aBounds origin negated.
 	element aeFullDrawOn: aCanvas.
-	
+
 	^ self finishExport: aCanvas
 ]
 

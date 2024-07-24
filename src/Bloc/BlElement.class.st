@@ -2173,6 +2173,13 @@ BlElement >> invalidationBounds: aBounds [
 ]
 
 { #category : #accessing }
+BlElement >> invalidationBoundsInParent [
+
+	^ self localBoundsToParent: (BlBounds fromRectangle: self invalidationBounds)
+
+]
+
+{ #category : #accessing }
 BlElement >> invalidationBoundsInSpace [
 
 	^ self localBoundsToGlobal: (BlBounds fromRectangle: self invalidationBounds)
