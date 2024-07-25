@@ -9,15 +9,6 @@ Class {
 }
 
 { #category : #accessing }
-BlLayoutEdge >> fromElement [
-	self
-		deprecated: 'Use #fromNode instead'
-		transformWith: '`@receiver fromElement' -> '`@receiver fromNode'.
-		
-	^ self fromNode
-]
-
-{ #category : #accessing }
 BlLayoutEdge >> fromNode [
 	^ fromNode
 ]
@@ -25,15 +16,6 @@ BlLayoutEdge >> fromNode [
 { #category : #accessing }
 BlLayoutEdge >> fromNode: anObject [
 	fromNode := anObject
-]
-
-{ #category : #accessing }
-BlLayoutEdge >> toElement [
-	self
-		deprecated: 'Use #toNode instead'
-		transformWith: '`@receiver toElement' -> '`@receiver toNode'.
-		
-	^ self toNode
 ]
 
 { #category : #accessing }

@@ -187,16 +187,6 @@ TBlEventTarget >> shortcuts [
 ]
 
 { #category : #'event management' }
-TBlEventTarget >> when: anEventClass do: aBlock [
-
-	self
-		deprecated: 'Use instead #addEventHandlerOn:do:'
-		transformWith: '`@rcv when: `@arg1 do: `@arg2' -> '`@rcv addEventHandlerOn: `@arg1 do: `@arg2'.
-
-	^ self addEventHandlerOn: anEventClass do: aBlock
-]
-
-{ #category : #'event management' }
 TBlEventTarget >> when: anEventClass doOnce: aBlock [
 	"Install an event handler just for one execution. After that the event handler is called, remove it"
 	| anEventHandler |

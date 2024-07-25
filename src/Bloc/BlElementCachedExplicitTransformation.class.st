@@ -41,16 +41,6 @@ BlElementCachedExplicitTransformation >> boundingRectangle: aRectangle [
 ]
 
 { #category : #'private - accessing' }
-BlElementCachedExplicitTransformation >> bounds [
-
-	self
-		deprecated: 'Use #boundingRectangle instead'
-		transformWith: '`@receiver bounds' -> '`@receiver boundingRectangle'.
-
-	^ boundingRectangle
-]
-
-{ #category : #'private - accessing' }
 BlElementCachedExplicitTransformation >> elementTransformation [
 
 	^ elementTransformation
@@ -143,14 +133,4 @@ BlElementCachedExplicitTransformation >> transformPoint: aPoint [
 	(Local to global transformation.)"
 	
 	^ self matrix transformPoint: aPoint
-]
-
-{ #category : #'private - accessing' }
-BlElementCachedExplicitTransformation >> transformation [
-
-	self
-		deprecated: 'Use #elementTransformation instead'
-		transformWith: '`@receiver transformation' -> '`@receiver elementTransformation'.
-	
-	^ elementTransformation
 ]
