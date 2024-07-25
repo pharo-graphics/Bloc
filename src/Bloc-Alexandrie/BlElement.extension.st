@@ -139,18 +139,6 @@ BlElement >> aeDrawOn: aeCanvas [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlElement >> aeDrawOn: aeCanvas with: aBlockClosure [
-
-	self
-		deprecated: 'Use AeCanvas API directly'
-		transformWith:
-			'`@rcv aeDrawOn: `@arg1 with: `@arg2' ->
-			'`@arg1 restoreContextAfterPaintAlpha: `@rcv opacity with: `@arg2'.
-
-	aeCanvas restoreContextAfterPaintAlpha: self opacity with: aBlockClosure
-]
-
-{ #category : #'*Bloc-Alexandrie' }
 BlElement >> aeFullDrawOn: aCanvas [
 	"Main entry point to draw myself and my children on an Alexandrie canvas."
 
