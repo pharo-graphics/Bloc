@@ -6,6 +6,9 @@ Transform animation can be absolute or relative.
  - #relative builds on existing element transformation
  - #absolute defines new element independent transformation
 
+`BlTransformAnimation` uses `BlElementAbsoluteTransformation` to manage the transformation matrix, even if each transformation uses `BlElementLocalTransformation` for its defintion.  This transformation works by updating its transformation matrix from the identity matrix to target matrix. This is done through interpolation computed at each animation step (fromMatrix interpolate: aNumber to: toMatrix). 
+
+This transformation doesn't use an origin point. Instead, It'll apply a translation, so that your shape still look like it's in the element bound. This translation is added to your transformation definition (boundingRectangle:)
 "
 Class {
 	#name : #BlTransformAnimation,
