@@ -3408,6 +3408,34 @@ BlElement >> privateRequestingLayout: aBoolean [
 		ifFalse: [ flags clearNeedsLayout ]
 ]
 
+{ #category : #dependencies }
+BlElement >> release [ 
+
+	super release.
+	spaceReference release.
+	spaceReference := nil.
+	parent := nil.
+	children release.
+	children := nil.
+	bounds := nil.
+	measuredBounds := nil.
+	boundsCache release.
+	boundsCache := nil.
+	eventDispatcher release.
+	constraints := nil.
+	layout release.
+	layout := nil.
+	transformation := nil.
+	taskQueue release.
+	taskQueue := nil.
+	errorHandler := nil.
+	userData release.
+	userData := nil.
+	visuals := nil.
+	flags := nil
+	
+]
+
 { #category : #'api - bounds' }
 BlElement >> relocate: aPoint [
 	
