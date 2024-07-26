@@ -16,16 +16,6 @@ Class {
 }
 
 { #category : #'window - properties' }
-BlHeadlessHostSpace >> borderless [
-
-	self
-		deprecated: 'Use isBorderless instead of current one'
-		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
-
-	^ self isBorderless
-]
-
-{ #category : #'window - properties' }
 BlHeadlessHostSpace >> borderless: aBoolean [
 	"Make host window borderless if true is given"
 ]
@@ -54,29 +44,9 @@ BlHeadlessHostSpace >> densityDpi [
 ]
 
 { #category : #'window - properties' }
-BlHeadlessHostSpace >> fullscreen [
-
-	self
-		deprecated: 'Use isFullscreen instead of current one'
-		transformWith: '`@rcv fullscreen' -> '`@rcv isFullscreen'.
-
-	^ self isFullscreen
-]
-
-{ #category : #'window - properties' }
 BlHeadlessHostSpace >> fullscreen: aBoolean [
 	"Switch underlying window to fullscreen if true is given
 	and exit fullscreen mode if false is given"
-]
-
-{ #category : #'window - properties' }
-BlHeadlessHostSpace >> fullsize [
-
-	self
-		deprecated: 'Use isFullsize instead of current one'
-		transformWith: '`@rcv fullsize' -> '`@rcv isFullsize'.
-		
-	^ self isFullsize
 ]
 
 { #category : #'window - properties' }
@@ -217,16 +187,6 @@ BlHeadlessHostSpace >> position: aPoint [
 { #category : #'host space - drawing' }
 BlHeadlessHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
-]
-
-{ #category : #'window - properties' }
-BlHeadlessHostSpace >> resizable [
-
-	self
-		deprecated: 'Use isResizable instead of current one'
-		transformWith: '`@rcv resizable' -> '`@rcv isResizable'.
-
-	^ self isResizable
 ]
 
 { #category : #'window - properties' }

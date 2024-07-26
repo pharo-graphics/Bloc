@@ -105,17 +105,6 @@ BlFocusProcessor >> hasFocusOwner [
 ]
 
 { #category : #'focus - requesting' }
-BlFocusProcessor >> looseFor: anElement [
-	self
-		deprecated: 'Please use loseFor: instead.'
-		transformWith:
-			'`@receiver looseFor: `@statements1'
-				-> '`@receiver loseFor: `@statements1'.
-
-	self loseFor: anElement
-]
-
-{ #category : #'focus - requesting' }
 BlFocusProcessor >> loseFor: anElement [
 	self focusOwner ~= anElement
 		ifTrue: [ ^ self ].

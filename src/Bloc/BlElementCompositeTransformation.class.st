@@ -73,13 +73,3 @@ BlElementCompositeTransformation >> isPureTranslation [
 
 	^ elementTransformations allSatisfy: [ :each | each isPureTranslation ]
 ]
-
-{ #category : #accessing }
-BlElementCompositeTransformation >> transformations [
-
-	self
-		deprecated: 'Use #elementTransformations instead'
-		transformWith: '`@receiver transformations' -> '`@receiver elementTransformations'.
-	
-	^ elementTransformations
-]

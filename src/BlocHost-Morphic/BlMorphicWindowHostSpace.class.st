@@ -16,16 +16,6 @@ Class {
 }
 
 { #category : #'window - properties' }
-BlMorphicWindowHostSpace >> borderless [
-
-	self
-		deprecated: 'Use isBorderless instead of current one'
-		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
-
-	^ self isBorderless
-]
-
-{ #category : #'window - properties' }
 BlMorphicWindowHostSpace >> borderless: aBoolean [
 	"Make host window borderless if true is given"
 
@@ -64,16 +54,6 @@ BlMorphicWindowHostSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch (a float)"
 	
 	^ 96.0
-]
-
-{ #category : #'window - properties' }
-BlMorphicWindowHostSpace >> fullsize [
-
-	self
-		deprecated: 'Use isFullsize instead of current one'
-		transformWith: '`@rcv fullsize' -> '`@rcv isFullsize'.
-		
-	^ self isFullsize
 ]
 
 { #category : #'window - properties' }
