@@ -52,37 +52,6 @@ TBlLayoutParentNode >> heightSpec [
 	^ self extentSpec heightSpec
 ]
 
-{ #category : #'api - geometry' }
-TBlLayoutParentNode >> layoutExtent [
-	self
-		deprecated: 'Use #extent instead.'
-		transformWith: '`@receiver layoutExtent' -> '`@receiver extent'.
-
-	^ self extent
-]
-
-{ #category : #'api - geometry' }
-TBlLayoutParentNode >> measuredExtent [
-	<return: #Point>
-
-	self
-		deprecated: 'Use #extent instead.'
-		transformWith: '`@receiver measuredExtent' -> '`@receiver extent'.
-
-	^ self extent
-]
-
-{ #category : #'api - geometry' }
-TBlLayoutParentNode >> measuredExtent: aPoint [
-	self
-		deprecated: 'Please use extent: instead.'
-		transformWith:
-			'`@receiver measuredExtent: `@statements1'
-				-> '`@receiver extent: `@statements1'.
-
-	self extent: aPoint
-]
-
 { #category : #accessing }
 TBlLayoutParentNode >> parent [
 	^ self explicitRequirement

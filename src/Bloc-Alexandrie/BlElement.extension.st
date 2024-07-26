@@ -20,9 +20,10 @@ BlElement >> aeAsForm [
 	self isLayoutRequested ifTrue: [ self forceLayout ].
 
 	"We want to consider our border, effect, as well as children's."
-	invalidationBounds := self invalidationBoundsInSpace.
+	invalidationBounds := self invalidationBoundsInParent.
 	aCanvas := AeCanvas extent: invalidationBounds extent.
 	aCanvas pathTranslate: invalidationBounds origin negated.
+
 	self aeFullDrawOn: aCanvas.
 	^ aCanvas asForm
 ]
@@ -135,18 +136,6 @@ BlElement >> aeDrawOn: aeCanvas [
 			self transformation aeApplyTo: aeCanvas.
 
 			self aeDrawIgnoringOpacityAndTransformationOn: aeCanvas ]
-]
-
-{ #category : #'*Bloc-Alexandrie' }
-BlElement >> aeDrawOn: aeCanvas with: aBlockClosure [
-
-	self
-		deprecated: 'Use AeCanvas API directly'
-		transformWith:
-			'`@rcv aeDrawOn: `@arg1 with: `@arg2' ->
-			'`@arg1 restoreContextAfterPaintAlpha: `@rcv opacity with: `@arg2'.
-
-	aeCanvas restoreContextAfterPaintAlpha: self opacity with: aBlockClosure
 ]
 
 { #category : #'*Bloc-Alexandrie' }

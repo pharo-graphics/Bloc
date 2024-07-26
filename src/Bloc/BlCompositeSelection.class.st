@@ -109,16 +109,6 @@ BlCompositeSelection >> deselectAll [
 ]
 
 { #category : #'api - selection' }
-BlCompositeSelection >> deselectAllIndexes: aCollection [
-
-	self
-		deprecated: 'Use deselectIndexes: instead'
-		transformWith: '`@receiver deselectAllIndexes: `@argument'
-			-> '`@receiver deselectIndexes: `@argument'.
-	self deselectIndexes: aCollection
-]
-
-{ #category : #'api - selection' }
 BlCompositeSelection >> deselectIndex: anIndex [
 	"Remove a given selection"
 
@@ -235,16 +225,6 @@ BlCompositeSelection >> select: aFromIndex to: aToIndex [
 	"Add a new monotone selection merging it with existing ones within provided indices"
 	
 	self add: (BlSelection from: (aFromIndex max: 0) to: aToIndex)
-]
-
-{ #category : #'api - selection' }
-BlCompositeSelection >> selectAllIndexes: aCollection [
-
-	self
-		deprecated: 'Use selectIndexes: instead'
-		transformWith: '`@receiver selectAllIndexes: `@argument'
-			-> '`@receiver selectIndexes: `@argument'.
-	self selectIndexes: aCollection
 ]
 
 { #category : #'api - selection' }

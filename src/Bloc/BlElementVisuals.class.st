@@ -212,16 +212,6 @@ BlElementVisuals >> focusability: aBlFocusability [
 ]
 
 { #category : #accessing }
-BlElementVisuals >> focused [
-
-	self
-		deprecated: 'Use isFocused instead of current one'
-		transformWith: '`@rcv focused' -> '`@rcv isFocused'.
-
-	^ self isFocused
-]
-
-{ #category : #accessing }
 BlElementVisuals >> focused: aBoolean [
 	"Change focused state and return new visuals to be used instead of the previous one (not necessarily a new instance)"
 	<return: #BlElementVisuals>

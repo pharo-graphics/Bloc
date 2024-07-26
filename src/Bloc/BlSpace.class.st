@@ -517,16 +517,6 @@ BlSpace >> becomeVisible [
 ]
 
 { #category : #'window - properties' }
-BlSpace >> borderless [
-
-	self
-		deprecated: 'Use isBorderless instead of current one'
-		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
-
-	^ self isBorderless
-]
-
-{ #category : #'window - properties' }
 BlSpace >> borderless: aBoolean [
 
 	borderless := aBoolean.
@@ -546,16 +536,6 @@ BlSpace >> center [
 	self hostSpace ifNotNil: [ :hw | hw center ]
 ]
 
-{ #category : #'children - accessing' }
-BlSpace >> children [
-
-	self
-		deprecated: 'Talk directly to root'
-		transformWith: '`@rcv children' -> '`@rcv root children'.
-		
-	^ self root children
-]
-
 { #category : #'change - rendering' }
 BlSpace >> clearDirtyElements [
 	"Clear dirty elements collection, which means there are no pending graphic operations."
@@ -568,17 +548,6 @@ BlSpace >> close [
 	"Delegate closing work to the Universe"
 	
 	(BlParallelUniverse forHost: self host class) closeSpace: self
-]
-
-{ #category : #'composition layer' }
-BlSpace >> compositionLayer [
-	"Return my composition layer if I have one or nil otherwise"
-
-	self
-		deprecated: 'Talk directly to root'
-		transformWith: '`@rcv compositionLayer' -> '`@rcv root compositionLayer'.
-
-	^ self root compositionLayer
 ]
 
 { #category : #'cursor managing' }
@@ -996,16 +965,6 @@ BlSpace >> focusProcessor: aFocusProcessor [
 ]
 
 { #category : #'window - properties' }
-BlSpace >> focused [
-
-	self
-		deprecated: 'Use isFocused instead of current one'
-		transformWith: '`@rcv focused' -> '`@rcv isFocused'.
-
-	^ focused
-]
-
-{ #category : #'window - properties' }
 BlSpace >> focused: aBoolean [
 
 	focused := aBoolean
@@ -1019,32 +978,12 @@ BlSpace >> frame [
 ]
 
 { #category : #'window - properties' }
-BlSpace >> fullscreen [
-
-	self
-		deprecated: 'Use isFullscreen instead of current one'
-		transformWith: '`@rcv fullscreen' -> '`@rcv isFullscreen'.
-
-	^ self isFullscreen
-]
-
-{ #category : #'window - properties' }
 BlSpace >> fullscreen: aBoolean [
 	"Switch underlying window to fullscreen if true is given
 	and exit fullscreen mode if false is given"
 
 	fullscreen := aBoolean.
 	 self hostSpaceDo: [ :aHostSpace | aHostSpace fullscreen: aBoolean ]
-]
-
-{ #category : #'window - properties' }
-BlSpace >> fullsize [
-
-	self
-		deprecated: 'Use isFullsize instead of current one'
-		transformWith: '`@rcv fullsize' -> '`@rcv isFullsize'.
-		
-	^ self isFullsize
 ]
 
 { #category : #'window - properties' }
@@ -1568,16 +1507,6 @@ BlSpace >> requestNextPulse [
 ]
 
 { #category : #'window - properties' }
-BlSpace >> resizable [
-
-	self
-		deprecated: 'Use isResizable instead of current one'
-		transformWith: '`@rcv resizable' -> '`@rcv isResizable'.
-
-	^ self isResizable
-]
-
-{ #category : #'window - properties' }
 BlSpace >> resizable: aBoolean [
 	"Make underlying window resizable if true is given"
 	
@@ -1748,16 +1677,6 @@ BlSpace >> toFront [
 	self hostSpace ifNotNil: [ :hw | hw toFront ]
 ]
 
-{ #category : #accessing }
-BlSpace >> topMostParent [
-
-	self
-		deprecated: 'Talk directly to root'
-		transformWith: '`@rcv topMostParent' -> '`@rcv root'.
-
-	^ self root
-]
-
 { #category : #'focus managing' }
 BlSpace >> ungrabFocus [
 
@@ -1822,24 +1741,4 @@ BlSpace >> windowScale [
 	^ self
 		hostSpaceDo: [ :aHostSpace | aHostSpace scaleFactor ]
 		ifAbsent: [ 1.0 asPoint ]
-]
-
-{ #category : #'api - children enumeration' }
-BlSpace >> withAllChildrenBreadthFirst [
-
-	self
-		deprecated: 'Talk directly to root'
-		transformWith: '`@rcv withAllChildrenBreadthFirst' -> '`@rcv root withAllChildrenBreadthFirst'.
-	
-	^ self root withAllChildrenBreadthFirst
-]
-
-{ #category : #'api - children enumeration' }
-BlSpace >> withAllChildrenBreadthFirstDo: aBlock [ 
-
-	self
-		deprecated: 'Talk directly to root'
-		transformWith: '`@rcv withAllChildrenBreadthFirstDo: `@arg' -> '`@rcv root withAllChildrenBreadthFirstDo: `@arg'.
-
-	^ self root withAllChildrenBreadthFirstDo: aBlock 
 ]
