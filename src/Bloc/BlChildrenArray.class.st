@@ -79,6 +79,14 @@ BlChildrenArray >> name [
 	^ 'Children array'
 ]
 
+{ #category : #dependencies }
+BlChildrenArray >> release [ 
+
+	super release.
+	array := nil
+	
+]
+
 { #category : #'children - removing' }
 BlChildrenArray >> removeAll: aCollectionOfBlElement [
 	array := array copyWithoutAll: aCollectionOfBlElement

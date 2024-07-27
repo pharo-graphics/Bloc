@@ -41,7 +41,7 @@ BlInfiniteHolder >> dataSourcePosition [
 	"Returns the datasource position of the item represented by this ElementHolder."
 	<return: #Number>
 
-	^ infiniteElement dataSourcePositionOf: self
+	^ self infiniteElement dataSourcePositionOf: self
 ]
 
 { #category : #private }
@@ -72,7 +72,7 @@ BlInfiniteHolder >> infiniteElement [
 	I am recycled or removed"
 	<return: #BlInfiniteElement>
 
-	^ infiniteElement
+	^ infiniteElement ifNotNil: [ :ie | ie first ]
 ]
 
 { #category : #'private - accessing' }
@@ -80,7 +80,7 @@ BlInfiniteHolder >> infiniteElement: anInfiniteElement [
 	"Set an infinite element a child of which a hold.
 	anInfiniteElement must not be nil"
 	
-	infiniteElement := anInfiniteElement
+	infiniteElement := anInfiniteElement asWeakReference 
 ]
 
 { #category : #initialization }

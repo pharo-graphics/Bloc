@@ -48,7 +48,7 @@ BlInfiniteLayoutConstraints >> holder [
 	holder can not be nil"
 	<return: #BlInfiniteHolder>
 
-	^ holder
+	^ holder 
 ]
 
 { #category : #accessing }
@@ -60,10 +60,10 @@ BlInfiniteLayoutConstraints >> holder: anElementHolder [
 		assert: [ anElementHolder isNotNil ]
 		description: [ 'An element holder must not be nil' ].
 
-	holder := anElementHolder
+	holder := anElementHolder 
 ]
 
-{ #category : #'initialize-release' }
+{ #category : #initialization }
 BlInfiniteLayoutConstraints >> initialize [
 	super initialize.
 	
