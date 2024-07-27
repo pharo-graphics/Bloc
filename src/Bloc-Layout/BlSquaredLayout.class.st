@@ -15,6 +15,15 @@ BlSquaredLayout class >> on: aBlLayout [
 	^ self new layout: aBlLayout
 ]
 
+{ #category : #comparing }
+BlSquaredLayout >> = anObject [
+
+	super = anObject ifFalse: [ ^ false ].
+	self layout = anObject layout ifFalse: [ ^ false ].
+	self isTight = anObject isTight ifFalse: [ ^ false ].
+	^ true
+]
+
 { #category : #accessing }
 BlSquaredLayout >> beLoose [
 	"Will use the max(width, height) to compute the extent"

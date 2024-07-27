@@ -31,6 +31,15 @@ BlInfiniteLinearLayout class >> vertical [
 	^ self new beVertical
 ]
 
+{ #category : #comparing }
+BlInfiniteLinearLayout >> = anObject [
+
+	super = anObject ifFalse: [ ^ false ].
+	self orientation = anObject orientation ifFalse: [ ^ false ].
+	^ true
+
+]
+
 { #category : #orientation }
 BlInfiniteLinearLayout >> beHorizontal [
 

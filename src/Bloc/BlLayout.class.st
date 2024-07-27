@@ -162,6 +162,12 @@ BlLayout >> findClosestChildOf: anElement to: aPoint [
 	^ anElement children first
 ]
 
+{ #category : #comparing }
+BlLayout >> hash [
+
+	^ self class hash
+]
+
 { #category : #protected }
 BlLayout >> isInfluencedByTransformation [
 	"Return true if the layout may be influenced by the element's transformation"
