@@ -354,8 +354,7 @@ BlParallelUniverse >> openSpace: aSpace [
 { #category : #'private - spaces' }
 BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
-	aSpace isOpened
-		ifTrue: [ ^ self ].
+	aSpace isOpened ifTrue: [ ^ self ].
 
 	self
 		assert: [ aSpace hasHostSpace not ]
@@ -383,7 +382,10 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
 	"Note: we should send shown event after everything else is done, because
 	theoretically, that only space could be closed as a reaction to the event"
-	aSpace dispatchEvent: (BlSpaceShownEvent new space: self).
+	aSpace dispatchEvent:
+		(BlSpaceShownEvent new
+			space: aSpace;
+			yourself).
 
 	"Notify root element that it is now visible to the user"
 	aSpace becomeVisible.
