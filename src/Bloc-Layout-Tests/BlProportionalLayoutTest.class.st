@@ -78,8 +78,8 @@ BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 
 	self assert: aContainer extent equals: containerExtent.
 
-	childMaxWidth := containerExtent x - containerPadding left - containerPadding right - childMargin left - childMargin right.
-	childMaxHeight := containerExtent y - containerPadding top - containerPadding bottom - childMargin top - childMargin bottom.
+	childMaxWidth := containerExtent x - containerPadding left - containerPadding right.
+	childMaxHeight := containerExtent y - containerPadding top - containerPadding bottom.
 
 	self
 		assert: aChild bounds inParent topLeft "=aChild position"
