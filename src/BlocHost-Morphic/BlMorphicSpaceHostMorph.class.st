@@ -157,8 +157,9 @@ BlMorphicSpaceHostMorph >> pointToSpace: aPoint [
 { #category : #'events-processing' }
 BlMorphicSpaceHostMorph >> processEvent: anEvent using: defaultDispatcher [
 	
-	(self isInSpaceArea: anEvent)
-		ifFalse: [ ^ super processEvent: anEvent using: defaultDispatcher ].
+	((self isInSpaceArea: anEvent)
+		and: [ (anEvent isMouse and: [ anEvent isMouseDown and: [ anEvent isSpecialGesture ] ]) not ])
+			ifFalse: [ ^ super processEvent: anEvent using: defaultDispatcher ].
 
 	anEvent sentTo: eventHandler.
 	
