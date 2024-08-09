@@ -23,9 +23,10 @@ Class {
 
 { #category : #'instance creation' }
 BlGridLayoutInterval class >> min: aMinValue max: aMaxValue [
-	<return: #BlGridLayoutInterval>
 
-	^ self new min: aMinValue max: aMaxValue
+	^ self new
+		  min: aMinValue max: aMaxValue;
+		  yourself
 ]
 
 { #category : #comparing }
@@ -48,7 +49,6 @@ BlGridLayoutInterval >> hash [
 
 { #category : #accessing }
 BlGridLayoutInterval >> inversed [
-	<return: #BlGridLayoutInterval>
 
 	^ self class min: max max: min
 ]
@@ -91,7 +91,6 @@ BlGridLayoutInterval >> printOn: aStream [
 
 { #category : #accessing }
 BlGridLayoutInterval >> size [
-	<return: #Number>
 
 	^ max - min
 ]

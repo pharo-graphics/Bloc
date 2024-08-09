@@ -945,11 +945,11 @@ BlElement >> computeLayout [
 			widthSpec := BlMeasurementSpec exact: maxExtent x.
 			heightSpec := BlMeasurementSpec exact: maxExtent y.
 
-			self measure: (BlExtentMeasurementSpec new
+			self measure: (BlExtentMeasurementSpec
 				widthSpec: (self layout
 					measurementSpecFor: widthSpec
 					usedSize:  0.0
-					resizer: self constraints horizontal resizer);
+					resizer: self constraints horizontal resizer)
 				heightSpec: (self layout
 					measurementSpecFor: heightSpec
 					usedSize:  0.0

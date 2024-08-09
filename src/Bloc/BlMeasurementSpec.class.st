@@ -10,30 +10,41 @@ Class {
 
 { #category : #'instance creation' }
 BlMeasurementSpec class >> atMost: aNumber [
-	^ self new beAtMost: aNumber
+
+	^ self new
+		  beAtMost: aNumber;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlMeasurementSpec class >> exact: aNumber [
-	^ self new beExact: aNumber
+
+	^ self new
+		  beExact: aNumber;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlMeasurementSpec class >> size: aSize mode: aMode [
+
 	^ self new
-		size: aSize;
-		mode: aMode;
-		yourself
+		  size: aSize;
+		  mode: aMode;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlMeasurementSpec class >> unspecified [
+
 	^ self unspecified: 0.0
 ]
 
 { #category : #'instance creation' }
 BlMeasurementSpec class >> unspecified: aNumber [
-	^ self new beUnspecified: aNumber
+
+	^ self new
+		  beUnspecified: aNumber;
+		  yourself
 ]
 
 { #category : #comparing }
@@ -50,13 +61,15 @@ BlMeasurementSpec >> = anotherObject [
 
 { #category : #composition }
 BlMeasurementSpec >> @ heightMeasurementSpec [
-	^ BlExtentMeasurementSpec new
-		widthSpec: self;
-		heightSpec: heightMeasurementSpec
+
+	^ BlExtentMeasurementSpec
+		  widthSpec: self
+		  heightSpec: heightMeasurementSpec
 ]
 
 { #category : #converting }
 BlMeasurementSpec >> beAtMost: aNumber [
+
 	self
 		size: aNumber;
 		mode: BlMeasurementMode atMost
@@ -64,6 +77,7 @@ BlMeasurementSpec >> beAtMost: aNumber [
 
 { #category : #converting }
 BlMeasurementSpec >> beExact: aNumber [
+
 	self
 		size: aNumber;
 		mode: BlMeasurementMode exact
@@ -71,11 +85,13 @@ BlMeasurementSpec >> beExact: aNumber [
 
 { #category : #converting }
 BlMeasurementSpec >> beUnspecified [
+
 	self beUnspecified: 0
 ]
 
 { #category : #converting }
 BlMeasurementSpec >> beUnspecified: aNumber [
+
 	self
 		size: aNumber;
 		mode: BlMeasurementMode unspecified
@@ -83,52 +99,61 @@ BlMeasurementSpec >> beUnspecified: aNumber [
 
 { #category : #comparing }
 BlMeasurementSpec >> hash [
+
 	^ size hash bitXor: mode hash
 ]
 
 { #category : #testing }
 BlMeasurementSpec >> isAtMost [
+
 	^ self mode isAtMost
 ]
 
 { #category : #testing }
 BlMeasurementSpec >> isExact [
+
 	^ self mode isExact
 ]
 
 { #category : #testing }
 BlMeasurementSpec >> isUnspecified [
+
 	^ self mode isUnspecified
 ]
 
 { #category : #geometry }
 BlMeasurementSpec >> min: aMinSize max: aMaxSize [
+
 	^ self mode size: self size min: aMinSize max: aMaxSize
 ]
 
 { #category : #accessing }
 BlMeasurementSpec >> mode [
+
 	^ mode
 ]
 
 { #category : #accessing }
 BlMeasurementSpec >> mode: aMeasurementSpec [
+
 	mode := aMeasurementSpec
 ]
 
 { #category : #printing }
 BlMeasurementSpec >> printOn: aStream [
+
 	self mode printOn: aStream size: self size
 ]
 
 { #category : #accessing }
 BlMeasurementSpec >> size [
+
 	^ size
 ]
 
 { #category : #accessing }
 BlMeasurementSpec >> size: aNumber [
-	"aNumber should satisfy: #isBlocPositiveFloat"
+	"aNumber should be a positive Float"
 
 	size := aNumber
 ]

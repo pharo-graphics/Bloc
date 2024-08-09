@@ -47,7 +47,6 @@ BlLayoutParentNodeWithTransformation >> extent: aPoint [
 
 { #category : #'api - extent spec' }
 BlLayoutParentNodeWithTransformation >> extentSpec [
-	<return: #BlExtentMeasurementSpec>
 
 	^ parentNode extentSpec
 ]

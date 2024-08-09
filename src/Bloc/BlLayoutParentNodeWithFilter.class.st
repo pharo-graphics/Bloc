@@ -46,7 +46,6 @@ BlLayoutParentNodeWithFilter >> extent: aPoint [
 
 { #category : #'api - extent spec' }
 BlLayoutParentNodeWithFilter >> extentSpec [
-	<return: #BlExtentMeasurementSpec>
 
 	^ parentNode extentSpec
 ]

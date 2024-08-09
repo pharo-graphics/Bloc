@@ -79,6 +79,7 @@ BlLayoutResizer >> isMatchParent [
 
 { #category : #'double dispatching' }
 BlLayoutResizer >> measurementAtMostWith: aNumber [
+
 	^ self subclassResponsibility
 ]
 

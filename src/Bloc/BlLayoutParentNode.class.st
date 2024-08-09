@@ -140,6 +140,7 @@ BlLayoutParentNode >> extent: aPoint [
 
 { #category : #'api - extent spec' }
 BlLayoutParentNode >> extentSpec [
+
 	^ extentSpec
 ]
 

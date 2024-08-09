@@ -265,8 +265,8 @@ BlGridLayoutAxis >> count: aNumber [
 
 { #category : #'computing arcs' }
 BlGridLayoutAxis >> createArcs [
+
 	| mins maxs n sMins sMaxs |
-	
 	mins := OrderedCollection new.
 	maxs := OrderedCollection new.
 	
@@ -279,10 +279,10 @@ BlGridLayoutAxis >> createArcs [
 	self isOrderPreserved
 		ifTrue: [
 			"Add a constraint for every row/col"
-			0 to: (self count - 1) do: [ :i |
+			1 to: self count do: [ :i |
 				self
 					includeIn: mins
-					span: (BlGridLayoutInterval min: i max: i + 1)
+					span: (BlGridLayoutInterval min: i - 1 max: i)
 					size: (BlGridMutableInteger value: 0) ] ].
 	
 	"Add the container constraints. Use the version of include that allows duplicate entries in case a child spans the entire grid."

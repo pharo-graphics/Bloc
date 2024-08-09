@@ -45,7 +45,6 @@ BlLayoutParentNodeWithEdges >> extent: aPoint [
 
 { #category : #'api - extent spec' }
 BlLayoutParentNodeWithEdges >> extentSpec [
-	<return: #BlExtentMeasurementSpec>
 
 	^ parentNode extentSpec
 ]

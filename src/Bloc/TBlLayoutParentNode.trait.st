@@ -32,7 +32,6 @@ TBlLayoutParentNode >> extent: aPoint [
 
 { #category : #'api - extent spec' }
 TBlLayoutParentNode >> extentSpec [
-	<return: #BlExtentMeasurementSpec>
 
 	^ self explicitRequirement
 ]

@@ -12,7 +12,7 @@ BlCompositeLayout >> addLayout: aBlLayout [
 	layouts add: aBlLayout
 ]
 
-{ #category : #adding }
+{ #category : #initialization }
 BlCompositeLayout >> initialize [
 	super initialize.
 	
