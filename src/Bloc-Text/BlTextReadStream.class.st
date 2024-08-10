@@ -42,7 +42,7 @@ BlTextReadStream >> iterator: aBlTextIterator [
 { #category : #'stream - enumeration' }
 BlTextReadStream >> next [
 	"Return an item (character) at current position and move one to the right"
-	<return: #Character or: #Object>
+	
 	^ self iterator next
 ]
 

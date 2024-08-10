@@ -73,7 +73,6 @@ BlSubTextIterator >> hasPrevious [
 { #category : #'iterator - enumeration' }
 BlSubTextIterator >> next [
 	"Return an item (character) at current position and move one to the right"
-	<return: #Character or: #Object>
 
 	^ iterator next
 ]

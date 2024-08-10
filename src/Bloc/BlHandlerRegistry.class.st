@@ -137,7 +137,7 @@ BlHandlerRegistry >> hasHandler: anEventHandler [
 { #category : #'api - testing' }
 BlHandlerRegistry >> isEmpty [
 	"Return true if registry is empty (there are no handlers), false otherwise"
-	
+
 
 	^ self numberOfHandlers isZero
 ]

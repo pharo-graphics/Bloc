@@ -100,7 +100,6 @@ BlLayoutChildNodeWithElement >> position [
 { #category : #'api - geometry' }
 BlLayoutChildNodeWithElement >> position: aPoint [
 	"Set position of the top left corner in the parent coordinate system"
-	<return: #Point>
 	
 	childNode position: aPoint
 ]
