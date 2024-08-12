@@ -40,6 +40,7 @@ BlCompositeLayout >> mayInfluencePosition [
 
 { #category : #measure }
 BlCompositeLayout >> measure: aParentLayoutNode [
+
 	layouts do: [ :eachLayout | eachLayout measure: aParentLayoutNode ]
 ]
 

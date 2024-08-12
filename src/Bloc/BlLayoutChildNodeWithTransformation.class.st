@@ -54,16 +54,18 @@ BlLayoutChildNodeWithTransformation >> extentToParent: aPoint [
 
 { #category : #'api - geometry' }
 BlLayoutChildNodeWithTransformation >> layoutBounds [
-	<return: #BlBounds>
+
 	| aDelta |
-	
 	"a delta represents by how much the layout bounds should be moved to accomodate transformation"
-	aDelta := (self boundsToParent: (BlBounds origin: 0@0 extent: self privateMeasurement extent)) origin.
-	aDelta := aDelta - (self pointToParent: 0@0).
-	
+	aDelta := (self boundsToParent:
+		           (BlBounds
+			            origin: 0 @ 0
+			            extent: self privateMeasurement extent)) origin.
+	aDelta := aDelta - (self pointToParent: 0 @ 0).
+
 	^ BlBounds
-		origin: self privateMeasurement position - aDelta
-		extent: self privateMeasurement extent
+		  origin: self privateMeasurement position - aDelta
+		  extent: self privateMeasurement extent
 ]
 
 { #category : #'api - transformation' }
@@ -82,13 +84,15 @@ BlLayoutChildNodeWithTransformation >> measure: anExtentSpecOrBlock [
 
 { #category : #accessing }
 BlLayoutChildNodeWithTransformation >> measurement: aBlLayoutNodeMeasurement [
+
 	childNode measurement: aBlLayoutNodeMeasurement.
 
 	self
 		assert: [ transformation notNil ]
 		description: [ 'Transformation should be set before measurement' ].
 
-	self transformation bounds: (BlBounds origin: 0.0@0.0 extent: self privateMeasurement extent)
+	self transformation bounds:
+		(BlBounds origin: 0.0 @ 0.0 extent: self privateMeasurement extent)
 ]
 
 { #category : #accessing }
@@ -136,8 +140,7 @@ BlLayoutChildNodeWithTransformation >> position: aPoint [
 
 { #category : #accessing }
 BlLayoutChildNodeWithTransformation >> privateMeasurement [
-	<return: #BlLayoutNodeMeasurement>
-	
+
 	^ childNode privateMeasurement
 ]
 

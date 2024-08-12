@@ -62,6 +62,7 @@ BlLayoutChildNodeWithElement >> layoutBounds [
 
 { #category : #'api - measure' }
 BlLayoutChildNodeWithElement >> measure: anExtentSpecOrBlock [
+
 	childNode measure: anExtentSpecOrBlock
 ]
 
@@ -116,8 +117,7 @@ BlLayoutChildNodeWithElement >> printOn: aStream [
 
 { #category : #accessing }
 BlLayoutChildNodeWithElement >> privateMeasurement [
-	<return: #BlLayoutNodeMeasurement>
-	
+
 	^ childNode privateMeasurement
 ]
 

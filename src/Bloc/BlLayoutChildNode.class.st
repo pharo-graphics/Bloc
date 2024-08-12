@@ -58,6 +58,7 @@ BlLayoutChildNode >> layoutBounds [
 
 { #category : #'api - measure' }
 BlLayoutChildNode >> measure: anExtentSpecOrBlock [
+
 	measurement := measurement measure: self with: anExtentSpecOrBlock
 ]
 

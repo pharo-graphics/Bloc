@@ -19,16 +19,14 @@ TBlLayoutChildNode >> bounds [
 
 { #category : #'api - geometry' }
 TBlLayoutChildNode >> extent [
-	"Return the size of the node in the parent coordinate system"
-	<return: #Point>
+	"Return a `Point` that represents the size of the node in the parent coordinate system"
 
 	^ self explicitRequirement
 ]
 
 { #category : #'api - geometry' }
 TBlLayoutChildNode >> height [
-	<return: #Number>
-	
+
 	^ self extent y
 ]
 
@@ -41,6 +39,7 @@ TBlLayoutChildNode >> layoutBounds [
 
 { #category : #'api - measure' }
 TBlLayoutChildNode >> measure: anExtentSpec [
+
 	self explicitRequirement
 ]
 
@@ -61,11 +60,6 @@ TBlLayoutChildNode >> parent: aBlLayoutParentNode [
 	self explicitRequirement
 ]
 
-{ #category : #'api - geometry' }
-TBlLayoutChildNode >> perimeter [
-	^ (self width + self height) * 2
-]
-
 { #category : #'api - actions' }
 TBlLayoutChildNode >> popAction [
 	<return: #BlLayoutNodeElementAction or: #nil>
@@ -84,8 +78,8 @@ TBlLayoutChildNode >> popActions [
 
 { #category : #'api - geometry' }
 TBlLayoutChildNode >> position [
-	"Return a position of the top left corner in the parent coordinate system"
-	<return: #Point>
+	"Return a `Point` that represents the position of the top left corner
+	of this node in the parent coordinate system."
 	
 	^ self explicitRequirement
 ]
@@ -93,25 +87,26 @@ TBlLayoutChildNode >> position [
 { #category : #'api - geometry' }
 TBlLayoutChildNode >> position: aPoint [
 	"Set position of the top left corner in the parent coordinate system"
-	<return: #Point>
 	
 	self explicitRequirement
 ]
 
 { #category : #accessing }
 TBlLayoutChildNode >> privateMeasurement [
-	<return: #BlLayoutNodeMeasurement>
+	"Answer a `BlLayoutNodeMeasurement`"
 	
 	^ self explicitRequirement
 ]
 
 { #category : #'api - actions' }
 TBlLayoutChildNode >> pushAction: aBlLayoutNodeElementAction [
+
 	self explicitRequirement
 ]
 
 { #category : #'api - geometry' }
 TBlLayoutChildNode >> right [
+
 	^ self position x + self width
 ]
 
@@ -124,7 +119,6 @@ TBlLayoutChildNode >> userData [
 
 { #category : #'api - geometry' }
 TBlLayoutChildNode >> width [
-	<return: #Number>
-	
+
 	^ self extent x
 ]
