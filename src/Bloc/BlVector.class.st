@@ -93,7 +93,6 @@ BlVector class >> zAxis [
 { #category : #'instance creation' }
 BlVector class >> zero [
 	"Return a vector of zero length."
-	<return: #BlVector>
 	
 	^ Zero ifNil: [ Zero := self x: 0 y: 0 z: 0 ]
 ]

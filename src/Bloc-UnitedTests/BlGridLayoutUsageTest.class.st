@@ -1,20 +1,17 @@
 "
-I contain examples of a grid layout
-
-I show how different resizing strategies work and how to build advanced layouts with the help of a grid
-
+I have been automatically converted and probably manually tweaked from BlGridLayoutUsageExamples. Pay attention there is an important design decision in such tests. First to let GT people execute them, the tests and helpers are tagged with <gtExample> do not remove them, let also the <label:...>.
+	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlGridLayoutUsageExamples,
-	#superclass : #BlExamplesTest,
-	#category : #'Bloc-Examples-Documentation'
+	#name : #BlGridLayoutUsageTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-UnitedTests'
 }
 
-{ #category : #examples }
-BlGridLayoutUsageExamples >> exampleDistributed2x2Grid [
+{ #category : #fixture }
+BlGridLayoutUsageTest >> testExampleDistributed2x2Grid [
 
 	<sampleInstance>
-	<demo>
 	| e1 e2 e3 e4 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -54,11 +51,10 @@ BlGridLayoutUsageExamples >> exampleDistributed2x2Grid [
 	^ el
 ]
 
-{ #category : #examples }
-BlGridLayoutUsageExamples >> exampleDistributedWithSpan2x2Grid [
+{ #category : #fixture }
+BlGridLayoutUsageTest >> testExampleDistributedWithSpan2x2Grid [
 
 	<sampleInstance>
-	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -94,11 +90,10 @@ BlGridLayoutUsageExamples >> exampleDistributedWithSpan2x2Grid [
 	^ el
 ]
 
-{ #category : #examples }
-BlGridLayoutUsageExamples >> exampleDistributedWithWeight2x2Grid [
+{ #category : #fixture }
+BlGridLayoutUsageTest >> testExampleDistributedWithWeight2x2Grid [
 
 	<sampleInstance>
-	<demo>
 	| e1 e2 e3 e4 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -140,11 +135,10 @@ BlGridLayoutUsageExamples >> exampleDistributedWithWeight2x2Grid [
 	^ el
 ]
 
-{ #category : #examples }
-BlGridLayoutUsageExamples >> exampleHorizontal2x1Grid [
+{ #category : #fixture }
+BlGridLayoutUsageTest >> testExampleHorizontal2x1Grid [
 
 	<sampleInstance>
-	<demo>
 	| e1 e2 el |
 	e1 := BlElement new
 		      size: 150 asPoint;
@@ -166,11 +160,10 @@ BlGridLayoutUsageExamples >> exampleHorizontal2x1Grid [
 	^ el
 ]
 
-{ #category : #examples }
-BlGridLayoutUsageExamples >> exampleHorizontalSpacing2x1Grid [
+{ #category : #fixture }
+BlGridLayoutUsageTest >> testExampleHorizontalSpacing2x1Grid [
 
 	<sampleInstance>
-	<demo>
 	| e1 e2 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -196,11 +189,10 @@ BlGridLayoutUsageExamples >> exampleHorizontalSpacing2x1Grid [
 	^ el
 ]
 
-{ #category : #examples }
-BlGridLayoutUsageExamples >> exampleInCellAlignment2x2Grid [
+{ #category : #fixture }
+BlGridLayoutUsageTest >> testExampleInCellAlignment2x2Grid [
 
 	<sampleInstance>
-	<demo>
 	| e1 e2 e3 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -237,11 +229,10 @@ BlGridLayoutUsageExamples >> exampleInCellAlignment2x2Grid [
 	^ el
 ]
 
-{ #category : #examples }
-BlGridLayoutUsageExamples >> exampleNautilusGrid [
+{ #category : #fixture }
+BlGridLayoutUsageTest >> testExampleNautilusGrid [
 
 	<sampleInstance>
-	<demo>
 	| e1 e2 e3 e4 e5 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -290,11 +281,10 @@ BlGridLayoutUsageExamples >> exampleNautilusGrid [
 	^ el
 ]
 
-{ #category : #examples }
-BlGridLayoutUsageExamples >> exampleSimple2x2Grid [
+{ #category : #fixture }
+BlGridLayoutUsageTest >> testExampleSimple2x2Grid [
 
 	<sampleInstance>
-	<demo>
 	| e1 e2 e3 e4 el |
 	e1 := BlElement new
 		      size: 150 asPoint;
@@ -326,11 +316,10 @@ BlGridLayoutUsageExamples >> exampleSimple2x2Grid [
 	^ el
 ]
 
-{ #category : #examples }
-BlGridLayoutUsageExamples >> exampleSpacing9x9Grid [
+{ #category : #fixture }
+BlGridLayoutUsageTest >> testExampleSpacing9x9Grid [
 
 	<sampleInstance>
-	<demo>
 	| children el dim |
 	dim := 9.
 
@@ -358,11 +347,10 @@ BlGridLayoutUsageExamples >> exampleSpacing9x9Grid [
 	^ el
 ]
 
-{ #category : #examples }
-BlGridLayoutUsageExamples >> exampleVertical1x2Grid [
+{ #category : #fixture }
+BlGridLayoutUsageTest >> testExampleVertical1x2Grid [
 
 	<sampleInstance>
-	<demo>
 	| e1 e2 el |
 	e1 := BlElement new
 		      size: 150 asPoint;
@@ -384,11 +372,10 @@ BlGridLayoutUsageExamples >> exampleVertical1x2Grid [
 	^ el
 ]
 
-{ #category : #examples }
-BlGridLayoutUsageExamples >> exampleVerticalSpacing1x2Grid [
+{ #category : #fixture }
+BlGridLayoutUsageTest >> testExampleVerticalSpacing1x2Grid [
 
 	<sampleInstance>
-	<demo>
 	| e1 e2 el |
 	e1 := BlElement new
 		      constraintsDo: [ :c |
@@ -414,11 +401,10 @@ BlGridLayoutUsageExamples >> exampleVerticalSpacing1x2Grid [
 	^ el
 ]
 
-{ #category : #examples }
-BlGridLayoutUsageExamples >> verticalSpan [
+{ #category : #fixture }
+BlGridLayoutUsageTest >> testVerticalSpan [
 
 	<sampleInstance>
-	<demo>
 	| grid child1 child2 child3 |
 	grid := BlElement new.
 	grid size: 500 @ 400.

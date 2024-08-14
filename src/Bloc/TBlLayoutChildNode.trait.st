@@ -93,7 +93,6 @@ TBlLayoutChildNode >> position [
 { #category : #'api - geometry' }
 TBlLayoutChildNode >> position: aPoint [
 	"Set position of the top left corner in the parent coordinate system"
-	<return: #Point>
 	
 	self explicitRequirement
 ]

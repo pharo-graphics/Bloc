@@ -184,7 +184,6 @@ BlInfiniteLayoutOrientation >> startWithPadding [
 { #category : #geometry }
 BlInfiniteLayoutOrientation >> totalSpace [
 	"Returns the total space to layout"
-	<return: #Number>
 
 	^ self endWithPadding - self startWithPadding
 ]
