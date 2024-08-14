@@ -23,9 +23,9 @@ BlLayoutNodeElementMeasurement >> element: anObject [
 
 { #category : #measure }
 BlLayoutNodeElementMeasurement >> measure: aLayoutChildNode with: anExtentSpecOrBlock [
-	<return: #BlLayoutNodeMeasurement>
 
-	^ BlLayoutNodeComputedMeasurement new
-		extent: (self element measure: anExtentSpecOrBlock value);
+	^ BlLayoutNodeComputedMeasurement
 		position: aLayoutChildNode constraints position
+		extent: (self element measure: anExtentSpecOrBlock value)
+
 ]

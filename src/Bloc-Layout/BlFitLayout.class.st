@@ -76,14 +76,14 @@ BlFitLayout >> measure: aParentLayoutNode [
 
 { #category : #measure }
 BlFitLayout >> measure: anElement with: anExtentSpec [
+
 	| aParentNode |
+	self
+		measuredChildren: anElement
+		do: [ :aChild | self measureChild: aChild parentSpec: anExtentSpec ].
 
-	self measuredChildren: anElement do: [ :aChild |
-		self
-			measureChild: aChild
-			parentSpec: anExtentSpec ].
-
-	aParentNode := (BlLayoutParentNode alreadyMeasured: anElement) extentSpec: anExtentSpec.
+	aParentNode :=
+		(BlLayoutParentNode alreadyMeasured: anElement) extentSpec: anExtentSpec.
 
 	self measure: aParentNode.
 

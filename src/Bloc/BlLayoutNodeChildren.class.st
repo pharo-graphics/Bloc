@@ -53,6 +53,7 @@ BlLayoutNodeChildren >> roundPositions [
 
 { #category : #converting }
 BlLayoutNodeChildren >> withoutElement [
+
 	^ self collect: [ :eachNode | eachNode withoutElement ]
 ]
 

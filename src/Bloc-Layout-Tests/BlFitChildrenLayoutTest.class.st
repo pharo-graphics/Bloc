@@ -231,9 +231,11 @@ BlFitChildrenLayoutTest >> testAtMostOneChildAt50x50Negated [
 			               (BlExtentMeasurementSpec atMost: 500 @ 400);
 		               children: { (BlLayoutChildNode new
 				                constraints: BlLayoutCommonConstraints new;
-				                measurement: (BlLayoutNodeComputedMeasurement new
-						                 position: (50 @ 50) negated;
-						                 extent: 100 @ 100)) }.
+				                measurement: (BlLayoutNodeComputedMeasurement
+						                 position: (50 @ 50) negated
+						                 extent: 100 @ 100);
+				                yourself) };
+		               yourself.
 
 	aLayout := BlFitChildrenLayout new.
 	aLayout measure: aParentNode.
@@ -263,9 +265,11 @@ BlFitChildrenLayoutTest >> testExactOneChildAt50x50Negated [
 			               (BlExtentMeasurementSpec exact: 500 @ 400);
 		               children: { (BlLayoutChildNode new
 				                constraints: BlLayoutCommonConstraints new;
-				                measurement: (BlLayoutNodeComputedMeasurement new
-						                 position: (50 @ 50) negated;
-						                 extent: 100 @ 100)) }.
+				                measurement: (BlLayoutNodeComputedMeasurement
+						                 position: (50 @ 50) negated
+						                 extent: 100 @ 100);
+				                yourself) };
+		               yourself.
 
 	aLayout := BlFitChildrenLayout new.
 	aLayout measure: aParentNode.
@@ -296,10 +300,11 @@ BlFitChildrenLayoutTest >> testFitContentGraph [
 			               (self graphNodesDataRaw collect: [ :bounds |
 					                BlLayoutChildNode new
 						                constraints: BlLayoutCommonConstraints new;
-						                measurement:
-							                (BlLayoutNodeComputedMeasurement new
-								                 position: bounds origin;
-								                 extent: bounds extent) ]).
+						                measurement: (BlLayoutNodeComputedMeasurement
+								                 position: bounds origin
+								                 extent: bounds extent);
+						                yourself ]);
+		               yourself.
 
 	aLayout := BlFitChildrenLayout new.
 	aLayout measure: aParentNode.
@@ -325,7 +330,9 @@ BlFitChildrenLayoutTest >> testFitContentOneChildAt0x0 [
 				                constraints: BlLayoutCommonConstraints new;
 				                measurement: (BlLayoutNodeComputedMeasurement new
 						                 position: 0 @ 0;
-						                 extent: 100 @ 100)) }.
+						                 extent: 100 @ 100);
+				                yourself) };
+		               yourself.
 
 	aLayout := BlFitChildrenLayout new.
 	aLayout measure: aParentNode.
@@ -354,9 +361,10 @@ BlFitChildrenLayoutTest >> testFitContentOneChildAt50x50 [
 		               extentSpec: BlExtentMeasurementSpec unspecified;
 		               children: { (BlLayoutChildNode new
 				                constraints: BlLayoutCommonConstraints new;
-				                measurement: (BlLayoutNodeComputedMeasurement new
-						                 position: 50 @ 50;
-						                 extent: 100 @ 100)) }.
+				                measurement: (BlLayoutNodeComputedMeasurement
+						                 position: 50 @ 50
+						                 extent: 100 @ 100)) };
+		               yourself.
 
 	aLayout := BlFitChildrenLayout new.
 	aLayout measure: aParentNode.
@@ -385,9 +393,11 @@ BlFitChildrenLayoutTest >> testFitContentOneChildAt50x50Negated [
 		               extentSpec: BlExtentMeasurementSpec unspecified;
 		               children: { (BlLayoutChildNode new
 				                constraints: BlLayoutCommonConstraints new;
-				                measurement: (BlLayoutNodeComputedMeasurement new
-						                 position: (50 @ 50) negated;
-						                 extent: 100 @ 100)) }.
+				                measurement: (BlLayoutNodeComputedMeasurement
+						                 position: (50 @ 50) negated
+						                 extent: 100 @ 100);
+				                yourself) };
+		               yourself.
 
 	aLayout := BlFitChildrenLayout new.
 	aLayout measure: aParentNode.
