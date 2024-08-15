@@ -7,11 +7,9 @@ Class {
 
 { #category : #'api - geometry' }
 BlLayoutNodeChildren >> boundingBox [
-	<return: #Rectangle>
-	| aBoundingBox |
 
-	self isEmpty
-		ifTrue: [ ^ BlBounds new asRectangle ].
+	| aBoundingBox |
+	self isEmpty ifTrue: [ ^ BlBounds new asRectangle ].
 
 	aBoundingBox := nil.
 
@@ -25,29 +23,37 @@ BlLayoutNodeChildren >> boundingBox [
 
 { #category : #'api - geometry' }
 BlLayoutNodeChildren >> extent [
+
 	^ self collect: [ :eachChild | eachChild extent ] as: Array
 ]
 
 { #category : #'api - geometry' }
 BlLayoutNodeChildren >> layoutBounds [
-	^ self collect: [ :eachChild | eachChild layoutBounds asRectangle ] as: Array
+
+	^ self
+		  collect: [ :eachChild | eachChild layoutBounds asRectangle ]
+		  as: Array
 ]
 
 { #category : #'api - geometry' }
 BlLayoutNodeChildren >> normalizePositions [
+
 	| theTopLeft |
+	self ifEmpty: [ ^ self ].
 
-	self
-		ifEmpty: [ ^ self ].
+	theTopLeft :=
+		self
+			inject: self first position
+			into: [ :topLeft :eachNode |
+				topLeft min: eachNode position ].
 
-	theTopLeft := self inject: self first position into: [ :topLeft :eachNode | 
-		topLeft min: eachNode position ].
-	
-	self do: [ :eachNode | eachNode position: eachNode position - theTopLeft ]
+	self do: [ :eachNode |
+		eachNode position: eachNode position - theTopLeft ]
 ]
 
 { #category : #'api - geometry' }
-BlLayoutNodeChildren >> roundPositions [	
+BlLayoutNodeChildren >> roundPositions [
+
 	self do: [ :eachNode | eachNode position: eachNode position rounded ]
 ]
 
@@ -59,5 +65,6 @@ BlLayoutNodeChildren >> withoutElement [
 
 { #category : #converting }
 BlLayoutNodeChildren >> withoutTransformation [
+
 	^ self collect: [ :eachNode | eachNode withoutTransformation ]
 ]

@@ -7,7 +7,6 @@ Class {
 	#instVars : [
 		'parent',
 		'measurement',
-		'layoutBounds',
 		'constraints',
 		'userData',
 		'actions'

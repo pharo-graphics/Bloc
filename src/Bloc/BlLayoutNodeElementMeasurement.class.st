@@ -13,12 +13,14 @@ Class {
 
 { #category : #accessing }
 BlLayoutNodeElementMeasurement >> element [
+
 	^ element
 ]
 
 { #category : #accessing }
-BlLayoutNodeElementMeasurement >> element: anObject [
-	element := anObject
+BlLayoutNodeElementMeasurement >> element: aBlElement [
+
+	element := aBlElement
 ]
 
 { #category : #measure }

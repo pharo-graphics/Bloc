@@ -77,6 +77,12 @@ BlAbstractLayoutParentNode >> position: aPoint [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+BlAbstractLayoutParentNode >> transformationDo: aBlock [
+
+	^ self subclassResponsibility
+]
+
 { #category : #'api - geometry' }
 BlAbstractLayoutParentNode >> width [
 
