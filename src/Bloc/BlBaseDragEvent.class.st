@@ -4,8 +4,7 @@ Class {
 	#instVars : [
 		'gestureSource',
 		'gestureTarget',
-		'dragboard',
-		'startButtons'
+		'dragboard'
 	],
 	#category : #'Bloc-Events'
 }
@@ -56,29 +55,4 @@ BlBaseDragEvent >> gestureTarget: anObject [
 { #category : #testing }
 BlBaseDragEvent >> isBaseDrag [
 	^ true
-]
-
-{ #category : #testing }
-BlBaseDragEvent >> isMiddleButtonDrag [
-	^ startButtons = self class middleButton
-]
-
-{ #category : #testing }
-BlBaseDragEvent >> isPrimaryButtonDrag [
-	^ startButtons = self class primaryButton
-]
-
-{ #category : #testing }
-BlBaseDragEvent >> isSecondaryButtonDrag [
-	^ startButtons = self class secondaryButton
-]
-
-{ #category : #accessing }
-BlBaseDragEvent >> startButtons [
-	^ startButtons
-]
-
-{ #category : #accessing }
-BlBaseDragEvent >> startButtons: anObject [
-	startButtons := anObject
 ]
