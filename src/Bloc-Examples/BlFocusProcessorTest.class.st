@@ -1,7 +1,7 @@
 Class {
 	#name : #BlFocusProcessorTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-Event-Scripter'
 }
 
 { #category : #running }
@@ -36,7 +36,7 @@ BlFocusProcessorTest >> newElementWithFocusHandler [
 				c padding: (BlInsets top: 5 right: 5) ];
 			yourself.
 
-	^ BlExampleEventsCountingElement new
+	^ BlEventCountingElement new
 		addChild: aLabel;
 		addEventHandler:
 			(BlEventHandler

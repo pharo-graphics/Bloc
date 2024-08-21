@@ -5,8 +5,52 @@ I contain examples-tests of mouse processor
 Class {
 	#name : #BlMouseProcessorTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Event'
+	#instVars : [
+		'mouseProcessor'
+	],
+	#category : #'Bloc-Examples-Event-Asserts'
 }
+
+{ #category : #tests }
+BlMouseProcessorTest >> createAndHandleMiddleMouseDown [
+
+	| anEvent |
+	anEvent := self middleMouseDownEvent.
+	mouseProcessor handleMouseDown: anEvent
+]
+
+{ #category : #tests }
+BlMouseProcessorTest >> createAndHandlePrimaryMouseDown [
+
+	| anEvent |
+	anEvent := self primaryMouseDownEvent.
+	mouseProcessor handleMouseDown: anEvent
+]
+
+{ #category : #tests }
+BlMouseProcessorTest >> createAndHandlePrimaryMouseUp [
+
+	| anEvent |
+	anEvent := self primaryMouseUpEvent.
+	mouseProcessor handleMouseUp: anEvent
+]
+
+{ #category : #tests }
+BlMouseProcessorTest >> createAndHandleSecondaryMouseDown [
+
+	| anEvent |
+	anEvent := self secondaryMouseDownEvent.
+	mouseProcessor handleMouseDown: anEvent.
+	
+]
+
+{ #category : #tests }
+BlMouseProcessorTest >> createAndHandleSecondaryMouseUp [
+
+	| anEvent |
+	anEvent := self secondaryMouseUpEvent.
+	mouseProcessor handleMouseUp: anEvent
+]
 
 { #category : #'running - instance creation' }
 BlMouseProcessorTest >> middleMouseDownEvent [
@@ -18,12 +62,6 @@ BlMouseProcessorTest >> middleMouseDownEvent [
 BlMouseProcessorTest >> middleMouseUpEvent [
 
 	^ BlMouseUpEvent middle
-]
-
-{ #category : #'running - instance creation' }
-BlMouseProcessorTest >> newMouseProcessor [
-
-	^ BlMouseProcessor space: BlSpace new
 ]
 
 { #category : #'running - instance creation' }
@@ -50,35 +88,31 @@ BlMouseProcessorTest >> secondaryMouseUpEvent [
 	^ BlMouseUpEvent secondary
 ]
 
+{ #category : #running }
+BlMouseProcessorTest >> setUp [ 
+
+	mouseProcessor := BlMouseProcessor space: BlSpace new.
+]
+
 { #category : #tests }
 BlMouseProcessorTest >> testClick [
 
-	| aMouseProcessor |
-	aMouseProcessor := self newMouseProcessor.
-
-	aMouseProcessor handleMouseDown: self primaryMouseDownEvent.
-	aMouseProcessor handleMouseUp: self primaryMouseUpEvent.
-
-	self assert: aMouseProcessor pressedButtons isEmpty.
-
-	^ aMouseProcessor
+	self createAndHandlePrimaryMouseDown.
+	self createAndHandlePrimaryMouseUp.
+	self assert: mouseProcessor pressedButtons isEmpty.
 ]
 
 { #category : #tests }
 BlMouseProcessorTest >> testMiddleDown [
 
-	| aMouseProcessor anEvent |
-	aMouseProcessor := self newMouseProcessor.
-	anEvent := self middleMouseDownEvent.
-
-	aMouseProcessor handleMouseDown: anEvent.
-
-	self assert: aMouseProcessor pressedButtons size equals: 1.
-	self assert: (aMouseProcessor pressedButtons includes: BlMouseButton middle)
+	self createAndHandleMiddleMouseDown.
+	self assert: mouseProcessor pressedButtons size equals: 1.
+	self assert:
+		(mouseProcessor pressedButtons includes: BlMouseButton middle)
 ]
 
 { #category : #tests }
-BlMouseProcessorTest >> testMouseProcessorInitialState [
+BlMouseProcessorTest >> testMouseProcessorInitializedEmptyAndWithCorrectSpace [
 
 	| aMouseProcessor aSpace |
 	aSpace := BlSpace new.
@@ -86,81 +120,59 @@ BlMouseProcessorTest >> testMouseProcessorInitialState [
 
 	self assert: aMouseProcessor space equals: aSpace.
 	self assert: aMouseProcessor pressedButtons isEmpty.
-
-	^ aMouseProcessor
 ]
 
 { #category : #tests }
-BlMouseProcessorTest >> testPrimaryDown [
+BlMouseProcessorTest >> testPrimaryDownCorrectlyHandled [
 
-	| aMouseProcessor anEvent |
-	aMouseProcessor := self newMouseProcessor.
-	anEvent := self primaryMouseDownEvent.
-
-	aMouseProcessor handleMouseDown: anEvent.
-
-	self assert: aMouseProcessor pressedButtons size equals: 1.
+	self createAndHandlePrimaryMouseDown.
+	
+	self assert: mouseProcessor pressedButtons size equals: 1.
 	self assert:
-		(aMouseProcessor pressedButtons includes: BlMouseButton primary).
-
-	^ aMouseProcessor
+		(mouseProcessor pressedButtons includes: BlMouseButton primary)
 ]
 
 { #category : #tests }
-BlMouseProcessorTest >> testPrimaryDownSecondaryDown [
+BlMouseProcessorTest >> testPrimaryDownSecondaryDownCorrectlyHandled [
 
-	| aMouseProcessor anEvent |
-	aMouseProcessor := self testPrimaryDown.
-	anEvent := self secondaryMouseDownEvent.
-
-	aMouseProcessor handleMouseDown: anEvent.
-
-	self assert: aMouseProcessor pressedButtons size equals: 2.
+	self createAndHandlePrimaryMouseDown.
+	self createAndHandleSecondaryMouseDown.
+	
+	self assert: mouseProcessor pressedButtons size equals: 2.
 	self assert:
-		(aMouseProcessor pressedButtons includes: BlMouseButton primary).
+		(mouseProcessor pressedButtons includes: BlMouseButton primary).
 	self assert:
-		(aMouseProcessor pressedButtons includes: BlMouseButton secondary).
+		(mouseProcessor pressedButtons includes: BlMouseButton secondary).
 
-	^ aMouseProcessor
 ]
 
 { #category : #tests }
-BlMouseProcessorTest >> testPrimaryDownSecondaryDownPrimaryUp [
+BlMouseProcessorTest >> testPrimaryDownSecondaryDownPrimaryUpCorrectlyHandled [
 
-	| aMouseProcessor anEvent |
-	aMouseProcessor := self testPrimaryDownSecondaryDown.
-	anEvent := self primaryMouseUpEvent.
-
-	aMouseProcessor handleMouseUp: anEvent.
-
-	self assert: aMouseProcessor pressedButtons size equals: 1.
+	self createAndHandlePrimaryMouseDown.
+	self createAndHandleSecondaryMouseDown.
+	self createAndHandlePrimaryMouseUp.
+	self assert: mouseProcessor pressedButtons size equals: 1.
 	self assert:
-		(aMouseProcessor pressedButtons includes: BlMouseButton secondary).
-
-	^ aMouseProcessor
+		(mouseProcessor pressedButtons includes: BlMouseButton secondary)
 ]
 
 { #category : #tests }
-BlMouseProcessorTest >> testPrimaryDownSecondaryDownPrimaryUpSecondaryUp [
+BlMouseProcessorTest >> testPrimaryDownSecondaryDownPrimaryUpSecondaryUpCorrectlyHandled [
 
-	| aMouseProcessor anEvent |
-	aMouseProcessor := self testPrimaryDownSecondaryDownPrimaryUp.
-	anEvent := self secondaryMouseUpEvent.
-
-	aMouseProcessor handleMouseUp: anEvent.
-
-	self assert: aMouseProcessor pressedButtons isEmpty
+	self createAndHandlePrimaryMouseDown.
+	self createAndHandleSecondaryMouseDown.
+	self createAndHandlePrimaryMouseUp.
+	self createAndHandleSecondaryMouseUp.
+	
+	self assert: mouseProcessor pressedButtons isEmpty
 ]
 
 { #category : #tests }
 BlMouseProcessorTest >> testSecondaryDown [
 
-	| aMouseProcessor anEvent |
-	aMouseProcessor := self newMouseProcessor.
-	anEvent := self secondaryMouseDownEvent.
-
-	aMouseProcessor handleMouseDown: anEvent.
-
-	self assert: aMouseProcessor pressedButtons size equals: 1.
-	self assert: (aMouseProcessor pressedButtons includes: BlMouseButton secondary)
+	self createAndHandleSecondaryMouseDown.
+	self assert: mouseProcessor pressedButtons size equals: 1.
+	self assert:
+		(mouseProcessor pressedButtons includes: BlMouseButton secondary)
 ]
