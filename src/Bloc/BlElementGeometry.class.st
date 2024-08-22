@@ -59,12 +59,6 @@ BlElementGeometry >> hasJoins [
 	^ self subclassResponsibility
 ]
 
-{ #category : #comparing }
-BlElementGeometry >> hash [
-
-	^ self class hash
-]
-
 { #category : #geometry }
 BlElementGeometry >> matchElement: anElement [
 	"Adapt me to match the size of a given element"

@@ -61,8 +61,7 @@ BlColorPaint >> color: aColor [
 
 { #category : #comparing }
 BlColorPaint >> hash [
-
-	^ self class hash bitXor: self color hash
+	^ self color hash
 ]
 
 { #category : #testing }

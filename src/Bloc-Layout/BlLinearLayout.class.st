@@ -34,16 +34,18 @@ BlLinearLayout class >> vertical [
 { #category : #comparing }
 BlLinearLayout >> = anObject [
 
-	super = anObject ifFalse: [ ^ false ].
-	self weightSum = anObject weightSum ifFalse: [ ^ false ].
-	self orientation = anObject orientation ifFalse: [ ^ false ].
-	self horizontalAlignment = anObject horizontalAlignment ifFalse: [ ^ false ].
-	self alignment = anObject alignment ifFalse: [ ^ false ].
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	
 	self cellSpacing = anObject cellSpacing ifFalse: [ ^ false ].
 	self interspace = anObject interspace ifFalse: [ ^ false ].
-	self verticalAlignment = anObject verticalAlignment ifFalse: [ ^ false ].
+	
+	self orientation = anObject orientation ifFalse: [ ^ false ].
+	self horizontalAlignment = anObject horizontalAlignment ifFalse: [
+		^ false ].
+	self verticalAlignment = anObject verticalAlignment ifFalse: [
+		^ false ].
 	^ true
-
 ]
 
 { #category : #'api - alignment' }

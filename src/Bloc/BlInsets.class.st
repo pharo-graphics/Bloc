@@ -235,12 +235,6 @@ BlInsets >> extent [
 	^ self width @ self height
 ]
 
-{ #category : #testing }
-BlInsets >> hash [
-
-	^ ((left hash bitXor: right hash) bitXor: top hash) bitXor: bottom hash
-]
-
 { #category : #accessing }
 BlInsets >> height [
 

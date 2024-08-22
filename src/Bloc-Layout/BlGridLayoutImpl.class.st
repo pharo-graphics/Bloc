@@ -21,17 +21,6 @@ BlGridLayoutImpl class >> on: aGridLayout [
 		yourself
 ]
 
-{ #category : #comparing }
-BlGridLayoutImpl >> = anObject [
-
-	super = anObject ifFalse: [ ^ false ].
-	self alignment = anObject alignment ifFalse: [ ^ false ].
-	self cellSpacing = anObject cellSpacing ifFalse: [ ^ false ].
-	self orientation = anObject orientation ifFalse: [ ^ false ].
-	^ true
-
-]
-
 { #category : #'private utilities' }
 BlGridLayoutImpl >> adjust: aMeasurementSpec by: delta [
 
