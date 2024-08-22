@@ -43,6 +43,21 @@ BlInfiniteLayout class >> constraints [
 	^ BlInfiniteLayoutConstraints new
 ]
 
+{ #category : #comparing }
+BlInfiniteLayout >> = anObject [
+
+	super = anObject ifFalse: [ ^ false ].
+	self dataSource = anObject dataSource ifFalse: [ ^ false ].
+	self lastExactSize = anObject lastExactSize ifFalse: [ ^ false ].
+	self announcer = anObject announcer ifFalse: [ ^ false ].
+	self recycler = anObject recycler ifFalse: [ ^ false ].
+	self measurementCacheEnabled = anObject measurementCacheEnabled ifFalse: [ ^ false ].
+	self state = anObject state ifFalse: [ ^ false ].
+	self smoothScroller = anObject smoothScroller ifFalse: [ ^ false ].
+	^ true
+
+]
+
 { #category : #'children - add/remove' }
 BlInfiniteLayout >> addChild: anElement [
 	"Add an element to the currently attached infinite element if needed.

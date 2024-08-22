@@ -13,6 +13,16 @@ BlZoomableLayout class >> constraints [
 	^ BlZoomableLayoutConstraints new
 ]
 
+{ #category : #comparing }
+BlZoomableLayout >> = anObject [
+
+	super = anObject ifFalse: [ ^ false ].
+	self animationDuration = anObject animationDuration ifFalse: [ ^ false ].
+	self defaultScale = anObject defaultScale ifFalse: [ ^ false ].
+	^ true
+
+]
+
 { #category : #accessing }
 BlZoomableLayout >> animationDuration [
 	^ animationDuration

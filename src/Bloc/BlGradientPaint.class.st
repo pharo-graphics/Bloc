@@ -25,6 +25,12 @@ BlGradientPaint >> from: aStartColor to: anEndColor [
 	}
 ]
 
+{ #category : #comparing }
+BlGradientPaint >> hash [
+
+	^ self class hash bitXor: self stops hash
+]
+
 { #category : #accessing }
 BlGradientPaint >> stops [
 	^ stops
