@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'space'
 	],
-	#category : #'Bloc-Examples-Event-Asserts'
+	#category : #'Bloc-Tests-Events'
 }
 
 { #category : #running }

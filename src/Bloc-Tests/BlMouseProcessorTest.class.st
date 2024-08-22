@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'mouseProcessor'
 	],
-	#category : #'Bloc-Examples-Event-Asserts'
+	#category : #'Bloc-Tests-Events'
 }
 
 { #category : #tests }
