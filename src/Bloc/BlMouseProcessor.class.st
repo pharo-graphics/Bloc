@@ -100,7 +100,6 @@ BlMouseProcessor >> fireAsDragEndEvent: anEvent [
 				startButtons: dragStartMask;
 				target: currentDragTarget;
 				gestureSource: currentDragTarget;
-				dragboard: self space dragboard;
 				yourself)
 ]
 
@@ -125,7 +124,6 @@ BlMouseProcessor >> fireAsDragEvent: anEvent [
 				startButtons: dragStartMask;
 				target: currentDragTarget;
 				gestureSource: currentDragTarget;
-				dragboard: self space dragboard;
 				yourself)
 ]
 
@@ -161,7 +159,6 @@ BlMouseProcessor >> fireAsDropEvent: anEvent [
 				gestureSource: currentDragTarget;
 				gestureTarget: anEvent target;
 				startButtons: dragStartMask;
-				dragboard: self space dragboard;
 				yourself)
 ]
 
