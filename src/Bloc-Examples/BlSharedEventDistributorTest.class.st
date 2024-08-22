@@ -12,11 +12,11 @@ Class {
 BlSharedEventDistributorTest >> example [
 	<sampleInstance>
 
-	| aHandler anElements aContainer |
+	| aHandler elements aContainer |
 	aHandler := self testInstallTwoElements.
-	anElements := aHandler elements.
+	elements := aHandler elements.
 	aContainer := self newContainer.
-	aContainer addChildren: anElements.
+	aContainer addChildren: elements.
 	aHandler shareEvents: {
 			BlMouseEnterEvent.
 			BlMouseLeaveEvent.

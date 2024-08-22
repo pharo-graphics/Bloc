@@ -1,13 +1,13 @@
 Class {
 	#name : #BlMouseProcessorEnterLeaveTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-Event-Scripter'
 }
 
 { #category : #running }
 BlMouseProcessorEnterLeaveTest >> newScripterElement [
 
-	^ BlExampleEventsCountingElement new
+	^ BlEventCountingElement new
 		  size: 100 @ 75;
 		  position: 50 @ 50;
 		  yourself

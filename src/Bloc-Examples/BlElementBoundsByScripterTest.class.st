@@ -19,7 +19,7 @@ BlElementBoundsByScripterTest >> expectedElementExtent [
 { #category : #running }
 BlElementBoundsByScripterTest >> newChild [
 
-	^ BlExampleEventsCountingElement new
+	^ BlEventCountingElement new
 		id: #child;
 		background: (Color veryVeryLightGray alpha: 0.4);
 		constraintsDo: [ :c |

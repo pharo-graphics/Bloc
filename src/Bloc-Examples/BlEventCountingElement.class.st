@@ -1,5 +1,5 @@
 Class {
-	#name : #BlExampleEventsCountingElement,
+	#name : #BlEventCountingElement,
 	#superclass : #BlElement,
 	#instVars : [
 		'clickCount',
@@ -26,212 +26,212 @@ Class {
 }
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> blurCount [
+BlEventCountingElement >> blurCount [
 	^ blurCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> blurCount: anObject [
+BlEventCountingElement >> blurCount: anObject [
 	blurCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> clickCount [
+BlEventCountingElement >> clickCount [
 	^ clickCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> clickCount: anObject [
+BlEventCountingElement >> clickCount: anObject [
 	clickCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> dragCount [
+BlEventCountingElement >> dragCount [
 	^ dragCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> dragCount: anObject [
+BlEventCountingElement >> dragCount: anObject [
 	dragCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> dragEndCount [
+BlEventCountingElement >> dragEndCount [
 	^ dragEndCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> dragEndCount: anObject [
+BlEventCountingElement >> dragEndCount: anObject [
 	dragEndCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> dragEnterCount [
+BlEventCountingElement >> dragEnterCount [
 	^ dragEnterCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> dragEnterCount: anObject [
+BlEventCountingElement >> dragEnterCount: anObject [
 	dragEnterCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> dragLeaveCount [
+BlEventCountingElement >> dragLeaveCount [
 	^ dragLeaveCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> dragLeaveCount: anObject [
+BlEventCountingElement >> dragLeaveCount: anObject [
 	dragLeaveCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> dragStartCount [
+BlEventCountingElement >> dragStartCount [
 	^ dragStartCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> dragStartCount: anObject [
+BlEventCountingElement >> dragStartCount: anObject [
 	dragStartCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> dropCount [
+BlEventCountingElement >> dropCount [
 	^ dropCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> dropCount: anObject [
+BlEventCountingElement >> dropCount: anObject [
 	dropCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> focusCount [
+BlEventCountingElement >> focusCount [
 	^ focusCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> focusCount: anObject [
+BlEventCountingElement >> focusCount: anObject [
 	focusCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> focusInCount [
+BlEventCountingElement >> focusInCount [
 	^ focusInCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> focusInCount: anObject [
+BlEventCountingElement >> focusInCount: anObject [
 	focusInCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> focusOutCount [
+BlEventCountingElement >> focusOutCount [
 	^ focusOutCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> focusOutCount: anObject [
+BlEventCountingElement >> focusOutCount: anObject [
 	focusOutCount := anObject
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementBlurCount [
+BlEventCountingElement >> incrementBlurCount [
 	blurCount := blurCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementClickCount [
+BlEventCountingElement >> incrementClickCount [
 	clickCount := clickCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementDragCount [
+BlEventCountingElement >> incrementDragCount [
 	dragCount := dragCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementDragEndCount [
+BlEventCountingElement >> incrementDragEndCount [
 	dragEndCount := dragEndCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementDragEnterCount [
+BlEventCountingElement >> incrementDragEnterCount [
 	dragEnterCount := dragEnterCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementDragLeaveCount [
+BlEventCountingElement >> incrementDragLeaveCount [
 	dragEnterCount := dragLeaveCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementDragStartCount [
+BlEventCountingElement >> incrementDragStartCount [
 	dragStartCount := dragStartCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementDropCount [
+BlEventCountingElement >> incrementDropCount [
 	dropCount := dropCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementFocusCount [
+BlEventCountingElement >> incrementFocusCount [
 	focusCount := focusCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementFocusInCount [
+BlEventCountingElement >> incrementFocusInCount [
 	focusInCount := focusInCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementFocusOutCount [
+BlEventCountingElement >> incrementFocusOutCount [
 	focusOutCount := focusOutCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementMouseDownCount [
+BlEventCountingElement >> incrementMouseDownCount [
 	mouseDownCount := mouseDownCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementMouseEnterCount [
+BlEventCountingElement >> incrementMouseEnterCount [
 	mouseEnterCount := mouseEnterCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementMouseLeaveCount [
+BlEventCountingElement >> incrementMouseLeaveCount [
 	mouseLeaveCount := mouseLeaveCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementMouseMoveCount [
+BlEventCountingElement >> incrementMouseMoveCount [
 	mouseMoveCount := mouseMoveCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementMouseOutCount [
+BlEventCountingElement >> incrementMouseOutCount [
 	mouseOutCount := mouseOutCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementMouseOverCount [
+BlEventCountingElement >> incrementMouseOverCount [
 	mouseOverCount := mouseOverCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementMouseUpCount [
+BlEventCountingElement >> incrementMouseUpCount [
 	mouseUpCount := mouseUpCount + 1
 ]
 
 { #category : #increment }
-BlExampleEventsCountingElement >> incrementPositionInSpaceChangedCount [
+BlEventCountingElement >> incrementPositionInSpaceChangedCount [
 	positionInSpaceChangedCount := positionInSpaceChangedCount + 1
 ]
 
 { #category : #initialization }
-BlExampleEventsCountingElement >> initialize [
+BlEventCountingElement >> initialize [
 
 	super initialize.
 
@@ -364,81 +364,81 @@ BlExampleEventsCountingElement >> initialize [
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> mouseDownCount [
+BlEventCountingElement >> mouseDownCount [
 	^ mouseDownCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> mouseDownCount: anObject [
+BlEventCountingElement >> mouseDownCount: anObject [
 	mouseDownCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> mouseEnterCount [
+BlEventCountingElement >> mouseEnterCount [
 	^ mouseEnterCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> mouseEnterCount: anObject [
+BlEventCountingElement >> mouseEnterCount: anObject [
 	mouseEnterCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> mouseLeaveCount [
+BlEventCountingElement >> mouseLeaveCount [
 	^ mouseLeaveCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> mouseLeaveCount: anObject [
+BlEventCountingElement >> mouseLeaveCount: anObject [
 	mouseLeaveCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> mouseMoveCount [
+BlEventCountingElement >> mouseMoveCount [
 	^ mouseMoveCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> mouseMoveCount: anObject [
+BlEventCountingElement >> mouseMoveCount: anObject [
 	mouseMoveCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> mouseOutCount [
+BlEventCountingElement >> mouseOutCount [
 	^ mouseOutCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> mouseOutCount: anObject [
+BlEventCountingElement >> mouseOutCount: anObject [
 	mouseOutCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> mouseOverCount [
+BlEventCountingElement >> mouseOverCount [
 	^ mouseOverCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> mouseOverCount: anObject [
+BlEventCountingElement >> mouseOverCount: anObject [
 	mouseOverCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> mouseUpCount [
+BlEventCountingElement >> mouseUpCount [
 	^ mouseUpCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> mouseUpCount: anObject [
+BlEventCountingElement >> mouseUpCount: anObject [
 	mouseUpCount := anObject
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> positionInSpaceChangedCount [
+BlEventCountingElement >> positionInSpaceChangedCount [
 	^ positionInSpaceChangedCount
 ]
 
 { #category : #accessing }
-BlExampleEventsCountingElement >> positionInSpaceChangedCount: anObject [
+BlEventCountingElement >> positionInSpaceChangedCount: anObject [
 	positionInSpaceChangedCount := anObject
 ]
