@@ -97,7 +97,6 @@ BlMouseProcessor >> fireAsDragEndEvent: anEvent [
 
 	self fireEvent:
 			(anEvent asDragEndEvent
-				startButtons: dragStartMask;
 				target: currentDragTarget;
 				gestureSource: currentDragTarget;
 				dragboard: self space dragboard;
@@ -110,7 +109,6 @@ BlMouseProcessor >> fireAsDragEnterEvent: anEvent targets: aCollection [
 		do: [ :t | 
 			self dispatchEvent:
 					(anEvent asDragEnterEvent
-						startButtons: dragStartMask;
 						target: t;
 						gestureSource: currentDragTarget;
 						canBePropagated: false;
@@ -122,7 +120,6 @@ BlMouseProcessor >> fireAsDragEnterEvent: anEvent targets: aCollection [
 BlMouseProcessor >> fireAsDragEvent: anEvent [
 	self	fireEvent:
 			(anEvent asDragEvent
-				startButtons: dragStartMask;
 				target: currentDragTarget;
 				gestureSource: currentDragTarget;
 				dragboard: self space dragboard;
@@ -135,7 +132,6 @@ BlMouseProcessor >> fireAsDragLeaveEvent: anEvent targets: aCollection [
 		do:	[ :t | 
 			self dispatchEvent:
 					(anEvent asDragLeaveEvent
-						startButtons: dragStartMask;
 						target: t;
 						gestureSource: currentDragTarget;
 						canBePropagated: false;
@@ -147,7 +143,6 @@ BlMouseProcessor >> fireAsDragLeaveEvent: anEvent targets: aCollection [
 BlMouseProcessor >> fireAsDragStartEvent: anEvent [
 	^ self fireEvent:
 			(anEvent asDragStartEvent
-				startButtons: dragStartMask;
 				target: anEvent target;
 				gestureSource: anEvent target;
 				yourself)
@@ -160,7 +155,6 @@ BlMouseProcessor >> fireAsDropEvent: anEvent [
 			(anEvent asDropEvent
 				gestureSource: currentDragTarget;
 				gestureTarget: anEvent target;
-				startButtons: dragStartMask;
 				dragboard: self space dragboard;
 				yourself)
 ]
@@ -311,7 +305,6 @@ BlMouseProcessor >> handleMouseLeft: aSpaceMouseLeaveEvent [
 		anEvent := self isDragging
 			           ifTrue: [
 				           BlDragLeaveEvent new
-					           startButtons: dragStartMask;
 					           gestureSource: currentDragTarget ]
 			           ifFalse: [ BlMouseLeaveEvent new ].
 
@@ -643,7 +636,6 @@ BlMouseProcessor >> tryDragStart: aMouseEvent [
 	aDragTarget := aMouseEvent target.
 	
 	aDragStartEvent := (aMouseEvent asDragStartEvent
-		startButtons: dragStartMask;
 		target: aDragTarget;
 		gestureSource: aDragTarget;
 		yourself).
