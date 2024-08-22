@@ -99,7 +99,6 @@ BlMouseProcessor >> fireAsDragEndEvent: anEvent [
 			(anEvent asDragEndEvent
 				target: currentDragTarget;
 				gestureSource: currentDragTarget;
-				dragboard: self space dragboard;
 				yourself)
 ]
 
@@ -122,7 +121,6 @@ BlMouseProcessor >> fireAsDragEvent: anEvent [
 			(anEvent asDragEvent
 				target: currentDragTarget;
 				gestureSource: currentDragTarget;
-				dragboard: self space dragboard;
 				yourself)
 ]
 
@@ -155,7 +153,6 @@ BlMouseProcessor >> fireAsDropEvent: anEvent [
 			(anEvent asDropEvent
 				gestureSource: currentDragTarget;
 				gestureTarget: anEvent target;
-				dragboard: self space dragboard;
 				yourself)
 ]
 
