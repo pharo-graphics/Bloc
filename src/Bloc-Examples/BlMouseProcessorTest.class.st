@@ -91,6 +91,7 @@ BlMouseProcessorTest >> secondaryMouseUpEvent [
 { #category : #running }
 BlMouseProcessorTest >> setUp [ 
 
+	super setUp.
 	mouseProcessor := BlMouseProcessor space: BlSpace new.
 ]
 
