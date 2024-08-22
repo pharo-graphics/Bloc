@@ -479,7 +479,6 @@ BlMouseProcessor >> processDragEnd: aMouseUpEvent [
 	currentDragTarget := nil.
 	dndInProgress := false.
 	lastOverTarget := nil.
-	dragStartMask := 0
 ]
 
 { #category : #'mouse drag' }
@@ -591,7 +590,6 @@ BlMouseProcessor >> reset [
 	currentDragTarget := nil.
 	lastMouseTarget := nil.
 	dndInProgress := false.
-	dragStartMask := 0.
 	pressedButtons := Set new.
 	dragState := BlMouseDragState new
 ]
