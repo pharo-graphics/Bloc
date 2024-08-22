@@ -8,7 +8,6 @@ Class {
 		'currentDragTarget',
 		'lastMouseTarget',
 		'dndInProgress',
-		'dragStartMask',
 		'pressedButtons',
 		'dragState',
 		'lastMouseMoveEvent',
