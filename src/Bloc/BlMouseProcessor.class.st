@@ -1,3 +1,22 @@
+"
+initial declaration
+
+BlBaseEventProcessor << #BlMouseProcessor
+	slots: {
+			 #lastEnteredTargets .
+			 #lastOverTarget .
+			 #lastClickEvent .
+			 #currentDragTarget .
+			 #lastMouseTarget .
+			 #dndInProgress .
+			 #dragStartMask .
+			 #pressedButtons .
+			 #dragState .
+			 #lastMouseMoveEvent .
+			 #lastMouseDownEvent };
+	tag: 'Space - Events';
+	package: 'Bloc'
+"
 Class {
 	#name : #BlMouseProcessor,
 	#superclass : #BlBaseEventProcessor,
@@ -91,14 +110,22 @@ BlMouseProcessor >> fillTargetHierarchy: aTarget [
 		aTarget allParentsDo: [ :aParentElement | aStream nextPut: aParentElement  ] ]
 ]
 
-{ #category : #'event firing' }
+{ #category : #'mouse drag' }
 BlMouseProcessor >> fireAsDragEndEvent: anEvent [
-
+	| aDragEvent |
+	
+	aDragEvent := BlDragEndEvent new
+		copyFrom: anEvent;
+		yourself.
+	
 	self fireEvent:
-			(anEvent asDragEndEvent
+			(aDragEvent
 				target: currentDragTarget;
-				gestureSource: currentDragTarget;
-				yourself)
+				dragboard: self space dragboard;
+				yourself).
+	
+	aDragEvent isConsumed
+		ifFalse: [ self space dispatchEvent: (BlSpaceDragCancelEvent new position: aDragEvent position) ]
 ]
 
 { #category : #'event firing' }
@@ -108,7 +135,6 @@ BlMouseProcessor >> fireAsDragEnterEvent: anEvent targets: aCollection [
 			self dispatchEvent:
 					(anEvent asDragEnterEvent
 						target: t;
-						gestureSource: currentDragTarget;
 						canBePropagated: false;
 						yourself)
 				target: t ]
@@ -119,7 +145,7 @@ BlMouseProcessor >> fireAsDragEvent: anEvent [
 	self	fireEvent:
 			(anEvent asDragEvent
 				target: currentDragTarget;
-				gestureSource: currentDragTarget;
+				dragboard: self space dragboard;
 				yourself)
 ]
 
@@ -130,7 +156,6 @@ BlMouseProcessor >> fireAsDragLeaveEvent: anEvent targets: aCollection [
 			self dispatchEvent:
 					(anEvent asDragLeaveEvent
 						target: t;
-						gestureSource: currentDragTarget;
 						canBePropagated: false;
 						yourself)
 					target: t ]
@@ -141,18 +166,21 @@ BlMouseProcessor >> fireAsDragStartEvent: anEvent [
 	^ self fireEvent:
 			(anEvent asDragStartEvent
 				target: anEvent target;
-				gestureSource: anEvent target;
 				yourself)
 ]
 
-{ #category : #'event firing' }
+{ #category : #'mouse drag' }
 BlMouseProcessor >> fireAsDropEvent: anEvent [
-	
-	self	fireEvent:
-			(anEvent asDropEvent
-				gestureSource: currentDragTarget;
-				gestureTarget: anEvent target;
-				yourself)
+	| aDropEvent |
+
+	aDropEvent := BlDropEvent new
+		copyFrom: anEvent;
+		yourself.
+		
+	self fireEvent: (aDropEvent
+		dragboard: self space dragboard;
+		target: anEvent target;
+		yourself)
 ]
 
 { #category : #'event firing' }
@@ -299,9 +327,8 @@ BlMouseProcessor >> handleMouseLeft: aSpaceMouseLeaveEvent [
 	lastEnteredTargets do: [ :eachEnteredTarget |
 		| anEvent |
 		anEvent := self isDragging
-			           ifTrue: [
-				           BlDragLeaveEvent new
-					           gestureSource: currentDragTarget ]
+			           ifTrue: [ 
+				           BlDragLeaveEvent new ]
 			           ifFalse: [ BlMouseLeaveEvent new ].
 
 		anEvent
@@ -313,7 +340,7 @@ BlMouseProcessor >> handleMouseLeft: aSpaceMouseLeaveEvent [
 		self dispatchEvent: anEvent target: eachEnteredTarget ].
 
 	lastEnteredTargets := #(  ).
-	lastOverTarget := nil
+	lastOverTarget := nil.
 ]
 
 { #category : #'mouse move' }
@@ -473,8 +500,8 @@ BlMouseProcessor >> processDragEnd: aMouseUpEvent [
 		description: [ 'When we drag something it can not be nil' ].
 
 	aMouseUpEvent primaryButtonPressed ifFalse: [ ^ self ].
-	self fireAsDragEndEvent: aMouseUpEvent.
 	self fireAsDropEvent: aMouseUpEvent.
+	self fireAsDragEndEvent: aMouseUpEvent.
 	currentDragTarget := nil.
 	dndInProgress := false.
 	lastOverTarget := nil.
@@ -631,7 +658,6 @@ BlMouseProcessor >> tryDragStart: aMouseEvent [
 	
 	aDragStartEvent := (aMouseEvent asDragStartEvent
 		target: aDragTarget;
-		gestureSource: aDragTarget;
 		yourself).
 
 	aDragStartEvent := self fireEvent: aDragStartEvent.

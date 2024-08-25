@@ -2,8 +2,7 @@ Class {
 	#name : #BlBaseDragEvent,
 	#superclass : #BlMouseEvent,
 	#instVars : [
-		'gestureSource',
-		'gestureTarget'
+		'dragboard'
 	],
 	#category : #'Bloc-Events'
 }
@@ -22,23 +21,15 @@ BlBaseDragEvent >> copySharedStatesFrom: anEvent [
 ]
 
 { #category : #accessing }
-BlBaseDragEvent >> gestureSource [
-	^ gestureSource
+BlBaseDragEvent >> dragboard [
+
+	^ dragboard
 ]
 
 { #category : #accessing }
-BlBaseDragEvent >> gestureSource: anObject [
-	gestureSource := anObject
-]
+BlBaseDragEvent >> dragboard: anObject [
 
-{ #category : #accessing }
-BlBaseDragEvent >> gestureTarget [
-	^ gestureTarget
-]
-
-{ #category : #accessing }
-BlBaseDragEvent >> gestureTarget: anObject [
-	gestureTarget := anObject
+	dragboard := anObject
 ]
 
 { #category : #testing }

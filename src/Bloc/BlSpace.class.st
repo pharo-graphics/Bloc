@@ -36,6 +36,7 @@ Class {
 		'focusProcessor',
 		'keyboardProcessor',
 		'focusChain',
+		'dragboard',
 		'nextPulseRequested',
 		'currentCursor',
 		'session',
@@ -800,6 +801,18 @@ BlSpace >> doUpdateLayoutBoundary: anElement context: aBlElementBoundsUpdater [
 
 	"...then we layout in measured during previous step bounds"
 	anElement applyLayoutIn: (anElement position extent: anElement measuredBounds extent) context: aBlElementBoundsUpdater
+]
+
+{ #category : #accessing }
+BlSpace >> dragboard [
+
+	^ dragboard
+]
+
+{ #category : #accessing }
+BlSpace >> dragboard: anObject [
+
+	dragboard := anObject
 ]
 
 { #category : #'change - layout' }
