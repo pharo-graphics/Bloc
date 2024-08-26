@@ -1,3 +1,6 @@
+"
+Actual behavior on dragged element. 
+"
 Class {
 	#name : #BlDragDelegate,
 	#superclass : #Object,

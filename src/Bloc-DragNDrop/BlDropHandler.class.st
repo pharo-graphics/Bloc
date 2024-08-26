@@ -1,3 +1,16 @@
+"
+specify behavior on how to handle the different event used after the element has been dragged, and is move over the `BlSpace` scene on the drop area.
+Event cover: 
+- `BlDropEvent`.
+- `BlDragEvent`.
+- `BlDragEnterEvent`.
+- `BlDragLeaveEvent`.
+- `BlItemsDroppedEvent`.
+- `BlItemsDraggedEvent`.
+- `BlItemsLeftEvent`
+Behavior is delegated to `BlDropDelegate`
+
+"
 Class {
 	#name : #BlDropHandler,
 	#superclass : #BlCustomEventHandler,

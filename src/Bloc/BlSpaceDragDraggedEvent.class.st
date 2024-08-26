@@ -1,3 +1,6 @@
+"
+Is sent by the space when an element is being dragged
+"
 Class {
 	#name : #BlSpaceDragDraggedEvent,
 	#superclass : #BlSpaceEvent,

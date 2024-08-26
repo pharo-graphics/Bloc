@@ -1,21 +1,5 @@
 "
-initial declaration
-
-BlBaseEventProcessor << #BlMouseProcessor
-	slots: {
-			 #lastEnteredTargets .
-			 #lastOverTarget .
-			 #lastClickEvent .
-			 #currentDragTarget .
-			 #lastMouseTarget .
-			 #dndInProgress .
-			 #dragStartMask .
-			 #pressedButtons .
-			 #dragState .
-			 #lastMouseMoveEvent .
-			 #lastMouseDownEvent };
-	tag: 'Space - Events';
-	package: 'Bloc'
+Is responsible for processing `BlMouseEvent` which are sent by the `TBlHostSpace` to the `BlSpace`. In addition, the mouse event processor manage event for Drag&drop, 
 "
 Class {
 	#name : #BlMouseProcessor,

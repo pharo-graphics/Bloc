@@ -1,3 +1,6 @@
+"
+Event added to Bloc when the `BlSpaceDragDropEvent` has been fired to allow additional behavior during drag&drop operation
+"
 Class {
 	#name : #BlAboutToBeDroppedEvent,
 	#superclass : #BlEvent,

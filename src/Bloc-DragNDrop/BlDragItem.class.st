@@ -1,3 +1,6 @@
+"
+A DragItem encapsulate a BlElement being dragged, to allow customisation of its appaerance, or specify its domain object. 
+"
 Class {
 	#name : #BlDragItem,
 	#superclass : #Object,

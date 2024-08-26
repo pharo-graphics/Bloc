@@ -1,3 +1,6 @@
+"
+Additional event to Bloc Drag&drop, raised when a `BlDragItem` is being dropped
+"
 Class {
 	#name : #BlItemsDroppedEvent,
 	#superclass : #BlEvent,

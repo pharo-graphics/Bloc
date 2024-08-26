@@ -1,3 +1,9 @@
+"
+specify behavior on how to handle the event to drag an element
+Current event being managed:
+- BlDragStartEvent
+Real behavior is delegated to `BlDragDelegate`
+"
 Class {
 	#name : #BlDragHandler,
 	#superclass : #BlCustomEventHandler,
