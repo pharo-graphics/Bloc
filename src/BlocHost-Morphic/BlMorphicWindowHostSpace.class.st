@@ -135,7 +135,12 @@ BlMorphicWindowHostSpace >> physicalSize [
 	This size may differ from the logical size on high dpi (retina) screens.
 	In most cases physical size is x2 larger than logical size on retina screens."
 
-	^ (morphicWindow spaceExtent x @ morphicWindow spaceExtent y) asPhysicalSize
+	| canvasScaleFactor |
+
+	canvasScaleFactor := SystemVersion current major >= 12
+		ifTrue: [ (Smalltalk at: #OSWorldRenderer) canvasScaleFactor ]
+		ifFalse: [ 1 ].
+	^ ((morphicWindow spaceExtent x @ morphicWindow spaceExtent y) * canvasScaleFactor) asPhysicalSize
 ]
 
 { #category : #'window - properties' }
