@@ -12,7 +12,7 @@ Class {
 		'position',
 		'itemId',
 		'flags',
-		'infiniteElement'
+		'infiniteElementR'
 	],
 	#pools : [
 		'BlInfiniteConstants'
@@ -72,7 +72,7 @@ BlInfiniteHolder >> infiniteElement [
 	I am recycled or removed"
 	<return: #BlInfiniteElement>
 
-	^ infiniteElement ifNotNil: [ :ie | ie first ]
+	^ infiniteElementR ifNotNil: [ :ie | ie first ]
 ]
 
 { #category : #'private - accessing' }
@@ -80,7 +80,8 @@ BlInfiniteHolder >> infiniteElement: anInfiniteElement [
 	"Set an infinite element a child of which a hold.
 	anInfiniteElement must not be nil"
 	
-	infiniteElement := anInfiniteElement asWeakReference 
+	infiniteElementR := WeakArray new: 1.
+	infiniteElementR	at: 1 put: anInfiniteElement
 ]
 
 { #category : #initialization }
