@@ -54,9 +54,11 @@ BlDemoCollector >> collectClass: aClass [
 { #category : #instanceCreation }
 BlDemoCollector >> collectPackage: aRPackage [
 
-	| node classes |
+	| packageClasses node classes |
+	packageClasses := (aRPackage classes flatCollect: [ :class | { class. class class } ])
+		sorted: [ :class1 :class2 | class1 name < class2 name ].
 	classes := OrderedCollection new.
-	(aRPackage classes sorted: [ :class1 :class2 | class1 name < class2 name ]) do: [ :class |
+	packageClasses do: [ :class |
 		| temp |
 		self collectClass: class.
 		temp := classDict at: class ifAbsent: [  ].
