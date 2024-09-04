@@ -115,6 +115,41 @@ BlSpaceFixture >> buildCapRoundDashedBorderOnClosedGeometry [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildChildDoesntInheritDashedBorder [
+
+	| outskirts |
+	builder spaceExtent: 90 @ 50.
+	builder space root layout: BlFlowLayout horizontal.
+
+	outskirts := {
+		BlOutskirts centered.
+		BlOutskirts inside.
+		BlOutskirts outside }.
+
+	#(true false) do: [ :childHasBorder |
+		outskirts do: [ :eachOutskirt |
+			| parent child |
+			parent := builder addToRoot
+				size: 25 @ 20;
+				margin: (BlInsets all: 2.5);
+				outskirts: eachOutskirt;
+				layout: BlFrameLayout new;
+				border: (BlBorder builder
+					paint: Color blue;
+					width: 2;
+					dashArray: #(2 2);
+					build).
+			child := (builder addTo: parent)
+				size: 12 asPoint;
+				constraintsDo: [ :c |
+					c frame horizontal alignCenter.
+					c frame vertical alignCenter ].
+			childHasBorder ifTrue: [
+				child border: (BlBorder paint: Color white width: 4) ] ] ]
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildClippingAbsolutelyTransparentElement [
 	"Add 3 elements, where only the last one should be clipped by it's transparent parent.
 	The output should be a blue rectangle surrounded by orange."
