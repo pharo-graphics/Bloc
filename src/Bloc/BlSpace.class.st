@@ -493,6 +493,16 @@ BlSpace class >> simulateSecondaryClickOn: anElement [
 	^ self simulateClickOn: anElement button: BlMouseButton secondary
 ]
 
+{ #category : #'debug - simulation' }
+BlSpace class >> simulateTextInput: aString on: aBlElement [
+
+	self
+		simulateEvent: (BlTextInputEvent new
+				 text: aString;
+				 yourself)
+		on: aBlElement
+]
+
 { #category : #'class initialization' }
 BlSpace class >> spaceWithId: aSpaceId do: aBlock [
 	^ self allSubInstances
