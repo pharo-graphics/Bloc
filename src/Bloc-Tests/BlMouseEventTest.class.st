@@ -1,7 +1,7 @@
 Class {
 	#name : #BlMouseEventTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Event-Asserts'
+	#category : #'Bloc-Tests-Events'
 }
 
 { #category : #running }
