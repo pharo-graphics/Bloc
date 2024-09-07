@@ -43,3 +43,9 @@ BlProportionalLayoutConstraintsHorizontal >> right: aNumber [
 
 	right := aNumber
 ]
+
+{ #category : #'accessing - structure variables' }
+BlProportionalLayoutConstraintsHorizontal >> unused [
+
+	^ left + (1.0 - right)
+]

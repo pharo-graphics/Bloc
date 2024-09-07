@@ -53,42 +53,70 @@ BlProportionalLayout class >> constraints [
 ]
 
 { #category : #measure }
-BlProportionalLayout >> boundsForChild: aChild in: parentBounds [
+BlProportionalLayout >> boundsForChild: aChild in: availableBounds [
 
-	| result horizontalProportions verticalProportions |
+	| horizontalProportions verticalProportions result |
 	horizontalProportions := aChild constraints proportional horizontal.
 	verticalProportions := aChild constraints proportional vertical.
 
-	result := BlBounds fromRectangle: (aChild margin inset: parentBounds).
+	result := BlBounds fromRectangle: availableBounds.
+	
 	result
-		shrinkByLeft: result width * horizontalProportions left
-		top: result height * verticalProportions top
-		right: result width * (1.0 - horizontalProportions right)
-		bottom: result height * (1.0 - verticalProportions bottom).
-	result expanded. "Ensure integer values"
+		shrinkByLeft: availableBounds width * horizontalProportions left
+		top: availableBounds height * verticalProportions top
+		right: availableBounds width * (1.0 - horizontalProportions right)
+		bottom: availableBounds height * (1.0 - verticalProportions bottom).
+
+	result shrinkByMargin: aChild margin.
+	result expanded. "Convert to integer values"
+
 	^ result
 ]
 
 { #category : #measure }
 BlProportionalLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdater [
 
-	| parentBounds |
-	parentBounds := anElement padding
+	| availableBounds |
+	availableBounds := anElement padding
 		inset: (0.0 @ 0.0 extent: anElement extent).
 
+	"Layout non-ignoredByLayout children"
 	anElement children accountedByLayout do: [ :eachChild |
 		eachChild
 			applyLayoutIn: (self
 				boundsForChild: eachChild
-				in: parentBounds)
+				in: availableBounds)
 			context: aBlElementBoundsUpdater ].
-		
+
+	"Layout ignoredByLayout children"		
 	self layoutIgnored: anElement context: aBlElementBoundsUpdater
 ]
 
 { #category : #measure }
 BlProportionalLayout >> measure: anElement with: anExtentSpec [
-	super measure: anElement with: anExtentSpec.
+
+	| extent |
+	extent := anExtentSpec sizeFor: 0.0 @ 0.0.
+	anElement measuredExtent: extent.
+
+	anElement children accountedByLayout do: [ :eachChild |
+		
+		| boundsForChild availableBounds |
+		availableBounds := anElement padding inset: (0@0 extent: extent).
+		boundsForChild := self boundsForChild: eachChild in: availableBounds.
+				
+		eachChild measure:
+			(BlExtentMeasurementSpec
+				widthSpec:
+					(self
+						measurementSpecFor: anExtentSpec widthSpec
+						usedSize: extent x - boundsForChild width
+						resizer: BlLayoutResizer matchParent)
+				heightSpec:
+					(self
+						measurementSpecFor: anExtentSpec heightSpec
+						usedSize: extent y - boundsForChild height
+						resizer: BlLayoutResizer matchParent)) ].
 	
 	self measureIgnored: anElement with: anExtentSpec
 ]
