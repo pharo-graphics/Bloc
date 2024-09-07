@@ -797,9 +797,11 @@ BlSpace >> doUpdateLayoutBoundary: anElement context: aBlElementBoundsUpdater [
 
 	"first we measure.."
 	anElement measure: anElement privatePreviousMeasurementSpec.
-
+				
 	"...then we layout in measured during previous step bounds"
-	anElement applyLayoutIn: (anElement position extent: anElement measuredBounds extent) context: aBlElementBoundsUpdater
+	anElement
+		applyLayoutIn: (anElement position extent: anElement measuredExtent)
+		context: aBlElementBoundsUpdater
 ]
 
 { #category : #accessing }

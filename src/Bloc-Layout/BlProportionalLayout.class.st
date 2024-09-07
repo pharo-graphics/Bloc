@@ -73,7 +73,7 @@ BlProportionalLayout >> boundsForChild: aChild in: availableBounds [
 	^ result
 ]
 
-{ #category : #measure }
+{ #category : #layout }
 BlProportionalLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdater [
 
 	| availableBounds |
