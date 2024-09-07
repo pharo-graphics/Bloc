@@ -5,19 +5,23 @@ I was initially inspired on Morphic's ProportionalLayout.
 
 Example:
 ```
-	| aContainer childA childB |
+	| aContainer childA childB gap |
+	gap := 5.
+
 	childA := BlElement new
 		id: #childA;
 		background: Color red;
 		constraintsDo: [ :c |
-			c proportional horizontal rightFraction: 0.5 ];
+			c proportional horizontal right: 0.5.
+			c margin: (BlInsets all: gap) ];
 		yourself.
 
 	childB := BlElement new
 		id: #childB;
 		background: Color green;
 		constraintsDo: [ :c |
-			c proportional horizontal leftFraction: 0.5 ];
+			c proportional horizontal left: 0.5.
+			c margin: (BlInsets all: gap) ];
 		yourself.
 
 	aContainer := BlElement new
@@ -30,10 +34,10 @@ Example:
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent ];
-		padding: (BlInsets all: 5);
+		padding: (BlInsets all: gap);
 		yourself.
 	
-	aContainer openInNewSpace.
+	aContainer openInNewSpace
 ```
 "
 Class {

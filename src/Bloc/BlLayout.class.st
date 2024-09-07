@@ -242,8 +242,7 @@ BlLayout >> measure: anElement with: anExtentSpec [
 { #category : #'private - measurement' }
 BlLayout >> measureChild: aChildElement parentSpec: anExtentSpec [
 	"Measure a given child element allowing it to take as much space within parent
-	as it want *does not* taking child's margin and parent's padding into account.
-	Note: You are only allowed to use me in a context of BlLayout and not from outside"
+	without taking into account child's margin and parent's padding."
 
 	self
 		measureChild: aChildElement
@@ -284,7 +283,7 @@ BlLayout >> measureChildWithMargins: anElement parentSpec: parentSpec [
 { #category : #protected }
 BlLayout >> measureChildWithMargins: anElement parentSpec: parentSpec widthUsed: widthUsed heightUsed: heightUsed [
 	"Measure anElement based on provided parent's extent measurement specification and used width and height
-	taking element's margin and parent's padding into account"
+	taking into account element's margin and parent's padding."
 	
 	self
 		measureChild: anElement
