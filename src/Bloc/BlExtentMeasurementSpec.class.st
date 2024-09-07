@@ -78,23 +78,23 @@ BlExtentMeasurementSpec >> heightSpec: aBlMeasurementSpec [
 { #category : #testing }
 BlExtentMeasurementSpec >> isExact [
 
-	^ self widthSpec isExact and: [ self heightSpec isExact ]
+	^ widthSpec isExact and: [ heightSpec isExact ]
 ]
 
 { #category : #geometry }
 BlExtentMeasurementSpec >> min: aMinSize max: aMaxSize [
 
-	^ (self widthSpec min: aMinSize x max: aMaxSize x)
-	  @ (self heightSpec min: aMinSize y max: aMaxSize y)
+	^ (widthSpec min: aMinSize x max: aMaxSize x)
+	  @ (heightSpec min: aMinSize y max: aMaxSize y)
 ]
 
 { #category : #printing }
 BlExtentMeasurementSpec >> printOn: aStream [
 
 	aStream nextPutAll: 'width: ('.
-	aStream nextPutAll: self widthSpec asString.
+	aStream nextPutAll: widthSpec asString.
 	aStream nextPutAll: ') height: ('.
-	aStream nextPutAll: self heightSpec asString.
+	aStream nextPutAll: heightSpec asString.
 	aStream nextPutAll: ')'
 ]
 
@@ -102,8 +102,9 @@ BlExtentMeasurementSpec >> printOn: aStream [
 BlExtentMeasurementSpec >> sizeFor: anExtent [
 
 	| width height |
-	width := self widthSpec sizeFor: anExtent x.
-	height := self heightSpec sizeFor: anExtent y.
+	width := widthSpec sizeFor: anExtent x.
+	height := heightSpec sizeFor: anExtent y.
+
 	^ width @ height
 ]
 

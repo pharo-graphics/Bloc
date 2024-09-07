@@ -50,13 +50,10 @@ BlMeasurementSpec class >> unspecified: aNumber [
 { #category : #comparing }
 BlMeasurementSpec >> = anotherObject [
 
-	self == anotherObject
-		ifTrue: [ ^ true ].
-	anotherObject class = self class
-		ifFalse: [ ^ false ].
-	
-	^ anotherObject size = size
-		and: [ anotherObject mode = mode ]
+	self == anotherObject ifTrue: [ ^ true ].
+	anotherObject class = self class ifFalse: [ ^ false ].
+
+	^ anotherObject size = size and: [ anotherObject mode = mode ]
 ]
 
 { #category : #composition }
@@ -106,25 +103,25 @@ BlMeasurementSpec >> hash [
 { #category : #testing }
 BlMeasurementSpec >> isAtMost [
 
-	^ self mode isAtMost
+	^ mode isAtMost
 ]
 
 { #category : #testing }
 BlMeasurementSpec >> isExact [
 
-	^ self mode isExact
+	^ mode isExact
 ]
 
 { #category : #testing }
 BlMeasurementSpec >> isUnspecified [
 
-	^ self mode isUnspecified
+	^ mode isUnspecified
 ]
 
 { #category : #geometry }
 BlMeasurementSpec >> min: aMinSize max: aMaxSize [
 
-	^ self mode size: self size min: aMinSize max: aMaxSize
+	^ mode size: size min: aMinSize max: aMaxSize
 ]
 
 { #category : #accessing }
@@ -142,7 +139,7 @@ BlMeasurementSpec >> mode: aMeasurementSpec [
 { #category : #printing }
 BlMeasurementSpec >> printOn: aStream [
 
-	self mode printOn: aStream size: self size
+	mode printOn: aStream size: size
 ]
 
 { #category : #accessing }
@@ -160,7 +157,6 @@ BlMeasurementSpec >> size: aNumber [
 
 { #category : #geometry }
 BlMeasurementSpec >> sizeFor: aNumber [
-	"aNumber should satisfy: #isBlocFiniteFloat"
 
-	^ self mode size: aNumber with: size
+	^ mode size: aNumber with: size
 ]
