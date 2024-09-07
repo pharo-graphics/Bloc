@@ -440,7 +440,9 @@ BlInfiniteLayout >> elementHolderOf: anElement [
 
 { #category : #initialization }
 BlInfiniteLayout >> exactMeasurementSpecFrom: anInfiniteElement [
-	self measurementSpec: (BlExtentMeasurementSpec exact: anInfiniteElement extent)
+
+	self measurementSpec:
+		(BlExtentMeasurementSpec exact: anInfiniteElement extent)
 ]
 
 { #category : #focus }

@@ -945,11 +945,11 @@ BlElement >> computeLayout [
 			widthSpec := BlMeasurementSpec exact: maxExtent x.
 			heightSpec := BlMeasurementSpec exact: maxExtent y.
 
-			self measure: (BlExtentMeasurementSpec new
+			self measure: (BlExtentMeasurementSpec
 				widthSpec: (self layout
 					measurementSpecFor: widthSpec
 					usedSize:  0.0
-					resizer: self constraints horizontal resizer);
+					resizer: self constraints horizontal resizer)
 				heightSpec: (self layout
 					measurementSpecFor: heightSpec
 					usedSize:  0.0
@@ -1967,14 +1967,21 @@ BlElement >> inUIProcessDo: aBlock [
 
 { #category : #initialization }
 BlElement >> initialize [
+
 	super initialize.
 
 	spaceReference := BlNullSpaceReference uniqueInstance.
 	visuals := BlDefaultVisuals uniqueInstance.
 
 	boundsCache := BlBoundsCache on: self.
-	bounds := BlElementLocalBounds new referenceElement: self.
-	measuredBounds := BlElementLocalBounds new referenceElement: self.
+	bounds :=
+		BlElementLocalBounds new
+			referenceElement: self;
+			yourself.
+	measuredBounds :=
+		BlElementLocalBounds new
+			referenceElement: self;
+			yourself.
 
 	self initializeEventDispatcher.
 	
@@ -1990,9 +1997,6 @@ BlElement >> initialize [
 	flags addShouldChildrenHandleMouseEvents.
 	flags addNeedsLayout.
 	flags addWaitingLayout.
-
-	"initialized lazily"
-	userData := nil.
 
 	taskQueue := BlTaskQueue new.
 	errorHandler := self defaultErrorHandler
@@ -2609,21 +2613,18 @@ BlElement >> measureThatFailed: anExtentMeasurementSpec [
 
 { #category : #layout }
 BlElement >> measuredBounds [
-	"Return my measured bounds where origin is my current position
-	and extent is measured extent.
-	@see BlElement>>#measuredExtent for more info"
-	<return: #BlElementBounds>
+	"Return my measured bounds (`BlElementBounds`) where origin is
+	my current position and extent is measured extent.
+	See BlElement>>#measuredExtent for more information."
 	
 	^ measuredBounds
 ]
 
 { #category : #layout }
 BlElement >> measuredExtent [
-	"Return my measured extent (as a Point) used during layout by layout strategies.
+	"Return my measured extent (as a `Point`) used during layout by layout strategies.
 	It is being computed during measuring step.
-	@see BlElement>>onMeasure:
-	measuredExtent can not be nil"
-	<return: #Point>
+	See BlElement>>onMeasure:"
 	
 	^ self measuredBounds extent
 ]

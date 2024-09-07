@@ -1,10 +1,7 @@
 Class {
 	#name : #BlLayoutParentNodeWithFilter,
-	#superclass : #BlLayoutNode,
-	#traits : 'TBlLayoutNode + TBlLayoutParentNode',
-	#classTraits : 'TBlLayoutNode classTrait + TBlLayoutParentNode classTrait',
+	#superclass : #BlLayoutNonLeafParentNode,
 	#instVars : [
-		'parentNode',
 		'filter',
 		'children'
 	],
@@ -13,7 +10,6 @@ Class {
 
 { #category : #accessing }
 BlLayoutParentNodeWithFilter >> children [
-	<return: #Collection of: #BlLayoutNode>
 
 	^ children
 ]
@@ -25,65 +21,8 @@ BlLayoutParentNodeWithFilter >> children: aBlLayoutNodeChildren [
 ]
 
 { #category : #accessing }
-BlLayoutParentNodeWithFilter >> constraints [
-	^ parentNode constraints
-]
-
-{ #category : #accessing }
-BlLayoutParentNodeWithFilter >> constraints: aBlLayoutConstraints [
-	parentNode constraints: aBlLayoutConstraints
-]
-
-{ #category : #'api - geometry' }
-BlLayoutParentNodeWithFilter >> extent [
-	^ parentNode extent
-]
-
-{ #category : #'api - geometry' }
-BlLayoutParentNodeWithFilter >> extent: aPoint [
-	parentNode extent: aPoint
-]
-
-{ #category : #'api - extent spec' }
-BlLayoutParentNodeWithFilter >> extentSpec [
-	<return: #BlExtentMeasurementSpec>
-
-	^ parentNode extentSpec
-]
-
-{ #category : #'api - extent spec' }
-BlLayoutParentNodeWithFilter >> extentSpec: aBlExtentMeasurementSpec [
-	parentNode extentSpec: aBlExtentMeasurementSpec
-]
-
-{ #category : #accessing }
 BlLayoutParentNodeWithFilter >> filterBlock: aBlockClosure [
 	filter := aBlockClosure
-]
-
-{ #category : #accessing }
-BlLayoutParentNodeWithFilter >> parent [
-	^ parentNode parent
-]
-
-{ #category : #accessing }
-BlLayoutParentNodeWithFilter >> parentNode [
-	^ parentNode
-]
-
-{ #category : #accessing }
-BlLayoutParentNodeWithFilter >> parentNode: anObject [
-	parentNode := anObject
-]
-
-{ #category : #accessing }
-BlLayoutParentNodeWithFilter >> position [
-	^ parentNode position
-]
-
-{ #category : #accessing }
-BlLayoutParentNodeWithFilter >> position: aPoint [
-	parentNode position: aPoint
 ]
 
 { #category : #accessing }
@@ -94,11 +33,12 @@ BlLayoutParentNodeWithFilter >> transformationDo: aBlock [
 { #category : #'api - converting' }
 BlLayoutParentNodeWithFilter >> withFilter: aSelectBlockOrFilterObject [
 	"implement filter as an object to support comparison and not filter twice"
-	filter = aSelectBlockOrFilterObject
-		ifTrue: [ ^ self ].
+
+	filter = aSelectBlockOrFilterObject ifTrue: [ ^ self ].
 
 	^ self class new
-		parentNode: self;
-		filterBlock: aSelectBlockOrFilterObject;
-		children: (self children select: aSelectBlockOrFilterObject)
+		  parentNode: self;
+		  filterBlock: aSelectBlockOrFilterObject;
+		  children: (self children select: aSelectBlockOrFilterObject);
+		  yourself
 ]

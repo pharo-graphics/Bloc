@@ -128,15 +128,12 @@ BlFlowLayoutMeasurer >> direction [
 BlFlowLayoutMeasurer >> fillLines: theLines with: theChildren [
 
 	| currentLine floatingQueue lineLength availableSpace totalBreadth currentSpaceIndex currentSpace |
-	self flag: 'This is something horrible!!!!'.
-	self flag: 'REFACTOR ME!!!'.
-	self flag: 'p.s. but first cover with unit tests :)'.
 
 	currentLine := BlFlowLayoutLine for: self.
 	theLines add: currentLine.
 
-	floatingQueue := SortedCollection sortBlock: [ :a :b |
-		                 a startLength < b startLength ].
+	floatingQueue := SortedCollection
+		sortBlock: [ :a :b | a startLength < b startLength ].
 	lineLength := 0.
 	totalBreadth := 0.
 	availableSpace := BlFlowLayoutLineSpace new
@@ -147,14 +144,14 @@ BlFlowLayoutMeasurer >> fillLines: theLines with: theChildren [
 
 	theChildren do: [ :aChild |
 		| newLine |
-		[
-		lineLength + aChild totalLength > currentSpace last and: [
-			currentSpaceIndex <= availableSpace intervals size ] ] whileTrue: [
-			currentSpaceIndex := currentSpaceIndex + 1.
-			currentSpaceIndex <= availableSpace intervals size ifTrue: [
-				currentSpace := availableSpace intervals at: currentSpaceIndex.
-				lineLength := currentSpace first.
-				currentLine length: lineLength ] ].
+		[ lineLength + aChild totalLength > currentSpace last and: [
+			currentSpaceIndex <= availableSpace intervals size ] ]
+				whileTrue: [
+					currentSpaceIndex := currentSpaceIndex + 1.
+					currentSpaceIndex <= availableSpace intervals size ifTrue: [
+						currentSpace := availableSpace intervals at: currentSpaceIndex.
+						lineLength := currentSpace first.
+						currentLine length: lineLength ] ].
 
 		newLine := aChild isNewLine or: [
 			           self isCheckCanFit and: [
@@ -163,31 +160,35 @@ BlFlowLayoutMeasurer >> fillLines: theLines with: theChildren [
 		newLine ifTrue: [
 			| previousLine |
 			previousLine := currentLine.
-			(previousLine children allSatisfy: [ :aLineChild |
-				 aLineChild isFloating ]) ifTrue: [
-				previousLine breadth: (previousLine children
-						 inject: 0
-						 into: [ :aTotalBreadth :aFloatingChild |
-							 aTotalBreadth max: aFloatingChild totalBreadth ]) ].
+			(previousLine children
+				allSatisfy: [ :aLineChild | aLineChild isFloating ]) ifTrue: [
+					previousLine breadth: (previousLine children
+						inject: 0
+						into: [ :aTotalBreadth :aFloatingChild |
+							aTotalBreadth max: aFloatingChild totalBreadth ]) ].
 			totalBreadth := totalBreadth + previousLine breadth.
+
 			"remove obsolete floating elements here"
-			floatingQueue := floatingQueue select: [ :aFloatingChild |
-				                 aFloatingChild excessBreadth > 0 ].
-			availableSpace := BlFlowLayoutLineSpace new
-				                  initializeFor: floatingQueue
-				                  maxLength: self maxLength.
+			floatingQueue :=
+				floatingQueue
+					select: [ :aFloatingChild | aFloatingChild excessBreadth > 0 ].
+
+			availableSpace :=
+				BlFlowLayoutLineSpace new
+					initializeFor: floatingQueue
+					maxLength: self maxLength.
 			currentSpaceIndex := 1.
 			currentSpace := availableSpace intervals at: currentSpaceIndex.
+
 			currentLine := BlFlowLayoutLine for: self.
 			currentLine addTo: theLines.
-			floatingQueue do: [ :aFloatingChild |
-				aFloatingChild addToLine: currentLine ].
+			floatingQueue
+				do: [ :aFloatingChild | aFloatingChild addToLine: currentLine ].
 			currentLine startBreadth: totalBreadth.
 
 			lineLength := 0.
-			[
-			(lineLength < currentSpace first or: [
-				 lineLength + aChild totalLength > currentSpace last ]) and: [
+			[ (lineLength < currentSpace first or: [
+				lineLength + aChild totalLength > currentSpace last ]) and: [
 				currentSpaceIndex <= availableSpace intervals size ] ] whileTrue: [
 				currentSpaceIndex <= availableSpace intervals size ifTrue: [
 					currentSpace := availableSpace intervals at: currentSpaceIndex.

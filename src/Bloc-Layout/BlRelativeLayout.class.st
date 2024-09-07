@@ -16,8 +16,8 @@ BlRelativeLayout >> layout: aParentLayoutNode [
 
 { #category : #measure }
 BlRelativeLayout >> measure: aParentLayoutNode [
-	| aConstrainedExtentSpec |
 
+	| aConstrainedExtentSpec |
 	aConstrainedExtentSpec := aParentLayoutNode extentSpec
 		min: aParentLayoutNode minExtent
 		max: aParentLayoutNode maxExtent.
@@ -52,7 +52,7 @@ BlRelativeLayout >> measureRelativePositions: aParentLayoutNode [
 
 { #category : #measure }
 BlRelativeLayout >> measurementSpecFor: aChildNode parentSpec: aParentSpec [
-	<return: #BlExtentMeasurementSpec>
+
 	| childWidthMeasureSpec childHeightMeasureSpec |
 
 	childWidthMeasureSpec := self

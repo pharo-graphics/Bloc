@@ -11,18 +11,19 @@ Class {
 
 { #category : #testing }
 BlMeasurementAtMostMode >> isAtMost [
+
 	^ true
 ]
 
 { #category : #geometry }
 BlMeasurementAtMostMode >> measurement: aResizing with: aFloat [	
-	<return: #BlMeasurementSpec>
 	
 	^ aResizing measurementAtMostWith: aFloat
 ]
 
 { #category : #printing }
 BlMeasurementAtMostMode >> printOn: aStream [
+
 	aStream nextPutAll: 'At most'
 ]
 
@@ -36,17 +37,12 @@ BlMeasurementAtMostMode >> printOn: aStream size: aNumber [
 
 { #category : #geometry }
 BlMeasurementAtMostMode >> size: aNumber min: aMinSizeFloat max: aMaxSizeFloat [
-	"aNumber should satisfy #isBlocFiniteFloat,
-	aMinSizeFloat and aMaxSizeFloat  #isBlocFiniteFloat"
-	<return: #Number>
-	
+
 	^ BlMeasurementSpec atMost: (aNumber min: aMaxSizeFloat)
 ]
 
 { #category : #geometry }
 BlMeasurementAtMostMode >> size: aNumber with: aSpecSize [
-	"aNumber should satisfy #isBlocFiniteFloat"
-	<return: #Number>
 	
 	^ aNumber min: aSpecSize
 ]

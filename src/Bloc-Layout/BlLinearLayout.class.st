@@ -220,7 +220,9 @@ BlLinearLayout >> measure: anElement with: anExtentSpec [
 	
 	aMeasurer measureOn: anElement.
 	
-	self measureIgnored: anElement with: (BlExtentMeasurementSpec exact: anElement measuredExtent)
+	self
+		measureIgnored: anElement
+		with: (BlExtentMeasurementSpec exact: anElement measuredExtent)
 ]
 
 { #category : #measure }
