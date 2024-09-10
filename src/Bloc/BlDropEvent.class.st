@@ -1,3 +1,6 @@
+"
+The `BlDropEvent` event is fired when a pointing device drop an element
+"
 Class {
 	#name : #BlDropEvent,
 	#superclass : #BlBaseDragEvent,
