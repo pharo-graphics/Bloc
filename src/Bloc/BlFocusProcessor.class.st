@@ -73,20 +73,25 @@ BlFocusProcessor >> fireFocusOutEvent: anElement from: aTopEventTarget dueTo: aF
 { #category : #'event firing' }
 BlFocusProcessor >> fireFocusTransferEvent: anElement from: aPreviousFocusedElement [
 	"Send focus event that doesn't bubble, perform simple direct dispatch to the target"
+
 	self
-		dispatchEvent: (self newFocusTransferEvent
-			target: anElement;
-			transfer: aPreviousFocusedElement)
+		dispatchEvent:
+			(self newFocusTransferEvent
+				 target: anElement;
+				 transfer: aPreviousFocusedElement;
+				 yourself)
 		target: anElement
 ]
 
 { #category : #accessing }
 BlFocusProcessor >> focusOwner [
+
 	^ self space focusOwner
 ]
 
 { #category : #accessing }
 BlFocusProcessor >> focusOwner: anElement [
+
 	self space focusOwner: anElement
 ]
 
@@ -106,9 +111,9 @@ BlFocusProcessor >> hasFocusOwner [
 
 { #category : #'focus - requesting' }
 BlFocusProcessor >> loseFor: anElement [
-	self focusOwner ~= anElement
-		ifTrue: [ ^ self ].
-		
+
+	self focusOwner ~= anElement ifTrue: [ ^ self ].
+
 	self processBlur: anElement.
 	"don't forget to forget focused element"
 	self focusOwner: nil
@@ -118,27 +123,26 @@ BlFocusProcessor >> loseFor: anElement [
 BlFocusProcessor >> newBlurEvent [
 	"Create, initialize and return a blur event that should be sent to the element
 	that just lost its focus"
-	<return: #BlBlurEvent>
 
 	^ BlBlurEvent new
-		canBePropagated: false
+		  canBePropagated: false;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlFocusProcessor >> newFocusEvent [
 	"Create, initialize and return a focus event that should be sent to the element
 	after it gets focus"
-	<return: #BlFocusEvent>
 
 	^ BlFocusEvent new
-		canBePropagated: false
+		  canBePropagated: false;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlFocusProcessor >> newFocusInEvent [
 	"Create, initialize and return a focus-in event that should be sent
 	as a part of focus processing"
-	<return: #BlFocusInEvent>
 	
 	^ BlFocusInEvent new
 ]
@@ -147,7 +151,6 @@ BlFocusProcessor >> newFocusInEvent [
 BlFocusProcessor >> newFocusOutEvent [
 	"Create, initialize and return a focus-out event that should be sent
 	as a part of blur processing"
-	<return: #BlFocusOutEvent>
 	
 	^ BlFocusOutEvent new
 ]
@@ -156,7 +159,6 @@ BlFocusProcessor >> newFocusOutEvent [
 BlFocusProcessor >> newFocusTransferEvent [
 	"Create, initialize and return a focus transfer event that should be sent to the element
 	before performing a focus transfer"
-	<return: #BlFocusTransferEvent>
 
 	^ BlFocusTransferEvent new
 ]

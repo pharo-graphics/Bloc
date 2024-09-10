@@ -10,10 +10,12 @@ Class {
 
 { #category : #testing }
 BlFocusInEvent >> isFocusIn [
+
 	^ true
 ]
 
 { #category : #sending }
 BlFocusInEvent >> sendTo: anObject [
+
 	anObject focusInEvent: self
 ]
