@@ -130,12 +130,12 @@ BlMouseProcessingTest >> testDragCreation [
 	self sendOutsideTargetEvent: BlMouseUpEvent primary.
 
 	self
-		assertFiredEventIs: BlDragEndEvent
-		target: self child
+		assertFiredEventIs: BlDropEvent
+		target: self space root
 		withPropagation: true.
 	self
-		assertFiredEventIs: BlDropEvent
-		target: self root
+		assertFiredEventIs: BlDragEndEvent 
+		target: self child
 		withPropagation: true
 ]
 
