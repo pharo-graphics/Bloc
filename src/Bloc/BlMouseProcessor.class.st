@@ -26,7 +26,7 @@ BlMouseProcessor class >> dblClickDelay [
 ]
 
 { #category : #'event testing' }
-BlMouseProcessor >> canBeClickAvortedEvent: aMouseUpEvent [
+BlMouseProcessor >> canBeClickAbortedEvent: aMouseUpEvent [
 
 	^ lastMouseDownEvent isNotNil and: [
 		  aMouseUpEvent target ~= lastMouseDownEvent target ]
@@ -209,10 +209,11 @@ BlMouseProcessor >> fireAsMouseOverEvent: aMouseEvent [
 ]
 
 { #category : #'mouse up' }
-BlMouseProcessor >> fireClickAvortedEventFrom: aMouseUpEvent [
-	"Click avorted is useful to let the mouse down target decide if it can be a click or not "
+BlMouseProcessor >> fireClickAbortedEventFrom: aMouseUpEvent [
+	"Click aborted is useful to let the mouse down target decide if it can be a click or not "
 
-	lastMouseDownEvent target fireEvent: (BlClickAbortedEvent new
+	lastMouseDownEvent target fireEvent:
+		(BlClickAbortedEvent new
 			 copyFrom: lastMouseDownEvent;
 			 upEvent: aMouseUpEvent;
 			 processor: self;
@@ -569,8 +570,8 @@ BlMouseProcessor >> processMouseUp: aMouseUpEvent [
 				ifTrue: [ self fireEvent: aMouseUpEvent asDoubleClickEvent ]
 				ifFalse: [ self fireClickEventFrom: aMouseUpEvent ] ]
 		ifFalse: [ 
-			(self canBeClickAvortedEvent: aMouseUpEvent) ifTrue: [
-				self fireClickAvortedEventFrom: aMouseUpEvent ] ]
+			(self canBeClickAbortedEvent: aMouseUpEvent) ifTrue: [
+				self fireClickAbortedEventFrom: aMouseUpEvent ] ]
 ]
 
 { #category : #'mouse picking' }
