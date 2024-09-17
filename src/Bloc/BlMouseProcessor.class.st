@@ -488,7 +488,7 @@ BlMouseProcessor >> processDragEnd: aMouseUpEvent [
 	self fireAsDragEndEvent: aMouseUpEvent.
 	currentDragTarget := nil.
 	dndInProgress := false.
-	lastOverTarget := nil.
+	lastOverTarget := nil
 ]
 
 { #category : #'mouse drag' }

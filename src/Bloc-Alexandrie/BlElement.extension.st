@@ -129,12 +129,10 @@ BlElement >> aeDrawOn: aeCanvas [
 
 	aeCanvas
 		restoreContextAfterPaintAlpha: self opacity
-		with: [
-			"My position is applied before my transformation matrix,
+		with: [ "My position is applied before my transformation matrix,
 			which may have an additional translation."
 			aeCanvas pathTranslate: self position.
 			self transformation aeApplyTo: aeCanvas.
-
 			self aeDrawIgnoringOpacityAndTransformationOn: aeCanvas ]
 ]
 

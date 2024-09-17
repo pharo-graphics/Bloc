@@ -58,6 +58,6 @@ BlDragHandler >> eventsToHandle [
 ]
 
 { #category : #accessing }
-BlDragHandler >> liftItem: aBlock [
+BlDragHandler >> liftItemBlock: aBlock [
 	liftItemBlock := aBlock
 ]
