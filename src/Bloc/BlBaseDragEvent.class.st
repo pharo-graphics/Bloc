@@ -2,7 +2,8 @@ Class {
 	#name : #BlBaseDragEvent,
 	#superclass : #BlMouseEvent,
 	#instVars : [
-		'dragboard'
+		'dragboard',
+		'gestureSource'
 	],
 	#category : #'Bloc-Events'
 }
@@ -30,6 +31,18 @@ BlBaseDragEvent >> dragboard [
 BlBaseDragEvent >> dragboard: anObject [
 
 	dragboard := anObject
+]
+
+{ #category : #accessing }
+BlBaseDragEvent >> gestureSource [
+
+	^ gestureSource
+]
+
+{ #category : #accessing }
+BlBaseDragEvent >> gestureSource: anObject [
+
+	gestureSource := anObject
 ]
 
 { #category : #testing }

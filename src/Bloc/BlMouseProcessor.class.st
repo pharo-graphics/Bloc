@@ -106,6 +106,7 @@ BlMouseProcessor >> fireAsDragEndEvent: anEvent [
 			(aDragEvent
 				target: currentDragTarget;
 				dragboard: self space dragboard;
+				gestureSource: currentDragTarget;
 				yourself).
 	
 	aDragEvent isConsumed
@@ -119,6 +120,7 @@ BlMouseProcessor >> fireAsDragEnterEvent: anEvent targets: aCollection [
 			self dispatchEvent:
 					(anEvent asDragEnterEvent
 						target: t;
+						gestureSource: currentDragTarget;
 						canBePropagated: false;
 						yourself)
 				target: t ]
@@ -140,6 +142,7 @@ BlMouseProcessor >> fireAsDragLeaveEvent: anEvent targets: aCollection [
 			self dispatchEvent:
 					(anEvent asDragLeaveEvent
 						target: t;
+						gestureSource: currentDragTarget;
 						canBePropagated: false;
 						yourself)
 					target: t ]
@@ -149,6 +152,7 @@ BlMouseProcessor >> fireAsDragLeaveEvent: anEvent targets: aCollection [
 BlMouseProcessor >> fireAsDragStartEvent: anEvent [
 	^ self fireEvent:
 			(anEvent asDragStartEvent
+			gestureSource: anEvent target;
 				target: anEvent target;
 				yourself)
 ]
@@ -164,6 +168,7 @@ BlMouseProcessor >> fireAsDropEvent: anEvent [
 	self fireEvent: (aDropEvent
 		dragboard: self space dragboard;
 		target: anEvent target;
+		gestureSource: currentDragTarget;
 		yourself)
 ]
 
@@ -312,7 +317,8 @@ BlMouseProcessor >> handleMouseLeft: aSpaceMouseLeaveEvent [
 		| anEvent |
 		anEvent := self isDragging
 			           ifTrue: [ 
-				           BlDragLeaveEvent new ]
+				           BlDragLeaveEvent new
+				gestureSource: currentDragTarget ]
 			           ifFalse: [ BlMouseLeaveEvent new ].
 
 		anEvent
@@ -642,6 +648,7 @@ BlMouseProcessor >> tryDragStart: aMouseEvent [
 	
 	aDragStartEvent := (aMouseEvent asDragStartEvent
 		target: aDragTarget;
+		gestureSource: aDragTarget;
 		yourself).
 
 	aDragStartEvent := self fireEvent: aDragStartEvent.
