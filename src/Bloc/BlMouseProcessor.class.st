@@ -132,6 +132,7 @@ BlMouseProcessor >> fireAsDragEvent: anEvent [
 			(anEvent asDragEvent
 				target: currentDragTarget;
 				dragboard: self space dragboard;
+				gestureSource: currentDragTarget;
 				yourself)
 ]
 
