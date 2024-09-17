@@ -1,9 +1,6 @@
 Class {
 	#name : #BlBaseDragEvent,
 	#superclass : #BlMouseEvent,
-	#instVars : [
-		'dragboard'
-	],
 	#category : #'Bloc-Events'
 }
 
@@ -18,18 +15,6 @@ BlBaseDragEvent >> copySharedStatesFrom: anEvent [
 	super copySharedStatesFrom: anEvent.
 	" Since the management of dnd relies on #isConsumed "
 	anEvent isConsumed ifTrue: [ self consume ]
-]
-
-{ #category : #accessing }
-BlBaseDragEvent >> dragboard [
-
-	^ dragboard
-]
-
-{ #category : #accessing }
-BlBaseDragEvent >> dragboard: anObject [
-
-	dragboard := anObject
 ]
 
 { #category : #testing }

@@ -96,20 +96,19 @@ BlMouseProcessor >> fillTargetHierarchy: aTarget [
 
 { #category : #'mouse drag' }
 BlMouseProcessor >> fireAsDragEndEvent: anEvent [
+
 	| aDragEvent |
-	
 	aDragEvent := BlDragEndEvent new
-		copyFrom: anEvent;
-		yourself.
-	
-	self fireEvent:
-			(aDragEvent
-				target: currentDragTarget;
-				dragboard: self space dragboard;
-				yourself).
-	
-	aDragEvent isConsumed
-		ifFalse: [ self space dispatchEvent: (BlSpaceDragCancelEvent new position: aDragEvent position) ]
+		              copyFrom: anEvent;
+		              yourself.
+
+	self fireEvent: (aDragEvent
+			 target: currentDragTarget;
+			 yourself).
+
+	aDragEvent isConsumed ifFalse: [
+		self space dispatchEvent:
+			(BlSpaceDragCancelEvent new position: aDragEvent position) ]
 ]
 
 { #category : #'event firing' }
@@ -126,11 +125,10 @@ BlMouseProcessor >> fireAsDragEnterEvent: anEvent targets: aCollection [
 
 { #category : #'event firing' }
 BlMouseProcessor >> fireAsDragEvent: anEvent [
-	self	fireEvent:
-			(anEvent asDragEvent
-				target: currentDragTarget;
-				dragboard: self space dragboard;
-				yourself)
+
+	self fireEvent: (anEvent asDragEvent
+			 target: currentDragTarget;
+			 yourself)
 ]
 
 { #category : #'event firing' }
@@ -155,16 +153,15 @@ BlMouseProcessor >> fireAsDragStartEvent: anEvent [
 
 { #category : #'mouse drag' }
 BlMouseProcessor >> fireAsDropEvent: anEvent [
-	| aDropEvent |
 
+	| aDropEvent |
 	aDropEvent := BlDropEvent new
-		copyFrom: anEvent;
-		yourself.
-		
+		              copyFrom: anEvent;
+		              yourself.
+
 	self fireEvent: (aDropEvent
-		dragboard: self space dragboard;
-		target: anEvent target;
-		yourself)
+			 target: anEvent target;
+			 yourself)
 ]
 
 { #category : #'event firing' }
