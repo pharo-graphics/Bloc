@@ -6,10 +6,12 @@ Class {
 
 { #category : #testing }
 BlBlurEvent >> isBlur [
+
 	^ true
 ]
 
 { #category : #sending }
 BlBlurEvent >> sendTo: anObject [
+
 	anObject blurEvent: self
 ]

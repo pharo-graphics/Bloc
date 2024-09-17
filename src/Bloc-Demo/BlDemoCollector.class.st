@@ -42,7 +42,8 @@ BlDemoCollector >> classes [
 BlDemoCollector >> collectClass: aClass [ 
 	
 	| node pragmas |
-	pragmas := Pragma allNamed: pragma in: aClass.
+	pragmas := (Pragma allNamed: pragma in: aClass) sorted: [ :pragma1 :pragma2 |
+		pragma1 methodSelector < pragma2 methodSelector ].
 	pragmas ifEmpty: [ ^ self ].
 	node := self ensureClassFor: aClass.
 	pragmas do: [ :prag | node addChild: (BlDemoMethodNode new item: prag method ) ].
@@ -53,9 +54,11 @@ BlDemoCollector >> collectClass: aClass [
 { #category : #instanceCreation }
 BlDemoCollector >> collectPackage: aRPackage [
 
-	| node classes |
+	| packageClasses node classes |
+	packageClasses := (aRPackage classes flatCollect: [ :class | { class. class class } ])
+		sorted: [ :class1 :class2 | class1 name < class2 name ].
 	classes := OrderedCollection new.
-	aRPackage classes do: [ :class |
+	packageClasses do: [ :class |
 		| temp |
 		self collectClass: class.
 		temp := classDict at: class ifAbsent: [  ].
@@ -68,7 +71,8 @@ BlDemoCollector >> collectPackage: aRPackage [
 { #category : #'as yet unclassified' }
 BlDemoCollector >> collectPackages: anOrderedCollection [
 
-	anOrderedCollection do: [ :each | self collectPackage: each ].
+	(anOrderedCollection sorted: [ :package1 :package2 | package1 name < package2 name ])
+		do: [ :each | self collectPackage: each ].
 ]
 
 { #category : #'as yet unclassified' }
@@ -87,7 +91,7 @@ BlDemoCollector >> ensurePackageFor: aPackage [
 BlDemoCollector >> initialize [
 	super initialize.
 	pragma := #demo.
-	packageDict := IdentityDictionary new.
+	packageDict := OrderedIdentityDictionary new.
 	classDict := IdentityDictionary new
 ]
 

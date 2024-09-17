@@ -494,6 +494,16 @@ BlSpace class >> simulateSecondaryClickOn: anElement [
 	^ self simulateClickOn: anElement button: BlMouseButton secondary
 ]
 
+{ #category : #'debug - simulation' }
+BlSpace class >> simulateTextInput: aString on: aBlElement [
+
+	self
+		simulateEvent: (BlTextInputEvent new
+				 text: aString;
+				 yourself)
+		on: aBlElement
+]
+
 { #category : #'class initialization' }
 BlSpace class >> spaceWithId: aSpaceId do: aBlock [
 	^ self allSubInstances
@@ -719,30 +729,29 @@ BlSpace >> doUpdateLayout [
 
 	| elementsToLayout aBlElementBoundsUpdater |
 
-	self elementsNeedingLayout copy do: [ :eachElement |
+	elementsNeedingLayout copy do: [ :eachElement |
 		eachElement privatePreviousMeasurementSpec ifNil: [
-			self elementsNeedingLayout remove: eachElement.
+			elementsNeedingLayout remove: eachElement.
 			eachElement requestLayout ] ].
 	
 	elementsToLayout :=
-		self elementsNeedingLayout reject: [ :eachElement |
+		elementsNeedingLayout reject: [ :eachElement |
 			| shouldIgnore |
 			shouldIgnore := false.
 			
-			self elementsNeedingLayout do: [ :eachPotentialParent |
-				(eachElement hasParent: eachPotentialParent)
-					ifTrue: [
-						eachElement
-							allParentsTo: eachPotentialParent
-							do: [ :eachParent |
-								eachParent privateRequestingLayout: true ].
-						shouldIgnore := true ] ].
+			elementsNeedingLayout do: [ :eachPotentialParent |
+				(eachElement hasParent: eachPotentialParent) ifTrue: [
+					eachElement
+						allParentsTo: eachPotentialParent
+						do: [ :eachParent |
+							eachParent privateRequestingLayout: true ].
+					shouldIgnore := true ] ].
 
 			shouldIgnore ].
 	
 	"we should clear the elements needing layout before we compute layout
 	to support multiple layout passes"
-	self elementsNeedingLayout removeAll.
+	elementsNeedingLayout removeAll.
 	
 	elementsToLayout :=
 		elementsToLayout
@@ -764,7 +773,7 @@ BlSpace >> doUpdateLayout [
 		self
 			doUpdateLayout: self root
 			context: aBlElementBoundsUpdater ].
-		
+	
 	aBlElementBoundsUpdater commitChanges
 ]
 
@@ -775,11 +784,11 @@ BlSpace >> doUpdateLayout: anElement context: aBlElementBoundsUpdater [
 	| currentExtent |
 	"First, we measure..."
 	currentExtent := self extent.
-	anElement measure: (BlExtentMeasurementSpec new
+	anElement measure: (BlExtentMeasurementSpec
 		widthSpec: (anElement layout
 			measurementSpecFor: (BlMeasurementSpec exact: currentExtent x)
 			usedSize:  0.0
-			resizer: BlLayoutResizer matchParent);
+			resizer: BlLayoutResizer matchParent)
 		heightSpec: (anElement layout
 			measurementSpecFor: (BlMeasurementSpec exact: currentExtent y)
 			usedSize:  0.0
@@ -798,9 +807,11 @@ BlSpace >> doUpdateLayoutBoundary: anElement context: aBlElementBoundsUpdater [
 
 	"first we measure.."
 	anElement measure: anElement privatePreviousMeasurementSpec.
-
+				
 	"...then we layout in measured during previous step bounds"
-	anElement applyLayoutIn: (anElement position extent: anElement measuredBounds extent) context: aBlElementBoundsUpdater
+	anElement
+		applyLayoutIn: (anElement position extent: anElement measuredExtent)
+		context: aBlElementBoundsUpdater
 ]
 
 { #category : #accessing }

@@ -14,7 +14,7 @@ It retrofits a part of the development made at https://github.com/feenkcom/bloc.
 
 The project can be loaded as usual via Metacello, using the `BaselineOfBloc` specification. To copy/paste a loading script. Use the following script to install stable Bloc in stable Pharo:
 
-```
+```smalltalk
 Metacello new
 	baseline: 'Bloc';
 	repository: 'github://pharo-graphics/Bloc:master/src';
@@ -28,7 +28,7 @@ Add this project to your Baseline with:
 
 ## How to depend on it
 
-```
+```smalltalk
 spec baseline: 'Bloc' with: [ spec repository: 'github://pharo-graphics/Bloc:v2.0.0/src' ].
 ```
 
@@ -42,10 +42,6 @@ spec baseline: 'Bloc' with: [ spec repository: 'github://pharo-graphics/Bloc:v2.
 These pages can be browsed via Pharo IDE -> World Menu -> Help -> Documentation Browser -> Bloc/doc (after loading the project).
 Note that there is also a book under writing available at [https://github.com/SquareBracketAssociates/Booklet-Graphics](https://github.com/SquareBracketAssociates/Booklet-Graphics)
 
-
-```
-https://github.com/SquareBracketAssociates/Booklet-Graphics
-```
 
 ## Contact
 

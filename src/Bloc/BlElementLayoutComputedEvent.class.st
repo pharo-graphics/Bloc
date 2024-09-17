@@ -18,8 +18,3 @@ BlElementLayoutComputedEvent class >> enableIn: anObject [
 BlElementLayoutComputedEvent class >> wantedIn: anObject [
 	^ anObject wantsLayoutComputed
 ]
-
-{ #category : #sending }
-BlElementLayoutComputedEvent >> sendTo: anObject [
-	anObject elementLayoutComputedEvent: self
-]

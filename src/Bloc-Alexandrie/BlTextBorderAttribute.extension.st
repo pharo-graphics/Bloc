@@ -28,10 +28,9 @@ BlTextBorderAttribute >> aeDrawOn: aeCanvas span: aBASpan [
 			aeCanvas setBorderBlock: [
 				border paint aeApplyTo: aeCanvas.
 
-				border style dashArray ifNotEmpty: [ :da |
-					aeCanvas
-						setDashes: da
-						offset: border style dashOffset ].
+				aeCanvas
+					setDashes: border style dashArray
+					offset: border style dashOffset.
 
 				border style lineJoin
 					aeApplyTo: aeCanvas

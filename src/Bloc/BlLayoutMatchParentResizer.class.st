@@ -32,9 +32,10 @@ BlLayoutMatchParentResizer >> isMatchParent [
 { #category : #'double dispatching' }
 BlLayoutMatchParentResizer >> measurementAtMostWith: aNumber [
 	"Child wants to be our size, but our size is not fixed. Constrain child to not be bigger than us."
-	<return: #BlMeasurementSpec>
 
-	^ BlMeasurementSpec new beAtMost: aNumber
+	^ BlMeasurementSpec new
+		  beAtMost: aNumber;
+		  yourself
 ]
 
 { #category : #'double dispatching' }

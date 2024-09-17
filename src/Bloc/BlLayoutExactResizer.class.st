@@ -79,7 +79,6 @@ BlLayoutExactResizer >> isExact [
 { #category : #'double dispatching' }
 BlLayoutExactResizer >> measurementAtMostWith: aNumber [
 	"Parent has imposed a maximum size on us. Child wants a specific size... so be it"
-	<return: #BlMeasurementSpec>
 
 	^ BlMeasurementSpec exact: self size
 ]
