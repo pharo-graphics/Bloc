@@ -43,3 +43,9 @@ BlProportionalLayoutConstraintsVertical >> top: aNumber [
 
 	top := aNumber
 ]
+
+{ #category : #'accessing - structure variables' }
+BlProportionalLayoutConstraintsVertical >> unused [
+
+	^ top + 1.0 - bottom
+]

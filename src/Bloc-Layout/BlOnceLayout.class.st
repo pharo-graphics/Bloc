@@ -74,10 +74,13 @@ BlOnceLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdate
 
 { #category : #measure }
 BlOnceLayout >> measure: anElement with: anExtentSpec [
-	self isStopped
-		ifFalse: [ ^ self layout measure: anElement with: anExtentSpec ].
-	
-	super measure: anElement with: (BlExtentMeasurementSpec exact: measuredExtent).
+
+	self isStopped ifFalse: [
+		^ self layout measure: anElement with: anExtentSpec ].
+
+	super
+		measure: anElement
+		with: (BlExtentMeasurementSpec exact: measuredExtent).
 	self measureIgnored: anElement with: anExtentSpec
 ]
 

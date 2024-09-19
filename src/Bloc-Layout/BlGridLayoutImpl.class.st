@@ -246,9 +246,15 @@ BlGridLayoutImpl >> layout: anElement in: aRectangle context: aBlElementBoundsUp
 		cy := paddingTop + locationBounds top + gravityOffsetY + alignmentOffsetY + topMargin.
 		
 		 (width ~= child measuredWidth or: [ height ~= child measuredHeight ])
-			ifTrue: [ child measure: (BlExtentMeasurementSpec exact: width @ height) ].
+			ifTrue: [
+				child measure:
+					(BlExtentMeasurementSpec
+						widthSpec: (BlMeasurementSpec exact: width asFloat)
+						heightSpec: (BlMeasurementSpec exact: height asFloat)) ].
 
-		child applyLayoutIn: (cx @ cy extent: width @ height) context: aBlElementBoundsUpdateContext ]
+		child
+			applyLayoutIn: (cx @ cy extent: width @ height)
+			context: aBlElementBoundsUpdateContext ]
 ]
 
 { #category : #measure }
@@ -316,11 +322,13 @@ BlGridLayoutImpl >> rowCount: aNumber [
 
 { #category : #'private utilities' }
 BlGridLayoutImpl >> setGroup: child row: row span: rowSpan col: col span: colSpan [
-	| childConstraints |
 
+	| childConstraints |
 	childConstraints := child constraints grid.
-	childConstraints vertical specSpan: (BlGridLayoutInterval min: row max: row + rowSpan).
-	childConstraints horizontal specSpan: (BlGridLayoutInterval min: col max: col + colSpan)
+	childConstraints vertical specSpan:
+		(BlGridLayoutInterval min: row max: row + rowSpan).
+	childConstraints horizontal specSpan:
+		(BlGridLayoutInterval min: col max: col + colSpan)
 ]
 
 { #category : #private }

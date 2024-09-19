@@ -117,6 +117,7 @@ BlAnnulusSectorGeometry >> innerRadius [
 { #category : #accessing }
 BlAnnulusSectorGeometry >> innerRadius: aNumber [
 	"Set inner radius as a fraction of the max radius of the annulus [0..1]"
+
 	innerRadius := aNumber min: 1.0 max: 0.0.
 	self releaseCache
 ]

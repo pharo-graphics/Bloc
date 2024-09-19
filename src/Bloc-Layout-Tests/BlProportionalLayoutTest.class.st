@@ -95,6 +95,93 @@ BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 ]
 
 { #category : #tests }
+BlProportionalLayoutTest >> testGrandChildMatchesParent [
+
+	| aContainer aChild aGrandChild |	
+	aGrandChild := BlElement new
+		id: #grandChild;
+		constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical matchParent.
+			c margin: (BlInsets all: 1) ];
+		yourself.
+
+	aChild := BlElement new
+		id: #child;
+		layout: BlFrameLayout new;
+		constraintsDo: [ :c |
+			c proportional horizontal
+				left: 0.5;
+				right: 0.9.
+			c proportional vertical
+				top: 0.2;
+				bottom: 0.8.
+			c padding: (BlInsets all: 2).
+			c margin: (BlInsets all: 3) ];		
+		addChild: aGrandChild;
+		yourself.
+
+	aContainer := BlElement new
+		id: #container;
+		layout: BlProportionalLayout new;
+		size: 48 @ 38;
+		addChild: aChild;
+		padding: (BlInsets all: 4);
+		yourself.
+	
+	aContainer forceLayout.
+	
+	self
+		assert: aChild bounds left
+		equals:
+			(((aContainer width - aContainer padding width)
+				* aChild constraints proportional horizontal left)
+			+ aContainer padding left
+			+ aChild margin left) floor.
+	self
+		assert: aChild bounds right
+		equals:
+			(((aContainer width - aContainer padding width)
+				* aChild constraints proportional horizontal right)
+			+ aContainer padding left
+			- aChild margin right) ceiling.
+	self
+		assert: aChild bounds top
+		equals:
+			(((aContainer height - aContainer padding height)
+				* aChild constraints proportional vertical top)
+			+ aContainer padding top
+			+ aChild margin top) floor.
+	self
+		assert: aChild bounds bottom
+		equals:
+			(((aContainer height - aContainer padding height)
+				* aChild constraints proportional vertical bottom)
+			+ aContainer padding top
+			- aChild margin bottom) ceiling.
+
+	" DEBUG with:
+	aContainer constraintsDo: [ :c |
+		c horizontal matchParent.
+		c vertical matchParent. ]. 
+	aContainer withAllChildrenBreadthFirstDo: [ :eachChild | 
+		eachChild background: Color random ].
+	aContainer openInNewSpace.
+	"
+
+	"Grand child must fill parent bounds except padding and margin"
+	self
+		assert: aGrandChild width
+		equals: aChild width - (aChild padding width + aGrandChild margin width).
+
+	self
+		assert: aGrandChild bounds inSpace asRectangle
+		equals:
+			((aGrandChild margin + aChild padding)
+				inset: aChild bounds inSpace)
+]
+
+{ #category : #tests }
 BlProportionalLayoutTest >> testHorizontalAndVerticalConstraints [
 
 	| aContainer aChild |

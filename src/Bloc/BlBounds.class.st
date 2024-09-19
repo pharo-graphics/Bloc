@@ -593,6 +593,16 @@ BlBounds >> shrinkByLeft: aLeft top: aTop right: aRight bottom: aBottom [
 	bottom := bottom - aBottom
 ]
 
+{ #category : #'rectangle functions' }
+BlBounds >> shrinkByMargin: aMargin [
+
+	self
+		shrinkByLeft: aMargin left
+		top: aMargin top
+		right: aMargin right
+		bottom: aMargin bottom
+]
+
 { #category : #printing }
 BlBounds >> storeOn: aStream [ 
 	"printed form is good for storing too"

@@ -26,9 +26,10 @@ BlLinearLayoutVerticalOrientation >> extentBreadth: breadth lengthSpec: length [
 
 { #category : #orientation }
 BlLinearLayoutVerticalOrientation >> extentSpecBreadth: breadthSpec lengthSpec: lengthSpec [
-	^ BlExtentMeasurementSpec new
-		widthSpec: breadthSpec;
-		heightSpec: lengthSpec
+
+	^ BlExtentMeasurementSpec
+		  widthSpec: breadthSpec
+		  heightSpec: lengthSpec
 ]
 
 { #category : #factory }

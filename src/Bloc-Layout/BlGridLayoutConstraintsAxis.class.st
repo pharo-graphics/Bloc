@@ -33,9 +33,10 @@ BlGridLayoutConstraintsAxis >> span: aNumber [
 	which may result in overlapping with neighbor rows or columns.
 	aNumber must be greater or equal to 0
 	aNumber must not be nil"
-	self assert: aNumber >= 0.
 
-	self specSpan: (BlGridLayoutInterval min: self spec span min max: self spec span min + aNumber)
+	self specSpan: (BlGridLayoutInterval
+			 min: self spec span min
+			 max: self spec span min + aNumber)
 ]
 
 { #category : #private }

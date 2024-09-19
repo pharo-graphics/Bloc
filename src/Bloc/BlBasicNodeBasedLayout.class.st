@@ -12,5 +12,6 @@ BlBasicNodeBasedLayout >> layout: aParentNode [
 
 { #category : #measure }
 BlBasicNodeBasedLayout >> measure: aParentLayoutNode [
+
 	self preMeasureChildrenNodes: aParentLayoutNode
 ]

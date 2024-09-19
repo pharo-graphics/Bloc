@@ -36,7 +36,7 @@ BlGridMutableInteger >> reset [
 	value := UNDEFINED
 ]
 
-{ #category : #accessing }
+{ #category : #evaluating }
 BlGridMutableInteger >> value [
 	^ 	value
 ]
