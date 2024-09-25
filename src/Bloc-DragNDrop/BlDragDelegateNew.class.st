@@ -2,33 +2,28 @@
 Actual behavior on dragged element. 
 "
 Class {
-	#name : #BlDragDelegate,
+	#name : #BlDragDelegateNew,
 	#superclass : #Object,
 	#instVars : [
 		'items',
 		'dragArea',
 		'offset',
-		'parent'
+		'parent',
+		'dragStrategy'
 	],
-	#category : #'Bloc-DragNDrop-core'
+	#category : #'Bloc-DragNDrop-core - experiment'
 }
 
 { #category : #'drag and drop' }
-BlDragDelegate >> cancel: aDraggedContainer at: aPoint in: aParentElement [
+BlDragDelegateNew >> cancel: aDraggedContainer at: aPoint in: aParentElement [
 	"Cancel drag and animate previews"
 
-	| aCancelAnimation |
+	"| aCancelAnimation |"
+
 	self items ifEmpty: [ ^ self ].
 
 	"self halt."
-	self items do: [ :eachItem |
-		| aPreviewElement |
-		aPreviewElement := eachItem sourceElement.
-		aPreviewElement removeFromParent.
-		aPreviewElement position: aPoint.
-		parent addChild: aPreviewElement ].
-
-	aCancelAnimation := BlParallelAnimation withAll:
+	self items do: [ :eachItem | "aCancelAnimation := BlParallelAnimation withAll:
 		                    (self items collect: [ :aDragItem |
 			                     | aPreviewBounds aSourceBounds aPreviewElement |
 			                     aPreviewElement := aDragItem sourceElement.
@@ -46,19 +41,21 @@ BlDragDelegate >> cancel: aDraggedContainer at: aPoint in: aParentElement [
 				                     easing: (BlDecelerateInterpolator factor: 2);
 				                     duration: 350 milliSeconds;
 				                     onStepDo: [ :aPosition |
-					                     aPreviewElement position: aPosition ]
-				                     ]).
+					                     aPreviewElement position: aPosition ] ]).
 
-	parent addAnimation: aCancelAnimation
-
-	"didn't include element state in my code picking"
-	"self items do: [ :each |
+	parent addAnimation: aCancelAnimation""didn't include element state in my code picking""self items do: [ :each |
 		each sourceElement states
 			removeState: BlElementDraggingState uniqueInstance ]"
+		| aPreviewElement |
+		aPreviewElement := eachItem sourceElement.
+		aPreviewElement removeFromParent.
+		dragStrategy drop: aPreviewElement at: aPoint - offset.
+		"aPreviewElement position: aPoint - offset."
+		parent addChild: aPreviewElement ]
 ]
 
 { #category : #'drag and drop' }
-BlDragDelegate >> drag: aDraggedContainer to: aPoint [
+BlDragDelegateNew >> drag: aDraggedContainer to: aPoint [
 	"Drag a container with all previews to a given point in the parent coordinate of the container"
 
 	"horizontal drag&drop, used by GToolkit to reorder tabs on top of its interface"
@@ -66,52 +63,68 @@ BlDragDelegate >> drag: aDraggedContainer to: aPoint [
 	"aDraggedContainer position:
 		(aPoint - offset) x @ aDraggedContainer measuredBounds position y"
 
-	"vertical drag & drop :" 
+	"vertical drag & drop :"
+
 	"aDraggedContainer position:
 		aDraggedContainer measuredBounds position x @ (aPoint - offset) y"
 
 	"normal drag & drop"
-	aDraggedContainer position: aPoint - offset
+
+	dragStrategy drag: aDraggedContainer to: aPoint withOffset: offset.
+	"aDraggedContainer position: aPoint - offset"
 ]
 
 { #category : #accessing }
-BlDragDelegate >> dragArea [
+BlDragDelegateNew >> dragArea [
 
 	^ dragArea
 ]
 
 { #category : #accessing }
-BlDragDelegate >> dragArea: anObject [
+BlDragDelegateNew >> dragArea: anObject [
 
 	dragArea := anObject
 ]
 
+{ #category : #accessing }
+BlDragDelegateNew >> dragStrategy [ 
+
+	^ dragStrategy 
+]
+
+{ #category : #accessing }
+BlDragDelegateNew >> dragStrategy: aBlDragStrategy [
+
+	dragStrategy := aBlDragStrategy 
+]
+
 { #category : #testing }
-BlDragDelegate >> hasDragArea [
+BlDragDelegateNew >> hasDragArea [
 	^ dragArea notNil
 ]
 
 { #category : #initialization }
-BlDragDelegate >> initialize [
-	super initialize.
+BlDragDelegateNew >> initialize [
 
-	items := { }
+	super initialize.
+	items := {  }.
+	dragStrategy := BlDragDefaultStrategy uniqueInstance 
 ]
 
 { #category : #accessing }
-BlDragDelegate >> items [
+BlDragDelegateNew >> items [
 
 	^ items
 ]
 
 { #category : #accessing }
-BlDragDelegate >> items: aCollectionOfDragItems [
+BlDragDelegateNew >> items: aCollectionOfDragItems [
 
 	items := aCollectionOfDragItems
 ]
 
 { #category : #'drag and drop' }
-BlDragDelegate >> lift [
+BlDragDelegateNew >> lift [
 	"Lift previews at a given point in space coordinates"
 
 	<return: #BlElement>
@@ -139,25 +152,25 @@ BlDragDelegate >> lift [
 ]
 
 { #category : #accessing }
-BlDragDelegate >> offset [
+BlDragDelegateNew >> offset [
 
 	^ offset
 ]
 
 { #category : #accessing }
-BlDragDelegate >> offset: anObject [
+BlDragDelegateNew >> offset: anObject [
 
 	offset := anObject
 ]
 
 { #category : #accessing }
-BlDragDelegate >> parent [
+BlDragDelegateNew >> parent [
 
 	^ parent
 ]
 
 { #category : #accessing }
-BlDragDelegate >> parent: anObject [
+BlDragDelegateNew >> parent: anObject [
 
 	parent := anObject
 ]
