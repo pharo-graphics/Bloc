@@ -34,6 +34,6 @@ BlKeyboardProcessorTest >> testProcessKeyDown [
 	eventA key: KeyboardKey A.
 
 	processor processKeyDown: eventA.
-	self assert: processor keystrokesAllowed.
+	self assert: processor areKeystrokesAllowed.
 	self assert: (processor buffer hasEvent: KeyboardKey A)
 ]

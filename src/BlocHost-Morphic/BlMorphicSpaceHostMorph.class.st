@@ -104,25 +104,26 @@ BlMorphicSpaceHostMorph >> initialize [
 
 { #category : #initialization }
 BlMorphicSpaceHostMorph >> initializeAnnouncement [
+
 	self
 		onAnnouncement: MorphOpened
-		do: [ :anEvent | BlMorphicWindowOpenedEvent new sentTo: eventHandler ].
+		do: [ :anEvent | anEvent sentTo: eventHandler ].
 
 	self
 		onAnnouncement: MorphDeleted
-		do: [ :anEvent | BlMorphicWindowClosedEvent new sentTo: eventHandler ].
+		do: [ :anEvent | anEvent sentTo: eventHandler ].
 
 	self
 		onAnnouncement: MorphGotFocus
-		do: [ :evt | ].
+		do: [ :anEvent | anEvent sentTo: eventHandler ].
 
 	self
 		onAnnouncement: MorphLostFocus
-		do: [ :evt | ].
+		do: [ :anEvent | anEvent sentTo: eventHandler ].
 
 	self
 		onAnnouncement: WindowResizing
-		do: [ :evt |
+		do: [ :anEvent |
 			self resizeDuring: [
 				BlMorphicWindowResizeEvent new
 					width: self width;
