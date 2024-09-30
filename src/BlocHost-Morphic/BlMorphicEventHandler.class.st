@@ -8,8 +8,8 @@ Class {
 	#name : #BlMorphicEventHandler,
 	#superclass : #Object,
 	#instVars : [
-		'morph',
-		'pressedKeys'
+		'pressedKeys',
+		'windowMorph'
 	],
 	#classVars : [
 		'HorizontalScrolling'
@@ -83,16 +83,16 @@ BlMorphicEventHandler >> convertMousePosition: anEvent andDo: aBlock [
 { #category : #'private - actions' }
 BlMorphicEventHandler >> dropFiles: anEvent [
 	"Handle a number of dropped files from the OS.
-	TODO:
-		- use a more general mechanism for figuring out what to do with the file (perhaps even offering a choice from a menu)
-		- remember the resource location or (when in browser) even the actual file handle"
-	| numFiles |	
+	Based on homonymous method in `PasteUpMorph`"
+
+	| numFiles |
 	numFiles := anEvent contents.
-	
-	1 to: numFiles do: [:i | | aFileReference handler |
-		aFileReference := FileReference requestDropReference: i.
+	1 to: numFiles do: [ :i |
+		| aFileReference handler |
+		aFileReference := anEvent requestDropReference: i.
 		handler := ExternalDropHandler lookupExternalDropHandler: aFileReference.
-		handler ifNotNil: [ aFileReference binaryWriteStreamDo: [ :stream | handler handle: stream in: self dropEvent: anEvent ] ]].
+		handler ifNotNil: [
+			handler handle: aFileReference in: self dropEvent: anEvent ] ]
 ]
 
 { #category : #accessing }
