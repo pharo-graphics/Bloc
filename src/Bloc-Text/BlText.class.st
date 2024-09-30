@@ -247,6 +247,7 @@ BlText >> delete: aStart to: anEnd [
 
 { #category : #'text - modifications' }
 BlText >> deleteAll [
+	self ifEmpty: [ ^ self ].
 	self delete: (1 min: self size) to: self size
 ]
 

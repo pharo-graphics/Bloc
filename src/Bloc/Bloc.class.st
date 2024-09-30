@@ -89,6 +89,7 @@ Bloc class >> preferableChildrenDataStructure: anChildrenCollectionClass [
 { #category : #settings }
 Bloc class >> preferencesOn: aBuilder [
 	<systemsettings>
+
 	(aBuilder group: self groupSymbolForBloc)
 		label: 'Bloc';
 		description: 'Bloc settings';
@@ -101,14 +102,6 @@ Bloc class >> preferencesOn: aBuilder [
 				domainValues: { BlChildrenArray . BlChildrenRope . BlChildrenLinkedList };
 				description: 'Choose which data structure should be used to store element''s children'.
 
-			(aBuilder range: #scrollingVelocity)
-				order: 5; 
-				target: BlInfiniteMouseScrollListener;
-				label: 'Scrolling velocity';
-				description: 'A positive integer used as a multiplier to increase mousewheel scrolling velocity ';
-				range: (1 to: 200 by: 1);
-				default: OSPlatform current defaultScrollingVelocity.
-				
 			(aBuilder setting: #assertionsEnabled)
 				order: 6;
 				target: self;

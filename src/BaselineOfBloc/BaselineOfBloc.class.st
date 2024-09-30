@@ -16,10 +16,10 @@ Class {
 { #category : #baselines }
 BaselineOfBloc >> baseline: spec [
 	<baseline>
+
 	spec
 		for: #common
 		do: [
-
 			"Bloc-Display"
 			spec
 				package: 'Bloc-Display';
@@ -78,9 +78,7 @@ BaselineOfBloc >> baseline: spec [
 					spec requires: #('Bloc-Text') ].
 
 			"Alexandrie canvas"
-			spec
-				baseline: 'Alexandrie' with: [
-					spec repository: 'github://pharo-graphics/Alexandrie:master/src' ].
+			self declareAlexandrieOn: spec.
 			spec
 				package: #'Bloc-Alexandrie' with: [
 					spec requires: #('Alexandrie' 'Bloc' 'Bloc-Text' 'Bloc-Infinite' ) ];
@@ -144,11 +142,8 @@ BaselineOfBloc >> baseline: spec [
 				spec requires: #(#'Bloc-Layout' #'Bloc-Spec2' #'Bloc-Text-Elements') ].
 
 			"SVG"
-			spec
-				baseline: 'XMLParser' with: [
-					spec
-						repository: 'github://pharo-contributions/XML-XMLParser:master/src';
-						loads: #(Core) ];
+			self declareXMLParserOn: spec.
+			spec 
 				package: #'Bloc-SVG' with: [
 					spec requires: #(#'Bloc' #'XMLParser') ];
 				package: #'Bloc-SVG-Tests' with: [
@@ -157,4 +152,20 @@ BaselineOfBloc >> baseline: spec [
 					spec requires: #(#'Bloc-Alexandrie' #'Bloc-SVG') ].
 
 			]
+]
+
+{ #category : #baselines }
+BaselineOfBloc >> declareAlexandrieOn: spec [
+
+	spec baseline: 'Alexandrie' with: [
+		spec repository: 'github://pharo-graphics/Alexandrie:master/src' ]
+]
+
+{ #category : #baselines }
+BaselineOfBloc >> declareXMLParserOn: spec [
+
+	spec baseline: 'XMLParser' with: [
+		spec
+			repository: 'github://pharo-contributions/XML-XMLParser:master/src';
+			loads: #( Core ) ]
 ]

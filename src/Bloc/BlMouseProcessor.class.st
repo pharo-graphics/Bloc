@@ -118,6 +118,7 @@ BlMouseProcessor >> fireAsDragEnterEvent: anEvent targets: aCollection [
 			self dispatchEvent:
 					(anEvent asDragEnterEvent
 						target: t;
+						gestureSource: currentDragTarget;
 						canBePropagated: false;
 						yourself)
 				target: t ]
@@ -138,6 +139,7 @@ BlMouseProcessor >> fireAsDragLeaveEvent: anEvent targets: aCollection [
 			self dispatchEvent:
 					(anEvent asDragLeaveEvent
 						target: t;
+						gestureSource: currentDragTarget;
 						canBePropagated: false;
 						yourself)
 					target: t ]
@@ -147,6 +149,7 @@ BlMouseProcessor >> fireAsDragLeaveEvent: anEvent targets: aCollection [
 BlMouseProcessor >> fireAsDragStartEvent: anEvent [
 	^ self fireEvent:
 			(anEvent asDragStartEvent
+			gestureSource: anEvent target;
 				target: anEvent target;
 				yourself)
 ]
@@ -310,7 +313,8 @@ BlMouseProcessor >> handleMouseLeft: aSpaceMouseLeaveEvent [
 		| anEvent |
 		anEvent := self isDragging
 			           ifTrue: [ 
-				           BlDragLeaveEvent new ]
+				           BlDragLeaveEvent new
+				gestureSource: currentDragTarget ]
 			           ifFalse: [ BlMouseLeaveEvent new ].
 
 		anEvent
@@ -632,21 +636,20 @@ BlMouseProcessor >> subprocessDragEnterExitEvent: aMouseEvent [
 { #category : #'mouse drag' }
 BlMouseProcessor >> tryDragStart: aMouseEvent [
 	"Try to start a drag and return true if drag actually started, otherwise false"
+
 	<return: #Boolean>
-	
 	| aDragTarget aDragStartEvent |
-	
 	aDragTarget := aMouseEvent target.
-	
-	aDragStartEvent := (aMouseEvent asDragStartEvent
-		target: aDragTarget;
-		yourself).
+
+	aDragStartEvent := aMouseEvent asDragStartEvent
+		                   target: aDragTarget;
+		                   gestureSource: aDragTarget;
+		                   yourself.
 
 	aDragStartEvent := self fireEvent: aDragStartEvent.
-	
-	currentDragTarget := aDragStartEvent isConsumed
-		ifTrue: [ aDragStartEvent currentTarget ]
-		ifFalse: [ nil ].
+
+	currentDragTarget := aDragStartEvent isConsumed ifTrue: [
+		                     aDragStartEvent currentTarget ].
 
 	^ dndInProgress := aDragStartEvent isConsumed
 ]

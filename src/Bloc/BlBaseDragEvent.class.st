@@ -17,6 +17,18 @@ BlBaseDragEvent >> copySharedStatesFrom: anEvent [
 	anEvent isConsumed ifTrue: [ self consume ]
 ]
 
+{ #category : #accessing }
+BlBaseDragEvent >> gestureSource [
+
+	^ gestureSource
+]
+
+{ #category : #accessing }
+BlBaseDragEvent >> gestureSource: anObject [
+
+	gestureSource := anObject
+]
+
 { #category : #testing }
 BlBaseDragEvent >> isBaseDrag [
 	^ true
