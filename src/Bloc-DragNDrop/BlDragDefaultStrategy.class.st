@@ -1,3 +1,6 @@
+"
+This class is part of a new DragHandler prototype
+"
 Class {
 	#name : #BlDragDefaultStrategy,
 	#superclass : #Object,

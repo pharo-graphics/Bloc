@@ -1,5 +1,5 @@
 "
-Actual behavior on dragged element. 
+This class is part of a new DragHandler prototype
 "
 Class {
 	#name : #BlDragDelegateNew,

@@ -5,19 +5,30 @@ Class {
 }
 
 { #category : #experimentations }
-BlDragAndDropExamples class >> experimentDragChangesScale [ 
-
-	<script> 
+BlDragAndDropExamples class >> experimentDragChangesScale [
+	"Dragging the element changes its size, revert it when dropping"
+	<script>
 	| child scaleUpAnimation scaleDownAnimation |
-	child := BlElement new background: Color lightRed; size: 50 asPoint; addEventHandler: BlDragHandlerNew new.
+	child := BlElement new
+		         background: Color lightRed;
+		         size: 50 asPoint;
+		         addEventHandler: BlDragHandlerNew new.
 
-scaleUpAnimation := (BlTransformAnimation scale: 1.3) duration: 0.3 seconds; easing: BlEasingBounceIn new.
-scaleDownAnimation := (BlTransformAnimation scale: 1/1.3) duration: 0.3 seconds; easing: BlEasingBounceOut new.
+	scaleUpAnimation := (BlTransformAnimation scale: 1.3)
+		                    duration: 0.3 seconds;
+		                    easing: BlEasingBounceIn new.
+	scaleDownAnimation := (BlTransformAnimation scale: 1 / 1.3)
+		                      duration: 0.3 seconds;
+		                      easing: BlEasingBounceOut new.
 
-child addEventHandlerOn: BlDragStartEvent do: [ child addAnimation: scaleUpAnimation copy ].
-child addEventHandlerOn: BlDragEndEvent do: [ child addAnimation: scaleDownAnimation copy ]. 
+	child
+		addEventHandlerOn: BlDragStartEvent
+		do: [ child addAnimation: scaleUpAnimation copy ].
+	child
+		addEventHandlerOn: BlDragEndEvent
+		do: [ child addAnimation: scaleDownAnimation copy ].
 
-child openInSpace.
+	child openInSpace
 ]
 
 { #category : #experimentations }
@@ -47,8 +58,8 @@ BlDragAndDropExamples class >> experimentDragEventAndSpaceDragLiftEventDifferenc
 ]
 
 { #category : #'experimentations - dragSelector' }
-BlDragAndDropExamples class >> experimentDragSelectorHighlightsSelectedElements [ 
-
+BlDragAndDropExamples class >> experimentDragSelectorHighlightsSelectedElements [
+	"This example shows how to draw a 'drag selector' rectangle using leftDrag, highlights hovered elements and inspect the list of it"
 	<script>
 	| space lasso initialPosition red blue green elements selectedElements |
 	space := BlSpace new.
@@ -59,22 +70,30 @@ BlDragAndDropExamples class >> experimentDragSelectorHighlightsSelectedElements 
 			          build).
 
 	initialPosition := 0 asPoint.
-	
-	red := (BlElement new background: Color lightRed; position: 100 asPoint).
-	blue := (BlElement new background: Color lightBlue; position: 200 asPoint).
-	green := (BlElement new background: Color lightGreen; position: 300@150).
 
-	elements := { red.blue.green }.
-	selectedElements := {} asOrderedCollection .
+	red := BlElement new
+		       background: Color lightRed;
+		       position: 100 asPoint.
+	blue := BlElement new
+		        background: Color lightBlue;
+		        position: 200 asPoint.
+	green := BlElement new
+		         background: Color lightGreen;
+		         position: 300 @ 150.
+
+	elements := {
+		            red.
+		            blue.
+		            green }.
+	selectedElements := {  } asOrderedCollection.
 	space root addChildren: elements.
 
 	space root addEventHandlerOn: BlDragStartEvent do: [ :event |
 		event consume.
 		initialPosition := event position.
-		elements do: [ :each |
-			each border: BlBorder empty ].
-		selectedElements := {} asOrderedCollection ].
-	
+		elements do: [ :each | each border: BlBorder empty ].
+		selectedElements := {  } asOrderedCollection ].
+
 	space root addEventHandlerOn: BlDragEvent do: [ :event |
 		| eventPos lassoPosX lassoPosY lassoSize |
 		eventPos := event position.
@@ -88,28 +107,28 @@ BlDragAndDropExamples class >> experimentDragSelectorHighlightsSelectedElements 
 			size: lassoSize.
 		space root addChild: lasso ].
 
-		space root addEventHandlerOn: BlDragEndEvent do: [ :event| 
-		|border|
+	space root addEventHandlerOn: BlDragEndEvent do: [ :event |
+		| border |
 		border := BlBorder paint: Color green width: 2.
 		elements do: [ :each |
-			((((lasso position x <= (each position x + each width)) and: 
-			((lasso position x + lasso width) >= each position x ))) and:
-			(( lasso position y <= (each position y + each height)) and: 
-			 ((lasso position y + lasso height) >= each position y)
-			))
-			 ifTrue: 
-				[each border: border.
-				selectedElements add: each].
-			].
-		selectedElements inspect.
-		].
+			((lasso position x <= (each position x + each width) and:
+				  lasso position x + lasso width >= each position x) and:
+				 (lasso position y <= (each position y + each height) and:
+					  lasso position y + lasso height >= each position y)) ifTrue: [
+				each border: border.
+				selectedElements add: each ] ].
+		selectedElements inspect ].
 
 	space show
 ]
 
 { #category : #experimentations }
 BlDragAndDropExamples class >> experimentDragStrategies [
-	"Careful this example uses a prototype of a new DragHandler, click on the element to change strategies"
+	"Careful this example uses a prototype of a new DragHandler, click on the element to change strategies
+	red -> Default (free drag)
+	green -> Horizontal
+	blue -> Vertical"
+
 	<script>
 	| handler child space strategy |
 	handler := BlDragHandlerNew new.
@@ -147,6 +166,7 @@ BlDragAndDropExamples class >> experimentDragStrategies [
 
 { #category : #experimentations }
 BlDragAndDropExamples class >> experimentDropEventReceivedByTargetArea [
+	"sends correctly (and inform) a DropEvent to the target area when dropping the element on it"
 
 	<script>
 	| child target space |
@@ -166,10 +186,9 @@ BlDragAndDropExamples class >> experimentDropEventReceivedByTargetArea [
 			target.
 			child }.
 
-	target
-		addEventHandlerOn: BlDropEvent
-		do: [ self inform: 'Drop on target'.
-			target background: Color random ].
+	target addEventHandlerOn: BlDropEvent do: [
+		self inform: 'Drop on target'.
+		target background: Color random ].
 
 	child
 		addEventHandlerOn: BlDragEndEvent
@@ -182,26 +201,31 @@ BlDragAndDropExamples class >> experimentDropEventReceivedByTargetArea [
 
 { #category : #experimentations }
 BlDragAndDropExamples class >> experimentHighlightAnimationToDraggedElement [
-
+	"Adds a king of highlight Animation when dragging the element"
 	<script>
 	| child animation currentAnimation |
-	child := BlElement new background: Color red; addEventHandler: BlDragHandler new.
+	child := BlElement new
+		         background: Color red;
+		         addEventHandler: BlDragHandler new.
 
-animation := BlColorTransition new
-		  from: Color white;
-		  to: Color red;
-		  duration: 500 milliSeconds;
-		  onStepDo: [ :c | child background: c ];
-		  beInfinite;
-		  yourself.
+	animation := BlColorTransition new
+		             from: Color white;
+		             to: Color red;
+		             duration: 500 milliSeconds;
+		             onStepDo: [ :c | child background: c ];
+		             beInfinite;
+		             yourself.
 
-currentAnimation := nil.
-child addEventHandlerOn: BlDragStartEvent do: [ currentAnimation := animation copy.
-	child addAnimation: currentAnimation. ].
+	currentAnimation := nil.
+	child addEventHandlerOn: BlDragStartEvent do: [
+		currentAnimation := animation copy.
+		child addAnimation: currentAnimation ].
 
-child addEventHandlerOn: BlDragEndEvent do: [ currentAnimation loops: 0. ]. 
+	child
+		addEventHandlerOn: BlDragEndEvent
+		do: [ currentAnimation loops: 0 ].
 
-child openInSpace
+	child openInSpace
 ]
 
 { #category : #experimentations }
@@ -224,7 +248,7 @@ BlDragAndDropExamples class >> experimentNewTagsOrderer [
 
 { #category : #'experimentations - dragSelector' }
 BlDragAndDropExamples class >> experimentRectangleDragSelect [
-
+	"This example shows how to draw a 'drag selector' rectangle using leftDrag"
 	<script>
 	| space lasso initialPosition |
 	space := BlSpace new.
@@ -257,7 +281,7 @@ BlDragAndDropExamples class >> experimentRectangleDragSelect [
 
 { #category : #'experimentations - dragSelector' }
 BlDragAndDropExamples class >> experimentRectangleDragSelectWithElementsOnSpace [
-
+	"This example shows how to draw a 'drag selector' rectangle using leftDrag when there's elements in the space"
 	<script>
 	| space lasso initialPosition |
 	space := BlSpace new.
@@ -285,8 +309,12 @@ BlDragAndDropExamples class >> experimentRectangleDragSelectWithElementsOnSpace 
 			size: lassoSize.
 		space root addChild: lasso ].
 
-	space root addChild: (BlElement new background: Color lightRed; position: 100 asPoint).
-	space root addChild: (BlElement new background: Color lightBlue; position: 200 asPoint).
+	space root addChild: (BlElement new
+			 background: Color lightRed;
+			 position: 100 asPoint).
+	space root addChild: (BlElement new
+			 background: Color lightBlue;
+			 position: 200 asPoint).
 
 	space show
 ]
@@ -318,18 +346,18 @@ BlDragAndDropExamples class >> experimentRemoveDragHandlerAtRunTime [
 
 { #category : #'experimentations - dragSelector - shortcut' }
 BlDragAndDropExamples class >> experimentShortcutDragSelectorDragsSelectedElements [
-
+	"This example lets us select elements to drag and we can drag the 'drag selector' to drag all selected elements"
 	<script>
-	
 	| space lasso initialPosition red blue green elements selectedElements lassoBorder offset |
 	space := BlSpace new.
-	lassoBorder := (BlBorderBuilder new
-			          paint: Color veryLightGray;
-			          width: 2;
-			          dashed;
-			          build).
-	lasso := BlElement new border: lassoBorder;
-			clipChildren: false.
+	lassoBorder := BlBorderBuilder new
+		               paint: Color veryLightGray;
+		               width: 2;
+		               dashed;
+		               build.
+	lasso := BlElement new
+		         border: lassoBorder;
+		         clipChildren: false.
 
 	initialPosition := 0 asPoint.
 
@@ -355,7 +383,7 @@ BlDragAndDropExamples class >> experimentShortcutDragSelectorDragsSelectedElemen
 			event consume.
 			initialPosition := event position.
 			selectedElements do: [ :each | each border: BlBorder empty ].
-			selectedElements := {  } asOrderedCollection. ] ].
+			selectedElements := {  } asOrderedCollection ] ].
 	space root addEventHandlerOn: BlDragEvent do: [ :event |
 		event modifiers isCtrl ifTrue: [
 			| eventPos lassoPosX lassoPosY lassoSize |
@@ -380,11 +408,10 @@ BlDragAndDropExamples class >> experimentShortcutDragSelectorDragsSelectedElemen
 					 (lasso position y <= (each position y + each height) and:
 						  lasso position y + lasso height >= each position y)) ifTrue: [
 					each border: border.
-					selectedElements add: each ] ].
-			] ].
-	
+					selectedElements add: each ] ] ] ].
+
 	offset := 0.
-	lasso addEventHandlerOn: BlDragStartEvent do: [ :event|
+	lasso addEventHandlerOn: BlDragStartEvent do: [ :event |
 		event consume.
 		offset := event position - lasso position.
 		lasso border: BlBorder empty.
@@ -392,23 +419,24 @@ BlDragAndDropExamples class >> experimentShortcutDragSelectorDragsSelectedElemen
 			each position: each position - lasso position.
 			each removeFromParent.
 			lasso addChild: each ] ].
-	
-	lasso addEventHandlerOn: BlDragEvent do: [ :event |
-		lasso position: event position - offset].
-	
+
+	lasso
+		addEventHandlerOn: BlDragEvent
+		do: [ :event | lasso position: event position - offset ].
+
 	lasso addEventHandlerOn: BlDragEndEvent do: [ :event |
 		lasso border: lassoBorder.
 		selectedElements do: [ :each |
 			each position: each position + lasso position.
 			each removeFromParent.
-			space root addChild: each ] ]. 	  
+			space root addChild: each ] ].
 
 	space show
 ]
 
 { #category : #'experimentations - dragSelector - shortcut' }
 BlDragAndDropExamples class >> experimentShortcutDragSelectorHighlightsSelectedElements [
-
+	"This example shows how to highlight elements hovered by the 'drag selector'"
 	<script>
 	| space lasso initialPosition red blue green elements selectedElements |
 	space := BlSpace new.
@@ -436,7 +464,7 @@ BlDragAndDropExamples class >> experimentShortcutDragSelectorHighlightsSelectedE
 		            green }.
 	selectedElements := {  } asOrderedCollection.
 	space root addChildren: elements.
-	
+
 	space root addEventHandlerOn: BlDragStartEvent do: [ :event |
 		event modifiers isCtrl ifTrue: [
 			event consume.
@@ -454,26 +482,26 @@ BlDragAndDropExamples class >> experimentShortcutDragSelectorHighlightsSelectedE
 				position: lassoPosX @ lassoPosY;
 				size: lassoSize.
 			space root addChild: lasso ] ].
-	
+
 	space root addEventHandlerOn: BlDragEndEvent do: [ :event |
 		event modifiers isCtrl ifTrue: [
-		| border |
-		border := BlBorder paint: Color green width: 2.
-		elements do: [ :each |
-			((lasso position x <= (each position x + each width) and:
-				  lasso position x + lasso width >= each position x) and:
-				 (lasso position y <= (each position y + each height) and:
-					  lasso position y + lasso height >= each position y)) ifTrue: [
-				each border: border.
-				selectedElements add: each ] ].
-		selectedElements inspect ]].
+			| border |
+			border := BlBorder paint: Color green width: 2.
+			elements do: [ :each |
+				((lasso position x <= (each position x + each width) and:
+					  lasso position x + lasso width >= each position x) and:
+					 (lasso position y <= (each position y + each height) and:
+						  lasso position y + lasso height >= each position y)) ifTrue: [
+					each border: border.
+					selectedElements add: each ] ].
+			selectedElements inspect ] ].
 
 	space show
 ]
 
 { #category : #'experimentations - dragSelector - shortcut' }
 BlDragAndDropExamples class >> experimentShortcutRectangleDragSelect [
-
+	"This example shows how to draw a 'drag selector' rectangle using ctrl+leftDrag"
 	<script>
 	| space lasso initialPosition |
 	space := BlSpace new.
@@ -491,17 +519,17 @@ BlDragAndDropExamples class >> experimentShortcutRectangleDragSelect [
 			initialPosition := event position ] ].
 	space root addEventHandlerOn: BlDragEvent do: [ :event |
 		event modifiers isCtrl ifTrue: [
-		| eventPos lassoPosX lassoPosY lassoSize |
-		eventPos := event position.
-		lassoPosX := eventPos x min: initialPosition x.
-		lassoPosY := eventPos y min: initialPosition y.
-		lassoSize := (eventPos - initialPosition) x abs
-		             @ (eventPos - initialPosition) y abs.
-		lasso hasParent ifTrue: [ lasso removeFromParent ].
-		lasso
-			position: lassoPosX @ lassoPosY;
-			size: lassoSize.
-		space root addChild: lasso ]].
+			| eventPos lassoPosX lassoPosY lassoSize |
+			eventPos := event position.
+			lassoPosX := eventPos x min: initialPosition x.
+			lassoPosY := eventPos y min: initialPosition y.
+			lassoSize := (eventPos - initialPosition) x abs
+			             @ (eventPos - initialPosition) y abs.
+			lasso hasParent ifTrue: [ lasso removeFromParent ].
+			lasso
+				position: lassoPosX @ lassoPosY;
+				size: lassoSize.
+			space root addChild: lasso ] ].
 
 	space show
 ]
@@ -541,39 +569,48 @@ BlDragAndDropExamples class >> experimentTargetBorderChangesWithDragEnterAndLeav
 
 { #category : #experimentations }
 BlDragAndDropExamples class >> experimentWiggleAnimationToDraggedElement [
-"This example needs to be checked because of the rotation offset obtained after releasing the drag"
+	"Adds a 'wiggle' animation when dragging the elements"
+	"This example needs to be checked because of the rotation offset obtained after releasing the drag"
+
 	<script>
 	| child angle animation1 animation2 animation3 animation currentAnimation |
-	child := BlElement new background: Color red; addEventHandler: BlDragHandler new.
-angle := 5.
-animation1 := (BlTransformAnimation
-		  rotate: angle )
-		  duration: 50 milliSeconds;
-		  easing: BlLinearInterpolator new;
-		target: child;
-		  yourself.
-animation2 := (BlTransformAnimation
-		  rotate: -2*angle )
-		  duration: 100 milliSeconds;
-		  easing: BlLinearInterpolator new;
-		target: child;
-		  yourself.
-animation3 := (BlTransformAnimation
-		  rotate: angle )
-		  duration: 50 milliSeconds;
-		  easing: BlLinearInterpolator new;
-		target: child;
-		  yourself.
+	child := BlElement new
+		         background: Color red;
+		         addEventHandler: BlDragHandler new.
+	angle := 5.
+	animation1 := (BlTransformAnimation rotate: angle)
+		              duration: 50 milliSeconds;
+		              easing: BlLinearInterpolator new;
+		              target: child;
+		              yourself.
+	animation2 := (BlTransformAnimation rotate: -2 * angle)
+		              duration: 100 milliSeconds;
+		              easing: BlLinearInterpolator new;
+		              target: child;
+		              yourself.
+	animation3 := (BlTransformAnimation rotate: angle)
+		              duration: 50 milliSeconds;
+		              easing: BlLinearInterpolator new;
+		              target: child;
+		              yourself.
 
-animation := BlSequentialAnimation new addAll: { animation1.animation2.animation3 }; beInfinite;yourself.
-currentAnimation := nil.
-child addEventHandlerOn: BlDragStartEvent do: [
-	currentAnimation := animation copy.
-	child addAnimation: currentAnimation. ].
+	animation := BlSequentialAnimation new
+		             addAll: {
+				             animation1.
+				             animation2.
+				             animation3 };
+		             beInfinite;
+		             yourself.
+	currentAnimation := nil.
+	child addEventHandlerOn: BlDragStartEvent do: [
+		currentAnimation := animation copy.
+		child addAnimation: currentAnimation ].
 
-child addEventHandlerOn: BlDragEndEvent do: [ currentAnimation loops: 0. ]. 
+	child
+		addEventHandlerOn: BlDragEndEvent
+		do: [ currentAnimation loops: 0 ].
 
-child openInSpace
+	child openInSpace
 ]
 
 { #category : #letters }
