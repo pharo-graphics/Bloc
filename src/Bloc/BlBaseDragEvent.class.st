@@ -1,6 +1,9 @@
 Class {
 	#name : #BlBaseDragEvent,
 	#superclass : #BlMouseEvent,
+	#instVars : [
+		'gestureSource'
+	],
 	#category : #'Bloc-Events'
 }
 
