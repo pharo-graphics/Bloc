@@ -19,6 +19,7 @@ Class {
 
 { #category : #'instance creation' }
 BlMorphicEventHandler class >> window: aMorphicWindow [
+
 	^ self new
 		window: aMorphicWindow;
 		yourself

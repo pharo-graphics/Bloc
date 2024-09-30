@@ -19,19 +19,18 @@ BlBaseEventProcessor class >> space: aSpace [
 
 { #category : #'event firing' }
 BlBaseEventProcessor >> dispatchEvent: anEvent target: aTarget [
+
 	aTarget dispatchEvent: anEvent
 ]
 
 { #category : #'event firing' }
 BlBaseEventProcessor >> fireEvent: anEvent [
-	<return: #BlEvent>
 
 	^ BlEvent fireEvent: anEvent
 ]
 
 { #category : #'event firing' }
 BlBaseEventProcessor >> fireEvent: anEvent from: aTopEventTarget [
-	<return: #BlEvent>
 
 	^ BlEvent fireEvent: anEvent from: aTopEventTarget
 ]
