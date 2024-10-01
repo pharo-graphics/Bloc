@@ -57,6 +57,311 @@ BlDragAndDropExamples class >> experimentDragEventAndSpaceDragLiftEventDifferenc
 	space show
 ]
 
+{ #category : #'experimentations - preview' }
+BlDragAndDropExamples class >> experimentDragFromGridLayout [ 
+
+	<script> 
+	| grid elements offset space |
+	grid := BlElement new size: 400 asPoint; layout: (BlGridLayout horizontal columnCount: 2).
+
+elements := OrderedCollection new.
+offset := 0.
+
+space := BlSpace new.
+
+1 to: 4 do: [ :i |
+	|elt textElt|
+	
+	"Element initialization"
+	elt := BlElement new size: 200 asPoint; background: Color lightGreen; border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
+	
+	textElt := BlTextElement new text: i asString asRopedText; constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter ].
+	textElt text fontSize: 100.
+	elt addChild: textElt.
+	
+	"Event handling"
+	elt addEventHandlerOn: BlDragStartEvent do: [ :e |
+		e consume.
+		offset := elt positionInSpace - e position.
+		elt removeFromParent.
+		space root addChild: elt.
+		elt preventMeAndChildrenMouseEvents ].
+	
+	elt addEventHandlerOn: BlDragEvent do: [ :e |
+		elt position: e position + offset. ].
+	
+	elt addEventHandlerOn: BlDragEndEvent do: [ :e |
+		elt allowMeAndChildrenMouseEvents ]. 
+	
+	"Add element to grid"
+	grid addChild: elt. ].
+
+space root addChild: grid.
+space show.
+]
+
+{ #category : #'experimentations - preview' }
+BlDragAndDropExamples class >> experimentDragFromGridLayoutWithFirstPreview [
+
+	<script>
+	| grid elements offset space preview textPreview |
+	grid := BlElement new size: 400 asPoint; layout: (BlGridLayout horizontal columnCount: 2).
+
+elements := OrderedCollection new.
+offset := 0.
+
+space := BlSpace new.
+preview := BlElement new size: 200 asPoint; background: (Color lightGreen alpha: 0.3); border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
+
+textPreview := BlAttributedTextElement new text: '0' asRopedText; constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter ].
+textPreview text fontSize: 100.
+
+preview addChild: textPreview.
+
+1 to: 4 do: [ :i |
+	|elt textElt|
+	
+	"Element initialization"
+	elt := BlElement new size: 200 asPoint; background: Color lightGreen; border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
+	
+	textElt := BlTextElement new text: i asString asRopedText; constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter ].
+	textElt text fontSize: 100.
+	elt addChild: textElt.
+	
+	"Event handling"
+	elt addEventHandlerOn: BlDragStartEvent do: [ :e |
+		e consume.
+		offset := elt positionInSpace - e position.
+		elt removeFromParent.
+		space root addChild: elt.
+		elt preventMeAndChildrenMouseEvents.
+		textPreview text: elt firstChild text ].
+	
+	elt addEventHandlerOn: BlDragEvent do: [ :e |
+		elt position: e position + offset. ].
+	
+	elt addEventHandlerOn: BlDragEndEvent do: [ :e |
+		elt allowMeAndChildrenMouseEvents ]. 
+	
+	elt addEventFilterOn: BlDragEnterEvent do: [ :e |
+		textPreview text: elt firstChild text.
+		e consume ].
+	
+	"Add element to grid"
+	grid addChild: elt. ].
+ 
+space root addChild: grid.
+
+preview position: 400 asPoint.
+space root addChild: preview.
+space show.
+]
+
+{ #category : #'experimentations - preview' }
+BlDragAndDropExamples class >> experimentDragPreviewGameWorking [
+
+	<script>
+	
+"Basic elements initialization"
+
+| space grid offset elements preview textPreview rearrangeBlock checkOrderBlock scaleFactor scaleUpAnimation scaleDownAnimation |
+space := BlSpace new extent: 1000 asPoint.
+space root layout: BlFrameLayout new.
+space root background: Color lightRed.
+grid := BlElement new size: 600 asPoint; layout: (BlGridLayout horizontal columnCount: 3); constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter].
+offset := 0.
+elements := OrderedCollection new.
+
+"Preview element initialization"
+
+preview := BlElement new size: 200 asPoint; background: (Color lightGreen alpha: 0.3); border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
+textPreview := BlAttributedTextElement new text: '0' asRopedText; constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter ].
+textPreview text fontSize: 100.
+preview addChild: textPreview.
+
+"Initialize the block closure that will rearrange the grid elements to insert the preview"
+
+rearrangeBlock := [ :formerElement |
+	|index|
+	index := grid children indexOf: formerElement.
+	(grid children includes: preview) ifTrue: [grid removeChild: preview].
+	grid addChild: preview at: index.
+	 ].
+
+"Block closure that checks if the game is in order/finished"
+checkOrderBlock := [ :grid |
+	|children index inOrder|
+	children := grid children.
+	index := 1.
+	inOrder := true.
+	children do: [ :each |
+		(each firstChild text asString = index asString) ifFalse: [ inOrder := false ].
+		index := index + 1.
+		].
+	inOrder ifTrue: [ space root background: Color lightGreen. ]
+	].
+
+"Some animations for prettier visuals"
+scaleFactor := 1.6.
+scaleUpAnimation := (BlTransformAnimation scale: scaleFactor)
+		                    duration: 0.3 seconds;
+		                    easing: BlEasingBounceIn new.
+scaleDownAnimation := (BlTransformAnimation scale: 1 / scaleFactor)
+		                      duration: 0.3 seconds;
+		                      easing: BlEasingBounceOut new.
+
+"Initialize and insert grid elements"
+1 to: 9 do: [ :i |
+	|elt textElt|
+	
+	"Element initialization"
+	elt := BlElement new size: 200 asPoint; background: Color lightGreen; border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
+	
+	textElt := BlTextElement new text: i asString asRopedText; constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter ].
+	textElt text fontSize: 100.
+	elt addChild: textElt.
+	
+	"Event handling"
+	elt addEventHandlerOn: BlDragStartEvent do: [ :e |
+		e consume.
+		offset := elt positionInSpace - e position.
+		rearrangeBlock value: elt.
+		elt removeFromParent.
+		space root addChild: elt.
+		elt constraintsDo: [:c | c ignoreByLayout ].
+		elt preventMeAndChildrenMouseEvents.
+		textPreview text: elt firstChild text.
+		elt addAnimation: scaleDownAnimation copy ].
+	
+	elt addEventHandlerOn: BlDragEvent do: [ :e |
+		elt position: e position + offset. ].
+	
+	elt addEventHandlerOn: BlDragEndEvent do: [ :e |
+		|previewIndex|
+		elt allowMeAndChildrenMouseEvents.
+		elt addAnimation: scaleUpAnimation copy.
+		previewIndex := grid children indexOf: preview.
+		grid removeChild: preview.
+		elt removeFromParent.
+		grid addChild: elt at: previewIndex.
+		elt constraintsDo: [ :c | c accountByLayout ].
+		checkOrderBlock value: grid. ]. 
+	
+	elt addEventFilterOn: BlDragEnterEvent do: [ :e |
+		rearrangeBlock value: elt.
+		e consume ].
+	
+	"Add element to grid"
+	elements add: elt.
+	"grid addChild: elt." ].
+
+elements shuffle.
+elements do: [ :each | grid addChild: each ].
+ 
+"Displaying the result"
+space root addChild: grid.
+space show.
+]
+
+{ #category : #'experimentations - preview' }
+BlDragAndDropExamples class >> experimentDragPreviewWorking [
+	"Basic elements initialization"
+
+	<script>
+	| grid space offset preview textPreview rearrangeBlock scaleFactor scaleUpAnimation scaleDownAnimation |
+	grid := BlElement new
+		        size: 600 asPoint;
+		        layout: (BlGridLayout horizontal columnCount: 3).
+	space := BlSpace new.
+	offset := 0.
+
+	"Preview element initialization"
+
+	preview := BlElement new
+		           size: 200 asPoint;
+		           background: (Color lightGreen alpha: 0.3);
+		           border: (BlBorder paint: Color black width: 2);
+		           layout: BlFrameLayout new.
+	textPreview := BlAttributedTextElement new
+		               text: '0' asRopedText;
+		               constraintsDo: [ :c |
+			               c frame vertical alignCenter.
+			               c frame horizontal alignCenter ].
+	textPreview text fontSize: 100.
+	preview addChild: textPreview.
+
+	"Initialize the block closure that will rearrange the grid elements to insert the preview"
+
+	rearrangeBlock := [ :formerElement |
+	                  | index |
+	                  index := grid children indexOf: formerElement.
+	                  (grid children includes: preview) ifTrue: [
+		                  grid removeChild: preview ].
+	                  grid addChild: preview at: index ].
+
+	"Some animations for prettier visuals"
+	scaleFactor := 1.6.
+	scaleUpAnimation := (BlTransformAnimation scale: scaleFactor)
+		                    duration: 0.3 seconds;
+		                    easing: BlEasingBounceIn new.
+	scaleDownAnimation := (BlTransformAnimation scale: 1 / scaleFactor)
+		                      duration: 0.3 seconds;
+		                      easing: BlEasingBounceOut new.
+
+	"Initialize and insert grid elements"
+	1 to: 9 do: [ :i |
+		| elt textElt |
+		"Element initialization"
+		elt := BlElement new
+			       size: 200 asPoint;
+			       background: Color lightGreen;
+			       border: (BlBorder paint: Color black width: 2);
+			       layout: BlFrameLayout new.
+
+		textElt := BlTextElement new
+			           text: i asString asRopedText;
+			           constraintsDo: [ :c |
+				           c frame vertical alignCenter.
+				           c frame horizontal alignCenter ].
+		textElt text fontSize: 100.
+		elt addChild: textElt.
+
+		"Event handling"
+		elt addEventHandlerOn: BlDragStartEvent do: [ :e |
+			e consume.
+			offset := elt positionInSpace - e position.
+			rearrangeBlock value: elt.
+			elt removeFromParent.
+			space root addChild: elt.
+			elt preventMeAndChildrenMouseEvents.
+			textPreview text: elt firstChild text.
+			elt addAnimation: scaleDownAnimation copy ].
+
+		elt
+			addEventHandlerOn: BlDragEvent
+			do: [ :e | elt position: e position + offset ].
+
+		elt addEventHandlerOn: BlDragEndEvent do: [ :e |
+			|previewIndex|
+			elt allowMeAndChildrenMouseEvents.
+			elt addAnimation: scaleUpAnimation copy.
+			previewIndex := grid children indexOf: preview.
+			grid removeChild: preview.
+			elt removeFromParent.
+			grid addChild: elt at: previewIndex ].
+
+		elt addEventFilterOn: BlDragEnterEvent do: [ :e |
+			rearrangeBlock value: elt.
+			e consume ].
+
+		"Add element to grid"
+		grid addChild: elt ].
+
+	"Displaying the result"
+	space root addChild: grid.
+	space show
+]
+
 { #category : #'experimentations - dragSelector' }
 BlDragAndDropExamples class >> experimentDragSelectorHighlightsSelectedElements [
 	"This example shows how to draw a 'drag selector' rectangle using leftDrag, highlights hovered elements and inspect the list of it"
