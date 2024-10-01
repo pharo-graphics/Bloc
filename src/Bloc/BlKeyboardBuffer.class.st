@@ -7,8 +7,6 @@ I allow `=BlKeyboardProcessor`= to sent key still pressed event every frame if t
 Class {
 	#name : #BlKeyboardBuffer,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'events'
 	],
@@ -17,19 +15,20 @@ Class {
 
 { #category : #'adding / removing' }
 BlKeyboardBuffer >> add: anEvent [
+
 	events at: anEvent key put: anEvent
 ]
 
 { #category : #accessing }
 BlKeyboardBuffer >> eventAt: aKey [
-	<return: #BlKeyDownEvent>
+	"Answer a `BlKeyDownEvent` that corresponds to aKey"
 	
 	^ events at: aKey
 ]
 
 { #category : #accessing }
 BlKeyboardBuffer >> events [
-	<return: #Collection of: #BlKeyDownEvent>
+	"Answer my collection of `BlKeyDownEvent`s"
 
 	^ events values
 ]
@@ -37,7 +36,6 @@ BlKeyboardBuffer >> events [
 { #category : #testing }
 BlKeyboardBuffer >> hasEvent: aKey [
 	"Return true if there is a buffered event for a given key"
-	<return: #Boolean>
 	
 	^ events includesKey: aKey
 ]
@@ -51,18 +49,21 @@ BlKeyboardBuffer >> hasExactlyAll: aCollectionOfKeys [
 
 { #category : #initialization }
 BlKeyboardBuffer >> initialize [
+
 	super initialize.
-	
+
 	events := Dictionary new
 ]
 
 { #category : #testing }
 BlKeyboardBuffer >> isEmpty [
+
 	^ events isEmpty
 ]
 
 { #category : #testing }
 BlKeyboardBuffer >> isNotEmpty [
+
 	^ events isNotEmpty
 ]
 
@@ -85,5 +86,6 @@ BlKeyboardBuffer >> printOn: aStream [
 
 { #category : #'adding / removing' }
 BlKeyboardBuffer >> remove: anEvent [
+
 	events removeKey: anEvent key
 ]

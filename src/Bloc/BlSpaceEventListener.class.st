@@ -22,21 +22,25 @@ BlSpaceEventListener class >> space: aStage [
 
 { #category : #accessing }
 BlSpaceEventListener >> focusProcessor [
+
 	^ self space focusProcessor
 ]
 
 { #category : #'keyboard handlers' }
 BlSpaceEventListener >> keyDownEvent: anEvent [
+
 	self keyboardProcessor processKeyDown: anEvent
 ]
 
 { #category : #'keyboard handlers' }
 BlSpaceEventListener >> keyUpEvent: anEvent [
+
 	self keyboardProcessor processKeyUp: anEvent
 ]
 
 { #category : #accessing }
 BlSpaceEventListener >> keyboardProcessor [
+
 	^ self space keyboardProcessor
 ]
 
@@ -54,6 +58,7 @@ BlSpaceEventListener >> mouseEvent: anEvent [
 
 { #category : #'mouse handlers' }
 BlSpaceEventListener >> mouseMoveEvent: anEvent [
+
 	self mouseProcessor handleMouseMove: anEvent
 ]
 
@@ -77,21 +82,25 @@ BlSpaceEventListener >> mouseWheelEvent: anEvent [
 
 { #category : #accessing }
 BlSpaceEventListener >> space [
+
 	^ space
 ]
 
 { #category : #accessing }
 BlSpaceEventListener >> space: aBlSpace [
+
 	space := aBlSpace
 ]
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceCloseRequest: anEvent [
-	self space close
+
+	space close
 ]
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceClosedEvent: anEvent [
+
 	self mouseProcessor onSpaceClosed
 ]
 
@@ -216,6 +225,7 @@ BlSpaceEventListener >> spaceDragLiftEvent: anEvent [
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceEventsProcessedEvent: anEvent [
+
 	self space keyboardProcessor handleSpaceEventProcessedEvent: anEvent
 ]
 
@@ -227,12 +237,14 @@ BlSpaceEventListener >> spaceFocusInEvent: anEvent [
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceFocusOutEvent: anEvent [
+
 	self focusProcessor processWindowFocusOut: anEvent.
 	self keyboardProcessor processWindowFocusOut: anEvent
 ]
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceMouseEnterEvent: anEvent [
+
 	self mouseProcessor handleMouseEntered: anEvent
 ]
 
@@ -245,14 +257,14 @@ BlSpaceEventListener >> spaceMouseLeaveEvent: anEvent [
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceMovedEvent: anEvent [
 
-  self space setPosition: anEvent position
+  space setPosition: anEvent position
 ]
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceResizedEvent: anEvent [
 	"Is sent after window size was changed"
 
-	self space setExtent: anEvent extent
+	space setExtent: anEvent extent
 ]
 
 { #category : #'keyboard handlers' }

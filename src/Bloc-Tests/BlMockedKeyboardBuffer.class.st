@@ -19,8 +19,9 @@ BlMockedKeyboardBuffer >> hasExactlyAll: aCollectionOfKeys [
 
 { #category : #initialization }
 BlMockedKeyboardBuffer >> initialize [
+
 	super initialize.
-	
+
 	states := Dictionary new
 ]
 
