@@ -77,6 +77,7 @@ BlOSWindowHost >> destroyHostSpaceFor: aSpace [
 
 { #category : #initialization }
 BlOSWindowHost >> keyboardKeyTable [
+
 	^ self subclassResponsibility
 ]
 

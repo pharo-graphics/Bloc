@@ -208,7 +208,6 @@ BlMockedHostSpace >> minimized [
 { #category : #'host space - testing' }
 BlMockedHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
-	<return: #Boolean>
 	
 	^ false
 ]

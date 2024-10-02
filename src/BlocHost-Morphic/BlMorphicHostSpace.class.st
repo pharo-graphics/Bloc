@@ -21,15 +21,16 @@ BlMorphicHostSpace >> borderless: aBoolean [
 
 { #category : #'host space - displaying' }
 BlMorphicHostSpace >> close [
-	self host containerMorph removeMorph: self spaceHostMorph
+
+	self host containerMorph removeMorph: spaceHostMorph
 ]
 
 { #category : #initialization }
 BlMorphicHostSpace >> createFormSurfaceRenderer [
 
 	^ BlMorphicFormSurfaceRenderer new
-			spaceHostMorph: spaceHostMorph;
-			yourself
+		spaceHostMorph: spaceHostMorph;
+		yourself
 ]
 
 { #category : #'host space - cursor' }
@@ -87,7 +88,6 @@ BlMorphicHostSpace >> logicalSize [
 { #category : #'host space - testing' }
 BlMorphicHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
-	<return: #Boolean>
 
 	^ false
 ]
@@ -114,17 +114,16 @@ BlMorphicHostSpace >> physicalSize [
 
 { #category : #'window - properties' }
 BlMorphicHostSpace >> position [
-	"Return window's position in screen coordinates"
-	<return: #Point>
+	"Return window's position in screen coordinates (`Point`)"
 	
-	^ self spaceHostMorph position
+	^ spaceHostMorph position
 ]
 
 { #category : #'window - properties' }
 BlMorphicHostSpace >> position: aPoint [
 	"Change window's position to a given point in screen coordinates"
 	
-	self spaceHostMorph position: aPoint
+	spaceHostMorph position: aPoint
 
 ]
 
@@ -137,27 +136,27 @@ BlMorphicHostSpace >> requestRedraw [
 
 { #category : #'host space - displaying' }
 BlMorphicHostSpace >> show [
-	self spaceHostMorph position: self host containerMorph position.
-	self host containerMorph addMorphBack: self spaceHostMorph
+
+	spaceHostMorph position: self host containerMorph position.
+	self host containerMorph addMorphBack: spaceHostMorph
 ]
 
 { #category : #accessing }
 BlMorphicHostSpace >> spaceHostMorph [
-	<return: #BlMorphicSpaceHostMorph>
 
 	^ spaceHostMorph
 ]
 
 { #category : #accessing }
-BlMorphicHostSpace >> spaceHostMorph: aMorphicSpaceHostMorph [
-	spaceHostMorph := aMorphicSpaceHostMorph.
-	aMorphicSpaceHostMorph hostSpace: self
+BlMorphicHostSpace >> spaceHostMorph: aBlMorphicSpaceHostMorph [
+
+	spaceHostMorph := aBlMorphicSpaceHostMorph.
+	spaceHostMorph hostSpace: self
 ]
 
 { #category : #'window - properties' }
 BlMorphicHostSpace >> title [
 	"Return window's title as a string"
-	<return: #String>
 
 	^ ''
 ]
@@ -169,5 +168,6 @@ BlMorphicHostSpace >> title: aString [
 
 { #category : #'host space - geometry' }
 BlMorphicHostSpace >> windowExtent: anExtent [
+
 	spaceHostMorph extent: anExtent
 ]
