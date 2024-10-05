@@ -19,5 +19,5 @@ BlAboutToBeDroppedEvent >> dropTarget [
 { #category : #accessing }
 BlAboutToBeDroppedEvent >> dropTarget: anObject [
 
-	dropTarget := anObject
+	dropTarget := anObject.
 ]

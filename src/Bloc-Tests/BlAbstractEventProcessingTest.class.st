@@ -81,7 +81,7 @@ BlAbstractEventProcessingTest >> sendOutsideTargetEvent: anEvent [
 	self sendEvent: anEvent
 ]
 
-{ #category : #initialization }
+{ #category : #'as yet unclassified' }
 BlAbstractEventProcessingTest >> setUp [
 
 	super setUp.
