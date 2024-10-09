@@ -5,7 +5,6 @@ Class {
 	#name : #BlSpaceStepEvent,
 	#superclass : #BlSpaceEvent,
 	#instVars : [
-		'start',
 		'end'
 	],
 	#category : #'Bloc-Events-Type-Space'
@@ -14,29 +13,42 @@ Class {
 { #category : #accessing }
 BlSpaceStepEvent >> duration [
 
-	^ end - start
+	^ end - timestamp
 ]
 
 { #category : #accessing }
 BlSpaceStepEvent >> end [
-	<return: #DateAndTime>
 
 	^ end
 ]
 
 { #category : #accessing }
 BlSpaceStepEvent >> end: aDateAndTime [
+
 	end := aDateAndTime
+]
+
+{ #category : #printing }
+BlSpaceStepEvent >> printOn: aStream [
+
+	aStream
+		nextPutAll: self className;
+		nextPut: $(;
+		nextPutAll: 'timestamp: ';
+		print: timestamp;
+		nextPutAll: '; duration: ';
+		print: self duration;
+		nextPut: $)
 ]
 
 { #category : #accessing }
 BlSpaceStepEvent >> start [
-	<return: #DateAndTime>
 
-	^ start
+	^ timestamp
 ]
 
 { #category : #accessing }
 BlSpaceStepEvent >> start: aDateAndTime [
-	start := aDateAndTime
+
+	timestamp := aDateAndTime
 ]
