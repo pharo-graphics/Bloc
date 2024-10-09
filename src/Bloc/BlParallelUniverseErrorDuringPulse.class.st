@@ -4,8 +4,9 @@ I include in myself the signaledError.
 "
 Class {
 	#name : #BlParallelUniverseErrorDuringPulse,
-	#superclass : #BlParallelUniverseSignal,
+	#superclass : #BeaconSignal,
 	#instVars : [
+		'universeId',
 		'signaledError'
 	],
 	#category : #'Bloc-Universe - Parallel'
@@ -21,4 +22,14 @@ BlParallelUniverseErrorDuringPulse >> signaledError [
 BlParallelUniverseErrorDuringPulse >> signaledError: anObject [
 
 	signaledError := anObject
+]
+
+{ #category : #accessing }
+BlParallelUniverseErrorDuringPulse >> universeId [
+	^ universeId
+]
+
+{ #category : #accessing }
+BlParallelUniverseErrorDuringPulse >> universeId: aNumber [
+	universeId := aNumber
 ]
