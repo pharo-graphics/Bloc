@@ -7,7 +7,6 @@ Class {
 	#instVars : [
 		'form',
 		'eventHandler',
-		'preventResize',
 		'hostSpace'
 	],
 	#category : #'BlocHost-Morphic-Common'
@@ -34,23 +33,6 @@ BlMorphicSpaceHostMorph >> drawOn: aCanvas [
 				aClippedCanvas drawFormSet: formSet at: self position ]
 			ifFalse: [
 				aClippedCanvas drawImage: spaceForm at: self position ] ]
-]
-
-{ #category : #geometry }
-BlMorphicSpaceHostMorph >> extent: aPoint [
-	
-	self extent = aPoint ifTrue: [ ^ self ].
-	
-	super extent: aPoint.
-	
-	"morph may resize before host space is created"
-	self hostSpace ifNil: [ ^ self ].
-
-	self resizeDuring: [
-		BlMorphicWindowResizeEvent new
-			width: self width;
-			height: self height;
-			sentTo: eventHandler ]
 ]
 
 { #category : #accessing }
@@ -88,8 +70,7 @@ BlMorphicSpaceHostMorph >> hostSpace [
 { #category : #accessing }
 BlMorphicSpaceHostMorph >> hostSpace: aHostSpace [
 
-	hostSpace := aHostSpace.
-	self initializeAnnouncement
+	hostSpace := aHostSpace
 ]
 
 { #category : #initialization }
@@ -98,45 +79,19 @@ BlMorphicSpaceHostMorph >> initialize [
 	super initialize.
 
 	eventHandler := BlMorphicEventHandler window: self.
-
+	self
+		onAnnouncement: MorphOpened, MorphDeleted, MorphGotFocus, MorphLostFocus
+		do: [ :anEvent |
+			hostSpace ifNotNil: [ anEvent sentTo: eventHandler ] ].
+		
 	form := BlExternalForm extent: 1@1 depth: 32.
 	form autoRelease.
+
 	color := Color transparent.
-	
-	preventResize := false.
 
 	"we prefer to fill parent"
 	self hResizing: #spaceFill.
 	self vResizing: #spaceFill
-]
-
-{ #category : #initialization }
-BlMorphicSpaceHostMorph >> initializeAnnouncement [
-
-	self
-		onAnnouncement: MorphOpened
-		do: [ :anEvent | anEvent sentTo: eventHandler ].
-
-	self
-		onAnnouncement: MorphDeleted
-		do: [ :anEvent | anEvent sentTo: eventHandler ].
-
-	self
-		onAnnouncement: MorphGotFocus
-		do: [ :anEvent | anEvent sentTo: eventHandler ].
-
-	self
-		onAnnouncement: MorphLostFocus
-		do: [ :anEvent | anEvent sentTo: eventHandler ].
-
-	self
-		onAnnouncement: WindowResizing
-		do: [ :anEvent |
-			self resizeDuring: [
-				BlMorphicWindowResizeEvent new
-					width: self width;
-					height: self height;
-					sentTo: eventHandler ] ]
 ]
 
 { #category : #testing }
@@ -156,6 +111,22 @@ BlMorphicSpaceHostMorph >> keyDown: anEvent [
 BlMorphicSpaceHostMorph >> keyUp: anEvent [
 
 	anEvent sentTo: eventHandler
+]
+
+{ #category : #recategorized }
+BlMorphicSpaceHostMorph >> layoutChanged [
+
+	| oldExtent |
+	oldExtent := self extent.
+
+	super layoutChanged.
+	
+	hostSpace ifNil: [ ^self ].
+
+	BlMorphExtentChangedAnnouncement new
+		oldExtent: oldExtent;
+		newExtent: self extent;
+		sendTo: eventHandler
 ]
 
 { #category : #geometry }
@@ -178,14 +149,6 @@ BlMorphicSpaceHostMorph >> processEvent: anEvent using: defaultDispatcher [
 	"quick fix for issue #15 : 
 	In morphic, if the drop event is marked as handled, the dragged window is removed"
 	anEvent isDropEvent ifFalse: [ anEvent wasHandled: true ]
-]
-
-{ #category : #geometry }
-BlMorphicSpaceHostMorph >> resizeDuring: aBlock [
-
-	preventResize ifTrue: [ ^ self ].
-	preventResize := true.
-	aBlock ensure: [ preventResize := false ]
 ]
 
 { #category : #testing }

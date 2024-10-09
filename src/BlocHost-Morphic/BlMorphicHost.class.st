@@ -20,7 +20,7 @@ Class {
 	#category : #'BlocHost-Morphic-Embedded'
 }
 
-{ #category : #testing }
+{ #category : #'driver selection' }
 BlMorphicHost class >> isSupported [
 	"I can not be used as one of the default Bloc host because I require users to provide containerMorph"
 
@@ -33,7 +33,7 @@ BlMorphicHost class >> label [
 	^ 'Morphic - Embedded'
 ]
 
-{ #category : #testing }
+{ #category : #'driver selection' }
 BlMorphicHost class >> priority [
 	"I have the lowest possible priority (I am also not supported)"
 
@@ -56,27 +56,7 @@ BlMorphicHost >> containerMorph: aMorph [
 BlMorphicHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new morphic host space for given bloc space"
 
-	| aMorph aHostSpace|
-	aMorph := self createMorphFor: aSpace.
-
-	aHostSpace := BlMorphicHostSpace new
-		spaceHostMorph: aMorph;
-		universe: self universe;
-		host: self;
-		space: aSpace;
-		renderer: BlHostRenderer preferableClass new;
-		yourself.
-
-	aSpace hostSpace: aHostSpace
-]
-
-{ #category : #private }
-BlMorphicHost >> createMorphFor: aSpace [
-
-	^ BlMorphicSpaceHostMorph new
-		  color: Color transparent;
-		  extent: aSpace extent;
-		  yourself
+	aSpace hostSpace: (self newHostSpaceFor: aSpace)
 ]
 
 { #category : #'host - api' }
@@ -97,4 +77,24 @@ BlMorphicHost >> initialize [
 	super initialize.
 
 	containerMorph := Morph new
+]
+
+{ #category : #private }
+BlMorphicHost >> newHostSpaceFor: aSpace [
+
+	^ BlMorphicHostSpace new
+		spaceHostMorph: (self newSpaceHostMorphFor: aSpace);
+		space: aSpace;
+		host: self;
+		universe: self universe;
+		renderer: BlHostRenderer preferableClass new;
+		yourself
+]
+
+{ #category : #private }
+BlMorphicHost >> newSpaceHostMorphFor: aSpace [
+
+	^ BlMorphicSpaceHostMorph new
+		extent: aSpace extent;
+		yourself
 ]

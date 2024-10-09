@@ -187,7 +187,6 @@ BlOSWindowHostSpace >> minimized [
 { #category : #'host space - testing' }
 BlOSWindowHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
-	<return: #Boolean>
 	
 	^ self isValid not
 ]

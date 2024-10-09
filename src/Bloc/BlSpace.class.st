@@ -671,16 +671,16 @@ BlSpace >> dispatchRemovedFromSceneGraph [
 ]
 
 { #category : #pulse }
-BlSpace >> dispatchTimeEvent: aSpaceStepEventClass during: aBlock [
+BlSpace >> dispatchTimeEvent: aSpacePhaseEventClass during: aBlock [
+
 	| aStartTime |
-	
 	aStartTime := self time now.
 	aBlock cull: self.
 	self eventDispatcher dispatchEvent:
-			(aSpaceStepEventClass new
-				start: aStartTime;
-				end: self time now;
-				yourself)
+		(aSpacePhaseEventClass new
+			 start: aStartTime;
+			 end: self time now;
+			 yourself)
 ]
 
 { #category : #'change - layout' }
