@@ -14,7 +14,7 @@ Class {
 	#classVars : [
 		'HorizontalScrolling'
 	],
-	#category : #'BlocHost-Morphic-Common - Events'
+	#category : #'BlocHost-Morphic-Common'
 }
 
 { #category : #'instance creation' }
@@ -27,7 +27,6 @@ BlMorphicEventHandler class >> window: aMorphicWindow [
 
 { #category : #converting }
 BlMorphicEventHandler >> convertButtonFromMouseButtonEvent: aMorphicEvent [
-	<return: #BlMouseButton>
 
 	aMorphicEvent redButtonChanged
 		ifTrue: [ ^ BlMouseButton primary ].
@@ -35,16 +34,17 @@ BlMorphicEventHandler >> convertButtonFromMouseButtonEvent: aMorphicEvent [
 		ifTrue: [ ^ BlMouseButton middle ].
 	aMorphicEvent yellowButtonChanged
 		ifTrue: [ ^ BlMouseButton secondary ].
+
 	^ BlMouseButton code: aMorphicEvent whichButton
 ]
 
 { #category : #converting }
 BlMorphicEventHandler >> convertKeyFromEvent: aMorphicEvent [
+	"Answer a platform-idependent `KeyboardKey` from the event. On Unix platorms, pressed shift changes the keycode."
 
-	<return: #KeyboardKey>
-	| aKeyValue aKey |
+	| aKey |
 	aKey := aMorphicEvent key.
-	"on unix platorms, pressed shift changes the keycode"
+
 	OSPlatform current isUnix ifTrue: [ 
 		(aKey isShift not and: [ aMorphicEvent shiftPressed ]) ifTrue: [ 
 			{ (KeyboardKey tab -> KeyboardKey enter) } asDictionary
@@ -56,8 +56,8 @@ BlMorphicEventHandler >> convertKeyFromEvent: aMorphicEvent [
 
 { #category : #converting }
 BlMorphicEventHandler >> convertKeyModifiersFromEvent: aMorphicEvent [ 
-	| shift ctrl alt cmd |
 
+	| shift ctrl alt cmd |
 	shift := aMorphicEvent shiftPressed.
 	ctrl := aMorphicEvent controlKeyPressed.
 	alt := aMorphicEvent altKeyPressed.
@@ -115,8 +115,8 @@ BlMorphicEventHandler >> globalMousePositionForEvent: anEvent [
 
 { #category : #'private - keyboard' }
 BlMorphicEventHandler >> handleBackspaceDown: aMorphicEvent [
+
 	| aBlEvent |
-	
 	aBlEvent := BlKeyDownEvent new
 		key: KeyboardKey backspace;
 		scanCode: aMorphicEvent scanCode;
@@ -129,8 +129,8 @@ BlMorphicEventHandler >> handleBackspaceDown: aMorphicEvent [
 
 { #category : #'private - keyboard' }
 BlMorphicEventHandler >> handleBackspaceUp: aMorphicEvent [
-	| aBlEvent |
 
+	| aBlEvent |
 	aBlEvent := BlKeyUpEvent new
 		key: KeyboardKey backspace;
 		scanCode: aMorphicEvent scanCode;
@@ -213,6 +213,16 @@ BlMorphicEventHandler >> handleDropMorph: anEvent [
 	pos := anEvent position - self window position.
 	anEvent setPosition: pos contents: anEvent contents hand: anEvent hand.
 	self enqueue: anEvent"
+]
+
+{ #category : #'event handling' }
+BlMorphicEventHandler >> handleExtentChanged: aMorphicEvent [
+
+	self enqueue:
+		(BlSpaceResizedEvent new
+			extent: aMorphicEvent newExtent;
+			timestamp: self timestampNow;
+			yourself)
 ]
 
 { #category : #'events - keyboard' }
@@ -494,18 +504,6 @@ BlMorphicEventHandler >> handleWindowEvent: anEvent [
 
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleWindowOpened: aMorphicEvent [
-]
-
-{ #category : #'event handling' }
-BlMorphicEventHandler >> handleWindowResize: aMorphicEvent [
-
-	| aBlEvent |
-	aBlEvent := BlSpaceResizedEvent new
-		extent: aMorphicEvent width @ aMorphicEvent height;
-		timestamp: self timestampNow;
-		yourself.
-
-	self enqueue: aBlEvent
 ]
 
 { #category : #'private - keyboard' }
