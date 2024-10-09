@@ -355,6 +355,16 @@ BlEvent >> newCopyFor: aTarget [
 		yourself
 ]
 
+{ #category : #printing }
+BlEvent >> printOn: aStream [
+
+	aStream
+		nextPutAll: self class name;
+		nextPutAll: '(timestamp: ';
+		print: timestamp;
+		nextPut: $)
+]
+
 { #category : #sending }
 BlEvent >> sendTo: anObject [
 	
