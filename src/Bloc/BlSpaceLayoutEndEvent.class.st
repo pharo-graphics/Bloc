@@ -1,5 +1,5 @@
 Class {
 	#name : #BlSpaceLayoutEndEvent,
-	#superclass : #BlSpaceStepEvent,
+	#superclass : #BlSpacePhaseEvent,
 	#category : #'Bloc-Events-Type-Space'
 }

@@ -2,7 +2,7 @@
 I represent the execution of a space frame phase.
 "
 Class {
-	#name : #BlSpaceStepEvent,
+	#name : #BlSpacePhaseEvent,
 	#superclass : #BlSpaceEvent,
 	#instVars : [
 		'end'
@@ -11,25 +11,25 @@ Class {
 }
 
 { #category : #accessing }
-BlSpaceStepEvent >> duration [
+BlSpacePhaseEvent >> duration [
 
 	^ end - timestamp
 ]
 
 { #category : #accessing }
-BlSpaceStepEvent >> end [
+BlSpacePhaseEvent >> end [
 
 	^ end
 ]
 
 { #category : #accessing }
-BlSpaceStepEvent >> end: aDateAndTime [
+BlSpacePhaseEvent >> end: aDateAndTime [
 
 	end := aDateAndTime
 ]
 
 { #category : #printing }
-BlSpaceStepEvent >> printOn: aStream [
+BlSpacePhaseEvent >> printOn: aStream [
 
 	aStream
 		nextPutAll: self className;
@@ -42,13 +42,13 @@ BlSpaceStepEvent >> printOn: aStream [
 ]
 
 { #category : #accessing }
-BlSpaceStepEvent >> start [
+BlSpacePhaseEvent >> start [
 
 	^ timestamp
 ]
 
 { #category : #accessing }
-BlSpaceStepEvent >> start: aDateAndTime [
+BlSpacePhaseEvent >> start: aDateAndTime [
 
 	timestamp := aDateAndTime
 ]
