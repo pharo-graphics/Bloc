@@ -166,12 +166,12 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 	aSpace dispatchRemovedFromSceneGraph.
 
 	"Raise an event indicating that the space is no longer attached to a universe"
-	aSpace dispatchEvent: (BlSpaceDetachedEvent new space: aSpace).
+	aSpace dispatchEventWithTimestamp: BlSpaceDetachedEvent new.
 	
 	"Send space closed event.
 	Note: a new space may be spawned as a reaction to the event, that is why
 	we send it before stopping host and universe"
-	aSpace dispatchEvent: (BlSpaceClosedEvent new space: aSpace).
+	aSpace dispatchEventWithTimestamp: BlSpaceClosedEvent new.
 
 	self
 		assert: [ aSpace hasHostSpace not ]
@@ -190,7 +190,7 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 	"Raise an event indicating that all normal event for closing a space have been completed.
 	This event is used by the debugger to stop the UI process. Users should not normally rely
 	on this event, as there is no guarantee that the process will not be terminated."
-	aSpace dispatchEvent: (BlSpaceDestroyedEvent new space: aSpace).
+	aSpace dispatchEventWithTimestamp: BlSpaceDestroyedEvent new
 ]
 
 { #category : #'api - spaces' }
@@ -264,7 +264,7 @@ BlParallelUniverse >> detachSpaceSynchronously: aSpace [
 					ifTrue: [ self stopUniverse ] ] ].
 	
 	"Raise an event indicating that the space is no longer attached to a universe"
-	aSpace dispatchEvent: (BlSpaceDetachedEvent new space: aSpace).
+	aSpace dispatchEventWithTimestamp: BlSpaceDetachedEvent new
 ]
 
 { #category : #testing }
@@ -382,10 +382,7 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
 	"Note: we should send shown event after everything else is done, because
 	theoretically, that only space could be closed as a reaction to the event"
-	aSpace dispatchEvent:
-		(BlSpaceShownEvent new
-			space: aSpace;
-			yourself).
+	aSpace dispatchEventWithTimestamp: BlSpaceShownEvent new.
 
 	"Notify root element that it is now visible to the user"
 	aSpace becomeVisible.

@@ -657,6 +657,13 @@ BlSpace >> dispatchAddedToSceneGraph [
 ]
 
 { #category : #'event handling' }
+BlSpace >> dispatchEventWithTimestamp: aBlEvent [ 
+
+	aBlEvent timestamp ifNil: [ aBlEvent timestamp: self time now ].
+	self dispatchEvent: aBlEvent
+]
+
+{ #category : #'event handling' }
 BlSpace >> dispatchMousePickedOutside: aMouseOutsideEvent [
 
 	self root dispatchMousePickedOutside: aMouseOutsideEvent
