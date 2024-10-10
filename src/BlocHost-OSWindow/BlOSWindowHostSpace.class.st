@@ -109,6 +109,12 @@ BlOSWindowHostSpace >> initializeWithAttributes: initialAttributes [
 	(BlOSWindowCreatedSignal new window: window) emit
 ]
 
+{ #category : #'dirty areas' }
+BlOSWindowHostSpace >> invalidate [
+	
+	window := nil
+]
+
 { #category : #'window - properties' }
 BlOSWindowHostSpace >> isBorderless [
 

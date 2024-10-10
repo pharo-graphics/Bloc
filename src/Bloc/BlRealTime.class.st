@@ -32,7 +32,7 @@ BlRealTime >> every: aDuration while: aWhileBlock do: aDoBlock [
 	aStartTime := self now.
 	aCount := 0.
 
-	aWhileBlock whileTrue: [
+	[aWhileBlock value] whileTrue: [
 		| anExpectedTime aCurrentTime aWaitingTime |
 		aDoBlock value.
 		

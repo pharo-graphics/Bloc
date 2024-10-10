@@ -91,3 +91,15 @@ BlSpaceManager >> spaces [
 
 	^ spaces
 ]
+
+{ #category : #'startup - shutdown' }
+BlSpaceManager >> start [
+
+	spaces do: [ :aSpace | aSpace ensureWindowOpen ]
+]
+
+{ #category : #'startup - shutdown' }
+BlSpaceManager >> stop [
+	
+	spaces do: [ :anSpace | anSpace rememberVisibleStatus ]
+]

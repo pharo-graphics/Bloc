@@ -159,6 +159,12 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 	BlHostRenderer preferableClass offscreenMeasureTextParagraph: aBlTextParagraph
 ]
 
+{ #category : #'host - testing' }
+BlHost >> runOneCycle [
+	
+	"The host can do something while waiting for the pulse to happen. Useful for Morphic when the test run in the UI thread"
+]
+
 { #category : #'api - lifecycle' }
 BlHost >> start [
 
