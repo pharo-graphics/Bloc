@@ -94,18 +94,20 @@ BlOSWindowHostSpace >> initialize [
 
 { #category : #initialization }
 BlOSWindowHostSpace >> initializeWithAttributes: initialAttributes [
-	
+
 	self
 		assert: [ window isNil or: [ window isValid not ] ]
 		description: [ 'Window must be nil or invalid' ].
 
 	window := OSWindow createWithAttributes: initialAttributes.
-	window 
-		eventHandler: ((BlOSWindowEventHandler window: self)
-		keyboardKeyTable: keyboardKeyTable).
+	window eventHandler:
+		(BlOSWindowEventHandler
+			window: self
+			time: space time
+			keyboardKeyTable: keyboardKeyTable).
 	window startTextInput.
 	window newBlocRenderer.
-	
+
 	(BlOSWindowCreatedSignal new window: window) emit
 ]
 

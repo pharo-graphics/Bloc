@@ -16,17 +16,12 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlOSWindowEventHandler class >> new [
-
-	self error: 'Use #window: instead'
-]
-
-{ #category : #'instance creation' }
-BlOSWindowEventHandler class >> window: anOSWindow [
+BlOSWindowEventHandler class >> window: aOSWindow time: aBlTime keyboardKeyTable: aKeyboardKeyTable [
 
 	^ self basicNew
-		initialize;
-		window: anOSWindow;
+		initializeWithWindow: aOSWindow
+		time: aBlTime
+		keyboardKeyTable: aKeyboardKeyTable;
 		yourself
 ]
 
@@ -92,12 +87,14 @@ BlOSWindowEventHandler >> handleEvent: anEvent [
 ]
 
 { #category : #initialization }
-BlOSWindowEventHandler >> initialize [
+BlOSWindowEventHandler >> initializeWithWindow: aOSWindow time: aBlTime keyboardKeyTable: aKeyboardKeyTable [
 
-	super initialize.
-	
-	time := BlTime real.
-	
+	self initialize.
+
+	window := aOSWindow.
+	time := aBlTime.
+	keyboardKeyTable := aKeyboardKeyTable.
+
 	self registerGesture: OSTouchTwoFingersScrollDetector new.
 	self registerGesture: OSTouchTwoFingersPinchDetector new
 ]
