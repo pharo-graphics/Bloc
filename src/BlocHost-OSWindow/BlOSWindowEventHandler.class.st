@@ -27,7 +27,6 @@ BlOSWindowEventHandler class >> window: aOSWindow time: aBlTime keyboardKeyTable
 
 { #category : #converting }
 BlOSWindowEventHandler >> convertButton: osButton [
-	<return: #BlMouseButton>
 
 	osButton = 1 ifTrue: [ ^ BlMouseButton primary ].
 	osButton = 2 ifTrue: [ ^ BlMouseButton middle ].
@@ -38,14 +37,12 @@ BlOSWindowEventHandler >> convertButton: osButton [
 
 { #category : #converting }
 BlOSWindowEventHandler >> convertKeyFromEvent: anEvent [
-	<return: #KeyboardKey>
 
 	^ self keyboardKeyTable keyFromVirtualCode: anEvent symbol
 ]
 
 { #category : #converting }
 BlOSWindowEventHandler >> convertKeyModifiers: modifiers [
-	<return: #BlKeyModifiers>
 
 	^ BlKeyModifiers
 		shift: modifiers shift
@@ -56,7 +53,8 @@ BlOSWindowEventHandler >> convertKeyModifiers: modifiers [
 
 { #category : #actions }
 BlOSWindowEventHandler >> enqueue: anEvent [
-	self window enqueueEvent: anEvent
+
+	window enqueueEvent: anEvent
 ]
 
 { #category : #'visiting - window' }
@@ -384,12 +382,12 @@ BlOSWindowEventHandler >> visitWindowResizeEvent: anEvent [
 
 { #category : #'api - accessing' }
 BlOSWindowEventHandler >> window [
-	<return: #BlOSWindowHostSpace>
 
 	^ window
 ]
 
 { #category : #'api - accessing' }
 BlOSWindowEventHandler >> window: aBlOSWindowSpace [
+
 	window := aBlOSWindowSpace
 ]
