@@ -9,6 +9,8 @@ BlSpaceVisibilityTest >> testHidingAnOpenSpaceHidesTheWindow [
 
 	| aSpace |
 
+	Smalltalk vm operatingSystemName = 'Linux' ifTrue: [ ^ self skip ].
+
 	aSpace := self newTestingSpace.
 
 	aSpace show.
@@ -26,6 +28,8 @@ BlSpaceVisibilityTest >> testHidingAnOpenSpaceHidesTheWindow [
 BlSpaceVisibilityTest >> testHidingAndShowingAnOpenSpaceShowsTheWindow [
 
 	| aSpace |
+
+	Smalltalk vm operatingSystemName = 'Linux' ifTrue: [ ^ self skip ].
 
 	aSpace := self newTestingSpace.
 

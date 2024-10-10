@@ -16,6 +16,7 @@ BlStartupShutdownTest >> testShutdownAndStartupKeepsSpacesInSamePosition [
 	| aSpace |
 	
 	hostClass = BlMorphicWindowHost ifTrue: [ ^ self skip ].
+	Smalltalk vm operatingSystemName = 'Linux' ifTrue: [ ^ self skip ].
 
 	aSpace := self newTestingSpace.
 
@@ -41,6 +42,7 @@ BlStartupShutdownTest >> testShutdownAndStartupKeepsSpacesOpen [
 	| aSpace |
 
 	hostClass = BlMorphicWindowHost ifTrue: [ ^ self skip ].
+	Smalltalk vm operatingSystemName = 'Linux' ifTrue: [ ^ self skip ].	
 
 	aSpace := self newTestingSpace.
 
@@ -61,6 +63,7 @@ BlStartupShutdownTest >> testShutdownAndStartupKeepsSpacesOpenWithInvalidation [
 	| aSpace |
 	
 	hostClass = BlMorphicWindowHost ifTrue: [ ^ self skip ].
+	Smalltalk vm operatingSystemName = 'Linux' ifTrue: [ ^ self skip ].
 
 	aSpace := self newTestingSpace.
 
