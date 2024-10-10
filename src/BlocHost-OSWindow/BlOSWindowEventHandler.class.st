@@ -58,18 +58,6 @@ BlOSWindowEventHandler >> enqueue: anEvent [
 ]
 
 { #category : #'visiting - window' }
-BlOSWindowEventHandler >> enqueueSpaceResized: aPoint [
-
-	| aBlocEvent |
-	aBlocEvent := BlSpaceResizedEvent new
-		extent: aPoint;
-		timestamp: time now;
-		yourself.
-		
-	self enqueue: aBlocEvent
-]
-
-{ #category : #'visiting - window' }
 BlOSWindowEventHandler >> enqueueSpaceResized: aBlSpaceResizedEvent extent: aPoint [
 
 	aBlSpaceResizedEvent
