@@ -60,7 +60,6 @@ BlOSWindowHostSpace >> enqueueEvent: aBlEvent [
 BlOSWindowHostSpace >> eventFetcher [
 	"Return event fetcher used to enqueue events that should be
 	processed in the beginning of every frame"
-	<return: #BlHostEventFetcher>
 
 	^ eventFetcher
 ]
@@ -87,9 +86,10 @@ BlOSWindowHostSpace >> hide [
 
 { #category : #initialization }
 BlOSWindowHostSpace >> initialize [
+
 	super initialize.
-	
-	eventFetcher := BlHostEventFetcher hostSpace: self.
+
+	eventFetcher := BlHostEventFetcher hostSpace: self
 ]
 
 { #category : #initialization }

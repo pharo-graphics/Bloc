@@ -123,6 +123,7 @@ BlMockedHostSpace >> icon: aForm [
 
 { #category : #initialization }
 BlMockedHostSpace >> initialize [
+
 	super initialize.
 
 	eventFetcher := BlHostEventFetcher hostSpace: self.
