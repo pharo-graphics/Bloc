@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'form',
 		'eventHandler',
-		'hostSpace'
+		'hostSpace',
+		'lastExtentAnnounced'
 	],
 	#category : #'BlocHost-Morphic-Common'
 }
@@ -116,17 +117,22 @@ BlMorphicSpaceHostMorph >> keyUp: anEvent [
 { #category : #recategorized }
 BlMorphicSpaceHostMorph >> layoutChanged [
 
-	| oldExtent |
-	oldExtent := self extent.
-
 	super layoutChanged.
 	
 	hostSpace ifNil: [ ^self ].
 
+	lastExtentAnnounced ifNil: [ 
+		lastExtentAnnounced := self extent.
+		^self ].
+	lastExtentAnnounced = self extent ifTrue: [ 
+		^self ].	
+
 	BlMorphExtentChangedAnnouncement new
-		oldExtent: oldExtent;
+		oldExtent: lastExtentAnnounced;
 		newExtent: self extent;
-		sendTo: eventHandler
+		sendTo: eventHandler.
+
+	lastExtentAnnounced := self extent
 ]
 
 { #category : #geometry }
