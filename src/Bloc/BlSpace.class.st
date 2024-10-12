@@ -53,7 +53,8 @@ Class {
 		'reference',
 		'iconStencil',
 		'rootElement',
-		'userData'
+		'userData',
+		'previousVisibleStatus'
 	],
 	#classVars : [
 		'UniqueIdGenerator'
@@ -139,7 +140,10 @@ BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
 			aSpace universe hasDeferredActions or: [
 				(aSpace taskQueue isEmpty or: [
 					aSpace time now >= deadline ]) not ] ]
-		do: [ aSpace pulse ].
+		do: [
+			"We delegate to the host class also to run a cycle, it is needed when using morphic host, as this can run in the same UI thread blocking everything."
+			aSpace host runOneCycle. 
+			aSpace pulse ].
 
 	aSpace pulse.
 
@@ -871,6 +875,15 @@ BlSpace >> ensureSession [
 	self onSessionChanged: Smalltalk session
 ]
 
+{ #category : #'private - display' }
+BlSpace >> ensureWindowOpen [
+
+	hostSpace ifNotNil: [
+		hostSpace isValid ifFalse: [
+			host createHostSpaceFor: self.
+			previousVisibleStatus ifTrue: [ hostSpace open ] ] ]
+]
+
 { #category : #'event management accessing' }
 BlSpace >> eventDispatcher [
 	^ eventDispatcher
@@ -1485,6 +1498,12 @@ BlSpace >> pulseRequested [
 
 	<return: #Boolean>
 	^ nextPulseRequested
+]
+
+{ #category : #'startup - shutdown' }
+BlSpace >> rememberVisibleStatus [
+	
+	previousVisibleStatus := self isVisible
 ]
 
 { #category : #pulse }

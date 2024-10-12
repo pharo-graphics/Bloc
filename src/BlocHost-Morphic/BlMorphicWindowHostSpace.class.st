@@ -67,6 +67,12 @@ BlMorphicWindowHostSpace >> fullsize: aBoolean [
 	morphicWindow fullsize: aBoolean
 ]
 
+{ #category : #'host space - displaying' }
+BlMorphicWindowHostSpace >> hide [
+	
+	morphicWindow visible: false.
+]
+
 { #category : #initialization }
 BlMorphicWindowHostSpace >> initialize [
 
@@ -74,6 +80,12 @@ BlMorphicWindowHostSpace >> initialize [
 	
 	isBorderless := false.
 	isFullSize := false
+]
+
+{ #category : #'dirty areas' }
+BlMorphicWindowHostSpace >> invalidate [
+	
+	morphicWindow := nil
 ]
 
 { #category : #'window - properties' }
@@ -95,6 +107,18 @@ BlMorphicWindowHostSpace >> isFullsize [
 BlMorphicWindowHostSpace >> isTextInputActive [
 	"Check whether or not Unicode text input events are enabled"
 	^ morphicWindow isTextInputActive
+]
+
+{ #category : #testing }
+BlMorphicWindowHostSpace >> isValid [
+	
+	^ morphicWindow isNotNil
+]
+
+{ #category : #testing }
+BlMorphicWindowHostSpace >> isVisible [
+
+	^ morphicWindow visible
 ]
 
 { #category : #'host space - geometry' }
@@ -162,6 +186,8 @@ BlMorphicWindowHostSpace >> position: aPoint [
 BlMorphicWindowHostSpace >> show [
 
 	| anExtent |
+	morphicWindow visible: true.
+	
 	anExtent := morphicWindow extent.
 	morphicWindow openInWorld.
 	morphicWindow extent: anExtent
