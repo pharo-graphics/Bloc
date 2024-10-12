@@ -101,10 +101,11 @@ BlMorphicEventHandler >> enqueue: aBlEvent [
 
 	self isClosed ifTrue: [ ^ self ].
 
-	self window hostSpace enqueueEvent: aBlEvent.
+	aBlEvent timestamp: windowMorph hostSpace space time now.
+
+	windowMorph hostSpace enqueueEvent: aBlEvent.
 	self flag: 'ugly code to force the space to dequeue the event '.
-	self window ifNil: [ ^ self ].
-	self window hostSpace space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
+	windowMorph hostSpace space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
 ]
 
 { #category : #converting }
@@ -121,7 +122,7 @@ BlMorphicEventHandler >> handleBackspaceDown: aMorphicEvent [
 		key: KeyboardKey backspace;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: self timestampNow.
+		yourself.
 
 	self registerPressedKey: KeyboardKey backspace.
 	self enqueue: aBlEvent
@@ -135,7 +136,7 @@ BlMorphicEventHandler >> handleBackspaceUp: aMorphicEvent [
 		key: KeyboardKey backspace;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: self timestampNow.
+		yourself.
 
 	self unregisterPressedKey: KeyboardKey backspace.
 	self enqueue: aBlEvent
@@ -149,11 +150,9 @@ BlMorphicEventHandler >> handleDeleteDown: aMorphicEvent [
 		key: KeyboardKey delete;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: self timestampNow;
 		yourself.
 
 	self registerPressedKey: KeyboardKey delete.
-
 	self enqueue: aBlEvent
 ]
 
@@ -190,7 +189,6 @@ BlMorphicEventHandler >> handleDeleteUp: aMorphicEvent [
 		key: KeyboardKey delete;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: self timestampNow;
 		yourself.
 	
 	self unregisterPressedKey: KeyboardKey delete.
@@ -221,7 +219,6 @@ BlMorphicEventHandler >> handleExtentChanged: aMorphicEvent [
 	self enqueue:
 		(BlSpaceResizedEvent new
 			extent: aMorphicEvent newExtent;
-			timestamp: self timestampNow;
 			yourself)
 ]
 
@@ -249,7 +246,6 @@ BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 		key: aKey;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: theModifiers;
-		timestamp: self timestampNow;
 		yourself.
 	
 	self registerPressedKey: aKey.
@@ -273,7 +269,6 @@ BlMorphicEventHandler >> handleKeyUp: aMorphicEvent [
 		key: aKey;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: theModifiers;
-		timestamp: self timestampNow;
 		yourself.
 
 	self unregisterPressedKey: aKey.
@@ -295,7 +290,6 @@ BlMorphicEventHandler >> handleKeystroke: aMorphicEvent [
 		            text: aMorphicEvent keyCharacter asString;
 		            modifiers:
 			            (self convertKeyModifiersFromEvent: aMorphicEvent);
-		            timestamp: self timestampNow;
 		            yourself.
 
 	self enqueue: aBlEvent
@@ -304,10 +298,7 @@ BlMorphicEventHandler >> handleKeystroke: aMorphicEvent [
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleMorphDeleted: aMorphDeleted [ 
 
-	self enqueue:
-		(BlSpaceCloseRequest new
-			timestamp: self timestampNow;
-			yourself).
+	self enqueue: BlSpaceCloseRequest new.
 
 	windowMorph := nil
 ]
@@ -315,10 +306,7 @@ BlMorphicEventHandler >> handleMorphDeleted: aMorphDeleted [
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleMorphGotFocus: aMorphGotFocus [ 
 
-	self enqueue:
-		(BlSpaceFocusInEvent new
-			timestamp: self timestampNow;
-			yourself)
+	self enqueue: BlSpaceFocusInEvent new
 ]
 
 { #category : #'event handling' }
@@ -344,7 +332,6 @@ BlMorphicEventHandler >> handleMouseDown: anEvent [
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			button: button;
-			timestamp: self timestampNow;
 			yourself.
 
 		self enqueue: aBlEvent ].
@@ -370,7 +357,6 @@ BlMorphicEventHandler >> handleMouseMove: anEvent [
 			delta: aMorphicEvent position - (self window pointToSpace: aMorphicEvent startPoint);
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-			timestamp: self timestampNow;
 			yourself.
 
 		self enqueue: aBlEvent ]
@@ -394,7 +380,6 @@ BlMorphicEventHandler >> handleMouseUp: anEvent [
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			button: button;
-			timestamp: self timestampNow;
 			yourself.
 
 		self enqueue: aBlEvent ].
@@ -423,7 +408,6 @@ BlMorphicEventHandler >> handleMouseWheel: anEvent [
 			            position: aMorphicEvent position;
 			            screenPosition:
 				            (self globalMousePositionForEvent: aMorphicEvent);
-			            timestamp: self timestampNow;
 			            yourself.
 
 		self enqueue: aBlEvent ]
@@ -440,7 +424,6 @@ BlMorphicEventHandler >> handleScrollLeft: anEvent [
 			button: (BlMouseButton code: aMorphicEvent buttons);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
-			timestamp: self timestampNow;
 			yourself.
 
 		self enqueue: aBlEvent ]
@@ -457,7 +440,6 @@ BlMorphicEventHandler >> handleScrollRight: anEvent [
 			button: (BlMouseButton code: aMorphicEvent buttons);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
-			timestamp: self timestampNow;
 			yourself.
 		
 		self enqueue: aBlEvent ]
@@ -479,7 +461,6 @@ BlMorphicEventHandler >> handleTextInputEvent: aTextInputEvent [
 				             ctrl: false
 				             alt: false
 				             cmd: false);
-		            timestamp: self timestampNow;
 		            yourself.
 
 	self enqueue: aBlEvent
@@ -488,11 +469,7 @@ BlMorphicEventHandler >> handleTextInputEvent: aTextInputEvent [
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleWindowClosed: aMorphicEvent [
 
-	| aBlEvent |
-	aBlEvent := BlSpaceCloseRequest new
-		            timestamp: self timestampNow;
-		            yourself.
-	self enqueue: aBlEvent.
+	self enqueue: BlSpaceCloseRequest new.
 
 	windowMorph := nil
 ]
