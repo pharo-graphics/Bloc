@@ -55,7 +55,21 @@ BlParallelUniverse class >> forHost: aHostClass [
 BlParallelUniverse class >> initialize [
 	Universes := #().
 	UniversesMutex := Mutex new.
-	UniqueIdGenerator := BlUniqueIdGenerator new
+	UniqueIdGenerator := BlUniqueIdGenerator new.
+	
+	SessionManager default registerGuiClassNamed: self name
+]
+
+{ #category : #'system startup' }
+BlParallelUniverse class >> shutDown [ 
+
+	self all do: [ :anUniverse | anUniverse stopUniverse ]
+]
+
+{ #category : #'system startup' }
+BlParallelUniverse class >> startUp [ 
+
+	self all do: [ :anUniverse | anUniverse startUniverse ]
 ]
 
 { #category : #'api - spaces' }
@@ -297,6 +311,7 @@ BlParallelUniverse >> hasUIProcess [
 
 { #category : #accessing }
 BlParallelUniverse >> hostClass [
+
 	^ hostClass
 ]
 
@@ -354,7 +369,10 @@ BlParallelUniverse >> openSpace: aSpace [
 { #category : #'private - spaces' }
 BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
-	aSpace isOpened ifTrue: [ ^ self ].
+	aSpace isOpened ifTrue: [
+		"If it has been already opened, just unhide it" 
+		aSpace hostSpace show.
+		^ self ].
 
 	self
 		assert: [ aSpace hasHostSpace not ]
@@ -450,7 +468,8 @@ BlParallelUniverse >> startUniverse [
 	"A universe must not be running here.
 	I am called outside of the UI loop (there is no UI loop yet)"
 
-	self hostClass start
+	hostClass start.
+	spaceManager start
 ]
 
 { #category : #'private - lifecycle' }
@@ -458,7 +477,8 @@ BlParallelUniverse >> stopUniverse [
 	"A universe must be running here.
 	I am called from the UI loop"
 	
-	self hostClass stop
+	hostClass stop.
+	spaceManager stop
 ]
 
 { #category : #'deferred message' }
