@@ -54,10 +54,10 @@ BlOSWindowHost >> createWindowSpaceFor: aSpace [
 	aHostSpace := self createHostSpace.
 	aHostSpace
 		keyboardKeyTable: self keyboardKeyTable;
-		initializeWithAttributes: theWindowAttributes;
 		universe: self universe;
 		host: self;
-		space: aSpace.
+		space: aSpace;
+		initializeWithAttributes: theWindowAttributes.
 	
 	^ aHostSpace
 ]
@@ -77,6 +77,7 @@ BlOSWindowHost >> destroyHostSpaceFor: aSpace [
 
 { #category : #initialization }
 BlOSWindowHost >> keyboardKeyTable [
+
 	^ self subclassResponsibility
 ]
 

@@ -661,6 +661,13 @@ BlSpace >> dispatchAddedToSceneGraph [
 ]
 
 { #category : #'event handling' }
+BlSpace >> dispatchEventWithTimestamp: aBlEvent [ 
+
+	aBlEvent timestamp ifNil: [ aBlEvent timestamp: self time now ].
+	self dispatchEvent: aBlEvent
+]
+
+{ #category : #'event handling' }
 BlSpace >> dispatchMousePickedOutside: aMouseOutsideEvent [
 
 	self root dispatchMousePickedOutside: aMouseOutsideEvent
@@ -675,16 +682,16 @@ BlSpace >> dispatchRemovedFromSceneGraph [
 ]
 
 { #category : #pulse }
-BlSpace >> dispatchTimeEvent: aSpaceStepEventClass during: aBlock [
+BlSpace >> dispatchTimeEvent: aSpacePhaseEventClass during: aBlock [
+
 	| aStartTime |
-	
 	aStartTime := self time now.
 	aBlock cull: self.
 	self eventDispatcher dispatchEvent:
-			(aSpaceStepEventClass new
-				start: aStartTime;
-				end: self time now;
-				yourself)
+		(aSpacePhaseEventClass new
+			 start: aStartTime;
+			 end: self time now;
+			 yourself)
 ]
 
 { #category : #'change - layout' }

@@ -7,19 +7,5 @@ This event is used by the debugger to stop the UI process so it should be used w
 Class {
 	#name : #BlSpaceDestroyedEvent,
 	#superclass : #BlSpaceEvent,
-	#instVars : [
-		'space'
-	],
 	#category : #'Bloc-Events-Type-Space'
 }
-
-{ #category : #accessing }
-BlSpaceDestroyedEvent >> space [
-
-	^ space
-]
-
-{ #category : #accessing }
-BlSpaceDestroyedEvent >> space: aSpace [
-	space := aSpace
-]

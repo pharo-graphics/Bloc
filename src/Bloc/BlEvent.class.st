@@ -144,8 +144,9 @@ BlEvent >> canBePropagated [
 ]
 
 { #category : #'private - accessing' }
-BlEvent >> canBePropagated: anObject [
-	canBePropagated := anObject
+BlEvent >> canBePropagated: aBoolean [
+
+	canBePropagated := aBoolean
 ]
 
 { #category : #'private - steps' }
@@ -353,6 +354,16 @@ BlEvent >> newCopyFor: aTarget [
 		copyFrom: self;
 		target: aTarget;
 		yourself
+]
+
+{ #category : #printing }
+BlEvent >> printOn: aStream [
+
+	aStream
+		nextPutAll: self className;
+		nextPutAll: '(timestamp: ';
+		print: timestamp;
+		nextPut: $)
 ]
 
 { #category : #sending }

@@ -8,7 +8,6 @@ Class {
 	#superclass : #StandardWindow,
 	#instVars : [
 		'hostSpace',
-		'preventResize',
 		'spaceHostMorph'
 	],
 	#category : #'BlocHost-Morphic-Window'
@@ -46,11 +45,10 @@ BlMorphicWindow >> form: aForm [
 BlMorphicWindow >> fullsize: aBoolean [
 	"Make window borderless if true is given"
 
-	aBoolean
-		ifTrue: [
-			label delete.
-			spaceHostMorph layoutFrame topOffset:
-				spaceHostMorph layoutFrame topOffset - labelArea height ]
+	aBoolean ifTrue: [
+		label delete.
+		spaceHostMorph layoutFrame topOffset:
+			spaceHostMorph layoutFrame topOffset - labelArea height ]
 ]
 
 { #category : #accessing }
@@ -72,16 +70,7 @@ BlMorphicWindow >> initialize [
 	super initialize.
 
 	spaceHostMorph := BlMorphicSpaceHostMorph new.
-	self addMorph: spaceHostMorph fullFrame: (0 @ 0 extent: 1 @ 1).
-	preventResize := false
-]
-
-{ #category : #geometry }
-BlMorphicWindow >> resizeDuring: aBlock [
-
-	preventResize ifTrue: [ ^ self ].
-	preventResize := true.
-	aBlock ensure: [ preventResize := false ]
+	self addMorph: spaceHostMorph fullFrame: (0 @ 0 extent: 1 @ 1)
 ]
 
 { #category : #geometry }
@@ -96,12 +85,10 @@ BlMorphicWindow >> spaceExtent [
 { #category : #geometry }
 BlMorphicWindow >> spaceExtent: anExtent [
 
-	self resizeDuring: [
-		self spaceExtent = anExtent ifFalse: [
-			| aDelta |
-			"We compute decorations extent first"
-			aDelta := self fullBounds extent - spaceHostMorph extent.
-			self extent: anExtent + aDelta ] ]
+	| aDelta |
+	"We compute decorations extent first"
+	aDelta := self fullBounds extent - spaceHostMorph extent.
+	self extent: anExtent + aDelta
 ]
 
 { #category : #accessing }
