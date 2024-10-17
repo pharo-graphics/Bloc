@@ -56,9 +56,3 @@ BlMousePickOutsideEvent >> originalEvent: aBlEvent [
 	aBlEvent consume.
 	originalEvent := aBlEvent
 ]
-
-{ #category : #sending }
-BlMousePickOutsideEvent >> sendTo: anObject [
-
-	anObject mousePickOutsideEvent: self
-]
