@@ -28,14 +28,6 @@ BlBasicEventHandler >> eventsToHandle [
 BlBasicEventHandler >> handleEvent: anEvent [
 ]
 
-{ #category : #testing }
-BlBasicEventHandler >> hasOwner [
-	"Utility #*owner message makes it possible to have a polymorphic way to visualise a tree structure of the elements"
-	<return: #Boolean>
-
-	^ false
-]
-
 { #category : #'api - hooks' }
 BlBasicEventHandler >> onInstalledIn: anObject [
 ]
