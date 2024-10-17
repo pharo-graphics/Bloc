@@ -5,8 +5,6 @@ I am a chain of BlEventDispatchers
 Class {
 	#name : #BlEventDispatcherChain,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'previous',
 		'dispatcher'
@@ -16,21 +14,23 @@ Class {
 
 { #category : #'instance creation' }
 BlEventDispatcherChain class >> empty [
-	<return: #BlEventDispatcherChain>
 	
 	^ BlEventDispatcherEmptyChain uniqueInstance
 ]
 
 { #category : #'instance creation' }
 BlEventDispatcherChain class >> with: aBlEventDispatcher [
-	^ self new initializeWith: aBlEventDispatcher
+
+	^ self new
+		  initializeWith: aBlEventDispatcher;
+		  yourself
 ]
 
 { #category : #'api - event managing' }
 BlEventDispatcherChain >> dispatchEvent: anEvent [
 	"Dispatch a given event through the whole dispatcher chain"
-	| aPreviousChain |
 
+	| aPreviousChain |
 	aPreviousChain := self hasPrevious
 		ifTrue: [ self previous ]
 		ifFalse: [ self class empty ].
@@ -46,6 +46,7 @@ BlEventDispatcherChain >> dispatcher [
 
 { #category : #'api - accessing' }
 BlEventDispatcherChain >> first [
+
 	^ self hasPrevious
 		ifTrue: [ self previous first ]
 		ifFalse: [ self ]
@@ -59,7 +60,6 @@ BlEventDispatcherChain >> hasDispatcher [
 
 { #category : #'private - testing' }
 BlEventDispatcherChain >> hasPrevious [
-	<return: #Boolean>
 	
 	^ previous isNotNil
 ]
@@ -67,39 +67,25 @@ BlEventDispatcherChain >> hasPrevious [
 { #category : #initialization }
 BlEventDispatcherChain >> initializeWith: aBlEventDispatcher [
 
-	self
-		assert: [ dispatcher isNil ]
-		description: [ 'I am immutable. Create a new chain for a given dispatcher' ].
-
-	dispatcher := aBlEventDispatcher.
-	
-	"explicitly log that new chain has no predecessor"
-	previous := nil
+	self initialize.
+	dispatcher := aBlEventDispatcher
 ]
 
 { #category : #'private - accessing' }
 BlEventDispatcherChain >> previous [
-	<return: #BlEventDispatcherChain>
-	
-	self
-		assert: [ self hasPrevious ]
-		description: [ 'Can not access previous element in a chain if it does not exist' ].
-	
+
 	^ previous
 ]
 
 { #category : #'private - accessing' }
 BlEventDispatcherChain >> previous: aBlEventDispatcherChain [
-	self
-		assert: [ self hasPrevious not ]
-		description: [ 'I am immutable' ].
 
 	previous := aBlEventDispatcherChain
 ]
 
 { #category : #'private - accessing' }
 BlEventDispatcherChain >> withAllPrevious [
-	<return: #SequenceableCollection of: #BlEventDispatcherChain>
+	"Answer a `SequenceableCollection` of `BlEventDispatcherChain`"
 
 	^ Array streamContents: [ :aStream |
 		| aChain |
@@ -112,8 +98,8 @@ BlEventDispatcherChain >> withAllPrevious [
 
 { #category : #'api - adding' }
 BlEventDispatcherChain >> withNext: aBlEventDispatcher [
-	| aNextChain |
 
+	| aNextChain |
 	aNextChain := self class with: aBlEventDispatcher.
 	aNextChain previous: self.
 
