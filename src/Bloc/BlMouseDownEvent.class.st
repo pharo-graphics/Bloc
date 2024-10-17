@@ -39,7 +39,10 @@ BlMouseDownEvent class >> secondary [
 { #category : #converting }
 BlMouseDownEvent >> asMouseOutsideEvent [
 
-	^ BlMouseDownOutsideEvent new originalEvent: self; canBePropagated: false; yourself
+	^ BlMouseDownOutsideEvent new
+		  originalEvent: self;
+		  canBePropagated: false;
+		  yourself
 ]
 
 { #category : #testing }
