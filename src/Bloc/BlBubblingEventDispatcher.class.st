@@ -1,3 +1,11 @@
+"
+I'm an event dispatcher that makes events be handled by the element tree in two phases: the capturing and the bubbling phase. 
+
+When an event is dispatched, the element tree can handle it in this specific order:
+1. Event Capturing starts at the root element and moves downward to the target element.
+2. Event Bubbling starts at the target element and moves upward through the element tree.
+
+"
 Class {
 	#name : #BlBubblingEventDispatcher,
 	#superclass : #BlDirectEventDispatcher,
