@@ -83,16 +83,15 @@ TBlEventTarget >> buildEventDispatchChain: aBlEventDispatcherChain upTo: anOther
 
 { #category : #'event management' }
 TBlEventTarget >> dispatchEvent: anEvent [
-	"I only call my event dispatcher, so the event can be only handled by my event handlers/filters"
+	"Dispatch an event if my dispatcher wants it. Previously, set in the event target, forwarding target, and source (if it wasn't already set)."
 
-	anEvent hasSource
-		ifFalse: [ anEvent source: self ].
+	anEvent hasSource ifFalse: [ anEvent source: self ].
 
 	anEvent target: self.
 	anEvent forwardingTarget: self.
 
-	(self eventDispatcher wantsEvent: anEvent)
-		ifTrue: [ self eventDispatcher dispatchEvent: anEvent ]
+	(self eventDispatcher wantsEvent: anEvent) ifTrue: [
+		self eventDispatcher dispatchEvent: anEvent ]
 ]
 
 { #category : #'event management accessing' }
