@@ -20,5 +20,5 @@ BlSpaceFrameTaskPhase >> runOn: aSpace [
 
 	aSpace
 		dispatchTimeEvent: BlSpaceTasksEndEvent
-		during: [ :theSpace | theSpace runTasks ]
+		during: [ aSpace runTasks ]
 ]

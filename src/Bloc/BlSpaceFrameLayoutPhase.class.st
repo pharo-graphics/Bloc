@@ -19,5 +19,5 @@ BlSpaceFrameLayoutPhase >> runOn: aSpace [
 
 	aSpace
 		dispatchTimeEvent: BlSpaceLayoutEndEvent
-		during: [ :theSpace | theSpace doLayout ]
+		during: [ aSpace doLayout ]
 ]

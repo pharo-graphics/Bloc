@@ -686,7 +686,7 @@ BlSpace >> dispatchTimeEvent: aSpacePhaseEventClass during: aBlock [
 
 	| aStartTime |
 	aStartTime := self time now.
-	aBlock cull: self.
+	aBlock value.
 	self eventDispatcher dispatchEvent:
 		(aSpacePhaseEventClass new
 			 start: aStartTime;
