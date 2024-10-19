@@ -14,10 +14,10 @@ Class {
 
 { #category : #dispatching }
 BlBubblingEventDispatcher >> dispatchArrivedEvent: anEvent [
-	
+
 	anEvent arrivedTarget: self owner.
-	
-	"handlers initialized lazily, do nothing if there are none of them"
+
+	"Pay attention at lazy initialization"
 	handlers ifNotNil: [ :theHandlers |
 		theHandlers dispatchEvent: anEvent ].
 
@@ -32,7 +32,7 @@ BlBubblingEventDispatcher >> dispatchBubblingEvent: anEvent [
 
 	anEvent bubblingTarget: self owner.
 
-	"handlers initialized lazily, do nothing if there are none of them"
+	"Pay attention at lazy initialization"
 	handlers ifNotNil: [ :theHandlers |
 		theHandlers dispatchEvent: anEvent ].
 
@@ -44,10 +44,10 @@ BlBubblingEventDispatcher >> dispatchBubblingEvent: anEvent [
 
 { #category : #dispatching }
 BlBubblingEventDispatcher >> dispatchCapturingEvent: anEvent [
-	
+
 	anEvent capturingTarget: self owner.
-	
-	"filters initialized lazily, do nothing if there are none of them"
+
+	"Pay attention at lazy initialization"
 	filters ifNotNil: [ :theFilters |
 		theFilters dispatchEvent: anEvent ]
 ]
