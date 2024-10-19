@@ -16,7 +16,7 @@ Class {
 BlElementEventDispatcher >> addEventHandler: aHandler [
 	"It is not very common to have event handlers so we initialize registry lazily"
 
-	handlers ifNil: [ handlers := self defaultHandlerRegistry ].
+	handlers ifNil: [ handlers := self newHandlerRegistry ].
 	handlers add: aHandler.
 
 	aHandler enableEventsIn: self.

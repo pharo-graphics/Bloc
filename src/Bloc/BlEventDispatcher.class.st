@@ -1,3 +1,6 @@
+"
+My subclasses are responsible of dispatching events.
+"
 Class {
 	#name : #BlEventDispatcher,
 	#superclass : #Object,
@@ -29,6 +32,8 @@ BlEventDispatcher >> filters [
 { #category : #'api - accessing' }
 BlEventDispatcher >> filtersDo: aBlock [
 	"Evaulate a given block with every event filter as an argument"
+	
+	self subclassResponsibility
 ]
 
 { #category : #'api - accessing' }
@@ -41,6 +46,8 @@ BlEventDispatcher >> handlers [
 { #category : #'api - accessing' }
 BlEventDispatcher >> handlersDo: aBlock [
 	"Evaulate a given block with every event handler as an argument"
+	
+	self subclassResponsibility
 ]
 
 { #category : #'api - testing' }

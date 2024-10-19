@@ -28,8 +28,7 @@ BlDirectEventDispatcher >> addEventFilter: aFilter [
 	For that custom filters should mark event as ==consumed: true== which instantly stops propagation"
 
 	"Lazy initialization"
-	filters ifNil: [
-		filters := self defaultFilterRegistry ].
+	filters ifNil: [ filters := self newFilterRegistry ].
 	filters add: aFilter.
 
 	"send hook AFTER filter is added"
@@ -40,7 +39,7 @@ BlDirectEventDispatcher >> addEventFilter: aFilter [
 BlDirectEventDispatcher >> addEventHandler: aHandler [
 
 	"Lazy initialization"
-	handlers ifNil: [ handlers := self defaultHandlerRegistry ].
+	handlers ifNil: [ handlers := self newHandlerRegistry ].
 	handlers add: aHandler.
 
 	"send hook AFTER handler is added"
@@ -51,18 +50,6 @@ BlDirectEventDispatcher >> addEventHandler: aHandler [
 BlDirectEventDispatcher >> addShortcut: aBlShortcut [
 
 	shortcutHandler := shortcutHandler addShortcut: aBlShortcut
-]
-
-{ #category : #initialization }
-BlDirectEventDispatcher >> defaultFilterRegistry [
-
-	^ BlHandlerRegistry preferableHandlerRegistryClass new
-]
-
-{ #category : #initialization }
-BlDirectEventDispatcher >> defaultHandlerRegistry [
-
-	^ BlHandlerRegistry preferableHandlerRegistryClass new
 ]
 
 { #category : #'api - event managing' }
@@ -145,6 +132,18 @@ BlDirectEventDispatcher >> initialize [
 	filters := nil. "BlHandlerRegistry"
 	handlers := nil. "BlHandlerRegistry"
 	shortcutHandler := BlShortcutHandlerWithoutShortcuts uniqueInstance
+]
+
+{ #category : #initialization }
+BlDirectEventDispatcher >> newFilterRegistry [
+
+	^ BlHandlerRegistry preferableHandlerRegistryClass new
+]
+
+{ #category : #initialization }
+BlDirectEventDispatcher >> newHandlerRegistry [
+
+	^ BlHandlerRegistry preferableHandlerRegistryClass new
 ]
 
 { #category : #'api - accessing' }
