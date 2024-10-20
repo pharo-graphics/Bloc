@@ -28,7 +28,7 @@ BlSpaceFrameEventPhase >> runOn: aSpace [
 				aHostSpace fetchedEventsDo: [ :anEvent |
 					"we have to test for existance of the host space before handling each event because it is possible that a space is closed due to an event"
 					aSpace hostSpaceDo: [
-						aSpace eventDispatcher dispatchEvent: anEvent ] ] ].
+						aSpace dispatchEvent: anEvent ] ] ].
 
 			aSpace hostSpaceDo: [ :aHostSpace | aHostSpace generateEvents ].
 			aSpace mouseProcessor generateEvents ]
