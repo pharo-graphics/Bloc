@@ -347,8 +347,11 @@ BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 		anEvent timestamp: aSpace time now ].
 
 	aSpace pulse.
-	aCollectionOfEvents do: [ :anEvent | aSpace dispatchEvent: anEvent ].
-	aSpace dispatchEvent: BlSpaceEventsProcessedEvent new.
+	aSpace
+		dispatchTimeEvent: BlSpaceEventsProcessedEvent
+		during: [
+			aCollectionOfEvents do: [ :anEvent |
+				aSpace dispatchEvent: anEvent ] ].
 	aSpace pulse.
 
 	topMostElement ifNotNil: [ topMostElement removeFromParent ]
