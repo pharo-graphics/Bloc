@@ -1191,11 +1191,6 @@ BlSpace >> id [
 ]
 
 { #category : #initialization }
-BlSpace >> initDispatcher [
-	self eventDispatcher addEventFilter: self eventListener
-]
-
-{ #category : #initialization }
 BlSpace >> initialize [
 
 	super initialize.
@@ -1214,7 +1209,7 @@ BlSpace >> initialize [
 
 	eventDispatcher := self defaultEventDispatcher.
 	eventListener := self defaultEventListener.
-	self initDispatcher.
+	eventDispatcher addEventFilter: eventListener.
 
 	mouseProcessor := BlMouseProcessor space: self.
 	focusProcessor := BlFocusProcessor space: self.
