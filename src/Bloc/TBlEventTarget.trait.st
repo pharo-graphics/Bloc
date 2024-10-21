@@ -14,7 +14,16 @@ TBlEventTarget >> addEventFilter: anEventHandler [
 
 { #category : #'event management' }
 TBlEventTarget >> addEventFilterOn: anEventClass do: aBlock [
-	self addEventFilter: (BlEventHandler on: anEventClass do: aBlock)
+
+	| newEventHandler |
+	newEventHandler :=
+		BlEventHandler
+			on: anEventClass
+			do: aBlock.
+
+	self addEventFilter: newEventHandler.
+	
+	^ newEventHandler
 ]
 
 { #category : #'event management' }
