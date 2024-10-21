@@ -187,13 +187,13 @@ TBlEventTarget >> shortcuts [
 
 { #category : #'event management' }
 TBlEventTarget >> when: anEventClass doOnce: aBlock [
-	"Install an event handler just for one execution. After that the event handler is called, remove it"
+	"Add an event handler that will be removed right before culling the received block closure."
+
 	| anEventHandler |
-	
-	anEventHandler := nil.
-	anEventHandler := BlEventHandler
-		on: anEventClass
-		do: [ :anEvent |
+	anEventHandler := BlEventHandler new.
+	anEventHandler
+		eventClass: anEventClass;
+		action: [ :anEvent |
 			self removeEventHandler: anEventHandler.
 			aBlock cull: anEvent ].
 	
