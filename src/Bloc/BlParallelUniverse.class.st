@@ -287,6 +287,12 @@ BlParallelUniverse >> hasDeferredActions [
 	^ deferredActions isEmpty not
 ]
 
+{ #category : #testing }
+BlParallelUniverse >> hasPostponedActions [
+	
+	^ postponedActions isEmpty not
+]
+
 { #category : #'api - spaces' }
 BlParallelUniverse >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"
