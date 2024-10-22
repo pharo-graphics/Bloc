@@ -54,6 +54,24 @@ TBlEventTarget >> addEventHandlerOn: anEventClass do: aBlock [
 	^ newEventHandler
 ]
 
+{ #category : #'event management' }
+TBlEventTarget >> addEventHandlerOn: anEventClass doOnce: aBlock [
+	"Add an event handler that will be removed right before culling the received block closure.
+	Answer the new `BlEventHandler`."
+
+	| anEventHandler |
+	anEventHandler := BlEventHandler new.
+	anEventHandler
+		eventClass: anEventClass;
+		action: [ :anEvent |
+			self removeEventHandler: anEventHandler.
+			aBlock cull: anEvent ].
+	
+	self addEventHandler: anEventHandler.
+	
+	^ anEventHandler
+]
+
 { #category : #'shortcut management' }
 TBlEventTarget >> addShortcut: aShortcut [
 	self eventDispatcher addShortcut: aShortcut
@@ -198,13 +216,10 @@ TBlEventTarget >> shortcuts [
 TBlEventTarget >> when: anEventClass doOnce: aBlock [
 	"Add an event handler that will be removed right before culling the received block closure."
 
-	| anEventHandler |
-	anEventHandler := BlEventHandler new.
-	anEventHandler
-		eventClass: anEventClass;
-		action: [ :anEvent |
-			self removeEventHandler: anEventHandler.
-			aBlock cull: anEvent ].
-	
-	self addEventHandler: anEventHandler
+	self
+		deprecated: 'Use addEventHandlerOn:doOnce: instead'
+		transformWith: '`@receiver when: `@arg1 doOnce: `@arg2'
+			-> '`@receiver addEventHandlerOn: `@arg1 doOnce: `@arg2'.
+
+	^ self addEventHandlerOn: anEventClass doOnce: aBlock
 ]
