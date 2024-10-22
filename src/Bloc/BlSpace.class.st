@@ -562,9 +562,10 @@ BlSpace >> clearDirtyElements [
 
 { #category : #'api - displaying' }
 BlSpace >> close [
-	"Delegate closing work to the Universe"
+	"Request closing this space. This might happen in a host process (async). 
+	This space can be reopened via `show`, either with current host or with another host."
 	
-	(BlParallelUniverse forHost: self host class) closeSpace: self
+	host universe closeSpace: self
 ]
 
 { #category : #'cursor managing' }
@@ -1319,10 +1320,9 @@ BlSpace >> isLayoutRequested [
 BlSpace >> isOpened [
 	"Return true if the space was shown (by sending #show message), false otherwise.
 	Please note, that an opened space can be hidden which does not influence the result of #isOpened"
-	<return: #Boolean>
 
-	^ (BlParallelUniverse existsForHost: self host class)
-		and: [ (BlParallelUniverse forHost: self host class) hasSpace: self ]
+	^ (self host class hasUniverse)
+		and: [ self universe hasSpace: self ]
 ]
 
 { #category : #'window - properties' }
@@ -1622,10 +1622,9 @@ BlSpace >> setPosition: aPoint [
 
 { #category : #'api - displaying' }
 BlSpace >> show [
-	"Open me in a window and show it to the user"
+	"Show this space to the user, using current host and other parameters such as extent, title, etc."
 
-	"delegate showing work to the Universe"	
-	(BlParallelUniverse forHost: self host class) openSpace: self
+	self universe openSpace: self
 ]
 
 { #category : #'api - displaying' }
@@ -1722,9 +1721,8 @@ BlSpace >> ungrabFocus [
 
 { #category : #accessing }
 BlSpace >> universe [
-	<return: #BlParallelUniverse>
 
-	^ BlParallelUniverse forHost: self host class
+	^ self host universe
 ]
 
 { #category : #'cursor managing' }

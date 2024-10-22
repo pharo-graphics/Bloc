@@ -13,6 +13,12 @@ Class {
 	#category : #'Bloc-Universe - Host'
 }
 
+{ #category : #testing }
+BlHost class >> hasUniverse [
+
+	^ BlParallelUniverse existsForHost: self
+]
+
 { #category : #'api - lifecycle' }
 BlHost class >> isRunning [
 	^ self subclassResponsibility
