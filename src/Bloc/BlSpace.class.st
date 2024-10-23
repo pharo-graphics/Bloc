@@ -37,6 +37,7 @@ Class {
 		'keyboardProcessor',
 		'focusChain',
 		'dragboard',
+		'pulseRequested',
 		'currentCursor',
 		'session',
 		'focused',
@@ -53,8 +54,7 @@ Class {
 		'iconStencil',
 		'rootElement',
 		'userData',
-		'previousVisibleStatus',
-		'pulseRequested'
+		'previousVisibleStatus'
 	],
 	#classVars : [
 		'UniqueIdGenerator'
@@ -1202,7 +1202,7 @@ BlSpace >> initialize [
 	id := UniqueIdGenerator generateUniqueId.
 
 	host := BlHost pickHost.
-	nextPulseRequested := true.
+	pulseRequested := true.
 	session := Smalltalk session.
 	elementsNeedingPaint := Set new.
 	elementsNeedingLayout := Set new.
@@ -1323,6 +1323,13 @@ BlSpace >> isOpened [
 
 	^ (self host class hasUniverse)
 		and: [ self universe hasSpace: self ]
+]
+
+{ #category : #pulse }
+BlSpace >> isPulseRequested [
+	"Return true if space pulse was requested, false otherwise"
+
+	^ pulseRequested
 ]
 
 { #category : #'window - properties' }
@@ -1474,13 +1481,14 @@ BlSpace >> printOn: aStream [
 
 { #category : #pulse }
 BlSpace >> processPulse [
+
 	self ensureSession.
-	
-	self pulseRequested
-		ifFalse: [ ^ self ].
-	
+
+	pulseRequested ifFalse: [ ^ self ].
+
 	"flip to false beforehand to be able to know if the next pulse was needed during the frame"
-	nextPulseRequested := false.
+	pulseRequested := false.
+
 	self frame runOn: self
 ]
 
@@ -1489,7 +1497,7 @@ BlSpace >> pulse [
 	self processPulse
 ]
 
-{ #category : #'change - rendering' }
+{ #category : #pulse }
 BlSpace >> pulseRequested [
 	"Return true if space pulse was requested, false otherwise"
 
@@ -1541,10 +1549,10 @@ BlSpace >> requestLayout: anElement [
 	self requestNextPulse
 ]
 
-{ #category : #'change - rendering' }
+{ #category : #pulse }
 BlSpace >> requestNextPulse [
 
-	nextPulseRequested := true
+	pulseRequested := true
 ]
 
 { #category : #'window - properties' }
