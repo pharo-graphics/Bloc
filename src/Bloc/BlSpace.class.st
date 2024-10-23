@@ -37,7 +37,6 @@ Class {
 		'keyboardProcessor',
 		'focusChain',
 		'dragboard',
-		'nextPulseRequested',
 		'currentCursor',
 		'session',
 		'focused',
@@ -54,7 +53,8 @@ Class {
 		'iconStencil',
 		'rootElement',
 		'userData',
-		'previousVisibleStatus'
+		'previousVisibleStatus',
+		'pulseRequested'
 	],
 	#classVars : [
 		'UniqueIdGenerator'
@@ -1491,11 +1491,15 @@ BlSpace >> pulse [
 
 { #category : #'change - rendering' }
 BlSpace >> pulseRequested [
-
 	"Return true if space pulse was requested, false otherwise"
 
-	<return: #Boolean>
-	^ nextPulseRequested
+	self
+		deprecated: 'Use #isPulseRequested instead'
+		transformWith:
+			'`@receiver pulseRequested'
+			-> '`@receiver isPulseRequested'.
+
+	^ self isPulseRequested
 ]
 
 { #category : #'startup - shutdown' }
