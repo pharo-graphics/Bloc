@@ -900,28 +900,6 @@ BlSpace >> extent: aNewExtent [
 	self windowExtent: aNewExtent
 ]
 
-{ #category : #'NOT-USED-private-change' }
-BlSpace >> extractAttachedElements: aSetOfElements [
-	^ aSetOfElements select: [ :eachElement |
-		eachElement isAttachedToSceneGraph
-			and: [ eachElement space == self ] ]
-]
-
-{ #category : #'NOT-USED-private-change' }
-BlSpace >> extractParents: aSetOfElements suchThat: aConditionBlock [
-	| theElementToProcess |
-
-	theElementToProcess := Set new.
-
-	aSetOfElements do: [ :eachElement |
-		eachElement
-			topMostParentSuchThat: aConditionBlock
-			ifFound: [ :aNotYetResolvedParent | theElementToProcess add: aNotYetResolvedParent ]
-			ifNone: [ theElementToProcess add: eachElement ] ].
-
-	^ theElementToProcess
-]
-
 { #category : #'private - change' }
 BlSpace >> extractRoots: aSetOfElements [
 	^ self class extractRoots: aSetOfElements
