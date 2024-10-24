@@ -33,29 +33,30 @@ BlSpaceManager >> addSpace: aSpace [
 
 { #category : #enumerating }
 BlSpaceManager >> do: aBlock [
-	self spaces do: aBlock
+
+	spaces do: aBlock
 ]
 
 { #category : #testing }
 BlSpaceManager >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"
-	<return: #Boolean>
 
-	^ self spaces includes: aSpace
+	^ spaces includes: aSpace
 ]
 
 { #category : #testing }
 BlSpaceManager >> hasSpaces [
 	"Return true if there are registered spaces, false otherwise"
 
-	^ self spaces isNotEmpty
+	^ spaces isNotEmpty
 ]
 
 { #category : #initialization }
 BlSpaceManager >> initialize [
+
 	super initialize.
 
-	spaces := #()
+	spaces := #(  )
 ]
 
 { #category : #printing }
@@ -71,6 +72,7 @@ BlSpaceManager >> printOn: aStream [
 
 { #category : #pulse }
 BlSpaceManager >> pulse [
+
 	spaces do: [ :aSpace | aSpace pulse ]
 ]
 
@@ -87,7 +89,6 @@ BlSpaceManager >> removeSpace: aSpace [
 { #category : #accessing }
 BlSpaceManager >> spaces [
 	"Return a collection of all existing spaces"
-	<return: #Array>
 
 	^ spaces
 ]

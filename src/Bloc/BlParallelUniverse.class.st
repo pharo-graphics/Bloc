@@ -204,6 +204,7 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> closeSpaces [
+
 	self spaces copy do: [ :aSpace | self closeSpace: aSpace ]
 ]
 
@@ -291,7 +292,6 @@ BlParallelUniverse >> hasPostponedActions [
 { #category : #'api - spaces' }
 BlParallelUniverse >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"
-	<return: #Boolean>
 	
 	^ spaceManager hasSpace: aSpace
 ]
@@ -318,12 +318,12 @@ BlParallelUniverse >> hostClass [
 
 { #category : #accessing }
 BlParallelUniverse >> hostClass: aHostClass [
+
 	hostClass := aHostClass
 ]
 
 { #category : #accessing }
 BlParallelUniverse >> id [
-	<return: #Number>
 	
 	^ id
 ]
@@ -426,6 +426,16 @@ BlParallelUniverse >> postpone: aValuable [
 	postponedActions nextPut: aValuable
 ]
 
+{ #category : #printing }
+BlParallelUniverse >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		nextPutAll: hostClass asString;
+		nextPut: $)
+]
+
 { #category : #pulse }
 BlParallelUniverse >> pulse [
 
@@ -507,5 +517,5 @@ BlParallelUniverse >> tryToRunPostponedActions [
 { #category : #'api - ui process' }
 BlParallelUniverse >> uiProcessDo: aBlock [
 
-	self hostClass uiProcessDo: aBlock
+	hostClass uiProcessDo: aBlock
 ]
