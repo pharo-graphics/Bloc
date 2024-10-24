@@ -149,57 +149,19 @@ BlParallelUniverse >> closeSpace: aSpace [
 { #category : #'private - spaces' }
 BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 
-	| aHost |
-	
 	"If space is not even opened we should do nothing"
-	aSpace isOpened
-		ifFalse: [ ^ self ].
-		
-	"we have to defer the check to the next frame, otherwise the UI loop may be terminated
-	before frame finishes"
+	aSpace isOpened ifFalse: [ ^ self ].
 
-	"we have to store a reference to the original host because it may potentially change.
-	for example assume the following:
-	[[[
-	aSpace close.
-	aSpace host: BlHost pickHost.
-	aSpace show
-	]]]
-
-	the actual termination of the host may happen after a host of the space is changed"
-	aHost := aSpace host.
-	
-	"first remove space itself from space manager, to break any recursions"
-	spaceManager removeSpace: aSpace.
-
-	"then destroy host space"
-	aSpace hasHostSpace
-		ifTrue: [ aSpace host destroyHostSpaceFor: aSpace ].
+	self detachSpaceSynchronously: aSpace.
 
 	"Notify root element that it is no longer in scene graph"
 	aSpace dispatchRemovedFromSceneGraph.
-
-	"Raise an event indicating that the space is no longer attached to a universe"
-	aSpace dispatchEventWithTimestamp: BlSpaceDetachedEvent new.
 	
 	"Send space closed event.
-	Note: a new space may be spawned as a reaction to the event, that is why
-	we send it before stopping host and universe"
+	Note: a new space may be opened as a reaction to the event. That is the reason to defer stopping of host and universe."
 	aSpace dispatchEventWithTimestamp: BlSpaceClosedEvent new.
 
-	self
-		assert: [ aSpace hasHostSpace not ]
-		description: [ 'Host space must not have a host!' ].
-	
-	(spaceManager hasSpaces not and: [ aHost isRunning ])
-		ifTrue: [
-			"we must defer host shutdown to let spaces perform actions as a result
-			of a space closed event"
-			self defer: [
-				"as the last step we may want to stop the host. It may terminate
-				the current process, so we should do it at last"
-				(spaceManager hasSpaces not and: [ aHost isRunning ])
-					ifTrue: [ self stopUniverse ] ] ]
+
 ]
 
 { #category : #'api - spaces' }
@@ -229,51 +191,33 @@ BlParallelUniverse >> detachSpace: aSpace [
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> detachSpaceSynchronously: aSpace [
-	"Detaches a given space from this universe without closing that space."
 
 	| aHost |
-
 	"If space is not even opened we should do nothing"
-	aSpace isOpened
-		ifFalse: [ ^ self ].
-		
-	"we have to defer the check to the next frame, otherwise the UI loop may be terminated
-	before frame finishes"
+	aSpace isOpened ifFalse: [ ^ self ].
 
-	"we have to store a reference to the original host because it may potentially change.
-	for example assume the following:
-	[[[
-	aSpace close.
-	aSpace host: BlHost pickHost.
-	aSpace show
-	]]]
-
-	the actual termination of the host may happen after a host of the space is changed"
+	"We have to defer the check to the next frame, otherwise the UI loop may be terminated before frame finishes. 
+	We have to store a reference to the original host because it may potentially change.
+	Note: the actual termination of the host may happen after a host of the space is changed."
 	aHost := aSpace host.
-	
-	"first remove space itself from space manager, to break any recursions"
+
+	"First, remove the space from space manager, to break any recursion."
 	spaceManager removeSpace: aSpace.
 
-	"then destroy host space"
-	aSpace hasHostSpace
-		ifTrue: [ aSpace host destroyHostSpaceFor: aSpace ].
+	"Then, destroy host space"
+	aSpace hasHostSpace ifTrue: [ aSpace host destroyHostSpaceFor: aSpace ].
 
-	self
-		assert: [ aSpace hasHostSpace not ]
-		description: [ 'Host space must not have a host!' ].
-	
-	(spaceManager hasSpaces not and: [ aHost isRunning ])
-		ifTrue: [
-			"we must defer host shutdown to let spaces perform actions as a result
-			of a space closed event"
-			self defer: [
-				"as the last step we may want to stop the host. It may terminate
-				the current process, so we should do it at last"
-				(spaceManager hasSpaces not and: [ aHost isRunning ])
-					ifTrue: [ self stopUniverse ] ] ].
-	
-	"Raise an event indicating that the space is no longer attached to a universe"
-	aSpace dispatchEventWithTimestamp: BlSpaceDetachedEvent new
+	"Dispatch an event indicating that the space is no longer attached to a universe"
+	aSpace dispatchEventWithTimestamp: BlSpaceDetachedEvent new.
+
+	(spaceManager hasSpaces not and: [ aHost isRunning ]) ifTrue: [
+		"We must defer host shutdown to let spaces perform actions as a result
+		of a space closed event"
+		self defer: [
+			"As the last step, we may want to stop the host. It may terminate
+			the current process, so we should do it at the end."
+			(spaceManager hasSpaces not and: [ aHost isRunning ])
+				ifTrue: [ self stopUniverse ] ] ]
 ]
 
 { #category : #testing }
