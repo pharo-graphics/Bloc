@@ -102,6 +102,12 @@ BlHeadlessHostSpace >> isResizable [
 	^ true
 ]
 
+{ #category : #testing }
+BlHeadlessHostSpace >> isValid [
+	
+	^ true
+]
+
 { #category : #'host space - testing' }
 BlHeadlessHostSpace >> isVisible [
 	"Return true if underlying window is shown, false otherwise.

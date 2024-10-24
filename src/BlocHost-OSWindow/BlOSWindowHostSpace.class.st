@@ -27,11 +27,8 @@ BlOSWindowHostSpace >> center [
 
 { #category : #'host space - displaying' }
 BlOSWindowHostSpace >> close [
-	
-	self isValid
-		ifTrue: [ window destroy ].
-		
-	(BlOSWindowDestroyedSignal new window: window) emit.
+
+	self isValid ifTrue: [ window destroy ].
 
 	window := nil
 ]
@@ -106,9 +103,7 @@ BlOSWindowHostSpace >> initializeWithAttributes: initialAttributes [
 			time: space time
 			keyboardKeyTable: keyboardKeyTable).
 	window startTextInput.
-	window newBlocRenderer.
-
-	(BlOSWindowCreatedSignal new window: window) emit
+	window newBlocRenderer
 ]
 
 { #category : #'dirty areas' }

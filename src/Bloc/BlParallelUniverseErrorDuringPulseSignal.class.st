@@ -3,8 +3,8 @@ I am a signal that is raised when there is an error in the pulse.
 I include in myself the signaledError.
 "
 Class {
-	#name : #BlParallelUniverseErrorDuringPulse,
-	#superclass : #BlParallelUniverseSignal,
+	#name : #BlParallelUniverseErrorDuringPulseSignal,
+	#superclass : #BeaconSignal,
 	#instVars : [
 		'signaledError'
 	],
@@ -12,13 +12,13 @@ Class {
 }
 
 { #category : #accessing }
-BlParallelUniverseErrorDuringPulse >> signaledError [
+BlParallelUniverseErrorDuringPulseSignal >> signaledError [
 
 	^ signaledError
 ]
 
 { #category : #accessing }
-BlParallelUniverseErrorDuringPulse >> signaledError: anObject [
+BlParallelUniverseErrorDuringPulseSignal >> signaledError: anObject [
 
 	signaledError := anObject
 ]
