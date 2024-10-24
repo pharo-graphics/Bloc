@@ -79,20 +79,7 @@ BlParallelUniverse >> attachSpace: aSpace [
 
 	self defer: [ self attachSpaceSynchronously: aSpace ].
 
-	aSpace host isRunning
-		ifFalse: [
-			(BlParallelUniverseHostStartRequestSignal new
-				universeId: self id;
-				spaceId: aSpace id;
-				host: aSpace host class) emit.
-			
-			self startUniverse.
-			
-			(BlParallelUniverseHostStartedSignal new
-				universeId: self id;
-				spaceId: aSpace id;
-				host: aSpace host class;
-				isRunning: aSpace host isRunning) emit ]
+	aSpace host isRunning ifFalse: [ self startUniverse ]
 ]
 
 { #category : #'private - spaces' }
@@ -102,31 +89,11 @@ BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 
 	"First of all we need to add space to the space manager"
 	spaceManager addSpace: aSpace.
-	
-	(BlParallelUniverseSpaceAddedSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
 
 	"then create and show it in a host space"
 	aSpace host createHostSpaceFor: aSpace.
-	
-	(BlParallelUniverseHostSpaceCreatedSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
 
-	aSpace hostSpace show.
-	
-	(BlParallelUniverseHostSpaceShownSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
-
-	(BlParallelUniverseSpaceRootAssignedSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
-	
-	(BlParallelUniverseSpaceDispatchAddedToSceneSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit
+	aSpace hostSpace show
 ]
 
 { #category : #'api - spaces' }
@@ -164,8 +131,6 @@ BlParallelUniverse >> closeSpaces [
 BlParallelUniverse >> defer: aValuable [
 	"Enqueue a valuable from any process to be executed in the UI process at the beginning of the next pulse.
 	It is useful to update the UI states."
-
-	(BlParallelUniverseDeferredActionAddedSignal new universeId: self id) emit.
 
 	deferredActions nextPut: aValuable
 ]
@@ -277,27 +242,9 @@ BlParallelUniverse >> initialize [
 BlParallelUniverse >> openSpace: aSpace [
 	"It should be possible to add a space from the other thread"
 
-	(BlParallelUniverseOpenSpaceRequestSignal new
-		universeId: self id;
-		spaceId: aSpace id;
-		isRunning: aSpace host isRunning) emit.
-
 	self defer: [ self openSpaceSynchronously: aSpace ].
 
-	aSpace host isRunning
-		ifFalse: [
-			(BlParallelUniverseHostStartRequestSignal new
-				universeId: self id;
-				spaceId: aSpace id;
-				host: aSpace host class) emit.
-			
-			self startUniverse.
-			
-			(BlParallelUniverseHostStartedSignal new
-				universeId: self id;
-				spaceId: aSpace id;
-				host: aSpace host class;
-				isRunning: aSpace host isRunning) emit ]
+	aSpace host isRunning ifFalse: [ self startUniverse ]
 ]
 
 { #category : #'private - spaces' }
@@ -356,7 +303,7 @@ BlParallelUniverse >> pulseSynchronously [
 	] 
 		on: Exception 
 		do: [ :e | 
-				(BlParallelUniverseErrorDuringPulse new
+				(BlParallelUniverseErrorDuringPulseSignal new
 					signaledError: e;
 					yourself) emit.
 				e pass ]
@@ -396,25 +343,18 @@ BlParallelUniverse >> stopUniverse [
 BlParallelUniverse >> tryToRunDeferredActions [
 
 	| nextInQueue |
-	(BlParallelUniverseTryToRunDeferredActionsSignal new
-		universeId: self id;
-		yourself) emit.
 
-	[ (nextInQueue := deferredActions nextOrNil) isNotNil ] whileTrue: [ 
-
-		(BlParallelUniverseRunDeferredActionSignal new
-			universeId: self id;
-			yourself) emit.
-
-		nextInQueue value ]
+	[ (nextInQueue := deferredActions nextOrNil) isNotNil ]
+		whileTrue: [ nextInQueue value ]
 ]
 
 { #category : #'deferred message' }
 BlParallelUniverse >> tryToRunPostponedActions [
 
 	| nextInQueue |
-	[ (nextInQueue := postponedActions nextOrNil) isNotNil ] whileTrue: [ 
-		nextInQueue value ]
+	
+	[ (nextInQueue := postponedActions nextOrNil) isNotNil ]
+		whileTrue: [ nextInQueue value ]
 ]
 
 { #category : #'api - ui process' }

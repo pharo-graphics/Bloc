@@ -19,5 +19,5 @@ BlSpaceFrameDrawingPhase >> runOn: aSpace [
 
 	aSpace
 		dispatchTimeEvent: BlSpaceRenderEndEvent
-		during: [ BlSpaceRenderSignal for: aSpace block: [ aSpace render ] ]
+		during: [ aSpace render ]
 ]
