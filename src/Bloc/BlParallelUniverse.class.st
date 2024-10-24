@@ -141,8 +141,7 @@ BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> closeSpace: aSpace [
-	aSpace isOpened
-		ifFalse: [ ^ self ].
+
 	self defer: [ self closeSpaceSynchronously: aSpace ]
 ]
 
@@ -220,11 +219,9 @@ BlParallelUniverse >> defer: aValuable [
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> detachSpace: aSpace [
-	"Detach a given space from this universe without actually closing the space. Space detaching is useful
-	for switching hosts and transferring spaces between universes."
+	"Detach an opened space from this universe without actually closing the space.
+	Space detaching is useful for switching hosts and transferring spaces between universes."
 
-	aSpace isOpened
-		ifFalse: [ ^ self ].
 	self defer: [ self detachSpaceSynchronously: aSpace ]
 ]
 
