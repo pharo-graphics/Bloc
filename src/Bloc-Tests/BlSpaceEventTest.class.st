@@ -4,7 +4,7 @@ I contain examples of space related events
 "
 Class {
 	#name : #BlSpaceEventTest,
-	#superclass : #BlParameterizedHostTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'space'
 	],
