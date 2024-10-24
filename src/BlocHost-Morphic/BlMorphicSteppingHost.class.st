@@ -33,7 +33,7 @@ BlMorphicSteppingHost class >> start [
 { #category : #'private - stepping' }
 BlMorphicSteppingHost class >> step [
 
-	[ (BlParallelUniverse forHost: self) pulse ]
+	[ self universe pulse ]
 		on: Exception
 		do: [ :e |
 			self start.
