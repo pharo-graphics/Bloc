@@ -97,14 +97,8 @@ BlParallelUniverse >> attachSpace: aSpace [
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> attachSpaceSynchronously: aSpace [
-	"Synchronously attach a given space to the Universe assuming that the message is sent from within the UI process
-	of this universe and the space was previously detached from another universe."
 
 	aSpace isOpened ifTrue: [ ^ self ].
-
-	self
-		assert: [ aSpace hasHostSpace not ]
-		description: [ 'Space must not have a host space!' ].
 
 	"First of all we need to add space to the space manager"
 	spaceManager addSpace: aSpace.
@@ -126,14 +120,10 @@ BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 		universeId: self id;
 		spaceId: aSpace id) emit.
 
-	self
-		assert: [ aSpace hasHostSpace ]
-		description: [ 'Space must have a host space!' ].
-
 	(BlParallelUniverseSpaceRootAssignedSignal new
 		universeId: self id;
 		spaceId: aSpace id) emit.
-
+	
 	(BlParallelUniverseSpaceDispatchAddedToSceneSignal new
 		universeId: self id;
 		spaceId: aSpace id) emit
@@ -318,29 +308,7 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 		aSpace hostSpace show.
 		^ self ].
 
-	self
-		assert: [ aSpace hasHostSpace not ]
-		description: [ 'Space must not have a host space!' ].
-
-	"First of all we need to add space to the space manager"
-	spaceManager addSpace: aSpace.
-	
-	(BlParallelUniverseSpaceAddedSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
-
-	"then create and show it in a host space"
-	aSpace host createHostSpaceFor: aSpace.
-	
-	(BlParallelUniverseHostSpaceCreatedSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
-
-	aSpace hostSpace show.
-	
-	(BlParallelUniverseHostSpaceShownSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
+	self attachSpaceSynchronously: aSpace.
 
 	"Note: we should send shown event after everything else is done, because
 	theoretically, that only space could be closed as a reaction to the event"
@@ -349,15 +317,7 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 	"Notify root element that it is now visible to the user"
 	aSpace becomeVisible.
 	
-	(BlParallelUniverseSpaceRootAssignedSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
-	
-	aSpace dispatchAddedToSceneGraph.
-	
-	(BlParallelUniverseSpaceDispatchAddedToSceneSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit
+	aSpace dispatchAddedToSceneGraph
 ]
 
 { #category : #'api - ui process' }
