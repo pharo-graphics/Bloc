@@ -4,7 +4,7 @@ I contain examples of space related events
 "
 Class {
 	#name : #BlSpaceEventTest,
-	#superclass : #TestCase,
+	#superclass : #BlParameterizedHostTest,
 	#instVars : [
 		'space'
 	],
@@ -38,29 +38,6 @@ BlSpaceEventTest >> testSpaceClosed [
 	space close.
 	self waitPulses.
 	self assert: count equals: 1
-]
-
-{ #category : #tests }
-BlSpaceEventTest >> testSpaceDestroyed [
-
-	| events |
-	events := OrderedCollection new.
-
-	space
-		addEventHandlerOn: BlSpaceClosedEvent
-		do: [ events add: #closed ].
-	space
-		addEventHandlerOn: BlSpaceDestroyedEvent
-		do: [ events add: #destroyed ].
-
-	space show.
-	self waitPulses.
-	self assert: events size equals: 0.
-
-	space close.
-	self waitPulses.
-	self assert: events size equals: 2.
-	self assert: events asArray equals: #( closed destroyed )
 ]
 
 { #category : #tests }

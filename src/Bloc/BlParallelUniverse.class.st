@@ -199,12 +199,7 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 				"as the last step we may want to stop the host. It may terminate
 				the current process, so we should do it at last"
 				(spaceManager hasSpaces not and: [ aHost isRunning ])
-					ifTrue: [ self stopUniverse ] ] ].
-
-	"Raise an event indicating that all normal event for closing a space have been completed.
-	This event is used by the debugger to stop the UI process. Users should not normally rely
-	on this event, as there is no guarantee that the process will not be terminated."
-	aSpace dispatchEventWithTimestamp: BlSpaceDestroyedEvent new
+					ifTrue: [ self stopUniverse ] ] ]
 ]
 
 { #category : #'api - spaces' }
