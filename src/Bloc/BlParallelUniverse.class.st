@@ -5,16 +5,13 @@ I am a parallel Universe. There can exist multiple parallel universes
 Class {
 	#name : #BlParallelUniverse,
 	#superclass : #Object,
-	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [
-		'id',
 		'deferredActions',
 		'postponedActions',
 		'hostClass',
 		'spaceManager'
 	],
 	#classVars : [
-		'UniqueIdGenerator',
 		'Universes',
 		'UniversesMutex'
 	],
@@ -53,9 +50,9 @@ BlParallelUniverse class >> forHost: aHostClass [
 
 { #category : #'class initialization' }
 BlParallelUniverse class >> initialize [
+
 	Universes := #().
 	UniversesMutex := Mutex new.
-	UniqueIdGenerator := BlUniqueIdGenerator new.
 	
 	SessionManager default registerGuiClassNamed: self name
 ]
@@ -220,18 +217,11 @@ BlParallelUniverse >> hostClass: aHostClass [
 	hostClass := aHostClass
 ]
 
-{ #category : #accessing }
-BlParallelUniverse >> id [
-	
-	^ id
-]
-
 { #category : #initialization }
 BlParallelUniverse >> initialize [
 
 	super initialize.
 
-	id := UniqueIdGenerator generateUniqueId.
 	spaceManager := BlSpaceManager new.
 	hostClass := BlHeadlessHost.
 	deferredActions := WaitfreeQueue new.

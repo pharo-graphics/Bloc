@@ -22,7 +22,6 @@ Class {
 	#traits : 'TBlEventTarget + TBlSpaceProperties + TBlDebug',
 	#classTraits : 'TBlEventTarget classTrait + TBlSpaceProperties classTrait + TBlDebug classTrait',
 	#instVars : [
-		'id',
 		'host',
 		'hostSpace',
 		'extent',
@@ -56,9 +55,6 @@ Class {
 		'userData',
 		'previousVisibleStatus'
 	],
-	#classVars : [
-		'UniqueIdGenerator'
-	],
 	#category : #'Bloc-Space'
 }
 
@@ -81,11 +77,6 @@ BlSpace class >> extractRoots: aSetOfElements [
 							current := nil ]
 						ifFalse: [ current := current parent ] ] ].
 	^ roots
-]
-
-{ #category : #'class initialization' }
-BlSpace class >> initialize [
-	UniqueIdGenerator := BlUniqueIdGenerator new
 ]
 
 { #category : #'debug - simulation' }
@@ -509,14 +500,6 @@ BlSpace class >> simulateTextInput: aString on: aBlElement [
 				 text: aString;
 				 yourself)
 		on: aBlElement
-]
-
-{ #category : #'class initialization' }
-BlSpace class >> spaceWithId: aSpaceId do: aBlock [
-	^ self allSubInstances
-		detect: [ :eachSpace | eachSpace id = aSpaceId ]
-		ifFound: aBlock
-		ifNone: [ nil ]
 ]
 
 { #category : #accessing }
@@ -1184,19 +1167,10 @@ BlSpace >> icon: aStencil [
 	self fireEvent: (BlSpaceIconChangedEvent new iconStencil: aStencil)
 ]
 
-{ #category : #accessing }
-BlSpace >> id [
-	<return: #Number>
-	
-	^ id
-]
-
 { #category : #initialization }
 BlSpace >> initialize [
 
 	super initialize.
-
-	id := UniqueIdGenerator generateUniqueId.
 
 	host := BlHost pickHost.
 	pulseRequested := true.
