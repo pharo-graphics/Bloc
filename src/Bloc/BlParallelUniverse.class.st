@@ -9,7 +9,7 @@ Class {
 		'deferredActions',
 		'postponedActions',
 		'hostClass',
-		'spaceManager'
+		'spaces'
 	],
 	#classVars : [
 		'Universes',
@@ -85,7 +85,7 @@ BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 	aSpace isOpened ifTrue: [ ^ self ].
 
 	"First of all we need to add space to the space manager"
-	spaceManager addSpace: aSpace.
+	spaces add: aSpace.
 
 	"then create and show it in a host space"
 	aSpace host createHostSpaceFor: aSpace.
@@ -154,7 +154,7 @@ BlParallelUniverse >> detachSpaceSynchronously: aSpace [
 	aHost := aSpace host.
 
 	"First, remove the space from space manager, to break any recursion."
-	spaceManager removeSpace: aSpace.
+	spaces remove: aSpace.
 
 	"Then, destroy host space"
 	aSpace hasHostSpace ifTrue: [ aSpace host destroyHostSpaceFor: aSpace ].
@@ -162,14 +162,14 @@ BlParallelUniverse >> detachSpaceSynchronously: aSpace [
 	"Dispatch an event indicating that the space is no longer attached to a universe"
 	aSpace dispatchEventWithTimestamp: BlSpaceDetachedEvent new.
 
-	(spaceManager hasSpaces not and: [ aHost isRunning ]) ifTrue: [
+	(spaces isEmpty and: [ aHost isRunning ]) ifTrue: [
 		"We must defer host shutdown to let spaces perform actions as a result
 		of a space closed event"
 		self defer: [
 			"As the last step, we may want to stop the host. It may terminate
 			the current process, so we should do it at the end."
-			(spaceManager hasSpaces not and: [ aHost isRunning ])
-				ifTrue: [ self stopUniverse ] ] ]
+			(spaces isEmpty and: [ aHost isRunning ]) ifTrue: [
+				self stopUniverse ] ] ]
 ]
 
 { #category : #testing }
@@ -188,14 +188,14 @@ BlParallelUniverse >> hasPostponedActions [
 BlParallelUniverse >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"
 	
-	^ spaceManager hasSpace: aSpace
+	^ spaces includes: aSpace
 ]
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> hasSpaces [
 	"Return true if there are registered spaces, false otherwise"
 
-	^ spaceManager hasSpaces
+	^ spaces isNotEmpty
 ]
 
 { #category : #'api - ui process' }
@@ -222,7 +222,7 @@ BlParallelUniverse >> initialize [
 
 	super initialize.
 
-	spaceManager := BlSpaceManager new.
+	spaces := OrderedCollection new.
 	hostClass := BlHeadlessHost.
 	deferredActions := WaitfreeQueue new.
 	postponedActions := WaitfreeQueue new
@@ -288,7 +288,7 @@ BlParallelUniverse >> pulseSynchronously [
 
 	[
 		self tryToRunDeferredActions.
-		spaceManager do: [ :eachSpace | eachSpace pulse ].
+		spaces do: [ :eachSpace | eachSpace pulse ].
 		self tryToRunPostponedActions
 	] 
 		on: Exception 
@@ -308,7 +308,7 @@ BlParallelUniverse >> snapshot: save andQuit: quit [
 { #category : #'api - spaces' }
 BlParallelUniverse >> spaces [
 
-	^ spaceManager spaces
+	^ spaces
 ]
 
 { #category : #'private - lifecycle' }
@@ -317,7 +317,7 @@ BlParallelUniverse >> startUniverse [
 	I am called outside of the UI loop (there is no UI loop yet)"
 
 	hostClass start.
-	spaceManager start
+	spaces do: [ :aSpace | aSpace ensureWindowOpen ]
 ]
 
 { #category : #'private - lifecycle' }
@@ -326,7 +326,7 @@ BlParallelUniverse >> stopUniverse [
 	I am called from the UI loop"
 	
 	hostClass stop.
-	spaceManager stop
+	spaces do: [ :anSpace | anSpace rememberVisibleStatus ]
 ]
 
 { #category : #'deferred message' }
