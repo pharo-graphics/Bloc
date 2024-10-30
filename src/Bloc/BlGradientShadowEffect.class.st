@@ -14,6 +14,12 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlGradientShadowEffect class >> color: aColor offset: anOffset width: aNumber [
+
+	^ self color: aColor width: aNumber offset: anOffset
+]
+
+{ #category : #'instance creation' }
 BlGradientShadowEffect class >> color: aColor width: aNumber offset: anOffset [
 
 	^ self basicNew
