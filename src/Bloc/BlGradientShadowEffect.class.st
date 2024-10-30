@@ -7,9 +7,6 @@ Class {
 		'shadowSurfaceElementHash',
 		'extraGap'
 	],
-	#classVars : [
-		'GaussK'
-	],
 	#category : #'Bloc-Effect'
 }
 
@@ -25,12 +22,6 @@ BlGradientShadowEffect class >> color: aColor width: aNumber offset: anOffset [
 	^ self basicNew
 		  initializeColor: aColor width: aNumber offset: anOffset;
 		  yourself
-]
-
-{ #category : #'class initialization' }
-BlGradientShadowEffect class >> initialize [
-
-	GaussK := 1.0 / (2.0 * Float pi) sqrt
 ]
 
 { #category : #private }

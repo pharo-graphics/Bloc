@@ -22,18 +22,16 @@ BlGradientShadowEffect >> aeDrawBelow: aBlElement on: aeCanvas [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlGradientShadowEffect >> gaussAt: x mean: mu stdev: sigma [
+BlGradientShadowEffect >> alphaBellFunctionAt: x [
+	"Answer the evaluation of a number in a Gaussian bell function with mean=0.0 and stdev=1.0, whose peak a 0.0 results in 1.0."
 
-	| exponent |
-	exponent := -0.5 * ((x - mu) / sigma) squared.
-	
-	^ (GaussK / sigma) * exponent exp
+	^ (x squared * -0.5) exp
 ]
 
 { #category : #'*Bloc-Alexandrie' }
 BlGradientShadowEffect >> setShadowForCircle: radius [ 
 
-	| aShadowContext aGradient shadowCenter rampSize fix |
+	| aShadowContext aGradient shadowCenter rampSize |
 	shadowSurface :=
 		AeCairoImageSurface
 			extent: ((radius + extraGap) * 2) asInteger asPoint
@@ -50,7 +48,8 @@ BlGradientShadowEffect >> setShadowForCircle: radius [
 			outerCenter: shadowCenter
 			outerRadius: radius + extraGap "(width*1.5)".
 
-	"Start by full alpha channel. Other channel doesn't matter as it's an a8 surface"
+	"Start by full alpha channel. RGB channels don't matter
+	as we are on an a8 surface"
 	aGradient
 		addStopAt: 0.0
 		r: 1.0
@@ -59,16 +58,15 @@ BlGradientShadowEffect >> setShadowForCircle: radius [
 		a: 1.0.
 
 	"Interpolate alpha channel in base of Gaussian function"
-	fix := self gaussAt: 0 mean: 0.0 stdev: 1.0.
 	1 to: rampSize - 1 do: [ :i |
 		| g |
-		g := (i/rampSize) asFloat.
+		g := (i / rampSize) asFloat.
 		aGradient
 			addStopAt: g
 			r: 1.0
 			g: 1.0
 			b: 1.0
-			a: (self gaussAt: g * 4.0 mean: 0.0 stdev: 1.0) / fix ].
+			a: (self alphaBellFunctionAt: g * 4.0) ].
 
 	"End with zero alpha channel"
 	aGradient
