@@ -137,47 +137,42 @@ BlTaskQueue >> requeue: aBlTask [
 BlTaskQueue >> runOn: aSpace [
 
 	| theTasks |
-	self critical: [
-		"We store reference to the tasks Array because it is possible
+	self critical: [ "We store reference to the tasks Array because it is possible
 		that a random task is removed while enumerating a collection.
 		This switch can be made atomic without the lock, but is here since
 		the tasks shouldn't be updated while another process has the lock."
-
 		theTasks := tasks.
 		tasks := nil.
 		"Mark all tasks as pending"
 		theTasks ifNotNil: [
-			theTasks do: [ :task | task setPendingExecution ] ] ].
+			theTasks do: [ :task | task setPendingExecution ] ].
 
-	"Since we have an immutable reference to original array, there is
-	need to execute task within a lock."
-	theTasks ifNotNil: [
-		theTasks do: [ :aTask |
-			(aTask
-				setExecuting;
-				run;
-				requeueTaskAfterExecution)
+		"Since we have an immutable reference to original array, there is
+		need to execute task within a lock."
+		theTasks ifNotNil: [
+			theTasks do: [ :aTask |
+				(aTask
+					 setExecuting;
+					 run;
+					 requeueTaskAfterExecution)
 					ifTrue: [ self requeue: aTask ]
-					ifFalse: [ aTask setComplete ] ] ]
+					ifFalse: [ aTask setComplete ] ] ] ]
 ]
 
 { #category : #accessing }
 BlTaskQueue >> size [
 
-	^ tasks
-		ifNil: [ 0 ]
-		ifNotNil: [ tasks size ]
+	tasks ifNil: [ ^ 0 ].
+	^ self critical: [ tasks ifNil: [ 0 ] ifNotNil: [ tasks size ] ]
 ]
 
 { #category : #'api - accessing' }
 BlTaskQueue >> tasks [
 	"Return a new collection instance holding all my tasks"
 
-	tasks ifNil: [ ^ #() ].
+	tasks ifNil: [ ^ #(  ) ].
 
 	"tasks are an OrderedCollection (or nil), thus converting to anArray is guaranteed to answer a copy"
 	^ self critical: [
-		tasks
-			ifNil: [ #() ]
-			ifNotNil: [ tasks asArray ] ]
+		  tasks ifNil: [ #(  ) ] ifNotNil: [ tasks asArray ] ]
 ]
