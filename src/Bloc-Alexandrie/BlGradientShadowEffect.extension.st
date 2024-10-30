@@ -46,7 +46,7 @@ BlGradientShadowEffect >> rampSize: rampSize stopsAndAlphasDo: aBlock [
 { #category : #'*Bloc-Alexandrie' }
 BlGradientShadowEffect >> setShadowForCircle: radius [ 
 
-	| aShadowContext aGradient shadowCenter rampSize |
+	| aShadowContext aGradient shadowCenter |
 	shadowSurface :=
 		AeCairoImageSurface
 			extent: ((radius + extraGap) * 2) asInteger asPoint
@@ -54,42 +54,25 @@ BlGradientShadowEffect >> setShadowForCircle: radius [
 	aShadowContext := shadowSurface newContext.
 
 	shadowCenter := (radius + extraGap) asPoint.
-	rampSize := 10.
 
 	aGradient :=
 		AeCairoRadialGradientPattern
 			innerCenter: shadowCenter
-			innerRadius: radius - (width/1.5)
+			innerRadius: ((radius - (width / 1.5)) max: 0.0)
 			outerCenter: shadowCenter
-			outerRadius: radius + extraGap "(width*1.5)".
+			outerRadius: ((radius + extraGap) max: 0.0).
 
-	"Start by full alpha channel. RGB channels don't matter
+	"Define all stops of alpha channel. RGB channels don't matter
 	as we are on an a8 surface"
-	aGradient
-		addStopAt: 0.0
-		r: 1.0
-		g: 1.0
-		b: 1.0
-		a: 1.0.
-
-	"Interpolate alpha channel in base of Gaussian function"
-	1 to: rampSize - 1 do: [ :i |
-		| g |
-		g := (i / rampSize) asFloat.
-		aGradient
-			addStopAt: g
-			r: 1.0
-			g: 1.0
-			b: 1.0
-			a: (self alphaBellFunctionAt: g * 4.0) ].
-
-	"End with zero alpha channel"
-	aGradient
-		addStopAt: 1.0
-		r: 1.0
-		g: 1.0
-		b: 1.0
-		a: 0.0.
+	self
+		rampSize: width
+		stopsAndAlphasDo: [ :eachStop :eachAlpha |
+			aGradient
+				addStopAt: eachStop
+				r: 1.0
+				g: 1.0
+				b: 1.0
+				a: eachAlpha ].
 
 	aShadowContext
 		source: aGradient;
