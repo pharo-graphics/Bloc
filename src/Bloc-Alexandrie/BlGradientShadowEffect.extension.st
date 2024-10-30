@@ -29,6 +29,21 @@ BlGradientShadowEffect >> alphaBellFunctionAt: x [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
+BlGradientShadowEffect >> rampSize: rampSize stopsAndAlphasDo: aBlock [
+
+	aBlock value: 0.0 value: 1.0.
+
+	1 to: rampSize - 2 do: [ :i |
+		| stop |
+		stop := i / (rampSize - 1) asFloat.
+		aBlock
+			value: stop
+			value: (self alphaBellFunctionAt: stop * 4.0) ].
+
+	aBlock value: 1.0 value: 0.0
+]
+
+{ #category : #'*Bloc-Alexandrie' }
 BlGradientShadowEffect >> setShadowForCircle: radius [ 
 
 	| aShadowContext aGradient shadowCenter rampSize |
