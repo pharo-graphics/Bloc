@@ -922,20 +922,24 @@ BlSpace >> findMousePickTargetFromEvent: anEvent [
 	The coordinate point is given in space coordinates.
 	I may return nil if no such child is found and if I can not be event target either"
 
-	<return: #BlElement or: nil>
-	(self findMouseEventTargetAt: anEvent position) ifNotNil: [ :found | " test found because if the result is the root then it means that no element has been found "
-		found ~~ self root ifTrue: [ " dispatch the mouse outside event to all alements of the scene graph "
+	| pickOutsideEvent |
+	(self findMouseEventTargetAt: anEvent position) ifNotNil: [ :found | 
+		" test found because if the result is the root then it means that no element has been found "
+		found ~~ self root ifTrue: [ 
+			" dispatch the mouse outside event to all alements of the scene graph "
 			self mouseProcessor isDragging ifFalse: [
-				self dispatchMousePickedOutside:
-					((anEvent newCopyFor: found) asMouseOutsideEvent
-						 lastMouseDownEvent: self mouseProcessor lastMouseDownEvent;
-						 yourself) ].
+				pickOutsideEvent := (anEvent newCopyFor: found)
+					                    asMouseOutsideEvent.
+				pickOutsideEvent lastMouseDownEvent:
+					self mouseProcessor lastMouseDownEvent.
+				self dispatchMousePickedOutside: pickOutsideEvent ].
 			^ found ] ].
 	" no element found at all: all elements receive a outside event"
 	self mouseProcessor isDragging ifFalse: [
-		self dispatchMousePickedOutside: (anEvent clone asMouseOutsideEvent
-				 lastMouseDownEvent: self mouseProcessor lastMouseDownEvent;
-				 yourself) ].
+		pickOutsideEvent := anEvent clone asMouseOutsideEvent.
+		pickOutsideEvent lastMouseDownEvent:
+			self mouseProcessor lastMouseDownEvent.
+		self dispatchMousePickedOutside: pickOutsideEvent ].
 	^ nil
 ]
 
