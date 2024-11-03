@@ -35,9 +35,10 @@ BlMouseProcessor >> canBeClickAbortedEvent: aMouseUpEvent [
 { #category : #'event testing' }
 BlMouseProcessor >> canBeClickEvent: aMouseUpEvent [
 
-	^ dndInProgress not and: [
-		  lastMouseDownEvent isNotNil and: [
-			  aMouseUpEvent target = lastMouseDownEvent target ] ]
+	^ aMouseUpEvent isConsumed not and: [
+		  dndInProgress not and: [
+			  lastMouseDownEvent isNotNil and: [
+				  aMouseUpEvent target = lastMouseDownEvent target ] ] ]
 ]
 
 { #category : #'event testing' }
