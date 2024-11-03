@@ -296,7 +296,9 @@ BlMouseProcessor >> handleMouseDown: aMouseDownEvent [
 	self pressedButtons add: aMouseDownEvent button.
 
 	aTargetElement := self processPicking: aMouseDownEvent.
-
+	" The result of #processPicking: can be nil in case of a consumed mousePickOutside event "
+	aTargetElement ifNil: [ ^ self ].
+	
 	aMouseDownEvent target: aTargetElement.
 
 	self fireEvent: aMouseDownEvent.
@@ -379,6 +381,9 @@ BlMouseProcessor >> handleMouseUp: aMouseUpEvent [
 	
 	"Note that the element that receives mouseup can be different from the element that received mousedown (lastMouseDownEvent)"
 	aTargetElement := self processPicking: aMouseUpEvent.
+	" The result of #processPicking: can be nil in case of a consumed mousePickOutside event "
+	aTargetElement ifNil: [ ^ self ].
+
 	aMouseUpEvent target: aTargetElement.
 
 	"depending on whether drag and drop is in process handle mouse up either
@@ -585,18 +590,18 @@ BlMouseProcessor >> processMouseUp: aMouseUpEvent [
 BlMouseProcessor >> processPicking: aMouseEvent [
 	" return the element at event position "
 
-	| aTargetElement |
 	" check if the last overtarget is still valid "
 	self checkLastOverTarget.
 
-	"if the last over target contains the point we can start picking from it (speed-up picking a lot)"
+	"<old version kept for the record>
+	if the last over target contains the point we can start picking from it (speed-up picking a lot)"
 	"aTargetElement := (aMouseEvent canFindTargetFrom: lastOverTarget)
 		                  ifTrue: [ aMouseEvent findTargetFrom: lastOverTarget ]
-		                  ifFalse: [ aMouseEvent findTargetFrom: self space ]."
-	self flag: 'always pick element starting from space because of menu'.
-	aTargetElement := aMouseEvent findTargetFrom: self space.
-	"we have to ensure that aTarget is not nil"
-	^ aTargetElement ifNil: [ aTargetElement := self space root ]
+		                  ifFalse: [ aMouseEvent findTargetFrom: self space ].
+	</>"
+	" always pick element starting from space because of menu "
+	" notice that the result can be nil in case of a consumed mousePickOutside event "
+	^ aMouseEvent findTargetFrom: self space
 ]
 
 { #category : #'initialize-release' }

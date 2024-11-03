@@ -13,5 +13,6 @@ BlMousePickEvent >> asMouseOutsideEvent [
 { #category : #processing }
 BlMousePickEvent >> findTargetFrom: aSpaceOrElement [
 
-	^ (aSpaceOrElement findMousePickTargetFromEvent: self) ifNil: [ aSpaceOrElement space root ]
+	" The result can be nil in case of a consumed mousePickOutside event "
+	^ aSpaceOrElement findMousePickTargetFromEvent: self
 ]

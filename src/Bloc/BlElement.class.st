@@ -1309,7 +1309,12 @@ BlElement >> dispatchMousePickedOutside: aMouseOutsideEvent [
 
 	aMouseOutsideEvent isConsumed ifTrue: [ ^ self ].
 	self children do: [ :aChildElement |
-		aChildElement dispatchMousePickedOutside: aMouseOutsideEvent clone ].
+		| event |
+		event := aMouseOutsideEvent clone.
+		aChildElement dispatchMousePickedOutside: event.
+		event isConsumed ifTrue: [
+			aMouseOutsideEvent consume.
+			^ self ] ].
 	" Am I allowed to manage mouse pick outside ?"
 	self shouldHandleMousePickOutsideEvent ifFalse: [ ^ self ].
 	" does my bounds contains the event position, if so, the picked point is inside myself "

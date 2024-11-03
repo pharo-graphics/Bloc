@@ -932,15 +932,17 @@ BlSpace >> findMousePickTargetFromEvent: anEvent [
 					                    asMouseOutsideEvent.
 				pickOutsideEvent lastMouseDownEvent:
 					self mouseProcessor lastMouseDownEvent.
-				self dispatchMousePickedOutside: pickOutsideEvent ].
+				self dispatchMousePickedOutside: pickOutsideEvent.
+				pickOutsideEvent isConsumed ifTrue: [ ^ nil ] ].
 			^ found ] ].
 	" no element found at all: all elements receive a outside event"
 	self mouseProcessor isDragging ifFalse: [
 		pickOutsideEvent := anEvent clone asMouseOutsideEvent.
 		pickOutsideEvent lastMouseDownEvent:
 			self mouseProcessor lastMouseDownEvent.
-		self dispatchMousePickedOutside: pickOutsideEvent ].
-	^ nil
+		self dispatchMousePickedOutside: pickOutsideEvent.
+		pickOutsideEvent isConsumed ifTrue: [ ^ nil ] ].
+	^ self root
 ]
 
 { #category : #'focus managing' }
