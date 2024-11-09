@@ -36,15 +36,6 @@ BlMouseDownEvent class >> secondary [
 	^ self button: BlMouseButton secondary
 ]
 
-{ #category : #converting }
-BlMouseDownEvent >> asMouseOutsideEvent [
-
-	^ BlMouseDownOutsideEvent new
-		  originalEvent: self;
-		  canBePropagated: false;
-		  yourself
-]
-
 { #category : #testing }
 BlMouseDownEvent >> isMouseDown [
 	^ true
