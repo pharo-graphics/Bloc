@@ -171,7 +171,8 @@ BlMouseEvent >> delta: aPoint [
 { #category : #processing }
 BlMouseEvent >> findTargetFrom: aSpaceOrElement [
 
-	^ (aSpaceOrElement findMouseEventTargetAt: self position) ifNil: [ aSpaceOrElement space root ]
+	^ (aSpaceOrElement findMouseEventTargetAt: self position) ifNil: [
+		  aSpaceOrElement space root ]
 ]
 
 { #category : #'action dispatching' }

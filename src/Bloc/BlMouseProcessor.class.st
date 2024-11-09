@@ -296,10 +296,7 @@ BlMouseProcessor >> handleMouseDown: aMouseDownEvent [
 	"First we need to register a pressed button"
 	self pressedButtons add: aMouseDownEvent button.
 
-	aTargetElement := self processPicking: aMouseDownEvent.
-	" The result of #processPicking: can be nil in case of a consumed mousePickOutside event "
-	aTargetElement ifNil: [ ^ self ].
-	
+	aTargetElement := self processPicking: aMouseDownEvent.	
 	aMouseDownEvent target: aTargetElement.
 
 	self fireEvent: aMouseDownEvent.
@@ -382,9 +379,6 @@ BlMouseProcessor >> handleMouseUp: aMouseUpEvent [
 	
 	"Note that the element that receives mouseup can be different from the element that received mousedown (lastMouseDownEvent)"
 	aTargetElement := self processPicking: aMouseUpEvent.
-	" The result of #processPicking: can be nil in case of a consumed mousePickOutside event "
-	aTargetElement ifNil: [ ^ self ].
-
 	aMouseUpEvent target: aTargetElement.
 
 	"depending on whether drag and drop is in process handle mouse up either
@@ -471,7 +465,6 @@ BlMouseProcessor >> preProcess: aMouseEvent [
 	| aTarget |
 	
 	aTarget := self processPicking: aMouseEvent.
-
 	aMouseEvent target: aTarget.
 
 	"mouse move is only fired when no dnd is in progress (else it is a drag event)"
@@ -601,7 +594,6 @@ BlMouseProcessor >> processPicking: aMouseEvent [
 		                  ifFalse: [ aMouseEvent findTargetFrom: self space ].
 	</>"
 	" always pick element starting from space because of menu "
-	" notice that the result can be nil in case of a consumed mousePickOutside event "
 	^ aMouseEvent findTargetFrom: self space
 ]
 
