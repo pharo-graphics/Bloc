@@ -654,12 +654,6 @@ BlSpace >> dispatchEventWithTimestamp: aBlEvent [
 	self dispatchEvent: aBlEvent
 ]
 
-{ #category : #'event handling' }
-BlSpace >> dispatchMousePickedOutside: aMouseOutsideEvent [
-
-	self root dispatchMousePickedOutside: aMouseOutsideEvent
-]
-
 { #category : #'children dispatching' }
 BlSpace >> dispatchRemovedFromSceneGraph [
 	"Sent after topFrame was removed from scene graph.
