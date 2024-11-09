@@ -654,12 +654,6 @@ BlSpace >> dispatchEventWithTimestamp: aBlEvent [
 	self dispatchEvent: aBlEvent
 ]
 
-{ #category : #'event handling' }
-BlSpace >> dispatchMousePickedOutside: aMouseOutsideEvent [
-
-	self root dispatchMousePickedOutside: aMouseOutsideEvent
-]
-
 { #category : #'children dispatching' }
 BlSpace >> dispatchRemovedFromSceneGraph [
 	"Sent after topFrame was removed from scene graph.
@@ -914,29 +908,6 @@ BlSpace >> findMouseEventTargetAt: aPoint [
 
 	<return: #BlElement or: nil>
 	^ self root findMouseEventTargetAt: aPoint
-]
-
-{ #category : #'event handling' }
-BlSpace >> findMousePickTargetFromEvent: anEvent [
-	"Return the deepest child element among all my children or myself that may be a target for mouse event at provided location.
-	The coordinate point is given in space coordinates.
-	I may return nil if no such child is found and if I can not be event target either"
-
-	<return: #BlElement or: nil>
-	(self findMouseEventTargetAt: anEvent position) ifNotNil: [ :found | " test found because if the result is the root then it means that no element has been found "
-		found ~~ self root ifTrue: [ " dispatch the mouse outside event to all alements of the scene graph "
-			self mouseProcessor isDragging ifFalse: [
-				self dispatchMousePickedOutside:
-					((anEvent newCopyFor: found) asMouseOutsideEvent
-						 lastMouseDownEvent: self mouseProcessor lastMouseDownEvent;
-						 yourself) ].
-			^ found ] ].
-	" no element found at all: all elements receive a outside event"
-	self mouseProcessor isDragging ifFalse: [
-		self dispatchMousePickedOutside: (anEvent clone asMouseOutsideEvent
-				 lastMouseDownEvent: self mouseProcessor lastMouseDownEvent;
-				 yourself) ].
-	^ nil
 ]
 
 { #category : #'focus managing' }

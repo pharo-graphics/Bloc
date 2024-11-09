@@ -20,16 +20,16 @@ BlMousePickOutsideEvent class >> enableIn: anEventDispatcher [
 	anEventDispatcher enableMousePickedOutside 
 ]
 
+{ #category : #testing }
+BlMousePickOutsideEvent class >> isDeprecated [ 
+
+	^ true
+]
+
 { #category : #'api - enable / disable' }
 BlMousePickOutsideEvent class >> wantedIn: anEventDispatcher [
 
 	^ anEventDispatcher wantsMousePickedOutside
-]
-
-{ #category : #converting }
-BlMousePickOutsideEvent >> asMouseOutsideEvent [
-
-	^ self 
 ]
 
 { #category : #accessing }
