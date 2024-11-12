@@ -20,7 +20,6 @@ BlDragDelegate >> cancel: aDraggedContainer at: aPoint in: aParentElement [
 	| aCancelAnimation |
 	self items ifEmpty: [ ^ self ].
 
-	"self halt."
 	self items do: [ :eachItem |
 		| aPreviewElement |
 		aPreviewElement := eachItem sourceElement.
@@ -33,10 +32,8 @@ BlDragDelegate >> cancel: aDraggedContainer at: aPoint in: aParentElement [
 			                     | aPreviewBounds aSourceBounds aPreviewElement |
 			                     aPreviewElement := aDragItem sourceElement.
 
-			                     aPreviewBounds := aPreviewElement bounds
-				                                       inSpace.
-			                     aSourceBounds := aDragItem sourceElement
-				                                      bounds inSpace.
+			                     aPreviewBounds := aPreviewElement bounds inSpace.
+			                     aSourceBounds := aDragItem sourceElement bounds inSpace.
 
 			                     BlNumberTransition new
 				                     from: aPoint;
@@ -50,11 +47,6 @@ BlDragDelegate >> cancel: aDraggedContainer at: aPoint in: aParentElement [
 				                     ]).
 
 	parent addAnimation: aCancelAnimation
-
-	"didn't include element state in my code picking"
-	"self items do: [ :each |
-		each sourceElement states
-			removeState: BlElementDraggingState uniqueInstance ]"
 ]
 
 { #category : #'drag and drop' }
@@ -88,11 +80,13 @@ BlDragDelegate >> dragArea: anObject [
 
 { #category : #testing }
 BlDragDelegate >> hasDragArea [
+
 	^ dragArea notNil
 ]
 
 { #category : #initialization }
 BlDragDelegate >> initialize [
+
 	super initialize.
 
 	items := { }
@@ -114,11 +108,10 @@ BlDragDelegate >> items: aCollectionOfDragItems [
 BlDragDelegate >> lift [
 	"Lift previews at a given point in space coordinates"
 
-	<return: #BlElement>
 	| aContainer |
 	aContainer := BlElement new
 		              layout: BlFrameLayout new;
-		clipChildren: false;
+		              clipChildren: false;
 		              "beInSingleCompositionLayer;"
 		              constraintsDo: [ :c |
 			              c ignoreByLayout.
@@ -130,11 +123,6 @@ BlDragDelegate >> lift [
 			 aDragItem sourceElement removeFromParent.
 			 aDragItem sourceElement ]).
 
-	"didn't include element state in my code picking"
-	"self items do: [ :each |
-		each sourceElement states
-			addState: BlElementDraggingState uniqueInstance ]."
-
 	^ aContainer
 ]
 
@@ -145,9 +133,9 @@ BlDragDelegate >> offset [
 ]
 
 { #category : #accessing }
-BlDragDelegate >> offset: anObject [
+BlDragDelegate >> offset: aPoint [
 
-	offset := anObject
+	offset := aPoint
 ]
 
 { #category : #accessing }
@@ -157,7 +145,7 @@ BlDragDelegate >> parent [
 ]
 
 { #category : #accessing }
-BlDragDelegate >> parent: anObject [
+BlDragDelegate >> parent: anElement [
 
-	parent := anObject
+	parent := anElement
 ]
