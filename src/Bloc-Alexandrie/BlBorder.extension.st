@@ -2,8 +2,8 @@ Extension { #name : #BlBorder }
 
 { #category : #'*Bloc-Alexandrie' }
 BlBorder >> aeApplyTo: aeCanvas element: aBlElement [
-	"No need to set any parameter as there is no border"
 
+	"No need to set any parameter as there is no border"
 	self isTransparent ifTrue: [ ^ aeCanvas setBorderOff ].
 
 	"This will double-dispatch with the geometry, and 
