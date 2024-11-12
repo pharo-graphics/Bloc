@@ -21,7 +21,7 @@ BlBorder >> aeApplyTo: aeCanvas element: aBlElement [
 
 		aeCanvas
 			setDashes: style dashArray
-			offset: style dashOffset ].
+			offset: style dashOffset.
 
 		aBlElement geometry hasJoins ifTrue: [
 			style lineJoin aeApplyTo: aeCanvas style: style ].
