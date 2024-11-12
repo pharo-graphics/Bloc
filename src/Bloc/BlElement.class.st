@@ -1301,23 +1301,6 @@ BlElement >> dispatchLayoutDone [
 	self children do: [ :aChildElement | aChildElement dispatchLayoutDone ]
 ]
 
-{ #category : #layout }
-BlElement >> dispatchMousePickedOutside: aMouseOutsideEvent [
-	"
-	I am triggered by the space as soon as a mouse down or up occurs.
-	I am recursively dispatched top-down through the scene graph and the whole composition tree of the elements"
-
-	aMouseOutsideEvent isConsumed ifTrue: [ ^ self ].
-	self children do: [ :aChildElement |
-		aChildElement dispatchMousePickedOutside: aMouseOutsideEvent clone ].
-	" Am I allowed to manage mouse pick outside ?"
-	self shouldHandleMousePickOutsideEvent ifFalse: [ ^ self ].
-	" does my bounds contains the event position, if so, the picked point is inside myself "
-	(self containsGlobalPoint: aMouseOutsideEvent originalEvent position)
-		ifTrue: [ ^ self ].
-	self dispatchEvent: aMouseOutsideEvent
-]
-
 { #category : #'children dispatching' }
 BlElement >> dispatchRemovedFromParent: aParentElement [
 	"Sent after I was removed from my parent and is not longer its direct child.
@@ -3933,16 +3916,15 @@ BlElement >> whenLayoutedDo: aBlock [
 
 { #category : #'geometry hooks' }
 BlElement >> whenLayoutedDoOnce: aBlock [
-	"As an example of use, imagine you need to get the actual size of an element.
+	"Evaluate block passed as argument after the layout applied.
+
+	As an example of use, imagine you need to get the actual size of an element.
 	The size is computed by the layout.
-	Thus, if one need to get the size of an element one have to be sure that its layout applied.
-	This is the purpose of #whenLayoutedDoOne: (when layout applied do once) which intention is to run
-	the block passed as argument only one time just after the layout applied.
-		
-	** notice ** that my use is not encouraged except for debugging or for particular purposes 
-	ouside usual Bloc coding
-	"
-	self when: BlElementLayoutComputedEvent doOnce: [ :event | aBlock cull: event ].
+	Thus, if one need to get the size of an element one have to be sure that its layout applied."
+
+	^ self
+		addEventHandlerOn: BlElementLayoutComputedEvent
+		doOnce: aBlock
 ]
 
 { #category : #'api - bounds' }
