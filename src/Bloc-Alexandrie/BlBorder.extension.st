@@ -19,9 +19,9 @@ BlBorder >> aeApplyTo: aeCanvas element: aBlElement [
 	aeCanvas setBorderBlock: [
 		paint aeApplyTo: aeCanvas.
 
-		"No dashes is the default"
-		style dashArray = aBlElement parent border style dashArray ifFalse: [
-			aeCanvas setDashes: style dashArray offset: style dashOffset ].
+		aeCanvas
+			setDashes: style dashArray
+			offset: style dashOffset ].
 
 		aBlElement geometry hasJoins ifTrue: [
 			style lineJoin aeApplyTo: aeCanvas style: style ].
