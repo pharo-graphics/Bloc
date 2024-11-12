@@ -20,7 +20,6 @@ BlDragDelegate >> cancel: aDraggedContainer at: aPoint in: aParentElement [
 	| aCancelAnimation |
 	self items ifEmpty: [ ^ self ].
 
-"self halt."
 	self items do: [ :eachItem |
 		| aPreviewElement |
 		aPreviewElement := eachItem sourceElement.
@@ -44,16 +43,10 @@ BlDragDelegate >> cancel: aDraggedContainer at: aPoint in: aParentElement [
 				                     easing: (BlDecelerateInterpolator factor: 2);
 				                     duration: 350 milliSeconds;
 				                     onStepDo: [ :aPosition |
-					                     aPreviewElement position: aPosition ]";"
-				                     "onFinishedDo: [
-					                     aPreviewElement removeFromParent ]" ]).
+					                     aPreviewElement position: aPosition ]
+				                     ]).
 
 	parent addAnimation: aCancelAnimation
-
-	"didn't include element state in my code picking"
-	"self items do: [ :each |
-		each sourceElement states
-			removeState: BlElementDraggingState uniqueInstance ]"
 ]
 
 { #category : #'drag and drop' }
@@ -65,6 +58,11 @@ BlDragDelegate >> drag: aDraggedContainer to: aPoint [
 	"aDraggedContainer position:
 		(aPoint - offset) x @ aDraggedContainer measuredBounds position y"
 
+	"vertical drag & drop :" 
+	"aDraggedContainer position:
+		aDraggedContainer measuredBounds position x @ (aPoint - offset) y"
+
+	"normal drag & drop"
 	aDraggedContainer position: aPoint - offset
 ]
 
@@ -82,11 +80,13 @@ BlDragDelegate >> dragArea: anObject [
 
 { #category : #testing }
 BlDragDelegate >> hasDragArea [
+
 	^ dragArea notNil
 ]
 
 { #category : #initialization }
 BlDragDelegate >> initialize [
+
 	super initialize.
 
 	items := { }
@@ -105,26 +105,23 @@ BlDragDelegate >> items: aCollectionOfDragItems [
 ]
 
 { #category : #'drag and drop' }
-BlDragDelegate >> liftAt: aPoint [
+BlDragDelegate >> lift [
 	"Lift previews at a given point in space coordinates"
-	<return: #BlElement>
-	| aContainer |
 
+	| aContainer |
 	aContainer := BlElement new
-		layout: BlFrameLayout new;
-		beInSingleCompositionLayer;
-		constraintsDo: [ :c |
-			c ignoreByLayout.
-			c horizontal fitContent.
-			c vertical fitContent ].
+		              layout: BlFrameLayout new;
+		              clipChildren: false;
+		              "beInSingleCompositionLayer;"
+		              constraintsDo: [ :c |
+			              c ignoreByLayout.
+			              c horizontal fitContent.
+			              c vertical fitContent ].
 
 	"aContainer addChildren: (self items collect: [ :aDragItem | aDragItem previewElement ])."
-	aContainer addChildren: (self items collect: [ :aDragItem | aDragItem sourceElement removeFromParent. aDragItem sourceElement  ]).
-
-"didn't include element state in my code picking"
-	"self items do: [ :each |
-		each sourceElement states
-			addState: BlElementDraggingState uniqueInstance ]."
+	aContainer addChildren: (self items collect: [ :aDragItem |
+			 aDragItem sourceElement removeFromParent.
+			 aDragItem sourceElement ]).
 
 	^ aContainer
 ]
@@ -136,9 +133,9 @@ BlDragDelegate >> offset [
 ]
 
 { #category : #accessing }
-BlDragDelegate >> offset: anObject [
+BlDragDelegate >> offset: aPoint [
 
-	offset := anObject
+	offset := aPoint
 ]
 
 { #category : #accessing }
@@ -148,7 +145,7 @@ BlDragDelegate >> parent [
 ]
 
 { #category : #accessing }
-BlDragDelegate >> parent: anObject [
+BlDragDelegate >> parent: anElement [
 
-	parent := anObject
+	parent := anElement
 ]

@@ -190,7 +190,7 @@ BlSpaceEventListener >> spaceDragLiftEvent: anEvent [
 
 	dragContainerElement ifNotNil: [ :anElement |
 		anElement removeFromParent ].
-	dragContainerElement := aDragDelegate liftAt: aPosition.
+	dragContainerElement := aDragDelegate lift.
 	dragContainerElement userData at: #dragDelegate put: aDragDelegate.
 	dragContainerElement preventMeAndChildrenMouseEvents.
 
@@ -200,7 +200,7 @@ BlSpaceEventListener >> spaceDragLiftEvent: anEvent [
 
 	aDragArea addChild: dragContainerElement.
 
-	aDragDelegate items size > 0 ifTrue: [
+	aDragDelegate items isNotEmpty ifTrue: [
 		| sourcePositionInSpace |
 		sourcePositionInSpace := aDragDelegate items first sourceElement
 			                         bounds inSpace position.
