@@ -4,8 +4,7 @@ Extension { #name : #BlBorder }
 BlBorder >> aeApplyTo: aeCanvas element: aBlElement [
 
 	"No need to set any parameter as there is no border"
-	self isTransparent ifTrue: [
-		^ aeCanvas setBorderOff ].
+	self isTransparent ifTrue: [ ^ aeCanvas setBorderOff ].
 
 	"This will double-dispatch with the geometry, and 
 	may set an explicit border path for the outskirt."
@@ -25,9 +24,7 @@ BlBorder >> aeApplyTo: aeCanvas element: aBlElement [
 			offset: style dashOffset.
 
 		aBlElement geometry hasJoins ifTrue: [
-			style lineJoin
-				aeApplyTo: aeCanvas
-				style: style ].
+			style lineJoin aeApplyTo: aeCanvas style: style ].
 
 		(aBlElement geometry hasCaps or: [ style isDashed ]) ifTrue: [
 			style lineCap aeApplyTo: aeCanvas ].

@@ -97,21 +97,20 @@ BlMouseProcessor >> fillTargetHierarchy: aTarget [
 
 { #category : #'mouse drag' }
 BlMouseProcessor >> fireAsDragEndEvent: anEvent [
+
 	| aDragEvent |
-	
 	aDragEvent := BlDragEndEvent new
-		copyFrom: anEvent;
-		yourself.
-	
-	self fireEvent:
-			(aDragEvent
-				target: currentDragTarget;
-				dragboard: self space dragboard;
-				gestureSource: currentDragTarget;
-				yourself).
-	
-	aDragEvent isConsumed
-		ifFalse: [ self space dispatchEvent: (BlSpaceDragCancelEvent new position: aDragEvent position) ]
+		              copyFrom: anEvent;
+		              yourself.
+
+	self fireEvent: (aDragEvent
+			 target: currentDragTarget;
+			 gestureSource: currentDragTarget;
+			 yourself).
+
+	aDragEvent isConsumed ifFalse: [
+		self space dispatchEvent:
+			(BlSpaceDragCancelEvent new position: aDragEvent position) ]
 ]
 
 { #category : #'event firing' }
@@ -129,12 +128,11 @@ BlMouseProcessor >> fireAsDragEnterEvent: anEvent targets: aCollection [
 
 { #category : #'event firing' }
 BlMouseProcessor >> fireAsDragEvent: anEvent [
-	self	fireEvent:
-			(anEvent asDragEvent
-				target: currentDragTarget;
-				dragboard: self space dragboard;
-				gestureSource: currentDragTarget;
-				yourself)
+
+	self fireEvent: (anEvent asDragEvent
+			 target: currentDragTarget;
+			 gestureSource: currentDragTarget;
+			 yourself)
 ]
 
 { #category : #'event firing' }
@@ -161,17 +159,16 @@ BlMouseProcessor >> fireAsDragStartEvent: anEvent [
 
 { #category : #'mouse drag' }
 BlMouseProcessor >> fireAsDropEvent: anEvent [
-	| aDropEvent |
 
+	| aDropEvent |
 	aDropEvent := BlDropEvent new
-		copyFrom: anEvent;
-		yourself.
-		
+		              copyFrom: anEvent;
+		              yourself.
+
 	self fireEvent: (aDropEvent
-		dragboard: self space dragboard;
-		target: anEvent target;
-		gestureSource: currentDragTarget;
-		yourself)
+			 target: anEvent target;
+			 gestureSource: currentDragTarget;
+			 yourself)
 ]
 
 { #category : #'event firing' }
@@ -495,7 +492,7 @@ BlMouseProcessor >> processDragEnd: aMouseUpEvent [
 	self fireAsDragEndEvent: aMouseUpEvent.
 	currentDragTarget := nil.
 	dndInProgress := false.
-	lastOverTarget := nil.
+	lastOverTarget := nil
 ]
 
 { #category : #'mouse drag' }

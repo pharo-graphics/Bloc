@@ -35,7 +35,6 @@ Class {
 		'focusProcessor',
 		'keyboardProcessor',
 		'focusChain',
-		'dragboard',
 		'pulseRequested',
 		'currentCursor',
 		'session',
@@ -155,10 +154,10 @@ BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDurati
 		| aSemaphore |
 		aSemaphore := Semaphore new.
 		aSpace
-			when: BlSpaceShownEvent
+			addEventHandlerOn: BlSpaceShownEvent
 			doOnce: [ :event | aSemaphore signal ].
 		aSemaphore wait: aDuration ].
-	
+
 	^ self pulseUntilEmptyTaskQueue: aSpace timeout: aDuration
 ]
 
@@ -804,18 +803,6 @@ BlSpace >> doUpdateLayoutBoundary: anElement context: aBlElementBoundsUpdater [
 	anElement
 		applyLayoutIn: (anElement position extent: anElement measuredExtent)
 		context: aBlElementBoundsUpdater
-]
-
-{ #category : #accessing }
-BlSpace >> dragboard [
-
-	^ dragboard
-]
-
-{ #category : #accessing }
-BlSpace >> dragboard: anObject [
-
-	dragboard := anObject
 ]
 
 { #category : #'change - layout' }
