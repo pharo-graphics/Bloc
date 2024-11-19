@@ -14,6 +14,7 @@ Class {
 		'currentFrames',
 		'previousMillisecond',
 		'fps',
+		'fpsSamples',
 		'listeners',
 		'service',
 		'fullGCDuringLastPeriod',
@@ -22,7 +23,8 @@ Class {
 		'incrementalGCCount',
 		'lastFullGCCount',
 		'lastIncrementalGCCount',
-		'totalTime'
+		'totalTime',
+		'hasClosed'
 	],
 	#category : #'Bloc-DevTool-Profiling'
 }
@@ -38,6 +40,12 @@ BlSpaceStatistics >> doUpdate [
 BlSpaceStatistics >> fps [
 
 	^ fps 
+]
+
+{ #category : #accessing }
+BlSpaceStatistics >> fpsSamples [
+
+	^ fpsSamples 
 ]
 
 { #category : #events }
@@ -105,6 +113,7 @@ BlSpaceStatistics >> initialize [
 	durationPerPhase := Dictionary new.
 
 	fps := 0.
+	fpsSamples := OrderedCollection new: 50.
 	previousMillisecond := 0.
 	totalTime := 0.
 	currentFrames := 0.
@@ -118,6 +127,8 @@ BlSpaceStatistics >> initialize [
 	
 	incrementalGCCount := 0.
 	lastIncrementalGCCount := 0.
+	
+	hasClosed := false.
 ]
 
 { #category : #accessing }
@@ -141,9 +152,9 @@ BlSpaceStatistics >> recordMilliseconds: millis forFramePhase: phase [
 ]
 
 { #category : #'API - listeners' }
-BlSpaceStatistics >> registerListener: aPRSpaceStatisticsWindow [ 
+BlSpaceStatistics >> registerListener: aPRSpaceStatisticsListener [
 	
-	listeners add: aPRSpaceStatisticsWindow 
+	listeners add: aPRSpaceStatisticsListener 
 ]
 
 { #category : #accessing }
@@ -155,11 +166,15 @@ BlSpaceStatistics >> space: aBlSpace [
 { #category : #events }
 BlSpaceStatistics >> spaceClosed [
 
+	hasClosed ifTrue: [ ^self ].
+	hasClosed := true.
+	
 	service ifNotNil: [service stop].
 	
 	self updateValues.
 
 	listeners do: [:e | e closed].
+
 ]
 
 { #category : #events }
@@ -177,6 +192,12 @@ BlSpaceStatistics >> spaceShown [
 ]
 
 { #category : #accessing }
+BlSpaceStatistics >> totalFrames [
+	
+	^ totalFrames
+]
+
+{ #category : #accessing }
 BlSpaceStatistics >> totalTime [
 
 	^ totalTime
@@ -190,9 +211,9 @@ BlSpaceStatistics >> updateValues [
 
 	totalTime := totalTime + (currentMillisecond - previousMillisecond).
 
-	fps := (currentFrames
-	        / (currentMillisecond - previousMillisecond / 1000)) asFloat.
-	previousMillisecond := Time millisecondClockValue.
+	fps := (currentFrames/ (currentMillisecond - previousMillisecond / 1000)) asFloat.
+	fpsSamples add: { currentMillisecond. fps }.
+	previousMillisecond := currentMillisecond.
 	currentFrames := 0.
 
 	currentFullGCCount := Smalltalk vm fullGCCount.
