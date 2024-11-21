@@ -7,7 +7,9 @@ Class {
 	#name : #BlGaussianShadowEffect,
 	#superclass : #BlShadowEffect,
 	#instVars : [
-		'width'
+		'width',
+		'alphaSurface',
+		'alphaSurfaceElementHash'
 	],
 	#category : #'Bloc-Effect'
 }
