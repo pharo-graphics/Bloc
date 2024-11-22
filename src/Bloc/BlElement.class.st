@@ -409,12 +409,6 @@ BlElement >> allowMouseEvents [
 	flags addShouldHandleMouseEvents.
 ]
 
-{ #category : #'event handling' }
-BlElement >> allowMousePickOutsideEvent [
-
-	self userData at: #shouldHandleMousePickOutsideEvent put: true
-]
-
 { #category : #layout }
 BlElement >> applyLayoutIn: aBlBounds [
 	
@@ -3616,12 +3610,6 @@ BlElement >> shouldHandleMouseEvents [
 	<return: #Boolean>
 
 	^ flags hasShouldHandleMouseEvents
-]
-
-{ #category : #'event handling' }
-BlElement >> shouldHandleMousePickOutsideEvent [
-
-	^ self userData at: #shouldHandleMousePickOutsideEvent ifAbsentPut: [ false ]
 ]
 
 { #category : #'api - opening' }
