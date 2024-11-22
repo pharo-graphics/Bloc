@@ -24,6 +24,7 @@ BlSpace >> enableStatistics [
 		
 	self addEventHandlerOn: BlSpaceShownEvent do: [ spaceStatistics spaceShown ]. 
 	self addEventHandlerOn: BlSpaceClosedEvent do: [ spaceStatistics spaceClosed ]. 
+	self isOpened ifTrue: [ spaceStatistics spaceShown ].
 	
 	self userData at: #spaceStatistics put: spaceStatistics
 ]
