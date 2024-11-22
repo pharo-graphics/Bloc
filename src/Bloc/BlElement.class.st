@@ -3205,12 +3205,6 @@ BlElement >> preventMouseEvents [
 	flags clearShouldHandleMouseEvents.
 ]
 
-{ #category : #'event handling' }
-BlElement >> preventMousePickOutsideEvent [
-
-	self userData at: #shouldHandleMousePickOutsideEvent put: false
-]
-
 { #category : #'children accessing' }
 BlElement >> previousSiblingDo: aBlock [
 	"Evaluate aBlock with the previous child in my parent before me if there is one"
