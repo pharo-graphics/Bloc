@@ -1987,6 +1987,11 @@ BlElement >> initializeEventDispatcher [
 
 { #category : #'geometry bounds' }
 BlElement >> insets [
+
+	self
+		deprecated: 'Use #padding instead of current one'
+		transformWith: '`@receiver insets' -> '`@receiver padding'.
+
 	^ self padding
 ]
 
@@ -2994,6 +2999,11 @@ BlElement >> openInSpace [
 
 { #category : #'geometry bounds' }
 BlElement >> outsets [
+
+	self
+		deprecated: 'Use #margin instead of current one'
+		transformWith: '`@receiver outsets' -> '`@receiver margin'.
+
 	^ self margin
 ]
 
