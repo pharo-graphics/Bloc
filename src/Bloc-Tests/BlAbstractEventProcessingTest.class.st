@@ -81,7 +81,7 @@ BlAbstractEventProcessingTest >> sendOutsideTargetEvent: anEvent [
 	self sendEvent: anEvent
 ]
 
-{ #category : #'running' }
+{ #category : #running }
 BlAbstractEventProcessingTest >> setUp [
 
 	super setUp.

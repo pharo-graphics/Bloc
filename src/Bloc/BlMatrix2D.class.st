@@ -70,116 +70,96 @@ BlMatrix2D class >> translation: aBlVector [
 
 { #category : #comparing }
 BlMatrix2D >> = anObject [
-	self == anObject
-		ifTrue: [ ^ true ].
-	self class = anObject class
-		ifFalse: [ ^ false ].
-		
-		
-	^ self sx = anObject sx
-		and: [ self shy = anObject shy
-			and: [ self shx = anObject shx
-				and: [ self sy = anObject sy
-					and: [ self x = anObject x
-						and: [ self y = anObject y ] ] ] ] ]
-]
 
-{ #category : #converting }
-BlMatrix2D >> asMatrixCollection [
-	^ Array2D rows: 3 columns: 3 contents: {
-		sx . shx . x.
-		shy . sy . y.
-		0 . 0. 1
-	}
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+
+
+	^ self sx = anObject sx and: [
+		  self shy = anObject shy and: [
+			  self shx = anObject shx and: [
+				  self sy = anObject sy and: [
+					  self x = anObject x and: [ self y = anObject y ] ] ] ] ]
 ]
 
 { #category : #'matrix - mathematical functions' }
 BlMatrix2D >> decomposition [
-	"Decompose this 2D Matrix into components and return a resulting decomposition.
-	Based on https://drafts.csswg.org/css-transforms/#decomposing-a-2d-matrix"
-	<return: #BlMatrixDecomposition2D>
+	"Answer my decomposition, in a`BlMatrixDecomposition2D`.
+
+	Based on: https://drafts.csswg.org/css-transforms/#decomposing-a-2d-matrix"
 	
-	| row0x row0y row1x row1y scaleX scaleY translate determinant angle matrix |
-	
-	row0x := self sx.
-	row0y := self shy.
-	row1x := self shx.
-	row1y := self sy.
-	
-	translate := BlVector x: self x y: self y.
+	| row0x row0y row1x row1y scaleX scaleY determinant angle |
+	row0x := sx.
+	row0y := shy.
+	row1x := shx.
+	row1y := sy.
+
 	scaleX := ((row0x * row0x) + (row0y * row0y)) sqrt.
 	scaleY := ((row1x * row1x) + (row1y * row1y)) sqrt.
 	
-	determinant := (row0x * row1y) - (row0y * row1x).
 	"If determinant is negative, one axis was flipped."
-	determinant < 0
-		ifTrue: [ 
-			row0x < row1y
-				ifTrue: [ scaleX := scaleX negated ]
-				ifFalse: [ scaleY := scaleY negated ] ].
+	determinant := (row0x * row1y) - (row0y * row1x).
+	determinant < 0 ifTrue: [ 
+		row0x < row1y
+			ifTrue: [ scaleX := scaleX negated ]
+			ifFalse: [ scaleY := scaleY negated ] ].
 	
 	"Renormalize matrix to remove scale."
-	scaleX isZero
-		ifFalse: [
-			row0x := row0x * (1.0 / scaleX).
-			row0y := row0y * (1.0 / scaleX) ].
-	scaleY isZero
-		ifFalse: [
-			row1x := row1x * (1.0 / scaleY).
-			row1y := row1y * (1.0 / scaleY) ].
+	scaleX isZero ifFalse: [
+		row0x := row0x * (1.0 / scaleX).
+		row0y := row0y * (1.0 / scaleX) ].
+	scaleY isZero ifFalse: [
+		row1x := row1x * (1.0 / scaleY).
+		row1y := row1y * (1.0 / scaleY) ].
 	
 	"Compute rotation and renormalize matrix."
 	angle := row0y arcTan: row0x.
-	angle isZero
-		ifFalse: [ 
-			| sn cs m11 m12 m21 m22 |
-			sn := row0y negated.
-			cs := row0x.
-			m11 := row0x.
-			m12 := row0y.
-			m21 := row1x.
-			m22 := row1y.
-			row0x := (cs * m11) + (sn * m21).
-			row0y := (cs * m12) + (sn * m22).
-			row1x := (sn negated * m11) + (cs * m21).
-			row1y := (sn negated * m12) + (cs * m22) ].
-	
-	matrix := Array2D
-		rows: 2
-		columns: 2
-		contents: { row0x . row0y . row1x . row1y }.
-		
+	angle isZero ifFalse: [ 
+		| sn cs m11 m12 m21 m22 |
+		sn := row0y negated.
+		cs := row0x.
+		m11 := row0x.
+		m12 := row0y.
+		m21 := row1x.
+		m22 := row1y.
+		row0x := (cs * m11) + (sn * m21).
+		row0y := (cs * m12) + (sn * m22).
+		row1x := (sn negated * m11) + (cs * m21).
+		row1y := (sn negated * m12) + (cs * m22) ].
+
 	"Convert into degrees because our rotation functions expect it."
 	angle := angle radiansToDegrees.
 	
 	^ BlMatrixDecomposition2D new
-		translation: translate;
+		translation: (BlVector x: x y: y);
 		scale: (BlVector x: scaleX y: scaleY);
 		angle: angle;
-		matrix: matrix
+		sx: row0x;
+		sy: row1y;
+		shx: row1x;
+		shy: row0y;
+		yourself
 ]
 
 { #category : #'matrix - mathematical functions' }
 BlMatrix2D >> determinant [
 	"Compute and return my determinant"
-	<return: #Number>
 	
 	^ (sx * sy) - (shy * shx)
 ]
 
 { #category : #comparing }
 BlMatrix2D >> hash [
-	^ ((((self sx hash bitXor: self shy hash)
-		bitXor: self shx hash)
-			bitXor: self sy hash)
-				bitXor: self x hash)
-					bitXor: self y hash
+
+	^ ((((self sx hash bitXor: self shy hash) bitXor: self shx hash)
+		    bitXor: self sy hash) bitXor: self x hash) bitXor: self y hash
 ]
 
 { #category : #initialization }
 BlMatrix2D >> initialize [
+
 	super initialize.
-	
+
 	sx := 1.0.
 	shy := 0.0.
 	shx := 0.0.
@@ -192,6 +172,7 @@ BlMatrix2D >> initialize [
 BlMatrix2D >> inverse [
 	"In-place inverse me.
 	Throw BlSingularMatrixError if matrix is singular (non-invertible or degenerate)"
+
 	| a b c d e f determinant inverseDeterminant |
 	
 	a := sy.
@@ -202,8 +183,8 @@ BlMatrix2D >> inverse [
 	f := (x * shy) - (sx * y).
 	
 	determinant := self determinant.
-	determinant isZero
-		ifTrue: [ BlSingularMatrixError signal: 'Matrix is singular and can not be inverted!' ].
+	determinant isZero ifTrue: [
+		BlSingularMatrixError signal: 'Matrix is singular and can not be inverted!' ].
 		
 	inverseDeterminant := 1.0 / determinant.
 	
@@ -257,6 +238,7 @@ BlMatrix2D >> matrix: aMatrix [
 { #category : #'matrix - transformations' }
 BlMatrix2D >> multiplyBy: aMatrix2D [
 	"Perform a right multiplication by a given 2D matrix"
+
 	| r11 r12 r21 r22 r31 r32 |
 	
 	r11 := (sx * aMatrix2D sx) + (shy * aMatrix2D shx).
@@ -281,7 +263,21 @@ BlMatrix2D >> perspective: aDepth [
 
 { #category : #printing }
 BlMatrix2D >> printOn: aStream [
-	aStream print: self asMatrixCollection
+
+	super printOn: aStream.
+
+	aStream nextPut: $(.
+
+	#(x y sx sy shx shy)
+		do: [ :each |
+			aStream
+				nextPutAll: each;
+				nextPut: $:;
+				space.
+			((self perform: each) printOn: aStream) ]
+		separatedBy: [ aStream space ].
+
+	aStream nextPut: $)
 ]
 
 { #category : #'matrix - transformations' }
@@ -307,6 +303,7 @@ BlMatrix2D >> reflection: aDiagonalVector [
 { #category : #'matrix - transformations' }
 BlMatrix2D >> rotateByRadians: anAngle around: aBlVector [
 	"Apply a rotation transformation by a given amount of radians around a provided axis vector"
+
 	self
 		assert: [ aBlVector = BlVector zAxis ]
 		description: [ '2D Matrix is incompatible with 3D transformation' ].
@@ -337,9 +334,9 @@ BlMatrix2D >> rotation: anAngle [
 
 { #category : #'matrix - transformations' }
 BlMatrix2D >> scaleBy: aBlVector [
-	| aScale3D |
 	"Apply a scaling defined by a given vector"
-	
+
+	| aScale3D |
 	aScale3D := aBlVector asScale3D.
 
 	self
@@ -374,40 +371,40 @@ BlMatrix2D >> shear: aCoefficientPoint [
 { #category : #'matrix - accessing' }
 BlMatrix2D >> shx [
 	"Returns the X coordinate shearing element of the affine transformation matrix"
-	<return: #Number>
 
 	^ shx
 ]
 
 { #category : #'matrix - accessing' }
-BlMatrix2D >> shx: anObject [
-	shx := anObject
+BlMatrix2D >> shx: aNumber [
+
+	shx := aNumber
 ]
 
 { #category : #'matrix - accessing' }
 BlMatrix2D >> shy [
 	"Returns the Y coordinate shearing element of the affine transformation matrix"
-	<return: #Number>
 	
 	^ shy
 ]
 
 { #category : #'matrix - accessing' }
-BlMatrix2D >> shy: anObject [
-	shy := anObject
+BlMatrix2D >> shy: aNumber [
+
+	shy := aNumber
 ]
 
 { #category : #'matrix - accessing' }
 BlMatrix2D >> sx [
 	"Returns the X coordinate scaling element of the affine transformation matrix"
-	<return: #Number>
 
 	^ sx
 ]
 
 { #category : #'matrix - accessing' }
-BlMatrix2D >> sx: anObject [
-	sx := anObject
+BlMatrix2D >> sx: aNumber [
+
+	sx := aNumber
 ]
 
 { #category : #'matrix - accessing' }
@@ -418,19 +415,19 @@ BlMatrix2D >> sy [
 ]
 
 { #category : #'matrix - accessing' }
-BlMatrix2D >> sy: anObject [
-	sy := anObject
+BlMatrix2D >> sy: aNumber [
+
+	sy := aNumber
 ]
 
 { #category : #'matrix - transforming points' }
 BlMatrix2D >> transformBounds: aBlBounds [
-	"In-place transform given BlBounds according to my transformation.
+	"In-place transform given `BlBounds` according to my transformation.
 	(local to global transformation)"
-	<return: #BlBounds>
+
 	| newLeft newTop newRight newBottom quadTopLeft quadTopRight quadBottomLeft quadBottomRight |
 
-	self isIdentity
-		ifTrue: [ ^ aBlBounds ].
+	self isIdentity ifTrue: [ ^ aBlBounds ].
 
 	quadTopLeft := self transformX: aBlBounds left Y: aBlBounds top.
 	quadTopRight := self transformX: aBlBounds right Y: aBlBounds top.
@@ -473,10 +470,10 @@ BlMatrix2D >> transformPoint2D: aPoint2D [
 
 { #category : #'matrix - transforming points' }
 BlMatrix2D >> transformX: aX Y: aY [
+
 	| newX newY |
-	
-	newX := (aX * sx) + (aY * shx) + x.
-	newY := (aX * shy) + (aY * sy) + y.
+	newX := aX * sx + (aY * shx) + x.
+	newY := aX * shy + (aY * sy) + y.
 
 	^ newX @ newY
 ]
@@ -496,44 +493,44 @@ BlMatrix2D >> transformY: aY withX: aX [
 { #category : #'matrix - transformations' }
 BlMatrix2D >> translateBy: aBlVector [
 	"Apply a translation by a given vector"
+
 	| aTranslate3D |
-	
 	aTranslate3D := aBlVector asTranslate3D.
-	
+
 	self
 		assert: [ aTranslate3D z isZero ]
 		description: [ '2D Matrix is incompatible with 3D transformation' ].
-		
+
 	"Apply the translation AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix
 	will first be transformed by the original transform,
 	then be translated by given translation"
 	x := x + aTranslate3D x.
-	y := y + aTranslate3D y.
+	y := y + aTranslate3D y
 ]
 
 { #category : #'matrix - accessing' }
 BlMatrix2D >> x [
 	"Returns the X coordinate of the translation element of the affine transformation matrix"
-	<return: #Number>
 	
 	^ x
 ]
 
 { #category : #'matrix - accessing' }
-BlMatrix2D >> x: anObject [
-	x := anObject
+BlMatrix2D >> x: aNumber [
+
+	x := aNumber
 ]
 
 { #category : #'matrix - accessing' }
 BlMatrix2D >> y [
 	"Returns the Y coordinate of the translation element of the affine transformation matrix"
-	<return: #Number>
 
 	^ y
 ]
 
 { #category : #'matrix - accessing' }
-BlMatrix2D >> y: anObject [
-	y := anObject
+BlMatrix2D >> y: aNumber [
+
+	y := aNumber
 ]

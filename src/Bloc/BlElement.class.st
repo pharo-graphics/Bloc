@@ -409,12 +409,6 @@ BlElement >> allowMouseEvents [
 	flags addShouldHandleMouseEvents.
 ]
 
-{ #category : #'event handling' }
-BlElement >> allowMousePickOutsideEvent [
-
-	self userData at: #shouldHandleMousePickOutsideEvent put: true
-]
-
 { #category : #layout }
 BlElement >> applyLayoutIn: aBlBounds [
 	
@@ -1993,6 +1987,11 @@ BlElement >> initializeEventDispatcher [
 
 { #category : #'geometry bounds' }
 BlElement >> insets [
+
+	self
+		deprecated: 'Use #padding instead of current one'
+		transformWith: '`@receiver insets' -> '`@receiver padding'.
+
 	^ self padding
 ]
 
@@ -3000,6 +2999,11 @@ BlElement >> openInSpace [
 
 { #category : #'geometry bounds' }
 BlElement >> outsets [
+
+	self
+		deprecated: 'Use #margin instead of current one'
+		transformWith: '`@receiver outsets' -> '`@receiver margin'.
+
 	^ self margin
 ]
 
@@ -3203,12 +3207,6 @@ BlElement >> preventMouseEvents [
 	It does not influence the ability of the children to handle events, hence I am a local property"
 	
 	flags clearShouldHandleMouseEvents.
-]
-
-{ #category : #'event handling' }
-BlElement >> preventMousePickOutsideEvent [
-
-	self userData at: #shouldHandleMousePickOutsideEvent put: false
 ]
 
 { #category : #'children accessing' }
@@ -3622,12 +3620,6 @@ BlElement >> shouldHandleMouseEvents [
 	<return: #Boolean>
 
 	^ flags hasShouldHandleMouseEvents
-]
-
-{ #category : #'event handling' }
-BlElement >> shouldHandleMousePickOutsideEvent [
-
-	^ self userData at: #shouldHandleMousePickOutsideEvent ifAbsentPut: [ false ]
 ]
 
 { #category : #'api - opening' }
