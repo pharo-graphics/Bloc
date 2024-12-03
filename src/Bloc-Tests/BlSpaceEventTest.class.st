@@ -41,29 +41,6 @@ BlSpaceEventTest >> testSpaceClosed [
 ]
 
 { #category : #tests }
-BlSpaceEventTest >> testSpaceDestroyed [
-
-	| events |
-	events := OrderedCollection new.
-
-	space
-		addEventHandlerOn: BlSpaceClosedEvent
-		do: [ events add: #closed ].
-	space
-		addEventHandlerOn: BlSpaceDestroyedEvent
-		do: [ events add: #destroyed ].
-
-	space show.
-	self waitPulses.
-	self assert: events size equals: 0.
-
-	space close.
-	self waitPulses.
-	self assert: events size equals: 2.
-	self assert: events asArray equals: #( closed destroyed )
-]
-
-{ #category : #tests }
 BlSpaceEventTest >> testSpaceShown [
 
 	| count |

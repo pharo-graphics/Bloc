@@ -43,12 +43,6 @@ BlMouseUpEvent >> asDoubleClickEvent [
 		yourself
 ]
 
-{ #category : #converting }
-BlMouseUpEvent >> asMouseOutsideEvent [
-
-	^ BlMouseUpOutsideEvent new originalEvent: self; canBePropagated: false; yourself
-]
-
 { #category : #testing }
 BlMouseUpEvent >> isMouseUp [
 	^ true

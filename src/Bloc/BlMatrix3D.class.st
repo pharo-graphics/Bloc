@@ -63,43 +63,32 @@ BlMatrix3D class >> rotation: aTheta axis: aVector [
 
 { #category : #comparing }
 BlMatrix3D >> = anObject [
+
 	self == anObject ifTrue: [ ^ true ].
 	self class = anObject class ifFalse: [ ^ false ].
-	
-	self sx = anObject sx ifFalse:[ ^ false ].
-	self shy0 = anObject shy0 ifFalse:[ ^ false ].
-	self shz0 = anObject shz0 ifFalse:[ ^ false ].
-	self wx = anObject wx ifFalse:[ ^ false ].
-	self shx0 = anObject shx0 ifFalse:[ ^ false ].
-	self shz1 = anObject shz1 ifFalse:[ ^ false ].
-	self wy = anObject wy ifFalse:[ ^ false ].
-	self shx1 = anObject shx1 ifFalse:[ ^ false ].
-	self shy1 = anObject shy1 ifFalse:[ ^ false ].
-	self sz = anObject sz ifFalse:[ ^ false ].
-	self wz = anObject wz ifFalse:[ ^ false ].
-	self x = anObject x ifFalse:[ ^ false ].
-	self y = anObject y ifFalse:[ ^ false ].
-	self z = anObject z ifFalse:[ ^ false ].
-	self w = anObject w ifFalse:[ ^ false ].
 
-	^true
-]
+	self sx = anObject sx ifFalse: [ ^ false ].
+	self shy0 = anObject shy0 ifFalse: [ ^ false ].
+	self shz0 = anObject shz0 ifFalse: [ ^ false ].
+	self wx = anObject wx ifFalse: [ ^ false ].
+	self shx0 = anObject shx0 ifFalse: [ ^ false ].
+	self shz1 = anObject shz1 ifFalse: [ ^ false ].
+	self wy = anObject wy ifFalse: [ ^ false ].
+	self shx1 = anObject shx1 ifFalse: [ ^ false ].
+	self shy1 = anObject shy1 ifFalse: [ ^ false ].
+	self sz = anObject sz ifFalse: [ ^ false ].
+	self wz = anObject wz ifFalse: [ ^ false ].
+	self x = anObject x ifFalse: [ ^ false ].
+	self y = anObject y ifFalse: [ ^ false ].
+	self z = anObject z ifFalse: [ ^ false ].
+	self w = anObject w ifFalse: [ ^ false ].
 
-{ #category : #converting }
-BlMatrix3D >> asMatrixCollection [
-	^ Array2D
-		rows: 4
-		columns: 4
-		contents: {
-			sx . shx0 . shx1 . x .
-			shy0 . sy . shy1 . y .
-			shz0 . shz1 . sz . z .
-			wx . wy . wz . w
-		}
+	^ true
 ]
 
 { #category : #initialization }
 BlMatrix3D >> initialize [
+
 	super initialize.
 
 	sx := 1.0.
@@ -159,6 +148,7 @@ BlMatrix3D >> isIdentity [
 { #category : #'matrix - transformations' }
 BlMatrix3D >> multiplyBy: aMatrix3D [
 	"Multiply me in-place by a given 3D Matrix"
+	
 	| _sx _shx0 _shx1 _x _shy0 _sy _shy1 _y _shz0 _shz1 _sz _z _wx _wy _wz _w |
 	
 	_sx := (sx * aMatrix3D sx) + (shy0 * aMatrix3D shx0) + (shz0 * aMatrix3D shx1) + (wx * aMatrix3D x).
@@ -216,7 +206,7 @@ BlMatrix3D >> perspective: aDepth [
 	wz := wz - (1.0 / aDepth * w)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'matrix - transformations' }
 BlMatrix3D >> postScaleX: aX Y: aY Z: aZ [
 	"Apply the scale AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix
@@ -239,7 +229,7 @@ BlMatrix3D >> postScaleX: aX Y: aY Z: aZ [
 	z := z * aZ
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'matrix - transformations' }
 BlMatrix3D >> postTranslateX: aX Y: aY Z: aZ [
 	"Apply the translation AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix
@@ -262,7 +252,7 @@ BlMatrix3D >> postTranslateX: aX Y: aY Z: aZ [
 	z := z + (w * aZ)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'matrix - transformations' }
 BlMatrix3D >> preScaleX: aX Y: aY Z: aZ [
 	"Apply the scaling BEFORE my existing transformation.
 	Any vector that is multiplied by the resulting matrix will first be scaled,
@@ -284,7 +274,7 @@ BlMatrix3D >> preScaleX: aX Y: aY Z: aZ [
 	wz := wz * aZ
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'matrix - transformations' }
 BlMatrix3D >> preTranslateX: aX Y: aY Z: aZ [
 	"Apply the translation BEFORE my existing transformation.
 	Any vector that is multiplied by the resulting matrix will first be translated,
@@ -296,9 +286,29 @@ BlMatrix3D >> preTranslateX: aX Y: aY Z: aZ [
 	w := w + (aX * wx) + (aY * wy) + (aZ * wz)
 ]
 
+{ #category : #printing }
+BlMatrix3D >> printOn: aStream [
+
+	super printOn: aStream.
+
+	aStream nextPut: $(.
+
+	#(#x #y #z #w #sx #sy #sz #shx0 #shy0 #shz0 #shx1 #shy1 #shz1 #wx #wy #wz)
+		do: [ :each |
+			aStream
+				nextPutAll: each;
+				nextPut: $:;
+				space.
+			((self perform: each) printOn: aStream) ]
+		separatedBy: [ aStream space ].
+
+	aStream nextPut: $)
+]
+
 { #category : #initialization }
 BlMatrix3D >> quaternion: aQuaternion [
 	"Set me to be a rotation matrix defined by a given quaternion"
+
 	| normalized x2 y2 z2 xx xy xz yy yz zz _wx _wy _wz |
 
 	"normalized quaternion"
@@ -335,30 +345,28 @@ BlMatrix3D >> quaternion: aQuaternion [
 	x := 0.0.
 	y := 0.0.
 	z := 0.0.
-	w := 1.0.
+	w := 1.0
 ]
 
 { #category : #'matrix - transformations' }
 BlMatrix3D >> rotateByRadians: aTheta around: aBlVector [
 	"Apply a rotation transformation by a given amount of radians around a provided axis vector"
+
 	| aRotationMatrix |
-	
 	aRotationMatrix := self class rotation: aTheta axis: aBlVector.
 	self multiplyBy: aRotationMatrix
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'matrix - transformations' }
 BlMatrix3D >> rotateX: aTheta [
 	"Rotate me around X-axis by aTheta degrees in radians"
+
 	| cosTheta sinTheta temp |
-	
 	cosTheta := aTheta cos.
-	(cosTheta closeTo: 0.0)
-		ifTrue: [ cosTheta := 0.0 ].
+	(cosTheta closeTo: 0.0) ifTrue: [ cosTheta := 0.0 ].
 
 	sinTheta := aTheta sin.
-	(sinTheta closeTo: 0.0)
-		ifTrue: [ sinTheta := 0.0 ].
+	(sinTheta closeTo: 0.0) ifTrue: [ sinTheta := 0.0 ].
 	
 	temp := shx0.
 	shx0 := (cosTheta * shx0) + (sinTheta * shx1).
@@ -380,10 +388,10 @@ BlMatrix3D >> rotateX: aTheta [
 { #category : #initialization }
 BlMatrix3D >> rotation: aTheta axis: aVector [
 	"Set me to be a 3D matrix representing a rotation about a given axis vector by aTheta radians"
+
 	| aNormalizedVector aX aY aZ cosTheta sinTheta sc sq |
-	
-	aVector length isZero
-		ifTrue: [ ^ self ].
+
+	aVector length isZero ifTrue: [ ^ self ].
 		
 	aNormalizedVector := aVector normalized.
 	
@@ -470,16 +478,13 @@ BlMatrix3D >> sz [
 BlMatrix3D >> transformBounds: aBlBounds [
 	"In-place transform given BlBounds according to my transformation.
 	(local to global transformation)"
-	<return: #BlBounds>
 
 	| quads minX maxX minY maxY|
-	
 	quads := { 
 		self transformPoint: (BlPoint2D x: aBlBounds left y: aBlBounds top).
 		self transformPoint: (BlPoint2D x: aBlBounds right y: aBlBounds top).
 		self transformPoint: (BlPoint2D x: aBlBounds left y: aBlBounds bottom).
-		self transformPoint: (BlPoint2D x: aBlBounds right y: aBlBounds bottom).
-	}.
+		self transformPoint: (BlPoint2D x: aBlBounds right y: aBlBounds bottom) }.
 	
 	minX := maxX := quads first x.
 	minY := maxY := quads first y.
@@ -499,9 +504,8 @@ BlMatrix3D >> transformBounds: aBlBounds [
 
 { #category : #'matrix - transforming points' }
 BlMatrix3D >> transformPoint2D: aPoint2D [
-	<return: #BlPoint2D>
+
 	| aX aY aW |
-	
 	aX := (aPoint2D x * sx) + (aPoint2D y * shx0) + x.
 	aY := (aPoint2D x * shy0) + (aPoint2D y * sy) + y.
 	aW := (aPoint2D x * wx) + (aPoint2D y * wy) + w.
@@ -513,9 +517,8 @@ BlMatrix3D >> transformPoint2D: aPoint2D [
 
 { #category : #'matrix - transforming points' }
 BlMatrix3D >> transformPoint3D: aPoint3D [
-	<return: #BlPoint3D>
+
 	| aX aY aZ aW |
-	
 	aX := (aPoint3D x * sx) + (aPoint3D y * shx0) + (aPoint3D z * shx1) + x.
 	aY := (aPoint3D x * shy0) + (aPoint3D y * sy) + (aPoint3D z * shy1) + y.
 	aZ := (aPoint3D x * shz0) + (aPoint3D y * shz1) + (aPoint3D z * sz) + z.
@@ -529,9 +532,8 @@ BlMatrix3D >> transformPoint3D: aPoint3D [
 
 { #category : #'matrix - transforming points' }
 BlMatrix3D >> transformPoint4D: aPoint4D [
-	<return: #BlPoint4D>
-	| aX aY aZ aW |
-	
+
+	| aX aY aZ aW |	
 	aX := (aPoint4D x * sx) + (aPoint4D y * shx0) + (aPoint4D z * shx1) + (aPoint4D w * x).
 	aY := (aPoint4D x * shy0) + (aPoint4D y * sy) + (aPoint4D z * shy1) + (aPoint4D w * y).
 	aZ := (aPoint4D x * shz0) + (aPoint4D y * shz1) + (aPoint4D z * sz) + (aPoint4D w * z).
@@ -546,8 +548,8 @@ BlMatrix3D >> transformPoint4D: aPoint4D [
 
 { #category : #'matrix - transformations' }
 BlMatrix3D >> translateBy: aBlVector [
+
 	| aTranslate3D |
-	
 	aTranslate3D := aBlVector asTranslate3D.
 
 	self

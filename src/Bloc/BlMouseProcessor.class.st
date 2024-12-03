@@ -35,9 +35,10 @@ BlMouseProcessor >> canBeClickAbortedEvent: aMouseUpEvent [
 { #category : #'event testing' }
 BlMouseProcessor >> canBeClickEvent: aMouseUpEvent [
 
-	^ dndInProgress not and: [
-		  lastMouseDownEvent isNotNil and: [
-			  aMouseUpEvent target = lastMouseDownEvent target ] ]
+	^ aMouseUpEvent isConsumed not and: [
+		  dndInProgress not and: [
+			  lastMouseDownEvent isNotNil and: [
+				  aMouseUpEvent target = lastMouseDownEvent target ] ] ]
 ]
 
 { #category : #'event testing' }
@@ -292,8 +293,7 @@ BlMouseProcessor >> handleMouseDown: aMouseDownEvent [
 	"First we need to register a pressed button"
 	self pressedButtons add: aMouseDownEvent button.
 
-	aTargetElement := self processPicking: aMouseDownEvent.
-
+	aTargetElement := self processPicking: aMouseDownEvent.	
 	aMouseDownEvent target: aTargetElement.
 
 	self fireEvent: aMouseDownEvent.
@@ -462,7 +462,6 @@ BlMouseProcessor >> preProcess: aMouseEvent [
 	| aTarget |
 	
 	aTarget := self processPicking: aMouseEvent.
-
 	aMouseEvent target: aTarget.
 
 	"mouse move is only fired when no dnd is in progress (else it is a drag event)"
@@ -582,18 +581,17 @@ BlMouseProcessor >> processMouseUp: aMouseUpEvent [
 BlMouseProcessor >> processPicking: aMouseEvent [
 	" return the element at event position "
 
-	| aTargetElement |
 	" check if the last overtarget is still valid "
 	self checkLastOverTarget.
 
-	"if the last over target contains the point we can start picking from it (speed-up picking a lot)"
+	"<old version kept for the record>
+	if the last over target contains the point we can start picking from it (speed-up picking a lot)"
 	"aTargetElement := (aMouseEvent canFindTargetFrom: lastOverTarget)
 		                  ifTrue: [ aMouseEvent findTargetFrom: lastOverTarget ]
-		                  ifFalse: [ aMouseEvent findTargetFrom: self space ]."
-	self flag: 'always pick element starting from space because of menu'.
-	aTargetElement := aMouseEvent findTargetFrom: self space.
-	"we have to ensure that aTarget is not nil"
-	^ aTargetElement ifNil: [ aTargetElement := self space root ]
+		                  ifFalse: [ aMouseEvent findTargetFrom: self space ].
+	</>"
+	" always pick element starting from space because of menu "
+	^ aMouseEvent findTargetFrom: self space
 ]
 
 { #category : #'initialize-release' }

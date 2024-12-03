@@ -15,20 +15,5 @@ space show
 Class {
 	#name : #BlSpaceShownEvent,
 	#superclass : #BlSpaceEvent,
-	#instVars : [
-		'space'
-	],
 	#category : #'Bloc-Events-Type-Space'
 }
-
-{ #category : #accessing }
-BlSpaceShownEvent >> space [
-
-	^ space
-]
-
-{ #category : #accessing }
-BlSpaceShownEvent >> space: aBlSpace [
-
-	space := aBlSpace
-]

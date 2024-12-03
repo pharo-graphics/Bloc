@@ -27,7 +27,7 @@ BlHostPulseLoopTest >> testOpeningAnSpaceDeferingAnErrorKeepsLoopRunning [
 	aSpace show.
 	
 	logger := MemoryLogger new.
-	logger runFor: BlParallelUniverseErrorDuringPulse during: [	
+	logger runFor: BlParallelUniverseErrorDuringPulseSignal during: [	
 			aSpace universe defer: [ 1 error: 'I am the debugger to kill' ].	
 			[aSpace universe hasDeferredActions] whileTrue: [ 
 				100 milliSeconds wait

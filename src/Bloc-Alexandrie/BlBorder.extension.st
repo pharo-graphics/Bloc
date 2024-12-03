@@ -2,8 +2,8 @@ Extension { #name : #BlBorder }
 
 { #category : #'*Bloc-Alexandrie' }
 BlBorder >> aeApplyTo: aeCanvas element: aBlElement [
-	"No need to set any parameter as there is no border"
 
+	"No need to set any parameter as there is no border"
 	self isTransparent ifTrue: [ ^ aeCanvas setBorderOff ].
 
 	"This will double-dispatch with the geometry, and 
@@ -19,9 +19,9 @@ BlBorder >> aeApplyTo: aeCanvas element: aBlElement [
 	aeCanvas setBorderBlock: [
 		paint aeApplyTo: aeCanvas.
 
-		"No dashes is the default"
-		style dashArray = aBlElement parent border style dashArray ifFalse: [
-			aeCanvas setDashes: style dashArray offset: style dashOffset ].
+		aeCanvas
+			setDashes: style dashArray
+			offset: style dashOffset.
 
 		aBlElement geometry hasJoins ifTrue: [
 			style lineJoin aeApplyTo: aeCanvas style: style ].

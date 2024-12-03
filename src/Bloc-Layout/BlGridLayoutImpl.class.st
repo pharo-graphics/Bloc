@@ -187,10 +187,10 @@ BlGridLayoutImpl >> layout: anElement in: aRectangle context: aBlElementBoundsUp
 	targetWidth := aRectangle width.
 	targetHeight := aRectangle height.
 	
-	paddingLeft := anElement insets left.
-	paddingRight := anElement insets right.
-	paddingTop := anElement insets top.
-	paddingBottom := anElement insets bottom.
+	paddingLeft := anElement padding left.
+	paddingRight := anElement padding right.
+	paddingTop := anElement padding top.
+	paddingBottom := anElement padding bottom.
 	
 	horizontalAxis applyLayoutWithin: targetWidth - paddingLeft - paddingRight.
 	verticalAxis applyLayoutWithin: targetHeight - paddingTop - paddingBottom.
@@ -274,8 +274,8 @@ BlGridLayoutImpl >> measure: anElement with: anExtentSpec [
 	self checkConsistency: anElement.
 	self invalidateValues.
 
-	hPadding := anElement insets width.
-	vPadding := anElement insets height.
+	hPadding := anElement padding width.
+	vPadding := anElement padding height.
 	
 	widthSpecSansPadding := self adjust: widthSpec by: hPadding negated.
 	heightSpecSansPadding := self adjust: heightSpec by: vPadding negated.

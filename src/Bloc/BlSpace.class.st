@@ -22,7 +22,6 @@ Class {
 	#traits : 'TBlEventTarget + TBlSpaceProperties + TBlDebug',
 	#classTraits : 'TBlEventTarget classTrait + TBlSpaceProperties classTrait + TBlDebug classTrait',
 	#instVars : [
-		'id',
 		'host',
 		'hostSpace',
 		'extent',
@@ -36,7 +35,7 @@ Class {
 		'focusProcessor',
 		'keyboardProcessor',
 		'focusChain',
-		'nextPulseRequested',
+		'pulseRequested',
 		'currentCursor',
 		'session',
 		'focused',
@@ -52,10 +51,8 @@ Class {
 		'reference',
 		'iconStencil',
 		'rootElement',
-		'userData'
-	],
-	#classVars : [
-		'UniqueIdGenerator'
+		'userData',
+		'previousVisibleStatus'
 	],
 	#category : #'Bloc-Space'
 }
@@ -79,11 +76,6 @@ BlSpace class >> extractRoots: aSetOfElements [
 							current := nil ]
 						ifFalse: [ current := current parent ] ] ].
 	^ roots
-]
-
-{ #category : #'class initialization' }
-BlSpace class >> initialize [
-	UniqueIdGenerator := BlUniqueIdGenerator new
 ]
 
 { #category : #'debug - simulation' }
@@ -138,7 +130,10 @@ BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
 			aSpace universe hasDeferredActions or: [
 				(aSpace taskQueue isEmpty or: [
 					aSpace time now >= deadline ]) not ] ]
-		do: [ aSpace pulse ].
+		do: [
+			"We delegate to the host class also to run a cycle, it is needed when using morphic host, as this can run in the same UI thread blocking everything."
+			aSpace host runOneCycle. 
+			aSpace pulse ].
 
 	aSpace pulse.
 
@@ -159,10 +154,10 @@ BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDurati
 		| aSemaphore |
 		aSemaphore := Semaphore new.
 		aSpace
-			when: BlSpaceShownEvent
+			addEventHandlerOn: BlSpaceShownEvent
 			doOnce: [ :event | aSemaphore signal ].
 		aSemaphore wait: aDuration ].
-	
+
 	^ self pulseUntilEmptyTaskQueue: aSpace timeout: aDuration
 ]
 
@@ -342,8 +337,11 @@ BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 		anEvent timestamp: aSpace time now ].
 
 	aSpace pulse.
-	aCollectionOfEvents do: [ :anEvent | aSpace dispatchEvent: anEvent ].
-	aSpace dispatchEvent: BlSpaceEventsProcessedEvent new.
+	aSpace
+		dispatchTimeEvent: BlSpaceEventsProcessedEvent
+		during: [
+			aCollectionOfEvents do: [ :anEvent |
+				aSpace dispatchEvent: anEvent ] ].
 	aSpace pulse.
 
 	topMostElement ifNotNil: [ topMostElement removeFromParent ]
@@ -503,14 +501,6 @@ BlSpace class >> simulateTextInput: aString on: aBlElement [
 		on: aBlElement
 ]
 
-{ #category : #'class initialization' }
-BlSpace class >> spaceWithId: aSpaceId do: aBlock [
-	^ self allSubInstances
-		detect: [ :eachSpace | eachSpace id = aSpaceId ]
-		ifFound: aBlock
-		ifNone: [ nil ]
-]
-
 { #category : #accessing }
 BlSpace >> asReference [
 	<return: #BlSpaceReference>
@@ -554,9 +544,10 @@ BlSpace >> clearDirtyElements [
 
 { #category : #'api - displaying' }
 BlSpace >> close [
-	"Delegate closing work to the Universe"
+	"Request closing this space. This might happen in a host process (async). 
+	This space can be reopened via `show`, either with current host or with another host."
 	
-	(BlParallelUniverse forHost: self host class) closeSpace: self
+	host universe closeSpace: self
 ]
 
 { #category : #'cursor managing' }
@@ -656,9 +647,10 @@ BlSpace >> dispatchAddedToSceneGraph [
 ]
 
 { #category : #'event handling' }
-BlSpace >> dispatchMousePickedOutside: aMouseOutsideEvent [
+BlSpace >> dispatchEventWithTimestamp: aBlEvent [ 
 
-	self root dispatchMousePickedOutside: aMouseOutsideEvent
+	aBlEvent timestamp ifNil: [ aBlEvent timestamp: self time now ].
+	self dispatchEvent: aBlEvent
 ]
 
 { #category : #'children dispatching' }
@@ -670,16 +662,16 @@ BlSpace >> dispatchRemovedFromSceneGraph [
 ]
 
 { #category : #pulse }
-BlSpace >> dispatchTimeEvent: aSpaceStepEventClass during: aBlock [
+BlSpace >> dispatchTimeEvent: aSpacePhaseEventClass during: aBlock [
+
 	| aStartTime |
-	
 	aStartTime := self time now.
-	aBlock cull: self.
-	self eventDispatcher dispatchEvent:
-			(aSpaceStepEventClass new
-				start: aStartTime;
-				end: self time now;
-				yourself)
+	aBlock value.
+	self dispatchEvent:
+		(aSpacePhaseEventClass new
+			 start: aStartTime;
+			 end: self time now;
+			 yourself)
 ]
 
 { #category : #'change - layout' }
@@ -851,6 +843,15 @@ BlSpace >> ensureSession [
 	self onSessionChanged: Smalltalk session
 ]
 
+{ #category : #'private - display' }
+BlSpace >> ensureWindowOpen [
+
+	hostSpace ifNotNil: [
+		hostSpace isValid ifFalse: [
+			host createHostSpaceFor: self.
+			previousVisibleStatus ifTrue: [ hostSpace open ] ] ]
+]
+
 { #category : #'event management accessing' }
 BlSpace >> eventDispatcher [
 	^ eventDispatcher
@@ -880,28 +881,6 @@ BlSpace >> extent: aNewExtent [
 	self windowExtent: aNewExtent
 ]
 
-{ #category : #'NOT-USED-private-change' }
-BlSpace >> extractAttachedElements: aSetOfElements [
-	^ aSetOfElements select: [ :eachElement |
-		eachElement isAttachedToSceneGraph
-			and: [ eachElement space == self ] ]
-]
-
-{ #category : #'NOT-USED-private-change' }
-BlSpace >> extractParents: aSetOfElements suchThat: aConditionBlock [
-	| theElementToProcess |
-
-	theElementToProcess := Set new.
-
-	aSetOfElements do: [ :eachElement |
-		eachElement
-			topMostParentSuchThat: aConditionBlock
-			ifFound: [ :aNotYetResolvedParent | theElementToProcess add: aNotYetResolvedParent ]
-			ifNone: [ theElementToProcess add: eachElement ] ].
-
-	^ theElementToProcess
-]
-
 { #category : #'private - change' }
 BlSpace >> extractRoots: aSetOfElements [
 	^ self class extractRoots: aSetOfElements
@@ -916,29 +895,6 @@ BlSpace >> findMouseEventTargetAt: aPoint [
 
 	<return: #BlElement or: nil>
 	^ self root findMouseEventTargetAt: aPoint
-]
-
-{ #category : #'event handling' }
-BlSpace >> findMousePickTargetFromEvent: anEvent [
-	"Return the deepest child element among all my children or myself that may be a target for mouse event at provided location.
-	The coordinate point is given in space coordinates.
-	I may return nil if no such child is found and if I can not be event target either"
-
-	<return: #BlElement or: nil>
-	(self findMouseEventTargetAt: anEvent position) ifNotNil: [ :found | " test found because if the result is the root then it means that no element has been found "
-		found ~~ self root ifTrue: [ " dispatch the mouse outside event to all alements of the scene graph "
-			self mouseProcessor isDragging ifFalse: [
-				self dispatchMousePickedOutside:
-					((anEvent newCopyFor: found) asMouseOutsideEvent
-						 lastMouseDownEvent: self mouseProcessor lastMouseDownEvent;
-						 yourself) ].
-			^ found ] ].
-	" no element found at all: all elements receive a outside event"
-	self mouseProcessor isDragging ifFalse: [
-		self dispatchMousePickedOutside: (anEvent clone asMouseOutsideEvent
-				 lastMouseDownEvent: self mouseProcessor lastMouseDownEvent;
-				 yourself) ].
-	^ nil
 ]
 
 { #category : #'focus managing' }
@@ -1077,20 +1033,17 @@ BlSpace >> host [
 { #category : #'host space - accessing' }
 BlSpace >> host: aHost [
 	"Change the host of this space. Asynchronous. If the space is opened, first destroy the host window and then open the space with a new host"
-	| aDetachedEventHandler |
-
-	aDetachedEventHandler := nil.
-
-	aDetachedEventHandler := BlEventHandler
-		on: BlSpaceDetachedEvent
-		do: [ :anEvent |
-			self removeEventHandler: aDetachedEventHandler.
-			host := aHost.
-			self universe attachSpace: self ].
 
 	self isOpened
-		ifTrue: [ self universe detachSpace: self ]
 		ifFalse: [ host := aHost ]
+		ifTrue: [
+			self
+				addEventHandlerOn: BlSpaceDetachedEvent
+				doOnce: [
+					host := aHost.
+					self universe attachSpace: self ].
+
+			self universe detachSpace: self ]
 ]
 
 { #category : #'host space - accessing' }
@@ -1150,27 +1103,13 @@ BlSpace >> icon: aStencil [
 	self fireEvent: (BlSpaceIconChangedEvent new iconStencil: aStencil)
 ]
 
-{ #category : #accessing }
-BlSpace >> id [
-	<return: #Number>
-	
-	^ id
-]
-
-{ #category : #initialization }
-BlSpace >> initDispatcher [
-	self eventDispatcher addEventFilter: self eventListener
-]
-
 { #category : #initialization }
 BlSpace >> initialize [
 
 	super initialize.
 
-	id := UniqueIdGenerator generateUniqueId.
-
 	host := BlHost pickHost.
-	nextPulseRequested := true.
+	pulseRequested := true.
 	session := Smalltalk session.
 	elementsNeedingPaint := Set new.
 	elementsNeedingLayout := Set new.
@@ -1181,7 +1120,7 @@ BlSpace >> initialize [
 
 	eventDispatcher := self defaultEventDispatcher.
 	eventListener := self defaultEventListener.
-	self initDispatcher.
+	eventDispatcher addEventFilter: eventListener.
 
 	mouseProcessor := BlMouseProcessor space: self.
 	focusProcessor := BlFocusProcessor space: self.
@@ -1288,10 +1227,16 @@ BlSpace >> isLayoutRequested [
 BlSpace >> isOpened [
 	"Return true if the space was shown (by sending #show message), false otherwise.
 	Please note, that an opened space can be hidden which does not influence the result of #isOpened"
-	<return: #Boolean>
 
-	^ (BlParallelUniverse existsForHost: self host class)
-		and: [ (BlParallelUniverse forHost: self host class) hasSpace: self ]
+	^ (self host class hasUniverse)
+		and: [ self universe hasSpace: self ]
+]
+
+{ #category : #pulse }
+BlSpace >> isPulseRequested [
+	"Return true if space pulse was requested, false otherwise"
+
+	^ pulseRequested
 ]
 
 { #category : #'window - properties' }
@@ -1443,13 +1388,14 @@ BlSpace >> printOn: aStream [
 
 { #category : #pulse }
 BlSpace >> processPulse [
+
 	self ensureSession.
-	
-	self pulseRequested
-		ifFalse: [ ^ self ].
-	
+
+	pulseRequested ifFalse: [ ^ self ].
+
 	"flip to false beforehand to be able to know if the next pulse was needed during the frame"
-	nextPulseRequested := false.
+	pulseRequested := false.
+
 	self frame runOn: self
 ]
 
@@ -1458,13 +1404,23 @@ BlSpace >> pulse [
 	self processPulse
 ]
 
-{ #category : #'change - rendering' }
+{ #category : #pulse }
 BlSpace >> pulseRequested [
-
 	"Return true if space pulse was requested, false otherwise"
 
-	<return: #Boolean>
-	^ nextPulseRequested
+	self
+		deprecated: 'Use #isPulseRequested instead'
+		transformWith:
+			'`@receiver pulseRequested'
+			-> '`@receiver isPulseRequested'.
+
+	^ self isPulseRequested
+]
+
+{ #category : #'startup - shutdown' }
+BlSpace >> rememberVisibleStatus [
+	
+	previousVisibleStatus := self isVisible
 ]
 
 { #category : #pulse }
@@ -1500,10 +1456,10 @@ BlSpace >> requestLayout: anElement [
 	self requestNextPulse
 ]
 
-{ #category : #'change - rendering' }
+{ #category : #pulse }
 BlSpace >> requestNextPulse [
 
-	nextPulseRequested := true
+	pulseRequested := true
 ]
 
 { #category : #'window - properties' }
@@ -1585,10 +1541,9 @@ BlSpace >> setPosition: aPoint [
 
 { #category : #'api - displaying' }
 BlSpace >> show [
-	"Open me in a window and show it to the user"
+	"Show this space to the user, using current host and other parameters such as extent, title, etc."
 
-	"delegate showing work to the Universe"	
-	(BlParallelUniverse forHost: self host class) openSpace: self
+	self universe openSpace: self
 ]
 
 { #category : #'api - displaying' }
@@ -1685,9 +1640,8 @@ BlSpace >> ungrabFocus [
 
 { #category : #accessing }
 BlSpace >> universe [
-	<return: #BlParallelUniverse>
 
-	^ BlParallelUniverse forHost: self host class
+	^ self host universe
 ]
 
 { #category : #'cursor managing' }

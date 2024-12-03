@@ -288,8 +288,8 @@ BlLayout >> measureChildWithMargins: anElement parentSpec: parentSpec widthUsed:
 	self
 		measureChild: anElement
 		parentSpec: parentSpec
-		widthUsed: anElement parent insets width + anElement outsets width + widthUsed
-		heightUsed: anElement parent insets height + anElement outsets height + heightUsed
+		widthUsed: anElement parent padding width + anElement margin width + widthUsed
+		heightUsed: anElement parent padding height + anElement margin height + heightUsed
 ]
 
 { #category : #'private - measurement' }

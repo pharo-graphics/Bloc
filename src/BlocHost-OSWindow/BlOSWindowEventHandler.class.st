@@ -16,23 +16,17 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlOSWindowEventHandler class >> new [
-
-	self error: 'Use #window: instead'
-]
-
-{ #category : #'instance creation' }
-BlOSWindowEventHandler class >> window: anOSWindow [
+BlOSWindowEventHandler class >> window: aOSWindow time: aBlTime keyboardKeyTable: aKeyboardKeyTable [
 
 	^ self basicNew
-		initialize;
-		window: anOSWindow;
+		initializeWithWindow: aOSWindow
+		time: aBlTime
+		keyboardKeyTable: aKeyboardKeyTable;
 		yourself
 ]
 
 { #category : #converting }
 BlOSWindowEventHandler >> convertButton: osButton [
-	<return: #BlMouseButton>
 
 	osButton = 1 ifTrue: [ ^ BlMouseButton primary ].
 	osButton = 2 ifTrue: [ ^ BlMouseButton middle ].
@@ -43,14 +37,12 @@ BlOSWindowEventHandler >> convertButton: osButton [
 
 { #category : #converting }
 BlOSWindowEventHandler >> convertKeyFromEvent: anEvent [
-	<return: #KeyboardKey>
 
 	^ self keyboardKeyTable keyFromVirtualCode: anEvent symbol
 ]
 
 { #category : #converting }
 BlOSWindowEventHandler >> convertKeyModifiers: modifiers [
-	<return: #BlKeyModifiers>
 
 	^ BlKeyModifiers
 		shift: modifiers shift
@@ -61,19 +53,8 @@ BlOSWindowEventHandler >> convertKeyModifiers: modifiers [
 
 { #category : #actions }
 BlOSWindowEventHandler >> enqueue: anEvent [
-	self window enqueueEvent: anEvent
-]
 
-{ #category : #'visiting - window' }
-BlOSWindowEventHandler >> enqueueSpaceResized: aPoint [
-
-	| aBlocEvent |
-	aBlocEvent := BlSpaceResizedEvent new
-		extent: aPoint;
-		timestamp: time now;
-		yourself.
-		
-	self enqueue: aBlocEvent
+	window enqueueEvent: anEvent
 ]
 
 { #category : #'visiting - window' }
@@ -92,12 +73,14 @@ BlOSWindowEventHandler >> handleEvent: anEvent [
 ]
 
 { #category : #initialization }
-BlOSWindowEventHandler >> initialize [
+BlOSWindowEventHandler >> initializeWithWindow: aOSWindow time: aBlTime keyboardKeyTable: aKeyboardKeyTable [
 
-	super initialize.
-	
-	time := BlTime real.
-	
+	self initialize.
+
+	window := aOSWindow.
+	time := aBlTime.
+	keyboardKeyTable := aKeyboardKeyTable.
+
 	self registerGesture: OSTouchTwoFingersScrollDetector new.
 	self registerGesture: OSTouchTwoFingersPinchDetector new
 ]
@@ -387,12 +370,12 @@ BlOSWindowEventHandler >> visitWindowResizeEvent: anEvent [
 
 { #category : #'api - accessing' }
 BlOSWindowEventHandler >> window [
-	<return: #BlOSWindowHostSpace>
 
 	^ window
 ]
 
 { #category : #'api - accessing' }
 BlOSWindowEventHandler >> window: aBlOSWindowSpace [
+
 	window := aBlOSWindowSpace
 ]

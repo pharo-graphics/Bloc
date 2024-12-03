@@ -1,13 +1,5 @@
 "
-I am an event dispatcher that directly dispatches events to the registered event handlers.
-I do not support event bubbling. If you need events to be dispatched through a composition tree you might want to use `BlBubblingEventDispatcher`.
-
-Example:
-
-```
-BlDirectEventDispatcher on: BlElement new
-```
-
+I dispatch events directly to the registered event handlers.
 "
 Class {
 	#name : #BlDirectEventDispatcher,
@@ -22,16 +14,9 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlDirectEventDispatcher class >> new [
-	self error: 'Do not create an instance of ', self name, ' using new. Please use #on: instead'
-]
-
-{ #category : #'instance creation' }
 BlDirectEventDispatcher class >> on: aTBlEventTarget [
-	<return: #BlDirectEventDispatcher>
 
-	^ self basicNew
-		initialize;
+	^ self new
 		owner: aTBlEventTarget;
 		yourself
 ]
@@ -42,9 +27,8 @@ BlDirectEventDispatcher >> addEventFilter: aFilter [
 	Their main goal is to prevent some specific events from being handled by basic handlers.
 	For that custom filters should mark event as ==consumed: true== which instantly stops propagation"
 
-	"It is not very common to have event filters so we initialize registry lazily"
-	filters ifNil: [
-		filters := self defaultFilterRegistry ].
+	"Lazy initialization"
+	filters ifNil: [ filters := self newFilterRegistry ].
 	filters add: aFilter.
 
 	"send hook AFTER filter is added"
@@ -53,10 +37,9 @@ BlDirectEventDispatcher >> addEventFilter: aFilter [
 
 { #category : #'api - adding/removing' }
 BlDirectEventDispatcher >> addEventHandler: aHandler [
-	
-	"It is not very common to have event handlers so we initialize registry lazily"
-	handlers ifNil: [
-		handlers := self defaultHandlerRegistry ].
+
+	"Lazy initialization"
+	handlers ifNil: [ handlers := self newHandlerRegistry ].
 	handlers add: aHandler.
 
 	"send hook AFTER handler is added"
@@ -65,50 +48,34 @@ BlDirectEventDispatcher >> addEventHandler: aHandler [
 
 { #category : #'api - adding/removing' }
 BlDirectEventDispatcher >> addShortcut: aBlShortcut [
+
 	shortcutHandler := shortcutHandler addShortcut: aBlShortcut
-]
-
-{ #category : #initialization }
-BlDirectEventDispatcher >> defaultFilterRegistry [
-
-	^ BlHandlerRegistry preferableHandlerRegistryClass new
-]
-
-{ #category : #initialization }
-BlDirectEventDispatcher >> defaultHandlerRegistry [
-
-	^ BlHandlerRegistry preferableHandlerRegistryClass new
 ]
 
 { #category : #'api - event managing' }
 BlDirectEventDispatcher >> dispatchEvent: anEvent next: aBlEventDispatcherChain [
-	<return: #BlEvent>
-	
-	anEvent isConsumed
-		ifTrue: [ ^ anEvent ].
-	
+
+	anEvent isConsumed ifTrue: [ ^ anEvent ].
+
 	anEvent target == self owner
-		ifTrue: [ anEvent arrivedTarget: self owner. ]
+		ifTrue: [ anEvent arrivedTarget: self owner ]
 		ifFalse: [ anEvent forwardingTarget: self owner ].
 
 	"filters initialized lazily, do nothing if there are none of them"
-	filters ifNotNil: [ :theFilters |
-		theFilters dispatchEvent: anEvent ].
+	filters ifNotNil: [ :theFilters | theFilters dispatchEvent: anEvent ].
 
-	anEvent isConsumed
-		ifTrue: [ ^ anEvent ].
+	anEvent isConsumed ifTrue: [ ^ anEvent ].
 
 	"handlers initialized lazily, do nothing if there are none of them"
 	handlers ifNotNil: [ :theHandlers |
 		theHandlers dispatchEvent: anEvent ].
-	
-	anEvent isConsumed
-		ifTrue: [ ^ anEvent ].
+
+	anEvent isConsumed ifTrue: [ ^ anEvent ].
 
 	"shortcutHandler is special case, treat it differently"
-	(shortcutHandler wantsEvent: anEvent)
-		ifTrue: [ shortcutHandler handleEvent: anEvent ].
-		
+	(shortcutHandler wantsEvent: anEvent) ifTrue: [
+		shortcutHandler handleEvent: anEvent ].
+
 	^ anEvent
 ]
 
@@ -128,31 +95,32 @@ BlDirectEventDispatcher >> handlersDo: aBlock [
 
 { #category : #'api - accessing' }
 BlDirectEventDispatcher >> hasEventFilterSuchThat: aBlock [
-	<return: #Boolean>
 
 	self filtersDo: [ :eachfilter |
-		(aBlock value: eachfilter)
-			ifTrue: [ ^ true ] ].
-		
+		(aBlock value: eachfilter) ifTrue: [ ^ true ] ].
+
 	^ false
 ]
 
 { #category : #'api - testing' }
 BlDirectEventDispatcher >> hasFilter: anEventHandler [
+
 	^ filters
-		ifNil: [ false ]
-		ifNotNil: [ filters hasHandler: anEventHandler ]
+		  ifNil: [ false ]
+		  ifNotNil: [ filters hasHandler: anEventHandler ]
 ]
 
 { #category : #'api - testing' }
 BlDirectEventDispatcher >> hasHandler: anEventHandler [
+
 	^ handlers
-		ifNil: [ false ]
-		ifNotNil: [ handlers hasHandler: anEventHandler ]
+		  ifNil: [ false ]
+		  ifNotNil: [ handlers hasHandler: anEventHandler ]
 ]
 
 { #category : #initialization }
 BlDirectEventDispatcher >> initialize [
+
 	super initialize.
 
 	"Note, that we do not expose filters and handlers to the outer worlds with getters because it is not part
@@ -166,73 +134,81 @@ BlDirectEventDispatcher >> initialize [
 	shortcutHandler := BlShortcutHandlerWithoutShortcuts uniqueInstance
 ]
 
+{ #category : #initialization }
+BlDirectEventDispatcher >> newFilterRegistry [
+
+	^ BlHandlerRegistry preferableHandlerRegistryClass new
+]
+
+{ #category : #initialization }
+BlDirectEventDispatcher >> newHandlerRegistry [
+
+	^ BlHandlerRegistry preferableHandlerRegistryClass new
+]
+
 { #category : #'api - accessing' }
 BlDirectEventDispatcher >> owner [
-	<return: #TBlEventTarget>
-
-	self
-		assert: [ owner isNotNil ]
-		description: [ 'Can not access owner if it does not exist' ].
 
 	^ owner
 ]
 
 { #category : #'private - accessing' }
 BlDirectEventDispatcher >> owner: aTBlEventTarget [
+
 	owner := aTBlEventTarget
 ]
 
 { #category : #printing }
 BlDirectEventDispatcher >> printOn: aStream [
-	aStream nextPutAll: self type, ' event dispatcher for '.
-	self owner printOn: aStream
+
+ 	super printOn: aStream.
+ 	aStream
+ 		nextPutAll: '(owner: ';
+ 		nextPutAll: owner;
+ 		nextPut: $)
 ]
 
 { #category : #'api - adding/removing' }
 BlDirectEventDispatcher >> removeAllShortcutsWithCombination: aBlKeyCombination [
+
 	shortcutHandler := shortcutHandler removeAllWithCombination: aBlKeyCombination
 ]
 
 { #category : #'api - adding/removing' }
 BlDirectEventDispatcher >> removeEventFilter: aFilter [
-	(self hasFilter: aFilter)
-		ifFalse: [ ^ self ].
 
-	filters
-		ifNil: [ ^ self ].
+	(self hasFilter: aFilter) ifFalse: [ ^ self ].
+
+	filters ifNil: [ ^ self ].
 	filters remove: aFilter.
 	"free memory as soon as we got rid of all event filters"
-	filters isEmpty
-		ifTrue: [ filters := nil ].
-	
+	filters isEmpty ifTrue: [ filters := nil ].
+
 	aFilter onUninstalledIn: self owner
 ]
 
 { #category : #'api - adding/removing' }
 BlDirectEventDispatcher >> removeEventFiltersSuchThat: aBlock [
-	"remove all event handlers for those aBlock returns true"
+	"Remove all event handlers for those aBlock returns true"
+
 	| toBeRemoved |
-	filters
-		ifNil: [ ^ self ].
-	
+	filters ifNil: [ ^ self ].
+
 	toBeRemoved := filters removeAllSuchThat: aBlock.
-	filters isEmpty
-		ifTrue: [ filters := nil ].
-	
+	filters isEmpty ifTrue: [ filters := nil ].
+
 	toBeRemoved do: [ :aHandler | aHandler onUninstalledIn: self owner ]
 ]
 
 { #category : #'api - adding/removing' }
 BlDirectEventDispatcher >> removeEventHandler: anHandler [
-	(self hasHandler: anHandler)
-		ifFalse: [ ^ self ].
 
-	handlers
-		ifNil: [ ^ self ].
+	(self hasHandler: anHandler) ifFalse: [ ^ self ].
+
+	handlers ifNil: [ ^ self ].
 	handlers remove: anHandler.
 	"free memory as soon as we got rid of all event handlers"
-	handlers isEmpty
-		ifTrue: [ handlers := nil ].
+	handlers isEmpty ifTrue: [ handlers := nil ].
 
 	anHandler onUninstalledIn: self owner
 ]
@@ -240,63 +216,57 @@ BlDirectEventDispatcher >> removeEventHandler: anHandler [
 { #category : #'api - adding/removing' }
 BlDirectEventDispatcher >> removeEventHandlers [
 	"Remove all my event handlers"
-	| oldHandlers |
 
-	handlers
-		ifNil: [ ^ self ].
+	| oldHandlers |
+	handlers ifNil: [ ^ self ].
 
 	oldHandlers := handlers.
 	handlers := nil.
 
-	oldHandlers do: [ :eachHandler | eachHandler onUninstalledIn: self owner ]
+	oldHandlers do: [ :eachHandler |
+		eachHandler onUninstalledIn: self owner ]
 ]
 
 { #category : #'api - adding/removing' }
 BlDirectEventDispatcher >> removeEventHandlersSuchThat: aBlock [
-	"remove all event handlers for those aBlock returns true"
+	"Remove all event handlers for those aBlock returns true"
+
 	| toBeRemoved |
-	handlers
-		ifNil: [ ^ self ].
-	
+	handlers ifNil: [ ^ self ].
+
 	toBeRemoved := handlers removeAllSuchThat: aBlock.
-	handlers isEmpty
-		ifTrue: [ handlers := nil ].
-	
+	handlers isEmpty ifTrue: [ handlers := nil ].
+
 	toBeRemoved do: [ :aHandler | aHandler onUninstalledIn: self owner ]
 ]
 
 { #category : #'api - adding/removing' }
 BlDirectEventDispatcher >> removeShortcut: aBlShortcut [
+
 	shortcutHandler := shortcutHandler removeShortcut: aBlShortcut
 ]
 
 { #category : #'private - accessing' }
 BlDirectEventDispatcher >> shortcutHandler [
+
 	^ shortcutHandler
-]
-
-{ #category : #'api - accessing' }
-BlDirectEventDispatcher >> type [
-	<return: #String>
-
-	^ 'Direct'
 ]
 
 { #category : #'api - event managing' }
 BlDirectEventDispatcher >> wantsEvent: anEvent [
 	"Return true if there are any filters or handlers interesting in a given event,
 	false otherwise"
-	<return: #Boolean>
 
-	"first ask shortcutHandler because it always presents"
-	(shortcutHandler wantsEvent: filters)
-		ifTrue: [ ^ true ].
+	"first, ask shortcutHandler because it is always present"
+	(shortcutHandler wantsEvent: filters) ifTrue: [ ^ true ].
 
-	(filters isNotNil and: [ filters anySatisfy: [ :aFilter | aFilter wantsEvent: anEvent ] ])
-		ifTrue: [ ^ true ].
+	(filters isNotNil and: [
+		filters anySatisfy: [ :aFilter | aFilter wantsEvent: anEvent ] ])
+			ifTrue: [ ^ true ].
 
-	(handlers isNotNil and: [ handlers anySatisfy: [ :aHandler | aHandler wantsEvent: anEvent ] ])
-		ifTrue: [ ^ true ].
+	(handlers isNotNil and: [
+		handlers anySatisfy: [ :aHandler | aHandler wantsEvent: anEvent ] ])
+			ifTrue: [ ^ true ].
 
 	^ false
 ]

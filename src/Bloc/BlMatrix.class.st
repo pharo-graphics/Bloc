@@ -12,20 +12,13 @@ Class {
 
 { #category : #comparing }
 BlMatrix >> = anObject [
-	self subclassResponsibility
-]
 
-{ #category : #converting }
-BlMatrix >> asMatrixCollection [
-	<return: #Array2D>
-	
-	^ self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #'matrix - mathematical functions' }
 BlMatrix >> decomposition [
-	"Return a decomposition of the matrix"
-	<return: #BlMatrixDecomposition>
+	"Return a decomposition of the matrix (`BlMatrixDecomposition`)"
 	
 	^ self subclassResponsibility
 ]
@@ -33,20 +26,19 @@ BlMatrix >> decomposition [
 { #category : #'matrix - mathematical functions' }
 BlMatrix >> determinant [
 	"Compute and return my determinant"
-	<return: #Number>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #comparing }
 BlMatrix >> hash [
+
 	^ self subclassResponsibility
 ]
 
 { #category : #'matrix - mathematical functions' }
 BlMatrix >> interpolate: aFactor to: anotherMatrix [
-	"Perform a matrix interpolation with a given factor"
-	<return: #BlMatrix>
+	"Answer a `BlMatrix` that interpolates self with another matrix, with a given factor."
 	
 	^ (self decomposition
 		interpolate: aFactor
@@ -119,43 +111,39 @@ BlMatrix >> scaleBy: aBlVector [
 
 { #category : #'matrix - transforming points' }
 BlMatrix >> transformBounds: aBlBounds [
-	"In-place transform given BlBounds according to my transformation.
+	"In-place transform given `BlBounds` according to my transformation.
 	(local to global transformation)"
-	<return: #BlBounds>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'matrix - transforming points' }
-BlMatrix >> transformPoint2D: aPoint2D [
+BlMatrix >> transformPoint2D: aBlPoint2D [
 	"Transform a given 2D point (either a ==Point== or ==BlPoint2D==).
 	In any case return BlPoint2D"
-	<return: #BlPoint2D>
 
 	^ self subclassResponsibility
 ]
 
 { #category : #'matrix - transforming points' }
-BlMatrix >> transformPoint3D: aPoint3D [
+BlMatrix >> transformPoint3D: aBlPoint3D [
 	"Transform a given 3D point according to this transformation matrix"
-	<return: #BlPoint3D>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'matrix - transforming points' }
-BlMatrix >> transformPoint4D: aPoint4D [
+BlMatrix >> transformPoint4D: aBlPoint4D [
 	"Transform a given 4D point according to this transformation matrix"
-	<return: #BlPoint4D>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'matrix - transforming points' }
 BlMatrix >> transformPoint: aPoint [
-	"Transform a given point according to transformation matrix.
-	I perform a double dispatch to handle 2D/3D/4D points and 2D/3D matrices"
-	<return: #BlPoint>
+	"Return a `BlPoint` that is the transformation of a given point according
+	to transformation matrix.
+	I perform a double dispatch to handle 2D/3D/4D points and 2D/3D matrices."
 
 	^ aPoint transformedOn: self
 ]
