@@ -70,18 +70,16 @@ BlMatrix2D class >> translation: aBlVector [
 
 { #category : #comparing }
 BlMatrix2D >> = anObject [
-	self == anObject
-		ifTrue: [ ^ true ].
-	self class = anObject class
-		ifFalse: [ ^ false ].
-		
-		
-	^ self sx = anObject sx
-		and: [ self shy = anObject shy
-			and: [ self shx = anObject shx
-				and: [ self sy = anObject sy
-					and: [ self x = anObject x
-						and: [ self y = anObject y ] ] ] ] ]
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+
+
+	^ self sx = anObject sx and: [
+		  self shy = anObject shy and: [
+			  self shx = anObject shx and: [
+				  self sy = anObject sy and: [
+					  self x = anObject x and: [ self y = anObject y ] ] ] ] ]
 ]
 
 { #category : #'matrix - mathematical functions' }
@@ -146,24 +144,22 @@ BlMatrix2D >> decomposition [
 { #category : #'matrix - mathematical functions' }
 BlMatrix2D >> determinant [
 	"Compute and return my determinant"
-	<return: #Number>
 	
 	^ (sx * sy) - (shy * shx)
 ]
 
 { #category : #comparing }
 BlMatrix2D >> hash [
-	^ ((((self sx hash bitXor: self shy hash)
-		bitXor: self shx hash)
-			bitXor: self sy hash)
-				bitXor: self x hash)
-					bitXor: self y hash
+
+	^ ((((self sx hash bitXor: self shy hash) bitXor: self shx hash)
+		    bitXor: self sy hash) bitXor: self x hash) bitXor: self y hash
 ]
 
 { #category : #initialization }
 BlMatrix2D >> initialize [
+
 	super initialize.
-	
+
 	sx := 1.0.
 	shy := 0.0.
 	shx := 0.0.
@@ -176,6 +172,7 @@ BlMatrix2D >> initialize [
 BlMatrix2D >> inverse [
 	"In-place inverse me.
 	Throw BlSingularMatrixError if matrix is singular (non-invertible or degenerate)"
+
 	| a b c d e f determinant inverseDeterminant |
 	
 	a := sy.
@@ -186,8 +183,8 @@ BlMatrix2D >> inverse [
 	f := (x * shy) - (sx * y).
 	
 	determinant := self determinant.
-	determinant isZero
-		ifTrue: [ BlSingularMatrixError signal: 'Matrix is singular and can not be inverted!' ].
+	determinant isZero ifTrue: [
+		BlSingularMatrixError signal: 'Matrix is singular and can not be inverted!' ].
 		
 	inverseDeterminant := 1.0 / determinant.
 	
@@ -241,6 +238,7 @@ BlMatrix2D >> matrix: aMatrix [
 { #category : #'matrix - transformations' }
 BlMatrix2D >> multiplyBy: aMatrix2D [
 	"Perform a right multiplication by a given 2D matrix"
+
 	| r11 r12 r21 r22 r31 r32 |
 	
 	r11 := (sx * aMatrix2D sx) + (shy * aMatrix2D shx).
@@ -305,6 +303,7 @@ BlMatrix2D >> reflection: aDiagonalVector [
 { #category : #'matrix - transformations' }
 BlMatrix2D >> rotateByRadians: anAngle around: aBlVector [
 	"Apply a rotation transformation by a given amount of radians around a provided axis vector"
+
 	self
 		assert: [ aBlVector = BlVector zAxis ]
 		description: [ '2D Matrix is incompatible with 3D transformation' ].
@@ -335,9 +334,9 @@ BlMatrix2D >> rotation: anAngle [
 
 { #category : #'matrix - transformations' }
 BlMatrix2D >> scaleBy: aBlVector [
-	| aScale3D |
 	"Apply a scaling defined by a given vector"
-	
+
+	| aScale3D |
 	aScale3D := aBlVector asScale3D.
 
 	self
@@ -372,40 +371,40 @@ BlMatrix2D >> shear: aCoefficientPoint [
 { #category : #'matrix - accessing' }
 BlMatrix2D >> shx [
 	"Returns the X coordinate shearing element of the affine transformation matrix"
-	<return: #Number>
 
 	^ shx
 ]
 
 { #category : #'matrix - accessing' }
-BlMatrix2D >> shx: anObject [
-	shx := anObject
+BlMatrix2D >> shx: aNumber [
+
+	shx := aNumber
 ]
 
 { #category : #'matrix - accessing' }
 BlMatrix2D >> shy [
 	"Returns the Y coordinate shearing element of the affine transformation matrix"
-	<return: #Number>
 	
 	^ shy
 ]
 
 { #category : #'matrix - accessing' }
-BlMatrix2D >> shy: anObject [
-	shy := anObject
+BlMatrix2D >> shy: aNumber [
+
+	shy := aNumber
 ]
 
 { #category : #'matrix - accessing' }
 BlMatrix2D >> sx [
 	"Returns the X coordinate scaling element of the affine transformation matrix"
-	<return: #Number>
 
 	^ sx
 ]
 
 { #category : #'matrix - accessing' }
-BlMatrix2D >> sx: anObject [
-	sx := anObject
+BlMatrix2D >> sx: aNumber [
+
+	sx := aNumber
 ]
 
 { #category : #'matrix - accessing' }
@@ -416,19 +415,19 @@ BlMatrix2D >> sy [
 ]
 
 { #category : #'matrix - accessing' }
-BlMatrix2D >> sy: anObject [
-	sy := anObject
+BlMatrix2D >> sy: aNumber [
+
+	sy := aNumber
 ]
 
 { #category : #'matrix - transforming points' }
 BlMatrix2D >> transformBounds: aBlBounds [
-	"In-place transform given BlBounds according to my transformation.
+	"In-place transform given `BlBounds` according to my transformation.
 	(local to global transformation)"
-	<return: #BlBounds>
+
 	| newLeft newTop newRight newBottom quadTopLeft quadTopRight quadBottomLeft quadBottomRight |
 
-	self isIdentity
-		ifTrue: [ ^ aBlBounds ].
+	self isIdentity ifTrue: [ ^ aBlBounds ].
 
 	quadTopLeft := self transformX: aBlBounds left Y: aBlBounds top.
 	quadTopRight := self transformX: aBlBounds right Y: aBlBounds top.
@@ -471,10 +470,10 @@ BlMatrix2D >> transformPoint2D: aPoint2D [
 
 { #category : #'matrix - transforming points' }
 BlMatrix2D >> transformX: aX Y: aY [
+
 	| newX newY |
-	
-	newX := (aX * sx) + (aY * shx) + x.
-	newY := (aX * shy) + (aY * sy) + y.
+	newX := aX * sx + (aY * shx) + x.
+	newY := aX * shy + (aY * sy) + y.
 
 	^ newX @ newY
 ]
@@ -494,44 +493,44 @@ BlMatrix2D >> transformY: aY withX: aX [
 { #category : #'matrix - transformations' }
 BlMatrix2D >> translateBy: aBlVector [
 	"Apply a translation by a given vector"
+
 	| aTranslate3D |
-	
 	aTranslate3D := aBlVector asTranslate3D.
-	
+
 	self
 		assert: [ aTranslate3D z isZero ]
 		description: [ '2D Matrix is incompatible with 3D transformation' ].
-		
+
 	"Apply the translation AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix
 	will first be transformed by the original transform,
 	then be translated by given translation"
 	x := x + aTranslate3D x.
-	y := y + aTranslate3D y.
+	y := y + aTranslate3D y
 ]
 
 { #category : #'matrix - accessing' }
 BlMatrix2D >> x [
 	"Returns the X coordinate of the translation element of the affine transformation matrix"
-	<return: #Number>
 	
 	^ x
 ]
 
 { #category : #'matrix - accessing' }
-BlMatrix2D >> x: anObject [
-	x := anObject
+BlMatrix2D >> x: aNumber [
+
+	x := aNumber
 ]
 
 { #category : #'matrix - accessing' }
 BlMatrix2D >> y [
 	"Returns the Y coordinate of the translation element of the affine transformation matrix"
-	<return: #Number>
 
 	^ y
 ]
 
 { #category : #'matrix - accessing' }
-BlMatrix2D >> y: anObject [
-	y := anObject
+BlMatrix2D >> y: aNumber [
+
+	y := aNumber
 ]
