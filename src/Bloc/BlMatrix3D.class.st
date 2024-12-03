@@ -85,19 +85,6 @@ BlMatrix3D >> = anObject [
 	^true
 ]
 
-{ #category : #converting }
-BlMatrix3D >> asMatrixCollection [
-	^ Array2D
-		rows: 4
-		columns: 4
-		contents: {
-			sx . shx0 . shx1 . x .
-			shy0 . sy . shy1 . y .
-			shz0 . shz1 . sz . z .
-			wx . wy . wz . w
-		}
-]
-
 { #category : #initialization }
 BlMatrix3D >> initialize [
 	super initialize.
@@ -294,6 +281,25 @@ BlMatrix3D >> preTranslateX: aX Y: aY Z: aZ [
 	y := y + (aX * shy0) + (aY * sy) + (aZ * shy1).
 	z := z + (aX * shz0) + (aY * shz1) + (aZ * sz).
 	w := w + (aX * wx) + (aY * wy) + (aZ * wz)
+]
+
+{ #category : #printing }
+BlMatrix3D >> printOn: aStream [
+
+	super printOn: aStream.
+
+	aStream nextPut: $(.
+
+	#(#x #y #z #w #sx #sy #sz #shx0 #shy0 #shz0 #shx1 #shy1 #shz1 #wx #wy #wz)
+		do: [ :each |
+			aStream
+				nextPutAll: each;
+				nextPut: $:;
+				space.
+			((self perform: each) printOn: aStream) ]
+		separatedBy: [ aStream space ].
+
+	aStream nextPut: $)
 ]
 
 { #category : #initialization }
