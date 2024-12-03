@@ -15,13 +15,6 @@ BlMatrix >> = anObject [
 	self subclassResponsibility
 ]
 
-{ #category : #converting }
-BlMatrix >> asMatrixCollection [
-	<return: #Array2D>
-	
-	^ self subclassResponsibility
-]
-
 { #category : #'matrix - mathematical functions' }
 BlMatrix >> decomposition [
 	"Return a decomposition of the matrix"
@@ -45,8 +38,7 @@ BlMatrix >> hash [
 
 { #category : #'matrix - mathematical functions' }
 BlMatrix >> interpolate: aFactor to: anotherMatrix [
-	"Perform a matrix interpolation with a given factor"
-	<return: #BlMatrix>
+	"Answer a `BlMatrix` that interpolates self with another matrix, with a given factor."
 	
 	^ (self decomposition
 		interpolate: aFactor
