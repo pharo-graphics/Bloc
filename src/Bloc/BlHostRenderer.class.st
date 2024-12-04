@@ -137,15 +137,13 @@ BlHostRenderer >> render: aHostSpace [
 	Note: if there are no dirty areas nothing will happen, including window
 	or canvas update."
 
-	| aSpace shouldUpdateEveryFrame isRenderNeeded |
+	| aSpace isRenderNeeded |
+	self isValid ifFalse: [ ^ self ].
+
 	aSpace := aHostSpace space.
-	shouldUpdateEveryFrame := surface shouldUpdateEveryFrame.
 	isRenderNeeded := aSpace hasDirtyElements.
 
-	(shouldUpdateEveryFrame or: [ isRenderNeeded ])
-		ifFalse: [ ^ self ].
-
-	self isValid
+	(surface shouldUpdateEveryFrame or: [ isRenderNeeded ])
 		ifFalse: [ ^ self ].
 
 	[ | theDamagedRectangles |
@@ -158,5 +156,30 @@ BlHostRenderer >> render: aHostSpace [
 		surface performUpdates.
 
 		surfaceRenderer renderSurface: surface damaged: theDamagedRectangles ]
+
 			ensure: [ self finishedRender: aSpace ]
+]
+
+{ #category : #accessing }
+BlHostRenderer >> spaceRenderer [
+
+	^ spaceRenderer
+]
+
+{ #category : #accessing }
+BlHostRenderer >> surface [
+
+	^ surface
+]
+
+{ #category : #accessing }
+BlHostRenderer >> surfaceRenderer [
+
+	^ surfaceRenderer
+]
+
+{ #category : #accessing }
+BlHostRenderer >> textMeasurer [
+
+	^ textMeasurer
 ]
