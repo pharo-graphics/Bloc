@@ -56,7 +56,7 @@ BlDevKeyboard >> initializeBottomRow [
 { #category : #initialization }
 BlDevKeyboard >> initializeEventListeners [
 	self
-		when: BlKeyDownEvent
+		addEventHandlerOn: BlKeyDownEvent
 		do: [ :anEvent | 
 			('down: ' , anEvent key asString) traceCr.
 			StringSignal emit: 'down: ' , anEvent key asString.
@@ -68,7 +68,7 @@ BlDevKeyboard >> initializeEventListeners [
 						show: 'Unknown: ' , anEvent key asString;
 						cr ] ].
 	self
-		when: BlKeyUpEvent
+		addEventHandlerOn: BlKeyUpEvent
 		do: [ :anEvent | 
 			('up ' , anEvent key asString) traceCr.
 			StringSignal emit: 'up: ' , anEvent key asString.
