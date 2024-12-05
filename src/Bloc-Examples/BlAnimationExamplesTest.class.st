@@ -311,6 +311,31 @@ BlAnimationExamplesTest >> testBaseAnimation [
 ]
 
 { #category : #'examples - base animation' }
+BlAnimationExamplesTest >> testBaseAnimationTolaratesRedundantStartAndStop [
+
+	| anAnimation |
+	anAnimation := BlAnimation new.
+	self deny: anAnimation isRunning.
+	anAnimation stop.
+	self deny: anAnimation isRunning.
+	anAnimation stop; stop; stop.
+	self deny: anAnimation isRunning.
+
+	anAnimation start.
+	self assert: anAnimation isRunning.
+	anAnimation run.
+	anAnimation start; start; start.
+	self assert: anAnimation isRunning.
+	anAnimation run.
+	self assert: anAnimation isRunning.
+
+	anAnimation stop.
+	self deny: anAnimation isRunning.
+	anAnimation stop.
+	self deny: anAnimation isRunning
+]
+
+{ #category : #'examples - base animation' }
 BlAnimationExamplesTest >> testBaseAnimationWithDelay [
 
 	| aBaseAnimation |

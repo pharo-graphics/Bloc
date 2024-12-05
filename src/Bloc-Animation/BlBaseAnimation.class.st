@@ -362,8 +362,8 @@ BlBaseAnimation >> shouldStop [
 { #category : #'api - running' }
 BlBaseAnimation >> start [
 
-	isRunning ifTrue: [
-		self error: 'Animation can not be start multiple times without stop' ].
+	"Ignore if it's already started"
+	isRunning ifTrue: [ ^ self ].
 
 	self initStart
 ]
@@ -410,8 +410,8 @@ BlBaseAnimation >> step [
 { #category : #'api - running' }
 BlBaseAnimation >> stop [
 
-	isRunning ifFalse: [
-		self error: 'Animation is not running' ].
+	"Ignore if it's already stopped"
+	isRunning ifFalse: [ ^ self ].
 
 	isRunning := false.
 
