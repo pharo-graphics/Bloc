@@ -59,6 +59,7 @@ BlText >> allSatisfy: aBlock [
 { #category : #'text - notifying' }
 BlText >> announcerDo: aBlockClosure [
 	"Evaluate a given block closure with an announcer as an argument if it is initialized"
+
 	announcer ifNotNil: aBlockClosure
 ]
 
@@ -282,6 +283,7 @@ BlText >> encodeOn: aWriteStream with: aZnCharacterEncoder [
 
 { #category : #'text - notifying' }
 BlText >> ensureAnnouncer [
+
 	announcer ifNil: [ announcer := BlTextAnnouncer new ]
 ]
 
@@ -572,6 +574,7 @@ BlText >> notifyStringsInserted: aCollectionOfStrings atAll: aCollectionOfFinalI
 
 { #category : #copying }
 BlText >> postCopy [
+
 	announcer := nil
 ]
 
@@ -670,6 +673,7 @@ BlText >> stylerDo: aBlock [
 
 { #category : #'text - notifying' }
 BlText >> suspendAnnouncementsWhile: aBlock [
+
 	announcer
 		ifNil: aBlock
 		ifNotNil: [ :anAnnouncer | anAnnouncer suspendAllWhile: aBlock ]
@@ -745,12 +749,38 @@ BlText >> utf8Encoded [
 
 { #category : #'text - notifying' }
 BlText >> when: anAnnouncementClass do: aValuable [
+	"Extracted on Pharo12's implementation."
+
+	| subscriberForDeprecation |
+	aValuable receiver ifNil: [
+		self error:
+			'You must specify a subscriber object for this subscription. Please use #when:do:for: method.' ].
+
+	subscriberForDeprecation := thisContext sender receiver = aValuable receiver
+		                            ifTrue: [ 'self' ]
+		                            ifFalse: [ '`@arg2 receiver' ].
+	self
+		deprecated:
+			'Since there are some block closures (Clean and Constant) without a receiver, the API of announcements was changed to send the subscriber explicitly. 
+			We are deprecating this method because it was asking for the receiver of the block to use it as the subscriber.'
+		transformWith: '`@receiver when: `@arg1 do: `@arg2'
+			->
+			('`@receiver when: `@arg1 do: `@arg2 for: '
+			 , subscriberForDeprecation).
+
+	self when: anAnnouncementClass do: aValuable for: aValuable receiver
+]
+
+{ #category : #'text - notifying' }
+BlText >> when: anAnnouncementClass do: aValuable for: aSubscriber [
+
 	self ensureAnnouncer.
-	announcer when: anAnnouncementClass do: aValuable
+	announcer when: anAnnouncementClass do: aValuable for: aSubscriber
 ]
 
 { #category : #'text - notifying' }
 BlText >> when: anAnnouncementClass send: aSelector to: anObject [
+
 	self ensureAnnouncer.
 	announcer weak when: anAnnouncementClass send: aSelector to: anObject
 ]
