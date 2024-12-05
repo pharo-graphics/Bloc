@@ -158,7 +158,8 @@ BlGeometryVisualAndLayoutBoundsExamples >> emptyIconElement [
 	<sampleInstance>
 	^ BlDevElement new
 		  size: 8 @ 12;
-		  background: Color green muchDarker
+		  background: Color green muchDarker;
+		  yourself
 ]
 
 { #category : #bounds }

@@ -1,3 +1,12 @@
+"
+I am an element that draws 3 different kinds of bounds that all elements have.
+
+
+* dashed red:  self geometryBounds
+* solid blue:  self visualBounds
+* dashed gray: self bounds inLocal
+
+"
 Class {
 	#name : #BlDevElement,
 	#superclass : #BlElement,
@@ -5,50 +14,64 @@ Class {
 }
 
 { #category : #drawing }
-BlDevElement >> drawDebugInfoOnSpartaCanvas: aCanvas [
-	| aWidth |
+BlDevElement >> aeDrawDebugInfoOn: aeCanvas [
 
+	| aWidth |
 	aWidth := (self globalBoundsToLocal: (BlBounds origin: 0@0 extent: 1@1)) width.
 
-	aCanvas stroke
-		path: self geometryBounds;
-		paint: (Color red alpha: 0.5);
-		dashPattern: { aWidth * 6 . aWidth * 6 };
-		width: aWidth;
-		draw.
+	aeCanvas
+		pathFactory: [ :context |
+			context rectangle: self geometryBounds ];
+		setBackgroundOff;
+		setOutskirtsOutside;
+		setBorderBlock: [
+			aeCanvas
+				setSourceColor: (Color red alpha: 0.5);
+				setDashes: { aWidth * 6 . aWidth * 6 } offset: 0;
+				setBorderWidth: aWidth ];
+		drawFigure.
 
-	aCanvas stroke
-		path: self visualBounds;
-		paint: (Color blue alpha: 0.5);
-		width: aWidth;
-		draw.
-		
-	aCanvas stroke
-		path: self bounds inLocal asRectangle;
-		paint: (Color gray alpha: 0.5);
-		dashPattern: { aWidth * 6 . aWidth * 6 };
-		width: aWidth;
-		draw
+	aeCanvas
+		pathFactory: [ :context |
+			context rectangle: self visualBounds ];
+		setBackgroundOff;
+		setOutskirtsOutside;
+		setBorderBlock: [
+			aeCanvas
+				setSourceColor: (Color blue alpha: 0.5);
+				setDashes: #() offset: 0;
+				setBorderWidth: aWidth ];
+		drawFigure.
+
+	aeCanvas
+		pathFactory: [ :context |
+			context rectangle: self bounds inLocal asRectangle ];
+		setBackgroundOff;
+		setOutskirtsOutside;
+		setBorderBlock: [
+			aeCanvas
+				setSourceColor: (Color gray alpha: 0.5);
+				setDashes: { aWidth * 6 . aWidth * 6 } offset: 0;
+				setBorderWidth: aWidth ];
+		drawFigure
 ]
 
 { #category : #drawing }
-BlDevElement >> drawOnSpartaCanvas: aCanvas [
-	super drawOnSpartaCanvas: aCanvas.
+BlDevElement >> aeDrawOn: aeCanvas [
 
-	self drawDebugInfoOnSpartaCanvas: aCanvas
+	super aeDrawOn: aeCanvas.
+
+	self aeDrawDebugInfoOn: aeCanvas
 ]
 
 { #category : #'geometry bounds' }
 BlDevElement >> invalidationBounds: aBounds [
-	"I compute and load damaged area in my local coordinates that would be invalidated
-	if #invalidate would be sent to me"
-	<return: #BlBounds>
-	| anInvalidationBounds |
 
+	| anInvalidationBounds |
 	anInvalidationBounds := super invalidationBounds: aBounds.
-	
-	"in order to support debug drawing"
+
+	"Save a small margin to draw my borders"
 	anInvalidationBounds expandBy: 1.
-	
+
 	^ anInvalidationBounds
 ]
