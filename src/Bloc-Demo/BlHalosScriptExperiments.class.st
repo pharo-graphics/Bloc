@@ -24,7 +24,7 @@ BlHalosScriptExperiments class >> experimentHoverToSeeHalosDecription [
 		                 position: 0 @ -30;
 		                 clipChildren: false.
 
-	elt addEventHandlerOn: BlDragEvent do: [ :e | self inform: 'drag' ].
+	elt addEventHandlerOn: BlDragEvent do: [ :e | 'drag' traceCr].
 
 	elt addEventHandlerOn: BlDragEvent do: [ :e | elt inspect ].
 

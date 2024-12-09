@@ -680,19 +680,19 @@ BlDragAndDropExamples class >> experimentDragStrategies [
 		strategy = 'Default'
 			ifTrue: [
 				strategy := 'Horizontal'.
-				self inform: 'Now using a Horizontal Strategy'.
+				'Now using a Horizontal Strategy' traceCr.
 				child background: Color green.
 				handler dragStrategy: BlDragHorizontalStrategy uniqueInstance ]
 			ifFalse: [
 				strategy = 'Horizontal'
 					ifTrue: [
 						strategy := 'Vertical'.
-						self inform: 'Now using a Vertical Strategy'.
+						'Now using a Vertical Strategy' traceCr.
 						child background: Color blue.
 						handler dragStrategy: BlDragVerticalStrategy uniqueInstance ]
 					ifFalse: [
 						strategy := 'Default'.
-						self inform: 'Now using a Default Strategy'.
+						'Now using a Default Strategy' traceCr.
 						child background: Color red.
 						handler dragStrategy: BlDragDefaultStrategy uniqueInstance ] ] ]
 ]
@@ -720,14 +720,14 @@ BlDragAndDropExamples class >> experimentDropEventReceivedByTargetArea [
 			child }.
 
 	target addEventHandlerOn: BlDropEvent do: [
-		self inform: 'Drop on target'.
+		'Drop on target' traceCr.
 		target background: Color random ].
 
 	child
 		addEventHandlerOn: BlDragEndEvent
-		do: [ self inform: 'Drag Ended' ].
+		do: [ 'Drag Ended' traceCr ].
 
-	child addEventHandlerOn: BlDropEvent do: [ self inform: 'Dropped' ].
+	child addEventHandlerOn: BlDropEvent do: [ 'Dropped' traceCr].
 	"This should never be done, only target will receive this DropEvent"
 	space show
 ]
@@ -777,7 +777,7 @@ haloContainer := BlElement new
 	position: 0 @ -30;
 	clipChildren: false. 
 
-elt addEventHandlerOn: BlDragEvent do: [ :e | self inform: 'drag' ].
+elt addEventHandlerOn: BlDragEvent do: [ :e | 'drag' traceCr].
 
 elt addEventHandlerOn: BlDragEvent do: [ :e | elt inspect ].
 
@@ -928,7 +928,8 @@ BlDragAndDropExamples class >> experimentRemoveDragHandlerAtRunTime [
 
 	child addEventHandlerOn: BlClickEvent do: [
 		draggable := draggable not.
-		self inform: 'draggable : ' , draggable asString.
+		'draggable :' trace.
+		draggable asString traceCr.
 		draggable
 			ifTrue: [
 				child background: Color green.

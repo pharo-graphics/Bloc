@@ -30,15 +30,15 @@ BlDragAndDropLetterExampleDemo >> consonantsDropContainer [
 	consonants background: Color lightBlue.
 	consonants addEventHandlerOn: BlDropEvent do: [ :event |
 		event consumed: true.
-		self inform: 'consonants BlDropEvent'.
+		'consonants BlDropEvent' traceCr.
 		(event gestureSource firstChild text first isCharacter and: [
 			 event gestureSource firstChild text first isVowel not ])
 			ifTrue: [
-				self inform: 'consonants drop accepted'.
+				'consonants drop accepted' traceCr.
 				event gestureSource removeFromParent.
 				event target addChild: event gestureSource ]
 			ifFalse: [
-				self inform: 'consonants drop rejected'.
+				'consonants drop rejected' traceCr.
 				event gestureSource
 					removeFromParent;
 					allowMeAndChildrenMouseEvents.
@@ -46,7 +46,7 @@ BlDragAndDropLetterExampleDemo >> consonantsDropContainer [
 
 	consonants addEventHandlerOn: BlDragEnterEvent do: [ :event |
 		event consumed: true.
-		self inform: 'consonants BlDragEnterEvent'.
+		'consonants BlDragEnterEvent' traceCr.
 		(event gestureSource firstChild text first isCharacter and: [
 			 event gestureSource firstChild text first isVowel not ])
 			ifTrue: [ event gestureSource background: Color lightGreen ]
@@ -54,7 +54,7 @@ BlDragAndDropLetterExampleDemo >> consonantsDropContainer [
 
 	consonants addEventHandlerOn: BlDragLeaveEvent do: [ :event |
 		event consumed: true.
-		self inform: 'consonants BlDragLeaveEvent'.
+		'consonants BlDragLeaveEvent' traceCr.
 		event gestureSource background: Color veryVeryLightGray ].
 
 	^ consonants
@@ -146,14 +146,14 @@ BlDragAndDropLetterExampleDemo >> lettersSorterDraggableLetterFor: aCharacter [
 	element := self letterFor: aCharacter.
 	element addEventHandlerOn: BlDragStartEvent do: [ :event |
 		event consumed: true.
-		self inform: 'source1 BlStartDragEvent'.
+		'source1 BlStartDragEvent' traceCr.
 		element removeFromParent.
 		dragArea addChild: element.
 		element preventMeAndChildrenMouseEvents ].
 
 	element addEventHandlerOn: BlDragEndEvent do: [ :event |
 		event consumed: true.
-		self inform: 'source1 BlDragEndEvent'.
+		'source1 BlDragEndEvent' traceCr.
 		element background: Color veryVeryLightGray.
 		element parent id = 'dragArea' ifTrue: [
 			element removeFromParent.
@@ -194,15 +194,15 @@ BlDragAndDropLetterExampleDemo >> vowelsDropContainer [
 	vowels background: Color lightYellow .
 	vowels addEventHandlerOn: BlDropEvent do: [ :event |
 		event consumed: true.
-		self inform: 'vowels BlDropEvent'.
+		'vowels BlDropEvent' traceCr.
 		(event gestureSource firstChild text first isCharacter and: [
 			 event gestureSource firstChild text first isVowel ])
 			ifTrue: [
-				self inform: 'vowels drop accepted'.
+				'vowels drop accepted' traceCr.
 				event gestureSource removeFromParent.
 				event target addChild: event gestureSource ]
 			ifFalse: [
-				self inform: 'vowels drop rejected'.
+				'vowels drop rejected' traceCr.
 				event gestureSource
 					removeFromParent;
 					allowMeAndChildrenMouseEvents.
@@ -210,7 +210,7 @@ BlDragAndDropLetterExampleDemo >> vowelsDropContainer [
 
 	vowels addEventHandlerOn: BlDragEnterEvent do: [ :event |
 		event consumed: true.
-		self inform: 'vowels BlDragEnterEvent'.
+		'vowels BlDragEnterEvent' traceCr.
 		(event gestureSource firstChild text first isCharacter and: [
 			 event gestureSource firstChild text first isVowel ])
 			ifTrue: [ event gestureSource background: Color lightGreen ]
@@ -218,7 +218,7 @@ BlDragAndDropLetterExampleDemo >> vowelsDropContainer [
 
 	vowels addEventHandlerOn: BlDragLeaveEvent do: [ :event |
 		event consumed: true.
-		self inform: 'vowels BlDragLeaveEvent'.
+		'vowels BlDragLeaveEvent' traceCr.
 		event gestureSource background: Color veryVeryLightGray ].
 
 	^ vowels
