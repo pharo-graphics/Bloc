@@ -41,7 +41,9 @@ BlHostPulseLoopTest >> testOpeningAnSpaceDeferingAnErrorKeepsLoopRunning [
 	
 	"This is horrible, I will fix Pharo to have a list of open debuggers"
 	StDebugger allInstances 
-		detect: [ :e | e window title = 'Error: I am the debugger to kill' ]
+		detect: [ :e |
+			e window notNil and: [
+				e window title = 'Error: I am the debugger to kill' ] ]
 		ifFound: [ :x | x window close ]
 		ifNone: [ self fail ].
 	

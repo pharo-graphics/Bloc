@@ -13,7 +13,7 @@ jobs:
       # Default value means that a failure in one OS cancels all 
       fail-fast: false
       matrix:
-        smalltalk: [ Pharo64-11, Pharo64-12 ]
+        smalltalk: [ Pharo64-11, Pharo64-12, Pharo64-13 ]
         os: [ ubuntu-latest, macos-latest, windows-latest ]
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.smalltalk }} on ${{ matrix.os }}
