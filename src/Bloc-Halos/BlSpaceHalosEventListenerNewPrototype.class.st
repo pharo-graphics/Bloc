@@ -17,7 +17,7 @@ Available actions (see implementation at `BlElementSelection>>#initializeActions
 
 "
 Class {
-	#name : #BlSpaceHalosEventListener,
+	#name : #BlSpaceHalosEventListenerNewPrototype,
 	#superclass : #BlEventListener,
 	#instVars : [
 		'haloContainer'
@@ -26,14 +26,14 @@ Class {
 }
 
 { #category : #initialization }
-BlSpaceHalosEventListener >> initialize [
+BlSpaceHalosEventListenerNewPrototype >> initialize [
 
 	super initialize.
 	haloContainer := nil
 ]
 
 { #category : #'mouse handlers' }
-BlSpaceHalosEventListener >> mouseDownEvent: anEvent [
+BlSpaceHalosEventListenerNewPrototype >> mouseDownEvent: anEvent [
 
 	(anEvent modifiers isShift and: [ anEvent modifiers isAlt ])
 		ifFalse: [ ^ self ].
@@ -45,7 +45,7 @@ BlSpaceHalosEventListener >> mouseDownEvent: anEvent [
 ]
 
 { #category : #removing }
-BlSpaceHalosEventListener >> removeHaloContainer [
+BlSpaceHalosEventListenerNewPrototype >> removeHaloContainer [
 
 	haloContainer := nil.
 ]

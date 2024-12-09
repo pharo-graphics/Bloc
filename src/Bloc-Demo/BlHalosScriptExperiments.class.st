@@ -1,11 +1,11 @@
 Class {
-	#name : #BlHalosPrototype,
+	#name : #BlHalosScriptExperiments,
 	#superclass : #Object,
 	#category : #'Bloc-Demo-Halos'
 }
 
 { #category : #'as yet unclassified' }
-BlHalosPrototype class >> exeprimentNewHalosOnShiftAltClick [
+BlHalosScriptExperiments class >> exeprimentNewHalosOnShiftAltClick [
 
 	<script>
 
@@ -24,14 +24,14 @@ BlHalosPrototype class >> exeprimentNewHalosOnShiftAltClick [
 
 	aSpace := BlSpace new.
 	aSpace root addChild: aContainer.
-	aSpace addHalosListener2.
+	aSpace addHalosListenerNewPrototype.
 
 
 	aSpace show
 ]
 
 { #category : #'as yet unclassified' }
-BlHalosPrototype class >> experimentHoverToSeeHalosDecription [
+BlHalosScriptExperiments class >> experimentHoverToSeeHalosDecription [
 
 	<script>
 	| elt haloContainer |
@@ -94,7 +94,7 @@ BlHalosPrototype class >> experimentHoverToSeeHalosDecription [
 ]
 
 { #category : #'as yet unclassified' }
-BlHalosPrototype class >> experimentInspectOnCtrlShift [
+BlHalosScriptExperiments class >> experimentInspectOnCtrlShift [
 
 	<script>
 	| elt |

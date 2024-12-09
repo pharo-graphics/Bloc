@@ -1,7 +1,7 @@
 Extension { #name : #BlSpace }
 
 { #category : #'*Bloc-Halos' }
-BlSpace >> addHalosListener2 [
+BlSpace >> addHalosListenerNewPrototype [
 
-	self root addEventFilter: BlSpaceHalosEventListener new
+	self root addEventFilter: BlSpaceHalosEventListenerNewPrototype new
 ]

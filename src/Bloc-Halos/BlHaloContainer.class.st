@@ -104,7 +104,7 @@ BlHaloContainer class >> exampleHalosAvailableAndCanDive [
 
 	aSpace := BlSpace new.
 	aSpace root addChild: aContainer.
-	aSpace addHalosListener2.
+	aSpace addHalosListenerNewPrototype.
 
 
 	aSpace show
