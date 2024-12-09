@@ -18,7 +18,7 @@ Class {
 		'dragOffset',
 		'spaceListener'
 	],
-	#category : #'Bloc-Halos'
+	#category : #'Bloc-Demo-Halos'
 }
 
 { #category : #'as yet unclassified' }

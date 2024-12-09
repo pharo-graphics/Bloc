@@ -22,7 +22,7 @@ Class {
 	#instVars : [
 		'haloContainer'
 	],
-	#category : #'Bloc-Halos'
+	#category : #'Bloc-Demo-Halos'
 }
 
 { #category : #initialization }

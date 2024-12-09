@@ -8,7 +8,7 @@ Class {
 		'actionBlock',
 		'container'
 	],
-	#category : #'Bloc-Halos'
+	#category : #'Bloc-Demo-Halos'
 }
 
 { #category : #inspecting }
