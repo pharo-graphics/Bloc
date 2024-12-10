@@ -25,6 +25,12 @@ BlDragLetter >> character: aCharacter [
 ]
 
 { #category : #accessing }
+BlDragLetter >> defaultContainer [ 
+
+	^ defaultContainer 
+]
+
+{ #category : #accessing }
 BlDragLetter >> defaultContainer: aBlElement [ 
 
 	defaultContainer := aBlElement 
@@ -54,6 +60,8 @@ BlDragLetter >> initializeEvents [
 	self addEventHandlerOn: BlDragStartEvent do: [ :event |
 		event consumed: true.
 		'source1 BlStartDragEvent' traceCr.
+		'is vowel ? ' trace.
+		self isVowel traceCr.
 		space := self space.
 		self removeFromParent.
 		space root addChild: self.
@@ -63,14 +71,19 @@ BlDragLetter >> initializeEvents [
 		event consumed: true.
 		'source1 BlDragEndEvent' traceCr.
 		self background: Color veryVeryLightGray.
-		self parent id = 'dragArea' ifTrue: [
-			self removeFromParent.
-			defaultContainer addChild: self.
-			self allowMeAndChildrenMouseEvents ] ].
+		"self removeFromParent.
+		defaultContainer addChild: self."
+		self allowMeAndChildrenMouseEvents ].
 
 	self addEventHandlerOn: BlDragEvent do: [ :event |
 		event consumed: true. "self inform:  'source1 BlDragEvent'."
 		self position: event position ].
 
 	^ self
+]
+
+{ #category : #testing }
+BlDragLetter >> isVowel [ 
+
+	^ character isVowel 
 ]

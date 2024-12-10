@@ -34,8 +34,11 @@ BlDragSortLettersExample >> initializeConsonantsContainer [
 
 	consonantsContainer := BlDragLetterContainer new background:
 		                       Color lightOrange.
-		
-	consonantsContainer addEventHandlerOn: BlDropEvent do: [ :event |
+
+	consonantsContainer dropAcceptCondition: [ :element |
+		element isVowel not ].
+
+	"consonantsContainer addEventHandlerOn: BlDropEvent do: [ :event |
 		event consumed: true.
 		'consonants BlDropEvent' traceCr.
 		(event gestureSource firstChild text first isCharacter and: [
@@ -49,20 +52,24 @@ BlDragSortLettersExample >> initializeConsonantsContainer [
 				event gestureSource
 					removeFromParent;
 					allowMeAndChildrenMouseEvents.
-				lettersContainer addChild: event gestureSource ] ].
+				lettersContainer addChild: event gestureSource ] ]."
 
-	consonantsContainer addEventHandlerOn: BlDragEnterEvent do: [ :event |
-		event consumed: true.
-		'consonants BlDragEnterEvent' traceCr.
-		(event gestureSource firstChild text first isCharacter and: [
-			 event gestureSource firstChild text first isVowel not ])
-			ifTrue: [ event gestureSource background: Color lightGreen ]
-			ifFalse: [ event gestureSource background: Color lightRed ] ].
+	consonantsContainer
+		addEventHandlerOn: BlDragEnterEvent
+		do: [ :event |
+			event consumed: true.
+			'consonants BlDragEnterEvent' traceCr.
+			(event gestureSource firstChild text first isCharacter and: [
+				 event gestureSource firstChild text first isVowel not ])
+				ifTrue: [ event gestureSource background: Color lightGreen ]
+				ifFalse: [ event gestureSource background: Color lightRed ] ].
 
-	consonantsContainer addEventHandlerOn: BlDragLeaveEvent do: [ :event |
-		event consumed: true.
-		'consonants BlDragLeaveEvent' traceCr.
-		event gestureSource background: Color veryVeryLightGray ].
+	consonantsContainer
+		addEventHandlerOn: BlDragLeaveEvent
+		do: [ :event |
+			event consumed: true.
+			'consonants BlDragLeaveEvent' traceCr.
+			event gestureSource background: Color veryVeryLightGray ]
 ]
 
 { #category : #initialization }
@@ -82,9 +89,7 @@ BlDragSortLettersExample >> initializeLetters [
 
 	lettersContainer addChildren:
 		({ $a. $c. $Q. $o. $j. $E. $y. $Z. $U. $B. $p. $i } collect: [ :each |
-			 BlDragLetter new character: each ])
-
-	
+			 BlDragLetter new character: each; defaultContainer: lettersContainer ])
 ]
 
 { #category : #initialization }
@@ -104,7 +109,9 @@ BlDragSortLettersExample >> initializeVowelsContainer [
 	vowelsContainer := BlDragLetterContainer new background:
 		                   Color lightBlue.
 
-	vowelsContainer addEventHandlerOn: BlDropEvent do: [ :event |
+	vowelsContainer dropAcceptCondition: [ :element | element isVowel ].
+
+	"vowelsContainer addEventHandlerOn: BlDropEvent do: [ :event |
 		event consumed: true.
 		'vowels BlDropEvent' traceCr.
 		(event gestureSource firstChild text first isCharacter and: [
@@ -118,7 +125,7 @@ BlDragSortLettersExample >> initializeVowelsContainer [
 				event gestureSource
 					removeFromParent;
 					allowMeAndChildrenMouseEvents.
-				lettersContainer addChild: event gestureSource ] ].
+				lettersContainer addChild: event gestureSource ] ]."
 
 	vowelsContainer addEventHandlerOn: BlDragEnterEvent do: [ :event |
 		event consumed: true.
