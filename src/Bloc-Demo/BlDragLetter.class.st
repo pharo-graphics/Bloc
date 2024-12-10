@@ -56,28 +56,24 @@ BlDragLetter >> initialize [
 { #category : #initialization }
 BlDragLetter >> initializeEvents [
 
-	| space |
+	| space offset |
 	self addEventHandlerOn: BlDragStartEvent do: [ :event |
 		event consumed: true.
-		'source1 BlStartDragEvent' traceCr.
-		'is vowel ? ' trace.
-		self isVowel traceCr.
 		space := self space.
+		offset := self positionInSpace - event position.
 		self removeFromParent.
 		space root addChild: self.
 		self preventMeAndChildrenMouseEvents ].
 
 	self addEventHandlerOn: BlDragEndEvent do: [ :event |
 		event consumed: true.
-		'source1 BlDragEndEvent' traceCr.
+		'dragEvent' traceCr.
 		self background: Color veryVeryLightGray.
-		"self removeFromParent.
-		defaultContainer addChild: self."
 		self allowMeAndChildrenMouseEvents ].
 
 	self addEventHandlerOn: BlDragEvent do: [ :event |
-		event consumed: true. "self inform:  'source1 BlDragEvent'."
-		self position: event position ].
+		event consumed: true.
+		self position: event position + offset ].
 
 	^ self
 ]

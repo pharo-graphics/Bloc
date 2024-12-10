@@ -37,39 +37,21 @@ BlDragSortLettersExample >> initializeConsonantsContainer [
 
 	consonantsContainer dropAcceptCondition: [ :element |
 		element isVowel not ].
+	consonantsContainer dropAcceptBehavior: [ :element |
+		element removeFromParent.
+		consonantsContainer addChild: element ].
+	consonantsContainer dropRejectBehavior: [ :element |
+		element
+			removeFromParent;
+			allowMeAndChildrenMouseEvents.
+		element defaultContainer addChild: element ].
 
-	"consonantsContainer addEventHandlerOn: BlDropEvent do: [ :event |
-		event consumed: true.
-		'consonants BlDropEvent' traceCr.
-		(event gestureSource firstChild text first isCharacter and: [
-			 event gestureSource firstChild text first isVowel not ])
-			ifTrue: [
-				'consonants drop accepted' traceCr.
-				event gestureSource removeFromParent.
-				event target addChild: event gestureSource ]
-			ifFalse: [
-				'consonants drop rejected' traceCr.
-				event gestureSource
-					removeFromParent;
-					allowMeAndChildrenMouseEvents.
-				lettersContainer addChild: event gestureSource ] ]."
-
-	consonantsContainer
-		addEventHandlerOn: BlDragEnterEvent
-		do: [ :event |
-			event consumed: true.
-			'consonants BlDragEnterEvent' traceCr.
-			(event gestureSource firstChild text first isCharacter and: [
-				 event gestureSource firstChild text first isVowel not ])
-				ifTrue: [ event gestureSource background: Color lightGreen ]
-				ifFalse: [ event gestureSource background: Color lightRed ] ].
-
-	consonantsContainer
-		addEventHandlerOn: BlDragLeaveEvent
-		do: [ :event |
-			event consumed: true.
-			'consonants BlDragLeaveEvent' traceCr.
-			event gestureSource background: Color veryVeryLightGray ]
+	consonantsContainer dragEnterAcceptBehavior: [ :element |
+		element background: Color lightGreen ].
+	consonantsContainer dragEnterRejectBehavior: [ :element |
+		element background: Color lightRed ].
+	consonantsContainer dragLeaveBehavior: [ :element |
+		element background: Color veryVeryLightGray ]
 ]
 
 { #category : #initialization }
@@ -101,6 +83,13 @@ BlDragSortLettersExample >> initializeLettersContainer [
 			                     dashed;
 			                     width: 2;
 			                     build).
+	lettersContainer dropAcceptBehavior: [ :element |
+		element removeFromParent.
+		lettersContainer addChild: element ].
+
+	lettersContainer dragEnterAcceptBehavior: [ :element |  ].
+	lettersContainer dragEnterRejectBehavior: [ :element |  ].
+	lettersContainer dragLeaveBehavior: [ :element |  ]
 ]
 
 { #category : #initialization }
@@ -110,35 +99,21 @@ BlDragSortLettersExample >> initializeVowelsContainer [
 		                   Color lightBlue.
 
 	vowelsContainer dropAcceptCondition: [ :element | element isVowel ].
+	vowelsContainer dropAcceptBehavior: [ :element |
+		element removeFromParent.
+		vowelsContainer addChild: element ].
+	vowelsContainer dropRejectBehavior: [ :element |
+		element
+			removeFromParent;
+			allowMeAndChildrenMouseEvents.
+		element defaultContainer addChild: element ].
 
-	"vowelsContainer addEventHandlerOn: BlDropEvent do: [ :event |
-		event consumed: true.
-		'vowels BlDropEvent' traceCr.
-		(event gestureSource firstChild text first isCharacter and: [
-			 event gestureSource firstChild text first isVowel ])
-			ifTrue: [
-				'vowels drop accepted' traceCr.
-				event gestureSource removeFromParent.
-				event target addChild: event gestureSource ]
-			ifFalse: [
-				'vowels drop rejected' traceCr.
-				event gestureSource
-					removeFromParent;
-					allowMeAndChildrenMouseEvents.
-				lettersContainer addChild: event gestureSource ] ]."
-
-	vowelsContainer addEventHandlerOn: BlDragEnterEvent do: [ :event |
-		event consumed: true.
-		'vowels BlDragEnterEvent' traceCr.
-		(event gestureSource firstChild text first isCharacter and: [
-			 event gestureSource firstChild text first isVowel ])
-			ifTrue: [ event gestureSource background: Color lightGreen ]
-			ifFalse: [ event gestureSource background: Color lightRed ] ].
-
-	vowelsContainer addEventHandlerOn: BlDragLeaveEvent do: [ :event |
-		event consumed: true.
-		'vowels BlDragLeaveEvent' traceCr.
-		event gestureSource background: Color veryVeryLightGray ]
+	vowelsContainer dragEnterAcceptBehavior: [ :element |
+		element background: Color lightGreen ].
+	vowelsContainer dragEnterRejectBehavior: [ :element |
+		element background: Color lightRed ].
+	vowelsContainer dragLeaveBehavior: [ :element |
+		element background: Color veryVeryLightGray ]
 ]
 
 { #category : #letters }
