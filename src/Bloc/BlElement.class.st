@@ -1520,6 +1520,13 @@ BlElement >> firstCommonParent: anElement ifFound: aFoundBlock ifNone: aNoneBloc
 	^ aNoneBlock value
 ]
 
+{ #category : #'focus requesting' }
+BlElement >> focusHolder [
+	"the element that will be actually focused when #requestFocus is sent "
+
+	^ self
+]
+
 { #category : #accessing }
 BlElement >> focusability [
 	<return: #BlFocusability>
@@ -3467,7 +3474,7 @@ BlElement >> requestFocus [
 	If I am not added to the scene graph mark me as focused in order to re-try focus
 	request as soon I am added to the scene graph"
 
-	self requestFocusDueTo: BlFocusUnknownReason uniqueInstance
+	self focusHolder requestFocusDueTo: BlFocusUnknownReason uniqueInstance
 ]
 
 { #category : #'focus requesting' }
