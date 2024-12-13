@@ -27,12 +27,12 @@ BlRoundedPolygonGeometry >> aeApplyTo: cairoContext roundedCornerP1: p1 p2: p2 p
 	(p1 = p2 or: [ p2 = p3 ]) ifTrue: [ ^ self ].
 
 	v1 := p1 - p2.
-	len1 := ((v1 x * v1 x) + (v1 y * v1 y)) sqrt.
+	len1 := (v1 x squared + v1 y squared) sqrt.
 	v1 := v1 / len1.
 	a1 := v1 angle.
 
 	v2 := p3 - p2.
-	len2 := ((v2 x * v2 x) + (v2 y * v2 y)) sqrt.
+	len2 := (v2 x squared + v2 y squared) sqrt.
 	v2 := v2 / len2.
 	a2 := v2 angle.
 
