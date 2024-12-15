@@ -2135,7 +2135,9 @@ BlElement >> isFocused [
 	"Returns true if I am focused, false otherwise.
 	Note: It is possible that an element has focus but is not focused by itself."
 
-	^ visuals isFocused
+	^ self focusHolder = self
+		  ifTrue: [ visuals isFocused ]
+		  ifFalse: [ self focusHolder isFocused ]
 ]
 
 { #category : #testing }
