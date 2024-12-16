@@ -206,12 +206,17 @@ BlSpaceStatistics >> totalTime [
 { #category : #private }
 BlSpaceStatistics >> updateValues [
 
-	| currentIncrementalGCCount currentMillisecond currentFullGCCount |
+	| currentIncrementalGCCount currentMillisecond currentFullGCCount secondPassed |
 	currentMillisecond := Time millisecondClockValue.
 
 	totalTime := totalTime + (currentMillisecond - previousMillisecond).
 
-	fps := (currentFrames/ (currentMillisecond - previousMillisecond / 1000)) asFloat.
+	secondPassed := (currentMillisecond - previousMillisecond) / 1000.
+
+	fps := secondPassed = 0 
+		ifTrue: [ 0 ]
+		ifFalse: [ (currentFrames / secondPassed) asFloat ].
+
 	fpsSamples add: { currentMillisecond. fps }.
 	previousMillisecond := currentMillisecond.
 	currentFrames := 0.
