@@ -2442,9 +2442,9 @@ BlElement >> loseFocus [
 	| anElementToLooseFocus |
 
 	anElementToLooseFocus := self isFocused
-		ifTrue: [ self ]
+		ifTrue: [ self focusHolder ]
 		ifFalse: [ self deepestFocusedChild
-			ifNil: [ self ] ].
+			ifNil: [ self focusHolder ] ].
 
 	anElementToLooseFocus isFocused
 		ifFalse: [ ^ self ].
