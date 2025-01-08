@@ -9,6 +9,42 @@ Class {
 	#category : #'Bloc-Demo-Collapse'
 }
 
+{ #category : #'as yet unclassified' }
+BlCollapseWidget class >> exampleSimpleCollapse [
+
+	<script>
+	| collapse bgPaint collapsed collapsedChild |
+	collapse := self new.
+	collapse position: 50 asPoint.
+
+	bgPaint := BlLinearGradientPaint vertical
+		           from: Color lightGreen
+		           to: Color lightRed.
+
+	collapsed := BlElement new
+		             background: bgPaint;
+		             size: 250 @ 150;
+		             border: (BlBorderBuilder new
+				              paint: Color red;
+				              width: 3;
+				              dashed;
+				              build);
+		             addEventHandlerOn: BlClickEvent do: [ :e | e traceCr ];
+		             yourself.
+
+	collapsedChild := BlElement new
+		                  background: Color purple;
+		                  size: 50 @ 100;
+		                  position: 50 asPoint;
+		                  yourself.
+
+	collapsed addChild: collapsedChild.
+
+	collapse container addChild: collapsed.
+
+	collapse openInSpace
+]
+
 { #category : #accessing }
 BlCollapseWidget >> bar [ 
  
