@@ -1,21 +1,21 @@
 Class {
-	#name : #BlCollapseWidget2,
+	#name : #BlCollapseWidgetForVerticalList,
 	#superclass : #BlElement,
 	#instVars : [
-		'bar',
-		'container',
-		'collapsed'
+		'collapsed',
+		'header',
+		'content'
 	],
 	#category : #'Bloc-Demo-Collapse'
 }
 
 { #category : #'as yet unclassified' }
-BlCollapseWidget2 class >> exampleSimpleCollapse [
+BlCollapseWidgetForVerticalList class >> exampleSimpleCollapse [
 
 	<script>
 	| collapse bgPaint collapsed collapsedChild |
 	collapse := self new.
-	collapse position: 50 asPoint.
+	"collapse position: 50 asPoint."
 
 	bgPaint := BlLinearGradientPaint vertical
 		           from: Color lightGreen
@@ -23,7 +23,9 @@ BlCollapseWidget2 class >> exampleSimpleCollapse [
 
 	collapsed := BlElement new
 		             background: bgPaint;
-		             size: 250 @ 350;
+		             "size: 350 @ 250;"
+		             constraintsDo: [ :c | c horizontal matchParent.
+			c vertical exact: 400 ];
 		             border: (BlBorderBuilder new
 				              paint: Color red;
 				              width: 3;
@@ -42,68 +44,85 @@ BlCollapseWidget2 class >> exampleSimpleCollapse [
 
 	collapse container addChild: collapsed.
 
+
 	collapse openInSpace
 ]
 
 { #category : #accessing }
-BlCollapseWidget2 >> bar [ 
+BlCollapseWidgetForVerticalList >> bar [ 
  
- ^ bar
+ ^ header
 ]
 
 { #category : #accessing }
-BlCollapseWidget2 >> bar: aBlElement [
+BlCollapseWidgetForVerticalList >> bar: aBlElement [
  
- bar := aBlElement 
+ header := aBlElement 
 ]
 
 { #category : #'expanding-collapsing' }
-BlCollapseWidget2 >> collapse [ 
+BlCollapseWidgetForVerticalList >> collapse [ 
 
 	| closedAnimation |
-	closedAnimation := (BlTransformAnimation translate: 0@ (0- container height)) duration: 0.2 second.
+	closedAnimation := (BlTransformAnimation translate: 0@ (0- content height)) duration: 0.2 second.
 	
-	container addAnimation: closedAnimation.
+	content addAnimation: closedAnimation.
 ]
 
 { #category : #accessing }
-BlCollapseWidget2 >> collapsed [ 
+BlCollapseWidgetForVerticalList >> collapsed [ 
 
  ^ collapsed 
 ]
 
 { #category : #accessing }
-BlCollapseWidget2 >> container [ 
+BlCollapseWidgetForVerticalList >> container [ 
 
-	^ container 
+	^ content 
 ]
 
 { #category : #accessing }
-BlCollapseWidget2 >> container: aBlElement [ 
+BlCollapseWidgetForVerticalList >> container: aBlElement [ 
 
-	container := aBlElement 
+	content := aBlElement 
 ]
 
 { #category : #initialization }
-BlCollapseWidget2 >> initialize [ 
+BlCollapseWidgetForVerticalList >> initialize [
 
 	super initialize.
 	collapsed := true.
 	self layout: BlLinearLayout vertical.
-	self constraintsDo: [ :c | 
+	self constraintsDo: [ :c |
 		c vertical fitContent.
-		c horizontal fitContent ].
-	self initializeBar.
-	self initializeContainer.
+		c horizontal matchParent ].
+	self initializeHeader.
+	self initializeContent
 ]
 
 { #category : #initialization }
-BlCollapseWidget2 >> initializeBar [
+BlCollapseWidgetForVerticalList >> initializeContent [
+
+	content := BlElement new
+		           layout: BlFrameLayout new;
+		           constraintsDo: [ :c |
+			           c vertical fitContent.
+			           c horizontal matchParent ];
+		           border: (BlBorder paint: Color veryLightGray width: 1);
+		           yourself.
+
+	self addChild: content
+]
+
+{ #category : #initialization }
+BlCollapseWidgetForVerticalList >> initializeHeader [
 
 	| arrow geometry rotateCWAnimation rotateACWAnimation |
-	bar := BlElement new
+	header := BlElement new
 		       background: Color veryVeryLightGray;
-		       size: 250 @ 50;
+				constraintsDo: [ :c |
+					c horizontal matchParent.
+					c vertical exact: 50 ];
 		       border: (BlBorder paint: Color lightGray width: 2);
 		       layout: BlFrameLayout new;
 		       padding: (BlInsets all: 10);
@@ -123,8 +142,8 @@ BlCollapseWidget2 >> initializeBar [
 			         c frame horizontal alignLeft ];
 		         background: Color lightGray.
 
-	bar addChild: arrow.
-	bar clipChildren: false.
+	header addChild: arrow.
+	header clipChildren: false.
 
 	rotateCWAnimation := (BlTransformAnimation rotate: 90) duration:
 		                     0.2 second.
@@ -132,7 +151,7 @@ BlCollapseWidget2 >> initializeBar [
 		                      0.2 second.
 
 
-	bar addEventHandlerOn: BlClickEvent do: [ :e |
+	header addEventHandlerOn: BlClickEvent do: [ :e |
 		e consume.
 		collapsed := collapsed not.
 		collapsed
@@ -143,28 +162,14 @@ BlCollapseWidget2 >> initializeBar [
 				self collapse.
 				arrow addAnimation: rotateACWAnimation copy ] ].
 
-	self addChild: bar
-]
-
-{ #category : #initialization }
-BlCollapseWidget2 >> initializeContainer [
-
-	container := BlElement new
-						layout: BlFrameLayout new;
-		             constraintsDo: [ :c |
-			             c vertical fitContent.
-			             c horizontal matchParent ];
-		             border: (BlBorder paint: Color veryLightGray width: 1);
-		             yourself.
-
-	self addChild: container
+	self addChild: header
 ]
 
 { #category : #'host space - displaying' }
-BlCollapseWidget2 >> show [ 
+BlCollapseWidgetForVerticalList >> show [ 
 
 	| openedAnimation | 
-	openedAnimation := (BlTransformAnimation translate: 0@ container height) duration: 0.2 second.
+	openedAnimation := (BlTransformAnimation translate: 0@ content height) duration: 0.2 second.
 	
-	container addAnimation: openedAnimation.
+	content addAnimation: openedAnimation.
 ]

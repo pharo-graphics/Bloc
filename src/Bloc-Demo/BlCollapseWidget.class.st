@@ -93,12 +93,25 @@ BlCollapseWidget >> initialize [
 	self constraintsDo: [ :c | 
 		c vertical fitContent.
 		c horizontal fitContent ].
-	self initializeBar.
-	self initializeContainer.
+	self initializeHeader.
+	self initializeContent.
 ]
 
 { #category : #initialization }
-BlCollapseWidget >> initializeBar [
+BlCollapseWidget >> initializeContent [ 
+
+	container := BlElement new 
+		constraintsDo: [ :c | 
+			c vertical exact: 150.
+			c horizontal matchParent ];
+		border: (BlBorder paint: Color veryLightGray width: 1);
+		yourself.
+		
+	self addChild: container
+]
+
+{ #category : #initialization }
+BlCollapseWidget >> initializeHeader [
 
 	| arrow geometry rotateCWAnimation rotateACWAnimation |
 	bar := BlElement new
@@ -144,19 +157,6 @@ BlCollapseWidget >> initializeBar [
 				arrow addAnimation: rotateACWAnimation copy ] ].
 
 	self addChild: bar
-]
-
-{ #category : #initialization }
-BlCollapseWidget >> initializeContainer [ 
-
-	container := BlElement new 
-		constraintsDo: [ :c | 
-			c vertical exact: 150.
-			c horizontal matchParent ];
-		border: (BlBorder paint: Color veryLightGray width: 1);
-		yourself.
-		
-	self addChild: container
 ]
 
 { #category : #'host space - displaying' }
