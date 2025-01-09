@@ -1520,6 +1520,13 @@ BlElement >> firstCommonParent: anElement ifFound: aFoundBlock ifNone: aNoneBloc
 	^ aNoneBlock value
 ]
 
+{ #category : #'focus requesting' }
+BlElement >> focusHolder [
+	"the element that will be actually focused when #requestFocus is sent "
+
+	^ self
+]
+
 { #category : #accessing }
 BlElement >> focusability [
 	<return: #BlFocusability>
@@ -2128,7 +2135,9 @@ BlElement >> isFocused [
 	"Returns true if I am focused, false otherwise.
 	Note: It is possible that an element has focus but is not focused by itself."
 
-	^ visuals isFocused
+	^ self focusHolder = self
+		  ifTrue: [ visuals isFocused ]
+		  ifFalse: [ self focusHolder isFocused ]
 ]
 
 { #category : #testing }
@@ -2433,9 +2442,9 @@ BlElement >> loseFocus [
 	| anElementToLooseFocus |
 
 	anElementToLooseFocus := self isFocused
-		ifTrue: [ self ]
+		ifTrue: [ self focusHolder ]
 		ifFalse: [ self deepestFocusedChild
-			ifNil: [ self ] ].
+			ifNil: [ self focusHolder ] ].
 
 	anElementToLooseFocus isFocused
 		ifFalse: [ ^ self ].
@@ -3467,7 +3476,7 @@ BlElement >> requestFocus [
 	If I am not added to the scene graph mark me as focused in order to re-try focus
 	request as soon I am added to the scene graph"
 
-	self requestFocusDueTo: BlFocusUnknownReason uniqueInstance
+	self focusHolder requestFocusDueTo: BlFocusUnknownReason uniqueInstance
 ]
 
 { #category : #'focus requesting' }
