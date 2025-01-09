@@ -2,18 +2,18 @@ Extension { #name : #BlElement }
 
 { #category : #'*Bloc-Infinite' }
 BlElement >> asScrollableElement [
-	| scrollable |
+	| scrollableParent |
 	self removeFromParent.
-	scrollable := self newScrollableParent.
-	scrollable constraintsDo: [ :c |
+	scrollableParent := self newScrollable.
+	scrollableParent constraintsDo: [ :c |
 		c horizontal matchParent.
 		c vertical matchParent ].
-	scrollable addChild: self.
-	^ scrollable
+	scrollableParent addChild: self.
+	^ scrollableParent
 ]
 
 { #category : #'*Bloc-Infinite' }
-BlElement >> newScrollableParent [
+BlElement >> newScrollable [
 
 	^ BlScrollableElement new
 ]
