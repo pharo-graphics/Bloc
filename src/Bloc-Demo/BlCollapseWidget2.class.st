@@ -1,5 +1,5 @@
 Class {
-	#name : #BlCollapseWidget,
+	#name : #BlCollapseWidget2,
 	#superclass : #BlElement,
 	#instVars : [
 		'bar',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-BlCollapseWidget class >> exampleSimpleCollapse [
+BlCollapseWidget2 class >> exampleSimpleCollapse [
 
 	<script>
 	| collapse bgPaint collapsed collapsedChild |
@@ -23,7 +23,7 @@ BlCollapseWidget class >> exampleSimpleCollapse [
 
 	collapsed := BlElement new
 		             background: bgPaint;
-		             size: 250 @ 150;
+		             size: 250 @ 350;
 		             border: (BlBorderBuilder new
 				              paint: Color red;
 				              width: 3;
@@ -46,19 +46,19 @@ BlCollapseWidget class >> exampleSimpleCollapse [
 ]
 
 { #category : #accessing }
-BlCollapseWidget >> bar [ 
+BlCollapseWidget2 >> bar [ 
  
  ^ bar
 ]
 
 { #category : #accessing }
-BlCollapseWidget >> bar: aBlElement [
+BlCollapseWidget2 >> bar: aBlElement [
  
  bar := aBlElement 
 ]
 
 { #category : #'expanding-collapsing' }
-BlCollapseWidget >> collapse [ 
+BlCollapseWidget2 >> collapse [ 
 
 	| closedAnimation |
 	closedAnimation := (BlTransformAnimation translate: 0@ (0- container height)) duration: 0.2 second.
@@ -67,25 +67,25 @@ BlCollapseWidget >> collapse [
 ]
 
 { #category : #accessing }
-BlCollapseWidget >> collapsed [ 
+BlCollapseWidget2 >> collapsed [ 
 
  ^ collapsed 
 ]
 
 { #category : #accessing }
-BlCollapseWidget >> container [ 
+BlCollapseWidget2 >> container [ 
 
 	^ container 
 ]
 
 { #category : #accessing }
-BlCollapseWidget >> container: aBlElement [ 
+BlCollapseWidget2 >> container: aBlElement [ 
 
 	container := aBlElement 
 ]
 
 { #category : #initialization }
-BlCollapseWidget >> initialize [ 
+BlCollapseWidget2 >> initialize [ 
 
 	super initialize.
 	collapsed := true.
@@ -98,7 +98,7 @@ BlCollapseWidget >> initialize [
 ]
 
 { #category : #initialization }
-BlCollapseWidget >> initializeBar [
+BlCollapseWidget2 >> initializeBar [
 
 	| arrow geometry rotateCWAnimation rotateACWAnimation |
 	bar := BlElement new
@@ -147,20 +147,21 @@ BlCollapseWidget >> initializeBar [
 ]
 
 { #category : #initialization }
-BlCollapseWidget >> initializeContainer [ 
+BlCollapseWidget2 >> initializeContainer [
 
-	container := BlElement new 
-		constraintsDo: [ :c | 
-			c vertical exact: 150.
-			c horizontal matchParent ];
-		border: (BlBorder paint: Color veryLightGray width: 1);
-		yourself.
-		
+	container := BlElement new
+						layout: BlFrameLayout new;
+		             constraintsDo: [ :c |
+			             c vertical fitContent.
+			             c horizontal matchParent ];
+		             border: (BlBorder paint: Color veryLightGray width: 1);
+		             yourself.
+
 	self addChild: container
 ]
 
 { #category : #'host space - displaying' }
-BlCollapseWidget >> show [ 
+BlCollapseWidget2 >> show [ 
 
 	| openedAnimation | 
 	openedAnimation := (BlTransformAnimation translate: 0@ container height) duration: 0.2 second.
