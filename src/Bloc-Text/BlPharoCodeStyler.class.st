@@ -82,7 +82,7 @@ BlPharoCodeStyler >> isScripting: aBoolean [
 	isScripting = aBoolean ifTrue: [ ^ self ].
 	isScripting := aBoolean.
 
-	shoutStyler isForWorkspace: aBoolean.
+	shoutStyler isScripting: aBoolean.
 
 	self announceStateChanged
 ]

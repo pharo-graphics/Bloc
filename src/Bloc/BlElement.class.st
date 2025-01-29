@@ -541,7 +541,7 @@ BlElement >> attachSpace [
 	self isFocused
 		ifTrue: [ self requestFocus: self ]
 		ifFalse: [
-			self space focusOwner == self
+			self space focusOwner == self focusHolder
 				ifTrue: [ self loseFocus: self ] ].
 
 	self taskQueue isEmpty
@@ -3476,7 +3476,7 @@ BlElement >> requestFocus [
 	If I am not added to the scene graph mark me as focused in order to re-try focus
 	request as soon I am added to the scene graph"
 
-	self focusHolder requestFocusDueTo: BlFocusUnknownReason uniqueInstance
+	self requestFocusDueTo: BlFocusUnknownReason uniqueInstance
 ]
 
 { #category : #'focus requesting' }
@@ -3512,7 +3512,7 @@ BlElement >> requestFocusDueTo: aFocusReason [
 
 	self isAttachedToSceneGraph
 		ifTrue: [ self requestFocus: self dueTo: aFocusReason ]
-		ifFalse: [ self focused: true ]
+		ifFalse: [ self focusHolder focused: true ]
 ]
 
 { #category : #layout }

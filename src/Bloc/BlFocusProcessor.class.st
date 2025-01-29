@@ -112,9 +112,11 @@ BlFocusProcessor >> hasFocusOwner [
 { #category : #'focus - requesting' }
 BlFocusProcessor >> loseFor: anElement [
 
-	self focusOwner ~= anElement ifTrue: [ ^ self ].
+	| focusHolder |
+	focusHolder := anElement focusHolder.
+	self focusOwner ~= focusHolder ifTrue: [ ^ self ].
 
-	self processBlur: anElement.
+	self processBlur: focusHolder.
 	"don't forget to forget focused element"
 	self focusOwner: nil
 ]
@@ -265,12 +267,13 @@ BlFocusProcessor >> processWindowFocusOut: anEvent [
 
 { #category : #'focus - requesting' }
 BlFocusProcessor >> requestFor: anElement dueTo: aFocusReason [
-	| aPreviousFocusOwner |
+	| aPreviousFocusOwner focusHolder |
 
-	self focusOwner = anElement
+	focusHolder := anElement focusHolder.
+	self focusOwner = focusHolder
 		ifTrue: [ ^ self ].
 
-	anElement isFocusable
+	focusHolder isFocusable
 		ifFalse: [ ^ self ].
 
 	"keep reference to the previous focus owner"
@@ -283,6 +286,6 @@ BlFocusProcessor >> requestFor: anElement dueTo: aFocusReason [
 	self focusOwner: nil.
 	"focus is processed with new requested focus owner"
 	aPreviousFocusOwner
-		ifNil: [ self processFocus: anElement ]
-		ifNotNil: [ self processFocus: anElement dueToTransferFrom: aPreviousFocusOwner ]
+		ifNil: [ self processFocus: focusHolder ]
+		ifNotNil: [ self processFocus: focusHolder dueToTransferFrom: aPreviousFocusOwner ]
 ]

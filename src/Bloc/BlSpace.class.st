@@ -906,7 +906,9 @@ BlSpace >> focusOwner [
 
 { #category : #'focus managing' }
 BlSpace >> focusOwner: anElement [
-	focusChain := anElement ifNotNil: [ BlFocusChain of: anElement ]
+
+	self focusOwner = anElement ifTrue: [ ^ self ].
+	focusChain := anElement ifNotNil: [ BlFocusChain of: anElement ].
 ]
 
 { #category : #'accessing - processors' }
