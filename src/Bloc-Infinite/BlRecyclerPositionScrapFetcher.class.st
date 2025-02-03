@@ -4,23 +4,18 @@ Class {
 	#category : #'Bloc-Infinite-Recycler'
 }
 
-{ #category : #initialization }
-BlRecyclerPositionScrapFetcher >> defaultNext [
-	^ BlRecyclerDataSourceFetcher uniqueInstance
-]
-
 { #category : #'element fetching' }
 BlRecyclerPositionScrapFetcher >> elementFor: aPosition in: anInfiniteElement [
 
-	(self exactScrapFor: aPosition in: anInfiniteElement)
-		ifNotNil: [ :found |
-			(self validateHolder: found in: anInfiniteElement)
-				ifTrue: [ ^ found ]
-				ifFalse: [ 
-					found flags addInvalid.
-					found wasReturnedFromScrap ifTrue: [ found clearReturnedFromScrap ] ] ].
-
-	^ self nextFetcher elementFor: aPosition in: anInfiniteElement
+	| scrapped |
+	scrapped := self exactScrapFor: aPosition in: anInfiniteElement.
+	^ scrapped ifNotNil: [ :found |
+		  (self validateHolder: found in: anInfiniteElement)
+			  ifTrue: [ found ]
+			  ifFalse: [
+				  found flags addInvalid.
+				  found wasReturnedFromScrap ifTrue: [
+					  found clearReturnedFromScrap ] ] ]
 ]
 
 { #category : #private }

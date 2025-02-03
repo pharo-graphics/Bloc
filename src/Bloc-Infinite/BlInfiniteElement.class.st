@@ -408,6 +408,7 @@ BlInfiniteElement >> defaultMouseScrollEventHandler [
 
 { #category : #initialization }
 BlInfiniteElement >> defaultRecycler [
+
 	^ BlInfiniteRecycler new
 ]
 

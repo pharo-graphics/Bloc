@@ -33,21 +33,29 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'attachedScrap'
+		'attachedScrap',
+		'fetchers',
+		'customRecycler'
 	],
 	#category : #'Bloc-Infinite-Recycler'
 }
 
+{ #category : #adding }
+BlInfiniteRecycler >> addFetchers: aCollection [ 
+
+	fetchers addAll: aCollection
+]
+
 { #category : #'accessing - cache' }
 BlInfiniteRecycler >> attachedScrap [
 	"Return a collection of attached scrapped elements"
-	<return: #SequenceableCollection>
 	
 	^ attachedScrap
 ]
 
 { #category : #initialization }
 BlInfiniteRecycler >> clear [
+
 	self removeScrap
 ]
 
@@ -60,7 +68,8 @@ BlInfiniteRecycler >> clearScrap [
 
 { #category : #initialization }
 BlInfiniteRecycler >> defaultFetcher [
-	^ BlRecyclerPositionScrapFetcher uniqueInstance 
+
+	^ BlRecyclerPositionScrapFetcher new 
 
 ]
 
@@ -69,17 +78,13 @@ BlInfiniteRecycler >> elementFor: aPosition in: anInfiniteElement [
 	"I do a hard work obtaining element for the data at a position in data source.
 	@see elementFor: for more information"
 
-	<return: #BlElement>
 	| holder fromScrap bound itemElement anInfiniteConstraints |
 	(aPosition < 1 or: [
 		 aPosition > anInfiniteElement dataSource itemCount ]) ifTrue: [
 		Error signal: 'Position is out of bounds!' ].
 
-	holder := self fetcher elementFor: aPosition in: anInfiniteElement.
+	holder := self fetchElementFor: aPosition in: anInfiniteElement.
 	fromScrap := holder wasReturnedFromScrap.
-
-	self assert: holder isNotNil.
-	self assert: fromScrap isNotNil.
 
 	bound := false.
 	(holder isBound not or: [
@@ -103,16 +108,43 @@ BlInfiniteRecycler >> elementFor: aPosition in: anInfiniteElement [
 ]
 
 { #category : #private }
-BlInfiniteRecycler >> fetcher [
+BlInfiniteRecycler >> fetchElementFor: aPosition in: anInfiniteElement [
+	"I do a hard work obtaining element for a position in data source."
 
-	^ self defaultFetcher
+	fetchers do: [ :f |
+		(f elementFor: aPosition in: anInfiniteElement) ifNotNil: [ :element |
+			^ element ] ]
+]
+
+{ #category : #private }
+BlInfiniteRecycler >> fetchers [
+
+	^ fetchers 
 ]
 
 { #category : #initialization }
 BlInfiniteRecycler >> initialize [
 
 	super initialize.
-	attachedScrap := OrderedCollection new
+	attachedScrap := OrderedCollection new.
+	self initializeFetchers
+]
+
+{ #category : #initialization }
+BlInfiniteRecycler >> initializeFetchers [
+
+	fetchers := OrderedCollection new.
+	customRecycler := self newCustomRecycler.
+	self addFetchers: {
+			BlRecyclerPositionScrapFetcher new.
+			customRecycler.
+			BlRecyclerDataSourceFetcher new }
+]
+
+{ #category : #initialization }
+BlInfiniteRecycler >> newCustomRecycler [ 
+
+	^ BlInfiniteCustomRecycler new
 ]
 
 { #category : #recycling }
@@ -133,7 +165,9 @@ BlInfiniteRecycler >> recycleElement: anElement in: anInfiniteElement [
 	| anElementHolder |
 	anElementHolder := anInfiniteElement elementHolderOf: anElement.	
 	anElementHolder wasReturnedFromScrap
-		ifTrue: [ anElementHolder clearReturnedFromScrap ]
+		ifTrue: [ anElementHolder clearReturnedFromScrap ].
+	
+	customRecycler recycleElement: anElement in: anInfiniteElement
 ]
 
 { #category : #recycling }
@@ -162,7 +196,6 @@ BlInfiniteRecycler >> reverseScrapDo: aBlock [
 { #category : #'accessing - cache' }
 BlInfiniteRecycler >> scrapCount [
 	"Return amount of scrapped elements"
-	<return: #Number>
 
 	^ attachedScrap size
 ]
@@ -186,7 +219,6 @@ BlInfiniteRecycler >> scrappedElementAt: anIndex [
 
 	"Return scrapped element at anIndex"
 
-	<return: #BlElement>
 	^ (attachedScrap at: anIndex) itemElement
 ]
 

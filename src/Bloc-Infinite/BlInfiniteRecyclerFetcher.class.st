@@ -1,23 +1,11 @@
 Class {
 	#name : #BlInfiniteRecyclerFetcher,
 	#superclass : #Object,
-	#classInstVars : [
-		'uniqueInstance'
-	],
 	#category : #'Bloc-Infinite-Recycler'
 }
 
-{ #category : #accessing }
-BlInfiniteRecyclerFetcher class >> uniqueInstance [
-	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
-]
+{ #category : #'element fetching' }
+BlInfiniteRecyclerFetcher >> elementFor: aPosition in: anInfiniteElement [
 
-{ #category : #initialization }
-BlInfiniteRecyclerFetcher >> defaultNext [
-	^ nil
-]
-
-{ #category : #initialization }
-BlInfiniteRecyclerFetcher >> nextFetcher [
-	^ self defaultNext 
+	^ self subclassResponsibility 
 ]
