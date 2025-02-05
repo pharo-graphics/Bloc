@@ -1246,7 +1246,7 @@ BlSpace >> isResizable [
 	"Return true if underlying window is resizable, false otherwise"
 
 	^ self
-		hostSpaceDo: [ :aHostSpace | aHostSpace resizable ]
+		hostSpaceDo: [ :aHostSpace | aHostSpace isResizable ]
 		ifAbsent: [ resizable ]
 ]
 
