@@ -58,6 +58,12 @@ BlMorphicWindowHostSpace >> densityDpi [
 ]
 
 { #category : #'window - properties' }
+BlMorphicWindowHostSpace >> fullscreen: aBoolean [
+	"Ignore. A Morphic space can't be fullscreen."
+
+]
+
+{ #category : #'window - properties' }
 BlMorphicWindowHostSpace >> fullsize: aBoolean [
 	"Switch underlying window to fullsize if true is given
 	and exit fullsize mode if false is given.
@@ -96,11 +102,25 @@ BlMorphicWindowHostSpace >> isBorderless [
 ]
 
 { #category : #'window - properties' }
+BlMorphicWindowHostSpace >> isFullscreen [
+	"Return false, as a Morphic space doesn't support fullscreen."
+
+	^ false
+]
+
+{ #category : #'window - properties' }
 BlMorphicWindowHostSpace >> isFullsize [
 	"Return true if an underlying window is in fullsize mode, false otherwise.
 	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent and has no window title"
 
 	^ isFullSize
+]
+
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> isResizable [
+	"Return true if underlying window is resizable, false otherwise"
+
+	^ morphicWindow isResizeable
 ]
 
 { #category : #'text input' }
@@ -128,6 +148,30 @@ BlMorphicWindowHostSpace >> logicalSize [
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
 
 	^ morphicWindow spaceExtent asLogicalSize
+]
+
+{ #category : #'host space - displaying' }
+BlMorphicWindowHostSpace >> maximize [
+
+	morphicWindow maximize
+]
+
+{ #category : #'host space - displaying' }
+BlMorphicWindowHostSpace >> maximized [
+
+	^ morphicWindow isMaximized
+]
+
+{ #category : #'host space - displaying' }
+BlMorphicWindowHostSpace >> minimize [
+
+	morphicWindow minimize
+]
+
+{ #category : #'host space - displaying' }
+BlMorphicWindowHostSpace >> minimized [
+
+	^ morphicWindow isMinimized
 ]
 
 { #category : #'private - accessing' }
@@ -180,6 +224,13 @@ BlMorphicWindowHostSpace >> position: aPoint [
 	"Change window's position to a given point in screen corrdinates"
 	
 	morphicWindow position: aPoint
+]
+
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> resizable: aBoolean [
+	"Make underlying window resizable if true is given"
+	
+	morphicWindow isResizeable: aBoolean
 ]
 
 { #category : #'host space - displaying' }
