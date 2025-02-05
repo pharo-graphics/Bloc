@@ -8,6 +8,14 @@ Class {
 	#category : #'Bloc-Tests-Space'
 }
 
+{ #category : #'building suites' }
+BlSpacePropertiesTest class >> testParameters [
+
+	^ super testParameters
+		forSelector: #showFirst
+		addOptions: #(true false)
+]
+
 { #category : #running }
 BlSpacePropertiesTest >> setUp [
 
