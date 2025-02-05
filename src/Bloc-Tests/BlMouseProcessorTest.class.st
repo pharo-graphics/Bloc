@@ -89,10 +89,10 @@ BlMouseProcessorTest >> secondaryMouseUpEvent [
 ]
 
 { #category : #running }
-BlMouseProcessorTest >> setUp [ 
+BlMouseProcessorTest >> setUp [
 
 	super setUp.
-	mouseProcessor := BlMouseProcessor space: BlSpace new.
+	mouseProcessor := BlMouseProcessor space: BlSpace new
 ]
 
 { #category : #tests }
@@ -120,7 +120,7 @@ BlMouseProcessorTest >> testMouseProcessorInitializedEmptyAndWithCorrectSpace [
 	aMouseProcessor := BlMouseProcessor space: aSpace.
 
 	self assert: aMouseProcessor space equals: aSpace.
-	self assert: aMouseProcessor pressedButtons isEmpty.
+	self assert: aMouseProcessor pressedButtons isEmpty
 ]
 
 { #category : #tests }
