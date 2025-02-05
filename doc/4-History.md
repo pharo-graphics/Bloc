@@ -26,4 +26,8 @@ Then, Sparta-Skia was introduced by feencom and it became the first backend opti
 In 2021, we started to work on a Bloc version that to be included in the future in Pharo.
 This codebase started to retrofit a part of the development made at feenkcom, to focus on core features and stability.
 
-In 2022, we introduced Alexandrie, a replacement of Sparta that uses Cairo much more efficiently and doesn't need the complexity of the bindings to Skia.
+In 2022, we introduced Alexandrie as a replacement for Sparta, leveraging Cairo for improved efficiency while eliminating the need for Skia bindings' complexity. That same year, Bloc was showcased at [ESUG](https://esug.org/2022-Conference/conf2022.html): [Watch here](https://youtu.be/HvJTDYuXkMU?si=FgcqK9qKFrfWOH74).
+
+The following year, in 2023, Bloc was featured at [Smalltalks Argentina](https://smalltalks2023.fast.org.ar/): [Watch here](https://youtu.be/CG8i2R4CbX0?si=0t7U_fE3N1DOYlFb).
+
+Most recently, in 2024, Bloc made another appearance at [ESUG](https://esug.org/2024-Conference/conf2024.html): [Watch here](https://youtu.be/R_yNWTUF7l0?si=oMQJR9Lh-UtMR6-3).
