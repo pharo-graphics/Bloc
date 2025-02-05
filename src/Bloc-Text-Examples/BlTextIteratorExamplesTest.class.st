@@ -5,15 +5,19 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlTextIteratorExamplesTest >> newTextSizeTenAttribute [
+
+	^ BlFontSizeAttribute size: 10
+]
+
+{ #category : #'instance creation' }
 BlTextIteratorExamplesTest >> testAttributed_end [
 
 	<sampleInstance>
 	| aText anIterator |
 	aText := 'EarthHelloWorld' asRopedText.
-	(aText from: 11 to: 15) appendingAdornment: [
-		BlElement new
-			size: 10 @ 10;
-			background: Color lightGray ].
+
+	(aText from: 11 to: 15) attribute: self newTextSizeTenAttribute.
 
 	anIterator := aText iterator.
 	self assert: anIterator position equals: 0.
@@ -29,7 +33,8 @@ BlTextIteratorExamplesTest >> testAttributed_end_next_attributed_end_at_1 [
 	anIterator := self testAttributed_end.
 
 	anIterator
-		nextAttributedEnd: [ :eachAttribute | eachAttribute isAdornment ]
+		nextAttributedEnd: [ :eachAttribute |
+			eachAttribute = self newTextSizeTenAttribute ]
 		indicesDo: [ :indexStart :indexEnd :theAttributes |
 			aStart := indexStart.
 			anEnd := indexEnd.
@@ -51,7 +56,8 @@ BlTextIteratorExamplesTest >> testAttributed_end_next_span_any_at_1 [
 	anIterator := self testAttributed_end.
 
 	anIterator
-		nextSpanAny: [ :eachAttribute | eachAttribute isAdornment ]
+		nextSpanAny: [ :eachAttribute |
+			eachAttribute = self newTextSizeTenAttribute ]
 		indicesDo: [ :indexStart :indexEnd :hasAny |
 			aStart := indexStart.
 			anEnd := indexEnd.
@@ -73,7 +79,8 @@ BlTextIteratorExamplesTest >> testAttributed_end_next_span_any_at_10 [
 	anIterator := self testAttributed_end_next_span_any_at_1.
 
 	anIterator
-		nextSpanAny: [ :eachAttribute | eachAttribute isAdornment ]
+		nextSpanAny: [ :eachAttribute |
+			eachAttribute = self newTextSizeTenAttribute ]
 		indicesDo: [ :indexStart :indexEnd :hasAny |
 			aStart := indexStart.
 			anEnd := indexEnd.
@@ -93,10 +100,8 @@ BlTextIteratorExamplesTest >> testAttributed_middle [
 	<sampleInstance>
 	| aText anIterator |
 	aText := 'EarthHelloWorld' asRopedText.
-	(aText from: 6 to: 10) appendingAdornment: [
-		BlElement new
-			size: 10 @ 10;
-			background: Color lightGray ].
+
+	(aText from: 6 to: 10) attribute: self newTextSizeTenAttribute.
 
 	anIterator := aText iterator.
 	self assert: anIterator position equals: 0.
@@ -112,7 +117,8 @@ BlTextIteratorExamplesTest >> testAttributed_middle_next_attributed_end_at_1 [
 	anIterator := self testAttributed_middle.
 
 	anIterator
-		nextAttributedEnd: [ :eachAttribute | eachAttribute isAdornment ]
+		nextAttributedEnd: [ :eachAttribute |
+			eachAttribute = self newTextSizeTenAttribute ]
 		indicesDo: [ :indexStart :indexEnd :theAttributes |
 			aStart := indexStart.
 			anEnd := indexEnd.
@@ -134,7 +140,8 @@ BlTextIteratorExamplesTest >> testAttributed_middle_next_attributed_end_at_10 [
 	anIterator := self testAttributed_middle_next_attributed_end_at_1.
 
 	anIterator
-		nextAttributedEnd: [ :eachAttribute | eachAttribute isAdornment ]
+		nextAttributedEnd: [ :eachAttribute |
+			eachAttribute = self newTextSizeTenAttribute ]
 		indicesDo: [ :indexStart :indexEnd :theAttributes |
 			aStart := indexStart.
 			anEnd := indexEnd.
@@ -156,7 +163,8 @@ BlTextIteratorExamplesTest >> testAttributed_middle_next_span_any_at_1 [
 	anIterator := self testAttributed_middle.
 
 	anIterator
-		nextSpanAny: [ :eachAttribute | eachAttribute isAdornment ]
+		nextSpanAny: [ :eachAttribute |
+			eachAttribute = self newTextSizeTenAttribute ]
 		indicesDo: [ :indexStart :indexEnd :hasAny |
 			aStart := indexStart.
 			anEnd := indexEnd.
@@ -178,7 +186,8 @@ BlTextIteratorExamplesTest >> testAttributed_middle_next_span_any_at_10 [
 	anIterator := self testAttributed_middle_next_span_any_at_5.
 
 	anIterator
-		nextSpanAny: [ :eachAttribute | eachAttribute isAdornment ]
+		nextSpanAny: [ :eachAttribute |
+			eachAttribute = self newTextSizeTenAttribute ]
 		indicesDo: [ :indexStart :indexEnd :hasAny |
 			aStart := indexStart.
 			anEnd := indexEnd.
@@ -200,7 +209,8 @@ BlTextIteratorExamplesTest >> testAttributed_middle_next_span_any_at_5 [
 	anIterator := self testAttributed_middle_next_span_any_at_1.
 
 	anIterator
-		nextSpanAny: [ :eachAttribute | eachAttribute isAdornment ]
+		nextSpanAny: [ :eachAttribute |
+			eachAttribute = self newTextSizeTenAttribute ]
 		indicesDo: [ :indexStart :indexEnd :hasAny |
 			aStart := indexStart.
 			anEnd := indexEnd.
@@ -220,10 +230,8 @@ BlTextIteratorExamplesTest >> testAttributed_start [
 	<sampleInstance>
 	| aText anIterator |
 	aText := 'EarthHelloWorld' asRopedText.
-	(aText from: 1 to: 5) appendingAdornment: [
-		BlElement new
-			size: 10 @ 10;
-			background: Color lightGray ].
+
+	(aText from: 1 to: 5) attribute: self newTextSizeTenAttribute.
 
 	anIterator := aText iterator.
 	self assert: anIterator position equals: 0.
@@ -239,7 +247,8 @@ BlTextIteratorExamplesTest >> testAttributed_start_next_attributed_end_at_1 [
 	anIterator := self testAttributed_start.
 
 	anIterator
-		nextAttributedEnd: [ :eachAttribute | eachAttribute isAdornment ]
+		nextAttributedEnd: [ :eachAttribute |
+			eachAttribute = self newTextSizeTenAttribute ]
 		indicesDo: [ :indexStart :indexEnd :theAttributes |
 			aStart := indexStart.
 			anEnd := indexEnd.
@@ -261,7 +270,8 @@ BlTextIteratorExamplesTest >> testAttributed_start_next_attributed_end_at_5 [
 	anIterator := self testAttributed_start_next_attributed_end_at_1.
 
 	anIterator
-		nextAttributedEnd: [ :eachAttribute | eachAttribute isAdornment ]
+		nextAttributedEnd: [ :eachAttribute |
+			eachAttribute = self newTextSizeTenAttribute ]
 		indicesDo: [ :indexStart :indexEnd :theAttributes |
 			aStart := indexStart.
 			anEnd := indexEnd.
@@ -283,7 +293,8 @@ BlTextIteratorExamplesTest >> testAttributed_start_next_span_any_at_1 [
 	anIterator := self testAttributed_start.
 
 	anIterator
-		nextSpanAny: [ :eachAttribute | eachAttribute isAdornment ]
+		nextSpanAny: [ :eachAttribute |
+			eachAttribute = self newTextSizeTenAttribute ]
 		indicesDo: [ :indexStart :indexEnd :hasAny |
 			aStart := indexStart.
 			anEnd := indexEnd.
@@ -305,7 +316,8 @@ BlTextIteratorExamplesTest >> testAttributed_start_next_span_any_at_5 [
 	anIterator := self testAttributed_start_next_span_any_at_1.
 
 	anIterator
-		nextSpanAny: [ :eachAttribute | eachAttribute isAdornment ]
+		nextSpanAny: [ :eachAttribute |
+			eachAttribute = self newTextSizeTenAttribute ]
 		indicesDo: [ :indexStart :indexEnd :hasAny |
 			aStart := indexStart.
 			anEnd := indexEnd.
