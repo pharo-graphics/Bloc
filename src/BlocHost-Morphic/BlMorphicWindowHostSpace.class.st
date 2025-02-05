@@ -116,6 +116,13 @@ BlMorphicWindowHostSpace >> isFullsize [
 	^ isFullSize
 ]
 
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> isResizable [
+	"Return true if underlying window is resizable, false otherwise"
+
+	^ morphicWindow isResizeable
+]
+
 { #category : #'text input' }
 BlMorphicWindowHostSpace >> isTextInputActive [
 	"Check whether or not Unicode text input events are enabled"
@@ -217,6 +224,13 @@ BlMorphicWindowHostSpace >> position: aPoint [
 	"Change window's position to a given point in screen corrdinates"
 	
 	morphicWindow position: aPoint
+]
+
+{ #category : #'window - properties' }
+BlMorphicWindowHostSpace >> resizable: aBoolean [
+	"Make underlying window resizable if true is given"
+	
+	morphicWindow isResizeable: aBoolean
 ]
 
 { #category : #'host space - displaying' }
