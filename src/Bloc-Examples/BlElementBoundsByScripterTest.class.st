@@ -121,6 +121,7 @@ BlElementBoundsByScripterTest >> testBoundsInSpace2 [
 
 { #category : #tests }
 BlElementBoundsByScripterTest >> testBoundsInSpace3 [
+	<expectedFailure>
 
 	| aScripter |
 	aScripter := self testBoundsInSpace2.

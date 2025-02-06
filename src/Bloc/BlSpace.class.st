@@ -1204,7 +1204,7 @@ BlSpace >> isFullscreen [
 	"Return true if an underlying window is in fullscreen mode, false otherwise."
 
 	^ self 
-		hostSpaceDo: [ :aHostSpace | aHostSpace fullscreen ]
+		hostSpaceDo: [ :aHostSpace | aHostSpace isFullscreen ]
 		ifAbsent: [ fullscreen ]
 ]
 
@@ -1246,7 +1246,7 @@ BlSpace >> isResizable [
 	"Return true if underlying window is resizable, false otherwise"
 
 	^ self
-		hostSpaceDo: [ :aHostSpace | aHostSpace resizable ]
+		hostSpaceDo: [ :aHostSpace | aHostSpace isResizable ]
 		ifAbsent: [ resizable ]
 ]
 
