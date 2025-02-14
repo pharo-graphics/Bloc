@@ -31,23 +31,6 @@ BlLinearLayout class >> vertical [
 	^ self new beVertical
 ]
 
-{ #category : #comparing }
-BlLinearLayout >> = anObject [
-
-	self == anObject ifTrue: [ ^ true ].
-	self class = anObject class ifFalse: [ ^ false ].
-	
-	self cellSpacing = anObject cellSpacing ifFalse: [ ^ false ].
-	self interspace = anObject interspace ifFalse: [ ^ false ].
-	
-	self orientation = anObject orientation ifFalse: [ ^ false ].
-	self horizontalAlignment = anObject horizontalAlignment ifFalse: [
-		^ false ].
-	self verticalAlignment = anObject verticalAlignment ifFalse: [
-		^ false ].
-	^ true
-]
-
 { #category : #'api - alignment' }
 BlLinearLayout >> align: aChildElement horizontal: aBlAlignment [
 	aChildElement constraintsDo: [ :c | (c at: self class) horizontal alignment: aBlAlignment ]
