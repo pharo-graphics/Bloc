@@ -30,7 +30,6 @@ Class {
 		'borderless',
 		'eventDispatcher',
 		'eventListener',
-		'eventRecorder',
 		'mouseProcessor',
 		'focusProcessor',
 		'keyboardProcessor',
