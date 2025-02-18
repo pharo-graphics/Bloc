@@ -1549,6 +1549,9 @@ BlSpace >> show [
 
 { #category : #'api - displaying' }
 BlSpace >> showSpace: aSpace [
+
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/698'.
+
 	"I show a given space either inside of me or let it open by default"
 	aSpace show
 ]

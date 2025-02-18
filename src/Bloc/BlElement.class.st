@@ -3633,6 +3633,9 @@ BlElement >> shouldHandleMouseEvents [
 
 { #category : #'api - opening' }
 BlElement >> showSpace: aSpace [
+	
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/698'.
+
 	self hasParent
 		ifTrue: [ self parent showSpace: aSpace ]
 		ifFalse: [
