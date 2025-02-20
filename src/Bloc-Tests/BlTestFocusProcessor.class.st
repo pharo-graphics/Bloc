@@ -7,7 +7,7 @@ Class {
 	#category : #'Bloc-Tests-Universe'
 }
 
-{ #category : #accessing }
+{ #category : #removing }
 BlTestFocusProcessor >> clearFiredEvents [
 
 	firedEvents removeAll

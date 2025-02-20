@@ -63,8 +63,6 @@ BlFocusProcessor >> processBlur: anElement [
 	self space focusOwner: nil.
 	anElement focused: false.
 	
-	1halt.
-	
 	"Fire events. Blur doesn't bubble; FocusOut does bubble."
 	self
 		dispatchEvent:
