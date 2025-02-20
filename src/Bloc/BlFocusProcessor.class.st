@@ -1,3 +1,6 @@
+"
+I'm responsible of processing events and requests related to focus gain and loose.
+"
 Class {
 	#name : #BlFocusProcessor,
 	#superclass : #BlBaseEventProcessor,
@@ -6,82 +9,6 @@ Class {
 	],
 	#category : #'Bloc-Space - Events'
 }
-
-{ #category : #'event firing' }
-BlFocusProcessor >> fireBlurEvent: anElement [
-	"Create and send blur event that doesn't bubble, perform simple direct dispatch to the given target element"
-	self
-		dispatchEvent: (self newBlurEvent target: anElement)
-		target: anElement
-]
-
-{ #category : #'event firing' }
-BlFocusProcessor >> fireBlurEvent: anElement dueTo: aFocusReason [
-	"Create and send blur event that doesn't bubble, perform simple direct dispatch to the given target element"
-	self
-		dispatchEvent: (self newBlurEvent target: anElement; reason: aFocusReason)
-		target: anElement
-]
-
-{ #category : #'event firing' }
-BlFocusProcessor >> fireFocusEvent: anElement [
-	"Send focus event that doesn't bubble, perform simple direct dispatch to the target"
-	
-	self
-		dispatchEvent: (self newFocusEvent target: anElement)
-		target: anElement
-]
-
-{ #category : #'event firing' }
-BlFocusProcessor >> fireFocusInEvent: anElement [
-	"Send focusIn event that should bubble"
-
-	self fireEvent: (self newFocusInEvent target: anElement)
-]
-
-{ #category : #'event firing' }
-BlFocusProcessor >> fireFocusInEvent: anElement from: aTopEventTarget [
-	"Send focusIn event that should bubble"
-	
-	anElement == aTopEventTarget
-		ifTrue: [ ^ self ].
-	
-	self fireEvent: (self newFocusInEvent target: anElement) from: aTopEventTarget
-]
-
-{ #category : #'event firing' }
-BlFocusProcessor >> fireFocusOutEvent: anElement [
-	"Send focusOut event that should bubble"
-
-	self fireEvent: (self newFocusOutEvent target: anElement)
-]
-
-{ #category : #'event firing' }
-BlFocusProcessor >> fireFocusOutEvent: anElement dueTo: aFocusReason [
-	"Send focusOut event that should bubble"
-
-	self fireEvent: (self newFocusOutEvent target: anElement; reason: aFocusReason)
-]
-
-{ #category : #'event firing' }
-BlFocusProcessor >> fireFocusOutEvent: anElement from: aTopEventTarget dueTo: aFocusReason [
-	"Send focusOut event that should bubble"
-
-	self fireEvent: (self newFocusOutEvent target: anElement; reason: aFocusReason) from: aTopEventTarget
-]
-
-{ #category : #'event firing' }
-BlFocusProcessor >> fireFocusTransferEvent: anElement from: aPreviousFocusedElement [
-	"Send focus event that doesn't bubble, perform simple direct dispatch to the target"
-
-	self
-		dispatchEvent:
-			(self newFocusTransferEvent
-				 target: anElement;
-				 transfer: aPreviousFocusedElement;
-				 yourself)
-		target: anElement
-]
 
 { #category : #accessing }
 BlFocusProcessor >> focusOwner [
@@ -121,136 +48,137 @@ BlFocusProcessor >> loseFor: anElement [
 	self focusOwner: nil
 ]
 
-{ #category : #'instance creation' }
-BlFocusProcessor >> newBlurEvent [
-	"Create, initialize and return a blur event that should be sent to the element
-	that just lost its focus"
-
-	^ BlBlurEvent new
-		  canBePropagated: false;
-		  yourself
-]
-
-{ #category : #'instance creation' }
-BlFocusProcessor >> newFocusEvent [
-	"Create, initialize and return a focus event that should be sent to the element
-	after it gets focus"
-
-	^ BlFocusEvent new
-		  canBePropagated: false;
-		  yourself
-]
-
-{ #category : #'instance creation' }
-BlFocusProcessor >> newFocusInEvent [
-	"Create, initialize and return a focus-in event that should be sent
-	as a part of focus processing"
-	
-	^ BlFocusInEvent new
-]
-
-{ #category : #'instance creation' }
-BlFocusProcessor >> newFocusOutEvent [
-	"Create, initialize and return a focus-out event that should be sent
-	as a part of blur processing"
-	
-	^ BlFocusOutEvent new
-]
-
-{ #category : #'instance creation' }
-BlFocusProcessor >> newFocusTransferEvent [
-	"Create, initialize and return a focus transfer event that should be sent to the element
-	before performing a focus transfer"
-
-	^ BlFocusTransferEvent new
-]
-
 { #category : #'initialize-release' }
 BlFocusProcessor >> onSpaceClosed [
+
 	self focusOwner: nil.
 	focusChain := nil
 ]
 
 { #category : #'focus - processing' }
 BlFocusProcessor >> processBlur: anElement [
-	self
-		assert: [ self hasFocusOwner ]
-		description: [ 'Blur event can only be processed when there is a focused element' ].
+	"Process and fire the corresponding blur events that occurs when an element looses focus."
 
-	"First make a given element to loose focus, then send events"
+	"First, mark the received element as unfocused, then send events"
 	self space focusOwner: nil.
 	anElement focused: false.
-	focusChain leafsDo: [ :aLeafElement | self fireFocusOutEvent: aLeafElement ].
-	self fireBlurEvent: anElement
+	
+	1halt.
+	
+	"Fire events. Blur doesn't bubble; FocusOut does bubble."
+	self
+		dispatchEvent:
+			(BlBlurEvent new
+				target: anElement;
+				dueToRemoval: false;
+				yourself)
+		target: anElement.
+
+	focusChain leafsDo: [ :aLeafElement |
+		self fireEvent:
+			(BlFocusOutEvent new
+				target: aLeafElement;
+				dueToRemoval: false;
+				yourself) ]
 ]
 
 { #category : #'focus - processing' }
-BlFocusProcessor >> processBlur: anElement dueToFocus: aNewFocusedElement dueTo: aFocusReason [
-	self
-		assert: [ self hasFocusOwner ]
-		description: [ 'Blur event can only be processed when there is a focused element' ].
+BlFocusProcessor >> processBlur: anElement dueToFocus: aNewFocusedElement dueToRemoval: aBoolean [
+	"Process and fire the corresponding blur events that occurs when an element looses focus."
 
-	"First make a given element to loose focus, then send events"
+	"First, mark the received element as unfocused, then send events"
 	self space focusOwner: nil.
 	anElement focused: false.
 
-	focusChain leafsDo: [ :aLeafElement |
-		"if a new focused element is a child we don't have to send focus-out event"
-		(aNewFocusedElement hasParent: aLeafElement)
-			ifFalse: [
-				aLeafElement
-					firstCommonParent: aNewFocusedElement
-					ifFound: [ :aCommonParent | self fireFocusOutEvent: aLeafElement from: aCommonParent dueTo: aFocusReason ]
-					ifNone: [ self fireFocusOutEvent: aLeafElement dueTo: aFocusReason ] ] ].
+	"Fire Blur; it doesn't bubble"
+	self
+		dispatchEvent:
+			(BlBlurEvent new
+				target: anElement;
+				dueToRemoval: aBoolean;
+				yourself)
+		target: anElement.
 
-	self fireBlurEvent: anElement dueTo: aFocusReason
+	"Fire FocusOut; they bubble"
+	focusChain leafsDo: [ :aLeafElement |
+		"if a new focused element is a child we
+		don't have to send focus-out event"
+		(aNewFocusedElement hasParent: aLeafElement) ifFalse: [
+			| anEvent |
+			anEvent :=
+				BlFocusOutEvent new
+					target: aLeafElement;
+					dueToRemoval: aBoolean;
+					yourself.
+
+			aLeafElement
+				firstCommonParent: aNewFocusedElement
+				ifFound: [ :aParent |
+					self fireEvent: anEvent from: aParent ]
+				ifNone: [
+					self fireEvent: anEvent ] ] ]
 ]
 
 { #category : #'focus - processing' }
 BlFocusProcessor >> processFocus: anElement [
-	self
-		assert: [ anElement isNotNil ]
-		description: [ 'Can not give focus to nil' ].
-	self
-		assert: [ anElement ~= self focusOwner ]
-		description: [ 'Can not give focus to the already focused element' ].
+	"Process and fire the corresponding focus and focus-in events that
+	occurs when an element gains focus."
 
-	"first make element to be focused"
+	"First, mark the element as focused"
 	self focusOwner: anElement.
 	focusChain := BlFocusChain of: self focusOwner.
 	anElement focused: true.
 
-	"then send events"
-	self fireFocusInEvent: anElement.
-	self fireFocusEvent: anElement
+	"Fire events. Focus doesn't bubble; FocusIn does bubble."
+	self
+		dispatchEvent:
+			(BlFocusEvent new
+				target: anElement;
+				yourself)
+		target: anElement.
+	self fireEvent:
+		(BlFocusInEvent new
+			target: anElement;
+			yourself)
 ]
 
 { #category : #'focus - processing' }
 BlFocusProcessor >> processFocus: anElement dueToTransferFrom: aPreviousFocus [
-	self
-		assert: [ anElement isNotNil ]
-		description: [ 'Can not give focus to nil' ].
-	self
-		assert: [ anElement ~= self focusOwner ]
-		description: [ 'Can not give focus to the already focused element' ].
+	"Process and fire the corresponding focus and focus-in events that
+	occurs when an element gains focus."
 
-	"first make element to be focused"
+	"First, mark the element as focused"
 	self focusOwner: anElement.
 	focusChain := BlFocusChain of: self focusOwner.
 	anElement focused: true.
 
-	"then send events"	
+	"Fire Focus; it doesn't bubble"
+	self
+		dispatchEvent:
+			(BlFocusEvent new
+				target: anElement;
+				yourself)
+		target: anElement.
+
+	"Fire FocusIn; they bubble"
 	focusChain leafsDo: [ :aLeafElement |
+		| anEvent |
+		anEvent := BlFocusInEvent new
+					target: aLeafElement;
+					yourself.
+
 		"if a new focused element is a child we don't have to send focus-in event"
 		(aLeafElement hasParent: aPreviousFocus)
 			ifFalse: [
 				aLeafElement
 					firstCommonParent: aPreviousFocus
-					ifFound: [ :aCommonParent | self fireFocusInEvent: aLeafElement from: aCommonParent ]
-					ifNone: [ self fireFocusInEvent: aLeafElement ] ]
-			ifTrue: [ self fireFocusInEvent: aLeafElement from: aPreviousFocus ] ].
-	
-	self fireFocusEvent: anElement
+					ifFound: [ :aCommonParent |
+						aLeafElement == aCommonParent ifFalse: [ 
+							self fireEvent: anEvent from: aCommonParent ] ]
+					ifNone: [ self fireEvent: anEvent ] ]
+			ifTrue: [
+				aLeafElement == aPreviousFocus ifFalse: [ 
+					self fireEvent: anEvent from: aPreviousFocus ] ] ]
 ]
 
 { #category : #'focus - processing' }
@@ -266,26 +194,30 @@ BlFocusProcessor >> processWindowFocusOut: anEvent [
 ]
 
 { #category : #'focus - requesting' }
-BlFocusProcessor >> requestFor: anElement dueTo: aFocusReason [
+BlFocusProcessor >> requestFor: anElement dueToRemoval: aBoolean [
+
 	| aPreviousFocusOwner focusHolder |
-
 	focusHolder := anElement focusHolder.
-	self focusOwner = focusHolder
-		ifTrue: [ ^ self ].
-
-	focusHolder isFocusable
-		ifFalse: [ ^ self ].
+	self focusOwner = focusHolder ifTrue: [ ^ self ].
+	focusHolder isFocusable ifFalse: [ ^ self ].
 
 	"keep reference to the previous focus owner"
 	aPreviousFocusOwner := self focusOwner.
 
-	"we should only process blur event when there is focused element, otherwise skip it"
-	self hasFocusOwner
-		ifTrue: [ self processBlur: aPreviousFocusOwner dueToFocus: anElement dueTo: aFocusReason ].
-
+	"we should only process blur event when there is a
+	focused element; otherwise, skip it."
+	self hasFocusOwner ifTrue: [
+		self
+			processBlur: aPreviousFocusOwner
+			dueToFocus: anElement
+			dueToRemoval: aBoolean ].
 	self focusOwner: nil.
+
 	"focus is processed with new requested focus owner"
 	aPreviousFocusOwner
 		ifNil: [ self processFocus: focusHolder ]
-		ifNotNil: [ self processFocus: focusHolder dueToTransferFrom: aPreviousFocusOwner ]
+		ifNotNil: [
+			self
+				processFocus: focusHolder
+				dueToTransferFrom: aPreviousFocusOwner ]
 ]
