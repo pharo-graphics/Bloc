@@ -58,5 +58,6 @@ BlBaseEventProcessor >> onSpaceClosed [
 
 { #category : #accessing }
 BlBaseEventProcessor >> space [
+
 	^ space
 ]

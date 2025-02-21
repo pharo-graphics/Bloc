@@ -54,12 +54,6 @@ BlAbstractEventProcessingTest >> assertNextFiredEventIs: anEventClass target: aT
 ]
 
 { #category : #accessing }
-BlAbstractEventProcessingTest >> child [
-
-	^ self space root children at: 1
-]
-
-{ #category : #accessing }
 BlAbstractEventProcessingTest >> childA [
 
 	^ space root childWithId: #A
