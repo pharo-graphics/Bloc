@@ -365,6 +365,16 @@ BlElement >> allParentsDo: aBlock [
 	^ self
 ]
 
+{ #category : #'children testing' }
+BlElement >> allParentsInclude: anElement [
+	"Return true if I have a given element in my parent chain, false otherwise"
+
+	self allParentsDo: [ :aParentElement |
+		aParentElement == anElement ifTrue: [ ^ true ] ].
+
+	^ false
+]
+
 { #category : #'children accessing' }
 BlElement >> allParentsReverseDo: aBlock [
 	"Evaluate a block with my every parent as an argument starting from my top most parent up to my direct parent (excluding myself).
@@ -1870,11 +1880,11 @@ BlElement >> hasParent [
 BlElement >> hasParent: anElement [
 	"Return true if I have a given element in my parent chain, false otherwise"
 
-	self allParentsDo: [ :aParentElement |
-		aParentElement == anElement
-			ifTrue: [ ^ true ] ].
+	self
+		deprecated: 'Use allParentsInclude: instead'
+		transformWith: '`@rcvr hasParent: `@arg' -> '`@rcvr allParentsInclude: `@arg'.
 
-	^ false
+	^ self allParentsInclude: anElement
 ]
 
 { #category : #'api - bounds' }
