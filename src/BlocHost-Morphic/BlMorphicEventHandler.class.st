@@ -101,7 +101,7 @@ BlMorphicEventHandler >> enqueue: aBlEvent [
 
 	self isClosed ifTrue: [ ^ self ].
 
-	aBlEvent timestamp: windowMorph hostSpace space time now.
+	aBlEvent fillFromTime: windowMorph hostSpace space time.
 
 	windowMorph hostSpace enqueueEvent: aBlEvent.
 	self flag: 'ugly code to force the space to dequeue the event '.

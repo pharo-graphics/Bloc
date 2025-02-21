@@ -333,7 +333,7 @@ BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 			aSpace root addChild: topMostElement ].
 
 	aCollectionOfEvents do: [ :anEvent |
-		anEvent timestamp: aSpace time now ].
+		anEvent fillFromTime: aSpace time ].
 
 	aSpace pulse.
 	aSpace
@@ -648,7 +648,7 @@ BlSpace >> dispatchAddedToSceneGraph [
 { #category : #'event handling' }
 BlSpace >> dispatchEventWithTimestamp: aBlEvent [ 
 
-	aBlEvent timestamp ifNil: [ aBlEvent timestamp: self time now ].
+	aBlEvent hasTimestamp ifNil: [ aBlEvent fillFromTime: self time ].
 	self dispatchEvent: aBlEvent
 ]
 
@@ -664,12 +664,11 @@ BlSpace >> dispatchRemovedFromSceneGraph [
 BlSpace >> dispatchTimeEvent: aSpacePhaseEventClass during: aBlock [
 
 	| aStartTime |
-	aStartTime := self time now.
+	aStartTime := self time nowInUTCMicroseconds.
 	aBlock value.
-	self dispatchEvent:
-		(aSpacePhaseEventClass new
-			 start: aStartTime;
-			 end: self time now;
+	self dispatchEvent: (aSpacePhaseEventClass new
+			 startMicroseconds: aStartTime
+			 endMicroseconds: self time nowInUTCMicroseconds;
 			 yourself)
 ]
 

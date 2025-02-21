@@ -21,7 +21,7 @@ BlBaseEventProcessor class >> space: aSpace [
 { #category : #'event firing' }
 BlBaseEventProcessor >> dispatchEvent: anEvent target: aTarget [
 
-	anEvent timestamp: space time now.
+	anEvent fillFromTime: space time.
 
 	aTarget dispatchEvent: anEvent
 ]
@@ -29,7 +29,7 @@ BlBaseEventProcessor >> dispatchEvent: anEvent target: aTarget [
 { #category : #'event firing' }
 BlBaseEventProcessor >> fireEvent: anEvent [
 
-	anEvent timestamp: space time now.
+	anEvent fillFromTime: space time.
 	
 	^ BlEvent fireEvent: anEvent
 ]
@@ -37,7 +37,7 @@ BlBaseEventProcessor >> fireEvent: anEvent [
 { #category : #'event firing' }
 BlBaseEventProcessor >> fireEvent: anEvent from: aTopEventTarget [
 
-	anEvent timestamp: space time now.
+	anEvent fillFromTime: space time.
 
 	^ BlEvent fireEvent: anEvent from: aTopEventTarget
 ]

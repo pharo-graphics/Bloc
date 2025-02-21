@@ -14,7 +14,8 @@ Class {
 		'currentTarget',
 		'timestamp',
 		'canBePropagated',
-		'consumed'
+		'consumed',
+		'timestampInMicroseconds'
 	],
 	#category : #'Bloc-Events'
 }
@@ -130,7 +131,7 @@ BlEvent >> asDictionaryForExport [
 		at: #source put: (source ifNotNil: [ :aSource | self class targetToDictionaryForExport: aSource ]);
 		at: #target put: (target ifNotNil: [ :aTarget | self class targetToDictionaryForExport: aTarget ]);
 		at: #currentTarget put: (currentTarget ifNotNil: [ :aCurrentTarget | self class targetToDictionaryForExport: aCurrentTarget ]);
-		at: #timestamp put: timestamp asString;
+		at: #timestamp put: self timestamp asString;
 		at: #canBePropagated put: canBePropagated;
 		at: #consumed put: consumed;
 		yourself
@@ -200,6 +201,13 @@ BlEvent >> currentTarget: anEventTarget [
 	currentTarget := anEventTarget
 ]
 
+{ #category : #'api - timestamp' }
+BlEvent >> fillFromTime: aBlTime [
+
+	timestampInMicroseconds := aBlTime nowInUTCMicroseconds.
+	timestamp := nil
+]
+
 { #category : #firing }
 BlEvent >> fire [
 	BlEvent fireEvent: self
@@ -215,6 +223,13 @@ BlEvent >> forwardingTarget: aTBlEventTarget [
 BlEvent >> hasSource [
 	
 	^ source isNotNil
+]
+
+{ #category : #'api - timestamp' }
+BlEvent >> hasTimestamp [
+	"Returns the `DateAndTime` at which the event was created."
+
+	^ timestampInMicroseconds isNotNil
 ]
 
 { #category : #initialization }
@@ -367,7 +382,7 @@ BlEvent >> newCopyFor: aTarget [
 { #category : #printing }
 BlEvent >> printExtraDetailsOn: aStream [
 
-	aStream print: timestamp.
+	aStream print: self timestamp.
 	aStream
 		nextPutAll: ' target: ';
 		print: target.
@@ -422,15 +437,18 @@ BlEvent >> target: aTBlEventTarget [
 	target := aTBlEventTarget
 ]
 
-{ #category : #'api - accessing' }
+{ #category : #'api - timestamp' }
 BlEvent >> timestamp [
 	"Returns the `DateAndTime` at which the event was created."
 
-	^ timestamp
+	^ timestamp ifNil: [ timestamp := DateAndTime fromUTCMicrosecondClockValue: timestampInMicroseconds ]
 ]
 
-{ #category : #'private - accessing' }
+{ #category : #'api - timestamp' }
 BlEvent >> timestamp: aDateAndTime [
-	
-	timestamp := aDateAndTime
+
+	self deprecated: 'Should use fillFromTime:'.
+
+	timestampInMicroseconds := aDateAndTime utcMicroSeconds.
+	timestamp := nil
 ]
