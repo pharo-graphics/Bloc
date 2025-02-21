@@ -233,6 +233,9 @@ BlEvent >> isBaseDrag [
 
 { #category : #testing }
 BlEvent >> isBaseFocus [
+
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/704'.
+
 	^ false
 ]
 
