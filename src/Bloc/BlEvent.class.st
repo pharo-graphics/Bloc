@@ -21,64 +21,67 @@ Class {
 
 { #category : #'api - enable / disable' }
 BlEvent class >> disableIn: anEventDispatcher [
+
 	anEventDispatcher disableGeneralEventType: self
 ]
 
 { #category : #'api - enable / disable' }
 BlEvent class >> enableIn: anEventDispatcher [
+
 	anEventDispatcher enableGeneralEventType: self
 ]
 
 { #category : #'event management' }
 BlEvent class >> fireEvent: anEvent [
-	<return: #BlEvent>
 
 	^ self fireEvent: anEvent target: anEvent target
 ]
 
 { #category : #'event management' }
 BlEvent class >> fireEvent: anEvent from: aTopEventTarget [
-	<return: #BlEvent>
 
 	^ self fireEvent: anEvent from: aTopEventTarget to: anEvent target
 ]
 
 { #category : #'event management' }
 BlEvent class >> fireEvent: anEvent from: aTopEventTarget to: aTargetEventTarget [
-	<return: #BlEvent>
-	| theEvent aDispatcherChain |
 
+	| theEvent aDispatcherChain |
 	theEvent := anEvent.
 
-	anEvent hasSource
-		ifFalse: [ anEvent source: aTargetEventTarget ].
+	anEvent hasSource ifFalse: [ anEvent source: aTargetEventTarget ].
 
-	anEvent target = aTargetEventTarget
-		ifFalse: [ theEvent := anEvent newCopyFor: aTargetEventTarget].
+	anEvent target = aTargetEventTarget ifFalse: [
+		theEvent := anEvent newCopyFor: aTargetEventTarget ].
 
-	aDispatcherChain := aTargetEventTarget buildEventDispatchChain: BlEventDispatcherChain empty upTo: aTopEventTarget.
+	aDispatcherChain :=
+		aTargetEventTarget
+			buildEventDispatchChain: BlEventDispatcherChain empty
+			upTo: aTopEventTarget.
+
 	^ aDispatcherChain dispatchEvent: theEvent
 ]
 
 { #category : #'event management' }
 BlEvent class >> fireEvent: anEvent target: anEventTarget [
-	<return: #BlEvent>
-	| theEvent aDispatcherChain |
 
+	| theEvent aDispatcherChain |
 	theEvent := anEvent.
 
-	anEvent hasSource
-		ifFalse: [ anEvent source: anEventTarget ].
+	anEvent hasSource ifFalse: [ anEvent source: anEventTarget ].
 
-	anEvent target = anEventTarget
-		ifFalse: [ theEvent := anEvent newCopyFor: anEventTarget].
+	anEvent target = anEventTarget ifFalse: [
+		theEvent := anEvent newCopyFor: anEventTarget ].
 
-	aDispatcherChain := anEventTarget buildEventDispatchChain: BlEventDispatcherChain empty.
+	aDispatcherChain :=
+		anEventTarget buildEventDispatchChain: BlEventDispatcherChain empty.
+
 	^ aDispatcherChain dispatchEvent: theEvent
 ]
 
 { #category : #accessing }
 BlEvent class >> from: anEventTarget [
+
 	^ self new
 		target: anEventTarget;
 		source: anEventTarget;
@@ -87,6 +90,7 @@ BlEvent class >> from: anEventTarget [
 
 { #category : #accessing }
 BlEvent class >> target: anObject [
+
 	^ self new
 		target: anObject;
 		yourself
@@ -94,8 +98,8 @@ BlEvent class >> target: anObject [
 
 { #category : #private }
 BlEvent class >> targetToDictionaryForExport: anObject [
-	| aDictionary |
 
+	| aDictionary |
 	aDictionary := OrderedDictionary new 
 		at: #class put: anObject class name;
 		at: #hash put: anObject identityHash;
@@ -109,6 +113,7 @@ BlEvent class >> targetToDictionaryForExport: anObject [
 
 { #category : #'api - enable / disable' }
 BlEvent class >> wantedIn: anEventDispatcher [
+
 	^ anEventDispatcher wantsGeneralEventType: self
 ]
 
@@ -208,15 +213,15 @@ BlEvent >> forwardingTarget: aTBlEventTarget [
 
 { #category : #testing }
 BlEvent >> hasSource [
-	<return: #Boolean>
 	
 	^ source isNotNil
 ]
 
 { #category : #initialization }
 BlEvent >> initialize [
+
 	super initialize.
-	
+
 	consumed := false.
 	canBePropagated := true
 ]
@@ -357,13 +362,26 @@ BlEvent >> newCopyFor: aTarget [
 ]
 
 { #category : #printing }
+BlEvent >> printExtraDetailsOn: aStream [
+
+	aStream print: timestamp.
+	aStream
+		nextPutAll: ' target: ';
+		print: target.
+	self hasSource ifTrue: [
+		aStream
+			nextPutAll: ' source: ';
+			print: source ]
+]
+
+{ #category : #printing }
 BlEvent >> printOn: aStream [
 
 	aStream
 		nextPutAll: self className;
-		nextPutAll: '(timestamp: ';
-		print: timestamp;
-		nextPut: $)
+		nextPut: $(.
+	self printExtraDetailsOn: aStream.
+	aStream nextPut: $)
 ]
 
 { #category : #sending }

@@ -1,5 +1,5 @@
 "
-Is responsible for processing `BlMouseEvent` which are sent by the `TBlHostSpace` to the `BlSpace`. In addition, the mouse event processor manage event for Drag&drop, 
+Is responsible for processing `BlMouseEvent` which are sent by the `TBlHostSpace` to the `BlSpace`. In addition, the mouse event processor manage events for drag&drop.
 "
 Class {
 	#name : #BlMouseProcessor,
@@ -12,17 +12,31 @@ Class {
 		'lastMouseTarget',
 		'dndInProgress',
 		'pressedButtons',
-		'dragState',
 		'lastMouseMoveEvent',
 		'lastMouseDownEvent'
+	],
+	#classInstVars : [
+		'dblClickDelay'
 	],
 	#category : #'Bloc-Space - Events'
 }
 
 { #category : #accessing }
 BlMouseProcessor class >> dblClickDelay [
-	<return: #Duration>
-	^ 400 milliSeconds
+
+	^ dblClickDelay
+]
+
+{ #category : #accessing }
+BlMouseProcessor class >> dblClickDelay: aDuration [
+
+	dblClickDelay := aDuration
+]
+
+{ #category : #accessing }
+BlMouseProcessor class >> initialize [
+
+	dblClickDelay := 400 milliSeconds
 ]
 
 { #category : #'event testing' }
@@ -84,6 +98,7 @@ BlMouseProcessor >> enteredTargets [
 
 { #category : #'event processing' }
 BlMouseProcessor >> fillTargetHierarchy: aTarget [
+
 	^ Array streamContents: [ :aStream |
 		aStream nextPut: aTarget.
 		aTarget allParentsDo: [ :aParentElement | aStream nextPut: aParentElement  ] ]
@@ -104,51 +119,57 @@ BlMouseProcessor >> fireAsDragEndEvent: anEvent [
 
 	aDragEvent isConsumed ifFalse: [
 		self space dispatchEvent:
-			(BlSpaceDragCancelEvent new position: aDragEvent position) ]
+			(BlSpaceDragCancelEvent new
+				position: aDragEvent position;
+				yourself) ]
 ]
 
 { #category : #'event firing' }
 BlMouseProcessor >> fireAsDragEnterEvent: anEvent targets: aCollection [
-	aCollection
-		do: [ :t | 
-			self dispatchEvent:
-					(anEvent asDragEnterEvent
-						target: t;
-						gestureSource: currentDragTarget;
-						canBePropagated: false;
-						yourself)
-				target: t ]
+
+	aCollection do: [ :t | 
+		self
+			dispatchEvent:
+				(anEvent asDragEnterEvent
+					target: t;
+					gestureSource: currentDragTarget;
+					canBePropagated: false;
+					yourself)
+			target: t ]
 ]
 
 { #category : #'event firing' }
 BlMouseProcessor >> fireAsDragEvent: anEvent [
 
-	self fireEvent: (anEvent asDragEvent
-			 target: currentDragTarget;
-			 gestureSource: currentDragTarget;
-			 yourself)
+	self fireEvent:
+		(anEvent asDragEvent
+			target: currentDragTarget;
+			gestureSource: currentDragTarget;
+			yourself)
 ]
 
 { #category : #'event firing' }
 BlMouseProcessor >> fireAsDragLeaveEvent: anEvent targets: aCollection [
-	aCollection
-		do:	[ :t | 
-			self dispatchEvent:
-					(anEvent asDragLeaveEvent
-						target: t;
-						gestureSource: currentDragTarget;
-						canBePropagated: false;
-						yourself)
-					target: t ]
+
+	aCollection do:	[ :t | 
+		self
+			dispatchEvent:
+				(anEvent asDragLeaveEvent
+					target: t;
+					gestureSource: currentDragTarget;
+					canBePropagated: false;
+					yourself)
+			target: t ]
 ]
 
 { #category : #'event firing' }
 BlMouseProcessor >> fireAsDragStartEvent: anEvent [
+
 	^ self fireEvent:
-			(anEvent asDragStartEvent
+		(anEvent asDragStartEvent
 			gestureSource: anEvent target;
-				target: anEvent target;
-				yourself)
+			target: anEvent target;
+			yourself)
 ]
 
 { #category : #'mouse drag' }
@@ -159,34 +180,37 @@ BlMouseProcessor >> fireAsDropEvent: anEvent [
 		              copyFrom: anEvent;
 		              yourself.
 
-	self fireEvent: (aDropEvent
-			 target: anEvent target;
-			 gestureSource: currentDragTarget;
-			 yourself)
+	self fireEvent:
+		(aDropEvent
+			target: anEvent target;
+			gestureSource: currentDragTarget;
+			yourself)
 ]
 
 { #category : #'event firing' }
 BlMouseProcessor >> fireAsEnterEvent: anEvent targets: aCollection [
-	aCollection
-		do:	[ :t | 
-			self dispatchEvent:
-					(anEvent asMouseEnterEvent
-						target: t;
-						canBePropagated: false;
-						yourself)
-					target: t ]
+
+	aCollection do: [ :t |
+		self
+			dispatchEvent:
+				(anEvent asMouseEnterEvent
+					target: t;
+					canBePropagated: false;
+					yourself)
+			target: t ]
 ]
 
 { #category : #'event firing' }
 BlMouseProcessor >> fireAsMouseLeaveEvent: anEvent targets: aCollection [
-	aCollection
-		do:	[ :t | 
-			self dispatchEvent:
-					(anEvent asMouseLeaveEvent
-						target: t;
-						canBePropagated: false;
-						yourself)
-					target:t ]
+
+	aCollection do: [ :t |
+		self
+			dispatchEvent:
+				(anEvent asMouseLeaveEvent
+					target: t;
+					canBePropagated: false;
+					yourself)
+			target: t ]
 ]
 
 { #category : #'event firing' }
@@ -197,13 +221,15 @@ BlMouseProcessor >> fireAsMouseOutEvent: aMouseEvent [
 
 { #category : #'event firing' }
 BlMouseProcessor >> fireAsMouseOutEvent: aMouseEvent targets: aCollection [
+
 	aCollection do: [ :eachElement |
 		self fireEvent: (aMouseEvent asMouseOutEvent target: eachElement) ]
 ]
 
 { #category : #'event firing' }
 BlMouseProcessor >> fireAsMouseOverEvent: aMouseEvent [
-	self fireEvent: aMouseEvent asMouseOverEvent 
+
+	self fireEvent: aMouseEvent asMouseOverEvent
 ]
 
 { #category : #'mouse up' }
@@ -278,12 +304,12 @@ BlMouseProcessor >> handleLastMouseMove [
 
 { #category : #'mouse down' }
 BlMouseProcessor >> handleMouseDown: aMouseDownEvent [
-	| aTargetElement |
 
+	| aTargetElement |
 	"First we need to register a pressed button"
 	self pressedButtons add: aMouseDownEvent button.
 
-	aTargetElement := self processPicking: aMouseDownEvent.	
+	aTargetElement := self processPicking: aMouseDownEvent.
 	aMouseDownEvent target: aTargetElement.
 
 	self fireEvent: aMouseDownEvent.
@@ -324,14 +350,12 @@ BlMouseProcessor >> handleMouseLeft: aSpaceMouseLeaveEvent [
 
 { #category : #'mouse move' }
 BlMouseProcessor >> handleMouseMove: aMouseMoveEvent [
+	"We assume "
+
 	| aTargetElement shouldTryDragStart |
 	"picking and mouse move"
 	
 	aTargetElement := self processPicking: aMouseMoveEvent.
-	self
-		assert: [ aTargetElement isAttachedToSceneGraph ]
-		description: [ 'Target element must be attached to the scene graph' ].
-	
 	aMouseMoveEvent target: aTargetElement.
 	aMouseMoveEvent button: (pressedButtons ifEmpty: [ nil ] ifNotEmpty: [ pressedButtons anyOne ]).
 
@@ -355,11 +379,10 @@ BlMouseProcessor >> handleMouseMove: aMouseMoveEvent [
 { #category : #'mouse up' }
 BlMouseProcessor >> handleMouseUp: aMouseUpEvent [
 	"DragEnd, Simple click and Dbl click"
+
 	| aTargetElement |
-	
 	"if mouse button was not registered as pressed we can ignore this particular event"
-	(self pressedButtons includes: aMouseUpEvent button)
-		ifFalse: [ ^ self ].
+	(self pressedButtons includes: aMouseUpEvent button) ifFalse: [ ^ self ].
 
 	"we need to unregister a button"
 	self pressedButtons remove: aMouseUpEvent button.
@@ -449,8 +472,8 @@ BlMouseProcessor >> postProcess: aMouseEvent [
 
 { #category : #'event processing' }
 BlMouseProcessor >> preProcess: aMouseEvent [
+
 	| aTarget |
-	
 	aTarget := self processPicking: aMouseEvent.
 	aMouseEvent target: aTarget.
 
@@ -469,12 +492,7 @@ BlMouseProcessor >> pressedButtons [
 
 { #category : #'mouse drag' }
 BlMouseProcessor >> processDragEnd: aMouseUpEvent [
-
-	self assert: [ self isDragging ] description: [
-		'Can not process mouse up event as drag end if I am not in dragging state' ].
-	self
-		assert: [ currentDragTarget isNotNil ]
-		description: [ 'When we drag something it can not be nil' ].
+	"We assume isDragging is true, so currentDragTarget isNotNil."
 
 	aMouseUpEvent primaryButtonPressed ifFalse: [ ^ self ].
 	self fireAsDropEvent: aMouseUpEvent.
@@ -499,6 +517,7 @@ BlMouseProcessor >> processDragMove: aMouseMoveEvent [
 
 { #category : #'mouse move' }
 BlMouseProcessor >> processMouseEnterLeaveEvent: aMouseEvent [
+
 	| newLeavedTargets newEnteredTargets currentEnteredTargets |
 
 	"mouse is moved over the same element, no need to process enter/leave events"
@@ -592,8 +611,7 @@ BlMouseProcessor >> reset [
 	currentDragTarget := nil.
 	lastMouseTarget := nil.
 	dndInProgress := false.
-	pressedButtons := Set new.
-	dragState := BlMouseDragState new
+	pressedButtons := Set new
 ]
 
 { #category : #accessing }
@@ -604,11 +622,9 @@ BlMouseProcessor >> startDragThreshold [
 
 { #category : #'mouse drag' }
 BlMouseProcessor >> subprocessDragEnterExitEvent: aMouseEvent [
+	"We assume currentDragTarget isNotNil"
 
 	| newEnteredTargets newExitedTargets currentEnteredTargets |
-
-	self assert: [ currentDragTarget isNotNil ] description: [
-		'Can not process drag mouse event as enter / exit when there is no dragged element' ].
 
 	currentEnteredTargets := self fillTargetHierarchy: aMouseEvent target.
 

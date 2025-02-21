@@ -16,26 +16,26 @@ BlMouseProcessingTest >> testClickCreation [
 	self sendInsideTargetEvent: BlMouseDownEvent primary.
 	self
 		assertFiredEventIs: BlMouseDownEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 
 	self sendInsideTargetEvent: BlMouseUpEvent primary.
 	self
 		assertFiredEventIs: BlMouseUpEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 	self
 		assertFiredEventIs: BlClickEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 
-	self child transform
+	self childA transform
 		scaleBy: 2 @ 2;
 		apply.
 	self sendEvent: (BlMouseDownEvent primary position: 100 @ 100).
 	self
 		assertFiredEventIs: BlMouseDownEvent
-		target: self child
+		target: self childA
 		withPropagation: true
 ]
 
@@ -45,33 +45,33 @@ BlMouseProcessingTest >> testDblClickCreation [
 	self sendInsideTargetEvent: BlMouseDownEvent primary.
 	self
 		assertFiredEventIs: BlMouseDownEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 
 	self sendInsideTargetEvent: BlMouseUpEvent primary.
 	self
 		assertFiredEventIs: BlMouseUpEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 	self
 		assertFiredEventIs: BlClickEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 
 	self sendInsideTargetEvent: BlMouseDownEvent primary.
 	self
 		assertFiredEventIs: BlMouseDownEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 
 	self sendInsideTargetEvent: BlMouseUpEvent primary.
 	self
 		assertFiredEventIs: BlMouseUpEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 	self
 		assertFiredEventIs: BlDoubleClickEvent
-		target: self child
+		target: self childA
 		withPropagation: true
 ]
 
@@ -79,24 +79,24 @@ BlMouseProcessingTest >> testDblClickCreation [
 BlMouseProcessingTest >> testDragCreation [
 	"make child draggable"
 
-	self child
+	self childA
 		addEventHandlerOn: BlDragStartEvent
 		do: [ :anEvent | anEvent consume ].
 
 	self sendInsideTargetEvent: BlMouseDownEvent primary.
 	self
 		assertFiredEventIs: BlMouseDownEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 
 	self sendInsideTargetEvent: BlMouseMoveEvent primary.
 	self
 		assertFiredEventIs: BlMouseOverEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 	self
 		assertFiredEventIs: BlMouseEnterEvent
-		target: self child
+		target: self childA
 		withPropagation: false.
 	self
 		assertFiredEventIs: BlMouseEnterEvent
@@ -104,27 +104,27 @@ BlMouseProcessingTest >> testDragCreation [
 		withPropagation: false.
 	self
 		assertFiredEventIs: BlMouseMoveEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 
 	self sendInsideTargetEvent: BlMouseMoveEvent primary.
 	self
 		assertFiredEventIs: BlMouseMoveEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 
 	self sendOutsideTargetEvent: BlMouseMoveEvent primary.
 	self
 		assertFiredEventIs: BlDragStartEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 	self
 		assertFiredEventIs: BlDragEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 	self
 		assertFiredEventIs: BlDragLeaveEvent
-		target: self child
+		target: self childA
 		withPropagation: false.
 
 	self sendOutsideTargetEvent: BlMouseUpEvent primary.
@@ -135,7 +135,7 @@ BlMouseProcessingTest >> testDragCreation [
 		withPropagation: true.
 	self
 		assertFiredEventIs: BlDragEndEvent 
-		target: self child
+		target: self childA
 		withPropagation: true
 ]
 
@@ -163,25 +163,25 @@ BlMouseProcessingTest >> testEnterExitCreation [
 		withPropagation: true.
 	self
 		assertFiredEventIs: BlMouseOverEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 	self
 		assertFiredEventIs: BlMouseEnterEvent
-		target: self child
+		target: self childA
 		withPropagation: false.
 	self
 		assertFiredEventIs: BlMouseMoveEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 
 	self sendOutsideTargetEvent: BlMouseMoveEvent new.
 	self
 		assertFiredEventIs: BlMouseOutEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 	self
 		assertFiredEventIs: BlMouseLeaveEvent
-		target: self child
+		target: self childA
 		withPropagation: false.
 	self
 		assertFiredEventIs: BlMouseOverEvent
@@ -199,11 +199,11 @@ BlMouseProcessingTest >> testMouseMove [
 	self sendInsideTargetEvent: BlMouseMoveEvent primary.
 	self
 		assertFiredEventIs: BlMouseOverEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 	self
 		assertFiredEventIs: BlMouseEnterEvent
-		target: self child
+		target: self childA
 		withPropagation: false.
 	self
 		assertFiredEventIs: BlMouseEnterEvent
@@ -211,17 +211,17 @@ BlMouseProcessingTest >> testMouseMove [
 		withPropagation: false.
 	self
 		assertFiredEventIs: BlMouseMoveEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 
 	self sendOutsideTargetEvent: BlMouseMoveEvent primary.
 	self
 		assertFiredEventIs: BlMouseOutEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 	self
 		assertFiredEventIs: BlMouseLeaveEvent
-		target: self child
+		target: self childA
 		withPropagation: false.
 	self
 		assertFiredEventIs: BlMouseOverEvent
@@ -239,17 +239,17 @@ BlMouseProcessingTest >> testNotDraggable [
 	self sendInsideTargetEvent: BlMouseDownEvent primary.
 	self
 		assertFiredEventIs: BlMouseDownEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 
 	self sendInsideTargetEvent: BlMouseMoveEvent primary.
 	self
 		assertFiredEventIs: BlMouseOverEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 	self
 		assertFiredEventIs: BlMouseEnterEvent
-		target: self child
+		target: self childA
 		withPropagation: false.
 	self
 		assertFiredEventIs: BlMouseEnterEvent
@@ -257,22 +257,22 @@ BlMouseProcessingTest >> testNotDraggable [
 		withPropagation: false.
 	self
 		assertFiredEventIs: BlMouseMoveEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 
 	self sendOutsideTargetEvent: BlMouseMoveEvent primary.
 	self
 		assertFiredEventIs: BlDragStartEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 
 	self
 		assertFiredEventIs: BlMouseOutEvent
-		target: self child
+		target: self childA
 		withPropagation: true.
 	self
 		assertFiredEventIs: BlMouseLeaveEvent
-		target: self child
+		target: self childA
 		withPropagation: false.
 	self
 		assertFiredEventIs: BlMouseOverEvent

@@ -1,8 +1,9 @@
+"
+My subclasses process `BlEvent`s and provide an API that spaces and space hosts send.
+"
 Class {
 	#name : #BlBaseEventProcessor,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'space'
 	],
@@ -51,5 +52,6 @@ BlBaseEventProcessor >> onSpaceClosed [
 
 { #category : #accessing }
 BlBaseEventProcessor >> space [
+
 	^ space
 ]

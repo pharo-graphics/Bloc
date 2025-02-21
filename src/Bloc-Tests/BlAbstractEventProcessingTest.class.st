@@ -43,12 +43,6 @@ BlAbstractEventProcessingTest >> assertFiredEventIs: anEventClass target: aTarge
 ]
 
 { #category : #accessing }
-BlAbstractEventProcessingTest >> child [
-
-	^ self space root children at: 1
-]
-
-{ #category : #accessing }
 BlAbstractEventProcessingTest >> firedEvents [
 
 	^ self subclassResponsibility
