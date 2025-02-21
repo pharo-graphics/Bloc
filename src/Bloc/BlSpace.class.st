@@ -718,39 +718,37 @@ BlSpace >> doUpdateFocus [
 BlSpace >> doUpdateLayout [
 
 	| elementsToLayout aBlElementBoundsUpdater |
-
 	elementsNeedingLayout copy do: [ :eachElement |
 		eachElement privatePreviousMeasurementSpec ifNil: [
 			elementsNeedingLayout remove: eachElement.
 			eachElement requestLayout ] ].
-	
-	elementsToLayout :=
-		elementsNeedingLayout reject: [ :eachElement |
-			| shouldIgnore |
-			shouldIgnore := false.
-			
-			elementsNeedingLayout do: [ :eachPotentialParent |
-				(eachElement hasParent: eachPotentialParent) ifTrue: [
-					eachElement
-						allParentsTo: eachPotentialParent
-						do: [ :eachParent |
-							eachParent privateRequestingLayout: true ].
-					shouldIgnore := true ] ].
 
-			shouldIgnore ].
-	
+	elementsToLayout := elementsNeedingLayout reject: [ :eachElement |
+		                    | shouldIgnore |
+		                    shouldIgnore := false.
+
+		                    elementsNeedingLayout do: [ :eachPotentialParent |
+			                    (eachElement allParentsInclude:
+				                     eachPotentialParent) ifTrue: [
+				                    eachElement
+					                    allParentsTo: eachPotentialParent
+					                    do: [ :eachParent |
+					                    eachParent privateRequestingLayout: true ].
+				                    shouldIgnore := true ] ].
+
+		                    shouldIgnore ].
+
 	"we should clear the elements needing layout before we compute layout
 	to support multiple layout passes"
 	elementsNeedingLayout removeAll.
-	
-	elementsToLayout :=
-		elementsToLayout
-			collect: [ :eachElement | eachElement -> eachElement compositionDepth ]
-			as: Array.
-	elementsToLayout :=
-		(elementsToLayout
-			sort: [ :a :b | a value > b value ])
-			collect: [ :each | each key ].
+
+	elementsToLayout := elementsToLayout
+		                    collect: [ :eachElement |
+		                    eachElement -> eachElement compositionDepth ]
+		                    as: Array.
+	elementsToLayout := (elementsToLayout sort: [ :a :b |
+		                     a value > b value ]) collect: [ :each |
+		                    each key ].
 
 	aBlElementBoundsUpdater := BlElementBoundsUpdater new.
 
@@ -758,12 +756,10 @@ BlSpace >> doUpdateLayout [
 		self
 			doUpdateLayoutBoundary: eachElement
 			context: aBlElementBoundsUpdater ].
-	
+
 	self root isLayoutRequested ifTrue: [
-		self
-			doUpdateLayout: self root
-			context: aBlElementBoundsUpdater ].
-	
+		self doUpdateLayout: self root context: aBlElementBoundsUpdater ].
+
 	aBlElementBoundsUpdater commitChanges
 ]
 
@@ -968,14 +964,12 @@ BlSpace >> hasDirtyElements [
 { #category : #'focus managing' }
 BlSpace >> hasFocus: anElement [
 	"Return true if a given element is within the focus chain"
-	
-	self focusOwner
-		ifNil: [ ^ false ].
-		
-	self focusOwner == anElement
-		ifTrue: [ ^ true ].
-		
-	^ self focusOwner hasParent: anElement
+
+	self focusOwner ifNil: [ ^ false ].
+
+	self focusOwner == anElement ifTrue: [ ^ true ].
+
+	^ self focusOwner allParentsInclude: anElement
 ]
 
 { #category : #'host space - accessing' }

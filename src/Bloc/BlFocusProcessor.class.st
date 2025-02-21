@@ -85,36 +85,32 @@ BlFocusProcessor >> processBlur: anElement dueToFocus: aNewFocusedElement dueToR
 	"Process and fire the corresponding blur events that occurs when an element looses focus."
 
 	"First, mark the received element as unfocused, then send events"
+
 	self space focusOwner: nil.
 	anElement focused: false.
 
 	"Fire Blur; it doesn't bubble"
 	self
-		dispatchEvent:
-			(BlBlurEvent new
-				target: anElement;
-				dueToRemoval: aBoolean;
-				yourself)
+		dispatchEvent: (BlBlurEvent new
+				 target: anElement;
+				 dueToRemoval: aBoolean;
+				 yourself)
 		target: anElement.
 
 	"Fire FocusOut; they bubble"
-	focusChain leafsDo: [ :aLeafElement |
-		"if a new focused element is a child we
+	focusChain leafsDo: [ :aLeafElement | "if a new focused element is a child we
 		don't have to send focus-out event"
-		(aNewFocusedElement hasParent: aLeafElement) ifFalse: [
+		(aNewFocusedElement allParentsInclude: aLeafElement) ifFalse: [
 			| anEvent |
-			anEvent :=
-				BlFocusOutEvent new
-					target: aLeafElement;
-					dueToRemoval: aBoolean;
-					yourself.
+			anEvent := BlFocusOutEvent new
+				           target: aLeafElement;
+				           dueToRemoval: aBoolean;
+				           yourself.
 
 			aLeafElement
 				firstCommonParent: aNewFocusedElement
-				ifFound: [ :aParent |
-					self fireEvent: anEvent from: aParent ]
-				ifNone: [
-					self fireEvent: anEvent ] ] ]
+				ifFound: [ :aParent | self fireEvent: anEvent from: aParent ]
+				ifNone: [ self fireEvent: anEvent ] ] ]
 ]
 
 { #category : #'focus - processing' }
@@ -146,36 +142,36 @@ BlFocusProcessor >> processFocus: anElement dueToTransferFrom: aPreviousFocus [
 	occurs when an element gains focus."
 
 	"First, mark the element as focused"
+
 	self focusOwner: anElement.
 	focusChain := BlFocusChain of: self focusOwner.
 	anElement focused: true.
 
 	"Fire Focus; it doesn't bubble"
 	self
-		dispatchEvent:
-			(BlFocusEvent new
-				target: anElement;
-				yourself)
+		dispatchEvent: (BlFocusEvent new
+				 target: anElement;
+				 yourself)
 		target: anElement.
 
 	"Fire FocusIn; they bubble"
 	focusChain leafsDo: [ :aLeafElement |
 		| anEvent |
 		anEvent := BlFocusInEvent new
-					target: aLeafElement;
-					yourself.
+			           target: aLeafElement;
+			           yourself.
 
 		"if a new focused element is a child we don't have to send focus-in event"
-		(aLeafElement hasParent: aPreviousFocus)
+		(aLeafElement allParentsInclude: aPreviousFocus)
 			ifFalse: [
 				aLeafElement
 					firstCommonParent: aPreviousFocus
 					ifFound: [ :aCommonParent |
-						aLeafElement == aCommonParent ifFalse: [ 
+						aLeafElement == aCommonParent ifFalse: [
 							self fireEvent: anEvent from: aCommonParent ] ]
 					ifNone: [ self fireEvent: anEvent ] ]
 			ifTrue: [
-				aLeafElement == aPreviousFocus ifFalse: [ 
+				aLeafElement == aPreviousFocus ifFalse: [
 					self fireEvent: anEvent from: aPreviousFocus ] ] ]
 ]
 
