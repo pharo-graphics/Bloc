@@ -1,16 +1,21 @@
 Extension { #name : #DateAndTime }
 
 { #category : #'*Bloc' }
+DateAndTime class >> epochValue [ 
+
+	"Ugly, but I have to handle the rename of the SharedPool variable"
+	^ ((self bindingOf: #Epoch) ifNil: [ (self bindingOf: #SqueakEpoch) ]) value.
+
+]
+
+{ #category : #'*Bloc' }
 DateAndTime class >> fromUTCMicrosecondClockValue: anInteger [
 
-	| nanoTicks epoch |
-	
-	"Ugly, but I have to handle the rename of the SharedPool variable"
-	epoch := ((self bindingOf: #Epoch) ifNil: [ (self bindingOf: #SqueakEpoch) ]) value.
-	
+	| nanoTicks |
+		
 	nanoTicks := anInteger * 1000.
 	^ self basicNew
-		setJdn: epoch 
+		setJdn: self epochValue 
 		seconds: 0
 		nano: nanoTicks
 		offset: self localOffset
@@ -19,5 +24,5 @@ DateAndTime class >> fromUTCMicrosecondClockValue: anInteger [
 { #category : #'*Bloc' }
 DateAndTime >> utcMicroSeconds [
 	
-	^ ((((julianDayNumber - Epoch) * SecondsInDay) + seconds) * NanosInSecond + nanos) / 1000
+	^ ((((julianDayNumber - self class epochValue) * SecondsInDay) + seconds) * NanosInSecond + nanos) / 1000
 ]
