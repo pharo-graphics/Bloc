@@ -1849,7 +1849,10 @@ BlElement >> hasNextEventTarget [
 
 { #category : #'children testing' }
 BlElement >> hasOwner [
-	<return: #Boolean>
+
+	self
+		deprecated: 'Use hasParent instead of current one'
+		transformWith: '`@receiver hasOwner' -> '`@receiver hasParent'.
 
 	^ self hasParent
 ]
@@ -1859,7 +1862,6 @@ BlElement >> hasParent [
 	"Return true if I have a parent, otherwise false.
 	Being added as direct child to other element does not necessary
 	mean that I am in the space scene graph"
-	<return: #Boolean>
 
 	^ self parent isNotNil
 ]
@@ -3038,7 +3040,10 @@ BlElement >> outskirts: aBlOutskirts [
 
 { #category : #'children accessing' }
 BlElement >> owner [
-	<return: #BlElement>
+
+	self
+		deprecated: 'Use parent instead of current one'
+		transformWith: '`@receiver owner' -> '`@receiver parent'.
 
 	^ self parent
 ]
@@ -3063,7 +3068,8 @@ BlElement >> padding: aBlInsets [
 
 { #category : #accessing }
 BlElement >> parent [
-	<return: #BlElement or: nil>
+	"Answer an element or nil (if there is no parent)"
+
 	^ parent
 ]
 
