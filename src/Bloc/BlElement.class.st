@@ -355,14 +355,10 @@ BlElement >> allParentsDo: aBlock [
 	"Evaluate a block with my every parent as an argument starting from my direct parent
 	up to the top most parent (excluding myself).
 	If I don't have a parent - does nothing"
-	
+
 	| current |
 	current := self.
-	
-	[ current := current parent  ] 
-		whileNotNil: [ aBlock value: current ].
-	
-	^ self
+	[ current := current parent ] whileNotNil: [ aBlock value: current ]
 ]
 
 { #category : #'children testing' }
@@ -1796,7 +1792,9 @@ BlElement >> globalScale [
 { #category : #'children testing' }
 BlElement >> hasAnyInParentChain: aCollection [
 	"Return true if any one in the given collection in my parent chain (including myself) "
-	
+
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/715'.
+
 	^ aCollection anySatisfy: [ :e | self hasInParentChain: e ]
 ]
 
@@ -1842,7 +1840,8 @@ BlElement >> hasFocusable [
 BlElement >> hasInParentChain: anElement [
 	"Return true if I have a given element in my parent chain, or if I am anElement "
 
-	<return: #Boolean>
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/715'.
+
 	^ anElement = self or: [ self allParentsInclude: anElement ]
 ]
 

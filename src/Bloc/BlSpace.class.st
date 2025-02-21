@@ -982,6 +982,8 @@ BlSpace >> hasHostSpace [
 { #category : #testing }
 BlSpace >> hasInParentChain: anElement [
 
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/715'.
+
 	^ anElement = self
 ]
 
@@ -994,15 +996,16 @@ BlSpace >> hasLayoutError [
 
 { #category : #testing }
 BlSpace >> hasOwner [
-	"To be polymorphic with BlElement's traversal API.
-	Space does not have an owner"
-	<return: #Boolean>
+
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/715'.
 	
 	^ false
 ]
 
 { #category : #testing }
 BlSpace >> hasParent: anElement [
+
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/715'.
 
 	^ false
 ]
