@@ -42,10 +42,39 @@ BlAbstractEventProcessingTest >> assertFiredEventIs: anEventClass target: aTarge
 	self firedEvents removeFirst
 ]
 
+{ #category : #asserting }
+BlAbstractEventProcessingTest >> assertNextFiredEventIs: anEventClass target: aTarget [
+
+	| nextEvent |
+	self deny: self firedEvents isEmpty.
+	
+	nextEvent := self firedEvents removeFirst.
+	self assert: nextEvent class equals: anEventClass.
+	self assert: nextEvent target equals: aTarget
+]
+
 { #category : #accessing }
 BlAbstractEventProcessingTest >> child [
 
 	^ self space root children at: 1
+]
+
+{ #category : #accessing }
+BlAbstractEventProcessingTest >> childA [
+
+	^ space root childWithId: #A
+]
+
+{ #category : #accessing }
+BlAbstractEventProcessingTest >> childB [
+
+	^ space root childWithId: #B
+]
+
+{ #category : #accessing }
+BlAbstractEventProcessingTest >> childBA [
+
+	^ self childB childWithId: #BA
 ]
 
 { #category : #accessing }
@@ -57,7 +86,7 @@ BlAbstractEventProcessingTest >> firedEvents [
 { #category : #accessing }
 BlAbstractEventProcessingTest >> root [
 
-	^ self space root
+	^ space root
 ]
 
 { #category : #'event firing' }
@@ -92,8 +121,22 @@ BlAbstractEventProcessingTest >> setUp [
 	space focusProcessor: (BlTestFocusProcessor space: space).
 	space root addChild:
 		(BlElement new
+			id: #A;
 			size: 100 @ 100;
 			background: Color red;
+			yourself).
+	space root addChild:
+		(BlElement new
+			id: #B;
+			position: 100 @ 0;
+			size: 100 @ 100;
+			background: Color green;
+			addChild:
+				(BlElement new
+					id: #BA;
+					size: 50 @ 50;
+					background: Color blue;
+					yourself)
 			yourself).
 	space pulse
 ]
