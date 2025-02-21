@@ -702,15 +702,15 @@ BlSpace >> doLayout [
 
 { #category : #'focus managing' }
 BlSpace >> doUpdateFocus [
-	(self focusOwner notNil and: [ self focusOwner isAttachedToSceneGraph not ])
-		ifTrue: [
-			focusChain
-				deepestAttachedElementDo: [ :aNewFocusOwner |
-					aNewFocusOwner requestFocusDueTo: BlFocusDueToRemovedFromSpaceReason uniqueInstance ]
-				ifAbsent: [ self focusProcessor focusOwner: nil ] ].
 
-	self focusOwner
-		ifNil: [ self initializeFocus ]
+	(self focusOwner notNil and: [
+		self focusOwner isAttachedToSceneGraph not ]) ifTrue: [
+		focusChain
+			deepestAttachedElementDo: [ :aNewFocusOwner |
+				aNewFocusOwner requestFocusDueToRemoval: true ]
+			ifAbsent: [ self focusProcessor focusOwner: nil ] ].
+
+	self focusOwner ifNil: [ self initializeFocus ]
 ]
 
 { #category : #'change - layout' }
@@ -1435,12 +1435,12 @@ BlSpace >> render [
 ]
 
 { #category : #'focus managing' }
-BlSpace >> requestFocusFor: anElement dueTo: aFocusReason [
+BlSpace >> requestFocusFor: anElement dueToRemoval: aFocusReason [
 	self
 		assert: [ anElement space = self ]
 		description: [ 'anElement must be attached to the scenegraph owned by this space' ].
 		
-	self focusProcessor requestFor: anElement dueTo: aFocusReason
+	self focusProcessor requestFor: anElement dueToRemoval: aFocusReason
 ]
 
 { #category : #'change - rendering' }
@@ -1548,6 +1548,9 @@ BlSpace >> show [
 
 { #category : #'api - displaying' }
 BlSpace >> showSpace: aSpace [
+
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/698'.
+
 	"I show a given space either inside of me or let it open by default"
 	aSpace show
 ]

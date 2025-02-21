@@ -365,6 +365,16 @@ BlElement >> allParentsDo: aBlock [
 	^ self
 ]
 
+{ #category : #'children testing' }
+BlElement >> allParentsInclude: anElement [
+	"Return true if I have a given element in my parent chain, false otherwise"
+
+	self allParentsDo: [ :aParentElement |
+		aParentElement == anElement ifTrue: [ ^ true ] ].
+
+	^ false
+]
+
 { #category : #'children accessing' }
 BlElement >> allParentsReverseDo: aBlock [
 	"Evaluate a block with my every parent as an argument starting from my top most parent up to my direct parent (excluding myself).
@@ -1522,7 +1532,7 @@ BlElement >> firstCommonParent: anElement ifFound: aFoundBlock ifNone: aNoneBloc
 
 { #category : #'focus requesting' }
 BlElement >> focusHolder [
-	"the element that will be actually focused when #requestFocus is sent "
+	"Answer the element that will be actually focused when #requestFocus is sent."
 
 	^ self
 ]
@@ -1849,7 +1859,10 @@ BlElement >> hasNextEventTarget [
 
 { #category : #'children testing' }
 BlElement >> hasOwner [
-	<return: #Boolean>
+
+	self
+		deprecated: 'Use hasParent instead of current one'
+		transformWith: '`@receiver hasOwner' -> '`@receiver hasParent'.
 
 	^ self hasParent
 ]
@@ -1859,7 +1872,6 @@ BlElement >> hasParent [
 	"Return true if I have a parent, otherwise false.
 	Being added as direct child to other element does not necessary
 	mean that I am in the space scene graph"
-	<return: #Boolean>
 
 	^ self parent isNotNil
 ]
@@ -1868,11 +1880,11 @@ BlElement >> hasParent [
 BlElement >> hasParent: anElement [
 	"Return true if I have a given element in my parent chain, false otherwise"
 
-	self allParentsDo: [ :aParentElement |
-		aParentElement == anElement
-			ifTrue: [ ^ true ] ].
+	self
+		deprecated: 'Use allParentsInclude: instead'
+		transformWith: '`@rcvr hasParent: `@arg' -> '`@rcvr allParentsInclude: `@arg'.
 
-	^ false
+	^ self allParentsInclude: anElement
 ]
 
 { #category : #'api - bounds' }
@@ -2817,19 +2829,15 @@ BlElement >> onChildRemoved: anElement [
 
 { #category : #'children dispatching' }
 BlElement >> onChildToBeRemoved: anElement [
-	"Is sent right before a given child element is about to be removed"
-	
-	"at this point we should make sure that the focus is transfered to me (its parent) if the removed
-	child (or one of its children) had focus"
-	
+
+	| aPreviousFocusOwner |
 	(self isAttachedToSceneGraph and: [ self space hasFocus: anElement ])
-		ifTrue: [
-			| aPreviousFocusOwner |
-			aPreviousFocusOwner := self space focusOwner.
-			self requestFocusDueTo: BlFocusDueToRemovedFromParentReason uniqueInstance.
-			"we should make sure that the removed element that previously had focus keeps the focused flag
-			in order to get focus back next time it is added to the scene"
-			aPreviousFocusOwner focused: true ].
+		ifFalse: [ ^ self ].
+
+	aPreviousFocusOwner := self space focusOwner.
+	self requestFocusDueToRemoval: true.
+	"we should make sure that the removed element that previously had focus keeps the focused flag in order to get focus back next time it is added to the scene"
+	aPreviousFocusOwner focused: true
 ]
 
 { #category : #'hooks - geometry' }
@@ -3038,7 +3046,10 @@ BlElement >> outskirts: aBlOutskirts [
 
 { #category : #'children accessing' }
 BlElement >> owner [
-	<return: #BlElement>
+
+	self
+		deprecated: 'Use parent instead of current one'
+		transformWith: '`@receiver owner' -> '`@receiver parent'.
 
 	^ self parent
 ]
@@ -3063,7 +3074,8 @@ BlElement >> padding: aBlInsets [
 
 { #category : #accessing }
 BlElement >> parent [
-	<return: #BlElement or: nil>
+	"Answer an element or nil (if there is no parent)"
+
 	^ parent
 ]
 
@@ -3476,7 +3488,7 @@ BlElement >> requestFocus [
 	If I am not added to the scene graph mark me as focused in order to re-try focus
 	request as soon I am added to the scene graph"
 
-	self requestFocusDueTo: BlFocusUnknownReason uniqueInstance
+	self requestFocusDueToRemoval: false
 ]
 
 { #category : #'focus requesting' }
@@ -3484,11 +3496,11 @@ BlElement >> requestFocus: aChildElement [
 	"Propagate focus request up in the scene graph with an original
 	element that requested focus"
 
-	self requestFocus: aChildElement dueTo: BlFocusUnknownReason uniqueInstance
+	self requestFocus: aChildElement dueToRemoval: false
 ]
 
 { #category : #'focus requesting' }
-BlElement >> requestFocus: aChildElement dueTo: aFocusReason [
+BlElement >> requestFocus: aChildElement dueToRemoval: aBoolean [
 	"Propagate focus request up in the scene graph with an original
 	element that requested focus"
 
@@ -3497,21 +3509,20 @@ BlElement >> requestFocus: aChildElement dueTo: aFocusReason [
 		description: [ 'I must be attached to the scene graph' ].
 
 	(self hasParent and: [ self parent isAttachedToSceneGraph ])
-		ifTrue: [ self parent requestFocus: aChildElement dueTo: aFocusReason ]
-		ifFalse: [ self space requestFocusFor: aChildElement dueTo: aFocusReason ]
+		ifTrue: [ self parent requestFocus: aChildElement dueToRemoval: aBoolean ]
+		ifFalse: [ self space requestFocusFor: aChildElement dueToRemoval: aBoolean ]
 ]
 
 { #category : #'focus requesting' }
-BlElement >> requestFocusDueTo: aFocusReason [
+BlElement >> requestFocusDueToRemoval: aBoolean [
 	"Request a focus for this element.
 	If I am not added to the scene graph mark me as focused in order to re-try focus
 	request as soon I am added to the scene graph"
 
-	self isFocused
-		ifTrue: [ ^ self ].
+	self isFocused ifTrue: [ ^ self ].
 
 	self isAttachedToSceneGraph
-		ifTrue: [ self requestFocus: self dueTo: aFocusReason ]
+		ifTrue: [ self requestFocus: self dueToRemoval: aBoolean ]
 		ifFalse: [ self focusHolder focused: true ]
 ]
 
@@ -3633,6 +3644,9 @@ BlElement >> shouldHandleMouseEvents [
 
 { #category : #'api - opening' }
 BlElement >> showSpace: aSpace [
+	
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/698'.
+
 	self hasParent
 		ifTrue: [ self parent showSpace: aSpace ]
 		ifFalse: [

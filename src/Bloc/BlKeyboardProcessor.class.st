@@ -46,20 +46,18 @@ BlKeyboardProcessor >> detectTarget [
 BlKeyboardProcessor >> handleSpaceEventProcessedEvent: anEvent [
 
 	| aShortcutEvent aTimeNow |
-
 	self processBufferedTextInput.
 
-	buffer isEmpty
-		ifTrue: [ ^ self ].
-	
+	buffer isEmpty ifTrue: [ ^ self ].
+
 	aTimeNow := self space time now.
-	
-	(aTimeNow - previousShortcutTime) < shortcutRepeatDelay
+
+	aTimeNow - previousShortcutTime < shortcutRepeatDelay
 		ifTrue: [ ^ self ].
 
-	(aTimeNow - previousShortcutRepeatTime) < shortcutRepeatInterval
+	aTimeNow - previousShortcutRepeatTime < shortcutRepeatInterval
 		ifTrue: [ ^ self ].
-	
+
 	aShortcutEvent := BlShortcutEvent new.
 	aShortcutEvent beRepeated.
 	aShortcutEvent buffer: buffer.

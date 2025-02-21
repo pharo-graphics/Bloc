@@ -1,8 +1,9 @@
+"
+My subclasses process `BlEvent`s and provide an API that spaces and space hosts send.
+"
 Class {
 	#name : #BlBaseEventProcessor,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'space'
 	],
@@ -20,17 +21,23 @@ BlBaseEventProcessor class >> space: aSpace [
 { #category : #'event firing' }
 BlBaseEventProcessor >> dispatchEvent: anEvent target: aTarget [
 
+	anEvent timestamp: space time now.
+
 	aTarget dispatchEvent: anEvent
 ]
 
 { #category : #'event firing' }
 BlBaseEventProcessor >> fireEvent: anEvent [
 
+	anEvent timestamp: space time now.
+	
 	^ BlEvent fireEvent: anEvent
 ]
 
 { #category : #'event firing' }
 BlBaseEventProcessor >> fireEvent: anEvent from: aTopEventTarget [
+
+	anEvent timestamp: space time now.
 
 	^ BlEvent fireEvent: anEvent from: aTopEventTarget
 ]
@@ -51,5 +58,6 @@ BlBaseEventProcessor >> onSpaceClosed [
 
 { #category : #accessing }
 BlBaseEventProcessor >> space [
+
 	^ space
 ]
