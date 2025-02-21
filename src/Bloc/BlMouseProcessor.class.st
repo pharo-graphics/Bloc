@@ -15,8 +15,8 @@ Class {
 		'lastMouseMoveEvent',
 		'lastMouseDownEvent'
 	],
-	#classInstVars : [
-		'dblClickDelay'
+	#classVars : [
+		'DoubleClickDuration'
 	],
 	#category : #'Bloc-Space - Events'
 }
@@ -24,19 +24,19 @@ Class {
 { #category : #accessing }
 BlMouseProcessor class >> dblClickDelay [
 
-	^ dblClickDelay
+	^ DoubleClickDuration
 ]
 
 { #category : #accessing }
 BlMouseProcessor class >> dblClickDelay: aDuration [
 
-	dblClickDelay := aDuration
+	DoubleClickDuration := aDuration
 ]
 
 { #category : #accessing }
 BlMouseProcessor class >> initialize [
 
-	dblClickDelay := 400 milliSeconds
+	DoubleClickDuration := 400 milliSeconds
 ]
 
 { #category : #'event testing' }
@@ -62,7 +62,7 @@ BlMouseProcessor >> canBeDblClickEvent: aMouseUpEvent [
 		aMouseUpEvent target = lastClickEvent target and: [
 			aMouseUpEvent button = lastClickEvent button and: [
 				(aMouseUpEvent timestamp - lastClickEvent timestamp)
-					< self dblClickDelay ] ] ]
+					< DoubleClickDuration ] ] ]
 ]
 
 { #category : #'event testing' }
@@ -81,12 +81,6 @@ BlMouseProcessor >> checkLastOverTarget [
 	lastOverTarget ifNil: [ ^ self ].
 	lastOverTarget isAttachedToSceneGraph ifTrue: [ ^ self ].
 	lastOverTarget := nil
-]
-
-{ #category : #accessing }
-BlMouseProcessor >> dblClickDelay [
-
-	^ self class dblClickDelay
 ]
 
 { #category : #accessing }
