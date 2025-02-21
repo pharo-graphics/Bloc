@@ -1,14 +1,16 @@
+"
+My subclasses represent blur-related events.
+"
 Class {
 	#name : #BlBaseFocusEvent,
 	#superclass : #BlUIEvent,
-	#instVars : [
-		'reason'
-	],
 	#category : #'Bloc-Events'
 }
 
 { #category : #converting }
 BlBaseFocusEvent >> asBlurEvent [
+
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/704'.
 
 	^ BlBlurEvent new
 		  copyFrom: self;
@@ -17,6 +19,8 @@ BlBaseFocusEvent >> asBlurEvent [
 
 { #category : #converting }
 BlBaseFocusEvent >> asFocusInEvent [
+
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/704'.
 
 	^ BlFocusInEvent new
 		  copyFrom: self;
@@ -27,41 +31,18 @@ BlBaseFocusEvent >> asFocusInEvent [
 { #category : #converting }
 BlBaseFocusEvent >> asFocusOutEvent [
 
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/704'.
+
 	^ BlFocusOutEvent new
 		  copyFrom: self;
 		  canBePropagated: false;
 		  yourself
 ]
 
-{ #category : #initialization }
-BlBaseFocusEvent >> initialize [
-
-	super initialize.
-
-	reason := BlFocusUnknownReason uniqueInstance
-]
-
 { #category : #testing }
 BlBaseFocusEvent >> isBaseFocus [
 
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/704'.
+
 	^ true
-]
-
-{ #category : #testing }
-BlBaseFocusEvent >> isDueToRemoval [
-
-	^ self reason = BlFocusDueToRemovedFromParentReason uniqueInstance
-		or: [ self reason = BlFocusDueToRemovedFromSpaceReason uniqueInstance ]
-]
-
-{ #category : #accessing }
-BlBaseFocusEvent >> reason [
-
-	^ reason
-]
-
-{ #category : #accessing }
-BlBaseFocusEvent >> reason: aBlFocusReason [
-
-	reason := aBlFocusReason
 ]

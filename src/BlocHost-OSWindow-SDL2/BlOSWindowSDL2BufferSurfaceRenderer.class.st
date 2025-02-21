@@ -15,25 +15,23 @@ Class {
 { #category : #initialization }
 BlOSWindowSDL2BufferSurfaceRenderer >> initializeForSurface: aBlHostRendererBufferSurface [
 
-	| textureExtent sdlSurface |
+	| textureExtent stride buffer |
 	textureExtent := aBlHostRendererBufferSurface physicalSize asPoint.
 	
-	sdlSurface := SDL2
-		createRGBSurfaceForCairoWidth: textureExtent x
-		height: textureExtent y.
-
 	sdlRenderer := window backendWindow renderer sdlRenderer.
 
 	texture := sdlRenderer
 		createTextureFormat: SDL_PIXELFORMAT_XRGB8888
-		access: SDL_TEXTUREACCESS_STREAMING
+		access: SDL_TEXTUREACCESS_STATIC
 		width: textureExtent x
 		height: textureExtent y.
 
+	stride := textureExtent x * 4.
+	buffer := ByteArray new: stride * textureExtent y.
+
 	aBlHostRendererBufferSurface
-		strongReference: sdlSurface;
-		buffer: sdlSurface pixels;
-		stride: sdlSurface pitch;
+		buffer: buffer;
+		stride: stride;
 		extent: textureExtent
 ]
 
