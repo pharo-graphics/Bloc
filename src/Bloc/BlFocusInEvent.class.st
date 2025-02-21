@@ -1,6 +1,5 @@
 "
-The `=BlFocusInEvent`= event is sent to an element when it, or any element inside of it, gains focus. This is distinct from the `=BlFocusEvent`= event, in that it supports detecting the focus event on parent elements (in other words, it supports event bubbling).
-
+The focusin event fires when an element has received focus, after the focus event. The two events differ in that focusin bubbles, while focus does not.
 "
 Class {
 	#name : #BlFocusInEvent,
