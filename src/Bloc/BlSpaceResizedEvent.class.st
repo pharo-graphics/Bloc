@@ -29,7 +29,7 @@ BlSpaceResizedEvent >> printOn: aStream [
 	aStream
 		nextPutAll: self class name;
 		nextPutAll: '(timestamp: ';
-		print: timestamp;
+		print: self timestamp;
 		nextPutAll: ' extent: ';
 		print: extent;
 		nextPut: $)

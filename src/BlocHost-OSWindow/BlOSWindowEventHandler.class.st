@@ -62,7 +62,7 @@ BlOSWindowEventHandler >> enqueueSpaceResized: aBlSpaceResizedEvent extent: aPoi
 
 	aBlSpaceResizedEvent
 		extent: aPoint;
-		timestamp: time now.
+		fillFromTime: time.
 		
 	self enqueue: aBlSpaceResizedEvent
 ]
@@ -115,7 +115,7 @@ BlOSWindowEventHandler >> visitKeyDownEvent: anEvent [
 		key: (self convertKeyFromEvent: anEvent);
 		scanCode: anEvent scanCode;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		timestamp: time now;
+		fillFromTime: time;
 		yourself.
 
 	self enqueue: aBlEvent
@@ -129,7 +129,7 @@ BlOSWindowEventHandler >> visitKeyUpEvent: anEvent [
 		key: (self convertKeyFromEvent: anEvent);
 		scanCode: anEvent scanCode;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		timestamp: time now;
+		fillFromTime: time;
 		yourself.
 
 	self enqueue: aBlEvent
@@ -149,7 +149,7 @@ BlOSWindowEventHandler >> visitMouseButtonPressEvent: anEvent [
 		delta: anEvent delta;
 		button: button;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		timestamp: time now;
+		fillFromTime: time;
 		yourself.
 
 	self enqueue: aBlocEvent
@@ -169,7 +169,7 @@ BlOSWindowEventHandler >> visitMouseButtonReleaseEvent: anEvent [
 		delta: anEvent delta;
 		button: button;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		timestamp: time now;
+		fillFromTime: time;
 		yourself.
 		
 	self enqueue: aBlocEvent
@@ -184,7 +184,7 @@ BlOSWindowEventHandler >> visitMouseMoveEvent: anEvent [
 		screenPosition: window position + anEvent position;
 		delta: anEvent delta;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		timestamp: time now;
+		fillFromTime: time;
 		yourself.
 		
 	self enqueue: aBlocEvent
@@ -206,7 +206,7 @@ BlOSWindowEventHandler >> visitMouseWheelEvent: anEvent [
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		timestamp: time now;
+		fillFromTime: time;
 		yourself.
 	
 	self enqueue: aBlocEvent
@@ -221,7 +221,7 @@ BlOSWindowEventHandler >> visitTextInputEvent: anEvent [
 	aBlocEvent := BlTextInputEvent new
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		text: anEvent text;
-		timestamp: time now;
+		fillFromTime: time;
 		yourself.
 		
 	self enqueue: aBlocEvent
@@ -276,7 +276,7 @@ BlOSWindowEventHandler >> visitWindowCloseEvent: anEvent [
 	anEvent suppressDefaultAction.
 
 	aBlocEvent := BlSpaceCloseRequest new
-		timestamp: time now;
+		fillFromTime: time;
 		yourself.
 		
 	self enqueue: aBlocEvent
@@ -293,7 +293,7 @@ BlOSWindowEventHandler >> visitWindowFocusInEvent: anEvent [
 
 	| aBlocEvent |
 	aBlocEvent := BlSpaceFocusInEvent new
-		timestamp: time now;
+		fillFromTime: time;
 		yourself.
 
 	self enqueue: aBlocEvent
@@ -304,7 +304,7 @@ BlOSWindowEventHandler >> visitWindowFocusOutEvent: anEvent [
 
 	| aBlocEvent |
 	aBlocEvent := BlSpaceFocusOutEvent new
-		timestamp: time now;
+		fillFromTime: time;
 		yourself.
 		
 	self enqueue: aBlocEvent
@@ -331,7 +331,7 @@ BlOSWindowEventHandler >> visitWindowMouseEnterEvent: anEvent [
 
 	| aBlocEvent |
 	aBlocEvent := BlSpaceMouseEnterEvent new
-		timestamp: time now;
+		fillFromTime: time;
 		yourself.
 		
 	self enqueue: aBlocEvent
@@ -342,7 +342,7 @@ BlOSWindowEventHandler >> visitWindowMouseLeaveEvent: anEvent [
 
 	| aBlocEvent |
 	aBlocEvent := BlSpaceMouseLeaveEvent new
-		timestamp: time now;
+		fillFromTime: time;
 		yourself.
 		
 	self enqueue: aBlocEvent
@@ -353,7 +353,7 @@ BlOSWindowEventHandler >> visitWindowMoveEvent: anEvent [
 
 	| aBlocEvent |
 	aBlocEvent := BlSpaceMovedEvent new
-		timestamp: time now;
+		fillFromTime: time;
 		position: self window position;
 		yourself.
 		

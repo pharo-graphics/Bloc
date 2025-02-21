@@ -5,7 +5,8 @@ Class {
 	#name : #BlSpacePhaseEvent,
 	#superclass : #BlSpaceEvent,
 	#instVars : [
-		'end'
+		'end',
+		'endInMicroseconds'
 	],
 	#category : #'Bloc-Events-Type-Space'
 }
@@ -13,19 +14,13 @@ Class {
 { #category : #accessing }
 BlSpacePhaseEvent >> duration [
 
-	^ end - timestamp
+	^ Duration microSeconds: (endInMicroseconds - timestampInMicroseconds)
 ]
 
 { #category : #accessing }
 BlSpacePhaseEvent >> end [
 
-	^ end
-]
-
-{ #category : #accessing }
-BlSpacePhaseEvent >> end: aDateAndTime [
-
-	end := aDateAndTime
+	^ end ifNil: [ end := DateAndTime fromUTCMicrosecondClockValue: endInMicroseconds ]
 ]
 
 { #category : #printing }
@@ -35,7 +30,7 @@ BlSpacePhaseEvent >> printOn: aStream [
 		nextPutAll: self className;
 		nextPut: $(;
 		nextPutAll: 'timestamp: ';
-		print: timestamp;
+		print: self timestamp;
 		nextPutAll: '; duration: ';
 		print: self duration;
 		nextPut: $)
@@ -44,11 +39,14 @@ BlSpacePhaseEvent >> printOn: aStream [
 { #category : #accessing }
 BlSpacePhaseEvent >> start [
 
-	^ timestamp
+	^ self timestamp 
 ]
 
 { #category : #accessing }
-BlSpacePhaseEvent >> start: aDateAndTime [
+BlSpacePhaseEvent >> startMicroseconds: aStartInMicro endMicroseconds: anEndInMicro [
 
-	timestamp := aDateAndTime
+	timestampInMicroseconds := aStartInMicro.
+	timestamp := nil.
+	end := nil.
+	endInMicroseconds := anEndInMicro
 ]

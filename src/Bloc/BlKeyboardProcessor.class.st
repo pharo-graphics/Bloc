@@ -97,7 +97,7 @@ BlKeyboardProcessor >> processBufferedTextInput [
 		"initialize target here to not search for the target if there are no buffered input"
 		aTarget ifNil: [ aTarget := self detectTarget ].
 		eachEvent
-			timestamp: self space time now;
+			fillFromTime: self space time;
 			target: aTarget.
 		self fireEvent: eachEvent ].
 
@@ -160,7 +160,7 @@ BlKeyboardProcessor >> processWindowFocusOut: anEvent [
 			BlKeyUpEvent new
 				key: aKeyDownEvent key;
 				scanCode: aKeyDownEvent scanCode;
-				timestamp: self space time now;
+				fillFromTime: self space time;
 				yourself ]
 		thenDo: [ :aKeyUpEvent | self processKeyUp: aKeyUpEvent ]
 ]
