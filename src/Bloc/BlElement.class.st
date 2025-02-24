@@ -1840,9 +1840,13 @@ BlElement >> hasFocusable [
 BlElement >> hasInParentChain: anElement [
 	"Return true if I have a given element in my parent chain, or if I am anElement "
 
-	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/715'.
+	self
+		deprecated: 'Please use #withAllParentsInclude: instead.'
+		transformWith:
+			'`@receiver hasInParentChain: `@arg' ->
+			'`@receiver withAllParentsInclude: `@arg'.
 
-	^ anElement = self or: [ self allParentsInclude: anElement ]
+	^ self withAllParentsInclude: anElement
 ]
 
 { #category : #'event management accessing' }
@@ -4109,6 +4113,13 @@ BlElement >> withAllParentsDo: aBlock [
 	
 	aBlock value: self.
 	self allParentsDo: aBlock
+]
+
+{ #category : #'children testing' }
+BlElement >> withAllParentsInclude: anElement [
+	"Return true if I have a given element in my parent chain, or if I am anElement."
+
+	^ anElement = self or: [ self allParentsInclude: anElement ]
 ]
 
 { #category : #'children accessing' }
