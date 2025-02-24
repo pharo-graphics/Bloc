@@ -44,7 +44,7 @@ BlSpaceStatisticsWindow >> createStatisticsElement [
 	
 	statiticsElement layout: (BlGridLayout horizontal
 			 columnCount: 2;
-			 cellSpacing: 3;
+			 cellSpacing: 6;
 			 yourself).
 
 	statiticsElement addChildren: {
