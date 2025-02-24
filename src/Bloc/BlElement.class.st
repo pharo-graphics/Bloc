@@ -366,7 +366,7 @@ BlElement >> allParentsInclude: anElement [
 	"Return true if I have a given element in my parent chain, false otherwise"
 
 	self allParentsDo: [ :aParentElement |
-		aParentElement == anElement ifTrue: [ ^ true ] ].
+		aParentElement = anElement ifTrue: [ ^ true ] ].
 
 	^ false
 ]
@@ -385,11 +385,10 @@ BlElement >> allParentsTo: aParentElement do: aBlock [
 	"Evaluate a block with each of my parents as an argument starting from my direct parent
 	up to the given parent element (excluding myself).
 	If I don't have a parent - does nothing"
-	
+
 	self allParentsDo: [ :eachParent |
 		aBlock value: eachParent.
-		eachParent == aParentElement
-			ifTrue: [ ^ self ] ]
+		eachParent = aParentElement ifTrue: [ ^ self ] ]
 ]
 
 { #category : #'event handling' }
