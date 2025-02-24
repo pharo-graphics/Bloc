@@ -886,7 +886,7 @@ BlElementChildrenTest >> testTopMostParentSuchThatifFoundifNone [
 	aChild := aContainer childWithId: #shape_10.
 	aChild
 		topMostParentSuchThat: [ :cur | cur id = #shape_1 ]
-		ifFound: [ :parent | self assert: parent owner equals: aContainer ]
+		ifFound: [ :parent | self assert: parent parent equals: aContainer ]
 		ifNone: [ self assert: false ].
 	aContainer
 		topMostParentSuchThat: [ :cur | cur id = #shape_1 ]
