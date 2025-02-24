@@ -30,9 +30,10 @@ BlTransparentBackground class >> uniqueInstance [
 
 { #category : #comparing }
 BlTransparentBackground >> = anotherObject [
+	"I do not take opacity into account"
 
 	self == anotherObject ifTrue: [ ^ true ].
-	^ (anotherObject isKindOf: self class)
+	^ anotherObject class = self class
 ]
 
 { #category : #testing }

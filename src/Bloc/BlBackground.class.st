@@ -29,19 +29,18 @@ Class {
 
 { #category : #builder }
 BlBackground class >> builder [
+
 	^ BlCompositeBackgroundBuilder new
 ]
 
 { #category : #'instance creation' }
 BlBackground class >> image: aForm [
-	<return: #BlBackground>
 	
 	^ BlImageBackground image: aForm
 ]
 
 { #category : #'instance creation' }
 BlBackground class >> paint: aColorOrBlPaint [
-	<return: #BlBackground>
 
 	^ BlPaintBackground paint: aColorOrBlPaint
 ]
@@ -49,21 +48,13 @@ BlBackground class >> paint: aColorOrBlPaint [
 { #category : #'instance creation' }
 BlBackground class >> transparent [
 	"Return a completely transparent background"
-	<return: #BlBackground>
 	
 	^ BlTransparentBackground uniqueInstance
 ]
 
-{ #category : #comparing }
-BlBackground >> = anotherObject [
-
-	self == anotherObject ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class) ifFalse: [ ^ false ].
-	^ anotherObject opacity = self opacity
-]
-
 { #category : #converting }
 BlBackground >> asBlBackground [
+
 	^ self
 ]
 

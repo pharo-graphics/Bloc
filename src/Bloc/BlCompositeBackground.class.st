@@ -44,10 +44,11 @@ BlCompositeBackground class >> withAll: aCollectionOfBackground [
 { #category : #comparing }
 BlCompositeBackground >> = anotherObject [
 
-	super = anotherObject ifFalse: [ ^ false ].
-
-	anotherObject backgrounds size = self backgrounds size ifFalse: [
-		^ false ].
+	self == anotherObject ifTrue: [ ^ true ].
+	anotherObject class = self class ifFalse: [ ^ false ].
+	anotherObject opacity = self opacity ifFalse: [ ^ false ].
+	anotherObject backgrounds size = self backgrounds size
+		ifFalse: [ ^ false ].
 	^ anotherObject backgrounds = self backgrounds
 ]
 

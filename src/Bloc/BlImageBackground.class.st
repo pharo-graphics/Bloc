@@ -18,14 +18,18 @@ Class {
 
 { #category : #'instance creation' }
 BlImageBackground class >> image: aForm [
-	^ self new image: aForm
+
+	^ self new
+		image: aForm;
+		yourself
 ]
 
 { #category : #comparing }
 BlImageBackground >> = anotherObject [
 
-	super = anotherObject ifFalse: [ ^ false ].
-
+	self == anotherObject ifTrue: [ ^ true ].
+	anotherObject class = self class ifFalse: [ ^ false ].
+	anotherObject opacity = self opacity ifFalse: [ ^ false ].
 	^ anotherObject image = self image
 ]
 

@@ -15,13 +15,15 @@ Class {
 
 { #category : #'instance creation' }
 BlColorPaint class >> color: aColor [
-	^ self new color: aColor
+
+	^ self new
+		color: aColor;
+		yourself
 ]
 
 { #category : #'instance creation' }
 BlColorPaint class >> transparent [
 	"Return an instance of a paint with transparent color"
-	<return: #BlColorPaint>
 	
 	^ BlTransparentPaint uniqueInstance
 ]
