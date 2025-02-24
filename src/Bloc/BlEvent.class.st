@@ -441,7 +441,9 @@ BlEvent >> target: aTBlEventTarget [
 BlEvent >> timestamp [
 	"Returns the `DateAndTime` at which the event was created."
 
-	^ timestamp ifNil: [ timestamp := DateAndTime fromUTCMicrosecondClockValue: timestampInMicroseconds ]
+	^ timestamp ifNil: [
+		timestampInMicroseconds ifNotNil: [
+			timestamp := DateAndTime fromUTCMicrosecondClockValue: timestampInMicroseconds ] ]
 ]
 
 { #category : #'api - timestamp' }
