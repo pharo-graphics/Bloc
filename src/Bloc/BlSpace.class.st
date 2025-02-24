@@ -648,7 +648,7 @@ BlSpace >> dispatchAddedToSceneGraph [
 { #category : #'event handling' }
 BlSpace >> dispatchEventWithTimestamp: aBlEvent [ 
 
-	aBlEvent hasTimestamp ifNil: [ aBlEvent fillFromTime: self time ].
+	aBlEvent hasTimestamp ifFalse: [ aBlEvent fillFromTime: self time ].
 	self dispatchEvent: aBlEvent
 ]
 
