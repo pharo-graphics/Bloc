@@ -37,6 +37,12 @@ BlTransparentPaint >> = anotherObject [
 	^ anotherObject = self class
 ]
 
+{ #category : #comparing }
+BlTransparentPaint >> hash [
+
+	^ self class hash
+]
+
 { #category : #testing }
 BlTransparentPaint >> isOpaque [
 	"I am transparent by definition and therefore always return false"
