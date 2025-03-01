@@ -25,7 +25,7 @@ BlColorPaint class >> color: aColor [
 BlColorPaint >> = anotherObject [
 
 	self == anotherObject ifTrue: [ ^ true ].
-	(anotherObject = self class) ifFalse: [ ^ false ].
+	(anotherObject class = self class) ifFalse: [ ^ false ].
 
 	^ anotherObject color = self color
 ]
