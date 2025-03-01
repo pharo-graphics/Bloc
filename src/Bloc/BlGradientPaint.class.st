@@ -21,16 +21,17 @@ BlGradientPaint >> from: aStartColor to: anEndColor [
 	
 	self stops: { 
 		0 -> aStartColor.
-		1 -> anEndColor
-	}
+		1 -> anEndColor }
 ]
 
 { #category : #accessing }
 BlGradientPaint >> stops [
+
 	^ stops
 ]
 
 { #category : #accessing }
 BlGradientPaint >> stops: anArray [
+
 	stops := anArray
 ]

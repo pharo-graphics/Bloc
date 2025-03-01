@@ -73,50 +73,50 @@ BlBackgroundTest >> testEqualityBlCompositeBackground [
 
 	background := BlCompositeBackground new withAll: {
 			              (BlPaintBackground new paint:
-				               (BlColorPaint new color: Color blue)).
+				               (BlColorPaint color: Color blue)).
 			              (BlImageBackground new image: form) }.
 	self assert: background equals: background.
 
 	self
 		assert: (BlCompositeBackground new withAll: {
 					 (BlPaintBackground new paint:
-						  (BlColorPaint new color: Color blue)).
+						  (BlColorPaint color: Color blue)).
 					 (BlImageBackground new image: form) })
 		equals: (BlCompositeBackground new withAll: {
 					 (BlPaintBackground new paint:
-						  (BlColorPaint new color: Color blue)).
+						  (BlColorPaint color: Color blue)).
 					 (BlImageBackground new image: form) }).
 	"Not the same size"
 	self
 		deny: (BlCompositeBackground new withAll: {
 					 (BlPaintBackground new paint:
-						  (BlColorPaint new color: Color blue)).
+						  (BlColorPaint color: Color blue)).
 					 (BlImageBackground new image: form) })
 		equals: (BlCompositeBackground new withAll:
 				 { (BlPaintBackground new paint:
-					  (BlColorPaint new color: Color blue)) }).
+					  (BlColorPaint color: Color blue)) }).
 	"Not the same backgrounds"
 	self
 		deny: (BlCompositeBackground new withAll: {
 					 (BlPaintBackground new paint:
-						  (BlColorPaint new color: Color blue)).
+						  (BlColorPaint color: Color blue)).
 					 (BlImageBackground new image: form) })
 		equals: (BlCompositeBackground new withAll: {
 					 (BlPaintBackground new paint:
-						  (BlColorPaint new color: Color red)).
+						  (BlColorPaint color: Color red)).
 					 (BlImageBackground new image: form) }).
 
 	self
 		assert: (BlCompositeBackground new
 				 withAll: {
 						 (BlPaintBackground new paint:
-								  (BlColorPaint new color: Color blue)).
+								  (BlColorPaint color: Color blue)).
 						 (BlImageBackground new image: form) };
 				 opacity: 0.5)
 		equals: (BlCompositeBackground new
 				 withAll: {
 						 (BlPaintBackground new paint:
-								  (BlColorPaint new color: Color blue)).
+								  (BlColorPaint color: Color blue)).
 						 (BlImageBackground new image: form) };
 				 opacity: 0.5).
 	"Test opacity"
@@ -124,13 +124,13 @@ BlBackgroundTest >> testEqualityBlCompositeBackground [
 		assert: (BlCompositeBackground new
 				 withAll: {
 						 (BlPaintBackground new paint:
-								  (BlColorPaint new color: Color blue)).
+								  (BlColorPaint color: Color blue)).
 						 (BlImageBackground new image: form) };
 				 opacity: 0.5)
 		equals: (BlCompositeBackground new
 				 withAll: {
 						 (BlPaintBackground new paint:
-								  (BlColorPaint new color: Color blue)).
+								  (BlColorPaint color: Color blue)).
 						 (BlImageBackground new image: form) };
 				 opacity: 0.5).
 
@@ -138,13 +138,13 @@ BlBackgroundTest >> testEqualityBlCompositeBackground [
 		deny: (BlCompositeBackground new
 				 withAll: {
 						 (BlPaintBackground new paint:
-								  (BlColorPaint new color: Color blue)).
+								  (BlColorPaint color: Color blue)).
 						 (BlImageBackground new image: form) };
 				 opacity: 1.0)
 		equals: (BlCompositeBackground new
 				 withAll: {
 						 (BlPaintBackground new paint:
-								  (BlColorPaint new color: Color blue)).
+								  (BlColorPaint color: Color blue)).
 						 (BlImageBackground new image: form) };
 				 opacity: 0.5)
 ]

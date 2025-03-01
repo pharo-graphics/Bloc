@@ -59,20 +59,22 @@ BlLinearGradientPaint >> = aBlPaint [
 
 { #category : #accessing }
 BlLinearGradientPaint >> end [
+
 	^ end
 ]
 
 { #category : #accessing }
 BlLinearGradientPaint >> end: aPoint [
+
 	end := aPoint
 ]
 
 { #category : #geometry }
 BlLinearGradientPaint >> matchExtent: anExtent [
+
 	| aDirection aStart anEnd aDelta aScaleX aScaleY |
 	
-	anExtent isZero
-		ifTrue: [ ^ self ].
+	anExtent isZero ifTrue: [ ^ self ].
 		
 	aDirection :=  (self end - self start) isZero
 		ifTrue: [ 1@0 ]
@@ -97,10 +99,12 @@ BlLinearGradientPaint >> matchExtent: anExtent [
 
 { #category : #accessing }
 BlLinearGradientPaint >> start [
+
 	^ start
 ]
 
 { #category : #accessing }
 BlLinearGradientPaint >> start: aPoint [
+
 	start := aPoint
 ]
