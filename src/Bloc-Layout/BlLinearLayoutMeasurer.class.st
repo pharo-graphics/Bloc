@@ -289,8 +289,7 @@ BlLinearLayoutMeasurer >> preMeasure [
 				
 				self updateTotalLengthAfterMeasuring: aNode.
 				
-				self useLargestChild
-					ifTrue: [ largestChildLength := largestChildLength max: childLength ] ].
+				largestChildLength := largestChildLength max: childLength ].
 		
 		self flag: 'Add baseline support here'.
 		
