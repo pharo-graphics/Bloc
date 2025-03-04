@@ -495,11 +495,11 @@ BlBackgroundTest >> testEqualityOfTransparentPaintBackground [
 				yourself)
 ]
 
-{ #category : #'background - transparent' }
+{ #category : #testing }
 BlBackgroundTest >> testTransparentBackground [
 
 	| aBackground |
 	aBackground := BlTransparentBackground new.
 	self assert: aBackground isTransparent.
-	self assert: aBackground opacity equals: 1.0
+	self assert: aBackground opacity equals: 0.0
 ]

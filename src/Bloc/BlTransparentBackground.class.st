@@ -47,3 +47,14 @@ BlTransparentBackground >> isTransparent [
 BlTransparentBackground >> matchExtent: anExtent [
 	"Do nothing for the transparent background"
 ]
+
+{ #category : #accessing }
+BlTransparentBackground >> opacity [
+
+	^ 0.0
+]
+
+{ #category : #accessing }
+BlTransparentBackground >> opacity: aNumber [
+	"Ignore: I'm transparent."
+]
