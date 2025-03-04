@@ -151,16 +151,14 @@ BlPaintBackgroundTest >> testRadiusGradientBackground [
 
 	| aBackground |
 	aBackground :=
-		BlPaintBackground new
-			paint:
-				(BlRadialGradientPaint new
-					stops: { 0 -> Color blue . 1 -> Color red};
-					innerCenter:  100@100;
-					innerRadius: 0;
-					outerCenter: 100@100;
-					outerRadius:  200;
-					yourself);
-			yourself.
+		BlPaintBackground paint:
+			(BlRadialGradientPaint new
+				stops: { 0 -> Color blue. 1 -> Color red };
+				innerCenter: 100@100;
+				innerRadius: 0;
+				outerCenter: 100@100;
+				outerRadius: 200;
+				yourself).
 
 	self assert: aBackground opacity equals: 1.0.
 	self deny: aBackground isTransparent.

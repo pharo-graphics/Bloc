@@ -31,6 +31,12 @@ BlPaint >> asBlPaint [
 	^ self
 ]
 
+{ #category : #comparing }
+BlPaint >> hash [
+
+	^ self class hash
+]
+
 { #category : #testing }
 BlPaint >> isColorPaint [
 

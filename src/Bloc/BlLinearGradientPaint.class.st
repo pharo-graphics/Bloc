@@ -1,3 +1,9 @@
+"
+I represent a linear gradient.
+
+The start and the end are instances of `Point`.
+The stops is a collection of associations where keys are numbers between 0.0 and 1.0, and values are instances of `Color`.
+"
 Class {
 	#name : #BlLinearGradientPaint,
 	#superclass : #BlGradientPaint,
@@ -67,6 +73,12 @@ BlLinearGradientPaint >> end [
 BlLinearGradientPaint >> end: aPoint [
 
 	end := aPoint
+]
+
+{ #category : #comparing }
+BlLinearGradientPaint >> hash [
+
+	^ super hash bitXor: (end hash bitXor: start hash)
 ]
 
 { #category : #geometry }
