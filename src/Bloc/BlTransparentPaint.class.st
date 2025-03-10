@@ -7,7 +7,7 @@ It is prefereable to refer my unique instance, since I am stateless
 "
 Class {
 	#name : #BlTransparentPaint,
-	#superclass : #BlColorPaint,
+	#superclass : #BlPaint,
 	#classInstVars : [
 		'uniqueInstance'
 	],
@@ -22,17 +22,6 @@ BlTransparentPaint class >> cleanUp [
 	uniqueInstance := nil
 ]
 
-{ #category : #'instance creation' }
-BlTransparentPaint class >> color: aColor [
-
-	self shouldNotImplement
-]
-
-{ #category : #'instance creation' }
-BlTransparentPaint class >> transparent [
-	self shouldNotImplement
-]
-
 { #category : #accessing }
 BlTransparentPaint class >> uniqueInstance [
 	"Return a unique instance of transparent paint.
@@ -45,21 +34,13 @@ BlTransparentPaint class >> uniqueInstance [
 BlTransparentPaint >> = anotherObject [
 
 	self == anotherObject ifTrue: [ ^ true ].
-	^ (anotherObject isKindOf: self class)
+	^ anotherObject = self class
 ]
 
-{ #category : #accessing }
-BlTransparentPaint >> color: aColor [
+{ #category : #comparing }
+BlTransparentPaint >> hash [
 
-	self shouldNotImplement
-]
-
-{ #category : #initialization }
-BlTransparentPaint >> initialize [
-
-	super initialize.
-
-	color := Color transparent
+	^ self class hash
 ]
 
 { #category : #testing }
@@ -74,4 +55,9 @@ BlTransparentPaint >> isTransparent [
 	"I am transparent by definition and therefore always return true"
 
 	^ true
+]
+
+{ #category : #geometry }
+BlTransparentPaint >> matchExtent: anExtent [
+	"Nothing to do"
 ]
