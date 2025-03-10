@@ -54,16 +54,16 @@ BlOSWindowEventHandler >> convertKeyModifiers: modifiers [
 { #category : #actions }
 BlOSWindowEventHandler >> enqueue: anEvent [
 
+	anEvent fillFromTime: time.
+
 	window enqueueEvent: anEvent
 ]
 
 { #category : #'visiting - window' }
 BlOSWindowEventHandler >> enqueueSpaceResized: aBlSpaceResizedEvent extent: aPoint [
 
-	aBlSpaceResizedEvent
-		extent: aPoint;
-		fillFromTime: time.
-		
+	aBlSpaceResizedEvent extent: aPoint.
+
 	self enqueue: aBlSpaceResizedEvent
 ]
 
@@ -329,23 +329,13 @@ BlOSWindowEventHandler >> visitWindowMinimizedEvent: anEvent [
 { #category : #visiting }
 BlOSWindowEventHandler >> visitWindowMouseEnterEvent: anEvent [
 
-	| aBlocEvent |
-	aBlocEvent := BlSpaceMouseEnterEvent new
-		fillFromTime: time;
-		yourself.
-		
-	self enqueue: aBlocEvent
+	self enqueue: BlSpaceMouseEnterEvent new
 ]
 
 { #category : #visiting }
 BlOSWindowEventHandler >> visitWindowMouseLeaveEvent: anEvent [
 
-	| aBlocEvent |
-	aBlocEvent := BlSpaceMouseLeaveEvent new
-		fillFromTime: time;
-		yourself.
-		
-	self enqueue: aBlocEvent
+	self enqueue: BlSpaceMouseLeaveEvent new
 ]
 
 { #category : #visiting }
@@ -353,7 +343,6 @@ BlOSWindowEventHandler >> visitWindowMoveEvent: anEvent [
 
 	| aBlocEvent |
 	aBlocEvent := BlSpaceMovedEvent new
-		fillFromTime: time;
 		position: self window position;
 		yourself.
 		
