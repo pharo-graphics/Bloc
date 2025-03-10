@@ -107,7 +107,7 @@ BlOSWindowEventHandler >> time: aBlTime [
 	time := aBlTime
 ]
 
-{ #category : #'visiting - keyboard' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitKeyDownEvent: anEvent [
 
 	| aBlEvent |
@@ -115,13 +115,12 @@ BlOSWindowEventHandler >> visitKeyDownEvent: anEvent [
 		key: (self convertKeyFromEvent: anEvent);
 		scanCode: anEvent scanCode;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		fillFromTime: time;
 		yourself.
 
 	self enqueue: aBlEvent
 ]
 
-{ #category : #'visiting - keyboard' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitKeyUpEvent: anEvent [
 
 	| aBlEvent |
@@ -129,19 +128,15 @@ BlOSWindowEventHandler >> visitKeyUpEvent: anEvent [
 		key: (self convertKeyFromEvent: anEvent);
 		scanCode: anEvent scanCode;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		fillFromTime: time;
 		yourself.
 
 	self enqueue: aBlEvent
 ]
 
-{ #category : #'visiting - mouse' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitMouseButtonPressEvent: anEvent [
 
 	| aBlocEvent button |
-	"we handle touch events separately, therefore ignore `touch` based mouse events"
-	"anEvent isTouch
-		ifTrue: [ ^ self ]."
 	button := self convertButton: anEvent button.
 	aBlocEvent := button mouseDownEventClass new
 		position: anEvent position;
@@ -149,19 +144,15 @@ BlOSWindowEventHandler >> visitMouseButtonPressEvent: anEvent [
 		delta: anEvent delta;
 		button: button;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		fillFromTime: time;
 		yourself.
 
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting - mouse' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitMouseButtonReleaseEvent: anEvent [
 
 	| aBlocEvent button |
-	"we handle touch events separately, therefore ignore `touch` based mouse events"
-	"anEvent isTouch
-		ifTrue: [ ^ self ]."
 	button := self convertButton: anEvent button.
 	aBlocEvent := button mouseUpEventClass new
 		position: anEvent position;
@@ -169,13 +160,12 @@ BlOSWindowEventHandler >> visitMouseButtonReleaseEvent: anEvent [
 		delta: anEvent delta;
 		button: button;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		fillFromTime: time;
 		yourself.
 		
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting - mouse' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitMouseMoveEvent: anEvent [
 
 	| aBlocEvent |
@@ -184,21 +174,19 @@ BlOSWindowEventHandler >> visitMouseMoveEvent: anEvent [
 		screenPosition: window position + anEvent position;
 		delta: anEvent delta;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		fillFromTime: time;
 		yourself.
 		
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting - mouse' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitMouseWheelEvent: anEvent [
 
 	| vertical horizontal aBlocEvent |
 	horizontal := anEvent scrollHorizontal.
 	vertical := anEvent scrollVertical.
 	
-	(horizontal isZero and: [ vertical isZero ])
-		ifTrue: [ ^ self ].
+	(horizontal isZero and: [ vertical isZero ]) ifTrue: [ ^ self ].
 	
 	aBlocEvent := BlMouseWheelEvent new
 		isTouch: false;
@@ -206,13 +194,12 @@ BlOSWindowEventHandler >> visitMouseWheelEvent: anEvent [
 		position: anEvent position;
 		screenPosition: window position + anEvent position;
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		fillFromTime: time;
 		yourself.
 	
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting - keyboard' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitTextInputEvent: anEvent [
 
 	| aBlocEvent |
@@ -221,7 +208,6 @@ BlOSWindowEventHandler >> visitTextInputEvent: anEvent [
 	aBlocEvent := BlTextInputEvent new
 		modifiers: (self convertKeyModifiers: anEvent modifiers);
 		text: anEvent text;
-		fillFromTime: time;
 		yourself.
 		
 	self enqueue: aBlocEvent
@@ -269,17 +255,12 @@ BlOSWindowEventHandler >> visitUnknownEvent: anEvent [
 		cr
 ]
 
-{ #category : #'visiting - window' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitWindowCloseEvent: anEvent [
 
-	| aBlocEvent |
 	anEvent suppressDefaultAction.
 
-	aBlocEvent := BlSpaceCloseRequest new
-		fillFromTime: time;
-		yourself.
-		
-	self enqueue: aBlocEvent
+	self enqueue: BlSpaceCloseRequest new
 ]
 
 { #category : #'visiting - window' }
@@ -288,26 +269,16 @@ BlOSWindowEventHandler >> visitWindowExposeEvent: anEvent [
 	^ nil
 ]
 
-{ #category : #'visiting - window' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitWindowFocusInEvent: anEvent [
 
-	| aBlocEvent |
-	aBlocEvent := BlSpaceFocusInEvent new
-		fillFromTime: time;
-		yourself.
-
-	self enqueue: aBlocEvent
+	self enqueue: BlSpaceFocusInEvent new
 ]
 
-{ #category : #'visiting - window' }
+{ #category : #visiting }
 BlOSWindowEventHandler >> visitWindowFocusOutEvent: anEvent [
-
-	| aBlocEvent |
-	aBlocEvent := BlSpaceFocusOutEvent new
-		fillFromTime: time;
-		yourself.
 		
-	self enqueue: aBlocEvent
+	self enqueue: BlSpaceFocusOutEvent new
 ]
 
 { #category : #visiting }
