@@ -7,9 +7,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'physicalSize',
-		'scaleFactor',
-		'shouldUpdateEveryFrame',
-		'updateActions'
+		'scaleFactor'
 	],
 	#category : #'Bloc-Universe - Renderer'
 }
@@ -35,12 +33,6 @@ BlHostRendererSurface class >> priority [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - updates' }
-BlHostRendererSurface >> addUpdateAction: aValuable [
-
-	updateActions add: aValuable
-]
-
 { #category : #initialization }
 BlHostRendererSurface >> createSpaceRendererOn: anObject [
 	"Return a new `BlHostSpaceRenderer` in dialog with the received argument."
@@ -61,15 +53,6 @@ BlHostRendererSurface >> extent [
 	Note: This extent can difer from canvas or window extents."
 
 	^ self subclassResponsibility
-]
-
-{ #category : #initialization }
-BlHostRendererSurface >> initialize [
-
-	super initialize.
-	
-	shouldUpdateEveryFrame := false.
-	updateActions := OrderedCollection new
 ]
 
 { #category : #initialization }
@@ -104,12 +87,6 @@ BlHostRendererSurface >> newSurfaceRendererOn: aBlHostSpace [
 		yourself
 ]
 
-{ #category : #'api - updates' }
-BlHostRendererSurface >> performUpdates [
-
-	updateActions do: [ :eachUpdateAction | eachUpdateAction value ]
-]
-
 { #category : #geometry }
 BlHostRendererSurface >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
@@ -127,14 +104,8 @@ BlHostRendererSurface >> scaleFactor [
 	^ scaleFactor
 ]
 
-{ #category : #'api - updates' }
-BlHostRendererSurface >> shouldUpdateEveryFrame [
+{ #category : #accessing }
+BlHostRendererSurface >> stride [
 
-	^ shouldUpdateEveryFrame
-]
-
-{ #category : #'api - updates' }
-BlHostRendererSurface >> updateEveryFrame [
-
-	shouldUpdateEveryFrame := true
+	^ self subclassResponsibility
 ]

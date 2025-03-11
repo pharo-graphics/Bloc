@@ -562,6 +562,12 @@ BlSpace >> currentCursor: aCursor [
 	self updateCursor: aCursor
 ]
 
+{ #category : #'change - rendering' }
+BlSpace >> damagedRectangles [
+
+	^ elementsNeedingPaint collect: [ :each | each boundsInSpace ]
+]
+
 { #category : #initialization }
 BlSpace >> defaultEventDispatcher [
 	^ BlDirectEventDispatcher on: self
@@ -1294,7 +1300,7 @@ BlSpace >> markNeedsCompositionPaint: anElement from: aSourceElement [
 { #category : #'change - rendering' }
 BlSpace >> markNeedsPaint: anElement from: aSourceElement [
 
-	elementsNeedingPaint add: anElement.
+	elementsNeedingPaint add: aSourceElement.
 	self requestHostSpaceRedraw.
 	self requestNextPulse
 ]

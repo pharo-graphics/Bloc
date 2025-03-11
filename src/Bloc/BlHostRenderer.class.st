@@ -142,20 +142,20 @@ BlHostRenderer >> render: aHostSpace [
 
 	aSpace := aHostSpace space.
 	isRenderNeeded := aSpace hasDirtyElements.
+	isRenderNeeded ifFalse: [ ^ self ].
 
-	(surface shouldUpdateEveryFrame or: [ isRenderNeeded ])
-		ifFalse: [ ^ self ].
-
-	[ | theDamagedRectangles |
+	[
 		aHostSpace makeCurrent.
-		
-		theDamagedRectangles := isRenderNeeded
-			ifTrue: [ spaceRenderer renderSpace: aSpace ]
-			ifFalse: [ #() ].
 
-		surface performUpdates.
-
-		surfaceRenderer renderSurface: surface damaged: theDamagedRectangles ]
+		surfaceRenderer
+			lockSurfaceFor: aSpace damagedRectangles
+			scaleFactor: surface scaleFactor
+			during: [ :aeCairoSurface |
+				| aeCanvas |
+				aeCanvas := AeCanvas newFor: aeCairoSurface.
+				
+				aSpace aeFullDrawOn: aeCanvas.
+				aeCanvas privateAeCairoContext externallyFree ] ]
 
 			ensure: [ self finishedRender: aSpace ]
 ]

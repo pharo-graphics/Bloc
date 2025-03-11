@@ -35,6 +35,45 @@ BlOSWindowSDL2BufferSurfaceRenderer >> initializeForSurface: aBlHostRendererBuff
 ]
 
 { #category : #rendering }
+BlOSWindowSDL2BufferSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFactor: aNumber during: aBlock [
+
+	| damagedRectangle aCairoSurface pixelsAddress |
+	"For now we only support a single rectangle"
+	damagedRectangle := Rectangle merging: damagedRectangles.
+
+	pixelsAddress := ExternalAddress new.
+ 	ExternalAddress
+		allocate: Smalltalk wordSize
+		bytesDuring: [ :pitchAddress |
+			| physicalDamagedRectangle |
+			physicalDamagedRectangle := damagedRectangle scaleBy: aNumber.
+			texture
+				lockRect: physicalDamagedRectangle asSDLRect
+				pixels: pixelsAddress 
+				pitch: pitchAddress.
+			aCairoSurface := AeCairoImageSurface
+				unownedNewForData: pixelsAddress
+			   format: AeCairoSurfaceFormat argb32
+			   width: physicalDamagedRectangle width
+			   height: physicalDamagedRectangle height
+			   stride: (pitchAddress signedLongAt: 1).
+			aCairoSurface
+				deviceOffset: physicalDamagedRectangle origin negated;
+				deviceScaleX: aNumber y: aNumber.
+			
+			aBlock value: aCairoSurface.
+				
+			aCairoSurface flush.
+			aCairoSurface externallyFree.
+			texture unlock ].
+
+	"No need to clear the renderer as texture has no blending and covers all pixels"
+	sdlRenderer
+		copy: texture;
+		present
+]
+
+{ #category : #rendering }
 BlOSWindowSDL2BufferSurfaceRenderer >> renderSurface: aBlHostRendererBufferSurface damaged: aCollectionOfRectangles [
 	"Render a given surface on a host space. Collection of damaged rectangles is not taken into account."
 
