@@ -1221,7 +1221,7 @@ BlAnimationExamplesTest >> test_4_1_sequential_first_step_halfOfDuration [
 	aSequentialAnimation time wait: self firstSequentialDuration / 2.0.
 	aSequentialAnimation run.
 
-	self assert: (aSequentialAnimation progress closeTo: 0.1818181).
+	self assert: aSequentialAnimation progress closeTo: 0.18181818181818182.
 	self
 		assert: aSequentialAnimation elapsedTime
 		equals: self firstSequentialDuration / 2.0.
@@ -1313,7 +1313,7 @@ BlAnimationExamplesTest >> test_4_2_sequential_first_step_fullDuration [
 	aSequentialAnimation time wait: self firstSequentialDuration / 2.0.
 	aSequentialAnimation run.
 
-	self assert: (aSequentialAnimation progress closeTo: 0.363636).
+	self assert: aSequentialAnimation progress closeTo: 0.36363636363636365.
 	self
 		assert: aSequentialAnimation elapsedTime
 		equals: self firstSequentialDuration.
