@@ -37,20 +37,21 @@ BlOSWindowSDL2BufferSurfaceRenderer >> initializeForSurface: aBlHostRendererBuff
 { #category : #rendering }
 BlOSWindowSDL2BufferSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFactor: aNumber during: aBlock [
 
-	| damagedRectangle aCairoSurface pixelsAddress |
+	| damagedRectangle physicalDamagedRectangle |
 	"For now we only support a single rectangle"
 	damagedRectangle := Rectangle merging: damagedRectangles.
+	physicalDamagedRectangle := damagedRectangle scaleBy: aNumber.
 
-	pixelsAddress := ExternalAddress new.
  	ExternalAddress
 		allocate: Smalltalk wordSize
 		bytesDuring: [ :pitchAddress |
-			| physicalDamagedRectangle |
-			physicalDamagedRectangle := damagedRectangle scaleBy: aNumber.
+			| aCairoSurface pixelsAddress |
+			pixelsAddress := ExternalAddress new.
 			texture
 				lockRect: physicalDamagedRectangle asSDLRect
 				pixels: pixelsAddress 
 				pitch: pitchAddress.
+
 			aCairoSurface := AeCairoImageSurface
 				unownedNewForData: pixelsAddress
 			   format: AeCairoSurfaceFormat argb32
@@ -67,7 +68,7 @@ BlOSWindowSDL2BufferSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFa
 			aCairoSurface externallyFree.
 			texture unlock ].
 
-	"No need to clear the renderer as texture has no blending and covers all pixels"
+	"No need to clear the renderer as texture is opaque and covers all pixels"
 	sdlRenderer
 		copy: texture;
 		present
