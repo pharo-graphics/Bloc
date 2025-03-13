@@ -565,7 +565,7 @@ BlSpace >> currentCursor: aCursor [
 { #category : #'change - rendering' }
 BlSpace >> damagedRectangles [
 
-	^ elementsNeedingPaint collect: [ :each | each boundsInSpace ]
+	^ elementsNeedingPaint collect: [ :each | each invalidationBoundsInSpace ]
 ]
 
 { #category : #initialization }
