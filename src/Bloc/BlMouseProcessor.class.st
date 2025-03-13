@@ -325,20 +325,20 @@ BlMouseProcessor >> handleMouseLeft: aSpaceMouseLeaveEvent [
 	lastEnteredTargets do: [ :eachEnteredTarget |
 		| anEvent |
 		anEvent := self isDragging
-			           ifTrue: [ 
-				           BlDragLeaveEvent new
-				gestureSource: currentDragTarget ]
-			           ifFalse: [ BlMouseLeaveEvent new ].
+			ifTrue: [
+				BlDragLeaveEvent new
+					gestureSource: currentDragTarget;
+					yourself ]
+			ifFalse: [ BlMouseLeaveEvent new ].
 
 		anEvent
 			position: 0 @ 0;
 			target: eachEnteredTarget;
-			canBePropagated: false;
-			fillFromTime: self space time.
+			canBePropagated: false.
 
 		self dispatchEvent: anEvent target: eachEnteredTarget ].
 
-	lastEnteredTargets := #(  ).
+	lastEnteredTargets := #().
 	lastOverTarget := nil.
 ]
 
