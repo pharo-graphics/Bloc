@@ -82,14 +82,6 @@ BlHostRenderer class >> write: aBlElement asPngTo: aFileReference [
 	self subclassResponsibility
 ]
 
-{ #category : #rendering }
-BlHostRenderer >> finishedRender: aSpace [
-	"Perform neccessary actions after rendering is complete.
-	By default I clear dirty areas of a given space"
-
-	aSpace clearDirtyElements
-]
-
 { #category : #testing }
 BlHostRenderer >> hasResized: aHostSpace [
 	"Return true if host space resized since previous frame, otherwise false"
@@ -144,8 +136,7 @@ BlHostRenderer >> render: aHostSpace [
 	isRenderNeeded := aSpace hasDirtyElements.
 	isRenderNeeded ifFalse: [ ^ self ].
 
-	[
-		aHostSpace makeCurrent.
+	[	aHostSpace makeCurrent.
 
 		surfaceRenderer
 			lockSurfaceFor: aSpace damagedRectangles
@@ -157,7 +148,7 @@ BlHostRenderer >> render: aHostSpace [
 				aSpace aeFullDrawOn: aeCanvas.
 				aeCanvas privateAeCairoContext externallyFree ] ]
 
-			ensure: [ self finishedRender: aSpace ]
+			ensure: [ aSpace clearDirtyElements ]
 ]
 
 { #category : #accessing }

@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'window',
 		'texture',
-		'sdlRenderer'
+		'sdlRenderer',
+		'texturePhysicalRectangle'
 	],
 	#pools : [
 		'SDL2Constants'
@@ -15,23 +16,24 @@ Class {
 { #category : #initialization }
 BlOSWindowSDL2BufferSurfaceRenderer >> initializeForSurface: aBlHostRendererBufferSurface [
 
-	| textureExtent textureStride surfaceBuffer |
+	| textureStride surfaceBuffer texturePhysicalExtent |
 	sdlRenderer := window backendWindow renderer sdlRenderer.
 
-	textureExtent := aBlHostRendererBufferSurface physicalSize asPoint.
-	textureStride := textureExtent x * 4.
-	surfaceBuffer := ByteArray new: textureStride * textureExtent y.
+	texturePhysicalExtent := aBlHostRendererBufferSurface physicalSize asPoint.
+	texturePhysicalRectangle := 0@0 extent: texturePhysicalExtent.
+	textureStride := texturePhysicalExtent x * 4.
+	surfaceBuffer := ByteArray new: textureStride * texturePhysicalExtent y.
 
 	texture := sdlRenderer
 		createTextureFormat: SDL_PIXELFORMAT_XRGB8888
 		access: SDL_TEXTUREACCESS_STREAMING
-		width: textureExtent x
-		height: textureExtent y.
+		width: texturePhysicalExtent x
+		height: texturePhysicalExtent y.
 
 	aBlHostRendererBufferSurface
 		buffer: surfaceBuffer;
 		stride: textureStride;
-		extent: textureExtent
+		extent: texturePhysicalExtent
 ]
 
 { #category : #rendering }
@@ -42,15 +44,21 @@ BlOSWindowSDL2BufferSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFa
 	damagedRectangle := Rectangle merging: damagedRectangles.
 	physicalDamagedRectangle := damagedRectangle scaleBy: aNumber.
 
+	"The only changed rectangle is outside of the window"
+	physicalDamagedRectangle := physicalDamagedRectangle intersect: texturePhysicalRectangle.
+	physicalDamagedRectangle isZero ifTrue: [ ^ self ].
+
+
  	ExternalAddress
 		allocate: Smalltalk wordSize
 		bytesDuring: [ :pitchAddress |
 			| aCairoSurface pixelsAddress |
+			
 			pixelsAddress := ExternalAddress new.
-			texture
+			(texture
 				lockRect: physicalDamagedRectangle asSDLRect
 				pixels: pixelsAddress 
-				pitch: pitchAddress.
+				pitch: pitchAddress) = 0 ifFalse: [ SDL2 checkForError ].
 
 			aCairoSurface := AeCairoImageSurface
 				unownedNewForData: pixelsAddress
