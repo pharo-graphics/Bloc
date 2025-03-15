@@ -1,6 +1,8 @@
 Class {
 	#name : #BlInfiniteLinearLayout,
 	#superclass : #BlInfiniteLayout,
+	#traits : 'TBlOrientableLayout',
+	#classTraits : 'TBlOrientableLayout classTrait',
 	#instVars : [
 		'layoutState',
 		'orientation',
@@ -533,28 +535,10 @@ BlInfiniteLinearLayout >> initialize [
 	pendingScrollPositionOffset := self class invalidOffset
 ]
 
-{ #category : #orientation }
-BlInfiniteLinearLayout >> isHorizontal [
-
-	^ self orientation isHorizontal 
-]
-
 { #category : #testing }
 BlInfiniteLinearLayout >> isLayoutRTL [
 
 	^ self direction isRightToLeft
-]
-
-{ #category : #testing }
-BlInfiniteLinearLayout >> isOrientable [
-
-	^ true
-]
-
-{ #category : #orientation }
-BlInfiniteLinearLayout >> isVertical [
-
-	^ self isHorizontal not
 ]
 
 { #category : #'private - children' }
