@@ -4,7 +4,7 @@ I bring simple testing and orientation changing features
 "
 Trait {
 	#name : #TBlOrientableLayout,
-	#category : #'Bloc-Layout-Support'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #'t - orientable layout' }
