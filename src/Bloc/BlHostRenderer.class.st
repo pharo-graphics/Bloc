@@ -141,12 +141,7 @@ BlHostRenderer >> render: aHostSpace [
 		surfaceRenderer
 			lockSurfaceFor: aSpace damagedRectangles
 			scaleFactor: surface scaleFactor
-			during: [ :aeCairoSurface |
-				| aeCanvas |
-				aeCanvas := AeCanvas newFor: aeCairoSurface.
-				
-				aSpace aeFullDrawOn: aeCanvas.
-				aeCanvas privateAeCairoContext externallyFree ] ]
+			during: [ :aeCanvas | aSpace aeFullDrawOn: aeCanvas ] ]
 
 			ensure: [ aSpace clearDirtyElements ]
 ]

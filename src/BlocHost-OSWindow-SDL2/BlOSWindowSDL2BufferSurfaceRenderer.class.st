@@ -52,7 +52,7 @@ BlOSWindowSDL2BufferSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFa
  	ExternalAddress
 		allocate: Smalltalk wordSize
 		bytesDuring: [ :pitchAddress |
-			| aCairoSurface pixelsAddress |
+			| aCairoSurface pixelsAddress aeCanvas |
 			
 			pixelsAddress := ExternalAddress new.
 			(texture
@@ -69,10 +69,12 @@ BlOSWindowSDL2BufferSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFa
 			aCairoSurface
 				deviceOffset: physicalDamagedRectangle origin negated;
 				deviceScaleX: aNumber y: aNumber.
-			
-			aBlock value: aCairoSurface.
+			aeCanvas := AeCanvas newFor: aCairoSurface.
+
+			aBlock value: aeCanvas.
 				
 			aCairoSurface flush.
+			aeCanvas privateAeCairoContext externallyFree.
 			aCairoSurface externallyFree.
 			texture unlock ].
 

@@ -24,7 +24,7 @@ BlMorphicFormSurfaceRenderer >> initializeForSurface: aSurface [
 { #category : #rendering }
 BlMorphicFormSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFactor: aNumber during: aBlock [
 
-	| aCairoSurface anExternalForm |
+	| aCairoSurface anExternalForm aeCanvas |
 	anExternalForm := BlExternalForm
 		extent: spaceHostMorph extent
 		depth: 32.
@@ -38,13 +38,14 @@ BlMorphicFormSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFactor: a
 			   height: spaceHostMorph height
 			   stride: anExternalForm stride.
 
-	aBlock value: aCairoSurface.
+	aeCanvas := AeCanvas newFor: aCairoSurface.
+
+	aBlock value: aeCanvas.
 	aCairoSurface flush.
-	
-	spaceHostMorph form: anExternalForm.
-	
-	
-	aCairoSurface externallyFree
+	aeCanvas privateAeCairoContext externallyFree.
+	aCairoSurface externallyFree.
+
+	spaceHostMorph form: anExternalForm
 ]
 
 { #category : #rendering }
