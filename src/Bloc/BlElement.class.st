@@ -2017,29 +2017,6 @@ BlElement >> insets [
 ]
 
 { #category : #'change reporting' }
-BlElement >> invalidRect: aBlBounds [
-	"Invalidate a dirty rectangle of the display.
-	The bounds must be given in my own coordinates."
-
-	self invalidRect: aBlBounds from: self
-]
-
-{ #category : #'change reporting' }
-BlElement >> invalidRect: aBlBounds from: anElement [
-	"Translate dirty reports from an Element.
-	A rectangle is given in my own coordinates"
-
-	"avoid unnecessary computations of rectangle transformation"
-	self isAttachedToSceneGraph ifFalse: [ ^ self ].
-
-	"transform provided rectangle to my parent's coordinates before I pass it further"
-	self localBoundsToParent: aBlBounds.
-	self hasParent
-		ifTrue: [ self parent invalidRect: aBlBounds from: anElement ]
-		ifFalse: [ self space invalidRect: aBlBounds from: anElement ]
-]
-
-{ #category : #'change reporting' }
 BlElement >> invalidate [
 	"I mark my bounds as damaged area that should be redrawn on next rendering pass.
 	Note, that #invalidate might be sent frequently, so keep implementation simple and performant.
