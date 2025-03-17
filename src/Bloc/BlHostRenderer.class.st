@@ -129,21 +129,7 @@ BlHostRenderer >> render: aHostSpace [
 	Note: if there are no dirty areas nothing will happen, including window
 	or canvas update."
 
-	| aSpace isRenderNeeded |
-	self isValid ifFalse: [ ^ self ].
-
-	aSpace := aHostSpace space.
-	isRenderNeeded := aSpace hasDirtyElements.
-	isRenderNeeded ifFalse: [ ^ self ].
-
-	[	aHostSpace makeCurrent.
-
-		surfaceRenderer
-			lockSurfaceFor: aSpace damagedRectangles
-			scaleFactor: surface scaleFactor
-			during: [ :aeCanvas | aSpace aeFullDrawOn: aeCanvas ] ]
-
-			ensure: [ aSpace clearDirtyElements ]
+	self subclassResponsibility
 ]
 
 { #category : #accessing }
