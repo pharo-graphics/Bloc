@@ -3246,10 +3246,11 @@ BlElement >> previousSiblingSuchThat: aSelectionBlock do: aBlock [
 
 { #category : #printing }
 BlElement >> printOn: aStream [
+
 	aStream
 		nextPutAll: self class name;
 		nextPutAll: ' @ ';
-		store: self identityHash.
+		print: self identityHash.
 		
 	self elementId isNoId ifTrue: [ ^self ].
 
