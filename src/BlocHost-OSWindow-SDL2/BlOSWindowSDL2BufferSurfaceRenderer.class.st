@@ -41,7 +41,7 @@ BlOSWindowSDL2BufferSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFa
 
 	| damagedRectangle physicalDamagedRectangle |
 	"For now we only support a single rectangle"
-	damagedRectangle := Rectangle merging: damagedRectangles.
+	damagedRectangle := (Rectangle merging: damagedRectangles) expanded.
 	
 	self class logDamagedRectangle: damagedRectangle.
 	
