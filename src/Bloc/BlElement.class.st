@@ -330,6 +330,15 @@ BlElement >> allChildrenBreadthFirstWithDepthDo: elementAndDepthBlock [
 ]
 
 { #category : #'api - children enumeration' }
+BlElement >> allChildrenCount [
+
+	| count |
+	count := 0.
+	self allChildrenDepthFirstDo: [ :_ | count := count + 1 ].
+	^ count
+]
+
+{ #category : #'api - children enumeration' }
 BlElement >> allChildrenDepthFirstDo: aBlock [
 	self childrenDo: [ :each | each allChildrenDepthFirstDo: aBlock ].
 	self childrenDo: aBlock
