@@ -73,6 +73,7 @@ BlOSWindowSDL2BufferSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFa
 				deviceOffset: physicalDamagedRectangle origin negated;
 				deviceScaleX: aNumber y: aNumber.
 			aeCanvas := AeCanvas newFor: aCairoSurface.
+			aeCanvas clippingRectangle: damagedRectangle.
 
 			aBlock value: aeCanvas.
 

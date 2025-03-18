@@ -32,10 +32,10 @@ BAAxisAlignedCompositionLayer class >> newFor: aBlElement [
 { #category : #drawing }
 BAAxisAlignedCompositionLayer >> createSurfaceToBePaintedOn: aCanvas [
 
-	| scale layerCanvas |
+	| scale layerCanvas logicalBounds |
 	scale := aCanvas deviceScale.
-	surface := AeCairoImageSurface extent:
-		element invalidationBoundsInSpace extent * scale.
+	logicalBounds := element invalidationBoundsInSpace.
+	surface := AeCairoImageSurface extent: logicalBounds extent * scale.
 	surface deviceScale: scale.
 
 	"The pattern allows us to establish a sampling filter that's not fancy,
@@ -44,6 +44,7 @@ BAAxisAlignedCompositionLayer >> createSurfaceToBePaintedOn: aCanvas [
 	pattern filter: AeCairoSamplingFilter fast.
 
 	layerCanvas := AeCanvas newFor: surface.
+	layerCanvas clippingRectangle: logicalBounds.
 	element aeDrawAsSeparatedLayerOn: layerCanvas.
 	layerCanvas flush
 ]
@@ -80,6 +81,12 @@ BAAxisAlignedCompositionLayer >> isValid [
 BAAxisAlignedCompositionLayer >> paintOn: aCanvas [ 
 	"Ensure the surface was drawn (with its transformation stack), "
 
+	| logicalBounds |
+	logicalBounds := element invalidationBoundsInSpace.
+	(logicalBounds intersects: aCanvas clippingRectangle)
+		ifFalse: [ ^ self ].
+
+
 	self ensureReadyToPaintOn: aCanvas.
 
 	aCanvas restoreContextAfter: [
@@ -89,7 +96,7 @@ BAAxisAlignedCompositionLayer >> paintOn: aCanvas [
 		"The layer has a global position"
 		aCanvas
 			setIdentityMatrix;
-			pathTranslate: element invalidationBoundsInSpace origin.
+			pathTranslate: logicalBounds origin.
 
 		"Paint the layer"
 		aCanvas paint: pattern alpha: element opacity ]
@@ -120,12 +127,14 @@ BAAxisAlignedCompositionLayer >> removeFromParent [
 BAAxisAlignedCompositionLayer >> updateSurfaceToBePaintedOn: aCanvas [
 	"We assume the layer exists and isValid, but needs to refresh its pixels."
 
-	| layerCanvas |
+	| layerCanvas logicalBounds |
 	"In fact it only updates if extents match"	
-	surface extent = (element invalidationBoundsInSpace extent * aCanvas deviceScale) asIntegerPoint
+	logicalBounds := element invalidationBoundsInSpace.
+	surface extent = (logicalBounds extent * aCanvas deviceScale) asIntegerPoint
 		ifFalse: [ ^ self createSurfaceToBePaintedOn: aCanvas ].
 	
 	layerCanvas := AeCanvas newFor: surface.
+	layerCanvas clippingRectangle: logicalBounds.
 	layerCanvas clearTransparent. "We need to clean it up"
 	element aeDrawAsSeparatedLayerOn: layerCanvas.
 	layerCanvas flush
