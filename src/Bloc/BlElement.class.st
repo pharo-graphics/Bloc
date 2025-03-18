@@ -63,7 +63,8 @@ Class {
 		'errorHandler',
 		'userData',
 		'visuals',
-		'flags'
+		'flags',
+		'lastDrawBoundsInSpace'
 	],
 	#category : #'Bloc-Basic'
 }
@@ -2242,6 +2243,12 @@ BlElement >> lastChild [
   
 	self hasChildren ifFalse: [ ^ self error: 'Must have at least one child' ].
 	^ self children last
+]
+
+{ #category : #accessing }
+BlElement >> lastDrawBoundsInSpace [
+
+	^ lastDrawBoundsInSpace
 ]
 
 { #category : #'api - layout' }

@@ -42,6 +42,9 @@ BlOSWindowSDL2BufferSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFa
 	| damagedRectangle physicalDamagedRectangle |
 	"For now we only support a single rectangle"
 	damagedRectangle := Rectangle merging: damagedRectangles.
+	
+	self class logDamagedRectangle: damagedRectangle.
+	
 	physicalDamagedRectangle := damagedRectangle scaleBy: aNumber.
 
 	"The only changed rectangle is outside of the window"
@@ -72,7 +75,10 @@ BlOSWindowSDL2BufferSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFa
 			aeCanvas := AeCanvas newFor: aCairoSurface.
 
 			aBlock value: aeCanvas.
-				
+
+			"DEBUG: draw dashed border on the area"
+			self class drawDamagedRectangle: damagedRectangle on: aeCanvas.
+
 			aCairoSurface flush.
 			aeCanvas privateAeCairoContext externallyFree.
 			aCairoSurface externallyFree.
@@ -88,44 +94,7 @@ BlOSWindowSDL2BufferSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFa
 BlOSWindowSDL2BufferSurfaceRenderer >> renderSurface: aBlHostRendererBufferSurface damaged: aCollectionOfRectangles [
 	"Render a given surface on a host space. Collection of damaged rectangles is not taken into account."
 
-	aCollectionOfRectangles size = 1
-		ifTrue: [
-			| damagedRectangle damagedCairoSurface fullCairoSurface pixelsAddress pitchAddress |
-			pitchAddress := ExternalAddress newPointer.
-			pixelsAddress := ExternalAddress newPointer.
-			damagedRectangle := aCollectionOfRectangles anyOne.
-
-			texture
-				lockRect: damagedRectangle asSDLRect
-				pixels: pixelsAddress
-				pitch: pitchAddress.
-			fullCairoSurface := AeCairoImageSurface
-				newForData: aBlHostRendererBufferSurface buffer
-				extent: aBlHostRendererBufferSurface physicalSize asPoint
-				stride: aBlHostRendererBufferSurface stride
-				format: AeCairoSurfaceFormat argb32.
-			damagedCairoSurface := AeCairoImageSurface
-				newForData: pixelsAddress
-				extent: damagedRectangle extent
-				stride: (pitchAddress signedLongAt: 1)
-				format: AeCairoSurfaceFormat argb32.
-			damagedCairoSurface newContext
-				clearTransparent;
-				sourceSurface: fullCairoSurface
-					x: damagedRectangle left negated
-					y: damagedRectangle top negated;
-				paint.
-			damagedCairoSurface flush.
-			texture unlock ]
-		ifFalse: [ 
-			texture
-				updateTexturePixels: aBlHostRendererBufferSurface buffer
-				pitch: aBlHostRendererBufferSurface stride ].
-
-	"No need to clear the renderer as texture has no blending and covers all pixels"
-	sdlRenderer
-		copy: texture;
-		present
+	self error: 'to be deleted'
 ]
 
 { #category : #accessing }

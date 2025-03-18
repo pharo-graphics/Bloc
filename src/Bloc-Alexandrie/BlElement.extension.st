@@ -133,7 +133,9 @@ BlElement >> aeDrawOn: aeCanvas [
 			which may have an additional translation."
 			aeCanvas pathTranslate: self position.
 			self transformation aeApplyTo: aeCanvas.
-			self aeDrawIgnoringOpacityAndTransformationOn: aeCanvas ]
+			self aeDrawIgnoringOpacityAndTransformationOn: aeCanvas ].
+
+	lastDrawBoundsInSpace := self invalidationBoundsInSpace
 ]
 
 { #category : #'*Bloc-Alexandrie' }

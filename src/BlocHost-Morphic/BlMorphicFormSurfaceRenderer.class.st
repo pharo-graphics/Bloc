@@ -52,7 +52,7 @@ BlMorphicFormSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFactor: a
 BlMorphicFormSurfaceRenderer >> renderSurface: aSurface damaged: aCollectionOfRectangles [
 	"Render a given surface on a host space"
 
-	spaceHostMorph form: aSurface form
+	self error: 'to be deleted'
 ]
 
 { #category : #accessing }
