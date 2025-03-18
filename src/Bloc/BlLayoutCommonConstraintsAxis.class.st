@@ -78,9 +78,6 @@ BlLayoutCommonConstraintsAxis >> resizer [
 
 { #category : #accessing }
 BlLayoutCommonConstraintsAxis >> resizer: aBlLayoutResizer [
-	self
-		assert: [ aBlLayoutResizer isKindOf: BlLayoutResizer ]
-		description: [ 'Resizer must be a special resizer object' ].
 
 	resizer := aBlLayoutResizer
 ]

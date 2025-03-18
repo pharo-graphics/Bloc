@@ -1,8 +1,8 @@
 Class {
 	#name : #BlLinearLayout,
 	#superclass : #BlLayout,
-	#traits : 'TBlAlignable',
-	#classTraits : 'TBlAlignable classTrait',
+	#traits : 'TBlAlignable + TBlOrientableLayout',
+	#classTraits : 'TBlAlignable classTrait + TBlOrientableLayout classTrait',
 	#instVars : [
 		'weightSum',
 		'verticalAlignment',
@@ -156,22 +156,6 @@ BlLinearLayout >> interspace [
 BlLinearLayout >> interspace: aNumber [	
 	
 	interspace := aNumber asFloat
-]
-
-{ #category : #testing }
-BlLinearLayout >> isHorizontal [
-	^ self orientation isHorizontal
-]
-
-{ #category : #testing }
-BlLinearLayout >> isOrientable [
-
-	^ true
-]
-
-{ #category : #testing }
-BlLinearLayout >> isVertical [
-	^ self orientation isVertical
 ]
 
 { #category : #layout }
