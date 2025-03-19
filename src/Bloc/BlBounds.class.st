@@ -191,6 +191,18 @@ BlBounds >> closestEdgeTo: aPoint [
 	^ self counterClockwiseEdges detectMin: [ :aRay | aRay distanceTo: aPoint ]
 ]
 
+{ #category : #'rectangle functions' }
+BlBounds >> compress [
+	"Transform me so that origin and corner are rounded to integers.
+	Rounding is done by upper value on origin and lower value on corner so that
+	rounded rectangle is inside self."
+
+	left := left ceiling.
+	top := top ceiling.
+	right := right floor.
+	bottom := bottom floor
+]
+
 { #category : #testing }
 BlBounds >> containedInRect: aRectangle [
 	"Answer whether a receiver is within a aRectangle"
