@@ -18,39 +18,47 @@ Class {
 { #category : #'instance creation' }
 BlBounds class >> fromRectangle: aRectangle [
 
-	^ self new
-		  rectangle: aRectangle;
-		  yourself
+	^ self
+		  left: aRectangle left
+		  top: aRectangle top
+		  right: aRectangle right
+		  bottom: aRectangle bottom
 ]
 
 { #category : #'instance creation' }
 BlBounds class >> left: aLeft top: aTop right: aRight bottom: aBottom [
 
-	^ self new
-		  left: aLeft
-		  top: aTop
-		  right: aRight
-		  bottom: aBottom;
-		  yourself
+	^ self basicNew
+		left: aLeft
+		top: aTop
+		right: aRight
+		bottom: aBottom;
+		yourself
+]
+
+{ #category : #'instance creation' }
+BlBounds class >> new [
+
+	^ self
+		  left: 0.0
+		  top: 0.0
+		  right: 0.0
+		  bottom: 0.0
 ]
 
 { #category : #'instance creation' }
 BlBounds class >> origin: anOrigin corner: aCorner [
 
 	^ self new
-		  origin: anOrigin corner: aCorner;
-		  yourself
+		origin: anOrigin corner: aCorner;
+		yourself
 ]
 
 { #category : #'instance creation' }
 BlBounds class >> origin: anOrigin extent: aPointExtent [	
-	"aPointExtent should satisfy #isBlocPositivePoint"
 
 	^ self new
-		left: anOrigin x
-		top: anOrigin y
-		right: anOrigin x + aPointExtent x
-		bottom: anOrigin y + aPointExtent y;
+		origin: anOrigin extent: aPointExtent;
 		yourself
 ]
 
@@ -369,17 +377,6 @@ BlBounds >> hasPositiveExtent [
 BlBounds >> height [
 
 	^ bottom - top
-]
-
-{ #category : #initialization }
-BlBounds >> initialize [
-
-	super initialize.
-	
-	left := 0.0.
-	top := 0.0.
-	right := 0.0.
-	bottom := 0.0
 ]
 
 { #category : #'rectangle functions' }
