@@ -567,7 +567,7 @@ BlBounds >> rightCenter [
 { #category : #transforming }
 BlBounds >> scaleBy: aFactor [
 	
-	^ aFactor isPoint
+	aFactor isPoint
 		ifTrue: [ self scaleX: aFactor x Y: aFactor y ]
 		ifFalse: [ aFactor isNumber
 			ifTrue: [ self scaleX: aFactor Y: aFactor ]
@@ -576,7 +576,6 @@ BlBounds >> scaleBy: aFactor [
 
 { #category : #transforming }
 BlBounds >> scaleX: aX Y: aY [
-	"Arguments should satisfy #isBlocFinite"
 
 	left := left * aX.
 	top := top * aY.
