@@ -9,16 +9,15 @@ Class {
 BlLayoutNodeChildren >> boundingBox [
 
 	| aBoundingBox |
-	self isEmpty ifTrue: [ ^ BlBounds new asRectangle ].
+	self isEmpty ifTrue: [ ^ Rectangle left: 0 right: 0 top: 0 bottom: 0 ].
 
-	aBoundingBox := nil.
+	aBoundingBox := self first bounds.
+	2 to: self size do: [ :aChild |
+		aBoundingBox merge: aChild bounds ].
 
-	self do: [ :aChild |
-		aBoundingBox
-			ifNil: [ aBoundingBox := aChild bounds ]
-			ifNotNil: [ aBoundingBox merge: aChild bounds ] ].
-
-	^ aBoundingBox expanded asRectangle
+	aBoundingBox expand.
+	
+	^ aBoundingBox asRectangle
 ]
 
 { #category : #'api - geometry' }
