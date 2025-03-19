@@ -8,6 +8,27 @@ Class {
 }
 
 { #category : #tests }
+BlBoundsTest >> testExpand [
+
+	| aBounds |
+	aBounds := BlBounds left: 1.9 top: 2.9 right: 3.9 bottom: 4.9.
+	aBounds expand.
+	
+	self assert: aBounds left equals: 1.
+	self assert: aBounds top equals: 2.
+	self assert: aBounds right equals: 4.
+	self assert: aBounds bottom equals: 5.
+
+	aBounds left: 1.2 top: 2.2 right: 3.2 bottom: 4.2.
+	aBounds expand.
+	
+	self assert: aBounds left equals: 1.
+	self assert: aBounds top equals: 2.
+	self assert: aBounds right equals: 4.
+	self assert: aBounds bottom equals: 5
+]
+
+{ #category : #tests }
 BlBoundsTest >> testFromRectangle [
 
 	| aBounds |

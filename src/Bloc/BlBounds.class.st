@@ -287,6 +287,18 @@ BlBounds >> encompass: aPoint [
 ]
 
 { #category : #'rectangle functions' }
+BlBounds >> expand [
+	"Transform me so that origin and corner are rounded to integers.
+	Rounding is done by upper value on origin and lower value on corner so that
+	self is inside rounded rectangle."
+	
+	left := left floor.
+	top := top floor.
+	right := right ceiling.
+	bottom := bottom ceiling
+]
+
+{ #category : #'rectangle functions' }
 BlBounds >> expandBy: aDelta [ 
 	"Outset me by delta. Delta is a Rectangle, Point, or Number."
 
@@ -341,14 +353,12 @@ BlBounds >> expandByPoint: aPoint [
 
 { #category : #accessing }
 BlBounds >> expanded [
-	"Transform me so that origin and corner are rounded to integers.
-	Rounding is done by upper value on origin and lower value on corner so that
-	self is inside rounded rectangle."
-	
-	left := left floor.
-	top := top floor.
-	right := right ceiling.
-	bottom := bottom ceiling
+
+	self
+		deprecated: 'Use expand'
+		transformWith: '`@rcvr expanded' -> '`@rcvr expand'.
+
+	^ self expand
 ]
 
 { #category : #accessing }
