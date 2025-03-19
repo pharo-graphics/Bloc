@@ -18,7 +18,7 @@ BlFitLayout >> childrenBoundingBox: aParentNode [
 		^ Rectangle left: 0 right: 0 top: 0 bottom: 0 ].
 
 	aBoundingBox := aParentNode children first bounds.
-	2 to: aParentNode children size do: [ :aChild |
+	aParentNode children allButFirstDo: [ :aChild |
 		aBoundingBox merge: aChild bounds ].
 
 	aBoundingBox expand.
