@@ -43,6 +43,16 @@ BlLinearLayoutMeasurer >> cellSpacing [
 	^ cellSpacing
 ]
 
+{ #category : #'private - measurement' }
+BlLinearLayoutMeasurer >> childBreadthSpecForNode: aNode [
+
+	^ parent layout
+		  measurementSpecFor: breadthSpec
+		  usedSize:
+		  (orientation paddingBreadth: parent) + aNode marginBreadth
+		  resizer: aNode breadthResizer
+]
+
 { #category : #initialization }
 BlLinearLayoutMeasurer >> initialize [
 	super initialize.
@@ -430,8 +440,7 @@ BlLinearLayoutMeasurer >> weightedMeasure [
 				childWeight > 0
 					ifTrue: [
 						| shareSpace childLengthSpec childBreadthSpec |
-						
-						self flag: 'deal with precision'.
+						" Deal with precision "
 						shareSpace := (remainingWeightSum closeTo: 0)
 							ifTrue: [ 0.0 ]
 							ifFalse: [ (childWeight * remainingExcess / remainingWeightSum) asFloat ].
@@ -448,12 +457,8 @@ BlLinearLayoutMeasurer >> weightedMeasure [
 								ifFalse: [ aNode measuredLength + shareSpace ] ].
 							
 						childLengthSpec := BlMeasurementSpec exact: (0.0 max: childLength).
-						childBreadthSpec := parent layout
-							measurementSpecFor: breadthSpec
-							usedSize: (orientation paddingBreadth: parent) + (aNode marginBreadth)
-							resizer: aNode breadthResizer.
-							
-						 aNode measure: (orientation extentSpecBreadth: childBreadthSpec lengthSpec: childLengthSpec) ].
+						childBreadthSpec := self childBreadthSpecForNode: aNode.	
+						aNode measure: (orientation extentSpecBreadth: childBreadthSpec lengthSpec: childLengthSpec) ].
 				
 				self updateTotalLengthAfterMeasuring: aNode.
 
