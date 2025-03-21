@@ -26,7 +26,8 @@ BlChildrenArray class >> from: anArrayOfChildren [
 BlChildrenArray >> add: aChild at: anIndex [
 	"Adds aChild at a given index moving existing children to the right"
 
-	array := array copyReplaceFrom: anIndex to: anIndex - 1 with: { aChild }
+	array := array copyReplaceFrom: anIndex to: anIndex - 1 with: { aChild }.
+	self resetCache
 ]
 
 { #category : #'children - adding' }
@@ -37,7 +38,8 @@ BlChildrenArray >> addAll: aSequenceableCollection [
 	no longer modify the given array."
 	array := (array isEmpty and: [ aSequenceableCollection isArray ])
 		ifTrue: [ aSequenceableCollection ]
-		ifFalse: [ array, aSequenceableCollection ]
+		ifFalse: [ array, aSequenceableCollection ].
+	self resetCache
 ]
 
 { #category : #converting }
@@ -66,12 +68,14 @@ BlChildrenArray >> do: aBlock [
 BlChildrenArray >> initialize [
 	super initialize.
 	
-	array := #()
+	array := #().
+	self resetCache
 ]
 
 { #category : #initialization }
 BlChildrenArray >> initializeFrom: anArrayOfChildren [
-	array := anArrayOfChildren asArray
+	array := anArrayOfChildren asArray.
+	self resetCache
 ]
 
 { #category : #accessing }
@@ -81,12 +85,20 @@ BlChildrenArray >> name [
 
 { #category : #'children - removing' }
 BlChildrenArray >> removeAll: aCollectionOfBlElement [
-	array := array copyWithoutAll: aCollectionOfBlElement
+	array := array copyWithoutAll: aCollectionOfBlElement.
+	self resetCache
 ]
 
 { #category : #'children - removing' }
 BlChildrenArray >> removeAt: anIndex [
-	array := array copyReplaceFrom: anIndex to: anIndex with: #()
+	array := array copyReplaceFrom: anIndex to: anIndex with: #().
+	self resetCache
+]
+
+{ #category : #'children - enumerating' }
+BlChildrenArray >> reverseDo: aBlock [
+
+	array reverseDo: aBlock
 ]
 
 { #category : #'children - accessing' }
@@ -109,5 +121,6 @@ BlChildrenArray >> swapAt: aChildIndex with: anotherChildIndex [
 		assert: [ anotherChildIndex between: 1 and: self size ]
 		description: [ 'Child index must be within bounds' ].
 		
-	array swap: aChildIndex with: anotherChildIndex
+	array swap: aChildIndex with: anotherChildIndex.
+	self resetCache
 ]

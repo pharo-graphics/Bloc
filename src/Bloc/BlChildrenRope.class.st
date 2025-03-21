@@ -20,12 +20,14 @@ Class {
 BlChildrenRope >> add: aChild at: anIndex [
 	"Adds aChild at a given index moving existing children to the right"
 
-	rope := rope insertItems: { aChild } at: anIndex - 1
+	rope := rope insertItems: { aChild } at: anIndex - 1.
+	self resetCache
 ]
 
 { #category : #'children - adding' }
 BlChildrenRope >> addAll: aSequenceableCollection [
-	rope := rope insertItems: aSequenceableCollection at: rope size
+	rope := rope insertItems: aSequenceableCollection at: rope size.
+	self resetCache
 ]
 
 { #category : #'children - accessing' }
@@ -55,12 +57,14 @@ BlChildrenRope >> name [
 
 { #category : #'children - removing' }
 BlChildrenRope >> removeAll: aCollectionOfBlElement [
-	aCollectionOfBlElement do: [ :aChild | self remove: aChild ]
+	aCollectionOfBlElement do: [ :aChild | self remove: aChild ].
+	self resetCache
 ]
 
 { #category : #'children - removing' }
 BlChildrenRope >> removeAt: anIndex [
-	rope := rope delete: anIndex - 1 to: anIndex
+	rope := rope delete: anIndex - 1 to: anIndex.
+	self resetCache
 ]
 
 { #category : #'children - accessing' }

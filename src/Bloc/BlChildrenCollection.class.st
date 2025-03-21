@@ -19,6 +19,9 @@ Subclasses need to provide the implementation for methods adding and removing ch
 Class {
 	#name : #BlChildrenCollection,
 	#superclass : #BlChildren,
+	#instVars : [
+		'sortedByElevationCache'
+	],
 	#category : #'Bloc-Basic-Children'
 }
 
@@ -50,6 +53,12 @@ BlChildrenCollection >> addFirst: anElement [
 	self add: anElement at: 1
 ]
 
+{ #category : #caching }
+BlChildrenCollection >> elevationChanged [ 
+
+	self resetCache
+]
+
 { #category : #'children - removing' }
 BlChildrenCollection >> remove: anElement [	
 	self
@@ -78,6 +87,12 @@ BlChildrenCollection >> removeAt: anIndex [
 	self subclassResponsibility
 ]
 
+{ #category : #caching }
+BlChildrenCollection >> resetCache [
+
+	sortedByElevationCache := nil
+]
+
 { #category : #enumerating }
 BlChildrenCollection >> select: selectBlock thenCollect: collectBlock [
 	"working version replacing Collection>>#select:thenCollect:"
@@ -86,6 +101,12 @@ BlChildrenCollection >> select: selectBlock thenCollect: collectBlock [
 		  self
 			  select: selectBlock
 			  thenDo: [ :child | str nextPut: (collectBlock value: child) ] ]
+]
+
+{ #category : #'children - subsets' }
+BlChildrenCollection >> sortedByElevation [
+
+	^ sortedByElevationCache ifNil: [ sortedByElevationCache := BlChildrenSortedByElevation on: self ]
 ]
 
 { #category : #'children - swapping' }

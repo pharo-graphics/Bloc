@@ -828,7 +828,7 @@ BlElement >> childrenAt: aPoint do: aBlock [
 
 	anyChildFound := false.
 	
-	self children sortedByElevationReversed do: [ :eachChildElement |
+	self children sortedByElevation reverseDo: [ :eachChildElement |
 		| aPointInChildCoordinates |
 		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
 
@@ -1418,12 +1418,15 @@ BlElement >> elevation [
 
 { #category : #'api - look' }
 BlElement >> elevation: aBlElevation [
+
 	visuals := visuals elevation: aBlElevation.
 
 	"when elevation changes, it is enough to just notify our parent, since
 	my rendering state does not change, only the order in which parent paints its children"
 	self hasParent
-		ifTrue: [ self parent invalidate ]
+		ifTrue: [ 
+			self parent children elevationChanged.
+			self parent invalidate ]
 ]
 
 { #category : #'api - tasks' }
@@ -1500,8 +1503,7 @@ BlElement >> findMouseEventTargetAt: aPoint [
 	(self clipChildren and: [ doWantEvent not ])
 		ifTrue: [ ^ nil ].
 
-	self children sortedByElevationReversed
-		do: [ :eachChild |
+	self children sortedByElevation reverseDo: [ :eachChild |
 			(eachChild findMouseEventTargetAt: aPoint)
 				ifNotNil: [ :aTargetElement | ^ aTargetElement ] ].
 	
@@ -3987,7 +3989,7 @@ BlElement >> withAllChildrenAt: aPoint do: aBlock [
 
 	anyChildFound := false.
 	
-	self children sortedByElevationReversed do: [ :eachChildElement |
+	self children sortedByElevation reverseDo: [ :eachChildElement |
 		| aPointInChildCoordinates |
 		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
 		
@@ -4066,7 +4068,7 @@ BlElement >> withAllLeafChildrenAt: aPoint do: aBlock [
 		
 	anyChildFound := false.
 	
-	self children sortedByElevationReversed do: [ :eachChildElement |
+	self children sortedByElevation reverseDo: [ :eachChildElement |
 		| aPointInChildCoordinates |
 		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
 		
