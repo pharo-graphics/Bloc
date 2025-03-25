@@ -24,6 +24,18 @@ BlOverlayListener class >> new [
 	self error: 'Do not create an instance of ', self name, ' using new. Please use #for: instead'
 ]
 
+{ #category : #'api - updating' }
+BlOverlayListener >> changeOverlayPositionWith: aPosition [
+
+	self overlayElement position: aPosition
+]
+
+{ #category : #'api - updating' }
+BlOverlayListener >> changeOverlaySizeWith: aSize [
+
+	self overlayElement size: aSize
+]
+
 { #category : #'element handlers' }
 BlOverlayListener >> elementExtentChangedEvent: anEvent [
 	self resizeTo: anEvent currentTarget
@@ -109,10 +121,11 @@ BlOverlayListener >> positionFor: anElement [
 { #category : #'api - updating' }
 BlOverlayListener >> relocateTo: anElement [
 
-	self overlayElement position: (self positionFor: anElement)
+	self changeOverlayPositionWith: (self positionFor: anElement)
 ]
 
 { #category : #'api - updating' }
 BlOverlayListener >> resizeTo: anElement [
-	self overlayElement size: (self extentFor: anElement)
+
+	self changeOverlaySizeWith: (self extentFor: anElement)
 ]
