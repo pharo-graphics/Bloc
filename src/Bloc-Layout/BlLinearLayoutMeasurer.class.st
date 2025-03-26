@@ -38,9 +38,25 @@ BlLinearLayoutMeasurer >> breadthSpec [
 	^ breadthSpec
 ]
 
+{ #category : #measurement }
+BlLinearLayoutMeasurer >> canMeasureExactUsingExcessSpaceForNode: aNode [
+
+	^ self isLengthExact and: [ self shouldUseExcessSpaceForNode: aNode ]
+]
+
 { #category : #'accessing - properties' }
 BlLinearLayoutMeasurer >> cellSpacing [
 	^ cellSpacing
+]
+
+{ #category : #'private - measurement' }
+BlLinearLayoutMeasurer >> childBreadthSpecForNode: aNode [
+
+	^ parent layout
+		  measurementSpecFor: breadthSpec
+		  usedSize:
+		  (orientation paddingBreadth: parent) + aNode marginBreadth
+		  resizer: aNode breadthResizer
 ]
 
 { #category : #initialization }
@@ -168,10 +184,7 @@ BlLinearLayoutMeasurer >> limitedMeasure [
 			childLength := eachNode measuredLength - shareLength.
 				
 			childLengthSpec := BlMeasurementSpec exact: (0.0 max: childLength).
-			childBreadthSpec := parent layout
-				measurementSpecFor: breadthSpec
-				usedSize: (orientation paddingBreadth: parent) + (eachNode marginBreadth)
-				resizer: eachNode breadthResizer.
+			childBreadthSpec := self childBreadthSpecForNode: eachNode.
 				
 			 eachNode measure: (orientation extentSpecBreadth: childBreadthSpec lengthSpec: childLengthSpec) ].
 		
@@ -253,9 +266,9 @@ BlLinearLayoutMeasurer >> preMeasure [
 		totalWeight := totalWeight + aNode weight.
 		
 		"we must store the result because it may temporary change during measurement"
-		shouldUseExcessSpace := (lengthSpec isUnspecified not or: [ useLargestChild ]) and: [ aNode shouldUseExcessSpace ].
+		shouldUseExcessSpace := self shouldUseExcessSpaceForNode: aNode.
 
-		(self isLengthExact and: [ shouldUseExcessSpace ])
+		(self canMeasureExactUsingExcessSpaceForNode: aNode)
 			ifTrue: [ self measureExactUsingExcessSpace: aNode ]
 			ifFalse: [
 				| usedLength childLength |
@@ -344,6 +357,13 @@ BlLinearLayoutMeasurer >> remainingWeightSum [
 		ifFalse: [ totalWeight ]
 ]
 
+{ #category : #'private - measurement' }
+BlLinearLayoutMeasurer >> shouldUseExcessSpaceForNode: aNode [
+
+	^ (lengthSpec isUnspecified not or: [ useLargestChild ]) and: [
+		  aNode shouldUseExcessSpace ]
+]
+
 { #category : #measurement }
 BlLinearLayoutMeasurer >> uniformMeasure [
 	| uniformMeasureSpec |
@@ -430,8 +450,7 @@ BlLinearLayoutMeasurer >> weightedMeasure [
 				childWeight > 0
 					ifTrue: [
 						| shareSpace childLengthSpec childBreadthSpec |
-						
-						self flag: 'deal with precision'.
+						" Deal with precision "
 						shareSpace := (remainingWeightSum closeTo: 0)
 							ifTrue: [ 0.0 ]
 							ifFalse: [ (childWeight * remainingExcess / remainingWeightSum) asFloat ].
@@ -448,12 +467,8 @@ BlLinearLayoutMeasurer >> weightedMeasure [
 								ifFalse: [ aNode measuredLength + shareSpace ] ].
 							
 						childLengthSpec := BlMeasurementSpec exact: (0.0 max: childLength).
-						childBreadthSpec := parent layout
-							measurementSpecFor: breadthSpec
-							usedSize: (orientation paddingBreadth: parent) + (aNode marginBreadth)
-							resizer: aNode breadthResizer.
-							
-						 aNode measure: (orientation extentSpecBreadth: childBreadthSpec lengthSpec: childLengthSpec) ].
+						childBreadthSpec := self childBreadthSpecForNode: aNode.	
+						aNode measure: (orientation extentSpecBreadth: childBreadthSpec lengthSpec: childLengthSpec) ].
 				
 				self updateTotalLengthAfterMeasuring: aNode.
 

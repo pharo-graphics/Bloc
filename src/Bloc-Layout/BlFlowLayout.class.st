@@ -1,8 +1,8 @@
 Class {
 	#name : #BlFlowLayout,
 	#superclass : #BlLayout,
-	#traits : 'TBlAlignable',
-	#classTraits : 'TBlAlignable classTrait',
+	#traits : 'TBlAlignable + TBlOrientableLayout',
+	#classTraits : 'TBlAlignable classTrait + TBlOrientableLayout classTrait',
 	#instVars : [
 		'measurer',
 		'orientation',
@@ -36,6 +36,20 @@ BlFlowLayout >> alignment [
 	^ self horizontalAlignment + self verticalAlignment
 ]
 
+{ #category : #accessing }
+BlFlowLayout >> beHorizontal [
+
+	orientation := BlLayoutOrientation horizontal.
+	measurer beHorizontal
+]
+
+{ #category : #accessing }
+BlFlowLayout >> beVertical [
+
+	orientation := BlLayoutOrientation vertical.
+	measurer beVertical
+]
+
 { #category : #initialization }
 BlFlowLayout >> defaultHorizontalAlignment [
 	"By default alignment should not influence on layout process,
@@ -61,8 +75,8 @@ BlFlowLayout >> defaultVerticalAlignment [
 
 { #category : #accessing }
 BlFlowLayout >> horizontal [
-	orientation := BlLayoutOrientation horizontal.
-	measurer beHorizontal
+
+	self beHorizontal
 ]
 
 { #category : #accessing }
@@ -83,12 +97,6 @@ BlFlowLayout >> initialize [
 	horizontalAlignment := self defaultHorizontalAlignment.
 	measurer := self newMeasurer.
 	self orientation: self defaultOrientation
-]
-
-{ #category : #testing }
-BlFlowLayout >> isOrientable [
-
-	^ true
 ]
 
 { #category : #layout }
@@ -122,8 +130,8 @@ BlFlowLayout >> orientation: aLayoutOrientation [
 
 { #category : #accessing }
 BlFlowLayout >> vertical [
-	orientation := BlLayoutOrientation vertical.
-	measurer beVertical
+
+	self beVertical
 ]
 
 { #category : #accessing }
