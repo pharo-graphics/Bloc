@@ -5,7 +5,8 @@ Class {
 		'window',
 		'texture',
 		'sdlRenderer',
-		'texturePhysicalRectangle'
+		'texturePhysicalRectangle',
+		'aeCanvas'
 	],
 	#pools : [
 		'SDL2Constants'
@@ -33,7 +34,9 @@ BlOSWindowSDL2BufferSurfaceRenderer >> initializeForSurface: aBlHostRendererBuff
 	aBlHostRendererBufferSurface
 		buffer: surfaceBuffer;
 		stride: textureStride;
-		extent: texturePhysicalExtent
+		extent: texturePhysicalExtent.
+		
+	aeCanvas := AeCanvas newWithoutSurface.
 ]
 
 { #category : #rendering }
@@ -55,7 +58,7 @@ BlOSWindowSDL2BufferSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFa
  	ExternalAddress
 		allocate: Smalltalk wordSize
 		bytesDuring: [ :pitchAddress |
-			| aCairoSurface pixelsAddress aeCanvas |
+			| aCairoSurface pixelsAddress |
 			
 			pixelsAddress := ExternalAddress new.
 			(texture
@@ -72,7 +75,8 @@ BlOSWindowSDL2BufferSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFa
 			aCairoSurface
 				deviceOffset: physicalDamagedRectangle origin negated;
 				deviceScaleX: aNumber y: aNumber.
-			aeCanvas := AeCanvas newFor: aCairoSurface.
+				
+			aeCanvas prepareForSurface: aCairoSurface.
 			aeCanvas clippingRectangle: damagedRectangle.
 
 			aBlock value: aeCanvas.
@@ -81,7 +85,7 @@ BlOSWindowSDL2BufferSurfaceRenderer >> lockSurfaceFor: damagedRectangles scaleFa
 			self class drawDamagedRectangle: damagedRectangle on: aeCanvas.
 
 			aCairoSurface flush.
-			aeCanvas privateAeCairoContext externallyFree.
+			aeCanvas removeSurface.
 			aCairoSurface externallyFree.
 			texture unlock ].
 
