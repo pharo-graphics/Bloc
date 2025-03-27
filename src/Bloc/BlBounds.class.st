@@ -365,6 +365,14 @@ BlBounds >> hasPositiveExtent [
 	^ right > left and: [ bottom > top ]
 ]
 
+{ #category : #comparing }
+BlBounds >> hash [
+	"Hash is reimplemented because = is reimplemented."
+
+	^ (top hash hashMultiply + left hash) hashMultiply bitXor:
+		  (bottom hash hashMultiply + right hash) hashMultiply
+]
+
 { #category : #accessing }
 BlBounds >> height [
 

@@ -69,7 +69,7 @@ BlBoundsCache >> invalidateBoundsInSpace [
 { #category : #accessing }
 BlBoundsCache >> invalidationBounds [
 	^ invalidationBounds ifNil: [
-		invalidationBounds := (self owner invalidationBounds: BlBounds new) asRectangle ]
+		invalidationBounds := self owner invalidationBounds: BlBounds new ]
 ]
 
 { #category : #accessing }

@@ -840,17 +840,6 @@ BlElement >> childrenAt: aPoint do: aBlock [
 	^ anyChildFound
 ]
 
-{ #category : #'geometry bounds convertion' }
-BlElement >> childrenBoundsToLocal: aBounds [
-	"In-place transform bounds from my childrens' coordinates to my local coordinates.
-	Note, that I do not return a new rectangle and instead mutate provided one,
-	so do not forget to send #asRectangle to given mutable rectangle in order to get
-	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
-	
-	^ aBounds
-]
-
 { #category : #'children accessing' }
 BlElement >> childrenCount [
 	"Return amount of my direct children"
@@ -936,6 +925,35 @@ BlElement >> compositionLayer: aCompositionLayer [
 		put: aCompositionLayer
 ]
 
+{ #category : #'geometry bounds' }
+BlElement >> computeEffectBoundsInto: aBlBounds [
+
+	^ self effect computeEffectBoundsInto: aBlBounds
+]
+
+{ #category : #'geometry bounds' }
+BlElement >> computeInvalidationBoundsInto: aBounds [
+	"Compute the bounds of self, including my children recursively, in my local
+	coordinates that would be invalidated if #invalidate would be sent to me."
+
+	
+	self computeVisualBoundsInto: aBounds.
+
+	self computeEffectBoundsInto: aBounds.
+	
+	aBounds merge: self boundsInLocal.
+
+	(self clipChildren not and: [ self hasChildren ]) ifTrue: [ 
+		| aChildBounds |
+		aChildBounds := BlBounds new.
+		self children do: [ :anElement |
+			anElement computeInvalidationBoundsInto: aChildBounds.
+			anElement localBoundsToParent: aChildBounds.
+			aBounds merge: aChildBounds ] ].
+
+	^ aBounds
+]
+
 { #category : #'private - layout' }
 BlElement >> computeLayout [
 	"Private! Never use me outside of #forceLayout"
@@ -973,6 +991,12 @@ BlElement >> computeLayout [
 		
 	relayoutCounter isZero
 		ifFalse: [ self dispatchLayoutDone ]
+]
+
+{ #category : #'geometry bounds' }
+BlElement >> computeVisualBoundsInto: aBounds [
+
+	self geometry strokedBounds: aBounds of: self
 ]
 
 { #category : #'private - accessing' }
@@ -1384,16 +1408,6 @@ BlElement >> effect: aBlEffect [
 
 	self boundsCache invalidateBoundsInLocal.
 	self invalidate.
-]
-
-{ #category : #'geometry bounds' }
-BlElement >> effectBounds [
-	^ (self effectBounds: BlBounds new) asRectangle
-]
-
-{ #category : #'geometry bounds' }
-BlElement >> effectBounds: aBlBounds [
-	^ self effect effectBounds: aBlBounds of: self
 ]
 
 { #category : #'private - accessing' }
@@ -2072,9 +2086,11 @@ BlElement >> invalidationBounds: aBounds [
 	coordinates that would be invalidated if #invalidate would be sent to me."
 
 	| anInvalidationBounds |
-	anInvalidationBounds := (self effectBounds: aBounds) merge: self boundsInLocal.
+	
+	self computeVisualBoundsInto: aBounds.
+	anInvalidationBounds := (self computeEffectBoundsInto: aBounds) merge: self boundsInLocal.
 
-	(self clipChildren and: [ self hasChildren ]) ifFalse: [ 
+	(self clipChildren not and: [ self hasChildren ]) ifTrue: [ 
 		| aChildBounds |
 		aChildBounds := BlBounds new.
 		self children do: [ :anElement |
@@ -2095,7 +2111,7 @@ BlElement >> invalidationBoundsInParent [
 { #category : #accessing }
 BlElement >> invalidationBoundsInSpace [
 
-	^ self localBoundsToGlobal: (BlBounds fromRectangle: self invalidationBounds)
+	^ self localBoundsToGlobal: self invalidationBounds copy
 
 ]
 
@@ -2358,7 +2374,6 @@ BlElement >> localBoundsToParent: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
 
 	"first apply transformation if we have one"
 	self transformation transformBounds: aBounds.
@@ -2366,10 +2381,7 @@ BlElement >> localBoundsToParent: aBounds [
 	"then translate according to my position within the parent.
 	Note, that an element might have a position even if it does not have a parent"
 	aBounds translateBy: self position.
-	
-	self hasParent
-		ifTrue: [ self parent childrenBoundsToLocal: aBounds ].
-	
+		
 	^ aBounds
 ]
 
@@ -3897,6 +3909,8 @@ BlElement >> visualBounds [
 	"Visual bounds represent a high precision area of rendered geometry, including border.
 	By default, visual bounds of `inside` outskits equal to geometry bounds since border
 	is never rendered outside of the element's geometry."
+
+	self deprecated: 'Use computeVisualBoundsInto:'.
 
 	^ (self geometry strokedBounds: BlBounds new of: self) asRectangle
 ]

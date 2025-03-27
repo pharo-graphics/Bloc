@@ -8,7 +8,8 @@ Class {
 	#instVars : [
 		'matrix',
 		'elementTransformation',
-		'boundingRectangle'
+		'boundingRectangle',
+		'backendMatrix'
 	],
 	#category : #'Bloc-Basic-Transformations'
 }
@@ -59,7 +60,8 @@ BlElementCachedExplicitTransformation >> initializeWith: aBlElementTransformatio
 	self initialize.
 	
 	boundingRectangle := 0.0@0.0 extent: 0.0@0.0.
-	elementTransformation := aBlElementTransformation
+	elementTransformation := aBlElementTransformation.
+
 ]
 
 { #category : #'private - accessing' }
@@ -69,7 +71,8 @@ BlElementCachedExplicitTransformation >> invalidateMatrix [
 	such as extent. It means that when element changes we need to invalidate and
 	recompute the matrix => set it to nil to trigger computation on next matrix access"
 
-	matrix := nil
+	matrix := nil.
+	backendMatrix := nil.
 ]
 
 { #category : #'api - transformation' }
@@ -124,7 +127,15 @@ BlElementCachedExplicitTransformation >> transformBounds: aBlBounds [
 	"Transform the given bounds according to my cached transformation.
 	(Local to global transformation.)"
 
-	^ self matrix transformBounds: aBlBounds
+"	lastBounds = aBlBounds 
+		ifTrue: [ ^ aBlBounds rectangle: resultsCache ].
+		
+	lastBounds := aBlBounds copy.
+"	self matrix transformBounds: aBlBounds.
+"	resultsCache := aBlBounds copy.
+"	
+	^ aBlBounds 
+	
 ]
 
 { #category : #'api - transformation' }
