@@ -20,9 +20,6 @@ Class {
 		'sx',
 		'sy'
 	],
-	#classVars : [
-		'X'
-	],
 	#category : #'Bloc-Basic-Math'
 }
 
