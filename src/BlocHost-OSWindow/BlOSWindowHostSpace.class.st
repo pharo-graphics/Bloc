@@ -92,10 +92,6 @@ BlOSWindowHostSpace >> initialize [
 { #category : #initialization }
 BlOSWindowHostSpace >> initializeWithAttributes: initialAttributes [
 
-	self
-		assert: [ window isNil or: [ window isValid not ] ]
-		description: [ 'Window must be nil or invalid' ].
-
 	window := OSWindow createWithAttributes: initialAttributes.
 	window eventHandler:
 		(BlOSWindowEventHandler

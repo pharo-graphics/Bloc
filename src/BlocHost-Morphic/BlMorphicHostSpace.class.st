@@ -25,14 +25,6 @@ BlMorphicHostSpace >> close [
 	self host containerMorph removeMorph: spaceHostMorph
 ]
 
-{ #category : #initialization }
-BlMorphicHostSpace >> createFormSurfaceRenderer [
-
-	^ BlMorphicFormSurfaceRenderer new
-		spaceHostMorph: spaceHostMorph;
-		yourself
-]
-
 { #category : #'host space - cursor' }
 BlMorphicHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one"
@@ -108,9 +100,11 @@ BlMorphicHostSpace >> needsRebuild [
 ]
 
 { #category : #initialization }
-BlMorphicHostSpace >> newBlHostRendererSurface [
-	
-	^ BlHostRendererFormSurface newForHostSpace: self
+BlMorphicHostSpace >> newSurfaceRenderer [
+
+	^ BlMorphicFormSurfaceRenderer new
+		spaceHostMorph: spaceHostMorph;
+		yourself
 ]
 
 { #category : #'host space - geometry' }

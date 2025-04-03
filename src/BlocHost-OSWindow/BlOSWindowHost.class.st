@@ -80,10 +80,3 @@ BlOSWindowHost >> keyboardKeyTable [
 
 	^ self subclassResponsibility
 ]
-
-{ #category : #'host - testing' }
-BlOSWindowHost >> supportsBufferSurface [
-	"Return true if this host can work with buffer surface, false otherwise"
-	
-	^ true
-]

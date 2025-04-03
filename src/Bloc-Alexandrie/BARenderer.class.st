@@ -6,6 +6,9 @@ Both buffer and form host-spaces are supported.
 Class {
 	#name : #BARenderer,
 	#superclass : #BlHostRenderer,
+	#instVars : [
+		'aeCanvas'
+	],
 	#category : #'Bloc-Alexandrie-Renderer'
 }
 
@@ -38,37 +41,18 @@ BARenderer class >> write: aBlElement asPngTo: aFileReference [
 ]
 
 { #category : #initialization }
-BARenderer >> createBufferSpaceRenderer [
-
-	^ BABufferSpaceRenderer new
-]
-
-{ #category : #initialization }
-BARenderer >> createFormSpaceRenderer [
-
-	^ BAFormSpaceRenderer new
-]
-
-{ #category : #initialization }
 BARenderer >> initializeForHostSpace: aBlHostSpace [
 	"Initialize this renderer for a given host space.
-	Please note, that it I be called multiple times"
+	Note: an instance can be initialized multiple times."
 
 	self initialize.
 
+	physicalSize := aBlHostSpace physicalSize.
+	scaleFactor := aBlHostSpace scaleFactor.
+
 	session := Smalltalk session.
-	
-	"we should mark it as a current one before initializing a canvas as it may rely on opengl context"
-	aBlHostSpace makeCurrent.
-
-	surface := aBlHostSpace newBlHostRendererSurface.
-	surfaceRenderer := surface newSurfaceRendererOn: aBlHostSpace.
-	spaceRenderer := surface newSpaceRendererOn: self.
-
-	textMeasurer := BASpaceTextMeasurer new
-		spaceRenderer: spaceRenderer;
-		yourself
-
+	textMeasurer := BAOffscreen instance textMeasurer.
+	aeCanvas := AeCanvas newWithoutSurface
 ]
 
 { #category : #rendering }
@@ -77,19 +61,44 @@ BARenderer >> render: aHostSpace [
 	Note: if there are no dirty areas nothing will happen, including window
 	or canvas update."
 
-	| aSpace isRenderNeeded |
 	self isValid ifFalse: [ ^ self ].
 
-	aSpace := aHostSpace space.
-	isRenderNeeded := aSpace hasDirtyElements.
-	isRenderNeeded ifFalse: [ ^ self ].
+	aHostSpace space hasDirtyElements ifFalse: [ ^ self ].
 
-	[	aHostSpace makeCurrent.
+	[	aHostSpace
+			lockSurfaceFor: aHostSpace space damagedRectangles
+			scaleFactor: scaleFactor
+			during: [ :aCanvas | aHostSpace space aeFullDrawOn: aCanvas ] ]
 
-		surfaceRenderer
-			lockSurfaceFor: aSpace damagedRectangles
-			scaleFactor: surface scaleFactor
-			during: [ :aeCanvas | aSpace aeFullDrawOn: aeCanvas ] ]
+		ensure: [ aHostSpace space clearDirtyElements ]
+]
 
-			ensure: [ aSpace clearDirtyElements ]
+{ #category : #rendering }
+BARenderer >> renderWith: aBlock pixels: address stride: stride physicalRectangle: physicalRectangle logicalRectangle: logicalRectangle [
+
+	| aCairoSurface |
+	aCairoSurface := AeCairoImageSurface
+		unownedNewForData: address
+	   format: AeCairoSurfaceFormat argb32
+	   width: physicalRectangle width
+	   height: physicalRectangle height
+	   stride: stride.
+	aCairoSurface
+		deviceOffset: physicalRectangle origin negated;
+		deviceScaleX: scaleFactor y: scaleFactor.
+
+	self flag: #todo. "Extract to settings"
+	"On High DPI displays, high quality is not visible enough, and often 
+	much larger surface areas are painted."
+	aCairoSurface scaleFactor > 1.0
+		ifTrue: [ aeCanvas setLowQualityOptions ].
+		
+	aeCanvas prepareForSurface: aCairoSurface.
+	aeCanvas clippingRectangle: logicalRectangle.
+
+	aBlock value: aeCanvas.
+
+	aCairoSurface flush.
+	aeCanvas removeSurface.
+	aCairoSurface externallyFree
 ]

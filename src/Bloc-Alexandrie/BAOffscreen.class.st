@@ -43,9 +43,10 @@ BAOffscreen >> ensureReady [
 
 	aeCanvas := AeCanvas extent: 1 asPoint.
 
-	textMeasurer := BACanvasTextMeasurer new
-							canvas: aeCanvas;
-							yourself
+	textMeasurer :=
+		BATextMeasurer new
+			canvas: aeCanvas;
+			yourself
 ]
 
 { #category : #api }

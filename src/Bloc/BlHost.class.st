@@ -181,20 +181,6 @@ BlHost >> stop [
 	self class stop
 ]
 
-{ #category : #'host - testing' }
-BlHost >> supportsBufferSurface [
-	"Return true if this host can work with buffer surface, false otherwise"
-	
-	^ false
-]
-
-{ #category : #'host - testing' }
-BlHost >> supportsFormSurface [
-	"Return true if this host can work with form surface, false otherwise"
-	
-	^ false
-]
-
 { #category : #enumerating }
 BlHost >> uiProcessDo: aBlock [
 

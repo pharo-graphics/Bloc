@@ -83,9 +83,3 @@ BlHeadlessHost >> destroyHostSpaceFor: aSpace [
 
 	aSpace detachHostSpace
 ]
-
-{ #category : #'host - testing' }
-BlHeadlessHost >> supportsBufferSurface [
-	
-	^ true
-]

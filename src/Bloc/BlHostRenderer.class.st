@@ -7,10 +7,9 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'session',
-		'surface',
-		'surfaceRenderer',
-		'spaceRenderer',
-		'textMeasurer'
+		'textMeasurer',
+		'physicalSize',
+		'scaleFactor'
 	],
 	#classInstVars : [
 		'preferableClass'
@@ -90,14 +89,14 @@ BlHostRenderer >> hasResized: aHostSpace [
 	self isValid ifFalse: [ ^ true ].
 	
 	"check if the size changed"
-	^ aHostSpace physicalSize ~= surface physicalSize
-		or: [ aHostSpace scaleFactor ~= surface scaleFactor ]
+	^ aHostSpace physicalSize ~= physicalSize
+		or: [ aHostSpace scaleFactor ~= scaleFactor ]
 ]
 
 { #category : #initialization }
 BlHostRenderer >> initializeForHostSpace: aBlHostSpace [
 	"Initialize this renderer for a given host space.
-	Please note, that it I be called multiple times"
+	Please note, that it I be executed multiple times"
 	
 	self subclassResponsibility
 ]
@@ -105,15 +104,8 @@ BlHostRenderer >> initializeForHostSpace: aBlHostSpace [
 { #category : #testing }
 BlHostRenderer >> isValid [
 
-	session == Smalltalk session
-		ifFalse: [ ^ false ].
+	session == Smalltalk session ifFalse: [ ^ false ].
 
-	(surface isNil
-		or: [ surfaceRenderer isNil
-			or: [ spaceRenderer isNil
-				or: [ textMeasurer isNil ] ] ])
-		ifTrue: [ ^ false ].
-	
 	^ true
 ]
 
@@ -130,24 +122,6 @@ BlHostRenderer >> render: aHostSpace [
 	or canvas update."
 
 	self subclassResponsibility
-]
-
-{ #category : #accessing }
-BlHostRenderer >> spaceRenderer [
-
-	^ spaceRenderer
-]
-
-{ #category : #accessing }
-BlHostRenderer >> surface [
-
-	^ surface
-]
-
-{ #category : #accessing }
-BlHostRenderer >> surfaceRenderer [
-
-	^ surfaceRenderer
 ]
 
 { #category : #accessing }

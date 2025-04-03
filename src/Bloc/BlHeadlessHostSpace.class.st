@@ -25,12 +25,6 @@ BlHeadlessHostSpace >> close [
 	"do nothing"
 ]
 
-{ #category : #initialization }
-BlHeadlessHostSpace >> createBufferSurfaceRenderer [
-	
-	^ BlHeadlessBufferSurfaceRenderer new
-]
-
 { #category : #'host space - cursor' }
 BlHeadlessHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one"
@@ -156,9 +150,9 @@ BlHeadlessHostSpace >> needsRebuild [
 ]
 
 { #category : #initialization }
-BlHeadlessHostSpace >> newBlHostRendererSurface [
+BlHeadlessHostSpace >> newSurfaceRenderer [
 	
-	^ BlHostRendererBufferSurface newForHostSpace: self
+	^ BlHeadlessBufferSurfaceRenderer new
 ]
 
 { #category : #'host space - displaying' }

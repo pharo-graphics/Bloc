@@ -22,20 +22,6 @@ TBlHostSpace >> close [
 	self explicitRequirement
 ]
 
-{ #category : #initialization }
-TBlHostSpace >> createBufferSurfaceRenderer [
-	"Answer a new `BlHostSurfaceRenderer`."
-	
-	^ self explicitRequirement
-]
-
-{ #category : #initialization }
-TBlHostSpace >> createFormSurfaceRenderer [
-	"Answer a new `BlHostSurfaceRenderer`."
-	
-	^ self explicitRequirement
-]
-
 { #category : #'host space - cursor' }
 TBlHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one."
@@ -136,11 +122,6 @@ TBlHostSpace >> logicalSize [
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
 
 	^ self explicitRequirement
-]
-
-{ #category : #'host space - rendering' }
-TBlHostSpace >> makeCurrent [
-	"When displaying visual content on the screen very often a window framebuffer must be marked as a current."
 ]
 
 { #category : #'host space - displaying' }
@@ -250,20 +231,6 @@ TBlHostSpace >> space: aSpace [
 	"Assign me to a given space."
 
 	space := aSpace
-]
-
-{ #category : #'host space - testing' }
-TBlHostSpace >> supportsBufferSurface [
-	"Return true if this host space can work with a buffer surface, false otherwise."
-
-	^ self host supportsBufferSurface
-]
-
-{ #category : #'host space - testing' }
-TBlHostSpace >> supportsFormSurface [
-	"Return true if this host space can work with form surface, false otherwise."
-	
-	^ self host supportsFormSurface
 ]
 
 { #category : #'host space - displaying' }
