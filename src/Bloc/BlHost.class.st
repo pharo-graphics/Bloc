@@ -145,17 +145,6 @@ BlHost >> isRunning [
 	^ self class isRunning
 ]
 
-{ #category : #'host - testing' }
-BlHost >> isStillAvailable [
-	"Let's assume that a space is opened with me as a host.
-	I return true if I am still available host for the current system.
-	For example if a space is opened in a native window with a headless VM
-	and then reopened with a headfull VM all those spaces should be re-opened
-	with a different host, for example morphic"
-
-	^ true
-]
-
 { #category : #'paragraph - measuring' }
 BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [ 
 	"Update the received paragraph with its measurement."

@@ -16,29 +16,17 @@ BlSpaceFrameHostValidationPhase >> name [
 ]
 
 { #category : #actions }
-BlSpaceFrameHostValidationPhase >> reopenSpace: aSpace [
-	aSpace host: BlHost pickHost
-]
-
-{ #category : #actions }
 BlSpaceFrameHostValidationPhase >> runOn: aSpace [
-	aSpace hasHostSpace
-		ifFalse: [ ^ self ].
-		
-	aSpace host isStillAvailable
-		ifTrue: [ self validateHostSpace: aSpace ]
-		ifFalse: [ self reopenSpace: aSpace ]
-]
 
-{ #category : #actions }
-BlSpaceFrameHostValidationPhase >> validateHostSpace: aSpace [
+	aSpace hasHostSpace ifFalse: [ ^ self ].
 
 	aSpace hostSpace needsRebuild ifFalse: [ ^ self ].
-		
+
 	aSpace invalidateAll.
 
 	aSpace host
 		destroyHostSpaceFor: aSpace;
 		createHostSpaceFor: aSpace.
+
 	aSpace hostSpace show
 ]

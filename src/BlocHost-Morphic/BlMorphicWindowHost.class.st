@@ -44,12 +44,6 @@ BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 	aSpace detachHostSpace
 ]
 
-{ #category : #testing }
-BlMorphicWindowHost >> isStillAvailable [
-
-	^ self class isSupported
-]
-
 { #category : #private }
 BlMorphicWindowHost >> newHostSpaceFor: aSpace [
 
