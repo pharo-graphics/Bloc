@@ -66,7 +66,7 @@ BlHeadlessHost >> createHostSpaceFor: aSpace [
 		host: self;
 		universe: self universe;
 		space: aSpace;
-		renderer: BlHostRenderer preferableClass new;
+		renderer: self newHostRenderer;
 		yourself.
 
 	aSpace hostSpace: aHostSpace

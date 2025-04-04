@@ -145,6 +145,12 @@ BlHost >> isRunning [
 	^ self class isRunning
 ]
 
+{ #category : #'host space - accessing' }
+BlHost >> newHostRenderer [
+
+	^ BlHostRenderer preferableClass new
+]
+
 { #category : #'paragraph - measuring' }
 BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [ 
 	"Update the received paragraph with its measurement."

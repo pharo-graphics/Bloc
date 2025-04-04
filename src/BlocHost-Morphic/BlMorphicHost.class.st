@@ -87,7 +87,7 @@ BlMorphicHost >> newHostSpaceFor: aSpace [
 		space: aSpace;
 		host: self;
 		universe: self universe;
-		renderer: BlHostRenderer preferableClass new;
+		renderer: self newHostRenderer;
 		yourself
 ]
 
