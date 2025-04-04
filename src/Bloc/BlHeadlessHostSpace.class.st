@@ -4,11 +4,10 @@ I am a fallback host space that is chosen if there are no other available and su
 "
 Class {
 	#name : #BlHeadlessHostSpace,
-	#superclass : #Object,
-	#traits : 'TBlHostSpace + TBlSpaceProperties',
-	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
+	#superclass : #BlHostSpace,
+	#traits : 'TBlSpaceProperties',
+	#classTraits : 'TBlSpaceProperties classTrait',
 	#instVars : [
-		'eventFetcher',
 		'position',
 		'title'
 	],
@@ -58,14 +57,6 @@ BlHeadlessHostSpace >> hide [
 { #category : #'window - properties' }
 BlHeadlessHostSpace >> icon: aForm [
 	"Change window's icon to the given one"
-]
-
-{ #category : #initialization }
-BlHeadlessHostSpace >> initialize [
-
-	super initialize.
-
-	eventFetcher := BlHostEventFetcher hostSpace: self
 ]
 
 { #category : #'window - properties' }

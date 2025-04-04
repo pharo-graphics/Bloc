@@ -5,8 +5,6 @@ I am the abstract class for event queue management
 Class {
 	#name : #BlHostEventFetcher,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'eventQueue',
 		'hostSpace'
@@ -14,14 +12,12 @@ Class {
 	#category : #'Bloc-Universe - Host'
 }
 
-{ #category : #accessing }
+{ #category : #'instance creation' }
 BlHostEventFetcher class >> hostSpace: aBlHostSpace [
-	^ self basicNew initialize hostSpace: aBlHostSpace
-]
 
-{ #category : #accessing }
-BlHostEventFetcher class >> new [
-	self error: 'Do not create an instance of ', self name, ' using new. Please use #hostSpace: instead'
+	^ self basicNew
+		initializeWithHostSpace: aBlHostSpace;
+		yourself
 ]
 
 { #category : #'event processing' }
@@ -30,14 +26,14 @@ BlHostEventFetcher >> enqueueEvent: aBlEvent [
 	Do not use me directly, instead rely on #enqueueEvent: from HostSpace"
 
 	eventQueue nextPut: aBlEvent.
-	self hostSpace space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
+	hostSpace space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
 ]
 
 { #category : #'event processing' }
 BlHostEventFetcher >> fetchedEventsDo: aBlock [
 	"Flush event queue and evaluate a given block with every queued event as argument"
-	| theEvents |
 
+	| theEvents |
 	theEvents := LinkedList new.
 	eventQueue flush: [ :anEvent | theEvents add: anEvent ].
 	theEvents do: aBlock
@@ -45,17 +41,15 @@ BlHostEventFetcher >> fetchedEventsDo: aBlock [
 
 { #category : #accessing }
 BlHostEventFetcher >> hostSpace [
+
 	^ hostSpace
 ]
 
-{ #category : #accessing }
-BlHostEventFetcher >> hostSpace: anObject [
-	hostSpace := anObject
-]
-
 { #category : #'initialize-release' }
-BlHostEventFetcher >> initialize [
-	super initialize.
+BlHostEventFetcher >> initializeWithHostSpace: aHostSpace [
 
-	eventQueue := WaitfreeQueue new
+	self initialize.
+
+	eventQueue := WaitfreeQueue new.
+	hostSpace := aHostSpace
 ]

@@ -4,15 +4,14 @@ I am a mocked host space that behaves just like a real one but is invisible and 
 "
 Class {
 	#name : #BlMockedHostSpace,
-	#superclass : #Object,
-	#traits : 'TBlHostSpace + TBlSpaceProperties',
-	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
+	#superclass : #BlHostSpace,
+	#traits : 'TBlSpaceProperties',
+	#classTraits : 'TBlSpaceProperties classTrait',
 	#instVars : [
 		'borderless',
 		'cursor',
 		'maximized',
 		'minimized',
-		'eventFetcher',
 		'visible',
 		'opened',
 		'densityDpi',
@@ -125,8 +124,6 @@ BlMockedHostSpace >> icon: aForm [
 BlMockedHostSpace >> initialize [
 
 	super initialize.
-
-	eventFetcher := BlHostEventFetcher hostSpace: self.
 
 	visible := false.
 	minimized := false.
