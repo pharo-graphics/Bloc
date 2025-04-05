@@ -56,6 +56,74 @@ Class {
 	#category : #'Bloc-Space'
 }
 
+{ #category : #'accessing - method dictionary' }
+BlSpace class >> addAndClassifySelector: selector withMethod: compiledMethod inProtocol: aProtocol [
+	"When a new methods is added, I add it to the localMethodDict and also propagate the changes to my users"
+	<reflection: 'Class structural modification - Selector/Method modification'>
+	self localMethodDict at: selector put: compiledMethod.
+
+	super addAndClassifySelector: selector withMethod: compiledMethod inProtocol: aProtocol.
+
+	TraitChange addSelector: selector on: self
+]
+
+{ #category : #querying }
+BlSpace class >> allTraits [
+	<reflection: 'Class structural inspection - Traits'>
+	^ self traitComposition allTraits
+]
+
+{ #category : #'debug - asserting' }
+BlSpace class >> assert: aBlock [
+	"Throw an assertion error if aBlock does not evaluates to true.
+	We check for true explicitly to make the assertion fail for non booleans.
+	
+	Note: Should be enabled with ===Bloc enableAssertions==="
+	
+	self assertionsEnabled
+		ifTrue: [ aBlock value == true ifFalse: [ AssertionFailure signal: 'Assertion failed' ] ]
+]
+
+{ #category : #'debug - asserting' }
+BlSpace class >> assert: aBlock description: aStringOrBlock [
+	"Throw an assertion error if aBlock does not evaluates to true.
+	
+	Note: Should be enabled with ===Bloc enableAssertions==="
+
+	self assertionsEnabled
+		ifTrue: [ aBlock value == true ifFalse: [ AssertionFailure signal: aStringOrBlock value ] ]
+]
+
+{ #category : #'debug - asserting' }
+BlSpace class >> assertionsEnabled [
+
+	^ Bloc assertionsEnabled
+]
+
+{ #category : #initialization }
+BlSpace class >> doRebuildMethodDictionary [
+
+	| selectors removedSelectors modified |
+	"During the creation of the class or after a change in the traitComposition, the whole method dictionary is calculated.
+	If I return true, my users should be updated""1. I recreate the local methodDict"
+	modified := false.
+	self methodDict valuesDo: [ :m | m traitSource ifNil: [ self localMethodDict at: m selector put: m ] ].
+
+	"2. I filter the selectors from the trait composition, rejecting the ones that are locally defined.
+	And then I install the methods in myself. The trait composition only install the method if it is needed."
+	selectors := self traitComposition selectors reject: [ :e | self localMethodDict includesKey: e ].
+	selectors do: [ :e | modified := modified | (self traitComposition installSelector: e into: self replacing: false) ].
+
+	"3. I handle the methods that I have and they are no more in the traitComposition."
+	removedSelectors := self methodDict keys reject: [ :aSelector | (selectors includes: aSelector) or: [ self localMethodDict includesKey: aSelector ] ].
+	modified := modified | removedSelectors isNotEmpty.
+	removedSelectors do: [ :aSelector |
+		self methodDict removeKey: aSelector.
+		self removeFromProtocols: aSelector ].
+
+	^ modified
+]
+
 { #category : #'private - change' }
 BlSpace class >> extractRoots: aSetOfElements [
 	| roots |
@@ -75,6 +143,110 @@ BlSpace class >> extractRoots: aSetOfElements [
 							current := nil ]
 						ifFalse: [ current := current parent ] ] ].
 	^ roots
+]
+
+{ #category : #testing }
+BlSpace class >> findOriginClassOf: aMethod [
+
+	"I return the myself or the trait that has the original implementation of a method.
+	If the method is an alias, the returned class includes the original aliased method"
+	<reflection: 'Class structural inspection - Selectors and methods inspection'>
+	
+	(aMethod hasProperty: #traitSource)
+		ifTrue: [ ^ aMethod traitSource innerClass ].
+
+	(self includesLocalSelector: aMethod selector)
+		ifTrue: [ ^ self ].
+
+	^ (self traitComposition traitDefining: aMethod selector ifNone: [ ^ self ]) innerClass
+]
+
+{ #category : #testing }
+BlSpace class >> findOriginMethodOf: aMethod [
+
+	"I return the original method for a aMethod.
+	If this is a local method, the original method is itself.
+	If it cames from a trait composition I look for the method in the trait composition.
+	First I try with the trait stored in the traitSource.
+	If it is an aliased or conflicting method, the method is look up in the whole trait composition"
+	<reflection: 'Class structural inspection - Selectors and methods inspection'>
+	
+	(self includesLocalSelector: aMethod selector)
+		ifTrue: [ ^ aMethod ].
+
+	(aMethod hasProperty: #traitSource)
+		ifTrue: [ |newSelector|
+			newSelector := self traitComposition originSelectorOf: aMethod selector.
+			^ aMethod traitSource compiledMethodAt: newSelector ifAbsent: [aMethod] ].
+
+	^ (self traitComposition traitDefining: aMethod selector ifNone: [ self ])
+		compiledMethodAt: aMethod selector ifAbsent: [ ^ aMethod ]
+]
+
+{ #category : #testing }
+BlSpace class >> hasTraitComposition [
+
+	^ self traitComposition isEmpty not
+]
+
+{ #category : #testing }
+BlSpace class >> includesLocalSelector: aSymbol [
+	<reflection: 'Class structural inspection - Shared pool inspection'>
+	^ self isLocalSelector: aSymbol
+]
+
+{ #category : #testing }
+BlSpace class >> includesTrait: aTrait [
+
+	<reflection: 'Class structural inspection - Traits'>
+	^ self traitComposition includesTrait: aTrait
+]
+
+{ #category : #testing }
+BlSpace class >> isAliasSelector: aSymbol [
+	"Return true if the selector aSymbol is an alias defined
+	in my or in another composition somewhere deeper in
+	the tree of traits compositions."
+
+	^ self traitComposition isAliasSelector: aSymbol
+]
+
+{ #category : #testing }
+BlSpace class >> isLocalAliasSelector: aSymbol [
+	"Return true if the selector aSymbol is an alias defined
+	in my trait composition."
+
+	^ self traitComposition isLocalAliasSelector: aSymbol
+]
+
+{ #category : #testing }
+BlSpace class >> isLocalSelector: aSelector [
+	<reflection: 'Class structural inspection - Selectors and methods inspection'>
+	^ self localMethodDict includesKey: aSelector
+]
+
+{ #category : #accessing }
+BlSpace class >> localMethodDict [
+	"The local methodDict is in the metaclass. In this way I do not have to recompile the methods during the bootstrap when we don't have a compiler."
+	^ self class baseLocalMethods
+]
+
+{ #category : #accessing }
+BlSpace class >> localMethodDict: aMethodDictionary [
+	^ self class baseLocalMethods: aMethodDictionary
+]
+
+{ #category : #accessing }
+BlSpace class >> localMethods [
+	"returns the methods of classes excluding the ones of the traits that the class uses"
+	<reflection: 'Class structural inspection - Selectors and methods inspection'>
+	^ self localMethodDict values
+]
+
+{ #category : #'accessing - method dictionary' }
+BlSpace class >> localSelectors [
+	<reflection: 'Class structural inspection - Selectors and methods inspection'>
+	^ self localMethodDict keys
 ]
 
 { #category : #'debug - simulation' }
@@ -158,6 +330,73 @@ BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDurati
 		aSemaphore wait: aDuration ].
 
 	^ self pulseUntilEmptyTaskQueue: aSpace timeout: aDuration
+]
+
+{ #category : #initialization }
+BlSpace class >> rebuildMethodDictionary [
+
+	"Useful to be rewritten in Traits"
+	^ self doRebuildMethodDictionary
+]
+
+{ #category : #categories }
+BlSpace class >> recategorizeSelector: selector from: oldProtocol to: newProtocol [
+	"When a method is recategorized I have to classify the method, but also recategorize the aliases pointing to it"
+
+	| originalProtocol |
+	"If it is nil is because it is a removal. It will removed when the method is removed."
+	newProtocol ifNil: [ ^ self ].
+
+	originalProtocol := (self protocolOfSelector: selector) ifNil: [ ^ self ].
+	originalProtocol name = oldProtocol name ifTrue: [ self classify: selector under: newProtocol name ].
+
+	(self traitComposition reverseAlias: selector) do: [ :selectorAlias |
+		self recategorizeSelector: selectorAlias from: oldProtocol to: newProtocol.
+		self notifyOfRecategorizedSelector: selectorAlias from: oldProtocol to: newProtocol ]
+]
+
+{ #category : #recompilation }
+BlSpace class >> recompile: selector from: oldClass [
+
+	super recompile: selector from: oldClass.
+	TraitChange addSelector: selector on: self
+]
+
+{ #category : #'trait-composition' }
+BlSpace class >> removeFromComposition: aTrait [
+
+	self setTraitComposition: (self traitComposition copyWithoutTrait: aTrait asTraitComposition)
+]
+
+{ #category : #removing }
+BlSpace class >> removeFromSystem: logged [
+
+	"When a traited class is removed the traits it is using should be updated"
+	| mySubclasses |
+	self traitComposition removeUser: self.
+	self class traitComposition removeUser: self class.
+
+	TraitedClass removeUser: self class.
+
+	mySubclasses := self subclasses.
+
+	super removeFromSystem: logged.
+
+	"As I am a traited class my subclasses does not have the basic traited class
+	methods, so I add them."
+	mySubclasses do: [ :each | each class initializeBasicMethods ]
+]
+
+{ #category : #removing }
+BlSpace class >> removeSelector: aSelector [
+
+	"When a selector is removed it should be notified to my users.
+	Check the class TraitChange for more details"
+	<reflection: 'Class structural modification - Selector/Method modification'>
+	super removeSelector: aSelector.
+	self localMethodDict removeKey: aSelector ifAbsent: [  ].
+
+	TraitChange removeSelector: aSelector on: self
 ]
 
 { #category : #'debug - simulation' }
@@ -501,10 +740,135 @@ BlSpace class >> simulateTextInput: aString on: aBlElement [
 ]
 
 { #category : #accessing }
+BlSpace class >> traitComposition [
+	"My trait composition is in my class. So I do not need to recompile the methods when installing them during bootstrap"
+	^ self class baseComposition
+]
+
+{ #category : #accessing }
+BlSpace class >> traitComposition: aComposition [
+
+	aComposition asTraitComposition allTraits do: [ :aMaybeTrait |
+		aMaybeTrait isTrait ifFalse: [
+			self error: 'All the members of the trait composition should be traits' ]].
+
+	self class baseComposition: aComposition
+]
+
+{ #category : #accessing }
+BlSpace class >> traitCompositionString [
+	^ self traitComposition asString
+]
+
+{ #category : #accessing }
+BlSpace class >> traitUsers [
+	"I am a traited class, I have no users, this is for compatibility with traits"
+		<reflection: 'Class structural inspection - Traits'>
+	^ #()
+]
+
+{ #category : #accessing }
+BlSpace class >> traits [
+	<reflection: 'Class structural inspection - Traits'>
+	^ self traitComposition traits
+]
+
+{ #category : #'event management' }
+BlSpace >> addEventFilter: anEventHandler [
+	self eventDispatcher addEventFilter: anEventHandler
+]
+
+{ #category : #'event management' }
+BlSpace >> addEventFilterOn: anEventClass do: aBlock [
+
+	| newEventHandler |
+	newEventHandler :=
+		BlEventHandler
+			on: anEventClass
+			do: aBlock.
+
+	self addEventFilter: newEventHandler.
+	
+	^ newEventHandler
+]
+
+{ #category : #'event management' }
+BlSpace >> addEventHandler: anEventHandler [
+	self eventDispatcher addEventHandler: anEventHandler
+]
+
+{ #category : #'event management' }
+BlSpace >> addEventHandlerIfNotPresent: anEventHandler [
+	(self hasEventHandler: anEventHandler)
+		ifTrue: [ ^ self ].
+
+	self addEventHandler: anEventHandler
+]
+
+{ #category : #'event management' }
+BlSpace >> addEventHandlerOn: anEventClass do: aBlock [
+	"Add a new event handler for the received event class, and answer the new handler."
+	
+	| newEventHandler |
+	newEventHandler :=
+		BlEventHandler
+			on: anEventClass
+			do: aBlock.
+
+	self addEventHandler: newEventHandler.
+
+	^ newEventHandler
+]
+
+{ #category : #'event management' }
+BlSpace >> addEventHandlerOn: anEventClass doOnce: aBlock [
+	"Add an event handler that will be removed right before culling the received block closure.
+	Answer the new `BlEventHandler`."
+
+	| anEventHandler |
+	anEventHandler := BlEventHandler new.
+	anEventHandler
+		eventClass: anEventClass;
+		action: [ :anEvent |
+			self removeEventHandler: anEventHandler.
+			aBlock cull: anEvent ].
+	
+	self addEventHandler: anEventHandler.
+	
+	^ anEventHandler
+]
+
+{ #category : #'shortcut management' }
+BlSpace >> addShortcut: aShortcut [
+	self eventDispatcher addShortcut: aShortcut
+]
+
+{ #category : #accessing }
 BlSpace >> asReference [
 	<return: #BlSpaceReference>
 
 	^ reference ifNil: [ reference := BlAttachedCachedSpaceReference forSpace: self ]
+]
+
+{ #category : #'debug - asserting' }
+BlSpace >> assert: aBlock [
+	"Throw an assertion error if aBlock does not evaluates to true"
+	
+	self class assert: aBlock
+]
+
+{ #category : #'debug - asserting' }
+BlSpace >> assert: aBlock description: aStringOrBlock [
+	"Throw an assertion error if aBlock does not evaluates to true."
+
+	self class assert: aBlock description: aStringOrBlock
+]
+
+{ #category : #'debug - asserting' }
+BlSpace >> assert: actual equals: expected [
+	^ self
+		assert: actual = expected
+		description: [self comparingStringBetween: actual and: expected]
 ]
 
 { #category : #'api - displaying' }
@@ -527,6 +891,37 @@ BlSpace >> bounds [
 	^ BlBounds origin: self position extent: self extent
 ]
 
+{ #category : #'event management' }
+BlSpace >> buildEventDispatchChain: aBlEventDispatcherChain [
+	"Note: Dispatcher chain is persistent - I return a new instance"
+	<return: #BlEventDispatcherChain>
+	| aResultChain |
+
+	aResultChain := aBlEventDispatcherChain.
+	aResultChain := aResultChain withNext: self eventDispatcher.
+
+	self hasNextEventTarget
+		ifTrue: [ aResultChain := self nextEventTarget buildEventDispatchChain: aResultChain ].
+
+	^ aResultChain
+]
+
+{ #category : #'event management' }
+BlSpace >> buildEventDispatchChain: aBlEventDispatcherChain upTo: anOtherEventTarget [
+	"Build an event dispatch chain up to but excluding a given other event target
+	Note: Dispatcher chain is persistent - I return a new instance"
+	<return: #BlEventDispatcherChain>
+	| aResultChain |
+
+	aResultChain := aBlEventDispatcherChain.
+	aResultChain := aResultChain withNext: self eventDispatcher.
+
+	(self hasNextEventTarget and: [ self nextEventTarget ~~ anOtherEventTarget ])
+		ifTrue: [ aResultChain := self nextEventTarget buildEventDispatchChain: aResultChain upTo: anOtherEventTarget ].
+
+	^ aResultChain
+]
+
 { #category : #'api - displaying' }
 BlSpace >> center [
 	"Tell host to change my position to be centered. Do nothing if host space is not present (e.g. not shown)."
@@ -547,6 +942,18 @@ BlSpace >> close [
 	This space can be reopened via `show`, either with current host or with another host."
 	
 	host universe closeSpace: self
+]
+
+{ #category : #'debug - asserting' }
+BlSpace >> comparingStringBetween: actual and: expected [
+
+	^ String streamContents: [:stream |
+			stream
+				nextPutAll: 'Got ';
+				nextPutAll: actual fullPrintString;
+				nextPutAll: ' instead of ';
+				nextPutAll: expected fullPrintString;
+				nextPutAll: '.']
 ]
 
 { #category : #'cursor managing' }
@@ -654,6 +1061,19 @@ BlSpace >> dispatchAddedToSceneGraph [
 
 	self root dispatchAddedToSceneGraph
 
+]
+
+{ #category : #'event management' }
+BlSpace >> dispatchEvent: anEvent [
+	"Dispatch an event if my dispatcher wants it. Previously, set in the event target, forwarding target, and source (if it wasn't already set)."
+
+	anEvent hasSource ifFalse: [ anEvent source: self ].
+
+	anEvent target: self.
+	anEvent forwardingTarget: self.
+
+	(self eventDispatcher wantsEvent: anEvent) ifTrue: [
+		self eventDispatcher dispatchEvent: anEvent ]
 ]
 
 { #category : #'event handling' }
@@ -902,6 +1322,22 @@ BlSpace >> findMouseEventTargetAt: aPoint [
 	^ self root findMouseEventTargetAt: aPoint
 ]
 
+{ #category : #'event management' }
+BlSpace >> fireEvent: anEvent [
+	"I fire provided event building an event dispatcher chain
+	(from target to the root element) and dispatch the event with it."
+
+	| aDispatcherChain |
+
+	anEvent hasSource
+		ifFalse: [ anEvent source: self ].
+
+	anEvent target: self.
+
+	aDispatcherChain := self buildEventDispatchChain: BlEventDispatcherChain empty.
+	aDispatcherChain dispatchEvent: anEvent
+]
+
 { #category : #'focus managing' }
 BlSpace >> focusOwner [
 	<return: #BlElement>
@@ -971,6 +1407,16 @@ BlSpace >> hasDirtyElements [
 	^ elementsNeedingPaint notEmpty
 ]
 
+{ #category : #'event management' }
+BlSpace >> hasEventFilter: anEventHandler [
+	^ self eventDispatcher hasFilter: anEventHandler
+]
+
+{ #category : #'event management' }
+BlSpace >> hasEventHandler: anEventHandler [
+	^ self eventDispatcher hasHandler: anEventHandler
+]
+
 { #category : #'focus managing' }
 BlSpace >> hasFocus: anElement [
 	"Return true if a given element is within the focus chain"
@@ -1003,6 +1449,17 @@ BlSpace >> hasLayoutError [
 	"Return true if there was a layout error, false otherwise"
 
 	^ layoutError isNotNil
+]
+
+{ #category : #'event management accessing' }
+BlSpace >> hasNextEventTarget [
+	"Return true if this event target has a logical successor within a dispatch chain.
+	For example, in case of visual components next event target is a parent, meaning
+	that first event is handled by child and the dispatched to the parent if that event
+	was not consumed"
+	<return: #Boolean>
+
+	^ false
 ]
 
 { #category : #testing }
@@ -1356,6 +1813,15 @@ BlSpace >> mouseProcessor: aMouseProcessor [
 	mouseProcessor := aMouseProcessor
 ]
 
+{ #category : #'event management accessing' }
+BlSpace >> nextEventTarget [
+	"Return next event target that should be contained in dispatch chain.
+	Note: returned object must use TBlEventTarget trait!"
+	<return: #TBlEventTarget>
+
+	self error: 'Override me if there is a next event target.'
+]
+
 { #category : #pulse }
 BlSpace >> onSessionChanged: aNewSession [
 
@@ -1429,6 +1895,36 @@ BlSpace >> pulseRequested [
 BlSpace >> rememberVisibleStatus [
 	
 	previousVisibleStatus := self isVisible
+]
+
+{ #category : #'event management' }
+BlSpace >> removeEventFilter: anEventHandler [
+	self eventDispatcher removeEventFilter: anEventHandler
+]
+
+{ #category : #'event management' }
+BlSpace >> removeEventFiltersSuchThat: aBlock [
+	self eventDispatcher removeEventFiltersSuchThat: aBlock
+]
+
+{ #category : #'event management' }
+BlSpace >> removeEventHandler: anEventHandler [
+	self eventDispatcher removeEventHandler: anEventHandler
+]
+
+{ #category : #'event management' }
+BlSpace >> removeEventHandlersSuchThat: aBlock [
+	self eventDispatcher removeEventHandlersSuchThat: aBlock
+]
+
+{ #category : #'shortcut management' }
+BlSpace >> removeShortcut: aShortcut [
+	self eventDispatcher removeShortcut: aShortcut
+]
+
+{ #category : #'shortcut management' }
+BlSpace >> removeShortcutsWithCombination: aBlKeyCombination [
+	self eventDispatcher removeAllShortcutsWithCombination: aBlKeyCombination
 ]
 
 { #category : #pulse }
@@ -1545,6 +2041,13 @@ BlSpace >> setPosition: aPoint [
 	"Actually change space, root and glass extent to a given one"
 
 	position := aPoint
+]
+
+{ #category : #'shortcut management' }
+BlSpace >> shortcuts [
+	<return: #BlShortcutRegistry>
+
+	^ self eventDispatcher shortcutHandler shortcuts
 ]
 
 { #category : #'api - displaying' }
@@ -1667,6 +2170,18 @@ BlSpace >> userData [
 	Be careful to limit the use of such facility and prefer clean instance variables when it is possible to define them."
 
 	^ userData ifNil: [ userData := IdentityDictionary new ]
+]
+
+{ #category : #'event management' }
+BlSpace >> when: anEventClass doOnce: aBlock [
+	"Add an event handler that will be removed right before culling the received block closure."
+
+	self
+		deprecated: 'Use addEventHandlerOn:doOnce: instead'
+		transformWith: '`@receiver when: `@arg1 doOnce: `@arg2'
+			-> '`@receiver addEventHandlerOn: `@arg1 doOnce: `@arg2'.
+
+	^ self addEventHandlerOn: anEventClass doOnce: aBlock
 ]
 
 { #category : #'window - properties' }
