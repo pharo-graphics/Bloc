@@ -1,12 +1,14 @@
 "
-I define the public API needed to be used by the Universe and the Spaces.
+I am an adapter between the Universe and the Spaces.
+
 I define the public API that Host Spaces must provide.
-This API is mostly used by  the Universe and the Host-Independent Spaces.
-An Host Space is an  actual screen area provided by the underlying Host.
+This API is mostly used by the Universe and the Host-Independent Spaces.
+An Host Space is an actual screen area provided by the underlying Host.
 This area is typically an host-specific window.
 "
-Trait {
-	#name : #TBlHostSpace,
+Class {
+	#name : #BlHostSpace,
+	#superclass : #Object,
 	#instVars : [
 		'host',
 		'space',
@@ -17,45 +19,45 @@ Trait {
 }
 
 { #category : #'host space - displaying' }
-TBlHostSpace >> close [
+BlHostSpace >> close [
 
-	self explicitRequirement
+	self subclassResponsibility
 ]
 
 { #category : #'host space - cursor' }
-TBlHostSpace >> cursor: aCursor [
+BlHostSpace >> cursor: aCursor [
 	"Change current cursor image/view to the given one."
 
-	self explicitRequirement
+	self subclassResponsibility
 ]
 
 { #category : #'host space - geometry' }
-TBlHostSpace >> densityDpi [
+BlHostSpace >> densityDpi [
 	"Return the screen density expressed as the number of dots-per-inch."
 	
-	^ self explicitRequirement
+	^ self subclassResponsibility
 ]
 
 { #category : #'host space - accessing' }
-TBlHostSpace >> detachHost [
+BlHostSpace >> detachHost [
 
 	host := nil
 ]
 
 { #category : #'host space - accessing' }
-TBlHostSpace >> detachSpace [
+BlHostSpace >> detachSpace [
 
 	space := nil
 ]
 
 { #category : #'host space - accessing' }
-TBlHostSpace >> detachUniverse [
+BlHostSpace >> detachUniverse [
 
 	universe := nil
 ]
 
 { #category : #'host space - events' }
-TBlHostSpace >> enqueueEvent: aBlEvent [
+BlHostSpace >> enqueueEvent: aBlEvent [
 	"I dispatch events directly to the universe or space as soon as they come"
 
 	aBlEvent isUniverseEvent
@@ -68,17 +70,17 @@ TBlHostSpace >> enqueueEvent: aBlEvent [
 ]
 
 { #category : #'host space - events' }
-TBlHostSpace >> fetchedEventsDo: aBlock [
+BlHostSpace >> fetchedEventsDo: aBlock [
 	"Flush event queue and evaluate a given block with every queued event as argument"
 ]
 
 { #category : #'host space - events' }
-TBlHostSpace >> generateEvents [
+BlHostSpace >> generateEvents [
 	"Generate more complex state change events such as window scale event when resolution of the screen changes"
 ]
 
 { #category : #'host space - testing' }
-TBlHostSpace >> hasResized [
+BlHostSpace >> hasResized [
 	"Return true if renderer extent changed.
 	It may happen if window moved between displays with different DPI,
 	e.g. from normal display to Retina."
@@ -87,110 +89,116 @@ TBlHostSpace >> hasResized [
 ]
 
 { #category : #'host space - accessing' }
-TBlHostSpace >> host [
+BlHostSpace >> host [
 	"Return a host that was used to create this host space"
 
 	^ host
 ]
 
 { #category : #'host space - accessing' }
-TBlHostSpace >> host: aBlHost [
+BlHostSpace >> host: aBlHost [
 	"Assign a host that was used to create this host space"
 	
 	host := aBlHost
 ]
 
 { #category : #initialization }
-TBlHostSpace >> initializeRenderer [
+BlHostSpace >> initializeRenderer [
 
 	renderer initializeForHostSpace: self
 ]
 
 { #category : #'host space - testing' }
-TBlHostSpace >> isVisible [
+BlHostSpace >> isVisible [
 	"Return true if underlying window is shown, false otherwise.
 	Note: If window was shown and then minimized it is still considered to be visible.
 	Window can become invisible by asking it to hide"
 
-	^ self explicitRequirement
+	^ self subclassResponsibility
 ]
 
 { #category : #'host space - geometry' }
-TBlHostSpace >> logicalSize [
+BlHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area (instance of `BlLogicalDisplaySize`).
 	The client area is the content of the window, excluding the title bar and borders.
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
 
-	^ self explicitRequirement
+	^ self subclassResponsibility
 ]
 
 { #category : #'host space - displaying' }
-TBlHostSpace >> maximize [
+BlHostSpace >> maximize [
 
-	self explicitRequirement
+	self subclassResponsibility
 ]
 
 { #category : #'host space - displaying' }
-TBlHostSpace >> maximized [
+BlHostSpace >> maximized [
 
-	^ self explicitRequirement
+	^ self subclassResponsibility
 ]
 
 { #category : #'host space - displaying' }
-TBlHostSpace >> minimize [
+BlHostSpace >> minimize [
 
-	self explicitRequirement
+	self subclassResponsibility
 ]
 
 { #category : #'host space - displaying' }
-TBlHostSpace >> minimized [
+BlHostSpace >> minimized [
 
-	^ self explicitRequirement
+	^ self subclassResponsibility
 ]
 
 { #category : #'host space - testing' }
-TBlHostSpace >> needsRebuild [
+BlHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit Pharo."
 	
-	^ self explicitRequirement
+	^ self subclassResponsibility
+]
+
+{ #category : #'host space - displaying' }
+BlHostSpace >> open [
+
+	self show
 ]
 
 { #category : #'host space - geometry' }
-TBlHostSpace >> physicalSize [
+BlHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be (Instance of `BlPhysicalDisplaySize`).
 	This size may differ from the logical size on high DPI (Retina) screens.
 	For example, physical size is x2 larger than logical size."
 
-	^ self explicitRequirement
+	^ self subclassResponsibility
 ]
 
 { #category : #'host space - rendering' }
-TBlHostSpace >> render: aSpace [
+BlHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
 
 	self renderer render: self
 ]
 
 { #category : #'host space - accessing' }
-TBlHostSpace >> renderer [
+BlHostSpace >> renderer [
 	"Return the host renderer used to render the elements of my spaces."
 
 	^ renderer
 ]
 
 { #category : #'host space - accessing' }
-TBlHostSpace >> renderer: aBlHostRenderer [
+BlHostSpace >> renderer: aBlHostRenderer [
 
 	renderer := aBlHostRenderer
 ]
 
 { #category : #'host space - rendering' }
-TBlHostSpace >> requestRedraw [
+BlHostSpace >> requestRedraw [
 	"Space needs to redraw the window"
 ]
 
 { #category : #'host space - geometry' }
-TBlHostSpace >> scaleFactor [
+BlHostSpace >> scaleFactor [
 	"Return a scaling dpi factor from logical to physical coordinates.
 	On high DPI displays, scaling factor is > 1."
 
@@ -214,51 +222,51 @@ TBlHostSpace >> scaleFactor [
 ]
 
 { #category : #'host space - displaying' }
-TBlHostSpace >> show [
+BlHostSpace >> show [
 
-	self explicitRequirement
+	self subclassResponsibility
 ]
 
 { #category : #'host space - accessing' }
-TBlHostSpace >> space [
+BlHostSpace >> space [
 	"Return a space I am assigned to."
 
 	^ space
 ]
 
 { #category : #'host space - accessing' }
-TBlHostSpace >> space: aSpace [
+BlHostSpace >> space: aSpace [
 	"Assign me to a given space."
 
 	space := aSpace
 ]
 
 { #category : #'host space - displaying' }
-TBlHostSpace >> toBack [
+BlHostSpace >> toBack [
 
-	self explicitRequirement
+	self subclassResponsibility
 ]
 
 { #category : #'host space - displaying' }
-TBlHostSpace >> toFront [
+BlHostSpace >> toFront [
 
-	self explicitRequirement
+	self subclassResponsibility
 ]
 
 { #category : #'host space - accessing' }
-TBlHostSpace >> universe [
+BlHostSpace >> universe [
 
 	^ universe
 ]
 
 { #category : #'host space - accessing' }
-TBlHostSpace >> universe: aBlParallelUniverse [
+BlHostSpace >> universe: aBlParallelUniverse [
 
 	universe := aBlParallelUniverse
 ]
 
 { #category : #'host space - geometry' }
-TBlHostSpace >> windowExtent: anExtent [
+BlHostSpace >> windowExtent: anExtent [
 
-	self explicitRequirement
+	self subclassResponsibility
 ]

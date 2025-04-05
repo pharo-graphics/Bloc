@@ -53,6 +53,31 @@ BlMorphicSteppingHost class >> uiProcessDo: aBlock [
 	UIManager default uiProcess ifNotNil: [ aBlock value ]
 ]
 
+{ #category : #'host - api' }
+BlMorphicSteppingHost >> createHostSpaceFor: aSpace [
+	"Create and assign a new morphic host space for given bloc space"
+
+	aSpace hostSpace: (self newHostSpaceFor: aSpace)
+]
+
+{ #category : #'host - api' }
+BlMorphicSteppingHost >> destroyHostSpaceFor: aSpace [
+
+	aSpace hostSpace
+		close;
+		detachSpace;
+		detachHost;
+		detachUniverse.
+
+	aSpace detachHostSpace
+]
+
+{ #category : #'instance creation' }
+BlMorphicSteppingHost >> newHostSpaceFor: aSpace [
+
+	^ self subclassResponsibility
+]
+
 { #category : #'host - testing' }
 BlMorphicSteppingHost >> runOneCycle [
 

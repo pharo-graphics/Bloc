@@ -86,16 +86,15 @@ BARenderer >> renderWith: aBlock pixels: address stride: stride physicalRectangl
 	aCairoSurface
 		deviceOffset: physicalRectangle origin negated;
 		deviceScaleX: scaleFactor y: scaleFactor.
-
-	self flag: #todo. "Extract to settings"
-	"On High DPI displays, high quality is not visible enough, and often 
-	much larger surface areas are painted."
-	aCairoSurface scaleFactor > 1.0
-		ifTrue: [ aeCanvas setLowQualityOptions ].
 		
 	aeCanvas prepareForSurface: aCairoSurface.
 	aeCanvas clippingRectangle: logicalRectangle.
 
+	self flag: #todo. "Extract to settings"
+	"On High DPI displays, high quality is not visible enough, and often 
+	much larger surface areas are painted."
+	scaleFactor > 1.0 ifTrue: [ aeCanvas setLowQualityOptions ].
+		
 	aBlock value: aeCanvas.
 
 	aCairoSurface flush.

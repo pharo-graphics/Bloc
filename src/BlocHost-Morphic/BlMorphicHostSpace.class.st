@@ -5,9 +5,7 @@ For more information and example, please refer to BlMorphicHost.
 "
 Class {
 	#name : #BlMorphicHostSpace,
-	#superclass : #Object,
-	#traits : 'TBlHostSpace + TBlSpaceProperties',
-	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
+	#superclass : #BlAbstractMorphicHostSpace,
 	#instVars : [
 		'spaceHostMorph'
 	],
@@ -97,14 +95,6 @@ BlMorphicHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
 
 	^ false
-]
-
-{ #category : #initialization }
-BlMorphicHostSpace >> newSurfaceRenderer [
-
-	^ BlMorphicFormSurfaceRenderer new
-		spaceHostMorph: spaceHostMorph;
-		yourself
 ]
 
 { #category : #'host space - geometry' }

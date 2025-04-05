@@ -4,9 +4,9 @@ I am a Bloc host space to control Morphic window.
 "
 Class {
 	#name : #BlMorphicWindowHostSpace,
-	#superclass : #Object,
-	#traits : 'TBlHostSpace + TBlSpaceProperties',
-	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
+	#superclass : #BlAbstractMorphicHostSpace,
+	#traits : 'TBlSpaceProperties',
+	#classTraits : 'TBlSpaceProperties classTrait',
 	#instVars : [
 		'morphicWindow',
 		'isFullSize',
@@ -184,14 +184,6 @@ BlMorphicWindowHostSpace >> needsRebuild [
 	^ false
 ]
 
-{ #category : #initialization }
-BlMorphicWindowHostSpace >> newSurfaceRenderer [
-
-	^ BlMorphicFormSurfaceRenderer new
-		spaceHostMorph: morphicWindow spaceHostMorph;
-		yourself
-]
-
 { #category : #'host space - geometry' }
 BlMorphicWindowHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
@@ -236,6 +228,12 @@ BlMorphicWindowHostSpace >> show [
 	anExtent := morphicWindow extent.
 	morphicWindow openInWorld.
 	morphicWindow extent: anExtent
+]
+
+{ #category : #'private - accessing' }
+BlMorphicWindowHostSpace >> spaceHostMorph [
+
+	^ morphicWindow spaceHostMorph
 ]
 
 { #category : #'text input' }

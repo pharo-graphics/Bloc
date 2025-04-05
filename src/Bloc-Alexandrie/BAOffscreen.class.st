@@ -16,6 +16,12 @@ Class {
 	#category : #'Bloc-Alexandrie-Utility'
 }
 
+{ #category : #'class initialization' }
+BAOffscreen class >> initialize [
+
+	SessionManager default registerUserClassNamed: self name
+]
+
 { #category : #accessing }
 BAOffscreen class >> instance [
 
@@ -27,6 +33,14 @@ BAOffscreen class >> resetInstance [
 	<script>
 
 	instance := nil
+]
+
+{ #category : #'system startup' }
+BAOffscreen class >> startUp: isImageStarting [
+
+	isImageStarting ifFalse: [ ^ self ].
+	
+	self resetInstance
 ]
 
 { #category : #api }
