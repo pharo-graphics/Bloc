@@ -127,13 +127,20 @@ BlElement >> aeDrawInSameLayerOn: aCanvas [
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawOn: aeCanvas [
 
+	| logicalBounds |
+	logicalBounds := self invalidationBoundsInSpace.
+	(logicalBounds intersects: aeCanvas clippingRectangle) ifFalse: [ ^self ].
+	lastDrawBoundsInSpace := logicalBounds.
+	
 	aeCanvas
 		restoreContextAfterPaintAlpha: self opacity
 		with: [ "My position is applied before my transformation matrix,
 			which may have an additional translation."
 			aeCanvas pathTranslate: self position.
 			self transformation aeApplyTo: aeCanvas.
-			self aeDrawIgnoringOpacityAndTransformationOn: aeCanvas ]
+			self aeDrawIgnoringOpacityAndTransformationOn: aeCanvas ].
+
+
 ]
 
 { #category : #'*Bloc-Alexandrie' }

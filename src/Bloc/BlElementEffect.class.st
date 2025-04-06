@@ -23,8 +23,9 @@ BlElementEffect >> computeBounds: aBlBounds [
 ]
 
 { #category : #geometry }
-BlElementEffect >> effectBounds: aBlBounds of: anElement [
-	^ self computeBounds: (aBlBounds rectangle: anElement visualBounds)
+BlElementEffect >> computeEffectBoundsInto: aBlBounds [
+
+	^ self computeBounds: aBlBounds
 ]
 
 { #category : #testing }

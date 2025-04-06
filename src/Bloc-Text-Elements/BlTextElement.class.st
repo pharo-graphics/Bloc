@@ -290,6 +290,12 @@ BlTextElement >> isTabulation [
 	^ text isNotEmpty and: [ text first = Character tab ]
 ]
 
+{ #category : #testing }
+BlTextElement >> isTextElement [
+
+	^ true
+]
+
 { #category : #'api - text' }
 BlTextElement >> labelMeasurement [
 

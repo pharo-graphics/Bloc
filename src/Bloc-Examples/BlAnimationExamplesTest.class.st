@@ -403,14 +403,14 @@ BlAnimationExamplesTest >> testInfiniteAnimation [
 	aBaseAnimation time: self newExampleBlTime.
 	aBaseAnimation beInfinite.
 
-	self assert: aBaseAnimation loops equals: Float infinity.
+	self assert: aBaseAnimation isInfinite.
+	self assert: aBaseAnimation loops equals: nil.
 	self assert: aBaseAnimation loopCount equals: 0.
 	self assert: aBaseAnimation progress equals: 0.
 	self assert: aBaseAnimation delay equals: 0 seconds.
 	self assert: aBaseAnimation duration equals: 1 seconds.
 	self assert: aBaseAnimation isStarted not.
 	self assert: aBaseAnimation isRunning not.
-	self assert: aBaseAnimation isInfinite.
 
 	^ aBaseAnimation
 ]
@@ -575,7 +575,7 @@ BlAnimationExamplesTest >> test_1_massive_infiniteAnimation_start [
 	self assert: aBaseAnimation startTime equals: self exampleDate.
 	self assert: aBaseAnimation delayedStartTime equals: self exampleDate.
 
-	self assert: aBaseAnimation loops equals: Float infinity.
+	self assert: aBaseAnimation loops equals: nil.
 	self assert: aBaseAnimation delay equals: 0 seconds.
 	self assert: aBaseAnimation duration equals: self exampleDuration.
 
@@ -670,7 +670,6 @@ BlAnimationExamplesTest >> test_2_1_massive_infiniteAnimation_step_oneDuration [
 
 	self assert: aBaseAnimation isStarted.
 	self assert: aBaseAnimation isRunning.
-	self assert: aBaseAnimation isInfinite.
 
 	self
 		assert: aBaseAnimation startTime
@@ -679,7 +678,8 @@ BlAnimationExamplesTest >> test_2_1_massive_infiniteAnimation_step_oneDuration [
 		assert: aBaseAnimation delayedStartTime
 		equals: self exampleDate.
 
-	self assert: aBaseAnimation loops equals: Float infinity.
+	self assert: aBaseAnimation isInfinite.
+	self assert: aBaseAnimation loops equals: nil.
 	self assert: aBaseAnimation delay equals: 0 seconds.
 	self assert: aBaseAnimation duration equals: self exampleDuration.
 
@@ -810,7 +810,6 @@ BlAnimationExamplesTest >> test_2_2_massive_infiniteAnimation_step_twiceDuration
 
 	self assert: aBaseAnimation isStarted.
 	self assert: aBaseAnimation isRunning.
-	self assert: aBaseAnimation isInfinite.
 
 	self
 		assert: aBaseAnimation startTime
@@ -819,7 +818,8 @@ BlAnimationExamplesTest >> test_2_2_massive_infiniteAnimation_step_twiceDuration
 		assert: aBaseAnimation delayedStartTime
 		equals: self exampleDate + self exampleDuration.
 
-	self assert: aBaseAnimation loops equals: Float infinity.
+	self assert: aBaseAnimation isInfinite.
+	self assert: aBaseAnimation loops equals: nil.
 	self assert: aBaseAnimation delay equals: 0 seconds.
 	self assert: aBaseAnimation duration equals: self exampleDuration.
 
@@ -924,7 +924,6 @@ BlAnimationExamplesTest >> test_2_3_massive_infiniteAnimation_step_tripleDuratio
 
 	self assert: aBaseAnimation isStarted.
 	self assert: aBaseAnimation isRunning.
-	self assert: aBaseAnimation isInfinite.
 
 	self
 		assert: aBaseAnimation startTime
@@ -933,7 +932,8 @@ BlAnimationExamplesTest >> test_2_3_massive_infiniteAnimation_step_tripleDuratio
 		assert: aBaseAnimation delayedStartTime
 		equals: self exampleDate + (self exampleDuration * 2).
 
-	self assert: aBaseAnimation loops equals: Float infinity.
+	self assert: aBaseAnimation isInfinite.
+	self assert: aBaseAnimation loops equals: nil.
 	self assert: aBaseAnimation delay equals: 0 seconds.
 	self assert: aBaseAnimation duration equals: self exampleDuration.
 
@@ -955,7 +955,6 @@ BlAnimationExamplesTest >> test_2_3_massive_infiniteAnimation_step_tripleDuratio
 
 	self assert: aBaseAnimation isStarted.
 	self assert: aBaseAnimation isRunning.
-	self assert: aBaseAnimation isInfinite.
 
 	self
 		assert: aBaseAnimation startTime
@@ -964,7 +963,8 @@ BlAnimationExamplesTest >> test_2_3_massive_infiniteAnimation_step_tripleDuratio
 		assert: aBaseAnimation delayedStartTime
 		equals: self exampleDate + (self exampleDuration * 3).
 
-	self assert: aBaseAnimation loops equals: Float infinity.
+	self assert: aBaseAnimation isInfinite.
+	self assert: aBaseAnimation loops equals: nil.
 	self assert: aBaseAnimation delay equals: 0 seconds.
 	self assert: aBaseAnimation duration equals: self exampleDuration.
 

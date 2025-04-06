@@ -4,9 +4,9 @@ I am a Bloc host space to control Morphic window.
 "
 Class {
 	#name : #BlMorphicWindowHostSpace,
-	#superclass : #Object,
-	#traits : 'TBlHostSpace + TBlSpaceProperties',
-	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
+	#superclass : #BlAbstractMorphicHostSpace,
+	#traits : 'TBlSpaceProperties',
+	#classTraits : 'TBlSpaceProperties classTrait',
 	#instVars : [
 		'morphicWindow',
 		'isFullSize',
@@ -33,14 +33,6 @@ BlMorphicWindowHostSpace >> center [
 BlMorphicWindowHostSpace >> close [
 
 	morphicWindow close
-]
-
-{ #category : #initialization }
-BlMorphicWindowHostSpace >> createFormSurfaceRenderer [
-
-	^ BlMorphicFormSurfaceRenderer new
-		spaceHostMorph: morphicWindow spaceHostMorph;
-		yourself
 ]
 
 { #category : #'host space - cursor' }
@@ -185,19 +177,6 @@ BlMorphicWindowHostSpace >> morphicWindow: aWindow [
 	morphicWindow hostSpace: self
 ]
 
-{ #category : #'host space - testing' }
-BlMorphicWindowHostSpace >> needsRebuild [
-	"Return true if window should be recreated after user saved and quit pharo"
-
-	^ false
-]
-
-{ #category : #initialization }
-BlMorphicWindowHostSpace >> newBlHostRendererSurface [
-
-	^ BlHostRendererFormSurface newForHostSpace: self
-]
-
 { #category : #'host space - geometry' }
 BlMorphicWindowHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
@@ -242,6 +221,12 @@ BlMorphicWindowHostSpace >> show [
 	anExtent := morphicWindow extent.
 	morphicWindow openInWorld.
 	morphicWindow extent: anExtent
+]
+
+{ #category : #'private - accessing' }
+BlMorphicWindowHostSpace >> spaceHostMorph [
+
+	^ morphicWindow spaceHostMorph
 ]
 
 { #category : #'text input' }

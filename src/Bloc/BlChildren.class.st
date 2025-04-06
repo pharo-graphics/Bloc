@@ -133,6 +133,10 @@ BlChildren >> do: aBlock [
 	self subclassResponsibility
 ]
 
+{ #category : #caching }
+BlChildren >> elevationChanged [
+]
+
 { #category : #private }
 BlChildren >> errorNotFound: anObject [
 	"Raise a NotFound exception."
@@ -336,13 +340,6 @@ BlChildren >> sortedByElevation [
 	<return: #BlChildren>
 
 	^ BlChildrenSortedByElevation on: self
-]
-
-{ #category : #'children - subsets' }
-BlChildren >> sortedByElevationReversed [
-	<return: #BlChildren>
-
-	^ BlChildrenSortedByElevationReversed on: self
 ]
 
 { #category : #'children - subsets' }

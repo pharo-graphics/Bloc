@@ -16,12 +16,10 @@ Class {
 { #category : #drawing }
 BlMorphicSpaceHostMorph >> drawOn: aCanvas [
 
-	| spaceForm |
 	super drawOn: aCanvas.
 
-	spaceForm := form.
-	spaceForm isNull ifTrue: [ ^ self ].
-	hostSpace ifNil: [ ^ self ].
+	(form isNil or: [ form isNull or: [ hostSpace isNil ]])
+		ifTrue: [ ^ self ].
 
 	aCanvas clipBy: self fullBounds during: [ :aClippedCanvas |
 		SystemVersion current major >= 12
@@ -29,11 +27,11 @@ BlMorphicSpaceHostMorph >> drawOn: aCanvas [
 				| formSet |
 				formSet := (Smalltalk at: #FormSet)
 					extent: self extent
-					depth: spaceForm depth
-					forms: { spaceForm }.
+					depth: form depth
+					forms: { form }.
 				aClippedCanvas drawFormSet: formSet at: self position ]
 			ifFalse: [
-				aClippedCanvas drawImage: spaceForm at: self position ] ]
+				aClippedCanvas drawImage: form at: self position ] ]
 ]
 
 { #category : #accessing }
@@ -85,9 +83,6 @@ BlMorphicSpaceHostMorph >> initialize [
 		do: [ :anEvent |
 			hostSpace ifNotNil: [ anEvent sentTo: eventHandler ] ].
 		
-	form := BlExternalForm extent: 1@1 depth: 32.
-	form autoRelease.
-
 	color := Color transparent.
 
 	"we prefer to fill parent"
@@ -118,14 +113,11 @@ BlMorphicSpaceHostMorph >> keyUp: anEvent [
 BlMorphicSpaceHostMorph >> layoutChanged [
 
 	super layoutChanged.
-	
-	hostSpace ifNil: [ ^self ].
 
-	lastExtentAnnounced ifNil: [ 
-		lastExtentAnnounced := self extent.
-		^self ].
-	lastExtentAnnounced = self extent ifTrue: [ 
-		^self ].	
+	hostSpace ifNil: [ ^ self ].
+
+	lastExtentAnnounced ifNil: [ ^ lastExtentAnnounced := self extent ].
+	lastExtentAnnounced = self extent ifTrue: [ ^ self ].
 
 	BlMorphExtentChangedAnnouncement new
 		oldExtent: lastExtentAnnounced;

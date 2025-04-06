@@ -53,15 +53,15 @@ BlMorphicSteppingHost class >> uiProcessDo: aBlock [
 	UIManager default uiProcess ifNotNil: [ aBlock value ]
 ]
 
+{ #category : #'instance creation' }
+BlMorphicSteppingHost >> newHostSpaceFor: aSpace [
+
+	^ self subclassResponsibility
+]
+
 { #category : #'host - testing' }
 BlMorphicSteppingHost >> runOneCycle [
 
 	MorphicUIManager uiProcess == Processor activeProcess ifTrue: [
 		MorphicRenderLoop new doOneCycle ]
-]
-
-{ #category : #'host - testing' }
-BlMorphicSteppingHost >> supportsFormSurface [
-
-	^ true
 ]

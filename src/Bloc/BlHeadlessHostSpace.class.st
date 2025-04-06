@@ -4,11 +4,10 @@ I am a fallback host space that is chosen if there are no other available and su
 "
 Class {
 	#name : #BlHeadlessHostSpace,
-	#superclass : #Object,
-	#traits : 'TBlHostSpace + TBlSpaceProperties',
-	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
+	#superclass : #BlHostSpace,
+	#traits : 'TBlSpaceProperties',
+	#classTraits : 'TBlSpaceProperties classTrait',
 	#instVars : [
-		'eventFetcher',
 		'position',
 		'title'
 	],
@@ -23,12 +22,6 @@ BlHeadlessHostSpace >> borderless: aBoolean [
 { #category : #'host space - displaying' }
 BlHeadlessHostSpace >> close [
 	"do nothing"
-]
-
-{ #category : #initialization }
-BlHeadlessHostSpace >> createBufferSurfaceRenderer [
-	
-	^ BlHeadlessBufferSurfaceRenderer new
 ]
 
 { #category : #'host space - cursor' }
@@ -64,14 +57,6 @@ BlHeadlessHostSpace >> hide [
 { #category : #'window - properties' }
 BlHeadlessHostSpace >> icon: aForm [
 	"Change window's icon to the given one"
-]
-
-{ #category : #initialization }
-BlHeadlessHostSpace >> initialize [
-
-	super initialize.
-
-	eventFetcher := BlHostEventFetcher hostSpace: self
 ]
 
 { #category : #'window - properties' }
@@ -148,22 +133,10 @@ BlHeadlessHostSpace >> minimized [
 	^ false
 ]
 
-{ #category : #'host space - testing' }
-BlHeadlessHostSpace >> needsRebuild [
-	"Return true if window should be recreated after user saved and quit pharo"
-	
-	^ false
-]
-
 { #category : #initialization }
-BlHeadlessHostSpace >> newBlHostRendererSurface [
+BlHeadlessHostSpace >> newSurfaceRenderer [
 	
-	^ BlHostRendererBufferSurface newForHostSpace: self
-]
-
-{ #category : #'host space - displaying' }
-BlHeadlessHostSpace >> open [
-	"do nothing"
+	^ BlHeadlessBufferSurfaceRenderer new
 ]
 
 { #category : #'host space - geometry' }

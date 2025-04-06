@@ -7,10 +7,9 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'session',
-		'surface',
-		'surfaceRenderer',
-		'spaceRenderer',
-		'textMeasurer'
+		'textMeasurer',
+		'physicalSize',
+		'scaleFactor'
 	],
 	#classInstVars : [
 		'preferableClass'
@@ -82,14 +81,6 @@ BlHostRenderer class >> write: aBlElement asPngTo: aFileReference [
 	self subclassResponsibility
 ]
 
-{ #category : #rendering }
-BlHostRenderer >> finishedRender: aSpace [
-	"Perform neccessary actions after rendering is complete.
-	By default I clear dirty areas of a given space"
-
-	aSpace clearDirtyElements
-]
-
 { #category : #testing }
 BlHostRenderer >> hasResized: aHostSpace [
 	"Return true if host space resized since previous frame, otherwise false"
@@ -98,14 +89,14 @@ BlHostRenderer >> hasResized: aHostSpace [
 	self isValid ifFalse: [ ^ true ].
 	
 	"check if the size changed"
-	^ aHostSpace physicalSize ~= surface physicalSize
-		or: [ aHostSpace scaleFactor ~= surface scaleFactor ]
+	^ aHostSpace physicalSize ~= physicalSize
+		or: [ aHostSpace scaleFactor ~= scaleFactor ]
 ]
 
 { #category : #initialization }
 BlHostRenderer >> initializeForHostSpace: aBlHostSpace [
 	"Initialize this renderer for a given host space.
-	Please note, that it I be called multiple times"
+	Please note, that it I be executed multiple times"
 	
 	self subclassResponsibility
 ]
@@ -113,15 +104,8 @@ BlHostRenderer >> initializeForHostSpace: aBlHostSpace [
 { #category : #testing }
 BlHostRenderer >> isValid [
 
-	session == Smalltalk session
-		ifFalse: [ ^ false ].
+	session == Smalltalk session ifFalse: [ ^ false ].
 
-	(surface isNil
-		or: [ surfaceRenderer isNil
-			or: [ spaceRenderer isNil
-				or: [ textMeasurer isNil ] ] ])
-		ifTrue: [ ^ false ].
-	
 	^ true
 ]
 
@@ -137,45 +121,7 @@ BlHostRenderer >> render: aHostSpace [
 	Note: if there are no dirty areas nothing will happen, including window
 	or canvas update."
 
-	| aSpace isRenderNeeded |
-	self isValid ifFalse: [ ^ self ].
-
-	aSpace := aHostSpace space.
-	isRenderNeeded := aSpace hasDirtyElements.
-
-	(surface shouldUpdateEveryFrame or: [ isRenderNeeded ])
-		ifFalse: [ ^ self ].
-
-	[ | theDamagedRectangles |
-		aHostSpace makeCurrent.
-		
-		theDamagedRectangles := isRenderNeeded
-			ifTrue: [ spaceRenderer renderSpace: aSpace ]
-			ifFalse: [ #() ].
-
-		surface performUpdates.
-
-		surfaceRenderer renderSurface: surface damaged: theDamagedRectangles ]
-
-			ensure: [ self finishedRender: aSpace ]
-]
-
-{ #category : #accessing }
-BlHostRenderer >> spaceRenderer [
-
-	^ spaceRenderer
-]
-
-{ #category : #accessing }
-BlHostRenderer >> surface [
-
-	^ surface
-]
-
-{ #category : #accessing }
-BlHostRenderer >> surfaceRenderer [
-
-	^ surfaceRenderer
+	self subclassResponsibility
 ]
 
 { #category : #accessing }

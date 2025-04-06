@@ -20,12 +20,14 @@ Class {
 BlChildrenOrderedCollection >> add: aChild at: anIndex [
 	"Adds aChild at a given index moving existing children to the right"
 		
-	collection add: aChild beforeIndex: anIndex
+	collection add: aChild beforeIndex: anIndex.
+	self resetCache
 ]
 
 { #category : #'children - adding' }
 BlChildrenOrderedCollection >> addAll: aSequenceableCollection [
-	collection addAll: aSequenceableCollection
+	collection addAll: aSequenceableCollection.
+	self resetCache
 ]
 
 { #category : #'children - accessing' }
@@ -45,7 +47,8 @@ BlChildrenOrderedCollection >> do: aBlock [
 BlChildrenOrderedCollection >> initialize [
 	super initialize.
 	
-	collection := OrderedCollection new
+	collection := OrderedCollection new.
+	self resetCache
 ]
 
 { #category : #accessing }
@@ -55,12 +58,14 @@ BlChildrenOrderedCollection >> name [
 
 { #category : #removing }
 BlChildrenOrderedCollection >> removeAll: aCollectionOfBlElement [
-	collection removeAll: aCollectionOfBlElement
+	collection removeAll: aCollectionOfBlElement.
+	self resetCache
 ]
 
 { #category : #'children - removing' }
 BlChildrenOrderedCollection >> removeAt: anIndex [
-	collection removeAt: anIndex
+	collection removeAt: anIndex.
+	self resetCache
 ]
 
 { #category : #'children - accessing' }
