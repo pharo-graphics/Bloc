@@ -1410,6 +1410,17 @@ BlElement >> effect: aBlEffect [
 	self invalidate.
 ]
 
+{ #category : #'geometry bounds' }
+BlElement >> effectBounds [
+
+	| aBounds |
+	aBounds := BlBounds new.
+	self computeVisualBoundsInto: aBounds.
+	self computeEffectBoundsInto: aBounds.
+
+	^ aBounds "asRectangle"
+]
+
 { #category : #'private - accessing' }
 BlElement >> elementId [
 
