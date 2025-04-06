@@ -13,9 +13,7 @@ BlSpaceFrameDrawingValidationPhase >> name [
 BlSpaceFrameDrawingValidationPhase >> runOn: aSpace [
 
 	aSpace hasHostSpace ifFalse: [ ^ self ].
-
-	aSpace hostSpace needsRebuild ifTrue: [ ^ self ].
-
+	aSpace hostSpace isValid ifFalse: [ ^ self ].
 	aSpace hostSpace hasResized ifFalse: [ ^ self ].
 
 	aSpace invalidateAll.

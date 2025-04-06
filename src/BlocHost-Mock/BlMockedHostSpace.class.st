@@ -203,13 +203,6 @@ BlMockedHostSpace >> minimized [
 	^ minimized
 ]
 
-{ #category : #'host space - testing' }
-BlMockedHostSpace >> needsRebuild [
-	"Return true if window should be recreated after user saved and quit pharo"
-	
-	^ false
-]
-
 { #category : #'host space - displaying' }
 BlMockedHostSpace >> open [
 	opened := true.

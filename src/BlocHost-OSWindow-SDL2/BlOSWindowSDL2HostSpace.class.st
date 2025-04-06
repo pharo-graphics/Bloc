@@ -159,6 +159,7 @@ BlOSWindowSDL2HostSpace >> isTextInputActive [
 
 { #category : #testing }
 BlOSWindowSDL2HostSpace >> isValid [
+
 	^ window isNotNil and: [ window isValid ]
 ]
 
@@ -241,13 +242,6 @@ BlOSWindowSDL2HostSpace >> minimize [
 { #category : #'host space - displaying' }
 BlOSWindowSDL2HostSpace >> minimized [
 	^ window minimized
-]
-
-{ #category : #'host space - testing' }
-BlOSWindowSDL2HostSpace >> needsRebuild [
-	"Return true if window should be recreated after user saved and quit pharo"
-	
-	^ self isValid not
 ]
 
 { #category : #'host space - geometry' }

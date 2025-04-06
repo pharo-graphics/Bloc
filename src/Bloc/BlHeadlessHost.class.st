@@ -59,27 +59,12 @@ BlHeadlessHost class >> uiProcessDo: aBlock [
 ]
 
 { #category : #'host - api' }
-BlHeadlessHost >> createHostSpaceFor: aSpace [	
+BlHeadlessHost >> newHostSpaceFor: aSpace [
 
-	| aHostSpace |
-	aHostSpace := BlHeadlessHostSpace new
+	^ BlHeadlessHostSpace new
 		host: self;
 		universe: self universe;
 		space: aSpace;
 		renderer: self newHostRenderer;
-		yourself.
-
-	aSpace hostSpace: aHostSpace
-]
-
-{ #category : #'host - api' }
-BlHeadlessHost >> destroyHostSpaceFor: aSpace [
-
-	aSpace hostSpace
-		close;
-		detachSpace;
-		detachHost;
-		detachUniverse.
-
-	aSpace detachHostSpace
+		yourself
 ]

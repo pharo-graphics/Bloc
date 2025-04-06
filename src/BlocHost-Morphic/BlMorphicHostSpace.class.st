@@ -90,13 +90,6 @@ BlMorphicHostSpace >> logicalSize [
 	^ spaceHostMorph extent asLogicalSize
 ]
 
-{ #category : #'host space - testing' }
-BlMorphicHostSpace >> needsRebuild [
-	"Return true if window should be recreated after user saved and quit pharo"
-
-	^ false
-]
-
 { #category : #'host space - geometry' }
 BlMorphicHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.

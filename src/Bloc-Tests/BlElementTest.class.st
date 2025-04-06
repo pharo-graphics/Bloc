@@ -29,22 +29,9 @@ BlElementTest >> setUp [
 
 	super setUp.
 
-	space := BlSpace new.
 	host := BlMockedHost new.
-
-	space host: host.
-	host createHostSpaceFor: space
-]
-
-{ #category : #initialization }
-BlElementTest >> tearDown [
-
-	super tearDown.
-
-	host destroyHostSpaceFor: space.
-	space host: nil.
-	host := nil.
-	space := nil
+	space := BlSpace new.
+	space host: host
 ]
 
 { #category : #'children - accessing' }

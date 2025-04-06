@@ -1047,13 +1047,6 @@ BlSpace >> dequeueTask: aBlTask [
 	self requestNextPulse
 ]
 
-{ #category : #'host space - accessing' }
-BlSpace >> detachHostSpace [
-	"Detach my current host space if I have one"
-
-	hostSpace := nil
-]
-
 { #category : #'children dispatching' }
 BlSpace >> dispatchAddedToSceneGraph [
 	"Sent after any of my parents or I was added to scene graph.
@@ -1431,7 +1424,6 @@ BlSpace >> hasFocus: anElement [
 { #category : #'host space - accessing' }
 BlSpace >> hasHostSpace [
 	"Return true if I have a host space, false otherwise"
-	<return: #Boolean>
 
 	^ self hostSpace isNotNil
 ]
@@ -1542,12 +1534,11 @@ BlSpace >> hostSpaceDo: aBlock [
 
 { #category : #'host space - accessing' }
 BlSpace >> hostSpaceDo: aBlock ifAbsent: anAbsentBlock [
-	self hasHostSpace
-		ifFalse: [ ^ anAbsentBlock value ].
 
-	self hostSpace needsRebuild
-		ifTrue: [ ^ anAbsentBlock value ].
-		
+	self hasHostSpace ifFalse: [ ^ anAbsentBlock value ].
+
+	self hostSpace isValid ifFalse: [ ^ anAbsentBlock value ].
+
 	^ aBlock cull: self hostSpace
 ]
 
@@ -2043,6 +2034,12 @@ BlSpace >> setPosition: aPoint [
 	position := aPoint
 ]
 
+{ #category : #'host space - accessing' }
+BlSpace >> setUpHostSpace [
+
+	hostSpace := host newHostSpaceFor: self
+]
+
 { #category : #'shortcut management' }
 BlSpace >> shortcuts [
 	<return: #BlShortcutRegistry>
@@ -2105,6 +2102,16 @@ BlSpace >> taskQueue [
 	<return: #BlSpaceTaskQueue>
 	
 	^ tasks
+]
+
+{ #category : #'host space - accessing' }
+BlSpace >> tearDownHostSpace [
+	"Detach my current host space if I have one"
+
+	hostSpace ifNil: [ ^ self ].
+
+	hostSpace tearDown.
+	hostSpace := nil
 ]
 
 { #category : #accessing }

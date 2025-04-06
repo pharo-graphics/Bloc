@@ -19,14 +19,12 @@ BlSpaceFrameHostValidationPhase >> name [
 BlSpaceFrameHostValidationPhase >> runOn: aSpace [
 
 	aSpace hasHostSpace ifFalse: [ ^ self ].
+	aSpace hostSpace isValid ifTrue: [ ^ self ].
 
-	aSpace hostSpace needsRebuild ifFalse: [ ^ self ].
+	aSpace
+		invalidateAll;
+		tearDownHostSpace;
+		setUpHostSpace.
 
-	aSpace invalidateAll.
-
-	aSpace host
-		destroyHostSpaceFor: aSpace;
-		createHostSpaceFor: aSpace.
-
-	aSpace hostSpace show
+	aSpace hostSpace open
 ]

@@ -133,13 +133,6 @@ BlHeadlessHostSpace >> minimized [
 	^ false
 ]
 
-{ #category : #'host space - testing' }
-BlHeadlessHostSpace >> needsRebuild [
-	"Return true if window should be recreated after user saved and quit pharo"
-	
-	^ false
-]
-
 { #category : #initialization }
 BlHeadlessHostSpace >> newSurfaceRenderer [
 	

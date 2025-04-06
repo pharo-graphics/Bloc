@@ -65,39 +65,6 @@ BlOSWindowSDL2Host class >> uiProcessDo: aBlock [
 	PulseLoop loopProcess ifNotNil: aBlock
 ]
 
-{ #category : #'host - api' }
-BlOSWindowSDL2Host >> createHostSpaceFor: aSpace [
-	"Create and assign a new host space for given Bloc space"
-	"Note, that I use given space only to find out what window properties to use for created window.
-	I do not create any strong or weak references to provided space."
-
-	| aHostSpace|
-	aHostSpace :=
-		BlOSWindowSDL2HostSpace new
-			keyboardKeyTable: self keyboardKeyTable;
-			universe: self universe;
-			host: self;
-			space: aSpace;
-			initializeWithAttributes: (self newAttributesFor: aSpace);
-			renderer: self newHostRenderer;
-			yourself.
-
-	aSpace hostSpace: aHostSpace
-]
-
-{ #category : #'host - api' }
-BlOSWindowSDL2Host >> destroyHostSpaceFor: aSpace [
-	"Closes OSWindow window and unrefer it from the Bloc space"
-	
-	aSpace hostSpace
-		close;
-		detachSpace;
-		detachHost;
-		detachUniverse.
-
-	aSpace detachHostSpace
-]
-
 { #category : #initialization }
 BlOSWindowSDL2Host >> keyboardKeyTable [
 
@@ -128,4 +95,20 @@ BlOSWindowSDL2Host >> newAttributesFor: aSpace [
 			yourself).
 
 	^ theAttributes
+]
+
+{ #category : #'host - api' }
+BlOSWindowSDL2Host >> newHostSpaceFor: aSpace [
+	"Create and assign a new host space for given Bloc space"
+	"Note, that I use given space only to find out what window properties to use for created window.
+	I do not create any strong or weak references to provided space."
+
+	^ BlOSWindowSDL2HostSpace new
+		keyboardKeyTable: self keyboardKeyTable;
+		universe: self universe;
+		host: self;
+		space: aSpace;
+		initializeWithAttributes: (self newAttributesFor: aSpace);
+		renderer: self newHostRenderer;
+		yourself
 ]

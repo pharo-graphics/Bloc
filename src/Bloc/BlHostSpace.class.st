@@ -38,24 +38,6 @@ BlHostSpace >> densityDpi [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'host space - accessing' }
-BlHostSpace >> detachHost [
-
-	host := nil
-]
-
-{ #category : #'host space - accessing' }
-BlHostSpace >> detachSpace [
-
-	space := nil
-]
-
-{ #category : #'host space - accessing' }
-BlHostSpace >> detachUniverse [
-
-	universe := nil
-]
-
 { #category : #'host space - events' }
 BlHostSpace >> enqueueEvent: aBlEvent [
 	"I dispatch events directly to the universe or space as soon as they come"
@@ -109,6 +91,12 @@ BlHostSpace >> initializeRenderer [
 ]
 
 { #category : #'host space - testing' }
+BlHostSpace >> isValid [
+	
+	^ true
+]
+
+{ #category : #'host space - testing' }
 BlHostSpace >> isVisible [
 	"Return true if underlying window is shown, false otherwise.
 	Note: If window was shown and then minimized it is still considered to be visible.
@@ -147,13 +135,6 @@ BlHostSpace >> minimize [
 { #category : #'host space - displaying' }
 BlHostSpace >> minimized [
 
-	^ self subclassResponsibility
-]
-
-{ #category : #'host space - testing' }
-BlHostSpace >> needsRebuild [
-	"Return true if window should be recreated after user saved and quit Pharo."
-	
 	^ self subclassResponsibility
 ]
 
@@ -239,6 +220,15 @@ BlHostSpace >> space: aSpace [
 	"Assign me to a given space."
 
 	space := aSpace
+]
+
+{ #category : #'host space - displaying' }
+BlHostSpace >> tearDown [
+
+	self close.
+	space := nil.
+	host := nil.
+	universe := nil
 ]
 
 { #category : #'host space - displaying' }

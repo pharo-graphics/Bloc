@@ -177,13 +177,6 @@ BlMorphicWindowHostSpace >> morphicWindow: aWindow [
 	morphicWindow hostSpace: self
 ]
 
-{ #category : #'host space - testing' }
-BlMorphicWindowHostSpace >> needsRebuild [
-	"Return true if window should be recreated after user saved and quit pharo"
-
-	^ false
-]
-
 { #category : #'host space - geometry' }
 BlMorphicWindowHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.

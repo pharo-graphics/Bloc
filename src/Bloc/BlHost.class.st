@@ -124,20 +124,6 @@ BlHost class >> universe [
 	^ BlParallelUniverse forHost: self
 ]
 
-{ #category : #'host - api' }
-BlHost >> createHostSpaceFor: aSpace [
-
-	self subclassResponsibility
-]
-
-{ #category : #'host - api' }
-BlHost >> destroyHostSpaceFor: aSpace [
-	"Destroys host space window of a given space.
-	Note: in most cases under 'destroy host space' we mean 'close host window' and unregister it"
-	
-	self subclassResponsibility
-]
-
 { #category : #'api - lifecycle' }
 BlHost >> isRunning [
 	"Return true if host is initialized and running"
@@ -149,6 +135,13 @@ BlHost >> isRunning [
 BlHost >> newHostRenderer [
 
 	^ BlHostRenderer preferableClass new
+]
+
+{ #category : #'host - api' }
+BlHost >> newHostSpaceFor: aSpace [
+	"Answer a new host space"
+
+	^ self subclassResponsibility
 ]
 
 { #category : #'paragraph - measuring' }
