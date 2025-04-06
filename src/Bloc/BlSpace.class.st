@@ -1266,7 +1266,7 @@ BlSpace >> ensureWindowOpen [
 
 	hostSpace ifNotNil: [
 		hostSpace isValid ifFalse: [
-			host createHostSpaceFor: self.
+			self setUpHostSpace.
 			previousVisibleStatus ifTrue: [ hostSpace open ] ] ]
 ]
 
