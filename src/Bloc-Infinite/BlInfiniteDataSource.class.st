@@ -25,7 +25,7 @@ BlInfiniteDataSource class >> noId [
 { #category : #'instance creation' }
 BlInfiniteDataSource >> bindHolder: anElementHolder at: aPosition [
 
-	anElementHolder position: aPosition.
+	anElementHolder bindAtPosition: aPosition.
 	self hasStableIds
 		ifTrue: [ anElementHolder itemId: (self itemIdAt: aPosition) ].
 	anElementHolder flags
@@ -35,7 +35,6 @@ BlInfiniteDataSource >> bindHolder: anElementHolder at: aPosition [
 		addBound.
 
 	self onBindHolder: anElementHolder at: aPosition.
-	
 	anElementHolder itemElement constraints infinite insetsDirty: true
 ]
 

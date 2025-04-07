@@ -16,8 +16,7 @@ Class {
 BlElementEventDispatcher >> addEventHandler: aHandler [
 	"It is not very common to have event handlers so we initialize registry lazily"
 
-	handlers ifNil: [
-		handlers := self defaultHandlerRegistry ].
+	handlers ifNil: [ handlers := self newHandlerRegistry ].
 	handlers add: aHandler.
 
 	aHandler enableEventsIn: self.
@@ -72,11 +71,10 @@ BlElementEventDispatcher >> disableExtentChanged [
 
 { #category : #'api - general events' }
 BlElementEventDispatcher >> disableGeneralEventType: anEventClass [
-	activatedGeneralEvents
-		ifNil: [ ^ self ].
+
+	activatedGeneralEvents ifNil: [ ^ self ].
 	activatedGeneralEvents remove: anEventClass ifAbsent: [  ].
-	activatedGeneralEvents
-		ifEmpty: [ activatedGeneralEvents := nil ]
+	activatedGeneralEvents ifEmpty: [ activatedGeneralEvents := nil ]
 ]
 
 { #category : #'api - element events' }
@@ -213,15 +211,15 @@ BlElementEventDispatcher >> dispatchScrolled: aDelta [
 
 { #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchSelectionAcquired: theBounds [
-	<return: #Boolean>
 
 	^ activatedElementEvents hasSelectionAcquired
+		ifFalse: [ false ]
 		ifTrue: [
 			| anEvent |
 			anEvent := (BlElementSelectionAcquiredEvent from: self) bounds: theBounds.
 			self dispatchEvent: anEvent.
 			anEvent isConsumed ]
-		ifFalse: [ false ]
+
 ]
 
 { #category : #'api - event managing' }
@@ -279,8 +277,9 @@ BlElementEventDispatcher >> enableExtentChanged [
 
 { #category : #'api - general events' }
 BlElementEventDispatcher >> enableGeneralEventType: anEventClass [
-	activatedGeneralEvents
-		ifNil: [ activatedGeneralEvents := self newActivatedGeneralEvents ].
+
+	activatedGeneralEvents ifNil: [
+		activatedGeneralEvents := self newActivatedGeneralEvents ].
 	activatedGeneralEvents add: anEventClass
 ]
 
@@ -346,6 +345,7 @@ BlElementEventDispatcher >> enableTransformationInSpaceChanged [
 
 { #category : #initialization }
 BlElementEventDispatcher >> initialize [
+
 	super initialize.
 
 	activatedElementEvents := BlElementEventDispatcherActivatedEvents new.

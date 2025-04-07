@@ -42,8 +42,3 @@ BlElementSelectionAcquiredEvent >> bounds [
 BlElementSelectionAcquiredEvent >> bounds: aBlBounds [
 	bounds := aBlBounds
 ]
-
-{ #category : #sending }
-BlElementSelectionAcquiredEvent >> sendTo: anObject [
-	anObject elementSelectionAcquiredEvent: self
-]

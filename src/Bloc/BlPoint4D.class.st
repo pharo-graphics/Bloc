@@ -1,3 +1,6 @@
+"
+I am a 4D point, with x, y, z and w coordinates.
+"
 Class {
 	#name : #BlPoint4D,
 	#superclass : #BlPoint,
@@ -20,15 +23,15 @@ BlPoint4D class >> x: aX y: aY z: aZ w: aW [
 
 { #category : #converting }
 BlPoint4D >> asPoint2D [
-	<return: #BlPoint2D>
 
 	^ BlPoint2D x: (self x asFloat / self w) y: (self y asFloat / self w)
 ]
 
 { #category : #initialization }
 BlPoint4D >> initialize [
+
 	super initialize.
-	
+
 	x := 0.0.
 	y := 0.0.
 	z := 0.0.
@@ -37,18 +40,19 @@ BlPoint4D >> initialize [
 
 { #category : #'matrix - transforming points' }
 BlPoint4D >> transformedOn: aBlMatrix [
-	<return: #BlPoint>
 	
 	^ aBlMatrix transformPoint4D: self
 ]
 
 { #category : #accessing }
 BlPoint4D >> w [
+
 	^ w
 ]
 
 { #category : #accessing }
 BlPoint4D >> x [
+
 	^ x
 ]
 
@@ -63,10 +67,12 @@ BlPoint4D >> x: aX y: aY z: aZ w: aW [
 
 { #category : #accessing }
 BlPoint4D >> y [
+
 	^ y
 ]
 
 { #category : #accessing }
 BlPoint4D >> z [
+
 	^ z
 ]

@@ -7,6 +7,14 @@ Class {
 	#category : #'Bloc-Basic-Transformations'
 }
 
+{ #category : #comparing }
+BlShearTransformation >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	^ self coefficient = anObject coefficient
+]
+
 { #category : #accessing }
 BlShearTransformation >> angleX: anAngleInDegrees [
 

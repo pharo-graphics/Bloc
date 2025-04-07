@@ -1,6 +1,6 @@
 Class {
 	#name : #BlSpaceEventsProcessedEvent,
-	#superclass : #BlSpaceStepEvent,
+	#superclass : #BlSpacePhaseEvent,
 	#category : #'Bloc-Events-Type-Space'
 }
 

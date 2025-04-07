@@ -71,7 +71,6 @@ BlInfiniteLayoutOrientation >> end [
 { #category : #geometry }
 BlInfiniteLayoutOrientation >> endWithPadding [
 	"Return the end position of the layout after the end padding is removed"
-	<return: #Number>
 	
 	^ self subclassResponsibility
 ]
@@ -185,7 +184,6 @@ BlInfiniteLayoutOrientation >> startWithPadding [
 { #category : #geometry }
 BlInfiniteLayoutOrientation >> totalSpace [
 	"Returns the total space to layout"
-	<return: #Number>
 
 	^ self endWithPadding - self startWithPadding
 ]

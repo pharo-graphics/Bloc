@@ -18,10 +18,13 @@ BATextMeasurerTest >> testIndexAtBetweenAllCharactersInRealPointWithDot [
 	aParagraph text: self pointWithDotText.
 	aParagraph measureOn: self realMeasurer.
 
-	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
-		              | aPoint |
-		              aPoint := aParagraph positionAt: anIndex.
-		              aParagraph indexAtPosition: aPoint ].
+	theIndices :=
+		(0 to: aParagraph text size)
+			collect: [ :anIndex |
+				| aPoint |
+				aPoint := aParagraph positionAt: anIndex.
+				aParagraph indexAtPosition: aPoint floor ].
+
 	self assert: theIndices equals: (0 to: aParagraph text size) asArray
 ]
 

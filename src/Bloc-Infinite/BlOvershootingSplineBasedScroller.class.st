@@ -17,7 +17,6 @@ Class {
 		'splineDistance',
 		'isFinished',
 		'overshotDistance',
-		'physicalCoefficient',
 		'time',
 		'currentStep',
 		'friction',

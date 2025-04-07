@@ -50,7 +50,7 @@ BlFlowLayoutPriorityQueueNode >> queueIndex: anObject [
 	queueIndex := anObject
 ]
 
-{ #category : #accessing }
+{ #category : #evaluating }
 BlFlowLayoutPriorityQueueNode >> value [
 	^ value
 ]

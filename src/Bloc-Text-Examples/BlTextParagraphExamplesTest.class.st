@@ -4,7 +4,7 @@ I contain examples of a text paragraph
 "
 Class {
 	#name : #BlTextParagraphExamplesTest,
-	#superclass : #TestCase,
+	#superclass : #Object,
 	#category : #'Bloc-Text-Examples-Measurement'
 }
 
@@ -165,19 +165,19 @@ BlTextParagraphExamplesTest >> testIndexAtBetweenAllCharactersInObjectPrintOn [
 { #category : #'geometry - 100@100.' }
 BlTextParagraphExamplesTest >> testIndexAtBetweenAllCharactersInPointWithDot [
 
-	<sampleInstance>
 	| aParagraph theIndices |
 	aParagraph := self newParagraph.
 	aParagraph text: self pointWithDotText.
 	aParagraph measureOn: self testMeasurer.
 
-	theIndices := (0 to: aParagraph text size) collect: [ :anIndex |
-		              | aPoint |
-		              aPoint := aParagraph positionAt: anIndex.
-		              aParagraph indexAtPosition: aPoint ].
-	self assert: theIndices equals: (0 to: aParagraph text size) asArray.
+	theIndices :=
+		(0 to: aParagraph text size)
+			collect: [ :anIndex |
+				| aPoint |
+				aPoint := aParagraph positionAt: anIndex.
+				aParagraph indexAtPosition: aPoint ].
 
-	^ aParagraph
+	self assert: theIndices equals: (0 to: aParagraph text size) asArray
 ]
 
 { #category : #'geometry - tab tab' }

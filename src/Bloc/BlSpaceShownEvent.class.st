@@ -7,29 +7,13 @@ Example:
 space := BlSpace new.
 space
 	addEventHandlerOn: BlSpaceShownEvent
-	do: [ self inform: 'Space shown' ].
+	do: [ :anEvent | self inform: 'Space shown: ', anEvent space asString ].
 space show
 ```
-
-Note:
-Behaves as SDL_WINDOWEVENT_SHOWN
 
 "
 Class {
 	#name : #BlSpaceShownEvent,
 	#superclass : #BlSpaceEvent,
-	#instVars : [
-		'space'
-	],
 	#category : #'Bloc-Events-Type-Space'
 }
-
-{ #category : #accessing }
-BlSpaceShownEvent >> space [
-	^ space
-]
-
-{ #category : #accessing }
-BlSpaceShownEvent >> space: anObject [
-	space := anObject
-]

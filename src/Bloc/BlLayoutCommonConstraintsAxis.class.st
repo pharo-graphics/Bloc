@@ -35,6 +35,24 @@ BlLayoutCommonConstraintsAxis >> initialize [
 ]
 
 { #category : #resizing }
+BlLayoutCommonConstraintsAxis >> isExact [
+	
+	^ self resizer isExact 
+]
+
+{ #category : #resizing }
+BlLayoutCommonConstraintsAxis >> isFitContent [
+	
+	^ self resizer isFitContent 
+]
+
+{ #category : #resizing }
+BlLayoutCommonConstraintsAxis >> isMatchParent [
+	
+	^ self resizer isMatchParent 
+]
+
+{ #category : #resizing }
 BlLayoutCommonConstraintsAxis >> matchParent [
 	self resizer: BlLayoutResizer matchParent
 ]
@@ -60,9 +78,6 @@ BlLayoutCommonConstraintsAxis >> resizer [
 
 { #category : #accessing }
 BlLayoutCommonConstraintsAxis >> resizer: aBlLayoutResizer [
-	self
-		assert: [ aBlLayoutResizer isKindOf: BlLayoutResizer ]
-		description: [ 'Resizer must be a special resizer object' ].
 
 	resizer := aBlLayoutResizer
 ]

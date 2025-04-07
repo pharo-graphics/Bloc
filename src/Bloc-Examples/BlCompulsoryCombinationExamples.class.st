@@ -74,7 +74,6 @@ BlCompulsoryCombinationExamples >> testEmptyCombination [
 { #category : #'examples - store' }
 BlCompulsoryCombinationExamples >> testStoreCombinationWithA [
 
-	<sampleInstance>
 	| aCombination aStoreString aRestoredCombination |
 	aCombination := self testCombinationWithA.
 	aStoreString := aCombination storeString.
@@ -82,18 +81,15 @@ BlCompulsoryCombinationExamples >> testStoreCombinationWithA [
 	self
 		assert: aStoreString
 		equals:
-		'(BlCompulsoryCombination new with: (BlKeyboardKey new setName: #A; setValue: nil) asKeyCombination)'.
+		'(BlCompulsoryCombination basicNew instVarAt: 1 put: ((OrderedCollection new) add: (BlSingleKeyCombination basicNew instVarAt: 1 put: (KeyboardKey basicNew instVarAt: 1 put: 65; instVarAt: 2 put: #A; yourself); yourself); yourself); yourself)'.
 
-	aRestoredCombination := Object evaluate: aStoreString.
-	self assert: aRestoredCombination equals: aCombination.
-
-	^ aStoreString
+	aRestoredCombination := self class compiler evaluate: aStoreString.
+	self assert: aRestoredCombination equals: aCombination
 ]
 
 { #category : #'examples - store' }
 BlCompulsoryCombinationExamples >> testStoreCombinationWithAB [
 
-	<sampleInstance>
 	| aCombination aStoreString aRestoredCombination |
 	aCombination := self testCombinationWithAB.
 	aStoreString := aCombination storeString.
@@ -101,18 +97,15 @@ BlCompulsoryCombinationExamples >> testStoreCombinationWithAB [
 	self
 		assert: aStoreString
 		equals:
-		'(((BlKeyboardKey new setName: #A; setValue: nil) asKeyCombination) and: (BlKeyboardKey new setName: #B; setValue: nil) asKeyCombination)'.
+		'(BlCompulsoryCombination basicNew instVarAt: 1 put: ((OrderedCollection new) add: (BlSingleKeyCombination basicNew instVarAt: 1 put: (KeyboardKey basicNew instVarAt: 1 put: 65; instVarAt: 2 put: #A; yourself); yourself); add: (BlSingleKeyCombination basicNew instVarAt: 1 put: (KeyboardKey basicNew instVarAt: 1 put: 66; instVarAt: 2 put: #B; yourself); yourself); yourself); yourself)'.
 
-	aRestoredCombination := Object evaluate: aStoreString.
-	self assert: aRestoredCombination equals: aCombination.
-
-	^ aStoreString
+	aRestoredCombination := self class compiler evaluate: aStoreString.
+	self assert: aRestoredCombination equals: aCombination
 ]
 
 { #category : #'examples - store' }
 BlCompulsoryCombinationExamples >> testStoreCombinationWithABC [
 
-	<sampleInstance>
 	| aCombination aStoreString aRestoredCombination |
 	aCombination := self testCombinationWithABC.
 	aStoreString := aCombination storeString.
@@ -120,26 +113,24 @@ BlCompulsoryCombinationExamples >> testStoreCombinationWithABC [
 	self
 		assert: aStoreString
 		equals:
-		'((((BlKeyboardKey new setName: #A; setValue: nil) asKeyCombination) and: (BlKeyboardKey new setName: #B; setValue: nil) asKeyCombination) and: (BlKeyboardKey new setName: #C; setValue: nil) asKeyCombination)'.
+		'(BlCompulsoryCombination basicNew instVarAt: 1 put: ((OrderedCollection new) add: (BlSingleKeyCombination basicNew instVarAt: 1 put: (KeyboardKey basicNew instVarAt: 1 put: 65; instVarAt: 2 put: #A; yourself); yourself); add: (BlSingleKeyCombination basicNew instVarAt: 1 put: (KeyboardKey basicNew instVarAt: 1 put: 66; instVarAt: 2 put: #B; yourself); yourself); add: (BlSingleKeyCombination basicNew instVarAt: 1 put: (KeyboardKey basicNew instVarAt: 1 put: 67; instVarAt: 2 put: #C; yourself); yourself); yourself); yourself)'.
 
-	aRestoredCombination := Object evaluate: aStoreString.
-	self assert: aRestoredCombination equals: aCombination.
-
-	^ aStoreString
+	aRestoredCombination := self class compiler evaluate: aStoreString.
+	self assert: aRestoredCombination equals: aCombination
 ]
 
 { #category : #'examples - store' }
 BlCompulsoryCombinationExamples >> testStoreEmptyCombination [
 
-	<sampleInstance>
 	| aCombination aStoreString aRestoredCombination |
 	aCombination := self testEmptyCombination.
 	aStoreString := aCombination storeString.
 
-	self assert: aStoreString equals: '(BlCompulsoryCombination new)'.
+	self
+		assert: aStoreString
+		equals:
+		'(BlCompulsoryCombination basicNew instVarAt: 1 put: ((OrderedCollection new)); yourself)'.
 
-	aRestoredCombination := Object compiler evaluate: aStoreString.
-	self assert: aRestoredCombination equals: aCombination.
-
-	^ aStoreString
+	aRestoredCombination := self class compiler evaluate: aStoreString.
+	self assert: aRestoredCombination equals: aCombination
 ]

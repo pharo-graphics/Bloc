@@ -22,6 +22,21 @@ BlInfiniteMouseScrollListener class >> scrollingVelocity: anInteger [
 	ScrollingVelocity := anInteger
 ]
 
+{ #category : #settings }
+BlInfiniteMouseScrollListener class >> settingsOn: aBuilder [
+	<systemsettings>
+
+	(aBuilder range: #scrollingVelocity)
+		parent: Bloc groupSymbolForBloc;
+		target: self;
+		order: 5;
+		label: 'Scrolling velocity';
+		description:
+			'A positive integer used as a multiplier to increase mousewheel scrolling velocity ';
+		range: (1 to: 200 by: 1);
+		default: OSPlatform current defaultScrollingVelocity
+]
+
 { #category : #'mouse handlers' }
 BlInfiniteMouseScrollListener >> canScrollDown: anInfiniteElement [
 	"Return true if an infinite element can be scrolled down"

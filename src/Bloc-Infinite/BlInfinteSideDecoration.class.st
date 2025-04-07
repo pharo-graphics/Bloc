@@ -11,5 +11,6 @@ BlInfinteSideDecoration >> gap [
 
 { #category : #geometry }
 BlInfinteSideDecoration >> requiredWidth [
+
 	^ self subclassResponsibility 
 ]

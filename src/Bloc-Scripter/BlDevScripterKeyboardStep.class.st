@@ -15,6 +15,7 @@ BlDevScripterKeyboardStep >> key [
 ]
 
 { #category : #accessing }
-BlDevScripterKeyboardStep >> key: aBlKeyboardKey [
-	key := aBlKeyboardKey
+BlDevScripterKeyboardStep >> key: aKeyboardKey [
+
+	key := aKeyboardKey
 ]

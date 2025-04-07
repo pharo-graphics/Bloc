@@ -1,25 +1,35 @@
 Class {
 	#name : #BlMouseProcessorClickTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Event'
+	#instVars : [
+		'scripter'
+	],
+	#category : #'Bloc-Examples-Event-Scripter'
 }
 
 { #category : #running }
 BlMouseProcessorClickTest >> newScripterElement [
 
-	^ BlExampleEventsCountingElement new
+	^ BlEventCountingElement new
 		  size: 100 @ 75;
 		  position: 50 @ 50;
 		  yourself
 ]
 
+{ #category : #running }
+BlMouseProcessorClickTest >> setUp [
+
+	super setUp.
+
+	scripter := BlDevScripter new.
+	scripter element: self newScripterElement
+]
+
 { #category : #tests }
 BlMouseProcessorClickTest >> testClick [
 
-	| aScripter |
-	aScripter := self testMouseEnter.
-
-	aScripter substeps: 'Click' do: [ :aStep |
+	scripter substeps: 'Click' do: [ :aStep |
+		aStep mouseMove by: 70 @ 60. "enter"
 		aStep mouseDown.
 		aStep mouseUp.
 
@@ -38,38 +48,35 @@ BlMouseProcessorClickTest >> testClick [
 		aStep check
 			label: 'Check last click event has correct target';
 			satisfies: [ :aMouseProcessor |
-				aMouseProcessor lastClickEvent target = aScripter element ];
+				aMouseProcessor lastClickEvent target = scripter element ];
 			onMouseProcessor.
 
 		aStep check
 			label: 'Check element was clicked';
 			satisfies: [ :anElement | anElement clickCount = 1 ];
 			onSelf ].
-	aScripter syncContinue.
 
-	^ aScripter
+	scripter syncPlay
 ]
 
 { #category : #tests }
 BlMouseProcessorClickTest >> testMouseDown [
 
-	| aScripter |
-	aScripter := self testMouseEnter.
-
-	aScripter substeps: 'Click' do: [ :aStep |
+	scripter substeps: 'Click' do: [ :aStep |
+		aStep mouseMove by: 70 @ 60. "enter"
 		aStep mouseDown.
 
 		aStep check
 			label: 'Check previous mouse down event';
 			value: [ :aMouseProcessor |
 				aMouseProcessor lastMouseDownEvent target ]
-			equals: [ aScripter element ];
+			equals: [ scripter element ];
 			onMouseProcessor.
 
 		aStep check
 			label: 'Check last over target is the element';
 			value: [ :aMouseProcessor | aMouseProcessor lastOverTarget ]
-			equals: [ aScripter element ];
+			equals: [ scripter element ];
 			onMouseProcessor.
 
 		aStep check
@@ -77,29 +84,24 @@ BlMouseProcessorClickTest >> testMouseDown [
 			value: [ :aMouseProcessor | aMouseProcessor enteredTargets ]
 			equals: [
 				{
-					aScripter element.
-					aScripter root } ];
+					scripter element.
+					scripter root } ];
 			onMouseProcessor ].
 
-	^ aScripter syncContinue
+	scripter syncPlay
 ]
 
 { #category : #tests }
 BlMouseProcessorClickTest >> testMouseEnter [
 
-	| aScripter |
-	aScripter := BlDevScripter new.
-	aScripter element: self newScripterElement.
-
-	aScripter substeps: 'Mouse Enter' do: [ :aStep |
-		aStep mouseMove by: 30 @ 30.
-
-		aStep mouseMove by: 70 @ 60.
+	scripter substeps: 'Mouse Enter' do: [ :aStep |
+		aStep mouseMove by: 30 @ 30. "outside"
+		aStep mouseMove by: 70 @ 60. "inside"
 
 		aStep check
 			label: 'Check last over target is the element';
 			value: [ :aMouseProcessor | aMouseProcessor lastOverTarget ]
-			equals: [ aScripter element ];
+			equals: [ scripter element ];
 			onMouseProcessor.
 
 		aStep check
@@ -107,11 +109,9 @@ BlMouseProcessorClickTest >> testMouseEnter [
 			value: [ :aMouseProcessor | aMouseProcessor enteredTargets ]
 			equals: [
 				{
-					aScripter element.
-					aScripter root } ];
+					scripter element.
+					scripter root } ];
 			onMouseProcessor ].
 
-	aScripter syncContinue.
-
-	^ aScripter
+	scripter syncPlay
 ]

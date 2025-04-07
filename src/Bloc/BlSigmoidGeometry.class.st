@@ -43,12 +43,11 @@ BlSigmoidGeometry >> beVertical [
 { #category : #accessing }
 BlSigmoidGeometry >> bendingPoint: aFloatNumber [
 	"aFloatNumber must be within interval [0...1]"
+
 	| aNewBendingPoint |
-	
-	aNewBendingPoint := aFloatNumber min: 1 max: 0.
-	(bendingPoint closeTo: aNewBendingPoint)
-		ifTrue: [ ^ self ].
-		
+	aNewBendingPoint := aFloatNumber min: 1.0 max: 0.0.
+	(bendingPoint closeTo: aNewBendingPoint) ifTrue: [ ^ self ].
+
 	bendingPoint := aNewBendingPoint.
 	self updateControlPoints.
 	self releaseCache
@@ -174,12 +173,11 @@ BlSigmoidGeometry >> orientation: anOrientation [
 { #category : #accessing }
 BlSigmoidGeometry >> sharpness: aFloatNumber [
 	"aFloatNumber must be within interval [0...1]"
+
 	| aNewSharpness |
-	
-	aNewSharpness := aFloatNumber min: 1 max: 0.
-	(sharpness closeTo: aNewSharpness)
-		ifTrue: [ ^ self ].
-		
+	aNewSharpness := aFloatNumber min: 1.0 max: 0.0.
+	(sharpness closeTo: aNewSharpness) ifTrue: [ ^ self ].
+
 	sharpness := aNewSharpness.
 	self updateControlPoints.
 	self releaseCache

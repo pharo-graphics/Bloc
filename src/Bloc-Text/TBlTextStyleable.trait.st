@@ -30,6 +30,19 @@ TBlTextStyleable >> bold [
 	self attributesBuilder attribute: BlFontWeightAttribute bold
 ]
 
+{ #category : #'api - text style' }
+TBlTextStyleable >> border: aBlBorder [
+
+	self border: aBlBorder above: false
+]
+
+{ #category : #'api - text style' }
+TBlTextStyleable >> border: aBlBorder above: aBoolean [
+
+	self attributesBuilder attribute:
+		(BlTextBorderAttribute border: aBlBorder above: aBoolean)
+]
+
 { #category : #'api - text decoration' }
 TBlTextStyleable >> decorationDo: aBlock [
 	| anAttribute |
@@ -147,16 +160,6 @@ TBlTextStyleable >> underlineColor: aColor thickness: aNumber [
 { #category : #'api - text decoration' }
 TBlTextStyleable >> underlineDo: aBlock [
 	self decorationDo: [ :aBlTextDecorationAttribute | aBlock value: aBlTextDecorationAttribute underline ]
-]
-
-{ #category : #'api - text decoration' }
-TBlTextStyleable >> underlinePaint: aColor width: aNumber [
-	self
-		deprecated: 'Use underlineColor:thickness: instead'
-		transformWith: '`@receiver underlinePaint: `@statements1 width: `@statements2'
-				-> '`@receiver underlineColor: `@statements1 thickness: `@statements2'.
-				
-	self underlineColor: aColor thickness: aNumber
 ]
 
 { #category : #'api - text orientation' }

@@ -22,10 +22,11 @@ BlScrollSlideHandler >> initialize [
 
 { #category : #'mouse handlers' }
 BlScrollSlideHandler >> mouseWheelEvent: anEvent [
+
 	| aTargetElement |
-	anEvent consumed: true.
+	anEvent consume.
 	
-	aTargetElement := targetElement ifNil: anEvent currentTarget.
+	aTargetElement := targetElement ifNil: [ anEvent currentTarget ].
 
 	aTargetElement children accountedByLayout do: [ :aChild |
 		| aHorizontalScrollDelta aVerticalScrollDelta |

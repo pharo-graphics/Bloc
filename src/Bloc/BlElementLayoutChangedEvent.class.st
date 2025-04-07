@@ -32,8 +32,3 @@ BlElementLayoutChangedEvent class >> enableIn: anObject [
 BlElementLayoutChangedEvent class >> wantedIn: anObject [
 	^ anObject wantsLayoutChanged
 ]
-
-{ #category : #sending }
-BlElementLayoutChangedEvent >> sendTo: anObject [
-	anObject elementLayoutChangedEvent: self
-]

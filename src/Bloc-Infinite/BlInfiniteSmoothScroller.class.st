@@ -172,7 +172,6 @@ BlInfiniteSmoothScroller >> startOn: anInfiniteElement [
 	(targetPosition isNil or: [ targetPosition = NoPosition ])
 		ifTrue: [ self error: 'Invalid target position: ', targetPosition asString ].
 	
-	infiniteElement state targetScrollPosition: targetPosition.
 	isRunning := true.
 	pendingInitialRun := true.
 	targetElement := self childAtPosition: targetPosition.
@@ -187,7 +186,6 @@ BlInfiniteSmoothScroller >> stop [
 		ifFalse: [ ^ self ].
 	
 	self onStop.
-	infiniteElement state targetPosition: NoPosition.
 	targetElement := nil.
 	targetPosition :=  NoPosition.
 	pendingInitialRun := false.

@@ -19,24 +19,10 @@ space close
 Class {
 	#name : #BlSpaceClosedEvent,
 	#superclass : #BlSpaceEvent,
-	#instVars : [
-		'space'
-	],
 	#category : #'Bloc-Events-Type-Space'
 }
 
 { #category : #sending }
 BlSpaceClosedEvent >> sendTo: anObject [
 	anObject spaceClosedEvent: self
-]
-
-{ #category : #accessing }
-BlSpaceClosedEvent >> space [
-
-	^ space
-]
-
-{ #category : #accessing }
-BlSpaceClosedEvent >> space: aSpace [
-	space := aSpace
 ]

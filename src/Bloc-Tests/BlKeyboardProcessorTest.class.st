@@ -8,32 +8,32 @@ Class {
 	#category : #'Bloc-Tests-Universe'
 }
 
-{ #category : #initialization }
+{ #category : #running }
 BlKeyboardProcessorTest >> setUp [
 
 	super setUp.
 	
 	space := BlSpace new.
-	processor := BlKeyboardProcessor new.
-	processor space: space
+	processor := BlKeyboardProcessor space: space
 ]
 
 { #category : #running }
 BlKeyboardProcessorTest >> tearDown [
+
 	super tearDown.
-	
+
 	processor := nil.
 	space := nil
 ]
 
 { #category : #tests }
 BlKeyboardProcessorTest >> testProcessKeyDown [
-	| eventA |
 
+	| eventA |
 	eventA := BlKeyDownEvent new.
 	eventA key: KeyboardKey A.
 
 	processor processKeyDown: eventA.
-	self assert: processor keystrokesAllowed.
+	self assert: processor areKeystrokesAllowed.
 	self assert: (processor buffer hasEvent: KeyboardKey A)
 ]

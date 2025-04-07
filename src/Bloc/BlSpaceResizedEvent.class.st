@@ -23,6 +23,18 @@ BlSpaceResizedEvent >> isSpaceResizedEvent [
 	^ true
 ]
 
+{ #category : #printing }
+BlSpaceResizedEvent >> printOn: aStream [
+
+	aStream
+		nextPutAll: self class name;
+		nextPutAll: '(timestamp: ';
+		print: self timestamp;
+		nextPutAll: ' extent: ';
+		print: extent;
+		nextPut: $)
+]
+
 { #category : #sending }
 BlSpaceResizedEvent >> sendTo: anObject [
 	anObject spaceResizedEvent: self

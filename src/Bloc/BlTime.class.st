@@ -34,6 +34,12 @@ BlTime >> currentTime [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'private - time' }
+BlTime >> currentUTCMicroseconds [
+
+	^ self currentTime utcMicroSeconds 
+]
+
 { #category : #'api - enumeration' }
 BlTime >> every: aDuration during: aLoopDuration do: aDoBlock [
 	| aStartTime |
@@ -84,6 +90,14 @@ BlTime >> now [
 	^ frozen
 		ifTrue: [ frozenTime ]
 		ifFalse: [ self currentTime ]
+]
+
+{ #category : #'api - time' }
+BlTime >> nowInUTCMicroseconds [
+
+	^ frozen
+		ifTrue: [ frozenTime utcMicroSeconds ]
+		ifFalse: [ self currentUTCMicroseconds ]
 ]
 
 { #category : #printing }

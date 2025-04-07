@@ -130,7 +130,7 @@ BlGridLayoutAxis >> arcs [
 
 { #category : #'computing links' }
 BlGridLayoutAxis >> backwardLinks [
-	<return: #BlGridPackedMap key: #Interval value: #BlGridMutableInteger>
+	"Return a BlGridPackedMap whose key is an interval and value is aBlGridMutableInteger"
 	
 	backwardLinks
 		ifNil: [ backwardLinks := self createLinks: false ].
@@ -265,8 +265,8 @@ BlGridLayoutAxis >> count: aNumber [
 
 { #category : #'computing arcs' }
 BlGridLayoutAxis >> createArcs [
+
 	| mins maxs n sMins sMaxs |
-	
 	mins := OrderedCollection new.
 	maxs := OrderedCollection new.
 	
@@ -279,10 +279,10 @@ BlGridLayoutAxis >> createArcs [
 	self isOrderPreserved
 		ifTrue: [
 			"Add a constraint for every row/col"
-			0 to: (self count - 1) do: [ :i |
+			1 to: self count do: [ :i |
 				self
 					includeIn: mins
-					span: (BlGridLayoutInterval min: i max: i + 1)
+					span: (BlGridLayoutInterval min: i - 1 max: i)
 					size: (BlGridMutableInteger value: 0) ] ].
 	
 	"Add the container constraints. Use the version of include that allows duplicate entries in case a child spans the entire grid."
@@ -299,7 +299,8 @@ BlGridLayoutAxis >> createArcs [
 
 { #category : #'computing group bounds' }
 BlGridLayoutAxis >> createGroupBounds [     
-	<return: #BlGridPackedMap key: #BlGridLayoutSpec value: #BlGridLayoutBounds>      
+	"Return a BlGridPackedMap whose key is an BlGridLayoutSpec and value is BlGridLayoutBounds"
+  
 	|assocs|
 	
 	assocs := OrderedCollection new.
@@ -313,7 +314,8 @@ BlGridLayoutAxis >> createGroupBounds [
 
 { #category : #'computing links' }
 BlGridLayoutAxis >> createLinks: isMin [
-	<return: #BlGridPackedMap key: #Interval value: #BlGridMutableInteger>
+	"Return a BlGridPackedMap whose key is an interval and value is aBlGridMutableInteger"
+	
 	| theLinks |
 
 	theLinks := OrderedCollection new.
@@ -359,7 +361,7 @@ BlGridLayoutAxis >> element: anElement [
 
 { #category : #'computing links' }
 BlGridLayoutAxis >> forwardLinks [
-	<return: #BlGridPackedMap key: #Interval value: #BlGridMutableInteger>
+	"Return a BlGridPackedMap whose key is an interval and value is aBlGridMutableInteger"
 	
 	forwardLinks
 		ifNil: [ forwardLinks := self createLinks: true ].
@@ -376,7 +378,8 @@ BlGridLayoutAxis >> groupArcsByFirstVertex: theArcs [
 	"Group arcs by their first vertex, returning an array of arrays of Arcs.
 	This is linear in the number of arcs.
 	theArcs is collection of BlGridLayoutArc."
-	<return: #Array of: #Array of: #BlGridLayoutArc>	
+	"return an Array of Array of BlGridLayoutArc"
+		
 	| n groups sizes |
 
 	n := self count + 1.
@@ -402,7 +405,7 @@ BlGridLayoutAxis >> groupArcsByFirstVertex: theArcs [
 
 { #category : #'computing group bounds' }
 BlGridLayoutAxis >> groupBounds [
-	<return: #BlGridPackedMap key: #BlGridLayoutSpec value: #BlGridLayoutBounds>  
+	"Return a BlGridPackedMap whose key is a BlGridLayoutSpec and value is aBlGridLayoutBounds"
 	
 	groupBounds
 		ifNil: [ groupBounds := self createGroupBounds ].
@@ -600,21 +603,22 @@ BlGridLayoutAxis >> maxIndex [
 
 { #category : #measure }
 BlGridLayoutAxis >> measure: aMeasurementSpec [
+
 	| mode size |
 	mode := aMeasurementSpec mode.
 	size := aMeasurementSpec size.
-	
-	mode isUnspecified
-		ifTrue: [ ^ self measureMin: 0 max: SmallInteger maxVal ].
 
-	mode isExact
-		ifTrue: [ ^ self measureMin: size max: size ].
+	mode isUnspecified ifTrue: [
+		^ self measureMin: 0 max: SmallInteger maxVal ].
 
-	mode isAtMost
-		ifTrue: [ ^ self measureMin: 0 max: size ].
-	
-	Warning signal: 'Unknown measurement spec mode: ', mode asString.
-	
+	mode isExact ifTrue: [
+		^ self measureMin: size max: size ].
+
+	mode isAtMost ifTrue: [
+		^ self measureMin: 0 max: size ].
+
+	self error: 'Unknown measurement spec mode: ' , mode asString.
+
 	^ 0
 ]
 

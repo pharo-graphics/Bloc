@@ -14,13 +14,6 @@ BlLayoutExactResizerTest >> setUp [
 	resizer := BlLayoutExactResizer new size: 100.0
 ]
 
-{ #category : #initialization }
-BlLayoutExactResizerTest >> tearDown [
-	super tearDown.
-	
-	resizer := nil
-]
-
 { #category : #tests }
 BlLayoutExactResizerTest >> testEquals [
 	

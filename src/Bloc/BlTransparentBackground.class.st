@@ -28,6 +28,14 @@ BlTransparentBackground class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
+{ #category : #comparing }
+BlTransparentBackground >> = anotherObject [
+	"I do not take opacity into account"
+
+	self == anotherObject ifTrue: [ ^ true ].
+	^ anotherObject class = self class
+]
+
 { #category : #testing }
 BlTransparentBackground >> isTransparent [
 	"I am transparent by definition"

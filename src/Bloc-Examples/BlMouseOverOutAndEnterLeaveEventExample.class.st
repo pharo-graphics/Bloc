@@ -128,7 +128,7 @@ BlMouseOverOutAndEnterLeaveEventExample >> mouseEnterAndLeaveConsumed [
 	aMouseEnterHandler := BlEventHandler
 		                      on: BlMouseEnterEvent
 		                      do: [ :anEvent |
-			                      anEvent consumed: true.
+			                      anEvent consume.
 			                      anEvent currentTarget background:
 				                      Color veryVeryLightGray.
 			                      anEvent currentTarget border:
@@ -137,7 +137,7 @@ BlMouseOverOutAndEnterLeaveEventExample >> mouseEnterAndLeaveConsumed [
 	aMouseLeaveHandler := BlEventHandler
 		                      on: BlMouseLeaveEvent
 		                      do: [ :anEvent |
-			                      anEvent consumed: true.
+			                      anEvent consume.
 			                      anEvent currentTarget background: Color white.
 			                      anEvent currentTarget border: BlBorder empty ].
 
@@ -184,7 +184,7 @@ BlMouseOverOutAndEnterLeaveEventExample >> mouseOverAndOutConsumed [
 	aMouseOverHandler := BlEventHandler
 		                     on: BlMouseOverEvent
 		                     do: [ :anEvent |
-			                     anEvent consumed: true.
+			                     anEvent consume.
 			                     anEvent currentTarget background:
 				                     Color veryVeryLightGray.
 			                     anEvent currentTarget border:
@@ -193,7 +193,7 @@ BlMouseOverOutAndEnterLeaveEventExample >> mouseOverAndOutConsumed [
 	aMouseOutHandler := BlEventHandler
 		                    on: BlMouseOutEvent
 		                    do: [ :anEvent |
-			                    anEvent consumed: true.
+			                    anEvent consume.
 			                    anEvent currentTarget background: Color white.
 			                    anEvent currentTarget border: BlBorder empty ].
 

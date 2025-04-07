@@ -47,6 +47,14 @@ BlRoundedRectangleGeometry class >> new [
 		  yourself
 ]
 
+{ #category : #comparing }
+BlRoundedRectangleGeometry >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+	^ self cornerRadii = anObject cornerRadii
+]
+
 { #category : #'geometry testing' }
 BlRoundedRectangleGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 

@@ -62,18 +62,6 @@ BlTextElement class >> text: aBlText [
 ]
 
 { #category : #accessing }
-BlTextElement >> baseline [
-
-	self
-		deprecated: 'Please use baselineMeasurer instead.'
-		transformWith:
-			'`@receiver baseline'
-				-> '`@receiver baselineMeasurer'.
-	
-	^ self baselineMeasurer
-]
-
-{ #category : #accessing }
 BlTextElement >> baselineMeasurer [
 	
 	^ baselineMeasurer
@@ -95,6 +83,7 @@ BlTextElement >> baselineOffset [
 
 { #category : #layout }
 BlTextElement >> basicMeasureParagraph: aBlTextParagraph [
+
 	measurer measureTextParagraph: aBlTextParagraph of: self
 ]
 
@@ -184,6 +173,7 @@ BlTextElement >> defaultHighlightCategory [
 
 { #category : #initialization }
 BlTextElement >> defaultMeasurer [
+
 	^ BlTextElementHostMeasurer uniqueInstance 
 ]
 
@@ -274,8 +264,7 @@ BlTextElement >> indexAtScreenPosition: aPoint [
 BlTextElement >> initialize [
 	super initialize.
 
-	self tightMeasurement.
-
+	self initializeMeasurement.
 	tabOffset := 0.
 	text := self defaultText.
 	"Text layout is created during measurement in onMeasure:"
@@ -288,6 +277,12 @@ BlTextElement >> initialize [
 	selection := BlCompositeSelection new.
 
 	"self debug: true"
+]
+
+{ #category : #initialization }
+BlTextElement >> initializeMeasurement [
+
+	self tightMeasurement
 ]
 
 { #category : #layout }
@@ -355,6 +350,7 @@ BlTextElement >> measurement [
 
 { #category : #accessing }
 BlTextElement >> measurement: aTextElementMeasurementStrategy [
+
 	measurement := aTextElementMeasurementStrategy.
 	self textChanged
 ]
@@ -473,18 +469,6 @@ BlTextElement >> onSessionChanged: aNewSession [
 BlTextElement >> paragraph [
 
 	^ paragraph
-]
-
-{ #category : #accessing }
-BlTextElement >> rawParagraph [
-
-	self
-		deprecated: 'Please use paragraph instead.'
-		transformWith:
-			'`@receiver rawParagraph'
-				-> '`@receiver paragraph'.
-	
-	^ self paragraph
 ]
 
 { #category : #'private - paragraph' }

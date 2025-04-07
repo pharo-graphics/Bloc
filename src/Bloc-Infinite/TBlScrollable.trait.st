@@ -4,10 +4,6 @@ Trait {
 }
 
 { #category : #'api - scrolling overscroll' }
-TBlScrollable >> absorbGlows: aVelocityPoint [
-]
-
-{ #category : #'api - scrolling overscroll' }
 TBlScrollable >> awakenScrollBars [
 	"Trigger the scrollbars to draw. When invoked this method starts an animation to fade the scrollbars out after a default delay.
 	If scrolling is animated, the start delay should equal the duration of the scrolling animation
@@ -112,10 +108,6 @@ TBlScrollable >> computeVerticalScrollRange [
 	^ 0
 ]
 
-{ #category : #'api - scrolling overscroll' }
-TBlScrollable >> considerReleasingGlowsOnScroll: aDeltaPoint [
-]
-
 { #category : #'api - scrolling notifying' }
 TBlScrollable >> dispatchOnScrolled: aPoint [
 	
@@ -136,16 +128,6 @@ TBlScrollable >> onScrolled: aPoint [
 	this method to respond to scrolling within the datasource's data set instead of an explicit event handler.
 	I will always be invoked before event handlers. If a subclass needs to perform any additional upkeep
 	or bookkeeping after scrolling but before events fired, this is a good place to do so"
-]
-
-{ #category : #'api - scrolling accessing' }
-TBlScrollable >> overScrollMode [
-	^ BlOverScrollMode never
-]
-
-{ #category : #'api - scrolling accessing' }
-TBlScrollable >> overScrollMode: aOBlOverScrollMode [
-	self explicitRequirement
 ]
 
 { #category : #'api - scrolling accessing' }

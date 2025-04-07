@@ -19,7 +19,7 @@ Public API and Key Messages
 Internal Representation and Key Implementation Points.
 
     Instance Variables
-	text:		<BrText>
+	text:		<BlText>
 	maxHeight:		<Number>
 	maxWidth:		<Number>
 	height:		<Number>
@@ -63,19 +63,6 @@ BlTextParagraph >> baseline [
 	<return: #Point>
 	baselineMeasurer ifNil: [ ^ 0 @ 0 ].
 	^ baselineMeasurer computedBaseline: self
-]
-
-{ #category : #'api - instantiation' }
-BlTextParagraph >> baseline: aBlTextParagraphBaselineMeasurer [
-
-	self
-		deprecated: 'Please use baselineMeasurer: instead.'
-		transformWith:
-			'`@receiver baseline: `@statements1'
-				-> '`@receiver baselineMeasurer: `@statements1'.
-
-	self baselineMeasurer: aBlTextParagraphBaselineMeasurer.
-
 ]
 
 { #category : #'paragraph - geometry' }

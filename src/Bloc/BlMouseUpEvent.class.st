@@ -7,19 +7,17 @@ Class {
 { #category : #'instance creation' }
 BlMouseUpEvent class >> button: aMouseButton [
 	"Create a sample button up event for a given button for testing purposes"
-	<return: #BlMouseUpEvent>
 	
 	^ aMouseButton mouseUpEventClass new
 		button: aMouseButton;
 		position: 0@0;
 		screenPosition: 0@0;
-		timestamp: DateAndTime now
+		yourself
 ]
 
 { #category : #'instance creation' }
 BlMouseUpEvent class >> middle [
 	"Create a sample middle button up event for testing purposes"
-	<return: #BlMouseUpEvent>
 
 	^ self button: BlMouseButton middle
 ]
@@ -27,7 +25,6 @@ BlMouseUpEvent class >> middle [
 { #category : #'instance creation' }
 BlMouseUpEvent class >> primary [
 	"Create a sample primary button up event for testing purposes"
-	<return: #BlMouseUpEvent>
 	
 	^ self button: BlMouseButton primary
 ]
@@ -35,7 +32,6 @@ BlMouseUpEvent class >> primary [
 { #category : #'instance creation' }
 BlMouseUpEvent class >> secondary [
 	"Create a sample secondary button up event for testing purposes"
-	<return: #BlMouseUpEvent>
 	
 	^ self button: BlMouseButton secondary
 ]
@@ -45,12 +41,6 @@ BlMouseUpEvent >> asDoubleClickEvent [
 	^ BlDoubleClickEvent new
 		copyFrom: self;
 		yourself
-]
-
-{ #category : #converting }
-BlMouseUpEvent >> asMouseOutsideEvent [
-
-	^ BlMouseUpOutsideEvent new originalEvent: self; canBePropagated: false; yourself
 ]
 
 { #category : #testing }

@@ -66,14 +66,13 @@ BlRopedTextIterator >> hasPrevious [
 { #category : #'iterator - enumeration' }
 BlRopedTextIterator >> next [
 	"Return an item (character) at current position and move one to the right"
-	<return: #Character or: #Object>
 
 	^ iterator next
 ]
 
 { #category : #'iterator - enumeration' }
 BlRopedTextIterator >> nextLine [
-	"Return an instance of BrText which represents a piece of text from current position
+	"Return an instance of `BlText` which represents a piece of text from current position
 	until the first carriage return character"
 	<return: #BlText>
 	
@@ -123,7 +122,7 @@ BlRopedTextIterator >> nextSpan [
 
 { #category : #'iterator - enumeration' }
 BlRopedTextIterator >> nextWhitespace [
-	"Return an instance of BrText which represents a piece of text from current position
+	"Return an instance of `BlText` which represents a piece of text from current position
 	until the first non-whitespace character without including it"
 	<return: #BlText>
 	| aStartPosition aSegment |
@@ -136,7 +135,7 @@ BlRopedTextIterator >> nextWhitespace [
 
 { #category : #'iterator - enumeration' }
 BlRopedTextIterator >> nextWord [
-	"Return an instance of BlText which represents a piece of text from current position
+	"Return an instance of `BlText` which represents a piece of text from current position
 	until the first space character not including spaces"
 	<return: #BlText>
 	| aStartPosition aSegment |
@@ -219,9 +218,10 @@ BlRopedTextIterator >> text [
 ]
 
 { #category : #accessing }
-BlRopedTextIterator >> text: aBrRopedText from: aStartIndex to: anEndIndex [
-	rope := aBrRopedText rope.
-	text := aBrRopedText.
+BlRopedTextIterator >> text: aBlRopedText from: aStartIndex to: anEndIndex [
+
+	rope := aBlRopedText rope.
+	text := aBlRopedText.
 
 	iterator := rope iterator: ((aStartIndex - 1) max: 0) to: anEndIndex
 ]

@@ -16,13 +16,15 @@ Class {
 
 { #category : #cleanup }
 BlTransparentPaint class >> cleanUp [
+
 	super cleanUp.
-	
+
 	uniqueInstance := nil
 ]
 
 { #category : #'instance creation' }
 BlTransparentPaint class >> color: aColor [
+
 	self shouldNotImplement
 ]
 
@@ -35,20 +37,28 @@ BlTransparentPaint class >> transparent [
 BlTransparentPaint class >> uniqueInstance [
 	"Return a unique instance of transparent paint.
 	It is preferable to use unique instance than create a new every time"
-	<return: #BlColorPaint>
 
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
+{ #category : #comparing }
+BlTransparentPaint >> = anotherObject [
+
+	self == anotherObject ifTrue: [ ^ true ].
+	^ (anotherObject isKindOf: self class)
+]
+
 { #category : #accessing }
 BlTransparentPaint >> color: aColor [
+
 	self shouldNotImplement
 ]
 
 { #category : #initialization }
 BlTransparentPaint >> initialize [
+
 	super initialize.
-	
+
 	color := Color transparent
 ]
 
@@ -62,7 +72,6 @@ BlTransparentPaint >> isOpaque [
 { #category : #testing }
 BlTransparentPaint >> isTransparent [
 	"I am transparent by definition and therefore always return true"
-	<return: #Boolean>
 
 	^ true
 ]

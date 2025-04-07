@@ -21,40 +21,31 @@ Class {
 { #category : #'instance creation' }
 BlPoint3D class >> x: aX y: aY z: aZ [
 
-	^ self new
+	^ self basicNew
 		x: aX y: aY z: aZ;
 		yourself
 ]
 
 { #category : #composition }
 BlPoint3D >> @ aNumber [
-	"Return a new 4D point with x, y and z represented by components and given number as w."
-	<return: #BlPoint4D>
-	
+	"Return a new `BlPoint4D` with x, y and z represented by components and given number as w."
+
 	^ BlPoint4D x: x y: y z: z w: aNumber
 ]
 
 { #category : #initialization }
 BlPoint3D >> initialize [
+
 	super initialize.
-	
+
 	x := 0.0.
 	y := 0.0.
 	z := 0.0
 ]
 
 { #category : #testing }
-BlPoint3D >> isPoint [
-	"Return true if I represent a point, false otherwise"
-	<return: #Boolean>
-
-	^ true
-]
-
-{ #category : #testing }
 BlPoint3D >> isPoint2D [
 	"Return true if I represent a 2D point, false otherwise"
-	<return: #Boolean>
 
 	^ false
 ]
@@ -62,7 +53,6 @@ BlPoint3D >> isPoint2D [
 { #category : #testing }
 BlPoint3D >> isPoint3D [
 	"Return true if I represent a 3D point, false otherwise"
-	<return: #Boolean>
 
 	^ true
 ]
@@ -70,13 +60,13 @@ BlPoint3D >> isPoint3D [
 { #category : #testing }
 BlPoint3D >> isZero [
 	"Return true if all my components are zeros, false otherwise"
-	<return: #Boolean>
 	
 	^ x isZero and: [ y isZero and: [ z isZero ] ]
 ]
 
 { #category : #printing }
 BlPoint3D >> printOn: aStream [
+
 	aStream nextPut: $(.
 	x printOn: aStream.
 	aStream nextPut: $@.
@@ -94,25 +84,23 @@ BlPoint3D >> printOn: aStream [
 	aStream nextPut: $).
 ]
 
-{ #category : #printing }
-BlPoint3D >> storeOn: aStream [ 
+{ #category : #storing }
+BlPoint3D >> storeOn: aStream [
 	"x@y@z printed form is good for storing too"
+
 	aStream nextPut: $(.
 	self printOn: aStream.
-	aStream nextPut: $).
+	aStream nextPut: $)
 ]
 
 { #category : #'matrix - transforming points' }
 BlPoint3D >> transformedOn: aBlMatrix [
-	<return: #BlPoint>
 	
 	^ aBlMatrix transformPoint3D: self
 ]
 
 { #category : #accessing }
 BlPoint3D >> x [
-	"Return my x component"
-	<return: #Number>
 	
 	^ x
 ]
@@ -127,16 +115,12 @@ BlPoint3D >> x: aX y: aY z: aZ [
 
 { #category : #accessing }
 BlPoint3D >> y [
-	"Return my y component"
-	<return: #Number>
 	
 	^ y
 ]
 
 { #category : #accessing }
 BlPoint3D >> z [
-	"Return my z component"
-	<return: #Number>
 	
 	^ z
 ]

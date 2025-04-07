@@ -98,13 +98,13 @@ BlGridLayoutSpec class >> start: aStart size: aSize alignment: anAlignment [
 
 { #category : #'instance creation' }
 BlGridLayoutSpec class >> start: aStart size: aSize alignment: anAlignment weight: aWeight [
-	"Return a new BlGridLayoutSpec isntance configured based on the arguments."
 
-	 ^ self basicNew
-		setAlignment: anAlignment
-		span: (BlGridLayoutInterval min: aStart max: aStart + aSize)
-		startDefined: aStart ~= UNDEFINED
-		weight: aWeight
+	^ self basicNew
+		  setAlignment: anAlignment
+		  span: (BlGridLayoutInterval min: aStart max: aStart + aSize)
+		  startDefined: aStart ~= UNDEFINED
+		  weight: aWeight;
+		  yourself
 ]
 
 { #category : #accessing }

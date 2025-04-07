@@ -24,14 +24,14 @@ BlRopeableCollectionFileTest >> emptyFile [
 { #category : #'test seed' }
 BlRopeableCollectionFileTest >> largeFile [
 
-	^largeFile ifNil: 
-		[ largeFile := FileReference newTempFilePrefix: 'BlRopeableCollectionFileExamples-' suffix: '-largeFile'.
+	^ largeFile ifNil: [
+		largeFile := FileSystem memory / 'test.txt'.
 		largeFile writeStreamDo: [ :stream |
 			1 to: 10000 do: [ :l |
 				1 to: 9 do: [ :i |
 					stream << (((l-1)*10 + i-1) printPaddedWith: $0 to: 10) ].
 				stream << 'abcdefghi'; lf. ] ].
-		largeFile ].
+		largeFile ]
 ]
 
 { #category : #'test seed' }

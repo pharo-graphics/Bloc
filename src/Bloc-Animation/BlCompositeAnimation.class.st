@@ -8,17 +8,6 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlCompositeAnimation class >> with: aCollectionOfAnimations [
-
-	self 
-		deprecated: 'Please use #withAll: instead' 
-		transformWith: '`@receiver with: `@arg'
-						  -> '`@receiver withAll: `@arg'.
-
-	^ self new addAll: aCollectionOfAnimations
-]
-
-{ #category : #'instance creation' }
 BlCompositeAnimation class >> with: anAnimation with: anotherAnimation [
 
 	^ self new

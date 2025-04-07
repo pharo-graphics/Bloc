@@ -34,17 +34,12 @@ BlMeasurementUnspecifiedMode >> printOn: aStream size: aNumber [
 
 { #category : #geometry }
 BlMeasurementUnspecifiedMode >> size: aNumber min: aMinSizeFloat max: aMaxSizeFloat [
-	"aNumber should satisfy #isBlocFiniteFloat,
-	aMinSizeFloat and aMaxSizeFloat  #isBlocFiniteFloat"
-	
-	<return: #Number>
+
 	^ BlMeasurementSpec atMost: (aMinSizeFloat max: aMaxSizeFloat)
 ]
 
 { #category : #geometry }
 BlMeasurementUnspecifiedMode >> size: aNumber with: aSpecSize [
-	"aNumber should satisfy #isBlocFiniteFloat"
-	<return: #Number>
 	
 	^ aNumber
 ]

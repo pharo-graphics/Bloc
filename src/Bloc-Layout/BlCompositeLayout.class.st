@@ -12,7 +12,7 @@ BlCompositeLayout >> addLayout: aBlLayout [
 	layouts add: aBlLayout
 ]
 
-{ #category : #adding }
+{ #category : #initialization }
 BlCompositeLayout >> initialize [
 	super initialize.
 	
@@ -40,6 +40,7 @@ BlCompositeLayout >> mayInfluencePosition [
 
 { #category : #measure }
 BlCompositeLayout >> measure: aParentLayoutNode [
+
 	layouts do: [ :eachLayout | eachLayout measure: aParentLayoutNode ]
 ]
 

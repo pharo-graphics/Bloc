@@ -35,19 +35,6 @@ BlElementCachedTransformation >> boundingRectangle: aRectangle [
 ]
 
 { #category : #'api - transformation' }
-BlElementCachedTransformation >> bounds: aRectangle [
-	"The actual transformation matrix may depends on the element bounds due to
-	potential non zero transformation origin.
-	This allows cached transformation to recompute the transformation matrix when bounds change"
-
-	self
-		deprecated: 'Use #boundingRectangle: instead'
-		transformWith: '`@receiver bounds: `@arg' -> '`@receiver boundingRectangle: `@arg'.
-
-	self boundingRectangle: aRectangle
-]
-
-{ #category : #'api - transformation' }
 BlElementCachedTransformation >> inverseTransformBounds: aBlBounds [
 	"Transform the given bounds according to inverse of my cached transformation.
 	(Global to local transformation.)"

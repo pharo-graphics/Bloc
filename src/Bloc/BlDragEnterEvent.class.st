@@ -1,3 +1,6 @@
+"
+The `BlDragEnterEvent` event is fired when a pointing device enter a drop area
+"
 Class {
 	#name : #BlDragEnterEvent,
 	#superclass : #BlBaseDragEvent,

@@ -115,6 +115,41 @@ BlSpaceFixture >> buildCapRoundDashedBorderOnClosedGeometry [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildChildDoesntInheritDashedBorder [
+
+	| outskirts |
+	builder spaceExtent: 90 @ 50.
+	builder space root layout: BlFlowLayout horizontal.
+
+	outskirts := {
+		BlOutskirts centered.
+		BlOutskirts inside.
+		BlOutskirts outside }.
+
+	#(true false) do: [ :childHasBorder |
+		outskirts do: [ :eachOutskirt |
+			| parent child |
+			parent := builder addToRoot
+				size: 25 @ 20;
+				margin: (BlInsets all: 2.5);
+				outskirts: eachOutskirt;
+				layout: BlFrameLayout new;
+				border: (BlBorder builder
+					paint: Color blue;
+					width: 2;
+					dashArray: #(2 2);
+					build).
+			child := (builder addTo: parent)
+				size: 12 asPoint;
+				constraintsDo: [ :c |
+					c frame horizontal alignCenter.
+					c frame vertical alignCenter ].
+			childHasBorder ifTrue: [
+				child border: (BlBorder paint: Color white width: 4) ] ] ]
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildClippingAbsolutelyTransparentElement [
 	"Add 3 elements, where only the last one should be clipped by it's transparent parent.
 	The output should be a blue rectangle surrounded by orange."
@@ -1352,6 +1387,125 @@ BlSpaceFixture >> buildTextTransformationsCustomizedWith: aBlock [
 	self buildTextTransformations.
 	
 	builder space root allChildrenDepthFirstDo: aBlock
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildTextWithBorder [
+	"Each character has different border attribute."
+
+	| aText |
+	builder spaceExtent: 90 @ 40.
+
+	aText := 'BLOC' asRopedText.
+
+	1 to: aText size do: [ :index |
+		(aText from: index to: index)
+			fontSize: 40 - (index * 3);
+			foreground: builder nextColor muchLighter;
+			background: builder nextColor;
+			border: (BlBorder
+				paint: builder nextColor muchDarker
+				width: index * 1.5) ].
+
+	(builder addTextToRoot: aText)
+		padding: (BlInsets all: 5)
+
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildTextWithBorderAbove [
+	"Text border can be drawn above or below the text."
+
+	| aText |
+	builder spaceExtent: 60 @ 100.
+
+	aText :=
+		'll' asRopedText
+			fontSize: 110;
+			foreground: (Color blue alpha: 0.5);
+			yourself.
+
+	(aText from: 1 to: 1)
+		border: (BlBorder paint: Color red width: 8)
+		above: false.
+
+	(aText from: 2 to: 2)
+		border: (BlBorder paint: Color red width: 8)
+		above: true.
+
+	(builder addTextToRoot: aText) padding: (BlInsets all: 10)
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildTextWithDashedBorder [
+	"Each character has a different dashes on its attribute."
+
+	| aText |
+	builder spaceExtent: 90 @ 100.
+
+	aText := 'iii' asRopedText
+		fontSize: 110;
+		foreground: (Color yellow alpha: 0.5);
+		yourself.
+
+	(aText from: 1 to: 1)
+		border: (BlBorder builder
+			paint: Color blue;
+			width: 6;
+			dashArray: #(0 7);
+			dashOffset: 1;
+			capSquare;
+			joinBevel;
+			build).
+
+	(aText from: 2 to: 2)
+		border: (BlBorder builder
+			paint: Color blue;
+			width: 6;
+			dashArray: #(1 1);
+			dashOffset: 1;
+			capButt;
+			joinMiter;
+			miterLimit: 1.5;
+			build).
+
+	(aText from: 3 to: 3)
+		border: (BlBorder builder
+			paint: Color blue;
+			width: 6;
+			dashArray: #(0 7);
+			dashOffset: 1;
+			capRound;
+			joinRound;
+			build).
+
+	(builder addTextToRoot: aText)
+		padding: (BlInsets all: 10)
+
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildTextWithOverlappingBorder [
+	"First subrope 'Bloc' is rendered behind the border of the second subrope."
+
+	| aText |
+	builder spaceExtent: 80 @ 25.
+
+	aText := 'BlocBloc' asRopedText.
+	aText fontSize: 15.
+	aText foreground: Color blue.
+
+	(aText from: 1 to: 4)
+		border: (BlBorder
+			paint: Color red
+			width: 10).
+	(aText from: 5 to: 8)
+		border: (BlBorder
+			paint: Color green
+			width: 10).
+
+	(builder addTextToRoot: aText)
+		padding: (BlInsets all: 5)
 ]
 
 { #category : #fixtures }

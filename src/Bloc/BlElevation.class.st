@@ -47,6 +47,18 @@ BlElevation class >> zero [
 	^ zero ifNil: [ zero := self elevation: 0 ]
 ]
 
+{ #category : #comparing }
+BlElevation >> <  another [
+
+	^ self elevation < another elevation
+]
+
+{ #category : #comparing }
+BlElevation >> >  another [
+
+	^ self elevation > another elevation
+]
+
 { #category : #accessing }
 BlElevation >> elevation [
 

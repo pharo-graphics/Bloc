@@ -1,8 +1,5 @@
 "
-I am a root class of all element events that are sent by `BlElement` as a reaction to various changes, for example position or extent.
-
-See `BlElementEventExamples` for related examples.
-
+I represent events that happen to a `BlElement`. For example, a change in position or extent.
 "
 Class {
 	#name : #BlElementEvent,

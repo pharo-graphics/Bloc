@@ -20,28 +20,19 @@ Class {
 	#instVars : [
 		'dataSource',
 		'dataSourceManager',
-		'childrenManager',
 		'state',
 		'recycler',
-		'hasFixedSize',
 		'layoutOrScrollCounter',
 		'dispatchScrollCounter',
-		'layoutFrozen',
-		'layoutRequestEaten',
 		'itemDecorations',
 		'dataSourceChangedAfterLayout',
 		'firstLayoutComplete',
-		'itemsAddedOrRemoved',
-		'itemsChanged',
-		'preserveFocusAfterLayout',
 		'layoutPositionsRange',
-		'eatRequestLayoutCounter',
 		'childrenUpdateRunnable',
 		'dataSourceChangeDuringMeasure',
 		'dataSourceObserver',
 		'scrollFlinger',
-		'scrollState',
-		'overScrollMode'
+		'scrollState'
 	],
 	#pools : [
 		'BlInfiniteConstants'
@@ -49,21 +40,18 @@ Class {
 	#category : #'Bloc-Infinite-Core'
 }
 
-{ #category : #'as yet unclassified' }
-BlInfiniteElement >> aeDrawChildrenOn: aCanvas [
-	" draw then decorate eventually (between the background and the childrens)"
-	super aeDrawChildrenOn: aCanvas.
-	self itemDecorationsDo: [ :d | 
-		d aeDrawOverOn: aCanvas in: self ]
-]
+{ #category : #'children add/remove' }
+BlInfiniteElement >> addChild: aChildElement at: anIndex [ 
 
-{ #category : #'as yet unclassified' }
-BlInfiniteElement >> aeDrawOn: aCanvas [
-	" draw then decorate eventually (between the background and the childrens)"
-	super aeDrawOn: aCanvas.
-	self itemDecorationsDo: [ :d | 
-		d aeDrawBeneathOn: aCanvas in: self ].
+	"Adds a child at an index.
+	If an Index is less or equal 0 child will be appended to the end"
 
+	| anOffset |
+	anOffset := (anIndex <= 0
+		             ifTrue: [ self childrenCount + 1 ]
+		             ifFalse: [ anIndex ]) max: 1.
+	super addChild: aChildElement at: anOffset.
+	self dispatchChildAttached: aChildElement.
 
 ]
 
@@ -105,6 +93,30 @@ BlInfiniteElement >> assertNotInLayoutOrScroll [
 	self
 		assert: [ dispatchScrollCounter isZero ]
 		description: [ 'Can not change the structure of InfiniteElement during scrolling' ]
+]
+
+{ #category : #'children add/remove' }
+BlInfiniteElement >> attachChild: aChildElement at: anIndex [
+
+	"Attaches aChildElement to the infinite element"
+
+	| anOffset anElementHolder |
+	anOffset := (anIndex <= 0
+		             ifTrue: [ self childrenCount + 1 ]
+		             ifFalse: [ anIndex ]) max: 1.
+
+	anElementHolder := self elementHolderOf: aChildElement.
+	(anElementHolder isTmpDetached not and: [ anElementHolder shouldIgnore not ]) ifTrue: [ 
+		self error: 'Can not attach a child which is not previously detached ' ].
+
+	anElementHolder clearTmpDetached.
+	super attachChild: aChildElement at: anOffset
+]
+
+{ #category : #layout }
+BlInfiniteElement >> boundsUpdaterHasChanges [
+
+	^ self layout boundsUpdaterHasChanges
 ]
 
 { #category : #'api - scrolling testing' }
@@ -182,26 +194,8 @@ BlInfiniteElement >> childLayoutPositionOf: anElement [
 	This position may not be equal to Item's datasource position if there are pending changes
 	in the datasource which have not been reflected to the layout yet"
 
-	^ (self elementHolderOf: anElement) layoutPosition
+	^ (self elementHolderOf: anElement) position
 
-]
-
-{ #category : #accessing }
-BlInfiniteElement >> childrenManager [
-	^ childrenManager
-]
-
-{ #category : #'private - positions' }
-BlInfiniteElement >> clearOldPositions [
-
-	childrenManager
-		unfilteredChildrenDo: [ :anElement | 
-			| anElementHolder |
-			anElementHolder := self elementHolderOf: anElement.
-			anElementHolder shouldIgnore ifFalse: [ anElementHolder clearOldPosition ] ]
-		in: self.
-
-	recycler clearOldPositions
 ]
 
 { #category : #'api - scrolling thumb' }
@@ -280,31 +274,16 @@ BlInfiniteElement >> computeVerticalScrollRange [
 
 { #category : #'private - commands' }
 BlInfiniteElement >> consumePendingDataSourceCommands [
-	"I help to reflect data changes to the state.
+	" I'm sent before scrolling or from the children update runnable task 
+	(my instance of BlInfiniteChildrenUpdateRunnable).
+	I help to reflect data changes to the state.
 	DataSource changes during a scroll may trigger a crash because scroll assumes no data change but data actually changed.
 	I consume all deferred changes to avoid that case."
 
 	(firstLayoutComplete not or: [ dataSourceChangedAfterLayout ])
 		ifTrue: [ ^ self dispatchLayout ].
-	
-	dataSourceManager hasPendingCommands
-		ifFalse: [ ^ self ].
-
-	"if it is only an item change (no add-remove-move) we can check
-	if any of the visible items is affected and if not, just ignore the change."
-	dataSourceManager hasOnlyUpdateCommand
-		ifTrue: [ 
-			self eatRequestLayout.
-			dataSourceManager preProcessCommandsIn: self.
-			layoutRequestEaten ifFalse: [ 
-				self hasUpdatedChild
-					ifTrue: [ self dispatchLayout ]
-					"no need to layout, clean state"
-					ifFalse: [ dataSourceManager consumePostponedCommandsIn: self ] ].
-			self resumeRequestLayout: true ]
-		ifFalse: [
-			 dataSourceManager hasPendingCommands
-				ifTrue: [ self dispatchLayout ] ]
+	dataSourceManager hasPendingCommands ifFalse: [ ^ self ].
+	self dispatchLayout
 ]
 
 { #category : #accessing }
@@ -369,14 +348,7 @@ BlInfiniteElement >> decorationsInsetsOfChildElement: anElement [
 	anInfiniteConstraints := anElement constraints infinite.
 	anInfiniteConstraints insetsDirty ifTrue: [ 
 		anInfiniteConstraints decorationInsets: 
-			(self getDecorationsInsetsOfChildElement: anElement).
-		^ anInfiniteConstraints decorationInsets ].
-
-	(self state isPreLayout and: [ 
-		 anInfiniteConstraints isItemChanged or: [ 
-			 anInfiniteConstraints isElementInvalid ] ]) ifTrue: [ 
-		self getDecorationsInsetsOfChildElement: anElement ].
-	"changed/invalid items should not be updated until they are rebound"
+			(self getDecorationsInsetsOfChildElement: anElement) ].
 	^ anInfiniteConstraints decorationInsets
 	"	
 
@@ -398,11 +370,6 @@ BlInfiniteElement >> decorationsInsetsOfChildElement: anElement [
 { #category : #'private - focus' }
 BlInfiniteElement >> deepestFocusedChildIn: anElement [
 	self shouldBeImplemented
-]
-
-{ #category : #initialization }
-BlInfiniteElement >> defaultChildrenManager [
-	^ BlInfiniteChildrenManager new
 ]
 
 { #category : #initialization }
@@ -434,24 +401,14 @@ BlInfiniteElement >> defaultLayout [
 ]
 
 { #category : #initialization }
-BlInfiniteElement >> defaultLayoutCommonConstraints [
-
-	^ BlLayoutCommonConstraints new
-]
-
-{ #category : #initialization }
 BlInfiniteElement >> defaultMouseScrollEventHandler [
 
 	^ BlInfiniteMouseScrollListener new
 ]
 
 { #category : #initialization }
-BlInfiniteElement >> defaultOverScrollMode [
-	^ BlOverScrollMode never
-]
-
-{ #category : #initialization }
 BlInfiniteElement >> defaultRecycler [
+
 	^ BlInfiniteRecycler new
 ]
 
@@ -463,7 +420,26 @@ BlInfiniteElement >> defaultScrollFlinger [
 
 { #category : #initialization }
 BlInfiniteElement >> defaultState [
+
 	^ BlInfiniteState new
+]
+
+{ #category : #'children add/remove' }
+BlInfiniteElement >> detachChildAt: anIndex [
+	"Detaches a child element at anIndex from infinite element"
+	| anElement anElementHolder |
+	anElement := self children 
+		at: anIndex
+		ifAbsent: [ ^ self ].
+	
+	anElementHolder := self elementHolderOf: anElement.
+	
+	(anElementHolder isTmpDetached and: [
+		anElement shouldIgnore not ])
+			ifTrue: [ self error: 'Can not detach already detached child!' ].
+	
+	anElementHolder flags addTmpDetached.
+	self detachChild: anElement
 ]
 
 { #category : #'private - positions' }
@@ -502,18 +478,40 @@ BlInfiniteElement >> dispatchChildDetached: anElement [
 { #category : #layout }
 BlInfiniteElement >> dispatchLayout [
 
-	self state isMeasuring: false.
-	self state isStartStep
-		ifTrue: [ 
+	state isStartStep
+		ifTrue: [
 			self dispatchLayoutFirstStep.
 			self layout exactMeasurementSpecFrom: self.
 			self dispatchLayoutSecondStep ]
-		ifFalse: [ 
+		ifFalse: [
 			self layout exactMeasurementSpecFrom: self.
-			(dataSourceManager hasCommands or: [ 
-				 layout width ~= self width or: [ layout height ~= self height ] ]) 
+			(dataSourceManager hasCommands or: [
+				 layout width ~= self width or: [ layout height ~= self height ] ])
 				ifTrue: [ self dispatchLayoutSecondStep ] ].
-	self dispatchLayoutThirdStep
+
+	self dispatchLayoutFinalStep
+]
+
+{ #category : #layout }
+BlInfiniteElement >> dispatchLayoutFinalStep [
+	"The final step of the layout where we save the information about elements for animations,
+	trigger animations and do any necessary cleanup."
+
+	state assertLayoutStep: BlInfiniteLayoutStepFlags Final.
+
+	self onEnterLayoutOrScroll.
+	state beStepStart.
+	layout removeAndRecycleScrap.
+	dataSourceChangedAfterLayout := false.
+
+	layout layoutCompleted.
+	self onExitLayoutOrScroll.
+	(self didChildPositionsRangeChange: layoutPositionsRange) ifTrue: [
+		self dispatchOnScrolled: 0 @ 0.
+		self boundsUpdaterHasChanges ifTrue: [
+			self dispatchEvent: BlBoundsHasChangedDuringScrollingEvent new ] ].
+	self recoverFocusFromState.
+	self resetFocusInfo
 ]
 
 { #category : #layout }
@@ -523,22 +521,16 @@ BlInfiniteElement >> dispatchLayoutFirstStep [
 		- save information about current child elements
 		- If necessary, run predictive layout and save its information"
 
-	self state assertLayoutStep: BlInfiniteLayoutStepFlags Start.
-	self state isMeasuring: false.
-	self eatRequestLayout.
+	state assertLayoutStep: BlInfiniteLayoutStepFlags Start.
 	self onEnterLayoutOrScroll.
 	self processDataSourceCommands.
 	self saveFocusInfo.
-	itemsAddedOrRemoved := false.
-	itemsChanged := false.
-	self state isPreLayout: false.
-	self state itemCount: self dataSource itemCount.
+	state itemCount: self dataSource itemCount.
 	self layoutPositionsRange: self findMinMaxChildLayoutPositions.
 	
-	self clearOldPositions.
+	"self clearOldPositions."
 	self onExitLayoutOrScroll.
-	self resumeRequestLayout: false.
-	self state beStepLayout
+	state beStepLayout
 ]
 
 { #category : #layout }
@@ -546,49 +538,19 @@ BlInfiniteElement >> dispatchLayoutSecondStep [
 	"The second layout step where we do the actual layout of the element for the final state.
 	This step might be run multiple times if necessary (e.g. measure)."
 	
-	self eatRequestLayout.
 	self onEnterLayoutOrScroll.
 	
-	self state assertLayoutStep: BlInfiniteLayoutStepFlags Layout or: BlInfiniteLayoutStepFlags Animations.
+	state assertLayoutStep: BlInfiniteLayoutStepFlags Layout or: BlInfiniteLayoutStepFlags Final.
 	
-	dataSourceManager consumeCommandsInOnePassIn: self.
-	self state itemCount: dataSource itemCount.
-	self state deletedInvisibleItemCountSincePreviousLayout: 0.
+	dataSourceManager consumeCommandsIn: self.
+	state itemCount: dataSource itemCount.
+	state deletedInvisibleItemCountSincePreviousLayout: 0.
 	
 	"Run layout"
-	self state isPreLayout: false.
-	layout layoutChildrenIn: self recycler state: self state.
-	self state structureChanged: false.
+	layout layoutChildrenIn: self recycler state: state.
 
-	self state beStepAnimations.	
-	self onExitLayoutOrScroll.
-	self resumeRequestLayout: false
-]
-
-{ #category : #layout }
-BlInfiniteElement >> dispatchLayoutThirdStep [
-	"The final step of the layout where we save the information about elements for animations,
-	trigger animations and do any necessary cleanup."
-
-	self state assertLayoutStep: BlInfiniteLayoutStepFlags Animations.
-
-	self eatRequestLayout.
-	self onEnterLayoutOrScroll.
-	self state beStepStart.
-
-	layout removeAndRecycleScrap.
-	self state previousLayoutItemCount: self state itemCount.
-	dataSourceChangedAfterLayout := false.
-
-	layout layoutCompleted.
-	self onExitLayoutOrScroll.
-	self resumeRequestLayout: false.
-
-	((self didChildPositionsRangeChange: layoutPositionsRange) or: [
-		 self scrolledWhileFilling ]) ifTrue: [
-		self dispatchOnScrolled: 0 @ 0 ].
-	self recoverFocusFromState.
-	self resetFocusInfo
+	state beStepFinal.
+	self onExitLayoutOrScroll
 ]
 
 { #category : #'api - scrolling notifying' }
@@ -617,14 +579,6 @@ BlInfiniteElement >> dispatchScrollStateChanged: aScrollState [
 	self notifyScrollStateChanged: aScrollState
 ]
 
-{ #category : #layout }
-BlInfiniteElement >> eatRequestLayout [
-
-	eatRequestLayoutCounter := eatRequestLayoutCounter + 1.
-	(eatRequestLayoutCounter = 1 and: [ layoutFrozen not ])
-		ifTrue: [ layoutRequestEaten := false ]
-]
-
 { #category : #'children - accessing' }
 BlInfiniteElement >> elementHolderOf: anElement [
 	"Return an element holder assigned to anElement.
@@ -638,21 +592,19 @@ BlInfiniteElement >> elementHolderOf: anElement [
 { #category : #'private - commands' }
 BlInfiniteElement >> elementRangeUpdate: aPositionStart itemCount: anItemCount [
 	"Rebind existing elements for the given range, or create new as needed"
-	| aPositionEnd |
 
+	| aPositionEnd |
 	aPositionEnd := aPositionStart + anItemCount.
-	childrenManager unfilteredChildrenDo: [ :anElement |
+	self unfilteredChildrenDo: [ :anElement |
 		| anElementHolder |
 		anElementHolder := self elementHolderOf: anElement.
-		anElementHolder shouldIgnore
-			ifFalse: [ 
-				(anElementHolder position >= aPositionStart and: [ anElementHolder position < aPositionEnd ])
-					ifTrue: [ 
-						"We re-bind these elements holders after pre-processing is complete so that
+		anElementHolder shouldIgnore ifFalse: [
+			(anElementHolder position >= aPositionStart and: [
+				 anElementHolder position < aPositionEnd ]) ifTrue: [ 
+					"We re-bind these elements holders after pre-processing is complete so that
 						ElementHolders have their final positions assigned."
-						anElementHolder flags addUpdate.
-						anElement constraints infinite insetsDirty: true ] ] ]
-			in: self
+				anElementHolder flags addUpdate.
+				anElement constraints infinite insetsDirty: true ] ] ]
 ]
 
 { #category : #'children - accessing' }
@@ -663,14 +615,13 @@ BlInfiniteElement >> findElementHolderForDataSourcePosition: aPosition [
 	<return: #BlInfiniteHolder or: nil>
 	dataSourceChangedAfterLayout ifTrue: [ ^ nil ].
 
-	childrenManager
+	self
 		unfilteredChildrenDo: [ :anElement | 
 			| anElementHolder |
 			anElementHolder := self elementHolderOf: anElement.
 			(anElementHolder isRemoved not and: [ 
 				 (self dataSourcePositionOf: anElementHolder) = aPosition ]) 
-				ifTrue: [ ^ anElementHolder ] ]
-		in: self.
+				ifTrue: [ ^ anElementHolder ] ].
 
 	^ nil
 ]
@@ -678,29 +629,6 @@ BlInfiniteElement >> findElementHolderForDataSourcePosition: aPosition [
 { #category : #'children - accessing' }
 BlInfiniteElement >> findElementHolderForItemId: anId [
 	self shouldBeImplemented
-]
-
-{ #category : #'children - accessing' }
-BlInfiniteElement >> findElementHolderForPosition: aPosition checkNew: shouldCheckNewPosition [
-
-	<return: #BlInfiniteHolder or: nil>
-	childrenManager
-		unfilteredChildrenDo: [ :anElement | 
-			| anElementHolder |
-			anElementHolder := self elementHolderOf: anElement.
-			anElementHolder isRemoved ifFalse: [ 
-				| shouldSkip |
-				shouldSkip := shouldCheckNewPosition
-					              ifTrue: [ anElementHolder position ~= aPosition ]
-					              ifFalse: [ 
-					              anElementHolder layoutPosition ~= aPosition ].
-				shouldSkip ifFalse: [ ^ anElementHolder ] ] ]
-		in: self.
-
-	"We should not query cached element. It creates a problem during data source updates
-	when we are dealing with already laid out elements. Also, for the public use, it is more
-	reasonable to return null if position is not laid out"
-	^ nil
 ]
 
 { #category : #'private - positions' }
@@ -720,7 +648,7 @@ BlInfiniteElement >> findMinMaxChildLayoutPositions [
 		anElementHolder := self elementHolderOf: anElement.
 		anElementHolder shouldIgnore ifFalse: [ 
 			| aPosition |
-			aPosition := anElementHolder layoutPosition.
+			aPosition := anElementHolder position.
 			minPositionPreLayout := minPositionPreLayout min: aPosition.
 			maxPositionPreLayout := maxPositionPreLayout max: aPosition ] ].
 	^ minPositionPreLayout to: maxPositionPreLayout
@@ -729,9 +657,6 @@ BlInfiniteElement >> findMinMaxChildLayoutPositions [
 { #category : #scrolling }
 BlInfiniteElement >> fling: aVelocity [
 	| aVelocityX aVelocityY canScrollHorizontal canScrollVertical |
-	
-	layoutFrozen
-		ifTrue: [ ^ false ].
 	
 	canScrollHorizontal := self layout canScrollHorizontally.
 	canScrollVertical := self layout canScrollVertically.
@@ -768,68 +693,25 @@ BlInfiniteElement >> getDecorationsInsetsOfChildElement: anItemElement [
 	
 ]
 
-{ #category : #'accessing - properties' }
-BlInfiniteElement >> hasFixedSize [
-	"Return true if changes in datasource content cannot change the size of the InfiniteElement itself"
-	<return: #Boolean>
-
-	^ hasFixedSize
-]
-
-{ #category : #'accessing - properties' }
-BlInfiniteElement >> hasFixedSize: aBoolean [
-	"InfiniteElement can perform several optimizations if it can know in advance that InfiniteElement's
-	size is not affected by the datasource contents. InfiniteElement can still change its size based
-	on other factors (e.g. its parent's size) but this size calculation cannot depend on the
-	size of its children or contents of its datasource (except the number of items in the datasource).
-	If your use of InfiniteElement falls into this category, set this to true. It will allow
-	InfiniteElement to avoid invalidating the whole layout when its datasource contents change"
-
-	hasFixedSize := aBoolean
-]
-
 { #category : #'item decorations - testing' }
 BlInfiniteElement >> hasItemDecorations [
 	^ itemDecorations isNotEmpty
-]
-
-{ #category : #'private - testing' }
-BlInfiniteElement >> hasUpdatedChild [
-	"Return true if any of existing elemnts holder needs to be updated"
-	<return: #Boolean>
-
-	self childrenDo: [ :anElement |
-		| anElementHolder |
-		anElementHolder := self elementHolderOf: anElement.
-		(anElementHolder shouldIgnore not and:[
-			anElementHolder isUpdated ])
-				ifTrue: [ ^ true ] ].
-	^ false 
 ]
 
 { #category : #initialization }
 BlInfiniteElement >> initialize [
 	super initialize.
 	
-	hasFixedSize := false.
 	firstLayoutComplete := false.
 	layoutOrScrollCounter := 0.
 	dispatchScrollCounter := 0.
-	eatRequestLayoutCounter := 0.
-	layoutFrozen := false.
-	layoutRequestEaten := false.
 	dataSourceChangedAfterLayout := false.
 	dataSourceChangeDuringMeasure := false.
-	itemsAddedOrRemoved := false.
-	itemsChanged := false.
-	preserveFocusAfterLayout := true.
 	
 	itemDecorations := OrderedCollection new.
 	state := self defaultState.
 	childrenUpdateRunnable := self defaultChildrenUpdateRunnable on: self.
-	overScrollMode := self defaultOverScrollMode.
 	scrollFlinger := self defaultScrollFlinger on: self.
-	self initializeChildrenManager.
 	self initializeDataSource.
 	self initializeRecycler.
 	
@@ -837,11 +719,6 @@ BlInfiniteElement >> initialize [
 	layout infiniteElement: self.
 	
 	self initializeEventHandlers
-]
-
-{ #category : #initialization }
-BlInfiniteElement >> initializeChildrenManager [
-	childrenManager := self defaultChildrenManager
 ]
 
 { #category : #initialization }
@@ -913,14 +790,6 @@ BlInfiniteElement >> isFirstLayoutComplete [
 	^ firstLayoutComplete
 ]
 
-{ #category : #testing }
-BlInfiniteElement >> isLayoutFrozen [
-	"Returns true if layout and scroll are frozen, false otherwise"
-	<return: #Boolean>
-
-	^ layoutFrozen
-]
-
 { #category : #'item decorations - accessing' }
 BlInfiniteElement >> itemDecorations [
 	^ itemDecorations
@@ -945,7 +814,7 @@ BlInfiniteElement >> layoutFrozen: aBoolean [
 	Layout requests will be postponed until layoutFrozen is set to false.
 	Child elements are not updated when InfiniteElement is frozen"
 
-	aBoolean = layoutFrozen
+	"aBoolean = layoutFrozen
 		ifTrue: [ ^ self ].
 		
 	self assertNotInLayoutOrScroll.
@@ -958,43 +827,35 @@ BlInfiniteElement >> layoutFrozen: aBoolean [
 			layoutRequestEaten := false ]
 		ifTrue: [ 
 			layoutFrozen := true.
-			self stopScroll ]
+			self stopScroll ]"
 ]
 
 { #category : #accessing }
 BlInfiniteElement >> layoutPositionsRange [
+
 	"layouted children interval"
 	^ layoutPositionsRange 
 ]
 
 { #category : #accessing }
 BlInfiniteElement >> layoutPositionsRange: anInterval [
+
 	"layouted children interval"
 	layoutPositionsRange := anInterval
 ]
 
 { #category : #layout }
 BlInfiniteElement >> markDataSourceChangeDuringMeasure [
+
 	dataSourceChangeDuringMeasure := true
 ]
 
 { #category : #'private - invalidation' }
 BlInfiniteElement >> markItemDecorationsInsetsDirty [
 
-	childrenManager
+	self
 		unfilteredChildrenDo: [ :anElement | 
 		anElement constraints infinite insetsDirty: true ]
-		in: self
-]
-
-{ #category : #layout }
-BlInfiniteElement >> markItemsAddedOrRemoved [
-	itemsAddedOrRemoved := true
-]
-
-{ #category : #layout }
-BlInfiniteElement >> markItemsChanged [
-	itemsChanged := true
 ]
 
 { #category : #'private - invalidation' }
@@ -1002,21 +863,15 @@ BlInfiniteElement >> markKnownElementsInvalid [
 
 	"Mark all known elements as invalid. Used in response to a, the whole world might have changed data change event"
 
-	childrenManager
+	self
 		unfilteredChildrenDo: [ :anElement | 
 			| anElementHolder |
 			anElementHolder := self elementHolderOf: anElement.
 			anElementHolder shouldIgnore ifFalse: [ 
 				anElementHolder flags addUpdate.
-				anElementHolder flags addInvalid ] ]
-		in: self.
+				anElementHolder flags addInvalid ] ].
 
 	self markItemDecorationsInsetsDirty
-]
-
-{ #category : #layout }
-BlInfiniteElement >> markLayoutRequestEaten [
-	layoutRequestEaten := true
 ]
 
 { #category : #'accessing - properties' }
@@ -1024,23 +879,9 @@ BlInfiniteElement >> maxFlingVelocity [
 	^ 8000
 ]
 
-{ #category : #'view - configuration' }
-BlInfiniteElement >> maxHeight: aNumber [
-
-	"set maxHeight in constraints"
-	self constraintsDo: [ :c | c maxHeight: aNumber ]
-]
-
 { #category : #'accessing - properties' }
 BlInfiniteElement >> minFlingVelocity [
 	^ 50
-]
-
-{ #category : #'view - configuration' }
-BlInfiniteElement >> minHeight: aNumber [
-
-	"set maxHeight in constraints"
-	self constraintsDo: [ :c | c minHeight: aNumber ]
 ]
 
 { #category : #notifying }
@@ -1054,14 +895,14 @@ BlInfiniteElement >> notifyChildAttached: anElement [
 BlInfiniteElement >> notifyChildDetached: anElement [
 	"Notify all event handlers that element is detached from InfiniteElement"
 
-	self fireEvent: (BlInfiniteElementDetachedEvent element: anElement)
+	self dispatchEvent: (BlInfiniteElementDetachedEvent element: anElement)
 ]
 
 { #category : #notifying }
 BlInfiniteElement >> notifyScrollStateChanged: aScrollState [
 	"Notify all event handlers that scroll state of InfiniteElement has been changed"
 
-	self fireEvent: (BlInfiniteScrollChangedEvent scrollState: aScrollState)
+	self dispatchEvent: (BlInfiniteScrollChangedEvent scrollState: aScrollState)
 ]
 
 { #category : #'api - scrolling notifying' }
@@ -1113,74 +954,35 @@ BlInfiniteElement >> offsetChildrenVerticallyBy: aNumber [
 { #category : #'private - commands' }
 BlInfiniteElement >> offsetPositionRecordsForInsert: aStartPosition itemCount: anItemCount [
 
-	childrenManager unfilteredChildrenDo: [ :anElement |
+	self unfilteredChildrenDo: [ :anElement |
 		| anElementHolder |
 		anElementHolder := self elementHolderOf: anElement.
-		(anElementHolder shouldIgnore not and: [ anElementHolder position >= aStartPosition ])
-			ifTrue: [ 
-				anElementHolder offsetPositionBy: anItemCount applyToPreLayout: false.
-				state structureChanged: true ] ]
-		in: self.
+		(anElementHolder shouldIgnore not and: [
+			 anElementHolder position >= aStartPosition ]) ifTrue: [
+			anElementHolder offsetPositionBy: anItemCount ] ].
 	self requestLayout
 ]
 
 { #category : #'private - commands' }
-BlInfiniteElement >> offsetPositionRecordsForMove: aFromPosition to: aToPosition [
-
-	| aStart anEnd anInBetweenOffset |
-	aFromPosition < aToPosition
-		ifTrue: [ 
-			aStart := aFromPosition.
-			anEnd := aToPosition.
-			anInBetweenOffset := -1 ]
-		ifFalse: [ 
-			aStart := aToPosition.
-			anEnd := aFromPosition.
-			anInBetweenOffset := 1 ].
-
-	childrenManager
-		unfilteredChildrenDo: [ :anElement | 
-			| anElementHolder |
-			anElementHolder := self elementHolderOf: anElement.
-			(anElementHolder position between: aStart and: anEnd) ifTrue: [ 
-				anElementHolder position = aFromPosition
-					ifTrue: [ 
-						anElementHolder
-							offsetPositionBy: aToPosition - aFromPosition
-							applyToPreLayout: false ]
-					ifFalse: [ 
-						anElementHolder
-							offsetPositionBy: anInBetweenOffset
-							applyToPreLayout: false ].
-				state structureChanged: true ] ]
-		in: self
-]
-
-{ #category : #'private - commands' }
-BlInfiniteElement >> offsetPositionRecordsForRemove: aPositionStart itemCount: anItemCount applyToPreLayout: applyToPreLayout [
+BlInfiniteElement >> offsetPositionRecordsForRemove: aPositionStart itemCount: anItemCount [
 
 	| aPositionEnd |
 	aPositionEnd := aPositionStart + anItemCount.
 
-	childrenManager
-		unfilteredChildrenDo: [ :anElement | 
+	self
+		unfilteredChildrenDo: [ :anElement |
 			| anElementHolder |
 			anElementHolder := self elementHolderOf: anElement.
-			anElementHolder shouldIgnore ifFalse: [ 
+			anElementHolder shouldIgnore ifFalse: [
 				anElementHolder position >= aPositionEnd
-					ifTrue: [ 
+					ifTrue: [
 						anElementHolder
-							offsetPositionBy: anItemCount negated
-							applyToPreLayout: applyToPreLayout.
-						state structureChanged: true ]
-					ifFalse: [ 
-						anElementHolder position >= aPositionStart ifTrue: [ 
+							offsetPositionBy: anItemCount negated ]
+					ifFalse: [
+						anElementHolder position >= aPositionStart ifTrue: [
 							anElementHolder
 								flagRemovedAndOffsetPosition: aPositionStart - 1
-								by: anItemCount negated
-								applyToPreLayout: applyToPreLayout.
-							state structureChanged: true ] ] ] ]
-		in: self
+								by: anItemCount negated ] ] ] ]
 ]
 
 { #category : #'hooks - children' }
@@ -1207,37 +1009,42 @@ BlInfiniteElement >> onEnterLayoutOrScroll [
 
 { #category : #'hooks - layout' }
 BlInfiniteElement >> onExitLayoutOrScroll [
-	
+
 	layoutOrScrollCounter := layoutOrScrollCounter - 1.
 
-	layoutOrScrollCounter < 0
-		ifTrue: [
-			self error: 'layout or scroll counter cannot go below zero'.
-			"it is important anyway to set counter to 0"
-			layoutOrScrollCounter := 0 ]
+	layoutOrScrollCounter < 0 ifFalse: [ ^ self ].
+	self error: 'layout or scroll counter cannot go below zero'.
+	"it is important anyway to set counter to 0"
+	layoutOrScrollCounter := 0
 ]
 
 { #category : #layout }
 BlInfiniteElement >> onLayout: aBounds context: aBlElementBoundsUpdateContext [
+
 	self dispatchLayout.
 	firstLayoutComplete := true.
-	
-	self layout layoutIgnored: self context: aBlElementBoundsUpdateContext
+
+	self layout
+		layoutIgnored: self
+		context: aBlElementBoundsUpdateContext
 ]
 
 { #category : #'hooks - layout' }
 BlInfiniteElement >> onLayoutDone [
-
 	"update decorations bounds after layout"
 
 	| remainingBounds |
-	super onLayoutDone.
 	remainingBounds := self bounds asRectangle.
-	self itemDecorationsDo: [ :d | remainingBounds := d onLayoutDoneIn: self remaining: remainingBounds ]
+	self itemDecorationsDo: [ :d |
+		remainingBounds := d onLayoutDoneIn: self remaining: remainingBounds ].
+	super onLayoutDone.
+
+
 ]
 
 { #category : #measurement }
 BlInfiniteElement >> onMeasure: anExtentMeasurementSpec [
+
 	layout shouldAutoMeasure
 		ifTrue: [ self onMeasureAuto: anExtentMeasurementSpec ]
 		ifFalse: [ self onMeasureCustom: anExtentMeasurementSpec ].
@@ -1252,16 +1059,14 @@ BlInfiniteElement >> onMeasureAuto: anExtentMeasurementSpec [
 	skipMeasure := anExtentMeasurementSpec isExact.
 	layout measure: self with: anExtentMeasurementSpec.
 	skipMeasure ifTrue: [ ^ self ].
-	self state isStartStep ifTrue: [ self dispatchLayoutFirstStep ].
+	state isStartStep ifTrue: [ self dispatchLayoutFirstStep ].
 	layout measurementSpec: anExtentMeasurementSpec.
-	self state isMeasuring: true.
 	self dispatchLayoutSecondStep.
 	layout measureBasedOnChildren: anExtentMeasurementSpec.
 	layout shouldMeasureTwice ifFalse: [ ^ self ].
-	self state beStepLayout.
+	state beStepLayout.
 	layout measurementSpec:
 		(BlExtentMeasurementSpec exact: self measuredExtent).
-	self state isMeasuring: true.
 	self dispatchLayoutSecondStep.
 	layout measureBasedOnChildren: anExtentMeasurementSpec
 ]
@@ -1269,25 +1074,13 @@ BlInfiniteElement >> onMeasureAuto: anExtentMeasurementSpec [
 { #category : #measurement }
 BlInfiniteElement >> onMeasureCustom: anExtentMeasurementSpec [
 		
-	hasFixedSize
-		ifTrue: [ ^ layout measure: self with: anExtentMeasurementSpec ].
-	
 	"custom onMeasure"
-	
 	dataSourceChangeDuringMeasure ifTrue: [ 
-		self eatRequestLayout.
 		self processDataSourceCommands.
-		dataSourceManager consumeCommandsInOnePassIn: self.
-		self state isPreLayout: false .
-		dataSourceChangeDuringMeasure := false.
-		self resumeRequestLayout: false ].
+		dataSourceChangeDuringMeasure := false ].
 	
-	self state itemCount: dataSource itemCount.
-	self eatRequestLayout.
-	
-	layout measure: self with: anExtentMeasurementSpec.
-	self resumeRequestLayout: false.
-	self state isPreLayout: false
+	state itemCount: dataSource itemCount.
+	layout measure: self with: anExtentMeasurementSpec
 ]
 
 { #category : #'hooks - scrolling' }
@@ -1306,16 +1099,6 @@ BlInfiniteElement >> onScrolled: aPoint [
 	or bookkeeping after scrolling but before events fired, this is a good place to do so"
 
 	"self itemDecorationsDo: [ :d | d onScrollDoneIn: self ]"
-]
-
-{ #category : #'api - scrolling accessing' }
-BlInfiniteElement >> overScrollMode [
-	^ overScrollMode
-]
-
-{ #category : #'api - scrolling accessing' }
-BlInfiniteElement >> overScrollMode: aBlOverScrollMode [
-	overScrollMode := aBlOverScrollMode
 ]
 
 { #category : #'deferred actions' }
@@ -1342,7 +1125,7 @@ BlInfiniteElement >> prefetchingAllowed [
 { #category : #'private - commands' }
 BlInfiniteElement >> processDataSourceCommands [
 
-	"Consumes data source commands and calculates which type of animations we want to run.
+	"Consumes data source commands.
 	Is sent in onMeasure and dispatchLayout.
 	This method may process only the pre-layout state of updates or all of them."
 
@@ -1351,7 +1134,7 @@ BlInfiniteElement >> processDataSourceCommands [
 		self markKnownElementsInvalid.
 		layout onItemsChanged ].
 
-	dataSourceManager consumeCommandsInOnePassIn: self
+	dataSourceManager consumeCommandsIn: self
 ]
 
 { #category : #'private - scrolling' }
@@ -1362,18 +1145,18 @@ BlInfiniteElement >> pullGlows: anEventPoint overscroll: anOverScrollPoint [
 BlInfiniteElement >> recoverFocusFromState [
 
 	| aFocusTarget |
-	(preserveFocusAfterLayout and: [ self hasFocus ]) ifFalse: [ ^ self ].
+	self hasFocus ifFalse: [ ^ self ].
 
 	"only recover focus if InfiniteElement itself has the focus"
 	self isFocused ifFalse: [ self focusedChild ifNil: [ ^ self ] ].
 
 	aFocusTarget := nil.
 
-	self state focusedItemPosition ~= NoPosition ifTrue: [ 
-		aFocusTarget := self findElementHolderForDataSourcePosition: self state focusedItemPosition ].
+	state focusedItemPosition ~= NoPosition ifTrue: [ 
+		aFocusTarget := self findElementHolderForDataSourcePosition: state focusedItemPosition ].
 
-	(aFocusTarget isNil and: [ self state focusedItemId ~= NoId and: [ dataSource hasStableIds ] ]) ifTrue: [ 
-		aFocusTarget := self findElementHolderForItemId: self state focusedItemId ].
+	(aFocusTarget isNil and: [ state focusedItemId ~= NoId and: [ dataSource hasStableIds ] ]) ifTrue: [ 
+		aFocusTarget := self findElementHolderForItemId: state focusedItemId ].
 
 	(aFocusTarget isNil or: [ aFocusTarget itemElement hasFocus or: [ aFocusTarget itemElement hasFocusable not ] ]) 
 		ifTrue: [ ^ self ]
@@ -1388,7 +1171,34 @@ BlInfiniteElement >> recycler [
 	^ recycler
 ]
 
-{ #category : #'children - add/remove' }
+{ #category : #'children add/remove' }
+BlInfiniteElement >> removeChild: aChildElement [
+	"Remove aChildElement from infinite element
+	and do not track it anymore (unhide and remove from bucket)"
+
+	| index |
+	index := self childIndexOf: aChildElement.
+	index <= 0 ifTrue: [ ^ self ].
+
+	self removeChildAt: index
+]
+
+{ #category : #'children add/remove' }
+BlInfiniteElement >> removeChildAt: anIndex [ 
+
+	"Remove a child at anIndex from infinite element
+	and do not track it anymore."
+
+	| anElement |	
+	anElement := self children 
+		at: anIndex
+		ifAbsent: [ ^ self ].
+
+	self dispatchChildDetached: anElement.
+	super removeChildAt: anIndex
+]
+
+{ #category : #'children add/remove' }
 BlInfiniteElement >> removeDetachedChild: anElement [
 	| anElementHolder |
 	
@@ -1401,11 +1211,6 @@ BlInfiniteElement >> removeDetachedChild: anElement [
 	
 	self dispatchChildDetached: anElement.
 	super removeDetachedChild: anElement
-]
-
-{ #category : #'children - add/remove' }
-BlInfiniteElement >> repositionShadowingElements [
-	"self shouldBeImplemented"
 ]
 
 { #category : #layout }
@@ -1428,29 +1233,9 @@ BlInfiniteElement >> requestLayout: anElement [
 BlInfiniteElement >> resetFocusInfo [
 	"Reset all stored focus information from my state"
 
-	self state focusedItemId: NoId.
-	self state focusedItemPosition: NoPosition.
-	self state focusedSubChild: nil
-]
-
-{ #category : #layout }
-BlInfiniteElement >> resumeRequestLayout: shouldPerformLayout [
-	
-	eatRequestLayoutCounter < 1
-		ifTrue: [ self error: 'Invalid eat request layout count' ].
-
-	shouldPerformLayout
-		ifFalse: [ layoutRequestEaten := false ].
-	
-	eatRequestLayoutCounter = 1 ifTrue: [ 
-		(shouldPerformLayout and: [
-			layoutRequestEaten and: [ 
-				layoutFrozen not ] ])
-			ifTrue: [ self dispatchLayout ].
-		layoutFrozen
-			ifFalse: [ layoutRequestEaten := false ] ].
-		
-	eatRequestLayoutCounter := eatRequestLayoutCounter - 1
+	state focusedItemId: NoId.
+	state focusedItemPosition: NoPosition.
+	state focusedSubChild: nil
 ]
 
 { #category : #'private - focus' }
@@ -1463,7 +1248,7 @@ BlInfiniteElement >> saveFocusInfo [
 	
 	aFocusedElement := nil.
 	
-	(preserveFocusAfterLayout and: [ self hasFocus ])
+	self hasFocus
 		ifTrue: [ aFocusedElement := self focusedChild ].
 	
 	aFocusedElementHolder := aFocusedElement
@@ -1472,21 +1257,18 @@ BlInfiniteElement >> saveFocusInfo [
 	aFocusedElementHolder
 		ifNil: [ self resetFocusInfo ]
 		ifNotNil: [ 
-			self state focusedItemId: (dataSource hasStableIds
+			state focusedItemId: (dataSource hasStableIds
 				ifTrue: [ aFocusedElementHolder itemId ]
 				ifFalse: [ NoId ]).
-			self state focusedItemPosition: (dataSourceChangedAfterLayout
+			state focusedItemPosition: (dataSourceChangedAfterLayout
 				ifTrue: [ NoPosition ]
 				ifFalse: [ aFocusedElementHolder dataSourcePosition ]).
-			self state focusedSubChild: (self deepestFocusedChildIn: aFocusedElementHolder itemElement) ]
+			state focusedSubChild: (self deepestFocusedChildIn: aFocusedElementHolder itemElement) ]
 ]
 
 { #category : #scrolling }
 BlInfiniteElement >> scrollBy: aPoint [ 
 	| canScrollHorizontal canScrollVertical |
-
-	layoutFrozen
-		ifTrue: [ ^ self ].
 		
 	canScrollHorizontal := self layout canScrollHorizontally.
 	canScrollVertical := self layout canScrollVertically.
@@ -1507,9 +1289,7 @@ BlInfiniteElement >> scrollByInternal: aDeltaPoint from: anEventPoint [
 	| unconsumedX unconsumedY consumedX consumedY |
 
 	unconsumedX := unconsumedY := consumedX := consumedY := 0.
-	
 	self consumePendingDataSourceCommands.
-	self eatRequestLayout.
 	self onEnterLayoutOrScroll.
 	
 	aDeltaPoint x isZero
@@ -1521,12 +1301,7 @@ BlInfiniteElement >> scrollByInternal: aDeltaPoint from: anEventPoint [
 			consumedY := self layout scrollVerticallyBy: aDeltaPoint y.
 			unconsumedY := aDeltaPoint y - consumedY ].
 	
-	self repositionShadowingElements.
 	self onExitLayoutOrScroll.
-	self resumeRequestLayout: false.
-	
-	self overScrollMode ~= BlOverScrollMode never
-		ifTrue: [].
 	
 	(consumedX isZero and: [ consumedY isZero ])
 		ifFalse: [ self dispatchOnScrolled: consumedX @ consumedY ].
@@ -1583,9 +1358,6 @@ BlInfiniteElement >> scrollToPosition: aPosition [
 	InfiniteElement does not implement scrolling logic, rather forwards the call to
    InfiniteElement>>#scrollToPosition:"
 
-	layoutFrozen
-		ifTrue: [ ^ self ].
-
 	self stopScroll.
 	self layout scrollToPosition: aPosition.
 	self awakenScrollBars
@@ -1598,9 +1370,6 @@ BlInfiniteElement >> scrollToPosition: aPosition offset: anOffset [
 	sending ===scrollToPosition: 10 offset: 20=== will layout such that 10th item's
 	bottom is 20 pixels above the InfiniteElement's bottom.
 	Note: scroll position change will not be reflected until the next layout cycle (space pulse)"
-
-	layoutFrozen
-		ifTrue: [ ^ self ].
 
 	self stopScroll.
 	self layout scrollToPosition: aPosition offset: anOffset.
@@ -1615,12 +1384,6 @@ BlInfiniteElement >> scrollVerticallyBy: aNumber [
 	^ self layout scrollVerticallyBy: aNumber
 ]
 
-{ #category : #layout }
-BlInfiniteElement >> scrolledWhileFilling [
-
-	^ self layout scrolledWhileFilling
-]
-
 { #category : #'private - invalidation' }
 BlInfiniteElement >> setDataSourceChangedAfterLayout [
 
@@ -1629,13 +1392,12 @@ BlInfiniteElement >> setDataSourceChangedAfterLayout [
 	dataSourceChangedAfterLayout ifTrue: [ ^ self ].
 
 	dataSourceChangedAfterLayout := true.
-	childrenManager
+	self
 		unfilteredChildrenDo: [ :anElement | 
 			| anElementHolder |
 			anElementHolder := self elementHolderOf: anElement.
 			anElementHolder shouldIgnore ifFalse: [ 
-				anElementHolder flags addDataSourcePositionUnknown ] ]
-		in: self.
+				anElementHolder flags addDataSourcePositionUnknown ] ].
 
 	"immediately mark all elements as invalid, so prefetched ones can be
 	differentiated from elements bound to previous data set - both in children, and cache"
@@ -1646,9 +1408,6 @@ BlInfiniteElement >> setDataSourceChangedAfterLayout [
 BlInfiniteElement >> smoothScrollBy: aPoint [
 	"Animate a scroll by the given amount of pixels along either axis"
 	| dX dY |
-	
-	layoutFrozen
-		ifTrue: [ ^ self ].
 	
 	dX := aPoint x.
 	dY := aPoint y.
@@ -1666,9 +1425,6 @@ BlInfiniteElement >> smoothScrollBy: aPoint [
 { #category : #scrolling }
 BlInfiniteElement >> smoothScrollToPosition: aPosition [
 	"Starts a smooth scroll to a datasource position."
-	
-	layoutFrozen
-		ifTrue: [ ^ self ].
 	
 	self layout smoothScrollToPosition: aPosition
 ]
@@ -1703,6 +1459,26 @@ BlInfiniteElement >> stopScrollersInternal [
 
 	scrollFlinger stop.
 	self layout stopSmoothScroller
+]
+
+{ #category : #'children - accessing' }
+BlInfiniteElement >> unfilteredChildrenDo: aBlock [
+	"Do not remove children in a Block!"
+
+	| aChildCount |
+	aChildCount := self childrenCount.
+	1 to: aChildCount do: [ :anIndex |
+	aBlock value: (self childAt: anIndex) ]
+]
+
+{ #category : #'children - accessing' }
+BlInfiniteElement >> unfilteredChildrenReverseDo: aBlock [
+	"Do not remove children in a Block!"
+
+	| aChildCount |
+	aChildCount := self childrenCount.
+	aChildCount to: 1 by: -1 do: [ :anIndex |
+	aBlock value: (self childAt: anIndex) ]
 ]
 
 { #category : #'accessing - decoration' }

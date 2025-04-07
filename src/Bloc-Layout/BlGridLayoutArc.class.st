@@ -77,7 +77,7 @@ BlGridLayoutArc >> valid: aBoolean [
 	valid := aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : #evaluating }
 BlGridLayoutArc >> value [
 	<return: #BlGridMutableInteger>
 

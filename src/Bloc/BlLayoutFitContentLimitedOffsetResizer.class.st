@@ -16,6 +16,7 @@ BlLayoutFitContentLimitedOffsetResizer class >> offset: aNumber [
 
 { #category : #'double dispatching' }
 BlLayoutFitContentLimitedOffsetResizer >> measurementAtMostWith: aNumber [
+
 	^ super measurementAtMostWith: aNumber - offset
 ]
 

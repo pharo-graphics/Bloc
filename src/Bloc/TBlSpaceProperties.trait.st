@@ -18,17 +18,15 @@ TBlSpaceProperties >> borderless: aBoolean [
 
 { #category : #'window - properties' }
 TBlSpaceProperties >> fullscreen: aBoolean [
-	"Switch underlying window to fullscreen if true is given
-	and exit fullscreen mode if false is given"
+	"Switch underlying window to fullscreen if true is given and exit fullscreen mode if false is given"
 
 	self explicitRequirement
 ]
 
 { #category : #'window - properties' }
 TBlSpaceProperties >> fullsize: aBoolean [
-	"Switch underlying window to fullsize if true is given
-	and exit fullsize mode if false is given.
-	See ${method:TBlSpaceProperties>>#fullsize}"
+	"Switch underlying window to fullsize if true is given and exit fullsize mode if false is given.
+	See `TBlSpaceProperties>>#fullsize`"
 
 	self explicitRequirement
 ]
@@ -49,8 +47,7 @@ TBlSpaceProperties >> isBorderless [
 
 { #category : #'window - properties' }
 TBlSpaceProperties >> isFullscreen [
-	"Return true if an underlying window is in fullscreen mode,
-	false otherwise"
+	"Return true if an underlying window is in fullscreen mode, false otherwise"
 
 	^ self explicitRequirement
 ]
@@ -72,8 +69,7 @@ TBlSpaceProperties >> isResizable [
 
 { #category : #'window - properties' }
 TBlSpaceProperties >> position [
-	"Return window's position in screen coordinates"
-	<return: #Point>
+	"Return window's position in screen coordinates (`Point`)"
 	
 	^ self explicitRequirement
 ]
@@ -95,8 +91,7 @@ TBlSpaceProperties >> resizable: aBoolean [
 
 { #category : #'window - properties' }
 TBlSpaceProperties >> title [
-	"Return window's title as a string"
-	<return: #String>
+	"Return window's title (`String`)"
 
 	^ self explicitRequirement
 ]

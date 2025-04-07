@@ -4,7 +4,7 @@ I am a host that opens spaces as windows in the Morphic World.
 Class {
 	#name : #BlMorphicWindowHost,
 	#superclass : #BlMorphicSteppingHost,
-	#category : #'BlocHost-Morphic-Host - Window'
+	#category : #'BlocHost-Morphic-Window'
 }
 
 { #category : #'driver selection' }
@@ -27,33 +27,9 @@ BlMorphicWindowHost class >> priority [
 
 { #category : #'host - api' }
 BlMorphicWindowHost >> createHostSpaceFor: aSpace [
-	"Create and assign a new morphic host space for given bloc space"
+	"Create and assign a new morphic host space for received Bloc space"
 
-	| aWindow aHostSpace|
-	aWindow := self createMorphicWindowFor: aSpace.
-
-	aHostSpace := BlMorphicWindowHostSpace new
-		morphicWindow: aWindow;
-		host: self;
-		universe: self universe;
-		space: aSpace;
-		renderer: BlHostRenderer preferableClass new;
-		yourself.
-
-	aSpace hostSpace: aHostSpace
-]
-
-{ #category : #private }
-BlMorphicWindowHost >> createMorphicWindowFor: aSpace [
-	"Note, that I use given space only to find out what window properties to use for created window.
-	I do not create any strong or weak references to provided space"
-
-	^ BlMorphicWindow new
-		  spaceExtent: aSpace extent;
-		  borderless: aSpace isBorderless;
-		  fullsize: aSpace isFullsize;
-		  title: aSpace title;
-		  yourself
+	aSpace hostSpace: (self newHostSpaceFor: aSpace)
 ]
 
 { #category : #'host - api' }
@@ -72,4 +48,28 @@ BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
 BlMorphicWindowHost >> isStillAvailable [
 
 	^ self class isSupported
+]
+
+{ #category : #private }
+BlMorphicWindowHost >> newHostSpaceFor: aSpace [
+
+	^ BlMorphicWindowHostSpace new
+		morphicWindow: (self newMorphicWindowFor: aSpace);
+		space: aSpace;
+		host: self;
+		universe: self universe;
+		renderer: BlHostRenderer preferableClass new;
+		yourself
+]
+
+{ #category : #private }
+BlMorphicWindowHost >> newMorphicWindowFor: aSpace [
+	"Answer a new Morphic window based on the provided space."
+
+	^ BlMorphicWindow new
+		spaceExtent: aSpace extent;
+		borderless: aSpace isBorderless;
+		fullsize: aSpace isFullsize;
+		title: aSpace title;
+		yourself
 ]

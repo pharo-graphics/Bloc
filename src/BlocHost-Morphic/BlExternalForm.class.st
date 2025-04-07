@@ -22,9 +22,7 @@ form destroySurface.
 Class {
 	#name : #BlExternalForm,
 	#superclass : #OSSDL2ExternalForm,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
-	#category : #'BlocHost-Morphic-Host - Common'
+	#category : #'BlocHost-Morphic-Common'
 }
 
 { #category : #'external resource management' }
@@ -42,11 +40,13 @@ BlExternalForm >> finalize [
 
 { #category : #testing }
 BlExternalForm >> isNull [
+
 	^ pointer isNil or: [ pointer isNull ]
 ]
 
 { #category : #initialize }
 BlExternalForm >> setExtent: extent depth: bitsPerPixel [
+
 	bits ifNotNil: [self error: 'bits are already set'].
 	bitsPerPixel == 32 ifFalse: [self error: 'only 32 bits for now'.  "see 'rowPitch' below"].
 	width := extent x asInteger.

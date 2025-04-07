@@ -4,12 +4,12 @@ Extension { #name : #BlRadialGradientPaint }
 BlRadialGradientPaint >> adaptedToElement: aBlElement [
 	"Sets the instance variables to match the BlElement size"
 
-	| corner |
-	corner := aBlElement geometry extent.
-	self innerCenter: corner * (self innerCenter / 100) asFloatPoint.
-	self outerCenter: corner * (self outerCenter / 100) asFloatPoint.
-	self innerRadius: 0.
-	self outerRadius:
-		(corner distanceTo: 0 @ 0) * (self outerRadius / 100) asFloat.
-	^ self
+	aBlElement whenLayoutedDoOnce: [
+		| corner |
+		corner := aBlElement size.		
+		self innerCenter: corner * (self innerCenter / 100) asFloatPoint.
+		self outerCenter: corner * (self outerCenter / 100) asFloatPoint.
+		self innerRadius: 0.
+		self outerRadius:
+			(corner distanceTo: 0 @ 0) * (self outerRadius / 100) asFloat ]
 ]

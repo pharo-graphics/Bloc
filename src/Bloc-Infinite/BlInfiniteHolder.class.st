@@ -11,7 +11,6 @@ Class {
 		'itemElement',
 		'position',
 		'itemId',
-		'preLayoutPosition',
 		'flags',
 		'infiniteElement'
 	],
@@ -22,9 +21,9 @@ Class {
 }
 
 { #category : #'private - position' }
-BlInfiniteHolder >> clearOldPosition [
+BlInfiniteHolder >> bindAtPosition: aPosition [
 
-	preLayoutPosition := NoPosition
+	position := aPosition
 ]
 
 { #category : #'private - flags changing' }
@@ -46,27 +45,23 @@ BlInfiniteHolder >> dataSourcePosition [
 ]
 
 { #category : #private }
-BlInfiniteHolder >> detachInfiniteElement [
-
-	infiniteElement := nil
-]
-
-{ #category : #private }
 BlInfiniteHolder >> detachRecycler [
+
 	"Set returned from scrap flag to false"
 	self clearReturnedFromScrap
 ]
 
 { #category : #private }
-BlInfiniteHolder >> flagRemovedAndOffsetPosition: aNewPosition by: anOffset applyToPreLayout: applyToPreLayout [
+BlInfiniteHolder >> flagRemovedAndOffsetPosition: aNewPosition by: anOffset [
 
 	self flags addRemoved.
-	self offsetPositionBy: anOffset applyToPreLayout: applyToPreLayout.
+	itemElement constraints infinite insetsDirty: true.
 	position := aNewPosition
 ]
 
 { #category : #accessing }
 BlInfiniteHolder >> flags [
+
 	^ flags
 ]
 
@@ -90,10 +85,10 @@ BlInfiniteHolder >> infiniteElement: anInfiniteElement [
 
 { #category : #initialization }
 BlInfiniteHolder >> initialize [
+
 	super initialize.
-	
+
 	position := NoPosition.
-	preLayoutPosition := NoPosition.
 	itemId := NoId.
 	flags := BlInfiniteElementHolderFlags new
 ]
@@ -104,13 +99,13 @@ BlInfiniteHolder >> isBound [
 ]
 
 { #category : #'private - flags testing' }
-BlInfiniteHolder >> isChanged [
-	^ self flags hasUpdate
+BlInfiniteHolder >> isInvalid [
+	^ self flags hasInvalid
 ]
 
 { #category : #'private - flags testing' }
-BlInfiniteHolder >> isInvalid [
-	^ self flags hasInvalid
+BlInfiniteHolder >> isItemUpdated [
+	^ self flags hasUpdate
 ]
 
 { #category : #'private - flags testing' }
@@ -123,52 +118,27 @@ BlInfiniteHolder >> isTmpDetached [
 	^ self flags hasTmpDetached
 ]
 
-{ #category : #'private - flags testing' }
-BlInfiniteHolder >> isUpdated [
-	^ self flags hasUpdate
-]
-
 { #category : #accessing }
 BlInfiniteHolder >> itemElement [
+
 	^ itemElement
 ]
 
 { #category : #accessing }
 BlInfiniteHolder >> itemId [
 	"Returns The itemId represented by this ElementHolder if datasource has stable ids, `BlInfiniteElement noId` otherwise"
-	<return: #Number>
 
 	^ itemId
 ]
 
 { #category : #'private - accessing' }
 BlInfiniteHolder >> itemId: anIdemId [
+
 	itemId := anIdemId
 ]
 
-{ #category : #accessing }
-BlInfiniteHolder >> layoutPosition [
-	"Returns the position of the ElementHolder in terms of the latest layout pass"
-	<return: #Number>
-
-	^ preLayoutPosition = NoPosition
-		ifTrue: [ position ]
-		ifFalse: [ preLayoutPosition ]
-]
-
-{ #category : #'private - flags testing' }
-BlInfiniteHolder >> needsUpdate [
-	^ self flags hasUpdate
-]
-
 { #category : #private }
-BlInfiniteHolder >> offsetPositionBy: anOffset applyToPreLayout: shouldApplyOnPreLayout [
-	
-	preLayoutPosition = NoPosition
-		ifTrue: [ preLayoutPosition := position ].
-	
-	shouldApplyOnPreLayout
-		ifTrue: [ preLayoutPosition := preLayoutPosition + anOffset ].
+BlInfiniteHolder >> offsetPositionBy: anOffset [ 
 	
 	position := position + anOffset.
 	itemElement constraints infinite insetsDirty: true
@@ -182,25 +152,12 @@ BlInfiniteHolder >> position [
 	^ position
 ]
 
-{ #category : #'private - position' }
-BlInfiniteHolder >> position: aPosition [
-	"For inner use ONLY!"
-	position := aPosition
-]
-
-{ #category : #'private - position' }
-BlInfiniteHolder >> preLayoutPosition: aPosition [
-	"For inner use ONLY!"
-	preLayoutPosition := aPosition
-]
-
 { #category : #'private - invalidate' }
 BlInfiniteHolder >> reset [
 
 	flags clear.
 	position := NoPosition.
-	itemId := NoId.
-	preLayoutPosition := NoPosition
+	itemId := NoId
 ]
 
 { #category : #'private - flags testing' }

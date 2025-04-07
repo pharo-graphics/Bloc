@@ -32,7 +32,6 @@ BlLayoutFitContentResizer >> isFitContent [
 { #category : #'double dispatching' }
 BlLayoutFitContentResizer >> measurementAtMostWith: aNumber [
 	"Child wants to determine its own size. It may be bigger than us."
-	<return: #BlMeasurementSpec>
 
 	^ BlMeasurementSpec unspecified
 ]

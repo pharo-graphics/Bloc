@@ -235,8 +235,7 @@ BlLayout >> measure: anElement with: anExtentSpec [
 { #category : #'private - measurement' }
 BlLayout >> measureChild: aChildElement parentSpec: anExtentSpec [
 	"Measure a given child element allowing it to take as much space within parent
-	as it want *does not* taking child's margin and parent's padding into account.
-	Note: You are only allowed to use me in a context of BlLayout and not from outside"
+	without taking into account child's margin and parent's padding."
 
 	self
 		measureChild: aChildElement
@@ -248,18 +247,18 @@ BlLayout >> measureChild: aChildElement parentSpec: anExtentSpec [
 { #category : #protected }
 BlLayout >> measureChild: anElement parentSpec: parentSpec widthUsed: widthUsed heightUsed: heightUsed [
 	"Measure anElement based on provided parent's extent measurement specification and used width and height.
-	used width and height can contain margin and/or padding.
-	@see BlElement>>#measurementSpecFor:usedSize:resizing: for more info"
+	Used width and height can contain margin and/or padding."
 
-	anElement measure: (BlExtentMeasurementSpec new
-		widthSpec: (self
-			measurementSpecFor: parentSpec widthSpec
-			usedSize: widthUsed
-			resizer: anElement constraints horizontal resizer);
-		heightSpec: (self
-			measurementSpecFor: parentSpec heightSpec
-			usedSize: heightUsed
-			resizer: anElement constraints vertical resizer))
+	anElement measure:
+		(BlExtentMeasurementSpec
+			widthSpec: (self
+				measurementSpecFor: parentSpec widthSpec
+				usedSize: widthUsed
+				resizer: anElement constraints horizontal resizer)
+			heightSpec: (self
+				measurementSpecFor: parentSpec heightSpec
+				usedSize: heightUsed
+				resizer: anElement constraints vertical resizer))
 ]
 
 { #category : #protected }
@@ -277,17 +276,18 @@ BlLayout >> measureChildWithMargins: anElement parentSpec: parentSpec [
 { #category : #protected }
 BlLayout >> measureChildWithMargins: anElement parentSpec: parentSpec widthUsed: widthUsed heightUsed: heightUsed [
 	"Measure anElement based on provided parent's extent measurement specification and used width and height
-	taking element's margin and parent's padding into account"
+	taking into account element's margin and parent's padding."
 	
 	self
 		measureChild: anElement
 		parentSpec: parentSpec
-		widthUsed: anElement parent insets width + anElement outsets width + widthUsed
-		heightUsed: anElement parent insets height + anElement outsets height + heightUsed
+		widthUsed: anElement parent padding width + anElement margin width + widthUsed
+		heightUsed: anElement parent padding height + anElement margin height + heightUsed
 ]
 
 { #category : #'private - measurement' }
 BlLayout >> measureChildren: aCollectionOfChildren [
+
 	aCollectionOfChildren do: [ :aChild |
 		self
 			measureChild: aChild
@@ -330,15 +330,15 @@ BlLayout >> measuredChildren: anElement do: aBlock [
 
 { #category : #protected }
 BlLayout >> measurementSpecFor: parentSpec usedSize: usedSize resizer: childResizer [
-	"I determine what measurement specification my child should have
-	based on parent's measurement spec and child's resizer property.
+	"I determine what measurement specification (`BlMeasurementSpec`) my child
+	should have based on parent's measurement spec and child's resizer property.
 	
 	parentSpec may have the following modes:
 	 - At Most: parent's size can be at most as provided value 
 	 - Exactly: parent's size equals provided value
 	 - Unspecified: parent still has no idea how big it should be
 	
-	usedSize is a number (should satisfy #isBlocFiniteFloat) describing how much child's size differs from parent one
+	usedSize is a number describing how much child's size differs from parent one
 		defined in parentSpec. usedSize can consist out of child's margin and/or
 		parent's padding. Custom layouts may introduce more parameters that influence
 		on final size of child.
@@ -349,7 +349,6 @@ BlLayout >> measurementSpecFor: parentSpec usedSize: usedSize resizer: childResi
 	 - Wrap Content: child tries to be big enough to fit contained subnodes
 	 - Exactly: child knows exactly how big it wants to be
 	"
-	<return: #BlMeasurementSpec>
 
 	| size |
    size := 0.0 max: (parentSpec size - usedSize).

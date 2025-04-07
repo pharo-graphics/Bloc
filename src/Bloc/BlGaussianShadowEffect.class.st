@@ -7,7 +7,9 @@ Class {
 	#name : #BlGaussianShadowEffect,
 	#superclass : #BlShadowEffect,
 	#instVars : [
-		'width'
+		'width',
+		'alphaSurface',
+		'alphaSurfaceElementHash'
 	],
 	#category : #'Bloc-Effect'
 }
@@ -24,19 +26,6 @@ BlGaussianShadowEffect class >> color: aColor width: aNumber offset: anOffset [
 	^ self basicNew
 		  initializeColor: aColor width: aNumber offset: anOffset;
 		  yourself
-]
-
-{ #category : #'instance creation' }
-BlGaussianShadowEffect class >> default [
-
-	self
-		deprecated: 'Use #new instead'
-		transformWith: '`@receiver default' -> '`@receiver new'.
-	
-	^ self
-		color: (Color black alpha: 0.3)
-		width: 15
-		offset: 10@20
 ]
 
 { #category : #'instance creation' }
@@ -95,8 +84,9 @@ BlGaussianShadowEffect >> initializeColor: aColor width: aWidth offset: aPoint [
 
 { #category : #testing }
 BlGaussianShadowEffect >> wantsCompositionLayer [
+	"See: https://github.com/pharo-graphics/Bloc/issues/543"
 
-	^ true
+	^ false
 ]
 
 { #category : #accessing }

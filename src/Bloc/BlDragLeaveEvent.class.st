@@ -1,3 +1,6 @@
+"
+The `BlDragLeaveEvent` event is fired when a pointing device leave a drop area
+"
 Class {
 	#name : #BlDragLeaveEvent,
 	#superclass : #BlBaseDragEvent,

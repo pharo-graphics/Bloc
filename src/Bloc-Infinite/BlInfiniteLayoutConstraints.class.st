@@ -39,7 +39,7 @@ BlInfiniteLayoutConstraints >> elementLayoutPosition [
 	"Returns the datasource position that the element I am attached to corresponds to as of latest layout calculation"
 	<return: #Number>
 
-	^ holder layoutPosition
+	^ holder position
 ]
 
 { #category : #accessing }
@@ -91,29 +91,21 @@ BlInfiniteLayoutConstraints >> isElementInvalid [
 ]
 
 { #category : #testing }
-BlInfiniteLayoutConstraints >> isElementNeedsUpdate [
-	"Returns true if the element I am attached to needs to have its content updated from the corresponding datasource"
-	<return: #Boolean>
-
-	^ holder needsUpdate
-]
-
-{ #category : #testing }
-BlInfiniteLayoutConstraints >> isItemChanged [
-	"Returns true if the datasource item corresponding to the element I am attached to has been changed in the data set.
-	An InfiniteElement may choose to treat it differently in order to animate its changing state."
-	<return: #Boolean>
-
-	^ holder isChanged
-]
-
-{ #category : #testing }
 BlInfiniteLayoutConstraints >> isItemRemoved [
 	"Returns true if the datasource item corresponding to the element I am attached to has been removed from the data set.
 	An InfiniteLayout may choose to treat it differently in order to animate its outgoing or disappearing state"
 	<return: #Boolean>
 
 	^ holder isRemoved
+]
+
+{ #category : #testing }
+BlInfiniteLayoutConstraints >> isItemUpdated [
+	"Returns true if the datasource item corresponding to the element I am attached to has been changed in the data set.
+	An InfiniteElement may choose to treat it differently in order to animate its changing state."
+
+	<return: #Boolean>
+	^ holder isItemUpdated
 ]
 
 { #category : #'private - accessing' }

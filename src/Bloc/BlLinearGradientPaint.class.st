@@ -50,6 +50,13 @@ BlLinearGradientPaint class >> vertical [
 		yourself
 ]
 
+{ #category : #comparing }
+BlLinearGradientPaint >> = aBlPaint [
+
+	super = aBlPaint ifFalse: [ ^ false ].
+	^ self end = aBlPaint end and: [ self start = aBlPaint start ]
+]
+
 { #category : #accessing }
 BlLinearGradientPaint >> end [
 	^ end

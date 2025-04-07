@@ -1,3 +1,6 @@
+"
+The `BlDragEvent` event is fired when a pointing device is moving over a `BlSpace` scene a dragged element
+"
 Class {
 	#name : #BlDragEvent,
 	#superclass : #BlBaseDragEvent,

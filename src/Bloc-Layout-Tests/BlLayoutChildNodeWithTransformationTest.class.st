@@ -18,11 +18,11 @@ BlLayoutChildNodeWithTransformationTest >> testNodeWithScale [
 	aChildNode := BlLayoutChildNode new
 		              constraints: BlLayoutCommonConstraints new;
 		              measurement:
-			              (BlLayoutNodeComputedMeasurement new extent:
-					               100 @ 100).
+			              (BlLayoutNodeComputedMeasurement extent: 100 @ 100);
+		              yourself.
 
-	aChildNodeWithTransformation := aChildNode withTransformation:
-		                                aTransformation.
+	aChildNodeWithTransformation :=
+		aChildNode withTransformation: aTransformation.
 
 	self
 		assert: aChildNodeWithTransformation position

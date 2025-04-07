@@ -771,20 +771,20 @@ BlElementChildrenTest >> testNextSiblingSuchThatdo [
 ]
 
 { #category : #tests }
-BlElementChildrenTest >> testOwner [
+BlElementChildrenTest >> testParent [
 
 	| aContainer |
 	aContainer := self multipleChildren.
 	self
-		assert: (aContainer childWithId: #shape_1) owner
+		assert: (aContainer childWithId: #shape_1) parent
 		equals: aContainer.
 	self
-		assert: (aContainer childWithId: #shape_5) owner
+		assert: (aContainer childWithId: #shape_5) parent
 		equals: aContainer.
 	self
-		assert: (aContainer childWithId: #shape_10) owner
+		assert: (aContainer childWithId: #shape_10) parent
 		equals: aContainer.
-	self assert: aContainer owner equals: nil
+	self assert: aContainer parent equals: nil
 ]
 
 { #category : #tests }
@@ -886,7 +886,7 @@ BlElementChildrenTest >> testTopMostParentSuchThatifFoundifNone [
 	aChild := aContainer childWithId: #shape_10.
 	aChild
 		topMostParentSuchThat: [ :cur | cur id = #shape_1 ]
-		ifFound: [ :parent | self assert: parent owner equals: aContainer ]
+		ifFound: [ :parent | self assert: parent parent equals: aContainer ]
 		ifNone: [ self assert: false ].
 	aContainer
 		topMostParentSuchThat: [ :cur | cur id = #shape_1 ]

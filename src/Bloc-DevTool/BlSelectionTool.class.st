@@ -40,8 +40,8 @@ BlSelectionTool >> dragEvent: anEvent [
 
 { #category : #'dnd handlers' }
 BlSelectionTool >> dragStartEvent: anEvent [
-	anEvent consumed: true.
-	
+
+	anEvent consume.
 	self resetCurrentSelections.
 	startPosition := anEvent position.
 	selectionRect size:50@50; position:startPosition.

@@ -32,9 +32,3 @@ BlElementBorderChangedEvent class >> enableIn: anObject [
 BlElementBorderChangedEvent class >> wantedIn: anObject [
 	^ anObject wantsBorderChanged
 ]
-
-{ #category : #sending }
-BlElementBorderChangedEvent >> sendTo: anObject [
-
-	anObject elementBorderChangedEvent: self
-]

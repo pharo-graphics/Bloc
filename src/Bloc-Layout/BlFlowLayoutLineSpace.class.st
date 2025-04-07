@@ -7,9 +7,18 @@ Class {
 	#category : #'Bloc-Layout-Flow-Utilities'
 }
 
+{ #category : #'instance creation' }
+BlFlowLayoutLineSpace class >> newFor: floatingQueue maxLength: maxLength [
+
+	^ self basicNew
+		  initializeFor: floatingQueue maxLength: maxLength;
+		  yourself
+]
+
 { #category : #initialization }
 BlFlowLayoutLineSpace >> initializeFor: aCollectionOfFloatingChildren maxLength: aNumber [
 	"By definition floating elements can not overlap"
+
 	| endOfOccupiedSpace maxLength |
 	
 	maxLength := aNumber isInfinite
@@ -31,10 +40,12 @@ BlFlowLayoutLineSpace >> initializeFor: aCollectionOfFloatingChildren maxLength:
 
 { #category : #accessing }
 BlFlowLayoutLineSpace >> intervals [
+
 	^ intervals
 ]
 
 { #category : #accessing }
 BlFlowLayoutLineSpace >> lineStart [
+
 	^ intervals first first
 ]

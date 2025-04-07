@@ -355,14 +355,20 @@ BlElement >> allParentsDo: aBlock [
 	"Evaluate a block with my every parent as an argument starting from my direct parent
 	up to the top most parent (excluding myself).
 	If I don't have a parent - does nothing"
-	
+
 	| current |
 	current := self.
-	
-	[ current := current parent  ] 
-		whileNotNil: [ aBlock value: current ].
-	
-	^ self
+	[ current := current parent ] whileNotNil: [ aBlock value: current ]
+]
+
+{ #category : #'children testing' }
+BlElement >> allParentsInclude: anElement [
+	"Return true if I have a given element in my parent chain, false otherwise"
+
+	self allParentsDo: [ :aParentElement |
+		aParentElement = anElement ifTrue: [ ^ true ] ].
+
+	^ false
 ]
 
 { #category : #'children accessing' }
@@ -379,11 +385,10 @@ BlElement >> allParentsTo: aParentElement do: aBlock [
 	"Evaluate a block with each of my parents as an argument starting from my direct parent
 	up to the given parent element (excluding myself).
 	If I don't have a parent - does nothing"
-	
+
 	self allParentsDo: [ :eachParent |
 		aBlock value: eachParent.
-		eachParent == aParentElement
-			ifTrue: [ ^ self ] ]
+		eachParent = aParentElement ifTrue: [ ^ self ] ]
 ]
 
 { #category : #'event handling' }
@@ -407,12 +412,6 @@ BlElement >> allowMouseEvents [
 	It does not influence the ability of the children to handle events, hence I am a local property"
 
 	flags addShouldHandleMouseEvents.
-]
-
-{ #category : #'event handling' }
-BlElement >> allowMousePickOutsideEvent [
-
-	self userData at: #shouldHandleMousePickOutsideEvent put: true
 ]
 
 { #category : #layout }
@@ -495,18 +494,6 @@ BlElement >> asForm [
 	^ BlHostRenderer preferableClass newFormFrom: self
 ]
 
-{ #category : #converting }
-BlElement >> asScrollableElement [
-	| scrollable |
-	self removeFromParent.
-	scrollable := self newScrollableParent.
-	scrollable constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent ].
-	scrollable addChild: self.
-	^ scrollable
-]
-
 { #category : #'children add/remove' }
 BlElement >> attachChild: anElement [
 	"Attaches previously detached element as my last direct child.
@@ -559,7 +546,7 @@ BlElement >> attachSpace [
 	self isFocused
 		ifTrue: [ self requestFocus: self ]
 		ifFalse: [
-			self space focusOwner == self
+			self space focusOwner == self focusHolder
 				ifTrue: [ self loseFocus: self ] ].
 
 	self taskQueue isEmpty
@@ -713,22 +700,6 @@ BlElement >> boundsInLocal: aBounds [
 ]
 
 { #category : #'geometry bounds' }
-BlElement >> boundsInParent [
-	self deprecated: 'Use `element bounds inParent` instead'.
-
-	^ self bounds inParent asRectangle
-]
-
-{ #category : #'geometry bounds' }
-BlElement >> boundsInParent: aBounds [
-	<return: #BlBounds>
-	
-	self deprecated: 'Use `element bounds inParent` instead'.
-	
-	^ self localBoundsToParent: (self boundsInLocal: aBounds)
-]
-
-{ #category : #'geometry bounds' }
 BlElement >> boundsInSpace [
 	^ boundsCache boundsInSpace
 ]
@@ -771,44 +742,6 @@ BlElement >> childIndexOf: anElement [
 	<return: #Number>
 
 	^ self children indexOf: anElement
-]
-
-{ #category : #'children accessing' }
-BlElement >> childNamed: aChildName [
-	<return: #BlElement>
-	
-	self 
-		deprecated:  'Use childWithId: instead' 
-		transformWith: '`@receiver childNamed: `@statements1' -> '`@receiver childWithId: `@statements1'.
-
-	^ self childWithId: aChildName
-]
-
-{ #category : #'children accessing' }
-BlElement >> childNamed: aContainerName ifFound: ifFoundBlock [
-	<return: #BlElement>
-	
-	self 
-		deprecated:  'Use childWithId:ifFound: instead' 
-		transformWith: '`@receiver childNamed: `@statements1 ifFound: `@statements2' -> '`@receiver childWithId: `@statements1 ifFound: `@statements2'.
-
-	^ self
-		childWithId: aContainerName
-		ifFound: ifFoundBlock
-]
-
-{ #category : #'children accessing' }
-BlElement >> childNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock [
-	<return: #BlElement>
-	
-	self 
-		deprecated:  'Use childWithId:ifFound:ifNone: instead' 
-		transformWith: '`@receiver childNamed: `@statements1 ifFound: `@statements2 ifNone: `@statements3' -> '`@receiver childWithId: `@statements1 ifFound: `@statements2 ifNone: `@statements3'.
-
-	^ self
-		childWithId: aContainerName
-		ifFound: ifFoundBlock
-		ifNone: ifNoneBlock
 ]
 
 { #category : #'children accessing' }
@@ -1011,11 +944,11 @@ BlElement >> computeLayout [
 			widthSpec := BlMeasurementSpec exact: maxExtent x.
 			heightSpec := BlMeasurementSpec exact: maxExtent y.
 
-			self measure: (BlExtentMeasurementSpec new
+			self measure: (BlExtentMeasurementSpec
 				widthSpec: (self layout
 					measurementSpecFor: widthSpec
 					usedSize:  0.0
-					resizer: self constraints horizontal resizer);
+					resizer: self constraints horizontal resizer)
 				heightSpec: (self layout
 					measurementSpecFor: heightSpec
 					usedSize:  0.0
@@ -1061,24 +994,6 @@ BlElement >> constraintsDo: aBlock [
 	
 	aBlock value: self constraints.
 	self requestLayout
-]
-
-{ #category : #accessing }
-BlElement >> containerName [
-	<return: #Symbol or: nil>
-
-	self deprecated: 'Use #id instead. Cannot use auto rewriting because of very used method, see https://github.com/pharo-graphics/Bloc/issues/207'.
-	
-	^ self id
-]
-
-{ #category : #accessing }
-BlElement >> containerName: aSymbol [
-	"Give this element a container name (a Symbol) which can be used to find an element by its name"
-
-	self deprecated: 'Use #id: instead. Cannot use auto rewriting because of very used method, see https://github.com/pharo-graphics/Bloc/issues/207'.
-
-	self id: aSymbol
 ]
 
 { #category : #'geometry testing' }
@@ -1295,17 +1210,6 @@ BlElement >> detachSpace [
 ]
 
 { #category : #'children accessing' }
-BlElement >> directChildNamed: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock [
-	<return: #Object>
-		
-	self 
-		deprecated:  'Use directChildNamed:ifFound:ifNone: instead' 
-		transformWith: '`@receiver directChildNamed: `@statements1 ifFound: `@statements2 ifNone: `@statements3' -> '`@receiver directChildWithId: `@statements1 ifFound: `@statements2 ifNone: `@statements3'.
-
-	^ self directChildWithId: aContainerName ifFound: ifFoundBlock ifNone: ifNoneBlock
-]
-
-{ #category : #'children accessing' }
 BlElement >> directChildWithId: aStringOrSymbol ifFound: ifFoundBlock ifNone: ifNoneBlock [
 	<return: #Object>
 
@@ -1394,23 +1298,6 @@ BlElement >> dispatchLayoutDone [
 	self onLayoutDone.
 	self layout onLayoutDone: self.
 	self children do: [ :aChildElement | aChildElement dispatchLayoutDone ]
-]
-
-{ #category : #layout }
-BlElement >> dispatchMousePickedOutside: aMouseOutsideEvent [
-	"
-	I am triggered by the space as soon as a mouse down or up occurs.
-	I am recursively dispatched top-down through the scene graph and the whole composition tree of the elements"
-
-	aMouseOutsideEvent isConsumed ifTrue: [ ^ self ].
-	self children do: [ :aChildElement |
-		aChildElement dispatchMousePickedOutside: aMouseOutsideEvent clone ].
-	" Am I allowed to manage mouse pick outside ?"
-	self shouldHandleMousePickOutsideEvent ifFalse: [ ^ self ].
-	" does my bounds contains the event position, if so, the picked point is inside myself "
-	(self containsGlobalPoint: aMouseOutsideEvent originalEvent position)
-		ifTrue: [ ^ self ].
-	self dispatchEvent: aMouseOutsideEvent
 ]
 
 { #category : #'children dispatching' }
@@ -1638,6 +1525,13 @@ BlElement >> firstCommonParent: anElement ifFound: aFoundBlock ifNone: aNoneBloc
 	^ aNoneBlock value
 ]
 
+{ #category : #'focus requesting' }
+BlElement >> focusHolder [
+	"Answer the element that will be actually focused when #requestFocus is sent."
+
+	^ self
+]
+
 { #category : #accessing }
 BlElement >> focusability [
 	<return: #BlFocusability>
@@ -1812,26 +1706,26 @@ BlElement >> globalBoundsToLocal: aBounds [
 BlElement >> globalBoundsToMine: aBlBounds fromParent: aParentElement [
 	"In-place transform provided bounds from coordinate system of a given parent
 	to my local coordinates and return a result"
+
 	<return: #BlBounds>
 	| theParents |
-
-	aParentElement == self
-		ifTrue: [ ^ aBlBounds ].
+	aParentElement == self ifTrue: [ ^ aBlBounds ].
 
 	self
-		assert: [ self hasParent: aParentElement ]
-		description: [ 'A given element must be my parent (be in my children composition tree)' ].
+		assert: [ self allParentsInclude: aParentElement ]
+		description: [
+			'A given element must be my parent (be in my children composition tree)' ].
 
 	theParents := Array streamContents: [ :aStream |
-		| eachParent |
-		
-		aStream nextPut: self.
-		eachParent := self parent.
-		[ eachParent == aParentElement ] whileFalse: [
-			aStream nextPut: eachParent.
-			eachParent := eachParent parent ] ].
+		              | eachParent |
+		              aStream nextPut: self.
+		              eachParent := self parent.
+		              [ eachParent == aParentElement ] whileFalse: [
+			              aStream nextPut: eachParent.
+			              eachParent := eachParent parent ] ].
 
-	theParents reverseDo: [ :eachParent | eachParent parentBoundsToLocal: aBlBounds ].
+	theParents reverseDo: [ :eachParent |
+		eachParent parentBoundsToLocal: aBlBounds ].
 
 	^ aBlBounds
 ]
@@ -1897,7 +1791,9 @@ BlElement >> globalScale [
 { #category : #'children testing' }
 BlElement >> hasAnyInParentChain: aCollection [
 	"Return true if any one in the given collection in my parent chain (including myself) "
-	
+
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/715'.
+
 	^ aCollection anySatisfy: [ :e | self hasInParentChain: e ]
 ]
 
@@ -1942,9 +1838,14 @@ BlElement >> hasFocusable [
 { #category : #'children testing' }
 BlElement >> hasInParentChain: anElement [
 	"Return true if I have a given element in my parent chain, or if I am anElement "
-	<return: #Boolean>
 
-	^ anElement = self or: [ self hasParent: anElement ]
+	self
+		deprecated: 'Please use #withAllParentsInclude: instead.'
+		transformWith:
+			'`@receiver hasInParentChain: `@arg' ->
+			'`@receiver withAllParentsInclude: `@arg'.
+
+	^ self withAllParentsInclude: anElement
 ]
 
 { #category : #'event management accessing' }
@@ -1960,7 +1861,10 @@ BlElement >> hasNextEventTarget [
 
 { #category : #'children testing' }
 BlElement >> hasOwner [
-	<return: #Boolean>
+
+	self
+		deprecated: 'Use hasParent instead of current one'
+		transformWith: '`@receiver hasOwner' -> '`@receiver hasParent'.
 
 	^ self hasParent
 ]
@@ -1970,7 +1874,6 @@ BlElement >> hasParent [
 	"Return true if I have a parent, otherwise false.
 	Being added as direct child to other element does not necessary
 	mean that I am in the space scene graph"
-	<return: #Boolean>
 
 	^ self parent isNotNil
 ]
@@ -1979,11 +1882,11 @@ BlElement >> hasParent [
 BlElement >> hasParent: anElement [
 	"Return true if I have a given element in my parent chain, false otherwise"
 
-	self allParentsDo: [ :aParentElement |
-		aParentElement == anElement
-			ifTrue: [ ^ true ] ].
+	self
+		deprecated: 'Use allParentsInclude: instead'
+		transformWith: '`@rcvr hasParent: `@arg' -> '`@rcvr allParentsInclude: `@arg'.
 
-	^ false
+	^ self allParentsInclude: anElement
 ]
 
 { #category : #'api - bounds' }
@@ -2062,14 +1965,21 @@ BlElement >> inUIProcessDo: aBlock [
 
 { #category : #initialization }
 BlElement >> initialize [
+
 	super initialize.
 
 	spaceReference := BlNullSpaceReference uniqueInstance.
 	visuals := BlDefaultVisuals uniqueInstance.
 
 	boundsCache := BlBoundsCache on: self.
-	bounds := BlElementLocalBounds new referenceElement: self.
-	measuredBounds := BlElementLocalBounds new referenceElement: self.
+	bounds :=
+		BlElementLocalBounds new
+			referenceElement: self;
+			yourself.
+	measuredBounds :=
+		BlElementLocalBounds new
+			referenceElement: self;
+			yourself.
 
 	self initializeEventDispatcher.
 	
@@ -2086,9 +1996,6 @@ BlElement >> initialize [
 	flags addNeedsLayout.
 	flags addWaitingLayout.
 
-	"initialized lazily"
-	userData := nil.
-
 	taskQueue := BlTaskQueue new.
 	errorHandler := self defaultErrorHandler
 ]
@@ -2101,6 +2008,11 @@ BlElement >> initializeEventDispatcher [
 
 { #category : #'geometry bounds' }
 BlElement >> insets [
+
+	self
+		deprecated: 'Use #padding instead of current one'
+		transformWith: '`@receiver insets' -> '`@receiver padding'.
+
 	^ self padding
 ]
 
@@ -2185,6 +2097,13 @@ BlElement >> invalidationBounds: aBounds [
 ]
 
 { #category : #accessing }
+BlElement >> invalidationBoundsInParent [
+
+	^ self localBoundsToParent: (BlBounds fromRectangle: self invalidationBounds)
+
+]
+
+{ #category : #accessing }
 BlElement >> invalidationBoundsInSpace [
 
 	^ self localBoundsToGlobal: (BlBounds fromRectangle: self invalidationBounds)
@@ -2230,7 +2149,9 @@ BlElement >> isFocused [
 	"Returns true if I am focused, false otherwise.
 	Note: It is possible that an element has focus but is not focused by itself."
 
-	^ visuals isFocused
+	^ self focusHolder = self
+		  ifTrue: [ visuals isFocused ]
+		  ifFalse: [ self focusHolder isFocused ]
 ]
 
 { #category : #testing }
@@ -2531,33 +2452,13 @@ BlElement >> localPointToParent: aPoint [
 ]
 
 { #category : #'focus requesting' }
-BlElement >> looseFocus [
-	self
-		deprecated: 'Use #loseFocus instead.'
-		transformWith: '`@receiver looseFocus' -> '`@receiver loseFocus'.
-
-	self loseFocus
-]
-
-{ #category : #'focus requesting' }
-BlElement >> looseFocus: aChildElement [
-	self
-		deprecated: 'Please use loseFocus: instead.'
-		transformWith:
-			'`@receiver looseFocus: `@statements1'
-				-> '`@receiver loseFocus: `@statements1'.
-
-	self loseFocus: aChildElement
-]
-
-{ #category : #'focus requesting' }
 BlElement >> loseFocus [
 	| anElementToLooseFocus |
 
 	anElementToLooseFocus := self isFocused
-		ifTrue: [ self ]
+		ifTrue: [ self focusHolder ]
 		ifFalse: [ self deepestFocusedChild
-			ifNil: [ self ] ].
+			ifNil: [ self focusHolder ] ].
 
 	anElementToLooseFocus isFocused
 		ifFalse: [ ^ self ].
@@ -2628,6 +2529,47 @@ BlElement >> markNeedsPaintFrom: anElement [
 					self space markNeedsPaint: self from: anElement ] ]
 ]
 
+{ #category : #'view - configuration' }
+BlElement >> maxHeight [
+
+	"get maxHeight in constraints"
+	^ self constraints maxHeight
+]
+
+{ #category : #'view - configuration' }
+BlElement >> maxHeight: aNumber [
+
+	"set maxHeight in constraints"
+	self constraintsDo: [ :c | c maxHeight: aNumber ]
+]
+
+{ #category : #'view - configuration' }
+BlElement >> maxSize [
+
+	"get maxSize in constraints"
+	^ self maxWidth @ self maxHeight
+]
+
+{ #category : #'view - configuration' }
+BlElement >> maxSize: aPoint [
+
+	self constraintsDo: [ :c |
+		c maxWidth: aPoint x.
+		c maxHeight: aPoint y ]
+]
+
+{ #category : #'view - configuration' }
+BlElement >> maxWidth [
+
+	^ self constraints maxWidth
+]
+
+{ #category : #'view - configuration' }
+BlElement >> maxWidth: aNumber [
+
+	self constraintsDo: [ :c | c maxWidth: aNumber ]
+]
+
 { #category : #layout }
 BlElement >> measure: anExtentMeasurementSpec [
 	<return: #Point>
@@ -2676,21 +2618,18 @@ BlElement >> measureThatFailed: anExtentMeasurementSpec [
 
 { #category : #layout }
 BlElement >> measuredBounds [
-	"Return my measured bounds where origin is my current position
-	and extent is measured extent.
-	@see BlElement>>#measuredExtent for more info"
-	<return: #BlElementBounds>
+	"Return my measured bounds (`BlElementBounds`) where origin is
+	my current position and extent is measured extent.
+	See BlElement>>#measuredExtent for more information."
 	
 	^ measuredBounds
 ]
 
 { #category : #layout }
 BlElement >> measuredExtent [
-	"Return my measured extent (as a Point) used during layout by layout strategies.
+	"Return my measured extent (as a `Point`) used during layout by layout strategies.
 	It is being computed during measuring step.
-	@see BlElement>>onMeasure:
-	measuredExtent can not be nil"
-	<return: #Point>
+	See BlElement>>onMeasure:"
 	
 	^ self measuredBounds extent
 ]
@@ -2732,6 +2671,47 @@ BlElement >> measuredWidth [
 	^ self measuredBounds width
 ]
 
+{ #category : #'view - configuration' }
+BlElement >> minHeight [
+
+	"get minHeight in constraints"
+	^ self constraints minHeight
+]
+
+{ #category : #'view - configuration' }
+BlElement >> minHeight: aNumber [
+
+	self constraintsDo: [ :c | c minHeight: aNumber ]
+]
+
+{ #category : #'view - configuration' }
+BlElement >> minSize [
+
+	"get maxSize in constraints"
+	^ self minWidth @ self minHeight
+]
+
+{ #category : #'view - configuration' }
+BlElement >> minSize: aPoint [
+
+	self constraintsDo: [ :c |
+		c minWidth: aPoint x.
+		c minHeight: aPoint y ]
+]
+
+{ #category : #'view - configuration' }
+BlElement >> minWidth [
+
+	"get from constraints"
+	^ self constraints minWidth
+]
+
+{ #category : #'view - configuration' }
+BlElement >> minWidth: aNumber [
+
+	self constraintsDo: [ :c | c minWidth: aNumber ]
+]
+
 { #category : #accessing }
 BlElement >> mouseCursor [
 	^ visuals mouseCursor 
@@ -2754,12 +2734,6 @@ BlElement >> needsPaint [
 BlElement >> newEventDispatcher [
 
 	^ self defaultEventDispatcherClass on: self
-]
-
-{ #category : #converting }
-BlElement >> newScrollableParent [
-
-	^ BlScrollableElement new
 ]
 
 { #category : #'event management accessing' }
@@ -2857,19 +2831,15 @@ BlElement >> onChildRemoved: anElement [
 
 { #category : #'children dispatching' }
 BlElement >> onChildToBeRemoved: anElement [
-	"Is sent right before a given child element is about to be removed"
-	
-	"at this point we should make sure that the focus is transfered to me (its parent) if the removed
-	child (or one of its children) had focus"
-	
+
+	| aPreviousFocusOwner |
 	(self isAttachedToSceneGraph and: [ self space hasFocus: anElement ])
-		ifTrue: [
-			| aPreviousFocusOwner |
-			aPreviousFocusOwner := self space focusOwner.
-			self requestFocusDueTo: BlFocusDueToRemovedFromParentReason uniqueInstance.
-			"we should make sure that the removed element that previously had focus keeps the focused flag
-			in order to get focus back next time it is added to the scene"
-			aPreviousFocusOwner focused: true ].
+		ifFalse: [ ^ self ].
+
+	aPreviousFocusOwner := self space focusOwner.
+	self requestFocusDueToRemoval: true.
+	"we should make sure that the removed element that previously had focus keeps the focused flag in order to get focus back next time it is added to the scene"
+	aPreviousFocusOwner focused: true
 ]
 
 { #category : #'hooks - geometry' }
@@ -3037,18 +3007,6 @@ BlElement >> openInNewSpace [
 ]
 
 { #category : #convenience }
-BlElement >> openInOBlSpace [
-	"Add self to a new BlSpace and show it. Answer such space."
-	
-	self 
-		deprecated:  'Use #openInSpace instead' 
-		transformWith: '`@receiver openInOBlSpace' -> '`@receiver openInSpace'.
-	
-	^ self openInSpace
-
-]
-
-{ #category : #convenience }
 BlElement >> openInSpace [
 	"Add self to a new BlSpace and show it. Answer such space."
 	| sp |
@@ -3060,6 +3018,11 @@ BlElement >> openInSpace [
 
 { #category : #'geometry bounds' }
 BlElement >> outsets [
+
+	self
+		deprecated: 'Use #margin instead of current one'
+		transformWith: '`@receiver outsets' -> '`@receiver margin'.
+
 	^ self margin
 ]
 
@@ -3085,7 +3048,10 @@ BlElement >> outskirts: aBlOutskirts [
 
 { #category : #'children accessing' }
 BlElement >> owner [
-	<return: #BlElement>
+
+	self
+		deprecated: 'Use parent instead of current one'
+		transformWith: '`@receiver owner' -> '`@receiver parent'.
 
 	^ self parent
 ]
@@ -3110,7 +3076,8 @@ BlElement >> padding: aBlInsets [
 
 { #category : #accessing }
 BlElement >> parent [
-	<return: #BlElement or: nil>
+	"Answer an element or nil (if there is no parent)"
+
 	^ parent
 ]
 
@@ -3265,12 +3232,6 @@ BlElement >> preventMouseEvents [
 	flags clearShouldHandleMouseEvents.
 ]
 
-{ #category : #'event handling' }
-BlElement >> preventMousePickOutsideEvent [
-
-	self userData at: #shouldHandleMousePickOutsideEvent put: false
-]
-
 { #category : #'children accessing' }
 BlElement >> previousSiblingDo: aBlock [
 	"Evaluate aBlock with the previous child in my parent before me if there is one"
@@ -3344,15 +3305,6 @@ BlElement >> privateRequestingLayout: aBoolean [
 		ifFalse: [ flags clearNeedsLayout ]
 ]
 
-{ #category : #'api - bounds' }
-BlElement >> relocate: aPoint [
-	
-	self 
-		deprecated:  'Use position:' 
-		transformWith: '`@receiver relocate: `@point' -> '`@receiver position: `@point'.
-	self position: aPoint
-]
-
 { #category : #'children add/remove' }
 BlElement >> removeChild: anElement [
 	"Request layout and redraw an area occupied by anElement.
@@ -3406,16 +3358,6 @@ BlElement >> removeChildAt: anIndex [
 	self invalidate.
 	"then we request layout update while element is not yet removed"
 	self requestLayout
-]
-
-{ #category : #'children add/remove' }
-BlElement >> removeChildNamed: aContainerName [
-
-	self 
-		deprecated:  'Use removeChildWithId: instead' 
-		transformWith: '`@receiver removeChildNamed: `@statements1' -> '`@receiver removeChildWithId: `@statements1'.
-
-	self removeChildWithId: aContainerName
 ]
 
 { #category : #'children add/remove' }
@@ -3548,7 +3490,7 @@ BlElement >> requestFocus [
 	If I am not added to the scene graph mark me as focused in order to re-try focus
 	request as soon I am added to the scene graph"
 
-	self requestFocusDueTo: BlFocusUnknownReason uniqueInstance
+	self requestFocusDueToRemoval: false
 ]
 
 { #category : #'focus requesting' }
@@ -3556,11 +3498,11 @@ BlElement >> requestFocus: aChildElement [
 	"Propagate focus request up in the scene graph with an original
 	element that requested focus"
 
-	self requestFocus: aChildElement dueTo: BlFocusUnknownReason uniqueInstance
+	self requestFocus: aChildElement dueToRemoval: false
 ]
 
 { #category : #'focus requesting' }
-BlElement >> requestFocus: aChildElement dueTo: aFocusReason [
+BlElement >> requestFocus: aChildElement dueToRemoval: aBoolean [
 	"Propagate focus request up in the scene graph with an original
 	element that requested focus"
 
@@ -3569,22 +3511,21 @@ BlElement >> requestFocus: aChildElement dueTo: aFocusReason [
 		description: [ 'I must be attached to the scene graph' ].
 
 	(self hasParent and: [ self parent isAttachedToSceneGraph ])
-		ifTrue: [ self parent requestFocus: aChildElement dueTo: aFocusReason ]
-		ifFalse: [ self space requestFocusFor: aChildElement dueTo: aFocusReason ]
+		ifTrue: [ self parent requestFocus: aChildElement dueToRemoval: aBoolean ]
+		ifFalse: [ self space requestFocusFor: aChildElement dueToRemoval: aBoolean ]
 ]
 
 { #category : #'focus requesting' }
-BlElement >> requestFocusDueTo: aFocusReason [
+BlElement >> requestFocusDueToRemoval: aBoolean [
 	"Request a focus for this element.
 	If I am not added to the scene graph mark me as focused in order to re-try focus
 	request as soon I am added to the scene graph"
 
-	self isFocused
-		ifTrue: [ ^ self ].
+	self isFocused ifTrue: [ ^ self ].
 
 	self isAttachedToSceneGraph
-		ifTrue: [ self requestFocus: self dueTo: aFocusReason ]
-		ifFalse: [ self focused: true ]
+		ifTrue: [ self requestFocus: self dueToRemoval: aBoolean ]
+		ifFalse: [ self focusHolder focused: true ]
 ]
 
 { #category : #layout }
@@ -3703,14 +3644,11 @@ BlElement >> shouldHandleMouseEvents [
 	^ flags hasShouldHandleMouseEvents
 ]
 
-{ #category : #'event handling' }
-BlElement >> shouldHandleMousePickOutsideEvent [
-
-	^ self userData at: #shouldHandleMousePickOutsideEvent ifAbsentPut: [ false ]
-]
-
 { #category : #'api - opening' }
 BlElement >> showSpace: aSpace [
+	
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/698'.
+
 	self hasParent
 		ifTrue: [ self parent showSpace: aSpace ]
 		ifFalse: [
@@ -3995,8 +3933,15 @@ BlElement >> whenLayoutedDo: aBlock [
 
 { #category : #'geometry hooks' }
 BlElement >> whenLayoutedDoOnce: aBlock [
+	"Evaluate block passed as argument after the layout applied.
 
-	self when: BlElementLayoutComputedEvent doOnce: [ :event | aBlock cull: event ].
+	As an example of use, imagine you need to get the actual size of an element.
+	The size is computed by the layout.
+	Thus, if one need to get the size of an element one have to be sure that its layout applied."
+
+	^ self
+		addEventHandlerOn: BlElementLayoutComputedEvent
+		doOnce: aBlock
 ]
 
 { #category : #'api - bounds' }
@@ -4167,6 +4112,13 @@ BlElement >> withAllParentsDo: aBlock [
 	
 	aBlock value: self.
 	self allParentsDo: aBlock
+]
+
+{ #category : #'children testing' }
+BlElement >> withAllParentsInclude: anElement [
+	"Return true if I have a given element in my parent chain, or if I am anElement."
+
+	^ anElement = self or: [ self allParentsInclude: anElement ]
 ]
 
 { #category : #'children accessing' }

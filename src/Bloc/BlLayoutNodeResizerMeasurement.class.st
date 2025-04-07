@@ -6,18 +6,24 @@ Class {
 
 { #category : #measure }
 BlLayoutNodeResizerMeasurement >> measure: aLayoutChildNode with: anExtentSpecOrBlock [
-	<return: #BlLayoutNodeMeasurement>
+
 	| anExtentSpec width measuredWidth height measuredHeight |
 
 	anExtentSpec := anExtentSpecOrBlock value.
 
    width := 0.0 max: (anExtentSpec widthSpec size).
-	measuredWidth := (anExtentSpec widthSpec mode measurement: aLayoutChildNode horizontalResizer with: width) size.
+	measuredWidth :=
+		(anExtentSpec widthSpec mode
+			measurement: aLayoutChildNode horizontalResizer
+			with: width) size.
 
 	height := 0.0 max: (anExtentSpec heightSpec size).
-	measuredHeight := (anExtentSpec heightSpec mode measurement: aLayoutChildNode verticalResizer with: height) size.
+	measuredHeight :=
+		(anExtentSpec heightSpec mode
+			measurement: aLayoutChildNode verticalResizer
+			with: height) size.
 
-	^ BlLayoutNodeComputedMeasurement new
-		extent: (measuredWidth @ measuredHeight);
+	^ BlLayoutNodeComputedMeasurement
 		position: aLayoutChildNode constraints position
+		extent: (measuredWidth @ measuredHeight)
 ]

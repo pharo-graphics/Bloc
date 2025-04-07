@@ -26,17 +26,6 @@ BAFileExporter >> extension [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
-BAFileExporter >> fileName: aFileReference [
-
-	self
-		deprecated: 'Use target: instead'
-		transformWith: '`@receiver fileName: `@argument'
-			-> '`@receiver target: `@argument'.
-
-	self target: aFileReference
-]
-
 { #category : #private }
 BAFileExporter >> finishExport: aeCanvas [
 

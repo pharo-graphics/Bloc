@@ -1,3 +1,6 @@
+"
+Is sent by the space when a dragged element is moved (lifted) by the mouse
+"
 Class {
 	#name : #BlSpaceDragLiftEvent,
 	#superclass : #BlSpaceEvent,
@@ -10,25 +13,30 @@ Class {
 
 { #category : #accessing }
 BlSpaceDragLiftEvent >> delegate [
+
 	^ delegate
 ]
 
 { #category : #accessing }
-BlSpaceDragLiftEvent >> delegate: anObject [
-	delegate := anObject
+BlSpaceDragLiftEvent >> delegate: aDragDelegate [
+
+	delegate := aDragDelegate
 ]
 
 { #category : #accessing }
 BlSpaceDragLiftEvent >> position [
+
 	^ position
 ]
 
 { #category : #accessing }
 BlSpaceDragLiftEvent >> position: anObject [
+
 	position := anObject
 ]
 
-{ #category : #sending }
+{ #category : #accessing }
 BlSpaceDragLiftEvent >> sendTo: anObject [
+
 	anObject spaceDragLiftEvent: self
 ]

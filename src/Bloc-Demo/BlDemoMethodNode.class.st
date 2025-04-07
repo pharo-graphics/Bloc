@@ -6,9 +6,12 @@ Class {
 
 { #category : #execution }
 BlDemoMethodNode >> execute [
-	
-	
-	^ item methodClass new perform: item selector
+
+	| methodClass instance |
+
+	methodClass := item methodClass.
+	instance := methodClass isMeta ifTrue: [ methodClass soleInstance ] ifFalse: [ methodClass new ].
+	^ instance perform: item selector
 ]
 
 { #category : #accessing }

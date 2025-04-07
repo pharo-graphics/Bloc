@@ -135,5 +135,6 @@ BlHostRendererSurface >> shouldUpdateEveryFrame [
 
 { #category : #'api - updates' }
 BlHostRendererSurface >> updateEveryFrame [
+
 	shouldUpdateEveryFrame := true
 ]

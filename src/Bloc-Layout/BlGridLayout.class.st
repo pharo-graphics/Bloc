@@ -158,9 +158,12 @@ BlGridLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdate
 
 { #category : #measure }
 BlGridLayout >> measure: anElement with: anExtentSpec [
+
 	impl measure: anElement with: anExtentSpec.
 
-	self measureIgnored: anElement with: (BlExtentMeasurementSpec exact: anElement measuredExtent)
+	self
+		measureIgnored: anElement
+		with: (BlExtentMeasurementSpec exact: anElement measuredExtent)
 ]
 
 { #category : #accessing }

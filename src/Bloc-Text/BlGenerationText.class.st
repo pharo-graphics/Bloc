@@ -17,14 +17,6 @@ BlGenerationText class >> fromText: aBlText [
 		yourself
 ]
 
-{ #category : #'text - copying' }
-BlGenerationText >> generation [
-	"Return an object that uniquely represents this generation of text"
-	<return: #Object>
-
-	^ self text generation
-]
-
 { #category : #initialization }
 BlGenerationText >> initialize: aBlText with: aPreviousGeneration [
 

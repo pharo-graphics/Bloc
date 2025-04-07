@@ -8,17 +8,18 @@ Class {
 	#name : #BlMorphicEventHandler,
 	#superclass : #Object,
 	#instVars : [
-		'morph',
-		'pressedKeys'
+		'pressedKeys',
+		'windowMorph'
 	],
 	#classVars : [
 		'HorizontalScrolling'
 	],
-	#category : #'BlocHost-Morphic-Support'
+	#category : #'BlocHost-Morphic-Common'
 }
 
 { #category : #'instance creation' }
 BlMorphicEventHandler class >> window: aMorphicWindow [
+
 	^ self new
 		window: aMorphicWindow;
 		yourself
@@ -26,7 +27,6 @@ BlMorphicEventHandler class >> window: aMorphicWindow [
 
 { #category : #converting }
 BlMorphicEventHandler >> convertButtonFromMouseButtonEvent: aMorphicEvent [
-	<return: #BlMouseButton>
 
 	aMorphicEvent redButtonChanged
 		ifTrue: [ ^ BlMouseButton primary ].
@@ -34,16 +34,17 @@ BlMorphicEventHandler >> convertButtonFromMouseButtonEvent: aMorphicEvent [
 		ifTrue: [ ^ BlMouseButton middle ].
 	aMorphicEvent yellowButtonChanged
 		ifTrue: [ ^ BlMouseButton secondary ].
+
 	^ BlMouseButton code: aMorphicEvent whichButton
 ]
 
 { #category : #converting }
 BlMorphicEventHandler >> convertKeyFromEvent: aMorphicEvent [
+	"Answer a platform-idependent `KeyboardKey` from the event. On Unix platorms, pressed shift changes the keycode."
 
-	<return: #KeyboardKey>
-	| aKeyValue aKey |
+	| aKey |
 	aKey := aMorphicEvent key.
-	"on unix platorms, pressed shift changes the keycode"
+
 	OSPlatform current isUnix ifTrue: [ 
 		(aKey isShift not and: [ aMorphicEvent shiftPressed ]) ifTrue: [ 
 			{ (KeyboardKey tab -> KeyboardKey enter) } asDictionary
@@ -55,8 +56,8 @@ BlMorphicEventHandler >> convertKeyFromEvent: aMorphicEvent [
 
 { #category : #converting }
 BlMorphicEventHandler >> convertKeyModifiersFromEvent: aMorphicEvent [ 
-	| shift ctrl alt cmd |
 
+	| shift ctrl alt cmd |
 	shift := aMorphicEvent shiftPressed.
 	ctrl := aMorphicEvent controlKeyPressed.
 	alt := aMorphicEvent altKeyPressed.
@@ -83,44 +84,45 @@ BlMorphicEventHandler >> convertMousePosition: anEvent andDo: aBlock [
 { #category : #'private - actions' }
 BlMorphicEventHandler >> dropFiles: anEvent [
 	"Handle a number of dropped files from the OS.
-	TODO:
-		- use a more general mechanism for figuring out what to do with the file (perhaps even offering a choice from a menu)
-		- remember the resource location or (when in browser) even the actual file handle"
-	| numFiles |	
+	Based on homonymous method in `PasteUpMorph`"
+
+	| numFiles |
 	numFiles := anEvent contents.
-	
-	1 to: numFiles do: [:i | | aFileReference handler |
-		aFileReference := FileReference requestDropReference: i.
+	1 to: numFiles do: [ :i |
+		| aFileReference handler |
+		aFileReference := anEvent requestDropReference: i.
 		handler := ExternalDropHandler lookupExternalDropHandler: aFileReference.
-		handler ifNotNil: [ aFileReference binaryWriteStreamDo: [ :stream | handler handle: stream in: self dropEvent: anEvent ] ]].
+		handler ifNotNil: [
+			handler handle: aFileReference in: self dropEvent: anEvent ] ]
 ]
 
 { #category : #accessing }
 BlMorphicEventHandler >> enqueue: aBlEvent [
 
-	self isClosed
-		ifTrue: [ ^ self ].
+	self isClosed ifTrue: [ ^ self ].
 
-	self window hostSpace enqueueEvent: aBlEvent.
+	aBlEvent fillFromTime: windowMorph hostSpace space time.
+
+	windowMorph hostSpace enqueueEvent: aBlEvent.
 	self flag: 'ugly code to force the space to dequeue the event '.
-	self window ifNil: [ ^ self ].
-	self window hostSpace space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
+	windowMorph hostSpace space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
 ]
 
 { #category : #converting }
 BlMorphicEventHandler >> globalMousePositionForEvent: anEvent [
-	^ morph position + anEvent position
+
+	^ windowMorph position + anEvent position
 ]
 
 { #category : #'private - keyboard' }
 BlMorphicEventHandler >> handleBackspaceDown: aMorphicEvent [
+
 	| aBlEvent |
-	
 	aBlEvent := BlKeyDownEvent new
 		key: KeyboardKey backspace;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: self time now.
+		yourself.
 
 	self registerPressedKey: KeyboardKey backspace.
 	self enqueue: aBlEvent
@@ -128,13 +130,13 @@ BlMorphicEventHandler >> handleBackspaceDown: aMorphicEvent [
 
 { #category : #'private - keyboard' }
 BlMorphicEventHandler >> handleBackspaceUp: aMorphicEvent [
-	| aBlEvent |
 
+	| aBlEvent |
 	aBlEvent := BlKeyUpEvent new
 		key: KeyboardKey backspace;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: self time now.
+		yourself.
 
 	self unregisterPressedKey: KeyboardKey backspace.
 	self enqueue: aBlEvent
@@ -142,34 +144,31 @@ BlMorphicEventHandler >> handleBackspaceUp: aMorphicEvent [
 
 { #category : #'private - keyboard' }
 BlMorphicEventHandler >> handleDeleteDown: aMorphicEvent [
-	| aBlEvent |
 
+	| aBlEvent |
 	aBlEvent := BlKeyDownEvent new
 		key: KeyboardKey delete;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: self time now.
+		yourself.
 
 	self registerPressedKey: KeyboardKey delete.
-
 	self enqueue: aBlEvent
 ]
 
 { #category : #'private - keyboard' }
 BlMorphicEventHandler >> handleDeleteOrBackspaceDown: aMorphicEvent [
-
 	"we only allow either delete or backspace key"
-	(self hasPressedKey: KeyboardKey backspace)
-		ifTrue: [ ^ self ].
-		
-	(self hasPressedKey: KeyboardKey delete)
-		ifTrue: [ ^ self ].
-	
-	aMorphicEvent keyCharacter = Character delete
-		ifTrue: [ ^ self handleDeleteDown: aMorphicEvent ].
-		
-	aMorphicEvent keyCharacter = Character backspace
-		ifTrue: [ ^ self handleBackspaceDown: aMorphicEvent ]
+
+	(self hasPressedKey: KeyboardKey backspace) ifTrue: [ ^ self ].
+
+	(self hasPressedKey: KeyboardKey delete) ifTrue: [ ^ self ].
+
+	aMorphicEvent keyCharacter = Character delete ifTrue: [
+		^ self handleDeleteDown: aMorphicEvent ].
+
+	aMorphicEvent keyCharacter = Character backspace ifTrue: [
+		^ self handleBackspaceDown: aMorphicEvent ]
 ]
 
 { #category : #'private - keyboard' }
@@ -184,13 +183,13 @@ BlMorphicEventHandler >> handleDeleteOrBackspaceUp: aMorphicEvent [
 
 { #category : #'private - keyboard' }
 BlMorphicEventHandler >> handleDeleteUp: aMorphicEvent [
-	| aBlEvent |
 
+	| aBlEvent |
 	aBlEvent := BlKeyUpEvent new
 		key: KeyboardKey delete;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		timestamp: self time now.
+		yourself.
 	
 	self unregisterPressedKey: KeyboardKey delete.
 	self enqueue: aBlEvent
@@ -199,10 +198,11 @@ BlMorphicEventHandler >> handleDeleteUp: aMorphicEvent [
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleDropFiles: anEvent [
 	"Handle a drop from the OS."
+
 	anEvent wasHandled ifTrue: [ ^ self ]. "not interested"
 	WorldMorph allowDropFiles ifFalse: [ ^ self ].
 	anEvent wasHandled: true.
-	self dropFiles: anEvent.
+	self dropFiles: anEvent
 ]
 
 { #category : #'event handling' }
@@ -213,28 +213,32 @@ BlMorphicEventHandler >> handleDropMorph: anEvent [
 	self enqueue: anEvent"
 ]
 
+{ #category : #'event handling' }
+BlMorphicEventHandler >> handleExtentChanged: aMorphicEvent [
+
+	self enqueue:
+		(BlSpaceResizedEvent new
+			extent: aMorphicEvent newExtent;
+			yourself)
+]
+
 { #category : #'events - keyboard' }
 BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
+
 	| aBlEvent aKey theModifiers |
 
-	(self isScrollEvent: aMorphicEvent)
-		ifTrue: [ ^ self ].
+	(self isScrollEvent: aMorphicEvent) ifTrue: [ ^ self ].
+
 	aKey := self convertKeyFromEvent: aMorphicEvent.
+
 	"Ugly mouse hack: F12 (106) toggles a global variable to tell the mouse handler
 	to scroll horizontally."
-	aKey value = 106 ifTrue:
-		[ self toggleHorizontalScrolling.
-		^self ].
+	aKey value = 106 ifTrue: [
+		self toggleHorizontalScrolling.
+		^ self ].
 
-	self flag: 'No need to consider a special case for delete and backspace'.
-	"we ignore `delete` keydown event because it is not distinguishable from backspace.
-	we create keydown event in keystroke:"
-	"(aKey = BlKeyboardKey delete or: [ aKey = BlKeyboardKey backspace ])
-		ifTrue: [^ self handleDeleteOrBackspaceDown: aMorphicEvent]."
-	
 	"we ignore already pressed keys"
-	(self hasPressedKey: aKey)
-		ifTrue: [ ^ self ].
+	(self hasPressedKey: aKey) ifTrue: [ ^ self ].
 	
 	theModifiers := self convertKeyModifiersFromEvent: aMorphicEvent.
 	
@@ -242,7 +246,7 @@ BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 		key: aKey;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: theModifiers;
-		timestamp: self time now.
+		yourself.
 	
 	self registerPressedKey: aKey.
 
@@ -251,29 +255,21 @@ BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 
 { #category : #'events - keyboard' }
 BlMorphicEventHandler >> handleKeyUp: aMorphicEvent [
+
 	| aBlEvent aKey theModifiers |
 
-	(self isScrollEvent: aMorphicEvent)
-		ifTrue: [ ^ self ].
+	(self isScrollEvent: aMorphicEvent) ifTrue: [ ^ self ].
 
 	aKey := self convertKeyFromEvent: aMorphicEvent.
-	
-	self flag: 'No need to consider a special case for delete and backspace'.
-	"we can not differentiate between delete and backspace. However, we previously
-	logged which exact key was pressed, so now we can nicely send a corresponding keyup event"
-	"(aKey = BlKeyboardKey delete or: [ aKey = BlKeyboardKey backspace ])
-		ifTrue: [ ^ self handleDeleteOrBackspaceUp: aMorphicEvent ]."
-	
 	theModifiers := self convertKeyModifiersFromEvent: aMorphicEvent.
 
-	(self hasPressedKey: aKey)
-		ifFalse: [ ^ self ].
+	(self hasPressedKey: aKey) ifFalse: [ ^ self ].
 	
 	aBlEvent := BlKeyUpEvent new
 		key: aKey;
 		scanCode: aMorphicEvent scanCode;
 		modifiers: theModifiers;
-		timestamp: self time now.
+		yourself.
 
 	self unregisterPressedKey: aKey.
 	self enqueue: aBlEvent
@@ -283,25 +279,45 @@ BlMorphicEventHandler >> handleKeyUp: aMorphicEvent [
 BlMorphicEventHandler >> handleKeystroke: aMorphicEvent [
 
 	| aBlEvent |
-	(aMorphicEvent shiftPressed and: [ aMorphicEvent controlKeyPressed ]) 
-		ifTrue: [ 
-			aMorphicEvent keyCharacter = Character arrowLeft ifTrue: [ 
+	(aMorphicEvent shiftPressed and: [ aMorphicEvent controlKeyPressed ])
+		ifTrue: [
+			aMorphicEvent keyCharacter = Character arrowLeft ifTrue: [
 				^ self handleScrollLeft: aMorphicEvent ].
-			aMorphicEvent keyCharacter = Character arrowRight ifTrue: [ 
+			aMorphicEvent keyCharacter = Character arrowRight ifTrue: [
 				^ self handleScrollRight: aMorphicEvent ] ].
-
-	self flag: 'keystrokeEvent is not created for delete and backspace; no need to handle them '.
-	"(aMorphicEvent keyCharacter = Character delete
-		or: [ aMorphicEvent keyCharacter = Character backspace ])
-			ifTrue: [ ^ self handleDeleteOrBackspaceDown: aMorphicEvent ]."
 
 	aBlEvent := BlTextInputEvent new
 		            text: aMorphicEvent keyCharacter asString;
 		            modifiers:
 			            (self convertKeyModifiersFromEvent: aMorphicEvent);
-		            timestamp: DateAndTime now.
+		            yourself.
 
 	self enqueue: aBlEvent
+]
+
+{ #category : #'event handling' }
+BlMorphicEventHandler >> handleMorphDeleted: aMorphDeleted [ 
+
+	self enqueue: BlSpaceCloseRequest new.
+
+	windowMorph := nil
+]
+
+{ #category : #'event handling' }
+BlMorphicEventHandler >> handleMorphGotFocus: aMorphGotFocus [ 
+
+	self enqueue: BlSpaceFocusInEvent new
+]
+
+{ #category : #'event handling' }
+BlMorphicEventHandler >> handleMorphLostFocus: aMorphLostFocus [
+
+	self enqueue: BlSpaceFocusOutEvent new
+]
+
+{ #category : #'event handling' }
+BlMorphicEventHandler >> handleMorphOpened: aMorphOpened [ 
+
 ]
 
 { #category : #'event handling' }
@@ -310,16 +326,17 @@ BlMorphicEventHandler >> handleMouseDown: anEvent [
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent button |
 		button := self convertButtonFromMouseButtonEvent: aMorphicEvent.
+
 		aBlEvent := button mouseDownEventClass new
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			button: button;
-			timestamp: DateAndTime now;
 			yourself.
+
 		self enqueue: aBlEvent ].
 	
-	morph takeKeyboardFocus
+	windowMorph takeKeyboardFocus
 ]
 
 { #category : #'event handling' }
@@ -332,15 +349,14 @@ BlMorphicEventHandler >> handleMouseLeave: anEvent [
 
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleMouseMove: anEvent [
+
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent |
-
 		aBlEvent := BlMouseMoveEvent new
 			position: aMorphicEvent position;
 			delta: aMorphicEvent position - (self window pointToSpace: aMorphicEvent startPoint);
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-			timestamp: self time now;
 			yourself.
 
 		self enqueue: aBlEvent ]
@@ -353,22 +369,22 @@ BlMorphicEventHandler >> handleMouseOver: anEvent [
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleMouseUp: anEvent [
 	
-	morph
-		ifNil: [ ^ self ].
+	windowMorph ifNil: [ ^ self ].
 	
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent button |
 		button := self convertButtonFromMouseButtonEvent: aMorphicEvent.
+
 		aBlEvent := button mouseUpEventClass new
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			button: button;
-			timestamp: DateAndTime now;
 			yourself.
+
 		self enqueue: aBlEvent ].
 	
-	morph ifNotNil: #takeKeyboardFocus
+	windowMorph ifNotNil: [ windowMorph takeKeyboardFocus ]
 ]
 
 { #category : #'event handling' }
@@ -387,16 +403,19 @@ BlMorphicEventHandler >> handleMouseWheel: anEvent [
 
 		aBlEvent := BlMouseWheelEvent new
 			            vector: vector;
-			            modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
+			            modifiers:
+				            (self convertKeyModifiersFromEvent: aMorphicEvent);
 			            position: aMorphicEvent position;
-			            screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
-			            timestamp: DateAndTime now.
+			            screenPosition:
+				            (self globalMousePositionForEvent: aMorphicEvent);
+			            yourself.
 
 		self enqueue: aBlEvent ]
 ]
 
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleScrollLeft: anEvent [
+
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent |
 		aBlEvent := BlMouseWheelEvent new
@@ -405,22 +424,23 @@ BlMorphicEventHandler >> handleScrollLeft: anEvent [
 			button: (BlMouseButton code: aMorphicEvent buttons);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
-			timestamp: DateAndTime now.
+			yourself.
+
 		self enqueue: aBlEvent ]
 ]
 
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleScrollRight: anEvent [
+
 	self convertMousePosition: anEvent andDo: [ :aMorphicEvent | 
 		| aBlEvent |
-
 		aBlEvent := BlMouseWheelEvent new
 			vector: (BlVector x: 5 y: 0);
 			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
 			button: (BlMouseButton code: aMorphicEvent buttons);
 			position: aMorphicEvent position;
 			screenPosition: (self globalMousePositionForEvent: aMorphicEvent);
-			timestamp: DateAndTime now.
+			yourself.
 		
 		self enqueue: aBlEvent ]
 ]
@@ -441,19 +461,17 @@ BlMorphicEventHandler >> handleTextInputEvent: aTextInputEvent [
 				             ctrl: false
 				             alt: false
 				             cmd: false);
-		            timestamp: DateAndTime now.
+		            yourself.
 
 	self enqueue: aBlEvent
 ]
 
 { #category : #'event handling' }
 BlMorphicEventHandler >> handleWindowClosed: aMorphicEvent [
-	| aBlEvent |
 
-	aBlEvent := BlSpaceCloseRequest new timestamp: DateAndTime now.
-	self enqueue: aBlEvent.
+	self enqueue: BlSpaceCloseRequest new.
 
-	morph := nil
+	windowMorph := nil
 ]
 
 { #category : #'event handling' }
@@ -465,40 +483,31 @@ BlMorphicEventHandler >> handleWindowEvent: anEvent [
 BlMorphicEventHandler >> handleWindowOpened: aMorphicEvent [
 ]
 
-{ #category : #'event handling' }
-BlMorphicEventHandler >> handleWindowResize: aMorphicEvent [
-	| aBlEvent |
-	aBlEvent := BlSpaceResizedEvent new
-		extent: aMorphicEvent width @ aMorphicEvent height;
-		timestamp: DateAndTime now;
-		yourself.
-	self enqueue: aBlEvent.
-	
-	self window hostSpace space pulse
-]
-
 { #category : #'private - keyboard' }
 BlMorphicEventHandler >> hasPressedKey: aKey [
+
 	^ pressedKeys includes: aKey
 ]
 
 { #category : #accessing }
 BlMorphicEventHandler >> horizontalScrolling [ 
 
-	^HorizontalScrolling ifNil: [ HorizontalScrolling := false ]
+	^ HorizontalScrolling ifNil: [ HorizontalScrolling := false ]
 ]
 
 { #category : #initialization }
 BlMorphicEventHandler >> initialize [
+
 	super initialize.
 
 	pressedKeys := Set new.
-	HorizontalScrolling := false.
+	HorizontalScrolling := false
 ]
 
 { #category : #'private - testing' }
 BlMorphicEventHandler >> isClosed [
-	^ morph isNil
+
+	^ windowMorph isNil
 ]
 
 { #category : #'private - testing' }
@@ -517,45 +526,39 @@ BlMorphicEventHandler >> isScrollEvent: aMorphicKeyEvent [
 									or: [ aMorphicKeyEvent keyCharacter = Character null ] ] ] ] ] ] ])
 ]
 
-{ #category : #accessing }
-BlMorphicEventHandler >> morph [
-	^ morph
-]
-
-{ #category : #accessing }
-BlMorphicEventHandler >> morph: aMorph [
-	morph := aMorph
-]
-
 { #category : #'private - keyboard' }
 BlMorphicEventHandler >> registerPressedKey: aKey [
+
 	pressedKeys add: aKey
 ]
 
 { #category : #accessing }
-BlMorphicEventHandler >> time [
-	<return: #BlTime>
+BlMorphicEventHandler >> timestampNow [
+	"Answer the `DateAndTime` from our space"
 
-	^ self window hostSpace space time
+	^ windowMorph hostSpace space time now
 ]
 
 { #category : #'private - keyboard' }
 BlMorphicEventHandler >> toggleHorizontalScrolling [
 
-	HorizontalScrolling := self horizontalScrolling not.
+	HorizontalScrolling := self horizontalScrolling not
 ]
 
 { #category : #'private - keyboard' }
 BlMorphicEventHandler >> unregisterPressedKey: aKey [
+
 	pressedKeys remove: aKey
 ]
 
 { #category : #accessing }
 BlMorphicEventHandler >> window [
-	^ self morph
+
+	^ windowMorph
 ]
 
 { #category : #accessing }
-BlMorphicEventHandler >> window: aBlMorphicWindow [
-	self morph: aBlMorphicWindow
+BlMorphicEventHandler >> window: aBlMorphicSpaceHostMorph [
+
+	windowMorph := aBlMorphicSpaceHostMorph
 ]

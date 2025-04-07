@@ -9,6 +9,7 @@ Class {
 }
 
 { #category : #drawing }
-BlExampleElementWithBrokenDrawing >> drawOnSpartaCanvas: aCanvas [
+BlExampleElementWithBrokenDrawing >> aeDrawOn: aeCanvas [
+
 	1/0
 ]

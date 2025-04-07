@@ -14,7 +14,16 @@ TBlEventTarget >> addEventFilter: anEventHandler [
 
 { #category : #'event management' }
 TBlEventTarget >> addEventFilterOn: anEventClass do: aBlock [
-	self addEventFilter: (BlEventHandler on: anEventClass do: aBlock)
+
+	| newEventHandler |
+	newEventHandler :=
+		BlEventHandler
+			on: anEventClass
+			do: aBlock.
+
+	self addEventFilter: newEventHandler.
+	
+	^ newEventHandler
 ]
 
 { #category : #'event management' }
@@ -43,6 +52,24 @@ TBlEventTarget >> addEventHandlerOn: anEventClass do: aBlock [
 	self addEventHandler: newEventHandler.
 
 	^ newEventHandler
+]
+
+{ #category : #'event management' }
+TBlEventTarget >> addEventHandlerOn: anEventClass doOnce: aBlock [
+	"Add an event handler that will be removed right before culling the received block closure.
+	Answer the new `BlEventHandler`."
+
+	| anEventHandler |
+	anEventHandler := BlEventHandler new.
+	anEventHandler
+		eventClass: anEventClass;
+		action: [ :anEvent |
+			self removeEventHandler: anEventHandler.
+			aBlock cull: anEvent ].
+	
+	self addEventHandler: anEventHandler.
+	
+	^ anEventHandler
 ]
 
 { #category : #'shortcut management' }
@@ -83,16 +110,15 @@ TBlEventTarget >> buildEventDispatchChain: aBlEventDispatcherChain upTo: anOther
 
 { #category : #'event management' }
 TBlEventTarget >> dispatchEvent: anEvent [
-	"I only call my event dispatcher, so the event can be only handled by my event handlers/filters"
+	"Dispatch an event if my dispatcher wants it. Previously, set in the event target, forwarding target, and source (if it wasn't already set)."
 
-	anEvent hasSource
-		ifFalse: [ anEvent source: self ].
+	anEvent hasSource ifFalse: [ anEvent source: self ].
 
 	anEvent target: self.
 	anEvent forwardingTarget: self.
 
-	(self eventDispatcher wantsEvent: anEvent)
-		ifTrue: [ self eventDispatcher dispatchEvent: anEvent ]
+	(self eventDispatcher wantsEvent: anEvent) ifTrue: [
+		self eventDispatcher dispatchEvent: anEvent ]
 ]
 
 { #category : #'event management accessing' }
@@ -187,26 +213,13 @@ TBlEventTarget >> shortcuts [
 ]
 
 { #category : #'event management' }
-TBlEventTarget >> when: anEventClass do: aBlock [
+TBlEventTarget >> when: anEventClass doOnce: aBlock [
+	"Add an event handler that will be removed right before culling the received block closure."
 
 	self
-		deprecated: 'Use instead #addEventHandlerOn:do:'
-		transformWith: '`@rcv when: `@arg1 do: `@arg2' -> '`@rcv addEventHandlerOn: `@arg1 do: `@arg2'.
+		deprecated: 'Use addEventHandlerOn:doOnce: instead'
+		transformWith: '`@receiver when: `@arg1 doOnce: `@arg2'
+			-> '`@receiver addEventHandlerOn: `@arg1 doOnce: `@arg2'.
 
-	^ self addEventHandlerOn: anEventClass do: aBlock
-]
-
-{ #category : #'event management' }
-TBlEventTarget >> when: anEventClass doOnce: aBlock [
-	"Install an event handler just for one execution. After that the event handler is called, remove it"
-	| anEventHandler |
-	
-	anEventHandler := nil.
-	anEventHandler := BlEventHandler
-		on: anEventClass
-		do: [ :anEvent |
-			self removeEventHandler: anEventHandler.
-			aBlock cull: anEvent ].
-	
-	self addEventHandler: anEventHandler
+	^ self addEventHandlerOn: anEventClass doOnce: aBlock
 ]

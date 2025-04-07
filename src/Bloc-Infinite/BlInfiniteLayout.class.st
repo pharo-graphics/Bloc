@@ -27,10 +27,10 @@ Class {
 		'heightSpec',
 		'widthSpec',
 		'autoMeasure',
-		'itemPrefetchEnabled',
 		'measurementCacheEnabled',
 		'smoothScroller',
-		'announcer'
+		'announcer',
+		'lastExactSize'
 	],
 	#pools : [
 		'BlInfiniteConstants'
@@ -61,56 +61,35 @@ BlInfiniteLayout >> addChild: anElement at: anIndex [
 { #category : #'private - children' }
 BlInfiniteLayout >> addChild: anElement at: anIndex disappearing: isDisappearing [
 
-	"If anIndex == 0 child will be attached at the end"
-
 	| anElementHolder anInfiniteConstraints |
 	anElementHolder := self elementHolderOf: anElement.
-
 	anInfiniteConstraints := anElement constraints infinite.
-
-	(anElementHolder wasReturnedFromScrap )
-		ifTrue: [ 
+	anElementHolder wasReturnedFromScrap
+		ifTrue: [
 			anElementHolder clearReturnedFromScrap.
-			infiniteElement childrenManager attachChild: anElement at: anIndex in: infiniteElement ]
-		ifFalse: [ 
+			infiniteElement attachChild: anElement at: anIndex ]
+		ifFalse: [
 			anElement parent == infiniteElement
-				ifTrue: [ 
+				ifTrue: [
 					| currentIndex index |
 					index := anIndex = 0
 						         ifTrue: [ self childrenCount ]
 						         ifFalse: [ anIndex ].
 					currentIndex := infiniteElement childIndexOf: anElement.
-					currentIndex <= 0 ifTrue: [ 
-						self error: 'Added element has infinite element as parent but is not a direct child of it' ].
-					currentIndex ~= index ifTrue: [ self moveChildFrom: currentIndex to: index ] ]
-				ifFalse: [ 
-					infiniteElement childrenManager addChild: anElement at: anIndex in: infiniteElement.
+					currentIndex <= 0 ifTrue: [
+						self error:
+							'Added element has infinite element as parent but is not a direct child of it' ].
+					currentIndex ~= index ifTrue: [
+						self moveChildFrom: currentIndex to: index ] ]
+				ifFalse: [
+					infiniteElement addChild: anElement at: anIndex.
 					anInfiniteConstraints insetsDirty: true.
-					"If smooth scroller is currently running, let it know that a new element was attached"
-					self smoothScroller ifNotNil: [ :aSmoothScroller | 
-						aSmoothScroller isRunning ifTrue: [ aSmoothScroller onChildAttached: anElement ] ] ] ].
+					self smoothScroller ifNotNil: [ :aSmoothScroller |
+						aSmoothScroller isRunning ifTrue: [
+							aSmoothScroller onChildAttached: anElement ] ] ] ].
 
-	anInfiniteConstraints pendingInvalidate ifTrue: [ 
-		self flag: 'Do we need to request layout here?'.
-		"anElementHolder itemElement invalidate."
-		anInfiniteConstraints pendingInvalidate: false ]
-]
-
-{ #category : #'children - add/remove' }
-BlInfiniteLayout >> addDisappearingChild: anElement [
-	"To be used only during #layoutChildren to add an element to the layout that is known to be going away,
-	either because it has been removed or because it is actually not in the visible portion of the container
-	but is being laid out in order to inform infinite element in how to animate the item out of view."
-
-	self addDisappearingChild: anElement at: 0
-]
-
-{ #category : #'children - add/remove' }
-BlInfiniteLayout >> addDisappearingChild: anElement at: anIndex [
-	"If anIndex == 0 child will be added at the end
-	@see #addDisappearingChild:"
-
-	self addChild: anElement at: anIndex disappearing: true
+	anInfiniteConstraints pendingInvalidate ifFalse: [ ^ self ].
+	anInfiniteConstraints pendingInvalidate: false
 ]
 
 { #category : #accessing }
@@ -127,16 +106,10 @@ BlInfiniteLayout >> assertNotInLayoutOrScroll [
 ]
 
 { #category : #'children - add/remove' }
-BlInfiniteLayout >> attachChild: anElement [
-	"Reattach a previously detached child element at the end of the list"
-	self attachChild: anElement at: 0 in: infiniteElement 
-]
-
-{ #category : #'children - add/remove' }
 BlInfiniteLayout >> attachChild: anElement at: anIndex [
 	"Reattach a previously detached child element.
 	If anIndex == 0 child will be attached at the end"
-	infiniteElement childrenManager attachChild: anElement at: anIndex in: infiniteElement
+	infiniteElement attachChild: anElement at: anIndex
 ]
 
 { #category : #geometry }
@@ -255,17 +228,15 @@ BlInfiniteLayout >> childAtPosition: aPosition [
 	"Finds the element which represents the given datasource position.
 	I traverse each child since I have no information about child order.
 	Override me to improve performance if your infinite layout keeps data about child elements"
+
 	<return: #BlElement or: nil>
-	
 	1 to: self childrenCount do: [ :anIndex |
 		| anElement anElementHolder |
 		anElement := self childAt: anIndex.
 		anElementHolder := self elementHolderOf: anElement.
-		anElementHolder ifNotNil: [ :aHolder | 
-			(aHolder layoutPosition = aPosition and: [
-				aHolder shouldIgnore not and: [ 
-					self state isPreLayout or: [ 
-						aHolder isRemoved not ] ] ])
+		anElementHolder ifNotNil: [ :aHolder |
+			(aHolder position = aPosition and: [
+				 aHolder shouldIgnore not and: [ aHolder isRemoved not ] ])
 				ifTrue: [ ^ anElement ] ] ].
 	^ nil
 ]
@@ -455,7 +426,7 @@ BlInfiniteLayout >> detachChild: anElement [
 BlInfiniteLayout >> detachChildAt: anIndex [
 	"Temporarily detach a child element at the index"
 
-	infiniteElement childrenManager detachChildAt: anIndex in: infiniteElement
+	infiniteElement detachChildAt: anIndex
 ]
 
 { #category : #'children - accessing' }
@@ -469,7 +440,9 @@ BlInfiniteLayout >> elementHolderOf: anElement [
 
 { #category : #initialization }
 BlInfiniteLayout >> exactMeasurementSpecFrom: anInfiniteElement [
-	self measurementSpec: (BlExtentMeasurementSpec exact: anInfiniteElement extent)
+
+	self measurementSpec:
+		(BlExtentMeasurementSpec exact: anInfiniteElement extent)
 ]
 
 { #category : #focus }
@@ -568,9 +541,7 @@ BlInfiniteLayout >> initialize [
 	"InfiniteLayout has its own more strict measurement cache to avoid re-measuring a child
 	if the space that will be given to it is already larger than what it has measured before"
 	measurementCacheEnabled := true.
-	
-	"disable until not implemented"
-	itemPrefetchEnabled := false.
+
 	
 	smoothScroller := nil "when not running smoothScroller is nil"
 ]
@@ -580,13 +551,6 @@ BlInfiniteLayout >> isFocused [
 	"Return true if the infinit element I am bound to has focus"
 	
 	^ infiniteElement isFocused
-]
-
-{ #category : #testing }
-BlInfiniteLayout >> isItemPrefetchEnabled [
-	<return: #Boolean>
-
-	^ itemPrefetchEnabled
 ]
 
 { #category : #'measurement - testing' }
@@ -625,6 +589,12 @@ BlInfiniteLayout >> itemCount [
 	<return: #Number>
 	
 	^ self dataSource itemCount
+]
+
+{ #category : #accessing }
+BlInfiniteLayout >> lastExactSize [
+
+	^ lastExactSize
 ]
 
 { #category : #'api - layout' }
@@ -718,38 +688,6 @@ BlInfiniteLayout >> measureBasedOnChildren: anExtentSpec [
 ]
 
 { #category : #measurement }
-BlInfiniteLayout >> measureChild: anElement widthUsed: aWidthUsed heightUsed: aHeightUsed [
-	"Measure a child element using standard measurement policy, taking the padding
-	of the parent InfiniteElement and any added item decorations into account.
-	Note: I don't take child margin into account!"
-	| widthUsed heightUsed aWidthSpec aHeightSpec anExtentSpec anInsets aConstraints |
-	
-	aConstraints := anElement constraints.
-	anInsets := infiniteElement decorationsInsetsOfChildElement: anElement.
-	widthUsed := aWidthUsed + anInsets width.
-	heightUsed := aHeightUsed + anInsets height.
-	
-	aWidthSpec := self
-		calculateChildMeasureSpec: self width
-		parentSpec: self widthSpec
-		padding: self paddingLeft + self paddingRight + widthUsed
-		childResizer: aConstraints horizontal resizer
-		canScroll: self canScrollHorizontally.
-	
-	aHeightSpec := self
-		calculateChildMeasureSpec: self height
-		parentSpec: self heightSpec
-		padding: self paddingTop + self paddingBottom + heightUsed
-		childResizer: aConstraints vertical resizer
-		canScroll: self canScrollVertically.
-		
-	anExtentSpec := aWidthSpec @ aHeightSpec.
-	
-	(self shouldMeasureChild: anElement spec: anExtentSpec)
-		ifTrue: [ anElement measure: anExtentSpec ]
-]
-
-{ #category : #measurement }
 BlInfiniteLayout >> measureChildWithMargins: anElement widthUsed: aWidthUsed heightUsed: aHeightUsed [
 	"Measure a child element using standard measurement policy, taking the padding
 	of the parent InfiniteElement, any added item decorations and the child margins
@@ -820,24 +758,27 @@ BlInfiniteLayout >> measurementCacheEnabled: aBoolean [
 BlInfiniteLayout >> measurementSpec: anExtentMeasurementSpec [
 	"Update measurement specifications. I am sent from onMeasure: by infinite element.
 	anExtentMeasurementSpec must not be nil"
+
 	self
 		assert: [ anExtentMeasurementSpec isNotNil ]
 		description: [ 'Measurement specification must not be nil' ].
-	
+
 	widthSpec := anExtentMeasurementSpec widthSpec.
 	heightSpec := anExtentMeasurementSpec heightSpec.
 
 	width := widthSpec isUnspecified
-		ifTrue: [ 0 ]
-		ifFalse: [ widthSpec size ].
-		
+		         ifTrue: [ 0 ]
+		         ifFalse: [ widthSpec size ].
+
 	width := width min: self maximumWidth.
-		
+
 	height := heightSpec isUnspecified
-		ifTrue: [ 0 ]
-		ifFalse: [ heightSpec size ].
-		
-	height := height min: self maximumHeight
+		          ifTrue: [ 0 ]
+		          ifFalse: [ heightSpec size ].
+
+	height := height min: self maximumHeight.
+
+	(width isZero or: [height isZero ]) ifFalse: [ lastExactSize := width @ height ]
 ]
 
 { #category : #geometry }
@@ -890,13 +831,6 @@ BlInfiniteLayout >> onItemsAddedAt: positionStart count: itemCount [
 
 { #category : #'items - hooks' }
 BlInfiniteLayout >> onItemsChanged [
-]
-
-{ #category : #'items - hooks' }
-BlInfiniteLayout >> onItemsMovedFrom: fromPosition to: toPosition itemCount: count [
-	"Sent when an item is moved withing the datasource.
-	Note that, an item may also change position in response to another ADD/REMOVE/MOVE operation.
-	I am only sent if and only if BlInfiniteDataSource>>#notifyItemMoved is sent"
 ]
 
 { #category : #'items - hooks' }
@@ -980,9 +914,8 @@ BlInfiniteLayout >> removeAllChildren [
 	"Remove all elements from the currently attached infinite element.
 	This will not recycle any of the affected element; the InfiniteLayout is responsible for doing so if desired."
 
-	"Only remove non-animating elements"
 	self reverseChildrenDo: [ :anElement :anIndex |
-		infiniteElement childrenManager removeChildAt: anIndex in: infiniteElement ]
+		infiniteElement removeChildAt: anIndex ]
 ]
 
 { #category : #'children - add/remove' }
@@ -1050,7 +983,7 @@ BlInfiniteLayout >> removeChild: anElement [
 	InfiniteLayouts should use this method to completely remove a child view that is no longer needed.
    Note: InfiniteLayouts should strongly consider recycling removed views using BlInfiniteRecycler#recycleElement:"
 
-	infiniteElement childrenManager removeChild: anElement in: infiniteElement
+	infiniteElement removeChild: anElement
 ]
 
 { #category : #'children - add/remove' }
@@ -1060,7 +993,7 @@ BlInfiniteLayout >> removeChildAt: anIndex [
    Note: InfiniteLayouts should strongly consider recycling removed views using BlInfiniteRecycler#recycleElement:"
 
 	(self childAt: anIndex)
-		ifNotNil: [ infiniteElement childrenManager removeChildAt: anIndex in: infiniteElement ]
+		ifNotNil: [ infiniteElement removeChildAt: anIndex ]
 ]
 
 { #category : #'children - add/remove' }

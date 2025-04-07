@@ -64,8 +64,8 @@ BlSquaredLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpd
 
 { #category : #measure }
 BlSquaredLayout >> measure: anElement with: anExtentSpec [
+
 	| aMeasuredExtent anExtent |
-	
 	"first measure to determine how big the element want to be"
 	self layout measure: anElement with: anExtentSpec.
 
@@ -73,12 +73,13 @@ BlSquaredLayout >> measure: anElement with: anExtentSpec [
 
 	"then compute squared extent"
 	anExtent := self isTight
-		ifTrue: [ aMeasuredExtent min asPoint ]
-		ifFalse: [ aMeasuredExtent max asPoint ].
+		            ifTrue: [ aMeasuredExtent min asPoint ]
+		            ifFalse: [ aMeasuredExtent max asPoint ].
 
-	 aMeasuredExtent = anExtent
-		ifTrue: [ ^ self ].
+	aMeasuredExtent = anExtent ifTrue: [ ^ self ].
 
 	"and finally re-measure everything with squared extent"
-	self layout measure: anElement with: (BlExtentMeasurementSpec exact: anExtent)
+	self layout
+		measure: anElement
+		with: (BlExtentMeasurementSpec exact: anExtent)
 ]

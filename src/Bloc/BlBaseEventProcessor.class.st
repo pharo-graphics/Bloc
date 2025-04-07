@@ -1,8 +1,9 @@
+"
+My subclasses process `BlEvent`s and provide an API that spaces and space hosts send.
+"
 Class {
 	#name : #BlBaseEventProcessor,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'space'
 	],
@@ -12,28 +13,42 @@ Class {
 { #category : #'instance creation' }
 BlBaseEventProcessor class >> space: aSpace [
 
-	^ self new
-		space: aSpace;
+	^ self basicNew
+		initializeWithSpace: aSpace;
 		yourself
 ]
 
 { #category : #'event firing' }
 BlBaseEventProcessor >> dispatchEvent: anEvent target: aTarget [
+
+	anEvent fillFromTime: space time.
+
 	aTarget dispatchEvent: anEvent
 ]
 
 { #category : #'event firing' }
 BlBaseEventProcessor >> fireEvent: anEvent [
-	<return: #BlEvent>
 
+	anEvent fillFromTime: space time.
+	
 	^ BlEvent fireEvent: anEvent
 ]
 
 { #category : #'event firing' }
 BlBaseEventProcessor >> fireEvent: anEvent from: aTopEventTarget [
-	<return: #BlEvent>
+
+	anEvent fillFromTime: space time.
 
 	^ BlEvent fireEvent: anEvent from: aTopEventTarget
+]
+
+{ #category : #accessing }
+BlBaseEventProcessor >> initializeWithSpace: aSpace [
+
+	space := aSpace.
+
+	"Initialization in subclasses may need the space"
+	self initialize
 ]
 
 { #category : #'initialize-release' }
@@ -43,10 +58,6 @@ BlBaseEventProcessor >> onSpaceClosed [
 
 { #category : #accessing }
 BlBaseEventProcessor >> space [
-	^ space
-]
 
-{ #category : #accessing }
-BlBaseEventProcessor >> space: aSpace [
-	space := aSpace
+	^ space
 ]

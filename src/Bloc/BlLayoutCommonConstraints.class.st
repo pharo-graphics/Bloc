@@ -132,11 +132,6 @@ BlLayoutCommonConstraints >> ignoredByLayout [
 	^ ignoredByLayout
 ]
 
-{ #category : #'api - layouts' }
-BlLayoutCommonConstraints >> infinite [
-	^ self at: BlInfiniteLayout
-]
-
 { #category : #initialization }
 BlLayoutCommonConstraints >> initialize [
 	super initialize.
@@ -192,6 +187,13 @@ BlLayoutCommonConstraints >> maxHeight: aNumber [
 ]
 
 { #category : #'api - constraints' }
+BlLayoutCommonConstraints >> maxSize: aPoint [
+		
+	self maxWidth: aPoint x asFloat.
+	self maxHeight: aPoint y asFloat
+]
+
+{ #category : #'api - constraints' }
 BlLayoutCommonConstraints >> maxWidth [
 	"Return a maximal width an element can have,
 	maxWidth can not be nil,
@@ -225,6 +227,13 @@ BlLayoutCommonConstraints >> minHeight: aNumber [
 	aNumber must be non-negative (#isBlocPositive)"
 	
 	minHeight := aNumber asFloat
+]
+
+{ #category : #'api - constraints' }
+BlLayoutCommonConstraints >> minSize: aPoint [
+		
+	self minWidth: aPoint x asFloat.
+	self minHeight: aPoint y asFloat
 ]
 
 { #category : #'api - constraints' }
@@ -276,12 +285,6 @@ BlLayoutCommonConstraints >> position [
 { #category : #'api - constraints' }
 BlLayoutCommonConstraints >> position: aPoint [
 	position := aPoint
-]
-
-{ #category : #'api - layouts' }
-BlLayoutCommonConstraints >> proportional [
-
-	^ self at: BlProportionalLayout
 ]
 
 { #category : #'api - layouts' }

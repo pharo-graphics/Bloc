@@ -21,24 +21,16 @@ Class {
 	#category : #'Bloc-Basic-Math'
 }
 
-{ #category : #converting }
-BlMatrixDecomposition >> asDictionary [
-	<return: #Dictionary>
-
-	^ self subclassResponsibility
-]
-
 { #category : #'matrix - mathematical functions' }
 BlMatrixDecomposition >> composition [
-	"Compose and return a matrix for this decomposition"
-	<return: #BlMatrix>
+	"Compose and return a `BlMatrix` for this decomposition"
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'matrix - mathematical functions' }
 BlMatrixDecomposition >> interpolate: aFactor to: anotherDecomposition [
-	<return: #BlMatrixDecomposition>
+	"Answer a `BlMatrixDecomposition` that interpolates self with anotherDecomposition."
 
 	^ self subclassResponsibility
 ]

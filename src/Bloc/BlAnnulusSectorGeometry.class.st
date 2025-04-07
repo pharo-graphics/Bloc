@@ -16,6 +16,18 @@ Class {
 	#category : #'Bloc-Basic-Geometry'
 }
 
+{ #category : #comparing }
+BlAnnulusSectorGeometry >> = anObject [
+
+	self == anObject ifTrue: [ ^ true ].
+	self class = anObject class ifFalse: [ ^ false ].
+
+	^ self startAngle = anObject startAngle and: [
+		  self endAngle = anObject endAngle and: [
+			  self innerRadius = anObject innerRadius and: [
+				  self outerRadius = anObject outerRadius ] ] ].
+]
+
 { #category : #'private - geometry' }
 BlAnnulusSectorGeometry >> absoluteInnerRadius [
 	<return: #Number>
@@ -105,6 +117,7 @@ BlAnnulusSectorGeometry >> innerRadius [
 { #category : #accessing }
 BlAnnulusSectorGeometry >> innerRadius: aNumber [
 	"Set inner radius as a fraction of the max radius of the annulus [0..1]"
+
 	innerRadius := aNumber min: 1.0 max: 0.0.
 	self releaseCache
 ]

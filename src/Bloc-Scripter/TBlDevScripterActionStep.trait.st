@@ -24,18 +24,22 @@ TBlDevScripterActionStep >> fire [
 ]
 
 { #category : #'steps - interactions' }
-TBlDevScripterActionStep >> keyClick: aBlKeyboardKey [
-	^ self addStep: (BlDevScripterKeyClickStep new referenceSender key: aBlKeyboardKey)
+TBlDevScripterActionStep >> keyClick: aKeyboardKey [
+	^ self addStep: (BlDevScripterKeyClickStep new referenceSender key: aKeyboardKey)
 ]
 
 { #category : #'steps - interactions' }
-TBlDevScripterActionStep >> keyDown: aBlKeyboardKey [
-	^ self addStep: (BlDevScripterKeyDownStep new referenceSender key: aBlKeyboardKey)
+TBlDevScripterActionStep >> keyDown: aKeyboardKey [
+
+	^ self addStep:
+		  (BlDevScripterKeyDownStep new referenceSender key: aKeyboardKey)
 ]
 
 { #category : #'steps - interactions' }
-TBlDevScripterActionStep >> keyUp: aBlKeyboardKey [
-	^ self addStep: (BlDevScripterKeyUpStep new referenceSender key: aBlKeyboardKey)
+TBlDevScripterActionStep >> keyUp: aKeyboardKey [
+
+	^ self addStep:
+		  (BlDevScripterKeyUpStep new referenceSender key: aKeyboardKey)
 ]
 
 { #category : #'steps - interactions' }

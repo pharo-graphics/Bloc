@@ -73,16 +73,6 @@ BlTextDecorationAttribute >> overline [
 	decoration withOverline
 ]
 
-{ #category : #'api - decoration' }
-BlTextDecorationAttribute >> paint: aColor [
-	self
-		deprecated: 'Use color: instead'
-		transformWith: '`@receiver paint: `@statements1'
-				-> '`@receiver color: `@statements1'.
-				
-	self color: aColor
-]
-
 { #category : #printing }
 BlTextDecorationAttribute >> printOn: aStream [
 
@@ -114,14 +104,4 @@ BlTextDecorationAttribute >> underline [
 { #category : #'api - decoration' }
 BlTextDecorationAttribute >> wavy [
 	decoration wavy
-]
-
-{ #category : #'api - decoration' }
-BlTextDecorationAttribute >> width: aNumber [
-	self
-		deprecated: 'Use thickness: instead'
-		transformWith: '`@receiver width: `@statements1'
-				-> '`@receiver thickness: `@statements1'.
-
-	self thickness: aNumber
 ]

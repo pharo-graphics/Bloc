@@ -6,108 +6,55 @@
 Bloc is a low-level UI infrastructure & framework for [Pharo](http://pharo.org/).
 
 :warning:
-This repository contains the code for Bloc that will included in the future in Pharo.
-It retrofits a part of the development made at https://github.com/feenkcom/bloc. This version will focus on core features and stability. We are currently identifying the core we want for Pharo.
+This repository contains a Bloc codebase to be included in Pharo and thus focuses on core features and stability.
+It retrofits a part of the development made at https://github.com/feenkcom/bloc.
 
-You can join the mailing-list lse-openbloc@inria.fr from http://sympa.inria.fr.
 
-## Installation
+## Install
 
-The following script installs Bloc in [Pharo 11](https://pharo.org/download):
+The project can be loaded as usual via Metacello, using the `BaselineOfBloc` specification. To copy/paste a loading script. Use the following script to install stable Bloc in stable Pharo:
 
 ```smalltalk
-[ Metacello new
+Metacello new
 	baseline: 'Bloc';
-	repository: 'github://pharo-graphics/Bloc:dev-1.0/src';
-	onConflictUseIncoming;
-	ignoreImage;
-	load ]
-		on: MCMergeOrLoadWarning
-		do: [ :warning | warning load ]
+	repository: 'github://pharo-graphics/Bloc:master/src';
+	load
 ```
+You can replace master by:
 
-You can replace `dev-1.0` by `v2.0.0-alpha` to load such released version.
+- dev to work on the development branch
+- v2.2.0 to load latest released version
+Add this project to your Baseline with:
 
-Alternatively, you can do it by terminal (MacOS, linux... and should work as well in Windows with MINGW64). 
-Create a directory and execute `<this_repo>/scripts/build.sh`, which first downloads the Pharo image and VM and then loads the project.
+## How to depend on it
 
-## Getting Started
-Open a new window (a Bloc _space_) 
 ```smalltalk
-aSpace := BlSpace new.
-aSpace show.
-
-"Edit the space's properties, like title and size"
-aSpace title: 'Bloc basics'.
-aSpace extent: 800 @ 600.
+spec baseline: 'Bloc' with: [ spec repository: 'github://pharo-graphics/Bloc:v2.2.0/src' ].
 ```
 
-Draw an element (a `BlElement`)
-```smalltalk
-"Create a red rectangle"
-rectangle := BlElement new 
-	background: Color red; 
-	size: 150 @ 150;
-	yourself.
-	
-"Add it to the space"
-aSpace root addChild: rectangle.
+## Documentation
 
-"Update its properties"
-rectangle 
-	background: Color lightBlue;
-	position: 100 @ 100;
-	border: (BlBorder paint: Color blue width: 10).
-```
+* [Getting Started](doc/1-GettingStarted.md)
+* [About Mouse Events](doc/2-MouseEvent.md)
+* [Understanding `BlElement>>#onAddedToSceneGraph`](doc/3-ElementAddedToSceneGraph.md)
+* [History](doc/4-History.md)
 
-Nesting elements
-```smalltalk
-"Create a circle using a geometry (a BlElementGeometry subclass)"
-circle := BlElement new
-	background: Color blue;
-	geometry: BlCircleGeometry new;
-	size: 80 @ 80;
-	yourself.
-rectangle addChild: circle.
+These pages can be browsed via Pharo IDE -> World Menu -> Help -> Documentation Browser -> Bloc/doc (after loading the project).
+Note that there is also a book under writing available at [https://github.com/SquareBracketAssociates/Booklet-Graphics](https://github.com/SquareBracketAssociates/Booklet-Graphics)
 
-"Use a transformation to resize and show child element's overflow"
-circle transformDo: [ :builder | builder scaleBy: 1.2 ].
-rectangle clipChildren: false
-```
 
-Animating
-```smalltalk
-"Animate opacity"
-rectangle addAnimation: (BlOpacityAnimation new opacity: 0.5).
+## Contact
 
-"Animate transformations"
-fallAnimation := (BlTransformAnimation translate: 0 @ 200) absolute.
-rectangle addAnimation: fallAnimation.
-climbAnimation := (BlTransformAnimation translate: 0 @ 0) absolute.
-rectangle addAnimation: climbAnimation.
+Want to write us? you are welcome! you can either:
+* Join the mailing-list lse-openbloc@inria.fr from http://sympa.inria.fr
+* Chat via Discord in the #bloc channel of the Pharo server
 
-"Create sequence of animations"
-animationSequence := (BlSequentialAnimation withAll: {fallAnimation . climbAnimation})
-	beInfinite;
-	yourself.
-rectangle addAnimation: animationSequence
-```
 
-Handling Events
-```smalltalk
-"Change color on click"
-rectangle addEventHandlerOn: BlClickEvent do: [ :event | event target background: Color lightGray ].
+## Branches & Contributions
 
-"Animate on hover/blur"
-rectangle 
-	addEventHandlerOn: BlMouseEnterEvent
-	do: [ :event | event target addAnimation: (BlOpacityAnimation new opacity: 0.2)];
-	addEventHandlerOn: BlMouseLeaveEvent 
-	do: [ :event | event target addAnimation: (BlOpacityAnimation new opacity: 0.8)] 
-```
+We describe our contribution workflow & branch name convention in [this wiki page](../../wiki/Branches-and-versions).
 
-## License and Contributing
+
+## License
 
 This code is licensed under the [MIT license](./LICENSE).
-
-If you want to contribute to the project, please read our [contributing guide](./CONTRIBUTING.md).

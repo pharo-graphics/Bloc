@@ -17,16 +17,18 @@ Class {
 
 { #category : #'instance creation' }
 BlPaintBackground class >> paint: aBlPaint [
-	^ self new paint: aBlPaint
+
+	^ self new
+		paint: aBlPaint;
+		yourself
 ]
 
 { #category : #comparing }
 BlPaintBackground >> = anotherObject [
-	self == anotherObject
-		ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class)
-		ifFalse: [ ^ false ].
-	
+
+	self == anotherObject ifTrue: [ ^ true ].
+	anotherObject class = self class ifFalse: [ ^ false ].
+	anotherObject opacity = self opacity ifFalse: [ ^ false ].
 	^ anotherObject paint = self paint
 ]
 

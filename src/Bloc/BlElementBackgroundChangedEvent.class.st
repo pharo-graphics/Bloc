@@ -32,8 +32,3 @@ BlElementBackgroundChangedEvent class >> enableIn: anObject [
 BlElementBackgroundChangedEvent class >> wantedIn: anObject [
 	^ anObject wantsBackgroundChanged
 ]
-
-{ #category : #sending }
-BlElementBackgroundChangedEvent >> sendTo: anObject [
-	anObject elementBackgroundChangedEvent: self
-]

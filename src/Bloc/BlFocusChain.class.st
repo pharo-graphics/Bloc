@@ -9,7 +9,7 @@ I am used by `BlFocusProcessor` to properly send events
 Class {
 	#name : #BlFocusChain,
 	#superclass : #DoubleLinkedList,
-	#category : #'Bloc-Space - Support'
+	#category : #'Bloc-Space - Events'
 }
 
 { #category : #'instance creation' }

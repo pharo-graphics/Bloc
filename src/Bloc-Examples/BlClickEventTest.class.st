@@ -3,7 +3,7 @@ Class {
 	#superclass : #TestCase,
 	#traits : 'TBlDevScripterExamples',
 	#classTraits : 'TBlDevScripterExamples classTrait',
-	#category : #'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-Event-Scripter'
 }
 
 { #category : #'running - elements' }
@@ -196,18 +196,18 @@ BlClickEventTest >> threeElementsInScripter [
 				   on: BlClickEvent
 				   do: [ :anEvent |
 					   anEventCollection add: #parent.
-					   anEvent consumed: true ]).
+					   anEvent consume ]).
 		  aChild := anElement childAt: 1.
 		  aChild addEventHandler: (BlEventHandler
 				   on: BlClickEvent
 				   do: [ :anEvent |
 					   anEventCollection add: #child.
-					   anEvent consumed: true ]).
+					   anEvent consume ]).
 		  (aChild childAt: 1) addEventHandler: (BlEventHandler
 				   on: BlClickEvent
 				   do: [ :anEvent |
 					   anEventCollection add: #grandchild.
-					   anEvent consumed: true ]).
+					   anEvent consume ]).
 		  anElement ]
 ]
 
@@ -260,18 +260,18 @@ BlClickEventTest >> threeElementsWithFalseChildClippingInScripter [
 				   on: BlClickEvent
 				   do: [ :anEvent |
 					   anEventCollection add: #parent.
-					   anEvent consumed: true ]).
+					   anEvent consume ]).
 		  aChild := anElement childAt: 1.
 		  aChild addEventHandler: (BlEventHandler
 				   on: BlClickEvent
 				   do: [ :anEvent |
 					   anEventCollection add: #child.
-					   anEvent consumed: true ]).
+					   anEvent consume ]).
 		  (aChild childAt: 1) addEventHandler: (BlEventHandler
 				   on: BlClickEvent
 				   do: [ :anEvent |
 					   anEventCollection add: #grandchild.
-					   anEvent consumed: true ]).
+					   anEvent consume ]).
 		  anElement ]
 ]
 
@@ -300,18 +300,18 @@ BlClickEventTest >> threeElementsWithTrueChildClippingInScripter [
 				   on: BlClickEvent
 				   do: [ :anEvent |
 					   anEventCollection add: #parent.
-					   anEvent consumed: true ]).
+					   anEvent consume ]).
 		  aChild := anElement childAt: 1.
 		  aChild addEventHandler: (BlEventHandler
 				   on: BlClickEvent
 				   do: [ :anEvent |
 					   anEventCollection add: #child.
-					   anEvent consumed: true ]).
+					   anEvent consume ]).
 		  (aChild childAt: 1) addEventHandler: (BlEventHandler
 				   on: BlClickEvent
 				   do: [ :anEvent |
 					   anEventCollection add: #grandchild.
-					   anEvent consumed: true ]).
+					   anEvent consume ]).
 		  anElement ]
 ]
 
@@ -338,11 +338,11 @@ BlClickEventTest >> twoElementsInScripter [
 				   on: BlClickEvent
 				   do: [ :anEvent |
 					   anEventCollection add: #parent.
-					   anEvent consumed: true ]).
+					   anEvent consume ]).
 		  (anElement childAt: 1) addEventHandler: (BlEventHandler
 				   on: BlClickEvent
 				   do: [ :anEvent |
 					   anEventCollection add: #child.
-					   anEvent consumed: true ]).
+					   anEvent consume ]).
 		  anElement ]
 ]

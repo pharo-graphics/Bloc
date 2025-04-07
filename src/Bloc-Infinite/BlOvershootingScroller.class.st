@@ -218,12 +218,6 @@ BlOvershootingScroller >> isFinished [
 ]
 
 { #category : #'api - testing' }
-BlOvershootingScroller >> isFlywheel [
-	
-	^ isFlywheel
-]
-
-{ #category : #'api - testing' }
 BlOvershootingScroller >> isOverScrolled [
 	"Returns whether the current Scroller is currently returning to a valid position.
 	Valid bounds were provided by the ==#fling:==method.
@@ -386,8 +380,8 @@ BlOvershootingScroller >> time: aTime [
 
 { #category : #accessing }
 BlOvershootingScroller >> timePassed [
-	"Returns the time elapsed since the beginning of the scrolling."
-	<return: #Duration>
+	"Returns a `Duration` that represents the time elapsed since the beginning of the scrolling."
+
 	| aTime aStartTime |
 	
 	aTime := DateAndTime millisecondClockValue.

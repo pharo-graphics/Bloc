@@ -17,43 +17,10 @@ Class {
 	#instVars : [
 		'containerMorph'
 	],
-	#category : #'BlocHost-Morphic-Host - Morph'
+	#category : #'BlocHost-Morphic-Embedded'
 }
 
-{ #category : #examples }
-BlMorphicHost class >> example [
-
-	| aMorph aHost aSpace |
-	aMorph := Morph new.
-	"container morph could also have #spaceFill resizing"
-	aMorph extent: 400 asPoint.
-	"Specify a layout policy so the Bloc space fills the whole
-	extent (including Morph resizing)."
-	aMorph layoutPolicy: TableLayout new.
-	aMorph openInWindowLabeled: 'Resize window to layout. Hover squares to color.'.
-
-	aHost := BlMorphicHost new.
-	aHost containerMorph: aMorph.
-
-	aSpace := BlSpace new.
-	aSpace host: aHost.
-	aSpace show.
-
-	aSpace root
-		background: Color paleBlue;
-		layout: BlFlowLayout horizontal.
-
-	50 timesRepeat: [ 
-		aSpace root addChild:
-			(BlElement new
-				background: Color random translucent;
-				addEventHandlerOn: BlMouseEnterEvent
-					do: [ :evt |
-						evt target background: Color random ];
-				yourself) ]
-]
-
-{ #category : #testing }
+{ #category : #'driver selection' }
 BlMorphicHost class >> isSupported [
 	"I can not be used as one of the default Bloc host because I require users to provide containerMorph"
 
@@ -66,7 +33,7 @@ BlMorphicHost class >> label [
 	^ 'Morphic - Embedded'
 ]
 
-{ #category : #testing }
+{ #category : #'driver selection' }
 BlMorphicHost class >> priority [
 	"I have the lowest possible priority (I am also not supported)"
 
@@ -89,27 +56,7 @@ BlMorphicHost >> containerMorph: aMorph [
 BlMorphicHost >> createHostSpaceFor: aSpace [
 	"Create and assign a new morphic host space for given bloc space"
 
-	| aMorph aHostSpace|
-	aMorph := self createMorphFor: aSpace.
-
-	aHostSpace := BlMorphicHostSpace new
-		spaceHostMorph: aMorph;
-		universe: self universe;
-		host: self;
-		space: aSpace;
-		renderer: BARenderer new;
-		yourself.
-
-	aSpace hostSpace: aHostSpace
-]
-
-{ #category : #private }
-BlMorphicHost >> createMorphFor: aSpace [
-
-	^ BlMorphicSpaceHostMorph new
-		  color: Color transparent;
-		  extent: aSpace extent;
-		  yourself
+	aSpace hostSpace: (self newHostSpaceFor: aSpace)
 ]
 
 { #category : #'host - api' }
@@ -130,4 +77,24 @@ BlMorphicHost >> initialize [
 	super initialize.
 
 	containerMorph := Morph new
+]
+
+{ #category : #private }
+BlMorphicHost >> newHostSpaceFor: aSpace [
+
+	^ BlMorphicHostSpace new
+		spaceHostMorph: (self newSpaceHostMorphFor: aSpace);
+		space: aSpace;
+		host: self;
+		universe: self universe;
+		renderer: BlHostRenderer preferableClass new;
+		yourself
+]
+
+{ #category : #private }
+BlMorphicHost >> newSpaceHostMorphFor: aSpace [
+
+	^ BlMorphicSpaceHostMorph new
+		extent: aSpace extent;
+		yourself
 ]

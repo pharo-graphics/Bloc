@@ -37,8 +37,8 @@ BlMockedHost class >> stop [
 
 { #category : #'host - api' }
 BlMockedHost >> createHostSpaceFor: aSpace [
-	| aHostSpace |
 
+	| aHostSpace |
 	aHostSpace := BlMockedHostSpace new.
 	aHostSpace host: self.
 	aHostSpace space: aSpace.

@@ -20,9 +20,10 @@ BlElement >> aeAsForm [
 	self isLayoutRequested ifTrue: [ self forceLayout ].
 
 	"We want to consider our border, effect, as well as children's."
-	invalidationBounds := self invalidationBoundsInSpace.
+	invalidationBounds := self invalidationBoundsInParent.
 	aCanvas := AeCanvas extent: invalidationBounds extent.
 	aCanvas pathTranslate: invalidationBounds origin negated.
+
 	self aeFullDrawOn: aCanvas.
 	^ aCanvas asForm
 ]
@@ -126,28 +127,13 @@ BlElement >> aeDrawInSameLayerOn: aCanvas [
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeDrawOn: aeCanvas [
 
-	self aeDrawOn: aeCanvas with: [
-
-		"My position is applied before my transformation matrix,
-		which may have an additional translation."
-		aeCanvas pathTranslate: self position.
-		self transformation aeApplyTo: aeCanvas.
-
-		self aeDrawIgnoringOpacityAndTransformationOn: aeCanvas ]
-]
-
-{ #category : #'*Bloc-Alexandrie' }
-BlElement >> aeDrawOn: aeCanvas with: aBlockClosure [
-	"Evaluate a block closure taking account my opacity.
-	The element opacity affects border and background, effects, and 
-	recursively to children elements.
-	When I have opaque opacity (1.0) I take the fastest branch, restoring
-	the Cairo context afterwards."
-
-	self opacity < 1.0
-		ifTrue: [ aeCanvas paintGroupWith: aBlockClosure alpha: self opacity ]
-		ifFalse: [ aeCanvas restoreContextAfter: aBlockClosure ]
-
+	aeCanvas
+		restoreContextAfterPaintAlpha: self opacity
+		with: [ "My position is applied before my transformation matrix,
+			which may have an additional translation."
+			aeCanvas pathTranslate: self position.
+			self transformation aeApplyTo: aeCanvas.
+			self aeDrawIgnoringOpacityAndTransformationOn: aeCanvas ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }

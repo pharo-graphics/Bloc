@@ -10,11 +10,15 @@ Class {
 { #category : #'instance creation' }
 BlSpaceTaskQueue class >> space: aBlSpace [
 
-	^ self new initializeWith: aBlSpace
+	^ self basicNew
+		  initializeWith: aBlSpace;
+		  yourself
 ]
 
 { #category : #initialization }
 BlSpaceTaskQueue >> initializeWith: aBlSpace [
+
+	self initialize.
 
 	space := aBlSpace
 ]
@@ -24,5 +28,5 @@ BlSpaceTaskQueue >> requeue: aBlTask [
 
 	super requeue: aBlTask.
 	aBlTask onEnqueued: space.
-	space requestNextPulse.
+	space requestNextPulse
 ]

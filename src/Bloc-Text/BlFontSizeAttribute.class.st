@@ -1,6 +1,6 @@
 "
 I represent a font size attribute.
-I am used together with BrText and BrTextStyler to style text.
+I am used together with `BlText` and `BlTextStyler` to style text.
 
 Public API and Key Messages
 
@@ -8,7 +8,7 @@ Public API and Key Messages
 
 Example:
 
-	BrFontSizeAttribute size: 20
+	BlFontSizeAttribute size: 20
  
 Internal Representation and Key Implementation Points.
 

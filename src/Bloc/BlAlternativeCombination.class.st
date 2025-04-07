@@ -122,24 +122,6 @@ BlAlternativeCombination >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : #printing }
-BlAlternativeCombination >> storeOn: aStream [
-	aStream nextPut: $(.
-
-	combinations size <= 1
-		ifTrue: [
-			aStream nextPutAll: self class name; space; nextPutAll: 'new'.
-			combinations size = 1
-				ifTrue: [ aStream space nextPutAll: #with:; space; store: combinations first ] ]
-		ifFalse: [ 
-			1 to: combinations size - 1 do: [ :i | aStream nextPut: $( ].
-			combinations
-				do: [ :eachCombination | aStream store: eachCombination ]
-				separatedBy: [ aStream nextPutAll: ') or: ' ] ].
-
-	aStream nextPut: $)
-]
-
 { #category : #adding }
 BlAlternativeCombination >> with: aCombination [
 	aCombination isAlternative

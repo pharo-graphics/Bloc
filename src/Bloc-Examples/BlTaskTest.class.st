@@ -5,7 +5,7 @@ I have been automatically converted and probably manually tweaked from BlTaskExa
 Class {
 	#name : #BlTaskTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples'
+	#category : #'Bloc-Examples-Tasks'
 }
 
 { #category : #tests }

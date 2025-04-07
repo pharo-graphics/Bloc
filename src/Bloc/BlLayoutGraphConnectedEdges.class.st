@@ -13,10 +13,12 @@ BlLayoutGraphConnectedEdges >> do: aBlock [
 
 { #category : #'api - iterator' }
 BlLayoutGraphConnectedEdges >> incoming [
+
 	^ BlLayoutGraphIncomingEdges on: self layoutNode
 ]
 
 { #category : #'api - iterator' }
 BlLayoutGraphConnectedEdges >> outgoing [
+
 	^ BlLayoutGraphOutgoingEdges on: self layoutNode
 ]

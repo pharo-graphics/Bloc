@@ -62,11 +62,11 @@ BlNodeBasedLayout >> preMeasureChildNode: aChildNode [
 	"Perform a basic independent measurement of each child node"
 
 	aChildNode measure: [
-		(BlExtentMeasurementSpec new
+		(BlExtentMeasurementSpec
 			widthSpec: (self
 				measurementSpecFor: aChildNode parent widthSpec
 				usedSize: 0
-				resizer: aChildNode horizontalResizer);
+				resizer: aChildNode horizontalResizer)
 			heightSpec: (self
 				measurementSpecFor: aChildNode parent heightSpec
 				usedSize: 0

@@ -12,16 +12,19 @@ Class {
 
 { #category : #'class initialization' }
 BlOSWindowSDL2Host class >> initialize [
+
 	PulseLoop := BlHostPulseLoop forHost: self
 ]
 
 { #category : #'api - lifecycle' }
 BlOSWindowSDL2Host class >> isRunning [
+
 	^ PulseLoop isRunning
 ]
 
 { #category : #'driver selection' }
 BlOSWindowSDL2Host class >> isSupported [
+
 	^ true
 ]
 
@@ -45,11 +48,13 @@ BlOSWindowSDL2Host class >> pulsePeriod: aDuration [
 
 { #category : #'api - lifecycle' }
 BlOSWindowSDL2Host class >> start [
+
 	PulseLoop start
 ]
 
 { #category : #'api - lifecycle' }
 BlOSWindowSDL2Host class >> stop [
+
 	PulseLoop stop
 ]
 

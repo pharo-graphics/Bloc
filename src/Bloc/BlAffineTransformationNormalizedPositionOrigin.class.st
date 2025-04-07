@@ -19,6 +19,13 @@ BlAffineTransformationNormalizedPositionOrigin class >> position: aPoint [
 		  yourself
 ]
 
+{ #category : #comparing }
+BlAffineTransformationNormalizedPositionOrigin >> = anObject [
+
+	super = anObject ifFalse: [ ^ false ].
+	^ self position = anObject position
+]
+
 { #category : #math }
 BlAffineTransformationNormalizedPositionOrigin >> originIn: anElement [
 	"Return a point describing an origin of a transformation within a given element.

@@ -69,7 +69,6 @@ BlTextIterator >> hasPrevious [
 { #category : #'iterator - enumeration' }
 BlTextIterator >> next [
 	"Return an item (character) at current position and move one to the right"
-	<return: #Character or: #Object>
 
 	^ self subclassResponsibility
 ]
@@ -181,7 +180,7 @@ BlTextIterator >> nextAttributedEnd: aBlock indicesDo: anIndicesBlock [
 
 { #category : #'iterator - enumeration' }
 BlTextIterator >> nextLine [
-	"Return an instance of BrText which represents a piece of text from current position
+	"Return an instance of `BlText` which represents a piece of text from current position
 	until the first carriage return character"
 	<return: #BlText>
 
@@ -371,7 +370,7 @@ BlTextIterator >> nextSpanAny: aBlock indicesDo: anIndicesBlock [
 
 { #category : #'iterator - enumeration' }
 BlTextIterator >> nextWhitespace [
-	"Return an instance of BrText which represents a piece of text from current position
+	"Return an instance of `BlText` which represents a piece of text from current position
 	until the first non-whitespace character without including it"
 	<return: #BlText>
 
@@ -380,7 +379,7 @@ BlTextIterator >> nextWhitespace [
 
 { #category : #'iterator - enumeration' }
 BlTextIterator >> nextWord [
-	"Return an instance of BrText which represents a piece of text from current position
+	"Return an instance of `BlText` which represents a piece of text from current position
 	until the first space character"
 	<return: #BlText>
 

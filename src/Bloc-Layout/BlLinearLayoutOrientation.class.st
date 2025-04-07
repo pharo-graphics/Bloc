@@ -7,6 +7,18 @@ Class {
 	#category : #'Bloc-Layout-Linear-Utilities'
 }
 
+{ #category : #factory }
+BlLinearLayoutOrientation class >> horizontal [
+
+	^ BlLinearLayoutHorizontalOrientation new
+]
+
+{ #category : #factory }
+BlLinearLayoutOrientation class >> vertical [
+
+	^ BlLinearLayoutVerticalOrientation new
+]
+
 { #category : #comparing }
 BlLinearLayoutOrientation >> = anObject [
 	self == anObject

@@ -7,14 +7,12 @@ Class {
 		'extraSpace',
 		'currentPosition',
 		'lastScrolledDelta',
-		'scrapList',
-		'isPreLayout',
 		'itemDirection',
 		'scrollingOffset',
 		'isInfinite',
 		'layoutDirection',
 		'offset',
-		'scrolledWhileFilling'
+		'boundsUpdaterHasChanges'
 	],
 	#pools : [
 		'BlInfiniteConstants'
@@ -36,21 +34,6 @@ BlInfiniteLinearLayoutState >> allowRecycling: aBoolean [
 	allowRecycling := aBoolean
 ]
 
-{ #category : #'private - recycling' }
-BlInfiniteLinearLayoutState >> assignPositionFromScrapList [
-	self assignPositionFromScrapList: nil
-]
-
-{ #category : #'private - recycling' }
-BlInfiniteLinearLayoutState >> assignPositionFromScrapList: anIgnoredElement [
-	| aClosestElement |
-	
-	aClosestElement := self nextElementInLimitedList: anIgnoredElement.
-	currentPosition := aClosestElement
-		ifNil: [ NoPosition ]
-		ifNotNil: [ :anElement | anElement constraints infinite elementLayoutPosition ]
-]
-
 { #category : #accessing }
 BlInfiniteLinearLayoutState >> availableSpace [
 	"Amount of space that we should fill, in the layout direction"
@@ -68,14 +51,19 @@ BlInfiniteLinearLayoutState >> availableSpace: aNumber in: aLayout [
 		assert: [ aNumber <= aLayout orientation maximumSpace ]
 		description: [ 'Available space can not be greater that maximum space' ]."
 
-	availableSpace := aNumber.
-	aLayout notifyAvailableSpaceChanged: aNumber
+	availableSpace := aNumber
 ]
 
 { #category : #accessing }
-BlInfiniteLinearLayoutState >> clearScrapList [
-	"must set to nil here"
-	scrapList := nil
+BlInfiniteLinearLayoutState >> boundsUpdaterHasChanges [
+
+	^ boundsUpdaterHasChanges
+]
+
+{ #category : #accessing }
+BlInfiniteLinearLayoutState >> boundsUpdaterHasChanges: aBoolean [
+
+	boundsUpdaterHasChanges := aBoolean
 ]
 
 { #category : #accessing }
@@ -120,14 +108,6 @@ BlInfiniteLinearLayoutState >> hasMoreItems: anInfiniteState [
 ]
 
 { #category : #testing }
-BlInfiniteLinearLayoutState >> hasScrapList [
-	"Return true if a scrap list is set, false otherwise"
-	<return: #Boolean>
-
-	^ scrapList isNotNil
-]
-
-{ #category : #testing }
 BlInfiniteLinearLayoutState >> hasScrollingOffset [
 
 	^ scrollingOffset ~= Float negativeInfinity
@@ -140,9 +120,8 @@ BlInfiniteLinearLayoutState >> initialize [
 	allowRecycling := true.
 	offset := 0.
 	availableSpace := 0.
-	isPreLayout := false.
 	lastScrolledDelta := 0.
-	scrolledWhileFilling := false
+	boundsUpdaterHasChanges := false
 ]
 
 { #category : #accessing }
@@ -170,11 +149,6 @@ BlInfiniteLinearLayoutState >> isLayoutStartDirection [
 	"Return true if the layout should be filled from the start"
 
 	^ layoutDirection isStart
-]
-
-{ #category : #accessing }
-BlInfiniteLinearLayoutState >> isPreLayout: aBoolean [
-	isPreLayout := aBoolean
 ]
 
 { #category : #accessing }
@@ -218,66 +192,16 @@ BlInfiniteLinearLayoutState >> layoutDirection: aLayoutDirection [
 
 { #category : #recycling }
 BlInfiniteLinearLayoutState >> nextElement: aRecycler in: anInfiniteElement [
-
 	"Get the element for the next item that we should layout.
 	Also update current item index to the next item, based on itemDirection."
 
 	<return: #BlElement>
-	
-	^ self hasScrapList
-		  ifTrue: [ self nextElementFromScrapList ]
-		  ifFalse: [ 
-			  | anElement |
-			  anElement := aRecycler elementFor: currentPosition in: anInfiniteElement.
-			  currentPosition := currentPosition + itemDirection multiplier.
-			  anElement ]
-]
-
-{ #category : #'private - recycling' }
-BlInfiniteLinearLayoutState >> nextElementFromScrapList [
-	"Return the next element from the scrap list or nil if there is not such"
-	<return: #BlElement or: nil>
-	
-	scrapList do: [ :anElementHolder |
-		| anElement anInfiniteConstraints |
-		
-		anElement := anElementHolder itemElement.
-		anInfiniteConstraints := anElement constraints infinite.
-		(anInfiniteConstraints isItemRemoved not and: [
-			currentPosition = anInfiniteConstraints elementLayoutPosition ])
-				ifTrue: [ 
-					self assignPositionFromScrapList: anElement.
-					^ anElement ] ].
-	^ nil
-]
-
-{ #category : #'private - recycling' }
-BlInfiniteLinearLayoutState >> nextElementInLimitedList: anIgnoredElement [
-	| aClosestElement aClosestDistance |
-	
-	isPreLayout
-		ifTrue: [ self error: 'Can not be used in pre layout' ].
-	
-	aClosestElement := nil.
-	aClosestDistance := Float infinity.
-	
-	scrapList do: [ :anElementHolder | 
-		| anElement anInfiniteConstraints |
-		anElement := anElementHolder itemElement.
-		anInfiniteConstraints := anElement constraints infinite.
-		(anElement == anIgnoredElement or: [
-			anInfiniteConstraints isItemRemoved ])
-				ifFalse: [ 
-					| aDistance |
-					aDistance := (anInfiniteConstraints elementLayoutPosition - currentPosition) * itemDirection multiplier.
-					(aDistance >= 0 and: [ aDistance < aClosestDistance ])
-						"item is in current direction and is currently the closest"
-						ifTrue: [ 
-							aClosestElement := anElement.
-							aClosestDistance := aDistance.
-							aDistance isZero
-								ifTrue: [ ^ aClosestElement ] ] ] ].
-	^ aClosestElement
+	| anElement |
+	anElement := aRecycler
+		             elementFor: currentPosition
+		             in: anInfiniteElement.
+	currentPosition := currentPosition + itemDirection multiplier.
+	^ anElement
 ]
 
 { #category : #accessing }
@@ -294,24 +218,6 @@ BlInfiniteLinearLayoutState >> offset: aNumber [
 ]
 
 { #category : #accessing }
-BlInfiniteLinearLayoutState >> scrapList: aCollectionOfScrappedElement [
-
-	scrapList := aCollectionOfScrappedElement
-]
-
-{ #category : #accessing }
-BlInfiniteLinearLayoutState >> scrolledWhileFilling [
-
-	^ scrolledWhileFilling
-]
-
-{ #category : #accessing }
-BlInfiniteLinearLayoutState >> scrolledWhileFilling: aBoolean [
-
-	scrolledWhileFilling := aBoolean
-]
-
-{ #category : #accessing }
 BlInfiniteLinearLayoutState >> scrollingOffset [
 	"Return the amount (a number) of scrolling we can make without creating a new element.
 	Taking me into account allows us to have efficient element recycling"
@@ -321,5 +227,6 @@ BlInfiniteLinearLayoutState >> scrollingOffset [
 
 { #category : #accessing }
 BlInfiniteLinearLayoutState >> scrollingOffset: aNumber [
+
 	scrollingOffset := aNumber
 ]

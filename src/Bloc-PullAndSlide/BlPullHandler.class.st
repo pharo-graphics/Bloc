@@ -95,7 +95,7 @@ BlPullHandler >> dispatchPulledTo: currentPosition [
 { #category : #'event handling' }
 BlPullHandler >> dragEndEvent: anEvent [
 
-	anEvent consumed: true.
+	anEvent consume.
 	
 	target dispatchEvent: BlPullEndEvent new
 ]
@@ -104,7 +104,7 @@ BlPullHandler >> dragEndEvent: anEvent [
 BlPullHandler >> dragEvent: aBlDragEvent [
 
 	| newPosition deltaFromStartPosition |
-	aBlDragEvent consumed: true.
+	aBlDragEvent consume.
 
 	deltaFromStartPosition := aBlDragEvent position - dragStartPosition.
 	newPosition := initialTargetPosition +
@@ -124,7 +124,7 @@ BlPullHandler >> dragEvent: aBlDragEvent [
 { #category : #'event handling' }
 BlPullHandler >> dragStartEvent: anEvent [
 
-	anEvent consumed: true.
+	anEvent consume.
 
 	target ifNil: [ target := anEvent currentTarget ].
 	target dispatchEvent: BlPullStartEvent new.

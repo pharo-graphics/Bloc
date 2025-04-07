@@ -63,7 +63,7 @@ BlBaseAnimation >> atLeastOneLoopDone [
 { #category : #'api - configuration' }
 BlBaseAnimation >> beInfinite [
 
-	loops := Float infinity
+	loops := nil
 ]
 
 { #category : #'private - testing' }
@@ -156,7 +156,7 @@ BlBaseAnimation >> initialize [
 BlBaseAnimation >> isInfinite [
 	"Return whether this animation is infinite, i.e. has unlimited amount of loops."
 
-	^ loops isInfinite
+	^ loops isNil
 ]
 
 { #category : #testing }
@@ -197,7 +197,7 @@ BlBaseAnimation >> loopDoneTime [
 { #category : #'api - accessing' }
 BlBaseAnimation >> loops [
 	"Return how many times animation should be repeated.
-	If animation is infinite, return `Float infinity`."
+	If animation is infinite, return `nil`."
 
 	^ loops
 ]
@@ -357,8 +357,8 @@ BlBaseAnimation >> shouldStop [
 { #category : #'api - running' }
 BlBaseAnimation >> start [
 
-	isRunning ifTrue: [
-		self error: 'Animation can not be start multiple times without stop' ].
+	"Ignore if it's already started"
+	isRunning ifTrue: [ ^ self ].
 
 	self initStart
 ]
@@ -405,8 +405,8 @@ BlBaseAnimation >> step [
 { #category : #'api - running' }
 BlBaseAnimation >> stop [
 
-	isRunning ifFalse: [
-		self error: 'Animation is not running' ].
+	"Ignore if it's already stopped"
+	isRunning ifFalse: [ ^ self ].
 
 	isRunning := false.
 

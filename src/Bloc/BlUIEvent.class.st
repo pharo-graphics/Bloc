@@ -39,11 +39,12 @@ BlUIEvent >> modifiers: aBlKeyModifiers [
 ]
 
 { #category : #printing }
-BlUIEvent >> printOn: aStream [
-	aStream 
-		nextPutAll: self class name;
-		nextPut:$(;
-		nextPutAll:'; modifiers: ';
-		print: modifiers;
-		nextPut:$)
+BlUIEvent >> printExtraDetailsOn: aStream [
+
+	super printExtraDetailsOn: aStream.
+	
+	modifiers isEmpty ifFalse: [
+		aStream
+			nextPutAll: ' modifiers: ';
+			print: modifiers ]
 ]

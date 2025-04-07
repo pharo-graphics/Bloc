@@ -28,16 +28,6 @@ Class {
 }
 
 { #category : #'window - properties' }
-BlMockedHostSpace >> borderless [
-
-	self
-		deprecated: 'Use isBorderless instead of current one'
-		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
-
-	^ self isBorderless
-]
-
-{ #category : #'window - properties' }
 BlMockedHostSpace >> borderless: aBoolean [
 	"Make host window borderless if true is given"
 
@@ -95,31 +85,11 @@ BlMockedHostSpace >> densityDpi: aNumber [
 ]
 
 { #category : #'window - properties' }
-BlMockedHostSpace >> fullscreen [
-
-	self
-		deprecated: 'Use isFullscreen instead of current one'
-		transformWith: '`@rcv fullscreen' -> '`@rcv isFullscreen'.
-
-	^ self isFullscreen
-]
-
-{ #category : #'window - properties' }
 BlMockedHostSpace >> fullscreen: aBoolean [
 	"Switch underlying window to fullscreen if true is given
 	and exit fullscreen mode if false is given"
 
 	isFullscreen := aBoolean
-]
-
-{ #category : #'window - properties' }
-BlMockedHostSpace >> fullsize [
-
-	self
-		deprecated: 'Use isFullsize instead of current one'
-		transformWith: '`@rcv fullsize' -> '`@rcv isFullsize'.
-		
-	^ self isFullsize
 ]
 
 { #category : #'window - properties' }
@@ -153,6 +123,7 @@ BlMockedHostSpace >> icon: aForm [
 
 { #category : #initialization }
 BlMockedHostSpace >> initialize [
+
 	super initialize.
 
 	eventFetcher := BlHostEventFetcher hostSpace: self.
@@ -238,7 +209,6 @@ BlMockedHostSpace >> minimized [
 { #category : #'host space - testing' }
 BlMockedHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
-	<return: #Boolean>
 	
 	^ false
 ]

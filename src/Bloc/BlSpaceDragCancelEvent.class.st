@@ -1,22 +1,14 @@
+"
+Is sent by the space when a drag&drop movement is being cancelled
+"
 Class {
 	#name : #BlSpaceDragCancelEvent,
 	#superclass : #BlSpaceEvent,
 	#instVars : [
-		'delegate',
 		'position'
 	],
 	#category : #'Bloc-Events-Type-Space'
 }
-
-{ #category : #accessing }
-BlSpaceDragCancelEvent >> delegate [
-	^ delegate
-]
-
-{ #category : #accessing }
-BlSpaceDragCancelEvent >> delegate: anObject [
-	delegate := anObject
-]
 
 { #category : #accessing }
 BlSpaceDragCancelEvent >> position [

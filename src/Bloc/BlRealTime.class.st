@@ -22,6 +22,12 @@ BlRealTime >> currentTime [
 	^ DateAndTime now
 ]
 
+{ #category : #'private - time' }
+BlRealTime >> currentUTCMicroseconds [
+
+	^ Time microsecondClockValue 
+]
+
 { #category : #'api - enumeration' }
 BlRealTime >> every: aDuration while: aWhileBlock do: aDoBlock [
 	"Evaluate a aDoBlock while aWhileBlock evaluates to true waiting a given amount of time between executions.
@@ -32,7 +38,7 @@ BlRealTime >> every: aDuration while: aWhileBlock do: aDoBlock [
 	aStartTime := self now.
 	aCount := 0.
 
-	aWhileBlock whileTrue: [
+	[aWhileBlock value] whileTrue: [
 		| anExpectedTime aCurrentTime aWaitingTime |
 		aDoBlock value.
 		

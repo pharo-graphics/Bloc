@@ -7,178 +7,154 @@ Class {
 	#instVars : [
 		'form',
 		'eventHandler',
-		'preventResize',
-		'hostSpace'
+		'hostSpace',
+		'lastExtentAnnounced'
 	],
-	#category : #'BlocHost-Morphic-Host - Common'
+	#category : #'BlocHost-Morphic-Common'
 }
 
 { #category : #drawing }
 BlMorphicSpaceHostMorph >> drawOn: aCanvas [
+
 	| spaceForm |
 	super drawOn: aCanvas.
 
 	spaceForm := form.
-	spaceForm isNull
-		ifTrue: [ ^ self ].
-	hostSpace ifNotNil: [ 
-		aCanvas clipBy: self fullBounds during: [ :aClippedCanvas |
-			aClippedCanvas drawImage: spaceForm at: self position ] ]
-]
+	spaceForm isNull ifTrue: [ ^ self ].
+	hostSpace ifNil: [ ^ self ].
 
-{ #category : #geometry }
-BlMorphicSpaceHostMorph >> extent: aPoint [
-	
-	self extent = aPoint
-		ifTrue: [ ^ self ].
-	
-	super extent: aPoint.
-	
-	"morph may resize before host space is created"
-	self hostSpace
-		ifNil: [ ^ self ].
-
-	self resizeDuring: [
-		BlMorphicWindowResizeEvent new
-			width: self width;
-			height: self height;
-			sentTo: eventHandler ]
+	aCanvas clipBy: self fullBounds during: [ :aClippedCanvas |
+		SystemVersion current major >= 12
+			ifTrue: [
+				| formSet |
+				formSet := (Smalltalk at: #FormSet)
+					extent: self extent
+					depth: spaceForm depth
+					forms: { spaceForm }.
+				aClippedCanvas drawFormSet: formSet at: self position ]
+			ifFalse: [
+				aClippedCanvas drawImage: spaceForm at: self position ] ]
 ]
 
 { #category : #accessing }
 BlMorphicSpaceHostMorph >> form: aForm [
+
 	form := aForm.
 	self changed
 ]
 
 { #category : #'event handling' }
 BlMorphicSpaceHostMorph >> handleKeystroke: anEvent [
+
 	anEvent sentTo: eventHandler
 ]
 
 { #category : #'event handling' }
 BlMorphicSpaceHostMorph >> handlesKeyboard: evt [
+
 	^ true
 ]
 
 { #category : #'event handling' }
 BlMorphicSpaceHostMorph >> handlesTextInputEvent: evt [
-	"Do I want to receive text edition events?" 
+	"Do I want to receive text edition events?"
 
-	^true
+	^ true
 ]
 
 { #category : #accessing }
 BlMorphicSpaceHostMorph >> hostSpace [
+
 	^ hostSpace
 ]
 
 { #category : #accessing }
 BlMorphicSpaceHostMorph >> hostSpace: aHostSpace [
-	
-	hostSpace := aHostSpace.	
-	self initializeAnnouncement
+
+	hostSpace := aHostSpace
 ]
 
 { #category : #initialization }
 BlMorphicSpaceHostMorph >> initialize [
+
 	super initialize.
 
 	eventHandler := BlMorphicEventHandler window: self.
-
+	self
+		onAnnouncement: MorphOpened, MorphDeleted, MorphGotFocus, MorphLostFocus
+		do: [ :anEvent |
+			hostSpace ifNotNil: [ anEvent sentTo: eventHandler ] ].
+		
 	form := BlExternalForm extent: 1@1 depth: 32.
 	form autoRelease.
+
 	color := Color transparent.
-	
-	preventResize := false.
 
 	"we prefer to fill parent"
 	self hResizing: #spaceFill.
 	self vResizing: #spaceFill
 ]
 
-{ #category : #initialization }
-BlMorphicSpaceHostMorph >> initializeAnnouncement [
-	self
-		onAnnouncement: MorphOpened
-		do: [ :anEvent | BlMorphicWindowOpenedEvent new sentTo: eventHandler ].
-
-	self
-		onAnnouncement: MorphDeleted
-		do: [ :anEvent | BlMorphicWindowClosedEvent new sentTo: eventHandler ].
-
-	self
-		onAnnouncement: MorphGotFocus
-		do: [ :evt | ].
-
-	self
-		onAnnouncement: MorphLostFocus
-		do: [ :evt | ].
-
-	self
-		onAnnouncement: WindowResizing
-		do: [ :evt |
-			self resizeDuring: [
-				BlMorphicWindowResizeEvent new
-					width: self width;
-					height: self height;
-					sentTo: eventHandler ] ]
-]
-
 { #category : #testing }
 BlMorphicSpaceHostMorph >> isInSpaceArea: anEvent [
 	"Return true if given morphic event is within space area, false otherwise"
-	<return: #Boolean>
 	
 	^ self bounds containsPoint: anEvent position
 ]
 
 { #category : #'event handling' }
 BlMorphicSpaceHostMorph >> keyDown: anEvent [
+
 	anEvent sentTo: eventHandler
 ]
 
 { #category : #'event handling' }
 BlMorphicSpaceHostMorph >> keyUp: anEvent [
+
 	anEvent sentTo: eventHandler
+]
+
+{ #category : #recategorized }
+BlMorphicSpaceHostMorph >> layoutChanged [
+
+	super layoutChanged.
+	
+	hostSpace ifNil: [ ^self ].
+
+	lastExtentAnnounced ifNil: [ 
+		lastExtentAnnounced := self extent.
+		^self ].
+	lastExtentAnnounced = self extent ifTrue: [ 
+		^self ].	
+
+	BlMorphExtentChangedAnnouncement new
+		oldExtent: lastExtentAnnounced;
+		newExtent: self extent;
+		sendTo: eventHandler.
+
+	lastExtentAnnounced := self extent
 ]
 
 { #category : #geometry }
 BlMorphicSpaceHostMorph >> pointToSpace: aPoint [
 
-	^ aPoint - self spacePosition
+	^ aPoint - self position
 ]
 
 { #category : #'events-processing' }
 BlMorphicSpaceHostMorph >> processEvent: anEvent using: defaultDispatcher [
 	
-	(self isInSpaceArea: anEvent)
+	((self isInSpaceArea: anEvent) and: [
+		(anEvent isMouse and: [
+			anEvent isMouseDown and: [
+				anEvent isSpecialGesture ] ]) not ])
 		ifFalse: [ ^ super processEvent: anEvent using: defaultDispatcher ].
 
 	anEvent sentTo: eventHandler.
 	
 	"quick fix for issue #15 : 
 	In morphic, if the drop event is marked as handled, the dragged window is removed"
-	anEvent isDropEvent
-		ifFalse: [ anEvent wasHandled: true ]
-]
-
-{ #category : #geometry }
-BlMorphicSpaceHostMorph >> resizeDuring: aBlock [
-	
-	preventResize
-		ifTrue: [ ^ self ].
-	
-	preventResize := true.
-	aBlock ensure: [ preventResize := false ]
-]
-
-{ #category : #geometry }
-BlMorphicSpaceHostMorph >> spacePosition [
-	"Return position of space area"
-	<return: #Point>
-
-	^ self position
+	anEvent isDropEvent ifFalse: [ anEvent wasHandled: true ]
 ]
 
 { #category : #testing }
@@ -190,6 +166,7 @@ BlMorphicSpaceHostMorph >> takesKeyboardFocus [
 
 { #category : #'event handling' }
 BlMorphicSpaceHostMorph >> textInput: aTextInputEvent [
+
 	aTextInputEvent sentTo: eventHandler
 ]
 

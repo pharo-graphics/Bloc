@@ -5,18 +5,13 @@ I am a parallel Universe. There can exist multiple parallel universes
 Class {
 	#name : #BlParallelUniverse,
 	#superclass : #Object,
-	#traits : 'TBlEventTarget',
-	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [
-		'id',
 		'deferredActions',
 		'postponedActions',
-		'eventDispatcher',
 		'hostClass',
-		'spaceManager'
+		'spaces'
 	],
 	#classVars : [
-		'UniqueIdGenerator',
 		'Universes',
 		'UniversesMutex'
 	],
@@ -55,9 +50,23 @@ BlParallelUniverse class >> forHost: aHostClass [
 
 { #category : #'class initialization' }
 BlParallelUniverse class >> initialize [
+
 	Universes := #().
 	UniversesMutex := Mutex new.
-	UniqueIdGenerator := BlUniqueIdGenerator new
+	
+	SessionManager default registerGuiClassNamed: self name
+]
+
+{ #category : #'system startup' }
+BlParallelUniverse class >> shutDown [ 
+
+	self all do: [ :anUniverse | anUniverse stopUniverse ]
+]
+
+{ #category : #'system startup' }
+BlParallelUniverse class >> startUp [ 
+
+	self all do: [ :anUniverse | anUniverse startUniverse ]
 ]
 
 { #category : #'api - spaces' }
@@ -67,147 +76,52 @@ BlParallelUniverse >> attachSpace: aSpace [
 
 	self defer: [ self attachSpaceSynchronously: aSpace ].
 
-	aSpace host isRunning
-		ifFalse: [
-			(BlParallelUniverseHostStartRequestSignal new
-				universeId: self id;
-				spaceId: aSpace id;
-				host: aSpace host class) emit.
-			
-			self startUniverse.
-			
-			(BlParallelUniverseHostStartedSignal new
-				universeId: self id;
-				spaceId: aSpace id;
-				host: aSpace host class;
-				isRunning: aSpace host isRunning) emit ]
+	aSpace host isRunning ifFalse: [ self startUniverse ]
 ]
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> attachSpaceSynchronously: aSpace [
-	"Synchronously attach a given space to the Universe assuming that the message is sent from within the UI process
-	of this universe and the space was previously detached from another universe."
 
 	aSpace isOpened ifTrue: [ ^ self ].
 
-	self
-		assert: [ aSpace hasHostSpace not ]
-		description: [ 'Space must not have a host space!' ].
-
 	"First of all we need to add space to the space manager"
-	spaceManager addSpace: aSpace.
-	
-	(BlParallelUniverseSpaceAddedSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
+	spaces add: aSpace.
 
 	"then create and show it in a host space"
 	aSpace host createHostSpaceFor: aSpace.
-	
-	(BlParallelUniverseHostSpaceCreatedSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
 
-	aSpace hostSpace show.
-	
-	(BlParallelUniverseHostSpaceShownSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
-
-	self
-		assert: [ aSpace hasHostSpace ]
-		description: [ 'Space must have a host space!' ].
-
-	(BlParallelUniverseSpaceRootAssignedSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
-
-	(BlParallelUniverseSpaceDispatchAddedToSceneSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit
+	aSpace hostSpace show
 ]
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> closeSpace: aSpace [
-	aSpace isOpened
-		ifFalse: [ ^ self ].
+
+	aSpace isOpened ifFalse: [ ^ self ].
 	self defer: [ self closeSpaceSynchronously: aSpace ]
 ]
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 
-	| aHost |
-	
 	"If space is not even opened we should do nothing"
-	aSpace isOpened
-		ifFalse: [ ^ self ].
-		
-	"we have to defer the check to the next frame, otherwise the UI loop may be terminated
-	before frame finishes"
+	aSpace isOpened ifFalse: [ ^ self ].
 
-	"we have to store a reference to the original host because it may potentially change.
-	for example assume the following:
-	[[[
-	aSpace close.
-	aSpace host: BlHost pickHost.
-	aSpace show
-	]]]
-
-	the actual termination of the host may happen after a host of the space is changed"
-	aHost := aSpace host.
-	
-	"first remove space itself from space manager, to break any recursions"
-	spaceManager removeSpace: aSpace.
-
-	"then destroy host space"
-	aSpace hasHostSpace
-		ifTrue: [ aSpace host destroyHostSpaceFor: aSpace ].
+	self detachSpaceSynchronously: aSpace.
 
 	"Notify root element that it is no longer in scene graph"
 	aSpace dispatchRemovedFromSceneGraph.
-
-	"Raise an event indicating that the space is no longer attached to a universe"
-	aSpace dispatchEvent: (BlSpaceDetachedEvent new space: aSpace).
 	
 	"Send space closed event.
-	Note: a new space may be spawned as a reaction to the event, that is why
-	we send it before stopping host and universe"
-	aSpace dispatchEvent: (BlSpaceClosedEvent new space: aSpace).
+	Note: a new space may be opened as a reaction to the event. That is the reason to defer stopping of host and universe."
+	aSpace dispatchEventWithTimestamp: BlSpaceClosedEvent new.
 
-	self
-		assert: [ aSpace hasHostSpace not ]
-		description: [ 'Host space must not have a host!' ].
-	
-	(spaceManager hasSpaces not and: [ aHost isRunning ])
-		ifTrue: [
-			"we must defer host shutdown to let spaces perform actions as a result
-			of a space closed event"
-			self defer: [
-				"as the last step we may want to stop the host. It may terminate
-				the current process, so we should do it at last"
-				(spaceManager hasSpaces not and: [ aHost isRunning ])
-					ifTrue: [ self stopUniverse ] ] ].
 
-	"Raise an event indicating that all normal event for closing a space have been completed.
-	This event is used by the debugger to stop the UI process. Users should not normally rely
-	on this event, as there is no guarantee that the process will not be terminated."
-	aSpace dispatchEvent: (BlSpaceDestroyedEvent new space: aSpace).
 ]
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> closeSpaces [
+
 	self spaces copy do: [ :aSpace | self closeSpace: aSpace ]
-]
-
-{ #category : #initialization }
-BlParallelUniverse >> defaultEventDispatcher [
-	^ BlDirectEventDispatcher on: self
-]
-
-{ #category : #initialization }
-BlParallelUniverse >> defaultEventListener [
-	^ BlUniverseEventListener new
 ]
 
 { #category : #'api - ui process' }
@@ -215,76 +129,47 @@ BlParallelUniverse >> defer: aValuable [
 	"Enqueue a valuable from any process to be executed in the UI process at the beginning of the next pulse.
 	It is useful to update the UI states."
 
-	(BlParallelUniverseDeferredActionAddedSignal new universeId: self id) emit.
-
 	deferredActions nextPut: aValuable
 ]
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> detachSpace: aSpace [
-	"Detach a given space from this universe without actually closing the space. Space detaching is useful
-	for switching hosts and transferring spaces between universes."
+	"Detach an opened space from this universe without actually closing the space.
+	Space detaching is useful for switching hosts and transferring spaces between universes."
 
-	aSpace isOpened
-		ifFalse: [ ^ self ].
+	aSpace isOpened ifFalse: [ ^ self ].
 	self defer: [ self detachSpaceSynchronously: aSpace ]
 ]
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> detachSpaceSynchronously: aSpace [
-	"Detaches a given space from this universe without closing that space."
 
 	| aHost |
-
 	"If space is not even opened we should do nothing"
-	aSpace isOpened
-		ifFalse: [ ^ self ].
-		
-	"we have to defer the check to the next frame, otherwise the UI loop may be terminated
-	before frame finishes"
+	aSpace isOpened ifFalse: [ ^ self ].
 
-	"we have to store a reference to the original host because it may potentially change.
-	for example assume the following:
-	[[[
-	aSpace close.
-	aSpace host: BlHost pickHost.
-	aSpace show
-	]]]
-
-	the actual termination of the host may happen after a host of the space is changed"
+	"We have to defer the check to the next frame, otherwise the UI loop may be terminated before frame finishes. 
+	We have to store a reference to the original host because it may potentially change.
+	Note: the actual termination of the host may happen after a host of the space is changed."
 	aHost := aSpace host.
-	
-	"first remove space itself from space manager, to break any recursions"
-	spaceManager removeSpace: aSpace.
 
-	"then destroy host space"
-	aSpace hasHostSpace
-		ifTrue: [ aSpace host destroyHostSpaceFor: aSpace ].
+	"First, remove the space from space manager, to break any recursion."
+	spaces remove: aSpace.
 
-	self
-		assert: [ aSpace hasHostSpace not ]
-		description: [ 'Host space must not have a host!' ].
-	
-	(spaceManager hasSpaces not and: [ aHost isRunning ])
-		ifTrue: [
-			"we must defer host shutdown to let spaces perform actions as a result
-			of a space closed event"
-			self defer: [
-				"as the last step we may want to stop the host. It may terminate
-				the current process, so we should do it at last"
-				(spaceManager hasSpaces not and: [ aHost isRunning ])
-					ifTrue: [ self stopUniverse ] ] ].
-	
-	"Raise an event indicating that the space is no longer attached to a universe"
-	aSpace dispatchEvent: (BlSpaceDetachedEvent new space: aSpace).
-]
+	"Then, destroy host space"
+	aSpace hasHostSpace ifTrue: [ aSpace host destroyHostSpaceFor: aSpace ].
 
-{ #category : #'event management accessing' }
-BlParallelUniverse >> eventDispatcher [
-	"Return an object responsible for event dispatching"
-	<return: #BlDirectEventDispatcher>
+	"Dispatch an event indicating that the space is no longer attached to a universe"
+	aSpace dispatchEventWithTimestamp: BlSpaceDetachedEvent new.
 
-	^ eventDispatcher
+	(spaces isEmpty and: [ aHost isRunning ]) ifTrue: [
+		"We must defer host shutdown to let spaces perform actions as a result
+		of a space closed event"
+		self defer: [
+			"As the last step, we may want to stop the host. It may terminate
+			the current process, so we should do it at the end."
+			(spaces isEmpty and: [ aHost isRunning ]) ifTrue: [
+				self stopUniverse ] ] ]
 ]
 
 { #category : #testing }
@@ -293,19 +178,24 @@ BlParallelUniverse >> hasDeferredActions [
 	^ deferredActions isEmpty not
 ]
 
+{ #category : #testing }
+BlParallelUniverse >> hasPostponedActions [
+	
+	^ postponedActions isEmpty not
+]
+
 { #category : #'api - spaces' }
 BlParallelUniverse >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"
-	<return: #Boolean>
 	
-	^ spaceManager hasSpace: aSpace
+	^ spaces includes: aSpace
 ]
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> hasSpaces [
 	"Return true if there are registered spaces, false otherwise"
 
-	^ spaceManager hasSpaces
+	^ spaces isNotEmpty
 ]
 
 { #category : #'api - ui process' }
@@ -317,19 +207,14 @@ BlParallelUniverse >> hasUIProcess [
 
 { #category : #accessing }
 BlParallelUniverse >> hostClass [
+
 	^ hostClass
 ]
 
 { #category : #accessing }
 BlParallelUniverse >> hostClass: aHostClass [
-	hostClass := aHostClass
-]
 
-{ #category : #accessing }
-BlParallelUniverse >> id [
-	<return: #Number>
-	
-	^ id
+	hostClass := aHostClass
 ]
 
 { #category : #initialization }
@@ -337,89 +222,39 @@ BlParallelUniverse >> initialize [
 
 	super initialize.
 
-	id := UniqueIdGenerator generateUniqueId.
-	spaceManager := BlSpaceManager new.
+	spaces := OrderedCollection new.
 	hostClass := BlHeadlessHost.
 	deferredActions := WaitfreeQueue new.
-	postponedActions := WaitfreeQueue new.
-
-	eventDispatcher := self defaultEventDispatcher.
-	self addEventHandler: self defaultEventListener
+	postponedActions := WaitfreeQueue new
 ]
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> openSpace: aSpace [
 	"It should be possible to add a space from the other thread"
 
-	(BlParallelUniverseOpenSpaceRequestSignal new
-		universeId: self id;
-		spaceId: aSpace id;
-		isRunning: aSpace host isRunning) emit.
-
 	self defer: [ self openSpaceSynchronously: aSpace ].
 
-	aSpace host isRunning
-		ifFalse: [
-			(BlParallelUniverseHostStartRequestSignal new
-				universeId: self id;
-				spaceId: aSpace id;
-				host: aSpace host class) emit.
-			
-			self startUniverse.
-			
-			(BlParallelUniverseHostStartedSignal new
-				universeId: self id;
-				spaceId: aSpace id;
-				host: aSpace host class;
-				isRunning: aSpace host isRunning) emit ]
+	aSpace host isRunning ifFalse: [ self startUniverse ]
 ]
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
-	aSpace isOpened
-		ifTrue: [ ^ self ].
+	aSpace isOpened ifTrue: [
+		"If it has been already opened, just unhide it" 
+		aSpace hostSpace show.
+		^ self ].
 
-	self
-		assert: [ aSpace hasHostSpace not ]
-		description: [ 'Space must not have a host space!' ].
-
-	"First of all we need to add space to the space manager"
-	spaceManager addSpace: aSpace.
-	
-	(BlParallelUniverseSpaceAddedSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
-
-	"then create and show it in a host space"
-	aSpace host createHostSpaceFor: aSpace.
-	
-	(BlParallelUniverseHostSpaceCreatedSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
-
-	aSpace hostSpace show.
-	
-	(BlParallelUniverseHostSpaceShownSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
+	self attachSpaceSynchronously: aSpace.
 
 	"Note: we should send shown event after everything else is done, because
 	theoretically, that only space could be closed as a reaction to the event"
-	aSpace dispatchEvent: (BlSpaceShownEvent new space: self).
+	aSpace dispatchEventWithTimestamp: BlSpaceShownEvent new.
 
 	"Notify root element that it is now visible to the user"
 	aSpace becomeVisible.
 	
-	(BlParallelUniverseSpaceRootAssignedSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit.
-	
-	aSpace dispatchAddedToSceneGraph.
-	
-	(BlParallelUniverseSpaceDispatchAddedToSceneSignal new
-		universeId: self id;
-		spaceId: aSpace id) emit
+	aSpace dispatchAddedToSceneGraph
 ]
 
 { #category : #'api - ui process' }
@@ -429,6 +264,16 @@ BlParallelUniverse >> postpone: aValuable [
 	I am different from #defer: in that #defer: actios are evaluated before the pulse of the universe"
 	
 	postponedActions nextPut: aValuable
+]
+
+{ #category : #printing }
+BlParallelUniverse >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		nextPutAll: hostClass asString;
+		nextPut: $)
 ]
 
 { #category : #pulse }
@@ -443,12 +288,12 @@ BlParallelUniverse >> pulseSynchronously [
 
 	[
 		self tryToRunDeferredActions.
-		spaceManager do: [ :eachSpace | eachSpace pulse ].
+		spaces do: [ :eachSpace | eachSpace pulse ].
 		self tryToRunPostponedActions
 	] 
 		on: Exception 
 		do: [ :e | 
-				(BlParallelUniverseErrorDuringPulse new
+				(BlParallelUniverseErrorDuringPulseSignal new
 					signaledError: e;
 					yourself) emit.
 				e pass ]
@@ -463,7 +308,7 @@ BlParallelUniverse >> snapshot: save andQuit: quit [
 { #category : #'api - spaces' }
 BlParallelUniverse >> spaces [
 
-	^ spaceManager spaces
+	^ spaces
 ]
 
 { #category : #'private - lifecycle' }
@@ -471,7 +316,8 @@ BlParallelUniverse >> startUniverse [
 	"A universe must not be running here.
 	I am called outside of the UI loop (there is no UI loop yet)"
 
-	self hostClass start
+	hostClass start.
+	spaces do: [ :aSpace | aSpace ensureWindowOpen ]
 ]
 
 { #category : #'private - lifecycle' }
@@ -479,36 +325,30 @@ BlParallelUniverse >> stopUniverse [
 	"A universe must be running here.
 	I am called from the UI loop"
 	
-	self hostClass stop
+	hostClass stop.
+	spaces do: [ :anSpace | anSpace rememberVisibleStatus ]
 ]
 
 { #category : #'deferred message' }
 BlParallelUniverse >> tryToRunDeferredActions [
 
 	| nextInQueue |
-	(BlParallelUniverseTryToRunDeferredActionsSignal new
-		universeId: self id;
-		yourself) emit.
 
-	[ (nextInQueue := deferredActions nextOrNil) isNotNil ] whileTrue: [ 
-
-		(BlParallelUniverseRunDeferredActionSignal new
-			universeId: self id;
-			yourself) emit.
-
-		nextInQueue value ]
+	[ (nextInQueue := deferredActions nextOrNil) isNotNil ]
+		whileTrue: [ nextInQueue value ]
 ]
 
 { #category : #'deferred message' }
 BlParallelUniverse >> tryToRunPostponedActions [
 
 	| nextInQueue |
-	[ (nextInQueue := postponedActions nextOrNil) isNotNil ] whileTrue: [ 
-		nextInQueue value ]
+	
+	[ (nextInQueue := postponedActions nextOrNil) isNotNil ]
+		whileTrue: [ nextInQueue value ]
 ]
 
 { #category : #'api - ui process' }
 BlParallelUniverse >> uiProcessDo: aBlock [
 
-	self hostClass uiProcessDo: aBlock
+	hostClass uiProcessDo: aBlock
 ]

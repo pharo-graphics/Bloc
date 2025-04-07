@@ -1,17 +1,19 @@
+"
+I handle Bloc space events (`BlSpaceEvent`).
+
+"
 Class {
 	#name : #BlSpaceEventListener,
 	#superclass : #BlEventListener,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'space',
 		'mouseDragListener',
-		'dragCollectionElement'
+		'dragContainerElement'
 	],
 	#category : #'Bloc-Space - Events'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlSpaceEventListener class >> space: aStage [
 	^ self new
 		space: aStage;
@@ -20,25 +22,25 @@ BlSpaceEventListener class >> space: aStage [
 
 { #category : #accessing }
 BlSpaceEventListener >> focusProcessor [
-	^ self space focusProcessor
-]
 
-{ #category : #'other handlers' }
-BlSpaceEventListener >> inputMethodEvent: anEvent [
+	^ self space focusProcessor
 ]
 
 { #category : #'keyboard handlers' }
 BlSpaceEventListener >> keyDownEvent: anEvent [
+
 	self keyboardProcessor processKeyDown: anEvent
 ]
 
 { #category : #'keyboard handlers' }
 BlSpaceEventListener >> keyUpEvent: anEvent [
+
 	self keyboardProcessor processKeyUp: anEvent
 ]
 
 { #category : #accessing }
 BlSpaceEventListener >> keyboardProcessor [
+
 	^ self space keyboardProcessor
 ]
 
@@ -56,6 +58,7 @@ BlSpaceEventListener >> mouseEvent: anEvent [
 
 { #category : #'mouse handlers' }
 BlSpaceEventListener >> mouseMoveEvent: anEvent [
+
 	self mouseProcessor handleMouseMove: anEvent
 ]
 
@@ -79,48 +82,150 @@ BlSpaceEventListener >> mouseWheelEvent: anEvent [
 
 { #category : #accessing }
 BlSpaceEventListener >> space [
+
 	^ space
 ]
 
 { #category : #accessing }
 BlSpaceEventListener >> space: aBlSpace [
+
 	space := aBlSpace
 ]
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceCloseRequest: anEvent [
-	self space close
+
+	space close
 ]
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceClosedEvent: anEvent [
+
 	self mouseProcessor onSpaceClosed
 ]
 
-{ #category : #'drag and drop' }
+{ #category : #'drag and drop handlers' }
 BlSpaceEventListener >> spaceDragCancelEvent: anEvent [
-	anEvent delegate cancel: anEvent position.
-	self space removeEventHandler: mouseDragListener
+	| aDragDelegate |
+	self space removeEventHandler: mouseDragListener.
+
+	dragContainerElement ifNil: [ ^ self ].
+
+	aDragDelegate := dragContainerElement userData at: #dragDelegate.
+	
+	aDragDelegate
+		cancel: dragContainerElement
+		at: anEvent position
+		in: self space root.
+
+"TODO
+NEED TO BETTER WORK ON Element handling when drang&drop is cancelec"
+	"dragContainerElement ifNotNil: [ :anElement | anElement removeFromParent ]."
+	dragContainerElement := nil.
 ]
 
-{ #category : #'drag and drop' }
-BlSpaceEventListener >> spaceDragLiftEvent: anEvent [
-	| aDelegate aPosition |
+{ #category : #'drag and drop handlers' }
+BlSpaceEventListener >> spaceDragDraggedEvent: anEvent [
+	| aDropDelegate aDragDelegate aPosition |
 
-	aDelegate := anEvent delegate.
+	aDropDelegate := anEvent delegate.
 	aPosition := anEvent position.
 
-	aDelegate lift: aPosition in: self space root.
+	dragContainerElement ifNil: [ ^ self ].
+
+	aDragDelegate := dragContainerElement userData at: #dragDelegate.
+	aDropDelegate
+		dragged: dragContainerElement
+		items: aDragDelegate items
+		at: aPosition
+		offset: aDragDelegate offset
+		in: anEvent element
+]
+
+{ #category : #'drag and drop handlers' }
+BlSpaceEventListener >> spaceDragDropEnterEvent: anEvent [
+	| aDropDelegate aDragDelegate aPosition |
+	
+	anEvent consumed: true.
+
+	aDropDelegate := anEvent delegate.
+	aPosition := anEvent position.
+
+	dragContainerElement ifNil: [ ^ self ].
+
+	aDragDelegate := dragContainerElement userData at: #dragDelegate.
+	aDropDelegate
+		enter: aDragDelegate items
+		at: aPosition
+		in: anEvent element
+]
+
+{ #category : #'drag and drop handlers' }
+BlSpaceEventListener >> spaceDragDropEvent: anEvent [
+	| aDropDelegate aDragDelegate aPosition theRejectedItems|
+
+	aDropDelegate := anEvent delegate.
+	aPosition := anEvent position.
+
+	dragContainerElement ifNil: [ ^ self ].
+
+	aDragDelegate := dragContainerElement userData at: #dragDelegate.
+
+	theRejectedItems := aDropDelegate
+		drop: aDragDelegate items
+		at: aPosition
+		in: anEvent element.
+"		theRejectedItems first sourceElement remove.
+	theRejectedItems first sourceElement parent addChild: theRejectedItems first sourceElement."
+
+	aDragDelegate items: theRejectedItems
+]
+
+{ #category : #'drag and drop handlers' }
+BlSpaceEventListener >> spaceDragLiftEvent: anEvent [
+
+	| aDragDelegate aPosition aDragArea |
+	aDragDelegate := anEvent delegate.
+	aPosition := anEvent position.
+
+	dragContainerElement ifNotNil: [ :anElement |
+		anElement removeFromParent ].
+	dragContainerElement := aDragDelegate lift.
+	dragContainerElement userData at: #dragDelegate put: aDragDelegate.
+	dragContainerElement preventMeAndChildrenMouseEvents.
+
+	aDragArea := aDragDelegate hasDragArea
+		             ifTrue: [ aDragDelegate dragArea ]
+		             ifFalse: [ self space root ].
+
+	aDragArea addChild: dragContainerElement.
+
+	aDragDelegate items isNotEmpty ifTrue: [
+		| sourcePositionInSpace |
+		sourcePositionInSpace := aDragDelegate items first sourceElement
+			                         bounds inSpace position.
+		dragContainerElement position:
+			(dragContainerElement globalPointToParent: sourcePositionInSpace) ].
+
+	aDragDelegate
+		drag: dragContainerElement
+		to: (dragContainerElement globalPointToParent: aPosition).
 
 	mouseDragListener := BlEventHandler
-		on: BlMouseMoveEvent
-		do: [ :aMouseMoveEvent | aDelegate drag: aMouseMoveEvent position ].
+		                     on: BlMouseMoveEvent
+		                     do: [ :aMouseMoveEvent |
+			                     aDragDelegate
+				                     drag: dragContainerElement
+				                     to:
+				                     (dragContainerElement globalPointToParent:
+					                      aMouseMoveEvent position) ].
 
 	self space addEventHandler: mouseDragListener
 ]
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceEventsProcessedEvent: anEvent [
+
 	self space keyboardProcessor handleSpaceEventProcessedEvent: anEvent
 ]
 
@@ -132,12 +237,14 @@ BlSpaceEventListener >> spaceFocusInEvent: anEvent [
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceFocusOutEvent: anEvent [
+
 	self focusProcessor processWindowFocusOut: anEvent.
 	self keyboardProcessor processWindowFocusOut: anEvent
 ]
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceMouseEnterEvent: anEvent [
+
 	self mouseProcessor handleMouseEntered: anEvent
 ]
 
@@ -150,36 +257,14 @@ BlSpaceEventListener >> spaceMouseLeaveEvent: anEvent [
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceMovedEvent: anEvent [
 
-  self space setPosition: anEvent position
-]
-
-{ #category : #'window handlers' }
-BlSpaceEventListener >> spaceRedrawRequestedEvent: anEvent [
-
-  self space
-		invalidateAll;
-		requestNextPulse
+  space setPosition: anEvent position
 ]
 
 { #category : #'window handlers' }
 BlSpaceEventListener >> spaceResizedEvent: anEvent [
 	"Is sent after window size was changed"
 
-	self space setExtent: anEvent extent
-]
-
-{ #category : #'window handlers' }
-BlSpaceEventListener >> spaceScaleFactorChangedEvent: anEvent [
-
-  self space
-		invalidateAll;
-		requestNextPulse
-]
-
-{ #category : #'window handlers' }
-BlSpaceEventListener >> spaceWakeUpEvent: anEvent [
-
-  self space requestNextPulse
+	space setExtent: anEvent extent
 ]
 
 { #category : #'keyboard handlers' }

@@ -116,13 +116,13 @@ BlHostPulseLoop >> loopIteration [
 
 	[
 		pulseStartMS := Time millisecondClockValue.
-		universe := BlParallelUniverse forHost: hostClass.
+		universe := hostClass universe.
 		universe pulse.
 		pulseDurationMS := Time millisecondClockValue - pulseStartMS.
 		self waitUntilNextPulse. ]
 	on: Exception
 	do: [ :e |
-			self forceStartNewUIProcess.
+		self forceStartNewUIProcess.
 		e pass ].
 
 	"Returns true to continue looping"

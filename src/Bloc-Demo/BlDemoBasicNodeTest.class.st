@@ -88,7 +88,7 @@ BlDemoBasicNodeTest >> testOnePackageWithTwoClassesHasTwoNodes [
 	collector := BlDemoCollector new
 		             pragma: #demo;
 		             collectPackage:
-			             (RPackageOrganizer default packageNamed: #'Bloc-Demo').
+			             (self class packageOrganizer packageNamed: #'Bloc-Demo').
 	packages := collector packages.
 	self assert: packages size equals: 1.
 
@@ -106,7 +106,7 @@ BlDemoBasicNodeTest >> testOnePackageWithTwoClassesHasTwoNodesWithSample2 [
 	collector := BlDemoCollector new
 		             pragma: #demo2;
 		             collectPackage:
-			             (RPackageOrganizer default packageNamed: #'Bloc-Demo').
+			             (self class packageOrganizer packageNamed: #'Bloc-Demo').
 	packages := collector packages.
 	self assert: packages size equals: 1.
 

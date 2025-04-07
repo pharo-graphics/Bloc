@@ -7,13 +7,17 @@ A Host can be compared to a driver that communicates with the native multimedia 
 Class {
 	#name : #BlHost,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#classVars : [
 		'PreferableHostClass'
 	],
 	#category : #'Bloc-Universe - Host'
 }
+
+{ #category : #testing }
+BlHost class >> hasUniverse [
+
+	^ BlParallelUniverse existsForHost: self
+]
 
 { #category : #'api - lifecycle' }
 BlHost class >> isRunning [
@@ -157,6 +161,12 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 	"Update the received paragraph with its measurement."
 
 	BlHostRenderer preferableClass offscreenMeasureTextParagraph: aBlTextParagraph
+]
+
+{ #category : #'host - testing' }
+BlHost >> runOneCycle [
+	
+	"The host can do something while waiting for the pulse to happen. Useful for Morphic when the test run in the UI thread"
 ]
 
 { #category : #'api - lifecycle' }

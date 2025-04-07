@@ -37,7 +37,8 @@ BlEventFilter >> eventsToHandle [
 
 { #category : #'api - event managing' }
 BlEventFilter >> handleEvent: anEvent [
-	anEvent consumed: true
+
+	anEvent consume
 ]
 
 { #category : #printing }

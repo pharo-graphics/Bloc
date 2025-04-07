@@ -109,16 +109,16 @@ BlCompositeSelection >> deselectAll [
 ]
 
 { #category : #'api - selection' }
-BlCompositeSelection >> deselectAllIndexes: aCollection [
-
-	aCollection do: [ :idx | self deselectIndex: idx ]
-]
-
-{ #category : #'api - selection' }
 BlCompositeSelection >> deselectIndex: anIndex [
 	"Remove a given selection"
 
 	self deselect: anIndex - 1 to: anIndex
+]
+
+{ #category : #'api - selection' }
+BlCompositeSelection >> deselectIndexes: aCollection [
+
+	aCollection do: [ :idx | self deselectIndex: idx ]
 ]
 
 { #category : #'api - enumerating' }
@@ -228,16 +228,16 @@ BlCompositeSelection >> select: aFromIndex to: aToIndex [
 ]
 
 { #category : #'api - selection' }
-BlCompositeSelection >> selectAllIndexes: aCollection [
-
-	aCollection do: [ :idx | self selectIndex: idx ]
-]
-
-{ #category : #'api - selection' }
 BlCompositeSelection >> selectIndex: anIndex [
 	"add a given selection"
 
 	self select: anIndex - 1 to: anIndex
+]
+
+{ #category : #'api - selection' }
+BlCompositeSelection >> selectIndexes: aCollection [
+
+	aCollection do: [ :idx | self selectIndex: idx ]
 ]
 
 { #category : #'api - selection' }

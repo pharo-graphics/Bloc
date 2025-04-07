@@ -1,15 +1,10 @@
 SmalltalkCISpec {
-  #preLoading: 'scripts/ciPreLoading.st',
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'Bloc',
       #directory : 'src',
-      #platforms : [ #pharo ]
+      #platforms : [ #pharo ],
+      #registerInIceberg : true
     }
-  ],
-	#testing : {
-		#exclude : {
-			#packages : [ 'Bloc-Examples.*', 'Bloc-Layout-Examples.*', 'Bloc-Text-Examples.*' ]
-		}
-	}
+  ]
 }

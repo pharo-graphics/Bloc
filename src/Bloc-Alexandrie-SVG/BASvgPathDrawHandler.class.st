@@ -188,8 +188,8 @@ BASvgPathDrawHandler >> quadraticBezierVia: p1 to: aPoint [
 	currentPosition := self toAbsolute: aPoint.
 
 	cairoContext
-		quadraticCurveFrom: startPoint
-		controlPoint: lastControlPoint
+		quadraticCurveFromCurrentPoint: startPoint
+		via: lastControlPoint
 		to: currentPosition
 ]
 
@@ -223,8 +223,8 @@ BASvgPathDrawHandler >> smoothQuadraticBezierTo: aPoint [
 	currentPosition := self toAbsolute: aPoint.
 
 	cairoContext
-		quadraticCurveFrom: startPoint
-		controlPoint: lastControlPoint
+		quadraticCurveFromCurrentPoint: startPoint
+		via: lastControlPoint
 		to: currentPosition
 ]
 

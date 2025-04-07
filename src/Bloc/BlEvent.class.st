@@ -14,71 +14,75 @@ Class {
 		'currentTarget',
 		'timestamp',
 		'canBePropagated',
-		'consumed'
+		'consumed',
+		'timestampInMicroseconds'
 	],
 	#category : #'Bloc-Events'
 }
 
 { #category : #'api - enable / disable' }
 BlEvent class >> disableIn: anEventDispatcher [
+
 	anEventDispatcher disableGeneralEventType: self
 ]
 
 { #category : #'api - enable / disable' }
 BlEvent class >> enableIn: anEventDispatcher [
+
 	anEventDispatcher enableGeneralEventType: self
 ]
 
 { #category : #'event management' }
 BlEvent class >> fireEvent: anEvent [
-	<return: #BlEvent>
 
 	^ self fireEvent: anEvent target: anEvent target
 ]
 
 { #category : #'event management' }
 BlEvent class >> fireEvent: anEvent from: aTopEventTarget [
-	<return: #BlEvent>
 
 	^ self fireEvent: anEvent from: aTopEventTarget to: anEvent target
 ]
 
 { #category : #'event management' }
 BlEvent class >> fireEvent: anEvent from: aTopEventTarget to: aTargetEventTarget [
-	<return: #BlEvent>
-	| theEvent aDispatcherChain |
 
+	| theEvent aDispatcherChain |
 	theEvent := anEvent.
 
-	anEvent hasSource
-		ifFalse: [ anEvent source: aTargetEventTarget ].
+	anEvent hasSource ifFalse: [ anEvent source: aTargetEventTarget ].
 
-	anEvent target = aTargetEventTarget
-		ifFalse: [ theEvent := anEvent newCopyFor: aTargetEventTarget].
+	anEvent target = aTargetEventTarget ifFalse: [
+		theEvent := anEvent newCopyFor: aTargetEventTarget ].
 
-	aDispatcherChain := aTargetEventTarget buildEventDispatchChain: BlEventDispatcherChain empty upTo: aTopEventTarget.
+	aDispatcherChain :=
+		aTargetEventTarget
+			buildEventDispatchChain: BlEventDispatcherChain empty
+			upTo: aTopEventTarget.
+
 	^ aDispatcherChain dispatchEvent: theEvent
 ]
 
 { #category : #'event management' }
 BlEvent class >> fireEvent: anEvent target: anEventTarget [
-	<return: #BlEvent>
-	| theEvent aDispatcherChain |
 
+	| theEvent aDispatcherChain |
 	theEvent := anEvent.
 
-	anEvent hasSource
-		ifFalse: [ anEvent source: anEventTarget ].
+	anEvent hasSource ifFalse: [ anEvent source: anEventTarget ].
 
-	anEvent target = anEventTarget
-		ifFalse: [ theEvent := anEvent newCopyFor: anEventTarget].
+	anEvent target = anEventTarget ifFalse: [
+		theEvent := anEvent newCopyFor: anEventTarget ].
 
-	aDispatcherChain := anEventTarget buildEventDispatchChain: BlEventDispatcherChain empty.
+	aDispatcherChain :=
+		anEventTarget buildEventDispatchChain: BlEventDispatcherChain empty.
+
 	^ aDispatcherChain dispatchEvent: theEvent
 ]
 
 { #category : #accessing }
 BlEvent class >> from: anEventTarget [
+
 	^ self new
 		target: anEventTarget;
 		source: anEventTarget;
@@ -87,6 +91,7 @@ BlEvent class >> from: anEventTarget [
 
 { #category : #accessing }
 BlEvent class >> target: anObject [
+
 	^ self new
 		target: anObject;
 		yourself
@@ -94,8 +99,8 @@ BlEvent class >> target: anObject [
 
 { #category : #private }
 BlEvent class >> targetToDictionaryForExport: anObject [
-	| aDictionary |
 
+	| aDictionary |
 	aDictionary := OrderedDictionary new 
 		at: #class put: anObject class name;
 		at: #hash put: anObject identityHash;
@@ -109,6 +114,7 @@ BlEvent class >> targetToDictionaryForExport: anObject [
 
 { #category : #'api - enable / disable' }
 BlEvent class >> wantedIn: anEventDispatcher [
+
 	^ anEventDispatcher wantsGeneralEventType: self
 ]
 
@@ -125,7 +131,7 @@ BlEvent >> asDictionaryForExport [
 		at: #source put: (source ifNotNil: [ :aSource | self class targetToDictionaryForExport: aSource ]);
 		at: #target put: (target ifNotNil: [ :aTarget | self class targetToDictionaryForExport: aTarget ]);
 		at: #currentTarget put: (currentTarget ifNotNil: [ :aCurrentTarget | self class targetToDictionaryForExport: aCurrentTarget ]);
-		at: #timestamp put: timestamp asString;
+		at: #timestamp put: self timestamp asString;
 		at: #canBePropagated put: canBePropagated;
 		at: #consumed put: consumed;
 		yourself
@@ -144,8 +150,9 @@ BlEvent >> canBePropagated [
 ]
 
 { #category : #'private - accessing' }
-BlEvent >> canBePropagated: anObject [
-	canBePropagated := anObject
+BlEvent >> canBePropagated: aBoolean [
+
+	canBePropagated := aBoolean
 ]
 
 { #category : #'private - steps' }
@@ -155,7 +162,14 @@ BlEvent >> capturingTarget: aTBlEventTarget [
 ]
 
 { #category : #testing }
+BlEvent >> consume [
+
+	consumed := true
+]
+
+{ #category : #testing }
 BlEvent >> consumed: aBoolean [
+
 	consumed := aBoolean
 ]
 
@@ -187,6 +201,14 @@ BlEvent >> currentTarget: anEventTarget [
 	currentTarget := anEventTarget
 ]
 
+{ #category : #'api - timestamp' }
+BlEvent >> fillFromTime: aBlTime [
+
+	aBlTime ifNil: [ ^ self ]. "See: https://github.com/pharo-graphics/Bloc/issues/733"
+	timestampInMicroseconds := aBlTime nowInUTCMicroseconds.
+	timestamp := nil
+]
+
 { #category : #firing }
 BlEvent >> fire [
 	BlEvent fireEvent: self
@@ -200,15 +222,22 @@ BlEvent >> forwardingTarget: aTBlEventTarget [
 
 { #category : #testing }
 BlEvent >> hasSource [
-	<return: #Boolean>
 	
 	^ source isNotNil
 ]
 
+{ #category : #'api - timestamp' }
+BlEvent >> hasTimestamp [
+	"Returns the `DateAndTime` at which the event was created."
+
+	^ timestampInMicroseconds isNotNil
+]
+
 { #category : #initialization }
 BlEvent >> initialize [
+
 	super initialize.
-	
+
 	consumed := false.
 	canBePropagated := true
 ]
@@ -220,6 +249,9 @@ BlEvent >> isBaseDrag [
 
 { #category : #testing }
 BlEvent >> isBaseFocus [
+
+	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/704'.
+
 	^ false
 ]
 
@@ -348,6 +380,29 @@ BlEvent >> newCopyFor: aTarget [
 		yourself
 ]
 
+{ #category : #printing }
+BlEvent >> printExtraDetailsOn: aStream [
+
+	aStream print: self timestamp.
+	aStream
+		nextPutAll: ' target: ';
+		print: target.
+	self hasSource ifTrue: [
+		aStream
+			nextPutAll: ' source: ';
+			print: source ]
+]
+
+{ #category : #printing }
+BlEvent >> printOn: aStream [
+
+	aStream
+		nextPutAll: self className;
+		nextPut: $(.
+	self printExtraDetailsOn: aStream.
+	aStream nextPut: $)
+]
+
 { #category : #sending }
 BlEvent >> sendTo: anObject [
 	
@@ -383,16 +438,20 @@ BlEvent >> target: aTBlEventTarget [
 	target := aTBlEventTarget
 ]
 
-{ #category : #'api - accessing' }
+{ #category : #'api - timestamp' }
 BlEvent >> timestamp [
-	"Returns the time at which the event was created."
-	<return: #DateAndTime>
+	"Returns the `DateAndTime` at which the event was created."
 
-	^ timestamp
+	^ timestamp ifNil: [
+		timestampInMicroseconds ifNotNil: [
+			timestamp := DateAndTime fromUTCMicrosecondClockValue: timestampInMicroseconds ] ]
 ]
 
-{ #category : #'private - accessing' }
+{ #category : #'api - timestamp' }
 BlEvent >> timestamp: aDateAndTime [
-	
-	timestamp := aDateAndTime
+
+	self deprecated: 'Should use fillFromTime:'.
+
+	timestampInMicroseconds := aDateAndTime utcMicroSeconds.
+	timestamp := nil
 ]

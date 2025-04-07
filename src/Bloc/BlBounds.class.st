@@ -18,39 +18,47 @@ Class {
 { #category : #'instance creation' }
 BlBounds class >> fromRectangle: aRectangle [
 
-	^ self new
-		  rectangle: aRectangle;
-		  yourself
+	^ self
+		  left: aRectangle left
+		  top: aRectangle top
+		  right: aRectangle right
+		  bottom: aRectangle bottom
 ]
 
 { #category : #'instance creation' }
 BlBounds class >> left: aLeft top: aTop right: aRight bottom: aBottom [
 
-	^ self new
-		  left: aLeft
-		  top: aTop
-		  right: aRight
-		  bottom: aBottom;
-		  yourself
+	^ self basicNew
+		left: aLeft
+		top: aTop
+		right: aRight
+		bottom: aBottom;
+		yourself
+]
+
+{ #category : #'instance creation' }
+BlBounds class >> new [
+
+	^ self
+		  left: 0.0
+		  top: 0.0
+		  right: 0.0
+		  bottom: 0.0
 ]
 
 { #category : #'instance creation' }
 BlBounds class >> origin: anOrigin corner: aCorner [
 
 	^ self new
-		  origin: anOrigin corner: aCorner;
-		  yourself
+		origin: anOrigin corner: aCorner;
+		yourself
 ]
 
 { #category : #'instance creation' }
 BlBounds class >> origin: anOrigin extent: aPointExtent [	
-	"aPointExtent should satisfy #isBlocPositivePoint"
 
 	^ self new
-		left: anOrigin x
-		top: anOrigin y
-		right: anOrigin x + aPointExtent x
-		bottom: anOrigin y + aPointExtent y;
+		origin: anOrigin extent: aPointExtent;
 		yourself
 ]
 
@@ -183,6 +191,18 @@ BlBounds >> closestEdgeTo: aPoint [
 	^ self counterClockwiseEdges detectMin: [ :aRay | aRay distanceTo: aPoint ]
 ]
 
+{ #category : #'rectangle functions' }
+BlBounds >> compress [
+	"Transform me so that origin and corner are rounded to integers.
+	Rounding is done by upper value on origin and lower value on corner so that
+	rounded rectangle is inside self."
+
+	left := left ceiling.
+	top := top ceiling.
+	right := right floor.
+	bottom := bottom floor
+]
+
 { #category : #testing }
 BlBounds >> containedInRect: aRectangle [
 	"Answer whether a receiver is within a aRectangle"
@@ -279,6 +299,18 @@ BlBounds >> encompass: aPoint [
 ]
 
 { #category : #'rectangle functions' }
+BlBounds >> expand [
+	"Transform me so that origin and corner are rounded to integers.
+	Rounding is done by upper value on origin and lower value on corner so that
+	self is inside rounded rectangle."
+	
+	left := left floor.
+	top := top floor.
+	right := right ceiling.
+	bottom := bottom ceiling
+]
+
+{ #category : #'rectangle functions' }
 BlBounds >> expandBy: aDelta [ 
 	"Outset me by delta. Delta is a Rectangle, Point, or Number."
 
@@ -333,14 +365,12 @@ BlBounds >> expandByPoint: aPoint [
 
 { #category : #accessing }
 BlBounds >> expanded [
-	"Transform me so that origin and corner are rounded to integers.
-	Rounding is done by upper value on origin and lower value on corner so that
-	self is inside rounded rectangle."
-	
-	left := left floor.
-	top := top floor.
-	right := right ceiling.
-	bottom := bottom ceiling
+
+	self
+		deprecated: 'Use expand'
+		transformWith: '`@rcvr expanded' -> '`@rcvr expand'.
+
+	^ self expand
 ]
 
 { #category : #accessing }
@@ -369,17 +399,6 @@ BlBounds >> hasPositiveExtent [
 BlBounds >> height [
 
 	^ bottom - top
-]
-
-{ #category : #initialization }
-BlBounds >> initialize [
-
-	super initialize.
-	
-	left := 0.0.
-	top := 0.0.
-	right := 0.0.
-	bottom := 0.0
 ]
 
 { #category : #'rectangle functions' }
@@ -567,7 +586,7 @@ BlBounds >> rightCenter [
 { #category : #transforming }
 BlBounds >> scaleBy: aFactor [
 	
-	^ aFactor isPoint
+	aFactor isPoint
 		ifTrue: [ self scaleX: aFactor x Y: aFactor y ]
 		ifFalse: [ aFactor isNumber
 			ifTrue: [ self scaleX: aFactor Y: aFactor ]
@@ -576,7 +595,6 @@ BlBounds >> scaleBy: aFactor [
 
 { #category : #transforming }
 BlBounds >> scaleX: aX Y: aY [
-	"Arguments should satisfy #isBlocFinite"
 
 	left := left * aX.
 	top := top * aY.
@@ -591,6 +609,16 @@ BlBounds >> shrinkByLeft: aLeft top: aTop right: aRight bottom: aBottom [
 	top := top + aTop.
 	right := right - aRight.
 	bottom := bottom - aBottom
+]
+
+{ #category : #'rectangle functions' }
+BlBounds >> shrinkByMargin: aMargin [
+
+	self
+		shrinkByLeft: aMargin left
+		top: aMargin top
+		right: aMargin right
+		bottom: aMargin bottom
 ]
 
 { #category : #printing }

@@ -51,7 +51,6 @@ Class {
 	#instVars : [
 		'fileReference',
 		'strict',
-		'binaryStream',
 		'map',
 		'bufferSize',
 		'buffer',
@@ -98,6 +97,12 @@ BlRopeableCollectionFile >> at: anInteger [
 	^ buffer at: (anInteger - bufferStart + 1) asInteger.
 ]
 
+{ #category : #enumerating }
+BlRopeableCollectionFile >> binaryReadStreamDo: aBlock [
+
+	^ fileReference binaryReadStreamDo: aBlock
+]
+
 { #category : #accessing }
 BlRopeableCollectionFile >> bufferSize [
 	^ bufferSize
@@ -108,48 +113,26 @@ BlRopeableCollectionFile >> bufferSize: anInteger [
 
 	bufferSize := anInteger.
 	buffer := String new: bufferSize.
-	bufferStart := nil.
+	bufferStart := 0.
 	bufferedSize := 0.
 ]
 
-{ #category : #private }
-BlRopeableCollectionFile >> characterStream [
-	"Answer a read stream with character decoding on the receiver's binary stream"
+{ #category : #enumerating }
+BlRopeableCollectionFile >> characterStreamDo: aBlock [
+	"Evaluate aBlock with a ZnCharacterReadStream on the receiver's file."
 
-	^ ZnCharacterReadStream 
-		on: binaryStream 
-		encoding: 'utf8'
-]
-
-{ #category : #'initialize-release' }
-BlRopeableCollectionFile >> close [
-
-	binaryStream close
+	^ self binaryReadStreamDo: [ :bStream |
+		aBlock value:
+			(ZnCharacterReadStream 
+				on: bStream
+				encoding: 'utf8') ]
 ]
 
 { #category : #copying }
 BlRopeableCollectionFile >> copyFrom: startIndex to: endIndex [
-	| length results receiverIndex bufferIndex resultIndex |
 
-	self ensureBuffered: startIndex.
-	length := endIndex - startIndex + 1.
-	length <= 0 ifTrue: [ ^ '' ].
-	results := String new: length.
-	receiverIndex := startIndex.
-	resultIndex := 1.
-	bufferIndex := startIndex - bufferStart + 1.
-
-	[ receiverIndex <= endIndex ] whileTrue:
-		[ bufferIndex > bufferedSize ifTrue: 
-			[ self ensureBuffered: receiverIndex.
-			bufferIndex := receiverIndex - bufferStart ].
-		results at: resultIndex put: (buffer at: bufferIndex).
-		receiverIndex := receiverIndex + 1.
-		resultIndex := resultIndex + 1.
-		bufferIndex := bufferIndex + 1. ].
-
-	^ results
-
+	^ String streamContents: [ :aStream |
+		startIndex to: endIndex do: [ :i | aStream nextPut: (self at: i) ] ]
 ]
 
 { #category : #copying }
@@ -183,43 +166,37 @@ BlRopeableCollectionFile >> copyToEndFrom: startIndex [
 
 { #category : #enumerating }
 BlRopeableCollectionFile >> do: aBlock [ 
-	| characterStream ch |
 
-	fileReference ifNil: [ ^ self ].
-	binaryStream position: 0.
-	characterStream := self characterStream.
-	[ characterStream atEnd ] whileFalse:
-		[ ch := characterStream next.
-		ch ifNotNil: [ aBlock value: ch ] ]
+	self characterStreamDo: [ :stream |
+		stream position: 0.
+		[ stream atEnd ] whileFalse: [
+			stream next ifNotNil: [ :ch | aBlock value: ch ] ] ]
 ]
 
 { #category : #private }
 BlRopeableCollectionFile >> ensureBuffered: anInteger [
-	"Ensure the character at anInteger is buffered"
-	| mapEntry characterStream rawBuffer |
+	"Ensure the character at anInteger is buffered.
+	anInteger is the position in the underlying binary stream, not the character position."
 
-	((anInteger between: bufferStart and: bufferStart + bufferedSize - 1) and: [ bufferStart > 0 ]) ifTrue: [ ^self ].
-	(haveSize and: [ anInteger > self size ]) ifTrue: [ ^self ].
+	| mapEntry rawBuffer |
+	((anInteger between: bufferStart and: bufferStart + bufferedSize - 1)
+		and: [ bufferStart > 0 ]) ifTrue: [ ^ self ].
+	(haveSize and: [ anInteger > self size ]) ifTrue: [ ^ self ].
 
 	mapEntry := self mapEntryFor: anInteger.
 
-	binaryStream position: mapEntry value.
-	bufferStart := mapEntry key.
-	bufferedSize := 0.
-	characterStream := self characterStream.
-
-	"All of the below should be modified to work with existing collections,
-	not discarding and creating on each iteration"
-
-	[ (anInteger > (bufferStart + bufferedSize - 1)) or: [ bufferStart = 0 ] ] whileTrue:
-		[ bufferStart := bufferStart + bufferedSize.
-		rawBuffer := self loadNext: bufferSize with: characterStream.
-		buffer := rawBuffer.
-		bufferedSize := buffer size.
-		map add: (bufferStart + bufferedSize - 1) -> binaryStream position.
-		haveSize := haveSize or: [ binaryStream atEnd ].
-		(haveSize and: [ anInteger >= self size ]) ifTrue: [ ^self ] ].
-
+	self characterStreamDo: [ :stream |
+		stream position: mapEntry value.
+		bufferStart := mapEntry key.
+		bufferedSize := 0.
+		[ anInteger > (bufferStart + bufferedSize - 1) or: [ bufferStart = 0 ] ] whileTrue:
+			[ bufferStart := bufferStart + bufferedSize.
+			rawBuffer := self loadNext: bufferSize with: stream.
+			buffer := rawBuffer.
+			bufferedSize := buffer size.
+			map add: bufferStart + bufferedSize -> stream position.
+			haveSize := haveSize or: [ stream atEnd ].
+			(haveSize and: [ anInteger >= self size ]) ifTrue: [ ^ self ] ] ]
 ]
 
 { #category : #accessing }
@@ -230,13 +207,7 @@ BlRopeableCollectionFile >> fileReference [
 { #category : #accessing }
 BlRopeableCollectionFile >> fileReference: aFileReference [
 
-	binaryStream ifNotNil: [ binaryStream close ].
-	fileReference := aFileReference asFileReference.
-	binaryStream := fileReference binaryReadStream.
-	WeakRegistry default
-		add: self
-		finalizer:
-		(BlRopeableCollectionFileFinalizer new binaryStream: binaryStream)
+	fileReference := aFileReference
 ]
 
 { #category : #comparing }
@@ -269,17 +240,19 @@ BlRopeableCollectionFile >> initialize [
 BlRopeableCollectionFile >> loadNext: aNumber with: aReadStream [
 	"Answer the next aNumber characters using aReadstream.
 	If an encoding error occurs and strict is false, fall back to null encoding"
-	| startPosition |
 
-	startPosition := binaryStream position.
+	| startPosition |
+	startPosition := aReadStream position.
 	^ [ aReadStream next: aNumber ]
 		on: ZnCharacterEncodingError
 		do: [ :ex | 
-			strict ifTrue: 
-				[ ex pass ]
-			ifFalse:
-				[ binaryStream position: startPosition.
-				self loadNext: aNumber with: self nullEncodedStream ] ]
+			strict
+				ifTrue: [ ex pass ]
+				ifFalse: [
+					aReadStream position: startPosition.
+					self loadNext: aNumber with: (ZnCharacterReadStream 
+						on: aReadStream wrappedStream 
+						encoding: 'null') ] ]
 ]
 
 { #category : #'private - testing' }
@@ -326,15 +299,6 @@ BlRopeableCollectionFile >> mapEntryFor: anInteger [
 
 ]
 
-{ #category : #private }
-BlRopeableCollectionFile >> nullEncodedStream [
-	"Answer a read stream with null (ascii) character decoding on the receiver's binary stream"
-
-	^ ZnCharacterReadStream 
-		on: binaryStream 
-		encoding: 'null'
-]
-
 { #category : #accessing }
 BlRopeableCollectionFile >> size [ 
 	"Answer the receiver's size.
@@ -346,7 +310,7 @@ BlRopeableCollectionFile >> size [
 		self ensureBuffered: 1 ].
 
 	^ haveSize
-		ifTrue: [ map last key ]
+		ifTrue: [ map last key - 1 ]
 		ifFalse: [ BlTextIndexEOS new text: self ]
 ]
 

@@ -16,16 +16,6 @@ Class {
 }
 
 { #category : #'window - properties' }
-BlOSWindowHostSpace >> borderless [
-
-	self
-		deprecated: 'Use isBorderless instead of current one'
-		transformWith: '`@rcv borderless' -> '`@rcv isBorderless'.
-
-	^ self isBorderless
-]
-
-{ #category : #'window - properties' }
 BlOSWindowHostSpace >> borderless: aBoolean [
 	window borderless: aBoolean
 ]
@@ -37,11 +27,8 @@ BlOSWindowHostSpace >> center [
 
 { #category : #'host space - displaying' }
 BlOSWindowHostSpace >> close [
-	
-	self isValid
-		ifTrue: [ window destroy ].
-		
-	(BlOSWindowDestroyedSignal new window: window) emit.
+
+	self isValid ifTrue: [ window destroy ].
 
 	window := nil
 ]
@@ -70,7 +57,6 @@ BlOSWindowHostSpace >> enqueueEvent: aBlEvent [
 BlOSWindowHostSpace >> eventFetcher [
 	"Return event fetcher used to enqueue events that should be
 	processed in the beginning of every frame"
-	<return: #BlHostEventFetcher>
 
 	^ eventFetcher
 ]
@@ -80,16 +66,6 @@ BlOSWindowHostSpace >> fetchedEventsDo: aBlock [
 	"Flush event queue and evaluate a given block with every queued event as argument"
 	
 	self eventFetcher fetchedEventsDo: aBlock
-]
-
-{ #category : #'window - properties' }
-BlOSWindowHostSpace >> fullscreen [
-
-	self
-		deprecated: 'Use isFullscreen instead of current one'
-		transformWith: '`@rcv fullscreen' -> '`@rcv isFullscreen'.
-
-	^ self isFullscreen
 ]
 
 { #category : #'window - properties' }
@@ -107,26 +83,33 @@ BlOSWindowHostSpace >> hide [
 
 { #category : #initialization }
 BlOSWindowHostSpace >> initialize [
+
 	super initialize.
-	
-	eventFetcher := BlHostEventFetcher hostSpace: self.
+
+	eventFetcher := BlHostEventFetcher hostSpace: self
 ]
 
 { #category : #initialization }
 BlOSWindowHostSpace >> initializeWithAttributes: initialAttributes [
-	
+
 	self
 		assert: [ window isNil or: [ window isValid not ] ]
 		description: [ 'Window must be nil or invalid' ].
 
 	window := OSWindow createWithAttributes: initialAttributes.
-	window 
-		eventHandler: ((BlOSWindowEventHandler window: self)
-		keyboardKeyTable: keyboardKeyTable).
+	window eventHandler:
+		(BlOSWindowEventHandler
+			window: self
+			time: space time
+			keyboardKeyTable: keyboardKeyTable).
 	window startTextInput.
-	window newBlocRenderer.
+	window newBlocRenderer
+]
+
+{ #category : #'dirty areas' }
+BlOSWindowHostSpace >> invalidate [
 	
-	(BlOSWindowCreatedSignal new window: window) emit
+	window := nil
 ]
 
 { #category : #'window - properties' }
@@ -207,7 +190,6 @@ BlOSWindowHostSpace >> minimized [
 { #category : #'host space - testing' }
 BlOSWindowHostSpace >> needsRebuild [
 	"Return true if window should be recreated after user saved and quit pharo"
-	<return: #Boolean>
 	
 	^ self isValid not
 ]
@@ -244,16 +226,6 @@ BlOSWindowHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
 
 	OSWindowRenderThread uniqueInstance critical: [ self renderer render: self ]
-]
-
-{ #category : #'window - properties' }
-BlOSWindowHostSpace >> resizable [
-
-	self
-		deprecated: 'Use isResizable instead of current one'
-		transformWith: '`@rcv resizable' -> '`@rcv isResizable'.
-
-	^ self isResizable
 ]
 
 { #category : #'window - properties' }

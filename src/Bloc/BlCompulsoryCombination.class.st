@@ -121,24 +121,6 @@ BlCompulsoryCombination >> printOn: aStream [
 	aStream nextPut: $).
 ]
 
-{ #category : #printing }
-BlCompulsoryCombination >> storeOn: aStream [
-	aStream nextPut: $(.
-
-	combinations size <= 1
-		ifTrue: [
-			aStream nextPutAll: self class name; space; nextPutAll: 'new'.
-			combinations size = 1
-				ifTrue: [ aStream space nextPutAll: #with:; space; store: combinations first ] ]
-		ifFalse: [ 
-			1 to: combinations size - 1 do: [ :i | aStream nextPut: $( ].
-			combinations
-				do: [ :eachCombination | aStream store: eachCombination ]
-				separatedBy: [ aStream nextPutAll: ') and: ' ] ].
-
-	aStream nextPut: $)
-]
-
 { #category : #adding }
 BlCompulsoryCombination >> with: aCombination [
 	

@@ -1,149 +1,112 @@
 Class {
 	#name : #BlImageBackgroundTest,
-	#superclass : #BlBackgroundTest,
-	#category : #'Bloc-Tests'
+	#superclass : #TestCase,
+	#category : #'Bloc-Tests-Basic-Background'
 }
+
+{ #category : #running }
+BlImageBackgroundTest >> newBlueForm [
+
+	^ (Form extent: 50 @ 50 depth: 32)
+			fillColor: Color blue;
+			yourself
+]
 
 { #category : #'background - image' }
 BlImageBackgroundTest >> testBlueImageBackgroundExplicitInitialization [
-	<sampleInstance>
+
 	| aBackground |
-	
-	aBackground := BlImageBackground new
-		image: ((Form extent: 50@50 depth: 32) fillColor: Color blue).
+	aBackground :=
+		BlImageBackground new
+			image: self newBlueForm;
+			yourself.
 
-	self assert: (aBackground isKindOf: BlImageBackground).	
 	self assert: aBackground opacity equals: 1.0.
-	self assert: aBackground isTransparent not.
-	self 
-		assert: aBackground image bits 
-		equals: ((Form extent: 50@50 depth: 32) fillColor: Color blue) bits.
-
-	^ aBackground
+	self deny: aBackground isTransparent.
+	self assert: aBackground image bits equals: self newBlueForm bits
 ]
 
 { #category : #'background - image' }
 BlImageBackgroundTest >> testBlueImageBackgroundExplicitInstantiation [
-	<sampleInstance>
-	
+
 	| aBackground |
-	
-	aBackground := BlImageBackground image: ((Form extent: 50@50 depth: 32) fillColor: Color blue).
+	aBackground := BlImageBackground image: self newBlueForm.
 
-	self assert: (aBackground isKindOf: BlImageBackground).	
 	self assert: aBackground opacity equals: 1.0.
-	self assert: aBackground isTransparent not.
-	self 
-		assert: aBackground image bits 
-		equals: ((Form extent: 50@50 depth: 32) fillColor: Color blue) bits.
-
-	^ aBackground
+	self deny: aBackground isTransparent.
+	self assert: aBackground image bits equals: self newBlueForm bits
 ]
 
 { #category : #'background - image' }
 BlImageBackgroundTest >> testBlueImageWithPositiveExtentBackground [
-	<sampleInstance>
+
 	| aBackground |
-	
-	aBackground := ((Form extent: 50@50 depth: 32) fillColor: Color blue) asBlBackground.
+	aBackground := self newBlueForm asBlBackground.
 
 	self assert: (aBackground isKindOf: BlImageBackground).	
 	self assert: aBackground opacity equals: 1.0.
-	self assert: aBackground isTransparent not.
-	self 
-		assert: aBackground image bits 
-		equals: ((Form extent: 50@50 depth: 32) fillColor: Color blue) bits.
-
-	^ aBackground
+	self deny: aBackground isTransparent.
+	self assert: aBackground image bits equals: self newBlueForm bits
 ]
 
 { #category : #'background - image' }
 BlImageBackgroundTest >> testEmptyImageBackground [
-	<sampleInstance>
+
 	| aBackground |
-	
 	aBackground := (Form extent: 0@0) asBlBackground.
 
 	self assert: (aBackground isKindOf: BlImageBackground).	
 	self assert: aBackground opacity equals: 1.0.
 	self assert: aBackground isTransparent.
-	self assert: aBackground image bits equals: (Form extent: 0@0) bits.
-
-	^ aBackground
+	self assert: aBackground image bits equals: (Form extent: 0@0) bits
 ]
 
 { #category : #'background - image' }
 BlImageBackgroundTest >> testEmptyImageWithPositiveExtentBackground [
-	<sampleInstance>
+
 	| aBackground |
-	
 	aBackground := (Form extent: 50@50) asBlBackground.
 
 	self assert: (aBackground isKindOf: BlImageBackground).	
 	self assert: aBackground opacity equals: 1.0.
-	self assert: aBackground isTransparent not.
-	self assert: aBackground image bits equals: (Form extent: 50@50) bits.
-
-	^ aBackground
+	self deny: aBackground isTransparent.
+	self assert: aBackground image bits equals: (Form extent: 50@50) bits
 ]
 
 { #category : #'background - icon' }
 BlImageBackgroundTest >> testIconImageBackground [
-	<sampleInstance>
-	
+
 	| aBackground |
-	aBackground := (Smalltalk ui icons iconNamed: #pharoIcon) asBlBackground.
+	aBackground := self newBlueForm asBlBackground.
+
 	self assert: (aBackground isKindOf: BlImageBackground).	
 	self assert: aBackground opacity equals: 1.0.
-	self assert: aBackground isTransparent not.
-	self assert: aBackground image bits equals: (Smalltalk ui icons iconNamed: #pharoIcon) bits.
-	^ aBackground
+	self deny: aBackground isTransparent.
+	self assert: aBackground image bits equals: self newBlueForm bits
 ]
 
 { #category : #'background - icon' }
 BlImageBackgroundTest >> testImageWithOpacityBackground [
-	<sampleInstance>
+
 	| aBackground |
-	
-	aBackground := (Smalltalk ui icons iconNamed: #pharoIcon) asBlBackground.
+	aBackground := self newBlueForm asBlBackground.
 	aBackground opacity: 0.2.
 
 	self assert: (aBackground isKindOf: BlImageBackground).	
 	self assert: aBackground opacity equals: 0.2.
-	self assert: aBackground isTransparent not.
-	self assert: aBackground image bits equals: (Smalltalk ui icons iconNamed: #pharoIcon) bits.
-
-	^ aBackground
+	self deny: aBackground isTransparent.
+	self assert: aBackground image bits equals: self newBlueForm bits
 ]
 
 { #category : #'background - icon' }
 BlImageBackgroundTest >> testImageWithZeroOpacityBackground [
-	<sampleInstance>
+
 	| aBackground |
-	
-	aBackground := (Smalltalk ui icons iconNamed: #pharoIcon) asBlBackground.
+	aBackground := self newBlueForm asBlBackground.
 	aBackground opacity: 0.
 
 	self assert: (aBackground isKindOf: BlImageBackground).	
 	self assert: aBackground opacity equals: 0.
 	self assert: aBackground isTransparent.
-	self assert: aBackground image bits equals: (Smalltalk ui icons iconNamed: #pharoIcon) bits.
-
-	^ aBackground
-]
-
-{ #category : #'background - icon' }
-BlImageBackgroundTest >> testPharoLogoImageBackground [
-	<sampleInstance>
-	
-	| aBackground |
-	
-	aBackground := PolymorphSystemSettings pharoLogoForm asBlBackground.
-
-	self assert: (aBackground isKindOf: BlImageBackground).	
-	self assert: aBackground opacity equals: 1.0.
-	self assert: aBackground isTransparent not.
-	self assert: aBackground image bits equals: PolymorphSystemSettings pharoLogoForm bits.
-
-	^ aBackground
+	self assert: aBackground image bits equals: self newBlueForm bits
 ]

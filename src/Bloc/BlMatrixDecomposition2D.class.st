@@ -11,7 +11,10 @@ Class {
 		'translation',
 		'scale',
 		'angle',
-		'matrix'
+		'sx',
+		'sy',
+		'shx',
+		'shy'
 	],
 	#category : #'Bloc-Basic-Math'
 }
@@ -19,133 +22,151 @@ Class {
 { #category : #accessing }
 BlMatrixDecomposition2D >> angle [
 	"Return a decomposed rotation angle in degrees"
-	<return: #Number>
 
 	^ angle
 ]
 
 { #category : #accessing }
-BlMatrixDecomposition2D >> angle: aNumber [
-	angle := aNumber
-]
+BlMatrixDecomposition2D >> angle: aNumberOfDegrees [
 
-{ #category : #converting }
-BlMatrixDecomposition2D >> asDictionary [
-	<return: #Dictionary>
-	^ { 
-		'Translation' -> self translation.
-		'Scale' -> self scale.
-		'Rotation angle (degrees)' -> self angle.
-		'Inner matrix' -> self matrix
-	} asOrderedDictionary
+	angle := aNumberOfDegrees
 ]
 
 { #category : #'matrix - mathematical functions' }
 BlMatrixDecomposition2D >> composition [
-	<return: #BlMatrix2D>
-	| composedMatrix |
-	
-	composedMatrix := BlMatrix2D new.
-	composedMatrix sx: (matrix at: 1 at: 1).
-	composedMatrix shy: (matrix at: 1 at: 2).
-	composedMatrix shx: (matrix at: 2 at: 1).
-	composedMatrix sy: (matrix at: 2 at: 2).
+
+	| aMatrix |
+	aMatrix := BlMatrix2D new.
+	aMatrix sx: sx.
+	aMatrix sy: sy.
+	aMatrix shx: shx.
+	aMatrix shy: shy.
 	
 	"Translate matrix"
-	composedMatrix x: (translation x * composedMatrix sx) + (translation y * composedMatrix shx).
-	composedMatrix y: (translation x * composedMatrix shy) + (translation y * composedMatrix sy).
+	aMatrix x: (translation x * aMatrix sx) + (translation y * aMatrix shx).
+	aMatrix y: (translation x * aMatrix shy) + (translation y * aMatrix sy).
 	
-	"rotate matrix"
-	composedMatrix := (BlMatrix2D rotation: angle degreesToRadians) multiplyBy: (composedMatrix).
+	"Rotate matrix"
+	aMatrix := (BlMatrix2D rotation: angle degreesToRadians) multiplyBy: aMatrix.
 
 	"Scale matrix."
-	composedMatrix sx: composedMatrix sx * scale x.
-	composedMatrix shy: composedMatrix shy * scale x.
-	composedMatrix shx: composedMatrix shx * scale y.
-	composedMatrix sy: composedMatrix sy * scale y.
+	aMatrix sx: aMatrix sx * scale x.
+	aMatrix shy: aMatrix shy * scale x.
+	aMatrix shx: aMatrix shx * scale y.
+	aMatrix sy: aMatrix sy * scale y.
 	
-	^ composedMatrix
+	^ aMatrix
 ]
 
 { #category : #'matrix - mathematical functions' }
 BlMatrixDecomposition2D >> interpolate: aFactor to: anotherDecomposition [
 	"Algorithm is based on https://drafts.csswg.org/css-transforms/#interpolation-of-decomposed-2d-matrix-values"
-	<return: #BlMatrixDecomposition2D>
-	| aScaleX aScaleY anAngle anOtherAngle aTranslation aScale aMatrix |
-	
-	aScaleX := self scale x.
-	aScaleY := self scale y.
-	anAngle := self angle.
-	anOtherAngle := anotherDecomposition angle.
 
-	((aScaleX < 0 and: [ anotherDecomposition scale y ])
-		or: [ aScaleY < 0 and: [ anotherDecomposition scale x < 0 ] ])
-			ifTrue: [
-				aScaleX := aScaleX negated.
-				aScaleY := aScaleY negated.
-				anAngle < 0
-					ifTrue: [ anAngle := anAngle + 180 ]
-					ifFalse: [ anAngle := anAngle - 180 ] ].
+	| aScaleX aScaleY anAngle anotherAngle |
+	aScaleX := scale x.
+	aScaleY := scale y.
+	anAngle := angle.
+	anotherAngle := anotherDecomposition angle.
+
+	((aScaleX < 0 and: [ anotherDecomposition scale y < 0 ]) or:
+	[ aScaleY < 0 and: [ anotherDecomposition scale x < 0 ] ])
+		ifTrue: [
+			aScaleX := aScaleX negated.
+			aScaleY := aScaleY negated.
+			anAngle := anAngle < 0
+				ifTrue: [ anAngle + 180 ]
+				ifFalse: [ anAngle - 180 ] ].
 	
 	"Don't rotate the long way around."
-	anAngle isZero
-		ifTrue: [ anAngle := 360 ].
-	anOtherAngle isZero
-		ifTrue: [ anOtherAngle := 360 ].
+	anAngle isZero ifTrue: [ anAngle := 360 ].
+	anotherAngle isZero ifTrue: [ anotherAngle := 360 ].
 
-	(anAngle - anOtherAngle) abs > 180
-		ifTrue: [ 
-			anAngle > anOtherAngle
-				ifTrue: [ anAngle := anAngle - 360 ]
-				ifFalse: [ anOtherAngle := anOtherAngle - 360 ] ].
+	(anAngle - anotherAngle) abs > 180 ifTrue: [ 
+		anAngle > anotherAngle
+			ifTrue: [ anAngle := anAngle - 360 ]
+			ifFalse: [ anotherAngle := anotherAngle - 360 ] ].
 	
 	"Interpolate all values."
-	aTranslation := self translation + ((anotherDecomposition translation - self translation) * aFactor).
-	aScale := self scale + ((anotherDecomposition scale - (BlVector x: aScaleX y: aScaleY)) * aFactor).
-	anAngle := anAngle + ((anOtherAngle - anAngle) * aFactor).
-	aMatrix := self matrix
-		with: anotherDecomposition matrix
-		collect: [ :aComponent :anOtherComponent | aComponent + ((anOtherComponent - aComponent) * aFactor) ].
-	
 	^ self class new
-		translation: aTranslation;
-		scale: aScale;
-		angle: anAngle;
-		matrix: aMatrix
-]
-
-{ #category : #accessing }
-BlMatrixDecomposition2D >> matrix [
-	<return: #Array2D>
-
-	^ matrix
-]
-
-{ #category : #accessing }
-BlMatrixDecomposition2D >> matrix: aMatrix [
-	matrix := aMatrix
+		translation: translation + ((anotherDecomposition translation - translation) * aFactor);
+		scale: scale + ((anotherDecomposition scale - (BlVector x: aScaleX y: aScaleY)) * aFactor);
+		angle: anAngle + ((anotherAngle - anAngle) * aFactor);
+		sx: sx + ((anotherDecomposition sx - sx) * aFactor);
+		sy: sy + ((anotherDecomposition sy - sy) * aFactor);
+		shx: shx + ((anotherDecomposition shx - shx) * aFactor);
+		shy: shy + ((anotherDecomposition shy - shy) * aFactor);
+		yourself
 ]
 
 { #category : #accessing }
 BlMatrixDecomposition2D >> scale [
-	<return: #BlVector>
 
 	^ scale
 ]
 
 { #category : #accessing }
-BlMatrixDecomposition2D >> scale: aVector [
-	scale := aVector
+BlMatrixDecomposition2D >> scale: aBlVector [
+
+	scale := aBlVector
+]
+
+{ #category : #accessing }
+BlMatrixDecomposition2D >> shx [
+
+	^ shx
+]
+
+{ #category : #accessing }
+BlMatrixDecomposition2D >> shx: aNumber [
+
+	shx := aNumber
+]
+
+{ #category : #accessing }
+BlMatrixDecomposition2D >> shy [
+
+	^ shy
+]
+
+{ #category : #accessing }
+BlMatrixDecomposition2D >> shy: aNumber [
+
+	shy := aNumber
+]
+
+{ #category : #accessing }
+BlMatrixDecomposition2D >> sx [
+
+	^ sx
+]
+
+{ #category : #accessing }
+BlMatrixDecomposition2D >> sx: aNumber [
+
+	sx := aNumber
+]
+
+{ #category : #accessing }
+BlMatrixDecomposition2D >> sy [
+
+	^ sy
+]
+
+{ #category : #accessing }
+BlMatrixDecomposition2D >> sy: aNumber [
+
+	sy := aNumber
 ]
 
 { #category : #accessing }
 BlMatrixDecomposition2D >> translation [
-	"Return the vector (BlVector) corresponding to the translation."
+	"Return the vector (`BlVector`) corresponding to the translation."
 	
 	^ translation
 ]
 
 { #category : #accessing }
-BlMatrixDecomposition2D >> translation: aVector [
-	translation := aVector
+BlMatrixDecomposition2D >> translation: aBlVector [
+
+	translation := aBlVector
 ]

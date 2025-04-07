@@ -5,61 +5,67 @@ I have been automatically converted and probably manually tweaked from BlEventDi
 Class {
 	#name : #BlEventDispatcherTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Tests'
+	#category : #'Bloc-Tests-Events'
 }
 
 { #category : #tests }
-BlEventDispatcherTest >> testDirectDispatcher [
+BlEventDispatcherTest >> newDirectDispatcher [
 
-	<sampleInstance>
 	^ BlDirectEventDispatcher on: BlElement new
 ]
 
 { #category : #tests }
-BlEventDispatcherTest >> testDirectDispatcherWithMouseDownFilter [
+BlEventDispatcherTest >> testFilteredEventIsNotHandled [
+	"Test with filter added before the handler"
 
-	<sampleInstance>
-	| aDispatcher |
-	aDispatcher := self testDirectDispatcher.
-	aDispatcher addEventFilter: (BlEventFilter on: BlMouseDownEvent).
+	| aDispatcher wasHandled |
+	wasHandled := false.
 
-	^ aDispatcher
-]
-
-{ #category : #tests }
-BlEventDispatcherTest >> testDirectDispatcherWithMouseDownFilterAndHandler [
-
-	<sampleInstance>
-	| aDispatcher mouseDownHandled |
-	aDispatcher := self testDirectDispatcherWithMouseDownFilter.
-
-	mouseDownHandled := false.
-
-	aDispatcher addEventHandler: (BlEventHandler
+	aDispatcher := self newDirectDispatcher.
+	aDispatcher
+		addEventFilter: (BlEventFilter on: BlMouseDownEvent);
+		addEventHandler: (BlEventHandler
 			 on: BlMouseDownEvent
-			 do: [ mouseDownHandled := true ]).
+			 do: [ wasHandled := true ]).
+
 	aDispatcher dispatchEvent: BlMouseDownEvent primary.
 
-	self assert: mouseDownHandled not.
-
-	^ aDispatcher
+	self deny: wasHandled
 ]
 
 { #category : #tests }
-BlEventDispatcherTest >> testDirectDispatcherWithMouseDownFilterAndHandlerWithMouseUpHandler [
+BlEventDispatcherTest >> testFilteredEventIsNotHandled2 [
+	"Test with filter added after the handler"
 
-	<sampleInstance>
-	| aDispatcher mouseUpHandled |
-	aDispatcher := self testDirectDispatcherWithMouseDownFilterAndHandler.
+	| aDispatcher wasHandled |
+	wasHandled := false.
 
-	mouseUpHandled := false.
+	aDispatcher := self newDirectDispatcher.
+	aDispatcher
+		addEventHandler: (BlEventHandler
+			 on: BlMouseDownEvent
+			 do: [ wasHandled := true ]);
+		addEventFilter: (BlEventFilter on: BlMouseDownEvent).
 
-	aDispatcher addEventHandler: (BlEventHandler
+	aDispatcher dispatchEvent: BlMouseDownEvent primary.
+
+	self deny: wasHandled
+]
+
+{ #category : #tests }
+BlEventDispatcherTest >> testNonFilteredEventIsHandled [
+
+	| aDispatcher wasHandled |
+	wasHandled := false.
+
+	aDispatcher := self newDirectDispatcher.
+	aDispatcher
+		addEventFilter: (BlEventFilter on: BlMouseDownEvent);
+		addEventHandler: (BlEventHandler
 			 on: BlMouseUpEvent
-			 do: [ mouseUpHandled := true ]).
+			 do: [ wasHandled := true ]).
+
 	aDispatcher dispatchEvent: BlMouseUpEvent primary.
-
-	self assert: mouseUpHandled.
-
-	^ aDispatcher
+	
+	self assert: wasHandled
 ]

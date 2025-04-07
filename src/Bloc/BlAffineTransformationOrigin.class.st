@@ -9,6 +9,12 @@ Class {
 	#category : #'Bloc-Basic-Transformations'
 }
 
+{ #category : #comparing }
+BlAffineTransformationOrigin >> = anObject [
+
+	^ self class = anObject class
+]
+
 { #category : #math }
 BlAffineTransformationOrigin >> originIn: anElement [
 	"Return a point describing an origin of a transformation within a given element.

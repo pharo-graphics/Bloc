@@ -10,7 +10,7 @@ BlSingleKeyCombinationExamples >> testArrowLeftCombination [
 	<sampleInstance>
 	| aKeyCombination |
 	aKeyCombination := self arrowLeft asKeyCombination.
-	self assert: (aKeyCombination isKindOf: BlSingleKeyCombination).
+	self assert: (aKeyCombination isKindOf: KMSingleKeyCombination).
 	self assert: aKeyCombination key equals: self arrowLeft.
 
 	^ aKeyCombination
@@ -27,9 +27,9 @@ BlSingleKeyCombinationExamples >> testStoreArrowLeftCombination [
 	self
 		assert: aStoreString
 		equals:
-		'(BlKeyboardKey new setName: #ArrowLeft; setValue: nil) asKeyCombination'.
+		'(KMSingleKeyCombination basicNew instVarAt: 1 put: (KeyboardKey basicNew instVarAt: 1 put: 65361; instVarAt: 2 put: #LEFT; yourself); yourself)'.
 
-	aRestoredKeyCombination := Object evaluate: aStoreString.
+	aRestoredKeyCombination := Object compiler evaluate: aStoreString.
 	self assert: aRestoredKeyCombination equals: aKeyCombination.
 
 	^ aStoreString

@@ -22,8 +22,3 @@ BlElementSelectionLostEvent class >> enableIn: anObject [
 BlElementSelectionLostEvent class >> wantedIn: anObject [
 	^ anObject wantsSelectionLost
 ]
-
-{ #category : #sending }
-BlElementSelectionLostEvent >> sendTo: anObject [
-	anObject elementSelectionLostEvent: self
-]

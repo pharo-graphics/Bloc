@@ -41,7 +41,8 @@ BlRopedTextTest2 >> testAppendEmptyText [
 	wasAnnounced := 0.
 	aText
 		when: BlTextStringsInserted
-		do: [ wasAnnounced := wasAnnounced + 1 ].
+		do: [ wasAnnounced := wasAnnounced + 1 ]
+		for: self.
 
 	aText , '' asRopedText.
 
@@ -61,7 +62,8 @@ BlRopedTextTest2 >> testInsertEmptyStrings [
 	insertedStrings := #(  ).
 	aText
 		when: BlTextStringsInserted
-		do: [ :anAnnouncement | insertedStrings := anAnnouncement strings ].
+		do: [ :anAnnouncement | insertedStrings := anAnnouncement strings ]
+		for: self.
 
 	aText insertStrings: { ''. 'World' } atAll: { 1. 5 }.
 

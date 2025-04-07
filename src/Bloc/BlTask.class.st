@@ -22,39 +22,17 @@ Class {
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'id',
 		'state'
-	],
-	#classVars : [
-		'UniqueIdGenerator'
 	],
 	#category : #'Bloc-Space - Tasks'
 }
 
-{ #category : #'class initialization' }
-BlTask class >> initialize [
-	UniqueIdGenerator := BlUniqueIdGenerator new
-]
-
-{ #category : #converting }
-BlTask >> asBeaconLoggingTask [
-	^ BlBeaconLoggingTask subtask: self
-]
-
-{ #category : #accessing }
-BlTask >> id [
-	"Return a unique id of this task"
-	<return: #Number>
-
-	^ id
-]
-
 { #category : #initialization }
 BlTask >> initialize [
+
 	super initialize.
-	
-	id := UniqueIdGenerator generateUniqueId.
-	state := #new.
+
+	state := #new
 ]
 
 { #category : #'private - state' }
@@ -66,7 +44,7 @@ BlTask >> isComplete [
 { #category : #'private - state' }
 BlTask >> isExecuting [
 
-	^ state = #executing
+	^ state == #executing
 ]
 
 { #category : #'private - state' }
@@ -127,19 +105,19 @@ BlTask >> setExecuting [
 { #category : #'private - state' }
 BlTask >> setNew [
 
-	state := #new.
+	state := #new
 ]
 
 { #category : #'private - state' }
 BlTask >> setPendingExecution [
 
-	state := #pendingExecution.
+	state := #pendingExecution
 ]
 
 { #category : #'private - state' }
 BlTask >> setQueued [
 
-	state := #queued.
+	state := #queued
 ]
 
 { #category : #'api - running' }

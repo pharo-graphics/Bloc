@@ -5,7 +5,7 @@ I am a data structure independent text abstraction.
 
 I define a public API of the text model. User must only talk with me using provided methods. My subclasses provide implementation based on concrete data structures, for example rope or string.
 
-I only store string and corresponding attributes. I don't know anything about text layout or paragraphs. I should be used together with BrTextParagraph in order to be measured, layered out and rendered. 
+I only store string and corresponding attributes. I don't know anything about text layout or paragraphs. I should be used together with `BlTextParagraph` in order to be measured, layered out and rendered. 
 
 Once a piece of string is converted `name=BlText` users must not make any assumption on the internat structure of that string inside of the text. For example I replace all occurrences of `CrLf` with a special marker that is exactly one item instead of two characters (`Cr` and `Lf`)
 
@@ -59,6 +59,7 @@ BlText >> allSatisfy: aBlock [
 { #category : #'text - notifying' }
 BlText >> announcerDo: aBlockClosure [
 	"Evaluate a given block closure with an announcer as an argument if it is initialized"
+
 	announcer ifNotNil: aBlockClosure
 ]
 
@@ -247,6 +248,7 @@ BlText >> delete: aStart to: anEnd [
 
 { #category : #'text - modifications' }
 BlText >> deleteAll [
+	self ifEmpty: [ ^ self ].
 	self delete: (1 min: self size) to: self size
 ]
 
@@ -281,6 +283,7 @@ BlText >> encodeOn: aWriteStream with: aZnCharacterEncoder [
 
 { #category : #'text - notifying' }
 BlText >> ensureAnnouncer [
+
 	announcer ifNil: [ announcer := BlTextAnnouncer new ]
 ]
 
@@ -561,7 +564,7 @@ BlText >> notifyStringsInserted: aCollectionOfStrings atAll: aCollectionOfFinalI
 	
 		aNonEmptyCollectionOfStrings
 			ifEmpty: [ ^ self ].
-		
+	
 		anAnnouncer
 			announce: (BlTextStringsInserted new
 				strings: aNonEmptyCollectionOfStrings;
@@ -571,6 +574,7 @@ BlText >> notifyStringsInserted: aCollectionOfStrings atAll: aCollectionOfFinalI
 
 { #category : #copying }
 BlText >> postCopy [
+
 	announcer := nil
 ]
 
@@ -669,6 +673,7 @@ BlText >> stylerDo: aBlock [
 
 { #category : #'text - notifying' }
 BlText >> suspendAnnouncementsWhile: aBlock [
+
 	announcer
 		ifNil: aBlock
 		ifNotNil: [ :anAnnouncer | anAnnouncer suspendAllWhile: aBlock ]
@@ -744,12 +749,38 @@ BlText >> utf8Encoded [
 
 { #category : #'text - notifying' }
 BlText >> when: anAnnouncementClass do: aValuable [
+	"Extracted on Pharo12's implementation."
+
+	| subscriberForDeprecation |
+	aValuable receiver ifNil: [
+		self error:
+			'You must specify a subscriber object for this subscription. Please use #when:do:for: method.' ].
+
+	subscriberForDeprecation := thisContext sender receiver = aValuable receiver
+		                            ifTrue: [ 'self' ]
+		                            ifFalse: [ '`@arg2 receiver' ].
+	self
+		deprecated:
+			'Since there are some block closures (Clean and Constant) without a receiver, the API of announcements was changed to send the subscriber explicitly. 
+			We are deprecating this method because it was asking for the receiver of the block to use it as the subscriber.'
+		transformWith: '`@receiver when: `@arg1 do: `@arg2'
+			->
+			('`@receiver when: `@arg1 do: `@arg2 for: '
+			 , subscriberForDeprecation).
+
+	self when: anAnnouncementClass do: aValuable for: aValuable receiver
+]
+
+{ #category : #'text - notifying' }
+BlText >> when: anAnnouncementClass do: aValuable for: aSubscriber [
+
 	self ensureAnnouncer.
-	announcer when: anAnnouncementClass do: aValuable
+	announcer when: anAnnouncementClass do: aValuable for: aSubscriber
 ]
 
 { #category : #'text - notifying' }
 BlText >> when: anAnnouncementClass send: aSelector to: anObject [
+
 	self ensureAnnouncer.
 	announcer weak when: anAnnouncementClass send: aSelector to: anObject
 ]

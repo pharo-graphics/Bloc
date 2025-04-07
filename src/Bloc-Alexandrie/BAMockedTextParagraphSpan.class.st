@@ -58,7 +58,7 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 			aeCanvas pathTranslate:
 				bounds origin x negated @ metrics ascent abs + (characterWidth / heightScale - bounds width / 2.0 @ 0).
 			self attributes do: [ :anAttribute | anAttribute aeDrawBelowOn: aeCanvas span: self ].
-			aeCanvas drawText: cairoGlyphsArray font: cairoScaledFont ].
+			aeCanvas drawGlyphs: cairoGlyphsArray font: cairoScaledFont ].
 
 		"Draw the textOffset "
 		aeCanvas restoreContextAfter: [ 
@@ -71,11 +71,11 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 			index = 1 ifTrue: [ 
 				aeCanvas restoreContextAfter: [ 
 					aeCanvas pathTranslate: eachBaseline x + 1 @ (self height - 1).
-					aeCanvas drawText: idxGlyphsArray font: idxScaledFont ] ].
+					aeCanvas drawGlyphs: idxGlyphsArray font: idxScaledFont ] ].
 			idxGlyphsArray := idxScaledFont glyphArrayForString: (index + hostMeasurer textOffset) asString.
 			aeCanvas restoreContextAfter: [ 
 				aeCanvas pathTranslate: eachBaseline x + characterWidth + 1 @ (self height - 1).
-				aeCanvas drawText: idxGlyphsArray font: idxScaledFont ] ] ].
+				aeCanvas drawGlyphs: idxGlyphsArray font: idxScaledFont ] ] ].
 
 	self attributes do: [ :anAttribute | anAttribute aeDrawAboveOn: aeCanvas span: self ]
 ]

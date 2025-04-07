@@ -41,13 +41,14 @@ BlSequentialAnimation >> doStep [
 { #category : #'api - accessing' }
 BlSequentialAnimation >> duration [
 	"Return animation duration. Duration can not necessarily be set manually, in case
-	of composite animations it is computed on-fly based on durations of their sub-animations"
+	of composite animations it is computed on-fly based on durations of their sub-animations.
+	We assume no animation is infinite"
 
 	^ animations
 		  ifEmpty: [ 0 seconds ]
 		  ifNotEmpty: [ :theAnimations | 
 			  theAnimations sum: [ :anAnimation | 
-				  anAnimation duration + anAnimation delay * anAnimation loops ] ]
+				  (anAnimation duration + anAnimation delay) * anAnimation loops ] ]
 ]
 
 { #category : #'private - running' }
@@ -65,4 +66,13 @@ BlSequentialAnimation >> initialize [
 	super initialize.
 
 	currentIndex := 0
+]
+
+{ #category : #'private - testing' }
+BlSequentialAnimation >> shouldStartNextLoop [
+	"It can happen that we are done but the last animation requires extra steps.
+	See: https://github.com/pharo-graphics/Bloc/issues/194"
+
+	^ super shouldStartNextLoop and: [
+		animations last progress >= 1.0 ]
 ]
