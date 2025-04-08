@@ -223,6 +223,9 @@ BlBaseAnimation >> notifyLoopDone [
 	announcer announce:
 		(BlAnimationLoopDoneAnnouncement new
 			animation: self;
+			progress: progress;
+			loopCount: loopCount;
+			timestamp: loopDoneTime;
 			yourself)
 ]
 
@@ -234,6 +237,8 @@ BlBaseAnimation >> notifyOnFinishedHandlers [
 	announcer announce:
 		(BlAnimationStoppedAnnouncement new
 			animation: self;
+			progress: progress;
+			timestamp: time now;
 			yourself)
 ]
 
@@ -273,8 +278,10 @@ BlBaseAnimation >> onStep [
 
 	announcer announce:
 		(BlAnimationStepAnnouncement new
-			 animation: self;
-			 yourself)
+			animation: self;
+			progress: progress;
+			timestamp: time now;
+			yourself)
 ]
 
 { #category : #accessing }
@@ -437,4 +444,13 @@ BlBaseAnimation >> time [
 BlBaseAnimation >> time: aBlTime [
 
 	time := aBlTime
+]
+
+{ #category : #'action  handling' }
+BlBaseAnimation >> whenStepDo: aBlock [
+
+	announcer
+		when: BlAnimationStepAnnouncement
+		do: aBlock
+		for: self
 ]

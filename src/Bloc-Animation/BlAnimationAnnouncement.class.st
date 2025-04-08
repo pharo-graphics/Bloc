@@ -9,14 +9,6 @@ Class {
 	#category : #'Bloc-Animation-Events'
 }
 
-{ #category : #'instance creation' }
-BlAnimationAnnouncement class >> on: aBlAnimation [
-
-	^ self new
-		animation: aBlAnimation;
-		yourself
-]
-
 { #category : #accessing }
 BlAnimationAnnouncement >> animation [
 
@@ -24,9 +16,9 @@ BlAnimationAnnouncement >> animation [
 ]
 
 { #category : #accessing }
-BlAnimationAnnouncement >> animation: anObject [
+BlAnimationAnnouncement >> animation: anAnimation [
 
-	animation := anObject
+	animation := anAnimation
 ]
 
 { #category : #printing }
@@ -52,7 +44,19 @@ BlAnimationAnnouncement >> progress [
 ]
 
 { #category : #accessing }
+BlAnimationAnnouncement >> progress: anObject [
+
+	progress := anObject
+]
+
+{ #category : #accessing }
 BlAnimationAnnouncement >> timestamp [
 
 	^ timestamp
+]
+
+{ #category : #accessing }
+BlAnimationAnnouncement >> timestamp: anObject [
+
+	timestamp := anObject
 ]
