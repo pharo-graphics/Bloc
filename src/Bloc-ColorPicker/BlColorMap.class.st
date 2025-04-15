@@ -1,15 +1,23 @@
+"
+I am a Color Map designed for a Color Picker.
+
+I present a rectangle of gradients for a certain hue, according to its saturation and brightness.
+
+I have a cursor that modifies the values of saturation and brightness of the current color.
+My hue can be modified according to the Color Slider and/or the Color Palette of the Color Picker.
+"
 Class {
 	#name : #BlColorMap,
 	#superclass : #BlElement,
 	#instVars : [
-		'colorCircle',
 		'saturationMap',
 		'brightnessMap',
 		'saturation',
 		'brightness',
 		'hue',
 		'color',
-		'owner'
+		'owner',
+		'cursor'
 	],
 	#category : #'Bloc-ColorPicker'
 }
@@ -21,13 +29,13 @@ BlColorMap >> clickAt: aPosition [
 	newPos := (aPosition x clampBetween: 0 and: self width)
 	          @ (aPosition y clampBetween: 0 and: self height).
 
-	colorCircle position: newPos.
+	cursor position: newPos.
 
 	saturation := newPos x / self width.
 	brightness := 1 - (newPos y / self height).
-	color := (Color h: hue s: saturation v: brightness).
-	colorCircle background: color.
-	self owner ifNotNil: [ :o | o updateColor ].
+	color := Color h: hue s: saturation v: brightness.
+	cursor background: color.
+	owner ifNotNil: [ :o | o updateColor ]
 ]
 
 { #category : #accessing }
@@ -45,11 +53,11 @@ BlColorMap >> initialize [
 	self clipChildren: false.
 	self constraintsDo: [ :c | c margin: (BlInsets all: 10) ].
 	hue := 0.
-	saturation := 0.
+	saturation := 1.
 	brightness := 1.
 	self initializeSaturationMap.
 	self initializeBrightnessMap.
-	self initializeColorCircle.
+	self initializeCursor.
 	self initializeEvents
 ]
 
@@ -65,15 +73,18 @@ BlColorMap >> initializeBrightnessMap [
 ]
 
 { #category : #initialization }
-BlColorMap >> initializeColorCircle [
+BlColorMap >> initializeCursor [
 
-	colorCircle := BlElement new size: 20 asPoint; background: Color white; geometry: BlCircleGeometry new; border: (BlBorder paint: Color white width: 2 ).
-	
-	colorCircle transformDo: [ :t | t translateBy: -10 asPoint ].
-	
-	self addChild: colorCircle.
-	
-	
+	cursor := BlElement new
+		               size: 20 asPoint;
+		               background: Color red;
+		               geometry: BlCircleGeometry new;
+		               border: (BlBorder paint: Color white width: 2).
+
+	cursor transformDo: [ :t | t translateBy: -10 asPoint ].
+	self whenLayoutedDoOnce: [ cursor position: self width @ 0 ].
+
+	self addChild: cursor
 ]
 
 { #category : #initialization }
@@ -108,26 +119,40 @@ BlColorMap >> initializeSaturationMap [
 ]
 
 { #category : #'children accessing' }
-BlColorMap >> owner [ 
-
-	^ owner
-]
-
-{ #category : #'children accessing' }
 BlColorMap >> owner: anElement [
 
 	owner := anElement 
 ]
 
-{ #category : #initialization }
+{ #category : #updating }
+BlColorMap >> positionCursor [
+
+	| newX newY |
+	newX := saturation * self width.
+	newY := 1 - brightness * self height.
+	cursor position: newX @ newY.
+	owner updateSliderCursor.
+]
+
+{ #category : #accessing }
+BlColorMap >> setColor: aColor [
+
+	saturation := aColor saturation.
+	brightness := aColor brightness.
+	self setHue: aColor hue.
+	owner updateColor.
+	self positionCursor
+]
+
+{ #category : #accessing }
 BlColorMap >> setHue: newHue [
 
 	hue := newHue.
-	color := (Color h: hue s: 1 v: 1).
+	color := Color h: hue s: saturation v: brightness.
 
 	saturationMap background: (BlLinearGradientPaint horizontal stops: {
 				 (0 -> Color white).
-				 (1 -> color) }).
+				 (1 -> (Color h: hue s:1 v: 1)) }).
 
-	colorCircle background: (Color h: hue s: saturation v: brightness)
+	cursor background: color
 ]

@@ -1,11 +1,17 @@
+"
+I am an Alpha Slider designed for a Color Picker.
+
+I display a gradient of transparency on which you can select the alpha value of a Color.
+My color gradient is the current color of the Color Picker.
+"
 Class {
 	#name : #BlAlphaSlider,
 	#superclass : #BlElement,
 	#instVars : [
 		'hueMap',
-		'alphaCircle',
 		'owner',
-		'alpha'
+		'alpha',
+		'cursor'
 	],
 	#category : #'Bloc-ColorPicker'
 }
@@ -67,9 +73,9 @@ BlAlphaSlider >> clickAt: aPosition [
 	| newPos |
 	newPos := (aPosition x clampBetween: 0 and: self width) @ 6.
 
-	alphaCircle position: newPos.
+	cursor position: newPos.
 	alpha := self alphaFromPosition: newPos.
-	self owner ifNotNil: [ :o | o updateAlpha ]
+	owner ifNotNil: [ :o | o updateAlpha ]
 ]
 
 { #category : #initialization }
@@ -83,14 +89,20 @@ BlAlphaSlider >> initialize [
 	alpha := 1.
 	self initializeChessBackground.
 	self initializeHueMap.
-	self initializeAlphaCircle.
+	self initializeCursor.
 	self initializeEvents
 ]
 
 { #category : #initialization }
-BlAlphaSlider >> initializeAlphaCircle [
+BlAlphaSlider >> initializeChessBackground [
 
-	alphaCircle := BlElement new
+	self addChild: (self chessBackgroundFor: 250 @ 12)
+]
+
+{ #category : #initialization }
+BlAlphaSlider >> initializeCursor [
+
+	cursor := BlElement new
 		               size: 20 asPoint;
 		               background: Color transparent;
 		               geometry: BlCircleGeometry new;
@@ -99,18 +111,12 @@ BlAlphaSlider >> initializeAlphaCircle [
 		               yourself.
 
 	self whenLayoutedDoOnce: [
-		alphaCircle position: self width @ (self height / 2) ].
+		cursor position: self width @ (self height / 2) ].
 
 
-	alphaCircle transformDo: [ :t | t translateBy: -10 asPoint ].
+	cursor transformDo: [ :t | t translateBy: -10 asPoint ].
 
-	self addChild: alphaCircle
-]
-
-{ #category : #initialization }
-BlAlphaSlider >> initializeChessBackground [
-
-	self addChild: (self chessBackgroundFor: 250 @ 12)
+	self addChild: cursor
 ]
 
 { #category : #initialization }
@@ -149,24 +155,16 @@ BlAlphaSlider >> initializeHueMap [
 	self addChild: hueMap
 ]
 
-{ #category : #'children accessing' }
-BlAlphaSlider >> owner [ 
-
-	^ owner 
-	
-	
-]
-
-{ #category : #'children accessing' }
+{ #category : #accessing }
 BlAlphaSlider >> owner: anElement [
 
 	owner := anElement 
 ]
 
-{ #category : #initialization }
-BlAlphaSlider >> setHue: newHue [
+{ #category : #accessing }
+BlAlphaSlider >> setColor: newColor [
 
 	hueMap background: (BlLinearGradientPaint horizontal stops: {
 				 (0 -> Color transparent).
-				 (1 -> (Color h: newHue s: 1 v: 1)) }).
+				 (1 -> newColor) })
 ]

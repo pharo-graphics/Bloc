@@ -1,10 +1,16 @@
+"
+I am a Color Slider designed for a Color Picker.
+
+I display a range of hues you can select with my cursor. 
+The selected hue changes the hue of the Color Map contained in the Color Picker.
+"
 Class {
 	#name : #BlColorSlider,
 	#superclass : #BlElement,
 	#instVars : [
-		'colorCircle',
 		'hue',
-		'owner'
+		'owner',
+		'cursor'
 	],
 	#category : #'Bloc-ColorPicker'
 }
@@ -15,10 +21,10 @@ BlColorSlider >> clickAt: aPosition [
 	| newPos |
 	newPos := (aPosition x clampBetween: 0 and: self width) @ 6.
 
-	colorCircle position: newPos.
+	cursor position: newPos.
 	hue := self hueFromPosition: newPos.
-	colorCircle background: (Color h: hue s: 1 v: 1).
-	self owner ifNotNil: [ :o | o updateHue ].
+	cursor background: (Color h: hue s: 1 v: 1).
+	owner ifNotNil: [ :o | o updateHue ]
 ]
 
 { #category : #accessing }
@@ -42,24 +48,24 @@ BlColorSlider >> initialize [
 	self clipChildren: false.
 	self constraintsDo: [ :c | c margin: (BlInsets all: 10) ].
 	self initializeHues.
-	self initializeColorCircle.
+	self initializeCursor.
 	self initializeEvents
 ]
 
 { #category : #initialization }
-BlColorSlider >> initializeColorCircle [
+BlColorSlider >> initializeCursor [
 
-	colorCircle := BlElement new
+	cursor := BlElement new
 		               size: 20 asPoint;
 		               background: Color red;
 		               geometry: BlCircleGeometry new;
 		               border: (BlBorder paint: Color white width: 2); yourself.
-	self whenLayoutedDoOnce: [ colorCircle position: 0 @ (self height / 2) ].	
+	self whenLayoutedDoOnce: [ cursor position: 0 @ (self height / 2) ].	
 	
 
-	colorCircle transformDo: [ :t | t translateBy: -10 asPoint ].
+	cursor transformDo: [ :t | t translateBy: -10 asPoint ].
 
-	self addChild: colorCircle
+	self addChild: cursor
 ]
 
 { #category : #initialization }
@@ -98,13 +104,20 @@ BlColorSlider >> initializeHues [
 ]
 
 { #category : #accessing }
-BlColorSlider >> owner [ 
-
-	^ owner 
-]
-
-{ #category : #accessing }
 BlColorSlider >> owner: anElement [ 
 
 	owner := anElement 
+]
+
+{ #category : #hooks }
+BlColorSlider >> positionFromHue: aHue [
+
+	^ aHue * self width / 360 @ (self height / 2)
+]
+
+{ #category : #updating }
+BlColorSlider >> updateCursor [
+
+	cursor position: (self positionFromHue: owner color hue).
+	cursor background: (Color h: owner color hue s: 1 v: 1).
 ]
