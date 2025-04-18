@@ -68,7 +68,7 @@ BlProportionalLayout >> boundsForChild: aChild in: availableBounds [
 		bottom: availableBounds height * (1.0 - verticalProportions bottom).
 
 	result shrinkByMargin: aChild margin.
-	result expanded. "Convert to integer values"
+	result expand. "Convert to integer values"
 
 	^ result
 ]

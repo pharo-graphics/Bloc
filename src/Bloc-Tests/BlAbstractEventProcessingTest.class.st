@@ -87,6 +87,7 @@ BlAbstractEventProcessingTest >> root [
 BlAbstractEventProcessingTest >> sendEvent: anEvent [
 
 	anEvent fillFromTime: space time.
+
 	space eventListener handleEvent: anEvent
 ]
 

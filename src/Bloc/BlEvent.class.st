@@ -204,10 +204,8 @@ BlEvent >> currentTarget: anEventTarget [
 { #category : #'api - timestamp' }
 BlEvent >> fillFromTime: aBlTime [
 
-	| inputTime |
-	self flag: 'Crappy workaround because of issue #733 (https://github.com/pharo-graphics/Bloc/issues/733)'.
-	inputTime := aBlTime ifNil: [BlTime real].
-	timestampInMicroseconds := inputTime nowInUTCMicroseconds.
+	aBlTime ifNil: [ ^ self ]. "See: https://github.com/pharo-graphics/Bloc/issues/733"
+	timestampInMicroseconds := aBlTime nowInUTCMicroseconds.
 	timestamp := nil
 ]
 

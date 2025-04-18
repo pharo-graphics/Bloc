@@ -1,8 +1,8 @@
 Class {
 	#name : #BlLinearLayout,
 	#superclass : #BlLayout,
-	#traits : 'TBlAlignable',
-	#classTraits : 'TBlAlignable classTrait',
+	#traits : 'TBlAlignable + TBlOrientableLayout',
+	#classTraits : 'TBlAlignable classTrait + TBlOrientableLayout classTrait',
 	#instVars : [
 		'weightSum',
 		'verticalAlignment',
@@ -158,22 +158,6 @@ BlLinearLayout >> interspace: aNumber [
 	interspace := aNumber asFloat
 ]
 
-{ #category : #testing }
-BlLinearLayout >> isHorizontal [
-	^ self orientation isHorizontal
-]
-
-{ #category : #testing }
-BlLinearLayout >> isOrientable [
-
-	^ true
-]
-
-{ #category : #testing }
-BlLinearLayout >> isVertical [
-	^ self orientation isVertical
-]
-
 { #category : #layout }
 BlLinearLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext [
 	self orientation layout: anElement in: aRectangle context: aBlElementBoundsUpdateContext.
@@ -191,10 +175,7 @@ BlLinearLayout >> measure: anElement with: anExtentSpec [
 	| aMeasurer |
 	"I measure a new extent of myself and my children"
 	
-	aMeasurer := self orientation isHorizontal
-		ifTrue: [ self newHorizontalMeasurer ]
-		ifFalse: [ self newVerticalMeasurer ].
-		
+	aMeasurer := self newMeasurer.
 	aMeasurer
 		initializeWith: anElement
 		layout: self
@@ -212,6 +193,14 @@ BlLinearLayout >> measure: anElement with: anExtentSpec [
 BlLinearLayout >> newHorizontalMeasurer [ 
 
 	^ BlLinearLayoutHorizontalMeasurer new 
+]
+
+{ #category : #measure }
+BlLinearLayout >> newMeasurer [
+
+	^ self orientation isHorizontal
+		  ifTrue: [ self newHorizontalMeasurer ]
+		  ifFalse: [ self newVerticalMeasurer ]
 ]
 
 { #category : #measure }
