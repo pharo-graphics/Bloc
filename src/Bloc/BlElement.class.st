@@ -2218,6 +2218,12 @@ BlElement >> isRoot [
 ]
 
 { #category : #testing }
+BlElement >> isTextElement [
+
+	^ false
+]
+
+{ #category : #testing }
 BlElement >> isTranslucent [
 	"Return true if I am semi-transparent (opacity is 0 < opacity < 1)"
 
