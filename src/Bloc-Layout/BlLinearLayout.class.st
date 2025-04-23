@@ -175,10 +175,7 @@ BlLinearLayout >> measure: anElement with: anExtentSpec [
 	| aMeasurer |
 	"I measure a new extent of myself and my children"
 	
-	aMeasurer := self orientation isHorizontal
-		ifTrue: [ self newHorizontalMeasurer ]
-		ifFalse: [ self newVerticalMeasurer ].
-		
+	aMeasurer := self newMeasurer.
 	aMeasurer
 		initializeWith: anElement
 		layout: self
@@ -196,6 +193,14 @@ BlLinearLayout >> measure: anElement with: anExtentSpec [
 BlLinearLayout >> newHorizontalMeasurer [ 
 
 	^ BlLinearLayoutHorizontalMeasurer new 
+]
+
+{ #category : #measure }
+BlLinearLayout >> newMeasurer [
+
+	^ self orientation isHorizontal
+		  ifTrue: [ self newHorizontalMeasurer ]
+		  ifFalse: [ self newVerticalMeasurer ]
 ]
 
 { #category : #measure }

@@ -12,25 +12,23 @@ Class {
 
 { #category : #measure }
 BlFitLayout >> childrenBoundingBox: aParentNode [
-	<return: #Rectangle>
-	
+
 	| aBoundingBox |
+	aParentNode children isEmpty ifTrue: [
+		^ Rectangle left: 0 right: 0 top: 0 bottom: 0 ].
 
-	aParentNode children isEmpty
-		ifTrue: [ ^ BlBounds new asRectangle ].
+	aBoundingBox := aParentNode children first bounds.
+	aParentNode children allButFirstDo: [ :aChild |
+		aBoundingBox merge: aChild bounds ].
 
-	aBoundingBox := nil.
-
-	aParentNode children do: [ :aChild |
-		aBoundingBox
-			ifNil: [ aBoundingBox := aChild bounds ]
-			ifNotNil: [ aBoundingBox merge: aChild bounds ] ].
-
-	^ aBoundingBox expanded asRectangle
+	aBoundingBox expand.
+	
+	^ aBoundingBox asRectangle
 ]
 
 { #category : #layout }
 BlFitLayout >> computeAlignmentTranslation: aParentLayoutNode [
+
 	| boundingBox delta |
 
 	boundingBox := self childrenBoundingBox: aParentLayoutNode.
@@ -41,28 +39,33 @@ BlFitLayout >> computeAlignmentTranslation: aParentLayoutNode [
 
 { #category : #layout }
 BlFitLayout >> layout: aParentNode [
+
 	| aDelta |
 	aDelta := self computeAlignmentTranslation: aParentNode.
 
-	aParentNode childrenDo: [ :eachChildNode | eachChildNode position: (eachChildNode position + aDelta) ]
+	aParentNode childrenDo: [ :eachChildNode |
+		eachChildNode position: eachChildNode position + aDelta ]
 ]
 
 { #category : #layout }
 BlFitLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdater [
+
 	| aParentNode |
-	
 	self layoutIgnored: anElement context: aBlElementBoundsUpdater.
-	
-	aParentNode := anElement userData
-		at: #layoutNode
-		ifAbsent: [ ^ self ].
-		
+
+	aParentNode :=
+		anElement userData
+			at: #layoutNode
+			ifAbsent: [ ^ self ].
+
 	aParentNode extent: aRectangle extent.
 
 	self layout: aParentNode.
 
 	aParentNode children do: [ :eachChildNode |
-		eachChildNode element applyLayoutIn: eachChildNode layoutBounds context: aBlElementBoundsUpdater ]
+		eachChildNode element
+			applyLayoutIn: eachChildNode layoutBounds
+			context: aBlElementBoundsUpdater ]
 ]
 
 { #category : #measure }
@@ -103,8 +106,8 @@ BlFitLayout >> measureChildrenPositions: aParentLayoutNode [
 { #category : #measure }
 BlFitLayout >> measureParentNode: aParentNode [
 	"Compute the measured extent of the parent node based on the measured bounds of the children"
-	| boundingBox width height |
 
+	| boundingBox width height |
 	boundingBox := self childrenBoundingBox: aParentNode.
 
 	width := boundingBox width + aParentNode padding width.

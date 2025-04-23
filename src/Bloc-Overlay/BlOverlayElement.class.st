@@ -57,7 +57,7 @@ BlOverlayElement >> extentFrom: anExtent [
 BlOverlayElement >> initialize [
 	super initialize.
 	
-	overlayListener := BlOverlayListener for: self.
+	overlayListener := self newOverlayListener.
 	self constraintsDo: [ :c |
 		c ignoreByLayout.
 		c infinite holder startIgnoring ].
@@ -70,6 +70,12 @@ BlOverlayElement >> isAttached [
 	<return: #Boolean>
 
 	^ referenceElement isNotNil
+]
+
+{ #category : #initialization }
+BlOverlayElement >> newOverlayListener [
+
+	^ BlOverlayListener for: self
 ]
 
 { #category : #'hooks - children' }
