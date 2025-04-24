@@ -61,16 +61,19 @@ BARenderer >> render: aHostSpace [
 	Note: if there are no dirty areas nothing will happen, including window
 	or canvas update."
 
+	| space |
 	self isValid ifFalse: [ ^ self ].
 
-	aHostSpace space hasDirtyElements ifFalse: [ ^ self ].
+	space := aHostSpace space.
+	space ifNil: [ ^self ].
+	space hasDirtyElements ifFalse: [ ^ self ].
 
 	[	aHostSpace
-			lockSurfaceFor: aHostSpace space damagedRectangles
+			lockSurfaceFor: space damagedRectangles
 			scaleFactor: scaleFactor
-			during: [ :aCanvas | aHostSpace space aeFullDrawOn: aCanvas ] ]
+			during: [ :aCanvas | space aeFullDrawOn: aCanvas ] ]
 
-		ensure: [ aHostSpace space clearDirtyElements ]
+		ensure: [ space clearDirtyElements ]
 ]
 
 { #category : #rendering }
