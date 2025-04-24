@@ -173,8 +173,21 @@ BlMatrix2D >> inverse [
 	"In-place inverse me.
 	Throw BlSingularMatrixError if matrix is singular (non-invertible or degenerate)"
 
-	| a b c d e f determinant inverseDeterminant |
+	self
+		deprecated: 'Use #invert'
+		transformWith:
+			'`@receiver inverse' -> 
+			'`@receiver invert'.
 	
+	self invert
+]
+
+{ #category : #'matrix - mathematical functions' }
+BlMatrix2D >> invert [
+	"In-place inverse me.
+	Throw BlSingularMatrixError if matrix is singular (non-invertible or degenerate)"
+
+	| a b c d e f determinant inverseDeterminant |
 	a := sy.
 	b := shx negated.
 	c := (shx * y) - (sy * x).
@@ -201,7 +214,7 @@ BlMatrix2D >> inverted [
 	"Return a new instance that is my inverse.
 	Signal a `BlSingularMatrixError` if matrix is singular (non-invertible or degenerate)"
 	
-	^ self copy inverse
+	^ self copy invert
 ]
 
 { #category : #testing }
