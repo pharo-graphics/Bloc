@@ -11,6 +11,11 @@ Class {
 		'boundingRectangle',
 		'backendMatrix'
 	],
+	#classVars : [
+		'CountInvalidateMatrix',
+		'CountNotNil',
+		'SharedBackendMatrix'
+	],
 	#category : #'Bloc-Basic-Transformations'
 }
 
@@ -127,13 +132,8 @@ BlElementCachedExplicitTransformation >> transformBounds: aBlBounds [
 	"Transform the given bounds according to my cached transformation.
 	(Local to global transformation.)"
 
-"	lastBounds = aBlBounds 
-		ifTrue: [ ^ aBlBounds rectangle: resultsCache ].
-		
-	lastBounds := aBlBounds copy.
-"	self matrix transformBounds: aBlBounds.
-"	resultsCache := aBlBounds copy.
-"	
+	self matrix transformBounds: aBlBounds.
+
 	^ aBlBounds 
 	
 ]
