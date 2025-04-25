@@ -110,6 +110,18 @@ BlLayoutCommonConstraints >> doNotAccountTransformation [
 	accountTransformation := false
 ]
 
+{ #category : #testing }
+BlLayoutCommonConstraints >> hasConstraintsForLayout: aLayoutClass [
+	"Return true if a layout constrait object specific for a given 
+	layout defined by its class has been created and stored "
+
+	"In most cases there is only one layout-specific constraint that is accessed extremely often.
+	We can optimize lookup for this particular case by storing a type of previously accessed constraint"
+
+	previouslyAccessedConstraintsType == aLayoutClass ifTrue: [ ^ true ].
+	^ constraints notNil and: [ constraints includesKey: aLayoutClass ]
+]
+
 { #category : #'api - constraints' }
 BlLayoutCommonConstraints >> ignoreByLayout [
 	"Makes an element with this constraits be ignored by layout.

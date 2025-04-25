@@ -45,7 +45,8 @@ BlInfiniteLayoutConstraints >> elementLayoutPosition [
 { #category : #accessing }
 BlInfiniteLayoutConstraints >> holder [
 	"Return an element holder of the element I am attached to.
-	holder can not be nil"
+	holder can not be nil in an infinite. 
+	It can be nil if used in another context than an infinite"
 	<return: #BlInfiniteHolder>
 
 	^ holder
