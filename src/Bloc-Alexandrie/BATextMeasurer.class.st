@@ -2,7 +2,6 @@ Class {
 	#name : #BATextMeasurer,
 	#superclass : #BlHostTextMeasurer,
 	#instVars : [
-		'lineAdvance',
 		'aeCanvas'
 	],
 	#category : #'Bloc-Alexandrie-Text'
