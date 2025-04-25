@@ -91,20 +91,20 @@ BlSelectionHandler >> hasOrigin [
 
 { #category : #initialization }
 BlSelectionHandler >> initialize [
+
 	super initialize.
-	
+
 	area := BlBounds new.
 	selected := IdentityDictionary new
 ]
 
 { #category : #selection }
 BlSelectionHandler >> intersect: aChildElement in: aSelectionBounds ifNone: aNoneBlock [
-	"Return selection intersection bounds of a given element and provided
+	"Return a `BlBounds` with the selection intersection bounds of a given element and provided
 	selection bounds in local child coordinates if intersection exists
 	or evaluate a none block otherwise.
 	Note: you should override me to modify selection area detection, for example
 	for the case of text selection intersection is not just plain intersection"
-	<return: #BlBounds>
 
 	^ aSelectionBounds
 		intersect: aChildElement boundsInLocal
@@ -138,8 +138,8 @@ BlSelectionHandler >> selectedChildren: anElement in: aBlBounds do: aBlock [
 
 { #category : #geometry }
 BlSelectionHandler >> selectionArea [
-	"Return bounds representing a selection area in global coordinates"
-	<return: #BlBounds>
+	"Return a `BlBounds` representing a selection area in global coordinates"
+
 	self
 		assert: [ origin isNotNil and: [ corner isNotNil ] ]
 		description: [ 'Selection origin and corner must be known' ].

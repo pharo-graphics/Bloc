@@ -21,7 +21,6 @@ BlEmptyGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 BlEmptyGeometry >> geometryBounds: aBlBounds of: aBlElement [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
-	<return: #BlBounds>
 	
 	^ aBlBounds
 		left: 0

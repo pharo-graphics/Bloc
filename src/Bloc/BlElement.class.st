@@ -698,13 +698,12 @@ BlElement >> boundsInLocal [
 
 { #category : #'geometry bounds' }
 BlElement >> boundsInLocal: aBounds [
-	"I load my local bounds in the given mutable bounds and return it.
+	"Load my local bounds in the given mutable bounds and return it.
 	I do not rely on cache and always provide actual bounds.
 	Local Bounds is nothing else than the bounds with origin point set to 0@0
 	and with extent equal to my pure extent.
 	Local Bounds property does not take effect or border into account.
 	I am a part of internal api, use me with caution"
-	<return: #BlBounds>
 
 	^ self bounds boundsInLocal: aBounds
 ]
@@ -716,10 +715,9 @@ BlElement >> boundsInSpace [
 
 { #category : #'geometry bounds' }
 BlElement >> boundsInSpace: aBounds [
-	"I load my bounds in space in a given mutable rectangle and return provided one.
+	"Load my bounds in space in a given mutable rectangle and return provided one.
 	I do not rely on cache and always provide actual bounds.
 	I am a part of internal api, use me with caution"
-	<return: #BlBounds>
 
 	self boundsInLocal: aBounds.
 	self localBoundsToGlobal: aBounds.
@@ -936,9 +934,7 @@ BlElement >> computeInvalidationBoundsInto: aBounds [
 	"Compute the bounds of self, including my children recursively, in my local
 	coordinates that would be invalidated if #invalidate would be sent to me."
 
-	
 	self computeVisualBoundsInto: aBounds.
-
 	self computeEffectBoundsInto: aBounds.
 	
 	aBounds merge: self boundsInLocal.
@@ -1608,6 +1604,7 @@ BlElement >> focused: aBoolean [
 
 { #category : #'geometry bounds' }
 BlElement >> focusedBounds [
+
 	^ (self focusedBounds: BlBounds new) asRectangle
 ]
 
@@ -1617,7 +1614,6 @@ BlElement >> focusedBounds: aBlBounds [
 	is used to search next focusable element. By default focused bounds property
 	is just local bounds. Override me to return more specific area, for example
 	cursor bounds or selected cell in the table"
-	<return: #BlBounds>
 	
 	^ self boundsInLocal: aBlBounds
 ]
@@ -1723,7 +1719,6 @@ BlElement >> globalBoundsToLocal: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
 
 	"Checking for very common mistake"
 	aBounds isRectangle
@@ -1744,7 +1739,6 @@ BlElement >> globalBoundsToMine: aBlBounds fromParent: aParentElement [
 	"In-place transform provided bounds from coordinate system of a given parent
 	to my local coordinates and return a result"
 
-	<return: #BlBounds>
 	| theParents |
 	aParentElement == self ifTrue: [ ^ aBlBounds ].
 
@@ -2335,7 +2329,6 @@ BlElement >> localBoundsToChildren: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
 	
 	^ aBounds
 ]
@@ -2346,7 +2339,6 @@ BlElement >> localBoundsToGlobal: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
 	
 	"Checking for very common mistake"
 	aBounds isRectangle
@@ -2402,7 +2394,6 @@ BlElement >> localBoundsToWindow: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
 	
 	"Checking for very common mistake"
 	aBounds isRectangle
@@ -3116,7 +3107,6 @@ BlElement >> parentBoundsToLocal: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
 
 	self hasParent
 		ifTrue: [ self parent localBoundsToChildren: aBounds ].

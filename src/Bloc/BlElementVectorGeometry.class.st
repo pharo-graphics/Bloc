@@ -57,7 +57,6 @@ BlElementVectorGeometry >> geometryBounds: aBlBounds [
 BlElementVectorGeometry >> geometryBounds: aBounds of: aBlElement [
 	"Load my geometry bounds for a given element in a mutable rectangle.
 	@see #geometryBounds for more info"
-	<return: #BlBounds>
 	
 	^ self geometryBounds: aBounds
 ]

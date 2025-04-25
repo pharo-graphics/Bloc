@@ -26,6 +26,16 @@ BlBounds class >> fromRectangle: aRectangle [
 ]
 
 { #category : #'instance creation' }
+BlBounds class >> left: aLeft top: aTop corner: aCorner [
+
+	^ self
+		left: aLeft
+		top: aTop
+		right: aCorner x
+		bottom: aCorner y
+]
+
+{ #category : #'instance creation' }
 BlBounds class >> left: aLeft top: aTop right: aRight bottom: aBottom [
 
 	^ self basicNew
