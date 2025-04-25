@@ -1,8 +1,6 @@
 Class {
 	#name : #BlBoundsCache,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'owner',
 		'boundsInSpace',
@@ -10,80 +8,111 @@ Class {
 		'transformedBounds',
 		'geometryBounds',
 		'geometryBoundsInSpace',
-		'invalidationBounds'
+		'invalidationBounds',
+		'lastDrawBoundsInSpace'
 	],
 	#category : #'Bloc-Basic-Support'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlBoundsCache class >> on: anElement [
-	^ self new owner: anElement
+
+	^ self new
+		owner: anElement;
+		yourself
 ]
 
 { #category : #accessing }
 BlBoundsCache >> boundsInLocal [
+
 	^ boundsInLocal ifNil: [
-		boundsInLocal := (self owner boundsInLocal: BlBounds new) asRectangle ]
+		boundsInLocal := owner boundsInLocal: BlBounds new ]
 ]
 
 { #category : #accessing }
 BlBoundsCache >> boundsInSpace [
+
 	^ boundsInSpace ifNil: [
-		boundsInSpace := (self owner boundsInSpace: BlBounds new) asRectangle ]
+		boundsInSpace := owner boundsInSpace: BlBounds new ]
+]
+
+{ #category : #accessing }
+BlBoundsCache >> damagedBoundsInSpace [
+
+	^ lastDrawBoundsInSpace
+		ifNotNil: [ self invalidationBoundsInSpace merge: lastDrawBoundsInSpace ]
+		ifNil: [ self invalidationBoundsInSpace ]
 ]
 
 { #category : #accessing }
 BlBoundsCache >> geometryBounds [
+
 	^ geometryBounds ifNil: [
-		geometryBounds := (self owner geometryBounds: BlBounds new) asRectangle ]
+		geometryBounds := owner geometryBounds: BlBounds new ]
 ]
 
 { #category : #accessing }
 BlBoundsCache >> geometryBoundsInSpace [
-	^ geometryBoundsInSpace
-		ifNil: [ geometryBoundsInSpace := (self owner geometryBoundsInSpace: BlBounds new) asRectangle ]
+
+	^ geometryBoundsInSpace ifNil: [
+		  geometryBoundsInSpace := owner geometryBoundsInSpace: BlBounds new ]
 ]
 
 { #category : #invalidation }
-BlBoundsCache >> invalidateBoundsInLocal [
-	"Bounds properties in local coordinates change than and only than when extent changes"
+BlBoundsCache >> invalidateLocalBounds [
 
 	boundsInLocal := nil.
 	geometryBounds := nil.
 	invalidationBounds := nil.
 
-	self invalidateBoundsInSpace
+	self invalidateParentBounds
 ]
 
 { #category : #invalidation }
-BlBoundsCache >> invalidateBoundsInSpace [
+BlBoundsCache >> invalidateParentBounds [
 
 	boundsInSpace := nil.
 	geometryBoundsInSpace := nil.
 	transformedBounds := nil.
 
-	self owner childrenDo: [ :anElement |
-		anElement boundsCache invalidateBoundsInSpace ]
+	owner childrenDo: [ :anElement |
+		anElement boundsCache invalidateParentBounds ]
 ]
 
 { #category : #accessing }
 BlBoundsCache >> invalidationBounds [
+
 	^ invalidationBounds ifNil: [
-		invalidationBounds := self owner invalidationBounds: BlBounds new ]
+		invalidationBounds := owner invalidationBounds: BlBounds new ]
+]
+
+{ #category : #accessing }
+BlBoundsCache >> invalidationBoundsInSpace [
+
+	^ owner localBoundsToGlobal: self invalidationBounds copy
+]
+
+{ #category : #accessing }
+BlBoundsCache >> markLastDrawBounds [
+
+	lastDrawBoundsInSpace := self invalidationBoundsInSpace
 ]
 
 { #category : #accessing }
 BlBoundsCache >> owner [
+
 	^ owner
 ]
 
 { #category : #accessing }
 BlBoundsCache >> owner: anElement [
+
 	owner := anElement
 ]
 
 { #category : #accessing }
 BlBoundsCache >> transformedBounds [
+
 	^ transformedBounds ifNil: [
-		transformedBounds := (self owner transformedBounds: BlBounds new) asRectangle ]
+		transformedBounds := owner transformedBounds: BlBounds new ]
 ]

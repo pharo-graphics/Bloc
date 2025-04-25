@@ -21,7 +21,7 @@ BlAbstractMorphicHostSpace >> initializeRenderer [
 ]
 
 { #category : #rendering }
-BlAbstractMorphicHostSpace >> lockSurfaceFor: damagedRectangles scaleFactor: aNumber during: aBlock [
+BlAbstractMorphicHostSpace >> lockSurfaceFor: damagedRectangle scaleFactor: aNumber during: aBlock [
 
 	renderer
 		renderWith: aBlock

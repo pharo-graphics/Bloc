@@ -69,7 +69,7 @@ BARenderer >> render: aHostSpace [
 	space hasDirtyElements ifFalse: [ ^ self ].
 
 	[	aHostSpace
-			lockSurfaceFor: space damagedRectangles
+			lockSurfaceFor: space damagedRectangle
 			scaleFactor: scaleFactor
 			during: [ :aCanvas | space aeFullDrawOn: aCanvas ] ]
 
@@ -81,15 +81,15 @@ BARenderer >> renderWith: aBlock pixels: address stride: stride physicalRectangl
 
 	| aCairoSurface |
 	aCairoSurface := AeCairoImageSurface
-		unownedNewForData: address
-	   format: AeCairoSurfaceFormat argb32
-	   width: physicalRectangle width
-	   height: physicalRectangle height
-	   stride: stride.
+		                 unownedNewForData: address
+		                 format: AeCairoSurfaceFormat argb32
+		                 width: physicalRectangle width
+		                 height: physicalRectangle height
+		                 stride: stride.
 	aCairoSurface
 		deviceOffset: physicalRectangle origin negated;
 		deviceScaleX: scaleFactor y: scaleFactor.
-		
+
 	aeCanvas prepareForSurface: aCairoSurface.
 	aeCanvas clippingRectangle: logicalRectangle.
 
@@ -97,7 +97,7 @@ BARenderer >> renderWith: aBlock pixels: address stride: stride physicalRectangl
 	"On High DPI displays, high quality is not visible enough, and often 
 	much larger surface areas are painted."
 	scaleFactor > 1.0 ifTrue: [ aeCanvas setLowQualityOptions ].
-		
+
 	aBlock value: aeCanvas.
 
 	aCairoSurface flush.

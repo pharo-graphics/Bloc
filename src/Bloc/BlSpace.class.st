@@ -970,14 +970,23 @@ BlSpace >> currentCursor: aCursor [
 ]
 
 { #category : #'change - rendering' }
+BlSpace >> damagedRectangle [
+
+	| bounds |
+	elementsNeedingPaint do: [ :each |
+		bounds
+			ifNil: [ bounds := each damagedBoundsInSpace copy ]
+			ifNotNil: [ bounds merge: each damagedBoundsInSpace ] ].
+
+	^ bounds expand
+]
+
+{ #category : #'change - rendering' }
 BlSpace >> damagedRectangles [
 
-	^ elementsNeedingPaint collect: [ :each |
-		each lastDrawBoundsInSpace
-			ifNotNil: [ :old |
-				each invalidationBoundsInSpace merge: old ]
-			ifNil: [
-				each invalidationBoundsInSpace ] ]
+	^ elementsNeedingPaint
+		  collect: [ :each | each damagedBoundsInSpace ]
+		  as: Array
 ]
 
 { #category : #initialization }

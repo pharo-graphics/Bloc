@@ -179,17 +179,13 @@ BlOSWindowSDL2HostSpace >> keyboardKeyTable: aKeyboardKeyTable [
 ]
 
 { #category : #rendering }
-BlOSWindowSDL2HostSpace >> lockSurfaceFor: damagedRectangles scaleFactor: aNumber during: aBlock [
+BlOSWindowSDL2HostSpace >> lockSurfaceFor: logicalDamagedRectangle scaleFactor: aNumber during: aBlock [
 
-	| logicalDamagedRectangle damagedRectangle |
-	"For now we only support a single rectangle"
-	logicalDamagedRectangle := (Rectangle merging: damagedRectangles) expanded.
-	
-	damagedRectangle := logicalDamagedRectangle scaleBy: aNumber.
-	damagedRectangle := damagedRectangle intersect: textureRectangle.
-
-	"The only changed rectangle is outside of the window?"
-	damagedRectangle isZero ifTrue: [ ^ self ].
+	| damagedRectangle |
+	"Return early if damages fall outside of the space"
+	damagedRectangle := textureRectangle
+		intersect: (logicalDamagedRectangle scaleBy: aNumber)
+		ifNone: [ ^ self ].
 
  	ExternalAddress
 		allocate: Smalltalk wordSize
