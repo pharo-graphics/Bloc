@@ -106,10 +106,11 @@ BlOSWindowSDL2HostSpace >> initializeRenderer [
 
  	pitchAddress := ExternalAddress newPointer.
 	pixelsAddress := ExternalAddress newPointer.
-	sdlRect := SDL_Rect new; autoRelease; yourself.
+	sdlRect := SDL_Rect new autoRelease; yourself.
 
 	sdlRenderer := window backendWindow renderer sdlRenderer.
 	logicalWindowRectangle := 0@0 extent: window extent.
+
 	textureExtent := window canvasExtent.
 	texture := sdlRenderer
 		createTextureFormat: SDL_PIXELFORMAT_XRGB8888
