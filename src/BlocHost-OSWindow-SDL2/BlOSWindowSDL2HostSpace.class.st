@@ -13,7 +13,10 @@ Class {
 		'keyboardKeyTable',
 		'sdlRenderer',
 		'texture',
-		'textureRectangle'
+		'pitchAddress',
+		'pixelsAddress',
+		'sdlRect',
+		'logicalWindowRectangle'
 	],
 	#pools : [
 		'SDL2Constants'
@@ -98,18 +101,21 @@ BlOSWindowSDL2HostSpace >> initialize [
 { #category : #initialization }
 BlOSWindowSDL2HostSpace >> initializeRenderer [
 
-	| physicalExtent |
+	| textureExtent |
 	super initializeRenderer.
 
-	sdlRenderer := window backendWindow renderer sdlRenderer.
-	physicalExtent := sdlRenderer outputExtent.
-	textureRectangle := 0@0 extent: physicalExtent.
+ 	pitchAddress := ExternalAddress newPointer.
+	pixelsAddress := ExternalAddress newPointer.
+	sdlRect := SDL_Rect new; autoRelease; yourself.
 
+	sdlRenderer := window backendWindow renderer sdlRenderer.
+	logicalWindowRectangle := 0@0 extent: window extent.
+	textureExtent := window canvasExtent.
 	texture := sdlRenderer
 		createTextureFormat: SDL_PIXELFORMAT_XRGB8888
 		access: SDL_TEXTUREACCESS_STREAMING
-		width: physicalExtent x
-		height: physicalExtent y
+		width: textureExtent x
+		height: textureExtent y
 ]
 
 { #category : #initialization }
@@ -183,29 +189,32 @@ BlOSWindowSDL2HostSpace >> lockSurfaceFor: logicalDamagedRectangle scaleFactor: 
 
 	| damagedRectangle |
 	"Return early if damages fall outside of the space"
-	damagedRectangle := textureRectangle
-		intersect: (logicalDamagedRectangle scaleBy: aNumber)
-		ifNone: [ ^ self ].
+	damagedRectangle :=
+		logicalDamagedRectangle
+			intersect: logicalWindowRectangle
+			ifNone: [ ^ self ].
 
- 	ExternalAddress
-		allocate: Smalltalk wordSize
-		bytesDuring: [ :pitchAddress |
-			| pixelsAddress |
-			pixelsAddress := ExternalAddress new.
+	damagedRectangle scaleBy: aNumber.
 
-			(texture
-				lockRect: damagedRectangle asSDLRect
-				pixels: pixelsAddress 
-				pitch: pitchAddress) = 0 ifFalse: [ SDL2 checkForError ].
+	sdlRect
+		x: damagedRectangle left asInteger;
+		y: damagedRectangle top asInteger;
+		w: damagedRectangle width asInteger;
+		h: damagedRectangle height asInteger.
 
-			renderer
-				renderWith: aBlock
-				pixels: pixelsAddress
-				stride: (pitchAddress signedLongAt: 1)
-				physicalRectangle: damagedRectangle
-				logicalRectangle: logicalDamagedRectangle.
+	(texture
+		lockRect: sdlRect
+		pixels: pixelsAddress
+		pitch: pitchAddress) = 0 ifFalse: [ SDL2 checkForError ].
 
-			texture unlock ].
+	renderer
+		renderWith: aBlock
+		pixels: pixelsAddress
+		stride: (pitchAddress signedLongAt: 1)
+		physicalRectangle: damagedRectangle
+		logicalRectangle: logicalDamagedRectangle.
+
+	texture unlock.
 
 	"No need to clear the renderer as texture is opaque and covers all pixels"
 	sdlRenderer copy: texture; present
