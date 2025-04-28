@@ -317,9 +317,8 @@ BlMatrix2D >> reflection: aDiagonalVector [
 BlMatrix2D >> rotateByRadians: anAngle around: aBlVector [
 	"Apply a rotation transformation by a given amount of radians around a provided axis vector"
 
-	self
-		assert: [ aBlVector = BlVector zAxis ]
-		description: [ '2D Matrix is incompatible with 3D transformation' ].
+	"2D Matrix is incompatible with 3D transformation"
+	self assert: [ aBlVector = BlVector zAxis ].
 		
 	"Apply the rotation AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix
@@ -352,9 +351,8 @@ BlMatrix2D >> scaleBy: aBlVector [
 	| aScale3D |
 	aScale3D := aBlVector asScale3D.
 
-	self
-		assert: [ aScale3D z closeTo: 1 ]
-		description: [ '2D Matrix is incompatible with 3D transformation' ].
+	"2D Matrix is incompatible with 3D transformation"
+	self assert: [ aScale3D z closeTo: 1 ].
 		
 	"Apply the scale AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix
@@ -510,9 +508,8 @@ BlMatrix2D >> translateBy: aBlVector [
 	| aTranslate3D |
 	aTranslate3D := aBlVector asTranslate3D.
 
-	self
-		assert: [ aTranslate3D z isZero ]
-		description: [ '2D Matrix is incompatible with 3D transformation' ].
+	"2D Matrix is incompatible with 3D transformation"
+	self assert: [ aTranslate3D z isZero ].
 
 	"Apply the translation AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix

@@ -8,8 +8,6 @@ https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation#Using_quaternion_
 Class {
 	#name : #BlQuaternion,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'x',
 		'y',
@@ -22,7 +20,7 @@ Class {
 { #category : #'instance creation' }
 BlQuaternion class >> x: aX y: aY z: aZ angle: aTheta [
 	"Create a quaternion representing a rotation about axis defined by a vector (x,y,z) by angle aTheta in radians"
-	<return: #BlQuaternion>
+
 	"length - length of a vector (aX, aY, aZ)
 	x,y,z - components of a normalized vector Normalized(aX,aY,aZ)"
 	| length x y z w cosTheta sinTheta sc sq m11 m12 m13 m21 m22 m23 m31 m32 m33 trace |
@@ -102,16 +100,20 @@ BlQuaternion class >> x: aX y: aY z: aZ angle: aTheta [
 
 { #category : #'instance creation' }
 BlQuaternion class >> x: aX y: aY z: aZ w: aW [
+
 	^ self new
-		x: aX y: aY z: aZ w: aW;
-		yourself
+		  x: aX
+		  y: aY
+		  z: aZ
+		  w: aW;
+		  yourself
 ]
 
 { #category : #arithmetic }
 BlQuaternion >> * aQuaternion [
 	"Multiply me by a given quaternion and return a new instance representing a multiplication result"
+
 	| rX rY rZ rW |	"components of a resulting quaternion"
-	<return: #BlQuaternion>
 
 	rX := (x * aQuaternion w) + (w * aQuaternion x) + (y * aQuaternion z) - (z * aQuaternion y).
 	rY := (y * aQuaternion w) + (w * aQuaternion y) + (z * aQuaternion x) - (x * aQuaternion z).
@@ -123,8 +125,9 @@ BlQuaternion >> * aQuaternion [
 
 { #category : #initialization }
 BlQuaternion >> initialize [
+
 	super initialize.
-	
+
 	x := 0.0.
 	y := 0.0.
 	z := 0.0.
@@ -134,7 +137,6 @@ BlQuaternion >> initialize [
 { #category : #accessing }
 BlQuaternion >> length [
 	"Return euclidian norm (length) of this quaternion"
-	<return: #Number>
 
 	^ ((x * x) + (y * y) + (z * z) + (w * w)) sqrt
 ]
@@ -142,31 +144,30 @@ BlQuaternion >> length [
 { #category : #converting }
 BlQuaternion >> normalize [
 	"Normalize me in-place"
+
 	| length |
-	
 	length := self length.
 	
 	"length is 1, no need to normalize"
-	(length closeTo: 1.0)
-		ifTrue: [ ^ self ].
+	(length closeTo: 1.0) ifTrue: [ ^ self ].
 	
 	length isZero
-		ifTrue: [ 
-			self x: 0.0 y: 0.0 z: 0.0 w: 1.0 ]
-		ifFalse: [
-			self x: x / length y: y / length z: z / length w: w / length ]
+		ifTrue: [ self x: 0.0 y: 0.0 z: 0.0 w: 1.0 ]
+		ifFalse: [ self x: x / length y: y / length z: z / length w: w / length ]
 ]
 
 { #category : #converting }
 BlQuaternion >> normalized [
 	"Return a new instance of me being normalized"
-	<return: #BlQuaternion>
 
-	^ self copy normalize
+	^ self copy
+		  normalize;
+		  yourself
 ]
 
 { #category : #printing }
 BlQuaternion >> printOn: aStream [
+
 	aStream
 		nextPut: $(;
 		nextPutAll: self x asString;
@@ -181,16 +182,19 @@ BlQuaternion >> printOn: aStream [
 
 { #category : #accessing }
 BlQuaternion >> w [
+
 	^ w
 ]
 
 { #category : #accessing }
 BlQuaternion >> x [
+
 	^ x
 ]
 
 { #category : #initialization }
 BlQuaternion >> x: aX y: aY z: aZ w: aW [
+
 	x := aX.
 	y := aY.
 	z := aZ.
@@ -199,10 +203,12 @@ BlQuaternion >> x: aX y: aY z: aZ w: aW [
 
 { #category : #accessing }
 BlQuaternion >> y [
+
 	^ y
 ]
 
 { #category : #accessing }
 BlQuaternion >> z [
+
 	^ z
 ]

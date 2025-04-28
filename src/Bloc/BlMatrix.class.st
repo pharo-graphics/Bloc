@@ -5,8 +5,6 @@ I represent a transformation Matrix and define common API of 2D and 3D matrices
 Class {
 	#name : #BlMatrix,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#category : #'Bloc-Basic-Math'
 }
 
