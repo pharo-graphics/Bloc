@@ -16,10 +16,10 @@ Class {
 	#traits : 'TBlTransformable',
 	#classTraits : 'TBlTransformable classTrait',
 	#instVars : [
-		'fromMatrix',
-		'toMatrix',
 		'isAbsolute',
-		'elementTransformation'
+		'elementTransformation',
+		'fromDecomposition',
+		'toDecomposition'
 	],
 	#category : #'Bloc-Animation-Animation'
 }
@@ -92,9 +92,9 @@ BlTransformAnimation >> initStart [
 		self target bounds inLocal asRectangle.
 
 	"Calculate matrix only on start of first loop"
-	fromMatrix ifNil: [
-		fromMatrix := self target transformation matrix copy.
-		toMatrix := elementTransformation matrix ]
+	fromDecomposition ifNil: [
+		fromDecomposition := self target transformation matrix decomposition.
+		toDecomposition := elementTransformation matrix decomposition ]
 ]
 
 { #category : #initialization }
@@ -128,5 +128,5 @@ BlTransformAnimation >> transformation: aBlElementTransformation [
 BlTransformAnimation >> valueForStep: aNumber [
 
 	^ BlElementAbsoluteTransformation matrix:
-		  (fromMatrix interpolate: aNumber to: toMatrix)
+		  (fromDecomposition interpolate: aNumber to: toDecomposition) composition
 ]
