@@ -131,8 +131,10 @@ BlMatrix2D >> decomposition [
 	angle := angle radiansToDegrees.
 	
 	^ BlMatrixDecomposition2D new
-		translation: (BlVector x: x y: y);
-		scale: (BlVector x: scaleX y: scaleY);
+		translationX: x;
+		translationY: y;
+		scaleX: scaleX;
+		scaleY: scaleY;
 		angle: angle;
 		sx: row0x;
 		sy: row1y;
