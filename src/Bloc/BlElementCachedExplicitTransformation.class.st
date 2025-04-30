@@ -8,12 +8,8 @@ Class {
 	#instVars : [
 		'matrix',
 		'elementTransformation',
-		'boundingRectangle'
-	],
-	#classVars : [
-		'CountInvalidateMatrix',
-		'CountNotNil',
-		'SharedBackendMatrix'
+		'boundingRectangle',
+		'backendMatrix'
 	],
 	#category : #'Bloc-Basic-Transformations'
 }
