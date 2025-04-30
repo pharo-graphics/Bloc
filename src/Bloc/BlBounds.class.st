@@ -421,29 +421,25 @@ BlBounds >> height [
 
 { #category : #'rectangle functions' }
 BlBounds >> intersect: aRectangle ifNone: aBlock [
-	"Answer a Rectangle that is the area in which the receiver overlaps with 
-	aRectangle. 
-	If there's no overlap, evaluate the block instead."
+	"Answer a new instance with the intersection with the received argument.
+	If there is no intersection evaluate the block, instead."
 
-	| aLeft aTop aRight aBottom newLeft newTop newRight newBottom |
-
-	(self intersects: aRectangle) ifFalse: [ ^ aBlock value ].
-	
+	| aLeft aTop aRight aBottom |
 	aLeft := aRectangle left.
 	aTop := aRectangle top.
 	aRight := aRectangle right.
 	aBottom := aRectangle bottom.
-	
-	newLeft := aLeft max: left.
-	newTop := aTop max: top.
-	newRight := aRight min: right.
-	newBottom := aBottom min: bottom.
 
-	^ self class new
-		left: newLeft
-		top: newTop
-		right: newRight
-		bottom: newBottom
+	aRight <= left ifTrue: [ ^ aBlock value ].
+	aBottom <= top ifTrue: [ ^ aBlock value ].
+	aLeft >= right ifTrue: [ ^ aBlock value ].
+	aTop >= bottom ifTrue: [ ^ aBlock value ].
+	
+	^ self class
+		left: (aLeft max: left)
+		top: (aTop max: top)
+		right: (aRight min: right)
+		bottom: (aBottom min: bottom)
 ]
 
 { #category : #testing }
