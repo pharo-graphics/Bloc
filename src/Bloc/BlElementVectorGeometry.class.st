@@ -8,8 +8,17 @@ Class {
 		'extent',
 		'pathCache'
 	],
+	#classVars : [
+		'DefaultExtent'
+	],
 	#category : #'Bloc-Basic-Geometry'
 }
+
+{ #category : #'class initialization' }
+BlElementVectorGeometry class >> initialize [
+
+	DefaultExtent := 150@100
+]
 
 { #category : #converting }
 BlElementVectorGeometry >> asElement [
@@ -63,9 +72,10 @@ BlElementVectorGeometry >> geometryBounds: aBounds of: aBlElement [
 
 { #category : #initialization }
 BlElementVectorGeometry >> initialize [
+
 	super initialize.
-	
-	extent := 150@100.
+
+	extent := DefaultExtent.
 	pathCache := BlPathCache on: self
 ]
 
@@ -85,17 +95,20 @@ BlElementVectorGeometry >> matchExtent: aPoint [
 
 { #category : #copying }
 BlElementVectorGeometry >> postCopy [
+
 	pathCache := BlPathCache on: self.
 	self releaseCache
 ]
 
 { #category : #'api - cache' }
 BlElementVectorGeometry >> releaseCache [
+
 	pathCache releaseCache
 ]
 
 { #category : #'api - cache' }
 BlElementVectorGeometry >> releaseStrokedBoundsCache [
+
 	pathCache releaseStrokedBoundsCache
 ]
 
