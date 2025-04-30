@@ -233,7 +233,8 @@ BlBounds >> containedInRect: aRectangle [
 BlBounds >> containsPoint: aPoint [ 
 	"Answer whether aPoint is within the receiver."
 
-	^ self origin <= aPoint and: [ aPoint < self corner ]
+	^ left <= aPoint x and: [ aPoint x < right and: [
+		top <= aPoint y and: [ aPoint y < bottom ] ] ]
 ]
 
 { #category : #testing }
