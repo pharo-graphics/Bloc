@@ -130,8 +130,8 @@ BlGeometryTest >> testElLocalAndGlobalBoundsConvertion [
 	self
 		assert:
 			(g globalBoundsToLocal:
-				 (BlBounds fromRectangle: (10 @ 10 corner: 110 @ 110)))
-		equals: g geometryBounds.
+				 (BlBounds origin: 10 @ 10 corner: 110 @ 110)) asRectangle
+		equals: g geometryBounds asRectangle.
 	"is the same as"
 	self
 		assert:

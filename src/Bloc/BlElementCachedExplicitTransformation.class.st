@@ -8,8 +8,7 @@ Class {
 	#instVars : [
 		'matrix',
 		'elementTransformation',
-		'boundingRectangle',
-		'backendMatrix'
+		'boundingRectangle'
 	],
 	#category : #'Bloc-Basic-Transformations'
 }
@@ -70,8 +69,7 @@ BlElementCachedExplicitTransformation >> invalidateMatrix [
 	such as extent. It means that when element changes we need to invalidate and
 	recompute the matrix => set it to nil to trigger computation on next matrix access"
 
-	matrix := nil.
-	backendMatrix := nil.
+	matrix := nil
 ]
 
 { #category : #'api - transformation' }
