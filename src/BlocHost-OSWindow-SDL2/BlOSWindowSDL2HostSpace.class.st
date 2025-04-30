@@ -188,20 +188,17 @@ BlOSWindowSDL2HostSpace >> keyboardKeyTable: aKeyboardKeyTable [
 { #category : #rendering }
 BlOSWindowSDL2HostSpace >> lockSurfaceFor: logicalDamagedRectangle scaleFactor: aNumber during: aBlock [
 
-	| damagedRectangle |
+	| physicalDamagedRectangle |
 	"Return early if damages fall outside of the space"
-	damagedRectangle :=
-		logicalDamagedRectangle
-			intersect: logicalWindowRectangle
-			ifNone: [ ^ self ].
-
-	damagedRectangle scaleBy: aNumber.
+	physicalDamagedRectangle :=
+		logicalDamagedRectangle intersect: logicalWindowRectangle ifNone: [ ^ self ].
+	physicalDamagedRectangle scaleBy: aNumber.
 
 	sdlRect
-		x: damagedRectangle left asInteger;
-		y: damagedRectangle top asInteger;
-		w: damagedRectangle width asInteger;
-		h: damagedRectangle height asInteger.
+		x: physicalDamagedRectangle left asInteger;
+		y: physicalDamagedRectangle top asInteger;
+		w: physicalDamagedRectangle width asInteger;
+		h: physicalDamagedRectangle height asInteger.
 
 	(texture
 		lockRect: sdlRect
@@ -212,7 +209,7 @@ BlOSWindowSDL2HostSpace >> lockSurfaceFor: logicalDamagedRectangle scaleFactor: 
 		renderWith: aBlock
 		pixels: pixelsAddress
 		stride: (pitchAddress signedLongAt: 1)
-		physicalRectangle: damagedRectangle
+		physicalRectangle: physicalDamagedRectangle
 		logicalRectangle: logicalDamagedRectangle.
 
 	texture unlock.
