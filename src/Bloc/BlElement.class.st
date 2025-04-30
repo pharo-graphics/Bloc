@@ -719,17 +719,6 @@ BlElement >> boundsInSpace [
 ]
 
 { #category : #'geometry bounds' }
-BlElement >> boundsInSpace: aBounds [
-	"Load my bounds in space in a given mutable rectangle and return provided one.
-	I do not rely on cache and always provide actual bounds.
-	I am a part of internal api, use me with caution"
-
-	self boundsInLocal: aBounds.
-	self localBoundsToGlobal: aBounds.
-	^ aBounds
-]
-
-{ #category : #'geometry bounds' }
 BlElement >> boundsInWindow [
 	^ self isAttachedToSceneGraph
 		ifTrue: [ boundsCache boundsInSpace scaleBy: self space windowScale ]
@@ -1708,14 +1697,6 @@ BlElement >> geometryBoundsInSpace [
 	^ boundsCache geometryBoundsInSpace
 ]
 
-{ #category : #'geometry bounds' }
-BlElement >> geometryBoundsInSpace: aBlBounds [
-	
-	self geometryBounds: aBlBounds.
-	self localBoundsToGlobal: aBlBounds.
-	^ aBlBounds
-]
-
 { #category : #'geometry bounds convertion' }
 BlElement >> globalBoundsToLocal: aBounds [
 	"In-place transform bounds from global space coordinates to local coordinates.
@@ -2075,7 +2056,7 @@ BlElement >> invalidateChildren [
 { #category : #'geometry bounds' }
 BlElement >> invalidationBounds [
 
-	^ boundsCache invalidationBounds
+	^ self invalidationBounds: BlBounds new
 ]
 
 { #category : #'geometry bounds' }
@@ -2102,7 +2083,11 @@ BlElement >> invalidationBounds: aBounds [
 { #category : #'geometry bounds' }
 BlElement >> invalidationBoundsInParent [
 
-	^ self localBoundsToParent: self invalidationBounds copy
+	| result |
+	result := BlBounds new.
+	self invalidationBounds: result.
+	self localBoundsToParent: result.
+	^ result
 ]
 
 { #category : #'geometry bounds' }
@@ -3814,7 +3799,7 @@ BlElement >> transformation: anElementTransformation [
 { #category : #'geometry bounds' }
 BlElement >> transformedBounds [
 
-	^ boundsCache transformedBounds
+	^ self transformedBounds: BlBounds new
 ]
 
 { #category : #'geometry bounds' }

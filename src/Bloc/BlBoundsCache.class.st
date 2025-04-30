@@ -1,5 +1,8 @@
 "
 My responsibility is providing several kinds of bounds of a `BlElement`.
+
+I point to bound objects, that are created lazily to speed up creation of complex element trees.
+When those bounds are invalidated, the instances are kept, to speed up trees with many animations, that invalidate on each new animation frame.
 "
 Class {
 	#name : #BlBoundsCache,
@@ -7,15 +10,13 @@ Class {
 	#instVars : [
 		'boundsInSpace',
 		'boundsInLocal',
-		'transformedBounds',
 		'geometryBounds',
 		'geometryBoundsInSpace',
-		'invalidationBounds',
 		'lastDrawBoundsInSpace',
 		'invalidationBoundsInSpace',
 		'element'
 	],
-	#category : #'Bloc-Basic-Support'
+	#category : #'Bloc-Basic-Bounds'
 }
 
 { #category : #'instance creation' }
@@ -29,15 +30,23 @@ BlBoundsCache class >> on: anElement [
 { #category : #accessing }
 BlBoundsCache >> boundsInLocal [
 
-	^ boundsInLocal ifNil: [
-		boundsInLocal := owner boundsInLocal: BlBounds new ]
+	boundsInLocal ifNil: [ boundsInLocal := BlCachedBounds new ].
+
+	boundsInLocal ensureValidWith: [ :b | element boundsInLocal: b ].
+
+	^ boundsInLocal
 ]
 
 { #category : #accessing }
 BlBoundsCache >> boundsInSpace [
 
-	^ boundsInSpace ifNil: [
-		boundsInSpace := owner boundsInSpace: BlBounds new ]
+	boundsInSpace ifNil: [ boundsInSpace := BlCachedBounds new ].
+
+	boundsInSpace ensureValidWith: [ :b |
+		element boundsInLocal: b.
+		element localBoundsToGlobal: b ].
+
+	^ boundsInSpace
 ]
 
 { #category : #accessing }
@@ -51,15 +60,24 @@ BlBoundsCache >> damagedBoundsInSpace [
 { #category : #accessing }
 BlBoundsCache >> geometryBounds [
 
-	^ geometryBounds ifNil: [
-		geometryBounds := owner geometryBounds: BlBounds new ]
+	geometryBounds ifNil: [ geometryBounds := BlCachedBounds new ].
+
+	geometryBounds ensureValidWith: [ :b | element geometryBounds: b ].
+	
+	^ geometryBounds
 ]
 
 { #category : #accessing }
 BlBoundsCache >> geometryBoundsInSpace [
 
-	^ geometryBoundsInSpace ifNil: [
-		  geometryBoundsInSpace := owner geometryBoundsInSpace: BlBounds new ]
+	geometryBoundsInSpace ifNil: [
+		geometryBoundsInSpace := BlCachedBounds new ].
+
+	geometryBoundsInSpace ensureValidWith: [ :b |
+		element geometryBounds: b.
+		element localBoundsToGlobal: b ].
+
+	^ geometryBoundsInSpace
 ]
 
 { #category : #initialization }
@@ -67,15 +85,14 @@ BlBoundsCache >> initializeWith: anElement [
 
 	self initialize.
 
-	owner := anElement
+	element := anElement
 ]
 
 { #category : #invalidation }
 BlBoundsCache >> invalidateLocalBounds [
 
-	boundsInLocal := nil.
-	geometryBounds := nil.
-	invalidationBounds := nil.
+	boundsInLocal ifNotNil: [ :b | b invalidate ].
+	geometryBounds ifNotNil: [ :b | b invalidate ].
 
 	self invalidateParentBounds
 ]
@@ -83,39 +100,32 @@ BlBoundsCache >> invalidateLocalBounds [
 { #category : #invalidation }
 BlBoundsCache >> invalidateParentBounds [
 
-	boundsInSpace := nil.
-	geometryBoundsInSpace := nil.
-	transformedBounds := nil.
-	invalidationBoundsInSpace := nil.
+	boundsInSpace ifNotNil: [ :b | b invalidate ].
+	geometryBoundsInSpace ifNotNil: [ :b | b invalidate ].
+	invalidationBoundsInSpace ifNotNil: [ :b | b invalidate ].
 
-	owner childrenDo: [ :anElement |
+	element childrenDo: [ :anElement |
 		anElement boundsCache invalidateParentBounds ]
-]
-
-{ #category : #accessing }
-BlBoundsCache >> invalidationBounds [
-
-	^ invalidationBounds ifNil: [
-		invalidationBounds := owner invalidationBounds: BlBounds new ]
 ]
 
 { #category : #accessing }
 BlBoundsCache >> invalidationBoundsInSpace [
 
-	^ invalidationBoundsInSpace ifNil: [
-		invalidationBoundsInSpace :=
-			owner localBoundsToGlobal: self invalidationBounds copy ]
+	invalidationBoundsInSpace ifNil: [
+		invalidationBoundsInSpace := BlCachedBounds new ].
+
+	invalidationBoundsInSpace ensureValidWith: [ :b |
+			element invalidationBounds: b.
+			element localBoundsToGlobal: b ].
+
+	^ invalidationBoundsInSpace
 ]
 
 { #category : #accessing }
 BlBoundsCache >> markLastDrawBounds [
 
-	lastDrawBoundsInSpace := self invalidationBoundsInSpace copy
-]
+	lastDrawBoundsInSpace ifNil: [
+		lastDrawBoundsInSpace := BlBounds new ].
 
-{ #category : #accessing }
-BlBoundsCache >> transformedBounds [
-
-	^ transformedBounds ifNil: [
-		transformedBounds := owner transformedBounds: BlBounds new ]
+	lastDrawBoundsInSpace bounds: self invalidationBoundsInSpace
 ]
