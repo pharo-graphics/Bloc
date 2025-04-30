@@ -13,7 +13,6 @@ Class {
 
 { #category : #converting }
 BlElementComputedBounds >> asRectangle [
-	<return: #Rectangle>
 	
 	 ^ self bounds asRectangle
 ]

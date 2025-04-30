@@ -19,7 +19,7 @@ BlLayoutParentNodeWithTransformation >> extent: aPoint [
 	super extent: aPoint.
 
 	transformation boundingRectangle:
-		(BlBounds origin: self position extent: aPoint)
+		(Rectangle origin: self position extent: aPoint)
 ]
 
 { #category : #accessing }

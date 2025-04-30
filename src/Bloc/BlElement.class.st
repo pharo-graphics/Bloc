@@ -3781,8 +3781,8 @@ BlElement >> transformation [
 BlElement >> transformation: anElementTransformation [
 
 	transformation :=
-		anElementTransformation asCachedTransformationIn:
-			self boundsInLocal asRectangle.
+		anElementTransformation
+			asCachedTransformationIn: self boundsInLocal.
 
 	self constraints shouldAccountTransformation ifTrue: [ 
 		self requestParentLayout ].
@@ -3824,7 +3824,7 @@ BlElement >> updateTransformationBounds [
 	"Update the bounds of the cached transformation in order to recompute its matrix
 	since transformation origin depends on the element's bounds"
 
-	transformation boundingRectangle: self bounds inLocal asRectangle
+	transformation boundingRectangle: self boundsInLocal
 ]
 
 { #category : #accessing }
