@@ -1,3 +1,6 @@
+"
+I am an error handler that can point to a sole error.
+"
 Class {
 	#name : #BlSingleErrorHandler,
 	#superclass : #BlErrorHandler,
@@ -9,6 +12,7 @@ Class {
 
 { #category : #comparing }
 BlSingleErrorHandler >> = anObject [
+
 	^ self class = anObject class
 ]
 
@@ -27,24 +31,25 @@ BlSingleErrorHandler >> error: aHandledError [
 
 { #category : #accessing }
 BlSingleErrorHandler >> errors [
-	^ { self error }
+
+	^ { error }
 ]
 
 { #category : #testing }
 BlSingleErrorHandler >> hasError [
-	<return: #Boolean>
 
 	^ error isNotNil
 ]
 
 { #category : #comparing }
 BlSingleErrorHandler >> hash [
+
 	^ self class hash
 ]
 
 { #category : #'error handling' }
-BlSingleErrorHandler >> registerError: aHandledError [
+BlSingleErrorHandler >> registerError: anError [
 	"Register a given handled error for further debugging"
 
-	self error: aHandledError
+	error := anError
 ]

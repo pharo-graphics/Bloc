@@ -1,3 +1,6 @@
+"
+I am an error handler that delegates the responsibility to my children error handlers. I follow the Composite design pattern.
+"
 Class {
 	#name : #BlCompositeErrorHandler,
 	#superclass : #BlErrorHandler,
@@ -9,61 +12,79 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlCompositeErrorHandler class >> new [
+
+	^ self withAll: #()
+]
+
+{ #category : #'instance creation' }
 BlCompositeErrorHandler class >> withAll: aCollectionOfErrorHandlers [
-	^ self new addErrorHandlers: aCollectionOfErrorHandlers
+
+	^ self basicNew
+		initializeWithErrorHandlers: aCollectionOfErrorHandlers;
+		yourself
 ]
 
 { #category : #adding }
 BlCompositeErrorHandler >> addErrorHandler: anErrorHandler [
-	self errorHandlers add: anErrorHandler
+
+	errorHandlers := errorHandlers copyWith: anErrorHandler
 ]
 
 { #category : #adding }
 BlCompositeErrorHandler >> addErrorHandlers: aCollectionOfErrorHandlers [
-	self errorHandlers addAll: aCollectionOfErrorHandlers
+
+	errorHandlers := errorHandlers copyWithAll: aCollectionOfErrorHandlers
 ]
 
 { #category : #accessing }
 BlCompositeErrorHandler >> errorHandlers [
-	<return: #Collection of: #BlErrorHandler>
 
 	^ errorHandlers
 ]
 
 { #category : #accessing }
 BlCompositeErrorHandler >> errors [
+
 	^ errors
 ]
 
 { #category : #testing }
 BlCompositeErrorHandler >> hasError [
-	<return: #Boolean>
 
-	^ self errors isNotEmpty
+	^ errors isNotEmpty
 ]
 
 { #category : #initialization }
-BlCompositeErrorHandler >> initialize [
-	super initialize.
+BlCompositeErrorHandler >> initializeWithErrorHandlers: aCollection [
 
-	errorHandlers := Set new.
-	errors := OrderedCollection new
+	self initialize.
+
+	errors := #().
+	errorHandlers := aCollection
 ]
 
 { #category : #testing }
 BlCompositeErrorHandler >> matches: aFramePhase [
-	^ self errorHandlers anySatisfy: [ :anErrorHandler | anErrorHandler matches: aFramePhase ]
+
+	errorHandlers ifNil: [ ^ false ].
+
+	^ errorHandlers anySatisfy: [ :each | each matches: aFramePhase ]
 ]
 
 { #category : #'error handling' }
-BlCompositeErrorHandler >> processError: aHandledError [
-	self errorHandlers
-		detect: [ :anErrorHandler | anErrorHandler matches: aHandledError framePhase ]
-		ifFound: [ :anErrorHandler | anErrorHandler handleError: aHandledError error in: aHandledError element ]
-		ifNone: [ self handleCriticalError: aHandledError ]
+BlCompositeErrorHandler >> processError: anError [
+
+	errorHandlers ifNil: [ ^ self handleCriticalError: anError ].
+
+	errorHandlers
+		detect: [ :each | each matches: anError framePhase ]
+		ifFound: [ :each | each handleError: anError error in: anError element ]
+		ifNone: [ self handleCriticalError: anError ]
 ]
 
 { #category : #'error handling' }
-BlCompositeErrorHandler >> registerError: aHandledError [
-	self errors add: aHandledError
+BlCompositeErrorHandler >> registerError: anError [
+
+	errors := errors copyWith: anError
 ]

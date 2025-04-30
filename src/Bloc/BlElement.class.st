@@ -430,10 +430,17 @@ BlElement >> applyLayoutIn: aBlBounds [
 
 { #category : #layout }
 BlElement >> applyLayoutIn: aBlBounds context: aBlElementBoundsUpdateContext [
+
 	self errorHandler
 		with: self
-		do: [ self applyLayoutSafelyIn: aBlBounds context: aBlElementBoundsUpdateContext ]
-		failed: [ self applyLayoutThatFailedIn: aBlBounds context: aBlElementBoundsUpdateContext ]
+		do: [
+				self
+					applyLayoutSafelyIn: aBlBounds
+					context: aBlElementBoundsUpdateContext ]
+		failed: [
+				self
+					applyLayoutThatFailedIn: aBlBounds
+					context: aBlElementBoundsUpdateContext ]
 ]
 
 { #category : #'private - layout' }
@@ -1468,7 +1475,6 @@ BlElement >> enqueueTask: aBlTask [
 
 { #category : #accessing }
 BlElement >> errorHandler [
-	<return: #BlErrorHandler>
 
 	^ errorHandler
 ]
