@@ -1,3 +1,6 @@
+"
+My responsibility is providing several kinds of bounds of a `BlElement`.
+"
 Class {
 	#name : #BlBoundsCache,
 	#superclass : #Object,
@@ -9,7 +12,8 @@ Class {
 		'geometryBounds',
 		'geometryBoundsInSpace',
 		'invalidationBounds',
-		'lastDrawBoundsInSpace'
+		'lastDrawBoundsInSpace',
+		'invalidationBoundsInSpace'
 	],
 	#category : #'Bloc-Basic-Support'
 }
@@ -17,8 +21,8 @@ Class {
 { #category : #'instance creation' }
 BlBoundsCache class >> on: anElement [
 
-	^ self new
-		owner: anElement;
+	^ self basicNew
+		initializeWith: anElement;
 		yourself
 ]
 
@@ -58,6 +62,14 @@ BlBoundsCache >> geometryBoundsInSpace [
 		  geometryBoundsInSpace := owner geometryBoundsInSpace: BlBounds new ]
 ]
 
+{ #category : #initialization }
+BlBoundsCache >> initializeWith: anElement [
+
+	self initialize.
+
+	owner := anElement
+]
+
 { #category : #invalidation }
 BlBoundsCache >> invalidateLocalBounds [
 
@@ -74,6 +86,7 @@ BlBoundsCache >> invalidateParentBounds [
 	boundsInSpace := nil.
 	geometryBoundsInSpace := nil.
 	transformedBounds := nil.
+	invalidationBoundsInSpace := nil.
 
 	owner childrenDo: [ :anElement |
 		anElement boundsCache invalidateParentBounds ]
@@ -89,25 +102,15 @@ BlBoundsCache >> invalidationBounds [
 { #category : #accessing }
 BlBoundsCache >> invalidationBoundsInSpace [
 
-	^ owner localBoundsToGlobal: self invalidationBounds copy
+	^ invalidationBoundsInSpace ifNil: [
+		invalidationBoundsInSpace :=
+			owner localBoundsToGlobal: self invalidationBounds copy ]
 ]
 
 { #category : #accessing }
 BlBoundsCache >> markLastDrawBounds [
 
 	lastDrawBoundsInSpace := self invalidationBoundsInSpace
-]
-
-{ #category : #accessing }
-BlBoundsCache >> owner [
-
-	^ owner
-]
-
-{ #category : #accessing }
-BlBoundsCache >> owner: anElement [
-
-	owner := anElement
 ]
 
 { #category : #accessing }
