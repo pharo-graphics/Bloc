@@ -5,7 +5,6 @@ Class {
 	#name : #BlBoundsCache,
 	#superclass : #Object,
 	#instVars : [
-		'owner',
 		'boundsInSpace',
 		'boundsInLocal',
 		'transformedBounds',
@@ -13,7 +12,8 @@ Class {
 		'geometryBoundsInSpace',
 		'invalidationBounds',
 		'lastDrawBoundsInSpace',
-		'invalidationBoundsInSpace'
+		'invalidationBoundsInSpace',
+		'element'
 	],
 	#category : #'Bloc-Basic-Support'
 }
@@ -44,7 +44,7 @@ BlBoundsCache >> boundsInSpace [
 BlBoundsCache >> damagedBoundsInSpace [
 
 	^ lastDrawBoundsInSpace
-		ifNotNil: [ self invalidationBoundsInSpace merge: lastDrawBoundsInSpace ]
+		ifNotNil: [ self invalidationBoundsInSpace copy merge: lastDrawBoundsInSpace ]
 		ifNil: [ self invalidationBoundsInSpace ]
 ]
 
@@ -110,7 +110,7 @@ BlBoundsCache >> invalidationBoundsInSpace [
 { #category : #accessing }
 BlBoundsCache >> markLastDrawBounds [
 
-	lastDrawBoundsInSpace := self invalidationBoundsInSpace
+	lastDrawBoundsInSpace := self invalidationBoundsInSpace copy
 ]
 
 { #category : #accessing }
