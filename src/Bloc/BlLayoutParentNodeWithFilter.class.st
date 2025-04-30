@@ -16,17 +16,20 @@ BlLayoutParentNodeWithFilter >> children [
 
 { #category : #accessing }
 BlLayoutParentNodeWithFilter >> children: aBlLayoutNodeChildren [
+
 	children := aBlLayoutNodeChildren as: BlLayoutNodeChildren.
 	children do: [ :eachChild | eachChild parent: self parent ]
 ]
 
 { #category : #accessing }
 BlLayoutParentNodeWithFilter >> filterBlock: aBlockClosure [
+
 	filter := aBlockClosure
 ]
 
 { #category : #accessing }
 BlLayoutParentNodeWithFilter >> transformationDo: aBlock [
+
 	parentNode transformationDo: aBlock
 ]
 

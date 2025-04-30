@@ -1160,13 +1160,6 @@ BlElement >> defaultOutskirts [
 ]
 
 { #category : #initialization }
-BlElement >> defaultTransformation [
-	"Return an instance of `BlElementTransformation` that plays a role of my default transformation."
-
-	^ BlElementIdentityTransformation uniqueInstance
-]
-
-{ #category : #initialization }
 BlElement >> defaultVisibility [
 	<return: #BlVisibility>
 
@@ -2017,7 +2010,7 @@ BlElement >> initialize [
 	constraints := self defaultLayoutCommonConstraints.
 	self resetChildrenArray.
 
-	transformation := self defaultTransformation asCachedTransformation.
+	transformation := BlElementCachedIdentityTransformation uniqueInstance.
 
 	layout := self defaultLayout.
 
@@ -3802,9 +3795,9 @@ BlElement >> transformation [
 { #category : #transformations }
 BlElement >> transformation: anElementTransformation [
 
-	transformation := anElementTransformation asCachedTransformation
-		                  boundingRectangle: self bounds inLocal asRectangle;
-		                  yourself.
+	transformation :=
+		anElementTransformation asCachedTransformationIn:
+			self boundsInLocal asRectangle.
 
 	self constraints shouldAccountTransformation ifTrue: [ 
 		self requestParentLayout ].

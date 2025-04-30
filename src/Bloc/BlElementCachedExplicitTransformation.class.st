@@ -8,8 +8,7 @@ Class {
 	#instVars : [
 		'matrix',
 		'elementTransformation',
-		'boundingRectangle',
-		'backendMatrix'
+		'boundingRectangle'
 	],
 	#classVars : [
 		'CountInvalidateMatrix',
@@ -20,11 +19,12 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlElementCachedExplicitTransformation class >> forTransformation: aBlElementTransformation [
+BlElementCachedExplicitTransformation class >> forTransformation: aBlElementTransformation in: aRectangle [
 
 	^ self basicNew
-		  initializeWith: aBlElementTransformation;
-		  yourself
+		initializeWith: aBlElementTransformation;
+		boundingRectangle: aRectangle;
+		yourself
 ]
 
 { #category : #'api - converting' }
@@ -63,10 +63,8 @@ BlElementCachedExplicitTransformation >> ensureMatrix [
 BlElementCachedExplicitTransformation >> initializeWith: aBlElementTransformation [
 
 	self initialize.
-	
-	boundingRectangle := 0.0@0.0 extent: 0.0@0.0.
-	elementTransformation := aBlElementTransformation.
 
+	elementTransformation := aBlElementTransformation
 ]
 
 { #category : #'private - accessing' }
