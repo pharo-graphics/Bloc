@@ -72,24 +72,20 @@ BlTransformAnimation >> initStart [
 	super initStart.
 
 	isAbsolute ifFalse: [
-		elementTransformation := BlElementCompositeTransformation new
-			                         add:
-				                         self target transformation
-					                         asElementTransformation;
-			                         add:
-				                         elementTransformation
-					                         asElementTransformation;
-			                         yourself ].
-	elementTransformation := elementTransformation asCachedTransformation.
+		elementTransformation :=
+			BlElementCompositeTransformation new
+				add: self target transformation asElementTransformation;
+				add: elementTransformation asElementTransformation;
+				yourself ].
 
 	"matrix depends on computed layout bounds, we should manually trigger layout recomputation"
-	
 	(self target space isNotNil and: [
 		self target space isLayoutRequested ]) ifTrue: [
 		self target space doLayout ].
 
-	elementTransformation boundingRectangle:
-		self target bounds inLocal asRectangle.
+	elementTransformation :=
+		elementTransformation asCachedTransformationIn: 
+			self target boundsInLocal asRectangle.
 
 	"Calculate matrix only on start of first loop"
 	fromDecomposition ifNil: [
