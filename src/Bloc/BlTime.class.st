@@ -95,7 +95,7 @@ BlTime >> now [
 { #category : #'api - time' }
 BlTime >> nowInUTCMicroseconds [
 
-	^ frozen
+	^ (frozen and: [ frozenTime notNil ])
 		ifTrue: [ frozenTime utcMicroSeconds ]
 		ifFalse: [ self currentUTCMicroseconds ]
 ]
