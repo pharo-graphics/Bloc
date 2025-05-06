@@ -164,7 +164,7 @@ BlDirectEventDispatcher >> printOn: aStream [
  	super printOn: aStream.
  	aStream
  		nextPutAll: '(owner: ';
- 		nextPutAll: owner;
+ 		nextPutAll: owner asString;
  		nextPut: $)
 ]
 
