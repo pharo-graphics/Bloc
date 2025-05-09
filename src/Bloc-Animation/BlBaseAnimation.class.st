@@ -28,7 +28,6 @@ Such element will be considered, in that case, the target of all its sub-animati
 Class {
 	#name : #BlBaseAnimation,
 	#superclass : #BlTask,
-	#traits : 'TBlEventTarget',
 	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [
 		'delay',
@@ -42,17 +41,17 @@ Class {
 		'parent',
 		'actionHandlers',
 		'target',
-		'eventDispatcher',
 		'loopDoneTime',
-		'loops'
+		'loops',
+		'announcer'
 	],
 	#category : #'Bloc-Animation-Basic'
 }
 
-{ #category : #'action  handling' }
-BlBaseAnimation >> addOnFinishedHandler: anActionHandler [
+{ #category : #'event management accessing' }
+BlBaseAnimation >> announcer [
 
-	actionHandlers add: anActionHandler
+	^ announcer
 ]
 
 { #category : #'private - testing' }
@@ -124,13 +123,6 @@ BlBaseAnimation >> enqueue [
 	self target ifNotNil: [ :aBlElement | aBlElement enqueueTask: self ]
 ]
 
-{ #category : #'event management accessing' }
-BlBaseAnimation >> eventDispatcher [
-	"Return an object responsible for event dispatching"
-
-	^ eventDispatcher
-]
-
 { #category : #'private - running' }
 BlBaseAnimation >> initStart [
 
@@ -150,8 +142,7 @@ BlBaseAnimation >> initialize [
 
 	super initialize.
 	
-	actionHandlers := OrderedCollection new.
-	eventDispatcher := BlDirectEventDispatcher on: self.
+	announcer := Announcer new.
 	
 	delay := 0 milliSeconds.
 	loops := 1.
@@ -229,14 +220,26 @@ BlBaseAnimation >> nextLoopStartTime [
 { #category : #'private - notifying' }
 BlBaseAnimation >> notifyLoopDone [
 
-	self dispatchEvent: BlAnimationLoopDoneEvent new
+	announcer announce:
+		(BlAnimationLoopDoneAnnouncement new
+			animation: self;
+			progress: progress;
+			loopCount: loopCount;
+			timestamp: loopDoneTime;
+			yourself)
 ]
 
 { #category : #'private - notifying' }
 BlBaseAnimation >> notifyOnFinishedHandlers [
 
 	self onFinished.
-	actionHandlers do: [ :each | each actionPerformed ]
+	
+	announcer announce:
+		(BlAnimationStoppedAnnouncement new
+			animation: self;
+			progress: progress;
+			timestamp: time now;
+			yourself)
 ]
 
 { #category : #hooks }
@@ -254,7 +257,10 @@ BlBaseAnimation >> onFinished [
 { #category : #'action  handling' }
 BlBaseAnimation >> onFinishedDo: aBlock [
 
-	self addOnFinishedHandler: (BlOnActionHandler do: aBlock)
+	announcer
+		when: BlAnimationStoppedAnnouncement 
+		do: aBlock
+		for: self
 ]
 
 { #category : #hooks }
@@ -270,10 +276,12 @@ BlBaseAnimation >> onLoopDone [
 { #category : #'action  handling' }
 BlBaseAnimation >> onStep [
 
-	self fireEvent:
-		(BlAnimationStepEvent new
-			 progress: progress;
-			 yourself)
+	announcer announce:
+		(BlAnimationStepAnnouncement new
+			animation: self;
+			progress: progress;
+			timestamp: time now;
+			yourself)
 ]
 
 { #category : #accessing }
@@ -307,12 +315,6 @@ BlBaseAnimation >> progress [
 	1 - animation loop is done"
 
 	^ progress
-]
-
-{ #category : #'action  handling' }
-BlBaseAnimation >> removeOnFinishedHandler: anActionHandler [
-
-	actionHandlers remove: anActionHandler
 ]
 
 { #category : #'private - testing' }
@@ -442,4 +444,13 @@ BlBaseAnimation >> time [
 BlBaseAnimation >> time: aBlTime [
 
 	time := aBlTime
+]
+
+{ #category : #'action  handling' }
+BlBaseAnimation >> whenStepDo: aBlock [
+
+	announcer
+		when: BlAnimationStepAnnouncement
+		do: aBlock
+		for: self
 ]

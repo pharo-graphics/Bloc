@@ -29,8 +29,7 @@ BlSequentialAnimationTest >> testDoNotFinishEarlyLastAnimation [
 			delay: initialDelay;
 			duration: aDuration;
 			onStepDo: [ :t | ];
-			addEventHandlerOn: BlAnimationStepEvent
-				do: [ :evt | log add: (evt progress -> 1) ];
+			whenStepDo: [ :ann | log add: (ann progress -> 1) ];
 			yourself.
 	animation2 :=
 		BlNumberTransition new
@@ -38,8 +37,7 @@ BlSequentialAnimationTest >> testDoNotFinishEarlyLastAnimation [
 			from: 0.0;
 			to: 1.0;
 			onStepDo: [ :t | ];
-			addEventHandlerOn: BlAnimationStepEvent
-				do: [ :evt | log add: (evt progress -> 2) ];
+			whenStepDo: [ :ann | log add: (ann progress -> 2) ];
 			duration: aDuration;
 			yourself.
 	animationSequence :=
@@ -47,8 +45,7 @@ BlSequentialAnimationTest >> testDoNotFinishEarlyLastAnimation [
 			time: aTime;
 			add: animation1;
 			add: animation2;
-			addEventHandlerOn: BlAnimationStepEvent
-				do: [ :evt | log add: (evt progress -> #s) ];
+			whenStepDo: [ :ann | log add: (ann progress -> $s) ];
 			beInfinite;
 			yourself.
 
@@ -60,5 +57,5 @@ BlSequentialAnimationTest >> testDoNotFinishEarlyLastAnimation [
 	"Last animation in the sequence must reach progress=1.0. Even if the
 	sequential animation that contains it already reached it (workaround?)"
 	self assert: (log includes: (1.0 -> 2)).
-	self assert: (log count: [ :each | each = (1.0 -> #s)]) equals: 2
+	self assert: (log count: [ :each | each = (1.0 -> $s)]) equals: 2
 ]
