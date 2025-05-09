@@ -4,6 +4,13 @@ Class {
 	#category : #'Bloc-Tests-Basic-Background'
 }
 
+{ #category : #asserting }
+BlBackgroundTest >> assert: anObject equalsAndHasSameHash: anotherObject [
+	
+	self assert: anObject equals: anotherObject.
+	self assert: anObject hash equals: anotherObject hash
+]
+
 { #category : #running }
 BlBackgroundTest >> newOpaqueSquaredForm [
 
@@ -23,7 +30,7 @@ BlBackgroundTest >> newTransparentSquaredForm [
 	^ Form extent: 50 @ 50 depth: 32
 ]
 
-{ #category : #'background - builder' }
+{ #category : #testing }
 BlBackgroundTest >> testBuildBackgroundWithImagesAndColor [
 
 	| aBackground aBuilder |	
@@ -65,138 +72,16 @@ BlBackgroundTest >> testCompositeBackgroundAsFormSmokeTest [
 	blElement asForm "smoke test"
 ]
 
-{ #category : #'background - builder' }
-BlBackgroundTest >> testEqualityBlCompositeBackground [
-
-	| form background |
-	form := self newOpaqueSquaredForm.
-
-	background := BlCompositeBackground new withAll: {
-			              (BlPaintBackground new paint:
-				               (BlColorPaint new color: Color blue)).
-			              (BlImageBackground new image: form) }.
-	self assert: background equals: background.
-
-	self
-		assert: (BlCompositeBackground new withAll: {
-					 (BlPaintBackground new paint:
-						  (BlColorPaint new color: Color blue)).
-					 (BlImageBackground new image: form) })
-		equals: (BlCompositeBackground new withAll: {
-					 (BlPaintBackground new paint:
-						  (BlColorPaint new color: Color blue)).
-					 (BlImageBackground new image: form) }).
-	"Not the same size"
-	self
-		deny: (BlCompositeBackground new withAll: {
-					 (BlPaintBackground new paint:
-						  (BlColorPaint new color: Color blue)).
-					 (BlImageBackground new image: form) })
-		equals: (BlCompositeBackground new withAll:
-				 { (BlPaintBackground new paint:
-					  (BlColorPaint new color: Color blue)) }).
-	"Not the same backgrounds"
-	self
-		deny: (BlCompositeBackground new withAll: {
-					 (BlPaintBackground new paint:
-						  (BlColorPaint new color: Color blue)).
-					 (BlImageBackground new image: form) })
-		equals: (BlCompositeBackground new withAll: {
-					 (BlPaintBackground new paint:
-						  (BlColorPaint new color: Color red)).
-					 (BlImageBackground new image: form) }).
-
-	self
-		assert: (BlCompositeBackground new
-				 withAll: {
-						 (BlPaintBackground new paint:
-								  (BlColorPaint new color: Color blue)).
-						 (BlImageBackground new image: form) };
-				 opacity: 0.5)
-		equals: (BlCompositeBackground new
-				 withAll: {
-						 (BlPaintBackground new paint:
-								  (BlColorPaint new color: Color blue)).
-						 (BlImageBackground new image: form) };
-				 opacity: 0.5).
-	"Test opacity"
-	self
-		assert: (BlCompositeBackground new
-				 withAll: {
-						 (BlPaintBackground new paint:
-								  (BlColorPaint new color: Color blue)).
-						 (BlImageBackground new image: form) };
-				 opacity: 0.5)
-		equals: (BlCompositeBackground new
-				 withAll: {
-						 (BlPaintBackground new paint:
-								  (BlColorPaint new color: Color blue)).
-						 (BlImageBackground new image: form) };
-				 opacity: 0.5).
-
-	self
-		deny: (BlCompositeBackground new
-				 withAll: {
-						 (BlPaintBackground new paint:
-								  (BlColorPaint new color: Color blue)).
-						 (BlImageBackground new image: form) };
-				 opacity: 1.0)
-		equals: (BlCompositeBackground new
-				 withAll: {
-						 (BlPaintBackground new paint:
-								  (BlColorPaint new color: Color blue)).
-						 (BlImageBackground new image: form) };
-				 opacity: 0.5)
-]
-
-{ #category : #'background - builder' }
-BlBackgroundTest >> testEqualityBlImageBackground [
-
-	| background form |
-	form := self newOpaqueSquaredForm.
-
-	background := BlImageBackground new image: form.
-	self assert: background equals: background.
-
-	"Note: Form inherits identity equals from Object."
-	self
-		assert: (BlImageBackground new image: form)
-		equals: (BlImageBackground new image: form).
-	self
-		deny: (BlImageBackground new image: form)
-		equals: (BlImageBackground new image: self newOpaqueSquaredForm).
-
-	"Test opacity"
-	self
-		assert: (BlImageBackground new
-				 image: form;
-				 opacity: 1.0;
-				 yourself)
-		equals: (BlImageBackground new
-				 image: form;
-				 opacity: 1.0;
-				 yourself).
-	self
-		deny: (BlImageBackground new
-				 image: form;
-				 opacity: 0.5;
-				 yourself)
-		equals: (BlImageBackground new
-				 image: form;
-				 opacity: 1.0;
-				 yourself)
-]
-
-{ #category : #'background - builder' }
-BlBackgroundTest >> testEqualityBlPaintBackground1 [
+{ #category : #testing }
+BlBackgroundTest >> testEqualityOfColorPaintBackground [
 
 	| background |
 	background := BlPaintBackground paint: (BlColorPaint color: Color blue).
-	self assert: background equals: background.
+	self assert: background equalsAndHasSameHash: background.
 
 	self
 		assert: (BlPaintBackground paint: (BlColorPaint color: Color blue))
-		equals: (BlPaintBackground paint: (BlColorPaint color: Color blue)).
+		equalsAndHasSameHash: (BlPaintBackground paint: (BlColorPaint color: Color blue)).
 	self
 		deny: (BlPaintBackground paint: (BlColorPaint color: Color blue))
 		equals: (BlPaintBackground paint: (BlColorPaint color: Color red)).
@@ -206,7 +91,7 @@ BlBackgroundTest >> testEqualityBlPaintBackground1 [
 				 paint: (BlColorPaint color: Color blue);
 				 opacity: 0.5;
 				 yourself)
-		equals:
+		equalsAndHasSameHash:
 			(BlPaintBackground new
 				 paint: (BlColorPaint color: Color blue);
 				 opacity: 0.5;
@@ -224,32 +109,136 @@ BlBackgroundTest >> testEqualityBlPaintBackground1 [
 				 yourself)
 ]
 
-{ #category : #'background - builder' }
-BlBackgroundTest >> testEqualityBlPaintBackground2 [
+{ #category : #testing }
+BlBackgroundTest >> testEqualityOfCompositeBackground [
 
-	| background |
-	background := BlPaintBackground paint: BlTransparentPaint new.
-	self assert: background equals: background.
-	
-	self
-		assert: (BlPaintBackground paint: BlTransparentPaint new)
-		equals: (BlPaintBackground paint: BlTransparentPaint new).
+	| form background |
+	form := self newOpaqueSquaredForm.
+
+	background :=
+		BlCompositeBackground withAll: {
+			(BlColorPaint color: Color blue) asBlBackground.
+			form asBlBackground }.
+	self assert: background equalsAndHasSameHash: background.
 
 	self
-		deny:
-			(BlPaintBackground new
-				paint: BlTransparentPaint new;
+		assert:
+			(BlCompositeBackground withAll: {
+				(BlPaintBackground paint:
+					(BlColorPaint color: Color blue)).
+				(BlImageBackground image: form) })
+		equalsAndHasSameHash:
+			(BlCompositeBackground withAll: {
+				(BlPaintBackground paint:
+					 (BlColorPaint color: Color blue)).
+				(BlImageBackground image: form) }).
+	"Not the same size"
+	self
+		deny: (BlCompositeBackground withAll: {
+				(BlPaintBackground paint:
+					 (BlColorPaint color: Color blue)).
+				(BlImageBackground image: form) })
+		equals: (BlCompositeBackground withAll:
+			{ (BlPaintBackground paint:
+				 (BlColorPaint color: Color blue)) }).
+	"Not the same backgrounds"
+	self
+		deny: (BlCompositeBackground withAll: {
+				(BlPaintBackground paint:
+					 (BlColorPaint color: Color blue)).
+				(BlImageBackground image: form) })
+		equals: (BlCompositeBackground withAll: {
+				(BlPaintBackground paint:
+					 (BlColorPaint color: Color red)).
+				(BlImageBackground image: form) }).
+
+	self
+		assert: (BlCompositeBackground new
+			withAll: {
+					(BlPaintBackground paint:
+							 (BlColorPaint color: Color blue)).
+					(BlImageBackground image: form) };
+			opacity: 0.5)
+		equalsAndHasSameHash: (BlCompositeBackground new
+			withAll: {
+					(BlPaintBackground paint:
+							 (BlColorPaint color: Color blue)).
+					(BlImageBackground image: form) };
+			opacity: 0.5).
+	"Test opacity"
+	self
+		assert: (BlCompositeBackground new
+			withAll: {
+					(BlPaintBackground paint:
+						(BlColorPaint color: Color blue)).
+					(BlImageBackground image: form) };
+			opacity: 0.5)
+		equalsAndHasSameHash: (BlCompositeBackground new
+			withAll: {
+					(BlPaintBackground paint:
+						(BlColorPaint color: Color blue)).
+					(BlImageBackground image: form) };
+			opacity: 0.5).
+
+	self
+		deny: (BlCompositeBackground new
+			withAll: {
+					(BlPaintBackground paint:
+						(BlColorPaint color: Color blue)).
+					(BlImageBackground image: form) };
+			opacity: 1.0)
+		equals: (BlCompositeBackground new
+			withAll: {
+					(BlPaintBackground paint:
+						(BlColorPaint color: Color blue)).
+					(BlImageBackground image: form) };
+			opacity: 0.5)
+]
+
+{ #category : #testing }
+BlBackgroundTest >> testEqualityOfImageBackground [
+
+	| background form |
+	form := self newOpaqueSquaredForm.
+
+	background := BlImageBackground image: form.
+	self assert: background equalsAndHasSameHash: background.
+
+	"Note: Form inherits identity equals from Object."
+	self
+		assert: (BlImageBackground image: form)
+		equalsAndHasSameHash: (BlImageBackground image: form).
+	self
+		deny: (BlImageBackground image: form)
+		equals: (BlImageBackground image: self newOpaqueSquaredForm).
+
+	"Test opacity"
+	self
+		assert:
+			(BlImageBackground new
+				image: form;
 				opacity: 1.0;
 				yourself)
-		equals:
-			(BlPaintBackground new
-				paint: BlTransparentPaint new;
+		equalsAndHasSameHash:
+			(BlImageBackground new
+				image: form;
+				opacity: 1.0;
+				yourself).
+	self
+		deny:
+			(BlImageBackground new
+				image: form;
 				opacity: 0.5;
+				yourself)
+		equals:
+			(BlImageBackground new
+				image: form;
+				opacity: 1.0;
 				yourself)
 ]
 
-{ #category : #'background - builder' }
-BlBackgroundTest >> testEqualityBlPaintBackground3 [
+{ #category : #testing }
+BlBackgroundTest >> testEqualityOfLinearPaintBackground [
 
 	| background |
 	background :=
@@ -259,7 +248,7 @@ BlBackgroundTest >> testEqualityBlPaintBackground3 [
 					start: 0 @ 1;
 					end: 1 @ 0;
 					yourself).
-	self assert: background equals: background.
+	self assert: background equalsAndHasSameHash: background.
 
 	self
 		assert:
@@ -269,7 +258,7 @@ BlBackgroundTest >> testEqualityBlPaintBackground3 [
 					start: 0 @ 1;
 					end: 1 @ 0;
 					yourself))
-		equals:
+		equalsAndHasSameHash:
 			(BlPaintBackground paint:
 				(BlLinearGradientPaint new
 					stops: { 0 -> Color blue. 1 -> Color red };
@@ -326,8 +315,8 @@ BlBackgroundTest >> testEqualityBlPaintBackground3 [
 					yourself))
 ]
 
-{ #category : #'background - builder' }
-BlBackgroundTest >> testEqualityBlPaintBackground4 [
+{ #category : #testing }
+BlBackgroundTest >> testEqualityOfRadialPaintBackground [
 
 	| background |
 	background :=
@@ -339,8 +328,8 @@ BlBackgroundTest >> testEqualityBlPaintBackground4 [
 				outerCenter: 100 @ 100;
 				outerRadius: 200;
 				yourself).
-	self assert: background equals: background.
-	
+	self assert: background equalsAndHasSameHash: background.
+
 	self
 		assert:
 			(BlPaintBackground paint:
@@ -351,7 +340,7 @@ BlBackgroundTest >> testEqualityBlPaintBackground4 [
 					outerCenter: 100 @ 100;
 					outerRadius: 200;
 					yourself))
-		equals:
+		equalsAndHasSameHash:
 			(BlPaintBackground paint:
 				(BlRadialGradientPaint new
 					stops: { 0 -> Color blue. 1 -> Color red };
@@ -466,26 +455,51 @@ BlBackgroundTest >> testEqualityBlPaintBackground4 [
 					yourself)
 ]
 
-{ #category : #'background - builder' }
-BlBackgroundTest >> testEqualityBlTransparentBackground [
+{ #category : #testing }
+BlBackgroundTest >> testEqualityOfTransparentBackground [
 
 	| background |
 	background := BlTransparentBackground new.
-	self assert: background equals: background.
+	self assert: background equalsAndHasSameHash: background.
 
 	self
 		assert: BlTransparentBackground new
-		equals: BlTransparentBackground new.
+		equalsAndHasSameHash: BlTransparentBackground new.
 	self
 		assert: (BlTransparentBackground new opacity: 0.5; yourself)
-		equals: (BlTransparentBackground new opacity: 1.0; yourself)
+		equalsAndHasSameHash: (BlTransparentBackground new opacity: 1.0; yourself)
 ]
 
-{ #category : #'background - transparent' }
+{ #category : #testing }
+BlBackgroundTest >> testEqualityOfTransparentPaintBackground [
+	"This test can be considered as redundant as the paint implements Singleton (but #new available)."
+
+	| background |
+	background := BlPaintBackground paint: BlTransparentPaint new.
+	self assert: background equalsAndHasSameHash: background.
+	
+	self
+		assert: (BlPaintBackground paint: BlTransparentPaint new)
+		equalsAndHasSameHash: (BlPaintBackground paint: BlTransparentPaint new).
+
+	self
+		deny:
+			(BlPaintBackground new
+				paint: BlTransparentPaint new;
+				opacity: 1.0;
+				yourself)
+		equals:
+			(BlPaintBackground new
+				paint: BlTransparentPaint new;
+				opacity: 0.5;
+				yourself)
+]
+
+{ #category : #testing }
 BlBackgroundTest >> testTransparentBackground [
 
 	| aBackground |
 	aBackground := BlTransparentBackground new.
 	self assert: aBackground isTransparent.
-	self assert: aBackground opacity equals: 1.0
+	self assert: aBackground opacity equals: 0.0
 ]
