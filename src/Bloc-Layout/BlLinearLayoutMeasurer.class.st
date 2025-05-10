@@ -239,15 +239,18 @@ BlLinearLayoutMeasurer >> parent [
 { #category : #measurement }
 BlLinearLayoutMeasurer >> postMeasure [
 
-	(allFillParent not and: [ breadthSpec isExact not ])
-		ifTrue: [ maxBreadth := alternativeMaxBreadth ].
+	(allFillParent not and: [ breadthSpec isExact not ]) ifTrue: [
+		maxBreadth := alternativeMaxBreadth ].
 
 	maxBreadth := maxBreadth + (orientation paddingBreadth: parent).
 
 	"Check against our minimum height"
 	maxBreadth := maxBreadth max: (orientation minimalBreadth: parent).
 
-	parent measuredExtent: (orientation extentBreadth: (breadthSpec sizeFor: maxBreadth) lengthSpec: measuredLength).
+	parent measuredExtent:
+		(orientation
+			extentBreadth: (breadthSpec sizeFor: maxBreadth)
+			lengthSpec: measuredLength)
 ]
 
 { #category : #measurement }

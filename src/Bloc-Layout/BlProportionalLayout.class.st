@@ -96,7 +96,7 @@ BlProportionalLayout >> layout: anElement in: aRectangle context: aBlElementBoun
 BlProportionalLayout >> measure: anElement with: anExtentSpec [
 
 	| extent |
-	extent := anExtentSpec sizeFor: 0.0 @ 0.0.
+	extent := anExtentSpec sizeForWidth: 0.0 height: 0.0.
 	anElement measuredExtent: extent.
 
 	anElement children accountedByLayout do: [ :eachChild |

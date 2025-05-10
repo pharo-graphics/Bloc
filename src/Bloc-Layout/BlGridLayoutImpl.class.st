@@ -303,7 +303,8 @@ BlGridLayoutImpl >> measure: anElement with: anExtentSpec [
 	measuredWidth := (widthSansPadding + hPadding).
 	measuredHeight := (heightSansPadding + vPadding).
 
-	anElement measuredExtent: (anExtentSpec sizeFor: measuredWidth @ measuredHeight)
+	anElement measuredExtent:
+		(anExtentSpec sizeForWidth: measuredWidth height: measuredHeight)
 ]
 
 { #category : #'private accessing' }
