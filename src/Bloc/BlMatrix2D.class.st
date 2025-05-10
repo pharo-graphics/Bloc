@@ -131,8 +131,10 @@ BlMatrix2D >> decomposition [
 	angle := angle radiansToDegrees.
 	
 	^ BlMatrixDecomposition2D new
-		translation: (BlVector x: x y: y);
-		scale: (BlVector x: scaleX y: scaleY);
+		translationX: x;
+		translationY: y;
+		scaleX: scaleX;
+		scaleY: scaleY;
 		angle: angle;
 		sx: row0x;
 		sy: row1y;
@@ -173,8 +175,21 @@ BlMatrix2D >> inverse [
 	"In-place inverse me.
 	Throw BlSingularMatrixError if matrix is singular (non-invertible or degenerate)"
 
-	| a b c d e f determinant inverseDeterminant |
+	self
+		deprecated: 'Use #invert'
+		transformWith:
+			'`@receiver inverse' -> 
+			'`@receiver invert'.
 	
+	self invert
+]
+
+{ #category : #'matrix - mathematical functions' }
+BlMatrix2D >> invert [
+	"In-place inverse me.
+	Throw BlSingularMatrixError if matrix is singular (non-invertible or degenerate)"
+
+	| a b c d e f determinant inverseDeterminant |
 	a := sy.
 	b := shx negated.
 	c := (shx * y) - (sy * x).
@@ -201,7 +216,7 @@ BlMatrix2D >> inverted [
 	"Return a new instance that is my inverse.
 	Signal a `BlSingularMatrixError` if matrix is singular (non-invertible or degenerate)"
 	
-	^ self copy inverse
+	^ self copy invert
 ]
 
 { #category : #testing }
@@ -304,9 +319,8 @@ BlMatrix2D >> reflection: aDiagonalVector [
 BlMatrix2D >> rotateByRadians: anAngle around: aBlVector [
 	"Apply a rotation transformation by a given amount of radians around a provided axis vector"
 
-	self
-		assert: [ aBlVector = BlVector zAxis ]
-		description: [ '2D Matrix is incompatible with 3D transformation' ].
+	"2D Matrix is incompatible with 3D transformation"
+	self assert: [ aBlVector = BlVector zAxis ].
 		
 	"Apply the rotation AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix
@@ -339,9 +353,8 @@ BlMatrix2D >> scaleBy: aBlVector [
 	| aScale3D |
 	aScale3D := aBlVector asScale3D.
 
-	self
-		assert: [ aScale3D z closeTo: 1 ]
-		description: [ '2D Matrix is incompatible with 3D transformation' ].
+	"2D Matrix is incompatible with 3D transformation"
+	self assert: [ aScale3D z closeTo: 1 ].
 		
 	"Apply the scale AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix
@@ -425,40 +438,40 @@ BlMatrix2D >> transformBounds: aBlBounds [
 	"In-place transform given `BlBounds` according to my transformation.
 	(local to global transformation)"
 
-	| newLeft newTop newRight newBottom quadTopLeft quadTopRight quadBottomLeft quadBottomRight |
-
+	| newLeft newTop newRight newBottom left top right bottom quadTopLeftX quadTopLeftY quadTopRightX quadTopRightY quadBottomLeftX quadBottomLeftY quadBottomRightX quadBottomRightY |
 	self isIdentity ifTrue: [ ^ aBlBounds ].
 
-	quadTopLeft := self transformX: aBlBounds left Y: aBlBounds top.
-	quadTopRight := self transformX: aBlBounds right Y: aBlBounds top.
-	quadBottomLeft := self transformX: aBlBounds left Y: aBlBounds bottom.
-	quadBottomRight := self transformX: aBlBounds right Y: aBlBounds bottom.
+	left := aBlBounds left.
+	top := aBlBounds top.
+	right := aBlBounds right.
+	bottom := aBlBounds bottom.
 
-	newLeft := ((quadTopLeft x
-		min: quadTopRight x)
-			min: quadBottomLeft x)
-				min: quadBottomRight x.
-	newRight := ((quadTopLeft x
-		max: quadTopRight x)
-			max: quadBottomLeft x)
-				max: quadBottomRight x.
+	quadTopLeftX := left * sx + (top * shx) + x.
+	quadTopLeftY := left * shy + (top * sy) + y.
+	quadTopRightX := right * sx + (top * shx) + x.
+	quadTopRightY := right * shy + (top * sy) + y.
+	quadBottomLeftX := left * sx + (bottom * shx) + x.
+	quadBottomLeftY := left * shy + (bottom * sy) + y.
+	quadBottomRightX := right * sx + (bottom * shx) + x.
+	quadBottomRightY := right * shy + (bottom * sy) + y.
 
-	newTop := ((quadTopLeft y
-		min: quadTopRight y)
-			min: quadBottomLeft y)
-				min: quadBottomRight y.
-				
-	newBottom := ((quadTopLeft y
-		max: quadTopRight y)
-			max: quadBottomLeft y)
-				max: quadBottomRight y.
-	
+	newLeft := ((quadTopLeftX min: quadTopRightX) min: quadBottomLeftX)
+		           min: quadBottomRightX.
+	newRight := ((quadTopLeftX max: quadTopRightX) max: quadBottomLeftX)
+		            max: quadBottomRightX.
+
+	newTop := ((quadTopLeftY min: quadTopRightY) min: quadBottomLeftY)
+		          min: quadBottomRightY.
+
+	newBottom := ((quadTopLeftY max: quadTopRightY) max: quadBottomLeftY)
+		             max: quadBottomRightY.
+
 	aBlBounds
 		left: newLeft
 		top: newTop
 		right: newRight
 		bottom: newBottom.
-		
+
 	^ aBlBounds
 ]
 
@@ -497,9 +510,8 @@ BlMatrix2D >> translateBy: aBlVector [
 	| aTranslate3D |
 	aTranslate3D := aBlVector asTranslate3D.
 
-	self
-		assert: [ aTranslate3D z isZero ]
-		description: [ '2D Matrix is incompatible with 3D transformation' ].
+	"2D Matrix is incompatible with 3D transformation"
+	self assert: [ aTranslate3D z isZero ].
 
 	"Apply the translation AFTER my existing transformation.
 	Any vector that is multiplied by the resulting matrix

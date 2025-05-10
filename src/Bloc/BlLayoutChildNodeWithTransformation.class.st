@@ -104,12 +104,11 @@ BlLayoutChildNodeWithTransformation >> transformation [
 { #category : #accessing }
 BlLayoutChildNodeWithTransformation >> transformation: aBlElementTransformation [
 
-	transformation := aBlElementTransformation asCachedTransformation
-		                  boundingRectangle:
-			                  (Rectangle
-				                   origin: 0.0 @ 0.0
-				                   extent: self privateMeasurement extent);
-		                  yourself
+	transformation :=
+		aBlElementTransformation asCachedTransformationIn:
+			(Rectangle
+				origin: 0.0 @ 0.0
+				extent: self privateMeasurement extent)
 ]
 
 { #category : #accessing }

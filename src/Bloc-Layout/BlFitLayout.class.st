@@ -113,5 +113,6 @@ BlFitLayout >> measureParentNode: aParentNode [
 	width := boundingBox width + aParentNode padding width.
 	height := boundingBox height + aParentNode padding height.
 
-	aParentNode extent: (aParentNode extentSpec sizeFor: width @ height)
+	aParentNode extent:
+		(aParentNode extentSpec sizeForWidth: width height: height)
 ]

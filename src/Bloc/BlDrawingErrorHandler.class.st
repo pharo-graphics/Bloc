@@ -12,6 +12,7 @@ Class {
 
 { #category : #testing }
 BlDrawingErrorHandler >> matches: aFramePhase [
+
 	^ aFramePhase isDrawingPhase
 ]
 

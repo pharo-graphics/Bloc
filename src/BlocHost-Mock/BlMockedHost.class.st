@@ -36,20 +36,11 @@ BlMockedHost class >> stop [
 ]
 
 { #category : #'host - api' }
-BlMockedHost >> createHostSpaceFor: aSpace [
+BlMockedHost >> newHostSpaceFor: aSpace [
 
-	| aHostSpace |
-	aHostSpace := BlMockedHostSpace new.
-	aHostSpace host: self.
-	aHostSpace space: aSpace.
-
-	aSpace hostSpace: aHostSpace
-]
-
-{ #category : #'host - api' }
-BlMockedHost >> destroyHostSpaceFor: aSpace [
-	"Destroys host space window of a given space.
-	Note: in most cases under 'destroy host space' we mean 'close host window' and unregister it"
+	^ BlMockedHostSpace new
+		host: self;
+		space: aSpace;
+		yourself
 	
-	aSpace detachHostSpace
 ]

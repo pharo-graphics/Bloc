@@ -379,27 +379,31 @@ BlBaseAnimation >> startTime [
 { #category : #'api - running' }
 BlBaseAnimation >> step [
 
-	| actualElapsedTime |
+	| actualElapsedTime done |
 
 	self shouldStartNextLoop ifTrue: [ self initStart ].
 
 	actualElapsedTime := time now - self delayedStartTime.
 
-	"Time did not come for me to run because of delay"	
+	"Time did not come for me to run because of delay"
 	actualElapsedTime negative ifTrue: [ ^ self ].
 
-	actualElapsedTime >= self duration
+	done := actualElapsedTime >= self duration.
+
+	done
 		ifTrue: [
 			elapsedTime := self duration.
-			progress := 1.0 ]
+			progress := 1.0.
+			done := true ]
 		ifFalse: [
 			elapsedTime := actualElapsedTime.
-			progress := (elapsedTime / self duration) asFloat ].
+			progress := (elapsedTime / self duration) asFloat.
+			done := false ].
 
 	self doStep.
 	self onStep.
 
-	progress = 1.0 ifTrue: [ self onLoopDone ].
+	done ifTrue: [ self onLoopDone ].
 
 	"Multiple steps may have passed"
 	(self shouldStartNextLoop and: [

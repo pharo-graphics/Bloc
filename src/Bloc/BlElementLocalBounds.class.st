@@ -17,7 +17,7 @@ BlElementLocalBounds >> asRectangle [
 
 { #category : #accessing }
 BlElementLocalBounds >> bounds [
-	<return: #BlBounds>
+	"Answer a `BlBounds`"
 
 	^ BlBounds origin: self position extent: self extent
 ]
@@ -53,42 +53,39 @@ BlElementLocalBounds >> height [
 
 { #category : #'geometry bounds' }
 BlElementLocalBounds >> inChild: anElement [
-	<return: #BlElementBounds>
 
 	^ BlElementBoundsInChild new
 		originalElement: self referenceElement;
 		referenceElement: anElement;
-		bounds: (anElement globalBoundsToMine: (BlBounds new left: 0.0 top: 0.0 corner: self extent) fromParent: self referenceElement);
+		bounds: (anElement globalBoundsToMine: (BlBounds left: 0.0 top: 0.0 corner: self extent) fromParent: self referenceElement);
 		yourself
 ]
 
 { #category : #'geometry bounds' }
 BlElementLocalBounds >> inLocal [
-	<return: #BlElementBounds>
 
 	^ BlElementBoundsInLocal new
 		referenceElement: self referenceElement;
-		bounds: (BlBounds new left: 0.0 top: 0.0 corner: self extent);
+		bounds: (BlBounds left: 0.0 top: 0.0 corner: self extent);
 		yourself
 ]
 
 { #category : #'geometry bounds' }
 BlElementLocalBounds >> inParent [
-	<return: #BlElementBounds>
-	
+
 	^ BlElementBoundsInParent new
 		originalElement: self referenceElement;
 		referenceElement: self referenceElement;
-		bounds: (self localBoundsToParent: (BlBounds new left: 0.0 top: 0.0 corner: self extent));
+		bounds: (self localBoundsToParent: (BlBounds left: 0.0 top: 0.0 corner: self extent));
 		yourself
 ]
 
 { #category : #'geometry bounds' }
 BlElementLocalBounds >> inParent: anElement [
-	<return: #BlElementBounds>
+
 	| subParent |
-	
 	subParent := self referenceElement.
+
 	self referenceElement withAllParentsDo: [ :aParentElement |
 		(aParentElement hasParent and: [ aParentElement parent == anElement ])
 			ifTrue: [ subParent := aParentElement ] ].
@@ -96,17 +93,16 @@ BlElementLocalBounds >> inParent: anElement [
 	^ BlElementBoundsInParent new
 		originalElement: self referenceElement;
 		referenceElement: subParent;
-		bounds: (anElement localBoundsToMine: (BlBounds new left: 0.0 top: 0.0 corner: self extent) fromChild: self referenceElement);
+		bounds: (anElement localBoundsToMine: (BlBounds left: 0.0 top: 0.0 corner: self extent) fromChild: self referenceElement);
 		yourself
 ]
 
 { #category : #'geometry bounds' }
 BlElementLocalBounds >> inSpace [
-	<return: #BlElementBounds>
 	
 	^ BlElementBoundsInSpace new
 		referenceElement: self referenceElement;
-		bounds: (self localBoundsToSpace: (BlBounds new left: 0.0 top: 0.0 corner: self extent));
+		bounds: (self localBoundsToSpace: (BlBounds left: 0.0 top: 0.0 corner: self extent));
 		yourself
 ]
 

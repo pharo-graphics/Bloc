@@ -65,10 +65,10 @@ BlDevElement >> aeDrawOn: aeCanvas [
 ]
 
 { #category : #'geometry bounds' }
-BlDevElement >> invalidationBounds: aBounds [
+BlDevElement >> computeInvalidationBoundsInto: aBounds [
 
 	| anInvalidationBounds |
-	anInvalidationBounds := super invalidationBounds: aBounds.
+	anInvalidationBounds := super computeInvalidationBoundsInto: aBounds.
 
 	"Save a small margin to draw my borders"
 	anInvalidationBounds expandBy: 1.

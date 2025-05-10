@@ -14,11 +14,12 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlElementCachedExplicitTransformation class >> forTransformation: aBlElementTransformation [
+BlElementCachedExplicitTransformation class >> forTransformation: aBlElementTransformation in: aRectangle [
 
 	^ self basicNew
-		  initializeWith: aBlElementTransformation;
-		  yourself
+		initializeWith: aBlElementTransformation;
+		boundingRectangle: aRectangle;
+		yourself
 ]
 
 { #category : #'api - converting' }
@@ -57,8 +58,7 @@ BlElementCachedExplicitTransformation >> ensureMatrix [
 BlElementCachedExplicitTransformation >> initializeWith: aBlElementTransformation [
 
 	self initialize.
-	
-	boundingRectangle := 0.0@0.0 extent: 0.0@0.0.
+
 	elementTransformation := aBlElementTransformation
 ]
 
@@ -124,7 +124,10 @@ BlElementCachedExplicitTransformation >> transformBounds: aBlBounds [
 	"Transform the given bounds according to my cached transformation.
 	(Local to global transformation.)"
 
-	^ self matrix transformBounds: aBlBounds
+	self matrix transformBounds: aBlBounds.
+
+	^ aBlBounds 
+	
 ]
 
 { #category : #'api - transformation' }

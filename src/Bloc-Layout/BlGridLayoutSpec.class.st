@@ -202,6 +202,25 @@ BlGridLayoutSpec >> hash [
 	^ span hash bitXor: alignment hash
 ]
 
+{ #category : #printing }
+BlGridLayoutSpec >> printOn: aStream [
+	"Generate a string representation of the receiver based on its instance variables."
+
+	super printOn: aStream.
+	aStream
+		nextPutAll: ' startDefined: ';
+		print: startDefined.
+	aStream
+		nextPutAll: ' span: ';
+		print: span.
+	aStream
+		nextPutAll: ' alignment: ';
+		print: alignment.
+	aStream
+		nextPutAll: ' weight: ';
+		print: weight
+]
+
 { #category : #initialization }
 BlGridLayoutSpec >> setAlignment: anAlignment span: aBlGridLayoutInterval startDefined: isStartDefined weight: aWeight [
 

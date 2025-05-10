@@ -46,6 +46,7 @@ BlWrapAroundChildrenLayout >> mayInfluencePosition [
 { #category : #measure }
 BlWrapAroundChildrenLayout >> measure: aParentLayoutNode [
 	"Compute the measured extent of the parent node based on the measured bounds of the children"
+
 	| boundingBox width height |
 	super measure: aParentLayoutNode.
 
@@ -54,5 +55,6 @@ BlWrapAroundChildrenLayout >> measure: aParentLayoutNode [
 	width := boundingBox width + aParentLayoutNode padding width.
 	height := boundingBox height + aParentLayoutNode padding height.
 
-	aParentLayoutNode extent: (aParentLayoutNode extentSpec sizeFor: width @ height)
+	aParentLayoutNode extent:
+		(aParentLayoutNode extentSpec sizeForWidth: width height: height)
 ]

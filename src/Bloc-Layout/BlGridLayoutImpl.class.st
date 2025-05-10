@@ -120,16 +120,16 @@ BlGridLayoutImpl >> defaultMeasurer [
 
 { #category : #'private utilities' }
 BlGridLayoutImpl >> fill: anArray from: fromIndex to: toIndex with: aValue [
+
 	| aLength start end |
-	
 	aLength := anArray size.
 	start := fromIndex min: aLength.
 	end := toIndex min: aLength.
 	
-	start > end
-		ifTrue: [ self error: ('fromIndex({1}) > toIndex({2})' format: { fromIndex . toIndex }) ].
+	start > end ifTrue: [
+		self error: ('fromIndex({1}) > toIndex({2})' format: { fromIndex. toIndex }) ].
 	
-	anArray atAll: (start + 1 to: end) put: aValue
+	start + 1 to: end do: [:index | anArray at: index put: aValue ]
 ]
 
 { #category : #'private utilities' }
@@ -139,12 +139,13 @@ BlGridLayoutImpl >> fits: anArray from: fromIndex to: toIndex with: value [
 	Value 'fits' in array if it is less or equal to all elements
 	in array within specified range.
 	fromIndex must be greater than 0"
-	<return: #Boolean>
 
-	(toIndex > anArray size)
-		ifTrue: [ ^ false ].
+	(toIndex > anArray size) ifTrue: [ ^ false ].
 
-	^ (fromIndex to: toIndex - 1) allSatisfy: [ :anIndex | (anArray at: anIndex + 1) <= value ]
+	fromIndex to: toIndex - 1 do: [ :index |
+		(anArray at: index + 1) <= value ifFalse: [ ^ false ] ].
+
+	^ true
 ]
 
 { #category : #initialization }
@@ -253,7 +254,7 @@ BlGridLayoutImpl >> layout: anElement in: aRectangle context: aBlElementBoundsUp
 						heightSpec: (BlMeasurementSpec exact: height asFloat)) ].
 
 		child
-			applyLayoutIn: (cx @ cy extent: width @ height)
+			applyLayoutIn: (BlBounds left: cx top: cy width: width height: height)
 			context: aBlElementBoundsUpdateContext ]
 ]
 
@@ -302,7 +303,8 @@ BlGridLayoutImpl >> measure: anElement with: anExtentSpec [
 	measuredWidth := (widthSansPadding + hPadding).
 	measuredHeight := (heightSansPadding + vPadding).
 
-	anElement measuredExtent: (anExtentSpec sizeFor: measuredWidth @ measuredHeight)
+	anElement measuredExtent:
+		(anExtentSpec sizeForWidth: measuredWidth height: measuredHeight)
 ]
 
 { #category : #'private accessing' }

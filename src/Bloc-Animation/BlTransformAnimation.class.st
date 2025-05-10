@@ -16,10 +16,10 @@ Class {
 	#traits : 'TBlTransformable',
 	#classTraits : 'TBlTransformable classTrait',
 	#instVars : [
-		'fromMatrix',
-		'toMatrix',
 		'isAbsolute',
-		'elementTransformation'
+		'elementTransformation',
+		'fromDecomposition',
+		'toDecomposition'
 	],
 	#category : #'Bloc-Animation-Animation'
 }
@@ -72,29 +72,25 @@ BlTransformAnimation >> initStart [
 	super initStart.
 
 	isAbsolute ifFalse: [
-		elementTransformation := BlElementCompositeTransformation new
-			                         add:
-				                         self target transformation
-					                         asElementTransformation;
-			                         add:
-				                         elementTransformation
-					                         asElementTransformation;
-			                         yourself ].
-	elementTransformation := elementTransformation asCachedTransformation.
+		elementTransformation :=
+			BlElementCompositeTransformation new
+				add: self target transformation asElementTransformation;
+				add: elementTransformation asElementTransformation;
+				yourself ].
 
 	"matrix depends on computed layout bounds, we should manually trigger layout recomputation"
-	
 	(self target space isNotNil and: [
 		self target space isLayoutRequested ]) ifTrue: [
 		self target space doLayout ].
 
-	elementTransformation boundingRectangle:
-		self target bounds inLocal asRectangle.
+	elementTransformation :=
+		elementTransformation asCachedTransformationIn: 
+			self target boundsInLocal asRectangle.
 
 	"Calculate matrix only on start of first loop"
-	fromMatrix ifNil: [
-		fromMatrix := self target transformation matrix copy.
-		toMatrix := elementTransformation matrix ]
+	fromDecomposition ifNil: [
+		fromDecomposition := self target transformation matrix decomposition.
+		toDecomposition := elementTransformation matrix decomposition ]
 ]
 
 { #category : #initialization }
@@ -128,5 +124,5 @@ BlTransformAnimation >> transformation: aBlElementTransformation [
 BlTransformAnimation >> valueForStep: aNumber [
 
 	^ BlElementAbsoluteTransformation matrix:
-		  (fromMatrix interpolate: aNumber to: toMatrix)
+		  (fromDecomposition interpolate: aNumber to: toDecomposition) composition
 ]

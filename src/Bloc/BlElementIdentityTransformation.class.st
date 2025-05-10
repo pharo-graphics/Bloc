@@ -30,7 +30,8 @@ BlElementIdentityTransformation >> affineTransformationsDo: aBlockClosure [
 ]
 
 { #category : #converting }
-BlElementIdentityTransformation >> asCachedTransformation [
+BlElementIdentityTransformation >> asCachedTransformationIn: aRectangle [
+	"The Rectangle is ignored by identity"
 
 	^ BlElementCachedIdentityTransformation uniqueInstance
 ]

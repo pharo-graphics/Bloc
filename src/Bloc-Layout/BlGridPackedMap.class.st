@@ -11,68 +11,67 @@ Class {
 
 { #category : #'instance creation' }
 BlGridPackedMap class >> fromAssociations: anArrayOfAssociations [
-	^ self new values: (anArrayOfAssociations collect: #value) keys: (anArrayOfAssociations collect: #key)
+
+	^ self basicNew
+		initializeWithAssociations: anArrayOfAssociations;
+		yourself
 ]
 
 { #category : #accessing }
 BlGridPackedMap >> at: index [
+
 	^ values at: (indices at: index)
 ]
 
-{ #category : #private }
-BlGridPackedMap >> compact: anArray indices: theIndices [
-	|size result|
-	size := anArray size.
-	result := Array new: (theIndices ifEmpty: [ 0 ] ifNotEmpty: #max).
-	
-	1 to: size do: [ :index | result at: (theIndices at: index) put: (anArray at: index) ].
-	^ result
-]
+{ #category : #accessing }
+BlGridPackedMap >> initializeWithAssociations: associations [
 
-{ #category : #private }
-BlGridPackedMap >> createIndex: theKeys [
-	| size result keyToIndex |
-	size := theKeys size.
-	result := Array new: size withAll: 0.
+	| keyToIndex |
 	keyToIndex := Dictionary new.
-	
-	1 to: size do: [ :i |
+
+	"Initialize indices"
+	indices := Array new: associations size withAll: 0.
+	1 to: associations size do: [ :i |
 		| key index |
-		key := theKeys at: i.
+		key := (associations at: i) key.
 		index := keyToIndex at: key ifAbsentPut: [ keyToIndex size + 1 ].
-		result at: i put: index ].
-	^ result
+		indices at: i put: index ].
+
+	"Initialize keys and values"
+	keys := Array new: keyToIndex size.
+	values := Array new: keyToIndex size.
+	1 to: associations size do: [ :i |
+		keys at: (indices at: i) put: (associations at: i) key.
+		values at: (indices at: i) put: (associations at: i) value ]
 ]
 
 { #category : #accessing }
 BlGridPackedMap >> keys [
+
 	^ keys
 ]
 
 { #category : #accessing }
 BlGridPackedMap >> keysAndValuesDo: aBlock [
 
-	1 to: self keys size do: [ :i | aBlock value: (self keys at: i) value: (self values at: i) ]
+	1 to: self keys size do: [ :i |
+		aBlock value: (self keys at: i) value: (self values at: i) ]
 ]
 
 { #category : #accessing }
 BlGridPackedMap >> keysDo: aBlock [
-	self keys do: aBlock
+
+	keys do: aBlock
 ]
 
 { #category : #accessing }
 BlGridPackedMap >> values [
+
 	^ values
 ]
 
 { #category : #accessing }
-BlGridPackedMap >> values: theValues keys: theKeys [
-	indices := self createIndex: theKeys.
-	keys := self compact: theKeys indices: indices.
-	values := self compact: theValues indices: indices
-]
-
-{ #category : #accessing }
 BlGridPackedMap >> valuesDo: aBlock [
-	self values do: aBlock
+
+	values do: aBlock
 ]

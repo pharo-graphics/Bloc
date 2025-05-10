@@ -87,10 +87,8 @@ BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 	"First of all we need to add space to the space manager"
 	spaces add: aSpace.
 
-	"then create and show it in a host space"
-	aSpace host createHostSpaceFor: aSpace.
-
-	aSpace hostSpace show
+	aSpace setUpHostSpace.
+	aSpace hostSpace open
 ]
 
 { #category : #'api - spaces' }
@@ -113,9 +111,7 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 	
 	"Send space closed event.
 	Note: a new space may be opened as a reaction to the event. That is the reason to defer stopping of host and universe."
-	aSpace dispatchEventWithTimestamp: BlSpaceClosedEvent new.
-
-
+	aSpace dispatchEventWithTimestamp: BlSpaceClosedEvent new
 ]
 
 { #category : #'api - spaces' }
@@ -156,8 +152,8 @@ BlParallelUniverse >> detachSpaceSynchronously: aSpace [
 	"First, remove the space from space manager, to break any recursion."
 	spaces remove: aSpace.
 
-	"Then, destroy host space"
-	aSpace hasHostSpace ifTrue: [ aSpace host destroyHostSpaceFor: aSpace ].
+	"Then, tear down the host space"
+	aSpace tearDownHostSpace.
 
 	"Dispatch an event indicating that the space is no longer attached to a universe"
 	aSpace dispatchEventWithTimestamp: BlSpaceDetachedEvent new.
@@ -240,10 +236,8 @@ BlParallelUniverse >> openSpace: aSpace [
 { #category : #'private - spaces' }
 BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
-	aSpace isOpened ifTrue: [
-		"If it has been already opened, just unhide it" 
-		aSpace hostSpace show.
-		^ self ].
+	"If it has been already opened, just unhide it" 
+	aSpace isOpened ifTrue: [ ^ aSpace hostSpace show ].
 
 	self attachSpaceSynchronously: aSpace.
 

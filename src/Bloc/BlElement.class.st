@@ -329,6 +329,15 @@ BlElement >> allChildrenBreadthFirstWithDepthDo: elementAndDepthBlock [
 ]
 
 { #category : #'api - children enumeration' }
+BlElement >> allChildrenCount [
+
+	| count |
+	count := 0.
+	self allChildrenDepthFirstDo: [ :_ | count := count + 1 ].
+	^ count
+]
+
+{ #category : #'api - children enumeration' }
 BlElement >> allChildrenDepthFirstDo: aBlock [
 	self childrenDo: [ :each | each allChildrenDepthFirstDo: aBlock ].
 	self childrenDo: aBlock
@@ -421,10 +430,17 @@ BlElement >> applyLayoutIn: aBlBounds [
 
 { #category : #layout }
 BlElement >> applyLayoutIn: aBlBounds context: aBlElementBoundsUpdateContext [
+
 	self errorHandler
 		with: self
-		do: [ self applyLayoutSafelyIn: aBlBounds context: aBlElementBoundsUpdateContext ]
-		failed: [ self applyLayoutThatFailedIn: aBlBounds context: aBlElementBoundsUpdateContext ]
+		do: [
+				self
+					applyLayoutSafelyIn: aBlBounds
+					context: aBlElementBoundsUpdateContext ]
+		failed: [
+				self
+					applyLayoutThatFailedIn: aBlBounds
+					context: aBlElementBoundsUpdateContext ]
 ]
 
 { #category : #'private - layout' }
@@ -681,20 +697,18 @@ BlElement >> boundsCache [
 
 { #category : #'geometry bounds' }
 BlElement >> boundsInLocal [
-	<return: #Rectangle>
 
 	^ boundsCache boundsInLocal
 ]
 
 { #category : #'geometry bounds' }
 BlElement >> boundsInLocal: aBounds [
-	"I load my local bounds in the given mutable bounds and return it.
+	"Load my local bounds in the given mutable bounds and return it.
 	I do not rely on cache and always provide actual bounds.
 	Local Bounds is nothing else than the bounds with origin point set to 0@0
 	and with extent equal to my pure extent.
 	Local Bounds property does not take effect or border into account.
 	I am a part of internal api, use me with caution"
-	<return: #BlBounds>
 
 	^ self bounds boundsInLocal: aBounds
 ]
@@ -702,18 +716,6 @@ BlElement >> boundsInLocal: aBounds [
 { #category : #'geometry bounds' }
 BlElement >> boundsInSpace [
 	^ boundsCache boundsInSpace
-]
-
-{ #category : #'geometry bounds' }
-BlElement >> boundsInSpace: aBounds [
-	"I load my bounds in space in a given mutable rectangle and return provided one.
-	I do not rely on cache and always provide actual bounds.
-	I am a part of internal api, use me with caution"
-	<return: #BlBounds>
-
-	self boundsInLocal: aBounds.
-	self localBoundsToGlobal: aBounds.
-	^ aBounds
 ]
 
 { #category : #'geometry bounds' }
@@ -818,7 +820,7 @@ BlElement >> childrenAt: aPoint do: aBlock [
 
 	anyChildFound := false.
 	
-	self children sortedByElevationReversed do: [ :eachChildElement |
+	self children sortedByElevation reverseDo: [ :eachChildElement |
 		| aPointInChildCoordinates |
 		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
 
@@ -828,17 +830,6 @@ BlElement >> childrenAt: aPoint do: aBlock [
 				anyChildFound := true ] ].
 
 	^ anyChildFound
-]
-
-{ #category : #'geometry bounds convertion' }
-BlElement >> childrenBoundsToLocal: aBounds [
-	"In-place transform bounds from my childrens' coordinates to my local coordinates.
-	Note, that I do not return a new rectangle and instead mutate provided one,
-	so do not forget to send #asRectangle to given mutable rectangle in order to get
-	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
-	
-	^ aBounds
 ]
 
 { #category : #'children accessing' }
@@ -926,6 +917,33 @@ BlElement >> compositionLayer: aCompositionLayer [
 		put: aCompositionLayer
 ]
 
+{ #category : #'geometry bounds' }
+BlElement >> computeEffectBoundsInto: aBlBounds [
+
+	^ self effect computeEffectBoundsInto: aBlBounds
+]
+
+{ #category : #'geometry bounds' }
+BlElement >> computeInvalidationBoundsInto: aBounds [
+	"Compute the bounds of self, including my children recursively, in my local
+	coordinates that would be invalidated if #invalidate would be sent to me."
+
+	self computeVisualBoundsInto: aBounds.
+	self computeEffectBoundsInto: aBounds.
+	
+	aBounds merge: self boundsInLocal.
+
+	(self clipChildren not and: [ self hasChildren ]) ifTrue: [ 
+		| aChildBounds |
+		aChildBounds := BlBounds new.
+		self children do: [ :anElement |
+			anElement computeInvalidationBoundsInto: aChildBounds.
+			anElement localBoundsToParent: aChildBounds.
+			aBounds merge: aChildBounds ] ].
+
+	^ aBounds
+]
+
 { #category : #'private - layout' }
 BlElement >> computeLayout [
 	"Private! Never use me outside of #forceLayout"
@@ -963,6 +981,12 @@ BlElement >> computeLayout [
 		
 	relayoutCounter isZero
 		ifFalse: [ self dispatchLayoutDone ]
+]
+
+{ #category : #'geometry bounds' }
+BlElement >> computeVisualBoundsInto: aBounds [
+
+	self geometry strokedBounds: aBounds of: self
 ]
 
 { #category : #'private - accessing' }
@@ -1027,6 +1051,12 @@ BlElement >> copy [
 	and let users instantiate elements by themselves in the way they want it"
 
 	self shouldNotImplement
+]
+
+{ #category : #'geometry bounds' }
+BlElement >> damagedBoundsInSpace [
+
+	^ boundsCache damagedBoundsInSpace
 ]
 
 { #category : #copying }
@@ -1116,13 +1146,6 @@ BlElement >> defaultLayoutCommonConstraints [
 { #category : #initialization }
 BlElement >> defaultOutskirts [
 	^ BlOutskirts inside
-]
-
-{ #category : #initialization }
-BlElement >> defaultTransformation [
-	"Return an instance of `BlElementTransformation` that plays a role of my default transformation."
-
-	^ BlElementIdentityTransformation uniqueInstance
 ]
 
 { #category : #initialization }
@@ -1372,18 +1395,19 @@ BlElement >> effect: aBlEffect [
 
 	visuals := visuals effect: aBlEffect.
 
-	self boundsCache invalidateBoundsInLocal.
+	boundsCache invalidateLocalBounds.
 	self invalidate.
 ]
 
 { #category : #'geometry bounds' }
 BlElement >> effectBounds [
-	^ (self effectBounds: BlBounds new) asRectangle
-]
 
-{ #category : #'geometry bounds' }
-BlElement >> effectBounds: aBlBounds [
-	^ self effect effectBounds: aBlBounds of: self
+	| aBounds |
+	aBounds := BlBounds new.
+	self computeVisualBoundsInto: aBounds.
+	self computeEffectBoundsInto: aBounds.
+
+	^ aBounds "asRectangle"
 ]
 
 { #category : #'private - accessing' }
@@ -1408,12 +1432,15 @@ BlElement >> elevation [
 
 { #category : #'api - look' }
 BlElement >> elevation: aBlElevation [
+
 	visuals := visuals elevation: aBlElevation.
 
 	"when elevation changes, it is enough to just notify our parent, since
 	my rendering state does not change, only the order in which parent paints its children"
 	self hasParent
-		ifTrue: [ self parent invalidate ]
+		ifTrue: [ 
+			self parent children elevationChanged.
+			self parent invalidate ]
 ]
 
 { #category : #'api - tasks' }
@@ -1430,7 +1457,6 @@ BlElement >> enqueueTask: aBlTask [
 
 { #category : #accessing }
 BlElement >> errorHandler [
-	<return: #BlErrorHandler>
 
 	^ errorHandler
 ]
@@ -1490,8 +1516,7 @@ BlElement >> findMouseEventTargetAt: aPoint [
 	(self clipChildren and: [ doWantEvent not ])
 		ifTrue: [ ^ nil ].
 
-	self children sortedByElevationReversed
-		do: [ :eachChild |
+	self children sortedByElevation reverseDo: [ :eachChild |
 			(eachChild findMouseEventTargetAt: aPoint)
 				ifNotNil: [ :aTargetElement | ^ aTargetElement ] ].
 	
@@ -1571,6 +1596,7 @@ BlElement >> focused: aBoolean [
 
 { #category : #'geometry bounds' }
 BlElement >> focusedBounds [
+
 	^ (self focusedBounds: BlBounds new) asRectangle
 ]
 
@@ -1580,7 +1606,6 @@ BlElement >> focusedBounds: aBlBounds [
 	is used to search next focusable element. By default focused bounds property
 	is just local bounds. Override me to return more specific area, for example
 	cursor bounds or selected cell in the table"
-	<return: #BlBounds>
 	
 	^ self boundsInLocal: aBlBounds
 ]
@@ -1634,7 +1659,7 @@ BlElement >> geometry: aBlGeometry [
 
 	"clear path cache after updating geometry path"
 	self geometry releaseCache.
-	boundsCache invalidateBoundsInLocal.
+	boundsCache invalidateLocalBounds.
 
 	"extent might not change, so we need to update geometry manually"
 	self updateGeometry.
@@ -1647,6 +1672,7 @@ BlElement >> geometry: aBlGeometry [
 
 { #category : #'geometry bounds' }
 BlElement >> geometryBounds [
+
 	^ boundsCache geometryBounds
 ]
 
@@ -1667,17 +1693,8 @@ BlElement >> geometryBoundsInSpace [
 	Note, that geometry bounds may differ from #boundsInSpace for the case of non-trivial geometry.
 	Geometry bounds in space is used to find out if a mouse event position is within the element.
 	GEOMETRY BOUNDS PROPERTY DOES NOT TAKE EFFECT OR BORDER OR BACKGROUND INTO ACCOUNT"
-	<return: #Rectangle>
 
 	^ boundsCache geometryBoundsInSpace
-]
-
-{ #category : #'geometry bounds' }
-BlElement >> geometryBoundsInSpace: aBlBounds [
-	
-	self geometryBounds: aBlBounds.
-	self localBoundsToGlobal: aBlBounds.
-	^ aBlBounds
 ]
 
 { #category : #'geometry bounds convertion' }
@@ -1686,15 +1703,9 @@ BlElement >> globalBoundsToLocal: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
-
-	"Checking for very common mistake"
-	aBounds isRectangle
-		ifTrue: [ self error: 'Was given a Rectangle ', aBounds asString, ' while it should be Bounds' ].
 
 	"First delegate transformation to my parent if I have one"
-	self hasParent
-		ifTrue: [ self parent globalBoundsToLocal: aBounds ].
+	self hasParent ifTrue: [ self parent globalBoundsToLocal: aBounds ].
 
 	"and then transform provided bounds from parent coordinates to my local ones"
 	self parentBoundsToLocal: aBounds.
@@ -1707,14 +1718,8 @@ BlElement >> globalBoundsToMine: aBlBounds fromParent: aParentElement [
 	"In-place transform provided bounds from coordinate system of a given parent
 	to my local coordinates and return a result"
 
-	<return: #BlBounds>
 	| theParents |
 	aParentElement == self ifTrue: [ ^ aBlBounds ].
-
-	self
-		assert: [ self allParentsInclude: aParentElement ]
-		description: [
-			'A given element must be my parent (be in my children composition tree)' ].
 
 	theParents := Array streamContents: [ :aStream |
 		              | eachParent |
@@ -1986,7 +1991,7 @@ BlElement >> initialize [
 	constraints := self defaultLayoutCommonConstraints.
 	self resetChildrenArray.
 
-	transformation := self defaultTransformation asCachedTransformation.
+	transformation := BlElementCachedIdentityTransformation uniqueInstance.
 
 	layout := self defaultLayout.
 
@@ -2014,29 +2019,6 @@ BlElement >> insets [
 		transformWith: '`@receiver insets' -> '`@receiver padding'.
 
 	^ self padding
-]
-
-{ #category : #'change reporting' }
-BlElement >> invalidRect: aBlBounds [
-	"Invalidate a dirty rectangle of the display.
-	The bounds must be given in my own coordinates."
-
-	self invalidRect: aBlBounds from: self
-]
-
-{ #category : #'change reporting' }
-BlElement >> invalidRect: aBlBounds from: anElement [
-	"Translate dirty reports from an Element.
-	A rectangle is given in my own coordinates"
-
-	"avoid unnecessary computations of rectangle transformation"
-	self isAttachedToSceneGraph ifFalse: [ ^ self ].
-
-	"transform provided rectangle to my parent's coordinates before I pass it further"
-	self localBoundsToParent: aBlBounds.
-	self hasParent
-		ifTrue: [ self parent invalidRect: aBlBounds from: anElement ]
-		ifFalse: [ self space invalidRect: aBlBounds from: anElement ]
 ]
 
 { #category : #'change reporting' }
@@ -2071,10 +2053,10 @@ BlElement >> invalidateChildren [
 	self childrenDo: [ :each | each invalidate ]
 ]
 
-{ #category : #accessing }
+{ #category : #'geometry bounds' }
 BlElement >> invalidationBounds [
 
-	^ boundsCache invalidationBounds
+	^ self invalidationBounds: BlBounds new
 ]
 
 { #category : #'geometry bounds' }
@@ -2083,9 +2065,11 @@ BlElement >> invalidationBounds: aBounds [
 	coordinates that would be invalidated if #invalidate would be sent to me."
 
 	| anInvalidationBounds |
-	anInvalidationBounds := (self effectBounds: aBounds) merge: self boundsInLocal.
+	
+	self computeVisualBoundsInto: aBounds.
+	anInvalidationBounds := (self computeEffectBoundsInto: aBounds) merge: self boundsInLocal.
 
-	(self clipChildren and: [ self hasChildren ]) ifFalse: [ 
+	(self clipChildren not and: [ self hasChildren ]) ifTrue: [ 
 		| aChildBounds |
 		aChildBounds := BlBounds new.
 		self children do: [ :anElement |
@@ -2096,18 +2080,20 @@ BlElement >> invalidationBounds: aBounds [
 	^ anInvalidationBounds
 ]
 
-{ #category : #accessing }
+{ #category : #'geometry bounds' }
 BlElement >> invalidationBoundsInParent [
 
-	^ self localBoundsToParent: (BlBounds fromRectangle: self invalidationBounds)
-
+	| result |
+	result := BlBounds new.
+	self invalidationBounds: result.
+	self localBoundsToParent: result.
+	^ result
 ]
 
-{ #category : #accessing }
+{ #category : #'geometry bounds' }
 BlElement >> invalidationBoundsInSpace [
 
-	^ self localBoundsToGlobal: (BlBounds fromRectangle: self invalidationBounds)
-
+	^ boundsCache invalidationBoundsInSpace
 ]
 
 { #category : #'api - space' }
@@ -2218,7 +2204,7 @@ BlElement >> isRoot [
 ]
 
 { #category : #testing }
-BlElement >> isTextElement [
+BlElement >> isTextElement [ 
 
 	^ false
 ]
@@ -2313,7 +2299,6 @@ BlElement >> localBoundsToChildren: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
 	
 	^ aBounds
 ]
@@ -2324,37 +2309,31 @@ BlElement >> localBoundsToGlobal: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
-	
-	"Checking for very common mistake"
-	aBounds isRectangle
-		ifTrue: [ self error: 'Was given a Rectangle ', aBounds asString, ' while it should be Bounds' ].
 
 	"First we need to transform provided bounds from my local coordinates to parent ones"
 	self localBoundsToParent: aBounds.
 
 	"and then delegate transformation to my parent if I have one"
-	self hasParent
-		ifTrue: [ self parent localBoundsToGlobal: aBounds ].
+	self hasParent ifTrue: [ self parent localBoundsToGlobal: aBounds ].
 
 	^ aBounds
 ]
 
 { #category : #'geometry bounds convertion' }
-BlElement >> localBoundsToMine: aBlBounds fromChild: anElement [
+BlElement >> localBoundsToMine: aBounds fromChild: anElement [
 	"In-place transform provided bounds from coordinate system of a given descendant element
 	to my local coordinates and return a result"
 
 	| aParentElement |
-	anElement == self ifTrue: [ ^ aBlBounds ].
+	anElement == self ifTrue: [ ^ aBounds ].
 		
 	aParentElement := anElement.
 	[
-		aParentElement localBoundsToParent: aBlBounds.
+		aParentElement localBoundsToParent: aBounds.
 		aParentElement := aParentElement parent
 	] doWhileFalse: [ aParentElement == self ].
 			
-	^ aBlBounds
+	^ aBounds
 ]
 
 { #category : #'geometry bounds convertion' }
@@ -2363,7 +2342,6 @@ BlElement >> localBoundsToParent: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
 
 	"first apply transformation if we have one"
 	self transformation transformBounds: aBounds.
@@ -2371,10 +2349,7 @@ BlElement >> localBoundsToParent: aBounds [
 	"then translate according to my position within the parent.
 	Note, that an element might have a position even if it does not have a parent"
 	aBounds translateBy: self position.
-	
-	self hasParent
-		ifTrue: [ self parent childrenBoundsToLocal: aBounds ].
-	
+		
 	^ aBounds
 ]
 
@@ -2384,12 +2359,7 @@ BlElement >> localBoundsToWindow: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
 	
-	"Checking for very common mistake"
-	aBounds isRectangle
-		ifTrue: [ self error: 'Was given a Rectangle ', aBounds asString, ' while it should be BlBounds' ].
-
 	"First we need to transform provided bounds from my local coordinates to parent ones"
 	self localBoundsToGlobal: aBounds.
 
@@ -2426,16 +2396,17 @@ BlElement >> localPointToMine: aPoint fromChild: anElement [
 	"compute a point from provided point from coordinate system of a given descendant element
 	to my local coordinates"
 
-	| aParentElement pt |
+	| aParentElement result |
 	anElement == self ifTrue: [ ^ aPoint ].
-	pt := aPoint.
+
+	result := aPoint.
 	aParentElement := anElement.
-	[
-		pt := aParentElement localPointToParent: pt.
-		aParentElement := aParentElement parent
-	] doWhileFalse: [ aParentElement == self ].
-			
-	^ pt
+
+	[	result := aParentElement localPointToParent: result.
+		aParentElement := aParentElement parent ]
+			doWhileFalse: [ aParentElement == self ].
+
+	^ result
 ]
 
 { #category : #'geometry position convertion' }
@@ -2853,7 +2824,7 @@ BlElement >> onExtentChanged [
 	"Is sent when my extent changed"
 
 	"extent changed => invalidate cached local bounds"
-	boundsCache invalidateBoundsInLocal.
+	boundsCache invalidateLocalBounds.
 	"extent changed => path also"
 	self updateGeometry.
 	"background might want to resize itself"
@@ -3098,18 +3069,16 @@ BlElement >> parentBoundsToLocal: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
 
-	self hasParent
-		ifTrue: [ self parent localBoundsToChildren: aBounds ].
+	self hasParent ifTrue: [ self parent localBoundsToChildren: aBounds ].
 
 	"then translate according to my position within the parent.
 	Note, that an element might have a position even if it does not have a parent"
 	aBounds translateBy: self position negated.
-	
+
 	"first apply inverted transformation if we have one"
 	transformation inverseTransformBounds: aBounds.
-	
+
 	^ aBounds
 ]
 
@@ -3195,7 +3164,7 @@ BlElement >> position: aPosition extent: anExtent context: aBlElementBoundsUpdat
 			changePositionFrom: aPreviousPosition
 			to: aPosition
 			of: self.
-		isExtentChanged ifFalse: [ boundsCache invalidateBoundsInSpace ] ].
+		isExtentChanged ifFalse: [ boundsCache invalidateParentBounds ] ].
 
 	isExtentChanged ifFalse: [ ^ self ].
 	self bounds extent: anExtent.
@@ -3203,7 +3172,7 @@ BlElement >> position: aPosition extent: anExtent context: aBlElementBoundsUpdat
 		changeExtentFrom: aPreviousExtent
 		to: anExtent
 		of: self.
-	boundsCache invalidateBoundsInLocal
+	boundsCache invalidateLocalBounds
 ]
 
 { #category : #'geometry position' }
@@ -3268,10 +3237,11 @@ BlElement >> previousSiblingSuchThat: aSelectionBlock do: aBlock [
 
 { #category : #printing }
 BlElement >> printOn: aStream [
+
 	aStream
 		nextPutAll: self class name;
 		nextPutAll: ' @ ';
-		store: self identityHash.
+		print: self identityHash.
 		
 	self elementId isNoId ifTrue: [ ^self ].
 
@@ -3810,9 +3780,9 @@ BlElement >> transformation [
 { #category : #transformations }
 BlElement >> transformation: anElementTransformation [
 
-	transformation := anElementTransformation asCachedTransformation
-		                  boundingRectangle: self bounds inLocal asRectangle;
-		                  yourself.
+	transformation :=
+		anElementTransformation
+			asCachedTransformationIn: self boundsInLocal.
 
 	self constraints shouldAccountTransformation ifTrue: [ 
 		self requestParentLayout ].
@@ -3820,7 +3790,7 @@ BlElement >> transformation: anElementTransformation [
 	self layout isInfluencedByTransformation ifTrue: [ 
 		self requestLayout ].
 
-	self boundsCache invalidateBoundsInSpace.
+	boundsCache invalidateParentBounds.
 	self invalidate.
 
 	self onTransformationChanged
@@ -3828,7 +3798,8 @@ BlElement >> transformation: anElementTransformation [
 
 { #category : #'geometry bounds' }
 BlElement >> transformedBounds [
-	^ boundsCache transformedBounds
+
+	^ self transformedBounds: BlBounds new
 ]
 
 { #category : #'geometry bounds' }
@@ -3853,7 +3824,7 @@ BlElement >> updateTransformationBounds [
 	"Update the bounds of the cached transformation in order to recompute its matrix
 	since transformation origin depends on the element's bounds"
 
-	transformation boundingRectangle: self bounds inLocal asRectangle
+	transformation boundingRectangle: self boundsInLocal
 ]
 
 { #category : #accessing }
@@ -3901,6 +3872,8 @@ BlElement >> visualBounds [
 	"Visual bounds represent a high precision area of rendered geometry, including border.
 	By default, visual bounds of `inside` outskits equal to geometry bounds since border
 	is never rendered outside of the element's geometry."
+
+	self deprecated: 'Use computeVisualBoundsInto:'.
 
 	^ (self geometry strokedBounds: BlBounds new of: self) asRectangle
 ]
@@ -3999,7 +3972,7 @@ BlElement >> withAllChildrenAt: aPoint do: aBlock [
 
 	anyChildFound := false.
 	
-	self children sortedByElevationReversed do: [ :eachChildElement |
+	self children sortedByElevation reverseDo: [ :eachChildElement |
 		| aPointInChildCoordinates |
 		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
 		
@@ -4078,7 +4051,7 @@ BlElement >> withAllLeafChildrenAt: aPoint do: aBlock [
 		
 	anyChildFound := false.
 	
-	self children sortedByElevationReversed do: [ :eachChildElement |
+	self children sortedByElevation reverseDo: [ :eachChildElement |
 		| aPointInChildCoordinates |
 		aPointInChildCoordinates := eachChildElement parentPointToLocal: aPoint.
 		

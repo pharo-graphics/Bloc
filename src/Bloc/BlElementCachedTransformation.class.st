@@ -15,9 +15,11 @@ Class {
 }
 
 { #category : #'api - converting' }
-BlElementCachedTransformation >> asCachedTransformation [
+BlElementCachedTransformation >> asCachedTransformationIn: aRectangle [
 
 	^ self
+		  boundingRectangle: aRectangle;
+		  yourself
 ]
 
 { #category : #'api - converting' }

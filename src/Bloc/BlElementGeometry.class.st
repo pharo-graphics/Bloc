@@ -40,7 +40,6 @@ BlElementGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement
 BlElementGeometry >> geometryBounds: aBounds of: aBlElement [
 	"Load my geometry bounds for a given element in a mutable rectangle.
 	@see #geometryBounds for more info"
-	<return: #BlBounds>
 	
 	^ self subclassResponsibility
 ]
@@ -85,7 +84,6 @@ BlElementGeometry >> storeOn: aStream [
 BlElementGeometry >> strokedBounds: aBlBounds of: anElement [
 	"Return stroked bounds of a geometry if it would be stroked according to element's border configuration.
 	Dispatch through outskirts first"
-	<return: #BlBounds>
 	
 	^ self subclassResponsibility
 ]

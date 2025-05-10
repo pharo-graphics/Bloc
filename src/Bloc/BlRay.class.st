@@ -7,8 +7,6 @@ I consist of a starting `=#point`= and a direction `=#vector`=
 Class {
 	#name : #BlRay,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'point',
 		'vector'
@@ -36,7 +34,6 @@ BlRay >> distanceTo: aPoint [
 	distance = abs( (y2-y1)*x1 - (x2-x1)*y0 + x2*y1 - y2*x1 ) / sqrt( (y2-y1)^2 + (x2-x1)^2 )
 
 	"
-	<return: #Number>
 	
 	self vector isZero
 		ifTrue: [ ^ aPoint distanceTo: self point ].
@@ -46,26 +43,28 @@ BlRay >> distanceTo: aPoint [
 
 { #category : #initialization }
 BlRay >> initialize [
+
 	super initialize.
-	
-	point := 0@0.
-	vector := BlVector x: 0 y: 0.
+
+	point := 0 @ 0.
+	vector := BlVector x: 0 y: 0
 ]
 
 { #category : #'api - accessing' }
 BlRay >> point [
-	<return: #Point>
 
 	^ point
 ]
 
 { #category : #'api - accessing' }
 BlRay >> point: aPoint [
+
 	point := aPoint
 ]
 
 { #category : #printing }
 BlRay >> printOn: aStream [
+
 	aStream
 		print: self point;
 		nextPutAll: ' -> ';
@@ -75,7 +74,7 @@ BlRay >> printOn: aStream [
 { #category : #'api - vector functions' }
 BlRay >> projection: aPoint [
 	"Return a projection of a given point on this ray"
-	<return: #Point>
+
 	| aNormalizedDirection |
 
 	"
@@ -96,8 +95,7 @@ BlRay >> projection: aPoint [
 	X == A + ((P-A).D)D
 	"
 	
-	self vector isZero
-		ifTrue: [ ^ self point ].
+	self vector isZero ifTrue: [ ^ self point ].
 	
 	aNormalizedDirection := self vector normalized.
 	
@@ -106,12 +104,12 @@ BlRay >> projection: aPoint [
 
 { #category : #'api - accessing' }
 BlRay >> vector [
-	<return: #BlVector>
 
 	^ vector
 ]
 
 { #category : #'api - accessing' }
 BlRay >> vector: aBlVector [
+
 	vector := aBlVector
 ]

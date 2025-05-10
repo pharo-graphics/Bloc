@@ -31,9 +31,11 @@ BlElementTransformation >> affineTransformationsDo: aBlockClosure [
 ]
 
 { #category : #converting }
-BlElementTransformation >> asCachedTransformation [
+BlElementTransformation >> asCachedTransformationIn: aRectangle [
 
-	^ BlElementCachedExplicitTransformation forTransformation: self
+	^ BlElementCachedExplicitTransformation
+		  forTransformation: self
+		  in: aRectangle
 ]
 
 { #category : #converting }

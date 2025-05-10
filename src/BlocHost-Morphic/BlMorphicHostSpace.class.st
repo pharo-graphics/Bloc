@@ -5,9 +5,7 @@ For more information and example, please refer to BlMorphicHost.
 "
 Class {
 	#name : #BlMorphicHostSpace,
-	#superclass : #Object,
-	#traits : 'TBlHostSpace + TBlSpaceProperties',
-	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
+	#superclass : #BlAbstractMorphicHostSpace,
 	#instVars : [
 		'spaceHostMorph'
 	],
@@ -23,14 +21,6 @@ BlMorphicHostSpace >> borderless: aBoolean [
 BlMorphicHostSpace >> close [
 
 	self host containerMorph removeMorph: spaceHostMorph
-]
-
-{ #category : #initialization }
-BlMorphicHostSpace >> createFormSurfaceRenderer [
-
-	^ BlMorphicFormSurfaceRenderer new
-		spaceHostMorph: spaceHostMorph;
-		yourself
 ]
 
 { #category : #'host space - cursor' }
@@ -98,19 +88,6 @@ BlMorphicHostSpace >> logicalSize [
 	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
 
 	^ spaceHostMorph extent asLogicalSize
-]
-
-{ #category : #'host space - testing' }
-BlMorphicHostSpace >> needsRebuild [
-	"Return true if window should be recreated after user saved and quit pharo"
-
-	^ false
-]
-
-{ #category : #initialization }
-BlMorphicHostSpace >> newBlHostRendererSurface [
-	
-	^ BlHostRendererFormSurface newForHostSpace: self
 ]
 
 { #category : #'host space - geometry' }

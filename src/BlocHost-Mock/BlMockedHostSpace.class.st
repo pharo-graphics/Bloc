@@ -4,15 +4,14 @@ I am a mocked host space that behaves just like a real one but is invisible and 
 "
 Class {
 	#name : #BlMockedHostSpace,
-	#superclass : #Object,
-	#traits : 'TBlHostSpace + TBlSpaceProperties',
-	#classTraits : 'TBlHostSpace classTrait + TBlSpaceProperties classTrait',
+	#superclass : #BlHostSpace,
+	#traits : 'TBlSpaceProperties',
+	#classTraits : 'TBlSpaceProperties classTrait',
 	#instVars : [
 		'borderless',
 		'cursor',
 		'maximized',
 		'minimized',
-		'eventFetcher',
 		'visible',
 		'opened',
 		'densityDpi',
@@ -126,8 +125,6 @@ BlMockedHostSpace >> initialize [
 
 	super initialize.
 
-	eventFetcher := BlHostEventFetcher hostSpace: self.
-
 	visible := false.
 	minimized := false.
 	maximized := false.
@@ -204,13 +201,6 @@ BlMockedHostSpace >> minimize [
 BlMockedHostSpace >> minimized [
 
 	^ minimized
-]
-
-{ #category : #'host space - testing' }
-BlMockedHostSpace >> needsRebuild [
-	"Return true if window should be recreated after user saved and quit pharo"
-	
-	^ false
 ]
 
 { #category : #'host space - displaying' }

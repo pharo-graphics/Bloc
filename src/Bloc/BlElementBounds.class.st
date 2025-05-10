@@ -53,20 +53,19 @@ BlElementBounds >> bottomRight [
 
 { #category : #accessing }
 BlElementBounds >> bounds [
-	<return: #BlBounds>
+	"Answer a `BlBounds`"
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #'bounds conversion' }
 BlElementBounds >> boundsInLocal: aBlBounds [
-	"I load my local bounds in the given mutable bounds and return it.
+	"Load my local bounds in the given mutable bounds and return it.
 	I do not rely on cache and always provide actual bounds.
 	Local Bounds is nothing else than the bounds with origin point set to 0@0
 	and with extent equal to my pure extent.
 	Local Bounds property does not take effect or border into account.
 	I am a part of internal api, use me with caution"
-	<return: #BlBounds>
 
 	^ aBlBounds
 		left: 0.0
@@ -121,14 +120,14 @@ BlElementBounds >> inChild: anElement [
 
 { #category : #'geometry bounds' }
 BlElementBounds >> inLocal [
-	<return: #BlElementBounds>
+	"Return a `BlElementBounds` in local coordinates."
 
 	^ self subclassResponsibility
 ]
 
 { #category : #'geometry bounds' }
 BlElementBounds >> inParent [
-	<return: #BlElementBounds>
+	"Return a `BlElementBounds` in parent coordinates."
 
 	^ self subclassResponsibility
 ]
@@ -142,7 +141,7 @@ BlElementBounds >> inParent: anElement [
 
 { #category : #'geometry bounds' }
 BlElementBounds >> inSpace [
-	<return: #BlElementBounds>
+	"Return a `BlElementBounds` in space coordinates."
 
 	^ self subclassResponsibility
 ]
@@ -160,7 +159,6 @@ BlElementBounds >> localBoundsToParent: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
 
 	"first apply transformation if we have one"
 	self referenceElement transformation transformBounds: aBounds.
@@ -178,9 +176,8 @@ BlElementBounds >> localBoundsToSpace: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
-	| aCurrentElement |
 
+	| aCurrentElement |
 	aCurrentElement := self referenceElement.
 
 	[
@@ -207,7 +204,6 @@ BlElementBounds >> localBoundsToTransformed: aBounds [
 	Note, that I do not return a new rectangle and instead mutate provided one,
 	so do not forget to send #asRectangle to given mutable rectangle in order to get
 	immutable one that can be safely stored as instance variable."
-	<return: #BlBounds>
 
 	"first apply transformation if we have one"
 	self referenceElement transformation transformBounds: aBounds.

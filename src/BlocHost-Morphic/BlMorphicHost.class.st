@@ -52,25 +52,6 @@ BlMorphicHost >> containerMorph: aMorph [
 	containerMorph := aMorph
 ]
 
-{ #category : #'host - api' }
-BlMorphicHost >> createHostSpaceFor: aSpace [
-	"Create and assign a new morphic host space for given bloc space"
-
-	aSpace hostSpace: (self newHostSpaceFor: aSpace)
-]
-
-{ #category : #'host - api' }
-BlMorphicHost >> destroyHostSpaceFor: aSpace [
-
-	aSpace hostSpace
-		close;
-		detachSpace;
-		detachHost;
-		detachUniverse.
-
-	aSpace detachHostSpace
-]
-
 { #category : #initialization }
 BlMorphicHost >> initialize [
 
@@ -87,7 +68,7 @@ BlMorphicHost >> newHostSpaceFor: aSpace [
 		space: aSpace;
 		host: self;
 		universe: self universe;
-		renderer: BlHostRenderer preferableClass new;
+		renderer: self newHostRenderer;
 		yourself
 ]
 

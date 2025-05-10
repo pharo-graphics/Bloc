@@ -13,7 +13,6 @@ Class {
 
 { #category : #converting }
 BlElementComputedBounds >> asRectangle [
-	<return: #Rectangle>
 	
 	 ^ self bounds asRectangle
 ]
@@ -27,7 +26,7 @@ BlElementComputedBounds >> assertNotOriginal [
 
 { #category : #accessing }
 BlElementComputedBounds >> bounds [
-	<return: #BlBounds>
+	"Answer a `BlBounds`"
 
 	^ bounds
 ]
@@ -68,6 +67,7 @@ BlElementComputedBounds >> inChild: anElement [
 
 { #category : #'geometry bounds' }
 BlElementComputedBounds >> inLocal [
+
 	^ self
 ]
 

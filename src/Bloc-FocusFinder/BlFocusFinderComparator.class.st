@@ -28,8 +28,9 @@ BlFocusFinderComparator >> bounds: aBlBounds of: anElement [
 
 { #category : #initialization }
 BlFocusFinderComparator >> initialize [
+
 	super initialize.
-	
+
 	firstBounds := BlBounds new.
 	secondBounds := BlBorder new
 ]

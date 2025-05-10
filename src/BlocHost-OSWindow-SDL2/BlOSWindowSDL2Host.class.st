@@ -3,7 +3,7 @@ I am a host that opens spaces as OSWindow SDL2 windows.
 "
 Class {
 	#name : #BlOSWindowSDL2Host,
-	#superclass : #BlOSWindowHost,
+	#superclass : #BlHost,
 	#classVars : [
 		'PulseLoop'
 	],
@@ -41,6 +41,12 @@ BlOSWindowSDL2Host class >> priority [
 ]
 
 { #category : #'api - lifecycle' }
+BlOSWindowSDL2Host class >> pulsePeriod [
+
+	^ PulseLoop pulsePeriod
+]
+
+{ #category : #'api - lifecycle' }
 BlOSWindowSDL2Host class >> pulsePeriod: aDuration [
 
 	PulseLoop pulsePeriod: aDuration
@@ -65,25 +71,50 @@ BlOSWindowSDL2Host class >> uiProcessDo: aBlock [
 	PulseLoop loopProcess ifNotNil: aBlock
 ]
 
-{ #category : #private }
-BlOSWindowSDL2Host >> createHostSpace [
-
-	^ BlOSWindowSDL2HostSpace new
-]
-
-{ #category : #'host - api' }
-BlOSWindowSDL2Host >> createHostSpaceFor: aSpace [
-	"Create and assign a new host space for given bloc space"
-
-	| aHostSpace|
-	aHostSpace := self createWindowSpaceFor: aSpace.
-	aHostSpace renderer: BlHostRenderer preferableClass new.
-
-	aSpace hostSpace: aHostSpace
-]
-
 { #category : #initialization }
 BlOSWindowSDL2Host >> keyboardKeyTable [
 
 	^ BlOSWindowSDL2KeyboardKeyTable default
+]
+
+{ #category : #private }
+BlOSWindowSDL2Host >> newAttributesFor: aSpace [
+
+	| theAttributes |
+	theAttributes := OSWindowAttributes new
+		title: aSpace title;
+		extent: aSpace extent;
+		resizable: aSpace isResizable;
+		borderless: aSpace isBorderless;
+		visible: false; "There is a race before opening a window and setting the event handler."
+		yourself.
+
+	aSpace knowsPosition ifTrue: [ 
+		theAttributes position: aSpace position ].
+
+	theAttributes glAttributes:
+		(OSWindowGLAttributes new
+			redSize: 8;
+			greenSize: 8;
+			blueSize: 8;
+			stencilSize: 8;
+			yourself).
+
+	^ theAttributes
+]
+
+{ #category : #'host - api' }
+BlOSWindowSDL2Host >> newHostSpaceFor: aSpace [
+	"Create and assign a new host space for given Bloc space"
+	"Note, that I use given space only to find out what window properties to use for created window.
+	I do not create any strong or weak references to provided space."
+
+	^ BlOSWindowSDL2HostSpace new
+		keyboardKeyTable: self keyboardKeyTable;
+		universe: self universe;
+		host: self;
+		space: aSpace;
+		initializeWithAttributes: (self newAttributesFor: aSpace);
+		renderer: self newHostRenderer;
+		yourself
 ]
