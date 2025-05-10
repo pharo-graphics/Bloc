@@ -254,7 +254,7 @@ BlGridLayoutImpl >> layout: anElement in: aRectangle context: aBlElementBoundsUp
 						heightSpec: (BlMeasurementSpec exact: height asFloat)) ].
 
 		child
-			applyLayoutIn: (cx @ cy extent: width @ height)
+			applyLayoutIn: (BlBounds left: cx top: cy width: width height: height)
 			context: aBlElementBoundsUpdateContext ]
 ]
 
@@ -303,7 +303,8 @@ BlGridLayoutImpl >> measure: anElement with: anExtentSpec [
 	measuredWidth := (widthSansPadding + hPadding).
 	measuredHeight := (heightSansPadding + vPadding).
 
-	anElement measuredExtent: (anExtentSpec sizeFor: measuredWidth @ measuredHeight)
+	anElement measuredExtent:
+		(anExtentSpec sizeForWidth: measuredWidth height: measuredHeight)
 ]
 
 { #category : #'private accessing' }

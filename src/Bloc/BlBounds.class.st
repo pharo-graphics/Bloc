@@ -47,6 +47,16 @@ BlBounds class >> left: aLeft top: aTop right: aRight bottom: aBottom [
 ]
 
 { #category : #'instance creation' }
+BlBounds class >> left: aLeft top: aTop width: aWidth height: aHeight [
+
+	^ self
+		left: aLeft
+		top: aTop
+		right: aLeft + aWidth
+		bottom: aTop + aHeight
+]
+
+{ #category : #'instance creation' }
 BlBounds class >> new [
 
 	^ self
