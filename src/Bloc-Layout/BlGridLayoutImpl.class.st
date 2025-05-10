@@ -254,7 +254,7 @@ BlGridLayoutImpl >> layout: anElement in: aRectangle context: aBlElementBoundsUp
 						heightSpec: (BlMeasurementSpec exact: height asFloat)) ].
 
 		child
-			applyLayoutIn: (cx @ cy extent: width @ height)
+			applyLayoutIn: (BlBounds left: cx top: cy width: width height: height)
 			context: aBlElementBoundsUpdateContext ]
 ]
 

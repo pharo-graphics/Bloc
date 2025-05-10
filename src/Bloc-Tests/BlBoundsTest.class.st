@@ -112,6 +112,18 @@ BlBoundsTest >> testLeftTopRightBottom [
 ]
 
 { #category : #tests }
+BlBoundsTest >> testLeftTopWidthHeight [
+
+	| aBounds |
+	aBounds := BlBounds left: 1.2 top: 3.4 width: 5.6 height: 7.8.
+	
+	self assert: aBounds left equals: 1.2.
+	self assert: aBounds top equals: 3.4.
+	self assert: aBounds right equals: 1.2 + 5.6.
+	self assert: aBounds bottom equals: 3.4 + 7.8
+]
+
+{ #category : #tests }
 BlBoundsTest >> testMerge [
 
 	| aBounds |
