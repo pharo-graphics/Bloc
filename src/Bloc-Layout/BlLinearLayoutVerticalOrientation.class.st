@@ -101,7 +101,7 @@ BlLinearLayoutVerticalOrientation >> layout: anElement in: aRectangle context: a
 			interspacing := turn = 1
 			                ifTrue: [ 0.0 ]
 			                ifFalse: [ self layout interspace ].
-			interspacing > 0.0 ifTrue: [ childBounds := childBounds translateBy: 0 @ interspacing ].
+			interspacing > 0.0 ifTrue: [ childBounds := childBounds translateBy: 0 @ (turn - 1 * interspacing) ].
 			
 			"telling each subnode what bounds to use for layouting process.
 			Because measuring process does not modify actual extent
