@@ -8,6 +8,14 @@ Class {
 }
 
 { #category : #tests }
+BlPharoCodeStylerTest >> expectedFailures [
+
+	^ SystemVersion current major < 12
+		  ifTrue: [ #( testStyleMethod testStyleScript ) ]
+		  ifFalse: [ #(  ) ]
+]
+
+{ #category : #tests }
 BlPharoCodeStylerTest >> testStyleMethod [
 
 	| styler method styledText attributes |
