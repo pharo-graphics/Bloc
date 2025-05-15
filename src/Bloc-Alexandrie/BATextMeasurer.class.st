@@ -2,7 +2,7 @@ Class {
 	#name : #BATextMeasurer,
 	#superclass : #BlHostTextMeasurer,
 	#instVars : [
-		'aeCanvas'
+		'canvas'
 	],
 	#category : #'Bloc-Alexandrie-Text'
 }
@@ -11,13 +11,13 @@ Class {
 BATextMeasurer >> canvas [
 	"Return the Alexandrie canvas"
 
-	^ aeCanvas
+	^ canvas
 ]
 
 { #category : #accessing }
-BATextMeasurer >> canvas: anAeCanvas [
+BATextMeasurer >> canvas: aeCanvas [
 
-	aeCanvas := anAeCanvas
+	canvas := aeCanvas
 ]
 
 { #category : #dispatch }
