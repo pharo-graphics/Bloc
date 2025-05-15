@@ -10,6 +10,8 @@ KeyboardKey >> isShift [
 KeyboardKey class >> unknown [
 
 	| aKeyboardKey |
+	self deprecated: 'To be removed'.
+	
 	aKeyboardKey := self new.
 
 	^ aKeyboardKey withValue: nil andName: self unknownKeyName
