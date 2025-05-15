@@ -4,6 +4,9 @@ I adapt the Shout text styler to work with `BlRopedText` instead of `Text`.
 Class {
 	#name : #BlSHRBTextStyler,
 	#superclass : #SHRBTextStyler,
+	#instVars : [
+		'blocText'
+	],
 	#category : #'Bloc-Text-Text-Styler'
 }
 
@@ -68,23 +71,28 @@ BlSHRBTextStyler class >> foregroundAttributeFor: aPaint [
 { #category : #formatting }
 BlSHRBTextStyler >> addAttributes: attributes from: start to: stop [
 
-	| convertedAttributes |
-	text isEmpty ifTrue: [ ^ self ].
-
-	convertedAttributes := attributes collect: [ :each | each asBlTextAttribute ].
-
-	text attributes: convertedAttributes from: start to: stop
+	blocText
+		attributes: (attributes collect: [ :each | each asBlTextAttribute ])
+		from: start to: stop
 ]
 
 { #category : #private }
-BlSHRBTextStyler >> style: aText ast: ast [
+BlSHRBTextStyler >> style: aBlText ast: ast [
 
-	text := aText.
-	text attributes: (self attributesFor: #default).
+	aBlText ifEmpty: [ ^ self ].
+	blocText := aBlText.
 
 	bracketLevel := 0.
 	parentheseLevel := 0.
 	braceLevel := 0.
 
-	[ self visitNode: ast ] ensure: [ text := nil ]
+	self visitNode: ast.
+	"Second pass to ensure that all syntax errors are visible"
+	ast allErrorNotices do: [ :notice |
+		notice isSyntaxError ifTrue: [
+			self addStyle: #invalid from: notice position to: notice position ] ].
+
+	blocText := nil.
+
+	^ aBlText
 ]
