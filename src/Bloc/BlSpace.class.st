@@ -562,6 +562,26 @@ BlSpace >> currentCursor: aCursor [
 	self updateCursor: aCursor
 ]
 
+{ #category : #'change - rendering' }
+BlSpace >> damagedRectangle [
+
+	| bounds |
+	elementsNeedingPaint do: [ :each |
+		bounds
+			ifNil: [ bounds := each damagedBoundsInSpace copy ]
+			ifNotNil: [ bounds merge: each damagedBoundsInSpace ] ].
+
+	^ bounds expand
+]
+
+{ #category : #'change - rendering' }
+BlSpace >> damagedRectangles [
+
+	^ elementsNeedingPaint
+		  collect: [ :each | each damagedBoundsInSpace ]
+		  as: Array
+]
+
 { #category : #initialization }
 BlSpace >> defaultEventDispatcher [
 	^ BlDirectEventDispatcher on: self
@@ -627,13 +647,6 @@ BlSpace >> densityDpi [
 BlSpace >> dequeueTask: aBlTask [
 	self taskQueue dequeue: aBlTask.
 	self requestNextPulse
-]
-
-{ #category : #'host space - accessing' }
-BlSpace >> detachHostSpace [
-	"Detach my current host space if I have one"
-
-	hostSpace := nil
 ]
 
 { #category : #'children dispatching' }
@@ -842,7 +855,7 @@ BlSpace >> ensureWindowOpen [
 
 	hostSpace ifNotNil: [
 		hostSpace isValid ifFalse: [
-			host createHostSpaceFor: self.
+			self setUpHostSpace.
 			previousVisibleStatus ifTrue: [ hostSpace open ] ] ]
 ]
 
@@ -974,7 +987,6 @@ BlSpace >> hasFocus: anElement [
 { #category : #'host space - accessing' }
 BlSpace >> hasHostSpace [
 	"Return true if I have a host space, false otherwise"
-	<return: #Boolean>
 
 	^ self hostSpace isNotNil
 ]
@@ -1074,12 +1086,11 @@ BlSpace >> hostSpaceDo: aBlock [
 
 { #category : #'host space - accessing' }
 BlSpace >> hostSpaceDo: aBlock ifAbsent: anAbsentBlock [
-	self hasHostSpace
-		ifFalse: [ ^ anAbsentBlock value ].
 
-	self hostSpace needsRebuild
-		ifTrue: [ ^ anAbsentBlock value ].
-		
+	self hasHostSpace ifFalse: [ ^ anAbsentBlock value ].
+
+	self hostSpace isValid ifFalse: [ ^ anAbsentBlock value ].
+
 	^ aBlock cull: self hostSpace
 ]
 
@@ -1294,7 +1305,7 @@ BlSpace >> markNeedsCompositionPaint: anElement from: aSourceElement [
 { #category : #'change - rendering' }
 BlSpace >> markNeedsPaint: anElement from: aSourceElement [
 
-	elementsNeedingPaint add: anElement.
+	elementsNeedingPaint add: aSourceElement.
 	self requestHostSpaceRedraw.
 	self requestNextPulse
 ]
@@ -1536,6 +1547,12 @@ BlSpace >> setPosition: aPoint [
 	position := aPoint
 ]
 
+{ #category : #'host space - accessing' }
+BlSpace >> setUpHostSpace [
+
+	hostSpace := host newHostSpaceFor: self
+]
+
 { #category : #'api - displaying' }
 BlSpace >> show [
 	"Show this space to the user, using current host and other parameters such as extent, title, etc."
@@ -1591,6 +1608,16 @@ BlSpace >> taskQueue [
 	<return: #BlSpaceTaskQueue>
 	
 	^ tasks
+]
+
+{ #category : #'host space - accessing' }
+BlSpace >> tearDownHostSpace [
+	"Detach my current host space if I have one"
+
+	hostSpace ifNil: [ ^ self ].
+
+	hostSpace tearDown.
+	hostSpace := nil
 ]
 
 { #category : #accessing }

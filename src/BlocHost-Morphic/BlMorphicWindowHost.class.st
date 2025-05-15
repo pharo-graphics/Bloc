@@ -25,31 +25,6 @@ BlMorphicWindowHost class >> priority [
 	^ 20
 ]
 
-{ #category : #'host - api' }
-BlMorphicWindowHost >> createHostSpaceFor: aSpace [
-	"Create and assign a new morphic host space for received Bloc space"
-
-	aSpace hostSpace: (self newHostSpaceFor: aSpace)
-]
-
-{ #category : #'host - api' }
-BlMorphicWindowHost >> destroyHostSpaceFor: aSpace [
-
-	aSpace hostSpace
-		close;
-		detachSpace;
-		detachHost;
-		detachUniverse.
-
-	aSpace detachHostSpace
-]
-
-{ #category : #testing }
-BlMorphicWindowHost >> isStillAvailable [
-
-	^ self class isSupported
-]
-
 { #category : #private }
 BlMorphicWindowHost >> newHostSpaceFor: aSpace [
 
@@ -58,7 +33,7 @@ BlMorphicWindowHost >> newHostSpaceFor: aSpace [
 		space: aSpace;
 		host: self;
 		universe: self universe;
-		renderer: BlHostRenderer preferableClass new;
+		renderer: self newHostRenderer;
 		yourself
 ]
 

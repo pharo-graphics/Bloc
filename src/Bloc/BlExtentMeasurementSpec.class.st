@@ -101,9 +101,15 @@ BlExtentMeasurementSpec >> printOn: aStream [
 { #category : #geometry }
 BlExtentMeasurementSpec >> sizeFor: anExtent [
 
+	^ self sizeForWidth: anExtent x height: anExtent y
+]
+
+{ #category : #geometry }
+BlExtentMeasurementSpec >> sizeForWidth: aWidth height: aHeight [
+
 	| width height |
-	width := widthSpec sizeFor: anExtent x.
-	height := heightSpec sizeFor: anExtent y.
+	width := widthSpec sizeFor: aWidth.
+	height := heightSpec sizeFor: aHeight.
 
 	^ width @ height
 ]

@@ -6,15 +6,13 @@ I am responsible for error handling that occur in the `BlElement`
 Class {
 	#name : #BlErrorHandler,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#category : #'Bloc-Basic-Errors'
 }
 
 { #category : #private }
 BlErrorHandler >> convertToHandledError: anError in: anElement [
-	| aHandledError |
 
+	| aHandledError |
 	aHandledError := BlHandledError new.
 	aHandledError error: anError freeze.
 	aHandledError errorHandler: self.
@@ -26,21 +24,19 @@ BlErrorHandler >> convertToHandledError: anError in: anElement [
 
 { #category : #accessing }
 BlErrorHandler >> errors [
-	<return: #Collection of: #BlHandledError>
+	"Return a collection of `BlHandledError`. Subclasses should override this default behavior."
 
 	^ #()
 ]
 
 { #category : #accessing }
 BlErrorHandler >> errorsForPhase: aFramePhase [
-	<return: #Collection of: #BlSpaceFramePhase>
 
 	^ self errors select: [ :aHandledError | aHandledError framePhase = aFramePhase ]
 ]
 
 { #category : #private }
 BlErrorHandler >> framePhaseOf: anElement [
-	<return: #BlSpaceFramePhase>
 
 	^ anElement isAttachedToSceneGraph
 		ifTrue: [ anElement space frame currentPhase ]
@@ -59,8 +55,8 @@ BlErrorHandler >> handleCriticalError: aHandledError [
 { #category : #'error handling' }
 BlErrorHandler >> handleError: anError in: anElement [
 	"Handle a given error that comes from a provided visual element"
-	| aHandledError |
 
+	| aHandledError |
 	aHandledError := self convertToHandledError: anError in: anElement.
 
 	self registerError: aHandledError.
@@ -69,20 +65,19 @@ BlErrorHandler >> handleError: anError in: anElement [
 
 { #category : #testing }
 BlErrorHandler >> hasError [
-	<return: #Boolean>
 	
 	^ self subclassResponsibility
 ]
 
 { #category : #testing }
 BlErrorHandler >> matches: aFramePhase [
-	<return: #Boolean>
 
 	^ self subclassResponsibility
 ]
 
 { #category : #'error handling' }
 BlErrorHandler >> processError: aHandledError [
+
 	self subclassResponsibility
 ]
 
@@ -97,7 +92,7 @@ BlErrorHandler >> registerError: aHandledError [
 BlErrorHandler >> with: anElement do: aBlock [
 	"Evaluate a given block while handling errors"
 
-	self with: anElement do: aBlock failed: [  ]
+	self with: anElement do: aBlock failed: [ ]
 ]
 
 { #category : #enumerating }

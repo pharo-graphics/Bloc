@@ -24,7 +24,3 @@ BlHeadlessBufferSurfaceRenderer >> initializeForSurface: aSurface [
 		stride: aForm stride;
 		extent: anExtent
 ]
-
-{ #category : #initialization }
-BlHeadlessBufferSurfaceRenderer >> renderSurface: aSurface damaged: aCollectionOfRectangles [
-]

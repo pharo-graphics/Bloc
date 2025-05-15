@@ -181,21 +181,22 @@ BlScalableElement >> onLayout: aBounds context: aBlElementBoundsUpdateContext [
 
 { #category : #layout }
 BlScalableElement >> onMeasure: anExtentMeasurementSpec [
-	| aScaleFactor aTransformedExtent |
+
+	| aScaleFactor |
 	"First we perform a default measurement"
 	super onMeasure: anExtentMeasurementSpec.
-	
-	self hasContentElement
-		ifFalse: [ ^ self ].
-	
+
+	self hasContentElement ifFalse: [ ^ self ].
+
 	"and then we scale a content element according to scaling strategy"
 	aScaleFactor := self measureScale.
 
-	self contentElement
-		transformDo: [ :t | t scaleBy: (aScaleFactor @ aScaleFactor) ].
-	
-	aTransformedExtent := self contentElement measuredBounds transformed extent.
-	self measuredExtent: (anExtentMeasurementSpec sizeFor: aTransformedExtent)
+	self contentElement transformDo: [ :t |
+		t scaleBy: aScaleFactor @ aScaleFactor ].
+
+	self measuredExtent:
+		(anExtentMeasurementSpec sizeFor:
+			self contentElement measuredBounds transformed extent)
 ]
 
 { #category : #accessing }

@@ -17,14 +17,14 @@ Class {
 BlElementEffect >> computeBounds: aBlBounds [
 	"Compute effect bounds based on provided geometry bounds.
 	Default implementation simply returns given bounds"
-	<return: #BlBounds>
 
 	^ aBlBounds
 ]
 
 { #category : #geometry }
-BlElementEffect >> effectBounds: aBlBounds of: anElement [
-	^ self computeBounds: (aBlBounds rectangle: anElement visualBounds)
+BlElementEffect >> computeEffectBoundsInto: aBlBounds [
+
+	^ self computeBounds: aBlBounds
 ]
 
 { #category : #testing }

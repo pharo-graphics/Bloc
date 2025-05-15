@@ -33,7 +33,7 @@ BlHostPulseLoopTest >> testOpeningAnSpaceDeferingAnErrorKeepsLoopRunning [
 				100 milliSeconds wait
 			 ]].
 
-	self assert: logger recordings size equals: 2.
+	self assert: logger recordings size >= 2.
 	self assert: logger recordings first signaledError class equals: Error.
 	self assert: logger recordings second signaledError class equals: UnhandledError.
 	

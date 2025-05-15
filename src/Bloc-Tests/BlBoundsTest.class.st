@@ -8,6 +8,22 @@ Class {
 }
 
 { #category : #tests }
+BlBoundsTest >> testARectangleContainsItsOrigin [
+
+	| bounds |
+	bounds := BlBounds origin: 10 @ 10 corner: 20 @ 20.
+	self assert: (bounds containsPoint: bounds origin)
+]
+
+{ #category : #tests }
+BlBoundsTest >> testARectangleDoesNotContainItsCorner [
+
+	| bounds |
+	bounds := BlBounds origin: 10 @ 10 corner: 20 @ 20.
+	self deny: (bounds containsPoint: bounds corner)
+]
+
+{ #category : #tests }
 BlBoundsTest >> testCompress [
 
 	| aBounds |
@@ -26,6 +42,14 @@ BlBoundsTest >> testCompress [
 	self assert: aBounds top equals: 3.
 	self assert: aBounds right equals: 3.
 	self assert: aBounds bottom equals: 4
+]
+
+{ #category : #tests }
+BlBoundsTest >> testContainsPoint [
+
+	| bounds |
+	bounds := BlBounds origin: 10 @ 10 corner: 20 @ 20.
+	self assert: (bounds containsPoint: bounds center)
 ]
 
 { #category : #tests }
@@ -85,6 +109,18 @@ BlBoundsTest >> testLeftTopRightBottom [
 	self assert: aBounds top equals: -6.5.
 	self assert: aBounds right equals: 4.3.
 	self assert: aBounds bottom equals: 2.1
+]
+
+{ #category : #tests }
+BlBoundsTest >> testLeftTopWidthHeight [
+
+	| aBounds |
+	aBounds := BlBounds left: 1.2 top: 3.4 width: 5.6 height: 7.8.
+	
+	self assert: aBounds left equals: 1.2.
+	self assert: aBounds top equals: 3.4.
+	self assert: aBounds right equals: 1.2 + 5.6.
+	self assert: aBounds bottom equals: 3.4 + 7.8
 ]
 
 { #category : #tests }

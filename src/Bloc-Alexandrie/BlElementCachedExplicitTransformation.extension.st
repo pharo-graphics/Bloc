@@ -6,11 +6,12 @@ BlElementCachedExplicitTransformation >> aeApplyTo: aeCanvas [
 	self ensureMatrix.
 
 	aeCanvas pathTransform:
-		(AeCairoMatrix
-			 newX: matrix x
-			 y: matrix y
-			 sx: matrix sx
-			 sy: matrix sy
-			 shx: matrix shx
-			 shy: matrix shy)
+		(BASharedCairoMatrix value
+			beX: matrix x
+			y: matrix y
+			sx: matrix sx
+			sy: matrix sy
+			shx: matrix shx
+			shy: matrix shy;
+			yourself)
 ]

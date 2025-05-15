@@ -54,7 +54,7 @@ BlSpaceStatistics >> frameEnded: id [
 	currentFrames := currentFrames + 1.
 	totalFrames := totalFrames + 1.
 
-
+	listeners do: [ :e | e frameEnded ].
 ]
 
 { #category : #events }

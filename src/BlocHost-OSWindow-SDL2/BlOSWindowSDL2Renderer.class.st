@@ -3,14 +3,14 @@ I am an Bloc OSWindow renderer which uses SDL2.
 "
 Class {
 	#name : #BlOSWindowSDL2Renderer,
-	#superclass : #BlOSWindowRenderer,
+	#superclass : #OSWindowRenderer,
 	#instVars : [
 		'sdlRenderer'
 	],
 	#pools : [
 		'SDL2Constants'
 	],
-	#category : #'BlocHost-OSWindow-SDL2-Renderer'
+	#category : #'BlocHost-OSWindow-SDL2'
 }
 
 { #category : #'instance creation' }
@@ -39,6 +39,10 @@ BlOSWindowSDL2Renderer >> destroy [
 	super destroy.
 ]
 
+{ #category : #'updating screen' }
+BlOSWindowSDL2Renderer >> exposed [
+]
+
 { #category : #initialization }
 BlOSWindowSDL2Renderer >> initializeWith: aSDL2BackendWindow [
 
@@ -59,8 +63,28 @@ BlOSWindowSDL2Renderer >> present [
 	
 ]
 
+{ #category : #'updating screen' }
+BlOSWindowSDL2Renderer >> resized [
+	
+]
+
 { #category : #accessing }
 BlOSWindowSDL2Renderer >> sdlRenderer [
 
 	^ sdlRenderer
+]
+
+{ #category : #'updating screen' }
+BlOSWindowSDL2Renderer >> updateAll [
+	self shouldNotImplement
+]
+
+{ #category : #'updating screen' }
+BlOSWindowSDL2Renderer >> updateRectangle: aRectangle [
+	self shouldNotImplement
+]
+
+{ #category : #'updating screen' }
+BlOSWindowSDL2Renderer >> updateRectangles: allDamage [
+	self shouldNotImplement
 ]

@@ -17,16 +17,18 @@ BlLayoutParentNodeWithTransformation >> children: aBlLayoutNodeChildren [
 BlLayoutParentNodeWithTransformation >> extent: aPoint [
 
 	super extent: aPoint.
-	self transformation boundingRectangle:
-		(BlBounds origin: self position extent: aPoint)
+
+	transformation boundingRectangle:
+		(Rectangle origin: self position extent: aPoint)
 ]
 
 { #category : #accessing }
 BlLayoutParentNodeWithTransformation >> position: aPoint [
 
 	super position: aPoint.
-	self transformation boundingRectangle:
-		(BlBounds origin: aPoint extent: self extent)
+	
+	transformation boundingRectangle:
+		(Rectangle origin: aPoint extent: self extent)
 ]
 
 { #category : #accessing }
@@ -38,11 +40,11 @@ BlLayoutParentNodeWithTransformation >> transformation [
 { #category : #accessing }
 BlLayoutParentNodeWithTransformation >> transformation: aBlElementTransformation [
 
-	transformation := aBlElementTransformation asCachedTransformation
-		                  boundingRectangle:
-		                  (BlBounds
-			                   origin: self position
-			                   extent: self extent)
+	transformation :=
+		aBlElementTransformation asCachedTransformationIn:
+			(Rectangle
+				origin: self position
+				extent: self extent)
 ]
 
 { #category : #accessing }

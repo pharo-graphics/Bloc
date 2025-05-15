@@ -24,6 +24,5 @@ BlChildrenSortedByElevation >> sortedByElevation [
 { #category : #initialization }
 BlChildrenSortedByElevation >> subsetFrom: aBlChildren [
 	"Perform the sort when the instance is created."
-	^ aBlChildren asArray sorted: [ :a :b | 
-		(a elevation relatedTo: 0) <= (b elevation relatedTo: 0) ]
+	^ aBlChildren asArray sorted: [ :a :b | a elevation elevation <= b elevation elevation  ]
 ]

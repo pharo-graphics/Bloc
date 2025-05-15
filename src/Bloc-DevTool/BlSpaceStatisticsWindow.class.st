@@ -44,7 +44,7 @@ BlSpaceStatisticsWindow >> createStatisticsElement [
 	
 	statiticsElement layout: (BlGridLayout horizontal
 			 columnCount: 2;
-			 cellSpacing: 6;
+			 cellSpacing: 3;
 			 yourself).
 
 	statiticsElement addChildren: {
@@ -89,6 +89,10 @@ BlSpaceStatisticsWindow >> doRefresh [
 				nameElement text: stats first name asRopedText .
 				timeElement text: ('{1} / {2} %' format: { stats second. (stats third * 100) roundTo: 0.01 }) asRopedText]
 			ifFalse: [ timeElement text: '' asRopedText. nameElement text: '' asRopedText ]]
+]
+
+{ #category : #'as yet unclassified' }
+BlSpaceStatisticsWindow >> frameEnded [
 ]
 
 { #category : #initialization }

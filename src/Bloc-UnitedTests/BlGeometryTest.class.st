@@ -124,14 +124,14 @@ BlGeometryTest >> testElLocalAndGlobalBoundsConvertion [
 	self assert: g position equals: 10 @ 10.
 	self assert: g geometryBounds equals: (0 @ 0 corner: 100 @ 100).
 	self
-		assert: g geometryBoundsInSpace
+		assert: g geometryBoundsInSpace asRectangle
 		equals: (10 @ 10 corner: 110 @ 110).
 
 	self
-		assert: (g globalBoundsToLocal:
-				 (BlBounds fromRectangle: (10 @ 10 corner: 110 @ 110)))
-				asRectangle
-		equals: g geometryBounds.
+		assert:
+			(g globalBoundsToLocal:
+				 (BlBounds origin: 10 @ 10 corner: 110 @ 110)) asRectangle
+		equals: g geometryBounds asRectangle.
 	"is the same as"
 	self
 		assert:

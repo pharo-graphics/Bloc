@@ -26,6 +26,16 @@ BlBounds class >> fromRectangle: aRectangle [
 ]
 
 { #category : #'instance creation' }
+BlBounds class >> left: aLeft top: aTop corner: aCorner [
+
+	^ self
+		left: aLeft
+		top: aTop
+		right: aCorner x
+		bottom: aCorner y
+]
+
+{ #category : #'instance creation' }
 BlBounds class >> left: aLeft top: aTop right: aRight bottom: aBottom [
 
 	^ self basicNew
@@ -34,6 +44,16 @@ BlBounds class >> left: aLeft top: aTop right: aRight bottom: aBottom [
 		right: aRight
 		bottom: aBottom;
 		yourself
+]
+
+{ #category : #'instance creation' }
+BlBounds class >> left: aLeft top: aTop width: aWidth height: aHeight [
+
+	^ self
+		left: aLeft
+		top: aTop
+		right: aLeft + aWidth
+		bottom: aTop + aHeight
 ]
 
 { #category : #'instance creation' }
@@ -223,7 +243,8 @@ BlBounds >> containedInRect: aRectangle [
 BlBounds >> containsPoint: aPoint [ 
 	"Answer whether aPoint is within the receiver."
 
-	^ self origin <= aPoint and: [ aPoint < self corner ]
+	^ left <= aPoint x and: [ aPoint x < right and: [
+		top <= aPoint y and: [ aPoint y < bottom ] ] ]
 ]
 
 { #category : #testing }
@@ -395,6 +416,14 @@ BlBounds >> hasPositiveExtent [
 	^ right > left and: [ bottom > top ]
 ]
 
+{ #category : #comparing }
+BlBounds >> hash [
+	"Hash is reimplemented because = is reimplemented."
+
+	^ (top hash hashMultiply + left hash) hashMultiply bitXor:
+		  (bottom hash hashMultiply + right hash) hashMultiply
+]
+
 { #category : #accessing }
 BlBounds >> height [
 
@@ -403,29 +432,25 @@ BlBounds >> height [
 
 { #category : #'rectangle functions' }
 BlBounds >> intersect: aRectangle ifNone: aBlock [
-	"Answer a Rectangle that is the area in which the receiver overlaps with 
-	aRectangle. 
-	If there's no overlap, evaluate the block instead."
+	"Answer a new instance with the intersection with the received argument.
+	If there is no intersection evaluate the block, instead."
 
-	| aLeft aTop aRight aBottom newLeft newTop newRight newBottom |
-
-	(self intersects: aRectangle) ifFalse: [ ^ aBlock value ].
-	
+	| aLeft aTop aRight aBottom |
 	aLeft := aRectangle left.
 	aTop := aRectangle top.
 	aRight := aRectangle right.
 	aBottom := aRectangle bottom.
-	
-	newLeft := aLeft max: left.
-	newTop := aTop max: top.
-	newRight := aRight min: right.
-	newBottom := aBottom min: bottom.
 
-	^ self class new
-		left: newLeft
-		top: newTop
-		right: newRight
-		bottom: newBottom
+	aRight <= left ifTrue: [ ^ aBlock value ].
+	aBottom <= top ifTrue: [ ^ aBlock value ].
+	aLeft >= right ifTrue: [ ^ aBlock value ].
+	aTop >= bottom ifTrue: [ ^ aBlock value ].
+	
+	^ self class
+		left: (aLeft max: left)
+		top: (aTop max: top)
+		right: (aRight min: right)
+		bottom: (aBottom min: bottom)
 ]
 
 { #category : #testing }

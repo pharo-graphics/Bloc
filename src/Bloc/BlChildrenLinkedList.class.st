@@ -27,12 +27,14 @@ BlChildrenLinkedList >> add: aChild at: anIndex [
 			^ self ].
 	
 	aLinkAt := list linkAt: anIndex - 1.
-	list add: aChild afterLink: aLinkAt
+	list add: aChild afterLink: aLinkAt.
+	self resetCache
 ]
 
 { #category : #'children - adding' }
 BlChildrenLinkedList >> addAll: aSequenceableCollection [
-	list addAll: aSequenceableCollection
+	list addAll: aSequenceableCollection.
+	self resetCache
 ]
 
 { #category : #'children - accessing' }
@@ -52,7 +54,8 @@ BlChildrenLinkedList >> do: aBlock [
 BlChildrenLinkedList >> initialize [
 	super initialize.
 	
-	list := LinkedList new
+	list := LinkedList new.
+	self resetCache
 ]
 
 { #category : #accessing }
@@ -62,7 +65,8 @@ BlChildrenLinkedList >> name [
 
 { #category : #'children - removing' }
 BlChildrenLinkedList >> removeAll: aCollectionOfBlElement [
-	list removeAll: aCollectionOfBlElement
+	list removeAll: aCollectionOfBlElement.
+	self resetCache
 ]
 
 { #category : #'children - removing' }
@@ -70,7 +74,8 @@ BlChildrenLinkedList >> removeAt: anIndex [
 	| aLinkAt |
 
 	aLinkAt := list linkAt: anIndex.
-	list removeLink: aLinkAt
+	list removeLink: aLinkAt.
+	self resetCache
 ]
 
 { #category : #'children - accessing' }
