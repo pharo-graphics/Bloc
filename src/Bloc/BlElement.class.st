@@ -3873,9 +3873,10 @@ BlElement >> visualBounds [
 	By default, visual bounds of `inside` outskits equal to geometry bounds since border
 	is never rendered outside of the element's geometry."
 
-	self deprecated: 'Use computeVisualBoundsInto:'.
-
-	^ (self geometry strokedBounds: BlBounds new of: self) asRectangle
+	| bnds |
+	bnds := BlBounds new.
+	self computeVisualBoundsInto: bnds.
+	^ bnds
 ]
 
 { #category : #'event handling' }
