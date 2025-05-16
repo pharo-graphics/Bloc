@@ -35,7 +35,8 @@ BaselineOfBloc >> baseline: spec [
 			package: #'Bloc-PullAndSlide' with: [ spec requires: #( 'Bloc' ) ];
 			package: #'Bloc-FocusFinder' with: [ spec requires: #( 'Bloc' ) ];
 			package: #'Bloc-Overlay' with: [ spec requires: #( 'Bloc' ) ];
-			package: #'Bloc-Scalable' with: [ spec requires: #( 'Bloc' ) ].
+			package: #'Bloc-Scalable' with: [ spec requires: #( 'Bloc' ) ];
+			package: #'Bloc-CommandApplier' with: [ spec requires: #( 'Bloc' ) ].
 
 		"Animation"
 		spec
