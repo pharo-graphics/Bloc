@@ -89,8 +89,9 @@ BlOSWindowSDL2Host >> newAttributesFor: aSpace [
 		visible: false; "There is a race before opening a window and setting the event handler."
 		yourself.
 
-	aSpace knowsPosition ifTrue: [ 
-		theAttributes position: aSpace position ].
+	aSpace knowsPosition
+		ifTrue: [ theAttributes position: aSpace position ]
+		ifFalse: [ theAttributes windowCentered: true ].
 
 	theAttributes glAttributes:
 		(OSWindowGLAttributes new
