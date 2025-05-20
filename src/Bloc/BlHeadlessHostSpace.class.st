@@ -133,12 +133,6 @@ BlHeadlessHostSpace >> minimized [
 	^ false
 ]
 
-{ #category : #initialization }
-BlHeadlessHostSpace >> newSurfaceRenderer [
-	
-	^ BlHeadlessBufferSurfaceRenderer new
-]
-
 { #category : #'host space - geometry' }
 BlHeadlessHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
