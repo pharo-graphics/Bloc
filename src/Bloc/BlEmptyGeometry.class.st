@@ -47,10 +47,6 @@ BlEmptyGeometry >> matchElement: anElement [
 ]
 
 { #category : #'api - cache' }
-BlEmptyGeometry >> releaseCache [
-]
-
-{ #category : #'api - cache' }
 BlEmptyGeometry >> releaseStrokedBoundsCache [
 ]
 
