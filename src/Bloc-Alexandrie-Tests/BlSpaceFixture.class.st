@@ -693,6 +693,29 @@ BlSpaceFixture >> buildGradientsInBorder [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildHistogram [
+
+	| ramp orientations |
+	ramp := 0 to: 1 by: 0.2.
+	orientations := #(beBottomToTop beLeftToRight beRightToLeft beTopToBottom).
+
+	builder spaceExtent: 10 * orientations size @ 20.
+	builder space root layout: BlLinearLayout horizontal.
+
+	orientations withIndexDo: [ :each :index |
+			| g |
+			g := BlHistogramGeometry new.
+			g values: ramp.
+			g perform: each.
+
+			builder addToRoot
+				width: 10;
+				height: 20;
+				background: builder nextColor;
+				geometry: g ]
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildImagesAndTransformations [
 	
 	| outskirts positionGenerator addElementBlock |
