@@ -697,7 +697,7 @@ BlSpaceFixture >> buildHistogram [
 
 	| ramp orientations |
 	ramp := 0 to: 1 by: 0.2.
-	orientations := #(beBottomToTop beLeftToRight beRightToLeft beTopToBottom).
+	orientations := #(#beHorizontal beVertical beVerticalInverted #beHorizontalInverted).
 
 	builder spaceExtent: 10 * orientations size @ 20.
 	builder space root layout: BlLinearLayout horizontal.

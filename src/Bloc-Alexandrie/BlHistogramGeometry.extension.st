@@ -5,6 +5,6 @@ BlHistogramGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
 	aeCanvas pathFactory: [ :cairoContext |
 		"Cairo treats first lineTo: as a moveTo:"
-		self computedVertices do: [ :each | cairoContext lineTo: each ].
+		self vertices do: [ :each | cairoContext lineTo: each ].
 		cairoContext closePath ]
 ]

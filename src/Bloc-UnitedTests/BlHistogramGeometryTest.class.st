@@ -9,65 +9,101 @@ Class {
 }
 
 { #category : #tests }
-BlHistogramGeometryTest >> testBottomToTop [
+BlHistogramGeometryTest >> testBeHorizontal [
 
-	<sampleInstance>
 	| aHistogram |
 	aHistogram := BlHistogramGeometry new
-		              beBottomToTop;
-		              values: #( 0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1 ).
-	^ aHistogram
+		              beHorizontal;
+		              values: #( 0.2 1.0 0.5 );
+		              yourself.
+
+	self assert: aHistogram vertices equals: {
+			(0.0 @ 100.0).
+			(0.0 @ 80.0).
+			(50.0 @ 80.0).
+			(50.0 @ 0.0).
+			(100.0 @ 0.0).
+			(100.0 @ 50.0).
+			(150.0 @ 50.0).
+			(150.0 @ 100.0) }
+]
+
+{ #category : #tests }
+BlHistogramGeometryTest >> testBeHorizontalInverted [
+
+	| aHistogram |
+	aHistogram := BlHistogramGeometry new
+		              beHorizontalInverted;
+		              values: #( 0.2 1.0 0.5 );
+		              yourself.
+
+	self assert: aHistogram vertices equals: {
+			(0.0 @ 0.0).
+			(0.0 @ 20.0).
+			(50.0 @ 20.0).
+			(50.0 @ 100.0).
+			(100.0 @ 100.0).
+			(100.0 @ 50.0).
+			(150.0 @ 50.0).
+			(150.0 @ 0.0) }
+]
+
+{ #category : #tests }
+BlHistogramGeometryTest >> testBeVertical [
+
+	| aHistogram |
+	aHistogram := BlHistogramGeometry new
+		              beVertical;
+		              values: #( 0.2 1.0 0.5 );
+		              yourself.
+
+	self assert: aHistogram vertices equals: {
+			(0.0 @ 0.0).
+			(30.0 @ 0.0).
+			(30.0 @ 33.333333333333336).
+			(150.0 @ 33.333333333333336).
+			(150.0 @ 66.66666666666667).
+			(75.0 @ 66.66666666666667).
+			(75.0 @ 100.0).
+			(0.0 @ 100.0) }
+]
+
+{ #category : #tests }
+BlHistogramGeometryTest >> testBeVerticalInverted [
+
+	| aHistogram |
+	aHistogram := BlHistogramGeometry new
+		              beVerticalInverted;
+		              values: #( 0.2 1.0 0.5 );
+		              yourself.
+
+	self assert: aHistogram vertices equals: {
+			(150.0 @ 0.0).
+			(120.0 @ 0.0).
+			(120.0 @ 33.333333333333336).
+			(0.0 @ 33.333333333333336).
+			(0.0 @ 66.66666666666667).
+			(75.0 @ 66.66666666666667).
+			(75.0 @ 100.0).
+			(150.0 @ 100.0) }
 ]
 
 { #category : #tests }
 BlHistogramGeometryTest >> testDefault [
 
-	<sampleInstance>
 	| aHistogram |
 	aHistogram := BlHistogramGeometry new.
 	self assert: aHistogram extent equals: 150 @ 100.
 	self
 		assert: aHistogram values
 		equals: #( 0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1 ).
-	self assert: aHistogram isBottomToTop.
-	self assert: aHistogram isTopToBottom not.
-	self assert: aHistogram isRightToLeft not.
-	self assert: aHistogram isLeftToRight not.
-	self assert: aHistogram computeOrigin equals: 0 @ 100.
-	self assert: aHistogram computeDelta equals: 15 @ 0.
-	self assert: aHistogram computeLengthVector equals: 0 @ -1.
-	^ aHistogram
-]
 
-{ #category : #tests }
-BlHistogramGeometryTest >> testLeftToRight [
+	self assert: aHistogram isHorizontal.
+	self deny: aHistogram isHorizontalInverted.
+	self deny: aHistogram isVerticalInverted.
+	self deny: aHistogram isVertical.
 
-	<sampleInstance>
-	| aHistogram |
-	aHistogram := BlHistogramGeometry new
-		              beLeftToRight;
-		              values: #( 0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1 ).
-	^ aHistogram
-]
-
-{ #category : #tests }
-BlHistogramGeometryTest >> testRightToLeft [
-
-	<sampleInstance>
-	| aHistogram |
-	aHistogram := BlHistogramGeometry new
-		              beRightToLeft;
-		              values: #( 0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1 ).
-	^ aHistogram
-]
-
-{ #category : #tests }
-BlHistogramGeometryTest >> testTopToBottom [
-
-	<sampleInstance>
-	| aHistogram |
-	aHistogram := BlHistogramGeometry new
-		              beTopToBottom;
-		              values: #( 0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1 ).
-	^ aHistogram
+	self assert: aHistogram origin equals: 0 @ 100.
+	self assert: aHistogram delta equals: 15 @ 0.
+	self assert: aHistogram direction equals: 0 @ -1
 ]

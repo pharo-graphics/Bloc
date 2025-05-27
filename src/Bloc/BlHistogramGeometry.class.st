@@ -11,10 +11,10 @@ Class {
 		'orientation'
 	],
 	#classVars : [
-		'BottomToTop',
-		'LeftToRight',
-		'RightToLeft',
-		'TopToBottom'
+		'Horizontal',
+		'HorizontalInverted',
+		'Vertical',
+		'VerticalInverted'
 	],
 	#category : #'Bloc-Basic-Geometry'
 }
@@ -22,93 +22,38 @@ Class {
 { #category : #'class initialization' }
 BlHistogramGeometry class >> initialize [
 
-	LeftToRight := #leftToRight.
-	RightToLeft := #rightToLeft.
-	BottomToTop := #bottomToTop.
-	TopToBottom := #topToBottom
+	Vertical := #Vertical.
+	VerticalInverted := #VerticalInverted.
+	Horizontal := #Horizontal.
+	HorizontalInverted := #HorizontalInverted
 ]
 
 { #category : #accessing }
-BlHistogramGeometry >> beBottomToTop [
+BlHistogramGeometry >> beHorizontal [
 
-	orientation := BottomToTop.
+	orientation := Horizontal.
 	self releaseCache
 ]
 
 { #category : #accessing }
-BlHistogramGeometry >> beLeftToRight [
+BlHistogramGeometry >> beHorizontalInverted [
 
-	orientation := LeftToRight.
+	orientation := HorizontalInverted.
 	self releaseCache
 ]
 
 { #category : #accessing }
-BlHistogramGeometry >> beRightToLeft [
+BlHistogramGeometry >> beVertical [
 
-	orientation := RightToLeft.
+	orientation := Vertical.
 	self releaseCache
 ]
 
 { #category : #accessing }
-BlHistogramGeometry >> beTopToBottom [
+BlHistogramGeometry >> beVerticalInverted [
 
-	orientation := TopToBottom.
+	orientation := VerticalInverted.
 	self releaseCache
-]
-
-{ #category : #'private - geometry' }
-BlHistogramGeometry >> computeDelta [
-
-	(self isLeftToRight or: [ self isRightToLeft ]) ifTrue: [
-		^ 0 @ (self extent y / self values size) asFloat ].
-	(self isTopToBottom or: [ self isBottomToTop ]) ifTrue: [
-		^ (self extent x / self values size) asFloat @ 0 ].
-
-	^ 0 @ 0
-]
-
-{ #category : #'private - geometry' }
-BlHistogramGeometry >> computeLengthVector [
-
-	self isLeftToRight ifTrue: [ ^ 1 @ 0 ].
-	self isRightToLeft ifTrue: [ ^ -1 @ 0 ].
-	self isTopToBottom ifTrue: [ ^ 0 @ 1 ].
-	self isBottomToTop ifTrue: [ ^ 0 @ -1 ].
-
-	^ 0 @ 0
-]
-
-{ #category : #'private - geometry' }
-BlHistogramGeometry >> computeOrigin [
-
-	self isLeftToRight ifTrue: [ ^ 0 @ 0 ].
-	self isRightToLeft ifTrue: [ ^ self extent x @ 0 ].
-	self isTopToBottom ifTrue: [ ^ 0 @ 0 ].
-	self isBottomToTop ifTrue: [ ^ 0 @ self extent y ].
-
-	^ 0 @ 0
-]
-
-{ #category : #accessing }
-BlHistogramGeometry >> computedVertices [
-
-	| anOrigin aDelta aLengthVector |
-	anOrigin := self computeOrigin asFloatPoint.
-	aDelta := self computeDelta.
-	aLengthVector := self computeLengthVector.
-
-	^ Array streamContents: [ :stream |
-		stream nextPut: anOrigin.
-
-		self values inject: anOrigin into: [ :currentPoint :eachValue |
-			| aNewY |
-			aNewY := currentPoint + aDelta.
-			stream
-				nextPut: currentPoint + (aLengthVector * eachValue * self extent);
-				nextPut: aNewY + (aLengthVector * eachValue * self extent).
-			aNewY ].
-
-		stream nextPut: anOrigin + (aDelta normalized * self extent) ]
 ]
 
 { #category : #'geometry testing' }
@@ -116,7 +61,25 @@ BlHistogramGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlEleme
 	"Answer whether aPoint is contained by this geometry.
 	Assume aPoint is already inside the geometry bounds rectangle."
 	
-	^ BlPolygonHitTester doPolygonBy: self computedVertices include: aPoint
+	^ BlPolygonHitTester doPolygonBy: self vertices include: aPoint
+]
+
+{ #category : #private }
+BlHistogramGeometry >> delta [
+
+	(self isVertical or: [ self isVerticalInverted ]) ifTrue: [
+		^ 0 @ (self extent y / self values size) asFloat ].
+	
+	^ (self extent x / self values size) asFloat @ 0
+]
+
+{ #category : #private }
+BlHistogramGeometry >> direction [
+
+	self isVertical ifTrue: [ ^ 1.0 @ 0.0 ].
+	self isVerticalInverted ifTrue: [ ^ -1.0 @ 0.0 ].
+	self isHorizontalInverted ifTrue: [ ^ 0.0 @ 1.0 ].
+	^ 0.0 @ -1.0
 ]
 
 { #category : #testing }
@@ -139,31 +102,31 @@ BlHistogramGeometry >> initialize [
 	super initialize.
 	
 	values := #(0.2 0.4 0.6 0.8 1.0 0.9 0.7 0.5 0.3 0.1).
-	orientation := BottomToTop
+	orientation := Horizontal
 ]
 
-{ #category : #'private - geometry' }
-BlHistogramGeometry >> isBottomToTop [
+{ #category : #testing }
+BlHistogramGeometry >> isHorizontal [
 
-	^ orientation = BottomToTop
+	^ orientation = Horizontal
 ]
 
-{ #category : #'private - geometry' }
-BlHistogramGeometry >> isLeftToRight [
+{ #category : #testing }
+BlHistogramGeometry >> isHorizontalInverted [
 
-	^ orientation = LeftToRight
+	^ orientation = HorizontalInverted
 ]
 
-{ #category : #'private - geometry' }
-BlHistogramGeometry >> isRightToLeft [
+{ #category : #testing }
+BlHistogramGeometry >> isVertical [
 
-	^ orientation = RightToLeft
+	^ orientation = Vertical
 ]
 
-{ #category : #'private - geometry' }
-BlHistogramGeometry >> isTopToBottom [
+{ #category : #testing }
+BlHistogramGeometry >> isVerticalInverted [
 
-	^ orientation = TopToBottom
+	^ orientation = VerticalInverted
 ]
 
 { #category : #geometry }
@@ -171,6 +134,15 @@ BlHistogramGeometry >> matchExtent: aPoint [
 	"Resize geometry to exactly match provided extent as a Point"
 
 	extent := aPoint
+]
+
+{ #category : #private }
+BlHistogramGeometry >> origin [
+
+	self isVertical ifTrue: [ ^ 0.0 @ 0.0 ].
+	self isVerticalInverted ifTrue: [ ^ self extent x asFloat @ 0.0 ].
+	self isHorizontalInverted ifTrue: [ ^ 0.0 @ 0.0 ].
+	^ 0.0 @ self extent y asFloat
 ]
 
 { #category : #accessing }
@@ -184,4 +156,26 @@ BlHistogramGeometry >> values: aCollectionOfFloats [
 
 	values := aCollectionOfFloats.
 	self releaseCache
+]
+
+{ #category : #private }
+BlHistogramGeometry >> vertices [
+
+	| origin delta direction |
+	origin := self origin.
+	delta := self delta.
+	direction := self direction.
+
+	^ Array streamContents: [ :stream |
+		stream nextPut: origin.
+
+		self values inject: origin into: [ :currentPoint :each |
+			| aNewY |
+			aNewY := currentPoint + delta.
+			stream
+				nextPut: currentPoint + (direction * each * self extent);
+				nextPut: aNewY + (direction * each * self extent).
+			aNewY ].
+
+		stream nextPut: origin + (delta normalized * self extent) ]
 ]
