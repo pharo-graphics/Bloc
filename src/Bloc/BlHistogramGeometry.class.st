@@ -161,21 +161,27 @@ BlHistogramGeometry >> values: aCollectionOfFloats [
 { #category : #private }
 BlHistogramGeometry >> vertices [
 
-	| origin delta direction |
-	origin := self origin.
-	delta := self delta.
-	direction := self direction.
+	^ pathCache geometryPath ifNil: [
 
-	^ Array streamContents: [ :stream |
-		stream nextPut: origin.
+		| origin delta direction vertices |
+		origin := self origin.
+		delta := self delta.
+		direction := self direction.
 
-		self values inject: origin into: [ :currentPoint :each |
-			| aNewY |
-			aNewY := currentPoint + delta.
-			stream
-				nextPut: currentPoint + (direction * each * self extent);
-				nextPut: aNewY + (direction * each * self extent).
-			aNewY ].
+		vertices := Array streamContents: [ :stream |
+			stream nextPut: origin.
 
-		stream nextPut: origin + (delta normalized * self extent) ]
+			self values inject: origin into: [ :currentPoint :each |
+				| aNewY |
+				aNewY := currentPoint + delta.
+				stream
+					nextPut: currentPoint + (direction * each * self extent);
+					nextPut: aNewY + (direction * each * self extent).
+				aNewY ].
+
+			stream nextPut: origin + (delta normalized * self extent) ].
+
+		pathCache geometryPath: vertices.
+
+		vertices ]
 ]

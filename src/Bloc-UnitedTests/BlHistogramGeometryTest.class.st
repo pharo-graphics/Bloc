@@ -107,3 +107,28 @@ BlHistogramGeometryTest >> testDefault [
 	self assert: aHistogram delta equals: 15 @ 0.
 	self assert: aHistogram direction equals: 0 @ -1
 ]
+
+{ #category : #tests }
+BlHistogramGeometryTest >> testMutations [
+
+	| aHistogram |
+	aHistogram := BlHistogramGeometry new.
+
+	aHistogram values: #(1.0).
+
+	self
+		assert: aHistogram vertices
+		equals: {(0.0@100.0). (0.0@0.0). (150.0@0.0). (150.0@100.0)}.
+	
+	aHistogram values: #(0.5).
+
+	self
+		assert: aHistogram vertices
+		equals: {(0.0@100.0). (0.0@50.0). (150.0@50.0). (150.0@100.0)}.
+
+	aHistogram beVertical.
+
+	self
+		assert: aHistogram vertices
+		equals: {(0.0@0.0). (75.0@0.0). (75.0@100.0). (0.0@100.0)}
+]
