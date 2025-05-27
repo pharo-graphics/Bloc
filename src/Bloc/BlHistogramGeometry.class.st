@@ -19,6 +19,57 @@ Class {
 	#category : #'Bloc-Basic-Geometry'
 }
 
+{ #category : #examples }
+BlHistogramGeometry class >> example [
+	<sampleInstance>
+	<demo>
+	
+	| ramp orientations colors width height gap container |
+	ramp := (0 to: 1 by: 0.2).
+	orientations := #(beHorizontal beHorizontalInverted beVertical beVerticalInverted).
+	colors := Color wheel: orientations size.
+	width := 150.
+	height := 100.
+	gap := 10.
+
+	container := BlElement new.
+	container extent: gap + (orientations size * (width + gap)) @ (50 + height).
+	container layout: (BlLinearLayout new cellSpacing: gap; yourself).
+
+	orientations withIndexDo: [ :each :index |
+			| cell g |
+			cell := BlElement new.
+			cell clipChildren: false.
+			cell layout: BlLinearLayout vertical.
+			cell border: (BlBorder paint: Color black width: 0.5).
+			cell margin: (BlInsets vertical: gap).
+			cell constraintsDo: [:c |
+				c horizontal fitContent.
+				c vertical fitContent ].
+			
+			g := BlHistogramGeometry new.
+			g values: ramp.
+			g perform: each.
+
+			cell addChild: (BlElement new
+				border: (BlBorder paint: Color black width: 1);
+				width: width;
+				height: height;
+				background: (colors at: index);
+				geometry: g;
+				yourself).
+
+			cell addChild: (BlTextElement new
+				text: each asString asRopedText;
+				editorMeasurement;
+				constraintsDo: [:c | c linear horizontal alignCenter ];
+				yourself).
+
+			container addChild: cell ].
+
+	^ container
+]
+
 { #category : #'class initialization' }
 BlHistogramGeometry class >> initialize [
 
