@@ -23,6 +23,18 @@ ReBlocDoNotSendForceLayoutRule class >> checksMethod [
 ]
 
 { #category : #accessing }
+ReBlocDoNotSendForceLayoutRule class >> group [
+
+	^ 'Potential Bugs'
+]
+
+{ #category : #accessing }
+ReBlocDoNotSendForceLayoutRule class >> ruleName [
+
+	^ 'Do not send forceLayout'
+]
+
+{ #category : #accessing }
 ReBlocDoNotSendForceLayoutRule class >> uniqueIdentifierName [
 	"This number should be unique and should change only when the rule completely change semantics"
 
@@ -33,15 +45,4 @@ ReBlocDoNotSendForceLayoutRule class >> uniqueIdentifierName [
 ReBlocDoNotSendForceLayoutRule >> basicCheck: aMethod [
 
 	^ (aMethod sendsSelector: #forceLayout)
-]
-
-{ #category : #accessing }
-ReBlocDoNotSendForceLayoutRule >> group [
-	^ 'Potential Bugs'
-]
-
-{ #category : #accessing }
-ReBlocDoNotSendForceLayoutRule >> name [
-
-	^ 'Do not send forceLayout'
 ]
