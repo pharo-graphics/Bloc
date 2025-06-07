@@ -129,6 +129,13 @@ TBlEventTarget >> eventDispatcher [
 	^ self explicitRequirement
 ]
 
+{ #category : #'event management accessing' }
+TBlEventTarget >> eventHandlers [
+	"Return all handlers registered in the event dispatcher "
+
+	^ self eventDispatcher handlers
+]
+
 { #category : #'event management' }
 TBlEventTarget >> fireEvent: anEvent [
 	"I fire provided event building an event dispatcher chain
