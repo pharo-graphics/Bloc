@@ -447,7 +447,7 @@ BlElement >> applyLayoutIn: aBlBounds context: aBlElementBoundsUpdateContext [
 BlElement >> applyLayoutSafelyIn: aRectangle context: aBlElementBoundsUpdateContext [
 	"Layout me and my children within aRectangle in my local coordinates.
 	Note: aRectangle may be a temporary or mutable rectangle, so you must not
-	store or refer it without making a copy!
+	store or refer to it without making a copy!
 	Note: subclasses should not override me, instead override onLayout: for concrete implementation.
 	aRectangle must not be nil"
 	| oldExtent newExtent newPosition extentChanged |
@@ -1042,7 +1042,7 @@ BlElement >> containsPoint: aPoint [
 { #category : #copying }
 BlElement >> copy [
 	"Visual elements can not be copied.
-	The reason for that is unpredictable amount of conflicting copying behaviours.
+	The reason for that is the unpredictable amount of conflicting copying behaviours.
 	For example, what should happen if a copied element is added to the parent?
 	Should we create a new element without the parent or add a copied one to the parent of
 	the original element? What should we do with View Models? How to deal with event handlers? ...
@@ -2285,7 +2285,7 @@ BlElement >> layout: aBlLayout [
 { #category : #'api - layout' }
 BlElement >> layoutDo: aBlock [
 	"Perform aBlock with my layout as argument.
-	Nite: After evaluation I request a layout update.
+	Note: After evaluation I request a layout update.
 	aBlock must not be nil.
 	aBlock must accept exactly one argument"
 
