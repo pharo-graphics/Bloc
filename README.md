@@ -23,13 +23,13 @@ Metacello new
 You can replace master by:
 
 - dev to work on the development branch
-- v2.2.0 to load latest released version
+- v2.4.0 to load latest released version
 Add this project to your Baseline with:
 
 ## How to depend on it
 
 ```smalltalk
-spec baseline: 'Bloc' with: [ spec repository: 'github://pharo-graphics/Bloc:v2.2.0/src' ].
+spec baseline: 'Bloc' with: [ spec repository: 'github://pharo-graphics/Bloc:v2.4.0/src' ].
 ```
 
 ## Documentation

@@ -14,6 +14,18 @@ ReBlocWidthShouldNotBeOverriddenRule class >> checksMethod [
 ]
 
 { #category : #accessing }
+ReBlocWidthShouldNotBeOverriddenRule class >> group [
+
+	^ 'Potential Bugs'
+]
+
+{ #category : #accessing }
+ReBlocWidthShouldNotBeOverriddenRule class >> ruleName [
+
+	^ 'Width should not be overridden'
+]
+
+{ #category : #accessing }
 ReBlocWidthShouldNotBeOverriddenRule class >> uniqueIdentifierName [
 	"This number should be unique and should change only when the rule completely change semantics"
 
@@ -25,15 +37,4 @@ ReBlocWidthShouldNotBeOverriddenRule >> basicCheck: aMethod [
 
 	^ (aMethod methodClass inheritsFrom: BlElement) and: [
 		  aMethod methodClass includesSelector: #width ]
-]
-
-{ #category : #accessing }
-ReBlocWidthShouldNotBeOverriddenRule >> group [
-	^ 'Potential Bugs'
-]
-
-{ #category : #accessing }
-ReBlocWidthShouldNotBeOverriddenRule >> name [
-
-	^ 'Width should not be overridden'
 ]

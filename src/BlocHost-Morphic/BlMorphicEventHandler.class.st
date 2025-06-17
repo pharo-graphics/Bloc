@@ -63,13 +63,6 @@ BlMorphicEventHandler >> convertKeyModifiersFromEvent: aMorphicEvent [
 	alt := aMorphicEvent altKeyPressed.
 	cmd := aMorphicEvent commandKeyPressed.
 	
-	"on windows, alt is registered as CMD while CMD itself does not exist.
-	https://github.com/feenkcom/gtoolkit/issues/557"
-	OSPlatform current isWindows
-		ifTrue: [
-			alt := cmd.
-			cmd := false ].
-	
 	^ BlKeyModifiers shift: shift ctrl: ctrl alt: alt cmd: cmd
 ]
 

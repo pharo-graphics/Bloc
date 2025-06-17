@@ -53,10 +53,6 @@ BlRectangleGeometry >> matchElement: anElement [
 ]
 
 { #category : #'api - cache' }
-BlRectangleGeometry >> releaseCache [
-]
-
-{ #category : #'api - cache' }
 BlRectangleGeometry >> releaseStrokedBoundsCache [
 ]
 

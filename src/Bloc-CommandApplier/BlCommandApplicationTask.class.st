@@ -4,8 +4,8 @@ Class {
 	#instVars : [
 		'commandQueue',
 		'finishedAction',
-		'posponedRequestTask',
-		'element'
+		'element',
+		'postponedRequestTask'
 	],
 	#category : #'Bloc-CommandApplier'
 }
@@ -15,10 +15,10 @@ BlCommandApplicationTask >> applyAll [
 
 	element ifNil: [ ^ self ].
 	self canApplyCommands ifFalse: [
-		posponedRequestTask ifNotNil: [ ^ self ].
-		posponedRequestTask := BlTaskAction new.
-		posponedRequestTask action: [ self privateApplyAll ].
-		element enqueueTask: posponedRequestTask.
+		postponedRequestTask ifNotNil: [ ^ self ].
+		postponedRequestTask := BlTaskAction new.
+		postponedRequestTask action: [ self privateApplyAll ].
+		element enqueueTask: postponedRequestTask.
 		^ self ].
 
 	self privateApplyAll

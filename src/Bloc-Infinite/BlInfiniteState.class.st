@@ -123,6 +123,18 @@ BlInfiniteState >> initialize [
 ]
 
 { #category : #'testing - step' }
+BlInfiniteState >> isFinalStep [
+
+	^ layoutStep hasFinal
+]
+
+{ #category : #'testing - step' }
+BlInfiniteState >> isLayoutStep [
+
+	^ layoutStep hasLayout
+]
+
+{ #category : #'testing - step' }
 BlInfiniteState >> isStartStep [
 
 	^ layoutStep hasStart
