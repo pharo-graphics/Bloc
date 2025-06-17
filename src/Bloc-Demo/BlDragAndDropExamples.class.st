@@ -843,6 +843,41 @@ BlDragAndDropExamples class >> experimentNewTagsOrderer [
 	aContainer openInNewSpace
 ]
 
+{ #category : #'as yet unclassified' }
+BlDragAndDropExamples class >> experimentPullHandlerWithPreview [
+
+ <script>
+
+| space elt offset previewElt parent |
+space := BlSpace new.
+
+elt := BlElement new background: Color purple.
+
+elt addEventHandler: BlPullHandler new disallowOutOfBounds.
+
+elt addEventHandlerOn: BlDragStartEvent do: [ :e | 
+	e consume.
+	offset := e position - elt positionInSpace.
+	previewElt := BlElement new background: (Color purple alpha: 0.5).
+	previewElt position: elt positionInSpace.
+	space root addChild: previewElt ].
+
+elt addEventHandlerOn: BlDragEvent do: [ :e |
+	e consume.
+	previewElt position: e position - offset. ].
+parent := BlElement new size: 200 asPoint; background: Color lightRed.
+
+elt addEventHandlerOn: BlDragEndEvent do: [ :e |
+	e consume.
+	previewElt removeFromParent ]. 
+
+parent position: 150 asPoint.
+parent addChild: elt.
+
+space root addChild: parent.
+space show.
+]
+
 { #category : #'experimentations - dragSelector' }
 BlDragAndDropExamples class >> experimentRectangleDragSelect [
 	"This example shows how to draw a 'drag selector' rectangle using leftDrag"
