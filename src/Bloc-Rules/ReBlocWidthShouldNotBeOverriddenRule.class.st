@@ -3,7 +3,7 @@ In Bloc an element defines a width method. Redefining it can lead to difficult t
 "
 Class {
 	#name : #ReBlocWidthShouldNotBeOverriddenRule,
-	#superclass : #ReAbstractRule,
+	#superclass : #ReBlocCompatibilityRule,
 	#category : #'Bloc-Rules'
 }
 
