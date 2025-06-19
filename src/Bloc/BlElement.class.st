@@ -395,6 +395,21 @@ BlElement >> allParentsTo: aParentElement do: aBlock [
 	up to the given parent element (excluding myself).
 	If I don't have a parent - does nothing"
 
+	self
+		deprecated: 'Please use #allParentsUpTo:do: instead'
+		transformWith: 
+			'`@receiver allParentsTo: `@arg1 do: `@arg2' -> 
+			'`@receiver allParentsUpTo: `@arg1 do: `@arg2'.
+		
+	self allParentsUpTo: aParentElement do: aBlock
+]
+
+{ #category : #'children accessing' }
+BlElement >> allParentsUpTo: aParentElement do: aBlock [
+	"Evaluate a block with each of my parents as an argument starting from my direct parent
+	up to the given parent element (excluding myself).
+	If I don't have a parent - does nothing"
+
 	self allParentsDo: [ :eachParent |
 		aBlock value: eachParent.
 		eachParent = aParentElement ifTrue: [ ^ self ] ]

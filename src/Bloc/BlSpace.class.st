@@ -743,7 +743,7 @@ BlSpace >> doUpdateLayout [
 			                    (eachElement allParentsInclude:
 				                     eachPotentialParent) ifTrue: [
 				                    eachElement
-					                    allParentsTo: eachPotentialParent
+					                    allParentsUpTo: eachPotentialParent
 					                    do: [ :eachParent |
 					                    eachParent privateRequestingLayout: true ].
 				                    shouldIgnore := true ] ].
