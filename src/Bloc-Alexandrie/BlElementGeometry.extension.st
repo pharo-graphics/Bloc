@@ -32,3 +32,9 @@ BlElementGeometry >> aeApplyWithOutsideBorderTo: anAeCanvas element: aBlElement 
 	The second option should be slower than specifying a border path."
 
 ]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlElementGeometry >> aeSetUpGradientShadowOn: aBlGradientShadowEffect extent: aPoint [ 
+	
+	aBlGradientShadowEffect setUpRectangleExtent: aPoint
+]
