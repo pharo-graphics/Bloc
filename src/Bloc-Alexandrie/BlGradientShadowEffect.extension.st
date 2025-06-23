@@ -3,80 +3,86 @@ Extension { #name : #BlGradientShadowEffect }
 { #category : #'*Bloc-Alexandrie' }
 BlGradientShadowEffect >> aeDrawBelow: aBlElement on: aeCanvas [
 
-	| newElementHash |
-	newElementHash := self elementHashFor: aBlElement.
-	(shadowSurface isNil or: [
-		 shadowSurface isNull or: [
-			 shadowSurfaceElementHash ~= newElementHash ] ])
-		ifTrue: [
-			shadowSurfaceElementHash := newElementHash.
-			aBlElement geometry
-				aeSetGradientShadowOn: self
-				extent: aBlElement extent ].
+	self ensureCreateSahdowSurfaceFor: aBlElement on: aeCanvas.
 
 	aeCanvas
 		maskSurface: shadowSurface
-		x: offset x - extraGap
-		y: offset y - extraGap
+		x: offset x - blurRadius
+		y: offset y - blurRadius
 		color: color
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlGradientShadowEffect >> alphaBellFunctionAt: x [
-	"Answer the evaluation of a number in a Gaussian bell function with mean=0.0 and stdev=1.0, whose peak a 0.0 results in 1.0."
+BlGradientShadowEffect >> ensureCreateSahdowSurfaceFor: aBlElement on: aeCanvas [
 
-	^ (x squared * -0.5) exp
+	| newElementHash extent |
+	newElementHash := self elementHashFor: aBlElement.
+	(shadowSurface isNil or: [
+		 shadowSurface isNull or: [
+			 shadowSurfaceElementHash ~= newElementHash ] ]) ifFalse: [ ^ self ].
+
+	shadowSurfaceElementHash := newElementHash.
+	extent := aBlElement geometryBounds extent.
+
+	self
+		setUpShadowSurfaceFor: aeCanvas
+		extent: extent + (blurRadius * 2) ceiling.
+	aBlElement geometry
+		aeSetUpGradientShadowOn: self
+		extent: extent
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlGradientShadowEffect >> rampSize: rampSize stopsAndAlphasDo: aBlock [
+BlGradientShadowEffect >> setUpCircle: circleRadius [ 
 
-	aBlock value: 0.0 value: 1.0.
-
-	1 to: rampSize - 2 do: [ :i |
-		| stop |
-		stop := i / (rampSize - 1) asFloat.
-		aBlock
-			value: stop
-			value: (self alphaBellFunctionAt: stop * 4.0) ].
-
-	aBlock value: 1.0 value: 0.0
+	AeCircleGradientBlurFilter new
+		blurRadius: blurRadius color: color;
+		center: (circleRadius + blurRadius) asPoint radius: circleRadius;
+		drawOn: shadowSurface newContext
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlGradientShadowEffect >> setShadowForCircle: radius [ 
+BlGradientShadowEffect >> setUpPolygon: aCollection extent: aPoint [ 
 
-	| aShadowContext aGradient shadowCenter |
+	AePolygonGradientBlurFilter new
+		blurRadius: blurRadius color: color;
+		vertices: aCollection;
+		drawOn: shadowSurface newContext
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlGradientShadowEffect >> setUpRectangleExtent: aPoint [ 
+
+	AeRectangleGradientBlurFilter new
+		blurRadius: blurRadius color: color;
+		rectangle: (0@0 extent: aPoint);
+		drawOn: shadowSurface newContext
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlGradientShadowEffect >> setUpRoundedRectangleExtent: aPoint radii: aBlCornerRadii [
+
+	AeRoundedRectangleGradientBlurFilter new
+		blurRadius: blurRadius color: color;
+		rectangle: (0 @ 0 extent: aPoint) radii: {
+				aBlCornerRadii topLeft.
+				aBlCornerRadii topRight.
+				aBlCornerRadii bottomRight.
+				aBlCornerRadii bottomLeft };
+		drawOn: shadowSurface newContext
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlGradientShadowEffect >> setUpShadowSurfaceFor: aeCanvas extent: aPoint [ 
+
+	| scale |
+	scale := aeCanvas deviceScale.
+	
 	shadowSurface :=
 		AeCairoImageSurface
-			extent: ((radius + extraGap) * 2) asInteger asPoint
+			extent: aPoint * scale
 			format: AeCairoSurfaceFormat a8.
-	aShadowContext := shadowSurface newContext.
-
-	shadowCenter := (radius + extraGap) asPoint.
-
-	aGradient :=
-		AeCairoRadialGradientPattern
-			innerCenter: shadowCenter
-			innerRadius: ((radius - (width / 1.5)) max: 0.0)
-			outerCenter: shadowCenter
-			outerRadius: ((radius + extraGap) max: 0.0).
-
-	"Define all stops of alpha channel. RGB channels don't matter
-	as we are on an a8 surface"
-	self
-		rampSize: width
-		stopsAndAlphasDo: [ :eachStop :eachAlpha |
-			aGradient
-				addStopAt: eachStop
-				r: 1.0
-				g: 1.0
-				b: 1.0
-				a: eachAlpha ].
-
-	aShadowContext
-		source: aGradient;
-		paint.
-
+	shadowSurface deviceScale: scale.
+	
 	shadowSurface status ensureIsSuccess
 ]

@@ -33,3 +33,9 @@ BlRectangleGeometry >> aeApplyWithOutsideBorderTo: aeCanvas element: aBlElement 
 			width:  aBlElement width + aWidth
 			height: aBlElement height + aWidth ]
 ]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlRectangleGeometry >> aeSetUpGradientShadowOn: aBlGradientShadowEffect extent: aPoint [ 
+	
+	aBlGradientShadowEffect setUpRectangleExtent: aPoint
+]

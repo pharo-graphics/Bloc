@@ -5,7 +5,7 @@ Class {
 		'width',
 		'shadowSurface',
 		'shadowSurfaceElementHash',
-		'extraGap'
+		'blurRadius'
 	],
 	#category : #'Bloc-Effect'
 }
@@ -28,14 +28,14 @@ BlGradientShadowEffect class >> color: aColor width: aNumber offset: anOffset [
 BlGradientShadowEffect >> elementHashFor: aBlElement [
 	"Answer a hash that is enough to identify when something changed in the element, something that is relevant for this effect."
 
-	^ aBlElement geometry hash bitXor: aBlElement extent hash
+	^ aBlElement geometry hash bitXor: aBlElement geometryBounds hash
 ]
 
 { #category : #geometry }
 BlGradientShadowEffect >> extraShadowSpace [
 	"Compute extra space that should be freed for shadow around element."
 	
-	^ extraGap
+	^ blurRadius
 ]
 
 { #category : #initialization }
@@ -46,5 +46,5 @@ BlGradientShadowEffect >> initializeColor: aColor width: aWidth offset: aPoint [
 	color := aColor.
 	width := aWidth.
 	offset := aPoint.
-	extraGap := width * 1.5
+	blurRadius := width * 1.5
 ]

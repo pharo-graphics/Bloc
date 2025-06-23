@@ -8,3 +8,11 @@ BlPolygonGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 		vertices do: [ :each | cairoContext lineTo: each ].
 		cairoContext closePath ]
 ]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlPolygonGeometry >> aeSetUpGradientShadowOn: aBlGradientShadowEffect extent: aPoint [
+
+	aBlGradientShadowEffect
+		setUpPolygon: vertices
+		extent: aPoint
+]
