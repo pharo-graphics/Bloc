@@ -157,62 +157,6 @@ AeGradientBlurFilter >> drawOn: context [
 	context restoreState
 ]
 
-{ #category : #private }
-AeGradientBlurFilter >> drawRectangleOn: context cornersRadius: radius left: left top: top right: right bottom: bottom [
-
-	| maskSurface aGradient outerRadius |
-	aGradient :=
-		AeCairoRadialGradientPattern
-			innerX: 0.0
-			innerY: 0.0
-			innerRadius: radius - blurRadius
-			outerX: 0.0
-			outerY: 0.0
-			outerRadius: (outerRadius := radius + blurRadius).
-	aGradient addStopsFrom: ramp.
-	
-	maskSurface :=
-		AeCairoImageSurface
-			newWithFormat: AeCairoSurfaceFormat a8
-			width: outerRadius ceiling
-			height: outerRadius ceiling.
-	maskSurface newContextDo: [ :maskContext |
-		maskContext sourcePattern: aGradient; paint ].
-	
-	context sourceColor: color.
-
-	"Bottom right"
-	context
-		maskSurface: maskSurface
-			x: right
-			y: bottom.
-
-	"Bottom left"
-	context
-		rotateByRadians: Float pi;
-		maskSurface: maskSurface
-			x: left negated
-			y: bottom.
-
-	"Top left"
-	context
-		rotateByRadians: Float halfPi;
-		maskSurface: maskSurface
-			x: left negated
-			y: top negated.
-
-	"Top right"
-	context
-		rotateByRadians: Float pi;
-		maskSurface: maskSurface
-			x: right
-			y: top negated.
-
-	"Force free to include this time in the benchmarks"
-	aGradient externallyFree.
-	maskSurface externallyFree
-]
-
 { #category : #accessing }
 AeGradientBlurFilter >> ramp [
 
