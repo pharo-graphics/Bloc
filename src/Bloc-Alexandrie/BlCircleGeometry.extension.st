@@ -26,3 +26,9 @@ BlCircleGeometry >> aeApplyWithOutsideBorderTo: aeCanvas element: aBlElement bor
 			y: radius
 			radius: radius + (aWidth / 2.0) ]
 ]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlCircleGeometry >> aeSetUpGradientShadowOn: aBlGradientShadowEffect extent: aPoint [
+
+	aBlGradientShadowEffect setUpCircle: radius
+]

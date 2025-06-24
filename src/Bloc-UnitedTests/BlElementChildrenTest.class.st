@@ -286,14 +286,14 @@ BlElementChildrenTest >> testAllParentsReversedDo [
 ]
 
 { #category : #tests }
-BlElementChildrenTest >> testAllParentsToDo [
+BlElementChildrenTest >> testAllParentsUpToDo [
 
 	| aContainer res |
 	aContainer := self hierarchyChildren.
 	res := OrderedCollection new.
 
 	(aContainer childWithId: #shape_10)
-		allParentsTo: (aContainer childWithId: #shape_5)
+		allParentsUpTo: (aContainer childWithId: #shape_5)
 		do: [ :parent | res add: parent ].
 	self assert: res asArray equals: {
 			(aContainer childWithId: #shape_9).
@@ -304,7 +304,7 @@ BlElementChildrenTest >> testAllParentsToDo [
 
 	res := OrderedCollection new.
 	(aContainer childWithId: #shape_5)
-		allParentsTo: (aContainer childWithId: #shape_10)
+		allParentsUpTo: (aContainer childWithId: #shape_10)
 		do: [ :parent | res add: parent ].
 	self assert: res asArray equals: {
 			(aContainer childWithId: #shape_4).

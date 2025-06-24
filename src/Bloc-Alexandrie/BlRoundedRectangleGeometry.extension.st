@@ -61,3 +61,11 @@ BlRoundedRectangleGeometry >> aeApplyWithOutsideBorderTo: aeCanvas element: aBlE
 			br: radii bottomRight
 			bl: radii bottomLeft ]
 ]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlRoundedRectangleGeometry >> aeSetUpGradientShadowOn: aBlGradientShadowEffect extent: aPoint [
+
+	aBlGradientShadowEffect
+		setUpRoundedRectangleExtent: aPoint
+		radii: cornerRadii
+]

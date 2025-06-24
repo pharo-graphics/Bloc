@@ -12,7 +12,7 @@
 "
 Class {
 	#name : #ReBlocDoNotSendForceLayoutRule,
-	#superclass : #ReAbstractRule,
+	#superclass : #ReBlocCompatibilityRule,
 	#category : #'Bloc-Rules'
 }
 
