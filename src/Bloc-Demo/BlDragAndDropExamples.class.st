@@ -1347,6 +1347,12 @@ BlDragAndDropExamples class >> experimentWiggleAnimationToDraggedElement [
 	child openInSpace
 ]
 
+{ #category : #experimentations }
+BlDragAndDropExamples class >> tagOrdererDraggableTagFor: aString [ 
+
+	^ BlElement new size: 100 @ 50; background: Color lightRed; border: (BlBorder paint: Color lightGray width: 2); layout: BlFrameLayout new; addChild: (BlTextElement new text: aString asRopedText; constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter]); addEventHandler: BlDragHandler new; yourself. 
+]
+
 { #category : #'see class side' }
 BlDragAndDropExamples >> seeClassSide [ 
 ]
