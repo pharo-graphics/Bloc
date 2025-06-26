@@ -23,8 +23,8 @@ Class {
 		'incrementalGCCount',
 		'lastFullGCCount',
 		'lastIncrementalGCCount',
-		'totalTime',
-		'hasClosed'
+		'hasClosed',
+		'totalMilliseconds'
 	],
 	#category : #'Bloc-DevTool-Profiling'
 }
@@ -61,12 +61,6 @@ BlSpaceStatistics >> frameEnded: id [
 BlSpaceStatistics >> frameStarted: id [
 
 	
-]
-
-{ #category : #accessing }
-BlSpaceStatistics >> fullFPS [
-	
-	^ (totalFrames / (self totalTime / 1000)) asFloat
 ]
 
 { #category : #accessing }
@@ -115,7 +109,7 @@ BlSpaceStatistics >> initialize [
 	fps := 0.
 	fpsSamples := OrderedCollection new: 50.
 	previousMillisecond := 0.
-	totalTime := 0.
+	totalMilliseconds := 0.
 	currentFrames := 0.
 	listeners := OrderedCollection new.
 	
@@ -128,19 +122,23 @@ BlSpaceStatistics >> initialize [
 	incrementalGCCount := 0.
 	lastIncrementalGCCount := 0.
 	
-	hasClosed := false.
+	hasClosed := false
 ]
 
 { #category : #accessing }
 BlSpaceStatistics >> phaseStatistics [
 
 	| total |
-
 	total := durationPerPhase sumNumbers.
-	
-	^ space frame phases collect: [ :e | | duration |
-		duration := durationPerPhase at: e ifAbsent: [0].
-		{ e. duration milliSeconds. total = 0 ifTrue: [0] ifFalse: [(duration / total) asFloat] } ].
+
+	^ space frame phases collect: [ :each |
+		| duration |
+		duration := durationPerPhase at: each ifAbsent: [ 0 ].
+		{	each.
+			duration milliSeconds.
+			total = 0
+				ifTrue: [ 0 ]
+				ifFalse: [ (duration / total) asFloat ] } ]
 ]
 
 { #category : #events }
@@ -155,6 +153,12 @@ BlSpaceStatistics >> recordMilliseconds: millis forFramePhase: phase [
 BlSpaceStatistics >> registerListener: aPRSpaceStatisticsListener [
 	
 	listeners add: aPRSpaceStatisticsListener 
+]
+
+{ #category : #accessing }
+BlSpaceStatistics >> space [
+
+	^ space
 ]
 
 { #category : #accessing }
@@ -192,15 +196,31 @@ BlSpaceStatistics >> spaceShown [
 ]
 
 { #category : #accessing }
+BlSpaceStatistics >> totalFPS [
+	
+	^ (totalFrames / (self totalMilliseconds / 1000)) asFloat
+]
+
+{ #category : #accessing }
 BlSpaceStatistics >> totalFrames [
 	
 	^ totalFrames
 ]
 
 { #category : #accessing }
+BlSpaceStatistics >> totalMilliseconds [
+
+	^ totalMilliseconds
+]
+
+{ #category : #accessing }
 BlSpaceStatistics >> totalTime [
 
-	^ totalTime
+	self
+		deprecated: 'Use totalMilliseconds'
+		transformWith: '`@receiver totalTime' -> '`@receiver totalMilliseconds'.
+
+	^ totalMilliseconds
 ]
 
 { #category : #private }
@@ -209,7 +229,7 @@ BlSpaceStatistics >> updateValues [
 	| currentIncrementalGCCount currentMillisecond currentFullGCCount secondPassed |
 	currentMillisecond := Time millisecondClockValue.
 
-	totalTime := totalTime + (currentMillisecond - previousMillisecond).
+	totalMilliseconds := totalMilliseconds + (currentMillisecond - previousMillisecond).
 
 	secondPassed := (currentMillisecond - previousMillisecond) / 1000.
 
