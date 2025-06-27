@@ -2165,7 +2165,28 @@ BlSpaceFixture >> buildVariantsOfSquare [
 { #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfStadium [
 
-	self buildVariantsOf: [ BlStadiumGeometry new ]
+	| positionGenerator |
+	builder spaceExtent: 170@70.
+
+	positionGenerator := self 
+		gridPositionGeneratorStartingAt: 10 asPoint
+		by: 50
+		columns: 3.
+	
+	{
+		50 @ 30.
+		30 @ 50.
+		50 @ 50.
+	} do: [ :each |
+		builder addToRoot
+			geometry: BlStadiumGeometry new;
+			border: (BlBorder paint: builder nextColor width: 5);
+			background: builder nextColor;
+			position: positionGenerator next;
+			size: each;
+			beOutskirtsCentered;
+			yourself ].
+
 ]
 
 { #category : #private }
