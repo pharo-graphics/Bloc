@@ -18,8 +18,25 @@ Class {
 	#category : #'Bloc-Basic-Geometry'
 }
 
+{ #category : #examples }
+BlSigmoidGeometry class >> example [
+	<sampleInstance>
+
+	| geometry |
+	geometry := BlSigmoidGeometry new from: 0 asPoint to: 100 asPoint; yourself.
+	geometry beVertical.
+
+	^ BlElement new
+		geometry: geometry;
+		border: (BlBorder paint: Color blue width: 3);
+		beOutskirtsCentered;
+		size: 100 asPoint;
+		yourself
+]
+
 { #category : #'class initialization' }
 BlSigmoidGeometry class >> initialize [
+
 	AutomaticOrientation := #automatic.
 	VerticalOrientation := #vertical.
 	HorizontalOrientation := #horizontal
@@ -27,16 +44,19 @@ BlSigmoidGeometry class >> initialize [
 
 { #category : #accessing }
 BlSigmoidGeometry >> beAutomatic [
+
 	self orientation: AutomaticOrientation
 ]
 
 { #category : #accessing }
 BlSigmoidGeometry >> beHorizontal [
+
 	self orientation: HorizontalOrientation
 ]
 
 { #category : #accessing }
 BlSigmoidGeometry >> beVertical [
+
 	self orientation: VerticalOrientation
 ]
 
@@ -57,7 +77,7 @@ BlSigmoidGeometry >> bendingPoint: aFloatNumber [
 BlSigmoidGeometry >> computeFromControlPoint [
 	"I compute the location of the from control point related to the start of the sigmoid based
 	on sharpness and bending point"
-	<return: #Point>
+
 	| anAbsoluteVector aDistanceBetweenPoints isHorizontal aDistanceToControlPoint |
 	
 	anAbsoluteVector := (to - from) abs.
@@ -87,7 +107,7 @@ BlSigmoidGeometry >> computeFromControlPoint [
 BlSigmoidGeometry >> computeToControlPoint [
 	"I compute the location of the to control point related to the start of the sigmoid based
 	on sharpness and bending point"
-	<return: #Point>
+
 	| anAbsoluteVector aDistanceBetweenPoints isHorizontal aDistanceToControlPoint |
 	
 	anAbsoluteVector := (to - from) abs.
@@ -113,6 +133,16 @@ BlSigmoidGeometry >> computeToControlPoint [
 		ifFalse: [ (0 @ ((from - to) y sign * aDistanceToControlPoint)) + to ]
 ]
 
+{ #category : #'geometry testing' }
+BlSigmoidGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
+	"Answer whether aPoint is contained by this geometry.
+	Assume aPoint is already inside the geometry bounds rectangle."
+	
+	self flag: #todo. "refine as in bezier geometry"
+	
+	^ true
+]
+
 { #category : #'instance creation' }
 BlSigmoidGeometry >> from: aFromPoint to: aToPoint [
 
@@ -125,10 +155,32 @@ BlSigmoidGeometry >> from: aFromPoint to: aToPoint [
 	self updateControlPoints
 ]
 
+{ #category : #'api - bounds' }
+BlSigmoidGeometry >> geometryBounds: aBlBounds [
+
+	^ aBlBounds rectangle:
+		(Rectangle encompassing: { from. to })
+]
+
+{ #category : #testing }
+BlSigmoidGeometry >> hasCaps [
+	"Answer whether my path has caps, i.e. if I include an open line."
+
+	^ true
+]
+
+{ #category : #testing }
+BlSigmoidGeometry >> hasJoins [
+	"Answer whether I have joins, i.e. my path presents edges between a segment and another."
+
+	^ false
+]
+
 { #category : #initialization }
 BlSigmoidGeometry >> initialize [
+
 	super initialize.
-	
+
 	from := 0 asPoint.
 	to := 0 asPoint.
 	fromControl := 0 asPoint.
@@ -162,10 +214,10 @@ BlSigmoidGeometry >> matchExtent: aPoint [
 
 { #category : #private }
 BlSigmoidGeometry >> orientation: anOrientation [
-	orientation = anOrientation
-		ifTrue: [ ^ self ].
+
+	orientation = anOrientation ifTrue: [ ^ self ].
 	orientation := anOrientation.
-	
+
 	self updateControlPoints.
 	self releaseCache
 ]
@@ -185,6 +237,7 @@ BlSigmoidGeometry >> sharpness: aFloatNumber [
 
 { #category : #private }
 BlSigmoidGeometry >> updateControlPoints [
+
 	fromControl := self computeFromControlPoint.
-	toControl := self computeToControlPoint.
+	toControl := self computeToControlPoint
 ]
