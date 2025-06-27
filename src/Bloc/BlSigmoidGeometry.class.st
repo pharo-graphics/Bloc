@@ -34,6 +34,14 @@ BlSigmoidGeometry class >> example [
 		yourself
 ]
 
+{ #category : #'instance creation' }
+BlSigmoidGeometry class >> from: aPoint to: anotherPoint [
+
+	^ self new
+		from: aPoint to: anotherPoint;
+		yourself
+]
+
 { #category : #'class initialization' }
 BlSigmoidGeometry class >> initialize [
 

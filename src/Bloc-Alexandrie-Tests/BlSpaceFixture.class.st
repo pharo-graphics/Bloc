@@ -1924,6 +1924,15 @@ BlSpaceFixture >> buildVariantsOfEllipse [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfHistogram [
+
+	self buildVariantsOf: [
+		BlHistogramGeometry new
+			values: (0 to: 1 by: 0.2);
+			yourself ]
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfLine [
 
 	self buildVariantsOfLinelikeGeometry:
@@ -2122,9 +2131,41 @@ BlSpaceFixture >> buildVariantsOfRoundedRectangleAndOutskirts [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfSigmoid [
+
+	| positionGenerator |
+	builder spaceExtent: 170@70.
+
+	positionGenerator := self 
+		gridPositionGeneratorStartingAt: 10 asPoint
+		by: 50
+		columns: 3.
+	
+	{
+		50 @ 30.
+		30 @ 50.
+		50 @ 50.
+	} do: [ :each |
+		builder addToRoot
+			geometry: (BlSigmoidGeometry from: 0@0 to: each);
+			border: (BlBorder paint: builder nextColor width: 10);
+			position: positionGenerator next;
+			size: each;
+			beOutskirtsCentered;
+			yourself ].
+
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfSquare [
 
 	self buildVariantsOf: [BlSquareGeometry new]
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfStadium [
+
+	self buildVariantsOf: [ BlStadiumGeometry new ]
 ]
 
 { #category : #private }
