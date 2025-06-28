@@ -14,3 +14,11 @@ BlTriangleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 			closePath ]
 
 ]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlTriangleGeometry >> aeSetUpGradientShadowOn: aBlGradientShadowEffect extent: aPoint [
+
+	aBlGradientShadowEffect
+		setUpPolygon: self computeVertices
+		extent: aPoint
+]
