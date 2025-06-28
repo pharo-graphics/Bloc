@@ -66,3 +66,11 @@ BlStadiumGeometry >> aeApplyVerticalStadiumTo: aeCanvas [
 				endAngle: Float pi;
 			closePath ]
 ]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlStadiumGeometry >> aeSetUpGradientShadowOn: aBlGradientShadowEffect extent: aPoint [
+
+	aBlGradientShadowEffect
+		setUpRoundedRectangleExtent: aPoint
+		radii: (BlCornerRadii radius: aPoint min / 2)
+]
