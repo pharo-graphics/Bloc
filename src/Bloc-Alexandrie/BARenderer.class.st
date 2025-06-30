@@ -104,3 +104,9 @@ BARenderer >> renderWith: aBlock pixels: address stride: stride physicalRectangl
 	aeCanvas removeSurface.
 	aCairoSurface externallyFree
 ]
+
+{ #category : #initialization }
+BARenderer >> resetCaches [
+
+	aeCanvas resetFormCaches
+]

@@ -37,6 +37,60 @@ BlColorPicker class >> open [
 	self new openInSpace
 ]
 
+{ #category : #'instance creation' }
+BlColorPicker class >> openPaint [
+	<script> 
+
+	| paintDiameter canvasExtent formCanvas paintSpace lastPoint picker pickerSpace initialPosition |
+	paintDiameter := 5.
+	canvasExtent := 600 @ 400.
+	initialPosition := 100@100.
+
+	formCanvas := FormCanvas extent: canvasExtent.
+	formCanvas fillColor: Color paleOrange.
+
+	paintSpace := BlSpace new.
+	paintSpace root
+		background: formCanvas form;
+		mouseCursor: Cursor crossHair.
+	paintSpace extent: formCanvas extent.
+	paintSpace resizable: false.
+	paintSpace title: 'Bloc Paint'.
+	paintSpace position: initialPosition.
+
+	picker := BlColorPicker new.
+	pickerSpace := picker inSpace.
+	pickerSpace position: initialPosition + (canvasExtent x @ 0).
+	picker whenLayoutedDoOnce: [
+		pickerSpace extent: picker size.
+		pickerSpace resizable: false ].
+
+	paintSpace root
+		addEventHandlerOn: BlDragStartEvent 
+		do: [ :evt |
+			evt consume.
+			lastPoint := evt position ]. 
+
+	paintSpace root
+		addEventHandlerOn: BlDragEvent 
+		do: [ :evt |
+			formCanvas
+				line: lastPoint
+				to: evt position
+				width: paintDiameter
+				color: picker color.
+			paintSpace invalidateAll.
+			paintSpace hostSpaceDo: [ :hs |
+				"Tricky hack to force update Form"
+				hs renderer resetCaches ].
+			lastPoint := evt position ].
+
+	paintSpace addEventHandlerOn: BlSpaceClosedEvent do: [ pickerSpace close ].
+
+	paintSpace show.
+	pickerSpace show
+]
+
 { #category : #accessing }
 BlColorPicker >> alpha [ 
 
