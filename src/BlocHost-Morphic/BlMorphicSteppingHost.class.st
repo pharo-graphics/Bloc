@@ -8,6 +8,14 @@ Class {
 }
 
 { #category : #'api - lifecycle' }
+BlMorphicSteppingHost class >> delete [
+	"Required to be polymorphic with Morph.
+	See: https://github.com/pharo-graphics/Bloc/issues/785"
+
+	^ self stop
+]
+
+{ #category : #'api - lifecycle' }
 BlMorphicSteppingHost class >> isRunning [
 
 	^ self currentWorld isStepping: self
