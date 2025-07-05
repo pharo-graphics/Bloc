@@ -821,6 +821,58 @@ BlSpaceFixture >> buildLinearLayoutWithPaddingAndMargin [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildMiddleAlignedGeometriesHorizontal [
+
+	| geometries container extent borderSize outskirts containerExtent |
+	extent := 24 @ 12.
+	borderSize := 3.
+	outskirts := { 
+		BlOutskirts inside.
+		BlOutskirts centered.
+		BlOutskirts outside }.
+	geometries := { 
+		BlSquareGeometry new.
+		BlCircleGeometry new.
+		BlAnnulusSectorGeometry new }.
+
+	containerExtent :=
+		Point
+			x: extent x
+			y: extent y * geometries size * outskirts size + borderSize.
+	builder spaceExtent: containerExtent.
+
+	container :=
+		builder addToRoot
+			clipChildren: false;
+			width: containerExtent x	 / 2;
+			height: containerExtent y;
+			background: (Color blue alpha: 0.2);
+			yourself.
+
+	outskirts withIndexDo: [ :eachOutskirts :outskirtIndex |
+		geometries withIndexDo: [ :eachGeometry :geometryIndex |
+		  container addChild:  
+				(BlElement new
+		         geometry: eachGeometry;
+					outskirts: eachOutskirts;
+		         background: Color orange translucent;
+		         border:
+						(BlBorder
+							paint: Color black translucent
+							width: borderSize);
+		         constraintsDo: [:constraints |
+		            constraints horizontal exact: extent x.
+		            constraints vertical exact: extent y.
+		            constraints position:
+							(Point
+								x: 0
+								y: (extent y * (
+									(geometryIndex-1) +
+									(geometries size * (outskirtIndex-1))))) ];
+		         yourself) ] ]
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildOpacities [
 
 	| size fillColor borderColor |

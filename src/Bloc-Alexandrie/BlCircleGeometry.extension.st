@@ -4,7 +4,10 @@ Extension { #name : #BlCircleGeometry }
 BlCircleGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 
 	aeCanvas pathFactory: [ :cairoContext | 
-		cairoContext circleRadius: radius ]
+		cairoContext
+			circleCenterX: origin x + radius
+			y: origin y + radius
+			radius: radius ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -12,8 +15,8 @@ BlCircleGeometry >> aeApplyWithInsideBorderTo: aeCanvas element: aBlElement bord
 
 	aeCanvas borderPathFactory: [ :cairoContext |
 		cairoContext
-			circleCenterX: radius
-			y: radius
+			circleCenterX: origin x + radius
+			y: origin y + radius
 			radius: radius - (aWidth / 2.0) ]
 ]
 
@@ -22,8 +25,8 @@ BlCircleGeometry >> aeApplyWithOutsideBorderTo: aeCanvas element: aBlElement bor
 
 	aeCanvas borderPathFactory: [ :cairoContext |
 		cairoContext
-			circleCenterX: radius
-			y: radius
+			circleCenterX: origin x + radius
+			y: origin y + radius
 			radius: radius + (aWidth / 2.0) ]
 ]
 
