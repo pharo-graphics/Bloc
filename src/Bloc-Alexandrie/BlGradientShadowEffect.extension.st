@@ -42,6 +42,25 @@ BlGradientShadowEffect >> setUpCircle: circleRadius [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
+BlGradientShadowEffect >> setUpEllipse: aExtent [
+
+	shadowSurface newContextDo: [ :context |
+		| center |
+		center := aExtent / 2.
+		
+		aExtent x >= aExtent y ifFalse: [ 1halt.
+			 ] .
+
+		context matrix: (context matrix
+			scaleByX: aExtent x / aExtent y y: 1  centerX: center x y: center y).
+
+		AeCircleGradientBlurFilter new
+			blurRadius: blurRadius color: color;
+			center: (center + blurRadius) asPoint radius: center min;
+			drawOn: context ]
+]
+
+{ #category : #'*Bloc-Alexandrie' }
 BlGradientShadowEffect >> setUpPolygon: aCollection extent: aPoint [ 
 
 	AePolygonGradientBlurFilter new

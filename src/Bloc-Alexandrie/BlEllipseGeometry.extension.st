@@ -10,3 +10,9 @@ BlEllipseGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 			ellipseWidth: rect width
 			height: rect height ]
 ]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlEllipseGeometry >> aeSetUpGradientShadowOn: aBlGradientShadowEffect extent: aPoint [
+
+	aBlGradientShadowEffect setUpEllipse: aPoint
+]
