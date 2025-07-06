@@ -1145,7 +1145,7 @@ BlSpace >> initialize [
 	self title: self defaultTitle.
 	self focused: false.
 
-	self updateCursor: Cursor normal.
+	self currentCursor: Cursor normal.
 
 	self root space: self
 ]
