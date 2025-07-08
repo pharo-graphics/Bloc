@@ -24,7 +24,7 @@ BlElementVectorGeometry class >> initialize [
 BlElementVectorGeometry >> asElement [
 
 	^ super asElement
-		size: self extent;
+		extent: self extent;
 		yourself
 ]
 

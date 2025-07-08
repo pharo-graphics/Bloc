@@ -21,7 +21,7 @@ BlElementSelectionButton class >> icon: anSvgIcon extent: aPoint [
 
 	^ self new
 		geometry: anSvgIcon;
-		size: aPoint;
+		extent: aPoint;
 		yourself
 ]
 

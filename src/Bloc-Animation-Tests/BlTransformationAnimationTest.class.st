@@ -56,7 +56,7 @@ BlTransformationAnimationTest >> testAnimationElement [
 	<sampleInstance>
 	<demo>
 	^ BlElement new
-		size: 50 @ 50;
+		extent: 50 @ 50;
 		background: Color veryLightGray;
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 5)
 ]
@@ -66,7 +66,7 @@ BlTransformationAnimationTest >> testContainerElement [
 	<sampleInstance>
 	<demo>
 	^ BlElement new
-		size: 350 @ 350;
+		extent: 350 @ 350;
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 5);
 		border: (BlBorder paint: Color gray width: 2)
 ]

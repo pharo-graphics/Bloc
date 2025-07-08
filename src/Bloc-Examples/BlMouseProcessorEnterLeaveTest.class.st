@@ -8,7 +8,7 @@ Class {
 BlMouseProcessorEnterLeaveTest >> newScripterElement [
 
 	^ BlEventCountingElement new
-		  size: 100 @ 75;
+		  extent: 100 @ 75;
 		  position: 50 @ 50;
 		  yourself
 ]

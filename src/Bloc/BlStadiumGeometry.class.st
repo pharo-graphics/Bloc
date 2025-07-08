@@ -23,7 +23,7 @@ BlStadiumGeometry class >> example [
 
 	extents do: [ :each |
 		space root addChild: (BlElement new
-			size: each;
+			extent: each;
 			border: (BlBorder paint: Color black width: 2);
 			background: Color blue;
 			geometry: BlStadiumGeometry new;

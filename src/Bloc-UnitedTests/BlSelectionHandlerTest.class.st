@@ -44,7 +44,7 @@ BlSelectionHandlerTest >> originClassName [
 BlSelectionHandlerTest >> testCell [
 
 	^ BlElement new
-		  size: 75 @ 75;
+		  extent: 75 @ 75;
 		  background: Color random paler;
 		  addEventHandlerOn: BlElementSelectionAcquiredEvent
 			  do: [ :anEvent |

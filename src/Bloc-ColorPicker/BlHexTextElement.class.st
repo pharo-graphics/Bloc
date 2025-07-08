@@ -59,7 +59,7 @@ BlHexTextElement >> initializeTextElements [
 				             b: 0.94
 				             alpha: 1.0);
 		            geometry: (BlRoundedRectangleGeometry cornerRadius: 10);
-		            size: 40 @ 10.
+		            extent: 40 @ 10.
 
 	self addChild: valueElt
 ]

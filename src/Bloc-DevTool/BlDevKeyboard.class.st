@@ -26,7 +26,7 @@ BlDevKeyboard >> initialize [
 	super initialize.
 	
 	self layout: BlFlowLayout new.
-	self size: self keyboardWidth @ self keyboardHeight.
+	self extent: self keyboardWidth @ self keyboardHeight.
 	self background: (Color gray alpha: 0.1).
 	
 	keymap := Dictionary new.
@@ -157,7 +157,7 @@ BlDevKeyboard >> keyboardWidth [
 { #category : #'instance creation' }
 BlDevKeyboard >> newButton: anExtent [
 	^ BlElement new
-		size: anExtent;
+		extent: anExtent;
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
 		border: (BlBorder paint: (Color gray alpha: 0.2) width: 1);
 		layout: (BlFrameLayout new);

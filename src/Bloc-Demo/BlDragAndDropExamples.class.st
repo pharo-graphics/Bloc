@@ -11,7 +11,7 @@ BlDragAndDropExamples class >> experimentDragChangesScale [
 	| child scaleUpAnimation scaleDownAnimation |
 	child := BlElement new
 		         background: Color lightRed;
-		         size: 50 asPoint;
+		         extent: 50 asPoint;
 		         addEventHandler: BlDragHandlerNew new.
 
 	scaleUpAnimation := (BlTransformAnimation scale: 1.3)
@@ -62,7 +62,7 @@ BlDragAndDropExamples class >> experimentDragFromGridLayout [
 
 	<script> 
 	| grid elements offset space |
-	grid := BlElement new size: 400 asPoint; layout: (BlGridLayout horizontal columnCount: 2).
+	grid := BlElement new extent: 400 asPoint; layout: (BlGridLayout horizontal columnCount: 2).
 
 elements := OrderedCollection new.
 offset := 0.
@@ -73,7 +73,7 @@ space := BlSpace new.
 	|elt textElt|
 	
 	"Element initialization"
-	elt := BlElement new size: 200 asPoint; background: Color lightGreen; border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
+	elt := BlElement new extent: 200 asPoint; background: Color lightGreen; border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
 	
 	textElt := BlTextElement new text: i asString asRopedText; constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter ].
 	textElt text fontSize: 100.
@@ -105,13 +105,13 @@ BlDragAndDropExamples class >> experimentDragFromGridLayoutWithFirstPreview [
 
 	<script>
 	| grid elements offset space preview textPreview |
-	grid := BlElement new size: 400 asPoint; layout: (BlGridLayout horizontal columnCount: 2).
+	grid := BlElement new extent: 400 asPoint; layout: (BlGridLayout horizontal columnCount: 2).
 
 elements := OrderedCollection new.
 offset := 0.
 
 space := BlSpace new.
-preview := BlElement new size: 200 asPoint; background: (Color lightGreen alpha: 0.3); border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
+preview := BlElement new extent: 200 asPoint; background: (Color lightGreen alpha: 0.3); border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
 
 textPreview := BlAttributedTextElement new text: '0' asRopedText; constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter ].
 textPreview text fontSize: 100.
@@ -122,7 +122,7 @@ preview addChild: textPreview.
 	|elt textElt|
 	
 	"Element initialization"
-	elt := BlElement new size: 200 asPoint; background: Color lightGreen; border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
+	elt := BlElement new extent: 200 asPoint; background: Color lightGreen; border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
 	
 	textElt := BlTextElement new text: i asString asRopedText; constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter ].
 	textElt text fontSize: 100.
@@ -168,13 +168,13 @@ BlDragAndDropExamples class >> experimentDragPreviewGameWithElementMoving [
 space := BlSpace new extent: 1000 asPoint.
 space root layout: BlFrameLayout new.
 space root background: Color lightRed.
-grid := BlElement new size: 600 asPoint; layout: (BlGridLayout horizontal columnCount: 3); constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter].
+grid := BlElement new extent: 600 asPoint; layout: (BlGridLayout horizontal columnCount: 3); constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter].
 offset := 0.
 elements := OrderedCollection new.
 
 "Preview element initialization"
 
-preview := BlElement new size: 200 asPoint; background: (Color lightGreen alpha: 0.3); border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
+preview := BlElement new extent: 200 asPoint; background: (Color lightGreen alpha: 0.3); border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
 textPreview := BlAttributedTextElement new text: '0' asRopedText; constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter ].
 textPreview text fontSize: 100.
 preview addChild: textPreview.
@@ -215,7 +215,7 @@ scaleDownAnimation := (BlTransformAnimation scale: 1 / scaleFactor)
 	|elt textElt|
 	
 	"Element initialization"
-	elt := BlElement new size: 200 asPoint; background: Color lightGreen; border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
+	elt := BlElement new extent: 200 asPoint; background: Color lightGreen; border: (BlBorder paint: Color black width: 2); layout: BlFrameLayout new.
 	
 	textElt := BlTextElement new text: i asString asRopedText; constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter ].
 	textElt text fontSize: 100.
@@ -273,7 +273,7 @@ BlDragAndDropExamples class >> experimentDragPreviewGameWithPreviewMoving [
 	space root layout: BlFrameLayout new.
 	space root background: Color lightRed.
 	grid := BlElement new
-		        size: 600 asPoint;
+		        extent: 600 asPoint;
 		        layout: (BlGridLayout horizontal columnCount: 3);
 		        constraintsDo: [ :c |
 			        c frame vertical alignCenter.
@@ -284,7 +284,7 @@ BlDragAndDropExamples class >> experimentDragPreviewGameWithPreviewMoving [
 	"Preview element initialization"
 
 	preview := BlElement new
-		           size: 200 asPoint;
+		           extent: 200 asPoint;
 		           background: (Color lightGreen);
 		           border: (BlBorder paint: Color black width: 2);
 		           layout: BlFrameLayout new;
@@ -336,7 +336,7 @@ BlDragAndDropExamples class >> experimentDragPreviewGameWithPreviewMoving [
 		| elt textElt |
 		"Element initialization"
 		elt := BlElement new
-			       size: 200 asPoint;
+			       extent: 200 asPoint;
 			       background: Color lightGreen;
 			       border: (BlBorder paint: Color black width: 2);
 			       layout: BlFrameLayout new.
@@ -396,7 +396,7 @@ BlDragAndDropExamples class >> experimentDragPreviewWithElementMoving [
 	<script>
 	| grid space offset preview textPreview rearrangeBlock scaleFactor scaleUpAnimation scaleDownAnimation |
 	grid := BlElement new
-		        size: 600 asPoint;
+		        extent: 600 asPoint;
 		        layout: (BlGridLayout horizontal columnCount: 3).
 	space := BlSpace new.
 	offset := 0.
@@ -404,7 +404,7 @@ BlDragAndDropExamples class >> experimentDragPreviewWithElementMoving [
 	"Preview element initialization"
 
 	preview := BlElement new
-		           size: 200 asPoint;
+		           extent: 200 asPoint;
 		           background: (Color lightGreen alpha: 0.3);
 		           border: (BlBorder paint: Color black width: 2);
 		           layout: BlFrameLayout new.
@@ -439,7 +439,7 @@ BlDragAndDropExamples class >> experimentDragPreviewWithElementMoving [
 		| elt textElt |
 		"Element initialization"
 		elt := BlElement new
-			       size: 200 asPoint;
+			       extent: 200 asPoint;
 			       background: Color lightGreen;
 			       border: (BlBorder paint: Color black width: 2);
 			       layout: BlFrameLayout new.
@@ -495,7 +495,7 @@ BlDragAndDropExamples class >> experimentDragPreviewWithPreviewMoving [
 	<script>
 	| grid space offset preview textPreview rearrangeBlock scaleFactor scaleUpAnimation scaleDownAnimation draggedElement |
 	grid := BlElement new
-		        size: 600 asPoint;
+		        extent: 600 asPoint;
 		        layout: (BlGridLayout horizontal columnCount: 3).
 	space := BlSpace new.
 	offset := 0.
@@ -503,7 +503,7 @@ BlDragAndDropExamples class >> experimentDragPreviewWithPreviewMoving [
 	"Preview element initialization"
 
 	preview := BlElement new
-		           size: 200 asPoint;
+		           extent: 200 asPoint;
 		           background: Color lightGreen;
 		           border: (BlBorder paint: Color black width: 2);
 		           layout: BlFrameLayout new;
@@ -540,7 +540,7 @@ BlDragAndDropExamples class >> experimentDragPreviewWithPreviewMoving [
 		| elt textElt |
 		"Element initialization"
 		elt := BlElement new
-			       size: 200 asPoint;
+			       extent: 200 asPoint;
 			       background: Color lightGreen;
 			       border: (BlBorder paint: Color black width: 2);
 			       layout: BlFrameLayout new.
@@ -637,7 +637,7 @@ BlDragAndDropExamples class >> experimentDragSelectorHighlightsSelectedElements 
 		lasso hasParent ifTrue: [ lasso removeFromParent ].
 		lasso
 			position: lassoPosX @ lassoPosY;
-			size: lassoSize.
+			extent: lassoSize.
 		space root addChild: lasso ].
 
 	space root addEventHandlerOn: BlDragEndEvent do: [ :event |
@@ -666,7 +666,7 @@ BlDragAndDropExamples class >> experimentDragStrategies [
 	| handler child space strategy |
 	handler := BlDragHandlerNew new.
 	child := BlElement new
-		         size: 100 asPoint;
+		         extent: 100 asPoint;
 		         background: Color red;
 		         addEventHandler: handler.
 
@@ -710,7 +710,7 @@ BlDragAndDropExamples class >> experimentDropEventReceivedByTargetArea [
 	target := BlElement new
 		          background: Color lightGreen;
 		          border: (BlBorder paint: Color green width: 3);
-		          size: 300 asPoint;
+		          extent: 300 asPoint;
 		          position: 500 @ 200.
 
 	space := BlSpace new.
@@ -766,7 +766,7 @@ BlDragAndDropExamples class >> experimentHoverToSeeHalosDecription [
 
 	<script> 
 	| elt haloContainer |
-	elt := BlElement new background: Color lightRed; clipChildren: false; size: 150 asPoint; position: 100 asPoint.
+	elt := BlElement new background: Color lightRed; clipChildren: false; extent: 150 asPoint; position: 100 asPoint.
 haloContainer := BlElement new 
 	background: Color lightGreen;
 	layout: BlLinearLayout horizontal; 
@@ -790,7 +790,7 @@ elt addEventHandlerOn: BlClickEvent do: [ :event |
 				haloContainer removeChildren.
 				elt eventDispatcher handlersDo: [ :handler |
 					|handlerElt textElt|
-					handlerElt := BlElement new size: 20 asPoint; background: Color random; clipChildren: false; constraintsDo: [ :c | c margin: (BlInsets all: 2) ].
+					handlerElt := BlElement new extent: 20 asPoint; background: Color random; clipChildren: false; constraintsDo: [ :c | c margin: (BlInsets all: 2) ].
 					handlerElt addEventHandlerOn: BlClickEvent do: [ :e |
 						handlerElt inspect ].
 					textElt := BlTextElement new text: handler action asText asRopedText;background: Color lightYellow; position: 0@ 20.
@@ -865,7 +865,7 @@ elt addEventHandlerOn: BlDragStartEvent do: [ :e |
 elt addEventHandlerOn: BlDragEvent do: [ :e |
 	e consume.
 	previewElt position: e position - offset. ].
-parent := BlElement new size: 200 asPoint; background: Color lightRed.
+parent := BlElement new extent: 200 asPoint; background: Color lightRed.
 
 elt addEventHandlerOn: BlDragEndEvent do: [ :e |
 	e consume.
@@ -905,7 +905,7 @@ BlDragAndDropExamples class >> experimentRectangleDragSelect [
 		lasso hasParent ifTrue: [ lasso removeFromParent ].
 		lasso
 			position: lassoPosX @ lassoPosY;
-			size: lassoSize.
+			extent: lassoSize.
 		space root addChild: lasso ].
 
 	space show
@@ -938,7 +938,7 @@ BlDragAndDropExamples class >> experimentRectangleDragSelectWithElementsOnSpace 
 		lasso hasParent ifTrue: [ lasso removeFromParent ].
 		lasso
 			position: lassoPosX @ lassoPosY;
-			size: lassoSize.
+			extent: lassoSize.
 		space root addChild: lasso ].
 
 	space root addChild: (BlElement new
@@ -1028,7 +1028,7 @@ BlDragAndDropExamples class >> experimentShortcutDragSelectorDragsSelectedElemen
 			lasso hasParent ifTrue: [ lasso removeFromParent ].
 			lasso
 				position: lassoPosX @ lassoPosY;
-				size: lassoSize.
+				extent: lassoSize.
 			space root addChild: lasso ] ].
 
 	space root addEventHandlerOn: BlDragEndEvent do: [ :event |
@@ -1113,7 +1113,7 @@ BlDragAndDropExamples class >> experimentShortcutDragSelectorHighlightsSelectedE
 			lasso hasParent ifTrue: [ lasso removeFromParent ].
 			lasso
 				position: lassoPosX @ lassoPosY;
-				size: lassoSize.
+				extent: lassoSize.
 			space root addChild: lasso ] ].
 
 	space root addEventHandlerOn: BlDragEndEvent do: [ :event |
@@ -1161,7 +1161,7 @@ BlDragAndDropExamples class >> experimentShortcutRectangleDragSelect [
 			lasso hasParent ifTrue: [ lasso removeFromParent ].
 			lasso
 				position: lassoPosX @ lassoPosY;
-				size: lassoSize.
+				extent: lassoSize.
 			space root addChild: lasso ] ].
 
 	space show
@@ -1173,7 +1173,7 @@ BlDragAndDropExamples class >> experimentTabsDragPreview [
 	<script>
 	| grid space offset preview textPreview rearrangeBlock scaleFactor scaleUpAnimation scaleDownAnimation draggedElement |
 	grid := BlElement new
-		        size: 700 asPoint;
+		        extent: 700 asPoint;
 		        layout: BlLinearLayout horizontal.
 	space := BlSpace new.
 	offset := 0.
@@ -1181,7 +1181,7 @@ BlDragAndDropExamples class >> experimentTabsDragPreview [
 	"Preview element initialization"
 
 	preview := BlElement new
-		           size: 70 @ 70;
+		           extent: 70 @ 70;
 		           background: Color lightGreen;
 		           border: (BlBorder paint: Color black width: 2);
 		           layout: BlFrameLayout new;
@@ -1218,7 +1218,7 @@ BlDragAndDropExamples class >> experimentTabsDragPreview [
 		| elt textElt |
 		"Element initialization"
 		elt := BlElement new
-			       size: 70 @ 70;
+			       extent: 70 @ 70;
 			       background: Color lightGreen;
 			       border: (BlBorder paint: Color black width: 2);
 			       layout: BlFrameLayout new.
@@ -1279,7 +1279,7 @@ BlDragAndDropExamples class >> experimentTargetBorderChangesWithDragEnterAndLeav
 
 	target := BlElement new
 		          background: Color lightGray;
-		          size: 150 asPoint;
+		          extent: 150 asPoint;
 		          position: 100 asPoint.
 
 	borderRed := BlBorder paint: Color red width: 3.
@@ -1350,7 +1350,7 @@ BlDragAndDropExamples class >> experimentWiggleAnimationToDraggedElement [
 { #category : #experimentations }
 BlDragAndDropExamples class >> tagOrdererDraggableTagFor: aString [ 
 
-	^ BlElement new size: 100 @ 50; background: Color lightRed; border: (BlBorder paint: Color lightGray width: 2); layout: BlFrameLayout new; addChild: (BlTextElement new text: aString asRopedText; constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter]); addEventHandler: BlDragHandler new; yourself. 
+	^ BlElement new extent: 100 @ 50; background: Color lightRed; border: (BlBorder paint: Color lightGray width: 2); layout: BlFrameLayout new; addChild: (BlTextElement new text: aString asRopedText; constraintsDo: [:c | c frame vertical alignCenter. c frame horizontal alignCenter]); addEventHandler: BlDragHandler new; yourself. 
 ]
 
 { #category : #'see class side' }

@@ -70,7 +70,7 @@ BlMetricsInspectorExample >> newElementWithMarginAndPadding [
 				   right: 6
 				   bottom: 7
 				   left: 8);
-		  size: 300 @ 100;
+		  extent: 300 @ 100;
 		  background: Color lightGray;
 		  border: (BlBorder paint: Color black width: 2);
 		  yourself

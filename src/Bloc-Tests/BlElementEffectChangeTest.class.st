@@ -10,7 +10,7 @@ BlElementEffectChangeTest >> testShadowOffsetChangesInvalidationBounds [
 	| aSpace anElement |
 	aSpace := BlSpace new.
 	anElement := BlElement new.
-	anElement size: 100 @ 200.
+	anElement extent: 100 @ 200.
 	aSpace root addChild: anElement.
 
 	anElement effect: (BlSimpleShadowEffect

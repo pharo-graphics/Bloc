@@ -13,7 +13,7 @@ BlOpacityTest >> colorfulElement [
 
 	| anElement |
 	anElement := BlElement new.
-	anElement size: 100 @ 75.
+	anElement extent: 100 @ 75.
 	anElement
 		background:
 			((BlLinearGradientPaint direction: 1 @ 1)

@@ -35,7 +35,7 @@ BlKeyCombinationExamplesTest >> keyLogger [
 	<sampleInstance>
 	<demo>
 	^ BlElement new
-		  size: 200 @ 200;
+		  extent: 200 @ 200;
 		  background: Color red;
 		  addEventHandler: (BlEventHandler
 				   on: BlTextInputEvent

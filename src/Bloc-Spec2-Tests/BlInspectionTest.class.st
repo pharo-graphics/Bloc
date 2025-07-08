@@ -22,7 +22,7 @@ BlInspectionTest >> setUp [
 	super setUp.
 
 	triangle := BlElement new
-			size: 120 @ 240;
+			extent: 120 @ 240;
 			border: (BlBorder paint: Color blue width: 5);
 			background: Color red;
 			yourself.

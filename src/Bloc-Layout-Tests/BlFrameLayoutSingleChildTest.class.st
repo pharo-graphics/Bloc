@@ -119,7 +119,7 @@ BlFrameLayoutSingleChildTest >> testElementDocumentationWithOneExactChildAlignBo
 		c frame horizontal alignRight.
 		c frame vertical alignBottom ].
 	parent := self testParentWithFrameLayoutAndFixedSize.
-	parent size: 300 @ 300.
+	parent extent: 300 @ 300.
 	parent addChild: child.
 	parent forceLayout.
 	self assert: child position equals: 160 @ 160.
@@ -993,7 +993,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildLargerWithPadding [
 	<demo>
 	| parent child |
 	child := self testChildElementWithVisualProperties.
-	child size: 200 @ 100.
+	child extent: 200 @ 100.
 	"relocate more than padding"
 	child position: 50 @ 75.
 	parent := self testParentWithFrameLayoutAndFixedSize.
@@ -1018,7 +1018,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildSmallWithPadding [
 	<demo>
 	| parent child |
 	child := self testChildElementWithVisualProperties.
-	child size: 200 @ 100.
+	child extent: 200 @ 100.
 	"relocate less than padding"
 	child position: 10 @ 5.
 	parent := self testParentWithFrameLayoutAndFixedSize.
@@ -1043,7 +1043,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildToZeroWithPadding [
 	<demo>
 	| parent child |
 	child := self testChildElementWithVisualProperties.
-	child size: 200 @ 100.
+	child extent: 200 @ 100.
 	child position: 0 @ 0.
 	parent := self testParentWithFrameLayoutAndFixedSize.
 	parent padding: (BlInsets
@@ -1070,7 +1070,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentLargerWithPaddi
 	child constraintsDo: [ :c |
 		c frame horizontal alignNone.
 		c frame vertical alignNone ].
-	child size: 200 @ 100.
+	child extent: 200 @ 100.
 	"relocate more than padding"
 	child position: 50 @ 75.
 	parent := self testParentWithFrameLayoutAndFixedSize.
@@ -1098,7 +1098,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentSmallWithPaddin
 	child constraintsDo: [ :c |
 		c frame horizontal alignNone.
 		c frame vertical alignNone ].
-	child size: 200 @ 100.
+	child extent: 200 @ 100.
 	"relocate less than padding"
 	child position: 10 @ 5.
 	parent := self testParentWithFrameLayoutAndFixedSize.
@@ -1126,7 +1126,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentToZeroWithPaddi
 	child constraintsDo: [ :c |
 		c frame horizontal alignNone.
 		c frame vertical alignNone ].
-	child size: 200 @ 100.
+	child extent: 200 @ 100.
 	child position: 0 @ 0.
 	parent := self testParentWithFrameLayoutAndFixedSize.
 	parent padding: (BlInsets

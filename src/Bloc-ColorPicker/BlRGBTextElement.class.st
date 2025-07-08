@@ -61,7 +61,7 @@ BlRGBTextElement >> initializeTextElements [
 				         b: 0.94
 				         alpha: 1.0);
 		        geometry: (BlRoundedRectangleGeometry cornerRadius: 10);
-		        size: 20 @ 10.
+		        extent: 20 @ 10.
 
 	self addChild: rElt.
 
@@ -75,7 +75,7 @@ BlRGBTextElement >> initializeTextElements [
 				         b: 0.94
 				         alpha: 1.0);
 		        geometry: (BlRoundedRectangleGeometry cornerRadius: 10);
-		        size: 20 @ 10.
+		        extent: 20 @ 10.
 
 	self addChild: gElt.
 
@@ -89,7 +89,7 @@ BlRGBTextElement >> initializeTextElements [
 				         b: 0.94
 				         alpha: 1.0);
 		        geometry: (BlRoundedRectangleGeometry cornerRadius: 10);
-		        size: 20 @ 10.
+		        extent: 20 @ 10.
 
 	self addChild: bElt
 ]

@@ -18,20 +18,20 @@ BlGeometryTest >> test3ElContainsPoint [
 
 	| g c1 c2 |
 	c1 := BlElement new
-		      size: 200 @ 100;
+		      extent: 200 @ 100;
 		      position: 100 @ 100;
 		      background: Color yellow;
 		      yourself.
 
 	c2 := BlElement new
-		      size: 400 @ 300;
+		      extent: 400 @ 300;
 		      position: 100 @ 100;
 		      background: Color red;
 		      addChild: c1;
 		      yourself.
 
 	g := BlElement new
-		     size: 700 @ 500;
+		     extent: 700 @ 500;
 		     position: 0 @ 0;
 		     background: Color blue;
 		     addChild: c2;
@@ -51,16 +51,16 @@ BlGeometryTest >> testElAnyBounds [
 
 	| g c1 c2 |
 	c1 := BlElement new
-		      size: 200 @ 100;
+		      extent: 200 @ 100;
 		      position: 100 @ 100;
 		      yourself.
 	c2 := BlElement new
-		      size: 400 @ 300;
+		      extent: 400 @ 300;
 		      position: 100 @ 100;
 		      addChild: c1;
 		      yourself.
 	g := BlElement new
-		     size: 700 @ 500;
+		     extent: 700 @ 500;
 		     position: 0 @ 0;
 		     addChild: c2;
 		     yourself.
@@ -115,7 +115,7 @@ BlGeometryTest >> testElLocalAndGlobalBoundsConvertion [
 
 	| g |
 	g := BlElement new
-		     size: 100 @ 100;
+		     extent: 100 @ 100;
 		     position: 10 @ 10;
 		     yourself.
 
@@ -145,12 +145,12 @@ BlGeometryTest >> testElLocalAndGlobalPostionConvertion [
 
 	| g n |
 	n := BlElement new
-		     size: 100 @ 100;
+		     extent: 100 @ 100;
 		     position: 10 @ 10;
 		     yourself.
 
 	g := BlElement new
-		     size: 100 @ 100;
+		     extent: 100 @ 100;
 		     position: 10 @ 10;
 		     addChild: n;
 		     yourself.
@@ -169,11 +169,11 @@ BlGeometryTest >> testElTxBounds [
 
 	| g n |
 	n := BlElement new
-		     size: 100 @ 100;
+		     extent: 100 @ 100;
 		     position: 10 @ 10;
 		     yourself.
 	g := BlElement new
-		     size: 100 @ 100;
+		     extent: 100 @ 100;
 		     position: 10 @ 10;
 		     addChild: n;
 		     yourself.

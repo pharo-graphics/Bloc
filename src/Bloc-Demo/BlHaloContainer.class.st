@@ -29,7 +29,7 @@ BlHaloContainer class >> exampleDisplayEventHandlersAsHalos [
 	elt := BlElement new
 		       background: Color lightRed;
 		       clipChildren: false;
-		       size: 150 asPoint;
+		       extent: 150 asPoint;
 		       position: 100 asPoint.
 	haloContainer := BlElement new
 		                 background: Color lightGreen;
@@ -55,7 +55,7 @@ BlHaloContainer class >> exampleDisplayEventHandlersAsHalos [
 					elt eventDispatcher handlersDo: [ :handler |
 						| handlerElt textElt |
 						handlerElt := BlElement new
-							              size: 20 asPoint;
+							              extent: 20 asPoint;
 							              background: Color random;
 							              clipChildren: false;
 							              constraintsDo: [ :c |
@@ -93,11 +93,11 @@ BlHaloContainer class >> exampleHalosAvailableAndCanDive [
 	"shift+click can make the halos dive to the parent on the decorated element"
 	aContainer := BlElement new
 		              background: Color lightRed;
-		              size: 300 asPoint;
+		              extent: 300 asPoint;
 		              position: 50 asPoint.
 	child := BlElement new
 		         background: Color lightBlue;
-		         size: 100 asPoint;
+		         extent: 100 asPoint;
 		         position: 10 asPoint.
 
 	aContainer addChild: child.
@@ -118,20 +118,20 @@ BlHaloContainer class >> exampleHalosDisplayedAboveWithFrameLayout [
 	<script>
 	| container elt1 elt2 elt3 elements marginOffset |
 	container := BlElement new
-		             size: 100 asPoint;
+		             extent: 100 asPoint;
 		             position: 100 asPoint;
 		             background: Color lightRed;
 		             layout: BlFrameLayout new;
 		             clipChildren: false.
 
 	elt1 := BlElement new
-		        size: 20 asPoint;
+		        extent: 20 asPoint;
 		        background: Color lightBlue.
 	elt2 := BlElement new
-		        size: 20 asPoint;
+		        extent: 20 asPoint;
 		        background: Color lightGreen.
 	elt3 := BlElement new
-		        size: 20 asPoint;
+		        extent: 20 asPoint;
 		        background: Color lightOrange.
 
 	elements := {
@@ -373,7 +373,7 @@ BlHaloContainer >> showOn: anElement [
 	decorated space root addChild: self.
 
 	self position: self selectionPosition.
-	self size: self selectionExtent.
+	self extent: self selectionExtent.
 ]
 
 { #category : #accessing }

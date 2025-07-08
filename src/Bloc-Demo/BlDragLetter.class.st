@@ -41,7 +41,7 @@ BlDragLetter >> initialize [
 
 	super initialize.
 	self layout: BlLinearLayout horizontal alignCenter;
-		  size: 30 @ 30;
+		  extent: 30 @ 30;
 		  margin: (BlInsets all: 5);
 		  background: Color veryVeryLightGray;
 		  border: (BlBorder paint: Color veryLightGray width: 1);

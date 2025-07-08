@@ -74,7 +74,7 @@ BlMouseEventTest >> newChild [
 	^ self newBox
 		  border: (BlBorder paint: Color red width: 1);
 		  background: (Color red alpha: 0.3);
-		  size: 400 @ 300;
+		  extent: 400 @ 300;
 		  yourself
 ]
 
@@ -84,7 +84,7 @@ BlMouseEventTest >> newGrandChild [
 	^ self newBox
 		  border: (BlBorder paint: Color blue width: 1);
 		  background: (Color blue alpha: 0.3);
-		  size: 400 @ 100;
+		  extent: 400 @ 100;
 		  yourself
 ]
 
@@ -105,7 +105,7 @@ BlMouseEventTest >> newParent [
 	^ self newBox
 		  border: (BlBorder paint: Color gray width: 1);
 		  background: (Color gray alpha: 0.3);
-		  size: 300 @ 250;
+		  extent: 300 @ 250;
 		  in: [ :anElement |
 			  anElement userData at: #blocEvents put: #parent ];
 		  yourself

@@ -18,7 +18,7 @@ BlScalableElementExamples >> contentElement [
 BlScalableElementExamples >> contentElementLarger [
 
 	^ self contentElement
-		size: self contentExtentLarger;
+		extent: self contentExtentLarger;
 		yourself
 ]
 
@@ -36,7 +36,7 @@ BlScalableElementExamples >> contentElementMatchingParent [
 BlScalableElementExamples >> contentElementSmaller [
 
 	^ self contentElement
-		size: self contentExtentSmaller;
+		extent: self contentExtentSmaller;
 		yourself
 ]
 
@@ -153,7 +153,7 @@ BlScalableElementExamples >> matchParentContentInMatchParentScalableFitAll [
 
 	| aScalable aContent aContainer |
 	aContainer := BlElement new.
-	aContainer size: self scalableExtent.
+	aContainer extent: self scalableExtent.
 	
 	aScalable := self scalableElement.
 	aScalable constraintsDo: [ :c |
@@ -183,7 +183,7 @@ BlScalableElementExamples >> scalableElement [
 
 	| aScalableElement |
 	aScalableElement := BlScalableElement new.
-	aScalableElement size: self scalableExtent.
+	aScalableElement extent: self scalableExtent.
 	aScalableElement border: (BlBorder builder dashed width: 2; paint: Color gray; build).
 	
 	self assert: aScalableElement hasContentElement not.

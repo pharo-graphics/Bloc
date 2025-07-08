@@ -17,7 +17,7 @@ BlPaletteElement >> addColor: aColor [
 
 	| newElt |
 	newElt := BlElement new
-		          size: 20 asPoint;
+		          extent: 20 asPoint;
 		          geometry: (BlRoundedRectangleGeometry cornerRadius: 5);
 					margin: (BlInsets all: 5);
 		          background: aColor;

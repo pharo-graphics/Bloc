@@ -10,7 +10,7 @@ BlOverlayElementExamples >> overlayOnParent [
 
 	| aContainer anOverlay |
 	aContainer := BlElement new
-		size: 500@400;
+		extent: 500@400;
 		border: (BlBorder builder dashed; paint: Color gray; width: 2; build).
 	
 	anOverlay := BlOverlayElement on: aContainer.
@@ -76,11 +76,11 @@ BlOverlayElementExamples >> overlayOnSibling [
 
 	| aContainer aSibling anOverlay |
 	aContainer := BlElement new
-		size: 500@400;
+		extent: 500@400;
 		border: (BlBorder builder dashed; paint: Color gray; width: 2; build).
 	
 	aSibling := BlElement new
-		size: 300@200;
+		extent: 300@200;
 		border: (BlBorder paint: Color gray width: 2);
 		addEventHandler: BlPullHandler new.
 	

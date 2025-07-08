@@ -35,7 +35,7 @@ BlSelectionTool >> dragEndEvent: anEvent [
 
 { #category : #'dnd handlers' }
 BlSelectionTool >> dragEvent: anEvent [
-	selectionRect size: anEvent position - startPosition
+	selectionRect extent: anEvent position - startPosition
 ]
 
 { #category : #'dnd handlers' }
@@ -44,7 +44,7 @@ BlSelectionTool >> dragStartEvent: anEvent [
 	anEvent consume.
 	self resetCurrentSelections.
 	startPosition := anEvent position.
-	selectionRect size:50@50; position:startPosition.
+	selectionRect extent:50@50; position:startPosition.
 	client addChild: selectionRect 
 ]
 
@@ -54,7 +54,7 @@ BlSelectionTool >> initialize [
 	currentSelections := OrderedCollection new.
 	selectionRect := BlElement new
 		zIndex: 1000;
-		size: 50@50;
+		extent: 50@50;
 		background: Color transparent;
 		border:
 			(BlBorder

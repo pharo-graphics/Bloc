@@ -23,7 +23,7 @@ BlCollapseWidget class >> exampleSimpleCollapse [
 
 	collapsed := BlElement new
 		             background: bgPaint;
-		             size: 250 @ 150;
+		             extent: 250 @ 150;
 		             border: (BlBorderBuilder new
 				              paint: Color red;
 				              width: 3;
@@ -34,7 +34,7 @@ BlCollapseWidget class >> exampleSimpleCollapse [
 
 	collapsedChild := BlElement new
 		                  background: Color purple;
-		                  size: 50 @ 100;
+		                  extent: 50 @ 100;
 		                  position: 50 asPoint;
 		                  yourself.
 
@@ -103,7 +103,7 @@ BlCollapseWidget >> initializeBar [
 	| arrow geometry opened rotateCWAnimation rotateACWAnimation |
 	bar := BlElement new
 		       background: Color veryVeryLightGray;
-		       size: 250 @ 50;
+		       extent: 250 @ 50;
 		       border: (BlBorder paint: Color lightGray width: 2);
 		       layout: BlFrameLayout new;
 		       padding: (BlInsets all: 10);
@@ -116,7 +116,7 @@ BlCollapseWidget >> initializeBar [
 			            (10 @ 10) }.
 
 	arrow := BlElement new
-		         size: geometry extent;
+		         extent: geometry extent;
 		         geometry: geometry;
 		         constraintsDo: [ :c |
 			         c frame vertical alignCenter.

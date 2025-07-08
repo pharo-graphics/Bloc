@@ -65,18 +65,18 @@ BlFrameLayoutCompositionTest >> testExample [
 		          c horizontal matchParent.
 		          c vertical matchParent ].
 	green := self green
-		         size: 200 @ 200;
+		         extent: 200 @ 200;
 		         constraintsDo: [ :c |
 			         c frame horizontal alignRight.
 			         c frame vertical alignBottom ].
 	red := self red
-		       size: 100 @ 100;
+		       extent: 100 @ 100;
 		       constraintsDo: [ :c |
 			       c frame horizontal alignCenter.
 			       c frame vertical alignCenter ].
 	container := self container
 		             layout: BlFrameLayout new;
-		             size: 350 @ 350;
+		             extent: 350 @ 350;
 		             position: 200 @ 100;
 		             addChildren: {
 				             yellow.
@@ -95,18 +95,18 @@ BlFrameLayoutCompositionTest >> testExampleReverseOrder [
 		          c horizontal matchParent.
 		          c vertical matchParent ].
 	green := self green
-		         size: 200 @ 200;
+		         extent: 200 @ 200;
 		         constraintsDo: [ :c |
 			         c frame horizontal alignRight.
 			         c frame vertical alignBottom ].
 	red := self red
-		       size: 100 @ 100;
+		       extent: 100 @ 100;
 		       constraintsDo: [ :c |
 			       c frame horizontal alignCenter.
 			       c frame vertical alignCenter ].
 	container := self container
 		             layout: BlFrameLayout new;
-		             size: 350 @ 350;
+		             extent: 350 @ 350;
 		             position: 200 @ 100;
 		             addChildren: {
 				             red.

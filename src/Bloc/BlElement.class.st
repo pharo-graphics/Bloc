@@ -702,7 +702,7 @@ BlElement >> bounds [
 BlElement >> bounds: aBounds [
 
 	self position: aBounds position.
-	self size: aBounds extent
+	self extent: aBounds extent
 ]
 
 { #category : #'private - accessing' }

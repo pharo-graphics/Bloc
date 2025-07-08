@@ -39,7 +39,7 @@ BlGridLayoutUsageTest >> testExampleDistributed2x2Grid [
 
 	el := BlElement new
 		      layout: (BlGridLayout new columnCount: 2);
-		      size: 300 @ 300;
+		      extent: 300 @ 300;
 		      position: 200 @ 100;
 		      background: Color blue;
 		      addChildren: {
@@ -79,7 +79,7 @@ BlGridLayoutUsageTest >> testExampleDistributedWithSpan2x2Grid [
 
 	el := BlElement new
 		      layout: (BlGridLayout new columnCount: 2);
-		      size: 300 @ 300;
+		      extent: 300 @ 300;
 		      position: 200 @ 100;
 		      background: Color blue;
 		      addChildren: {
@@ -123,7 +123,7 @@ BlGridLayoutUsageTest >> testExampleDistributedWithWeight2x2Grid [
 
 	el := BlElement new
 		      layout: (BlGridLayout new columnCount: 2);
-		      size: 300 @ 300;
+		      extent: 300 @ 300;
 		      position: 200 @ 100;
 		      background: Color blue;
 		      addChildren: {
@@ -141,16 +141,16 @@ BlGridLayoutUsageTest >> testExampleHorizontal2x1Grid [
 	<sampleInstance>
 	| e1 e2 el |
 	e1 := BlElement new
-		      size: 150 asPoint;
+		      extent: 150 asPoint;
 		      background: Color red.
 
 	e2 := BlElement new
-		      size: 150 asPoint;
+		      extent: 150 asPoint;
 		      background: Color yellow.
 
 	el := BlElement new
 		      layout: BlGridLayout horizontal;
-		      size: 400 @ 400;
+		      extent: 400 @ 400;
 		      position: 200 @ 100;
 		      background: Color blue;
 		      addChildren: {
@@ -179,7 +179,7 @@ BlGridLayoutUsageTest >> testExampleHorizontalSpacing2x1Grid [
 
 	el := BlElement new
 		      layout: (BlGridLayout horizontal cellSpacing: 20);
-		      size: 400 @ 200;
+		      extent: 400 @ 200;
 		      position: 200 @ 100;
 		      background: Color blue;
 		      addChildren: {
@@ -218,7 +218,7 @@ BlGridLayoutUsageTest >> testExampleInCellAlignment2x2Grid [
 
 	el := BlElement new
 		      layout: (BlGridLayout new columnCount: 2);
-		      size: 300 @ 300;
+		      extent: 300 @ 300;
 		      position: 200 @ 100;
 		      background: Color blue;
 		      addChildren: {
@@ -269,7 +269,7 @@ BlGridLayoutUsageTest >> testExampleNautilusGrid [
 		      layout: (BlGridLayout new
 				       columnCount: 4;
 				       cellSpacing: 10);
-		      size: 300 @ 300;
+		      extent: 300 @ 300;
 		      background: Color veryLightGray;
 		      addChildren: {
 				      e1.
@@ -287,24 +287,24 @@ BlGridLayoutUsageTest >> testExampleSimple2x2Grid [
 	<sampleInstance>
 	| e1 e2 e3 e4 el |
 	e1 := BlElement new
-		      size: 150 asPoint;
+		      extent: 150 asPoint;
 		      background: Color pink.
 
 	e2 := BlElement new
-		      size: 150 asPoint;
+		      extent: 150 asPoint;
 		      background: Color green.
 
 	e3 := BlElement new
-		      size: 150 asPoint;
+		      extent: 150 asPoint;
 		      background: Color red.
 
 	e4 := BlElement new
-		      size: 150 asPoint;
+		      extent: 150 asPoint;
 		      background: Color yellow.
 
 	el := BlElement new
 		      layout: (BlGridLayout new columnCount: 2);
-		      size: 400 @ 400;
+		      extent: 400 @ 400;
 		      position: 200 @ 100;
 		      background: Color blue;
 		      addChildren: {
@@ -353,16 +353,16 @@ BlGridLayoutUsageTest >> testExampleVertical1x2Grid [
 	<sampleInstance>
 	| e1 e2 el |
 	e1 := BlElement new
-		      size: 150 asPoint;
+		      extent: 150 asPoint;
 		      background: Color red.
 
 	e2 := BlElement new
-		      size: 150 asPoint;
+		      extent: 150 asPoint;
 		      background: Color yellow.
 
 	el := BlElement new
 		      layout: BlGridLayout vertical;
-		      size: 400 @ 400;
+		      extent: 400 @ 400;
 		      position: 200 @ 100;
 		      background: Color blue;
 		      addChildren: {
@@ -391,7 +391,7 @@ BlGridLayoutUsageTest >> testExampleVerticalSpacing1x2Grid [
 
 	el := BlElement new
 		      layout: (BlGridLayout vertical cellSpacing: 20);
-		      size: 200 @ 400;
+		      extent: 200 @ 400;
 		      position: 200 @ 100;
 		      background: Color blue;
 		      addChildren: {
@@ -407,7 +407,7 @@ BlGridLayoutUsageTest >> testVerticalSpan [
 	<sampleInstance>
 	| grid child1 child2 child3 |
 	grid := BlElement new.
-	grid size: 500 @ 400.
+	grid extent: 500 @ 400.
 	grid layout: (BlGridLayout horizontal
 			 cellSpacing: 10;
 			 columnCount: 2).

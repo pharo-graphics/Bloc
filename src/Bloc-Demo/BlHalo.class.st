@@ -79,7 +79,7 @@ BlHalo class >> resize [
 			 on: BlDragEvent
 			 do: [ :evt |
 				 evt consume.
-				 resizeHalo decorated size: initialSize + evt position - initialPosition ]).
+				 resizeHalo decorated extent: initialSize + evt position - initialPosition ]).
 
 	^ resizeHalo 
 ]
@@ -132,7 +132,7 @@ BlHalo >> initialize [
 	super initialize.
 	self
 		geometry: BlEllipseGeometry new;
-		size: 20 asPoint;
+		extent: 20 asPoint;
 		background: Color white;
 		opacity: 0.8.
 	self name: 'Unnamed'.

@@ -11,7 +11,7 @@ BlIgnoredLayoutTest >> testAlignmentIsStable [
 	<demo>
 	| aContainer aChild |
 	aChild := BlElement new
-		          size: 50 @ 50;
+		          extent: 50 @ 50;
 		          background: (Color red alpha: 0.5);
 		          constraintsDo: [ :c |
 			          c ignoreByLayout.
@@ -20,7 +20,7 @@ BlIgnoredLayoutTest >> testAlignmentIsStable [
 
 	aContainer := BlElement new
 		              border: (BlBorder paint: Color black width: 1);
-		              size: 300 @ 200;
+		              extent: 300 @ 200;
 		              margin: (BlInsets top: 20);
 		              clipChildren: false;
 		              addChild: aChild.

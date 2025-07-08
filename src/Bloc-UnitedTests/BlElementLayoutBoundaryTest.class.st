@@ -64,8 +64,8 @@ BlElementLayoutBoundaryTest >> testSpaceWithExactLayoutBoundary [
 	| aSpace aContainer aLayoutBoundary aChild |
 	aSpace := BlSpace new.
 	aSpace extent: 500 @ 400.
-	aContainer := BlElement new size: 400 @ 300.
-	aLayoutBoundary := BlElement new size: 300 @ 200.
+	aContainer := BlElement new extent: 400 @ 300.
+	aLayoutBoundary := BlElement new extent: 300 @ 200.
 	aChild := BlElement new
 		constraintsDo: [ :c | 
 			c horizontal matchParent.

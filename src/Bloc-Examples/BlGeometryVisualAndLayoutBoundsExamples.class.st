@@ -157,7 +157,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> emptyIconElement [
 
 	<sampleInstance>
 	^ BlDevElement new
-		  size: 8 @ 12;
+		  extent: 8 @ 12;
 		  background: Color green muchDarker;
 		  yourself
 ]
@@ -265,7 +265,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> rectangleWithSmallerGeometry [
 	| aRectangleElement |
 	aRectangleElement := BlDevElement new.
 	aRectangleElement geometry: self rectanglePolygon.
-	aRectangleElement size: 200 @ 150.
+	aRectangleElement extent: 200 @ 150.
 	aRectangleElement background: (Color gray alpha: 0.2).
 	aRectangleElement border:
 		(BlBorder paint: (Color gray alpha: 0.5) width: 10).
@@ -335,7 +335,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> starWithSmallerGeometry [
 	| aStarElement |
 	aStarElement := BlDevElement new.
 	aStarElement geometry: self starPolygon.
-	aStarElement size: 200 @ 200.
+	aStarElement extent: 200 @ 200.
 	aStarElement background: (Color gray alpha: 0.2).
 	aStarElement border:
 		(BlBorder paint: (Color gray alpha: 0.5) width: 10).
@@ -403,7 +403,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> unclippedTriangle [
 	<sampleInstance>
 	| aContainer aPolygonElement |
 	aContainer := BlElement new.
-	aContainer size: 8 @ 11.
+	aContainer extent: 8 @ 11.
 	aContainer position: 50 @ 50.
 	aContainer clipChildren: false.
 	aContainer transformDo: [ :t |
@@ -414,7 +414,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> unclippedTriangle [
 		(BlBorder paint: (Color green alpha: 0.4) width: 0.2).
 
 	aPolygonElement := BlElement new.
-	aPolygonElement size: 8 @ 11.
+	aPolygonElement extent: 8 @ 11.
 	aPolygonElement geometry: (BlPolygonGeometry vertices: {
 				 (0 @ 0).
 				 (8 @ 5.5).

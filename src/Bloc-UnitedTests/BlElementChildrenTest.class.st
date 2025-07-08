@@ -15,7 +15,7 @@ BlElementChildrenTest >> hierarchyChildren [
 	<demo>
 	| aContainer current |
 	aContainer := BlElement new
-		              size: 400 @ 400;
+		              extent: 400 @ 400;
 		              background: Color veryVeryLightGray;
 		              labeled: 'Container';
 		              yourself.
@@ -23,7 +23,7 @@ BlElementChildrenTest >> hierarchyChildren [
 	1 to: 10 do: [ :i |
 		| son |
 		son := BlElement new
-			       size: 10 - i * 40 asPoint;
+			       extent: 10 - i * 40 asPoint;
 			       position: 10 asPoint;
 			       background: (Color h: i * 360 / 10 s: 1.0 v: 1.0);
 			       labeled: 'shape_' , i asString;
@@ -41,7 +41,7 @@ BlElementChildrenTest >> multipleChildren [
 	<demo>
 	| aContainer |
 	aContainer := BlElement new
-		              size: 400 @ 400;
+		              extent: 400 @ 400;
 		              background: Color veryVeryLightGray;
 		              labeled: 'Container'.
 
@@ -83,7 +83,7 @@ BlElementChildrenTest >> multipleChildrenIn: aContainer depth: aDepth [
 	1 to: 10 do: [ :i |
 		| son |
 		son := BlElement new
-			       size: 10 - i * 40 asPoint;
+			       extent: 10 - i * 40 asPoint;
 			       position: 10 asPoint;
 			       background: (Color h: i * 360 / 10 s: 1.0 v: 1.0);
 			       labeled: 'shape_' , i asString.
@@ -100,16 +100,16 @@ BlElementChildrenTest >> overlappingChildren [
 	<demo>
 	| aContainer aRedChild aBlueChild |
 	aContainer := BlElement new
-		              size: 400 @ 400;
+		              extent: 400 @ 400;
 		              background: Color veryVeryLightGray;
 		              labeled: 'Container'.
 	aRedChild := BlElement new
-		             size: 300 @ 150;
+		             extent: 300 @ 150;
 		             position: 50 @ 125;
 		             background: (Color red alpha: 0.5);
 		             labeled: 'Red'.
 	aBlueChild := BlElement new
-		              size: 150 @ 300;
+		              extent: 150 @ 300;
 		              position: 125 @ 50;
 		              background: (Color blue alpha: 0.5);
 		              labeled: 'Blue'.

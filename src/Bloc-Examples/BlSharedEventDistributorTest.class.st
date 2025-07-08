@@ -50,7 +50,7 @@ BlSharedEventDistributorTest >> newSquaredElement [
 
 	anElement := BlElement new.
 	anElement
-		size: 100 @ 100;
+		extent: 100 @ 100;
 		background: aBackgroundColor;
 		margin: (BlInsets all: 3);
 		addEventHandlerOn: BlClickEvent

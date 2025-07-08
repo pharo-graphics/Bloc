@@ -14,7 +14,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> blue [
 	<sampleInstance>
 	<demo>
 	^ self box
-		  size: self blueWidth @ self blueHeight;
+		  extent: self blueWidth @ self blueHeight;
 		  border: (BlBorder paint: (Color blue alpha: 0.6) width: 1);
 		  background: (Color blue alpha: 0.3);
 		  margin: self blueMargin
@@ -87,7 +87,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> green [
 	<sampleInstance>
 	<demo>
 	^ self box
-		  size: self greenWidth @ self greenHeight;
+		  extent: self greenWidth @ self greenHeight;
 		  border:
 			  (BlBorder paint: (Color green muchDarker alpha: 0.6) width: 1);
 		  background: (Color green darker alpha: 0.3);
@@ -186,7 +186,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> red [
 	<sampleInstance>
 	<demo>
 	^ self box
-		  size: self redWidth @ self redHeight;
+		  extent: self redWidth @ self redHeight;
 		  background: (Color red alpha: 0.3);
 		  border: (BlBorder paint: (Color red alpha: 0.6) width: 1);
 		  margin: self redMargin

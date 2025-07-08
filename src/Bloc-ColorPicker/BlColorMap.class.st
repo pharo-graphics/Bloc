@@ -48,7 +48,7 @@ BlColorMap >> color [
 BlColorMap >> initialize [
 
 	super initialize.
-	self size: 250 @ 140.
+	self extent: 250 @ 140.
 	self geometry: (BlRoundedRectangleGeometry cornerRadius: 10).
 	self clipChildren: false.
 	self constraintsDo: [ :c | c margin: (BlInsets all: 10) ].
@@ -76,7 +76,7 @@ BlColorMap >> initializeBrightnessMap [
 BlColorMap >> initializeCursor [
 
 	cursor := BlElement new
-		               size: 20 asPoint;
+		               extent: 20 asPoint;
 		               background: Color red;
 		               geometry: BlCircleGeometry new;
 		               border: (BlBorder paint: Color white width: 2).

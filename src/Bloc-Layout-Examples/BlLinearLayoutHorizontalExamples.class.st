@@ -239,7 +239,7 @@ BlLinearLayoutHorizontalExamples >> one_child_set_visibility_gone [
 	aContainer := BlElement new
 		layout: (BlLinearLayout horizontal cellSpacing: 20);
 		padding: (BlInsets top: 10 bottom: 10);
-		size: 500@400.
+		extent: 500@400.
 		
 	aRed := BlElement new
 		constraintsDo: [ :c |
