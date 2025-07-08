@@ -1499,11 +1499,18 @@ BlElement >> extent [
 
 { #category : #'geometry extent' }
 BlElement >> extent: aPoint [ 
-	self 
-		deprecated: 'Use size: instead'
-		on: 	'1 October 2017' 
-		in: 'Pharo-7.0-alpha.build.132.sha.4ea2f39a9f43185d31b844be5ad33b677f43bf17'.
-	^ self size: aPoint 
+
+	| aLayoutConstraints |
+	aLayoutConstraints := self constraints.
+	(aLayoutConstraints horizontal resizer isExact and: [ 
+		aLayoutConstraints horizontal resizer size = aPoint x 
+			and: [ aLayoutConstraints vertical resizer isExact
+				and: [ aLayoutConstraints vertical resizer size = aPoint y ] ] ])
+		ifTrue: [ ^ self ].
+
+	self constraintsDo: [ :c |
+		c horizontal exact: aPoint x.
+		c vertical exact: aPoint y ]
 ]
 
 { #category : #'event handling' }
@@ -3659,24 +3666,26 @@ BlElement >> siblingsDo: aBlock [
 
 { #category : #'api - bounds' }
 BlElement >> size [
+
+	self
+		deprecated: 'Use #extent instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver size' ->
+			'`@receiver extent'.
+
 	^ self extent
 ]
 
 { #category : #'api - bounds' }
 BlElement >> size: aPoint [
-	<event: #BlElementExtentChangedEvent>
-	| aLayoutConstraints |
 
-	aLayoutConstraints := self constraints.
-	(aLayoutConstraints horizontal resizer isExact and: [ 
-		aLayoutConstraints horizontal resizer size = aPoint x 
-			and: [ aLayoutConstraints vertical resizer isExact
-				and: [ aLayoutConstraints vertical resizer size = aPoint y ] ] ])
-		ifTrue: [ ^ self ].
+	self
+		deprecated: 'Use #extent: instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver size: `@arg' ->
+			'`@receiver extent: `@arg'.
 
-	self constraintsDo: [ :c |
-		c horizontal exact: aPoint x.
-		c vertical exact: aPoint y ]
+	self extent: aPoint
 ]
 
 { #category : #accessing }
