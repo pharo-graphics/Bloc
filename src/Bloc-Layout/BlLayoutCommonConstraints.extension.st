@@ -1,6 +1,12 @@
 Extension { #name : #BlLayoutCommonConstraints }
 
 { #category : #'*Bloc-Layout' }
+BlLayoutCommonConstraints >> anchors [ 
+
+	^ self at: BlAnchorLayout 
+]
+
+{ #category : #'*Bloc-Layout' }
 BlLayoutCommonConstraints >> flow [
 	^ self at: BlFlowLayout
 ]
