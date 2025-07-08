@@ -47,8 +47,7 @@ BlHistogramGeometry class >> example [
 				c horizontal fitContent.
 				c vertical fitContent ].
 			
-			g := BlHistogramGeometry new.
-			g values: ramp.
+			g := BlHistogramGeometry values: ramp.
 			g perform: each.
 
 			cell addChild: (BlElement new
@@ -77,6 +76,14 @@ BlHistogramGeometry class >> initialize [
 	VerticalInverted := #VerticalInverted.
 	Horizontal := #Horizontal.
 	HorizontalInverted := #HorizontalInverted
+]
+
+{ #category : #accessing }
+BlHistogramGeometry class >> values: aCollection [
+
+	^ self new
+		values: aCollection;
+		yourself
 ]
 
 { #category : #accessing }
