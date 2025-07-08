@@ -13,7 +13,7 @@ BlBasicTest >> testAsForm [
 
 	| anElement |
 	anElement := BlElement new
-		size: 30@40;
+		extent: 30@40;
 		background: Color green;
 		yourself.
 
@@ -32,15 +32,18 @@ BlBasicTest >> testAsForm [
 
 { #category : #tests }
 BlBasicTest >> testBorderRopedText [
-<sampleInstance>	
-| aText |
-aText := 'Text with border' asRopedText.
-aText fontSize: 30.
-aText foreground: Color gray.
-aText thin.
-self assert: aText rope attributes equals: { (BlFontSizeAttribute size: 30).
-(BlTextForegroundAttribute paint: Color gray). BlFontWeightAttribute thin }.
-^ aText
+
+	<sampleInstance>
+	| aText |
+	aText := 'Text with border' asRopedText.
+	aText fontSize: 30.
+	aText foreground: Color gray.
+	aText thin.
+	self assert: aText rope attributes equals: {
+			(BlFontSizeAttribute size: 30).
+			(BlTextForegroundAttribute paint: Color gray).
+			BlFontWeightAttribute thin }.
+	^ aText
 ]
 
 { #category : #tests }
@@ -150,7 +153,7 @@ BlBasicTest >> testElementWithAllBorders [
 	<demo>
 	^ self testContainer
 		  layout: BlFrameLayout new;
-		  size: 300 @ 150;
+		  extent: 300 @ 150;
 		  position: 50 @ 50;
 		  addChild: (self testLeftBorder background: Color green darker);
 		  addChild: (self testRightBorder background: Color yellow darker);
@@ -165,7 +168,7 @@ BlBasicTest >> testElementWithEllipticBorders [
 	<demo>
 	^ self testContainer
 		  layout: BlFrameLayout new;
-		  size: 300 @ 150;
+		  extent: 300 @ 150;
 		  position: 50 @ 50;
 		  addChild: (self testLeftBorder
 				   background: (Color gray alpha: 0.3);
@@ -209,7 +212,7 @@ BlBasicTest >> testEllipseWithShadow [
 	<demo>
 	^ BlElement new
 		  geometry: BlEllipseGeometry new;
-		  size: 300 @ 150;
+		  extent: 300 @ 150;
 		  position: 50 @ 50;
 		  border: (BlBorder paint: Color black width: 2);
 		  background: Color red;
@@ -231,7 +234,7 @@ BlBasicTest >> testFabButton [
 				           range: 255);
 		          geometry: BlEllipseGeometry new;
 		          position: 100 @ 100;
-		          size: 56 @ 56;
+		          extent: 56 @ 56;
 		          layout: BlFrameLayout new;
 		          effect: (BlGaussianShadowEffect
 				           color: (Color black alpha: 0.3)
@@ -304,7 +307,7 @@ BlBasicTest >> testPolygon [
 				   (190 @ 78).
 				   (10 @ 78).
 				   (160 @ 198) }) asElement
-		  size: 200 @ 200;
+		  extent: 200 @ 200;
 		  background: (Color blue alpha: 0.4);
 		  outskirts: BlOutskirts outside;
 		  border: (BlBorder paint: Color darkGray width: 2);
@@ -318,7 +321,7 @@ BlBasicTest >> testRectangle [
 	<demo>
 	^ BlElement new
 		  geometry: BlRoundedRectangleGeometry new;
-		  size: 200 @ 100;
+		  extent: 200 @ 100;
 		  background: Color transparent;
 		  effect: BlGaussianShadowEffect new;
 		  border: (BlBorder paint: Color blue width: 4);
@@ -331,7 +334,7 @@ BlBasicTest >> testRectangleWithImage [
 	<sampleInstance>
 	<demo>
 	^ BlElement new
-		  size: 400 @ 200;
+		  extent: 400 @ 200;
 		  position: 100 @ 100;
 		  geometry: (BlRoundedRectangleGeometry cornerRadius: 10);
 		  background:
@@ -345,7 +348,7 @@ BlBasicTest >> testRectangleWithLinearGradient [
 	<sampleInstance>
 	<demo>
 	^ BlElement new
-		  size: 300 @ 200;
+		  extent: 300 @ 200;
 		  position: 100 @ 100;
 		  geometry: (BlRoundedRectangleGeometry cornerRadius: 40);
 		  background: self testLinearGradient;
@@ -358,7 +361,7 @@ BlBasicTest >> testRectangleWithShadow [
 	<sampleInstance>
 	<demo>
 	^ BlElement new
-		  size: 300 @ 150;
+		  extent: 300 @ 150;
 		  position: 50 @ 50;
 		  border: (BlBorder paint: Color black width: 2);
 		  background: Color red;
@@ -381,7 +384,7 @@ BlBasicTest >> testRoundedRectangle [
 	<demo>
 	^ BlElement new
 		  geometry: (BlRoundedRectangleGeometry cornerRadius: 20);
-		  size: 150 @ 80;
+		  extent: 150 @ 80;
 		  background: Color yellow;
 		  border: (BlBorder paint: Color red width: 7);
 		  yourself
@@ -414,7 +417,7 @@ BlBasicTest >> testSquare [
 	<demo>
 	^ BlElement new
 		  geometry: BlRoundedRectangleGeometry new;
-		  size: 80 @ 80;
+		  extent: 80 @ 80;
 		  background: Color green;
 		  border: (BlBorder paint: Color black width: 2);
 		  yourself

@@ -8,7 +8,7 @@ Class {
 BlElementEventTest >> newChild [
 
 	^ BlElement new
-		  size: 100 @ 75;
+		  extent: 100 @ 75;
 		  background: Color red;
 		  yourself
 ]
@@ -17,7 +17,7 @@ BlElementEventTest >> newChild [
 BlElementEventTest >> newContainer [
 
 	^ BlElement new
-		  size: 500 @ 400;
+		  extent: 500 @ 400;
 		  border:
 				(BlBorder builder dashed
 				   width: 2;
@@ -30,7 +30,7 @@ BlElementEventTest >> newContainer [
 BlElementEventTest >> newParent [
 
 	^ BlElement new
-		  size: 400 @ 300;
+		  extent: 400 @ 300;
 		  background: (Color gray alpha: 0.3);
 		  yourself
 ]
@@ -104,12 +104,12 @@ BlElementEventTest >> testExtentChanged [
 		do: [ extentChanged := extentChanged + 1 ].
 
 	"change size and force compute layout"
-	element size: element extent * 2.
+	element extent: element extent * 2.
 	element forceLayout.
 	self assert: extentChanged equals: 1.
 
 	"requesting the same size should not trigger event"
-	element size: element extent.
+	element extent: element extent.
 	element forceLayout.
 	self assert: extentChanged equals: 1
 ]
@@ -126,7 +126,7 @@ BlElementEventTest >> testExtentChangedChangingWithTheSameSizeDoesNotRaiseEvent 
 		addEventHandlerOn: BlElementExtentChangedEvent
 		do: [ extentChanged := extentChanged + 1 ].
 
-	element size: element extent.
+	element extent: element extent.
 	element forceLayout.
 	self assert: extentChanged equals: 0
 ]

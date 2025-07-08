@@ -15,7 +15,7 @@ BlProportionalLayoutTest >> testDefaultConstraints [
 	aContainer := BlElement new
 		id: #container;
 		layout: BlProportionalLayout new;
-		size: 210 @ 110;
+		extent: 210 @ 110;
 		addChild: aChild;
 		padding: (BlInsets all: 5);
 		yourself.
@@ -68,7 +68,7 @@ BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 	aContainer := BlElement new
 		id: #container;
 		layout: BlProportionalLayout new;
-		size: containerExtent;
+		extent: containerExtent;
 		addChild: aChild;
 		padding: containerPadding;
 		yourself.
@@ -124,7 +124,7 @@ BlProportionalLayoutTest >> testGrandChildMatchesParent [
 	aContainer := BlElement new
 		id: #container;
 		layout: BlProportionalLayout new;
-		size: 48 @ 38;
+		extent: 48 @ 38;
 		addChild: aChild;
 		padding: (BlInsets all: 4);
 		yourself.
@@ -199,7 +199,7 @@ BlProportionalLayoutTest >> testHorizontalAndVerticalConstraints [
 	aContainer := BlElement new
 		id: #container;
 		layout: BlProportionalLayout new;
-		size: 100 @ 100;
+		extent: 100 @ 100;
 		addChild: aChild;
 		yourself.
 	
@@ -216,7 +216,7 @@ BlProportionalLayoutTest >> testIgnoreByLayoutChild [
 	| aContainer aChild |
 	aChild := BlElement new
 		id: #child;
-		size: 10 @ 20;
+		extent: 10 @ 20;
 		margin: (BlInsets all: 2); "This is taken into account"
 		constraintsDo: [ :c |
 			c ignoreByLayout.
@@ -226,7 +226,7 @@ BlProportionalLayoutTest >> testIgnoreByLayoutChild [
 
 	aContainer := BlElement new
 		id: #container;
-		size: 200 @ 100;
+		extent: 200 @ 100;
 		padding: (BlInsets all: 5); "This won't be taken into account"
 		layout: BlProportionalLayout new;
 		addChild: aChild;
@@ -257,7 +257,7 @@ BlProportionalLayoutTest >> testMultipleChildren [
 	aContainer := BlElement new
 		id: #container;
 		layout: BlProportionalLayout new;
-		size: 100 @ 100;
+		extent: 100 @ 100;
 		addChild: childA;
 		addChild: childB;
 		yourself.

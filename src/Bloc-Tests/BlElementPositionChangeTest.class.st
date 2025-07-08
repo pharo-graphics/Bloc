@@ -12,15 +12,15 @@ BlElementPositionChangeTest >> newElementTree [
 
 	| parent child subChild |
 	parent := BlElement new.
-	parent size: 200 @ 200.
+	parent extent: 200 @ 200.
 	parent background: Color blue.
 
 	child := BlElement new.
-	child size: 150 @ 150.
+	child extent: 150 @ 150.
 	child background: Color red.
 
 	subChild := BlElement new.
-	subChild size: 100 @ 100.
+	subChild extent: 100 @ 100.
 	subChild background: Color green.
 
 	child addChild: subChild.
@@ -134,7 +134,7 @@ BlElementPositionChangeTest >> testPositionChangeBoundsChange [
 	| element anUpdater |
 	element := BlElement new.
 	element background: Color blue.
-	element size: 100 @ 100.
+	element extent: 100 @ 100.
 	element position: 0 @ 0.
 	element forceLayout.
 

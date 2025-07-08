@@ -57,7 +57,7 @@ BlElementBoundsByScripterTest >> newParent1 [
 
 	^ BlElement new
 		id: #parent_1;
-		size: self expectedElementExtent;
+		extent: self expectedElementExtent;
 		border: (BlBorder paint: (Color blue alpha: 0.2) width: 2);
 		yourself
 ]
@@ -67,7 +67,7 @@ BlElementBoundsByScripterTest >> newParent2 [
 
 	^ BlElement new
 		id: #parent_2;
-		size: self expectedElementExtent;
+		extent: self expectedElementExtent;
 		position: 50 @ 50;
 		border: (BlBorder paint: (Color red alpha: 0.2) width: 2);
 		yourself

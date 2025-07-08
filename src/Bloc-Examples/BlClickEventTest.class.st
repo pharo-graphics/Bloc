@@ -219,11 +219,11 @@ BlClickEventTest >> threeElementsWithFalseChildClipping [
 		           background: Color green muchLighter;
 		           id: #parent;
 		           layout: BlFrameLayout new;
-		           size: 100 @ 100;
+		           extent: 100 @ 100;
 		           yourself.
 
 	aChild := self element
-		          size: 30 @ 30;
+		          extent: 30 @ 30;
 		          id: #child;
 		          clipChildren: false;
 		          constraintsDo: [ :c |
@@ -232,7 +232,7 @@ BlClickEventTest >> threeElementsWithFalseChildClipping [
 		          yourself.
 
 	aGrandchild := self element
-		               size: 20 @ 20;
+		               extent: 20 @ 20;
 		               background: Color red muchLighter;
 		               id: #grandchild;
 		               constraintsDo: [ :c |

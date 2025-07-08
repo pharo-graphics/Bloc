@@ -73,7 +73,7 @@ BlElementSelection >> hideInfo [
 
 	self padding: BlInsets empty.
 	self position: self selectionPosition.
-	self size: self selectionExtent.
+	self extent: self selectionExtent.
 	
 	self effect: BlNullEffect new.
 	self background: self defaultBackground.
@@ -126,7 +126,7 @@ BlElementSelection >> initializeActions [
 	resizeButton addEventHandler: (BlEventHandler on: BlDragEndEvent do: [ :evt |  evt consume.]).
 	resizeButton addEventHandler: (BlEventHandler on: BlDragEvent do: [ :evt |
 		evt consume.
-		self client size: (initialSize + evt position - initialPosition) ]).
+		self client extent: (initialSize + evt position - initialPosition) ]).
 
 	inspectButton addEventHandler: (BlEventHandler on: BlClickEvent do: [ :evt | 
 		evt consume.
@@ -236,5 +236,5 @@ BlElementSelection >> showOn: anElement [
 	client space root addChild: self.
 
 	self position: self selectionPosition.
-	self size: self selectionExtent
+	self extent: self selectionExtent
 ]

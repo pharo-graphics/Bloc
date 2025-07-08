@@ -14,7 +14,7 @@ BlElementBoundsTest >> child [
 	<sampleInstance>
 	<demo>
 	^ BlElement new
-		  size: self childExtent;
+		  extent: self childExtent;
 		  position: self childPosition;
 		  background: Color red
 ]
@@ -35,7 +35,7 @@ BlElementBoundsTest >> parent [
 	<sampleInstance>
 	<demo>
 	^ BlElement new
-		  size: self parentExtent;
+		  extent: self parentExtent;
 		  position: self parentPosition;
 		  background: (Color gray alpha: 0.3)
 ]
@@ -424,7 +424,7 @@ BlElementBoundsTest >> testShadowEffectBoundsWithoutOffset [
 		equals:
 			(shadowWidth * shadowMultiplier asPoint negated
 				corner: self childExtent + (shadowWidth * shadowMultiplier asPoint)).
-	child size: self childExtent * 2.
+	child extent: self childExtent * 2.
 	child forceLayout.
 	self
 		assert: child effectBounds

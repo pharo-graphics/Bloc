@@ -21,7 +21,7 @@ BlElementSelectionListener class >> on: aSelectionElement [
 { #category : #'element handlers' }
 BlElementSelectionListener >> elementExtentChangedEvent: anEvent [
 
-	self selection size: self selection selectionExtent
+	self selection extent: self selection selectionExtent
 ]
 
 { #category : #'element handlers' }

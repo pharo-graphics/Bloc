@@ -58,7 +58,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalListFixedWidthLTR [
 		
 	el := BlElement new
 		layout: BlLinearLayout horizontal;
-		size: 450 @ 150;
+		extent: 450 @ 150;
 		position: 200 @ 100;
 		padding:(BlInsets all: 10);
 		background: Color blue;
@@ -93,7 +93,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalListFixedWidthRTL [
 		
 	el := BlElement new
 		layout: (BlLinearLayout horizontal rightToLeft);
-		size: 450 @ 150;
+		extent: 450 @ 150;
 		position: 200 @ 100;
 		padding:(BlInsets all: 10);
 		background: Color blue;
@@ -126,7 +126,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalListLTR [
 	
 	el := BlElement new
 		layout: BlLinearLayout horizontal;
-		size: 300@80;
+		extent: 300@80;
 		position: 200 @ 100;
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
@@ -158,7 +158,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalListRTL [
 	
 	el := BlElement new
 		layout: (BlLinearLayout horizontal rightToLeft);
-		size: 300@80;
+		extent: 300@80;
 		position: 200 @ 100;
 		background: Color veryVeryLightGray;
 		addChildren: { e1. e2. e3 }.
@@ -187,7 +187,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalTopCenterBottomLTR [
 	
 	el := BlElement new
 		layout: BlLinearLayout horizontal;
-		size: 300@80;
+		extent: 300@80;
 		position: 200 @ 100;
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
@@ -216,7 +216,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalTopCenterBottomRTL [
 	
 	el := BlElement new
 		layout: BlLinearLayout horizontal rightToLeft;
-		size: 300@80;
+		extent: 300@80;
 		position: 200 @ 100;
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
@@ -251,7 +251,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalUsingWeightLTR [
 	
 	el := BlElement new
 		layout: BlLinearLayout horizontal;
-		size: 300@80;
+		extent: 300@80;
 		position: 200 @ 100;
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
@@ -286,7 +286,7 @@ BlLinearLayoutUsageExamples >> exampleHorizontalUsingWeightRTL [
 	
 	el := BlElement new
 		layout: BlLinearLayout horizontal rightToLeft;
-		size: 300@80;
+		extent: 300@80;
 		position: 200 @ 100;
 		background: Color blue;
 		addChildren: {e1. e2. e3}.
@@ -311,14 +311,14 @@ BlLinearLayoutUsageExamples >> exampleVerticalLeftCenterRightLRT [
 		background: Color green.
 	
 	e3 := BlElement new
-		size: 50@50;
+		extent: 50@50;
 		constraintsDo: [ :c |
 			c linear horizontal alignRight ];
 		background: Color yellow.
 	
 	el := BlElement new
 		layout: BlLinearLayout vertical;
-		size: 200@300;
+		extent: 200@300;
 		position: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3 }.
@@ -343,14 +343,14 @@ BlLinearLayoutUsageExamples >> exampleVerticalLeftCenterRightRTL [
 		background: Color green.
 	
 	e3 := BlElement new
-		size: 50@50;
+		extent: 50@50;
 		constraintsDo: [ :c |
 			c linear horizontal alignRight ];
 		background: Color yellow.
 
 	el := BlElement new
 		layout: BlLinearLayout vertical rightToLeft;
-		size: 200@300;
+		extent: 200@300;
 		position: 200 @ 100;
 		background: Color blue;
 		addChildren: { e1. e2. e3 }.
@@ -385,7 +385,7 @@ BlLinearLayoutUsageExamples >> exampleVerticalList [
 	
 	el := BlElement new
 		layout: BlLinearLayout vertical;
-		size: 80@300;
+		extent: 80@300;
 		position: 200 @ 100;
 		padding: (BlInsets all: 10);
 		background: Color blue;
@@ -415,7 +415,7 @@ BlLinearLayoutUsageExamples >> exampleVerticalListFixedHeight [
 	
 	el := BlElement new
 		layout: BlLinearLayout vertical;
-		size: 80@300;
+		extent: 80@300;
 		position: 200 @ 100;
 		padding:(BlInsets all: 10);
 		background: Color blue;
@@ -498,7 +498,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimited [
 		BlElement new
 			background: Color blue;
 			margin: (BlInsets all: 10);
-			size: 200@150 ].
+			extent: 200@150 ].
 
 	child := BlElement new.
 	child layout: BlLinearLayout vertical.
@@ -533,7 +533,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedAndAnotherChild [
 		BlElement new
 			background: Color blue;
 			margin: (BlInsets all: 10);
-			size: 200@150 ].
+			extent: 200@150 ].
 
 	childA := BlElement new.
 	childA layout: BlLinearLayout vertical.
@@ -547,7 +547,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedAndAnotherChild [
 	childB := BlElement new.
 	childB background: (Color blue alpha: 0.3).
 	childB border: (BlBorder paint: Color blue width: 2).
-	childB size: 100@75.
+	childB extent: 100@75.
 
 	parent := BlElement new.
 	parent layout: BlLinearLayout vertical.
@@ -574,7 +574,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedAndAnotherChildFitCo
 		BlElement new
 			background: Color blue;
 			margin: (BlInsets all: 10);
-			size: 200@150 ].
+			extent: 200@150 ].
 
 	childA := BlElement new.
 	childA layout: BlLinearLayout vertical.
@@ -588,7 +588,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedAndAnotherChildFitCo
 	subChildB := BlElement new.
 	subChildB background: (Color blue alpha: 0.3).
 	subChildB border: (BlBorder paint: Color blue width: 2).
-	subChildB size: 100@75.
+	subChildB extent: 100@75.
 
 	childB := BlElement new.
 	childB layout: BlLinearLayout vertical.
@@ -626,7 +626,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsAndThreeChild
 		BlElement new
 			background: (Color red alpha: 0.5);
 			margin: (BlInsets all: 20);
-			size: 200@100 ].
+			extent: 200@100 ].
 
 	childA := BlElement new.
 	childA layout: BlLinearLayout vertical.
@@ -640,12 +640,12 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsAndThreeChild
 	childB := BlElement new.
 	childB background: (Color blue alpha: 0.3).
 	childB border: (BlBorder paint: Color blue width: 2).
-	childB size: 100@75.
+	childB extent: 100@75.
 	
 	childC := BlElement new.
 	childC background: (Color blue alpha: 0.3).
 	childC border: (BlBorder paint: Color blue width: 2).
-	childC size: 75@50.
+	childC extent: 75@50.
 	
 	childD := BlElement new.
 	childD background: (Color green darker alpha: 0.3).
@@ -682,7 +682,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsAndTwoChildlr
 		BlElement new
 			background: (Color red alpha: 0.5);
 			margin: (BlInsets all: 20);
-			size: 200@100 ].
+			extent: 200@100 ].
 
 	childA := BlElement new.
 	childA layout: BlLinearLayout vertical.
@@ -696,12 +696,12 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsAndTwoChildlr
 	childB := BlElement new.
 	childB background: (Color blue alpha: 0.3).
 	childB border: (BlBorder paint: Color blue width: 2).
-	childB size: 100@75.
+	childB extent: 100@75.
 	
 	childC := BlElement new.
 	childC background: (Color blue alpha: 0.3).
 	childC border: (BlBorder paint: Color blue width: 2).
-	childC size: 75@50.
+	childC extent: 75@50.
 
 	parent := BlElement new.
 	parent layout: (BlLinearLayout vertical cellSpacing: 20).
@@ -730,7 +730,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsNotAndThreeCh
 		BlElement new
 			background: (Color red alpha: 0.5);
 			margin: (BlInsets all: 20);
-			size: 200@100 ].
+			extent: 200@100 ].
 
 	childA := BlElement new.
 	childA layout: BlLinearLayout vertical.
@@ -744,12 +744,12 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsNotAndThreeCh
 	childB := BlElement new.
 	childB background: (Color blue alpha: 0.3).
 	childB border: (BlBorder paint: Color blue width: 2).
-	childB size: 100@75.
+	childB extent: 100@75.
 	
 	childC := BlElement new.
 	childC background: (Color blue alpha: 0.3).
 	childC border: (BlBorder paint: Color blue width: 2).
-	childC size: 75@50.
+	childC extent: 75@50.
 	
 	childD := BlElement new.
 	childD background: (Color green darker alpha: 0.3).
@@ -786,7 +786,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsNotAndTwoChil
 		BlElement new
 			background: (Color red alpha: 0.5);
 			margin: (BlInsets all: 20);
-			size: 200@100 ].
+			extent: 200@100 ].
 
 	childA := BlElement new.
 	childA layout: BlLinearLayout vertical.
@@ -800,12 +800,12 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsNotAndTwoChil
 	childB := BlElement new.
 	childB background: (Color blue alpha: 0.3).
 	childB border: (BlBorder paint: Color blue width: 2).
-	childB size: 100@75.
+	childB extent: 100@75.
 	
 	childC := BlElement new.
 	childC background: (Color blue alpha: 0.3).
 	childC border: (BlBorder paint: Color blue width: 2).
-	childC size: 75@50.
+	childC extent: 75@50.
 
 	parent := BlElement new.
 	parent layout: (BlLinearLayout vertical cellSpacing: 20).

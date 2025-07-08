@@ -43,7 +43,7 @@ BlColorSlider >> hueFromPosition: aPosition [
 BlColorSlider >> initialize [
 
 	super initialize.
-	self size: 180 @ 12.
+	self extent: 180 @ 12.
 	self geometry: (BlRoundedRectangleGeometry cornerRadius: 10).
 	self clipChildren: false.
 	self constraintsDo: [ :c | c margin: (BlInsets all: 10) ].
@@ -56,7 +56,7 @@ BlColorSlider >> initialize [
 BlColorSlider >> initializeCursor [
 
 	cursor := BlElement new
-		               size: 20 asPoint;
+		               extent: 20 asPoint;
 		               background: Color red;
 		               geometry: BlCircleGeometry new;
 		               border: (BlBorder paint: Color white width: 2); yourself.

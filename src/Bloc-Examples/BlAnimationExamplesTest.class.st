@@ -22,7 +22,7 @@ BlAnimationExamplesTest >> ballsAnim [
 			BlEllipseGeometry new asElement
 			      background: Color white;
 			      position: (i * 10) @ 0;
-			      size: 50 @ 50;
+			      extent: 50 @ 50;
 			      yourself.
 
 		bounceAnimation :=
@@ -284,7 +284,7 @@ BlAnimationExamplesTest >> sequential [
 
 	element := BlElement new
 		           background: Color blue;
-		           size: 100 @ 100;
+		           extent: 100 @ 100;
 		           position: 100 @ 50;
 		           addAnimation: sequential;
 		           yourself.

@@ -43,7 +43,7 @@ BlSpaceBuilder >> addHexagonalPolygon [
 
 	^ self addToRoot
 		geometry: (BlPolygonGeometry vertices: hexagonVertices);
-		size: (Rectangle encompassing: hexagonVertices) extent;
+		extent: (Rectangle encompassing: hexagonVertices) extent;
 		yourself
 ]
 
@@ -114,7 +114,7 @@ BlSpaceBuilder >> buildSpace [
 
 	self flag: #todo. "Hacky way to prepare stuff without showing the space:"
 	space root
-		size: spaceExtent;
+		extent: spaceExtent;
 		forceLayout.
 ]
 

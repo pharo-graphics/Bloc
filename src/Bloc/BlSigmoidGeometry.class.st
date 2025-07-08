@@ -30,7 +30,7 @@ BlSigmoidGeometry class >> example [
 		geometry: geometry;
 		border: (BlBorder paint: Color blue width: 3);
 		beOutskirtsCentered;
-		size: 100 asPoint;
+		extent: 100 asPoint;
 		yourself
 ]
 

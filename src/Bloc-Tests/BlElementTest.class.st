@@ -13,7 +13,7 @@ BlElementTest >> element [
 
 	<sampleInstance>
 	^ BlElement new
-		  size: 50 @ 50;
+		  extent: 50 @ 50;
 		  yourself
 ]
 

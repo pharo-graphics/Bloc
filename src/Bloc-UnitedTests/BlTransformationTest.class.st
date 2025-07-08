@@ -13,7 +13,7 @@ BlTransformationTest >> element [
 
 	^ BlElement new
 		  background: Color blue;
-		  size: self extent;
+		  extent: self extent;
 		  position: self position;
 		  "to compute extent and position"forceLayout
 ]
@@ -33,12 +33,12 @@ BlTransformationTest >> testElTxBoundsWithScale [
 
 	| g n |
 	n := BlElement new
-		     size: 100 @ 100;
+		     extent: 100 @ 100;
 		     position: 10 @ 10;
 		     yourself.
 
 	g := BlElement new
-		     size: 200 @ 200;
+		     extent: 200 @ 200;
 		     position: 10 @ 10;
 		     addChild: n;
 		     yourself.
@@ -69,7 +69,7 @@ BlTransformationTest >> testInheritFromIdentity [
 
 	| n |
 	n := BlElement new
-		     size: 100 @ 100;
+		     extent: 100 @ 100;
 		     position: 10 @ 10;
 		     yourself.
 
@@ -155,7 +155,7 @@ BlTransformationTest >> testScaleBy [
 
 	| n |
 	n := BlElement new
-		     size: 100 @ 100;
+		     extent: 100 @ 100;
 		     position: 10 @ 10;
 		     yourself.
 
@@ -183,7 +183,7 @@ BlTransformationTest >> testScaleTo [
 
 	| n |
 	n := BlElement new
-		     size: 100 @ 100;
+		     extent: 100 @ 100;
 		     position: 10 @ 10;
 		     yourself.
 
@@ -232,7 +232,7 @@ BlTransformationTest >> testTranslateTo [
 
 	| n |
 	n := BlElement new
-		     size: 100 @ 100;
+		     extent: 100 @ 100;
 		     position: 10 @ 10;
 		     yourself.
 

@@ -178,7 +178,7 @@ BlColorPicker >> initializePreviewElement [
 
 	| previewElementParent |
 	previewElementParent := BlElement new
-		                        size: 50 asPoint;
+		                        extent: 50 asPoint;
 		                        geometry:
 			                        (BlRoundedRectangleGeometry cornerRadius:
 					                         10);

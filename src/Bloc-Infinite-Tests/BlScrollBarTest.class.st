@@ -31,7 +31,7 @@ BlScrollBarTest >> setUp [
 	gap := 5.
 	largeExtent := 200 @ 400.
 	largeElement := BlElement new
-		size: largeExtent;
+		extent: largeExtent;
 		background: (BlRadialGradientPaint new
 			stops: { 0 -> Color blue. 1 -> Color red };
 			innerCenter:  largeExtent // 2;

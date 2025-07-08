@@ -54,7 +54,7 @@ BlFrameLayoutAlignmentExampleTest >> cheatSheet [
 BlFrameLayoutAlignmentExampleTest >> child [
 
 	^ BlElement new
-		  size: 70 @ 40;
+		  extent: 70 @ 40;
 		  border: (BlBorder paint: Color black width: 1);
 		  layout: BlLinearLayout vertical
 ]
@@ -178,7 +178,7 @@ BlFrameLayoutAlignmentExampleTest >> parent [
 	| parent line1 line2 |
 	parent := BlElement new
 		          background: Color lightGreen;
-		          size: 500 @ 500;
+		          extent: 500 @ 500;
 		          layout: BlFrameLayout new;
 		          clipChildren: false;
 		          constraintsDo: [ :c |

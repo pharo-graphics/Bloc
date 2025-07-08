@@ -69,7 +69,7 @@ BlFocusProcessorTest >> newElementWithFocusHandler [
 BlFocusProcessorTest >> newScripterElement [
 
 	^ self newElementWithFocusHandler
-		size: 600 @ 400;
+		extent: 600 @ 400;
 		position: 50 @ 50;
 		border: (BlBorder paint: Color gray width: 1);
 		background: Color white;
@@ -84,7 +84,7 @@ BlFocusProcessorTest >> newScripterElement [
 		addChild:
 			(self newElementWithFocusHandler
 				id: #'container-1';
-				size: 240 @ 320;
+				extent: 240 @ 320;
 				position: 40 @ 40;
 				border: (BlBorder paint: Color gray width: 1);
 				background: (Color gray alpha: 0.1);
@@ -98,7 +98,7 @@ BlFocusProcessorTest >> newScripterElement [
 				addChild:
 					(self newElementWithFocusHandler
 						id: #'child-1';
-						size: 200 @ 130;
+						extent: 200 @ 130;
 						position: 20 @ 20;
 						background: (Color gray alpha: 0.3);
 						border: (BlBorder paint: Color lightGray width: 1);
@@ -112,7 +112,7 @@ BlFocusProcessorTest >> newScripterElement [
 				addChild:
 					(self newElementWithFocusHandler
 						id: #'child-2';
-						size: 200 @ 130;
+						extent: 200 @ 130;
 						position: 20 @ 170;
 						background: (Color gray alpha: 0.3);
 						border: (BlBorder paint: Color lightGray width: 1);
@@ -128,7 +128,7 @@ BlFocusProcessorTest >> newScripterElement [
 		addChild:
 			(self newElementWithFocusHandler
 				id: #'container-2';
-				size: 240 @ 320;
+				extent: 240 @ 320;
 				position: 320 @ 40;
 				border: (BlBorder paint: Color gray width: 1);
 				background: (Color gray alpha: 0.1);
@@ -142,7 +142,7 @@ BlFocusProcessorTest >> newScripterElement [
 				addChild:
 					(self newElementWithFocusHandler
 						id: #'child-3';
-						size: 200 @ 130;
+						extent: 200 @ 130;
 						position: 20 @ 20;
 						background: (Color gray alpha: 0.3);
 						border: (BlBorder paint: Color lightGray width: 1);
@@ -156,7 +156,7 @@ BlFocusProcessorTest >> newScripterElement [
 				addChild:
 					(self newElementWithFocusHandler
 						id: #'child-4';
-						size: 200 @ 130;
+						extent: 200 @ 130;
 						position: 20 @ 170;
 						background: (Color gray alpha: 0.3);
 						border: (BlBorder paint: Color lightGray width: 1);

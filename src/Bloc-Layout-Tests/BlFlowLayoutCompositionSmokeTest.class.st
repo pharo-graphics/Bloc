@@ -25,21 +25,21 @@ BlFlowLayoutCompositionSmokeTest class >> exampleHorizontalList [
 		background: Color green.
 	
 	e3 := BlElement new
-		size: 50 asPoint;
+		extent: 50 asPoint;
 		background: Color yellow.
 
 	e4 := BlElement new
-		size: 50 asPoint;
+		extent: 50 asPoint;
 		background: Color magenta.
 	
 	e5 := BlElement new
-		size: 50 asPoint;
+		extent: 50 asPoint;
 		geometry: BlEllipseGeometry new;
 		background: Color orange.
 
 	el := BlElement new
 		layout: BlFlowLayout new horizontal;
-		size: 166@300;
+		extent: 166@300;
 		position: 200 @ 100;
 		background: Color veryLightGray;
 		border: (BlBorder paint: Color lightGray width: 8);
@@ -165,7 +165,7 @@ BlFlowLayoutCompositionSmokeTest >> floatBlueCell [
 	<sampleInstance>
 	<demo>
 	^ self floatCell
-		  size: 50 @ 109;
+		  extent: 50 @ 109;
 		  background: Color blue
 ]
 
@@ -189,7 +189,7 @@ BlFlowLayoutCompositionSmokeTest >> floatRedCell [
 	<sampleInstance>
 	<demo>
 	^ self floatCell
-		  size: 103 @ 165;
+		  extent: 103 @ 165;
 		  background: Color red
 ]
 
@@ -199,7 +199,7 @@ BlFlowLayoutCompositionSmokeTest >> floatingCells [
 	<sampleInstance>
 	<demo>
 	^ self container
-		  size: 560 @ 400;
+		  extent: 560 @ 400;
 		  position: 100 @ 50;
 		  addChildren: (2 timesCollect: [ self grayCell ]);
 		  addChild: self floatRedCell;

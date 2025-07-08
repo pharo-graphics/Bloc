@@ -16,14 +16,14 @@ BlFrameLayoutConstraintTest >> setUp [
 
 	parent := BlElement new
 		          background: Color lightGreen;
-		          size: 100 @ 100;
+		          extent: 100 @ 100;
 		          layout: BlFrameLayout new;
 		          position: 100 @ 100;
 		          clipChildren: false.
 
 	child := BlElement new
 		         background: Color lightRed;
-		         size: 20 @ 20.
+		         extent: 20 @ 20.
 
 	parent addChild: child.
 

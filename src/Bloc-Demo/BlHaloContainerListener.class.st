@@ -21,7 +21,7 @@ BlHaloContainerListener class >> on: aSelectionElement [
 { #category : #'element handlers' }
 BlHaloContainerListener >> elementExtentChangedEvent: anEvent [
 
-	self haloContainer size: self haloContainer selectionExtent
+	self haloContainer extent: self haloContainer selectionExtent
 ]
 
 { #category : #'element handlers' }

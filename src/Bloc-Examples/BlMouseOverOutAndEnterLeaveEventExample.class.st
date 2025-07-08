@@ -83,13 +83,13 @@ BlMouseOverOutAndEnterLeaveEventExample >> elementWithChildren [
 		           background: Color white;
 		           effect: self shadow;
 		           position: 30 @ 50;
-		           size: 100 @ 100.
+		           extent: 100 @ 100.
 
 	aChildB := BlElement new
 		           background: Color white;
 		           effect: self shadow;
 		           position: 170 @ 50;
-		           size: 100 @ 100.
+		           extent: 100 @ 100.
 
 	aContainer addChild: aChildA as: #left.
 	aContainer addChild: aChildB as: #right.
@@ -107,7 +107,7 @@ BlMouseOverOutAndEnterLeaveEventExample >> elementWithoutChildren [
 		              background: Color white;
 		              effect: self shadow;
 		              position: 50 @ 50;
-		              size: 300 @ 200.
+		              extent: 300 @ 200.
 
 	^ aContainer
 ]

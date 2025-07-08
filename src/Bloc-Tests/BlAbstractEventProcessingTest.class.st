@@ -117,19 +117,19 @@ BlAbstractEventProcessingTest >> setUp [
 	space root addChild:
 		(BlElement new
 			id: #A;
-			size: 100 @ 100;
+			extent: 100 @ 100;
 			background: Color red;
 			yourself).
 	space root addChild:
 		(BlElement new
 			id: #B;
 			position: 100 @ 0;
-			size: 100 @ 100;
+			extent: 100 @ 100;
 			background: Color green;
 			addChild:
 				(BlElement new
 					id: #BA;
-					size: 50 @ 50;
+					extent: 50 @ 50;
 					background: Color blue;
 					yourself)
 			yourself).

@@ -1505,7 +1505,7 @@ BlSpace >> root: anElement [
 
 	anElement
 		space: self;
-		size: self extent.
+		extent: self extent.
 
 	rootElement := anElement.
 	self dispatchEvent: BlSpaceRootChangeEvent new

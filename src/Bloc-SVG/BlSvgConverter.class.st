@@ -108,7 +108,7 @@ BlSvgConverter >> ellipseFrom: node [
 	| ellipse |
 	ellipse := self newShapeElement.
 	ellipse geometry: BlEllipseGeometry new.
-	ellipse size:
+	ellipse extent:
 		((node attributeAt: 'rx') asNumber * 2) @
 		((node attributeAt: 'ry') asNumber * 2).
 	ellipse position: (self ellipsePositionFrom: node).
@@ -523,7 +523,7 @@ BlSvgConverter >> rectFrom: node [
 	rectangle geometry:
 		(BlRoundedRectangleGeometry cornerRadius:
 			(self rectCornerRadiusFrom: node)).
-	rectangle size:
+	rectangle extent:
 		(node attributeAt: 'width') asNumber @
 		(node attributeAt: 'height') asNumber.
 	self positionFrom: node on: rectangle.

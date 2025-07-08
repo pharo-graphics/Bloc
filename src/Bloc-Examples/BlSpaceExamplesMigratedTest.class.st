@@ -18,7 +18,7 @@ BlSpaceExamplesMigratedTest >> newAnimatedElement [
 
 	^ BlElement new
 		  background: Color blue;
-		  size: 150 @ 150;
+		  extent: 150 @ 150;
 		  position: 100 @ 100;
 		  addAnimation: anAnimation;
 		  yourself
@@ -28,7 +28,7 @@ BlSpaceExamplesMigratedTest >> newAnimatedElement [
 BlSpaceExamplesMigratedTest >> newIconElement [
 
 	^ BlElement new
-		size: 16@16;
+		extent: 16@16;
 		background: (Color green alpha: 0.5);
 		geometry: BlCircleGeometry new;
 		yourself

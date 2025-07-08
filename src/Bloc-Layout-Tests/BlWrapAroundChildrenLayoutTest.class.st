@@ -42,7 +42,7 @@ BlWrapAroundChildrenLayoutTest >> newContainerWithChildren [
 		aContainer addChild: (BlElement new
 				 position: each;
 				 background: Color blue;
-				 size: self childExtent;
+				 extent: self childExtent;
 				 yourself) ].
 	
 	^ aContainer

@@ -62,14 +62,14 @@ BlEventTest >> testChildConsumesEventWithHandler [
 
 	parent := self newRedElement.
 	parent position: 100 @ 100.
-	parent size: 100 @ 100.
+	parent extent: 100 @ 100.
 	parent addEventHandlerOn: BlClickEvent do: [ :anEvent |
 		anEvent consume.
 		clicks add: Color red ].
 
 	child := self newBlueElement.
 	child position: 10 @ 10.
-	child size: 50 @ 50.
+	child extent: 50 @ 50.
 	child addEventHandlerOn: BlClickEvent do: [ :anEvent |
 		anEvent consume.
 		clicks add: Color blue ].
@@ -88,14 +88,14 @@ BlEventTest >> testChildDoesNotConsumeEventWithHandler [
 
 	parent := self newRedElement.
 	parent position: 100 @ 100.
-	parent size: 100 @ 100.
+	parent extent: 100 @ 100.
 	parent addEventHandlerOn: BlClickEvent do: [ :anEvent |
 		anEvent consume.
 		clicks add: Color red ].
 
 	child := self newBlueElement.
 	child position: 10 @ 10.
-	child size: 50 @ 50.
+	child extent: 50 @ 50.
 	child addEventHandlerOn: BlClickEvent do: [ :anEvent |
 		anEvent consumed: false.
 		clicks add: Color blue ].
@@ -132,14 +132,14 @@ BlEventTest >> testParentWithEventFilter [
 
 	parent := self newRedElement.
 	parent position: 100 @ 100.
-	parent size: 100 @ 100.
+	parent extent: 100 @ 100.
 	parent addEventFilterOn: BlClickEvent do: [ :anEvent |
 		anEvent consume.
 		clicks add: Color red ].
 
 	child := self newBlueElement.
 	child position: 10 @ 10.
-	child size: 50 @ 50.
+	child extent: 50 @ 50.
 	child addEventHandlerOn: BlClickEvent do: [ :anEvent |
 		anEvent consume.
 		clicks add: Color blue ].
@@ -182,7 +182,7 @@ BlEventTest >> testSimulateClick [
 
 	| element mouseDown mouseUp click |
 	element := self newBlueElement.
-	element size: 100 @ 100.
+	element extent: 100 @ 100.
 	element position: 0 @ 0.
 
 	mouseDown := mouseUp := click := 0.
@@ -209,12 +209,12 @@ BlEventTest >> testSimulateClickOnChildInDisabledParent [
 
 	| parent red mouseDown mouseUp click |
 	parent := self newGrayElement.
-	parent size: 300 @ 300.
+	parent extent: 300 @ 300.
 	"make parent element be unresponsive to mouse events"
 	parent preventMouseEvents.
 
 	red := self newRedElement.
-	red size: 200 @ 200.
+	red extent: 200 @ 200.
 	red opacity: 0.2.
 
 	parent addChildren: { red }.
@@ -243,12 +243,12 @@ BlEventTest >> testSimulateClickOnChildInParentPreventingChildren [
 
 	| parent red childMouseDown childMouseUp childClick parentMouseDown parentMouseUp parentClick |
 	parent := self newGrayElement.
-	parent size: 300 @ 300.
+	parent extent: 300 @ 300.
 	"make parent element and children be unresponsive to mouse events"
 	parent preventChildrenMouseEvents.
 
 	red := self newRedElement.
-	red size: 200 @ 200.
+	red extent: 200 @ 200.
 	red opacity: 0.2.
 
 	parent addChildren: { red }.
@@ -291,12 +291,12 @@ BlEventTest >> testSimulateClickOnChildInUnresponsiveParent [
 
 	| parent red mouseDown mouseUp click |
 	parent := self newGrayElement.
-	parent size: 300 @ 300.
+	parent extent: 300 @ 300.
 	"make parent element and children be unresponsive to mouse events"
 	parent preventMeAndChildrenMouseEvents.
 
 	red := self newRedElement.
-	red size: 200 @ 200.
+	red extent: 200 @ 200.
 	red opacity: 0.2.
 
 	parent addChildren: { red }.
@@ -326,16 +326,16 @@ BlEventTest >> testSimulateClickOnOverlapped [
 
 	| container blue red clickOnBlue |
 	container := self newGrayElement.
-	container size: 300 @ 300.
+	container extent: 300 @ 300.
 
 	blue := self newBlueElement.
-	blue size: 200 @ 200.
+	blue extent: 200 @ 200.
 	blue opacity: 0.2.
 	blue elevation: (BlGlobalElevation elevation: 10).
 	container addChild: blue.
 
 	red := self newRedElement.
-	red size: 200 @ 200.
+	red extent: 200 @ 200.
 	red opacity: 0.2.
 	red elevation: (BlGlobalElevation elevation: 1).
 	container addChild: red.
@@ -355,7 +355,7 @@ BlEventTest >> testSimulateClickOnTransformedAndRelocated [
 
 	| element mouseDown mouseUp click |
 	element := self newBlueElement.
-	element size: 10 @ 10.
+	element extent: 10 @ 10.
 	element position: 500 @ 300.
 	element transform
 		scaleBy: 15 @ 15;
@@ -392,17 +392,17 @@ BlEventTest >> testSimulateClickOnUnresponsiveOverlapped [
 
 	| container blue red mouseDown mouseUp click |
 	container := self newGrayElement.
-	container size: 300 @ 300.
+	container extent: 300 @ 300.
 
 	red := self newRedElement.
-	red size: 200 @ 200.
+	red extent: 200 @ 200.
 	red opacity: 0.2.
 	"make red element unresponsive to mouse events"
 	red preventMouseEvents.
 
 	"blue is below the red element"
 	blue := self newBlueElement.
-	blue size: 100 @ 100.
+	blue extent: 100 @ 100.
 	blue opacity: 0.2.
 
 	container addChildren: { blue. red }.
@@ -431,7 +431,7 @@ BlEventTest >> testSimulateClickOutside [
 
 	| element mouseDown mouseUp click |
 	element := self newBlueElement.
-	element size: 100 @ 100.
+	element extent: 100 @ 100.
 	element position: 100 @ 100.
 
 	mouseDown := mouseUp := click := 0.
@@ -458,7 +458,7 @@ BlEventTest >> testSimulateMouseMoveInside [
 
 	| element mouseMove mouseEnter |
 	element := self newBlueElement.
-	element size: 100 @ 100.
+	element extent: 100 @ 100.
 	element position: 100 @ 100.
 
 	mouseMove := mouseEnter := 0.
@@ -481,7 +481,7 @@ BlEventTest >> testSimulateMouseMoveOutside [
 
 	| element mouseLeave mouseMove mouseEnter |
 	element := self newBlueElement.
-	element size: 100 @ 100.
+	element extent: 100 @ 100.
 	element position: 100 @ 100.
 
 	mouseLeave := mouseMove := mouseEnter := 0.

@@ -8,7 +8,7 @@ Form >> asBlBackground [
 { #category : #'*Bloc' }
 Form >> asElement [
 	^ BlElement new
-		size: self extent;
+		extent: self extent;
 		background: self;
 		yourself
 ]

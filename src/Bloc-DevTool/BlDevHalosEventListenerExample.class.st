@@ -44,7 +44,7 @@ BlDevHalosEventListenerExample >> newContainerWithRectangle [
 	anElement := BlElement new.
 	anElement
 		layout: BlFrameLayout new;
-		size: 300 @ 300;
+		extent: 300 @ 300;
 		background: Color white;
 		border: (BlBorder paint: Color blue width: 2).
 
@@ -57,7 +57,7 @@ BlDevHalosEventListenerExample >> newContainerWithRectangle [
 BlDevHalosEventListenerExample >> newRectangle [
 
 	^ BlElement new
-		size: 100 @ 100;
+		extent: 100 @ 100;
 		background: Color gray;
 		border: (BlBorder paint: Color black width: 2);
 		constraintsDo: [ :c |

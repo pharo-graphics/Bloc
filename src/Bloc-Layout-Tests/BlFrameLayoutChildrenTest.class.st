@@ -49,7 +49,7 @@ BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize300per250 [
 				            paint: Color red;
 				            width: 3;
 				            build);
-		           size: 300 @ 250;
+		           extent: 300 @ 250;
 		           yourself.
 	self assert: element position equals: 0 @ 0.
 	self assert: element extent equals: 0 @ 0.

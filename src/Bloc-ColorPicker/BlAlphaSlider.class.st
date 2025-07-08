@@ -40,7 +40,7 @@ BlAlphaSlider class >> chessBackgroundFor: aPoint squareSize: squareSize [
 	1 to: aPoint x // squareSize * (aPoint y // squareSize + offset) do: [ :i |
 		| square |
 		square := BlElement new
-			          size: squareSize asPoint;
+			          extent: squareSize asPoint;
 			          background: (i even
 					           ifTrue: [ Color white ]
 					           ifFalse: [ Color gray ]);
@@ -82,7 +82,7 @@ BlAlphaSlider >> clickAt: aPosition [
 BlAlphaSlider >> initialize [
 
 	super initialize.
-	self size: 180 @ 12.
+	self extent: 180 @ 12.
 	self geometry: (BlRoundedRectangleGeometry cornerRadius: 10).
 	self clipChildren: false.
 	self constraintsDo: [ :c | c margin: (BlInsets all: 10) ].
@@ -103,7 +103,7 @@ BlAlphaSlider >> initializeChessBackground [
 BlAlphaSlider >> initializeCursor [
 
 	cursor := BlElement new
-		               size: 20 asPoint;
+		               extent: 20 asPoint;
 		               background: Color transparent;
 		               geometry: BlCircleGeometry new;
 		               border: (BlBorder paint: Color white width: 2);

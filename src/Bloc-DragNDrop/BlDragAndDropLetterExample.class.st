@@ -66,7 +66,7 @@ BlDragAndDropLetterExample >> initDragArea [
 	dragArea := BlElement new
 		            id: 'dragArea';
 		            border: (BlBorder paint: Color red width: 2);
-		            size: 600@500.
+		            extent: 600@500.
 	dragArea addChild: (BlElement new
 			 layout: (BlLinearLayout horizontal cellSpacing: 30);
 			 constraintsDo: [ :c |
@@ -114,7 +114,7 @@ BlDragAndDropLetterExample >> letterFor: aCharacter [
 
 	^ BlElement new
 		  layout: BlLinearLayout horizontal alignCenter;
-		  size: 30 @ 30;
+		  extent: 30 @ 30;
 		  margin: (BlInsets all: 5);
 		  background: Color veryVeryLightGray;
 		  border: (BlBorder paint: Color veryLightGray width: 1);
