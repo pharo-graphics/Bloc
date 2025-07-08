@@ -704,8 +704,7 @@ BlSpaceFixture >> buildHistogram [
 
 	orientations withIndexDo: [ :each :index |
 			| g |
-			g := BlHistogramGeometry new.
-			g values: ramp.
+			g := BlHistogramGeometry values: ramp.
 			g perform: each.
 
 			builder addToRoot
@@ -1979,9 +1978,7 @@ BlSpaceFixture >> buildVariantsOfEllipse [
 BlSpaceFixture >> buildVariantsOfHistogram [
 
 	self buildVariantsOf: [
-		BlHistogramGeometry new
-			values: (0 to: 1 by: 0.2);
-			yourself ]
+		BlHistogramGeometry values: (0 to: 1 by: 0.2) ]
 ]
 
 { #category : #fixtures }
