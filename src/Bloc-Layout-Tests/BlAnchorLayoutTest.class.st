@@ -31,7 +31,7 @@ BlAnchorLayoutTest >> testActionAnchorOnChild [
 
 	| anchor |
 	child position: 10 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := child actionAnchor: [ :v :e | e position ].
 	self waitTestingSpaces.
@@ -57,7 +57,7 @@ BlAnchorLayoutTest >> testBottomAnchorOnChild [
 
 	| anchor |
 	child position: 0 @ 0.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := BlElementBottomAnchor new
 		          element: child;
@@ -67,7 +67,7 @@ BlAnchorLayoutTest >> testBottomAnchorOnChild [
 
 	self
 		assert:
-		(anchor valueInBounds: 
+		(anchor valueInBounds:
 			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
 		equals: 0.
 	self
@@ -86,7 +86,7 @@ BlAnchorLayoutTest >> testBottomLeftAnchorOnChild [
 
 	| anchor |
 	child position: 110 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := BlElementBottomLeftAnchor new
 		          element: child;
@@ -98,17 +98,16 @@ BlAnchorLayoutTest >> testBottomLeftAnchorOnChild [
 		assert:
 		(anchor valueInBounds:
 			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0@0.
+		equals: 0 @ 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 110@140.
+		equals: 110 @ 140.
 	" the result is the element bounds with an height of 10"
 	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10@20)
-		equals: (-100 @ -120 corner: 0 @ 0).
-
-
+		assert: (anchor
+				 appliedOnRectangle: child bounds asRectangle
+				 withValue: 10 @ 20)
+		equals: (-100 @ -120 corner: 0 @ 0)
 ]
 
 { #category : #tests }
@@ -117,7 +116,7 @@ BlAnchorLayoutTest >> testBottomRightAnchorOnChild [
 
 	| anchor |
 	child position: 110 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := BlElementBottomRightAnchor new
 		          element: child;
@@ -129,14 +128,15 @@ BlAnchorLayoutTest >> testBottomRightAnchorOnChild [
 		assert:
 		(anchor valueInBounds:
 			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0@0.
+		equals: 0 @ 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 210@140.
+		equals: 210 @ 140.
 	" the result is the element bounds with an height of 10"
 	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10@20)
+		assert: (anchor
+				 appliedOnRectangle: child bounds asRectangle
+				 withValue: 10 @ 20)
 		equals: (-200 @ -120 corner: -100 @ 0)
 ]
 
@@ -146,7 +146,7 @@ BlAnchorLayoutTest >> testExtentAnchorOnChild [
 
 	| anchor |
 	child position: 110 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := BlElementExtentAnchor new
 		          element: child;
@@ -158,14 +158,15 @@ BlAnchorLayoutTest >> testExtentAnchorOnChild [
 		assert:
 		(anchor valueInBounds:
 			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0@0.
+		equals: 0 @ 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 100@120.
+		equals: 100 @ 120.
 	" the result is the element bounds with an height of 10"
 	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10@20)
+		assert: (anchor
+				 appliedOnRectangle: child bounds asRectangle
+				 withValue: 10 @ 20)
 		equals: (110 @ 20 corner: 120 @ 40)
 ]
 
@@ -175,7 +176,7 @@ BlAnchorLayoutTest >> testHeightAnchorOnChild [
 
 	| anchor |
 	child position: 10 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := BlElementHeightAnchor new
 		          element: child;
@@ -204,7 +205,7 @@ BlAnchorLayoutTest >> testHorizontalCenterAnchorOnChild [
 
 	| anchor |
 	child position: 10 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := BlElementHorizontalCenterAnchor new
 		          element: child;
@@ -233,7 +234,7 @@ BlAnchorLayoutTest >> testLeftAnchorOnChild [
 
 	| anchor |
 	child position: 10 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := BlElementLeftAnchor new
 		          element: child;
@@ -262,7 +263,7 @@ BlAnchorLayoutTest >> testNeutralAnchorOnChild [
 
 	| anchor |
 	child position: 10 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := child neutralAnchor: 0.
 	self waitTestingSpaces.
@@ -288,7 +289,7 @@ BlAnchorLayoutTest >> testNilAnchorOnChild [
 
 	| anchor |
 	child position: 10 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := child nilAnchor.
 	self waitTestingSpaces.
@@ -314,7 +315,7 @@ BlAnchorLayoutTest >> testRightAnchorOnChild [
 
 	| anchor |
 	child position: 110 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := BlElementRightAnchor new
 		          element: child;
@@ -343,7 +344,7 @@ BlAnchorLayoutTest >> testTopAnchorOnChild [
 
 	| anchor |
 	child position: 10 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := BlElementTopAnchor new
 		          element: child;
@@ -372,7 +373,7 @@ BlAnchorLayoutTest >> testTopLeftAnchorOnChild [
 
 	| anchor |
 	child position: 110 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := BlElementTopLeftAnchor new
 		          element: child;
@@ -384,14 +385,15 @@ BlAnchorLayoutTest >> testTopLeftAnchorOnChild [
 		assert:
 		(anchor valueInBounds:
 			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0@0.
+		equals: 0 @ 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 110@20.
+		equals: 110 @ 20.
 	" the result is the element bounds with an height of 10"
 	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10@20)
+		assert: (anchor
+				 appliedOnRectangle: child bounds asRectangle
+				 withValue: 10 @ 20)
 		equals: (-100 @ 0 corner: 0 @ 120)
 ]
 
@@ -401,7 +403,7 @@ BlAnchorLayoutTest >> testTopRightAnchorOnChild [
 
 	| anchor |
 	child position: 110 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := BlElementTopRightAnchor new
 		          element: child;
@@ -413,14 +415,15 @@ BlAnchorLayoutTest >> testTopRightAnchorOnChild [
 		assert:
 		(anchor valueInBounds:
 			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0@0.
+		equals: 0 @ 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 210@20.
+		equals: 210 @ 20.
 	" the result is the element bounds with an height of 10"
 	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10@20)
+		assert: (anchor
+				 appliedOnRectangle: child bounds asRectangle
+				 withValue: 10 @ 20)
 		equals: (-200 @ 0 corner: -100 @ 120)
 ]
 
@@ -430,7 +433,7 @@ BlAnchorLayoutTest >> testVerticalCenterAnchorOnChild [
 
 	| anchor |
 	child position: 10 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := BlElementVerticalCenterAnchor new
 		          element: child;
@@ -459,7 +462,7 @@ BlAnchorLayoutTest >> testWidthAnchorOnChild [
 
 	| anchor |
 	child position: 10 @ 20.
-	child size: 100 @ 120.
+	child extent: 100 @ 120.
 
 	anchor := BlElementWidthAnchor new
 		          element: child;

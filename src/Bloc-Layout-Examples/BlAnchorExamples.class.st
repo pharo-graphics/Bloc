@@ -7,13 +7,13 @@ Class {
 { #category : #anchors }
 BlAnchorExamples class >> blueRectangle [
 
-	  | blue |
-	  blue := BlElement new
-		          id: #blue;
-		          yourself.
-	  blue background: Color blue.
-	  blue size: 40 asPoint.
-	  ^ blue
+	| blue |
+	blue := BlElement new
+		        id: #blue;
+		        yourself.
+	blue background: Color blue.
+	blue extent: 40 asPoint.
+	^ blue
 ]
 
 { #category : #anchors }
@@ -50,10 +50,10 @@ BlAnchorExamples class >> example_AnchorLeftOnParentLeft [
 	| pane blue |
 	pane := self mainPane.
 	blue := self blueRectangle.
-	blue size: 40 asPoint.
+	blue extent: 40 asPoint.
 	blue constraintsDo: [ :c |
-		c ignoreByLayout.
-		c anchors add: (blue leftAnchor on: pane leftAnchor) ].
+			c ignoreByLayout.
+			c anchors add: (blue leftAnchor on: pane leftAnchor) ].
 	pane addChild: blue.
 	pane openInSpace
 ]
@@ -64,10 +64,10 @@ BlAnchorExamples class >> example_AnchorRightOnParentRight [
 	| pane blue |
 	pane := self mainPane.
 	blue := self blueRectangle.
-	blue size: 40 asPoint.
+	blue extent: 40 asPoint.
 	blue constraintsDo: [ :c |
-		c ignoreByLayout.
-		c anchors add: (blue rightAnchor on: pane rightAnchor) ].
+			c ignoreByLayout.
+			c anchors add: (blue rightAnchor on: pane rightAnchor) ].
 	pane addChild: blue.
 	pane openInSpace
 ]
@@ -78,10 +78,10 @@ BlAnchorExamples class >> example_AnchorTopOnParentTop [
 	| pane blue |
 	pane := self mainPane.
 	blue := self blueRectangle.
-	blue size: 40 asPoint.
+	blue extent: 40 asPoint.
 	blue constraintsDo: [ :c |
-		c ignoreByLayout.
-		c anchors add: (blue topAnchor on: pane topAnchor) ].
+			c ignoreByLayout.
+			c anchors add: (blue topAnchor on: pane topAnchor) ].
 	pane addChild: blue.
 	pane openInSpace
 ]
@@ -122,7 +122,7 @@ BlAnchorExamples class >> example_AnchorsAroundCircle [
 
 	| blue |
 	blue := self example_AnchorsAroundRectangle.
-	blue size: 100 asPoint.
+	blue extent: 100 asPoint.
 	blue geometry: BlCircleGeometry new
 ]
 
@@ -131,7 +131,7 @@ BlAnchorExamples class >> example_AnchorsAroundEllipse [
 
 	| blue |
 	blue := self example_AnchorsAroundRectangle.
-	blue size: 100 @ 70.
+	blue extent: 100 @ 70.
 	blue geometry: BlEllipseGeometry new
 ]
 
@@ -165,15 +165,15 @@ BlAnchorExamples class >> example_AnchorsAroundRectangle [
 				       id: degrees asString asSymbol;
 				       layout: BlFrameLayout new;
 				       yourself.
-			lab := (BlAttributedTextElement text: (degrees asString , '°') asRopedText).
-			lab
-				       foreground: Color white.
+			lab := BlAttributedTextElement text:
+				       (degrees asString , '°') asRopedText.
+			lab foreground: Color white.
 			lab constraintsDo: [ :c |
 					c frame horizontal alignCenter.
 					c frame vertical alignCenter ].
 			deg addChild: lab.
 			deg background: Color gray.
-			deg size: 24 @ 22.
+			deg extent: 24 @ 22.
 			deg constraintsDo: [ :c |
 					c ignoreByLayout.
 					c anchors add:
@@ -190,92 +190,91 @@ BlAnchorExamples class >> example_AnchorsAroundRoundRectangle [
 	| blue |
 	blue := self example_AnchorsAroundRectangle.
 	blue margin: (BlInsets all: 10).
-	blue size: 200 @ 200.
-	blue geometry: (BlRoundedRectangleGeometry cornerRadius: 50).
-
+	blue extent: 200 @ 200.
+	blue geometry: (BlRoundedRectangleGeometry cornerRadius: 50)
 ]
 
 { #category : #anchors }
 BlAnchorExamples class >> example_CenterLayout [
 
-	  | pane pink blue red green |
-	  pane := self mainPane.
-	  blue := self blueRectangle.
-	  blue size: 150 asPoint.
-	  blue constraintsDo: [ :c |
-			  c ignoreByLayout.
-			  c anchors add: (blue centerAnchor on: pane centerAnchor) ].
-	  pane addChild: blue.
+	| pane pink blue red green |
+	pane := self mainPane.
+	blue := self blueRectangle.
+	blue extent: 150 asPoint.
+	blue constraintsDo: [ :c |
+			c ignoreByLayout.
+			c anchors add: (blue centerAnchor on: pane centerAnchor) ].
+	pane addChild: blue.
 
-	  pink := BlElement new
-		          id: #pink;
-		          yourself.
-	  pink background: Color pink.
-	  pink size: 100 asPoint.
-	  pink constraintsDo: [ :c |
-			  c ignoreByLayout.
-			  c anchors add: (pink centerAnchor on: blue centerAnchor) ].
-	  blue addChild: pink.
+	pink := BlElement new
+		        id: #pink;
+		        yourself.
+	pink background: Color pink.
+	pink extent: 100 asPoint.
+	pink constraintsDo: [ :c |
+			c ignoreByLayout.
+			c anchors add: (pink centerAnchor on: blue centerAnchor) ].
+	blue addChild: pink.
 
 
-	  red := BlElement new
-		         id: #red;
+	red := BlElement new
+		       id: #red;
+		       yourself.
+	red background: Color red.
+	red extent: 20 asPoint.
+	red constraintsDo: [ :c |
+			c ignoreByLayout.
+			c anchors add: (red centerAnchor on: pink centerAnchor) ].
+	pane addChild: red.
+
+
+	green := BlElement new
+		         id: #green;
 		         yourself.
-	  red background: Color red.
-	  red size: 20 asPoint.
-	  red constraintsDo: [ :c |
-			  c ignoreByLayout.
-			  c anchors add: (red centerAnchor on: pink centerAnchor) ].
-	  pane addChild: red.
+	green background: Color green.
+	green extent: 10 @ 10.
 
+	green constraintsDo: [ :c |
+			c ignoreByLayout.
+			c anchors add: (green topAnchor on: red topAnchor).
+			c anchors add: (green heightAnchor on: pink heightAnchor).
+			c anchors add: (green rightAnchor on: blue leftAnchor) ].
+	pane addChild: green.
 
-	  green := BlElement new
-		           id: #green;
-		           yourself.
-	  green background: Color green.
-	  green size: 10 @ 10.
-
-	  green constraintsDo: [ :c |
-			  c ignoreByLayout.
-			  c anchors add: (green topAnchor on: red topAnchor).
-			  c anchors add: (green heightAnchor on: pink heightAnchor).
-			  c anchors add: (green rightAnchor on: blue leftAnchor) ].
-	  pane addChild: green.
-
-	  pane openInSpace
+	pane openInSpace
 ]
 
 { #category : #anchors }
 BlAnchorExamples class >> example_PerimeterAnchorOnLeftHandSide [
 
-	  | pane blue red |
-	  pane := self mainPane.
-	  blue := self blueRectangle.
-	  blue size: 100 @ 50.
-	  blue margin: (BlInsets horizontal: 40 vertical: 40).
-	  blue constraintsDo: [ :c |
-			  c ignoreByLayout.
-			  c anchors add:
-				  (blue verticalCenterAnchor on: pane verticalCenterAnchor).
-			  c anchors add:
-				  (blue horizontalCenterAnchor on: pane horizontalCenterAnchor) ].
+	| pane blue red |
+	pane := self mainPane.
+	blue := self blueRectangle.
+	blue extent: 100 @ 50.
+	blue margin: (BlInsets horizontal: 40 vertical: 40).
+	blue constraintsDo: [ :c |
+			c ignoreByLayout.
+			c anchors add:
+				(blue verticalCenterAnchor on: pane verticalCenterAnchor).
+			c anchors add:
+				(blue horizontalCenterAnchor on: pane horizontalCenterAnchor) ].
 
-	  pane addChild: blue.
+	pane addChild: blue.
 
-	  red := BlElement new
-		         id: #red;
-		         layout: BlFrameLayout new;
-		         yourself.
-	  red background: Color red.
-	  red size: 24 @ 22.
-	  red constraintsDo: [ :c |
-			  c ignoreByLayout.
-			  c anchors add:
-				  ((red perimeterAnchor degrees: 90) on: blue bottomLeftAnchor) ].
-	  pane addChild: red.
+	red := BlElement new
+		       id: #red;
+		       layout: BlFrameLayout new;
+		       yourself.
+	red background: Color red.
+	red extent: 24 @ 22.
+	red constraintsDo: [ :c |
+			c ignoreByLayout.
+			c anchors add:
+				((red perimeterAnchor degrees: 90) on: blue bottomLeftAnchor) ].
+	pane addChild: red.
 
-	  pane openInSpace.
-	  ^ blue
+	pane openInSpace.
+	^ blue
 ]
 
 { #category : #anchors }
