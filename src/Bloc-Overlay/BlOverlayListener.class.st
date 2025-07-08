@@ -25,15 +25,15 @@ BlOverlayListener class >> new [
 ]
 
 { #category : #'api - updating' }
-BlOverlayListener >> changeOverlayPositionWith: aPosition [
+BlOverlayListener >> changeOverlayExtentWith: aPoint [
 
-	self overlayElement position: aPosition
+	self overlayElement extent: aPoint
 ]
 
 { #category : #'api - updating' }
-BlOverlayListener >> changeOverlaySizeWith: aSize [
+BlOverlayListener >> changeOverlayPositionWith: aPosition [
 
-	self overlayElement size: aSize
+	self overlayElement position: aPosition
 ]
 
 { #category : #'element handlers' }
@@ -127,5 +127,5 @@ BlOverlayListener >> relocateTo: anElement [
 { #category : #'api - updating' }
 BlOverlayListener >> resizeTo: anElement [
 
-	self changeOverlaySizeWith: (self extentFor: anElement)
+	self changeOverlayExtentWith: (self extentFor: anElement)
 ]
