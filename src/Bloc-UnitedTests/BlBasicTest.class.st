@@ -32,15 +32,18 @@ BlBasicTest >> testAsForm [
 
 { #category : #tests }
 BlBasicTest >> testBorderRopedText [
-<sampleInstance>	
-| aText |
-aText := 'Text with border' asRopedText.
-aText fontSize: 30.
-aText foreground: Color gray.
-aText thin.
-self assert: aText rope attributes equals: { (BlFontSizeAttribute extent: 30).
-(BlTextForegroundAttribute paint: Color gray). BlFontWeightAttribute thin }.
-^ aText
+
+	<sampleInstance>
+	| aText |
+	aText := 'Text with border' asRopedText.
+	aText fontSize: 30.
+	aText foreground: Color gray.
+	aText thin.
+	self assert: aText rope attributes equals: {
+			(BlFontSizeAttribute size: 30).
+			(BlTextForegroundAttribute paint: Color gray).
+			BlFontWeightAttribute thin }.
+	^ aText
 ]
 
 { #category : #tests }
