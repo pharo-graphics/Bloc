@@ -79,6 +79,15 @@ BlElement class >> id: aStringOrSymbol [
 	^ self new id: aStringOrSymbol
 ]
 
+{ #category : #'layout anchors' }
+BlElement >> actionAnchor: aBlock [
+
+	^ BlActionAnchor new
+		  action: aBlock;
+		  baseAnchor: self nilAnchor;
+		  yourself
+]
+
 { #category : #'api - animations' }
 BlElement >> addAnimation: aBlBaseAnimation [
  
@@ -691,6 +700,30 @@ BlElement >> border: aBlBorder [
 	self invalidate
 ]
 
+{ #category : #'layout anchors' }
+BlElement >> bottomAnchor [
+
+	^ BlElementBottomAnchor new
+		  element: self;
+		  yourself
+]
+
+{ #category : #'layout anchors' }
+BlElement >> bottomLeftAnchor [
+
+	^ BlElementBottomLeftAnchor new
+		  element: self;
+		  yourself
+]
+
+{ #category : #'layout anchors' }
+BlElement >> bottomRightAnchor [
+
+	^ BlElementBottomRightAnchor new
+		  element: self;
+		  yourself
+]
+
 { #category : #'geometry bounds' }
 BlElement >> bounds [
 	<return: #BlElementBounds>
@@ -738,6 +771,14 @@ BlElement >> boundsInWindow [
 	^ self isAttachedToSceneGraph
 		ifTrue: [ boundsCache boundsInSpace scaleBy: self space windowScale ]
 		ifFalse: [ boundsCache boundsInSpace ]
+]
+
+{ #category : #'layout anchors' }
+BlElement >> centerAnchor [
+
+	^ BlElementCenterAnchor new
+		  element: self;
+		  yourself
 ]
 
 { #category : #updating }
@@ -1513,6 +1554,14 @@ BlElement >> extent: aPoint [
 		c vertical exact: aPoint y ]
 ]
 
+{ #category : #'layout anchors' }
+BlElement >> extentAnchor [
+
+	^ BlElementExtentAnchor new
+		  element: self;
+		  yourself
+]
+
 { #category : #'event handling' }
 BlElement >> findMouseEventTargetAt: aPoint [
 	"Return the deepest child element among all my children or myself that may be a target for mouse event at provided location.
@@ -1935,6 +1984,22 @@ BlElement >> height: aNumber [
 		c vertical exact: aNumber ]
 ]
 
+{ #category : #'layout anchors' }
+BlElement >> heightAnchor [
+
+	^ BlElementHeightAnchor new
+		  element: self;
+		  yourself
+]
+
+{ #category : #'layout anchors' }
+BlElement >> horizontalCenterAnchor [
+
+	^ BlElementHorizontalCenterAnchor new
+		  element: self;
+		  yourself
+]
+
 { #category : #accessing }
 BlElement >> id [
 	"Return an id of this element if it was defined"
@@ -2313,6 +2378,14 @@ BlElement >> layoutDo: aBlock [
 
 	aBlock value: self layout.
 	self requestLayout
+]
+
+{ #category : #'layout anchors' }
+BlElement >> leftAnchor [
+
+	^ BlElementLeftAnchor new
+		  element: self;
+		  yourself
 ]
 
 { #category : #'geometry bounds convertion' }
@@ -2729,6 +2802,15 @@ BlElement >> needsPaint [
 	^ flags hasNeedsPaint
 ]
 
+{ #category : #'layout anchors' }
+BlElement >> neutralAnchor: aNeutralValue [
+
+	^ BlNeutralAnchor new
+		  element: self;
+		neutralValue: aNeutralValue;
+		  yourself
+]
+
 { #category : #initialization }
 BlElement >> newEventDispatcher [
 
@@ -2770,6 +2852,14 @@ BlElement >> nextSiblingSuchThat: aSelectionBlock do: aBlock [
 		aSiblingChild := self parent childAt: eachIndex.
 		(aSelectionBlock value: aSiblingChild)
 			ifTrue: [ ^ aBlock value: aSiblingChild ] ]
+]
+
+{ #category : #'layout anchors' }
+BlElement >> nilAnchor [
+
+	^ BlNeutralAnchor new
+		  element: self;
+		  yourself
 ]
 
 { #category : #'geometry hooks' }
@@ -3126,6 +3216,22 @@ BlElement >> parentPointToLocal: aPoint [
 	aLocalPoint := aLocalPoint translateBy: self position negated.
 	aLocalPoint := self transformation inverseTransformPoint: aLocalPoint.
 	^ aLocalPoint
+]
+
+{ #category : #'layout anchors' }
+BlElement >> perimeterAnchor [
+
+	^ BlElementPerimeterAnchor new
+		  element: self;
+		  yourself
+]
+
+{ #category : #'layout anchors' }
+BlElement >> pointAnchor [ 
+
+	^ BlElementPointAnchor new
+		  element: self;
+		  yourself
 ]
 
 { #category : #'geometry position' }
@@ -3613,6 +3719,14 @@ BlElement >> resetChildrenArray [
 	children := Bloc preferableChildrenDataStructure new
 ]
 
+{ #category : #'layout anchors' }
+BlElement >> rightAnchor [
+
+	^ BlElementRightAnchor new
+		  element: self;
+		  yourself
+]
+
 { #category : #'api - children enumeration' }
 BlElement >> selectChildrenWithId: aStringOrSymbol [
 
@@ -3764,6 +3878,22 @@ BlElement >> taskQueue [
 	^ taskQueue
 ]
 
+{ #category : #'layout anchors' }
+BlElement >> topAnchor [
+
+	^ BlElementTopAnchor new
+		  element: self;
+		  yourself
+]
+
+{ #category : #'layout anchors' }
+BlElement >> topLeftAnchor [
+
+	^ BlElementTopLeftAnchor new
+		  element: self;
+		  yourself
+]
+
 { #category : #'children accessing' }
 BlElement >> topMostParent [
 	"Return a topmost parent in a scene graph.
@@ -3789,6 +3919,14 @@ BlElement >> topMostParentSuchThat: aConditionBlock ifFound: ifFoundBlock ifNone
 	^ aTargetParent
 		ifNil: ifNoneBlock
 		ifNotNil: ifFoundBlock
+]
+
+{ #category : #'layout anchors' }
+BlElement >> topRightAnchor [
+
+	^ BlElementTopRightAnchor new
+		  element: self;
+		  yourself
 ]
 
 { #category : #transformations }
@@ -3857,6 +3995,14 @@ BlElement >> userData [
 	Be careful to limit the use of such facility and prefer clean instance variables when it is possible to define them."
 
 	^ userData ifNil: [ userData := IdentityDictionary new ]
+]
+
+{ #category : #'layout anchors' }
+BlElement >> verticalCenterAnchor [
+
+	^ BlElementVerticalCenterAnchor new
+		  element: self;
+		  yourself
 ]
 
 { #category : #accessing }
@@ -3965,6 +4111,14 @@ BlElement >> width: aNumber [
 
 	self constraintsDo: [ :c |
 		c horizontal exact: aNumber ]
+]
+
+{ #category : #'layout anchors' }
+BlElement >> widthAnchor [
+
+	^ BlElementWidthAnchor new
+		  element: self;
+		  yourself
 ]
 
 { #category : #'api - children enumeration' }

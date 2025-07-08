@@ -188,29 +188,33 @@ BlLayout >> layout: anElement in: aRectangle context: aBlElementBoundsUpdateCont
 BlLayout >> layoutIgnored: anElement context: aBlElementBoundsUpdateContext [
 	"Layout children ignored by layout so that their measured bounds
 	become actual bounds in parent"
-	| parentBounds |
 
+	| parentBounds |
 	"when layering ignored childed we don't take parent padding into account"
-	parentBounds := (0@0 extent: anElement extent).
+	parentBounds := 0 @ 0 extent: anElement extent.
 	"reuse the same instance for children bounds"
-	
+
 	anElement children
 		select: [ :aChild | aChild constraints ignoredByLayout ]
 		thenDo: [ :aChild |
-			| childBounds allowedBounds |
-			"ask child for its measured bounds"
-			childBounds := aChild measuredBounds bounds copy.
-			allowedBounds := aChild margin inset: parentBounds copy.
+				| childBounds allowedBounds |
+				"ask child for its measured bounds"
+				childBounds := aChild measuredBounds bounds copy.
+				allowedBounds := aChild margin inset: parentBounds copy.
 
-			"frame layout supports alignment, so we need to translate child's bounds accordingly to alignment"
-			childBounds := self
-				align: childBounds
-				in: allowedBounds
-				with: aChild constraints ignored alignment.
-				
-			aChild measuredBounds position: childBounds origin.
-			"and finally set new bounds"
-			aChild applyLayoutIn: childBounds context: aBlElementBoundsUpdateContext ]
+				childBounds := aChild constraints anchors
+					               positionInParent: anElement
+					               forChild: aChild.
+				"frame layout supports alignment, so we need to translate child's bounds accordingly to alignment"
+				childBounds := self
+					               align: childBounds
+					               in: allowedBounds
+					               with: aChild constraints ignored alignment.
+
+				"and finally set new bounds"
+				aChild
+					applyLayoutIn: childBounds
+					context: aBlElementBoundsUpdateContext ]
 ]
 
 { #category : #protected }
@@ -301,20 +305,35 @@ BlLayout >> measureIgnored: anElement with: anExtentSpec [
 	anElement children
 		select: [ :aChild | aChild constraints ignoredByLayout ]
 		thenDo: [ :aChild |
-			| aWidthSpec aHeightSpec |
-			
-			aWidthSpec := anExtentSpec widthSpec.
-			aHeightSpec := anExtentSpec heightSpec.
+				| aWidthSpec aHeightSpec boundsForChild prevBounds |
+				aWidthSpec := anExtentSpec widthSpec.
+				aHeightSpec := anExtentSpec heightSpec.
+				prevBounds := aChild measuredBounds asRectangle.
+				boundsForChild := aChild constraints anchors
+					                  measureInParent: anElement
+					                  forChild: aChild.
 
-			aChild constraints horizontal resizer isMatchParent
-				ifTrue: [ aWidthSpec := BlMeasurementSpec exact: (anElement measuredBounds width * aChild constraints ignored horizontal weight) ].
-			
-			aChild constraints vertical resizer isMatchParent
-				ifTrue: [ aHeightSpec := BlMeasurementSpec exact: (anElement measuredBounds height * aChild constraints ignored vertical weight) ].
-			
-			self
-				measureChild: aChild
-				parentSpec: aWidthSpec @ aHeightSpec ]
+				aChild constraints horizontal resizer isMatchParent
+					ifTrue: [
+							aWidthSpec := BlMeasurementSpec exact:
+								              anElement measuredBounds width
+								              * aChild constraints ignored horizontal weight ]
+					ifFalse: [
+							boundsForChild width ~= prevBounds width ifTrue: [
+									aWidthSpec := BlMeasurementSpec exact: boundsForChild width.
+									aChild constraints horizontal exact: boundsForChild width ] ].
+
+				aChild constraints vertical resizer isMatchParent
+					ifTrue: [
+							aHeightSpec := BlMeasurementSpec exact:
+								               anElement measuredBounds height
+								               * aChild constraints ignored vertical weight ]
+					ifFalse: [
+							boundsForChild height ~= prevBounds height ifTrue: [
+									aHeightSpec := BlMeasurementSpec exact: boundsForChild height.
+									aChild constraints vertical exact: boundsForChild height ] ].
+
+				self measureChild: aChild parentSpec: aWidthSpec @ aHeightSpec ]
 ]
 
 { #category : #enumeration }
