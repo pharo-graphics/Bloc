@@ -1,6 +1,8 @@
 Class {
 	#name : #BlAnchor,
 	#superclass : #Object,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#category : #'Bloc-Layout-Anchor'
 }
 
@@ -150,6 +152,12 @@ BlAnchor >> on: anAnchor [
 		  baseAnchor: self;
 		  rightHandSideAnchor: anAnchor;
 		  yourself
+]
+
+{ #category : #applying }
+BlAnchor >> setUpInParent: anElement forChild: aChild [
+
+	self subclassResponsibility 
 ]
 
 { #category : #applying }

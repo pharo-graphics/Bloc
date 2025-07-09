@@ -9,8 +9,10 @@ Class {
 }
 
 { #category : #layout }
-BlAnchorLayoutOperation >> appliedOnChildBounds: childBoundsRectangle withParent: anElement [
+BlAnchorLayoutOperation >> appliedOnChildBounds: childBoundsRectangle inParent: anElement forChild: aChild [
 
+	leftHandSideAnchor setUpInParent: anElement forChild: aChild.
+	rightHandSideAnchor setUpInParent: anElement forChild: aChild.
 	^ anElement globalBoundsToLocal: (leftHandSideAnchor
 		  appliedOnRectangle: childBoundsRectangle
 		  withValue: (rightHandSideAnchor valueInParent: anElement))
@@ -32,6 +34,12 @@ BlAnchorLayoutOperation >> isMeasurement [
 BlAnchorLayoutOperation >> leftHHandSideAnchor [
 
 	^ leftHandSideAnchor 
+]
+
+{ #category : #accessing }
+BlAnchorLayoutOperation >> leftHHandSideAnchor: anAnchor [
+
+	leftHandSideAnchor := anAnchor
 ]
 
 { #category : #accessing }

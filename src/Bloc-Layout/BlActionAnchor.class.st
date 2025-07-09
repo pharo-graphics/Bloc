@@ -34,6 +34,19 @@ BlActionAnchor >> element [
 	^ baseAnchor element
 ]
 
+{ #category : #initialization }
+BlActionAnchor >> initialize [ 
+
+	super initialize.
+	baseAnchor := BlNeutralAnchor new
+]
+
+{ #category : #applying }
+BlActionAnchor >> setUpInParent: anElement forChild: aChild [
+
+	baseAnchor setUpInParent: anElement forChild: aChild
+]
+
 { #category : #applying }
 BlActionAnchor >> valueInBounds: aBounds [
 
