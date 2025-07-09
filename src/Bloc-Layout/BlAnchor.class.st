@@ -1,6 +1,8 @@
 Class {
 	#name : #BlAnchor,
 	#superclass : #Object,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#category : #'Bloc-Layout-Anchor'
 }
 
@@ -131,6 +133,12 @@ BlAnchor >> appliedOnRectangle: aRectangle withValue: aValue [
 	^ self subclassResponsibility
 ]
 
+{ #category : #applying }
+BlAnchor >> checkInParent: anElement forChild: aChild [
+
+	self subclassResponsibility 
+]
+
 { #category : #accessing }
 BlAnchor >> element [
 
@@ -146,7 +154,7 @@ BlAnchor >> isMeasurement [
 { #category : #'instance creation' }
 BlAnchor >> on: anAnchor [
 
-	^ BlAnchorLayoutOperation new
+	^ BlAnchorLayoutRule new
 		  baseAnchor: self;
 		  rightHandSideAnchor: anAnchor;
 		  yourself

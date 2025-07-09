@@ -1,5 +1,5 @@
 Class {
-	#name : #BlAnchorLayoutOperation,
+	#name : #BlAnchorLayoutRule,
 	#superclass : #Object,
 	#instVars : [
 		'leftHandSideAnchor',
@@ -9,39 +9,47 @@ Class {
 }
 
 { #category : #layout }
-BlAnchorLayoutOperation >> appliedOnChildBounds: childBoundsRectangle withParent: anElement [
+BlAnchorLayoutRule >> appliedOnChildBounds: childBoundsRectangle inParent: anElement forChild: aChild [
 
+	leftHandSideAnchor checkInParent: anElement forChild: aChild.
+	rightHandSideAnchor checkInParent: anElement forChild: aChild.
 	^ anElement globalBoundsToLocal: (leftHandSideAnchor
 		  appliedOnRectangle: childBoundsRectangle
 		  withValue: (rightHandSideAnchor valueInParent: anElement))
 ]
 
 { #category : #accessing }
-BlAnchorLayoutOperation >> baseAnchor: anAnchor [
+BlAnchorLayoutRule >> baseAnchor: anAnchor [
 
 	leftHandSideAnchor := anAnchor
 ]
 
 { #category : #testing }
-BlAnchorLayoutOperation >> isMeasurement [ 
+BlAnchorLayoutRule >> isMeasurement [ 
 
 	^ leftHandSideAnchor isMeasurement 
 ]
 
 { #category : #accessing }
-BlAnchorLayoutOperation >> leftHHandSideAnchor [
+BlAnchorLayoutRule >> leftHHandSideAnchor [
 
 	^ leftHandSideAnchor 
 ]
 
 { #category : #accessing }
-BlAnchorLayoutOperation >> leftHandSideAnchor [
+BlAnchorLayoutRule >> leftHHandSideAnchor: anAnchor [
+
+	leftHandSideAnchor := anAnchor
+]
+
+{ #category : #accessing }
+BlAnchorLayoutRule >> leftHandSideAnchor [
 
 	^ leftHandSideAnchor 
 ]
 
 { #category : #accessing }
-BlAnchorLayoutOperation >> rightHandSideAnchor: anAnchor [
+BlAnchorLayoutRule >> rightHandSideAnchor: anAnchor [
 
 	rightHandSideAnchor := anAnchor
 ]

@@ -2,7 +2,7 @@
 A BlAnchorLayoutTest is a test class for testing the behavior of BlAnchorLayout
 "
 Class {
-	#name : #BlAnchorLayoutTest,
+	#name : #BlAnchorLayoutConstraintsTest,
 	#superclass : #BlParameterizedHostTest,
 	#instVars : [
 		'parent',
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #running }
-BlAnchorLayoutTest >> setUp [ 
+BlAnchorLayoutConstraintsTest >> setUp [ 
 
 	super setUp.
 	space := self newTestingSpace. 
@@ -26,7 +26,7 @@ BlAnchorLayoutTest >> setUp [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testActionAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testActionAnchor [
 	" return the height of a rectangle or create a rectangle with a particular height according to element margin "
 
 	| anchor |
@@ -52,7 +52,7 @@ BlAnchorLayoutTest >> testActionAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testBottomAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testBottomAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
@@ -81,7 +81,7 @@ BlAnchorLayoutTest >> testBottomAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testBottomLeftAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testBottomLeftAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
@@ -111,7 +111,7 @@ BlAnchorLayoutTest >> testBottomLeftAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testBottomRightAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testBottomRightAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
@@ -141,7 +141,7 @@ BlAnchorLayoutTest >> testBottomRightAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testExtentAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testExtentAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
@@ -171,7 +171,7 @@ BlAnchorLayoutTest >> testExtentAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testHeightAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testHeightAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
@@ -200,7 +200,7 @@ BlAnchorLayoutTest >> testHeightAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testHorizontalCenterAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testHorizontalCenterAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
@@ -229,7 +229,7 @@ BlAnchorLayoutTest >> testHorizontalCenterAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testLeftAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testLeftAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
@@ -258,7 +258,7 @@ BlAnchorLayoutTest >> testLeftAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testNeutralAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testNeutralAnchor [
 	" return the height of a rectangle or create a rectangle with a particular height according to element margin "
 
 	| anchor |
@@ -284,7 +284,7 @@ BlAnchorLayoutTest >> testNeutralAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testNilAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testNilAnchor [
 	" return the height of a rectangle or create a rectangle with a particular height according to element margin "
 
 	| anchor |
@@ -310,7 +310,7 @@ BlAnchorLayoutTest >> testNilAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testRightAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testRightAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
@@ -339,7 +339,7 @@ BlAnchorLayoutTest >> testRightAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testTopAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testTopAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
@@ -368,7 +368,7 @@ BlAnchorLayoutTest >> testTopAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testTopLeftAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testTopLeftAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
@@ -398,7 +398,7 @@ BlAnchorLayoutTest >> testTopLeftAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testTopRightAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testTopRightAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
@@ -428,7 +428,7 @@ BlAnchorLayoutTest >> testTopRightAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testVerticalCenterAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testVerticalCenterAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
@@ -457,7 +457,7 @@ BlAnchorLayoutTest >> testVerticalCenterAnchorOnChild [
 ]
 
 { #category : #tests }
-BlAnchorLayoutTest >> testWidthAnchorOnChild [
+BlAnchorLayoutConstraintsTest >> testWidthAnchor [
 	" return the width of a rectangle or create a rectangle with a particular width according to element margin "
 
 	| anchor |

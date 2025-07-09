@@ -35,7 +35,7 @@ TBlOverlayElement >> detach [
 	overlayReferenceElement := nil
 ]
 
-{ #category : #'t- overlay element - geometry' }
+{ #category : #'t - overlay element - geometry' }
 TBlOverlayElement >> extentFrom: anExtent [
 
 	^ anExtent
@@ -70,7 +70,7 @@ TBlOverlayElement >> newOverlayListener [
 	^ BlOverlayListener for: self
 ]
 
-{ #category : #'t- overlay element - geometry' }
+{ #category : #'t - overlay element - geometry' }
 TBlOverlayElement >> positionFrom: aPosition [
 
 	^ aPosition

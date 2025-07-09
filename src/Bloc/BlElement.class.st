@@ -82,10 +82,8 @@ BlElement class >> id: aStringOrSymbol [
 { #category : #'layout anchors' }
 BlElement >> actionAnchor: aBlock [
 
-	^ BlActionAnchor new
-		  action: aBlock;
-		  baseAnchor: self nilAnchor;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) 
+		  actionAnchor: aBlock
 ]
 
 { #category : #'api - animations' }
@@ -703,25 +701,19 @@ BlElement >> border: aBlBorder [
 { #category : #'layout anchors' }
 BlElement >> bottomAnchor [
 
-	^ BlElementBottomAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) bottomAnchor
 ]
 
 { #category : #'layout anchors' }
 BlElement >> bottomLeftAnchor [
 
-	^ BlElementBottomLeftAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) bottomLeftAnchor
 ]
 
 { #category : #'layout anchors' }
 BlElement >> bottomRightAnchor [
 
-	^ BlElementBottomRightAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) bottomRightAnchor
 ]
 
 { #category : #'geometry bounds' }
@@ -776,9 +768,7 @@ BlElement >> boundsInWindow [
 { #category : #'layout anchors' }
 BlElement >> centerAnchor [
 
-	^ BlElementCenterAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) centerAnchor
 ]
 
 { #category : #updating }
@@ -1557,9 +1547,7 @@ BlElement >> extent: aPoint [
 { #category : #'layout anchors' }
 BlElement >> extentAnchor [
 
-	^ BlElementExtentAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) extentAnchor
 ]
 
 { #category : #'event handling' }
@@ -1987,17 +1975,13 @@ BlElement >> height: aNumber [
 { #category : #'layout anchors' }
 BlElement >> heightAnchor [
 
-	^ BlElementHeightAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) heightAnchor
 ]
 
 { #category : #'layout anchors' }
 BlElement >> horizontalCenterAnchor [
 
-	^ BlElementHorizontalCenterAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) horizontalCenterAnchor
 ]
 
 { #category : #accessing }
@@ -2383,9 +2367,7 @@ BlElement >> layoutDo: aBlock [
 { #category : #'layout anchors' }
 BlElement >> leftAnchor [
 
-	^ BlElementLeftAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) leftAnchor
 ]
 
 { #category : #'geometry bounds convertion' }
@@ -2805,10 +2787,7 @@ BlElement >> needsPaint [
 { #category : #'layout anchors' }
 BlElement >> neutralAnchor: aNeutralValue [
 
-	^ BlNeutralAnchor new
-		  element: self;
-		neutralValue: aNeutralValue;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) neutralAnchor: aNeutralValue
 ]
 
 { #category : #initialization }
@@ -2857,9 +2836,7 @@ BlElement >> nextSiblingSuchThat: aSelectionBlock do: aBlock [
 { #category : #'layout anchors' }
 BlElement >> nilAnchor [
 
-	^ BlNeutralAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) nilAnchor
 ]
 
 { #category : #'geometry hooks' }
@@ -3221,17 +3198,13 @@ BlElement >> parentPointToLocal: aPoint [
 { #category : #'layout anchors' }
 BlElement >> perimeterAnchor [
 
-	^ BlElementPerimeterAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) perimeterAnchor
 ]
 
 { #category : #'layout anchors' }
 BlElement >> pointAnchor [ 
 
-	^ BlElementPointAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) pointAnchor
 ]
 
 { #category : #'geometry position' }
@@ -3722,9 +3695,7 @@ BlElement >> resetChildrenArray [
 { #category : #'layout anchors' }
 BlElement >> rightAnchor [
 
-	^ BlElementRightAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) rightAnchor
 ]
 
 { #category : #'api - children enumeration' }
@@ -3881,17 +3852,13 @@ BlElement >> taskQueue [
 { #category : #'layout anchors' }
 BlElement >> topAnchor [
 
-	^ BlElementTopAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) topAnchor
 ]
 
 { #category : #'layout anchors' }
 BlElement >> topLeftAnchor [
 
-	^ BlElementTopLeftAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) topLeftAnchor
 ]
 
 { #category : #'children accessing' }
@@ -3924,9 +3891,7 @@ BlElement >> topMostParentSuchThat: aConditionBlock ifFound: ifFoundBlock ifNone
 { #category : #'layout anchors' }
 BlElement >> topRightAnchor [
 
-	^ BlElementTopRightAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) topRightAnchor
 ]
 
 { #category : #transformations }
@@ -4000,9 +3965,7 @@ BlElement >> userData [
 { #category : #'layout anchors' }
 BlElement >> verticalCenterAnchor [
 
-	^ BlElementVerticalCenterAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) verticalCenterAnchor
 ]
 
 { #category : #accessing }
@@ -4116,9 +4079,7 @@ BlElement >> width: aNumber [
 { #category : #'layout anchors' }
 BlElement >> widthAnchor [
 
-	^ BlElementWidthAnchor new
-		  element: self;
-		  yourself
+	^ (self constraints anchors newExplicitReceiverWith: self) widthAnchor
 ]
 
 { #category : #'api - children enumeration' }

@@ -24,7 +24,7 @@ BlAnchorExamples class >> example_AnchorBottomOnParentBottom [
 	  blue := self blueRectangle.
 	  blue constraintsDo: [ :c |
 			  c ignoreByLayout.
-			  c anchors add: (blue bottomAnchor on: pane bottomAnchor) ].
+			  c anchors add: (c anchors bottomAnchor on: c anchors parent bottomAnchor) ].
 	  pane addChild: blue.
 	  pane openInSpace.
 	  ^ pane
@@ -38,7 +38,7 @@ BlAnchorExamples class >> example_AnchorExtentOnParentExtent [
 	  blue := self blueRectangle.
 	  blue constraintsDo: [ :c |
 			  c ignoreByLayout.
-			  c anchors add: (blue extentAnchor on: pane extentAnchor) ].
+			  c anchors add: (c anchors extentAnchor on: c anchors parent extentAnchor) ].
 	  pane addChild: blue.
 	  pane openInSpace.
 	  ^ pane
@@ -67,7 +67,7 @@ BlAnchorExamples class >> example_AnchorRightOnParentRight [
 	blue extent: 40 asPoint.
 	blue constraintsDo: [ :c |
 			c ignoreByLayout.
-			c anchors add: (blue rightAnchor on: pane rightAnchor) ].
+			c anchors add: (c anchors rightAnchor on: pane rightAnchor) ].
 	pane addChild: blue.
 	pane openInSpace
 ]
@@ -154,8 +154,8 @@ BlAnchorExamples class >> example_AnchorsAroundRectangle [
 	blue constraintsDo: [ :c |
 			c ignoreByLayout.
 			c anchors add:
-				(blue extentAnchor on: pane extentAnchor - 400 asPoint).
-			c anchors add: (blue centerAnchor on: pane centerAnchor) ].
+				(c anchors extentAnchor on: c anchors parent extentAnchor - 400 asPoint).
+			c anchors add: (c anchors centerAnchor on: c anchors parent centerAnchor) ].
 
 	pane addChild: blue.
 
@@ -177,7 +177,7 @@ BlAnchorExamples class >> example_AnchorsAroundRectangle [
 			deg constraintsDo: [ :c |
 					c ignoreByLayout.
 					c anchors add:
-						(deg centerAnchor on: (blue perimeterAnchor degrees: degrees)) ].
+						(c anchors centerAnchor on: (blue perimeterAnchor degrees: degrees)) ].
 			pane addChild: deg ].
 
 	pane openInSpace.
@@ -236,9 +236,9 @@ BlAnchorExamples class >> example_CenterLayout [
 
 	green constraintsDo: [ :c |
 			c ignoreByLayout.
-			c anchors add: (green topAnchor on: red topAnchor).
-			c anchors add: (green heightAnchor on: pink heightAnchor).
-			c anchors add: (green rightAnchor on: blue leftAnchor) ].
+			c anchors add: (c anchors topAnchor on: red topAnchor).
+			c anchors add: (c anchors heightAnchor on: pink heightAnchor).
+			c anchors add: (c anchors rightAnchor on: blue leftAnchor) ].
 	pane addChild: green.
 
 	pane openInSpace
