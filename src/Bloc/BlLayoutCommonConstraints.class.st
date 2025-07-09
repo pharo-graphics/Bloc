@@ -181,6 +181,13 @@ BlLayoutCommonConstraints >> margin: aBlMargin [
 ]
 
 { #category : #'api - constraints' }
+BlLayoutCommonConstraints >> maxExtent: aPoint [
+		
+	self maxWidth: aPoint x asFloat.
+	self maxHeight: aPoint y asFloat
+]
+
+{ #category : #'api - constraints' }
 BlLayoutCommonConstraints >> maxHeight [
 	"Return a maximal height an element can have,
 	maxHeight can not be nil,
@@ -201,8 +208,13 @@ BlLayoutCommonConstraints >> maxHeight: aNumber [
 { #category : #'api - constraints' }
 BlLayoutCommonConstraints >> maxSize: aPoint [
 		
-	self maxWidth: aPoint x asFloat.
-	self maxHeight: aPoint y asFloat
+	self
+		deprecated: 'Use #maxExtent: instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver maxSize: `@arg' ->
+			'`@receiver maxExtent: `@arg'.
+
+	self maxExtent: aPoint
 ]
 
 { #category : #'api - constraints' }
@@ -221,6 +233,13 @@ BlLayoutCommonConstraints >> maxWidth: aNumber [
 	aNumber must be non-negative (#isBlocPositive)"
 	
 	maxWidth := aNumber asFloat
+]
+
+{ #category : #'api - constraints' }
+BlLayoutCommonConstraints >> minExtent: aPoint [
+		
+	self minWidth: aPoint x asFloat.
+	self minHeight: aPoint y asFloat
 ]
 
 { #category : #'api - constraints' }
@@ -244,8 +263,13 @@ BlLayoutCommonConstraints >> minHeight: aNumber [
 { #category : #'api - constraints' }
 BlLayoutCommonConstraints >> minSize: aPoint [
 		
-	self minWidth: aPoint x asFloat.
-	self minHeight: aPoint y asFloat
+	self
+		deprecated: 'Use #minExtent: instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver minSize: `@arg' ->
+			'`@receiver minExtent: `@arg'.
+
+	self minExtent: aPoint
 ]
 
 { #category : #'api - constraints' }
