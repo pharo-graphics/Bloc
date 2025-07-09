@@ -2602,6 +2602,20 @@ BlElement >> markNeedsPaintFrom: anElement [
 ]
 
 { #category : #'view - configuration' }
+BlElement >> maxExtent [
+
+	^ self maxWidth @ self maxHeight
+]
+
+{ #category : #'view - configuration' }
+BlElement >> maxExtent: aPoint [
+
+	self constraintsDo: [ :c |
+		c maxWidth: aPoint x.
+		c maxHeight: aPoint y ]
+]
+
+{ #category : #'view - configuration' }
 BlElement >> maxHeight [
 
 	"get maxHeight in constraints"
@@ -2618,16 +2632,25 @@ BlElement >> maxHeight: aNumber [
 { #category : #'view - configuration' }
 BlElement >> maxSize [
 
-	"get maxSize in constraints"
-	^ self maxWidth @ self maxHeight
+	self
+		deprecated: 'Use #maxExtent instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver maxSize' ->
+			'`@receiver maxExtent'.
+
+	^ self maxExtent
 ]
 
 { #category : #'view - configuration' }
 BlElement >> maxSize: aPoint [
 
-	self constraintsDo: [ :c |
-		c maxWidth: aPoint x.
-		c maxHeight: aPoint y ]
+	self
+		deprecated: 'Use #maxExtent: instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver maxSize: `@arg' ->
+			'`@receiver maxExtent: `@arg'.
+
+	self maxExtent: aPoint
 ]
 
 { #category : #'view - configuration' }
@@ -2744,6 +2767,20 @@ BlElement >> measuredWidth [
 ]
 
 { #category : #'view - configuration' }
+BlElement >> minExtent [
+
+	^ self minWidth @ self minHeight
+]
+
+{ #category : #'view - configuration' }
+BlElement >> minExtent: aPoint [
+
+	self constraintsDo: [ :c |
+		c minWidth: aPoint x.
+		c minHeight: aPoint y ]
+]
+
+{ #category : #'view - configuration' }
 BlElement >> minHeight [
 
 	"get minHeight in constraints"
@@ -2759,16 +2796,25 @@ BlElement >> minHeight: aNumber [
 { #category : #'view - configuration' }
 BlElement >> minSize [
 
-	"get maxSize in constraints"
-	^ self minWidth @ self minHeight
+	self
+		deprecated: 'Use #minExtent instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver minSize' ->
+			'`@receiver minExtent'.
+
+	^ self minExtent
 ]
 
 { #category : #'view - configuration' }
 BlElement >> minSize: aPoint [
 
-	self constraintsDo: [ :c |
-		c minWidth: aPoint x.
-		c minHeight: aPoint y ]
+	self
+		deprecated: 'Use #minExtent: instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver minSize: `@arg' ->
+			'`@receiver minExtent: `@arg'.
+
+	self minExtent: aPoint
 ]
 
 { #category : #'view - configuration' }
