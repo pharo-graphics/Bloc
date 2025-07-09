@@ -28,6 +28,12 @@ BlActionAnchor >> baseAnchor: anAnchor [
 	baseAnchor := anAnchor
 ]
 
+{ #category : #applying }
+BlActionAnchor >> checkInParent: anElement forChild: aChild [
+
+	baseAnchor checkInParent: anElement forChild: aChild
+]
+
 { #category : #accessing }
 BlActionAnchor >> element [
 
@@ -39,12 +45,6 @@ BlActionAnchor >> initialize [
 
 	super initialize.
 	baseAnchor := BlNeutralAnchor new
-]
-
-{ #category : #applying }
-BlActionAnchor >> setUpInParent: anElement forChild: aChild [
-
-	baseAnchor setUpInParent: anElement forChild: aChild
 ]
 
 { #category : #applying }

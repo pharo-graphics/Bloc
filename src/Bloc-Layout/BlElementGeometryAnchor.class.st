@@ -7,6 +7,12 @@ Class {
 	#category : #'Bloc-Layout-Anchor'
 }
 
+{ #category : #applying }
+BlElementGeometryAnchor >> checkInParent: anElement forChild: aChild [
+
+	receiver := receiver inParent: anElement forChild: aChild
+]
+
 { #category : #accessing }
 BlElementGeometryAnchor >> element [
 	self assert: receiver element notNil.
@@ -38,10 +44,4 @@ BlElementGeometryAnchor >> receiver [
 BlElementGeometryAnchor >> receiver: anAnchorReceiver [
 
 	receiver := anAnchorReceiver
-]
-
-{ #category : #applying }
-BlElementGeometryAnchor >> setUpInParent: anElement forChild: aChild [
-
-	receiver := receiver inParent: anElement forChild: aChild
 ]

@@ -133,6 +133,12 @@ BlAnchor >> appliedOnRectangle: aRectangle withValue: aValue [
 	^ self subclassResponsibility
 ]
 
+{ #category : #applying }
+BlAnchor >> checkInParent: anElement forChild: aChild [
+
+	self subclassResponsibility 
+]
+
 { #category : #accessing }
 BlAnchor >> element [
 
@@ -152,12 +158,6 @@ BlAnchor >> on: anAnchor [
 		  baseAnchor: self;
 		  rightHandSideAnchor: anAnchor;
 		  yourself
-]
-
-{ #category : #applying }
-BlAnchor >> setUpInParent: anElement forChild: aChild [
-
-	self subclassResponsibility 
 ]
 
 { #category : #applying }
