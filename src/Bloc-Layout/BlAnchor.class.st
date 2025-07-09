@@ -148,7 +148,7 @@ BlAnchor >> isMeasurement [
 { #category : #'instance creation' }
 BlAnchor >> on: anAnchor [
 
-	^ BlAnchorLayoutOperation new
+	^ BlAnchorLayoutRule new
 		  baseAnchor: self;
 		  rightHandSideAnchor: anAnchor;
 		  yourself

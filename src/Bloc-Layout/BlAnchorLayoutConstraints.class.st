@@ -5,7 +5,7 @@ Class {
 	#name : #BlAnchorLayoutConstraints,
 	#superclass : #BlLayoutConstraints,
 	#instVars : [
-		'operations'
+		'rules'
 	],
 	#category : #'Bloc-Layout-Anchor'
 }
@@ -17,17 +17,17 @@ BlAnchorLayoutConstraints >> actionAnchor: aBlock [
 ]
 
 { #category : #adding }
-BlAnchorLayoutConstraints >> add: anAnchorOperation [
+BlAnchorLayoutConstraints >> add: anAnchorRule [
 
-	operations add: anAnchorOperation
+	rules add: anAnchorRule
 ]
 
 { #category : #layout }
-BlAnchorLayoutConstraints >> applyOperations: anOperationArray inParent: anElement forChild: aChild [
+BlAnchorLayoutConstraints >> applyRules: aRuleArray inParent: anElement forChild: aChild [
 
 	| bnds |
 	bnds := aChild measuredBounds asRectangle.
-	anOperationArray do: [ :op |
+	aRuleArray do: [ :op |
 			bnds := op
 				        appliedOnChildBounds: bnds
 				        inParent: anElement
@@ -99,7 +99,7 @@ BlAnchorLayoutConstraints >> horizontalCenterAnchor [
 BlAnchorLayoutConstraints >> initialize [ 
 
 	super initialize.
-	operations := OrderedCollection new
+	rules := OrderedCollection new
 ]
 
 { #category : #'layout anchors' }
@@ -112,15 +112,15 @@ BlAnchorLayoutConstraints >> leftAnchor [
 BlAnchorLayoutConstraints >> measureInParent: anElement forChild: aChild [
 
 	^ self
-		  applyOperations: self measurementOperations
+		  applyRules: self measurementRules
 		  inParent: anElement
 		  forChild: aChild
 ]
 
 { #category : #layout }
-BlAnchorLayoutConstraints >> measurementOperations [
+BlAnchorLayoutConstraints >> measurementRules [
 
-	^ operations select: [ :op | op isMeasurement ]
+	^ rules select: [ :op | op isMeasurement ]
 ]
 
 { #category : #'layout anchors' }
@@ -164,15 +164,15 @@ BlAnchorLayoutConstraints >> pointAnchor [
 BlAnchorLayoutConstraints >> positionInParent: anElement forChild: aChild [
 
 	^ self
-		  applyOperations: self positionOperations
+		  applyRules: self positionRules
 		  inParent: anElement
 		  forChild: aChild
 ]
 
 { #category : #layout }
-BlAnchorLayoutConstraints >> positionOperations [
+BlAnchorLayoutConstraints >> positionRules [
 
-	^ operations reject: [ :op | op isMeasurement ]
+	^ rules reject: [ :op | op isMeasurement ]
 ]
 
 { #category : #'layout anchors' }
