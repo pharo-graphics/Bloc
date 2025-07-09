@@ -324,6 +324,12 @@ BlLayoutCommonConstraints >> position: aPoint [
 ]
 
 { #category : #'api - layouts' }
+BlLayoutCommonConstraints >> requestedExtentIn: anElement [
+
+	^ (self requestedWidthIn: anElement) @ (self requestedHeightIn: anElement)
+]
+
+{ #category : #'api - layouts' }
 BlLayoutCommonConstraints >> requestedHeightIn: anElement [
 
 	^ self vertical requestedHeightIn: anElement 
@@ -332,7 +338,13 @@ BlLayoutCommonConstraints >> requestedHeightIn: anElement [
 { #category : #'api - layouts' }
 BlLayoutCommonConstraints >> requestedSizeIn: anElement [
 
-	^ (self requestedWidthIn: anElement) @ (self requestedHeightIn: anElement)
+	self
+		deprecated: 'Use #requestedExtentIn: instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver requestedSizeIn: `@arg' ->
+			'`@receiver requestedExtentIn: `@arg'.
+
+	^ self requestedExtentIn: anElement
 ]
 
 { #category : #'api - layouts' }

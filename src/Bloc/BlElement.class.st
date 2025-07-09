@@ -3732,6 +3732,18 @@ BlElement >> requestParentLayout [
 ]
 
 { #category : #'geometry bounds' }
+BlElement >> requestedExtent [
+	"Normally, one should wait for the layouting to measure myself exactly.
+	But, in case my extent (or my height or my width) is set with an #exact: send, it is possible
+	to get the exact extent|height|width. 
+	So requestExtent|height|width will works correctly only in this particular case.
+	The behavior in others cases may be impredictable or may raise an error.
+	"
+
+	^ self constraints requestedExtentIn: self
+]
+
+{ #category : #'geometry bounds' }
 BlElement >> requestedHeight [
 	" return the exact height. Use it only if you know what your are doing. 
 	see BlElement>>requestedSize comment"
@@ -3742,14 +3754,13 @@ BlElement >> requestedHeight [
 { #category : #'geometry bounds' }
 BlElement >> requestedSize [ 
 
-	"Normally, one shoud wait for the layouting to measure myself exactly.
-	But, in case my size (or my height or my width) is set with an #exact: send, it is possible
-	to get the exact size|height|width. 
-	So requestSize|height|width will works correctly only in this particular case.
-	The behavior in others cases may be impredictable or may raise an error.
-	"
+	self
+		deprecated: 'Use #requestedExtent instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver requestedSize' ->
+			'`@receiver requestedExtent'.
 
-	^ self constraints requestedSizeIn: self
+	^ self requestedExtent
 ]
 
 { #category : #'geometry bounds' }
