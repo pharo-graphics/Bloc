@@ -62,7 +62,7 @@ BlColorPicker class >> openPaint [
 	pickerSpace := picker inSpace.
 	pickerSpace position: initialPosition + (canvasExtent x @ 0).
 	picker whenLayoutedDoOnce: [
-		pickerSpace extent: picker size.
+		pickerSpace extent: picker extent.
 		pickerSpace resizable: false ].
 
 	paintSpace root

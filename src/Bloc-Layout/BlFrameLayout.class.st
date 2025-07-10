@@ -174,7 +174,7 @@ BlFrameLayout >> measureParentNode: aParentNode [
 		min: aParentNode maxExtent
 		max: aParentNode minExtent.
 
-	aMeasuredExtent := aParentNode extentSpec sizeFor: maxExtent.
+	aMeasuredExtent := aParentNode extentSpec extentFor: maxExtent.
 
 	aMeasuredExtent := aMeasuredExtent
 		min: aParentNode maxExtent

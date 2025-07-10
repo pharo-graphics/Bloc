@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #tests }
-BlFrameLayoutChildrenTest >> testChildElementWithExactSize100per50 [
+BlFrameLayoutChildrenTest >> testChildElementWithExactExtent100per50 [
 
 	<sampleInstance>
 	<demo>
@@ -25,19 +25,19 @@ BlFrameLayoutChildrenTest >> testChildElementWithExactSize100per50 [
 ]
 
 { #category : #tests }
-BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize [
+BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedExtent [
 
 	<sampleInstance>
 	<demo>
 	| element |
-	element := self parentWithFixedSize.
+	element := self parentWithFixedExtent.
 	element layout: BlFrameLayout new.
 	self assert: element layout class equals: BlFrameLayout.
 	^ element
 ]
 
 { #category : #tests }
-BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedSize300per250 [
+BlFrameLayoutChildrenTest >> testParentWithFrameLayoutAndFixedExtent300per250 [
 
 	<sampleInstance>
 	<demo>

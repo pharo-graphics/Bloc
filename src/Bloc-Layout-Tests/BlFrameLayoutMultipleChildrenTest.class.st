@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #tests }
-BlFrameLayoutMultipleChildrenTest >> testChildElementWithExactSize140per140 [
+BlFrameLayoutMultipleChildrenTest >> testChildElementWithExactExtent140per140 [
 
 	<sampleInstance>
 	<demo>
@@ -30,15 +30,15 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignLeftCenterAnd
 	<sampleInstance>
 	<demo>
 	| parent childOne childTwo |
-	childOne := self testChildElementWithExactSize140per140.
-	childTwo := self testChildElementWithExactSize100per50.
+	childOne := self testChildElementWithExactExtent140per140.
+	childTwo := self testChildElementWithExactExtent100per50.
 	childOne constraintsDo: [ :c |
 		c frame horizontal alignLeft.
 		c frame vertical alignCenter ].
 	childTwo constraintsDo: [ :c |
 		c frame horizontal alignCenter.
 		c frame vertical alignCenter ].
-	parent := self testParentWithFrameLayoutAndFixedSize300per250.
+	parent := self testParentWithFrameLayoutAndFixedExtent300per250.
 	parent addChildren: {
 			childOne.
 			childTwo }.
@@ -58,12 +58,12 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignTopLeftAndExa
 	<sampleInstance>
 	<demo>
 	| parent childOne childTwo |
-	childOne := self testChildElementWithExactSize140per140.
-	childTwo := self testChildElementWithExactSize100per50.
+	childOne := self testChildElementWithExactExtent140per140.
+	childTwo := self testChildElementWithExactExtent100per50.
 	childTwo constraintsDo: [ :c |
 		c frame horizontal alignRight.
 		c frame vertical alignCenter ].
-	parent := self testParentWithFrameLayoutAndFixedSize300per250.
+	parent := self testParentWithFrameLayoutAndFixedExtent300per250.
 	parent addChildren: {
 			childOne.
 			childTwo }.
@@ -137,7 +137,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithNineExactChildrenWithAllAlig
 		                    constraintsDo: [ :c |
 			                    c frame horizontal alignRight.
 			                    c frame vertical alignBottom ].
-	parent := self testParentWithFrameLayoutAndFixedSize300per250.
+	parent := self testParentWithFrameLayoutAndFixedExtent300per250.
 	parent addChildren: {
 			childTopLeft.
 			childTopCenter.
@@ -172,7 +172,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithTwoChildrenMatchingParentWit
 	childTwo constraintsDo: [ :c |
 		c frame horizontal weight: 0.5.
 		c frame vertical weight: 0.9 ].
-	parent := self testParentWithFrameLayoutAndFixedSize300per250.
+	parent := self testParentWithFrameLayoutAndFixedExtent300per250.
 	parent addChildren: {
 			childOne.
 			childTwo }.
@@ -229,9 +229,9 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithTwoExactChildrenAndNoAlignme
 	<sampleInstance>
 	<demo>
 	| parent childOne childTwo |
-	childOne := self testChildElementWithExactSize140per140.
-	childTwo := self testChildElementWithExactSize100per50.
-	parent := self testParentWithFrameLayoutAndFixedSize300per250.
+	childOne := self testChildElementWithExactExtent140per140.
+	childTwo := self testChildElementWithExactExtent100per50.
+	parent := self testParentWithFrameLayoutAndFixedExtent300per250.
 	parent addChildren: {
 			childOne.
 			childTwo }.

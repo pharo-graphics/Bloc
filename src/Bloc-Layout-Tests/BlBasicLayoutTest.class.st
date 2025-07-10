@@ -22,7 +22,7 @@ BlBasicLayoutTest >> testForceLayoutOfMatchParent [
 ]
 
 { #category : #tests }
-BlBasicLayoutTest >> testParentWithChildExactSize [
+BlBasicLayoutTest >> testParentWithChildExactExtent [
 
 	<sampleInstance>
 	<demo>
@@ -58,7 +58,7 @@ BlBasicLayoutTest >> testParentWithChildFitContent [
 	<sampleInstance>
 	<demo>
 	| child parent |
-	parent := self testParentWithChildExactSize.
+	parent := self testParentWithChildExactExtent.
 	child := parent children first.
 	child constraintsDo: [ :c |
 		c horizontal fitContent.
@@ -75,7 +75,7 @@ BlBasicLayoutTest >> testParentWithChildMatchParent [
 	<sampleInstance>
 	<demo>
 	| child parent |
-	parent := self testParentWithChildExactSize.
+	parent := self testParentWithChildExactExtent.
 	child := parent children first.
 	child constraintsDo: [ :c |
 		c horizontal matchParent.

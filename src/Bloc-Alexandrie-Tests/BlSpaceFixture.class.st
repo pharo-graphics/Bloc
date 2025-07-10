@@ -185,15 +185,15 @@ BlSpaceFixture >> buildClippingAbsolutelyTransparentElement [
 { #category : #fixtures }
 BlSpaceFixture >> buildClippingMany [
 
-	| newElementBlock elementSize |
-	elementSize := 200 asPoint.
+	| newElementBlock extent |
+	extent := 200 asPoint.
 
 	newElementBlock := [ :parentElement :depth |
 		| anElement |
 		anElement :=
 			(builder addTo: parentElement)
 				geometry: BlCircleGeometry new;
-				extent: elementSize;
+				extent: extent;
 				transformDo: [ :t | t topLeftOrigin; scaleBy: 0.5 ];
 				border: (BlBorder paint: Color black width: 5);
 				background: (depth odd
@@ -204,7 +204,7 @@ BlSpaceFixture >> buildClippingMany [
 			
 			depth > 0 ifTrue: [
 				(newElementBlock value: anElement value: depth-1).
-				(newElementBlock value: anElement value: depth-1) position: elementSize/2 ].
+				(newElementBlock value: anElement value: depth-1) position: extent/2 ].
 			
 			anElement ].
 	
@@ -874,8 +874,8 @@ BlSpaceFixture >> buildMiddleAlignedGeometriesHorizontal [
 { #category : #fixtures }
 BlSpaceFixture >> buildOpacities [
 
-	| size fillColor borderColor |
-	size := 50 asPoint.
+	| extent fillColor borderColor |
+	extent := 50 asPoint.
 	fillColor := builder nextColor.
 	borderColor := builder nextColor.
 	
@@ -883,14 +883,14 @@ BlSpaceFixture >> buildOpacities [
 		background: ((BlPaintBackground paint: fillColor asBlPaint) opacity: 0.75; yourself);
 		opacity: 0.5;
 		position: 10 @ 10;
-		extent: size;
+		extent: extent;
 		yourself.
 
 	builder addToRoot
 		background: ((BlPaintBackground paint: fillColor) opacity: 0.5; yourself);
 		opacity: 0.75;
 		position: 40 @ 10;
-		extent: size;
+		extent: extent;
 		yourself.
 
 	builder addToRoot
@@ -901,7 +901,7 @@ BlSpaceFixture >> buildOpacities [
 			opacity: 0.5;
 			build);
 		position: 10 @ 40;
-		extent: size;
+		extent: extent;
 		yourself.
 
 	builder addToRoot
@@ -912,7 +912,7 @@ BlSpaceFixture >> buildOpacities [
 			opacity: 0.75;
 			build);
 		position: 40 @ 40;
-		extent: size;
+		extent: extent;
 		yourself.
 
 ]
@@ -1630,7 +1630,7 @@ BlSpaceFixture >> buildTransformScale [
 		transformDo: [ :t | t scaleBy: 2 ];
 		yourself.
 
-	"C is in the center of it's parent, as they have the same size."
+	"C is in the center of it's parent, as they have the same extent."
 	elementC := (builder addTo: elementB)
 		geometry: BlCircleGeometry new;
 		position: 0 asPoint;

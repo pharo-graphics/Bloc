@@ -1521,10 +1521,6 @@ BlElement >> extent [
 	Extent is a point with `x` component representing my width
 	and y component representing my height accordingly"
 
-	<return: #Point>
-	self
-		flag:
-			'TODO as extent: is deprecated, should this be as well in favor of size?'.
 	^ self bounds extent
 ]
 
@@ -1960,16 +1956,14 @@ BlElement >> height [
 
 { #category : #'api - bounds' }
 BlElement >> height: aNumber [
-	<event: #BlElementExtentChangedEvent>
-	| aLayoutConstraints |
 
+	| aLayoutConstraints |
 	aLayoutConstraints := self constraints.
-	(aLayoutConstraints vertical resizer isExact and: [ 
+	(aLayoutConstraints vertical resizer isExact and: [
 		aLayoutConstraints vertical resizer size = aNumber ])
 		ifTrue: [ ^ self ].
 
-	self constraintsDo: [ :c |
-		c vertical exact: aNumber ]
+	self constraintsDo: [ :c | c vertical exact: aNumber ]
 ]
 
 { #category : #'layout anchors' }
@@ -2237,10 +2231,11 @@ BlElement >> isLayoutBoundary [
 	"Return true if I am a layout boundary, e.g. the layout recomputation requests should not be propagated up in the hierarchy.
 	Imagine an element matches parent in both directions or has a fixed size, in this case even if my children request layout update
 	I do not have to propagate it further because it will not have any influence on the parent"
-	<return: #Boolean>
-	
-	^ (self constraints horizontal resizer isExact or: [ self constraints horizontal resizer isMatchParent ])
-		and: [ self constraints vertical resizer isExact or: [ self constraints vertical resizer isMatchParent ] ]
+
+	^ (self constraints horizontal resizer isExact or: [
+		   self constraints horizontal resizer isMatchParent ]) and: [
+			  self constraints vertical resizer isExact or: [
+				  self constraints vertical resizer isMatchParent ] ]
 ]
 
 { #category : #layout }
@@ -2584,6 +2579,20 @@ BlElement >> markNeedsPaintFrom: anElement [
 ]
 
 { #category : #'view - configuration' }
+BlElement >> maxExtent [
+
+	^ self maxWidth @ self maxHeight
+]
+
+{ #category : #'view - configuration' }
+BlElement >> maxExtent: aPoint [
+
+	self constraintsDo: [ :c |
+		c maxWidth: aPoint x.
+		c maxHeight: aPoint y ]
+]
+
+{ #category : #'view - configuration' }
 BlElement >> maxHeight [
 
 	"get maxHeight in constraints"
@@ -2600,16 +2609,25 @@ BlElement >> maxHeight: aNumber [
 { #category : #'view - configuration' }
 BlElement >> maxSize [
 
-	"get maxSize in constraints"
-	^ self maxWidth @ self maxHeight
+	self
+		deprecated: 'Use #maxExtent instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver maxSize' ->
+			'`@receiver maxExtent'.
+
+	^ self maxExtent
 ]
 
 { #category : #'view - configuration' }
 BlElement >> maxSize: aPoint [
 
-	self constraintsDo: [ :c |
-		c maxWidth: aPoint x.
-		c maxHeight: aPoint y ]
+	self
+		deprecated: 'Use #maxExtent: instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver maxSize: `@arg' ->
+			'`@receiver maxExtent: `@arg'.
+
+	self maxExtent: aPoint
 ]
 
 { #category : #'view - configuration' }
@@ -2726,6 +2744,20 @@ BlElement >> measuredWidth [
 ]
 
 { #category : #'view - configuration' }
+BlElement >> minExtent [
+
+	^ self minWidth @ self minHeight
+]
+
+{ #category : #'view - configuration' }
+BlElement >> minExtent: aPoint [
+
+	self constraintsDo: [ :c |
+		c minWidth: aPoint x.
+		c minHeight: aPoint y ]
+]
+
+{ #category : #'view - configuration' }
 BlElement >> minHeight [
 
 	"get minHeight in constraints"
@@ -2741,16 +2773,25 @@ BlElement >> minHeight: aNumber [
 { #category : #'view - configuration' }
 BlElement >> minSize [
 
-	"get maxSize in constraints"
-	^ self minWidth @ self minHeight
+	self
+		deprecated: 'Use #minExtent instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver minSize' ->
+			'`@receiver minExtent'.
+
+	^ self minExtent
 ]
 
 { #category : #'view - configuration' }
 BlElement >> minSize: aPoint [
 
-	self constraintsDo: [ :c |
-		c minWidth: aPoint x.
-		c minHeight: aPoint y ]
+	self
+		deprecated: 'Use #minExtent: instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver minSize: `@arg' ->
+			'`@receiver minExtent: `@arg'.
+
+	self minExtent: aPoint
 ]
 
 { #category : #'view - configuration' }
@@ -3659,9 +3700,21 @@ BlElement >> requestParentLayout [
 ]
 
 { #category : #'geometry bounds' }
+BlElement >> requestedExtent [
+	"Normally, one should wait for the layouting to measure myself exactly.
+	But, in case my extent (or my height or my width) is set with an #exact: send, it is possible
+	to get the exact extent|height|width. 
+	So requestExtent|height|width will works correctly only in this particular case.
+	The behavior in others cases may be impredictable or may raise an error.
+	"
+
+	^ self constraints requestedExtentIn: self
+]
+
+{ #category : #'geometry bounds' }
 BlElement >> requestedHeight [
 	" return the exact height. Use it only if you know what your are doing. 
-	see BlElement>>requestedSize comment"
+	see BlElement>>requestedExtent comment"
 
 	^ self constraints requestedHeightIn: self
 ]
@@ -3669,20 +3722,19 @@ BlElement >> requestedHeight [
 { #category : #'geometry bounds' }
 BlElement >> requestedSize [ 
 
-	"Normally, one shoud wait for the layouting to measure myself exactly.
-	But, in case my size (or my height or my width) is set with an #exact: send, it is possible
-	to get the exact size|height|width. 
-	So requestSize|height|width will works correctly only in this particular case.
-	The behavior in others cases may be impredictable or may raise an error.
-	"
+	self
+		deprecated: 'Use #requestedExtent instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver requestedSize' ->
+			'`@receiver requestedExtent'.
 
-	^ self constraints requestedSizeIn: self
+	^ self requestedExtent
 ]
 
 { #category : #'geometry bounds' }
 BlElement >> requestedWidth [ 
 	" return the exact width. Use it only if you know what your are doing. 
-	see BlElement>>requestedSize comment"
+	see BlElement>>requestedExtent comment"
 
 	^ self constraints requestedWidthIn: self
 ]
@@ -4048,9 +4100,9 @@ BlElement >> whenLayoutedDo: aBlock [
 BlElement >> whenLayoutedDoOnce: aBlock [
 	"Evaluate block passed as argument after the layout applied.
 
-	As an example of use, imagine you need to get the actual size of an element.
-	The size is computed by the layout.
-	Thus, if one need to get the size of an element one have to be sure that its layout applied."
+	As an example of use, imagine you need to get the actual extent of an element.
+	The extent is computed by the layout.
+	Thus, if one need to get the extent of an element one have to be sure that its layout applied."
 
 	^ self
 		addEventHandlerOn: BlElementLayoutComputedEvent
@@ -4064,16 +4116,14 @@ BlElement >> width [
 
 { #category : #'api - bounds' }
 BlElement >> width: aNumber [
-	<event: #BlElementExtentChangedEvent>
-	| aLayoutConstraints |
 
+	| aLayoutConstraints |
 	aLayoutConstraints := self constraints.
 	(aLayoutConstraints horizontal resizer isExact and: [ 
 		aLayoutConstraints horizontal resizer size = aNumber ])
 		ifTrue: [ ^ self ].
 
-	self constraintsDo: [ :c |
-		c horizontal exact: aNumber ]
+	self constraintsDo: [ :c | c horizontal exact: aNumber ]
 ]
 
 { #category : #'layout anchors' }

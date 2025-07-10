@@ -56,5 +56,5 @@ BlWrapAroundChildrenLayout >> measure: aParentLayoutNode [
 	height := boundingBox height + aParentLayoutNode padding height.
 
 	aParentLayoutNode extent:
-		(aParentLayoutNode extentSpec sizeForWidth: width height: height)
+		(aParentLayoutNode extentSpec extentForWidth: width height: height)
 ]

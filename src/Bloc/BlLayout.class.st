@@ -229,7 +229,7 @@ BlLayout >> measure: anElement with: anExtentSpec [
 	"Default simple and naive implementation that does not support #fitContent resizing
 	strategy of the anElement that uses a layout with this version of measurement"
 
-	anElement measuredExtent: (anExtentSpec sizeForWidth: 0.0 height: 0.0).
+	anElement measuredExtent: (anExtentSpec extentForWidth: 0.0 height: 0.0).
 	self measuredChildren: anElement do: [ :aChild |
 		self
 			measureChild: aChild

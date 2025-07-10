@@ -194,9 +194,8 @@ BlScalableElement >> onMeasure: anExtentMeasurementSpec [
 	self contentElement transformDo: [ :t |
 		t scaleBy: aScaleFactor @ aScaleFactor ].
 
-	self measuredExtent:
-		(anExtentMeasurementSpec sizeFor:
-			self contentElement measuredBounds transformed extent)
+	self measuredExtent: (anExtentMeasurementSpec extentFor:
+			 self contentElement measuredBounds transformed extent)
 ]
 
 { #category : #accessing }

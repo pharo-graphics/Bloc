@@ -28,32 +28,28 @@ BlInfiniteLinearSmoothScroller class >> initialize [
 ]
 
 { #category : #physics }
-BlInfiniteLinearSmoothScroller >> calculateDelta: aViewSize toFit: aBoxSize snap: aSnapPreference [
-	<return: #Number>
-	"view start = aViewSize x
-	view end = aViewSize y
-	box start = aBoxSize x
-	box end = aBoxSize y"
+BlInfiniteLinearSmoothScroller >> calculateDelta: aViewExtent toFit: aBoxExtent snap: aSnapPreference [
 
-	aSnapPreference = SnapToStart
-		ifTrue: [ ^ aBoxSize x - aViewSize x ].
+	"view start = aViewExtent x
+	view end = aViewExtent y
+	box start = aBoxExtent x
+	box end = aBoxExtent y"
+
+	aSnapPreference = SnapToStart ifTrue: [
+		^ aBoxExtent x - aViewExtent x ].
 	
-	aSnapPreference = SnapToEnd
-		ifTrue: [ ^ aBoxSize y - aViewSize y ].
+	aSnapPreference = SnapToEnd ifTrue: [
+		^ aBoxExtent y - aViewExtent y ].
 	
+	aSnapPreference = SnapToAny ifTrue: [ 
+		| aDeltaStart aDeltaEnd |
+		aDeltaStart := aBoxExtent x - aViewExtent x.
+		aDeltaStart > 0 ifTrue: [ ^ aDeltaStart ].
+		aDeltaEnd := aBoxExtent y - aViewExtent y.
+		aDeltaEnd < 0 ifTrue: [ ^ aDeltaEnd ].
+		^ 0 ].
 	
-	aSnapPreference = SnapToAny
-		ifTrue: [ 
-			| aDeltaStart aDeltaEnd |
-			aDeltaStart := aBoxSize x - aViewSize x.
-			aDeltaStart > 0
-				ifTrue: [ ^ aDeltaStart ].
-			aDeltaEnd := aBoxSize y - aViewSize y.
-			aDeltaEnd < 0
-				ifTrue: [ ^ aDeltaEnd ].
-			^ 0 ].
-	
-	self error: 'Unknown snap preference: ', aSnapPreference asString.
+	self error: 'Unknown snap preference: ', aSnapPreference asString
 ]
 
 { #category : #physics }

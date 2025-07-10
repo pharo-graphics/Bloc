@@ -30,7 +30,7 @@ Class {
 		'measurementCacheEnabled',
 		'smoothScroller',
 		'announcer',
-		'lastExactSize'
+		'lastExactExtent'
 	],
 	#pools : [
 		'BlInfiniteConstants'
@@ -592,9 +592,21 @@ BlInfiniteLayout >> itemCount [
 ]
 
 { #category : #accessing }
+BlInfiniteLayout >> lastExactExtent [
+
+	^ lastExactExtent
+]
+
+{ #category : #accessing }
 BlInfiniteLayout >> lastExactSize [
 
-	^ lastExactSize
+	self
+		deprecated: 'Use #lastExactExtent instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver lastExactSize' ->
+			'`@receiver lastExactExtent'.
+
+	^ self lastExactExtent
 ]
 
 { #category : #'api - layout' }
@@ -778,7 +790,8 @@ BlInfiniteLayout >> measurementSpec: anExtentMeasurementSpec [
 
 	height := height min: self maximumHeight.
 
-	(width isZero or: [height isZero ]) ifFalse: [ lastExactSize := width @ height ]
+	(width isZero or: [ height isZero ]) ifFalse: [
+		lastExactExtent := width @ height ]
 ]
 
 { #category : #geometry }

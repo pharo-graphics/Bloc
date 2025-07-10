@@ -220,7 +220,7 @@ BlInsets >> bottomRight [
 
 { #category : #converting }
 BlInsets >> expand: aRectangle [
-	"Answer a rectangle whose size has been expanded by the receiver which represents each rectangle corner."
+	"Answer a rectangle whose extent has been expanded by the receiver which represents each rectangle corner."
 	"Optimisation: fast return if I don't modify bounds. gives 10x speed boost"
 
 	self isEmpty
