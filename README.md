@@ -23,13 +23,14 @@ Metacello new
 You can replace master by:
 
 - dev to work on the development branch
-- v2.4.0 to load latest released version
-Add this project to your Baseline with:
+- v2.5.0 to load latest released version
 
 ## How to depend on it
 
+Add this project to your Baseline with:
+
 ```smalltalk
-spec baseline: 'Bloc' with: [ spec repository: 'github://pharo-graphics/Bloc:v2.4.0/src' ].
+spec baseline: 'Bloc' with: [ spec repository: 'github://pharo-graphics/Bloc:v2.5.0/src' ].
 ```
 
 ## Documentation
@@ -42,6 +43,12 @@ spec baseline: 'Bloc' with: [ spec repository: 'github://pharo-graphics/Bloc:v2.
 These pages can be browsed via Pharo IDE -> World Menu -> Help -> Documentation Browser -> Bloc/doc (after loading the project).
 Note that there is also a book under writing available at [https://github.com/SquareBracketAssociates/Booklet-Graphics](https://github.com/SquareBracketAssociates/Booklet-Graphics)
 
+## Examples
+
+Several options:
+* Open the Demo browser via Pharo IDE -> World Menu -> Library -> Bloc -> Bloc demo browser
+* Browse Bloc's `-Examples` packages
+* Browse related projects that use Bloc such as Toplo, BlocBenchs, Pyramid, Coypu.
 
 ## Contact
 
