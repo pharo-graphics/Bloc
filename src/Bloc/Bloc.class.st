@@ -117,3 +117,28 @@ Bloc class >> preferencesOn: aBuilder [
 				default: [ false ].
 		]
 ]
+
+{ #category : #'world menu items' }
+Bloc class >> registerBlocInWorldMenuOn: aBuilder [
+	<worldMenu>
+
+	(aBuilder item: #Bloc) 
+		parent: #Tools;
+		order: 778;
+		label: 'Bloc';
+		iconName: #image;
+		help: 'Bloc is a low-level UI infrastructure & framework for Pharo.'
+]
+
+{ #category : #'world menu items' }
+Bloc class >> registerGithubInWorldMenuOn: aBuilder [
+	<worldMenu>
+
+	(aBuilder item: #BlocGitHub)
+		parent: #Bloc;
+		order: 1;
+		label: 'GitHub';
+		help: 'Open Bloc GitHub page';
+		iconName: #github;
+		action: [ WebBrowser openOn: 'https://github.com/pharo-graphics/Bloc/' ]
+]
