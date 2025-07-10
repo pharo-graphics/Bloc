@@ -57,6 +57,16 @@ BlExtentMeasurementSpec >> = anotherObject [
 		  anotherObject heightSpec = heightSpec ]
 ]
 
+{ #category : #geometry }
+BlExtentMeasurementSpec >> extentForWidth: aWidth height: aHeight [
+
+	| width height |
+	width := widthSpec sizeFor: aWidth.
+	height := heightSpec sizeFor: aHeight.
+
+	^ width @ height
+]
+
 { #category : #comparing }
 BlExtentMeasurementSpec >> hash [
 
@@ -102,16 +112,6 @@ BlExtentMeasurementSpec >> printOn: aStream [
 BlExtentMeasurementSpec >> sizeFor: anExtent [
 
 	^ self sizeForWidth: anExtent x height: anExtent y
-]
-
-{ #category : #geometry }
-BlExtentMeasurementSpec >> sizeForWidth: aWidth height: aHeight [
-
-	| width height |
-	width := widthSpec sizeFor: aWidth.
-	height := heightSpec sizeFor: aHeight.
-
-	^ width @ height
 ]
 
 { #category : #accessing }

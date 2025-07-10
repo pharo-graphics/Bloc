@@ -277,7 +277,7 @@ BlFlowLayoutMeasurer >> fillLinesFor: anElement with: anExtentSpec [
 		totalContentHeight := totalContentHeight + contentLength ].
 
 	anElement measuredExtent:
-		(anExtentSpec sizeForWidth: totalContentWidth height: totalContentHeight)
+		(anExtentSpec extentForWidth: totalContentWidth height: totalContentHeight)
 ]
 
 { #category : #accessing }
