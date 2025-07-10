@@ -58,6 +58,12 @@ BlExtentMeasurementSpec >> = anotherObject [
 ]
 
 { #category : #geometry }
+BlExtentMeasurementSpec >> extentFor: anExtent [
+
+	^ self extentForWidth: anExtent x height: anExtent y
+]
+
+{ #category : #geometry }
 BlExtentMeasurementSpec >> extentForWidth: aWidth height: aHeight [
 
 	| width height |
@@ -111,7 +117,13 @@ BlExtentMeasurementSpec >> printOn: aStream [
 { #category : #geometry }
 BlExtentMeasurementSpec >> sizeFor: anExtent [
 
-	^ self sizeForWidth: anExtent x height: anExtent y
+	self
+		deprecated: 'Use #extentFor: instead. See: https://github.com/pharo-graphics/Bloc/issues/802'
+		transformWith:
+			'`@receiver sizeFor: `@arg' ->
+			'`@receiver extentFor: `@arg'.
+
+	^ self extentFor: anExtent
 ]
 
 { #category : #accessing }
