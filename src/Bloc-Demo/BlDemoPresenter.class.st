@@ -13,14 +13,14 @@ Class {
 
 { #category : #running }
 BlDemoPresenter class >> menuCommandOn: aBuilder [
-
 	<worldMenu>
-	(aBuilder item: #'Open Bloc Demo')
+
+	(aBuilder item: #'Bloc demo browser')
+		parent: #Bloc;
+		order: 0.1;
 		action: [ self open ];
-		parent: #Help;
 		help: 'Open a demo browser of Bloc to display multiple example of Bloc usages.';
-		iconName: #group;
-		withSeparatorAfter
+		iconName: #go
 ]
 
 { #category : #running }
