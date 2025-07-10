@@ -8,7 +8,7 @@ Class {
 	#category : #'Bloc-Tests-Basic'
 }
 
-{ #category : #initialization }
+{ #category : #'instance creation' }
 BlElementTest >> element [
 
 	<sampleInstance>
@@ -17,7 +17,58 @@ BlElementTest >> element [
 		  yourself
 ]
 
-{ #category : #initialization }
+{ #category : #'instance creation' }
+BlElementTest >> elementTree [
+
+	<sampleInstance>
+	| parent child1 child2 subChild1 subChild2 |
+	parent := BlElement new id: #parent.
+	parent extent: 500 asPoint.
+	parent background: Color veryLightGray.
+	
+	child1 := BlElement new id: #child1.
+	child1 background: Color red.
+	child1 extent: 200 asPoint.
+	child1 position: 5 @ 5.
+	child2 := BlElement new id: #child2.
+	child2 background: Color blue.
+	child2 extent: 200 asPoint.
+	child2 position: 5 @ 210.
+
+	subChild1 := BlElement new id: #subChild1_1.
+	subChild1 background: Color yellow.
+	subChild1 extent: 50 asPoint.
+	subChild1 position: 5 @ 5.
+
+	subChild2 := BlElement new id: #subChild1_2.
+	subChild2 background: Color pink.
+	subChild2 extent: 50 asPoint.
+	subChild2 position: 5 @ 110.
+
+	child1 addChildren: {
+			subChild1.
+			subChild2 }.
+
+	subChild1 := BlElement new id: #subChild2_1.
+	subChild1 background: Color yellow.
+	subChild1 extent: 50 asPoint.
+	subChild1 position: 5 @ 5.
+
+	subChild2 := BlElement new id: #subChild2_2.
+	subChild2 background: Color pink.
+	subChild2 extent: 50 asPoint.
+	subChild2 position: 5 @ 110.
+
+	child2 addChildren: {
+			subChild1.
+			subChild2 }.
+	parent addChildren: {
+			child1.
+			child2 }.
+	^ parent
+]
+
+{ #category : #'instance creation' }
 BlElementTest >> invisible [
 
 	<sampleInstance>
@@ -32,6 +83,62 @@ BlElementTest >> setUp [
 	host := BlMockedHost new.
 	space := BlSpace new.
 	space host: host
+]
+
+{ #category : #'api - children enumeration' }
+BlElementTest >> testAllChildrenBreadthFirstDo [
+
+	| parent allElements |
+	parent := self elementTree.
+	allElements := OrderedCollection new.
+	parent allChildrenBreadthFirstDo: [ :child | allElements add: child ].
+	self
+		assert: (allElements collect: [ :e | e id asSymbol ]) asArray
+		equals:
+		#( #child1 #child2 #subChild1_1 #subChild1_2 #subChild2_1
+		   #subChild2_2 )
+]
+
+{ #category : #'api - children enumeration' }
+BlElementTest >> testAllChildrenBreadthFirstDoWhile [
+
+	| parent allElements |
+	parent := self elementTree.
+	allElements := OrderedCollection new.
+	parent
+		allChildrenBreadthFirstDo: [ :child | allElements add: child ]
+		while: [ :e | e hasChildren ].
+	self
+		assert: (allElements collect: [ :e | e id asSymbol ]) asArray
+		equals: #( #child1 #child2 )
+]
+
+{ #category : #'api - children enumeration' }
+BlElementTest >> testAllChildrenDepthFirstDo [
+
+	| parent allElements |
+	parent := self elementTree.
+	allElements := OrderedCollection new.
+	parent allChildrenDepthFirstDo: [ :child | allElements add: child ].
+	self
+		assert: (allElements collect: [ :e | e id asSymbol ]) asArray
+		equals:
+		#( #subChild1_1 #subChild1_2 #subChild2_1 #subChild2_2 #child1
+		   #child2 )
+]
+
+{ #category : #'api - children enumeration' }
+BlElementTest >> testAllChildrenDepthFirstDoWhile [
+
+	| parent allElements |
+	parent := self elementTree.
+	allElements := OrderedCollection new.
+	parent
+		allChildrenDepthFirstDo: [ :child | allElements add: child ]
+		while: [ :e | e hasChildren ].
+	self
+		assert: (allElements collect: [ :e | e id asSymbol ]) asArray
+		equals: #( #child1 #child2 )
 ]
 
 { #category : #'children - accessing' }
@@ -376,7 +483,7 @@ BlElementTest >> testRequestFocus [
 	self assert: childEvents first target == child
 ]
 
-{ #category : #'children - enumerating' }
+{ #category : #'api - children enumeration' }
 BlElementTest >> testSelectChildrenWithId [
 
 	| element child list child2 |
@@ -398,7 +505,64 @@ BlElementTest >> testSelectChildrenWithId [
 	self assert: list second identicalTo: child2.
 ]
 
-{ #category : #initialization }
+{ #category : #'api - children enumeration' }
+BlElementTest >> testWithAllChildrenBreadthFirstDo [
+
+	| parent allElements |
+	parent := self elementTree.
+	allElements := OrderedCollection new.
+	parent withAllChildrenBreadthFirstDo: [ :child | allElements add: child ].
+	self
+		assert: (allElements collect: [ :e | e id asSymbol ]) asArray
+		equals:
+			#( #parent #child1 #child2 #subChild1_1 #subChild1_2 #subChild2_1
+			   #subChild2_2 )
+]
+
+{ #category : #'api - children enumeration' }
+BlElementTest >> testWithAllChildrenBreadthFirstDoWhile [
+
+	| parent allElements |
+	parent := self elementTree.
+	allElements := OrderedCollection new.
+	parent
+		withAllChildrenBreadthFirstDo: [ :child | allElements add: child ]
+		while: [ :e | e hasChildren ].
+	self
+		assert: (allElements collect: [ :e | e id asSymbol ]) asArray
+		equals: #( #parent #child1 #child2 )
+]
+
+{ #category : #'api - children enumeration' }
+BlElementTest >> testWithAllChildrenDepthFirstDo [
+
+	| parent allElements |
+	parent := self elementTree.
+	allElements := OrderedCollection new.
+	parent withAllChildrenDepthFirstDo: [ :child |
+		allElements add: child ].
+	self
+		assert: (allElements collect: [ :e | e id asSymbol ]) asArray
+		equals:
+			#( #subChild1_1 #subChild1_2 #subChild2_1 #subChild2_2 #child1
+			   #child2 #parent )
+]
+
+{ #category : #'api - children enumeration' }
+BlElementTest >> testWithAllChildrenDepthFirstDoWhile [
+
+	| parent allElements |
+	parent := self elementTree.
+	allElements := OrderedCollection new.
+	parent
+		withAllChildrenDepthFirstDo: [ :child | allElements add: child ]
+		while: [ :e | e hasChildren ].
+	self
+		assert: (allElements collect: [ :e | e id asSymbol ]) asArray
+		equals: #( #child1 #child2 #parent)
+]
+
+{ #category : #'instance creation' }
 BlElementTest >> visible [
 
 	<sampleInstance>

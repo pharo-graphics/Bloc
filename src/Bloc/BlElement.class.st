@@ -303,8 +303,23 @@ BlElement >> allChildrenBreadthFirstDetect: aBlock ifFound: ifFoundBlock ifNone:
 
 { #category : #'api - children enumeration' }
 BlElement >> allChildrenBreadthFirstDo: aBlock [ 
+	" run the block for all children breadth first "
+
 	self childrenDo: aBlock.
 	self childrenDo: [ :each | each allChildrenBreadthFirstDo: aBlock ]
+]
+
+{ #category : #'api - children enumeration' }
+BlElement >> allChildrenBreadthFirstDo: aBlock while: aConditionBlock [
+	" run the block for all children breadth first while aConditionBlock value is true.
+	If aConditionBlock value is false, then the enumeration stops (the children are not enumerated) "
+
+	| allowedChildren |
+	allowedChildren := self children select: [ :each |
+		                   aConditionBlock value: each ].
+	allowedChildren do: [ :each | aBlock value: each ].
+	allowedChildren do: [ :each |
+		each allChildrenBreadthFirstDo: aBlock while: aConditionBlock ]
 ]
 
 { #category : #'api - children enumeration' }
@@ -346,8 +361,23 @@ BlElement >> allChildrenCount [
 
 { #category : #'api - children enumeration' }
 BlElement >> allChildrenDepthFirstDo: aBlock [
+	" run the block for all children depth first  "
+
 	self childrenDo: [ :each | each allChildrenDepthFirstDo: aBlock ].
 	self childrenDo: aBlock
+]
+
+{ #category : #'api - children enumeration' }
+BlElement >> allChildrenDepthFirstDo: aBlock while: aConditionBlock [
+	" run the block for all children depth first while aConditionBlock value is true.
+	If aConditionBlock value is false, then the enumeration stops (the children are not enumerated) "
+
+	| allowedChildren |
+	allowedChildren := self children select: [ :each |
+		                   aConditionBlock value: each ].
+	allowedChildren do: [ :each |
+		each allChildrenDepthFirstDo: aBlock while: aConditionBlock ].
+	allowedChildren do: aBlock
 ]
 
 { #category : #'children accessing' }
@@ -4190,14 +4220,37 @@ BlElement >> withAllChildrenBreadthFirst [
 
 { #category : #'api - children enumeration' }
 BlElement >> withAllChildrenBreadthFirstDo: aBlock [ 
+	" run the block for the receiver then for all children breadth first "
+
 	aBlock value: self.
 	self allChildrenBreadthFirstDo: aBlock
 ]
 
 { #category : #'api - children enumeration' }
+BlElement >> withAllChildrenBreadthFirstDo: aBlock while: aConditionBlock [
+	" run the block for the receiver then for all children breadth first while aConditionBlock value is true.
+	If aConditionBlock value is false, then the enumeration stops (the children are not enumerated) "
+
+	(aConditionBlock value: self) ifFalse: [ ^ self ].
+	aBlock value: self.
+	self allChildrenBreadthFirstDo: aBlock while: aConditionBlock
+]
+
+{ #category : #'api - children enumeration' }
 BlElement >> withAllChildrenDepthFirstDo: aBlock [
-	self childrenDo: [ :each | each allChildrenDepthFirstDo: aBlock ].
-	self childrenDo: aBlock.
+	" run the block for the receiver then for all children depth first  "
+
+	self allChildrenDepthFirstDo: aBlock.
+	aBlock value: self
+]
+
+{ #category : #'api - children enumeration' }
+BlElement >> withAllChildrenDepthFirstDo: aBlock while: aConditionBlock [
+	" run the block for the receiver then for all children depth first while aConditionBlock value is true.
+	If aConditionBlock value is false, then the enumeration stops (the children are not enumerated) "
+
+	self allChildrenDepthFirstDo: aBlock while: aConditionBlock.
+	(aConditionBlock value: self) ifFalse: [ ^ self ].
 	aBlock value: self
 ]
 
