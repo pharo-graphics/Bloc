@@ -48,7 +48,7 @@ BlRootLayoutTest >> childExactWidth: aNumber [
 ]
 
 { #category : #tests }
-BlRootLayoutTest >> parentWithFixedSize [
+BlRootLayoutTest >> parentWithFixedExtent [
 	<sampleInstance>
 	
 	| element |

@@ -25,25 +25,26 @@ BlFocusFinderExamples >> cell [
 { #category : #'instance creation' }
 BlFocusFinderExamples >> container [
 	<gtExample>
-	| container children |
-	
-	children := { {30. 2. 455}. {489}. { 489 }. {26. 2. 18. 2. 437} } collect: [ :eachSegment |
-		| grid gridChildren |
-		gridChildren := eachSegment collect: [ :eachExtent |
-			self cell
-				extent: eachExtent @ (eachSegment size = 1 ifTrue: [ 25 ] ifFalse: [ 30 ]);
-				background: Color veryVeryLightGray;
-				margin: (BlInsets all: 2);
-				border: (BlBorder paint: Color gray width: 1) ].
 
-		grid := BlElement new.
-		grid layout: BlFlowLayout new.
-		grid focusability: BlFocusability after.
-		grid constraintsDo: [ :c | 
-			c horizontal exact: 506.
-			c vertical fitContent ].
-		grid addChildren: gridChildren.
-		grid ].
+	| container children |
+	children := { {30. 2. 455}. {489}. { 489 }. {26. 2. 18. 2. 437} }
+		collect: [ :eachSegment |
+			| grid gridChildren |
+			gridChildren := eachSegment collect: [ :eachExtent |
+				self cell
+					extent: eachExtent @ (eachSegment size = 1 ifTrue: [ 25 ] ifFalse: [ 30 ]);
+					background: Color veryVeryLightGray;
+					margin: (BlInsets all: 2);
+					border: (BlBorder paint: Color gray width: 1) ].
+
+			grid := BlElement new.
+			grid layout: BlFlowLayout new.
+			grid focusability: BlFocusability after.
+			grid constraintsDo: [ :c | 
+				c horizontal exact: 506.
+				c vertical fitContent ].
+			grid addChildren: gridChildren.
+			grid ].
 
 	container := BlElement new.
 	container layout: BlLinearLayout vertical.
@@ -796,25 +797,26 @@ BlFocusFinderExamples >> segmentWithCells_3 [
 { #category : #'examples - segment 4' }
 BlFocusFinderExamples >> segmentWithCells_4 [
 	<gtExample>
-	| container children |
-	
-	children := { {30. 2. 455}. {489}. { 489 }. {26. 2. 18. 2. 437} } collect: [ :eachSegment |
-		| grid gridChildren |
-		gridChildren := eachSegment collect: [ :eachExtent |
-			self cell
-				extent: eachExtent @ (eachSegment size = 1 ifTrue: [ 25 ] ifFalse: [ 30 ]);
-				background: Color veryVeryLightGray;
-				margin: (BlInsets all: 2);
-				border: (BlBorder paint: Color gray width: 1) ].
 
-		grid := BlElement new.
-		grid layout: BlFlowLayout new.
-		grid focusability: BlFocusability after.
-		grid constraintsDo: [ :c | 
-			c horizontal exact: 506.
-			c vertical fitContent ].
-		grid addChildren: gridChildren.
-		grid ].
+	| container children |
+	children := { {30. 2. 455}. {489}. { 489 }. {26. 2. 18. 2. 437} }
+		collect: [ :eachSegment |
+			| grid gridChildren |
+			gridChildren := eachSegment collect: [ :eachExtent |
+				self cell
+					extent: eachExtent @ (eachSegment size = 1 ifTrue: [ 25 ] ifFalse: [ 30 ]);
+					background: Color veryVeryLightGray;
+					margin: (BlInsets all: 2);
+					border: (BlBorder paint: Color gray width: 1) ].
+
+			grid := BlElement new.
+			grid layout: BlFlowLayout new.
+			grid focusability: BlFocusability after.
+			grid constraintsDo: [ :c | 
+				c horizontal exact: 506.
+				c vertical fitContent ].
+			grid addChildren: gridChildren.
+			grid ].
 
 	container := BlElement new.
 	container layout: BlLinearLayout vertical.

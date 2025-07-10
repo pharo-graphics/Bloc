@@ -169,7 +169,7 @@ BlEventListener >> spaceMovedEvent: anEvent [
 
 { #category : #'space handlers' }
 BlEventListener >> spaceResizedEvent: anEvent [
-	"Is sent after window size was changed"
+	"Is sent after window extent was changed"
 ]
 
 { #category : #'keyboard handlers' }

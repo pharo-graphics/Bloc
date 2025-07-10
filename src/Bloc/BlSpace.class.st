@@ -1073,7 +1073,8 @@ BlSpace >> hostSpace: aHostSpace [
 
 { #category : #'host space - accessing' }
 BlSpace >> hostSpaceChanged [
-	"When host space changed we might want to adapt sizes"
+	"When host space changed we might want to adapt window extent."
+
 	self windowExtent: self windowExtent.
 	"host space changed => renderer changed, we want to redraw the whole space"
 	self invalidateAll

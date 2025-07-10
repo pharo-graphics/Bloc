@@ -14,7 +14,7 @@ BlOnceLayoutTest >> testOnceLinearLayoutExact [
 	<sampleInstance>
 	<demo>
 	| aContainer aChildA aChildB aChildC |
-	aContainer := self parentWithFixedSize.
+	aContainer := self parentWithFixedExtent.
 	aContainer layout:
 		(BlOnceLayout on: (BlLinearLayout vertical cellSpacing: 10)).
 	aChildA := self childExact: 150 @ 80.
@@ -68,7 +68,7 @@ BlOnceLayoutTest >> testOnceLinearLayoutMatchParent [
 	<sampleInstance>
 	<demo>
 	| aContainer aChildA aChildB aChildC |
-	aContainer := self parentWithFixedSize.
+	aContainer := self parentWithFixedExtent.
 	aContainer layout:
 		(BlOnceLayout on: (BlLinearLayout vertical cellSpacing: 15)).
 	aChildA := self testChildElementMatchingParent.

@@ -130,7 +130,8 @@ BlFitContentVerticallyInHorizontalLayoutTest >> layoutLabel: aString [
 		  padding: (BlInsets top: 5);
 		  constraintsDo: [ :c |
 			  c ignoreByLayout.
-			  c ignored horizontal alignCenter ]
+			  c ignored horizontal alignCenter ];
+		  yourself
 ]
 
 { #category : #tests }

@@ -60,7 +60,7 @@ BlElementGeometry >> hasJoins [
 
 { #category : #geometry }
 BlElementGeometry >> matchElement: anElement [
-	"Adapt me to match the size of a given element"
+	"Adapt me to match the extent of a given element"
 
 	self subclassResponsibility
 ]
