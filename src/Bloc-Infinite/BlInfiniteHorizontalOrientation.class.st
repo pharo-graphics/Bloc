@@ -77,9 +77,9 @@ BlInfiniteHorizontalOrientation >> end [
 BlInfiniteHorizontalOrientation >> endWithPadding [
 
 	| width |
-	width := self layout lastExactSize
+	width := self layout lastExactExtent
 		         ifNil: [ self layout width ]
-		         ifNotNil: [ :size | size x ].
+		         ifNotNil: [ :extent | extent x ].
 
 	^ (width max: self layout minimumWidth) - self layout paddingRight
 ]
