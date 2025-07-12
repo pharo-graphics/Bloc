@@ -13,7 +13,7 @@ BlElementLocationAnchor >> appliedOnRectangle: aRectangle withValue: aValue [
 	h := pt y.
 	x1 := aValue x - w.
 	y1 := aValue y - h.
-	^ Rectangle
+	^ BlBounds
 		  origin: x1 @ y1
 		  corner: (x1 + aRectangle width) @ (y1 + aRectangle height)
 ]

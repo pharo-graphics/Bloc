@@ -7,7 +7,7 @@ Class {
 { #category : #applying }
 BlElementExtentAnchor >> appliedOnRectangle: aRectangle withValue: aValue [
 
-	^ Rectangle origin: aRectangle origin extent: aValue
+	^ BlBounds origin: aRectangle origin extent: aValue
 ]
 
 { #category : #testing }

@@ -13,9 +13,9 @@ BlAnchorLayoutRule >> appliedOnChildBounds: childBoundsRectangle inParent: anEle
 
 	leftHandSideAnchor checkInParent: anElement forChild: aChild.
 	rightHandSideAnchor checkInParent: anElement forChild: aChild.
-	^ anElement globalBoundsToLocal: (leftHandSideAnchor
+	^ leftHandSideAnchor
 		  appliedOnRectangle: childBoundsRectangle
-		  withValue: (rightHandSideAnchor valueInParent: anElement))
+		  withValue: (rightHandSideAnchor valueInParent: anElement)
 ]
 
 { #category : #accessing }

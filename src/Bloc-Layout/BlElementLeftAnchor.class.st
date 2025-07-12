@@ -10,7 +10,7 @@ BlElementLeftAnchor >> appliedOnRectangle: aRectangle withValue: aValue [
 	| x y |
 	x := aValue - (self valueInBounds: aRectangle).
 	y := aRectangle top.
-	^ Rectangle
+	^ BlBounds
 		  origin: x @ y
 		  corner: (x + aRectangle width) @ (y + aRectangle height)
 ]

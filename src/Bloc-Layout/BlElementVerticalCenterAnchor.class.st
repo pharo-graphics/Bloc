@@ -10,7 +10,7 @@ BlElementVerticalCenterAnchor >> appliedOnRectangle: aRectangle withValue: aValu
 	| h y1 |
 	h := aRectangle height // 2.
 	y1 := aValue - h.
-	^ Rectangle
+	^ BlBounds
 		  origin: aRectangle origin x @ y1
 		  corner: aRectangle corner x @ (y1 + aRectangle height)
 ]
