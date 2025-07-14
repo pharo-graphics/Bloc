@@ -26,12 +26,6 @@ BlLineGeometry >> = anObject [
 	^ self from = anObject from and: [ self to = anObject to ]
 ]
 
-{ #category : #'as yet unclassified' }
-BlLineGeometry >> anchorLayoutBoundsOfElement: anElement [
-	
-	^ self geometryBounds: BlBounds new
-]
-
 { #category : #'geometry testing' }
 BlLineGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry"
