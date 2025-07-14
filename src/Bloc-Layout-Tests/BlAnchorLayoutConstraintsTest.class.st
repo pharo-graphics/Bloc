@@ -9,7 +9,7 @@ Class {
 		'space',
 		'child'
 	],
-	#category : #'Bloc-Layout-Tests'
+	#category : #'Bloc-Layout-Tests-Anchor'
 }
 
 { #category : #running }

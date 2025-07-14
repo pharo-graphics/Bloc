@@ -26,7 +26,7 @@ BlAnchorLayoutConstraints >> add: anAnchorRule [
 BlAnchorLayoutConstraints >> applyRules: aRuleArray inParent: anElement forChild: aChild [
 
 	| bnds |
-	bnds := aChild measuredBounds asRectangle.
+	bnds := (aChild geometry anchorLayoutBoundsOfElement: aChild) asRectangle.
 	aRuleArray do: [ :op |
 			bnds := op
 				        appliedOnChildBounds: bnds
