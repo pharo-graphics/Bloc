@@ -5,14 +5,14 @@ Class {
 }
 
 { #category : #applying }
-BlElementBottomAnchor >> appliedOnRectangle: aRectangle withValue: aValue [ 
+BlElementBottomAnchor >> appliedOnRectangle: aRectangle withValue: aValue [
 
 	| x y |
-	y := aValue - (self valueInBounds: aRectangle).
+	y := aValue - aRectangle height.
 	x := aRectangle left.
 	^ BlBounds
 		  origin: x @ y
-		  corner: (x + aRectangle width) @ (y + aRectangle height)
+		  corner: x + aRectangle width @ (y + aRectangle height)
 ]
 
 { #category : #applying }

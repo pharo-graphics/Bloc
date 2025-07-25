@@ -7,6 +7,16 @@ Class {
 	#category : #'Bloc-Layout-Anchor'
 }
 
+{ #category : #applying }
+BlElementPointAnchor >> appliedOnRectangle: aRectangle withValue: aValue [ 
+
+	| pt |
+	pt := aValue - aRectangle extent.
+	^ BlBounds
+		  origin: pt
+		  extent: aRectangle extent
+]
+
 { #category : #accessing }
 BlElementPointAnchor >> point [
 

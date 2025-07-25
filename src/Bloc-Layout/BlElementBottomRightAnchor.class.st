@@ -1,8 +1,18 @@
 Class {
 	#name : #BlElementBottomRightAnchor,
-	#superclass : #BlElementLocationAnchor,
+	#superclass : #BlElementCornerAnchor,
 	#category : #'Bloc-Layout-Anchor'
 }
+
+{ #category : #applying }
+BlElementBottomRightAnchor >> appliedOnRectangle: aRectangle withValue: aValue [ 
+
+	| pt |
+	pt := aValue - aRectangle extent.
+	^ BlBounds
+		  origin: pt
+		  extent: aRectangle extent
+]
 
 { #category : #applying }
 BlElementBottomRightAnchor >> valueInBounds: aBounds [

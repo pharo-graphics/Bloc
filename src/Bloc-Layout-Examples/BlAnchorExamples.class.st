@@ -17,6 +17,20 @@ BlAnchorExamples class >> blueRectangle [
 ]
 
 { #category : #anchors }
+BlAnchorExamples class >> example_AnchorBottomLeftOnParentBottomLeft [
+
+	  | pane blue |
+	  pane := self mainPane.
+	  blue := self blueRectangle.
+	  blue constraintsDo: [ :c |
+			  c ignoreByLayout.
+			  c anchors add: (blue bottomLeftAnchor on: pane bottomLeftAnchor)].
+	  pane addChild: blue.
+	  pane openInSpace.
+	  ^ pane
+]
+
+{ #category : #anchors }
 BlAnchorExamples class >> example_AnchorBottomOnParentBottom [
 
 	  | pane blue |
@@ -28,6 +42,35 @@ BlAnchorExamples class >> example_AnchorBottomOnParentBottom [
 	  pane addChild: blue.
 	  pane openInSpace.
 	  ^ pane
+]
+
+{ #category : #anchors }
+BlAnchorExamples class >> example_AnchorBottomRightOnParentBottomRight [
+
+	  | pane blue |
+	  pane := self mainPane.
+	  blue := self blueRectangle.
+	  blue constraintsDo: [ :c |
+			  c ignoreByLayout.
+			  c anchors add: (blue bottomRightAnchor on: pane bottomRightAnchor)].
+	  pane addChild: blue.
+	  pane openInSpace.
+	  ^ pane
+]
+
+{ #category : #anchors }
+BlAnchorExamples class >> example_AnchorBottomRightOnPointAnchor [
+
+	| pane blue |
+	pane := self mainPane.
+	blue := self blueRectangle.
+	blue constraintsDo: [ :c |
+			c ignoreByLayout.
+			c anchors add: (c anchors bottomRightAnchor on:
+					 (c anchors parent pointAnchor point: 41 asPoint)) ].
+	pane addChild: blue.
+	pane openInSpace.
+	^ pane
 ]
 
 { #category : #anchors }

@@ -1,5 +1,5 @@
 Class {
-	#name : #BlElementLocationAnchor,
+	#name : #BlElementCornerAnchor,
 	#superclass : #BlElementGeometryAnchor,
 	#category : #'Bloc-Layout-Anchor'
 }
