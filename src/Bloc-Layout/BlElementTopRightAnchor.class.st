@@ -8,7 +8,7 @@ Class {
 BlElementTopRightAnchor >> appliedOnRectangle: aRectangle withValue: aValue [ 
 
 	| x y |
-	x := aValue - aRectangle width.
+	x := aValue x - aRectangle width.
 	y := aValue y.
 	^ BlBounds
 		  origin: x @ y
