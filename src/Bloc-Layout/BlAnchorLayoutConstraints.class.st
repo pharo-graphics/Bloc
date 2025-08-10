@@ -192,6 +192,12 @@ BlAnchorLayoutConstraints >> referenceElement: anElement [
 	referenceElement := anElement
 ]
 
+{ #category : #adding }
+BlAnchorLayoutConstraints >> removeAll [
+
+	rules removeAll
+]
+
 { #category : #'layout anchors' }
 BlAnchorLayoutConstraints >> rightAnchor [
 
