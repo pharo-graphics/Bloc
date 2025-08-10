@@ -424,7 +424,7 @@ BlAnchorLayoutConstraintsTest >> testTopRightAnchor [
 		assert: (anchor
 				 appliedOnRectangle: child bounds asRectangle
 				 withValue: 10 @ 20)
-		equals: (-90 @ -80 corner: 10 @ 40)
+		equals: (-90 @ 20 corner: 10 @ 140)
 ]
 
 { #category : #tests }

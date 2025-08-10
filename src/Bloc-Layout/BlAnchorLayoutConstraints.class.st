@@ -5,7 +5,8 @@ Class {
 	#name : #BlAnchorLayoutConstraints,
 	#superclass : #BlLayoutConstraints,
 	#instVars : [
-		'rules'
+		'rules',
+		'referenceElement'
 	],
 	#category : #'Bloc-Layout-Anchor'
 }
@@ -163,16 +164,32 @@ BlAnchorLayoutConstraints >> pointAnchor [
 { #category : #layout }
 BlAnchorLayoutConstraints >> positionInParent: anElement forChild: aChild [
 
-	^ self
-		  applyRules: self positionRules
-		  inParent: anElement
-		  forChild: aChild
+	| bnds ref translation |
+	ref := referenceElement ifNil: [ anElement ].
+	bnds := self
+		        applyRules: self positionRules
+		        inParent: ref
+		        forChild: aChild.
+	translation := (ref measuredBounds inParent: anElement) position.
+	^ bnds translateBy: translation
 ]
 
 { #category : #layout }
 BlAnchorLayoutConstraints >> positionRules [
 
 	^ rules reject: [ :op | op isMeasurement ]
+]
+
+{ #category : #accessing }
+BlAnchorLayoutConstraints >> referenceElement [
+
+	^ referenceElement
+]
+
+{ #category : #accessing }
+BlAnchorLayoutConstraints >> referenceElement: anElement [
+
+	referenceElement := anElement
 ]
 
 { #category : #'layout anchors' }
