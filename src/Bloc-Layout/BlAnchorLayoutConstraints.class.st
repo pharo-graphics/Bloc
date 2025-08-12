@@ -23,6 +23,12 @@ BlAnchorLayoutConstraints >> add: anAnchorRule [
 	rules add: anAnchorRule
 ]
 
+{ #category : #adding }
+BlAnchorLayoutConstraints >> addAll: anAnchorRuleCollection [
+
+	rules addAll: anAnchorRuleCollection
+]
+
 { #category : #layout }
 BlAnchorLayoutConstraints >> applyRules: aRuleArray inParent: anElement forChild: aChild [
 
