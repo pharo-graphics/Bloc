@@ -51,13 +51,16 @@ BlNewBasicVerticalSlider >> initializeBar [
 { #category : #initialization }
 BlNewBasicVerticalSlider >> initializeGraduationsFor: aGraduation [
 
-	| valueDiff |
+	| valueDiff stepValues |
 	self whenLayoutedDoOnce: [
-	aGraduation height: self height - (sliderKnob height).
-	aGraduation width: 25. ].
+			aGraduation height: self height - sliderKnob height.
+			aGraduation width: 25 ].
 	valueDiff := maxValue - minValue.
 
-	minValue to: maxValue by: aGraduation stepValue do: [ :value |
+	stepValues := segmentedValues.
+	segmented ifFalse: [
+		stepValues := minValue to: maxValue by: aGraduation stepValue ].
+	stepValues do: [ :value |
 			| element |
 			element := ToElement new
 				           background: Color black;
@@ -65,8 +68,8 @@ BlNewBasicVerticalSlider >> initializeGraduationsFor: aGraduation [
 						           c horizontal matchParent.
 						           c vertical exact: 2.
 						           c frame vertical alignCenterAt:
-								           value - minValue / valueDiff ].
-			aGraduation addChild: element ]
+								           1 - (value - minValue / valueDiff) ].
+			aGraduation addChild: element ].
 ]
 
 { #category : #'private - building' }
@@ -78,7 +81,7 @@ BlNewBasicVerticalSlider >> initializeKnob [
 	sliderKnob zIndex: 4.
 	pt := 20 @ 20.
 	sliderKnob
-		size: pt;
+		extent: pt;
 		transformDo: [ :t | t translateBy: 0 @ (pt negated y / 2) ].
 	sliderKnob whenLayoutedDoOnce: [
 			sliderKnob constraintsDo: [ :c |
@@ -117,11 +120,11 @@ BlNewBasicVerticalSlider >> valueAtCoord: aPosition [
 	posY = (sliderKnob height / 2) ifTrue: [ ^ maxValue ].
 	posY = (self height - (sliderKnob height / 2)) ifTrue: [ ^ minValue ].
 	valueDiff := maxValue - minValue.
-	coeff :=
-	         (self height - sliderKnob height
-	          / (posY - (sliderKnob height / 2))).
+	coeff := self height - sliderKnob height
+	         / (posY - (sliderKnob height / 2)).
 	value := maxValue - (valueDiff / coeff).
-
+	segmented ifTrue: [ value := self nearestValue: value ].
+	
 	^ (value roundTo: 1) asFloat
 ]
 

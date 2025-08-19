@@ -50,13 +50,16 @@ BlNewBasicHorizontalSlider >> initializeBar [
 { #category : #initialization }
 BlNewBasicHorizontalSlider >> initializeGraduationsFor: aGraduation [
 
-	| valueDiff |
+	| valueDiff stepValues |
 	self whenLayoutedDoOnce: [
 			aGraduation width: self width - sliderKnob width.
 			aGraduation height: 25 ].
 	valueDiff := maxValue - minValue.
 
-	minValue to: maxValue by: aGraduation stepValue do: [ :value |
+	stepValues := segmentedValues.
+	segmented ifFalse: [
+		stepValues := minValue to: maxValue by: aGraduation stepValue ].
+	stepValues do: [ :value |
 			| element |
 			element := ToElement new
 				           background: Color black;
@@ -77,7 +80,7 @@ BlNewBasicHorizontalSlider >> initializeKnob [
 	sliderKnob zIndex: 4.
 	pt := 20 @ 20.
 	sliderKnob
-		size: pt;
+		extent: pt;
 		transformDo: [ :t | t translateBy: pt negated x / 2 @ 0 ].
 	sliderKnob whenLayoutedDoOnce: [
 			sliderKnob constraintsDo: [ :c |
@@ -116,6 +119,7 @@ BlNewBasicHorizontalSlider >> valueAtCoord: aPosition [
 	coeff := self width - sliderKnob width
 	         / (posX - (sliderKnob width / 2)).
 	value := minValue + (valueDiff / coeff).
+	segmented ifTrue: [ value := self nearestValue: value ].
 
 	^ (value roundTo: 1) asFloat
 ]

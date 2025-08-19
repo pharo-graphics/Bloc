@@ -36,24 +36,6 @@ BlSliderGraduation >> initialize [
 	self preventMeAndChildrenMouseEvents
 ]
 
-{ #category : #initialization }
-BlSliderGraduation >> initializeStepGraduations [
-
-	"| valueDiff |
-	valueDiff := maxValue - minValue.
-
-	minValue to: maxValue by: stepValue do: [ :value |
-			| element |
-			element := ToElement new
-				           background: Color black;
-				           constraintsDo: [ :c |
-						           c vertical matchParent.
-						           c horizontal exact: 2.
-						           c frame horizontal alignCenterAt:
-								           value - minValue / valueDiff ].
-			self addChild: element ]"
-]
-
 { #category : #'as yet unclassified' }
 BlSliderGraduation >> reinitializeStepGraduations [
 
