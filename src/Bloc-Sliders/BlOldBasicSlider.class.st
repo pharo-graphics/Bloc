@@ -186,7 +186,7 @@ BlOldBasicSlider >> buildDefaultHandle [
 	bl := ToElement new
 		      geometry: BlCircleGeometry new;
 		      background: self class interactorDefaultColor;
-		      size: pt;
+		      extent: pt;
 		      transformDo: [ :t | t translateBy: pt negated / 2 ].
 	^ bl
 ]
@@ -204,10 +204,11 @@ BlOldBasicSlider >> buildHorizontalBackground [
 
 	| bgElt |
 	bgElt := ToElement new.
-	bgElt size:
+	bgElt extent:
 		self widgetSize x - (2 * self sliderPixelMargin) @ barThickness.
 	bgElt id: #sliderBackground.
-	bgElt position: self sliderPixelMargin
+	bgElt position:
+		self sliderPixelMargin
 		@ (self widgetSize y / 2 - (barThickness / 2)).
 	bgElt background: self class backgroundDefaultColor.
 	bgElt zIndex: 0.
@@ -220,11 +221,12 @@ BlOldBasicSlider >> buildHorizontalBar [
 
 	| bar |
 	bar := ToElement new.
-	bar size:
-		(self valueToCoord: currentValue)
-		- (self sliderPixelMargin) @ barThickness.
+	bar extent:
+		(self valueToCoord: currentValue) - self sliderPixelMargin
+		@ barThickness.
 	bar id: #sliderBar.
-	bar position: self sliderPixelMargin
+	bar position:
+		self sliderPixelMargin
 		@ (self widgetSize y / 2 - (barThickness / 2)).
 	bar background: self class barDefaultColor.
 	bar zIndex: 2.
@@ -341,22 +343,22 @@ BlOldBasicSlider >> changedCurrentValue: aValue withSlider: aBool [
 	v := self valueToCoord: aValue.
 	self isHorizontal
 		ifTrue: [
-			aBool ifTrue: [
-				self sliderHandle ifNotNil: [ :sl |
-					sl position: v @ sl constraints position y ] ].
-			self sliderBar size:
-				v - self sliderPixelMargin @ self sliderBar size y ]
+				aBool ifTrue: [
+						self sliderHandle ifNotNil: [ :sl |
+							sl position: v @ sl constraints position y ] ].
+				self sliderBar extent:
+					v - self sliderPixelMargin @ self sliderBar extent y ]
 		ifFalse: [
-			aBool ifTrue: [
-				self sliderHandle ifNotNil: [ :sl |
-					sl position: sl constraints position x @ v ] ].
-			self sliderBar size:
-				barThickness
-				@ (self widgetSize y - (self valueToCoord: currentValue)
-					 - self sliderPixelMargin).
-			self sliderBar position:
-				self widgetSize x / 2 - (barThickness / 2)
-				@ (self valueToCoord: currentValue) ].
+				aBool ifTrue: [
+						self sliderHandle ifNotNil: [ :sl |
+							sl position: sl constraints position x @ v ] ].
+				self sliderBar size:
+					barThickness
+					@ (self widgetSize y - (self valueToCoord: currentValue)
+						 - self sliderPixelMargin).
+				self sliderBar position:
+					self widgetSize x / 2 - (barThickness / 2)
+					@ (self valueToCoord: currentValue) ].
 	color := self colorForValue: aValue.
 	self sliderHandle background: color.
 	self sliderBar background: color
@@ -631,7 +633,7 @@ BlOldBasicSlider >> pointToValue: point [
 BlOldBasicSlider >> pointToXValue: point [
 
 	| facteur valeur |
-	facteur := point x / self sliderBackground size x.
+	facteur := point x / self sliderBackground extent x.
 	valeur := self maxValue - self minValue * facteur.
 	valeur := (valeur roundTo: (self stepValue ifNil: [ 1 ]))
 	          + self minValue.
@@ -709,7 +711,7 @@ BlOldBasicSlider >> setValue: aValue [
 { #category : #'api - bounds' }
 BlOldBasicSlider >> size: aValue [
 
-	super size: aValue.
+	super extent: aValue.
 	self widgetSize: aValue.
 	self isSliderBuilt ifTrue: [ self rebuildSlider ]
 ]
