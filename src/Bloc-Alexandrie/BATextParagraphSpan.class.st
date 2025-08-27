@@ -38,7 +38,7 @@ BATextParagraphSpan >> measure [
 
 	"build an abstract font and resolve not yet resolved properties"
 
-	| metrics canvas font usedSpan fontSize face |
+	| metrics canvas font usedSpan fontSize |
 	canvas := hostMeasurer canvas.
 
 	usedSpan := self span isTabulation
@@ -47,21 +47,21 @@ BATextParagraphSpan >> measure [
 
 	font := fontAndStyleBuilder font.
 	fontSize := font fontSize value.
-	face := font asAeFTFace.
-	cairoScaledFont := canvas scaledFontForFace: face size: fontSize.
 
 	"Without Harfbuzz:"
-	cairoGlyphsArray := cairoScaledFont glyphArrayForString: usedSpan.
+"	cairoScaledFont := canvas scaledFontForFace: font asAeFTFace size: fontSize."
 
 	"With Harfbuzz:"
-	"cairoGlyphsArray := AeHbBuffer defaultCairoGlyphArrayFor: usedSpan face: face size: fontSize."
+	cairoScaledFont := canvas scaledFontForHbFont: font asAeHbFont size: fontSize.
 
+	"Common"
+	cairoGlyphsArray := cairoScaledFont glyphArrayForString: usedSpan.
 	metrics := canvas metricsFor: cairoGlyphsArray font: cairoScaledFont.
 	baseline := 0 @ 0.
 	ascent := metrics ascent.
 	descent := metrics descent.
-	left := metrics bearingX.
-	top := metrics bearingY.
+	left := metrics bearingX "ceiling". ""
+	top := metrics bearingY "floor".    ""
 	height := metrics height.
 	self span isTabulation
 		ifTrue: [ 
@@ -69,5 +69,7 @@ BATextParagraphSpan >> measure [
 			width := self tabStopWidth ]
 		ifFalse: [ 
 			advance := metrics advanceX.
-			width := metrics width ]
+			width := metrics width ].
+
+"	Halt once. "
 ]

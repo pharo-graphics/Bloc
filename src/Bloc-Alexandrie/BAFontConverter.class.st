@@ -13,6 +13,13 @@ Class {
 }
 
 { #category : #accessing }
+BAFontConverter class >> reset [
+	<script>
+
+	uniqueInstance := nil
+]
+
+{ #category : #accessing }
 BAFontConverter class >> uniqueInstance [
 
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
@@ -28,6 +35,17 @@ BAFontConverter >> faceFor: aBlFont [
 		stretch: (stretchTranslator at: aBlFont fontStretch)
 		ifNone: [ AeFontManager globalInstance defaultFace ]
 
+]
+
+{ #category : #initialization }
+BAFontConverter >> hbFontFor: aBlFont [
+
+	^ AeFontManager globalInstance
+		detectHbFontForFamilyName: aBlFont familyName
+		slant: (slantTranslator at: aBlFont fontSlant)
+		weight: (weightTranslator at: aBlFont fontWeight)
+		stretch: (stretchTranslator at: aBlFont fontStretch)
+		ifNone: [ AeFontManager globalInstance defaultHbFont ]
 ]
 
 { #category : #initialization }
