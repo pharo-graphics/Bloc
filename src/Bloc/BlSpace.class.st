@@ -56,6 +56,12 @@ Class {
 	#category : #'Bloc-Space'
 }
 
+{ #category : #initialization }
+BlSpace class >> defaultRootLabel [
+
+	^ #'space-root'
+]
+
 { #category : #'private - change' }
 BlSpace class >> extractRoots: aSetOfElements [
 	| roots |
@@ -624,7 +630,8 @@ BlSpace >> defaultRootElevation [
 
 { #category : #initialization }
 BlSpace >> defaultRootLabel [
-	^ #'space-root'
+
+	^ self class defaultRootLabel
 ]
 
 { #category : #initialization }
