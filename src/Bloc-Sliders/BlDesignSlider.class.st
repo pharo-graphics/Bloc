@@ -293,8 +293,8 @@ BlDesignSlider >> defaultBar [
 	^ BlElement new
 		  geometry: (BlRoundedRectangleGeometry cornerRadius: 10);
 		  background: self barDefaultColor;
-		  size: size;
-		constraintsDo: [ :c | c ignoreByLayout ];
+		  extent: size;
+		  constraintsDo: [ :c | c ignoreByLayout ];
 		  yourself
 ]
 
@@ -327,8 +327,8 @@ BlDesignSlider >> defaultColoredBar [
 	^ BlElement new
 		  geometry: (BlRoundedRectangleGeometry cornerRadius: 10);
 		  background: self coloredBarDefaultColor;
-		constraintsDo: [ :c | c ignoreByLayout ];
-		  size: size;
+		  constraintsDo: [ :c | c ignoreByLayout ];
+		  extent: size;
 		  yourself
 ]
 
@@ -343,8 +343,8 @@ BlDesignSlider >> defaultHandle [
 	elt := BlElement new
 		       background: self handleDefaultColor;
 		       geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
-		constraintsDo: [ :c | c ignoreByLayout ];
-		       size: size;
+		       constraintsDo: [ :c | c ignoreByLayout ];
+		       extent: size;
 		       transformDo: [ :t | "so the position is now the center"
 			       t translateBy: size negated / 2 ];
 		       yourself.
@@ -774,8 +774,8 @@ BlDesignSlider >> setValue: aNumber [
 BlDesignSlider >> size: aValue [
 	"just to keep the widgset size"
 
-	super size: aValue.
-	
+	super extent: aValue
+
 	" for now do not support resize
 	
 	self isBuildSlider ifTrue: [ self rebuildSlider ]
@@ -800,12 +800,14 @@ BlDesignSlider >> updateColoredBarTo: aPosition [
 
 	self
 		ifHorizontal: [
-			coloredBar position: bar position.
-			coloredBar size: (aPosition - coloredBar position) x @ barThickness ]
+				coloredBar position: bar position.
+				coloredBar extent:
+					(aPosition - coloredBar position) x @ barThickness ]
 		ifVertical: [
-			coloredBar position: aPosition x - (barThickness / 2) @ aPosition y.
-			coloredBar size:
-				barThickness @ (bar position y + barLength - aPosition y) ]
+				coloredBar position:
+					aPosition x - (barThickness / 2) @ aPosition y.
+				coloredBar extent:
+					barThickness @ (bar position y + barLength - aPosition y) ]
 ]
 
 { #category : #accessing }
