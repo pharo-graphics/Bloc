@@ -35,10 +35,9 @@ BATextParagraphSpan >> appendPathOn: aeCanvas [
 
 { #category : #building }
 BATextParagraphSpan >> measure [
-
 	"build an abstract font and resolve not yet resolved properties"
 
-	| metrics canvas font usedSpan fontSize |
+	| metrics canvas font usedSpan fontSize cairoFontFace |
 	canvas := hostMeasurer canvas.
 
 	usedSpan := self span isTabulation
@@ -49,12 +48,15 @@ BATextParagraphSpan >> measure [
 	fontSize := font fontSize value.
 
 	"Without Harfbuzz:"
-	cairoScaledFont := canvas scaledFontForFace: font asAeFTFace size: fontSize.
+	cairoFontFace := font asAeFTFace newCairoFontFace.
 
 	"With Harfbuzz:"
-"	cairoScaledFont := canvas scaledFontForFace: font asAeHbFont size: fontSize."
+"	cairoFontFace := font asAeHbFont newCairoFontFace."
+
+	{self identityHash. cairoFontFace} traceCr.
 
 	"Common"
+	cairoScaledFont := canvas scaledFontFor: cairoFontFace size: fontSize.
 	cairoGlyphsArray := cairoScaledFont glyphArrayForString: usedSpan.
 	metrics := canvas metricsFor: cairoGlyphsArray font: cairoScaledFont.
 	baseline := 0 @ 0.
