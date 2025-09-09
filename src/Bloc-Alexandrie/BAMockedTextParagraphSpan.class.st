@@ -11,9 +11,9 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 	self spanLength isZero ifTrue: [ ^ self ].
 
 	aBlFont := fontAndStyleBuilder font.
-	aFace := aBlFont asAeFTFace.
+	aFace := aBlFont asAeCairoFontFace.
 	cairoScaledFont := aeCanvas
-		scaledFontForFace: aFace
+		scaledFontFor: aFace
 		size: aBlFont fontSize value.
 
 	"Get glyphs for the text"

@@ -13,6 +13,13 @@ Class {
 }
 
 { #category : #accessing }
+BAFontConverter class >> reset [
+	<script>
+
+	uniqueInstance := nil
+]
+
+{ #category : #accessing }
 BAFontConverter class >> uniqueInstance [
 
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]

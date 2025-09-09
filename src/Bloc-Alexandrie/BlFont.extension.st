@@ -1,7 +1,15 @@
 Extension { #name : #BlFont }
 
 { #category : #'*Bloc-Alexandrie' }
-BlFont >> asAeFTFace [
+BlFont >> asAeCairoFontFace [
 
 	^ BAFontConverter uniqueInstance faceFor: self
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlFont >> asAeFTFace [
+
+	self deprecated: 'Migrate our code to #asAeCairoFontFace'.
+
+	^ self error
 ]
