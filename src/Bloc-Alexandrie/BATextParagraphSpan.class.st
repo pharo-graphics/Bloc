@@ -49,10 +49,10 @@ BATextParagraphSpan >> measure [
 	fontSize := font fontSize value.
 
 	"Without Harfbuzz:"
-"	cairoScaledFont := canvas scaledFontForFace: font asAeFTFace size: fontSize."
+	cairoScaledFont := canvas scaledFontForFace: font asAeFTFace size: fontSize.
 
 	"With Harfbuzz:"
-	cairoScaledFont := canvas scaledFontForFace: font asAeHbFont size: fontSize.
+"	cairoScaledFont := canvas scaledFontForFace: font asAeHbFont size: fontSize."
 
 	"Common"
 	cairoGlyphsArray := cairoScaledFont glyphArrayForString: usedSpan.
@@ -60,8 +60,8 @@ BATextParagraphSpan >> measure [
 	baseline := 0 @ 0.
 	ascent := metrics ascent.
 	descent := metrics descent.
-	left := metrics bearingX "ceiling".
-	top := metrics bearingY "floor".
+	left := metrics bearingX.
+	top := metrics bearingY.
 	height := metrics height.
 	self span isTabulation
 		ifTrue: [ 
@@ -69,7 +69,5 @@ BATextParagraphSpan >> measure [
 			width := self tabStopWidth ]
 		ifFalse: [ 
 			advance := metrics advanceX.
-			width := metrics width ].
-
-"	Halt once. "
+			width := metrics width ]
 ]
