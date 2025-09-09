@@ -46,18 +46,10 @@ BATextParagraphSpan >> measure [
 
 	font := fontAndStyleBuilder font.
 	fontSize := font fontSize value.
-
-	"Without Harfbuzz:"
-	cairoFontFace := font asAeFTFace newCairoFontFace.
-
-	"With Harfbuzz:"
-"	cairoFontFace := font asAeHbFont newCairoFontFace."
-
-	{self identityHash. cairoFontFace} traceCr.
-
-	"Common"
+	cairoFontFace := font asAeCairoFontFace.
 	cairoScaledFont := canvas scaledFontFor: cairoFontFace size: fontSize.
 	cairoGlyphsArray := cairoScaledFont glyphArrayForString: usedSpan.
+
 	metrics := canvas metricsFor: cairoGlyphsArray font: cairoScaledFont.
 	baseline := 0 @ 0.
 	ascent := metrics ascent.

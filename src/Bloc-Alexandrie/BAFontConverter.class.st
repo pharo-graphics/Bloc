@@ -38,17 +38,6 @@ BAFontConverter >> faceFor: aBlFont [
 ]
 
 { #category : #initialization }
-BAFontConverter >> hbFontFor: aBlFont [
-
-	^ AeFontManager globalInstance
-		detectHbFontForFamilyName: aBlFont familyName
-		slant: (slantTranslator at: aBlFont fontSlant)
-		weight: (weightTranslator at: aBlFont fontWeight)
-		stretch: (stretchTranslator at: aBlFont fontStretch)
-		ifNone: [ AeFontManager globalInstance defaultHbFont ]
-]
-
-{ #category : #initialization }
 BAFontConverter >> initialize [
 
 	super initialize.
