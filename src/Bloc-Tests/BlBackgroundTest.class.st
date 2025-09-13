@@ -150,6 +150,44 @@ BlBackgroundTest >> testEqualityBlCompositeBackground [
 ]
 
 { #category : #'background - builder' }
+BlBackgroundTest >> testEqualityBlFormSetBackground [
+
+	| background formSet |
+	formSet := FormSet form: self newOpaqueSquaredForm.
+
+	background := BlFormSetBackground new formSet: formSet.
+	self assert: background equals: background.
+
+	"Note: FormSet inherits identity equals from Object."
+	self
+		assert: (BlFormSetBackground new formSet: formSet)
+		equals: (BlFormSetBackground new formSet: formSet).
+	self
+		deny: (BlFormSetBackground new formSet: formSet)
+		equals: (BlFormSetBackground new formSet: (FormSet form: self newOpaqueSquaredForm)).
+
+	"Test opacity"
+	self
+		assert: (BlFormSetBackground new
+				 formSet: formSet;
+				 opacity: 1.0;
+				 yourself)
+		equals: (BlFormSetBackground new
+				 formSet: formSet;
+				 opacity: 1.0;
+				 yourself).
+	self
+		deny: (BlFormSetBackground new
+				 formSet: formSet;
+				 opacity: 0.5;
+				 yourself)
+		equals: (BlFormSetBackground new
+				 formSet: formSet;
+				 opacity: 1.0;
+				 yourself)
+]
+
+{ #category : #'background - builder' }
 BlBackgroundTest >> testEqualityBlImageBackground [
 
 	| background form |

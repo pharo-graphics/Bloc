@@ -34,6 +34,12 @@ BlBackground class >> builder [
 ]
 
 { #category : #'instance creation' }
+BlBackground class >> formSet: aFormSet [
+	
+	^ BlFormSetBackground formSet: aFormSet
+]
+
+{ #category : #'instance creation' }
 BlBackground class >> image: aForm [
 	
 	^ BlImageBackground image: aForm
