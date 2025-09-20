@@ -4,7 +4,7 @@ Extension { #name : #BlTextFontAndStyleBuilder }
 BlTextFontAndStyleBuilder >> aeCairoScaledFontOn: aeCanvas [
 
 	^ aeCanvas
-		fontForFamily: (self hasCustomFamilyName
+		scaledFontForFamily: (self hasCustomFamilyName
 			ifTrue: [ self resolvedFontFamilyName ]
 			ifFalse: [ BlFont defaultFamilyName ])
 		size: (self hasCustomFontSize
