@@ -13,8 +13,9 @@ BATextParagraphSpan >> aeDrawOn: aeCanvas [
 	self span ifNil: [ ^ self ].
 	aeCanvas restoreContextAfter: [
 		aeCanvas pathTranslate: self baseline.
-		self flag: #todo. "Default color?"
-		aeCanvas setSourceColor: (fontAndStyleBuilder hasCustomColor
+
+		aeCanvas setSourceColor:
+			(fontAndStyleBuilder hasCustomColor
 				 ifTrue: [ fontAndStyleBuilder color ]
 				 ifFalse: [ Color black ]).
 
@@ -37,17 +38,12 @@ BATextParagraphSpan >> appendPathOn: aeCanvas [
 BATextParagraphSpan >> measure [
 	"build an abstract font and resolve not yet resolved properties"
 
-	| metrics canvas font usedSpan fontSize cairoFontFace |
+	| metrics canvas  usedSpan |
 	canvas := hostMeasurer canvas.
 
-	usedSpan := self span isTabulation
-		            ifTrue: [ '' ]
-		            ifFalse: [ self span ].
+	usedSpan := self span isTabulation ifTrue: [ '' ] ifFalse: [ self span ].
 
-	font := fontAndStyleBuilder font.
-	fontSize := font fontSize value.
-	cairoFontFace := font asAeCairoFontFace.
-	cairoScaledFont := canvas scaledFontFor: cairoFontFace size: fontSize.
+	cairoScaledFont := fontAndStyleBuilder aeCairoScaledFontOn: canvas.
 	cairoGlyphsArray := cairoScaledFont glyphArrayForString: usedSpan.
 
 	metrics := canvas metricsFor: cairoGlyphsArray font: cairoScaledFont.
