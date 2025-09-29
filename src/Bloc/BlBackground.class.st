@@ -65,6 +65,12 @@ BlBackground >> defaultOpacity [
 	^ 1.0
 ]
 
+{ #category : #comparing }
+BlBackground >> hash [
+
+	^ self class hash bitXor: self opacity hash
+]
+
 { #category : #testing }
 BlBackground >> isColorBackground [
 

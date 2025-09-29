@@ -6,19 +6,19 @@ Class {
 
 { #category : #tests }
 BlColorPaintTest >> testColor [
+
 	| paint |
-	
 	paint := BlColorPaint color: Color red.
 	self assert: paint color equals: Color red.
-	
-	paint := BlColorPaint new color: Color blue.
+
+	paint := BlColorPaint color: Color blue.
 	self assert: paint color equals: Color blue
 ]
 
 { #category : #tests }
 BlColorPaintTest >> testIsTransparent [
+
 	| paint |
-	
 	paint := BlColorPaint color: Color red.
 	self assert: paint isTransparent not.
 	
@@ -29,5 +29,5 @@ BlColorPaintTest >> testIsTransparent [
 	self assert: paint isTransparent.
 	
 	paint := BlColorPaint color: Color transparent.
-	self assert: paint isTransparent.
+	self assert: paint isTransparent
 ]

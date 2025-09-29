@@ -21,20 +21,12 @@ BlColorPaint class >> color: aColor [
 		yourself
 ]
 
-{ #category : #'instance creation' }
-BlColorPaint class >> transparent [
-	"Return an instance of a paint with transparent color"
-	
-	^ BlTransparentPaint uniqueInstance
-]
-
 { #category : #comparing }
 BlColorPaint >> = anotherObject [
-	self == anotherObject
-		ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class)
-		ifFalse: [ ^ false ].
-	
+
+	self == anotherObject ifTrue: [ ^ true ].
+	(anotherObject class = self class) ifFalse: [ ^ false ].
+
 	^ anotherObject color = self color
 ]
 
@@ -63,7 +55,8 @@ BlColorPaint >> color: aColor [
 
 { #category : #comparing }
 BlColorPaint >> hash [
-	^ self color hash
+
+	^ super hash bitXor: color hash
 ]
 
 { #category : #testing }
@@ -84,7 +77,6 @@ BlColorPaint >> isOpaque [
 BlColorPaint >> isTransparent [
 	"Color paint is transparent when underlying color is transparent
 	@see BlPaint>>#isTransparent"
-	<return: #Boolean>
 
 	^ color isTransparent
 ]

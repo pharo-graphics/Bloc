@@ -33,6 +33,12 @@ BlImageBackground >> = anotherObject [
 	^ anotherObject image = self image
 ]
 
+{ #category : #comparing }
+BlImageBackground >> hash [
+
+	^ super hash bitXor: self image hash
+]
+
 { #category : #accessing }
 BlImageBackground >> image [
 	"Return the form that represents the visual of the background."

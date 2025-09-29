@@ -1,3 +1,10 @@
+"
+I represent a radial gradient.
+
+The inner and outer center are instances of `Point`.
+The inner and outer radius are numbers.
+The stops is a collection of associations where keys are numbers between 0.0 and 1.0, and values are instances of `Color`.
+"
 Class {
 	#name : #BlRadialGradientPaint,
 	#superclass : #BlGradientPaint,
@@ -14,7 +21,10 @@ Class {
 BlRadialGradientPaint >> = aBlPaint [
 
 	super = aBlPaint ifFalse: [ ^ false ].
-	^ self innerCenter = aBlPaint innerCenter and: [ self innerRadius = aBlPaint innerRadius and: [ self outerCenter = aBlPaint outerCenter and: [ self outerRadius = aBlPaint outerRadius ] ] ]
+	^ self innerCenter = aBlPaint innerCenter and: [
+		  self innerRadius = aBlPaint innerRadius and: [
+			  self outerCenter = aBlPaint outerCenter and: [
+				  self outerRadius = aBlPaint outerRadius ] ] ]
 ]
 
 { #category : #accessing }
@@ -22,6 +32,15 @@ BlRadialGradientPaint >> center: aPoint [
 	"Set the innerCenter and outerCenter at the specified Point."
 
 	innerCenter := outerCenter := aPoint
+]
+
+{ #category : #comparing }
+BlRadialGradientPaint >> hash [
+
+	^ super hash bitXor:
+		(innerCenter hash bitXor:
+		   (outerCenter hash bitXor:
+				(innerRadius bitXor: outerRadius)))
 ]
 
 { #category : #accessing }
