@@ -9,7 +9,7 @@ Examples are provided by the class `BlImageBackgroundExamples`.
 "
 Class {
 	#name : #BlImageBackground,
-	#superclass : #BlBackground,
+	#superclass : #BlAbstractImageBackground,
 	#instVars : [
 		'image'
 	],
@@ -34,6 +34,12 @@ BlImageBackground >> = anotherObject [
 ]
 
 { #category : #accessing }
+BlImageBackground >> height [
+
+	^ image height
+]
+
+{ #category : #accessing }
 BlImageBackground >> image [
 	"Return the form that represents the visual of the background."
 
@@ -49,16 +55,8 @@ BlImageBackground >> image: aForm [
 	image := aForm
 ]
 
-{ #category : #testing }
-BlImageBackground >> isTransparent [
-	"Unfortunately there is no fast way to detect if a Form is completely transparent,
-	the only check we can afford to do is to see whether the extent of the form is positive"
+{ #category : #accessing }
+BlImageBackground >> width [
 
-	^ (self opacity closeTo: 0.0) or: [ image width = 0 or: [ image height = 0 ] ]
-]
-
-{ #category : #geometry }
-BlImageBackground >> matchExtent: anExtent [
-	"Not sure what we should do with image background.
-	Will implement later"
+	^ image width
 ]
