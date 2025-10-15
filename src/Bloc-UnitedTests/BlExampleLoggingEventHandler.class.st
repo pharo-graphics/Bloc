@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'counter'
 	],
-	#category : #'Bloc-Examples-EventHandling'
+	#category : #'Bloc-UnitedTests-Handler'
 }
 
 { #category : #'instance creation' }

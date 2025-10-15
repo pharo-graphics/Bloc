@@ -1,11 +1,11 @@
 Class {
 	#name : #BlHandlerArrayRegistryTest,
-	#superclass : #BlHandlerAnnouncerRegistryTest,
+	#superclass : #BlHandlerRegistryTest,
 	#category : #'Bloc-UnitedTests-Handler'
 }
 
 { #category : #'instance creation' }
-BlHandlerArrayRegistryTest >> emptyRegistry [
+BlHandlerArrayRegistryTest >> newRegistryToTest [
 
 	^ BlHandlerArrayRegistry new
 ]
