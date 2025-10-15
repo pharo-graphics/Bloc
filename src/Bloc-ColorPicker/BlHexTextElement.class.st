@@ -70,7 +70,7 @@ BlHexTextElement >> owner: anElement [
 	owner := anElement 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #updating }
 BlHexTextElement >> updateHexCode [ 
 
 	valueElt text: owner color asHexString asRopedText

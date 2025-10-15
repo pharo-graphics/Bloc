@@ -64,7 +64,7 @@ BlElementFlags class >> flagsDecl [
 	}
 ]
 
-{ #category : #'flags declaration' }
+{ #category : #'class initialization' }
 BlElementFlags class >> initialize [
 	"this method is needed else the information is not created. 
 	This is the sign of a bad design.

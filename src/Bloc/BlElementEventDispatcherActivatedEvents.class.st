@@ -166,7 +166,7 @@ BlElementEventDispatcherActivatedEvents class >> flagsDecl [
 
 ]
 
-{ #category : #initialization }
+{ #category : #'class initialization' }
 BlElementEventDispatcherActivatedEvents class >> initialize [
 	"this method is needed else the information is not created. 
 	This is the sign of a bad design.

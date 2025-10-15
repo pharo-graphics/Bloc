@@ -843,7 +843,7 @@ BlDragAndDropExamples class >> experimentNewTagsOrderer [
 	aContainer openInNewSpace
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'experimentations - preview' }
 BlDragAndDropExamples class >> experimentPullHandlerWithPreview [
 
  <script>

@@ -2,7 +2,6 @@ Class {
 	#name : #BlGridMeasurer,
 	#superclass : #Object,
 	#instVars : [
-		'element',
 		'layout'
 	],
 	#category : #'Bloc-Layout-Grid-Utilities'

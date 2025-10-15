@@ -318,7 +318,7 @@ BlElementTest >> testHasFocusable [
 	self assert: child hasFocusable
 ]
 
-{ #category : #test }
+{ #category : #tests }
 BlElementTest >> testId [
 
 	| element |
@@ -328,7 +328,7 @@ BlElementTest >> testId [
 	self assert: element id equals: #anId.
 ]
 
-{ #category : #test }
+{ #category : #tests }
 BlElementTest >> testIdConstructor [
 
 	| element |

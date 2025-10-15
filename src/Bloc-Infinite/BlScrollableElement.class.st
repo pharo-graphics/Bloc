@@ -13,7 +13,7 @@ Class {
 	#category : #'Bloc-Infinite-Scrollable-Core'
 }
 
-{ #category : #conversion }
+{ #category : #converting }
 BlScrollableElement >> asScrollableElement [
 	^ self
 ]

@@ -127,7 +127,6 @@ BlDragDelegateNew >> items: aCollectionOfDragItems [
 BlDragDelegateNew >> lift [
 	"Lift previews at a given point in space coordinates"
 
-	<return: #BlElement>
 	| aContainer |
 	aContainer := BlElement new
 		              layout: BlFrameLayout new;

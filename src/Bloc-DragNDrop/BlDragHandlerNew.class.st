@@ -7,7 +7,6 @@ Class {
 	#instVars : [
 		'liftItemBlock',
 		'dragAreaBlock',
-		'dragStrategy',
 		'dragDelegate',
 		'dragStartPosition'
 	],
@@ -16,7 +15,6 @@ Class {
 
 { #category : #'dnd handlers' }
 BlDragHandlerNew >> createDragItemFor: aSourceElement [
-	<return: #BlDragItem>
 
 	^ liftItemBlock
 		ifNil: [

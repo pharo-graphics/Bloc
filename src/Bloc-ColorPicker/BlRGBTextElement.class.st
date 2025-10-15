@@ -101,7 +101,7 @@ BlRGBTextElement >> owner: anElement [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #updating }
 BlRGBTextElement >> updateRGBCode [ 
 
 	| code |
