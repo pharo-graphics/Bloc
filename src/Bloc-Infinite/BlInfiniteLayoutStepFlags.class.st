@@ -39,8 +39,9 @@ BlInfiniteLayoutStepFlags class >> flagsDecl [
 	}
 ]
 
-{ #category : #initialization }
+{ #category : #'class initialization' }
 BlInfiniteLayoutStepFlags class >> initialize [
+
 	super initialize
 ]
 

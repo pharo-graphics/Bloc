@@ -33,7 +33,7 @@ BlMouseProcessor class >> dblClickDelay: aDuration [
 	DoubleClickDuration := aDuration
 ]
 
-{ #category : #accessing }
+{ #category : #'class initialization' }
 BlMouseProcessor class >> initialize [
 
 	DoubleClickDuration := 400 milliSeconds

@@ -1,9 +1,6 @@
 Class {
 	#name : #BlDevScripterCheckElementNotExistsStep,
 	#superclass : #BlDevScripterCheckStep,
-	#instVars : [
-		'elementId'
-	],
 	#category : #'Bloc-Scripter-Scripter-Steps'
 }
 

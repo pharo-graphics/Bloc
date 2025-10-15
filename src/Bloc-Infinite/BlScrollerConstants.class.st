@@ -21,7 +21,7 @@ Class {
 	#category : #'Bloc-Infinite-Scrollable-Helpers'
 }
 
-{ #category : #initialization }
+{ #category : #'class initialization' }
 BlScrollerConstants class >> initialize [
 	
 	DecelerationRate := 0.78 log / 0.9 log.

@@ -11,7 +11,7 @@ Class {
 	#category : #'BlocHost-Mock-Host'
 }
 
-{ #category : #initialization }
+{ #category : #'class initialization' }
 BlMockedHost class >> initialize [
 
 	isRunning := false

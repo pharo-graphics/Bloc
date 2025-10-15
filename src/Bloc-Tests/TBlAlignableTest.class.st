@@ -18,70 +18,70 @@ TBlAlignableTest >> setUp [
 	element := BlMockAlignableElement new
 ]
 
-{ #category : #test }
+{ #category : #tests }
 TBlAlignableTest >> testAlignBottomCenter [
 
 	element alignBottomCenter.
 	self assert: element isAlignBottomCenter
 ]
 
-{ #category : #test }
+{ #category : #tests }
 TBlAlignableTest >> testAlignBottomLeft [
 
 	element alignBottomLeft.
 	self assert: element isAlignBottomLeft
 ]
 
-{ #category : #test }
+{ #category : #tests }
 TBlAlignableTest >> testAlignBottomRight [
 
 	element alignBottomRight.
 	self assert: element isAlignBottomRight
 ]
 
-{ #category : #test }
+{ #category : #tests }
 TBlAlignableTest >> testAlignCenter [
 
 	element alignCenter.
 	self assert: element isAlignCenter
 ]
 
-{ #category : #test }
+{ #category : #tests }
 TBlAlignableTest >> testAlignCenterLeft [
 
 	element alignCenterLeft.
 	self assert: element isAlignCenterLeft
 ]
 
-{ #category : #test }
+{ #category : #tests }
 TBlAlignableTest >> testAlignCenterRight [
 
 	element alignCenterRight.
 	self assert: element isAlignCenterRight
 ]
 
-{ #category : #test }
+{ #category : #tests }
 TBlAlignableTest >> testAlignNone [
 
 	element alignNone.
 	self assert: element isAlignNone
 ]
 
-{ #category : #test }
+{ #category : #tests }
 TBlAlignableTest >> testAlignTopCenter [
 
 	element alignTopCenter.
 	self assert: element isAlignTopCenter
 ]
 
-{ #category : #test }
+{ #category : #tests }
 TBlAlignableTest >> testAlignTopLeft [
 
 	element alignTopLeft.
 	self assert: element isAlignTopLeft
 ]
 
-{ #category : #test }
+{ #category : #tests }
 TBlAlignableTest >> testAlignTopRight [
 
 	element alignTopRight.

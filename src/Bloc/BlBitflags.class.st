@@ -153,7 +153,7 @@ BlBitflags class >> generatedFlagsTestingProtocolName [
 	^ 'flags - testing'
 ]
 
-{ #category : #initialization }
+{ #category : #'class initialization' }
 BlBitflags class >> initialize [
 	self initializeFlags
 ]

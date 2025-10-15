@@ -40,7 +40,7 @@ BlAttributeRope class >> combineAttributed: aLeftAttributeRope and: aRightAttrib
 		rope: (self concatenate: aLeftAttributeRope rope and: aRightAttributeRope rope)
 ]
 
-{ #category : #utility }
+{ #category : #utilities }
 BlAttributeRope class >> mergeAttributes: aCollectionOfAttributes and: anotherCollectionOfAttributes [
 	"Merge two collection of attributes letting anotherCollectionOfAttributes to override
 	attributes from aCollectionOfAttributes based on its type"
@@ -58,7 +58,7 @@ BlAttributeRope class >> mergeAttributes: aCollectionOfAttributes and: anotherCo
 	^ anOrderedDictionary values
 ]
 
-{ #category : #utility }
+{ #category : #utilities }
 BlAttributeRope class >> typeOf: anObject [
 
 	^[anObject type] onErrorDo: [:ex | anObject]

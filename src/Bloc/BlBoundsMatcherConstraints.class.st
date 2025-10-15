@@ -209,7 +209,7 @@ BlBoundsMatcherConstraints class >> flagsDecl [
 	}
 ]
 
-{ #category : #'flags declaration' }
+{ #category : #'class initialization' }
 BlBoundsMatcherConstraints class >> initialize [
 	"this method is needed else the information is not created. 
 	This is the sign of a bad design.

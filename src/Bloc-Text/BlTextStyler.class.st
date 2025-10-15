@@ -23,7 +23,6 @@ Class {
 	#traits : 'TBlAnnouncerProvider',
 	#classTraits : 'TBlAnnouncerProvider classTrait',
 	#instVars : [
-		'text',
 		'launcher'
 	],
 	#category : #'Bloc-Text-Text-Styler'

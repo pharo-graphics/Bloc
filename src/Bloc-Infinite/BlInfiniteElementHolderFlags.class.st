@@ -72,8 +72,9 @@ BlInfiniteElementHolderFlags class >> flagsDecl [
 	  #IGNORE. #UPDATE. #TMP_DETACHED }
 ]
 
-{ #category : #initialization }
+{ #category : #'class initialization' }
 BlInfiniteElementHolderFlags class >> initialize [
+
 	super initialize
 ]
 

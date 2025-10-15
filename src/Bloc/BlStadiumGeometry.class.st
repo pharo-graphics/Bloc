@@ -48,7 +48,7 @@ BlStadiumGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement
 	^ self containsPointCircle: aPoint
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'geometry testing' }
 BlStadiumGeometry >> containsPointCircle: aPoint [
 	"We assume extent x = extent y"
 
