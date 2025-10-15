@@ -1,3 +1,6 @@
+"
+I'm a handler registry based on `Announcer`.
+"
 Class {
 	#name : #BlHandlerAnnouncerRegistry,
 	#superclass : #BlHandlerRegistry,

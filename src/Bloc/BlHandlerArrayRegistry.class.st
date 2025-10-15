@@ -1,3 +1,6 @@
+"
+I'm a handler registry based on `Array`.
+"
 Class {
 	#name : #BlHandlerArrayRegistry,
 	#superclass : #BlHandlerRegistry,

@@ -130,11 +130,11 @@ BaselineOfBloc >> baseline: spec [
 
 		spec package: #'Bloc-Rules' with: [ spec requires: #( #Bloc ) ].
 
-		spec package: #'Bloc-Demo' with: [
-			spec requires:
-				#( #'Bloc-Layout' #'Bloc-Spec2' #'Bloc-Text-Elements' ) ].
 		spec package: #'Bloc-DragNDrop' with: [ spec requires: #( #Bloc ) ].
 		spec package: #'Bloc-ColorPicker' with: [ spec requires: #( #Bloc ) ].
+		spec package: #'Bloc-Demo' with: [
+			spec requires:
+				#( #'Bloc-Layout' #'Bloc-Spec2' #'Bloc-Text-Elements' #'Bloc-DragNDrop') ].
 
 		"SVG"
 		self declareXMLParserOn: spec.
