@@ -8,7 +8,7 @@ BlElement >> asPreviewMorph [
 
 { #category : #'*Bloc-Spec2' }
 BlElement >> inspectionPreview: aBuilder [
-	<inspectorPresentationOrder: 1 title: 'Preview'>
+	<inspectorPresentationOrder: 2 title: 'Preview'>
 
 	^ aBuilder newMorph
 		morph: self asPreviewMorph;
@@ -38,7 +38,7 @@ BlElement >> inspectionResizers: aBuilder [
 
 { #category : #'*Bloc-Spec2' }
 BlElement >> inspectionTree: aBuilder [
-	<inspectorPresentationOrder: 2 title: 'Tree'>
+	<inspectorPresentationOrder: 1 title: 'Tree'>
 
 	^ aBuilder newTree
 		roots: { self };
