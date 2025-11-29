@@ -4,21 +4,21 @@ Class {
 	#category : #'Bloc-Demo-NodeTests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'return ' }
 BlDemoData >> returnBlElement [
 
 	<demo>
 	^ BlElement new background: Color blue
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'return ' }
 BlDemoData >> returnBlElement2 [
 
 	<demo>
 	^ BlElement new background: Color red
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'return ' }
 BlDemoData >> returnBlElementWithADifferentPragma [
 
 	<demo2>

@@ -1,3 +1,6 @@
+"
+I'm the head of a little domain to represent classes, methods, and package for the demo collector tool (a tool to browse demo expressed as methods).
+"
 Class {
 	#name : #BlDemoBasicNode,
 	#superclass : #Object,

@@ -110,6 +110,6 @@ BlDemoBasicNodeTest >> testOnePackageWithTwoClassesHasTwoNodesWithSample2 [
 	packages := collector packages.
 	self assert: packages size equals: 1.
 
-	self assert: packages first class equals: BlDemoPackageNode .
+	self assert: packages first class equals: BlDemoPackageNode.
 	self assert: packages first children size equals: 1
 ]
