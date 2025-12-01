@@ -9,7 +9,7 @@ Class {
 		'parent',
 		'children'
 	],
-	#category : #'Bloc-Demo-Node'
+	#category : #'Bloc-Demo-DemoPresenterNodes'
 }
 
 { #category : #'as yet unclassified' }

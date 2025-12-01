@@ -1,7 +1,7 @@
 Class {
 	#name : #BlDemoMethodNode,
 	#superclass : #BlDemoBasicNode,
-	#category : #'Bloc-Demo-Node'
+	#category : #'Bloc-Demo-DemoPresenterNodes'
 }
 
 { #category : #execution }

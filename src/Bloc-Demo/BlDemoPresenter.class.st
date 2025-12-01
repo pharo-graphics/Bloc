@@ -12,7 +12,7 @@ Class {
 		'tree',
 		'canvas'
 	],
-	#category : #'Bloc-Demo-Spec2'
+	#category : #'Bloc-Demo-DemoPresenterSpec'
 }
 
 { #category : #running }
@@ -35,12 +35,12 @@ BlDemoPresenter class >> open [
 ]
 
 { #category : #accessing }
-BlDemoPresenter >> canva [ 
+BlDemoPresenter >> canvas [ 
 	^ canvas 
 ]
 
 { #category : #accessing }
-BlDemoPresenter >> canva: aCanva [
+BlDemoPresenter >> canvas: aCanva [
 	canvas := aCanva 
 ]
 
@@ -82,7 +82,7 @@ BlDemoPresenter >> defaultLayout [
 BlDemoPresenter >> drawOnCanvas: anElement [
 
 	| root |
-	root := self canva space root.
+	root := self canvas space root.
 	root removeChildren.
 	root addChild: ((anElement isKindOf: BlElement)
 		ifTrue: [ anElement ]
@@ -115,7 +115,7 @@ BlDemoPresenter >> executeCode [
 		on: Error 
 		do: [ :ex |
 			| root |
-			root := self canva space root.
+			root := self canvas space root.
 			root removeChildren.
 			root addChild:
 			(self errorMessage: 'Execution of ', item item printString, ' led to an error') ]
@@ -199,7 +199,7 @@ BlDemoPresenter >> notABlElementErrorMessage [
 BlDemoPresenter >> packagesToCollect [
 	
 	| suffixes |
-	suffixes := #('Bloc' 'Album').
+	suffixes := #('Bloc' 'Album' 'Toplo').
 	"we could avoid to hardcode this."
 	
 	^ self class packageOrganizer packages select: [ :package |

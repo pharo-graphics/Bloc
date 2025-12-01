@@ -6,7 +6,7 @@ Class {
 		'packageDictionary',
 		'classDictionary'
 	],
-	#category : #'Bloc-Demo-Node'
+	#category : #'Bloc-Demo-DemoPresenterNodes'
 }
 
 { #category : #'instance creation' }
