@@ -1,16 +1,17 @@
 Class {
 	#name : #BlDemoMethodNode,
 	#superclass : #BlDemoBasicNode,
-	#category : #'Bloc-Demo-Node'
+	#category : #'Bloc-Demo-DemoPresenterNodes'
 }
 
 { #category : #execution }
 BlDemoMethodNode >> execute [
 
 	| methodClass instance |
-
 	methodClass := item methodClass.
-	instance := methodClass isMeta ifTrue: [ methodClass soleInstance ] ifFalse: [ methodClass new ].
+	instance := methodClass isMeta 
+		ifTrue: [ methodClass soleInstance ] 
+		ifFalse: [ methodClass new ].
 	^ instance perform: item selector
 ]
 
@@ -23,6 +24,14 @@ BlDemoMethodNode >> icon [
 { #category : #accessing }
 BlDemoMethodNode >> name [ 
 	^ self selector
+]
+
+{ #category : #printing }
+BlDemoMethodNode >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream space ; print: item 
+	
 ]
 
 { #category : #accessing }

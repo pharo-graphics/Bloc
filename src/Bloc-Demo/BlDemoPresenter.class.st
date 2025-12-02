@@ -1,14 +1,18 @@
+"
+I'm a little tool to browse and render demo of bloc.
+The demoes are identified using the pragma <demo>
+"
 Class {
 	#name : #BlDemoPresenter,
 	#superclass : #SpPresenter,
 	#instVars : [
-		'canva',
 		'errorMessage',
 		'code',
 		'collector',
-		'tree'
+		'tree',
+		'canvas'
 	],
-	#category : #'Bloc-Demo-Spec2'
+	#category : #'Bloc-Demo-DemoPresenterSpec'
 }
 
 { #category : #running }
@@ -31,13 +35,13 @@ BlDemoPresenter class >> open [
 ]
 
 { #category : #accessing }
-BlDemoPresenter >> canva [ 
-	^ canva 
+BlDemoPresenter >> canvas [ 
+	^ canvas 
 ]
 
 { #category : #accessing }
-BlDemoPresenter >> canva: aCanva [
-	canva := aCanva 
+BlDemoPresenter >> canvas: aCanva [
+	canvas := aCanva 
 ]
 
 { #category : #accessing }
@@ -69,7 +73,7 @@ BlDemoPresenter >> defaultLayout [
 		  add: (SpPanedLayout newLeftToRight
 				   positionOfSlider: 300;
 				   add: tree;
-				   add: canva yourself);
+				   add: canvas yourself);
 		  add: code;
 		  yourself
 ]
@@ -78,15 +82,15 @@ BlDemoPresenter >> defaultLayout [
 BlDemoPresenter >> drawOnCanvas: anElement [
 
 	| root |
-	root := self canva space root.
+	root := self canvas space root.
 	root removeChildren.
 	root addChild: ((anElement isKindOf: BlElement)
 		ifTrue: [ anElement ]
-		ifFalse: [ self errorMessage ])
+		ifFalse: [ self notABlElementErrorMessage ])
 ]
 
-{ #category : #accessing }
-BlDemoPresenter >> errorMessage [
+{ #category : #errors }
+BlDemoPresenter >> errorMessage: aString [
 
 	^ errorMessage ifNil: [
 		  BlElement new
@@ -96,9 +100,7 @@ BlDemoPresenter >> errorMessage [
 				  c vertical matchParent.
 				  c horizontal matchParent ];
 			  addChild: (BlTextElement new
-					   text:
-						   'This method does not return any element for you to see'
-							   asRopedText;
+					   text: aString asRopedText;
 					   constraintsDo: [ :c |
 						   c frame vertical alignCenter.
 						   c frame horizontal alignCenter ]) ]
@@ -107,9 +109,16 @@ BlDemoPresenter >> errorMessage [
 { #category : #operations }
 BlDemoPresenter >> executeCode [
 
-	| res |
-	res := tree selectedItem execute.
-	self drawOnCanvas: res
+	| item  |
+	item := tree selectedItem.
+	[ self drawOnCanvas: item execute ] 
+		on: Error 
+		do: [ :ex |
+			| root |
+			root := self canvas space root.
+			root removeChildren.
+			root addChild:
+			(self errorMessage: 'Execution of ', item item printString, ' led to an error') ]
 ]
 
 { #category : #TOREMOVE }
@@ -124,9 +133,9 @@ BlDemoPresenter >> initialExtent [
 ]
 
 { #category : #initialization }
-BlDemoPresenter >> initializeCanvaPresenter [ 
+BlDemoPresenter >> initializeCanvasPresenter [ 
 	
-	canva := SpBlSpaceInMorphPresenter new
+	canvas := SpBlSpaceInMorphPresenter new
 ]
 
 { #category : #initialization }
@@ -159,7 +168,7 @@ BlDemoPresenter >> initializePathArray [
 BlDemoPresenter >> initializePresenters [
 
 	self initializeCollector.
-	self initializeCanvaPresenter.
+	self initializeCanvasPresenter.
 	self initializeTreePresenter.
 	self initializeCodePresenter
 ]
@@ -178,14 +187,26 @@ BlDemoPresenter >> initializeTreePresenter [
 	tree selectPathByItems: pathArray scrollToSelection: true
 ]
 
+{ #category : #errors }
+BlDemoPresenter >> notABlElementErrorMessage [
+
+	^ self errorMessage: 
+						   'This method does not return any element for you to see'
+							  
+]
+
 { #category : #accessing }
 BlDemoPresenter >> packagesToCollect [
-
-	^ self class packageOrganizer packages select: [ :each |
-		  each name includesSubstring: 'Bloc' ]
+	
+	| suffixes |
+	suffixes := #('Bloc' 'Album' 'Toplo').
+	"we could avoid to hardcode this."
+	
+	^ self class packageOrganizer packages select: [ :package |
+		suffixes anySatisfy: [ :suff | package name includesSubstring: suff ]]
 ]
 
 { #category : #TOREMOVE }
-BlDemoPresenter >> title [ 
+BlDemoPresenter >> windowTitle [
 	^ 'Bloc UI Framework Demo'
 ]
