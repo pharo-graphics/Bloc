@@ -5,7 +5,8 @@ Class {
 		'cairoContext',
 		'lastControlPoint',
 		'currentPosition',
-		'isAbsolute'
+		'isAbsolute',
+		'initialPathPosition'
 	],
 	#category : #'Bloc-Alexandrie-SVG'
 }
@@ -23,7 +24,8 @@ BASvgPathDrawHandler >> closePath [
 	
 	cairoContext closePath.
 	
-	currentPosition := cairoContext currentPointInUserSpace.
+	self currentPosition: initialPathPosition.
+	initialPathPosition := nil.
 	lastControlPoint := nil
 ]
 
@@ -33,7 +35,7 @@ BASvgPathDrawHandler >> cubicBezierVia: p1 and: p2 to: aPoint [
 	| pt1 |
 	pt1 := self toAbsolute: p1.
 	lastControlPoint := self toAbsolute: p2.
-	currentPosition := self toAbsolute: aPoint.
+	self currentPosition: (self toAbsolute: aPoint).
 
 	cairoContext
 		curveViaX: pt1 x
@@ -42,6 +44,13 @@ BASvgPathDrawHandler >> cubicBezierVia: p1 and: p2 to: aPoint [
 		y: lastControlPoint y
 		toX: currentPosition x
 		y: currentPosition y
+]
+
+{ #category : #accessing }
+BASvgPathDrawHandler >> currentPosition: aPoint [
+
+	currentPosition := aPoint.
+	initialPathPosition ifNil: [ initialPathPosition := aPoint ]
 ]
 
 { #category : #API }
@@ -133,7 +142,7 @@ BASvgPathDrawHandler >> ellipticalArcRotation: radiiPoint xAxisRotation: xAxisRo
 				startAngle: startAngle degreesToRadians
 				sweep: sweepAngle degreesToRadians ].
 
-	currentPosition := absoluteToPosition
+	self currentPosition: absoluteToPosition
 ]
 
 { #category : #API }
@@ -165,7 +174,7 @@ BASvgPathDrawHandler >> isAbsolute: aBoolean [
 BASvgPathDrawHandler >> lineTo: aPoint [
 
 	lastControlPoint := nil.
-	currentPosition := self toAbsolute: aPoint.
+	self currentPosition: (self toAbsolute: aPoint).
 	
 	cairoContext lineTo: currentPosition
 ]
@@ -174,7 +183,7 @@ BASvgPathDrawHandler >> lineTo: aPoint [
 BASvgPathDrawHandler >> moveTo: aPoint [
 
 	lastControlPoint := nil.
-	currentPosition := self toAbsolute: aPoint.
+	self currentPosition: (self toAbsolute: aPoint).
 
 	cairoContext moveTo: currentPosition
 ]
@@ -185,7 +194,7 @@ BASvgPathDrawHandler >> quadraticBezierVia: p1 to: aPoint [
 	| startPoint |
 	startPoint := currentPosition.
 	lastControlPoint := self toAbsolute: p1.
-	currentPosition := self toAbsolute: aPoint.
+	self currentPosition: (self toAbsolute: aPoint).
 
 	cairoContext
 		quadraticCurveFromCurrentPoint: startPoint
@@ -203,7 +212,7 @@ BASvgPathDrawHandler >> smoothCubicBezierVia: p2 to: aPoint [
 	       ifNil: [ startPoint ]
 	       ifNotNil: [ startPoint * 2 - lastControlPoint ].
 	lastControlPoint := self toAbsolute: p2.
-	currentPosition := self toAbsolute: aPoint.
+	self currentPosition: (self toAbsolute: aPoint).
 
 	cairoContext
 		curveVia: firstControlPoint
@@ -220,7 +229,7 @@ BASvgPathDrawHandler >> smoothQuadraticBezierTo: aPoint [
 		lastControlPoint
 			ifNil: [ startPoint ]
 			ifNotNil: [ startPoint * 2 - lastControlPoint ].
-	currentPosition := self toAbsolute: aPoint.
+	self currentPosition: (self toAbsolute: aPoint).
 
 	cairoContext
 		quadraticCurveFromCurrentPoint: startPoint
