@@ -1366,7 +1366,10 @@ BlElement >> dispatchChildAdded: anElement [
 		anElement dispatchAddedToSceneGraph ].
 
 	"Let child dispatch necessary events and hooks"
-	anElement dispatchAddedToParent
+	anElement dispatchAddedToParent.
+	
+	"We notify the event dispatcher in case we need to raise an event"
+	eventDispatcher dispatchChildAdded: anElement
 ]
 
 { #category : #'children dispatching' }
@@ -1752,7 +1755,9 @@ BlElement >> geometry: aBlGeometry [
 	"invalidate with new geometry"
 	self invalidate.
 
-	self requestLayout
+	self requestLayout.
+	
+	self eventDispatcher dispatchGeometryChanged
 ]
 
 { #category : #'geometry bounds' }
@@ -3180,6 +3185,7 @@ BlElement >> outskirts: aBlOutskirts [
 
 	visuals := visuals outskirts: aBlOutskirts.
 	self geometry releaseStrokedBoundsCache.
+	self eventDispatcher dispatchOutskirtChanged.
 	self invalidate
 ]
 
