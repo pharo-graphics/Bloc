@@ -1,3 +1,6 @@
+"
+I represent an element identifier that consists of a prefix id and an index suffix.
+"
 Class {
 	#name : #BlElementIndexedId,
 	#superclass : #BlElementId,
@@ -25,6 +28,7 @@ BlElementIndexedId >> = anObject [
 
 { #category : #converting }
 BlElementIndexedId >> asSymbol [
+
 	^ Symbol streamContents: [ :aStream | 
 		aStream
 			nextPutAll: self prefixId asSymbol;
@@ -34,29 +38,30 @@ BlElementIndexedId >> asSymbol [
 
 { #category : #accessing }
 BlElementIndexedId >> index [
-	<return: #Number>
 
 	^ index
 ]
 
 { #category : #accessing }
 BlElementIndexedId >> index: aNumber [
+
 	index := aNumber
 ]
 
 { #category : #testing }
 BlElementIndexedId >> isIndexed [
+
 	^ true
 ]
 
 { #category : #accessing }
 BlElementIndexedId >> prefixId [
-	<return: #BlElementId>
 
 	^ prefixId
 ]
 
 { #category : #accessing }
 BlElementIndexedId >> prefixId: aBlElementId [
+
 	prefixId := aBlElementId
 ]

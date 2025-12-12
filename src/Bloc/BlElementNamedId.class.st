@@ -1,8 +1,11 @@
+"
+I represent a string-based element identifier.
+"
 Class {
 	#name : #BlElementNamedId,
 	#superclass : #BlElementId,
 	#instVars : [
-		'identifier'
+		'name'
 	],
 	#category : #'Bloc-Basic-Support'
 }
@@ -16,7 +19,7 @@ BlElementNamedId >> = anObject [
 	
 	"if anObject is of the same class it is faster to directly compare identifiers"
 	self class = anObject class
-		ifTrue: [ ^ identifier = anObject identifier ].
+		ifTrue: [ ^ name = anObject identifier ].
 	
 	"otherwise fallback to the symbol comparison, but watch out, #asSymbol may not be cheap!"
 	^ self asSymbol = anObject asSymbol
@@ -24,20 +27,41 @@ BlElementNamedId >> = anObject [
 
 { #category : #converting }
 BlElementNamedId >> asSymbol [
-	^ self identifier
+
+	^ name
 ]
 
 { #category : #accessing }
 BlElementNamedId >> identifier [
-	<return: #Symbol>
 
-	^ identifier
+	self
+		deprecated: 'Use #name instead'
+		transformWith: '`@rcvr identifier' -> '`@rcvr name'.
+
+	^ self name
 ]
 
 { #category : #accessing }
 BlElementNamedId >> identifier: aSymbol [
-	identifier
-		ifNotNil: [ (BlImmutableObjectChangeError object: self) signal ].
 
-	identifier := aSymbol
+	self
+		deprecated: 'Use name: instead'
+		transformWith: '`@rcvr identifier: `@arg' -> '`@rcvr name: `@arg'.
+
+	self name: aSymbol
+]
+
+{ #category : #accessing }
+BlElementNamedId >> name [
+
+	^ name
+]
+
+{ #category : #accessing }
+BlElementNamedId >> name: aSymbol [
+
+	name ifNotNil: [
+		(BlImmutableObjectChangeError object: self) signal ].
+
+	name := aSymbol
 ]
