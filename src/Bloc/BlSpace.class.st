@@ -613,7 +613,7 @@ BlSpace >> defaultRoot [
 			  c horizontal matchParent.
 			  c vertical matchParent ];
 		  elevation: (BlRelativeElevation elevation: self defaultRootElevation);
-		  labeled: self defaultRootLabel;
+		  id: self defaultRootLabel;
 		  yourself
 ]
 
@@ -1513,6 +1513,7 @@ BlSpace >> root: anElement [
 
 	anElement
 		space: self;
+		id: self defaultRootLabel;
 		extent: self extent.
 
 	rootElement := anElement.
