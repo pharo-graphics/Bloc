@@ -17,19 +17,19 @@ BlElementChildrenTest >> hierarchyChildren [
 	aContainer := BlElement new
 		              extent: 400 @ 400;
 		              background: Color veryVeryLightGray;
-		              labeled: 'Container';
+		              id: 'Container';
 		              yourself.
 	current := aContainer.
 	1 to: 10 do: [ :i |
-		| son |
-		son := BlElement new
-			       extent: 10 - i * 40 asPoint;
-			       position: 10 asPoint;
-			       background: (Color h: i * 360 / 10 s: 1.0 v: 1.0);
-			       labeled: 'shape_' , i asString;
-			       yourself.
-		current addChild: son.
-		current := son ].
+			| son |
+			son := BlElement new
+				       extent: (10 - i) * 40 asPoint;
+				       position: 10 asPoint;
+				       background: (Color h: i * 360 / 10 s: 1.0 v: 1.0);
+				       id: ('shape' asBlocElementId indexed: i);
+				       yourself.
+			current addChild: son.
+			current := son ].
 
 	^ aContainer
 ]
@@ -43,7 +43,8 @@ BlElementChildrenTest >> multipleChildren [
 	aContainer := BlElement new
 		              extent: 400 @ 400;
 		              background: Color veryVeryLightGray;
-		              labeled: 'Container'.
+		              id: 'Container';
+		              yourself.
 
 	self multipleChildrenIn: aContainer depth: 1.
 
@@ -78,7 +79,6 @@ BlElementChildrenTest >> multipleChildrenDepth: aDepth [
 { #category : #tests }
 BlElementChildrenTest >> multipleChildrenIn: aContainer depth: aDepth [
 
-	<sampleInstance>
 	aDepth = 0 ifTrue: [ ^ self ].
 	1 to: 10 do: [ :i |
 		| son |
@@ -86,7 +86,8 @@ BlElementChildrenTest >> multipleChildrenIn: aContainer depth: aDepth [
 			       extent: 10 - i * 40 asPoint;
 			       position: 10 asPoint;
 			       background: (Color h: i * 360 / 10 s: 1.0 v: 1.0);
-			       labeled: 'shape_' , i asString.
+			       id: ('shape' asBlocElementId indexed: i);
+			yourself.
 		aContainer addChild: son.
 		self multipleChildrenIn: son depth: aDepth - 1 ].
 
@@ -102,17 +103,20 @@ BlElementChildrenTest >> overlappingChildren [
 	aContainer := BlElement new
 		              extent: 400 @ 400;
 		              background: Color veryVeryLightGray;
-		              labeled: 'Container'.
+		              id: 'Container';
+		              yourself.
 	aRedChild := BlElement new
 		             extent: 300 @ 150;
 		             position: 50 @ 125;
 		             background: (Color red alpha: 0.5);
-		             labeled: 'Red'.
+		             id: 'Red';
+		             yourself.
 	aBlueChild := BlElement new
 		              extent: 150 @ 300;
 		              position: 125 @ 50;
 		              background: (Color blue alpha: 0.5);
-		              labeled: 'Blue'.
+		              id: 'Blue';
+		              yourself.
 	aContainer addChild: aRedChild as: #red.
 	aContainer addChild: aBlueChild as: #blue.
 	aContainer forceLayout.
@@ -130,10 +134,10 @@ BlElementChildrenTest >> testAllChildrenBreadthFirstWithDepthDo [
 		(allChildren allSatisfy: [ :each | each parent = aContainer ]).
 	self
 		assert: allChildren first
-		equals: (aContainer childWithId: #shape_1).
+		equals: (aContainer childWithId: #'shape-1').
 	self
 		assert: allChildren last
-		equals: (aContainer childWithId: #shape_10).
+		equals: (aContainer childWithId: #'shape-10').
 		
 	founds := Dictionary new.
 	aContainer allChildrenBreadthFirstWithDepthDo: [ :child :depth |
@@ -205,7 +209,7 @@ BlElementChildrenTest >> testAllParentsDetectifFoundifNone1 [
 
 	| aContainer aChild |
 	aContainer := self hierarchyChildren.
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 
 	aChild
 		allParentsDetect: [ :parent | true ]
@@ -227,7 +231,7 @@ BlElementChildrenTest >> testAllParentsDetectifFoundifNone2 [
 
 	| aContainer aChild |
 	aContainer := self hierarchyChildren.
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 
 	aChild
 		allParentsDetect: [ :parent | parent hasParent not ]
@@ -240,20 +244,20 @@ BlElementChildrenTest >> testAllParentsDo [
 
 	| aContainer aChild res |
 	aContainer := self hierarchyChildren.
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 	res := OrderedCollection new.
 
 	aChild allParentsDo: [ :parent | res add: parent ].
 	self assert: res asArray equals: {
-			(aContainer childWithId: #shape_9).
-			(aContainer childWithId: #shape_8).
-			(aContainer childWithId: #shape_7).
-			(aContainer childWithId: #shape_6).
-			(aContainer childWithId: #shape_5).
-			(aContainer childWithId: #shape_4).
-			(aContainer childWithId: #shape_3).
-			(aContainer childWithId: #shape_2).
-			(aContainer childWithId: #shape_1).
+			(aContainer childWithId: #'shape-9').
+			(aContainer childWithId: #'shape-8').
+			(aContainer childWithId: #'shape-7').
+			(aContainer childWithId: #'shape-6').
+			(aContainer childWithId: #'shape-5').
+			(aContainer childWithId: #'shape-4').
+			(aContainer childWithId: #'shape-3').
+			(aContainer childWithId: #'shape-2').
+			(aContainer childWithId: #'shape-1').
 			aContainer }.
 
 	res := OrderedCollection new.
@@ -266,7 +270,7 @@ BlElementChildrenTest >> testAllParentsReversedDo [
 
 	| aContainer aChild all |
 	aContainer := self hierarchyChildren.
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 	all := Array streamContents: [ :stream |
 		aChild allParentsReverseDo: [ :each |
 			stream nextPut: each ] ].
@@ -274,15 +278,15 @@ BlElementChildrenTest >> testAllParentsReversedDo [
 		assert: all
 		equals: {
 			aContainer.
-			(aContainer childWithId: #shape_1).
-			(aContainer childWithId: #shape_2).
-			(aContainer childWithId: #shape_3).
-			(aContainer childWithId: #shape_4).
-			(aContainer childWithId: #shape_5).
-			(aContainer childWithId: #shape_6).
-			(aContainer childWithId: #shape_7).
-			(aContainer childWithId: #shape_8).
-			(aContainer childWithId: #shape_9) }
+			(aContainer childWithId: #'shape-1').
+			(aContainer childWithId: #'shape-2').
+			(aContainer childWithId: #'shape-3').
+			(aContainer childWithId: #'shape-4').
+			(aContainer childWithId: #'shape-5').
+			(aContainer childWithId: #'shape-6').
+			(aContainer childWithId: #'shape-7').
+			(aContainer childWithId: #'shape-8').
+			(aContainer childWithId: #'shape-9') }
 ]
 
 { #category : #tests }
@@ -292,25 +296,25 @@ BlElementChildrenTest >> testAllParentsUpToDo [
 	aContainer := self hierarchyChildren.
 	res := OrderedCollection new.
 
-	(aContainer childWithId: #shape_10)
-		allParentsUpTo: (aContainer childWithId: #shape_5)
+	(aContainer childWithId: #'shape-10')
+		allParentsUpTo: (aContainer childWithId: #'shape-5')
 		do: [ :parent | res add: parent ].
 	self assert: res asArray equals: {
-			(aContainer childWithId: #shape_9).
-			(aContainer childWithId: #shape_8).
-			(aContainer childWithId: #shape_7).
-			(aContainer childWithId: #shape_6).
-			(aContainer childWithId: #shape_5) }.
+			(aContainer childWithId: #'shape-9').
+			(aContainer childWithId: #'shape-8').
+			(aContainer childWithId: #'shape-7').
+			(aContainer childWithId: #'shape-6').
+			(aContainer childWithId: #'shape-5') }.
 
 	res := OrderedCollection new.
-	(aContainer childWithId: #shape_5)
-		allParentsUpTo: (aContainer childWithId: #shape_10)
+	(aContainer childWithId: #'shape-5')
+		allParentsUpTo: (aContainer childWithId: #'shape-10')
 		do: [ :parent | res add: parent ].
 	self assert: res asArray equals: {
-			(aContainer childWithId: #shape_4).
-			(aContainer childWithId: #shape_3).
-			(aContainer childWithId: #shape_2).
-			(aContainer childWithId: #shape_1).
+			(aContainer childWithId: #'shape-4').
+			(aContainer childWithId: #'shape-3').
+			(aContainer childWithId: #'shape-2').
+			(aContainer childWithId: #'shape-1').
 			aContainer }
 ]
 
@@ -319,9 +323,9 @@ BlElementChildrenTest >> testChildAt [
 
 	| aContainer |
 	aContainer := self multipleChildren.
-	self assert: (aContainer childAt: 1) id equals: #shape_1.
-	self assert: (aContainer childAt: 5) id equals: #shape_5.
-	self assert: (aContainer childAt: 10) id equals: #shape_10.
+	self assert: (aContainer childAt: 1) id equals: #'shape-1'.
+	self assert: (aContainer childAt: 5) id equals: #'shape-5'.
+	self assert: (aContainer childAt: 10) id equals: #'shape-10'.
 
 	[
 	aContainer childAt: 11.
@@ -338,14 +342,14 @@ BlElementChildrenTest >> testChildIndexOf [
 	aContainer := self multipleChildren.
 	aNonChild := BlElement new.
 	self
-		assert: (aContainer childIndexOf: (aContainer childWithId: #shape_1))
+		assert: (aContainer childIndexOf: (aContainer childWithId: #'shape-1'))
 		equals: 1.
 	self
-		assert: (aContainer childIndexOf: (aContainer childWithId: #shape_5))
+		assert: (aContainer childIndexOf: (aContainer childWithId: #'shape-5'))
 		equals: 5.
 	self
 		assert:
-		(aContainer childIndexOf: (aContainer childWithId: #shape_10))
+		(aContainer childIndexOf: (aContainer childWithId: #'shape-10'))
 		equals: 10.
 	self assert: (aContainer childIndexOf: aNonChild) equals: 0
 ]
@@ -355,20 +359,20 @@ BlElementChildrenTest >> testChildWithId [
 
 	| aContainer aChild1 aChild2 |
 	aContainer := self hierarchyChildren.
-	aChild1 := aContainer childWithId: #shape_1.
+	aChild1 := aContainer childWithId: #'shape-1'.
 	self assert: aChild1 parent equals: aContainer.
-	self assert: aChild1 id equals: #shape_1.
+	self assert: aChild1 id equals: #'shape-1'.
 
-	aChild2 := aContainer childWithId: #shape_2.
+	aChild2 := aContainer childWithId: #'shape-2'.
 	self assert: aChild2 parent equals: aChild1.
-	self assert: aChild2 id equals: #shape_2.
+	self assert: aChild2 id equals: #'shape-2'.
 
-	aChild1 := aContainer childWithId: #shape_5.
-	self assert: aChild1 id equals: #shape_5.
+	aChild1 := aContainer childWithId: #'shape-5'.
+	self assert: aChild1 id equals: #'shape-5'.
 
-	aChild2 := aContainer childWithId: #shape_6.
+	aChild2 := aContainer childWithId: #'shape-6'.
 	self assert: aChild2 parent equals: aChild1.
-	self assert: aChild2 id equals: #shape_6.
+	self assert: aChild2 id equals: #'shape-6'.
 
 	[
 	aContainer childWithId: #idontexist.
@@ -381,17 +385,17 @@ BlElementChildrenTest >> testChildWithId1 [
 	<sampleInstance>
 	| aContainer aChild |
 	aContainer := self multipleChildren.
-	aChild := aContainer childWithId: #shape_1.
+	aChild := aContainer childWithId: #'shape-1'.
 	self assert: aChild parent equals: aContainer.
-	self assert: aChild id equals: #shape_1.
+	self assert: aChild id equals: #'shape-1'.
 
-	aChild := aContainer childWithId: #shape_5.
+	aChild := aContainer childWithId: #'shape-5'.
 	self assert: aChild parent equals: aContainer.
-	self assert: aChild id equals: #shape_5.
+	self assert: aChild id equals: #'shape-5'.
 
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 	self assert: aChild parent equals: aContainer.
-	self assert: aChild id equals: #shape_10.
+	self assert: aChild id equals: #'shape-10'.
 
 	[
 	aContainer childWithId: #idontexist.
@@ -404,20 +408,20 @@ BlElementChildrenTest >> testChildWithId2 [
 	<sampleInstance>
 	| aContainer aChild1 aChild2 |
 	aContainer := self hierarchyChildren.
-	aChild1 := aContainer childWithId: #shape_1.
+	aChild1 := aContainer childWithId: #'shape-1'.
 	self assert: aChild1 parent equals: aContainer.
-	self assert: aChild1 id equals: #shape_1.
+	self assert: aChild1 id equals: #'shape-1'.
 
-	aChild2 := aContainer childWithId: #shape_2.
+	aChild2 := aContainer childWithId: #'shape-2'.
 	self assert: aChild2 parent equals: aChild1.
-	self assert: aChild2 id equals: #shape_2.
+	self assert: aChild2 id equals: #'shape-2'.
 
-	aChild1 := aContainer childWithId: #shape_5.
-	self assert: aChild1 id equals: #shape_5.
+	aChild1 := aContainer childWithId: #'shape-5'.
+	self assert: aChild1 id equals: #'shape-5'.
 
-	aChild2 := aContainer childWithId: #shape_6.
+	aChild2 := aContainer childWithId: #'shape-6'.
 	self assert: aChild2 parent equals: aChild1.
-	self assert: aChild2 id equals: #shape_6.
+	self assert: aChild2 id equals: #'shape-6'.
 
 	[
 	aContainer childWithId: #idontexist.
@@ -430,16 +434,16 @@ BlElementChildrenTest >> testChildWithIdIfFound1 [
 	| aContainer |
 	aContainer := self multipleChildren.
 	aContainer
-		childWithId: #shape_1
+		childWithId: #'shape-1'
 		ifFound: [ self assert: true ].
 	aContainer
-		childWithId: #shape_5
+		childWithId: #'shape-5'
 		ifFound: [ self assert: true ].
 	aContainer
-		childWithId: #shape_10
+		childWithId: #'shape-10'
 		ifFound: [ self assert: true ].
 	aContainer
-		childWithId: #shape_11
+		childWithId: #'shape-11'
 		ifFound: [ self assert: false ]
 ]
 
@@ -449,16 +453,16 @@ BlElementChildrenTest >> testChildWithIdIfFound2 [
 	| aContainer |
 	aContainer := self hierarchyChildren.
 	aContainer
-		childWithId: #shape_1
+		childWithId: #'shape-1'
 		ifFound: [ self assert: true ].
 	aContainer
-		childWithId: #shape_5
+		childWithId: #'shape-5'
 		ifFound: [ self assert: true ].
 	aContainer
-		childWithId: #shape_10
+		childWithId: #'shape-10'
 		ifFound: [ self assert: true ].
 	aContainer
-		childWithId: #shape_11
+		childWithId: #'shape-11'
 		ifFound: [ self assert: false ]
 ]
 
@@ -468,19 +472,19 @@ BlElementChildrenTest >> testChildWithIdIfFoundifNone1 [
 	| aContainer |
 	aContainer := self multipleChildren.
 	aContainer
-		childWithId: #shape_1
+		childWithId: #'shape-1'
 		ifFound: [ self assert: true ]
 		ifNone: [ self assert: false ].
 	aContainer
-		childWithId: #shape_5
+		childWithId: #'shape-5'
 		ifFound: [ self assert: true ]
 		ifNone: [ self assert: false ].
 	aContainer
-		childWithId: #shape_10
+		childWithId: #'shape-10'
 		ifFound: [ self assert: true ]
 		ifNone: [ self assert: false ].
 	aContainer
-		childWithId: #shape_11
+		childWithId: #'shape-11'
 		ifFound: [ self assert: false ]
 		ifNone: [ self assert: true ]
 ]
@@ -491,19 +495,19 @@ BlElementChildrenTest >> testChildWithIdIfFoundifNone2 [
 	| aContainer |
 	aContainer := self hierarchyChildren.
 	aContainer
-		childWithId: #shape_1
+		childWithId: #'shape-1'
 		ifFound: [ self assert: true ]
 		ifNone: [ self assert: false ].
 	aContainer
-		childWithId: #shape_5
+		childWithId: #'shape-5'
 		ifFound: [ self assert: true ]
 		ifNone: [ self assert: false ].
 	aContainer
-		childWithId: #shape_10
+		childWithId: #'shape-10'
 		ifFound: [ self assert: true ]
 		ifNone: [ self assert: false ].
 	aContainer
-		childWithId: #shape_11
+		childWithId: #'shape-11'
 		ifFound: [ self assert: false ]
 		ifNone: [ self assert: true ]
 ]
@@ -514,16 +518,16 @@ BlElementChildrenTest >> testChildWithIdifNone1 [
 	| aContainer |
 	aContainer := self multipleChildren.
 	aContainer
-		childWithId: #shape_1
+		childWithId: #'shape-1'
 		ifNone: [ self assert: false ].
 	aContainer
-		childWithId: #shape_5
+		childWithId: #'shape-5'
 		ifNone: [ self assert: false ].
 	aContainer
-		childWithId: #shape_10
+		childWithId: #'shape-10'
 		ifNone: [ self assert: false ].
 	aContainer
-		childWithId: #shape_11
+		childWithId: #'shape-11'
 		ifNone: [ self assert: true ]
 ]
 
@@ -533,16 +537,16 @@ BlElementChildrenTest >> testChildWithIdifNone2 [
 	| aContainer |
 	aContainer := self hierarchyChildren.
 	aContainer
-		childWithId: #shape_1
+		childWithId: #'shape-1'
 		ifNone: [ self assert: false ].
 	aContainer
-		childWithId: #shape_5
+		childWithId: #'shape-5'
 		ifNone: [ self assert: false ].
 	aContainer
-		childWithId: #shape_10
+		childWithId: #'shape-10'
 		ifNone: [ self assert: false ].
 	aContainer
-		childWithId: #shape_11
+		childWithId: #'shape-11'
 		ifNone: [ self assert: true ]
 ]
 
@@ -557,13 +561,13 @@ BlElementChildrenTest >> testChildren1 [
 		(allChildren allSatisfy: [ :each | each parent = aContainer ]).
 	self
 		assert: (allChildren at: 1)
-		equals: (aContainer childWithId: #shape_1).
+		equals: (aContainer childWithId: #'shape-1').
 	self
 		assert: (allChildren at: 5)
-		equals: (aContainer childWithId: #shape_5).
+		equals: (aContainer childWithId: #'shape-5').
 	self
 		assert: (allChildren at: 10)
-		equals: (aContainer childWithId: #shape_10)
+		equals: (aContainer childWithId: #'shape-10')
 ]
 
 { #category : #tests }
@@ -577,7 +581,7 @@ BlElementChildrenTest >> testChildren2 [
 		(allChildren allSatisfy: [ :each | each parent = aContainer ]).
 	self
 		assert: (allChildren at: 1)
-		equals: (aContainer childWithId: #shape_1)
+		equals: (aContainer childWithId: #'shape-1')
 ]
 
 { #category : #tests }
@@ -603,15 +607,15 @@ BlElementChildrenTest >> testDirectChildWithIdifFoundifNone [
 	| aContainer |
 	aContainer := self hierarchyChildren.
 	aContainer
-		directChildWithId: #shape_1
+		directChildWithId: #'shape-1'
 		ifFound: [ self assert: true ]
 		ifNone: [ self assert: false ].
 	aContainer
-		directChildWithId: #shape_2
+		directChildWithId: #'shape-2'
 		ifFound: [ self assert: false ]
 		ifNone: [ self assert: true ].
 	aContainer
-		directChildWithId: #shape_10
+		directChildWithId: #'shape-10'
 		ifFound: [ self assert: false ]
 		ifNone: [ self assert: true ]
 ]
@@ -623,7 +627,7 @@ BlElementChildrenTest >> testFirstChild [
 	aContainer := self multipleChildren.
 
 	self assert: aContainer firstChild parent equals: aContainer.
-	self assert: aContainer firstChild id equals: #shape_1.
+	self assert: aContainer firstChild id equals: #'shape-1'.
 
 	anElementWithNoChild := BlElement new.
 	[
@@ -637,8 +641,8 @@ BlElementChildrenTest >> testFirstCommonParentifFoundifNone [
 	| aContainer aChild1 aChild2 |
 	aContainer := self hierarchyChildren.
 
-	aChild1 := aContainer childWithId: #shape_1.
-	aChild2 := aContainer childWithId: #shape_2.
+	aChild1 := aContainer childWithId: #'shape-1'.
+	aChild2 := aContainer childWithId: #'shape-2'.
 	aChild1
 		firstCommonParent: aChild2
 		ifFound: [ :parent | self assert: parent equals: aChild1 ]
@@ -648,8 +652,8 @@ BlElementChildrenTest >> testFirstCommonParentifFoundifNone [
 		ifFound: [ :parent | self assert: parent equals: aChild1 ]
 		ifNone: [ self assert: false ].
 
-	aChild1 := aContainer childWithId: #shape_1.
-	aChild2 := aContainer childWithId: #shape_10.
+	aChild1 := aContainer childWithId: #'shape-1'.
+	aChild2 := aContainer childWithId: #'shape-10'.
 	aChild1
 		firstCommonParent: aChild2
 		ifFound: [ :parent | self assert: parent equals: aChild1 ]
@@ -659,7 +663,7 @@ BlElementChildrenTest >> testFirstCommonParentifFoundifNone [
 		ifFound: [ :parent | self assert: parent equals: aChild1 ]
 		ifNone: [ self assert: false ].
 
-	aChild1 := aContainer childWithId: #shape_1.
+	aChild1 := aContainer childWithId: #'shape-1'.
 	aChild2 := BlElement new.
 	aChild1
 		firstCommonParent: aChild2
@@ -689,16 +693,16 @@ BlElementChildrenTest >> testIsFirstChild [
 
 	| aContainer aChild |
 	aContainer := self multipleChildren.
-	aChild := aContainer childWithId: #shape_1.
+	aChild := aContainer childWithId: #'shape-1'.
 	self assert: aChild isFirstChild equals: true.
 
-	aChild := aContainer childWithId: #shape_2.
+	aChild := aContainer childWithId: #'shape-2'.
 	self assert: aChild isFirstChild equals: false.
 
-	aChild := aContainer childWithId: #shape_9.
+	aChild := aContainer childWithId: #'shape-9'.
 	self assert: aChild isFirstChild equals: false.
 
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 	self assert: aChild isFirstChild equals: false.
 
 	aChild := BlElement new.
@@ -712,16 +716,16 @@ BlElementChildrenTest >> testIsLastChild [
 
 	| aContainer aChild |
 	aContainer := self multipleChildren.
-	aChild := aContainer childWithId: #shape_1.
+	aChild := aContainer childWithId: #'shape-1'.
 	self assert: aChild isLastChild equals: false.
 
-	aChild := aContainer childWithId: #shape_2.
+	aChild := aContainer childWithId: #'shape-2'.
 	self assert: aChild isLastChild equals: false.
 
-	aChild := aContainer childWithId: #shape_9.
+	aChild := aContainer childWithId: #'shape-9'.
 	self assert: aChild isLastChild equals: false.
 
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 	self assert: aChild isLastChild equals: true.
 
 	aChild := BlElement new.
@@ -735,13 +739,13 @@ BlElementChildrenTest >> testNextSiblingDo [
 
 	| aContainer aChild |
 	aContainer := self multipleChildren.
-	aChild := aContainer childWithId: #shape_1.
+	aChild := aContainer childWithId: #'shape-1'.
 	aChild nextSiblingDo: [ :next |
-		self assert: next equals: (aContainer childWithId: #shape_2) ].
-	aChild := aContainer childWithId: #shape_5.
+		self assert: next equals: (aContainer childWithId: #'shape-2') ].
+	aChild := aContainer childWithId: #'shape-5'.
 	aChild nextSiblingDo: [ :next |
-		self assert: next equals: (aContainer childWithId: #shape_6) ].
-	aChild := aContainer childWithId: #shape_10.
+		self assert: next equals: (aContainer childWithId: #'shape-6') ].
+	aChild := aContainer childWithId: #'shape-10'.
 	aChild nextSiblingDo: [ :next | self assert: false ]
 ]
 
@@ -750,23 +754,23 @@ BlElementChildrenTest >> testNextSiblingSuchThatdo [
 
 	| aContainer aChild |
 	aContainer := self multipleChildren.
-	aChild := aContainer childWithId: #shape_1.
+	aChild := aContainer childWithId: #'shape-1'.
 	aChild
-		nextSiblingSuchThat: [ :next | next id = #shape_8 ]
+		nextSiblingSuchThat: [ :next | next id = #'shape-8' ]
 		do: [ :next |
-		self assert: next equals: (aContainer childWithId: #shape_8) ].
-	aChild := aContainer childWithId: #shape_5.
+		self assert: next equals: (aContainer childWithId: #'shape-8') ].
+	aChild := aContainer childWithId: #'shape-5'.
 	aChild
-		nextSiblingSuchThat: [ :next | next id = #shape_8 ]
+		nextSiblingSuchThat: [ :next | next id = #'shape-8' ]
 		do: [ :next |
-		self assert: next equals: (aContainer childWithId: #shape_8) ].
-	aChild := aContainer childWithId: #shape_5.
+		self assert: next equals: (aContainer childWithId: #'shape-8') ].
+	aChild := aContainer childWithId: #'shape-5'.
 	aChild
-		nextSiblingSuchThat: [ :next | next id = #shape_4 ]
+		nextSiblingSuchThat: [ :next | next id = #'shape-4' ]
 		do: [ :next | self assert: false ].
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 	aChild
-		nextSiblingSuchThat: [ :next | next id = #shape_8 ]
+		nextSiblingSuchThat: [ :next | next id = #'shape-8' ]
 		do: [ :next | self assert: false ]
 ]
 
@@ -776,13 +780,13 @@ BlElementChildrenTest >> testParent [
 	| aContainer |
 	aContainer := self multipleChildren.
 	self
-		assert: (aContainer childWithId: #shape_1) parent
+		assert: (aContainer childWithId: #'shape-1') parent
 		equals: aContainer.
 	self
-		assert: (aContainer childWithId: #shape_5) parent
+		assert: (aContainer childWithId: #'shape-5') parent
 		equals: aContainer.
 	self
-		assert: (aContainer childWithId: #shape_10) parent
+		assert: (aContainer childWithId: #'shape-10') parent
 		equals: aContainer.
 	self assert: aContainer parent equals: nil
 ]
@@ -792,13 +796,13 @@ BlElementChildrenTest >> testParentDo [
 
 	| aContainer aChild res |
 	aContainer := self hierarchyChildren.
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 	res := OrderedCollection new.
 
 	aChild parentDo: [ :parent | res add: parent ].
 	self
 		assert: res asArray
-		equals: { (aContainer childWithId: #shape_9) }.
+		equals: { (aContainer childWithId: #'shape-9') }.
 
 	res := OrderedCollection new.
 	aContainer parentDo: [ :parent | res add: parent ].
@@ -810,14 +814,14 @@ BlElementChildrenTest >> testPreviousSiblingDo [
 
 	| aContainer aChild |
 	aContainer := self multipleChildren.
-	aChild := aContainer childWithId: #shape_1.
+	aChild := aContainer childWithId: #'shape-1'.
 	aChild previousSiblingDo: [ :next | self assert: false ].
-	aChild := aContainer childWithId: #shape_5.
+	aChild := aContainer childWithId: #'shape-5'.
 	aChild previousSiblingDo: [ :next |
-		self assert: next equals: (aContainer childWithId: #shape_4) ].
-	aChild := aContainer childWithId: #shape_10.
+		self assert: next equals: (aContainer childWithId: #'shape-4') ].
+	aChild := aContainer childWithId: #'shape-10'.
 	aChild previousSiblingDo: [ :next |
-		self assert: next equals: (aContainer childWithId: #shape_9) ]
+		self assert: next equals: (aContainer childWithId: #'shape-9') ]
 ]
 
 { #category : #tests }
@@ -825,24 +829,24 @@ BlElementChildrenTest >> testPreviousSiblingSuchThatdo [
 
 	| aContainer aChild |
 	aContainer := self multipleChildren.
-	aChild := aContainer childWithId: #shape_1.
+	aChild := aContainer childWithId: #'shape-1'.
 	aChild
-		previousSiblingSuchThat: [ :next | next id = #shape_8 ]
+		previousSiblingSuchThat: [ :next | next id = #'shape-8' ]
 		do: [ :next | self assert: false ].
-	aChild := aContainer childWithId: #shape_5.
+	aChild := aContainer childWithId: #'shape-5'.
 	aChild
-		previousSiblingSuchThat: [ :next | next id = #shape_8 ]
+		previousSiblingSuchThat: [ :next | next id = #'shape-8' ]
 		do: [ :next | self assert: false ].
-	aChild := aContainer childWithId: #shape_5.
+	aChild := aContainer childWithId: #'shape-5'.
 	aChild
-		previousSiblingSuchThat: [ :next | next id = #shape_4 ]
+		previousSiblingSuchThat: [ :next | next id = #'shape-4' ]
 		do: [ :next |
-		self assert: next equals: (aContainer childWithId: #shape_4) ].
-	aChild := aContainer childWithId: #shape_10.
+		self assert: next equals: (aContainer childWithId: #'shape-4') ].
+	aChild := aContainer childWithId: #'shape-10'.
 	aChild
-		previousSiblingSuchThat: [ :next | next id = #shape_8 ]
+		previousSiblingSuchThat: [ :next | next id = #'shape-8' ]
 		do: [ :next |
-		self assert: next equals: (aContainer childWithId: #shape_8) ]
+		self assert: next equals: (aContainer childWithId: #'shape-8') ]
 ]
 
 { #category : #tests }
@@ -855,7 +859,7 @@ BlElementChildrenTest >> testSiblingsDo [
 	aChild siblingsDo: [ :next | found add: next ].
 	self assert: found size equals: aContainer children size - 1.
 	self assert: (found includes: aChild) not.
-	aChild := aContainer childWithId: #shape_5.
+	aChild := aContainer childWithId: #'shape-5'.
 	found := OrderedCollection new.
 	aChild siblingsDo: [ :next | found add: next ].
 	self assert: found size equals: aContainer children size - 1.
@@ -874,7 +878,7 @@ BlElementChildrenTest >> testTopMostParent [
 
 	| aContainer aChild |
 	aContainer := self hierarchyChildren.
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 	self assert: aChild topMostParent equals: aContainer
 ]
 
@@ -883,13 +887,13 @@ BlElementChildrenTest >> testTopMostParentSuchThatifFoundifNone [
 
 	| aContainer aChild |
 	aContainer := self hierarchyChildren.
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 	aChild
-		topMostParentSuchThat: [ :cur | cur id = #shape_1 ]
+		topMostParentSuchThat: [ :cur | cur id = #'shape-1' ]
 		ifFound: [ :parent | self assert: parent parent equals: aContainer ]
 		ifNone: [ self assert: false ].
 	aContainer
-		topMostParentSuchThat: [ :cur | cur id = #shape_1 ]
+		topMostParentSuchThat: [ :cur | cur id = #'shape-1' ]
 		ifFound: [ self assert: false ]
 		ifNone: [ self assert: true ]
 ]
@@ -899,18 +903,18 @@ BlElementChildrenTest >> testWithAllParents [
 
 	| aContainer aChild |
 	aContainer := self hierarchyChildren.
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 	self assert: aChild withAllParents equals: {
-			(aContainer childWithId: #shape_10).
-			(aContainer childWithId: #shape_9).
-			(aContainer childWithId: #shape_8).
-			(aContainer childWithId: #shape_7).
-			(aContainer childWithId: #shape_6).
-			(aContainer childWithId: #shape_5).
-			(aContainer childWithId: #shape_4).
-			(aContainer childWithId: #shape_3).
-			(aContainer childWithId: #shape_2).
-			(aContainer childWithId: #shape_1).
+			(aContainer childWithId: #'shape-10').
+			(aContainer childWithId: #'shape-9').
+			(aContainer childWithId: #'shape-8').
+			(aContainer childWithId: #'shape-7').
+			(aContainer childWithId: #'shape-6').
+			(aContainer childWithId: #'shape-5').
+			(aContainer childWithId: #'shape-4').
+			(aContainer childWithId: #'shape-3').
+			(aContainer childWithId: #'shape-2').
+			(aContainer childWithId: #'shape-1').
 			aContainer }
 ]
 
@@ -919,12 +923,12 @@ BlElementChildrenTest >> testWithAllParentsDetectifFoundifNone [
 
 	| aContainer aChild |
 	aContainer := self hierarchyChildren.
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 
 	aChild
-		withAllParentsDetect: [ :parent | parent id = #shape_5 ]
+		withAllParentsDetect: [ :parent | parent id = #'shape-5' ]
 		ifFound: [ :parent |
-			self assert: parent equals: (aContainer childWithId: #shape_5) ]
+			self assert: parent equals: (aContainer childWithId: #'shape-5') ]
 		ifNone: [ self assert: false ].
 
 	aChild
@@ -943,21 +947,21 @@ BlElementChildrenTest >> testWithAllParentsDo [
 
 	| aContainer aChild res |
 	aContainer := self hierarchyChildren.
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 	res := OrderedCollection new.
 
 	aChild withAllParentsDo: [ :parent | res add: parent ].
 	self assert: res asArray equals: {
-			(aContainer childWithId: #shape_10).
-			(aContainer childWithId: #shape_9).
-			(aContainer childWithId: #shape_8).
-			(aContainer childWithId: #shape_7).
-			(aContainer childWithId: #shape_6).
-			(aContainer childWithId: #shape_5).
-			(aContainer childWithId: #shape_4).
-			(aContainer childWithId: #shape_3).
-			(aContainer childWithId: #shape_2).
-			(aContainer childWithId: #shape_1).
+			(aContainer childWithId: #'shape-10').
+			(aContainer childWithId: #'shape-9').
+			(aContainer childWithId: #'shape-8').
+			(aContainer childWithId: #'shape-7').
+			(aContainer childWithId: #'shape-6').
+			(aContainer childWithId: #'shape-5').
+			(aContainer childWithId: #'shape-4').
+			(aContainer childWithId: #'shape-3').
+			(aContainer childWithId: #'shape-2').
+			(aContainer childWithId: #'shape-1').
 			aContainer }.
 
 	res := OrderedCollection new.
@@ -970,7 +974,7 @@ BlElementChildrenTest >> testWithAllParentsReversedDo [
 
 	| aContainer aChild all |
 	aContainer := self hierarchyChildren.
-	aChild := aContainer childWithId: #shape_10.
+	aChild := aContainer childWithId: #'shape-10'.
 	all := Array streamContents: [ :stream |
 		aChild withAllParentsReverseDo: [ :each |
 			stream nextPut: each ] ].
@@ -978,16 +982,16 @@ BlElementChildrenTest >> testWithAllParentsReversedDo [
 		assert: all
 		equals: {
 			aContainer.
-			(aContainer childWithId: #shape_1).
-			(aContainer childWithId: #shape_2).
-			(aContainer childWithId: #shape_3).
-			(aContainer childWithId: #shape_4).
-			(aContainer childWithId: #shape_5).
-			(aContainer childWithId: #shape_6).
-			(aContainer childWithId: #shape_7).
-			(aContainer childWithId: #shape_8).
-			(aContainer childWithId: #shape_9).
-			(aContainer childWithId: #shape_10) }
+			(aContainer childWithId: #'shape-1').
+			(aContainer childWithId: #'shape-2').
+			(aContainer childWithId: #'shape-3').
+			(aContainer childWithId: #'shape-4').
+			(aContainer childWithId: #'shape-5').
+			(aContainer childWithId: #'shape-6').
+			(aContainer childWithId: #'shape-7').
+			(aContainer childWithId: #'shape-8').
+			(aContainer childWithId: #'shape-9').
+			(aContainer childWithId: #'shape-10') }
 ]
 
 { #category : #tests }
@@ -997,26 +1001,26 @@ BlElementChildrenTest >> testWithAllParentsUpToDo [
 	aContainer := self hierarchyChildren.
 	res := OrderedCollection new.
 
-	(aContainer childWithId: #shape_10)
-		withAllParentsUpTo: (aContainer childWithId: #shape_5)
+	(aContainer childWithId: #'shape-10')
+		withAllParentsUpTo: (aContainer childWithId: #'shape-5')
 		do: [ :parent | res add: parent ].
 	self assert: res asArray equals: {
-			(aContainer childWithId: #shape_10).
-			(aContainer childWithId: #shape_9).
-			(aContainer childWithId: #shape_8).
-			(aContainer childWithId: #shape_7).
-			(aContainer childWithId: #shape_6) }.
+			(aContainer childWithId: #'shape-10').
+			(aContainer childWithId: #'shape-9').
+			(aContainer childWithId: #'shape-8').
+			(aContainer childWithId: #'shape-7').
+			(aContainer childWithId: #'shape-6') }.
 
 	res := OrderedCollection new.
-	(aContainer childWithId: #shape_5)
-		withAllParentsUpTo: (aContainer childWithId: #shape_10)
+	(aContainer childWithId: #'shape-5')
+		withAllParentsUpTo: (aContainer childWithId: #'shape-10')
 		do: [ :parent | res add: parent ].
 	self assert: res asArray equals: {
-			(aContainer childWithId: #shape_5).
-			(aContainer childWithId: #shape_4).
-			(aContainer childWithId: #shape_3).
-			(aContainer childWithId: #shape_2).
-			(aContainer childWithId: #shape_1).
+			(aContainer childWithId: #'shape-5').
+			(aContainer childWithId: #'shape-4').
+			(aContainer childWithId: #'shape-3').
+			(aContainer childWithId: #'shape-2').
+			(aContainer childWithId: #'shape-1').
 			aContainer }
 ]
 
@@ -1027,24 +1031,24 @@ BlElementChildrenTest >> testWithAllParentsUpTodetectifFoundIfNone [
 	aContainer := self hierarchyChildren.
 
 	res := true.
-	(aContainer childWithId: #shape_10)
-		withAllParentsUpTo: (aContainer childWithId: #shape_5)
-		detect: [ :parent | parent = (aContainer childWithId: #shape_7) ]
+	(aContainer childWithId: #'shape-10')
+		withAllParentsUpTo: (aContainer childWithId: #'shape-5')
+		detect: [ :parent | parent = (aContainer childWithId: #'shape-7') ]
 		ifFound: [ :parent | res := false ]
 		ifNone: [ self assert: true ].
 	self assert: res equals: false.
 
 	res := true.
-	(aContainer childWithId: #shape_10)
-		withAllParentsUpTo: (aContainer childWithId: #shape_5)
+	(aContainer childWithId: #'shape-10')
+		withAllParentsUpTo: (aContainer childWithId: #'shape-5')
 		detect: [ :parent | true ]
 		ifFound: [ :parent | res := false ]
 		ifNone: [ self assert: true ].
 	self assert: res equals: false.
 
 	res := true.
-	(aContainer childWithId: #shape_10)
-		withAllParentsUpTo: (aContainer childWithId: #shape_5)
+	(aContainer childWithId: #'shape-10')
+		withAllParentsUpTo: (aContainer childWithId: #'shape-5')
 		detect: [ :parent | false ]
 		ifFound: [ :parent | res := false ]
 		ifNone: [ self assert: true ].

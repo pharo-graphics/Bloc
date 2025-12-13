@@ -1,7 +1,5 @@
 "
-# Element id
-
-Allows to assign id to `BlElement`. This allows us query a tree of elements
+I represent the identifier of an `BlElement`. This allows query a tree of elements.
 
 "
 Class {
@@ -11,23 +9,28 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlElementId class >> named: aSymbol [
+BlElementId class >> named: aString [
+
 	^ BlElementNamedId new
-		identifier: aSymbol asSymbol
+		  name: aString asSymbol;
+		  yourself
 ]
 
 { #category : #'instance creation' }
 BlElementId class >> noId [
+
 	^ BlElementNoId uniqueInstance
 ]
 
 { #category : #converting }
 BlElementId >> asBlocElementId [
+
 	^ self
 ]
 
 { #category : #converting }
 BlElementId >> asSymbol [
+
 	^ self subclassResponsibility
 ]
 
@@ -41,12 +44,12 @@ BlElementId >> hash [
 
 { #category : #converting }
 BlElementId >> indexed: anIndex [
-	"Convert me to an indexed id with a given index"
-	<return: #BlElementId>
+	"Answer a new indexed id with me as prefix and the given index as suffix"
 
 	^ BlElementIndexedId new
 		prefixId: self;
-		index: anIndex
+		index: anIndex;
+		yourself
 ]
 
 { #category : #converting }
@@ -57,16 +60,19 @@ BlElementId >> isBlocElementId [
 
 { #category : #testing }
 BlElementId >> isIndexed [
+
 	^ false
 ]
 
 { #category : #testing }
 BlElementId >> isNoId [
+
 	^ false
 ]
 
 { #category : #printing }
 BlElementId >> printOn: aStream [
+
 	self class isAbstract
 		ifTrue: [ aStream print: self ]
 		ifFalse: [ aStream print: self asSymbol ]

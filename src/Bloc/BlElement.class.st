@@ -123,8 +123,8 @@ BlElement >> addChild: anElement after: anotherElement [
 BlElement >> addChild: anElement as: aBlElementId [
 	"Add a given element to my children and make it a named container, so that
 	we could add children in that container"
+
 	| aChildId |
-	
 	aChildId := aBlElementId asBlocElementId.
 	
 	self
@@ -824,7 +824,6 @@ BlElement >> childIndexOf: anElement [
 
 { #category : #'children accessing' }
 BlElement >> childWithId: aBlElementId [
-	<return: #BlElement>
 
 	self
 		childWithId: aBlElementId
@@ -1489,7 +1488,6 @@ BlElement >> effectBounds [
 { #category : #'private - accessing' }
 BlElement >> elementId [
 
-	<return: #BlElementId>
 	^ self userData at: #elementId ifAbsent: [ BlElementId noId ]
 ]
 
@@ -2344,6 +2342,13 @@ BlElement >> isVisibleInSpace [
 
 { #category : #accessing }
 BlElement >> labeled: aString [
+
+	self
+		deprecated: 'Use #id: instead. String will be converted to Symbol, too.'
+		transformWith:
+			'`@receiver labeled: `@arg' ->
+			'`@receiver id: `@arg'.
+
 	self id: aString asSymbol
 ]
 
