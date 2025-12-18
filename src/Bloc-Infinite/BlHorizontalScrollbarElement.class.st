@@ -1,3 +1,6 @@
+"
+I'm an horizontal scroll bar element.
+"
 Class {
 	#name : #BlHorizontalScrollbarElement,
 	#superclass : #BlScrollbarElement,

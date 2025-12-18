@@ -20,42 +20,41 @@ Class {
 
 { #category : #'children - accessing' }
 BlInfiniteSmoothScroller >> childAtPosition: aPosition [
-	"@see OBlInfiniteLayout>>#childAtPosition:"
-	<return: #BlElement or: nil>
+	"See `BlInfiniteLayout>>#childAtPosition:`. Return either an `BlElement` or nil."
 
 	^ infiniteElement layout childAtPosition: aPosition
 ]
 
 { #category : #'children - accessing' }
 BlInfiniteSmoothScroller >> childPositionOf: anElement [
-	"@see OBlInfiniteElement>>#childLayoutPositionOf:"
-	<return: #Number>
+	"Answer a number the represents the child position. See `BlInfiniteElement>>#childLayoutPositionOf:`"
 
 	^ infiniteElement childLayoutPositionOf: anElement
 ]
 
 { #category : #'children - accessing' }
 BlInfiniteSmoothScroller >> childrenCount [
-	"@see OBlInfiniteLayout>>#childrenCount"
-	<return: #Number>
 
 	^ infiniteElement layout childrenCount
 ]
 
 { #category : #initialization }
 BlInfiniteSmoothScroller >> defaultAction [
+
 	^ BlInfiniteSmoothScrollerAction new
 ]
 
 { #category : #initialization }
 BlInfiniteSmoothScroller >> initialize [
+
 	super initialize.
-	
+
 	action := self defaultAction
 ]
 
 { #category : #accessing }
 BlInfiniteSmoothScroller >> layout [
+
 	^ infiniteLayout
 ]
 
@@ -71,9 +70,10 @@ BlInfiniteSmoothScroller >> onChildAttached: anElement [
 
 { #category : #scrolling }
 BlInfiniteSmoothScroller >> onScrollBy: aPoint [
+
 	| anInfiniteElement hadJumpTarget |
-	
 	anInfiniteElement := infiniteElement.
+
 	(isRunning not or: [ targetPosition = NoPosition or: [ anInfiniteElement isNil ] ])
 		ifTrue: [ self stop ].
 	
@@ -87,8 +87,7 @@ BlInfiniteSmoothScroller >> onScrollBy: aPoint [
 			"Passed over target position while smooth scrolling"
 			ifFalse: [ targetElement := nil ] ].
 	
-	isRunning
-		ifFalse: [ ^ self ].
+	isRunning ifFalse: [ ^ self ].
 
 	self onSeekTargetStep: aPoint action: action.
 	hadJumpTarget := action hasJumpTarget.
@@ -138,8 +137,8 @@ BlInfiniteSmoothScroller >> onTargetFound: anElement action: aScrollingAction [
 
 { #category : #scrolling }
 BlInfiniteSmoothScroller >> scrollBy: aPoint [
+
 	| anItemCount |
-	
 	anItemCount := infiniteElement state itemCount.
 	
 	"If there are no items in datasource but smooth scroll is running, we need to stop it"
@@ -149,7 +148,6 @@ BlInfiniteSmoothScroller >> scrollBy: aPoint [
 	self targetPosition > anItemCount
 		"requested target position is greater that item count, scroll to the last item instead"
 		ifTrue: [ self targetPosition: anItemCount ].
-
 
 	self onScrollBy: aPoint
 ]
@@ -182,8 +180,7 @@ BlInfiniteSmoothScroller >> startOn: anInfiniteElement [
 { #category : #scrolling }
 BlInfiniteSmoothScroller >> stop [
 
-	isRunning
-		ifFalse: [ ^ self ].
+	isRunning ifFalse: [ ^ self ].
 	
 	self onStop.
 	targetElement := nil.
@@ -201,10 +198,12 @@ BlInfiniteSmoothScroller >> stop [
 
 { #category : #accessing }
 BlInfiniteSmoothScroller >> targetPosition [
+
 	^ targetPosition
 ]
 
 { #category : #accessing }
 BlInfiniteSmoothScroller >> targetPosition: aPosition [
+
 	targetPosition := aPosition
 ]

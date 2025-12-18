@@ -1,3 +1,6 @@
+"
+I'm the scroll `BlScrollFlinger` mode.
+"
 Class {
 	#name : #BlSplineOverScrollerScrollMode,
 	#superclass : #BlSplineOverScrollerMode,
@@ -13,24 +16,24 @@ Class {
 { #category : #updating }
 BlSplineOverScrollerScrollMode >> continueOn: aSplineOverScroller [
 	"Simple scroll mode does not need to continue, animation can be finished"
-	<return: #Boolean>
 
 	^ false
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerScrollMode >> distance [
+
 	^ distance
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerScrollMode >> distance: anObject [
+
 	distance := anObject
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerScrollMode >> duration [
-	<return: #Duration>
 
 	^ duration
 ]
@@ -47,8 +50,8 @@ BlSplineOverScrollerScrollMode >> duration: aDuration [
 
 { #category : #initialization }
 BlSplineOverScrollerScrollMode >> initializeOn: aSplineOverScroller [
+
 	aSplineOverScroller isFinished: false.
-	
 	aSplineOverScroller startPosition: self startPosition.
 	aSplineOverScroller currentPosition: self startPosition.
 	aSplineOverScroller finalPosition: self startPosition + self distance.
@@ -65,27 +68,31 @@ BlSplineOverScrollerScrollMode >> initializeOn: aSplineOverScroller [
 
 { #category : #accessing }
 BlSplineOverScrollerScrollMode >> interpolator [
+
 	^ interpolator
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerScrollMode >> interpolator: anObject [
+
 	interpolator := anObject
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerScrollMode >> startPosition [
+
 	^ startPosition
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerScrollMode >> startPosition: anObject [
+
 	startPosition := anObject
 ]
 
 { #category : #updating }
 BlSplineOverScrollerScrollMode >> updateOn: aSplineOverScroller [
-	<return: #Boolean>
+
 	| aCurrentTime anElapsedTime aDuration |
 
 	aCurrentTime := aSplineOverScroller time now.
@@ -98,7 +105,8 @@ BlSplineOverScrollerScrollMode >> updateOn: aSplineOverScroller [
 			| anInterpolatedTime anInterpolatedTranslation aNewPosition |
 			
 			anInterpolatedTime := self interpolator interpolate: (anElapsedTime / aDuration) asFloat.			
-			anInterpolatedTranslation := anInterpolatedTime * (aSplineOverScroller finalPosition - aSplineOverScroller startPosition).
+			anInterpolatedTranslation :=
+				anInterpolatedTime * (aSplineOverScroller finalPosition - aSplineOverScroller startPosition).
 			aNewPosition := aSplineOverScroller startPosition + anInterpolatedTranslation.
 			
 			aSplineOverScroller currentPosition: aNewPosition ].
