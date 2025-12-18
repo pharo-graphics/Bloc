@@ -1,3 +1,8 @@
+"
+Constants for the scroll flinger algorithm.
+
+See `BlScrollFlinger`
+"
 Class {
 	#name : #BlScrollerConstants,
 	#superclass : #SharedPool,
@@ -49,8 +54,8 @@ BlScrollerConstants class >> initializeSplines [
 	"Precomputes spline position and time
 	https://en.wikipedia.org/wiki/Spline_interpolation
 	https://github.com/android/platform_frameworks_base/blob/master/core/java/android/widget/OverScroller.java#L603"
+
 	| xMin yMin |
-	
 	xMin := 0.0.
 	yMin := 0.0.
 	
@@ -92,5 +97,5 @@ BlScrollerConstants class >> initializeSplines [
 		SplineTime at: anIndex put: coef * ((1.0 - y) * P1 + (y * P2)) + (y * y * y) ].
 
 	SplinePosition at: NbSamples + 1 put: 1.0.
-	SplineTime at: NbSamples + 1 put: 1.0.
+	SplineTime at: NbSamples + 1 put: 1.0
 ]

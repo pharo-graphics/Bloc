@@ -14,12 +14,15 @@ The goal of Fling is to simulate physics and gravity so that it could be used fo
 
 Is a simple smooth animated scroll without support of the overshooting and that relies on an interpolator to compute scroll delta
 
+See:
+* https://en.wikipedia.org/wiki/Spline_interpolation
+* https://github.com/android/platform_frameworks_base/blob/master/core/java/android/widget/OverScroller.java
 "
 Class {
 	#name : #BlOvershootingScroller,
 	#superclass : #Object,
-	#traits : 'TBlDebug + TBlEventTarget',
-	#classTraits : 'TBlDebug classTrait + TBlEventTarget classTrait',
+	#traits : 'TBlEventTarget',
+	#classTraits : 'TBlEventTarget classTrait',
 	#instVars : [
 		'interpolator',
 		'scrollerX',
@@ -28,8 +31,17 @@ Class {
 		'time',
 		'eventDispatcher'
 	],
+	#classVars : [
+		'DefaultDuration'
+	],
 	#category : #'Bloc-Infinite-Scrollable-Core'
 }
+
+{ #category : #'class initialization' }
+BlOvershootingScroller class >> initialize [
+
+	DefaultDuration := 200 milliSeconds
+]
 
 { #category : #'instance creation' }
 BlOvershootingScroller class >> interpolator: anInterpolator [
@@ -41,6 +53,7 @@ BlOvershootingScroller class >> interpolator: anInterpolator [
 
 { #category : #'api - accessing' }
 BlOvershootingScroller >> currentPosition [
+
 	^ self currentX @ self currentY
 ]
 
@@ -53,56 +66,58 @@ BlOvershootingScroller >> currentVelocity [
 
 { #category : #accessing }
 BlOvershootingScroller >> currentX [
+
 	^ scrollerX currentPosition
 ]
 
 { #category : #accessing }
 BlOvershootingScroller >> currentY [
-	^ scrollerY currentPosition
-]
 
-{ #category : #initialization }
-BlOvershootingScroller >> defaultDuration [
-	^ 200 milliSeconds
+	^ scrollerY currentPosition
 ]
 
 { #category : #initialization }
 BlOvershootingScroller >> defaultEventDispatcher [
 	"Return class of event dispatcher.
 	Instantiation happens in initialize"
+
 	^ BlDirectEventDispatcher
 ]
 
 { #category : #initialization }
-BlOvershootingScroller >> defaultFlyweel [
-	^ true
-]
-
-{ #category : #initialization }
 BlOvershootingScroller >> defaultInterpolator [
+
 	^ BlViscousFluidInterpolator default
 ]
 
 { #category : #initialization }
+BlOvershootingScroller >> defaultIsFlywheel [
+
+	^ true
+]
+
+{ #category : #initialization }
 BlOvershootingScroller >> defaultSplineScroller [
+
 	^ BlOvershootingSplineBasedScroller new
 ]
 
 { #category : #'event management accessing' }
 BlOvershootingScroller >> eventDispatcher [
-	"Return an object responsible for event dispatching"
-	<return: #BlDirectEventDispatcher>
+	"Return an `BlDirectEventDispatcher` that is responsible for event dispatching"
 
 	^ eventDispatcher
 ]
 
 { #category : #accessing }
 BlOvershootingScroller >> finalX [
+
 	^ scrollerX finalPosition
 ]
 
 { #category : #accessing }
 BlOvershootingScroller >> finalY [
+
 	^ scrollerY finalPosition
 ]
 
@@ -139,8 +154,8 @@ BlOvershootingScroller >> fling: aStartPosition velocity: aVelocityPoint min: aM
 
 { #category : #'api - scrolling' }
 BlOvershootingScroller >> fling: aStartPosition velocity: aVelocityPoint min: aMinPosition max: aMaxPosition overshot: anOvershotDistance [
+
 	| aVelocityX aVelocityY |
-	
 	aVelocityX := aVelocityPoint x.
 	aVelocityY := aVelocityPoint y.
 	
@@ -174,46 +189,53 @@ BlOvershootingScroller >> fling: aStartPosition velocity: aVelocityPoint min: aM
 
 { #category : #accessing }
 BlOvershootingScroller >> flywheel: aBoolean [
-	"successive fling motions will keep on increasing scroll speed"
+	"Successive fling motions will keep on increasing scroll speed"
+
 	isFlywheel := aBoolean
 ]
 
 { #category : #scrolling }
 BlOvershootingScroller >> forceFinished: aBoolean [
+
 	scrollerX isFinished: aBoolean.
 	scrollerY isFinished: aBoolean
 ]
 
 { #category : #accessing }
 BlOvershootingScroller >> friction: aNumber [
+
 	scrollerX friction: aNumber.
 	scrollerY friction: aNumber
 ]
 
 { #category : #initialization }
 BlOvershootingScroller >> initialize [
+
 	super initialize.
-	
+
 	time := BlTime real.
 	interpolator := self defaultInterpolator.
 	scrollerX := self defaultSplineScroller time: time.
 	scrollerY := self defaultSplineScroller time: time.
-	isFlywheel := self defaultFlyweel.
+	isFlywheel := self defaultIsFlywheel.
 	eventDispatcher := self defaultEventDispatcher on: self
 ]
 
 { #category : #accessing }
 BlOvershootingScroller >> interpolator [
+
 	^ interpolator
 ]
 
 { #category : #accessing }
 BlOvershootingScroller >> interpolator: anObject [
+
 	interpolator := anObject
 ]
 
 { #category : #testing }
 BlOvershootingScroller >> isFinished [
+
 	^ scrollerX isFinished and: [ scrollerY isFinished ]
 ]
 
@@ -226,7 +248,6 @@ BlOvershootingScroller >> isOverScrolled [
 	to restore a valid position will then be stopped. The caller has to take into account the fact that the started scroll will start from an overscrolled position.
 	
 	I return true when the current position is overscrolled and in the process of interpolating back to a valid value"
-	<return: #Boolean>
 
 	^ (scrollerX isFinished not and: [ scrollerX isSpline not ])
 		or: [ scrollerY isFinished not and: [ scrollerY isSpline not ] ]
@@ -234,8 +255,8 @@ BlOvershootingScroller >> isOverScrolled [
 
 { #category : #testing }
 BlOvershootingScroller >> isScrollingInDirection: aVectorPoint [
+
 	| aDeltaX aDeltaY |
-	
 	aDeltaX := scrollerX finalPosition - scrollerX startPosition.
 	aDeltaY := scrollerY finalPosition - scrollerY startPosition.
 	
@@ -293,7 +314,6 @@ BlOvershootingScroller >> notifyVerticalEdgeReached: aStartPosition final: aFina
 BlOvershootingScroller >> run [
 	"Call this when you want to know the new location.
 	If it returns true, the animation is not yet finished."
-	<return: #Boolean>
 
 	self isFinished
 		ifTrue: [
@@ -324,18 +344,18 @@ BlOvershootingScroller >> scrollerY [
 
 { #category : #scrolling }
 BlOvershootingScroller >> springBack: aStartPoint min: aMinPoint max: aMaxPoint [
-	| didSpringX didSpringY |
 
+	| didSpringX didSpringY |
 	didSpringX := scrollerX springback: aStartPoint x min: aMinPoint x max: aMaxPoint x.
 	didSpringY := scrollerY springback: aStartPoint y min: aMinPoint y max: aMaxPoint y.
-	
+
 	^ didSpringX or: [ didSpringY ]
 ]
 
 { #category : #'api - scrolling' }
 BlOvershootingScroller >> startScrollAt: aStartPoint by: aDeltaPoint [
 
-	self startScrollAt: aStartPoint by: aDeltaPoint during: self defaultDuration
+	self startScrollAt: aStartPoint by: aDeltaPoint during: DefaultDuration
 ]
 
 { #category : #'api - scrolling' }
@@ -356,23 +376,25 @@ BlOvershootingScroller >> startScrollAt: aStartPoint by: aDeltaPoint during: aDu
 
 { #category : #accessing }
 BlOvershootingScroller >> startX [
+
 	^ scrollerX startPosition
 ]
 
 { #category : #accessing }
 BlOvershootingScroller >> startY [
+
 	^ scrollerY startPosition
 ]
 
 { #category : #accessing }
 BlOvershootingScroller >> time [
-	<return: #BlTime>
 	
 	^ time
 ]
 
 { #category : #accessing }
 BlOvershootingScroller >> time: aTime [
+
 	time := aTime.
 	scrollerX time: aTime.
 	scrollerY time: aTime
@@ -384,7 +406,7 @@ BlOvershootingScroller >> timePassed [
 
 	| aTime aStartTime |
 	
-	aTime := DateAndTime millisecondClockValue.
+	aTime := Time millisecondClockValue.
 	aStartTime := scrollerX startTime min: scrollerY startTime.
 
 	^ aTime - aStartTime

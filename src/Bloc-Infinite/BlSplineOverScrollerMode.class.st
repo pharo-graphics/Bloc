@@ -1,14 +1,15 @@
+"
+I'm a `BlScrollFlinger` mode.
+"
 Class {
 	#name : #BlSplineOverScrollerMode,
 	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#category : #'Bloc-Infinite-Scrollable-Helpers'
 }
 
 { #category : #updating }
 BlSplineOverScrollerMode >> continueOn: aSplineOverScroller [
-	<return: #Boolean>
+	"Answer a Boolean that indicates whether scroll animation should continue."
 	
 	^ self subclassResponsibility
 ]
@@ -25,12 +26,13 @@ BlSplineOverScrollerMode >> finishOn: aSplineOverScroller [
 
 { #category : #initialization }
 BlSplineOverScrollerMode >> initializeOn: aSplineOverScroller [
+
 	self subclassResponsibility
 ]
 
 { #category : #updating }
 BlSplineOverScrollerMode >> updateOn: aSplineOverScroller [
-	<return: #Boolean>
+	"Update and return true if update has been done and false if animation duration has been reached"
 
 	self subclassResponsibility
 ]

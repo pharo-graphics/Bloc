@@ -1,3 +1,6 @@
+"
+I'm a ballistic `BlScrollFlinger` step.
+"
 Class {
 	#name : #BlSplineOverScrollerBallisticStep,
 	#superclass : #BlSplineOverScrollerStep,
@@ -7,9 +10,8 @@ Class {
 { #category : #hooks }
 BlSplineOverScrollerBallisticStep >> onFinished: aSplineOverScroller [
 	"Scroller being in ballistic state should spring back, so we continue"
-	<return: #Boolean>
+
 	| aNewStartTime |
-	
 	aNewStartTime := aSplineOverScroller startTime + aSplineOverScroller duration.
 	aSplineOverScroller startTime: aNewStartTime.
 
