@@ -16,16 +16,35 @@ BlElement >> aeApplyClippingWithAllParentsOn: aCanvas [
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeAsForm [
 
-	| invalidationBounds aCanvas |
-	self isLayoutRequested ifTrue: [ self forceLayout ].
+	| topMostBounds transformedGeometryBounds aCanvas matrix |
+	self isLayoutRequested ifTrue: [ self forceLayout ]. "We want to consider our border, effect, as well as children's."
+	topMostBounds := self topMostParent bounds asRectangle.
 
-	"We want to consider our border, effect, as well as children's."
-	invalidationBounds := self invalidationBoundsInParent.
-	aCanvas := AeCanvas extent: invalidationBounds extent.
-	aCanvas pathTranslate: invalidationBounds origin negated.
+	matrix := BlMatrix2D new.
+	self allParentsReverseDo: [ :e | matrix := e transformation matrix copy multiplyBy: matrix ].
+	
+	self transformation asElementTransformation class = BlElementAbsoluteTransformation 
+		ifFalse: [ matrix := self transformation matrix copy multiplyBy: matrix ].
 
-	self aeFullDrawOn: aCanvas.
-	^ aCanvas asForm
+	transformedGeometryBounds := self geometryBounds copy.	
+	matrix transformBounds: transformedGeometryBounds.
+
+	self withAllParentsReverseDo: [ :e | transformedGeometryBounds translateBy: e position ].
+
+	transformedGeometryBounds expandBy: 2.0.
+
+	aCanvas := AeCanvas extent: transformedGeometryBounds extent.
+	aCanvas privateAeCairoSurface deviceOffset: transformedGeometryBounds origin negated.
+	aCanvas clippingRectangle: topMostBounds.
+
+	
+	aCanvas restoreContextAfter: [ 
+		self allParentsReverseDo: [ :e | 
+			aCanvas pathTranslate: e position.
+			e transformation aeApplyTo: aCanvas. ].
+		self aeFullDrawOn: aCanvas ].
+	
+	^ aCanvas asForm 
 ]
 
 { #category : #'*Bloc-Alexandrie' }
