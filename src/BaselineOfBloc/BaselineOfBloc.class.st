@@ -202,12 +202,25 @@ BaselineOfBloc >> baseline: spec [
 					'Bloc-Text-Examples'
 					'BlocHost-OSWindow-SDL2') ].
 
-			"Ignoring cycle with ('Bloc-Tests')"
+			"Cycles ignored ('Bloc-Examples')"
+			spec
+				package: 'Bloc-Tests'
+				with: [ spec requires: #(
+					'Bloc'
+					'Bloc-Text-Elements'
+					'BlocHost-Mock'
+					'BlocHost-Morphic'
+					'BlocHost-OSWindow-SDL2') ].
+
 			spec
 				package: 'Bloc-DevTool'
-				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Text-Elements' 'Bloc-Text-Rope') ].
+				with: [ spec requires: #(
+					'Bloc'
+					'Bloc-Layout'
+					'Bloc-Tests'
+					'Bloc-Text-Elements'
+					'Bloc-Text-Rope') ].
 
-			"Ignoring cycle with ('Bloc-Tests')"
 			spec
 				package: 'Bloc-Examples'
 				with: [ spec requires: #(
@@ -216,20 +229,11 @@ BaselineOfBloc >> baseline: spec [
 					'Bloc-DevTool'
 					'Bloc-Layout'
 					'Bloc-Scripter'
+					'Bloc-Tests'
 					'Bloc-Text'
 					'Bloc-Text-Elements'
 					'Bloc-Text-Rope'
 					'BlocHost-Morphic') ].
-
-			spec
-				package: 'Bloc-Tests'
-				with: [ spec requires: #(
-					'Bloc'
-					'Bloc-Examples'
-					'Bloc-Text-Elements'
-					'BlocHost-Mock'
-					'BlocHost-Morphic'
-					'BlocHost-OSWindow-SDL2') ].
 
 			spec
 				package: 'Bloc-FocusFinder-Examples'
