@@ -17,7 +17,7 @@ BaselineOfBloc >> baseline: spec [
 
 			spec
 				package: 'Bloc'
-				with: [ spec requires: #('Bloc-Display' 'Bloc-Layout' 'Bloc-Text-Elements') ].
+				with: [ spec requires: #('Bloc-Display') ].
 
 			spec
 				package: 'Bloc-Alexandrie'
@@ -101,7 +101,6 @@ BaselineOfBloc >> baseline: spec [
 					'Bloc-DevTool'
 					'Bloc-Layout'
 					'Bloc-Scripter'
-					'Bloc-Tests'
 					'Bloc-Text'
 					'Bloc-Text-Elements'
 					'Bloc-Text-Rope'
