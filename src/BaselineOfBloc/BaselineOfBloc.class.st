@@ -1,3 +1,11 @@
+"
+This Baseline contains the code for Bloc that may be included in the future in Pharo. 
+It retrofits a part of the development made at http://github.com/feenkcom/bloc.
+This version will focus on core features and stability.
+We are currently identifying the core we want for Pharo.
+
+See BaselineOfBloc for more information about Bloc in general.
+"
 Class {
 	#name : #BaselineOfBloc,
 	#superclass : #BaselineOf,
@@ -13,7 +21,7 @@ BaselineOfBloc >> baseline: spec [
 		do: [ 
 			self
 				declareAlexandrieOn: spec;
-				declareXMLOn: spec.
+				declareXMLParserOn: spec.
 
 			spec package: 'Bloc-Display'.
 
@@ -120,7 +128,7 @@ BaselineOfBloc >> baseline: spec [
 
 			spec
 				package: 'Bloc-SVG'
-				with: [ spec requires: #('Bloc' 'Bloc-Text' 'Bloc-Text-Elements' 'Bloc-Text-Rope' 'XML') ].
+				with: [ spec requires: #('Bloc' 'Bloc-Text' 'Bloc-Text-Elements' 'Bloc-Text-Rope' 'XMLParser') ].
 
 			spec
 				package: 'Bloc-Alexandrie-SVG'
@@ -277,9 +285,9 @@ BaselineOfBloc >> declareAlexandrieOn: spec [
 ]
 
 { #category : #'external projects' }
-BaselineOfBloc >> declareXMLOn: spec [
+BaselineOfBloc >> declareXMLParserOn: spec [
 
-	spec baseline: 'XML' with: [
+	spec baseline: 'XMLParser' with: [
 		spec
 			repository: 'github://pharo-contributions/XML-XMLParser:master/src';
 			loads: #( Core ) ]
