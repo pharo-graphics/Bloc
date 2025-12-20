@@ -202,7 +202,6 @@ BaselineOfBloc >> baseline: spec [
 					'Bloc-Text-Examples'
 					'BlocHost-OSWindow-SDL2') ].
 
-			"Cycles ignored ('Bloc-Examples')"
 			spec
 				package: 'Bloc-Tests'
 				with: [ spec requires: #(
