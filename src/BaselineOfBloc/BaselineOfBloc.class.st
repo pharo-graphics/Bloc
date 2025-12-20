@@ -128,7 +128,12 @@ BaselineOfBloc >> baseline: spec [
 
 			spec
 				package: 'Bloc-SVG'
-				with: [ spec requires: #('Bloc' 'Bloc-Text' 'Bloc-Text-Elements' 'Bloc-Text-Rope' 'XMLParser') ].
+				with: [ spec requires: #(
+					'Bloc'
+					'Bloc-Text'
+					'Bloc-Text-Elements'
+					'Bloc-Text-Rope'
+					'XMLParser') ].
 
 			spec
 				package: 'Bloc-Alexandrie-SVG'
@@ -197,12 +202,12 @@ BaselineOfBloc >> baseline: spec [
 					'Bloc-Text-Examples'
 					'BlocHost-OSWindow-SDL2') ].
 
-			"Ignoring cycle with #('Bloc-Tests')"
+			"Ignoring cycle with ('Bloc-Tests')"
 			spec
 				package: 'Bloc-DevTool'
 				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Text-Elements' 'Bloc-Text-Rope') ].
 
-			"Ignoring cycle with #('Bloc-Tests')"
+			"Ignoring cycle with ('Bloc-Tests')"
 			spec
 				package: 'Bloc-Examples'
 				with: [ spec requires: #(
