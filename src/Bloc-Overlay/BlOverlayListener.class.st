@@ -54,11 +54,11 @@ BlOverlayListener >> elementTransformationInSpaceChangedEvent: anEvent [
 
 { #category : #'api - accessing' }
 BlOverlayListener >> eventsToHandle [
+
 	^ {
-		BlElementExtentChangedEvent .
-		BlElementPositionInSpaceChangedEvent .
-		BlElementTransformationInSpaceChangedEvent .
-	}
+		  BlElementExtentChangedEvent.
+		  BlElementPositionInSpaceChangedEvent.
+		  BlElementTransformationInSpaceChangedEvent }
 ]
 
 { #category : #geometry }
