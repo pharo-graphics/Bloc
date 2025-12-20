@@ -174,6 +174,56 @@ BlGeometryVisualAndLayoutBoundsExamples >> fullyVisibleTriangle [
 	^ aContainer
 ]
 
+{ #category : #geometries }
+BlGeometryVisualAndLayoutBoundsExamples >> histogram [
+	<sampleInstance>
+	<demo>
+	
+	| ramp orientations colors width height gap container |
+	ramp := (0 to: 1 by: 0.2).
+	orientations := #(beHorizontal beHorizontalInverted beVertical beVerticalInverted).
+	colors := Color wheel: orientations size.
+	width := 150.
+	height := 100.
+	gap := 10.
+
+	container := BlElement new.
+	container extent: gap + (orientations size * (width + gap)) @ (50 + height).
+	container layout: (BlLinearLayout new cellSpacing: gap; yourself).
+
+	orientations withIndexDo: [ :each :index |
+			| cell g |
+			cell := BlElement new.
+			cell clipChildren: false.
+			cell layout: BlLinearLayout vertical.
+			cell border: (BlBorder paint: Color black width: 0.5).
+			cell margin: (BlInsets vertical: gap).
+			cell constraintsDo: [:c |
+				c horizontal fitContent.
+				c vertical fitContent ].
+			
+			g := BlHistogramGeometry values: ramp.
+			g perform: each.
+
+			cell addChild: (BlElement new
+				border: (BlBorder paint: Color black width: 1);
+				width: width;
+				height: height;
+				background: (colors at: index);
+				geometry: g;
+				yourself).
+
+			cell addChild: (BlTextElement new
+				text: each asString asRopedText;
+				editorMeasurement;
+				constraintsDo: [:c | c linear horizontal alignCenter ];
+				yourself).
+
+			container addChild: cell ].
+
+	^ container
+]
+
 { #category : #'debugging triangle and text' }
 BlGeometryVisualAndLayoutBoundsExamples >> iconAndTextContainer [
 
@@ -307,6 +357,49 @@ BlGeometryVisualAndLayoutBoundsExamples >> rectangleWithSmallerGeometryOutside [
 	aRectangleElement outskirts: BlOutskirts outside.
 
 	^ aRectangleElement
+]
+
+{ #category : #geometries }
+BlGeometryVisualAndLayoutBoundsExamples >> sigmoid [
+	<sampleInstance>
+
+	| geometry |
+	geometry := BlSigmoidGeometry new from: 0 asPoint to: 100 asPoint; yourself.
+	geometry beVertical.
+
+	^ BlElement new
+		geometry: geometry;
+		border: (BlBorder paint: Color blue width: 3);
+		beOutskirtsCentered;
+		extent: 100 asPoint;
+		yourself
+]
+
+{ #category : #geometries }
+BlGeometryVisualAndLayoutBoundsExamples >> stadium [
+	<sampleInstance>
+	<demo>
+	
+	| extents gap container |
+	extents := { 200@100. 100@200. 100@100 }.
+	gap := 10.
+
+	container := BlElement new.
+	container extent: 600 @ 200.
+
+	container layout: (BlLinearLayout new cellSpacing: gap; yourself).
+
+	extents do: [ :each |
+		container addChild: (BlElement new
+			extent: each;
+			border: (BlBorder paint: Color black width: 2);
+			background: Color blue;
+			geometry: BlStadiumGeometry new;
+			addEventHandlerOn: BlMouseEnterEvent do: [ :evt | evt target opacity: 0.5 ];
+			addEventHandlerOn: BlMouseLeaveEvent do: [ :evt | evt target opacity: 1.0 ];
+			yourself) ].
+
+	^ container
 ]
 
 { #category : #star }

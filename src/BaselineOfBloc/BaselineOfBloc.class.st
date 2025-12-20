@@ -15,9 +15,75 @@ BaselineOfBloc >> baseline: spec [
 				declareAlexandrieOn: spec;
 				declareXMLOn: spec.
 
+			spec package: 'Bloc-Display'.
+
 			spec
 				package: 'Bloc'
 				with: [ spec requires: #('Bloc-Display') ].
+
+			spec
+				package: 'Bloc-Animation'
+				with: [ spec requires: #('Bloc') ].
+
+			spec
+				package: 'Bloc-Animation-Tests'
+				with: [ spec requires: #('Bloc' 'Bloc-Animation') ].
+
+			spec
+				package: 'Bloc-CommandApplier'
+				with: [ spec requires: #('Bloc') ].
+
+			spec
+				package: 'Bloc-Display-Tests'
+				with: [ spec requires: #('Bloc-Display') ].
+
+			spec
+				package: 'Bloc-FocusFinder'
+				with: [ spec requires: #('Bloc') ].
+
+			spec
+				package: 'Bloc-Layout'
+				with: [ spec requires: #('Bloc') ].
+
+			spec
+				package: 'Bloc-Layout-Resizer'
+				with: [ spec requires: #('Bloc') ].
+
+			spec
+				package: 'Bloc-LayoutZoomable'
+				with: [ spec requires: #('Bloc' 'Bloc-Animation' 'Bloc-Layout') ].
+
+			spec
+				package: 'Bloc-Overlay'
+				with: [ spec requires: #('Bloc') ].
+
+			spec
+				package: 'Bloc-PharoExtensions'
+				with: [ spec requires: #('Bloc') ].
+
+			spec
+				package: 'Bloc-PullAndSlide'
+				with: [ spec requires: #('Bloc') ].
+
+			spec
+				package: 'Bloc-Infinite'
+				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-PullAndSlide') ].
+
+			spec
+				package: 'Bloc-Rules'
+				with: [ spec requires: #('Bloc') ].
+
+			spec
+				package: 'Bloc-Scalable'
+				with: [ spec requires: #('Bloc') ].
+
+			spec
+				package: 'Bloc-Text'
+				with: [ spec requires: #('Bloc') ].
+
+			spec
+				package: 'Bloc-Text-Elements'
+				with: [ spec requires: #('Bloc' 'Bloc-Text') ].
 
 			spec
 				package: 'Bloc-Alexandrie'
@@ -33,35 +99,61 @@ BaselineOfBloc >> baseline: spec [
 				with: [ spec requires: #('Alexandrie' 'Bloc' 'Bloc-Alexandrie') ].
 
 			spec
-				package: 'Bloc-Alexandrie-SVG'
-				with: [ spec requires: #('Bloc' 'Bloc-SVG') ].
-
-			spec
-				package: 'Bloc-Alexandrie-Tests'
-				with: [ spec requires: #(
-					'Alexandrie'
-					'Bloc'
-					'Bloc-Alexandrie'
-					'Bloc-Layout'
-					'Bloc-Text-Elements'
-					'Bloc-Text-Examples'
-					'BlocHost-OSWindow-SDL2') ].
-
-			spec
-				package: 'Bloc-Animation'
-				with: [ spec requires: #('Bloc') ].
-
-			spec
-				package: 'Bloc-Animation-Tests'
-				with: [ spec requires: #('Bloc' 'Bloc-Animation') ].
-
-			spec
 				package: 'Bloc-ColorPicker'
 				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Text-Elements') ].
 
 			spec
-				package: 'Bloc-CommandApplier'
+				package: 'Bloc-DragNDrop'
+				with: [ spec requires: #('Bloc' 'Bloc-Animation' 'Bloc-Layout' 'Bloc-Text-Elements') ].
+
+			spec
+				package: 'Bloc-Layout-Examples'
+				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Text-Elements') ].
+
+			spec
+				package: 'Bloc-Text-Examples'
+				with: [ spec requires: #('Bloc-Alexandrie' 'Bloc-Text') ].
+
+			spec
+				package: 'Bloc-Text-Rope'
+				with: [ spec requires: #('Bloc' 'Bloc-Text') ].
+
+			spec
+				package: 'Bloc-SVG'
+				with: [ spec requires: #('Bloc' 'Bloc-Text' 'Bloc-Text-Elements' 'Bloc-Text-Rope' 'XML') ].
+
+			spec
+				package: 'Bloc-Alexandrie-SVG'
+				with: [ spec requires: #('Bloc' 'Bloc-SVG') ].
+
+			spec
+				package: 'Bloc-Text-Rope-Tests'
+				with: [ spec requires: #('Bloc-Text' 'Bloc-Text-Rope') ].
+
+			spec
+				package: 'Bloc-Text-Tests'
+				with: [ spec requires: #('Bloc' 'Bloc-Text') ].
+
+			spec
+				package: 'BlocHost-Mock'
 				with: [ spec requires: #('Bloc') ].
+
+			spec
+				package: 'Bloc-Scripter'
+				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'BlocHost-Mock') ].
+
+			spec
+				package: 'BlocHost-Morphic'
+				with: [ spec requires: #('Bloc') ].
+
+			spec
+				package: 'Bloc-Spec2'
+				with: [ spec requires: #(
+					'Bloc'
+					'Bloc-Layout'
+					'Bloc-Text'
+					'Bloc-Text-Rope'
+					'BlocHost-Morphic') ].
 
 			spec
 				package: 'Bloc-Demo'
@@ -75,131 +167,35 @@ BaselineOfBloc >> baseline: spec [
 					'Bloc-Text-Elements') ].
 
 			spec
-				package: 'Bloc-DevTool'
+				package: 'Bloc-Spec2-Tests'
+				with: [ spec requires: #('Bloc' 'Bloc-Spec2') ].
+
+			spec
+				package: 'BlocHost-OSWindow'
+				with: [ spec requires: #('Bloc') ].
+
+			spec
+				package: 'BlocHost-OSWindow-SDL2'
+				with: [ spec requires: #('Bloc' 'BlocHost-OSWindow') ].
+
+			spec
+				package: 'Bloc-Alexandrie-Tests'
 				with: [ spec requires: #(
+					'Alexandrie'
 					'Bloc'
+					'Bloc-Alexandrie'
 					'Bloc-Layout'
-					'Bloc-Tests'
 					'Bloc-Text-Elements'
-					'Bloc-Text-Rope') ].
-
-			spec package: 'Bloc-Display'.
-
-			spec
-				package: 'Bloc-Display-Tests'
-				with: [ spec requires: #('Bloc-Display') ].
+					'Bloc-Text-Examples'
+					'BlocHost-OSWindow-SDL2') ].
 
 			spec
-				package: 'Bloc-DragNDrop'
-				with: [ spec requires: #('Bloc' 'Bloc-Animation' 'Bloc-Layout' 'Bloc-Text-Elements') ].
+				package: 'Bloc-DevTool'
+				with: [ spec requires: #('Bloc-Tests') ].
 
 			spec
 				package: 'Bloc-Examples'
-				with: [ spec requires: #(
-					'Bloc'
-					'Bloc-Animation'
-					'Bloc-DevTool'
-					'Bloc-Layout'
-					'Bloc-Scripter'
-					'Bloc-Text'
-					'Bloc-Text-Elements'
-					'Bloc-Text-Rope'
-					'BlocHost-Morphic') ].
-
-			spec
-				package: 'Bloc-FocusFinder'
-				with: [ spec requires: #('Bloc') ].
-
-			spec
-				package: 'Bloc-FocusFinder-Examples'
-				with: [ spec requires: #('Bloc' 'Bloc-FocusFinder' 'Bloc-Layout' 'Bloc-Tests') ].
-
-			spec
-				package: 'Bloc-Infinite'
-				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-PullAndSlide') ].
-
-			spec
-				package: 'Bloc-Infinite-Tests'
-				with: [ spec requires: #('Bloc' 'Bloc-Infinite' 'Bloc-Layout' 'Bloc-Tests') ].
-
-			spec
-				package: 'Bloc-Layout'
-				with: [ spec requires: #('Bloc') ].
-
-			spec
-				package: 'Bloc-Layout-Examples'
-				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Text-Elements') ].
-
-			spec
-				package: 'Bloc-Layout-Resizer'
-				with: [ spec requires: #('Bloc') ].
-
-			spec
-				package: 'Bloc-Layout-Tests'
-				with: [ spec requires: #(
-					'Bloc'
-					'Bloc-DevTool'
-					'Bloc-Layout'
-					'Bloc-Tests'
-					'Bloc-Text'
-					'Bloc-Text-Elements') ].
-
-			spec
-				package: 'Bloc-LayoutZoomable'
-				with: [ spec requires: #('Bloc' 'Bloc-Animation' 'Bloc-Layout') ].
-
-			spec
-				package: 'Bloc-Overlay'
-				with: [ spec requires: #('Bloc') ].
-
-			spec
-				package: 'Bloc-Overlay-Examples'
-				with: [ spec requires: #('Bloc' 'Bloc-Overlay' 'Bloc-PullAndSlide' 'Bloc-Tests') ].
-
-			spec
-				package: 'Bloc-PharoExtensions'
-				with: [ spec requires: #('Bloc') ].
-
-			spec
-				package: 'Bloc-PullAndSlide'
-				with: [ spec requires: #('Bloc') ].
-
-			spec
-				package: 'Bloc-Rules'
-				with: [ spec requires: #('Bloc') ].
-
-			spec
-				package: 'Bloc-SVG'
-				with: [ spec requires: #('Bloc' 'Bloc-Text' 'Bloc-Text-Elements' 'Bloc-Text-Rope' 'XML') ].
-
-			spec
-				package: 'Bloc-SVG-Tests'
-				with: [ spec requires: #('Bloc' 'Bloc-Alexandrie-Tests' 'Bloc-SVG' 'Bloc-Tests') ].
-
-			spec
-				package: 'Bloc-Scalable'
-				with: [ spec requires: #('Bloc') ].
-
-			spec
-				package: 'Bloc-Scalable-Examples'
-				with: [ spec requires: #('Bloc' 'Bloc-Scalable' 'Bloc-Tests') ].
-
-			spec
-				package: 'Bloc-Scripter'
-				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'BlocHost-Mock') ].
-
-			spec
-				package: 'Bloc-Spec2'
-				with: [ spec requires: #(
-					'Bloc'
-					'Bloc-Layout'
-					'Bloc-Text'
-					'Bloc-Text-Rope'
-					'BlocHost-Morphic') ].
-
-			spec
-				package: 'Bloc-Spec2-Tests'
-				with: [ spec requires: #('Bloc' 'Bloc-Spec2') ].
+				with: [ spec requires: #('Bloc-Tests') ].
 
 			spec
 				package: 'Bloc-Tests'
@@ -212,8 +208,34 @@ BaselineOfBloc >> baseline: spec [
 					'BlocHost-OSWindow-SDL2') ].
 
 			spec
-				package: 'Bloc-Text'
-				with: [ spec requires: #('Bloc') ].
+				package: 'Bloc-FocusFinder-Examples'
+				with: [ spec requires: #('Bloc' 'Bloc-FocusFinder' 'Bloc-Layout' 'Bloc-Tests') ].
+
+			spec
+				package: 'Bloc-Infinite-Tests'
+				with: [ spec requires: #('Bloc' 'Bloc-Infinite' 'Bloc-Layout' 'Bloc-Tests') ].
+
+			spec
+				package: 'Bloc-Layout-Tests'
+				with: [ spec requires: #(
+					'Bloc'
+					'Bloc-DevTool'
+					'Bloc-Layout'
+					'Bloc-Tests'
+					'Bloc-Text'
+					'Bloc-Text-Elements') ].
+
+			spec
+				package: 'Bloc-Overlay-Examples'
+				with: [ spec requires: #('Bloc' 'Bloc-Overlay' 'Bloc-PullAndSlide' 'Bloc-Tests') ].
+
+			spec
+				package: 'Bloc-SVG-Tests'
+				with: [ spec requires: #('Bloc' 'Bloc-Alexandrie-Tests' 'Bloc-SVG' 'Bloc-Tests') ].
+
+			spec
+				package: 'Bloc-Scalable-Examples'
+				with: [ spec requires: #('Bloc' 'Bloc-Scalable' 'Bloc-Tests') ].
 
 			spec
 				package: 'Bloc-Text-Alexandrie-Examples'
@@ -226,26 +248,6 @@ BaselineOfBloc >> baseline: spec [
 					'Bloc-Text-Elements') ].
 
 			spec
-				package: 'Bloc-Text-Elements'
-				with: [ spec requires: #('Bloc' 'Bloc-Text') ].
-
-			spec
-				package: 'Bloc-Text-Examples'
-				with: [ spec requires: #('Bloc-Alexandrie' 'Bloc-Text') ].
-
-			spec
-				package: 'Bloc-Text-Rope'
-				with: [ spec requires: #('Bloc' 'Bloc-Text') ].
-
-			spec
-				package: 'Bloc-Text-Rope-Tests'
-				with: [ spec requires: #('Bloc-Text' 'Bloc-Text-Rope') ].
-
-			spec
-				package: 'Bloc-Text-Tests'
-				with: [ spec requires: #('Bloc' 'Bloc-Text') ].
-
-			spec
 				package: 'Bloc-UnitedTests'
 				with: [ spec requires: #(
 					'Bloc'
@@ -253,23 +255,7 @@ BaselineOfBloc >> baseline: spec [
 					'Bloc-Tests'
 					'Bloc-Text'
 					'Bloc-Text-Elements'
-					'BlocHost-Morphic') ].
-
-			spec
-				package: 'BlocHost-Mock'
-				with: [ spec requires: #('Bloc') ].
-
-			spec
-				package: 'BlocHost-Morphic'
-				with: [ spec requires: #('Bloc') ].
-
-			spec
-				package: 'BlocHost-OSWindow'
-				with: [ spec requires: #('Bloc') ].
-
-			spec
-				package: 'BlocHost-OSWindow-SDL2'
-				with: [ spec requires: #('Bloc' 'BlocHost-OSWindow') ] ]
+					'BlocHost-Morphic') ] ]
 ]
 
 { #category : #'external projects' }
