@@ -90,8 +90,12 @@ BaselineOfBloc >> baseline: spec [
 				with: [ spec requires: #('Bloc') ].
 
 			spec
-				package: 'Bloc-Text-Elements'
+				package: 'Bloc-Text-Rope'
 				with: [ spec requires: #('Bloc' 'Bloc-Text') ].
+
+			spec
+				package: 'Bloc-Text-Elements'
+				with: [ spec requires: #('Bloc' 'Bloc-Text' 'Bloc-Text-Rope') ].
 
 			spec
 				package: 'Bloc-Alexandrie'
@@ -119,14 +123,6 @@ BaselineOfBloc >> baseline: spec [
 				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Text-Elements') ].
 
 			spec
-				package: 'Bloc-Text-Examples'
-				with: [ spec requires: #('Bloc-Alexandrie' 'Bloc-Text') ].
-
-			spec
-				package: 'Bloc-Text-Rope'
-				with: [ spec requires: #('Bloc' 'Bloc-Text') ].
-
-			spec
 				package: 'Bloc-SVG'
 				with: [ spec requires: #(
 					'Bloc'
@@ -138,6 +134,10 @@ BaselineOfBloc >> baseline: spec [
 			spec
 				package: 'Bloc-Alexandrie-SVG'
 				with: [ spec requires: #('Bloc' 'Bloc-SVG') ].
+
+			spec
+				package: 'Bloc-Text-Examples'
+				with: [ spec requires: #('Bloc-Alexandrie' 'Bloc-Text') ].
 
 			spec
 				package: 'Bloc-Text-Rope-Tests'
