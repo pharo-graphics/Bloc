@@ -189,13 +189,24 @@ BaselineOfBloc >> baseline: spec [
 					'Bloc-Text-Examples'
 					'BlocHost-OSWindow-SDL2') ].
 
+			"Ignoring cycle with #('Bloc-Tests')"
 			spec
 				package: 'Bloc-DevTool'
-				with: [ spec requires: #('Bloc-Tests') ].
+				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Text-Elements' 'Bloc-Text-Rope') ].
 
+			"Ignoring cycle with #('Bloc-Tests')"
 			spec
 				package: 'Bloc-Examples'
-				with: [ spec requires: #('Bloc-Tests') ].
+				with: [ spec requires: #(
+					'Bloc'
+					'Bloc-Animation'
+					'Bloc-DevTool'
+					'Bloc-Layout'
+					'Bloc-Scripter'
+					'Bloc-Text'
+					'Bloc-Text-Elements'
+					'Bloc-Text-Rope'
+					'BlocHost-Morphic') ].
 
 			spec
 				package: 'Bloc-Tests'
