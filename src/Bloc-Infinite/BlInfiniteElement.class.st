@@ -698,6 +698,18 @@ BlInfiniteElement >> hasItemDecorations [
 	^ itemDecorations isNotEmpty
 ]
 
+{ #category : #'accessing - decoration' }
+BlInfiniteElement >> haveDecoration: aDecorationClass [
+
+	^ self itemDecorations anySatisfy: [ :d | d isKindOf: aDecorationClass ]
+]
+
+{ #category : #'view - configuration' }
+BlInfiniteElement >> haveRowNumbers [
+
+	^ self haveDecoration: BlRowNumberDecoration
+]
+
 { #category : #initialization }
 BlInfiniteElement >> initialize [
 	super initialize.
