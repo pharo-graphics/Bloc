@@ -2049,16 +2049,25 @@ BlElement >> inUIProcessDo: aBlock [
 	If the active process is already the UI process, evaluate immediately. 
 	Otherwise, queue up for the next frame."
 
+	self inUIProcessDo: aBlock elseDo: [
+			self enqueueTask: (BlTaskAction new
+					 action: aBlock;
+					 yourself) ]
+]
+
+{ #category : #processing }
+BlElement >> inUIProcessDo: aBlock elseDo: altBlock [
+	"Run the supplied block in the UI process else run the alternative block
+	If the active process is already the UI process, evaluate immediately. 
+	Otherwise, queue up for the next frame."
+
 	| uiProcess |
 	self isAttachedToSceneGraph ifTrue: [ 
 		self space host uiProcessDo: [ :uiProc | uiProcess := uiProc ] ].
 
 	uiProcess = Processor activeProcess
-		ifTrue: [ aBlock value ]
-		ifFalse: [ 
-			self enqueueTask: (BlTaskAction new
-					 action: aBlock;
-					 yourself) ]
+		ifTrue: aBlock 
+		ifFalse: altBlock
 ]
 
 { #category : #initialization }

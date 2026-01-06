@@ -31,8 +31,6 @@ BlElement >> aeAsForm [
 
 	self withAllParentsReverseDo: [ :e | transformedGeometryBounds translateBy: e position ].
 
-	transformedGeometryBounds expandBy: 2.0.
-
 	aCanvas := AeCanvas extent: transformedGeometryBounds extent.
 	aCanvas privateAeCairoSurface deviceOffset: transformedGeometryBounds origin negated.
 	aCanvas clippingRectangle: topMostBounds.

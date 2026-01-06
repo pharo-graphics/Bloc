@@ -2,7 +2,8 @@ Class {
 	#name : #BlTaskBasedCommandApplicationStrategy,
 	#superclass : #BlCommandApplicationStrategy,
 	#instVars : [
-		'weak'
+		'weak',
+		'enqueuedCount'
 	],
 	#category : #'Bloc-CommandApplier'
 }
@@ -11,18 +12,27 @@ Class {
 BlTaskBasedCommandApplicationStrategy >> addCommand: aCommand from: aCommandApplier [
 
 	weak ifTrue: [
-		element isAttachedToSceneGraph ifFalse: [
-			aCommandApplier applyCommand: aCommand.
-			^ self ] ].
-	element enqueueTask:
-		(BlTaskAction new action: [ aCommandApplier applyCommand: aCommand ])
+			element isAttachedToSceneGraph ifFalse: [
+					aCommandApplier applyCommand: aCommand.
+					^ self ] ].
+	enqueuedCount := enqueuedCount + 1.
+	element enqueueTask: (BlTaskAction new action: [
+				 aCommandApplier applyCommand: aCommand.
+				 enqueuedCount := enqueuedCount - 1 ])
+]
+
+{ #category : #testing }
+BlTaskBasedCommandApplicationStrategy >> hasPendingCommands [ 
+
+	^ enqueuedCount > 0
 ]
 
 { #category : #initialization }
 BlTaskBasedCommandApplicationStrategy >> initialize [ 
 
 	super initialize.
-	weak := true
+	weak := true.
+	enqueuedCount := 0
 ]
 
 { #category : #accessing }
