@@ -18,3 +18,9 @@ BlCommandApplicationStrategy >> element: anElement [
 
 	element := anElement
 ]
+
+{ #category : #testing }
+BlCommandApplicationStrategy >> hasPendingCommands [
+
+	^ self subclassResponsibility 
+]

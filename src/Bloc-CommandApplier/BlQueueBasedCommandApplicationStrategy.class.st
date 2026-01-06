@@ -38,6 +38,12 @@ BlQueueBasedCommandApplicationStrategy >> element: anElement [
 	queued := false
 ]
 
+{ #category : #testing }
+BlQueueBasedCommandApplicationStrategy >> hasPendingCommands [
+
+	^ commandQueue notEmpty
+]
+
 { #category : #initialization }
 BlQueueBasedCommandApplicationStrategy >> initialize [ 
 
