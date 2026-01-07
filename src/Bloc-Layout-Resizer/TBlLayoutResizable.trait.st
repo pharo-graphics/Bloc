@@ -10,6 +10,13 @@ TBlLayoutResizable >> exact: aPoint [
 ]
 
 { #category : #'t - layout resizeable' }
+TBlLayoutResizable >> exactOrFitContent [
+
+	self hExactOrFitContent.
+	self vExactOrFitContent 
+]
+
+{ #category : #'t - layout resizeable' }
 TBlLayoutResizable >> fitContent [
 
 	self resizerDo: [ :c | self requestFitContentOn: c ]
@@ -30,10 +37,23 @@ TBlLayoutResizable >> fitElement: anElement [
 ]
 
 { #category : #'t - layout resizeable' }
+TBlLayoutResizable >> fitParent: anElement [
+
+	self hFitParent: anElement.
+	self vFitParent: anElement
+]
+
+{ #category : #'t - layout resizeable' }
 TBlLayoutResizable >> hExact: aNumber [
 	"we have to set the size in the constraints because the resizer state is stateless and does not propagate the actual size value"
 
 	self resizerDo: [ :c | self requestHExact: aNumber on: c ]
+]
+
+{ #category : #'t - layout resizeable' }
+TBlLayoutResizable >> hExactOrFitContent [
+
+	self isHExact ifFalse: [ self hFitContent ]
 ]
 
 { #category : #'t - layout resizeable' }
@@ -53,6 +73,13 @@ TBlLayoutResizable >> hFitElement: anElement [
 
 	anElement isHMatchParent ifTrue: [ ^ self hMatchParent ].
 	self hFitContent
+]
+
+{ #category : #'t - layout resizeable' }
+TBlLayoutResizable >> hFitParent: anElement [
+
+	anElement isHFitContent ifTrue: [ ^ self hFitContent ].
+	self hMatchParent
 ]
 
 { #category : #'t - layout resizeable' }
@@ -253,6 +280,12 @@ TBlLayoutResizable >> vExact: aNumber [
 ]
 
 { #category : #'t - layout resizeable' }
+TBlLayoutResizable >> vExactOrFitContent [
+
+	self isVExact ifFalse: [ self vFitContent ]
+]
+
+{ #category : #'t - layout resizeable' }
 TBlLayoutResizable >> vFitContent [
 
 	self resizerDo: [ :c | self requestVFitContentOn: c ]
@@ -269,6 +302,13 @@ TBlLayoutResizable >> vFitElement: anElement [
 
 	anElement isVMatchParent ifTrue: [ ^ self vMatchParent ].
 	self vFitContent
+]
+
+{ #category : #'t - layout resizeable' }
+TBlLayoutResizable >> vFitParent: anElement [
+
+	anElement isVFitContent ifTrue: [ ^ self vFitContent ].
+	self vMatchParent
 ]
 
 { #category : #'t - layout resizeable' }
