@@ -4,6 +4,17 @@ Trait {
 }
 
 { #category : #'t - layout resizeable' }
+TBlLayoutResizable >> adoptHorizontalResizerFromChild: aChild [
+
+	self isHExact ifTrue: [ ^ self ].
+			aChild isHExact
+				ifTrue: [ ^ self hFitContent ].
+				aChild isHMatchParent
+							ifTrue: [ ^ self hMatchParent ].
+							self hFitContent 
+]
+
+{ #category : #'t - layout resizeable' }
 TBlLayoutResizable >> exact: aPoint [
 
 	self resizerDo: [ :c | self requestExact: aPoint on: c ]
