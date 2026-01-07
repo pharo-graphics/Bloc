@@ -7,33 +7,6 @@ Class {
 	#category : #'Bloc-Basic-Geometry'
 }
 
-{ #category : #examples }
-BlStadiumGeometry class >> example [
-	<sampleInstance>
-	<demo>
-	
-	| extents gap space |
-	extents := { 200@100. 100@200. 100@100 }.
-	gap := 10.
-
-	space := BlSpace new.
-	space extent: 400 @ 200.
-
-	space root layout: (BlLinearLayout new cellSpacing: gap; yourself).
-
-	extents do: [ :each |
-		space root addChild: (BlElement new
-			extent: each;
-			border: (BlBorder paint: Color black width: 2);
-			background: Color blue;
-			geometry: BlStadiumGeometry new;
-			addEventHandlerOn: BlMouseEnterEvent do: [ :evt | evt target opacity: 0.5 ];
-			addEventHandlerOn: BlMouseLeaveEvent do: [ :evt | evt target opacity: 1.0 ];
-			yourself) ].
-
-	^ space show
-]
-
 { #category : #'geometry testing' }
 BlStadiumGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
 	"Answer whether aPoint is contained by this geometry.

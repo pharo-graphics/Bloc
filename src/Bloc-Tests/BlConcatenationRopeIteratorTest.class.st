@@ -18,20 +18,18 @@ BlConcatenationRopeIteratorTest >> originClassName [
 { #category : #tests }
 BlConcatenationRopeIteratorTest >> testSmall [
 
-	<sampleInstance>
 	| aRope anIterator |
-	aRope := BlConcatenationRopeExamplesTest new testAttributes_small_5_to_10.
+	aRope := BlConcatenationRopeTest new testAttributesSmall5To10.
 	anIterator := aRope iterator: 0 to: 10.
 
 	self assert: anIterator position equals: 0.
 	self assert: anIterator start equals: 0.
 	self assert: anIterator end equals: 10.
-	self assert: anIterator rope == aRope.
+	self assert: anIterator rope identicalTo: aRope.
 
 	self assert: anIterator hasNext.
 	self assert: anIterator hasPrevious not.
-
-	self assert: anIterator currentIterator rope == aRope left.
+	self assert: anIterator currentIterator rope identicalTo: aRope left.
 	self assert: anIterator currentIterator position equals: 0.
 
 	^ anIterator

@@ -18,22 +18,6 @@ Class {
 	#category : #'Bloc-Basic-Geometry'
 }
 
-{ #category : #examples }
-BlSigmoidGeometry class >> example [
-	<sampleInstance>
-
-	| geometry |
-	geometry := BlSigmoidGeometry new from: 0 asPoint to: 100 asPoint; yourself.
-	geometry beVertical.
-
-	^ BlElement new
-		geometry: geometry;
-		border: (BlBorder paint: Color blue width: 3);
-		beOutskirtsCentered;
-		extent: 100 asPoint;
-		yourself
-]
-
 { #category : #'instance creation' }
 BlSigmoidGeometry class >> from: aPoint to: anotherPoint [
 
