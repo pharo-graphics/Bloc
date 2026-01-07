@@ -1,7 +1,7 @@
 Class {
 	#name : #BlLayoutResizerChangedEvent,
 	#superclass : #BlEvent,
-	#category : #'Bloc-Layout-Resizer'
+	#category : #'Bloc-Layouts-Support'
 }
 
 { #category : #sending }
