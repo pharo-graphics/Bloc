@@ -4050,6 +4050,12 @@ BlElement >> userData [
 	^ userData ifNil: [ userData := IdentityDictionary new ]
 ]
 
+{ #category : #accessing }
+BlElement >> userData: aNewUserData [
+
+	userData := aNewUserData
+]
+
 { #category : #'layout anchors' }
 BlElement >> verticalCenterAnchor [
 
