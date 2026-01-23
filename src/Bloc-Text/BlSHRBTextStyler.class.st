@@ -71,9 +71,9 @@ BlSHRBTextStyler class >> foregroundAttributeFor: aPaint [
 { #category : #formatting }
 BlSHRBTextStyler >> addAttributes: attributes from: start to: stop [
 
-	blocText
-		attributes: (attributes collect: [ :each | each asBlTextAttribute ])
-		from: start to: stop
+	| subText |
+	subText := blocText from: start to: stop.
+	attributes do: [ :each | each applyToBlText: subText ]
 ]
 
 { #category : #private }

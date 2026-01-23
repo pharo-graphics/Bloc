@@ -1,7 +1,8 @@
 Extension { #name : #TextMethodLink }
 
 { #category : #'*Bloc-Text' }
-TextMethodLink >> asBlTextAttribute [
-
-	^ BlTextMethodLink selector: selector
+TextMethodLink >> applyToBlText: aBlText [
+	"Apply the receiver to the supplied BlText"
+	
+	aBlText attribute: (BlTextMethodLink selector: selector)
 ]

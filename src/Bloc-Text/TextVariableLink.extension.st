@@ -1,7 +1,8 @@
 Extension { #name : #TextVariableLink }
 
 { #category : #'*Bloc-Text' }
-TextVariableLink >> asBlTextAttribute [
-
-	^ BlTextVariableLink variableName: variableName
+TextVariableLink >> applyToBlText: aBlText [
+	"Apply the receiver to the supplied BlText"
+	
+	aBlText attribute: (BlTextVariableLink variableName: variableName)
 ]
