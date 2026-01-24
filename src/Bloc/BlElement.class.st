@@ -3566,6 +3566,7 @@ BlElement >> removeChildren: aListOfElements [
 	See `BlElement>>#removeChild:` for more info
 	aListOfElements must not be nil."
 	
+	aListOfElements ifEmpty: [ ^ self ].
 	aListOfElements do: [ :anElement | self onChildToBeRemoved: anElement ].
 	aListOfElements do: [ :anElement | anElement parent: nil ].
 	self children removeAll: aListOfElements.
