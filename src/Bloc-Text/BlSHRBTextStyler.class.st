@@ -81,7 +81,7 @@ BlSHRBTextStyler >> style: aBlText ast: ast [
 
 	aBlText ifEmpty: [ ^ self ].
 	blocText := aBlText.
-
+	self addStyle: #default from: 1 to: aBlText size .
 	bracketLevel := 0.
 	parentheseLevel := 0.
 	braceLevel := 0.
