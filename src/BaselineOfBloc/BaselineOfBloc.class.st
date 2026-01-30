@@ -305,7 +305,7 @@ BaselineOfBloc >> baseline: spec [
 					#'Bloc-Scripter' #'Bloc-Examples' #'Bloc-Text-Examples' #'Bloc-Alexandrie-Tests'
 					#'Bloc-Infinite-Tests' #'Bloc-Layout-Tests' #'Bloc-Layout-Examples' #'Bloc-Overlay-Examples'
 					#'Bloc-Scalable-Examples' #'Bloc-FocusFinder-Examples' #'Bloc-Rules' #'Bloc-DragNDrop'
-					#'Bloc-ColorPicker' #'Bloc-Demo' #'Bloc-SVG' #'Bloc-SVG-Tests' #'Bloc-Alexandrie-SVG')
+					#'Bloc-ColorPicker' #'Bloc-Demo' #'Bloc-SVG' #'Bloc-SVG-Tests' #'Bloc-Alexandrie-SVG').
 
 			spec group: 'default' with: #('development')	
 			]
