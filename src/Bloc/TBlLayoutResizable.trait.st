@@ -3,89 +3,106 @@ Trait {
 	#category : #'Bloc-Layouts-Support'
 }
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> exact: aPoint [
 
-	self resizerDo: [ :c | self requestExact: aPoint on: c ]
+	self resizerDo: [ :c |
+			| anExtent |
+			anExtent := aPoint asPoint.
+			(self isExact: aPoint) ifFalse: [
+					c horizontal exact: anExtent x.
+					c vertical exact: anExtent y ] ]
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> exactOrFitContent [
 
 	self hExactOrFitContent.
 	self vExactOrFitContent 
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> fitContent [
 
-	self resizerDo: [ :c | self requestFitContentOn: c ]
+	self resizerDo: [ :c |
+			(self isHFitContent and: [ self isVFitContent ]) ifTrue: [ ^ self ].
+			c horizontal fitContent.
+			c vertical fitContent ]
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> fitContentLimited [
 
 	self resizerDo: [ :c |
-		self requestFitContentLimitedOn: c ]
+			(self isHFitContentLimited and: [ self isVFitContentLimited ])
+				ifTrue: [ ^ self ].
+			c horizontal fitContentLimited.
+			c vertical fitContentLimited ]
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> fitElement: anElement [
 
 	self hFitElement: anElement.
 	self vFitElement: anElement
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> fitParent: anElement [
 
 	self hFitParent: anElement.
 	self vFitParent: anElement
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> hExact: aNumber [
 	"we have to set the size in the constraints because the resizer state is stateless and does not propagate the actual size value"
 
-	self resizerDo: [ :c | self requestHExact: aNumber on: c ]
+	self resizerDo: [ :c |
+			(self isHExact: aNumber) ifFalse: [
+				c horizontal exact: aNumber ] ]
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> hExactOrFitContent [
 
 	self isHExact ifFalse: [ self hFitContent ]
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> hFitContent [
 
-	self resizerDo: [ :c | self requestHFitContentOn: c ]
+	self resizerDo: [ :c |
+		self isHFitContent ifFalse: [
+			c horizontal fitContent ] ]
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> hFitContentLimited [
 
-	self resizerDo: [ :c | self requestHFitContentLimitedOn: c ]
+	self resizerDo: [ :c |
+		self isHFitContentLimited ifFalse: [ c horizontal fitContentLimited ] ]
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> hFitElement: anElement [
 
 	anElement isHMatchParent ifTrue: [ ^ self hMatchParent ].
 	self hFitContent
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> hFitParent: anElement [
 
 	anElement isHFitContent ifTrue: [ ^ self hFitContent ].
 	self hMatchParent
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> hMatchParent [
 
-	self resizerDo: [ :c | self requestHMatchParentOn: c ]
+	self resizerDo: [ :c |
+		self isHMatchParent ifFalse: [ c horizontal matchParent ] ]
 ]
 
 { #category : #'t - layout resizable - testing' }
@@ -95,9 +112,24 @@ TBlLayoutResizable >> isExact [
 ]
 
 { #category : #'t - layout resizable - testing' }
+TBlLayoutResizable >> isExact: aPoint [
+
+	^ (self isHExact: aPoint x) and: [ self isVExact: aPoint y ]
+]
+
+{ #category : #'t - layout resizable - testing' }
 TBlLayoutResizable >> isHExact [
 
 	^ self constraints horizontal resizer isExact
+]
+
+{ #category : #'t - layout resizable - testing' }
+TBlLayoutResizable >> isHExact: aSize [
+
+	| c |
+	c := self constraints.
+	^ c horizontal resizer isExact and: [
+		  c horizontal resizer size = aSize ]
 ]
 
 { #category : #'t - layout resizable - testing' }
@@ -131,6 +163,15 @@ TBlLayoutResizable >> isVExact [
 ]
 
 { #category : #'t - layout resizable - testing' }
+TBlLayoutResizable >> isVExact: aSize [
+
+	| c |
+	c := self constraints.
+	^ c vertical resizer isExact and: [
+		  c vertical resizer size = aSize ]
+]
+
+{ #category : #'t - layout resizable - testing' }
 TBlLayoutResizable >> isVFitContent [
 
 	^ self constraints vertical resizer isFitContent
@@ -148,112 +189,14 @@ TBlLayoutResizable >> isVMatchParent [
 	^ self constraints vertical resizer isMatchParent
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> matchParent [
 
-	self resizerDo: [ :c | self requestMatchParentOn: c ]
+	self hMatchParent.
+	self vMatchParent
 ]
 
-{ #category : #'t - layout resizeable - request' }
-TBlLayoutResizable >> requestExact: aPoint on: aConstraints [
-
-	| aSize |
-	aSize := aPoint asPoint.
-	(aConstraints horizontal resizer isExact and: [
-		 aConstraints horizontal resizer size = aSize x ]) ifFalse: [
-		aConstraints horizontal exact: aSize x ].
-	(aConstraints vertical resizer isExact and: [
-		 aConstraints vertical resizer size = aSize y ]) ifFalse: [
-		aConstraints vertical exact: aSize y ]
-]
-
-{ #category : #'t - layout resizeable - request' }
-TBlLayoutResizable >> requestFitContentLimitedOn: aConstraints [
-
-	(aConstraints horizontal resizer isFitContentLimited and: [
-		 aConstraints vertical resizer isFitContentLimited ]) ifTrue: [
-		^ self ].
-	aConstraints horizontal fitContentLimited.
-	aConstraints vertical fitContentLimited
-]
-
-{ #category : #'t - layout resizeable - request' }
-TBlLayoutResizable >> requestFitContentOn: aConstraints [
-
-	(aConstraints horizontal resizer isFitContent and: [
-		 aConstraints vertical resizer isFitContent ]) ifTrue: [
-		^ self ].
-	aConstraints horizontal fitContent.
-	aConstraints vertical fitContent
-]
-
-{ #category : #'t - layout resizeable - request' }
-TBlLayoutResizable >> requestHExact: aNumber on: aConstraints [
-
-	(aConstraints horizontal resizer isExact and: [
-		 aConstraints horizontal resizer size = aNumber ]) ifFalse: [
-		aConstraints horizontal exact: aNumber ]
-]
-
-{ #category : #'t - layout resizeable - request' }
-TBlLayoutResizable >> requestHFitContentLimitedOn: aConstraints [
-
-	aConstraints horizontal resizer isFitContentLimited ifFalse: [
-		aConstraints horizontal fitContentLimited ]
-]
-
-{ #category : #'t - layout resizeable - request' }
-TBlLayoutResizable >> requestHFitContentOn: aConstraints [
-
-	aConstraints horizontal resizer isFitContent ifFalse: [
-		aConstraints horizontal fitContent ]
-]
-
-{ #category : #'t - layout resizeable - request' }
-TBlLayoutResizable >> requestHMatchParentOn: aConstraints [
-
-	aConstraints horizontal resizer isMatchParent ifFalse: [
-		aConstraints horizontal matchParent ]
-]
-
-{ #category : #'t - layout resizeable - request' }
-TBlLayoutResizable >> requestMatchParentOn: aConstraint [
-
-	self requestHMatchParentOn: aConstraint.
-	self requestVMatchParentOn: aConstraint
-]
-
-{ #category : #'t - layout resizeable - request' }
-TBlLayoutResizable >> requestVExact: aNumber on: aConstraints [
-	"we have to set the size in the constraints because the resizer state is stateless and does not propagate the actual size value"
-
-	(aConstraints vertical resizer isExact and: [
-		 aConstraints vertical resizer size = aNumber ]) ifFalse: [
-		aConstraints vertical exact: aNumber ]
-]
-
-{ #category : #'t - layout resizeable - request' }
-TBlLayoutResizable >> requestVFitContentLimitedOn: aConstraints [
-
-	aConstraints vertical resizer isFitContentLimited ifFalse: [
-		aConstraints vertical fitContentLimited ]
-]
-
-{ #category : #'t - layout resizeable - request' }
-TBlLayoutResizable >> requestVFitContentOn: aConstraints [
-
-	aConstraints vertical resizer isFitContent ifFalse: [
-		aConstraints vertical fitContent ]
-]
-
-{ #category : #'t - layout resizeable - request' }
-TBlLayoutResizable >> requestVMatchParentOn: aConstraints [
-
-	aConstraints vertical resizer isMatchParent ifFalse: [
-		aConstraints vertical matchParent ]
-]
-
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> resizerDo: aBlock [
 	"Perform aBlock with my constraints as argument.
 	Note: After evaluation I request a layout update!
@@ -272,47 +215,52 @@ TBlLayoutResizable >> resizerDo: aBlock [
 	self requestLayout
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> vExact: aNumber [
 	"we have to set the size in the constraints because the resizer state is stateless and does not propagate the actual size value"
 
-	self resizerDo: [ :c | self requestVExact: aNumber on: c ]
+	self resizerDo: [ :c |
+			(self isVExact: aNumber)  ifFalse: [
+				c vertical exact: aNumber ] ]
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> vExactOrFitContent [
 
 	self isVExact ifFalse: [ self vFitContent ]
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> vFitContent [
 
-	self resizerDo: [ :c | self requestVFitContentOn: c ]
+	self resizerDo: [ :c |
+		self isVFitContent ifFalse: [ c vertical fitContent ] ]
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> vFitContentLimited [
 
-	self resizerDo: [ :c | self requestVFitContentLimitedOn: c ]
+	self resizerDo: [ :c |
+		self isVFitContentLimited ifFalse: [ c vertical fitContentLimited ] ]
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> vFitElement: anElement [
 
 	anElement isVMatchParent ifTrue: [ ^ self vMatchParent ].
 	self vFitContent
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> vFitParent: anElement [
 
 	anElement isVFitContent ifTrue: [ ^ self vFitContent ].
 	self vMatchParent
 ]
 
-{ #category : #'t - layout resizeable' }
+{ #category : #'t - layout resizable' }
 TBlLayoutResizable >> vMatchParent [
 
-	self resizerDo: [ :c | self requestVMatchParentOn: c ]
+	self resizerDo: [ :c |
+		self isVMatchParent ifFalse: [ c vertical matchParent ] ]
 ]
