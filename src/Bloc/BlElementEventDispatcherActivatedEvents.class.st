@@ -14,7 +14,6 @@ Class {
 		'ExtentChanged',
 		'LayoutChanged',
 		'LayoutComputed',
-		'MousePickedOutside',
 		'PositionChanged',
 		'PositionInSpaceChanged',
 		'RemovedFromParent',
@@ -23,7 +22,8 @@ Class {
 		'SelectionAcquired',
 		'SelectionLost',
 		'TransformationChanged',
-		'TransformationInSpaceChanged'
+		'TransformationInSpaceChanged',
+		'VisibilityChanged'
 	],
 	#category : #'Bloc-Events-Dispatcher'
 }
@@ -74,12 +74,6 @@ BlElementEventDispatcherActivatedEvents class >> LayoutChanged [
 BlElementEventDispatcherActivatedEvents class >> LayoutComputed [
 	"This method was automatically generated"
 	^ LayoutComputed value
-]
-
-{ #category : #'accessing - flags' }
-BlElementEventDispatcherActivatedEvents class >> MousePickedOutside [
-	"This method was automatically generated"
-	^ MousePickedOutside value 
 ]
 
 { #category : #'accessing - flags' }
@@ -136,6 +130,12 @@ BlElementEventDispatcherActivatedEvents class >> TransformationInSpaceChanged [
 	^ TransformationInSpaceChanged value
 ]
 
+{ #category : #'accessing - flags' }
+BlElementEventDispatcherActivatedEvents class >> VisibilityChanged [
+	"This method was automatically generated"
+	^ VisibilityChanged value
+]
+
 { #category : #'flags declaration' }
 BlElementEventDispatcherActivatedEvents class >> flagsDecl [
 	"
@@ -152,6 +152,7 @@ BlElementEventDispatcherActivatedEvents class >> flagsDecl [
 		#LayoutChanged.
 		#LayoutComputed.
 		#PositionChanged.
+		#VisibilityChanged.
 		#PositionInSpaceChanged.
 		#RemovedFromParent.
 		#RemovedFromSceneGraph.
@@ -159,8 +160,7 @@ BlElementEventDispatcherActivatedEvents class >> flagsDecl [
 		#SelectionAcquired.
 		#SelectionLost.
 		#TransformationChanged.
-		#TransformationInSpaceChanged.
-		#MousePickedOutside.
+		#TransformationInSpaceChanged
 	}
 
 
@@ -223,12 +223,6 @@ BlElementEventDispatcherActivatedEvents >> addLayoutComputed [
 ]
 
 { #category : #'flags - add' }
-BlElementEventDispatcherActivatedEvents >> addMousePickedOutside [
-	"This method was automatically generated"
-	value := value | MousePickedOutside value
-]
-
-{ #category : #'flags - add' }
 BlElementEventDispatcherActivatedEvents >> addPositionChanged [
 	"This method was automatically generated"
 	value := value | PositionChanged value
@@ -282,6 +276,12 @@ BlElementEventDispatcherActivatedEvents >> addTransformationInSpaceChanged [
 	value := value | TransformationInSpaceChanged value
 ]
 
+{ #category : #'flags - add' }
+BlElementEventDispatcherActivatedEvents >> addVisibilityChanged [
+	"This method was automatically generated"
+	value := value | VisibilityChanged value
+]
+
 { #category : #'flags - clear' }
 BlElementEventDispatcherActivatedEvents >> clearAddedToParent [
 	"This method was automatically generated"
@@ -328,12 +328,6 @@ BlElementEventDispatcherActivatedEvents >> clearLayoutChanged [
 BlElementEventDispatcherActivatedEvents >> clearLayoutComputed [
 	"This method was automatically generated"
 	value := value & (LayoutComputed value bitInvert)
-]
-
-{ #category : #'flags - clear' }
-BlElementEventDispatcherActivatedEvents >> clearMousePickedOutside [
-	"This method was automatically generated"
-	value := value & (MousePickedOutside value bitInvert)
 ]
 
 { #category : #'flags - clear' }
@@ -390,6 +384,12 @@ BlElementEventDispatcherActivatedEvents >> clearTransformationInSpaceChanged [
 	value := value & (TransformationInSpaceChanged value bitInvert)
 ]
 
+{ #category : #'flags - clear' }
+BlElementEventDispatcherActivatedEvents >> clearVisibilityChanged [
+	"This method was automatically generated"
+	value := value & (VisibilityChanged value bitInvert)
+]
+
 { #category : #'flags - testing' }
 BlElementEventDispatcherActivatedEvents >> hasAddedToParent [
 	"This method was automatically generated"
@@ -436,12 +436,6 @@ BlElementEventDispatcherActivatedEvents >> hasLayoutChanged [
 BlElementEventDispatcherActivatedEvents >> hasLayoutComputed [
 	"This method was automatically generated"
 	^ (value & LayoutComputed value) ~= 0
-]
-
-{ #category : #'flags - testing' }
-BlElementEventDispatcherActivatedEvents >> hasMousePickedOutside [
-	"This method was automatically generated"
-	^ (value & MousePickedOutside value) ~= 0
 ]
 
 { #category : #'flags - testing' }
@@ -496,4 +490,10 @@ BlElementEventDispatcherActivatedEvents >> hasTransformationChanged [
 BlElementEventDispatcherActivatedEvents >> hasTransformationInSpaceChanged [
 	"This method was automatically generated"
 	^ (value & TransformationInSpaceChanged value) ~= 0
+]
+
+{ #category : #'flags - testing' }
+BlElementEventDispatcherActivatedEvents >> hasVisibilityChanged [
+	"This method was automatically generated"
+	^ (value & VisibilityChanged value) ~= 0
 ]

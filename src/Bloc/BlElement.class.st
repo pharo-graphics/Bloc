@@ -4094,7 +4094,9 @@ BlElement >> visibility: aVisibility [
 	"visibility does not change how *this* element is rendered,
 	instead it affects the rendering of the parent"
 	self hasParent
-		ifTrue: [ self parent invalidate ]
+		ifTrue: [ self parent invalidate ].
+	
+	self eventDispatcher dispatchVisibilityChanged 
 ]
 
 { #category : #'geometry bounds' }
