@@ -1,7 +1,8 @@
 Extension { #name : #TextClassLink }
 
 { #category : #'*Bloc-Text' }
-TextClassLink >> asBlTextAttribute [
-
-	^ BlTextClassLink className: className
+TextClassLink >> applyToBlText: aBlText [
+	"Apply the receiver to the supplied BlText"
+	
+	aBlText attribute: (BlTextClassLink className: className)
 ]
