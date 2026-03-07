@@ -19,7 +19,7 @@ BlElementNamedId >> = anObject [
 	
 	"if anObject is of the same class it is faster to directly compare identifiers"
 	self class = anObject class
-		ifTrue: [ ^ name = anObject identifier ].
+		ifTrue: [ ^ name = anObject name ].
 	
 	"otherwise fallback to the symbol comparison, but watch out, #asSymbol may not be cheap!"
 	^ self asSymbol = anObject asSymbol
