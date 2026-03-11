@@ -161,7 +161,7 @@ BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDurati
 		aSpace
 			addEventHandlerOn: BlSpaceShownEvent
 			doOnce: [ :event | aSemaphore signal ].
-		aSemaphore wait: aDuration ].
+		aSemaphore waitTimeoutMilliseconds: aDuration asMilliSeconds ].
 
 	^ self pulseUntilEmptyTaskQueue: aSpace timeout: aDuration
 ]
