@@ -289,7 +289,7 @@ BaselineOfBloc >> baseline: spec [
 BaselineOfBloc >> declareAlexandrieOn: spec [
 
 	spec baseline: 'Alexandrie' with: [
-		spec repository: 'github://pharo-graphics/Alexandrie:master/src' ]
+		spec repository: 'github://pharo-graphics/Alexandrie:v2.8.0/src' ]
 ]
 
 { #category : #'external projects' }
@@ -297,6 +297,6 @@ BaselineOfBloc >> declareXMLParserOn: spec [
 
 	spec baseline: 'XMLParser' with: [
 		spec
-			repository: 'github://pharo-contributions/XML-XMLParser:master/src';
+			repository: 'github://pharo-contributions/XML-XMLParser:v3.6.3/src';
 			loads: #( Core ) ]
 ]
