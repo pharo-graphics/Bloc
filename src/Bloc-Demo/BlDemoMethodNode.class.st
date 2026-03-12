@@ -1,3 +1,6 @@
+"
+I'm a demo node for a method.
+"
 Class {
 	#name : #BlDemoMethodNode,
 	#superclass : #BlDemoBasicNode,

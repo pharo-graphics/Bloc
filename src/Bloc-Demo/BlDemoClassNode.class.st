@@ -1,3 +1,6 @@
+"
+I'm a demo node for a class.
+"
 Class {
 	#name : #BlDemoClassNode,
 	#superclass : #BlDemoBasicNode,
@@ -11,6 +14,7 @@ BlDemoClassNode >> icon [
 ]
 
 { #category : #accessing }
-BlDemoClassNode >> methods [ 
+BlDemoClassNode >> methods [
+
 	^ item methods
 ]

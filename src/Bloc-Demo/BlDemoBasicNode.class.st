@@ -69,3 +69,13 @@ BlDemoBasicNode >> parent: aNode [
 
 	parent := aNode 
 ]
+
+{ #category : #printing }
+BlDemoBasicNode >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPutAll: '(';
+		print: item;
+		nextPutAll: ')'
+]
