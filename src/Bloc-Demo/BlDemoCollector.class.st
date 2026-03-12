@@ -1,3 +1,6 @@
+"
+I'm responsible of collecting demo nodes from a given pragma.
+"
 Class {
 	#name : #BlDemoCollector,
 	#superclass : #Object,
@@ -58,27 +61,14 @@ BlDemoCollector >> collectClass: aClass [
 { #category : #instanceCreation }
 BlDemoCollector >> collectPackage: aPackage [
 
-	"| packageClasses packageNode classes |
-	packageClasses := (aPackage classes flatCollect: [ :class | { class. class class } ])
-		sorted: [ :class1 :class2 | class1 name < class2 name ].
-	packageNode := self ensurePackageFor: aPackage.
-	classes := OrderedCollection new.
-	packageClasses do: [ :pairclass |
-		| aNode |
-		self collectClass: pairclass.
-		aNode := classDictionary at: pairclass ifAbsent: [ nil ].
-		aNode ifNotNil: [ packageNode addChild: aNode ] ]."
-
-
 	| packageClasses node classes |
-	packageClasses := (aPackage classes flatCollect: [ :class | { class. class class } ])
+	packageClasses := (aPackage definedClasses
+		flatCollect: [ :class | { class. class class } ])
 		sorted: [ :class1 :class2 | class1 name < class2 name ].
 	classes := OrderedCollection new.
 	packageClasses do: [ :class |
-		| temp |
 		self collectClass: class.
-		temp := classDictionary at: class ifAbsent: [  ].
-		temp ifNotNil: [ classes add: temp ] ].
+		classDictionary at: class ifPresent: [ :c | classes add: c ] ].
 	classes ifEmpty: [ ^ self ].
 	node := self ensurePackageFor: aPackage.
 	classes do: [ :classNode | node addChild: classNode ]
