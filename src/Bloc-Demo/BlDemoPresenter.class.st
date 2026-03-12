@@ -15,6 +15,16 @@ Class {
 	#category : #'Bloc-Demo-DemoPresenterSpec'
 }
 
+{ #category : #accessing }
+BlDemoPresenter class >> defaultPreferredExtent [
+
+	| fontWidth rowHeight |
+	fontWidth := (StandardFonts defaultFont widthOfString: 'M').
+	rowHeight := self inputTextHeight.
+
+	^ (90@24) * (fontWidth @ rowHeight)
+]
+
 { #category : #running }
 BlDemoPresenter class >> menuCommandOn: aBuilder [
 	<worldMenu>
@@ -35,13 +45,15 @@ BlDemoPresenter class >> open [
 ]
 
 { #category : #accessing }
-BlDemoPresenter >> canvas [ 
-	^ canvas 
+BlDemoPresenter >> canvas [
+
+	^ canvas
 ]
 
 { #category : #accessing }
-BlDemoPresenter >> canvas: aCanva [
-	canvas := aCanva 
+BlDemoPresenter >> canvas: aCanvas [
+
+	canvas := aCanvas
 ]
 
 { #category : #accessing }
@@ -73,7 +85,8 @@ BlDemoPresenter >> defaultLayout [
 		  add: (SpPanedLayout newLeftToRight
 				   positionOfSlider: 300;
 				   add: tree;
-				   add: canvas yourself);
+				   add: canvas;
+					yourself);
 		  add: code;
 		  yourself
 ]
@@ -81,29 +94,30 @@ BlDemoPresenter >> defaultLayout [
 { #category : #drawing }
 BlDemoPresenter >> drawOnCanvas: anElement [
 
-	| root |
-	root := self canvas space root.
-	root removeChildren.
-	root addChild: ((anElement isKindOf: BlElement)
-		ifTrue: [ anElement ]
-		ifFalse: [ self notABlElementErrorMessage ])
+	canvas space root
+		removeChildren;
+		addChild: 
+			((anElement isKindOf: BlElement)
+				ifTrue: [ anElement ]
+				ifFalse: [ self notABlElementErrorMessage ])
 ]
 
 { #category : #errors }
 BlDemoPresenter >> errorMessage: aString [
 
 	^ errorMessage ifNil: [
-		  BlElement new
-			  background: Color lightRed;
-			  layout: BlFrameLayout new;
-			  constraintsDo: [ :c |
-				  c vertical matchParent.
-				  c horizontal matchParent ];
-			  addChild: (BlTextElement new
-					   text: aString asRopedText;
-					   constraintsDo: [ :c |
-						   c frame vertical alignCenter.
-						   c frame horizontal alignCenter ]) ]
+			  BlElement new
+				  background: Color lightRed;
+				  layout: BlFrameLayout new;
+				  constraintsDo: [ :c |
+						  c vertical matchParent.
+						  c horizontal matchParent ];
+				  addChild: (BlTextElement new
+						   text: aString asRopedText;
+						   constraintsDo: [ :c |
+								   c frame vertical alignCenter.
+								   c frame horizontal alignCenter ]);
+				  yourself ]
 ]
 
 { #category : #operations }
@@ -114,22 +128,9 @@ BlDemoPresenter >> executeCode [
 	[ self drawOnCanvas: item execute ] 
 		on: Error 
 		do: [ :ex |
-			| root |
-			root := self canvas space root.
-			root removeChildren.
-			root addChild:
-			(self errorMessage: 'Execution of ', item item printString, ' led to an error') ]
-]
-
-{ #category : #TOREMOVE }
-BlDemoPresenter >> initialExtent [
-
-	| fontWidth rowHeight |
-	fontWidth := (StandardFonts defaultFont widthOfString: 'M').
-	rowHeight := self class inputTextHeight.
-
-	^ (90@24) * (fontWidth @ rowHeight)
-	
+			canvas space root
+				removeChildren;
+				addChild: (self errorMessage: 'Execution of ', item item printString, ' led to an error') ]
 ]
 
 { #category : #initialization }
@@ -158,10 +159,8 @@ BlDemoPresenter >> initializePathArray [
 	firstPackage := tree roots first.
 	firstClass := firstPackage children first.
 	firstItem := firstClass children first.
-	^ {
-		  firstPackage.
-		  firstClass.
-		  firstItem }
+
+	^ { firstPackage. firstClass. firstItem }
 ]
 
 { #category : #initialization }
@@ -182,7 +181,8 @@ BlDemoPresenter >> initializeTreePresenter [
 		        children: [ :aPackageNode | aPackageNode children ];
 		        displayIcon: [ :aNode | self iconNamed: aNode icon ];
 		        display: [ :aPackageNode | aPackageNode name ];
-		        expandRoots.
+		        expandAll;
+		        yourself.
 	pathArray := self initializePathArray.
 	tree selectPathByItems: pathArray scrollToSelection: true
 ]
@@ -190,9 +190,8 @@ BlDemoPresenter >> initializeTreePresenter [
 { #category : #errors }
 BlDemoPresenter >> notABlElementErrorMessage [
 
-	^ self errorMessage: 
-						   'This method does not return any element for you to see'
-							  
+	^ self errorMessage:
+		  'This method does not return any element for you to see'
 ]
 
 { #category : #accessing }
@@ -200,13 +199,13 @@ BlDemoPresenter >> packagesToCollect [
 	
 	| suffixes |
 	suffixes := #('Bloc' 'Album' 'Toplo').
-	"we could avoid to hardcode this."
 	
 	^ self class packageOrganizer packages select: [ :package |
-		suffixes anySatisfy: [ :suff | package name includesSubstring: suff ]]
+		suffixes anySatisfy: [ :each | package name includesSubstring: each ]]
 ]
 
-{ #category : #TOREMOVE }
+{ #category : #accessing }
 BlDemoPresenter >> windowTitle [
+
 	^ 'Bloc UI Framework Demo'
 ]
