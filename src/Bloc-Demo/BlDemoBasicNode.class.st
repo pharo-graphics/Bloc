@@ -12,11 +12,12 @@ Class {
 	#category : #'Bloc-Demo-DemoPresenterNodes'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlDemoBasicNode class >> withItem: anObject [
 
-	^ self new item: anObject 
-	
+	^ self new
+		initializeWithItem: anObject;
+		yourself
 ]
 
 { #category : #adding }
@@ -37,10 +38,13 @@ BlDemoBasicNode >> children: anOrderedCollection [
 ]
 
 { #category : #initialization }
-BlDemoBasicNode >> initialize [
+BlDemoBasicNode >> initializeWithItem: anObject [
 
-	super initialize.
-	children := OrderedCollection new
+	self initialize.
+
+	children := OrderedCollection new.
+
+	item := anObject
 ]
 
 { #category : #accessing }
@@ -49,13 +53,8 @@ BlDemoBasicNode >> item [
 ]
 
 { #category : #accessing }
-BlDemoBasicNode >> item: anObject [
+BlDemoBasicNode >> name [
 
-	item := anObject 
-]
-
-{ #category : #accessing }
-BlDemoBasicNode >> name [ 
 	^ item name
 ]
 

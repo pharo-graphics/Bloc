@@ -12,36 +12,9 @@ Class {
 	#category : #'Bloc-Demo-DemoPresenterNodes'
 }
 
-{ #category : #'instance creation' }
-BlDemoCollector class >> collectClass: aClass [
-
-	^ self new collectClass: aClass
-]
-
-{ #category : #'instance creation' }
-BlDemoCollector class >> collectPackage: aPackage [
-
-	^ self new collectPackage: aPackage
-]
-
-{ #category : #'instance creation' }
-BlDemoCollector class >> collectPragma: aSymbol fromClass: aClass [
-
-	^ self new
-		  pragma: aSymbol;
-		  collectClass: aClass 
-]
-
-{ #category : #'instance creation' }
-BlDemoCollector class >> collectPragma: aSymbol fromPackage: aPackage [
-
-	^ self new 
-		pragma: aSymbol; 
-		collectPackage: aPackage 
-]
-
 { #category : #accessing }
 BlDemoCollector >> classes [
+
 	^ classDictionary values
 ]
 
@@ -49,13 +22,14 @@ BlDemoCollector >> classes [
 BlDemoCollector >> collectClass: aClass [ 
 	
 	| node pragmas |
-	pragmas := (Pragma allNamed: pragma in: aClass) sorted: [ :pragma1 :pragma2 |
-		pragma1 methodSelector < pragma2 methodSelector ].
+	pragmas := (Pragma allNamed: pragma in: aClass)
+		sorted: [ :pragma1 :pragma2 |
+			pragma1 methodSelector < pragma2 methodSelector ].
+
 	pragmas ifEmpty: [ ^ self ].
 	node := self ensureClassFor: aClass.
-	pragmas do: [ :prag | node addChild: (BlDemoMethodNode new item: prag method ) ].
-	
-	
+	pragmas do: [ :each |
+		node addChild: (BlDemoMethodNode withItem: each method) ]
 ]
 
 { #category : #instanceCreation }
@@ -76,6 +50,12 @@ BlDemoCollector >> collectPackage: aPackage [
 	
 ]
 
+{ #category : #'as yet unclassified' }
+BlDemoCollector >> collectPackageNamed: aString [
+
+	self collectPackage: (self class packageOrganizer packageNamed: aString)
+]
+
 { #category : #collection }
 BlDemoCollector >> collectPackages: anOrderedCollection [
 
@@ -88,7 +68,7 @@ BlDemoCollector >> ensureClassFor: aClass [
 
 	^ classDictionary 
 		at: aClass 
-		ifAbsentPut: [BlDemoClassNode new item: aClass; yourself]
+		ifAbsentPut: [ BlDemoClassNode withItem: aClass ]
 ]
 
 { #category : #collection }
@@ -96,7 +76,7 @@ BlDemoCollector >> ensurePackageFor: aPackage [
 
 	^ packageDictionary 
 		at: aPackage 
-		ifAbsentPut: [ BlDemoPackageNode new item: aPackage; yourself]
+		ifAbsentPut: [ BlDemoPackageNode withItem: aPackage ]
 ]
 
 { #category : #initialization }
@@ -115,6 +95,7 @@ BlDemoCollector >> packages [
 ]
 
 { #category : #accessing }
-BlDemoCollector >> pragma: aString [ 
+BlDemoCollector >> pragma: aString [
+
 	pragma := aString
 ]
