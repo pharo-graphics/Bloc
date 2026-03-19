@@ -86,6 +86,7 @@ BlOSWindowSDL2Host >> newAttributesFor: aSpace [
 		extent: aSpace extent;
 		resizable: aSpace isResizable;
 		borderless: aSpace isBorderless;
+		fullscreen: aSpace isFullscreen;
 		visible: false; "There is a race before opening a window and setting the event handler."
 		yourself.
 
