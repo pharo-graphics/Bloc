@@ -229,6 +229,12 @@ BlElementEventDispatcher >> dispatchSelectionLost [
 ]
 
 { #category : #'api - event managing' }
+BlElementEventDispatcher >> dispatchToBeRemovedFromParent [
+
+	self dispatchEvent: BlElementToBeRemovedFromParentEvent new
+]
+
+{ #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchTransformationChanged [
 	activatedElementEvents hasTransformationChanged
 		ifTrue: [ self dispatchEvent: (BlElementTransformationChangedEvent from: self owner) ]

@@ -2984,6 +2984,7 @@ BlElement >> onChildRemoved: anElement [
 BlElement >> onChildToBeRemoved: anElement [
 
 	| aPreviousFocusOwner |
+	anElement eventDispatcher dispatchToBeRemovedFromParent.
 	(self isAttachedToSceneGraph and: [ self space hasFocus: anElement ])
 		ifFalse: [ ^ self ].
 
