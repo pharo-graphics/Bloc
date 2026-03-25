@@ -22,5 +22,5 @@ BlElementToBeRemovedFromParentEvent class >> wantedIn: anEventDispatcher [
 { #category : #sending }
 BlElementToBeRemovedFromParentEvent >> sendTo: anObject [
 
-	anObject alementToBeRemovedFromParentEvent: self
+	anObject elementToBeRemovedFromParentEvent: self
 ]
