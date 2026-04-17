@@ -12,6 +12,7 @@ Class {
 
 { #category : #accessing }
 BlInfiniteLayoutConstraints >> decorationInsets [
+
 	^ decorationInsets
 ]
 
@@ -64,11 +65,13 @@ BlInfiniteLayoutConstraints >> holder: anElementHolder [
 	holder := anElementHolder
 ]
 
-{ #category : #'initialize-release' }
+{ #category : #initialization }
 BlInfiniteLayoutConstraints >> initialize [
+
 	super initialize.
-	
+
 	holder := self defaultHolder.
+	decorationInsets := BlInsets empty.
 	insertsDirty := true.
 	pendingInvalidate := false
 ]
