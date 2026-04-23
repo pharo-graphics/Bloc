@@ -71,8 +71,12 @@ BlSHRBTextStyler class >> foregroundAttributeFor: aPaint [
 { #category : #formatting }
 BlSHRBTextStyler >> addAttributes: attributes from: start to: stop [
 
-	| subText |
-	subText := blocText from: start to: stop.
+	| actualStart actualStop subText |
+	actualStart := start max: 1.
+	actualStop := stop min: blocText size.
+	actualStart <= actualStop ifFalse: [ ^ self ].
+
+	subText := blocText from: actualStart to: actualStop.
 	attributes do: [ :each | each applyToBlText: subText ]
 ]
 
