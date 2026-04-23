@@ -282,14 +282,42 @@ BaselineOfBloc >> baseline: spec [
 					'Bloc-Tests'
 					'Bloc-Text'
 					'Bloc-Text-Elements'
-					'BlocHost-Morphic') ] ]
+					'BlocHost-Morphic') ].
+			
+			spec
+				group: 'production'
+				with:
+					#('BlocHost-OSWindow-SDL2' 'Bloc-Spec2' 'Bloc-Alexandrie-SVG' 'Bloc-DragNDrop'
+					'Bloc-ColorPicker' 'Bloc-Alexandrie-Exporter' 'Bloc-Scalable' 'Bloc-Infinite'
+					'Bloc-Overlay' 'Bloc-LayoutZoomable' 'Bloc-Layout-Resizer' 'Bloc-FocusFinder'
+					'Bloc-CommandApplier').
+			spec
+				group: 'development'
+				with:
+					#('Bloc-Display' 'Bloc-Display-Tests' #Bloc #'BlocHost-Mock' #'Bloc-Tests'
+					#'Bloc-PullAndSlide' #'Bloc-FocusFinder' #'Bloc-Overlay' #'Bloc-Scalable'
+					#'Bloc-CommandApplier' #'Bloc-Animation' #'Bloc-Animation-Tests' #'BlocHost-Morphic'
+					#'BlocHost-OSWindow' #'BlocHost-OSWindow-SDL2' #'Bloc-Text' #'Bloc-Text-Rope'
+					#'Bloc-Text-Rope-Tests' #'Bloc-Text-Tests' #'Bloc-Layout' #'Bloc-Layout-Resizer'
+					#'Bloc-Text-Elements' #'Bloc-LayoutZoomable' #'Bloc-Infinite' #'Bloc-Alexandrie'
+					#'Bloc-Alexandrie-Exporter' #'Bloc-Text-Alexandrie-Examples' #'Bloc-Spec2'
+					#'Bloc-PharoExtensions' #'Bloc-Spec2-Tests' #'Bloc-UnitedTests' #'Bloc-DevTool'
+					#'Bloc-Scripter' #'Bloc-Examples' #'Bloc-Text-Examples' #'Bloc-Alexandrie-Tests'
+					#'Bloc-Infinite-Tests' #'Bloc-Layout-Tests' #'Bloc-Layout-Examples' #'Bloc-Overlay-Examples'
+					#'Bloc-Scalable-Examples' #'Bloc-FocusFinder-Examples' #'Bloc-Rules' #'Bloc-DragNDrop'
+					#'Bloc-ColorPicker' #'Bloc-Demo' #'Bloc-SVG' #'Bloc-SVG-Tests' #'Bloc-Alexandrie-SVG').
+
+			spec group: 'default' with: #('development')	
+			]
 ]
 
 { #category : #'external projects' }
 BaselineOfBloc >> declareAlexandrieOn: spec [
 
 	spec baseline: 'Alexandrie' with: [
-		spec repository: 'github://pharo-graphics/Alexandrie:master/src' ]
+		spec
+			repository: 'github://pharo-graphics/Alexandrie:NoTestsGroup/src';
+			loads: #( production ) ]
 ]
 
 { #category : #'external projects' }
