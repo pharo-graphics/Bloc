@@ -192,7 +192,7 @@ BlOSWindowSDL2HostSpace >> lockSurfaceFor: logicalDamagedRectangle scaleFactor: 
 	"Return early if damages fall outside of the space"
 	physicalDamagedRectangle :=
 		logicalDamagedRectangle intersect: logicalWindowRectangle ifNone: [ ^ self ].
-	physicalDamagedRectangle scaleBy: aNumber.
+	physicalDamagedRectangle := physicalDamagedRectangle scaleBy: aNumber.
 
 	sdlRect
 		x: physicalDamagedRectangle left asInteger;

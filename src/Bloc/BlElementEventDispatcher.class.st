@@ -162,9 +162,21 @@ BlElementEventDispatcher >> dispatchBorderChanged [
 ]
 
 { #category : #'api - event managing' }
+BlElementEventDispatcher >> dispatchChildAdded: anElement [
+
+		
+]
+
+{ #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchExtentChanged [
 	activatedElementEvents hasExtentChanged
 		ifTrue: [ self dispatchEvent: (BlElementExtentChangedEvent from: self owner) ]
+]
+
+{ #category : #'api - event managing' }
+BlElementEventDispatcher >> dispatchGeometryChanged [
+
+		
 ]
 
 { #category : #'api - event managing' }
@@ -177,6 +189,12 @@ BlElementEventDispatcher >> dispatchLayoutChanged [
 BlElementEventDispatcher >> dispatchLayoutComputed [
 	activatedElementEvents hasLayoutComputed
 		ifTrue: [ self dispatchEvent: (BlElementLayoutComputedEvent from: self) ]
+]
+
+{ #category : #'api - event managing' }
+BlElementEventDispatcher >> dispatchOutskirtChanged [
+
+		
 ]
 
 { #category : #'api - event managing' }
