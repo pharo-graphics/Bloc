@@ -1197,8 +1197,6 @@ BlSpace >> invalidateAll [
 	self root allChildrenBreadthFirstDo: [ :each |
 		each wantsSeparateCompositingLayer ifTrue: [ 
 			self markNeedsPaint: each from: each ] ].
-
-	self eventDispatcher dispatchInvalidateAllRequested
 ]
 
 { #category : #'window - properties' }
