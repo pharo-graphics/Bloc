@@ -180,6 +180,12 @@ BlElementEventDispatcher >> dispatchGeometryChanged [
 ]
 
 { #category : #'api - event managing' }
+BlElementEventDispatcher >> dispatchInvalidateAllRequested [
+
+		
+]
+
+{ #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchLayoutChanged [
 	activatedElementEvents hasLayoutChanged
 		ifTrue: [ self dispatchEvent: (BlElementLayoutChangedEvent from: self) ]

@@ -1196,7 +1196,9 @@ BlSpace >> invalidateAll [
 	"Also recursively any child in a layer"
 	self root allChildrenBreadthFirstDo: [ :each |
 		each wantsSeparateCompositingLayer ifTrue: [ 
-			self markNeedsPaint: each from: each ] ]
+			self markNeedsPaint: each from: each ] ].
+
+	self eventDispatcher dispatchInvalidateAllRequested
 ]
 
 { #category : #'window - properties' }
