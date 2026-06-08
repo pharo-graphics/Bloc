@@ -1,3 +1,6 @@
+"
+I'm a state in a `BlScrollFlinger`.
+"
 Class {
 	#name : #BlScrollFlingerState,
 	#superclass : #Object,

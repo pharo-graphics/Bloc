@@ -506,8 +506,8 @@ BlInfiniteElement >> dispatchLayoutFinalStep [
 
 	layout layoutCompleted.
 	self onExitLayoutOrScroll.
+	self dispatchOnScrolled: 0 @ 0.
 	(self didChildPositionsRangeChange: layoutPositionsRange) ifTrue: [
-		self dispatchOnScrolled: 0 @ 0.
 		self boundsUpdaterHasChanges ifTrue: [
 			self dispatchEvent: BlBoundsHasChangedDuringScrollingEvent new ] ].
 	self recoverFocusFromState.
@@ -696,6 +696,18 @@ BlInfiniteElement >> getDecorationsInsetsOfChildElement: anItemElement [
 { #category : #'item decorations - testing' }
 BlInfiniteElement >> hasItemDecorations [
 	^ itemDecorations isNotEmpty
+]
+
+{ #category : #'accessing - decoration' }
+BlInfiniteElement >> haveDecoration: aDecorationClass [
+
+	^ self itemDecorations anySatisfy: [ :d | d isKindOf: aDecorationClass ]
+]
+
+{ #category : #'view - configuration' }
+BlInfiniteElement >> haveRowNumbers [
+
+	^ self haveDecoration: BlRowNumberDecoration
 ]
 
 { #category : #initialization }

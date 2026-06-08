@@ -26,10 +26,11 @@ BlTextAttribute >> = anObject [
 BlTextAttribute >> applyOnFontAndStyleBuilder: aBlTextFontAndStyleBuilder [
 ]
 
-{ #category : #converting }
-BlTextAttribute >> asBlTextAttribute [
-
-	^ self
+{ #category : #'text style' }
+BlTextAttribute >> applyToBlText: aBlText [
+	"Apply the receiver to the supplied BlText"
+	
+	aBlText attribute: self
 ]
 
 { #category : #style }

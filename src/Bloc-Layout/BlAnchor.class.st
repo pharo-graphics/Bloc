@@ -169,5 +169,5 @@ BlAnchor >> valueInBounds: aBounds [
 { #category : #applying }
 BlAnchor >> valueInParent: aParent [
 
-	^ self valueInBounds: (self element measuredBounds inParent: aParent)
+	^ self valueInBounds: (self element geometry anchorBoundsOf: self element inParent: aParent)
 ]

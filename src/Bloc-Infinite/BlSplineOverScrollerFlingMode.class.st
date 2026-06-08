@@ -1,3 +1,6 @@
+"
+I'm the fling `BlScrollFlinger` mode.
+"
 Class {
 	#name : #BlSplineOverScrollerFlingMode,
 	#superclass : #BlSplineOverScrollerMode,
@@ -13,25 +16,23 @@ Class {
 
 { #category : #updating }
 BlSplineOverScrollerFlingMode >> continueOn: aSplineOverScroller [
+
 	| aResult |
-	
 	aResult := aSplineOverScroller currentStep onFinished: aSplineOverScroller.
-	aResult
-		ifFalse: [ ^ false ].
+	aResult ifFalse: [ ^ false ].
 
 	^ true
 ]
 
 { #category : #initialization }
 BlSplineOverScrollerFlingMode >> initializeOn: aSplineOverScroller [
+
 	| aTotalDistance |
-		
 	aSplineOverScroller overshotDistance: self overshotDistance.
 	aSplineOverScroller isFinished: false.
 
 	aSplineOverScroller startPosition: self startPosition.
 	aSplineOverScroller startVelocity: self velocity.
-	
 	
 	
 	aSplineOverScroller updateTime
@@ -100,41 +101,49 @@ BlSplineOverScrollerFlingMode >> initializeOn: aSplineOverScroller [
 
 { #category : #accessing }
 BlSplineOverScrollerFlingMode >> maxPosition [
+
 	^ maxPosition
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerFlingMode >> maxPosition: anObject [
+
 	maxPosition := anObject
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerFlingMode >> minPosition [
+
 	^ minPosition
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerFlingMode >> minPosition: anObject [
+
 	minPosition := anObject
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerFlingMode >> overshotDistance [
+
 	^ overshotDistance
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerFlingMode >> overshotDistance: anObject [
+
 	overshotDistance := anObject
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerFlingMode >> startPosition [
+
 	^ startPosition
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerFlingMode >> startPosition: anObject [
+
 	startPosition := anObject
 ]
 
@@ -142,19 +151,17 @@ BlSplineOverScrollerFlingMode >> startPosition: anObject [
 BlSplineOverScrollerFlingMode >> updateOn: aSplineOverScroller [
 	"Update the current position and velocity for current time.
 	Returns true if update has been done and false if animation duration has been reached."
-	<return: #Boolean>
-	| aCurrentTime aDeltaTime aDistance|
+
+	| aCurrentTime aDeltaTime aDistance |
 
 	aCurrentTime := aSplineOverScroller time now.
 
-	aDeltaTime := (aCurrentTime - aSplineOverScroller startTime).
+	aDeltaTime := aCurrentTime - aSplineOverScroller startTime.
 
-	(aDeltaTime isZero)
-		"Skip work but report that we're still going if we have a nonzero duration."
-		ifTrue: [ ^ aSplineOverScroller duration isZero not ].
+	"Skip work but report that we're still going if we have a nonzero duration."
+	aDeltaTime isZero ifTrue: [ ^ aSplineOverScroller duration isZero not ].
 
-	aDeltaTime > aSplineOverScroller duration
-		ifTrue: [ ^ false ].
+	aDeltaTime > aSplineOverScroller duration ifTrue: [ ^ false ].
 
 	aDistance := 0.0.
 	
@@ -166,17 +173,20 @@ BlSplineOverScrollerFlingMode >> updateOn: aSplineOverScroller [
 		ifTrue: [ aDistance := aSplineOverScroller updateCubic: aDeltaTime ].
 	
 	"Distance must be rounded and position converted to integer to prevent fractional locations"
-	aSplineOverScroller currentPosition: (aSplineOverScroller startPosition + (aSplineOverScroller rounded: aDistance)).
+	aSplineOverScroller currentPosition:
+		(aSplineOverScroller startPosition + (aSplineOverScroller rounded: aDistance)).
 
 	^ true
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerFlingMode >> velocity [
+
 	^ velocity
 ]
 
 { #category : #accessing }
 BlSplineOverScrollerFlingMode >> velocity: anObject [
+
 	velocity := anObject
 ]

@@ -28,6 +28,7 @@ BlDevScripterElementIdEventTarget >> elementId [
 
 { #category : #accessing }
 BlDevScripterElementIdEventTarget >> elementId: aBlElementId [
+
 	elementId := aBlElementId asBlocElementId
 ]
 

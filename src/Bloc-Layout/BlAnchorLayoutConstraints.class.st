@@ -199,6 +199,12 @@ BlAnchorLayoutConstraints >> referenceElement: anElement [
 ]
 
 { #category : #adding }
+BlAnchorLayoutConstraints >> remove: anAnchorRule [
+
+	rules remove: anAnchorRule
+]
+
+{ #category : #adding }
 BlAnchorLayoutConstraints >> removeAll [
 
 	rules removeAll

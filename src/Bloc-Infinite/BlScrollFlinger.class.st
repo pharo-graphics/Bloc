@@ -1,8 +1,9 @@
+"
+Scroll flinger animation. See `BlOvershootingScroller` for more information.
+"
 Class {
 	#name : #BlScrollFlinger,
 	#superclass : #BlTask,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'interpolator',
 		'scroller',
@@ -12,8 +13,19 @@ Class {
 		'scrollable',
 		'shouldRequeueTask'
 	],
+	#classVars : [
+		'InfluenceFactor',
+		'MaxScrollDuration'
+	],
 	#category : #'Bloc-Infinite-Scrollable-Core'
 }
+
+{ #category : #'class initialization' }
+BlScrollFlinger class >> initialize [
+
+	MaxScrollDuration := 2 seconds.
+	InfluenceFactor := 0.3 * Float pi / 2.0
+]
 
 { #category : #'instance creation' }
 BlScrollFlinger class >> on: aTOBlScrollable [
@@ -26,80 +38,41 @@ BlScrollFlinger class >> on: aTOBlScrollable [
 
 { #category : #'private - state' }
 BlScrollFlinger >> beIdle [
+
 	self scrollable scrollState: #idle
 ]
 
 { #category : #'private - state' }
 BlScrollFlinger >> beSettling [
+
 	self scrollable scrollState: #settling
-]
-
-{ #category : #'private - physics' }
-BlScrollFlinger >> computeScrollDurationFor: aVelocityPoint distance: aDeltaPoint [
-	<return: #Duration>
-
-	| anAbsDx anAbsDy isHorizontal aVelocity aDelta aContainerSize aHalfContainerSize aDistanceRatio aDistance aDuration |
- 
-	anAbsDx := aDeltaPoint x abs.
-	anAbsDy := aDeltaPoint y abs.
-	isHorizontal := anAbsDx > anAbsDy.
-	aVelocity := aVelocityPoint r. "sqrt(x*x + y*y)"
-	aDelta := aDeltaPoint r. "sqrt(x*x + y*y)"
-	aContainerSize := isHorizontal
-		ifTrue: [ self scrollable width ]
-		ifFalse: [ self scrollable height ].
-	aHalfContainerSize := aContainerSize / 2.0.
-	aDistanceRatio := (aDelta / aContainerSize) min: 1.0.
-	aDistance := aHalfContainerSize + (aHalfContainerSize * (self distanceInfluenceForSnapDuration: aDistanceRatio)).
-	
-	aDuration := (aVelocity > 0)
-		ifTrue: [ 4 * (1000.0 * (aDistance / aVelocity) abs) rounded ]
-		ifFalse: [ 
-			| anAbsDelta |
-			anAbsDelta := isHorizontal
-				ifTrue: [ anAbsDx ]
-				ifFalse: [ anAbsDy ].
-			(((anAbsDelta / aContainerSize) + 1) * 300) asInteger ].
-	
-	^ aDuration milliSeconds min: self maxScrollDuration
-]
-
-{ #category : #initialization }
-BlScrollFlinger >> createScrollerFor: anInterpolator [
-	^ BlOvershootingScroller interpolator: interpolator
-]
-
-{ #category : #initialization }
-BlScrollFlinger >> createState [
-	^ BlScrollFlingerState new
 ]
 
 { #category : #initialization }
 BlScrollFlinger >> defaultInterpolator [
+
 	^ BlQuinticInterpolator default
 ]
 
 { #category : #'private - scheduling' }
 BlScrollFlinger >> disableRunOnAnimationRequests [
+
 	shouldRequeueTask := false.
 	eatRunOnAnimationRequest := true
 ]
 
 { #category : #'private - physics' }
 BlScrollFlinger >> distanceInfluenceForSnapDuration: aFactorNumber [
-	<return: #Number>
-	| f |
 
-	f := aFactorNumber - 0.5. "center the values about 0"
-	f := f * 0.3 * Float pi / 2.0.
-	^ f sin
+	"Center the values about 0 and apply a factor"
+	^ ((aFactorNumber - 0.5) * InfluenceFactor) sin
 ]
 
 { #category : #'private - scheduling' }
 BlScrollFlinger >> enableRunOnAnimationRequests [
+
 	eatRunOnAnimationRequest := false.
-	shouldRequeueTask
-		ifTrue: [ self postOnAnimation ]
+	shouldRequeueTask ifTrue: [ self postOnAnimation ]
 ]
 
 { #category : #'api - scrolling' }
@@ -123,29 +96,30 @@ BlScrollFlinger >> flingBy: aVelocityPoint [
 
 { #category : #initialization }
 BlScrollFlinger >> initialize [
+
 	super initialize.
-	
+
 	lastFlingX := 0.
 	lastFlingY := 0.
 	interpolator := self defaultInterpolator.
-	scroller := self createScrollerFor: interpolator.
+	scroller := self newScrollerFor: interpolator.
 	eatRunOnAnimationRequest := false.
-	shouldRequeueTask := false.
+	shouldRequeueTask := false
 ]
 
 { #category : #initialization }
-BlScrollFlinger >> initializeWith: aTOBlScrollable [
+BlScrollFlinger >> initializeWith: aScrollable [
 
 	self
 		assert: [ scrollable isNil ]
 		description: [ 'I can be initialized only once!' ].
 
-	scrollable := aTOBlScrollable
+	scrollable := aScrollable
 ]
 
 { #category : #accessing }
 BlScrollFlinger >> interpolator [
-	<return: #BlInterpolator>
+	"Answer my `BlInterpolator`"
 	
 	^ interpolator
 ]
@@ -158,20 +132,25 @@ BlScrollFlinger >> isIdle [
 
 { #category : #accessing }
 BlScrollFlinger >> lastFlingPosition [
-	<return: #Point>
-	
+
 	^ lastFlingX @ lastFlingY
 ]
 
 { #category : #initialization }
-BlScrollFlinger >> maxScrollDuration [
-	<return: #Duration>
+BlScrollFlinger >> newScrollerFor: anInterpolator [
 
-	^ 2 seconds
+	^ BlOvershootingScroller interpolator: interpolator
+]
+
+{ #category : #initialization }
+BlScrollFlinger >> newState [
+
+	^ BlScrollFlingerState new
 ]
 
 { #category : #hooks }
 BlScrollFlinger >> onEnqueued: aBlSpace [
+
 	super onEnqueued: aBlSpace.
 	
 	self scroller time: aBlSpace time
@@ -203,14 +182,14 @@ BlScrollFlinger >> onSmoothScrolled [
 
 { #category : #scheduling }
 BlScrollFlinger >> postOnAnimation [
+
 	self
 		assert: [ scrollable isNotNil ]
 		description: [ 'Can not post on animation if I am not attached to a scrollable' ].
 
 	eatRunOnAnimationRequest 
-		ifTrue: [ 
-			shouldRequeueTask := true ]
-		ifFalse:[ 
+		ifTrue: [ shouldRequeueTask := true ]
+		ifFalse:[
 			self isNew 
 				ifTrue: [ self scrollable enqueueTask: self ]
 				ifFalse: [ 
@@ -221,7 +200,7 @@ BlScrollFlinger >> postOnAnimation [
 								ifTrue: [ 
 									self setNew.
 									shouldRequeueTask := false.
-									self scrollable enqueueTask: self ] ] ] ].
+									self scrollable enqueueTask: self ] ] ] ]
 ]
 
 { #category : #running }
@@ -240,6 +219,7 @@ BlScrollFlinger >> requeueTaskAfterExecution [
 
 { #category : #running }
 BlScrollFlinger >> run [
+
 	| aScroller aSmoothScroller |
 		
 	self disableRunOnAnimationRequests.
@@ -273,7 +253,8 @@ BlScrollFlinger >> run [
 	aSmoothScroller ifNotNil: [ 
 		aSmoothScroller isPendingInitialRun
 			ifTrue: [ aSmoothScroller onScrollBy: 0@0 ].
-		"stop if it does not trigger any scroll"
+
+		"Stop if it does not trigger any scroll"
 		shouldRequeueTask
 			ifFalse: [ aSmoothScroller stop ] ].
 		
@@ -282,6 +263,7 @@ BlScrollFlinger >> run [
 
 { #category : #private }
 BlScrollFlinger >> runFinalizeOn: anOverScroller with: aState [
+
 	| fullyConsumedHorizontal fullyConsumedVertical fullyConsumedAny |
 	
 	fullyConsumedHorizontal := aState dX isZero not and: [
@@ -307,10 +289,10 @@ BlScrollFlinger >> runFinalizeOn: anOverScroller with: aState [
 
 { #category : #private }
 BlScrollFlinger >> runInitOn: anOverScroller [
-	<return: #BlScrollFlingerState>
-	| aState |
 
-	aState := self createState.
+	| aState |
+	aState := self newState.
+
 	aState
 		x: anOverScroller currentX;
 		y: anOverScroller currentY;
@@ -331,25 +313,23 @@ BlScrollFlinger >> runInitOn: anOverScroller [
 BlScrollFlinger >> runLayoutScrollWith: aState [
 	"A state is an instance of OBlScrollFlingerState"
 
-	aState dX isZero
-		ifFalse: [ 
-			aState hResult: (scrollable scrollHorizontallyBy: aState dX).
-			aState overscrollX: aState dX - aState hResult ].
+	aState dX isZero ifFalse: [
+		aState hResult: (scrollable scrollHorizontallyBy: aState dX).
+		aState overscrollX: aState dX - aState hResult ].
 	
-	aState dY isZero
-		ifFalse: [ 
-			aState vResult: (scrollable scrollVerticallyBy: aState dY).
-			aState overscrollY: aState dY - aState vResult ]
+	aState dY isZero ifFalse: [
+		aState vResult: (scrollable scrollVerticallyBy: aState dY).
+		aState overscrollY: aState dY - aState vResult ]
 ]
 
 { #category : #private }
 BlScrollFlinger >> runOverscrollOn: anOverScroller with: aState [
+
 	| aVelocity aVelocityX aVelocityY |
 		
 	"Should not overscroll if distances in both directions are zero"
-	(aState overscrollX isZero and: [
-		aState overscrollY isZero ])
-			ifTrue: [ ^ self ].
+	(aState overscrollX isZero and: [ aState overscrollY isZero ])
+		ifTrue: [ ^ self ].
 			
 	aVelocity := anOverScroller velocity.
 	
@@ -383,33 +363,57 @@ BlScrollFlinger >> runOverscrollOn: anOverScroller with: aState [
 
 { #category : #private }
 BlScrollFlinger >> runSmoothOn: aSmoothScroller with: aState [
-	| aDeltaPoint |
 
+	| aDeltaPoint |
 	"Can not scroll smoothly using nil scroller
 	(which means that smooth scroll was not requested)"
-	aSmoothScroller
-		ifNil: [ ^ self ].
+	aSmoothScroller ifNil: [ ^ self ]. 
 	
 	"Can not scroll if smooth scroller is not yet initialized or not running"
-	(aSmoothScroller isPendingInitialRun or: [
-		aSmoothScroller isRunning not ])
-			ifTrue: [ ^ self ].
+	(aSmoothScroller isPendingInitialRun or: [ aSmoothScroller isRunning not ]) ifTrue: [ ^ self ].
 
-	aDeltaPoint := (aState dX - aState overscrollX) @ (aState dY - aState overscrollY).	
+	aDeltaPoint := aState dX - aState overscrollX @ (aState dY - aState overscrollY).
 
 	aSmoothScroller scrollBy: aDeltaPoint
 ]
 
+{ #category : #'private - physics' }
+BlScrollFlinger >> scrollDurationFor: aVelocityPoint distance: aDeltaPoint [
+
+	| anAbsDx anAbsDy isHorizontal aVelocity aDelta aContainerSize aHalfContainerSize aDistanceRatio aDistance aDuration |
+ 
+	anAbsDx := aDeltaPoint x abs.
+	anAbsDy := aDeltaPoint y abs.
+	isHorizontal := anAbsDx > anAbsDy.
+	aVelocity := aVelocityPoint r. "sqrt(x*x + y*y)"
+	aDelta := aDeltaPoint r. "sqrt(x*x + y*y)"
+	aContainerSize := isHorizontal
+		ifTrue: [ self scrollable width ]
+		ifFalse: [ self scrollable height ].
+	aHalfContainerSize := aContainerSize / 2.0.
+	aDistanceRatio := (aDelta / aContainerSize) min: 1.0.
+	aDistance := aHalfContainerSize + (aHalfContainerSize * (self distanceInfluenceForSnapDuration: aDistanceRatio)).
+	
+	aDuration := aVelocity > 0
+		ifTrue: [ 4 * (1000.0 * (aDistance / aVelocity) abs) rounded ]
+		ifFalse: [ 
+			| anAbsDelta |
+			anAbsDelta := isHorizontal
+				ifTrue: [ anAbsDx ]
+				ifFalse: [ anAbsDy ].
+			(((anAbsDelta / aContainerSize) + 1) * 300) asInteger ].
+	
+	^ aDuration milliSeconds min: MaxScrollDuration
+]
+
 { #category : #accessing }
 BlScrollFlinger >> scrollable [
-	<return: #TBlScrollable>
 
 	^ scrollable
 ]
 
 { #category : #accessing }
 BlScrollFlinger >> scroller [
-	<return: #BlOvershootingScroller>
 	
 	^ scroller
 ]
@@ -438,7 +442,7 @@ BlScrollFlinger >> smoothScrollBy: aDeltaPoint during: aDuration with: anInterpo
 		"Interpolator changes, need to re-create a scroller"
 		ifTrue: [ 
 			interpolator := anInterpolator.
-			scroller := self createScrollerFor: interpolator ].
+			scroller := self newScrollerFor: interpolator ].
 	
 	self beSettling.
 	lastFlingX := 0.
@@ -452,10 +456,11 @@ BlScrollFlinger >> smoothScrollBy: aDeltaPoint velocity: aVelocityPoint [
 
 	self
 		smoothScrollBy: aDeltaPoint
-		during: (self computeScrollDurationFor: aVelocityPoint distance: aDeltaPoint)
+		during: (self scrollDurationFor: aVelocityPoint distance: aDeltaPoint)
 ]
 
 { #category : #'api - scrolling' }
 BlScrollFlinger >> stop [
+
 	scroller finish
 ]

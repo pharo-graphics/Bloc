@@ -71,9 +71,13 @@ BlSHRBTextStyler class >> foregroundAttributeFor: aPaint [
 { #category : #formatting }
 BlSHRBTextStyler >> addAttributes: attributes from: start to: stop [
 
-	blocText
-		attributes: (attributes collect: [ :each | each asBlTextAttribute ])
-		from: start to: stop
+	| actualStart actualStop subText |
+	actualStart := start max: 1.
+	actualStop := stop min: blocText size.
+	actualStart <= actualStop ifFalse: [ ^ self ].
+
+	subText := blocText from: actualStart to: actualStop.
+	attributes do: [ :each | each applyToBlText: subText ]
 ]
 
 { #category : #private }
@@ -81,7 +85,7 @@ BlSHRBTextStyler >> style: aBlText ast: ast [
 
 	aBlText ifEmpty: [ ^ self ].
 	blocText := aBlText.
-
+	self addStyle: #default from: 1 to: aBlText size .
 	bracketLevel := 0.
 	parentheseLevel := 0.
 	braceLevel := 0.

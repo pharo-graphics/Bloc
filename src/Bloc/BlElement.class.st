@@ -46,8 +46,8 @@ You can learn Bloc following a memory game tutorial: [00-memory-game.pillar](fil
 Class {
 	#name : #BlElement,
 	#superclass : #Object,
-	#traits : 'TBlTransformable + TBlEventTarget + TBlDebug',
-	#classTraits : 'TBlTransformable classTrait + TBlEventTarget classTrait + TBlDebug classTrait',
+	#traits : 'TBlLayoutResizable + TBlTransformable + TBlEventTarget + TBlDebug',
+	#classTraits : 'TBlLayoutResizable classTrait + TBlTransformable classTrait + TBlEventTarget classTrait + TBlDebug classTrait',
 	#instVars : [
 		'spaceReference',
 		'parent',
@@ -123,8 +123,8 @@ BlElement >> addChild: anElement after: anotherElement [
 BlElement >> addChild: anElement as: aBlElementId [
 	"Add a given element to my children and make it a named container, so that
 	we could add children in that container"
+
 	| aChildId |
-	
 	aChildId := aBlElementId asBlocElementId.
 	
 	self
@@ -824,7 +824,6 @@ BlElement >> childIndexOf: anElement [
 
 { #category : #'children accessing' }
 BlElement >> childWithId: aBlElementId [
-	<return: #BlElement>
 
 	self
 		childWithId: aBlElementId
@@ -1492,7 +1491,6 @@ BlElement >> effectBounds [
 { #category : #'private - accessing' }
 BlElement >> elementId [
 
-	<return: #BlElementId>
 	^ self userData at: #elementId ifAbsent: [ BlElementId noId ]
 ]
 
@@ -2056,16 +2054,25 @@ BlElement >> inUIProcessDo: aBlock [
 	If the active process is already the UI process, evaluate immediately. 
 	Otherwise, queue up for the next frame."
 
+	self inUIProcessDo: aBlock elseDo: [
+			self enqueueTask: (BlTaskAction new
+					 action: aBlock;
+					 yourself) ]
+]
+
+{ #category : #processing }
+BlElement >> inUIProcessDo: aBlock elseDo: altBlock [
+	"Run the supplied block in the UI process else run the alternative block
+	If the active process is already the UI process, evaluate immediately. 
+	Otherwise, queue up for the next frame."
+
 	| uiProcess |
 	self isAttachedToSceneGraph ifTrue: [ 
 		self space host uiProcessDo: [ :uiProc | uiProcess := uiProc ] ].
 
 	uiProcess = Processor activeProcess
-		ifTrue: [ aBlock value ]
-		ifFalse: [ 
-			self enqueueTask: (BlTaskAction new
-					 action: aBlock;
-					 yourself) ]
+		ifTrue: aBlock 
+		ifFalse: altBlock
 ]
 
 { #category : #initialization }
@@ -2349,6 +2356,13 @@ BlElement >> isVisibleInSpace [
 
 { #category : #accessing }
 BlElement >> labeled: aString [
+
+	self
+		deprecated: 'Use #id: instead. String will be converted to Symbol, too.'
+		transformWith:
+			'`@receiver labeled: `@arg' ->
+			'`@receiver id: `@arg'.
+
 	self id: aString asSymbol
 ]
 
@@ -2975,6 +2989,7 @@ BlElement >> onChildRemoved: anElement [
 BlElement >> onChildToBeRemoved: anElement [
 
 	| aPreviousFocusOwner |
+	anElement eventDispatcher dispatchToBeRemovedFromParent.
 	(self isAttachedToSceneGraph and: [ self space hasFocus: anElement ])
 		ifFalse: [ ^ self ].
 
@@ -3558,6 +3573,7 @@ BlElement >> removeChildren: aListOfElements [
 	See `BlElement>>#removeChild:` for more info
 	aListOfElements must not be nil."
 	
+	aListOfElements ifEmpty: [ ^ self ].
 	aListOfElements do: [ :anElement | self onChildToBeRemoved: anElement ].
 	aListOfElements do: [ :anElement | anElement parent: nil ].
 	self children removeAll: aListOfElements.
@@ -4091,7 +4107,9 @@ BlElement >> visibility: aVisibility [
 	"visibility does not change how *this* element is rendered,
 	instead it affects the rendering of the parent"
 	self hasParent
-		ifTrue: [ self parent invalidate ]
+		ifTrue: [ self parent invalidate ].
+	
+	self eventDispatcher dispatchVisibilityChanged 
 ]
 
 { #category : #'geometry bounds' }

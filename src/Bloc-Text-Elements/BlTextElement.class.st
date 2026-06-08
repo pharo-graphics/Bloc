@@ -30,7 +30,8 @@ Class {
 
 { #category : #'class initialization' }
 BlTextElement class >> initialize [ 
-	DefaultText := 'Text' asRopedText readonly
+
+	DefaultText := (BlRopedText string: 'Text') readonly
 ]
 
 { #category : #accessing }

@@ -1,3 +1,6 @@
+"
+I'm a scrollable element.
+"
 Class {
 	#name : #BlScrollableElement,
 	#superclass : #BlElement,

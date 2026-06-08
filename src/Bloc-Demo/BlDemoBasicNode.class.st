@@ -1,3 +1,6 @@
+"
+I'm the head of a little domain to represent classes, methods, and package for the demo collector tool (a tool to browse demo expressed as methods).
+"
 Class {
 	#name : #BlDemoBasicNode,
 	#superclass : #Object,
@@ -6,14 +9,15 @@ Class {
 		'parent',
 		'children'
 	],
-	#category : #'Bloc-Demo-Node'
+	#category : #'Bloc-Demo-DemoPresenterNodes'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 BlDemoBasicNode class >> withItem: anObject [
 
-	^ self new item: anObject 
-	
+	^ self new
+		initializeWithItem: anObject;
+		yourself
 ]
 
 { #category : #adding }
@@ -34,10 +38,13 @@ BlDemoBasicNode >> children: anOrderedCollection [
 ]
 
 { #category : #initialization }
-BlDemoBasicNode >> initialize [
+BlDemoBasicNode >> initializeWithItem: anObject [
 
-	super initialize.
-	children := OrderedCollection new
+	self initialize.
+
+	children := OrderedCollection new.
+
+	item := anObject
 ]
 
 { #category : #accessing }
@@ -46,13 +53,8 @@ BlDemoBasicNode >> item [
 ]
 
 { #category : #accessing }
-BlDemoBasicNode >> item: anObject [
+BlDemoBasicNode >> name [
 
-	item := anObject 
-]
-
-{ #category : #accessing }
-BlDemoBasicNode >> name [ 
 	^ item name
 ]
 
@@ -65,4 +67,14 @@ BlDemoBasicNode >> parent [
 BlDemoBasicNode >> parent: aNode [
 
 	parent := aNode 
+]
+
+{ #category : #printing }
+BlDemoBasicNode >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPutAll: '(';
+		print: item;
+		nextPutAll: ')'
 ]

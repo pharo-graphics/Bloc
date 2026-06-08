@@ -88,11 +88,6 @@ BlElementEventDispatcher >> disableLayoutComputed [
 ]
 
 { #category : #'api - element events' }
-BlElementEventDispatcher >> disableMousePickedOutside [
-	activatedElementEvents clearMousePickedOutside
-]
-
-{ #category : #'api - element events' }
 BlElementEventDispatcher >> disablePositionChanged [
 	activatedElementEvents clearPositionChanged
 ]
@@ -135,6 +130,11 @@ BlElementEventDispatcher >> disableTransformationChanged [
 { #category : #'api - element events' }
 BlElementEventDispatcher >> disableTransformationInSpaceChanged [
 	activatedElementEvents clearTransformationInSpaceChanged
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> disableVisibilityChanged [
+	activatedElementEvents clearVisibilityChanged
 ]
 
 { #category : #'api - event managing' }
@@ -247,6 +247,12 @@ BlElementEventDispatcher >> dispatchSelectionLost [
 ]
 
 { #category : #'api - event managing' }
+BlElementEventDispatcher >> dispatchToBeRemovedFromParent [
+
+	self dispatchEvent: BlElementToBeRemovedFromParentEvent new
+]
+
+{ #category : #'api - event managing' }
 BlElementEventDispatcher >> dispatchTransformationChanged [
 	activatedElementEvents hasTransformationChanged
 		ifTrue: [ self dispatchEvent: (BlElementTransformationChangedEvent from: self owner) ]
@@ -256,6 +262,12 @@ BlElementEventDispatcher >> dispatchTransformationChanged [
 BlElementEventDispatcher >> dispatchTransformationInSpaceChanged [
 	activatedElementEvents hasTransformationInSpaceChanged
 		ifTrue: [ self dispatchEvent: (BlElementTransformationInSpaceChangedEvent from: self owner) ]
+]
+
+{ #category : #'api - event managing' }
+BlElementEventDispatcher >> dispatchVisibilityChanged [
+	activatedElementEvents hasVisibilityChanged
+		ifTrue: [ self dispatchEvent: (BlElementVisibilityChangedEvent from: self owner) ]
 ]
 
 { #category : #'api - element events' }
@@ -312,11 +324,6 @@ BlElementEventDispatcher >> enableLayoutComputed [
 ]
 
 { #category : #'api - element events' }
-BlElementEventDispatcher >> enableMousePickedOutside [
-	activatedElementEvents addMousePickedOutside
-]
-
-{ #category : #'api - element events' }
 BlElementEventDispatcher >> enablePositionChanged [
 	activatedElementEvents addPositionChanged
 ]
@@ -359,6 +366,11 @@ BlElementEventDispatcher >> enableTransformationChanged [
 { #category : #'api - element events' }
 BlElementEventDispatcher >> enableTransformationInSpaceChanged [
 	activatedElementEvents addTransformationInSpaceChanged
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> enableVisibilityChanged [
+	activatedElementEvents addVisibilityChanged
 ]
 
 { #category : #initialization }
@@ -431,11 +443,6 @@ BlElementEventDispatcher >> wantsLayoutComputed [
 ]
 
 { #category : #'api - element events' }
-BlElementEventDispatcher >> wantsMousePickedOutside [
-	^ activatedElementEvents hasMousePickedOutside
-]
-
-{ #category : #'api - element events' }
 BlElementEventDispatcher >> wantsPositionChanged [
 	^ activatedElementEvents hasPositionChanged
 ]
@@ -478,4 +485,9 @@ BlElementEventDispatcher >> wantsTransformationChanged [
 { #category : #'api - element events' }
 BlElementEventDispatcher >> wantsTransformationInSpaceChanged [
 	^ activatedElementEvents hasTransformationInSpaceChanged
+]
+
+{ #category : #'api - element events' }
+BlElementEventDispatcher >> wantsVisibilityChanged [
+	^ activatedElementEvents hasVisibilityChanged
 ]

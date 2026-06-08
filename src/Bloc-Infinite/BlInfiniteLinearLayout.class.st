@@ -178,22 +178,6 @@ BlInfiniteLinearLayout >> computeScrollRange [
 	^ self newScrollbarHelper computeScrollRange
 ]
 
-{ #category : #scrolling }
-BlInfiniteLinearLayout >> computeScrollVectorForPosition: aPosition [
-
-	| aFirstChildPos aDirection |
-	self hasChildren ifFalse: [ ^ nil ].
-	
-	aFirstChildPos := self childPositionOf: (self childAt: 1).
-	aDirection := (aPosition < aFirstChildPos) ~= shouldReverseLayout
-		ifTrue: [ -1 ]
-		ifFalse: [ 1 ].
-	
-	^ orientation isHorizontal
-		ifTrue: [ aDirection @ 0 ]
-		ifFalse: [ 0 @ aDirection ]
-]
-
 { #category : #'scrolling - thumb' }
 BlInfiniteLinearLayout >> computeVerticalScrollExtent [
 
@@ -1155,6 +1139,22 @@ BlInfiniteLinearLayout >> scrollToPosition: aPositionInDataSource offset: anOffs
 	pendingScrollPositionOffset := anOffset.
 
 	self requestLayout
+]
+
+{ #category : #scrolling }
+BlInfiniteLinearLayout >> scrollVectorForPosition: aPosition [
+
+	| aFirstChildPos aDirection |
+	self hasChildren ifFalse: [ ^ nil ].
+	
+	aFirstChildPos := self childPositionOf: (self childAt: 1).
+	aDirection := (aPosition < aFirstChildPos) ~= shouldReverseLayout
+		ifTrue: [ -1 ]
+		ifFalse: [ 1 ].
+	
+	^ orientation isHorizontal
+		ifTrue: [ aDirection @ 0 ]
+		ifFalse: [ 0 @ aDirection ]
 ]
 
 { #category : #scrolling }

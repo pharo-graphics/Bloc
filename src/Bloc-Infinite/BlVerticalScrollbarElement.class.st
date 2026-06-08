@@ -1,3 +1,6 @@
+"
+I'm an vertical scroll bar element.
+"
 Class {
 	#name : #BlVerticalScrollbarElement,
 	#superclass : #BlScrollbarElement,

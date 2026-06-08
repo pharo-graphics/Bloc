@@ -4,5 +4,5 @@ Extension { #name : #TextColor }
 TextColor >> applyToBlText: aBlText [
 	"Apply the receiver to the supplied BlText"
 
-	aBlText foreground: self color
+	aBlText foreground: color
 ]

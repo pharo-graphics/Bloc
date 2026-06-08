@@ -1,8 +1,5 @@
 "
-# Custom id
-
-Is intended to be subclassed for custom object-oriented ids
-
+I am the abstract superclass of Singleton identifiers. A subclass only needs to override #asSymbol to return the Symbol that represents the unique instance of such class.
 "
 Class {
 	#name : #BlElementUniqueId,
@@ -15,6 +12,7 @@ Class {
 
 { #category : #converting }
 BlElementUniqueId class >> asBlocElementId [
+
 	^ self uniqueInstance
 ]
 
@@ -31,7 +29,6 @@ BlElementUniqueId class >> cleanUp [
 { #category : #converting }
 BlElementUniqueId class >> indexed: anIndex [
 	"Convert me to an indexed id with a given index"
-	<return: #BlElementId>
 	
 	^ self asBlocElementId indexed: anIndex
 ]
@@ -55,5 +52,6 @@ BlElementUniqueId >> = anObject [
 
 { #category : #accessing }
 BlElementUniqueId >> description [
+
 	^ self class comment
 ]

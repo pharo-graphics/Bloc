@@ -1,3 +1,6 @@
+"
+I'm a cubic `BlScrollFlinger` step.
+"
 Class {
 	#name : #BlSplineOverScrollerCubicStep,
 	#superclass : #BlSplineOverScrollerStep,
@@ -7,7 +10,6 @@ Class {
 { #category : #hooks }
 BlSplineOverScrollerCubicStep >> onFinished: aSplineOverScroller [
 	"Cubic means no spring back, simply finish"
-	<return: #Boolean>
 	
 	^ false
 ]

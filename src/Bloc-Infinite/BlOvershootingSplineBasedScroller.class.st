@@ -79,13 +79,12 @@ BlOvershootingSplineBasedScroller >> continue [
 	spring back or fling animations and nicely handle overshot. If false is returned,
 	animation is treated as finished.
 	Returns true if animation should continue, false otherwise"
-	<return: #Boolean>
+
 	| shouldContinue |
-	
 	shouldContinue := self mode continueOn: self.
-	shouldContinue
-		"perform an update if we continue, because it is skipped during #run step"
-		ifTrue: [ self update ].
+
+	"Perform an update if we continue, because it is skipped during #run step"
+	shouldContinue ifTrue: [ self update ].
 
 	^ shouldContinue
 ]
@@ -686,7 +685,6 @@ BlOvershootingSplineBasedScroller >> truncated: aNumber [
 BlOvershootingSplineBasedScroller >> update [
 	"Update the current position and velocity for current time.
 	Returns true if update has been done and false if animation duration has been reached."
-	<return: #Boolean>
 	
 	updateTime := self time now.
 	

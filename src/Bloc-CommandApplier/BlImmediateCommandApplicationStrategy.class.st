@@ -9,3 +9,9 @@ BlImmediateCommandApplicationStrategy >> addCommand: aCommand from: aCommandAppl
 
 	aCommandApplier applyCommand: aCommand
 ]
+
+{ #category : #testing }
+BlImmediateCommandApplicationStrategy >> hasPendingCommands [
+
+	^ false
+]

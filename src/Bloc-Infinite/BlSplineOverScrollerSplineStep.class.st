@@ -1,3 +1,6 @@
+"
+I'm a spline `BlScrollFlinger` step.
+"
 Class {
 	#name : #BlSplineOverScrollerSplineStep,
 	#superclass : #BlSplineOverScrollerStep,
@@ -6,7 +9,6 @@ Class {
 
 { #category : #hooks }
 BlSplineOverScrollerSplineStep >> onFinished: aSplineOverScroller [
-	<return: #Boolean>
 	
 	"Duration from start to null velocity"
 	aSplineOverScroller duration < aSplineOverScroller splineDuration

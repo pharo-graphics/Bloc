@@ -15,6 +15,24 @@ Class {
 	#category : #'Bloc-DevTool-Tools'
 }
 
+{ #category : #examples }
+BlDevKeyboard class >> exampleScript [
+
+	<script>
+	
+	^ self sampleInstance openInSpace 
+]
+
+{ #category : #examples }
+BlDevKeyboard class >> sampleInstance [
+
+	<demo>
+	<sampleInstance>
+	
+	^ BlDevKeyboard new asScalableElement.
+	
+]
+
 { #category : #initialization }
 BlDevKeyboard >> addButton: anElement key: aKey [
 	keymap at: aKey put: anElement.

@@ -161,7 +161,7 @@ BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDurati
 		aSpace
 			addEventHandlerOn: BlSpaceShownEvent
 			doOnce: [ :event | aSemaphore signal ].
-		aSemaphore wait: aDuration ].
+		aSemaphore waitTimeoutMilliseconds: aDuration asMilliSeconds ].
 
 	^ self pulseUntilEmptyTaskQueue: aSpace timeout: aDuration
 ]
@@ -613,7 +613,7 @@ BlSpace >> defaultRoot [
 			  c horizontal matchParent.
 			  c vertical matchParent ];
 		  elevation: (BlRelativeElevation elevation: self defaultRootElevation);
-		  labeled: self defaultRootLabel;
+		  id: self defaultRootLabel;
 		  yourself
 ]
 
@@ -1513,6 +1513,7 @@ BlSpace >> root: anElement [
 
 	anElement
 		space: self;
+		id: self defaultRootLabel;
 		extent: self extent.
 
 	rootElement := anElement.

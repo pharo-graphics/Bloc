@@ -1,3 +1,6 @@
+"
+I'm an abstract scroll bar element.
+"
 Class {
 	#name : #BlScrollbarElement,
 	#superclass : #BlElement,

@@ -1,106 +1,101 @@
+"
+I'm responsible of collecting demo nodes from a given pragma.
+"
 Class {
 	#name : #BlDemoCollector,
 	#superclass : #Object,
 	#instVars : [
-		'packageDict',
-		'classDict',
-		'pragma'
+		'pragma',
+		'packageDictionary',
+		'classDictionary'
 	],
-	#category : #'Bloc-Demo-Node'
+	#category : #'Bloc-Demo-DemoPresenterNodes'
 }
-
-{ #category : #'instance creation' }
-BlDemoCollector class >> collectClass: aClass [ 
-	^ self new collectClass: aClass.
-]
-
-{ #category : #'instance creation' }
-BlDemoCollector class >> collectPackage: aPackage [
-
-	^ self new collectPackage: aPackage
-]
-
-{ #category : #'as yet unclassified' }
-BlDemoCollector class >> collectPragma: aSymbol fromClass: aClass [
-
-	^ self new
-		  pragma: aSymbol;
-		  collectClass: aClass 
-]
-
-{ #category : #'as yet unclassified' }
-BlDemoCollector class >> collectPragma: aSymbol fromPackage: aPackage [ 
-	^ self new pragma: aSymbol; collectPackage: aPackage 
-]
 
 { #category : #accessing }
 BlDemoCollector >> classes [
-	^ classDict values
+
+	^ classDictionary values
 ]
 
 { #category : #instanceCreation }
 BlDemoCollector >> collectClass: aClass [ 
 	
 	| node pragmas |
-	pragmas := (Pragma allNamed: pragma in: aClass) sorted: [ :pragma1 :pragma2 |
-		pragma1 methodSelector < pragma2 methodSelector ].
+	pragmas := (Pragma allNamed: pragma in: aClass)
+		sorted: [ :pragma1 :pragma2 |
+			pragma1 methodSelector < pragma2 methodSelector ].
+
 	pragmas ifEmpty: [ ^ self ].
 	node := self ensureClassFor: aClass.
-	pragmas do: [ :prag | node addChild: (BlDemoMethodNode new item: prag method ) ].
-	
-	
+	pragmas do: [ :each |
+		node addChild: (BlDemoMethodNode withItem: each method) ]
 ]
 
 { #category : #instanceCreation }
-BlDemoCollector >> collectPackage: aRPackage [
+BlDemoCollector >> collectPackage: aPackage [
 
 	| packageClasses node classes |
-	packageClasses := (aRPackage classes flatCollect: [ :class | { class. class class } ])
+	packageClasses := (aPackage definedClasses
+		flatCollect: [ :class | { class. class class } ])
 		sorted: [ :class1 :class2 | class1 name < class2 name ].
 	classes := OrderedCollection new.
 	packageClasses do: [ :class |
-		| temp |
 		self collectClass: class.
-		temp := classDict at: class ifAbsent: [  ].
-		temp ifNotNil: [ classes add: temp ] ].
+		classDictionary at: class ifPresent: [ :c | classes add: c ] ].
 	classes ifEmpty: [ ^ self ].
-	node := self ensurePackageFor: aRPackage.
+	node := self ensurePackageFor: aPackage.
 	classes do: [ :classNode | node addChild: classNode ]
+	
+	
 ]
 
 { #category : #'as yet unclassified' }
+BlDemoCollector >> collectPackageNamed: aString [
+
+	self collectPackage: (self class packageOrganizer packageNamed: aString)
+]
+
+{ #category : #collection }
 BlDemoCollector >> collectPackages: anOrderedCollection [
 
-	(anOrderedCollection sorted: [ :package1 :package2 | package1 name < package2 name ])
-		do: [ :each | self collectPackage: each ].
+	(anOrderedCollection sorted: [ :p1 :p2 | p1 name < p2 name ])
+		do: [ :each | self collectPackage: each ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #collection }
 BlDemoCollector >> ensureClassFor: aClass [
 
-	^ classDict at: aClass ifAbsentPut: [BlDemoClassNode new item: aClass; yourself]
+	^ classDictionary 
+		at: aClass 
+		ifAbsentPut: [ BlDemoClassNode withItem: aClass ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #collection }
 BlDemoCollector >> ensurePackageFor: aPackage [ 
 
-	^ packageDict at: aPackage ifAbsentPut: [ BlDemoPackageNode new item: aPackage; yourself]
+	^ packageDictionary 
+		at: aPackage 
+		ifAbsentPut: [ BlDemoPackageNode withItem: aPackage ]
 ]
 
 { #category : #initialization }
 BlDemoCollector >> initialize [
+
 	super initialize.
 	pragma := #demo.
-	packageDict := OrderedIdentityDictionary new.
-	classDict := IdentityDictionary new
+	packageDictionary := OrderedIdentityDictionary new.
+	classDictionary := IdentityDictionary new
 ]
 
 { #category : #accessing }
 BlDemoCollector >> packages [
-	^ packageDict values
+
+	^ packageDictionary values
 ]
 
 { #category : #accessing }
-BlDemoCollector >> pragma: aString [ 
+BlDemoCollector >> pragma: aString [
+
 	pragma := aString
 ]
