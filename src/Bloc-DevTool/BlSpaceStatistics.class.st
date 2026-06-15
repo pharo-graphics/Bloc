@@ -184,12 +184,19 @@ BlSpaceStatistics >> spaceClosed [
 { #category : #events }
 BlSpaceStatistics >> spaceShown [
 
+	| name | 
+
 	lastFullGCCount := Smalltalk vm fullGCCount.
 	lastIncrementalGCCount := Smalltalk vm incrementalGCCount.
+	name := 'Update Space Statistics ' , self identityHash printString.
 
+	TKTConfiguration value serviceManager services 
+		detect: [ :e | e name = name ] 
+		ifFound: [ :s | s stop. TKTConfiguration value serviceManager removeService: s  ].
+ 
 	previousMillisecond := Time millisecondClockValue.
 	service := TKTParameterizableService new 
-		name: 'Update Space Statistics ' , self identityHash printString;
+		name: name;
 		step: [ self doUpdate ];
 		start;
 		yourself
