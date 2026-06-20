@@ -303,10 +303,19 @@ BlElement >> allChildrenBreadthFirstDetect: aBlock ifFound: ifFoundBlock ifNone:
 
 { #category : #'api - children enumeration' }
 BlElement >> allChildrenBreadthFirstDo: aBlock [ 
-	" run the block for all children breadth first "
 
-	self childrenDo: aBlock.
-	self childrenDo: [ :each | each allChildrenBreadthFirstDo: aBlock ]
+	| queue |
+	queue := OrderedCollection new.
+	
+	"Add all direct children to queue"
+	self childrenDo: [ :each | queue addLast: each ].
+	
+	"Visit element, then add its children"
+	[ queue isEmpty ] whileFalse: [
+		| current |
+		current := queue removeFirst.
+		aBlock value: current.
+		current childrenDo: [ :each | queue addLast: each ] ]
 ]
 
 { #category : #'api - children enumeration' }
