@@ -10,7 +10,9 @@ BlEventSimulatorTest >> testClick [
 	clicked := false.
 	element := BlElement new.
 	element extent: 100 @ 100.
-	element addEventHandlerOn: BlClickEvent do: [ :event | clicked := true ].
+	element
+		addEventHandlerOn: BlClickEvent
+		do: [ :event | clicked := true ].
 	
 	(BlEventSimulator forTarget: element) simulateClick.
 	
@@ -23,7 +25,9 @@ BlEventSimulatorTest >> testDoubleClick [
 	doubleClicked := false.
 	element := BlElement new.
 	element extent: 100 @ 100.
-	element addEventHandlerOn: BlDoubleClickEvent do: [ :event | doubleClicked := true ].
+	element
+		addEventHandlerOn: BlDoubleClickEvent
+		do: [ :event | doubleClicked := true ].
 	
 	(BlEventSimulator forTarget: element) simulateDoubleClick.
 	
@@ -37,8 +41,12 @@ BlEventSimulatorTest >> testMouseDownAndUp [
 	upCount := 0.
 	element := BlElement new.
 	element extent: 100 @ 100.
-	element addEventHandlerOn: BlMouseDownEvent do: [ :event | downCount := downCount + 1 ].
-	element addEventHandlerOn: BlMouseUpEvent do: [ :event | upCount := upCount + 1 ].
+	element
+		addEventHandlerOn: BlMouseDownEvent
+		do: [ :event | downCount := downCount + 1 ].
+	element
+		addEventHandlerOn: BlMouseUpEvent
+		do: [ :event | upCount := upCount + 1 ].
 	
 	simulator := BlEventSimulator forTarget: element.
 	simulator simulateMouseDown.
@@ -53,7 +61,9 @@ BlEventSimulatorTest >> testMouseMove [
 	| element movedTo |
 	element := BlElement new.
 	element extent: 100 @ 100.
-	element addEventHandlerOn: BlMouseMoveEvent do: [ :event | movedTo := event position ].
+	element
+		addEventHandlerOn: BlMouseMoveEvent
+		do: [ :event | movedTo := event position ].
 	
 	(BlEventSimulator forTarget: element) simulateMouseMoveAt: 10 @ 20.
 	
@@ -65,7 +75,9 @@ BlEventSimulatorTest >> testMouseWheel [
 	| element wheelVector |
 	element := BlElement new.
 	element extent: 100 @ 100.
-	element addEventHandlerOn: BlMouseWheelEvent do: [ :event | wheelVector := event vector ].
+	element
+		addEventHandlerOn: BlMouseWheelEvent
+		do: [ :event | wheelVector := event vector ].
 	
 	(BlEventSimulator forTarget: element) simulateMouseWheelBy: (BlVector x: 5 y: 10).
 	
@@ -77,7 +89,9 @@ BlEventSimulatorTest >> testTextInput [
 	| element textInputText |
 	element := BlElement new.
 	element extent: 100 @ 100.
-	element addEventHandlerOn: BlTextInputEvent do: [ :event | textInputText := event text ].
+	element
+		addEventHandlerOn: BlTextInputEvent
+		do: [ :event | textInputText := event text ].
 	
 	(BlEventSimulator forTarget: element) simulateTextInput: 'hello'.
 	
@@ -89,8 +103,12 @@ BlEventSimulatorTest >> testKeyboardEvents [
 	| element keyDownKey keyUpKey simulator |
 	element := BlElement new.
 	element extent: 100 @ 100.
-	element addEventHandlerOn: BlKeyDownEvent do: [ :event | keyDownKey := event key ].
-	element addEventHandlerOn: BlKeyUpEvent do: [ :event | keyUpKey := event key ].
+	element
+		addEventHandlerOn: BlKeyDownEvent
+		do: [ :event | keyDownKey := event key ].
+	element
+		addEventHandlerOn: BlKeyUpEvent
+		do: [ :event | keyUpKey := event key ].
 	
 	simulator := BlEventSimulator forTarget: element.
 	simulator simulateKeyDown: KeyboardKey escape.
@@ -106,9 +124,11 @@ BlEventSimulatorTest >> testVirtualDeviceState [
 	clicked := false.
 	element := BlElement new.
 	element extent: 100 @ 100.
-	element addEventHandlerOn: BlClickEvent do: [ :event | 
-		clicked := true.
-		modifierState := event modifiers copy ].
+	element
+		addEventHandlerOn: BlClickEvent
+		do: [ :event | 
+			clicked := true.
+			modifierState := event modifiers copy ].
 	
 	simulator := BlEventSimulator forTarget: element.
 	simulator shiftDown.
@@ -128,7 +148,9 @@ BlEventSimulatorTest >> testVirtualDeviceMouseMoveBy [
 	| element movedTo simulator |
 	element := BlElement new.
 	element extent: 100 @ 100.
-	element addEventHandlerOn: BlMouseMoveEvent do: [ :event | movedTo := event position ].
+	element
+		addEventHandlerOn: BlMouseMoveEvent
+		do: [ :event | movedTo := event position ].
 	
 	simulator := BlEventSimulator forTarget: element.
 	"Default starting position should center on the element"
@@ -142,8 +164,12 @@ BlEventSimulatorTest >> testKeyPress [
 	| element keyDownKey keyUpKey simulator |
 	element := BlElement new.
 	element extent: 100 @ 100.
-	element addEventHandlerOn: BlKeyDownEvent do: [ :event | keyDownKey := event key ].
-	element addEventHandlerOn: BlKeyUpEvent do: [ :event | keyUpKey := event key ].
+	element
+		addEventHandlerOn: BlKeyDownEvent
+		do: [ :event | keyDownKey := event key ].
+	element
+		addEventHandlerOn: BlKeyUpEvent
+		do: [ :event | keyUpKey := event key ].
 	
 	simulator := BlEventSimulator forTarget: element.
 	simulator keyPress: KeyboardKey escape.
@@ -160,9 +186,11 @@ BlEventSimulatorTest >> testVirtualDeviceClick [
 	count := 0.
 	element := BlElement new.
 	element extent: 100 @ 100.
-	element addEventHandlerOn: BlClickEvent do: [ :event | 
-		clicked := true.
-		count := count + 1 ].
+	element
+		addEventHandlerOn: BlClickEvent
+		do: [ :event | 
+			clicked := true.
+			count := count + 1 ].
 	
 	(BlEventSimulator forTarget: element) click.
 	
@@ -176,7 +204,9 @@ BlEventSimulatorTest >> testVirtualDeviceDoubleClick [
 	doubleClicked := false.
 	element := BlElement new.
 	element extent: 100 @ 100.
-	element addEventHandlerOn: BlDoubleClickEvent do: [ :event | doubleClicked := true ].
+	element
+		addEventHandlerOn: BlDoubleClickEvent
+		do: [ :event | doubleClicked := true ].
 	
 	(BlEventSimulator forTarget: element) doubleClick.
 	
