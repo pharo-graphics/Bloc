@@ -93,11 +93,11 @@ BlEventSimulatorTest >> testKeyboardEvents [
 	element addEventHandlerOn: BlKeyUpEvent do: [ :event | keyUpKey := event key ].
 	
 	simulator := BlEventSimulator forTarget: element.
-	simulator simulateKeyDown: BlKeyboardKey escape.
-	simulator simulateKeyUp: BlKeyboardKey escape.
+	simulator simulateKeyDown: KeyboardKey escape.
+	simulator simulateKeyUp: KeyboardKey escape.
 		
-	self assert: keyDownKey equals: BlKeyboardKey escape.
-	self assert: keyUpKey equals: BlKeyboardKey escape.
+	self assert: keyDownKey equals: KeyboardKey escape.
+	self assert: keyUpKey equals: KeyboardKey escape.
 ]
 
 { #category : #tests }
@@ -146,11 +146,11 @@ BlEventSimulatorTest >> testKeyPress [
 	element addEventHandlerOn: BlKeyUpEvent do: [ :event | keyUpKey := event key ].
 	
 	simulator := BlEventSimulator forTarget: element.
-	simulator keyPress: BlKeyboardKey escape.
+	simulator keyPress: KeyboardKey escape.
 		
-	self assert: keyDownKey equals: BlKeyboardKey escape.
-	self assert: keyUpKey equals: BlKeyboardKey escape.
-	self deny: (simulator isKeyPressed: BlKeyboardKey escape)
+	self assert: keyDownKey equals: KeyboardKey escape.
+	self assert: keyUpKey equals: KeyboardKey escape.
+	self deny: (simulator isKeyPressed: KeyboardKey escape)
 ]
 
 { #category : #tests }
