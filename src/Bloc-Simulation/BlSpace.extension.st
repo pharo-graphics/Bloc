@@ -3,19 +3,19 @@ Extension { #name : #BlSpace }
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> locationInside: anElement [
 	self
-		deprecated: 'Use BlEventSimulator class >> #locationInside: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) locationInside instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator locationInside: anElement
+	^ (BlEventSimulator forTarget: anElement) locationInside
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> locationOutside: anElement [
 	self
-		deprecated: 'Use BlEventSimulator class >> #locationOutside: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) locationOutside instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator locationOutside: anElement
+	^ (BlEventSimulator forTarget: anElement) locationOutside
 ]
 
 { #category : #'*Bloc-Simulation' }
@@ -43,188 +43,188 @@ BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDurati
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateClickOn: anElement [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateClickOn: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateClick instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateClickOn: anElement
+	^ (BlEventSimulator forTarget: anElement) simulateClick
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateClickOn: anElement button: aButton [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateClickOn:button: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateClickButton: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateClickOn: anElement button: aButton
+	^ (BlEventSimulator forTarget: anElement) simulateClickButton: aButton
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateClickOutside: anElement [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateClickOutside: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateClickOutside instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateClickOutside: anElement
+	^ (BlEventSimulator forTarget: anElement) simulateClickOutside
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateDoubleClickOn: anElement [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateDoubleClickOn: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateDoubleClick instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateDoubleClickOn: anElement
+	^ (BlEventSimulator forTarget: anElement) simulateDoubleClick
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateDragOn: anElement by: aBlVector [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateDragOn:by: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateDragBy: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateDragOn: anElement by: aBlVector
+	^ (BlEventSimulator forTarget: anElement) simulateDragBy: aBlVector
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateDragOn: anElement byAll: aSequenceOfBlVectors [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateDragOn:byAll: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateDragByAll: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateDragOn: anElement byAll: aSequenceOfBlVectors
+	^ (BlEventSimulator forTarget: anElement) simulateDragByAll: aSequenceOfBlVectors
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateEvent: anEvent on: anElement [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateEvent:on: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateEvent: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateEvent: anEvent on: anElement
+	^ (BlEventSimulator forTarget: anElement) simulateEvent: anEvent
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateEvents:on: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateEvents: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateEvents: aCollectionOfEvents on: anElement
+	^ (BlEventSimulator forTarget: anElement) simulateEvents: aCollectionOfEvents
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateKeyDownOn: anElement key: aKeyboardKey [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateKeyDownOn:key: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateKeyDown: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateKeyDownOn: anElement key: aKeyboardKey
+	^ (BlEventSimulator forTarget: anElement) simulateKeyDown: aKeyboardKey
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateKeyUpOn: anElement key: aKeyboardKey [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateKeyUpOn:key: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateKeyUp: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateKeyUpOn: anElement key: aKeyboardKey
+	^ (BlEventSimulator forTarget: anElement) simulateKeyUp: aKeyboardKey
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateMouseDownOn: anElement [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateMouseDownOn: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateMouseDown instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateMouseDownOn: anElement
+	^ (BlEventSimulator forTarget: anElement) simulateMouseDown
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateMouseDownOn: anElement at: aPoint [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateMouseDownOn:at: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateMouseDownAt: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateMouseDownOn: anElement at: aPoint
+	^ (BlEventSimulator forTarget: anElement) simulateMouseDownAt: aPoint
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateMouseMoveInside: anElement [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateMouseMoveInside: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateMouseMoveInside instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateMouseMoveInside: anElement
+	^ (BlEventSimulator forTarget: anElement) simulateMouseMoveInside
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateMouseMoveOn: anElement at: aPoint [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateMouseMoveOn:at: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateMouseMoveAt: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateMouseMoveOn: anElement at: aPoint
+	^ (BlEventSimulator forTarget: anElement) simulateMouseMoveAt: aPoint
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateMouseMoveOn: anElement from: aFromPoint to: aToPoint [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateMouseMoveOn:from:to: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateMouseMoveFrom:to: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateMouseMoveOn: anElement from: aFromPoint to: aToPoint
+	^ (BlEventSimulator forTarget: anElement) simulateMouseMoveFrom: aFromPoint to: aToPoint
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateMouseMoveOutside: anElement [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateMouseMoveOutside: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateMouseMoveOutside instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateMouseMoveOutside: anElement
+	^ (BlEventSimulator forTarget: anElement) simulateMouseMoveOutside
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateMouseUpOn: anElement [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateMouseUpOn: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateMouseUp instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateMouseUpOn: anElement
+	^ (BlEventSimulator forTarget: anElement) simulateMouseUp
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateMouseUpOn: anElement at: aPoint [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateMouseUpOn:at: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateMouseUpAt: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateMouseUpOn: anElement at: aPoint
+	^ (BlEventSimulator forTarget: anElement) simulateMouseUpAt: aPoint
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateMouseWheelOn: anElement by: aBlVector [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateMouseWheelOn:by: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateMouseWheelBy: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateMouseWheelOn: anElement by: aBlVector
+	^ (BlEventSimulator forTarget: anElement) simulateMouseWheelBy: aBlVector
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateSecondaryClickOn: anElement [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateSecondaryClickOn: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: anElement) simulateSecondaryClick instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateSecondaryClickOn: anElement
+	^ (BlEventSimulator forTarget: anElement) simulateSecondaryClick
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateTextInput: aString on: aBlElement [
 	self
-		deprecated: 'Use BlEventSimulator class >> #simulateTextInput:on: instead'
+		deprecated: 'Use (BlEventSimulator forTarget: aBlElement) simulateTextInput: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ BlEventSimulator simulateTextInput: aString on: aBlElement
+	^ (BlEventSimulator forTarget: aBlElement) simulateTextInput: aString
 ]
