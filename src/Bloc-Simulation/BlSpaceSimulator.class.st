@@ -18,13 +18,29 @@ BlSpaceSimulator class >> forSpace: aSpace [
 ]
 
 { #category : #accessing }
+BlSpaceSimulator class >> defaultTimeout [
+	^ 500 milliSeconds
+]
+
+{ #category : #accessing }
 BlSpaceSimulator >> space: aSpace [
 	space := aSpace
 ]
 
 { #category : #accessing }
+BlSpaceSimulator >> timeout [
+	^ timeout
+]
+
+{ #category : #accessing }
 BlSpaceSimulator >> timeout: aDuration [
 	timeout := aDuration
+]
+
+{ #category : #initialization }
+BlSpaceSimulator >> initialize [
+	super initialize.
+	timeout := self class defaultTimeout
 ]
 
 { #category : #testing }
@@ -58,8 +74,8 @@ BlSpaceSimulator >> pulseManually [
 		while: [ self waitLoopCondition ]
 		do: [
 			space host runOneCycle. 
-			space pulse ].
-	space pulse.
+			space universe pulse ].
+	space universe pulse.
 ]
 
 { #category : #private }

@@ -88,12 +88,14 @@ BlSharedEventDistributorTest >> testInstallTwoElements [
 { #category : #'examples - sharing events' }
 BlSharedEventDistributorTest >> testMouseEnterEventOneOutOfTwoElements [
 
-	| aHandler anElements aContainer aMouseEnterTwo aMouseEnterOne anElementOne anElementTwo |
+	| aHandler anElements aContainer aMouseEnterTwo aMouseEnterOne anElementOne anElementTwo aSpace |
 	aMouseEnterOne := aMouseEnterTwo := 0.
 	aHandler := self testInstallTwoElements.
 	anElements := aHandler elements.
 	aContainer := self newContainer.
 	aContainer addChildren: anElements.
+	aSpace := BlSpace new.
+	aSpace root addChild: aContainer.
 	anElementOne := anElements first.
 	anElementTwo := anElements second.
 
@@ -110,7 +112,7 @@ BlSharedEventDistributorTest >> testMouseEnterEventOneOutOfTwoElements [
 			 on: BlMouseEnterEvent
 			 do: [ aMouseEnterTwo := aMouseEnterTwo + 1 ]).
 
-	(BlEventSimulator forElement: anElementOne) simulateMouseMoveInside.
+	anElementOne simulator simulateMouseMoveInside.
 
 	self assert: aMouseEnterOne equals: 1.
 	self assert: aMouseEnterTwo equals: 1
@@ -119,12 +121,14 @@ BlSharedEventDistributorTest >> testMouseEnterEventOneOutOfTwoElements [
 { #category : #'examples - sharing events' }
 BlSharedEventDistributorTest >> testMouseLeaveEventOneOutOfTwoElements [
 
-	| aHandler anElements aContainer aMouseLeaveTwo aMouseLeaveOne anElementOne anElementTwo |
+	| aHandler anElements aContainer aMouseLeaveTwo aMouseLeaveOne anElementOne anElementTwo aSpace |
 	aMouseLeaveOne := aMouseLeaveTwo := 0.
 	aHandler := self testInstallTwoElements.
 	anElements := aHandler elements.
 	aContainer := self newContainer.
 	aContainer addChildren: anElements.
+	aSpace := BlSpace new.
+	aSpace root addChild: aContainer.
 	anElementOne := anElements first.
 	anElementTwo := anElements second.
 
@@ -141,14 +145,14 @@ BlSharedEventDistributorTest >> testMouseLeaveEventOneOutOfTwoElements [
 			 on: BlMouseLeaveEvent
 			 do: [ aMouseLeaveTwo := aMouseLeaveTwo + 1 ]).
 
-	(BlEventSimulator forElement: aContainer)
+	aContainer simulator
 		simulateEvents: {
 				(BlMouseMoveEvent new
-					 position: ((BlEventSimulator forElement: anElementOne) locationInside);
+					 position: (anElementOne simulator locationInside);
 					 screenPosition: 0 @ 0;
 					 yourself).
 				(BlMouseMoveEvent new
-					 position: ((BlEventSimulator forElement: aContainer) locationOutside);
+					 position: (aContainer simulator locationOutside);
 					 screenPosition: 0 @ 0;
 					 yourself) }.
 

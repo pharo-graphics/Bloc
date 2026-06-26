@@ -228,3 +228,8 @@ BlSpace class >> simulateTextInput: aString on: aBlElement [
 		in: 'Bloc'.
 	^ (BlEventSimulator forElement: aBlElement) simulateTextInput: aString
 ]
+
+{ #category : #'*Bloc-Simulation' }
+BlSpace >> simulator [
+	^ BlSpaceSimulator forSpace: self
+]

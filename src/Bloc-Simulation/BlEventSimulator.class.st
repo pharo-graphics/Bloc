@@ -345,6 +345,10 @@ BlEventSimulator >> simulateEvents: aCollectionOfEvents [
 	target isAttachedToSceneGraph
 		ifTrue: [ aSpace := target space ]
 		ifFalse: [
+			self
+				deprecated: 'Elements must be attached to a space before simulating events.'
+				on: '2026-06-26'
+				in: 'Bloc'.
 			topMostElement := target topMostParent.
 			aSpace := BlSpace new.
 			aSpace root addChild: topMostElement ].
