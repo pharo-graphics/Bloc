@@ -2079,6 +2079,40 @@ BlElement >> inUIProcessDo: aBlock elseDo: altBlock [
 		ifFalse: altBlock
 ]
 
+{ #category : #processing }
+BlElement >> inUIProcessAndWaitDo: aBlock [
+	"Evaluate aBlock in the UI process of the host, blocking the current process
+	until evaluation is complete. If the active process is already the UI process,
+	or if there is no UI process running (e.g. the element is not attached, 
+	the space is closed, or host loop is stopped), evaluate immediately in the current process."
+
+	| uiProcess |
+	self isAttachedToSceneGraph ifTrue: [ 
+		self space host uiProcessDo: [ :uiProc | uiProcess := uiProc ] ].
+
+	(uiProcess isNil or: [ uiProcess = Processor activeProcess ])
+		ifTrue: [ ^ aBlock value ].
+
+	^ self inUIProcessAndWaitDoViaTask: aBlock
+]
+
+{ #category : #processing }
+BlElement >> inUIProcessAndWaitDoViaTask: aBlock [
+	| semaphore result error task |
+	semaphore := Semaphore new.
+	task := BlTaskAction new.
+	task action: [ 
+		[ result := aBlock value ]
+			on: Error
+			do: [ :err | error := err ].
+		semaphore signal ].
+	self enqueueTask: task.
+	semaphore wait.
+	error ifNotNil: [ error signal ].
+	^ result
+]
+
+
 { #category : #initialization }
 BlElement >> initialize [
 

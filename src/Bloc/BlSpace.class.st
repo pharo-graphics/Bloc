@@ -120,51 +120,6 @@ BlSpace class >> locationOutside: anElement [
 	^ aPosition
 ]
 
-{ #category : #'debug - simulation' }
-BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
-	"Wait until a BlSpace doesn't have available tasks to execute. 
-	
-	Inspired on BlDevScripterWaitStep>>#forEmptySpaceTaskQueueTimeout:"
-
-	| deadline |
-	deadline := aSpace time now + aDuration.
-	
-	aSpace time
-		every: 5 milliSeconds
-		while: [
-			aSpace universe hasDeferredActions or: [
-				(aSpace taskQueue isEmpty or: [
-					aSpace time now >= deadline ]) not ] ]
-		do: [
-			"We delegate to the host class also to run a cycle, it is needed when using morphic host, as this can run in the same UI thread blocking everything."
-			aSpace host runOneCycle. 
-			aSpace pulse ].
-
-	aSpace pulse.
-
-	^ aSpace taskQueue isEmpty
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDuration [
-	"Wait until a BlSpace doesn't have available tasks to execute. 
-	
-	Inspired on BlDevScripterWaitStep>>#forEmptySpaceTaskQueueTimeout:"
-
-	| deadline |
-	deadline := aSpace time now + aDuration.
-
-	"A non-opened space needs a special wait."
-	aSpace isOpened ifFalse: [
-		| aSemaphore |
-		aSemaphore := Semaphore new.
-		aSpace
-			addEventHandlerOn: BlSpaceShownEvent
-			doOnce: [ :event | aSemaphore signal ].
-		aSemaphore waitTimeoutMilliseconds: aDuration asMilliSeconds ].
-
-	^ self pulseUntilEmptyTaskQueue: aSpace timeout: aDuration
-]
 
 { #category : #'debug - simulation' }
 BlSpace class >> simulateClickOn: anElement [

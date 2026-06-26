@@ -16,33 +16,34 @@ BlElement >> aeApplyClippingWithAllParentsOn: aCanvas [
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeAsForm [
 
-	| topMostBounds transformedGeometryBounds aCanvas matrix |
-	self isLayoutRequested ifTrue: [ self forceLayout ]. "We want to consider our border, effect, as well as children's."
-	topMostBounds := self topMostParent bounds asRectangle.
+	^ self inUIProcessAndWaitDo: [
+		| topMostBounds transformedGeometryBounds aCanvas matrix |
+		self isLayoutRequested ifTrue: [ self forceLayout ]. "We want to consider our border, effect, as well as children's."
+		topMostBounds := self topMostParent bounds asRectangle.
 
-	matrix := BlMatrix2D new.
-	self allParentsReverseDo: [ :e | matrix := e transformation matrix copy multiplyBy: matrix ].
-	
-	self transformation asElementTransformation class = BlElementAbsoluteTransformation 
-		ifFalse: [ matrix := self transformation matrix copy multiplyBy: matrix ].
+		matrix := BlMatrix2D new.
+		self allParentsReverseDo: [ :e | matrix := e transformation matrix copy multiplyBy: matrix ].
+		
+		self transformation asElementTransformation class = BlElementAbsoluteTransformation 
+			ifFalse: [ matrix := self transformation matrix copy multiplyBy: matrix ].
 
-	transformedGeometryBounds := self geometryBounds copy.	
-	matrix transformBounds: transformedGeometryBounds.
+		transformedGeometryBounds := self geometryBounds copy.	
+		matrix transformBounds: transformedGeometryBounds.
 
-	self withAllParentsReverseDo: [ :e | transformedGeometryBounds translateBy: e position ].
+		self withAllParentsReverseDo: [ :e | transformedGeometryBounds translateBy: e position ].
 
-	aCanvas := AeCanvas extent: transformedGeometryBounds extent.
-	aCanvas privateAeCairoSurface deviceOffset: transformedGeometryBounds origin negated.
-	aCanvas clippingRectangle: topMostBounds.
+		aCanvas := AeCanvas extent: transformedGeometryBounds extent.
+		aCanvas privateAeCairoSurface deviceOffset: transformedGeometryBounds origin negated.
+		aCanvas clippingRectangle: topMostBounds.
 
-	
-	aCanvas restoreContextAfter: [ 
-		self allParentsReverseDo: [ :e | 
-			aCanvas pathTranslate: e position.
-			e transformation aeApplyTo: aCanvas. ].
-		self aeFullDrawOn: aCanvas ].
-	
-	^ aCanvas asForm 
+		
+		aCanvas restoreContextAfter: [ 
+			self allParentsReverseDo: [ :e | 
+				aCanvas pathTranslate: e position.
+				e transformation aeApplyTo: aCanvas. ].
+			self aeFullDrawOn: aCanvas ].
+		
+		aCanvas asForm ]
 ]
 
 { #category : #'*Bloc-Alexandrie' }
