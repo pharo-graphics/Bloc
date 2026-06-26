@@ -152,9 +152,31 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 ]
 
 { #category : #'host - testing' }
-BlHost >> runOneCycle [
+BlHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock onTimeout: timeoutBlock [
+	"Evaluate aBlock repeatedly until it answers false. If aDuration passes before aBlock answers false, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
+	| deadline aSemaphore timeProvider |
+	timeProvider := self universe spaces
+		ifNotEmpty: [ :theSpaces | theSpaces first time ]
+		ifEmpty: [ BlTime real ].
+	deadline := timeProvider now + aDuration.
+	aSemaphore := Semaphore new.
+	self universe registerPulseSemaphore: aSemaphore.
 	
-	"The host can do something while waiting for the pulse to happen. Useful for Morphic when the test run in the UI thread"
+	[
+		[ aBlock value ] whileTrue: [
+			timeProvider now >= deadline ifTrue: [ ^ timeoutBlock value ].
+			self isRunning
+				ifTrue: [
+					"Reactive wait: Wakes up instantly on the next pulse or at the deadline"
+					aSemaphore waitTimeoutMilliseconds: (deadline - timeProvider now) asMilliSeconds ]
+				ifFalse: [
+					"No background loop: manually pulse and yield a tiny bit"
+					self universe pulse.
+					(Delay forMilliseconds: 1) wait ] ]
+	] ensure: [
+		self universe unregisterPulseSemaphore: aSemaphore ].
+		
+	^ completionBlock value
 ]
 
 { #category : #'api - lifecycle' }

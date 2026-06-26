@@ -9,7 +9,9 @@ Class {
 		'deferredActions',
 		'postponedActions',
 		'hostClass',
-		'spaces'
+		'spaces',
+		'pulseSemaphores',
+		'pulseSemaphoresMutex'
 	],
 	#classVars : [
 		'Universes',
@@ -221,7 +223,33 @@ BlParallelUniverse >> initialize [
 	spaces := OrderedCollection new.
 	hostClass := BlHeadlessHost.
 	deferredActions := WaitfreeQueue new.
-	postponedActions := WaitfreeQueue new
+	postponedActions := WaitfreeQueue new.
+	pulseSemaphores := OrderedCollection new.
+	pulseSemaphoresMutex := Mutex new
+]
+
+{ #category : #'api - pulse' }
+BlParallelUniverse >> pulseSemaphores [
+
+	^ pulseSemaphores ifNil: [ pulseSemaphores := OrderedCollection new ]
+]
+
+{ #category : #'api - pulse' }
+BlParallelUniverse >> pulseSemaphoresMutex [
+
+	^ pulseSemaphoresMutex ifNil: [ pulseSemaphoresMutex := Mutex new ]
+]
+
+{ #category : #'api - pulse' }
+BlParallelUniverse >> registerPulseSemaphore: aSemaphore [
+
+	self pulseSemaphoresMutex critical: [ self pulseSemaphores add: aSemaphore ]
+]
+
+{ #category : #'api - pulse' }
+BlParallelUniverse >> unregisterPulseSemaphore: aSemaphore [
+
+	self pulseSemaphoresMutex critical: [ self pulseSemaphores remove: aSemaphore ifAbsent: [  ] ]
 ]
 
 { #category : #'api - spaces' }
@@ -280,10 +308,14 @@ BlParallelUniverse >> pulse [
 BlParallelUniverse >> pulseSynchronously [
 	"deferred actions must be run before spaces"
 
+	| semaphoresToSignal |
 	[
 		self tryToRunDeferredActions.
 		spaces do: [ :eachSpace | eachSpace pulse ].
-		self tryToRunPostponedActions
+		self tryToRunPostponedActions.
+		
+		self pulseSemaphoresMutex critical: [ semaphoresToSignal := self pulseSemaphores copy ].
+		semaphoresToSignal do: [ :each | each signal ]
 	] 
 		on: Exception 
 		do: [ :e | 
