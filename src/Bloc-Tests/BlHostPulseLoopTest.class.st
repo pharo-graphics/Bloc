@@ -13,7 +13,7 @@ BlHostPulseLoopTest >> runCaseManaged [
 { #category : #tests }
 BlHostPulseLoopTest >> testOpeningAnSpaceDeferingAnErrorKeepsLoopRunning [
 
-	| aSpace logger |
+	| aSpace logger oldUIManager |
 
 	UIManager default class = MorphicUIManager 
 		ifFalse: [ ^ self skip ].
@@ -27,24 +27,18 @@ BlHostPulseLoopTest >> testOpeningAnSpaceDeferingAnErrorKeepsLoopRunning [
 	aSpace show.
 	
 	logger := MemoryLogger new.
-	logger runFor: BlParallelUniverseErrorDuringPulseSignal during: [	
+	oldUIManager := UIManager default.
+	
+	[
+		UIManager default: oldUIManager nonInteractiveManager.
+		logger runFor: BlParallelUniverseErrorDuringPulseSignal during: [	
 			aSpace universe defer: [ 1 error: 'I am the debugger to kill' ].	
-			[aSpace universe hasDeferredActions] whileTrue: [ 
+			[ aSpace universe hasDeferredActions ] whileTrue: [ 
 				100 milliSeconds wait
-			 ]].
+			 ] ]
+	] ensure: [ UIManager default: oldUIManager ].
 
 	self assert: logger recordings size >= 2.
 	self assert: logger recordings first signaledError class equals: Error.
 	self assert: logger recordings second signaledError class equals: UnhandledError.
-	
-	MorphicRenderLoop new doOneCycle.
-	
-	"This is horrible, I will fix Pharo to have a list of open debuggers"
-	StDebugger allInstances 
-		detect: [ :e |
-			e window notNil and: [
-				e window title = 'Error: I am the debugger to kill' ] ]
-		ifFound: [ :x | x window close ]
-		ifNone: [ self fail ].
-	
 ]
