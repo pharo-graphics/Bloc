@@ -323,10 +323,14 @@ BlEventSimulator >> simulateEvents: aCollectionOfEvents [
 			aSpace := BlSpace new.
 			aSpace root addChild: topMostElement ].
 
+	(target isKindOf: BlElement) ifTrue: [
+		target requestFocus ].
+
 	aCollectionOfEvents do: [ :anEvent |
 		anEvent fillFromTime: aSpace time.
 		(anEvent isKindOf: BlUIEvent) ifTrue: [
-			anEvent modifiers: modifiers copy ] ].
+			modifiers isEmpty ifFalse: [
+				anEvent modifiers: modifiers copy ] ] ].
 
 	aSpace pulse.
 	aSpace
