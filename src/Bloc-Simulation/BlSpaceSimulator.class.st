@@ -18,11 +18,6 @@ BlSpaceSimulator class >> forSpace: aSpace [
 ]
 
 { #category : #accessing }
-BlSpaceSimulator class >> defaultTimeout [
-	^ 500 milliSeconds
-]
-
-{ #category : #accessing }
 BlSpaceSimulator >> space: aSpace [
 	space := aSpace
 ]
@@ -40,7 +35,7 @@ BlSpaceSimulator >> timeout: aDuration [
 { #category : #initialization }
 BlSpaceSimulator >> initialize [
 	super initialize.
-	timeout := self class defaultTimeout
+	timeout := 500 milliSeconds
 ]
 
 { #category : #testing }
