@@ -12,13 +12,13 @@ BlSpaceSmokeTest >> testShowAfterClose [
 
 	aSpace show.
 	self waitTestingSpaces.
-	(BlEventSimulator forTarget: aSpace root) simulateClick.
+	(BlEventSimulator forElement: aSpace root) simulateClick.
 	self waitTestingSpaces.
 	aSpace close.
 	self waitTestingSpaces.
 	aSpace show.
 	self waitTestingSpaces.
-	(BlEventSimulator forTarget: aSpace root) simulateClick.
+	(BlEventSimulator forElement: aSpace root) simulateClick.
 	self waitTestingSpaces.
 
 ]
@@ -31,7 +31,7 @@ BlSpaceSmokeTest >> testShowAndClick [
 
 	aSpace show.
 	self waitTestingSpaces.
-	(BlEventSimulator forTarget: aSpace root) simulateClick.
+	(BlEventSimulator forElement: aSpace root) simulateClick.
 	self waitTestingSpaces.
 
 ]

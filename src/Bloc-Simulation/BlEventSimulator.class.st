@@ -6,152 +6,178 @@ Class {
 		'space',
 		'mousePosition',
 		'modifiers',
-		'pressedKeys'
+		'pressedKeys',
+		'shouldFocus'
 	],
 	#category : #'Bloc-Simulation'
 }
 
 { #category : #'instance creation' }
-BlEventSimulator class >> forTarget: anObject [
+BlEventSimulator class >> forElement: anElement [
 	^ self new
-		target: anObject;
+		element: anElement;
 		yourself
 ]
 
 { #category : #'instance creation' }
+BlEventSimulator class >> forSpace: aSpace [
+	^ self new
+		space: aSpace;
+		yourself
+]
+
+{ #category : #'instance creation' }
+BlEventSimulator class >> forElement: anObject [
+	"Deprecated fallback"
+	self
+		deprecated: 'Use forElement: or forSpace: instead'
+		on: '2026-06-26'
+		in: 'Bloc'.
+	^ (anObject class includesBehavior: BlSpace)
+		ifTrue: [ self forSpace: anObject ]
+		ifFalse: [ self forElement: anObject ]
+]
+
+{ #category : #'instance creation' }
 BlEventSimulator class >> on: anObject [
-	^ self forTarget: anObject
+	^ self forElement: anObject
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> locationInside: anElement [
-	^ (self forTarget: anElement) locationInside
+	^ (self forElement: anElement) locationInside
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> locationOutside: anElement [
-	^ (self forTarget: anElement) locationOutside
+	^ (self forElement: anElement) locationOutside
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateClickOn: anElement [
-	^ (self forTarget: anElement) simulateClick
+	^ (self forElement: anElement) simulateClick
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateClickOn: anElement button: aButton [
-	^ (self forTarget: anElement) simulateClickButton: aButton
+	^ (self forElement: anElement) simulateClickButton: aButton
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateClickOutside: anElement [
-	^ (self forTarget: anElement) simulateClickOutside
+	^ (self forElement: anElement) simulateClickOutside
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateDoubleClickOn: anElement [
-	^ (self forTarget: anElement) simulateDoubleClick
+	^ (self forElement: anElement) simulateDoubleClick
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateDragOn: anElement by: aBlVector [
-	^ (self forTarget: anElement) simulateDragBy: aBlVector
+	^ (self forElement: anElement) simulateDragBy: aBlVector
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateDragOn: anElement byAll: aSequenceOfBlVectors [
-	^ (self forTarget: anElement) simulateDragByAll: aSequenceOfBlVectors
+	^ (self forElement: anElement) simulateDragByAll: aSequenceOfBlVectors
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateEvent: anEvent on: anElement [
-	^ (self forTarget: anElement) simulateEvent: anEvent
+	^ (self forElement: anElement) simulateEvent: anEvent
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateEvents: aCollectionOfEvents on: anElement [
-	^ (self forTarget: anElement) simulateEvents: aCollectionOfEvents
+	^ (self forElement: anElement) simulateEvents: aCollectionOfEvents
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateKeyDownOn: anElement key: aKeyboardKey [
-	^ (self forTarget: anElement) simulateKeyDown: aKeyboardKey
+	^ (self forElement: anElement) simulateKeyDown: aKeyboardKey
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateKeyUpOn: anElement key: aKeyboardKey [
-	^ (self forTarget: anElement) simulateKeyUp: aKeyboardKey
+	^ (self forElement: anElement) simulateKeyUp: aKeyboardKey
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseDownOn: anElement [
-	^ (self forTarget: anElement) simulateMouseDown
+	^ (self forElement: anElement) simulateMouseDown
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseDownOn: anElement at: aPoint [
-	^ (self forTarget: anElement) simulateMouseDownAt: aPoint
+	^ (self forElement: anElement) simulateMouseDownAt: aPoint
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseMoveInside: anElement [
-	^ (self forTarget: anElement) simulateMouseMoveInside
+	^ (self forElement: anElement) simulateMouseMoveInside
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseMoveOn: anElement at: aPoint [
-	^ (self forTarget: anElement) simulateMouseMoveAt: aPoint
+	^ (self forElement: anElement) simulateMouseMoveAt: aPoint
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseMoveOn: anElement from: aFromPoint to: aToPoint [
-	^ (self forTarget: anElement) simulateMouseMoveFrom: aFromPoint to: aToPoint
+	^ (self forElement: anElement) simulateMouseMoveFrom: aFromPoint to: aToPoint
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseMoveOutside: anElement [
-	^ (self forTarget: anElement) simulateMouseMoveOutside
+	^ (self forElement: anElement) simulateMouseMoveOutside
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseUpOn: anElement [
-	^ (self forTarget: anElement) simulateMouseUp
+	^ (self forElement: anElement) simulateMouseUp
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseUpOn: anElement at: aPoint [
-	^ (self forTarget: anElement) simulateMouseUpAt: aPoint
+	^ (self forElement: anElement) simulateMouseUpAt: aPoint
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseWheelOn: anElement by: aBlVector [
-	^ (self forTarget: anElement) simulateMouseWheelBy: aBlVector
+	^ (self forElement: anElement) simulateMouseWheelBy: aBlVector
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateSecondaryClickOn: anElement [
-	^ (self forTarget: anElement) simulateSecondaryClick
+	^ (self forElement: anElement) simulateSecondaryClick
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateTextInput: aString on: aBlElement [
-	^ (self forTarget: aBlElement) simulateTextInput: aString
+	^ (self forElement: aBlElement) simulateTextInput: aString
 ]
 
 { #category : #initialization }
 BlEventSimulator >> initialize [
 	super initialize.
 	modifiers := BlKeyModifiers new.
-	pressedKeys := Set new
+	pressedKeys := Set new.
+	shouldFocus := false
 ]
 
 { #category : #accessing }
-BlEventSimulator >> target: anObject [
-	target := anObject.
-	(target isKindOf: BlSpace)
-		ifTrue: [ space := target ]
-		ifFalse: [ 
-			target isAttachedToSceneGraph ifTrue: [ space := target space ] ]
+BlEventSimulator >> element: anElement [
+	target := anElement.
+	anElement isAttachedToSceneGraph ifTrue: [ space := anElement space ].
+	shouldFocus := true
+]
+
+{ #category : #accessing }
+BlEventSimulator >> space: aSpace [
+	target := aSpace.
+	space := aSpace.
+	shouldFocus := false
 ]
 
 { #category : #accessing }
@@ -323,12 +349,11 @@ BlEventSimulator >> simulateEvents: aCollectionOfEvents [
 			aSpace := BlSpace new.
 			aSpace root addChild: topMostElement ].
 
-	(target isKindOf: BlElement) ifTrue: [
-		target requestFocus ].
+	shouldFocus ifTrue: [ target requestFocus ].
 
 	aCollectionOfEvents do: [ :anEvent |
 		anEvent fillFromTime: aSpace time.
-		(anEvent isKindOf: BlUIEvent) ifTrue: [
+		anEvent isUIEvent ifTrue: [
 			modifiers isEmpty ifFalse: [
 				anEvent modifiers: modifiers copy ] ] ].
 

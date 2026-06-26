@@ -76,7 +76,7 @@ BlEventTest >> testChildConsumesEventWithHandler [
 
 	parent addChild: child.
 
-	(BlEventSimulator forTarget: child) simulateClick.
+	(BlEventSimulator forElement: child) simulateClick.
 	self assert: clicks equals: { Color blue } asOrderedCollection
 ]
 
@@ -102,7 +102,7 @@ BlEventTest >> testChildDoesNotConsumeEventWithHandler [
 
 	parent addChild: child.
 
-	(BlEventSimulator forTarget: child) simulateClick.
+	(BlEventSimulator forElement: child) simulateClick.
 	self
 		assert: clicks
 		equals: {
@@ -146,7 +146,7 @@ BlEventTest >> testParentWithEventFilter [
 
 	parent addChild: child.
 
-	(BlEventSimulator forTarget: child) simulateClick.
+	(BlEventSimulator forElement: child) simulateClick.
 	self assert: clicks equals: { Color red } asOrderedCollection
 ]
 
@@ -197,7 +197,7 @@ BlEventTest >> testSimulateClick [
 		addEventHandlerOn: BlClickEvent
 		do: [ click := click + 1 ].
 
-	(BlEventSimulator forTarget: element) simulateClick.
+	(BlEventSimulator forElement: element) simulateClick.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -231,7 +231,7 @@ BlEventTest >> testSimulateClickOnChildInDisabledParent [
 		addEventHandlerOn: BlClickEvent
 		do: [ click := click + 1 ].
 
-	(BlEventSimulator forTarget: red) simulateClick.
+	(BlEventSimulator forElement: red) simulateClick.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -275,7 +275,7 @@ BlEventTest >> testSimulateClickOnChildInParentPreventingChildren [
 		addEventHandlerOn: BlClickEvent
 		do: [ parentClick := parentClick + 1 ].
 
-	(BlEventSimulator forTarget: red) simulateClick.
+	(BlEventSimulator forElement: red) simulateClick.
 
 	self assert: childMouseDown equals: 0.
 	self assert: childMouseUp equals: 0.
@@ -313,7 +313,7 @@ BlEventTest >> testSimulateClickOnChildInUnresponsiveParent [
 		addEventHandlerOn: BlClickEvent
 		do: [ click := click + 1 ].
 
-	(BlEventSimulator forTarget: red) simulateClick.
+	(BlEventSimulator forElement: red) simulateClick.
 
 	self assert: mouseDown equals: 0.
 	self assert: mouseUp equals: 0.
@@ -345,7 +345,7 @@ BlEventTest >> testSimulateClickOnOverlapped [
 		addEventHandlerOn: BlClickEvent
 		do: [ clickOnBlue := clickOnBlue + 1 ].
 
-	(BlEventSimulator forTarget: red) simulateClick.
+	(BlEventSimulator forElement: red) simulateClick.
 
 	self assert: clickOnBlue equals: 1
 ]
@@ -376,7 +376,7 @@ BlEventTest >> testSimulateClickOnTransformedAndRelocated [
 		addEventHandlerOn: BlClickEvent
 		do: [ click := click + 1 ].
 
-	(BlEventSimulator forTarget: element) simulateClick.
+	(BlEventSimulator forElement: element) simulateClick.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -419,7 +419,7 @@ BlEventTest >> testSimulateClickOnUnresponsiveOverlapped [
 		addEventHandlerOn: BlClickEvent
 		do: [ click := click + 1 ].
 
-	(BlEventSimulator forTarget: blue) simulateClick.
+	(BlEventSimulator forElement: blue) simulateClick.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -446,7 +446,7 @@ BlEventTest >> testSimulateClickOutside [
 		addEventHandlerOn: BlClickEvent
 		do: [ click := click + 1 ].
 
-	(BlEventSimulator forTarget: element) simulateClickOutside.
+	(BlEventSimulator forElement: element) simulateClickOutside.
 
 	self assert: mouseDown equals: 0.
 	self assert: mouseUp equals: 0.
@@ -470,7 +470,7 @@ BlEventTest >> testSimulateMouseMoveInside [
 		addEventHandlerOn: BlMouseEnterEvent
 		do: [ mouseEnter := mouseEnter + 1 ].
 
-	(BlEventSimulator forTarget: element) simulateMouseMoveInside.
+	(BlEventSimulator forElement: element) simulateMouseMoveInside.
 
 	self assert: mouseMove equals: 1.
 	self assert: mouseEnter equals: 1
@@ -496,7 +496,7 @@ BlEventTest >> testSimulateMouseMoveOutside [
 		addEventHandlerOn: BlMouseLeaveEvent
 		do: [ mouseLeave := mouseLeave + 1 ].
 
-	(BlEventSimulator forTarget: element) simulateMouseMoveOutside.
+	(BlEventSimulator forElement: element) simulateMouseMoveOutside.
 
 	self assert: mouseMove equals: 0.
 	self assert: mouseEnter equals: 0.

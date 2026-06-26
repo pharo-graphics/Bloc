@@ -30,7 +30,7 @@ BlDevHalosEventListenerExample >> activatedHalos [
 	anEvent modifiers
 		alt: true;
 		shift: true.
-	(BlEventSimulator forTarget: aContainer children first) simulateEvent: anEvent.
+	(BlEventSimulator forElement: aContainer children first) simulateEvent: anEvent.
 
 	self assert: aSpace root children size equals: 2.
 

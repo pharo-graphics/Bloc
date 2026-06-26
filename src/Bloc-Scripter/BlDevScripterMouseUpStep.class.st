@@ -11,6 +11,6 @@ BlDevScripterMouseUpStep >> defaultLabel [
 
 { #category : #actions }
 BlDevScripterMouseUpStep >> playOn: aScripter [
-	(BlEventSimulator forTarget: aScripter element) simulateMouseUpAt: (self getMousePositionIn: aScripter).
+	(BlEventSimulator forElement: aScripter element) simulateMouseUpAt: (self getMousePositionIn: aScripter).
 	aScripter pulse
 ]
