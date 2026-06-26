@@ -12,7 +12,7 @@ BlDevScripterSecondaryClickStep >> defaultLabel [
 { #category : #actions }
 BlDevScripterSecondaryClickStep >> playOn: aScripter [
 	self
-		setMousePosition: (BlSpace simulateSecondaryClickOn: (self target findTargetStartingInScripter: aScripter))
+		setMousePosition: ((BlEventSimulator forTarget: (self target findTargetStartingInScripter: aScripter)) simulateSecondaryClick)
 		in: aScripter.
 	aScripter pulse
 ]

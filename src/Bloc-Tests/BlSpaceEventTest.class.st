@@ -62,5 +62,7 @@ BlSpaceEventTest >> testSpaceShown [
 { #category : #running }
 BlSpaceEventTest >> waitPulses [
 
-	BlSpace pulseUntilEmptyTaskQueue: space timeout: 50 milliSeconds
+	(BlSpaceSimulator forSpace: space)
+		timeout: 50 milliSeconds;
+		pulseUntilEmptyTaskQueue
 ]
