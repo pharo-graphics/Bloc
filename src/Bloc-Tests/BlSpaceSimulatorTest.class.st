@@ -29,6 +29,8 @@ BlSpaceSimulatorTest >> testPulseUntilSpaceOpenedAndEmptyTaskQueue [
 	taskRun := false.
 	aSpace enqueueTask: (BlTaskAction new action: [ taskRun := true ]).
 	
+	aSpace show.
+	
 	simulator := BlSpaceSimulator forSpace: aSpace.
 	simulator timeout: 500 milliSeconds.
 	
