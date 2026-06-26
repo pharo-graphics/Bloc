@@ -136,3 +136,49 @@ BlEventSimulatorTest >> testVirtualDeviceMouseMoveBy [
 	
 	self assert: movedTo isNotNil.
 ]
+
+{ #category : #tests }
+BlEventSimulatorTest >> testKeyPress [
+	| element keyDownKey keyUpKey simulator |
+	element := BlElement new.
+	element size: 100 @ 100.
+	element addEventHandlerOn: BlKeyDownEvent do: [ :event | keyDownKey := event key ].
+	element addEventHandlerOn: BlKeyUpEvent do: [ :event | keyUpKey := event key ].
+	
+	simulator := BlEventSimulator forTarget: element.
+	simulator keyPress: BlKeyboardKey escape.
+		
+	self assert: keyDownKey equals: BlKeyboardKey escape.
+	self assert: keyUpKey equals: BlKeyboardKey escape.
+	self deny: (simulator isKeyPressed: BlKeyboardKey escape)
+]
+
+{ #category : #tests }
+BlEventSimulatorTest >> testVirtualDeviceClick [
+	| element clicked count |
+	clicked := false.
+	count := 0.
+	element := BlElement new.
+	element size: 100 @ 100.
+	element addEventHandlerOn: BlClickEvent do: [ :event | 
+		clicked := true.
+		count := count + 1 ].
+	
+	(BlEventSimulator forTarget: element) click.
+	
+	self assert: clicked.
+	self assert: count equals: 1
+]
+
+{ #category : #tests }
+BlEventSimulatorTest >> testVirtualDeviceDoubleClick [
+	| element doubleClicked |
+	doubleClicked := false.
+	element := BlElement new.
+	element size: 100 @ 100.
+	element addEventHandlerOn: BlDoubleClickEvent do: [ :event | doubleClicked := true ].
+	
+	(BlEventSimulator forTarget: element) doubleClick.
+	
+	self assert: doubleClicked
+]

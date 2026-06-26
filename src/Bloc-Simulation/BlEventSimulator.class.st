@@ -532,3 +532,48 @@ BlEventSimulator >> cmdDown [
 BlEventSimulator >> cmdUp [
 	modifiers cmd: false
 ]
+
+{ #category : #'virtual device' }
+BlEventSimulator >> click [
+	"Perform a click at the current mouse position"
+	^ self clickButton: BlMouseButton primary
+]
+
+{ #category : #'virtual device' }
+BlEventSimulator >> clickButton: aButton [
+	"Perform a click (mouse down and mouse up) at the current mouse position"
+	self mouseDownButton: aButton.
+	self mouseUpButton: aButton
+]
+
+{ #category : #'virtual device' }
+BlEventSimulator >> doubleClick [
+	"Perform a double click at the current mouse position"
+	^ self doubleClickButton: BlMouseButton primary
+]
+
+{ #category : #'virtual device' }
+BlEventSimulator >> doubleClickButton: aButton [
+	| aPosition |
+	aPosition := mousePosition ifNil: [ 
+		target topMostParent forceLayout.
+		target bounds inSpace center ].
+	mousePosition := aPosition.
+	self simulateEvents: {
+		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
+		((BlMouseUpEvent button: aButton) position: aPosition; yourself).
+		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
+		((BlMouseUpEvent button: aButton) position: aPosition; yourself) }
+]
+
+{ #category : #'virtual device' }
+BlEventSimulator >> keyPress: aKeyboardKey [
+	"Simulate a key down followed by key up event"
+	self simulateKeyDown: aKeyboardKey.
+	self simulateKeyUp: aKeyboardKey
+]
+
+{ #category : #'virtual device' }
+BlEventSimulator >> isKeyPressed: aKeyboardKey [
+	^ pressedKeys includes: aKeyboardKey
+]
