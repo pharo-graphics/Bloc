@@ -31,7 +31,7 @@ BlEventSimulatorTest >> testClick [
 		addEventHandlerOn: BlClickEvent
 		do: [ :event | clicked := true ].
 	
-	element simulator simulateClick.
+	element simulator click.
 	
 	self assert: clicked
 ]
@@ -44,7 +44,7 @@ BlEventSimulatorTest >> testDoubleClick [
 		addEventHandlerOn: BlDoubleClickEvent
 		do: [ :event | doubleClicked := true ].
 	
-	element simulator simulateDoubleClick.
+	element simulator doubleClick.
 	
 	self assert: doubleClicked
 ]
@@ -62,8 +62,8 @@ BlEventSimulatorTest >> testMouseDownAndUp [
 		do: [ :event | upCount := upCount + 1 ].
 	
 	simulator := element simulator.
-	simulator simulateMouseDown.
-	simulator simulateMouseUp.
+	simulator mouseDown.
+	simulator mouseUp.
 		
 	self assert: downCount equals: 1.
 	self assert: upCount equals: 1.
@@ -76,7 +76,7 @@ BlEventSimulatorTest >> testMouseMove [
 		addEventHandlerOn: BlMouseMoveEvent
 		do: [ :event | movedTo := event position ].
 	
-	element simulator simulateMouseMoveAt: 10 @ 20.
+	element simulator mouseMoveAt: 10 @ 20.
 	
 	self assert: movedTo equals: 10 @ 20.
 ]
@@ -88,7 +88,7 @@ BlEventSimulatorTest >> testMouseWheel [
 		addEventHandlerOn: BlMouseWheelEvent
 		do: [ :event | wheelVector := event vector ].
 	
-	element simulator simulateMouseWheelBy: (BlVector x: 5 y: 10).
+	element simulator mouseWheelBy: (BlVector x: 5 y: 10).
 	
 	self assert: wheelVector equals: (BlVector x: 5 y: 10) asBlocVector.
 ]
@@ -100,7 +100,7 @@ BlEventSimulatorTest >> testTextInput [
 		addEventHandlerOn: BlTextInputEvent
 		do: [ :event | textInputText := event text ].
 	
-	element simulator simulateTextInput: 'hello'.
+	element simulator textInput: 'hello'.
 	
 	self assert: textInputText equals: 'hello'.
 ]
@@ -116,8 +116,8 @@ BlEventSimulatorTest >> testKeyboardEvents [
 		do: [ :event | keyUpKey := event key ].
 	
 	simulator := element simulator.
-	simulator simulateKeyDown: KeyboardKey escape.
-	simulator simulateKeyUp: KeyboardKey escape.
+	simulator keyDown: KeyboardKey escape.
+	simulator keyUp: KeyboardKey escape.
 		
 	self assert: keyDownKey equals: KeyboardKey escape.
 	self assert: keyUpKey equals: KeyboardKey escape.
@@ -137,7 +137,7 @@ BlEventSimulatorTest >> testVirtualDeviceState [
 	simulator shiftDown.
 	self assert: simulator modifiers isShift.
 	
-	simulator simulateClick.
+	simulator click.
 	self assert: clicked.
 	self assert: modifierState isShift.
 	self assert: modifierState isCtrl not.

@@ -112,7 +112,7 @@ BlSharedEventDistributorTest >> testMouseEnterEventOneOutOfTwoElements [
 			 on: BlMouseEnterEvent
 			 do: [ aMouseEnterTwo := aMouseEnterTwo + 1 ]).
 
-	anElementOne simulator simulateMouseMoveInside.
+	anElementOne simulator mouseMoveInside.
 
 	self assert: aMouseEnterOne equals: 1.
 	self assert: aMouseEnterTwo equals: 1
@@ -146,7 +146,7 @@ BlSharedEventDistributorTest >> testMouseLeaveEventOneOutOfTwoElements [
 			 do: [ aMouseLeaveTwo := aMouseLeaveTwo + 1 ]).
 
 	aContainer simulator
-		simulateEvents: {
+		events: {
 				(BlMouseMoveEvent new
 					 position: (anElementOne simulator locationInside);
 					 screenPosition: 0 @ 0;

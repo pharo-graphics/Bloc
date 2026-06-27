@@ -826,6 +826,14 @@ BlSpace >> isOpened [
 		and: [ self universe hasSpace: self ]
 ]
 
+{ #category : #testing }
+BlSpace >> isShown [
+	"Return true if the space was shown (by sending #show message), false otherwise.
+	Please note, that an opened/shown space can be hidden which does not influence the result of #isShown"
+
+	^ self isOpened
+]
+
 { #category : #pulse }
 BlSpace >> isPulseRequested [
 	"Return true if space pulse was requested, false otherwise"

@@ -22,7 +22,7 @@ BlSpaceSimulatorTest >> testPulseUntilEmptyTaskQueue [
 ]
 
 { #category : #tests }
-BlSpaceSimulatorTest >> testPulseUntilSpaceOpenedAndEmptyTaskQueue [
+BlSpaceSimulatorTest >> testPulseUntilSpaceShownAndEmptyTaskQueue [
 	| aSpace simulator taskRun |
 	aSpace := self newTestingSpace.
 	
@@ -34,8 +34,8 @@ BlSpaceSimulatorTest >> testPulseUntilSpaceOpenedAndEmptyTaskQueue [
 	simulator := BlSpaceSimulator forSpace: aSpace.
 	simulator timeout: 500 milliSeconds.
 	
-	self assert: simulator pulseUntilSpaceOpenedAndEmptyTaskQueue.
-	self assert: aSpace isOpened.
+	self assert: simulator pulseUntilSpaceShownAndEmptyTaskQueue.
+	self assert: aSpace isShown.
 	self assert: taskRun
 ]
 

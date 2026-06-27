@@ -55,107 +55,107 @@ BlEventSimulator class >> locationOutside: anElement [
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateClickOn: anElement [
-	^ (self forElement: anElement) simulateClick
+	^ (self forElement: anElement) click
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateClickOn: anElement button: aButton [
-	^ (self forElement: anElement) simulateClickButton: aButton
+	^ (self forElement: anElement) clickButton: aButton
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateClickOutside: anElement [
-	^ (self forElement: anElement) simulateClickOutside
+	^ (self forElement: anElement) clickOutside
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateDoubleClickOn: anElement [
-	^ (self forElement: anElement) simulateDoubleClick
+	^ (self forElement: anElement) doubleClick
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateDragOn: anElement by: aBlVector [
-	^ (self forElement: anElement) simulateDragBy: aBlVector
+	^ (self forElement: anElement) dragBy: aBlVector
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateDragOn: anElement byAll: aSequenceOfBlVectors [
-	^ (self forElement: anElement) simulateDragByAll: aSequenceOfBlVectors
+	^ (self forElement: anElement) dragByAll: aSequenceOfBlVectors
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateEvent: anEvent on: anElement [
-	^ (self forElement: anElement) simulateEvent: anEvent
+	^ (self forElement: anElement) event: anEvent
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateEvents: aCollectionOfEvents on: anElement [
-	^ (self forElement: anElement) simulateEvents: aCollectionOfEvents
+	^ (self forElement: anElement) events: aCollectionOfEvents
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateKeyDownOn: anElement key: aKeyboardKey [
-	^ (self forElement: anElement) simulateKeyDown: aKeyboardKey
+	^ (self forElement: anElement) keyDown: aKeyboardKey
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateKeyUpOn: anElement key: aKeyboardKey [
-	^ (self forElement: anElement) simulateKeyUp: aKeyboardKey
+	^ (self forElement: anElement) keyUp: aKeyboardKey
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseDownOn: anElement [
-	^ (self forElement: anElement) simulateMouseDown
+	^ (self forElement: anElement) mouseDown
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseDownOn: anElement at: aPoint [
-	^ (self forElement: anElement) simulateMouseDownAt: aPoint
+	^ (self forElement: anElement) mouseDownAt: aPoint
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseMoveInside: anElement [
-	^ (self forElement: anElement) simulateMouseMoveInside
+	^ (self forElement: anElement) mouseMoveInside
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseMoveOn: anElement at: aPoint [
-	^ (self forElement: anElement) simulateMouseMoveAt: aPoint
+	^ (self forElement: anElement) mouseMoveAt: aPoint
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseMoveOn: anElement from: aFromPoint to: aToPoint [
-	^ (self forElement: anElement) simulateMouseMoveFrom: aFromPoint to: aToPoint
+	^ (self forElement: anElement) mouseMoveFrom: aFromPoint to: aToPoint
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseMoveOutside: anElement [
-	^ (self forElement: anElement) simulateMouseMoveOutside
+	^ (self forElement: anElement) mouseMoveOutside
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseUpOn: anElement [
-	^ (self forElement: anElement) simulateMouseUp
+	^ (self forElement: anElement) mouseUp
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseUpOn: anElement at: aPoint [
-	^ (self forElement: anElement) simulateMouseUpAt: aPoint
+	^ (self forElement: anElement) mouseUpAt: aPoint
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateMouseWheelOn: anElement by: aBlVector [
-	^ (self forElement: anElement) simulateMouseWheelBy: aBlVector
+	^ (self forElement: anElement) mouseWheelBy: aBlVector
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateSecondaryClickOn: anElement [
-	^ (self forElement: anElement) simulateSecondaryClick
+	^ (self forElement: anElement) secondaryClick
 ]
 
 { #category : #'debug - simulation' }
 BlEventSimulator class >> simulateTextInput: aString on: aBlElement [
-	^ (self forElement: aBlElement) simulateTextInput: aString
+	^ (self forElement: aBlElement) textInput: aString
 ]
 
 { #category : #initialization }
@@ -186,8 +186,8 @@ BlEventSimulator >> target [
 ]
 
 { #category : #accessing }
-BlEventSimulator >> space [
-	^ space
+BlEventSimulator >> modifiers [
+	^ modifiers
 ]
 
 { #category : #accessing }
@@ -195,151 +195,37 @@ BlEventSimulator >> mousePosition [
 	^ mousePosition
 ]
 
-{ #category : #accessing }
-BlEventSimulator >> modifiers [
-	^ modifiers
-]
-
-{ #category : #accessing }
-BlEventSimulator >> pressedKeys [
-	^ pressedKeys
+{ #category : #testing }
+BlEventSimulator >> isKeyPressed: aKeyboardKey [
+	^ pressedKeys includes: aKeyboardKey
 ]
 
 { #category : #simulation }
 BlEventSimulator >> locationInside [
 	"Return a random space location inside of target bounds"	
-	| theBounds aPosition |
-	
+	| theBounds |
 	target topMostParent forceLayout.
 	theBounds := target bounds inSpace bounds.
-	aPosition := theBounds atRandom.
-		
-	self
-		assert: [ theBounds containsPoint: aPosition ]
-		description: [ 'Point({1}) must be inside of the bounds({2})' format: { aPosition . theBounds } ].
-		
-	^ aPosition
+	^ theBounds origin + (theBounds extent * (0.15 @ 0.3))
 ]
 
 { #category : #simulation }
 BlEventSimulator >> locationOutside [
 	"Return a random space location outside of target bounds"	
-	| theBounds aPosition |
-	
+	| theBounds |
 	target topMostParent forceLayout.
 	theBounds := target bounds inSpace bounds.
-	aPosition := {
-		theBounds topRight - (theBounds width asInteger atRandom @ 100 atRandom).
-		theBounds topRight + (100 atRandom @ theBounds height asInteger atRandom).
-		theBounds bottomLeft + (theBounds width asInteger atRandom @ 100 atRandom).
-		theBounds bottomLeft - (100 atRandom @ theBounds height asInteger atRandom).
-	} atRandom.
-		
-	self
-		assert: [ (theBounds containsPoint: aPosition) not ]
-		description: [ 'Point must be outside of the bounds' ].
-		
-	^ aPosition
+	^ theBounds origin - (20 @ 20)
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateClick [
-	"Simulate a click event in the middle of target element by
-	performing mouse down and mouse up events in a sequence"
-	^ self simulateClickButton: BlMouseButton primary
-]
-
-{ #category : #simulation }
-BlEventSimulator >> simulateClickButton: aButton [
-	"Simulate a click event in the middle of target element by
-	performing mouse down and mouse up events in a sequence."
-	| aPosition |
-
-	target topMostParent forceLayout.
-	aPosition := target bounds inSpace center.
-	mousePosition := aPosition.
-	
-	self
-		simulateEvents: {
-			((BlMouseDownEvent button: aButton) position: aPosition; yourself).
-			((BlMouseUpEvent button: aButton) position: aPosition; yourself) }.
-		
-	^ aPosition
-]
-
-{ #category : #simulation }
-BlEventSimulator >> simulateClickOutside [
-	"Simulate a click event outside of target bounds by
-	performing mouse down and mouse up events in a sequence"
-	| aPosition |
-	aPosition := self locationOutside.
-	mousePosition := aPosition.
-	self
-		simulateEvents: {
-			(BlMouseDownEvent primary position: aPosition; yourself).
-			(BlMouseUpEvent primary position: aPosition; yourself) }
-]
-
-{ #category : #simulation }
-BlEventSimulator >> simulateDoubleClick [
-	"Simulate a double click event in the middle of target element by
-	performing mouse down and mouse up events in a sequence"
-	| aPosition |
-	target topMostParent forceLayout.
-	aPosition := target bounds inSpace center.
-	mousePosition := aPosition.
-	self
-		simulateEvents: {
-			(BlMouseDownEvent primary position: aPosition; yourself).
-			(BlMouseUpEvent primary position: aPosition; yourself).
-			(BlMouseDownEvent primary position: aPosition; yourself).
-			(BlMouseUpEvent primary position: aPosition; yourself) }
-]
-
-{ #category : #simulation }
-BlEventSimulator >> simulateDragBy: aBlVector [
-	"Simulate a drag event in the middle of target element by a vector"
-	| aPosition aDelta |
-	target topMostParent forceLayout.
-	aPosition := target bounds inSpace center.
-	aDelta := (target localBoundsToGlobal:
-		(BlBounds origin: 0.0 @ 0.0 extent: aBlVector)) extent.
-	mousePosition := aPosition + aDelta.
-	self
-		simulateEvents: {
-			(BlMouseDownEvent primary position: aPosition; yourself).
-			(BlMouseMoveEvent primary position: mousePosition; delta: aDelta; yourself).
-			(BlMouseUpEvent primary position: mousePosition; yourself) }
-]
-
-{ #category : #simulation }
-BlEventSimulator >> simulateDragByAll: aSequenceOfBlVectors [
-	"Simulate a drag in the center of target element by performing
-	mouse down, mouse move, and mouse up events in a sequence of vectors."
-	| aPosition aDelta |
-	target forceLayout.
-	aPosition := target bounds inSpace center.
-	mousePosition := aPosition.
-
-	self simulateEvent: (BlMouseDownEvent primary position: mousePosition; yourself).
-
-	aSequenceOfBlVectors do: [ :each |
-		aDelta := (target localBoundsToGlobal:
-			(BlBounds origin: 0.0 @ 0.0 extent: each)) extent.
-		mousePosition := mousePosition + aDelta.
-		self simulateEvent: (BlMouseMoveEvent primary position: mousePosition; delta: aDelta; yourself) ].
-
-	self simulateEvent: (BlMouseUpEvent primary position: mousePosition; delta: aDelta; yourself)
-]
-
-{ #category : #simulation }
-BlEventSimulator >> simulateEvent: anEvent [
+BlEventSimulator >> event: anEvent [
 	"Simulate a single event"
-	self simulateEvents: { anEvent }
+	self events: { anEvent }
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateEvents: aCollectionOfEvents [
+BlEventSimulator >> events: aCollectionOfEvents [
 	"I simulate a given sequence of low level space UI events such as MouseUp/MouseDown or keyboard."
 	| aSpace topMostElement |
 	target isAttachedToSceneGraph
@@ -373,89 +259,194 @@ BlEventSimulator >> simulateEvents: aCollectionOfEvents [
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateKeyDown: aKeyboardKey [
-	"Simulate a key down event"
-	pressedKeys add: aKeyboardKey.
-	self simulateEvents: { BlKeyDownEvent new key: aKeyboardKey; yourself }
+BlEventSimulator >> click [
+	"Perform a click at the current mouse position (defaulting to the center of target if nil)"
+	^ self clickButton: BlMouseButton primary
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateKeyUp: aKeyboardKey [
-	"Simulate a key up event"
-	pressedKeys remove: aKeyboardKey ifAbsent: [ ].
-	self simulateEvents: { BlKeyUpEvent new key: aKeyboardKey; yourself }
+BlEventSimulator >> clickButton: aButton [
+	"Perform a click (mouse down and mouse up) at the current mouse position"
+	self mouseDownButton: aButton.
+	self mouseUpButton: aButton
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateMouseDown [
-	"Simulate a mouse down event in the middle of target element"
+BlEventSimulator >> clickOutside [
+	"Simulate a click event outside of target bounds"
 	| aPosition |
+	aPosition := self locationOutside.
+	mousePosition := aPosition.
+	self
+		events: {
+			(BlMouseDownEvent primary position: aPosition; yourself).
+			(BlMouseUpEvent primary position: aPosition; yourself) }
+]
+
+{ #category : #simulation }
+BlEventSimulator >> doubleClick [
+	"Perform a double click at the current mouse position (defaulting to the center of target if nil)"
+	^ self doubleClickButton: BlMouseButton primary
+]
+
+{ #category : #simulation }
+BlEventSimulator >> doubleClickButton: aButton [
+	| aPosition |
+	aPosition := mousePosition ifNil: [ 
+		target topMostParent forceLayout.
+		target bounds inSpace center ].
+	mousePosition := aPosition.
+	self events: {
+		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
+		((BlMouseUpEvent button: aButton) position: aPosition; yourself).
+		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
+		((BlMouseUpEvent button: aButton) position: aPosition; yourself) }
+]
+
+{ #category : #simulation }
+BlEventSimulator >> dragBy: aBlVector [
+	"Simulate a drag event in the middle of target element by a vector"
+	| aPosition aDelta |
 	target topMostParent forceLayout.
 	aPosition := target bounds inSpace center.
-	mousePosition := aPosition.
-	self simulateEvents: { BlMouseDownEvent primary position: aPosition }
+	aDelta := (target localBoundsToGlobal:
+		(BlBounds origin: 0.0 @ 0.0 extent: aBlVector)) extent.
+	mousePosition := aPosition + aDelta.
+	self
+		events: {
+			(BlMouseDownEvent primary position: aPosition; yourself).
+			(BlMouseMoveEvent primary position: mousePosition; delta: aDelta; yourself).
+			(BlMouseUpEvent primary position: mousePosition; yourself) }
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateMouseDownAt: aPoint [
+BlEventSimulator >> dragByAll: aSequenceOfBlVectors [
+	"Simulate a drag in the center of target element by performing
+	mouse down, mouse move, and mouse up events in a sequence of vectors."
+	| aPosition aDelta |
+	target forceLayout.
+	aPosition := target bounds inSpace center.
+	mousePosition := aPosition.
+
+	self event: (BlMouseDownEvent primary position: mousePosition; yourself).
+
+	aSequenceOfBlVectors do: [ :each |
+		aDelta := (target localBoundsToGlobal:
+			(BlBounds origin: 0.0 @ 0.0 extent: each)) extent.
+		mousePosition := mousePosition + aDelta.
+		self event: (BlMouseMoveEvent primary position: mousePosition; delta: aDelta; yourself) ].
+
+	self event: (BlMouseUpEvent primary position: mousePosition; yourself)
+]
+
+{ #category : #simulation }
+BlEventSimulator >> keyDown: aKeyboardKey [
+	"Simulate a key down event"
+	pressedKeys add: aKeyboardKey.
+	self events: { BlKeyDownEvent new key: aKeyboardKey; yourself }
+]
+
+{ #category : #simulation }
+BlEventSimulator >> keyUp: aKeyboardKey [
+	"Simulate a key up event"
+	pressedKeys remove: aKeyboardKey ifAbsent: [ ].
+	self events: { BlKeyUpEvent new key: aKeyboardKey; yourself }
+]
+
+{ #category : #simulation }
+BlEventSimulator >> mouseDown [
+	"Perform a mouse down event at the current mouse position (defaulting to the center of target if nil)"
+	^ self mouseDownButton: BlMouseButton primary
+]
+
+{ #category : #simulation }
+BlEventSimulator >> mouseDownButton: aButton [
+	| aPosition |
+	aPosition := mousePosition ifNil: [ 
+		target topMostParent forceLayout.
+		target bounds inSpace center ].
+	mousePosition := aPosition.
+	self events: { ((BlMouseDownEvent button: aButton) position: aPosition; yourself) }
+]
+
+{ #category : #simulation }
+BlEventSimulator >> mouseDownAt: aPoint [
 	"Simulate a mouse down event at a given location in the space of the element"
 	mousePosition := aPoint.
-	self simulateEvents: { BlMouseDownEvent primary position: aPoint }
+	self events: { BlMouseDownEvent primary position: aPoint }
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateMouseMoveInside [
+BlEventSimulator >> mouseMoveInside [
 	"Simulate a mouse move event at a random location within target's bounds"
 	| aPosition |
 	aPosition := self locationInside.
 	mousePosition := aPosition.
-	self simulateEvents: { BlMouseMoveEvent primary position: aPosition }
+	self events: { BlMouseMoveEvent primary position: aPosition }
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateMouseMoveAt: aPoint [
+BlEventSimulator >> mouseMoveAt: aPoint [
 	"Simulate a mouse move event at a given location in the space of the element"
 	| aDelta |
 	aDelta := mousePosition ifNil: [ 0 @ 0 ] ifNotNil: [ aPoint - mousePosition ].
 	mousePosition := aPoint.
-	self simulateEvents: { BlMouseMoveEvent primary position: aPoint; delta: aDelta; yourself }
+	self events: { BlMouseMoveEvent primary position: aPoint; delta: aDelta; yourself }
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateMouseMoveFrom: aFromPoint to: aToPoint [
+BlEventSimulator >> mouseMoveFrom: aFromPoint to: aToPoint [
 	"Simulate a mouse move event from a point to a point in the space"
 	mousePosition := aToPoint.
-	self simulateEvents: { BlMouseMoveEvent primary position: aToPoint; delta: (aToPoint - aFromPoint) }
+	self events: { BlMouseMoveEvent primary position: aToPoint; delta: (aToPoint - aFromPoint) }
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateMouseMoveOutside [
+BlEventSimulator >> mouseMoveOutside [
 	"Simulate a mouse move event at a random location outside of target's bounds"
 	| aPosition |
 	aPosition := self locationOutside.
 	mousePosition := aPosition.
-	self simulateEvents: { BlMouseMoveEvent primary position: aPosition }
+	self events: { BlMouseMoveEvent primary position: aPosition }
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateMouseUp [
-	"Simulate a mouse up event in the middle of target element"
+BlEventSimulator >> mouseMoveBy: aPoint [
+	"Move the mouse by a delta relative to current position"
+	| oldPosition newPosition |
+	oldPosition := mousePosition ifNil: [ 
+		target topMostParent forceLayout.
+		target bounds inSpace center ].
+	newPosition := oldPosition + aPoint.
+	mousePosition := newPosition.
+	self events: { BlMouseMoveEvent primary position: newPosition; delta: aPoint; yourself }
+]
+
+{ #category : #simulation }
+BlEventSimulator >> mouseUp [
+	"Perform a mouse up event at the current mouse position (defaulting to the center of target if nil)"
+	^ self mouseUpButton: BlMouseButton primary
+]
+
+{ #category : #simulation }
+BlEventSimulator >> mouseUpButton: aButton [
 	| aPosition |
-	target topMostParent forceLayout.
-	aPosition := target bounds inSpace center.
+	aPosition := mousePosition ifNil: [ 
+		target topMostParent forceLayout.
+		target bounds inSpace center ].
 	mousePosition := aPosition.
-	self simulateEvent: (BlMouseUpEvent primary position: aPosition; yourself)
+	self events: { ((BlMouseUpEvent button: aButton) position: aPosition; yourself) }
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateMouseUpAt: aPoint [
+BlEventSimulator >> mouseUpAt: aPoint [
 	"Simulate a mouse up event at a given location in the space of the element"
 	mousePosition := aPoint.
-	self simulateEvent: (BlMouseUpEvent primary position: aPoint; yourself)
+	self event: (BlMouseUpEvent primary position: aPoint; yourself)
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateMouseWheelBy: aBlVector [
+BlEventSimulator >> mouseWheelBy: aBlVector [
 	"Simulate a mouse wheel event in the middle of target element"
 	| aPosition aBlocEvent |
 	target topMostParent forceLayout.
@@ -465,148 +456,65 @@ BlEventSimulator >> simulateMouseWheelBy: aBlVector [
 		isTouch: false;
 		vector: aBlVector asBlocVector;
 		position: aPosition.
-	self simulateEvent: aBlocEvent.
+	self event: aBlocEvent.
 	^ aPosition
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateSecondaryClick [
-	"Simulate a secondary click event in the middle of target element by
-	performing mouse down and mouse up events in a sequence"
-	^ self simulateClickButton: BlMouseButton secondary
+BlEventSimulator >> secondaryClick [
+	"Simulate a secondary click event in the middle of target element"
+	^ self clickButton: BlMouseButton secondary
 ]
 
 { #category : #simulation }
-BlEventSimulator >> simulateTextInput: aString [
+BlEventSimulator >> textInput: aString [
 	"Simulate a text input event"
-	self simulateEvent: (BlTextInputEvent new text: aString; yourself)
+	self event: (BlTextInputEvent new text: aString; yourself)
 ]
 
-{ #category : #'virtual device' }
-BlEventSimulator >> mouseDown [
-	"Perform a mouse down event at the current mouse position (defaulting to the center of target if nil)"
-	^ self mouseDownButton: BlMouseButton primary
+{ #category : #simulation }
+BlEventSimulator >> keyPress: aKeyboardKey [
+	"Simulate a key down followed by key up event"
+	self keyDown: aKeyboardKey.
+	self keyUp: aKeyboardKey
 ]
 
-{ #category : #'virtual device' }
-BlEventSimulator >> mouseDownButton: aButton [
-	| aPosition |
-	aPosition := mousePosition ifNil: [ 
-		target topMostParent forceLayout.
-		target bounds inSpace center ].
-	mousePosition := aPosition.
-	self simulateEvents: { ((BlMouseDownEvent button: aButton) position: aPosition; yourself) }
-]
-
-{ #category : #'virtual device' }
-BlEventSimulator >> mouseUp [
-	"Perform a mouse up event at the current mouse position"
-	^ self mouseUpButton: BlMouseButton primary
-]
-
-{ #category : #'virtual device' }
-BlEventSimulator >> mouseUpButton: aButton [
-	| aPosition |
-	aPosition := mousePosition ifNil: [ 
-		target topMostParent forceLayout.
-		target bounds inSpace center ].
-	mousePosition := aPosition.
-	self simulateEvents: { ((BlMouseUpEvent button: aButton) position: aPosition; yourself) }
-]
-
-{ #category : #'virtual device' }
-BlEventSimulator >> mouseMoveBy: aPoint [
-	"Move the mouse by a delta relative to current position"
-	| oldPosition newPosition |
-	oldPosition := mousePosition ifNil: [ 
-		target topMostParent forceLayout.
-		target bounds inSpace center ].
-	newPosition := oldPosition + aPoint.
-	mousePosition := newPosition.
-	self simulateEvents: { BlMouseMoveEvent primary position: newPosition; delta: aPoint; yourself }
-]
-
-{ #category : #'virtual device' }
+{ #category : #simulation }
 BlEventSimulator >> shiftDown [
 	modifiers shift: true
 ]
 
-{ #category : #'virtual device' }
+{ #category : #simulation }
 BlEventSimulator >> shiftUp [
 	modifiers shift: false
 ]
 
-{ #category : #'virtual device' }
+{ #category : #simulation }
 BlEventSimulator >> ctrlDown [
 	modifiers ctrl: true
 ]
 
-{ #category : #'virtual device' }
+{ #category : #simulation }
 BlEventSimulator >> ctrlUp [
 	modifiers ctrl: false
 ]
 
-{ #category : #'virtual device' }
+{ #category : #simulation }
 BlEventSimulator >> altDown [
 	modifiers alt: true
 ]
 
-{ #category : #'virtual device' }
+{ #category : #simulation }
 BlEventSimulator >> altUp [
 	modifiers alt: false
 ]
 
-{ #category : #'virtual device' }
+{ #category : #simulation }
 BlEventSimulator >> cmdDown [
 	modifiers cmd: true
 ]
 
-{ #category : #'virtual device' }
+{ #category : #simulation }
 BlEventSimulator >> cmdUp [
 	modifiers cmd: false
-]
-
-{ #category : #'virtual device' }
-BlEventSimulator >> click [
-	"Perform a click at the current mouse position"
-	^ self clickButton: BlMouseButton primary
-]
-
-{ #category : #'virtual device' }
-BlEventSimulator >> clickButton: aButton [
-	"Perform a click (mouse down and mouse up) at the current mouse position"
-	self mouseDownButton: aButton.
-	self mouseUpButton: aButton
-]
-
-{ #category : #'virtual device' }
-BlEventSimulator >> doubleClick [
-	"Perform a double click at the current mouse position"
-	^ self doubleClickButton: BlMouseButton primary
-]
-
-{ #category : #'virtual device' }
-BlEventSimulator >> doubleClickButton: aButton [
-	| aPosition |
-	aPosition := mousePosition ifNil: [ 
-		target topMostParent forceLayout.
-		target bounds inSpace center ].
-	mousePosition := aPosition.
-	self simulateEvents: {
-		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
-		((BlMouseUpEvent button: aButton) position: aPosition; yourself).
-		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
-		((BlMouseUpEvent button: aButton) position: aPosition; yourself) }
-]
-
-{ #category : #'virtual device' }
-BlEventSimulator >> keyPress: aKeyboardKey [
-	"Simulate a key down followed by key up event"
-	self simulateKeyDown: aKeyboardKey.
-	self simulateKeyUp: aKeyboardKey
-]
-
-{ #category : #'virtual device' }
-BlEventSimulator >> isKeyPressed: aKeyboardKey [
-	^ pressedKeys includes: aKeyboardKey
 ]

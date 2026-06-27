@@ -179,6 +179,30 @@ BlHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock onTimeou
 	^ completionBlock value
 ]
 
+{ #category : #'host - testing' }
+BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aDuration [
+	| finished |
+	finished := false.
+	self
+		wait: [ self universe hasDeferredActions or: [ aSpace taskQueue isNotEmpty ] ]
+		timeout: aDuration
+		onCompletion: [ finished := true ]
+		onTimeout: [ finished := false ].
+	^ finished
+]
+
+{ #category : #'host - testing' }
+BlHost >> waitShownAndEmptyTaskQueueFor: aSpace timeout: aDuration [
+	aSpace isShown ifFalse: [
+		| aSemaphore |
+		aSemaphore := Semaphore new.
+		aSpace
+			addEventHandlerOn: BlSpaceShownEvent
+			doOnce: [ :event | aSemaphore signal ].
+		aSemaphore waitTimeoutMilliseconds: aDuration asMilliSeconds ].
+	^ self waitEmptyTaskQueueFor: aSpace timeout: aDuration
+]
+
 { #category : #'api - lifecycle' }
 BlHost >> start [
 

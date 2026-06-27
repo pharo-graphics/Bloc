@@ -37,38 +37,20 @@ BlSpaceSimulator >> initialize [
 ]
 
 { #category : #testing }
-BlSpaceSimulator >> isOpened [
-	^ space isOpened
-]
-
-{ #category : #private }
-BlSpaceSimulator >> waitForSpaceOpened [
-	| aSemaphore |
-	aSemaphore := Semaphore new.
-	space
-		addEventHandlerOn: BlSpaceShownEvent
-		doOnce: [ :event | aSemaphore signal ].
-	aSemaphore waitTimeoutMilliseconds: timeout asMilliSeconds
+BlSpaceSimulator >> isShown [
+	^ space isShown
 ]
 
 { #category : #stepping }
 BlSpaceSimulator >> pulseUntilEmptyTaskQueue [
 	"Wait until the space doesn't have available tasks to execute."
 
-	| finished |
-	finished := false.
-	space host
-		wait: [ space universe hasDeferredActions or: [ space taskQueue isNotEmpty ] ]
-		timeout: timeout
-		onCompletion: [ finished := true ]
-		onTimeout: [ finished := false ].
-	^ finished
+	^ space host waitEmptyTaskQueueFor: space timeout: timeout
 ]
 
 { #category : #stepping }
-BlSpaceSimulator >> pulseUntilSpaceOpenedAndEmptyTaskQueue [
-	"Wait until the space is opened and doesn't have available tasks to execute."
+BlSpaceSimulator >> pulseUntilSpaceShownAndEmptyTaskQueue [
+	"Wait until the space is shown and doesn't have available tasks to execute."
 
-	self isOpened ifFalse: [ self waitForSpaceOpened ].
-	^ self pulseUntilEmptyTaskQueue
+	^ space host waitShownAndEmptyTaskQueueFor: space timeout: timeout
 ]
