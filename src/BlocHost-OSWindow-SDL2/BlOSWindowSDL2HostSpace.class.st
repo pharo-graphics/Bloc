@@ -261,7 +261,7 @@ BlOSWindowSDL2HostSpace >> position [
 	"Return window's position in screen coordinates"
 	<return: #Point>
 
-	^ window position
+	^ window ifNotNil: [ :w | w position ] ifNil: [ 0@0 ]
 ]
 
 { #category : #'host space - geometry' }
