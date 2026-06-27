@@ -89,8 +89,3 @@ BlMorphicSteppingHost >> wait: aBlock timeout: aDuration onCompletion: completio
 				onCompletion: completionBlock
 				onTimeout: timeoutBlock ]
 ]
-
-{ #category : #testing }
-BlMorphicSteppingHost >> hasBackgroundLoop [
-	^ true
-]

@@ -120,8 +120,3 @@ BlOSWindowSDL2Host >> newHostSpaceFor: aSpace [
 		renderer: self newHostRenderer;
 		yourself
 ]
-
-{ #category : #testing }
-BlOSWindowSDL2Host >> hasBackgroundLoop [
-	^ true
-]

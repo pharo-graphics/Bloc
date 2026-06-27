@@ -68,8 +68,3 @@ BlHeadlessHost >> newHostSpaceFor: aSpace [
 		renderer: self newHostRenderer;
 		yourself
 ]
-
-{ #category : #testing }
-BlHeadlessHost >> hasBackgroundLoop [
-	^ true
-]
