@@ -13,7 +13,7 @@ BlDevScripterDoubleClickStep >> defaultLabel [
 BlDevScripterDoubleClickStep >> playOn: aScripter [
 	| targetElement simulator |
 	targetElement := self target findTargetStartingInScripter: aScripter.
-	simulator := BlEventSimulator forElement: targetElement.
+	simulator := targetElement simulator.
 	simulator click.
 	simulator click.
 	aScripter pulse

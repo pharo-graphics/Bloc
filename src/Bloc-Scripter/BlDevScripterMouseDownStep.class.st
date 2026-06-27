@@ -11,6 +11,6 @@ BlDevScripterMouseDownStep >> defaultLabel [
 
 { #category : #actions }
 BlDevScripterMouseDownStep >> playOn: aScripter [
-	(BlEventSimulator forElement: aScripter element) mouseDownAt: (self getMousePositionIn: aScripter).
+	aScripter element simulator mouseDownAt: (self getMousePositionIn: aScripter).
 	aScripter pulse
 ]
