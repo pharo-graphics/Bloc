@@ -11,6 +11,6 @@ BlDevScripterKeyUpStep >> defaultLabel [
 
 { #category : #actions }
 BlDevScripterKeyUpStep >> playOn: aScripter [
-	(BlEventSimulator forElement: aScripter element) simulateKeyUp: self key.
+	(BlEventSimulator forElement: aScripter element) keyUp: self key.
 	aScripter pulse
 ]

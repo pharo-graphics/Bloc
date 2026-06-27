@@ -23,9 +23,7 @@ BlDevScripterTypeTextStep >> playOn: aScripter [
 	anInputEvent := BlTextInputEvent new
 		text: self text.
 
-	BlSpace
-		simulateEvent: anInputEvent
-		on: aTarget.
+	aTarget simulator event: anInputEvent.
 
 	aScripter pulse.
 ]
