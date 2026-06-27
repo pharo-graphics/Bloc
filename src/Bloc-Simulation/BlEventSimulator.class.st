@@ -203,19 +203,26 @@ BlEventSimulator >> isKeyPressed: aKeyboardKey [
 { #category : #simulation }
 BlEventSimulator >> locationInside [
 	"Return a random space location inside of target bounds"	
-	| theBounds |
+	| theBounds aPosition |
 	target topMostParent forceLayout.
 	theBounds := target bounds inSpace bounds.
-	^ theBounds origin + (theBounds extent * (0.15 @ 0.3))
+	aPosition := theBounds atRandom.
+	self
+		assert: [ theBounds containsPoint: aPosition ]
+		description: [ 'Point must be inside of the bounds' ].
+	^ aPosition
 ]
 
 { #category : #simulation }
 BlEventSimulator >> locationOutside [
 	"Return a random space location outside of target bounds"	
-	| theBounds |
+	| theBounds aPosition |
 	target topMostParent forceLayout.
 	theBounds := target bounds inSpace bounds.
-	^ theBounds origin - (20 @ 20)
+	aPosition := theBounds origin - (20 @ 20).
+	[ theBounds containsPoint: aPosition ] whileTrue: [ 
+		aPosition := (theBounds origin - (100 @ 100)) + (200 @ 200) atRandom ].
+	^ aPosition
 ]
 
 { #category : #simulation }
