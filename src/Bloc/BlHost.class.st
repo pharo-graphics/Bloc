@@ -184,7 +184,9 @@ BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aDuration [
 	| finished |
 	finished := false.
 	self
-		wait: [ self universe hasDeferredActions or: [ aSpace taskQueue isEmpty not ] ]
+		wait: [ 
+			aSpace isShown ifFalse: [ aSpace pulse ].
+			self universe hasDeferredActions or: [ aSpace taskQueue isEmpty not ] ]
 		timeout: aDuration
 		onCompletion: [ finished := true ]
 		onTimeout: [ finished := false ].
@@ -208,6 +210,7 @@ BlHost >> waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: aDuration [
 	self
 		wait: [
 			| shouldWait |
+			aSpace isShown ifFalse: [ aSpace pulse ].
 			shouldWait := firstTime or: [ self universe hasDeferredActions or: [ aSpace taskQueue isEmpty not ] ].
 			firstTime := false.
 			shouldWait ]
