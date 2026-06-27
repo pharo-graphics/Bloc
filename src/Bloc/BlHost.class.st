@@ -131,6 +131,11 @@ BlHost >> isRunning [
 	^ self class isRunning
 ]
 
+{ #category : #testing }
+BlHost >> hasBackgroundLoop [
+	^ false
+]
+
 { #category : #'host space - accessing' }
 BlHost >> newHostRenderer [
 
@@ -165,7 +170,7 @@ BlHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock onTimeou
 	[
 		[ aBlock value ] whileTrue: [
 			timeProvider now >= deadline ifTrue: [ ^ timeoutBlock value ].
-			self isRunning
+			(self isRunning and: [ self hasBackgroundLoop ])
 				ifTrue: [
 					"Reactive wait: Wakes up instantly on the next pulse or at the deadline"
 					aSemaphore waitTimeoutMilliseconds: (deadline - timeProvider now) asMilliSeconds ]
