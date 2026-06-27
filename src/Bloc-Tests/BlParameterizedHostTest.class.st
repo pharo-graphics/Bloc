@@ -66,7 +66,7 @@ BlParameterizedHostTest >> tearDown [
 BlParameterizedHostTest >> waitTestingOpenedSpaces [
 
 	testingSpaces do: [ :each |
-		self assert: ((BlSpaceSimulator forSpace: each) timeout: 200 milliSeconds; pulseUntilSpaceOpenedAndEmptyTaskQueue) ]
+		self assert: ((BlSpaceSimulator forSpace: each) timeout: 200 milliSeconds; pulseUntilSpaceShownAndEmptyTaskQueue) ]
 ]
 
 { #category : #tests }

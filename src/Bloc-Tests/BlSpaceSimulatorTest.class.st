@@ -5,6 +5,16 @@ Class {
 }
 
 { #category : #tests }
+BlSpaceSimulatorTest >> testDefaultTimeout [
+	| aSpace simulator |
+	aSpace := self newTestingSpace.
+	
+	simulator := aSpace simulator.
+	
+	self assert: simulator timeout equals: 500 milliSeconds
+]
+
+{ #category : #tests }
 BlSpaceSimulatorTest >> testPulseUntilEmptyTaskQueue [
 	| aSpace simulator taskRun |
 	aSpace := self newTestingSpace.
@@ -37,14 +47,4 @@ BlSpaceSimulatorTest >> testPulseUntilSpaceShownAndEmptyTaskQueue [
 	self assert: simulator pulseUntilSpaceShownAndEmptyTaskQueue.
 	self assert: aSpace isShown.
 	self assert: taskRun
-]
-
-{ #category : #tests }
-BlSpaceSimulatorTest >> testDefaultTimeout [
-	| aSpace simulator |
-	aSpace := self newTestingSpace.
-	
-	simulator := aSpace simulator.
-	
-	self assert: simulator timeout equals: 500 milliSeconds
 ]
