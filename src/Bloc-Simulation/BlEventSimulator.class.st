@@ -53,8 +53,7 @@ BlEventSimulator >> clickButton: aButton [
 	| aPosition |
 	aPosition := mousePosition ifNil: [ 
 		target topMostParent forceLayout.
-		target bounds inSpace center ].
-	mousePosition := aPosition.
+		mousePosition := target bounds inSpace center ].
 	self events: {
 		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
 		((BlMouseUpEvent button: aButton) position: aPosition; yourself) }
@@ -103,8 +102,7 @@ BlEventSimulator >> doubleClickButton: aButton [
 	| aPosition |
 	aPosition := mousePosition ifNil: [ 
 		target topMostParent forceLayout.
-		target bounds inSpace center ].
-	mousePosition := aPosition.
+		mousePosition := target bounds inSpace center ].
 	self events: {
 		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
 		((BlMouseUpEvent button: aButton) position: aPosition; yourself).
@@ -297,8 +295,7 @@ BlEventSimulator >> mouseDownButton: aButton [
 	| aPosition |
 	aPosition := mousePosition ifNil: [ 
 		target topMostParent forceLayout.
-		target bounds inSpace center ].
-	mousePosition := aPosition.
+		mousePosition := target bounds inSpace center ].
 	self events: { ((BlMouseDownEvent button: aButton) position: aPosition; yourself) }
 ]
 
@@ -371,8 +368,7 @@ BlEventSimulator >> mouseUpButton: aButton [
 	| aPosition |
 	aPosition := mousePosition ifNil: [ 
 		target topMostParent forceLayout.
-		target bounds inSpace center ].
-	mousePosition := aPosition.
+		mousePosition := target bounds inSpace center ].
 	self events: { ((BlMouseUpEvent button: aButton) position: aPosition; yourself) }
 ]
 
