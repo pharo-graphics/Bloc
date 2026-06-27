@@ -41,6 +41,7 @@ BlParameterizedHostTest >> newTestingSpace [
 	aSpace := BlSpace new.
 	aSpace host: hostClass new.
 	testingSpaces add: aSpace.
+	aSpace show.
 	^ aSpace
 ]
 
@@ -73,5 +74,5 @@ BlParameterizedHostTest >> waitTestingOpenedSpaces [
 BlParameterizedHostTest >> waitTestingSpaces [
 
 	testingSpaces do: [ :each |
-		self assert: ((BlSpaceSimulator forSpace: each) timeout: 200 milliSeconds; pulseUntilEmptyTaskQueue) ]
+		self assert: ((BlSpaceSimulator forSpace: each) timeout: 200 milliSeconds; pulseUntilSpaceShownAndEmptyTaskQueue) ]
 ]
