@@ -27,132 +27,18 @@ BlEventSimulator class >> forSpace: aSpace [
 ]
 
 { #category : #'instance creation' }
-BlEventSimulator class >> forElement: anObject [
-	"Deprecated fallback"
-	self
-		deprecated: 'Use forElement: or forSpace: instead'
-		on: '2026-06-26'
-		in: 'Bloc'.
-	^ (anObject class includesBehavior: BlSpace)
-		ifTrue: [ self forSpace: anObject ]
-		ifFalse: [ self forElement: anObject ]
-]
-
-{ #category : #'instance creation' }
 BlEventSimulator class >> on: anObject [
 	^ self forElement: anObject
 ]
 
-{ #category : #initialization }
-BlEventSimulator >> initialize [
-	super initialize.
-	modifiers := BlKeyModifiers new.
-	pressedKeys := Set new.
-	shouldFocus := false
-]
-
-{ #category : #accessing }
-BlEventSimulator >> element: anElement [
-	target := anElement.
-	anElement isAttachedToSceneGraph ifTrue: [ space := anElement space ].
-	shouldFocus := true
-]
-
-{ #category : #accessing }
-BlEventSimulator >> space: aSpace [
-	target := aSpace.
-	space := aSpace.
-	shouldFocus := false
-]
-
-{ #category : #accessing }
-BlEventSimulator >> target [
-	^ target
-]
-
-{ #category : #accessing }
-BlEventSimulator >> modifiers [
-	^ modifiers
-]
-
-{ #category : #accessing }
-BlEventSimulator >> mousePosition [
-	^ mousePosition
-]
-
-{ #category : #testing }
-BlEventSimulator >> isKeyPressed: aKeyboardKey [
-	^ pressedKeys includes: aKeyboardKey
+{ #category : #simulation }
+BlEventSimulator >> altDown [
+	modifiers alt: true
 ]
 
 { #category : #simulation }
-BlEventSimulator >> locationInside [
-	"Return a random space location inside of target bounds"	
-	| theBounds aPosition |
-	target topMostParent forceLayout.
-	theBounds := target bounds inSpace bounds.
-	aPosition := theBounds atRandom.
-	self
-		assert: [ theBounds containsPoint: aPosition ]
-		description: [ 'Point must be inside of the bounds' ].
-	^ aPosition
-]
-
-{ #category : #simulation }
-BlEventSimulator >> locationOutside [
-	"Return a random space location outside of target bounds"	
-	| theBounds aPosition |
-	target topMostParent forceLayout.
-	theBounds := target bounds inSpace bounds.
-	aPosition := theBounds origin - (20 @ 20).
-	[ theBounds containsPoint: aPosition ] whileTrue: [ 
-		aPosition := (theBounds origin - (100 @ 100)) + (200 @ 200) atRandom ].
-	^ aPosition
-]
-
-{ #category : #simulation }
-BlEventSimulator >> event: anEvent [
-	"Simulate a single event"
-	self events: { anEvent }
-]
-
-{ #category : #simulation }
-BlEventSimulator >> events: aCollectionOfEvents [
-	"I simulate a given sequence of low level space UI events such as MouseUp/MouseDown or keyboard."
-	| aSpace topMostElement |
-	target isAttachedToSceneGraph
-		ifTrue: [ aSpace := target space ]
-		ifFalse: [
-			self
-				deprecated: 'Elements must be attached to a space before simulating events.'
-				on: '2026-06-26'
-				in: 'Bloc'.
-			topMostElement := target topMostParent.
-			aSpace := BlSpace new.
-			aSpace root addChild: topMostElement.
-			aSpace show ].
-
-	shouldFocus ifTrue: [ target requestFocus ].
-
-	aCollectionOfEvents do: [ :anEvent |
-		anEvent fillFromTime: aSpace time.
-		anEvent isUIEvent ifTrue: [
-			modifiers isEmpty ifFalse: [
-				anEvent modifiers: modifiers copy ] ] ].
-
-	aSpace isShown ifFalse: [
-		aSpace host waitShownAndEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds ].
-
-	aSpace host waitEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds.
-
-	aCollectionOfEvents do: [ :anEvent |
-		aSpace hostSpace enqueueEvent: anEvent ].
-
-	aSpace host waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds.
-
-	topMostElement ifNotNil: [
-		topMostElement removeFromParent.
-		aSpace close ]
+BlEventSimulator >> altUp [
+	modifiers alt: false
 ]
 
 { #category : #simulation }
@@ -178,6 +64,26 @@ BlEventSimulator >> clickOutside [
 		events: {
 			(BlMouseDownEvent primary position: aPosition; yourself).
 			(BlMouseUpEvent primary position: aPosition; yourself) }
+]
+
+{ #category : #simulation }
+BlEventSimulator >> cmdDown [
+	modifiers cmd: true
+]
+
+{ #category : #simulation }
+BlEventSimulator >> cmdUp [
+	modifiers cmd: false
+]
+
+{ #category : #simulation }
+BlEventSimulator >> ctrlDown [
+	modifiers ctrl: true
+]
+
+{ #category : #simulation }
+BlEventSimulator >> ctrlUp [
+	modifiers ctrl: false
 ]
 
 { #category : #simulation }
@@ -236,11 +142,83 @@ BlEventSimulator >> dragByAll: aSequenceOfBlVectors [
 	self event: (BlMouseUpEvent primary position: mousePosition; yourself)
 ]
 
+{ #category : #accessing }
+BlEventSimulator >> element: anElement [
+	target := anElement.
+	anElement isAttachedToSceneGraph ifTrue: [ space := anElement space ].
+	shouldFocus := true
+]
+
+{ #category : #simulation }
+BlEventSimulator >> event: anEvent [
+	"Simulate a single event"
+	self events: { anEvent }
+]
+
+{ #category : #simulation }
+BlEventSimulator >> events: aCollectionOfEvents [
+	"I simulate a given sequence of low level space UI events such as MouseUp/MouseDown or keyboard."
+	| aSpace topMostElement |
+	target isAttachedToSceneGraph
+		ifTrue: [ aSpace := target space ]
+		ifFalse: [
+			self
+				deprecated: 'Elements must be attached to a space before simulating events.'
+				on: '2026-06-26'
+				in: 'Bloc'.
+			topMostElement := target topMostParent.
+			aSpace := BlSpace new.
+			aSpace root addChild: topMostElement.
+			aSpace show ].
+
+	shouldFocus ifTrue: [ target requestFocus ].
+
+	aCollectionOfEvents do: [ :anEvent |
+		anEvent fillFromTime: aSpace time.
+		anEvent isUIEvent ifTrue: [
+			modifiers isEmpty ifFalse: [
+				anEvent modifiers: modifiers copy ] ] ].
+
+	aSpace isShown ifFalse: [
+		aSpace host waitShownAndEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds ].
+
+	aSpace host waitEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds.
+
+	aCollectionOfEvents do: [ :anEvent |
+		aSpace hostSpace enqueueEvent: anEvent ].
+
+	aSpace host waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds.
+
+	topMostElement ifNotNil: [
+		topMostElement removeFromParent.
+		aSpace close ]
+]
+
+{ #category : #initialization }
+BlEventSimulator >> initialize [
+	super initialize.
+	modifiers := BlKeyModifiers new.
+	pressedKeys := Set new.
+	shouldFocus := false
+]
+
+{ #category : #testing }
+BlEventSimulator >> isKeyPressed: aKeyboardKey [
+	^ pressedKeys includes: aKeyboardKey
+]
+
 { #category : #simulation }
 BlEventSimulator >> keyDown: aKeyboardKey [
 	"Simulate a key down event"
 	pressedKeys add: aKeyboardKey.
 	self events: { BlKeyDownEvent new key: aKeyboardKey; yourself }
+]
+
+{ #category : #simulation }
+BlEventSimulator >> keyPress: aKeyboardKey [
+	"Simulate a key down followed by key up event"
+	self keyDown: aKeyboardKey.
+	self keyUp: aKeyboardKey
 ]
 
 { #category : #simulation }
@@ -251,9 +229,55 @@ BlEventSimulator >> keyUp: aKeyboardKey [
 ]
 
 { #category : #simulation }
+BlEventSimulator >> locationInside [
+	"Return a random space location inside of target bounds"	
+	| theBounds aPosition |
+	target topMostParent forceLayout.
+	theBounds := target bounds inSpace bounds.
+	aPosition := theBounds atRandom.
+	self
+		assert: [ theBounds containsPoint: aPosition ]
+		description: [ 'Point must be inside of the bounds' ].
+	^ aPosition
+]
+
+{ #category : #simulation }
+BlEventSimulator >> locationOutside [
+	"Return a random space location outside of target bounds"	
+
+	| theBounds aPosition |
+	target topMostParent forceLayout.
+	theBounds := target bounds inSpace bounds.
+	aPosition := {
+		theBounds topRight - (theBounds width asInteger atRandom @ 100 atRandom).
+		theBounds topRight + (100 atRandom @ theBounds height asInteger atRandom).
+		theBounds bottomLeft + (theBounds width asInteger atRandom @ 100 atRandom).
+		theBounds bottomLeft - (100 atRandom @ theBounds height asInteger atRandom).
+	} atRandom.
+
+	self
+		assert: [ (theBounds containsPoint: aPosition) not ]
+		description: [ 'Point must be outside of the bounds' ].
+
+	^ aPosition
+]
+
+{ #category : #accessing }
+BlEventSimulator >> modifiers [
+	^ modifiers
+]
+
+{ #category : #simulation }
 BlEventSimulator >> mouseDown [
 	"Perform a mouse down event at the current mouse position (defaulting to the center of target if nil)"
 	^ self mouseDownButton: BlMouseButton primary
+]
+
+{ #category : #simulation }
+BlEventSimulator >> mouseDownAt: aPoint [
+	"Simulate a mouse down event at a given location in the space of the element"
+	mousePosition := aPoint.
+	self events: { BlMouseDownEvent primary position: aPoint }
 ]
 
 { #category : #simulation }
@@ -267,44 +291,12 @@ BlEventSimulator >> mouseDownButton: aButton [
 ]
 
 { #category : #simulation }
-BlEventSimulator >> mouseDownAt: aPoint [
-	"Simulate a mouse down event at a given location in the space of the element"
-	mousePosition := aPoint.
-	self events: { BlMouseDownEvent primary position: aPoint }
-]
-
-{ #category : #simulation }
-BlEventSimulator >> mouseMoveInside [
-	"Simulate a mouse move event at a random location within target's bounds"
-	| aPosition |
-	aPosition := self locationInside.
-	mousePosition := aPosition.
-	self events: { BlMouseMoveEvent primary position: aPosition }
-]
-
-{ #category : #simulation }
 BlEventSimulator >> mouseMoveAt: aPoint [
 	"Simulate a mouse move event at a given location in the space of the element"
 	| aDelta |
 	aDelta := mousePosition ifNil: [ 0 @ 0 ] ifNotNil: [ aPoint - mousePosition ].
 	mousePosition := aPoint.
 	self events: { BlMouseMoveEvent primary position: aPoint; delta: aDelta; yourself }
-]
-
-{ #category : #simulation }
-BlEventSimulator >> mouseMoveFrom: aFromPoint to: aToPoint [
-	"Simulate a mouse move event from a point to a point in the space"
-	mousePosition := aToPoint.
-	self events: { BlMouseMoveEvent primary position: aToPoint; delta: (aToPoint - aFromPoint) }
-]
-
-{ #category : #simulation }
-BlEventSimulator >> mouseMoveOutside [
-	"Simulate a mouse move event at a random location outside of target's bounds"
-	| aPosition |
-	aPosition := self locationOutside.
-	mousePosition := aPosition.
-	self events: { BlMouseMoveEvent primary position: aPosition }
 ]
 
 { #category : #simulation }
@@ -320,9 +312,46 @@ BlEventSimulator >> mouseMoveBy: aPoint [
 ]
 
 { #category : #simulation }
+BlEventSimulator >> mouseMoveFrom: aFromPoint to: aToPoint [
+	"Simulate a mouse move event from a point to a point in the space"
+	mousePosition := aToPoint.
+	self events: { BlMouseMoveEvent primary position: aToPoint; delta: (aToPoint - aFromPoint) }
+]
+
+{ #category : #simulation }
+BlEventSimulator >> mouseMoveInside [
+	"Simulate a mouse move event at a random location within target's bounds"
+	| aPosition |
+	aPosition := self locationInside.
+	mousePosition := aPosition.
+	self events: { BlMouseMoveEvent primary position: aPosition }
+]
+
+{ #category : #simulation }
+BlEventSimulator >> mouseMoveOutside [
+	"Simulate a mouse move event at a random location outside of target's bounds"
+	| aPosition |
+	aPosition := self locationOutside.
+	mousePosition := aPosition.
+	self events: { BlMouseMoveEvent primary position: aPosition }
+]
+
+{ #category : #accessing }
+BlEventSimulator >> mousePosition [
+	^ mousePosition
+]
+
+{ #category : #simulation }
 BlEventSimulator >> mouseUp [
 	"Perform a mouse up event at the current mouse position (defaulting to the center of target if nil)"
 	^ self mouseUpButton: BlMouseButton primary
+]
+
+{ #category : #simulation }
+BlEventSimulator >> mouseUpAt: aPoint [
+	"Simulate a mouse up event at a given location in the space of the element"
+	mousePosition := aPoint.
+	self event: (BlMouseUpEvent primary position: aPoint; yourself)
 ]
 
 { #category : #simulation }
@@ -333,13 +362,6 @@ BlEventSimulator >> mouseUpButton: aButton [
 		target bounds inSpace center ].
 	mousePosition := aPosition.
 	self events: { ((BlMouseUpEvent button: aButton) position: aPosition; yourself) }
-]
-
-{ #category : #simulation }
-BlEventSimulator >> mouseUpAt: aPoint [
-	"Simulate a mouse up event at a given location in the space of the element"
-	mousePosition := aPoint.
-	self event: (BlMouseUpEvent primary position: aPoint; yourself)
 ]
 
 { #category : #simulation }
@@ -364,19 +386,6 @@ BlEventSimulator >> secondaryClick [
 ]
 
 { #category : #simulation }
-BlEventSimulator >> textInput: aString [
-	"Simulate a text input event"
-	self event: (BlTextInputEvent new text: aString; yourself)
-]
-
-{ #category : #simulation }
-BlEventSimulator >> keyPress: aKeyboardKey [
-	"Simulate a key down followed by key up event"
-	self keyDown: aKeyboardKey.
-	self keyUp: aKeyboardKey
-]
-
-{ #category : #simulation }
 BlEventSimulator >> shiftDown [
 	modifiers shift: true
 ]
@@ -386,32 +395,20 @@ BlEventSimulator >> shiftUp [
 	modifiers shift: false
 ]
 
-{ #category : #simulation }
-BlEventSimulator >> ctrlDown [
-	modifiers ctrl: true
+{ #category : #accessing }
+BlEventSimulator >> space: aSpace [
+	target := aSpace.
+	space := aSpace.
+	shouldFocus := false
+]
+
+{ #category : #accessing }
+BlEventSimulator >> target [
+	^ target
 ]
 
 { #category : #simulation }
-BlEventSimulator >> ctrlUp [
-	modifiers ctrl: false
-]
-
-{ #category : #simulation }
-BlEventSimulator >> altDown [
-	modifiers alt: true
-]
-
-{ #category : #simulation }
-BlEventSimulator >> altUp [
-	modifiers alt: false
-]
-
-{ #category : #simulation }
-BlEventSimulator >> cmdDown [
-	modifiers cmd: true
-]
-
-{ #category : #simulation }
-BlEventSimulator >> cmdUp [
-	modifiers cmd: false
+BlEventSimulator >> textInput: aString [
+	"Simulate a text input event"
+	self event: (BlTextInputEvent new text: aString; yourself)
 ]
