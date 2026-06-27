@@ -44,3 +44,20 @@ BlMockedHost >> newHostSpaceFor: aSpace [
 		yourself
 	
 ]
+
+{ #category : #'host - api' }
+BlMockedHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock onTimeout: timeoutBlock [
+	"A mocked host has no background loop: manually pulse and yield a tiny bit"
+	| deadline timeProvider |
+	timeProvider := self universe spaces
+		ifNotEmpty: [ :theSpaces | theSpaces first time ]
+		ifEmpty: [ BlTime real ].
+	deadline := timeProvider now + aDuration.
+
+	[ aBlock value ] whileTrue: [
+		timeProvider now >= deadline ifTrue: [ ^ timeoutBlock value ].
+		self universe pulse.
+		(Delay forMilliseconds: 1) wait ].
+
+	^ completionBlock value
+]
