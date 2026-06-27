@@ -50,8 +50,14 @@ BlEventSimulator >> click [
 { #category : #simulation }
 BlEventSimulator >> clickButton: aButton [
 	"Perform a click (mouse down and mouse up) at the current mouse position"
-	self mouseDownButton: aButton.
-	self mouseUpButton: aButton
+	| aPosition |
+	aPosition := mousePosition ifNil: [ 
+		target topMostParent forceLayout.
+		target bounds inSpace center ].
+	mousePosition := aPosition.
+	self events: {
+		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
+		((BlMouseUpEvent button: aButton) position: aPosition; yourself) }
 ]
 
 { #category : #simulation }
@@ -126,20 +132,23 @@ BlEventSimulator >> dragBy: aBlVector [
 BlEventSimulator >> dragByAll: aSequenceOfBlVectors [
 	"Simulate a drag in the center of target element by performing
 	mouse down, mouse move, and mouse up events in a sequence of vectors."
-	| aPosition aDelta |
+	| aPosition aDelta eventsList |
 	target forceLayout.
 	aPosition := target bounds inSpace center.
 	mousePosition := aPosition.
+	eventsList := OrderedCollection new.
 
-	self event: (BlMouseDownEvent primary position: mousePosition; yourself).
+	eventsList add: (BlMouseDownEvent primary position: mousePosition; yourself).
 
 	aSequenceOfBlVectors do: [ :each |
 		aDelta := (target localBoundsToGlobal:
 			(BlBounds origin: 0.0 @ 0.0 extent: each)) extent.
 		mousePosition := mousePosition + aDelta.
-		self event: (BlMouseMoveEvent primary position: mousePosition; delta: aDelta; yourself) ].
+		eventsList add: (BlMouseMoveEvent primary position: mousePosition; delta: aDelta; yourself) ].
 
-	self event: (BlMouseUpEvent primary position: mousePosition; yourself)
+	eventsList add: (BlMouseUpEvent primary position: mousePosition; yourself).
+
+	self events: eventsList
 ]
 
 { #category : #accessing }
@@ -217,8 +226,11 @@ BlEventSimulator >> keyDown: aKeyboardKey [
 { #category : #simulation }
 BlEventSimulator >> keyPress: aKeyboardKey [
 	"Simulate a key down followed by key up event"
-	self keyDown: aKeyboardKey.
-	self keyUp: aKeyboardKey
+	pressedKeys add: aKeyboardKey.
+	self events: {
+		(BlKeyDownEvent new key: aKeyboardKey; yourself).
+		(BlKeyUpEvent new key: aKeyboardKey; yourself) }.
+	pressedKeys remove: aKeyboardKey ifAbsent: [ ]
 ]
 
 { #category : #simulation }
