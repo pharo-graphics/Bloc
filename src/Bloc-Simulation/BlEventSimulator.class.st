@@ -248,9 +248,11 @@ BlEventSimulator >> events: aCollectionOfEvents [
 				anEvent modifiers: modifiers copy ] ] ].
 
 	aSpace pulse.
-	aSpace
-		dispatchTimeEvent: BlSpaceEventsProcessedEvent
-		during: [
+	aSpace hostSpace
+		ifNotNil: [ :aHostSpace |
+			aCollectionOfEvents do: [ :anEvent |
+				aHostSpace enqueueEvent: anEvent ] ]
+		ifNil: [
 			aCollectionOfEvents do: [ :anEvent |
 				aSpace dispatchEvent: anEvent ] ].
 	aSpace pulse.
