@@ -193,13 +193,11 @@ BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aDuration [
 
 { #category : #'host - testing' }
 BlHost >> waitShownAndEmptyTaskQueueFor: aSpace timeout: aDuration [
-	aSpace isShown ifFalse: [
-		| aSemaphore |
-		aSemaphore := Semaphore new.
-		aSpace
-			addEventHandlerOn: BlSpaceShownEvent
-			doOnce: [ :event | aSemaphore signal ].
-		aSemaphore waitTimeoutMilliseconds: aDuration asMilliSeconds ].
+	self
+		wait: [ aSpace isShown not ]
+		timeout: aDuration
+		onCompletion: [ ]
+		onTimeout: [ ].
 	^ self waitEmptyTaskQueueFor: aSpace timeout: aDuration
 ]
 
