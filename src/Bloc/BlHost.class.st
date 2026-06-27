@@ -203,6 +203,21 @@ BlHost >> waitShownAndEmptyTaskQueueFor: aSpace timeout: aDuration [
 	^ self waitEmptyTaskQueueFor: aSpace timeout: aDuration
 ]
 
+{ #category : #'host - testing' }
+BlHost >> waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: aDuration [
+	| firstTime |
+	firstTime := true.
+	self
+		wait: [
+			| shouldWait |
+			shouldWait := firstTime or: [ self universe hasDeferredActions or: [ aSpace taskQueue isNotEmpty ] ].
+			firstTime := false.
+			shouldWait ]
+		timeout: aDuration
+		onCompletion: [ ]
+		onTimeout: [ ]
+]
+
 { #category : #'api - lifecycle' }
 BlHost >> start [
 

@@ -244,7 +244,8 @@ BlEventSimulator >> events: aCollectionOfEvents [
 				in: 'Bloc'.
 			topMostElement := target topMostParent.
 			aSpace := BlSpace new.
-			aSpace root addChild: topMostElement ].
+			aSpace root addChild: topMostElement.
+			aSpace show ].
 
 	shouldFocus ifTrue: [ target requestFocus ].
 
@@ -254,17 +255,19 @@ BlEventSimulator >> events: aCollectionOfEvents [
 			modifiers isEmpty ifFalse: [
 				anEvent modifiers: modifiers copy ] ] ].
 
-	aSpace pulse.
-	aSpace hostSpace
-		ifNotNil: [ :aHostSpace |
-			aCollectionOfEvents do: [ :anEvent |
-				aHostSpace enqueueEvent: anEvent ] ]
-		ifNil: [
-			aCollectionOfEvents do: [ :anEvent |
-				aSpace dispatchEvent: anEvent ] ].
-	aSpace pulse.
+	aSpace isShown ifFalse: [
+		aSpace host waitShownAndEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds ].
 
-	topMostElement ifNotNil: [ topMostElement removeFromParent ]
+	aSpace host waitEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds.
+
+	aCollectionOfEvents do: [ :anEvent |
+		aSpace hostSpace enqueueEvent: anEvent ].
+
+	aSpace host waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds.
+
+	topMostElement ifNotNil: [
+		topMostElement removeFromParent.
+		aSpace close ]
 ]
 
 { #category : #simulation }
