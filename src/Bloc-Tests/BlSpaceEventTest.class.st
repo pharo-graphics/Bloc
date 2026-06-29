@@ -66,3 +66,9 @@ BlSpaceEventTest >> waitPulses [
 		timeout: 50 milliSeconds;
 		pulseUntilEmptyTaskQueue
 ]
+
+{ #category : #running }
+BlSpaceEventTest >> tearDown [
+	space ifNotNil: [ space close ].
+	super tearDown
+]
