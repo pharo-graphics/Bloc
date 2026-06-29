@@ -16,8 +16,7 @@ Class {
 		'pitchAddress',
 		'pixelsAddress',
 		'sdlRect',
-		'logicalWindowRectangle',
-		'mutex'
+		'logicalWindowRectangle'
 	],
 	#pools : [
 		'SDL2Constants'
@@ -38,9 +37,9 @@ BlOSWindowSDL2HostSpace >> center [
 { #category : #'host space - displaying' }
 BlOSWindowSDL2HostSpace >> close [
 
-	mutex critical: [
-		self isValid ifTrue: [ window destroy ].
-		window := nil ]
+	self isValid ifTrue: [ window destroy ].
+
+	window := nil
 ]
 
 { #category : #'host space - cursor' }
@@ -96,7 +95,6 @@ BlOSWindowSDL2HostSpace >> initialize [
 
 	super initialize.
 
-	mutex := Mutex new.
 	eventFetcher := BlHostEventFetcher hostSpace: self
 ]
 
@@ -263,8 +261,7 @@ BlOSWindowSDL2HostSpace >> position [
 	"Return window's position in screen coordinates"
 	<return: #Point>
 
-	^ mutex critical: [
-		window ifNotNil: [ :w | w position ] ifNil: [ 0@0 ] ]
+	^ window ifNotNil: [ :w | w position ] ifNil: [ 0@0 ]
 ]
 
 { #category : #'host space - geometry' }
