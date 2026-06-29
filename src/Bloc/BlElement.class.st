@@ -2087,7 +2087,7 @@ BlElement >> inUIProcessAndWaitDo: aBlock [
 	the space is closed, or host loop is stopped), evaluate immediately in the current process."
 
 	| uiProcess |
-	self isAttachedToSceneGraph ifTrue: [ 
+	(self isAttachedToSceneGraph and: [ self space isShown ]) ifTrue: [ 
 		self space host uiProcessDo: [ :uiProc | uiProcess := uiProc ] ].
 
 	(uiProcess isNil or: [ uiProcess = Processor activeProcess ])
