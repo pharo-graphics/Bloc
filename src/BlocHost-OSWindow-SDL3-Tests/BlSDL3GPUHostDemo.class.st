@@ -1,7 +1,7 @@
 Class {
 	#name : #BlSDL3GPUHostDemo,
 	#superclass : #Object,
-	#category : #'BlocHost-OSWindow-SDL3-Examples'
+	#category : #'BlocHost-OSWindow-SDL3-Tests'
 }
 
 { #category : #examples }
