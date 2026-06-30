@@ -94,6 +94,15 @@ BlBounds >> = aRectangle [
 ]
 
 { #category : #converting }
+BlBounds >> asExpandedRectangle [
+	"Convert me to immutable expanded (then, integer) Rectangle.
+	Note, that using left:right:top:bottom: is the fastest way to create
+	a rectangle from set of numbers (faster than Point#>>corner:)"
+
+	^ Rectangle left: left floor right: right ceiling top: top floor bottom: bottom ceiling
+]
+
+{ #category : #converting }
 BlBounds >> asRectangle [
 	"Convert me to immutable Rectangle.
 	Note, that using left:right:top:bottom: is the fastest way to create
