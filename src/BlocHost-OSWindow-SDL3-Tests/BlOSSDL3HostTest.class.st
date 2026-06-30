@@ -23,6 +23,7 @@ BlOSSDL3HostTest >> testKeyMapping [
 
 { #category : #tests }
 BlOSSDL3HostTest >> testNewAttributesForSpace [
+
 	| host space attributes |
 	host := BlOSSDL3Host new.
 	space := BlSpace new.
@@ -37,6 +38,7 @@ BlOSSDL3HostTest >> testNewAttributesForSpace [
 
 { #category : #tests }
 BlOSSDL3HostTest >> testNewHostSpaceFor [
+
 	| host space hostSpace |
 	host := BlOSSDL3Host new.
 	space := BlSpace new.
