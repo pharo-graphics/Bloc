@@ -141,5 +141,5 @@ BlOSSDL3KeyTable >> keyFromVirtualCode: aVirtualCode [
 
 	^ virtualKeyTable
 		at: aVirtualCode
-		ifAbsent: [ KeyboardKey new withValue: aVirtualCode ]
+		ifAbsent: [ KeyboardKey new withValue: aVirtualCode; yourself ]
 ]
