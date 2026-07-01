@@ -42,6 +42,8 @@ BlMockedHost >> newHostSpaceFor: aSpace [
 		host: self;
 		space: aSpace;
 		renderer: self newHostRenderer;
+		windowExtent: aSpace extent;
+		canvasExtent: aSpace extent;
 		yourself
 	
 ]
