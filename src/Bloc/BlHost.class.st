@@ -194,7 +194,11 @@ BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aDuration [
 	| finished |
 	finished := false.
 	self
-		wait: [ self universe hasDeferredActions or: [ aSpace taskQueue isEmpty not ] ]
+		wait: [ 
+			aSpace hostSpace ifNil: [
+				self universe pulse.
+				aSpace pulse ].
+			self universe hasDeferredActions or: [ aSpace taskQueue isEmpty not ] ]
 		timeout: aDuration
 		onCompletion: [ finished := true ]
 		onTimeout: [ finished := false ].
@@ -204,7 +208,11 @@ BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aDuration [
 { #category : #'host - testing' }
 BlHost >> waitShownAndEmptyTaskQueueFor: aSpace timeout: aDuration [
 	self
-		wait: [ aSpace isShown not ]
+		wait: [ 
+			aSpace hostSpace ifNil: [
+				self universe pulse.
+				aSpace pulse ].
+			aSpace isShown not ]
 		timeout: aDuration
 		onCompletion: [ ]
 		onTimeout: [ ].
@@ -218,6 +226,9 @@ BlHost >> waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: aDuration [
 	self
 		wait: [
 			| shouldWait |
+			aSpace hostSpace ifNil: [
+				self universe pulse.
+				aSpace pulse ].
 			shouldWait := firstTime or: [ self universe hasDeferredActions or: [ aSpace taskQueue isEmpty not ] ].
 			firstTime := false.
 			shouldWait ]
