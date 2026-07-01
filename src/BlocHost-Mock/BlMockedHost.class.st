@@ -41,6 +41,7 @@ BlMockedHost >> newHostSpaceFor: aSpace [
 	^ BlMockedHostSpace new
 		host: self;
 		space: aSpace;
+		renderer: self newHostRenderer;
 		yourself
 	
 ]

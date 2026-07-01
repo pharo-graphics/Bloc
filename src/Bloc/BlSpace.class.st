@@ -920,7 +920,7 @@ BlSpace >> measureTextParagraph: aBlTextParagraph [
 
 	self
 		hostSpaceDo: [ :aHostSpace | 
-			(aHostSpace renderer isNotNil and: [ aHostSpace renderer isValid ]) ifTrue: [
+			aHostSpace renderer isValid ifTrue: [
 				^ aHostSpace renderer measureTextParagraph: aBlTextParagraph ] ]
 		ifAbsent: [ ].
 
