@@ -152,6 +152,16 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 ]
 
 { #category : #'host - testing' }
+BlHost >> shouldSafetyPulse [
+	^ false
+]
+
+{ #category : #'host - testing' }
+BlHost >> runOneCycle [
+	self universe pulse
+]
+
+{ #category : #'host - testing' }
 BlHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock onTimeout: timeoutBlock [
 	"Evaluate aBlock repeatedly until it answers false. If aDuration passes before aBlock answers false, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
 	| deadline aSemaphore timeProvider |
@@ -165,13 +175,13 @@ BlHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock onTimeou
 	[
 		[ aBlock value ] whileTrue: [
 			timeProvider now >= deadline ifTrue: [ ^ timeoutBlock value ].
-			self isRunning
+			(self isRunning and: [ self shouldSafetyPulse not ])
 				ifTrue: [
 					"Reactive wait: Wakes up instantly on the next pulse or at the deadline"
 					aSemaphore waitTimeoutMilliseconds: (deadline - timeProvider now) asMilliSeconds ]
 				ifFalse: [
-					"No background loop: manually pulse and yield a tiny bit"
-					self universe pulse.
+					"No background loop, or we are on the UI process itself: manually run cycle and yield a tiny bit"
+					self runOneCycle.
 					(Delay forMilliseconds: 1) wait ] ]
 	] ensure: [
 		self universe unregisterPulseSemaphore: aSemaphore ].
