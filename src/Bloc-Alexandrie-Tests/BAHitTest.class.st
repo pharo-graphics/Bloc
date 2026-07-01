@@ -54,13 +54,15 @@ BAHitTest >> formBehavior [
 { #category : #tests }
 BAHitTest >> hitFormFor: aSymbol [
 		
-	| aSpace |
+	| aSpace aForm |
 	aSpace := self formBehavior
 		host: BlMockedHost new;
 		perform: aSymbol;
 		space.
 
-	^ self newHitFormFor: aSpace root
+	aForm := self newHitFormFor: aSpace root.
+	aSpace close.
+	^ aForm
 ]
 
 { #category : #tests }

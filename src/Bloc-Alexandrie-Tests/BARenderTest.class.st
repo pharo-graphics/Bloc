@@ -34,12 +34,14 @@ BARenderTest class >> inspectMismatches [
 { #category : #hooks }
 BARenderTest >> actualForm [
 		
-	| aSpace |
+	| aSpace aForm |
 	aSpace := self formBehavior
 		host: BlMockedHost new; 
 		perform: formSelector;
 		space.
-	^ aSpace root aeAsForm
+	aForm := aSpace root aeAsForm.
+	aSpace close.
+	^ aForm
 ]
 
 { #category : #tests }

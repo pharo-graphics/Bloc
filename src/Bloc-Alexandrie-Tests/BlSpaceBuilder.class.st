@@ -108,18 +108,13 @@ BlSpaceBuilder >> addTriangle [
 BlSpaceBuilder >> buildSpace [
 	"Make last set up before user can use the space."
 
-	| count |
 	space
 		host: host;
 		extent: spaceExtent.
 
 	space root extent: spaceExtent.
-	
-	"Since the space is not registered in the universe, we pulse it directly"
-	count := 0.
-	[ (space isPulseRequested or: [ space taskQueue isEmpty not ]) and: [ count < 100 ] ] whileTrue: [ 
-		space pulse.
-		count := count + 1 ]
+	space show.
+	space simulator pulseUntilEmptyTaskQueue.
 ]
 
 { #category : #accessing }
