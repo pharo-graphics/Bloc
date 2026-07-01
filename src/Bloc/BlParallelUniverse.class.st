@@ -84,13 +84,18 @@ BlParallelUniverse >> attachSpace: aSpace [
 { #category : #'private - spaces' }
 BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 
-	aSpace isOpened ifTrue: [ ^ self ].
+	(aSpace isOpened and: [ aSpace hostSpace isNotNil ]) ifTrue: [ ^ self ].
 
 	"First of all we need to add space to the space manager"
-	spaces add: aSpace.
+	(spaces includes: aSpace) ifFalse: [ spaces add: aSpace ].
 
-	aSpace setUpHostSpace.
-	aSpace hostSpace open
+	[
+		aSpace setUpHostSpace.
+		aSpace hostSpace open
+	] on: Exception do: [ :ex |
+		spaces remove: aSpace ifAbsent: [ ].
+		aSpace tearDownHostSpace.
+		ex pass ]
 ]
 
 { #category : #'api - spaces' }
@@ -265,7 +270,7 @@ BlParallelUniverse >> openSpace: aSpace [
 BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
 	"If it has been already opened, just unhide it" 
-	aSpace isOpened ifTrue: [ ^ aSpace hostSpace show ].
+	(aSpace isOpened and: [ aSpace hostSpace isNotNil ]) ifTrue: [ ^ aSpace hostSpace show ].
 
 	self attachSpaceSynchronously: aSpace.
 
