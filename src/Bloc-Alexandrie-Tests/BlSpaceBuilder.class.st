@@ -112,10 +112,8 @@ BlSpaceBuilder >> buildSpace [
 		host: host;
 		extent: spaceExtent.
 
-	self flag: #todo. "Hacky way to prepare stuff without showing the space:"
-	space root
-		extent: spaceExtent;
-		forceLayout.
+	space root extent: spaceExtent.
+	space simulator pulseUntilEmptyTaskQueue.
 ]
 
 { #category : #accessing }
