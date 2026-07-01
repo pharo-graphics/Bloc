@@ -14,7 +14,7 @@ BlSpaceVisibilityTest >> testHidingAnOpenSpaceHidesTheWindow [
 	aSpace := self newTestingSpace.
 
 	aSpace show.
-	self waitTestingOpenedSpaces.
+	self waitTestingSpaces.
 	
 	self assert: aSpace hostSpace isVisible.
 
@@ -34,7 +34,7 @@ BlSpaceVisibilityTest >> testHidingAndShowingAnOpenSpaceShowsTheWindow [
 	aSpace := self newTestingSpace.
 
 	aSpace show.
-	self waitTestingOpenedSpaces.
+	self waitTestingSpaces.
 	
 	self assert: aSpace hostSpace isVisible.
 
@@ -43,7 +43,7 @@ BlSpaceVisibilityTest >> testHidingAndShowingAnOpenSpaceShowsTheWindow [
 	self deny: aSpace hostSpace isVisible.
 
 	aSpace show.	
-	self waitTestingOpenedSpaces.
+	self waitTestingSpaces.
 
 	self assert: aSpace hostSpace isVisible.
 

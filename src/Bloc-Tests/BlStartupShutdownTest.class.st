@@ -21,7 +21,7 @@ BlStartupShutdownTest >> testShutdownAndStartupKeepsSpacesInSamePosition [
 	aSpace := self newTestingSpace.
 
 	aSpace show.
-	self waitTestingOpenedSpaces.
+	self waitTestingSpaces.
 	aSpace position: 100@100.
 	aSpace extent: 200@200.
 
@@ -47,7 +47,7 @@ BlStartupShutdownTest >> testShutdownAndStartupKeepsSpacesOpen [
 	aSpace := self newTestingSpace.
 
 	aSpace show.
-	self waitTestingOpenedSpaces.
+	self waitTestingSpaces.
 	self assert: aSpace isVisible.
 	
 	aSpace universe stopUniverse.
@@ -68,7 +68,7 @@ BlStartupShutdownTest >> testShutdownAndStartupKeepsSpacesOpenWithInvalidation [
 	aSpace := self newTestingSpace.
 
 	aSpace show.
-	self waitTestingOpenedSpaces.
+	self waitTestingSpaces.
 	self assert: aSpace isVisible.
 	
 	aSpace universe stopUniverse.
