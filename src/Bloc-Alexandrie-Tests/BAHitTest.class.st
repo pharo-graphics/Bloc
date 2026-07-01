@@ -60,24 +60,24 @@ BAHitTest >> hitFormFor: aSymbol [
 		perform: aSymbol;
 		space.
 
-	^ self newHitFormFor: aSpace
+	^ self newHitFormFor: aSpace root
 ]
 
 { #category : #tests }
-BAHitTest >> newHitFormFor: aSpace [
+BAHitTest >> newHitFormFor: anElement [
 
 	| allElements colors colorByElement aForm |
-	allElements := aSpace root withAllChildrenBreadthFirst.
+	allElements := anElement withAllChildrenBreadthFirst.
 
 	colors := { Color white }, (Color wheel: allElements size - 1).
 	colorByElement := IdentityDictionary newFromKeys: allElements andValues: colors.
-	aForm := Form extent: aSpace extent depth: 32.
+	aForm := Form extent: anElement extent depth: 32.
 	
-	1 to: aSpace width do: [ :x |
-		1 to: aSpace height do: [ :y |
+	1 to: anElement extent x do: [ :x |
+		1 to: anElement extent y do: [ :y |
 			| eachPosition hittedElementOrNil hittedColor |
 			eachPosition := x@y.
-			hittedElementOrNil := aSpace root findMouseEventTargetAt: eachPosition.
+			hittedElementOrNil := anElement findMouseEventTargetAt: eachPosition.
 			hittedColor := colorByElement
 				at: hittedElementOrNil
 				ifAbsent: [ Color black ].
