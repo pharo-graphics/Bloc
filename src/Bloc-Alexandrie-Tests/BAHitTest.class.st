@@ -34,7 +34,7 @@ BAHitTest class >> inspectMismatches [
 { #category : #tests }
 BAHitTest >> actualForm [
 
-	^ self hitFormFor: formSelector host: BlHeadlessHost new
+	^ self hitFormFor: formSelector
 ]
 
 { #category : #tests }
@@ -52,11 +52,11 @@ BAHitTest >> formBehavior [
 ]
 
 { #category : #tests }
-BAHitTest >> hitFormFor: aSymbol host: aHost [
+BAHitTest >> hitFormFor: aSymbol [
 		
 	| aSpace |
 	aSpace := self formBehavior
-		host: aHost;
+		host: BlHeadlessHost new;
 		perform: aSymbol;
 		space.
 
