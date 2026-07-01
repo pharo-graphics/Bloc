@@ -56,7 +56,7 @@ BAHitTest >> hitFormFor: aSymbol [
 		
 	| aSpace |
 	aSpace := self formBehavior
-		host: BlHeadlessHost new;
+		host: BlMockedHost new;
 		perform: aSymbol;
 		space.
 
