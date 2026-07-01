@@ -7,7 +7,8 @@ Class {
 		'mousePosition',
 		'modifiers',
 		'pressedKeys',
-		'shouldFocus'
+		'shouldFocus',
+		'timeout'
 	],
 	#category : #'Bloc-Simulation'
 }
@@ -156,6 +157,16 @@ BlEventSimulator >> element: anElement [
 	shouldFocus := true
 ]
 
+{ #category : #accessing }
+BlEventSimulator >> timeout [
+	^ timeout
+]
+
+{ #category : #accessing }
+BlEventSimulator >> timeout: aDuration [
+	timeout := aDuration
+]
+
 { #category : #simulation }
 BlEventSimulator >> event: anEvent [
 	"Simulate a single event"
@@ -191,14 +202,14 @@ BlEventSimulator >> events: aCollectionOfEvents [
 
 	wasShown ifFalse: [
 		aSpace isShown ifFalse: [ aSpace show ].
-		aSpace host waitShownAndEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds ].
+		aSpace host waitShownAndEmptyTaskQueueFor: aSpace timeout: timeout ].
 
-	aSpace host waitEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds.
+	aSpace host waitEmptyTaskQueueFor: aSpace timeout: timeout.
 
 	aCollectionOfEvents do: [ :anEvent |
 		aSpace hostSpace enqueueEvent: anEvent ].
 
-	aSpace host waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds.
+	aSpace host waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: timeout.
 
 	topMostElement ifNotNil: [
 		topMostElement removeFromParent.
@@ -210,7 +221,8 @@ BlEventSimulator >> initialize [
 	super initialize.
 	modifiers := BlKeyModifiers new.
 	pressedKeys := Set new.
-	shouldFocus := false
+	shouldFocus := false.
+	timeout := 500 milliSeconds
 ]
 
 { #category : #testing }
