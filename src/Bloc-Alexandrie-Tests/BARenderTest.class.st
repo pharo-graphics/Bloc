@@ -39,6 +39,8 @@ BARenderTest >> actualForm [
 		host: BlMockedHost new; 
 		perform: formSelector;
 		space.
+	aSpace show.
+	aSpace simulator pulseUntilEmptyTaskQueue.
 	aForm := aSpace root aeAsForm.
 	aSpace close.
 	^ aForm

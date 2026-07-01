@@ -113,8 +113,6 @@ BlSpaceBuilder >> buildSpace [
 		extent: spaceExtent.
 
 	space root extent: spaceExtent.
-	space show.
-	space simulator pulseUntilEmptyTaskQueue.
 ]
 
 { #category : #accessing }
