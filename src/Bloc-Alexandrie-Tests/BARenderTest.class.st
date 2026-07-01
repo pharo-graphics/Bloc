@@ -36,7 +36,7 @@ BARenderTest >> actualForm [
 		
 	| aSpace |
 	aSpace := self formBehavior
-		host: BlOSWindowSDL2Host new; 
+		host: BlHeadlessHost new; 
 		perform: formSelector;
 		space.
 	^ aSpace root aeAsForm
