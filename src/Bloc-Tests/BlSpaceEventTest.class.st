@@ -21,6 +21,12 @@ BlSpaceEventTest >> setUp [
 		  yourself
 ]
 
+{ #category : #running }
+BlSpaceEventTest >> tearDown [
+	space ifNotNil: [ space close ].
+	super tearDown
+]
+
 { #category : #tests }
 BlSpaceEventTest >> testSpaceClosed [
 
@@ -62,13 +68,7 @@ BlSpaceEventTest >> testSpaceShown [
 { #category : #running }
 BlSpaceEventTest >> waitPulses [
 
-	(BlSpaceSimulator forSpace: space)
+	space simulator
 		timeout: 50 milliSeconds;
 		pulseUntilEmptyTaskQueue
-]
-
-{ #category : #running }
-BlSpaceEventTest >> tearDown [
-	space ifNotNil: [ space close ].
-	super tearDown
 ]

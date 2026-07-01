@@ -64,14 +64,16 @@ BlErrorHandlingTest >> sceneWith: aFaultyElement [
 	aSpace root addChild: aContainer.
 	aSpace show.
 
-	self assert: ((BlSpaceSimulator forSpace: aSpace)
+	self assert:
+		(aSpace simulator
 			timeout: 200 milliSeconds;
 			pulseUntilEmptyTaskQueue).
 
 	aSpace close.
 	aContainer removeFromParent.
 
-	self assert: ((BlSpaceSimulator forSpace: aSpace)
+	self assert:
+		(aSpace simulator
 			timeout: 200 milliSeconds;
 			pulseUntilEmptyTaskQueue).
 
