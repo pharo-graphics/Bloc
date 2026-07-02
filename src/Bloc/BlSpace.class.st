@@ -1155,7 +1155,11 @@ BlSpace >> initialize [
 
 	self currentCursor: Cursor normal.
 
-	self root space: self
+	self root space: self.
+
+	"Install the Bloc Space Tools. See the class #BlocSpaceTools"
+	BlocSpaceShortcutTool subclassesDo: [ :each |
+		each addShortcutOn: self ]
 ]
 
 { #category : #'focus managing' }
