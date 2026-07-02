@@ -6,12 +6,19 @@ BlBorder >> aeApplyTo: aeCanvas element: aBlElement [
 	"No need to set any parameter as there is no border"
 	self isTransparent ifTrue: [ ^ aeCanvas setBorderOff ].
 
-	"This will double-dispatch with the geometry, and 
-	may set an explicit border path for the outskirt."
-	aBlElement outskirts
-		aeApplyTo: aeCanvas
-		element: aBlElement
-		border: self.
+	aBlElement geometry hasCaps
+		ifTrue: [
+			"Outskirts don't make sense for open geometry (e.g. line or bezier)"
+			self
+				aeApplyWithCenteredBorderTo: aeCanvas
+				element: aBlElement ]
+		ifFalse: [
+			"This will double-dispatch with the geometry, and 
+			may set an explicit border path for the outskirt."
+			aBlElement outskirts
+				aeApplyTo: aeCanvas
+				element: aBlElement
+				border: self ].
 
 	"Set common parameters to all outskirts.
 	The canvas will evaluate this block for drawing
