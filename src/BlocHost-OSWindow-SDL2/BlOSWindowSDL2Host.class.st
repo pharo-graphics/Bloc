@@ -25,7 +25,7 @@ BlOSWindowSDL2Host class >> isRunning [
 { #category : #'driver selection' }
 BlOSWindowSDL2Host class >> isSupported [
 
-	^ true
+	^ OSWindowDriver current className = #OSSDL2Driver
 ]
 
 { #category : #printing }

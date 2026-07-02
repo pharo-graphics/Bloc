@@ -25,7 +25,7 @@ BlOSSDL3Host class >> isRunning [
 { #category : #'driver selection' }
 BlOSSDL3Host class >> isSupported [
 
-	^ true
+	^ OSWindowDriver current className = #OSSDL3Driver
 ]
 
 { #category : #printing }
