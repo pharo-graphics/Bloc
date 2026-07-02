@@ -10,7 +10,7 @@ Class {
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> isSupported [
 
-	^ true
+	^ UIManager default className = #MorphicUIManager
 ]
 
 { #category : #printing }
