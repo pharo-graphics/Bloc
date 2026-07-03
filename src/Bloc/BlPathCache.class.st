@@ -54,7 +54,7 @@ BlPathCache >> geometryPath [
 { #category : #accessing }
 BlPathCache >> geometryPath: anObject [
 
-	geometryPath := nil
+	geometryPath := anObject
 ]
 
 { #category : #'session management' }
