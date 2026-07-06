@@ -502,3 +502,30 @@ BlEventTest >> testSimulateMouseMoveOutside [
 	self assert: mouseEnter equals: 0.
 	self assert: mouseLeave equals: 0
 ]
+
+{ #category : #tests }
+BlEventTest >> testSimulateSecondaryClick [
+
+	| element mouseDown mouseUp click |
+	element := self newBlueElement.
+	element extent: 100 @ 100.
+	element position: 0 @ 0.
+
+	mouseDown := mouseUp := click := 0.
+
+	element
+		addEventHandlerOn: BlSecondaryMouseDownEvent
+		do: [ mouseDown := mouseDown + 1 ].
+	element
+		addEventHandlerOn: BlSecondaryMouseUpEvent
+		do: [ mouseUp := mouseUp + 1 ].
+	element
+		addEventHandlerOn: BlSecondaryClickEvent 
+		do: [ click := click + 1 ].
+
+	BlSpace simulateSecondaryClickOn: element.
+
+	self assert: mouseDown equals: 1.
+	self assert: mouseUp equals: 1.
+	self assert: click equals: 1
+]
