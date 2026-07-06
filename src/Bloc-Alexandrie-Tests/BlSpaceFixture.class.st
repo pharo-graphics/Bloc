@@ -1873,6 +1873,28 @@ BlSpaceFixture >> buildVariantsOfBezier4CPs [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfBezier4CPsWithCloseFirstAndSecond [
+	"Regression test for the stroke-outline self-intersection fix.
+	The first two control points (P0 and P1) are separated by only 1 unit,
+	much less than the stroke half-width (5), so the De Casteljau safe path
+	is activated at the start of the curve."
+
+	self buildVariantsOfLinelikeGeometry:
+		(BlBezierCurveGeometry controlPoints: { 5@0. 5@1. 25@10. 35@40 })
+]
+
+{ #category : #fixtures }
+BlSpaceFixture >> buildVariantsOfBezier4CPsWithCloseThirdAndFourth [
+	"Regression test for the stroke-outline self-intersection fix.
+	The last two control points (P2 and P3) are separated by only 1 unit,
+	much less than the stroke half-width (5), so the De Casteljau safe path
+	is activated at the end of the curve."
+
+	self buildVariantsOfLinelikeGeometry:
+		(BlBezierCurveGeometry controlPoints: { 5@0. 15@30. 35@39. 35@40 })
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> buildVariantsOfCircleSector [
 
 	self buildVariantsOf: 
