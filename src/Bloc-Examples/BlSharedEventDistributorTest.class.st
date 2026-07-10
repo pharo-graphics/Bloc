@@ -13,7 +13,9 @@ BlSharedEventDistributorTest >> example [
 	<sampleInstance>
 
 	| aHandler elements aContainer |
-	aHandler := self testInstallTwoElements.
+	aHandler := BlSharedEventDistributor new.
+	self newSquaredElement addEventHandler: aHandler.
+	self newSquaredElement addEventHandler: aHandler.
 	elements := aHandler elements.
 	aContainer := self newContainer.
 	aContainer addChildren: elements.
@@ -70,19 +72,17 @@ BlSharedEventDistributorTest >> testInstallOneElement [
 	aHandler := BlSharedEventDistributor new.
 	anElement := self newSquaredElement.
 	anElement addEventHandler: aHandler.
-	self assert: aHandler elements size equals: 1.
-	^ aHandler
+	self assert: aHandler elements size equals: 1
 ]
 
 { #category : #'examples - basic' }
 BlSharedEventDistributorTest >> testInstallTwoElements [
 
-	| aHandler anElement |
-	aHandler := self testInstallOneElement.
-	anElement := self newSquaredElement.
-	anElement addEventHandler: aHandler.
-	self assert: aHandler elements size equals: 2.
-	^ aHandler
+	| aHandler |
+	aHandler := BlSharedEventDistributor new.
+	self newSquaredElement addEventHandler: aHandler.
+	self newSquaredElement addEventHandler: aHandler.
+	self assert: aHandler elements size equals: 2
 ]
 
 { #category : #'examples - sharing events' }
@@ -90,7 +90,10 @@ BlSharedEventDistributorTest >> testMouseEnterEventOneOutOfTwoElements [
 
 	| aHandler anElements aContainer aMouseEnterTwo aMouseEnterOne anElementOne anElementTwo aSpace |
 	aMouseEnterOne := aMouseEnterTwo := 0.
-	aHandler := self testInstallTwoElements.
+	aHandler := BlSharedEventDistributor new.
+	self newSquaredElement addEventHandler: aHandler.
+	self newSquaredElement addEventHandler: aHandler.
+
 	anElements := aHandler elements.
 	aContainer := self newContainer.
 	aContainer addChildren: anElements.
@@ -123,7 +126,10 @@ BlSharedEventDistributorTest >> testMouseLeaveEventOneOutOfTwoElements [
 
 	| aHandler anElements aContainer aMouseLeaveTwo aMouseLeaveOne anElementOne anElementTwo aSpace |
 	aMouseLeaveOne := aMouseLeaveTwo := 0.
-	aHandler := self testInstallTwoElements.
+	aHandler := BlSharedEventDistributor new.
+	self newSquaredElement addEventHandler: aHandler.
+	self newSquaredElement addEventHandler: aHandler.
+
 	anElements := aHandler elements.
 	aContainer := self newContainer.
 	aContainer addChildren: anElements.
@@ -164,9 +170,9 @@ BlSharedEventDistributorTest >> testMouseLeaveEventOneOutOfTwoElements [
 BlSharedEventDistributorTest >> testUninstallOneElement [
 
 	| aHandler anElement |
-	aHandler := self testInstallOneElement.
-	anElement := aHandler elements anyOne.
+	aHandler := BlSharedEventDistributor new.
+	anElement := self newSquaredElement.
+	anElement addEventHandler: aHandler.
 	anElement removeEventHandler: aHandler.
-	self assert: aHandler elements size equals: 0.
-	^ aHandler
+	self assert: aHandler elements size equals: 0
 ]
