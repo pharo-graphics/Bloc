@@ -4,7 +4,7 @@ I exemplify `BlSharedEventDistributor`.
 "
 Class {
 	#name : #BlSharedEventDistributorTest,
-	#superclass : #TestCase,
+	#superclass : #BlParameterizedHostTest,
 	#category : #'Bloc-Examples-EventHandling'
 }
 
@@ -66,21 +66,14 @@ BlSharedEventDistributorTest >> newSquaredElement [
 ]
 
 { #category : #'examples - basic' }
-BlSharedEventDistributorTest >> testInstallOneElement [
-
-	| aHandler anElement |
-	aHandler := BlSharedEventDistributor new.
-	anElement := self newSquaredElement.
-	anElement addEventHandler: aHandler.
-	self assert: aHandler elements size equals: 1
-]
-
-{ #category : #'examples - basic' }
 BlSharedEventDistributorTest >> testInstallTwoElements [
 
 	| aHandler |
 	aHandler := BlSharedEventDistributor new.
+
 	self newSquaredElement addEventHandler: aHandler.
+	self assert: aHandler elements size equals: 1.
+
 	self newSquaredElement addEventHandler: aHandler.
 	self assert: aHandler elements size equals: 2
 ]
@@ -88,82 +81,75 @@ BlSharedEventDistributorTest >> testInstallTwoElements [
 { #category : #'examples - sharing events' }
 BlSharedEventDistributorTest >> testMouseEnterEventOneOutOfTwoElements [
 
-	| aHandler anElements aContainer aMouseEnterTwo aMouseEnterOne anElementOne anElementTwo aSpace |
-	aMouseEnterOne := aMouseEnterTwo := 0.
+	| aHandler aContainer countB countA elementA elementB aSpace |
+	elementA := self newSquaredElement.
+	elementB := self newSquaredElement.
+
 	aHandler := BlSharedEventDistributor new.
-	self newSquaredElement addEventHandler: aHandler.
-	self newSquaredElement addEventHandler: aHandler.
-
-	anElements := aHandler elements.
-	aContainer := self newContainer.
-	aContainer addChildren: anElements.
-	aSpace := BlSpace new.
-	aSpace root addChild: aContainer.
-	anElementOne := anElements first.
-	anElementTwo := anElements second.
-
+	elementA addEventHandler: aHandler.
+	elementB addEventHandler: aHandler.
 	aHandler shareEvents: {
-			BlMouseEnterEvent.
-			BlMouseLeaveEvent.
-			BlClickEvent }.
-	anElementOne addEventHandler:
+		BlMouseEnterEvent.
+		BlMouseLeaveEvent.
+		BlClickEvent }.
+
+	countA := countB := 0.
+	elementA addEventHandler:
 		(BlEventHandler
 			 on: BlMouseEnterEvent
-			 do: [ aMouseEnterOne := aMouseEnterOne + 1 ]).
-	anElementTwo addEventHandler:
+			 do: [ countA := countA + 1 ]).
+	elementB addEventHandler:
 		(BlEventHandler
 			 on: BlMouseEnterEvent
-			 do: [ aMouseEnterTwo := aMouseEnterTwo + 1 ]).
+			 do: [ countB := countB + 1 ]).
 
-	anElementOne simulator mouseMoveInside.
+	aSpace := self newTestingSpace.
+	aContainer := self newContainer.
+	aContainer addChildren: aHandler elements.
+	aSpace root addChild: aContainer.
+	elementA simulator mouseMoveInside.
+	self waitTestingSpaces.
 
-	self assert: aMouseEnterOne equals: 1.
-	self assert: aMouseEnterTwo equals: 1
+	self assert: countA equals: 1.
+	self assert: countB equals: 1
 ]
 
 { #category : #'examples - sharing events' }
 BlSharedEventDistributorTest >> testMouseLeaveEventOneOutOfTwoElements [
 
-	| aHandler anElements aContainer aMouseLeaveTwo aMouseLeaveOne anElementOne anElementTwo aSpace |
-	aMouseLeaveOne := aMouseLeaveTwo := 0.
+	| aHandler aContainer countB countA elementA elementB aSpace |
+	elementA := self newSquaredElement.
+	elementB := self newSquaredElement.
+
 	aHandler := BlSharedEventDistributor new.
-	self newSquaredElement addEventHandler: aHandler.
-	self newSquaredElement addEventHandler: aHandler.
-
-	anElements := aHandler elements.
-	aContainer := self newContainer.
-	aContainer addChildren: anElements.
-	aSpace := BlSpace new.
-	aSpace root addChild: aContainer.
-	anElementOne := anElements first.
-	anElementTwo := anElements second.
-
+	elementA addEventHandler: aHandler.
+	elementB addEventHandler: aHandler.
 	aHandler shareEvents: {
-			BlMouseEnterEvent.
-			BlMouseLeaveEvent.
-			BlClickEvent }.
-	anElementOne addEventHandler:
+		BlMouseEnterEvent.
+		BlMouseLeaveEvent.
+		BlClickEvent }.
+
+	countA := countB := 0.
+	elementA addEventHandler:
 		(BlEventHandler
 			 on: BlMouseLeaveEvent
-			 do: [ aMouseLeaveOne := aMouseLeaveOne + 1 ]).
-	anElementTwo addEventHandler:
+			 do: [ countA := countA + 1 ]).
+	elementB addEventHandler:
 		(BlEventHandler
 			 on: BlMouseLeaveEvent
-			 do: [ aMouseLeaveTwo := aMouseLeaveTwo + 1 ]).
+			 do: [ countB := countB + 1 ]).
 
-	aContainer simulator
-		events: {
-				(BlMouseMoveEvent new
-					 position: (anElementOne simulator locationInside);
-					 screenPosition: 0 @ 0;
-					 yourself).
-				(BlMouseMoveEvent new
-					 position: (aContainer simulator locationOutside);
-					 screenPosition: 0 @ 0;
-					 yourself) }.
+	aSpace := self newTestingSpace.
+	aContainer := self newContainer.
+	aContainer addChildren: aHandler elements.
+	aSpace root addChild: aContainer.
+	elementA simulator
+		mouseMoveInside;
+		mouseMoveOutside.
+	self waitTestingSpaces.
 
-	self assert: aMouseLeaveOne equals: 1.
-	self assert: aMouseLeaveTwo equals: 1
+	self assert: countA equals: 1.
+	self assert: countB equals: 1
 ]
 
 { #category : #'examples - basic' }

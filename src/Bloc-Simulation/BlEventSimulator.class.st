@@ -157,16 +157,6 @@ BlEventSimulator >> element: anElement [
 	shouldFocus := true
 ]
 
-{ #category : #accessing }
-BlEventSimulator >> timeout [
-	^ timeout
-]
-
-{ #category : #accessing }
-BlEventSimulator >> timeout: aDuration [
-	timeout := aDuration
-]
-
 { #category : #simulation }
 BlEventSimulator >> event: anEvent [
 	"Simulate a single event"
@@ -260,36 +250,20 @@ BlEventSimulator >> keyUp: aKeyboardKey [
 
 { #category : #simulation }
 BlEventSimulator >> locationInside [
-	"Return a random space location inside of target bounds"	
-	| theBounds aPosition |
+	"Return a space location inside of target bounds"	
+
 	target topMostParent forceLayout.
-	theBounds := target bounds inSpace bounds.
-	aPosition := theBounds atRandom.
-	self
-		assert: [ theBounds containsPoint: aPosition ]
-		description: [ 'Point must be inside of the bounds' ].
-	^ aPosition
+
+	^ target bounds inSpace bounds center
 ]
 
 { #category : #simulation }
 BlEventSimulator >> locationOutside [
-	"Return a random space location outside of target bounds"	
+	"Return a space location outside of target bounds"	
 
-	| theBounds aPosition |
 	target topMostParent forceLayout.
-	theBounds := target bounds inSpace bounds.
-	aPosition := {
-		theBounds topRight - (theBounds width asInteger atRandom @ 100 atRandom).
-		theBounds topRight + (100 atRandom @ theBounds height asInteger atRandom).
-		theBounds bottomLeft + (theBounds width asInteger atRandom @ 100 atRandom).
-		theBounds bottomLeft - (100 atRandom @ theBounds height asInteger atRandom).
-	} atRandom.
 
-	self
-		assert: [ (theBounds containsPoint: aPosition) not ]
-		description: [ 'Point must be outside of the bounds' ].
-
-	^ aPosition
+	^ target bounds inSpace bounds bottomRight + 1
 ]
 
 { #category : #accessing }
@@ -439,4 +413,14 @@ BlEventSimulator >> target [
 BlEventSimulator >> textInput: aString [
 	"Simulate a text input event"
 	self event: (BlTextInputEvent new text: aString; yourself)
+]
+
+{ #category : #accessing }
+BlEventSimulator >> timeout [
+	^ timeout
+]
+
+{ #category : #accessing }
+BlEventSimulator >> timeout: aDuration [
+	timeout := aDuration
 ]

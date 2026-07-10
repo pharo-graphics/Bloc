@@ -1,7 +1,7 @@
 Class {
 	#name : #BlMouseProcessorEnterLeaveTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Event-Scripter'
+	#category : #'Bloc-Examples-EventHandling'
 }
 
 { #category : #running }

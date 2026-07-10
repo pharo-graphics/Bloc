@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'scripter'
 	],
-	#category : #'Bloc-Examples-Event-Scripter'
+	#category : #'Bloc-Examples-EventHandling'
 }
 
 { #category : #running }

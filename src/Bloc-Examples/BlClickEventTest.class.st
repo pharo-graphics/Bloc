@@ -3,7 +3,7 @@ Class {
 	#superclass : #TestCase,
 	#traits : 'TBlDevScripterExamples',
 	#classTraits : 'TBlDevScripterExamples classTrait',
-	#category : #'Bloc-Examples-Event-Scripter'
+	#category : #'Bloc-Examples-EventHandling'
 }
 
 { #category : #'running - elements' }
