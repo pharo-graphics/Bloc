@@ -46,9 +46,12 @@ BlHostSpace >> enqueueEvent: aBlEvent [
 		ifTrue: [ ^ self universe dispatchEvent: aBlEvent ].
 
 	aBlEvent isSpaceEvent
-		ifTrue: [ ^ self space dispatchEvent: aBlEvent ].
+		ifTrue: [ 
+			self space dispatchEvent: aBlEvent.
+			^ self space requestNextPulse ].
 
-	self space dispatchEvent: aBlEvent
+	self space dispatchEvent: aBlEvent.
+	self space requestNextPulse
 ]
 
 { #category : #'host space - events' }
