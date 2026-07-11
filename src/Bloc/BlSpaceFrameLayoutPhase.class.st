@@ -19,7 +19,5 @@ BlSpaceFrameLayoutPhase >> runOn: aSpace [
 
 	aSpace
 		dispatchTimeEvent: BlSpaceLayoutEndEvent
-		during: [ aSpace doLayout ].
-		
-	aSpace mouseProcessor handleLastMouseMove
+		during: [ aSpace doLayout ]
 ]
