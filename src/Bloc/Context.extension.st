@@ -5,10 +5,12 @@ Context >> blocDefiningMethod [
 	"Return a CompiledMethod this context belongs to"
 	| outerMostContext aCompiledCode |
 	
-	outerMostContext :=
-		self outerContext
-			ifNil: [ self ]
-			ifNotNil: [ self outerContext ].
+	outerMostContext := self outerContext.
+	outerMostContext ifNil: [ 
+		aCompiledCode := self compiledCode.
+		^ aCompiledCode isCompiledMethod
+			ifTrue: [ aCompiledCode ]
+			ifFalse: [ aCompiledCode method ] ].
 		
 	aCompiledCode := outerMostContext compiledCode.
 		
