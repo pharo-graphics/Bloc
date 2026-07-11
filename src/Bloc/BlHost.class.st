@@ -193,13 +193,12 @@ BlHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock onTimeou
 BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aDuration [
 	| finished |
 	finished := false.
-	self universe postpone: [].
 	self
 		wait: [ 
 			aSpace hostSpace ifNil: [
 				self universe pulse.
 				aSpace pulse ].
-			self universe hasDeferredActions or: [ self universe hasPostponedActions or: [ aSpace taskQueue isEmpty not or: [ aSpace hostSpace ifNotNil: [ :hs | hs hasEvents ] ifNil: [ false ] ] ] ] ]
+			self universe hasDeferredActions or: [ aSpace taskQueue isEmpty not or: [ aSpace hostSpace ifNotNil: [ :hs | hs hasEvents ] ifNil: [ false ] ] ] ]
 		timeout: aDuration
 		onCompletion: [ finished := true ]
 		onTimeout: [ finished := false ].
@@ -224,14 +223,13 @@ BlHost >> waitShownAndEmptyTaskQueueFor: aSpace timeout: aDuration [
 BlHost >> waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: aDuration [
 	| firstTime |
 	firstTime := true.
-	self universe postpone: [].
 	self
 		wait: [
 			| shouldWait |
 			aSpace hostSpace ifNil: [
 				self universe pulse.
 				aSpace pulse ].
-			shouldWait := firstTime or: [ self universe hasDeferredActions or: [ self universe hasPostponedActions or: [ aSpace taskQueue isEmpty not or: [ aSpace hostSpace ifNotNil: [ :hs | hs hasEvents ] ifNil: [ false ] ] ] ] ].
+			shouldWait := firstTime or: [ self universe hasDeferredActions or: [ aSpace taskQueue isEmpty not or: [ aSpace hostSpace ifNotNil: [ :hs | hs hasEvents ] ifNil: [ false ] ] ] ].
 			firstTime := false.
 			shouldWait ]
 		timeout: aDuration
