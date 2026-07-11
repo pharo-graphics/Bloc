@@ -166,21 +166,12 @@ BlEventSimulator >> event: anEvent [
 { #category : #simulation }
 BlEventSimulator >> events: aCollectionOfEvents [
 	"I simulate a given sequence of low level space UI events such as MouseUp/MouseDown or keyboard."
-	| aSpace topMostElement wasShown |
-	target isAttachedToSceneGraph
-		ifTrue: [ 
-			aSpace := target space.
-			wasShown := aSpace isShown ]
-		ifFalse: [
-			self
-				deprecated: 'Elements must be attached to a space before simulating events.'
-				on: '2026-06-26'
-				in: 'Bloc'.
-			topMostElement := target topMostParent.
-			aSpace := BlSpace new.
-			aSpace root addChild: topMostElement.
-			wasShown := false.
-			aSpace show ].
+	| aSpace |
+	self 
+		assert: [ target isAttachedToSceneGraph ]
+		description: [ 'Elements must be attached to a space before simulating events.' ].
+	
+	aSpace := target space.
 
 	shouldFocus ifTrue: [ target requestFocus ].
 
@@ -189,10 +180,6 @@ BlEventSimulator >> events: aCollectionOfEvents [
 		anEvent isUIEvent ifTrue: [
 			modifiers isEmpty ifFalse: [
 				anEvent modifiers: modifiers copy ] ] ].
-
-	wasShown ifFalse: [
-		aSpace isShown ifFalse: [ aSpace show ].
-		aSpace host waitShownAndEmptyTaskQueueFor: aSpace timeout: timeout ].
 
 	aSpace host waitEmptyTaskQueueFor: aSpace timeout: timeout.
 
@@ -205,11 +192,7 @@ BlEventSimulator >> events: aCollectionOfEvents [
 
 	aSpace hostSpace
 		ifNotNil: [ aSpace host waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: timeout ]
-		ifNil: [ aSpace pulse ].
-
-	topMostElement ifNotNil: [
-		topMostElement removeFromParent.
-		aSpace close ]
+		ifNil: [ aSpace pulse ]
 ]
 
 { #category : #initialization }
