@@ -62,6 +62,11 @@ BlOSWindowSDL2HostSpace >> enqueueEvent: aBlEvent [
 	self eventFetcher enqueueEvent: aBlEvent
 ]
 
+{ #category : #'host space - events' }
+BlOSWindowSDL2HostSpace >> hasEvents [
+	^ self eventFetcher isEmpty not
+]
+
 { #category : #'host space - accessing' }
 BlOSWindowSDL2HostSpace >> eventFetcher [
 	"Return event fetcher used to enqueue events that should be

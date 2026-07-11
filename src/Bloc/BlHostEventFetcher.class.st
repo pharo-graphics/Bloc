@@ -39,6 +39,11 @@ BlHostEventFetcher >> fetchedEventsDo: aBlock [
 	theEvents do: aBlock
 ]
 
+{ #category : #testing }
+BlHostEventFetcher >> isEmpty [
+	^ eventQueue isEmpty
+]
+
 { #category : #accessing }
 BlHostEventFetcher >> hostSpace [
 
