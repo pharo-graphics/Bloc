@@ -3251,6 +3251,29 @@ BlElement >> owner [
 	^ self parent
 ]
 
+{ #category : #layout }
+BlElement >> waitLayout [
+	"Wait until the layout of this element is computed by the UI pulse.
+	If called from the UI thread (e.g. an event handler), it computes layout synchronously and returns immediately.
+	If called from a background thread (e.g. a test, script, or REPL), it requests a layout and safely suspends the thread until the UI thread's layout phase is done."
+	| uiProcess aSemaphore |
+	self isAttachedToSceneGraph ifFalse: [ 
+		self forceLayout.
+		^ self ].
+		
+	self space host uiProcessDo: [ :p | uiProcess := p ].
+	
+	(uiProcess isNil or: [ uiProcess == Processor activeProcess ]) ifTrue: [
+		self forceLayout.
+		^ self ].
+		
+	aSemaphore := Semaphore new.
+	self whenLayoutedDoOnce: [ aSemaphore signal ].
+	self requestLayout.
+	self space requestNextPulse.
+	aSemaphore wait
+]
+
 { #category : #'api - layout' }
 BlElement >> padding [
 	"Return my current padding - a space inside of me around my content.
