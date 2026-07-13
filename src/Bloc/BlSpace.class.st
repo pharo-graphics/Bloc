@@ -1299,6 +1299,20 @@ BlSpace >> waitPulse [
 	aSemaphore wait
 ]
 
+{ #category : #pulse }
+BlSpace >> waitPulseFor: aDuration [
+	"Wait for this space task queue to be empty until a given timeout"
+
+	^ self host waitEmptyTaskQueueFor: self timeout: aDuration
+]
+
+{ #category : #pulse }
+BlSpace >> waitPulseForMilliseconds: aNumber [
+	"Wait for this space task queue to be empty until a given timeout"
+
+	^ self waitPulseFor: aNumber milliSeconds
+]
+
 { #category : #'window - properties' }
 BlSpace >> width [
 	<return: #Number>
@@ -1336,18 +1350,4 @@ BlSpace >> windowScale [
 	^ self
 		hostSpaceDo: [ :aHostSpace | aHostSpace scaleFactor ]
 		ifAbsent: [ 1.0 asPoint ]
-]
-
-{ #category : #pulse }
-BlSpace >> waitPulseFor: aDuration [
-	"Wait for this space task queue to be empty until a given timeout"
-
-	self host waitEmptyTaskQueueFor: self timeout: aDuration
-]
-
-{ #category : #pulse }
-BlSpace >> waitPulseForMilliseconds: aNumber [
-	"Wait for this space task queue to be empty until a given timeout"
-
-	self waitPulseFor: aNumber milliSeconds
 ]
