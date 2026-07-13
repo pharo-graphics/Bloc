@@ -6,6 +6,7 @@ Class {
 	#name : #BlHeadlessHost,
 	#superclass : #BlHost,
 	#classVars : [
+		'PulseLoop',
 		'isRunning'
 	],
 	#category : #'Bloc-Universe - Host Headless'
@@ -14,13 +15,14 @@ Class {
 { #category : #'class initialization' }
 BlHeadlessHost class >> initialize [
 
+	PulseLoop := BlHostPulseLoop forHost: self.
 	isRunning := false
 ]
 
 { #category : #'api - lifecycle' }
 BlHeadlessHost class >> isRunning [
 
-	^ isRunning
+	^ PulseLoop isRunning
 ]
 
 { #category : #printing }
@@ -37,14 +39,28 @@ BlHeadlessHost class >> priority [
 ]
 
 { #category : #'api - lifecycle' }
+BlHeadlessHost class >> pulsePeriod [
+
+	^ PulseLoop pulsePeriod
+]
+
+{ #category : #'api - lifecycle' }
+BlHeadlessHost class >> pulsePeriod: aDuration [
+
+	PulseLoop pulsePeriod: aDuration
+]
+
+{ #category : #'api - lifecycle' }
 BlHeadlessHost class >> start [
 
+	PulseLoop start.
 	isRunning := true
 ]
 
 { #category : #'api - lifecycle' }
 BlHeadlessHost class >> stop [
 
+	PulseLoop stop.
 	isRunning := false
 ]
 
