@@ -14,7 +14,6 @@ BlDevScripterDoubleClickStep >> playOn: aScripter [
 	| targetElement eventSimulator |
 	targetElement := self target findTargetStartingInScripter: aScripter.
 	eventSimulator := targetElement eventSimulator.
-	eventSimulator click.
-	eventSimulator click.
+	eventSimulator doubleClick.
 	aScripter pulse
 ]
