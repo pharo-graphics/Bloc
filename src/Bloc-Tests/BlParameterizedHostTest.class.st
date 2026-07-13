@@ -67,6 +67,5 @@ BlParameterizedHostTest >> tearDown [
 BlParameterizedHostTest >> waitTestingSpaces [
 
 	testingSpaces do: [ :each |
-		self assert:
-			(each host waitShownAndEmptyTaskQueueFor: each timeout: 200 milliSeconds) ]
+		self assert: (each waitPulseForMilliseconds: 200) ]
 ]

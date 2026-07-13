@@ -60,7 +60,7 @@ BAHitTest >> hitFormFor: aSymbol [
 		perform: aSymbol;
 		space.
 	aSpace show.
-	aSpace host waitEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds.
+	aSpace waitPulseForMilliseconds: 500.
 	aForm := self newHitFormFor: aSpace root.
 	aSpace close.
 	^ aForm

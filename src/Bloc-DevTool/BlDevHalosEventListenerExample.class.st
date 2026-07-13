@@ -18,7 +18,7 @@ BlDevHalosEventListenerExample >> activatedHalos [
 	aSpace := BlSpace new.
 	aSpace root addChild: aContainer.
 	aSpace addHalosListener.
-	aSpace host waitEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds.
+	aSpace waitPulseForMilliseconds: 500.
 
 	self assert: aSpace root children size equals: 1.
 

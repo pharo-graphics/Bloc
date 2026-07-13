@@ -40,7 +40,7 @@ BARenderTest >> actualForm [
 		perform: formSelector;
 		space.
 	aSpace show.
-	aSpace host waitEmptyTaskQueueFor: aSpace timeout: 500 milliSeconds.
+	aSpace waitPulseForMilliseconds: 500.
 	aForm := aSpace root aeAsForm.
 	aSpace close.
 	^ aForm
