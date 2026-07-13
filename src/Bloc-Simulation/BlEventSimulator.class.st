@@ -182,7 +182,9 @@ BlEventSimulator >> events: aCollectionOfEvents [
 				anEvent modifiers: modifiers copy ] ] ].
 
 	aCollectionOfEvents do: [ :anEvent |
-		aSpace hostSpace enqueueEvent: anEvent ].
+		aSpace hostSpace
+			ifNotNil: [ :theHostSpace | theHostSpace enqueueEvent: anEvent ]
+			ifNil: [ aSpace dispatchEvent: anEvent ] ]
 
 ]
 
