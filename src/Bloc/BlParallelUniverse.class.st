@@ -233,30 +233,6 @@ BlParallelUniverse >> initialize [
 	pulseSemaphoresMutex := Mutex new
 ]
 
-{ #category : #'api - pulse' }
-BlParallelUniverse >> pulseSemaphores [
-
-	^ pulseSemaphores ifNil: [ pulseSemaphores := OrderedCollection new ]
-]
-
-{ #category : #'api - pulse' }
-BlParallelUniverse >> pulseSemaphoresMutex [
-
-	^ pulseSemaphoresMutex ifNil: [ pulseSemaphoresMutex := Mutex new ]
-]
-
-{ #category : #'api - pulse' }
-BlParallelUniverse >> registerPulseSemaphore: aSemaphore [
-
-	self pulseSemaphoresMutex critical: [ self pulseSemaphores add: aSemaphore ]
-]
-
-{ #category : #'api - pulse' }
-BlParallelUniverse >> unregisterPulseSemaphore: aSemaphore [
-
-	self pulseSemaphoresMutex critical: [ self pulseSemaphores remove: aSemaphore ifAbsent: [  ] ]
-]
-
 { #category : #'api - spaces' }
 BlParallelUniverse >> openSpace: aSpace [
 	"It should be possible to add a space from the other thread"
@@ -309,6 +285,18 @@ BlParallelUniverse >> pulse [
 	self pulseSynchronously
 ]
 
+{ #category : #'api - pulse' }
+BlParallelUniverse >> pulseSemaphores [
+
+	^ pulseSemaphores ifNil: [ pulseSemaphores := OrderedCollection new ]
+]
+
+{ #category : #'api - pulse' }
+BlParallelUniverse >> pulseSemaphoresMutex [
+
+	^ pulseSemaphoresMutex ifNil: [ pulseSemaphoresMutex := Mutex new ]
+]
+
 { #category : #'private - spaces' }
 BlParallelUniverse >> pulseSynchronously [
 	"deferred actions must be run before spaces"
@@ -328,6 +316,12 @@ BlParallelUniverse >> pulseSynchronously [
 					signaledError: e;
 					yourself) emit.
 				e pass ]
+]
+
+{ #category : #'api - pulse' }
+BlParallelUniverse >> registerPulseSemaphore: aSemaphore [
+
+	self pulseSemaphoresMutex critical: [ self pulseSemaphores add: aSemaphore ]
 ]
 
 { #category : #'api - lifecycle' }
@@ -382,4 +376,10 @@ BlParallelUniverse >> tryToRunPostponedActions [
 BlParallelUniverse >> uiProcessDo: aBlock [
 
 	hostClass uiProcessDo: aBlock
+]
+
+{ #category : #'api - pulse' }
+BlParallelUniverse >> unregisterPulseSemaphore: aSemaphore [
+
+	self pulseSemaphoresMutex critical: [ self pulseSemaphores remove: aSemaphore ifAbsent: [  ] ]
 ]

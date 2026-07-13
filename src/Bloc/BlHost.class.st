@@ -152,13 +152,37 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 ]
 
 { #category : #'host - testing' }
+BlHost >> runOneCycle [
+	self universe pulse
+]
+
+{ #category : #'host - testing' }
 BlHost >> shouldSafetyPulse [
 	^ false
 ]
 
-{ #category : #'host - testing' }
-BlHost >> runOneCycle [
-	self universe pulse
+{ #category : #'api - lifecycle' }
+BlHost >> start [
+
+	self class start
+]
+
+{ #category : #'api - lifecycle' }
+BlHost >> stop [
+
+	self class stop
+]
+
+{ #category : #enumerating }
+BlHost >> uiProcessDo: aBlock [
+
+	self class uiProcessDo: aBlock
+]
+
+{ #category : #'host space - accessing' }
+BlHost >> universe [
+	
+	^ self class universe
 ]
 
 { #category : #'host - testing' }
@@ -206,20 +230,6 @@ BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aDuration [
 ]
 
 { #category : #'host - testing' }
-BlHost >> waitShownAndEmptyTaskQueueFor: aSpace timeout: aDuration [
-	self
-		wait: [ 
-			aSpace hostSpace ifNil: [
-				self universe pulse.
-				aSpace pulse ].
-			aSpace isShown not ]
-		timeout: aDuration
-		onCompletion: [ ]
-		onTimeout: [ ].
-	^ self waitEmptyTaskQueueFor: aSpace timeout: aDuration
-]
-
-{ #category : #'host - testing' }
 BlHost >> waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: aDuration [
 	| firstTime |
 	firstTime := true.
@@ -237,26 +247,16 @@ BlHost >> waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: aDuration [
 		onTimeout: [ ]
 ]
 
-{ #category : #'api - lifecycle' }
-BlHost >> start [
-
-	self class start
-]
-
-{ #category : #'api - lifecycle' }
-BlHost >> stop [
-
-	self class stop
-]
-
-{ #category : #enumerating }
-BlHost >> uiProcessDo: aBlock [
-
-	self class uiProcessDo: aBlock
-]
-
-{ #category : #'host space - accessing' }
-BlHost >> universe [
-	
-	^ self class universe
+{ #category : #'host - testing' }
+BlHost >> waitShownAndEmptyTaskQueueFor: aSpace timeout: aDuration [
+	self
+		wait: [ 
+			aSpace hostSpace ifNil: [
+				self universe pulse.
+				aSpace pulse ].
+			aSpace isShown not ]
+		timeout: aDuration
+		onCompletion: [ ]
+		onTimeout: [ ].
+	^ self waitEmptyTaskQueueFor: aSpace timeout: aDuration
 ]

@@ -83,7 +83,6 @@ BlSpace class >> extractRoots: aSetOfElements [
 	^ roots
 ]
 
-
 { #category : #accessing }
 BlSpace >> asReference [
 	<return: #BlSpaceReference>
@@ -826,14 +825,6 @@ BlSpace >> isOpened [
 		and: [ self universe hasSpace: self ]
 ]
 
-{ #category : #testing }
-BlSpace >> isShown [
-	"Return true if the space was shown (by sending #show message), false otherwise.
-	Please note, that an opened/shown space can be hidden which does not influence the result of #isShown"
-
-	^ self isOpened
-]
-
 { #category : #pulse }
 BlSpace >> isPulseRequested [
 	"Return true if space pulse was requested, false otherwise"
@@ -848,6 +839,14 @@ BlSpace >> isResizable [
 	^ self
 		hostSpaceDo: [ :aHostSpace | aHostSpace isResizable ]
 		ifAbsent: [ resizable ]
+]
+
+{ #category : #testing }
+BlSpace >> isShown [
+	"Return true if the space was shown (by sending #show message), false otherwise.
+	Please note, that an opened/shown space can be hidden which does not influence the result of #isShown"
+
+	^ self isOpened
 ]
 
 { #category : #'host space - text input' }
@@ -1004,26 +1003,6 @@ BlSpace >> processPulse [
 { #category : #pulse }
 BlSpace >> pulse [
 	self processPulse
-]
-
-{ #category : #pulse }
-BlSpace >> waitPulse [
-	"Wait until the next pulse finishes.
-	If called from the UI thread, it processes the pulse synchronously.
-	If called from a background thread (e.g. tests or scripts), it safely suspends the thread and wakes up after the layout phase completes."
-	| uiProcess aSemaphore |
-	self isPulseRequested ifFalse: [ self requestNextPulse ].
-	
-	self host uiProcessDo: [ :p | uiProcess := p ].
-	
-	(uiProcess isNil or: [ uiProcess == Processor activeProcess ]) ifTrue: [
-		self processPulse.
-		^ self ].
-		
-	aSemaphore := Semaphore new.
-	self addEventHandlerOn: BlSpaceLayoutEndEvent doOnce: [ :e | aSemaphore signal ].
-	self requestNextPulse.
-	aSemaphore wait
 ]
 
 { #category : #pulse }
@@ -1298,6 +1277,26 @@ BlSpace >> userData [
 	Be careful to limit the use of such facility and prefer clean instance variables when it is possible to define them."
 
 	^ userData ifNil: [ userData := IdentityDictionary new ]
+]
+
+{ #category : #pulse }
+BlSpace >> waitPulse [
+	"Wait until the next pulse finishes.
+	If called from the UI thread, it processes the pulse synchronously.
+	If called from a background thread (e.g. tests or scripts), it safely suspends the thread and wakes up after the layout phase completes."
+	| uiProcess aSemaphore |
+	self isPulseRequested ifFalse: [ self requestNextPulse ].
+	
+	self host uiProcessDo: [ :p | uiProcess := p ].
+	
+	(uiProcess isNil or: [ uiProcess == Processor activeProcess ]) ifTrue: [
+		self processPulse.
+		^ self ].
+		
+	aSemaphore := Semaphore new.
+	self addEventHandlerOn: BlSpaceLayoutEndEvent doOnce: [ :e | aSemaphore signal ].
+	self requestNextPulse.
+	aSemaphore wait
 ]
 
 { #category : #'window - properties' }

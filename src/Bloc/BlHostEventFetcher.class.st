@@ -39,11 +39,6 @@ BlHostEventFetcher >> fetchedEventsDo: aBlock [
 	theEvents do: aBlock
 ]
 
-{ #category : #testing }
-BlHostEventFetcher >> isEmpty [
-	^ eventQueue isEmpty
-]
-
 { #category : #accessing }
 BlHostEventFetcher >> hostSpace [
 
@@ -57,4 +52,9 @@ BlHostEventFetcher >> initializeWithHostSpace: aHostSpace [
 
 	eventQueue := WaitfreeQueue new.
 	hostSpace := aHostSpace
+]
+
+{ #category : #testing }
+BlHostEventFetcher >> isEmpty [
+	^ eventQueue isEmpty
 ]

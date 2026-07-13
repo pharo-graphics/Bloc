@@ -60,15 +60,15 @@ BlHostSpace >> fetchedEventsDo: aBlock [
 ]
 
 { #category : #'host space - events' }
+BlHostSpace >> generateEvents [
+	"Generate more complex state change events such as window scale event when resolution of the screen changes"
+]
+
+{ #category : #'host space - events' }
 BlHostSpace >> hasEvents [
 	"Return true if there are pending events in the queue, false otherwise"
 
 	^ false
-]
-
-{ #category : #'host space - events' }
-BlHostSpace >> generateEvents [
-	"Generate more complex state change events such as window scale event when resolution of the screen changes"
 ]
 
 { #category : #'host space - testing' }
