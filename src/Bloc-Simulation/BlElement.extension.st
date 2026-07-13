@@ -1,6 +1,6 @@
 Extension { #name : #BlElement }
 
 { #category : #'*Bloc-Simulation' }
-BlElement >> simulator [
+BlElement >> eventSimulator [
 	^ BlEventSimulator forElement: self
 ]

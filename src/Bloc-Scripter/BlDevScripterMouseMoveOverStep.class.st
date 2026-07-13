@@ -23,6 +23,6 @@ BlDevScripterMouseMoveOverStep >> playOn: aScripter [
 	
 	self setMousePosition: aNewPosition in: aScripter.
 	
-	aScripter element simulator mouseMoveFrom: anOldPositon to: aNewPosition.
+	aScripter element eventSimulator mouseMoveFrom: anOldPositon to: aNewPosition.
 	aScripter pulse
 ]

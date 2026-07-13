@@ -121,7 +121,7 @@ BlElementTest >> setUp [
 
 	super setUp.
 
-	host := BlMockedHost new.
+	host := BlHeadlessHost new.
 	space := BlSpace new.
 	space host: host
 ]

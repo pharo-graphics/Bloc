@@ -18,7 +18,7 @@ BlDevHalosEventListenerExample >> activatedHalos [
 	aSpace := BlSpace new.
 	aSpace root addChild: aContainer.
 	aSpace addHalosListener.
-	aSpace simulator
+	aSpace eventSimulator
 		timeout: 500 milliSeconds;
 		pulseUntilEmptyTaskQueue.
 
@@ -32,7 +32,7 @@ BlDevHalosEventListenerExample >> activatedHalos [
 	anEvent modifiers
 		alt: true;
 		shift: true.
-	aContainer children first simulator event: anEvent.
+	aContainer children first eventSimulator event: anEvent.
 
 	self assert: aSpace root children size equals: 2.
 

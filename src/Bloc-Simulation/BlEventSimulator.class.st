@@ -181,18 +181,9 @@ BlEventSimulator >> events: aCollectionOfEvents [
 			modifiers isEmpty ifFalse: [
 				anEvent modifiers: modifiers copy ] ] ].
 
-	aSpace host waitEmptyTaskQueueFor: aSpace timeout: timeout.
-
 	aCollectionOfEvents do: [ :anEvent |
-		aSpace hostSpace
-			ifNotNil: [ :theHostSpace | theHostSpace enqueueEvent: anEvent ]
-			ifNil: [ 
-				aSpace dispatchEvent: anEvent.
-				aSpace requestNextPulse ] ].
+		aSpace hostSpace enqueueEvent: anEvent ].
 
-	aSpace hostSpace
-		ifNotNil: [ aSpace host waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: timeout ]
-		ifNil: [ aSpace pulse ]
 ]
 
 { #category : #initialization }

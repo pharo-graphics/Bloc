@@ -68,7 +68,7 @@ BlParameterizedHostTest >> waitTestingSpaces [
 
 	testingSpaces do: [ :each |
 		self assert:
-			(each simulator
+			(each eventSimulator
 				timeout: 200 milliSeconds;
 				pulseUntilSpaceShownAndEmptyTaskQueue) ]
 ]

@@ -3,7 +3,7 @@ I am a mocked host that looks like real but does not create any windows
 
 "
 Class {
-	#name : #BlMockedHost,
+	#name : #BlHeadlessHost,
 	#superclass : #BlHost,
 	#classVars : [
 		'isRunning'
@@ -12,31 +12,31 @@ Class {
 }
 
 { #category : #'class initialization' }
-BlMockedHost class >> initialize [
+BlHeadlessHost class >> initialize [
 
 	isRunning := false
 ]
 
 { #category : #'api - lifecycle' }
-BlMockedHost class >> isRunning [
+BlHeadlessHost class >> isRunning [
 
 	^ isRunning
 ]
 
 { #category : #'api - lifecycle' }
-BlMockedHost class >> start [
+BlHeadlessHost class >> start [
 
 	isRunning := true
 ]
 
 { #category : #'api - lifecycle' }
-BlMockedHost class >> stop [
+BlHeadlessHost class >> stop [
 
 	isRunning := false
 ]
 
 { #category : #'host - api' }
-BlMockedHost >> newHostSpaceFor: aSpace [
+BlHeadlessHost >> newHostSpaceFor: aSpace [
 
 	^ BlMockedHostSpace new
 		host: self;
@@ -49,7 +49,7 @@ BlMockedHost >> newHostSpaceFor: aSpace [
 ]
 
 { #category : #'host - api' }
-BlMockedHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock onTimeout: timeoutBlock [
+BlHeadlessHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock onTimeout: timeoutBlock [
 	"A mocked host has no background loop: manually pulse and yield a tiny bit"
 	| deadline timeProvider |
 	timeProvider := self universe spaces

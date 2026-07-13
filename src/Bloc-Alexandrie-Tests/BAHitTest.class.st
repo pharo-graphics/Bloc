@@ -56,11 +56,11 @@ BAHitTest >> hitFormFor: aSymbol [
 		
 	| aSpace aForm |
 	aSpace := self formBehavior
-		host: BlMockedHost new;
+		host: BlHeadlessHost new;
 		perform: aSymbol;
 		space.
 	aSpace show.
-	aSpace simulator pulseUntilEmptyTaskQueue.
+	aSpace eventSimulator pulseUntilEmptyTaskQueue.
 	aForm := self newHitFormFor: aSpace root.
 	aSpace close.
 	^ aForm

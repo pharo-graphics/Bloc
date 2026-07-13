@@ -50,8 +50,8 @@ BlDevScripter >> assertSpace: aSpace [
 		assert: [ aSpace isNotNil ] 
 		description: [ 'Space must be non-nil' ].
 	self 
-		assert: [ aSpace host isKindOf: BlMockedHost ] 
-		description: [ 'Scripter space must have a ', BlMockedHost name, 
+		assert: [ aSpace host isKindOf: BlHeadlessHost ] 
+		description: [ 'Scripter space must have a ', BlHeadlessHost name, 
 			' kind of space, instead of ', aSpace host class ].
 	self 
 		assert: [ self element isNil ]
@@ -73,7 +73,7 @@ BlDevScripter >> defaultSpace [
 	^ BlSpace new
 		  title: 'Scripter';
 		  extent: 800 @ 600;
-		  host: BlMockedHost new;
+		  host: BlHeadlessHost new;
 		  yourself
 ]
 

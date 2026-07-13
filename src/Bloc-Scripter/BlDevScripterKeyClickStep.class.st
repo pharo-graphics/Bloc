@@ -11,6 +11,6 @@ BlDevScripterKeyClickStep >> defaultLabel [
 
 { #category : #actions }
 BlDevScripterKeyClickStep >> playOn: aScripter [
-	aScripter element simulator keyPress: self key.
+	aScripter element eventSimulator keyPress: self key.
 	aScripter pulse
 ]

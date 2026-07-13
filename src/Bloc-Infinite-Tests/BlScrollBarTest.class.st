@@ -15,7 +15,7 @@ Class {
 { #category : #running }
 BlScrollBarTest >> dragOn: anElement byAll: aSequenceOfDeltas [
 
-	anElement simulator dragByAll: aSequenceOfDeltas.
+	anElement eventSimulator dragByAll: aSequenceOfDeltas.
 	self waitTestingSpaces
 ]
 
