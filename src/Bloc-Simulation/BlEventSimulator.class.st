@@ -181,18 +181,12 @@ BlEventSimulator >> events: aCollectionOfEvents [
 			modifiers isEmpty ifFalse: [
 				anEvent modifiers: modifiers copy ] ] ].
 
-	| needsProcessedEvent |
-	needsProcessedEvent := false.
+	aSpace hostSpace ifNil: [ aSpace setUpHostSpace ].
 
 	aCollectionOfEvents do: [ :anEvent |
-		aSpace hostSpace
-			ifNotNil: [ :theHostSpace | theHostSpace enqueueEvent: anEvent ]
-			ifNil: [ 
-				aSpace dispatchEvent: anEvent.
-				needsProcessedEvent := true ] ].
+		aSpace hostSpace enqueueEvent: anEvent ].
 
-	needsProcessedEvent ifTrue: [ 
-		aSpace dispatchEvent: BlSpaceEventsProcessedEvent new ]
+	aSpace waitPulseFor: timeout.
 
 ]
 
