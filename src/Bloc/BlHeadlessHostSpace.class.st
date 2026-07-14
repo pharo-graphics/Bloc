@@ -8,20 +8,20 @@ Class {
 	#traits : 'TBlSpaceProperties',
 	#classTraits : 'TBlSpaceProperties classTrait',
 	#instVars : [
-		'borderless',
-		'cursor',
-		'maximized',
-		'minimized',
-		'visible',
-		'opened',
-		'renderCount',
-		'isFullscreen',
-		'position',
-		'title',
-		'isFullsize',
 		'physicalSize',
 		'logicalSize',
-		'eventFetcher'
+		'scaleFactor',
+		'densityDpi',
+		'minimized',
+		'maximized',
+		'isFullscreen',
+		'isFullsize',
+		'borderless',
+		'position',
+		'title',
+		'opened',
+		'cursor',
+		'renderCount'
 	],
 	#category : #'Bloc-Universe - Host Headless'
 }
@@ -119,29 +119,7 @@ BlHeadlessHostSpace >> initialize [
 
 	physicalSize := self defaultPhysicalSize.
 	logicalSize := self defaultLogicalSize.
-	renderCount := 0.
-	
-	eventFetcher := BlHostEventFetcher hostSpace: self
-]
-
-{ #category : #'host space - events' }
-BlHeadlessHostSpace >> enqueueEvent: aBlEvent [
-	self eventFetcher enqueueEvent: aBlEvent
-]
-
-{ #category : #'private' }
-BlHeadlessHostSpace >> eventFetcher [
-	^ eventFetcher ifNil: [ eventFetcher := BlHostEventFetcher hostSpace: self ]
-]
-
-{ #category : #'host space - events' }
-BlHeadlessHostSpace >> fetchedEventsDo: aBlock [
-	self eventFetcher fetchedEventsDo: aBlock
-]
-
-{ #category : #'host space - events' }
-BlHeadlessHostSpace >> hasEvents [
-	^ self eventFetcher isEmpty not
+	renderCount := 0
 ]
 
 { #category : #'window - properties' }

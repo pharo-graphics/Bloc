@@ -13,7 +13,8 @@ Class {
 		'host',
 		'space',
 		'universe',
-		'renderer'
+		'renderer',
+		'eventFetcher'
 	],
 	#category : #'Bloc-Universe - Host'
 }
@@ -40,23 +41,20 @@ BlHostSpace >> densityDpi [
 
 { #category : #'host space - events' }
 BlHostSpace >> enqueueEvent: aBlEvent [
-	"I dispatch events directly to the universe or space as soon as they come"
-
 	aBlEvent isUniverseEvent
 		ifTrue: [ ^ self universe dispatchEvent: aBlEvent ].
 
-	aBlEvent isSpaceEvent
-		ifTrue: [ 
-			self space dispatchEvent: aBlEvent.
-			^ self space requestNextPulse ].
-
-	self space dispatchEvent: aBlEvent.
-	self space requestNextPulse
+	self eventFetcher enqueueEvent: aBlEvent
 ]
 
 { #category : #'host space - events' }
 BlHostSpace >> fetchedEventsDo: aBlock [
-	"Flush event queue and evaluate a given block with every queued event as argument"
+	self eventFetcher fetchedEventsDo: aBlock
+]
+
+{ #category : #'private - accessing' }
+BlHostSpace >> eventFetcher [
+	^ eventFetcher ifNil: [ eventFetcher := BlHostEventFetcher hostSpace: self ]
 ]
 
 { #category : #'host space - events' }
@@ -66,9 +64,7 @@ BlHostSpace >> generateEvents [
 
 { #category : #'host space - events' }
 BlHostSpace >> hasEvents [
-	"Return true if there are pending events in the queue, false otherwise"
-
-	^ false
+	^ self eventFetcher isEmpty not
 ]
 
 { #category : #'host space - testing' }
