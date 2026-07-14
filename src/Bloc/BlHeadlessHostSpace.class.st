@@ -1,31 +1,29 @@
 "
-I am a mocked host space that behaves just like a real one but is invisible and does not render anything
-
+I am a concrete implementation of a Host Space.
+I am headless and mostly used for testing
 "
 Class {
 	#name : #BlHeadlessHostSpace,
 	#superclass : #BlHostSpace,
-	#traits : 'TBlSpaceProperties',
-	#classTraits : 'TBlSpaceProperties classTrait',
 	#instVars : [
-		'borderless',
-		'cursor',
-		'maximized',
-		'minimized',
-		'visible',
-		'opened',
-		'renderCount',
-		'isFullscreen',
-		'position',
-		'title',
-		'isFullsize',
 		'physicalSize',
-		'logicalSize'
+		'opened',
+		'borderless',
+		'eventFetcher'
 	],
 	#category : #'Bloc-Universe - Host Headless'
 }
 
-{ #category : #'window - properties' }
+{ #category : #'host space - accessing' }
+BlHeadlessHostSpace >> borderless [
+	"Return true if underlying window is now without borders,
+	false otherwise"
+	<return: #Boolean>
+
+	^ borderless
+]
+
+{ #category : #'host space - accessing' }
 BlHeadlessHostSpace >> borderless: aBoolean [
 	"Make host window borderless if true is given"
 
@@ -43,215 +41,124 @@ BlHeadlessHostSpace >> close [
 	self hide
 ]
 
-{ #category : #'host space - cursor' }
-BlHeadlessHostSpace >> cursor [
-	^ cursor
-]
-
-{ #category : #'host space - cursor' }
-BlHeadlessHostSpace >> cursor: aCursor [
-	"Change current cursor image/view to the given one"
-
-	cursor := aCursor
-]
-
-{ #category : #initialization }
-BlHeadlessHostSpace >> defaultLogicalSize [
-	^ (400 @ 300) asLogicalSize
-]
-
-{ #category : #initialization }
-BlHeadlessHostSpace >> defaultPhysicalSize [
-	^ 800 @ 600
-]
-
-{ #category : #'host space - geometry' }
+{ #category : #'host space - accessing' }
 BlHeadlessHostSpace >> densityDpi [
-	"Return the screen density expressed as dots-per-inch (a float)"
-
+	"Return screen density as dots per inch.
+	Note: on retina displays it is usually 192 (96 * 2)"
+	<return: #Number>
+	
 	^ 96.0
 ]
 
-{ #category : #'window - properties' }
-BlHeadlessHostSpace >> fullscreen: aBoolean [
-	"Switch underlying window to fullscreen if true is given
-	and exit fullscreen mode if false is given"
-
-	isFullscreen := aBoolean
+{ #category : #'host space - events' }
+BlHeadlessHostSpace >> enqueueEvent: aBlEvent [
+	eventFetcher enqueueEvent: aBlEvent
 ]
 
-{ #category : #'window - properties' }
-BlHeadlessHostSpace >> fullsize: aBoolean [
-	"Switch underlying window to fullsize if true is given
-	and exit fullsize mode if false is given.
-	See ${method:TBlSpaceProperties>>#fullsize}"
-
-	isFullsize := aBoolean
+{ #category : #'host space - events' }
+BlHeadlessHostSpace >> fetchedEventsDo: aBlock [
+	eventFetcher fetchedEventsDo: aBlock
 ]
 
-{ #category : #'host space - testing' }
-BlHeadlessHostSpace >> hasResized [
-
-	^ false
+{ #category : #'host space - events' }
+BlHeadlessHostSpace >> hasEvents [
+	^ eventFetcher isEmpty not
 ]
 
 { #category : #'host space - displaying' }
 BlHeadlessHostSpace >> hide [
-	visible := false
-]
-
-{ #category : #'window - properties' }
-BlHeadlessHostSpace >> icon: aForm [
-	"Change window's icon to the given one"
+	opened ifFalse: [ ^ self ].
+	self space dispatchEvent: BlSpaceHiddenEvent new
 ]
 
 { #category : #initialization }
 BlHeadlessHostSpace >> initialize [
-
 	super initialize.
-
-	visible := false.
-	minimized := false.
-	maximized := false.
-	borderless := false.
-	opened := false.
-
-	physicalSize := self defaultPhysicalSize.
-	logicalSize := self defaultLogicalSize.
-	renderCount := 0
-]
-
-{ #category : #'window - properties' }
-BlHeadlessHostSpace >> isBorderless [
-	"Return true if underlying window is now borderless, false otherwise"
 	
-	^ borderless
-]
-
-{ #category : #'window - properties' }
-BlHeadlessHostSpace >> isFullscreen [
-	"Return true if the underlying window is in fullscreen mode, false otherwise."
-
-	^ isFullscreen
-]
-
-{ #category : #'window - properties' }
-BlHeadlessHostSpace >> isFullsize [
-	"Return true if the underlying window is in fullsize mode, false otherwise."
-
-	^ isFullsize
+	physicalSize := 800@600 asPhysicalSize.
+	opened := false.
+	borderless := false.
+	eventFetcher := BlHostEventFetcher hostSpace: self
 ]
 
 { #category : #'host space - testing' }
 BlHeadlessHostSpace >> isVisible [
-	"Return true if underlying window is shown, false otherwise.
-	Note: If window was shown and then minimized it is still considered to be visible.
-	Window can become invisible by asking it to hide"
+	"Return true if underlying window is shown to the user
+	(is not minimized or hidden), false otherwise"
+	<return: #Boolean>
 
-	^ visible
+	^ opened
 ]
 
-{ #category : #'host space - geometry' }
+{ #category : #'host space - accessing' }
 BlHeadlessHostSpace >> logicalSize [
 	"Returns the logical size of the host's client area.
 	The client area is the content of the window, excluding the title bar and borders.
-	Converting the returned LogicalSize to PhysicalSize produces the size your framebuffer should be."
+	Coordinates of the logical size are represented in logical pixels.
+	Logical size doesn't necessarily match the physical size, for example on high-DPI displays
+	the logical size is scaled down"
+	<return: #BlLogicalSize>
 
-	^ logicalSize
+	^ physicalSize asLogicalSize
 ]
 
 { #category : #'host space - displaying' }
 BlHeadlessHostSpace >> maximize [
-
-	maximized := true.
-	minimized := false
-]
-
-{ #category : #'host space - displaying' }
-BlHeadlessHostSpace >> maximized [
-
-	^ maximized
-]
-
-{ #category : #'host space - displaying' }
-BlHeadlessHostSpace >> minimize [
-
-	maximized := false.
-	minimized := true
+	
 ]
 
 { #category : #'host space - displaying' }
 BlHeadlessHostSpace >> minimized [
-
-	^ minimized
+	^ false
 ]
 
-{ #category : #'host space - displaying' }
-BlHeadlessHostSpace >> open [
-	opened := true.
-	self show
-]
-
-{ #category : #'host space - geometry' }
+{ #category : #'host space - accessing' }
 BlHeadlessHostSpace >> physicalSize [
-	"Return a physical host size which is what the framebuffer size should be.
-	This size may differ from the logical size on high-DPI (Retina) screens.
-	In most cases physical size is x2 larger than logical size on retina screens."
+	"Return a physical host space size in screen coordinates.
+	(usually differs from logical size on high-dpi (retina) screens)"
+	<return: #BlPhysicalSize>
 
 	^ physicalSize
 ]
 
-{ #category : #'window - properties' }
-BlHeadlessHostSpace >> position [
-	"Return window's position in screen coordinates"
-
-	^ position
-]
-
-{ #category : #'window - properties' }
-BlHeadlessHostSpace >> position: aPoint [
-	"Change window's position to a given point in screen coordinates"
-	
-	position := aPoint
-
-]
-
-{ #category : #'host space - drawing' }
+{ #category : #'host space - rendering' }
 BlHeadlessHostSpace >> render: aSpace [
-	"Render a given abstract space on an underlying window or visual area"
-
-	renderCount := renderCount + 1.
-	aSpace clearDirtyElements
-]
-
-{ #category : #'host space - accessing' }
-BlHeadlessHostSpace >> renderCount [
-	"Return how many times my render: method was executed"
-
-	^ renderCount
+	"Render a given space on my underlying window or surface.
+	I am sent every time space needs to be rendered, which is usually
+	at 60 frames per second"
+	
+	"Does nothing"
 ]
 
 { #category : #'host space - displaying' }
 BlHeadlessHostSpace >> show [
-	visible := true
+	opened ifTrue: [ ^ self ].
+	opened := true.
+	self space dispatchEvent: BlSpaceShownEvent new
 ]
 
-{ #category : #'window - properties' }
+{ #category : #'host space - accessing' }
 BlHeadlessHostSpace >> title [
 	"Return window's title as a string"
 	<return: #String>
 
-	^ title
+	^ 'Mocked host space'
 ]
 
-{ #category : #'window - properties' }
+{ #category : #'host space - accessing' }
 BlHeadlessHostSpace >> title: aString [
 	"Change window's title"
-
-	title := aString
 ]
 
-{ #category : #'host space - geometry' }
+{ #category : #'host space - displaying' }
+BlHeadlessHostSpace >> toBack [
+]
+
+{ #category : #'host space - displaying' }
+BlHeadlessHostSpace >> toFront [
+]
+
+{ #category : #'host space - accessing' }
 BlHeadlessHostSpace >> windowExtent: anExtent [
-	logicalSize := anExtent asLogicalSize
+	physicalSize := (anExtent x @ anExtent y) asPhysicalSize
 ]

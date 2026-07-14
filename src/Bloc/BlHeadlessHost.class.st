@@ -77,3 +77,18 @@ BlHeadlessHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock 
 
 	^ completionBlock value
 ]
+
+{ #category : #'host - testing' }
+BlHeadlessHost >> waitEmptyTaskQueueFor: aSpace timeout: aDuration [
+	| finished |
+	finished := false.
+	self
+		wait: [ 
+			self universe pulse.
+			aSpace pulse.
+			self universe hasDeferredActions or: [ aSpace taskQueue isEmpty not or: [ aSpace hostSpace ifNotNil: [ :hs | hs hasEvents ] ifNil: [ false ] ] ] ]
+		timeout: aDuration
+		onCompletion: [ finished := true ]
+		onTimeout: [ finished := false ].
+	^ finished
+]
