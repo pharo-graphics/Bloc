@@ -1,6 +1,6 @@
 Class {
 	#name : #BlEventSimulatorTest,
-	#superclass : #TestCase,
+	#superclass : #BlParameterizedHostTest,
 	#instVars : [
 		'space',
 		'element'
@@ -11,18 +11,11 @@ Class {
 { #category : #running }
 BlEventSimulatorTest >> setUp [
 	super setUp.
-	space := BlSpace new.
+	space := self newTestingSpace.
 	element := BlElement new.
 	element extent: 100 @ 100.
 	element focusability: BlFocusability block.
-	space root addChild: element.
-	space show
-]
-
-{ #category : #running }
-BlEventSimulatorTest >> tearDown [
-	space close.
-	super tearDown
+	space root addChild: element
 ]
 
 { #category : #tests }
