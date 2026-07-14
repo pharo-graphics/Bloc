@@ -21,7 +21,8 @@ Class {
 		'title',
 		'opened',
 		'cursor',
-		'renderCount'
+		'renderCount',
+		'visible'
 	],
 	#category : #'Bloc-Universe - Host Headless'
 }

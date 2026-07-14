@@ -66,12 +66,6 @@ BlHostSpace >> hasEvents [
 	^ eventQueue isEmpty not
 ]
 
-{ #category : #initialization }
-BlHostSpace >> initialize [
-	super initialize.
-	eventQueue := WaitfreeQueue new
-]
-
 { #category : #'host space - testing' }
 BlHostSpace >> hasResized [
 	"Return true if renderer extent changed.
@@ -93,6 +87,12 @@ BlHostSpace >> host: aBlHost [
 	"Assign a host that was used to create this host space"
 	
 	host := aBlHost
+]
+
+{ #category : #initialization }
+BlHostSpace >> initialize [
+	super initialize.
+	eventQueue := WaitfreeQueue new
 ]
 
 { #category : #initialization }
