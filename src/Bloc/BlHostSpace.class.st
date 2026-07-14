@@ -14,7 +14,7 @@ Class {
 		'space',
 		'universe',
 		'renderer',
-		'eventFetcher'
+		'eventQueue'
 	],
 	#category : #'Bloc-Universe - Host'
 }
@@ -44,17 +44,16 @@ BlHostSpace >> enqueueEvent: aBlEvent [
 	aBlEvent isUniverseEvent
 		ifTrue: [ ^ self universe dispatchEvent: aBlEvent ].
 
-	self eventFetcher enqueueEvent: aBlEvent
+	eventQueue nextPut: aBlEvent.
+	self space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
 ]
 
 { #category : #'host space - events' }
 BlHostSpace >> fetchedEventsDo: aBlock [
-	self eventFetcher fetchedEventsDo: aBlock
-]
-
-{ #category : #'private - accessing' }
-BlHostSpace >> eventFetcher [
-	^ eventFetcher ifNil: [ eventFetcher := BlHostEventFetcher hostSpace: self ]
+	| theEvents |
+	theEvents := LinkedList new.
+	eventQueue flush: [ :anEvent | theEvents add: anEvent ].
+	theEvents do: aBlock
 ]
 
 { #category : #'host space - events' }
@@ -64,7 +63,13 @@ BlHostSpace >> generateEvents [
 
 { #category : #'host space - events' }
 BlHostSpace >> hasEvents [
-	^ self eventFetcher isEmpty not
+	^ eventQueue isEmpty not
+]
+
+{ #category : #initialization }
+BlHostSpace >> initialize [
+	super initialize.
+	eventQueue := WaitfreeQueue new
 ]
 
 { #category : #'host space - testing' }
