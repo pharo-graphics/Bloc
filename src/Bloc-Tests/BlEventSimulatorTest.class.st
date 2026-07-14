@@ -15,7 +15,8 @@ BlEventSimulatorTest >> setUp [
 	element := BlElement new.
 	element extent: 100 @ 100.
 	element focusability: BlFocusability block.
-	space root addChild: element
+	space root addChild: element.
+	space show
 ]
 
 { #category : #running }

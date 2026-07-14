@@ -21,6 +21,7 @@ BlEventTest >> putInSpace: anElement [
 	| aSpace |
 	aSpace := BlSpace new.
 	aSpace root addChild: anElement.
+	aSpace show.
 	^ aSpace
 ]
 

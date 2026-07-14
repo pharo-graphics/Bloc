@@ -17,6 +17,7 @@ BlDevHalosEventListenerExample >> activatedHalos [
 	aContainer := self newContainerWithRectangle.
 	aSpace := BlSpace new.
 	aSpace root addChild: aContainer.
+	aSpace show.
 	aSpace addHalosListener.
 	aSpace waitPulseForMilliseconds: 500.
 
