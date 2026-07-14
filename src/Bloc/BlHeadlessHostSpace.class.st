@@ -126,17 +126,22 @@ BlHeadlessHostSpace >> initialize [
 
 { #category : #'host space - events' }
 BlHeadlessHostSpace >> enqueueEvent: aBlEvent [
-	eventFetcher enqueueEvent: aBlEvent
+	self eventFetcher enqueueEvent: aBlEvent
+]
+
+{ #category : #'private' }
+BlHeadlessHostSpace >> eventFetcher [
+	^ eventFetcher ifNil: [ eventFetcher := BlHostEventFetcher hostSpace: self ]
 ]
 
 { #category : #'host space - events' }
 BlHeadlessHostSpace >> fetchedEventsDo: aBlock [
-	eventFetcher fetchedEventsDo: aBlock
+	self eventFetcher fetchedEventsDo: aBlock
 ]
 
 { #category : #'host space - events' }
 BlHeadlessHostSpace >> hasEvents [
-	^ eventFetcher isEmpty not
+	^ self eventFetcher isEmpty not
 ]
 
 { #category : #'window - properties' }
