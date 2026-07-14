@@ -220,7 +220,8 @@ BlMorphicWindowHostSpace >> show [
 	
 	anExtent := morphicWindow extent.
 	morphicWindow openInWorld.
-	morphicWindow extent: anExtent
+	morphicWindow extent: anExtent.
+	morphicWindow fullBounds."Force morphic layout to avoid 0@0 spaceExtent race condition"
 ]
 
 { #category : #'private - accessing' }
