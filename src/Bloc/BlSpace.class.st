@@ -780,7 +780,7 @@ BlSpace >> invalidateAll [
 BlSpace >> isBorderless [
 
 	^ self
-		  hostSpaceDo: [ :aHostSpace | aHostSpace borderless ]
+		  hostSpaceDo: [ :aHostSpace | aHostSpace isBorderless ]
 		  ifAbsent: [ borderless ]
 ]
 
@@ -805,7 +805,7 @@ BlSpace >> isFullsize [
 	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent and has no window title."
 
 	^ self 
-		hostSpaceDo: [ :aHostSpace | aHostSpace fullsize ]
+		hostSpaceDo: [ :aHostSpace | aHostSpace isFullsize ]
 		ifAbsent: [ fullsize ]
 ]
 
