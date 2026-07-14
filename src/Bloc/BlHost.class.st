@@ -219,7 +219,7 @@ BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aDuration [
 	finished := false.
 	self
 		wait: [ 
-			aSpace hostSpace ifNil: [
+			(aSpace hostSpace isNil or: [ aSpace isOpened not ]) ifTrue: [
 				self universe pulse.
 				aSpace pulse ].
 			self universe hasDeferredActions or: [ aSpace taskQueue isEmpty not or: [ aSpace hostSpace ifNotNil: [ :hs | hs hasEvents ] ifNil: [ false ] ] ] ]
@@ -236,7 +236,7 @@ BlHost >> waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: aDuration [
 	self
 		wait: [
 			| shouldWait |
-			aSpace hostSpace ifNil: [
+			(aSpace hostSpace isNil or: [ aSpace isOpened not ]) ifTrue: [
 				self universe pulse.
 				aSpace pulse ].
 			shouldWait := firstTime or: [ self universe hasDeferredActions or: [ aSpace taskQueue isEmpty not or: [ aSpace hostSpace ifNotNil: [ :hs | hs hasEvents ] ifNil: [ false ] ] ] ].
