@@ -207,3 +207,22 @@ BlSpace class >> simulateTextInput: aString on: aBlElement [
 	^ (BlEventSimulator forElement: aBlElement) textInput: aString
 ]
 
+{ #category : #'*Bloc-Simulation' }
+BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
+	self
+		deprecated: 'Use space host waitEmptyTaskQueueFor: space timeout: aDuration instead'
+		on: '2026-07-14'
+		in: 'Bloc'.
+	^ aSpace host waitEmptyTaskQueueFor: aSpace timeout: aDuration
+]
+
+{ #category : #'*Bloc-Simulation' }
+BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDuration [
+	self
+		deprecated: 'Use space host waitShownAndEmptyTaskQueueFor: space timeout: aDuration instead'
+		on: '2026-07-14'
+		in: 'Bloc'.
+	^ aSpace host waitShownAndEmptyTaskQueueFor: aSpace timeout: aDuration
+]
+
+
