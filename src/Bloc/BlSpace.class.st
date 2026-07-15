@@ -594,11 +594,20 @@ BlSpace >> hasLayoutError [
 BlSpace >> hasPendingWork [
 	"Return true if there are deferred actions in my universe, or if my task queue is not empty,
 	or if layout is requested, or if my host space has events."
-
-	^ self universe hasDeferredActions
-		  or: [ self taskQueue isEmpty not
-		  or: [ self isLayoutRequested
-		  or: [ self hostSpaceDo: [ :hs | hs hasEvents ] ifAbsent: [ false ] ] ] ]
+	| pendingActions pendingTasks pendingLayout pendingEvents result |
+	pendingActions := self universe hasDeferredActions.
+	pendingTasks := self taskQueue isEmpty not.
+	pendingLayout := self isLayoutRequested.
+	pendingEvents := self hostSpaceDo: [ :hs | hs hasEvents ] ifAbsent: [ false ].
+	result := pendingActions or: [ pendingTasks or: [ pendingLayout or: [ pendingEvents ] ] ].
+	result ifTrue: [
+		[ Stdio stdout
+			nextPutAll: 'pendingWork: actions='; print: pendingActions;
+			nextPutAll: ' tasks='; print: pendingTasks;
+			nextPutAll: ' layout='; print: pendingLayout;
+			nextPutAll: ' events='; print: pendingEvents;
+			lf ] on: Error do: [ ]. ].
+	^ result
 ]
 
 { #category : #testing }
