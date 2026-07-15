@@ -68,16 +68,11 @@ BlMorphicSteppingHost >> newHostSpaceFor: aSpace [
 ]
 
 { #category : #'host - testing' }
-BlMorphicSteppingHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock onTimeout: timeoutBlock [
-	| deadline timeProvider |
+BlMorphicSteppingHost >> wait: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
 	MorphicUIManager uiProcess == Processor activeProcess
 		ifTrue: [
-			timeProvider := self universe spaces
-				ifNotEmpty: [ :theSpaces | theSpaces first time ]
-				ifEmpty: [ BlTime real ].
-			deadline := timeProvider now + aDuration.
 			[ aBlock value ] whileTrue: [
-				timeProvider now >= deadline ifTrue: [ ^ timeoutBlock value ].
+				aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
 				MorphicRenderLoop new doOneCycle.
 				self universe pulse.
 				(Delay forMilliseconds: 5) wait ].
@@ -85,7 +80,7 @@ BlMorphicSteppingHost >> wait: aBlock timeout: aDuration onCompletion: completio
 		ifFalse: [
 			^ super
 				wait: aBlock
-				timeout: aDuration
+				timeout: aTimeoutBlock
 				onCompletion: completionBlock
 				onTimeout: timeoutBlock ]
 ]
