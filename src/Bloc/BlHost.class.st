@@ -192,17 +192,19 @@ BlHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock onTimeou
 	timeProvider := self universe spaces
 		ifNotEmpty: [ :theSpaces | theSpaces first time ]
 		ifEmpty: [ BlTime real ].
-	deadline := timeProvider now + aDuration.
+	deadline := aDuration ifNotNil: [ timeProvider now + aDuration ].
 	aSemaphore := Semaphore new.
 	self universe registerPulseSemaphore: aSemaphore.
 	
 	[
 		[ aBlock value ] whileTrue: [
-			timeProvider now >= deadline ifTrue: [ ^ timeoutBlock value ].
+			(deadline notNil and: [ timeProvider now >= deadline ]) ifTrue: [ ^ timeoutBlock value ].
 			(self isRunning and: [ self shouldSafetyPulse not ])
 				ifTrue: [
 					"Reactive wait: Wakes up instantly on the next pulse or at the deadline"
-					aSemaphore waitTimeoutMilliseconds: (deadline - timeProvider now) asMilliSeconds ]
+					deadline
+						ifNotNil: [ aSemaphore waitTimeoutMilliseconds: (deadline - timeProvider now) asMilliSeconds ]
+						ifNil: [ aSemaphore wait ] ]
 				ifFalse: [
 					"No background loop, or we are on the UI process itself: manually run cycle and yield a tiny bit"
 					self runOneCycle.

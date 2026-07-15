@@ -1298,22 +1298,10 @@ BlSpace >> userData [
 
 { #category : #pulse }
 BlSpace >> waitPulse [
-	"Wait until the next pulse finishes.
-	If called from the UI thread, it processes the pulse synchronously.
-	If called from a background thread (e.g. tests or scripts), it safely suspends the thread and wakes up after the layout phase completes."
-	| uiProcess aSemaphore |
-	self isPulseRequested ifFalse: [ self requestNextPulse ].
-	
-	self host uiProcessDo: [ :p | uiProcess := p ].
-	
-	(uiProcess isNil or: [ uiProcess == Processor activeProcess ]) ifTrue: [
-		self processPulse.
-		^ self ].
-		
-	aSemaphore := Semaphore new.
-	self addEventHandlerOn: BlSpaceLayoutEndEvent doOnce: [ :e | aSemaphore signal ].
-	self requestNextPulse.
-	aSemaphore wait
+	"Wait until there is no more pending work (deferred actions, tasks, layout, or events)."
+
+	self waitPulseFor: nil.
+	^ self
 ]
 
 { #category : #pulse }

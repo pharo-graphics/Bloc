@@ -68,10 +68,10 @@ BlHeadlessHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock 
 	timeProvider := self universe spaces
 		ifNotEmpty: [ :theSpaces | theSpaces first time ]
 		ifEmpty: [ BlTime real ].
-	deadline := timeProvider now + aDuration.
+	deadline := aDuration ifNotNil: [ timeProvider now + aDuration ].
 
 	[ aBlock value ] whileTrue: [
-		timeProvider now >= deadline ifTrue: [ ^ timeoutBlock value ].
+		(deadline notNil and: [ timeProvider now >= deadline ]) ifTrue: [ ^ timeoutBlock value ].
 		self universe pulse.
 		(Delay forMilliseconds: 1) wait ].
 
