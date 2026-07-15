@@ -312,6 +312,13 @@ BlParallelUniverse >> pulseSynchronously [
 	] 
 		on: Exception 
 		do: [ :e | 
+				[
+					Stdio stderr
+						nextPutAll: 'Error during pulse: ';
+						nextPutAll: e description;
+						lf.
+					e signalerContext stack printOn: Stdio stderr.
+					Stdio stderr lf ] on: Error do: [ ].
 				(BlParallelUniverseErrorDuringPulseSignal new
 					signaledError: e;
 					yourself) emit.
