@@ -1305,30 +1305,28 @@ BlSpace >> waitPulse [
 ]
 
 { #category : #pulse }
-BlSpace >> waitPulseFor: aDurationOrBlock [
-	"Wait for this space task queue to be empty until a given timeout"
-	| timeoutBlock |
-	timeoutBlock := aDurationOrBlock isBlock
-		ifTrue: [ aDurationOrBlock ]
-		ifFalse: [
-			aDurationOrBlock
-				ifNil: [ [ false ] ]
-				ifNotNil: [
-					| deadline timeProvider |
-					timeProvider := self host universe spaces
-						ifNotEmpty: [ :theSpaces | theSpaces first time ]
-						ifEmpty: [ BlTime real ].
-					deadline := timeProvider now + aDurationOrBlock.
-					[ timeProvider now >= deadline ] ] ].
+BlSpace >> waitPulseFor: aTimeoutBlock [
+	"Wait for this space task queue to be empty until a given timeout block evaluates to true"
 
-	^ self host waitEmptyTaskQueueFor: self timeout: timeoutBlock
+	^ self host waitEmptyTaskQueueFor: self timeout: aTimeoutBlock
+]
+
+{ #category : #pulse }
+BlSpace >> waitPulseForDuration: aDuration [
+	"Wait for this space task queue to be empty until a given duration has passed"
+	| deadline timeProvider |
+	timeProvider := self host universe spaces
+		ifNotEmpty: [ :theSpaces | theSpaces first time ]
+		ifEmpty: [ BlTime real ].
+	deadline := timeProvider now + aDuration.
+	^ self waitPulseFor: [ timeProvider now >= deadline ]
 ]
 
 { #category : #pulse }
 BlSpace >> waitPulseForMilliseconds: aNumber [
 	"Wait for this space task queue to be empty until a given timeout"
 
-	^ self waitPulseFor: aNumber milliSeconds
+	^ self waitPulseForDuration: aNumber milliSeconds
 ]
 
 { #category : #'window - properties' }

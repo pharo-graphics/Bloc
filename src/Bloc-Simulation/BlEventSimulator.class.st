@@ -192,7 +192,7 @@ BlEventSimulator >> events: aCollectionOfEvents [
 	aCollectionOfEvents do: [ :anEvent |
 		aSpace enqueueEvent: anEvent ].
 
-	aSpace waitPulseFor: timeout.
+	aSpace waitPulseForDuration: timeout.
 
 ]
 
