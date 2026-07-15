@@ -67,5 +67,5 @@ BlParameterizedHostTest >> tearDown [
 BlParameterizedHostTest >> waitTestingSpaces [
 
 	testingSpaces do: [ :each |
-		self assert: (each waitPulseForMilliseconds: 200) ]
+		self assert: (each waitPulseForMilliseconds: 500) ]
 ]
