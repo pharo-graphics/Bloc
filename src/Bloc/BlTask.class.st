@@ -53,6 +53,13 @@ BlTask >> isNew [
 	^ state == #new
 ]
 
+{ #category : #testing }
+BlTask >> isPending [
+	"Return true if this task constitutes pending work that a space should wait for."
+
+	^ true
+]
+
 { #category : #'private - state' }
 BlTask >> isPendingExecution [
 

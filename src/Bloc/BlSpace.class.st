@@ -592,11 +592,9 @@ BlSpace >> hasLayoutError [
 
 { #category : #testing }
 BlSpace >> hasPendingTasks [
-	"Return true if I have tasks in the queue that are not repeated or animation tasks."
+	"Return true if I have tasks in the queue that are considered pending."
 
-	^ self taskQueue tasks anySatisfy: [ :eachTask |
-		  (eachTask isKindOf: BlRepeatedTask) not
-			  and: [ (eachTask isKindOf: BlBaseAnimation) not ] ]
+	^ self taskQueue tasks anySatisfy: [ :eachTask | eachTask isPending ]
 ]
 
 { #category : #testing }

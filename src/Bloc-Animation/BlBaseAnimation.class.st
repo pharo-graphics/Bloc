@@ -169,6 +169,13 @@ BlBaseAnimation >> isInfinite [
 ]
 
 { #category : #testing }
+BlBaseAnimation >> isPending [
+	"Return true if this animation has a finite duration, i.e., is not infinite."
+
+	^ self isInfinite not
+]
+
+{ #category : #testing }
 BlBaseAnimation >> isRunning [
 
 	^ isRunning

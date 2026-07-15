@@ -74,6 +74,13 @@ BlRepeatedTask >> isRunning [
 	^ isRunning
 ]
 
+{ #category : #testing }
+BlRepeatedTask >> isPending [
+	"Repeated tasks run indefinitely, so they do not constitute pending work to wait for."
+
+	^ false
+]
+
 { #category : #hooks }
 BlRepeatedTask >> onEnqueued: aBlSpace [
 
