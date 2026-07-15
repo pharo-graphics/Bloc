@@ -61,34 +61,7 @@ BlHeadlessHost >> newHostSpaceFor: aSpace [
 		yourself
 ]
 
-{ #category : #'host - api' }
-BlHeadlessHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock onTimeout: timeoutBlock [
-	"A mocked host has no background loop: manually pulse and yield a tiny bit"
-	| deadline timeProvider |
-	timeProvider := self universe spaces
-		ifNotEmpty: [ :theSpaces | theSpaces first time ]
-		ifEmpty: [ BlTime real ].
-	deadline := aDuration ifNotNil: [ timeProvider now + aDuration ].
-
-	[ aBlock value ] whileTrue: [
-		(deadline notNil and: [ timeProvider now >= deadline ]) ifTrue: [ ^ timeoutBlock value ].
-		self universe pulse.
-		(Delay forMilliseconds: 1) wait ].
-
-	^ completionBlock value
-]
-
 { #category : #'host - testing' }
-BlHeadlessHost >> waitEmptyTaskQueueFor: aSpace timeout: aDuration [
-	| finished |
-	finished := false.
-	self
-		wait: [ 
-			self universe pulse.
-			aSpace pulse.
-			aSpace hasPendingWork ]
-		timeout: aDuration
-		onCompletion: [ finished := true ]
-		onTimeout: [ finished := false ].
-	^ finished
+BlHeadlessHost >> shouldSafetyPulse [
+	^ true
 ]
