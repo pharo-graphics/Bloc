@@ -210,10 +210,10 @@ BlSpace class >> simulateTextInput: aString on: aBlElement [
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
 	self
-		deprecated: 'Use space host waitEmptyTaskQueueFor: space timeout: aDuration instead'
+		deprecated: 'Use space waitPulseFor: aDuration instead'
 		on: '2026-07-14'
 		in: 'Bloc'.
-	^ aSpace host waitEmptyTaskQueueFor: aSpace timeout: aDuration
+	^ aSpace waitPulseFor: aDuration
 ]
 
 { #category : #'*Bloc-Simulation' }
