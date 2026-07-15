@@ -603,7 +603,7 @@ BlSpace >> hasPendingWork [
 	result ifTrue: [
 		[ Stdio stdout
 			nextPutAll: 'pendingWork: actions='; print: pendingActions;
-			nextPutAll: ' tasks='; print: pendingTasks;
+			nextPutAll: ' tasks='; print: (self taskQueue tasks collect: [ :t | t class name ]);
 			nextPutAll: ' layout='; print: pendingLayout;
 			nextPutAll: ' events='; print: pendingEvents;
 			lf ] on: Error do: [ ]. ].
