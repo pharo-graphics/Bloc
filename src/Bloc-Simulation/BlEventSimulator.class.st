@@ -181,16 +181,16 @@ BlEventSimulator >> events: aCollectionOfEvents [
 			modifiers isEmpty ifFalse: [
 				anEvent modifiers: modifiers copy ] ] ].
 
-	[ aSpace isOpened and: [ aSpace hostSpace isNotNil ] ] whileFalse: [
+	[ aSpace isOpened and: [ aSpace hasHostSpace ] ] whileFalse: [
 		aSpace universe hasDeferredActions
 			ifTrue: [ aSpace universe tryToRunDeferredActions ]
 			ifFalse: [
 				aSpace isOpened
-					ifTrue: [ (Delay forMilliseconds: 10) wait ]
+					ifTrue: [ Processor yield ]
 					ifFalse: [ self error: 'You can''t simulate events if you didn''t add the element to a space and sent #show to it.' ] ] ].
 
 	aCollectionOfEvents do: [ :anEvent |
-		aSpace hostSpace enqueueEvent: anEvent ].
+		aSpace enqueueEvent: anEvent ].
 
 	aSpace waitPulseFor: timeout.
 

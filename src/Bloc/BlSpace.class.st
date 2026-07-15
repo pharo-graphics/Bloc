@@ -679,6 +679,12 @@ BlSpace >> hostSpaceDo: aBlock ifAbsent: anAbsentBlock [
 	^ aBlock cull: self hostSpace
 ]
 
+{ #category : #'host space - accessing' }
+BlSpace >> enqueueEvent: aBlEvent [
+	self hostSpaceDo: [ :aHostSpace | aHostSpace enqueueEvent: aBlEvent ]
+]
+
+
 { #category : #'window - properties' }
 BlSpace >> icon [
 	"Return an object that understands #asElement, or nil"
