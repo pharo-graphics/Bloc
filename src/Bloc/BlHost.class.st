@@ -186,25 +186,19 @@ BlHost >> universe [
 ]
 
 { #category : #'host - testing' }
-BlHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock onTimeout: timeoutBlock [
-	"Evaluate aBlock repeatedly until it answers false. If aDuration passes before aBlock answers false, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
-	| deadline aSemaphore timeProvider |
-	timeProvider := self universe spaces
-		ifNotEmpty: [ :theSpaces | theSpaces first time ]
-		ifEmpty: [ BlTime real ].
-	deadline := aDuration ifNotNil: [ timeProvider now + aDuration ].
+BlHost >> wait: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
+	"Evaluate aBlock repeatedly until it answers false. If aTimeoutBlock answers true before aBlock answers false, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
+	| aSemaphore |
 	aSemaphore := Semaphore new.
 	self universe registerPulseSemaphore: aSemaphore.
 	
 	[
 		[ aBlock value ] whileTrue: [
-			(deadline notNil and: [ timeProvider now >= deadline ]) ifTrue: [ ^ timeoutBlock value ].
+			aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
 			(self isRunning and: [ self shouldSafetyPulse not ])
 				ifTrue: [
-					"Reactive wait: Wakes up instantly on the next pulse or at the deadline"
-					deadline
-						ifNotNil: [ aSemaphore waitTimeoutMilliseconds: (deadline - timeProvider now) asMilliSeconds ]
-						ifNil: [ aSemaphore wait ] ]
+					"Reactive wait: Wakes up instantly on the next pulse"
+					aSemaphore waitTimeoutMilliseconds: 50 ]
 				ifFalse: [
 					"No background loop, or we are on the UI process itself: manually run cycle and yield a tiny bit"
 					self runOneCycle.
@@ -216,7 +210,7 @@ BlHost >> wait: aBlock timeout: aDuration onCompletion: completionBlock onTimeou
 ]
 
 { #category : #'host - testing' }
-BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aDuration [
+BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock [
 	| finished |
 	finished := false.
 	self
@@ -225,14 +219,14 @@ BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aDuration [
 				self universe pulse.
 				aSpace pulse ].
 			aSpace hasPendingWork ]
-		timeout: aDuration
+		timeout: aTimeoutBlock
 		onCompletion: [ finished := true ]
 		onTimeout: [ finished := false ].
 	^ finished
 ]
 
 { #category : #'host - testing' }
-BlHost >> waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: aDuration [
+BlHost >> waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock [
 	| firstTime |
 	firstTime := true.
 	self
@@ -241,24 +235,24 @@ BlHost >> waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: aDuration [
 			(aSpace hostSpace isNil or: [ aSpace isOpened not ]) ifTrue: [
 				self universe pulse.
 				aSpace pulse ].
-			shouldWait := firstTime or: [ self universe hasDeferredActions or: [ aSpace taskQueue isEmpty not or: [ aSpace hostSpace ifNotNil: [ :hs | hs hasEvents ] ifNil: [ false ] ] ] ].
+			shouldWait := firstTime or: [ aSpace hasPendingWork ].
 			firstTime := false.
 			shouldWait ]
-		timeout: aDuration
+		timeout: aTimeoutBlock
 		onCompletion: [ ]
 		onTimeout: [ ]
 ]
 
 { #category : #'host - testing' }
-BlHost >> waitShownAndEmptyTaskQueueFor: aSpace timeout: aDuration [
+BlHost >> waitShownAndEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock [
 	self
 		wait: [ 
 			aSpace hostSpace ifNil: [
 				self universe pulse.
 				aSpace pulse ].
 			aSpace isShown not ]
-		timeout: aDuration
+		timeout: aTimeoutBlock
 		onCompletion: [ ]
 		onTimeout: [ ].
-	^ self waitEmptyTaskQueueFor: aSpace timeout: aDuration
+	^ self waitEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock
 ]

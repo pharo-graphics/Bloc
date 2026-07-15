@@ -1300,15 +1300,28 @@ BlSpace >> userData [
 BlSpace >> waitPulse [
 	"Wait until there is no more pending work (deferred actions, tasks, layout, or events)."
 
-	self waitPulseFor: nil.
+	self waitPulseFor: [ false ].
 	^ self
 ]
 
 { #category : #pulse }
-BlSpace >> waitPulseFor: aDuration [
+BlSpace >> waitPulseFor: aDurationOrBlock [
 	"Wait for this space task queue to be empty until a given timeout"
+	| timeoutBlock |
+	timeoutBlock := aDurationOrBlock isBlock
+		ifTrue: [ aDurationOrBlock ]
+		ifFalse: [
+			aDurationOrBlock
+				ifNil: [ [ false ] ]
+				ifNotNil: [
+					| deadline timeProvider |
+					timeProvider := self host universe spaces
+						ifNotEmpty: [ :theSpaces | theSpaces first time ]
+						ifEmpty: [ BlTime real ].
+					deadline := timeProvider now + aDurationOrBlock.
+					[ timeProvider now >= deadline ] ] ].
 
-	^ self host waitEmptyTaskQueueFor: self timeout: aDuration
+	^ self host waitEmptyTaskQueueFor: self timeout: timeoutBlock
 ]
 
 { #category : #pulse }
