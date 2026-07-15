@@ -591,23 +591,24 @@ BlSpace >> hasLayoutError [
 ]
 
 { #category : #testing }
+BlSpace >> hasPendingTasks [
+	"Return true if I have tasks in the queue that are not repeated, animation, or delayed tasks."
+
+	^ self taskQueue tasks anySatisfy: [ :eachTask |
+		  (eachTask isKindOf: BlRepeatedTask) not
+			  and: [ (eachTask isKindOf: BlBaseAnimation) not
+			  and: [ (eachTask isKindOf: BlDelayedTask) not ] ] ]
+]
+
+{ #category : #testing }
 BlSpace >> hasPendingWork [
-	"Return true if there are deferred actions in my universe, or if my task queue is not empty,
+	"Return true if there are deferred actions in my universe, or if I have pending tasks,
 	or if layout is requested, or if my host space has events."
-	| pendingActions pendingTasks pendingLayout pendingEvents result |
-	pendingActions := self universe hasDeferredActions.
-	pendingTasks := self taskQueue isEmpty not.
-	pendingLayout := self isLayoutRequested.
-	pendingEvents := self hostSpaceDo: [ :hs | hs hasEvents ] ifAbsent: [ false ].
-	result := pendingActions or: [ pendingTasks or: [ pendingLayout or: [ pendingEvents ] ] ].
-	result ifTrue: [
-		[ Stdio stdout
-			nextPutAll: 'pendingWork: actions='; print: pendingActions;
-			nextPutAll: ' tasks='; print: (self taskQueue tasks collect: [ :t | t class name ]);
-			nextPutAll: ' layout='; print: pendingLayout;
-			nextPutAll: ' events='; print: pendingEvents;
-			lf ] on: Error do: [ ]. ].
-	^ result
+
+	^ self universe hasDeferredActions
+		  or: [ self hasPendingTasks
+		  or: [ self isLayoutRequested
+		  or: [ self hostSpaceDo: [ :hs | hs hasEvents ] ifAbsent: [ false ] ] ] ]
 ]
 
 { #category : #testing }
