@@ -1302,7 +1302,7 @@ BlSpace >> waitPulse [
 	aSemaphore := Semaphore new.
 	self addEventHandlerOn: BlSpaceLayoutEndEvent doOnce: [ :e | aSemaphore signal ].
 	self requestNextPulse.
-	aSemaphore wait
+	aSemaphore waitTimeoutMilliseconds: 500
 ]
 
 { #category : #pulse }
