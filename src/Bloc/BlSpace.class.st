@@ -591,6 +591,17 @@ BlSpace >> hasLayoutError [
 ]
 
 { #category : #testing }
+BlSpace >> hasPendingWork [
+	"Return true if there are deferred actions in my universe, or if my task queue is not empty,
+	or if layout is requested, or if my host space has events."
+
+	^ self universe hasDeferredActions
+		  or: [ self taskQueue isEmpty not
+		  or: [ self isLayoutRequested
+		  or: [ self hostSpaceDo: [ :hs | hs hasEvents ] ifAbsent: [ false ] ] ] ]
+]
+
+{ #category : #testing }
 BlSpace >> hasOwner [
 
 	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/715'.
