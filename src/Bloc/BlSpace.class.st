@@ -598,7 +598,7 @@ BlSpace >> hasPendingTasks [
 ]
 
 { #category : #testing }
-BlSpace >> hasPendingWork
+BlSpace >> hasPendingWork [
 	"Return true if there are deferred actions in my universe, or if I have pending tasks,
 	or if layout is requested, or if a pulse is requested, or if my host space has events."
 
