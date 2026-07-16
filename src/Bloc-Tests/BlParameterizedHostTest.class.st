@@ -69,3 +69,9 @@ BlParameterizedHostTest >> waitTestingSpaces [
 	testingSpaces do: [ :each |
 		self assert: (each waitPulseForMilliseconds: 500) ]
 ]
+
+{ #category : #running }
+BlParameterizedHostTest >> runCase [
+
+	^ BlPulseLoopRequired value: false during: [ super runCase ]
+]
