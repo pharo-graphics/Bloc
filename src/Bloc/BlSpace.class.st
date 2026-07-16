@@ -598,14 +598,15 @@ BlSpace >> hasPendingTasks [
 ]
 
 { #category : #testing }
-BlSpace >> hasPendingWork [
+BlSpace >> hasPendingWork
 	"Return true if there are deferred actions in my universe, or if I have pending tasks,
-	or if layout is requested, or if my host space has events."
+	or if layout is requested, or if a pulse is requested, or if my host space has events."
 
 	^ self universe hasDeferredActions
 		  or: [ self hasPendingTasks
 		  or: [ self isLayoutRequested
-		  or: [ self hostSpaceDo: [ :hs | hs hasEvents ] ifAbsent: [ false ] ] ] ]
+		  or: [ self isPulseRequested
+		  or: [ self hostSpaceDo: [ :hs | hs hasEvents ] ifAbsent: [ false ] ] ] ] ]
 ]
 
 { #category : #testing }
