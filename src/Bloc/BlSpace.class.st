@@ -599,14 +599,10 @@ BlSpace >> hasPendingTasks [
 
 { #category : #testing }
 BlSpace >> hasPendingWork [
-	"Return true if there are deferred actions in my universe, or if I have pending tasks,
-	or if layout is requested, or if a pulse is requested, or if my host space has events."
+	"Return true if there are deferred actions in my universe, or if any of my frame's phases has pending work."
 
-	^ self universe hasDeferredActions
-		  or: [ self hasPendingTasks
-		  or: [ self isLayoutRequested
-		  or: [ self isPulseRequested
-		  or: [ self hostSpaceDo: [ :hs | hs hasEvents ] ifAbsent: [ false ] ] ] ] ]
+	self universe hasDeferredActions ifTrue: [ ^ true ].
+	^ self frame phases anySatisfy: [ :eachPhase | eachPhase hasPendingWorkIn: self ]
 ]
 
 { #category : #testing }

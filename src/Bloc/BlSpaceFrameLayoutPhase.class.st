@@ -21,3 +21,8 @@ BlSpaceFrameLayoutPhase >> runOn: aSpace [
 		dispatchTimeEvent: BlSpaceLayoutEndEvent
 		during: [ aSpace doLayout ]
 ]
+
+{ #category : #testing }
+BlSpaceFrameLayoutPhase >> hasPendingWorkIn: aSpace [
+	^ aSpace isLayoutRequested
+]

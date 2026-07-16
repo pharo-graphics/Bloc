@@ -46,3 +46,8 @@ BlSpaceFramePhase >> name [
 BlSpaceFramePhase >> runOn: aSpace [
 	self subclassResponsibility
 ]
+
+{ #category : #testing }
+BlSpaceFramePhase >> hasPendingWorkIn: aSpace [
+	^ false
+]

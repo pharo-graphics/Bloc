@@ -22,3 +22,8 @@ BlSpaceFrameTaskPhase >> runOn: aSpace [
 		dispatchTimeEvent: BlSpaceTasksEndEvent
 		during: [ aSpace runTasks ]
 ]
+
+{ #category : #testing }
+BlSpaceFrameTaskPhase >> hasPendingWorkIn: aSpace [
+	^ aSpace hasPendingTasks
+]
