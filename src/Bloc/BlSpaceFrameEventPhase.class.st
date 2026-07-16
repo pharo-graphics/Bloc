@@ -33,8 +33,3 @@ BlSpaceFrameEventPhase >> runOn: aSpace [
 			aSpace hostSpaceDo: [ :aHostSpace | aHostSpace generateEvents ].
 			aSpace mouseProcessor generateEvents ]
 ]
-
-{ #category : #testing }
-BlSpaceFrameEventPhase >> hasPendingWorkIn: aSpace [
-	^ aSpace hostSpaceDo: [ :hs | hs hasEvents ] ifAbsent: [ false ]
-]
