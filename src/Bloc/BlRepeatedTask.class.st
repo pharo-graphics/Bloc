@@ -76,9 +76,10 @@ BlRepeatedTask >> isRunning [
 
 { #category : #testing }
 BlRepeatedTask >> isPending [
-	"Repeated tasks run indefinitely, so they do not constitute pending work to wait for."
+	"Repeated tasks run indefinitely, so they do not constitute pending work to wait for,
+	except before they have run for the first time."
 
-	^ false
+	^ previousRunTime isNil
 ]
 
 { #category : #hooks }
