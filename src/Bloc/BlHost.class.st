@@ -225,23 +225,6 @@ BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock [
 	^ finished
 ]
 
-{ #category : #'host - testing' }
-BlHost >> waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock [
-	| firstTime |
-	firstTime := true.
-	self
-		waitUntil: [
-			| isDone |
-			(aSpace hostSpace isNil or: [ aSpace isOpened not ]) ifTrue: [
-				self universe pulse.
-				aSpace pulse ].
-			isDone := firstTime not and: [ aSpace hasPendingWork not ].
-			firstTime := false.
-			isDone ]
-		timeout: aTimeoutBlock
-		onCompletion: [ ]
-		onTimeout: [ ]
-]
 
 { #category : #'host - testing' }
 BlHost >> waitShownAndEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock [
