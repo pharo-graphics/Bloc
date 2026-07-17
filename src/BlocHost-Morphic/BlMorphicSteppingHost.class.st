@@ -73,7 +73,7 @@ BlMorphicSteppingHost >> wait: aBlock timeout: aTimeoutBlock onCompletion: compl
 		ifTrue: [
 			[ aBlock value ] whileTrue: [
 				aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
-				MorphicRenderLoop new doOneCycle.
+				self currentWorld doOneCycle.
 				self universe pulse.
 				(Delay forMilliseconds: 5) wait ].
 			^ completionBlock value ]
