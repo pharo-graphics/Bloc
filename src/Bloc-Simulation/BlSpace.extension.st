@@ -19,6 +19,24 @@ BlSpace class >> locationOutside: anElement [
 ]
 
 { #category : #'*Bloc-Simulation' }
+BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
+	self
+		deprecated: 'Use space waitPulseForDuration: aDuration instead'
+		on: '2026-07-14'
+		in: 'Bloc'.
+	^ aSpace waitPulseForDuration: aDuration
+]
+
+{ #category : #'*Bloc-Simulation' }
+BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDuration [
+	self
+		deprecated: 'Use space host waitShownAndEmptyTaskQueueFor: space timeout: aDuration instead'
+		on: '2026-07-14'
+		in: 'Bloc'.
+	^ aSpace host waitShownAndEmptyTaskQueueFor: aSpace timeout: aDuration
+]
+
+{ #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateClickOn: anElement [
 	self
 		deprecated: 'Use anElement eventSimulator click instead'
@@ -201,28 +219,8 @@ BlSpace class >> simulateSecondaryClickOn: anElement [
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulateTextInput: aString on: aBlElement [
 	self
-		deprecated: 'Use (BlEventSimulator forElement: aBlElement) textInput: instead'
+		deprecated: 'Use aBlElement eventSimulator textInput: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ (BlEventSimulator forElement: aBlElement) textInput: aString
+	^ aBlElement eventSimulator textInput: aString
 ]
-
-{ #category : #'*Bloc-Simulation' }
-BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
-	self
-		deprecated: 'Use space waitPulseForDuration: aDuration instead'
-		on: '2026-07-14'
-		in: 'Bloc'.
-	^ aSpace waitPulseForDuration: aDuration
-]
-
-{ #category : #'*Bloc-Simulation' }
-BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDuration [
-	self
-		deprecated: 'Use space host waitShownAndEmptyTaskQueueFor: space timeout: aDuration instead'
-		on: '2026-07-14'
-		in: 'Bloc'.
-	^ aSpace host waitShownAndEmptyTaskQueueFor: aSpace timeout: aDuration
-]
-
-

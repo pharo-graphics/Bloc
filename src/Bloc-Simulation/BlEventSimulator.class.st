@@ -20,18 +20,6 @@ BlEventSimulator class >> forElement: anElement [
 		yourself
 ]
 
-{ #category : #'instance creation' }
-BlEventSimulator class >> forSpace: aSpace [
-	^ self new
-		space: aSpace;
-		yourself
-]
-
-{ #category : #'instance creation' }
-BlEventSimulator class >> on: anObject [
-	^ self forElement: anObject
-]
-
 { #category : #simulation }
 BlEventSimulator >> altDown [
 	modifiers alt: true
