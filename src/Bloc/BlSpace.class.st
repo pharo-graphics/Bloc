@@ -1315,18 +1315,20 @@ BlSpace >> waitPulseFor: aTimeoutBlock [
 
 { #category : #pulse }
 BlSpace >> waitPulseForDuration: aDuration [
-	"Wait for this space task queue to be empty until a given duration has passed"
+	"Wait for this space task queue to be empty until a given duration has passed.
+	Forwards to #waitPulseForMilliseconds: converting the duration to milliseconds."
 
-	| deadline |
-	deadline := time now + aDuration.
-	^ self waitPulseFor: [ time now >= deadline ]
+	^ self waitPulseForMilliseconds: aDuration asMilliSeconds
 ]
 
 { #category : #pulse }
 BlSpace >> waitPulseForMilliseconds: aNumber [
-	"Wait for this space task queue to be empty until a given timeout"
+	"Wait for this space task queue to be empty until a given number of milliseconds has passed.
+	Uses #nowInUTCMicroseconds for a monotonic, high-resolution deadline to avoid clock-skew issues."
 
-	^ self waitPulseForDuration: aNumber milliSeconds
+	| deadlineInMicroseconds |
+	deadlineInMicroseconds := time nowInUTCMicroseconds + (aNumber * 1000).
+	^ self waitPulseFor: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
 ]
 
 { #category : #'window - properties' }
