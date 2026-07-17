@@ -68,10 +68,10 @@ BlMorphicSteppingHost >> newHostSpaceFor: aSpace [
 ]
 
 { #category : #'host - testing' }
-BlMorphicSteppingHost >> wait: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
+BlMorphicSteppingHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
 	MorphicUIManager uiProcess == Processor activeProcess
 		ifTrue: [
-			[ aBlock value ] whileTrue: [
+			[ aBlock value ] whileFalse: [
 				aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
 				self currentWorld doOneCycle.
 				self universe pulse.
@@ -79,7 +79,7 @@ BlMorphicSteppingHost >> wait: aBlock timeout: aTimeoutBlock onCompletion: compl
 			^ completionBlock value ]
 		ifFalse: [
 			^ super
-				wait: aBlock
+				waitUntil: aBlock
 				timeout: aTimeoutBlock
 				onCompletion: completionBlock
 				onTimeout: timeoutBlock ]

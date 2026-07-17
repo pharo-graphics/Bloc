@@ -186,14 +186,14 @@ BlHost >> universe [
 ]
 
 { #category : #'host - testing' }
-BlHost >> wait: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
-	"Evaluate aBlock repeatedly until it answers false. If aTimeoutBlock answers true before aBlock answers false, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
+BlHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
+	"Evaluate aBlock repeatedly until it answers true. If aTimeoutBlock answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
 	| aSemaphore |
 	aSemaphore := Semaphore new.
 	self universe registerPulseSemaphore: aSemaphore.
 	
 	[
-		[ aBlock value ] whileTrue: [
+		[ aBlock value ] whileFalse: [
 			aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
 			(self isRunning and: [ self shouldSafetyPulse not ])
 				ifTrue: [
@@ -214,11 +214,11 @@ BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock [
 	| finished |
 	finished := false.
 	self
-		wait: [ 
+		waitUntil: [ 
 			(aSpace hostSpace isNil or: [ aSpace isOpened not ]) ifTrue: [
 				self universe pulse.
 				aSpace pulse ].
-			aSpace hasPendingWork ]
+			aSpace hasPendingWork not ]
 		timeout: aTimeoutBlock
 		onCompletion: [ finished := true ]
 		onTimeout: [ finished := false ].
@@ -230,14 +230,14 @@ BlHost >> waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock
 	| firstTime |
 	firstTime := true.
 	self
-		wait: [
-			| shouldWait |
+		waitUntil: [
+			| isDone |
 			(aSpace hostSpace isNil or: [ aSpace isOpened not ]) ifTrue: [
 				self universe pulse.
 				aSpace pulse ].
-			shouldWait := firstTime or: [ aSpace hasPendingWork ].
+			isDone := firstTime not and: [ aSpace hasPendingWork not ].
 			firstTime := false.
-			shouldWait ]
+			isDone ]
 		timeout: aTimeoutBlock
 		onCompletion: [ ]
 		onTimeout: [ ]
@@ -246,11 +246,11 @@ BlHost >> waitEventsProcessedAndEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock
 { #category : #'host - testing' }
 BlHost >> waitShownAndEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock [
 	self
-		wait: [ 
+		waitUntil: [ 
 			aSpace hostSpace ifNil: [
 				self universe pulse.
 				aSpace pulse ].
-			aSpace isShown not ]
+			aSpace isShown ]
 		timeout: aTimeoutBlock
 		onCompletion: [ ]
 		onTimeout: [ ].
