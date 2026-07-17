@@ -30,10 +30,10 @@ BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDuration [
 	self
-		deprecated: 'Use space host waitShownAndEmptyTaskQueueFor: space timeout: aDuration instead'
+		deprecated: 'Use aSpace waitUntilShown instead'
 		on: '2026-07-14'
 		in: 'Bloc'.
-	^ aSpace host waitShownAndEmptyTaskQueueFor: aSpace timeout: aDuration
+	^ aSpace waitUntilShown
 ]
 
 { #category : #'*Bloc-Simulation' }
