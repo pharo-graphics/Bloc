@@ -11,6 +11,11 @@ Class {
 }
 
 { #category : #testing }
+BlSpaceFramePhase >> hasPendingWorkIn: aSpace [
+	^ false
+]
+
+{ #category : #testing }
 BlSpaceFramePhase >> isDrawingPhase [
 	^ false
 ]
@@ -45,9 +50,4 @@ BlSpaceFramePhase >> name [
 { #category : #actions }
 BlSpaceFramePhase >> runOn: aSpace [
 	self subclassResponsibility
-]
-
-{ #category : #testing }
-BlSpaceFramePhase >> hasPendingWorkIn: aSpace [
-	^ false
 ]

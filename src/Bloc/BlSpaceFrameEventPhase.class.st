@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #testing }
+BlSpaceFrameEventPhase >> hasPendingWorkIn: aSpace [
+
+	^ aSpace hostSpaceDo: [ :hs | hs hasEvents ] ifAbsent: [ false ]
+]
+
+{ #category : #testing }
 BlSpaceFrameEventPhase >> isEventPhase [
 	^ true
 ]

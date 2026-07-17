@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #testing }
+BlSpaceFrameLayoutPhase >> hasPendingWorkIn: aSpace [
+	^ aSpace isLayoutRequested
+]
+
+{ #category : #testing }
 BlSpaceFrameLayoutPhase >> isLayoutPhase [
 	^ true
 ]
@@ -20,9 +25,4 @@ BlSpaceFrameLayoutPhase >> runOn: aSpace [
 	aSpace
 		dispatchTimeEvent: BlSpaceLayoutEndEvent
 		during: [ aSpace doLayout ]
-]
-
-{ #category : #testing }
-BlSpaceFrameLayoutPhase >> hasPendingWorkIn: aSpace [
-	^ aSpace isLayoutRequested
 ]

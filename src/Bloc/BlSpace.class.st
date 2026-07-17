@@ -408,6 +408,11 @@ BlSpace >> elementsNeedingPaint [
 	^ elementsNeedingPaint
 ]
 
+{ #category : #'host space - accessing' }
+BlSpace >> enqueueEvent: aBlEvent [
+	self hostSpaceDo: [ :aHostSpace | aHostSpace enqueueEvent: aBlEvent ]
+]
+
 { #category : #'api - tasks' }
 BlSpace >> enqueueTask: aBlTask [
 	aBlTask onEnqueued: self.
@@ -591,24 +596,6 @@ BlSpace >> hasLayoutError [
 ]
 
 { #category : #testing }
-BlSpace >> hasPendingTasks [
-	"Return true if I have tasks in the queue that are considered pending."
-
-	^ self taskQueue tasks anySatisfy: [ :eachTask | eachTask isPending ]
-]
-
-{ #category : #testing }
-BlSpace >> hasPendingWork [
-	"Return true if there are deferred actions in my universe, if a pulse was explicitly requested
-	(e.g. by an injected event, a skin update request, or a layout invalidation), or if any of my
-	frame's phases has pending work (tasks, layout, Toplo skin passes, etc.)."
-
-	self universe hasDeferredActions ifTrue: [ ^ true ].
-	self isPulseRequested ifTrue: [ ^ true ].
-	^ self frame phases anySatisfy: [ :eachPhase | eachPhase hasPendingWorkIn: self ]
-]
-
-{ #category : #testing }
 BlSpace >> hasOwner [
 
 	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/715'.
@@ -622,6 +609,21 @@ BlSpace >> hasParent: anElement [
 	self deprecated: 'See https://github.com/pharo-graphics/Bloc/issues/715'.
 
 	^ false
+]
+
+{ #category : #testing }
+BlSpace >> hasPendingTasks [
+	"Return true if I have tasks in the queue that are considered pending."
+
+	^ self taskQueue tasks anySatisfy: [ :eachTask | eachTask isPending ]
+]
+
+{ #category : #testing }
+BlSpace >> hasPendingWork [
+	"Return true if there are deferred actions in my universe, or if any of my frame's phases has pending work."
+
+	self universe hasDeferredActions ifTrue: [ ^ true ].
+	^ self frame phases anySatisfy: [ :eachPhase | eachPhase hasPendingWorkIn: self ]
 ]
 
 { #category : #'window - properties' }
@@ -696,12 +698,6 @@ BlSpace >> hostSpaceDo: aBlock ifAbsent: anAbsentBlock [
 
 	^ aBlock cull: self hostSpace
 ]
-
-{ #category : #'host space - accessing' }
-BlSpace >> enqueueEvent: aBlEvent [
-	self hostSpaceDo: [ :aHostSpace | aHostSpace enqueueEvent: aBlEvent ]
-]
-
 
 { #category : #'window - properties' }
 BlSpace >> icon [

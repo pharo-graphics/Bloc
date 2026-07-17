@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #testing }
+BlSpaceFrameTaskPhase >> hasPendingWorkIn: aSpace [
+	^ aSpace hasPendingTasks
+]
+
+{ #category : #testing }
 BlSpaceFrameTaskPhase >> isTaskPhase [
 	^ true
 ]
@@ -21,9 +26,4 @@ BlSpaceFrameTaskPhase >> runOn: aSpace [
 	aSpace
 		dispatchTimeEvent: BlSpaceTasksEndEvent
 		during: [ aSpace runTasks ]
-]
-
-{ #category : #testing }
-BlSpaceFrameTaskPhase >> hasPendingWorkIn: aSpace [
-	^ aSpace hasPendingTasks
 ]
