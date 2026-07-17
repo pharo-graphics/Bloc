@@ -599,9 +599,12 @@ BlSpace >> hasPendingTasks [
 
 { #category : #testing }
 BlSpace >> hasPendingWork [
-	"Return true if there are deferred actions in my universe, or if any of my frame's phases has pending work."
+	"Return true if there are deferred actions in my universe, if a pulse was explicitly requested
+	(e.g. by an injected event, a skin update request, or a layout invalidation), or if any of my
+	frame's phases has pending work (tasks, layout, Toplo skin passes, etc.)."
 
 	self universe hasDeferredActions ifTrue: [ ^ true ].
+	self isPulseRequested ifTrue: [ ^ true ].
 	^ self frame phases anySatisfy: [ :eachPhase | eachPhase hasPendingWorkIn: self ]
 ]
 
