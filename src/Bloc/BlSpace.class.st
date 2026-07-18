@@ -1331,13 +1331,6 @@ BlSpace >> waitPulseForMilliseconds: aNumber [
 	^ self waitPulseFor: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
 ]
 
-{ #category : #pulse }
-BlSpace >> waitUntilShown [
-	"Wait until this space is shown and then until all pending work is processed."
-
-	self host waitShownAndEmptyTaskQueueFor: self timeout: [ false ]
-]
-
 { #category : #'window - properties' }
 BlSpace >> width [
 	<return: #Number>

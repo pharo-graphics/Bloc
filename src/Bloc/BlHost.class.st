@@ -186,6 +186,22 @@ BlHost >> universe [
 ]
 
 { #category : #'host - testing' }
+BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock [
+	| finished |
+	finished := false.
+	self
+		waitUntil: [ 
+			(aSpace hostSpace isNil or: [ aSpace isOpened not ]) ifTrue: [
+				self universe pulse.
+				aSpace pulse ].
+			aSpace hasPendingWork not ]
+		timeout: aTimeoutBlock
+		onCompletion: [ finished := true ]
+		onTimeout: [ finished := false ].
+	^ finished
+]
+
+{ #category : #'host - testing' }
 BlHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
 	"Evaluate aBlock repeatedly until it answers true. If aTimeoutBlock answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
 	| aSemaphore |
@@ -207,35 +223,4 @@ BlHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock
 		self universe unregisterPulseSemaphore: aSemaphore ].
 		
 	^ completionBlock value
-]
-
-{ #category : #'host - testing' }
-BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock [
-	| finished |
-	finished := false.
-	self
-		waitUntil: [ 
-			(aSpace hostSpace isNil or: [ aSpace isOpened not ]) ifTrue: [
-				self universe pulse.
-				aSpace pulse ].
-			aSpace hasPendingWork not ]
-		timeout: aTimeoutBlock
-		onCompletion: [ finished := true ]
-		onTimeout: [ finished := false ].
-	^ finished
-]
-
-
-{ #category : #'host - testing' }
-BlHost >> waitShownAndEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock [
-	self
-		waitUntil: [ 
-			aSpace hostSpace ifNil: [
-				self universe pulse.
-				aSpace pulse ].
-			aSpace isShown ]
-		timeout: aTimeoutBlock
-		onCompletion: [ ]
-		onTimeout: [ ].
-	^ self waitEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock
 ]
