@@ -41,7 +41,7 @@ BlEventSimulator >> clickButton: aButton [
 	"Perform a click (mouse down and mouse up) at the current mouse position"
 	| aPosition |
 	aPosition := mousePosition ifNil: [ 
-		target space waitPulse.
+		target space wait.
 		mousePosition := target bounds inSpace center ].
 	self events: {
 		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
@@ -90,7 +90,7 @@ BlEventSimulator >> doubleClick [
 BlEventSimulator >> doubleClickButton: aButton [
 	| aPosition |
 	aPosition := mousePosition ifNil: [ 
-		target space waitPulse.
+		target space wait.
 		mousePosition := target bounds inSpace center ].
 	self events: {
 		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
@@ -103,7 +103,7 @@ BlEventSimulator >> doubleClickButton: aButton [
 BlEventSimulator >> dragBy: aBlVector [
 	"Simulate a drag event in the middle of target element by a vector"
 	| aPosition aDelta |
-	target space waitPulse.
+	target space wait.
 	aPosition := target bounds inSpace center.
 	aDelta := (target localBoundsToGlobal:
 		(BlBounds origin: 0.0 @ 0.0 extent: aBlVector)) extent.
@@ -120,7 +120,7 @@ BlEventSimulator >> dragByAll: aSequenceOfBlVectors [
 	"Simulate a drag in the center of target element by performing
 	mouse down, mouse move, and mouse up events in a sequence of vectors."
 	| aPosition aDelta eventsList |
-	target space waitPulse.
+	target space wait.
 	aPosition := target bounds inSpace center.
 	mousePosition := aPosition.
 	eventsList := OrderedCollection new.
@@ -180,7 +180,7 @@ BlEventSimulator >> events: aCollectionOfEvents [
 	aCollectionOfEvents do: [ :anEvent |
 		aSpace enqueueEvent: anEvent ].
 
-	aSpace waitPulseForDuration: timeout.
+	aSpace waitForDuration: timeout.
 
 ]
 
@@ -226,7 +226,7 @@ BlEventSimulator >> keyUp: aKeyboardKey [
 BlEventSimulator >> locationInside [
 	"Return a space location inside of target bounds"	
 
-	target space waitPulse.
+	target space wait.
 
 	^ target bounds inSpace bounds center
 ]
@@ -235,7 +235,7 @@ BlEventSimulator >> locationInside [
 BlEventSimulator >> locationOutside [
 	"Return a space location outside of target bounds"	
 
-	target space waitPulse.
+	target space wait.
 
 	^ target bounds inSpace bounds bottomRight + 1
 ]
@@ -262,7 +262,7 @@ BlEventSimulator >> mouseDownAt: aPoint [
 BlEventSimulator >> mouseDownButton: aButton [
 	| aPosition |
 	aPosition := mousePosition ifNil: [ 
-		target space waitPulse.
+		target space wait.
 		mousePosition := target bounds inSpace center ].
 	self events: { ((BlMouseDownEvent button: aButton) position: aPosition; yourself) }
 ]
@@ -281,7 +281,7 @@ BlEventSimulator >> mouseMoveBy: aPoint [
 	"Move the mouse by a delta relative to current position"
 	| oldPosition newPosition |
 	oldPosition := mousePosition ifNil: [ 
-		target space waitPulse.
+		target space wait.
 		target bounds inSpace center ].
 	newPosition := oldPosition + aPoint.
 	mousePosition := newPosition.
@@ -335,7 +335,7 @@ BlEventSimulator >> mouseUpAt: aPoint [
 BlEventSimulator >> mouseUpButton: aButton [
 	| aPosition |
 	aPosition := mousePosition ifNil: [ 
-		target space waitPulse.
+		target space wait.
 		mousePosition := target bounds inSpace center ].
 	self events: { ((BlMouseUpEvent button: aButton) position: aPosition; yourself) }
 ]
@@ -344,7 +344,7 @@ BlEventSimulator >> mouseUpButton: aButton [
 BlEventSimulator >> mouseWheelBy: aBlVector [
 	"Simulate a mouse wheel event in the middle of target element"
 	| aPosition aBlocEvent |
-	target space waitPulse.
+	target space wait.
 	aPosition := target bounds inSpace center.
 	mousePosition := aPosition.
 	aBlocEvent := BlMouseWheelEvent new

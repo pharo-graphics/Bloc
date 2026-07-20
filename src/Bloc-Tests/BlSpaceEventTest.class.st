@@ -38,11 +38,11 @@ BlSpaceEventTest >> testSpaceClosed [
 		do: [ count := count + 1 ].
 
 	space show.
-	self waitPulses.
+	self waits.
 	self assert: count equals: 0.
 
 	space close.
-	self waitPulses.
+	self waits.
 	self assert: count equals: 1
 ]
 
@@ -57,16 +57,16 @@ BlSpaceEventTest >> testSpaceShown [
 		do: [ count := count + 1 ].
 
 	space show.
-	self waitPulses.
+	self waits.
 	self assert: count equals: 1.
 
 	space close.
-	self waitPulses.
+	self waits.
 	self assert: count equals: 1
 ]
 
 { #category : #running }
-BlSpaceEventTest >> waitPulses [
+BlSpaceEventTest >> waits [
 
-	space waitPulseForMilliseconds: 50
+	space waitForMilliseconds: 50
 ]

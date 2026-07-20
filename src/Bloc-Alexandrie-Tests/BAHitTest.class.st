@@ -60,7 +60,7 @@ BAHitTest >> hitFormFor: aSymbol [
 		perform: aSymbol;
 		space.
 	aSpace show.
-	aSpace waitPulse.
+	aSpace wait.
 	aForm := self newHitFormFor: aSpace root.
 	aSpace close.
 	^ aForm

@@ -186,7 +186,7 @@ BlHost >> universe [
 ]
 
 { #category : #'host - testing' }
-BlHost >> waitEmptyTaskQueueFor: aSpace timeout: aTimeoutBlock [
+BlHost >> wait: aSpace timeout: aTimeoutBlock [
 	| finished |
 	finished := false.
 	self

@@ -40,7 +40,7 @@ BARenderTest >> actualForm [
 		perform: formSelector;
 		space.
 	aSpace show.
-	aSpace waitPulse.
+	aSpace wait.
 	aForm := aSpace root aeAsForm.
 	aSpace close.
 	^ aForm

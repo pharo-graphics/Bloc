@@ -21,21 +21,21 @@ BlSpace class >> locationOutside: anElement [
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
 	self
-		deprecated: 'Use space waitPulseForDuration: aDuration instead'
+		deprecated: 'Use space waitForDuration: aDuration instead'
 		on: '2026-07-14'
 		in: 'Bloc'.
-	^ aSpace waitPulseForDuration: aDuration
+	^ aSpace waitForDuration: aDuration
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDuration [
 
 	self
-		deprecated: 'Use aSpace waitPulseForDuration: aDuration instead'
+		deprecated: 'Use aSpace waitForDuration: aDuration instead'
 		on: '2026-07-14'
 		in: 'Bloc'.
 
-	^ aSpace waitPulseForDuration: aDuration
+	^ aSpace waitForDuration: aDuration
 ]
 
 { #category : #'*Bloc-Simulation' }
