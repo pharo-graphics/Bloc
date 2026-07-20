@@ -17,15 +17,6 @@ BlEventTest >> newBlueElement [
 ]
 
 { #category : #tests }
-BlEventTest >> putInSpace: anElement [
-	| aSpace |
-	aSpace := BlSpace new.
-	aSpace root addChild: anElement.
-	aSpace show.
-	^ aSpace
-]
-
-{ #category : #tests }
 BlEventTest >> newCustomEvent [
 
 	^ BlMockedEvent new
@@ -61,6 +52,15 @@ BlEventTest >> newRedElement [
 	^ BlElement new
 		  background: Color red;
 		  yourself
+]
+
+{ #category : #tests }
+BlEventTest >> putInSpace: anElement [
+	| aSpace |
+	aSpace := BlSpace new.
+	aSpace root addChild: anElement.
+	aSpace show.
+	^ aSpace
 ]
 
 { #category : #tests }

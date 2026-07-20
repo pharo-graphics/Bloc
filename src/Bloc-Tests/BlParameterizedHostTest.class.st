@@ -46,6 +46,12 @@ BlParameterizedHostTest >> newTestingSpace [
 ]
 
 { #category : #running }
+BlParameterizedHostTest >> runCase [
+
+	^ BlPulseLoopRequired value: false during: [ super runCase ]
+]
+
+{ #category : #running }
 BlParameterizedHostTest >> setUp [
 	super setUp.
 
@@ -66,12 +72,5 @@ BlParameterizedHostTest >> tearDown [
 { #category : #tests }
 BlParameterizedHostTest >> waitTestingSpaces [
 
-	testingSpaces do: [ :each |
-		self assert: (each waitPulseForMilliseconds: 500) ]
-]
-
-{ #category : #running }
-BlParameterizedHostTest >> runCase [
-
-	^ BlPulseLoopRequired value: false during: [ super runCase ]
+	testingSpaces do: [ :each | each waitPulse ]
 ]
