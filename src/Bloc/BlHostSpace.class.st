@@ -44,20 +44,15 @@ BlHostSpace >> enqueueEvent: aBlEvent [
 	aBlEvent isUniverseEvent
 		ifTrue: [ ^ self universe dispatchEvent: aBlEvent ].
 
-	self eventQueue nextPut: aBlEvent.
+	eventQueue nextPut: aBlEvent.
 	self space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
-]
-
-{ #category : #'host space - events' }
-BlHostSpace >> eventQueue [
-	^ eventQueue ifNil: [ eventQueue := WaitfreeQueue new ]
 ]
 
 { #category : #'host space - events' }
 BlHostSpace >> fetchedEventsDo: aBlock [
 	| theEvents |
 	theEvents := LinkedList new.
-	self eventQueue flush: [ :anEvent | theEvents add: anEvent ].
+	eventQueue flush: [ :anEvent | theEvents add: anEvent ].
 	theEvents do: aBlock
 ]
 
@@ -68,7 +63,7 @@ BlHostSpace >> generateEvents [
 
 { #category : #'host space - events' }
 BlHostSpace >> hasEvents [
-	^ self eventQueue isEmpty not
+	^ eventQueue isEmpty not
 ]
 
 { #category : #'host space - testing' }
