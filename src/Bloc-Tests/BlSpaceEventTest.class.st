@@ -23,7 +23,9 @@ BlSpaceEventTest >> setUp [
 
 { #category : #running }
 BlSpaceEventTest >> tearDown [
-	space ifNotNil: [ space close ].
+	space ifNotNil: [
+		space close.
+		space waitPendingWork ].
 	super tearDown
 ]
 
