@@ -1300,35 +1300,35 @@ BlSpace >> userData [
 ]
 
 { #category : #pulse }
-BlSpace >> wait [
+BlSpace >> waitPendingWork [
 	"Wait until there is no more pending work (deferred actions, tasks, layout, or events)."
 
-	^ self waitFor: [ false ]
+	^ self waitPendingWorkFor: [ false ]
 ]
 
 { #category : #pulse }
-BlSpace >> waitFor: aTimeoutBlock [
+BlSpace >> waitPendingWorkFor: aTimeoutBlock [
 	"Wait for this space task queue to be empty until a given timeout block evaluates to true"
 
-	^ self host wait: self timeout: aTimeoutBlock
+	^ self host waitPendingWorkFor: self timeout: aTimeoutBlock
 ]
 
 { #category : #pulse }
-BlSpace >> waitForDuration: aDuration [
+BlSpace >> waitPendingWorkForDuration: aDuration [
 	"Wait for this space task queue to be empty until a given duration has passed.
-	Forwards to #waitForMilliseconds: converting the duration to milliseconds."
+	Forwards to #waitPendingWorkForMilliseconds: converting the duration to milliseconds."
 
-	^ self waitForMilliseconds: aDuration asMilliSeconds
+	^ self waitPendingWorkForMilliseconds: aDuration asMilliSeconds
 ]
 
 { #category : #pulse }
-BlSpace >> waitForMilliseconds: aNumber [
+BlSpace >> waitPendingWorkForMilliseconds: aNumber [
 	"Wait for this space task queue to be empty until a given number of milliseconds has passed.
 	Uses #nowInUTCMicroseconds for a monotonic, high-resolution deadline to avoid clock-skew issues."
 
 	| deadlineInMicroseconds |
 	deadlineInMicroseconds := time nowInUTCMicroseconds + (aNumber * 1000).
-	^ self waitFor: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
+	^ self waitPendingWorkFor: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
 ]
 
 { #category : #'window - properties' }

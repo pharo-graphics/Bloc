@@ -72,5 +72,5 @@ BlParameterizedHostTest >> tearDown [
 { #category : #tests }
 BlParameterizedHostTest >> waitTestingSpaces [
 
-	testingSpaces do: [ :each | each wait ]
+	testingSpaces do: [ :each | each waitPendingWork ]
 ]

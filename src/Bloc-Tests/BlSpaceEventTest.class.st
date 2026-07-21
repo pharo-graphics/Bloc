@@ -68,5 +68,5 @@ BlSpaceEventTest >> testSpaceShown [
 { #category : #running }
 BlSpaceEventTest >> waitBriefly [
 
-	space waitForMilliseconds: 50
+	space waitPendingWorkForMilliseconds: 50
 ]

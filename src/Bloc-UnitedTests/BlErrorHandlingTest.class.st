@@ -65,13 +65,13 @@ BlErrorHandlingTest >> sceneWith: aFaultyElement [
 	aSpace show.
 
 	self assert:
-		(aSpace waitForMilliseconds: 200).
+		(aSpace waitPendingWorkForMilliseconds: 200).
 
 	aSpace close.
 	aContainer removeFromParent.
 
 	self assert:
-		(aSpace waitForMilliseconds: 200).
+		(aSpace waitPendingWorkForMilliseconds: 200).
 
 	^ aContainer
 ]

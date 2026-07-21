@@ -16,7 +16,7 @@ BlEventSimulatorTest >> setUp [
 	element extent: 100 @ 100.
 	element focusability: BlFocusability block.
 	space root addChild: element.
-	space wait
+	space waitPendingWork
 ]
 
 { #category : #tests }

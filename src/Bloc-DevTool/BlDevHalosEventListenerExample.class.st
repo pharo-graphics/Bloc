@@ -19,7 +19,7 @@ BlDevHalosEventListenerExample >> activatedHalos [
 	aSpace root addChild: aContainer.
 	aSpace show.
 	aSpace addHalosListener.
-	aSpace wait.
+	aSpace waitPendingWork.
 
 	self assert: aSpace root children size equals: 1.
 
