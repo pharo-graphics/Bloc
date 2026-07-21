@@ -5,6 +5,9 @@ I have been automatically converted and probably manually tweaked from BlEventEx
 Class {
 	#name : #BlEventTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'spaces'
+	],
 	#category : #'Bloc-Tests-Events'
 }
 
@@ -60,7 +63,20 @@ BlEventTest >> putInSpace: anElement [
 	aSpace := BlSpace new.
 	aSpace root addChild: anElement.
 	aSpace show.
+	spaces ifNil: [ spaces := OrderedCollection new ].
+	spaces add: aSpace.
 	^ aSpace
+]
+
+{ #category : #running }
+BlEventTest >> tearDown [
+
+	spaces ifNotNil: [
+		spaces do: [ :each | 
+			each close.
+			each waitPendingWork ].
+		spaces := nil ].
+	super tearDown
 ]
 
 { #category : #tests }
