@@ -7,8 +7,7 @@ Class {
 		'mousePosition',
 		'modifiers',
 		'pressedKeys',
-		'shouldFocus',
-		'timeout'
+		'shouldFocus'
 	],
 	#category : #'Bloc-Simulation'
 }
@@ -180,8 +179,7 @@ BlEventSimulator >> events: aCollectionOfEvents [
 	aCollectionOfEvents do: [ :anEvent |
 		aSpace enqueueEvent: anEvent ].
 
-	aSpace waitPendingWorkForDuration: timeout.
-
+	aSpace waitPendingWork
 ]
 
 { #category : #initialization }
@@ -189,8 +187,7 @@ BlEventSimulator >> initialize [
 	super initialize.
 	modifiers := BlKeyModifiers new.
 	pressedKeys := Set new.
-	shouldFocus := false.
-	timeout := 500 milliSeconds
+	shouldFocus := false
 ]
 
 { #category : #testing }
@@ -387,14 +384,4 @@ BlEventSimulator >> target [
 BlEventSimulator >> textInput: aString [
 	"Simulate a text input event"
 	self event: (BlTextInputEvent new text: aString; yourself)
-]
-
-{ #category : #accessing }
-BlEventSimulator >> timeout [
-	^ timeout
-]
-
-{ #category : #accessing }
-BlEventSimulator >> timeout: aDuration [
-	timeout := aDuration
 ]
