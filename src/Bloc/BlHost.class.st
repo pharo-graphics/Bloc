@@ -178,11 +178,6 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 	BlHostRenderer preferableClass offscreenMeasureTextParagraph: aBlTextParagraph
 ]
 
-{ #category : #'host - testing' }
-BlHost >> shouldSafetyPulse [
-	^ false
-]
-
 { #category : #'api - lifecycle' }
 BlHost >> start [
 
@@ -229,7 +224,7 @@ BlHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock
 	[
 		[ aBlock value ] whileFalse: [
 			aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
-			(self isRunning and: [ self shouldSafetyPulse not ])
+			self isRunning
 				ifTrue: [
 					"Reactive wait: Wakes up instantly on the next pulse"
 					aSemaphore waitTimeoutMilliseconds: 50 ]
