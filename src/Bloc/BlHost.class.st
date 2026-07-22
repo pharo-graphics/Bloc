@@ -152,11 +152,6 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 ]
 
 { #category : #'host - testing' }
-BlHost >> runOneCycle [
-	self universe pulse
-]
-
-{ #category : #'host - testing' }
 BlHost >> shouldSafetyPulse [
 	^ false
 ]
@@ -217,7 +212,7 @@ BlHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock
 					aSemaphore waitTimeoutMilliseconds: 50 ]
 				ifFalse: [
 					"No background loop, or we are on the UI process itself: manually run cycle and yield a tiny bit"
-					self runOneCycle.
+					self universe pulse.
 					(Delay forMilliseconds: 1) wait ] ]
 	] ensure: [
 		self universe unregisterPulseSemaphore: aSemaphore ].
