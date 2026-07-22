@@ -7,8 +7,11 @@ A Host can be compared to a driver that communicates with the native multimedia 
 Class {
 	#name : #BlHost,
 	#superclass : #Object,
-	#classInstVars : [
+	#instVars : [
 		'universe'
+	],
+	#classInstVars : [
+		'default'
 	],
 	#classVars : [
 		'PreferableHostClass'
@@ -19,7 +22,12 @@ Class {
 { #category : #testing }
 BlHost class >> hasUniverse [
 
-	^ universe isNotNil
+	^ self isSingleton and: [ self default hasUniverse ]
+]
+
+{ #category : #testing }
+BlHost class >> isSingleton [
+	^ false
 ]
 
 { #category : #'class initialization' }
@@ -31,23 +39,23 @@ BlHost class >> initialize [
 { #category : #'system startup' }
 BlHost class >> startUp [
 	self allSubclasses do: [ :eachHostClass |
-		eachHostClass hasUniverse ifTrue: [ eachHostClass universe startUniverse ] ]
+		eachHostClass hasUniverse ifTrue: [ eachHostClass default universe startUniverse ] ]
 ]
 
 { #category : #'system startup' }
 BlHost class >> shutDown [
 	self allSubclasses do: [ :eachHostClass |
-		eachHostClass hasUniverse ifTrue: [ eachHostClass universe stopUniverse ] ]
+		eachHostClass hasUniverse ifTrue: [ eachHostClass default universe stopUniverse ] ]
 ]
 
 { #category : #cleanup }
 BlHost class >> cleanUp [
-	universe := nil
 ]
 
 { #category : #'api - lifecycle' }
 BlHost class >> isRunning [
-	^ self subclassResponsibility
+	self deprecated: 'Use default isRunning instead'.
+	^ self default isRunning
 ]
 
 { #category : #'driver selection' }
@@ -120,14 +128,14 @@ BlHost class >> settingsOn: aBuilder [
 
 { #category : #'api - lifecycle' }
 BlHost class >> start [
-
-	self subclassResponsibility
+	self deprecated: 'Use default start instead'.
+	self default start
 ]
 
 { #category : #'api - lifecycle' }
 BlHost class >> stop [
-
-	self subclassResponsibility
+	self deprecated: 'Use default stop instead'.
+	self default stop
 ]
 
 { #category : #'driver selection' }
@@ -142,13 +150,16 @@ BlHost class >> supportedHostClasses [
 { #category : #'api - ui process' }
 BlHost class >> uiProcessDo: aBlock [
 	"Evaluate aBlock with the running UI Process of this host if any"
+	self deprecated: 'Use default uiProcessDo: instead'.
+	self default uiProcessDo: aBlock
 ]
 
 { #category : #'host space - accessing' }
 BlHost class >> universe [
 	"Lazy initialization is preferred to avoid instantiating unused universes and background loop processes for host types that are not used in a given session."
 
-	^ universe ifNil: [ universe := BlParallelUniverse new hostClass: self; yourself ]
+	self deprecated: 'Use default universe instead'.
+	^ self default universe
 ]
 
 { #category : #'api - lifecycle' }
@@ -198,8 +209,14 @@ BlHost >> uiProcessDo: aBlock [
 
 { #category : #'host space - accessing' }
 BlHost >> universe [
-	
-	^ self class universe
+
+	^ universe ifNil: [ universe := BlParallelUniverse new hostClass: self class; yourself ]
+]
+
+{ #category : #testing }
+BlHost >> hasUniverse [
+
+	^ universe isNotNil
 ]
 
 { #category : #'host - testing' }
