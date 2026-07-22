@@ -7,6 +7,9 @@ A Host can be compared to a driver that communicates with the native multimedia 
 Class {
 	#name : #BlHost,
 	#superclass : #Object,
+	#classInstVars : [
+		'universe'
+	],
 	#classVars : [
 		'PreferableHostClass'
 	],
@@ -16,7 +19,30 @@ Class {
 { #category : #testing }
 BlHost class >> hasUniverse [
 
-	^ BlParallelUniverse existsForHost: self
+	^ universe isNotNil
+]
+
+{ #category : #'class initialization' }
+BlHost class >> initialize [
+
+	SessionManager default registerGuiClassNamed: self name
+]
+
+{ #category : #'system startup' }
+BlHost class >> startUp [
+	self allSubclasses do: [ :eachHostClass |
+		eachHostClass hasUniverse ifTrue: [ eachHostClass universe startUniverse ] ]
+]
+
+{ #category : #'system startup' }
+BlHost class >> shutDown [
+	self allSubclasses do: [ :eachHostClass |
+		eachHostClass hasUniverse ifTrue: [ eachHostClass universe stopUniverse ] ]
+]
+
+{ #category : #cleanup }
+BlHost class >> cleanUp [
+	universe := nil
 ]
 
 { #category : #'api - lifecycle' }
@@ -120,8 +146,9 @@ BlHost class >> uiProcessDo: aBlock [
 
 { #category : #'host space - accessing' }
 BlHost class >> universe [
+	"Lazy initialization is preferred to avoid instantiating unused universes and background loop processes for host types that are not used in a given session."
 
-	^ BlParallelUniverse forHost: self
+	^ universe ifNil: [ universe := BlParallelUniverse new hostClass: self; yourself ]
 ]
 
 { #category : #'api - lifecycle' }
@@ -185,11 +212,7 @@ BlHost >> waitPendingWorkFor: aSpace timeout: aTimeoutBlock [
 	| finished |
 	finished := false.
 	self
-		waitUntil: [ 
-			(aSpace hostSpace isNil or: [ aSpace isOpened not ]) ifTrue: [
-				self universe pulse.
-				aSpace pulse ].
-			aSpace hasPendingWork not ]
+		waitUntil: [ aSpace hasPendingWork not ]
 		timeout: aTimeoutBlock
 		onCompletion: [ finished := true ]
 		onTimeout: [ finished := false ].

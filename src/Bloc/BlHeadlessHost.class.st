@@ -5,22 +5,16 @@ I am a mocked host that looks like real but does not create any windows
 Class {
 	#name : #BlHeadlessHost,
 	#superclass : #BlHost,
-	#classVars : [
-		'isRunning'
+	#classInstVars : [
+		'pulseLoop'
 	],
 	#category : #'Bloc-Universe - Host Headless'
 }
 
-{ #category : #'class initialization' }
-BlHeadlessHost class >> initialize [
-
-	isRunning := false
-]
-
 { #category : #'api - lifecycle' }
 BlHeadlessHost class >> isRunning [
 
-	^ isRunning
+	^ self pulseLoop isRunning
 ]
 
 { #category : #printing }
@@ -37,15 +31,46 @@ BlHeadlessHost class >> priority [
 ]
 
 { #category : #'api - lifecycle' }
+BlHeadlessHost class >> pulsePeriod [
+
+	^ self pulseLoop pulsePeriod
+]
+
+{ #category : #'api - lifecycle' }
+BlHeadlessHost class >> pulsePeriod: aDuration [
+
+	self pulseLoop pulsePeriod: aDuration
+]
+
+{ #category : #'api - lifecycle' }
 BlHeadlessHost class >> start [
 
-	isRunning := true
+	self pulseLoop start
 ]
 
 { #category : #'api - lifecycle' }
 BlHeadlessHost class >> stop [
 
-	isRunning := false
+	self pulseLoop stop
+]
+
+{ #category : #'api - ui process' }
+BlHeadlessHost class >> uiProcessDo: aBlock [
+	"Evaluate aBlock with the running UI Process of this host if any"
+
+	self pulseLoop loopProcess ifNotNil: aBlock
+]
+
+{ #category : #accessing }
+BlHeadlessHost class >> pulseLoop [
+
+	^ pulseLoop ifNil: [ pulseLoop := BlHostPulseLoop forHost: self ]
+]
+
+{ #category : #cleanup }
+BlHeadlessHost class >> cleanUp [
+	super cleanUp.
+	pulseLoop := nil
 ]
 
 { #category : #'host - api' }
@@ -59,9 +84,4 @@ BlHeadlessHost >> newHostSpaceFor: aSpace [
 		windowExtent: aSpace extent;
 		canvasExtent: aSpace extent;
 		yourself
-]
-
-{ #category : #'host - testing' }
-BlHeadlessHost >> shouldSafetyPulse [
-	^ true
 ]

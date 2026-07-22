@@ -13,63 +13,8 @@ Class {
 		'pulseSemaphores',
 		'pulseSemaphoresMutex'
 	],
-	#classVars : [
-		'Universes',
-		'UniversesMutex'
-	],
 	#category : #'Bloc-Universe - Parallel'
 }
-
-{ #category : #accessing }
-BlParallelUniverse class >> all [
-	"Return a collection with all the registered instances"
-	
-	^ Universes
-]
-
-{ #category : #'instance creation' }
-BlParallelUniverse class >> existsForHost: aHostClass [
-
-	^ UniversesMutex critical: [
-		Universes
-			detect: [ :eachUniverse | eachUniverse hostClass = aHostClass ]
-			ifFound: [ true ]
-			ifNone: [ false ] ]
-]
-
-{ #category : #'instance creation' }
-BlParallelUniverse class >> forHost: aHostClass [
-
-	^ UniversesMutex critical: [
-		Universes
-			detect: [ :eachUniverse | eachUniverse hostClass = aHostClass ]
-			ifNone: [
-				| aUniverse |
-				aUniverse := self new hostClass: aHostClass; yourself.
-				Universes := Universes copyWith: aUniverse.
-				aUniverse ] ]
-]
-
-{ #category : #'class initialization' }
-BlParallelUniverse class >> initialize [
-
-	Universes := #().
-	UniversesMutex := Mutex new.
-	
-	SessionManager default registerGuiClassNamed: self name
-]
-
-{ #category : #'system startup' }
-BlParallelUniverse class >> shutDown [ 
-
-	self all do: [ :anUniverse | anUniverse stopUniverse ]
-]
-
-{ #category : #'system startup' }
-BlParallelUniverse class >> startUp [ 
-
-	self all do: [ :anUniverse | anUniverse startUniverse ]
-]
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> attachSpace: aSpace [
