@@ -3,18 +3,9 @@ I am a host that opens spaces as OSWindow SDL2 windows.
 "
 Class {
 	#name : #BlOSWindowSDL2Host,
-	#superclass : #BlHost,
-	#classInstVars : [
-		'pulseLoop'
-	],
+	#superclass : #BlPulseLoopHost,
 	#category : #'BlocHost-OSWindow-SDL2'
 }
-
-{ #category : #'api - lifecycle' }
-BlOSWindowSDL2Host class >> isRunning [
-
-	^ self pulseLoop isRunning
-]
 
 { #category : #'driver selection' }
 BlOSWindowSDL2Host class >> isSupported [
@@ -32,49 +23,6 @@ BlOSWindowSDL2Host class >> label [
 BlOSWindowSDL2Host class >> priority [
 	
 	^ 10
-]
-
-{ #category : #'api - lifecycle' }
-BlOSWindowSDL2Host class >> pulsePeriod [
-
-	^ self pulseLoop pulsePeriod
-]
-
-{ #category : #'api - lifecycle' }
-BlOSWindowSDL2Host class >> pulsePeriod: aDuration [
-
-	self pulseLoop pulsePeriod: aDuration
-]
-
-{ #category : #'api - lifecycle' }
-BlOSWindowSDL2Host class >> start [
-
-	self pulseLoop start
-]
-
-{ #category : #'api - lifecycle' }
-BlOSWindowSDL2Host class >> stop [
-
-	self pulseLoop stop
-]
-
-{ #category : #'api - ui process' }
-BlOSWindowSDL2Host class >> uiProcessDo: aBlock [
-	"Evaluate aBlock with the running UI Process of this host if any"
-	
-	self pulseLoop loopProcess ifNotNil: aBlock
-]
-
-{ #category : #accessing }
-BlOSWindowSDL2Host class >> pulseLoop [
-
-	^ pulseLoop ifNil: [ pulseLoop := BlHostPulseLoop forHost: self ]
-]
-
-{ #category : #cleanup }
-BlOSWindowSDL2Host class >> cleanUp [
-	super cleanUp.
-	pulseLoop := nil
 ]
 
 { #category : #initialization }
