@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #'api - lifecycle' }
-BlMorphicSteppingHost class >> delete [
+BlMorphicSteppingHost >> delete [
 	"Required to be polymorphic with Morph.
 	See: https://github.com/pharo-graphics/Bloc/issues/785"
 
@@ -16,19 +16,19 @@ BlMorphicSteppingHost class >> delete [
 ]
 
 { #category : #'api - lifecycle' }
-BlMorphicSteppingHost class >> isRunning [
+BlMorphicSteppingHost >> isRunning [
 
 	^ self currentWorld isStepping: self
 ]
 
 { #category : #'private - stepping' }
-BlMorphicSteppingHost class >> shouldGetStepsFrom: aWorld [
+BlMorphicSteppingHost >> shouldGetStepsFrom: aWorld [
 
 	^ true
 ]
 
 { #category : #'api - lifecycle' }
-BlMorphicSteppingHost class >> start [
+BlMorphicSteppingHost >> start [
 
 	self currentWorld
 		startStepping: self
@@ -39,7 +39,7 @@ BlMorphicSteppingHost class >> start [
 ]
 
 { #category : #'private - stepping' }
-BlMorphicSteppingHost class >> step [
+BlMorphicSteppingHost >> step [
 
 	[ self universe pulse ]
 		on: Exception
@@ -49,13 +49,13 @@ BlMorphicSteppingHost class >> step [
 ]
 
 { #category : #'api - lifecycle' }
-BlMorphicSteppingHost class >> stop [
+BlMorphicSteppingHost >> stop [
 
 	self currentWorld stopStepping: self
 ]
 
 { #category : #'api - ui process' }
-BlMorphicSteppingHost class >> uiProcessDo: aBlock [
+BlMorphicSteppingHost >> uiProcessDo: aBlock [
 	"Evaluate aBlock with the running UI Process of this host if any"
 
 	UIManager default uiProcess ifNotNil: aBlock
