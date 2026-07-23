@@ -16,21 +16,6 @@ BlPulseLoopHost class >> isSingleton [
 	^ true
 ]
 
-{ #category : #accessing }
-BlPulseLoopHost class >> default [
-	^ default ifNil: [ default := self basicNew initialize; yourself ]
-]
-
-{ #category : #'instance creation' }
-BlPulseLoopHost class >> new [
-	^ self default
-]
-
-{ #category : #cleanup }
-BlPulseLoopHost class >> cleanUp [
-	default := nil
-]
-
 { #category : #initialization }
 BlPulseLoopHost >> initialize [
 	super initialize.

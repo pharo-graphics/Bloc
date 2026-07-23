@@ -12,20 +12,7 @@ BlMorphicWindowHost class >> isSingleton [
 	^ true
 ]
 
-{ #category : #accessing }
-BlMorphicWindowHost class >> default [
-	^ default ifNil: [ default := self basicNew initialize; yourself ]
-]
 
-{ #category : #'instance creation' }
-BlMorphicWindowHost class >> new [
-	^ self default
-]
-
-{ #category : #cleanup }
-BlMorphicWindowHost class >> cleanUp [
-	default := nil
-]
 
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> isSupported [
