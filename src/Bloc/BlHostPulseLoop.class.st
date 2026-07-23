@@ -12,7 +12,7 @@ Class {
 	#name : #BlHostPulseLoop,
 	#superclass : #Object,
 	#instVars : [
-		'hostClass',
+		'host',
 		'loopProcess',
 		'pulsePeriodMS',
 		'msToWaitForBackgroundProcess',
@@ -23,11 +23,11 @@ Class {
 }
 
 { #category : #'instance creation' }
-BlHostPulseLoop class >> forHost: aHostClass [
+BlHostPulseLoop class >> forHost: aHost [
 
 	^ self basicNew
 		  initialize;
-		  hostClass: aHostClass;
+		  host: aHost;
 		  yourself
 ]
 
@@ -72,15 +72,15 @@ BlHostPulseLoop >> forceStartOfUIProcess: aProces [
 ]
 
 { #category : #accessing }
-BlHostPulseLoop >> hostClass [
+BlHostPulseLoop >> host [
 
-	^ hostClass
+	^ host
 ]
 
 { #category : #accessing }
-BlHostPulseLoop >> hostClass: aHostClass [
+BlHostPulseLoop >> host: aHost [
 
-	hostClass := aHostClass
+	host := aHost
 ]
 
 { #category : #initialization }
@@ -116,7 +116,7 @@ BlHostPulseLoop >> loopIteration [
 
 	[
 		pulseStartMS := Time millisecondClockValue.
-		universe := hostClass universe.
+		universe := host universe.
 		universe pulse.
 		pulseDurationMS := Time millisecondClockValue - pulseStartMS.
 		self waitUntilNextPulse. ]
