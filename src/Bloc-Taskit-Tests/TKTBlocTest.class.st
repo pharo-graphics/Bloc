@@ -49,7 +49,11 @@ TKTBlocTest >> testService [
 	service stepDelay: 50 milliSeconds.
 	service start.
 
-	0.5 seconds wait.
+	| stopTime |
+	stopTime := Time millisecondClockValue + 500.
+	[ Time millisecondClockValue < stopTime ] whileTrue: [
+		(Delay forMilliseconds: 10) wait.
+		self waitTestingSpaces ].
 	service stop waitForCompletion: 1 second.
 	
 	self assert: count > 1
