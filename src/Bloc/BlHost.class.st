@@ -88,23 +88,29 @@ BlHost class >> label [
 
 { #category : #'driver selection' }
 BlHost class >> pickHost [
-	"Answer a new instance of the preferable host."
+	"Answer the preferred host instance."
 	
-	^ self preferableHostClass new
+	^ BlHostRegistry default preferredHost
 ]
 
 { #category : #settings }
 BlHost class >> preferableHostClass [
-
-	^ PreferableHostClass ifNil: [
-		PreferableHostClass := self prioritaryHostClass ]
+	self deprecated: 'Use BlHostRegistry default preferredHost class instead'.
+	^ BlHostRegistry default preferredHost class
 ]
 
 { #category : #settings }
 BlHost class >> preferableHostClass: aHostClass [
-	
-	PreferableHostClass := aHostClass
-
+	| matchingHost |
+	self deprecated: 'Use BlHostRegistry default preferredHost: instead'.
+	matchingHost := BlHostRegistry default availableHosts 
+		detect: [ :each | each class = aHostClass ]
+		ifNone: [ 
+			| newHost |
+			newHost := aHostClass default.
+			BlHostRegistry default registerHost: newHost.
+			newHost ].
+	BlHostRegistry default preferredHost: matchingHost
 ]
 
 { #category : #'driver selection' }
@@ -128,7 +134,7 @@ BlHost class >> priority [
 
 { #category : #settings }
 BlHost class >> settingsOn: aBuilder [
-	<systemsettings>
+	"Deprecated. System settings are now managed by BlHostRegistry"
 
 	(aBuilder pickOne: #preferableHostClass)
 		parent: Bloc groupSymbolForBloc;
