@@ -8,10 +8,10 @@ Class {
 	#instVars : [
 		'deferredActions',
 		'postponedActions',
-		'hostClass',
 		'spaces',
 		'pulseSemaphores',
-		'pulseSemaphoresMutex'
+		'pulseSemaphoresMutex',
+		'host'
 	],
 	#category : #'Bloc-Universe - Parallel'
 }
@@ -156,13 +156,25 @@ BlParallelUniverse >> hasUIProcess [
 { #category : #accessing }
 BlParallelUniverse >> hostClass [
 
-	^ hostClass
+	^ host class
 ]
 
 { #category : #accessing }
 BlParallelUniverse >> hostClass: aHostClass [
 
-	hostClass := aHostClass
+	host := aHostClass default
+]
+
+{ #category : #accessing }
+BlParallelUniverse >> host [
+
+	^ host
+]
+
+{ #category : #accessing }
+BlParallelUniverse >> host: aHost [
+
+	host := aHost
 ]
 
 { #category : #initialization }
@@ -171,7 +183,7 @@ BlParallelUniverse >> initialize [
 	super initialize.
 
 	spaces := OrderedCollection new.
-	hostClass := BlHeadlessHost.
+	host := BlHeadlessHost default.
 	deferredActions := WaitfreeQueue new.
 	postponedActions := WaitfreeQueue new.
 	pulseSemaphores := OrderedCollection new.
@@ -220,7 +232,7 @@ BlParallelUniverse >> printOn: aStream [
 	super printOn: aStream.
 	aStream
 		nextPut: $(;
-		nextPutAll: hostClass asString;
+		nextPutAll: self hostClass asString;
 		nextPut: $)
 ]
 
@@ -293,7 +305,7 @@ BlParallelUniverse >> startUniverse [
 	"A universe must not be running here.
 	I am called outside of the UI loop (there is no UI loop yet)"
 
-	hostClass start.
+	host start.
 	spaces do: [ :aSpace | aSpace ensureWindowOpen ]
 ]
 
@@ -302,7 +314,7 @@ BlParallelUniverse >> stopUniverse [
 	"A universe must be running here.
 	I am called from the UI loop"
 	
-	hostClass stop.
+	host stop.
 	spaces do: [ :anSpace | anSpace rememberVisibleStatus ]
 ]
 
@@ -327,7 +339,7 @@ BlParallelUniverse >> tryToRunPostponedActions [
 { #category : #'api - ui process' }
 BlParallelUniverse >> uiProcessDo: aBlock [
 
-	hostClass uiProcessDo: aBlock
+	host uiProcessDo: aBlock
 ]
 
 { #category : #'api - pulse' }
