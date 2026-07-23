@@ -14,7 +14,7 @@ BlOSSDL3Host class >> isSupported [
 ]
 
 { #category : #printing }
-BlOSSDL3Host class >> label [
+BlOSSDL3Host >> label [
 
 	^ 'SDL3'
 ]

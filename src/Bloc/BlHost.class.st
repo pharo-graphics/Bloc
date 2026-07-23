@@ -83,7 +83,7 @@ BlHost class >> isSupported [
 BlHost class >> label [
 	"Return a human readable title to identify myself."
 
-	^ self subclassResponsibility
+	^ self default label
 ]
 
 { #category : #'driver selection' }
@@ -181,6 +181,13 @@ BlHost class >> universe [
 
 	self deprecated: 'Use default universe instead'.
 	^ self default universe
+]
+
+{ #category : #accessing }
+BlHost >> label [
+	"Return a human readable title to identify myself."
+
+	^ self subclassResponsibility
 ]
 
 { #category : #'api - lifecycle' }

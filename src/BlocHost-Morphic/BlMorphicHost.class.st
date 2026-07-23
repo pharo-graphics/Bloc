@@ -28,7 +28,7 @@ BlMorphicHost class >> isSupported [
 ]
 
 { #category : #printing }
-BlMorphicHost class >> label [
+BlMorphicHost >> label [
 
 	^ 'Morphic - Embedded'
 ]

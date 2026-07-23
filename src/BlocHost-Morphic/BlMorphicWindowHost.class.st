@@ -21,7 +21,7 @@ BlMorphicWindowHost class >> isSupported [
 ]
 
 { #category : #printing }
-BlMorphicWindowHost class >> label [
+BlMorphicWindowHost >> label [
 
 	^ 'Morphic'
 ]

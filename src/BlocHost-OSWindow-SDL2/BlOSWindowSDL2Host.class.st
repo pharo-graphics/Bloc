@@ -14,7 +14,7 @@ BlOSWindowSDL2Host class >> isSupported [
 ]
 
 { #category : #printing }
-BlOSWindowSDL2Host class >> label [
+BlOSWindowSDL2Host >> label [
 
 	^ 'SDL2'
 ]

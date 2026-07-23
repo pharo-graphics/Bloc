@@ -37,7 +37,7 @@ TKTBlocTest >> testRunner [
 { #category : #tests }
 TKTBlocTest >> testService [
 
-	| space service count |
+	| space service count stopTime |
 	space := self newTestingSpace.
 	space show.
 
@@ -49,7 +49,6 @@ TKTBlocTest >> testService [
 	service stepDelay: 50 milliSeconds.
 	service start.
 
-	| stopTime |
 	stopTime := Time millisecondClockValue + 500.
 	[ Time millisecondClockValue < stopTime ] whileTrue: [
 		(Delay forMilliseconds: 10) wait.

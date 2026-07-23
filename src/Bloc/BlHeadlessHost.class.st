@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #printing }
-BlHeadlessHost class >> label [
+BlHeadlessHost >> label [
 
 	^ 'Headless'
 ]
