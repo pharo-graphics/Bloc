@@ -561,6 +561,7 @@ BlEventTest >> testSimulateSecondaryClick [
 		addEventHandlerOn: BlSecondaryClickEvent 
 		do: [ click := click + 1 ].
 
+	self putInSpace: element.
 	BlSpace simulateSecondaryClickOn: element.
 
 	self assert: mouseDown equals: 1.
