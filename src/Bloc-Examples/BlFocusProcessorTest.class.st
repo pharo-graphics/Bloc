@@ -8,21 +8,6 @@ Class {
 }
 
 { #category : #running }
-BlFocusProcessorTest >> setUp [
-
-	super setUp.
-	scripter := BlDevScripter new.
-	scripter element: self newScripterElement
-]
-
-{ #category : #running }
-BlFocusProcessorTest >> tearDown [
-
-	scripter close.
-	super tearDown
-]
-
-{ #category : #running }
 BlFocusProcessorTest >> newElementWithFocusHandler [
 
 	| aTextStyler hasFocus isFocused aTextBuilder aLabel |
@@ -187,6 +172,21 @@ BlFocusProcessorTest >> newScripterElement [
 
 				yourself);
 			yourself
+]
+
+{ #category : #running }
+BlFocusProcessorTest >> setUp [
+
+	super setUp.
+	scripter := BlDevScripter new.
+	scripter element: self newScripterElement
+]
+
+{ #category : #running }
+BlFocusProcessorTest >> tearDown [
+
+	scripter close.
+	super tearDown
 ]
 
 { #category : #'tests - lose focus' }
@@ -996,4 +996,5 @@ BlFocusProcessorTest >> testRequestFocus06Container1 [
 			equals: [ scripter element childWithId: #'container-1' ];
 			onFocusProcessor ].
 
-	scripter syncContinue]
+	scripter syncContinue
+]

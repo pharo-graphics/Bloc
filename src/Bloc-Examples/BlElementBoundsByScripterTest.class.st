@@ -46,15 +46,6 @@ BlElementBoundsByScripterTest >> newContainer [
 ]
 
 { #category : #running }
-BlElementBoundsByScripterTest >> setUp [
-
-	super setUp.
-	scripter := BlDevScripter new.
-	scripter element: self newContainer.
-	scripter syncContinue
-]
-
-{ #category : #running }
 BlElementBoundsByScripterTest >> newParent1 [
 
 	^ BlElement new
@@ -73,6 +64,15 @@ BlElementBoundsByScripterTest >> newParent2 [
 		position: 50 @ 50;
 		border: (BlBorder paint: (Color red alpha: 0.2) width: 2);
 		yourself
+]
+
+{ #category : #running }
+BlElementBoundsByScripterTest >> setUp [
+
+	super setUp.
+	scripter := BlDevScripter new.
+	scripter element: self newContainer.
+	scripter syncContinue
 ]
 
 { #category : #running }
