@@ -126,6 +126,13 @@ BlElementTest >> setUp [
 	space host: host
 ]
 
+{ #category : #running }
+BlElementTest >> tearDown [
+
+	space close.
+	super tearDown
+]
+
 { #category : #'api - children enumeration' }
 BlElementTest >> testAllChildrenBreadthFirstDepthDo [
 

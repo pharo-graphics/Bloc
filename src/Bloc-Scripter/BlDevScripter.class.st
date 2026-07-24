@@ -148,6 +148,14 @@ BlDevScripter >> initialize [
 	space root addEventFilter: self eventHandler
 ]
 
+{ #category : #'api - lifecycle' }
+BlDevScripter >> close [
+
+	space ifNotNil: [
+		space close.
+		space := nil ]
+]
+
 { #category : #'accessing - data' }
 BlDevScripter >> model [
 	^ self userData model

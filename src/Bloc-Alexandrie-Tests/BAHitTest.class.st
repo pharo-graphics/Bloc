@@ -61,8 +61,8 @@ BAHitTest >> hitFormFor: aSymbol [
 		space.
 	aSpace show.
 	aSpace waitPendingWork.
-	aForm := self newHitFormFor: aSpace root.
-	aSpace close.
+	[ aForm := self newHitFormFor: aSpace root ]
+		ensure: [ aSpace close ].
 	^ aForm
 ]
 

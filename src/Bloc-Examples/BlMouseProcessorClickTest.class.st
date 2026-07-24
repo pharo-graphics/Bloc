@@ -25,6 +25,13 @@ BlMouseProcessorClickTest >> setUp [
 	scripter element: self newScripterElement
 ]
 
+{ #category : #running }
+BlMouseProcessorClickTest >> tearDown [
+
+	scripter close.
+	super tearDown
+]
+
 { #category : #tests }
 BlMouseProcessorClickTest >> testClick [
 

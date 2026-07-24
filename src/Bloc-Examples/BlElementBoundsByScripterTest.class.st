@@ -1,6 +1,9 @@
 Class {
 	#name : #BlElementBoundsByScripterTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'scripter'
+	],
 	#category : #'Bloc-Examples-Basic'
 }
 
@@ -43,13 +46,12 @@ BlElementBoundsByScripterTest >> newContainer [
 ]
 
 { #category : #running }
-BlElementBoundsByScripterTest >> newDevScripter [
+BlElementBoundsByScripterTest >> setUp [
 
-	| aScripter |
-	aScripter := BlDevScripter new.
-	aScripter element: self newContainer.
-
-	^ aScripter syncContinue
+	super setUp.
+	scripter := BlDevScripter new.
+	scripter element: self newContainer.
+	scripter syncContinue
 ]
 
 { #category : #running }
@@ -73,26 +75,31 @@ BlElementBoundsByScripterTest >> newParent2 [
 		yourself
 ]
 
+{ #category : #running }
+BlElementBoundsByScripterTest >> tearDown [
+
+	scripter close.
+	super tearDown
+]
+
 { #category : #tests }
 BlElementBoundsByScripterTest >> testBoundsInSpace1 [
 
-	| aScripter |
-	aScripter := self newDevScripter.
-	aScripter check
+	scripter check
 		id: #parent_1;
 		value: [ :anElement | anElement extent ]
 			equals: [ self expectedElementExtent ];
 		value: [ :anElement | anElement boundsInSpace ]
 			equals: [ self expectedElementBounds ].
 
-	aScripter check
+	scripter check
 		id: #parent_2;
 		value: [ :anElement | anElement extent ]
 			equals: [ self expectedElementExtent ];
 		value: [ :anElement | anElement boundsInSpace ]
 			equals: [ self expectedElementBounds translateBy: 50 @ 50 ].
 
-	aScripter check
+	scripter check
 		id: #child;
 		value: [ :anElement | anElement extent ]
 			equals: [ self expectedElementExtent ];
@@ -101,46 +108,44 @@ BlElementBoundsByScripterTest >> testBoundsInSpace1 [
 		value: [ :anElement | anElement positionInSpaceChangedCount ]
 			equals: [ 0 ].
 
-	^ aScripter syncContinue
+	^ scripter syncContinue
 ]
 
 { #category : #tests }
 BlElementBoundsByScripterTest >> testBoundsInSpace2 [
 
-	| aScripter |
-	aScripter := self testBoundsInSpace1.
+	self testBoundsInSpace1.
 
-	aScripter do action: [ :anElement |
+	scripter do action: [ :anElement |
 		| aChild |
 		aChild := anElement childWithId: #child.
 		aChild removeFromParent.
 		(anElement childWithId: #parent_2) addChild: aChild ].
 
-	^ aScripter syncContinue
+	^ scripter syncContinue
 ]
 
 { #category : #tests }
 BlElementBoundsByScripterTest >> testBoundsInSpace3 [
 	<expectedFailure>
 
-	| aScripter |
-	aScripter := self testBoundsInSpace2.
+	self testBoundsInSpace2.
 
-	aScripter check
+	scripter check
 		id: #parent_1;
 		value: [ :anElement | anElement extent ]
 			equals: [ self expectedElementExtent ];
 		value: [ :anElement | anElement boundsInSpace ]
 			equals: [ self expectedElementBounds ].
 
-	aScripter check
+	scripter check
 		id: #parent_2;
 		value: [ :anElement | anElement extent ]
 			equals: [ self expectedElementExtent ];
 		value: [ :anElement | anElement boundsInSpace ]
 			equals: [ self expectedElementBounds translateBy: 50 @ 50 ].
 
-	aScripter check
+	scripter check
 		id: #child;
 		value: [ :anElement | anElement extent ]
 			equals: [ self expectedElementExtent ];
@@ -149,5 +154,5 @@ BlElementBoundsByScripterTest >> testBoundsInSpace3 [
 		value: [ :anElement | anElement positionInSpaceChangedCount ]
 			equals: [ 1 ].
 
-	^ aScripter syncContinue
+	^ scripter syncContinue
 ]
