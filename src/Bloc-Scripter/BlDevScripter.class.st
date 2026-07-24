@@ -58,6 +58,14 @@ BlDevScripter >> assertSpace: aSpace [
 		description: [ 'Space must be initialized before the element ', self element printString ]
 ]
 
+{ #category : #'api - lifecycle' }
+BlDevScripter >> close [
+
+	space ifNotNil: [
+		space close.
+		space := nil ]
+]
+
 { #category : #execution }
 BlDevScripter >> continue [
 	BlDevScripterStepContinueExecutor new
@@ -146,14 +154,6 @@ BlDevScripter >> initialize [
 	space := self defaultSpace.
 	space addEventFilter: self eventHandler.
 	space root addEventFilter: self eventHandler
-]
-
-{ #category : #'api - lifecycle' }
-BlDevScripter >> close [
-
-	space ifNotNil: [
-		space close.
-		space := nil ]
 ]
 
 { #category : #'accessing - data' }

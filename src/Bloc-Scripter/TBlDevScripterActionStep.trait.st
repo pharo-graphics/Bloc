@@ -8,6 +8,11 @@ Trait {
 	#category : #'Bloc-Scripter-Scripter'
 }
 
+{ #category : #'steps - interactions' }
+TBlDevScripterActionStep >> click [
+	^ self addStep: (BlDevScripterClickStep new referenceSender)
+]
+
 { #category : #'steps - other' }
 TBlDevScripterActionStep >> do [
 	^ self addStep: BlDevScripterActionStep new referenceSender
@@ -112,11 +117,6 @@ TBlDevScripterActionStep >> substeps: aLabel do: anOneArgBlock [
 		referenceSender.
 	anOneArgBlock value: aStep.
 	^ aStep
-]
-
-{ #category : #'steps - interactions' }
-TBlDevScripterActionStep >> testClick [
-	^ self addStep: (BlDevScripterClickStep new referenceSender)
 ]
 
 { #category : #'steps - interactions' }

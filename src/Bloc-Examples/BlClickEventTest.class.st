@@ -222,7 +222,7 @@ BlClickEventTest >> testClickInHiddenChild [
 			block: [ :aChild | aChild visibility: BlVisibility hidden ];
 			onChildAt: 1.
 
-		aStep testClick onChildAt: 1.
+		aStep click onChildAt: 1.
 
 		aStep check
 			label: 'Check the click was consumed by parent';
@@ -246,7 +246,7 @@ BlClickEventTest >> testClickInHiddenChildAndVisibleClippedGrandchild [
 			block: [ :aChild | aChild visibility: BlVisibility hidden ];
 			onChildAt: 1.
 
-		aStep testClick
+		aStep click
 			onChildAt: 1;
 			onChildAt: 1.
 
@@ -272,7 +272,7 @@ BlClickEventTest >> testClickInHiddenChildAndVisibleGrandchild [
 			block: [ :aChild | aChild visibility: BlVisibility hidden ];
 			onChildAt: 1.
 
-		aStep testClick
+		aStep click
 			onChildAt: 1;
 			onChildAt: 1.
 
@@ -298,7 +298,7 @@ BlClickEventTest >> testClickInHiddenChildAndVisibleUnclippedGrandchild [
 			block: [ :aChild | aChild visibility: BlVisibility hidden ];
 			onChildAt: 1.
 
-		aStep testClick
+		aStep click
 			onChildAt: 1;
 			onChildAt: 1.
 
@@ -324,7 +324,7 @@ BlClickEventTest >> testClickInParentWithGoneChild [
 			block: [ :aChild | aChild visibility: BlVisibility gone ];
 			onChildAt: 1.
 
-		aStep testClick.
+		aStep click.
 
 		aStep check
 			label: 'Check the click was consumed by parent';
@@ -343,7 +343,7 @@ BlClickEventTest >> testClickInVisibleChild [
 	self scriptTwoElements.
 
 	scripter substeps: 'Click in visible child' do: [ :aStep |
-		aStep testClick onChildAt: 1.
+		aStep click onChildAt: 1.
 
 		aStep check
 			label: 'Check the click was consumed by child';

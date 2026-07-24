@@ -59,8 +59,8 @@ BlDevScripterTest >> testClickCheckFailure [
 	| found |
 	"Expect a click on the first child.
 	But will do a click on the space's root"
-	scripter testClick onSpaceRoot.
-	scripter check testClick onChildAt: 1.
+	scripter click onSpaceRoot.
+	scripter check click onChildAt: 1.
 
 	self should: [ scripter syncPlay ] raise: AssertionFailure.
 
@@ -79,8 +79,8 @@ BlDevScripterTest >> testClickCheckFailure [
 BlDevScripterTest >> testClickCheckSuccess [
 
 	| found |
-	scripter testClick onChildAt: 1.
-	scripter check testClick onChildAt: 1.
+	scripter click onChildAt: 1.
+	scripter check click onChildAt: 1.
 	scripter syncPlay.
 
 	found := false.
@@ -96,7 +96,7 @@ BlDevScripterTest >> testClickCheckSuccess [
 { #category : #tests }
 BlDevScripterTest >> testSyncPlayProducesClick [
 
-	scripter testClick onChildAt: 1.
+	scripter click onChildAt: 1.
 
 	self assert: scripter events isEmpty.
 	scripter syncPlay.
