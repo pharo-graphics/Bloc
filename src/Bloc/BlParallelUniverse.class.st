@@ -154,18 +154,6 @@ BlParallelUniverse >> hasUIProcess [
 ]
 
 { #category : #accessing }
-BlParallelUniverse >> hostClass [
-
-	^ host class
-]
-
-{ #category : #accessing }
-BlParallelUniverse >> hostClass: aHostClass [
-
-	host := aHostClass default
-]
-
-{ #category : #accessing }
 BlParallelUniverse >> host [
 
 	^ host
@@ -175,6 +163,18 @@ BlParallelUniverse >> host [
 BlParallelUniverse >> host: aHost [
 
 	host := aHost
+]
+
+{ #category : #accessing }
+BlParallelUniverse >> hostClass [
+
+	^ host class
+]
+
+{ #category : #accessing }
+BlParallelUniverse >> hostClass: aHostClass [
+
+	host := aHostClass default
 ]
 
 { #category : #initialization }

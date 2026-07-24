@@ -8,17 +8,17 @@ Class {
 	#category : #'Bloc-Universe - Host Headless'
 }
 
-{ #category : #printing }
-BlHeadlessHost >> label [
-
-	^ 'Headless'
-]
-
 { #category : #'driver selection' }
 BlHeadlessHost class >> priority [
 	"Infinite priority means that I am selected only if there are no other available hosts"
 
 	^ Float infinity
+]
+
+{ #category : #printing }
+BlHeadlessHost >> label [
+
+	^ 'Headless'
 ]
 
 { #category : #'host - api' }

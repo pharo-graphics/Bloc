@@ -5,24 +5,24 @@ I hold the list of available hosts and track the user's preferred host.
 Class {
 	#name : #BlHostRegistry,
 	#superclass : #Object,
-	#classInstVars : [
-		'default'
-	],
 	#instVars : [
 		'availableHosts',
 		'preferredHost'
 	],
+	#classInstVars : [
+		'default'
+	],
 	#category : #'Bloc-Universe - Host'
 }
-
-{ #category : #accessing }
-BlHostRegistry class >> default [
-	^ default ifNil: [ default := self new ]
-]
 
 { #category : #cleanup }
 BlHostRegistry class >> cleanUp [
 	default := nil
+]
+
+{ #category : #accessing }
+BlHostRegistry class >> default [
+	^ default ifNil: [ default := self new ]
 ]
 
 { #category : #settings }

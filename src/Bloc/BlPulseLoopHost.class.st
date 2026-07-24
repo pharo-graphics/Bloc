@@ -28,6 +28,12 @@ BlPulseLoopHost >> isRunning [
 	^ pulseLoop isRunning
 ]
 
+{ #category : #accessing }
+BlPulseLoopHost >> pulseLoop [
+
+	^ pulseLoop
+]
+
 { #category : #'api - lifecycle' }
 BlPulseLoopHost >> pulsePeriod [
 
@@ -57,10 +63,4 @@ BlPulseLoopHost >> uiProcessDo: aBlock [
 	"Evaluate aBlock with the running UI Process of this host if any"
 
 	pulseLoop loopProcess ifNotNil: aBlock
-]
-
-{ #category : #accessing }
-BlPulseLoopHost >> pulseLoop [
-
-	^ pulseLoop
 ]

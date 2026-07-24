@@ -10,24 +10,18 @@ Class {
 	#instVars : [
 		'universe'
 	],
-	#classInstVars : [
-		'default'
-	],
 	#classVars : [
 		'PreferableHostClass'
+	],
+	#classInstVars : [
+		'default'
 	],
 	#category : #'Bloc-Universe - Host'
 }
 
-{ #category : #testing }
-BlHost class >> hasUniverse [
-
-	^ self isSingleton and: [ self default hasUniverse ]
-]
-
-{ #category : #testing }
-BlHost class >> isSingleton [
-	^ false
+{ #category : #cleanup }
+BlHost class >> cleanUp [
+	default := nil
 ]
 
 { #category : #accessing }
@@ -37,11 +31,10 @@ BlHost class >> default [
 		ifFalse: [ self basicNew initialize; yourself ]
 ]
 
-{ #category : #'instance creation' }
-BlHost class >> new [
-	^ self isSingleton
-		ifTrue: [ self default ]
-		ifFalse: [ self basicNew initialize; yourself ]
+{ #category : #testing }
+BlHost class >> hasUniverse [
+
+	^ self isSingleton and: [ self default hasUniverse ]
 ]
 
 { #category : #'class initialization' }
@@ -50,27 +43,15 @@ BlHost class >> initialize [
 	SessionManager default registerGuiClassNamed: self name
 ]
 
-{ #category : #'system startup' }
-BlHost class >> startUp [
-	self allSubclasses do: [ :eachHostClass |
-		eachHostClass hasUniverse ifTrue: [ eachHostClass default universe startUniverse ] ]
-]
-
-{ #category : #'system startup' }
-BlHost class >> shutDown [
-	self allSubclasses do: [ :eachHostClass |
-		eachHostClass hasUniverse ifTrue: [ eachHostClass default universe stopUniverse ] ]
-]
-
-{ #category : #cleanup }
-BlHost class >> cleanUp [
-	default := nil
-]
-
 { #category : #'api - lifecycle' }
 BlHost class >> isRunning [
 	self deprecated: 'Use default isRunning instead'.
 	^ self default isRunning
+]
+
+{ #category : #testing }
+BlHost class >> isSingleton [
+	^ false
 ]
 
 { #category : #'driver selection' }
@@ -84,6 +65,13 @@ BlHost class >> label [
 	"Return a human readable title to identify myself."
 
 	^ self default label
+]
+
+{ #category : #'instance creation' }
+BlHost class >> new [
+	^ self isSingleton
+		ifTrue: [ self default ]
+		ifFalse: [ self basicNew initialize; yourself ]
 ]
 
 { #category : #'driver selection' }
@@ -147,10 +135,22 @@ BlHost class >> settingsOn: aBuilder [
 
 ]
 
+{ #category : #'system startup' }
+BlHost class >> shutDown [
+	self allSubclasses do: [ :eachHostClass |
+		eachHostClass hasUniverse ifTrue: [ eachHostClass default universe stopUniverse ] ]
+]
+
 { #category : #'api - lifecycle' }
 BlHost class >> start [
 	self deprecated: 'Use default start instead'.
 	self default start
+]
+
+{ #category : #'system startup' }
+BlHost class >> startUp [
+	self allSubclasses do: [ :eachHostClass |
+		eachHostClass hasUniverse ifTrue: [ eachHostClass default universe startUniverse ] ]
 ]
 
 { #category : #'api - lifecycle' }
@@ -183,11 +183,10 @@ BlHost class >> universe [
 	^ self default universe
 ]
 
-{ #category : #accessing }
-BlHost >> label [
-	"Return a human readable title to identify myself."
+{ #category : #testing }
+BlHost >> hasUniverse [
 
-	^ self subclassResponsibility
+	^ universe isNotNil
 ]
 
 { #category : #'api - lifecycle' }
@@ -195,6 +194,13 @@ BlHost >> isRunning [
 	"Return true if host is initialized and running"
 
 	^ self class isRunning
+]
+
+{ #category : #accessing }
+BlHost >> label [
+	"Return a human readable title to identify myself."
+
+	^ self subclassResponsibility
 ]
 
 { #category : #'host space - accessing' }
@@ -239,12 +245,6 @@ BlHost >> uiProcessDo: aBlock [
 BlHost >> universe [
 
 	^ universe ifNil: [ universe := BlParallelUniverse new host: self; yourself ]
-]
-
-{ #category : #testing }
-BlHost >> hasUniverse [
-
-	^ universe isNotNil
 ]
 
 { #category : #'host - testing' }
