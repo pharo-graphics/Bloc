@@ -153,14 +153,15 @@ BlEventSimulator >> event: anEvent [
 { #category : #simulation }
 BlEventSimulator >> events: aCollectionOfEvents [
 	"I simulate a given sequence of low level space UI events such as MouseUp/MouseDown or keyboard."
-	| aSpace |
+	| aSpace aShouldFocus |
 	self 
 		assert: [ target isAttachedToSceneGraph ]
 		description: [ 'Elements must be attached to a space before simulating events.' ].
 	
 	aSpace := target space.
 
-	shouldFocus ifTrue: [ target requestFocus ].
+	aShouldFocus := shouldFocus and: [ aCollectionOfEvents noneSatisfy: [ :each | each isKeyboard or: [ each isTextInput ] ] ].
+	aShouldFocus ifTrue: [ target requestFocus ].
 
 	aCollectionOfEvents do: [ :anEvent |
 		anEvent fillFromTime: aSpace time.
