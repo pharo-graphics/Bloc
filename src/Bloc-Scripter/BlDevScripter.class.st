@@ -62,7 +62,10 @@ BlDevScripter >> assertSpace: aSpace [
 BlDevScripter >> close [
 
 	space ifNotNil: [
+		| aUniverse |
+		aUniverse := space universe.
 		space close.
+		aUniverse tryToRunDeferredActions.
 		space := nil ]
 ]
 

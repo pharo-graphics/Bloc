@@ -16,6 +16,14 @@ Class {
 	#category : #'Bloc-Universe - Parallel'
 }
 
+{ #category : #'instance creation' }
+BlParallelUniverse class >> host: aBlHost [
+
+	^ self basicNew
+		initializeWithHost: aBlHost;
+		yourself
+]
+
 { #category : #'api - spaces' }
 BlParallelUniverse >> attachSpace: aSpace [
 	"Attach a given space to the universe. It is assumed that the space was previously detached from another Universe.
@@ -160,13 +168,9 @@ BlParallelUniverse >> host [
 ]
 
 { #category : #accessing }
-BlParallelUniverse >> host: aHost [
-
-	host := aHost
-]
-
-{ #category : #accessing }
 BlParallelUniverse >> hostClass [
+
+	self deprecated: 'Access the #host instance'.
 
 	^ host class
 ]
@@ -174,14 +178,18 @@ BlParallelUniverse >> hostClass [
 { #category : #accessing }
 BlParallelUniverse >> hostClass: aHostClass [
 
+	self deprecated: 'Set #host:'.
+
 	host := aHostClass default
 ]
 
-{ #category : #initialization }
-BlParallelUniverse >> initialize [
+{ #category : #accessing }
+BlParallelUniverse >> initializeWithHost: aHost [
 
-	super initialize.
+	self initialize.
 
+	host := aHost.
+	
 	spaces := OrderedCollection new.
 	host := BlHeadlessHost default.
 	deferredActions := WaitfreeQueue new.
@@ -232,7 +240,7 @@ BlParallelUniverse >> printOn: aStream [
 	super printOn: aStream.
 	aStream
 		nextPut: $(;
-		nextPutAll: self hostClass asString;
+		print: host;
 		nextPut: $)
 ]
 

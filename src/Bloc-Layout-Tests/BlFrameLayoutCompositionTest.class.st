@@ -23,16 +23,12 @@ BlFrameLayoutCompositionTest >> container [
 { #category : #helpers }
 BlFrameLayoutCompositionTest >> element [
 
-	<sampleInstance>
-	<demo>
 	^ BlElement new
 ]
 
 { #category : #helpers }
 BlFrameLayoutCompositionTest >> green [
 
-	<sampleInstance>
-	<demo>
 	^ self element
 		  background: Color green;
 		  border: (BlBorder paint: Color black width: 4)
@@ -48,8 +44,6 @@ BlFrameLayoutCompositionTest >> originClassName [
 { #category : #helpers }
 BlFrameLayoutCompositionTest >> red [
 
-	<sampleInstance>
-	<demo>
 	^ self element
 		  background: Color red;
 		  border: (BlBorder paint: Color lightGray width: 4)
@@ -118,8 +112,6 @@ BlFrameLayoutCompositionTest >> testExampleReverseOrder [
 { #category : #helpers }
 BlFrameLayoutCompositionTest >> yellow [
 
-	<sampleInstance>
-	<demo>
 	^ self element
 		  background: Color yellow;
 		  border: (BlBorder paint: Color darkGray width: 4)

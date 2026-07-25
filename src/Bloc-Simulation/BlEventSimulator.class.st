@@ -6,8 +6,7 @@ Class {
 		'space',
 		'mousePosition',
 		'modifiers',
-		'pressedKeys',
-		'shouldFocus'
+		'pressedKeys'
 	],
 	#category : #'Bloc-Simulation'
 }
@@ -140,8 +139,7 @@ BlEventSimulator >> dragByAll: aSequenceOfBlVectors [
 { #category : #accessing }
 BlEventSimulator >> element: anElement [
 	target := anElement.
-	anElement isAttachedToSceneGraph ifTrue: [ space := anElement space ].
-	shouldFocus := true
+	anElement isAttachedToSceneGraph ifTrue: [ space := anElement space ]
 ]
 
 { #category : #simulation }
@@ -153,15 +151,12 @@ BlEventSimulator >> event: anEvent [
 { #category : #simulation }
 BlEventSimulator >> events: aCollectionOfEvents [
 	"I simulate a given sequence of low level space UI events such as MouseUp/MouseDown or keyboard."
-	| aSpace aShouldFocus |
+	| aSpace |
 	self 
 		assert: [ target isAttachedToSceneGraph ]
 		description: [ 'Elements must be attached to a space before simulating events.' ].
 	
 	aSpace := target space.
-
-	aShouldFocus := shouldFocus and: [ aCollectionOfEvents noneSatisfy: [ :each | each isKeyboard or: [ each isTextInput ] ] ].
-	aShouldFocus ifTrue: [ target requestFocus ].
 
 	aCollectionOfEvents do: [ :anEvent |
 		anEvent fillFromTime: aSpace time.
@@ -188,7 +183,6 @@ BlEventSimulator >> initialize [
 	super initialize.
 	modifiers := BlKeyModifiers new.
 	pressedKeys := Set new.
-	shouldFocus := false
 ]
 
 { #category : #testing }
@@ -373,7 +367,6 @@ BlEventSimulator >> shiftUp [
 BlEventSimulator >> space: aSpace [
 	target := aSpace.
 	space := aSpace.
-	shouldFocus := false
 ]
 
 { #category : #accessing }

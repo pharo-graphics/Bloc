@@ -241,7 +241,6 @@ BlHeadlessHostSpace >> show [
 { #category : #'window - properties' }
 BlHeadlessHostSpace >> title [
 	"Return window's title as a string"
-	<return: #String>
 
 	^ title
 ]

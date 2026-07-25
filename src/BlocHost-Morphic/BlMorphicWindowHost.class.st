@@ -12,24 +12,22 @@ BlMorphicWindowHost class >> isSingleton [
 	^ true
 ]
 
-
-
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> isSupported [
 
 	^ UIManager default className = #MorphicUIManager
 ]
 
-{ #category : #printing }
-BlMorphicWindowHost >> label [
-
-	^ 'Morphic'
-]
-
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> priority [
 
 	^ 20
+]
+
+{ #category : #printing }
+BlMorphicWindowHost >> label [
+
+	^ 'Morphic'
 ]
 
 { #category : #private }

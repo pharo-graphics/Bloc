@@ -27,12 +27,6 @@ BlMorphicHost class >> isSupported [
 	^ false
 ]
 
-{ #category : #printing }
-BlMorphicHost >> label [
-
-	^ 'Morphic - Embedded'
-]
-
 { #category : #'driver selection' }
 BlMorphicHost class >> priority [
 	"I have the lowest possible priority (I am also not supported)"
@@ -60,6 +54,12 @@ BlMorphicHost >> initialize [
 	containerMorph := Morph new
 ]
 
+{ #category : #printing }
+BlMorphicHost >> label [
+
+	^ 'Morphic - Embedded'
+]
+
 { #category : #private }
 BlMorphicHost >> newHostSpaceFor: aSpace [
 
@@ -78,4 +78,14 @@ BlMorphicHost >> newSpaceHostMorphFor: aSpace [
 	^ BlMorphicSpaceHostMorph new
 		extent: aSpace extent;
 		yourself
+]
+
+{ #category : #printing }
+BlMorphicHost >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		print: containerMorph;
+		nextPut: $)
 ]

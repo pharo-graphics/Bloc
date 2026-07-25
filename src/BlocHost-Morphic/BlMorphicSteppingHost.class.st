@@ -21,6 +21,12 @@ BlMorphicSteppingHost >> isRunning [
 	^ self currentWorld isStepping: self
 ]
 
+{ #category : #'instance creation' }
+BlMorphicSteppingHost >> newHostSpaceFor: aSpace [
+
+	^ self subclassResponsibility
+]
+
 { #category : #'private - stepping' }
 BlMorphicSteppingHost >> shouldGetStepsFrom: aWorld [
 
@@ -59,12 +65,6 @@ BlMorphicSteppingHost >> uiProcessDo: aBlock [
 	"Evaluate aBlock with the running UI Process of this host if any"
 
 	UIManager default uiProcess ifNotNil: aBlock
-]
-
-{ #category : #'instance creation' }
-BlMorphicSteppingHost >> newHostSpaceFor: aSpace [
-
-	^ self subclassResponsibility
 ]
 
 { #category : #'host - testing' }

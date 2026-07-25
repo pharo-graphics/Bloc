@@ -244,7 +244,7 @@ BlHost >> uiProcessDo: aBlock [
 { #category : #'host space - accessing' }
 BlHost >> universe [
 
-	^ universe ifNil: [ universe := BlParallelUniverse new host: self; yourself ]
+	^ universe ifNil: [ universe := BlParallelUniverse host: self ]
 ]
 
 { #category : #'host - testing' }

@@ -48,6 +48,7 @@ BlEventSimulatorTest >> testDoubleClick [
 { #category : #tests }
 BlEventSimulatorTest >> testKeyPress [
 	| keyDownKey keyUpKey eventSimulator |
+	element requestFocus.
 	element
 		addEventHandlerOn: BlKeyDownEvent
 		do: [ :event | keyDownKey := event key ].
@@ -66,6 +67,7 @@ BlEventSimulatorTest >> testKeyPress [
 { #category : #tests }
 BlEventSimulatorTest >> testKeyboardEvents [
 	| keyDownKey keyUpKey eventSimulator |
+	element requestFocus.
 	element
 		addEventHandlerOn: BlKeyDownEvent
 		do: [ :event | keyDownKey := event key ].
@@ -128,6 +130,7 @@ BlEventSimulatorTest >> testMouseWheel [
 { #category : #tests }
 BlEventSimulatorTest >> testTextInput [
 	| textInputText |
+	element requestFocus.
 	element
 		addEventHandlerOn: BlTextInputEvent
 		do: [ :event | textInputText := event text ].
