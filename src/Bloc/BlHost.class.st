@@ -263,23 +263,18 @@ BlHost >> waitPendingWorkFor: aSpace timeout: aTimeoutBlock [
 BlHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
 	"Evaluate aBlock repeatedly until it answers true. If aTimeoutBlock answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
 	| aSemaphore |
+	self isRunning ifFalse: [ Error signal: 'Host must be running to wait for a condition.' ].
+
 	aSemaphore := Semaphore new.
 	self universe registerPulseSemaphore: aSemaphore.
 	
 	[
 		[ aBlock value ] whileFalse: [
 			aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
-			self isRunning
-				ifTrue: [
-					"If the host is running a background pulse loop (e.g., when BlPulseLoopRequired evaluates to true),
-					we wait on a registered semaphore. The background thread will signal this semaphore on every pulse,
-					allowing us to wake up immediately. The 50ms is just a safety timeout limit."
-					aSemaphore waitTimeoutMilliseconds: 50 ]
-				ifFalse: [
-					"If no background loop is running (e.g., when BlPulseLoopRequired is dynamically bound to false in test cases),
-					we must manually pulse the universe to progress animations/tasks, and yield the processor briefly."
-					self universe pulse.
-					(Delay forMilliseconds: 1) wait ] ]
+			"Reactive wait: Wakes up instantly on the next pulse. The background thread
+			will signal this semaphore on every pulse, allowing us to wake up immediately.
+			The 50ms is just a safety timeout limit."
+			aSemaphore waitTimeoutMilliseconds: 50 ]
 	] ensure: [
 		self universe unregisterPulseSemaphore: aSemaphore ].
 		
