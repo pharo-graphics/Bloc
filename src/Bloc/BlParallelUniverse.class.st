@@ -1,6 +1,13 @@
 "
-I am a parallel Universe. There can exist multiple parallel universes
+I represent a self-contained environment (a ""universe"") managing a collection of open spaces (`BlSpace`), a pipeline for deferred/postponed actions, and a synchronization mechanism for frame pulses. 
 
+There can exist multiple parallel universes running concurrently, each owned and run by a specific host (`BlHost`).
+
+Key Responsibilities:
+- **Space management**: Holds the collection of open spaces (`spaces`) that belong to this universe.
+- **Action deferral**: Queues deferred and postponed block closures to be processed in a thread-safe manner at specific lifecycle stages of a pulse.
+- **Pulsing lifecycle**: Implements `pulseSynchronously` which runs layout, event, task, and drawing passes for all spaces in the universe, and executes deferred/postponed actions.
+- **Synchronization**: Manages a list of registered pulse semaphores (`pulseSemaphores`). When a pulse completes, it signals these semaphores to wake up any threads waiting for state changes or animations (e.g. during `waitUntil:`).
 "
 Class {
 	#name : #BlParallelUniverse,
