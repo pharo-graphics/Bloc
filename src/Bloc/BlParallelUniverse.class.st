@@ -291,13 +291,19 @@ BlParallelUniverse >> pulseSynchronously [
 ]
 
 { #category : #'api - pulse' }
-BlParallelUniverse >> waitPulseTimeoutMilliseconds: aNumber [
+BlParallelUniverse >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
 
 	| aSemaphore |
 	aSemaphore := Semaphore new.
 	self registerPulseSemaphore: aSemaphore.
-	[ aSemaphore waitTimeoutMilliseconds: aNumber ] ensure: [
-		self unregisterPulseSemaphore: aSemaphore ]
+	[
+		[ aBlock value ] whileFalse: [
+			aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
+			aSemaphore waitTimeoutMilliseconds: 50 ]
+	] ensure: [
+		self unregisterPulseSemaphore: aSemaphore ].
+		
+	^ completionBlock value
 ]
 
 { #category : #'api - pulse' }

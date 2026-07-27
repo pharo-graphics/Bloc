@@ -265,9 +265,9 @@ BlHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock
 
 	self isRunning ifFalse: [ Error signal: 'Host must be running to wait for a condition.' ].
 
-	[ aBlock value ] whileFalse: [
-		aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
-		self universe waitPulseTimeoutMilliseconds: 50 ].
-		
-	^ completionBlock value
+	^ self universe
+		  waitUntil: aBlock
+		  timeout: aTimeoutBlock
+		  onCompletion: completionBlock
+		  onTimeout: timeoutBlock
 ]
