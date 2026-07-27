@@ -291,6 +291,16 @@ BlParallelUniverse >> pulseSynchronously [
 ]
 
 { #category : #'api - pulse' }
+BlParallelUniverse >> waitPulseTimeoutMilliseconds: aNumber [
+
+	| aSemaphore |
+	aSemaphore := Semaphore new.
+	self registerPulseSemaphore: aSemaphore.
+	[ aSemaphore waitTimeoutMilliseconds: aNumber ] ensure: [
+		self unregisterPulseSemaphore: aSemaphore ]
+]
+
+{ #category : #'api - pulse' }
 BlParallelUniverse >> registerPulseSemaphore: aSemaphore [
 
 	self pulseSemaphoresMutex critical: [ self pulseSemaphores add: aSemaphore ]
