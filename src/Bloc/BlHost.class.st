@@ -226,13 +226,13 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 { #category : #'api - lifecycle' }
 BlHost >> start [
 
-	self class start
+	^ self subclassResponsibility
 ]
 
 { #category : #'api - lifecycle' }
 BlHost >> stop [
 
-	self class stop
+	^ self subclassResponsibility
 ]
 
 { #category : #enumerating }
@@ -271,10 +271,13 @@ BlHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock
 			aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
 			self isRunning
 				ifTrue: [
-					"Reactive wait: Wakes up instantly on the next pulse"
+					"If the host is running a background pulse loop (e.g., when BlPulseLoopRequired evaluates to true),
+					we wait on a registered semaphore. The background thread will signal this semaphore on every pulse,
+					allowing us to wake up immediately. The 50ms is just a safety timeout limit."
 					aSemaphore waitTimeoutMilliseconds: 50 ]
 				ifFalse: [
-					"No background loop, or we are on the UI process itself: manually run cycle and yield a tiny bit"
+					"If no background loop is running (e.g., when BlPulseLoopRequired is dynamically bound to false in test cases),
+					we must manually pulse the universe to progress animations/tasks, and yield the processor briefly."
 					self universe pulse.
 					(Delay forMilliseconds: 1) wait ] ]
 	] ensure: [
