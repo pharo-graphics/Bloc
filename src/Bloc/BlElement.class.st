@@ -1817,7 +1817,7 @@ BlElement >> globalBoundsToMine: aBlBounds fromParent: aParentElement [
 		              | eachParent |
 		              aStream nextPut: self.
 		              eachParent := self parent.
-		              [ eachParent isNotNil and: [ eachParent /= aParentElement ] ] whileTrue: [
+		              [ eachParent == aParentElement ] whileFalse: [
 			              aStream nextPut: eachParent.
 			              eachParent := eachParent parent ] ].
 
