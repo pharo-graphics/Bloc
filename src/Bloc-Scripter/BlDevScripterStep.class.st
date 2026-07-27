@@ -114,14 +114,14 @@ BlDevScripterStep >> reference: aBlDevScripterReference [
 { #category : #'accessing - reference' }
 BlDevScripterStep >> referenceHere [
 	| aDefinition |
-	aDefinition := thisContext stack second blocMethodDefinition.
+	aDefinition := thisContext stack second homeMethod asRingDefinition.
 	self reference: (BlDevScripterReference method: aDefinition).
 ]
 
 { #category : #'accessing - reference' }
 BlDevScripterStep >> referenceSender [
 	| aDefinition |
-	aDefinition := thisContext stack third blocMethodDefinition.
+	aDefinition := thisContext stack third homeMethod asRingDefinition.
 	self reference: (BlDevScripterReference method: aDefinition).
 ]
 
