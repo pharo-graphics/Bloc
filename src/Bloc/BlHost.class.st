@@ -268,8 +268,6 @@ BlHost >> waitPendingWorkFor: aSpace timeout: aTimeoutBlock [
 BlHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
 	"Evaluate aBlock repeatedly until it answers true. If aTimeoutBlock answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
 
-	self isRunning ifFalse: [ Error signal: 'Host must be running to wait for a condition.' ].
-
 	^ self universe
 		  waitUntil: aBlock
 		  timeout: aTimeoutBlock

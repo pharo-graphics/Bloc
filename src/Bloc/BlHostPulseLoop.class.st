@@ -172,6 +172,7 @@ BlHostPulseLoop >> pulsePeriod: aDuration [
 { #category : #lifecycle }
 BlHostPulseLoop >> start [
 
+	BlPulseLoopRequired value ifFalse: [ ^ self ].
 	self isRunning ifTrue: [ ^ self ].
 
 	loopProcess := self newLoopProcess.

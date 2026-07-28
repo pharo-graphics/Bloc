@@ -306,7 +306,11 @@ BlParallelUniverse >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: com
 	[
 		[ aBlock value ] whileFalse: [
 			aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
-			aSemaphore waitTimeoutMilliseconds: 50 ]
+			self host isRunning
+				ifTrue: [ aSemaphore waitTimeoutMilliseconds: 50 ]
+				ifFalse: [
+					self pulse.
+					(Delay forMilliseconds: 1) wait ] ]
 	] ensure: [
 		self unregisterPulseSemaphore: aSemaphore ].
 		
