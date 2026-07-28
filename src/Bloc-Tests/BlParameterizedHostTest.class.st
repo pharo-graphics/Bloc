@@ -61,12 +61,10 @@ BlParameterizedHostTest >> setUp [
 { #category : #running }
 BlParameterizedHostTest >> tearDown [
 
-	self waitTestingSpaces.
 	testingSpaces do: [ :each | each close ].
-	hostClass universe closeSpaces.
 	self waitTestingSpaces.
-	
-	super tearDown.
+
+	super tearDown
 ]
 
 { #category : #tests }
