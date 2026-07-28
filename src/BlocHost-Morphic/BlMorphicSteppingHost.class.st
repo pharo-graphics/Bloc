@@ -36,6 +36,8 @@ BlMorphicSteppingHost >> shouldGetStepsFrom: aWorld [
 { #category : #'api - lifecycle' }
 BlMorphicSteppingHost >> start [
 
+	BlPulseLoopRequired value ifFalse: [ ^ self ].
+
 	self currentWorld
 		startStepping: self
 		at: Time millisecondClockValue
