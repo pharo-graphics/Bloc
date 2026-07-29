@@ -190,19 +190,25 @@ BlParallelUniverse >> hostClass: aHostClass [
 	host := aHostClass default
 ]
 
-{ #category : #accessing }
-BlParallelUniverse >> initializeWithHost: aHost [
+{ #category : #initialization }
+BlParallelUniverse >> initialize [
 
-	self initialize.
+	super initialize.
 
-	host := aHost.
-	
 	spaces := OrderedCollection new.
 	host := BlHeadlessHost default.
 	deferredActions := WaitfreeQueue new.
 	postponedActions := WaitfreeQueue new.
 	pulseSemaphores := OrderedCollection new.
-	pulseSemaphoresMutex := Mutex new
+	pulseSemaphoresMutex := Mutex new.
+]
+
+{ #category : #initialization }
+BlParallelUniverse >> initializeWithHost: aHost [
+
+	self initialize.
+
+	host := aHost.
 ]
 
 { #category : #'api - spaces' }
