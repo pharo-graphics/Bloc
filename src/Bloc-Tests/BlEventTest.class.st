@@ -58,20 +58,16 @@ BlEventTest >> newRedElement [
 ]
 
 { #category : #tests }
-BlEventTest >> putInSpace: anElement [
-	| aSpace |
-	aSpace := BlSpace new.
-	aSpace root addChild: anElement.
-	aSpace show.
-	spaces ifNil: [ spaces := OrderedCollection new ].
-	spaces add: aSpace.
-	^ aSpace
-]
-
-{ #category : #tests }
 BlEventTest >> simulate: aSymbol on: anElement [
 
-	anElement isAttachedToSceneGraph ifFalse: [ self putInSpace: anElement ].
+	| rootElement aSpace |
+	rootElement := anElement topMostParent.
+	rootElement isAttachedToSceneGraph ifFalse: [
+		aSpace := BlSpace new.
+		aSpace root addChild: rootElement.
+		aSpace show.
+		spaces ifNil: [ spaces := OrderedCollection new ].
+		spaces add: aSpace ].
 	anElement eventSimulator perform: aSymbol.
 	anElement space waitPendingWork
 ]
@@ -267,7 +263,6 @@ BlEventTest >> testSimulateClickOnChildInDisabledParent [
 		addEventHandlerOn: BlClickEvent
 		do: [ click := click + 1 ].
 
-	self putInSpace: parent.
 	self simulate: #click on: red.
 
 	self assert: mouseDown equals: 1.
@@ -312,7 +307,6 @@ BlEventTest >> testSimulateClickOnChildInParentPreventingChildren [
 		addEventHandlerOn: BlClickEvent
 		do: [ parentClick := parentClick + 1 ].
 
-	self putInSpace: parent.
 	self simulate: #click on: red.
 
 	self assert: childMouseDown equals: 0.
@@ -351,7 +345,6 @@ BlEventTest >> testSimulateClickOnChildInUnresponsiveParent [
 		addEventHandlerOn: BlClickEvent
 		do: [ click := click + 1 ].
 
-	self putInSpace: parent.
 	self simulate: #click on: red.
 
 	self assert: mouseDown equals: 0.
@@ -384,7 +377,6 @@ BlEventTest >> testSimulateClickOnOverlapped [
 		addEventHandlerOn: BlClickEvent
 		do: [ clickOnBlue := clickOnBlue + 1 ].
 
-	self putInSpace: container.
 	self simulate: #click on: red.
 
 	self assert: clickOnBlue equals: 1
@@ -459,7 +451,6 @@ BlEventTest >> testSimulateClickOnUnresponsiveOverlapped [
 		addEventHandlerOn: BlClickEvent
 		do: [ click := click + 1 ].
 
-	self putInSpace: container.
 	self simulate: #click on: blue.
 
 	self assert: mouseDown equals: 1.
