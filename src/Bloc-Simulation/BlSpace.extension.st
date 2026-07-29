@@ -45,13 +45,16 @@ BlSpace class >> simulate: anElement during: aBlock [
 	anElement isAttachedToSceneGraph
 		ifTrue: [ 
 			result := aBlock value.
-			anElement space ifNotNil: [ :s | s waitPendingWork ] ]
+			anElement space ifNotNil: [ :s | 
+				s requestNextPulse.
+				s waitPendingWork ] ]
 		ifFalse: [
 			topMostElement := anElement topMostParent.
 			tempSpace := BlSpace new.
 			tempSpace root addChild: topMostElement.
 			[
 				result := aBlock value.
+				tempSpace requestNextPulse.
 				tempSpace waitPendingWork.
 			] ensure: [
 				topMostElement removeFromParent ] ].
