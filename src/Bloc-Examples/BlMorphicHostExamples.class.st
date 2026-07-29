@@ -1,23 +1,16 @@
 Class {
 	#name : #BlMorphicHostExamples,
-	#superclass : #BlExamplesTest,
-	#instVars : [
-		'containerMorph'
-	],
+	#superclass : #Object,
 	#category : #'Bloc-Examples-Host - Morph'
 }
 
-{ #category : #examples }
-BlMorphicHostExamples >> squares [
-	<sampleInstance>
-	<demo>
+{ #category : #scripts }
+BlMorphicHostExamples class >> openSquares [
+	<script>
 
 	| aMorph aHost aSpace |
 	aMorph := Morph new.
-	"container morph could also have #spaceFill resizing"
 	aMorph extent: 400 asPoint.
-	"Specify a layout policy so the Bloc space fills the whole
-	extent (including Morph resizing)."
 	aMorph layoutPolicy: TableLayout new.
 	aMorph openInWindowLabeled: 'Resize window to layout. Hover squares to color.'.
 
@@ -26,19 +19,31 @@ BlMorphicHostExamples >> squares [
 
 	aSpace := BlSpace new.
 	aSpace host: aHost.
+	aSpace root addChild: self new squares.
 	aSpace show.
+]
 
-	aSpace root
+{ #category : #examples }
+BlMorphicHostExamples >> squares [
+	<demo>
+
+	| parent |
+	parent := BlElement new
 		background: Color paleBlue;
-		layout: BlFlowLayout horizontal.
+		layout: BlFlowLayout horizontal;
+		constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical matchParent ].
 
 	50 timesRepeat: [ 
-		aSpace root addChild:
+		parent addChild:
 			(BlElement new
+				size: 40@40;
+				margin: (BlInsets all: 4);
 				background: Color random translucent;
 				addEventHandlerOn: BlMouseEnterEvent
 					do: [ :evt | evt target background: Color random ];
 				yourself) ].
 
-	^ aSpace
+	^ parent
 ]
