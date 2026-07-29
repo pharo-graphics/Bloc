@@ -842,7 +842,7 @@ BlSpace >> isOpened [
 	"Return true if the space was shown (by sending #show message), false otherwise.
 	Please note, that an opened space can be hidden which does not influence the result of #isOpened"
 
-	^ (self host class hasUniverse)
+	^ self host hasUniverse
 		and: [ self universe hasSpace: self ]
 ]
 
