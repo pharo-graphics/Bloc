@@ -3,7 +3,8 @@ Class {
 	#superclass : #ParametrizedTestCase,
 	#instVars : [
 		'testingSpaces',
-		'hostClass'
+		'hostClass',
+		'initialSpaces'
 	],
 	#category : #'Bloc-Tests'
 }
@@ -56,12 +57,17 @@ BlParameterizedHostTest >> setUp [
 	super setUp.
 
 	testingSpaces := OrderedCollection new.
+	initialSpaces := hostClass default universe spaces copy.
 ]
 
 { #category : #running }
 BlParameterizedHostTest >> tearDown [
 
 	testingSpaces do: [ :each | each close ].
+	self waitTestingSpaces.
+
+	(hostClass default universe spaces copy reject: [ :each | initialSpaces includes: each ])
+		do: [ :each | each close ].
 	self waitTestingSpaces.
 
 	super tearDown
