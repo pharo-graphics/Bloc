@@ -227,6 +227,7 @@ BlEventTest >> testSimulateClick [
 
 	self putInSpace: element.
 	element eventSimulator click.
+	element space waitPendingWork.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -262,6 +263,7 @@ BlEventTest >> testSimulateClickOnChildInDisabledParent [
 
 	self putInSpace: parent.
 	red eventSimulator click.
+	red space waitPendingWork.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -307,6 +309,7 @@ BlEventTest >> testSimulateClickOnChildInParentPreventingChildren [
 
 	self putInSpace: parent.
 	red eventSimulator click.
+	red space waitPendingWork.
 
 	self assert: childMouseDown equals: 0.
 	self assert: childMouseUp equals: 0.
@@ -346,6 +349,7 @@ BlEventTest >> testSimulateClickOnChildInUnresponsiveParent [
 
 	self putInSpace: parent.
 	red eventSimulator click.
+	red space waitPendingWork.
 
 	self assert: mouseDown equals: 0.
 	self assert: mouseUp equals: 0.
@@ -379,6 +383,7 @@ BlEventTest >> testSimulateClickOnOverlapped [
 
 	self putInSpace: container.
 	red eventSimulator click.
+	red space waitPendingWork.
 
 	self assert: clickOnBlue equals: 1
 ]
@@ -411,6 +416,7 @@ BlEventTest >> testSimulateClickOnTransformedAndRelocated [
 
 	self putInSpace: element.
 	element eventSimulator click.
+	element space waitPendingWork.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -455,6 +461,7 @@ BlEventTest >> testSimulateClickOnUnresponsiveOverlapped [
 
 	self putInSpace: container.
 	blue eventSimulator click.
+	blue space waitPendingWork.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
@@ -483,6 +490,7 @@ BlEventTest >> testSimulateClickOutside [
 
 	self putInSpace: element.
 	element eventSimulator clickOutside.
+	element space waitPendingWork.
 
 	self assert: mouseDown equals: 0.
 	self assert: mouseUp equals: 0.
@@ -508,6 +516,7 @@ BlEventTest >> testSimulateMouseMoveInside [
 
 	self putInSpace: element.
 	element eventSimulator mouseMoveInside.
+	element space waitPendingWork.
 
 	self assert: mouseMove equals: 1.
 	self assert: mouseEnter equals: 1
@@ -535,6 +544,7 @@ BlEventTest >> testSimulateMouseMoveOutside [
 
 	self putInSpace: element.
 	element eventSimulator mouseMoveOutside.
+	element space waitPendingWork.
 
 	self assert: mouseMove equals: 0.
 	self assert: mouseEnter equals: 0.
@@ -562,7 +572,8 @@ BlEventTest >> testSimulateSecondaryClick [
 		do: [ click := click + 1 ].
 
 	self putInSpace: element.
-	BlSpace simulateSecondaryClickOn: element.
+	element eventSimulator secondaryClick.
+	element space waitPendingWork.
 
 	self assert: mouseDown equals: 1.
 	self assert: mouseUp equals: 1.
