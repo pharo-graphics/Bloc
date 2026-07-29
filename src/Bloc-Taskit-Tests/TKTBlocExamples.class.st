@@ -1,12 +1,15 @@
+"
+Examples of a Taskit extension for Bloc
+"
 Class {
 	#name : #TKTBlocExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #Object,
 	#category : #'Bloc-Taskit-Tests'
 }
 
 { #category : #examples }
-TKTBlocExamples >> runnerExample [
-	<sampleInstance>
+TKTBlocExamples class >> runnerExample [
+	<script>
 "  This is equivalent to:
 	space
 		enqueueTask:
@@ -33,8 +36,8 @@ TKTBlocExamples >> runnerExample [
 ]
 
 { #category : #examples }
-TKTBlocExamples >> serviceExample [
-	<sampleInstance>
+TKTBlocExamples class >> serviceExample [
+	<script>
 	"This example is equivalent to:
 	space
 		enqueueTask:
