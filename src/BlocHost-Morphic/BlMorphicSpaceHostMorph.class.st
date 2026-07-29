@@ -35,6 +35,12 @@ BlMorphicSpaceHostMorph >> drawOn: aCanvas [
 ]
 
 { #category : #accessing }
+BlMorphicSpaceHostMorph >> form [
+
+	^ form
+]
+
+{ #category : #accessing }
 BlMorphicSpaceHostMorph >> form: aForm [
 
 	form := aForm.
