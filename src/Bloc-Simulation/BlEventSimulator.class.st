@@ -173,9 +173,7 @@ BlEventSimulator >> events: aCollectionOfEvents [
 					ifFalse: [ self error: 'You can''t simulate events if you didn''t add the element to a space and sent #show to it.' ] ] ].
 
 	aCollectionOfEvents do: [ :anEvent |
-		aSpace enqueueEvent: anEvent ].
-
-	aSpace waitPendingWork
+		aSpace enqueueEvent: anEvent ]
 ]
 
 { #category : #initialization }
