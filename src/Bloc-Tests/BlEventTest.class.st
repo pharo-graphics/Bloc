@@ -105,8 +105,7 @@ BlEventTest >> testChildConsumesEventWithHandler [
 
 	parent addChild: child.
 
-	self putInSpace: parent.
-	child eventSimulator click.
+	self simulate: #click on: child.
 	self assert: clicks equals: { Color blue } asOrderedCollection
 ]
 
@@ -132,8 +131,7 @@ BlEventTest >> testChildDoesNotConsumeEventWithHandler [
 
 	parent addChild: child.
 
-	self putInSpace: parent.
-	child eventSimulator click.
+	self simulate: #click on: child.
 	self
 		assert: clicks
 		equals: {
@@ -177,8 +175,7 @@ BlEventTest >> testParentWithEventFilter [
 
 	parent addChild: child.
 
-	self putInSpace: parent.
-	child eventSimulator click.
+	self simulate: #click on: child.
 	self assert: clicks equals: { Color red } asOrderedCollection
 ]
 
