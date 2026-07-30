@@ -1013,8 +1013,10 @@ BlSpace >> processPulse [
 
 	self ensureSession.
 
+	Transcript show: 'processPulse check: pulseRequested = '; show: pulseRequested printString; show: ' BlPulseLoopRequired value = '; show: BlPulseLoopRequired value printString; cr.
 	(pulseRequested or: [ BlPulseLoopRequired value not ]) ifFalse: [ ^ self ].
 
+	Transcript show: 'processPulse running frame'; cr.
 	"flip to false beforehand to be able to know if the next pulse was needed during the frame"
 	pulseRequested := false.
 
