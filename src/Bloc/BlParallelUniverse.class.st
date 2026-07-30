@@ -310,13 +310,26 @@ BlParallelUniverse >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: com
 	aSemaphore := Semaphore new.
 	self registerPulseSemaphore: aSemaphore.
 	[
-		[ aBlock value ] whileFalse: [
-			aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
-			self host isRunning
-				ifTrue: [ aSemaphore waitTimeoutMilliseconds: 50 ]
-				ifFalse: [
+		BlPulseLoopRequired value
+			ifTrue: [
+				[ aBlock value ] whileFalse: [
+					aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
+					self host isRunning
+						ifTrue: [ aSemaphore waitTimeoutMilliseconds: 50 ]
+						ifFalse: [
+							self pulse.
+							(Delay forMilliseconds: 1) wait ] ] ]
+			ifFalse: [
+				| hasAnyWorkBlock |
+				hasAnyWorkBlock := [ 
+					aBlock value not or: [ 
+						spaces anySatisfy: [ :sp | sp taskQueue tasks isNotEmpty ] ] ].
+				[ hasAnyWorkBlock value and: [ aTimeoutBlock value not ] ] whileTrue: [
 					self pulse.
-					(Delay forMilliseconds: 1) wait ] ]
+					(Delay forMilliseconds: 1) wait ].
+				aTimeoutBlock value ifTrue: [
+					self pulse. "One final pulse to execute tasks that expired at the deadline"
+					^ timeoutBlock value ] ]
 	] ensure: [
 		self unregisterPulseSemaphore: aSemaphore ].
 		

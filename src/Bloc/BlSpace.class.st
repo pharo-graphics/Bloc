@@ -1013,7 +1013,7 @@ BlSpace >> processPulse [
 
 	self ensureSession.
 
-	pulseRequested ifFalse: [ ^ self ].
+	(pulseRequested or: [ BlPulseLoopRequired value not ]) ifFalse: [ ^ self ].
 
 	"flip to false beforehand to be able to know if the next pulse was needed during the frame"
 	pulseRequested := false.
