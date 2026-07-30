@@ -282,7 +282,6 @@ BlParallelUniverse >> pulseSynchronously [
 	| semaphoresToSignal |
 	[
 		self tryToRunDeferredActions.
-		Transcript show: 'pulseSynchronously spaces size: '; show: spaces size printString; cr.
 		spaces do: [ :eachSpace | eachSpace pulse ].
 		self tryToRunPostponedActions.
 		
