@@ -67,8 +67,9 @@ BlParameterizedHostTest >> tearDown [
 	self waitTestingSpaces.
 
 	(hostClass default universe spaces copy reject: [ :each | initialSpaces includes: each ])
-		do: [ :each | each close ].
-	self waitTestingSpaces.
+		do: [ :each |
+			each close.
+			each waitPendingWork ].
 
 	super tearDown
 ]
