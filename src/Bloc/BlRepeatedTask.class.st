@@ -114,6 +114,7 @@ BlRepeatedTask >> run [
 	isRunning ifFalse: [ ^ self ].
 
 	now := time now.
+	Transcript show: 'BlRepeatedTask run check: '; show: now printString; show: ' < '; show: (previousRunTime ifNotNil: [ previousRunTime + delay ] ifNil: [ 'nil' ]) printString; show: ' ? '; show: (previousRunTime isNotNil and: [ now < (previousRunTime + delay) ]) printString; cr.
 	(previousRunTime isNotNil and: [ now < (previousRunTime + delay) ])
 		ifTrue: [ ^ self ].
 
