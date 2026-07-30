@@ -49,7 +49,7 @@ BlParameterizedHostTest >> newTestingSpace [
 { #category : #running }
 BlParameterizedHostTest >> runCase [
 
-	^ BlPulseLoopRequired value: false during: [ super runCase ]
+	^ super runCase
 ]
 
 { #category : #running }

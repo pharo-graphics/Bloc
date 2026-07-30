@@ -1301,6 +1301,22 @@ BlSpace >> userData [
 ]
 
 { #category : #pulse }
+BlSpace >> mutateSync [
+	"Wait until there is no more pending work (deferred actions, tasks, layout, or events)"
+
+	self waitPendingWork
+]
+
+{ #category : #pulse }
+BlSpace >> mutateWith: aBlock [
+	"Schedule aBlock to be run on the loop process"
+
+	self isOpened
+		ifTrue: [ self universe defer: aBlock ]
+		ifFalse: [ aBlock value ]
+]
+
+{ #category : #pulse }
 BlSpace >> waitPendingWork [
 	"Wait until there is no more pending work (deferred actions, tasks, layout, or events)."
 
