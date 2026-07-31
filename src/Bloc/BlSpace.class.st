@@ -1308,6 +1308,14 @@ BlSpace >> mutateSync [
 ]
 
 { #category : #pulse }
+BlSpace >> mutateSync: aBlock [
+	"Evaluate aBlock on the UI process and wait until all pending work is completed"
+
+	self mutateWith: aBlock.
+	self mutateSync
+]
+
+{ #category : #pulse }
 BlSpace >> mutateWith: aBlock [
 	"Schedule aBlock to be run on the loop process"
 
@@ -1323,11 +1331,20 @@ BlSpace >> waitPendingWork [
 	^ self waitPendingWorkFor: [ false ]
 ]
 
-{ #category : #pulse }
 BlSpace >> waitPendingWorkFor: aTimeoutBlock [
 	"Wait for this space task queue to be empty until a given timeout block evaluates to true"
 
+	self host canWaitPendingWork ifFalse: [ 
+		Error signal: 'Cannot wait for pending work from within the UI loop process' ].
+
 	^ self host waitPendingWorkFor: self timeout: aTimeoutBlock
+]
+
+{ #category : #pulse }
+BlSpace >> isUIProcess [
+	"Return true if the active process is the UI loop process for this space"
+
+	^ self host isUIProcess
 ]
 
 { #category : #pulse }

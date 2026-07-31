@@ -86,3 +86,11 @@ BlMorphicSteppingHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: 
 				onCompletion: completionBlock
 				onTimeout: timeoutBlock ]
 ]
+
+{ #category : #'host - testing' }
+BlMorphicSteppingHost >> isUIProcess [
+	"Return true if the active process is the Morphic UI process"
+
+	^ MorphicUIManager uiProcess == Processor activeProcess
+]
+

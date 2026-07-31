@@ -274,3 +274,20 @@ BlHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock
 		  onCompletion: completionBlock
 		  onTimeout: timeoutBlock
 ]
+
+{ #category : #'host - testing' }
+BlHost >> isUIProcess [
+	"Return true if the active process is the UI loop process of this host"
+
+	^ self subclassResponsibility
+]
+
+{ #category : #'host - testing' }
+BlHost >> canWaitPendingWork [
+	"Return true if the active process is allowed to wait for pending work on this host"
+
+	^ true
+]
+
+
+
