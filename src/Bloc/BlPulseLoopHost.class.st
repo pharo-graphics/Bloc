@@ -16,6 +16,13 @@ BlPulseLoopHost class >> isSingleton [
 	^ true
 ]
 
+{ #category : #'host - testing' }
+BlPulseLoopHost >> canWaitPendingWork [
+	"Return true if the active process is allowed to wait for pending work on this host"
+
+	^ self isUIProcess not
+]
+
 { #category : #initialization }
 BlPulseLoopHost >> initialize [
 	super initialize.
@@ -26,6 +33,13 @@ BlPulseLoopHost >> initialize [
 BlPulseLoopHost >> isRunning [
 
 	^ pulseLoop isRunning
+]
+
+{ #category : #'host - testing' }
+BlPulseLoopHost >> isUIProcess [
+	"Return true if the active process is the UI loop process of this host"
+
+	^ pulseLoop isNotNil and: [ pulseLoop isRunningInTheSameProcess ]
 ]
 
 { #category : #accessing }
@@ -64,19 +78,3 @@ BlPulseLoopHost >> uiProcessDo: aBlock [
 
 	pulseLoop loopProcess ifNotNil: aBlock
 ]
-
-{ #category : #'host - testing' }
-BlPulseLoopHost >> isUIProcess [
-	"Return true if the active process is the UI loop process of this host"
-
-	^ pulseLoop isNotNil and: [ pulseLoop isRunningInTheSameProcess ]
-]
-
-{ #category : #'host - testing' }
-BlPulseLoopHost >> canWaitPendingWork [
-	"Return true if the active process is allowed to wait for pending work on this host"
-
-	^ self isUIProcess not
-]
-
-

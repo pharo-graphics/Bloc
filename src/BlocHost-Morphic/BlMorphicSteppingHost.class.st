@@ -21,6 +21,13 @@ BlMorphicSteppingHost >> isRunning [
 	^ self currentWorld isStepping: self
 ]
 
+{ #category : #'host - testing' }
+BlMorphicSteppingHost >> isUIProcess [
+	"Return true if the active process is the Morphic UI process"
+
+	^ MorphicUIManager uiProcess == Processor activeProcess
+]
+
 { #category : #'instance creation' }
 BlMorphicSteppingHost >> newHostSpaceFor: aSpace [
 
@@ -35,8 +42,6 @@ BlMorphicSteppingHost >> shouldGetStepsFrom: aWorld [
 
 { #category : #'api - lifecycle' }
 BlMorphicSteppingHost >> start [
-
-	BlPulseLoopRequired value ifFalse: [ ^ self ].
 
 	self currentWorld
 		startStepping: self
@@ -86,11 +91,3 @@ BlMorphicSteppingHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: 
 				onCompletion: completionBlock
 				onTimeout: timeoutBlock ]
 ]
-
-{ #category : #'host - testing' }
-BlMorphicSteppingHost >> isUIProcess [
-	"Return true if the active process is the Morphic UI process"
-
-	^ MorphicUIManager uiProcess == Processor activeProcess
-]
-

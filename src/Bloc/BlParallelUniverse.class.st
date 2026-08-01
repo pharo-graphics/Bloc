@@ -304,39 +304,6 @@ BlParallelUniverse >> pulseSynchronously [
 ]
 
 { #category : #'api - pulse' }
-BlParallelUniverse >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
-
-	| aSemaphore |
-	aSemaphore := Semaphore new.
-	self registerPulseSemaphore: aSemaphore.
-	[
-		BlPulseLoopRequired value
-			ifTrue: [
-				[ aBlock value ] whileFalse: [
-					aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
-					self host isRunning
-						ifTrue: [ aSemaphore waitTimeoutMilliseconds: 50 ]
-						ifFalse: [
-							self pulse.
-							(Delay forMilliseconds: 1) wait ] ] ]
-			ifFalse: [
-				| hasAnyWorkBlock |
-				hasAnyWorkBlock := [ 
-					aBlock value not or: [ 
-						spaces anySatisfy: [ :sp | sp taskQueue tasks isNotEmpty ] ] ].
-				[ hasAnyWorkBlock value and: [ aTimeoutBlock value not ] ] whileTrue: [
-					self pulse.
-					(Delay forMilliseconds: 1) wait ].
-				aTimeoutBlock value ifTrue: [
-					self pulse. "One final pulse to execute tasks that expired at the deadline"
-					^ timeoutBlock value ] ]
-	] ensure: [
-		self unregisterPulseSemaphore: aSemaphore ].
-		
-	^ completionBlock value
-]
-
-{ #category : #'api - pulse' }
 BlParallelUniverse >> registerPulseSemaphore: aSemaphore [
 
 	self pulseSemaphoresMutex critical: [ self pulseSemaphores add: aSemaphore ]
@@ -400,4 +367,24 @@ BlParallelUniverse >> uiProcessDo: aBlock [
 BlParallelUniverse >> unregisterPulseSemaphore: aSemaphore [
 
 	self pulseSemaphoresMutex critical: [ self pulseSemaphores remove: aSemaphore ifAbsent: [  ] ]
+]
+
+{ #category : #'api - pulse' }
+BlParallelUniverse >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
+
+	| aSemaphore |
+	aSemaphore := Semaphore new.
+	self registerPulseSemaphore: aSemaphore.
+	[
+		[ aBlock value ] whileFalse: [
+			aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
+			self host isRunning
+				ifTrue: [ aSemaphore waitTimeoutMilliseconds: 50 ]
+				ifFalse: [
+					self pulse.
+					(Delay forMilliseconds: 1) wait ] ]
+	] ensure: [
+		self unregisterPulseSemaphore: aSemaphore ].
+		
+	^ completionBlock value
 ]

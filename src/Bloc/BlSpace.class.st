@@ -877,6 +877,13 @@ BlSpace >> isTextInputActive [
 	^ self hostSpaceDo: [:hs | hs isTextInputActive] ifAbsent: [ false ]
 ]
 
+{ #category : #pulse }
+BlSpace >> isUIProcess [
+	"Return true if the active process is the UI loop process for this space"
+
+	^ self host isUIProcess
+]
+
 { #category : #testing }
 BlSpace >> isVisible [
 	^ self hasHostSpace
@@ -971,6 +978,30 @@ BlSpace >> mouseProcessor: aMouseProcessor [
 ]
 
 { #category : #pulse }
+BlSpace >> mutateSync [
+	"Wait until there is no more pending work (deferred actions, tasks, layout, or events)"
+
+	self waitPendingWork
+]
+
+{ #category : #pulse }
+BlSpace >> mutateSync: aBlock [
+	"Evaluate aBlock on the UI process and wait until all pending work is completed"
+
+	self mutateWith: aBlock.
+	self mutateSync
+]
+
+{ #category : #pulse }
+BlSpace >> mutateWith: aBlock [
+	"Schedule aBlock to be run on the loop process"
+
+	self isOpened
+		ifTrue: [ self universe defer: aBlock ]
+		ifFalse: [ aBlock value ]
+]
+
+{ #category : #pulse }
 BlSpace >> onSessionChanged: aNewSession [
 
 	session := aNewSession.
@@ -1013,7 +1044,7 @@ BlSpace >> processPulse [
 
 	self ensureSession.
 
-	(pulseRequested or: [ BlPulseLoopRequired value not ]) ifFalse: [ ^ self ].
+	pulseRequested ifFalse: [ ^ self ].
 
 	"flip to false beforehand to be able to know if the next pulse was needed during the frame"
 	pulseRequested := false.
@@ -1301,36 +1332,13 @@ BlSpace >> userData [
 ]
 
 { #category : #pulse }
-BlSpace >> mutateSync [
-	"Wait until there is no more pending work (deferred actions, tasks, layout, or events)"
-
-	self waitPendingWork
-]
-
-{ #category : #pulse }
-BlSpace >> mutateSync: aBlock [
-	"Evaluate aBlock on the UI process and wait until all pending work is completed"
-
-	self mutateWith: aBlock.
-	self mutateSync
-]
-
-{ #category : #pulse }
-BlSpace >> mutateWith: aBlock [
-	"Schedule aBlock to be run on the loop process"
-
-	self isOpened
-		ifTrue: [ self universe defer: aBlock ]
-		ifFalse: [ aBlock value ]
-]
-
-{ #category : #pulse }
 BlSpace >> waitPendingWork [
 	"Wait until there is no more pending work (deferred actions, tasks, layout, or events)."
 
 	^ self waitPendingWorkFor: [ false ]
 ]
 
+{ #category : #'as yet unclassified' }
 BlSpace >> waitPendingWorkFor: aTimeoutBlock [
 	"Wait for this space task queue to be empty until a given timeout block evaluates to true"
 
@@ -1338,13 +1346,6 @@ BlSpace >> waitPendingWorkFor: aTimeoutBlock [
 		Error signal: 'Cannot wait for pending work from within the UI loop process' ].
 
 	^ self host waitPendingWorkFor: self timeout: aTimeoutBlock
-]
-
-{ #category : #pulse }
-BlSpace >> isUIProcess [
-	"Return true if the active process is the UI loop process for this space"
-
-	^ self host isUIProcess
 ]
 
 { #category : #pulse }
