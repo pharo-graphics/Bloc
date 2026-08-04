@@ -213,6 +213,12 @@ BlEventSimulator >> keyUp: aKeyboardKey [
 ]
 
 { #category : #simulation }
+BlEventSimulator >> waitPendingWork [
+
+	space waitPendingWork
+]
+
+{ #category : #simulation }
 BlEventSimulator >> locationInside [
 	"Return a space location inside of target bounds"	
 

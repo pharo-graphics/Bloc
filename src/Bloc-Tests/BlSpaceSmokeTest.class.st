@@ -12,14 +12,16 @@ BlSpaceSmokeTest >> testShowAfterClose [
 
 	aSpace show.
 	self waitTestingSpaces.
-	aSpace root eventSimulator click.
-	self waitTestingSpaces.
+	aSpace root eventSimulator
+		click;
+		waitPendingWork.
 	aSpace close.
 	self waitTestingSpaces.
 	aSpace show.
 	self waitTestingSpaces.
-	aSpace root eventSimulator click.
-	self waitTestingSpaces.
+	aSpace root eventSimulator
+		click;
+		waitPendingWork.
 
 ]
 
@@ -31,7 +33,8 @@ BlSpaceSmokeTest >> testShowAndClick [
 
 	aSpace show.
 	self waitTestingSpaces.
-	aSpace root eventSimulator click.
-	self waitTestingSpaces.
+	aSpace root eventSimulator
+		click;
+		waitPendingWork.
 
 ]

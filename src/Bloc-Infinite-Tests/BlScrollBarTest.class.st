@@ -15,8 +15,9 @@ Class {
 { #category : #running }
 BlScrollBarTest >> dragOn: anElement byAll: aSequenceOfDeltas [
 
-	anElement eventSimulator dragByAll: aSequenceOfDeltas.
-	self waitTestingSpaces
+	anElement eventSimulator
+		dragByAll: aSequenceOfDeltas;
+		waitPendingWork.
 ]
 
 { #category : #running }
@@ -82,8 +83,9 @@ BlScrollBarTest >> setUp [
 		background: Color green;
 		addChild: scrollPane.
 	space extent: 100 asPoint.
-"	space show."
-	self waitTestingSpaces
+
+	space show.
+	space waitPendingWork
 ]
 
 { #category : #tests }

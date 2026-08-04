@@ -282,6 +282,9 @@ BlHost >> waitPendingWorkFor: aSpace timeout: aTimeoutBlock [
 BlHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
 	"Evaluate aBlock repeatedly until it answers true. If aTimeoutBlock answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
 
+	self canWaitPendingWork ifFalse: [ 
+		Error signal: 'Cannot wait from within the UI loop process' ].
+
 	^ self universe
 		  waitUntil: aBlock
 		  timeout: aTimeoutBlock

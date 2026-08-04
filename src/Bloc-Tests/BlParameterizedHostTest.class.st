@@ -63,8 +63,7 @@ BlParameterizedHostTest >> setUp [
 { #category : #running }
 BlParameterizedHostTest >> tearDown [
 
-	testingSpaces do: [ :each | each close ].
-	self waitTestingSpaces.
+	testingSpaces do: [ :each | each close; waitPendingWork ].
 
 	(hostClass default universe spaces copy reject: [ :each | initialSpaces includes: each ])
 		do: [ :each |

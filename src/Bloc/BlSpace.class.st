@@ -1333,19 +1333,22 @@ BlSpace >> userData [
 
 { #category : #pulse }
 BlSpace >> waitPendingWork [
-	"Wait until there is no more pending work (deferred actions, tasks, layout, or events)."
+	"Wait until there is no more pending work (deferred actions, tasks, layout, or events).
+	This utilizes #waitUntil: to safely block the active process on the host's pulse semaphore until the condition is met."
 
-	^ self waitPendingWorkFor: [ false ]
+	^ self waitUntil: [ self hasPendingWork not ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #pulse }
 BlSpace >> waitPendingWorkFor: aTimeoutBlock [
-	"Wait for this space task queue to be empty until a given timeout block evaluates to true"
+	"Wait for this space task queue to be empty until a given timeout block evaluates to true.
+	Runs a synchronized wait loop using the host's pulse semaphore."
 
-	self host canWaitPendingWork ifFalse: [ 
-		Error signal: 'Cannot wait for pending work from within the UI loop process' ].
-
-	^ self host waitPendingWorkFor: self timeout: aTimeoutBlock
+	self host
+		waitUntil: [ self hasPendingWork not ]
+		timeout: aTimeoutBlock
+		onCompletion: [ ]
+		onTimeout: [ ]
 ]
 
 { #category : #pulse }
@@ -1364,6 +1367,44 @@ BlSpace >> waitPendingWorkForMilliseconds: aNumber [
 	| deadlineInMicroseconds |
 	deadlineInMicroseconds := time nowInUTCMicroseconds + (aNumber * 1000).
 	^ self waitPendingWorkFor: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
+]
+
+{ #category : #pulse }
+BlSpace >> wait: aDuration [
+	"Synchronously wait for the given duration, blocked on the host's pulse loop semaphore.
+	
+	Note: This is different from `aDuration wait` because:
+	1. It blocks the active process on a pulse semaphore, waking up only on space frame pulses.
+	2. Under stepping hosts running directly on the UI process (like BlMorphicSteppingHost), it manually drives UI stepping to advance space time, preventing deadlocks that standard process sleeps would cause."
+
+	self waitUntil: [ false ] timeout: aDuration
+]
+
+{ #category : #pulse }
+BlSpace >> waitUntil: aBlock [
+	"Wait until the given condition block evaluates to true, synchronized with the space pulses.
+	Blocks the calling process on the host's pulse semaphore, waking up on each frame to check the condition.
+	Under stepping hosts running directly on the UI process (like BlMorphicSteppingHost), it manually drives the stepping loop to allow time to progress."
+
+	self host
+		waitUntil: aBlock
+		timeout: [ false ]
+		onCompletion: [ ]
+		onTimeout: [ ]
+]
+
+{ #category : #pulse }
+BlSpace >> waitUntil: aBlock timeout: aDuration [
+	"Wait until the given condition block evaluates to true, or the timeout duration has passed.
+	Blocks the calling process on the host's pulse semaphore, waking up on each frame to check the condition."
+
+	| deadlineInMicroseconds |
+	deadlineInMicroseconds := time nowInUTCMicroseconds + (aDuration asMilliSeconds * 1000).
+	self host
+		waitUntil: aBlock
+		timeout: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
+		onCompletion: [ ]
+		onTimeout: [ ]
 ]
 
 { #category : #'window - properties' }

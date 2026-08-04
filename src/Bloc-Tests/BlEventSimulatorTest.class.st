@@ -27,8 +27,9 @@ BlEventSimulatorTest >> testClick [
 		addEventHandlerOn: BlClickEvent
 		do: [ :event | clicked := true ].
 	
-	element eventSimulator click.
-	space waitPendingWork.
+	element eventSimulator
+		click;
+		waitPendingWork.
 	
 	self assert: clicked
 ]
@@ -41,8 +42,9 @@ BlEventSimulatorTest >> testDoubleClick [
 		addEventHandlerOn: BlDoubleClickEvent
 		do: [ :event | doubleClicked := true ].
 	
-	element eventSimulator doubleClick.
-	space waitPendingWork.
+	element eventSimulator
+		doubleClick;
+		waitPendingWork.
 	
 	self assert: doubleClicked
 ]
@@ -115,8 +117,9 @@ BlEventSimulatorTest >> testMouseMove [
 		addEventHandlerOn: BlMouseMoveEvent
 		do: [ :event | movedTo := event position ].
 	
-	element eventSimulator mouseMoveAt: 10 @ 20.
-	space waitPendingWork.
+	element eventSimulator
+		mouseMoveAt: 10 @ 20;
+		waitPendingWork.
 	
 	self assert: movedTo equals: 10 @ 20.
 ]
@@ -128,8 +131,9 @@ BlEventSimulatorTest >> testMouseWheel [
 		addEventHandlerOn: BlMouseWheelEvent
 		do: [ :event | wheelVector := event vector ].
 	
-	element eventSimulator mouseWheelBy: (BlVector x: 5 y: 10).
-	space waitPendingWork.
+	element eventSimulator
+		mouseWheelBy: (BlVector x: 5 y: 10);
+		waitPendingWork.
 	
 	self assert: wheelVector equals: (BlVector x: 5 y: 10) asBlocVector.
 ]
@@ -142,8 +146,9 @@ BlEventSimulatorTest >> testTextInput [
 		addEventHandlerOn: BlTextInputEvent
 		do: [ :event | textInputText := event text ].
 	
-	element eventSimulator textInput: 'hello'.
-	space waitPendingWork.
+	element eventSimulator
+		textInput: 'hello';
+		waitPendingWork.
 	
 	self assert: textInputText equals: 'hello'.
 ]
@@ -159,8 +164,9 @@ BlEventSimulatorTest >> testVirtualDeviceClick [
 			clicked := true.
 			count := count + 1 ].
 	
-	element eventSimulator click.
-	space waitPendingWork.
+	element eventSimulator
+		click;
+		waitPendingWork.
 	
 	self assert: clicked.
 	self assert: count equals: 1
@@ -174,8 +180,9 @@ BlEventSimulatorTest >> testVirtualDeviceDoubleClick [
 		addEventHandlerOn: BlDoubleClickEvent
 		do: [ :event | doubleClicked := true ].
 	
-	element eventSimulator doubleClick.
-	space waitPendingWork.
+	element eventSimulator
+		doubleClick;
+		waitPendingWork.
 	
 	self assert: doubleClicked
 ]
