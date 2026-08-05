@@ -993,6 +993,21 @@ BlSpace >> mutateSync: aBlock [
 ]
 
 { #category : #pulse }
+BlSpace >> accessSync: aBlock [
+	"Evaluate aBlock on the UI process and block the calling thread until aBlock finishes executing.
+	Return the result of aBlock.
+	Unlike #mutateSync:, this does not wait for subsequent frame passes (layout, drawing, or deferred tasks) to settle."
+
+	| result semaphore |
+	self isOpened ifFalse: [ ^ aBlock value ].
+	semaphore := Semaphore new.
+	self universe defer: [
+		[ result := aBlock value ] ensure: [ semaphore signal ] ].
+	semaphore wait.
+	^ result
+]
+
+{ #category : #pulse }
 BlSpace >> mutateWith: aBlock [
 	"Schedule aBlock to be run on the loop process"
 
