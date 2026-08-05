@@ -77,15 +77,13 @@ BlScrollBarTest >> setUp [
 				c vertical matchParent ];
 			yourself.
 
-	space root
-		layout: BlLinearLayout new;
-		padding: (BlInsets all: gap);
-		background: Color green;
-		addChild: scrollPane.
-	space extent: 100 asPoint.
-
-	space show.
-	space waitPendingWork
+	space mutateSync: [
+		space root
+			layout: BlLinearLayout new;
+			padding: (BlInsets all: gap);
+			background: Color green;
+			addChild: scrollPane.
+		space extent: 100 asPoint ]
 ]
 
 { #category : #tests }
