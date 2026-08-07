@@ -280,31 +280,31 @@ BlParallelUniverse >> pulseSemaphoresMutex [
 BlParallelUniverse >> pulseSynchronously [
 	"deferred actions must be run before spaces"
 
-	| semaphoresToSignal prev |
-	prev := isPulsing.
+	| semaphoresToSignal |
 	isPulsing := true.
 	[
-		self tryToRunDeferredActions.
-		spaces do: [ :eachSpace | eachSpace pulse ].
-		self tryToRunPostponedActions.
-		
-		self pulseSemaphoresMutex critical: [ semaphoresToSignal := self pulseSemaphores copy ].
-		semaphoresToSignal do: [ :each | each signal ]
-	] 
-		on: Exception 
-		do: [ :e | 
-				[
-					Stdio stderr
-						nextPutAll: 'Error during pulse: ';
-						nextPutAll: e description;
-						lf.
-					e signalerContext stack printOn: Stdio stderr.
-					Stdio stderr lf ] on: Error do: [ ].
-				(BlParallelUniverseErrorDuringPulseSignal new
-					signaledError: e;
-					yourself) emit.
-				e pass ]
-		ensure: [ isPulsing := prev ]
+		[
+			self tryToRunDeferredActions.
+			spaces do: [ :eachSpace | eachSpace pulse ].
+			self tryToRunPostponedActions.
+			
+			self pulseSemaphoresMutex critical: [ semaphoresToSignal := self pulseSemaphores copy ].
+			semaphoresToSignal do: [ :each | each signal ]
+		] 
+			on: Exception 
+			do: [ :e | 
+					[
+						Stdio stderr
+							nextPutAll: 'Error during pulse: ';
+							nextPutAll: e description;
+							lf.
+						e signalerContext stack printOn: Stdio stderr.
+						Stdio stderr lf ] on: Error do: [ ].
+					(BlParallelUniverseErrorDuringPulseSignal new
+						signaledError: e;
+						yourself) emit.
+					e pass ]
+	] ensure: [ isPulsing := false ]
 ]
 
 { #category : #'api - pulse' }
