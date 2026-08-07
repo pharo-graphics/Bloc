@@ -18,7 +18,8 @@ Class {
 		'spaces',
 		'pulseSemaphores',
 		'pulseSemaphoresMutex',
-		'host'
+		'host',
+		'isPulsing'
 	],
 	#category : #'Bloc-Universe - Parallel'
 }
@@ -279,7 +280,9 @@ BlParallelUniverse >> pulseSemaphoresMutex [
 BlParallelUniverse >> pulseSynchronously [
 	"deferred actions must be run before spaces"
 
-	| semaphoresToSignal |
+	| semaphoresToSignal prev |
+	prev := isPulsing.
+	isPulsing := true.
 	[
 		self tryToRunDeferredActions.
 		spaces do: [ :eachSpace | eachSpace pulse ].
@@ -301,6 +304,7 @@ BlParallelUniverse >> pulseSynchronously [
 					signaledError: e;
 					yourself) emit.
 				e pass ]
+		ensure: [ isPulsing := prev ]
 ]
 
 { #category : #'api - pulse' }
@@ -369,6 +373,12 @@ BlParallelUniverse >> unregisterPulseSemaphore: aSemaphore [
 	self pulseSemaphoresMutex critical: [ self pulseSemaphores remove: aSemaphore ifAbsent: [  ] ]
 ]
 
+{ #category : #testing }
+BlParallelUniverse >> isPulsing [
+
+	^ isPulsing ifNil: [ false ]
+]
+
 { #category : #'api - pulse' }
 BlParallelUniverse >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
 
@@ -376,7 +386,13 @@ BlParallelUniverse >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: com
 	aSemaphore := Semaphore new.
 	self registerPulseSemaphore: aSemaphore.
 	[
-		[ aBlock value ] whileFalse: [
+		[
+			| midPulse |
+			midPulse := self host isUIProcess not and: [ self isPulsing ].
+			midPulse
+				ifTrue: [ false ]
+				ifFalse: [ aBlock value ]
+		] whileFalse: [
 			aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
 			self host isRunning
 				ifTrue: [ aSemaphore waitTimeoutMilliseconds: 50 ]
