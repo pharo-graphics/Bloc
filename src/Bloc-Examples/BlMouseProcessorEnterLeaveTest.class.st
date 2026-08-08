@@ -1,7 +1,10 @@
 Class {
 	#name : #BlMouseProcessorEnterLeaveTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Event-Scripter'
+	#instVars : [
+		'scripter'
+	],
+	#category : #'Bloc-Examples-EventHandling'
 }
 
 { #category : #running }
@@ -13,14 +16,25 @@ BlMouseProcessorEnterLeaveTest >> newScripterElement [
 		  yourself
 ]
 
+{ #category : #running }
+BlMouseProcessorEnterLeaveTest >> setUp [
+
+	super setUp.
+	scripter := BlDevScripter new.
+	scripter element: self newScripterElement
+]
+
+{ #category : #running }
+BlMouseProcessorEnterLeaveTest >> tearDown [
+
+	scripter close.
+	super tearDown
+]
+
 { #category : #tests }
 BlMouseProcessorEnterLeaveTest >> testMouseEnter [
 
-	| aScripter |
-	aScripter := BlDevScripter new.
-	aScripter element: self newScripterElement.
-
-	aScripter substeps: 'Mouse Enter' do: [ :aStep |
+	scripter substeps: 'Mouse Enter' do: [ :aStep |
 		aStep mouseMove by: 30 @ 30.
 
 		aStep mouseMove by: 70 @ 60.
@@ -44,21 +58,18 @@ BlMouseProcessorEnterLeaveTest >> testMouseEnter [
 			label: 'Check entered targets';
 			value: [ :aMouseProcessor | aMouseProcessor enteredTargets ]
 			equals: {
-					aScripter element.
-					aScripter root };
+					scripter element.
+					scripter root };
 			onMouseProcessor ].
-	aScripter syncContinue.
-
-	^ aScripter
+	scripter syncContinue
 ]
 
 { #category : #tests }
 BlMouseProcessorEnterLeaveTest >> testMouseLeave [
 
-	| aScripter |
-	aScripter := self testMouseEnter.
+	self testMouseEnter.
 
-	aScripter substeps: 'Mouse Leave' do: [ :aStep |
+	scripter substeps: 'Mouse Leave' do: [ :aStep |
 		aStep mouseMove by: 100 @ 20.
 
 		aStep check
@@ -79,31 +90,30 @@ BlMouseProcessorEnterLeaveTest >> testMouseLeave [
 		aStep check
 			label: 'Check entered targets';
 			value: [ :aMouseProcessor | aMouseProcessor enteredTargets ]
-			equals: { aScripter root };
+			equals: { scripter root };
 			onMouseProcessor ].
 
-	^ aScripter syncContinue
+	scripter syncContinue
 ]
 
 { #category : #tests }
 BlMouseProcessorEnterLeaveTest >> testMouseLeaveDueToRemovalFromScene [
 
-	| aScripter |
-	aScripter := self testMouseEnter.
+	self testMouseEnter.
 
-	aScripter substeps: 'Remove from scene graph' do: [ :aStep |
+	scripter substeps: 'Remove from scene graph' do: [ :aStep |
 		aStep do
 			block: [ :anElement | anElement removeFromParent ];
 			onSelf ].
 
-	aScripter
+	scripter
 		substeps: 'Pulse one time to generate mouse leave events'
 		do: [ :aStep |
 			aStep do
 				block: [ :theScripter | theScripter pulse ];
 				onScripter ].
 
-	aScripter substeps: 'Check that events are fired' do: [ :aStep |
+	scripter substeps: 'Check that events are fired' do: [ :aStep |
 		aStep check
 			label: 'Check mouse leave fired';
 			value: [ :anElement | anElement mouseLeaveCount ] equals: 1;
@@ -122,8 +132,8 @@ BlMouseProcessorEnterLeaveTest >> testMouseLeaveDueToRemovalFromScene [
 		aStep check
 			label: 'Check entered targets';
 			value: [ :aMouseProcessor | aMouseProcessor enteredTargets ]
-			equals: { aScripter root };
+			equals: { scripter root };
 			onMouseProcessor ].
 
-	^ aScripter syncContinue
+	scripter syncContinue
 ]
