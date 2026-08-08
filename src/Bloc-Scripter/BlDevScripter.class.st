@@ -58,6 +58,17 @@ BlDevScripter >> assertSpace: aSpace [
 		description: [ 'Space must be initialized before the element ', self element printString ]
 ]
 
+{ #category : #'api - lifecycle' }
+BlDevScripter >> close [
+
+	space ifNotNil: [
+		| aUniverse |
+		aUniverse := space universe.
+		space close.
+		aUniverse tryToRunDeferredActions.
+		space := nil ]
+]
+
 { #category : #execution }
 BlDevScripter >> continue [
 	BlDevScripterStepContinueExecutor new
