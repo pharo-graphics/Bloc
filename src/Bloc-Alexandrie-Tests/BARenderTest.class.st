@@ -41,8 +41,8 @@ BARenderTest >> actualForm [
 		space.
 	aSpace show.
 	aSpace waitPendingWork.
-	[ aForm := aSpace root aeAsForm ]
-		ensure: [ aSpace close ].
+	aForm := [ aSpace root aeAsForm ] ensure: [ aSpace close ].
+	aSpace waitPendingWork.
 	^ aForm
 ]
 
