@@ -6,7 +6,7 @@ Class {
 
 { #category : #'examples - overlay' }
 BlOverlayElementExamples >> overlayOnParent [
-	<gtExample>
+	<sampleInstance>
 
 	| aContainer anOverlay |
 	aContainer := BlElement new
@@ -23,7 +23,7 @@ BlOverlayElementExamples >> overlayOnParent [
 
 { #category : #'examples - overlay' }
 BlOverlayElementExamples >> overlayOnParentInSpace [
-	<gtExample>
+	<sampleInstance>
 
 	| aSpace aContainer |
 	aContainer := self overlayOnParent.
@@ -47,7 +47,7 @@ BlOverlayElementExamples >> overlayOnParentInSpace [
 
 { #category : #'examples - overlay' }
 BlOverlayElementExamples >> overlayOnParentInSpaceWithOffset [
-	<gtExample>
+	<sampleInstance>
 
 	| aSpace aContainer |
 	aContainer := self overlayOnParent.
@@ -72,7 +72,7 @@ BlOverlayElementExamples >> overlayOnParentInSpaceWithOffset [
 
 { #category : #'examples - overlay' }
 BlOverlayElementExamples >> overlayOnSibling [
-	<gtExample>
+	<sampleInstance>
 
 	| aContainer aSibling anOverlay |
 	aContainer := BlElement new
@@ -95,7 +95,7 @@ BlOverlayElementExamples >> overlayOnSibling [
 
 { #category : #'examples - overlay' }
 BlOverlayElementExamples >> overlayOnSiblingInSpace [
-	<gtExample>
+	<sampleInstance>
 
 	| aSpace aContainer |
 	aContainer := self overlayOnSibling.
@@ -119,7 +119,7 @@ BlOverlayElementExamples >> overlayOnSiblingInSpace [
 
 { #category : #'examples - overlay' }
 BlOverlayElementExamples >> overlayOnSiblingInSpaceWithOffset [
-	<gtExample>
+	<sampleInstance>
 
 	| aSpace aContainer |
 	aContainer := self overlayOnSibling.

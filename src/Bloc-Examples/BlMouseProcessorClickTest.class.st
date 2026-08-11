@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'scripter'
 	],
-	#category : #'Bloc-Examples-Event-Scripter'
+	#category : #'Bloc-Examples-EventHandling'
 }
 
 { #category : #running }
@@ -23,6 +23,13 @@ BlMouseProcessorClickTest >> setUp [
 
 	scripter := BlDevScripter new.
 	scripter element: self newScripterElement
+]
+
+{ #category : #running }
+BlMouseProcessorClickTest >> tearDown [
+
+	scripter close.
+	super tearDown
 ]
 
 { #category : #tests }

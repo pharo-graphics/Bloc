@@ -22,7 +22,7 @@ Class {
 		'blurCount',
 		'positionInSpaceChangedCount'
 	],
-	#category : #'Bloc-Examples-Event'
+	#category : #'Bloc-Examples-EventHandling'
 }
 
 { #category : #accessing }

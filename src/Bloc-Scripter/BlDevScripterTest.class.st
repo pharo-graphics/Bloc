@@ -1,10 +1,9 @@
-"
-I exemplify `BlDevScripter`.
-
-"
 Class {
 	#name : #BlDevScripterTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'scripter'
+	],
 	#category : #'Bloc-Scripter-Examples'
 }
 
@@ -32,37 +31,46 @@ BlDevScripterTest >> newContainerWithRectangle [
 BlDevScripterTest >> newRectangle [
 
 	^ BlElement new
-		extent: 100 @ 100;
-		background: Color gray;
-		border: (BlBorder paint: Color black width: 2);
+		background: Color red;
 		constraintsDo: [ :c |
 			c frame vertical alignCenter.
 			c frame horizontal alignCenter ];
 		yourself
 ]
 
+{ #category : #running }
+BlDevScripterTest >> setUp [
+
+	super setUp.
+	scripter := BlDevScripter new.
+	scripter element: self newContainerWithRectangle
+]
+
+{ #category : #running }
+BlDevScripterTest >> tearDown [
+
+	scripter close.
+	super tearDown
+]
+
 { #category : #tests }
 BlDevScripterTest >> testClickCheckFailure [
 
-	| anElement aScripter found |
-	anElement := self newContainerWithRectangle.
-	aScripter := BlDevScripter new.
-	aScripter element: anElement.
-
+	| found |
 	"Expect a click on the first child.
 	But will do a click on the space's root"
-	aScripter testClick onSpaceRoot.
-	aScripter check testClick onChildAt: 1.
+	scripter click onSpaceRoot.
+	scripter check click onChildAt: 1.
 
-	self should: [ aScripter syncPlay ] raise: AssertionFailure.
+	self should: [ scripter syncPlay ] raise: AssertionFailure.
 
 	"The root is the clicked element"
 	found := false.
-	aScripter events
+	scripter events
 		detect: [ :each | each isClick ]
 		ifFound: [ :event |
 			found := true.
-			self assert: event target equals: anElement space root ]
+			self assert: event target equals: scripter element space root ]
 		ifNone: [ self fail ].
 	self assert: found
 ]
@@ -70,21 +78,17 @@ BlDevScripterTest >> testClickCheckFailure [
 { #category : #tests }
 BlDevScripterTest >> testClickCheckSuccess [
 
-	| anElement aScripter found |
-	anElement := self newContainerWithRectangle.
-	aScripter := BlDevScripter new.
-	aScripter element: anElement.
-
-	aScripter testClick onChildAt: 1.
-	aScripter check testClick onChildAt: 1.
-	aScripter syncPlay.
+	| found |
+	scripter click onChildAt: 1.
+	scripter check click onChildAt: 1.
+	scripter syncPlay.
 
 	found := false.
-	aScripter events
+	scripter events
 		detect: [ :each | each isClick ]
 		ifFound: [ :event |
 			found := true.
-			self assert: event target equals: (anElement childAt: 1) ]
+			self assert: event target equals: (scripter element childAt: 1) ]
 		ifNone: [ self fail ].
 	self assert: found
 ]
@@ -92,14 +96,9 @@ BlDevScripterTest >> testClickCheckSuccess [
 { #category : #tests }
 BlDevScripterTest >> testSyncPlayProducesClick [
 
-	| anElement aScripter |
-	anElement := self newContainerWithRectangle.
-	aScripter := BlDevScripter new.
-	aScripter element: anElement.
+	scripter click onChildAt: 1.
 
-	aScripter testClick onChildAt: 1.
-
-	self assert: aScripter events isEmpty.
-	aScripter syncPlay.
-	self assert: (aScripter events asArray anySatisfy: [ :each | each isClick ])
+	self assert: scripter events isEmpty.
+	scripter syncPlay.
+	self assert: (scripter events asArray anySatisfy: [ :each | each isClick ])
 ]
