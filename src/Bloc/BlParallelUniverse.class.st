@@ -212,6 +212,12 @@ BlParallelUniverse >> initializeWithHost: aHost [
 	host := aHost.
 ]
 
+{ #category : #testing }
+BlParallelUniverse >> isPulsing [
+
+	^ isPulsing ifNil: [ false ]
+]
+
 { #category : #'api - spaces' }
 BlParallelUniverse >> openSpace: aSpace [
 	"It should be possible to add a space from the other thread"
@@ -371,12 +377,6 @@ BlParallelUniverse >> uiProcessDo: aBlock [
 BlParallelUniverse >> unregisterPulseSemaphore: aSemaphore [
 
 	self pulseSemaphoresMutex critical: [ self pulseSemaphores remove: aSemaphore ifAbsent: [  ] ]
-]
-
-{ #category : #testing }
-BlParallelUniverse >> isPulsing [
-
-	^ isPulsing ifNil: [ false ]
 ]
 
 { #category : #'api - pulse' }

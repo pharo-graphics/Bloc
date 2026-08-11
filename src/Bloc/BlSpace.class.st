@@ -83,6 +83,21 @@ BlSpace class >> extractRoots: aSetOfElements [
 	^ roots
 ]
 
+{ #category : #pulse }
+BlSpace >> accessSync: aBlock [
+	"Evaluate aBlock on the UI process and block the calling thread until aBlock finishes executing.
+	Return the result of aBlock.
+	Unlike #mutateSync:, this does not wait for subsequent frame passes (layout, drawing, or deferred tasks) to settle."
+
+	| result semaphore |
+	self isOpened ifFalse: [ ^ aBlock value ].
+	semaphore := Semaphore new.
+	self universe defer: [
+		[ result := aBlock value ] ensure: [ semaphore signal ] ].
+	semaphore wait.
+	^ result
+]
+
 { #category : #accessing }
 BlSpace >> asReference [
 	<return: #BlSpaceReference>
@@ -993,21 +1008,6 @@ BlSpace >> mutateSync: aBlock [
 ]
 
 { #category : #pulse }
-BlSpace >> accessSync: aBlock [
-	"Evaluate aBlock on the UI process and block the calling thread until aBlock finishes executing.
-	Return the result of aBlock.
-	Unlike #mutateSync:, this does not wait for subsequent frame passes (layout, drawing, or deferred tasks) to settle."
-
-	| result semaphore |
-	self isOpened ifFalse: [ ^ aBlock value ].
-	semaphore := Semaphore new.
-	self universe defer: [
-		[ result := aBlock value ] ensure: [ semaphore signal ] ].
-	semaphore wait.
-	^ result
-]
-
-{ #category : #pulse }
 BlSpace >> mutateWith: aBlock [
 	"Schedule aBlock to be run on the loop process"
 
@@ -1347,6 +1347,17 @@ BlSpace >> userData [
 ]
 
 { #category : #pulse }
+BlSpace >> wait: aDuration [
+	"Synchronously wait for the given duration, blocked on the host's pulse loop semaphore.
+	
+	Note: This is different from `aDuration wait` because:
+	1. It blocks the active process on a pulse semaphore, waking up only on space frame pulses.
+	2. Under stepping hosts running directly on the UI process (like BlMorphicSteppingHost), it manually drives UI stepping to advance space time, preventing deadlocks that standard process sleeps would cause."
+
+	self waitUntil: [ false ] timeout: aDuration
+]
+
+{ #category : #pulse }
 BlSpace >> waitPendingWork [
 	"Wait until there is no more pending work (deferred actions, tasks, layout, or events).
 	This utilizes #waitUntil: to safely block the active process on the host's pulse semaphore until the condition is met."
@@ -1382,17 +1393,6 @@ BlSpace >> waitPendingWorkForMilliseconds: aNumber [
 	| deadlineInMicroseconds |
 	deadlineInMicroseconds := time nowInUTCMicroseconds + (aNumber * 1000).
 	^ self waitPendingWorkFor: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
-]
-
-{ #category : #pulse }
-BlSpace >> wait: aDuration [
-	"Synchronously wait for the given duration, blocked on the host's pulse loop semaphore.
-	
-	Note: This is different from `aDuration wait` because:
-	1. It blocks the active process on a pulse semaphore, waking up only on space frame pulses.
-	2. Under stepping hosts running directly on the UI process (like BlMorphicSteppingHost), it manually drives UI stepping to advance space time, preventing deadlocks that standard process sleeps would cause."
-
-	self waitUntil: [ false ] timeout: aDuration
 ]
 
 { #category : #pulse }

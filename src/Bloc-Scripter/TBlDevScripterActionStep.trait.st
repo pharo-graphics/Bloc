@@ -120,6 +120,16 @@ TBlDevScripterActionStep >> substeps: aLabel do: anOneArgBlock [
 ]
 
 { #category : #'steps - interactions' }
+TBlDevScripterActionStep >> testClick [
+
+	self
+		deprecated: 'Use #click'
+		transformWith: '`@rcv testClick' -> '`@rcv click'.
+
+	^ self click
+]
+
+{ #category : #'steps - interactions' }
 TBlDevScripterActionStep >> type [
 	^ self addStep: BlDevScripterTypeTextStep new referenceSender
 ]

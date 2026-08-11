@@ -87,6 +87,16 @@ TBlDevScripterCheckStep >> satisfies: anOneArgBlock description: aDescriptionOne
 		referenceSender)
 ]
 
+{ #category : #tests }
+TBlDevScripterCheckStep >> testClick [
+
+	self
+		deprecated: 'Use #click'
+		transformWith: '`@rcv testClick' -> '`@rcv click'.
+
+	^ self click
+]
+
 { #category : #'steps - checks' }
 TBlDevScripterCheckStep >> totalChildrenCount: aNumber [
 	^ self addStep: (BlDevScripterCheckTotalChildrenCountStep new 
