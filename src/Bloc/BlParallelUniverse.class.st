@@ -293,9 +293,6 @@ BlParallelUniverse >> pulseSynchronously [
 			self tryToRunDeferredActions.
 			spaces do: [ :eachSpace | eachSpace pulse ].
 			self tryToRunPostponedActions.
-			
-			self pulseSemaphoresMutex critical: [ semaphoresToSignal := self pulseSemaphores copy ].
-			semaphoresToSignal do: [ :each | each signal ]
 		] 
 			on: Exception 
 			do: [ :e | 
@@ -310,7 +307,10 @@ BlParallelUniverse >> pulseSynchronously [
 						signaledError: e;
 						yourself) emit.
 					e pass ]
-	] ensure: [ isPulsing := false ]
+	] ensure: [ 
+		isPulsing := false.
+		self pulseSemaphoresMutex critical: [ semaphoresToSignal := self pulseSemaphores copy ].
+		semaphoresToSignal do: [ :each | each signal ] ]
 ]
 
 { #category : #'api - pulse' }
