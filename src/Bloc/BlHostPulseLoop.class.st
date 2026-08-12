@@ -37,12 +37,6 @@ BlHostPulseLoop class >> new [
 	self error: 'Use #forHost: instead'
 ]
 
-{ #category : #accessing }
-BlHostPulseLoop class >> processId [
-
-	^ 'Bloc Main Loop'
-]
-
 { #category : #period }
 BlHostPulseLoop >> defaultPulsePeriod [
 
@@ -112,11 +106,9 @@ BlHostPulseLoop >> loop [
 { #category : #'loop process' }
 BlHostPulseLoop >> loopIteration [
 
-	| universe |
-
-	[
-		pulseStartMS := Time millisecondClockValue.
+	[  | universe |
 		universe := host universe.
+		pulseStartMS := Time millisecondClockValue.
 		universe pulse.
 		pulseDurationMS := Time millisecondClockValue - pulseStartMS.
 		self waitUntilNextPulse. ]
@@ -140,14 +132,14 @@ BlHostPulseLoop >> newLoopProcess [
 
 	^ [ self loop ] newProcess
 		  priority: self processPriority;
-		  name: self processId;
+		  name: self processName;
 		  yourself
 ]
 
 { #category : #'loop process' }
-BlHostPulseLoop >> processId [
+BlHostPulseLoop >> processName [
 
-	^ self class processId
+	^ 'Bloc UI Loop ({1})' format: { host }
 ]
 
 { #category : #'loop process' }
@@ -200,7 +192,7 @@ BlHostPulseLoop >> waitUntilNextPulse [
 
 	"No need to wait"	
 	pulseDurationMS >= pulsePeriodMS ifTrue: [
-		"Processor yield. maybe?" ^ self ].
+		Processor yield. ^ self ].
 	
 	"Need to wait"
 	msToWait := pulsePeriodMS - pulseDurationMS.
