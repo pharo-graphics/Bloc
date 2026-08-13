@@ -44,15 +44,15 @@ BlErrorHandlingExamplesTest >> sceneWith: aFaultyElement [
 		c vertical matchParent ].
 
 	aContainer addChildren: { aLeftChild . aRightChild }.
-	
+
 	aSpace := BlSpace new.
 	aSpace host: BlMorphicWindowHost new.
 	aSpace root addChild: aContainer.
 	aSpace show.
 	aSpace pulse.
 	aSpace close.
-	aContainer removeFromParent. 
-	
+	aContainer removeFromParent.
+
 	^ aContainer
 ]
 

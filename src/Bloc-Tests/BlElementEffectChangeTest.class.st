@@ -17,11 +17,11 @@ BlElementEffectChangeTest >> testShadowOffsetChangesInvalidationBounds [
 		color: Color red
 		offset: 10 @ 20).
 	aSpace pulse.
-	
+
 	self
 		assert: anElement invalidationBounds
 		equals: ((0.0 @ 0.0) corner: (110.0 @ 220.0)).
-		
+
 	anElement effect: (BlSimpleShadowEffect
 		color: Color green
 		offset: -10 @ -20).
