@@ -90,7 +90,7 @@ BlSpace >> accessSync: aBlock [
 	Unlike #mutateSync:, this does not wait for subsequent frame passes (layout, drawing, or deferred tasks) to settle."
 
 	| result semaphore |
-	self isOpened ifFalse: [ ^ aBlock value ].
+	(self isOpened not or: [ self host isUIProcess ]) ifTrue: [ ^ aBlock value ].
 	semaphore := Semaphore new.
 	self universe defer: [
 		[ result := aBlock value ] ensure: [ semaphore signal ] ].
@@ -637,7 +637,7 @@ BlSpace >> hasPendingTasks [
 BlSpace >> hasPendingWork [
 	"Return true if there are deferred actions in my universe, or if any of my frame's phases has pending work."
 
-	self isOpened ifFalse: [ ^ self universe hasDeferredActions ].
+	self isOpened ifFalse: [ ^ false ].
 	self universe hasDeferredActions ifTrue: [ ^ true ].
 	^ self frame phases anySatisfy: [ :eachPhase | eachPhase hasPendingWorkIn: self ]
 ]
