@@ -18,11 +18,12 @@ BlMorphicSteppingHost >> delete [
 { #category : #'api - lifecycle' }
 BlMorphicSteppingHost >> isRunning [
 
-	(Smalltalk globals at: #Display ifAbsent: [ nil ]) ifNil: [ ^ false ].
-	^ MorphicUIManager uiProcess ifNotNil: [ :proc |
-		proc isTerminated not and: [ 
-			proc ~= Processor activeProcess and: [ 
-				self currentWorld isStepping: self ] ] ] ifNil: [ false ]
+	^ MorphicUIManager uiProcess
+		ifNotNil: [ :proc |
+			proc isTerminated not and: [ 
+				proc ~= Processor activeProcess and: [ 
+					self currentWorld isStepping: self ] ] ]
+		ifNil: [ false ]
 ]
 
 { #category : #'host - testing' }

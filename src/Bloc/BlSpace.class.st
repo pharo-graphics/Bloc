@@ -637,7 +637,7 @@ BlSpace >> hasPendingTasks [
 BlSpace >> hasPendingWork [
 	"Return true if there are deferred actions in my universe, or if any of my frame's phases has pending work."
 
-	self isOpened ifFalse: [ ^ false ].
+	self isOpened ifFalse: [ ^ self universe hasDeferredActions ].
 	self universe hasDeferredActions ifTrue: [ ^ true ].
 	^ self frame phases anySatisfy: [ :eachPhase | eachPhase hasPendingWorkIn: self ]
 ]
