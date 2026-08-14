@@ -64,13 +64,20 @@ BlParameterizedHostTest >> setUp [
 BlParameterizedHostTest >> tearDown [
 
 	testingSpaces do: [ :each |
-		[ each close; waitPendingWork ] on: Exception do: [ ] ].
+			[
+				each
+					close;
+					waitPendingWork ]
+				on: Exception
+				do: [ ] ].
 
 	hostClass ifNotNil: [
-		hostClass default universe spaces copy
-			reject: [ :each | initialSpaces includes: each ]
-			thenDo: [ :each |
-				[ each close. each waitPendingWork ] on: Exception do: [ ] ] ].
+			hostClass default universe spaces copy reject: [ :each | initialSpaces includes: each ] thenDo: [ :each |
+					[
+						each close.
+						each waitPendingWork ]
+						on: Exception
+						do: [ ] ] ].
 
 	super tearDown
 ]

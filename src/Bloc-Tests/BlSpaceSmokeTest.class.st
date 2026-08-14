@@ -5,6 +5,18 @@ Class {
 }
 
 { #category : #tests }
+BlSpaceSmokeTest >> testImmediateCloseAfterShow [
+
+	| aSpace universe |
+	aSpace := self newTestingSpace.
+	universe := aSpace universe.
+	aSpace close.
+	self waitTestingSpaces.
+	self deny: (universe spaces includes: aSpace).
+	self deny: aSpace isOpened
+]
+
+{ #category : #tests }
 BlSpaceSmokeTest >> testShowAfterClose [
 
 	| aSpace |
@@ -37,16 +49,4 @@ BlSpaceSmokeTest >> testShowAndClick [
 		click;
 		waitPendingWork.
 
-]
-
-{ #category : #tests }
-BlSpaceSmokeTest >> testImmediateCloseAfterShow [
-
-	| aSpace universe |
-	aSpace := self newTestingSpace.
-	universe := aSpace universe.
-	aSpace close.
-	self waitTestingSpaces.
-	self deny: (universe spaces includes: aSpace).
-	self deny: aSpace isOpened
 ]
