@@ -999,18 +999,11 @@ BlSpace >> mouseProcessor: aMouseProcessor [
 ]
 
 { #category : #pulse }
-BlSpace >> mutateSync [
-	"Wait until there is no more pending work (deferred actions, tasks, layout, or events)"
-
-	self waitPendingWork
-]
-
-{ #category : #pulse }
 BlSpace >> mutateSync: aBlock [
 	"Evaluate aBlock on the UI process and wait until all pending work is completed"
 
 	self mutateWith: aBlock.
-	self mutateSync
+	self waitPendingWork
 ]
 
 { #category : #pulse }
