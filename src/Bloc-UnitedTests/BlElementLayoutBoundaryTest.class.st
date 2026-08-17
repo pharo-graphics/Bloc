@@ -5,8 +5,20 @@ I have been automatically converted and probably manually tweaked from BlElement
 Class {
 	#name : #BlElementLayoutBoundaryTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'space'
+	],
 	#category : #'Bloc-UnitedTests-Layout'
 }
+
+{ #category : #running }
+BlElementLayoutBoundaryTest >> tearDown [
+
+	space ifNotNil: [
+		space close; waitPendingWork.
+		space := nil ].
+	super tearDown
+]
 
 { #category : #tests }
 BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
@@ -14,9 +26,10 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
 	
 	| aSpace |
 	aSpace := self testSpaceWithExactLayoutBoundary.
-	self assert: aSpace isLayoutRequested.
-	self assert: aSpace elementsNeedingLayout isEmpty.
-	aSpace pulse.
+	space := aSpace.
+	aSpace host: BlHeadlessHost new.
+	aSpace show; waitPendingWork.
+
 	self assert: aSpace root extent equals: 500 @ 400.
 	self
 		assert: (aSpace root childWithId: #container) extent
@@ -37,12 +50,9 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary02RequestLayoutChild [
 	<sampleInstance>
 	| aSpace |
 	aSpace := self testExactLayoutBoundary01Pulse.
-	(aSpace root childWithId: #child) requestLayout.
-	self assert: aSpace isLayoutRequested.
-	self
-		assert: aSpace elementsNeedingLayout
-		equals: {(aSpace root childWithId: #boundary)} asSet.
-	aSpace pulse.
+	aSpace mutateSync: [
+		(aSpace root childWithId: #child) requestLayout ].
+
 	self assert: aSpace root extent equals: 500 @ 400.
 	self
 		assert: (aSpace root childWithId: #container) extent

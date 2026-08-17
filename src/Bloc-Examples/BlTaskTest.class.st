@@ -58,12 +58,17 @@ BlTaskTest >> testPulseSpaceWithTask [
 	| aSpace aTask |
 	aSpace := self testAddElementWithTaskToSpace.
 	aTask := aSpace taskQueue tasks first.
-	aSpace pulse.
-	"task was run and queue is empty now"
-	self assert: aSpace taskQueue tasks isEmpty.
+	aSpace host: BlHeadlessHost new.
+	[
+		aSpace show; waitPendingWork.
 
-	"action was executed"
-	self assert: aTask action equals: #done.
+		"task was run and queue is empty now"
+		self assert: aSpace taskQueue tasks isEmpty.
+
+		"action was executed"
+		self assert: aTask action equals: #done
+	] ensure: [
+		aSpace close; waitPendingWork ].
 
 	^ aSpace
 ]

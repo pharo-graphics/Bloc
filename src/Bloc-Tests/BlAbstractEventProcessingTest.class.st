@@ -111,29 +111,40 @@ BlAbstractEventProcessingTest >> setUp [
 	super setUp.
 
 	space := BlSpace new.
+	space host: BlHeadlessHost new.
 	space extent: 200 @ 200.
 	space mouseProcessor: (BlTestMouseEventProcessor space: space).
 	space focusProcessor: (BlTestFocusProcessor space: space).
-	space root addChild:
-		(BlElement new
-			id: #A;
-			extent: 100 @ 100;
-			background: Color red;
-			yourself).
-	space root addChild:
-		(BlElement new
-			id: #B;
-			position: 100 @ 0;
-			extent: 100 @ 100;
-			background: Color green;
-			addChild:
-				(BlElement new
-					id: #BA;
-					extent: 50 @ 50;
-					background: Color blue;
-					yourself)
-			yourself).
-	space pulse
+	space show; waitPendingWork.
+	space mutateSync: [
+		space root addChild:
+			(BlElement new
+				id: #A;
+				extent: 100 @ 100;
+				background: Color red;
+				yourself).
+		space root addChild:
+			(BlElement new
+				id: #B;
+				position: 100 @ 0;
+				extent: 100 @ 100;
+				background: Color green;
+				addChild:
+					(BlElement new
+						id: #BA;
+						extent: 50 @ 50;
+						background: Color blue;
+						yourself);
+				yourself) ]
+]
+
+{ #category : #running }
+BlAbstractEventProcessingTest >> tearDown [
+
+	space ifNotNil: [
+		space close; waitPendingWork.
+		space := nil ].
+	super tearDown
 ]
 
 { #category : #accessing }
