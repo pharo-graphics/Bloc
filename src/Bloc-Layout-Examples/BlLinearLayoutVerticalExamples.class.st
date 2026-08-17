@@ -1,10 +1,12 @@
 Class {
-	#name : #BlLinearLayoutVerticalExamples,
-	#superclass : #BlLinearLayoutExamples,
-	#category : #'Bloc-Layout-Examples-LinearMigrated'
+	#name : 'BlLinearLayoutVerticalExamples',
+	#superclass : 'BlLinearLayoutExamples',
+	#category : 'Bloc-Layout-Examples-LinearMigrated',
+	#package : 'Bloc-Layout-Examples',
+	#tag : 'LinearMigrated'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutVerticalExamples >> elementWithChildMatchInExactParentPadding [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
@@ -18,7 +20,7 @@ BlLinearLayoutVerticalExamples >> elementWithChildMatchInExactParentPadding [
 
 	parent addChildren: { childA }.
 
-	parent forceLayout.
+	self layoutInSpace: parent.
 
 	self assert: childA extent equals: 360@560.
 	self assert: childA position equals: 20@20.
@@ -29,7 +31,7 @@ BlLinearLayoutVerticalExamples >> elementWithChildMatchInExactParentPadding [
 	^ parent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutVerticalExamples >> elementWithChildrenMatchInExactParentPadding [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
@@ -45,7 +47,7 @@ BlLinearLayoutVerticalExamples >> elementWithChildrenMatchInExactParentPadding [
 
 	parent addChildren: { childA . childB }.
 
-	parent forceLayout.
+	self layoutInSpace: parent.
 
 	self assert: childA extent equals: 560@180.
 	self assert: childA position equals: 20@20.
@@ -58,7 +60,7 @@ BlLinearLayoutVerticalExamples >> elementWithChildrenMatchInExactParentPadding [
 	^ parent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutVerticalExamples >> elementWithExactChildrenInFitContent [
 	<gtExample>
 	"Parent resizes to fit children"
@@ -72,7 +74,7 @@ BlLinearLayoutVerticalExamples >> elementWithExactChildrenInFitContent [
 	
 	parent addChildren: { childA . childB }.
 	
-	parent forceLayout.
+	self layoutInSpace: parent.
 	
 	self assert: childA extent equals: 200@100.
 	self assert: childA position equals: 0@0.
@@ -85,7 +87,7 @@ BlLinearLayoutVerticalExamples >> elementWithExactChildrenInFitContent [
 	^ parent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutVerticalExamples >> elementWithMatchChildrenInExactParent [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
@@ -100,7 +102,7 @@ BlLinearLayoutVerticalExamples >> elementWithMatchChildrenInExactParent [
 
 	parent addChildren: { childA . childB . childC }.
 
-	parent forceLayout.
+	self layoutInSpace: parent.
 
 	self assert: childA extent equals: 200@200.
 	self assert: childA position equals: 0@0.
@@ -116,36 +118,34 @@ BlLinearLayoutVerticalExamples >> elementWithMatchChildrenInExactParent [
 	^ parent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutVerticalExamples >> elementWithOneChildMatchOneExactInFitParent [
 	<gtExample>
-	"All children are distributed equally within parent's bounds"
 	| parent childA childB |
-	childA := self childExact: 200@300.
+	childA := self childExact: 200 @ 300.
 	childB := self childExactHeight: 200.
 	childB constraints horizontal matchParent.
 
-	parent := self parentWithLinearHorizontalLayout.
+	parent := self parentWithLinearVerticalLayout.
 	parent constraints horizontal fitContent.
 	parent constraints vertical fitContent.
 
 	parent addChildren: { childA . childB }.
 
-	parent forceLayout.
+	self layoutInSpace: parent.
 
-	self assert: childA extent equals: 200@300.
-	self assert: childA position equals: 0@0.
+	self assert: childA extent equals: 200 @ 300.
+	self assert: childA position equals: 0 @ 0.
 
-	self assert: childB extent equals: 200@200.
-	self assert: childB position equals: 0@300.
+	self assert: childB extent equals: 200 @ 200.
+	self assert: childB position equals: 0 @ 300.
 
-	self assert: parent extent equals: 200@500.
-	self assert: parent position equals: 0@0.
-	
+	self assert: parent extent equals: 200 @ 500.
+	self assert: parent position equals: 0 @ 0.
 	^ parent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutVerticalExamples >> elementWithOneExactChildInExactParentMargin [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
@@ -159,7 +159,7 @@ BlLinearLayoutVerticalExamples >> elementWithOneExactChildInExactParentMargin [
 
 	parent addChildren: { childA }.
 
-	parent forceLayout.
+	self layoutInSpace: parent.
 
 	self assert: childA extent equals: 20@20.
 	self assert: childA position equals: 10@15.
@@ -169,7 +169,7 @@ BlLinearLayoutVerticalExamples >> elementWithOneExactChildInExactParentMargin [
 	^ parent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutVerticalExamples >> elementWithThreeExactChildrenAlignInExactParentLTR [
 	<gtExample>
 	| parent childA childB childC |
@@ -187,7 +187,7 @@ BlLinearLayoutVerticalExamples >> elementWithThreeExactChildrenAlignInExactParen
 	
 	parent addChildren: { childA . childB . childC }.
 
-	parent forceLayout.
+	self layoutInSpace: parent.
 
 	self assert: childA extent equals: 100@100.
 	self assert: childA position equals: 0@0.
@@ -203,43 +203,41 @@ BlLinearLayoutVerticalExamples >> elementWithThreeExactChildrenAlignInExactParen
 	^ parent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutVerticalExamples >> elementWithThreeExactChildrenAlignInExactParentRTL [
 	<gtExample>
 	| parent childA childB childC |
-
-	childA := self childExact: 100@100.
-	childB := self childExact: 200@100.
-	childC := self childExact: 50@100.
+	childA := self childExact: 100 @ 100.
+	childB := self childExact: 200 @ 100.
+	childC := self childExact: 50 @ 100.
 
 	childA constraints linear horizontal alignLeft.
 	childB constraints linear horizontal alignCenter.
 	childC constraints linear horizontal alignRight.
 
-	parent := self parentWithLinearHorizontalLayout.
-	parent layout rightToLeft.
+	parent := self parentWithLinearVerticalLayout.
 	parent constraints horizontal exact: 500.
 	parent constraints vertical exact: 600.
 
 	parent addChildren: { childA . childB . childC }.
 
-	parent forceLayout.
+	self layoutInSpace: parent.
 
-	self assert: childA extent equals: 100@100.
-	self assert: childA position equals: 400@0.
+	self assert: childA extent equals: 100 @ 100.
+	self assert: childA position equals: 0 @ 0.
 
-	self assert: childB extent equals: 200@100.
-	self assert: childB position equals: 150@100.
-	
-	self assert: childC extent equals: 50@100.
-	self assert: childC position equals: 0@200.
+	self assert: childB extent equals: 200 @ 100.
+	self assert: childB position equals: 150 @ 100.
 
-	self assert: parent extent equals: 500@600.
-	self assert: parent position equals: 0@0.
+	self assert: childC extent equals: 50 @ 100.
+	self assert: childC position equals: 450 @ 200.
+
+	self assert: parent extent equals: 500 @ 600.
+	self assert: parent position equals: 0 @ 0.
 	^ parent
 ]
 
-{ #category : #'examples - visibility' }
+{ #category : 'examples - visibility' }
 BlLinearLayoutVerticalExamples >> one_child_set_visibility_gone [
 	<gtExample>
 	| aContainer aRed aBlue |
@@ -265,7 +263,7 @@ BlLinearLayoutVerticalExamples >> one_child_set_visibility_gone [
 		
 	aContainer addChildren: { aRed . aBlue }.
 	
-	aContainer forceLayout.
+	self layoutInSpace: aContainer.
 	
 	self assert: aContainer extent equals: 400@500.
 	self assert: aRed position equals: 10@20.
@@ -276,7 +274,7 @@ BlLinearLayoutVerticalExamples >> one_child_set_visibility_gone [
 	
 	aRed visibility: BlVisibility gone.
 	
-	aContainer forceLayout.
+	self layoutInSpace: aContainer.
 	
 	self assert: aContainer extent equals: 400@500.
 	"red keeps its position and extent from the previous pass"
@@ -289,7 +287,7 @@ BlLinearLayoutVerticalExamples >> one_child_set_visibility_gone [
 	^ aContainer
 ]
 
-{ #category : #'examples - setup' }
+{ #category : 'examples - setup' }
 BlLinearLayoutVerticalExamples >> parentWithLinearHorizontalLayout [
 	<gtExample>
 	| element |

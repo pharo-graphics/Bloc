@@ -1,10 +1,30 @@
 Class {
-	#name : #BlBasicLayoutTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlBasicLayoutTest',
+	#superclass : 'TestCase',
+	#instVars : [
+		'space'
+	],
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'running' }
+BlBasicLayoutTest >> setUp [
+	super setUp.
+	space := BlSpace new.
+	space host: BlHeadlessHost new.
+	space show; waitPendingWork
+]
+
+{ #category : 'running' }
+BlBasicLayoutTest >> tearDown [
+	space ifNotNil: [
+		space close; waitPendingWork.
+		space := nil ].
+	super tearDown
+]
+
+{ #category : 'tests' }
 BlBasicLayoutTest >> testForceLayoutOfMatchParent [
 
 	<sampleInstance>
@@ -16,12 +36,12 @@ BlBasicLayoutTest >> testForceLayoutOfMatchParent [
 	anElement constraintsDo: [ :c |
 		c horizontal matchParent.
 		c vertical matchParent ].
-	anElement forceLayout.
+	space mutateSync: [ space root addChild: anElement ].
 	self assert: anElement extent equals: 800 @ 600.
 	^ anElement
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicLayoutTest >> testParentWithChildExactExtent [
 
 	<sampleInstance>
@@ -46,13 +66,13 @@ BlBasicLayoutTest >> testParentWithChildExactExtent [
 		c horizontal exact: 300.
 		c vertical exact: 300 ].
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 300.
 	self assert: child extent equals: 100 @ 100.
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicLayoutTest >> testParentWithChildFitContent [
 
 	<sampleInstance>
@@ -63,13 +83,13 @@ BlBasicLayoutTest >> testParentWithChildFitContent [
 	child constraintsDo: [ :c |
 		c horizontal fitContent.
 		c vertical fitContent ].
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 300.
 	self assert: child extent equals: 0 @ 0.
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlBasicLayoutTest >> testParentWithChildMatchParent [
 
 	<sampleInstance>
@@ -80,7 +100,7 @@ BlBasicLayoutTest >> testParentWithChildMatchParent [
 	child constraintsDo: [ :c |
 		c horizontal matchParent.
 		c vertical matchParent ].
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 300.
 	self assert: child extent equals: 300 @ 300.
 	^ parent

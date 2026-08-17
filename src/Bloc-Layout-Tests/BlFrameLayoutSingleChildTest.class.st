@@ -3,12 +3,13 @@ I have been automatically converted and probably manually tweaked from BlFrameLa
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlFrameLayoutSingleChildTest,
-	#superclass : #BlFrameLayoutChildrenTest,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlFrameLayoutSingleChildTest',
+	#superclass : 'BlFrameLayoutChildrenTest',
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testChildElementMatchingParentWith25per50Percent [
 
 	<sampleInstance>
@@ -29,7 +30,7 @@ BlFrameLayoutSingleChildTest >> testChildElementMatchingParentWith25per50Percent
 	^ element
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testChildElementMatchingParentWith50per40Percent [
 
 	<sampleInstance>
@@ -50,7 +51,7 @@ BlFrameLayoutSingleChildTest >> testChildElementMatchingParentWith50per40Percent
 	^ element
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testChildElementMatchingWidthFitHeight [
 
 	<sampleInstance>
@@ -69,7 +70,7 @@ BlFrameLayoutSingleChildTest >> testChildElementMatchingWidthFitHeight [
 	^ element
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testChildElementMatchingWidthFitLimitedHeight [
 
 	<sampleInstance>
@@ -88,7 +89,7 @@ BlFrameLayoutSingleChildTest >> testChildElementMatchingWidthFitLimitedHeight [
 	^ element
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testEelementWithMaxWidthOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -98,7 +99,7 @@ BlFrameLayoutSingleChildTest >> testEelementWithMaxWidthOneChildMatchExactParent
 	aParent := self testParentWithFrameLayoutAndFixedExtent.
 	aParent constraintsDo: [ :c | c maxWidth: 200 ].
 	aParent addChild: child.
-	aParent forceLayout.
+	space mutateSync: [ space root addChild: aParent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 200 @ 300.
 	self assert: aParent position equals: 0 @ 0.
@@ -106,7 +107,7 @@ BlFrameLayoutSingleChildTest >> testEelementWithMaxWidthOneChildMatchExactParent
 	^ aParent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementDocumentationWithOneExactChildAlignBottomRightInExactParent [
 
 	<sampleInstance>
@@ -121,7 +122,7 @@ BlFrameLayoutSingleChildTest >> testElementDocumentationWithOneExactChildAlignBo
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent extent: 300 @ 300.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 160 @ 160.
 	self assert: child extent equals: 140 @ 140.
 	self assert: parent position equals: 0 @ 0.
@@ -129,7 +130,7 @@ BlFrameLayoutSingleChildTest >> testElementDocumentationWithOneExactChildAlignBo
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementForDocumentationWithOneChildMatchExactParentWithWeight [
 
 	<sampleInstance>
@@ -143,7 +144,7 @@ BlFrameLayoutSingleChildTest >> testElementForDocumentationWithOneChildMatchExac
 		c frame vertical weight: 0.5 ].
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 360 @ 150.
 	self assert: parent position equals: 0 @ 0.
@@ -151,7 +152,7 @@ BlFrameLayoutSingleChildTest >> testElementForDocumentationWithOneChildMatchExac
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithMaxHeightOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -161,7 +162,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMaxHeightOneChildMatchExactParent
 	aParent := self testParentWithFrameLayoutAndFixedExtent.
 	aParent constraintsDo: [ :c | c maxHeight: 200 ].
 	aParent addChild: child.
-	aParent forceLayout.
+	space mutateSync: [ space root addChild: aParent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 400 @ 200.
 	self assert: aParent position equals: 0 @ 0.
@@ -169,7 +170,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMaxHeightOneChildMatchExactParent
 	^ aParent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithMaxWidthOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -179,7 +180,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMaxWidthOneChildMatchExactParent 
 	aParent := self testParentWithFrameLayoutAndFixedExtent.
 	aParent constraintsDo: [ :c | c maxWidth: 200 ].
 	aParent addChild: child.
-	aParent forceLayout.
+	space mutateSync: [ space root addChild: aParent ].
 	self assert: child position equals: 0 @ 0.
 	" since child is matchParent"
 	self assert: child extent equals: 200 @ 300.
@@ -189,7 +190,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMaxWidthOneChildMatchExactParent 
 	^ aParent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithMinAndMaxHeightOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -201,7 +202,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinAndMaxHeightOneChildMatchExact
 		c maxHeight: 200.
 		c minHeight: 500 ]. "minHeight has a precedence over maxHeight"
 	aParent addChild: child.
-	aParent forceLayout.
+	space mutateSync: [ space root addChild: aParent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 400 @ 500.
 	self assert: aParent position equals: 0 @ 0.
@@ -209,7 +210,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinAndMaxHeightOneChildMatchExact
 	^ aParent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithMinAndMaxWidthOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -221,7 +222,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinAndMaxWidthOneChildMatchExactP
 		c maxWidth: 200.
 		c minWidth: 500 ]. "minWidth has a precedence over maxWidth"
 	aParent addChild: child.
-	aParent forceLayout.
+	space mutateSync: [ space root addChild: aParent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 500 @ 300.
 	self assert: aParent position equals: 0 @ 0.
@@ -229,7 +230,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinAndMaxWidthOneChildMatchExactP
 	^ aParent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithMinHeightOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -239,7 +240,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinHeightOneChildMatchExactParent
 	aParent := self testParentWithFrameLayoutAndFixedExtent.
 	aParent constraintsDo: [ :c | c minHeight: 500 ].
 	aParent addChild: child.
-	aParent forceLayout.
+	space mutateSync: [ space root addChild: aParent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 400 @ 500.
 	self assert: aParent position equals: 0 @ 0.
@@ -247,7 +248,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinHeightOneChildMatchExactParent
 	^ aParent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithMinWidthOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -257,7 +258,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinWidthOneChildMatchExactParent 
 	aParent := self testParentWithFrameLayoutAndFixedExtent.
 	aParent constraintsDo: [ :c | c minWidth: 500 ].
 	aParent addChild: child.
-	aParent forceLayout.
+	space mutateSync: [ space root addChild: aParent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 500 @ 300.
 	self assert: aParent position equals: 0 @ 0.
@@ -265,7 +266,7 @@ BlFrameLayoutSingleChildTest >> testElementWithMinWidthOneChildMatchExactParent 
 	^ aParent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParent [
 
 	<sampleInstance>
@@ -274,7 +275,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParent [
 	child := self testChildElementMatchingParent.
 	aParent := self testParentWithFrameLayoutAndFixedExtent.
 	aParent addChild: child.
-	aParent forceLayout.
+	space mutateSync: [ space root addChild: aParent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 400 @ 300.
 	self assert: aParent position equals: 0 @ 0.
@@ -282,7 +283,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParent [
 	^ aParent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithPadding [
 
 	<sampleInstance>
@@ -299,7 +300,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithPaddi
 			 bottom: 30
 			 left: 40).
 	aParent addChild: aChild.
-	aParent forceLayout.
+	space mutateSync: [ space root addChild: aParent ].
 	self assert: aChild position equals: 40 @ 10.
 	self assert: aChild extent equals: 340 @ 260.
 	self assert: aParent position equals: 0 @ 0.
@@ -307,7 +308,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithPaddi
 	^ aParent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithPaddingAndMargin [
 
 	<sampleInstance>
@@ -329,7 +330,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithPaddi
 			 bottom: 30
 			 left: 40).
 	aParent addChild: aChild.
-	aParent forceLayout.
+	space mutateSync: [ space root addChild: aParent ].
 	self assert: aChild position equals: 50 @ 50.
 	self assert: aChild extent equals: 300 @ 200.
 	self assert: aParent position equals: 0 @ 0.
@@ -337,7 +338,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithPaddi
 	^ aParent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeight [
 
 	<sampleInstance>
@@ -346,7 +347,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeigh
 	child := self testChildElementMatchingParentWith50per40Percent.
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 200 @ 120.
 	self assert: parent position equals: 0 @ 0.
@@ -354,7 +355,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeigh
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeightAndPadding [
 
 	<sampleInstance>
@@ -368,7 +369,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeigh
 			 bottom: 30
 			 left: 40).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 40 @ 10.
 	self assert: child extent equals: 85 @ 130.
 	self assert: parent position equals: 0 @ 0.
@@ -376,7 +377,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeigh
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeightAndPaddingAndMargin [
 
 	<sampleInstance>
@@ -395,7 +396,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeigh
 			 bottom: 30
 			 left: 40).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 50 @ 50.
 	self assert: child extent equals: 75 @ 100.
 	self assert: parent position equals: 0 @ 0.
@@ -403,7 +404,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchExactParentWithWeigh
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchWidthFitHeightParentExactWidthFitHeight [
 
 	<sampleInstance>
@@ -419,7 +420,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchWidthFitHeightParent
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent constraintsDo: [ :c | c vertical fitContent ].
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: subChild position equals: 0 @ 0.
 	self assert: subChild extent equals: 300 @ 300.
 	self assert: child position equals: 0 @ 0.
@@ -429,7 +430,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchWidthFitHeightParent
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchWidthFitLimitedHeightParentExactWidthFitHeight [
 
 	<sampleInstance>
@@ -446,7 +447,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchWidthFitLimitedHeigh
 	child addChild: subChild.
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: subChild position equals: 0 @ 0.
 	self assert: subChild extent equals: 500 @ 500.
 	self assert: child position equals: 0 @ 0.
@@ -456,7 +457,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildMatchWidthFitLimitedHeigh
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneChildWithExactSizeParentWithWeight [
 
 	<sampleInstance>
@@ -470,7 +471,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildWithExactSizeParentWithWe
 		c frame vertical weight: 0.5 ].
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 140 @ 140.
 	self assert: parent position equals: 0 @ 0.
@@ -478,7 +479,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneChildWithExactSizeParentWithWe
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterAndWithWeightInExactParent [
 
 	<sampleInstance>
@@ -492,7 +493,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterAnd
 		c frame vertical alignBottom ].
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 150 @ 250.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -500,7 +501,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterAnd
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterInExactParent [
 
 	<sampleInstance>
@@ -511,7 +512,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterInE
 	child constraints frame vertical alignBottom.
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 150 @ 250.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -519,7 +520,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterInE
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterInExactParentWithPadding [
 
 	<sampleInstance>
@@ -535,7 +536,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterInE
 			 bottom: 30
 			 left: 40).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 160 @ 220.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -543,7 +544,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomCenterInE
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomLeftInExactParent [
 
 	<sampleInstance>
@@ -554,7 +555,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomLeftInExa
 	child constraints frame vertical alignBottom.
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 0 @ 250.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -562,7 +563,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomLeftInExa
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomLeftInExactParentWithPadding [
 
 	<sampleInstance>
@@ -578,7 +579,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomLeftInExa
 			 bottom: 30
 			 left: 40).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 40 @ 220.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -586,7 +587,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomLeftInExa
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomRightInExactParent [
 
 	<sampleInstance>
@@ -597,7 +598,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomRightInEx
 	child constraints frame vertical alignBottom.
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 300 @ 250.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -605,7 +606,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomRightInEx
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomRightInExactParentWithPadding [
 
 	<sampleInstance>
@@ -621,7 +622,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomRightInEx
 			 bottom: 30
 			 left: 40).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 280 @ 220.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -629,7 +630,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignBottomRightInEx
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterInExactParent [
 
 	<sampleInstance>
@@ -640,7 +641,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterInExactPa
 	child constraints frame vertical alignCenter.
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 150 @ 125.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -648,7 +649,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterInExactPa
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterInExactParentWithPadding [
 
 	<sampleInstance>
@@ -664,7 +665,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterInExactPa
 			 bottom: 30
 			 left: 40).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 160 @ 115.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -672,7 +673,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterInExactPa
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterLeftInExactParent [
 
 	<sampleInstance>
@@ -683,7 +684,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterLeftInExa
 	child constraints frame vertical alignCenter.
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 0 @ 125.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -691,7 +692,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterLeftInExa
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterLeftInExactParentWithPadding [
 
 	<sampleInstance>
@@ -707,7 +708,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterLeftInExa
 			 bottom: 30
 			 left: 40).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 40 @ 115.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -715,7 +716,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterLeftInExa
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterRightInExactParent [
 
 	<sampleInstance>
@@ -726,7 +727,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterRightInEx
 	child constraints frame vertical alignCenter.
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 300 @ 125.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -734,7 +735,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterRightInEx
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterRightInExactParentWithPadding [
 
 	<sampleInstance>
@@ -750,7 +751,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterRightInEx
 			 bottom: 30
 			 left: 40).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 280 @ 115.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -758,7 +759,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignCenterRightInEx
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignLeftInExactParent [
 
 	<sampleInstance>
@@ -768,7 +769,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignLeftInExactPare
 	child constraints frame horizontal alignLeft.
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -776,7 +777,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignLeftInExactPare
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignRightInExactParentWithPadding [
 
 	<sampleInstance>
@@ -791,7 +792,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignRightInExactPar
 			 bottom: 30
 			 left: 40).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 280 @ 10.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -799,7 +800,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignRightInExactPar
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopCenterInExactParent [
 
 	<sampleInstance>
@@ -810,7 +811,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopCenterInExac
 	child constraints frame vertical alignTop.
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 150 @ 0.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -818,7 +819,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopCenterInExac
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopCenterInExactParentWithPadding [
 
 	<sampleInstance>
@@ -834,7 +835,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopCenterInExac
 			 bottom: 30
 			 left: 40).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 160 @ 10.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -842,7 +843,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopCenterInExac
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopLeftInExactParent [
 
 	<sampleInstance>
@@ -853,7 +854,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopLeftInExactP
 	child constraints frame vertical alignTop.
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -861,7 +862,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopLeftInExactP
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopLeftInExactParentWithPadding [
 
 	<sampleInstance>
@@ -877,7 +878,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopLeftInExactP
 			 bottom: 30
 			 left: 40).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 40 @ 10.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -885,7 +886,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopLeftInExactP
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopRightInExactParent [
 
 	<sampleInstance>
@@ -896,7 +897,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopRightInExact
 	child constraints frame vertical alignTop.
 	parent := self testParentWithFrameLayoutAndFixedExtent.
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 300 @ 0.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -904,7 +905,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopRightInExact
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopRightInExactParentWithPadding [
 
 	<sampleInstance>
@@ -920,7 +921,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopRightInExact
 			 bottom: 30
 			 left: 40).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 280 @ 10.
 	self assert: child extent equals: 100 @ 50.
 	self assert: parent position equals: 0 @ 0.
@@ -928,7 +929,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAlignTopRightInExact
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAndFitContentParent [
 
 	<sampleInstance>
@@ -949,7 +950,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAndFitContentParent 
 			           c vertical fitContent.
 			           c horizontal fitContent ].
 	aParent addChild: child.
-	aParent forceLayout.
+	space mutateSync: [ space root addChild: aParent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 140 @ 140.
 	self assert: aParent position equals: 0 @ 0.
@@ -957,7 +958,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneExactChildAndFitContentParent 
 	^ aParent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testElementWithOneMatchParentChildAndFitContentParent [
 
 	<sampleInstance>
@@ -978,7 +979,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneMatchParentChildAndFitContentP
 			           c vertical fitContent.
 			           c horizontal fitContent ].
 	aParent addChild: child.
-	aParent forceLayout.
+	space mutateSync: [ space root addChild: aParent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 0 @ 0.
 	self assert: aParent position equals: 0 @ 0.
@@ -986,7 +987,7 @@ BlFrameLayoutSingleChildTest >> testElementWithOneMatchParentChildAndFitContentP
 	^ aParent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testRelocateChildLargerWithPadding [
 
 	<sampleInstance>
@@ -1003,7 +1004,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildLargerWithPadding [
 			 bottom: 10
 			 right: 15).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 25 @ 50.
 	self assert: child extent equals: 200 @ 100.
 	self assert: parent position equals: 0 @ 0.
@@ -1011,7 +1012,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildLargerWithPadding [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testRelocateChildSmallWithPadding [
 
 	<sampleInstance>
@@ -1028,7 +1029,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildSmallWithPadding [
 			 bottom: 10
 			 right: 15).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 25 @ 50.
 	self assert: child extent equals: 200 @ 100.
 	self assert: parent position equals: 0 @ 0.
@@ -1036,7 +1037,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildSmallWithPadding [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testRelocateChildToZeroWithPadding [
 
 	<sampleInstance>
@@ -1052,7 +1053,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildToZeroWithPadding [
 			 bottom: 10
 			 right: 15).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 25 @ 50.
 	self assert: child extent equals: 200 @ 100.
 	self assert: parent position equals: 0 @ 0.
@@ -1060,7 +1061,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildToZeroWithPadding [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentLargerWithPadding [
 
 	<sampleInstance>
@@ -1080,7 +1081,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentLargerWithPaddi
 			 bottom: 10
 			 right: 15).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 50 @ 75.
 	self assert: child extent equals: 200 @ 100.
 	self assert: parent position equals: 0 @ 0.
@@ -1088,7 +1089,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentLargerWithPaddi
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentSmallWithPadding [
 
 	<sampleInstance>
@@ -1108,7 +1109,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentSmallWithPaddin
 			 bottom: 10
 			 right: 15).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 10 @ 5.
 	self assert: child extent equals: 200 @ 100.
 	self assert: parent position equals: 0 @ 0.
@@ -1116,7 +1117,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentSmallWithPaddin
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentToZeroWithPadding [
 
 	<sampleInstance>
@@ -1135,7 +1136,7 @@ BlFrameLayoutSingleChildTest >> testRelocateChildWithoutAlignmentToZeroWithPaddi
 			 bottom: 10
 			 right: 15).
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: child position equals: 0 @ 0.
 	self assert: child extent equals: 200 @ 100.
 	self assert: parent position equals: 0 @ 0.

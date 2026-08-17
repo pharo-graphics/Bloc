@@ -3,12 +3,13 @@ I have been automatically converted and probably manually tweaked from BlGridLay
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlGridLayoutTest,
-	#superclass : #BlRootLayoutTest,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlGridLayoutTest',
+	#superclass : 'BlRootLayoutTest',
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlGridLayoutTest >> childExact: aPoint [
 
 	^ self testChildElementWithVisualProperties
@@ -18,7 +19,7 @@ BlGridLayoutTest >> childExact: aPoint [
 		  yourself
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlGridLayoutTest >> matchWidthFitHeight [
 
 	<sampleInstance>
@@ -28,7 +29,7 @@ BlGridLayoutTest >> matchWidthFitHeight [
 		  c vertical fitContent ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleCellFitContent [
 
 	<sampleInstance>
@@ -50,7 +51,7 @@ BlGridLayoutTest >> testExampleCellFitContent [
 	child addChild: subchild.
 	parent addChild: child.
 
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 
 	self assert: subchild extent equals: 200 @ 100.
 	self assert: subchild position equals: 0 @ 0.
@@ -64,7 +65,7 @@ BlGridLayoutTest >> testExampleCellFitContent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleCellSpacingHorizontal1 [
 
 	<sampleInstance>
@@ -82,7 +83,7 @@ BlGridLayoutTest >> testExampleCellSpacingHorizontal1 [
 	parent addChildren: {
 			childA.
 			childB }.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 
 	self assert: childA extent equals: 170 @ 160.
 	self assert: childA position equals: 20 @ 20.
@@ -95,7 +96,7 @@ BlGridLayoutTest >> testExampleCellSpacingHorizontal1 [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleCellSpacingVertical1 [
 
 	<sampleInstance>
@@ -113,7 +114,7 @@ BlGridLayoutTest >> testExampleCellSpacingVertical1 [
 	parent addChildren: {
 			childA.
 			childB }.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 
 	self assert: childA extent equals: 160 @ 170.
 	self assert: childA position equals: 20 @ 20.
@@ -126,7 +127,7 @@ BlGridLayoutTest >> testExampleCellSpacingVertical1 [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillEmpty [
 
 	<sampleInstance>
@@ -144,7 +145,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillEmpty [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillFirstInFourElements [
 
 	<sampleInstance>
@@ -162,7 +163,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillFirstInFourElements [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillForthInFourElements [
 
 	<sampleInstance>
@@ -180,7 +181,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillForthInFourElements [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOneElement [
 
 	<sampleInstance>
@@ -198,7 +199,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOneElement [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty1 [
 
 	<sampleInstance>
@@ -218,7 +219,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty1 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty2 [
 
 	<sampleInstance>
@@ -238,7 +239,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty2 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty3 [
 
 	<sampleInstance>
@@ -255,7 +256,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty3 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty4 [
 
 	<sampleInstance>
@@ -271,7 +272,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsEmpty4 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsInFourElements1 [
 
 	<sampleInstance>
@@ -291,7 +292,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsInFourElements1 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsInFourElements2 [
 
 	<sampleInstance>
@@ -311,7 +312,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsInFourElements2 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsInFourElements3 [
 
 	<sampleInstance>
@@ -327,7 +328,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillOutOfBoundsInFourElements3 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillSecondInFourElements [
 
 	<sampleInstance>
@@ -345,7 +346,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillSecondInFourElements [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillThreeElements [
 
 	<sampleInstance>
@@ -363,7 +364,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillThreeElements [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoElements [
 
 	<sampleInstance>
@@ -381,7 +382,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoElements [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoInFourElements1 [
 
 	<sampleInstance>
@@ -399,7 +400,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoInFourElements1 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoInFourElements2 [
 
 	<sampleInstance>
@@ -417,7 +418,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoInFourElements2 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoInFourElements3 [
 
 	<sampleInstance>
@@ -435,7 +436,7 @@ BlGridLayoutTest >> testExampleGridLayoutArrayFillTwoInFourElements3 [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleOneCellExactChildInExactParent [
 
 	<sampleInstance>
@@ -448,7 +449,7 @@ BlGridLayoutTest >> testExampleOneCellExactChildInExactParent [
 	parent constraints vertical exact: 400.
 
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 
 	self assert: child extent equals: 200 @ 300.
 	self assert: child position equals: 0 @ 0.
@@ -458,7 +459,7 @@ BlGridLayoutTest >> testExampleOneCellExactChildInExactParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleOneCellExactChildInFitParent [
 
 	<sampleInstance>
@@ -471,7 +472,7 @@ BlGridLayoutTest >> testExampleOneCellExactChildInFitParent [
 	parent constraints vertical fitContent.
 
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 
 	self assert: child extent equals: 200 @ 300.
 	self assert: child position equals: 0 @ 0.
@@ -481,7 +482,7 @@ BlGridLayoutTest >> testExampleOneCellExactChildInFitParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleOneCellMatchChildInExactParent [
 
 	<sampleInstance>
@@ -494,7 +495,7 @@ BlGridLayoutTest >> testExampleOneCellMatchChildInExactParent [
 	parent constraints vertical exact: 300.
 
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 
 	self assert: child extent equals: 400 @ 300.
 	self assert: child position equals: 0 @ 0.
@@ -504,7 +505,7 @@ BlGridLayoutTest >> testExampleOneCellMatchChildInExactParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleSpanDistributeOneColumn [
 
 	<sampleInstance>
@@ -523,7 +524,7 @@ BlGridLayoutTest >> testExampleSpanDistributeOneColumn [
 			childA.
 			childB.
 			childC }.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 
 	self
 		assert: childA constraints grid horizontal spec span
@@ -549,7 +550,7 @@ BlGridLayoutTest >> testExampleSpanDistributeOneColumn [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testExampleSpanDistributeOneRow [
 
 	<sampleInstance>
@@ -568,7 +569,7 @@ BlGridLayoutTest >> testExampleSpanDistributeOneRow [
 			childA.
 			childB.
 			childC }.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 
 	self
 		assert: childA constraints grid horizontal spec span
@@ -593,7 +594,7 @@ BlGridLayoutTest >> testExampleSpanDistributeOneRow [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGridLayoutTest >> testParentWithGridHorizontalLayout [
 
 	<sampleInstance>

@@ -1,10 +1,12 @@
 Class {
-	#name : #BlAnchorExamples,
-	#superclass : #Object,
-	#category : #'Bloc-Layout-Examples-Anchors'
+	#name : 'BlAnchorExamples',
+	#superclass : 'Object',
+	#category : 'Bloc-Layout-Examples-Anchors',
+	#package : 'Bloc-Layout-Examples',
+	#tag : 'Anchors'
 }
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> blueRectangle [
 
 	| blue |
@@ -16,7 +18,7 @@ BlAnchorExamples class >> blueRectangle [
 	^ blue
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_AnchorBottomLeftOnParentBottomLeft [
 
 	  | pane blue |
@@ -30,7 +32,7 @@ BlAnchorExamples class >> example_AnchorBottomLeftOnParentBottomLeft [
 	  ^ pane
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_AnchorBottomOnParentBottom [
 
 	  | pane blue |
@@ -44,7 +46,7 @@ BlAnchorExamples class >> example_AnchorBottomOnParentBottom [
 	  ^ pane
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_AnchorBottomRightOnParentBottomRight [
 
 	  | pane blue |
@@ -58,7 +60,7 @@ BlAnchorExamples class >> example_AnchorBottomRightOnParentBottomRight [
 	  ^ pane
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_AnchorBottomRightOnPointAnchor [
 
 	| pane blue |
@@ -73,7 +75,7 @@ BlAnchorExamples class >> example_AnchorBottomRightOnPointAnchor [
 	^ pane
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_AnchorExtentOnParentExtent [
 
 	  | pane blue |
@@ -87,7 +89,7 @@ BlAnchorExamples class >> example_AnchorExtentOnParentExtent [
 	  ^ pane
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_AnchorLeftOnParentLeft [
 
 	| pane blue |
@@ -101,7 +103,7 @@ BlAnchorExamples class >> example_AnchorLeftOnParentLeft [
 	pane openInSpace
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_AnchorRightOnParentRight [
 
 	| pane blue |
@@ -115,7 +117,7 @@ BlAnchorExamples class >> example_AnchorRightOnParentRight [
 	pane openInSpace
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_AnchorTopOnParentTop [
 
 	| pane blue |
@@ -129,7 +131,7 @@ BlAnchorExamples class >> example_AnchorTopOnParentTop [
 	pane openInSpace
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_AnchorWidthHeightOnParentWidthHeight [
 
 	  | pane blue |
@@ -144,7 +146,7 @@ BlAnchorExamples class >> example_AnchorWidthHeightOnParentWidthHeight [
 	  ^ pane
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_AnchorWidthHeightRightBottom [
 
 	  | pane blue |
@@ -160,7 +162,7 @@ BlAnchorExamples class >> example_AnchorWidthHeightRightBottom [
 	  pane openInSpace
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_AnchorsAroundCircle [
 
 	| blue |
@@ -169,7 +171,7 @@ BlAnchorExamples class >> example_AnchorsAroundCircle [
 	blue geometry: BlCircleGeometry new
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_AnchorsAroundEllipse [
 
 	| blue |
@@ -178,7 +180,7 @@ BlAnchorExamples class >> example_AnchorsAroundEllipse [
 	blue geometry: BlEllipseGeometry new
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_AnchorsAroundRectangle [
 
 	| pane blue |
@@ -227,7 +229,7 @@ BlAnchorExamples class >> example_AnchorsAroundRectangle [
 	^ blue
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_AnchorsAroundRoundRectangle [
 
 	| blue |
@@ -237,7 +239,7 @@ BlAnchorExamples class >> example_AnchorsAroundRoundRectangle [
 	blue geometry: (BlRoundedRectangleGeometry cornerRadius: 50)
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_CenterLayout [
 
 	| pane pink blue red green |
@@ -287,7 +289,7 @@ BlAnchorExamples class >> example_CenterLayout [
 	pane openInSpace
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_PerimeterAnchorOnLeftHandSide [
 
 	| pane blue red |
@@ -320,14 +322,14 @@ BlAnchorExamples class >> example_PerimeterAnchorOnLeftHandSide [
 	^ blue
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> example_pointOnPerimeterAtRadians [
 
 	| view element count points angle polygon |
 	view := BlElement new.
 	view constraintsDo: [ :c |
-			c vertical matchParent.
-			c horizontal matchParent ].
+		c vertical matchParent.
+		c horizontal matchParent ].
 	view background: Color white.
 
 	"Créer un élément arrondi simple, sans marges"
@@ -338,15 +340,14 @@ BlAnchorExamples class >> example_pointOnPerimeterAtRadians [
 	element position: 30 @ 30.
 	element background: Color lightGray.
 	view addChild: element.
-	view forceLayout.
 
 	"Calculer les points sur le périmètre"
 	count := 1000.
 	points := (0 to: count - 1) collect: [ :i |
-			          angle := 2 * Float pi * i / count.
-			          element geometry
-				          pointOnPerimeterOfElement: element
-				          atRadians: angle ].
+		angle := 2 * Float pi * i / count.
+		element geometry
+			pointOnPerimeterOfElement: element
+			atRadians: angle ].
 
 	"Tracer une polyligne pour relier les points"
 	polygon := (BlPolygonGeometry vertices: points) asElement.
@@ -355,18 +356,18 @@ BlAnchorExamples class >> example_pointOnPerimeterAtRadians [
 
 	"Afficher les points en petits cercles"
 	points do: [ :pt |
-			| dot |
-			dot := BlElement new.
-			dot geometry: BlEllipseGeometry new.
-			dot extent: 2 @ 2.
-			dot position: pt - (1 @ 1).
-			dot background: Color blue.
-			view addChild: dot ].
+		| dot |
+		dot := BlElement new.
+		dot geometry: BlEllipseGeometry new.
+		dot extent: 2 @ 2.
+		dot position: pt - (1 @ 1).
+		dot background: Color blue.
+		view addChild: dot ].
 
 	view openInSpace
 ]
 
-{ #category : #anchors }
+{ #category : 'anchors' }
 BlAnchorExamples class >> mainPane [
 
 	  | pane |

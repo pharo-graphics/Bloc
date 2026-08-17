@@ -1,10 +1,30 @@
 Class {
-	#name : #BlProportionalLayoutTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlProportionalLayoutTest',
+	#superclass : 'TestCase',
+	#instVars : [
+		'space'
+	],
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'running' }
+BlProportionalLayoutTest >> setUp [
+	super setUp.
+	space := BlSpace new.
+	space host: BlHeadlessHost new.
+	space show; waitPendingWork
+]
+
+{ #category : 'running' }
+BlProportionalLayoutTest >> tearDown [
+	space ifNotNil: [
+		space close; waitPendingWork.
+		space := nil ].
+	super tearDown
+]
+
+{ #category : 'tests' }
 BlProportionalLayoutTest >> testDefaultConstraints [
 
 	| aContainer aChild |
@@ -21,7 +41,7 @@ BlProportionalLayoutTest >> testDefaultConstraints [
 		yourself.
 	
 	aChild requestLayout.
-	aContainer forceLayout.
+	space mutateSync: [ space root addChild: aContainer ].
 	
 	self assert: aContainer extent equals: 210@110.
 	self assert: aChild position equals: 5@5.
@@ -40,7 +60,7 @@ BlProportionalLayoutTest >> testDefaultConstraints [
 		equals: 1.0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 
 	| aContainer aChild childFractions childMargin containerPadding containerExtent childMaxWidth childMaxHeight |
@@ -74,7 +94,7 @@ BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 		yourself.
 
 	aChild requestLayout.
-	aContainer forceLayout.
+	space mutateSync: [ space root addChild: aContainer ].
 
 	self assert: aContainer extent equals: containerExtent.
 
@@ -94,7 +114,7 @@ BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 			(containerExtent y - containerPadding bottom - childMargin bottom - (childMaxHeight * (1 - childFractions bottom))) ceiling
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlProportionalLayoutTest >> testGrandChildMatchesParent [
 
 	| aContainer aChild aGrandChild |	
@@ -129,7 +149,7 @@ BlProportionalLayoutTest >> testGrandChildMatchesParent [
 		padding: (BlInsets all: 4);
 		yourself.
 	
-	aContainer forceLayout.
+	space mutateSync: [ space root addChild: aContainer ].
 	
 	self
 		assert: aChild bounds left
@@ -181,7 +201,7 @@ BlProportionalLayoutTest >> testGrandChildMatchesParent [
 				inset: aChild bounds inSpace)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlProportionalLayoutTest >> testHorizontalAndVerticalConstraints [
 
 	| aContainer aChild |
@@ -204,13 +224,13 @@ BlProportionalLayoutTest >> testHorizontalAndVerticalConstraints [
 		yourself.
 	
 	aChild requestLayout.
-	aContainer forceLayout.
+	space mutateSync: [ space root addChild: aContainer ].
 	
 	self assert: aChild position equals: 10@20.
 	self assert: aChild extent equals: 80@60
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlProportionalLayoutTest >> testIgnoreByLayoutChild [
 
 	| aContainer aChild |
@@ -232,13 +252,13 @@ BlProportionalLayoutTest >> testIgnoreByLayoutChild [
 		addChild: aChild;
 		yourself.
 	
-	aContainer forceLayout.
+	space mutateSync: [ space root addChild: aContainer ].
 
 	self assert: aChild position equals: 2 @ 78.
 	self assert: aChild extent equals: 10 @ 20
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlProportionalLayoutTest >> testMultipleChildren [
 
 	| aContainer childA childB |
@@ -264,7 +284,7 @@ BlProportionalLayoutTest >> testMultipleChildren [
 	
 	childA requestLayout.
 	childB requestLayout.
-	aContainer forceLayout.
+	space mutateSync: [ space root addChild: aContainer ].
 	
 	self assert: childA position equals: 0@0.
 	self assert: childA extent equals: 50@100.

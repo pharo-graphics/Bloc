@@ -1,10 +1,30 @@
 Class {
-	#name : #BlIgnoredLayoutTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlIgnoredLayoutTest',
+	#superclass : 'TestCase',
+	#instVars : [
+		'space'
+	],
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #'examples - alignment' }
+{ #category : 'running' }
+BlIgnoredLayoutTest >> setUp [
+	super setUp.
+	space := BlSpace new.
+	space host: BlHeadlessHost new.
+	space show; waitPendingWork
+]
+
+{ #category : 'running' }
+BlIgnoredLayoutTest >> tearDown [
+	space ifNotNil: [
+		space close; waitPendingWork.
+		space := nil ].
+	super tearDown
+]
+
+{ #category : 'examples - alignment' }
 BlIgnoredLayoutTest >> testAlignmentIsStable [
 
 	<sampleInstance>
@@ -25,14 +45,14 @@ BlIgnoredLayoutTest >> testAlignmentIsStable [
 		              clipChildren: false;
 		              addChild: aChild.
 
-	aContainer forceLayout.
+	space mutateSync: [ space root addChild: aContainer ].
 
 	self assert: aContainer extent equals: 300 @ 200.
 	self assert: aChild position equals: 125 @ -25.
 	self assert: aChild extent equals: 50 @ 50.
 
 	aChild requestLayout.
-	aContainer forceLayout.
+	space mutateSync: [ space root addChild: aContainer ].
 
 	self assert: aContainer extent equals: 300 @ 200.
 	self assert: aChild position equals: 125 @ -25.

@@ -2,12 +2,33 @@
 A BlAnchorLayoutRuleTest is a test class for testing the behavior of BlAnchorLayoutRule
 "
 Class {
-	#name : #BlAnchorLayoutRuleTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Layout-Tests-Anchor'
+	#name : 'BlAnchorLayoutRuleTest',
+	#superclass : 'TestCase',
+	#instVars : [
+		'space'
+	],
+	#category : 'Bloc-Layout-Tests-Anchor',
+	#package : 'Bloc-Layout-Tests',
+	#tag : 'Anchor'
 }
 
-{ #category : #tests }
+{ #category : 'running' }
+BlAnchorLayoutRuleTest >> setUp [
+	super setUp.
+	space := BlSpace new.
+	space host: BlHeadlessHost new.
+	space show; waitPendingWork
+]
+
+{ #category : 'running' }
+BlAnchorLayoutRuleTest >> tearDown [
+	space ifNotNil: [
+		space close; waitPendingWork.
+		space := nil ].
+	super tearDown
+]
+
+{ #category : 'tests' }
 BlAnchorLayoutRuleTest >> testAppliedOnChildBoundsInParentForChild [
 
 	| parent child rule resultBounds |
@@ -19,8 +40,8 @@ BlAnchorLayoutRuleTest >> testAppliedOnChildBoundsInParentForChild [
 	rule := BlAnchorLayoutRule new.
 	rule baseAnchor: child extentAnchor.
 	rule rightHandSideAnchor: parent extentAnchor.
-	parent forceLayout.
-	child forceLayout.
+	space mutateSync: [ space root addChild: parent ].
+	space waitPendingWork.
 	resultBounds := rule
 		                appliedOnChildBounds: (0 @ 0 extent: 10 asPoint)
 		                inParent: parent
@@ -34,7 +55,7 @@ BlAnchorLayoutRuleTest >> testAppliedOnChildBoundsInParentForChild [
 	self assert: resultBounds equals: (0 @ 0 extent: 70 asPoint)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAnchorLayoutRuleTest >> testIsMeasurement [
 
 	| parent child rule |
@@ -48,7 +69,7 @@ BlAnchorLayoutRuleTest >> testIsMeasurement [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlAnchorLayoutRuleTest >> testIsMeasurement2 [
 
 	| parent child rule |

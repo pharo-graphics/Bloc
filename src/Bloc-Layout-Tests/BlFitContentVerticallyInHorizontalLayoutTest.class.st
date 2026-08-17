@@ -3,12 +3,16 @@ I have been automatically converted and probably manually tweaked from BlFitCont
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlFitContentVerticallyInHorizontalLayoutTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlFitContentVerticallyInHorizontalLayoutTest',
+	#superclass : 'TestCase',
+	#instVars : [
+		'space'
+	],
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> blue [
 
 	<sampleInstance>
@@ -20,25 +24,25 @@ BlFitContentVerticallyInHorizontalLayoutTest >> blue [
 		  margin: self blueMargin
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> blueHeight [
 
 	^ 100
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> blueMargin [
 
 	^ BlInsets right: self boxMargin
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> blueWidth [
 
 	^ 75
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> box [
 
 	<sampleInstance>
@@ -46,13 +50,13 @@ BlFitContentVerticallyInHorizontalLayoutTest >> box [
 	^ BlElement new
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> boxMargin [
 
 	^ 15
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> container [
 
 	<sampleInstance>
@@ -65,13 +69,13 @@ BlFitContentVerticallyInHorizontalLayoutTest >> container [
 		  padding: (BlInsets all: self containerPadding)
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> containerPadding [
 
 	^ 25
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> flow [
 
 	<sampleInstance>
@@ -81,7 +85,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> flow [
 		  addChild: (self layoutLabel: 'Flow')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> green [
 
 	<sampleInstance>
@@ -94,25 +98,25 @@ BlFitContentVerticallyInHorizontalLayoutTest >> green [
 		  margin: self greenMargin
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> greenHeight [
 
 	^ 80
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> greenMargin [
 
 	^ BlInsets top: self boxMargin
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> greenWidth [
 
 	^ 150
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> grid [
 
 	<sampleInstance>
@@ -122,7 +126,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> grid [
 		  addChild: (self layoutLabel: 'Grid')
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> layoutLabel: aString [
 
 	^ BlTextElement new
@@ -134,7 +138,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> layoutLabel: aString [
 		  yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> list [
 
 	<sampleInstance>
@@ -144,14 +148,14 @@ BlFitContentVerticallyInHorizontalLayoutTest >> list [
 		  addChild: (self layoutLabel: 'List')
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> oneColumnExtentDepth: aNumber [
 
 	^ (self oneColumnWidthDepth: aNumber)
 	  @ (self oneColumnHeightDepth: aNumber)
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> oneColumnHeight [
 
 	^ {
@@ -160,13 +164,13 @@ BlFitContentVerticallyInHorizontalLayoutTest >> oneColumnHeight [
 		  (self greenHeight + self greenMargin height) } sum
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> oneColumnHeightDepth: aNumber [
 
 	^ self oneColumnHeight + (self containerPadding * 2 * aNumber)
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> oneColumnWidth [
 
 	^ {
@@ -175,13 +179,13 @@ BlFitContentVerticallyInHorizontalLayoutTest >> oneColumnWidth [
 		  (self greenWidth + self greenMargin width) } max
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> oneColumnWidthDepth: aNumber [
 
 	^ self oneColumnWidth + (self containerPadding * 2 * aNumber)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> red [
 
 	<sampleInstance>
@@ -193,13 +197,13 @@ BlFitContentVerticallyInHorizontalLayoutTest >> red [
 		  margin: self redMargin
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> redHeight [
 
 	^ 75
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> redMargin [
 
 	^ BlInsets
@@ -209,13 +213,29 @@ BlFitContentVerticallyInHorizontalLayoutTest >> redMargin [
 		  left: 0
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> redWidth [
 
 	^ 100
 ]
 
-{ #category : #tests }
+{ #category : 'running' }
+BlFitContentVerticallyInHorizontalLayoutTest >> setUp [
+	super setUp.
+	space := BlSpace new.
+	space host: BlHeadlessHost new.
+	space show; waitPendingWork
+]
+
+{ #category : 'running' }
+BlFitContentVerticallyInHorizontalLayoutTest >> tearDown [
+	space ifNotNil: [
+		space close; waitPendingWork.
+		space := nil ].
+	super tearDown
+]
+
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlow [
 
 	<sampleInstance>
@@ -227,14 +247,14 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlow [
 			self red.
 			self blue.
 			self green }.
-	flow forceLayout.
+	space mutateSync: [ space root addChild: flow ].
 
 	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
 
 	^ flow
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowGridGrid [
 
 	<sampleInstance>
@@ -252,7 +272,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowGridGrid [
 	secondGrid := self grid.
 	secondGrid width: (self oneColumnWidthDepth: 3).
 	secondGrid addChild: firstGrid.
-	secondGrid forceLayout.
+	space mutateSync: [ space root addChild: secondGrid ].
 
 	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
 	self assert: firstGrid extent equals: (self oneColumnExtentDepth: 2).
@@ -261,7 +281,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowGridGrid [
 	^ secondGrid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowList [
 
 	<sampleInstance>
@@ -275,11 +295,11 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowList [
 
 	list := self list.
 	list width: (self oneColumnWidthDepth: 2) + 1.
-	list addChild: flow.
+	list addChild: flow. space mutateSync: [ space root addChild: list ].
 
-	list forceLayout.
+	space waitPendingWork.
 	list width: (self oneColumnWidthDepth: 2).
-	list forceLayout.
+	space waitPendingWork.
 
 	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
 	self assert: list extent equals: (self oneColumnExtentDepth: 2).
@@ -287,7 +307,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowList [
 	^ list
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowListGrid [
 
 	<sampleInstance>
@@ -305,7 +325,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowListGrid [
 	grid := self grid.
 	grid width: (self oneColumnWidthDepth: 3).
 	grid addChild: list.
-	grid forceLayout.
+	space mutateSync: [ space root addChild: grid ].
 
 	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
 	self assert: list extent equals: (self oneColumnExtentDepth: 2).
@@ -314,7 +334,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowListGrid [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowListList [
 
 	<sampleInstance>
@@ -332,7 +352,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowListList [
 	secondList := self list.
 	secondList width: (self oneColumnWidthDepth: 3).
 	secondList addChild: firstList.
-	secondList forceLayout.
+	space mutateSync: [ space root addChild: secondList ].
 
 	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
 	self assert: firstList extent equals: (self oneColumnExtentDepth: 2).
@@ -341,7 +361,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowListList [
 	^ secondList
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowGridGrid [
 
 	<sampleInstance>
@@ -359,7 +379,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowGridGrid [
 	secondGrid := self grid.
 	secondGrid width: (self threeColumnWidthDepth: 3).
 	secondGrid addChild: firstGrid.
-	secondGrid forceLayout.
+	space mutateSync: [ space root addChild: secondGrid ].
 
 	self assert: flow extent equals: (self threeColumnExtentDepth: 1).
 	self
@@ -372,7 +392,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowGridGrid [
 	^ secondGrid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowListGrid [
 
 	<sampleInstance>
@@ -390,7 +410,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowListGrid [
 	grid := self grid.
 	grid width: (self threeColumnWidthDepth: 3).
 	grid addChild: list.
-	grid forceLayout.
+	space mutateSync: [ space root addChild: grid ].
 
 	self assert: flow extent equals: (self threeColumnExtentDepth: 1).
 	self assert: list extent equals: (self threeColumnExtentDepth: 2).
@@ -399,7 +419,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowListGrid [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowListList [
 
 	<sampleInstance>
@@ -417,7 +437,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowListList [
 	secondList := self list.
 	secondList width: (self threeColumnWidthDepth: 3).
 	secondList addChild: firstList.
-	secondList forceLayout.
+	space mutateSync: [ space root addChild: secondList ].
 
 	self assert: flow extent equals: (self threeColumnExtentDepth: 1).
 	self
@@ -430,7 +450,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowListList [
 	^ secondList
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlow [
 
 	<sampleInstance>
@@ -442,14 +462,14 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlow [
 			self red.
 			self blue.
 			self green }.
-	flow forceLayout.
+	space mutateSync: [ space root addChild: flow ].
 
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
 
 	^ flow
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowFlow [
 
 	<sampleInstance>
@@ -467,7 +487,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowFlow [
 	thirdFlow := self flow.
 	thirdFlow width: (self twoColumnWidthDepth: 3).
 	thirdFlow addChild: secondFlow.
-	thirdFlow forceLayout.
+	space mutateSync: [ space root addChild: thirdFlow ].
 
 	self assert: firstFlow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: secondFlow extent equals: (self twoColumnExtentDepth: 2).
@@ -476,7 +496,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowFlow [
 	^ thirdFlow
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowList [
 
 	<sampleInstance>
@@ -493,8 +513,8 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowList [
 
 	list := self list.
 	list width: (self twoColumnWidthDepth: 3).
-	list addChild: secondFlow.
-	list forceLayout.
+	list addChild: secondFlow. space mutateSync: [ space root addChild: list ].
+	space waitPendingWork.
 
 	self assert: firstFlow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: secondFlow extent equals: (self twoColumnExtentDepth: 2).
@@ -503,7 +523,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowList [
 	^ list
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridGrid [
 
 	<sampleInstance>
@@ -521,7 +541,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridGrid [
 	secondGrid := self grid.
 	secondGrid width: (self twoColumnWidthDepth: 3).
 	secondGrid addChild: firstGrid.
-	secondGrid forceLayout.
+	space mutateSync: [ space root addChild: secondGrid ].
 
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: firstGrid extent equals: (self twoColumnExtentDepth: 2).
@@ -530,7 +550,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridGrid [
 	^ secondGrid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridList [
 
 	<sampleInstance>
@@ -547,8 +567,8 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridList [
 
 	list := self list.
 	list width: (self twoColumnWidthDepth: 3).
-	list addChild: grid.
-	list forceLayout.
+	list addChild: grid. space mutateSync: [ space root addChild: list ].
+	space waitPendingWork.
 
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: grid extent equals: (self twoColumnExtentDepth: 2).
@@ -557,7 +577,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridList [
 	^ list
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowList [
 
 	<sampleInstance>
@@ -571,8 +591,8 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowList [
 
 	list := self list.
 	list width: (self twoColumnWidthDepth: 2).
-	list addChild: flow.
-	list forceLayout.
+	list addChild: flow. space mutateSync: [ space root addChild: list ].
+	space waitPendingWork.
 
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: list extent equals: (self twoColumnExtentDepth: 2).
@@ -580,7 +600,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowList [
 	^ list
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowListGrid [
 
 	<sampleInstance>
@@ -598,7 +618,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowListGrid [
 	grid := self grid.
 	grid width: (self twoColumnWidthDepth: 3).
 	grid addChild: list.
-	grid forceLayout.
+	space mutateSync: [ space root addChild: grid ].
 
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: list extent equals: (self twoColumnExtentDepth: 2).
@@ -607,7 +627,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowListGrid [
 	^ grid
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowListList [
 
 	<sampleInstance>
@@ -625,7 +645,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowListList [
 	secondList := self list.
 	secondList width: (self twoColumnWidthDepth: 3).
 	secondList addChild: firstList.
-	secondList forceLayout.
+	space mutateSync: [ space root addChild: secondList ].
 
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: firstList extent equals: (self twoColumnExtentDepth: 2).
@@ -634,14 +654,14 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowListList [
 	^ secondList
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> threeColumnExtentDepth: aNumber [
 
 	^ (self threeColumnWidthDepth: aNumber)
 	  @ (self threeColumnHeightDepth: aNumber)
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> threeColumnHeight [
 
 	^ {
@@ -650,13 +670,13 @@ BlFitContentVerticallyInHorizontalLayoutTest >> threeColumnHeight [
 		  (self greenHeight + self greenMargin height) } max
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> threeColumnHeightDepth: aNumber [
 
 	^ self threeColumnHeight + (self containerPadding * 2 * aNumber)
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> threeColumnWidth [
 
 	^ {
@@ -665,20 +685,20 @@ BlFitContentVerticallyInHorizontalLayoutTest >> threeColumnWidth [
 		  (self greenWidth + self greenMargin width) } sum
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> threeColumnWidthDepth: aNumber [
 
 	^ self threeColumnWidth + (self containerPadding * 2 * aNumber)
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> twoColumnExtentDepth: aNumber [
 
 	^ (self twoColumnWidthDepth: aNumber)
 	  @ (self twoColumnHeightDepth: aNumber)
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> twoColumnHeight [
 
 	^ {
@@ -687,13 +707,13 @@ BlFitContentVerticallyInHorizontalLayoutTest >> twoColumnHeight [
 	  + self greenHeight + self greenMargin height
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> twoColumnHeightDepth: aNumber [
 
 	^ self twoColumnHeight + (self containerPadding * 2 * aNumber)
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> twoColumnWidth [
 
 	^ {
@@ -702,7 +722,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> twoColumnWidth [
 		  (self greenWidth + self greenMargin width) } max
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlFitContentVerticallyInHorizontalLayoutTest >> twoColumnWidthDepth: aNumber [
 
 	^ self twoColumnWidth + (self containerPadding * 2 * aNumber)

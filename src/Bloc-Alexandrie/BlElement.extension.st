@@ -18,7 +18,16 @@ BlElement >> aeAsForm [
 
 	^ self inUIProcessAndWaitDo: [
 		| topMostBounds transformedGeometryBounds aCanvas matrix |
-		self isLayoutRequested ifTrue: [ self forceLayout ]. "We want to consider our border, effect, as well as children's."
+		self isLayoutRequested ifTrue: [
+			self isAttachedToSceneGraph
+				ifTrue: [ self space waitPendingWork ]
+				ifFalse: [
+					| aSpace |
+					aSpace := BlSpace new host: BlHeadlessHost new.
+					aSpace show; waitPendingWork.
+					aSpace mutateSync: [ aSpace root addChild: self ].
+					aSpace mutateSync: [ self removeFromParent ].
+					aSpace close; waitPendingWork ] ]. "We want to consider our border, effect, as well as children's."
 		topMostBounds := self topMostParent bounds asRectangle.
 
 		matrix := BlMatrix2D new.

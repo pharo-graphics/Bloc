@@ -1,14 +1,16 @@
 Class {
-	#name : #BlLinearLayoutHorizontalExamples,
-	#superclass : #BlLinearLayoutExamples,
-	#category : #'Bloc-Layout-Examples-LinearMigrated'
+	#name : 'BlLinearLayoutHorizontalExamples',
+	#superclass : 'BlLinearLayoutExamples',
+	#category : 'Bloc-Layout-Examples-LinearMigrated',
+	#package : 'Bloc-Layout-Examples',
+	#tag : 'LinearMigrated'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutHorizontalExamples >> elementWithOneChildMatchInExactParentPadding [
 	<gtExample>
 	<description: 'A single child is distributed equally within the parent''s bounds'>
-	| parent child |
+	| parent space child |
 	child := self childElementMatchingParent.
 
 	parent := self parentWithLinearHorizontalLayout.
@@ -18,7 +20,10 @@ BlLinearLayoutHorizontalExamples >> elementWithOneChildMatchInExactParentPadding
 
 	parent addChildren: { child }.
 
-	parent forceLayout.
+	space ifNil: [
+	space := BlSpace new host: BlHeadlessHost new.
+	space show; waitPendingWork.
+	space mutateSync: [ space root addChild: parent ] ] ifNotNil: [ space waitPendingWork ].
 
 	self assert: child extent equals: 360@560.
 	self assert: child position equals: 20@20.
@@ -28,11 +33,11 @@ BlLinearLayoutHorizontalExamples >> elementWithOneChildMatchInExactParentPadding
 	^ parent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutHorizontalExamples >> elementWithOneChildMatchOneExactInFitParent [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| parent childA childB |
+	| parent space childA childB |
 	childA := self childExact: 300@200.
 	childB := self childExactWidth: 200.
 	childB constraints vertical matchParent.
@@ -43,7 +48,10 @@ BlLinearLayoutHorizontalExamples >> elementWithOneChildMatchOneExactInFitParent 
 
 	parent addChildren: { childA . childB }.
 
-	parent forceLayout.
+	space ifNil: [
+	space := BlSpace new host: BlHeadlessHost new.
+	space show; waitPendingWork.
+	space mutateSync: [ space root addChild: parent ] ] ifNotNil: [ space waitPendingWork ].
 
 	self assert: childA extent equals: 300@200.
 	self assert: childA position equals: 0@0.
@@ -57,11 +65,11 @@ BlLinearLayoutHorizontalExamples >> elementWithOneChildMatchOneExactInFitParent 
 	
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutHorizontalExamples >> elementWithOneExactChildInExactParentMargin [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| parent childA |
+	| parent space childA |
 	childA := self childExact: 20@20.
 	childA margin: (BlInsets top: 15 right: 0 bottom: 0 left: 10).
 	
@@ -71,7 +79,10 @@ BlLinearLayoutHorizontalExamples >> elementWithOneExactChildInExactParentMargin 
 
 	parent addChildren: { childA }.
 
-	parent forceLayout.
+	space ifNil: [
+	space := BlSpace new host: BlHeadlessHost new.
+	space show; waitPendingWork.
+	space mutateSync: [ space root addChild: parent ] ] ifNotNil: [ space waitPendingWork ].
 
 	self assert: childA extent equals: 20@20.
 	self assert: childA position equals: 10@15.
@@ -81,11 +92,11 @@ BlLinearLayoutHorizontalExamples >> elementWithOneExactChildInExactParentMargin 
 	^ parent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutHorizontalExamples >> elementWithThreeMatchChildrenInExactParent [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| parent childA childB childC |
+	| parent space childA childB childC |
 	childA := self childElementMatchingParent.
 	childB := self childElementMatchingParent.
 	childC := self childElementMatchingParent.
@@ -96,7 +107,10 @@ BlLinearLayoutHorizontalExamples >> elementWithThreeMatchChildrenInExactParent [
 
 	parent addChildren: { childA . childB . childC }.
 
-	parent forceLayout.
+	space ifNil: [
+	space := BlSpace new host: BlHeadlessHost new.
+	space show; waitPendingWork.
+	space mutateSync: [ space root addChild: parent ] ] ifNotNil: [ space waitPendingWork ].
 
 	self assert: childA extent equals: 200@200.
 	self assert: childA position equals: 0@0.
@@ -113,11 +127,11 @@ BlLinearLayoutHorizontalExamples >> elementWithThreeMatchChildrenInExactParent [
 	^ parent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutHorizontalExamples >> elementWithThreeMatchChildrenInExactParentRTL [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| parent childA childB childC |
+	| parent space childA childB childC |
 	childA := self childElementMatchingParent.
 	childB := self childElementMatchingParent.
 	childC := self childElementMatchingParent.
@@ -129,7 +143,10 @@ BlLinearLayoutHorizontalExamples >> elementWithThreeMatchChildrenInExactParentRT
 
 	parent addChildren: { childA . childB . childC }.
 
-	parent forceLayout.
+	space ifNil: [
+	space := BlSpace new host: BlHeadlessHost new.
+	space show; waitPendingWork.
+	space mutateSync: [ space root addChild: parent ] ] ifNotNil: [ space waitPendingWork ].
 
 	self assert: childC extent equals: 200@200.
 	self assert: childC position equals: 0@0.
@@ -146,11 +163,11 @@ BlLinearLayoutHorizontalExamples >> elementWithThreeMatchChildrenInExactParentRT
 	^ parent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutHorizontalExamples >> elementWithTwoChildrenMatchInExactParentPadding [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| parent childA childB |
+	| parent space childA childB |
 	childA := self childElementMatchingParent.
 	childB := self childElementMatchingParent.
 
@@ -161,7 +178,10 @@ BlLinearLayoutHorizontalExamples >> elementWithTwoChildrenMatchInExactParentPadd
 
 	parent addChildren: { childA . childB }.
 
-	parent forceLayout.
+	space ifNil: [
+	space := BlSpace new host: BlHeadlessHost new.
+	space show; waitPendingWork.
+	space mutateSync: [ space root addChild: parent ] ] ifNotNil: [ space waitPendingWork ].
 
 	self assert: childA extent equals: 180@560.
 	self assert: childA position equals: 20@20.
@@ -175,11 +195,11 @@ BlLinearLayoutHorizontalExamples >> elementWithTwoChildrenMatchInExactParentPadd
 	^ parent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutHorizontalExamples >> elementWithTwoExactChildrenInFitContent [
 	<gtExample>
 	"Parent resizes to fit children"
-	| parent childA childB |
+	| parent space childA childB |
 	childA := self childExact: 200@100.
 	childB := self childExact: 100@200.
 	
@@ -189,7 +209,10 @@ BlLinearLayoutHorizontalExamples >> elementWithTwoExactChildrenInFitContent [
 	
 	parent addChildren: { childA . childB }.
 	
-	parent forceLayout.
+	space ifNil: [
+	space := BlSpace new host: BlHeadlessHost new.
+	space show; waitPendingWork.
+	space mutateSync: [ space root addChild: parent ] ] ifNotNil: [ space waitPendingWork ].
 	
 	self assert: childA extent equals: 200@100.
 	self assert: childA position equals: 0@0.
@@ -203,11 +226,11 @@ BlLinearLayoutHorizontalExamples >> elementWithTwoExactChildrenInFitContent [
 	^ parent
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlLinearLayoutHorizontalExamples >> elementWithTwoMatchChildrenInExactParent [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| parent childA childB |
+	| parent space childA childB |
 	childA := self childElementMatchingParent.
 	childB := self childElementMatchingParent.
 	
@@ -217,7 +240,10 @@ BlLinearLayoutHorizontalExamples >> elementWithTwoMatchChildrenInExactParent [
 
 	parent addChildren: { childA . childB }.
 
-	parent forceLayout.
+	space ifNil: [
+	space := BlSpace new host: BlHeadlessHost new.
+	space show; waitPendingWork.
+	space mutateSync: [ space root addChild: parent ] ] ifNotNil: [ space waitPendingWork ].
 
 	self assert: childA extent equals: 250@200.
 	self assert: childA position equals: 0@0.
@@ -231,10 +257,10 @@ BlLinearLayoutHorizontalExamples >> elementWithTwoMatchChildrenInExactParent [
 	^ parent
 ]
 
-{ #category : #'examples - visibility' }
+{ #category : 'examples - visibility' }
 BlLinearLayoutHorizontalExamples >> one_child_set_visibility_gone [
 	<gtExample>
-	| aContainer aRed aBlue |
+	| aContainer space aRed aBlue |
 	
 	aContainer := BlElement new
 		layout: (BlLinearLayout horizontal cellSpacing: 20);
@@ -257,7 +283,10 @@ BlLinearLayoutHorizontalExamples >> one_child_set_visibility_gone [
 		
 	aContainer addChildren: { aRed . aBlue }.
 	
-	aContainer forceLayout.
+	space ifNil: [
+	space := BlSpace new host: BlHeadlessHost new.
+	space show; waitPendingWork.
+	space mutateSync: [ space root addChild: aContainer ] ] ifNotNil: [ space waitPendingWork ].
 	
 	self assert: aContainer extent equals: 500@400.
 	self assert: aRed position equals: 20@10.
@@ -268,7 +297,10 @@ BlLinearLayoutHorizontalExamples >> one_child_set_visibility_gone [
 	
 	aRed visibility: BlVisibility gone.
 	
-	aContainer forceLayout.
+	space ifNil: [
+	space := BlSpace new host: BlHeadlessHost new.
+	space show; waitPendingWork.
+	space mutateSync: [ space root addChild: aContainer ] ] ifNotNil: [ space waitPendingWork ].
 	
 	self assert: aContainer extent equals: 500@400.
 	"red keeps its position and extent from the previous pass"
@@ -281,7 +313,7 @@ BlLinearLayoutHorizontalExamples >> one_child_set_visibility_gone [
 	^ aContainer
 ]
 
-{ #category : #'examples - setup' }
+{ #category : 'examples - setup' }
 BlLinearLayoutHorizontalExamples >> parentWithLinearHorizontalLayout [
 	<gtExample>
 	| element |

@@ -3,12 +3,13 @@ I have been automatically converted and probably manually tweaked from BlLinearL
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlLinearLayoutUsageTest,
-	#superclass : #BlLinearLayoutTest,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlLinearLayoutUsageTest',
+	#superclass : 'BlLinearLayoutTest',
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testEqualizingHeighAndWidth [
 
 	<sampleInstance>
@@ -19,7 +20,7 @@ BlLinearLayoutUsageTest >> testEqualizingHeighAndWidth [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testEqualizingWidth [
 
 	<sampleInstance>
@@ -30,7 +31,7 @@ BlLinearLayoutUsageTest >> testEqualizingWidth [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testExampleHorizontalListFixedWidthLTR [
 
 	<sampleInstance>
@@ -67,7 +68,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListFixedWidthLTR [
 	^ el
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testExampleHorizontalListFixedWidthRTL [
 
 	<sampleInstance>
@@ -104,7 +105,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListFixedWidthRTL [
 	^ el
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testExampleHorizontalListLTR [
 
 	<sampleInstance>
@@ -137,7 +138,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListLTR [
 	^ el
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testExampleHorizontalListRTL [
 
 	<sampleInstance>
@@ -170,7 +171,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListRTL [
 	^ el
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testExampleHorizontalTopCenterBottomLTR [
 
 	<sampleInstance>
@@ -197,7 +198,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalTopCenterBottomLTR [
 	^ el
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testExampleHorizontalTopCenterBottomRTL [
 
 	<sampleInstance>
@@ -224,7 +225,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalTopCenterBottomRTL [
 	^ el
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testExampleHorizontalUsingWeightLTR [
 
 	<sampleInstance>
@@ -260,7 +261,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalUsingWeightLTR [
 	^ el
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testExampleHorizontalUsingWeightRTL [
 
 	<sampleInstance>
@@ -296,7 +297,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalUsingWeightRTL [
 	^ el
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testExampleVerticalLeftCenterRightLRT [
 
 	<sampleInstance>
@@ -328,7 +329,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalLeftCenterRightLRT [
 	^ el
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testExampleVerticalLeftCenterRightRTL [
 
 	<sampleInstance>
@@ -360,7 +361,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalLeftCenterRightRTL [
 	^ el
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testExampleVerticalList [
 
 	<sampleInstance>
@@ -397,7 +398,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalList [
 	^ el
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testExampleVerticalListFixedHeight [
 
 	<sampleInstance>
@@ -428,7 +429,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalListFixedHeight [
 	^ el
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testMatchParentInFitContent [
 	"If all children in the parent that fits content match parent then they should be measured with 0 size"
 
@@ -450,13 +451,13 @@ BlLinearLayoutUsageTest >> testMatchParentInFitContent [
 		c horizontal exact: 300.
 		c vertical fitContent ].
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 50.
 	self assert: child extent equals: 100 @ 0.
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeBackToMatchParent [
 
 	<sampleInstance>
@@ -465,13 +466,13 @@ BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeBackToMatchParent [
 	parent := self testMatchParentInFitContentChangeToExact.
 	child := parent children first.
 	child constraintsDo: [ :c | c vertical matchParent ].
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 50.
 	self assert: child extent equals: 100 @ 0.
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeToExact [
 	"Now we change size to exact and expect parent to resize"
 
@@ -481,13 +482,13 @@ BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeToExact [
 	parent := self testMatchParentInFitContent.
 	child := parent children first.
 	child height: 200.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 250.
 	self assert: child extent equals: 100 @ 200.
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimited [
 
 	<sampleInstance>
@@ -513,13 +514,13 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimited [
 		c horizontal exact: 300.
 		c vertical exact: 400 ].
 	parent addChild: child.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 400.
 	self assert: child extent equals: 300 @ 400.
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChild [
 
 	<sampleInstance>
@@ -551,14 +552,14 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChild [
 	parent addChildren: {
 			childA.
 			childB }.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 300 @ 325.
 	self assert: childB extent equals: 100 @ 75.
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChildFitContent [
 
 	<sampleInstance>
@@ -597,7 +598,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChildFitCo
 	parent addChildren: {
 			childA.
 			childB }.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 300 @ 325.
 	self assert: childB extent equals: 300 @ 75.
@@ -605,7 +606,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChildFitCo
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndThreeChildlren [
 
 	<sampleInstance>
@@ -650,7 +651,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndThreeChild
 			childB.
 			childD }.
 	parent padding: (BlInsets left: 20 right: 20).
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 260 @ 175.
 	self assert: childB extent equals: 100 @ 75.
@@ -659,7 +660,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndThreeChild
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndTwoChildlren [
 
 	<sampleInstance>
@@ -697,7 +698,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndTwoChildlr
 			childA.
 			childB }.
 	parent padding: (BlInsets left: 20 right: 20).
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 260 @ 195.
 	self assert: childB extent equals: 100 @ 75.
@@ -705,7 +706,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndTwoChildlr
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndThreeChildlren [
 
 	<sampleInstance>
@@ -750,7 +751,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndThreeCh
 			childB.
 			childD }.
 	parent padding: (BlInsets left: 20 right: 20).
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 260 @ 140.
 	self assert: childB extent equals: 100 @ 75.
@@ -759,7 +760,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndThreeCh
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndTwoChildlren [
 
 	<sampleInstance>
@@ -797,7 +798,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndTwoChil
 			childA.
 			childB }.
 	parent padding: (BlInsets left: 20 right: 20).
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 260 @ 140.
 	self assert: childB extent equals: 100 @ 75.
@@ -805,7 +806,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndTwoChil
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testTwoChildrenMatchParentInFitContent [
 
 	<sampleInstance>
@@ -836,11 +837,11 @@ BlLinearLayoutUsageTest >> testTwoChildrenMatchParentInFitContent [
 		c vertical matchParent ].
 	parent addChild: child.
 	parent addChild: child2.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> testTwoChildrenOnOppositeSidesWithSpan [
 
 	<sampleInstance>
@@ -885,7 +886,7 @@ BlLinearLayoutUsageTest >> testTwoChildrenOnOppositeSidesWithSpan [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlLinearLayoutUsageTest >> twoChildrenMatchParentInFitContent [
 
 	<sampleInstance>
@@ -916,6 +917,6 @@ BlLinearLayoutUsageTest >> twoChildrenMatchParentInFitContent [
 		c vertical matchParent ].
 	parent addChild: child.
 	parent addChild: child2.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	^ parent
 ]

@@ -3,12 +3,13 @@ I have been automatically converted and probably manually tweaked from BlFrameLa
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlFrameLayoutMultipleChildrenTest,
-	#superclass : #BlFrameLayoutChildrenTest,
-	#category : #'Bloc-Layout-Tests'
+	#name : 'BlFrameLayoutMultipleChildrenTest',
+	#superclass : 'BlFrameLayoutChildrenTest',
+	#category : 'Bloc-Layout-Tests',
+	#package : 'Bloc-Layout-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutMultipleChildrenTest >> testChildElementWithExactExtent140per140 [
 
 	<sampleInstance>
@@ -24,7 +25,7 @@ BlFrameLayoutMultipleChildrenTest >> testChildElementWithExactExtent140per140 [
 	^ element
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignLeftCenterAndExactChildCenter [
 
 	<sampleInstance>
@@ -42,7 +43,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignLeftCenterAnd
 	parent addChildren: {
 			childOne.
 			childTwo }.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: childOne position equals: 0 @ 55.
 	self assert: childOne extent equals: 140 @ 140.
 	self assert: childTwo position equals: 100 @ 100.
@@ -52,7 +53,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignLeftCenterAnd
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignTopLeftAndExactChildRightCenter [
 
 	<sampleInstance>
@@ -67,7 +68,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignTopLeftAndExa
 	parent addChildren: {
 			childOne.
 			childTwo }.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: childOne position equals: 0 @ 0.
 	self assert: childOne extent equals: 140 @ 140.
 	self assert: childTwo position equals: 200 @ 100.
@@ -77,7 +78,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithExactChildAlignTopLeftAndExa
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutMultipleChildrenTest >> testElementWithNineExactChildrenWithAllAlignments [
 
 	<sampleInstance>
@@ -148,13 +149,13 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithNineExactChildrenWithAllAlig
 			childBottomLeft.
 			childBottomCenter.
 			childBottomRight }.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: parent position equals: 0 @ 0.
 	self assert: parent extent equals: 300 @ 250.
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutMultipleChildrenTest >> testElementWithTwoChildrenMatchingParentWithWeight [
 
 	<sampleInstance>
@@ -176,7 +177,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithTwoChildrenMatchingParentWit
 	parent addChildren: {
 			childOne.
 			childTwo }.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: childOne position equals: 0 @ 0.
 	self assert: childOne extent equals: 270 @ 125.
 	self assert: childTwo position equals: 0 @ 0.
@@ -186,7 +187,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithTwoChildrenMatchingParentWit
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutMultipleChildrenTest >> testElementWithTwoExactChildrenAndFitContentParent [
 
 	<sampleInstance>
@@ -213,7 +214,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithTwoExactChildrenAndFitConten
 	parent addChildren: {
 			childOne.
 			childTwo }.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: childOne position equals: 0 @ 0.
 	self assert: childOne extent equals: 250 @ 100.
 	self assert: childTwo position equals: 0 @ 0.
@@ -223,7 +224,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithTwoExactChildrenAndFitConten
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlFrameLayoutMultipleChildrenTest >> testElementWithTwoExactChildrenAndNoAlignment [
 
 	<sampleInstance>
@@ -235,7 +236,7 @@ BlFrameLayoutMultipleChildrenTest >> testElementWithTwoExactChildrenAndNoAlignme
 	parent addChildren: {
 			childOne.
 			childTwo }.
-	parent forceLayout.
+	space mutateSync: [ space root addChild: parent ].
 	self assert: childOne position equals: 0 @ 0.
 	self assert: childOne extent equals: 140 @ 140.
 	self assert: childTwo position equals: 0 @ 0.

@@ -2,94 +2,99 @@
 I am an exporter of Bloc elements to certain output format, that each of my subclasses define.
 "
 Class {
-	#name : #BAExporter,
-	#superclass : #Object,
+	#name : 'BAExporter',
+	#superclass : 'Object',
 	#instVars : [
 		'element',
 		'scale',
 		'background'
 	],
-	#category : #'Bloc-Alexandrie-Exporter'
+	#category : 'Bloc-Alexandrie-Exporter',
+	#package : 'Bloc-Alexandrie-Exporter'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BAExporter class >> form [
 	^ BAFormExporter new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BAExporter class >> jpg [
 	^ BAJpgExporter new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BAExporter class >> pdf [
 	^ BAPdfExporter new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BAExporter class >> png [
 	^ BAPngExporter new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BAExporter class >> svg [
 	^ BASvgExporter new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BAExporter >> background [
 
 	^ background
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BAExporter >> background: aColorOrPaint [
 
 	background := aColorOrPaint
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BAExporter >> element [
 	"Return an element to be exported"
 	
 	^ element
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BAExporter >> element: aBlElement [
 	"Specify an element to be exorted"
 	
 	element := aBlElement
 ]
 
-{ #category : #'api - exporting' }
+{ #category : 'exporting' }
 BAExporter >> export [
-
 	| aCanvas aBounds |
-	element isLayoutRequested ifTrue: [ element forceLayout ].
-
+	element isLayoutRequested ifTrue: [
+		element isAttachedToSceneGraph
+			ifTrue: [ element space waitPendingWork ]
+			ifFalse: [
+				| aSpace |
+				aSpace := BlSpace new host: BlHeadlessHost new.
+				aSpace show; waitPendingWork.
+				aSpace mutateSync: [ aSpace root addChild: element ].
+				aSpace mutateSync: [ element removeFromParent ].
+				aSpace close; waitPendingWork ] ].
 	aBounds := element invalidationBoundsInParent.
-
 	aCanvas := self newCanvas: aBounds extent * scale.
-
 	aCanvas
 		clear: self background;
 		pathScale: scale asPoint;
 		pathTranslate: aBounds origin negated.
 	element aeFullDrawOn: aCanvas.
-
 	^ self finishExport: aCanvas
 ]
 
-{ #category : #'api - exporting' }
+{ #category : 'api - exporting' }
 BAExporter >> finishExport: aeCanvas [
 	"Do finish the canvas and return the export result."
 
 	self subclassResponsibility
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BAExporter >> initialize [
 	super initialize.
 	
@@ -97,20 +102,20 @@ BAExporter >> initialize [
 	background := Color transparent
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BAExporter >> newCanvas: anExtent [
 	"Create a suitable canvas of a given size used for the export"
 	
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BAExporter >> scale [
 
 	^ scale
 ]
 
-{ #category : #'api - configuration' }
+{ #category : 'api - configuration' }
 BAExporter >> scale: aNumber [
 	"Scale horizontally and vertically by aNumber. Scale must be positive."
 
