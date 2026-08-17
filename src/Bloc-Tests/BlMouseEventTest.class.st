@@ -1,10 +1,15 @@
 Class {
-	#name : #BlMouseEventTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-Tests-Events'
+	#name : 'BlMouseEventTest',
+	#superclass : 'TestCase',
+	#instVars : [
+		'space'
+	],
+	#category : 'Bloc-Tests-Events',
+	#package : 'Bloc-Tests',
+	#tag : 'Events'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 BlMouseEventTest >> bottomLeftText: anEvent [
 
 	self
@@ -12,7 +17,7 @@ BlMouseEventTest >> bottomLeftText: anEvent [
 		for: anEvent currentTarget
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlMouseEventTest >> bottomRightText: anEvent [
 
 	self
@@ -20,7 +25,7 @@ BlMouseEventTest >> bottomRightText: anEvent [
 		for: anEvent currentTarget
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlMouseEventTest >> boundsOf: anElement [
 
 	| aRoot |
@@ -33,7 +38,7 @@ BlMouseEventTest >> boundsOf: anElement [
 	^ anElement bounds inParent: aRoot
 ]
 
-{ #category : #'running - instance creation' }
+{ #category : 'running - instance creation' }
 BlMouseEventTest >> newBox [
 
 	^ BlElement new
@@ -68,7 +73,7 @@ BlMouseEventTest >> newBox [
 		  yourself
 ]
 
-{ #category : #'running - instance creation' }
+{ #category : 'running - instance creation' }
 BlMouseEventTest >> newChild [
 
 	^ self newBox
@@ -78,7 +83,7 @@ BlMouseEventTest >> newChild [
 		  yourself
 ]
 
-{ #category : #'running - instance creation' }
+{ #category : 'running - instance creation' }
 BlMouseEventTest >> newGrandChild [
 
 	^ self newBox
@@ -88,7 +93,7 @@ BlMouseEventTest >> newGrandChild [
 		  yourself
 ]
 
-{ #category : #'running - instance creation' }
+{ #category : 'running - instance creation' }
 BlMouseEventTest >> newLabel [
 
 	^ BlTextElement new
@@ -99,7 +104,7 @@ BlMouseEventTest >> newLabel [
 		  yourself
 ]
 
-{ #category : #'running - instance creation' }
+{ #category : 'running - instance creation' }
 BlMouseEventTest >> newParent [
 
 	^ self newBox
@@ -111,7 +116,7 @@ BlMouseEventTest >> newParent [
 		  yourself
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlMouseEventTest >> pointToText: aPoint for: aTextElement [
 
 	aTextElement text: 
@@ -121,7 +126,23 @@ BlMouseEventTest >> pointToText: aPoint for: aTextElement [
 			 yourself)
 ]
 
-{ #category : #tests }
+{ #category : 'running' }
+BlMouseEventTest >> setUp [
+	super setUp.
+	space := BlSpace new.
+	space host: BlHeadlessHost new.
+	space show; waitPendingWork
+]
+
+{ #category : 'running' }
+BlMouseEventTest >> tearDown [
+	space ifNotNil: [
+		space close; waitPendingWork.
+		space := nil ].
+	super tearDown
+]
+
+{ #category : 'tests' }
 BlMouseEventTest >> testParentWithClip [
 
 	| gray red blue |
@@ -135,7 +156,7 @@ BlMouseEventTest >> testParentWithClip [
 	gray := self newParent.
 	gray clipChildren: true.
 	gray addChild: red.
-	gray forceLayout.
+	space mutateSync: [ space root addChild: gray ].
 
 	"on gray outside red and blue"
 	self assert: (gray findMouseEventTargetAt: 50 @ 50) equals: gray.
@@ -159,7 +180,7 @@ BlMouseEventTest >> testParentWithClip [
 	self assert: (gray findMouseEventTargetAt: 700 @ 500) isNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseEventTest >> testParentWithoutClipChildWithClip [
 
 	| gray red blue |
@@ -173,7 +194,7 @@ BlMouseEventTest >> testParentWithoutClipChildWithClip [
 	gray := self newParent.
 	gray clipChildren: false.
 	gray addChild: red.
-	gray forceLayout.
+	space mutateSync: [ space root addChild: gray ].
 
 	"on gray outside red and blue"
 	self assert: (gray findMouseEventTargetAt: 50 @ 50) equals: gray.
@@ -197,7 +218,7 @@ BlMouseEventTest >> testParentWithoutClipChildWithClip [
 	self assert: (gray findMouseEventTargetAt: 700 @ 500) isNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlMouseEventTest >> testParentWithoutClipChildWithoutClip [
 
 	| gray red blue |
@@ -212,7 +233,7 @@ BlMouseEventTest >> testParentWithoutClipChildWithoutClip [
 	gray := self newParent.
 	gray clipChildren: false.
 	gray addChild: red.
-	gray forceLayout.
+	space mutateSync: [ space root addChild: gray ].
 
 	"on gray outside red and blue"
 	self assert: (gray findMouseEventTargetAt: 50 @ 50) equals: gray.
@@ -236,7 +257,7 @@ BlMouseEventTest >> testParentWithoutClipChildWithoutClip [
 	self assert: (gray findMouseEventTargetAt: 700 @ 500) isNil
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlMouseEventTest >> topLeftText: anEvent [
 
 	self
@@ -244,7 +265,7 @@ BlMouseEventTest >> topLeftText: anEvent [
 		for: anEvent currentTarget
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 BlMouseEventTest >> topRightText: anEvent [
 
 	self

@@ -2,18 +2,39 @@
 An AkGroupTest is a test class for testing the behavior of AkGroup
 "
 Class {
-	#name : #BlGeometryTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests-Geometry'
+	#name : 'BlGeometryTest',
+	#superclass : 'TestCase',
+	#instVars : [
+		'space'
+	],
+	#category : 'Bloc-UnitedTests-Geometry',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Geometry'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 BlGeometryTest class >> shouldInheritSelectors [
 	^ true
 	
 ]
 
-{ #category : #'contains tests' }
+{ #category : 'running' }
+BlGeometryTest >> setUp [
+	super setUp.
+	space := BlSpace new.
+	space host: BlHeadlessHost new.
+	space show; waitPendingWork
+]
+
+{ #category : 'running' }
+BlGeometryTest >> tearDown [
+	space ifNotNil: [
+		space close; waitPendingWork.
+		space := nil ].
+	super tearDown
+]
+
+{ #category : 'contains tests' }
 BlGeometryTest >> test3ElContainsPoint [
 
 	| g c1 c2 |
@@ -37,7 +58,7 @@ BlGeometryTest >> test3ElContainsPoint [
 		     addChild: c2;
 		     yourself.
 
-	g forceLayout.
+	space mutateSync: [ space root addChild: g ].
 
 	self assert: (c1 containsGlobalPoint: 250 @ 250).
 	self assert: (c2 containsGlobalPoint: 250 @ 250).
@@ -46,7 +67,7 @@ BlGeometryTest >> test3ElContainsPoint [
 	self assert: (c1 containsPoint: 50 @ 50)
 ]
 
-{ #category : #'any bounds tests' }
+{ #category : 'any bounds tests' }
 BlGeometryTest >> testElAnyBounds [
 
 	| g c1 c2 |
@@ -65,7 +86,7 @@ BlGeometryTest >> testElAnyBounds [
 		     addChild: c2;
 		     yourself.
 
-	g forceLayout.
+	space mutateSync: [ space root addChild: g ].
 
 	self assert: g positionInSpace equals: 0 @ 0.
 	self assert: c2 positionInSpace equals: 100 @ 100.
@@ -110,7 +131,7 @@ BlGeometryTest >> testElAnyBounds [
 		equals: (200 @ 200 corner: 400 @ 300)
 ]
 
-{ #category : #'bounds tests' }
+{ #category : 'bounds tests' }
 BlGeometryTest >> testElLocalAndGlobalBoundsConvertion [
 
 	| g |
@@ -119,7 +140,7 @@ BlGeometryTest >> testElLocalAndGlobalBoundsConvertion [
 		     position: 10 @ 10;
 		     yourself.
 
-	g forceLayout.
+	space mutateSync: [ space root addChild: g ].
 
 	self assert: g position equals: 10 @ 10.
 	self assert: g geometryBounds equals: (0 @ 0 corner: 100 @ 100).
@@ -140,7 +161,7 @@ BlGeometryTest >> testElLocalAndGlobalBoundsConvertion [
 		equals: (10 @ 10 corner: 110 @ 110)
 ]
 
-{ #category : #'position tests' }
+{ #category : 'position tests' }
 BlGeometryTest >> testElLocalAndGlobalPostionConvertion [
 
 	| g n |
@@ -155,7 +176,7 @@ BlGeometryTest >> testElLocalAndGlobalPostionConvertion [
 		     addChild: n;
 		     yourself.
 
-	g forceLayout.
+	space mutateSync: [ space root addChild: g ].
 
 	self assert: g position equals: 10 @ 10.
 	self assert: n position equals: 10 @ 10.
@@ -164,7 +185,7 @@ BlGeometryTest >> testElLocalAndGlobalPostionConvertion [
 	self assert: (n parentPointToLocal: n position) equals: 0 @ 0
 ]
 
-{ #category : #'tx bounds tests' }
+{ #category : 'tx bounds tests' }
 BlGeometryTest >> testElTxBounds [
 
 	| g n |
@@ -178,7 +199,7 @@ BlGeometryTest >> testElTxBounds [
 		     addChild: n;
 		     yourself.
 
-	g forceLayout.
+	space mutateSync: [ space root addChild: g ].
 
 	self assert: g position equals: (10 @ 10).
 	self assert: n position equals: (10 @ 10).
@@ -188,7 +209,7 @@ BlGeometryTest >> testElTxBounds [
 	self assert: g transformedBounds equals: (0 @ 0 corner: 100 @ 100)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGeometryTest >> testEqualityBlAnnulusSectorGeometry [
 
 	self
@@ -248,7 +269,7 @@ BlGeometryTest >> testEqualityBlAnnulusSectorGeometry [
 				 outerRadius: 1.0)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGeometryTest >> testEqualityBlBezierCurveGeometry [
 
 	self
@@ -271,25 +292,25 @@ BlGeometryTest >> testEqualityBlBezierCurveGeometry [
 					 (0 @ 50) })
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGeometryTest >> testEqualityBlCircleGeometry [
 
 	self assert: BlCircleGeometry new equals: BlCircleGeometry new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGeometryTest >> testEqualityBlEllipseGeometry [
 
 	self assert: BlEllipseGeometry new equals: BlEllipseGeometry new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGeometryTest >> testEqualityBlEmptyGeometry [
 
 	self assert: BlEmptyGeometry new equals: BlEmptyGeometry new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGeometryTest >> testEqualityBlLineGeometry [
 
 	self
@@ -300,7 +321,7 @@ BlGeometryTest >> testEqualityBlLineGeometry [
 		equals: (BlLineGeometry from: 0 @ 0 to: 0 @ 100)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGeometryTest >> testEqualityBlPolygonGeometry [
 
 	self
@@ -323,7 +344,7 @@ BlGeometryTest >> testEqualityBlPolygonGeometry [
 					 (0 @ 50) })
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGeometryTest >> testEqualityBlPolylineGeometry [
 
 	self
@@ -334,26 +355,26 @@ BlGeometryTest >> testEqualityBlPolylineGeometry [
 		equals: (BlPolylineGeometry vertices: {0@0 . 100@100 . 0 @ 50}).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGeometryTest >> testEqualityBlRectangleGeometry [
 
 	self assert: BlRectangleGeometry new equals: BlRectangleGeometry new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGeometryTest >> testEqualityBlRoundedRectangleGeometry [
 
 	self assert: (BlRoundedRectangleGeometry cornerRadius: 5) equals: (BlRoundedRectangleGeometry cornerRadius: 5).
 	self deny: (BlRoundedRectangleGeometry cornerRadius: 4) equals: (BlRoundedRectangleGeometry cornerRadius: 5)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGeometryTest >> testEqualityBlSquareGeometry [
 
 	self assert: BlSquareGeometry new equals: BlSquareGeometry new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlGeometryTest >> testEqualityBlTriangleGeometry [
 
 	self

@@ -3,12 +3,14 @@ I have been automatically converted and probably manually tweaked from BlElement
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlElementBoundsTest,
-	#superclass : #BlExamplesTest,
-	#category : #'Bloc-UnitedTests-Bounds'
+	#name : 'BlElementBoundsTest',
+	#superclass : 'BlExamplesTest',
+	#category : 'Bloc-UnitedTests-Bounds',
+	#package : 'Bloc-UnitedTests',
+	#tag : 'Bounds'
 }
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlElementBoundsTest >> child [
 
 	<sampleInstance>
@@ -19,17 +21,17 @@ BlElementBoundsTest >> child [
 		  background: Color red
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 BlElementBoundsTest >> childExtent [
 	^ 100 @ 50
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 BlElementBoundsTest >> childPosition [
 	^ 200 @ 150
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlElementBoundsTest >> parent [
 
 	<sampleInstance>
@@ -40,27 +42,31 @@ BlElementBoundsTest >> parent [
 		  background: (Color gray alpha: 0.3)
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 BlElementBoundsTest >> parentExtent [
 	^ 500 @ 400
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 BlElementBoundsTest >> parentPosition [
 	^ 100 @ 75
 ]
 
-{ #category : #'test seed' }
+{ #category : 'test seed' }
 BlElementBoundsTest >> parentWithChild [
-
 	<sampleInstance>
 	<demo>
-	^ self parent
-		  addChild: self child;
-		  forceLayout
+	| p aSpace |
+	p := self parent addChild: self child; yourself.
+	aSpace := BlSpace new host: BlHeadlessHost new.
+	aSpace show; waitPendingWork.
+	aSpace mutateSync: [ aSpace root addChild: p ].
+	aSpace mutateSync: [ p removeFromParent ].
+	aSpace close; waitPendingWork.
+	^ p
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBounds [
 	"Element bounds consist of position and extent"
 	<sampleInstance>
@@ -77,7 +83,7 @@ BlElementBoundsTest >> testBounds [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInLocal [
 	"Bounds in local always have position 0@0"
 
@@ -94,7 +100,7 @@ BlElementBoundsTest >> testBoundsInLocal [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInLocalInLocal [
 	<sampleInstance>
 	
@@ -110,7 +116,7 @@ BlElementBoundsTest >> testBoundsInLocalInLocal [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInLocalInParent [
 	
 	<sampleInstance>
@@ -132,7 +138,7 @@ BlElementBoundsTest >> testBoundsInLocalInParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInLocalInSpace [
 
 	<sampleInstance>
@@ -154,7 +160,7 @@ BlElementBoundsTest >> testBoundsInLocalInSpace [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInParent [
 	
 	<sampleInstance>
@@ -172,7 +178,7 @@ BlElementBoundsTest >> testBoundsInParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInParentInLocal [
 	
 	<sampleInstance>
@@ -194,7 +200,7 @@ BlElementBoundsTest >> testBoundsInParentInLocal [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInParentInParent [
 	
 	<sampleInstance>
@@ -216,7 +222,7 @@ BlElementBoundsTest >> testBoundsInParentInParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInParentInParentInParent [
 	
 	<sampleInstance>
@@ -238,7 +244,7 @@ BlElementBoundsTest >> testBoundsInParentInParentInParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInSpace [
 	
 	<sampleInstance>
@@ -256,7 +262,7 @@ BlElementBoundsTest >> testBoundsInSpace [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInSpaceInLocal [
 	
 	<sampleInstance>
@@ -278,7 +284,7 @@ BlElementBoundsTest >> testBoundsInSpaceInLocal [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInSpaceInParent [
 	
 	<sampleInstance>
@@ -300,7 +306,7 @@ BlElementBoundsTest >> testBoundsInSpaceInParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInSpecificChild [
 	
 	<sampleInstance>
@@ -324,7 +330,7 @@ BlElementBoundsTest >> testBoundsInSpecificChild [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInSpecificChildInSpecificParent [
 	
 	<sampleInstance>
@@ -352,7 +358,7 @@ BlElementBoundsTest >> testBoundsInSpecificChildInSpecificParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInSpecificParent [
 	
 	<sampleInstance>
@@ -376,7 +382,7 @@ BlElementBoundsTest >> testBoundsInSpecificParent [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testBoundsInSpecificParentInSpecificChild [
 	
 	<sampleInstance>
@@ -404,11 +410,10 @@ BlElementBoundsTest >> testBoundsInSpecificParentInSpecificChild [
 	^ parent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BlElementBoundsTest >> testShadowEffectBoundsWithoutOffset [
-	
 	<sampleInstance>
-	| parent child shadowWidth shadowMultiplier |
+	| parent child shadowWidth shadowMultiplier aSpace |
 	shadowWidth := 20.
 	shadowMultiplier := 1.5.
 	parent := self parentWithChild.
@@ -425,11 +430,16 @@ BlElementBoundsTest >> testShadowEffectBoundsWithoutOffset [
 			(shadowWidth * shadowMultiplier asPoint negated
 				corner: self childExtent + (shadowWidth * shadowMultiplier asPoint)).
 	child extent: self childExtent * 2.
-	child forceLayout.
-	self
-		assert: child effectBounds
-		equals:
-			(shadowWidth * shadowMultiplier asPoint negated
-				corner: self childExtent * 2 + (shadowWidth * shadowMultiplier asPoint)).
+	aSpace := BlSpace new host: BlHeadlessHost new.
+	[
+		aSpace show; waitPendingWork.
+		aSpace mutateSync: [ aSpace root addChild: parent ].
+		self
+			assert: child effectBounds
+			equals:
+				(shadowWidth * shadowMultiplier asPoint negated
+					corner: self childExtent * 2 + (shadowWidth * shadowMultiplier asPoint))
+	] ensure: [
+		aSpace close; waitPendingWork ].
 	^ parent
 ]

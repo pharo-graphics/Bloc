@@ -3,12 +3,32 @@ I have been automatically converted and probably manually tweaked from BlGridLay
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : #BlGridLayoutUsageTest,
-	#superclass : #TestCase,
-	#category : #'Bloc-UnitedTests'
+	#name : 'BlGridLayoutUsageTest',
+	#superclass : 'TestCase',
+	#instVars : [
+		'space'
+	],
+	#category : 'Bloc-UnitedTests',
+	#package : 'Bloc-UnitedTests'
 }
 
-{ #category : #fixture }
+{ #category : 'running' }
+BlGridLayoutUsageTest >> setUp [
+	super setUp.
+	space := BlSpace new.
+	space host: BlHeadlessHost new.
+	space show; waitPendingWork
+]
+
+{ #category : 'running' }
+BlGridLayoutUsageTest >> tearDown [
+	space ifNotNil: [
+		space close; waitPendingWork.
+		space := nil ].
+	super tearDown
+]
+
+{ #category : 'fixture' }
 BlGridLayoutUsageTest >> testExampleDistributed2x2Grid [
 
 	<sampleInstance>
@@ -51,7 +71,7 @@ BlGridLayoutUsageTest >> testExampleDistributed2x2Grid [
 	^ el
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlGridLayoutUsageTest >> testExampleDistributedWithSpan2x2Grid [
 
 	<sampleInstance>
@@ -90,7 +110,7 @@ BlGridLayoutUsageTest >> testExampleDistributedWithSpan2x2Grid [
 	^ el
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlGridLayoutUsageTest >> testExampleDistributedWithWeight2x2Grid [
 
 	<sampleInstance>
@@ -135,7 +155,7 @@ BlGridLayoutUsageTest >> testExampleDistributedWithWeight2x2Grid [
 	^ el
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlGridLayoutUsageTest >> testExampleHorizontal2x1Grid [
 
 	<sampleInstance>
@@ -160,7 +180,7 @@ BlGridLayoutUsageTest >> testExampleHorizontal2x1Grid [
 	^ el
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlGridLayoutUsageTest >> testExampleHorizontalSpacing2x1Grid [
 
 	<sampleInstance>
@@ -189,7 +209,7 @@ BlGridLayoutUsageTest >> testExampleHorizontalSpacing2x1Grid [
 	^ el
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlGridLayoutUsageTest >> testExampleInCellAlignment2x2Grid [
 
 	<sampleInstance>
@@ -229,7 +249,7 @@ BlGridLayoutUsageTest >> testExampleInCellAlignment2x2Grid [
 	^ el
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlGridLayoutUsageTest >> testExampleNautilusGrid [
 
 	<sampleInstance>
@@ -281,7 +301,7 @@ BlGridLayoutUsageTest >> testExampleNautilusGrid [
 	^ el
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlGridLayoutUsageTest >> testExampleSimple2x2Grid [
 
 	<sampleInstance>
@@ -316,7 +336,7 @@ BlGridLayoutUsageTest >> testExampleSimple2x2Grid [
 	^ el
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlGridLayoutUsageTest >> testExampleSpacing9x9Grid [
 
 	<sampleInstance>
@@ -347,7 +367,7 @@ BlGridLayoutUsageTest >> testExampleSpacing9x9Grid [
 	^ el
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlGridLayoutUsageTest >> testExampleVertical1x2Grid [
 
 	<sampleInstance>
@@ -372,7 +392,7 @@ BlGridLayoutUsageTest >> testExampleVertical1x2Grid [
 	^ el
 ]
 
-{ #category : #fixture }
+{ #category : 'fixture' }
 BlGridLayoutUsageTest >> testExampleVerticalSpacing1x2Grid [
 
 	<sampleInstance>
@@ -401,16 +421,13 @@ BlGridLayoutUsageTest >> testExampleVerticalSpacing1x2Grid [
 	^ el
 ]
 
-{ #category : #fixture }
+{ #category : 'tests' }
 BlGridLayoutUsageTest >> testVerticalSpan [
-
 	<sampleInstance>
 	| grid child1 child2 child3 |
 	grid := BlElement new.
 	grid extent: 500 @ 400.
-	grid layout: (BlGridLayout horizontal
-			 cellSpacing: 10;
-			 columnCount: 2).
+	grid layout: (BlGridLayout horizontal cellSpacing: 10; columnCount: 2).
 
 	child1 := BlElement new.
 	child1 background: (Color red alpha: 0.5).
@@ -432,11 +449,11 @@ BlGridLayoutUsageTest >> testVerticalSpan [
 		c vertical matchParent ].
 
 	grid addChildren: {
-			child1.
-			child2.
-			child3 }.
+		child1.
+		child2.
+		child3 }.
 
-	grid forceLayout.
+	space mutateSync: [ space root addChild: grid ].
 	self assert: grid extent equals: 500 @ 400.
 	self assert: child1 position equals: 10 @ 10.
 	self assert: child1 extent equals: 235 @ 185.

@@ -1,10 +1,11 @@
 Class {
-	#name : #BlFocusFinderExamples,
-	#superclass : #BlExamplesTest,
-	#category : #'Bloc-FocusFinder-Examples'
+	#name : 'BlFocusFinderExamples',
+	#superclass : 'BlExamplesTest',
+	#category : 'Bloc-FocusFinder-Examples',
+	#package : 'Bloc-FocusFinder-Examples'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFocusFinderExamples >> cell [
 
 	^ BlElement new
@@ -22,45 +23,60 @@ BlFocusFinderExamples >> cell [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BlFocusFinderExamples >> container [
+
 	<gtExample>
+	| container children space1x5voneqac5pgopubg0rklwjb |
+	children := {
+		            { 30. 2. 455 }.
+		            { 489 }.
+		            { 489 }.
+		            { 26. 2. 18. 2. 437 } } collect: [ :eachSegment |
+			            | grid gridChildren |
+			            gridChildren := eachSegment collect: [ :eachExtent |
+					                            self cell
+						                            extent:
+							                            eachExtent @ (eachSegment size = 1
+									                             ifTrue: [ 25 ]
+									                             ifFalse: [ 30 ]);
+						                            background: Color veryVeryLightGray;
+						                            margin: (BlInsets all: 2);
+						                            border:
+							                            (BlBorder
+								                             paint: Color gray
+								                             width: 1) ].
 
-	| container children |
-	children := { {30. 2. 455}. {489}. { 489 }. {26. 2. 18. 2. 437} }
-		collect: [ :eachSegment |
-			| grid gridChildren |
-			gridChildren := eachSegment collect: [ :eachExtent |
-				self cell
-					extent: eachExtent @ (eachSegment size = 1 ifTrue: [ 25 ] ifFalse: [ 30 ]);
-					background: Color veryVeryLightGray;
-					margin: (BlInsets all: 2);
-					border: (BlBorder paint: Color gray width: 1) ].
-
-			grid := BlElement new.
-			grid layout: BlFlowLayout new.
-			grid focusability: BlFocusability after.
-			grid constraintsDo: [ :c | 
-				c horizontal exact: 506.
-				c vertical fitContent ].
-			grid addChildren: gridChildren.
-			grid ].
+			            grid := BlElement new.
+			            grid layout: BlFlowLayout new.
+			            grid focusability: BlFocusability after.
+			            grid constraintsDo: [ :c |
+					            c horizontal exact: 506.
+					            c vertical fitContent ].
+			            grid addChildren: gridChildren.
+			            grid ].
 
 	container := BlElement new.
 	container layout: BlLinearLayout vertical.
-	container constraintsDo: [ :c | 
-		c horizontal fitContent.
-		c vertical fitContent ].
-	
+	container constraintsDo: [ :c |
+			c horizontal fitContent.
+			c vertical fitContent ].
+
 	container addChildren: children.
-	container forceLayout.
-	
+	space1x5voneqac5pgopubg0rklwjb := BlSpace new host:
+		                                  BlHeadlessHost new.
+	space1x5voneqac5pgopubg0rklwjb
+		show;
+		waitPendingWork.
+	space1x5voneqac5pgopubg0rklwjb mutateSync: [
+		space1x5voneqac5pgopubg0rklwjb root addChild: container ].
+
 	container addEventHandler: BlFocusExampleNavigationListener new.
-	
+
 	^ container
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderDownOnContainer [
 	<gtExample>
 	| aFocusFinder aContainer |
@@ -75,7 +91,7 @@ BlFocusFinderExamples >> focusFinderDownOnContainer [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 2' }
+{ #category : 'examples - segment 2' }
 BlFocusFinderExamples >> focusFinderDownOnSegment_2_at_190x30 [
 	<gtExample>
 	| aFocusFinder aContainer aNextFocus |
@@ -98,7 +114,7 @@ BlFocusFinderExamples >> focusFinderDownOnSegment_2_at_190x30 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 2' }
+{ #category : 'examples - segment 2' }
 BlFocusFinderExamples >> focusFinderDownOnSegment_2_child_41 [
 	<gtExample>
 	| aFocusFinder aContainer aNextFocus |
@@ -121,7 +137,7 @@ BlFocusFinderExamples >> focusFinderDownOnSegment_2_child_41 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 3' }
+{ #category : 'examples - segment 3' }
 BlFocusFinderExamples >> focusFinderDownOnSegment_3_at_285x50 [
 	<gtExample>
 	| aFocusFinder aContainer aNextFocus |
@@ -144,7 +160,7 @@ BlFocusFinderExamples >> focusFinderDownOnSegment_3_at_285x50 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 3' }
+{ #category : 'examples - segment 3' }
 BlFocusFinderExamples >> focusFinderDownOnSegment_3_child_57 [
 	<gtExample>
 	| aFocusFinder aContainer aNextFocus |
@@ -167,7 +183,7 @@ BlFocusFinderExamples >> focusFinderDownOnSegment_3_child_57 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderLeftOnContainer [
 	<gtExample>
 	| aFocusFinder aContainer |
@@ -182,7 +198,7 @@ BlFocusFinderExamples >> focusFinderLeftOnContainer [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderRightOnContainer [
 	<gtExample>
 	| aFocusFinder aContainer |
@@ -197,7 +213,7 @@ BlFocusFinderExamples >> focusFinderRightOnContainer [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderUpOnContainer [
 	<gtExample>
 	| aFocusFinder aContainer |
@@ -212,7 +228,7 @@ BlFocusFinderExamples >> focusFinderUpOnContainer [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderUpOnContainerFromBounds [
 	<gtExample>
 	| aFocusFinder aContainer |
@@ -227,7 +243,7 @@ BlFocusFinderExamples >> focusFinderUpOnContainerFromBounds [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderUpOnSegment_4_at_100x100 [
 	<gtExample>
 	| aContainer aFocusFinder aNextFocus |
@@ -249,7 +265,7 @@ BlFocusFinderExamples >> focusFinderUpOnSegment_4_at_100x100 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderUpOnSegment_4_at_20x100 [
 	<gtExample>
 	| aContainer aFocusFinder aNextFocus |
@@ -271,7 +287,7 @@ BlFocusFinderExamples >> focusFinderUpOnSegment_4_at_20x100 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusFinderUpOnSegment_4_at_minus10x100 [
 	<gtExample>
 	| aContainer aFocusFinder aNextFocus |
@@ -293,7 +309,7 @@ BlFocusFinderExamples >> focusFinderUpOnSegment_4_at_minus10x100 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 1' }
+{ #category : 'examples - segment 1' }
 BlFocusFinderExamples >> focusFinderUpOnSegmentsAt_0x60 [
 	<gtExample>
 	| aFocusFinder aContainer aNextFocus |
@@ -316,7 +332,7 @@ BlFocusFinderExamples >> focusFinderUpOnSegmentsAt_0x60 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 1' }
+{ #category : 'examples - segment 1' }
 BlFocusFinderExamples >> focusFinderUpOnSegmentsAt_minus10x60 [
 	<gtExample>
 	| aFocusFinder aContainer aNextFocus |
@@ -339,7 +355,7 @@ BlFocusFinderExamples >> focusFinderUpOnSegmentsAt_minus10x60 [
 	^ aFocusFinder
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> focusedElementAbove_90 [
 	<gtExample>
 	| aContainer |
@@ -360,38 +376,205 @@ BlFocusFinderExamples >> focusedElementAbove_90 [
 	^ aContainer
 ]
 
-{ #category : #'examples - segment 1' }
+{ #category : 'examples - segment 1' }
 BlFocusFinderExamples >> segmentWithCells [
+
 	<gtExample>
-	| container children |
-	
-	children := { (0.0@0.0) corner: (64.38600158691406@17.59783935546875). (64.38600158691406@0.0) corner: (67.18600153923035@17.59783935546875). (67.18600153923035@0.0) corner: (108.54200053215027@17.59783935546875). (108.54200053215027@0.0) corner: (111.34200048446655@17.59783935546875). (111.34200048446655@0.0) corner: (144.77399969100952@17.59783935546875). (144.77399969100952@0.0) corner: (147.5739996433258@17.59783935546875). (147.5739996433258@0.0) corner: (154.62999987602234@17.59783935546875). (154.62999987602234@0.0) corner: (157.42999982833862@17.59783935546875). (157.42999982833862@0.0) corner: (243.29199934005737@17.59783935546875). (243.29199934005737@0.0) corner: (246.09199929237366@17.59783935546875). (246.09199929237366@0.0) corner: (270.74599862098694@17.59783935546875). (270.74599862098694@0.0) corner: (337.0@17.59783935546875). (0.0@17.59783935546875) corner: (68.19400024414063@35.1956787109375). (68.19400024414063@17.59783935546875) corner: (70.99400019645691@35.1956787109375). (70.99400019645691@17.59783935546875) corner: (86.2400004863739@35.1956787109375). (86.2400004863739@17.59783935546875) corner: (89.04000043869019@35.1956787109375). (89.04000043869019@17.59783935546875) corner: (173.08199262619019@35.1956787109375). (173.08199262619019@17.59783935546875) corner: (175.88199257850647@35.1956787109375). (175.88199257850647@17.59783935546875) corner: (193.8299925327301@35.1956787109375). (193.8299925327301@17.59783935546875) corner: (196.6299924850464@35.1956787109375). (196.6299924850464@17.59783935546875) corner: (217.20999240875244@35.1956787109375). (217.20999240875244@17.59783935546875) corner: (220.00999236106873@35.1956787109375). (220.00999236106873@17.59783935546875) corner: (228.18599200248718@35.1956787109375). (228.18599200248718@17.59783935546875) corner: (230.98599195480347@35.1956787109375). (230.98599195480347@17.59783935546875) corner: (286.8319926261902@35.1956787109375). (286.8319926261902@17.59783935546875) corner: (337.0@35.1956787109375). (0.0@35.1956787109375) corner: (81.54999542236328@52.79351806640625). (81.54999542236328@35.1956787109375) corner: (84.34999537467957@52.79351806640625). (84.34999537467957@35.1956787109375) corner: (102.2979953289032@52.79351806640625). (102.2979953289032@35.1956787109375) corner: (105.09799528121948@52.79351806640625). (105.09799528121948@35.1956787109375) corner: (134.59599447250366@52.79351806640625). (134.59599447250366@35.1956787109375) corner: (137.39599442481995@52.79351806640625). (137.39599442481995@35.1956787109375) corner: (156.68799424171448@52.79351806640625). (156.68799424171448@35.1956787109375) corner: (159.48799419403076@52.79351806640625). (159.48799419403076@35.1956787109375) corner: (235.11599254608154@52.79351806640625). (235.11599254608154@35.1956787109375) corner: (237.91599249839783@52.79351806640625). (237.91599249839783@35.1956787109375) corner: (250.23599219322205@52.79351806640625). (250.23599219322205@35.1956787109375) corner: (253.03599214553833@52.79351806640625). (253.03599214553833@35.1956787109375) corner: (265.2999920845032@52.79351806640625). (265.2999920845032@35.1956787109375) corner: (268.09999203681946@52.79351806640625). (268.09999203681946@35.1956787109375) corner: (287.391991853714@52.79351806640625). (287.391991853714@35.1956787109375) corner: (290.1919918060303@52.79351806640625). (290.1919918060303@35.1956787109375) corner: (337.0@52.79351806640625). (0.0@52.79351806640625) corner: (2.799999952316284@70.391357421875). (2.799999952316284@52.79351806640625) corner: (14.475999593734741@70.391357421875). (14.475999593734741@52.79351806640625) corner: (17.275999546051025@70.391357421875). (17.275999546051025@52.79351806640625) corner: (36.56799936294556@70.391357421875). (36.56799936294556@52.79351806640625) corner: (39.36799931526184@70.391357421875). (39.36799931526184@52.79351806640625) corner: (82.41799855232239@70.391357421875). (82.41799855232239@52.79351806640625) corner: (85.21799850463867@70.391357421875). (85.21799850463867@52.79351806640625) corner: (126.77000045776367@70.391357421875). (126.77000045776367@52.79351806640625) corner: (129.57000041007996@70.391357421875). (129.57000041007996@52.79351806640625) corner: (152.05400156974792@70.391357421875). (152.05400156974792@52.79351806640625) corner: (154.8540015220642@70.391357421875). (154.8540015220642@52.79351806640625) corner: (187.12400197982788@70.391357421875). (187.12400197982788@52.79351806640625) corner: (189.92400193214417@70.391357421875). (189.92400193214417@52.79351806640625) corner: (198.10000157356262@70.391357421875). (198.10000157356262@52.79351806640625) corner: (200.9000015258789@70.391357421875). (200.9000015258789@52.79351806640625) corner: (229.06800079345703@70.391357421875). (229.06800079345703@52.79351806640625) corner: (231.86800074577332@70.391357421875). (231.86800074577332@52.79351806640625) corner: (255.3320014476776@70.391357421875). (255.3320014476776@52.79351806640625) corner: (258.1320013999939@70.391357421875). (258.1320013999939@52.79351806640625) corner: (275.1280016899109@70.391357421875). (275.1280016899109@52.79351806640625) corner: (277.9280016422272@70.391357421875). (277.9280016422272@52.79351806640625) corner: (307.42600083351135@70.391357421875). (307.42600083351135@52.79351806640625) corner: (310.22600078582764@70.391357421875). (310.22600078582764@52.79351806640625) corner: (322.54600048065186@70.391357421875). (322.54600048065186@52.79351806640625) corner: (337.0@70.391357421875). (0.0@70.391357421875) corner: (30.534000396728516@87.98919677734375). (30.534000396728516@70.391357421875) corner: (33.3340003490448@87.98919677734375). (33.3340003490448@70.391357421875) corner: (41.50999999046326@87.98919677734375). (41.50999999046326@70.391357421875) corner: (44.30999994277954@87.98919677734375). (44.30999994277954@70.391357421875) corner: (111.62200403213501@87.98919677734375). (111.62200403213501@70.391357421875) corner: (114.4220039844513@87.98919677734375). (114.4220039844513@70.391357421875) corner: (138.85200428962708@87.98919677734375). (138.85200428962708@70.391357421875) corner: (141.65200424194336@87.98919677734375). (141.65200424194336@70.391357421875) corner: (184.36600494384766@87.98919677734375). (184.36600494384766@70.391357421875) corner: (187.16600489616394@87.98919677734375). (187.16600489616394@70.391357421875) corner: (196.47600531578064@87.98919677734375). (196.47600531578064@70.391357421875) corner: (199.27600526809692@87.98919677734375). (199.27600526809692@70.391357421875) corner: (337.0@87.98919677734375) } collect: [ :eachBounds |
-			self cell
-				extent: eachBounds extent;
-				position: eachBounds origin;
-				background: (Color veryVeryLightGray);
-				margin: (BlInsets all: 0);
-				border: (BlBorder paint: Color lightGray width: 1);
-				yourself ].
+	| container children space7i49eyknyxtf7my5wes3tysxo |
+	children := {
+		            (0.0 @ 0.0 corner: 64.38600158691406 @ 17.59783935546875).
+		            (64.38600158691406 @ 0.0 corner:
+			             67.18600153923035 @ 17.59783935546875).
+		            (67.18600153923035 @ 0.0 corner:
+			             108.54200053215027 @ 17.59783935546875).
+		            (108.54200053215027 @ 0.0 corner:
+			             111.34200048446655 @ 17.59783935546875).
+		            (111.34200048446655 @ 0.0 corner:
+			             144.77399969100952 @ 17.59783935546875).
+		            (144.77399969100952 @ 0.0 corner:
+			             147.5739996433258 @ 17.59783935546875).
+		            (147.5739996433258 @ 0.0 corner:
+			             154.62999987602234 @ 17.59783935546875).
+		            (154.62999987602234 @ 0.0 corner:
+			             157.42999982833862 @ 17.59783935546875).
+		            (157.42999982833862 @ 0.0 corner:
+			             243.29199934005737 @ 17.59783935546875).
+		            (243.29199934005737 @ 0.0 corner:
+			             246.09199929237366 @ 17.59783935546875).
+		            (246.09199929237366 @ 0.0 corner:
+			             270.74599862098694 @ 17.59783935546875).
+		            (270.74599862098694 @ 0.0 corner:
+			             337.0 @ 17.59783935546875).
+		            (0.0 @ 17.59783935546875 corner:
+			             68.19400024414063 @ 35.1956787109375).
+		            (68.19400024414063 @ 17.59783935546875 corner:
+			             70.99400019645691 @ 35.1956787109375).
+		            (70.99400019645691 @ 17.59783935546875 corner:
+			             86.2400004863739 @ 35.1956787109375).
+		            (86.2400004863739 @ 17.59783935546875 corner:
+			             89.04000043869019 @ 35.1956787109375).
+		            (89.04000043869019 @ 17.59783935546875 corner:
+			             173.08199262619019 @ 35.1956787109375).
+		            (173.08199262619019 @ 17.59783935546875 corner:
+			             175.88199257850647 @ 35.1956787109375).
+		            (175.88199257850647 @ 17.59783935546875 corner:
+			             193.8299925327301 @ 35.1956787109375).
+		            (193.8299925327301 @ 17.59783935546875 corner:
+			             196.6299924850464 @ 35.1956787109375).
+		            (196.6299924850464 @ 17.59783935546875 corner:
+			             217.20999240875244 @ 35.1956787109375).
+		            (217.20999240875244 @ 17.59783935546875 corner:
+			             220.00999236106873 @ 35.1956787109375).
+		            (220.00999236106873 @ 17.59783935546875 corner:
+			             228.18599200248718 @ 35.1956787109375).
+		            (228.18599200248718 @ 17.59783935546875 corner:
+			             230.98599195480347 @ 35.1956787109375).
+		            (230.98599195480347 @ 17.59783935546875 corner:
+			             286.8319926261902 @ 35.1956787109375).
+		            (286.8319926261902 @ 17.59783935546875 corner:
+			             337.0 @ 35.1956787109375).
+		            (0.0 @ 35.1956787109375 corner:
+			             81.54999542236328 @ 52.79351806640625).
+		            (81.54999542236328 @ 35.1956787109375 corner:
+			             84.34999537467957 @ 52.79351806640625).
+		            (84.34999537467957 @ 35.1956787109375 corner:
+			             102.2979953289032 @ 52.79351806640625).
+		            (102.2979953289032 @ 35.1956787109375 corner:
+			             105.09799528121948 @ 52.79351806640625).
+		            (105.09799528121948 @ 35.1956787109375 corner:
+			             134.59599447250366 @ 52.79351806640625).
+		            (134.59599447250366 @ 35.1956787109375 corner:
+			             137.39599442481995 @ 52.79351806640625).
+		            (137.39599442481995 @ 35.1956787109375 corner:
+			             156.68799424171448 @ 52.79351806640625).
+		            (156.68799424171448 @ 35.1956787109375 corner:
+			             159.48799419403076 @ 52.79351806640625).
+		            (159.48799419403076 @ 35.1956787109375 corner:
+			             235.11599254608154 @ 52.79351806640625).
+		            (235.11599254608154 @ 35.1956787109375 corner:
+			             237.91599249839783 @ 52.79351806640625).
+		            (237.91599249839783 @ 35.1956787109375 corner:
+			             250.23599219322205 @ 52.79351806640625).
+		            (250.23599219322205 @ 35.1956787109375 corner:
+			             253.03599214553833 @ 52.79351806640625).
+		            (253.03599214553833 @ 35.1956787109375 corner:
+			             265.2999920845032 @ 52.79351806640625).
+		            (265.2999920845032 @ 35.1956787109375 corner:
+			             268.09999203681946 @ 52.79351806640625).
+		            (268.09999203681946 @ 35.1956787109375 corner:
+			             287.391991853714 @ 52.79351806640625).
+		            (287.391991853714 @ 35.1956787109375 corner:
+			             290.1919918060303 @ 52.79351806640625).
+		            (290.1919918060303 @ 35.1956787109375 corner:
+			             337.0 @ 52.79351806640625).
+		            (0.0 @ 52.79351806640625 corner:
+			             2.799999952316284 @ 70.391357421875).
+		            (2.799999952316284 @ 52.79351806640625 corner:
+			             14.475999593734741 @ 70.391357421875).
+		            (14.475999593734741 @ 52.79351806640625 corner:
+			             17.275999546051025 @ 70.391357421875).
+		            (17.275999546051025 @ 52.79351806640625 corner:
+			             36.56799936294556 @ 70.391357421875).
+		            (36.56799936294556 @ 52.79351806640625 corner:
+			             39.36799931526184 @ 70.391357421875).
+		            (39.36799931526184 @ 52.79351806640625 corner:
+			             82.41799855232239 @ 70.391357421875).
+		            (82.41799855232239 @ 52.79351806640625 corner:
+			             85.21799850463867 @ 70.391357421875).
+		            (85.21799850463867 @ 52.79351806640625 corner:
+			             126.77000045776367 @ 70.391357421875).
+		            (126.77000045776367 @ 52.79351806640625 corner:
+			             129.57000041007996 @ 70.391357421875).
+		            (129.57000041007996 @ 52.79351806640625 corner:
+			             152.05400156974792 @ 70.391357421875).
+		            (152.05400156974792 @ 52.79351806640625 corner:
+			             154.8540015220642 @ 70.391357421875).
+		            (154.8540015220642 @ 52.79351806640625 corner:
+			             187.12400197982788 @ 70.391357421875).
+		            (187.12400197982788 @ 52.79351806640625 corner:
+			             189.92400193214417 @ 70.391357421875).
+		            (189.92400193214417 @ 52.79351806640625 corner:
+			             198.10000157356262 @ 70.391357421875).
+		            (198.10000157356262 @ 52.79351806640625 corner:
+			             200.9000015258789 @ 70.391357421875).
+		            (200.9000015258789 @ 52.79351806640625 corner:
+			             229.06800079345703 @ 70.391357421875).
+		            (229.06800079345703 @ 52.79351806640625 corner:
+			             231.86800074577332 @ 70.391357421875).
+		            (231.86800074577332 @ 52.79351806640625 corner:
+			             255.3320014476776 @ 70.391357421875).
+		            (255.3320014476776 @ 52.79351806640625 corner:
+			             258.1320013999939 @ 70.391357421875).
+		            (258.1320013999939 @ 52.79351806640625 corner:
+			             275.1280016899109 @ 70.391357421875).
+		            (275.1280016899109 @ 52.79351806640625 corner:
+			             277.9280016422272 @ 70.391357421875).
+		            (277.9280016422272 @ 52.79351806640625 corner:
+			             307.42600083351135 @ 70.391357421875).
+		            (307.42600083351135 @ 52.79351806640625 corner:
+			             310.22600078582764 @ 70.391357421875).
+		            (310.22600078582764 @ 52.79351806640625 corner:
+			             322.54600048065186 @ 70.391357421875).
+		            (322.54600048065186 @ 52.79351806640625 corner:
+			             337.0 @ 70.391357421875).
+		            (0.0 @ 70.391357421875 corner:
+			             30.534000396728516 @ 87.98919677734375).
+		            (30.534000396728516 @ 70.391357421875 corner:
+			             33.3340003490448 @ 87.98919677734375).
+		            (33.3340003490448 @ 70.391357421875 corner:
+			             41.50999999046326 @ 87.98919677734375).
+		            (41.50999999046326 @ 70.391357421875 corner:
+			             44.30999994277954 @ 87.98919677734375).
+		            (44.30999994277954 @ 70.391357421875 corner:
+			             111.62200403213501 @ 87.98919677734375).
+		            (111.62200403213501 @ 70.391357421875 corner:
+			             114.4220039844513 @ 87.98919677734375).
+		            (114.4220039844513 @ 70.391357421875 corner:
+			             138.85200428962708 @ 87.98919677734375).
+		            (138.85200428962708 @ 70.391357421875 corner:
+			             141.65200424194336 @ 87.98919677734375).
+		            (141.65200424194336 @ 70.391357421875 corner:
+			             184.36600494384766 @ 87.98919677734375).
+		            (184.36600494384766 @ 70.391357421875 corner:
+			             187.16600489616394 @ 87.98919677734375).
+		            (187.16600489616394 @ 70.391357421875 corner:
+			             196.47600531578064 @ 87.98919677734375).
+		            (196.47600531578064 @ 70.391357421875 corner:
+			             199.27600526809692 @ 87.98919677734375).
+		            (199.27600526809692 @ 70.391357421875 corner:
+			             337.0 @ 87.98919677734375) } collect: [ :eachBounds |
+			            self cell
+				            extent: eachBounds extent;
+				            position: eachBounds origin;
+				            background: Color veryVeryLightGray;
+				            margin: (BlInsets all: 0);
+				            border: (BlBorder paint: Color lightGray width: 1);
+				            yourself ].
 
 	container := BlElement new.
 	container layout: BlFitLayout new.
-	container constraintsDo: [ :c | 
-		c horizontal fitContent.
-		c vertical fitContent ].
-	
+	container constraintsDo: [ :c |
+			c horizontal fitContent.
+			c vertical fitContent ].
+
 	container addChildren: children.
-	container forceLayout.
+	space7i49eyknyxtf7my5wes3tysxo := BlSpace new host:
+		                                  BlHeadlessHost new.
+	space7i49eyknyxtf7my5wes3tysxo
+		show;
+		waitPendingWork.
+	space7i49eyknyxtf7my5wes3tysxo mutateSync: [
+		space7i49eyknyxtf7my5wes3tysxo root addChild: container ].
 	container addEventHandler: BlFocusExampleNavigationListener new.
-	
+
 	^ container
 ]
 
-{ #category : #'examples - segment 2' }
+{ #category : 'examples - segment 2' }
 BlFocusFinderExamples >> segmentWithCells_2 [
 
 	<gtExample>
-	| container children |
+	| container children spaceewaebfw0zqi9mi92vx296x6z8 |
 	children := {
 		            (0.0 @ 0.0 corner: 64.38600158691406 @ 17.59783935546875).
 		            (64.38600158691406 @ 0.0 corner:
@@ -606,31 +789,37 @@ BlFocusFinderExamples >> segmentWithCells_2 [
 			             291.68800139427185 @ 70.391357421875).
 		            (291.68800139427185 @ 52.79351806640625 corner:
 			             484.5 @ 70.391357421875) } collect: [ :eachBounds |
-		            self cell
-			            extent: eachBounds extent;
-			            position: eachBounds origin;
-			            background: Color veryVeryLightGray;
-			            margin: (BlInsets all: 0);
-			            border: (BlBorder paint: Color lightGray width: 1) ].
+			            self cell
+				            extent: eachBounds extent;
+				            position: eachBounds origin;
+				            background: Color veryVeryLightGray;
+				            margin: (BlInsets all: 0);
+				            border: (BlBorder paint: Color lightGray width: 1) ].
 
 	container := BlElement new.
 	container layout: BlFitLayout new.
 	container constraintsDo: [ :c |
-		c horizontal fitContent.
-		c vertical fitContent ].
+			c horizontal fitContent.
+			c vertical fitContent ].
 
 	container addChildren: children.
-	container forceLayout.
+	spaceewaebfw0zqi9mi92vx296x6z8 := BlSpace new host:
+		                                  BlHeadlessHost new.
+	spaceewaebfw0zqi9mi92vx296x6z8
+		show;
+		waitPendingWork.
+	spaceewaebfw0zqi9mi92vx296x6z8 mutateSync: [
+		spaceewaebfw0zqi9mi92vx296x6z8 root addChild: container ].
 	container addEventHandler: BlFocusExampleNavigationListener new.
 
 	^ container
 ]
 
-{ #category : #'examples - segment 3' }
+{ #category : 'examples - segment 3' }
 BlFocusFinderExamples >> segmentWithCells_3 [
 
 	<gtExample>
-	| container children |
+	| container children space762wft9ejfhhnnqn9k3pzm9oa |
 	children := {
 		            (0.0 @ 0.0 corner: 64.38600158691406 @ 17.59783935546875).
 		            (64.38600158691406 @ 0.0 corner:
@@ -773,61 +962,82 @@ BlFocusFinderExamples >> segmentWithCells_3 [
 			             37.53399729728699 @ 72.87738037109375).
 		            (37.53399729728699 @ 55.279541015625 corner:
 			             482.09765625 @ 72.87738037109375) } collect: [
-		            :eachBounds |
-		            self cell
-			            extent: eachBounds extent;
-			            position: eachBounds origin;
-			            background: Color veryVeryLightGray;
-			            margin: (BlInsets all: 0);
-			            border: (BlBorder paint: Color lightGray width: 1) ].
+			            :eachBounds |
+			            self cell
+				            extent: eachBounds extent;
+				            position: eachBounds origin;
+				            background: Color veryVeryLightGray;
+				            margin: (BlInsets all: 0);
+				            border: (BlBorder paint: Color lightGray width: 1) ].
 
 	container := BlElement new.
 	container layout: BlFitLayout new.
 	container constraintsDo: [ :c |
-		c horizontal fitContent.
-		c vertical fitContent ].
+			c horizontal fitContent.
+			c vertical fitContent ].
 
 	container addChildren: children.
-	container forceLayout.
+	space762wft9ejfhhnnqn9k3pzm9oa := BlSpace new host:
+		                                  BlHeadlessHost new.
+	space762wft9ejfhhnnqn9k3pzm9oa
+		show;
+		waitPendingWork.
+	space762wft9ejfhhnnqn9k3pzm9oa mutateSync: [
+		space762wft9ejfhhnnqn9k3pzm9oa root addChild: container ].
 	container addEventHandler: BlFocusExampleNavigationListener new.
 
 	^ container
 ]
 
-{ #category : #'examples - segment 4' }
+{ #category : 'examples - segment 4' }
 BlFocusFinderExamples >> segmentWithCells_4 [
+
 	<gtExample>
+	| container children spacecs5zho68dukcj05ugopbwde8y |
+	children := {
+		            { 30. 2. 455 }.
+		            { 489 }.
+		            { 489 }.
+		            { 26. 2. 18. 2. 437 } } collect: [ :eachSegment |
+			            | grid gridChildren |
+			            gridChildren := eachSegment collect: [ :eachExtent |
+					                            self cell
+						                            extent:
+							                            eachExtent @ (eachSegment size = 1
+									                             ifTrue: [ 25 ]
+									                             ifFalse: [ 30 ]);
+						                            background: Color veryVeryLightGray;
+						                            margin: (BlInsets all: 2);
+						                            border:
+							                            (BlBorder
+								                             paint: Color gray
+								                             width: 1) ].
 
-	| container children |
-	children := { {30. 2. 455}. {489}. { 489 }. {26. 2. 18. 2. 437} }
-		collect: [ :eachSegment |
-			| grid gridChildren |
-			gridChildren := eachSegment collect: [ :eachExtent |
-				self cell
-					extent: eachExtent @ (eachSegment size = 1 ifTrue: [ 25 ] ifFalse: [ 30 ]);
-					background: Color veryVeryLightGray;
-					margin: (BlInsets all: 2);
-					border: (BlBorder paint: Color gray width: 1) ].
-
-			grid := BlElement new.
-			grid layout: BlFlowLayout new.
-			grid focusability: BlFocusability after.
-			grid constraintsDo: [ :c | 
-				c horizontal exact: 506.
-				c vertical fitContent ].
-			grid addChildren: gridChildren.
-			grid ].
+			            grid := BlElement new.
+			            grid layout: BlFlowLayout new.
+			            grid focusability: BlFocusability after.
+			            grid constraintsDo: [ :c |
+					            c horizontal exact: 506.
+					            c vertical fitContent ].
+			            grid addChildren: gridChildren.
+			            grid ].
 
 	container := BlElement new.
 	container layout: BlLinearLayout vertical.
-	container constraintsDo: [ :c | 
-		c horizontal fitContent.
-		c vertical fitContent ].
-	
+	container constraintsDo: [ :c |
+			c horizontal fitContent.
+			c vertical fitContent ].
+
 	container addChildren: children.
-	container forceLayout.
-	
+	spacecs5zho68dukcj05ugopbwde8y := BlSpace new host:
+		                                  BlHeadlessHost new.
+	spacecs5zho68dukcj05ugopbwde8y
+		show;
+		waitPendingWork.
+	spacecs5zho68dukcj05ugopbwde8y mutateSync: [
+		spacecs5zho68dukcj05ugopbwde8y root addChild: container ].
+
 	container addEventHandler: BlFocusExampleNavigationListener new.
-	
+
 	^ container
 ]
