@@ -27,9 +27,7 @@ BlEventSimulatorTest >> testClick [
 		addEventHandlerOn: BlClickEvent
 		do: [ :event | clicked := true ].
 	
-	element eventSimulator
-		click;
-		waitPendingWork.
+	element eventSimulator click.
 	
 	self assert: clicked
 ]
@@ -42,9 +40,7 @@ BlEventSimulatorTest >> testDoubleClick [
 		addEventHandlerOn: BlDoubleClickEvent
 		do: [ :event | doubleClicked := true ].
 	
-	element eventSimulator
-		doubleClick;
-		waitPendingWork.
+	element eventSimulator doubleClick.
 	
 	self assert: doubleClicked
 ]
@@ -62,7 +58,6 @@ BlEventSimulatorTest >> testKeyPress [
 	
 	eventSimulator := element eventSimulator.
 	eventSimulator keyPress: KeyboardKey escape.
-	space waitPendingWork.
 		
 	self assert: keyDownKey equals: KeyboardKey escape.
 	self assert: keyUpKey equals: KeyboardKey escape.
@@ -83,7 +78,6 @@ BlEventSimulatorTest >> testKeyboardEvents [
 	eventSimulator := element eventSimulator.
 	eventSimulator keyDown: KeyboardKey escape.
 	eventSimulator keyUp: KeyboardKey escape.
-	space waitPendingWork.
 		
 	self assert: keyDownKey equals: KeyboardKey escape.
 	self assert: keyUpKey equals: KeyboardKey escape.
@@ -104,7 +98,6 @@ BlEventSimulatorTest >> testMouseDownAndUp [
 	eventSimulator := element eventSimulator.
 	eventSimulator mouseDown.
 	eventSimulator mouseUp.
-	space waitPendingWork.
 		
 	self assert: downCount equals: 1.
 	self assert: upCount equals: 1.
@@ -117,9 +110,7 @@ BlEventSimulatorTest >> testMouseMove [
 		addEventHandlerOn: BlMouseMoveEvent
 		do: [ :event | movedTo := event position ].
 	
-	element eventSimulator
-		mouseMoveAt: 10 @ 20;
-		waitPendingWork.
+	element eventSimulator mouseMoveAt: 10 @ 20.
 	
 	self assert: movedTo equals: 10 @ 20.
 ]
@@ -131,9 +122,7 @@ BlEventSimulatorTest >> testMouseWheel [
 		addEventHandlerOn: BlMouseWheelEvent
 		do: [ :event | wheelVector := event vector ].
 	
-	element eventSimulator
-		mouseWheelBy: (BlVector x: 5 y: 10);
-		waitPendingWork.
+	element eventSimulator mouseWheelBy: (BlVector x: 5 y: 10).
 	
 	self assert: wheelVector equals: (BlVector x: 5 y: 10) asBlocVector.
 ]
@@ -146,9 +135,7 @@ BlEventSimulatorTest >> testTextInput [
 		addEventHandlerOn: BlTextInputEvent
 		do: [ :event | textInputText := event text ].
 	
-	element eventSimulator
-		textInput: 'hello';
-		waitPendingWork.
+	element eventSimulator textInput: 'hello'.
 	
 	self assert: textInputText equals: 'hello'.
 ]
@@ -164,9 +151,7 @@ BlEventSimulatorTest >> testVirtualDeviceClick [
 			clicked := true.
 			count := count + 1 ].
 	
-	element eventSimulator
-		click;
-		waitPendingWork.
+	element eventSimulator click.
 	
 	self assert: clicked.
 	self assert: count equals: 1
@@ -180,9 +165,7 @@ BlEventSimulatorTest >> testVirtualDeviceDoubleClick [
 		addEventHandlerOn: BlDoubleClickEvent
 		do: [ :event | doubleClicked := true ].
 	
-	element eventSimulator
-		doubleClick;
-		waitPendingWork.
+	element eventSimulator doubleClick.
 	
 	self assert: doubleClicked
 ]
@@ -197,7 +180,6 @@ BlEventSimulatorTest >> testVirtualDeviceMouseMoveBy [
 	eventSimulator := element eventSimulator.
 	"Default starting position should center on the element"
 	eventSimulator mouseMoveBy: 10 @ 20.
-	space waitPendingWork.
 	
 	self assert: movedTo isNotNil.
 ]
@@ -217,7 +199,6 @@ BlEventSimulatorTest >> testVirtualDeviceState [
 	self assert: eventSimulator modifiers isShift.
 	
 	eventSimulator click.
-	space waitPendingWork.
 	self assert: clicked.
 	self assert: modifierState isShift.
 	self assert: modifierState isCtrl not.
