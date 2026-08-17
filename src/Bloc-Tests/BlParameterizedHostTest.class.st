@@ -40,10 +40,13 @@ BlParameterizedHostTest >> newTestingSpace [
 
 	| aSpace |
 	aSpace := BlSpace new.
-	aSpace host: hostClass new.
-	testingSpaces add: aSpace.
-	aSpace show;
+	aSpace
+		host: hostClass default;
+		show;
 		waitPendingWork.
+
+	testingSpaces add: aSpace.
+
 	^ aSpace
 ]
 
