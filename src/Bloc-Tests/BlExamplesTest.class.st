@@ -26,10 +26,13 @@ BlExamplesTest class >> testSelectors [
 { #category : #private }
 BlExamplesTest >> performTest [ 
 
-	| testMethod |
+	| testMethod result |
 	testMethod := self class methodNamed: testSelector asSymbol.
 	(testMethod hasPragmaNamed: #noTest)
 		ifTrue: [ self skip ].
 
-	^ super performTest
+	result := super performTest.
+	(result isKindOf: BlSpace) ifTrue: [
+		result close; waitPendingWork ].
+	^ result
 ]

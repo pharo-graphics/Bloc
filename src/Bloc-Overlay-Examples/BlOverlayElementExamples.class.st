@@ -29,9 +29,10 @@ BlOverlayElementExamples >> overlayOnParentInSpace [
 	aContainer := self overlayOnParent.
 
 	aSpace := BlSpace new.
+	aSpace host: BlHeadlessHost new.
 	aSpace root addChild: aContainer.
 
-	aSpace pulse.
+	aSpace show; waitPendingWork.
 
 	self assert: aContainer extent equals: 500 @ 400.
 	self assert: aContainer position equals: 0 @ 0.
@@ -54,9 +55,10 @@ BlOverlayElementExamples >> overlayOnParentInSpaceWithOffset [
 	aContainer position: 50 @ 100.
 
 	aSpace := BlSpace new.
+	aSpace host: BlHeadlessHost new.
 	aSpace root addChild: aContainer.
 
-	aSpace pulse.
+	aSpace show; waitPendingWork.
 
 	self assert: aContainer extent equals: 500 @ 400.
 	self assert: aContainer position equals: 50 @ 100.
@@ -101,9 +103,10 @@ BlOverlayElementExamples >> overlayOnSiblingInSpace [
 	aContainer := self overlayOnSibling.
 
 	aSpace := BlSpace new.
+	aSpace host: BlHeadlessHost new.
 	aSpace root addChild: aContainer.
 
-	aSpace pulse.
+	aSpace show; waitPendingWork.
 
 	self assert: aContainer extent equals: 500 @ 400.
 	self assert: aContainer position equals: 0 @ 0.
@@ -127,9 +130,10 @@ BlOverlayElementExamples >> overlayOnSiblingInSpaceWithOffset [
 	(aContainer childWithId: #sibling) position: 30 @ 40.
 
 	aSpace := BlSpace new.
+	aSpace host: BlHeadlessHost new.
 	aSpace root addChild: aContainer.
 
-	aSpace pulse.
+	aSpace show; waitPendingWork.
 
 	self assert: aContainer extent equals: 500 @ 400.
 	self assert: aContainer position equals: 10 @ 20.
