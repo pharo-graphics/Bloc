@@ -1,14 +1,13 @@
 Class {
-	#name : 'BlBasicLayoutTest',
-	#superclass : 'TestCase',
+	#name : #BlBasicLayoutTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 BlBasicLayoutTest >> setUp [
 	super setUp.
 	space := BlSpace new.
@@ -16,7 +15,7 @@ BlBasicLayoutTest >> setUp [
 	space show; waitPendingWork
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlBasicLayoutTest >> tearDown [
 	space ifNotNil: [
 		space close; waitPendingWork.
@@ -24,7 +23,7 @@ BlBasicLayoutTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicLayoutTest >> testForceLayoutOfMatchParent [
 
 	<sampleInstance>
@@ -41,7 +40,7 @@ BlBasicLayoutTest >> testForceLayoutOfMatchParent [
 	^ anElement
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicLayoutTest >> testParentWithChildExactExtent [
 
 	<sampleInstance>
@@ -72,7 +71,7 @@ BlBasicLayoutTest >> testParentWithChildExactExtent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicLayoutTest >> testParentWithChildFitContent [
 
 	<sampleInstance>
@@ -89,7 +88,7 @@ BlBasicLayoutTest >> testParentWithChildFitContent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlBasicLayoutTest >> testParentWithChildMatchParent [
 
 	<sampleInstance>

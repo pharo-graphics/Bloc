@@ -1,14 +1,13 @@
 Class {
-	#name : 'BlIgnoredLayoutTest',
-	#superclass : 'TestCase',
+	#name : #BlIgnoredLayoutTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 BlIgnoredLayoutTest >> setUp [
 	super setUp.
 	space := BlSpace new.
@@ -16,7 +15,7 @@ BlIgnoredLayoutTest >> setUp [
 	space show; waitPendingWork
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlIgnoredLayoutTest >> tearDown [
 	space ifNotNil: [
 		space close; waitPendingWork.
@@ -24,7 +23,7 @@ BlIgnoredLayoutTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlIgnoredLayoutTest >> testAlignmentIsStable [
 	<sampleInstance>
 	<demo>

@@ -2,17 +2,15 @@
 A BlAnchorLayoutRuleTest is a test class for testing the behavior of BlAnchorLayoutRule
 "
 Class {
-	#name : 'BlAnchorLayoutRuleTest',
-	#superclass : 'TestCase',
+	#name : #BlAnchorLayoutRuleTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Layout-Tests-Anchor',
-	#package : 'Bloc-Layout-Tests',
-	#tag : 'Anchor'
+	#category : #'Bloc-Layout-Tests-Anchor'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 BlAnchorLayoutRuleTest >> setUp [
 	super setUp.
 	space := BlSpace new.
@@ -20,7 +18,7 @@ BlAnchorLayoutRuleTest >> setUp [
 	space show; waitPendingWork
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlAnchorLayoutRuleTest >> tearDown [
 	space ifNotNil: [
 		space close; waitPendingWork.
@@ -28,7 +26,7 @@ BlAnchorLayoutRuleTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlAnchorLayoutRuleTest >> testAppliedOnChildBoundsInParentForChild [
 
 	| parent child rule resultBounds |
@@ -55,7 +53,7 @@ BlAnchorLayoutRuleTest >> testAppliedOnChildBoundsInParentForChild [
 	self assert: resultBounds equals: (0 @ 0 extent: 70 asPoint)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlAnchorLayoutRuleTest >> testIsMeasurement [
 
 	| parent child rule |
@@ -69,7 +67,7 @@ BlAnchorLayoutRuleTest >> testIsMeasurement [
 	
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlAnchorLayoutRuleTest >> testIsMeasurement2 [
 
 	| parent child rule |

@@ -3,13 +3,12 @@ I have been automatically converted and probably manually tweaked from BlLinearL
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlLinearLayoutHorizontalTest',
-	#superclass : 'BlLinearLayoutTest',
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#name : #BlLinearLayoutHorizontalTest,
+	#superclass : #BlLinearLayoutTest,
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithOneChildMatchInExactParentPadding [
 
 	<sampleInstance>
@@ -30,7 +29,7 @@ BlLinearLayoutHorizontalTest >> testElementWithOneChildMatchInExactParentPadding
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithOneChildMatchOneExactInFitParent [
 	"All children are distributed equally within parent's bounds"
 
@@ -56,7 +55,7 @@ BlLinearLayoutHorizontalTest >> testElementWithOneChildMatchOneExactInFitParent 
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithOneExactChildInExactParentMargin [
 	"All children are distributed equally within parent's bounds"
 
@@ -81,7 +80,7 @@ BlLinearLayoutHorizontalTest >> testElementWithOneExactChildInExactParentMargin 
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithThreeMatchChildrenInExactParent [
 	"All children are distributed equally within parent's bounds"
 
@@ -110,7 +109,7 @@ BlLinearLayoutHorizontalTest >> testElementWithThreeMatchChildrenInExactParent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithThreeMatchChildrenInExactParentRTL [
 	"All children are distributed equally within parent's bounds"
 
@@ -140,12 +139,10 @@ BlLinearLayoutHorizontalTest >> testElementWithThreeMatchChildrenInExactParentRT
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithTwoChildrenMatchInExactParentPadding [
 	"All children are distributed equally within parent's bounds"
 
-	<sampleInstance>
-	<demo>
 	| parent childA childB |
 	childA := self testChildElementMatchingParent.
 	childB := self testChildElementMatchingParent.
@@ -153,20 +150,17 @@ BlLinearLayoutHorizontalTest >> testElementWithTwoChildrenMatchInExactParentPadd
 	parent constraints horizontal exact: 400.
 	parent constraints vertical exact: 600.
 	parent constraints padding: (BlInsets all: 20).
-	parent addChildren: {
-			childA.
-			childB }.
+	parent addChildren: { childA. childB }.
 	space mutateSync: [ space root addChild: parent ].
 	self assert: childA extent equals: 180 @ 560.
 	self assert: childA position equals: 20 @ 20.
 	self assert: childB extent equals: 180 @ 560.
 	self assert: childB position equals: 200 @ 20.
 	self assert: parent extent equals: 400 @ 600.
-	self assert: parent position equals: 0 @ 0.
-	^ parent
+	self assert: parent position equals: 0 @ 0
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithTwoExactChildrenInFitContent [
 	"Parent resizes to fit children"
 
@@ -191,7 +185,7 @@ BlLinearLayoutHorizontalTest >> testElementWithTwoExactChildrenInFitContent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testElementWithTwoMatchChildrenInExactParent [
 	"All children are distributed equally within parent's bounds"
 
@@ -216,47 +210,50 @@ BlLinearLayoutHorizontalTest >> testElementWithTwoMatchChildrenInExactParent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testOneChildSetVisibilityGone [
-	<sampleInstance>
-	<demo>
+
 	| aContainer aRed aBlue |
-	aContainer := BlElement new
-		layout: (BlLinearLayout horizontal cellSpacing: 20);
-		padding: (BlInsets top: 10 bottom: 10);
-		extent: 500 @ 400.
-	aRed := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		border: (BlBorder paint: Color red darker width: 1);
-		background: (Color red alpha: 0.3).
-	aBlue := BlElement new
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		border: (BlBorder paint: Color blue darker width: 1);
-		background: (Color blue alpha: 0.3).
-	aContainer addChildren: {
-		aRed.			aBlue }.
+	aContainer :=
+		BlElement new
+			layout: (BlLinearLayout horizontal cellSpacing: 20);
+			padding: (BlInsets top: 10 bottom: 10);
+			extent: 500 @ 400;
+			yourself.
+	aRed :=
+		BlElement new
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical matchParent ];
+			border: (BlBorder paint: Color red darker width: 1);
+			background: (Color red alpha: 0.3);
+			yourself.
+	aBlue :=
+		BlElement new
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical matchParent ];
+			border: (BlBorder paint: Color blue darker width: 1);
+			background: (Color blue alpha: 0.3);
+			yourself.
+	aContainer addChildren: { aRed. aBlue }.
 	space mutateSync: [ space root addChild: aContainer ].
 	self assert: aContainer extent equals: 500 @ 400.
 	self assert: aRed position equals: 20 @ 10.
 	self assert: aRed extent equals: 220 @ 380.
 	self assert: aBlue position equals: 260 @ 10.
 	self assert: aBlue extent equals: 220 @ 380.
-	aRed visibility: BlVisibility gone.
-	space waitPendingWork.
+
+	space mutateSync: [ aRed visibility: BlVisibility gone ].
 	self assert: aContainer extent equals: 500 @ 400.
 	"red keeps its position and extent from the previous pass"
 	self assert: aRed position equals: 20 @ 10.
 	self assert: aRed extent equals: 220 @ 380.
 	self assert: aBlue position equals: 20 @ 10.
-	self assert: aBlue extent equals: 460 @ 380.
-	^ aContainer
+	self assert: aBlue extent equals: 460 @ 380
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testParentWithLinearHorizontalLayout [
 
 	<sampleInstance>
@@ -274,7 +271,7 @@ BlLinearLayoutHorizontalTest >> testParentWithLinearHorizontalLayout [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testParentWithLinearHorizontalLayoutWithCellSpacing [
 	| element child1 child2 |
 	element := BlElement new layout: BlLinearLayout horizontal.
@@ -294,7 +291,7 @@ BlLinearLayoutHorizontalTest >> testParentWithLinearHorizontalLayoutWithCellSpac
 	self assert: child2 position x equals: 10
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testParentWithLinearLayoutWithCellSpacing [
 	| element child1 child2 |
 	element := BlElement new layout: BlLinearLayout vertical.
@@ -322,7 +319,7 @@ BlLinearLayoutHorizontalTest >> testParentWithLinearLayoutWithCellSpacing [
 	self assert: child1 position y equals: 5.		self assert: child2 position y equals: 10
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testParentWithLinearLayoutWithCellSpacingChangingDirection [
 	| element child1 child2 |
 	element := BlElement new layout: BlLinearLayout vertical.
@@ -367,7 +364,7 @@ BlLinearLayoutHorizontalTest >> testParentWithLinearLayoutWithCellSpacingChangin
 	self assert: child2 position x equals: 10
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutHorizontalTest >> testParentWithLinearVerticalLayoutWithCellSpacing [
 	| element child1 child2 |
 	element := BlElement new layout: BlLinearLayout vertical.

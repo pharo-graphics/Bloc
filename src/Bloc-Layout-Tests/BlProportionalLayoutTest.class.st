@@ -1,14 +1,13 @@
 Class {
-	#name : 'BlProportionalLayoutTest',
-	#superclass : 'TestCase',
+	#name : #BlProportionalLayoutTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 BlProportionalLayoutTest >> setUp [
 	super setUp.
 	space := BlSpace new.
@@ -16,7 +15,7 @@ BlProportionalLayoutTest >> setUp [
 	space show; waitPendingWork
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlProportionalLayoutTest >> tearDown [
 	space ifNotNil: [
 		space close; waitPendingWork.
@@ -24,7 +23,7 @@ BlProportionalLayoutTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlProportionalLayoutTest >> testDefaultConstraints [
 
 	| aContainer aChild |
@@ -60,7 +59,7 @@ BlProportionalLayoutTest >> testDefaultConstraints [
 		equals: 1.0
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 
 	| aContainer aChild childFractions childMargin containerPadding containerExtent childMaxWidth childMaxHeight |
@@ -114,7 +113,7 @@ BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 			(containerExtent y - containerPadding bottom - childMargin bottom - (childMaxHeight * (1 - childFractions bottom))) ceiling
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlProportionalLayoutTest >> testGrandChildMatchesParent [
 
 	| aContainer aChild aGrandChild |	
@@ -201,7 +200,7 @@ BlProportionalLayoutTest >> testGrandChildMatchesParent [
 				inset: aChild bounds inSpace)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlProportionalLayoutTest >> testHorizontalAndVerticalConstraints [
 
 	| aContainer aChild |
@@ -230,7 +229,7 @@ BlProportionalLayoutTest >> testHorizontalAndVerticalConstraints [
 	self assert: aChild extent equals: 80@60
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlProportionalLayoutTest >> testIgnoreByLayoutChild [
 
 	| aContainer aChild |
@@ -258,7 +257,7 @@ BlProportionalLayoutTest >> testIgnoreByLayoutChild [
 	self assert: aChild extent equals: 10 @ 20
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlProportionalLayoutTest >> testMultipleChildren [
 
 	| aContainer childA childB |

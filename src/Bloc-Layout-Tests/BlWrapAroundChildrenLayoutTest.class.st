@@ -3,22 +3,21 @@ I have been automatically converted and probably manually tweaked from BlWrapAro
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlWrapAroundChildrenLayoutTest',
-	#superclass : 'TestCase',
+	#name : #BlWrapAroundChildrenLayoutTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 BlWrapAroundChildrenLayoutTest >> childExtent [
 
 	^ 20 @ 20
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlWrapAroundChildrenLayoutTest >> childPositions [
 
 	^ {  (150 @ 50).
@@ -26,7 +25,7 @@ BlWrapAroundChildrenLayoutTest >> childPositions [
 		  (250 @ 250) }
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlWrapAroundChildrenLayoutTest >> newContainerWithChildren [
 
 	<demo>
@@ -52,7 +51,7 @@ BlWrapAroundChildrenLayoutTest >> newContainerWithChildren [
 	^ aContainer
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlWrapAroundChildrenLayoutTest >> setUp [
 	super setUp.
 	space := BlSpace new.
@@ -60,7 +59,7 @@ BlWrapAroundChildrenLayoutTest >> setUp [
 	space show; waitPendingWork
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlWrapAroundChildrenLayoutTest >> tearDown [
 	space ifNotNil: [
 		space close; waitPendingWork.
@@ -68,7 +67,7 @@ BlWrapAroundChildrenLayoutTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlWrapAroundChildrenLayoutTest >> testNotTransformedContainerWrapsAroundChildren [
 
 	| aContainer |
@@ -91,7 +90,7 @@ BlWrapAroundChildrenLayoutTest >> testNotTransformedContainerWrapsAroundChildren
 				equals: (eachPosition extent: self childExtent) ]
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlWrapAroundChildrenLayoutTest >> testScaledContainerWrapsAroundChildren [
 
 	| aContainer |

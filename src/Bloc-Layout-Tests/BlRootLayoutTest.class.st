@@ -1,32 +1,31 @@
 Class {
-	#name : 'BlRootLayoutTest',
-	#superclass : 'TestCase',
+	#name : #BlRootLayoutTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlRootLayoutTest class >> isAbstract [ 
 	^ self name = 'BlRootLayoutTest'
 	
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 BlRootLayoutTest class >> shouldInheritSelectors [
 	^ true
 	
 ]
 
-{ #category : 'assertions' }
+{ #category : #assertions }
 BlRootLayoutTest >> assertExactConstraint: aPoint forElement: anElement [
 	self assert: anElement constraints horizontal resizer size equals: aPoint x.
 	self assert: anElement constraints vertical resizer size equals: aPoint y.
 ]
 
-{ #category : 'helpers' }
+{ #category : #helpers }
 BlRootLayoutTest >> childExact: aPoint [
 	^ self testChildElementWithVisualProperties
 		constraintsDo: [ :c |
@@ -35,7 +34,7 @@ BlRootLayoutTest >> childExact: aPoint [
 		yourself
 ]
 
-{ #category : 'helpers' }
+{ #category : #helpers }
 BlRootLayoutTest >> childExactHeight: aNumber [
 	^ self testChildElementWithVisualProperties
 		constraintsDo: [ :c |
@@ -43,7 +42,7 @@ BlRootLayoutTest >> childExactHeight: aNumber [
 		yourself
 ]
 
-{ #category : 'helpers' }
+{ #category : #helpers }
 BlRootLayoutTest >> childExactWidth: aNumber [
 	^ self testChildElementWithVisualProperties
 		constraintsDo: [ :c |
@@ -51,7 +50,7 @@ BlRootLayoutTest >> childExactWidth: aNumber [
 		yourself
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlRootLayoutTest >> parentWithFixedExtent [
 	<sampleInstance>
 	
@@ -71,7 +70,7 @@ BlRootLayoutTest >> parentWithFixedExtent [
 	^ element
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlRootLayoutTest >> setUp [
 	super setUp.
 	space := BlSpace new.
@@ -79,7 +78,7 @@ BlRootLayoutTest >> setUp [
 	space show; waitPendingWork
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlRootLayoutTest >> tearDown [
 	space ifNotNil: [
 		space close; waitPendingWork.
@@ -87,7 +86,7 @@ BlRootLayoutTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlRootLayoutTest >> testChildElementMatchingParent [
 	<sampleInstance>
 	| element |
@@ -104,7 +103,7 @@ BlRootLayoutTest >> testChildElementMatchingParent [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlRootLayoutTest >> testChildElementWithVisualProperties [
 	<sampleInstance>
 	| element |
@@ -120,7 +119,7 @@ BlRootLayoutTest >> testChildElementWithVisualProperties [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlRootLayoutTest >> testParentWithFixedSize [
 	<sampleInstance>
 	

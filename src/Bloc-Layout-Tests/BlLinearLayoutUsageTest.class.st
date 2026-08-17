@@ -3,13 +3,12 @@ I have been automatically converted and probably manually tweaked from BlLinearL
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlLinearLayoutUsageTest',
-	#superclass : 'BlLinearLayoutTest',
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#name : #BlLinearLayoutUsageTest,
+	#superclass : #BlLinearLayoutTest,
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testEqualizingHeighAndWidth [
 
 	<sampleInstance>
@@ -20,7 +19,7 @@ BlLinearLayoutUsageTest >> testEqualizingHeighAndWidth [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testEqualizingWidth [
 
 	<sampleInstance>
@@ -31,7 +30,7 @@ BlLinearLayoutUsageTest >> testEqualizingWidth [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testExampleHorizontalListFixedWidthLTR [
 
 	<sampleInstance>
@@ -68,7 +67,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListFixedWidthLTR [
 	^ el
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testExampleHorizontalListFixedWidthRTL [
 
 	<sampleInstance>
@@ -105,7 +104,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListFixedWidthRTL [
 	^ el
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testExampleHorizontalListLTR [
 
 	<sampleInstance>
@@ -138,7 +137,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListLTR [
 	^ el
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testExampleHorizontalListRTL [
 
 	<sampleInstance>
@@ -171,7 +170,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalListRTL [
 	^ el
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testExampleHorizontalTopCenterBottomLTR [
 
 	<sampleInstance>
@@ -198,7 +197,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalTopCenterBottomLTR [
 	^ el
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testExampleHorizontalTopCenterBottomRTL [
 
 	<sampleInstance>
@@ -225,7 +224,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalTopCenterBottomRTL [
 	^ el
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testExampleHorizontalUsingWeightLTR [
 
 	<sampleInstance>
@@ -261,7 +260,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalUsingWeightLTR [
 	^ el
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testExampleHorizontalUsingWeightRTL [
 
 	<sampleInstance>
@@ -297,7 +296,7 @@ BlLinearLayoutUsageTest >> testExampleHorizontalUsingWeightRTL [
 	^ el
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testExampleVerticalLeftCenterRightLRT [
 
 	<sampleInstance>
@@ -329,7 +328,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalLeftCenterRightLRT [
 	^ el
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testExampleVerticalLeftCenterRightRTL [
 
 	<sampleInstance>
@@ -361,7 +360,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalLeftCenterRightRTL [
 	^ el
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testExampleVerticalList [
 
 	<sampleInstance>
@@ -398,7 +397,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalList [
 	^ el
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testExampleVerticalListFixedHeight [
 
 	<sampleInstance>
@@ -429,7 +428,7 @@ BlLinearLayoutUsageTest >> testExampleVerticalListFixedHeight [
 	^ el
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testMatchParentInFitContent [
 	"If all children in the parent that fits content match parent then they should be measured with 0 size"
 
@@ -457,7 +456,7 @@ BlLinearLayoutUsageTest >> testMatchParentInFitContent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeBackToMatchParent [
 
 	<sampleInstance>
@@ -472,7 +471,7 @@ BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeBackToMatchParent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeToExact [
 	"Now we change size to exact and expect parent to resize"
 
@@ -488,7 +487,7 @@ BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeToExact [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimited [
 
 	<sampleInstance>
@@ -520,7 +519,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimited [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChild [
 
 	<sampleInstance>
@@ -559,7 +558,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChild [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChildFitContent [
 
 	<sampleInstance>
@@ -606,7 +605,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChildFitCo
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndThreeChildlren [
 
 	<sampleInstance>
@@ -660,7 +659,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndThreeChild
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndTwoChildlren [
 
 	<sampleInstance>
@@ -706,7 +705,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndTwoChildlr
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndThreeChildlren [
 
 	<sampleInstance>
@@ -760,7 +759,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndThreeCh
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndTwoChildlren [
 
 	<sampleInstance>
@@ -806,7 +805,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndTwoChil
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testTwoChildrenMatchParentInFitContent [
 
 	<sampleInstance>
@@ -841,7 +840,7 @@ BlLinearLayoutUsageTest >> testTwoChildrenMatchParentInFitContent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> testTwoChildrenOnOppositeSidesWithSpan [
 
 	<sampleInstance>
@@ -886,7 +885,7 @@ BlLinearLayoutUsageTest >> testTwoChildrenOnOppositeSidesWithSpan [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutUsageTest >> twoChildrenMatchParentInFitContent [
 
 	<sampleInstance>
