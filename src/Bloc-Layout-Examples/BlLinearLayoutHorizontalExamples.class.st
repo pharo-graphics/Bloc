@@ -257,59 +257,42 @@ BlLinearLayoutHorizontalExamples >> elementWithTwoMatchChildrenInExactParent [
 	^ parent
 ]
 
-{ #category : 'examples - visibility' }
+{ #category : 'examples' }
 BlLinearLayoutHorizontalExamples >> one_child_set_visibility_gone [
 	<gtExample>
-	| aContainer space aRed aBlue |
-	
+	| aContainer aRed aBlue |
 	aContainer := BlElement new
 		layout: (BlLinearLayout horizontal cellSpacing: 20);
 		padding: (BlInsets top: 10 bottom: 10);
-		extent: 500@400.
-		
+		extent: 500 @ 400.
 	aRed := BlElement new
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent ];
 		border: (BlBorder paint: Color red darker width: 1);
 		background: (Color red alpha: 0.3).
-		
 	aBlue := BlElement new
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent ];
 		border: (BlBorder paint: Color blue darker width: 1);
 		background: (Color blue alpha: 0.3).
-		
-	aContainer addChildren: { aRed . aBlue }.
-	
-	space ifNil: [
-	space := BlSpace new host: BlHeadlessHost new.
-	space show; waitPendingWork.
-	space mutateSync: [ space root addChild: aContainer ] ] ifNotNil: [ space waitPendingWork ].
-	
-	self assert: aContainer extent equals: 500@400.
-	self assert: aRed position equals: 20@10.
-	self assert: aRed extent equals: 220@380.
-	
-	self assert: aBlue position equals: 260@10.
-	self assert: aBlue extent equals: 220@380.
-	
+	aContainer addChildren: {
+		aRed.			aBlue }.
+	self layoutInSpace: aContainer.
+	self assert: aContainer extent equals: 500 @ 400.
+	self assert: aRed position equals: 20 @ 10.
+	self assert: aRed extent equals: 220 @ 380.
+	self assert: aBlue position equals: 260 @ 10.
+	self assert: aBlue extent equals: 220 @ 380.
 	aRed visibility: BlVisibility gone.
-	
-	space ifNil: [
-	space := BlSpace new host: BlHeadlessHost new.
-	space show; waitPendingWork.
-	space mutateSync: [ space root addChild: aContainer ] ] ifNotNil: [ space waitPendingWork ].
-	
-	self assert: aContainer extent equals: 500@400.
+	aContainer space waitPendingWork.
+	self assert: aContainer extent equals: 500 @ 400.
 	"red keeps its position and extent from the previous pass"
-	self assert: aRed position equals: 20@10.
-	self assert: aRed extent equals: 220@380.
-	
-	self assert: aBlue position equals: 20@10.
-	self assert: aBlue extent equals: 460@380.
-	
+	self assert: aRed position equals: 20 @ 10.
+	self assert: aRed extent equals: 220 @ 380.
+	self assert: aBlue position equals: 20 @ 10.
+	self assert: aBlue extent equals: 460 @ 380.
 	^ aContainer
 ]
 
