@@ -1346,14 +1346,14 @@ BlSpace >> userData [
 ]
 
 { #category : #pulse }
-BlSpace >> wait: aDuration [
+BlSpace >> waitForDuration: aDuration [
 	"Synchronously wait for the given duration, blocked on the host's pulse loop semaphore.
 	
 	Note: This is different from `aDuration wait` because:
 	1. It blocks the active process on a pulse semaphore, waking up only on space frame pulses.
 	2. Under stepping hosts running directly on the UI process (like BlMorphicSteppingHost), it manually drives UI stepping to advance space time, preventing deadlocks that standard process sleeps would cause."
 
-	self waitUntil: [ false ] timeout: aDuration
+	self waitUntil: [ false ] forDuration: aDuration
 ]
 
 { #category : #pulse }
@@ -1408,7 +1408,7 @@ BlSpace >> waitUntil: aBlock [
 ]
 
 { #category : #pulse }
-BlSpace >> waitUntil: aBlock timeout: aDuration [
+BlSpace >> waitUntil: aBlock forDuration: aDuration [
 	"Wait until the given condition block evaluates to true, or the timeout duration has passed.
 	Blocks the calling process on the host's pulse semaphore, waking up on each frame to check the condition."
 
