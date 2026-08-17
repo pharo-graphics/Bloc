@@ -49,7 +49,7 @@ BlDevScripterMouseWheelStep >> playOn: aScripter [
 		setMousePosition: (aTarget eventSimulator mouseWheelBy: self vector)
 		in: aScripter.
 
-	aScripter pulse
+	aScripter waitPendingWork
 ]
 
 { #category : #accessing }

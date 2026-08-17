@@ -180,6 +180,11 @@ BlDevScripter >> play [
 
 { #category : #execution }
 BlDevScripter >> pulse [
+	self waitPendingWork
+]
+
+{ #category : #execution }
+BlDevScripter >> waitPendingWork [
 	self space waitPendingWork
 ]
 
