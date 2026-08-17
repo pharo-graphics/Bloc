@@ -213,12 +213,6 @@ BlEventSimulator >> keyUp: aKeyboardKey [
 ]
 
 { #category : #simulation }
-BlEventSimulator >> waitPendingWork [
-
-	self space ifNotNil: [ :s | s waitPendingWork ]
-]
-
-{ #category : #simulation }
 BlEventSimulator >> locationInside [
 	"Return a space location inside of target bounds"	
 
@@ -229,7 +223,7 @@ BlEventSimulator >> locationInside [
 
 { #category : #simulation }
 BlEventSimulator >> locationOutside [
-	"Return a space location outside of target bounds"	
+	"Return a space location outside of target bounds"
 
 	self space ifNotNil: [ :s | s waitPendingWork ].
 
@@ -351,12 +345,6 @@ BlEventSimulator >> mouseWheelBy: aBlVector [
 	^ aPosition
 ]
 
-{ #category : #accessing }
-BlEventSimulator >> space [
-
-	^ space ifNil: [ target isAttachedToSceneGraph ifTrue: [ space := target space ] ifFalse: [ nil ] ]
-]
-
 { #category : #simulation }
 BlEventSimulator >> secondaryClick [
 	"Simulate a secondary click event in the middle of target element"
@@ -374,6 +362,12 @@ BlEventSimulator >> shiftUp [
 ]
 
 { #category : #accessing }
+BlEventSimulator >> space [
+
+	^ space ifNil: [ target isAttachedToSceneGraph ifTrue: [ space := target space ] ifFalse: [ nil ] ]
+]
+
+{ #category : #accessing }
 BlEventSimulator >> space: aSpace [
 	target := aSpace.
 	space := aSpace.
@@ -388,4 +382,10 @@ BlEventSimulator >> target [
 BlEventSimulator >> textInput: aString [
 	"Simulate a text input event"
 	self event: (BlTextInputEvent new text: aString; yourself)
+]
+
+{ #category : #simulation }
+BlEventSimulator >> waitPendingWork [
+
+	self space ifNotNil: [ :s | s waitPendingWork ]
 ]
