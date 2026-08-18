@@ -1,10 +1,23 @@
 Class {
-	#name : #BlOverlayElementExamples,
-	#superclass : #BlExamplesTest,
-	#category : #'Bloc-Overlay-Examples'
+	#name : 'BlOverlayElementExamples',
+	#superclass : 'BlExamplesTest',
+	#category : 'Bloc-Overlay-Examples',
+	#package : 'Bloc-Overlay-Examples'
 }
 
-{ #category : #'examples - overlay' }
+{ #category : 'helpers' }
+BlOverlayElementExamples >> layoutInSpace: anElement [
+
+	| space |
+	space := BlSpace new.
+	space host: BlHeadlessHost default.
+	space root addChild: anElement.
+	space show; waitPendingWork.
+	space root removeChildren.
+	space close; waitPendingWork
+]
+
+{ #category : 'examples - overlay' }
 BlOverlayElementExamples >> overlayOnParent [
 	<sampleInstance>
 
@@ -21,58 +34,40 @@ BlOverlayElementExamples >> overlayOnParent [
 	^ aContainer
 ]
 
-{ #category : #'examples - overlay' }
+{ #category : 'examples' }
 BlOverlayElementExamples >> overlayOnParentInSpace [
 	<sampleInstance>
 
-	| aSpace aContainer |
+	| aContainer |
 	aContainer := self overlayOnParent.
-
-	aSpace := BlSpace new.
-	aSpace host: BlHeadlessHost new.
-	aSpace root addChild: aContainer.
-
-	aSpace show; waitPendingWork.
+	self layoutInSpace: aContainer.
 
 	self assert: aContainer extent equals: 500 @ 400.
 	self assert: aContainer position equals: 0 @ 0.
-	self
-		assert: (aContainer childWithId: #overlay) extent
-		equals: 500 @ 400.
-	self
-		assert: (aContainer childWithId: #overlay) position
-		equals: 0 @ 0.
+	self assert: (aContainer childWithId: #overlay) extent equals: 500 @ 400.
+	self assert: (aContainer childWithId: #overlay) position equals: 0 @ 0.
 
-	^ aSpace
+	^ aContainer
 ]
 
-{ #category : #'examples - overlay' }
+{ #category : 'examples' }
 BlOverlayElementExamples >> overlayOnParentInSpaceWithOffset [
 	<sampleInstance>
 
-	| aSpace aContainer |
+	| aContainer |
 	aContainer := self overlayOnParent.
 	aContainer position: 50 @ 100.
-
-	aSpace := BlSpace new.
-	aSpace host: BlHeadlessHost new.
-	aSpace root addChild: aContainer.
-
-	aSpace show; waitPendingWork.
+	self layoutInSpace: aContainer.
 
 	self assert: aContainer extent equals: 500 @ 400.
 	self assert: aContainer position equals: 50 @ 100.
-	self
-		assert: (aContainer childWithId: #overlay) extent
-		equals: 500 @ 400.
-	self
-		assert: (aContainer childWithId: #overlay) position
-		equals: 0 @ 0.
+	self assert: (aContainer childWithId: #overlay) extent equals: 500 @ 400.
+	self assert: (aContainer childWithId: #overlay) position equals: 0 @ 0.
 
-	^ aSpace
+	^ aContainer
 ]
 
-{ #category : #'examples - overlay' }
+{ #category : 'examples - overlay' }
 BlOverlayElementExamples >> overlayOnSibling [
 	<sampleInstance>
 
@@ -95,54 +90,36 @@ BlOverlayElementExamples >> overlayOnSibling [
 	^ aContainer
 ]
 
-{ #category : #'examples - overlay' }
+{ #category : 'examples' }
 BlOverlayElementExamples >> overlayOnSiblingInSpace [
 	<sampleInstance>
 
-	| aSpace aContainer |
+	| aContainer |
 	aContainer := self overlayOnSibling.
-
-	aSpace := BlSpace new.
-	aSpace host: BlHeadlessHost new.
-	aSpace root addChild: aContainer.
-
-	aSpace show; waitPendingWork.
+	self layoutInSpace: aContainer.
 
 	self assert: aContainer extent equals: 500 @ 400.
 	self assert: aContainer position equals: 0 @ 0.
-	self
-		assert: (aContainer childWithId: #overlay) extent
-		equals: 300 @ 200.
-	self
-		assert: (aContainer childWithId: #overlay) position
-		equals: 0 @ 0.
+	self assert: (aContainer childWithId: #overlay) extent equals: 300 @ 200.
+	self assert: (aContainer childWithId: #overlay) position equals: 0 @ 0.
 
-	^ aSpace
+	^ aContainer
 ]
 
-{ #category : #'examples - overlay' }
+{ #category : 'examples' }
 BlOverlayElementExamples >> overlayOnSiblingInSpaceWithOffset [
 	<sampleInstance>
 
-	| aSpace aContainer |
+	| aContainer |
 	aContainer := self overlayOnSibling.
 	aContainer position: 10 @ 20.
 	(aContainer childWithId: #sibling) position: 30 @ 40.
-
-	aSpace := BlSpace new.
-	aSpace host: BlHeadlessHost new.
-	aSpace root addChild: aContainer.
-
-	aSpace show; waitPendingWork.
+	self layoutInSpace: aContainer.
 
 	self assert: aContainer extent equals: 500 @ 400.
 	self assert: aContainer position equals: 10 @ 20.
-	self
-		assert: (aContainer childWithId: #overlay) extent
-		equals: 300 @ 200.
-	self
-		assert: (aContainer childWithId: #overlay) position
-		equals: 30 @ 40.
+	self assert: (aContainer childWithId: #overlay) extent equals: 300 @ 200.
+	self assert: (aContainer childWithId: #overlay) position equals: 30 @ 40.
 
-	^ aSpace
+	^ aContainer
 ]

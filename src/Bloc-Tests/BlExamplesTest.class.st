@@ -34,5 +34,10 @@ BlExamplesTest >> performTest [
 	result := super performTest.
 	(result isKindOf: BlSpace) ifTrue: [
 		result close; waitPendingWork ].
+	((result isKindOf: BlElement) and: [ result isAttachedToSceneGraph ]) ifTrue: [
+		| sp |
+		sp := result space.
+		result removeFromParent.
+		sp close; waitPendingWork ].
 	^ result
 ]

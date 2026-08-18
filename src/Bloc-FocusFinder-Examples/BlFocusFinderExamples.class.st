@@ -27,13 +27,13 @@ BlFocusFinderExamples >> cell [
 BlFocusFinderExamples >> container [
 
 	<gtExample>
-	| container children space1x5voneqac5pgopubg0rklwjb |
+	| 	 container children |
 	children := {
 		            { 30. 2. 455 }.
 		            { 489 }.
 		            { 489 }.
 		            { 26. 2. 18. 2. 437 } } collect: [ :eachSegment |
-			            | grid gridChildren |
+			            | 			 grid gridChildren |
 			            gridChildren := eachSegment collect: [ :eachExtent |
 					                            self cell
 						                            extent:
@@ -63,17 +63,12 @@ BlFocusFinderExamples >> container [
 			c vertical fitContent ].
 
 	container addChildren: children.
-	space1x5voneqac5pgopubg0rklwjb := BlSpace new host:
-		                                  BlHeadlessHost new.
-	space1x5voneqac5pgopubg0rklwjb
-		show;
-		waitPendingWork.
-	space1x5voneqac5pgopubg0rklwjb mutateSync: [
-		space1x5voneqac5pgopubg0rklwjb root addChild: container ].
+	self layoutInSpace: container.
 
 	container addEventHandler: BlFocusExampleNavigationListener new.
 
 	^ container
+
 ]
 
 { #category : 'examples - segment 4' }
@@ -376,11 +371,23 @@ BlFocusFinderExamples >> focusedElementAbove_90 [
 	^ aContainer
 ]
 
+{ #category : 'helpers' }
+BlFocusFinderExamples >> layoutInSpace: anElement [
+
+	| space |
+	space := BlSpace new.
+	space host: BlHeadlessHost default.
+	space root addChild: anElement.
+	space show; waitPendingWork.
+	space root removeChildren.
+	space close; waitPendingWork
+]
+
 { #category : 'examples - segment 1' }
 BlFocusFinderExamples >> segmentWithCells [
 
 	<gtExample>
-	| container children space7i49eyknyxtf7my5wes3tysxo |
+	| 	 container children |
 	children := {
 		            (0.0 @ 0.0 corner: 64.38600158691406 @ 17.59783935546875).
 		            (64.38600158691406 @ 0.0 corner:
@@ -558,23 +565,18 @@ BlFocusFinderExamples >> segmentWithCells [
 			c vertical fitContent ].
 
 	container addChildren: children.
-	space7i49eyknyxtf7my5wes3tysxo := BlSpace new host:
-		                                  BlHeadlessHost new.
-	space7i49eyknyxtf7my5wes3tysxo
-		show;
-		waitPendingWork.
-	space7i49eyknyxtf7my5wes3tysxo mutateSync: [
-		space7i49eyknyxtf7my5wes3tysxo root addChild: container ].
+	self layoutInSpace: container.
 	container addEventHandler: BlFocusExampleNavigationListener new.
 
 	^ container
+
 ]
 
 { #category : 'examples - segment 2' }
 BlFocusFinderExamples >> segmentWithCells_2 [
 
 	<gtExample>
-	| container children spaceewaebfw0zqi9mi92vx296x6z8 |
+	| 	 container children |
 	children := {
 		            (0.0 @ 0.0 corner: 64.38600158691406 @ 17.59783935546875).
 		            (64.38600158691406 @ 0.0 corner:
@@ -803,23 +805,18 @@ BlFocusFinderExamples >> segmentWithCells_2 [
 			c vertical fitContent ].
 
 	container addChildren: children.
-	spaceewaebfw0zqi9mi92vx296x6z8 := BlSpace new host:
-		                                  BlHeadlessHost new.
-	spaceewaebfw0zqi9mi92vx296x6z8
-		show;
-		waitPendingWork.
-	spaceewaebfw0zqi9mi92vx296x6z8 mutateSync: [
-		spaceewaebfw0zqi9mi92vx296x6z8 root addChild: container ].
+	self layoutInSpace: container.
 	container addEventHandler: BlFocusExampleNavigationListener new.
 
 	^ container
+
 ]
 
 { #category : 'examples - segment 3' }
 BlFocusFinderExamples >> segmentWithCells_3 [
 
 	<gtExample>
-	| container children space762wft9ejfhhnnqn9k3pzm9oa |
+	| 	 container children |
 	children := {
 		            (0.0 @ 0.0 corner: 64.38600158691406 @ 17.59783935546875).
 		            (64.38600158691406 @ 0.0 corner:
@@ -977,29 +974,24 @@ BlFocusFinderExamples >> segmentWithCells_3 [
 			c vertical fitContent ].
 
 	container addChildren: children.
-	space762wft9ejfhhnnqn9k3pzm9oa := BlSpace new host:
-		                                  BlHeadlessHost new.
-	space762wft9ejfhhnnqn9k3pzm9oa
-		show;
-		waitPendingWork.
-	space762wft9ejfhhnnqn9k3pzm9oa mutateSync: [
-		space762wft9ejfhhnnqn9k3pzm9oa root addChild: container ].
+	self layoutInSpace: container.
 	container addEventHandler: BlFocusExampleNavigationListener new.
 
 	^ container
+
 ]
 
 { #category : 'examples - segment 4' }
 BlFocusFinderExamples >> segmentWithCells_4 [
 
 	<gtExample>
-	| container children spacecs5zho68dukcj05ugopbwde8y |
+	| 	 container children |
 	children := {
 		            { 30. 2. 455 }.
 		            { 489 }.
 		            { 489 }.
 		            { 26. 2. 18. 2. 437 } } collect: [ :eachSegment |
-			            | grid gridChildren |
+			            | 			 grid gridChildren |
 			            gridChildren := eachSegment collect: [ :eachExtent |
 					                            self cell
 						                            extent:
@@ -1029,15 +1021,10 @@ BlFocusFinderExamples >> segmentWithCells_4 [
 			c vertical fitContent ].
 
 	container addChildren: children.
-	spacecs5zho68dukcj05ugopbwde8y := BlSpace new host:
-		                                  BlHeadlessHost new.
-	spacecs5zho68dukcj05ugopbwde8y
-		show;
-		waitPendingWork.
-	spacecs5zho68dukcj05ugopbwde8y mutateSync: [
-		spacecs5zho68dukcj05ugopbwde8y root addChild: container ].
+	self layoutInSpace: container.
 
 	container addEventHandler: BlFocusExampleNavigationListener new.
 
 	^ container
+
 ]

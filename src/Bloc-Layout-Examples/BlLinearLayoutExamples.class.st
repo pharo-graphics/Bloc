@@ -41,11 +41,14 @@ BlLinearLayoutExamples >> childExactWidth: aNumber [
 
 { #category : 'helpers' }
 BlLinearLayoutExamples >> layoutInSpace: anElement [
+
 	| space |
-	space := BlSpace new host: BlHeadlessHost new.
+	space := BlSpace new.
+	space host: BlHeadlessHost default.
+	space root addChild: anElement.
 	space show; waitPendingWork.
-	space mutateSync: [ space root addChild: anElement ].
-	^ anElement
+	space root removeChildren.
+	space close; waitPendingWork
 ]
 
 { #category : 'instance creation' }
