@@ -282,9 +282,7 @@ BlParallelUniverse >> pulseSemaphoresMutex [
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> pulseSynchronously [
-	"deferred actions must be run before spaces"
 
-	| semaphoresToSignal |
 	isPulsing := true.
 	[
 		[
@@ -294,13 +292,15 @@ BlParallelUniverse >> pulseSynchronously [
 		] 
 			on: Exception 
 			do: [ :e | 
-					(BlParallelUniverseErrorDuringPulseSignal new
+					BlParallelUniverseErrorDuringPulseSignal new
 						signaledError: e;
-						yourself) emit.
+						emit.
 					e pass ]
-	] ensure: [ 
+	] ensure: [
+		| semaphoresToSignal |
 		isPulsing := false.
-		self pulseSemaphoresMutex critical: [ semaphoresToSignal := self pulseSemaphores copy ].
+		self pulseSemaphoresMutex critical: [
+			semaphoresToSignal := self pulseSemaphores copy ].
 		semaphoresToSignal do: [ :each | each signal ] ]
 ]
 

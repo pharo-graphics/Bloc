@@ -18,7 +18,7 @@ BlParallelUniverseErrorDuringPulseSignal >> signaledError [
 ]
 
 { #category : #accessing }
-BlParallelUniverseErrorDuringPulseSignal >> signaledError: anObject [
+BlParallelUniverseErrorDuringPulseSignal >> signaledError: anException [
 
-	signaledError := anObject
+	signaledError := anException
 ]
