@@ -148,7 +148,10 @@ BlHost class >> shutDown [
 
 { #category : #'api - lifecycle' }
 BlHost class >> start [
-	self deprecated: 'Use default start instead'.
+	self
+		deprecated: 'Use #default #start instead'
+		transformWith: '`@receiver start' -> '`@receiver default start'.
+
 	self default start
 ]
 
@@ -160,7 +163,10 @@ BlHost class >> startUp [
 
 { #category : #'api - lifecycle' }
 BlHost class >> stop [
-	self deprecated: 'Use default stop instead'.
+	self
+		deprecated: 'Use #default #stop instead'
+		transformWith: '`@receiver stop' -> '`@receiver default stop'.
+
 	self default stop
 ]
 
@@ -176,7 +182,11 @@ BlHost class >> supportedHostClasses [
 { #category : #'api - ui process' }
 BlHost class >> uiProcessDo: aBlock [
 	"Evaluate aBlock with the running UI Process of this host if any"
-	self deprecated: 'Use default uiProcessDo: instead'.
+
+	self
+		deprecated: 'Use #default #uiProcessDo: instead'
+		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver default uiProcessDo: `@arg'.
+
 	self default uiProcessDo: aBlock
 ]
 
@@ -184,7 +194,10 @@ BlHost class >> uiProcessDo: aBlock [
 BlHost class >> universe [
 	"Lazy initialization is preferred to avoid instantiating unused universes and background loop processes for host types that are not used in a given session."
 
-	self deprecated: 'Use default universe instead'.
+	self
+		deprecated: 'Use #default #universe instead'
+		transformWith: '`@receiver universe' -> '`@receiver default universe'.
+
 	^ self default universe
 ]
 
