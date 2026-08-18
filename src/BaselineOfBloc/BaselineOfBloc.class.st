@@ -124,7 +124,7 @@ BaselineOfBloc >> baseline: spec [
 
 			spec
 				package: 'Bloc-Layout-Examples'
-				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Text-Elements') ].
+				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Tests' 'Bloc-Text-Elements') ].
 
 			spec
 				package: 'Bloc-SVG'
