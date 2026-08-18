@@ -180,6 +180,11 @@ BlDevScripter >> play [
 
 { #category : #execution }
 BlDevScripter >> pulse [
+
+	self
+		deprecated: 'Use #waitPendingWork instead'
+		transformWith: '`@receiver pulse' -> '`@receiver waitPendingWork'.
+
 	self waitPendingWork
 ]
 
