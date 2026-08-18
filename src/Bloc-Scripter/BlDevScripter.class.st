@@ -62,10 +62,8 @@ BlDevScripter >> assertSpace: aSpace [
 BlDevScripter >> close [
 
 	space ifNotNil: [
-		| aUniverse |
-		aUniverse := space universe.
 		space close.
-		aUniverse tryToRunDeferredActions.
+		space waitPendingWork.
 		space := nil ]
 ]
 
@@ -188,11 +186,6 @@ BlDevScripter >> pulse [
 	self waitPendingWork
 ]
 
-{ #category : #execution }
-BlDevScripter >> waitPendingWork [
-	self space waitPendingWork
-]
-
 { #category : #'accessing - space' }
 BlDevScripter >> root [
 	^ self space root
@@ -267,4 +260,9 @@ BlDevScripter >> time [
 BlDevScripter >> userData [
 	<return: #BlDevScripterUserData>
 	^ self space root devScripterData
+]
+
+{ #category : #execution }
+BlDevScripter >> waitPendingWork [
+	self space waitPendingWork
 ]
