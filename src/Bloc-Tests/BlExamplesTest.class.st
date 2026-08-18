@@ -31,10 +31,10 @@ BlExamplesTest >> performTest [
 	(testMethod hasPragmaNamed: #noTest)
 		ifTrue: [ self skip ].
 
-	result := super performTest.
-	(result isKindOf: BlSpace) ifTrue: [
+	result := self perform: testSelector asSymbol.
+	result class = BlSpace ifTrue: [
 		result close; waitPendingWork ].
-	((result isKindOf: BlElement) and: [ result isAttachedToSceneGraph ]) ifTrue: [
+	(result isElement and: [ result isAttachedToSceneGraph ]) ifTrue: [
 		| sp |
 		sp := result space.
 		result removeFromParent.

@@ -2285,6 +2285,12 @@ BlElement >> isFocused [
 ]
 
 { #category : #testing }
+BlElement >> isElement [
+
+	^ true
+]
+
+{ #category : #testing }
 BlElement >> isFullyVisibleInSpace [
 	"Return true if I am in fully visible in the area of a space (window), false otherwise.
 	Note, that this visibility is computed only based on bounds. 
