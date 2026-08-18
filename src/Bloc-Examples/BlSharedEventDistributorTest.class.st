@@ -107,9 +107,7 @@ BlSharedEventDistributorTest >> testMouseEnterEventOneOutOfTwoElements [
 	aContainer := self newContainer.
 	aContainer addChildren: aHandler elements.
 	aSpace root addChild: aContainer.
-	elementA eventSimulator
-		mouseMoveInside;
-		waitPendingWork.
+	elementA eventSimulator mouseMoveInside.
 
 	self assert: countA equals: 1.
 	self assert: countB equals: 1
