@@ -39,18 +39,6 @@ BlLinearLayoutExamples >> childExactWidth: aNumber [
 		yourself
 ]
 
-{ #category : 'helpers' }
-BlLinearLayoutExamples >> layoutInSpace: anElement [
-
-	| space |
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space root addChild: anElement.
-	space show; waitPendingWork.
-	space root removeChildren.
-	space close; waitPendingWork
-]
-
 { #category : 'instance creation' }
 BlLinearLayoutExamples >> parentWithLinearHorizontalLayout [
 	^ BlElement new

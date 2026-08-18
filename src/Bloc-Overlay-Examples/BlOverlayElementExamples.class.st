@@ -5,18 +5,6 @@ Class {
 	#package : 'Bloc-Overlay-Examples'
 }
 
-{ #category : 'helpers' }
-BlOverlayElementExamples >> layoutInSpace: anElement [
-
-	| space |
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space root addChild: anElement.
-	space show; waitPendingWork.
-	space root removeChildren.
-	space close; waitPendingWork
-]
-
 { #category : 'examples - overlay' }
 BlOverlayElementExamples >> overlayOnParent [
 	<sampleInstance>

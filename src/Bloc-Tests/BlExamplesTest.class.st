@@ -41,3 +41,16 @@ BlExamplesTest >> performTest [
 		sp close; waitPendingWork ].
 	^ result
 ]
+
+{ #category : #helpers }
+BlExamplesTest >> layoutInSpace: anElement [
+
+	| space |
+	space := BlSpace new.
+	space host: BlHeadlessHost default.
+	space root addChild: anElement.
+	space show; waitPendingWork.
+	space root removeChildren.
+	space close; waitPendingWork
+]
+

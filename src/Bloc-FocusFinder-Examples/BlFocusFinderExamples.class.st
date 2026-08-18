@@ -371,18 +371,6 @@ BlFocusFinderExamples >> focusedElementAbove_90 [
 	^ aContainer
 ]
 
-{ #category : 'helpers' }
-BlFocusFinderExamples >> layoutInSpace: anElement [
-
-	| space |
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space root addChild: anElement.
-	space show; waitPendingWork.
-	space root removeChildren.
-	space close; waitPendingWork
-]
-
 { #category : 'examples - segment 1' }
 BlFocusFinderExamples >> segmentWithCells [
 
