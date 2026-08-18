@@ -2,17 +2,15 @@
 I contain examples of position change logging functionality
 "
 Class {
-	#name : 'BlElementPositionChangeTest',
-	#superclass : 'TestCase',
+	#name : #BlElementPositionChangeTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-Tests-Basic-Changes',
-	#package : 'Bloc-Tests',
-	#tag : 'Basic-Changes'
+	#category : #'Bloc-Tests-Basic-Changes'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlElementPositionChangeTest >> newElementTree [
 
 	| parent child subChild |
@@ -34,7 +32,7 @@ BlElementPositionChangeTest >> newElementTree [
 	^ parent
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlElementPositionChangeTest >> setUp [
 	super setUp.
 	space := BlSpace new.
@@ -42,7 +40,7 @@ BlElementPositionChangeTest >> setUp [
 	space show; waitPendingWork
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlElementPositionChangeTest >> tearDown [
 	space ifNotNil: [
 		space close; waitPendingWork.
@@ -50,7 +48,7 @@ BlElementPositionChangeTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementPositionChangeTest >> testParentPositionChanged [
 	| parent parentPositionChangedListener parentPositionInSpaceChangedListener parentPositionChanged parentPositionInSpaceChanged child childPositionChangedListener childPositionInSpaceChangedListener childPositionChanged childPositionInSpaceChanged subChild subChildPositionChangedListener subChildPositionInSpaceChangedListener subChildPositionChanged subChildPositionInSpaceChanged anUpdater |
 	parentPositionChanged := parentPositionInSpaceChanged := 0.
@@ -113,7 +111,7 @@ BlElementPositionChangeTest >> testParentPositionChanged [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementPositionChangeTest >> testPositionChangeBoundsChange [
 	| element anUpdater |
 	element := BlElement new.
@@ -144,7 +142,7 @@ BlElementPositionChangeTest >> testPositionChangeBoundsChange [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementPositionChangeTest >> testPositionChangeLoop [
 
 	| element positionChanged positionChangedListener positionInSpaceChanged positionInSpaceChangedListener anUpdater |

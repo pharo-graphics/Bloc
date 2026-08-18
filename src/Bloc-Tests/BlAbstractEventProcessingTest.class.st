@@ -138,6 +138,12 @@ BlAbstractEventProcessingTest >> setUp [
 				yourself) ]
 ]
 
+{ #category : #accessing }
+BlAbstractEventProcessingTest >> space [
+
+	^ space
+]
+
 { #category : #running }
 BlAbstractEventProcessingTest >> tearDown [
 
@@ -145,10 +151,4 @@ BlAbstractEventProcessingTest >> tearDown [
 		space close; waitPendingWork.
 		space := nil ].
 	super tearDown
-]
-
-{ #category : #accessing }
-BlAbstractEventProcessingTest >> space [
-
-	^ space
 ]

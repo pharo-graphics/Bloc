@@ -23,25 +23,6 @@ BlExamplesTest class >> testSelectors [
 		  thenCollect: [ :each | each selector ]
 ]
 
-{ #category : #private }
-BlExamplesTest >> performTest [ 
-
-	| testMethod result |
-	testMethod := self class methodNamed: testSelector asSymbol.
-	(testMethod hasPragmaNamed: #noTest)
-		ifTrue: [ self skip ].
-
-	result := self perform: testSelector asSymbol.
-	result class = BlSpace ifTrue: [
-		result close; waitPendingWork ].
-	(result isElement and: [ result isAttachedToSceneGraph ]) ifTrue: [
-		| sp |
-		sp := result space.
-		result removeFromParent.
-		sp close; waitPendingWork ].
-	^ result
-]
-
 { #category : #helpers }
 BlExamplesTest >> layoutInSpace: anElement [
 
@@ -54,3 +35,22 @@ BlExamplesTest >> layoutInSpace: anElement [
 	space close; waitPendingWork
 ]
 
+{ #category : #private }
+BlExamplesTest >> performTest [ 
+
+	| testMethod result |
+	testMethod := self class methodNamed: testSelector asSymbol.
+	(testMethod hasPragmaNamed: #noTest)
+		ifTrue: [ self skip ].
+
+	result := self perform: testSelector asSymbol.
+	result class = BlSpace
+		ifTrue: [ result close; waitPendingWork ]
+		ifFalse: [
+			result isAttachedToSceneGraph ifTrue: [
+				| sp |
+				sp := result space.
+				result removeFromParent.
+				sp close; waitPendingWork ] ].
+	^ result
+]
