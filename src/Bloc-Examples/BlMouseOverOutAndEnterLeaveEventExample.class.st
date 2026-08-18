@@ -272,9 +272,9 @@ BlMouseOverOutAndEnterLeaveEventExample >> quickComparison [
 	^ aContainer
 ]
 
-{ #category : #private }
+{ #category : #accessing }
 BlMouseOverOutAndEnterLeaveEventExample >> shadow [
-	<sampleInstance>
+
 	^ BlGaussianShadowEffect color: (Color black alpha: 0.5) width: 7 offset: 2@2
 ]
 
