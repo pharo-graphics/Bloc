@@ -739,9 +739,7 @@ BlFocusFinderTest >> testFocusFinderDownOnContainer [
 	aFocusFinder := BlFocusFinder new
 		down;
 		root: aContainer;
-		referenceElement: aContainer children last children third.
-
-	^ aFocusFinder
+		referenceElement: aContainer children last children third
 ]
 
 { #category : 'tests' }
@@ -762,9 +760,7 @@ BlFocusFinderTest >> testFocusFinderDownOnSegment_2_at_190x30 [
 
 	self
 		assert: aNextFocus
-		equals: (aContainer children at: 73).
-
-	^ aFocusFinder
+		equals: (aContainer children at: 73)
 ]
 
 { #category : 'tests' }
@@ -785,9 +781,7 @@ BlFocusFinderTest >> testFocusFinderDownOnSegment_2_child_41 [
 
 	self
 		assert: aNextFocus
-		equals: (aContainer children at: 73).
-
-	^ aFocusFinder
+		equals: (aContainer children at: 73)
 ]
 
 { #category : 'tests' }
@@ -808,9 +802,7 @@ BlFocusFinderTest >> testFocusFinderDownOnSegment_3_at_285x50 [
 
 	self
 		assert: aNextFocus
-		equals: (aContainer children at: 39).
-
-	^ aFocusFinder
+		equals: (aContainer children at: 39)
 ]
 
 { #category : 'tests' }
@@ -831,9 +823,7 @@ BlFocusFinderTest >> testFocusFinderDownOnSegment_3_child_57 [
 
 	self
 		assert: aNextFocus
-		equals: (aContainer children at: 39).
-
-	^ aFocusFinder
+		equals: (aContainer children at: 39)
 ]
 
 { #category : 'tests' }
@@ -846,9 +836,7 @@ BlFocusFinderTest >> testFocusFinderLeftOnContainer [
 	aFocusFinder := BlFocusFinder new
 		left;
 		root: aContainer;
-		referenceElement: aContainer children last children third.
-
-	^ aFocusFinder
+		referenceElement: aContainer children last children third
 ]
 
 { #category : 'tests' }
@@ -861,9 +849,7 @@ BlFocusFinderTest >> testFocusFinderRightOnContainer [
 	aFocusFinder := BlFocusFinder new
 		right;
 		root: aContainer;
-		referenceElement: aContainer children last children third.
-
-	^ aFocusFinder
+		referenceElement: aContainer children last children third
 ]
 
 { #category : 'tests' }
@@ -876,9 +862,7 @@ BlFocusFinderTest >> testFocusFinderUpOnContainer [
 	aFocusFinder := BlFocusFinder new
 		up;
 		root: aContainer;
-		referenceElement: aContainer children last children third.
-
-	^ aFocusFinder
+		referenceElement: aContainer children last children third
 ]
 
 { #category : 'tests' }
@@ -891,9 +875,7 @@ BlFocusFinderTest >> testFocusFinderUpOnContainerFromBounds [
 	aFocusFinder := BlFocusFinder new
 		up;
 		root: aContainer;
-		referenceArea: (170@100 corner: 200@120).
-
-	^ aFocusFinder
+		referenceArea: (170@100 corner: 200@120)
 ]
 
 { #category : 'tests' }
@@ -913,9 +895,7 @@ BlFocusFinderTest >> testFocusFinderUpOnSegment_4_at_100x100 [
 
 	self
 		assert: aNextFocus
-		equals: (aContainer children third children first).
-
-	^ aFocusFinder
+		equals: (aContainer children third children first)
 ]
 
 { #category : 'tests' }
@@ -935,9 +915,7 @@ BlFocusFinderTest >> testFocusFinderUpOnSegment_4_at_20x100 [
 
 	self
 		assert: aNextFocus
-		equals: (aContainer children third children first).
-
-	^ aFocusFinder
+		equals: (aContainer children third children first)
 ]
 
 { #category : 'tests' }
@@ -957,9 +935,7 @@ BlFocusFinderTest >> testFocusFinderUpOnSegment_4_at_minus10x100 [
 
 	self
 		assert: aNextFocus
-		equals: (aContainer children third children first).
-
-	^ aFocusFinder
+		equals: (aContainer children third children first)
 ]
 
 { #category : 'tests' }
@@ -980,9 +956,7 @@ BlFocusFinderTest >> testFocusFinderUpOnSegmentsAt_0x60 [
 
 	self
 		assert: aNextFocus
-		equals: (aContainer children at: 27).
-
-	^ aFocusFinder
+		equals: (aContainer children at: 27)
 ]
 
 { #category : 'tests' }
@@ -1003,9 +977,7 @@ BlFocusFinderTest >> testFocusFinderUpOnSegmentsAt_minus10x60 [
 
 	self
 		assert: aNextFocus
-		equals: (aContainer children at: 27).
-
-	^ aFocusFinder
+		equals: (aContainer children at: 27)
 ]
 
 { #category : 'tests' }
@@ -1024,7 +996,5 @@ BlFocusFinderTest >> testFocusedElementAbove_90 [
 			referenceArea: (eachX @ 90 extent: 0@0);
 			nextFocusDo: #yourself ifNone: [ nil ].
 
-		self assert: aFocusedElement == aContainer children third children first 	].
-
-	^ aContainer
+		self assert: aFocusedElement == aContainer children third children first 	]
 ]
