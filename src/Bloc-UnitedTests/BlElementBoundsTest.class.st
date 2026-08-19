@@ -59,10 +59,10 @@ BlElementBoundsTest >> parentWithChild [
 	| p aSpace |
 	p := self parent addChild: self child; yourself.
 	aSpace := BlSpace new host: BlHeadlessHost new.
-	aSpace show; waitPendingWork.
-	aSpace mutateSync: [ aSpace root addChild: p ].
-	aSpace mutateSync: [ p removeFromParent ].
-	aSpace close; waitPendingWork.
+	aSpace show; settle.
+	aSpace deferAndSettle: [ aSpace root addChild: p ].
+	aSpace deferAndSettle: [ p removeFromParent ].
+	aSpace close; settle.
 	^ p
 ]
 
@@ -432,14 +432,14 @@ BlElementBoundsTest >> testShadowEffectBoundsWithoutOffset [
 	child extent: self childExtent * 2.
 	aSpace := BlSpace new host: BlHeadlessHost new.
 	[
-		aSpace show; waitPendingWork.
-		aSpace mutateSync: [ aSpace root addChild: parent ].
+		aSpace show; settle.
+		aSpace deferAndSettle: [ aSpace root addChild: parent ].
 		self
 			assert: child effectBounds
 			equals:
 				(shadowWidth * shadowMultiplier asPoint negated
 					corner: self childExtent * 2 + (shadowWidth * shadowMultiplier asPoint))
 	] ensure: [
-		aSpace close; waitPendingWork ].
+		aSpace close; settle ].
 	^ parent
 ]

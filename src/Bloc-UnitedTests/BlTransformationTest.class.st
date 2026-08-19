@@ -37,13 +37,13 @@ BlTransformationTest >> setUp [
 	super setUp.
 	space := BlSpace new.
 	space host: BlHeadlessHost new.
-	space show; waitPendingWork
+	space show; settle
 ]
 
 { #category : 'running' }
 BlTransformationTest >> tearDown [
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]
@@ -66,7 +66,7 @@ BlTransformationTest >> testElTxBoundsWithScale [
 	g transform
 		scaleBy: 2 @ 2;
 		apply.
-	space mutateSync: [ space root addChild: g ].
+	space deferAndSettle: [ space root addChild: g ].
 	self assert: g position equals: 10 @ 10.
 	self assert: n position equals: 10 @ 10.
 	self assert: g positionInSpace equals: (90 @ 90) negated.
@@ -90,7 +90,7 @@ BlTransformationTest >> testInheritFromIdentity [
 		inherit;
 		scaleBy: 2 @ 2;
 		apply.
-	space mutateSync: [ space root addChild: n ].
+	space deferAndSettle: [ space root addChild: n ].
 	self assert: n position equals: 10 @ 10.
 	self assert: n positionInSpace equals: (40 @ 40) negated.
 	self
@@ -121,7 +121,7 @@ BlTransformationTest >> testRotate [
 	element transform
 		rotateBy: 45;
 		apply.
-	space mutateSync: [ space root addChild: element ].
+	space deferAndSettle: [ space root addChild: element ].
 	self assert: element extent equals: self extent.
 	self assert: element position equals: self position.
 	expectedOrigin := self extent / 2.0 * (1 - 2 sqrt).
@@ -144,7 +144,7 @@ BlTransformationTest >> testScale [
 	element transform
 		scaleBy: 2 @ 2;
 		apply.
-	space mutateSync: [ space root addChild: element ].
+	space deferAndSettle: [ space root addChild: element ].
 	expectedOrigin := (self extent / 2.0) negated.
 	expectedExtent := self extent * 2.
 	self
@@ -168,7 +168,7 @@ BlTransformationTest >> testScaleBy [
 	n transform
 		scaleBy: 2 @ 2;
 		apply.
-	space mutateSync: [ space root addChild: n ].
+	space deferAndSettle: [ space root addChild: n ].
 	self assert: n position equals: 10 @ 10.
 	self assert: n positionInSpace equals: (40 @ 40) negated.
 	self
@@ -178,7 +178,7 @@ BlTransformationTest >> testScaleBy [
 		inherit;
 		scaleBy: 0.5 @ 0.5;
 		apply.
-	space waitPendingWork.
+	space settle.
 	self assert: n transformedBounds equals: (0 @ 0 corner: 100 @ 100)
 ]
 
@@ -192,7 +192,7 @@ BlTransformationTest >> testScaleTo [
 	n transform
 		scaleBy: 2 @ 2;
 		apply.
-	space mutateSync: [ space root addChild: n ].
+	space deferAndSettle: [ space root addChild: n ].
 	self assert: n position equals: 10 @ 10.
 	self assert: n positionInSpace equals: (40 @ 40) negated.
 	self
@@ -201,7 +201,7 @@ BlTransformationTest >> testScaleTo [
 	n transform
 		scaleBy: 0.5 @ 0.5;
 		apply.
-	space waitPendingWork.
+	space settle.
 	self assert: n transformedBounds equals: (25 @ 25 corner: 75 @ 75)
 ]
 
@@ -212,7 +212,7 @@ BlTransformationTest >> testTranslate [
 	element transform
 		translateBy: 50 @ 50;
 		apply.
-	space mutateSync: [ space root addChild: element ].
+	space deferAndSettle: [ space root addChild: element ].
 	expectedOrigin := 50 @ 50.
 	expectedExtent := self extent.
 	self
@@ -236,14 +236,14 @@ BlTransformationTest >> testTranslateTo [
 	n transform
 		translateBy: 10 @ 10;
 		apply.
-	space mutateSync: [ space root addChild: n ].
+	space deferAndSettle: [ space root addChild: n ].
 	self assert: n position equals: 10 @ 10.
 	self assert: n positionInSpace equals: 20 @ 20.
 	self assert: n transformedBounds equals: (10 @ 10 corner: 110 @ 110).
 	n transform
 		translateBy: 30 @ 30;
 		apply.
-	space waitPendingWork.
+	space settle.
 	self assert: n position equals: 10 @ 10.
 	self assert: n positionInSpace equals: 40 @ 40.
 	self assert: n transformedBounds equals: (30 @ 30 corner: 130 @ 130)

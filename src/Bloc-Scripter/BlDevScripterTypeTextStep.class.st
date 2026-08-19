@@ -25,7 +25,7 @@ BlDevScripterTypeTextStep >> playOn: aScripter [
 
 	aTarget eventSimulator event: anInputEvent.
 
-	aScripter waitPendingWork.
+	aScripter settle.
 ]
 
 { #category : #accessing }

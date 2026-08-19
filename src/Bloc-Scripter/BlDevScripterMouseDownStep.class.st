@@ -12,5 +12,5 @@ BlDevScripterMouseDownStep >> defaultLabel [
 { #category : #actions }
 BlDevScripterMouseDownStep >> playOn: aScripter [
 	aScripter element eventSimulator mouseDownAt: (self getMousePositionIn: aScripter).
-	aScripter waitPendingWork
+	aScripter settle
 ]

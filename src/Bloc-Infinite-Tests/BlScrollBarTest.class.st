@@ -75,7 +75,7 @@ BlScrollBarTest >> setUp [
 				c vertical matchParent ];
 			yourself.
 
-	space mutateSync: [
+	space deferAndSettle: [
 		space root
 			layout: BlLinearLayout new;
 			padding: (BlInsets all: gap);

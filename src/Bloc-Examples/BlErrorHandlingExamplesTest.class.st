@@ -49,9 +49,9 @@ BlErrorHandlingExamplesTest >> sceneWith: aFaultyElement [
 	aSpace host: BlMorphicWindowHost new.
 	[
 		aSpace root addChild: aContainer.
-		aSpace show; waitPendingWork
+		aSpace show; settle
 	] ensure: [
-		aSpace close; waitPendingWork.
+		aSpace close; settle.
 		aContainer removeFromParent ].
 
 	^ aContainer

@@ -176,3 +176,10 @@ BlTaskQueue >> tasks [
 	^ self critical: [
 		  tasks ifNil: [ #(  ) ] ifNotNil: [ tasks asArray ] ]
 ]
+
+{ #category : #testing }
+BlTaskQueue >> isSettled [
+	"Return true if all tasks in the queue are considered settled (no pending execution)"
+
+	^ self tasks noneSatisfy: [ :eachTask | eachTask isPending ]
+]

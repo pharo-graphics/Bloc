@@ -43,7 +43,7 @@ BlParameterizedHostTest >> newTestingSpace [
 	aSpace
 		host: hostClass default;
 		show;
-		waitPendingWork.
+		settle.
 
 	testingSpaces add: aSpace.
 
@@ -71,7 +71,7 @@ BlParameterizedHostTest >> tearDown [
 			[
 				each
 					close;
-					waitPendingWork ]
+					settle ]
 				on: Exception
 				do: [ ] ].
 
@@ -79,7 +79,7 @@ BlParameterizedHostTest >> tearDown [
 			hostClass default universe spaces copy reject: [ :each | initialSpaces includes: each ] thenDo: [ :each |
 					[
 						each close.
-						each waitPendingWork ]
+						each settle ]
 						on: Exception
 						do: [ ] ] ].
 
@@ -89,5 +89,5 @@ BlParameterizedHostTest >> tearDown [
 { #category : #tests }
 BlParameterizedHostTest >> waitTestingSpaces [
 
-	testingSpaces do: [ :each | each waitPendingWork ]
+	testingSpaces do: [ :each | each settle ]
 ]

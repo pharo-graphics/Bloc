@@ -371,7 +371,7 @@ BlParallelUniverse >> unregisterPulseSemaphore: aSemaphore [
 ]
 
 { #category : #'api - pulse' }
-BlParallelUniverse >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
+BlParallelUniverse >> waitUntilTrue: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
 
 	| aSemaphore |
 	aSemaphore := Semaphore new.
@@ -394,4 +394,11 @@ BlParallelUniverse >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: com
 		self unregisterPulseSemaphore: aSemaphore ].
 		
 	^ completionBlock value
+]
+
+{ #category : #testing }
+BlParallelUniverse >> isSettled [
+	"Return true if there are no deferred actions waiting to be executed"
+
+	^ deferredActions isEmpty
 ]

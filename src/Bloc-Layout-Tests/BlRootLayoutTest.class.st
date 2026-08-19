@@ -75,13 +75,13 @@ BlRootLayoutTest >> setUp [
 	super setUp.
 	space := BlSpace new.
 	space host: BlHeadlessHost new.
-	space show; waitPendingWork
+	space show; settle
 ]
 
 { #category : #running }
 BlRootLayoutTest >> tearDown [
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]

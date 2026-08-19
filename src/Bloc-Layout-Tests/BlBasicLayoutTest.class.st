@@ -12,13 +12,13 @@ BlBasicLayoutTest >> setUp [
 	super setUp.
 	space := BlSpace new.
 	space host: BlHeadlessHost new.
-	space show; waitPendingWork
+	space show; settle
 ]
 
 { #category : #running }
 BlBasicLayoutTest >> tearDown [
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]
@@ -57,7 +57,7 @@ BlBasicLayoutTest >> testForceLayoutOfMatchParent [
 				c vertical matchParent ];
 			yourself.
 
-	space mutateSync: [ space root addChild: anElement ].
+	space deferAndSettle: [ space root addChild: anElement ].
 
 	self assert: anElement extent equals: 800 @ 600
 ]
@@ -69,7 +69,7 @@ BlBasicLayoutTest >> testParentWithChildExactExtent [
 	parent := self newParentWithChild.
 	child := parent children first.
 
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
 	self assert: parent extent equals: 300 @ 300.
 	self assert: child extent equals: 100 @ 100
@@ -85,7 +85,7 @@ BlBasicLayoutTest >> testParentWithChildFitContent [
 		c horizontal fitContent.
 		c vertical fitContent ].
 
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
 	self assert: parent extent equals: 300 @ 300.
 	self assert: child extent equals: 0 @ 0
@@ -101,7 +101,7 @@ BlBasicLayoutTest >> testParentWithChildMatchParent [
 		c horizontal matchParent.
 		c vertical matchParent ].
 
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
 	self assert: parent extent equals: 300 @ 300.
 	self assert: child extent equals: 300 @ 300

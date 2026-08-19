@@ -118,11 +118,11 @@ BlSpaceExamplesMigratedTest >> testFirstPulse [
 	aSpace := BlSpace new.
 	aSpace host: BlHeadlessHost new.
 	[
-		aSpace show; waitPendingWork.
+		aSpace show; settle.
 
 		self deny: aSpace hasDirtyElements.
 		self assert: aSpace root position equals: 0 @ 0.
 		self assert: aSpace root extent equals: aSpace extent
 	] ensure: [
-		aSpace close; waitPendingWork ]
+		aSpace close; settle ]
 ]

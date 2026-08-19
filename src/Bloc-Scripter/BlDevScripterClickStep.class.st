@@ -41,5 +41,5 @@ BlDevScripterClickStep >> playOn: aScripter [
 		setMousePosition: ((self target findTargetStartingInScripter: aScripter) eventSimulator click)
 		in: aScripter.
 
-	aScripter waitPendingWork
+	aScripter settle
 ]

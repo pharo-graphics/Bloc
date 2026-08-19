@@ -462,7 +462,7 @@ BlLinearLayoutUsageTest >> testMatchParentInFitContent [
 	parent := self newParentWithMatchParentInFitContent.
 	child := parent children first.
 
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
 	self assert: parent extent equals: 300 @ 50.
 	self assert: child extent equals: 100 @ 0
@@ -476,14 +476,14 @@ BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeBackToMatchParent [
 	parent := self newParentWithMatchParentInFitContent.
 	child := parent children first.
 
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
-	space mutateSync: [ child height: 200 ].
+	space deferAndSettle: [ child height: 200 ].
 
 	self assert: parent extent equals: 300 @ 250.
 	self assert: child extent equals: 100 @ 200.
 
-	space mutateSync: [ child constraintsDo: [ :c | c vertical matchParent ] ].
+	space deferAndSettle: [ child constraintsDo: [ :c | c vertical matchParent ] ].
 
 	self assert: parent extent equals: 300 @ 50.
 	self assert: child extent equals: 100 @ 0
@@ -497,9 +497,9 @@ BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeToExact [
 	parent := self newParentWithMatchParentInFitContent.
 	child := parent children first.
 
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
-	space mutateSync: [ child height: 200 ].
+	space deferAndSettle: [ child height: 200 ].
 
 	self assert: parent extent equals: 300 @ 250.
 	self assert: child extent equals: 100 @ 200
@@ -531,7 +531,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimited [
 		c horizontal exact: 300.
 		c vertical exact: 400 ].
 	parent addChild: child.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 400.
 	self assert: child extent equals: 300 @ 400.
 	^ parent
@@ -569,7 +569,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChild [
 	parent addChildren: {
 			childA.
 			childB }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 300 @ 325.
 	self assert: childB extent equals: 100 @ 75.
@@ -615,7 +615,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChildFitCo
 	parent addChildren: {
 			childA.
 			childB }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 300 @ 325.
 	self assert: childB extent equals: 300 @ 75.
@@ -668,7 +668,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndThreeChild
 			childB.
 			childD }.
 	parent padding: (BlInsets left: 20 right: 20).
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 260 @ 175.
 	self assert: childB extent equals: 100 @ 75.
@@ -715,7 +715,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndTwoChildlr
 			childA.
 			childB }.
 	parent padding: (BlInsets left: 20 right: 20).
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 260 @ 195.
 	self assert: childB extent equals: 100 @ 75.
@@ -768,7 +768,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndThreeCh
 			childB.
 			childD }.
 	parent padding: (BlInsets left: 20 right: 20).
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 260 @ 140.
 	self assert: childB extent equals: 100 @ 75.
@@ -815,7 +815,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndTwoChil
 			childA.
 			childB }.
 	parent padding: (BlInsets left: 20 right: 20).
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 260 @ 140.
 	self assert: childB extent equals: 100 @ 75.
@@ -854,7 +854,7 @@ BlLinearLayoutUsageTest >> testTwoChildrenMatchParentInFitContent [
 		c vertical matchParent ].
 	parent addChild: child.
 	parent addChild: child2.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	^ parent
 ]
 
@@ -934,6 +934,6 @@ BlLinearLayoutUsageTest >> twoChildrenMatchParentInFitContent [
 		c vertical matchParent ].
 	parent addChild: child.
 	parent addChild: child2.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	^ parent
 ]

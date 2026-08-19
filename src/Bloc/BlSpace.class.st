@@ -84,10 +84,10 @@ BlSpace class >> extractRoots: aSetOfElements [
 ]
 
 { #category : #pulse }
-BlSpace >> accessSync: aBlock [
+BlSpace >> deferRead: aBlock [
 	"Evaluate aBlock on the UI process and block the calling thread until aBlock finishes executing.
 	Return the result of aBlock.
-	Unlike #mutateSync:, this does not wait for subsequent frame passes (layout, drawing, or deferred tasks) to settle."
+	Unlike #deferAndSettle:, this does not wait for subsequent frame passes (layout, drawing, or deferred tasks) to settle."
 
 	| result semaphore |
 	(self isOpened not or: [ self host isUIProcess ]) ifTrue: [ ^ aBlock value ].
@@ -626,22 +626,6 @@ BlSpace >> hasParent: anElement [
 	^ false
 ]
 
-{ #category : #testing }
-BlSpace >> hasPendingTasks [
-	"Return true if I have tasks in the queue that are considered pending."
-
-	^ self taskQueue tasks anySatisfy: [ :eachTask | eachTask isPending ]
-]
-
-{ #category : #testing }
-BlSpace >> hasPendingWork [
-	"Return true if there are deferred actions in my universe, or if any of my frame's phases has pending work."
-
-	self isOpened ifFalse: [ ^ self universe hasDeferredActions ].
-	self universe hasDeferredActions ifTrue: [ ^ true ].
-	^ self frame phases anySatisfy: [ :eachPhase | eachPhase hasPendingWorkIn: self ]
-]
-
 { #category : #'window - properties' }
 BlSpace >> height [
 	<return: #Number>
@@ -999,16 +983,16 @@ BlSpace >> mouseProcessor: aMouseProcessor [
 ]
 
 { #category : #pulse }
-BlSpace >> mutateSync: aBlock [
-	"Evaluate aBlock on the UI process and wait until all pending work is completed"
+BlSpace >> deferAndSettle: aBlock [
+	"Evaluate aBlock on the UI process and wait until the space reaches equilibrium (all cascading tasks, skins, layout, and render passes have settled)."
 
-	self mutateWith: aBlock.
-	self waitPendingWork
+	self defer: aBlock.
+	self settle
 ]
 
 { #category : #pulse }
-BlSpace >> mutateWith: aBlock [
-	"Schedule aBlock to be run on the loop process"
+BlSpace >> defer: aBlock [
+	"Schedule aBlock to be run asynchronously on the host UI loop process."
 
 	self isOpened
 		ifTrue: [ self universe defer: aBlock ]
@@ -1353,69 +1337,73 @@ BlSpace >> waitForDuration: aDuration [
 	1. It blocks the active process on a pulse semaphore, waking up only on space frame pulses.
 	2. Under stepping hosts running directly on the UI process (like BlMorphicSteppingHost), it manually drives UI stepping to advance space time, preventing deadlocks that standard process sleeps would cause."
 
-	self waitUntil: [ false ] forDuration: aDuration
+	self waitUntilTrue: [ false ] forDuration: aDuration
 ]
 
 { #category : #pulse }
-BlSpace >> waitPendingWork [
-	"Wait until there is no more pending work (deferred actions, tasks, layout, or events).
-	This utilizes #waitUntil: to safely block the active process on the host's pulse semaphore until the condition is met."
+BlSpace >> isSettled [
+	"Return true if the space has reached equilibrium: no deferred actions in universe, and all frame phases are settled in this space."
 
-	^ self waitUntil: [ self hasPendingWork not ]
+	self isOpened ifFalse: [ ^ self universe isSettled ].
+	self universe isSettled ifFalse: [ ^ false ].
+	^ self frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
 ]
 
 { #category : #pulse }
-BlSpace >> waitPendingWorkFor: aTimeoutBlock [
-	"Wait for this space task queue to be empty until a given timeout block evaluates to true.
-	Runs a synchronized wait loop using the host's pulse semaphore."
+BlSpace >> settle [
+	"Wait until the space reaches equilibrium (all deferred actions, tasks, skins, and layout requests have settled).
+	Blocks the active process on the host pulse semaphore until #isSettled answers true."
 
-	self host
-		waitUntil: [ self hasPendingWork not ]
-		timeout: aTimeoutBlock
-		onCompletion: [ ]
-		onTimeout: [ ]
+	^ self waitUntilTrue: [ self isSettled ]
 ]
 
 { #category : #pulse }
-BlSpace >> waitPendingWorkForDuration: aDuration [
+BlSpace >> settleFor: aTimeoutBlock [
+	"Wait until the space is settled, or until aTimeoutBlock evaluates to true."
+
+	^ self host settle: self timeout: aTimeoutBlock
+]
+
+{ #category : #pulse }
+BlSpace >> settleForDuration: aDuration [
 	"Wait for this space task queue to be empty until a given duration has passed.
-	Forwards to #waitPendingWorkForMilliseconds: converting the duration to milliseconds."
+	Forwards to #settleForMilliseconds: converting the duration to milliseconds."
 
-	^ self waitPendingWorkForMilliseconds: aDuration asMilliSeconds
+	^ self settleForMilliseconds: aDuration asMilliSeconds
 ]
 
 { #category : #pulse }
-BlSpace >> waitPendingWorkForMilliseconds: aNumber [
-	"Wait for this space task queue to be empty until a given number of milliseconds has passed.
+BlSpace >> settleForMilliseconds: aNumber [
+	"Wait until the space is settled, or until the timeout in milliseconds has passed.
 	Uses #nowInUTCMicroseconds for a monotonic, high-resolution deadline to avoid clock-skew issues."
 
 	| deadlineInMicroseconds |
 	deadlineInMicroseconds := time nowInUTCMicroseconds + (aNumber * 1000).
-	^ self waitPendingWorkFor: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
+	^ self settleFor: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
 ]
 
 { #category : #pulse }
-BlSpace >> waitUntil: aBlock [
+BlSpace >> waitUntilTrue: aBlock [
 	"Wait until the given condition block evaluates to true, synchronized with the space pulses.
 	Blocks the calling process on the host's pulse semaphore, waking up on each frame to check the condition.
 	Under stepping hosts running directly on the UI process (like BlMorphicSteppingHost), it manually drives the stepping loop to allow time to progress."
 
 	self host
-		waitUntil: aBlock
+		waitUntilTrue: aBlock
 		timeout: [ false ]
 		onCompletion: [ ]
 		onTimeout: [ ]
 ]
 
 { #category : #pulse }
-BlSpace >> waitUntil: aBlock forDuration: aDuration [
+BlSpace >> waitUntilTrue: aBlock forDuration: aDuration [
 	"Wait until the given condition block evaluates to true, or the timeout duration has passed.
 	Blocks the calling process on the host's pulse semaphore, waking up on each frame to check the condition."
 
 	| deadlineInMicroseconds |
 	deadlineInMicroseconds := time nowInUTCMicroseconds + (aDuration asMilliSeconds * 1000).
 	self host
-		waitUntil: aBlock
+		waitUntilTrue: aBlock
 		timeout: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
 		onCompletion: [ ]
 		onTimeout: [ ]

@@ -15,5 +15,5 @@ BlDevScripterDoubleClickStep >> playOn: aScripter [
 	targetElement := self target findTargetStartingInScripter: aScripter.
 	eventSimulator := targetElement eventSimulator.
 	eventSimulator doubleClick.
-	aScripter waitPendingWork
+	aScripter settle
 ]

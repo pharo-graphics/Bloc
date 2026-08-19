@@ -63,7 +63,7 @@ BlDevScripter >> close [
 
 	space ifNotNil: [
 		space close.
-		space waitPendingWork.
+		space settle.
 		space := nil ]
 ]
 
@@ -180,10 +180,10 @@ BlDevScripter >> play [
 BlDevScripter >> pulse [
 
 	self
-		deprecated: 'Use #waitPendingWork instead'
-		transformWith: '`@receiver pulse' -> '`@receiver waitPendingWork'.
+		deprecated: 'Use #settle instead'
+		transformWith: '`@receiver pulse' -> '`@receiver settle'.
 
-	self waitPendingWork
+	self settle
 ]
 
 { #category : #'accessing - space' }
@@ -263,6 +263,6 @@ BlDevScripter >> userData [
 ]
 
 { #category : #execution }
-BlDevScripter >> waitPendingWork [
-	self space waitPendingWork
+BlDevScripter >> settle [
+	self space settle
 ]

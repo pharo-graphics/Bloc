@@ -56,13 +56,13 @@ BlWrapAroundChildrenLayoutTest >> setUp [
 	super setUp.
 	space := BlSpace new.
 	space host: BlHeadlessHost new.
-	space show; waitPendingWork
+	space show; settle
 ]
 
 { #category : #running }
 BlWrapAroundChildrenLayoutTest >> tearDown [
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]
@@ -73,7 +73,7 @@ BlWrapAroundChildrenLayoutTest >> testNotTransformedContainerWrapsAroundChildren
 	| aContainer |
 	aContainer := self newContainerWithChildren.
 
-	space mutateSync: [ space root addChild: aContainer ].
+	space deferAndSettle: [ space root addChild: aContainer ].
 
 	self
 		assert: aContainer bounds asRectangle
@@ -98,7 +98,7 @@ BlWrapAroundChildrenLayoutTest >> testScaledContainerWrapsAroundChildren [
 
 	aContainer transformDo: [ :t | t scaleBy: 0.5 ].
 
-	space mutateSync: [ space root addChild: aContainer ].
+	space deferAndSettle: [ space root addChild: aContainer ].
 
 	self
 		assert: aContainer bounds asRectangle

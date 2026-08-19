@@ -25,7 +25,7 @@ BlSpaceEventTest >> setUp [
 BlSpaceEventTest >> tearDown [
 	space ifNotNil: [
 		space close.
-		space waitPendingWork ].
+		space settle ].
 	super tearDown
 ]
 
@@ -70,5 +70,5 @@ BlSpaceEventTest >> testSpaceShown [
 { #category : #running }
 BlSpaceEventTest >> waitBriefly [
 
-	space waitPendingWorkForMilliseconds: 50
+	space settleForMilliseconds: 50
 ]

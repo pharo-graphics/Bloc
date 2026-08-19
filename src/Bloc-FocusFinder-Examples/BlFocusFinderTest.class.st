@@ -78,9 +78,9 @@ BlFocusFinderTest >> layoutInSpace: anElement [
 	space := BlSpace new.
 	space host: BlHeadlessHost default.
 	space root addChild: anElement.
-	space show; waitPendingWork.
+	space show; settle.
 	space root removeChildren.
-	space close; waitPendingWork
+	space close; settle
 ]
 
 { #category : 'examples - segment 1' }

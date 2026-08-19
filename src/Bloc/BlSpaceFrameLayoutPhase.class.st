@@ -5,8 +5,10 @@ Class {
 }
 
 { #category : #testing }
-BlSpaceFrameLayoutPhase >> hasPendingWorkIn: aSpace [
-	^ aSpace isLayoutRequested
+BlSpaceFrameLayoutPhase >> isSettledIn: aSpace [
+	"Return true if aSpace does not have any pending layout requests"
+
+	^ aSpace isLayoutRequested not
 ]
 
 { #category : #testing }

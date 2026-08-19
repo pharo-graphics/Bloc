@@ -5,9 +5,10 @@ Class {
 }
 
 { #category : #testing }
-BlSpaceFrameEventPhase >> hasPendingWorkIn: aSpace [
+BlSpaceFrameEventPhase >> isSettledIn: aSpace [
+	"Return true if there are no pending UI events waiting for aSpace"
 
-	^ aSpace hostSpaceDo: [ :hs | hs hasEvents ] ifAbsent: [ false ]
+	^ aSpace hostSpaceDo: [ :hs | hs hasEvents not ] ifAbsent: [ true ]
 ]
 
 { #category : #testing }

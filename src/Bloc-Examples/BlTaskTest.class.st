@@ -60,7 +60,7 @@ BlTaskTest >> testPulseSpaceWithTask [
 	aTask := aSpace taskQueue tasks first.
 	aSpace host: BlHeadlessHost new.
 	[
-		aSpace show; waitPendingWork.
+		aSpace show; settle.
 
 		"task was run and queue is empty now"
 		self assert: aSpace taskQueue tasks isEmpty.
@@ -68,7 +68,7 @@ BlTaskTest >> testPulseSpaceWithTask [
 		"action was executed"
 		self assert: aTask action equals: #done
 	] ensure: [
-		aSpace close; waitPendingWork ].
+		aSpace close; settle ].
 
 	^ aSpace
 ]

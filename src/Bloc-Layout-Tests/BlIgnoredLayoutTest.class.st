@@ -13,13 +13,13 @@ BlIgnoredLayoutTest >> setUp [
 	super setUp.
 	space := BlSpace new.
 	space host: BlHeadlessHost new.
-	space show; waitPendingWork
+	space show; settle
 ]
 
 { #category : 'running' }
 BlIgnoredLayoutTest >> tearDown [
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]
@@ -47,13 +47,13 @@ BlIgnoredLayoutTest >> testAlignmentIsStable [
 			addChild: aChild;
 			yourself.
 
-	space mutateSync: [ space root addChild: aContainer ].
+	space deferAndSettle: [ space root addChild: aContainer ].
 
 	self assert: aContainer extent equals: 300 @ 200.
 	self assert: aChild position equals: 125 @ -25.
 	self assert: aChild extent equals: 50 @ 50.
 
-	space mutateSync: [ aChild requestLayout ].
+	space deferAndSettle: [ aChild requestLayout ].
 
 	self assert: aContainer extent equals: 300 @ 200.
 	self assert: aChild position equals: 125 @ -25.

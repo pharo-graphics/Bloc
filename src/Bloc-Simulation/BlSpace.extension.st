@@ -21,21 +21,20 @@ BlSpace class >> locationOutside: anElement [
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
 	self
-		deprecated: 'Use space waitPendingWorkForDuration: aDuration instead'
-		on: '2026-07-14'
-		in: 'Bloc'.
-	^ aSpace waitPendingWorkForDuration: aDuration
+		deprecated: 'Use aSpace settleForDuration: aDuration instead'
+		transformWith: '`@receiver pulseUntilEmptyTaskQueue: `@arg1 timeout: `@arg2' -> '`@arg1 settleForDuration: `@arg2'.
+
+	^ aSpace settleForDuration: aDuration
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDuration [
 
 	self
-		deprecated: 'Use aSpace waitPendingWorkForDuration: aDuration instead'
-		on: '2026-07-14'
-		in: 'Bloc'.
+		deprecated: 'Use aSpace settleForDuration: aDuration instead'
+		transformWith: '`@receiver pulseUntilSpaceOpenedAndEmptyTaskQueue: `@arg1 timeout: `@arg2' -> '`@arg1 settleForDuration: `@arg2'.
 
-	^ aSpace waitPendingWorkForDuration: aDuration
+	^ aSpace settleForDuration: aDuration
 ]
 
 { #category : #'*Bloc-Simulation' }
@@ -47,7 +46,7 @@ BlSpace class >> simulate: anElement during: aBlock [
 			result := aBlock value.
 			anElement space ifNotNil: [ :s | 
 				s requestNextPulse.
-				s waitPendingWork ] ]
+				s settle ] ]
 		ifFalse: [
 			topMostElement := anElement topMostParent.
 			tempSpace := BlSpace new.
@@ -55,7 +54,7 @@ BlSpace class >> simulate: anElement during: aBlock [
 			[
 				result := aBlock value.
 				tempSpace requestNextPulse.
-				tempSpace waitPendingWork.
+				tempSpace settle.
 			] ensure: [
 				topMostElement removeFromParent ] ].
 	^ result

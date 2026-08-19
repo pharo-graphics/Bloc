@@ -24,5 +24,5 @@ BlDevScripterMouseMoveOverStep >> playOn: aScripter [
 	self setMousePosition: aNewPosition in: aScripter.
 	
 	aScripter element eventSimulator mouseMoveFrom: anOldPositon to: aNewPosition.
-	aScripter waitPendingWork
+	aScripter settle
 ]

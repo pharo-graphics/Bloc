@@ -129,13 +129,13 @@ BlMouseEventTest >> setUp [
 	super setUp.
 	space := BlSpace new.
 	space host: BlHeadlessHost new.
-	space show; waitPendingWork
+	space show; settle
 ]
 
 { #category : #running }
 BlMouseEventTest >> tearDown [
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]
@@ -154,7 +154,7 @@ BlMouseEventTest >> testParentWithClip [
 	gray := self newParent.
 	gray clipChildren: true.
 	gray addChild: red.
-	space mutateSync: [ space root addChild: gray ].
+	space deferAndSettle: [ space root addChild: gray ].
 
 	"on gray outside red and blue"
 	self assert: (gray findMouseEventTargetAt: 50 @ 50) equals: gray.
@@ -192,7 +192,7 @@ BlMouseEventTest >> testParentWithoutClipChildWithClip [
 	gray := self newParent.
 	gray clipChildren: false.
 	gray addChild: red.
-	space mutateSync: [ space root addChild: gray ].
+	space deferAndSettle: [ space root addChild: gray ].
 
 	"on gray outside red and blue"
 	self assert: (gray findMouseEventTargetAt: 50 @ 50) equals: gray.
@@ -231,7 +231,7 @@ BlMouseEventTest >> testParentWithoutClipChildWithoutClip [
 	gray := self newParent.
 	gray clipChildren: false.
 	gray addChild: red.
-	space mutateSync: [ space root addChild: gray ].
+	space deferAndSettle: [ space root addChild: gray ].
 
 	"on gray outside red and blue"
 	self assert: (gray findMouseEventTargetAt: 50 @ 50) equals: gray.

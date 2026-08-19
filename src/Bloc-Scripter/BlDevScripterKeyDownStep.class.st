@@ -12,5 +12,5 @@ BlDevScripterKeyDownStep >> defaultLabel [
 { #category : #actions }
 BlDevScripterKeyDownStep >> playOn: aScripter [
 	aScripter element eventSimulator keyDown: self key.
-	aScripter waitPendingWork
+	aScripter settle
 ]

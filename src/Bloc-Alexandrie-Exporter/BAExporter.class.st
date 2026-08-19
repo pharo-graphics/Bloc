@@ -69,14 +69,14 @@ BAExporter >> export [
 	| aCanvas aBounds |
 	element isLayoutRequested ifTrue: [
 		element isAttachedToSceneGraph
-			ifTrue: [ element space waitPendingWork ]
+			ifTrue: [ element space settle ]
 			ifFalse: [
 				| aSpace |
 				aSpace := BlSpace new host: BlHeadlessHost new.
-				aSpace show; waitPendingWork.
-				aSpace mutateSync: [ aSpace root addChild: element ].
-				aSpace mutateSync: [ element removeFromParent ].
-				aSpace close; waitPendingWork ] ].
+				aSpace show; settle.
+				aSpace deferAndSettle: [ aSpace root addChild: element ].
+				aSpace deferAndSettle: [ element removeFromParent ].
+				aSpace close; settle ] ].
 	aBounds := element invalidationBoundsInParent.
 	aCanvas := self newCanvas: aBounds extent * scale.
 	aCanvas

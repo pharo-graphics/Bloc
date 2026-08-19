@@ -11,7 +11,7 @@ BlDevScripterStepExecutorStrategy >> playStep: aStep executor: anExecutor [
 
 { #category : #execution }
 BlDevScripterStepExecutorStrategy >> startOnScripter: aScripter executor: anExecutor [
-	aScripter waitPendingWork.
+	aScripter settle.
 	aScripter startWithExecutor: anExecutor.
-	aScripter waitPendingWork.
+	aScripter settle.
 ]

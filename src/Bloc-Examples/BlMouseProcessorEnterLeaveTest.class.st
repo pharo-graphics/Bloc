@@ -110,7 +110,7 @@ BlMouseProcessorEnterLeaveTest >> testMouseLeaveDueToRemovalFromScene [
 		substeps: 'Wait for pending work to generate mouse leave events'
 		do: [ :aStep |
 			aStep do
-				block: [ :theScripter | theScripter waitPendingWork ];
+				block: [ :theScripter | theScripter settle ];
 				onScripter ].
 
 	scripter substeps: 'Check that events are fired' do: [ :aStep |

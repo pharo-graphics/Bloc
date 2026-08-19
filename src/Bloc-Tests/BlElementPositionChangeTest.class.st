@@ -37,13 +37,13 @@ BlElementPositionChangeTest >> setUp [
 	super setUp.
 	space := BlSpace new.
 	space host: BlHeadlessHost new.
-	space show; waitPendingWork
+	space show; settle
 ]
 
 { #category : #running }
 BlElementPositionChangeTest >> tearDown [
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]
@@ -56,7 +56,7 @@ BlElementPositionChangeTest >> testParentPositionChanged [
 	subChildPositionChanged := subChildPositionInSpaceChanged := 0.
 
 	parent := self newElementTree.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
 	child := parent children first.
 	subChild := child children first.
@@ -118,7 +118,7 @@ BlElementPositionChangeTest >> testPositionChangeBoundsChange [
 	element background: Color blue.
 	element extent: 100 @ 100.
 	element position: 0 @ 0.
-	space mutateSync: [ space root addChild: element ].
+	space deferAndSettle: [ space root addChild: element ].
 
 	anUpdater := BlElementBoundsUpdater new.
 
@@ -135,7 +135,7 @@ BlElementPositionChangeTest >> testPositionChangeBoundsChange [
 	self assert: element boundsInLocal equals: (0 @ 0 extent: 150 @ 150).
 	self assert: element bounds inParent asRectangle equals: (50 @ 50 extent: 150 @ 150).
 
-	space mutateSync: [ element requestLayout ].
+	space deferAndSettle: [ element requestLayout ].
 	self assert: element boundsInLocal equals: (0 @ 0 extent: 100 @ 100).
 	self assert: element bounds inParent asRectangle equals: (0 @ 0 extent: 100 @ 100).
 

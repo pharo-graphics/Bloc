@@ -45,13 +45,13 @@ BlElementEventTest >> setUp [
 	super setUp.
 	space := BlSpace new.
 	space host: BlHeadlessHost new.
-	space show; waitPendingWork
+	space show; settle
 ]
 
 { #category : 'running' }
 BlElementEventTest >> tearDown [
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]
@@ -116,13 +116,13 @@ BlElementEventTest >> testExtentChanged [
 	| extentChanged element |
 	extentChanged := 0.
 	element := self newChild.
-	space mutateSync: [ space root addChild: element ].
+	space deferAndSettle: [ space root addChild: element ].
 	element
 		addEventHandlerOn: BlElementExtentChangedEvent
 		do: [ extentChanged := extentChanged + 1 ].
-	space mutateSync: [ element extent: element extent * 2 ].
+	space deferAndSettle: [ element extent: element extent * 2 ].
 	self assert: extentChanged equals: 1.
-	space mutateSync: [ element extent: element extent ].
+	space deferAndSettle: [ element extent: element extent ].
 	self assert: extentChanged equals: 1
 ]
 
@@ -131,11 +131,11 @@ BlElementEventTest >> testExtentChangedChangingWithTheSameSizeDoesNotRaiseEvent 
 	| extentChanged element |
 	extentChanged := 0.
 	element := self newChild.
-	space mutateSync: [ space root addChild: element ].
+	space deferAndSettle: [ space root addChild: element ].
 	element
 		addEventHandlerOn: BlElementExtentChangedEvent
 		do: [ extentChanged := extentChanged + 1 ].
-	space mutateSync: [ element extent: element extent ].
+	space deferAndSettle: [ element extent: element extent ].
 	self assert: extentChanged equals: 0
 ]
 
@@ -161,13 +161,13 @@ BlElementEventTest >> testPositionChanged [
 	child := self newChild.
 	parent := self newParent.
 	parent addChild: child.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	child
 		addEventHandlerOn: BlElementPositionChangedEvent
 		do: [ positionChanged := positionChanged + 1 ].
-	space mutateSync: [ child position: child position + (20 @ 20) ].
+	space deferAndSettle: [ child position: child position + (20 @ 20) ].
 	self assert: positionChanged equals: 1.
-	space mutateSync: [ child position: child position ].
+	space deferAndSettle: [ child position: child position ].
 	self assert: positionChanged equals: 1
 ]
 
@@ -178,11 +178,11 @@ BlElementEventTest >> testPositionChangedRelocatingOnSamePositionDoesNotRaiseEve
 	child := self newChild.
 	parent := self newParent.
 	parent addChild: child.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	child
 		addEventHandlerOn: BlElementPositionChangedEvent
 		do: [ positionChanged := positionChanged + 1 ].
-	space mutateSync: [ child position: child position ].
+	space deferAndSettle: [ child position: child position ].
 	self assert: positionChanged equals: 0
 ]
 

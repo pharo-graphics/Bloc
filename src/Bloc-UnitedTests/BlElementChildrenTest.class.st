@@ -131,13 +131,13 @@ BlElementChildrenTest >> setUp [
 	super setUp.
 	space := BlSpace new.
 	space host: BlHeadlessHost new.
-	space show; waitPendingWork
+	space show; settle
 ]
 
 { #category : 'running' }
 BlElementChildrenTest >> tearDown [
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]
@@ -176,7 +176,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt100200 [
 
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
-	space mutateSync: [ space root addChild: aContainer ].
+	space deferAndSettle: [ space root addChild: aContainer ].
 	theChildren := aContainer withAllLeafChildrenAt: 100 @ 200.
 	self assert: theChildren equals: { (aContainer childWithId: #red) }.
 	^ theChildren
@@ -187,7 +187,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt200100 [
 
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
-	space mutateSync: [ space root addChild: aContainer ].
+	space deferAndSettle: [ space root addChild: aContainer ].
 	theChildren := aContainer withAllLeafChildrenAt: 200 @ 100.
 	self assert: theChildren equals: { (aContainer childWithId: #blue) }.
 	^ theChildren
@@ -198,7 +198,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt200200 [
 
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
-	space mutateSync: [ space root addChild: aContainer ].
+	space deferAndSettle: [ space root addChild: aContainer ].
 	theChildren := aContainer withAllLeafChildrenAt: 200 @ 200.
 	self assert: theChildren equals: {
 			(aContainer childWithId: #blue).
@@ -211,7 +211,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt5050 [
 
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
-	space mutateSync: [ space root addChild: aContainer ].
+	space deferAndSettle: [ space root addChild: aContainer ].
 	theChildren := aContainer withAllLeafChildrenAt: 50 @ 50.
 	self assert: theChildren equals: { aContainer }.
 	^ theChildren

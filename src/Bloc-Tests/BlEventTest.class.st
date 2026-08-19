@@ -69,7 +69,7 @@ BlEventTest >> simulate: aSymbol on: anElement [
 		spaces ifNil: [ spaces := OrderedCollection new ].
 		spaces add: aSpace ].
 	anElement eventSimulator perform: aSymbol.
-	anElement space waitPendingWork
+	anElement space settle
 ]
 
 { #category : #running }
@@ -78,7 +78,7 @@ BlEventTest >> tearDown [
 	spaces ifNotNil: [
 		spaces do: [ :each | 
 			each close.
-			each waitPendingWork ].
+			each settle ].
 		spaces := nil ].
 	super tearDown
 ]

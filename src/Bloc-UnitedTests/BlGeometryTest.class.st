@@ -23,13 +23,13 @@ BlGeometryTest >> setUp [
 	super setUp.
 	space := BlSpace new.
 	space host: BlHeadlessHost new.
-	space show; waitPendingWork
+	space show; settle
 ]
 
 { #category : 'running' }
 BlGeometryTest >> tearDown [
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]
@@ -58,7 +58,7 @@ BlGeometryTest >> test3ElContainsPoint [
 		     addChild: c2;
 		     yourself.
 
-	space mutateSync: [ space root addChild: g ].
+	space deferAndSettle: [ space root addChild: g ].
 
 	self assert: (c1 containsGlobalPoint: 250 @ 250).
 	self assert: (c2 containsGlobalPoint: 250 @ 250).
@@ -86,7 +86,7 @@ BlGeometryTest >> testElAnyBounds [
 		     addChild: c2;
 		     yourself.
 
-	space mutateSync: [ space root addChild: g ].
+	space deferAndSettle: [ space root addChild: g ].
 
 	self assert: g positionInSpace equals: 0 @ 0.
 	self assert: c2 positionInSpace equals: 100 @ 100.
@@ -140,7 +140,7 @@ BlGeometryTest >> testElLocalAndGlobalBoundsConvertion [
 		     position: 10 @ 10;
 		     yourself.
 
-	space mutateSync: [ space root addChild: g ].
+	space deferAndSettle: [ space root addChild: g ].
 
 	self assert: g position equals: 10 @ 10.
 	self assert: g geometryBounds equals: (0 @ 0 corner: 100 @ 100).
@@ -176,7 +176,7 @@ BlGeometryTest >> testElLocalAndGlobalPostionConvertion [
 		     addChild: n;
 		     yourself.
 
-	space mutateSync: [ space root addChild: g ].
+	space deferAndSettle: [ space root addChild: g ].
 
 	self assert: g position equals: 10 @ 10.
 	self assert: n position equals: 10 @ 10.
@@ -199,7 +199,7 @@ BlGeometryTest >> testElTxBounds [
 		     addChild: n;
 		     yourself.
 
-	space mutateSync: [ space root addChild: g ].
+	space deferAndSettle: [ space root addChild: g ].
 
 	self assert: g position equals: (10 @ 10).
 	self assert: n position equals: (10 @ 10).

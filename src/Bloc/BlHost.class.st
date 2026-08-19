@@ -202,7 +202,7 @@ BlHost class >> universe [
 ]
 
 { #category : #'host - testing' }
-BlHost >> canWaitPendingWork [
+BlHost >> canWait [
 	"Return true if the active process is allowed to wait for pending work on this host"
 
 	^ true
@@ -280,11 +280,11 @@ BlHost >> universe [
 ]
 
 { #category : #'host - testing' }
-BlHost >> waitPendingWorkFor: aSpace timeout: aTimeoutBlock [
+BlHost >> settle: aSpace timeout: aTimeoutBlock [
 	| finished |
 	finished := false.
 	self
-		waitUntil: [ aSpace hasPendingWork not ]
+		waitUntil: [ aSpace isSettled ]
 		timeout: aTimeoutBlock
 		onCompletion: [ finished := true ]
 		onTimeout: [ finished := false ].
@@ -292,14 +292,14 @@ BlHost >> waitPendingWorkFor: aSpace timeout: aTimeoutBlock [
 ]
 
 { #category : #'host - testing' }
-BlHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
+BlHost >> waitUntilTrue: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
 	"Evaluate aBlock repeatedly until it answers true. If aTimeoutBlock answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
 
-	self canWaitPendingWork ifFalse: [ 
+	self canWait ifFalse: [ 
 		Error signal: 'Cannot wait from within the UI loop process' ].
 
 	^ self universe
-		  waitUntil: aBlock
+		  waitUntilTrue: aBlock
 		  timeout: aTimeoutBlock
 		  onCompletion: completionBlock
 		  onTimeout: timeoutBlock

@@ -115,8 +115,8 @@ BlAbstractEventProcessingTest >> setUp [
 	space extent: 200 @ 200.
 	space mouseProcessor: (BlTestMouseEventProcessor space: space).
 	space focusProcessor: (BlTestFocusProcessor space: space).
-	space show; waitPendingWork.
-	space mutateSync: [
+	space show; settle.
+	space deferAndSettle: [
 		space root addChild:
 			(BlElement new
 				id: #A;
@@ -148,7 +148,7 @@ BlAbstractEventProcessingTest >> space [
 BlAbstractEventProcessingTest >> tearDown [
 
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]

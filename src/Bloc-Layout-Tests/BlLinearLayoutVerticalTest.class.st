@@ -22,7 +22,7 @@ BlLinearLayoutVerticalTest >> testElementWithChildMatchInExactParentPadding [
 	parent constraints vertical exact: 600.
 	parent constraints padding: (BlInsets all: 20).
 	parent addChildren: { childA }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childA extent equals: 360 @ 560.
 	self assert: childA position equals: 20 @ 20.
 	self assert: parent extent equals: 400 @ 600.
@@ -46,7 +46,7 @@ BlLinearLayoutVerticalTest >> testElementWithChildrenMatchInExactParentPadding [
 	parent addChildren: {
 			childA.
 			childB }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childA extent equals: 560 @ 180.
 	self assert: childA position equals: 20 @ 20.
 	self assert: childB extent equals: 560 @ 180.
@@ -71,7 +71,7 @@ BlLinearLayoutVerticalTest >> testElementWithExactChildrenInFitContent [
 	parent addChildren: {
 			childA.
 			childB }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childA extent equals: 200 @ 100.
 	self assert: childA position equals: 0 @ 0.
 	self assert: childB extent equals: 100 @ 200.
@@ -98,7 +98,7 @@ BlLinearLayoutVerticalTest >> testElementWithMatchChildrenInExactParent [
 			childA.
 			childB.
 			childC }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childA extent equals: 200 @ 200.
 	self assert: childA position equals: 0 @ 0.
 	self assert: childB extent equals: 200 @ 200.
@@ -126,7 +126,7 @@ BlLinearLayoutVerticalTest >> testElementWithOneChildMatchOneExactInFitParent [
 	parent addChildren: {
 			childA.
 			childB }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childA extent equals: 200 @ 300.
 	self assert: childA position equals: 0 @ 0.
 	self assert: childB extent equals: 200 @ 200.
@@ -153,7 +153,7 @@ BlLinearLayoutVerticalTest >> testElementWithOneExactChildInExactParentMargin [
 	parent constraints horizontal exact: 50.
 	parent constraints vertical exact: 50.
 	parent addChildren: { childA }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childA extent equals: 20 @ 20.
 	self assert: childA position equals: 10 @ 15.
 	self assert: parent extent equals: 50 @ 50.
@@ -180,7 +180,7 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 			childA.
 			childB.
 			childC }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childA extent equals: 100 @ 100.
 	self assert: childA position equals: 0 @ 0.
 	self assert: childB extent equals: 200 @ 100.
@@ -212,7 +212,7 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 			childA.
 			childB.
 			childC }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childA extent equals: 100 @ 100.
 	self assert: childA position equals: 400 @ 200.
 	self assert: childB extent equals: 200 @ 100.
@@ -252,7 +252,7 @@ BlLinearLayoutVerticalTest >> testOneChildSetVisibilityGone [
 			yourself.
 	aContainer addChildren: { aRed. aBlue }.
 
-	space mutateSync: [ space root addChild: aContainer ].
+	space deferAndSettle: [ space root addChild: aContainer ].
 
 	self assert: aContainer extent equals: 400 @ 500.
 	self assert: aRed position equals: 10 @ 20.
@@ -260,7 +260,7 @@ BlLinearLayoutVerticalTest >> testOneChildSetVisibilityGone [
 	self assert: aBlue position equals: 10 @ 260.
 	self assert: aBlue extent equals: 380 @ 220.
 
-	space mutateSync: [ aRed visibility: BlVisibility gone ].
+	space deferAndSettle: [ aRed visibility: BlVisibility gone ].
 
 	self assert: aContainer extent equals: 400 @ 500.
 	"red keeps its position and extent from the previous pass"

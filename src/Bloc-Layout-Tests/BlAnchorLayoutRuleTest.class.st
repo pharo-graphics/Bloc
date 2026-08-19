@@ -15,13 +15,13 @@ BlAnchorLayoutRuleTest >> setUp [
 	super setUp.
 	space := BlSpace new.
 	space host: BlHeadlessHost new.
-	space show; waitPendingWork
+	space show; settle
 ]
 
 { #category : #running }
 BlAnchorLayoutRuleTest >> tearDown [
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]
@@ -38,8 +38,8 @@ BlAnchorLayoutRuleTest >> testAppliedOnChildBoundsInParentForChild [
 	rule := BlAnchorLayoutRule new.
 	rule baseAnchor: child extentAnchor.
 	rule rightHandSideAnchor: parent extentAnchor.
-	space mutateSync: [ space root addChild: parent ].
-	space waitPendingWork.
+	space deferAndSettle: [ space root addChild: parent ].
+	space settle.
 	resultBounds := rule
 		                appliedOnChildBounds: (0 @ 0 extent: 10 asPoint)
 		                inParent: parent

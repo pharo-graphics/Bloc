@@ -17,7 +17,7 @@ BlPulseLoopHost class >> isSingleton [
 ]
 
 { #category : #'host - testing' }
-BlPulseLoopHost >> canWaitPendingWork [
+BlPulseLoopHost >> canWait [
 	"Return true if the active process is allowed to wait for pending work on this host"
 
 	^ self isUIProcess not

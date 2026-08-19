@@ -17,13 +17,13 @@ BlGridLayoutUsageTest >> setUp [
 	super setUp.
 	space := BlSpace new.
 	space host: BlHeadlessHost new.
-	space show; waitPendingWork
+	space show; settle
 ]
 
 { #category : 'running' }
 BlGridLayoutUsageTest >> tearDown [
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]
@@ -453,7 +453,7 @@ BlGridLayoutUsageTest >> testVerticalSpan [
 		child2.
 		child3 }.
 
-	space mutateSync: [ space root addChild: grid ].
+	space deferAndSettle: [ space root addChild: grid ].
 	self assert: grid extent equals: 500 @ 400.
 	self assert: child1 position equals: 10 @ 10.
 	self assert: child1 extent equals: 235 @ 185.

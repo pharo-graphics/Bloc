@@ -80,7 +80,7 @@ BlMorphicSteppingHost >> uiProcessDo: aBlock [
 ]
 
 { #category : #'host - testing' }
-BlMorphicSteppingHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
+BlMorphicSteppingHost >> waitUntilTrue: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
 	MorphicUIManager uiProcess == Processor activeProcess
 		ifTrue: [
 			[ aBlock value ] whileFalse: [
@@ -91,7 +91,7 @@ BlMorphicSteppingHost >> waitUntil: aBlock timeout: aTimeoutBlock onCompletion: 
 			^ completionBlock value ]
 		ifFalse: [
 			^ super
-				waitUntil: aBlock
+				waitUntilTrue: aBlock
 				timeout: aTimeoutBlock
 				onCompletion: completionBlock
 				onTimeout: timeoutBlock ]

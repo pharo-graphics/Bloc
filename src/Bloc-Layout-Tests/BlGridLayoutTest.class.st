@@ -50,7 +50,7 @@ BlGridLayoutTest >> testExampleCellFitContent [
 	child addChild: subchild.
 	parent addChild: child.
 
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
 	self assert: subchild extent equals: 200 @ 100.
 	self assert: subchild position equals: 0 @ 0.
@@ -82,7 +82,7 @@ BlGridLayoutTest >> testExampleCellSpacingHorizontal1 [
 	parent addChildren: {
 			childA.
 			childB }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
 	self assert: childA extent equals: 170 @ 160.
 	self assert: childA position equals: 20 @ 20.
@@ -113,7 +113,7 @@ BlGridLayoutTest >> testExampleCellSpacingVertical1 [
 	parent addChildren: {
 			childA.
 			childB }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
 	self assert: childA extent equals: 160 @ 170.
 	self assert: childA position equals: 20 @ 20.
@@ -448,7 +448,7 @@ BlGridLayoutTest >> testExampleOneCellExactChildInExactParent [
 	parent constraints vertical exact: 400.
 
 	parent addChild: child.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
 	self assert: child extent equals: 200 @ 300.
 	self assert: child position equals: 0 @ 0.
@@ -471,7 +471,7 @@ BlGridLayoutTest >> testExampleOneCellExactChildInFitParent [
 	parent constraints vertical fitContent.
 
 	parent addChild: child.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
 	self assert: child extent equals: 200 @ 300.
 	self assert: child position equals: 0 @ 0.
@@ -494,7 +494,7 @@ BlGridLayoutTest >> testExampleOneCellMatchChildInExactParent [
 	parent constraints vertical exact: 300.
 
 	parent addChild: child.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
 	self assert: child extent equals: 400 @ 300.
 	self assert: child position equals: 0 @ 0.
@@ -523,7 +523,7 @@ BlGridLayoutTest >> testExampleSpanDistributeOneColumn [
 			childA.
 			childB.
 			childC }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
 	self
 		assert: childA constraints grid horizontal spec span
@@ -568,7 +568,7 @@ BlGridLayoutTest >> testExampleSpanDistributeOneRow [
 			childA.
 			childB.
 			childC }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 
 	self
 		assert: childA constraints grid horizontal spec span

@@ -224,13 +224,13 @@ BlFitContentVerticallyInHorizontalLayoutTest >> setUp [
 	super setUp.
 	space := BlSpace new.
 	space host: BlHeadlessHost new.
-	space show; waitPendingWork
+	space show; settle
 ]
 
 { #category : 'running' }
 BlFitContentVerticallyInHorizontalLayoutTest >> tearDown [
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]
@@ -247,7 +247,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlow [
 			self red.
 			self blue.
 			self green }.
-	space mutateSync: [ space root addChild: flow ].
+	space deferAndSettle: [ space root addChild: flow ].
 
 	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
 
@@ -272,7 +272,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowGridGrid [
 	secondGrid := self grid.
 	secondGrid width: (self oneColumnWidthDepth: 3).
 	secondGrid addChild: firstGrid.
-	space mutateSync: [ space root addChild: secondGrid ].
+	space deferAndSettle: [ space root addChild: secondGrid ].
 
 	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
 	self assert: firstGrid extent equals: (self oneColumnExtentDepth: 2).
@@ -295,9 +295,9 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowList [
 	list width: (self oneColumnWidthDepth: 2) + 1.
 	list addChild: flow.
 
-	space mutateSync: [ space root addChild: list ].
+	space deferAndSettle: [ space root addChild: list ].
 
-	space mutateSync: [ list width: (self oneColumnWidthDepth: 2) ].
+	space deferAndSettle: [ list width: (self oneColumnWidthDepth: 2) ].
 
 	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
 	self assert: list extent equals: (self oneColumnExtentDepth: 2)
@@ -321,7 +321,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowListGrid [
 	grid := self grid.
 	grid width: (self oneColumnWidthDepth: 3).
 	grid addChild: list.
-	space mutateSync: [ space root addChild: grid ].
+	space deferAndSettle: [ space root addChild: grid ].
 
 	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
 	self assert: list extent equals: (self oneColumnExtentDepth: 2).
@@ -348,7 +348,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testOneColumnFlowListList [
 	secondList := self list.
 	secondList width: (self oneColumnWidthDepth: 3).
 	secondList addChild: firstList.
-	space mutateSync: [ space root addChild: secondList ].
+	space deferAndSettle: [ space root addChild: secondList ].
 
 	self assert: flow extent equals: (self oneColumnExtentDepth: 1).
 	self assert: firstList extent equals: (self oneColumnExtentDepth: 2).
@@ -375,7 +375,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowGridGrid [
 	secondGrid := self grid.
 	secondGrid width: (self threeColumnWidthDepth: 3).
 	secondGrid addChild: firstGrid.
-	space mutateSync: [ space root addChild: secondGrid ].
+	space deferAndSettle: [ space root addChild: secondGrid ].
 
 	self assert: flow extent equals: (self threeColumnExtentDepth: 1).
 	self
@@ -406,7 +406,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowListGrid [
 	grid := self grid.
 	grid width: (self threeColumnWidthDepth: 3).
 	grid addChild: list.
-	space mutateSync: [ space root addChild: grid ].
+	space deferAndSettle: [ space root addChild: grid ].
 
 	self assert: flow extent equals: (self threeColumnExtentDepth: 1).
 	self assert: list extent equals: (self threeColumnExtentDepth: 2).
@@ -433,7 +433,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testThreeColumnFlowListList [
 	secondList := self list.
 	secondList width: (self threeColumnWidthDepth: 3).
 	secondList addChild: firstList.
-	space mutateSync: [ space root addChild: secondList ].
+	space deferAndSettle: [ space root addChild: secondList ].
 
 	self assert: flow extent equals: (self threeColumnExtentDepth: 1).
 	self
@@ -458,7 +458,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlow [
 			self red.
 			self blue.
 			self green }.
-	space mutateSync: [ space root addChild: flow ].
+	space deferAndSettle: [ space root addChild: flow ].
 
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
 
@@ -483,7 +483,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowFlow [
 	thirdFlow := self flow.
 	thirdFlow width: (self twoColumnWidthDepth: 3).
 	thirdFlow addChild: secondFlow.
-	space mutateSync: [ space root addChild: thirdFlow ].
+	space deferAndSettle: [ space root addChild: thirdFlow ].
 
 	self assert: firstFlow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: secondFlow extent equals: (self twoColumnExtentDepth: 2).
@@ -509,7 +509,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowList [
 	list width: (self twoColumnWidthDepth: 3).
 	list addChild: secondFlow.
 
-	space mutateSync: [ space root addChild: list ].
+	space deferAndSettle: [ space root addChild: list ].
 
 	self assert: firstFlow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: secondFlow extent equals: (self twoColumnExtentDepth: 2).
@@ -534,7 +534,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridGrid [
 	secondGrid := self grid.
 	secondGrid width: (self twoColumnWidthDepth: 3).
 	secondGrid addChild: firstGrid.
-	space mutateSync: [ space root addChild: secondGrid ].
+	space deferAndSettle: [ space root addChild: secondGrid ].
 
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: firstGrid extent equals: (self twoColumnExtentDepth: 2).
@@ -560,7 +560,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridList [
 	list width: (self twoColumnWidthDepth: 3).
 	list addChild: grid.
 
-	space mutateSync: [ space root addChild: list ].
+	space deferAndSettle: [ space root addChild: list ].
 
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: grid extent equals: (self twoColumnExtentDepth: 2).
@@ -581,7 +581,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowList [
 	list width: (self twoColumnWidthDepth: 2).
 	list addChild: flow.
 
-	space mutateSync: [ space root addChild: list ].
+	space deferAndSettle: [ space root addChild: list ].
 
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: list extent equals: (self twoColumnExtentDepth: 2)
@@ -605,7 +605,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowListGrid [
 	grid := self grid.
 	grid width: (self twoColumnWidthDepth: 3).
 	grid addChild: list.
-	space mutateSync: [ space root addChild: grid ].
+	space deferAndSettle: [ space root addChild: grid ].
 
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: list extent equals: (self twoColumnExtentDepth: 2).
@@ -632,7 +632,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowListList [
 	secondList := self list.
 	secondList width: (self twoColumnWidthDepth: 3).
 	secondList addChild: firstList.
-	space mutateSync: [ space root addChild: secondList ].
+	space deferAndSettle: [ space root addChild: secondList ].
 
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: firstList extent equals: (self twoColumnExtentDepth: 2).

@@ -20,14 +20,14 @@ BlElement >> aeAsForm [
 		| topMostBounds transformedGeometryBounds aCanvas matrix |
 		self isLayoutRequested ifTrue: [
 			self isAttachedToSceneGraph
-				ifTrue: [ self space waitPendingWork ]
+				ifTrue: [ self space settle ]
 				ifFalse: [
 					| aSpace |
 					aSpace := BlSpace new host: BlHeadlessHost new.
-					aSpace show; waitPendingWork.
-					aSpace mutateSync: [ aSpace root addChild: self ].
-					aSpace mutateSync: [ self removeFromParent ].
-					aSpace close; waitPendingWork ] ]. "We want to consider our border, effect, as well as children's."
+					aSpace show; settle.
+					aSpace deferAndSettle: [ aSpace root addChild: self ].
+					aSpace deferAndSettle: [ self removeFromParent ].
+					aSpace close; settle ] ]. "We want to consider our border, effect, as well as children's."
 		topMostBounds := self topMostParent bounds asRectangle.
 
 		matrix := BlMatrix2D new.

@@ -41,7 +41,7 @@ BlMetricsInspector >> extentTextFor: aPoint [
 
 { #category : 'updating' }
 BlMetricsInspector >> for: anElement [
-	anElement isAttachedToSceneGraph ifTrue: [ anElement space waitPendingWork ].
+	anElement isAttachedToSceneGraph ifTrue: [ anElement space settle ].
 	self updateMetrics: anElement
 ]
 

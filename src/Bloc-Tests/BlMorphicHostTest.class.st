@@ -23,7 +23,7 @@ BlMorphicHostTest >> testSquaresEmbeddedInMorph [
 		rootElement background: Color paleBlue.
 		
 		"Wait for space to open/render"
-		aSpace waitPendingWork.
+		aSpace settle.
 
 		self assert: aSpace isOpened.
 		self assert: aSpace hostSpace isNotNil.
@@ -32,7 +32,7 @@ BlMorphicHostTest >> testSquaresEmbeddedInMorph [
 		self assert: aSpace hostSpace spaceHostMorph form depth equals: 32.
 		
 		aSpace close.
-		aSpace waitPendingWork.
+		aSpace settle.
 		self assert: aSpace isOpened not.
 	] ensure: [
 		aMorph window ifNotNil: [ :w | w delete ] ifNil: [ aMorph delete ] ]

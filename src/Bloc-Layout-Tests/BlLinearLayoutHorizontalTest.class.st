@@ -22,7 +22,7 @@ BlLinearLayoutHorizontalTest >> testElementWithOneChildMatchInExactParentPadding
 	parent constraints vertical exact: 600.
 	parent constraints padding: (BlInsets all: 20).
 	parent addChildren: { child }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: child extent equals: 360 @ 560.
 	self assert: child position equals: 20 @ 20.
 	self assert: parent extent equals: 400 @ 600.
@@ -46,7 +46,7 @@ BlLinearLayoutHorizontalTest >> testElementWithOneChildMatchOneExactInFitParent 
 	parent addChildren: {
 			childA.
 			childB }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childA extent equals: 300 @ 200.
 	self assert: childA position equals: 0 @ 0.
 	self assert: childB extent equals: 200 @ 200.
@@ -73,7 +73,7 @@ BlLinearLayoutHorizontalTest >> testElementWithOneExactChildInExactParentMargin 
 	parent constraints horizontal exact: 50.
 	parent constraints vertical exact: 50.
 	parent addChildren: { childA }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childA extent equals: 20 @ 20.
 	self assert: childA position equals: 10 @ 15.
 	self assert: parent extent equals: 50 @ 50.
@@ -98,7 +98,7 @@ BlLinearLayoutHorizontalTest >> testElementWithThreeMatchChildrenInExactParent [
 			childA.
 			childB.
 			childC }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childA extent equals: 200 @ 200.
 	self assert: childA position equals: 0 @ 0.
 	self assert: childB extent equals: 200 @ 200.
@@ -128,7 +128,7 @@ BlLinearLayoutHorizontalTest >> testElementWithThreeMatchChildrenInExactParentRT
 			childA.
 			childB.
 			childC }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childC extent equals: 200 @ 200.
 	self assert: childC position equals: 0 @ 0.
 	self assert: childB extent equals: 200 @ 200.
@@ -152,7 +152,7 @@ BlLinearLayoutHorizontalTest >> testElementWithTwoChildrenMatchInExactParentPadd
 	parent constraints vertical exact: 600.
 	parent constraints padding: (BlInsets all: 20).
 	parent addChildren: { childA. childB }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childA extent equals: 180 @ 560.
 	self assert: childA position equals: 20 @ 20.
 	self assert: childB extent equals: 180 @ 560.
@@ -176,7 +176,7 @@ BlLinearLayoutHorizontalTest >> testElementWithTwoExactChildrenInFitContent [
 	parent addChildren: {
 			childA.
 			childB }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childA extent equals: 200 @ 100.
 	self assert: childA position equals: 0 @ 0.
 	self assert: childB extent equals: 100 @ 200.
@@ -201,7 +201,7 @@ BlLinearLayoutHorizontalTest >> testElementWithTwoMatchChildrenInExactParent [
 	parent addChildren: {
 			childA.
 			childB }.
-	space mutateSync: [ space root addChild: parent ].
+	space deferAndSettle: [ space root addChild: parent ].
 	self assert: childA extent equals: 250 @ 200.
 	self assert: childA position equals: 0 @ 0.
 	self assert: childB extent equals: 250 @ 200.
@@ -238,14 +238,14 @@ BlLinearLayoutHorizontalTest >> testOneChildSetVisibilityGone [
 			background: (Color blue alpha: 0.3);
 			yourself.
 	aContainer addChildren: { aRed. aBlue }.
-	space mutateSync: [ space root addChild: aContainer ].
+	space deferAndSettle: [ space root addChild: aContainer ].
 	self assert: aContainer extent equals: 500 @ 400.
 	self assert: aRed position equals: 20 @ 10.
 	self assert: aRed extent equals: 220 @ 380.
 	self assert: aBlue position equals: 260 @ 10.
 	self assert: aBlue extent equals: 220 @ 380.
 
-	space mutateSync: [ aRed visibility: BlVisibility gone ].
+	space deferAndSettle: [ aRed visibility: BlVisibility gone ].
 	self assert: aContainer extent equals: 500 @ 400.
 	"red keeps its position and extent from the previous pass"
 	self assert: aRed position equals: 20 @ 10.
@@ -285,11 +285,11 @@ BlLinearLayoutHorizontalTest >> testParentWithLinearHorizontalLayoutWithCellSpac
 	element addChild: child1.
 	element addChild: child2.
 
-	space mutateSync: [ space root addChild: element ].
+	space deferAndSettle: [ space root addChild: element ].
 
 	self assert: element width equals: 0.
 
-	space mutateSync: [ element layout: (BlLinearLayout horizontal cellSpacing: 5) ].
+	space deferAndSettle: [ element layout: (BlLinearLayout horizontal cellSpacing: 5) ].
 
 	self assert: element width equals: 15.
 	self assert: child1 position x equals: 5.
@@ -309,24 +309,24 @@ BlLinearLayoutHorizontalTest >> testParentWithLinearLayoutWithCellSpacing [
 	element addChild: child1.
 	element addChild: child2.
 
-	space mutateSync: [ space root addChild: element ].
+	space deferAndSettle: [ space root addChild: element ].
 
 	self assert: element height equals: 0.
 
-	space mutateSync: [ element layout: (BlLinearLayout vertical cellSpacing: 5) ].
+	space deferAndSettle: [ element layout: (BlLinearLayout vertical cellSpacing: 5) ].
 
 	self assert: element height equals: 15.
 	self assert: child1 position y equals: 5.
 	self assert: child2 position y equals: 10.
 
-	space mutateSync: [
+	space deferAndSettle: [
 		element removeChildren.
 		element addChild: child1.
 		element addChild: child2 ].
 
 	self assert: element height equals: 15.
 
-	space mutateSync: [ element layout: (BlLinearLayout vertical cellSpacing: 5) ].
+	space deferAndSettle: [ element layout: (BlLinearLayout vertical cellSpacing: 5) ].
 
 	self assert: child1 position y equals: 5.
 	self assert: child2 position y equals: 10
@@ -355,30 +355,30 @@ BlLinearLayoutHorizontalTest >> testParentWithLinearLayoutWithCellSpacingChangin
 	element addChild: child1.
 	element addChild: child2.
 
-	space mutateSync: [ space root addChild: element ].
+	space deferAndSettle: [ space root addChild: element ].
 
 	self assert: element height equals: 0.
 	self assert: element width equals: 0.
 
-	space mutateSync: [ element layout: (BlLinearLayout vertical cellSpacing: 5) ].
+	space deferAndSettle: [ element layout: (BlLinearLayout vertical cellSpacing: 5) ].
 
 	self assert: element height equals: 15.
 	self assert: child1 position y equals: 5.
 	self assert: child2 position y equals: 10.
 
-	space mutateSync: [ element layout: (BlLinearLayout horizontal cellSpacing: 5) ].
+	space deferAndSettle: [ element layout: (BlLinearLayout horizontal cellSpacing: 5) ].
 
 	self assert: element width equals: 15.
 	self assert: child1 position x equals: 5.
 	self assert: child2 position x equals: 10.
 
-	space mutateSync: [ element layout: (BlLinearLayout vertical cellSpacing: 5) ].
+	space deferAndSettle: [ element layout: (BlLinearLayout vertical cellSpacing: 5) ].
 
 	self assert: element height equals: 15.
 	self assert: child1 position y equals: 5.
 	self assert: child2 position y equals: 10.
 
-	space mutateSync: [ element layout: (BlLinearLayout horizontal cellSpacing: 5) ].
+	space deferAndSettle: [ element layout: (BlLinearLayout horizontal cellSpacing: 5) ].
 
 	self assert: element width equals: 15.
 	self assert: child1 position x equals: 5.
@@ -401,24 +401,24 @@ BlLinearLayoutHorizontalTest >> testParentWithLinearVerticalLayoutWithCellSpacin
 	element addChild: child1.
 	element addChild: child2.
 
-	space mutateSync: [ space root addChild: element ].
+	space deferAndSettle: [ space root addChild: element ].
 
 	self assert: element height equals: 0.
 
-	space mutateSync: [ element layout: (BlLinearLayout vertical cellSpacing: 5) ].
+	space deferAndSettle: [ element layout: (BlLinearLayout vertical cellSpacing: 5) ].
 
 	self assert: element height equals: 15.
 	self assert: child1 position y equals: 5.
 	self assert: child2 position y equals: 10.
 
-	space mutateSync: [
+	space deferAndSettle: [
 		element removeChildren.
 		element addChild: child1.
 		element addChild: child2 ].
 
 	self assert: element height equals: 15.
 
-	space mutateSync: [ element layout: (BlLinearLayout vertical cellSpacing: 5) ].
+	space deferAndSettle: [ element layout: (BlLinearLayout vertical cellSpacing: 5) ].
 
 	self assert: child1 position y equals: 5.
 	self assert: child2 position y equals: 10

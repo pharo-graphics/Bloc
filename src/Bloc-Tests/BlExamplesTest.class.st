@@ -30,9 +30,9 @@ BlExamplesTest >> layoutInSpace: anElement [
 	space := BlSpace new.
 	space host: BlHeadlessHost default.
 	space root addChild: anElement.
-	space show; waitPendingWork.
+	space show; settle.
 	space root removeChildren.
-	space close; waitPendingWork
+	space close; settle
 ]
 
 { #category : #private }
@@ -45,12 +45,12 @@ BlExamplesTest >> performTest [
 
 	result := self perform: testSelector asSymbol.
 	result class = BlSpace
-		ifTrue: [ result close; waitPendingWork ]
+		ifTrue: [ result close; settle ]
 		ifFalse: [
 			result isAttachedToSceneGraph ifTrue: [
 				| sp |
 				sp := result space.
 				result removeFromParent.
-				sp close; waitPendingWork ] ].
+				sp close; settle ] ].
 	^ result
 ]

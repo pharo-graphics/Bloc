@@ -15,7 +15,7 @@ Class {
 BlElementLayoutBoundaryTest >> tearDown [
 
 	space ifNotNil: [
-		space close; waitPendingWork.
+		space close; settle.
 		space := nil ].
 	super tearDown
 ]
@@ -28,7 +28,7 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
 	aSpace := self testSpaceWithExactLayoutBoundary.
 	space := aSpace.
 	aSpace host: BlHeadlessHost new.
-	aSpace show; waitPendingWork.
+	aSpace show; settle.
 
 	self assert: aSpace root extent equals: 500 @ 400.
 	self
@@ -50,7 +50,7 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary02RequestLayoutChild [
 	<sampleInstance>
 	| aSpace |
 	aSpace := self testExactLayoutBoundary01Pulse.
-	aSpace mutateSync: [
+	aSpace deferAndSettle: [
 		(aSpace root childWithId: #child) requestLayout ].
 
 	self assert: aSpace root extent equals: 500 @ 400.
