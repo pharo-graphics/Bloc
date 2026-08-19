@@ -83,20 +83,6 @@ BlSpace class >> extractRoots: aSetOfElements [
 	^ roots
 ]
 
-{ #category : #pulse }
-BlSpace >> deferRead: aBlock [
-	"Evaluate aBlock on the UI process and block the calling thread until aBlock finishes executing.
-	Return the result of aBlock.
-	Unlike #deferAndSettle:, this does not wait for subsequent frame passes (layout, drawing, or deferred tasks) to settle."
-
-	| result semaphore |
-	(self isOpened not or: [ self host isUIProcess ]) ifTrue: [ ^ aBlock value ].
-	semaphore := Semaphore new.
-	self universe defer: [
-		[ result := aBlock value ] ensure: [ semaphore signal ] ].
-	semaphore wait.
-	^ result
-]
 
 { #category : #accessing }
 BlSpace >> asReference [
