@@ -89,5 +89,9 @@ BlParameterizedHostTest >> tearDown [
 { #category : #tests }
 BlParameterizedHostTest >> waitTestingSpaces [
 
+	self
+		deprecated: 'Settle the relevant space directly using #settle'
+		transformWith: '`@receiver waitTestingSpaces' -> '`@receiver testingSpaces do: [ :each | each settle ]'.
+
 	testingSpaces do: [ :each | each settle ]
 ]

@@ -11,7 +11,7 @@ BlSpaceSmokeTest >> testImmediateCloseAfterShow [
 	aSpace := self newTestingSpace.
 	universe := aSpace universe.
 	aSpace close.
-	self waitTestingSpaces.
+	aSpace settle.
 	self deny: (universe spaces includes: aSpace).
 	self deny: aSpace isOpened
 ]
@@ -23,13 +23,13 @@ BlSpaceSmokeTest >> testShowAfterClose [
 	aSpace := self newTestingSpace.
 
 	aSpace show.
-	self waitTestingSpaces.
+	aSpace settle.
 	aSpace root eventSimulator click.
 	aSpace close.
-	self waitTestingSpaces.
+	aSpace settle.
 	aSpace show.
-	self waitTestingSpaces.
-	aSpace root eventSimulator click.
+	aSpace settle.
+	aSpace root eventSimulator click
 ]
 
 { #category : #tests }
@@ -39,6 +39,6 @@ BlSpaceSmokeTest >> testShowAndClick [
 	aSpace := self newTestingSpace.
 
 	aSpace show.
-	self waitTestingSpaces.
-	aSpace root eventSimulator click.
+	aSpace settle.
+	aSpace root eventSimulator click
 ]

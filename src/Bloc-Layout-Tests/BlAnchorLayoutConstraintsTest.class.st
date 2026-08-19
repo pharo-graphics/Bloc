@@ -20,7 +20,7 @@ BlAnchorLayoutConstraintsTest >> setUp [
 	parent := BlElement new. 
 	parent constraintsDo: [:c | c horizontal matchParent. c vertical matchParent ].
 	parent layout: BlAnchorLayout new.
-	space root addChild: parent.
+	space deferAndSettle: [ space root addChild: parent ].
 	child := BlElement new.
 	parent addChild: child
 ]
@@ -30,11 +30,11 @@ BlAnchorLayoutConstraintsTest >> testActionAnchor [
 	" return the heiht of a rectangle or create a rectangle with a particular height according to element margin "
 
 	| anchor |
-	child position: 10 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 10 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := child actionAnchor: [ :v :e | e position ].
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -56,14 +56,13 @@ BlAnchorLayoutConstraintsTest >> testBottomAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
-	child position: 0 @ 0.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 0 @ 0.
+		child extent: 100 @ 120 ].
 
 	anchor := BlElementBottomAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -85,14 +84,13 @@ BlAnchorLayoutConstraintsTest >> testBottomLeftAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
-	child position: 110 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 110 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := BlElementBottomLeftAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -115,14 +113,13 @@ BlAnchorLayoutConstraintsTest >> testBottomRightAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
-	child position: 110 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 110 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := BlElementBottomRightAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -145,14 +142,13 @@ BlAnchorLayoutConstraintsTest >> testExtentAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
-	child position: 110 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 110 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := BlElementExtentAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -175,14 +171,13 @@ BlAnchorLayoutConstraintsTest >> testHeightAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
-	child position: 10 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 10 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := BlElementHeightAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -204,14 +199,13 @@ BlAnchorLayoutConstraintsTest >> testHorizontalCenterAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
-	child position: 10 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 10 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := BlElementHorizontalCenterAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -233,14 +227,13 @@ BlAnchorLayoutConstraintsTest >> testLeftAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
-	child position: 10 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 10 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := BlElementLeftAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -262,11 +255,11 @@ BlAnchorLayoutConstraintsTest >> testNeutralAnchor [
 	" return the height of a rectangle or create a rectangle with a particular height according to element margin "
 
 	| anchor |
-	child position: 10 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 10 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := child neutralAnchor: 0.
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -288,11 +281,11 @@ BlAnchorLayoutConstraintsTest >> testNilAnchor [
 	" return the height of a rectangle or create a rectangle with a particular height according to element margin "
 
 	| anchor |
-	child position: 10 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 10 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := child nilAnchor.
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -314,14 +307,13 @@ BlAnchorLayoutConstraintsTest >> testRightAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
-	child position: 110 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 110 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := BlElementRightAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -343,14 +335,13 @@ BlAnchorLayoutConstraintsTest >> testTopAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
-	child position: 10 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 10 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := BlElementTopAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -372,14 +363,13 @@ BlAnchorLayoutConstraintsTest >> testTopLeftAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
-	child position: 110 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 110 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := BlElementTopLeftAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -402,14 +392,13 @@ BlAnchorLayoutConstraintsTest >> testTopRightAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
-	child position: 110 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 110 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := BlElementTopRightAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -432,14 +421,13 @@ BlAnchorLayoutConstraintsTest >> testVerticalCenterAnchor [
 	" return the height of a rectangle or create a rectangle with a height according to element margin "
 
 	| anchor |
-	child position: 10 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 10 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := BlElementVerticalCenterAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -461,14 +449,13 @@ BlAnchorLayoutConstraintsTest >> testWidthAnchor [
 	" return the width of a rectangle or create a rectangle with a particular width according to element margin "
 
 	| anchor |
-	child position: 10 @ 20.
-	child extent: 100 @ 120.
+	space deferAndSettle: [
+		child position: 10 @ 20.
+		child extent: 100 @ 120 ].
 
 	anchor := BlElementWidthAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
