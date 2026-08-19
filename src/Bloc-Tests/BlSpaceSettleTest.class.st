@@ -160,12 +160,14 @@ BlSpaceSettleTest >> testIsSettledWithRepeatedTask [
 { #category : #tests }
 BlSpaceSettleTest >> testSettleForDurationWithContinuousSelfReschedulingTask [
 
-	| aSpace running task |
+	| aSpace running enqueueNext |
 	aSpace := self newTestingSpace.
 	running := true.
-	task := BlTaskAction new.
-	task action: [ running ifTrue: [ aSpace taskQueue enqueue: task ] ].
-	aSpace taskQueue enqueue: task.
+	enqueueNext := [
+		running ifTrue: [
+			aSpace taskQueue enqueue: (BlTaskAction new action: enqueueNext).
+			aSpace requestNextPulse ] ].
+	enqueueNext value.
 	aSpace settleForDuration: 60 milliSeconds.
 	running := false.
 	aSpace settle.

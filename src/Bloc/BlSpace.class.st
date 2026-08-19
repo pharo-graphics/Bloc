@@ -972,8 +972,13 @@ BlSpace >> mouseProcessor: aMouseProcessor [
 BlSpace >> deferAndSettle: aBlock [
 	"Evaluate aBlock on the UI process and wait until the space reaches equilibrium (all cascading tasks, skins, layout, and render passes have settled)."
 
-	self defer: aBlock.
-	self settle
+	self isUIProcess
+		ifTrue: [
+			aBlock value.
+			self isSettled ifFalse: [ self pulse ] ]
+		ifFalse: [
+			self defer: aBlock.
+			self settle ]
 ]
 
 { #category : #pulse }

@@ -284,7 +284,7 @@ BlHost >> settle: aSpace timeout: aTimeoutBlock [
 	| finished |
 	finished := false.
 	self
-		waitUntil: [ aSpace isSettled ]
+		waitUntilTrue: [ aSpace isSettled ]
 		timeout: aTimeoutBlock
 		onCompletion: [ finished := true ]
 		onTimeout: [ finished := false ].
