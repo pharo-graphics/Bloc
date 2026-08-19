@@ -103,6 +103,13 @@ BlTaskQueue >> isEmpty [
 	^ self critical: [ tasks isNil or: [ tasks isEmpty ] ]
 ]
 
+{ #category : #testing }
+BlTaskQueue >> isSettled [
+	"Return true if all tasks in the queue are considered settled (no pending execution)"
+
+	^ self tasks noneSatisfy: [ :eachTask | eachTask isPending ]
+]
+
 { #category : #private }
 BlTaskQueue >> newTasks [
 	"Answer a new collection for storing tasks"
@@ -175,11 +182,4 @@ BlTaskQueue >> tasks [
 	"tasks are an OrderedCollection (or nil), thus converting to anArray is guaranteed to answer a copy"
 	^ self critical: [
 		  tasks ifNil: [ #(  ) ] ifNotNil: [ tasks asArray ] ]
-]
-
-{ #category : #testing }
-BlTaskQueue >> isSettled [
-	"Return true if all tasks in the queue are considered settled (no pending execution)"
-
-	^ self tasks noneSatisfy: [ :eachTask | eachTask isPending ]
 ]

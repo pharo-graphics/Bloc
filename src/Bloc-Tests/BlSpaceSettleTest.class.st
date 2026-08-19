@@ -49,6 +49,7 @@ BlSpaceSettleTest >> testDeferOnOpenedSpaceRunsOnUIProcess [
 	aSpace := self newTestingSpace.
 	isUI := false.
 	aSpace defer: [ isUI := aSpace host isUIProcess ].
+	self deny: isUI.
 	aSpace settle.
 	self assert: isUI
 ]
@@ -127,8 +128,8 @@ BlSpaceSettleTest >> testIsSettledWithPendingTask [
 	| aSpace task executed |
 	aSpace := self newTestingSpace.
 	executed := false.
-	task := BlTaskAction new action: [ executed := true ].
-	aSpace taskQueue enqueue: task.
+	task := BlTaskAction with: [ executed := true ].
+	aSpace enqueueTask: task.
 	self deny: aSpace isSettled.
 
 	aSpace settle.
@@ -147,7 +148,7 @@ BlSpaceSettleTest >> testIsSettledWithRepeatedTask [
 			delay: 500 milliSeconds;
 			action: [ count := count + 1 ];
 			yourself.
-	aSpace taskQueue enqueue: task.
+	aSpace enqueueTask: task.
 	self assert: task isPending.
 	self deny: aSpace isSettled.
 

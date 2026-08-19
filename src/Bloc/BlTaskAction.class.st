@@ -7,36 +7,49 @@ Class {
 	#category : #'Bloc-Space - Tasks'
 }
 
+{ #category : #'instance creation' }
+BlTaskAction class >> with: aValuable [
+
+	^ self new
+		action: aValuable;
+		yourself
+]
+
 { #category : #accessing }
 BlTaskAction >> action [
+
 	^ action
 ]
 
 { #category : #accessing }
-BlTaskAction >> action: aBlock [
-	action := aBlock
+BlTaskAction >> action: aValuable [
+
+	action := aValuable
 ]
 
 { #category : #initialization }
 BlTaskAction >> initialize [
+
 	super initialize.
-	
-	action := [ :optionalThisTask | ]
+
+	action := [ :optionalThisTask |  ]
 ]
 
 { #category : #printing }
 BlTaskAction >> printOn: aStream [
+
 	aStream
-		print: self class name;
+		print: self className;
 		space;
 		nextPut: $(;
-		print: self action;
+		print: action;
 		nextPut: $)
 ]
 
 { #category : #running }
 BlTaskAction >> run [
-	self action isClosure
-		ifTrue: [ self action cull: self ]
-		ifFalse: [ self action value ]
+
+	action isClosure
+		ifTrue: [ action cull: self ]
+		ifFalse: [ action value ]
 ]

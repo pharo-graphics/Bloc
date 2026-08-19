@@ -216,6 +216,13 @@ BlParallelUniverse >> isPulsing [
 	^ isPulsing ifNil: [ false ]
 ]
 
+{ #category : #testing }
+BlParallelUniverse >> isSettled [
+	"Return true if there are no deferred actions waiting to be executed"
+
+	^ deferredActions isEmpty
+]
+
 { #category : #'api - spaces' }
 BlParallelUniverse >> openSpace: aSpace [
 	"It should be possible to add a space from the other thread"
@@ -394,11 +401,4 @@ BlParallelUniverse >> waitUntilTrue: aBlock timeout: aTimeoutBlock onCompletion:
 		self unregisterPulseSemaphore: aSemaphore ].
 		
 	^ completionBlock value
-]
-
-{ #category : #testing }
-BlParallelUniverse >> isSettled [
-	"Return true if there are no deferred actions waiting to be executed"
-
-	^ deferredActions isEmpty
 ]

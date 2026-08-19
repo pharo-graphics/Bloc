@@ -255,6 +255,18 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 	BlHostRenderer preferableClass offscreenMeasureTextParagraph: aBlTextParagraph
 ]
 
+{ #category : #'host - testing' }
+BlHost >> settle: aSpace timeout: aTimeoutBlock [
+	| finished |
+	finished := false.
+	self
+		waitUntilTrue: [ aSpace isSettled ]
+		timeout: aTimeoutBlock
+		onCompletion: [ finished := true ]
+		onTimeout: [ finished := false ].
+	^ finished
+]
+
 { #category : #'api - lifecycle' }
 BlHost >> start [
 
@@ -277,18 +289,6 @@ BlHost >> uiProcessDo: aBlock [
 BlHost >> universe [
 
 	^ universe ifNil: [ universe := BlParallelUniverse host: self ]
-]
-
-{ #category : #'host - testing' }
-BlHost >> settle: aSpace timeout: aTimeoutBlock [
-	| finished |
-	finished := false.
-	self
-		waitUntilTrue: [ aSpace isSettled ]
-		timeout: aTimeoutBlock
-		onCompletion: [ finished := true ]
-		onTimeout: [ finished := false ].
-	^ finished
 ]
 
 { #category : #'host - testing' }

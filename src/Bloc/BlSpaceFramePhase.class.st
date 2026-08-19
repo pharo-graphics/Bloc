@@ -11,13 +11,6 @@ Class {
 }
 
 { #category : #testing }
-BlSpaceFramePhase >> isSettledIn: aSpace [
-	"Return true if I have no pending work in aSpace"
-
-	^ true
-]
-
-{ #category : #testing }
 BlSpaceFramePhase >> isDrawingPhase [
 	^ false
 ]
@@ -35,6 +28,13 @@ BlSpaceFramePhase >> isIdlePhase [
 { #category : #testing }
 BlSpaceFramePhase >> isLayoutPhase [
 	^ false
+]
+
+{ #category : #testing }
+BlSpaceFramePhase >> isSettledIn: aSpace [
+	"Return true if I have no pending work in aSpace"
+
+	^ true
 ]
 
 { #category : #testing }

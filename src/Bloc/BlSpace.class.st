@@ -83,7 +83,6 @@ BlSpace class >> extractRoots: aSetOfElements [
 	^ roots
 ]
 
-
 { #category : #accessing }
 BlSpace >> asReference [
 	<return: #BlSpaceReference>
@@ -215,6 +214,28 @@ BlSpace >> defaultRootLabel [
 { #category : #initialization }
 BlSpace >> defaultTitle [
 	^ ''
+]
+
+{ #category : #pulse }
+BlSpace >> defer: aBlock [
+	"Schedule aBlock to be run asynchronously on the host UI loop process."
+
+	self isOpened
+		ifTrue: [ self universe defer: aBlock ]
+		ifFalse: [ aBlock value ]
+]
+
+{ #category : #pulse }
+BlSpace >> deferAndSettle: aBlock [
+	"Evaluate aBlock on the UI process and wait until the space reaches equilibrium (all cascading tasks, skins, layout, and render passes have settled)."
+
+	self isUIProcess
+		ifTrue: [
+			aBlock value.
+			self isSettled ifFalse: [ self pulse ] ]
+		ifFalse: [
+			self defer: aBlock.
+			self settle ]
 ]
 
 { #category : #'window - properties' }
@@ -853,6 +874,15 @@ BlSpace >> isResizable [
 		ifAbsent: [ resizable ]
 ]
 
+{ #category : #pulse }
+BlSpace >> isSettled [
+	"Return true if the space has reached equilibrium: no deferred actions in universe, and all frame phases are settled in this space."
+
+	self isOpened ifFalse: [ ^ self universe isSettled ].
+	self universe isSettled ifFalse: [ ^ false ].
+	^ self frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
+]
+
 { #category : #testing }
 BlSpace >> isShown [
 	"Return true if the space was shown (by sending #show message), false otherwise.
@@ -966,28 +996,6 @@ BlSpace >> mouseProcessor [
 { #category : #'accessing - processors' }
 BlSpace >> mouseProcessor: aMouseProcessor [
 	mouseProcessor := aMouseProcessor
-]
-
-{ #category : #pulse }
-BlSpace >> deferAndSettle: aBlock [
-	"Evaluate aBlock on the UI process and wait until the space reaches equilibrium (all cascading tasks, skins, layout, and render passes have settled)."
-
-	self isUIProcess
-		ifTrue: [
-			aBlock value.
-			self isSettled ifFalse: [ self pulse ] ]
-		ifFalse: [
-			self defer: aBlock.
-			self settle ]
-]
-
-{ #category : #pulse }
-BlSpace >> defer: aBlock [
-	"Schedule aBlock to be run asynchronously on the host UI loop process."
-
-	self isOpened
-		ifTrue: [ self universe defer: aBlock ]
-		ifFalse: [ aBlock value ]
 ]
 
 { #category : #pulse }
@@ -1188,6 +1196,39 @@ BlSpace >> setUpHostSpace [
 	hostSpace := host newHostSpaceFor: self
 ]
 
+{ #category : #pulse }
+BlSpace >> settle [
+	"Wait until the space reaches equilibrium (all deferred actions, tasks, skins, and layout requests have settled).
+	Blocks the active process on the host pulse semaphore until #isSettled answers true."
+
+	^ self waitUntilTrue: [ self isSettled ]
+]
+
+{ #category : #pulse }
+BlSpace >> settleFor: aTimeoutBlock [
+	"Wait until the space is settled, or until aTimeoutBlock evaluates to true."
+
+	^ self host settle: self timeout: aTimeoutBlock
+]
+
+{ #category : #pulse }
+BlSpace >> settleForDuration: aDuration [
+	"Wait for this space task queue to be empty until a given duration has passed.
+	Forwards to #settleForMilliseconds: converting the duration to milliseconds."
+
+	^ self settleForMilliseconds: aDuration asMilliSeconds
+]
+
+{ #category : #pulse }
+BlSpace >> settleForMilliseconds: aNumber [
+	"Wait until the space is settled, or until the timeout in milliseconds has passed.
+	Uses #nowInUTCMicroseconds for a monotonic, high-resolution deadline to avoid clock-skew issues."
+
+	| deadlineInMicroseconds |
+	deadlineInMicroseconds := time nowInUTCMicroseconds + (aNumber * 1000).
+	^ self settleFor: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
+]
+
 { #category : #'api - displaying' }
 BlSpace >> show [
 	"Show this space to the user, using current host and other parameters such as extent, title, etc."
@@ -1329,48 +1370,6 @@ BlSpace >> waitForDuration: aDuration [
 	2. Under stepping hosts running directly on the UI process (like BlMorphicSteppingHost), it manually drives UI stepping to advance space time, preventing deadlocks that standard process sleeps would cause."
 
 	self waitUntilTrue: [ false ] forDuration: aDuration
-]
-
-{ #category : #pulse }
-BlSpace >> isSettled [
-	"Return true if the space has reached equilibrium: no deferred actions in universe, and all frame phases are settled in this space."
-
-	self isOpened ifFalse: [ ^ self universe isSettled ].
-	self universe isSettled ifFalse: [ ^ false ].
-	^ self frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
-]
-
-{ #category : #pulse }
-BlSpace >> settle [
-	"Wait until the space reaches equilibrium (all deferred actions, tasks, skins, and layout requests have settled).
-	Blocks the active process on the host pulse semaphore until #isSettled answers true."
-
-	^ self waitUntilTrue: [ self isSettled ]
-]
-
-{ #category : #pulse }
-BlSpace >> settleFor: aTimeoutBlock [
-	"Wait until the space is settled, or until aTimeoutBlock evaluates to true."
-
-	^ self host settle: self timeout: aTimeoutBlock
-]
-
-{ #category : #pulse }
-BlSpace >> settleForDuration: aDuration [
-	"Wait for this space task queue to be empty until a given duration has passed.
-	Forwards to #settleForMilliseconds: converting the duration to milliseconds."
-
-	^ self settleForMilliseconds: aDuration asMilliSeconds
-]
-
-{ #category : #pulse }
-BlSpace >> settleForMilliseconds: aNumber [
-	"Wait until the space is settled, or until the timeout in milliseconds has passed.
-	Uses #nowInUTCMicroseconds for a monotonic, high-resolution deadline to avoid clock-skew issues."
-
-	| deadlineInMicroseconds |
-	deadlineInMicroseconds := time nowInUTCMicroseconds + (aNumber * 1000).
-	^ self settleFor: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
 ]
 
 { #category : #pulse }
