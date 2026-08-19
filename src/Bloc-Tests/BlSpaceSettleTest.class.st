@@ -12,7 +12,7 @@ BlSpaceSettleTest >> testDeferAndSettleEnsuresEquilibrium [
 	element := BlElement new.
 	aSpace deferAndSettle: [
 		aSpace root addChild: element.
-		element size: 120 @ 80 ].
+		element extent: 120 @ 80 ].
 	self assert: aSpace isSettled.
 	self assert: element extent equals: 120 @ 80
 ]
@@ -79,11 +79,12 @@ BlSpaceSettleTest >> testIsSettledWithInfiniteAnimation [
 	aSpace := self newTestingSpace.
 	element := BlElement new.
 	aSpace deferAndSettle: [ aSpace root addChild: element ].
-	anim := BlNumberTransition new
-		from: 0;
-		to: 100;
-		beInfinite;
-		yourself.
+	anim :=
+		BlNumberTransition new
+			from: 0;
+			to: 100;
+			beInfinite;
+			yourself.
 	element addAnimation: anim.
 	aSpace settle.
 	self assert: aSpace isSettled.
@@ -113,7 +114,7 @@ BlSpaceSettleTest >> testIsSettledWithPendingLayout [
 	element := BlElement new.
 	aSpace deferAndSettle: [ aSpace root addChild: element ].
 
-	element requestLayout.
+	element width: 100.
 	self deny: aSpace isSettled.
 
 	aSpace settle.
@@ -141,10 +142,11 @@ BlSpaceSettleTest >> testIsSettledWithRepeatedTask [
 	| aSpace count task |
 	aSpace := self newTestingSpace.
 	count := 0.
-	task := BlRepeatedTaskAction new
-		delay: 500 milliSeconds;
-		action: [ count := count + 1 ];
-		yourself.
+	task :=
+		BlRepeatedTaskAction new
+			delay: 500 milliSeconds;
+			action: [ count := count + 1 ];
+			yourself.
 	aSpace taskQueue enqueue: task.
 	self assert: task isPending.
 	self deny: aSpace isSettled.
@@ -161,8 +163,8 @@ BlSpaceSettleTest >> testSettleForDurationWithContinuousSelfReschedulingTask [
 	| aSpace running task |
 	aSpace := self newTestingSpace.
 	running := true.
-	task := BlTaskAction new action: [
-		running ifTrue: [ aSpace taskQueue enqueue: task ] ].
+	task := BlTaskAction new.
+	task action: [ running ifTrue: [ aSpace taskQueue enqueue: task ] ].
 	aSpace taskQueue enqueue: task.
 	aSpace settleForDuration: 60 milliSeconds.
 	running := false.
