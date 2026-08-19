@@ -1,3 +1,14 @@
+"
+I am a task that executes a valuable (such as a block closure) once during a space pulse.
+
+I can be created using the convenience constructor:
+
+```smalltalk
+BlTaskAction with: [ :optionalThisTask | ... ]
+```
+
+When executed, I evaluate my action valuable (culling myself if the valuable accepts an argument).
+"
 Class {
 	#name : #BlTaskAction,
 	#superclass : #BlTask,
