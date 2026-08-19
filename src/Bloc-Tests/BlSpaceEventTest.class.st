@@ -13,19 +13,20 @@ Class {
 
 { #category : #running }
 BlSpaceEventTest >> setUp [
+
 	super setUp.
 
 	space :=
 		BlSpace new
-		  host: BlHeadlessHost new;
+		  host: BlHeadlessHost default;
 		  yourself
 ]
 
 { #category : #running }
 BlSpaceEventTest >> tearDown [
-	space ifNotNil: [
-		space close.
-		space settle ].
+
+	space ifNotNil: [ space close; settle ].
+
 	super tearDown
 ]
 
@@ -39,12 +40,10 @@ BlSpaceEventTest >> testSpaceClosed [
 		addEventHandlerOn: BlSpaceClosedEvent
 		do: [ count := count + 1 ].
 
-	space show.
-	self waitBriefly.
+	space show; settle.
 	self assert: count equals: 0.
 
-	space close.
-	self waitBriefly.
+	space close; settle.
 	self assert: count equals: 1
 ]
 
@@ -58,17 +57,9 @@ BlSpaceEventTest >> testSpaceShown [
 		addEventHandlerOn: BlSpaceShownEvent
 		do: [ count := count + 1 ].
 
-	space show.
-	self waitBriefly.
+	space show; settle.
 	self assert: count equals: 1.
 
-	space close.
-	self waitBriefly.
+	space close; settle.
 	self assert: count equals: 1
-]
-
-{ #category : #running }
-BlSpaceEventTest >> waitBriefly [
-
-	space settleForMilliseconds: 50
 ]
