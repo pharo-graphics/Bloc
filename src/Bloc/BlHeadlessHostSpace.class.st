@@ -123,6 +123,11 @@ BlHeadlessHostSpace >> initialize [
 	renderCount := 0
 ]
 
+{ #category : #'dirty areas' }
+BlHeadlessHostSpace >> invalidate [
+	"Ignore it"
+]
+
 { #category : #'window - properties' }
 BlHeadlessHostSpace >> isBorderless [
 	"Return true if underlying window is now borderless, false otherwise"
