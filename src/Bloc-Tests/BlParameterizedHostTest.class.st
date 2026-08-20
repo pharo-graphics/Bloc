@@ -6,8 +6,21 @@ Class {
 		'hostClass',
 		'initialSpaces'
 	],
+	#classVars : [
+		'OnlyHeadlessHost'
+	],
 	#category : #'Bloc-Tests'
 }
+
+{ #category : #accessing }
+BlParameterizedHostTest class >> hostClasses [
+	"Answer the collection of host classes to be tested.
+	When #onlyHeadlessHost is true, returns only BlHeadlessHost to speed up test execution."
+
+	^ self onlyHeadlessHost
+		ifTrue: [ { BlHeadlessHost } ]
+		ifFalse: [ BlHost supportedHostClasses ]
+]
 
 { #category : #private }
 BlParameterizedHostTest class >> isAbstract [
@@ -15,12 +28,38 @@ BlParameterizedHostTest class >> isAbstract [
 	^ self == BlParameterizedHostTest
 ]
 
+{ #category : #accessing }
+BlParameterizedHostTest class >> onlyHeadlessHost [
+	"Return true if parameterized host tests should run exclusively on BlHeadlessHost"
+
+	^ OnlyHeadlessHost ifNil: [ false ]
+]
+
+{ #category : #accessing }
+BlParameterizedHostTest class >> onlyHeadlessHost: aBoolean [
+
+	OnlyHeadlessHost := aBoolean
+]
+
+{ #category : #settings }
+BlParameterizedHostTest class >> preferencesOn: aBuilder [
+	<systemsettings>
+
+	(aBuilder setting: #onlyHeadlessHost)
+		parent: Bloc groupSymbolForBloc;
+		target: self;
+		order: 10;
+		label: 'Run parameterized host tests only on Headless host';
+		description: 'When enabled, BlParameterizedHostTest suites run only on BlHeadlessHost instead of all supported host classes, speeding up test runs.';
+		default: [ false ]
+]
+
 { #category : #'building suites' }
 BlParameterizedHostTest class >> testParameters [
 
 	^ ParametrizedTestMatrix new
 		forSelector: #hostClass
-		addOptions: BlHost supportedHostClasses
+		addOptions: self hostClasses
 ]
 
 { #category : #accessing }
