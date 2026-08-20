@@ -6,7 +6,7 @@ Class {
 	#name : #BlEventTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'spaces'
+		'space'
 	],
 	#category : #'Bloc-Tests-Events'
 }
@@ -57,29 +57,29 @@ BlEventTest >> newRedElement [
 		  yourself
 ]
 
+{ #category : #running }
+BlEventTest >> setUp [
+
+	super setUp.
+	space := BlSpace new.
+	space host: BlHeadlessHost new.
+	space show; settle
+]
+
 { #category : #tests }
 BlEventTest >> simulate: aSymbol on: anElement [
 
-	| rootElement aSpace |
-	rootElement := anElement topMostParent.
-	rootElement isAttachedToSceneGraph ifFalse: [
-		aSpace := BlSpace new.
-		aSpace root addChild: rootElement.
-		aSpace show.
-		spaces ifNil: [ spaces := OrderedCollection new ].
-		spaces add: aSpace ].
+	anElement isAttachedToSceneGraph ifFalse: [
+		space root addChild: anElement topMostParent ].
 	anElement eventSimulator perform: aSymbol.
-	anElement space settle
+	space settle
 ]
 
 { #category : #running }
 BlEventTest >> tearDown [
 
-	spaces ifNotNil: [
-		spaces do: [ :each | 
-			each close.
-			each settle ].
-		spaces := nil ].
+	space close; settle.
+
 	super tearDown
 ]
 
