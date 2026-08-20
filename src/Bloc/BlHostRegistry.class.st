@@ -17,12 +17,20 @@ Class {
 
 { #category : #cleanup }
 BlHostRegistry class >> cleanUp [
+
 	default := nil
 ]
 
 { #category : #accessing }
 BlHostRegistry class >> default [
+
 	^ default ifNil: [ default := self new ]
+]
+
+{ #category : #'class initialization' }
+BlHostRegistry class >> initialize [
+
+	SessionManager default registerGuiClassNamed: self name
 ]
 
 { #category : #settings }
@@ -39,42 +47,61 @@ BlHostRegistry class >> settingsOn: aBuilder [
 		description: 'Choose the option that spaces will use to open, unless they have a particular host.'.
 ]
 
+{ #category : #'class initialization' }
+BlHostRegistry class >> startUp: isResuming [
+
+	isResuming ifTrue: [ self cleanUp ]
+]
+
 { #category : #accessing }
 BlHostRegistry >> availableHosts [
+
 	^ availableHosts
 ]
 
 { #category : #initialization }
 BlHostRegistry >> initialize [
-	| supportedClasses |
+
 	super initialize.
-	availableHosts := OrderedCollection new.
-	supportedClasses := BlHost supportedHostClasses.
-	supportedClasses ifEmpty: [ supportedClasses := { BlHeadlessHost } ].
-	(supportedClasses select: [ :each | each isSingleton ]) do: [ :each |
-		availableHosts add: each default ].
-	preferredHost := availableHosts ifEmpty: [ nil ] ifNotEmpty: [ :hosts | hosts first ].
+
+	availableHosts :=
+		(BlHost supportedHostClasses ifEmpty: [ { BlHeadlessHost } ])
+			select: [ :each | each isSingleton ]
+			thenCollect: [ :each | each default ].
+
+	preferredHost :=
+		availableHosts
+			ifEmpty: [ nil ]
+			ifNotEmpty: [ :hosts | hosts first ]
 ]
 
 { #category : #accessing }
 BlHostRegistry >> preferredHost [
+
 	^ preferredHost
 ]
 
 { #category : #accessing }
 BlHostRegistry >> preferredHost: aHost [
+
 	preferredHost := aHost
 ]
 
 { #category : #registration }
 BlHostRegistry >> registerHost: aHost [
-	(availableHosts includes: aHost) ifFalse: [
-		availableHosts add: aHost ]
+
+	(availableHosts includes: aHost)
+		ifFalse: [ availableHosts add: aHost ]
 ]
 
 { #category : #registration }
 BlHostRegistry >> unregisterHost: aHost [
+
 	availableHosts remove: aHost ifAbsent: [].
+
 	preferredHost = aHost ifTrue: [
-		preferredHost := availableHosts ifEmpty: [ nil ] ifNotEmpty: [ :hosts | hosts first ] ]
+		preferredHost :=
+			availableHosts
+				ifEmpty: [ nil ]
+				ifNotEmpty: [ :hosts | hosts first ] ]
 ]
