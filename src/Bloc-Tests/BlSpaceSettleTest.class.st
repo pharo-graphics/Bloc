@@ -87,6 +87,8 @@ BlSpaceSettleTest >> testIsSettledWithInfiniteAnimation [
 			beInfinite;
 			yourself.
 	element addAnimation: anim.
+	self assert: aSpace isSettled. "Infinite animations don't make it not settled"
+
 	aSpace settle.
 	self assert: aSpace isSettled.
 	self assert: anim isInfinite.
@@ -113,12 +115,21 @@ BlSpaceSettleTest >> testIsSettledWithPendingLayout [
 	| aSpace element |
 	aSpace := self newTestingSpace.
 	element := BlElement new.
-	aSpace deferAndSettle: [ aSpace root addChild: element ].
 
-	element width: 100.
+	aSpace defer: [ aSpace root addChild: element ].
+	self assert: element width equals: 0. "Still default width didn't apply"
 	self deny: aSpace isSettled.
 
 	aSpace settle.
+	self assert: element width equals: 50. "Default width was applied"
+	self assert: aSpace isSettled.
+
+	aSpace defer: [ element width: 100 ].
+	self assert: element width equals: 50. "New width still not applied"
+	self deny: aSpace isSettled.
+
+	aSpace settle.
+	self assert: element width equals: 100. "New width was applied"
 	self assert: aSpace isSettled
 ]
 
@@ -149,8 +160,11 @@ BlSpaceSettleTest >> testIsSettledWithRepeatedTask [
 			action: [ count := count + 1 ];
 			yourself.
 	aSpace enqueueTask: task.
+
+	"Not settled, only first time"
+	self deny: aSpace isSettled. 
 	self assert: task isPending.
-	self deny: aSpace isSettled.
+	self assert: count equals: 0.
 
 	aSpace settle.
 	self assert: aSpace isSettled.
@@ -161,18 +175,18 @@ BlSpaceSettleTest >> testIsSettledWithRepeatedTask [
 { #category : #tests }
 BlSpaceSettleTest >> testSettleForDurationWithContinuousSelfReschedulingTask [
 
-	| aSpace running enqueueNext |
+	| aSpace running enqueueBlock |
 	aSpace := self newTestingSpace.
 	running := true.
-	enqueueNext := [
+	enqueueBlock := [
 		running ifTrue: [
-			aSpace taskQueue enqueue: (BlTaskAction new action: enqueueNext).
-			aSpace requestNextPulse ] ].
-	enqueueNext value.
-	aSpace settleForDuration: 60 milliSeconds.
+			aSpace enqueueTask: (BlTaskAction with: enqueueBlock) ] ].
+
+	enqueueBlock value.
+
+	self deny: (aSpace settleForDuration: 100 milliSeconds).
 	running := false.
-	aSpace settle.
-	self assert: aSpace isSettled
+	self assert: (aSpace settleForDuration: 100 milliSeconds)
 ]
 
 { #category : #tests }
