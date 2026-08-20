@@ -232,7 +232,7 @@ BlSpace >> deferAndSettle: aBlock [
 	self isUIProcess
 		ifTrue: [
 			aBlock value.
-			self isSettled ifFalse: [ self pulse ] ]
+			[ self isSettled ] whileFalse: [ self universe pulse ] ]
 		ifFalse: [
 			self defer: aBlock.
 			self settle ]
