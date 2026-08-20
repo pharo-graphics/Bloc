@@ -49,7 +49,7 @@ BlParameterizedHostTest class >> preferencesOn: aBuilder [
 		parent: Bloc groupSymbolForBloc;
 		target: self;
 		order: 10;
-		label: 'Run parameterized host tests only on Headless host';
+		label: 'Test on headless host only';
 		description: 'When enabled, BlParameterizedHostTest suites run only on BlHeadlessHost instead of all supported host classes, speeding up test runs.';
 		default: [ false ]
 ]
