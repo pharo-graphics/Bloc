@@ -16,43 +16,54 @@ BlElement >> aeApplyClippingWithAllParentsOn: aCanvas [
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeAsForm [
 
-	^ self inUIProcessAndWaitDo: [
-		| topMostBounds transformedGeometryBounds aCanvas matrix |
-		self isLayoutRequested ifTrue: [
-			self isAttachedToSceneGraph
-				ifTrue: [ self space settle ]
-				ifFalse: [
-					| aSpace |
-					aSpace := BlSpace new host: BlHeadlessHost new.
-					aSpace show; settle.
-					aSpace deferAndSettle: [ aSpace root addChild: self ].
-					aSpace deferAndSettle: [ self removeFromParent ].
-					aSpace close; settle ] ]. "We want to consider our border, effect, as well as children's."
-		topMostBounds := self topMostParent bounds asRectangle.
+	| form |
+	self isAttachedToSceneGraph ifTrue: [
+		self space deferAndSettle: [ form := self basicAeAsForm ].
+		^ form ].
 
-		matrix := BlMatrix2D new.
-		self allParentsReverseDo: [ :e | matrix := e transformation matrix copy multiplyBy: matrix ].
-		
-		self transformation asElementTransformation class = BlElementAbsoluteTransformation 
-			ifFalse: [ matrix := self transformation matrix copy multiplyBy: matrix ].
+	BlSpace new
+		host: BlHeadlessHost default;
+		in: [ :aSpace |
+			aSpace show.
+			[
+				aSpace deferAndSettle: [
+					aSpace root addChild: self.
+					aSpace processPulse.
+					form := self basicAeAsForm.
+					self removeFromParent ].
+				^ form
+			] ensure: [
+				aSpace close; settle ] ]
+]
 
-		transformedGeometryBounds := self geometryBounds copy.	
-		matrix transformBounds: transformedGeometryBounds.
+{ #category : #'*Bloc-Alexandrie' }
+BlElement >> basicAeAsForm [
 
-		self withAllParentsReverseDo: [ :e | transformedGeometryBounds translateBy: e position ].
+	| topMostBounds transformedGeometryBounds aCanvas matrix |
+	topMostBounds := self topMostParent bounds asRectangle.
 
-		aCanvas := AeCanvas extent: transformedGeometryBounds extent.
-		aCanvas privateAeCairoSurface deviceOffset: transformedGeometryBounds origin negated.
-		aCanvas clippingRectangle: topMostBounds.
+	matrix := BlMatrix2D new.
+	self allParentsReverseDo: [ :e | matrix := e transformation matrix copy multiplyBy: matrix ].
 
-		
-		aCanvas restoreContextAfter: [ 
-			self allParentsReverseDo: [ :e | 
-				aCanvas pathTranslate: e position.
-				e transformation aeApplyTo: aCanvas. ].
-			self aeFullDrawOn: aCanvas ].
-		
-		aCanvas asForm ]
+	self transformation asElementTransformation class = BlElementAbsoluteTransformation 
+		ifFalse: [ matrix := self transformation matrix copy multiplyBy: matrix ].
+
+	transformedGeometryBounds := self geometryBounds copy.	
+	matrix transformBounds: transformedGeometryBounds.
+
+	self withAllParentsReverseDo: [ :e | transformedGeometryBounds translateBy: e position ].
+
+	aCanvas := AeCanvas extent: transformedGeometryBounds extent.
+	aCanvas privateAeCairoSurface deviceOffset: transformedGeometryBounds origin negated.
+	aCanvas clippingRectangle: topMostBounds.
+
+	aCanvas restoreContextAfter: [ 
+		self allParentsReverseDo: [ :e | 
+			aCanvas pathTranslate: e position.
+			e transformation aeApplyTo: aCanvas ].
+		self aeFullDrawOn: aCanvas ].
+
+	^ aCanvas asForm
 ]
 
 { #category : #'*Bloc-Alexandrie' }
