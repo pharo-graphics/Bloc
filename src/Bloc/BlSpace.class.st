@@ -221,7 +221,7 @@ BlSpace >> defer: aBlock [
 	"Schedule aBlock to be run asynchronously on the host UI loop process."
 
 	self isOpened
-		ifTrue: [ self universe defer: aBlock ]
+		ifTrue: [ self enqueueTask: (BlTaskAction with: aBlock) ]
 		ifFalse: [ aBlock value ]
 ]
 
@@ -876,10 +876,8 @@ BlSpace >> isResizable [
 
 { #category : #pulse }
 BlSpace >> isSettled [
-	"Return true if the space has reached equilibrium: no deferred actions in universe, and all frame phases are settled in this space."
+	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space."
 
-	self isOpened ifFalse: [ ^ self universe isSettled ].
-	self universe isSettled ifFalse: [ ^ false ].
 	^ self frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
 ]
 

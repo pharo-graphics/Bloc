@@ -96,12 +96,12 @@ BlSpaceSettleTest >> testIsSettledWithInfiniteAnimation [
 ]
 
 { #category : #tests }
-BlSpaceSettleTest >> testIsSettledWithPendingDeferredActionInUniverse [
+BlSpaceSettleTest >> testIsSettledWithPendingDeferredAction [
 
 	| aSpace executed |
 	aSpace := self newTestingSpace.
 	executed := false.
-	aSpace universe defer: [ executed := true ].
+	aSpace defer: [ executed := true ].
 	self deny: aSpace isSettled.
 
 	aSpace settle.
