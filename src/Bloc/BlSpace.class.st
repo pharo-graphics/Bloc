@@ -877,6 +877,7 @@ BlSpace >> isSettled [
 	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space, and there are no pending universe lifecycle actions."
 
 	self universe isSettled ifFalse: [ ^ false ].
+	self isOpened ifFalse: [ ^ true ].
 	^ self frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
 ]
 
