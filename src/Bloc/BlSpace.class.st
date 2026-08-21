@@ -218,11 +218,9 @@ BlSpace >> defaultTitle [
 
 { #category : #pulse }
 BlSpace >> defer: aBlock [
-	"Schedule aBlock to be run asynchronously on the host UI loop process."
+	"Schedule aBlock to be run asynchronously during a space pulse on the host UI loop process."
 
-	self isOpened
-		ifTrue: [ self enqueueTask: (BlTaskAction with: aBlock) ]
-		ifFalse: [ aBlock value ]
+	self enqueueTask: (BlTaskAction with: aBlock)
 ]
 
 { #category : #pulse }

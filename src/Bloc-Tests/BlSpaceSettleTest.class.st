@@ -66,14 +66,21 @@ BlSpaceSettleTest >> testDeferOnOpenedSpaceRunsOnUIProcess [
 ]
 
 { #category : #tests }
-BlSpaceSettleTest >> testDeferOnUnopenedSpaceExecutesImmediately [
+BlSpaceSettleTest >> testDeferOnUnopenedSpaceExecutesOnFirstPulse [
 
 	| aSpace executed |
 	aSpace := BlSpace new.
 	executed := false.
 	aSpace defer: [ executed := true ].
+	self deny: executed.
+	self deny: aSpace isOpened.
+
+	aSpace show.
+	aSpace settle.
 	self assert: executed.
-	self deny: aSpace isOpened
+	self assert: aSpace isOpened.
+	aSpace close.
+	aSpace settle
 ]
 
 { #category : #tests }
