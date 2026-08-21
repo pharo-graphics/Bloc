@@ -80,19 +80,19 @@ BlMorphicSteppingHost >> uiProcessDo: aBlock [
 ]
 
 { #category : #'host - testing' }
-BlMorphicSteppingHost >> waitUntilTrue: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
+BlMorphicSteppingHost >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion: completionBlock onTimeout: timeoutBlock [
 	MorphicUIManager uiProcess == Processor activeProcess
 		ifTrue: [
-			[ aBlock value ] whileFalse: [
-				aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
+			[ aConditionValuable value ] whileFalse: [
+				aTimeoutValuable value ifTrue: [ ^ timeoutBlock value ].
 				self currentWorld doOneCycle.
 				self universe pulse.
 				(Delay forMilliseconds: 5) wait ].
 			^ completionBlock value ]
 		ifFalse: [
 			^ super
-				waitUntilTrue: aBlock
-				timeout: aTimeoutBlock
+				waitUntil: aConditionValuable
+				timeOutIf: aTimeoutValuable
 				onCompletion: completionBlock
 				onTimeout: timeoutBlock ]
 ]

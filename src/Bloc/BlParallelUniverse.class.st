@@ -378,7 +378,7 @@ BlParallelUniverse >> unregisterPulseSemaphore: aSemaphore [
 ]
 
 { #category : #'api - pulse' }
-BlParallelUniverse >> waitUntilTrue: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
+BlParallelUniverse >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion: completionBlock onTimeout: timeoutBlock [
 
 	| aSemaphore |
 	aSemaphore := Semaphore new.
@@ -389,9 +389,9 @@ BlParallelUniverse >> waitUntilTrue: aBlock timeout: aTimeoutBlock onCompletion:
 			midPulse := self host isUIProcess not and: [ self isPulsing ].
 			midPulse
 				ifTrue: [ false ]
-				ifFalse: [ aBlock value ]
+				ifFalse: [ aConditionValuable value ]
 		] whileFalse: [
-			aTimeoutBlock value ifTrue: [ ^ timeoutBlock value ].
+			aTimeoutValuable value ifTrue: [ ^ timeoutBlock value ].
 			self host isRunning
 				ifTrue: [ aSemaphore waitTimeoutMilliseconds: 50 ]
 				ifFalse: [

@@ -256,12 +256,12 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 ]
 
 { #category : #'host - testing' }
-BlHost >> settle: aSpace timeout: aTimeoutBlock [
+BlHost >> settle: aSpace timeOutIf: aTimeoutValuable [
 	| finished |
 	finished := false.
 	self
-		waitUntilTrue: [ aSpace isSettled ]
-		timeout: aTimeoutBlock
+		waitUntil: [ aSpace isSettled ]
+		timeOutIf: aTimeoutValuable
 		onCompletion: [ finished := true ]
 		onTimeout: [ finished := false ].
 	^ finished
@@ -292,15 +292,15 @@ BlHost >> universe [
 ]
 
 { #category : #'host - testing' }
-BlHost >> waitUntilTrue: aBlock timeout: aTimeoutBlock onCompletion: completionBlock onTimeout: timeoutBlock [
-	"Evaluate aBlock repeatedly until it answers true. If aTimeoutBlock answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
+BlHost >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion: completionBlock onTimeout: timeoutBlock [
+	"Evaluate aConditionValuable repeatedly until it answers true. If aTimeoutValuable answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
 
 	self canWait ifFalse: [ 
 		Error signal: 'Cannot wait from within the UI loop process' ].
 
 	^ self universe
-		  waitUntilTrue: aBlock
-		  timeout: aTimeoutBlock
+		  waitUntil: aConditionValuable
+		  timeOutIf: aTimeoutValuable
 		  onCompletion: completionBlock
 		  onTimeout: timeoutBlock
 ]
