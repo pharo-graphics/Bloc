@@ -169,10 +169,11 @@ BlBaseAnimation >> isInfinite [
 ]
 
 { #category : #testing }
-BlBaseAnimation >> isPending [
-	"Return true if this animation has a finite duration, i.e., is not infinite."
+BlBaseAnimation >> isSettled [
+	"Return true if this animation is considered settled.
+	Infinite animations run perpetually and are considered settled so they do not block space settlement."
 
-	^ self isInfinite not
+	^ self isInfinite
 ]
 
 { #category : #testing }

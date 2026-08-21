@@ -69,11 +69,10 @@ BlRepeatedTask >> initialize [
 ]
 
 { #category : #testing }
-BlRepeatedTask >> isPending [
-	"Repeated tasks run indefinitely, so they do not constitute pending work to wait for,
-	except before they have run for the first time."
+BlRepeatedTask >> isSettled [
+	"Repeated tasks run indefinitely, so they are considered settled once they have run for the first time."
 
-	^ previousRunTime isNil
+	^ previousRunTime isNotNil
 ]
 
 { #category : #'api - testing' }

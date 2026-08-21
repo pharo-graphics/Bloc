@@ -54,10 +54,11 @@ BlTask >> isNew [
 ]
 
 { #category : #testing }
-BlTask >> isPending [
-	"Return true if this task constitutes pending work that a space should wait for."
+BlTask >> isSettled [
+	"Return true if this task is considered settled.
+	A task queued for execution is not settled until it completes."
 
-	^ true
+	^ false
 ]
 
 { #category : #'private - state' }

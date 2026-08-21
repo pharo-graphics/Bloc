@@ -110,7 +110,7 @@ BlSpaceSettleTest >> testIsSettledWithInfiniteAnimation [
 	aSpace settle.
 	self assert: aSpace isSettled.
 	self assert: anim isInfinite.
-	self deny: anim isPending
+	self assert: anim isSettled
 ]
 
 { #category : #tests }
@@ -181,12 +181,12 @@ BlSpaceSettleTest >> testIsSettledWithRepeatedTask [
 
 	"Not settled, only first time"
 	self deny: aSpace isSettled. 
-	self assert: task isPending.
+	self deny: task isSettled.
 	self assert: count equals: 0.
 
 	aSpace settle.
 	self assert: aSpace isSettled.
-	self deny: task isPending.
+	self assert: task isSettled.
 	self assert: count equals: 1
 ]
 
