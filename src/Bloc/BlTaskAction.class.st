@@ -19,10 +19,16 @@ Class {
 }
 
 { #category : #'instance creation' }
+BlTaskAction class >> new [
+
+	^ self with: [ :optionalThisTask |  ]
+]
+
+{ #category : #'instance creation' }
 BlTaskAction class >> with: aValuable [
 
-	^ self new
-		action: aValuable;
+	^ self basicNew
+		initializeWithAction: aValuable;
 		yourself
 ]
 
@@ -44,6 +50,14 @@ BlTaskAction >> initialize [
 	super initialize.
 
 	action := [ :optionalThisTask |  ]
+]
+
+{ #category : #initialization }
+BlTaskAction >> initializeWithAction: aValuable [
+
+	self initialize.
+
+	action := aValuable
 ]
 
 { #category : #printing }
