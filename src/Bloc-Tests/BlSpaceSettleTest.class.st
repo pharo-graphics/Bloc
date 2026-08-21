@@ -18,6 +18,17 @@ BlSpaceSettleTest >> testDeferAndSettleEnsuresEquilibrium [
 ]
 
 { #category : #tests }
+BlSpaceSettleTest >> testCloseAndSettleClosesWindowSynchronously [
+
+	| aSpace |
+	aSpace := self newTestingSpace.
+	self assert: aSpace isOpened.
+	aSpace close.
+	aSpace settle.
+	self deny: aSpace isOpened
+]
+
+{ #category : #tests }
 BlSpaceSettleTest >> testDeferAndSettleFromUIProcessIsReentrant [
 
 	| aSpace nestedExecuted |
