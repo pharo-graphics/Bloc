@@ -270,19 +270,19 @@ BlHost >> settle: aSpace timeout: aTimeoutBlock [
 { #category : #'api - lifecycle' }
 BlHost >> start [
 
-	^ self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #'api - lifecycle' }
 BlHost >> stop [
 
-	^ self subclassResponsibility
+	self subclassResponsibility
 ]
 
 { #category : #enumerating }
 BlHost >> uiProcessDo: aBlock [
 
-	self class uiProcessDo: aBlock
+	^ self subclassResponsibility
 ]
 
 { #category : #'host space - accessing' }
