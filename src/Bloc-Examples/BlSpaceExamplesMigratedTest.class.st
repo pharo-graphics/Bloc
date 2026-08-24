@@ -3,7 +3,7 @@ I contain example of how to use space
 "
 Class {
 	#name : #BlSpaceExamplesMigratedTest,
-	#superclass : #TestCase,
+	#superclass : #BlParameterizedHostTest,
 	#category : #'Bloc-Examples-Space'
 }
 
@@ -48,7 +48,7 @@ BlSpaceExamplesMigratedTest >> newSpaceWithSlownDownTime [
 	| aTime aSpace |
 	aTime := BlFastForwardedTime new.
 	aTime speed: 0.2.
-	aSpace := BlSpace new.
+	aSpace := self newTestingSpace.
 	aSpace time: aTime.
 	^ aSpace
 ]
@@ -66,7 +66,7 @@ BlSpaceExamplesMigratedTest >> newSpaceWithSlownDownTimeAndAnimatedElement [
 BlSpaceExamplesMigratedTest >> testChangeIcon [
 
 	| aSpace aCollection |
-	aSpace := BlSpace new.
+	aSpace := self newTestingSpace.
 
 	aCollection := OrderedCollection new.
 	aSpace addEventHandler: (BlEventHandler
@@ -115,14 +115,9 @@ BlSpaceExamplesMigratedTest >> testEmptySpace [
 BlSpaceExamplesMigratedTest >> testFirstPulse [
 
 	| aSpace |
-	aSpace := BlSpace new.
-	aSpace host: BlHeadlessHost new.
-	[
-		aSpace show; settle.
+	aSpace := self newTestingSpace.
 
-		self deny: aSpace hasDirtyElements.
-		self assert: aSpace root position equals: 0 @ 0.
-		self assert: aSpace root extent equals: aSpace extent
-	] ensure: [
-		aSpace close; settle ]
+	self deny: aSpace hasDirtyElements.
+	self assert: aSpace root position equals: 0 @ 0.
+	self assert: aSpace root extent equals: aSpace extent
 ]

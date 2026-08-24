@@ -73,6 +73,7 @@ BlElementLayoutBoundaryTest >> testSpaceWithExactLayoutBoundary [
 	<sampleInstance>
 	| aSpace aContainer aLayoutBoundary aChild |
 	aSpace := BlSpace new.
+	aSpace host: BlHeadlessHost new.
 	aSpace extent: 500 @ 400.
 	aContainer := BlElement new extent: 400 @ 300.
 	aLayoutBoundary := BlElement new extent: 300 @ 200.
