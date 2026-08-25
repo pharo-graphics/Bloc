@@ -1206,7 +1206,14 @@ BlSpace >> settle [
 BlSpace >> settleFor: aTimeoutValuable [
 	"Wait until the space is settled, or until aTimeoutValuable evaluates to true."
 
-	^ self host settle: self timeOutIf: aTimeoutValuable
+	| finished |
+	finished := false.
+	self host
+		waitUntil: [ self isSettled ]
+		timeOutIf: aTimeoutValuable
+		onCompletion: [ finished := true ]
+		onTimeout: [ finished := false ].
+	^ finished
 ]
 
 { #category : #pulse }

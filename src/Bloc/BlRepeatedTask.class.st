@@ -68,17 +68,17 @@ BlRepeatedTask >> initialize [
 	isRunning := true
 ]
 
+{ #category : #'api - testing' }
+BlRepeatedTask >> isRunning [
+
+	^ isRunning
+]
+
 { #category : #testing }
 BlRepeatedTask >> isSettled [
 	"Repeated tasks run indefinitely, so they are considered settled once they have run for the first time."
 
 	^ previousRunTime isNotNil
-]
-
-{ #category : #'api - testing' }
-BlRepeatedTask >> isRunning [
-
-	^ isRunning
 ]
 
 { #category : #hooks }

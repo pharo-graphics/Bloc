@@ -53,14 +53,6 @@ BlTask >> isNew [
 	^ state == #new
 ]
 
-{ #category : #testing }
-BlTask >> isSettled [
-	"Return true if this task is considered settled.
-	A task queued for execution is not settled until it completes."
-
-	^ false
-]
-
 { #category : #'private - state' }
 BlTask >> isPendingExecution [
 
@@ -71,6 +63,14 @@ BlTask >> isPendingExecution [
 BlTask >> isQueued [
 
 	^ state == #queued
+]
+
+{ #category : #testing }
+BlTask >> isSettled [
+	"Return true if this task is considered settled.
+	A task queued for execution is not settled until it completes."
+
+	^ false
 ]
 
 { #category : #hooks }

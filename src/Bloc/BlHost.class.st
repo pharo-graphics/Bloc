@@ -255,18 +255,6 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 	BlHostRenderer preferableClass offscreenMeasureTextParagraph: aBlTextParagraph
 ]
 
-{ #category : #'host - testing' }
-BlHost >> settle: aSpace timeOutIf: aTimeoutValuable [
-	| finished |
-	finished := false.
-	self
-		waitUntil: [ aSpace isSettled ]
-		timeOutIf: aTimeoutValuable
-		onCompletion: [ finished := true ]
-		onTimeout: [ finished := false ].
-	^ finished
-]
-
 { #category : #'api - lifecycle' }
 BlHost >> start [
 
