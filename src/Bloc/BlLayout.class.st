@@ -281,14 +281,12 @@ BlLayout >> measureChildWithMargins: anElement parentSpec: parentSpec [
 BlLayout >> measureChildWithMargins: anElement parentSpec: parentSpec widthUsed: widthUsed heightUsed: heightUsed [
 	"Measure anElement based on provided parent's extent measurement specification and used width and height
 	taking into account element's margin and parent's padding."
-	| parentPadding |
-	parentPadding := anElement parent ifNotNil: [ :p | p padding ] ifNil: [ BlInsets empty ].
 	
 	self
 		measureChild: anElement
 		parentSpec: parentSpec
-		widthUsed: parentPadding width + anElement margin width + widthUsed
-		heightUsed: parentPadding height + anElement margin height + heightUsed
+		widthUsed: anElement parent padding width + anElement margin width + widthUsed
+		heightUsed: anElement parent padding height + anElement margin height + heightUsed
 ]
 
 { #category : #'private - measurement' }
