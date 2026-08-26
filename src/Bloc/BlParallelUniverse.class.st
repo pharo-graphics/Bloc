@@ -338,7 +338,7 @@ BlParallelUniverse >> pulse [
 					e pass ]
 	] ensure: [
 		isPulsing := false.
-		self pulseSemaphoresMutex critical: [
+		pulseSemaphoresMutex critical: [
 			semaphoresToSignal := self pulseSemaphores copy ].
 		semaphoresToSignal do: [ :each | each signal ] ]
 ]
@@ -360,15 +360,9 @@ BlParallelUniverse >> pulseSemaphores [
 ]
 
 { #category : #'api - pulse' }
-BlParallelUniverse >> pulseSemaphoresMutex [
-
-	^ pulseSemaphoresMutex ifNil: [ pulseSemaphoresMutex := Mutex new ]
-]
-
-{ #category : #'api - pulse' }
 BlParallelUniverse >> registerPulseSemaphore: aSemaphore [
 
-	self pulseSemaphoresMutex critical: [ self pulseSemaphores add: aSemaphore ]
+	pulseSemaphoresMutex critical: [ self pulseSemaphores add: aSemaphore ]
 ]
 
 { #category : #'api - lifecycle' }
@@ -449,7 +443,7 @@ BlParallelUniverse >> uiProcessDo: aBlock [
 { #category : #'api - pulse' }
 BlParallelUniverse >> unregisterPulseSemaphore: aSemaphore [
 
-	self pulseSemaphoresMutex critical: [ self pulseSemaphores remove: aSemaphore ifAbsent: [  ] ]
+	pulseSemaphoresMutex critical: [ self pulseSemaphores remove: aSemaphore ifAbsent: [  ] ]
 ]
 
 { #category : #'api - pulse' }
