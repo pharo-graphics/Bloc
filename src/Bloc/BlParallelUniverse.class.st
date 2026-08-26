@@ -350,6 +350,18 @@ BlParallelUniverse >> pulseSynchronously [
 ]
 
 { #category : #'api - pulse' }
+BlParallelUniverse >> pulseSemaphores [
+
+	^ pulseSemaphores ifNil: [ pulseSemaphores := OrderedCollection new ]
+]
+
+{ #category : #'api - pulse' }
+BlParallelUniverse >> pulseSemaphoresMutex [
+
+	^ pulseSemaphoresMutex ifNil: [ pulseSemaphoresMutex := Mutex new ]
+]
+
+{ #category : #'api - pulse' }
 BlParallelUniverse >> registerPulseSemaphore: aSemaphore [
 
 	self pulseSemaphoresMutex critical: [ self pulseSemaphores add: aSemaphore ]
