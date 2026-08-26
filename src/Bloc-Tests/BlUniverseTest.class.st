@@ -40,3 +40,16 @@ BlUniverseTest >> testParallelUniverseErrorDuringPulseSignalIsDeprecated [
 
 	self assert: BlParallelUniverseErrorDuringPulseSignal isDeprecated
 ]
+
+{ #category : #tests }
+BlUniverseTest >> testSpaceOpenedSignal [
+
+	| aUniverse aSpace logger |
+	aUniverse := BlUniverse new.
+	aSpace := BlSpace new.
+	logger := MemoryLogger new.
+	logger runFor: BlSpaceOpenedSignal during: [
+		aUniverse openSpace: aSpace ].
+
+	self assert: (logger recordings anySatisfy: [ :each | each space == aSpace ])
+]
