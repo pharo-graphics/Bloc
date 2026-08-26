@@ -129,7 +129,7 @@ BlSpace >> close [
 	"Request closing this space. This might happen in a host process (async). 
 	This space can be reopened via `show`, either with current host or with another host."
 	
-	host universe closeSpace: self
+	self universe deferCloseSpace: self
 ]
 
 { #category : #'cursor managing' }
@@ -659,9 +659,9 @@ BlSpace >> host: aHost [
 				addEventHandlerOn: BlSpaceDetachedEvent
 				doOnce: [
 					host := aHost.
-					self universe attachSpace: self ].
+					self universe deferAttachSpace: self ].
 
-			self universe detachSpace: self ]
+			self universe deferDetachSpace: self ]
 ]
 
 { #category : #'host space - accessing' }
@@ -1230,7 +1230,7 @@ BlSpace >> settleForMilliseconds: aNumber [
 BlSpace >> show [
 	"Show this space to the user, using current host and other parameters such as extent, title, etc."
 
-	self universe openSpace: self
+	self universe deferOpenSpace: self
 ]
 
 { #category : #'api - displaying' }

@@ -6,7 +6,7 @@ There can exist multiple parallel universes running concurrently, each owned and
 Key Responsibilities:
 - **Space management**: Holds the collection of open spaces (`spaces`) that belong to this universe.
 - **Action deferral**: Queues deferred block closures to be processed in a thread-safe manner before each frame pulse.
-- **Pulsing lifecycle**: Implements `pulseSynchronously` which runs layout, event, task, and drawing passes for all spaces in the universe, and executes deferred actions.
+- **Pulsing lifecycle**: Implements `pulse` which runs layout, event, task, and drawing passes for all spaces in the universe, and executes deferred actions.
 - **Synchronization**: Manages a list of registered pulse semaphores (`pulseSemaphores`). When a pulse completes, it signals these semaphores to wake up any threads waiting for state changes or animations (e.g. during `waitUntil:`).
 "
 Class {
@@ -33,16 +33,6 @@ BlParallelUniverse class >> host: aBlHost [
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> attachSpace: aSpace [
-	"Attach a given space to the universe. It is assumed that the space was previously detached from another Universe.
-	Is useful for changing space host."
-
-	self defer: [ self attachSpaceSynchronously: aSpace ].
-
-	aSpace host isRunning ifFalse: [ self startUniverse ]
-]
-
-{ #category : #'private - spaces' }
-BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 
 	(aSpace isOpened and: [ aSpace hostSpace isNotNil ]) ifTrue: [ ^ self ].
 
@@ -58,19 +48,23 @@ BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 		ex pass ]
 ]
 
-{ #category : #'api - spaces' }
-BlParallelUniverse >> closeSpace: aSpace [
+{ #category : #'private - spaces' }
+BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 
-	self defer: [ self closeSpaceSynchronously: aSpace ]
+	self
+		deprecated: 'Use #attachSpace: instead'
+		transformWith: '`@receiver attachSpaceSynchronously: `@arg' -> '`@receiver attachSpace: `@arg'.
+
+	^ self attachSpace: aSpace
 ]
 
-{ #category : #'private - spaces' }
-BlParallelUniverse >> closeSpaceSynchronously: aSpace [
+{ #category : #'api - spaces' }
+BlParallelUniverse >> closeSpace: aSpace [
 
 	"If space is not even opened we should do nothing"
 	aSpace isOpened ifFalse: [ ^ self ].
 
-	self detachSpaceSynchronously: aSpace.
+	self detachSpace: aSpace.
 
 	"Notify root element that it is no longer in scene graph"
 	aSpace dispatchRemovedFromSceneGraph.
@@ -80,10 +74,20 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 	aSpace dispatchEventWithTimestamp: BlSpaceClosedEvent new
 ]
 
+{ #category : #'private - spaces' }
+BlParallelUniverse >> closeSpaceSynchronously: aSpace [
+
+	self
+		deprecated: 'Use #closeSpace: instead'
+		transformWith: '`@receiver closeSpaceSynchronously: `@arg' -> '`@receiver closeSpace: `@arg'.
+
+	^ self closeSpace: aSpace
+]
+
 { #category : #'api - spaces' }
 BlParallelUniverse >> closeSpaces [
 
-	self spaces copy do: [ :aSpace | self closeSpace: aSpace ]
+	self spaces copy do: [ :aSpace | self deferCloseSpace: aSpace ]
 ]
 
 { #category : #'api - ui process' }
@@ -95,15 +99,38 @@ BlParallelUniverse >> defer: aValuable [
 ]
 
 { #category : #'api - spaces' }
-BlParallelUniverse >> detachSpace: aSpace [
-	"Detach an opened space from this universe without actually closing the space.
-	Space detaching is useful for switching hosts and transferring spaces between universes."
+BlParallelUniverse >> deferAttachSpace: aSpace [
+	"Attach a given space to the universe. It is assumed that the space was previously detached from another Universe.
+	Is useful for changing space host."
 
-	self defer: [ self detachSpaceSynchronously: aSpace ]
+	self defer: [ self attachSpace: aSpace ].
+
+	aSpace host isRunning ifFalse: [ self start ]
 ]
 
-{ #category : #'private - spaces' }
-BlParallelUniverse >> detachSpaceSynchronously: aSpace [
+{ #category : #'api - spaces' }
+BlParallelUniverse >> deferCloseSpace: aSpace [
+
+	self defer: [ self closeSpace: aSpace ]
+]
+
+{ #category : #'api - spaces' }
+BlParallelUniverse >> deferDetachSpace: aSpace [
+
+	self defer: [ self detachSpace: aSpace ]
+]
+
+{ #category : #'api - spaces' }
+BlParallelUniverse >> deferOpenSpace: aSpace [
+	"It should be possible to add a space from the other thread"
+
+	self defer: [ self openSpace: aSpace ].
+
+	aSpace host isRunning ifFalse: [ self start ]
+]
+
+{ #category : #'api - spaces' }
+BlParallelUniverse >> detachSpace: aSpace [
 
 	| aHost |
 	"If space is not even opened we should do nothing"
@@ -128,9 +155,27 @@ BlParallelUniverse >> detachSpaceSynchronously: aSpace [
 		of a space closed event"
 		self defer: [
 			"As the last step, we may want to stop the host. It may terminate
-			the current process, so we should do it at the end."
+			the UI loop process, so nothing should be executed after that"
 			(spaces isEmpty and: [ aHost isRunning ]) ifTrue: [
-				self stopUniverse ] ] ]
+				self stop ] ] ]
+]
+
+{ #category : #'private - spaces' }
+BlParallelUniverse >> detachSpaceSynchronously: aSpace [
+
+	self
+		deprecated: 'Use #detachSpace: instead'
+		transformWith: '`@receiver detachSpaceSynchronously: `@arg' -> '`@receiver detachSpace: `@arg'.
+
+	^ self detachSpace: aSpace
+]
+
+{ #category : #'deferred message' }
+BlParallelUniverse >> evaluateDeferred [
+
+	| nextInQueue |
+	[ (nextInQueue := deferredActions nextOrNil) isNotNil ]
+		whileTrue: [ nextInQueue value ]
 ]
 
 { #category : #testing }
@@ -226,20 +271,11 @@ BlParallelUniverse >> isSettled [
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> openSpace: aSpace [
-	"It should be possible to add a space from the other thread"
-
-	self defer: [ self openSpaceSynchronously: aSpace ].
-
-	aSpace host isRunning ifFalse: [ self startUniverse ]
-]
-
-{ #category : #'private - spaces' }
-BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
 	"If it has been already opened, just unhide it" 
 	(aSpace isOpened and: [ aSpace hostSpace isNotNil ]) ifTrue: [ ^ aSpace hostSpace show ].
 
-	self attachSpaceSynchronously: aSpace.
+	self attachSpace: aSpace.
 
 	"Note: we should send shown event after everything else is done, because
 	theoretically, that only space could be closed as a reaction to the event"
@@ -249,6 +285,16 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 	aSpace becomeVisible.
 	
 	aSpace dispatchAddedToSceneGraph
+]
+
+{ #category : #'private - spaces' }
+BlParallelUniverse >> openSpaceSynchronously: aSpace [
+
+	self
+		deprecated: 'Use #openSpace: instead'
+		transformWith: '`@receiver openSpaceSynchronously: `@arg' -> '`@receiver openSpace: `@arg'.
+
+	^ self openSpace: aSpace
 ]
 
 { #category : #'api - ui process' }
@@ -273,28 +319,11 @@ BlParallelUniverse >> printOn: aStream [
 { #category : #pulse }
 BlParallelUniverse >> pulse [
 
-	self pulseSynchronously
-]
-
-{ #category : #'api - pulse' }
-BlParallelUniverse >> pulseSemaphores [
-
-	^ pulseSemaphores ifNil: [ pulseSemaphores := OrderedCollection new ]
-]
-
-{ #category : #'api - pulse' }
-BlParallelUniverse >> pulseSemaphoresMutex [
-
-	^ pulseSemaphoresMutex ifNil: [ pulseSemaphoresMutex := Mutex new ]
-]
-
-{ #category : #'private - spaces' }
-BlParallelUniverse >> pulseSynchronously [
-
+	| semaphoresToSignal |
 	isPulsing := true.
 	[
 		[
-			self tryToRunDeferredActions.
+			self evaluateDeferred.
 			spaces do: [ :eachSpace | eachSpace pulse ]
 		] 
 			on: Exception 
@@ -304,11 +333,20 @@ BlParallelUniverse >> pulseSynchronously [
 						emit.
 					e pass ]
 	] ensure: [
-		| semaphoresToSignal |
 		isPulsing := false.
 		self pulseSemaphoresMutex critical: [
 			semaphoresToSignal := self pulseSemaphores copy ].
 		semaphoresToSignal do: [ :each | each signal ] ]
+]
+
+{ #category : #'private - spaces' }
+BlParallelUniverse >> pulseSynchronously [
+
+	self
+		deprecated: 'Use #pulse instead'
+		transformWith: '`@receiver pulseSynchronously' -> '`@receiver pulse'.
+
+	^ self pulse
 ]
 
 { #category : #'api - pulse' }
@@ -330,7 +368,7 @@ BlParallelUniverse >> spaces [
 ]
 
 { #category : #'private - lifecycle' }
-BlParallelUniverse >> startUniverse [
+BlParallelUniverse >> start [
 	"A universe must not be running here.
 	I am called outside of the UI loop (there is no UI loop yet)"
 
@@ -339,7 +377,17 @@ BlParallelUniverse >> startUniverse [
 ]
 
 { #category : #'private - lifecycle' }
-BlParallelUniverse >> stopUniverse [
+BlParallelUniverse >> startUniverse [
+
+	self
+		deprecated: 'Use #start instead'
+		transformWith: '`@receiver startUniverse' -> '`@receiver start'.
+
+	^ self start
+]
+
+{ #category : #'private - lifecycle' }
+BlParallelUniverse >> stop [
 	"A universe must be running here.
 	I am called from the UI loop"
 	
@@ -347,22 +395,33 @@ BlParallelUniverse >> stopUniverse [
 	spaces do: [ :anSpace | anSpace rememberVisibleStatus ]
 ]
 
+{ #category : #'private - lifecycle' }
+BlParallelUniverse >> stopUniverse [
+
+	self
+		deprecated: 'Use #stop instead'
+		transformWith: '`@receiver stopUniverse' -> '`@receiver stop'.
+
+	^ self stop
+]
+
 { #category : #'deferred message' }
 BlParallelUniverse >> tryToRunDeferredActions [
 
-	| nextInQueue |
+	self
+		deprecated: 'Use #evaluateDeferred instead'
+		transformWith: '`@receiver tryToRunDeferredActions' -> '`@receiver evaluateDeferred'.
 
-	[ (nextInQueue := deferredActions nextOrNil) isNotNil ]
-		whileTrue: [ nextInQueue value ]
+	^ self evaluateDeferred
 ]
 
 { #category : #'deferred message' }
 BlParallelUniverse >> tryToRunPostponedActions [
 	self
-		deprecated: 'Use #tryToRunDeferredActions instead'
-		transformWith: '`@receiver tryToRunPostponedActions' -> '`@receiver tryToRunDeferredActions'.
+		deprecated: 'Use #evaluateDeferred instead'
+		transformWith: '`@receiver tryToRunPostponedActions' -> '`@receiver evaluateDeferred'.
 
-	^ self tryToRunDeferredActions
+	^ self evaluateDeferred
 ]
 
 { #category : #'api - ui process' }
