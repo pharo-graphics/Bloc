@@ -36,12 +36,6 @@ BlUniverseTest >> testEvaluateDeferred [
 ]
 
 { #category : #tests }
-BlUniverseTest >> testParallelUniverseErrorDuringPulseSignalIsDeprecated [
-
-	self assert: BlParallelUniverseErrorDuringPulseSignal isDeprecated
-]
-
-{ #category : #tests }
 BlUniverseTest >> testSpaceOpenedSignal [
 
 	| aUniverse aSpace logger |
