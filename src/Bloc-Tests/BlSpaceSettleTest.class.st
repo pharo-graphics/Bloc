@@ -5,6 +5,17 @@ Class {
 }
 
 { #category : #tests }
+BlSpaceSettleTest >> testCloseAndSettleClosesWindowSynchronously [
+
+	| aSpace |
+	aSpace := self newTestingSpace.
+	self assert: aSpace isOpened.
+	aSpace close.
+	aSpace settle.
+	self deny: aSpace isOpened
+]
+
+{ #category : #tests }
 BlSpaceSettleTest >> testDeferAndSettleEnsuresEquilibrium [
 
 	| aSpace element |
@@ -15,17 +26,6 @@ BlSpaceSettleTest >> testDeferAndSettleEnsuresEquilibrium [
 		element extent: 120 @ 80 ].
 	self assert: aSpace isSettled.
 	self assert: element extent equals: 120 @ 80
-]
-
-{ #category : #tests }
-BlSpaceSettleTest >> testCloseAndSettleClosesWindowSynchronously [
-
-	| aSpace |
-	aSpace := self newTestingSpace.
-	self assert: aSpace isOpened.
-	aSpace close.
-	aSpace settle.
-	self deny: aSpace isOpened
 ]
 
 { #category : #tests }

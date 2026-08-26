@@ -111,7 +111,7 @@ BlSpace class >> simulateDragOn: anElement byAll: aSequenceOfBlVectors [
 		deprecated: 'Use anElement eventSimulator dragByAll: instead'
 		on: '2026-06-26'
 		in: 'Bloc'.
-	^ self simulate: anElement during: [ anElement eventSimulator dragByAll: aSequenceOfBlVectors ]
+	^ self simulate: anElement during: [ anElement eventSimulator dragByDeltas: aSequenceOfBlVectors ]
 ]
 
 { #category : #'*Bloc-Simulation' }

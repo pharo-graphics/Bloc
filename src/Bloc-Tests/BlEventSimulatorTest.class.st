@@ -117,6 +117,7 @@ BlEventSimulatorTest >> testMouseMove [
 
 { #category : #tests }
 BlEventSimulatorTest >> testMouseWheel [
+
 	| wheelVector |
 	element
 		addEventHandlerOn: BlMouseWheelEvent
@@ -124,7 +125,7 @@ BlEventSimulatorTest >> testMouseWheel [
 	
 	element eventSimulator mouseWheelBy: (BlVector x: 5 y: 10).
 	
-	self assert: wheelVector equals: (BlVector x: 5 y: 10) asBlocVector.
+	self assert: wheelVector equals: (BlVector x: 5 y: 10) asBlocVector
 ]
 
 { #category : #tests }
