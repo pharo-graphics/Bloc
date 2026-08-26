@@ -881,14 +881,6 @@ BlSpace >> isSettled [
 	^ self frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
 ]
 
-{ #category : #testing }
-BlSpace >> isShown [
-	"Return true if the space was shown (by sending #show message), false otherwise.
-	Please note, that an opened/shown space can be hidden which does not influence the result of #isShown"
-
-	^ self isOpened
-]
-
 { #category : #'host space - text input' }
 BlSpace >> isTextInputActive [
 	"Check whether or not Unicode text input events are enabled"
