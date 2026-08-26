@@ -1233,8 +1233,6 @@ BlSpace >> settleForMilliseconds: aNumber [
 BlSpace >> show [
 	"Show this space to the user, using current host and other parameters such as extent, title, etc."
 
-	self isOpened ifTrue: [ ^ self ].
-
 	self universe defer: [ self universe openSpace: self ].
 	self host isRunning ifFalse: [ self universe start ]
 ]
