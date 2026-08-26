@@ -40,20 +40,22 @@ BlHostSpace >> densityDpi [
 ]
 
 { #category : #'host space - events' }
+BlHostSpace >> dequeueEvents [
+
+	| theEvents |
+	theEvents := LinkedList new.
+	eventQueue flush: [ :anEvent | theEvents add: anEvent ].
+	^ theEvents
+]
+
+{ #category : #'host space - events' }
 BlHostSpace >> enqueueEvent: aBlEvent [
+
 	aBlEvent isUniverseEvent
 		ifTrue: [ ^ self universe dispatchEvent: aBlEvent ].
 
 	eventQueue nextPut: aBlEvent.
 	self space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
-]
-
-{ #category : #'host space - events' }
-BlHostSpace >> fetchedEventsDo: aBlock [
-	| theEvents |
-	theEvents := LinkedList new.
-	eventQueue flush: [ :anEvent | theEvents add: anEvent ].
-	theEvents do: aBlock
 ]
 
 { #category : #'host space - events' }
@@ -63,6 +65,7 @@ BlHostSpace >> generateEvents [
 
 { #category : #'host space - events' }
 BlHostSpace >> hasEvents [
+
 	^ eventQueue isEmpty not
 ]
 
@@ -91,6 +94,7 @@ BlHostSpace >> host: aBlHost [
 
 { #category : #initialization }
 BlHostSpace >> initialize [
+
 	super initialize.
 	eventQueue := WaitfreeQueue new
 ]
