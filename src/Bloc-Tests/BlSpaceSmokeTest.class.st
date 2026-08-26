@@ -42,3 +42,15 @@ BlSpaceSmokeTest >> testShowAndClick [
 	aSpace settle.
 	aSpace root eventSimulator click
 ]
+
+{ #category : #tests }
+BlSpaceSmokeTest >> testSpaceOpenedSignal [
+
+	| aSpace logger |
+	aSpace := self newTestingSpace.
+	logger := MemoryLogger new.
+	logger runFor: BlSpaceOpenedSignal during: [
+		aSpace show.
+		aSpace settle.
+		self assert: (logger recordings anySatisfy: [ :each | each space == aSpace ]) ]
+]

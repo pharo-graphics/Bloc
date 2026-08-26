@@ -284,7 +284,11 @@ BlParallelUniverse >> openSpace: aSpace [
 	"Notify root element that it is now visible to the user"
 	aSpace becomeVisible.
 	
-	aSpace dispatchAddedToSceneGraph
+	aSpace dispatchAddedToSceneGraph.
+
+	BlSpaceOpenedSignal new
+		space: aSpace;
+		emit
 ]
 
 { #category : #'private - spaces' }
