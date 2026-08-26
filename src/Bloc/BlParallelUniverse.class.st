@@ -332,9 +332,9 @@ BlParallelUniverse >> pulse [
 		] 
 			on: Exception 
 			do: [ :e | 
-					BlParallelUniverseErrorDuringPulseSignal new
-						signaledError: e;
-						emit.
+				BlUniversePulseSignal new
+					error: e;
+					emit.
 					e pass ]
 	] ensure: [
 		isPulsing := false.

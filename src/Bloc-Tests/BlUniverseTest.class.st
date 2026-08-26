@@ -12,11 +12,11 @@ BlUniverseTest >> testErrorDuringPulseSignal [
 	expectedError := Error new messageText: 'Pulse test error'.
 	aUniverse defer: [ expectedError signal ].
 	logger := MemoryLogger new.
-	logger runFor: BlParallelUniverseErrorDuringPulseSignal during: [
+	logger runFor: BlUniversePulseSignal during: [
 		[ aUniverse pulse ] on: Error do: [ :err | caughtError := err ] ].
 
 	self assert: caughtError equals: expectedError.
-	self assert: (logger recordings anySatisfy: [ :each | each signaledError == expectedError ])
+	self assert: (logger recordings anySatisfy: [ :each | each error == expectedError ])
 ]
 
 { #category : #tests }
@@ -33,4 +33,10 @@ BlUniverseTest >> testEvaluateDeferred [
 	self assert: evaluated.
 	self deny: aUniverse hasDeferredActions.
 	self assert: aUniverse isSettled
+]
+
+{ #category : #tests }
+BlUniverseTest >> testParallelUniverseErrorDuringPulseSignalIsDeprecated [
+
+	self assert: BlParallelUniverseErrorDuringPulseSignal isDeprecated
 ]

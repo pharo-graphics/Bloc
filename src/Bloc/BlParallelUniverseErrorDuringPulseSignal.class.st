@@ -1,24 +1,14 @@
 "
-I am a signal that is raised when there is an error in the pulse.
-I include in myself the signaledError.
+I am a deprecated BeaconSignal. Use `BlUniversePulseSignal` instead.
 "
 Class {
 	#name : #BlParallelUniverseErrorDuringPulseSignal,
-	#superclass : #BeaconSignal,
-	#instVars : [
-		'signaledError'
-	],
+	#superclass : #BlUniversePulseSignal,
 	#category : #'Bloc-Universe - Parallel'
 }
 
-{ #category : #accessing }
-BlParallelUniverseErrorDuringPulseSignal >> signaledError [
+{ #category : #testing }
+BlParallelUniverseErrorDuringPulseSignal class >> isDeprecated [
 
-	^ signaledError
-]
-
-{ #category : #accessing }
-BlParallelUniverseErrorDuringPulseSignal >> signaledError: anException [
-
-	signaledError := anException
+	^ true
 ]
