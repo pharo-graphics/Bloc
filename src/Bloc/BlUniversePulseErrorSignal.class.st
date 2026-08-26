@@ -22,15 +22,3 @@ BlUniversePulseErrorSignal >> error: anException [
 
 	error := anException
 ]
-
-{ #category : #accessing }
-BlUniversePulseErrorSignal >> signaledError [
-
-	^ error
-]
-
-{ #category : #accessing }
-BlUniversePulseErrorSignal >> signaledError: anException [
-
-	error := anException
-]
