@@ -13,12 +13,6 @@ Class {
 }
 
 { #category : #running }
-BlScrollBarTest >> dragOn: anElement byAll: aSequenceOfDeltas [
-
-	anElement eventSimulator dragByAll: aSequenceOfDeltas
-]
-
-{ #category : #running }
 BlScrollBarTest >> setUp [
 
 	| largeExtent gap |
@@ -88,13 +82,13 @@ BlScrollBarTest >> setUp [
 BlScrollBarTest >> testHorizontalDragThumbBeyondBounds [
 
 	"Increase offset by a small distance"
-	self dragOn: hBar thumb byAll: { 10 asPoint }.
+	hBar thumb eventSimulator dragByDeltas: { 10 asPoint }.
 	self
 		assert: scrollableElement computeHorizontalScrollOffset
 		equals: 25.
 
 	"Increase offset to max offset"
-	self dragOn: hBar thumb byAll: { scrollableElement extent * 2 }.
+	hBar thumb eventSimulator dragByDeltas: { scrollableElement extent * 2 }.
 	self
 		assert: scrollableElement computeHorizontalScrollOffset
 		equals: 120
@@ -104,11 +98,9 @@ BlScrollBarTest >> testHorizontalDragThumbBeyondBounds [
 { #category : #tests }
 BlScrollBarTest >> testHorizontalDragThumbReturn [
 
-	self
-		dragOn: hBar thumb
-		byAll: {
-			scrollableElement extent * 2.
-			-10 asPoint }.
+	hBar thumb eventSimulator dragByDeltas: {
+		scrollableElement extent * 2.
+		-10 asPoint }.
 	self
 		assert: scrollableElement computeHorizontalScrollOffset
 		equals: 120
@@ -130,13 +122,13 @@ BlScrollBarTest >> testHorizontalScrollInitialValues [
 BlScrollBarTest >> testVerticalDragThumbBeyondBounds [
 
 	"Increase offset by a small distance"
-	self dragOn: vBar thumb byAll: { 10 asPoint }.
+	vBar thumb eventSimulator dragByDeltas: { 10 asPoint }.
 	self
 		assert: scrollableElement computeVerticalScrollOffset
 		equals: 50.
 
 	"Increase offset to max offset"
-	self dragOn: vBar thumb byAll: { scrollableElement extent * 2 }.
+	vBar thumb eventSimulator dragByDeltas: { scrollableElement extent * 2 }.
 	self
 		assert: scrollableElement computeVerticalScrollOffset
 		equals: 300
@@ -145,11 +137,10 @@ BlScrollBarTest >> testVerticalDragThumbBeyondBounds [
 { #category : #tests }
 BlScrollBarTest >> testVerticalDragThumbReturn [
 
-	self
-		dragOn: vBar thumb
-		byAll: {
-			scrollableElement extent * 2.
-			-10 asPoint }.
+	vBar thumb eventSimulator dragByDeltas: {
+		scrollableElement extent * 2.
+		-10 asPoint }.
+
 	self
 		assert: scrollableElement computeVerticalScrollOffset
 		equals: 300
