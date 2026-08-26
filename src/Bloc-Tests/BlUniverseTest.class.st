@@ -38,12 +38,17 @@ BlUniverseTest >> testEvaluateDeferred [
 { #category : #tests }
 BlUniverseTest >> testSpaceOpenedSignal [
 
-	| aUniverse aSpace logger |
-	aUniverse := BlUniverse new.
-	aSpace := BlSpace new.
+	| aSpace logger |
+	aSpace := BlSpace new
+		host: BlHeadlessHost new;
+		yourself.
 	logger := MemoryLogger new.
-	logger runFor: BlSpaceOpenedSignal during: [
-		aUniverse openSpace: aSpace ].
-
-	self assert: (logger entries anySatisfy: [ :each | each space == aSpace ])
+	[
+		logger runFor: BlSpaceOpenedSignal during: [
+			aSpace show.
+			aSpace settle ].
+		self assert: (logger entries anySatisfy: [ :each | each space == aSpace ])
+	] ensure: [
+		aSpace close.
+		aSpace settle ]
 ]
