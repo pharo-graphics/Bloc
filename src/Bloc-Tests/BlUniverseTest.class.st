@@ -36,6 +36,26 @@ BlUniverseTest >> testEvaluateDeferred [
 ]
 
 { #category : #tests }
+BlUniverseTest >> testSnapshotAndQuit [
+
+	| aSpace |
+	aSpace := BlSpace new
+		host: BlHeadlessHost new;
+		yourself.
+	[
+		aSpace universe snapshot: false andQuit: false.
+		self assert: aSpace universe hasDeferredActions.
+		self deny: aSpace universe isSettled.
+
+		aSpace settle.
+		self deny: aSpace universe hasDeferredActions.
+		self assert: aSpace universe isSettled
+	] ensure: [
+		aSpace close.
+		aSpace settle ]
+]
+
+{ #category : #tests }
 BlUniverseTest >> testSpaceOpenedSignal [
 
 	| aSpace logger |
