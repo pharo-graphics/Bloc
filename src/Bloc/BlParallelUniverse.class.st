@@ -1,12 +1,12 @@
 "
-I represent a self-contained environment (a ""universe"") managing a collection of open spaces (`BlSpace`), a pipeline for deferred/postponed actions, and a synchronization mechanism for frame pulses. 
+I represent a self-contained environment (a ""universe"") managing a collection of open spaces (`BlSpace`), a pipeline for deferred actions, and a synchronization mechanism for frame pulses. 
 
 There can exist multiple parallel universes running concurrently, each owned and run by a specific host (`BlHost`).
 
 Key Responsibilities:
 - **Space management**: Holds the collection of open spaces (`spaces`) that belong to this universe.
-- **Action deferral**: Queues deferred and postponed block closures to be processed in a thread-safe manner at specific lifecycle stages of a pulse.
-- **Pulsing lifecycle**: Implements `pulseSynchronously` which runs layout, event, task, and drawing passes for all spaces in the universe, and executes deferred/postponed actions.
+- **Action deferral**: Queues deferred block closures to be processed in a thread-safe manner before each frame pulse.
+- **Pulsing lifecycle**: Implements `pulseSynchronously` which runs layout, event, task, and drawing passes for all spaces in the universe, and executes deferred actions.
 - **Synchronization**: Manages a list of registered pulse semaphores (`pulseSemaphores`). When a pulse completes, it signals these semaphores to wake up any threads waiting for state changes or animations (e.g. during `waitUntil:`).
 "
 Class {
@@ -14,7 +14,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'deferredActions',
-		'postponedActions',
 		'spaces',
 		'pulseSemaphores',
 		'pulseSemaphoresMutex',
@@ -140,12 +139,6 @@ BlParallelUniverse >> hasDeferredActions [
 	^ deferredActions isEmpty not
 ]
 
-{ #category : #testing }
-BlParallelUniverse >> hasPostponedActions [
-	
-	^ postponedActions isEmpty not
-]
-
 { #category : #'api - spaces' }
 BlParallelUniverse >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"
@@ -197,7 +190,6 @@ BlParallelUniverse >> initialize [
 	spaces := OrderedCollection new.
 	host := BlHeadlessHost default.
 	deferredActions := WaitfreeQueue new.
-	postponedActions := WaitfreeQueue new.
 	pulseSemaphores := OrderedCollection new.
 	pulseSemaphoresMutex := Mutex new.
 ]
@@ -252,11 +244,11 @@ BlParallelUniverse >> openSpaceSynchronously: aSpace [
 
 { #category : #'api - ui process' }
 BlParallelUniverse >> postpone: aValuable [
-	"#postpone: can be used from any thread to execute a valuable in the GUI thread
-	after the pulse is completed.
-	I am different from #defer: in that #defer: actios are evaluated before the pulse of the universe"
-	
-	postponedActions nextPut: aValuable
+	self
+		deprecated: 'Use #defer: instead'
+		transformWith: '`@receiver postpone: `@arg' -> '`@receiver defer: `@arg'.
+
+	^ self defer: aValuable
 ]
 
 { #category : #printing }
@@ -294,8 +286,7 @@ BlParallelUniverse >> pulseSynchronously [
 	[
 		[
 			self tryToRunDeferredActions.
-			spaces do: [ :eachSpace | eachSpace pulse ].
-			self tryToRunPostponedActions.
+			spaces do: [ :eachSpace | eachSpace pulse ]
 		] 
 			on: Exception 
 			do: [ :e | 
@@ -320,7 +311,7 @@ BlParallelUniverse >> registerPulseSemaphore: aSemaphore [
 { #category : #'api - lifecycle' }
 BlParallelUniverse >> snapshot: save andQuit: quit [
 
-	self postpone: [ Smalltalk snapshot: save andQuit: quit ]
+	self defer: [ Smalltalk snapshot: save andQuit: quit ]
 ]
 
 { #category : #'api - spaces' }
@@ -353,15 +344,6 @@ BlParallelUniverse >> tryToRunDeferredActions [
 	| nextInQueue |
 
 	[ (nextInQueue := deferredActions nextOrNil) isNotNil ]
-		whileTrue: [ nextInQueue value ]
-]
-
-{ #category : #'deferred message' }
-BlParallelUniverse >> tryToRunPostponedActions [
-
-	| nextInQueue |
-	
-	[ (nextInQueue := postponedActions nextOrNil) isNotNil ]
 		whileTrue: [ nextInQueue value ]
 ]
 
