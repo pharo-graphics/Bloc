@@ -1,9 +1,9 @@
 "
-I am a deprecated BeaconSignal. Use `BlUniversePulseSignal` instead.
+I am a deprecated BeaconSignal. Use `BlUniversePulseErrorSignal` instead.
 "
 Class {
 	#name : #BlParallelUniverseErrorDuringPulseSignal,
-	#superclass : #BlUniversePulseSignal,
+	#superclass : #BlUniversePulseErrorSignal,
 	#category : #'Bloc-Universe - Parallel'
 }
 

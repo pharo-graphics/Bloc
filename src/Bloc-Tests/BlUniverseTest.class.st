@@ -12,7 +12,7 @@ BlUniverseTest >> testErrorDuringPulseSignal [
 	expectedError := Error new messageText: 'Pulse test error'.
 	aUniverse defer: [ expectedError signal ].
 	logger := MemoryLogger new.
-	logger runFor: BlUniversePulseSignal during: [
+	logger runFor: BlUniversePulseErrorSignal during: [
 		[ aUniverse pulse ] on: Error do: [ :err | caughtError := err ] ].
 
 	self assert: caughtError equals: expectedError.
