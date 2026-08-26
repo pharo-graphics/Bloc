@@ -67,7 +67,6 @@ BlOSWindowSDL2Host >> newHostSpaceFor: aSpace [
 
 	^ BlOSWindowSDL2HostSpace new
 		keyboardKeyTable: self keyboardKeyTable;
-		universe: self universe;
 		host: self;
 		space: aSpace;
 		initializeWithAttributes: (self newAttributesFor: aSpace);

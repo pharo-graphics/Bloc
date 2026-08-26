@@ -67,7 +67,6 @@ BlMorphicHost >> newHostSpaceFor: aSpace [
 		spaceHostMorph: (self newSpaceHostMorphFor: aSpace);
 		space: aSpace;
 		host: self;
-		universe: self universe;
 		renderer: self newHostRenderer;
 		yourself
 ]

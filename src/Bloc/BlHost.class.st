@@ -143,7 +143,7 @@ BlHost class >> settingsOn: aBuilder [
 { #category : #'system startup' }
 BlHost class >> shutDown [
 	self allSubclasses do: [ :eachHostClass |
-		eachHostClass hasUniverse ifTrue: [ eachHostClass default universe stopUniverse ] ]
+		eachHostClass hasUniverse ifTrue: [ eachHostClass default universe stop ] ]
 ]
 
 { #category : #'api - lifecycle' }
@@ -158,7 +158,7 @@ BlHost class >> start [
 { #category : #'system startup' }
 BlHost class >> startUp [
 	self allSubclasses do: [ :eachHostClass |
-		eachHostClass hasUniverse ifTrue: [ eachHostClass default universe startUniverse ] ]
+		eachHostClass hasUniverse ifTrue: [ eachHostClass default universe start ] ]
 ]
 
 { #category : #'api - lifecycle' }

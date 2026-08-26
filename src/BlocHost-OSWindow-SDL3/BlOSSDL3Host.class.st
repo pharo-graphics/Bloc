@@ -58,7 +58,6 @@ BlOSSDL3Host >> newHostSpaceFor: aSpace [
 
 	^ BlOSSDL3Renderer defaultClass hostSpaceClass new
 		keyboardKeyTable: self keyboardKeyTable;
-		universe: self universe;
 		host: self;
 		space: aSpace;
 		initializeWithAttributes: (self newAttributesFor: aSpace);

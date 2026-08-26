@@ -37,7 +37,6 @@ BlMorphicWindowHost >> newHostSpaceFor: aSpace [
 		morphicWindow: (self newMorphicWindowFor: aSpace);
 		space: aSpace;
 		host: self;
-		universe: self universe;
 		renderer: self newHostRenderer;
 		yourself
 ]

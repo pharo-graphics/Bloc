@@ -26,7 +26,6 @@ BlHeadlessHost >> newHostSpaceFor: aSpace [
 
 	^ BlHeadlessHostSpace new
 		host: self;
-		universe: self universe;
 		space: aSpace;
 		renderer: self newHostRenderer;
 		windowExtent: aSpace extent;

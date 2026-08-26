@@ -12,7 +12,6 @@ Class {
 	#instVars : [
 		'host',
 		'space',
-		'universe',
 		'renderer',
 		'eventQueue'
 	],
@@ -242,8 +241,7 @@ BlHostSpace >> tearDown [
 
 	self close.
 	space := nil.
-	host := nil.
-	universe := nil
+	host := nil
 ]
 
 { #category : #'host space - displaying' }
@@ -261,13 +259,15 @@ BlHostSpace >> toFront [
 { #category : #'host space - accessing' }
 BlHostSpace >> universe [
 
-	^ universe
+	^ self host ifNotNil: [ :h | h universe ]
 ]
 
 { #category : #'host space - accessing' }
 BlHostSpace >> universe: aBlParallelUniverse [
 
-	universe := aBlParallelUniverse
+	self
+		deprecated: 'HostSpace derives universe from host'
+		transformWith: '`@receiver universe: `@arg' -> '`@receiver host: `@arg host'.
 ]
 
 { #category : #'host space - geometry' }
