@@ -16,7 +16,7 @@ BlUniverseTest >> testErrorDuringPulseSignal [
 		[ aUniverse pulse ] on: Error do: [ :err | caughtError := err ] ].
 
 	self assert: caughtError equals: expectedError.
-	self assert: (logger recordings anySatisfy: [ :each | each error == expectedError ])
+	self assert: (logger entries anySatisfy: [ :each | each error == expectedError ])
 ]
 
 { #category : #tests }
@@ -45,5 +45,5 @@ BlUniverseTest >> testSpaceOpenedSignal [
 	logger runFor: BlSpaceOpenedSignal during: [
 		aUniverse openSpace: aSpace ].
 
-	self assert: (logger recordings anySatisfy: [ :each | each space == aSpace ])
+	self assert: (logger entries anySatisfy: [ :each | each space == aSpace ])
 ]
