@@ -87,7 +87,7 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 { #category : #'api - spaces' }
 BlParallelUniverse >> closeSpaces [
 
-	self spaces copy do: [ :aSpace | self deferCloseSpace: aSpace ]
+	self spaces copy do: [ :aSpace | aSpace close ]
 ]
 
 { #category : #'api - ui process' }
@@ -96,37 +96,6 @@ BlParallelUniverse >> defer: aValuable [
 	It is useful to update the UI states."
 
 	deferredActions nextPut: aValuable
-]
-
-{ #category : #'api - spaces' }
-BlParallelUniverse >> deferAttachSpace: aSpace [
-	"Attach a given space to the universe. It is assumed that the space was previously detached from another Universe.
-	Is useful for changing space host."
-
-	self defer: [ self attachSpace: aSpace ].
-
-	aSpace host isRunning ifFalse: [ self start ]
-]
-
-{ #category : #'api - spaces' }
-BlParallelUniverse >> deferCloseSpace: aSpace [
-
-	self defer: [ self closeSpace: aSpace ]
-]
-
-{ #category : #'api - spaces' }
-BlParallelUniverse >> deferDetachSpace: aSpace [
-
-	self defer: [ self detachSpace: aSpace ]
-]
-
-{ #category : #'api - spaces' }
-BlParallelUniverse >> deferOpenSpace: aSpace [
-	"It should be possible to add a space from the other thread"
-
-	self defer: [ self openSpace: aSpace ].
-
-	aSpace host isRunning ifFalse: [ self start ]
 ]
 
 { #category : #'api - spaces' }
