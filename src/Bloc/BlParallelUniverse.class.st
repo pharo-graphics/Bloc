@@ -139,6 +139,15 @@ BlParallelUniverse >> hasDeferredActions [
 	^ deferredActions isEmpty not
 ]
 
+{ #category : #testing }
+BlParallelUniverse >> hasPostponedActions [
+	self
+		deprecated: 'Use #hasDeferredActions instead'
+		transformWith: '`@receiver hasPostponedActions' -> '`@receiver hasDeferredActions'.
+
+	^ self hasDeferredActions
+]
+
 { #category : #'api - spaces' }
 BlParallelUniverse >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"
@@ -345,6 +354,15 @@ BlParallelUniverse >> tryToRunDeferredActions [
 
 	[ (nextInQueue := deferredActions nextOrNil) isNotNil ]
 		whileTrue: [ nextInQueue value ]
+]
+
+{ #category : #'deferred message' }
+BlParallelUniverse >> tryToRunPostponedActions [
+	self
+		deprecated: 'Use #tryToRunDeferredActions instead'
+		transformWith: '`@receiver tryToRunPostponedActions' -> '`@receiver tryToRunDeferredActions'.
+
+	^ self tryToRunDeferredActions
 ]
 
 { #category : #'api - ui process' }
