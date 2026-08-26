@@ -36,14 +36,14 @@ BlUniverseTest >> testEvaluateDeferred [
 ]
 
 { #category : #tests }
-BlUniverseTest >> testSnapshotAndQuit [
+BlUniverseTest >> testDeferSnapshotAndQuit [
 
 	| aSpace |
 	aSpace := BlSpace new
 		host: BlHeadlessHost new;
 		yourself.
 	[
-		aSpace universe snapshot: false andQuit: false.
+		aSpace universe deferSnapshot: false andQuit: false.
 		self assert: aSpace universe hasDeferredActions.
 		self deny: aSpace universe isSettled.
 

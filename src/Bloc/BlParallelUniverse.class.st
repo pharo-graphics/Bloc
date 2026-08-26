@@ -335,9 +335,19 @@ BlParallelUniverse >> registerPulseSemaphore: aSemaphore [
 ]
 
 { #category : #'api - lifecycle' }
-BlParallelUniverse >> snapshot: save andQuit: quit [
+BlParallelUniverse >> deferSnapshot: save andQuit: quit [
 
 	self defer: [ Smalltalk snapshot: save andQuit: quit ]
+]
+
+{ #category : #'api - lifecycle' }
+BlParallelUniverse >> snapshot: save andQuit: quit [
+
+	self
+		deprecated: 'Use #deferSnapshot:andQuit: instead'
+		transformWith: '`@receiver snapshot: `@arg1 andQuit: `@arg2' -> '`@receiver deferSnapshot: `@arg1 andQuit: `@arg2'.
+
+	self deferSnapshot: save andQuit: quit
 ]
 
 { #category : #'api - spaces' }
