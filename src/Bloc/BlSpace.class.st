@@ -1030,6 +1030,16 @@ BlSpace >> printOn: aStream [
 { #category : #pulse }
 BlSpace >> processPulse [
 
+	self
+		deprecated: 'Use #pulse instead'
+		transformWith: '`@receiver processPulse' -> '`@receiver pulse'.
+
+	self pulse
+]
+
+{ #category : #pulse }
+BlSpace >> pulse [
+
 	self ensureSession.
 
 	pulseRequested ifFalse: [ ^ self ].
@@ -1038,11 +1048,6 @@ BlSpace >> processPulse [
 	pulseRequested := false.
 
 	self frame runOn: self
-]
-
-{ #category : #pulse }
-BlSpace >> pulse [
-	self processPulse
 ]
 
 { #category : #pulse }

@@ -28,7 +28,7 @@ BlElement >> aeAsForm [
 			[
 				aSpace deferAndSettle: [
 					aSpace root addChild: self.
-					aSpace processPulse.
+					aSpace pulse.
 					form := self basicAeAsForm.
 					self removeFromParent ].
 				^ form
