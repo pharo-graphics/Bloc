@@ -205,7 +205,7 @@ BlHost class >> universe [
 BlHost >> canWait [
 	"Return true if the active process is allowed to wait for pending work on this host"
 
-	^ true
+	^ self isUIProcess not
 ]
 
 { #category : #testing }

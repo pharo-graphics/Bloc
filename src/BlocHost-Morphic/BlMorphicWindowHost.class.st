@@ -3,7 +3,7 @@ I am a host that opens spaces as windows in the Morphic World.
 "
 Class {
 	#name : #BlMorphicWindowHost,
-	#superclass : #BlMorphicSteppingHost,
+	#superclass : #BlPulseLoopHost,
 	#category : #'BlocHost-Morphic-Window'
 }
 

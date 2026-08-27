@@ -13,7 +13,7 @@ See example in class-side.
 "
 Class {
 	#name : #BlMorphicHost,
-	#superclass : #BlMorphicSteppingHost,
+	#superclass : #BlPulseLoopHost,
 	#instVars : [
 		'containerMorph'
 	],

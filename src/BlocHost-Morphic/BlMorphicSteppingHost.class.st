@@ -7,6 +7,12 @@ Class {
 	#category : #'BlocHost-Morphic-Common'
 }
 
+{ #category : #testing }
+BlMorphicSteppingHost class >> isDeprecated [
+
+	^ true
+]
+
 { #category : #'api - lifecycle' }
 BlMorphicSteppingHost >> delete [
 	"Required to be polymorphic with Morph.
@@ -77,22 +83,4 @@ BlMorphicSteppingHost >> uiProcessDo: aBlock [
 	"Evaluate aBlock with the running UI Process of this host if any"
 
 	UIManager default uiProcess ifNotNil: aBlock
-]
-
-{ #category : #'host - testing' }
-BlMorphicSteppingHost >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion: completionBlock onTimeout: timeoutBlock [
-	MorphicUIManager uiProcess == Processor activeProcess
-		ifTrue: [
-			[ aConditionValuable value ] whileFalse: [
-				aTimeoutValuable value ifTrue: [ ^ timeoutBlock value ].
-				self currentWorld doOneCycle.
-				self universe pulse.
-				(Delay forMilliseconds: 5) wait ].
-			^ completionBlock value ]
-		ifFalse: [
-			^ super
-				waitUntil: aConditionValuable
-				timeOutIf: aTimeoutValuable
-				onCompletion: completionBlock
-				onTimeout: timeoutBlock ]
 ]
