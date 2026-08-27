@@ -11,10 +11,6 @@ Class {
 	#category : #'Bloc-Universe - Host'
 }
 
-{ #category : #testing }
-BlPulseLoopHost class >> isSingleton [
-	^ true
-]
 
 { #category : #initialization }
 BlPulseLoopHost >> initialize [

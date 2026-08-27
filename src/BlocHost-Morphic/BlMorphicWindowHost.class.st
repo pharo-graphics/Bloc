@@ -3,14 +3,9 @@ I am a host that opens spaces as windows in the Morphic World.
 "
 Class {
 	#name : #BlMorphicWindowHost,
-	#superclass : #BlPulseLoopHost,
+	#superclass : #BlSingletonHost,
 	#category : #'BlocHost-Morphic-Window'
 }
-
-{ #category : #testing }
-BlMorphicWindowHost class >> isSingleton [
-	^ true
-]
 
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> isSupported [

@@ -16,7 +16,7 @@ BlSDL3GPUHostDemo class >> openGPURendererSpace [
 	space := BlSpace new.
 	space extent: 600 @ 400.
 	space title: 'Bloc SDL3 GPU Host Demo'.
-	space host: BlOSSDL3Host new.
+	space host: BlOSSDL3Host default.
 
 	element := BlElement new
 		extent: 200 @ 200;
@@ -63,7 +63,7 @@ BlSDL3GPUHostDemo class >> openSimpleSpace [
 	space := BlSpace new.
 	space extent: 600 @ 400.
 	space title: 'Bloc SDL3 GPU Host Demo'.
-	space host: BlOSSDL3Host new.
+	space host: BlOSSDL3Host default.
 
 	element := BlElement new
 		extent: 200 @ 200;

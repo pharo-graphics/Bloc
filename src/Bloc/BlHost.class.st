@@ -24,18 +24,6 @@ Class {
 	#category : #'Bloc-Universe - Host'
 }
 
-{ #category : #cleanup }
-BlHost class >> cleanUp [
-	default := nil
-]
-
-{ #category : #accessing }
-BlHost class >> default [
-	^ self isSingleton
-		ifTrue: [ default ifNil: [ default := self basicNew initialize; yourself ] ]
-		ifFalse: [ self basicNew initialize; yourself ]
-]
-
 { #category : #'api - lifecycle' }
 BlHost class >> isRunning [
 	self
@@ -69,9 +57,7 @@ BlHost class >> label [
 
 { #category : #'instance creation' }
 BlHost class >> new [
-	^ self isSingleton
-		ifTrue: [ self default ]
-		ifFalse: [ self basicNew initialize; yourself ]
+	^ self basicNew initialize; yourself
 ]
 
 { #category : #'driver selection' }

@@ -9,7 +9,7 @@ BlElementEffectChangeTest >> testShadowOffsetChangesInvalidationBounds [
 
 	| aSpace anElement |
 	aSpace := BlSpace new.
-	aSpace host: BlHeadlessHost new.
+	aSpace host: BlHeadlessHost default.
 	anElement := BlElement new.
 	anElement extent: 100 @ 200.
 	[

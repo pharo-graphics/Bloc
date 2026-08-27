@@ -82,7 +82,7 @@ BlDevScripter >> defaultSpace [
 	^ BlSpace new
 		  title: 'Scripter';
 		  extent: 800 @ 600;
-		  host: BlHeadlessHost new;
+		  host: BlHeadlessHost default;
 		  show;
 		  yourself
 ]

@@ -27,7 +27,7 @@ BlElementLayoutBoundaryTest >> testExactLayoutBoundary01Pulse [
 	| aSpace |
 	aSpace := self testSpaceWithExactLayoutBoundary.
 	space := aSpace.
-	aSpace host: BlHeadlessHost new.
+	aSpace host: BlHeadlessHost default.
 	aSpace show; settle.
 
 	self assert: aSpace root extent equals: 500 @ 400.
@@ -73,7 +73,7 @@ BlElementLayoutBoundaryTest >> testSpaceWithExactLayoutBoundary [
 	<sampleInstance>
 	| aSpace aContainer aLayoutBoundary aChild |
 	aSpace := BlSpace new.
-	aSpace host: BlHeadlessHost new.
+	aSpace host: BlHeadlessHost default.
 	aSpace extent: 500 @ 400.
 	aContainer := BlElement new extent: 400 @ 300.
 	aLayoutBoundary := BlElement new extent: 300 @ 200.

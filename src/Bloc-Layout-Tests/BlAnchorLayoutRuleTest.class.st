@@ -14,7 +14,7 @@ Class {
 BlAnchorLayoutRuleTest >> setUp [
 	super setUp.
 	space := BlSpace new.
-	space host: BlHeadlessHost new.
+	space host: BlHeadlessHost default.
 	space show; settle
 ]
 

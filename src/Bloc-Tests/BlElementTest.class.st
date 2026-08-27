@@ -121,7 +121,7 @@ BlElementTest >> setUp [
 
 	super setUp.
 
-	host := BlHeadlessHost new.
+	host := BlHeadlessHost default.
 	space := BlSpace new.
 	space host: host
 ]

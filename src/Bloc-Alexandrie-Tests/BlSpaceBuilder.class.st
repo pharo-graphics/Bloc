@@ -134,7 +134,7 @@ BlSpaceBuilder >> initialize [
 	
 	space := BlSpace new.
 	spaceExtent := 100 asPoint.
-	host := BlHeadlessHost new.
+	host := BlHeadlessHost default.
 
 	colorGenerator := self newColorGenerator.
 	alphabetGenerator := self newAlphabetGenerator

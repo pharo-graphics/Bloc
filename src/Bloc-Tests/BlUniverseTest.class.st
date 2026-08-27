@@ -40,7 +40,7 @@ BlUniverseTest >> testDeferSnapshotAndQuit [
 
 	| aSpace |
 	aSpace := BlSpace new
-		host: BlHeadlessHost new;
+		host: BlHeadlessHost default;
 		yourself.
 	[
 		aSpace universe deferSnapshot: false andQuit: false.
@@ -60,7 +60,7 @@ BlUniverseTest >> testSpaceOpenedSignal [
 
 	| aSpace logger |
 	aSpace := BlSpace new
-		host: BlHeadlessHost new;
+		host: BlHeadlessHost default;
 		yourself.
 	logger := MemoryLogger new.
 	[

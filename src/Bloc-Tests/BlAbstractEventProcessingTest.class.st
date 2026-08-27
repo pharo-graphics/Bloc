@@ -111,7 +111,7 @@ BlAbstractEventProcessingTest >> setUp [
 	super setUp.
 
 	space := BlSpace new.
-	space host: BlHeadlessHost new.
+	space host: BlHeadlessHost default.
 	space extent: 200 @ 200.
 	space mouseProcessor: (BlTestMouseEventProcessor space: space).
 	space focusProcessor: (BlTestFocusProcessor space: space).

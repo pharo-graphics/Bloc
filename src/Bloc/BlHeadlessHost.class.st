@@ -4,7 +4,7 @@ I am a mocked host that looks like real but does not create any windows
 "
 Class {
 	#name : #BlHeadlessHost,
-	#superclass : #BlPulseLoopHost,
+	#superclass : #BlSingletonHost,
 	#category : #'Bloc-Universe - Host Headless'
 }
 

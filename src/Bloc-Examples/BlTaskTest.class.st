@@ -58,7 +58,7 @@ BlTaskTest >> testPulseSpaceWithTask [
 	| aSpace aTask |
 	aSpace := self testAddElementWithTaskToSpace.
 	aTask := aSpace taskQueue tasks first.
-	aSpace host: BlHeadlessHost new.
+	aSpace host: BlHeadlessHost default.
 	[
 		aSpace show; settle.
 
