@@ -263,7 +263,7 @@ BlHostSpace >> universe [
 ]
 
 { #category : #'host space - accessing' }
-BlHostSpace >> universe: aBlParallelUniverse [
+BlHostSpace >> universe: aBlUniverse [
 
 	self
 		deprecated: 'HostSpace derives universe from host'
