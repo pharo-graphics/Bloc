@@ -36,17 +36,6 @@ BlHost class >> default [
 		ifFalse: [ self basicNew initialize; yourself ]
 ]
 
-{ #category : #testing }
-BlHost class >> hasUniverse [
-
-	^ self isSingleton and: [ self default hasUniverse ]
-]
-
-{ #category : #'class initialization' }
-BlHost class >> initialize [
-
-	SessionManager default registerGuiClassNamed: self name
-]
 
 { #category : #'api - lifecycle' }
 BlHost class >> isRunning [
@@ -153,12 +142,6 @@ BlHost class >> settingsOn: aBuilder [
 
 ]
 
-{ #category : #'system startup' }
-BlHost class >> shutDown [
-	self allSubclasses do: [ :eachHostClass |
-		eachHostClass hasUniverse ifTrue: [ eachHostClass default universe stop ] ]
-]
-
 { #category : #'api - lifecycle' }
 BlHost class >> start [
 	self
@@ -166,12 +149,6 @@ BlHost class >> start [
 		transformWith: '`@receiver start' -> '`@receiver default start'.
 
 	self default start
-]
-
-{ #category : #'system startup' }
-BlHost class >> startUp [
-	self allSubclasses do: [ :eachHostClass |
-		eachHostClass hasUniverse ifTrue: [ eachHostClass default universe start ] ]
 ]
 
 { #category : #'api - lifecycle' }
