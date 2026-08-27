@@ -26,13 +26,11 @@ BlElement >> aeAsForm [
 		in: [ :aSpace |
 			aSpace show.
 			[
-				aSpace deferAndSettle: [
-					aSpace root addChild: self.
-					aSpace pulse.
-					form := self basicAeAsForm.
-					self removeFromParent ].
+				aSpace deferAndSettle: [ aSpace root addChild: self ].
+				aSpace deferAndSettle: [ form := self basicAeAsForm ].
 				^ form
 			] ensure: [
+				aSpace deferAndSettle: [ self removeFromParent ].
 				aSpace close; settle ] ]
 ]
 
