@@ -18,9 +18,6 @@ Class {
 	#classVars : [
 		'PreferableHostClass'
 	],
-	#classInstVars : [
-		'default'
-	],
 	#category : #'Bloc-Universe - Host'
 }
 
