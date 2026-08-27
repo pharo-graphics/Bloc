@@ -65,18 +65,21 @@ BAExporter >> element: aBlElement [
 
 { #category : #exporting }
 BAExporter >> export [
+
 	| aCanvas aBounds |
 	element isLayoutRequested ifTrue: [
 		element isAttachedToSceneGraph
-			ifTrue: [ element space settle ]
+			ifTrue: [
+				element space host isUIProcess
+					ifTrue: [ element space pulse ]
+					ifFalse: [ element space settle ] ]
 			ifFalse: [
 				| aSpace |
 				aSpace := BlSpace new.
-				aSpace host: BlHeadlessHost default.
-				aSpace show; settle.
-				aSpace deferAndSettle: [ aSpace root addChild: element ].
-				aSpace deferAndSettle: [ element removeFromParent ].
-				aSpace close; settle ] ].
+				aSpace root addChild: element.
+				aSpace pulse.
+				aSpace root removeChildren ] ].
+
 	aBounds := element invalidationBoundsInParent.
 	aCanvas := self newCanvas: aBounds extent * scale.
 	aCanvas
@@ -84,6 +87,7 @@ BAExporter >> export [
 		pathScale: scale asPoint;
 		pathTranslate: aBounds origin negated.
 	element aeFullDrawOn: aCanvas.
+
 	^ self finishExport: aCanvas
 ]
 
