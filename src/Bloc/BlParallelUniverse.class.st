@@ -98,6 +98,12 @@ BlParallelUniverse >> defer: aValuable [
 	deferredActions nextPut: aValuable
 ]
 
+{ #category : #'api - lifecycle' }
+BlParallelUniverse >> deferSnapshot: save andQuit: quit [
+
+	self defer: [ Smalltalk snapshot: save andQuit: quit ]
+]
+
 { #category : #'api - spaces' }
 BlParallelUniverse >> detachSpace: aSpace [
 
@@ -214,7 +220,7 @@ BlParallelUniverse >> initialize [
 	host := BlHeadlessHost default.
 	deferredActions := WaitfreeQueue new.
 	pulseSemaphores := OrderedCollection new.
-	pulseSemaphoresMutex := Mutex new.
+	pulseSemaphoresMutex := Mutex new
 ]
 
 { #category : #initialization }
@@ -308,7 +314,7 @@ BlParallelUniverse >> pulse [
 	] ensure: [
 		isPulsing := false.
 		pulseSemaphoresMutex critical: [
-			semaphoresToSignal := self pulseSemaphores copy ].
+			semaphoresToSignal := pulseSemaphores copy ].
 		semaphoresToSignal do: [ :each | each signal ] ]
 ]
 
@@ -323,21 +329,10 @@ BlParallelUniverse >> pulseSynchronously [
 ]
 
 { #category : #'api - pulse' }
-BlParallelUniverse >> pulseSemaphores [
-
-	^ pulseSemaphores ifNil: [ pulseSemaphores := OrderedCollection new ]
-]
-
-{ #category : #'api - pulse' }
 BlParallelUniverse >> registerPulseSemaphore: aSemaphore [
 
-	pulseSemaphoresMutex critical: [ self pulseSemaphores add: aSemaphore ]
-]
-
-{ #category : #'api - lifecycle' }
-BlParallelUniverse >> deferSnapshot: save andQuit: quit [
-
-	self defer: [ Smalltalk snapshot: save andQuit: quit ]
+	pulseSemaphoresMutex critical: [
+		pulseSemaphores add: aSemaphore ]
 ]
 
 { #category : #'api - lifecycle' }
@@ -422,7 +417,8 @@ BlParallelUniverse >> uiProcessDo: aBlock [
 { #category : #'api - pulse' }
 BlParallelUniverse >> unregisterPulseSemaphore: aSemaphore [
 
-	pulseSemaphoresMutex critical: [ self pulseSemaphores remove: aSemaphore ifAbsent: [  ] ]
+	pulseSemaphoresMutex critical: [
+		pulseSemaphores remove: aSemaphore ifAbsent: [] ]
 ]
 
 { #category : #'api - pulse' }
