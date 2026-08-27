@@ -166,7 +166,8 @@ BAExporterTest >> testExportAsSVG [
 BAExporterTest >> testExportAttachedElementInSpace [
 
 	| space form |
-	space := BlSpace new host: BlHeadlessHost default.
+	space := BlSpace new.
+	space host: BlHeadlessHost default.
 	space root addChild: element.
 	space show; settle.
 	form := element exportAsForm.
@@ -191,7 +192,8 @@ BAExporterTest >> testExportFromForkedProcess [
 BAExporterTest >> testExportFromHostUIProcess [
 
 	| space form |
-	space := BlSpace new host: BlHeadlessHost default.
+	space := BlSpace new.
+	space host: BlHeadlessHost default.
 	space root addChild: element.
 	space show; settle.
 	space defer: [ form := element exportAsForm ].
@@ -245,7 +247,8 @@ BAExporterTest >> testExportUnattachedElementRequiringLayout [
 BAExporterTest >> testExportUnattachedFromHostUIProcess [
 
 	| space form |
-	space := BlSpace new host: BlHeadlessHost default.
+	space := BlSpace new.
+	space host: BlHeadlessHost default.
 	space show; settle.
 	space defer: [
 		| unattached |

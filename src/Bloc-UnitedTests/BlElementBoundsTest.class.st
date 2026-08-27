@@ -56,7 +56,8 @@ BlElementBoundsTest >> parentWithChild [
 	<demo>
 	| p aSpace |
 	p := self parent addChild: self child; yourself.
-	aSpace := BlSpace new host: BlHeadlessHost default.
+	aSpace := BlSpace new.
+	aSpace host: BlHeadlessHost default.
 	aSpace show; settle.
 	aSpace deferAndSettle: [ aSpace root addChild: p ].
 	aSpace deferAndSettle: [ p removeFromParent ].
@@ -428,7 +429,8 @@ BlElementBoundsTest >> testShadowEffectBoundsWithoutOffset [
 			(shadowWidth * shadowMultiplier asPoint negated
 				corner: self childExtent + (shadowWidth * shadowMultiplier asPoint)).
 	child extent: self childExtent * 2.
-	aSpace := BlSpace new host: BlHeadlessHost default.
+	aSpace := BlSpace new.
+	aSpace host: BlHeadlessHost default.
 	[
 		aSpace show; settle.
 		aSpace deferAndSettle: [ aSpace root addChild: parent ].
