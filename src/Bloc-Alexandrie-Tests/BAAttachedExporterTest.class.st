@@ -38,8 +38,7 @@ BAAttachedExporterTest >> tearDown [
 BAAttachedExporterTest >> testExportFromHostUIProcess [
 
 	| form |
-	space defer: [ form := element exportAsForm ].
-	space settle.
+	space deferAndSettle: [ form := element exportAsForm ].
 	self assert: form isNotNil.
 	self assert: form extent equals: 100 @ 50
 ]

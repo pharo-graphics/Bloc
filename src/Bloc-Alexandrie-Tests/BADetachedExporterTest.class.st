@@ -31,7 +31,7 @@ BADetachedExporterTest >> testExportUnattachedFromHostUIProcess [
 	space := BlSpace new.
 	space host: BlHeadlessHost default.
 	space show; settle.
-	space defer: [
+	space deferAndSettle: [
 		| unattached |
 		unattached := BlElement new
 			extent: 80 @ 40;
@@ -39,7 +39,6 @@ BADetachedExporterTest >> testExportUnattachedFromHostUIProcess [
 			requestLayout;
 			yourself.
 		form := unattached exportAsForm ].
-	space settle.
 	self assert: form isNotNil.
 	self assert: form extent equals: 80 @ 40.
 
