@@ -227,13 +227,8 @@ BlSpace >> defer: aBlock [
 BlSpace >> deferAndSettle: aBlock [
 	"Evaluate aBlock on the UI process and wait until the space reaches equilibrium (all cascading tasks, skins, layout, and render passes have settled)."
 
-	self isUIProcess
-		ifTrue: [
-			aBlock value.
-			[ self isSettled ] whileFalse: [ self universe pulse ] ]
-		ifFalse: [
-			self defer: aBlock.
-			self settle ]
+	self defer: aBlock.
+	self settle
 ]
 
 { #category : #'window - properties' }
@@ -1369,9 +1364,7 @@ BlSpace >> userData [
 BlSpace >> waitForDuration: aDuration [
 	"Synchronously wait for the given duration, blocked on the host's pulse loop semaphore.
 	
-	Note: This is different from `aDuration wait` because:
-	1. It blocks the active process on a pulse semaphore, waking up only on space frame pulses.
-	2. Under stepping hosts running directly on the UI process (like BlMorphicSteppingHost), it manually drives UI stepping to advance space time, preventing deadlocks that standard process sleeps would cause."
+	Note: This is different from `aDuration wait` because it blocks the active process on a pulse semaphore, waking up only on space frame pulses."
 
 	self waitUntilTrue: [ false ] forDuration: aDuration
 ]
@@ -1379,8 +1372,7 @@ BlSpace >> waitForDuration: aDuration [
 { #category : #pulse }
 BlSpace >> waitUntilTrue: aConditionValuable [
 	"Wait until the given condition block evaluates to true, synchronized with the space pulses.
-	Blocks the calling process on the host's pulse semaphore, waking up on each frame to check the condition.
-	Under stepping hosts running directly on the UI process (like BlMorphicSteppingHost), it manually drives the stepping loop to allow time to progress."
+	Blocks the calling process on the host's pulse semaphore, waking up on each frame to check the condition."
 
 	self host
 		waitUntil: aConditionValuable

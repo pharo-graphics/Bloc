@@ -201,12 +201,6 @@ BlHost class >> universe [
 	^ self default universe
 ]
 
-{ #category : #'host - testing' }
-BlHost >> canWait [
-	"Return true if the active process is allowed to wait for pending work on this host"
-
-	^ self isUIProcess not
-]
 
 { #category : #testing }
 BlHost >> hasUniverse [
@@ -283,7 +277,7 @@ BlHost >> universe [
 BlHost >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion: completionBlock onTimeout: timeoutBlock [
 	"Evaluate aConditionValuable repeatedly until it answers true. If aTimeoutValuable answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
 
-	self canWait ifFalse: [ 
+	self isUIProcess ifTrue: [ 
 		Error signal: 'Cannot wait from within the UI loop process' ].
 
 	^ self universe

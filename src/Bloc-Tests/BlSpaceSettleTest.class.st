@@ -29,15 +29,17 @@ BlSpaceSettleTest >> testDeferAndSettleEnsuresEquilibrium [
 ]
 
 { #category : #tests }
-BlSpaceSettleTest >> testDeferAndSettleFromUIProcessIsReentrant [
+BlSpaceSettleTest >> testDeferAndSettleFromUIProcessRaisesError [
 
-	| aSpace nestedExecuted |
+	| aSpace errorRaised |
 	aSpace := self newTestingSpace.
-	nestedExecuted := false.
-	aSpace deferAndSettle: [
-		aSpace deferAndSettle: [ nestedExecuted := true ] ].
-	self assert: nestedExecuted.
-	self assert: aSpace isSettled
+	errorRaised := false.
+	aSpace defer: [
+		[ aSpace deferAndSettle: [ ] ]
+			on: Error
+			do: [ :err | errorRaised := true ] ].
+	aSpace settle.
+	self assert: errorRaised
 ]
 
 { #category : #tests }
