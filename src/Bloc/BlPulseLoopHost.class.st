@@ -16,11 +16,11 @@ BlPulseLoopHost class >> isSingleton [
 	^ true
 ]
 
-
 { #category : #initialization }
 BlPulseLoopHost >> initialize [
+
 	super initialize.
-	pulseLoop := BlHostPulseLoop forHost: self
+	pulseLoop := BlHostPulseLoop host: self
 ]
 
 { #category : #'api - lifecycle' }
@@ -33,7 +33,7 @@ BlPulseLoopHost >> isRunning [
 BlPulseLoopHost >> isUIProcess [
 	"Return true if the active process is the UI loop process of this host"
 
-	^ pulseLoop isNotNil and: [ pulseLoop isRunningInTheSameProcess ]
+	^ pulseLoop isNotNil and: [ pulseLoop isRunningInActiveProcess ]
 ]
 
 { #category : #accessing }

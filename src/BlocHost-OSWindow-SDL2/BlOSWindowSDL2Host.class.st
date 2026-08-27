@@ -13,12 +13,6 @@ BlOSWindowSDL2Host class >> isSupported [
 	^ OSWindowDriver current className = #OSSDL2Driver
 ]
 
-{ #category : #printing }
-BlOSWindowSDL2Host >> label [
-
-	^ 'SDL2'
-]
-
 { #category : #'driver selection' }
 BlOSWindowSDL2Host class >> priority [
 	
@@ -29,6 +23,12 @@ BlOSWindowSDL2Host class >> priority [
 BlOSWindowSDL2Host >> keyboardKeyTable [
 
 	^ BlOSWindowSDL2KeyboardKeyTable default
+]
+
+{ #category : #printing }
+BlOSWindowSDL2Host >> label [
+
+	^ 'SDL2'
 ]
 
 { #category : #private }

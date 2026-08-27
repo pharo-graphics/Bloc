@@ -16,31 +16,18 @@ Class {
 		'loopProcess',
 		'pulsePeriodMS',
 		'msToWaitForBackgroundProcess',
-		'pulseStartMS',
-		'pulseDurationMS'
+		'pulseDurationMS',
+		'processPriority'
 	],
 	#category : #'Bloc-Universe - Host'
 }
 
 { #category : #'instance creation' }
-BlHostPulseLoop class >> forHost: aHost [
+BlHostPulseLoop class >> host: aBlHost [
 
 	^ self basicNew
-		  initialize;
-		  host: aHost;
-		  yourself
-]
-
-{ #category : #'instance creation' }
-BlHostPulseLoop class >> new [
-
-	self error: 'Use #forHost: instead'
-]
-
-{ #category : #period }
-BlHostPulseLoop >> defaultPulsePeriod [
-
-	^ 15 milliSeconds
+		initializeWithHost: aBlHost;
+		yourself
 ]
 
 { #category : #debug }
@@ -48,13 +35,13 @@ BlHostPulseLoop >> forceStartNewUIProcess [
 	"I should only be used by the logic for opening the debugger.
 	
 	I create and start a new UI thread without stopping the previous one.
-	Normally this leads to incorrect behaviou in Bloc UI process. However 
-	if I am called from the current Bloc UI process when an error happened in 
-	the actual process, and after calling me my sender terminates or suspends 
+	Normally this leads to incorrect behaviour in Bloc UI process. However 
+	if I am sent from the current Bloc UI process when an error happened in 
+	the actual process, and after sending me, my sender terminates or suspends 
 	the process my usage should be safe."
 	
 	loopProcess := self newLoopProcess.
-	loopProcess resume.
+	loopProcess resume
 ]
 
 { #category : #debug }
@@ -62,7 +49,7 @@ BlHostPulseLoop >> forceStartOfUIProcess: aProces [
 	"I should only be used by the logic for closing the debugger."
 	
 	loopProcess := aProces.
-	loopProcess resume.
+	loopProcess resume
 ]
 
 { #category : #accessing }
@@ -71,18 +58,15 @@ BlHostPulseLoop >> host [
 	^ host
 ]
 
-{ #category : #accessing }
-BlHostPulseLoop >> host: aHost [
-
-	host := aHost
-]
-
 { #category : #initialization }
-BlHostPulseLoop >> initialize [
+BlHostPulseLoop >> initializeWithHost: aBlHost [
 
-	super initialize.
+	self initialize.
 
-	self pulsePeriod: self defaultPulsePeriod
+	host := aBlHost.
+	processPriority := Processor userSchedulingPriority.
+	
+	self pulsePeriod: 15 milliSeconds
 ]
 
 { #category : #testing }
@@ -92,9 +76,9 @@ BlHostPulseLoop >> isRunning [
 ]
 
 { #category : #testing }
-BlHostPulseLoop >> isRunningInTheSameProcess [
+BlHostPulseLoop >> isRunningInActiveProcess [
 
-	^ Processor activeProcess effectiveProcess == loopProcess
+	^ Processor activeProcess == loopProcess
 ]
 
 { #category : #'loop process' }
@@ -106,19 +90,18 @@ BlHostPulseLoop >> loop [
 { #category : #'loop process' }
 BlHostPulseLoop >> loopIteration [
 
-	[  | universe |
-		universe := host universe.
+	[	| pulseStartMS |
 		pulseStartMS := Time millisecondClockValue.
-		universe pulse.
+		host universe pulse.
 		pulseDurationMS := Time millisecondClockValue - pulseStartMS.
-		self waitUntilNextPulse. ]
+		self waitUntilNextPulse ]
 	on: Exception
 	do: [ :e |
 		self forceStartNewUIProcess.
 		e pass ].
 
 	"Returns true to continue looping"
-	^ self isRunningInTheSameProcess 
+	^ self isRunningInActiveProcess 
 ]
 
 { #category : #accessing }
@@ -139,13 +122,20 @@ BlHostPulseLoop >> newLoopProcess [
 { #category : #'loop process' }
 BlHostPulseLoop >> processName [
 
-	^ 'Bloc UI Loop ({1})' format: { host }
+	^ 'Bloc Host Loop ({1})' format: { host }
 ]
 
 { #category : #'loop process' }
 BlHostPulseLoop >> processPriority [
 
-	^ 40
+	^ processPriority ifNil: [ Processor userSchedulingPriority ]
+]
+
+{ #category : #'loop process' }
+BlHostPulseLoop >> processPriority: aNumber [
+	"Change the Process priority (takes effect on next #start)"
+
+	processPriority := aNumber
 ]
 
 { #category : #period }
@@ -158,7 +148,7 @@ BlHostPulseLoop >> pulsePeriod [
 BlHostPulseLoop >> pulsePeriod: aDuration [
 
 	pulsePeriodMS := aDuration asMilliSeconds.
-	msToWaitForBackgroundProcess := (pulsePeriodMS // 2) min: 1.
+	msToWaitForBackgroundProcess := (pulsePeriodMS // 2) min: 1
 ]
 
 { #category : #lifecycle }
@@ -174,9 +164,9 @@ BlHostPulseLoop >> start [
 BlHostPulseLoop >> stop [
 
 	| currentProcess |
-
 	self isRunning ifFalse: [ ^ self ].
 	
+	"Store in temporary variable to support stopping from the loopProcess itself"
 	currentProcess := loopProcess.
 	loopProcess := nil.
 	currentProcess terminate
@@ -189,12 +179,11 @@ BlHostPulseLoop >> waitUntilNextPulse [
 	| msToWait |
 	"Since a pulse can take longer than #pulsePeriod, msToWait may be negative here
 	(meaning that we shouldn't wait for the next pulse)"
-
-	"No need to wait"	
-	pulseDurationMS >= pulsePeriodMS ifTrue: [
-		Processor yield. ^ self ].
-	
-	"Need to wait"
 	msToWait := pulsePeriodMS - pulseDurationMS.
+
+	"Even if there is no need to wait, yield to other processes of the same priority"
+	msToWait <= 0 ifTrue: [ ^ Processor yield ].
+	
+	"We need to wait"
 	(Delay forMilliseconds: msToWait) wait
 ]

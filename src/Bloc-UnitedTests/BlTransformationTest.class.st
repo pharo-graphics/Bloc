@@ -3,17 +3,15 @@ I have been automatically converted and probably manually tweaked from BlTransfo
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlTransformationTest',
-	#superclass : 'TestCase',
+	#name : #BlTransformationTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-UnitedTests-Math',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Math'
+	#category : #'Bloc-UnitedTests-Math'
 }
 
-{ #category : 'test seeds' }
+{ #category : #'test seeds' }
 BlTransformationTest >> element [
 	^ BlElement new
 		background: Color blue;
@@ -22,17 +20,17 @@ BlTransformationTest >> element [
 		yourself
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlTransformationTest >> extent [
 	^ 100 @ 100
 ]
 
-{ #category : 'hooks' }
+{ #category : #hooks }
 BlTransformationTest >> position [
 	^ 100 @ 100
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlTransformationTest >> setUp [
 	super setUp.
 	space := BlSpace new.
@@ -40,7 +38,7 @@ BlTransformationTest >> setUp [
 	space show; settle
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlTransformationTest >> tearDown [
 	space ifNotNil: [
 		space close; settle.
@@ -48,7 +46,7 @@ BlTransformationTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationTest >> testElTxBoundsWithScale [
 	| g n |
 	n := BlElement new
@@ -79,7 +77,7 @@ BlTransformationTest >> testElTxBoundsWithScale [
 		equals: ((100 @ 100) negated extent: 400 @ 400)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationTest >> testInheritFromIdentity [
 	| n |
 	n := BlElement new
@@ -98,7 +96,7 @@ BlTransformationTest >> testInheritFromIdentity [
 		equals: ((50 @ 50) negated corner: 150 @ 150)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationTest >> testReflection [
 	
 	| element |
@@ -114,7 +112,7 @@ BlTransformationTest >> testReflection [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationTest >> testRotate [
 	| element expectedOrigin expectedExtent |
 	element := self element.
@@ -137,7 +135,7 @@ BlTransformationTest >> testRotate [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationTest >> testScale [
 	| element expectedOrigin expectedExtent |
 	element := self element.
@@ -158,7 +156,7 @@ BlTransformationTest >> testScale [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationTest >> testScaleBy [
 	| n |
 	n := BlElement new
@@ -182,7 +180,7 @@ BlTransformationTest >> testScaleBy [
 	self assert: n transformedBounds equals: (0 @ 0 corner: 100 @ 100)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationTest >> testScaleTo [
 	| n |
 	n := BlElement new
@@ -205,7 +203,7 @@ BlTransformationTest >> testScaleTo [
 	self assert: n transformedBounds equals: (25 @ 25 corner: 75 @ 75)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationTest >> testTranslate [
 	| element expectedOrigin expectedExtent |
 	element := self element.
@@ -226,7 +224,7 @@ BlTransformationTest >> testTranslate [
 	^ element
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlTransformationTest >> testTranslateTo [
 	| n |
 	n := BlElement new

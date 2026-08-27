@@ -36,7 +36,7 @@ BARenderTest >> actualForm [
 		
 	| aSpace aForm |
 	aSpace := self formBehavior
-		host: BlHeadlessHost new; 
+		host: BlHeadlessHost default;
 		perform: formSelector;
 		space.
 	aSpace show.

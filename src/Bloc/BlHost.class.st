@@ -36,7 +36,6 @@ BlHost class >> default [
 		ifFalse: [ self basicNew initialize; yourself ]
 ]
 
-
 { #category : #'api - lifecycle' }
 BlHost class >> isRunning [
 	self
@@ -190,7 +189,6 @@ BlHost class >> universe [
 
 	^ self default universe
 ]
-
 
 { #category : #testing }
 BlHost >> hasUniverse [

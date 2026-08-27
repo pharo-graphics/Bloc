@@ -1,15 +1,13 @@
 Class {
-	#name : 'BlElementEventTest',
-	#superclass : 'TestCase',
+	#name : #BlElementEventTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'space'
 	],
-	#category : 'Bloc-UnitedTests-Event',
-	#package : 'Bloc-UnitedTests',
-	#tag : 'Event'
+	#category : #'Bloc-UnitedTests-Event'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 BlElementEventTest >> newChild [
 
 	^ BlElement new
@@ -18,7 +16,7 @@ BlElementEventTest >> newChild [
 		  yourself
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlElementEventTest >> newContainer [
 
 	^ BlElement new
@@ -31,7 +29,7 @@ BlElementEventTest >> newContainer [
 		  yourself
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlElementEventTest >> newParent [
 
 	^ BlElement new
@@ -40,7 +38,7 @@ BlElementEventTest >> newParent [
 		  yourself
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlElementEventTest >> setUp [
 	super setUp.
 	space := BlSpace new.
@@ -48,7 +46,7 @@ BlElementEventTest >> setUp [
 	space show; settle
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 BlElementEventTest >> tearDown [
 	space ifNotNil: [
 		space close; settle.
@@ -56,7 +54,7 @@ BlElementEventTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementEventTest >> testAddedToParent [
 
 	| wasAdded parent child container |
@@ -78,7 +76,7 @@ BlElementEventTest >> testAddedToParent [
 	self assert: wasAdded equals: 1
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementEventTest >> testBackgroundChanged [
 
 	| backgroundChanged element |
@@ -93,7 +91,7 @@ BlElementEventTest >> testBackgroundChanged [
 	self assert: backgroundChanged equals: 1
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementEventTest >> testBorderChanged [
 
 	| borderChanged element |
@@ -111,7 +109,7 @@ BlElementEventTest >> testBorderChanged [
 	self assert: borderChanged equals: 1
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementEventTest >> testExtentChanged [
 	| extentChanged element |
 	extentChanged := 0.
@@ -126,7 +124,7 @@ BlElementEventTest >> testExtentChanged [
 	self assert: extentChanged equals: 1
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementEventTest >> testExtentChangedChangingWithTheSameSizeDoesNotRaiseEvent [
 	| extentChanged element |
 	extentChanged := 0.
@@ -139,7 +137,7 @@ BlElementEventTest >> testExtentChangedChangingWithTheSameSizeDoesNotRaiseEvent 
 	self assert: extentChanged equals: 0
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementEventTest >> testLayoutChanged [
 
 	| layoutChanged element |
@@ -154,7 +152,7 @@ BlElementEventTest >> testLayoutChanged [
 	self assert: layoutChanged equals: 1
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementEventTest >> testPositionChanged [
 	| positionChanged parent child |
 	positionChanged := 0.
@@ -171,7 +169,7 @@ BlElementEventTest >> testPositionChanged [
 	self assert: positionChanged equals: 1
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementEventTest >> testPositionChangedRelocatingOnSamePositionDoesNotRaiseEvent [
 	| positionChanged parent child |
 	positionChanged := 0.
@@ -186,7 +184,7 @@ BlElementEventTest >> testPositionChangedRelocatingOnSamePositionDoesNotRaiseEve
 	self assert: positionChanged equals: 0
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlElementEventTest >> testRemovedFromParent [
 
 	| wasRemoved parent child container |
