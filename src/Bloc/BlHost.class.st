@@ -50,7 +50,10 @@ BlHost class >> initialize [
 
 { #category : #'api - lifecycle' }
 BlHost class >> isRunning [
-	self deprecated: 'Use default isRunning instead'.
+	self
+		deprecated: 'Use #default #isRunning instead'
+		transformWith: '`@receiver isRunning' -> '`@receiver default isRunning'.
+
 	^ self default isRunning
 ]
 
@@ -68,6 +71,10 @@ BlHost class >> isSupported [
 { #category : #'driver selection' }
 BlHost class >> label [
 	"Return a human readable title to identify myself."
+
+	self
+		deprecated: 'Use #default #label instead'
+		transformWith: '`@receiver label' -> '`@receiver default label'.
 
 	^ self default label
 ]
@@ -88,14 +95,20 @@ BlHost class >> pickHost [
 
 { #category : #settings }
 BlHost class >> preferableHostClass [
-	self deprecated: 'Use BlHostRegistry default preferredHost class instead'.
+	self
+		deprecated: 'Use BlHostRegistry default preferredHost class instead'
+		transformWith: '`@receiver preferableHostClass' -> 'BlHostRegistry default preferredHost class'.
+
 	^ BlHostRegistry default preferredHost class
 ]
 
 { #category : #settings }
 BlHost class >> preferableHostClass: aHostClass [
 	| matchingHost |
-	self deprecated: 'Use BlHostRegistry default preferredHost: instead'.
+	self
+		deprecated: 'Use BlHostRegistry default preferredHost: instead'
+		transformWith: '`@receiver preferableHostClass: `@arg' -> 'BlHostRegistry default preferredHost: (`@arg default)'.
+
 	matchingHost := BlHostRegistry default availableHosts 
 		detect: [ :each | each class = aHostClass ]
 		ifNone: [ 
@@ -135,7 +148,7 @@ BlHost class >> settingsOn: aBuilder [
 		order: 1;
 		label: 'Preferable host';
 		domainValues: (self supportedHostClasses
-			collect: [ :aHostClass | aHostClass label -> aHostClass ]);
+			collect: [ :aHostClass | aHostClass default label -> aHostClass ]);
 		description: 'Choose the option that spaces will use to open, unless they have a particular host.'.
 
 ]
@@ -212,7 +225,7 @@ BlHost >> hasUniverse [
 BlHost >> isRunning [
 	"Return true if host is initialized and running"
 
-	^ self class isRunning
+	^ false
 ]
 
 { #category : #'host - testing' }
