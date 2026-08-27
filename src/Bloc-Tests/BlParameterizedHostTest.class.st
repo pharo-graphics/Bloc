@@ -89,11 +89,6 @@ BlParameterizedHostTest >> newTestingSpace [
 	^ aSpace
 ]
 
-{ #category : #running }
-BlParameterizedHostTest >> runCase [
-
-	^ super runCase
-]
 
 { #category : #running }
 BlParameterizedHostTest >> setUp [
