@@ -52,11 +52,6 @@ BlHost class >> label [
 	^ self default label
 ]
 
-{ #category : #'instance creation' }
-BlHost class >> new [
-	^ self basicNew initialize; yourself
-]
-
 { #category : #'driver selection' }
 BlHost class >> pickHost [
 	"Answer the preferred host instance."
