@@ -129,8 +129,6 @@ BlSpace >> close [
 	"Request closing this space. This might happen in a host process (async). 
 	This space can be reopened via `show`, either with current host or with another host."
 	
-	self isOpened ifFalse: [ ^ self ].
-
 	self universe defer: [ self universe closeSpace: self ]
 ]
 
