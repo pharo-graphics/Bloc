@@ -35,6 +35,27 @@ BAAttachedExporterTest >> tearDown [
 ]
 
 { #category : #tests }
+BAAttachedExporterTest >> testAeAsFormFromHostUIProcess [
+
+	| form |
+	space deferAndSettle: [ form := element aeAsForm ].
+	self assert: form isNotNil.
+	self assert: form extent equals: 100 @ 50
+]
+
+{ #category : #tests }
+BAAttachedExporterTest >> testAeAsFormWithPendingLayoutFromHostUIProcessErrors [
+
+	| raisedError |
+	raisedError := false.
+	space deferAndSettle: [
+		element requestLayout.
+		self should: [ element aeAsForm ] raise: Error.
+		raisedError := true ].
+	self assert: raisedError
+]
+
+{ #category : #tests }
 BAAttachedExporterTest >> testExportFromHostUIProcess [
 
 	| form |
