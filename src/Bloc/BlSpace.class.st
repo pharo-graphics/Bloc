@@ -228,8 +228,7 @@ BlSpace >> denyUIProcess [
 	"Signal an error if the active process is the UI process for this space.
 	Blocking synchronization from the UI process would deadlock the pulse loop."
 
-	self isUIProcess ifTrue: [
-		self error: 'Cannot perform blocking synchronization from the UI process as it would deadlock the pulse loop.' ]
+	self host denyUIProcess
 ]
 
 { #category : #pulse }
