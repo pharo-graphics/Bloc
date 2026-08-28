@@ -25,22 +25,18 @@ BADetachedExporterTest >> testExportUnattachedElementRequiringLayout [
 ]
 
 { #category : #tests }
-BADetachedExporterTest >> testExportUnattachedFromHostUIProcess [
+BADetachedExporterTest >> testExportUnattachedFromHostUIProcess
 
-	| space form |
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space show; settle.
-	space deferAndSettle: [
-		| unattached |
-		unattached := BlElement new
-			extent: 80 @ 40;
-			background: Color yellow;
-			requestLayout;
-			yourself.
-		form := unattached exportAsForm ].
+	| form |
+	BlElement new inHeadlessSpaceDo: [ :space |
+		space deferAndSettle: [
+			| unattached |
+			unattached := BlElement new
+				extent: 80 @ 40;
+				background: Color yellow;
+				requestLayout;
+				yourself.
+			form := unattached exportAsForm ] ].
 	self assert: form isNotNil.
-	self assert: form extent equals: 80 @ 40.
-
-	space close; settle
+	self assert: form extent equals: 80 @ 40
 ]

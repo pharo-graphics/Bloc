@@ -692,3 +692,28 @@ BlElementTest >> testWithAllChildrenDepthFirstDoWhile [
 		assert: (allElements collect: [ :e | e id asSymbol ]) asArray
 		equals: #( #child1 #child2 #parent)
 ]
+
+{ #category : #tests }
+BlElementTest >> testInHeadlessSpaceDo [
+
+	| element executed capturedSpace result |
+	element := BlElement new.
+	element extent: 100 @ 50.
+	executed := false.
+
+	self deny: element isAttachedToSceneGraph.
+
+	result := element inHeadlessSpaceDo: [ :sp |
+		executed := true.
+		capturedSpace := sp.
+		self assert: element isAttachedToSceneGraph.
+		self assert: element space equals: sp.
+		self assert: sp isOpened.
+		self assert: sp host equals: BlHeadlessHost default.
+		#blockResult ].
+
+	self assert: executed.
+	self assert: result equals: #blockResult.
+	self deny: element isAttachedToSceneGraph.
+	self deny: capturedSpace isOpened
+]
