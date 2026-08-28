@@ -252,8 +252,6 @@ BlHost >> denyUIProcess [
 BlHost >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion: completionBlock onTimeout: timeoutBlock [
 	"Evaluate aConditionValuable repeatedly until it answers true. If aTimeoutValuable answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
 
-	self denyUIProcess.
-
 	^ self universe
 		  waitUntil: aConditionValuable
 		  timeOutIf: aTimeoutValuable
