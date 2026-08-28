@@ -694,7 +694,7 @@ BlElementTest >> testWithAllChildrenDepthFirstDoWhile [
 ]
 
 { #category : #tests }
-BlElementTest >> testInHeadlessSpaceDo [
+BlElementTest >> testInNewHeadlessSpaceDo [
 
 	| element executed capturedSpace result |
 	element := BlElement new.
@@ -703,7 +703,7 @@ BlElementTest >> testInHeadlessSpaceDo [
 
 	self deny: element isAttachedToSceneGraph.
 
-	result := element inHeadlessSpaceDo: [ :sp |
+	result := element inNewHeadlessSpaceDo: [ :sp |
 		executed := true.
 		capturedSpace := sp.
 		self assert: element isAttachedToSceneGraph.
@@ -716,4 +716,15 @@ BlElementTest >> testInHeadlessSpaceDo [
 	self assert: result equals: #blockResult.
 	self deny: element isAttachedToSceneGraph.
 	self deny: capturedSpace isOpened
+]
+
+{ #category : #tests }
+BlElementTest >> testInNewSpace [
+
+	| element aSpace |
+	element := BlElement new.
+	aSpace := element inNewSpace.
+	self assert: aSpace root children size equals: 1.
+	self assert: aSpace root children first equals: element.
+	self deny: aSpace isOpened
 ]

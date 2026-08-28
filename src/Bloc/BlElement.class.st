@@ -2046,7 +2046,9 @@ BlElement >> ignoreRequestLayoutDuring: aBlock [
 BlElement >> inSpace [
 
 	| sp |
-	self deprecated: 'Use #inHeadlessSpaceDo: or create a BlSpace explicitly'.
+	self
+		deprecated: 'Use #inNewSpace instead'
+		transformWith: '`@receiver inSpace' -> '`@receiver inNewSpace'.
 
 	sp := BlSpace new.
 	sp root addChild: self.
@@ -3159,6 +3161,16 @@ BlElement >> opacity: aNumber [
 
 { #category : #convenience }
 BlElement >> inHeadlessSpaceDo: aBlock [
+
+	self
+		deprecated: 'Use #inNewHeadlessSpaceDo: instead'
+		transformWith: '`@receiver inHeadlessSpaceDo: `@arg' -> '`@receiver inNewHeadlessSpaceDo: `@arg'.
+
+	^ self inNewHeadlessSpaceDo: aBlock
+]
+
+{ #category : #convenience }
+BlElement >> inNewHeadlessSpaceDo: aBlock [
 	"Open the receiver in a new headless space, settle it, evaluate aBlock with the space (and the receiver), and ensure the space is closed and settled upon completion. Answer the result of evaluating aBlock."
 
 	| aSpace |
@@ -3174,24 +3186,32 @@ BlElement >> inHeadlessSpaceDo: aBlock [
 ]
 
 { #category : #convenience }
-BlElement >> openInNewSpace [
-
-	self
-		deprecated: 'Use #openInSpace instead'
-		transformWith: '`@receiver openInNewSpace' -> '`@receiver openInSpace'.
-
-	^ self openInSpace
-]
-
-{ #category : #convenience }
-BlElement >> openInSpace [
-	"Add self to a new BlSpace and show it. Answer such space."
+BlElement >> inNewSpace [
+	"Add self to a new BlSpace. Answer such space without opening it."
 
 	| aSpace |
 	aSpace := BlSpace new.
 	aSpace root addChild: self.
-	aSpace show.
 	^ aSpace
+]
+
+{ #category : #convenience }
+BlElement >> openInNewSpace [
+	"Add self to a new BlSpace and show it. Answer such space."
+
+	^ self inNewSpace
+		show;
+		yourself
+]
+
+{ #category : #convenience }
+BlElement >> openInSpace [
+
+	self
+		deprecated: 'Use #openInNewSpace instead'
+		transformWith: '`@receiver openInSpace' -> '`@receiver openInNewSpace'.
+
+	^ self openInNewSpace
 ]
 
 { #category : #'geometry bounds' }

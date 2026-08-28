@@ -28,7 +28,7 @@ BADetachedExporterTest >> testExportUnattachedElementRequiringLayout [
 BADetachedExporterTest >> testExportUnattachedFromHostUIProcess [
 
 	| form |
-	BlElement new inHeadlessSpaceDo: [ :space |
+	BlElement new inNewHeadlessSpaceDo: [ :space |
 		space deferAndSettle: [
 			| unattached |
 			unattached := BlElement new
