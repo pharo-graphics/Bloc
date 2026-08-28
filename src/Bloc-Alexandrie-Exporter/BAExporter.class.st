@@ -70,7 +70,7 @@ BAExporter >> export [
 	element isLayoutRequested ifTrue: [
 		element isAttachedToSceneGraph
 			ifTrue: [
-				element space assertNotUIProcess.
+				element space denyUIProcess.
 				element space settle ]
 			ifFalse: [
 				element forceLayout ] ].

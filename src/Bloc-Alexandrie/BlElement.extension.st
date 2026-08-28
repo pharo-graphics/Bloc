@@ -19,7 +19,7 @@ BlElement >> aeAsForm [
 	| form |
 	self isAttachedToSceneGraph ifTrue: [
 		self space host isUIProcess ifTrue: [
-			self isLayoutRequested ifTrue: [ self space assertNotUIProcess ].
+			self isLayoutRequested ifTrue: [ self space denyUIProcess ].
 			^ self basicAeAsForm ].
 		self space deferAndSettle: [ form := self basicAeAsForm ].
 		^ form ].
