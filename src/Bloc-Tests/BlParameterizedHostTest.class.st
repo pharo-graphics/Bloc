@@ -32,7 +32,7 @@ BlParameterizedHostTest class >> isAbstract [
 BlParameterizedHostTest class >> onlyHeadlessHost [
 	"Return true if parameterized host tests should run exclusively on BlHeadlessHost"
 
-	^ OnlyHeadlessHost ifNil: [ false ]
+	^ OnlyHeadlessHost ifNil: [ true ]
 ]
 
 { #category : #accessing }
@@ -51,7 +51,7 @@ BlParameterizedHostTest class >> preferencesOn: aBuilder [
 		order: 10;
 		label: 'Test on headless host only';
 		description: 'When enabled, BlParameterizedHostTest suites run only on BlHeadlessHost instead of all supported host classes, speeding up test runs.';
-		default: [ false ]
+		default: [ true ]
 ]
 
 { #category : #'building suites' }
