@@ -11,7 +11,6 @@ Class {
 	#category : #'Bloc-Universe - Host'
 }
 
-
 { #category : #initialization }
 BlPulseLoopHost >> initialize [
 

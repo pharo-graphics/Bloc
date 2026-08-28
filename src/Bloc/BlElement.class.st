@@ -2042,17 +2042,40 @@ BlElement >> ignoreRequestLayoutDuring: aBlock [
 			ifFalse: [ flags clearShouldIgnoreLayoutRequests ] ]
 ]
 
+{ #category : #convenience }
+BlElement >> inNewHeadlessSpaceDo: aBlock [
+	"Open the receiver in a new headless space, settle it, evaluate aBlock with the space (and the receiver), and ensure the space is closed and settled upon completion. Answer the result of evaluating aBlock."
+
+	| aSpace |
+	aSpace := BlSpace new.
+	aSpace host: BlHeadlessHost default.
+	aSpace root addChild: self.
+	^ [
+		aSpace show; settle.
+		aBlock cull: aSpace cull: self
+	] ensure: [
+		aSpace close; settle.
+		self removeFromParent ]
+]
+
+{ #category : #convenience }
+BlElement >> inNewSpace [
+	"Add self to a new BlSpace. Answer such space without opening it."
+
+	| aSpace |
+	aSpace := BlSpace new.
+	aSpace root addChild: self.
+	^ aSpace
+]
+
 { #category : #'api - space' }
 BlElement >> inSpace [
 
-	| sp |
 	self
 		deprecated: 'Use #inNewSpace instead'
 		transformWith: '`@receiver inSpace' -> '`@receiver inNewSpace'.
 
-	sp := BlSpace new.
-	sp root addChild: self.
-	^ sp
+	^ self inNewSpace
 ]
 
 { #category : #processing }
@@ -3157,32 +3180,6 @@ BlElement >> opacity: aNumber [
 	visuals := visuals opacity: aNewOpacity.
 
 	self invalidate
-]
-
-{ #category : #convenience }
-BlElement >> inNewHeadlessSpaceDo: aBlock [
-	"Open the receiver in a new headless space, settle it, evaluate aBlock with the space (and the receiver), and ensure the space is closed and settled upon completion. Answer the result of evaluating aBlock."
-
-	| aSpace |
-	aSpace := BlSpace new.
-	aSpace host: BlHeadlessHost default.
-	aSpace root addChild: self.
-	^ [
-		aSpace show; settle.
-		aBlock cull: aSpace cull: self
-	] ensure: [
-		aSpace close; settle.
-		self removeFromParent ]
-]
-
-{ #category : #convenience }
-BlElement >> inNewSpace [
-	"Add self to a new BlSpace. Answer such space without opening it."
-
-	| aSpace |
-	aSpace := BlSpace new.
-	aSpace root addChild: self.
-	^ aSpace
 ]
 
 { #category : #convenience }
