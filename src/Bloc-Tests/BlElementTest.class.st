@@ -696,16 +696,18 @@ BlElementTest >> testWithAllChildrenDepthFirstDoWhile [
 { #category : #tests }
 BlElementTest >> testInNewHeadlessSpaceDo [
 
-	| element executed capturedSpace result |
+	| element executed capturedSpace capturedProcess result senderProcess |
 	element := BlElement new.
 	element extent: 100 @ 50.
 	executed := false.
+	senderProcess := Processor activeProcess.
 
 	self deny: element isAttachedToSceneGraph.
 
 	result := element inNewHeadlessSpaceDo: [ :sp |
 		executed := true.
 		capturedSpace := sp.
+		capturedProcess := Processor activeProcess.
 		self assert: element isAttachedToSceneGraph.
 		self assert: element space equals: sp.
 		self assert: sp isOpened.
@@ -713,6 +715,7 @@ BlElementTest >> testInNewHeadlessSpaceDo [
 		#blockResult ].
 
 	self assert: executed.
+	self assert: capturedProcess equals: senderProcess.
 	self assert: result equals: #blockResult.
 	self deny: element isAttachedToSceneGraph.
 	self deny: capturedSpace isOpened
