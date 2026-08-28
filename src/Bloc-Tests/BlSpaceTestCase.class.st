@@ -1,6 +1,6 @@
 "
 I am an abstract base class for test cases that require a BlSpace fixture.
-I provide automatic lifecycle management (opening in setUp and closing in tearDown), leak prevention in runCase, and convenience helper methods.
+I provide automatic lifecycle management (opening in setUp and closing in tearDown) and leak prevention in runCase.
 "
 Class {
 	#name : #BlSpaceTestCase,
@@ -10,26 +10,6 @@ Class {
 	],
 	#category : #'Bloc-Tests-Space'
 }
-
-{ #category : #accessing }
-BlSpaceTestCase >> space [
-
-	^ space
-]
-
-{ #category : #adding }
-BlSpaceTestCase >> addChild: anElement [
-
-	space root addChild: anElement.
-	space settle.
-	^ anElement
-]
-
-{ #category : #actions }
-BlSpaceTestCase >> deferAndSettle: aBlock [
-
-	space deferAndSettle: aBlock
-]
 
 { #category : #running }
 BlSpaceTestCase >> host [
@@ -47,12 +27,6 @@ BlSpaceTestCase >> runCase [
 				reject: [ :each | initialSpaces includes: each ]
 				thenDo: [ :each |
 					[ each close; settle ] on: Exception do: [ ] ] ]
-]
-
-{ #category : #actions }
-BlSpaceTestCase >> settle [
-
-	space settle
 ]
 
 { #category : #running }

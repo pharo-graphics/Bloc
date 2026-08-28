@@ -1,6 +1,5 @@
 "
-I am a mocked host space that behaves just like a real one but is invisible and does not render anything
-
+I am an in-memory host space that supports window properties and layout measurement without opening an OS display window.
 "
 Class {
 	#name : #BlHeadlessHostSpace,

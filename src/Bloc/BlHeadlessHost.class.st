@@ -1,6 +1,5 @@
 "
-I am a mocked host that looks like real but does not create any windows
-
+I am a headless host that manages space lifecycles, pulse loops, layout, and event processing in-memory without opening an OS display window.
 "
 Class {
 	#name : #BlHeadlessHost,
