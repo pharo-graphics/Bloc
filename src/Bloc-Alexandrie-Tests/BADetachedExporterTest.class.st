@@ -25,7 +25,7 @@ BADetachedExporterTest >> testExportUnattachedElementRequiringLayout [
 ]
 
 { #category : #tests }
-BADetachedExporterTest >> testExportUnattachedFromHostUIProcess
+BADetachedExporterTest >> testExportUnattachedFromHostUIProcess [
 
 	| form |
 	BlElement new inHeadlessSpaceDo: [ :space |
