@@ -375,8 +375,8 @@ BlUniverse >> stop [
 	"A universe must be running here.
 	I am called from the UI loop"
 	
-	host stop.
-	spaces do: [ :anSpace | anSpace rememberVisibleStatus ]
+	spaces do: [ :anSpace | anSpace rememberVisibleStatus ].
+	host stop
 ]
 
 { #category : #'private - lifecycle' }

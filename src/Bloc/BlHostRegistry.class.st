@@ -48,9 +48,20 @@ BlHostRegistry class >> settingsOn: aBuilder [
 ]
 
 { #category : #'class initialization' }
+BlHostRegistry class >> shutDown: isQuitting [
+
+	default ifNotNil: [ :registry |
+		registry availableHosts do: [ :eachHost |
+			eachHost hasUniverse ifTrue: [ eachHost universe stop ] ] ]
+]
+
+{ #category : #'class initialization' }
 BlHostRegistry class >> startUp: isResuming [
 
-	isResuming ifTrue: [ self cleanUp ]
+	isResuming ifFalse: [ ^ self ].
+	default ifNotNil: [ :registry |
+		registry availableHosts do: [ :eachHost |
+			eachHost hasUniverse ifTrue: [ eachHost universe start ] ] ]
 ]
 
 { #category : #accessing }

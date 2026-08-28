@@ -56,6 +56,24 @@ BlStartupShutdownTest >> testShutdownAndStartupKeepsSpacesOpen [
 ]
 
 { #category : #tests }
+BlStartupShutdownTest >> testHostRegistryShutdownAndStartupKeepsSpacesOpen [
+
+	| aSpace |
+	hostClass = BlMorphicWindowHost ifTrue: [ ^ self skip ].
+	Smalltalk vm operatingSystemName = 'unix' ifTrue: [ ^ self skip ].
+
+	aSpace := self newTestingSpace.
+	aSpace show.
+	aSpace settle.
+	self assert: aSpace isVisible.
+
+	BlHostRegistry shutDown: true.
+	BlHostRegistry startUp: true.
+
+	self assert: aSpace isVisible
+]
+
+{ #category : #tests }
 BlStartupShutdownTest >> testShutdownAndStartupKeepsSpacesOpenWithInvalidation [
 
 	| aSpace |
