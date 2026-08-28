@@ -70,11 +70,8 @@ BAExporter >> export [
 	element isLayoutRequested ifTrue: [
 		element isAttachedToSceneGraph
 			ifTrue: [
-				element space host isUIProcess
-					ifTrue: [
-						self error: 'Cannot export an attached element with pending layout requests from the UI process. Defer the export to let layout settle first.' ]
-					ifFalse: [
-						element space settle ] ]
+				element space assertNotUIProcess.
+				element space settle ]
 			ifFalse: [
 				element forceLayout ] ].
 

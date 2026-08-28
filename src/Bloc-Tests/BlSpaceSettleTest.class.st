@@ -234,6 +234,20 @@ BlSpaceSettleTest >> testWaitUntilTrueConditionMetImmediately [
 ]
 
 { #category : #tests }
+BlSpaceSettleTest >> testSettleFromUIProcessRaisesError [
+
+	| aSpace errorRaised |
+	aSpace := self newTestingSpace.
+	errorRaised := false.
+	aSpace defer: [
+		[ aSpace settle ]
+			on: Error
+			do: [ :err | errorRaised := true ] ].
+	aSpace settle.
+	self assert: errorRaised
+]
+
+{ #category : #tests }
 BlSpaceSettleTest >> testWaitUntilTrueForDurationTimesOut [
 
 	| aSpace completed |
@@ -242,4 +256,18 @@ BlSpaceSettleTest >> testWaitUntilTrueForDurationTimesOut [
 	aSpace waitUntilTrue: [ false ] forDuration: 50 milliSeconds.
 	completed := true.
 	self assert: completed
+]
+
+{ #category : #tests }
+BlSpaceSettleTest >> testWaitUntilTrueFromUIProcessRaisesError [
+
+	| aSpace errorRaised |
+	aSpace := self newTestingSpace.
+	errorRaised := false.
+	aSpace defer: [
+		[ aSpace waitUntilTrue: [ true ] ]
+			on: Error
+			do: [ :err | errorRaised := true ] ].
+	aSpace settle.
+	self assert: errorRaised
 ]

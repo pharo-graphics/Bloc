@@ -19,8 +19,7 @@ BlElement >> aeAsForm [
 	| form |
 	self isAttachedToSceneGraph ifTrue: [
 		self space host isUIProcess ifTrue: [
-			self isLayoutRequested ifTrue: [
-				self error: 'Cannot export an attached element with pending layout requests from the UI process. Defer the export to let layout settle first.' ].
+			self isLayoutRequested ifTrue: [ self space assertNotUIProcess ].
 			^ self basicAeAsForm ].
 		self space deferAndSettle: [ form := self basicAeAsForm ].
 		^ form ].
