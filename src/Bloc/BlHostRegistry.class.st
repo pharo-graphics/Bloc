@@ -60,6 +60,7 @@ BlHostRegistry class >> startUp: isResuming [
 
 	isResuming ifFalse: [ ^ self ].
 	default ifNotNil: [ :registry |
+		registry refreshAvailableHosts.
 		registry availableHosts do: [ :eachHost |
 			eachHost hasUniverse ifTrue: [ eachHost universe start ] ] ]
 ]
@@ -74,16 +75,23 @@ BlHostRegistry >> availableHosts [
 BlHostRegistry >> initialize [
 
 	super initialize.
+	self refreshAvailableHosts
+]
+
+{ #category : #initialization }
+BlHostRegistry >> refreshAvailableHosts [
+	"Recompute available hosts for the current session and environment."
 
 	availableHosts :=
 		(BlHost supportedHostClasses ifEmpty: [ { BlHeadlessHost } ])
 			select: [ :each | each isSingleton ]
 			thenCollect: [ :each | each default ].
 
-	preferredHost :=
-		availableHosts
-			ifEmpty: [ nil ]
-			ifNotEmpty: [ :hosts | hosts first ]
+	(availableHosts includes: preferredHost) ifFalse: [
+		preferredHost :=
+			availableHosts
+				ifEmpty: [ nil ]
+				ifNotEmpty: [ :hosts | hosts first ] ]
 ]
 
 { #category : #accessing }
