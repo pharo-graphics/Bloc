@@ -47,7 +47,7 @@ BlExamplesTest >> performTest [
 	result class = BlSpace
 		ifTrue: [ result close; settle ]
 		ifFalse: [
-			result isAttachedToSceneGraph ifTrue: [
+			((result isKindOf: BlElement) and: [ result isAttachedToSceneGraph ]) ifTrue: [
 				| sp |
 				sp := result space.
 				result removeFromParent.

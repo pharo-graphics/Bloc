@@ -430,5 +430,6 @@ BlElementBoundsTest >> testShadowEffectBoundsWithoutOffset [
 		assert: child effectBounds
 		equals:
 			(shadowWidth * shadowMultiplier asPoint negated
-				corner: self childExtent * 2 + (shadowWidth * shadowMultiplier asPoint))
+				corner: self childExtent * 2 + (shadowWidth * shadowMultiplier asPoint)).
+	^ parent
 ]

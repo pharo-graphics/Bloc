@@ -444,14 +444,12 @@ BlSpace >> enqueueTasksFrom: aTaskQueue [
 	self requestNextPulse
 ]
 
-{ #category : #pulse }
+{ #category : #'private - pulse' }
 BlSpace >> ensureSession [
-	"Check current session and perform required operations if it changed since last frame"
 
-	session == Smalltalk session
-		ifTrue: [ ^ self ].
-
-	self onSessionChanged: Smalltalk session
+	self
+		deprecated: 'Session management is handled by BlUniverse on image startup'
+		transformWith: '`@receiver ensureSession' -> ''
 ]
 
 { #category : #'private - display' }
@@ -1032,10 +1030,11 @@ BlSpace >> processPulse [
 	self pulse
 ]
 
-{ #category : #pulse }
+{ #category : #'private - pulse' }
 BlSpace >> pulse [
-
-	self ensureSession.
+	"Internal engine driver. Never send me directly.
+	I am driven exclusively by BlUniverse during pulse loop cycles.
+	To wait for a space to reach equilibrium, send #settle or #deferAndSettle:."
 
 	pulseRequested ifFalse: [ ^ self ].
 

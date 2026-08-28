@@ -42,3 +42,15 @@ BAAttachedExporterTest >> testExportFromHostUIProcess [
 	self assert: form isNotNil.
 	self assert: form extent equals: 100 @ 50
 ]
+
+{ #category : #tests }
+BAAttachedExporterTest >> testExportWithPendingLayoutFromHostUIProcessErrors [
+
+	| raisedError |
+	raisedError := false.
+	space deferAndSettle: [
+		element requestLayout.
+		self should: [ element exportAsForm ] raise: Error.
+		raisedError := true ].
+	self assert: raisedError
+]
