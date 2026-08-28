@@ -16,22 +16,13 @@ BlElement >> aeApplyClippingWithAllParentsOn: aCanvas [
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeAsForm [
 
-	| form aSpace |
+	| form |
 	self isAttachedToSceneGraph ifTrue: [
 		self space deferAndSettle: [ form := self basicAeAsForm ].
 		^ form ].
 
-	aSpace := BlSpace new.
-	aSpace
-		host: BlHeadlessHost default;
-		show;
-		deferAndSettle: [ aSpace root addChild: self ];
-		deferAndSettle: [ form := self basicAeAsForm ];
-		deferAndSettle: [ self removeFromParent ];
-		close;
-		settle.
-
-	^ form
+	self isLayoutRequested ifTrue: [ self forceLayout ].
+	^ self basicAeAsForm
 ]
 
 { #category : #'*Bloc-Alexandrie' }

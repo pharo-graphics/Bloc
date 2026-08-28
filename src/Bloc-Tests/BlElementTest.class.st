@@ -722,6 +722,38 @@ BlElementTest >> testInNewHeadlessSpaceDo [
 ]
 
 { #category : #tests }
+BlElementTest >> testForceLayout [
+
+	| element child |
+	element := BlElement new.
+	element layout: BlLinearLayout horizontal.
+	element constraintsDo: [ :c |
+		c horizontal fitContent.
+		c vertical fitContent ].
+	child := BlElement new extent: 80 @ 40.
+	element addChild: child.
+
+	self deny: element isAttachedToSceneGraph.
+	self assert: element isLayoutRequested.
+
+	element forceLayout.
+
+	self deny: element isLayoutRequested.
+	self assert: child position equals: 0 @ 0.
+	self assert: element extent equals: 80 @ 40
+]
+
+{ #category : #tests }
+BlElementTest >> testForceLayoutOnAttachedElementErrors [
+
+	| element |
+	element := BlElement new.
+	element inNewHeadlessSpaceDo: [ :sp |
+		self assert: element isAttachedToSceneGraph.
+		self should: [ element forceLayout ] raise: Error ]
+]
+
+{ #category : #tests }
 BlElementTest >> testInNewSpace [
 
 	| element aSpace |

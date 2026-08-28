@@ -74,11 +74,7 @@ BAExporter >> export [
 					ifTrue: [ element space pulse ]
 					ifFalse: [ element space settle ] ]
 			ifFalse: [
-				| aSpace |
-				aSpace := BlSpace new.
-				aSpace root addChild: element.
-				aSpace pulse.
-				aSpace root removeChildren ] ].
+				element forceLayout ] ].
 
 	aBounds := element invalidationBoundsInParent.
 	aCanvas := self newCanvas: aBounds extent * scale.
