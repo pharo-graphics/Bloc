@@ -3160,16 +3160,6 @@ BlElement >> opacity: aNumber [
 ]
 
 { #category : #convenience }
-BlElement >> inHeadlessSpaceDo: aBlock [
-
-	self
-		deprecated: 'Use #inNewHeadlessSpaceDo: instead'
-		transformWith: '`@receiver inHeadlessSpaceDo: `@arg' -> '`@receiver inNewHeadlessSpaceDo: `@arg'.
-
-	^ self inNewHeadlessSpaceDo: aBlock
-]
-
-{ #category : #convenience }
 BlElement >> inNewHeadlessSpaceDo: aBlock [
 	"Open the receiver in a new headless space, settle it, evaluate aBlock with the space (and the receiver), and ensure the space is closed and settled upon completion. Answer the result of evaluating aBlock."
 
@@ -3197,10 +3187,11 @@ BlElement >> inNewSpace [
 
 { #category : #convenience }
 BlElement >> openInNewSpace [
-	"Add self to a new BlSpace and show it. Answer such space."
+	"Add self to a new BlSpace, show it, settle it, and answer such space."
 
 	^ self inNewSpace
 		show;
+		settle;
 		yourself
 ]
 
