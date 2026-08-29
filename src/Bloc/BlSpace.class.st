@@ -235,7 +235,6 @@ BlSpace >> denyUIProcess [
 BlSpace >> deferAndSettle: aBlock [
 	"Evaluate aBlock on the UI process and wait until the space reaches equilibrium (all cascading tasks, skins, layout, and render passes have settled)."
 
-	self denyUIProcess.
 	self defer: aBlock.
 	self settle
 ]
