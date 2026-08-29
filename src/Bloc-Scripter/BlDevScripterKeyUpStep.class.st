@@ -11,6 +11,9 @@ BlDevScripterKeyUpStep >> defaultLabel [
 
 { #category : #actions }
 BlDevScripterKeyUpStep >> playOn: aScripter [
-	aScripter element eventSimulator keyUp: self key.
+	| aTarget |
+
+	aTarget := self target findTargetStartingInScripter: aScripter.
+	aTarget eventSimulator keyUp: self key.
 	aScripter settle
 ]
