@@ -44,13 +44,6 @@ BlMorphicHostSpace >> fullsize: aBoolean [
 	See ${method:TBlSpaceProperties>>#fullsize}"
 ]
 
-{ #category : #'host space - events' }
-BlMorphicHostSpace >> generateEvents [
-	"Generate more complex state change events such as window scale event when resolution of the screen changes"
-	
-	spaceHostMorph world ifNil: [ spaceHostMorph announceDeleted ]
-]
-
 { #category : #'window - properties' }
 BlMorphicHostSpace >> isBorderless [
 	"Return true if underlying window is now borderless, false otherwise"
