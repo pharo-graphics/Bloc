@@ -455,11 +455,14 @@ BlSpace >> ensureSession [
 BlSpace >> ensureWindowOpen [
 
 	hostSpace ifNotNil: [
-		hostSpace isValid ifFalse: [
-			self setUpHostSpace.
-			previousVisibleStatus ifTrue: [
-				hostSpace open.
-				self onSessionChanged: Smalltalk session ] ] ]
+		hostSpace isValid
+			ifFalse: [
+				self setUpHostSpace.
+				previousVisibleStatus ifTrue: [
+					hostSpace open.
+					self onSessionChanged: Smalltalk session ] ]
+			ifTrue: [
+				self onSessionChanged: Smalltalk session ] ]
 ]
 
 { #category : #'event management accessing' }

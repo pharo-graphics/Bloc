@@ -79,3 +79,39 @@ BlMorphicHostTest >> testSquaresEmbeddedInMorph [
 	aSpace settle.
 	self deny: aSpace isOpened
 ]
+
+{ #category : #tests }
+BlMorphicHostTest >> testEnsureWindowOpenRendersWhenHostSpaceIsValidOnSessionChange [
+
+	| aHost aSpace rootElement hostSpace spaceHostMorph oldForm |
+	aHost := BlMorphicHost new.
+	aHost containerMorph: containerMorph.
+
+	aSpace := BlSpace new.
+	aSpace host: aHost.
+	rootElement := aSpace root.
+	rootElement background: Color green.
+
+	aSpace show.
+	aSpace settle.
+	self assert: aSpace isOpened.
+	hostSpace := aSpace hostSpace.
+	spaceHostMorph := hostSpace spaceHostMorph.
+	self assert: spaceHostMorph form isNotNil.
+	self deny: spaceHostMorph form isNull.
+
+	"Simulate session restart nullifying the form buffer"
+	oldForm := spaceHostMorph form.
+	oldForm setManualSurfacePointer: ExternalAddress null.
+	self assert: spaceHostMorph form isNull.
+
+	"Ensure window open should invoke onSessionChanged, request pulse, and restore valid buffer"
+	aSpace deferAndSettle: [ aSpace ensureWindowOpen ].
+	self assert: aSpace isOpened.
+	self assert: spaceHostMorph form isNotNil.
+	self deny: spaceHostMorph form isNull.
+
+	aSpace close.
+	aSpace settle.
+	self deny: aSpace isOpened
+]

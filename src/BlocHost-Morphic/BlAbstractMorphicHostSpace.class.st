@@ -22,9 +22,9 @@ BlAbstractMorphicHostSpace >> lockSurfaceFor: damagedRectangle scaleFactor: aNum
 
 	| currentPhysicalSize temp |
 	currentPhysicalSize := self physicalSize asPoint.
-	(backBuffer isNil or: [ backBuffer extent ~= currentPhysicalSize ]) ifTrue: [ 
+	(backBuffer isNil or: [ backBuffer isNull or: [ backBuffer extent ~= currentPhysicalSize ] ]) ifTrue: [ 
 		backBuffer := self newExternalForm ].
-	(frontBuffer isNil or: [ frontBuffer extent ~= currentPhysicalSize ]) ifTrue: [ 
+	(frontBuffer isNil or: [ frontBuffer isNull or: [ frontBuffer extent ~= currentPhysicalSize ] ]) ifTrue: [ 
 		frontBuffer := self newExternalForm ].
 
 	renderer
