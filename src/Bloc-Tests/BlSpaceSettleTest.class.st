@@ -43,6 +43,24 @@ BlSpaceSettleTest >> testDeferAndSettleFromUIProcessRaisesError [
 ]
 
 { #category : #tests }
+BlSpaceSettleTest >> testDeferErrorDoesNotPreventSettle [
+
+	| aSpace errorCaught stepExecuted |
+	aSpace := self newTestingSpace.
+	errorCaught := false.
+	stepExecuted := false.
+	aSpace defer: [
+		[ Error signal: 'Expected defer error' ]
+			on: Error
+			do: [ :e | errorCaught := true ] ].
+	aSpace defer: [ stepExecuted := true ].
+	aSpace settle.
+	self assert: errorCaught.
+	self assert: stepExecuted.
+	self assert: aSpace isSettled
+]
+
+{ #category : #tests }
 BlSpaceSettleTest >> testDeferAndSettlePreservesSequentialOrdering [
 
 	| aSpace items |
