@@ -14,7 +14,8 @@ BlAbstractMorphicHostSpace >> initializeRenderer [
 	super initializeRenderer.
 
 	backBuffer := self newExternalForm.
-	frontBuffer := self newExternalForm
+	frontBuffer := self newExternalForm.
+	self spaceHostMorph form: frontBuffer
 ]
 
 { #category : #rendering }

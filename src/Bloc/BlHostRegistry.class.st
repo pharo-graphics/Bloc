@@ -58,7 +58,6 @@ BlHostRegistry class >> shutDown: isQuitting [
 { #category : #'class initialization' }
 BlHostRegistry class >> startUp: isResuming [
 
-	isResuming ifFalse: [ ^ self ].
 	default ifNotNil: [ :registry |
 		registry refreshAvailableHosts.
 		registry availableHosts do: [ :eachHost |

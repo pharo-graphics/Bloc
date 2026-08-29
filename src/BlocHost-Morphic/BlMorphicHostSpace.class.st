@@ -62,7 +62,7 @@ BlMorphicHostSpace >> isFullsize [
 { #category : #testing }
 BlMorphicHostSpace >> isValid [
 
-	^ spaceHostMorph isNotNil
+	^ spaceHostMorph isNotNil and: [ spaceHostMorph isInWorld ]
 ]
 
 { #category : #'host space - testing' }

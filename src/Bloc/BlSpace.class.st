@@ -989,6 +989,7 @@ BlSpace >> mouseProcessor: aMouseProcessor [
 BlSpace >> onSessionChanged: aNewSession [
 
 	self invalidateAll.
+	self requestHostSpaceRedraw.
 	self requestNextPulse.
 	
 	self root onSessionChanged: aNewSession
