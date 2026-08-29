@@ -30,7 +30,9 @@ BlHostRegistry class >> default [
 { #category : #'class initialization' }
 BlHostRegistry class >> initialize [
 
-	SessionManager default registerGuiClassNamed: self name
+	SessionManager default
+		registerGuiClassNamed: self name
+		atPriority: 200
 ]
 
 { #category : #settings }
