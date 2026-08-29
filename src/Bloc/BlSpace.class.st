@@ -36,7 +36,6 @@ Class {
 		'focusChain',
 		'pulseRequested',
 		'currentCursor',
-		'session',
 		'focused',
 		'title',
 		'fullscreen',
@@ -724,7 +723,6 @@ BlSpace >> initialize [
 
 	host := BlHost pickHost.
 	pulseRequested := true.
-	session := Smalltalk session.
 	elementsNeedingPaint := Set new.
 	elementsNeedingLayout := Set new.
 
@@ -987,7 +985,6 @@ BlSpace >> mouseProcessor: aMouseProcessor [
 { #category : #pulse }
 BlSpace >> onSessionChanged: aNewSession [
 
-	session := aNewSession.
 	self invalidateAll.
 	self requestNextPulse.
 	
@@ -1164,7 +1161,7 @@ BlSpace >> runTasks [
 
 { #category : #accessing }
 BlSpace >> session [
-	^ session
+	^ Smalltalk session
 ]
 
 { #category : #'private - accessing' }
