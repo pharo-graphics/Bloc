@@ -1001,6 +1001,14 @@ BlElement >> compositionLayer: aCompositionLayer [
 		put: aCompositionLayer
 ]
 
+{ #category : #'layout utilities' }
+BlElement >> computeDetachedLayout [
+	"Compute layout synchronously for this detached element tree.
+	Raise an error if attached to a space: attached elements must be settled via their space."
+
+	^ self forceLayout
+]
+
 { #category : #'geometry bounds' }
 BlElement >> computeEffectBoundsInto: aBlBounds [
 
@@ -1711,14 +1719,6 @@ BlElement >> focusedChild [
 	^ self children
 		detect: [ :anElement | anElement hasFocus ]
 		ifNone: [ nil ]
-]
-
-{ #category : #'layout utilities' }
-BlElement >> computeDetachedLayout [
-	"Compute layout synchronously for this detached element tree.
-	Raise an error if attached to a space: attached elements must be settled via their space."
-
-	^ self forceLayout
 ]
 
 { #category : #'layout utilities' }

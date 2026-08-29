@@ -421,19 +421,11 @@ BlUniverse >> unregisterPulseSemaphore: aSemaphore [
 		pulseSemaphores remove: aSemaphore ifAbsent: [] ]
 ]
 
-{ #category : #'error handling' }
-BlUniverse >> denyUIProcess [
-	"Signal an error if the active process is the host UI process.
-	Blocking synchronization from the UI process would deadlock the pulse loop."
-
-	self host denyUIProcess
-]
-
 { #category : #'api - pulse' }
 BlUniverse >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion: completionBlock onTimeout: timeoutBlock [
 
 	| aSemaphore |
-	self denyUIProcess.
+	self host denyUIProcess.
 	aSemaphore := Semaphore new.
 	self registerPulseSemaphore: aSemaphore.
 	[

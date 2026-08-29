@@ -212,7 +212,7 @@ BlEventSimulator >> events: aCollectionOfEvents [
 		description: [ 'Elements must be attached to a space before simulating events.' ].
 	
 	aSpace := target space.
-	aSpace denyUIProcess.
+	aSpace host denyUIProcess.
 
 	aCollectionOfEvents do: [ :anEvent |
 		anEvent fillFromTime: aSpace time.

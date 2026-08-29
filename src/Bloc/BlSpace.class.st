@@ -223,14 +223,6 @@ BlSpace >> defer: aBlock [
 	self enqueueTask: (BlTaskAction with: aBlock)
 ]
 
-{ #category : #'error handling' }
-BlSpace >> denyUIProcess [
-	"Signal an error if the active process is the UI process for this space.
-	Blocking synchronization from the UI process would deadlock the pulse loop."
-
-	self host denyUIProcess
-]
-
 { #category : #pulse }
 BlSpace >> deferAndSettle: aBlock [
 	"Evaluate aBlock on the UI process and wait until the space reaches equilibrium (all cascading tasks, skins, layout, and render passes have settled)."

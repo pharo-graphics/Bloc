@@ -168,6 +168,15 @@ BlHost class >> universe [
 	^ self default universe
 ]
 
+{ #category : #'error handling' }
+BlHost >> denyUIProcess [
+	"Signal an error if the active process is the UI process of this host.
+	Blocking synchronization from the UI process would deadlock the pulse loop."
+
+	self isUIProcess ifTrue: [
+		self error: 'Cannot perform blocking synchronization from the UI process as it would deadlock the pulse loop.' ]
+]
+
 { #category : #testing }
 BlHost >> hasUniverse [
 
@@ -237,15 +246,6 @@ BlHost >> uiProcessDo: aBlock [
 BlHost >> universe [
 
 	^ universe ifNil: [ universe := BlUniverse host: self ]
-]
-
-{ #category : #'error handling' }
-BlHost >> denyUIProcess [
-	"Signal an error if the active process is the UI process of this host.
-	Blocking synchronization from the UI process would deadlock the pulse loop."
-
-	self isUIProcess ifTrue: [
-		self error: 'Cannot perform blocking synchronization from the UI process as it would deadlock the pulse loop.' ]
 ]
 
 { #category : #'host - testing' }

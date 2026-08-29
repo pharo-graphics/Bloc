@@ -78,6 +78,18 @@ BlHostRegistry >> initialize [
 	self refreshAvailableHosts
 ]
 
+{ #category : #accessing }
+BlHostRegistry >> preferredHost [
+
+	^ preferredHost
+]
+
+{ #category : #accessing }
+BlHostRegistry >> preferredHost: aHost [
+
+	preferredHost := aHost
+]
+
 { #category : #initialization }
 BlHostRegistry >> refreshAvailableHosts [
 	"Recompute available hosts for the current session and environment."
@@ -92,18 +104,6 @@ BlHostRegistry >> refreshAvailableHosts [
 			availableHosts
 				ifEmpty: [ nil ]
 				ifNotEmpty: [ :hosts | hosts first ] ]
-]
-
-{ #category : #accessing }
-BlHostRegistry >> preferredHost [
-
-	^ preferredHost
-]
-
-{ #category : #accessing }
-BlHostRegistry >> preferredHost: aHost [
-
-	preferredHost := aHost
 ]
 
 { #category : #registration }
