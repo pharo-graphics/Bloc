@@ -44,7 +44,8 @@ BlMorphicSpaceHostMorph >> form [
 BlMorphicSpaceHostMorph >> form: aForm [
 
 	form := aForm.
-	self changed
+	self changed.
+	self currentWorld ifNotNil: [ :w | w defer: [ self changed ] ]
 ]
 
 { #category : #'event handling' }

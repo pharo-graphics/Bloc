@@ -109,14 +109,6 @@ BlMorphicHostSpace >> position: aPoint [
 	"Change window's position to a given point in screen coordinates"
 	
 	spaceHostMorph position: aPoint
-
-]
-
-{ #category : #'host space - rendering' }
-BlMorphicHostSpace >> requestRedraw [
-	"Space needs to redraw the window"
-	
-	spaceHostMorph changed
 ]
 
 { #category : #'host space - displaying' }
