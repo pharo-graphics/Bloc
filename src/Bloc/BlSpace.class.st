@@ -1161,6 +1161,11 @@ BlSpace >> runTasks [
 
 { #category : #accessing }
 BlSpace >> session [
+
+	self
+		deprecated: 'Use `Smalltalk session` directly instead.'
+		transformWith: '`@receiver session' -> 'Smalltalk session'.
+
 	^ Smalltalk session
 ]
 
