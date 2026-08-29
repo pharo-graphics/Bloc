@@ -151,11 +151,11 @@ BlEventSimulator >> doubleClickButton: aButton [
 BlEventSimulator >> dragBy: aPoint [
 	"Simulate a drag event starting from the center of the target element by the specified delta point."
 
-	self dragByDeltas: { aPoint }
+	self dragByAll: { aPoint }
 ]
 
 { #category : #simulation }
-BlEventSimulator >> dragByDeltas: aSequenceOfPoints [
+BlEventSimulator >> dragByAll: aSequenceOfPoints [
 	"Simulate a drag in the center of the target element by performing
 	mouse down, mouse move across a sequence of delta vectors, and mouse up."
 
