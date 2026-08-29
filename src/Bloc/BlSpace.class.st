@@ -460,7 +460,7 @@ BlSpace >> ensureWindowOpen [
 			self setUpHostSpace.
 			previousVisibleStatus ifTrue: [
 				hostSpace open.
-				self invalidateAll ] ] ]
+				self onSessionChanged: Smalltalk session ] ] ]
 ]
 
 { #category : #'event management accessing' }
