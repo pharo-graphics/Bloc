@@ -458,7 +458,9 @@ BlSpace >> ensureWindowOpen [
 	hostSpace ifNotNil: [
 		hostSpace isValid ifFalse: [
 			self setUpHostSpace.
-			previousVisibleStatus ifTrue: [ hostSpace open ] ] ]
+			previousVisibleStatus ifTrue: [
+				hostSpace open.
+				self invalidateAll ] ] ]
 ]
 
 { #category : #'event management accessing' }
