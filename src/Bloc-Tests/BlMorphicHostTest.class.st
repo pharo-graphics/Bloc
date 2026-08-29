@@ -115,3 +115,37 @@ BlMorphicHostTest >> testEnsureWindowOpenRendersWhenHostSpaceIsValidOnSessionCha
 	aSpace settle.
 	self deny: aSpace isOpened
 ]
+
+{ #category : #tests }
+BlMorphicHostTest >> testSpaceClosedEventOnProgrammaticClose [
+
+	| s closedCount |
+	closedCount := 0.
+	s := BlSpace new.
+	s useMorphicHost.
+	s addEventHandlerOn: BlSpaceClosedEvent do: [ closedCount := closedCount + 1 ].
+	s show; settle.
+	self assert: closedCount equals: 0.
+
+	s close; settle.
+	self assert: closedCount equals: 1.
+	self deny: s isOpened
+]
+
+{ #category : #tests }
+BlMorphicHostTest >> testSpaceClosedEventOnWindowCloseButton [
+
+	| s win closedCount |
+	closedCount := 0.
+	s := BlSpace new.
+	s useMorphicHost.
+	s addEventHandlerOn: BlSpaceClosedEvent do: [ closedCount := closedCount + 1 ].
+	s show; settle.
+	self assert: closedCount equals: 0.
+
+	win := s hostSpace morphicWindow.
+	win delete.
+	s settle.
+	self assert: closedCount equals: 1.
+	self deny: s isOpened
+]
