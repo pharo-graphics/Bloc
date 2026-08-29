@@ -124,7 +124,7 @@ BlMorphicWindowHostSpace >> isTextInputActive [
 { #category : #testing }
 BlMorphicWindowHostSpace >> isValid [
 	
-	^ morphicWindow isNotNil and: [ morphicWindow isInWorld ]
+	^ morphicWindow isNotNil
 ]
 
 { #category : #testing }
