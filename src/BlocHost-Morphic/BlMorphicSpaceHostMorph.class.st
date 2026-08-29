@@ -34,6 +34,13 @@ BlMorphicSpaceHostMorph >> drawOn: aCanvas [
 				aClippedCanvas drawImage: form at: self position ] ]
 ]
 
+{ #category : #drawing }
+BlMorphicSpaceHostMorph >> requestRedraw [
+
+	self changed.
+	self currentWorld ifNotNil: [ :w | w defer: [ self changed ] ]
+]
+
 { #category : #accessing }
 BlMorphicSpaceHostMorph >> form [
 
@@ -44,8 +51,7 @@ BlMorphicSpaceHostMorph >> form [
 BlMorphicSpaceHostMorph >> form: aForm [
 
 	form := aForm.
-	self changed.
-	self currentWorld ifNotNil: [ :w | w defer: [ self changed ] ]
+	self requestRedraw
 ]
 
 { #category : #'event handling' }

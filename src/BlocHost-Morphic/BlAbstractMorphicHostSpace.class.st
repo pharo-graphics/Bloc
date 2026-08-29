@@ -58,9 +58,7 @@ BlAbstractMorphicHostSpace >> newExternalForm [
 { #category : #'host space - rendering' }
 BlAbstractMorphicHostSpace >> requestRedraw [
 
-	self spaceHostMorph ifNotNil: [ :m |
-		m changed.
-		m currentWorld ifNotNil: [ :w | w defer: [ m changed ] ] ]
+	self spaceHostMorph ifNotNil: [ :m | m requestRedraw ]
 ]
 
 { #category : #accessing }
