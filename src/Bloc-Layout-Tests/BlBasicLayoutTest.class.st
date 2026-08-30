@@ -106,3 +106,22 @@ BlBasicLayoutTest >> testParentWithChildMatchParent [
 	self assert: parent extent equals: 300 @ 300.
 	self assert: child extent equals: 300 @ 300
 ]
+
+{ #category : #tests }
+BlBasicLayoutTest >> testMeasureChildWithMarginsWhenChildHasNoParent [
+
+	| layout child |
+	layout := BlBasicLayout new.
+	child := BlElement new
+		margin: (BlInsets all: 10);
+		extent: 100 @ 100;
+		yourself.
+
+	layout
+		measureChildWithMargins: child
+		parentSpec: (BlExtentMeasurementSpec exact: 200 @ 200)
+		widthUsed: 0
+		heightUsed: 0.
+
+	self assert: child measuredExtent equals: 100 @ 100
+]
