@@ -886,10 +886,10 @@ BlSpace >> isTextInputActive [
 ]
 
 { #category : #pulse }
-BlSpace >> isUIProcess [
-	"Return true if the active process is the UI loop process for this space"
+BlSpace >> isPulseProcess [
+	"Return true if the active process is the pulse loop process for this space"
 
-	^ self host isUIProcess
+	^ self host isPulseProcess
 ]
 
 { #category : #testing }

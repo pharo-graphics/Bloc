@@ -42,7 +42,7 @@ BlCollapseWidget class >> exampleSimpleCollapse [
 
 	collapse container addChild: collapsed.
 
-	collapse openInSpace
+	collapse openInNewSpace
 ]
 
 { #category : #accessing }

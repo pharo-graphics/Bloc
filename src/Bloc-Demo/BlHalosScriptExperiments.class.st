@@ -64,7 +64,7 @@ BlHalosScriptExperiments class >> experimentHoverToSeeHalosDecription [
 
 
 
-	elt openInSpace
+	elt openInNewSpace
 ]
 
 { #category : #'as yet unclassified' }
@@ -78,7 +78,7 @@ BlHalosScriptExperiments class >> experimentInspectOnCtrlShift [
 		(event modifiers isCtrl and: event modifiers isShift) ifTrue: [
 			event inspect ] ].
 
-	elt openInSpace
+	elt openInNewSpace
 ]
 
 { #category : #'as yet unclassified' }

@@ -11,10 +11,16 @@ Class {
 	#category : #'Bloc-Tests-Space'
 }
 
-{ #category : #running }
+{ #category : #accessing }
 BlSpaceTestCase >> host [
 
 	^ BlHeadlessHost default
+]
+
+{ #category : #'instance creation' }
+BlSpaceTestCase >> newSpace [
+
+	^ BlSpace new
 ]
 
 { #category : #running }
@@ -33,9 +39,15 @@ BlSpaceTestCase >> runCase [
 BlSpaceTestCase >> setUp [
 
 	super setUp.
-	space := BlSpace new.
+	space := self newSpace.
 	space host: self host.
 	space show; settle
+]
+
+{ #category : #accessing }
+BlSpaceTestCase >> space [
+
+	^ space
 ]
 
 { #category : #running }

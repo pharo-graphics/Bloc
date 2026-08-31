@@ -4,9 +4,6 @@ I contain examples of position change logging functionality
 Class {
 	#name : #BlElementPositionChangeTest,
 	#superclass : #TestCase,
-	#instVars : [
-		'space'
-	],
 	#category : #'Bloc-Tests-Basic-Changes'
 }
 
@@ -32,114 +29,142 @@ BlElementPositionChangeTest >> newElementTree [
 	^ parent
 ]
 
-{ #category : #running }
-BlElementPositionChangeTest >> setUp [
-	super setUp.
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space show; settle
-]
-
-{ #category : #running }
-BlElementPositionChangeTest >> tearDown [
-	space ifNotNil: [
-		space close; settle.
-		space := nil ].
-	super tearDown
-]
-
 { #category : #tests }
 BlElementPositionChangeTest >> testParentPositionChanged [
+
 	| parent parentPositionChangedListener parentPositionInSpaceChangedListener parentPositionChanged parentPositionInSpaceChanged child childPositionChangedListener childPositionInSpaceChangedListener childPositionChanged childPositionInSpaceChanged subChild subChildPositionChangedListener subChildPositionInSpaceChangedListener subChildPositionChanged subChildPositionInSpaceChanged anUpdater |
 	parentPositionChanged := parentPositionInSpaceChanged := 0.
 	childPositionChanged := childPositionInSpaceChanged := 0.
 	subChildPositionChanged := subChildPositionInSpaceChanged := 0.
 
 	parent := self newElementTree.
-	space deferAndSettle: [ space root addChild: parent ].
-
-	child := parent children first.
-	subChild := child children first.
+	parent forceLayout.
 
 	parentPositionChangedListener := BlEventHandler
-		on: BlElementPositionChangedEvent
-		do: [
-		parentPositionChanged := parentPositionChanged + 1 ].
+		                                 on: BlElementPositionChangedEvent
+		                                 do: [
+		                                 parentPositionChanged := parentPositionChanged
+		                                                          + 1 ].
 	parentPositionInSpaceChangedListener := BlEventHandler
-		on: BlElementPositionInSpaceChangedEvent
-		do: [
-		parentPositionInSpaceChanged := parentPositionInSpaceChanged + 1 ].
+		                                        on:
+		                                        BlElementPositionInSpaceChangedEvent
+		                                        do: [
+		                                        parentPositionInSpaceChanged := parentPositionInSpaceChanged
+		                                                                        +
+		                                                                        1 ].
 
+	child := parent children first.
 	childPositionChangedListener := BlEventHandler
-		on: BlElementPositionChangedEvent
-		do: [
-		childPositionChanged := childPositionChanged + 1 ].
+		                                on: BlElementPositionChangedEvent
+		                                do: [
+		                                childPositionChanged := childPositionChanged
+		                                                        + 1 ].
 	childPositionInSpaceChangedListener := BlEventHandler
-		on: BlElementPositionInSpaceChangedEvent
-		do: [
-		childPositionInSpaceChanged := childPositionInSpaceChanged + 1 ].
+		                                       on:
+		                                       BlElementPositionInSpaceChangedEvent
+		                                       do: [
+		                                       childPositionInSpaceChanged := childPositionInSpaceChanged
+		                                                                      +
+		                                                                      1 ].
 
+	subChild := child children first.
 	subChildPositionChangedListener := BlEventHandler
-		on: BlElementPositionChangedEvent
-		do: [
-		subChildPositionChanged := subChildPositionChanged + 1 ].
+		                                   on: BlElementPositionChangedEvent
+		                                   do: [
+		                                   subChildPositionChanged := subChildPositionChanged
+		                                                              + 1 ].
 	subChildPositionInSpaceChangedListener := BlEventHandler
-		on: BlElementPositionInSpaceChangedEvent
-		do: [
-		subChildPositionInSpaceChanged := subChildPositionInSpaceChanged + 1 ].
+		                                          on:
+		                                          BlElementPositionInSpaceChangedEvent
+		                                          do: [
+			                                          subChildPositionInSpaceChanged := subChildPositionInSpaceChanged
+			                                                                            +
+			                                                                            1 ].
+
+	self assert: parent position equals: 0 @ 0.
+	self assert: child position equals: 0 @ 0.
+	self assert: subChild position equals: 0 @ 0.
 
 	parent addEventHandler: parentPositionChangedListener.
 	parent addEventHandler: parentPositionInSpaceChangedListener.
+
 	child addEventHandler: childPositionChangedListener.
 	child addEventHandler: childPositionInSpaceChangedListener.
+
 	subChild addEventHandler: subChildPositionChangedListener.
 	subChild addEventHandler: subChildPositionInSpaceChangedListener.
 
 	anUpdater := BlElementBoundsUpdater new.
-	parent position: 20 @ 20 extent: parent extent context: anUpdater.
-	child position: 20 @ 20 extent: child extent context: anUpdater.
-	subChild position: 20 @ 20 extent: subChild extent context: anUpdater.
+	"change parent's position directly"
+	parent position: 50 @ 50 extent: parent extent context: anUpdater.
+
+	"notify changed"
 	anUpdater commitChanges.
 
+	self assert: parent position equals: 50 @ 50.
 	self assert: parentPositionChanged equals: 1.
 	self assert: parentPositionInSpaceChanged equals: 1.
-	self assert: childPositionChanged equals: 1.
+
+	self assert: child position equals: 0 @ 0.
+	self assert: childPositionChanged equals: 0.
 	self assert: childPositionInSpaceChanged equals: 1.
-	self assert: subChildPositionChanged equals: 1.
+
+	self assert: subChild position equals: 0 @ 0.
+	self assert: subChildPositionChanged equals: 0.
 	self assert: subChildPositionInSpaceChanged equals: 1.
 
-	^ parent
+	parent removeEventHandler: parentPositionChangedListener.
+	parent removeEventHandler: parentPositionInSpaceChangedListener.
+
+	child removeEventHandler: childPositionChangedListener.
+	child removeEventHandler: childPositionInSpaceChangedListener.
+
+	subChild removeEventHandler: subChildPositionChangedListener.
+	subChild removeEventHandler: subChildPositionInSpaceChangedListener.
+
+	parent position: 0 @ 0 extent: parent extent context: anUpdater
 ]
 
 { #category : #tests }
 BlElementPositionChangeTest >> testPositionChangeBoundsChange [
+
 	| element anUpdater |
 	element := BlElement new.
 	element background: Color blue.
 	element extent: 100 @ 100.
 	element position: 0 @ 0.
-	space deferAndSettle: [ space root addChild: element ].
+	element forceLayout.
 
 	anUpdater := BlElementBoundsUpdater new.
 
 	self assert: element boundsInLocal equals: (0 @ 0 extent: 100 @ 100).
-	self assert: element bounds inParent asRectangle equals: (0 @ 0 extent: 100 @ 100).
+	self
+		assert: element bounds inParent asRectangle
+		equals: (0 @ 0 extent: 100 @ 100).
 
+	"As soon as we change position bounds should change too"
 	element position: 30 @ 30 extent: element extent context: anUpdater.
 
 	self assert: element boundsInLocal equals: (0 @ 0 extent: 100 @ 100).
-	self assert: element bounds inParent asRectangle equals: (30 @ 30 extent: 100 @ 100).
+	self
+		assert: element bounds inParent asRectangle
+		equals: (30 @ 30 extent: 100 @ 100).
 
+	"change position and extent at the same time"
 	element position: 50 @ 50 extent: 150 @ 150 context: anUpdater.
 
 	self assert: element boundsInLocal equals: (0 @ 0 extent: 150 @ 150).
-	self assert: element bounds inParent asRectangle equals: (50 @ 50 extent: 150 @ 150).
+	self
+		assert: element bounds inParent asRectangle
+		equals: (50 @ 50 extent: 150 @ 150).
 
-	space deferAndSettle: [ element requestLayout ].
+	"layout recomputation resets position and extent to originally requested values"
+	element requestLayout.
+	element forceLayout.
 	self assert: element boundsInLocal equals: (0 @ 0 extent: 100 @ 100).
-	self assert: element bounds inParent asRectangle equals: (0 @ 0 extent: 100 @ 100).
-
-	^ element
+	self
+		assert: element bounds inParent asRectangle
+		equals: (0 @ 0 extent: 100 @ 100)
 ]
 
 { #category : #tests }
@@ -181,7 +206,5 @@ BlElementPositionChangeTest >> testPositionChangeLoop [
 	anUpdater commitChanges.
 
 	self assert: positionChanged equals: 0.
-	self assert: positionInSpaceChanged equals: 0.
-
-	^ element
+	self assert: positionInSpaceChanged equals: 0
 ]

@@ -63,24 +63,12 @@ BlFocusFinderTest >> container [
 			c vertical fitContent ].
 
 	container addChildren: children.
-	self layoutInSpace: container.
+	container forceLayout.
 
 	container addEventHandler: BlFocusExampleNavigationListener new.
 
 	^ container
 
-]
-
-{ #category : 'helpers' }
-BlFocusFinderTest >> layoutInSpace: anElement [
-
-	| space |
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space root addChild: anElement.
-	space show; settle.
-	space root removeChildren.
-	space close; settle
 ]
 
 { #category : 'examples - segment 1' }
@@ -265,7 +253,7 @@ BlFocusFinderTest >> segmentWithCells [
 			c vertical fitContent ].
 
 	container addChildren: children.
-	self layoutInSpace: container.
+	container forceLayout.
 	container addEventHandler: BlFocusExampleNavigationListener new.
 
 	^ container
@@ -505,7 +493,7 @@ BlFocusFinderTest >> segmentWithCells_2 [
 			c vertical fitContent ].
 
 	container addChildren: children.
-	self layoutInSpace: container.
+	container forceLayout.
 	container addEventHandler: BlFocusExampleNavigationListener new.
 
 	^ container
@@ -674,7 +662,7 @@ BlFocusFinderTest >> segmentWithCells_3 [
 			c vertical fitContent ].
 
 	container addChildren: children.
-	self layoutInSpace: container.
+	container forceLayout.
 	container addEventHandler: BlFocusExampleNavigationListener new.
 
 	^ container
@@ -721,7 +709,7 @@ BlFocusFinderTest >> segmentWithCells_4 [
 			c vertical fitContent ].
 
 	container addChildren: children.
-	self layoutInSpace: container.
+	container forceLayout.
 
 	container addEventHandler: BlFocusExampleNavigationListener new.
 

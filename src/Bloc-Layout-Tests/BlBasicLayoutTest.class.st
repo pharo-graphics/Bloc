@@ -1,27 +1,8 @@
 Class {
 	#name : #BlBasicLayoutTest,
 	#superclass : #TestCase,
-	#instVars : [
-		'space'
-	],
 	#category : #'Bloc-Layout-Tests'
 }
-
-{ #category : #running }
-BlBasicLayoutTest >> setUp [
-	super setUp.
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space show; settle
-]
-
-{ #category : #running }
-BlBasicLayoutTest >> tearDown [
-	space ifNotNil: [
-		space close; settle.
-		space := nil ].
-	super tearDown
-]
 
 { #category : #helpers }
 BlBasicLayoutTest >> newParentWithChild [
@@ -57,9 +38,29 @@ BlBasicLayoutTest >> testForceLayoutOfMatchParent [
 				c vertical matchParent ];
 			yourself.
 
-	space deferAndSettle: [ space root addChild: anElement ].
+	anElement forceLayout.
 
 	self assert: anElement extent equals: 800 @ 600
+]
+
+{ #category : #tests }
+BlBasicLayoutTest >> testMeasureChildWithMarginsWhenChildHasNoParent [
+
+	| layout child |
+	layout := BlBasicLayout new.
+	child :=
+		BlElement new
+			margin: (BlInsets all: 10);
+			extent: 100 @ 100;
+			yourself.
+
+	layout
+		measureChildWithMargins: child
+		parentSpec: (BlExtentMeasurementSpec exact: 200 @ 200)
+		widthUsed: 0
+		heightUsed: 0.
+
+	self assert: child measuredExtent equals: 100 @ 100
 ]
 
 { #category : #tests }
@@ -69,7 +70,7 @@ BlBasicLayoutTest >> testParentWithChildExactExtent [
 	parent := self newParentWithChild.
 	child := parent children first.
 
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 
 	self assert: parent extent equals: 300 @ 300.
 	self assert: child extent equals: 100 @ 100
@@ -85,7 +86,7 @@ BlBasicLayoutTest >> testParentWithChildFitContent [
 		c horizontal fitContent.
 		c vertical fitContent ].
 
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 
 	self assert: parent extent equals: 300 @ 300.
 	self assert: child extent equals: 0 @ 0
@@ -101,27 +102,8 @@ BlBasicLayoutTest >> testParentWithChildMatchParent [
 		c horizontal matchParent.
 		c vertical matchParent ].
 
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 
 	self assert: parent extent equals: 300 @ 300.
 	self assert: child extent equals: 300 @ 300
-]
-
-{ #category : #tests }
-BlBasicLayoutTest >> testMeasureChildWithMarginsWhenChildHasNoParent [
-
-	| layout child |
-	layout := BlBasicLayout new.
-	child := BlElement new
-		margin: (BlInsets all: 10);
-		extent: 100 @ 100;
-		yourself.
-
-	layout
-		measureChildWithMargins: child
-		parentSpec: (BlExtentMeasurementSpec exact: 200 @ 200)
-		widthUsed: 0
-		heightUsed: 0.
-
-	self assert: child measuredExtent equals: 100 @ 100
 ]

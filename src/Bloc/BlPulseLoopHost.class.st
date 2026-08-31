@@ -25,8 +25,8 @@ BlPulseLoopHost >> isRunning [
 ]
 
 { #category : #'host - testing' }
-BlPulseLoopHost >> isUIProcess [
-	"Return true if the active process is the UI loop process of this host"
+BlPulseLoopHost >> isPulseProcess [
+	"Return true if the active process is the pulse loop process of this host"
 
 	^ pulseLoop isNotNil and: [ pulseLoop isRunningInActiveProcess ]
 ]
@@ -61,9 +61,19 @@ BlPulseLoopHost >> stop [
 	pulseLoop stop
 ]
 
-{ #category : #'api - ui process' }
-BlPulseLoopHost >> uiProcessDo: aBlock [
-	"Evaluate aBlock with the running UI Process of this host if any"
+{ #category : #'api - pulse process' }
+BlPulseLoopHost >> pulseProcessDo: aBlock [
+	"Evaluate aBlock with the running pulse Process of this host if any"
 
-	pulseLoop loopProcess ifNotNil: aBlock
+	pulseLoop pulseProcess ifNotNil: aBlock
+]
+
+{ #category : #'api - pulse process' }
+BlPulseLoopHost >> uiProcessDo: aBlock [
+
+	self
+		deprecated: 'Use #pulseProcessDo: instead'
+		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcessDo: `@arg'.
+
+	^ self pulseProcessDo: aBlock
 ]

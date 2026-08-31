@@ -1,9 +1,6 @@
 Class {
 	#name : #BlRootLayoutTest,
 	#superclass : #TestCase,
-	#instVars : [
-		'space'
-	],
 	#category : #'Bloc-Layout-Tests'
 }
 
@@ -68,22 +65,6 @@ BlRootLayoutTest >> parentWithFixedExtent [
 	self assert: element border paint equals: Color red asBlPaint.
 	
 	^ element
-]
-
-{ #category : #running }
-BlRootLayoutTest >> setUp [
-	super setUp.
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space show; settle
-]
-
-{ #category : #running }
-BlRootLayoutTest >> tearDown [
-	space ifNotNil: [
-		space close; settle.
-		space := nil ].
-	super tearDown
 ]
 
 { #category : #tests }

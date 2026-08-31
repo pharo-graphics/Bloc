@@ -7,32 +7,24 @@ Class {
 { #category : #tests }
 BlElementEffectChangeTest >> testShadowOffsetChangesInvalidationBounds [
 
-	| aSpace anElement |
-	aSpace := BlSpace new.
-	aSpace host: BlHeadlessHost default.
+	| anElement |
 	anElement := BlElement new.
 	anElement extent: 100 @ 200.
-	[
-		aSpace show; settle.
-		aSpace deferAndSettle: [ aSpace root addChild: anElement ].
+	anElement forceLayout.
 
-		aSpace deferAndSettle: [
-			anElement effect: (BlSimpleShadowEffect
-				color: Color red
-				offset: 10 @ 20) ].
+	anElement effect: (BlSimpleShadowEffect
+		color: Color red
+		offset: 10 @ 20).
 
-		self
-			assert: anElement invalidationBounds
-			equals: ((0.0 @ 0.0) corner: (110.0 @ 220.0)).
+	self
+		assert: anElement invalidationBounds
+		equals: ((0.0 @ 0.0) corner: (110.0 @ 220.0)).
 
-		aSpace deferAndSettle: [
-			anElement effect: (BlSimpleShadowEffect
-				color: Color green
-				offset: -10 @ -20) ].
+	anElement effect: (BlSimpleShadowEffect
+		color: Color green
+		offset: -10 @ -20).
 
-		self
-			assert: anElement invalidationBounds
-			equals: ((-10.0 @ -20.0) corner: (100.0 @ 200.0))
-	] ensure: [
-		aSpace close; settle ]
+	self
+		assert: anElement invalidationBounds
+		equals: ((-10.0 @ -20.0) corner: (100.0 @ 200.0))
 ]

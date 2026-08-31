@@ -1,16 +1,14 @@
 Class {
-	#name : 'BlLinearLayoutHorizontalExamples',
-	#superclass : 'BlLinearLayoutExamples',
-	#category : 'Bloc-Layout-Examples-LinearMigrated',
-	#package : 'Bloc-Layout-Examples',
-	#tag : 'LinearMigrated'
+	#name : #BlLinearLayoutHorizontalExamples,
+	#superclass : #BlLinearLayoutExamples,
+	#category : #'Bloc-Layout-Examples-LinearMigrated'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutHorizontalExamples >> elementWithOneChildMatchInExactParentPadding [
 	<gtExample>
 	<description: 'A single child is distributed equally within the parent''s bounds'>
-	| 	 parent child |
+	| parent child |
 	child := self childElementMatchingParent.
 
 	parent := self parentWithLinearHorizontalLayout.
@@ -19,8 +17,8 @@ BlLinearLayoutHorizontalExamples >> elementWithOneChildMatchInExactParentPadding
 	parent constraints padding: (BlInsets all: 20).
 
 	parent addChildren: { child }.
-	self layoutInSpace: parent.
 
+	parent forceLayout.
 
 	self assert: child extent equals: 360@560.
 	self assert: child position equals: 20@20.
@@ -28,14 +26,13 @@ BlLinearLayoutHorizontalExamples >> elementWithOneChildMatchInExactParentPadding
 	self assert: parent extent equals: 400@600.
 	self assert: parent position equals: 0@0.
 	^ parent
-
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutHorizontalExamples >> elementWithOneChildMatchOneExactInFitParent [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| 	 parent childA childB |
+	| parent childA childB |
 	childA := self childExact: 300@200.
 	childB := self childExactWidth: 200.
 	childB constraints vertical matchParent.
@@ -45,8 +42,8 @@ BlLinearLayoutHorizontalExamples >> elementWithOneChildMatchOneExactInFitParent 
 	parent constraints vertical fitContent.
 
 	parent addChildren: { childA . childB }.
-	self layoutInSpace: parent.
 
+	parent forceLayout.
 
 	self assert: childA extent equals: 300@200.
 	self assert: childA position equals: 0@0.
@@ -58,14 +55,13 @@ BlLinearLayoutHorizontalExamples >> elementWithOneChildMatchOneExactInFitParent 
 	self assert: parent position equals: 0@0.
 	^ parent
 	
-
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutHorizontalExamples >> elementWithOneExactChildInExactParentMargin [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| 	 parent childA |
+	| parent childA |
 	childA := self childExact: 20@20.
 	childA margin: (BlInsets top: 15 right: 0 bottom: 0 left: 10).
 	
@@ -74,8 +70,8 @@ BlLinearLayoutHorizontalExamples >> elementWithOneExactChildInExactParentMargin 
 	parent constraints vertical exact: 50.
 
 	parent addChildren: { childA }.
-	self layoutInSpace: parent.
 
+	parent forceLayout.
 
 	self assert: childA extent equals: 20@20.
 	self assert: childA position equals: 10@15.
@@ -83,14 +79,13 @@ BlLinearLayoutHorizontalExamples >> elementWithOneExactChildInExactParentMargin 
 	self assert: parent extent equals: 50@50.
 	self assert: parent position equals: 0@0.
 	^ parent
-
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutHorizontalExamples >> elementWithThreeMatchChildrenInExactParent [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| 	 parent childA childB childC |
+	| parent childA childB childC |
 	childA := self childElementMatchingParent.
 	childB := self childElementMatchingParent.
 	childC := self childElementMatchingParent.
@@ -100,8 +95,8 @@ BlLinearLayoutHorizontalExamples >> elementWithThreeMatchChildrenInExactParent [
 	parent constraints vertical exact: 200.
 
 	parent addChildren: { childA . childB . childC }.
-	self layoutInSpace: parent.
 
+	parent forceLayout.
 
 	self assert: childA extent equals: 200@200.
 	self assert: childA position equals: 0@0.
@@ -116,14 +111,13 @@ BlLinearLayoutHorizontalExamples >> elementWithThreeMatchChildrenInExactParent [
 	self assert: parent position equals: 0@0.
 	
 	^ parent
-
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutHorizontalExamples >> elementWithThreeMatchChildrenInExactParentRTL [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| 	 parent childA childB childC |
+	| parent childA childB childC |
 	childA := self childElementMatchingParent.
 	childB := self childElementMatchingParent.
 	childC := self childElementMatchingParent.
@@ -134,8 +128,8 @@ BlLinearLayoutHorizontalExamples >> elementWithThreeMatchChildrenInExactParentRT
 	parent constraints vertical exact: 200.
 
 	parent addChildren: { childA . childB . childC }.
-	self layoutInSpace: parent.
 
+	parent forceLayout.
 
 	self assert: childC extent equals: 200@200.
 	self assert: childC position equals: 0@0.
@@ -150,14 +144,13 @@ BlLinearLayoutHorizontalExamples >> elementWithThreeMatchChildrenInExactParentRT
 	self assert: parent position equals: 0@0.
 	
 	^ parent
-
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutHorizontalExamples >> elementWithTwoChildrenMatchInExactParentPadding [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| 	 parent childA childB |
+	| parent childA childB |
 	childA := self childElementMatchingParent.
 	childB := self childElementMatchingParent.
 
@@ -167,8 +160,8 @@ BlLinearLayoutHorizontalExamples >> elementWithTwoChildrenMatchInExactParentPadd
 	parent constraints padding: (BlInsets all: 20).
 
 	parent addChildren: { childA . childB }.
-	self layoutInSpace: parent.
 
+	parent forceLayout.
 
 	self assert: childA extent equals: 180@560.
 	self assert: childA position equals: 20@20.
@@ -180,14 +173,13 @@ BlLinearLayoutHorizontalExamples >> elementWithTwoChildrenMatchInExactParentPadd
 	self assert: parent position equals: 0@0.
 	
 	^ parent
-
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutHorizontalExamples >> elementWithTwoExactChildrenInFitContent [
 	<gtExample>
 	"Parent resizes to fit children"
-	| 	 parent childA childB |
+	| parent childA childB |
 	childA := self childExact: 200@100.
 	childB := self childExact: 100@200.
 	
@@ -196,8 +188,8 @@ BlLinearLayoutHorizontalExamples >> elementWithTwoExactChildrenInFitContent [
 	parent constraints vertical fitContent.
 	
 	parent addChildren: { childA . childB }.
-	self layoutInSpace: parent.
 	
+	parent forceLayout.
 	
 	self assert: childA extent equals: 200@100.
 	self assert: childA position equals: 0@0.
@@ -209,14 +201,13 @@ BlLinearLayoutHorizontalExamples >> elementWithTwoExactChildrenInFitContent [
 	self assert: parent position equals: 0@0.
 	
 	^ parent
-
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlLinearLayoutHorizontalExamples >> elementWithTwoMatchChildrenInExactParent [
 	<gtExample>
 	"All children are distributed equally within parent's bounds"
-	| 	 parent childA childB |
+	| parent childA childB |
 	childA := self childElementMatchingParent.
 	childB := self childElementMatchingParent.
 	
@@ -225,8 +216,8 @@ BlLinearLayoutHorizontalExamples >> elementWithTwoMatchChildrenInExactParent [
 	parent constraints vertical exact: 200.
 
 	parent addChildren: { childA . childB }.
-	self layoutInSpace: parent.
 
+	parent forceLayout.
 
 	self assert: childA extent equals: 250@200.
 	self assert: childA position equals: 0@0.
@@ -238,49 +229,59 @@ BlLinearLayoutHorizontalExamples >> elementWithTwoMatchChildrenInExactParent [
 	self assert: parent position equals: 0@0.
 	
 	^ parent
-
 ]
 
-{ #category : 'examples' }
+{ #category : #'examples - visibility' }
 BlLinearLayoutHorizontalExamples >> one_child_set_visibility_gone [
 	<gtExample>
 	| aContainer aRed aBlue |
+	
 	aContainer := BlElement new
 		layout: (BlLinearLayout horizontal cellSpacing: 20);
 		padding: (BlInsets top: 10 bottom: 10);
-		extent: 500 @ 400.
+		extent: 500@400.
+		
 	aRed := BlElement new
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent ];
 		border: (BlBorder paint: Color red darker width: 1);
 		background: (Color red alpha: 0.3).
+		
 	aBlue := BlElement new
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent ];
 		border: (BlBorder paint: Color blue darker width: 1);
 		background: (Color blue alpha: 0.3).
-	aContainer addChildren: {
-		aRed.			aBlue }.
-	self layoutInSpace: aContainer.
-	self assert: aContainer extent equals: 500 @ 400.
-	self assert: aRed position equals: 20 @ 10.
-	self assert: aRed extent equals: 220 @ 380.
-	self assert: aBlue position equals: 260 @ 10.
-	self assert: aBlue extent equals: 220 @ 380.
+		
+	aContainer addChildren: { aRed . aBlue }.
+	
+	aContainer forceLayout.
+	
+	self assert: aContainer extent equals: 500@400.
+	self assert: aRed position equals: 20@10.
+	self assert: aRed extent equals: 220@380.
+	
+	self assert: aBlue position equals: 260@10.
+	self assert: aBlue extent equals: 220@380.
+	
 	aRed visibility: BlVisibility gone.
-	self layoutInSpace: aContainer.
-	self assert: aContainer extent equals: 500 @ 400.
+	
+	aContainer forceLayout.
+	
+	self assert: aContainer extent equals: 500@400.
 	"red keeps its position and extent from the previous pass"
-	self assert: aRed position equals: 20 @ 10.
-	self assert: aRed extent equals: 220 @ 380.
-	self assert: aBlue position equals: 20 @ 10.
-	self assert: aBlue extent equals: 460 @ 380.
+	self assert: aRed position equals: 20@10.
+	self assert: aRed extent equals: 220@380.
+	
+	self assert: aBlue position equals: 20@10.
+	self assert: aBlue extent equals: 460@380.
+	
 	^ aContainer
 ]
 
-{ #category : 'examples - setup' }
+{ #category : #'examples - setup' }
 BlLinearLayoutHorizontalExamples >> parentWithLinearHorizontalLayout [
 	<gtExample>
 	| element |

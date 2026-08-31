@@ -1,9 +1,6 @@
 Class {
 	#name : #BlElementEventTest,
 	#superclass : #TestCase,
-	#instVars : [
-		'space'
-	],
 	#category : #'Bloc-UnitedTests-Event'
 }
 
@@ -36,22 +33,6 @@ BlElementEventTest >> newParent [
 		  extent: 400 @ 300;
 		  background: (Color gray alpha: 0.3);
 		  yourself
-]
-
-{ #category : #running }
-BlElementEventTest >> setUp [
-	super setUp.
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space show; settle
-]
-
-{ #category : #running }
-BlElementEventTest >> tearDown [
-	space ifNotNil: [
-		space close; settle.
-		space := nil ].
-	super tearDown
 ]
 
 { #category : #tests }
@@ -111,29 +92,42 @@ BlElementEventTest >> testBorderChanged [
 
 { #category : #tests }
 BlElementEventTest >> testExtentChanged [
+
 	| extentChanged element |
 	extentChanged := 0.
+
 	element := self newChild.
-	space deferAndSettle: [ space root addChild: element ].
+	"make sure initial extent is computed"
+	element forceLayout.
 	element
 		addEventHandlerOn: BlElementExtentChangedEvent
 		do: [ extentChanged := extentChanged + 1 ].
-	space deferAndSettle: [ element extent: element extent * 2 ].
+
+	"change size and force compute layout"
+	element extent: element extent * 2.
+	element forceLayout.
 	self assert: extentChanged equals: 1.
-	space deferAndSettle: [ element extent: element extent ].
+
+	"requesting the same size should not trigger event"
+	element extent: element extent.
+	element forceLayout.
 	self assert: extentChanged equals: 1
 ]
 
 { #category : #tests }
 BlElementEventTest >> testExtentChangedChangingWithTheSameSizeDoesNotRaiseEvent [
+
 	| extentChanged element |
 	extentChanged := 0.
 	element := self newChild.
-	space deferAndSettle: [ space root addChild: element ].
+	"make sure initial extent is computed"
+	element forceLayout.
 	element
 		addEventHandlerOn: BlElementExtentChangedEvent
 		do: [ extentChanged := extentChanged + 1 ].
-	space deferAndSettle: [ element extent: element extent ].
+
+	element extent: element extent.
+	element forceLayout.
 	self assert: extentChanged equals: 0
 ]
 
@@ -154,33 +148,47 @@ BlElementEventTest >> testLayoutChanged [
 
 { #category : #tests }
 BlElementEventTest >> testPositionChanged [
+
 	| positionChanged parent child |
 	positionChanged := 0.
+
 	child := self newChild.
 	parent := self newParent.
 	parent addChild: child.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
+
 	child
 		addEventHandlerOn: BlElementPositionChangedEvent
 		do: [ positionChanged := positionChanged + 1 ].
-	space deferAndSettle: [ child position: child position + (20 @ 20) ].
+
+	child position: child position + (20 @ 20).
+	child forceLayout.
 	self assert: positionChanged equals: 1.
-	space deferAndSettle: [ child position: child position ].
+
+	"relocating child to the same position should not trigger an event"
+	child position: child position.
+	child forceLayout.
 	self assert: positionChanged equals: 1
 ]
 
 { #category : #tests }
 BlElementEventTest >> testPositionChangedRelocatingOnSamePositionDoesNotRaiseEvent [
+
 	| positionChanged parent child |
 	positionChanged := 0.
+
 	child := self newChild.
 	parent := self newParent.
 	parent addChild: child.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
+
 	child
 		addEventHandlerOn: BlElementPositionChangedEvent
 		do: [ positionChanged := positionChanged + 1 ].
-	space deferAndSettle: [ child position: child position ].
+
+
+	child position: child position.
+	child forceLayout.
 	self assert: positionChanged equals: 0
 ]
 

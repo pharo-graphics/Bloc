@@ -31,12 +31,12 @@ BlHostPulseLoop class >> host: aBlHost [
 ]
 
 { #category : #debug }
-BlHostPulseLoop >> forceStartNewUIProcess [
+BlHostPulseLoop >> forceStartNewPulseProcess [
 	"I should only be used by the logic for opening the debugger.
 	
-	I create and start a new UI thread without stopping the previous one.
-	Normally this leads to incorrect behaviour in Bloc UI process. However 
-	if I am sent from the current Bloc UI process when an error happened in 
+	I create and start a new pulse process without stopping the previous one.
+	Normally this leads to incorrect behaviour in Bloc pulse process. However 
+	if I am sent from the current Bloc pulse process when an error happened in 
 	the actual process, and after sending me, my sender terminates or suspends 
 	the process my usage should be safe."
 	
@@ -45,11 +45,31 @@ BlHostPulseLoop >> forceStartNewUIProcess [
 ]
 
 { #category : #debug }
-BlHostPulseLoop >> forceStartOfUIProcess: aProces [
+BlHostPulseLoop >> forceStartNewUIProcess [
+
+	self
+		deprecated: 'Use #forceStartNewPulseProcess instead'
+		transformWith: '`@receiver forceStartNewUIProcess' -> '`@receiver forceStartNewPulseProcess'.
+
+	^ self forceStartNewPulseProcess
+]
+
+{ #category : #debug }
+BlHostPulseLoop >> forceStartOfPulseProcess: aProcess [
 	"I should only be used by the logic for closing the debugger."
 	
-	loopProcess := aProces.
+	loopProcess := aProcess.
 	loopProcess resume
+]
+
+{ #category : #debug }
+BlHostPulseLoop >> forceStartOfUIProcess: aProces [
+
+	self
+		deprecated: 'Use #forceStartOfPulseProcess: instead'
+		transformWith: '`@receiver forceStartOfUIProcess: `@arg' -> '`@receiver forceStartOfPulseProcess: `@arg'.
+
+	^ self forceStartOfPulseProcess: aProces
 ]
 
 { #category : #accessing }
@@ -97,7 +117,7 @@ BlHostPulseLoop >> loopIteration [
 		self waitUntilNextPulse ]
 	on: Exception
 	do: [ :e |
-		self forceStartNewUIProcess.
+		self forceStartNewPulseProcess.
 		e pass ].
 
 	"Returns true to continue looping"
@@ -106,6 +126,12 @@ BlHostPulseLoop >> loopIteration [
 
 { #category : #accessing }
 BlHostPulseLoop >> loopProcess [
+
+	^ loopProcess
+]
+
+{ #category : #accessing }
+BlHostPulseLoop >> pulseProcess [
 
 	^ loopProcess
 ]

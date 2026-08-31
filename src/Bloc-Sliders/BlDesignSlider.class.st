@@ -93,7 +93,7 @@ BlDesignSlider class >> simpleExampleHorizontal [
 	container addChild: slider.
 	container addChild: textElt.
 
-	container openInSpace
+	container openInNewSpace
 ]
 
 { #category : #'as yet unclassified' }
@@ -114,7 +114,7 @@ BlDesignSlider class >> simpleExampleVertical [
 	container addChild: slider.
 	container addChild: textElt.
 
-	container openInSpace
+	container openInNewSpace
 ]
 
 { #category : #accessing }

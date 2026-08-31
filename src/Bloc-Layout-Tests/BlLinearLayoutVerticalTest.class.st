@@ -3,13 +3,12 @@ I have been automatically converted and probably manually tweaked from BlLinearL
 	Finally and more important such tests should not use setup because every method should be in capacity of returning a fully working object called an example :)
 "
 Class {
-	#name : 'BlLinearLayoutVerticalTest',
-	#superclass : 'BlLinearLayoutTest',
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#name : #BlLinearLayoutVerticalTest,
+	#superclass : #BlLinearLayoutTest,
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutVerticalTest >> testElementWithChildMatchInExactParentPadding [
 	"All children are distributed equally within parent's bounds"
 
@@ -22,7 +21,7 @@ BlLinearLayoutVerticalTest >> testElementWithChildMatchInExactParentPadding [
 	parent constraints vertical exact: 600.
 	parent constraints padding: (BlInsets all: 20).
 	parent addChildren: { childA }.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: childA extent equals: 360 @ 560.
 	self assert: childA position equals: 20 @ 20.
 	self assert: parent extent equals: 400 @ 600.
@@ -30,7 +29,7 @@ BlLinearLayoutVerticalTest >> testElementWithChildMatchInExactParentPadding [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutVerticalTest >> testElementWithChildrenMatchInExactParentPadding [
 	"All children are distributed equally within parent's bounds"
 
@@ -46,7 +45,7 @@ BlLinearLayoutVerticalTest >> testElementWithChildrenMatchInExactParentPadding [
 	parent addChildren: {
 			childA.
 			childB }.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: childA extent equals: 560 @ 180.
 	self assert: childA position equals: 20 @ 20.
 	self assert: childB extent equals: 560 @ 180.
@@ -56,7 +55,7 @@ BlLinearLayoutVerticalTest >> testElementWithChildrenMatchInExactParentPadding [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutVerticalTest >> testElementWithExactChildrenInFitContent [
 	"Parent resizes to fit children"
 
@@ -71,7 +70,7 @@ BlLinearLayoutVerticalTest >> testElementWithExactChildrenInFitContent [
 	parent addChildren: {
 			childA.
 			childB }.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: childA extent equals: 200 @ 100.
 	self assert: childA position equals: 0 @ 0.
 	self assert: childB extent equals: 100 @ 200.
@@ -81,7 +80,7 @@ BlLinearLayoutVerticalTest >> testElementWithExactChildrenInFitContent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutVerticalTest >> testElementWithMatchChildrenInExactParent [
 	"All children are distributed equally within parent's bounds"
 
@@ -98,7 +97,7 @@ BlLinearLayoutVerticalTest >> testElementWithMatchChildrenInExactParent [
 			childA.
 			childB.
 			childC }.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: childA extent equals: 200 @ 200.
 	self assert: childA position equals: 0 @ 0.
 	self assert: childB extent equals: 200 @ 200.
@@ -110,7 +109,7 @@ BlLinearLayoutVerticalTest >> testElementWithMatchChildrenInExactParent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutVerticalTest >> testElementWithOneChildMatchOneExactInFitParent [
 	"All children are distributed equally within parent's bounds"
 
@@ -126,7 +125,7 @@ BlLinearLayoutVerticalTest >> testElementWithOneChildMatchOneExactInFitParent [
 	parent addChildren: {
 			childA.
 			childB }.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: childA extent equals: 200 @ 300.
 	self assert: childA position equals: 0 @ 0.
 	self assert: childB extent equals: 200 @ 200.
@@ -136,7 +135,7 @@ BlLinearLayoutVerticalTest >> testElementWithOneChildMatchOneExactInFitParent [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutVerticalTest >> testElementWithOneExactChildInExactParentMargin [
 	"All children are distributed equally within parent's bounds"
 
@@ -153,7 +152,7 @@ BlLinearLayoutVerticalTest >> testElementWithOneExactChildInExactParentMargin [
 	parent constraints horizontal exact: 50.
 	parent constraints vertical exact: 50.
 	parent addChildren: { childA }.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: childA extent equals: 20 @ 20.
 	self assert: childA position equals: 10 @ 15.
 	self assert: parent extent equals: 50 @ 50.
@@ -161,7 +160,7 @@ BlLinearLayoutVerticalTest >> testElementWithOneExactChildInExactParentMargin [
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParentLTR [
 
 	<sampleInstance>
@@ -180,7 +179,7 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 			childA.
 			childB.
 			childC }.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: childA extent equals: 100 @ 100.
 	self assert: childA position equals: 0 @ 0.
 	self assert: childB extent equals: 200 @ 100.
@@ -192,7 +191,7 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParentRTL [
 
 	<sampleInstance>
@@ -212,7 +211,7 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 			childA.
 			childB.
 			childC }.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: childA extent equals: 100 @ 100.
 	self assert: childA position equals: 400 @ 200.
 	self assert: childB extent equals: 200 @ 100.
@@ -224,7 +223,7 @@ BlLinearLayoutVerticalTest >> testElementWithThreeExactChildrenAlignInExactParen
 	^ parent
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutVerticalTest >> testOneChildSetVisibilityGone [
 
 	| aContainer aRed aBlue |
@@ -251,17 +250,15 @@ BlLinearLayoutVerticalTest >> testOneChildSetVisibilityGone [
 			background: (Color blue alpha: 0.3);
 			yourself.
 	aContainer addChildren: { aRed. aBlue }.
-
-	space deferAndSettle: [ space root addChild: aContainer ].
-
+	aContainer forceLayout.
 	self assert: aContainer extent equals: 400 @ 500.
 	self assert: aRed position equals: 10 @ 20.
 	self assert: aRed extent equals: 380 @ 220.
 	self assert: aBlue position equals: 10 @ 260.
 	self assert: aBlue extent equals: 380 @ 220.
 
-	space deferAndSettle: [ aRed visibility: BlVisibility gone ].
-
+	aRed visibility: BlVisibility gone.
+	aContainer forceLayout.
 	self assert: aContainer extent equals: 400 @ 500.
 	"red keeps its position and extent from the previous pass"
 	self assert: aRed position equals: 10 @ 20.
@@ -270,7 +267,7 @@ BlLinearLayoutVerticalTest >> testOneChildSetVisibilityGone [
 	self assert: aBlue extent equals: 380 @ 460
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlLinearLayoutVerticalTest >> testParentWithLinearVerticalLayout [
 
 	<sampleInstance>

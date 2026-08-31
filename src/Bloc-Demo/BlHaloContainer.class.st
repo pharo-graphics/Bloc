@@ -81,7 +81,7 @@ BlHaloContainer class >> exampleDisplayEventHandlersAsHalos [
 
 
 
-	elt openInSpace
+	elt openInNewSpace
 ]
 
 { #category : #'as yet unclassified' }
@@ -160,7 +160,7 @@ BlHaloContainer class >> exampleHalosDisplayedAboveWithFrameLayout [
 
 	container addChildren: elements.
 
-	container openInSpace
+	container openInNewSpace
 ]
 
 { #category : #'instance creation' }

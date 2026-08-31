@@ -1001,13 +1001,6 @@ BlElement >> compositionLayer: aCompositionLayer [
 		put: aCompositionLayer
 ]
 
-{ #category : #'layout utilities' }
-BlElement >> computeDetachedLayout [
-	"Compute layout synchronously for this detached element tree.
-	Raise an error if attached to a space: attached elements must be settled via their space."
-
-	^ self forceLayout
-]
 
 { #category : #'geometry bounds' }
 BlElement >> computeEffectBoundsInto: aBlBounds [
@@ -1537,7 +1530,7 @@ BlElement >> elevation: aBlElevation [
 { #category : #'api - tasks' }
 BlElement >> enqueueTask: aBlTask [
 	"Queue the supplied task to be executed in the next frame.
-	If you want the task executed in the UI process as soon as possible, use #inUIProcessDo:.
+	If you want the task executed in the pulse process as soon as possible, use #inPulseProcessDo:.
 	Note that the task is not guaranteed to be executed (if the element is never attached to a scene)."
 
 	aBlTask onEnqueuedInElement: self.
@@ -2087,30 +2080,46 @@ BlElement >> inSpace [
 ]
 
 { #category : #processing }
-BlElement >> inUIProcessDo: aBlock [
-	"Run the supplied block in the UI process.
-	If the active process is already the UI process, evaluate immediately. 
+BlElement >> inPulseProcessDo: aBlock [
+	"Run the supplied block in the pulse process.
+	If the active process is already the pulse process, evaluate immediately. 
 	Otherwise, queue up for the next frame."
 
-	self inUIProcessDo: aBlock elseDo: [
-			self enqueueTask: (BlTaskAction new
-					 action: aBlock;
-					 yourself) ]
+	self inPulseProcessDo: aBlock elseDo: [
+		self enqueueTask: (BlTaskAction new
+			action: aBlock;
+			yourself) ]
+]
+
+{ #category : #processing }
+BlElement >> inPulseProcessDo: aBlock elseDo: altBlock [
+	"Run the supplied block in the pulse process else run the alternative block.
+	If the active process is already the pulse process, evaluate immediately. 
+	Otherwise, queue up for the next frame."
+
+	(self isAttachedToSceneGraph and: [ self space isPulseProcess ])
+		ifTrue: aBlock
+		ifFalse: altBlock
+]
+
+{ #category : #processing }
+BlElement >> inUIProcessDo: aBlock [
+
+	self
+		deprecated: 'Use #inPulseProcessDo: instead'
+		transformWith: '`@receiver inUIProcessDo: `@arg' -> '`@receiver inPulseProcessDo: `@arg'.
+
+	^ self inPulseProcessDo: aBlock
 ]
 
 { #category : #processing }
 BlElement >> inUIProcessDo: aBlock elseDo: altBlock [
-	"Run the supplied block in the UI process else run the alternative block
-	If the active process is already the UI process, evaluate immediately. 
-	Otherwise, queue up for the next frame."
 
-	| uiProcess |
-	self isAttachedToSceneGraph ifTrue: [ 
-		self space host uiProcessDo: [ :uiProc | uiProcess := uiProc ] ].
+	self
+		deprecated: 'Use #inPulseProcessDo:elseDo: instead'
+		transformWith: '`@receiver inUIProcessDo: `@arg1 elseDo: `@arg2' -> '`@receiver inPulseProcessDo: `@arg1 elseDo: `@arg2'.
 
-	uiProcess = Processor activeProcess
-		ifTrue: aBlock 
-		ifFalse: altBlock
+	^ self inPulseProcessDo: aBlock elseDo: altBlock
 ]
 
 { #category : #initialization }

@@ -29,7 +29,7 @@ BlSpaceSettleTest >> testDeferAndSettleEnsuresEquilibrium [
 ]
 
 { #category : #tests }
-BlSpaceSettleTest >> testDeferAndSettleFromUIProcessRaisesError [
+BlSpaceSettleTest >> testDeferAndSettleFromPulseProcessRaisesError [
 
 	| aSpace errorRaised |
 	aSpace := self newTestingSpace.
@@ -74,15 +74,15 @@ BlSpaceSettleTest >> testDeferAndSettlePreservesSequentialOrdering [
 ]
 
 { #category : #tests }
-BlSpaceSettleTest >> testDeferOnOpenedSpaceRunsOnUIProcess [
+BlSpaceSettleTest >> testDeferOnOpenedSpaceRunsOnPulseProcess [
 
-	| aSpace isUI |
+	| aSpace isPulse |
 	aSpace := self newTestingSpace.
-	isUI := false.
-	aSpace defer: [ isUI := aSpace host isUIProcess ].
-	self deny: isUI.
+	isPulse := false.
+	aSpace defer: [ isPulse := aSpace host isPulseProcess ].
+	self deny: isPulse.
 	aSpace settle.
-	self assert: isUI
+	self assert: isPulse
 ]
 
 { #category : #tests }
@@ -252,7 +252,7 @@ BlSpaceSettleTest >> testWaitUntilTrueConditionMetImmediately [
 ]
 
 { #category : #tests }
-BlSpaceSettleTest >> testSettleFromUIProcessRaisesError [
+BlSpaceSettleTest >> testSettleFromPulseProcessRaisesError [
 
 	| aSpace errorRaised |
 	aSpace := self newTestingSpace.
@@ -277,7 +277,7 @@ BlSpaceSettleTest >> testWaitUntilTrueForDurationTimesOut [
 ]
 
 { #category : #tests }
-BlSpaceSettleTest >> testWaitUntilTrueFromUIProcessRaisesError [
+BlSpaceSettleTest >> testWaitUntilTrueFromPulseProcessRaisesError [
 
 	| aSpace errorRaised |
 	aSpace := self newTestingSpace.

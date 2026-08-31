@@ -428,81 +428,63 @@ BlLinearLayoutUsageTest >> testExampleVerticalListFixedHeight [
 	^ el
 ]
 
-{ #category : #helpers }
-BlLinearLayoutUsageTest >> newParentWithMatchParentInFitContent [
-
-	| child parent |
-	child :=
-		BlElement new
-			layout: BlBasicLayout new;
-			background: (Color red alpha: 0.3);
-			border: (BlBorder paint: Color red width: 1);
-			constraintsDo: [ :c |
-				c horizontal exact: 100.
-				c vertical matchParent ];
-			yourself.
-	parent :=
-		BlElement new
-			layout: BlLinearLayout horizontal;
-			background: (Color gray alpha: 0.3);
-			padding: (BlInsets all: 25);
-			constraintsDo: [ :c |
-				c horizontal exact: 300.
-				c vertical fitContent ];
-			addChild: child;
-			yourself.
-	^ parent
-]
-
 { #category : #tests }
 BlLinearLayoutUsageTest >> testMatchParentInFitContent [
 	"If all children in the parent that fits content match parent then they should be measured with 0 size"
 
-	| parent child |
-	parent := self newParentWithMatchParentInFitContent.
-	child := parent children first.
-
-	space deferAndSettle: [ space root addChild: parent ].
-
+	<sampleInstance>
+	<demo>
+	| child parent |
+	child := BlElement new.
+	child layout: BlBasicLayout new.
+	child background: (Color red alpha: 0.3).
+	child border: (BlBorder paint: Color red width: 1).
+	child constraintsDo: [ :c |
+		c horizontal exact: 100.
+		c vertical matchParent ].
+	parent := BlElement new.
+	parent layout: BlLinearLayout horizontal.
+	parent background: (Color gray alpha: 0.3).
+	parent padding: (BlInsets all: 25).
+	parent constraintsDo: [ :c |
+		c horizontal exact: 300.
+		c vertical fitContent ].
+	parent addChild: child.
+	parent forceLayout.
 	self assert: parent extent equals: 300 @ 50.
-	self assert: child extent equals: 100 @ 0
+	self assert: child extent equals: 100 @ 0.
+	^ parent
 ]
 
 { #category : #tests }
 BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeBackToMatchParent [
+
+	<sampleInstance>
 	"Changing back to match parent should reset size to 0"
-
 	| parent child |
-	parent := self newParentWithMatchParentInFitContent.
+	parent := self testMatchParentInFitContentChangeToExact.
 	child := parent children first.
-
-	space deferAndSettle: [ space root addChild: parent ].
-
-	space deferAndSettle: [ child height: 200 ].
-
-	self assert: parent extent equals: 300 @ 250.
-	self assert: child extent equals: 100 @ 200.
-
-	space deferAndSettle: [ child constraintsDo: [ :c | c vertical matchParent ] ].
-
+	child constraintsDo: [ :c | c vertical matchParent ].
+	parent forceLayout.
 	self assert: parent extent equals: 300 @ 50.
-	self assert: child extent equals: 100 @ 0
+	self assert: child extent equals: 100 @ 0.
+	^ parent
 ]
 
 { #category : #tests }
 BlLinearLayoutUsageTest >> testMatchParentInFitContentChangeToExact [
 	"Now we change size to exact and expect parent to resize"
 
+	<sampleInstance>
+	<demo>
 	| parent child |
-	parent := self newParentWithMatchParentInFitContent.
+	parent := self testMatchParentInFitContent.
 	child := parent children first.
-
-	space deferAndSettle: [ space root addChild: parent ].
-
-	space deferAndSettle: [ child height: 200 ].
-
+	child height: 200.
+	parent forceLayout.
 	self assert: parent extent equals: 300 @ 250.
-	self assert: child extent equals: 100 @ 200
+	self assert: child extent equals: 100 @ 200.
+	^ parent
 ]
 
 { #category : #tests }
@@ -531,7 +513,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimited [
 		c horizontal exact: 300.
 		c vertical exact: 400 ].
 	parent addChild: child.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: parent extent equals: 300 @ 400.
 	self assert: child extent equals: 300 @ 400.
 	^ parent
@@ -569,7 +551,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChild [
 	parent addChildren: {
 			childA.
 			childB }.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 300 @ 325.
 	self assert: childB extent equals: 100 @ 75.
@@ -615,7 +597,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedAndAnotherChildFitCo
 	parent addChildren: {
 			childA.
 			childB }.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 300 @ 325.
 	self assert: childB extent equals: 300 @ 75.
@@ -668,7 +650,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndThreeChild
 			childB.
 			childD }.
 	parent padding: (BlInsets left: 20 right: 20).
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 260 @ 175.
 	self assert: childB extent equals: 100 @ 75.
@@ -715,7 +697,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsAndTwoChildlr
 			childA.
 			childB }.
 	parent padding: (BlInsets left: 20 right: 20).
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 260 @ 195.
 	self assert: childB extent equals: 100 @ 75.
@@ -768,7 +750,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndThreeCh
 			childB.
 			childD }.
 	parent padding: (BlInsets left: 20 right: 20).
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 260 @ 140.
 	self assert: childB extent equals: 100 @ 75.
@@ -815,7 +797,7 @@ BlLinearLayoutUsageTest >> testOneChildWithFitContentLimitedExceedsNotAndTwoChil
 			childA.
 			childB }.
 	parent padding: (BlInsets left: 20 right: 20).
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	self assert: parent extent equals: 300 @ 400.
 	self assert: childA extent equals: 260 @ 140.
 	self assert: childB extent equals: 100 @ 75.
@@ -854,7 +836,7 @@ BlLinearLayoutUsageTest >> testTwoChildrenMatchParentInFitContent [
 		c vertical matchParent ].
 	parent addChild: child.
 	parent addChild: child2.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	^ parent
 ]
 
@@ -934,6 +916,6 @@ BlLinearLayoutUsageTest >> twoChildrenMatchParentInFitContent [
 		c vertical matchParent ].
 	parent addChild: child.
 	parent addChild: child2.
-	space deferAndSettle: [ space root addChild: parent ].
+	parent forceLayout.
 	^ parent
 ]

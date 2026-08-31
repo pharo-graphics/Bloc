@@ -20,7 +20,7 @@ BlDemoScript >> description [
 BlDemoScript >> executeOn: class [
 
  	(super executeOn: class)
-		openInSpace
+		openInNewSpace
 ]
 
 { #category : #accessing }

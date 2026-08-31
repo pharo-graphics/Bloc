@@ -35,7 +35,7 @@ BAAttachedExporterTest >> tearDown [
 ]
 
 { #category : #tests }
-BAAttachedExporterTest >> testAeAsFormFromHostUIProcess [
+BAAttachedExporterTest >> testAeAsFormFromHostPulseProcess [
 
 	| form |
 	space deferAndSettle: [ form := element aeAsForm ].
@@ -44,7 +44,7 @@ BAAttachedExporterTest >> testAeAsFormFromHostUIProcess [
 ]
 
 { #category : #tests }
-BAAttachedExporterTest >> testAeAsFormWithPendingLayoutFromHostUIProcessErrors [
+BAAttachedExporterTest >> testAeAsFormWithPendingLayoutFromHostPulseProcessErrors [
 
 	| raisedError |
 	raisedError := false.
@@ -56,7 +56,7 @@ BAAttachedExporterTest >> testAeAsFormWithPendingLayoutFromHostUIProcessErrors [
 ]
 
 { #category : #tests }
-BAAttachedExporterTest >> testExportFromHostUIProcess [
+BAAttachedExporterTest >> testExportFromHostPulseProcess [
 
 	| form |
 	space deferAndSettle: [ form := element exportAsForm ].
@@ -65,7 +65,7 @@ BAAttachedExporterTest >> testExportFromHostUIProcess [
 ]
 
 { #category : #tests }
-BAAttachedExporterTest >> testExportWithPendingLayoutFromHostUIProcessErrors [
+BAAttachedExporterTest >> testExportWithPendingLayoutFromHostPulseProcessErrors [
 
 	| raisedError |
 	raisedError := false.

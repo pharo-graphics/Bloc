@@ -1,27 +1,8 @@
 Class {
 	#name : #BlProportionalLayoutTest,
 	#superclass : #TestCase,
-	#instVars : [
-		'space'
-	],
 	#category : #'Bloc-Layout-Tests'
 }
-
-{ #category : #running }
-BlProportionalLayoutTest >> setUp [
-	super setUp.
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space show; settle
-]
-
-{ #category : #running }
-BlProportionalLayoutTest >> tearDown [
-	space ifNotNil: [
-		space close; settle.
-		space := nil ].
-	super tearDown
-]
 
 { #category : #tests }
 BlProportionalLayoutTest >> testDefaultConstraints [
@@ -40,7 +21,7 @@ BlProportionalLayoutTest >> testDefaultConstraints [
 		yourself.
 	
 	aChild requestLayout.
-	space deferAndSettle: [ space root addChild: aContainer ].
+	aContainer forceLayout.
 	
 	self assert: aContainer extent equals: 210@110.
 	self assert: aChild position equals: 5@5.
@@ -93,7 +74,7 @@ BlProportionalLayoutTest >> testFullMathsConsideringPaddingAndMargin [
 		yourself.
 
 	aChild requestLayout.
-	space deferAndSettle: [ space root addChild: aContainer ].
+	aContainer forceLayout.
 
 	self assert: aContainer extent equals: containerExtent.
 
@@ -148,7 +129,7 @@ BlProportionalLayoutTest >> testGrandChildMatchesParent [
 		padding: (BlInsets all: 4);
 		yourself.
 	
-	space deferAndSettle: [ space root addChild: aContainer ].
+	aContainer forceLayout.
 	
 	self
 		assert: aChild bounds left
@@ -223,7 +204,7 @@ BlProportionalLayoutTest >> testHorizontalAndVerticalConstraints [
 		yourself.
 	
 	aChild requestLayout.
-	space deferAndSettle: [ space root addChild: aContainer ].
+	aContainer forceLayout.
 	
 	self assert: aChild position equals: 10@20.
 	self assert: aChild extent equals: 80@60
@@ -251,7 +232,7 @@ BlProportionalLayoutTest >> testIgnoreByLayoutChild [
 		addChild: aChild;
 		yourself.
 	
-	space deferAndSettle: [ space root addChild: aContainer ].
+	aContainer forceLayout.
 
 	self assert: aChild position equals: 2 @ 78.
 	self assert: aChild extent equals: 10 @ 20
@@ -283,7 +264,7 @@ BlProportionalLayoutTest >> testMultipleChildren [
 	
 	childA requestLayout.
 	childB requestLayout.
-	space deferAndSettle: [ space root addChild: aContainer ].
+	aContainer forceLayout.
 	
 	self assert: childA position equals: 0@0.
 	self assert: childA extent equals: 50@100.

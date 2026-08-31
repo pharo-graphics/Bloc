@@ -74,6 +74,12 @@ BlParameterizedHostTest >> hostClass: aClass [
 	hostClass := aClass
 ]
 
+{ #category : #accessing }
+BlParameterizedHostTest >> testingSpaces [
+
+	^ testingSpaces
+]
+
 { #category : #'instance creation' }
 BlParameterizedHostTest >> newTestingSpace [
 

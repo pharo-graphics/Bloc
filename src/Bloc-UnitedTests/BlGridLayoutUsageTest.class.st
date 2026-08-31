@@ -5,27 +5,8 @@ I have been automatically converted and probably manually tweaked from BlGridLay
 Class {
 	#name : #BlGridLayoutUsageTest,
 	#superclass : #TestCase,
-	#instVars : [
-		'space'
-	],
 	#category : #'Bloc-UnitedTests'
 }
-
-{ #category : #running }
-BlGridLayoutUsageTest >> setUp [
-	super setUp.
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space show; settle
-]
-
-{ #category : #running }
-BlGridLayoutUsageTest >> tearDown [
-	space ifNotNil: [
-		space close; settle.
-		space := nil ].
-	super tearDown
-]
 
 { #category : #fixture }
 BlGridLayoutUsageTest >> testExampleDistributed2x2Grid [
@@ -422,37 +403,45 @@ BlGridLayoutUsageTest >> testExampleVerticalSpacing1x2Grid [
 
 { #category : #tests }
 BlGridLayoutUsageTest >> testVerticalSpan [
-	<sampleInstance>
+
 	| grid child1 child2 child3 |
-	grid := BlElement new.
-	grid extent: 500 @ 400.
-	grid layout: (BlGridLayout horizontal cellSpacing: 10; columnCount: 2).
+	grid :=
+		BlElement new
+			extent: 500 @ 400;
+			layout: (BlGridLayout horizontal cellSpacing: 10; columnCount: 2);
+			yourself.
 
-	child1 := BlElement new.
-	child1 background: (Color red alpha: 0.5).
-	child1 constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent ].
+	child1 :=
+		BlElement new
+			background: (Color red alpha: 0.5);
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical matchParent ];
+			yourself.
 
-	child2 := BlElement new.
-	child2 background: (Color blue alpha: 0.5).
-	child2 constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent.
-		c grid vertical span: 2 ].
+	child2 :=
+		BlElement new
+			background: (Color blue alpha: 0.5);
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical matchParent.
+				c grid vertical span: 2 ];
+			yourself.
 
-	child3 := BlElement new.
-	child3 background: (Color green alpha: 0.5).
-	child3 constraintsDo: [ :c |
-		c horizontal matchParent.
-		c vertical matchParent ].
+	child3 :=
+		BlElement new
+			background: (Color green alpha: 0.5);
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical matchParent ];
+			yourself.
 
 	grid addChildren: {
-		child1.
-		child2.
-		child3 }.
+			child1.
+			child2.
+			child3 }.
 
-	space deferAndSettle: [ space root addChild: grid ].
+	grid forceLayout.
 	self assert: grid extent equals: 500 @ 400.
 	self assert: child1 position equals: 10 @ 10.
 	self assert: child1 extent equals: 235 @ 185.
@@ -461,7 +450,5 @@ BlGridLayoutUsageTest >> testVerticalSpan [
 	self assert: child2 extent equals: 235 @ 380.
 
 	self assert: child3 position equals: 10 @ 205.
-	self assert: child3 extent equals: 235 @ 185.
-
-	^ grid
+	self assert: child3 extent equals: 235 @ 185
 ]

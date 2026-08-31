@@ -209,7 +209,7 @@ BlEventSimulatorTest >> testVirtualDeviceState [
 ]
 
 { #category : #tests }
-BlEventSimulatorTest >> testSimulateFromUIProcessRaisesError [
+BlEventSimulatorTest >> testSimulateFromPulseProcessRaisesError [
 
 	| errorRaised |
 	errorRaised := false.

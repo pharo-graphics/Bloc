@@ -301,7 +301,7 @@ BlNewBasicSlider class >> fullExample [
 			graduatedSegmentedSlider.
 			graduatedSegmentedSliderTextElt }.
 
-	container openInSpace.
+	container openInNewSpace.
 
 	2 seconds wait.
 	0 to: 100 do: [ :i |

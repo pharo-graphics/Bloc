@@ -5,9 +5,6 @@ I have been automatically converted and probably manually tweaked from BlWrapAro
 Class {
 	#name : #BlWrapAroundChildrenLayoutTest,
 	#superclass : #TestCase,
-	#instVars : [
-		'space'
-	],
 	#category : #'Bloc-Layout-Tests'
 }
 
@@ -51,29 +48,13 @@ BlWrapAroundChildrenLayoutTest >> newContainerWithChildren [
 	^ aContainer
 ]
 
-{ #category : #running }
-BlWrapAroundChildrenLayoutTest >> setUp [
-	super setUp.
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space show; settle
-]
-
-{ #category : #running }
-BlWrapAroundChildrenLayoutTest >> tearDown [
-	space ifNotNil: [
-		space close; settle.
-		space := nil ].
-	super tearDown
-]
-
 { #category : #tests }
 BlWrapAroundChildrenLayoutTest >> testNotTransformedContainerWrapsAroundChildren [
 
 	| aContainer |
 	aContainer := self newContainerWithChildren.
 
-	space deferAndSettle: [ space root addChild: aContainer ].
+	aContainer forceLayout.
 
 	self
 		assert: aContainer bounds asRectangle
@@ -98,7 +79,7 @@ BlWrapAroundChildrenLayoutTest >> testScaledContainerWrapsAroundChildren [
 
 	aContainer transformDo: [ :t | t scaleBy: 0.5 ].
 
-	space deferAndSettle: [ space root addChild: aContainer ].
+	aContainer forceLayout.
 
 	self
 		assert: aContainer bounds asRectangle

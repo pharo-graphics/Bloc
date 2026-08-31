@@ -28,7 +28,7 @@ BlDragAndDropExamples class >> experimentDragChangesScale [
 		addEventHandlerOn: BlDragEndEvent
 		do: [ child addAnimation: scaleDownAnimation copy ].
 
-	child openInSpace
+	child openInNewSpace
 ]
 
 { #category : #experimentations }
@@ -758,7 +758,7 @@ BlDragAndDropExamples class >> experimentHighlightAnimationToDraggedElement [
 		addEventHandlerOn: BlDragEndEvent
 		do: [ currentAnimation loops: 0 ].
 
-	child openInSpace
+	child openInNewSpace
 ]
 
 { #category : #'experimentations - halos' }
@@ -808,7 +808,7 @@ elt addEventHandlerOn: BlClickEvent do: [ :event |
 	 
 
 
-elt openInSpace 
+elt openInNewSpace 
 ]
 
 { #category : #'experimentations - halos' }
@@ -822,7 +822,7 @@ BlDragAndDropExamples class >> experimentInspectOnCtrlShift [
 		(event modifiers isCtrl and: event modifiers isShift) ifTrue: [
 			event inspect ] ].
 
-	elt openInSpace
+	elt openInNewSpace
 ]
 
 { #category : #experimentations }
@@ -974,7 +974,7 @@ BlDragAndDropExamples class >> experimentRemoveDragHandlerAtRunTime [
 				child removeEventHandler: dragHandler ] ].
 
 
-	child openInSpace
+	child openInNewSpace
 ]
 
 { #category : #'experimentations - dragSelector - shortcut' }
@@ -1344,7 +1344,7 @@ BlDragAndDropExamples class >> experimentWiggleAnimationToDraggedElement [
 		addEventHandlerOn: BlDragEndEvent
 		do: [ currentAnimation loops: 0 ].
 
-	child openInSpace
+	child openInNewSpace
 ]
 
 { #category : #experimentations }

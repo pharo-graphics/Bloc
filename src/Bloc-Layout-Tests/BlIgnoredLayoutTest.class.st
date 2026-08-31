@@ -1,30 +1,10 @@
 Class {
-	#name : 'BlIgnoredLayoutTest',
-	#superclass : 'TestCase',
-	#instVars : [
-		'space'
-	],
-	#category : 'Bloc-Layout-Tests',
-	#package : 'Bloc-Layout-Tests'
+	#name : #BlIgnoredLayoutTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-Layout-Tests'
 }
 
-{ #category : 'running' }
-BlIgnoredLayoutTest >> setUp [
-	super setUp.
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space show; settle
-]
-
-{ #category : 'running' }
-BlIgnoredLayoutTest >> tearDown [
-	space ifNotNil: [
-		space close; settle.
-		space := nil ].
-	super tearDown
-]
-
-{ #category : 'tests' }
+{ #category : #tests }
 BlIgnoredLayoutTest >> testAlignmentIsStable [
 
 	| aContainer aChild |
@@ -47,13 +27,14 @@ BlIgnoredLayoutTest >> testAlignmentIsStable [
 			addChild: aChild;
 			yourself.
 
-	space deferAndSettle: [ space root addChild: aContainer ].
+	aContainer forceLayout.
 
 	self assert: aContainer extent equals: 300 @ 200.
 	self assert: aChild position equals: 125 @ -25.
 	self assert: aChild extent equals: 50 @ 50.
 
-	space deferAndSettle: [ aChild requestLayout ].
+	aChild requestLayout.
+	aContainer forceLayout.
 
 	self assert: aContainer extent equals: 300 @ 200.
 	self assert: aChild position equals: 125 @ -25.

@@ -23,17 +23,6 @@ BlExamplesTest class >> testSelectors [
 		  thenCollect: [ :each | each selector ]
 ]
 
-{ #category : #helpers }
-BlExamplesTest >> layoutInSpace: anElement [
-
-	| space |
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space root addChild: anElement.
-	space show; settle.
-	space root removeChildren.
-	space close; settle
-]
 
 { #category : #private }
 BlExamplesTest >> performTest [ 

@@ -69,7 +69,7 @@ BlOldBasicSlider class >> exampleSegmented [
 	bl buildSlider.
 	bl validatedValueCallback: [ :e | "self changedTimeValue: e" ].
 	bl margin: (BlInsets top: 5).
-	bl openInSpace
+	bl openInNewSpace
 ]
 
 { #category : #testing }
@@ -92,7 +92,7 @@ BlOldBasicSlider class >> exampleSegmentedWithColors [
 	bl2 buildSlider.
 	bl2 validatedValueCallback: [ :e | "self changedOperationalActivityValue: e"
 		 ].
-	bl2 openInSpace.
+	bl2 openInNewSpace
 ]
 
 { #category : #building }

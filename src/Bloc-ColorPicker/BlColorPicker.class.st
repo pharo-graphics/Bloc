@@ -34,7 +34,7 @@ BlColorPicker class >> open [
 
 	<script> 
 	
-	self new openInSpace
+	self new openInNewSpace
 ]
 
 { #category : #'instance creation' }
@@ -59,7 +59,7 @@ BlColorPicker class >> openPaint [
 	paintSpace position: initialPosition.
 
 	picker := BlColorPicker new.
-	pickerSpace := picker inSpace.
+	pickerSpace := picker inNewSpace.
 	pickerSpace position: initialPosition + (canvasExtent x @ 0).
 	picker whenLayoutedDoOnce: [
 		pickerSpace extent: picker extent.

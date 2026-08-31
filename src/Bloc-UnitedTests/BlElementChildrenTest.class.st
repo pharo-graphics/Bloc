@@ -5,9 +5,6 @@ I have been automatically converted and probably manually tweaked from BlElement
 Class {
 	#name : #BlElementChildrenTest,
 	#superclass : #TestCase,
-	#instVars : [
-		'space'
-	],
 	#category : #'Bloc-UnitedTests-Children'
 }
 
@@ -99,45 +96,31 @@ BlElementChildrenTest >> multipleChildrenIn: aContainer depth: aDepth [
 
 { #category : #tests }
 BlElementChildrenTest >> overlappingChildren [
+
 	<sampleInstance>
 	<demo>
 	| aContainer aRedChild aBlueChild |
 	aContainer := BlElement new
-		extent: 400 @ 400;
-		background: Color veryVeryLightGray;
-		id: 'Container';
-		yourself.
+		              extent: 400 @ 400;
+		              background: Color veryVeryLightGray;
+		              id: 'Container';
+		              yourself.
 	aRedChild := BlElement new
-		extent: 300 @ 150;
-		position: 50 @ 125;
-		background: (Color red alpha: 0.5);
-		id: 'Red';
-		yourself.
+		             extent: 300 @ 150;
+		             position: 50 @ 125;
+		             background: (Color red alpha: 0.5);
+		             id: 'Red';
+		             yourself.
 	aBlueChild := BlElement new
-		extent: 150 @ 300;
-		position: 125 @ 50;
-		background: (Color blue alpha: 0.5);
-		id: 'Blue';
-		yourself.
+		              extent: 150 @ 300;
+		              position: 125 @ 50;
+		              background: (Color blue alpha: 0.5);
+		              id: 'Blue';
+		              yourself.
 	aContainer addChild: aRedChild as: #red.
 	aContainer addChild: aBlueChild as: #blue.
+	aContainer forceLayout.
 	^ aContainer
-]
-
-{ #category : #running }
-BlElementChildrenTest >> setUp [
-	super setUp.
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space show; settle
-]
-
-{ #category : #running }
-BlElementChildrenTest >> tearDown [
-	space ifNotNil: [
-		space close; settle.
-		space := nil ].
-	super tearDown
 ]
 
 { #category : #tests }
@@ -174,10 +157,8 @@ BlElementChildrenTest >> testAllLeafChildrenAt100200 [
 
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
-	space deferAndSettle: [ space root addChild: aContainer ].
 	theChildren := aContainer withAllLeafChildrenAt: 100 @ 200.
-	self assert: theChildren equals: { (aContainer childWithId: #red) }.
-	^ theChildren
+	self assert: theChildren equals: { (aContainer childWithId: #red) }
 ]
 
 { #category : #tests }
@@ -185,10 +166,8 @@ BlElementChildrenTest >> testAllLeafChildrenAt200100 [
 
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
-	space deferAndSettle: [ space root addChild: aContainer ].
 	theChildren := aContainer withAllLeafChildrenAt: 200 @ 100.
-	self assert: theChildren equals: { (aContainer childWithId: #blue) }.
-	^ theChildren
+	self assert: theChildren equals: { (aContainer childWithId: #blue) }
 ]
 
 { #category : #tests }
@@ -196,12 +175,10 @@ BlElementChildrenTest >> testAllLeafChildrenAt200200 [
 
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
-	space deferAndSettle: [ space root addChild: aContainer ].
 	theChildren := aContainer withAllLeafChildrenAt: 200 @ 200.
 	self assert: theChildren equals: {
 			(aContainer childWithId: #blue).
-			(aContainer childWithId: #red) }.
-	^ theChildren
+			(aContainer childWithId: #red) }
 ]
 
 { #category : #tests }
@@ -209,10 +186,8 @@ BlElementChildrenTest >> testAllLeafChildrenAt5050 [
 
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
-	space deferAndSettle: [ space root addChild: aContainer ].
 	theChildren := aContainer withAllLeafChildrenAt: 50 @ 50.
-	self assert: theChildren equals: { aContainer }.
-	^ theChildren
+	self assert: theChildren equals: { aContainer }
 ]
 
 { #category : #tests }
@@ -221,8 +196,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt600600 [
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
 	theChildren := aContainer withAllLeafChildrenAt: 600 @ 600.
-	self assert: theChildren equals: {  }.
-	^ theChildren
+	self assert: theChildren equals: {  }
 ]
 
 { #category : #tests }

@@ -4,10 +4,7 @@ I have been automatically converted and probably manually tweaked from BlEventEx
 "
 Class {
 	#name : #BlEventTest,
-	#superclass : #TestCase,
-	#instVars : [
-		'space'
-	],
+	#superclass : #BlSpaceTestCase,
 	#category : #'Bloc-Tests-Events'
 }
 
@@ -57,15 +54,6 @@ BlEventTest >> newRedElement [
 		  yourself
 ]
 
-{ #category : #running }
-BlEventTest >> setUp [
-
-	super setUp.
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space show; settle
-]
-
 { #category : #tests }
 BlEventTest >> simulate: aSymbol on: anElement [
 
@@ -73,14 +61,6 @@ BlEventTest >> simulate: aSymbol on: anElement [
 		space root addChild: anElement topMostParent ].
 	anElement eventSimulator perform: aSymbol.
 	space settle
-]
-
-{ #category : #running }
-BlEventTest >> tearDown [
-
-	space close; settle.
-
-	super tearDown
 ]
 
 { #category : #tests }

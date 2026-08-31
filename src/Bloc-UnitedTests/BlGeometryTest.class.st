@@ -4,9 +4,6 @@ An AkGroupTest is a test class for testing the behavior of AkGroup
 Class {
 	#name : #BlGeometryTest,
 	#superclass : #TestCase,
-	#instVars : [
-		'space'
-	],
 	#category : #'Bloc-UnitedTests-Geometry'
 }
 
@@ -14,22 +11,6 @@ Class {
 BlGeometryTest class >> shouldInheritSelectors [
 	^ true
 	
-]
-
-{ #category : #running }
-BlGeometryTest >> setUp [
-	super setUp.
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space show; settle
-]
-
-{ #category : #running }
-BlGeometryTest >> tearDown [
-	space ifNotNil: [
-		space close; settle.
-		space := nil ].
-	super tearDown
 ]
 
 { #category : #'contains tests' }
@@ -56,7 +37,7 @@ BlGeometryTest >> test3ElContainsPoint [
 		     addChild: c2;
 		     yourself.
 
-	space deferAndSettle: [ space root addChild: g ].
+	g forceLayout.
 
 	self assert: (c1 containsGlobalPoint: 250 @ 250).
 	self assert: (c2 containsGlobalPoint: 250 @ 250).
@@ -84,7 +65,7 @@ BlGeometryTest >> testElAnyBounds [
 		     addChild: c2;
 		     yourself.
 
-	space deferAndSettle: [ space root addChild: g ].
+	g forceLayout.
 
 	self assert: g positionInSpace equals: 0 @ 0.
 	self assert: c2 positionInSpace equals: 100 @ 100.
@@ -138,7 +119,7 @@ BlGeometryTest >> testElLocalAndGlobalBoundsConvertion [
 		     position: 10 @ 10;
 		     yourself.
 
-	space deferAndSettle: [ space root addChild: g ].
+	g forceLayout.
 
 	self assert: g position equals: 10 @ 10.
 	self assert: g geometryBounds equals: (0 @ 0 corner: 100 @ 100).
@@ -174,7 +155,7 @@ BlGeometryTest >> testElLocalAndGlobalPostionConvertion [
 		     addChild: n;
 		     yourself.
 
-	space deferAndSettle: [ space root addChild: g ].
+	g forceLayout.
 
 	self assert: g position equals: 10 @ 10.
 	self assert: n position equals: 10 @ 10.
@@ -197,7 +178,7 @@ BlGeometryTest >> testElTxBounds [
 		     addChild: n;
 		     yourself.
 
-	space deferAndSettle: [ space root addChild: g ].
+	g forceLayout.
 
 	self assert: g position equals: (10 @ 10).
 	self assert: n position equals: (10 @ 10).

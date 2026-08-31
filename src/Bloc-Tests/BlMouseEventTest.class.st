@@ -1,9 +1,6 @@
 Class {
 	#name : #BlMouseEventTest,
-	#superclass : #TestCase,
-	#instVars : [
-		'space'
-	],
+	#superclass : #BlSpaceTestCase,
 	#category : #'Bloc-Tests-Events'
 }
 
@@ -124,21 +121,6 @@ BlMouseEventTest >> pointToText: aPoint for: aTextElement [
 			 yourself)
 ]
 
-{ #category : #running }
-BlMouseEventTest >> setUp [
-	super setUp.
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space show; settle
-]
-
-{ #category : #running }
-BlMouseEventTest >> tearDown [
-	space ifNotNil: [
-		space close; settle.
-		space := nil ].
-	super tearDown
-]
 
 { #category : #tests }
 BlMouseEventTest >> testParentWithClip [

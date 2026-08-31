@@ -1,9 +1,6 @@
 Class {
 	#name : #BlAbstractEventProcessingTest,
-	#superclass : #TestCase,
-	#instVars : [
-		'space'
-	],
+	#superclass : #BlSpaceTestCase,
 	#category : #'Bloc-Tests-Universe'
 }
 
@@ -105,17 +102,22 @@ BlAbstractEventProcessingTest >> sendOutsideTargetEvent: anEvent [
 	self sendEvent: anEvent
 ]
 
+{ #category : #'instance creation' }
+BlAbstractEventProcessingTest >> newSpace [
+
+	| newSpace |
+	newSpace := super newSpace.
+	newSpace extent: 200 @ 200.
+	newSpace mouseProcessor: (BlTestMouseEventProcessor space: newSpace).
+	newSpace focusProcessor: (BlTestFocusProcessor space: newSpace).
+	^ newSpace
+]
+
 { #category : #running }
 BlAbstractEventProcessingTest >> setUp [
 
 	super setUp.
 
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space extent: 200 @ 200.
-	space mouseProcessor: (BlTestMouseEventProcessor space: space).
-	space focusProcessor: (BlTestFocusProcessor space: space).
-	space show; settle.
 	space deferAndSettle: [
 		space root addChild:
 			(BlElement new
@@ -136,19 +138,4 @@ BlAbstractEventProcessingTest >> setUp [
 						background: Color blue;
 						yourself);
 				yourself) ]
-]
-
-{ #category : #accessing }
-BlAbstractEventProcessingTest >> space [
-
-	^ space
-]
-
-{ #category : #running }
-BlAbstractEventProcessingTest >> tearDown [
-
-	space ifNotNil: [
-		space close; settle.
-		space := nil ].
-	super tearDown
 ]

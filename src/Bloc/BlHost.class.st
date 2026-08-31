@@ -143,15 +143,22 @@ BlHost class >> supportedHostClasses [
 			sort: [ :a :b | a priority < b priority ]
 ]
 
-{ #category : #'api - ui process' }
+{ #category : #'api - pulse process' }
+BlHost class >> pulseProcessDo: aBlock [
+	"Evaluate aBlock with the running pulse Process of this host if any"
+
+	self default pulseProcessDo: aBlock
+]
+
+{ #category : #'api - pulse process' }
 BlHost class >> uiProcessDo: aBlock [
 	"Evaluate aBlock with the running UI Process of this host if any"
 
 	self
-		deprecated: 'Use #default #uiProcessDo: instead'
-		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver default uiProcessDo: `@arg'.
+		deprecated: 'Use #pulseProcessDo: instead'
+		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcessDo: `@arg'.
 
-	self default uiProcessDo: aBlock
+	self pulseProcessDo: aBlock
 ]
 
 { #category : #'host space - accessing' }
@@ -166,12 +173,12 @@ BlHost class >> universe [
 ]
 
 { #category : #'error handling' }
-BlHost >> denyUIProcess [
-	"Signal an error if the active process is the UI process of this host.
-	Blocking synchronization from the UI process would deadlock the pulse loop."
+BlHost >> denyPulseProcess [
+	"Signal an error if the active process is the pulse loop process of this host.
+	Blocking synchronization from the pulse loop process would deadlock the host loop."
 
-	self isUIProcess ifTrue: [
-		self error: 'Cannot perform blocking synchronization from the UI process as it would deadlock the pulse loop.' ]
+	self isPulseProcess ifTrue: [
+		self error: 'Cannot perform blocking synchronization from the pulse process as it would deadlock the host loop.' ]
 ]
 
 { #category : #testing }
@@ -188,8 +195,8 @@ BlHost >> isRunning [
 ]
 
 { #category : #'host - testing' }
-BlHost >> isUIProcess [
-	"Return true if the active process is the UI loop process of this host"
+BlHost >> isPulseProcess [
+	"Return true if the active process is the pulse loop process of this host"
 
 	^ self subclassResponsibility
 ]
@@ -234,9 +241,20 @@ BlHost >> stop [
 ]
 
 { #category : #enumerating }
-BlHost >> uiProcessDo: aBlock [
+BlHost >> pulseProcessDo: aBlock [
+	"Evaluate aBlock with the running pulse Process of this host if any"
 
 	^ self subclassResponsibility
+]
+
+{ #category : #enumerating }
+BlHost >> uiProcessDo: aBlock [
+
+	self
+		deprecated: 'Use #pulseProcessDo: instead'
+		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcessDo: `@arg'.
+
+	^ self pulseProcessDo: aBlock
 ]
 
 { #category : #'host space - accessing' }

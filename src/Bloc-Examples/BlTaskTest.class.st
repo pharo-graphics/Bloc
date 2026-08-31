@@ -55,20 +55,16 @@ BlTaskTest >> testAddTaskToTheElementWithoutSpace [
 BlTaskTest >> testPulseSpaceWithTask [
 
 	<sampleInstance>
-	| aSpace aTask |
-	aSpace := self testAddElementWithTaskToSpace.
-	aTask := aSpace taskQueue tasks first.
-	aSpace host: BlHeadlessHost default.
-	[
-		aSpace show; settle.
+	| anElement aTask |
+	anElement := self testAddTaskToTheElementWithoutSpace.
+	aTask := anElement taskQueue tasks first.
 
+	anElement inNewHeadlessSpaceDo: [ :aSpace |
 		"task was run and queue is empty now"
 		self assert: aSpace taskQueue tasks isEmpty.
 
 		"action was executed"
-		self assert: aTask action equals: #done
-	] ensure: [
-		aSpace close; settle ].
+		self assert: aTask action equals: #done ].
 
-	^ aSpace
+	^ anElement
 ]

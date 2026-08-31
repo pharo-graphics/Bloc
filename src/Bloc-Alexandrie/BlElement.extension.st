@@ -16,12 +16,36 @@ BlElement >> aeApplyClippingWithAllParentsOn: aCanvas [
 { #category : #'*Bloc-Alexandrie' }
 BlElement >> aeAsForm [
 
+	| topMostBounds transformedGeometryBounds aCanvas matrix |
 	self isLayoutRequested ifTrue: [
 		self isAttachedToSceneGraph
 			ifTrue: [ self space settle ]
 			ifFalse: [ self forceLayout ] ].
 
-	^ self basicAeAsForm
+	topMostBounds := self topMostParent bounds asRectangle.
+
+	matrix := BlMatrix2D new.
+	self allParentsReverseDo: [ :e | matrix := e transformation matrix copy multiplyBy: matrix ].
+
+	self transformation asElementTransformation class = BlElementAbsoluteTransformation 
+		ifFalse: [ matrix := self transformation matrix copy multiplyBy: matrix ].
+
+	transformedGeometryBounds := self geometryBounds copy.	
+	matrix transformBounds: transformedGeometryBounds.
+
+	self withAllParentsReverseDo: [ :e | transformedGeometryBounds translateBy: e position ].
+
+	aCanvas := AeCanvas extent: transformedGeometryBounds extent.
+	aCanvas privateAeCairoSurface deviceOffset: transformedGeometryBounds origin negated.
+	aCanvas clippingRectangle: topMostBounds.
+
+	aCanvas restoreContextAfter: [ 
+		self allParentsReverseDo: [ :e | 
+			aCanvas pathTranslate: e position.
+			e transformation aeApplyTo: aCanvas ].
+		self aeFullDrawOn: aCanvas ].
+
+	^ aCanvas asForm
 ]
 
 { #category : #'*Bloc-Alexandrie' }
@@ -144,32 +168,3 @@ BlElement >> aeFullDrawOn: aCanvas [
 	self aeCompositionLayersSortedByElevationDo: [ :each | each paintOn: aCanvas ]
 ]
 
-{ #category : #'*Bloc-Alexandrie' }
-BlElement >> basicAeAsForm [
-
-	| topMostBounds transformedGeometryBounds aCanvas matrix |
-	topMostBounds := self topMostParent bounds asRectangle.
-
-	matrix := BlMatrix2D new.
-	self allParentsReverseDo: [ :e | matrix := e transformation matrix copy multiplyBy: matrix ].
-
-	self transformation asElementTransformation class = BlElementAbsoluteTransformation 
-		ifFalse: [ matrix := self transformation matrix copy multiplyBy: matrix ].
-
-	transformedGeometryBounds := self geometryBounds copy.	
-	matrix transformBounds: transformedGeometryBounds.
-
-	self withAllParentsReverseDo: [ :e | transformedGeometryBounds translateBy: e position ].
-
-	aCanvas := AeCanvas extent: transformedGeometryBounds extent.
-	aCanvas privateAeCairoSurface deviceOffset: transformedGeometryBounds origin negated.
-	aCanvas clippingRectangle: topMostBounds.
-
-	aCanvas restoreContextAfter: [ 
-		self allParentsReverseDo: [ :e | 
-			aCanvas pathTranslate: e position.
-			e transformation aeApplyTo: aCanvas ].
-		self aeFullDrawOn: aCanvas ].
-
-	^ aCanvas asForm
-]

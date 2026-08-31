@@ -24,7 +24,7 @@ BlOnceLayoutTest >> testOnceLinearLayoutExact [
 			aChildA.
 			aChildB.
 			aChildC }.
-	space deferAndSettle: [ space root addChild: aContainer ].
+	aContainer forceLayout.
 	self assert: aContainer layout isStopped.
 	self
 		assert: aContainer bounds asRectangle
@@ -78,7 +78,7 @@ BlOnceLayoutTest >> testOnceLinearLayoutMatchParent [
 			aChildA.
 			aChildB.
 			aChildC }.
-	space deferAndSettle: [ space root addChild: aContainer ].
+	aContainer forceLayout.
 	self assert: aContainer layout isStopped.
 	self
 		assert: aContainer bounds asRectangle

@@ -4,27 +4,8 @@ A BlAnchorLayoutRuleTest is a test class for testing the behavior of BlAnchorLay
 Class {
 	#name : #BlAnchorLayoutRuleTest,
 	#superclass : #TestCase,
-	#instVars : [
-		'space'
-	],
 	#category : #'Bloc-Layout-Tests-Anchor'
 }
-
-{ #category : #running }
-BlAnchorLayoutRuleTest >> setUp [
-	super setUp.
-	space := BlSpace new.
-	space host: BlHeadlessHost default.
-	space show; settle
-]
-
-{ #category : #running }
-BlAnchorLayoutRuleTest >> tearDown [
-	space ifNotNil: [
-		space close; settle.
-		space := nil ].
-	super tearDown
-]
 
 { #category : #tests }
 BlAnchorLayoutRuleTest >> testAppliedOnChildBoundsInParentForChild [
@@ -38,8 +19,8 @@ BlAnchorLayoutRuleTest >> testAppliedOnChildBoundsInParentForChild [
 	rule := BlAnchorLayoutRule new.
 	rule baseAnchor: child extentAnchor.
 	rule rightHandSideAnchor: parent extentAnchor.
-	space deferAndSettle: [ space root addChild: parent ].
-	space settle.
+	parent forceLayout.
+	child forceLayout.
 	resultBounds := rule
 		                appliedOnChildBounds: (0 @ 0 extent: 10 asPoint)
 		                inParent: parent

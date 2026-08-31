@@ -182,11 +182,21 @@ BlUniverse >> hasSpaces [
 	^ spaces isNotEmpty
 ]
 
-{ #category : #'api - ui process' }
+{ #category : #'api - pulse process' }
+BlUniverse >> hasPulseProcess [
+
+	self pulseProcessDo: [ :aProcess | ^ true ].
+	^ false
+]
+
+{ #category : #'api - pulse process' }
 BlUniverse >> hasUIProcess [
 
-	self uiProcessDo: [ :aUIProcess | ^ true ].
-	^ false
+	self
+		deprecated: 'Use #hasPulseProcess instead'
+		transformWith: '`@receiver hasUIProcess' -> '`@receiver hasPulseProcess'.
+
+	^ self hasPulseProcess
 ]
 
 { #category : #accessing }
@@ -408,10 +418,20 @@ BlUniverse >> tryToRunPostponedActions [
 	^ self evaluateDeferred
 ]
 
-{ #category : #'api - ui process' }
+{ #category : #'api - pulse process' }
+BlUniverse >> pulseProcessDo: aBlock [
+
+	host pulseProcessDo: aBlock
+]
+
+{ #category : #'api - pulse process' }
 BlUniverse >> uiProcessDo: aBlock [
 
-	host uiProcessDo: aBlock
+	self
+		deprecated: 'Use #pulseProcessDo: instead'
+		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcessDo: `@arg'.
+
+	self pulseProcessDo: aBlock
 ]
 
 { #category : #'api - pulse' }
@@ -425,7 +445,7 @@ BlUniverse >> unregisterPulseSemaphore: aSemaphore [
 BlUniverse >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion: completionBlock onTimeout: timeoutBlock [
 
 	| aSemaphore |
-	self host denyUIProcess.
+	self host denyPulseProcess.
 	aSemaphore := Semaphore new.
 	self registerPulseSemaphore: aSemaphore.
 	[
