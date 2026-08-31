@@ -7,11 +7,18 @@ Class {
 	#category : #'Bloc-Universe - Host Headless'
 }
 
+{ #category : #testing }
+BlHeadlessHost class >> isSupported [
+	"Headless host requires no display server or window manager and is always supported."
+
+	^ true
+]
+
 { #category : #'driver selection' }
 BlHeadlessHost class >> priority [
-	"Infinite priority means that I am selected only if there are no other available hosts"
+	"Lowest priority (highest value) so that GUI window hosts take precedence when available."
 
-	^ Float infinity
+	^ 1000
 ]
 
 { #category : #printing }

@@ -96,15 +96,12 @@ BlHostRegistry >> refreshAvailableHosts [
 	"Recompute available hosts for the current session and environment."
 
 	availableHosts :=
-		(BlHost supportedHostClasses ifEmpty: [ { BlHeadlessHost } ])
+		BlHost supportedHostClasses
 			select: [ :each | each isSingleton ]
 			thenCollect: [ :each | each default ].
 
 	(availableHosts includes: preferredHost) ifFalse: [
-		preferredHost :=
-			availableHosts
-				ifEmpty: [ nil ]
-				ifNotEmpty: [ :hosts | hosts first ] ]
+		preferredHost := availableHosts first ]
 ]
 
 { #category : #registration }

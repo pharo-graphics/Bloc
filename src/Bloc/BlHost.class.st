@@ -87,12 +87,9 @@ BlHost class >> preferableHostClass: aHostClass [
 
 { #category : #'driver selection' }
 BlHost class >> prioritaryHostClass [
-	"Answer either the supported host with the lowest priority, or
-	`BlHeadlessHost` if there isn't any supported host."
+	"Answer the supported host with the lowest priority."
 
-	^ self supportedHostClasses
-		ifEmpty: [ BlHeadlessHost ]
-		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
+	^ self supportedHostClasses first
 ]
 
 { #category : #'driver selection' }
