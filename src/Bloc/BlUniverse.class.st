@@ -313,7 +313,7 @@ BlUniverse >> pulse [
 	[
 		[
 			self evaluateDeferred.
-			spaces do: [ :eachSpace | eachSpace pulse ]
+			spaces do: [ :eachSpace | eachSpace basicPulse ]
 		] 
 			on: Exception 
 			do: [ :e | 

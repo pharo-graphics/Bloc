@@ -1022,18 +1022,8 @@ BlSpace >> printOn: aStream [
 		<< ')'
 ]
 
-{ #category : #pulse }
-BlSpace >> processPulse [
-
-	self
-		deprecated: 'Use #pulse instead'
-		transformWith: '`@receiver processPulse' -> '`@receiver pulse'.
-
-	self pulse
-]
-
 { #category : #'private - pulse' }
-BlSpace >> pulse [
+BlSpace >> basicPulse [
 	"Internal engine driver. Never send me directly.
 	I am driven exclusively by BlUniverse during pulse loop cycles.
 	To wait for a space to reach equilibrium, send #settle or #deferAndSettle:."
@@ -1044,6 +1034,26 @@ BlSpace >> pulse [
 	pulseRequested := false.
 
 	frame runOn: self
+]
+
+{ #category : #pulse }
+BlSpace >> processPulse [
+
+	self
+		deprecated: 'Use #settle instead'
+		transformWith: '`@receiver processPulse' -> '`@receiver settle'.
+
+	^ self settle
+]
+
+{ #category : #pulse }
+BlSpace >> pulse [
+
+	self
+		deprecated: 'Direct #pulse on BlSpace causes concurrency races. Use #settle or #deferAndSettle: instead'
+		transformWith: '`@receiver pulse' -> '`@receiver settle'.
+
+	^ self settle
 ]
 
 { #category : #pulse }
