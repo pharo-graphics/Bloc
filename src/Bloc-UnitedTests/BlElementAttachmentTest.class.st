@@ -4,11 +4,10 @@ I have been automatically converted and probably manually tweaked from BlElement
 "
 Class {
 	#name : #BlElementAttachmentTest,
-	#superclass : #TestCase,
+	#superclass : #BlSpaceTestCase,
 	#instVars : [
 		'addedToScene',
 		'removedFromScene',
-		'space',
 		'leaf',
 		'container'
 	],
@@ -20,7 +19,6 @@ BlElementAttachmentTest >> setUp [
 
 	super setUp.
 
-	space := BlSpace new.
 	leaf := BlElement new.
 	container := BlElement new.
 	container addChild: leaf.
@@ -37,19 +35,16 @@ BlElementAttachmentTest >> setUp [
 	removedFromScene := OrderedCollection new.
 	container
 		addEventHandlerOn: BlElementRemovedFromSceneGraphEvent
-		 do: [ :anEvent | removedFromScene add: anEvent currentTarget ].
+		do: [ :anEvent | removedFromScene add: anEvent currentTarget ].
 	leaf
 		addEventHandlerOn: BlElementRemovedFromSceneGraphEvent
-		do: [ :anEvent | removedFromScene add: anEvent currentTarget ].
-
-
+		do: [ :anEvent | removedFromScene add: anEvent currentTarget ]
 ]
 
 { #category : #tests }
 BlElementAttachmentTest >> testAddToSpace [
 
 	"Override setUp to check the very initial state."
-	space := BlSpace new.
 	leaf := BlElement new.
 	container := BlElement new.
 	container addChild: leaf.
