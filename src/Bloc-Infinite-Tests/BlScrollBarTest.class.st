@@ -1,8 +1,7 @@
 Class {
 	#name : #BlScrollBarTest,
-	#superclass : #BlParameterizedHostTest,
+	#superclass : #BlSpaceTestCase,
 	#instVars : [
-		'space',
 		'largeElement',
 		'scrollableElement',
 		'hBar',
@@ -18,7 +17,6 @@ BlScrollBarTest >> setUp [
 	| largeExtent gap |
 	super setUp.
 
-	space := self newTestingSpace.
 	space title: testSelector asString.
 	
 	gap := 5.
