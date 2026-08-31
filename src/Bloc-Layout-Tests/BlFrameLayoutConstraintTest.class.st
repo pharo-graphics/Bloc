@@ -1,10 +1,9 @@
 Class {
 	#name : #BlFrameLayoutConstraintTest,
-	#superclass : #BlParameterizedHostTest,
+	#superclass : #BlSpaceTestCase,
 	#instVars : [
 		'child',
-		'parent',
-		'space'
+		'parent'
 	],
 	#category : #'Bloc-Layout-Tests'
 }
@@ -27,9 +26,7 @@ BlFrameLayoutConstraintTest >> setUp [
 
 	parent addChild: child.
 
-	space := self newTestingSpace.
-	space root addChild: parent.
-	"space show"
+	space root addChild: parent
 ]
 
 { #category : #tests }
@@ -39,7 +36,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft0Bottom0 [
 		c frame horizontal alignLeftAt: 0.
 		c frame vertical alignBottomAt: 0 ].
 
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: 0 @ 80
 ]
 
@@ -50,7 +47,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft0Bottom1 [
 		c frame horizontal alignLeftAt: 0.
 		c frame vertical alignBottomAt: 1 ].
 
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: 0 @ -20
 ]
 
@@ -61,7 +58,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft0Top0 [
 		c frame horizontal alignLeftAt: 0.
 		c frame vertical alignTopAt: 0 ].
 
-	self waitTestingSpaces. 
+	space settle.
 	self assert: child position equals: 0 @ 0
 ]
 
@@ -72,7 +69,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft0Top1 [
 		c frame horizontal alignLeftAt: 0.
 		c frame vertical alignTopAt: 1 ].
 
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: 0 @ 100
 ]
 
@@ -83,7 +80,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft1Bottom0 [
 		c frame horizontal alignLeftAt: 1.
 		c frame vertical alignBottomAt: 0 ].
 
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: 100 @ 80
 ]
 
@@ -94,7 +91,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft1Bottom1 [
 		c frame horizontal alignLeftAt: 1.
 		c frame vertical alignBottomAt: 1 ].
 
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: 100 @ -20
 ]
 
@@ -105,7 +102,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft1Top0 [
 		c frame horizontal alignLeftAt: 1.
 		c frame vertical alignTopAt: 0 ].
 
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: 100 @ 0
 ]
 
@@ -116,7 +113,7 @@ BlFrameLayoutConstraintTest >> testChildAlignLeft1Top1 [
 		c frame horizontal alignLeftAt: 1.
 		c frame vertical alignTopAt: 1 ].
 	
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: 100 @ 100
 ]
 
@@ -127,7 +124,7 @@ BlFrameLayoutConstraintTest >> testChildAlignRight0Bottom0 [
 		c frame horizontal alignRightAt: 0.
 		c frame vertical alignBottomAt: 0 ].
 
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: 80 @ 80
 ]
 
@@ -138,7 +135,7 @@ BlFrameLayoutConstraintTest >> testChildAlignRight0Bottom1 [
 		c frame horizontal alignRightAt: 0.
 		c frame vertical alignBottomAt: 1 ].
 
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: 80 @ -20
 ]
 
@@ -149,7 +146,7 @@ BlFrameLayoutConstraintTest >> testChildAlignRight0Top0 [
 		c frame horizontal alignRightAt: 0.
 		c frame vertical alignTopAt: 0 ].
 
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: 80 @ 0
 ]
 
@@ -160,7 +157,7 @@ BlFrameLayoutConstraintTest >> testChildAlignRight0Top1 [
 		c frame horizontal alignRightAt: 0.
 		c frame vertical alignTopAt: 1 ].
 
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: 80 @ 100
 ]
 
@@ -171,7 +168,7 @@ BlFrameLayoutConstraintTest >> testChildAlignRight1Bottom0 [
 		c frame horizontal alignRightAt: 1.
 		c frame vertical alignBottomAt: 0 ].
 
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: -20 @ 80
 ]
 
@@ -182,7 +179,7 @@ BlFrameLayoutConstraintTest >> testChildAlignRight1Bottom1 [
 		c frame horizontal alignRightAt: 1.
 		c frame vertical alignBottomAt: 1 ].
 
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: -20 @ -20
 ]
 
@@ -193,7 +190,7 @@ BlFrameLayoutConstraintTest >> testChildAlignRight1Top0 [
 		c frame horizontal alignRightAt: 1.
 		c frame vertical alignTopAt: 0 ].
 
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: -20 @ 0
 ]
 
@@ -204,6 +201,6 @@ BlFrameLayoutConstraintTest >> testChildAlignRight1Top1 [
 		c frame horizontal alignRightAt: 1.
 		c frame vertical alignTopAt: 1 ].
 
-	self waitTestingSpaces.
+	space settle.
 	self assert: child position equals: -20 @ 100
 ]
