@@ -34,13 +34,6 @@ BlMorphicSpaceHostMorph >> drawOn: aCanvas [
 				aClippedCanvas drawImage: form at: self position ] ]
 ]
 
-{ #category : #drawing }
-BlMorphicSpaceHostMorph >> requestRedraw [
-
-	self changed.
-	self currentWorld ifNotNil: [ :w | w defer: [ self changed ] ]
-]
-
 { #category : #accessing }
 BlMorphicSpaceHostMorph >> form [
 
@@ -160,6 +153,13 @@ BlMorphicSpaceHostMorph >> processEvent: anEvent using: defaultDispatcher [
 	"quick fix for issue #15 : 
 	In morphic, if the drop event is marked as handled, the dragged window is removed"
 	anEvent isDropEvent ifFalse: [ anEvent wasHandled: true ]
+]
+
+{ #category : #drawing }
+BlMorphicSpaceHostMorph >> requestRedraw [
+
+	self changed.
+	self currentWorld ifNotNil: [ :w | w defer: [ self changed ] ]
 ]
 
 { #category : #testing }

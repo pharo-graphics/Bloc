@@ -10,8 +10,7 @@ Class {
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> isSupported [
 
-	^ (Smalltalk globals includesKey: #WorldMorph) and: [ 
-		  MorphicUIManager isValidForCurrentSystemConfiguration ]
+	^ UIManager default className = #MorphicUIManager
 ]
 
 { #category : #'driver selection' }
