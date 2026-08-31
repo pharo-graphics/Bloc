@@ -130,12 +130,6 @@ BlHostPulseLoop >> loopProcess [
 	^ loopProcess
 ]
 
-{ #category : #accessing }
-BlHostPulseLoop >> pulseProcess [
-
-	^ loopProcess
-]
-
 { #category : #'loop process' }
 BlHostPulseLoop >> newLoopProcess [
 
@@ -175,6 +169,12 @@ BlHostPulseLoop >> pulsePeriod: aDuration [
 
 	pulsePeriodMS := aDuration asMilliSeconds.
 	msToWaitForBackgroundProcess := (pulsePeriodMS // 2) min: 1
+]
+
+{ #category : #accessing }
+BlHostPulseLoop >> pulseProcess [
+
+	^ loopProcess
 ]
 
 { #category : #lifecycle }

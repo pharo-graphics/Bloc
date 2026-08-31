@@ -101,6 +101,13 @@ BlHost class >> priority [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'api - pulse process' }
+BlHost class >> pulseProcessDo: aBlock [
+	"Evaluate aBlock with the running pulse Process of this host if any"
+
+	self default pulseProcessDo: aBlock
+]
+
 { #category : #settings }
 BlHost class >> settingsOn: aBuilder [
 	"Deprecated. System settings are now managed by BlHostRegistry"
@@ -144,13 +151,6 @@ BlHost class >> supportedHostClasses [
 ]
 
 { #category : #'api - pulse process' }
-BlHost class >> pulseProcessDo: aBlock [
-	"Evaluate aBlock with the running pulse Process of this host if any"
-
-	self default pulseProcessDo: aBlock
-]
-
-{ #category : #'api - pulse process' }
 BlHost class >> uiProcessDo: aBlock [
 	"Evaluate aBlock with the running UI Process of this host if any"
 
@@ -187,18 +187,18 @@ BlHost >> hasUniverse [
 	^ universe isNotNil
 ]
 
-{ #category : #'api - lifecycle' }
-BlHost >> isRunning [
-	"Return true if host is initialized and running"
-
-	^ false
-]
-
 { #category : #'host - testing' }
 BlHost >> isPulseProcess [
 	"Return true if the active process is the pulse loop process of this host"
 
 	^ self subclassResponsibility
+]
+
+{ #category : #'api - lifecycle' }
+BlHost >> isRunning [
+	"Return true if host is initialized and running"
+
+	^ false
 ]
 
 { #category : #accessing }
@@ -228,6 +228,13 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 	BlHostRenderer preferableClass offscreenMeasureTextParagraph: aBlTextParagraph
 ]
 
+{ #category : #enumerating }
+BlHost >> pulseProcessDo: aBlock [
+	"Evaluate aBlock with the running pulse Process of this host if any"
+
+	^ self subclassResponsibility
+]
+
 { #category : #'api - lifecycle' }
 BlHost >> start [
 
@@ -238,13 +245,6 @@ BlHost >> start [
 BlHost >> stop [
 
 	self subclassResponsibility
-]
-
-{ #category : #enumerating }
-BlHost >> pulseProcessDo: aBlock [
-	"Evaluate aBlock with the running pulse Process of this host if any"
-
-	^ self subclassResponsibility
 ]
 
 { #category : #enumerating }

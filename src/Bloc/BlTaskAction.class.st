@@ -71,7 +71,7 @@ BlTaskAction >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #running }
+{ #category : #'api - running' }
 BlTaskAction >> run [
 
 	action isClosure

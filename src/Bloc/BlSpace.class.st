@@ -848,6 +848,13 @@ BlSpace >> isOpened [
 ]
 
 { #category : #pulse }
+BlSpace >> isPulseProcess [
+	"Return true if the active process is the pulse loop process for this space"
+
+	^ self host isPulseProcess
+]
+
+{ #category : #pulse }
 BlSpace >> isPulseRequested [
 	"Return true if space pulse was requested, false otherwise"
 
@@ -883,13 +890,6 @@ BlSpace >> isTextInputActive [
 	"Check whether or not Unicode text input events are enabled"
 
 	^ self hostSpaceDo: [:hs | hs isTextInputActive] ifAbsent: [ false ]
-]
-
-{ #category : #pulse }
-BlSpace >> isPulseProcess [
-	"Return true if the active process is the pulse loop process for this space"
-
-	^ self host isPulseProcess
 ]
 
 { #category : #testing }

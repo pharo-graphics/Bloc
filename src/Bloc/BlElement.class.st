@@ -1001,7 +1001,6 @@ BlElement >> compositionLayer: aCompositionLayer [
 		put: aCompositionLayer
 ]
 
-
 { #category : #'geometry bounds' }
 BlElement >> computeEffectBoundsInto: aBlBounds [
 
@@ -2069,16 +2068,6 @@ BlElement >> inNewSpace [
 	^ aSpace
 ]
 
-{ #category : #'api - space' }
-BlElement >> inSpace [
-
-	self
-		deprecated: 'Use #inNewSpace instead'
-		transformWith: '`@receiver inSpace' -> '`@receiver inNewSpace'.
-
-	^ self inNewSpace
-]
-
 { #category : #processing }
 BlElement >> inPulseProcessDo: aBlock [
 	"Run the supplied block in the pulse process.
@@ -2100,6 +2089,16 @@ BlElement >> inPulseProcessDo: aBlock elseDo: altBlock [
 	(self isAttachedToSceneGraph and: [ self space isPulseProcess ])
 		ifTrue: aBlock
 		ifFalse: altBlock
+]
+
+{ #category : #'api - space' }
+BlElement >> inSpace [
+
+	self
+		deprecated: 'Use #inNewSpace instead'
+		transformWith: '`@receiver inSpace' -> '`@receiver inNewSpace'.
+
+	^ self inNewSpace
 ]
 
 { #category : #processing }

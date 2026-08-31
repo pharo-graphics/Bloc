@@ -168,6 +168,13 @@ BlUniverse >> hasPostponedActions [
 	^ self hasDeferredActions
 ]
 
+{ #category : #'api - pulse process' }
+BlUniverse >> hasPulseProcess [
+
+	self pulseProcessDo: [ :aProcess | ^ true ].
+	^ false
+]
+
 { #category : #'api - spaces' }
 BlUniverse >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"
@@ -180,13 +187,6 @@ BlUniverse >> hasSpaces [
 	"Return true if there are registered spaces, false otherwise"
 
 	^ spaces isNotEmpty
-]
-
-{ #category : #'api - pulse process' }
-BlUniverse >> hasPulseProcess [
-
-	self pulseProcessDo: [ :aProcess | ^ true ].
-	^ false
 ]
 
 { #category : #'api - pulse process' }
@@ -328,6 +328,12 @@ BlUniverse >> pulse [
 		semaphoresToSignal do: [ :each | each signal ] ]
 ]
 
+{ #category : #'api - pulse process' }
+BlUniverse >> pulseProcessDo: aBlock [
+
+	host pulseProcessDo: aBlock
+]
+
 { #category : #'private - spaces' }
 BlUniverse >> pulseSynchronously [
 
@@ -416,12 +422,6 @@ BlUniverse >> tryToRunPostponedActions [
 		transformWith: '`@receiver tryToRunPostponedActions' -> '`@receiver evaluateDeferred'.
 
 	^ self evaluateDeferred
-]
-
-{ #category : #'api - pulse process' }
-BlUniverse >> pulseProcessDo: aBlock [
-
-	host pulseProcessDo: aBlock
 ]
 
 { #category : #'api - pulse process' }

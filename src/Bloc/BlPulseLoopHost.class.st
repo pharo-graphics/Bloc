@@ -18,17 +18,17 @@ BlPulseLoopHost >> initialize [
 	pulseLoop := BlHostPulseLoop host: self
 ]
 
-{ #category : #'api - lifecycle' }
-BlPulseLoopHost >> isRunning [
-
-	^ pulseLoop isRunning
-]
-
 { #category : #'host - testing' }
 BlPulseLoopHost >> isPulseProcess [
 	"Return true if the active process is the pulse loop process of this host"
 
 	^ pulseLoop isNotNil and: [ pulseLoop isRunningInActiveProcess ]
+]
+
+{ #category : #'api - lifecycle' }
+BlPulseLoopHost >> isRunning [
+
+	^ pulseLoop isRunning
 ]
 
 { #category : #accessing }
@@ -49,6 +49,13 @@ BlPulseLoopHost >> pulsePeriod: aDuration [
 	pulseLoop pulsePeriod: aDuration
 ]
 
+{ #category : #'api - pulse process' }
+BlPulseLoopHost >> pulseProcessDo: aBlock [
+	"Evaluate aBlock with the running pulse Process of this host if any"
+
+	pulseLoop pulseProcess ifNotNil: aBlock
+]
+
 { #category : #'api - lifecycle' }
 BlPulseLoopHost >> start [
 
@@ -59,13 +66,6 @@ BlPulseLoopHost >> start [
 BlPulseLoopHost >> stop [
 
 	pulseLoop stop
-]
-
-{ #category : #'api - pulse process' }
-BlPulseLoopHost >> pulseProcessDo: aBlock [
-	"Evaluate aBlock with the running pulse Process of this host if any"
-
-	pulseLoop pulseProcess ifNotNil: aBlock
 ]
 
 { #category : #'api - pulse process' }
