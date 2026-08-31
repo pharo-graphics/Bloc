@@ -543,7 +543,6 @@ BlSpace >> focused: aBoolean [
 
 { #category : #accessing }
 BlSpace >> frame [
-	<return: #BlSpaceFrame>
 
 	^ frame
 ]
@@ -882,7 +881,7 @@ BlSpace >> isSettled [
 
 	self universe isSettled ifFalse: [ ^ false ].
 	self isOpened ifFalse: [ ^ true ].
-	^ self frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
+	^ frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
 ]
 
 { #category : #'host space - text input' }
@@ -1044,7 +1043,7 @@ BlSpace >> pulse [
 	"flip to false beforehand to be able to know if the next pulse was needed during the frame"
 	pulseRequested := false.
 
-	self frame runOn: self
+	frame runOn: self
 ]
 
 { #category : #pulse }
