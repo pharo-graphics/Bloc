@@ -36,6 +36,7 @@ Class {
 		'focusChain',
 		'pulseRequested',
 		'currentCursor',
+		'session',
 		'focused',
 		'title',
 		'fullscreen',
