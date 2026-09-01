@@ -3,7 +3,7 @@ Class {
 	#superclass : #ParametrizedTestCase,
 	#instVars : [
 		'testingSpaces',
-		'hostClass',
+		'host',
 		'initialSpaces'
 	],
 	#classVars : [
@@ -13,13 +13,13 @@ Class {
 }
 
 { #category : #accessing }
-BlParameterizedHostTest class >> hostClasses [
-	"Answer the collection of host classes to be tested.
-	When #onlyHeadlessHost is true, returns only BlHeadlessHost to speed up test execution."
+BlParameterizedHostTest class >> availableHosts [
+	"Answer the collection of host instances to be tested.
+	When #onlyHeadlessHost is true, returns only BlHeadlessHost default to speed up test execution."
 
 	^ self onlyHeadlessHost
-		ifTrue: [ { BlHeadlessHost } ]
-		ifFalse: [ BlHost supportedHostClasses ]
+		  ifTrue: [ { BlHeadlessHost default } ]
+		  ifFalse: [ BlHostRegistry default availableHosts ]
 ]
 
 { #category : #private }
@@ -50,7 +50,7 @@ BlParameterizedHostTest class >> preferencesOn: aBuilder [
 		target: self;
 		order: 10;
 		label: 'Test on headless host only';
-		description: 'When enabled, BlParameterizedHostTest suites run only on BlHeadlessHost instead of all supported host classes, speeding up test runs.';
+		description: 'When enabled, BlParameterizedHostTest suites run only on BlHeadlessHost default instead of all supported host instances, speeding up test runs.';
 		default: [ true ]
 ]
 
@@ -58,20 +58,20 @@ BlParameterizedHostTest class >> preferencesOn: aBuilder [
 BlParameterizedHostTest class >> testParameters [
 
 	^ ParametrizedTestMatrix new
-		forSelector: #hostClass
-		addOptions: self hostClasses
+		  forSelector: #host
+		  addOptions: self availableHosts
 ]
 
 { #category : #accessing }
-BlParameterizedHostTest >> hostClass [
+BlParameterizedHostTest >> host [
 
-	^ hostClass
+	^ host
 ]
 
 { #category : #accessing }
-BlParameterizedHostTest >> hostClass: aClass [
+BlParameterizedHostTest >> host: aHost [
 
-	hostClass := aClass
+	host := aHost
 ]
 
 { #category : #'instance creation' }
@@ -80,7 +80,7 @@ BlParameterizedHostTest >> newTestingSpace [
 	| aSpace |
 	aSpace := BlSpace new.
 	aSpace
-		host: hostClass default;
+		host: host;
 		show;
 		settle.
 
@@ -94,7 +94,7 @@ BlParameterizedHostTest >> setUp [
 	super setUp.
 
 	testingSpaces := OrderedCollection new.
-	initialSpaces := hostClass default universe spaces copy.
+	initialSpaces := host universe spaces copy.
 ]
 
 { #category : #running }
@@ -108,8 +108,8 @@ BlParameterizedHostTest >> tearDown [
 				on: Exception
 				do: [ ] ].
 
-	hostClass ifNotNil: [
-			hostClass default universe spaces copy reject: [ :each | initialSpaces includes: each ] thenDo: [ :each |
+	host ifNotNil: [
+			host universe spaces copy reject: [ :each | initialSpaces includes: each ] thenDo: [ :each |
 					[
 						each close.
 						each settle ]
