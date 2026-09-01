@@ -38,19 +38,25 @@ BlElementBoundsUpdater >> commitChanges [
 		               thenCollect: [ :eachAssociation | eachAssociation key ].
 	theElements ifEmpty: [ ^ self ].
 	
-	"<---"
-	self flag: 'Workarroud: avoiding #extractRoots: use speed-up position updates a lot'.
-	"theElements do: [ :eachRootElement |
-		eachRootElement withAllChildrenBreadthFirstDo: [ :eachChild |	eachChild onPositionInSpaceChanged ] ]."
-	"--->"
-	self flag: 'Original version'.
-	"<---"
-	self flag: ' It sounds better with #extractRoots: from feenk '.
-	theRoots := BlSpace extractRoots: theElements.
+	theRoots := self extractRoots: theElements.
 	theRoots do: [ :eachRootElement |
 		eachRootElement withAllChildrenBreadthFirstDo: [ :eachChild | eachChild onPositionInSpaceChanged ] ]
-	"--->"
+]
 
+{ #category : #'private - changes' }
+BlElementBoundsUpdater >> extractRoots: aSetOfElements [
+	| roots |
+	roots := IdentitySet withAll: aSetOfElements.
+	aSetOfElements do: [ :each | 
+		| current |
+		current := each parent.
+		[ current isNil ] whileFalse: [
+			(roots includes: current)
+				ifTrue: [ 
+					roots remove: each ifAbsent: [  ].
+					current := nil ]
+				ifFalse: [ current := current parent ] ] ].
+	^ roots
 ]
 
 { #category : #testing }

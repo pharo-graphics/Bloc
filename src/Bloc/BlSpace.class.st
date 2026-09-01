@@ -63,23 +63,11 @@ BlSpace class >> defaultRootLabel [
 
 { #category : #'private - change' }
 BlSpace class >> extractRoots: aSetOfElements [
-	| roots |
-	" feenk version 2022-02-01 that eliminate recursion from allParentsDo: "
-	
-	roots := IdentitySet withAll: aSetOfElements.
-	aSetOfElements
-		do:
-			[ :each | 
-			| current |
-			current := each parent.
-			[ current isNil ]
-				whileFalse:
-					[ (roots includes: current)
-						ifTrue:
-							[ roots remove: each ifAbsent: [  ].
-							current := nil ]
-						ifFalse: [ current := current parent ] ] ].
-	^ roots
+	self
+		deprecated: 'Use BlElementBoundsUpdater >> #extractRoots: instead'
+		transformWith: '`@receiver extractRoots: `@arg' -> 'BlElementBoundsUpdater new extractRoots: `@arg'.
+
+	^ BlElementBoundsUpdater new extractRoots: aSetOfElements
 ]
 
 { #category : #accessing }
@@ -510,6 +498,10 @@ BlSpace >> extent: aNewExtent [
 
 { #category : #'private - change' }
 BlSpace >> extractRoots: aSetOfElements [
+	self
+		deprecated: 'Use BlElementBoundsUpdater >> #extractRoots: instead'
+		transformWith: '`@receiver extractRoots: `@arg' -> 'BlElementBoundsUpdater new extractRoots: `@arg'.
+
 	^ self class extractRoots: aSetOfElements
 ]
 
