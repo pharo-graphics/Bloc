@@ -28,5 +28,5 @@ BlSpaceTaskQueue >> requeue: aBlTask [
 
 	super requeue: aBlTask.
 	aBlTask onEnqueued: space.
-	space requestNextPulse
+	space requestPulse
 ]

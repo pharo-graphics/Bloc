@@ -45,7 +45,7 @@ BlSpace class >> simulate: anElement during: aBlock [
 		ifTrue: [ 
 			result := aBlock value.
 			anElement space ifNotNil: [ :s | 
-				s requestNextPulse.
+				s requestPulse.
 				s settle ] ]
 		ifFalse: [
 			topMostElement := anElement topMostParent.
@@ -53,7 +53,7 @@ BlSpace class >> simulate: anElement during: aBlock [
 			tempSpace root addChild: topMostElement.
 			[
 				result := aBlock value.
-				tempSpace requestNextPulse.
+				tempSpace requestPulse.
 				tempSpace settle.
 			] ensure: [
 				topMostElement removeFromParent ] ].

@@ -89,6 +89,20 @@ BlSpace >> asReference [
 	^ reference ifNil: [ reference := BlAttachedCachedSpaceReference forSpace: self ]
 ]
 
+{ #category : #'private - pulse' }
+BlSpace >> basicPulse [
+	"Internal engine driver. Never send me directly.
+	I am driven exclusively by BlUniverse during pulse loop cycles.
+	To wait for a space to reach equilibrium, send #settle or #deferAndSettle:."
+
+	pulseRequested ifFalse: [ ^ self ].
+
+	"flip to false beforehand to be able to know if the next pulse was needed during the frame"
+	pulseRequested := false.
+
+	frame runOn: self
+]
+
 { #category : #'api - displaying' }
 BlSpace >> becomeVisible [
 	"Notify root element that it is now visible to the user"
@@ -244,7 +258,7 @@ BlSpace >> densityDpi [
 { #category : #'api - tasks' }
 BlSpace >> dequeueTask: aBlTask [
 	self taskQueue dequeue: aBlTask.
-	self requestNextPulse
+	self requestPulse
 ]
 
 { #category : #'children dispatching' }
@@ -431,7 +445,7 @@ BlSpace >> enqueueEvent: aBlEvent [
 BlSpace >> enqueueTask: aBlTask [
 	aBlTask onEnqueued: self.
 	self taskQueue enqueue: aBlTask.
-	self requestNextPulse
+	self requestPulse
 ]
 
 { #category : #'api - tasks' }
@@ -440,7 +454,7 @@ BlSpace >> enqueueTasksFrom: aTaskQueue [
 	aTaskQueue isEmpty ifTrue: [ ^ self ].
 	aTaskQueue tasks do: [ :eachTask | eachTask onEnqueued: self ].	
 	self taskQueue enqueueFrom: aTaskQueue.
-	self requestNextPulse
+	self requestPulse
 ]
 
 { #category : #'private - pulse' }
@@ -782,7 +796,7 @@ BlSpace >> invalidRect: aBlBounds from: anElement [
 	self flag: #todo. "aBlBounds is ignored. Rename selector!"
 	elementsNeedingPaint add: anElement.
 	self requestHostSpaceRedraw.
-	self requestNextPulse
+	self requestPulse
 ]
 
 { #category : #'change - rendering' }
@@ -935,7 +949,7 @@ BlSpace >> markNeedsPaint: anElement from: aSourceElement [
 
 	elementsNeedingPaint add: aSourceElement.
 	self requestHostSpaceRedraw.
-	self requestNextPulse
+	self requestPulse
 ]
 
 { #category : #'api - displaying' }
@@ -989,7 +1003,7 @@ BlSpace >> onSessionChanged: aNewSession [
 
 	self invalidateAll.
 	self requestHostSpaceRedraw.
-	self requestNextPulse.
+	self requestPulse.
 	
 	self root onSessionChanged: aNewSession
 ]
@@ -1020,20 +1034,6 @@ BlSpace >> printOn: aStream [
 		<< '(';
 		print: title;
 		<< ')'
-]
-
-{ #category : #'private - pulse' }
-BlSpace >> basicPulse [
-	"Internal engine driver. Never send me directly.
-	I am driven exclusively by BlUniverse during pulse loop cycles.
-	To wait for a space to reach equilibrium, send #settle or #deferAndSettle:."
-
-	pulseRequested ifFalse: [ ^ self ].
-
-	"flip to false beforehand to be able to know if the next pulse was needed during the frame"
-	pulseRequested := false.
-
-	frame runOn: self
 ]
 
 { #category : #pulse }
@@ -1105,11 +1105,21 @@ BlSpace >> requestHostSpaceRedraw [
 BlSpace >> requestLayout: anElement [
 
 	elementsNeedingLayout add: anElement.
-	self requestNextPulse
+	self requestPulse
 ]
 
 { #category : #pulse }
 BlSpace >> requestNextPulse [
+
+	self
+		deprecated: 'Use #requestPulse instead'
+		transformWith: '`@receiver requestNextPulse' -> '`@receiver requestPulse'.
+
+	self requestPulse
+]
+
+{ #category : #pulse }
+BlSpace >> requestPulse [
 
 	pulseRequested := true
 ]

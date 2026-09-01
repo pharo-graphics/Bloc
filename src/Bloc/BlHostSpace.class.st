@@ -54,7 +54,7 @@ BlHostSpace >> enqueueEvent: aBlEvent [
 		ifTrue: [ ^ self universe dispatchEvent: aBlEvent ].
 
 	eventQueue nextPut: aBlEvent.
-	self space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
+	self space ifNotNil: [ :aSpace | aSpace requestPulse ]
 ]
 
 { #category : #'host space - events' }
