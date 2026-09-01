@@ -43,6 +43,19 @@ BlSpaceSettleTest >> testDeferAndSettleFromPulseProcessRaisesError [
 ]
 
 { #category : #tests }
+BlSpaceSettleTest >> testDeferAndSettlePreservesSequentialOrdering [
+
+	| aSpace items |
+	aSpace := self newTestingSpace.
+	items := OrderedCollection new.
+	aSpace defer: [ items add: 1 ].
+	aSpace defer: [ items add: 2 ].
+	aSpace defer: [ items add: 3 ].
+	aSpace settle.
+	self assert: items asArray equals: #(1 2 3)
+]
+
+{ #category : #tests }
 BlSpaceSettleTest >> testDeferErrorDoesNotPreventSettle [
 
 	| aSpace errorCaught stepExecuted |
@@ -58,19 +71,6 @@ BlSpaceSettleTest >> testDeferErrorDoesNotPreventSettle [
 	self assert: errorCaught.
 	self assert: stepExecuted.
 	self assert: aSpace isSettled
-]
-
-{ #category : #tests }
-BlSpaceSettleTest >> testDeferAndSettlePreservesSequentialOrdering [
-
-	| aSpace items |
-	aSpace := self newTestingSpace.
-	items := OrderedCollection new.
-	aSpace defer: [ items add: 1 ].
-	aSpace defer: [ items add: 2 ].
-	aSpace defer: [ items add: 3 ].
-	aSpace settle.
-	self assert: items asArray equals: #(1 2 3)
 ]
 
 { #category : #tests }
@@ -228,6 +228,20 @@ BlSpaceSettleTest >> testSettleForDurationWithContinuousSelfReschedulingTask [
 ]
 
 { #category : #tests }
+BlSpaceSettleTest >> testSettleFromPulseProcessRaisesError [
+
+	| aSpace errorRaised |
+	aSpace := self newTestingSpace.
+	errorRaised := false.
+	aSpace defer: [
+		[ aSpace settle ]
+			on: Error
+			do: [ :err | errorRaised := true ] ].
+	aSpace settle.
+	self assert: errorRaised
+]
+
+{ #category : #tests }
 BlSpaceSettleTest >> testWaitUntilTrueAwakenedOnPulse [
 
 	| aSpace pulses flag |
@@ -249,20 +263,6 @@ BlSpaceSettleTest >> testWaitUntilTrueConditionMetImmediately [
 	aSpace := self newTestingSpace.
 	aSpace waitUntilTrue: [ true ].
 	self assert: aSpace isSettled
-]
-
-{ #category : #tests }
-BlSpaceSettleTest >> testSettleFromPulseProcessRaisesError [
-
-	| aSpace errorRaised |
-	aSpace := self newTestingSpace.
-	errorRaised := false.
-	aSpace defer: [
-		[ aSpace settle ]
-			on: Error
-			do: [ :err | errorRaised := true ] ].
-	aSpace settle.
-	self assert: errorRaised
 ]
 
 { #category : #tests }

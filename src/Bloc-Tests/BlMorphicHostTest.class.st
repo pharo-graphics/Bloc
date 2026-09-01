@@ -29,58 +29,6 @@ BlMorphicHostTest >> tearDown [
 ]
 
 { #category : #tests }
-BlMorphicHostTest >> testSquaresEmbeddedInMorph [
-
-	| aHost aSpace rootElement square1 square2 |
-	aHost := BlMorphicHost new.
-	aHost containerMorph: containerMorph.
-
-	aSpace := BlSpace new.
-	aSpace host: aHost.
-
-	rootElement := aSpace root.
-	rootElement background: Color paleBlue.
-
-	square1 := BlElement new
-		extent: 60 @ 60;
-		position: 20 @ 20;
-		background: Color red;
-		yourself.
-	square1 addEventHandlerOn: BlMouseEnterEvent do: [ :anEvent |
-		square1 background: Color yellow ].
-	square1 addEventHandlerOn: BlMouseLeaveEvent do: [ :anEvent |
-		square1 background: Color red ].
-
-	square2 := BlElement new
-		extent: 60 @ 60;
-		position: 100 @ 20;
-		background: Color green;
-		yourself.
-
-	rootElement addChild: square1.
-	rootElement addChild: square2.
-
-	aSpace show.
-	aSpace settle.
-	self assert: aSpace isOpened.
-	self assert: aSpace hostSpace isNotNil.
-	self assert: aSpace hostSpace spaceHostMorph isNotNil.
-	self assert: aSpace hostSpace spaceHostMorph form isNotNil.
-	self assert: aSpace hostSpace spaceHostMorph form depth equals: 32.
-	self assert: square1 background paint color equals: Color red.
-
-	square1 eventSimulator mouseMoveInside.
-	self assert: square1 background paint color equals: Color yellow.
-
-	square1 eventSimulator mouseMoveAt: 300 @ 300.
-	self assert: square1 background paint color equals: Color red.
-
-	aSpace close.
-	aSpace settle.
-	self deny: aSpace isOpened
-]
-
-{ #category : #tests }
 BlMorphicHostTest >> testEnsureWindowOpenRendersWhenHostSpaceIsValidOnSessionChange [
 
 	| aHost aSpace rootElement hostSpace spaceHostMorph oldForm |
@@ -148,4 +96,56 @@ BlMorphicHostTest >> testSpaceClosedEventOnWindowCloseButton [
 	s settle.
 	self assert: closedCount equals: 1.
 	self deny: s isOpened
+]
+
+{ #category : #tests }
+BlMorphicHostTest >> testSquaresEmbeddedInMorph [
+
+	| aHost aSpace rootElement square1 square2 |
+	aHost := BlMorphicHost new.
+	aHost containerMorph: containerMorph.
+
+	aSpace := BlSpace new.
+	aSpace host: aHost.
+
+	rootElement := aSpace root.
+	rootElement background: Color paleBlue.
+
+	square1 := BlElement new
+		extent: 60 @ 60;
+		position: 20 @ 20;
+		background: Color red;
+		yourself.
+	square1 addEventHandlerOn: BlMouseEnterEvent do: [ :anEvent |
+		square1 background: Color yellow ].
+	square1 addEventHandlerOn: BlMouseLeaveEvent do: [ :anEvent |
+		square1 background: Color red ].
+
+	square2 := BlElement new
+		extent: 60 @ 60;
+		position: 100 @ 20;
+		background: Color green;
+		yourself.
+
+	rootElement addChild: square1.
+	rootElement addChild: square2.
+
+	aSpace show.
+	aSpace settle.
+	self assert: aSpace isOpened.
+	self assert: aSpace hostSpace isNotNil.
+	self assert: aSpace hostSpace spaceHostMorph isNotNil.
+	self assert: aSpace hostSpace spaceHostMorph form isNotNil.
+	self assert: aSpace hostSpace spaceHostMorph form depth equals: 32.
+	self assert: square1 background paint color equals: Color red.
+
+	square1 eventSimulator mouseMoveInside.
+	self assert: square1 background paint color equals: Color yellow.
+
+	square1 eventSimulator mouseMoveAt: 300 @ 300.
+	self assert: square1 background paint color equals: Color red.
+
+	aSpace close.
+	aSpace settle.
+	self deny: aSpace isOpened
 ]

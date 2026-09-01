@@ -1,6 +1,6 @@
 Class {
 	#name : #BlMouseEventTest,
-	#superclass : #BlSpaceTestCase,
+	#superclass : #TestCase,
 	#category : #'Bloc-Tests-Events'
 }
 
@@ -121,7 +121,6 @@ BlMouseEventTest >> pointToText: aPoint for: aTextElement [
 			 yourself)
 ]
 
-
 { #category : #tests }
 BlMouseEventTest >> testParentWithClip [
 
@@ -136,7 +135,7 @@ BlMouseEventTest >> testParentWithClip [
 	gray := self newParent.
 	gray clipChildren: true.
 	gray addChild: red.
-	space deferAndSettle: [ space root addChild: gray ].
+	gray forceLayout.
 
 	"on gray outside red and blue"
 	self assert: (gray findMouseEventTargetAt: 50 @ 50) equals: gray.
@@ -174,7 +173,7 @@ BlMouseEventTest >> testParentWithoutClipChildWithClip [
 	gray := self newParent.
 	gray clipChildren: false.
 	gray addChild: red.
-	space deferAndSettle: [ space root addChild: gray ].
+	gray forceLayout.
 
 	"on gray outside red and blue"
 	self assert: (gray findMouseEventTargetAt: 50 @ 50) equals: gray.
@@ -213,7 +212,7 @@ BlMouseEventTest >> testParentWithoutClipChildWithoutClip [
 	gray := self newParent.
 	gray clipChildren: false.
 	gray addChild: red.
-	space deferAndSettle: [ space root addChild: gray ].
+	gray forceLayout.
 
 	"on gray outside red and blue"
 	self assert: (gray findMouseEventTargetAt: 50 @ 50) equals: gray.

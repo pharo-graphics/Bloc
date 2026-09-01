@@ -74,12 +74,6 @@ BlParameterizedHostTest >> hostClass: aClass [
 	hostClass := aClass
 ]
 
-{ #category : #accessing }
-BlParameterizedHostTest >> testingSpaces [
-
-	^ testingSpaces
-]
-
 { #category : #'instance creation' }
 BlParameterizedHostTest >> newTestingSpace [
 
@@ -94,7 +88,6 @@ BlParameterizedHostTest >> newTestingSpace [
 
 	^ aSpace
 ]
-
 
 { #category : #running }
 BlParameterizedHostTest >> setUp [
@@ -124,6 +117,12 @@ BlParameterizedHostTest >> tearDown [
 						do: [ ] ] ].
 
 	super tearDown
+]
+
+{ #category : #accessing }
+BlParameterizedHostTest >> testingSpaces [
+
+	^ testingSpaces
 ]
 
 { #category : #tests }

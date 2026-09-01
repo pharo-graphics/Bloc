@@ -74,6 +74,17 @@ BlAbstractEventProcessingTest >> firedEvents [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'instance creation' }
+BlAbstractEventProcessingTest >> newSpace [
+
+	| newSpace |
+	newSpace := super newSpace.
+	newSpace extent: 200 @ 200.
+	newSpace mouseProcessor: (BlTestMouseEventProcessor space: newSpace).
+	newSpace focusProcessor: (BlTestFocusProcessor space: newSpace).
+	^ newSpace
+]
+
 { #category : #accessing }
 BlAbstractEventProcessingTest >> root [
 
@@ -100,17 +111,6 @@ BlAbstractEventProcessingTest >> sendOutsideTargetEvent: anEvent [
 
 	anEvent position: 150 @ 150.
 	self sendEvent: anEvent
-]
-
-{ #category : #'instance creation' }
-BlAbstractEventProcessingTest >> newSpace [
-
-	| newSpace |
-	newSpace := super newSpace.
-	newSpace extent: 200 @ 200.
-	newSpace mouseProcessor: (BlTestMouseEventProcessor space: newSpace).
-	newSpace focusProcessor: (BlTestFocusProcessor space: newSpace).
-	^ newSpace
 ]
 
 { #category : #running }

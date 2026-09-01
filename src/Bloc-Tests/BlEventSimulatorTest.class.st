@@ -129,6 +129,19 @@ BlEventSimulatorTest >> testMouseWheel [
 ]
 
 { #category : #tests }
+BlEventSimulatorTest >> testSimulateFromPulseProcessRaisesError [
+
+	| errorRaised |
+	errorRaised := false.
+	space defer: [
+		[ element eventSimulator click ]
+			on: Error
+			do: [ :err | errorRaised := true ] ].
+	space settle.
+	self assert: errorRaised
+]
+
+{ #category : #tests }
 BlEventSimulatorTest >> testTextInput [
 	| textInputText |
 	element requestFocus.
@@ -206,17 +219,4 @@ BlEventSimulatorTest >> testVirtualDeviceState [
 	
 	eventSimulator shiftUp.
 	self assert: eventSimulator modifiers isShift not.
-]
-
-{ #category : #tests }
-BlEventSimulatorTest >> testSimulateFromPulseProcessRaisesError [
-
-	| errorRaised |
-	errorRaised := false.
-	space defer: [
-		[ element eventSimulator click ]
-			on: Error
-			do: [ :err | errorRaised := true ] ].
-	space settle.
-	self assert: errorRaised
 ]

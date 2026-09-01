@@ -5,6 +5,26 @@ Class {
 }
 
 { #category : #tests }
+BlUniverseTest >> testDeferSnapshotAndQuit [
+
+	| aSpace |
+	aSpace := BlSpace new
+		host: BlHeadlessHost default;
+		yourself.
+	[
+		aSpace universe deferSnapshot: false andQuit: false.
+		self assert: aSpace universe hasDeferredActions.
+		self deny: aSpace universe isSettled.
+
+		aSpace settle.
+		self deny: aSpace universe hasDeferredActions.
+		self assert: aSpace universe isSettled
+	] ensure: [
+		aSpace close.
+		aSpace settle ]
+]
+
+{ #category : #tests }
 BlUniverseTest >> testErrorDuringPulseSignal [
 
 	| aUniverse logger expectedError caughtError |
@@ -33,26 +53,6 @@ BlUniverseTest >> testEvaluateDeferred [
 	self assert: evaluated.
 	self deny: aUniverse hasDeferredActions.
 	self assert: aUniverse isSettled
-]
-
-{ #category : #tests }
-BlUniverseTest >> testDeferSnapshotAndQuit [
-
-	| aSpace |
-	aSpace := BlSpace new
-		host: BlHeadlessHost default;
-		yourself.
-	[
-		aSpace universe deferSnapshot: false andQuit: false.
-		self assert: aSpace universe hasDeferredActions.
-		self deny: aSpace universe isSettled.
-
-		aSpace settle.
-		self deny: aSpace universe hasDeferredActions.
-		self assert: aSpace universe isSettled
-	] ensure: [
-		aSpace close.
-		aSpace settle ]
 ]
 
 { #category : #tests }

@@ -23,7 +23,6 @@ BlExamplesTest class >> testSelectors [
 		  thenCollect: [ :each | each selector ]
 ]
 
-
 { #category : #private }
 BlExamplesTest >> performTest [ 
 

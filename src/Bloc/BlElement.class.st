@@ -2047,9 +2047,8 @@ BlElement >> inNewHeadlessSpaceDo: aBlock [
 	"Open the receiver in a new headless space, settle it, evaluate aBlock with the space (and the receiver), and ensure the space is closed and settled upon completion. Answer the result of evaluating aBlock."
 
 	| aSpace |
-	aSpace := BlSpace new.
+	aSpace := self inNewSpace.
 	aSpace host: BlHeadlessHost default.
-	aSpace root addChild: self.
 	^ [
 		aSpace show; settle.
 		aBlock cull: aSpace cull: self
@@ -2075,9 +2074,7 @@ BlElement >> inPulseProcessDo: aBlock [
 	Otherwise, queue up for the next frame."
 
 	self inPulseProcessDo: aBlock elseDo: [
-		self enqueueTask: (BlTaskAction new
-			action: aBlock;
-			yourself) ]
+		self enqueueTask: (BlTaskAction with: aBlock) ]
 ]
 
 { #category : #processing }
