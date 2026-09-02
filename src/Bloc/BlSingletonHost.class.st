@@ -19,7 +19,9 @@ BlSingletonHost class >> cleanUp [
 
 { #category : #accessing }
 BlSingletonHost class >> default [
-	^ default ifNil: [ default := self basicNew initialize; yourself ]
+
+	^ default ifNil: [
+		default := self basicNew initialize; yourself ]
 ]
 
 { #category : #testing }

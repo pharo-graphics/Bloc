@@ -9,8 +9,6 @@ Class {
 	#instVars : [
 		'physicalSize',
 		'logicalSize',
-		'scaleFactor',
-		'densityDpi',
 		'minimized',
 		'maximized',
 		'isFullscreen',
@@ -222,7 +220,7 @@ BlHeadlessHostSpace >> position: aPoint [
 
 ]
 
-{ #category : #'host space - drawing' }
+{ #category : #'host space - rendering' }
 BlHeadlessHostSpace >> render: aSpace [
 	"Render a given abstract space on an underlying window or visual area"
 

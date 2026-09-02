@@ -63,16 +63,14 @@ BAExporter >> element: aBlElement [
 	element := aBlElement
 ]
 
-{ #category : #exporting }
+{ #category : #'api - exporting' }
 BAExporter >> export [
 
 	| aCanvas aBounds |
 	element isLayoutRequested ifTrue: [
 		element isAttachedToSceneGraph
-			ifTrue: [
-				element space settle ]
-			ifFalse: [
-				element forceLayout ] ].
+			ifTrue: [ element space settle ]
+			ifFalse: [ element forceLayout ] ].
 
 	aBounds := element invalidationBoundsInParent.
 	aCanvas := self newCanvas: aBounds extent * scale.

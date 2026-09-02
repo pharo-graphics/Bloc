@@ -116,7 +116,7 @@ BlElementTest >> newVisibleElement [
 	^ self newElement
 ]
 
-{ #category : #initialization }
+{ #category : #running }
 BlElementTest >> setUp [
 
 	super setUp.

@@ -83,6 +83,28 @@ BlMorphicHostSpace >> logicalSize [
 	^ spaceHostMorph extent asLogicalSize
 ]
 
+{ #category : #'host space - displaying' }
+BlMorphicHostSpace >> maximize [
+	"Ignore"
+]
+
+{ #category : #'host space - displaying' }
+BlMorphicHostSpace >> maximized [
+
+	^ false
+]
+
+{ #category : #'host space - displaying' }
+BlMorphicHostSpace >> minimize [
+	"Ignore"
+]
+
+{ #category : #'host space - displaying' }
+BlMorphicHostSpace >> minimized [
+
+	^ false
+]
+
 { #category : #'host space - geometry' }
 BlMorphicHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.

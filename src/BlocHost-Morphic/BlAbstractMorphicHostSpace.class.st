@@ -1,6 +1,8 @@
 Class {
 	#name : #BlAbstractMorphicHostSpace,
 	#superclass : #BlHostSpace,
+	#traits : 'TBlSpaceProperties',
+	#classTraits : 'TBlSpaceProperties classTrait',
 	#instVars : [
 		'backBuffer',
 		'frontBuffer'
@@ -23,10 +25,16 @@ BlAbstractMorphicHostSpace >> lockSurfaceFor: damagedRectangle scaleFactor: aNum
 
 	| currentPhysicalSize temp |
 	currentPhysicalSize := self physicalSize asPoint.
-	(backBuffer isNil or: [ backBuffer isNull or: [ backBuffer extent ~= currentPhysicalSize ] ]) ifTrue: [ 
-		backBuffer := self newExternalForm ].
-	(frontBuffer isNil or: [ frontBuffer isNull or: [ frontBuffer extent ~= currentPhysicalSize ] ]) ifTrue: [ 
-		frontBuffer := self newExternalForm ].
+
+	(backBuffer isNil or: [
+		backBuffer isNull or: [
+			backBuffer extent ~= currentPhysicalSize ] ])
+				ifTrue: [ backBuffer := self newExternalForm ].
+
+	(frontBuffer isNil or: [
+		frontBuffer isNull or: [
+			frontBuffer extent ~= currentPhysicalSize ] ])
+				ifTrue: [ frontBuffer := self newExternalForm ].
 
 	renderer
 		renderWith: aBlock

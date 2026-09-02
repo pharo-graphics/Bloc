@@ -5,8 +5,6 @@ I am a Bloc host space to control Morphic window.
 Class {
 	#name : #BlMorphicWindowHostSpace,
 	#superclass : #BlAbstractMorphicHostSpace,
-	#traits : 'TBlSpaceProperties',
-	#classTraits : 'TBlSpaceProperties classTrait',
 	#instVars : [
 		'morphicWindow',
 		'isFullSize',

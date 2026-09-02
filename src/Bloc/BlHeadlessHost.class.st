@@ -21,7 +21,7 @@ BlHeadlessHost class >> priority [
 	^ 1000
 ]
 
-{ #category : #printing }
+{ #category : #accessing }
 BlHeadlessHost >> label [
 
 	^ 'Headless'

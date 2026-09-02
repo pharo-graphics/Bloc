@@ -21,6 +21,12 @@ Class {
 	#category : #'Bloc-Universe - Host'
 }
 
+{ #category : #accessing }
+BlHost class >> default [
+	
+	^ self subclassResponsibility
+]
+
 { #category : #'api - lifecycle' }
 BlHost class >> isRunning [
 	self
