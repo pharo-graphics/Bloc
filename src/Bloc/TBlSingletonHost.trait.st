@@ -11,14 +11,18 @@ Trait {
 
 { #category : #cleanup }
 TBlSingletonHost classSide >> cleanUp [
-	default := nil
+	default ifNotNil: [
+		BlHostRegistry default unregisterHost: default.
+		default := nil ]
 ]
 
 { #category : #accessing }
 TBlSingletonHost classSide >> default [
 
 	^ default ifNil: [
-		default := self basicNew initialize; yourself ]
+		default := self basicNew initialize; yourself.
+		BlHostRegistry default registerHost: default.
+		default ]
 ]
 
 { #category : #'api - lifecycle' }
@@ -28,11 +32,6 @@ TBlSingletonHost classSide >> isRunning [
 		transformWith: '`@receiver isRunning' -> '`@receiver default isRunning'.
 
 	^ self default isRunning
-]
-
-{ #category : #testing }
-TBlSingletonHost classSide >> isSingleton [
-	^ true
 ]
 
 { #category : #'driver selection' }

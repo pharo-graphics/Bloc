@@ -21,10 +21,6 @@ Class {
 	#category : #'Bloc-Universe - Host'
 }
 
-{ #category : #testing }
-BlHost class >> isSingleton [
-	^ false
-]
 
 { #category : #'driver selection' }
 BlHost class >> isSupported [
@@ -81,13 +77,6 @@ BlHost class >> priority [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - pulse process' }
-BlHost class >> pulseProcessDo: aBlock [
-	"Evaluate aBlock with the running pulse Process of this host if any"
-
-	self default pulseProcessDo: aBlock
-]
-
 { #category : #settings }
 BlHost class >> settingsOn: aBuilder [
 	"Deprecated. System settings are now managed by BlHostRegistry"
@@ -103,42 +92,15 @@ BlHost class >> settingsOn: aBuilder [
 
 ]
 
-{ #category : #'api - lifecycle' }
-BlHost class >> start [
-	self
-		deprecated: 'Use #default #start instead'
-		transformWith: '`@receiver start' -> '`@receiver default start'.
-
-	self default start
-]
-
-{ #category : #'api - lifecycle' }
-BlHost class >> stop [
-	self
-		deprecated: 'Use #default #stop instead'
-		transformWith: '`@receiver stop' -> '`@receiver default stop'.
-
-	self default stop
-]
-
 { #category : #'driver selection' }
 BlHost class >> supportedHostClasses [
 	"Return all supported Bloc host classes, sorted by priority (lowest first)."
 
-	^ (self allSubclasses
-			select: [ :aHostClass | aHostClass isSupported ])
-			sort: [ :a :b | a priority < b priority ]
-]
-
-{ #category : #'api - pulse process' }
-BlHost class >> uiProcessDo: aBlock [
-	"Evaluate aBlock with the running UI Process of this host if any"
-
 	self
-		deprecated: 'Use #pulseProcessDo: instead'
-		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcessDo: `@arg'.
+		deprecated: 'Use BlHostRegistry default availableHostClasses instead'
+		transformWith: '`@receiver supportedHostClasses' -> 'BlHostRegistry default availableHostClasses'.
 
-	self pulseProcessDo: aBlock
+	^ BlHostRegistry default availableHostClasses
 ]
 
 { #category : #'host space - accessing' }
@@ -252,4 +214,16 @@ BlHost >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion
 		  timeOutIf: aTimeoutValuable
 		  onCompletion: completionBlock
 		  onTimeout: timeoutBlock
+]
+
+{ #category : #testing }
+BlHost >> isSupported [
+
+	^ self class isSupported
+]
+
+{ #category : #accessing }
+BlHost >> priority [
+
+	^ self class priority
 ]

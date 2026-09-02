@@ -67,6 +67,12 @@ BlHostRegistry class >> startUp: isResuming [
 ]
 
 { #category : #accessing }
+BlHostRegistry >> availableHostClasses [
+
+	^ (self availableHosts collect: [ :each | each class ]) asArray
+]
+
+{ #category : #accessing }
 BlHostRegistry >> availableHosts [
 
 	^ availableHosts
@@ -76,6 +82,7 @@ BlHostRegistry >> availableHosts [
 BlHostRegistry >> initialize [
 
 	super initialize.
+	availableHosts := OrderedCollection new.
 	self refreshAvailableHosts
 ]
 
@@ -95,20 +102,35 @@ BlHostRegistry >> preferredHost: aHost [
 BlHostRegistry >> refreshAvailableHosts [
 	"Recompute available hosts for the current session and environment."
 
-	availableHosts :=
-		BlHost supportedHostClasses
-			select: [ :each | each isSingleton ]
-			thenCollect: [ :each | each default ].
+	"1. Prune hosts that are no longer supported in the current session/environment"
+	availableHosts removeAllSuchThat: [ :eachHost | eachHost isSupported not ].
 
+	"2. Ensure all supported singleton hosts are registered"
+	TBlSingletonHost users do: [ :eachClass |
+		eachClass isSupported ifTrue: [
+			self registerHost: eachClass default ] ].
+
+	"3. Ensure preferredHost is valid and present"
 	(availableHosts includes: preferredHost) ifFalse: [
-		preferredHost := availableHosts first ]
+		preferredHost :=
+			availableHosts
+				ifNotEmpty: [ availableHosts first ]
+				ifEmpty: [ nil ] ]
 ]
 
 { #category : #registration }
 BlHostRegistry >> registerHost: aHost [
 
-	(availableHosts includes: aHost)
-		ifFalse: [ availableHosts add: aHost ]
+	(availableHosts includes: aHost) ifFalse: [
+		availableHosts add: aHost.
+		self sortAvailableHosts.
+		preferredHost ifNil: [ preferredHost := availableHosts first ] ]
+]
+
+{ #category : #private }
+BlHostRegistry >> sortAvailableHosts [
+
+	availableHosts sort: [ :a :b | a priority < b priority ]
 ]
 
 { #category : #registration }

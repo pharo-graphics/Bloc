@@ -54,6 +54,12 @@ BlMorphicHost >> initialize [
 	containerMorph := Morph new
 ]
 
+{ #category : #testing }
+BlMorphicHost >> isSupported [
+
+	^ containerMorph isNotNil and: [ containerMorph isInWorld ]
+]
+
 { #category : #printing }
 BlMorphicHost >> label [
 
