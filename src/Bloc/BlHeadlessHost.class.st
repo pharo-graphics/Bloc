@@ -4,8 +4,8 @@ I am a headless host that manages space lifecycles, pulse loops, layout, and eve
 Class {
 	#name : #BlHeadlessHost,
 	#superclass : #BlPulseLoopHost,
-	#traits : 'TBlSingleton',
-	#classTraits : 'TBlSingleton classTrait',
+	#traits : 'TBlSingletonHost',
+	#classTraits : 'TBlSingletonHost classTrait',
 	#category : #'Bloc-Universe - Host Headless'
 }
 

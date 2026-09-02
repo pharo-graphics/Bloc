@@ -4,8 +4,8 @@ I am a host that opens spaces as windows in the Morphic World.
 Class {
 	#name : #BlMorphicWindowHost,
 	#superclass : #BlPulseLoopHost,
-	#traits : 'TBlSingleton',
-	#classTraits : 'TBlSingleton classTrait',
+	#traits : 'TBlSingletonHost',
+	#classTraits : 'TBlSingletonHost classTrait',
 	#category : #'BlocHost-Morphic-Window'
 }
 
