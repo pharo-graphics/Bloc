@@ -53,16 +53,19 @@ BlRelativeLayout >> measureRelativePositions: aParentLayoutNode [
 { #category : #measure }
 BlRelativeLayout >> measurementSpecFor: aChildNode parentSpec: aParentSpec [
 
-	| childWidthMeasureSpec childHeightMeasureSpec |
+	| childWidthMeasureSpec childHeightMeasureSpec aParentPadding |
+	aParentPadding := aChildNode parent
+		ifNil: [ BlInsets empty ]
+		ifNotNil: [ :p | p padding ].
 
 	childWidthMeasureSpec := self
 		measurementSpecFor: aParentSpec widthSpec
-		usedSize: aChildNode parent padding width + aChildNode padding width
+		usedSize: aParentPadding width + aChildNode padding width
 		resizer: aChildNode horizontalResizer.
 
 	childHeightMeasureSpec := self
 		measurementSpecFor: aParentSpec heightSpec
-		usedSize: aChildNode parent padding height + aChildNode margin height
+		usedSize: aParentPadding height + aChildNode margin height
 		resizer: aChildNode verticalResizer.
 
 	^ childWidthMeasureSpec @ childHeightMeasureSpec

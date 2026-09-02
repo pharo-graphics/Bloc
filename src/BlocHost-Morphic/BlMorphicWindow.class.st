@@ -78,6 +78,7 @@ BlMorphicWindow >> spaceExtent [
 
 	| aDelta |
 	"we compute decorations extent first"
+	spaceHostMorph extent isZero ifTrue: [ ^ self extent ].
 	aDelta := self fullBounds extent - spaceHostMorph extent.
 	^ self extent - aDelta
 ]
