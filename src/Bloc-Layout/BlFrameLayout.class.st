@@ -186,32 +186,41 @@ BlFrameLayout >> measureParentNode: aParentNode [
 { #category : #private }
 BlFrameLayout >> measurementSpecFor: aChildNode parentExtent: aParentExtent [
 	
-	| aParentWidth aParentHeight childWidthMeasureSpec childHeightMeasureSpec |
+	| aParentWidth aParentHeight childWidthMeasureSpec childHeightMeasureSpec aParentPadding aParentWidthSpec aParentHeightSpec |
 	aParentWidth := aParentExtent x.
 	aParentHeight := aParentExtent y.
+	aParentPadding := aChildNode parent
+		ifNil: [ BlInsets empty ]
+		ifNotNil: [ :p | p padding ].
+	aParentWidthSpec := aChildNode parent
+		ifNil: [ BlMeasurementSpec unspecified ]
+		ifNotNil: [ :p | p widthSpec ].
+	aParentHeightSpec := aChildNode parent
+		ifNil: [ BlMeasurementSpec unspecified ]
+		ifNotNil: [ :p | p heightSpec ].
 
 	aChildNode isHorizontalMatchParent
 		ifTrue: [ 
 			| weight width |
 			weight := (aChildNode constraints frame horizontal weight max: 0.0).
-			width := ((aParentWidth - aChildNode parent padding width - aChildNode margin width) * weight) max: aChildNode constraints minWidth.
+			width := ((aParentWidth - aParentPadding width - aChildNode margin width) * weight) max: aChildNode constraints minWidth.
 			childWidthMeasureSpec := BlMeasurementSpec exact: width ]
 		ifFalse: [ 
 			childWidthMeasureSpec := self
-				measurementSpecFor: aChildNode parent widthSpec
-				usedSize: aChildNode parent padding width + aChildNode padding width
+				measurementSpecFor: aParentWidthSpec
+				usedSize: aParentPadding width + aChildNode padding width
 				resizer: aChildNode horizontalResizer ].
  
 	aChildNode isVerticalMatchParent
 		ifTrue: [ 
 			| weight height |
 			weight := (aChildNode  constraints frame vertical weight max: 0.0).
-			height := ((aParentHeight - aChildNode parent padding height - aChildNode margin height) * weight) max: aChildNode constraints minHeight.
+			height := ((aParentHeight - aParentPadding height - aChildNode margin height) * weight) max: aChildNode constraints minHeight.
 			childHeightMeasureSpec := BlMeasurementSpec exact: height ]
 		ifFalse: [ 
 			childHeightMeasureSpec := self
-				measurementSpecFor: aChildNode parent heightSpec
-				usedSize: aChildNode parent padding height + aChildNode margin height
+				measurementSpecFor: aParentHeightSpec
+				usedSize: aParentPadding height + aChildNode margin height
 				resizer: aChildNode verticalResizer ].
 
 	^ childWidthMeasureSpec @ childHeightMeasureSpec
