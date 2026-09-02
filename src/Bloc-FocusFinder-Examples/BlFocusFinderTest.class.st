@@ -1,11 +1,10 @@
 Class {
-	#name : 'BlFocusFinderTest',
-	#superclass : 'TestCase',
-	#category : 'Bloc-FocusFinder-Examples',
-	#package : 'Bloc-FocusFinder-Examples'
+	#name : #BlFocusFinderTest,
+	#superclass : #TestCase,
+	#category : #'Bloc-FocusFinder-Examples'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlFocusFinderTest >> cell [
 
 	^ BlElement new
@@ -23,7 +22,7 @@ BlFocusFinderTest >> cell [
 		yourself
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 BlFocusFinderTest >> container [
 
 	
@@ -71,7 +70,7 @@ BlFocusFinderTest >> container [
 
 ]
 
-{ #category : 'examples - segment 1' }
+{ #category : #'examples - segment 1' }
 BlFocusFinderTest >> segmentWithCells [
 
 	
@@ -260,7 +259,7 @@ BlFocusFinderTest >> segmentWithCells [
 
 ]
 
-{ #category : 'examples - segment 2' }
+{ #category : #'examples - segment 2' }
 BlFocusFinderTest >> segmentWithCells_2 [
 
 	
@@ -500,7 +499,7 @@ BlFocusFinderTest >> segmentWithCells_2 [
 
 ]
 
-{ #category : 'examples - segment 3' }
+{ #category : #'examples - segment 3' }
 BlFocusFinderTest >> segmentWithCells_3 [
 
 	
@@ -669,7 +668,7 @@ BlFocusFinderTest >> segmentWithCells_3 [
 
 ]
 
-{ #category : 'examples - segment 4' }
+{ #category : #'examples - segment 4' }
 BlFocusFinderTest >> segmentWithCells_4 [
 
 	
@@ -717,7 +716,7 @@ BlFocusFinderTest >> segmentWithCells_4 [
 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusFinderDownOnContainer [
 	
 	| aFocusFinder aContainer |
@@ -730,7 +729,7 @@ BlFocusFinderTest >> testFocusFinderDownOnContainer [
 		referenceElement: aContainer children last children third
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusFinderDownOnSegment_2_at_190x30 [
 	
 	| aFocusFinder aContainer aNextFocus |
@@ -751,7 +750,7 @@ BlFocusFinderTest >> testFocusFinderDownOnSegment_2_at_190x30 [
 		equals: (aContainer children at: 73)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusFinderDownOnSegment_2_child_41 [
 	
 	| aFocusFinder aContainer aNextFocus |
@@ -772,7 +771,7 @@ BlFocusFinderTest >> testFocusFinderDownOnSegment_2_child_41 [
 		equals: (aContainer children at: 73)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusFinderDownOnSegment_3_at_285x50 [
 	
 	| aFocusFinder aContainer aNextFocus |
@@ -793,7 +792,7 @@ BlFocusFinderTest >> testFocusFinderDownOnSegment_3_at_285x50 [
 		equals: (aContainer children at: 39)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusFinderDownOnSegment_3_child_57 [
 	
 	| aFocusFinder aContainer aNextFocus |
@@ -814,7 +813,7 @@ BlFocusFinderTest >> testFocusFinderDownOnSegment_3_child_57 [
 		equals: (aContainer children at: 39)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusFinderLeftOnContainer [
 	
 	| aFocusFinder aContainer |
@@ -827,7 +826,7 @@ BlFocusFinderTest >> testFocusFinderLeftOnContainer [
 		referenceElement: aContainer children last children third
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusFinderRightOnContainer [
 	
 	| aFocusFinder aContainer |
@@ -840,7 +839,7 @@ BlFocusFinderTest >> testFocusFinderRightOnContainer [
 		referenceElement: aContainer children last children third
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusFinderUpOnContainer [
 	
 	| aFocusFinder aContainer |
@@ -853,7 +852,7 @@ BlFocusFinderTest >> testFocusFinderUpOnContainer [
 		referenceElement: aContainer children last children third
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusFinderUpOnContainerFromBounds [
 	
 	| aFocusFinder aContainer |
@@ -866,7 +865,7 @@ BlFocusFinderTest >> testFocusFinderUpOnContainerFromBounds [
 		referenceArea: (170@100 corner: 200@120)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusFinderUpOnSegment_4_at_100x100 [
 	
 	| aContainer aFocusFinder aNextFocus |
@@ -886,7 +885,7 @@ BlFocusFinderTest >> testFocusFinderUpOnSegment_4_at_100x100 [
 		equals: (aContainer children third children first)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusFinderUpOnSegment_4_at_20x100 [
 	
 	| aContainer aFocusFinder aNextFocus |
@@ -906,7 +905,7 @@ BlFocusFinderTest >> testFocusFinderUpOnSegment_4_at_20x100 [
 		equals: (aContainer children third children first)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusFinderUpOnSegment_4_at_minus10x100 [
 	
 	| aContainer aFocusFinder aNextFocus |
@@ -926,7 +925,7 @@ BlFocusFinderTest >> testFocusFinderUpOnSegment_4_at_minus10x100 [
 		equals: (aContainer children third children first)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusFinderUpOnSegmentsAt_0x60 [
 	
 	| aFocusFinder aContainer aNextFocus |
@@ -947,7 +946,7 @@ BlFocusFinderTest >> testFocusFinderUpOnSegmentsAt_0x60 [
 		equals: (aContainer children at: 27)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusFinderUpOnSegmentsAt_minus10x60 [
 	
 	| aFocusFinder aContainer aNextFocus |
@@ -968,7 +967,7 @@ BlFocusFinderTest >> testFocusFinderUpOnSegmentsAt_minus10x60 [
 		equals: (aContainer children at: 27)
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 BlFocusFinderTest >> testFocusedElementAbove_90 [
 	
 	| aContainer |
