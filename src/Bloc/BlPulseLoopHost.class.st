@@ -19,10 +19,10 @@ BlPulseLoopHost >> initialize [
 ]
 
 { #category : #'host - testing' }
-BlPulseLoopHost >> isPulseProcess [
+BlPulseLoopHost >> isPulseProcessActive [
 	"Return true if the active process is the pulse loop process of this host"
 
-	^ pulseLoop isNotNil and: [ pulseLoop isPulseProcess ]
+	^ pulseLoop isNotNil and: [ pulseLoop isPulseProcessActive ]
 ]
 
 { #category : #'api - lifecycle' }

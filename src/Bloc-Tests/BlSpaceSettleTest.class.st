@@ -79,7 +79,7 @@ BlSpaceSettleTest >> testDeferOnOpenedSpaceRunsOnPulseProcess [
 	| aSpace isPulse |
 	aSpace := self newTestingSpace.
 	isPulse := false.
-	aSpace defer: [ isPulse := aSpace host isPulseProcess ].
+	aSpace defer: [ isPulse := aSpace host isPulseProcessActive ].
 	self deny: isPulse.
 	aSpace settle.
 	self assert: isPulse

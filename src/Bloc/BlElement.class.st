@@ -2083,7 +2083,7 @@ BlElement >> inPulseProcessDo: aBlock elseDo: altBlock [
 	If the active process is already the pulse process, evaluate immediately. 
 	Otherwise, queue up for the next frame."
 
-	(self isAttachedToSceneGraph and: [ self space isPulseProcess ])
+	(self isAttachedToSceneGraph and: [ self space isPulseProcessActive ])
 		ifTrue: aBlock
 		ifFalse: altBlock
 ]

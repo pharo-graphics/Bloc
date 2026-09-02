@@ -90,7 +90,7 @@ BlHostPulseLoop >> initializeWithHost: aBlHost [
 ]
 
 { #category : #testing }
-BlHostPulseLoop >> isPulseProcess [
+BlHostPulseLoop >> isPulseProcessActive [
 
 	^ Processor activeProcess == loopProcess
 ]
@@ -121,7 +121,7 @@ BlHostPulseLoop >> loopIteration [
 		e pass ].
 
 	"Returns true to continue looping"
-	^ self isPulseProcess 
+	^ self isPulseProcessActive 
 ]
 
 { #category : #accessing }

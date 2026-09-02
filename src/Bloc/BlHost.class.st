@@ -183,7 +183,7 @@ BlHost >> denyPulseProcess [
 	"Signal an error if the active process is the pulse loop process of this host.
 	Blocking synchronization from the pulse loop process would deadlock the host loop."
 
-	self isPulseProcess ifTrue: [
+	self isPulseProcessActive ifTrue: [
 		self error: 'Cannot perform blocking synchronization from the pulse process as it would deadlock the host loop.' ]
 ]
 
@@ -194,7 +194,7 @@ BlHost >> hasUniverse [
 ]
 
 { #category : #'host - testing' }
-BlHost >> isPulseProcess [
+BlHost >> isPulseProcessActive [
 	"Return true if the active process is the pulse loop process of this host"
 
 	^ self subclassResponsibility

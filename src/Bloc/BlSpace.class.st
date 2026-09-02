@@ -853,10 +853,10 @@ BlSpace >> isOpened [
 ]
 
 { #category : #pulse }
-BlSpace >> isPulseProcess [
+BlSpace >> isPulseProcessActive [
 	"Return true if the active process is the pulse loop process for this space"
 
-	^ self host isPulseProcess
+	^ self host isPulseProcessActive
 ]
 
 { #category : #pulse }
