@@ -15,9 +15,6 @@ Class {
 	#instVars : [
 		'universe'
 	],
-	#classVars : [
-		'PreferableHostClass'
-	],
 	#category : #'Bloc-Universe - Host'
 }
 
@@ -93,17 +90,6 @@ BlHost class >> supportedHostClasses [
 	^ BlHostRegistry default availableHostClasses
 ]
 
-{ #category : #'host space - accessing' }
-BlHost class >> universe [
-	"Lazy initialization is preferred to avoid instantiating unused universes and background loop processes for host types that are not used in a given session."
-
-	self
-		deprecated: 'Use #default #universe instead'
-		transformWith: '`@receiver universe' -> '`@receiver default universe'.
-
-	^ self default universe
-]
-
 { #category : #'error handling' }
 BlHost >> denyPulseProcess [
 	"Signal an error if the active process is the pulse loop process of this host.
@@ -123,7 +109,7 @@ BlHost >> hasUniverse [
 BlHost >> isPulseProcessActive [
 	"Return true if the active process is the pulse loop process of this host"
 
-	^ self subclassResponsibility
+	^ false
 ]
 
 { #category : #'api - lifecycle' }
