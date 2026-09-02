@@ -2067,23 +2067,6 @@ BlElement >> inNewSpace [
 	^ aSpace
 ]
 
-{ #category : #processing }
-BlElement >> inPulseProcessDo: aBlock [
-	self
-		deprecated: 'Use #valueOrDefer: instead'
-		transformWith: '`@receiver inPulseProcessDo: `@arg' -> '`@receiver valueOrDefer: `@arg'.
-
-	^ self valueOrDefer: aBlock
-]
-
-{ #category : #processing }
-BlElement >> inPulseProcessDo: aBlock elseDo: altBlock [
-	self
-		deprecated: 'Use #pulseProcessIfActive:else: instead'
-		transformWith: '`@receiver inPulseProcessDo: `@arg1 elseDo: `@arg2' -> '`@receiver pulseProcessIfActive: `@arg1 else: `@arg2'.
-
-	^ self pulseProcessIfActive: aBlock else: altBlock
-]
 
 { #category : #'api - space' }
 BlElement >> inSpace [
