@@ -32,7 +32,7 @@ BlSpaceFrameEventPhase >> runOn: aSpace [
 
 			"Process events enqueued by host space and dispatch them to the scene graph"
 			aSpace hostSpaceDo: [ :aHostSpace |
-				aHostSpace dequeueEvents do: [ :anEvent |
+				aHostSpace dequeuedEvents do: [ :anEvent |
 					"we have to test for existance of the host space before handling each event because it is possible that a space is closed due to an event"
 					aSpace hostSpaceDo: [
 						aSpace dispatchEvent: anEvent ] ] ].

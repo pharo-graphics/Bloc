@@ -39,7 +39,7 @@ BlHostSpace >> densityDpi [
 ]
 
 { #category : #'host space - events' }
-BlHostSpace >> dequeueEvents [
+BlHostSpace >> dequeuedEvents [
 
 	| theEvents |
 	theEvents := LinkedList new.
