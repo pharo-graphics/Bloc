@@ -55,7 +55,6 @@ Class {
 	#category : #'Bloc-Space'
 }
 
-
 { #category : #initialization }
 BlSpace class >> defaultRootLabel [
 
@@ -231,25 +230,6 @@ BlSpace >> deferAndSettle: aBlock [
 
 	self defer: aBlock.
 	self settle
-]
-
-{ #category : #pulse }
-BlSpace >> pulseProcessIfActive: aBlock else: altBlock [
-	"Evaluate aBlock if the active process is the pulse process of this space,
-	otherwise evaluate altBlock."
-
-	^ self isPulseProcessActive
-		ifTrue: aBlock
-		ifFalse: altBlock
-]
-
-{ #category : #pulse }
-BlSpace >> valueOrDefer: aBlock [
-	"Evaluate aBlock immediately if the active process is already the pulse process.
-	Otherwise, defer execution by scheduling a task for the next pulse."
-
-	self pulseProcessIfActive: aBlock else: [
-		self defer: aBlock ]
 ]
 
 { #category : #'window - properties' }
@@ -1069,6 +1049,16 @@ BlSpace >> pulse [
 ]
 
 { #category : #pulse }
+BlSpace >> pulseProcessIfActive: aBlock else: altBlock [
+	"Evaluate aBlock if the active process is the pulse process of this space,
+	otherwise evaluate altBlock."
+
+	^ self isPulseProcessActive
+		ifTrue: aBlock
+		ifFalse: altBlock
+]
+
+{ #category : #pulse }
 BlSpace >> pulseRequested [
 	"Return true if space pulse was requested, false otherwise"
 
@@ -1396,6 +1386,15 @@ BlSpace >> userData [
 	Be careful to limit the use of such facility and prefer clean instance variables when it is possible to define them."
 
 	^ userData ifNil: [ userData := IdentityDictionary new ]
+]
+
+{ #category : #pulse }
+BlSpace >> valueOrDefer: aBlock [
+	"Evaluate aBlock immediately if the active process is already the pulse process.
+	Otherwise, defer execution by scheduling a task for the next pulse."
+
+	self pulseProcessIfActive: aBlock else: [
+		self defer: aBlock ]
 ]
 
 { #category : #pulse }

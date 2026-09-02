@@ -18,7 +18,6 @@ Class {
 	#category : #'Bloc-Universe - Host'
 }
 
-
 { #category : #'driver selection' }
 BlHost class >> isSupported [
 
@@ -78,7 +77,6 @@ BlHost class >> priority [
 	^ self subclassResponsibility
 ]
 
-
 { #category : #'driver selection' }
 BlHost class >> supportedHostClasses [
 	"Return all supported Bloc host classes, sorted by priority (lowest first)."
@@ -119,6 +117,12 @@ BlHost >> isRunning [
 	^ false
 ]
 
+{ #category : #testing }
+BlHost >> isSupported [
+
+	^ self class isSupported
+]
+
 { #category : #accessing }
 BlHost >> label [
 	"Return a human readable title to identify myself."
@@ -144,6 +148,12 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 	"Update the received paragraph with its measurement."
 
 	BlHostRenderer preferableClass offscreenMeasureTextParagraph: aBlTextParagraph
+]
+
+{ #category : #accessing }
+BlHost >> priority [
+
+	^ self class priority
 ]
 
 { #category : #enumerating }
@@ -190,16 +200,4 @@ BlHost >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion
 		  timeOutIf: aTimeoutValuable
 		  onCompletion: completionBlock
 		  onTimeout: timeoutBlock
-]
-
-{ #category : #testing }
-BlHost >> isSupported [
-
-	^ self class isSupported
-]
-
-{ #category : #accessing }
-BlHost >> priority [
-
-	^ self class priority
 ]

@@ -78,6 +78,15 @@ BlHostRegistry >> availableHosts [
 	^ availableHosts
 ]
 
+{ #category : #'api - lifecycle' }
+BlHostRegistry >> closeAllSpaces [
+
+	self availableHosts do: [ :eachHost |
+		eachHost hasUniverse ifTrue: [
+			eachHost universe closeSpaces.
+			eachHost stop ] ]
+]
+
 { #category : #initialization }
 BlHostRegistry >> initialize [
 
@@ -98,32 +107,23 @@ BlHostRegistry >> preferredHost: aHost [
 	preferredHost := aHost
 ]
 
-{ #category : #'api - lifecycle' }
-BlHostRegistry >> closeAllSpaces [
-
-	self availableHosts do: [ :eachHost |
-		eachHost hasUniverse ifTrue: [
-			eachHost universe closeSpaces.
-			eachHost stop ] ]
-]
-
 { #category : #initialization }
 BlHostRegistry >> refreshAvailableHosts [
 	"Recompute available hosts for the current session and environment."
 
-	"1. Prune hosts that are no longer supported in the current session/environment"
+	"First: Prune hosts that are no longer supported in the current session"
 	availableHosts
 		select: [ :eachHost | eachHost isSupported not ]
 		thenDo: [ :eachHost |
 			eachHost hasUniverse ifTrue: [ eachHost universe stop ] ].
 	availableHosts removeAllSuchThat: [ :eachHost | eachHost isSupported not ].
 
-	"2. Ensure all supported singleton hosts are registered"
+	"Second: Ensure all supported singleton hosts are registered"
 	TBlSingletonHost users do: [ :eachClass |
 		eachClass isSupported ifTrue: [
 			self registerHost: eachClass default ] ].
 
-	"3. Ensure preferredHost is valid and present"
+	"Third: Ensure preferredHost is valid and present"
 	(availableHosts includes: preferredHost) ifFalse: [
 		preferredHost :=
 			availableHosts
@@ -134,16 +134,10 @@ BlHostRegistry >> refreshAvailableHosts [
 { #category : #registration }
 BlHostRegistry >> registerHost: aHost [
 
-	(availableHosts includes: aHost) ifFalse: [
-		availableHosts add: aHost.
-		self sortAvailableHosts.
-		preferredHost ifNil: [ preferredHost := availableHosts first ] ]
-]
-
-{ #category : #private }
-BlHostRegistry >> sortAvailableHosts [
-
-	availableHosts sort: [ :a :b | a priority < b priority ]
+	(availableHosts includes: aHost) ifTrue: [ ^ self ].
+	availableHosts add: aHost.
+	availableHosts sort: [ :a :b | a priority < b priority ].
+	preferredHost ifNil: [ preferredHost := availableHosts first ]
 ]
 
 { #category : #registration }

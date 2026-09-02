@@ -2067,7 +2067,6 @@ BlElement >> inNewSpace [
 	^ aSpace
 ]
 
-
 { #category : #'api - space' }
 BlElement >> inSpace [
 
@@ -2096,25 +2095,6 @@ BlElement >> inUIProcessDo: aBlock elseDo: altBlock [
 		transformWith: '`@receiver inUIProcessDo: `@arg1 elseDo: `@arg2' -> '`@receiver pulseProcessIfActive: `@arg1 else: `@arg2'.
 
 	^ self pulseProcessIfActive: aBlock else: altBlock
-]
-
-{ #category : #processing }
-BlElement >> pulseProcessIfActive: aBlock else: altBlock [
-	"Evaluate aBlock if the active process is the pulse process of this element's space,
-	otherwise evaluate altBlock."
-
-	^ self isAttachedToSceneGraph
-		ifTrue: [ self space pulseProcessIfActive: aBlock else: altBlock ]
-		ifFalse: altBlock
-]
-
-{ #category : #processing }
-BlElement >> valueOrDefer: aBlock [
-	"Evaluate aBlock immediately if the active process is already the pulse process.
-	Otherwise, defer execution by enqueuing a task on this element."
-
-	self pulseProcessIfActive: aBlock else: [
-		self enqueueTask: (BlTaskAction with: aBlock) ]
 ]
 
 { #category : #initialization }
@@ -3513,6 +3493,16 @@ BlElement >> privateRequestingLayout: aBoolean [
 		ifFalse: [ flags clearNeedsLayout ]
 ]
 
+{ #category : #processing }
+BlElement >> pulseProcessIfActive: aBlock else: altBlock [
+	"Evaluate aBlock if the active process is the pulse process of this element's space,
+	otherwise evaluate altBlock."
+
+	^ self isAttachedToSceneGraph
+		ifTrue: [ self space pulseProcessIfActive: aBlock else: altBlock ]
+		ifFalse: altBlock
+]
+
 { #category : #'children add/remove' }
 BlElement >> removeChild: anElement [
 	"Request layout and redraw an area occupied by anElement.
@@ -4103,6 +4093,15 @@ BlElement >> userData [
 	Be careful to limit the use of such facility and prefer clean instance variables when it is possible to define them."
 
 	^ userData ifNil: [ userData := IdentityDictionary new ]
+]
+
+{ #category : #processing }
+BlElement >> valueOrDefer: aBlock [
+	"Evaluate aBlock immediately if the active process is already the pulse process.
+	Otherwise, defer execution by enqueuing a task on this element."
+
+	self pulseProcessIfActive: aBlock else: [
+		self enqueueTask: (BlTaskAction with: aBlock) ]
 ]
 
 { #category : #'layout anchors' }
