@@ -65,7 +65,11 @@ BlHost class >> preferableHostClass: aHostClass [
 BlHost class >> prioritaryHostClass [
 	"Answer the supported host with the lowest priority."
 
-	^ self supportedHostClasses first
+	self
+		deprecated: 'Use BlHostRegistry default preferredHost class instead'
+		transformWith: '`@receiver prioritaryHostClass' -> 'BlHostRegistry default preferredHost class'.
+
+	^ BlHostRegistry default preferredHost class
 ]
 
 { #category : #'driver selection' }
@@ -77,20 +81,6 @@ BlHost class >> priority [
 	^ self subclassResponsibility
 ]
 
-{ #category : #settings }
-BlHost class >> settingsOn: aBuilder [
-	"Deprecated. System settings are now managed by BlHostRegistry"
-
-	(aBuilder pickOne: #preferableHostClass)
-		parent: Bloc groupSymbolForBloc;
-		target: self;
-		order: 1;
-		label: 'Preferable host';
-		domainValues: (self supportedHostClasses
-			collect: [ :aHostClass | aHostClass default label -> aHostClass ]);
-		description: 'Choose the option that spaces will use to open, unless they have a particular host.'.
-
-]
 
 { #category : #'driver selection' }
 BlHost class >> supportedHostClasses [
