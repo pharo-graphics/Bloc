@@ -152,12 +152,8 @@ BaselineOfBloc >> baseline: spec [
 				with: [ spec requires: #('Bloc' 'Bloc-Text') ].
 
 			spec
-				package: 'BlocHost-Mock'
-				with: [ spec requires: #('Bloc') ].
-
-			spec
 				package: 'Bloc-Scripter'
-				with: [ spec requires: #('Bloc' 'Bloc-Simulation' 'Bloc-Layout' 'BlocHost-Mock') ].
+				with: [ spec requires: #('Bloc' 'Bloc-Simulation' 'Bloc-Layout') ].
 
 			spec
 				package: 'BlocHost-Morphic'
@@ -212,7 +208,6 @@ BaselineOfBloc >> baseline: spec [
 					'Bloc'
 					'Bloc-Simulation'
 					'Bloc-Text-Elements'
-					'BlocHost-Mock'
 					'BlocHost-Morphic'
 					'BlocHost-OSWindow-SDL2') ].
 
