@@ -98,11 +98,24 @@ BlHostRegistry >> preferredHost: aHost [
 	preferredHost := aHost
 ]
 
+{ #category : #'api - lifecycle' }
+BlHostRegistry >> closeAllSpaces [
+
+	self availableHosts do: [ :eachHost |
+		eachHost hasUniverse ifTrue: [
+			eachHost universe closeSpaces.
+			eachHost stop ] ]
+]
+
 { #category : #initialization }
 BlHostRegistry >> refreshAvailableHosts [
 	"Recompute available hosts for the current session and environment."
 
 	"1. Prune hosts that are no longer supported in the current session/environment"
+	availableHosts
+		select: [ :eachHost | eachHost isSupported not ]
+		thenDo: [ :eachHost |
+			eachHost hasUniverse ifTrue: [ eachHost universe stop ] ].
 	availableHosts removeAllSuchThat: [ :eachHost | eachHost isSupported not ].
 
 	"2. Ensure all supported singleton hosts are registered"

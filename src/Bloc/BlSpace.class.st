@@ -55,6 +55,13 @@ Class {
 	#category : #'Bloc-Space'
 }
 
+{ #category : #'api - space' }
+BlSpace class >> closeAllSpaces [
+	"Close all spaces across all active hosts in the system."
+
+	BlHostRegistry default closeAllSpaces
+]
+
 { #category : #initialization }
 BlSpace class >> defaultRootLabel [
 
