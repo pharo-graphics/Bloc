@@ -11,7 +11,7 @@ Class {
 BlErrorHandlingExamplesTest >> sceneWith: aFaultyElement [
 	"Create a visual scene with a faulty element embedded in it"
 
-	| aContainer aLeftChild aRightChild aSpace |
+	| aContainer aLeftChild aRightChild |
 	aContainer := BlElement new.
 	aContainer layout: BlLinearLayout horizontal.
 	aContainer constraintsDo: [ :c |
@@ -45,14 +45,8 @@ BlErrorHandlingExamplesTest >> sceneWith: aFaultyElement [
 
 	aContainer addChildren: { aLeftChild . aRightChild }.
 
-	aSpace := BlSpace new.
-	aSpace host: BlMorphicWindowHost default.
-	[
-		aSpace root addChild: aContainer.
-		aSpace show; settle
-	] ensure: [
-		aSpace close; settle.
-		aContainer removeFromParent ].
+	"A way to apply layout constraints"
+	aContainer inNewHeadlessSpaceDo: [ ].
 
 	^ aContainer
 ]
