@@ -21,21 +21,6 @@ Class {
 	#category : #'Bloc-Universe - Host'
 }
 
-{ #category : #accessing }
-BlHost class >> default [
-	
-	^ self subclassResponsibility
-]
-
-{ #category : #'api - lifecycle' }
-BlHost class >> isRunning [
-	self
-		deprecated: 'Use #default #isRunning instead'
-		transformWith: '`@receiver isRunning' -> '`@receiver default isRunning'.
-
-	^ self default isRunning
-]
-
 { #category : #testing }
 BlHost class >> isSingleton [
 	^ false
@@ -45,17 +30,6 @@ BlHost class >> isSingleton [
 BlHost class >> isSupported [
 
 	^ false
-]
-
-{ #category : #'driver selection' }
-BlHost class >> label [
-	"Return a human readable title to identify myself."
-
-	self
-		deprecated: 'Use #default #label instead'
-		transformWith: '`@receiver label' -> '`@receiver default label'.
-
-	^ self default label
 ]
 
 { #category : #'driver selection' }

@@ -3,7 +3,9 @@ I am a host that opens spaces as OSWindow SDL2 windows.
 "
 Class {
 	#name : #BlOSWindowSDL2Host,
-	#superclass : #BlSingletonHost,
+	#superclass : #BlPulseLoopHost,
+	#traits : 'TBlSingleton',
+	#classTraits : 'TBlSingleton classTrait',
 	#category : #'BlocHost-OSWindow-SDL2'
 }
 
