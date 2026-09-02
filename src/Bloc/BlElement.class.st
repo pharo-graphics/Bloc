@@ -1529,7 +1529,7 @@ BlElement >> elevation: aBlElevation [
 { #category : #'api - tasks' }
 BlElement >> enqueueTask: aBlTask [
 	"Queue the supplied task to be executed in the next frame.
-	If you want the task executed in the pulse process as soon as possible, use #inPulseProcessDo:.
+	If you want the block executed in the pulse process without deferring if already on the UI process, use #valueOrDefer:.
 	Note that the task is not guaranteed to be executed (if the element is never attached to a scene)."
 
 	aBlTask onEnqueuedInElement: self.
@@ -2069,23 +2069,20 @@ BlElement >> inNewSpace [
 
 { #category : #processing }
 BlElement >> inPulseProcessDo: aBlock [
-	"Run the supplied block in the pulse process.
-	If the active process is already the pulse process, evaluate immediately. 
-	Otherwise, queue up for the next frame."
+	self
+		deprecated: 'Use #valueOrDefer: instead'
+		transformWith: '`@receiver inPulseProcessDo: `@arg' -> '`@receiver valueOrDefer: `@arg'.
 
-	self inPulseProcessDo: aBlock elseDo: [
-		self enqueueTask: (BlTaskAction with: aBlock) ]
+	^ self valueOrDefer: aBlock
 ]
 
 { #category : #processing }
 BlElement >> inPulseProcessDo: aBlock elseDo: altBlock [
-	"Run the supplied block in the pulse process else run the alternative block.
-	If the active process is already the pulse process, evaluate immediately. 
-	Otherwise, queue up for the next frame."
+	self
+		deprecated: 'Use #pulseProcessIfActive:else: instead'
+		transformWith: '`@receiver inPulseProcessDo: `@arg1 elseDo: `@arg2' -> '`@receiver pulseProcessIfActive: `@arg1 else: `@arg2'.
 
-	(self isAttachedToSceneGraph and: [ self space isPulseProcessActive ])
-		ifTrue: aBlock
-		ifFalse: altBlock
+	^ self pulseProcessIfActive: aBlock else: altBlock
 ]
 
 { #category : #'api - space' }
@@ -2102,20 +2099,39 @@ BlElement >> inSpace [
 BlElement >> inUIProcessDo: aBlock [
 
 	self
-		deprecated: 'Use #inPulseProcessDo: instead'
-		transformWith: '`@receiver inUIProcessDo: `@arg' -> '`@receiver inPulseProcessDo: `@arg'.
+		deprecated: 'Use #valueOrDefer: instead'
+		transformWith: '`@receiver inUIProcessDo: `@arg' -> '`@receiver valueOrDefer: `@arg'.
 
-	^ self inPulseProcessDo: aBlock
+	^ self valueOrDefer: aBlock
 ]
 
 { #category : #processing }
 BlElement >> inUIProcessDo: aBlock elseDo: altBlock [
 
 	self
-		deprecated: 'Use #inPulseProcessDo:elseDo: instead'
-		transformWith: '`@receiver inUIProcessDo: `@arg1 elseDo: `@arg2' -> '`@receiver inPulseProcessDo: `@arg1 elseDo: `@arg2'.
+		deprecated: 'Use #pulseProcessIfActive:else: instead'
+		transformWith: '`@receiver inUIProcessDo: `@arg1 elseDo: `@arg2' -> '`@receiver pulseProcessIfActive: `@arg1 else: `@arg2'.
 
-	^ self inPulseProcessDo: aBlock elseDo: altBlock
+	^ self pulseProcessIfActive: aBlock else: altBlock
+]
+
+{ #category : #processing }
+BlElement >> pulseProcessIfActive: aBlock else: altBlock [
+	"Evaluate aBlock if the active process is the pulse process of this element's space,
+	otherwise evaluate altBlock."
+
+	^ self isAttachedToSceneGraph
+		ifTrue: [ self space pulseProcessIfActive: aBlock else: altBlock ]
+		ifFalse: altBlock
+]
+
+{ #category : #processing }
+BlElement >> valueOrDefer: aBlock [
+	"Evaluate aBlock immediately if the active process is already the pulse process.
+	Otherwise, defer execution by enqueuing a task on this element."
+
+	self pulseProcessIfActive: aBlock else: [
+		self enqueueTask: (BlTaskAction with: aBlock) ]
 ]
 
 { #category : #initialization }
