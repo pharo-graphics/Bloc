@@ -26,9 +26,11 @@ BlHost class >> isSupported [
 
 { #category : #'driver selection' }
 BlHost class >> pickHost [
-	"Answer the preferred host instance."
-	
-	^ BlHostRegistry default preferredHost
+	self
+		deprecated: 'Use Bloc preferredHost instead'
+		transformWith: '`@receiver pickHost' -> 'Bloc preferredHost'.
+
+	^ Bloc preferredHost
 ]
 
 { #category : #settings }

@@ -21,6 +21,34 @@ Bloc class >> assertionsEnabled [
 	^ AssertionsEnabled ifNil: [ true ]
 ]
 
+{ #category : #'host - accessing' }
+Bloc class >> availableHosts [
+	"Answer all available host instances currently registered in the system."
+
+	^ self hostRegistry availableHosts
+]
+
+{ #category : #'host - accessing' }
+Bloc class >> closeAllSpaces [
+	"Close all spaces across all active hosts in the system."
+
+	self hostRegistry closeAllSpaces
+]
+
+{ #category : #'host - accessing' }
+Bloc class >> hostRegistry [
+	"Answer the default host registry."
+
+	^ BlHostRegistry default
+]
+
+{ #category : #'host - accessing' }
+Bloc class >> preferredHost [
+	"Answer the preferred host instance."
+
+	^ self hostRegistry preferredHost
+]
+
 { #category : #assertions }
 Bloc class >> assertionsEnabled: aBoolean [
 	AssertionsEnabled := aBoolean

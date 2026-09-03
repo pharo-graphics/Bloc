@@ -196,7 +196,7 @@ BlDevScripter >> showSpace [
 	"I can be only used after Scripter execution."
 	self space
 		close;
-		host: BlHost pickHost;
+		host: Bloc preferredHost;
 		show
 ]
 

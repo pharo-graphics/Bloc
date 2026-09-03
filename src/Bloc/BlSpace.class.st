@@ -729,7 +729,7 @@ BlSpace >> initialize [
 
 	super initialize.
 
-	host := BlHost pickHost.
+	host := Bloc preferredHost.
 	pulseRequested := true.
 	elementsNeedingPaint := Set new.
 	elementsNeedingLayout := Set new.
