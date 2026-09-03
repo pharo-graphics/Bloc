@@ -1396,7 +1396,7 @@ BlSpace >> pulseProcess [
 ]
 
 { #category : #pulse }
-BlSpace >> valueOrDefer: aBlock [
+BlSpace >> deferOrValue: aBlock [
 	"Evaluate aBlock immediately if the active process is already the pulse process.
 	Otherwise, defer execution by scheduling a task for the next pulse."
 

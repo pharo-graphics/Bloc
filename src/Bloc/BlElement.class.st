@@ -1529,7 +1529,7 @@ BlElement >> elevation: aBlElevation [
 { #category : #'api - tasks' }
 BlElement >> enqueueTask: aBlTask [
 	"Queue the supplied task to be executed in the next frame.
-	If you want the block executed in the pulse process without deferring if already on the UI process, use #valueOrDefer:.
+	If you want the block executed in the pulse process without deferring if already on the UI process, use #deferOrValue:.
 	Note that the task is not guaranteed to be executed (if the element is never attached to a scene)."
 
 	aBlTask onEnqueuedInElement: self.
@@ -2081,10 +2081,10 @@ BlElement >> inSpace [
 BlElement >> inUIProcessDo: aBlock [
 
 	self
-		deprecated: 'Use #valueOrDefer: instead'
-		transformWith: '`@receiver inUIProcessDo: `@arg' -> '`@receiver valueOrDefer: `@arg'.
+		deprecated: 'Use #deferOrValue: instead'
+		transformWith: '`@receiver inUIProcessDo: `@arg' -> '`@receiver deferOrValue: `@arg'.
 
-	^ self valueOrDefer: aBlock
+	^ self deferOrValue: aBlock
 ]
 
 { #category : #processing }
@@ -4096,7 +4096,7 @@ BlElement >> userData [
 ]
 
 { #category : #processing }
-BlElement >> valueOrDefer: aBlock [
+BlElement >> deferOrValue: aBlock [
 	"Evaluate aBlock immediately if the active process is already the pulse process.
 	Otherwise, defer execution by enqueuing a task on this element."
 
