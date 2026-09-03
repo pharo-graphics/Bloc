@@ -68,13 +68,20 @@ TBlSingletonHost classSide >> stop [
 	^ self default stop
 ]
 
-{ #category : #'api - ui process' }
+{ #category : #'api - pulse process' }
+TBlSingletonHost classSide >> pulseProcess [
+	"Return the pulse loop Process if running, or nil."
+
+	^ self default pulseProcess
+]
+
+{ #category : #'api - pulse process' }
 TBlSingletonHost classSide >> uiProcessDo: aBlock [
 	self
-		deprecated: 'Use #default #pulseProcessDo: instead'
-		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver default pulseProcessDo: `@arg'.
+		deprecated: 'Use #default #pulseProcess ifNotNil: instead'
+		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver default pulseProcess ifNotNil: `@arg'.
 
-	^ self default pulseProcessDo: aBlock
+	^ self default pulseProcess ifNotNil: aBlock
 ]
 
 { #category : #'host space - accessing' }

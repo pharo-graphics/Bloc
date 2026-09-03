@@ -171,8 +171,7 @@ BlUniverse >> hasPostponedActions [
 { #category : #'api - pulse process' }
 BlUniverse >> hasPulseProcess [
 
-	self pulseProcessDo: [ :aProcess | ^ true ].
-	^ false
+	^ self pulseProcess isNotNil
 ]
 
 { #category : #'api - spaces' }
@@ -329,9 +328,19 @@ BlUniverse >> pulse [
 ]
 
 { #category : #'api - pulse process' }
+BlUniverse >> pulseProcess [
+
+	^ host pulseProcess
+]
+
+{ #category : #'api - pulse process' }
 BlUniverse >> pulseProcessDo: aBlock [
 
-	host pulseProcessDo: aBlock
+	self
+		deprecated: 'Use #pulseProcess ifNotNil: instead'
+		transformWith: '`@receiver pulseProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
+
+	^ self pulseProcess ifNotNil: aBlock
 ]
 
 { #category : #'private - spaces' }
@@ -428,10 +437,10 @@ BlUniverse >> tryToRunPostponedActions [
 BlUniverse >> uiProcessDo: aBlock [
 
 	self
-		deprecated: 'Use #pulseProcessDo: instead'
-		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcessDo: `@arg'.
+		deprecated: 'Use #pulseProcess ifNotNil: instead'
+		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
 
-	self pulseProcessDo: aBlock
+	^ self pulseProcess ifNotNil: aBlock
 ]
 
 { #category : #'api - pulse' }

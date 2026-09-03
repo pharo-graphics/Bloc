@@ -156,11 +156,22 @@ BlHost >> priority [
 	^ self class priority
 ]
 
+{ #category : #'api - pulse process' }
+BlHost >> pulseProcess [
+	"Return the pulse loop Process if running, or nil."
+
+	^ nil
+]
+
 { #category : #enumerating }
 BlHost >> pulseProcessDo: aBlock [
 	"Evaluate aBlock with the running pulse Process of this host if any"
 
-	^ self subclassResponsibility
+	self
+		deprecated: 'Use #pulseProcess ifNotNil: instead'
+		transformWith: '`@receiver pulseProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
+
+	^ self pulseProcess ifNotNil: aBlock
 ]
 
 { #category : #'api - lifecycle' }
@@ -179,10 +190,10 @@ BlHost >> stop [
 BlHost >> uiProcessDo: aBlock [
 
 	self
-		deprecated: 'Use #pulseProcessDo: instead'
-		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcessDo: `@arg'.
+		deprecated: 'Use #pulseProcess ifNotNil: instead'
+		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
 
-	^ self pulseProcessDo: aBlock
+	^ self pulseProcess ifNotNil: aBlock
 ]
 
 { #category : #'host space - accessing' }

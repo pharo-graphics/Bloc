@@ -2091,10 +2091,10 @@ BlElement >> inUIProcessDo: aBlock [
 BlElement >> inUIProcessDo: aBlock elseDo: altBlock [
 
 	self
-		deprecated: 'Use #pulseProcessIfActive:else: instead'
-		transformWith: '`@receiver inUIProcessDo: `@arg1 elseDo: `@arg2' -> '`@receiver pulseProcessIfActive: `@arg1 else: `@arg2'.
+		deprecated: 'Use #ifPulseProcessActive:else: instead'
+		transformWith: '`@receiver inUIProcessDo: `@arg1 elseDo: `@arg2' -> '`@receiver ifPulseProcessActive: `@arg1 else: `@arg2'.
 
-	^ self pulseProcessIfActive: aBlock else: altBlock
+	^ self ifPulseProcessActive: aBlock else: altBlock
 ]
 
 { #category : #initialization }
@@ -3494,12 +3494,12 @@ BlElement >> privateRequestingLayout: aBoolean [
 ]
 
 { #category : #processing }
-BlElement >> pulseProcessIfActive: aBlock else: altBlock [
+BlElement >> ifPulseProcessActive: aBlock else: altBlock [
 	"Evaluate aBlock if the active process is the pulse process of this element's space,
 	otherwise evaluate altBlock."
 
 	^ self isAttachedToSceneGraph
-		ifTrue: [ self space pulseProcessIfActive: aBlock else: altBlock ]
+		ifTrue: [ self space ifPulseProcessActive: aBlock else: altBlock ]
 		ifFalse: altBlock
 ]
 
@@ -4100,7 +4100,7 @@ BlElement >> valueOrDefer: aBlock [
 	"Evaluate aBlock immediately if the active process is already the pulse process.
 	Otherwise, defer execution by enqueuing a task on this element."
 
-	self pulseProcessIfActive: aBlock else: [
+	self ifPulseProcessActive: aBlock else: [
 		self enqueueTask: (BlTaskAction with: aBlock) ]
 ]
 

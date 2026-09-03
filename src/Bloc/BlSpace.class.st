@@ -1049,7 +1049,7 @@ BlSpace >> pulse [
 ]
 
 { #category : #pulse }
-BlSpace >> pulseProcessIfActive: aBlock else: altBlock [
+BlSpace >> ifPulseProcessActive: aBlock else: altBlock [
 	"Evaluate aBlock if the active process is the pulse process of this space,
 	otherwise evaluate altBlock."
 
@@ -1388,12 +1388,19 @@ BlSpace >> userData [
 	^ userData ifNil: [ userData := IdentityDictionary new ]
 ]
 
+{ #category : #accessing }
+BlSpace >> pulseProcess [
+	"Return the pulse loop Process if running, or nil."
+
+	^ self hasHost ifTrue: [ self host pulseProcess ] ifFalse: [ nil ]
+]
+
 { #category : #pulse }
 BlSpace >> valueOrDefer: aBlock [
 	"Evaluate aBlock immediately if the active process is already the pulse process.
 	Otherwise, defer execution by scheduling a task for the next pulse."
 
-	self pulseProcessIfActive: aBlock else: [
+	self ifPulseProcessActive: aBlock else: [
 		self defer: aBlock ]
 ]
 

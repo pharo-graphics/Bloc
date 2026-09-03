@@ -50,10 +50,21 @@ BlPulseLoopHost >> pulsePeriod: aDuration [
 ]
 
 { #category : #'api - pulse process' }
+BlPulseLoopHost >> pulseProcess [
+	"Return the pulse loop Process if running, or nil."
+
+	^ pulseLoop pulseProcess
+]
+
+{ #category : #'api - pulse process' }
 BlPulseLoopHost >> pulseProcessDo: aBlock [
 	"Evaluate aBlock with the running pulse Process of this host if any"
 
-	pulseLoop pulseProcess ifNotNil: aBlock
+	self
+		deprecated: 'Use #pulseProcess ifNotNil: instead'
+		transformWith: '`@receiver pulseProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
+
+	^ self pulseProcess ifNotNil: aBlock
 ]
 
 { #category : #'api - lifecycle' }
@@ -72,8 +83,8 @@ BlPulseLoopHost >> stop [
 BlPulseLoopHost >> uiProcessDo: aBlock [
 
 	self
-		deprecated: 'Use #pulseProcessDo: instead'
-		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcessDo: `@arg'.
+		deprecated: 'Use #pulseProcess ifNotNil: instead'
+		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
 
-	^ self pulseProcessDo: aBlock
+	^ self pulseProcess ifNotNil: aBlock
 ]
