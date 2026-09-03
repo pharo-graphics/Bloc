@@ -220,3 +220,25 @@ BlEventSimulatorTest >> testVirtualDeviceState [
 	eventSimulator shiftUp.
 	self assert: eventSimulator modifiers isShift not.
 ]
+
+{ #category : #tests }
+BlEventSimulatorTest >> testPositionInsideAndOutside [
+	| simulator inside outside |
+	simulator := element eventSimulator.
+	inside := simulator positionInside.
+	self assert: inside equals: 50 @ 50.
+
+	outside := simulator positionOutside.
+	self assert: (element bounds inSpace bounds containsPoint: outside) not
+]
+
+{ #category : #tests }
+BlEventSimulatorTest >> testSimulationReturnsSelf [
+	| simulator |
+	simulator := element eventSimulator.
+	self assert: simulator click == simulator.
+	self assert: simulator doubleClick == simulator.
+	self assert: (simulator mouseDownAt: 10 @ 10) == simulator.
+	self assert: (simulator mouseUpAt: 10 @ 10) == simulator.
+	self assert: (simulator mouseMoveAt: 10 @ 10) == simulator
+]

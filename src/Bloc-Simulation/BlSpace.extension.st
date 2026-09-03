@@ -3,19 +3,19 @@ Extension { #name : #BlSpace }
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> locationInside: anElement [
 	self
-		deprecated: 'Use anElement eventSimulator locationInside instead'
-		on: '2026-06-26'
-		in: 'Bloc'.
-	^ anElement eventSimulator locationInside
+		deprecated: 'Use anElement eventSimulator positionInside instead'
+		transformWith: '`@receiver locationInside: `@arg' -> '`@arg eventSimulator positionInside'.
+
+	^ anElement eventSimulator positionInside
 ]
 
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> locationOutside: anElement [
 	self
-		deprecated: 'Use anElement eventSimulator locationOutside instead'
-		on: '2026-06-26'
-		in: 'Bloc'.
-	^ anElement eventSimulator locationOutside
+		deprecated: 'Use anElement eventSimulator positionOutside instead'
+		transformWith: '`@receiver locationOutside: `@arg' -> '`@arg eventSimulator positionOutside'.
+
+	^ anElement eventSimulator positionOutside
 ]
 
 { #category : #'*Bloc-Simulation' }

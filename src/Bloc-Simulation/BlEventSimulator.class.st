@@ -71,7 +71,7 @@ BlEventSimulator >> altUp [
 BlEventSimulator >> click [
 	"Perform a primary click at the center of the target element."
 
-	^ self clickButton: BlMouseButton primary
+	self clickButton: BlMouseButton primary
 ]
 
 { #category : #simulation }
@@ -79,11 +79,10 @@ BlEventSimulator >> clickButton: aButton [
 	"Perform a click (mouse down and mouse up) with the specified button at the center of the target element."
 
 	| aPosition |
-	aPosition := self locationInside.
+	aPosition := self positionInside.
 	self events: {
 		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
-		((BlMouseUpEvent button: aButton) position: aPosition; yourself) }.
-	^ aPosition
+		((BlMouseUpEvent button: aButton) position: aPosition; yourself) }
 ]
 
 { #category : #simulation }
@@ -91,11 +90,10 @@ BlEventSimulator >> clickOutside [
 	"Simulate a primary click event outside of the target element's bounds."
 
 	| aPosition |
-	aPosition := self locationOutside.
+	aPosition := self positionOutside.
 	self events: {
 		(BlMouseDownEvent primary position: aPosition; yourself).
-		(BlMouseUpEvent primary position: aPosition; yourself) }.
-	^ aPosition
+		(BlMouseUpEvent primary position: aPosition; yourself) }
 ]
 
 { #category : #simulation }
@@ -130,7 +128,7 @@ BlEventSimulator >> ctrlUp [
 BlEventSimulator >> doubleClick [
 	"Perform a primary double click at the center of the target element."
 
-	^ self doubleClickButton: BlMouseButton primary
+	self doubleClickButton: BlMouseButton primary
 ]
 
 { #category : #simulation }
@@ -138,13 +136,12 @@ BlEventSimulator >> doubleClickButton: aButton [
 	"Perform a double click (two consecutive mouse down/up sequences) with the specified button at the center of the target element."
 
 	| aPosition |
-	aPosition := self locationInside.
+	aPosition := self positionInside.
 	self events: {
 		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
 		((BlMouseUpEvent button: aButton) position: aPosition; yourself).
 		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
-		((BlMouseUpEvent button: aButton) position: aPosition; yourself) }.
-	^ aPosition
+		((BlMouseUpEvent button: aButton) position: aPosition; yourself) }
 ]
 
 { #category : #simulation }
@@ -160,7 +157,7 @@ BlEventSimulator >> dragByAll: aSequenceOfPoints [
 	mouse down, mouse move across a sequence of delta vectors, and mouse up."
 
 	| currentPosition |
-	currentPosition := self locationInside.
+	currentPosition := self positionInside.
 
 	self events:
 		(Array streamContents: [ :stream |
@@ -267,8 +264,8 @@ BlEventSimulator >> keyUp: aKeyboardKey [
 ]
 
 { #category : #simulation }
-BlEventSimulator >> locationInside [
-	"Return a space location inside of the target element's bounds."
+BlEventSimulator >> positionInside [
+	"Return a space position inside of the target element's bounds."
 
 	target space settle.
 
@@ -276,8 +273,8 @@ BlEventSimulator >> locationInside [
 ]
 
 { #category : #simulation }
-BlEventSimulator >> locationOutside [
-	"Return a space location outside of the target element's bounds."
+BlEventSimulator >> positionOutside [
+	"Return a space position outside of the target element's bounds."
 
 	target space settle.
 
@@ -295,15 +292,14 @@ BlEventSimulator >> modifiers [
 BlEventSimulator >> mouseDown [
 	"Perform a primary mouse down event at the center of the target element."
 
-	^ self mouseDownButton: BlMouseButton primary
+	self mouseDownButton: BlMouseButton primary
 ]
 
 { #category : #simulation }
 BlEventSimulator >> mouseDownAt: aPoint [
-	"Simulate a primary mouse down event at the specified space location."
+	"Simulate a primary mouse down event at the specified space position."
 
-	self events: { BlMouseDownEvent primary position: aPoint }.
-	^ aPoint
+	self events: { BlMouseDownEvent primary position: aPoint }
 ]
 
 { #category : #simulation }
@@ -311,20 +307,18 @@ BlEventSimulator >> mouseDownButton: aButton [
 	"Simulate a mouse down event with the specified mouse button at the center of the target element."
 
 	| aPosition |
-	aPosition := self locationInside.
+	aPosition := self positionInside.
 	self events: {
 		((BlMouseDownEvent button: aButton)
 			position: aPosition;
-			yourself) }.
-	^ aPosition
+			yourself) }
 ]
 
 { #category : #simulation }
 BlEventSimulator >> mouseMoveAt: aPoint [
-	"Simulate a mouse move event to the specified space location."
+	"Simulate a mouse move event to the specified space position."
 
-	self events: { BlMouseMoveEvent primary position: aPoint; delta: 0 @ 0; yourself }.
-	^ aPoint
+	self events: { BlMouseMoveEvent primary position: aPoint; delta: 0 @ 0; yourself }
 ]
 
 { #category : #simulation }
@@ -332,56 +326,51 @@ BlEventSimulator >> mouseMoveBy: aPoint [
 	"Simulate a mouse move from the center of the target element by the given delta vector."
 
 	| aPosition |
-	aPosition := self locationInside + aPoint.
+	aPosition := self positionInside + aPoint.
 	self events: {
 		BlMouseMoveEvent primary
 			position: aPosition;
 			delta: aPoint;
-			yourself }.
-	^ aPosition
+			yourself }
 ]
 
 { #category : #simulation }
 BlEventSimulator >> mouseMoveFrom: aFromPoint to: aToPoint [
 	"Simulate a mouse move event from one space position to another."
 
-	self events: { BlMouseMoveEvent primary position: aToPoint; delta: (aToPoint - aFromPoint) }.
-	^ aToPoint
+	self events: { BlMouseMoveEvent primary position: aToPoint; delta: (aToPoint - aFromPoint) }
 ]
 
 { #category : #simulation }
 BlEventSimulator >> mouseMoveInside [
-	"Simulate a mouse move event to a location within the target element's bounds."
+	"Simulate a mouse move event to a position within the target element's bounds."
 
 	| aPosition |
-	aPosition := self locationInside.
-	self events: { BlMouseMoveEvent primary position: aPosition }.
-	^ aPosition
+	aPosition := self positionInside.
+	self events: { BlMouseMoveEvent primary position: aPosition }
 ]
 
 { #category : #simulation }
 BlEventSimulator >> mouseMoveOutside [
-	"Simulate a mouse move event to a location outside of the target element's bounds."
+	"Simulate a mouse move event to a position outside of the target element's bounds."
 
 	| aPosition |
-	aPosition := self locationOutside.
-	self events: { BlMouseMoveEvent primary position: aPosition }.
-	^ aPosition
+	aPosition := self positionOutside.
+	self events: { BlMouseMoveEvent primary position: aPosition }
 ]
 
 { #category : #simulation }
 BlEventSimulator >> mouseUp [
 	"Perform a primary mouse up event at the center of the target element."
 
-	^ self mouseUpButton: BlMouseButton primary
+	self mouseUpButton: BlMouseButton primary
 ]
 
 { #category : #simulation }
 BlEventSimulator >> mouseUpAt: aPoint [
-	"Simulate a primary mouse up event at the specified space location."
+	"Simulate a primary mouse up event at the specified space position."
 
-	self event: (BlMouseUpEvent primary position: aPoint; yourself).
-	^ aPoint
+	self event: (BlMouseUpEvent primary position: aPoint; yourself)
 ]
 
 { #category : #simulation }
@@ -389,12 +378,11 @@ BlEventSimulator >> mouseUpButton: aButton [
 	"Simulate a mouse up event with the specified mouse button at the center of the target element."
 
 	| aPosition |
-	aPosition := self locationInside.
+	aPosition := self positionInside.
 	self events: {
 		((BlMouseUpEvent button: aButton)
 			position: aPosition;
-			yourself) }.
-	^ aPosition
+			yourself) }
 ]
 
 { #category : #simulation }
@@ -402,22 +390,20 @@ BlEventSimulator >> mouseWheelBy: aBlVector [
 	"Simulate a mouse wheel scroll event centered on the target element by the specified vector."
 
 	| aPosition aBlocEvent |
-	aPosition := self locationInside.
+	aPosition := self positionInside.
 	aBlocEvent := BlMouseWheelEvent new
 		isTouch: false;
 		vector: aBlVector asBlocVector;
 		position: aPosition.
 
-	self event: aBlocEvent.
-
-	^ aPosition
+	self event: aBlocEvent
 ]
 
 { #category : #simulation }
 BlEventSimulator >> secondaryClick [
 	"Simulate a secondary (right) click in the center of the target element."
 
-	^ self clickButton: BlMouseButton secondary
+	self clickButton: BlMouseButton secondary
 ]
 
 { #category : #simulation }
