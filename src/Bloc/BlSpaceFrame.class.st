@@ -74,7 +74,6 @@ BlSpaceFrame >> initialize [
 BlSpaceFrame >> initializePhases [
 
 	self addPhases: { 
-		BlSpaceFrameIdlePhase new.
 		BlSpaceFrameHostValidationPhase new.
 		BlSpaceFrameTaskPhase new. " animation as an example "
 		BlSpaceFrameEventPhase new. " generate BlMouse events from host mouse event as an example "

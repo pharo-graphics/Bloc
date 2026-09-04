@@ -21,11 +21,6 @@ BlSpaceFramePhase >> isEventPhase [
 ]
 
 { #category : #testing }
-BlSpaceFramePhase >> isIdlePhase [
-	^ false
-]
-
-{ #category : #testing }
 BlSpaceFramePhase >> isLayoutPhase [
 	^ false
 ]
