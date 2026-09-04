@@ -1,11 +1,11 @@
 Class {
-	#name : #BlUniverseTest,
+	#name : #BlParallelUniverseTest,
 	#superclass : #TestCase,
 	#category : #'Bloc-Tests-Universe'
 }
 
 { #category : #tests }
-BlUniverseTest >> testDeferSnapshotAndQuit [
+BlParallelUniverseTest >> testDeferSnapshotAndQuit [
 
 	| aSpace universe |
 	aSpace := BlSpace new
@@ -26,25 +26,24 @@ BlUniverseTest >> testDeferSnapshotAndQuit [
 ]
 
 { #category : #tests }
-BlUniverseTest >> testErrorDuringPulseSignal [
+BlParallelUniverseTest >> testErrorDuringPulseSignal [
 
 	| aUniverse logger expectedError caughtError |
-	aUniverse := BlUniverse new.
+	aUniverse := BlParallelUniverse new.
 	expectedError := Error new messageText: 'Pulse test error'.
 	aUniverse defer: [ expectedError signal ].
 	logger := MemoryLogger new.
-	logger runFor: BlUniversePulseErrorSignal during: [
+	logger runFor: BlParallelUniverseErrorDuringPulseSignal during: [
 		[ aUniverse pulse ] on: Error do: [ :err | caughtError := err ] ].
-
 	self assert: caughtError equals: expectedError.
 	self assert: (logger entries anySatisfy: [ :each | each error == expectedError ])
 ]
 
 { #category : #tests }
-BlUniverseTest >> testEvaluateDeferred [
+BlParallelUniverseTest >> testEvaluateDeferred [
 
 	| aUniverse evaluated |
-	aUniverse := BlUniverse new.
+	aUniverse := BlParallelUniverse new.
 	evaluated := false.
 	aUniverse defer: [ evaluated := true ].
 	self assert: aUniverse hasDeferredActions.
@@ -57,7 +56,7 @@ BlUniverseTest >> testEvaluateDeferred [
 ]
 
 { #category : #tests }
-BlUniverseTest >> testSpaceOpenedSignal [
+BlParallelUniverseTest >> testSpaceOpenedSignal [
 
 	| aSpace logger |
 	aSpace := BlSpace new
@@ -73,3 +72,4 @@ BlUniverseTest >> testSpaceOpenedSignal [
 		aSpace close.
 		aSpace settle ]
 ]
+

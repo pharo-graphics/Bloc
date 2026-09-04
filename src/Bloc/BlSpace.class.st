@@ -80,7 +80,7 @@ BlSpace >> asReference [
 { #category : #'private - pulse' }
 BlSpace >> basicPulse [
 	"Internal engine driver. Never send me directly.
-	I am driven exclusively by BlUniverse during pulse loop cycles.
+	I am driven exclusively by BlParallelUniverse during pulse loop cycles.
 	To wait for a space to reach equilibrium, send #settle or #deferAndSettle:."
 
 	pulseRequested ifFalse: [ ^ self ].
@@ -464,7 +464,7 @@ BlSpace >> enqueueTasksFrom: aTaskQueue [
 BlSpace >> ensureSession [
 
 	self
-		deprecated: 'Session management is handled by BlUniverse on image startup'
+		deprecated: 'Session management is handled by BlParallelUniverse on image startup'
 		transformWith: '`@receiver ensureSession' -> ''
 ]
 
