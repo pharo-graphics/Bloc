@@ -1,44 +1,24 @@
 "
 I am a signal that is raised when there is an error in the pulse.
-I include in myself the error.
+I include in myself the signaledError.
 "
 Class {
 	#name : #BlParallelUniverseErrorDuringPulseSignal,
 	#superclass : #BeaconSignal,
 	#instVars : [
-		'error'
+		'signaledError'
 	],
 	#category : #'Bloc-Universe - Parallel'
 }
 
 { #category : #accessing }
-BlParallelUniverseErrorDuringPulseSignal >> error [
-
-	^ error
-]
-
-{ #category : #accessing }
-BlParallelUniverseErrorDuringPulseSignal >> error: anException [
-
-	error := anException
-]
-
-{ #category : #accessing }
 BlParallelUniverseErrorDuringPulseSignal >> signaledError [
 
-	self
-		deprecated: 'Use #error instead'
-		transformWith: '`@receiver signaledError' -> '`@receiver error'.
-
-	^ self error
+	^ signaledError
 ]
 
 { #category : #accessing }
-BlParallelUniverseErrorDuringPulseSignal >> signaledError: anException [
+BlParallelUniverseErrorDuringPulseSignal >> signaledError: anObject [
 
-	self
-		deprecated: 'Use #error: instead'
-		transformWith: '`@receiver signaledError: `@arg' -> '`@receiver error: `@arg'.
-
-	self error: anException
+	signaledError := anObject
 ]

@@ -36,7 +36,7 @@ BlParallelUniverseTest >> testErrorDuringPulseSignal [
 	logger runFor: BlParallelUniverseErrorDuringPulseSignal during: [
 		[ aUniverse pulse ] on: Error do: [ :err | caughtError := err ] ].
 	self assert: caughtError equals: expectedError.
-	self assert: (logger entries anySatisfy: [ :each | each error == expectedError ])
+	self assert: (logger entries anySatisfy: [ :each | each signaledError == expectedError ])
 ]
 
 { #category : #tests }
