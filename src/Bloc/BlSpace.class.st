@@ -50,8 +50,7 @@ Class {
 		'reference',
 		'iconStencil',
 		'rootElement',
-		'userData',
-		'previousVisibleStatus'
+		'userData'
 	],
 	#category : #'Bloc-Space'
 }
@@ -469,19 +468,6 @@ BlSpace >> ensureSession [
 		transformWith: '`@receiver ensureSession' -> ''
 ]
 
-{ #category : #'private - display' }
-BlSpace >> ensureWindowOpen [
-
-	hostSpace ifNotNil: [
-		hostSpace isValid
-			ifFalse: [
-				self hostSpaceClose.
-				previousVisibleStatus ifTrue: [
-					self hostSpaceOpen.
-					self onSessionChanged ] ]
-			ifTrue: [
-				self onSessionChanged ] ]
-]
 
 { #category : #'event management accessing' }
 BlSpace >> eventDispatcher [
@@ -1110,11 +1096,6 @@ BlSpace >> pulseRequested [
 	^ self isPulseRequested
 ]
 
-{ #category : #'startup - shutdown' }
-BlSpace >> rememberVisibleStatus [
-	
-	previousVisibleStatus := self isVisible
-]
 
 { #category : #pulse }
 BlSpace >> render [

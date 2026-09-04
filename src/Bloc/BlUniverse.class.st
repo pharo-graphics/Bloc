@@ -18,7 +18,8 @@ Class {
 		'pulseSemaphores',
 		'pulseSemaphoresMutex',
 		'host',
-		'isPulsing'
+		'isPulsing',
+		'visibleSpacesOnShutdown'
 	],
 	#category : #'Bloc-Universe'
 }
@@ -380,8 +381,19 @@ BlUniverse >> start [
 	"A universe must not be running here.
 	I am called outside of the UI loop (there is no UI loop yet)"
 
+	| visibleSpaces |
 	host start.
-	spaces do: [ :aSpace | aSpace ensureWindowOpen ]
+	visibleSpaces := visibleSpacesOnShutdown ifNil: [ IdentitySet new ].
+	spaces do: [ :aSpace |
+		aSpace hasHostSpace ifTrue: [
+			aSpace hostSpace isValid
+				ifTrue: [ aSpace onSessionChanged ]
+				ifFalse: [
+					aSpace hostSpaceClose.
+					(visibleSpaces includes: aSpace) ifTrue: [
+						aSpace hostSpaceOpen.
+						aSpace onSessionChanged ] ] ] ].
+	visibleSpacesOnShutdown := nil
 ]
 
 { #category : #'private - lifecycle' }
@@ -399,7 +411,7 @@ BlUniverse >> stop [
 	"A universe must be running here.
 	I am called from the UI loop"
 	
-	spaces do: [ :anSpace | anSpace rememberVisibleStatus ].
+	visibleSpacesOnShutdown := (spaces select: [ :each | each isVisible ]) asIdentitySet.
 	host stop
 ]
 

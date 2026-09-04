@@ -53,8 +53,8 @@ BlMorphicHostTest >> testEnsureWindowOpenRendersWhenHostSpaceIsValidOnSessionCha
 	oldForm setManualSurfacePointer: ExternalAddress null.
 	self assert: spaceHostMorph form isNull.
 
-	"Ensure window open should invoke onSessionChanged, request pulse, and restore valid buffer"
-	aSpace deferAndSettle: [ aSpace ensureWindowOpen ].
+	"onSessionChanged should request pulse, redraw, and restore valid buffer"
+	aSpace deferAndSettle: [ aSpace onSessionChanged ].
 	self assert: aSpace isOpened.
 	self assert: spaceHostMorph form isNotNil.
 	self deny: spaceHostMorph form isNull.
