@@ -42,3 +42,16 @@ BlSpaceSmokeTest >> testShowAndClick [
 	aSpace settle.
 	aSpace root eventSimulator click
 ]
+
+{ #category : #tests }
+BlSpaceSmokeTest >> testValidateHostSpaceDrawing [
+
+	| aSpace |
+	aSpace := BlSpace new.
+	aSpace validateHostSpaceDrawing.
+	self deny: aSpace isOpened.
+
+	aSpace := self newTestingSpace.
+	aSpace validateHostSpaceDrawing.
+	self assert: aSpace isOpened
+]

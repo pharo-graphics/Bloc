@@ -1420,6 +1420,15 @@ BlSpace >> deferOrValue: aBlock [
 ]
 
 { #category : #pulse }
+BlSpace >> validateHostSpaceDrawing [
+
+	self hostSpaceDo: [ :aHostSpace |
+		aHostSpace hasResized ifTrue: [
+			self invalidateAll.
+			aHostSpace initializeRenderer ] ]
+]
+
+{ #category : #pulse }
 BlSpace >> waitForDuration: aDuration [
 	"Synchronously wait for the given duration, blocked on the host's pulse loop semaphore.
 	

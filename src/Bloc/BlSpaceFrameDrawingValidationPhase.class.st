@@ -12,11 +12,5 @@ BlSpaceFrameDrawingValidationPhase >> name [
 { #category : #actions }
 BlSpaceFrameDrawingValidationPhase >> runOn: aSpace [
 
-	aSpace hasHostSpace ifFalse: [ ^ self ].
-	aSpace hostSpace isValid ifFalse: [ ^ self ].
-	aSpace hostSpace hasResized ifFalse: [ ^ self ].
-
-	aSpace invalidateAll.
-
-	aSpace hostSpace initializeRenderer
+	aSpace validateHostSpaceDrawing
 ]
