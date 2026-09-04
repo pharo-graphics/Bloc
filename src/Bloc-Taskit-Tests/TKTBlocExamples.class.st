@@ -8,8 +8,8 @@ Class {
 }
 
 { #category : #examples }
-TKTBlocExamples class >> runnerExample [
-	<script>
+TKTBlocExamples >> runnerExample [
+	<sampleInstance>
 "  This is equivalent to:
 	space
 		enqueueTask:
@@ -36,8 +36,8 @@ TKTBlocExamples class >> runnerExample [
 ]
 
 { #category : #examples }
-TKTBlocExamples class >> serviceExample [
-	<script>
+TKTBlocExamples >> serviceExample [
+	<sampleInstance>
 	"This example is equivalent to:
 	space
 		enqueueTask:
