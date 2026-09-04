@@ -7,19 +7,18 @@ Class {
 		'initialSpaces'
 	],
 	#classVars : [
-		'OnlyHeadlessHost'
+		'TestHostsMode'
 	],
 	#category : #'Bloc-Tests'
 }
 
 { #category : #accessing }
 BlParameterizedHostTest class >> availableHosts [
-	"Answer the collection of host instances to be tested.
-	When #onlyHeadlessHost is true, returns only BlHeadlessHost default to speed up test execution."
+	"Answer the collection of host instances to be tested."
 
-	^ self onlyHeadlessHost
-		  ifTrue: [ { BlHeadlessHost default } ]
-		  ifFalse: [ BlHostRegistry default availableHosts ]
+	^ self testHostsMode == #allAvailable
+		  ifTrue: [ BlHostRegistry default availableHosts ]
+		  ifFalse: [ { BlHeadlessHost default } ]
 ]
 
 { #category : #private }
@@ -30,28 +29,52 @@ BlParameterizedHostTest class >> isAbstract [
 
 { #category : #accessing }
 BlParameterizedHostTest class >> onlyHeadlessHost [
-	"Return true if parameterized host tests should run exclusively on BlHeadlessHost"
 
-	^ OnlyHeadlessHost ifNil: [ true ]
+	self
+		deprecated: 'Use #testHostsMode instead'
+		transformWith: '`@receiver onlyHeadlessHost' -> '`@receiver testHostsMode == #headlessOnly'.
+
+	^ self testHostsMode == #headlessOnly
 ]
 
 { #category : #accessing }
 BlParameterizedHostTest class >> onlyHeadlessHost: aBoolean [
 
-	OnlyHeadlessHost := aBoolean
+	self
+		deprecated: 'Use #testHostsMode: instead'
+		transformWith: '`@receiver onlyHeadlessHost: `@arg' -> '`@receiver testHostsMode: (`@arg ifTrue: [ #headlessOnly ] ifFalse: [ #allAvailable ])'.
+
+	self testHostsMode: (aBoolean ifTrue: [ #headlessOnly ] ifFalse: [ #allAvailable ])
 ]
 
 { #category : #settings }
 BlParameterizedHostTest class >> preferencesOn: aBuilder [
 	<systemsettings>
 
-	(aBuilder setting: #onlyHeadlessHost)
+	(aBuilder pickOne: #testHostsMode)
 		parent: Bloc groupSymbolForBloc;
 		target: self;
 		order: 10;
-		label: 'Test on headless host only';
-		description: 'When enabled, BlParameterizedHostTest suites run only on BlHeadlessHost default instead of all supported host instances, speeding up test runs.';
-		default: [ true ]
+		label: 'Hosts for parameterized tests';
+		domainValues: {
+			'Headless host only (Fast)' -> #headlessOnly.
+			'All available hosts' -> #allAvailable };
+		default: #headlessOnly;
+		description: 'Choose which host backends are included in BlParameterizedHostTest test suites.'
+]
+
+{ #category : #accessing }
+BlParameterizedHostTest class >> testHostsMode [
+	"Return the mode determining which hosts are tested in parameterized tests.
+	Can be #headlessOnly or #allAvailable."
+
+	^ TestHostsMode ifNil: [ #headlessOnly ]
+]
+
+{ #category : #accessing }
+BlParameterizedHostTest class >> testHostsMode: aSymbol [
+
+	TestHostsMode := aSymbol
 ]
 
 { #category : #'building suites' }
