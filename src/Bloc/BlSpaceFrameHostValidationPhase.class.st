@@ -23,8 +23,6 @@ BlSpaceFrameHostValidationPhase >> runOn: aSpace [
 
 	aSpace
 		invalidateAll;
-		tearDownHostSpace;
-		setUpHostSpace.
-
-	aSpace hostSpace open
+		hostSpaceClose;
+		hostSpaceOpen
 ]

@@ -40,11 +40,10 @@ BlUniverse >> attachSpace: aSpace [
 	(spaces includes: aSpace) ifFalse: [ spaces add: aSpace ].
 
 	[
-		aSpace setUpHostSpace.
-		aSpace hostSpace open
+		aSpace hostSpaceOpen
 	] on: Exception do: [ :ex |
 		spaces remove: aSpace ifAbsent: [ ].
-		aSpace tearDownHostSpace.
+		aSpace hostSpaceClose.
 		ex pass ]
 ]
 
@@ -120,7 +119,7 @@ BlUniverse >> detachSpace: aSpace [
 	spaces remove: aSpace.
 
 	"Then, tear down the host space"
-	aSpace tearDownHostSpace.
+	aSpace hostSpaceClose.
 
 	"Dispatch an event indicating that the space is no longer attached to a universe"
 	aSpace dispatchEventWithTimestamp: BlSpaceDetachedEvent new.

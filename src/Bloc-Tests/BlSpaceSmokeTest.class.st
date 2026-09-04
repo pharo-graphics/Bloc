@@ -5,6 +5,22 @@ Class {
 }
 
 { #category : #tests }
+BlSpaceSmokeTest >> testHostSpaceOpenAndClose [
+
+	| aSpace |
+	aSpace := BlSpace new.
+	aSpace host: BlHeadlessHost default.
+	self deny: aSpace hasHostSpace.
+
+	aSpace hostSpaceOpen.
+	self assert: aSpace hasHostSpace.
+	self assert: aSpace hostSpace isValid.
+
+	aSpace hostSpaceClose.
+	self deny: aSpace hasHostSpace
+]
+
+{ #category : #tests }
 BlSpaceSmokeTest >> testImmediateCloseAfterShow [
 
 	| aSpace universe |

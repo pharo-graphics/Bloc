@@ -477,9 +477,9 @@ BlSpace >> ensureWindowOpen [
 	hostSpace ifNotNil: [
 		hostSpace isValid
 			ifFalse: [
-				self setUpHostSpace.
+				self hostSpaceClose.
 				previousVisibleStatus ifTrue: [
-					hostSpace open.
+					self hostSpaceOpen.
 					self onSessionChanged ] ]
 			ifTrue: [
 				self onSessionChanged ] ]
@@ -723,6 +723,22 @@ BlSpace >> hostSpaceDo: aBlock ifAbsent: anAbsentBlock [
 	self hostSpace isValid ifFalse: [ ^ anAbsentBlock value ].
 
 	^ aBlock cull: self hostSpace
+]
+
+{ #category : #'host space - accessing' }
+BlSpace >> hostSpaceClose [
+
+	hostSpace ifNil: [ ^ self ].
+
+	hostSpace tearDown.
+	hostSpace := nil
+]
+
+{ #category : #'host space - accessing' }
+BlSpace >> hostSpaceOpen [
+
+	hostSpace := host newHostSpaceFor: self.
+	hostSpace open
 ]
 
 { #category : #'window - properties' }
@@ -1234,12 +1250,6 @@ BlSpace >> setPosition: aPoint [
 	position := aPoint
 ]
 
-{ #category : #'host space - accessing' }
-BlSpace >> setUpHostSpace [
-
-	hostSpace := host newHostSpaceFor: self
-]
-
 { #category : #pulse }
 BlSpace >> settle [
 	"Wait until the space reaches equilibrium (all deferred actions, tasks, skins, and layout requests have settled).
@@ -1336,16 +1346,6 @@ BlSpace >> taskQueue [
 	<return: #BlSpaceTaskQueue>
 	
 	^ tasks
-]
-
-{ #category : #'host space - accessing' }
-BlSpace >> tearDownHostSpace [
-	"Detach my current host space if I have one"
-
-	hostSpace ifNil: [ ^ self ].
-
-	hostSpace tearDown.
-	hostSpace := nil
 ]
 
 { #category : #accessing }
