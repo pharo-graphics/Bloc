@@ -12,8 +12,7 @@ Class {
 	#instVars : [
 		'host',
 		'space',
-		'renderer',
-		'eventQueue'
+		'renderer'
 	],
 	#category : #'Bloc-Universe - Host'
 }
@@ -41,20 +40,19 @@ BlHostSpace >> densityDpi [
 { #category : #'host space - events' }
 BlHostSpace >> dequeuedEvents [
 
-	| theEvents |
-	theEvents := LinkedList new.
-	eventQueue flush: [ :anEvent | theEvents add: anEvent ].
-	^ theEvents
+	self
+		deprecated: 'Use aSpace dequeuedEvents instead'
+		transformWith: '`@receiver dequeuedEvents' -> '`@receiver space dequeuedEvents'.
+
+	^ self space
+		ifNotNil: [ :aSpace | aSpace dequeuedEvents ]
+		ifNil: [ #() ]
 ]
 
 { #category : #'host space - events' }
 BlHostSpace >> enqueueEvent: aBlEvent [
 
-	aBlEvent isUniverseEvent
-		ifTrue: [ ^ self universe dispatchEvent: aBlEvent ].
-
-	eventQueue nextPut: aBlEvent.
-	self space ifNotNil: [ :aSpace | aSpace requestPulse ]
+	self space ifNotNil: [ :aSpace | aSpace enqueueEvent: aBlEvent ]
 ]
 
 { #category : #'host space - events' }
@@ -65,7 +63,13 @@ BlHostSpace >> generateEvents [
 { #category : #'host space - events' }
 BlHostSpace >> hasEvents [
 
-	^ eventQueue isEmpty not
+	self
+		deprecated: 'Use aSpace hasEvents instead'
+		transformWith: '`@receiver hasEvents' -> '`@receiver space hasEvents'.
+
+	^ self space
+		ifNotNil: [ :aSpace | aSpace hasEvents ]
+		ifNil: [ false ]
 ]
 
 { #category : #'host space - testing' }
@@ -94,8 +98,7 @@ BlHostSpace >> host: aBlHost [
 { #category : #initialization }
 BlHostSpace >> initialize [
 
-	super initialize.
-	eventQueue := WaitfreeQueue new
+	super initialize
 ]
 
 { #category : #initialization }

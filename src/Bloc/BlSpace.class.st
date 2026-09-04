@@ -24,6 +24,7 @@ Class {
 	#instVars : [
 		'host',
 		'hostSpace',
+		'eventQueue',
 		'extent',
 		'position',
 		'resizable',
@@ -424,9 +425,26 @@ BlSpace >> elementsNeedingPaint [
 	^ elementsNeedingPaint
 ]
 
-{ #category : #'host space - accessing' }
+{ #category : #'api - events' }
+BlSpace >> dequeuedEvents [
+	| theEvents |
+	theEvents := LinkedList new.
+	eventQueue flush: [ :anEvent | theEvents add: anEvent ].
+	^ theEvents
+]
+
+{ #category : #'api - events' }
 BlSpace >> enqueueEvent: aBlEvent [
-	self hostSpaceDo: [ :aHostSpace | aHostSpace enqueueEvent: aBlEvent ]
+	aBlEvent isUniverseEvent
+		ifTrue: [ ^ self universe dispatchEvent: aBlEvent ].
+
+	eventQueue nextPut: aBlEvent.
+	self requestPulse
+]
+
+{ #category : #'api - events' }
+BlSpace >> hasEvents [
+	^ eventQueue isEmpty not
 ]
 
 { #category : #'api - tasks' }
@@ -731,6 +749,7 @@ BlSpace >> initialize [
 
 	host := Bloc preferredHost.
 	pulseRequested := true.
+	eventQueue := WaitfreeQueue new.
 	elementsNeedingPaint := Set new.
 	elementsNeedingLayout := Set new.
 

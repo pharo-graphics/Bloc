@@ -63,3 +63,18 @@ BlSpaceEventTest >> testSpaceShown [
 	space close; settle.
 	self assert: count equals: 1
 ]
+
+{ #category : #tests }
+BlSpaceEventTest >> testEnqueueEventAndDequeue [
+	| event dequeued |
+	self deny: space hasEvents.
+
+	event := BlMouseDownEvent new.
+	space enqueueEvent: event.
+	self assert: space hasEvents.
+
+	dequeued := space dequeuedEvents.
+	self deny: space hasEvents.
+	self assert: dequeued size equals: 1.
+	self assert: dequeued first == event
+]
