@@ -116,7 +116,7 @@ BlSpace >> bounds [
 BlSpace >> center [
 	"Tell host to change my position to be centered. Do nothing if host space is not present (e.g. not shown)."
 
-	self hostSpace ifNotNil: [ :hw | hw center ]
+	self hostSpaceDo: [ :hw | hw center ]
 ]
 
 { #category : #'change - rendering' }
@@ -660,7 +660,7 @@ BlSpace >> height [
 
 { #category : #'api - displaying' }
 BlSpace >> hide [
-	self hostSpace ifNotNil: [ :hw | hw hide ]
+	self hostSpaceDo: [ :hw | hw hide ]
 ]
 
 { #category : #'host space - accessing' }
@@ -918,9 +918,7 @@ BlSpace >> isTextInputActive [
 
 { #category : #testing }
 BlSpace >> isVisible [
-	^ self hasHostSpace
-		ifTrue: [ self hostSpace isVisible ]
-		ifFalse: [ false ]
+	^ self hostSpaceDo: [ :hs | hs isVisible ] ifAbsent: [ false ]
 ]
 
 { #category : #'accessing - processors' }
@@ -965,13 +963,12 @@ BlSpace >> markNeedsPaint: anElement from: aSourceElement [
 
 { #category : #'api - displaying' }
 BlSpace >> maximize [
-	self hostSpace ifNotNil: [ :hw | hw maximize ]
+	self hostSpaceDo: [ :hw | hw maximize ]
 ]
 
 { #category : #'api - displaying' }
 BlSpace >> maximized [
-	self hostSpace ifNotNil: [ :hw | ^ hw maximized ].
-	^ false
+	^ self hostSpaceDo: [ :hw | hw maximized ] ifAbsent: [ false ]
 ]
 
 { #category : #dispatch }
@@ -989,13 +986,12 @@ BlSpace >> measureTextParagraph: aBlTextParagraph [
 
 { #category : #'api - displaying' }
 BlSpace >> minimize [
-	self hostSpace ifNotNil: [ :hw | hw minimize ]
+	self hostSpaceDo: [ :hw | hw minimize ]
 ]
 
 { #category : #'api - displaying' }
 BlSpace >> minimized [
-	self hostSpace ifNotNil: [ :hw | ^ hw minimized ].
-	^ false
+	^ self hostSpaceDo: [ :hw | hw minimized ] ifAbsent: [ false ]
 ]
 
 { #category : #'accessing - processors' }
@@ -1373,12 +1369,12 @@ BlSpace >> title: aString [
 
 { #category : #'api - displaying' }
 BlSpace >> toBack [
-	self hostSpace ifNotNil: [ :hw | hw toBack ]
+	self hostSpaceDo: [ :hw | hw toBack ]
 ]
 
 { #category : #'api - displaying' }
 BlSpace >> toFront [
-	self hostSpace ifNotNil: [ :hw | hw toFront ]
+	self hostSpaceDo: [ :hw | hw toFront ]
 ]
 
 { #category : #'focus managing' }
