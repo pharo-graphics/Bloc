@@ -23,12 +23,28 @@ BlSpaceSmokeTest >> testHostSpaceOpenAndClose [
 { #category : #tests }
 BlSpaceSmokeTest >> testImmediateCloseAfterShow [
 
-	| aSpace universe |
+	| aSpace |
 	aSpace := self newTestingSpace.
-	universe := aSpace universe.
 	aSpace close.
 	aSpace settle.
-	self deny: (universe spaces includes: aSpace).
+	self deny: (aSpace host hasSpace: aSpace).
+	self deny: aSpace isOpened
+]
+
+{ #category : #tests }
+BlSpaceSmokeTest >> testOpenAndClose [
+
+	| aSpace |
+	aSpace := BlSpace new.
+	aSpace host: BlHeadlessHost default.
+	self deny: aSpace isOpened.
+
+	aSpace open.
+	aSpace settle.
+	self assert: aSpace isOpened.
+
+	aSpace close.
+	aSpace settle.
 	self deny: aSpace isOpened
 ]
 

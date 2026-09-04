@@ -46,8 +46,8 @@ BlStartupShutdownTest >> testShutdownAndStartupKeepsSpacesInSamePosition [
 	self assert: aSpace position equals: 100@100.
 	self assert: aSpace extent equals: 200@200.
 
-	aSpace universe stop.
-	aSpace universe start.	
+	host universe stop.
+	host universe start.	
 
 	self assert: aSpace position equals: 100@100.
 	self assert: aSpace extent equals: 200@200
@@ -67,8 +67,8 @@ BlStartupShutdownTest >> testShutdownAndStartupKeepsSpacesOpen [
 	aSpace settle.
 	self assert: aSpace isVisible.
 	
-	aSpace universe stop.
-	aSpace universe start.	
+	host universe stop.
+	host universe start.	
 
 	self assert: aSpace isVisible
 ]
@@ -87,10 +87,10 @@ BlStartupShutdownTest >> testShutdownAndStartupKeepsSpacesOpenWithInvalidation [
 	aSpace settle.
 	self assert: aSpace isVisible.
 	
-	aSpace universe stop.
+	host universe stop.
 	aSpace hostSpace invalidate.
 	
-	aSpace universe start.	
+	host universe start.	
 
 	self assert: aSpace isVisible
 ]

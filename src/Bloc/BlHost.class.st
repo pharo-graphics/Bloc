@@ -100,6 +100,13 @@ BlHost >> denyPulseProcess [
 ]
 
 { #category : #testing }
+BlHost >> hasSpace: aSpace [
+	"Return true if a given space is registered with this host, false otherwise."
+
+	^ self hasUniverse and: [ self universe hasSpace: aSpace ]
+]
+
+{ #category : #testing }
 BlHost >> hasUniverse [
 
 	^ universe isNotNil
@@ -112,11 +119,25 @@ BlHost >> isPulseProcessActive [
 	^ false
 ]
 
+{ #category : #testing }
+BlHost >> isPulsing [
+	"Return true if this host's universe is currently pulsing, false otherwise."
+
+	^ self hasUniverse and: [ self universe isPulsing ]
+]
+
 { #category : #'api - lifecycle' }
 BlHost >> isRunning [
 	"Return true if host is initialized and running"
 
 	^ false
+]
+
+{ #category : #testing }
+BlHost >> isSettled [
+	"Return true if there are no deferred actions waiting to be executed on this host."
+
+	^ self hasUniverse not or: [ self universe isSettled ]
 ]
 
 { #category : #testing }
@@ -174,6 +195,26 @@ BlHost >> pulseProcessDo: aBlock [
 		transformWith: '`@receiver pulseProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
 
 	^ self pulseProcess ifNotNil: aBlock
+]
+
+{ #category : #'api - spaces' }
+BlHost >> closeSpace: aSpace [
+
+	self defer: [ self universe closeSpace: aSpace ]
+]
+
+{ #category : #'api - ui process' }
+BlHost >> defer: aValuable [
+	"Enqueue a valuable from any process to be executed in the UI process at the beginning of the next pulse."
+
+	self universe defer: aValuable
+]
+
+{ #category : #'api - spaces' }
+BlHost >> openSpace: aSpace [
+
+	self defer: [ self universe openSpace: aSpace ].
+	self isRunning ifFalse: [ self start ]
 ]
 
 { #category : #'api - lifecycle' }

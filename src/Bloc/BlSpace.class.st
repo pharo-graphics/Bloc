@@ -129,9 +129,9 @@ BlSpace >> clearDirtyElements [
 { #category : #'api - displaying' }
 BlSpace >> close [
 	"Request closing this space. This might happen in a host process (async). 
-	This space can be reopened via `show`, either with current host or with another host."
+	This space can be reopened via `open`, either with current host or with another host."
 	
-	self universe defer: [ self universe closeSpace: self ]
+	self host closeSpace: self
 ]
 
 { #category : #'cursor managing' }
@@ -435,8 +435,6 @@ BlSpace >> dequeuedEvents [
 
 { #category : #'api - events' }
 BlSpace >> enqueueEvent: aBlEvent [
-	aBlEvent isUniverseEvent
-		ifTrue: [ ^ self universe dispatchEvent: aBlEvent ].
 
 	eventQueue nextPut: aBlEvent.
 	self requestPulse
@@ -675,14 +673,15 @@ BlSpace >> host: aHost [
 	self isOpened
 		ifFalse: [ host := aHost ]
 		ifTrue: [
+			| currentHost |
+			currentHost := host.
 			self
 				addEventHandlerOn: BlSpaceDetachedEvent
 				doOnce: [
 					host := aHost.
-					self universe defer: [ self universe attachSpace: self ].
-					aHost isRunning ifFalse: [ self universe start ] ].
+					aHost openSpace: self ].
 
-			self universe defer: [ self universe detachSpace: self ] ]
+			currentHost closeSpace: self ]
 ]
 
 { #category : #'host space - accessing' }
@@ -880,11 +879,10 @@ BlSpace >> isLayoutRequested [
 
 { #category : #testing }
 BlSpace >> isOpened [
-	"Return true if the space was shown (by sending #show message), false otherwise.
+	"Return true if the space was shown (by sending #show or #open message), false otherwise.
 	Please note, that an opened space can be hidden which does not influence the result of #isOpened"
 
-	^ self host hasUniverse
-		and: [ self universe hasSpace: self ]
+	^ self host hasSpace: self
 ]
 
 { #category : #pulse }
@@ -904,7 +902,7 @@ BlSpace >> isPulseRequested [
 { #category : #testing }
 BlSpace >> isPulsing [
 
-	^ self universe isPulsing
+	^ self host isPulsing
 ]
 
 { #category : #'window - properties' }
@@ -920,7 +918,7 @@ BlSpace >> isResizable [
 BlSpace >> isSettled [
 	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space, and there are no pending universe lifecycle actions."
 
-	self universe isSettled ifFalse: [ ^ false ].
+	self host isSettled ifFalse: [ ^ false ].
 	self isOpened ifFalse: [ ^ true ].
 	^ frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
 ]
@@ -1291,11 +1289,17 @@ BlSpace >> settleForMilliseconds: aNumber [
 ]
 
 { #category : #'api - displaying' }
+BlSpace >> open [
+	"Open this space on my host."
+
+	self host openSpace: self
+]
+
+{ #category : #'api - displaying' }
 BlSpace >> show [
 	"Show this space to the user, using current host and other parameters such as extent, title, etc."
 
-	self universe defer: [ self universe openSpace: self ].
-	self host isRunning ifFalse: [ self universe start ]
+	self open
 ]
 
 { #category : #'api - displaying' }
@@ -1395,6 +1399,10 @@ BlSpace >> ungrabFocus [
 
 { #category : #accessing }
 BlSpace >> universe [
+
+	self
+		deprecated: 'Use self host universe instead'
+		transformWith: '`@receiver universe' -> '`@receiver host universe'.
 
 	^ self host universe
 ]

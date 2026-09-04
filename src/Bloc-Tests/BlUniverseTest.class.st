@@ -7,18 +7,19 @@ Class {
 { #category : #tests }
 BlUniverseTest >> testDeferSnapshotAndQuit [
 
-	| aSpace |
+	| aSpace universe |
 	aSpace := BlSpace new
 		host: BlHeadlessHost default;
 		yourself.
+	universe := aSpace host universe.
 	[
-		aSpace universe deferSnapshot: false andQuit: false.
-		self assert: aSpace universe hasDeferredActions.
-		self deny: aSpace universe isSettled.
+		universe deferSnapshot: false andQuit: false.
+		self assert: universe hasDeferredActions.
+		self deny: universe isSettled.
 
 		aSpace settle.
-		self deny: aSpace universe hasDeferredActions.
-		self assert: aSpace universe isSettled
+		self deny: universe hasDeferredActions.
+		self assert: universe isSettled
 	] ensure: [
 		aSpace close.
 		aSpace settle ]
