@@ -480,9 +480,9 @@ BlSpace >> ensureWindowOpen [
 				self setUpHostSpace.
 				previousVisibleStatus ifTrue: [
 					hostSpace open.
-					self onSessionChanged: Smalltalk session ] ]
+					self onSessionChanged ] ]
 			ifTrue: [
-				self onSessionChanged: Smalltalk session ] ]
+				self onSessionChanged ] ]
 ]
 
 { #category : #'event management accessing' }
@@ -1006,13 +1006,23 @@ BlSpace >> mouseProcessor: aMouseProcessor [
 ]
 
 { #category : #pulse }
-BlSpace >> onSessionChanged: aNewSession [
+BlSpace >> onSessionChanged [
 
 	self invalidateAll.
 	self requestHostSpaceRedraw.
 	self requestPulse.
-	
-	self root onSessionChanged: aNewSession
+
+	self root onSessionChanged: Smalltalk session
+]
+
+{ #category : #pulse }
+BlSpace >> onSessionChanged: aNewSession [
+
+	self
+		deprecated: 'Use #onSessionChanged instead'
+		transformWith: '`@receiver onSessionChanged: `@arg' -> '`@receiver onSessionChanged'.
+
+	self onSessionChanged
 ]
 
 { #category : #'window - properties' }
