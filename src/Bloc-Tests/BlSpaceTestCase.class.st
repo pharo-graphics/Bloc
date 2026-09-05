@@ -11,6 +11,12 @@ Class {
 	#category : #'Bloc-Tests-Space'
 }
 
+{ #category : #testing }
+BlSpaceTestCase class >> isAbstract [
+
+	^ self == BlSpaceTestCase
+]
+
 { #category : #accessing }
 BlSpaceTestCase >> host [
 
