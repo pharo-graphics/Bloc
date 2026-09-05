@@ -72,4 +72,3 @@ BlParallelUniverseTest >> testSpaceOpenedSignal [
 		aSpace close.
 		aSpace settle ]
 ]
-

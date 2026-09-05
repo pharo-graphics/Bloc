@@ -32,6 +32,15 @@ BlSpaceSmokeTest >> testImmediateCloseAfterShow [
 ]
 
 { #category : #tests }
+BlSpaceSmokeTest >> testOnSessionChanged [
+
+	| aSpace |
+	aSpace := self newTestingSpace.
+	aSpace onSessionChanged.
+	self assert: aSpace isOpened
+]
+
+{ #category : #tests }
 BlSpaceSmokeTest >> testOpenAndClose [
 
 	| aSpace |
@@ -76,15 +85,6 @@ BlSpaceSmokeTest >> testShowAndClick [
 ]
 
 { #category : #tests }
-BlSpaceSmokeTest >> testOnSessionChanged [
-
-	| aSpace |
-	aSpace := self newTestingSpace.
-	aSpace onSessionChanged.
-	self assert: aSpace isOpened
-]
-
-{ #category : #tests }
 BlSpaceSmokeTest >> testValidateHostSpaceDrawing [
 
 	| aSpace |
@@ -96,4 +96,3 @@ BlSpaceSmokeTest >> testValidateHostSpaceDrawing [
 	aSpace validateHostSpaceDrawing.
 	self assert: aSpace isOpened
 ]
-

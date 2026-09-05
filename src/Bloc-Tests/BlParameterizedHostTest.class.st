@@ -27,26 +27,6 @@ BlParameterizedHostTest class >> isAbstract [
 	^ self == BlParameterizedHostTest
 ]
 
-{ #category : #accessing }
-BlParameterizedHostTest class >> onlyHeadlessHost [
-
-	self
-		deprecated: 'Use #testHostsMode instead'
-		transformWith: '`@receiver onlyHeadlessHost' -> '`@receiver testHostsMode == #headlessOnly'.
-
-	^ self testHostsMode == #headlessOnly
-]
-
-{ #category : #accessing }
-BlParameterizedHostTest class >> onlyHeadlessHost: aBoolean [
-
-	self
-		deprecated: 'Use #testHostsMode: instead'
-		transformWith: '`@receiver onlyHeadlessHost: `@arg' -> '`@receiver testHostsMode: (`@arg ifTrue: [ #headlessOnly ] ifFalse: [ #allAvailable ])'.
-
-	self testHostsMode: (aBoolean ifTrue: [ #headlessOnly ] ifFalse: [ #allAvailable ])
-]
-
 { #category : #settings }
 BlParameterizedHostTest class >> preferencesOn: aBuilder [
 	<systemsettings>
