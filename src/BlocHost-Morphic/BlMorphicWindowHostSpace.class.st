@@ -30,6 +30,8 @@ BlMorphicWindowHostSpace >> center [
 { #category : #'host space - displaying' }
 BlMorphicWindowHostSpace >> close [
 
+	morphicWindow ifNil: [ ^ self ].
+	self spaceHostMorph ifNotNil: [ :morph | morph hostSpace: nil ].
 	morphicWindow close
 ]
 

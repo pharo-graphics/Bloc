@@ -46,6 +46,16 @@ BlSpaceEventTest >> testEnqueueEventAndDequeue [
 ]
 
 { #category : #tests }
+BlSpaceEventTest >> testEventsClearedOnHostSpaceClose [
+	space show; settle.
+	space enqueueEvent: BlMouseDownEvent new.
+	self assert: space hasEvents.
+
+	space close; settle.
+	self deny: space hasEvents
+]
+
+{ #category : #tests }
 BlSpaceEventTest >> testSpaceClosed [
 
 	| count |
