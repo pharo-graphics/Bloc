@@ -54,21 +54,3 @@ BlParallelUniverseTest >> testEvaluateDeferred [
 	self deny: aUniverse hasDeferredActions.
 	self assert: aUniverse isSettled
 ]
-
-{ #category : #tests }
-BlParallelUniverseTest >> testSpaceOpenedSignal [
-
-	| aSpace logger |
-	aSpace := BlSpace new
-		host: BlHeadlessHost default;
-		yourself.
-	logger := MemoryLogger new.
-	[
-		logger runFor: BlSpaceOpenedSignal during: [
-			aSpace show.
-			aSpace settle ].
-		self assert: (logger entries anySatisfy: [ :each | each space == aSpace ])
-	] ensure: [
-		aSpace close.
-		aSpace settle ]
-]
