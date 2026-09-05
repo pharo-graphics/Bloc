@@ -232,6 +232,15 @@ BlSpace >> deferAndSettle: aBlock [
 	self settle
 ]
 
+{ #category : #pulse }
+BlSpace >> deferOrValue: aBlock [
+	"Evaluate aBlock immediately if the active process is already the pulse process.
+	Otherwise, defer execution by scheduling a task for the next pulse."
+
+	self ifPulseProcessActive: aBlock else: [
+		self defer: aBlock ]
+]
+
 { #category : #'window - properties' }
 BlSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch (a float)"
@@ -247,6 +256,14 @@ BlSpace >> densityDpi [
 BlSpace >> dequeueTask: aBlTask [
 	self taskQueue dequeue: aBlTask.
 	self requestPulse
+]
+
+{ #category : #'api - events' }
+BlSpace >> dequeuedEvents [
+	| theEvents |
+	theEvents := LinkedList new.
+	eventQueue flush: [ :anEvent | theEvents add: anEvent ].
+	^ theEvents
 ]
 
 { #category : #'children dispatching' }
@@ -425,23 +442,10 @@ BlSpace >> elementsNeedingPaint [
 ]
 
 { #category : #'api - events' }
-BlSpace >> dequeuedEvents [
-	| theEvents |
-	theEvents := LinkedList new.
-	eventQueue flush: [ :anEvent | theEvents add: anEvent ].
-	^ theEvents
-]
-
-{ #category : #'api - events' }
 BlSpace >> enqueueEvent: aBlEvent [
 
 	eventQueue nextPut: aBlEvent.
 	self requestPulse
-]
-
-{ #category : #'api - events' }
-BlSpace >> hasEvents [
-	^ eventQueue isEmpty not
 ]
 
 { #category : #'api - tasks' }
@@ -467,7 +471,6 @@ BlSpace >> ensureSession [
 		deprecated: 'Session management is handled by BlParallelUniverse on image startup'
 		transformWith: '`@receiver ensureSession' -> ''
 ]
-
 
 { #category : #'event management accessing' }
 BlSpace >> eventDispatcher [
@@ -586,6 +589,11 @@ BlSpace >> hasDirtyElements [
 	^ elementsNeedingPaint notEmpty
 ]
 
+{ #category : #'api - events' }
+BlSpace >> hasEvents [
+	^ eventQueue isEmpty not
+]
+
 { #category : #'focus managing' }
 BlSpace >> hasFocus: anElement [
 	"Return true if a given element is within the focus chain"
@@ -696,6 +704,16 @@ BlSpace >> hostSpaceChanged [
 ]
 
 { #category : #'host space - accessing' }
+BlSpace >> hostSpaceClose [
+
+	hostSpace ifNil: [ ^ self ].
+
+	hostSpace tearDown.
+	hostSpace := nil.
+	eventQueue removeAll
+]
+
+{ #category : #'host space - accessing' }
 BlSpace >> hostSpaceDo: aBlock [
 	^ self hostSpaceDo: aBlock ifAbsent: [ self ]
 ]
@@ -708,16 +726,6 @@ BlSpace >> hostSpaceDo: aBlock ifAbsent: anAbsentBlock [
 	self hostSpace isValid ifFalse: [ ^ anAbsentBlock value ].
 
 	^ aBlock cull: self hostSpace
-]
-
-{ #category : #'host space - accessing' }
-BlSpace >> hostSpaceClose [
-
-	hostSpace ifNil: [ ^ self ].
-
-	hostSpace tearDown.
-	hostSpace := nil.
-	eventQueue removeAll
 ]
 
 { #category : #'host space - accessing' }
@@ -742,6 +750,16 @@ BlSpace >> icon: aStencil [
 	iconStencil := aStencil.
 	
 	self fireEvent: (BlSpaceIconChangedEvent new iconStencil: aStencil)
+]
+
+{ #category : #pulse }
+BlSpace >> ifPulseProcessActive: aBlock else: altBlock [
+	"Evaluate aBlock if the active process is the pulse process of this space,
+	otherwise evaluate altBlock."
+
+	^ self isPulseProcessActive
+		ifTrue: aBlock
+		ifFalse: altBlock
 ]
 
 { #category : #initialization }
@@ -1026,6 +1044,13 @@ BlSpace >> onSessionChanged: aNewSession [
 	self onSessionChanged
 ]
 
+{ #category : #'api - displaying' }
+BlSpace >> open [
+	"Open this space on my host."
+
+	self host openSpace: self
+]
+
 { #category : #'window - properties' }
 BlSpace >> position [
 	"Return window's position in screen coordinates"
@@ -1074,14 +1099,11 @@ BlSpace >> pulse [
 	^ self settle
 ]
 
-{ #category : #pulse }
-BlSpace >> ifPulseProcessActive: aBlock else: altBlock [
-	"Evaluate aBlock if the active process is the pulse process of this space,
-	otherwise evaluate altBlock."
+{ #category : #accessing }
+BlSpace >> pulseProcess [
+	"Return the pulse loop Process if running, or nil."
 
-	^ self isPulseProcessActive
-		ifTrue: aBlock
-		ifFalse: altBlock
+	^ self hasHost ifTrue: [ self host pulseProcess ] ifFalse: [ nil ]
 ]
 
 { #category : #pulse }
@@ -1096,7 +1118,6 @@ BlSpace >> pulseRequested [
 
 	^ self isPulseRequested
 ]
-
 
 { #category : #pulse }
 BlSpace >> render [
@@ -1271,13 +1292,6 @@ BlSpace >> settleForMilliseconds: aNumber [
 ]
 
 { #category : #'api - displaying' }
-BlSpace >> open [
-	"Open this space on my host."
-
-	self host openSpace: self
-]
-
-{ #category : #'api - displaying' }
 BlSpace >> show [
 	"Show this space to the user, using current host and other parameters such as extent, title, etc."
 
@@ -1401,22 +1415,6 @@ BlSpace >> userData [
 	Be careful to limit the use of such facility and prefer clean instance variables when it is possible to define them."
 
 	^ userData ifNil: [ userData := IdentityDictionary new ]
-]
-
-{ #category : #accessing }
-BlSpace >> pulseProcess [
-	"Return the pulse loop Process if running, or nil."
-
-	^ self hasHost ifTrue: [ self host pulseProcess ] ifFalse: [ nil ]
-]
-
-{ #category : #pulse }
-BlSpace >> deferOrValue: aBlock [
-	"Evaluate aBlock immediately if the active process is already the pulse process.
-	Otherwise, defer execution by scheduling a task for the next pulse."
-
-	self ifPulseProcessActive: aBlock else: [
-		self defer: aBlock ]
 ]
 
 { #category : #pulse }

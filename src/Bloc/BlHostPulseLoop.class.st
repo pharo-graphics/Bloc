@@ -142,7 +142,7 @@ BlHostPulseLoop >> newLoopProcess [
 { #category : #'loop process' }
 BlHostPulseLoop >> processName [
 
-	^ 'Bloc Host Loop ({1})' format: { host }
+	^ 'Bloc Host Pulse Loop ({1})' format: { host label }
 ]
 
 { #category : #'loop process' }

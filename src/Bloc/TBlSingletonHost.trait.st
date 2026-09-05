@@ -50,6 +50,13 @@ TBlSingletonHost classSide >> new [
 	self error: 'Use #default instead'
 ]
 
+{ #category : #'api - pulse process' }
+TBlSingletonHost classSide >> pulseProcess [
+	"Return the pulse loop Process if running, or nil."
+
+	^ self default pulseProcess
+]
+
 { #category : #'api - lifecycle' }
 TBlSingletonHost classSide >> start [
 	self
@@ -66,13 +73,6 @@ TBlSingletonHost classSide >> stop [
 		transformWith: '`@receiver stop' -> '`@receiver default stop'.
 
 	^ self default stop
-]
-
-{ #category : #'api - pulse process' }
-TBlSingletonHost classSide >> pulseProcess [
-	"Return the pulse loop Process if running, or nil."
-
-	^ self default pulseProcess
 ]
 
 { #category : #'api - pulse process' }
