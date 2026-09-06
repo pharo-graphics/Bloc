@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #tests }
-BlParallelUniverseTest >> testDeferSnapshotAndQuit [
+BlParallelUniverseTest >> testSnapshotAndQuit [
 
 	| aSpace universe |
 	aSpace := BlSpace new
@@ -13,7 +13,7 @@ BlParallelUniverseTest >> testDeferSnapshotAndQuit [
 		yourself.
 	universe := aSpace host universe.
 	[
-		universe deferSnapshot: false andQuit: false.
+		universe snapshot: false andQuit: false.
 		self assert: universe hasDeferredActions.
 		self deny: universe isSettled.
 

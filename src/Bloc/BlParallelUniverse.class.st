@@ -98,11 +98,6 @@ BlParallelUniverse >> defer: aValuable [
 	deferredActions nextPut: aValuable
 ]
 
-{ #category : #'api - lifecycle' }
-BlParallelUniverse >> deferSnapshot: save andQuit: quit [
-
-	self defer: [ Smalltalk snapshot: save andQuit: quit ]
-]
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> detachSpace: aSpace [
@@ -359,11 +354,7 @@ BlParallelUniverse >> registerPulseSemaphore: aSemaphore [
 { #category : #'api - lifecycle' }
 BlParallelUniverse >> snapshot: save andQuit: quit [
 
-	self
-		deprecated: 'Use #deferSnapshot:andQuit: instead'
-		transformWith: '`@receiver snapshot: `@arg1 andQuit: `@arg2' -> '`@receiver deferSnapshot: `@arg1 andQuit: `@arg2'.
-
-	self deferSnapshot: save andQuit: quit
+	self defer: [ Smalltalk snapshot: save andQuit: quit ]
 ]
 
 { #category : #'api - spaces' }

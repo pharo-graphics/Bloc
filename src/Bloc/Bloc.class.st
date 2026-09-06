@@ -33,16 +33,6 @@ Bloc class >> availableHosts [
 	^ self hostRegistry availableHosts
 ]
 
-{ #category : #'host - accessing' }
-Bloc class >> closeAllSpaces [
-	"Close all spaces across all active hosts in the system."
-
-	self
-		deprecated: 'Use #closeSpaces instead'
-		transformWith: '`@receiver closeAllSpaces' -> '`@receiver closeSpaces'.
-
-	self closeSpaces
-]
 
 { #category : #'host - accessing' }
 Bloc class >> closeSpaces [

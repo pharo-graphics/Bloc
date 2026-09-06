@@ -78,15 +78,6 @@ BlHostRegistry >> availableHosts [
 	^ availableHosts
 ]
 
-{ #category : #'api - lifecycle' }
-BlHostRegistry >> closeAllSpaces [
-
-	self
-		deprecated: 'Use #closeSpaces instead'
-		transformWith: '`@receiver closeAllSpaces' -> '`@receiver closeSpaces'.
-
-	self closeSpaces
-]
 
 { #category : #'api - lifecycle' }
 BlHostRegistry >> closeSpaces [
