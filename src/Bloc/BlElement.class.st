@@ -2078,10 +2078,7 @@ BlElement >> inNewHeadlessSpaceDo: aBlock [
 
 { #category : #convenience }
 BlElement >> inNewSpace [
-
-	self
-		deprecated: 'Use #inSpace instead'
-		transformWith: '`@receiver inNewSpace' -> '`@receiver inSpace'.
+	"Add self to a new BlSpace. Answer such space without opening it."
 
 	^ self inSpace
 ]
@@ -3194,10 +3191,7 @@ BlElement >> opacity: aNumber [
 
 { #category : #convenience }
 BlElement >> openInNewSpace [
-
-	self
-		deprecated: 'Use #openInSpace instead'
-		transformWith: '`@receiver openInNewSpace' -> '`@receiver openInSpace'.
+	"Add self to a new BlSpace and show it. Answer such space."
 
 	^ self openInSpace
 ]
