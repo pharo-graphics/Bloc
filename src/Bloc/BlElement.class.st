@@ -2066,7 +2066,7 @@ BlElement >> inNewHeadlessSpaceDo: aBlock [
 	"Open the receiver in a new headless space, settle it, evaluate aBlock with the space (and the receiver), and ensure the space is closed and settled upon completion. Answer the result of evaluating aBlock."
 
 	| aSpace |
-	aSpace := self inNewSpace.
+	aSpace := self inSpace.
 	aSpace host: BlHeadlessHost default.
 	^ [
 		aSpace show; settle.
@@ -2078,22 +2078,22 @@ BlElement >> inNewHeadlessSpaceDo: aBlock [
 
 { #category : #convenience }
 BlElement >> inNewSpace [
-	"Add self to a new BlSpace. Answer such space without opening it."
 
-	| aSpace |
-	aSpace := BlSpace new.
-	aSpace root addChild: self.
-	^ aSpace
+	self
+		deprecated: 'Use #inSpace instead'
+		transformWith: '`@receiver inNewSpace' -> '`@receiver inSpace'.
+
+	^ self inSpace
 ]
 
 { #category : #'api - space' }
 BlElement >> inSpace [
+	"Add self to a new BlSpace. Answer such space."
+	| sp |
+	sp := BlSpace new.
+	sp root addChild: self.
+	^ sp
 
-	self
-		deprecated: 'Use #inNewSpace instead'
-		transformWith: '`@receiver inSpace' -> '`@receiver inNewSpace'.
-
-	^ self inNewSpace
 ]
 
 { #category : #processing }
@@ -3194,22 +3194,22 @@ BlElement >> opacity: aNumber [
 
 { #category : #convenience }
 BlElement >> openInNewSpace [
-	"Add self to a new BlSpace, show it, settle it, and answer such space."
 
-	^ self inNewSpace
-		show;
-		settle;
-		yourself
+	self
+		deprecated: 'Use #openInSpace instead'
+		transformWith: '`@receiver openInNewSpace' -> '`@receiver openInSpace'.
+
+	^ self openInSpace
 ]
 
 { #category : #convenience }
 BlElement >> openInSpace [
+	"Add self to a new BlSpace and show it. Answer such space."
+	| sp |
+	sp := self inSpace.
+	sp show.
+	^ sp
 
-	self
-		deprecated: 'Use #openInNewSpace instead'
-		transformWith: '`@receiver openInSpace' -> '`@receiver openInNewSpace'.
-
-	^ self openInNewSpace
 ]
 
 { #category : #'geometry bounds' }

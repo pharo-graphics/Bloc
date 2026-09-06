@@ -97,7 +97,7 @@ BlParameterizedHostTest >> setUp [
 	super setUp.
 
 	testingSpaces := OrderedCollection new.
-	initialSpaces := host universe spaces copy.
+	initialSpaces := host spaces copy.
 ]
 
 { #category : #running }
@@ -112,7 +112,7 @@ BlParameterizedHostTest >> tearDown [
 				do: [ ] ].
 
 	host ifNotNil: [
-			host universe spaces copy reject: [ :each | initialSpaces includes: each ] thenDo: [ :each |
+			host spaces copy reject: [ :each | initialSpaces includes: each ] thenDo: [ :each |
 					[
 						each close.
 						each settle ]

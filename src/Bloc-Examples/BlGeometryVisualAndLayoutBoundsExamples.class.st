@@ -275,6 +275,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> misalignedIcon [
 BlGeometryVisualAndLayoutBoundsExamples >> misalignedTrianglePolygon [
 	"Triangle polygon"
 
+	<sampleInstance>
 	^ BlPolygonGeometry vertices: {
 			  (0 @ 3).
 			  (8 @ 7.5).
@@ -298,6 +299,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> outsideOutskirts [
 BlGeometryVisualAndLayoutBoundsExamples >> rectanglePolygon [
 	"Rectangle polygon"
 
+	<sampleInstance>
 	^ BlPolygonGeometry vertices: {
 			  (50 @ 50).
 			  (150 @ 50).
@@ -404,6 +406,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> stadium [
 BlGeometryVisualAndLayoutBoundsExamples >> starPolygon [
 	"Star polygon"
 
+	<sampleInstance>
 	^ BlPolygonGeometry vertices: {
 			  (100 @ 50).
 			  (115 @ 90).
@@ -479,6 +482,7 @@ BlGeometryVisualAndLayoutBoundsExamples >> textElementWithRunText [
 BlGeometryVisualAndLayoutBoundsExamples >> trianglePolygon [
 	"Triangle polygon"
 
+	<sampleInstance>
 	^ BlPolygonGeometry vertices: {
 			  (0 @ 0).
 			  (8 @ 6).

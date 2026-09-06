@@ -37,7 +37,18 @@ Bloc class >> availableHosts [
 Bloc class >> closeAllSpaces [
 	"Close all spaces across all active hosts in the system."
 
-	self hostRegistry closeAllSpaces
+	self
+		deprecated: 'Use #closeSpaces instead'
+		transformWith: '`@receiver closeAllSpaces' -> '`@receiver closeSpaces'.
+
+	self closeSpaces
+]
+
+{ #category : #'host - accessing' }
+Bloc class >> closeSpaces [
+	"Close all spaces across all active hosts in the system."
+
+	self hostRegistry closeSpaces
 ]
 
 { #category : #debugging }

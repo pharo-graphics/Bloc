@@ -33,9 +33,9 @@ BlSpaceTestCase >> newSpace [
 BlSpaceTestCase >> runCase [
 
 	| initialSpaces |
-	initialSpaces := self host universe spaces copy.
+	initialSpaces := self host spaces copy.
 	^ [ super runCase ] ensure: [
-			self host universe spaces copy
+			self host spaces copy
 				reject: [ :each | initialSpaces includes: each ]
 				thenDo: [ :each |
 					[ each close; settle ] on: Exception do: [ ] ] ]

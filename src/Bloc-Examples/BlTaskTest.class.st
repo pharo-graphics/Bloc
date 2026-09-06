@@ -31,7 +31,7 @@ BlTaskTest >> testAddElementWithTaskToSpace [
 	anElement := BlElement new.
 	anElement enqueueTask: aTask.
 
-	aSpace := anElement inNewSpace.
+	aSpace := anElement inSpace.
 	aSpace host: BlHeadlessHost default.
 	
 	"task were moved to the space"

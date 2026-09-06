@@ -479,11 +479,11 @@ BlElementTest >> testInNewHeadlessSpaceDo [
 ]
 
 { #category : #tests }
-BlElementTest >> testInNewSpace [
+BlElementTest >> testInSpace [
 
 	| element aSpace |
 	element := BlElement new.
-	aSpace := element inNewSpace.
+	aSpace := element inSpace.
 	self assert: aSpace root children size equals: 1.
 	self assert: aSpace root children first equals: element.
 	self deny: aSpace isOpened

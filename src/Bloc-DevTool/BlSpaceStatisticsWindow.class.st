@@ -210,5 +210,5 @@ BlSpaceStatisticsWindow >> open [
 { #category : #actions }
 BlSpaceStatisticsWindow >> refresh [
 
-	space universe defer: [ self doRefresh ]
+	space defer: [ self doRefresh ]
 ]

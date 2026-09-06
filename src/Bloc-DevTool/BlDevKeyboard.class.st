@@ -20,7 +20,7 @@ BlDevKeyboard class >> exampleScript [
 
 	<script>
 	
-	^ self sampleInstance openInNewSpace 
+	^ self sampleInstance openInSpace 
 ]
 
 { #category : #examples }

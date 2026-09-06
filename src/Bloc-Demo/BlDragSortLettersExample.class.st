@@ -137,7 +137,7 @@ BlDragSortLettersExample >> lettersContainer [
 { #category : #running }
 BlDragSortLettersExample >> run [ 
 
-	<script: 'self new openInNewSpace'>
+	<script: 'self new openInSpace'>
 ]
 
 { #category : #accessing }

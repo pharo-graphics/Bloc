@@ -81,10 +81,17 @@ BlHostRegistry >> availableHosts [
 { #category : #'api - lifecycle' }
 BlHostRegistry >> closeAllSpaces [
 
-	self availableHosts do: [ :eachHost |
-		eachHost hasUniverse ifTrue: [
-			eachHost universe closeSpaces.
-			eachHost stop ] ]
+	self
+		deprecated: 'Use #closeSpaces instead'
+		transformWith: '`@receiver closeAllSpaces' -> '`@receiver closeSpaces'.
+
+	self closeSpaces
+]
+
+{ #category : #'api - lifecycle' }
+BlHostRegistry >> closeSpaces [
+
+	self availableHosts do: [ :eachHost | eachHost closeSpaces ]
 ]
 
 { #category : #initialization }
