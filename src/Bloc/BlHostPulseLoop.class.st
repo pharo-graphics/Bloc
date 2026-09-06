@@ -31,45 +31,23 @@ BlHostPulseLoop class >> host: aBlHost [
 ]
 
 { #category : #debug }
-BlHostPulseLoop >> forceStartNewPulseProcess [
-	"I should only be used by the logic for opening the debugger.
-	
-	I create and start a new pulse process without stopping the previous one.
-	Normally this leads to incorrect behaviour in Bloc pulse process. However 
-	if I am sent from the current Bloc pulse process when an error happened in 
-	the actual process, and after sending me, my sender terminates or suspends 
-	the process my usage should be safe."
-	
-	loopProcess := self newLoopProcess.
-	loopProcess resume
-]
-
-{ #category : #debug }
 BlHostPulseLoop >> forceStartNewUIProcess [
 
 	self
-		deprecated: 'Use #forceStartNewPulseProcess instead'
-		transformWith: '`@receiver forceStartNewUIProcess' -> '`@receiver forceStartNewPulseProcess'.
+		deprecated: 'Use #basicStart instead'
+		transformWith: '`@receiver forceStartNewUIProcess' -> '`@receiver basicStart'.
 
-	^ self forceStartNewPulseProcess
+	^ self basicStart
 ]
 
 { #category : #debug }
-BlHostPulseLoop >> forceStartOfPulseProcess: aProcess [
-	"I should only be used by the logic for closing the debugger."
-	
-	loopProcess := aProcess.
-	loopProcess resume
-]
-
-{ #category : #debug }
-BlHostPulseLoop >> forceStartOfUIProcess: aProces [
+BlHostPulseLoop >> forceStartOfUIProcess: aProcess [
 
 	self
-		deprecated: 'Use #forceStartOfPulseProcess: instead'
-		transformWith: '`@receiver forceStartOfUIProcess: `@arg' -> '`@receiver forceStartOfPulseProcess: `@arg'.
+		deprecated: 'Use #basicStart: instead'
+		transformWith: '`@receiver forceStartOfUIProcess: `@arg' -> '`@receiver basicStart: `@arg'.
 
-	^ self forceStartOfPulseProcess: aProces
+	^ self basicStart: aProcess
 ]
 
 { #category : #accessing }
@@ -117,7 +95,7 @@ BlHostPulseLoop >> loopIteration [
 		self waitUntilNextPulse ]
 	on: Exception
 	do: [ :e |
-		self forceStartNewPulseProcess.
+		self basicStart.
 		e pass ].
 
 	"Returns true to continue looping"
@@ -178,12 +156,26 @@ BlHostPulseLoop >> pulseProcess [
 ]
 
 { #category : #lifecycle }
+BlHostPulseLoop >> basicStart [
+	"Start a new loop process unguardedly without checking if already running."
+
+	self basicStart: self newLoopProcess
+]
+
+{ #category : #lifecycle }
+BlHostPulseLoop >> basicStart: aProcess [
+	"Install and resume the given loop process unguardedly."
+
+	loopProcess := aProcess.
+	loopProcess resume
+]
+
+{ #category : #lifecycle }
 BlHostPulseLoop >> start [
 
 	self isRunning ifTrue: [ ^ self ].
 
-	loopProcess := self newLoopProcess.
-	loopProcess resume
+	self basicStart
 ]
 
 { #category : #lifecycle }
