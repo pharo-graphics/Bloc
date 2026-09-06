@@ -1,61 +1,32 @@
 "
-I am a fallback host that is chosen if there are no other available and supported hosts.
-
+I am a headless host that manages space lifecycles, pulse loops, layout, and event processing in-memory without opening an OS display window.
 "
 Class {
 	#name : #BlHeadlessHost,
-	#superclass : #BlHost,
-	#instVars : [
-		'isRunning'
-	],
-	#classVars : [
-		'PulseLoop'
-	],
+	#superclass : #BlPulseLoopHost,
+	#traits : 'TBlSingletonHost',
+	#classTraits : 'TBlSingletonHost classTrait',
 	#category : #'Bloc-Universe - Host Headless'
 }
 
-{ #category : #'class initialization' }
-BlHeadlessHost class >> initialize [
+{ #category : #'driver selection' }
+BlHeadlessHost class >> isSupported [
+	"Headless host requires no display server or window manager and is always supported."
 
-	PulseLoop := BlHostPulseLoop forHost: self
-]
-
-{ #category : #'api - lifecycle' }
-BlHeadlessHost class >> isRunning [
-
-	^ PulseLoop isRunning
-]
-
-{ #category : #printing }
-BlHeadlessHost class >> label [
-
-	^ 'Headless'
+	^ true
 ]
 
 { #category : #'driver selection' }
 BlHeadlessHost class >> priority [
-	"Infinite priority means that I am selected only if there are no other available hosts"
+	"Lowest priority (highest value) so that GUI window hosts take precedence when available."
 
-	^ Float infinity
+	^ 1000
 ]
 
-{ #category : #'api - lifecycle' }
-BlHeadlessHost class >> start [
+{ #category : #accessing }
+BlHeadlessHost >> label [
 
-	PulseLoop start
-]
-
-{ #category : #'api - lifecycle' }
-BlHeadlessHost class >> stop [
-
-	PulseLoop stop
-]
-
-{ #category : #'api - lifecycle' }
-BlHeadlessHost class >> uiProcessDo: aBlock [
-	"Evaluate aBlock with the running UI Process of this host if any"
-	
-	PulseLoop loopProcess ifNotNil: aBlock
+	^ 'Headless'
 ]
 
 { #category : #'host - api' }
@@ -63,8 +34,9 @@ BlHeadlessHost >> newHostSpaceFor: aSpace [
 
 	^ BlHeadlessHostSpace new
 		host: self;
-		universe: self universe;
 		space: aSpace;
 		renderer: self newHostRenderer;
+		windowExtent: aSpace extent;
+		canvasExtent: aSpace extent;
 		yourself
 ]

@@ -11,7 +11,10 @@ BlDevScripterDoubleClickStep >> defaultLabel [
 
 { #category : #actions }
 BlDevScripterDoubleClickStep >> playOn: aScripter [
-	BlSpace simulateClickOn: (self target findTargetStartingInScripter: aScripter).
-	BlSpace simulateClickOn: (self target findTargetStartingInScripter: aScripter).
-	aScripter pulse
+	| targetElement |
+	targetElement := self target findTargetStartingInScripter: aScripter.
+	self
+		setMousePosition: targetElement eventSimulator doubleClick
+		in: aScripter.
+	aScripter settle
 ]

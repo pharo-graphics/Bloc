@@ -479,14 +479,12 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowFlow [
 { #category : #tests }
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowList [
 
-	<sampleInstance>
-	<demo>
 	| firstFlow secondFlow list |
 	firstFlow := self flow.
 	firstFlow addChildren: {
-			self red.
-			self blue.
-			self green }.
+		self red.
+		self blue.
+		self green }.
 
 	secondFlow := self flow.
 	secondFlow addChild: firstFlow.
@@ -498,9 +496,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowFlowList [
 
 	self assert: firstFlow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: secondFlow extent equals: (self twoColumnExtentDepth: 2).
-	self assert: list extent equals: (self twoColumnExtentDepth: 3).
-
-	^ list
+	self assert: list extent equals: (self twoColumnExtentDepth: 3)
 ]
 
 { #category : #tests }
@@ -533,14 +529,12 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridGrid [
 { #category : #tests }
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridList [
 
-	<sampleInstance>
-	<demo>
 	| flow grid list |
 	flow := self flow.
 	flow addChildren: {
-			self red.
-			self blue.
-			self green }.
+		self red.
+		self blue.
+		self green }.
 
 	grid := self grid.
 	grid addChild: flow.
@@ -552,22 +546,18 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowGridList [
 
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
 	self assert: grid extent equals: (self twoColumnExtentDepth: 2).
-	self assert: list extent equals: (self twoColumnExtentDepth: 3).
-
-	^ list
+	self assert: list extent equals: (self twoColumnExtentDepth: 3)
 ]
 
 { #category : #tests }
 BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowList [
 
-	<sampleInstance>
-	<demo>
 	| flow list |
 	flow := self flow.
 	flow addChildren: {
-			self red.
-			self blue.
-			self green }.
+		self red.
+		self blue.
+		self green }.
 
 	list := self list.
 	list width: (self twoColumnWidthDepth: 2).
@@ -575,9 +565,7 @@ BlFitContentVerticallyInHorizontalLayoutTest >> testTwoColumnFlowList [
 	list forceLayout.
 
 	self assert: flow extent equals: (self twoColumnExtentDepth: 1).
-	self assert: list extent equals: (self twoColumnExtentDepth: 2).
-
-	^ list
+	self assert: list extent equals: (self twoColumnExtentDepth: 2)
 ]
 
 { #category : #tests }

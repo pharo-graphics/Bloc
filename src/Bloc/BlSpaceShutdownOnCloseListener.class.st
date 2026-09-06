@@ -28,7 +28,7 @@ Class {
 BlSpaceShutdownOnCloseListener >> handleEvent: anEvent [
 	| aSpace |
 	aSpace := anEvent currentTarget.
-	aSpace universe snapshot: shouldSave andQuit: true.
+	aSpace defer: [ Smalltalk snapshot: shouldSave andQuit: true ].
 ]
 
 { #category : #initialization }

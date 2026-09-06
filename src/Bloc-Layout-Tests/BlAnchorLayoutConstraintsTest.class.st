@@ -1,26 +1,20 @@
-"
-A BlAnchorLayoutTest is a test class for testing the behavior of BlAnchorLayout
-"
 Class {
 	#name : #BlAnchorLayoutConstraintsTest,
-	#superclass : #BlParameterizedHostTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'parent',
-		'space',
 		'child'
 	],
 	#category : #'Bloc-Layout-Tests-Anchor'
 }
 
 { #category : #running }
-BlAnchorLayoutConstraintsTest >> setUp [ 
+BlAnchorLayoutConstraintsTest >> setUp [
 
 	super setUp.
-	space := self newTestingSpace. 
-	parent := BlElement new. 
-	parent constraintsDo: [:c | c horizontal matchParent. c vertical matchParent ].
+	parent := BlElement new.
+	parent extent: 500 @ 500.
 	parent layout: BlAnchorLayout new.
-	space root addChild: parent.
 	child := BlElement new.
 	parent addChild: child
 ]
@@ -32,9 +26,9 @@ BlAnchorLayoutConstraintsTest >> testActionAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := child actionAnchor: [ :v :e | e position ].
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -58,12 +52,11 @@ BlAnchorLayoutConstraintsTest >> testBottomAnchor [
 	| anchor |
 	child position: 0 @ 0.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementBottomAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -87,12 +80,11 @@ BlAnchorLayoutConstraintsTest >> testBottomLeftAnchor [
 	| anchor |
 	child position: 110 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementBottomLeftAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -117,12 +109,11 @@ BlAnchorLayoutConstraintsTest >> testBottomRightAnchor [
 	| anchor |
 	child position: 110 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementBottomRightAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -147,12 +138,11 @@ BlAnchorLayoutConstraintsTest >> testExtentAnchor [
 	| anchor |
 	child position: 110 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementExtentAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -177,12 +167,11 @@ BlAnchorLayoutConstraintsTest >> testHeightAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementHeightAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -206,12 +195,11 @@ BlAnchorLayoutConstraintsTest >> testHorizontalCenterAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementHorizontalCenterAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -235,12 +223,11 @@ BlAnchorLayoutConstraintsTest >> testLeftAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementLeftAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -264,9 +251,9 @@ BlAnchorLayoutConstraintsTest >> testNeutralAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := child neutralAnchor: 0.
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -290,9 +277,9 @@ BlAnchorLayoutConstraintsTest >> testNilAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := child nilAnchor.
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -316,12 +303,11 @@ BlAnchorLayoutConstraintsTest >> testRightAnchor [
 	| anchor |
 	child position: 110 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementRightAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -345,12 +331,11 @@ BlAnchorLayoutConstraintsTest >> testTopAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementTopAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -374,12 +359,11 @@ BlAnchorLayoutConstraintsTest >> testTopLeftAnchor [
 	| anchor |
 	child position: 110 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementTopLeftAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -404,12 +388,11 @@ BlAnchorLayoutConstraintsTest >> testTopRightAnchor [
 	| anchor |
 	child position: 110 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementTopRightAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -434,12 +417,11 @@ BlAnchorLayoutConstraintsTest >> testVerticalCenterAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementVerticalCenterAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:
@@ -463,12 +445,11 @@ BlAnchorLayoutConstraintsTest >> testWidthAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementWidthAnchor new
 		          element: child;
 		          yourself.
-
-	self waitTestingSpaces.
 
 	self
 		assert:

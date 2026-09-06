@@ -8,7 +8,6 @@ Class {
 	#traits : 'TBlSpaceProperties',
 	#classTraits : 'TBlSpaceProperties classTrait',
 	#instVars : [
-		'eventFetcher',
 		'keyboardKeyTable',
 		'osWindow'
 	],
@@ -51,28 +50,6 @@ BlOSSDL3HostSpace >> densityDpi [
 	^ 96.0
 ]
 
-{ #category : #'host space - events' }
-BlOSSDL3HostSpace >> enqueueEvent: aBlEvent [
-	"I put events in a queue to be processed later"
-
-	self eventFetcher enqueueEvent: aBlEvent
-]
-
-{ #category : #'host space - accessing' }
-BlOSSDL3HostSpace >> eventFetcher [
-	"Return event fetcher used to enqueue events that should be
-	processed in the beginning of every frame"
-
-	^ eventFetcher
-]
-
-{ #category : #'host space - events' }
-BlOSSDL3HostSpace >> fetchedEventsDo: aBlock [
-	"Flush event queue and evaluate a given block with every queued event as argument"
-	
-	self eventFetcher fetchedEventsDo: aBlock
-]
-
 { #category : #'window - properties' }
 BlOSSDL3HostSpace >> fullscreen: aBoolean [
 	"Switch underlying window to fullscreen if true is given
@@ -85,14 +62,6 @@ BlOSSDL3HostSpace >> fullscreen: aBoolean [
 BlOSSDL3HostSpace >> hide [
 
 	osWindow hide
-]
-
-{ #category : #initialization }
-BlOSSDL3HostSpace >> initialize [
-
-	super initialize.
-
-	eventFetcher := BlHostEventFetcher hostSpace: self
 ]
 
 { #category : #initialization }
@@ -208,7 +177,7 @@ BlOSSDL3HostSpace >> physicalSize [
 BlOSSDL3HostSpace >> position [
 	"Return window's position in screen coordinates"
 
-	^ osWindow position
+	^ osWindow ifNotNil: [ :w | w position ] ifNil: [ 0@0 ]
 ]
 
 { #category : #'host space - geometry' }

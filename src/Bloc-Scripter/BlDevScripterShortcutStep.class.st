@@ -30,5 +30,5 @@ BlDevScripterShortcutStep >> playOn: aScripter [
 
 	BlEvent fireEvent: anEvent target: aTarget.
 
-	aScripter pulse
+	aScripter settle
 ]

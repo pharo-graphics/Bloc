@@ -21,13 +21,15 @@ BlSpaceFramePhase >> isEventPhase [
 ]
 
 { #category : #testing }
-BlSpaceFramePhase >> isIdlePhase [
+BlSpaceFramePhase >> isLayoutPhase [
 	^ false
 ]
 
 { #category : #testing }
-BlSpaceFramePhase >> isLayoutPhase [
-	^ false
+BlSpaceFramePhase >> isSettledIn: aSpace [
+	"Return true if I have no pending work in aSpace"
+
+	^ true
 ]
 
 { #category : #testing }

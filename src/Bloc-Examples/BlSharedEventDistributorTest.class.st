@@ -107,8 +107,7 @@ BlSharedEventDistributorTest >> testMouseEnterEventOneOutOfTwoElements [
 	aContainer := self newContainer.
 	aContainer addChildren: aHandler elements.
 	aSpace root addChild: aContainer.
-
-	BlSpace simulateMouseMoveInside: elementA.
+	elementA eventSimulator mouseMoveInside.
 
 	self assert: countA equals: 1.
 	self assert: countB equals: 1
@@ -142,19 +141,10 @@ BlSharedEventDistributorTest >> testMouseLeaveEventOneOutOfTwoElements [
 	aSpace := self newTestingSpace.
 	aContainer := self newContainer.
 	aContainer addChildren: aHandler elements.
-	aSpace root addChild: aContainer.
-
-	BlSpace
-		simulateEvents: {
-				(BlMouseMoveEvent new
-					 position: (BlSpace locationInside: elementA);
-					 screenPosition: 0 @ 0;
-					 yourself).
-				(BlMouseMoveEvent new
-					 position: (BlSpace locationOutside: aContainer);
-					 screenPosition: 0 @ 0;
-					 yourself) }
-		on: aContainer.
+	aSpace deferAndSettle: [ aSpace root addChild: aContainer ].
+	elementA eventSimulator
+		mouseMoveInside;
+		mouseMoveOutside.
 
 	self assert: countA equals: 1.
 	self assert: countB equals: 1

@@ -31,10 +31,10 @@ BAHitTest class >> inspectMismatches [
 	super inspectMismatches
 ]
 
-{ #category : #tests }
+{ #category : #hooks }
 BAHitTest >> actualForm [
 
-	^ self hitFormFor: formSelector host: BlOSWindowSDL2Host new
+	^ self hitFormFor: formSelector
 ]
 
 { #category : #tests }
@@ -52,15 +52,41 @@ BAHitTest >> formBehavior [
 ]
 
 { #category : #tests }
-BAHitTest >> hitFormFor: aSymbol host: aHost [
+BAHitTest >> hitFormFor: aSymbol [
 		
-	| aSpace |
+	| aSpace aForm |
 	aSpace := self formBehavior
-		host: aHost;
+		host: BlHeadlessHost default;
 		perform: aSymbol;
 		space.
+	aSpace show.
+	aSpace settle.
+	aForm := [ self newHitFormFor: aSpace root ] ensure: [ aSpace close ].
+	aSpace settle.
+	^ aForm
+]
 
-	^ BAHitFormFactory newFormFor: aSpace
+{ #category : #tests }
+BAHitTest >> newHitFormFor: anElement [
+
+	| allElements colors colorByElement aForm |
+	allElements := anElement withAllChildrenBreadthFirst.
+
+	colors := { Color white }, (Color wheel: allElements size - 1).
+	colorByElement := IdentityDictionary newFromKeys: allElements andValues: colors.
+	aForm := Form extent: anElement extent depth: 32.
+	
+	1 to: anElement extent x do: [ :x |
+		1 to: anElement extent y do: [ :y |
+			| eachPosition hittedElementOrNil hittedColor |
+			eachPosition := x@y.
+			hittedElementOrNil := anElement findMouseEventTargetAt: eachPosition.
+			hittedColor := colorByElement
+				at: hittedElementOrNil
+				ifAbsent: [ Color black ].
+			aForm colorAt: eachPosition put: hittedColor ] ].
+
+	^ aForm
 ]
 
 { #category : #tests }

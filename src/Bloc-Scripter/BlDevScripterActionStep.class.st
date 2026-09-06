@@ -50,5 +50,5 @@ BlDevScripterActionStep >> playOn: aScripter [
 BlDevScripterActionStep >> pulse [
 	self label: 'Pulse space'.
 	self onSpace.
-	self block: [ :aSpace | aSpace pulse ].
+	self block: [ :aSpace | aSpace settle ].
 ]

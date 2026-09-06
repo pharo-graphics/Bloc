@@ -44,13 +44,6 @@ BlMorphicHostSpace >> fullsize: aBoolean [
 	See ${method:TBlSpaceProperties>>#fullsize}"
 ]
 
-{ #category : #'host space - events' }
-BlMorphicHostSpace >> generateEvents [
-	"Generate more complex state change events such as window scale event when resolution of the screen changes"
-	
-	spaceHostMorph world ifNil: [ spaceHostMorph announceDeleted ]
-]
-
 { #category : #'window - properties' }
 BlMorphicHostSpace >> isBorderless [
 	"Return true if underlying window is now borderless, false otherwise"
@@ -90,6 +83,28 @@ BlMorphicHostSpace >> logicalSize [
 	^ spaceHostMorph extent asLogicalSize
 ]
 
+{ #category : #'host space - displaying' }
+BlMorphicHostSpace >> maximize [
+	"Ignore"
+]
+
+{ #category : #'host space - displaying' }
+BlMorphicHostSpace >> maximized [
+
+	^ false
+]
+
+{ #category : #'host space - displaying' }
+BlMorphicHostSpace >> minimize [
+	"Ignore"
+]
+
+{ #category : #'host space - displaying' }
+BlMorphicHostSpace >> minimized [
+
+	^ false
+]
+
 { #category : #'host space - geometry' }
 BlMorphicHostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
@@ -116,14 +131,6 @@ BlMorphicHostSpace >> position: aPoint [
 	"Change window's position to a given point in screen coordinates"
 	
 	spaceHostMorph position: aPoint
-
-]
-
-{ #category : #'host space - rendering' }
-BlMorphicHostSpace >> requestRedraw [
-	"Space needs to redraw the window"
-	
-	spaceHostMorph changed
 ]
 
 { #category : #'host space - displaying' }

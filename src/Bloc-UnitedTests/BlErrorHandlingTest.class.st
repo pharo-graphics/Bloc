@@ -60,20 +60,18 @@ BlErrorHandlingTest >> sceneWith: aFaultyElement [
 			aRightChild }.
 
 	aSpace := BlSpace new.
-	aSpace host: BlMorphicWindowHost new.
+	aSpace host: BlMorphicWindowHost default.
 	aSpace root addChild: aContainer.
 	aSpace show.
 
-	self assert: (BlSpace
-			pulseUntilEmptyTaskQueue: aSpace
-			timeout: 200 milliSeconds).
+	self assert:
+		(aSpace settleForMilliseconds: 200).
 
 	aSpace close.
 	aContainer removeFromParent.
 
-	self assert: (BlSpace
-			pulseUntilEmptyTaskQueue: aSpace
-			timeout: 200 milliSeconds).
+	self assert:
+		(aSpace settleForMilliseconds: 200).
 
 	^ aContainer
 ]

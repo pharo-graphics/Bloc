@@ -12,95 +12,86 @@ Class {
 	#name : #BlHostPulseLoop,
 	#superclass : #Object,
 	#instVars : [
-		'hostClass',
+		'host',
 		'loopProcess',
 		'pulsePeriodMS',
 		'msToWaitForBackgroundProcess',
-		'pulseStartMS',
-		'pulseDurationMS'
+		'pulseDurationMS',
+		'processPriority'
 	],
 	#category : #'Bloc-Universe - Host'
 }
 
 { #category : #'instance creation' }
-BlHostPulseLoop class >> forHost: aHostClass [
+BlHostPulseLoop class >> host: aBlHost [
 
 	^ self basicNew
-		  initialize;
-		  hostClass: aHostClass;
-		  yourself
+		initializeWithHost: aBlHost;
+		yourself
 ]
 
-{ #category : #'instance creation' }
-BlHostPulseLoop class >> new [
+{ #category : #lifecycle }
+BlHostPulseLoop >> basicStart [
+	"Start a new loop process unguardedly without checking if already running."
 
-	self error: 'Use #forHost: instead'
+	self basicStart: self newLoopProcess
 ]
 
-{ #category : #accessing }
-BlHostPulseLoop class >> processId [
+{ #category : #lifecycle }
+BlHostPulseLoop >> basicStart: aProcess [
+	"Install and resume the given loop process unguardedly."
 
-	^ 'Bloc Main Loop'
-]
-
-{ #category : #period }
-BlHostPulseLoop >> defaultPulsePeriod [
-
-	^ 15 milliSeconds
+	loopProcess := aProcess.
+	loopProcess resume
 ]
 
 { #category : #debug }
 BlHostPulseLoop >> forceStartNewUIProcess [
-	"I should only be used by the logic for opening the debugger.
-	
-	I create and start a new UI thread without stopping the previous one.
-	Normally this leads to incorrect behaviou in Bloc UI process. However 
-	if I am called from the current Bloc UI process when an error happened in 
-	the actual process, and after calling me my sender terminates or suspends 
-	the process my usage should be safe."
-	
-	loopProcess := self newLoopProcess.
-	loopProcess resume.
+
+	self
+		deprecated: 'Use #basicStart instead'
+		transformWith: '`@receiver forceStartNewUIProcess' -> '`@receiver basicStart'.
+
+	^ self basicStart
 ]
 
 { #category : #debug }
-BlHostPulseLoop >> forceStartOfUIProcess: aProces [
-	"I should only be used by the logic for closing the debugger."
-	
-	loopProcess := aProces.
-	loopProcess resume.
+BlHostPulseLoop >> forceStartOfUIProcess: aProcess [
+
+	self
+		deprecated: 'Use #basicStart: instead'
+		transformWith: '`@receiver forceStartOfUIProcess: `@arg' -> '`@receiver basicStart: `@arg'.
+
+	^ self basicStart: aProcess
 ]
 
 { #category : #accessing }
-BlHostPulseLoop >> hostClass [
+BlHostPulseLoop >> host [
 
-	^ hostClass
-]
-
-{ #category : #accessing }
-BlHostPulseLoop >> hostClass: aHostClass [
-
-	hostClass := aHostClass
+	^ host
 ]
 
 { #category : #initialization }
-BlHostPulseLoop >> initialize [
+BlHostPulseLoop >> initializeWithHost: aBlHost [
 
-	super initialize.
+	self initialize.
 
-	self pulsePeriod: self defaultPulsePeriod
+	host := aBlHost.
+	processPriority := Processor userSchedulingPriority.
+	
+	self pulsePeriod: 15 milliSeconds
+]
+
+{ #category : #testing }
+BlHostPulseLoop >> isPulseProcessActive [
+
+	^ Processor activeProcess == loopProcess
 ]
 
 { #category : #testing }
 BlHostPulseLoop >> isRunning [
 
 	^ loopProcess isNotNil and: [ loopProcess isTerminated not ]
-]
-
-{ #category : #testing }
-BlHostPulseLoop >> isRunningInTheSameProcess [
-
-	^ Processor activeProcess effectiveProcess == loopProcess
 ]
 
 { #category : #'loop process' }
@@ -112,21 +103,18 @@ BlHostPulseLoop >> loop [
 { #category : #'loop process' }
 BlHostPulseLoop >> loopIteration [
 
-	| universe |
-
-	[
+	[	| pulseStartMS |
 		pulseStartMS := Time millisecondClockValue.
-		universe := hostClass universe.
-		universe pulse.
+		host universe pulse.
 		pulseDurationMS := Time millisecondClockValue - pulseStartMS.
-		self waitUntilNextPulse. ]
+		self waitUntilNextPulse ]
 	on: Exception
 	do: [ :e |
-		self forceStartNewUIProcess.
+		self basicStart.
 		e pass ].
 
 	"Returns true to continue looping"
-	^ self isRunningInTheSameProcess 
+	^ self isPulseProcessActive 
 ]
 
 { #category : #accessing }
@@ -140,20 +128,27 @@ BlHostPulseLoop >> newLoopProcess [
 
 	^ [ self loop ] newProcess
 		  priority: self processPriority;
-		  name: self processId;
+		  name: self processName;
 		  yourself
 ]
 
 { #category : #'loop process' }
-BlHostPulseLoop >> processId [
+BlHostPulseLoop >> processName [
 
-	^ self class processId
+	^ 'Bloc Host Pulse Loop ({1})' format: { host label }
 ]
 
 { #category : #'loop process' }
 BlHostPulseLoop >> processPriority [
 
-	^ 40
+	^ processPriority ifNil: [ Processor userSchedulingPriority ]
+]
+
+{ #category : #'loop process' }
+BlHostPulseLoop >> processPriority: aNumber [
+	"Change the Process priority (takes effect on next #start)"
+
+	processPriority := aNumber
 ]
 
 { #category : #period }
@@ -166,7 +161,13 @@ BlHostPulseLoop >> pulsePeriod [
 BlHostPulseLoop >> pulsePeriod: aDuration [
 
 	pulsePeriodMS := aDuration asMilliSeconds.
-	msToWaitForBackgroundProcess := (pulsePeriodMS // 2) min: 1.
+	msToWaitForBackgroundProcess := (pulsePeriodMS // 2) min: 1
+]
+
+{ #category : #accessing }
+BlHostPulseLoop >> pulseProcess [
+
+	^ loopProcess
 ]
 
 { #category : #lifecycle }
@@ -174,17 +175,16 @@ BlHostPulseLoop >> start [
 
 	self isRunning ifTrue: [ ^ self ].
 
-	loopProcess := self newLoopProcess.
-	loopProcess resume
+	self basicStart
 ]
 
 { #category : #lifecycle }
 BlHostPulseLoop >> stop [
 
 	| currentProcess |
-
 	self isRunning ifFalse: [ ^ self ].
 	
+	"Store in temporary variable to support stopping from the loopProcess itself"
 	currentProcess := loopProcess.
 	loopProcess := nil.
 	currentProcess terminate
@@ -197,12 +197,11 @@ BlHostPulseLoop >> waitUntilNextPulse [
 	| msToWait |
 	"Since a pulse can take longer than #pulsePeriod, msToWait may be negative here
 	(meaning that we shouldn't wait for the next pulse)"
-
-	"No need to wait"	
-	pulseDurationMS >= pulsePeriodMS ifTrue: [
-		"Processor yield. maybe?" ^ self ].
-	
-	"Need to wait"
 	msToWait := pulsePeriodMS - pulseDurationMS.
+
+	"Even if there is no need to wait, yield to other processes of the same priority"
+	msToWait <= 0 ifTrue: [ ^ Processor yield ].
+	
+	"We need to wait"
 	(Delay forMilliseconds: msToWait) wait
 ]

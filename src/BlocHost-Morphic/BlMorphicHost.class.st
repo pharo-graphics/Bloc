@@ -13,7 +13,7 @@ See example in class-side.
 "
 Class {
 	#name : #BlMorphicHost,
-	#superclass : #BlMorphicSteppingHost,
+	#superclass : #BlPulseLoopHost,
 	#instVars : [
 		'containerMorph'
 	],
@@ -25,12 +25,6 @@ BlMorphicHost class >> isSupported [
 	"I can not be used as one of the default Bloc host because I require users to provide containerMorph"
 
 	^ false
-]
-
-{ #category : #printing }
-BlMorphicHost class >> label [
-
-	^ 'Morphic - Embedded'
 ]
 
 { #category : #'driver selection' }
@@ -60,14 +54,25 @@ BlMorphicHost >> initialize [
 	containerMorph := Morph new
 ]
 
-{ #category : #private }
+{ #category : #testing }
+BlMorphicHost >> isSupported [
+
+	^ containerMorph isNotNil and: [ containerMorph isInWorld ]
+]
+
+{ #category : #accessing }
+BlMorphicHost >> label [
+
+	^ 'Morphic - Embedded'
+]
+
+{ #category : #'host - api' }
 BlMorphicHost >> newHostSpaceFor: aSpace [
 
 	^ BlMorphicHostSpace new
 		spaceHostMorph: (self newSpaceHostMorphFor: aSpace);
 		space: aSpace;
 		host: self;
-		universe: self universe;
 		renderer: self newHostRenderer;
 		yourself
 ]
@@ -78,4 +83,14 @@ BlMorphicHost >> newSpaceHostMorphFor: aSpace [
 	^ BlMorphicSpaceHostMorph new
 		extent: aSpace extent;
 		yourself
+]
+
+{ #category : #printing }
+BlMorphicHost >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		print: containerMorph;
+		nextPut: $)
 ]

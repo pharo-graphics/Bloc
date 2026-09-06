@@ -1,8 +1,7 @@
 Class {
 	#name : #BlScrollBarTest,
-	#superclass : #BlParameterizedHostTest,
+	#superclass : #BlSpaceTestCase,
 	#instVars : [
-		'space',
 		'largeElement',
 		'scrollableElement',
 		'hBar',
@@ -13,19 +12,11 @@ Class {
 }
 
 { #category : #running }
-BlScrollBarTest >> dragOn: anElement byAll: aSequenceOfDeltas [
-
-	BlSpace simulateDragOn: anElement byAll: aSequenceOfDeltas.
-	self waitTestingSpaces
-]
-
-{ #category : #running }
 BlScrollBarTest >> setUp [
 
 	| largeExtent gap |
 	super setUp.
 
-	space := self newTestingSpace.
 	space title: testSelector asString.
 	
 	gap := 5.
@@ -76,27 +67,26 @@ BlScrollBarTest >> setUp [
 				c vertical matchParent ];
 			yourself.
 
-	space root
-		layout: BlLinearLayout new;
-		padding: (BlInsets all: gap);
-		background: Color green;
-		addChild: scrollPane.
-	space extent: 100 asPoint.
-"	space show."
-	self waitTestingSpaces
+	space deferAndSettle: [
+		space root
+			layout: BlLinearLayout new;
+			padding: (BlInsets all: gap);
+			background: Color green;
+			addChild: scrollPane.
+		space extent: 100 asPoint ]
 ]
 
 { #category : #tests }
 BlScrollBarTest >> testHorizontalDragThumbBeyondBounds [
 
 	"Increase offset by a small distance"
-	self dragOn: hBar thumb byAll: { 10 asPoint }.
+	hBar thumb eventSimulator dragByAll: { 10 asPoint }.
 	self
 		assert: scrollableElement computeHorizontalScrollOffset
 		equals: 25.
 
 	"Increase offset to max offset"
-	self dragOn: hBar thumb byAll: { scrollableElement extent * 2 }.
+	hBar thumb eventSimulator dragByAll: { scrollableElement extent * 2 }.
 	self
 		assert: scrollableElement computeHorizontalScrollOffset
 		equals: 120
@@ -106,11 +96,9 @@ BlScrollBarTest >> testHorizontalDragThumbBeyondBounds [
 { #category : #tests }
 BlScrollBarTest >> testHorizontalDragThumbReturn [
 
-	self
-		dragOn: hBar thumb
-		byAll: {
-			scrollableElement extent * 2.
-			-10 asPoint }.
+	hBar thumb eventSimulator dragByAll: {
+		scrollableElement extent * 2.
+		-10 asPoint }.
 	self
 		assert: scrollableElement computeHorizontalScrollOffset
 		equals: 120
@@ -132,13 +120,13 @@ BlScrollBarTest >> testHorizontalScrollInitialValues [
 BlScrollBarTest >> testVerticalDragThumbBeyondBounds [
 
 	"Increase offset by a small distance"
-	self dragOn: vBar thumb byAll: { 10 asPoint }.
+	vBar thumb eventSimulator dragByAll: { 10 asPoint }.
 	self
 		assert: scrollableElement computeVerticalScrollOffset
 		equals: 50.
 
 	"Increase offset to max offset"
-	self dragOn: vBar thumb byAll: { scrollableElement extent * 2 }.
+	vBar thumb eventSimulator dragByAll: { scrollableElement extent * 2 }.
 	self
 		assert: scrollableElement computeVerticalScrollOffset
 		equals: 300
@@ -147,11 +135,10 @@ BlScrollBarTest >> testVerticalDragThumbBeyondBounds [
 { #category : #tests }
 BlScrollBarTest >> testVerticalDragThumbReturn [
 
-	self
-		dragOn: vBar thumb
-		byAll: {
-			scrollableElement extent * 2.
-			-10 asPoint }.
+	vBar thumb eventSimulator dragByAll: {
+		scrollableElement extent * 2.
+		-10 asPoint }.
+
 	self
 		assert: scrollableElement computeVerticalScrollOffset
 		equals: 300

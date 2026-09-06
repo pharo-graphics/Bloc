@@ -175,6 +175,14 @@ BlBaseAnimation >> isRunning [
 ]
 
 { #category : #testing }
+BlBaseAnimation >> isSettled [
+	"Return true if this animation is considered settled.
+	Infinite animations run perpetually and are considered settled so they do not block space settlement."
+
+	^ self isInfinite
+]
+
+{ #category : #testing }
 BlBaseAnimation >> isStarted [
 
 	^ isStarted

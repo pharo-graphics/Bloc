@@ -11,7 +11,7 @@ Class {
 BlOSSDL3HostTest >> testKeyMapping [
 
 	| table |
-	table := BlOSSDL3Host new keyboardKeyTable.
+	table := BlOSSDL3Host default keyboardKeyTable.
 	
 	self assert: (table keyFromVirtualCode: SDLK_A) equals: KeyboardKey A.
 	self assert: (table keyFromVirtualCode: SDLK_RETURN) equals: KeyboardKey enter.
@@ -25,7 +25,7 @@ BlOSSDL3HostTest >> testKeyMapping [
 BlOSSDL3HostTest >> testNewAttributesForSpace [
 
 	| host space attributes |
-	host := BlOSSDL3Host new.
+	host := BlOSSDL3Host default.
 	space := BlSpace new.
 	space title: 'Test Window'.
 	space extent: 800@600.
@@ -40,7 +40,7 @@ BlOSSDL3HostTest >> testNewAttributesForSpace [
 BlOSSDL3HostTest >> testNewHostSpaceFor [
 
 	| host space hostSpace |
-	host := BlOSSDL3Host new.
+	host := BlOSSDL3Host default.
 	space := BlSpace new.
 	hostSpace := host newHostSpaceFor: space.
 	
@@ -60,7 +60,7 @@ BlOSSDL3HostTest >> testUseSDL3Host [
 	host := space host.
 	host start.
 	self assert: host isRunning.
-	self assert: host class label equals: 'SDL3'.
+	self assert: host label equals: 'SDL3'.
 	self assert: host class priority equals: 10.
 	self assert: host class isSupported.
 ]

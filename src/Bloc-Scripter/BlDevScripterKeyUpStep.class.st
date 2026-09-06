@@ -11,6 +11,9 @@ BlDevScripterKeyUpStep >> defaultLabel [
 
 { #category : #actions }
 BlDevScripterKeyUpStep >> playOn: aScripter [
-	BlSpace simulateKeyUpOn: aScripter element key: self key.
-	aScripter pulse
+	| aTarget |
+
+	aTarget := self target findTargetStartingInScripter: aScripter.
+	aTarget eventSimulator keyUp: self key.
+	aScripter settle
 ]

@@ -3,7 +3,9 @@ I am a host that opens spaces as windows in the Morphic World.
 "
 Class {
 	#name : #BlMorphicWindowHost,
-	#superclass : #BlMorphicSteppingHost,
+	#superclass : #BlPulseLoopHost,
+	#traits : 'TBlSingletonHost',
+	#classTraits : 'TBlSingletonHost classTrait',
 	#category : #'BlocHost-Morphic-Window'
 }
 
@@ -13,26 +15,25 @@ BlMorphicWindowHost class >> isSupported [
 	^ UIManager default className = #MorphicUIManager
 ]
 
-{ #category : #printing }
-BlMorphicWindowHost class >> label [
-
-	^ 'Morphic'
-]
-
 { #category : #'driver selection' }
 BlMorphicWindowHost class >> priority [
 
 	^ 20
 ]
 
-{ #category : #private }
+{ #category : #accessing }
+BlMorphicWindowHost >> label [
+
+	^ 'Morphic'
+]
+
+{ #category : #'host - api' }
 BlMorphicWindowHost >> newHostSpaceFor: aSpace [
 
 	^ BlMorphicWindowHostSpace new
 		morphicWindow: (self newMorphicWindowFor: aSpace);
 		space: aSpace;
 		host: self;
-		universe: self universe;
 		renderer: self newHostRenderer;
 		yourself
 ]
