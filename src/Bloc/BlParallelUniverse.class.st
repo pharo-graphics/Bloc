@@ -141,7 +141,7 @@ BlParallelUniverse >> detachSpaceSynchronously: aSpace [
 ]
 
 { #category : #'deferred message' }
-BlParallelUniverse >> evaluateDeferred [
+BlParallelUniverse >> evaluateDeferredActions [
 
 	| nextInQueue |
 	[ (nextInQueue := deferredActions nextOrNil) isNotNil ]
@@ -302,7 +302,7 @@ BlParallelUniverse >> pulse [
 	isPulsing := true.
 	[
 		[
-			self evaluateDeferred.
+			self evaluateDeferredActions.
 			spaces do: [ :eachSpace | eachSpace basicPulse ]
 		] 
 			on: Exception 
@@ -420,19 +420,20 @@ BlParallelUniverse >> stopUniverse [
 BlParallelUniverse >> tryToRunDeferredActions [
 
 	self
-		deprecated: 'Use #evaluateDeferred instead'
-		transformWith: '`@receiver tryToRunDeferredActions' -> '`@receiver evaluateDeferred'.
+		deprecated: 'Use #evaluateDeferredActions instead'
+		transformWith: '`@receiver tryToRunDeferredActions' -> '`@receiver evaluateDeferredActions'.
 
-	^ self evaluateDeferred
+	^ self evaluateDeferredActions
 ]
 
 { #category : #'deferred message' }
 BlParallelUniverse >> tryToRunPostponedActions [
-	self
-		deprecated: 'Use #evaluateDeferred instead'
-		transformWith: '`@receiver tryToRunPostponedActions' -> '`@receiver evaluateDeferred'.
 
-	^ self evaluateDeferred
+	self
+		deprecated: 'Use #evaluateDeferredActions instead'
+		transformWith: '`@receiver tryToRunPostponedActions' -> '`@receiver evaluateDeferredActions'.
+
+	^ self evaluateDeferredActions
 ]
 
 { #category : #'api - pulse process' }

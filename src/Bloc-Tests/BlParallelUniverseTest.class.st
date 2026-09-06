@@ -20,7 +20,7 @@ BlParallelUniverseTest >> testErrorDuringPulseSignal [
 ]
 
 { #category : #tests }
-BlParallelUniverseTest >> testEvaluateDeferred [
+BlParallelUniverseTest >> testEvaluateDeferredActions [
 
 	| aUniverse evaluated |
 	aUniverse := BlParallelUniverse new.
@@ -29,7 +29,7 @@ BlParallelUniverseTest >> testEvaluateDeferred [
 	self assert: aUniverse hasDeferredActions.
 	self deny: aUniverse isSettled.
 
-	aUniverse evaluateDeferred.
+	aUniverse evaluateDeferredActions.
 	self assert: evaluated.
 	self deny: aUniverse hasDeferredActions.
 	self assert: aUniverse isSettled
