@@ -4,26 +4,6 @@ Class {
 	#category : #'Bloc-Tests-Universe'
 }
 
-{ #category : #tests }
-BlParallelUniverseTest >> testSnapshotAndQuit [
-
-	| aSpace universe |
-	aSpace := BlSpace new
-		host: BlHeadlessHost default;
-		yourself.
-	universe := aSpace host universe.
-	[
-		universe snapshot: false andQuit: false.
-		self assert: universe hasDeferredActions.
-		self deny: universe isSettled.
-
-		aSpace settle.
-		self deny: universe hasDeferredActions.
-		self assert: universe isSettled
-	] ensure: [
-		aSpace close.
-		aSpace settle ]
-]
 
 { #category : #tests }
 BlParallelUniverseTest >> testErrorDuringPulseSignal [
