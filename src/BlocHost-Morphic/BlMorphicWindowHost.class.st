@@ -21,13 +21,13 @@ BlMorphicWindowHost class >> priority [
 	^ 20
 ]
 
-{ #category : #printing }
+{ #category : #accessing }
 BlMorphicWindowHost >> label [
 
 	^ 'Morphic'
 ]
 
-{ #category : #private }
+{ #category : #'host - api' }
 BlMorphicWindowHost >> newHostSpaceFor: aSpace [
 
 	^ BlMorphicWindowHostSpace new

@@ -91,18 +91,18 @@ BlHost class >> supportedHostClasses [
 ]
 
 { #category : #'api - spaces' }
+BlHost >> closeSpace: aSpace [
+
+	self defer: [ self universe closeSpace: aSpace ]
+]
+
+{ #category : #'api - spaces' }
 BlHost >> closeSpaces [
 	"Close all spaces managed by this host."
 
 	self hasUniverse ifTrue: [
 		self universe closeSpaces.
 		self stop ]
-]
-
-{ #category : #'api - spaces' }
-BlHost >> closeSpace: aSpace [
-
-	self defer: [ self universe closeSpace: aSpace ]
 ]
 
 { #category : #'api - ui process' }
@@ -226,6 +226,13 @@ BlHost >> pulseProcessDo: aBlock [
 	^ self pulseProcess ifNotNil: aBlock
 ]
 
+{ #category : #'host space - accessing' }
+BlHost >> spaces [
+	"Answer the collection of spaces managed by this host."
+
+	^ self universe spaces
+]
+
 { #category : #'api - lifecycle' }
 BlHost >> start [
 
@@ -246,13 +253,6 @@ BlHost >> uiProcessDo: aBlock [
 		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
 
 	^ self pulseProcess ifNotNil: aBlock
-]
-
-{ #category : #'host space - accessing' }
-BlHost >> spaces [
-	"Answer the collection of spaces managed by this host."
-
-	^ self universe spaces
 ]
 
 { #category : #'host space - accessing' }

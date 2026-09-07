@@ -60,13 +60,13 @@ BlMorphicHost >> isSupported [
 	^ containerMorph isNotNil and: [ containerMorph isInWorld ]
 ]
 
-{ #category : #printing }
+{ #category : #accessing }
 BlMorphicHost >> label [
 
 	^ 'Morphic - Embedded'
 ]
 
-{ #category : #private }
+{ #category : #'host - api' }
 BlMorphicHost >> newHostSpaceFor: aSpace [
 
 	^ BlMorphicHostSpace new

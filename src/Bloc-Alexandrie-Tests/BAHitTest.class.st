@@ -31,7 +31,7 @@ BAHitTest class >> inspectMismatches [
 	super inspectMismatches
 ]
 
-{ #category : #tests }
+{ #category : #hooks }
 BAHitTest >> actualForm [
 
 	^ self hitFormFor: formSelector

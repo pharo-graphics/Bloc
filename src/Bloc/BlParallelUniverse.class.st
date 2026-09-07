@@ -98,7 +98,6 @@ BlParallelUniverse >> defer: aValuable [
 	deferredActions nextPut: aValuable
 ]
 
-
 { #category : #'api - spaces' }
 BlParallelUniverse >> detachSpace: aSpace [
 

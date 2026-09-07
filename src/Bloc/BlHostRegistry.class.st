@@ -49,7 +49,7 @@ BlHostRegistry class >> settingsOn: aBuilder [
 		description: 'Choose the option that spaces will use to open, unless they have a particular host.'.
 ]
 
-{ #category : #'class initialization' }
+{ #category : #'system startup' }
 BlHostRegistry class >> shutDown: isQuitting [
 
 	default ifNotNil: [ :registry |
@@ -57,7 +57,7 @@ BlHostRegistry class >> shutDown: isQuitting [
 			eachHost hasUniverse ifTrue: [ eachHost universe stop ] ] ]
 ]
 
-{ #category : #'class initialization' }
+{ #category : #'system startup' }
 BlHostRegistry class >> startUp: isResuming [
 
 	default ifNotNil: [ :registry |
@@ -77,7 +77,6 @@ BlHostRegistry >> availableHosts [
 
 	^ availableHosts
 ]
-
 
 { #category : #'api - lifecycle' }
 BlHostRegistry >> closeSpaces [

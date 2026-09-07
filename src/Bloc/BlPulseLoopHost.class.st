@@ -56,7 +56,7 @@ BlPulseLoopHost >> pulseProcess [
 	^ pulseLoop pulseProcess
 ]
 
-{ #category : #'api - pulse process' }
+{ #category : #enumerating }
 BlPulseLoopHost >> pulseProcessDo: aBlock [
 	"Evaluate aBlock with the running pulse Process of this host if any"
 
@@ -79,7 +79,7 @@ BlPulseLoopHost >> stop [
 	pulseLoop stop
 ]
 
-{ #category : #'api - pulse process' }
+{ #category : #enumerating }
 BlPulseLoopHost >> uiProcessDo: aBlock [
 
 	self

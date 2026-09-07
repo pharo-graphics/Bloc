@@ -33,7 +33,6 @@ Bloc class >> availableHosts [
 	^ self hostRegistry availableHosts
 ]
 
-
 { #category : #'host - accessing' }
 Bloc class >> closeSpaces [
 	"Close all spaces across all active hosts in the system."

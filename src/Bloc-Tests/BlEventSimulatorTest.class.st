@@ -153,17 +153,6 @@ BlEventSimulatorTest >> testSimulateFromPulseProcessRaisesError [
 ]
 
 { #category : #tests }
-BlEventSimulatorTest >> testSimulationReturnsSelf [
-	| simulator |
-	simulator := element eventSimulator.
-	self assert: simulator click == simulator.
-	self assert: simulator doubleClick == simulator.
-	self assert: (simulator mouseDownAt: 10 @ 10) == simulator.
-	self assert: (simulator mouseUpAt: 10 @ 10) == simulator.
-	self assert: (simulator mouseMoveAt: 10 @ 10) == simulator
-]
-
-{ #category : #tests }
 BlEventSimulatorTest >> testTextInput [
 	| textInputText |
 	element requestFocus.

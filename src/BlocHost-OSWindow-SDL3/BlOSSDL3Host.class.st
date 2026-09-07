@@ -15,12 +15,6 @@ BlOSSDL3Host class >> isSupported [
 	^ OSWindowDriver current className = #OSSDL3Driver
 ]
 
-{ #category : #printing }
-BlOSSDL3Host >> label [
-
-	^ 'SDL3'
-]
-
 { #category : #'driver selection' }
 BlOSSDL3Host class >> priority [
 	
@@ -31,6 +25,12 @@ BlOSSDL3Host class >> priority [
 BlOSSDL3Host >> keyboardKeyTable [
 
 	^ BlOSSDL3KeyTable default
+]
+
+{ #category : #accessing }
+BlOSSDL3Host >> label [
+
+	^ 'SDL3'
 ]
 
 { #category : #private }

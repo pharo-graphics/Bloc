@@ -4,7 +4,6 @@ Class {
 	#category : #'Bloc-Tests-Universe'
 }
 
-
 { #category : #tests }
 BlParallelUniverseTest >> testErrorDuringPulseSignal [
 

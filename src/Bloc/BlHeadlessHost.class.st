@@ -9,7 +9,7 @@ Class {
 	#category : #'Bloc-Universe - Host Headless'
 }
 
-{ #category : #testing }
+{ #category : #'driver selection' }
 BlHeadlessHost class >> isSupported [
 	"Headless host requires no display server or window manager and is always supported."
 

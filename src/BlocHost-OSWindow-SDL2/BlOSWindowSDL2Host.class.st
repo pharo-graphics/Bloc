@@ -27,7 +27,7 @@ BlOSWindowSDL2Host >> keyboardKeyTable [
 	^ BlOSWindowSDL2KeyboardKeyTable default
 ]
 
-{ #category : #printing }
+{ #category : #accessing }
 BlOSWindowSDL2Host >> label [
 
 	^ 'SDL2'

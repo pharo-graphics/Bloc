@@ -30,6 +30,21 @@ BlHostPulseLoop class >> host: aBlHost [
 		yourself
 ]
 
+{ #category : #lifecycle }
+BlHostPulseLoop >> basicStart [
+	"Start a new loop process unguardedly without checking if already running."
+
+	self basicStart: self newLoopProcess
+]
+
+{ #category : #lifecycle }
+BlHostPulseLoop >> basicStart: aProcess [
+	"Install and resume the given loop process unguardedly."
+
+	loopProcess := aProcess.
+	loopProcess resume
+]
+
 { #category : #debug }
 BlHostPulseLoop >> forceStartNewUIProcess [
 
@@ -153,21 +168,6 @@ BlHostPulseLoop >> pulsePeriod: aDuration [
 BlHostPulseLoop >> pulseProcess [
 
 	^ loopProcess
-]
-
-{ #category : #lifecycle }
-BlHostPulseLoop >> basicStart [
-	"Start a new loop process unguardedly without checking if already running."
-
-	self basicStart: self newLoopProcess
-]
-
-{ #category : #lifecycle }
-BlHostPulseLoop >> basicStart: aProcess [
-	"Install and resume the given loop process unguardedly."
-
-	loopProcess := aProcess.
-	loopProcess resume
 ]
 
 { #category : #lifecycle }
