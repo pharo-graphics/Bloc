@@ -12,7 +12,6 @@ Class {
 	#instVars : [
 		'host',
 		'space',
-		'universe',
 		'renderer'
 	],
 	#category : #'Bloc-Universe - Host'
@@ -39,26 +38,38 @@ BlHostSpace >> densityDpi [
 ]
 
 { #category : #'host space - events' }
-BlHostSpace >> enqueueEvent: aBlEvent [
-	"I dispatch events directly to the universe or space as soon as they come"
+BlHostSpace >> dequeuedEvents [
 
-	aBlEvent isUniverseEvent
-		ifTrue: [ ^ self universe dispatchEvent: aBlEvent ].
+	self
+		deprecated: 'Use aSpace dequeuedEvents instead'
+		transformWith: '`@receiver dequeuedEvents' -> '`@receiver space dequeuedEvents'.
 
-	aBlEvent isSpaceEvent
-		ifTrue: [ ^ self space dispatchEvent: aBlEvent ].
-
-	self space dispatchEvent: aBlEvent
+	^ self space
+		ifNotNil: [ :aSpace | aSpace dequeuedEvents ]
+		ifNil: [ #() ]
 ]
 
 { #category : #'host space - events' }
-BlHostSpace >> fetchedEventsDo: aBlock [
-	"Flush event queue and evaluate a given block with every queued event as argument"
+BlHostSpace >> enqueueEvent: aBlEvent [
+
+	self space ifNotNil: [ :aSpace | aSpace enqueueEvent: aBlEvent ]
 ]
 
 { #category : #'host space - events' }
 BlHostSpace >> generateEvents [
 	"Generate more complex state change events such as window scale event when resolution of the screen changes"
+]
+
+{ #category : #'host space - events' }
+BlHostSpace >> hasEvents [
+
+	self
+		deprecated: 'Use aSpace hasEvents instead'
+		transformWith: '`@receiver hasEvents' -> '`@receiver space hasEvents'.
+
+	^ self space
+		ifNotNil: [ :aSpace | aSpace hasEvents ]
+		ifNil: [ false ]
 ]
 
 { #category : #'host space - testing' }
@@ -82,6 +93,12 @@ BlHostSpace >> host: aBlHost [
 	"Assign a host that was used to create this host space"
 	
 	host := aBlHost
+]
+
+{ #category : #initialization }
+BlHostSpace >> initialize [
+
+	super initialize
 ]
 
 { #category : #initialization }
@@ -227,8 +244,7 @@ BlHostSpace >> tearDown [
 
 	self close.
 	space := nil.
-	host := nil.
-	universe := nil
+	host := nil
 ]
 
 { #category : #'host space - displaying' }
@@ -246,13 +262,15 @@ BlHostSpace >> toFront [
 { #category : #'host space - accessing' }
 BlHostSpace >> universe [
 
-	^ universe
+	^ self host ifNotNil: [ :h | h universe ]
 ]
 
 { #category : #'host space - accessing' }
-BlHostSpace >> universe: aBlParallelUniverse [
+BlHostSpace >> universe: aBlUniverse [
 
-	universe := aBlParallelUniverse
+	self
+		deprecated: 'HostSpace derives universe from host'
+		transformWith: '`@receiver universe: `@arg' -> '`@receiver host: `@arg host'.
 ]
 
 { #category : #'host space - geometry' }

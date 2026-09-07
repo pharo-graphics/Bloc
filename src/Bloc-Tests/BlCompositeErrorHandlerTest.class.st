@@ -36,29 +36,32 @@ BlCompositeErrorHandlerTest >> testAddErrorHandlers [
 { #category : #tests }
 BlCompositeErrorHandlerTest >> testErrors [
 
-	| handler errors |
-	handler := BlCompositeErrorHandler withAll: { BlDrawingErrorHandler new }.
+	| handler errors mockHandler |
+	mockHandler := BlMockErrorHandler new.
+	handler := BlCompositeErrorHandler withAll: { mockHandler }.
 	
 	self deny: handler hasError.
 	self assert: handler errors isEmpty.
 	
 	handler
 		with: BlElement new
-		do: [ 1/0 ]
+		do: [ 1 / 0 ]
 		failed: [ :aCollection | errors := aCollection ].
 
 	self assert: handler hasError.
 	self assert: handler errors size equals: 1.
 	self assert: handler errors equals: errors.
+	self assert: mockHandler handledErrors size equals: 1.
 
 	handler
 		with: BlElement new
-		do: [ 1/0 ]
+		do: [ 1 / 0 ]
 		failed: [ :aCollection | errors := aCollection ].
 
 	self assert: handler hasError.
 	self assert: handler errors size equals: 2.
 	self assert: handler errors equals: errors.
+	self assert: mockHandler handledErrors size equals: 2
 ]
 
 { #category : #tests }

@@ -5,8 +5,6 @@ I am a Bloc host space to control Morphic window.
 Class {
 	#name : #BlMorphicWindowHostSpace,
 	#superclass : #BlAbstractMorphicHostSpace,
-	#traits : 'TBlSpaceProperties',
-	#classTraits : 'TBlSpaceProperties classTrait',
 	#instVars : [
 		'morphicWindow',
 		'isFullSize',
@@ -32,6 +30,8 @@ BlMorphicWindowHostSpace >> center [
 { #category : #'host space - displaying' }
 BlMorphicWindowHostSpace >> close [
 
+	morphicWindow ifNil: [ ^ self ].
+	self spaceHostMorph ifNotNil: [ :morph | morph hostSpace: nil ].
 	morphicWindow close
 ]
 
@@ -220,7 +220,8 @@ BlMorphicWindowHostSpace >> show [
 	
 	anExtent := morphicWindow extent.
 	morphicWindow openInWorld.
-	morphicWindow extent: anExtent
+	morphicWindow extent: anExtent.
+	morphicWindow fullBounds."Force morphic layout to avoid 0@0 spaceExtent race condition"
 ]
 
 { #category : #'private - accessing' }

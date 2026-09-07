@@ -26,10 +26,19 @@ BlExamplesTest class >> testSelectors [
 { #category : #private }
 BlExamplesTest >> performTest [ 
 
-	| testMethod |
+	| testMethod result |
 	testMethod := self class methodNamed: testSelector asSymbol.
 	(testMethod hasPragmaNamed: #noTest)
 		ifTrue: [ self skip ].
 
-	^ super performTest
+	result := self perform: testSelector asSymbol.
+	result class = BlSpace
+		ifTrue: [ result close; settle ]
+		ifFalse: [
+			((result isKindOf: BlElement) and: [ result isAttachedToSceneGraph ]) ifTrue: [
+				| sp |
+				sp := result space.
+				result removeFromParent.
+				sp close; settle ] ].
+	^ result
 ]

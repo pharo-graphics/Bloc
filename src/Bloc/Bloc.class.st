@@ -26,6 +26,20 @@ Bloc class >> assertionsEnabled: aBoolean [
 	AssertionsEnabled := aBoolean
 ]
 
+{ #category : #'host - accessing' }
+Bloc class >> availableHosts [
+	"Answer all available host instances currently registered in the system."
+
+	^ self hostRegistry availableHosts
+]
+
+{ #category : #'host - accessing' }
+Bloc class >> closeSpaces [
+	"Close all spaces across all active hosts in the system."
+
+	self hostRegistry closeSpaces
+]
+
 { #category : #debugging }
 Bloc class >> debugModeEnabled [
 	^ DebugModeEnabled ifNil: [ false ]
@@ -73,6 +87,13 @@ Bloc class >> groupSymbolForBloc [
 	^ 	#Bloc
 ]
 
+{ #category : #'host - accessing' }
+Bloc class >> hostRegistry [
+	"Answer the default host registry."
+
+	^ BlHostRegistry default
+]
+
 { #category : #children }
 Bloc class >> preferableChildrenDataStructure [
 	"Answer a `BlChildrenCollection class`."
@@ -116,6 +137,13 @@ Bloc class >> preferencesOn: aBuilder [
 				description: 'Set enabled to turn extensive debugging mode on or disable to turn it off';
 				default: [ false ].
 		]
+]
+
+{ #category : #'host - accessing' }
+Bloc class >> preferredHost [
+	"Answer the preferred host instance."
+
+	^ self hostRegistry preferredHost
 ]
 
 { #category : #'world menu items' }

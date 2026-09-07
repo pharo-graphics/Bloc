@@ -112,10 +112,7 @@ BlSpaceBuilder >> buildSpace [
 		host: host;
 		extent: spaceExtent.
 
-	self flag: #todo. "Hacky way to prepare stuff without showing the space:"
-	space root
-		extent: spaceExtent;
-		forceLayout.
+	space root extent: spaceExtent.
 ]
 
 { #category : #accessing }
@@ -137,7 +134,7 @@ BlSpaceBuilder >> initialize [
 	
 	space := BlSpace new.
 	spaceExtent := 100 asPoint.
-	host := BlOSWindowSDL2Host new.
+	host := BlHeadlessHost default.
 
 	colorGenerator := self newColorGenerator.
 	alphabetGenerator := self newAlphabetGenerator

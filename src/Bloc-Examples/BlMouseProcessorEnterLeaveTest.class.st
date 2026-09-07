@@ -107,10 +107,10 @@ BlMouseProcessorEnterLeaveTest >> testMouseLeaveDueToRemovalFromScene [
 			onSelf ].
 
 	scripter
-		substeps: 'Pulse one time to generate mouse leave events'
+		substeps: 'Wait for pending work to generate mouse leave events'
 		do: [ :aStep |
 			aStep do
-				block: [ :theScripter | theScripter pulse ];
+				block: [ :theScripter | theScripter settle ];
 				onScripter ].
 
 	scripter substeps: 'Check that events are fired' do: [ :aStep |

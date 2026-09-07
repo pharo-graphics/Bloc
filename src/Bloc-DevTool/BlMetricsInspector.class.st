@@ -39,7 +39,7 @@ BlMetricsInspector >> extentTextFor: aPoint [
 
 { #category : #initialization }
 BlMetricsInspector >> for: anElement [	
-	anElement forceLayout.
+	anElement isAttachedToSceneGraph ifTrue: [ anElement space settle ].
 	self updateMetrics: anElement
 ]
 

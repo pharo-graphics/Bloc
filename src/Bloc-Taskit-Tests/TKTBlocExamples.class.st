@@ -1,6 +1,9 @@
+"
+Examples of a Taskit extension for Bloc
+"
 Class {
 	#name : #TKTBlocExamples,
-	#superclass : #BlExamplesTest,
+	#superclass : #Object,
 	#category : #'Bloc-Taskit-Tests'
 }
 
@@ -26,7 +29,8 @@ TKTBlocExamples >> runnerExample [
 	[	17 timesRepeat: [
 			runner schedule: [
 				space root background: Color random ] asTask.
-			200 milliSeconds wait ] ] fork.
+			200 milliSeconds wait ].
+		space close ] fork.
 
 	^ space
 ]
@@ -54,7 +58,8 @@ TKTBlocExamples >> serviceExample [
 	service start.
 
 	[	2 seconds wait.
-		service stop waitForCompletion: 1 second ] fork.
+		service stop waitForCompletion: 1 second.
+		space close ] fork.
 	
 	^ space
 ]

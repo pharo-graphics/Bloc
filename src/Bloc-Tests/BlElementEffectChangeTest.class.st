@@ -7,25 +7,22 @@ Class {
 { #category : #tests }
 BlElementEffectChangeTest >> testShadowOffsetChangesInvalidationBounds [
 
-	| aSpace anElement |
-	aSpace := BlSpace new.
+	| anElement |
 	anElement := BlElement new.
 	anElement extent: 100 @ 200.
-	aSpace root addChild: anElement.
+	anElement forceLayout.
 
 	anElement effect: (BlSimpleShadowEffect
 		color: Color red
 		offset: 10 @ 20).
-	aSpace pulse.
-	
+
 	self
 		assert: anElement invalidationBounds
 		equals: ((0.0 @ 0.0) corner: (110.0 @ 220.0)).
-		
+
 	anElement effect: (BlSimpleShadowEffect
 		color: Color green
 		offset: -10 @ -20).
-	aSpace pulse.
 
 	self
 		assert: anElement invalidationBounds

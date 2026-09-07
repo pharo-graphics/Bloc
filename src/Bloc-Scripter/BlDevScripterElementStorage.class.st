@@ -61,5 +61,5 @@ BlDevScripterElementStorage >> storeFrom: aTarget scripter: aScripter [
 		assert: [ anElement isKindOf: BlElement ] 
 		description: [ 'An element must be stored' ].
 	aScripter element: anElement.
-	aScripter pulse.
+	aScripter settle.
 ]

@@ -19,7 +19,9 @@ Class {
 { #category : #'class initialization' }
 BAOffscreen class >> initialize [
 
-	SessionManager default registerUserClassNamed: self name
+	SessionManager default
+		registerGuiClassNamed: self name
+		atPriority: 150
 ]
 
 { #category : #accessing }

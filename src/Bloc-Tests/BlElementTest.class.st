@@ -116,14 +116,21 @@ BlElementTest >> newVisibleElement [
 	^ self newElement
 ]
 
-{ #category : #initialization }
+{ #category : #running }
 BlElementTest >> setUp [
 
 	super setUp.
 
-	host := BlMockedHost new.
+	host := BlHeadlessHost default.
 	space := BlSpace new.
 	space host: host
+]
+
+{ #category : #running }
+BlElementTest >> tearDown [
+
+	space close.
+	super tearDown
 ]
 
 { #category : #'api - children enumeration' }
@@ -341,6 +348,38 @@ BlElementTest >> testDefault [
 	self assert: element extent equals: 0 @ 0
 ]
 
+{ #category : #tests }
+BlElementTest >> testForceLayout [
+
+	| element child |
+	element := BlElement new.
+	element layout: BlLinearLayout horizontal.
+	element constraintsDo: [ :c |
+		c horizontal fitContent.
+		c vertical fitContent ].
+	child := BlElement new extent: 80 @ 40.
+	element addChild: child.
+
+	self deny: element isAttachedToSceneGraph.
+	self assert: element isLayoutRequested.
+
+	element forceLayout.
+
+	self deny: element isLayoutRequested.
+	self assert: child position equals: 0 @ 0.
+	self assert: element extent equals: 80 @ 40
+]
+
+{ #category : #tests }
+BlElementTest >> testForceLayoutOnAttachedElementErrors [
+
+	| element |
+	element := BlElement new.
+	element inNewHeadlessSpaceDo: [ :sp |
+		self assert: element isAttachedToSceneGraph.
+		self should: [ element forceLayout ] raise: Error ]
+]
+
 { #category : #'focus testing' }
 BlElementTest >> testHasFocus [
 
@@ -409,6 +448,45 @@ BlElementTest >> testIdConstructor [
 	element := BlElement id: #anId.
 	
 	self assert: element id equals: #anId.
+]
+
+{ #category : #tests }
+BlElementTest >> testInNewHeadlessSpaceDo [
+
+	| element executed capturedSpace capturedProcess result senderProcess |
+	element := BlElement new.
+	element extent: 100 @ 50.
+	executed := false.
+	senderProcess := Processor activeProcess.
+
+	self deny: element isAttachedToSceneGraph.
+
+	result := element inNewHeadlessSpaceDo: [ :sp |
+		executed := true.
+		capturedSpace := sp.
+		capturedProcess := Processor activeProcess.
+		self assert: element isAttachedToSceneGraph.
+		self assert: element space equals: sp.
+		self assert: sp isOpened.
+		self assert: sp host equals: BlHeadlessHost default.
+		#blockResult ].
+
+	self assert: executed.
+	self assert: capturedProcess equals: senderProcess.
+	self assert: result equals: #blockResult.
+	self deny: element isAttachedToSceneGraph.
+	self deny: capturedSpace isOpened
+]
+
+{ #category : #tests }
+BlElementTest >> testInSpace [
+
+	| element aSpace |
+	element := BlElement new.
+	aSpace := element inSpace.
+	self assert: aSpace root children size equals: 1.
+	self assert: aSpace root children first equals: element.
+	self deny: aSpace isOpened
 ]
 
 { #category : #'focus testing' }

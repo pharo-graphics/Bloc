@@ -13,8 +13,8 @@ jobs:
       # Default value means that a failure in one OS cancels all 
       fail-fast: false
       matrix:
-        smalltalk: [ Pharo64-14, Pharo64-15 ]
-        os: [ macos-latest, windows-latest ]
+        smalltalk: [ Pharo64-13, Pharo64-14, Pharo64-15 ]
+        os: [ windows-latest ] # macos-latest See https://github.com/pharo-graphics/Bloc/issues/872
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.smalltalk }} on ${{ matrix.os }}
     steps:

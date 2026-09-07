@@ -218,34 +218,37 @@ BlLinearLayoutHorizontalTest >> testElementWithTwoMatchChildrenInExactParent [
 { #category : #tests }
 BlLinearLayoutHorizontalTest >> testOneChildSetVisibilityGone [
 
-	<sampleInstance>
-	<demo>
 	| aContainer aRed aBlue |
-	aContainer := BlElement new
-		              layout: (BlLinearLayout horizontal cellSpacing: 20);
-		              padding: (BlInsets top: 10 bottom: 10);
-		              extent: 500 @ 400.
-	aRed := BlElement new
-		        constraintsDo: [ :c |
-			        c horizontal matchParent.
-			        c vertical matchParent ];
-		        border: (BlBorder paint: Color red darker width: 1);
-		        background: (Color red alpha: 0.3).
-	aBlue := BlElement new
-		         constraintsDo: [ :c |
-			         c horizontal matchParent.
-			         c vertical matchParent ];
-		         border: (BlBorder paint: Color blue darker width: 1);
-		         background: (Color blue alpha: 0.3).
-	aContainer addChildren: {
-			aRed.
-			aBlue }.
+	aContainer :=
+		BlElement new
+			layout: (BlLinearLayout horizontal cellSpacing: 20);
+			padding: (BlInsets top: 10 bottom: 10);
+			extent: 500 @ 400;
+			yourself.
+	aRed :=
+		BlElement new
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical matchParent ];
+			border: (BlBorder paint: Color red darker width: 1);
+			background: (Color red alpha: 0.3);
+			yourself.
+	aBlue :=
+		BlElement new
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical matchParent ];
+			border: (BlBorder paint: Color blue darker width: 1);
+			background: (Color blue alpha: 0.3);
+			yourself.
+	aContainer addChildren: { aRed. aBlue }.
 	aContainer forceLayout.
 	self assert: aContainer extent equals: 500 @ 400.
 	self assert: aRed position equals: 20 @ 10.
 	self assert: aRed extent equals: 220 @ 380.
 	self assert: aBlue position equals: 260 @ 10.
 	self assert: aBlue extent equals: 220 @ 380.
+
 	aRed visibility: BlVisibility gone.
 	aContainer forceLayout.
 	self assert: aContainer extent equals: 500 @ 400.
@@ -253,8 +256,7 @@ BlLinearLayoutHorizontalTest >> testOneChildSetVisibilityGone [
 	self assert: aRed position equals: 20 @ 10.
 	self assert: aRed extent equals: 220 @ 380.
 	self assert: aBlue position equals: 20 @ 10.
-	self assert: aBlue extent equals: 460 @ 380.
-	^ aContainer
+	self assert: aBlue extent equals: 460 @ 380
 ]
 
 { #category : #tests }

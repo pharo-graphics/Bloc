@@ -3,35 +3,16 @@ I am a host that opens spaces as OSWindow SDL3 windows.
 "
 Class {
 	#name : #BlOSSDL3Host,
-	#superclass : #BlHost,
-	#classVars : [
-		'PulseLoop'
-	],
+	#superclass : #BlPulseLoopHost,
+	#traits : 'TBlSingletonHost',
+	#classTraits : 'TBlSingletonHost classTrait',
 	#category : #'BlocHost-OSWindow-SDL3'
 }
-
-{ #category : #'class initialization' }
-BlOSSDL3Host class >> initialize [
-
-	PulseLoop := BlHostPulseLoop forHost: self
-]
-
-{ #category : #'api - lifecycle' }
-BlOSSDL3Host class >> isRunning [
-
-	^ PulseLoop isRunning
-]
 
 { #category : #'driver selection' }
 BlOSSDL3Host class >> isSupported [
 
 	^ OSWindowDriver current className = #OSSDL3Driver
-]
-
-{ #category : #printing }
-BlOSSDL3Host class >> label [
-
-	^ 'SDL3'
 ]
 
 { #category : #'driver selection' }
@@ -40,41 +21,16 @@ BlOSSDL3Host class >> priority [
 	^ 10
 ]
 
-{ #category : #'api - lifecycle' }
-BlOSSDL3Host class >> pulsePeriod [
-
-	^ PulseLoop pulsePeriod
-]
-
-{ #category : #'api - lifecycle' }
-BlOSSDL3Host class >> pulsePeriod: aDuration [
-
-	PulseLoop pulsePeriod: aDuration
-]
-
-{ #category : #'api - lifecycle' }
-BlOSSDL3Host class >> start [
-
-	PulseLoop start
-]
-
-{ #category : #'api - lifecycle' }
-BlOSSDL3Host class >> stop [
-
-	PulseLoop stop
-]
-
-{ #category : #'api - ui process' }
-BlOSSDL3Host class >> uiProcessDo: aBlock [
-	"Evaluate aBlock with the running UI Process of this host if any"
-	
-	PulseLoop loopProcess ifNotNil: aBlock
-]
-
 { #category : #initialization }
 BlOSSDL3Host >> keyboardKeyTable [
 
 	^ BlOSSDL3KeyTable default
+]
+
+{ #category : #accessing }
+BlOSSDL3Host >> label [
+
+	^ 'SDL3'
 ]
 
 { #category : #private }
@@ -86,6 +42,7 @@ BlOSSDL3Host >> newAttributesFor: aSpace [
 		extent: aSpace extent;
 		resizable: aSpace isResizable;
 		borderless: aSpace isBorderless;
+		fullscreen: aSpace isFullscreen;
 		visible: false; "There is a race before opening a window and setting the event handler."
 		yourself.
 
@@ -104,7 +61,6 @@ BlOSSDL3Host >> newHostSpaceFor: aSpace [
 
 	^ BlOSSDL3Renderer defaultClass hostSpaceClass new
 		keyboardKeyTable: self keyboardKeyTable;
-		universe: self universe;
 		host: self;
 		space: aSpace;
 		initializeWithAttributes: (self newAttributesFor: aSpace);

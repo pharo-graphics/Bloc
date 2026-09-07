@@ -45,6 +45,14 @@ BlTaskAction >> action: aValuable [
 ]
 
 { #category : #initialization }
+BlTaskAction >> initialize [
+
+	super initialize.
+
+	action := [ :optionalThisTask |  ]
+]
+
+{ #category : #initialization }
 BlTaskAction >> initializeWithAction: aValuable [
 
 	self initialize.

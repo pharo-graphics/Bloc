@@ -1,9 +1,6 @@
 Class {
 	#name : #BlAbstractEventProcessingTest,
-	#superclass : #TestCase,
-	#instVars : [
-		'space'
-	],
+	#superclass : #BlSpaceTestCase,
 	#category : #'Bloc-Tests-Universe'
 }
 
@@ -77,6 +74,17 @@ BlAbstractEventProcessingTest >> firedEvents [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'instance creation' }
+BlAbstractEventProcessingTest >> newSpace [
+
+	| newSpace |
+	newSpace := super newSpace.
+	newSpace extent: 200 @ 200.
+	newSpace mouseProcessor: (BlTestMouseEventProcessor space: newSpace).
+	newSpace focusProcessor: (BlTestFocusProcessor space: newSpace).
+	^ newSpace
+]
+
 { #category : #accessing }
 BlAbstractEventProcessingTest >> root [
 
@@ -110,34 +118,24 @@ BlAbstractEventProcessingTest >> setUp [
 
 	super setUp.
 
-	space := BlSpace new.
-	space extent: 200 @ 200.
-	space mouseProcessor: (BlTestMouseEventProcessor space: space).
-	space focusProcessor: (BlTestFocusProcessor space: space).
-	space root addChild:
-		(BlElement new
-			id: #A;
-			extent: 100 @ 100;
-			background: Color red;
-			yourself).
-	space root addChild:
-		(BlElement new
-			id: #B;
-			position: 100 @ 0;
-			extent: 100 @ 100;
-			background: Color green;
-			addChild:
-				(BlElement new
-					id: #BA;
-					extent: 50 @ 50;
-					background: Color blue;
-					yourself)
-			yourself).
-	space pulse
-]
-
-{ #category : #accessing }
-BlAbstractEventProcessingTest >> space [
-
-	^ space
+	space deferAndSettle: [
+		space root addChild:
+			(BlElement new
+				id: #A;
+				extent: 100 @ 100;
+				background: Color red;
+				yourself).
+		space root addChild:
+			(BlElement new
+				id: #B;
+				position: 100 @ 0;
+				extent: 100 @ 100;
+				background: Color green;
+				addChild:
+					(BlElement new
+						id: #BA;
+						extent: 50 @ 50;
+						background: Color blue;
+						yourself);
+				yourself) ]
 ]

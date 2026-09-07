@@ -5,6 +5,13 @@ Class {
 }
 
 { #category : #testing }
+BlSpaceFrameTaskPhase >> isSettledIn: aSpace [
+	"Return true if aSpace task queue has reached equilibrium"
+
+	^ aSpace taskQueue isSettled
+]
+
+{ #category : #testing }
 BlSpaceFrameTaskPhase >> isTaskPhase [
 	^ true
 ]
