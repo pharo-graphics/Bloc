@@ -104,6 +104,15 @@ BlHostRegistry >> preferredHost: aHost [
 	preferredHost := aHost
 ]
 
+{ #category : #accessing }
+BlHostRegistry >> preferredHost: aHost during: aBlock [
+	| previousHost |
+
+	previousHost := self preferredHost.
+	self preferredHost: aHost.
+	^ aBlock ensure: [ self preferredHost: previousHost ]
+]
+
 { #category : #initialization }
 BlHostRegistry >> refreshAvailableHosts [
 	"Recompute available hosts for the current session and environment."

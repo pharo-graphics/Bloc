@@ -146,6 +146,13 @@ Bloc class >> preferredHost [
 	^ self hostRegistry preferredHost
 ]
 
+{ #category : #'host - accessing' }
+Bloc class >> preferredHost: aHost during: aBlock [
+	"Evaluate aBlock with aHost temporarily set as the preferred host."
+
+	^ self hostRegistry preferredHost: aHost during: aBlock
+]
+
 { #category : #'world menu items' }
 Bloc class >> registerBlocInWorldMenuOn: aBuilder [
 	<worldMenu>

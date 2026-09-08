@@ -87,7 +87,7 @@ BlParallelUniverse >> closeSpaceSynchronously: aSpace [
 { #category : #'api - spaces' }
 BlParallelUniverse >> closeSpaces [
 
-	self spaces copy do: [ :aSpace | aSpace close ]
+	self spaces copy do: [ :aSpace | self closeSpace: aSpace ]
 ]
 
 { #category : #'api - ui process' }
