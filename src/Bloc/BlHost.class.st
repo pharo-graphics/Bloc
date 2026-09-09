@@ -204,6 +204,17 @@ BlHost >> openSpace: aSpace [
 	self isRunning ifFalse: [ self start ]
 ]
 
+{ #category : #'api - spaces' }
+BlHost >> settle [
+	"Wait until this host has executed all pending deferred actions and reached equilibrium."
+
+	self
+		waitUntil: [ self isSettled ]
+		timeOutIf: [ false ]
+		onCompletion: [ ]
+		onTimeout: [ ]
+]
+
 { #category : #accessing }
 BlHost >> priority [
 
