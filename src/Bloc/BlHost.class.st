@@ -93,9 +93,9 @@ BlHost class >> supportedHostClasses [
 { #category : #'api - spaces' }
 BlHost >> closeSpace: aSpace [
 
-	self isRunning
-		ifTrue: [ self defer: [ self universe closeSpace: aSpace ] ]
-		ifFalse: [ self universe closeSpace: aSpace ]
+	aSpace isOpened ifFalse: [ ^ self ].
+	self defer: [ self universe closeSpace: aSpace ].
+	self isRunning ifFalse: [ self start ]
 ]
 
 { #category : #'api - spaces' }
@@ -103,8 +103,7 @@ BlHost >> closeSpaces [
 	"Close all spaces managed by this host."
 
 	self hasUniverse ifTrue: [
-		self universe closeSpaces.
-		self stop ]
+		self universe closeSpaces ]
 ]
 
 { #category : #'api - ui process' }
