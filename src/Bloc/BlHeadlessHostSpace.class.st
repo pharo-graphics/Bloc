@@ -36,6 +36,10 @@ BlHeadlessHostSpace >> canvasExtent: anExtent [
 	physicalSize := (anExtent x @ anExtent y) asPhysicalSize
 ]
 
+{ #category : #accessing }
+BlHeadlessHostSpace >> center [
+]
+
 { #category : #'host space - displaying' }
 BlHeadlessHostSpace >> close [
 	opened := false.
