@@ -246,13 +246,6 @@ BlHost >> pulse [
 ]
 
 { #category : #'system startup' }
-BlHost >> shutDown [
-	"Handle system shutdown / session suspend."
-
-	self shutDown: true
-]
-
-{ #category : #'system startup' }
 BlHost >> shutDown: isQuitting [
 	"Handle system shutdown / session suspend."
 
@@ -280,13 +273,6 @@ BlHost >> spaces [
 BlHost >> start [
 
 	self subclassResponsibility
-]
-
-{ #category : #'system startup' }
-BlHost >> startUp [
-	"Handle system startup / session resume."
-
-	self startUp: true
 ]
 
 { #category : #'system startup' }
