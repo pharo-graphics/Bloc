@@ -94,30 +94,21 @@ BlParameterizedHostTest >> newTestingSpace [
 
 { #category : #running }
 BlParameterizedHostTest >> setUp [
+
 	super setUp.
 
 	testingSpaces := OrderedCollection new.
-	initialSpaces := host spaces copy.
+	initialSpaces := host spaces copy
 ]
 
 { #category : #running }
 BlParameterizedHostTest >> tearDown [
 
-	testingSpaces do: [ :each |
-			[
-				each
-					close;
-					settle ]
-				on: Exception
-				do: [ ] ].
+	testingSpaces do: [ :each | each close; settle ].
 
-	host ifNotNil: [
-			host spaces copy reject: [ :each | initialSpaces includes: each ] thenDo: [ :each |
-					[
-						each close.
-						each settle ]
-						on: Exception
-						do: [ ] ] ].
+	host spaces copy
+		reject: [ :each | initialSpaces includes: each ]
+		thenDo: [ :each | each close; settle ].
 
 	super tearDown
 ]
