@@ -104,6 +104,35 @@ BlSpaceSettleTest >> testDeferOnUnopenedSpaceExecutesOnFirstPulse [
 ]
 
 { #category : #tests }
+BlSpaceSettleTest >> testHostCloseSpacesClosesAllAndStopsHost [
+
+	| space1 space2 |
+	space1 := self newTestingSpace.
+	space2 := self newTestingSpace.
+	self assert: (host spaces includes: space1).
+	self assert: (host spaces includes: space2).
+	self assert: host isRunning.
+
+	host closeSpaces.
+	host settle.
+	self deny: space1 isOpened.
+	self deny: space2 isOpened.
+	self assert: host spaces isEmpty.
+	self deny: host isRunning
+]
+
+{ #category : #tests }
+BlSpaceSettleTest >> testHostSettleWhenStoppedCompletesImmediately [
+
+	self deny: host isRunning.
+	self assert: host isSettled.
+
+	host settle.
+	self deny: host isRunning.
+	self assert: host isSettled
+]
+
+{ #category : #tests }
 BlSpaceSettleTest >> testIsSettledWhenEmpty [
 
 	| aSpace |

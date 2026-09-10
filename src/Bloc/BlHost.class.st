@@ -226,6 +226,17 @@ BlHost >> pulseProcessDo: aBlock [
 	^ self pulseProcess ifNotNil: aBlock
 ]
 
+{ #category : #'api - spaces' }
+BlHost >> settle [
+	"Wait until this host has executed all pending deferred actions and reached equilibrium."
+
+	self
+		waitUntil: [ self isSettled ]
+		timeOutIf: [ false ]
+		onCompletion: [ ]
+		onTimeout: [ ]
+]
+
 { #category : #'host space - accessing' }
 BlHost >> spaces [
 	"Answer the collection of spaces managed by this host."
