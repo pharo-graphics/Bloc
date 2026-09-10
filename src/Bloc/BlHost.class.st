@@ -238,6 +238,37 @@ BlHost >> pulseProcessDo: aBlock [
 	^ self pulseProcess ifNotNil: aBlock
 ]
 
+{ #category : #'api - pulse' }
+BlHost >> pulse [
+	"Execute a single pulse cycle across all spaces managed by this host."
+
+	self hasUniverse ifTrue: [ self universe pulse ]
+]
+
+{ #category : #'system startup' }
+BlHost >> shutDown [
+	"Handle system shutdown / session suspend."
+
+	self shutDown: true
+]
+
+{ #category : #'system startup' }
+BlHost >> shutDown: isQuitting [
+	"Handle system shutdown / session suspend."
+
+	self hasUniverse ifTrue: [ self universe stop ]
+]
+
+{ #category : #'private - spaces' }
+BlHost >> spaceDetached: aSpace [
+	"A space has been detached from this host. If no spaces remain, cleanly shut down the host loop on the next frame."
+
+	(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
+		self defer: [
+			(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
+				self stop ] ] ]
+]
+
 { #category : #'host space - accessing' }
 BlHost >> spaces [
 	"Answer the collection of spaces managed by this host."
@@ -249,6 +280,20 @@ BlHost >> spaces [
 BlHost >> start [
 
 	self subclassResponsibility
+]
+
+{ #category : #'system startup' }
+BlHost >> startUp [
+	"Handle system startup / session resume."
+
+	self startUp: true
+]
+
+{ #category : #'system startup' }
+BlHost >> startUp: isResuming [
+	"Handle system startup / session resume."
+
+	self hasUniverse ifTrue: [ self universe start ]
 ]
 
 { #category : #'api - lifecycle' }

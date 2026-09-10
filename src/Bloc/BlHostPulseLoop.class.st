@@ -105,7 +105,7 @@ BlHostPulseLoop >> loopIteration [
 
 	[	| pulseStartMS |
 		pulseStartMS := Time millisecondClockValue.
-		host universe pulse.
+		host pulse.
 		pulseDurationMS := Time millisecondClockValue - pulseStartMS.
 		self waitUntilNextPulse ]
 	on: Exception

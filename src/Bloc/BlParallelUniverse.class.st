@@ -119,14 +119,7 @@ BlParallelUniverse >> detachSpace: aSpace [
 	"Dispatch an event indicating that the space is no longer attached to a universe"
 	aSpace dispatchEventWithTimestamp: BlSpaceDetachedEvent new.
 
-	(spaces isEmpty and: [ aHost isRunning ]) ifTrue: [
-		"We must defer host shutdown to let spaces perform actions as a result
-		of a space closed event"
-		self defer: [
-			"As the last step, we may want to stop the host. It may terminate
-			the UI loop process, so nothing should be executed after that"
-			(spaces isEmpty and: [ aHost isRunning ]) ifTrue: [
-				self stop ] ] ]
+	aHost spaceDetached: aSpace
 ]
 
 { #category : #'private - spaces' }
