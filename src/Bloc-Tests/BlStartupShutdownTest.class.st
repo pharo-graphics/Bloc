@@ -94,3 +94,12 @@ BlStartupShutdownTest >> testShutdownAndStartupKeepsSpacesOpenWithInvalidation [
 
 	self assert: aSpace isVisible
 ]
+
+{ #category : #tests }
+BlStartupShutdownTest >> testOnSessionChanged [
+
+	| aSpace |
+	aSpace := self newTestingSpace.
+	aSpace onSessionChanged.
+	self assert: aSpace isOpened
+]

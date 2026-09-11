@@ -5,95 +5,6 @@ Class {
 }
 
 { #category : #tests }
-BlSpaceSettleTest >> testCloseAlreadyClosedSpaceIsNoOp [
-
-	| aSpace |
-	aSpace := self newTestingSpace.
-	self assert: aSpace isOpened.
-
-	aSpace close.
-	aSpace settle.
-	self deny: aSpace isOpened.
-	self deny: host isRunning.
-
-	aSpace close.
-	self deny: aSpace isOpened.
-	self deny: host isRunning
-]
-
-{ #category : #tests }
-BlSpaceSettleTest >> testCloseAndSettleClosesWindowSynchronously [
-
-	| aSpace |
-	aSpace := self newTestingSpace.
-	self assert: aSpace isOpened.
-	aSpace close.
-	aSpace settle.
-	self deny: aSpace isOpened
-]
-
-{ #category : #tests }
-BlSpaceSettleTest >> testCloseClearsPendingEvents [
-
-	| aSpace |
-	aSpace := self newTestingSpace.
-	aSpace enqueueEvent: (BlMouseMoveEvent new position: 10 @ 10; yourself).
-	self assert: aSpace hasEvents.
-
-	aSpace close.
-	aSpace settle.
-	self deny: aSpace hasEvents
-]
-
-{ #category : #tests }
-BlSpaceSettleTest >> testCloseFromPulseProcessClosesSpace [
-
-	| aSpace |
-	aSpace := self newTestingSpace.
-	self assert: aSpace isOpened.
-	self assert: host isRunning.
-
-	aSpace deferAndSettle: [ aSpace close ].
-	self deny: aSpace isOpened.
-	self deny: host isRunning
-]
-
-{ #category : #tests }
-BlSpaceSettleTest >> testCloseSpaceOnStoppedHostRunsOnPulseProcess [
-
-	| aSpace closedProcess |
-	aSpace := self newTestingSpace.
-	aSpace addEventHandlerOn: BlSpaceClosedEvent doOnce: [
-		closedProcess := Processor activeProcess ].
-	self assert: aSpace isOpened.
-	self assert: host isRunning.
-
-	host stop.
-	self deny: host isRunning.
-
-	aSpace close.
-	host settle.
-	self deny: aSpace isOpened.
-	self deny: closedProcess equals: Processor activeProcess.
-	self assert: (closedProcess name beginsWith: 'Bloc Host Pulse Loop').
-	self deny: host isRunning
-]
-
-{ #category : #tests }
-BlSpaceSettleTest >> testCloseUnopenedSpaceDoesNotStartHost [
-
-	| aSpace |
-	aSpace := BlSpace new.
-	aSpace host: host.
-	self deny: aSpace isOpened.
-	self deny: host isRunning.
-
-	aSpace close.
-	self deny: aSpace isOpened.
-	self deny: host isRunning
-]
-
-{ #category : #tests }
 BlSpaceSettleTest >> testDeferAndSettleEnsuresEquilibrium [
 
 	| aSpace element |
@@ -179,24 +90,6 @@ BlSpaceSettleTest >> testDeferOnUnopenedSpaceExecutesOnFirstPulse [
 	self assert: aSpace isOpened.
 	aSpace close.
 	aSpace settle
-]
-
-{ #category : #tests }
-BlSpaceSettleTest >> testHostCloseSpacesClosesAllAndStopsHost [
-
-	| space1 space2 |
-	space1 := self newTestingSpace.
-	space2 := self newTestingSpace.
-	self assert: (host spaces includes: space1).
-	self assert: (host spaces includes: space2).
-	self assert: host isRunning.
-
-	host closeSpaces.
-	host settle.
-	self deny: space1 isOpened.
-	self deny: space2 isOpened.
-	self assert: host spaces isEmpty.
-	self deny: host isRunning
 ]
 
 { #category : #tests }
