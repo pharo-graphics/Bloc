@@ -93,6 +93,20 @@ BlParameterizedHostTest >> newTestingSpace [
 ]
 
 { #category : #running }
+BlParameterizedHostTest >> closeNonInitialSpaces [
+
+	self closeSpacesExcluding: initialSpaces
+]
+
+{ #category : #running }
+BlParameterizedHostTest >> closeSpacesExcluding: aCollectionOfSpaces [
+
+	host spaces copy
+		reject: [ :each | aCollectionOfSpaces includes: each ]
+		thenDo: [ :each | each close; settle ]
+]
+
+{ #category : #running }
 BlParameterizedHostTest >> setUp [
 
 	super setUp.
@@ -105,10 +119,7 @@ BlParameterizedHostTest >> setUp [
 BlParameterizedHostTest >> tearDown [
 
 	testingSpaces do: [ :each | each close; settle ].
-
-	host spaces copy
-		reject: [ :each | initialSpaces includes: each ]
-		thenDo: [ :each | each close; settle ].
+	self closeNonInitialSpaces.
 
 	super tearDown
 ]
