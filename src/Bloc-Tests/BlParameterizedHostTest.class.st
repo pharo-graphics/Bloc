@@ -93,6 +93,17 @@ BlParameterizedHostTest >> newTestingSpace [
 ]
 
 { #category : #running }
+BlParameterizedHostTest >> closeHostSpaces [
+
+	host isRunning ifTrue: [ host settle ].
+	host spaces copy do: [ :each |
+		each
+			settle;
+			close;
+			settle ]
+]
+
+{ #category : #running }
 BlParameterizedHostTest >> closeNonInitialSpaces [
 
 	self closeSpacesExcluding: initialSpaces
@@ -111,6 +122,7 @@ BlParameterizedHostTest >> setUp [
 
 	super setUp.
 
+	self closeHostSpaces.
 	testingSpaces := OrderedCollection new.
 	initialSpaces := host spaces copy
 ]
