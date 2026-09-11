@@ -24,7 +24,10 @@ BlSpaceSmokeTest >> testHostSpaceOpenAndClose [
 BlSpaceSmokeTest >> testImmediateCloseAfterShow [
 
 	| aSpace |
-	aSpace := self newTestingSpace.
+	aSpace := BlSpace new.
+	aSpace host: host.
+	testingSpaces add: aSpace.
+	aSpace show.
 	aSpace close.
 	aSpace settle.
 	self deny: (aSpace host hasSpace: aSpace).
