@@ -1256,6 +1256,7 @@ BlSpace >> settle [
 	"Wait until the space reaches equilibrium (all deferred actions, tasks, skins, and layout requests have settled).
 	Blocks the active process on the host pulse semaphore until #isSettled answers true."
 
+	self requestPulse.
 	^ self waitUntilTrue: [ self isSettled ]
 ]
 
