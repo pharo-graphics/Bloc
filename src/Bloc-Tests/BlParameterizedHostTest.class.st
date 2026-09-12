@@ -100,9 +100,18 @@ BlParameterizedHostTest >> closeHostSpaces
 ]
 
 { #category : #running }
-BlParameterizedHostTest >> closeNonInitialSpaces [
+BlParameterizedHostTest >> closeNonInitialSpaces
 
 	self closeSpacesExcluding: initialSpaces
+]
+
+{ #category : #running }
+BlParameterizedHostTest >> settleNonInitialSpaces
+
+	host isRunning ifTrue: [ host settle ].
+	host spaces copy
+		reject: [ :each | initialSpaces includes: each ]
+		thenDo: [ :each | each settle ]
 ]
 
 { #category : #running }
