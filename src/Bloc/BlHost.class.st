@@ -248,6 +248,13 @@ BlHost >> settle [
 		onTimeout: [ ]
 ]
 
+{ #category : #'system startup' }
+BlHost >> shutDown: isQuitting [
+	"Handle system shutdown / session suspend."
+
+	self hasUniverse ifTrue: [ self universe stop ]
+]
+
 { #category : #'private - spaces' }
 BlHost >> spaceDetached: aSpace [
 	"A space has been detached from this host. If no spaces remain, cleanly shut down the host loop on the next frame."
@@ -269,6 +276,13 @@ BlHost >> spaces [
 BlHost >> start [
 
 	self subclassResponsibility
+]
+
+{ #category : #'system startup' }
+BlHost >> startUp: isResuming [
+	"Handle system startup / session resume."
+
+	self hasUniverse ifTrue: [ self universe start ]
 ]
 
 { #category : #'api - lifecycle' }
