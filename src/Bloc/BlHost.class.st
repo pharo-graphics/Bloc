@@ -105,8 +105,7 @@ BlHost >> closeSpaces [
 	"Close all spaces managed by this host."
 
 	self hasUniverse ifTrue: [
-		self universe closeSpaces.
-		self stop ]
+		self universe closeSpaces ]
 ]
 
 { #category : #'api - ui process' }
