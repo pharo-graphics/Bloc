@@ -887,7 +887,7 @@ BlSpace >> isOpened [
 	"Return true if the space was shown (by sending #show or #open message), false otherwise.
 	Please note, that an opened space can be hidden which does not influence the result of #isOpened"
 
-	^ self host hasSpace: self
+	^ self host ifNotNil: [ :h | h hasSpace: self ] ifNil: [ false ]
 ]
 
 { #category : #pulse }

@@ -112,6 +112,8 @@ BlParameterizedHostTest >> closeNonInitialSpaces [
 { #category : #running }
 BlParameterizedHostTest >> closeSpacesExcluding: aCollectionOfSpaces [
 
+	aCollectionOfSpaces ifNil: [ ^ self ].
+
 	host spaces copy
 		reject: [ :each | aCollectionOfSpaces includes: each ]
 		thenDo: [ :each | each close; settle ]
@@ -130,16 +132,10 @@ BlParameterizedHostTest >> setUp [
 { #category : #running }
 BlParameterizedHostTest >> tearDown [
 
-	testingSpaces do: [ :each | each close; settle ].
+	testingSpaces ifNotNil: [ testingSpaces do: [ :each | each close; settle ] ].
 	self closeNonInitialSpaces.
 
 	super tearDown
-]
-
-{ #category : #accessing }
-BlParameterizedHostTest >> testingSpaces [
-
-	^ testingSpaces
 ]
 
 { #category : #tests }
@@ -147,7 +143,7 @@ BlParameterizedHostTest >> waitTestingSpaces [
 
 	self
 		deprecated: 'Settle the relevant space directly using #settle'
-		transformWith: '`@receiver waitTestingSpaces' -> '`@receiver testingSpaces do: [ :each | each settle ]'.
+		transformWith: '`@receiver waitTestingSpaces' -> '`@receiver host spaces do: [ :each | each settle ]'.
 
 	testingSpaces do: [ :each | each settle ]
 ]
