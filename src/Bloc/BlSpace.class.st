@@ -1103,7 +1103,7 @@ BlSpace >> pulse [
 BlSpace >> pulseProcess [
 	"Return the pulse loop Process if running, or nil."
 
-	^ self hasHost ifTrue: [ self host pulseProcess ] ifFalse: [ nil ]
+	^ self host pulseProcess
 ]
 
 { #category : #pulse }
