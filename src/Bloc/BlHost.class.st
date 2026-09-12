@@ -93,7 +93,11 @@ BlHost class >> supportedHostClasses [
 { #category : #'api - spaces' }
 BlHost >> closeSpace: aSpace [
 
-	self defer: [ self universe closeSpace: aSpace ]
+	"Return early if space was never opened and host is idle"
+	(self isRunning or: [ self hasSpace: aSpace ]) ifFalse: [ ^ self ].
+
+	self defer: [ self universe closeSpace: aSpace ].
+	self isRunning ifFalse: [ self start ]
 ]
 
 { #category : #'api - spaces' }
