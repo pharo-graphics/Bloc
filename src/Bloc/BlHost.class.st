@@ -204,21 +204,17 @@ BlHost >> openSpace: aSpace [
 	self isRunning ifFalse: [ self start ]
 ]
 
-{ #category : #'api - spaces' }
-BlHost >> settle [
-	"Wait until this host has executed all pending deferred actions and reached equilibrium."
-
-	self
-		waitUntil: [ self isSettled ]
-		timeOutIf: [ false ]
-		onCompletion: [ ]
-		onTimeout: [ ]
-]
-
 { #category : #accessing }
 BlHost >> priority [
 
 	^ self class priority
+]
+
+{ #category : #'api - pulse' }
+BlHost >> pulse [
+	"Execute a single pulse cycle across all spaces managed by this host."
+
+	self hasUniverse ifTrue: [ self universe pulse ]
 ]
 
 { #category : #'api - pulse process' }
@@ -239,11 +235,15 @@ BlHost >> pulseProcessDo: aBlock [
 	^ self pulseProcess ifNotNil: aBlock
 ]
 
-{ #category : #'api - pulse' }
-BlHost >> pulse [
-	"Execute a single pulse cycle across all spaces managed by this host."
+{ #category : #'api - spaces' }
+BlHost >> settle [
+	"Wait until this host has executed all pending deferred actions and reached equilibrium."
 
-	self hasUniverse ifTrue: [ self universe pulse ]
+	self
+		waitUntil: [ self isSettled ]
+		timeOutIf: [ false ]
+		onCompletion: [ ]
+		onTimeout: [ ]
 ]
 
 { #category : #'system startup' }
