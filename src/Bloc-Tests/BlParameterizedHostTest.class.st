@@ -93,20 +93,20 @@ BlParameterizedHostTest >> newTestingSpace [
 ]
 
 { #category : #running }
-BlParameterizedHostTest >> closeHostSpaces
+BlParameterizedHostTest >> closeHostSpaces [
 
 	host closeSpaces.
 	host isRunning ifTrue: [ host settle ]
 ]
 
 { #category : #running }
-BlParameterizedHostTest >> closeNonInitialSpaces
+BlParameterizedHostTest >> closeNonInitialSpaces [
 
 	self closeSpacesExcluding: initialSpaces
 ]
 
 { #category : #running }
-BlParameterizedHostTest >> settleNonInitialSpaces
+BlParameterizedHostTest >> settleNonInitialSpaces [
 
 	host isRunning ifTrue: [ host settle ].
 	host spaces copy
@@ -115,7 +115,7 @@ BlParameterizedHostTest >> settleNonInitialSpaces
 ]
 
 { #category : #running }
-BlParameterizedHostTest >> closeSpacesExcluding: aCollectionOfSpaces
+BlParameterizedHostTest >> closeSpacesExcluding: aCollectionOfSpaces [
 
 	| spacesToClose |
 	aCollectionOfSpaces ifNil: [ ^ self ].
