@@ -212,6 +212,13 @@ BlHost >> priority [
 	^ self class priority
 ]
 
+{ #category : #'api - pulse' }
+BlHost >> pulse [
+	"Execute a single pulse cycle across all spaces managed by this host."
+
+	self hasUniverse ifTrue: [ self universe pulse ]
+]
+
 { #category : #'api - pulse process' }
 BlHost >> pulseProcess [
 	"Return the pulse loop Process if running, or nil."
@@ -239,6 +246,16 @@ BlHost >> settle [
 		timeOutIf: [ false ]
 		onCompletion: [ ]
 		onTimeout: [ ]
+]
+
+{ #category : #'private - spaces' }
+BlHost >> spaceDetached: aSpace [
+	"A space has been detached from this host. If no spaces remain, cleanly shut down the host loop on the next frame."
+
+	(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
+		self defer: [
+			(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
+				self stop ] ] ]
 ]
 
 { #category : #'host space - accessing' }
