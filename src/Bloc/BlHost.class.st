@@ -256,12 +256,14 @@ BlHost >> shutDown: isQuitting [
 
 { #category : #'private - spaces' }
 BlHost >> spaceDetached: aSpace [
-	"A space has been detached from this host. If no spaces remain, cleanly shut down the host loop on the next frame."
+	"A space has been detached from this host. If no spaces remain, cleanly shut down the host loop once all pending actions in the universe have settled."
 
 	(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
 		self defer: [
 			(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
-				self stop ] ] ]
+				self universe isSettled
+					ifTrue: [ self stop ]
+					ifFalse: [ self spaceDetached: aSpace ] ] ] ]
 ]
 
 { #category : #'host space - accessing' }
