@@ -261,7 +261,7 @@ BlHost >> spaceDetached: aSpace [
 	(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
 		self defer: [
 			(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
-				self universe isSettled
+				self isSettled
 					ifTrue: [ self stop ]
 					ifFalse: [ self spaceDetached: aSpace ] ] ] ]
 ]
