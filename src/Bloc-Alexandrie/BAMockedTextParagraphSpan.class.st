@@ -7,14 +7,10 @@ Class {
 { #category : #drawing }
 BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 
-	| characterWidth characterHeight aBlFont aFace |
+	| characterWidth characterHeight |
 	self spanLength isZero ifTrue: [ ^ self ].
 
-	aBlFont := fontAndStyleBuilder font.
-	aFace := aBlFont asAeFTFace.
-	cairoScaledFont := aeCanvas
-		scaledFontForFace: aFace
-		size: aBlFont fontSize value.
+	cairoScaledFont := fontAndStyleBuilder aeCairoScaledFontOn: aeCanvas.
 
 	"Get glyphs for the text"
 	characterWidth := (self width / self spanLength) asFloat.
@@ -34,9 +30,10 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 		measuredHeight isZero ifTrue: [ measuredHeight := characterHeight ].
 		heightScale := characterHeight * 0.8 / measuredHeight.
 		fixedBounds := eachBaseline extent: characterWidth @ characterHeight.
-		aeCanvas setSourceColor: (fontAndStyleBuilder hasCustomColor
-				 ifTrue: [ fontAndStyleBuilder color ]
-				 ifFalse: [ Color black ]).
+		aeCanvas setSourceColor:
+			(fontAndStyleBuilder hasCustomColor
+				ifTrue: [ fontAndStyleBuilder color ]
+				ifFalse: [ Color black ]).
 
 		"Draw the border around the character"
 		aeCanvas restoreContextAfter: [ 
@@ -64,9 +61,9 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 		aeCanvas restoreContextAfter: [ 
 			| idxScaledFont idxGlyphsArray |
 			aeCanvas setSourceColor: Color gray.
-			idxScaledFont := aeCanvas
-				scaledFontForFace: aFace
-				size: characterHeight * 0.32.
+			idxScaledFont := fontAndStyleBuilder copy
+				fontSize: characterHeight * 0.32;
+				aeCairoScaledFontOn: aeCanvas.
 			idxGlyphsArray := idxScaledFont glyphArrayForString: (index + hostMeasurer textOffset - 1) asString.
 			index = 1 ifTrue: [ 
 				aeCanvas restoreContextAfter: [ 
