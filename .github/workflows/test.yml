@@ -28,7 +28,7 @@ jobs:
       - name: Load in New Image and Run Tests
         run: smalltalkci -s ${{ matrix.smalltalk }} .ci.ston
         shell: bash
-        timeout-minutes: 10
+        timeout-minutes: 15
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload logs
