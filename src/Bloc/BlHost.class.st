@@ -93,7 +93,11 @@ BlHost class >> supportedHostClasses [
 { #category : #'api - spaces' }
 BlHost >> closeSpace: aSpace [
 
-	self defer: [ self universe closeSpace: aSpace ]
+	"Return early if space was never opened and host is idle"
+	(self isRunning or: [ self hasSpace: aSpace ]) ifFalse: [ ^ self ].
+
+	self defer: [ self universe closeSpace: aSpace ].
+	self isRunning ifFalse: [ self start ]
 ]
 
 { #category : #'api - spaces' }
@@ -101,8 +105,7 @@ BlHost >> closeSpaces [
 	"Close all spaces managed by this host."
 
 	self hasUniverse ifTrue: [
-		self universe closeSpaces.
-		self stop ]
+		self universe closeSpaces ]
 ]
 
 { #category : #'api - ui process' }
@@ -208,6 +211,13 @@ BlHost >> priority [
 	^ self class priority
 ]
 
+{ #category : #'api - pulse' }
+BlHost >> pulse [
+	"Execute a single pulse cycle across all spaces managed by this host."
+
+	self hasUniverse ifTrue: [ self universe pulse ]
+]
+
 { #category : #'api - pulse process' }
 BlHost >> pulseProcess [
 	"Return the pulse loop Process if running, or nil."
@@ -237,6 +247,23 @@ BlHost >> settle [
 		onTimeout: [ ]
 ]
 
+{ #category : #'system startup' }
+BlHost >> shutDown: isQuitting [
+	"Handle system shutdown / session suspend."
+
+	self hasUniverse ifTrue: [ self universe stop ]
+]
+
+{ #category : #'private - spaces' }
+BlHost >> spaceDetached: aSpace [
+	"A space has been detached from this host. If no spaces remain, cleanly shut down the host loop on the next frame."
+
+	(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
+		self defer: [
+			(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
+				self stop ] ] ]
+]
+
 { #category : #'host space - accessing' }
 BlHost >> spaces [
 	"Answer the collection of spaces managed by this host."
@@ -248,6 +275,13 @@ BlHost >> spaces [
 BlHost >> start [
 
 	self subclassResponsibility
+]
+
+{ #category : #'system startup' }
+BlHost >> startUp: isResuming [
+	"Handle system startup / session resume."
+
+	self hasUniverse ifTrue: [ self universe start ]
 ]
 
 { #category : #'api - lifecycle' }

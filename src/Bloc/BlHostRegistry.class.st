@@ -54,7 +54,7 @@ BlHostRegistry class >> shutDown: isQuitting [
 
 	default ifNotNil: [ :registry |
 		registry availableHosts do: [ :eachHost |
-			eachHost hasUniverse ifTrue: [ eachHost universe stop ] ] ]
+			eachHost shutDown: isQuitting ] ]
 ]
 
 { #category : #'system startup' }
@@ -63,7 +63,7 @@ BlHostRegistry class >> startUp: isResuming [
 	default ifNotNil: [ :registry |
 		registry refreshAvailableHosts.
 		registry availableHosts do: [ :eachHost |
-			eachHost hasUniverse ifTrue: [ eachHost universe start ] ] ]
+			eachHost startUp: isResuming ] ]
 ]
 
 { #category : #accessing }

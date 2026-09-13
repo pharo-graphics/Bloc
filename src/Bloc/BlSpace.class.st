@@ -1103,7 +1103,7 @@ BlSpace >> pulse [
 BlSpace >> pulseProcess [
 	"Return the pulse loop Process if running, or nil."
 
-	^ self hasHost ifTrue: [ self host pulseProcess ] ifFalse: [ nil ]
+	^ self host pulseProcess
 ]
 
 { #category : #pulse }
@@ -1256,6 +1256,7 @@ BlSpace >> settle [
 	"Wait until the space reaches equilibrium (all deferred actions, tasks, skins, and layout requests have settled).
 	Blocks the active process on the host pulse semaphore until #isSettled answers true."
 
+	self requestPulse.
 	^ self waitUntilTrue: [ self isSettled ]
 ]
 

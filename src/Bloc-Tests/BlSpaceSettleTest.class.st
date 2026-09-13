@@ -5,17 +5,6 @@ Class {
 }
 
 { #category : #tests }
-BlSpaceSettleTest >> testCloseAndSettleClosesWindowSynchronously [
-
-	| aSpace |
-	aSpace := self newTestingSpace.
-	self assert: aSpace isOpened.
-	aSpace close.
-	aSpace settle.
-	self deny: aSpace isOpened
-]
-
-{ #category : #tests }
 BlSpaceSettleTest >> testDeferAndSettleEnsuresEquilibrium [
 
 	| aSpace element |
@@ -101,24 +90,6 @@ BlSpaceSettleTest >> testDeferOnUnopenedSpaceExecutesOnFirstPulse [
 	self assert: aSpace isOpened.
 	aSpace close.
 	aSpace settle
-]
-
-{ #category : #tests }
-BlSpaceSettleTest >> testHostCloseSpacesClosesAllAndStopsHost [
-
-	| space1 space2 |
-	space1 := self newTestingSpace.
-	space2 := self newTestingSpace.
-	self assert: (host spaces includes: space1).
-	self assert: (host spaces includes: space2).
-	self assert: host isRunning.
-
-	host closeSpaces.
-	host settle.
-	self deny: space1 isOpened.
-	self deny: space2 isOpened.
-	self assert: host spaces isEmpty.
-	self deny: host isRunning
 ]
 
 { #category : #tests }

@@ -65,6 +65,31 @@ BlParameterizedHostTest class >> testParameters [
 		  addOptions: self availableHosts
 ]
 
+{ #category : #running }
+BlParameterizedHostTest >> closeHostSpaces [
+
+	host closeSpaces.
+	host isRunning ifTrue: [ host settle ]
+]
+
+{ #category : #running }
+BlParameterizedHostTest >> closeNonInitialSpaces [
+
+	self closeSpacesExcluding: initialSpaces
+]
+
+{ #category : #running }
+BlParameterizedHostTest >> closeSpacesExcluding: aCollectionOfSpaces [
+
+	| spacesToClose |
+	aCollectionOfSpaces ifNil: [ ^ self ].
+
+	spacesToClose := host spaces copy reject: [ :each | aCollectionOfSpaces includes: each ].
+	spacesToClose ifEmpty: [ ^ self ].
+	spacesToClose do: [ :each | each close ].
+	host isRunning ifTrue: [ host settle ]
+]
+
 { #category : #accessing }
 BlParameterizedHostTest >> host [
 
@@ -94,38 +119,30 @@ BlParameterizedHostTest >> newTestingSpace [
 
 { #category : #running }
 BlParameterizedHostTest >> setUp [
+
 	super setUp.
 
+	self closeHostSpaces.
 	testingSpaces := OrderedCollection new.
-	initialSpaces := host spaces copy.
+	initialSpaces := host spaces copy
+]
+
+{ #category : #running }
+BlParameterizedHostTest >> settleNonInitialSpaces [
+
+	host isRunning ifTrue: [ host settle ].
+	host spaces copy
+		reject: [ :each | initialSpaces includes: each ]
+		thenDo: [ :each | each settle ]
 ]
 
 { #category : #running }
 BlParameterizedHostTest >> tearDown [
 
-	testingSpaces do: [ :each |
-			[
-				each
-					close;
-					settle ]
-				on: Exception
-				do: [ ] ].
-
-	host ifNotNil: [
-			host spaces copy reject: [ :each | initialSpaces includes: each ] thenDo: [ :each |
-					[
-						each close.
-						each settle ]
-						on: Exception
-						do: [ ] ] ].
+	testingSpaces ifNotNil: [ testingSpaces do: [ :each | each close ] ].
+	self closeNonInitialSpaces.
 
 	super tearDown
-]
-
-{ #category : #accessing }
-BlParameterizedHostTest >> testingSpaces [
-
-	^ testingSpaces
 ]
 
 { #category : #tests }
@@ -133,7 +150,7 @@ BlParameterizedHostTest >> waitTestingSpaces [
 
 	self
 		deprecated: 'Settle the relevant space directly using #settle'
-		transformWith: '`@receiver waitTestingSpaces' -> '`@receiver testingSpaces do: [ :each | each settle ]'.
+		transformWith: '`@receiver waitTestingSpaces' -> '`@receiver host spaces do: [ :each | each settle ]'.
 
 	testingSpaces do: [ :each | each settle ]
 ]
