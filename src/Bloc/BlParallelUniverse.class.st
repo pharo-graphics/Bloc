@@ -38,7 +38,7 @@ BlParallelUniverse >> attachSpace: aSpace [
 	(aSpace isOpened and: [ aSpace hostSpace isNotNil ]) ifTrue: [ ^ self ].
 
 	"First of all we need to add space to the space manager"
-	(spaces includes: aSpace) ifFalse: [ spaces add: aSpace ].
+	spaces add: aSpace.
 
 	[
 		aSpace hostSpaceOpen
@@ -212,7 +212,7 @@ BlParallelUniverse >> initialize [
 
 	super initialize.
 
-	spaces := OrderedCollection new.
+	spaces := IdentitySet new.
 	host := BlHeadlessHost default.
 	deferredActions := WaitfreeQueue new.
 	pulseSemaphores := OrderedCollection new.
