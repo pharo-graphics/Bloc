@@ -108,9 +108,11 @@ BlHost >> closeSpaces [
 		self universe closeSpaces ]
 ]
 
-{ #category : #'api - ui process' }
+{ #category : #'private - spaces' }
 BlHost >> defer: aValuable [
-	"Enqueue a valuable from any process to be executed in the UI process at the beginning of the next pulse."
+	"Internal engine method. Enqueue a valuable to be executed in the UI process at the beginning of the next pulse.
+	Used exclusively by host lifecycle operations (such as #openSpace:, #closeSpace:, and #spaceDetached:).
+	Application and test code should use BlSpace >> #defer: or BlElement >> #enqueueTask:."
 
 	self universe defer: aValuable
 ]
@@ -256,7 +258,9 @@ BlHost >> shutDown: isQuitting [
 
 { #category : #'private - spaces' }
 BlHost >> spaceDetached: aSpace [
-	"A space has been detached from this host. If no spaces remain, cleanly shut down the host loop once all pending actions in the universe have settled."
+	"A space has been detached from this host. If no spaces remain, cleanly shut down the host loop once all pending deferred actions on this host have settled.
+
+	The check is deferred to the next frame to avoid terminating the pulse loop mid-frame. If deferred cleanup actions (e.g. from space closing handlers) are still executing when checked, re-defer until the host is fully settled. If a new space is attached in the interim, shutdown is automatically cancelled."
 
 	(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
 		self defer: [

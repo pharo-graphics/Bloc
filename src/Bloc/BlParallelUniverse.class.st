@@ -90,10 +90,11 @@ BlParallelUniverse >> closeSpaces [
 	self spaces copy do: [ :aSpace | aSpace close ]
 ]
 
-{ #category : #'api - ui process' }
+{ #category : #'deferred message' }
 BlParallelUniverse >> defer: aValuable [
-	"Enqueue a valuable from any process to be executed in the UI process at the beginning of the next pulse.
-	It is useful to update the UI states."
+	"Internal engine method. Enqueue a valuable to be executed in the UI process at the beginning of the next pulse.
+	Used exclusively for engine lifecycle operations (such as opening and closing spaces).
+	Application and test code should use BlSpace >> #defer: or BlElement >> #enqueueTask:."
 
 	deferredActions nextPut: aValuable
 ]
