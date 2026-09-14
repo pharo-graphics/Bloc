@@ -220,19 +220,3 @@ BlSpaceLifecycleTest >> testValidateHostSpaceDrawing [
 	aSpace validateHostSpaceDrawing.
 	self assert: aSpace isOpened
 ]
-
-{ #category : #tests }
-BlSpaceLifecycleTest >> testCloseSpaceExecutesPendingDeferredActionsBeforeHostStops [
-
-	| aSpace deferredRan |
-	aSpace := self newTestingSpace.
-	deferredRan := false.
-	host defer: [
-		host defer: [ deferredRan := true ] ].
-	aSpace close.
-	aSpace settle.
-	self deny: aSpace isOpened.
-	self assert: deferredRan.
-	self deny: host isRunning
-]
-

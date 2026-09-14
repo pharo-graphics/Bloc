@@ -258,16 +258,12 @@ BlHost >> shutDown: isQuitting [
 
 { #category : #'private - spaces' }
 BlHost >> spaceDetached: aSpace [
-	"A space has been detached from this host. If no spaces remain, cleanly shut down the host loop once all pending deferred actions on this host have settled.
-
-	The check is deferred to the next frame to avoid terminating the pulse loop mid-frame. If deferred cleanup actions (e.g. from space closing handlers) are still executing when checked, re-defer until the host is fully settled. If a new space is attached in the interim, shutdown is automatically cancelled."
+	"A space has been detached from this host. If no spaces remain, cleanly shut down the host loop on the next frame."
 
 	(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
 		self defer: [
 			(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
-				self isSettled
-					ifTrue: [ self stop ]
-					ifFalse: [ self spaceDetached: aSpace ] ] ] ]
+				self stop ] ] ]
 ]
 
 { #category : #'host space - accessing' }
