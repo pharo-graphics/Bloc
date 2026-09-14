@@ -40,21 +40,18 @@ BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDurati
 { #category : #'*Bloc-Simulation' }
 BlSpace class >> simulate: anElement during: aBlock [
 
-	| tempSpace topMostElement result |
 	anElement isAttachedToSceneGraph
-		ifTrue: [ 
+		ifTrue: [
+			| result |
 			result := aBlock value.
-			anElement space ifNotNil: [ :s | s settle ] ]
+			anElement space ifNotNil: [ :s | s settle ].
+			^ result ]
 		ifFalse: [
-			topMostElement := anElement topMostParent.
-			tempSpace := BlSpace new.
-			tempSpace root addChild: topMostElement.
-			[
+			^ anElement topMostParent inNewHeadlessSpaceDo: [ :space |
+				| result |
 				result := aBlock value.
-				tempSpace settle.
-			] ensure: [
-				topMostElement removeFromParent ] ].
-	^ result
+				space settle.
+				result ] ]
 ]
 
 { #category : #'*Bloc-Simulation' }

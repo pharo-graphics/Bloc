@@ -153,6 +153,22 @@ BlEventSimulatorTest >> testSimulateFromPulseProcessRaisesError [
 ]
 
 { #category : #tests }
+BlEventSimulatorTest >> testSimulateOnDetachedElement [
+
+	| detached clicked |
+	detached := BlElement new.
+	detached extent: 100 @ 100.
+	clicked := false.
+	detached
+		addEventHandlerOn: BlClickEvent
+		do: [ :event | clicked := true ].
+	BlSpace simulate: detached during: [
+		detached eventSimulator click ].
+	self assert: clicked.
+	self deny: detached isAttachedToSceneGraph
+]
+
+{ #category : #tests }
 BlEventSimulatorTest >> testTextInput [
 	| textInputText |
 	element requestFocus.
