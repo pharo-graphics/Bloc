@@ -210,9 +210,9 @@ BlEventSimulator >> events: aCollectionOfEvents [
 			modifiers isEmpty ifFalse: [
 				anEvent modifiers: modifiers copy ] ] ].
 
-	aSpace hasHostSpace ifFalse: [
+	aSpace isOpened ifFalse: [
 		aSpace settle.
-		aSpace hasHostSpace ifFalse: [
+		aSpace isOpened ifFalse: [
 			self error: 'You can''t simulate events if you didn''t add the element to a space and sent #show to it.' ] ].
 
 	aCollectionOfEvents do: [ :anEvent |
