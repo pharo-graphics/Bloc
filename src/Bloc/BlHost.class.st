@@ -96,7 +96,7 @@ BlHost >> closeSpace: aSpace [
 	"Return early if space was never opened and host is idle"
 	(self isRunning or: [ self hasSpace: aSpace ]) ifFalse: [ ^ self ].
 
-	self defer: [ self universe closeSpace: aSpace ].
+	self universe defer: [ self universe closeSpace: aSpace ].
 	self isRunning ifFalse: [ self start ]
 ]
 
@@ -108,11 +108,10 @@ BlHost >> closeSpaces [
 		self universe closeSpaces ]
 ]
 
-{ #category : #'private - spaces' }
+{ #category : #deprecating }
 BlHost >> defer: aValuable [
-	"Internal engine method. Enqueue a valuable to be executed in the UI process at the beginning of the next pulse.
-	Used exclusively by host lifecycle operations (such as #openSpace:, #closeSpace:, and #spaceDetached:).
-	Application and test code should use BlSpace >> #defer: or BlElement >> #enqueueTask:."
+
+	self deprecated: 'You should send #defer: to an opened space instead of a host.'.
 
 	self universe defer: aValuable
 ]
@@ -203,7 +202,7 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 { #category : #'api - spaces' }
 BlHost >> openSpace: aSpace [
 
-	self defer: [ self universe openSpace: aSpace ].
+	self universe defer: [ self universe openSpace: aSpace ].
 	self isRunning ifFalse: [ self start ]
 ]
 
@@ -261,7 +260,7 @@ BlHost >> spaceDetached: aSpace [
 	"A space has been detached from this host. If no spaces remain, cleanly shut down the host loop on the next frame."
 
 	(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
-		self defer: [
+		self universe defer: [
 			(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
 				self stop ] ] ]
 ]
