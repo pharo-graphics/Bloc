@@ -62,12 +62,12 @@ BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 BlParallelUniverse >> closeSpace: aSpace [
 	"Queue aSpace to be closed at the beginning of the next pulse."
 
-	self lifecycleMutex critical: [
-		(self spacesToOpen includes: aSpace) ifTrue: [
-			self spacesToOpen remove: aSpace.
+	lifecycleMutex critical: [
+		(spacesToOpen includes: aSpace) ifTrue: [
+			spacesToOpen remove: aSpace.
 			^ self ].
 		(spaces includes: aSpace) ifFalse: [ ^ self ].
-		self spacesToClose add: aSpace ].
+		spacesToClose add: aSpace ].
 
 	host isRunning ifFalse: [ host start ].
 	host requestPulse
@@ -209,19 +209,19 @@ BlParallelUniverse >> host [
 { #category : #accessing }
 BlParallelUniverse >> lifecycleMutex [
 
-	^ lifecycleMutex ifNil: [ lifecycleMutex := Mutex new ]
+	^ lifecycleMutex
 ]
 
 { #category : #accessing }
 BlParallelUniverse >> spacesToClose [
 
-	^ spacesToClose ifNil: [ spacesToClose := IdentitySet new ]
+	^ spacesToClose
 ]
 
 { #category : #accessing }
 BlParallelUniverse >> spacesToOpen [
 
-	^ spacesToOpen ifNil: [ spacesToOpen := IdentitySet new ]
+	^ spacesToOpen
 ]
 
 { #category : #accessing }
@@ -273,21 +273,21 @@ BlParallelUniverse >> isPulsing [
 BlParallelUniverse >> isSettled [
 	"Return true if there are no pending space openings, closings, or deferred actions"
 
-	^ self lifecycleMutex critical: [
-		self spacesToOpen isEmpty and: [
-			self spacesToClose isEmpty and: [ deferredActions isEmpty ] ] ]
+	^ lifecycleMutex critical: [
+		spacesToOpen isEmpty and: [
+			spacesToClose isEmpty and: [ deferredActions isEmpty ] ] ]
 ]
 
 { #category : #testing }
 BlParallelUniverse >> isSpaceClosing: aSpace [
 
-	^ self lifecycleMutex critical: [ self spacesToClose includes: aSpace ]
+	^ lifecycleMutex critical: [ spacesToClose includes: aSpace ]
 ]
 
 { #category : #testing }
 BlParallelUniverse >> isSpaceOpening: aSpace [
 
-	^ self lifecycleMutex critical: [ self spacesToOpen includes: aSpace ]
+	^ lifecycleMutex critical: [ spacesToOpen includes: aSpace ]
 ]
 
 { #category : #'api - spaces' }
@@ -300,8 +300,8 @@ BlParallelUniverse >> openSpace: aSpace [
 			hs show ].
 		^ self ].
 
-	self lifecycleMutex critical: [
-		self spacesToOpen add: aSpace ].
+	lifecycleMutex critical: [
+		spacesToOpen add: aSpace ].
 
 	host isRunning ifFalse: [ host start ].
 	host requestPulse
@@ -364,11 +364,11 @@ BlParallelUniverse >> pulse [
 	| toClose toOpen semaphoresToSignal |
 	isPulsing := true.
 	[
-		self lifecycleMutex critical: [
-			toOpen := self spacesToOpen asArray.
-			self spacesToOpen removeAll.
-			toClose := self spacesToClose asArray.
-			self spacesToClose removeAll ].
+		lifecycleMutex critical: [
+			toOpen := spacesToOpen asArray.
+			spacesToOpen removeAll.
+			toClose := spacesToClose asArray.
+			spacesToClose removeAll ].
 
 		[
 			toOpen do: [ :eachSpace | self openSpaceNow: eachSpace ].
@@ -377,9 +377,9 @@ BlParallelUniverse >> pulse [
 			self evaluateDeferredActions.
 			spaces do: [ :eachSpace | eachSpace basicPulse ]
 		] ifCurtailed: [
-			self lifecycleMutex critical: [
-				self spacesToClose addAll: (toClose reject: [ :s | (spaces includes: s) not ]).
-				self spacesToOpen addAll: (toOpen reject: [ :s | spaces includes: s ]) ] ]
+			lifecycleMutex critical: [
+				spacesToClose addAll: (toClose reject: [ :s | (spaces includes: s) not ]).
+				spacesToOpen addAll: (toOpen reject: [ :s | spaces includes: s ]) ] ]
 	] ensure: [
 		isPulsing := false.
 		(spaces isEmpty and: [ self isSettled ]) ifTrue: [
