@@ -37,15 +37,12 @@ BlParallelUniverse >> attachSpace: aSpace [
 
 	(aSpace isOpened and: [ aSpace hostSpace isNotNil ]) ifTrue: [ ^ self ].
 
-	"First of all we need to add space to the space manager"
 	spaces add: aSpace.
 
-	[
-		aSpace hostSpaceOpen
-	] on: Exception do: [ :ex |
+	[ aSpace hostSpaceOpen ] on: Exception do: [ :exception |
 		spaces remove: aSpace ifAbsent: [ ].
 		aSpace hostSpaceClose.
-		ex pass ]
+		exception pass ]
 ]
 
 { #category : #'private - spaces' }
@@ -90,11 +87,10 @@ BlParallelUniverse >> closeSpaces [
 	self spaces copy do: [ :aSpace | aSpace close ]
 ]
 
-{ #category : #'deferred message' }
+{ #category : #'api - ui process' }
 BlParallelUniverse >> defer: aValuable [
-	"Internal engine method. Enqueue a valuable to be executed in the UI process at the beginning of the next pulse.
-	Used exclusively for engine lifecycle operations (such as opening and closing spaces).
-	Application and test code should use BlSpace >> #defer: or BlElement >> #enqueueTask:."
+	"Enqueue a valuable from any process to be executed in the UI process at the beginning of the next pulse.
+	It is useful to update the UI states."
 
 	deferredActions nextPut: aValuable
 ]

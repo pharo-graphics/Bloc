@@ -108,8 +108,9 @@ BlHost >> closeSpaces [
 		self universe closeSpaces ]
 ]
 
-{ #category : #deprecating }
+{ #category : #'api - ui process' }
 BlHost >> defer: aValuable [
+	"Enqueue a valuable from any process to be executed in the UI process at the beginning of the next pulse."
 
 	self deprecated: 'You should send #defer: to an opened space instead of a host.'.
 
