@@ -128,6 +128,7 @@ BlHostPulseLoop >> loopIteration [
 			self basicStart.
 			e pass ].
 
+	"Returns true to continue looping"
 	^ self isPulseProcessActive
 ]
 
@@ -194,26 +195,31 @@ BlHostPulseLoop >> start [
 
 { #category : #lifecycle }
 BlHostPulseLoop >> markStopped [
+	"Mark the loop process as stopped without terminating the active process."
 
 	loopProcess := nil
 ]
 
 { #category : #period }
 BlHostPulseLoop >> requestPulse [
+	"Signal the loop to wake up and perform a pulse immediately without waiting for the next scheduled tick."
 
 	self pulseRequestedSemaphore signal
 ]
 
 { #category : #lifecycle }
 BlHostPulseLoop >> stop [
+	"Stop the loop process. Can be safely called from any process, including the loop process itself."
 
-	| currentProcess |
+	| currentProcess isCurrentActive |
 	self isRunning ifFalse: [ ^ self ].
 
+	"Store in temporary variable to support stopping from the loopProcess itself"
+	isCurrentActive := self isPulseProcessActive.
 	currentProcess := loopProcess.
 	loopProcess := nil.
 
-	self isPulseProcessActive ifFalse: [ currentProcess terminate ]
+	isCurrentActive ifFalse: [ currentProcess terminate ]
 ]
 
 { #category : #period }
@@ -221,8 +227,13 @@ BlHostPulseLoop >> waitUntilNextPulse [
 	"Wait the appropriate amount of time for the next pulse"
 
 	| msToWait |
+	"Since a pulse can take longer than #pulsePeriod, msToWait may be negative or zero here
+	(meaning that we shouldn't wait for the next pulse)"
 	msToWait := pulsePeriodMS - pulseDurationMS.
+
+	"Even if there is no need to wait, yield to other processes of the same priority"
 	msToWait <= 0 ifTrue: [ ^ Processor yield ].
 
+	"Wait until the next scheduled pulse period or until a pulse is requested explicitly"
 	self pulseRequestedSemaphore waitTimeoutMilliseconds: msToWait
 ]

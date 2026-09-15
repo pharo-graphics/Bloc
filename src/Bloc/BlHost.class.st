@@ -92,8 +92,7 @@ BlHost class >> supportedHostClasses [
 
 { #category : #'api - spaces' }
 BlHost >> closeSpace: aSpace [
-
-	(self isRunning or: [ self hasSpace: aSpace ]) ifFalse: [ ^ self ].
+	"Close aSpace managed by this host."
 
 	self universe closeSpace: aSpace
 ]
@@ -214,6 +213,7 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 
 { #category : #'api - spaces' }
 BlHost >> openSpace: aSpace [
+	"Open aSpace on this host."
 
 	self universe openSpace: aSpace
 ]
@@ -292,6 +292,7 @@ BlHost >> spaces [
 
 { #category : #'api - lifecycle' }
 BlHost >> start [
+	"Start this host."
 
 	self subclassResponsibility
 ]
@@ -305,12 +306,13 @@ BlHost >> startUp: isResuming [
 
 { #category : #'api - lifecycle' }
 BlHost >> markStopped [
-	"Subclasses with pulse loops implement this to mark stopped without self-termination"
+	"Subclasses with pulse loops implement this to mark stopped without self-termination."
 
 ]
 
 { #category : #'api - lifecycle' }
 BlHost >> stop [
+	"Stop this host."
 
 	self subclassResponsibility
 ]

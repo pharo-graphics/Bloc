@@ -60,28 +60,32 @@ BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> closeSpace: aSpace [
+	"Queue aSpace to be closed at the beginning of the next pulse."
 
 	self lifecycleMutex critical: [
-		(self spacesToOpen includes: aSpace)
-			ifTrue: [ self spacesToOpen remove: aSpace ]
-			ifFalse: [
-				(spaces includes: aSpace)
-					ifTrue: [ self spacesToClose add: aSpace ] ] ].
+		(self spacesToOpen includes: aSpace) ifTrue: [
+			self spacesToOpen remove: aSpace.
+			^ self ].
+		(spaces includes: aSpace) ifFalse: [ ^ self ].
+		self spacesToClose add: aSpace ].
 
-	host isRunning
-		ifFalse: [
-			(self isSpaceClosing: aSpace) ifTrue: [
-				host start ] ]
-		ifTrue: [ host requestPulse ]
+	host isRunning ifFalse: [ host start ].
+	host requestPulse
 ]
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> closeSpaceNow: aSpace [
 
+	"If space is not even opened we should do nothing"
 	(spaces includes: aSpace) ifFalse: [ ^ self ].
 
 	self detachSpace: aSpace.
+
+	"Notify root element that it is no longer in scene graph"
 	aSpace dispatchRemovedFromSceneGraph.
+
+	"Send space closed event.
+	Note: a new space may be opened as a reaction to the event. That is the reason to defer stopping of host and universe."
 	aSpace dispatchEventWithTimestamp: BlSpaceClosedEvent new
 ]
 
@@ -114,7 +118,7 @@ BlParallelUniverse >> detachSpace: aSpace [
 
 	| aHost |
 	"If space is not even opened we should do nothing"
-	aSpace isOpened ifFalse: [ ^ self ].
+	(spaces includes: aSpace) ifFalse: [ ^ self ].
 
 	"We have to defer the check to the next frame, otherwise the UI loop may be terminated before frame finishes. 
 	We have to store a reference to the original host because it may potentially change.
@@ -288,14 +292,16 @@ BlParallelUniverse >> isSpaceOpening: aSpace [
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> openSpace: aSpace [
+	"Queue aSpace to be opened at the beginning of the next pulse."
+
+	(spaces includes: aSpace) ifTrue: [
+		aSpace hostSpaceDo: [ :hs |
+			aSpace becomeVisible.
+			hs show ].
+		^ self ].
 
 	self lifecycleMutex critical: [
-		(self spacesToClose includes: aSpace)
-			ifTrue: [ self spacesToClose remove: aSpace ].
-		(spaces includes: aSpace)
-			ifFalse: [ self spacesToOpen add: aSpace ]
-			ifTrue: [
-				aSpace isVisible ifFalse: [ self spacesToOpen add: aSpace ] ] ].
+		self spacesToOpen add: aSpace ].
 
 	host isRunning ifFalse: [ host start ].
 	host requestPulse
@@ -304,14 +310,21 @@ BlParallelUniverse >> openSpace: aSpace [
 { #category : #'private - spaces' }
 BlParallelUniverse >> openSpaceNow: aSpace [
 
+	"If it has been already opened, just unhide it"
 	(spaces includes: aSpace) ifTrue: [
 		aSpace hasHostSpace ifTrue: [
 			aSpace becomeVisible.
 			^ aSpace hostSpace show ] ].
 
 	self attachSpace: aSpace.
+
+	"Note: we should send shown event after everything else is done, because
+	theoretically, that only space could be closed as a reaction to the event"
 	aSpace dispatchEventWithTimestamp: BlSpaceShownEvent new.
+
+	"Notify root element that it is now visible to the user"
 	aSpace becomeVisible.
+
 	aSpace dispatchAddedToSceneGraph
 ]
 
@@ -346,19 +359,21 @@ BlParallelUniverse >> printOn: aStream [
 
 { #category : #pulse }
 BlParallelUniverse >> pulse [
+	"Execute a complete frame pulse for all managed spaces, processing pending lifecycle changes and deferred actions."
 
 	| toClose toOpen semaphoresToSignal |
 	isPulsing := true.
 	[
 		self lifecycleMutex critical: [
-			toClose := self spacesToClose asArray.
-			self spacesToClose removeAll.
 			toOpen := self spacesToOpen asArray.
-			self spacesToOpen removeAll ].
+			self spacesToOpen removeAll.
+			toClose := self spacesToClose asArray.
+			self spacesToClose removeAll ].
 
 		[
-			toClose do: [ :eachSpace | self closeSpaceNow: eachSpace ].
 			toOpen do: [ :eachSpace | self openSpaceNow: eachSpace ].
+			toClose do: [ :eachSpace | self closeSpaceNow: eachSpace ].
+			"Deferred actions must be run before spaces"
 			self evaluateDeferredActions.
 			spaces do: [ :eachSpace | eachSpace basicPulse ]
 		] ifCurtailed: [
