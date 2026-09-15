@@ -93,11 +93,9 @@ BlHost class >> supportedHostClasses [
 { #category : #'api - spaces' }
 BlHost >> closeSpace: aSpace [
 
-	"Return early if space was never opened and host is idle"
 	(self isRunning or: [ self hasSpace: aSpace ]) ifFalse: [ ^ self ].
 
-	self universe defer: [ self universe closeSpace: aSpace ].
-	self isRunning ifFalse: [ self start ]
+	self universe closeSpace: aSpace
 ]
 
 { #category : #'api - spaces' }
@@ -168,6 +166,20 @@ BlHost >> isSettled [
 ]
 
 { #category : #testing }
+BlHost >> isSpaceClosing: aSpace [
+	"Return true if a given space is currently queued to be closed on this host, false otherwise."
+
+	^ self hasUniverse and: [ self universe isSpaceClosing: aSpace ]
+]
+
+{ #category : #testing }
+BlHost >> isSpaceOpening: aSpace [
+	"Return true if a given space is currently queued to be opened on this host, false otherwise."
+
+	^ self hasUniverse and: [ self universe isSpaceOpening: aSpace ]
+]
+
+{ #category : #testing }
 BlHost >> isSupported [
 
 	^ self class isSupported
@@ -203,8 +215,7 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 { #category : #'api - spaces' }
 BlHost >> openSpace: aSpace [
 
-	self universe defer: [ self universe openSpace: aSpace ].
-	self isRunning ifFalse: [ self start ]
+	self universe openSpace: aSpace
 ]
 
 { #category : #accessing }
@@ -218,6 +229,12 @@ BlHost >> pulse [
 	"Execute a single pulse cycle across all spaces managed by this host."
 
 	self hasUniverse ifTrue: [ self universe pulse ]
+]
+
+{ #category : #'api - pulse' }
+BlHost >> requestPulse [
+	"Request a pulse cycle from this host. Subclasses with pulse loops implement this to wake the loop."
+
 ]
 
 { #category : #'api - pulse process' }
@@ -284,6 +301,12 @@ BlHost >> startUp: isResuming [
 	"Handle system startup / session resume."
 
 	self hasUniverse ifTrue: [ self universe start ]
+]
+
+{ #category : #'api - lifecycle' }
+BlHost >> markStopped [
+	"Subclasses with pulse loops implement this to mark stopped without self-termination"
+
 ]
 
 { #category : #'api - lifecycle' }

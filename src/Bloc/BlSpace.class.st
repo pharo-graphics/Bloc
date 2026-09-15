@@ -662,20 +662,22 @@ BlSpace >> host [
 
 { #category : #'host space - accessing' }
 BlSpace >> host: aHost [
-	"Change the host of this space. Asynchronous. If the space is opened, first destroy the host window and then open the space with a new host"
+	"Change the host of this space. The space must be closed and settled first."
 
-	self isOpened
-		ifFalse: [ host := aHost ]
-		ifTrue: [
-			| currentHost |
-			currentHost := host.
-			self
-				addEventHandlerOn: BlSpaceDetachedEvent
-				doOnce: [
-					host := aHost.
-					aHost openSpace: self ].
+	self isClosed ifFalse: [
+		self error: 'Cannot change host while space is opened, opening, or closing. Close and settle the space first.' ].
 
-			currentHost closeSpace: self ]
+	host := aHost
+]
+
+{ #category : #'host space - accessing' }
+BlSpace >> migrateToHost: aHost [
+	"Migrate this space to a new host cleanly by closing, settling, re-assigning, and reopening."
+
+	self close.
+	self settle.
+	self host: aHost.
+	self show
 ]
 
 { #category : #'host space - accessing' }
@@ -883,11 +885,31 @@ BlSpace >> isLayoutRequested [
 ]
 
 { #category : #testing }
-BlSpace >> isOpened [
-	"Return true if the space was shown (by sending #show or #open message), false otherwise.
-	Please note, that an opened space can be hidden which does not influence the result of #isOpened"
+BlSpace >> isClosed [
+	"Return true if the space is completely closed (not open, not opening, not closing)."
 
-	^ self host hasSpace: self
+	^ (self host hasSpace: self) not and: [ self isOpening not and: [ self isClosing not ] ]
+]
+
+{ #category : #testing }
+BlSpace >> isClosing [
+	"Return true if this space is currently queued to be closed, false otherwise."
+
+	^ self host isSpaceClosing: self
+]
+
+{ #category : #testing }
+BlSpace >> isOpened [
+	"Return true if the space is opened or currently opening, and not closing."
+
+	^ (self host hasSpace: self) and: [ self isClosing not ]
+]
+
+{ #category : #testing }
+BlSpace >> isOpening [
+	"Return true if this space is currently queued to be opened, false otherwise."
+
+	^ self host isSpaceOpening: self
 ]
 
 { #category : #pulse }
@@ -1165,7 +1187,8 @@ BlSpace >> requestNextPulse [
 { #category : #pulse }
 BlSpace >> requestPulse [
 
-	pulseRequested := true
+	pulseRequested := true.
+	self host ifNotNil: [ :h | h requestPulse ]
 ]
 
 { #category : #'window - properties' }

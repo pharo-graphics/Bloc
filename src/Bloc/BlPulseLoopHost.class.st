@@ -68,6 +68,18 @@ BlPulseLoopHost >> pulseProcessDo: aBlock [
 ]
 
 { #category : #'api - lifecycle' }
+BlPulseLoopHost >> markStopped [
+
+	pulseLoop markStopped
+]
+
+{ #category : #'api - lifecycle' }
+BlPulseLoopHost >> requestPulse [
+
+	pulseLoop requestPulse
+]
+
+{ #category : #'api - lifecycle' }
 BlPulseLoopHost >> start [
 
 	pulseLoop start

@@ -19,7 +19,10 @@ Class {
 		'pulseSemaphoresMutex',
 		'host',
 		'isPulsing',
-		'visibleSpacesOnShutdown'
+		'visibleSpacesOnShutdown',
+		'spacesToOpen',
+		'spacesToClose',
+		'lifecycleMutex'
 	],
 	#category : #'Bloc-Universe - Parallel'
 }
@@ -58,16 +61,27 @@ BlParallelUniverse >> attachSpaceSynchronously: aSpace [
 { #category : #'api - spaces' }
 BlParallelUniverse >> closeSpace: aSpace [
 
-	"If space is not even opened we should do nothing"
-	aSpace isOpened ifFalse: [ ^ self ].
+	self lifecycleMutex critical: [
+		(self spacesToOpen includes: aSpace)
+			ifTrue: [ self spacesToOpen remove: aSpace ]
+			ifFalse: [
+				(spaces includes: aSpace)
+					ifTrue: [ self spacesToClose add: aSpace ] ] ].
+
+	host isRunning
+		ifFalse: [
+			(self isSpaceClosing: aSpace) ifTrue: [
+				host start ] ]
+		ifTrue: [ host requestPulse ]
+]
+
+{ #category : #'private - spaces' }
+BlParallelUniverse >> closeSpaceNow: aSpace [
+
+	(spaces includes: aSpace) ifFalse: [ ^ self ].
 
 	self detachSpace: aSpace.
-
-	"Notify root element that it is no longer in scene graph"
 	aSpace dispatchRemovedFromSceneGraph.
-	
-	"Send space closed event.
-	Note: a new space may be opened as a reaction to the event. That is the reason to defer stopping of host and universe."
 	aSpace dispatchEventWithTimestamp: BlSpaceClosedEvent new
 ]
 
@@ -189,6 +203,24 @@ BlParallelUniverse >> host [
 ]
 
 { #category : #accessing }
+BlParallelUniverse >> lifecycleMutex [
+
+	^ lifecycleMutex ifNil: [ lifecycleMutex := Mutex new ]
+]
+
+{ #category : #accessing }
+BlParallelUniverse >> spacesToClose [
+
+	^ spacesToClose ifNil: [ spacesToClose := IdentitySet new ]
+]
+
+{ #category : #accessing }
+BlParallelUniverse >> spacesToOpen [
+
+	^ spacesToOpen ifNil: [ spacesToOpen := IdentitySet new ]
+]
+
+{ #category : #accessing }
 BlParallelUniverse >> hostClass [
 
 	self deprecated: 'Access the #host instance'.
@@ -210,6 +242,9 @@ BlParallelUniverse >> initialize [
 	super initialize.
 
 	spaces := IdentitySet new.
+	spacesToOpen := IdentitySet new.
+	spacesToClose := IdentitySet new.
+	lifecycleMutex := Mutex new.
 	host := BlHeadlessHost default.
 	deferredActions := WaitfreeQueue new.
 	pulseSemaphores := OrderedCollection new.
@@ -232,26 +267,51 @@ BlParallelUniverse >> isPulsing [
 
 { #category : #testing }
 BlParallelUniverse >> isSettled [
-	"Return true if there are no deferred actions waiting to be executed"
+	"Return true if there are no pending space openings, closings, or deferred actions"
 
-	^ deferredActions isEmpty
+	^ self lifecycleMutex critical: [
+		self spacesToOpen isEmpty and: [
+			self spacesToClose isEmpty and: [ deferredActions isEmpty ] ] ]
+]
+
+{ #category : #testing }
+BlParallelUniverse >> isSpaceClosing: aSpace [
+
+	^ self lifecycleMutex critical: [ self spacesToClose includes: aSpace ]
+]
+
+{ #category : #testing }
+BlParallelUniverse >> isSpaceOpening: aSpace [
+
+	^ self lifecycleMutex critical: [ self spacesToOpen includes: aSpace ]
 ]
 
 { #category : #'api - spaces' }
 BlParallelUniverse >> openSpace: aSpace [
 
-	"If it has been already opened, just unhide it" 
-	(aSpace isOpened and: [ aSpace hostSpace isNotNil ]) ifTrue: [ ^ aSpace hostSpace show ].
+	self lifecycleMutex critical: [
+		(self spacesToClose includes: aSpace)
+			ifTrue: [ self spacesToClose remove: aSpace ].
+		(spaces includes: aSpace)
+			ifFalse: [ self spacesToOpen add: aSpace ]
+			ifTrue: [
+				aSpace isVisible ifFalse: [ self spacesToOpen add: aSpace ] ] ].
+
+	host isRunning ifFalse: [ host start ].
+	host requestPulse
+]
+
+{ #category : #'private - spaces' }
+BlParallelUniverse >> openSpaceNow: aSpace [
+
+	(spaces includes: aSpace) ifTrue: [
+		aSpace hasHostSpace ifTrue: [
+			aSpace becomeVisible.
+			^ aSpace hostSpace show ] ].
 
 	self attachSpace: aSpace.
-
-	"Note: we should send shown event after everything else is done, because
-	theoretically, that only space could be closed as a reaction to the event"
 	aSpace dispatchEventWithTimestamp: BlSpaceShownEvent new.
-
-	"Notify root element that it is now visible to the user"
 	aSpace becomeVisible.
-	
 	aSpace dispatchAddedToSceneGraph
 ]
 
@@ -287,21 +347,28 @@ BlParallelUniverse >> printOn: aStream [
 { #category : #pulse }
 BlParallelUniverse >> pulse [
 
-	| semaphoresToSignal |
+	| toClose toOpen semaphoresToSignal |
 	isPulsing := true.
 	[
+		self lifecycleMutex critical: [
+			toClose := self spacesToClose asArray.
+			self spacesToClose removeAll.
+			toOpen := self spacesToOpen asArray.
+			self spacesToOpen removeAll ].
+
 		[
+			toClose do: [ :eachSpace | self closeSpaceNow: eachSpace ].
+			toOpen do: [ :eachSpace | self openSpaceNow: eachSpace ].
 			self evaluateDeferredActions.
 			spaces do: [ :eachSpace | eachSpace basicPulse ]
-		] 
-			on: Exception 
-			do: [ :e | 
-				BlParallelUniverseErrorDuringPulseSignal new
-					signaledError: e;
-					emit.
-				e pass ]
+		] ifCurtailed: [
+			self lifecycleMutex critical: [
+				self spacesToClose addAll: (toClose reject: [ :s | (spaces includes: s) not ]).
+				self spacesToOpen addAll: (toOpen reject: [ :s | spaces includes: s ]) ] ]
 	] ensure: [
 		isPulsing := false.
+		(spaces isEmpty and: [ self isSettled ]) ifTrue: [
+			host markStopped ].
 		pulseSemaphoresMutex critical: [
 			semaphoresToSignal := pulseSemaphores copy ].
 		semaphoresToSignal do: [ :each | each signal ] ]
@@ -447,6 +514,9 @@ BlParallelUniverse >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable 
 
 	| aSemaphore |
 	self host denyPulseProcess.
+
+	aConditionValuable value ifTrue: [ ^ completionBlock value ].
+
 	aSemaphore := Semaphore new.
 	self registerPulseSemaphore: aSemaphore.
 	[
@@ -455,16 +525,10 @@ BlParallelUniverse >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable 
 			midPulse := self isPulsing.
 			midPulse
 				ifTrue: [ false ]
-				ifFalse: [ aConditionValuable value ]
-		] whileFalse: [
-			aTimeoutValuable value ifTrue: [ ^ timeoutBlock value ].
-			self host isRunning
-				ifTrue: [ aSemaphore waitTimeoutMilliseconds: 50 ]
-				ifFalse: [
-					self pulse.
-					(Delay forMilliseconds: 1) wait ] ]
-	] ensure: [
+				ifFalse: [ aConditionValuable value ] ] whileFalse: [
+				aTimeoutValuable value ifTrue: [ ^ timeoutBlock value ].
+				aSemaphore waitTimeoutMilliseconds: 50 ] ] ensure: [
 		self unregisterPulseSemaphore: aSemaphore ].
-		
+
 	^ completionBlock value
 ]
