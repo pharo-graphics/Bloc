@@ -195,7 +195,10 @@ BlDevScripter >> root [
 BlDevScripter >> showSpace [
 	"I can be only used after Scripter execution."
 
-	self space migrateToHost: Bloc preferredHost
+	self space close.
+	self space settle.
+	self space host: Bloc preferredHost.
+	self space show
 ]
 
 { #category : #'accessing - space' }

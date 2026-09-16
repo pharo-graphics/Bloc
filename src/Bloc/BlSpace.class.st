@@ -1013,16 +1013,6 @@ BlSpace >> measureTextParagraph: aBlTextParagraph [
 	host offscreenMeasureTextParagraph: aBlTextParagraph
 ]
 
-{ #category : #'host space - accessing' }
-BlSpace >> migrateToHost: aHost [
-	"Migrate this space to a new host cleanly by closing, settling, re-assigning, and reopening."
-
-	self close.
-	self settle.
-	self host: aHost.
-	self show
-]
-
 { #category : #'api - displaying' }
 BlSpace >> minimize [
 	self hostSpaceDo: [ :hw | hw minimize ]
