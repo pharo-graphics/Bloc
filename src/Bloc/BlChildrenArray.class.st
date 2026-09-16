@@ -34,7 +34,7 @@ BlChildrenArray >> add: aChild at: anIndex [
 BlChildrenArray >> addAll: aSequenceableCollection [
 	"Add all the elements from the given collection to the children array.
 	If the user passed an array and our current array is empty, we just replace 
-	it directly - no need to waste time making a copy of array. Callers should 
+	it directly - no need to waste time making a copy of array. Senders should 
 	no longer modify the given array."
 	array := (array isEmpty and: [ aSequenceableCollection isArray ])
 		ifTrue: [ aSequenceableCollection ]
@@ -46,7 +46,7 @@ BlChildrenArray >> addAll: aSequenceableCollection [
 BlChildrenArray >> asArray [
 	"Directly return the internal array used to store children.
 	This avoids creating an extra array, as this operation can be called many times.
-	Callers should create a copy of the array if they need to modify it,
+	Senders should create a copy of the array if they need to modify it,
 	as adding or removing elements will create a new array used internally."
 	^ array
 ]

@@ -1439,9 +1439,9 @@ BlSpace >> waitForDuration: aDuration [
 { #category : #pulse }
 BlSpace >> waitUntilTrue: aConditionValuable [
 	"Wait until the given condition block evaluates to true, synchronized with the space pulses.
-	Blocks the calling process on the host's pulse semaphore, waking up on each frame to check the condition."
+	Blocks the sender process on the host's pulse semaphore, waking up on each frame to check the condition."
 
-	self host
+	host
 		waitUntil: aConditionValuable
 		timeOutIf: [ false ]
 		onCompletion: [ ]
@@ -1451,11 +1451,11 @@ BlSpace >> waitUntilTrue: aConditionValuable [
 { #category : #pulse }
 BlSpace >> waitUntilTrue: aConditionValuable forDuration: aDuration [
 	"Wait until the given condition block evaluates to true, or the timeout duration has passed.
-	Blocks the calling process on the host's pulse semaphore, waking up on each frame to check the condition."
+	Blocks the sender process on the host's pulse semaphore, waking up on each frame to check the condition."
 
 	| deadlineInMicroseconds |
 	deadlineInMicroseconds := time nowInUTCMicroseconds + (aDuration asMilliSeconds * 1000).
-	self host
+	host
 		waitUntil: aConditionValuable
 		timeOutIf: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
 		onCompletion: [ ]
