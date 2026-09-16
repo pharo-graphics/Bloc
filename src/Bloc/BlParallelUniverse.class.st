@@ -157,7 +157,7 @@ BlParallelUniverse >> hostClass: aHostClass [
 { #category : #initialization }
 BlParallelUniverse >> initializeWithHost: aHost [
 
-	super initialize.
+	self initialize.
 
 	host := aHost.
 
