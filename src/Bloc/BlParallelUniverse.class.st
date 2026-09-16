@@ -446,8 +446,6 @@ BlParallelUniverse >> unregisterPulseSemaphore: aSemaphore [
 BlParallelUniverse >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion: completionBlock onTimeout: timeoutBlock [
 
 	| aSemaphore |
-	self host denyPulseProcess.
-
 	aConditionValuable value ifTrue: [ ^ completionBlock value ].
 
 	aSemaphore := Semaphore new.
