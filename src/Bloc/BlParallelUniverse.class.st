@@ -155,26 +155,19 @@ BlParallelUniverse >> hostClass: aHostClass [
 ]
 
 { #category : #initialization }
-BlParallelUniverse >> initialize [
+BlParallelUniverse >> initializeWithHost: aHost [
 
 	super initialize.
+
+	host := aHost.
 
 	spaces := IdentitySet new.
 	spacesToOpen := IdentitySet new.
 	spacesToClose := IdentitySet new.
 	lifecycleMutex := Mutex new.
-	host := BlHeadlessHost default.
 	deferredActions := WaitfreeQueue new.
 	pulseSemaphores := OrderedCollection new.
 	pulseSemaphoresMutex := Mutex new
-]
-
-{ #category : #initialization }
-BlParallelUniverse >> initializeWithHost: aHost [
-
-	self initialize.
-
-	host := aHost
 ]
 
 { #category : #testing }
