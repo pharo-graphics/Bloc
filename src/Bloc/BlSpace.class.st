@@ -664,7 +664,7 @@ BlSpace >> host [
 BlSpace >> host: aHost [
 	"Change the host of this space. The space must be closed and settled first."
 
-	self isClosed ifFalse: [
+	(self isOpened or: [ self isOpening or: [ self isClosing ] ]) ifTrue: [
 		self error: 'Cannot change host while space is opened, opening, or closing. Close and settle the space first.' ].
 
 	host := aHost
@@ -843,13 +843,6 @@ BlSpace >> isBorderless [
 ]
 
 { #category : #testing }
-BlSpace >> isClosed [
-	"Return true if the space is completely closed (not open, not opening, not closing)."
-
-	^ (host hasSpace: self) not and: [ self isOpening not and: [ self isClosing not ] ]
-]
-
-{ #category : #testing }
 BlSpace >> isClosing [
 	"Return true if this space is currently queued to be closed, false otherwise."
 
@@ -890,9 +883,9 @@ BlSpace >> isLayoutRequested [
 
 { #category : #testing }
 BlSpace >> isOpened [
-	"Return true if the space is opened or currently opening, and not closing."
+	"Return true if the space is currently opened on its host."
 
-	^ (host hasSpace: self) and: [ self isClosing not ]
+	^ host hasSpace: self
 ]
 
 { #category : #testing }
