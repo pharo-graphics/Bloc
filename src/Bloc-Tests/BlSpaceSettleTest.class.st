@@ -308,3 +308,22 @@ BlSpaceSettleTest >> testWaitUntilTrueFromPulseProcessRaisesError [
 	aSpace settle.
 	self assert: errorRaised
 ]
+
+{ #category : #tests }
+BlSpaceSettleTest >> testSpaceSettledIsIndependentOfOtherSpaces [
+
+	| space1 space2 |
+	space1 := self newTestingSpace.
+	self assert: space1 isSettled.
+
+	space2 := BlSpace new.
+	space2 host: host.
+	testingSpaces add: space2.
+	space2 open.
+	self deny: space2 isSettled.
+	self assert: space1 isSettled.
+
+	space2 settle.
+	self assert: space2 isSettled.
+	self assert: space1 isSettled
+]

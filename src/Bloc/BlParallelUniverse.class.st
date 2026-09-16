@@ -36,29 +36,6 @@ BlParallelUniverse class >> host: aBlHost [
 ]
 
 { #category : #'api - spaces' }
-BlParallelUniverse >> attachSpace: aSpace [
-
-	(aSpace isOpened and: [ aSpace hostSpace isNotNil ]) ifTrue: [ ^ self ].
-
-	spaces add: aSpace.
-
-	[ aSpace hostSpaceOpen ] on: Exception do: [ :exception |
-		spaces remove: aSpace ifAbsent: [ ].
-		aSpace hostSpaceClose.
-		exception pass ]
-]
-
-{ #category : #'private - spaces' }
-BlParallelUniverse >> attachSpaceSynchronously: aSpace [
-
-	self
-		deprecated: 'Use #attachSpace: instead'
-		transformWith: '`@receiver attachSpaceSynchronously: `@arg' -> '`@receiver attachSpace: `@arg'.
-
-	^ self attachSpace: aSpace
-]
-
-{ #category : #'api - spaces' }
 BlParallelUniverse >> closeSpace: aSpace [
 	"Queue aSpace to be closed at the beginning of the next pulse."
 
@@ -72,13 +49,9 @@ BlParallelUniverse >> closeSpaceNow: aSpace [
 	"If space is not even opened we should do nothing"
 	(spaces includes: aSpace) ifFalse: [ ^ self ].
 
-	self detachSpace: aSpace.
-
-	"Notify root element that it is no longer in scene graph"
+	spaces remove: aSpace.
+	aSpace hostSpaceClose.
 	aSpace dispatchRemovedFromSceneGraph.
-
-	"Send space closed event.
-	Note: a new space may be opened as a reaction to the event. That is the reason to defer stopping of host and universe."
 	aSpace dispatchEventWithTimestamp: BlSpaceClosedEvent new
 ]
 
@@ -104,40 +77,6 @@ BlParallelUniverse >> defer: aValuable [
 	It is useful to update the UI states."
 
 	deferredActions nextPut: aValuable
-]
-
-{ #category : #'api - spaces' }
-BlParallelUniverse >> detachSpace: aSpace [
-
-	| aHost |
-	"If space is not even opened we should do nothing"
-	(spaces includes: aSpace) ifFalse: [ ^ self ].
-
-	"We have to defer the check to the next frame, otherwise the UI loop may be terminated before frame finishes. 
-	We have to store a reference to the original host because it may potentially change.
-	Note: the actual termination of the host may happen after a host of the space is changed."
-	aHost := aSpace host.
-
-	"First, remove the space from space manager, to break any recursion."
-	spaces remove: aSpace.
-
-	"Then, tear down the host space"
-	aSpace hostSpaceClose.
-
-	"Dispatch an event indicating that the space is no longer attached to a universe"
-	aSpace dispatchEventWithTimestamp: BlSpaceDetachedEvent new.
-
-	aHost spaceDetached: aSpace
-]
-
-{ #category : #'private - spaces' }
-BlParallelUniverse >> detachSpaceSynchronously: aSpace [
-
-	self
-		deprecated: 'Use #detachSpace: instead'
-		transformWith: '`@receiver detachSpaceSynchronously: `@arg' -> '`@receiver detachSpace: `@arg'.
-
-	^ self detachSpace: aSpace
 ]
 
 { #category : #'deferred message' }
@@ -299,16 +238,15 @@ BlParallelUniverse >> openSpaceNow: aSpace [
 			aSpace becomeVisible.
 			^ aSpace hostSpace show ] ].
 
-	self attachSpace: aSpace.
+	spaces add: aSpace.
+	[ aSpace hostSpaceOpen ] on: Exception do: [ :exception |
+		spaces remove: aSpace ifAbsent: [ ].
+		aSpace hostSpaceClose.
+		exception pass ].
 
-	"Note: we should send shown event after everything else is done, because
-	theoretically, that only space could be closed as a reaction to the event"
-	aSpace dispatchEventWithTimestamp: BlSpaceShownEvent new.
-
-	"Notify root element that it is now visible to the user"
 	aSpace becomeVisible.
-
-	aSpace dispatchAddedToSceneGraph
+	aSpace dispatchAddedToSceneGraph.
+	aSpace dispatchEventWithTimestamp: BlSpaceShownEvent new
 ]
 
 { #category : #'private - spaces' }

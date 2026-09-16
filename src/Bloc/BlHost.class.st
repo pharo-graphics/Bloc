@@ -293,16 +293,6 @@ BlHost >> shutDown: isQuitting [
 	self hasUniverse ifTrue: [ self universe stop ]
 ]
 
-{ #category : #'private - spaces' }
-BlHost >> spaceDetached: aSpace [
-	"A space has been detached from this host. If no spaces remain, cleanly shut down the host loop on the next frame."
-
-	(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
-		self universe defer: [
-			(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
-				self stop ] ] ]
-]
-
 { #category : #'host space - accessing' }
 BlHost >> spaces [
 	"Answer the collection of spaces managed by this host."
@@ -312,6 +302,7 @@ BlHost >> spaces [
 
 { #category : #'api - lifecycle' }
 BlHost >> start [
+	"Start this host."
 
 	self subclassResponsibility
 ]
@@ -325,6 +316,7 @@ BlHost >> startUp: isResuming [
 
 { #category : #'api - lifecycle' }
 BlHost >> stop [
+	"Stop this host."
 
 	self subclassResponsibility
 ]

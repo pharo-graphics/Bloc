@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #tests }
-BlSpaceLifecycleTest >> testCloseAlreadyClosedSpaceIsNoOp [
+BlSpaceLifecycleTest >> testCloseAlreadyClosedSpaceIsIdempotent [
 
 	| aSpace |
 	aSpace := self newTestingSpace.
@@ -70,7 +70,7 @@ BlSpaceLifecycleTest >> testCloseSpaceOnStoppedHostRunsOnPulseProcess [
 ]
 
 { #category : #tests }
-BlSpaceLifecycleTest >> testCloseUnopenedSpaceDoesNotStartHost [
+BlSpaceLifecycleTest >> testCloseUnopenedSpaceLeavesHostStopped [
 
 	| aSpace |
 	aSpace := BlSpace new.
