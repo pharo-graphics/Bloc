@@ -115,7 +115,7 @@ BlSpace >> bounds [
 BlSpace >> center [
 	"Tell host to change my position to be centered. Do nothing if host space is not present (e.g. not shown)."
 
-	self hostSpaceDo: [ :hw | hw center ]
+	self hostSpaceDo: [ :hs | hs center ]
 ]
 
 { #category : #'change - rendering' }
@@ -652,7 +652,7 @@ BlSpace >> height [
 
 { #category : #'api - displaying' }
 BlSpace >> hide [
-	self hostSpaceDo: [ :hw | hw hide ]
+	self hostSpaceDo: [ :hs | hs hide ]
 ]
 
 { #category : #'host space - accessing' }
@@ -982,12 +982,12 @@ BlSpace >> markNeedsPaint: anElement from: aSourceElement [
 
 { #category : #'api - displaying' }
 BlSpace >> maximize [
-	self hostSpaceDo: [ :hw | hw maximize ]
+	self hostSpaceDo: [ :hs | hs maximize ]
 ]
 
 { #category : #'api - displaying' }
 BlSpace >> maximized [
-	^ self hostSpaceDo: [ :hw | hw maximized ] ifAbsent: [ false ]
+	^ self hostSpaceDo: [ :hs | hs maximized ] ifAbsent: [ false ]
 ]
 
 { #category : #dispatch }
@@ -1005,12 +1005,12 @@ BlSpace >> measureTextParagraph: aBlTextParagraph [
 
 { #category : #'api - displaying' }
 BlSpace >> minimize [
-	self hostSpaceDo: [ :hw | hw minimize ]
+	self hostSpaceDo: [ :hs | hs minimize ]
 ]
 
 { #category : #'api - displaying' }
 BlSpace >> minimized [
-	^ self hostSpaceDo: [ :hw | hw minimized ] ifAbsent: [ false ]
+	^ self hostSpaceDo: [ :hs | hs minimized ] ifAbsent: [ false ]
 ]
 
 { #category : #'accessing - processors' }
@@ -1380,12 +1380,12 @@ BlSpace >> title: aString [
 
 { #category : #'api - displaying' }
 BlSpace >> toBack [
-	self hostSpaceDo: [ :hw | hw toBack ]
+	self hostSpaceDo: [ :hs | hs toBack ]
 ]
 
 { #category : #'api - displaying' }
 BlSpace >> toFront [
-	self hostSpaceDo: [ :hw | hw toFront ]
+	self hostSpaceDo: [ :hs | hs toFront ]
 ]
 
 { #category : #'focus managing' }
