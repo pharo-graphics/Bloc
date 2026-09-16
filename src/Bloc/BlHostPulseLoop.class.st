@@ -196,7 +196,7 @@ BlHostPulseLoop >> start [
 
 { #category : #lifecycle }
 BlHostPulseLoop >> stop [
-	"Stop the loop process. Can be safely called from any process, including the loop process itself."
+	"Stop the loop process. Can be safely sent from any process, including the loop process itself."
 
 	| currentProcess isCurrentActive |
 	self isRunning ifFalse: [ ^ self ].

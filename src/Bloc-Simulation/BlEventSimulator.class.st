@@ -5,7 +5,7 @@ I provide a high-level API to simulate user interactions such as mouse clicks, d
 
 ### Key Responsibilities
 - **Realistic Event Generation**: Constructs low-level UI events (`BlMouseDownEvent`, `BlMouseUpEvent`, `BlMouseMoveEvent`, `BlKeyDownEvent`, `BlKeyUpEvent`, `BlTextInputEvent`, `BlMouseWheelEvent`) with timestamps and modifier state.
-- **Pulse Synchronization**: Enqueues events directly into the target's `BlHostSpace` event queue and calls `space settle` so that event handlers, layout changes, and frame passes complete before returning control to the caller.
+- **Pulse Synchronization**: Enqueues events directly into the target's `BlHostSpace` event queue and sends `space settle` so that event handlers, layout changes, and frame passes complete before returning control to the sender.
 - **Stateful Modifiers**: Maintains modifier state (`modifiers`) and pressed keys (`pressedKeys`) across multi-step sequences.
 
 ### Typical Usage

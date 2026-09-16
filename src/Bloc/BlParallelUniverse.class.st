@@ -374,7 +374,7 @@ BlParallelUniverse >> spacesToOpen [
 { #category : #'private - lifecycle' }
 BlParallelUniverse >> start [
 	"A universe must not be running here.
-	I am called outside of the UI loop (there is no UI loop yet)"
+	Sent outside of the UI loop (there is no UI loop yet)."
 
 	| visibleSpaces |
 	host start.
@@ -404,7 +404,7 @@ BlParallelUniverse >> startUniverse [
 { #category : #'private - lifecycle' }
 BlParallelUniverse >> stop [
 	"A universe must be running here.
-	I am called from the UI loop"
+	Sent from the UI loop."
 	
 	visibleSpacesOnShutdown := (spaces select: [ :each | each isVisible ]) asIdentitySet.
 	host stop
