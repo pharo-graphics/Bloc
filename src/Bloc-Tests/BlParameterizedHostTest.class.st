@@ -65,6 +65,31 @@ BlParameterizedHostTest class >> testParameters [
 		  addOptions: self availableHosts
 ]
 
+{ #category : #running }
+BlParameterizedHostTest >> closeHostSpaces [
+
+	host closeSpaces.
+	host isRunning ifTrue: [ host settle ]
+]
+
+{ #category : #running }
+BlParameterizedHostTest >> closeNonInitialSpaces [
+
+	self closeSpacesExcluding: initialSpaces
+]
+
+{ #category : #running }
+BlParameterizedHostTest >> closeSpacesExcluding: aCollectionOfSpaces [
+
+	| spacesToClose |
+	aCollectionOfSpaces ifNil: [ ^ self ].
+
+	spacesToClose := host spaces copy reject: [ :each | aCollectionOfSpaces includes: each ].
+	spacesToClose ifEmpty: [ ^ self ].
+	spacesToClose do: [ :each | each close ].
+	host isRunning ifTrue: [ host settle ]
+]
+
 { #category : #accessing }
 BlParameterizedHostTest >> host [
 
@@ -93,16 +118,13 @@ BlParameterizedHostTest >> newTestingSpace [
 ]
 
 { #category : #running }
-BlParameterizedHostTest >> closeHostSpaces [
+BlParameterizedHostTest >> setUp [
 
-	host closeSpaces.
-	host isRunning ifTrue: [ host settle ]
-]
+	super setUp.
 
-{ #category : #running }
-BlParameterizedHostTest >> closeNonInitialSpaces [
-
-	self closeSpacesExcluding: initialSpaces
+	self closeHostSpaces.
+	testingSpaces := OrderedCollection new.
+	initialSpaces := host spaces copy
 ]
 
 { #category : #running }
@@ -112,28 +134,6 @@ BlParameterizedHostTest >> settleNonInitialSpaces [
 	host spaces copy
 		reject: [ :each | initialSpaces includes: each ]
 		thenDo: [ :each | each settle ]
-]
-
-{ #category : #running }
-BlParameterizedHostTest >> closeSpacesExcluding: aCollectionOfSpaces [
-
-	| spacesToClose |
-	aCollectionOfSpaces ifNil: [ ^ self ].
-
-	spacesToClose := host spaces copy reject: [ :each | aCollectionOfSpaces includes: each ].
-	spacesToClose ifEmpty: [ ^ self ].
-	spacesToClose do: [ :each | each close ].
-	host isRunning ifTrue: [ host settle ]
-]
-
-{ #category : #running }
-BlParameterizedHostTest >> setUp [
-
-	super setUp.
-
-	self closeHostSpaces.
-	testingSpaces := OrderedCollection new.
-	initialSpaces := host spaces copy
 ]
 
 { #category : #running }

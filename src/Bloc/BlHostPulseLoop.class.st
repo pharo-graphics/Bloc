@@ -132,13 +132,6 @@ BlHostPulseLoop >> loopProcess [
 	^ loopProcess
 ]
 
-{ #category : #lifecycle }
-BlHostPulseLoop >> requestStop [
-	"Request the loop process to stop gracefully at the end of the current iteration."
-
-	loopProcess := nil
-]
-
 { #category : #'loop process' }
 BlHostPulseLoop >> newLoopProcess [
 
@@ -186,11 +179,11 @@ BlHostPulseLoop >> pulseProcess [
 	^ loopProcess
 ]
 
-{ #category : #period }
-BlHostPulseLoop >> wakeUp [
-	"Wake up the loop process immediately if sleeping between frames."
+{ #category : #lifecycle }
+BlHostPulseLoop >> requestStop [
+	"Request the loop process to stop gracefully at the end of the current iteration."
 
-	pulseRequestedSemaphore signal
+	loopProcess := nil
 ]
 
 { #category : #lifecycle }
@@ -230,4 +223,11 @@ BlHostPulseLoop >> waitUntilNextPulse [
 
 	"Wait until the next scheduled pulse period or until a pulse is requested explicitly"
 	pulseRequestedSemaphore waitTimeoutMilliseconds: msToWait
+]
+
+{ #category : #period }
+BlHostPulseLoop >> wakeUp [
+	"Wake up the loop process immediately if sleeping between frames."
+
+	pulseRequestedSemaphore signal
 ]

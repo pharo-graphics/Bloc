@@ -29,6 +29,15 @@ BlStartupShutdownTest >> testHostRegistryShutdownAndStartupKeepsSpacesOpen [
 ]
 
 { #category : #tests }
+BlStartupShutdownTest >> testOnSessionChanged [
+
+	| aSpace |
+	aSpace := self newTestingSpace.
+	aSpace onSessionChanged.
+	self assert: aSpace isOpened
+]
+
+{ #category : #tests }
 BlStartupShutdownTest >> testShutdownAndStartupKeepsSpacesInSamePosition [
 
 	| aSpace |
@@ -93,13 +102,4 @@ BlStartupShutdownTest >> testShutdownAndStartupKeepsSpacesOpenWithInvalidation [
 	host startUp: true.	
 
 	self assert: aSpace isVisible
-]
-
-{ #category : #tests }
-BlStartupShutdownTest >> testOnSessionChanged [
-
-	| aSpace |
-	aSpace := self newTestingSpace.
-	aSpace onSessionChanged.
-	self assert: aSpace isOpened
 ]

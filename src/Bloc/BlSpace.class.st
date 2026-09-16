@@ -70,6 +70,13 @@ BlSpace class >> extractRoots: aSetOfElements [
 	^ BlElementBoundsUpdater new extractRoots: aSetOfElements
 ]
 
+{ #category : #pulse }
+BlSpace >> areFramePhasesSettled [
+	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space."
+
+	^ frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
+]
+
 { #category : #accessing }
 BlSpace >> asReference [
 	<return: #BlSpaceReference>
@@ -922,13 +929,6 @@ BlSpace >> isResizable [
 	^ self
 		hostSpaceDo: [ :aHostSpace | aHostSpace isResizable ]
 		ifAbsent: [ resizable ]
-]
-
-{ #category : #pulse }
-BlSpace >> areFramePhasesSettled [
-	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space."
-
-	^ frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
 ]
 
 { #category : #pulse }

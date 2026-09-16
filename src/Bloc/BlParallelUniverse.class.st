@@ -63,14 +63,7 @@ BlParallelUniverse >> closeSpace: aSpace [
 	"Queue aSpace to be closed at the beginning of the next pulse."
 
 	lifecycleMutex critical: [
-		(spacesToOpen includes: aSpace) ifTrue: [
-			spacesToOpen remove: aSpace.
-			^ self ].
-		(spaces includes: aSpace) ifFalse: [ ^ self ].
-		spacesToClose add: aSpace ].
-
-	host isRunning ifFalse: [ host start ].
-	host requestPulse
+		spacesToClose add: aSpace ]
 ]
 
 { #category : #'private - spaces' }
@@ -293,17 +286,8 @@ BlParallelUniverse >> lifecycleMutex [
 BlParallelUniverse >> openSpace: aSpace [
 	"Queue aSpace to be opened at the beginning of the next pulse."
 
-	(spaces includes: aSpace) ifTrue: [
-		aSpace hostSpaceDo: [ :hs |
-			aSpace becomeVisible.
-			hs show ].
-		^ self ].
-
 	lifecycleMutex critical: [
-		spacesToOpen add: aSpace ].
-
-	host isRunning ifFalse: [ host start ].
-	host requestPulse
+		spacesToOpen add: aSpace ]
 ]
 
 { #category : #'private - spaces' }

@@ -18,6 +18,7 @@ BlSpaceLifecycleTest >> testCloseAlreadyClosedSpaceIsNoOp [
 
 	aSpace close.
 	self deny: aSpace isOpened.
+	host settle.
 	self deny: host isRunning
 ]
 
@@ -79,6 +80,7 @@ BlSpaceLifecycleTest >> testCloseUnopenedSpaceDoesNotStartHost [
 
 	aSpace close.
 	self deny: aSpace isOpened.
+	host settle.
 	self deny: host isRunning
 ]
 

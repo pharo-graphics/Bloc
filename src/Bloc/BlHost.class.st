@@ -94,7 +94,10 @@ BlHost class >> supportedHostClasses [
 BlHost >> closeSpace: aSpace [
 	"Close aSpace managed by this host."
 
-	self universe closeSpace: aSpace
+	self universe closeSpace: aSpace.
+
+	self isRunning ifFalse: [ self start ].
+	self requestPulse
 ]
 
 { #category : #'api - spaces' }
@@ -198,13 +201,6 @@ BlHost >> label [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'api - lifecycle' }
-BlHost >> requestStop [
-	"Request the host to stop its pulse loop gracefully without terminating the active process.
-	Subclasses with background loops should override to implement cooperative stopping."
-
-]
-
 { #category : #'host space - accessing' }
 BlHost >> newHostRenderer [
 
@@ -229,7 +225,10 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 BlHost >> openSpace: aSpace [
 	"Open aSpace on this host."
 
-	self universe openSpace: aSpace
+	self universe openSpace: aSpace.
+
+	self isRunning ifFalse: [ self start ].
+	self requestPulse
 ]
 
 { #category : #accessing }
@@ -266,6 +265,13 @@ BlHost >> pulseProcessDo: aBlock [
 { #category : #'api - pulse' }
 BlHost >> requestPulse [
 	"Request a pulse cycle from this host. Subclasses with pulse loops implement this to wake the loop."
+
+]
+
+{ #category : #'api - lifecycle' }
+BlHost >> requestStop [
+	"Request the host to stop its pulse loop gracefully without terminating the active process.
+	Subclasses with background loops should override to implement cooperative stopping."
 
 ]
 
@@ -306,7 +312,6 @@ BlHost >> spaces [
 
 { #category : #'api - lifecycle' }
 BlHost >> start [
-	"Start this host."
 
 	self subclassResponsibility
 ]
@@ -320,7 +325,6 @@ BlHost >> startUp: isResuming [
 
 { #category : #'api - lifecycle' }
 BlHost >> stop [
-	"Stop this host."
 
 	self subclassResponsibility
 ]
