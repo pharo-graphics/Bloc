@@ -932,12 +932,17 @@ BlSpace >> isResizable [
 ]
 
 { #category : #pulse }
-BlSpace >> isSettled [
-	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space, and there are no pending universe lifecycle actions."
+BlSpace >> areFramePhasesSettled [
+	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space."
 
-	host isSettled ifFalse: [ ^ false ].
-	self isOpened ifFalse: [ ^ true ].
 	^ frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
+]
+
+{ #category : #pulse }
+BlSpace >> isSettled [
+	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space, and there are no pending host lifecycle actions for this space."
+
+	^ host isSpaceSettled: self
 ]
 
 { #category : #'host space - text input' }

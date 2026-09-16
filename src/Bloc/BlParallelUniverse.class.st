@@ -272,6 +272,17 @@ BlParallelUniverse >> isSpaceOpening: aSpace [
 	^ lifecycleMutex critical: [ spacesToOpen includes: aSpace ]
 ]
 
+{ #category : #testing }
+BlParallelUniverse >> isSpaceSettled: aSpace [
+	"Return true if aSpace has no pending lifecycle actions and, if opened, all its frame phases are settled."
+
+	^ lifecycleMutex critical: [
+		(spacesToOpen includes: aSpace) not and: [
+			(spacesToClose includes: aSpace) not and: [
+				(spaces includes: aSpace) not or: [
+					aSpace areFramePhasesSettled ] ] ] ]
+]
+
 { #category : #accessing }
 BlParallelUniverse >> lifecycleMutex [
 

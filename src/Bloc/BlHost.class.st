@@ -173,9 +173,16 @@ BlHost >> isSpaceClosing: aSpace [
 
 { #category : #testing }
 BlHost >> isSpaceOpening: aSpace [
-	"Return true if a given space is currently queued to be opened on this host, false otherwise."
+	"Return true if a space is currently queued to be opened on this host, false otherwise."
 
-	^ self hasUniverse and: [ self universe isSpaceOpening: aSpace ]
+	^ self hasUniverse and: [ universe isSpaceOpening: aSpace ]
+]
+
+{ #category : #testing }
+BlHost >> isSpaceSettled: aSpace [
+	"Return true if there are no pending lifecycle actions for aSpace and, if opened, all its frame phases are settled."
+
+	^ self hasUniverse not or: [ universe isSpaceSettled: aSpace ]
 ]
 
 { #category : #testing }
