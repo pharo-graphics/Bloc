@@ -1277,7 +1277,7 @@ BlSpace >> settleFor: aTimeoutValuable [
 
 	| finished |
 	finished := false.
-	self host
+	host
 		waitUntil: [ self isSettled ]
 		timeOutIf: aTimeoutValuable
 		onCompletion: [ finished := true ]

@@ -16,13 +16,12 @@ Class {
 		'deferredActions',
 		'spaces',
 		'pulseSemaphores',
-		'pulseSemaphoresMutex',
+		'mutex',
 		'host',
 		'isPulsing',
 		'visibleSpacesOnShutdown',
 		'spacesToOpen',
-		'spacesToClose',
-		'lifecycleMutex'
+		'spacesToClose'
 	],
 	#category : #'Bloc-Universe - Parallel'
 }
@@ -39,7 +38,7 @@ BlParallelUniverse class >> host: aBlHost [
 BlParallelUniverse >> closeSpace: aSpace [
 	"Queue aSpace to be closed at the beginning of the next pulse."
 
-	lifecycleMutex critical: [
+	mutex critical: [
 		spacesToClose add: aSpace ]
 ]
 
@@ -157,17 +156,16 @@ BlParallelUniverse >> hostClass: aHostClass [
 { #category : #initialization }
 BlParallelUniverse >> initializeWithHost: aHost [
 
-	self initialize.
+	super initialize.
 
 	host := aHost.
 
 	spaces := IdentitySet new.
 	spacesToOpen := IdentitySet new.
 	spacesToClose := IdentitySet new.
-	lifecycleMutex := Mutex new.
+	mutex := Mutex new.
 	deferredActions := WaitfreeQueue new.
-	pulseSemaphores := OrderedCollection new.
-	pulseSemaphoresMutex := Mutex new
+	pulseSemaphores := OrderedCollection new
 ]
 
 { #category : #testing }
@@ -180,7 +178,7 @@ BlParallelUniverse >> isPulsing [
 BlParallelUniverse >> isSettled [
 	"Return true if there are no pending space openings, closings, or deferred actions"
 
-	^ lifecycleMutex critical: [
+	^ mutex critical: [
 		spacesToOpen isEmpty and: [
 			spacesToClose isEmpty and: [ deferredActions isEmpty ] ] ]
 ]
@@ -188,37 +186,31 @@ BlParallelUniverse >> isSettled [
 { #category : #testing }
 BlParallelUniverse >> isSpaceClosing: aSpace [
 
-	^ lifecycleMutex critical: [ spacesToClose includes: aSpace ]
+	^ mutex critical: [ spacesToClose includes: aSpace ]
 ]
 
 { #category : #testing }
 BlParallelUniverse >> isSpaceOpening: aSpace [
 
-	^ lifecycleMutex critical: [ spacesToOpen includes: aSpace ]
+	^ mutex critical: [ spacesToOpen includes: aSpace ]
 ]
 
 { #category : #testing }
 BlParallelUniverse >> isSpaceSettled: aSpace [
 	"Return true if aSpace has no pending lifecycle actions and, if opened, all its frame phases are settled."
 
-	^ lifecycleMutex critical: [
+	^ mutex critical: [
 		(spacesToOpen includes: aSpace) not and: [
 			(spacesToClose includes: aSpace) not and: [
 				(spaces includes: aSpace) not or: [
 					aSpace areFramePhasesSettled ] ] ] ]
 ]
 
-{ #category : #accessing }
-BlParallelUniverse >> lifecycleMutex [
-
-	^ lifecycleMutex
-]
-
 { #category : #'api - spaces' }
 BlParallelUniverse >> openSpace: aSpace [
 	"Queue aSpace to be opened at the beginning of the next pulse."
 
-	lifecycleMutex critical: [
+	mutex critical: [
 		spacesToOpen add: aSpace ]
 ]
 
@@ -278,7 +270,7 @@ BlParallelUniverse >> pulse [
 	| toClose toOpen semaphoresToSignal |
 	isPulsing := true.
 	[
-		lifecycleMutex critical: [
+		mutex critical: [
 			toOpen := spacesToOpen asArray.
 			spacesToOpen removeAll.
 			toClose := spacesToClose asArray.
@@ -291,14 +283,14 @@ BlParallelUniverse >> pulse [
 			self evaluateDeferredActions.
 			spaces do: [ :eachSpace | eachSpace basicPulse ]
 		] ifCurtailed: [
-			lifecycleMutex critical: [
+			mutex critical: [
 				spacesToClose addAll: (toClose reject: [ :s | (spaces includes: s) not ]).
 				spacesToOpen addAll: (toOpen reject: [ :s | spaces includes: s ]) ] ]
 	] ensure: [
 		isPulsing := false.
 		(spaces isEmpty and: [ self isSettled ]) ifTrue: [
 			host requestStop ].
-		pulseSemaphoresMutex critical: [
+		mutex critical: [
 			semaphoresToSignal := pulseSemaphores copy ].
 		semaphoresToSignal do: [ :each | each signal ] ]
 ]
@@ -332,7 +324,7 @@ BlParallelUniverse >> pulseSynchronously [
 { #category : #'api - pulse' }
 BlParallelUniverse >> registerPulseSemaphore: aSemaphore [
 
-	pulseSemaphoresMutex critical: [
+	mutex critical: [
 		pulseSemaphores add: aSemaphore ]
 ]
 
@@ -446,8 +438,8 @@ BlParallelUniverse >> uiProcessDo: aBlock [
 { #category : #'api - pulse' }
 BlParallelUniverse >> unregisterPulseSemaphore: aSemaphore [
 
-	pulseSemaphoresMutex critical: [
-		pulseSemaphores remove: aSemaphore ifAbsent: [] ]
+	mutex critical: [
+		pulseSemaphores remove: aSemaphore ifAbsent: [ ] ]
 ]
 
 { #category : #'api - pulse' }
@@ -461,14 +453,9 @@ BlParallelUniverse >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable 
 	aSemaphore := Semaphore new.
 	self registerPulseSemaphore: aSemaphore.
 	[
-		[
-			| midPulse |
-			midPulse := self isPulsing.
-			midPulse
-				ifTrue: [ false ]
-				ifFalse: [ aConditionValuable value ] ] whileFalse: [
-				aTimeoutValuable value ifTrue: [ ^ timeoutBlock value ].
-				aSemaphore waitTimeoutMilliseconds: 50 ] ] ensure: [
+		[ self isPulsing not and: [ aConditionValuable value ] ] whileFalse: [
+			aTimeoutValuable value ifTrue: [ ^ timeoutBlock value ].
+			aSemaphore waitTimeoutMilliseconds: 50 ] ] ensure: [
 		self unregisterPulseSemaphore: aSemaphore ].
 
 	^ completionBlock value

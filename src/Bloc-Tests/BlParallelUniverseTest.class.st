@@ -8,7 +8,7 @@ Class {
 BlParallelUniverseTest >> testErrorDuringPulsePropagatesAndSignalsSemaphores [
 
 	| aUniverse expectedError caughtError aSemaphore semaphoreSignaled |
-	aUniverse := BlParallelUniverse new.
+	aUniverse := BlParallelUniverse host: BlHeadlessHost default.
 	expectedError := Error new messageText: 'Pulse test error'.
 	aUniverse defer: [ expectedError signal ].
 	aSemaphore := Semaphore new.
@@ -24,7 +24,7 @@ BlParallelUniverseTest >> testErrorDuringPulsePropagatesAndSignalsSemaphores [
 BlParallelUniverseTest >> testEvaluateDeferredActions [
 
 	| aUniverse evaluated |
-	aUniverse := BlParallelUniverse new.
+	aUniverse := BlParallelUniverse host: BlHeadlessHost default.
 	evaluated := false.
 	aUniverse defer: [ evaluated := true ].
 	self assert: aUniverse hasDeferredActions.
