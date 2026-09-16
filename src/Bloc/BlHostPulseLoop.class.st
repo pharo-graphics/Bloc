@@ -109,7 +109,7 @@ BlHostPulseLoop >> loopIteration [
 
 	[
 		| pulseStartMS |
-		self pulseRequestedSemaphore consumeAllSignals.
+		pulseRequestedSemaphore consumeAllSignals.
 		pulseStartMS := Time millisecondClockValue.
 		host pulse.
 		pulseDurationMS := Time millisecondClockValue - pulseStartMS.
@@ -186,17 +186,11 @@ BlHostPulseLoop >> pulseProcess [
 	^ loopProcess
 ]
 
-{ #category : #accessing }
-BlHostPulseLoop >> pulseRequestedSemaphore [
-
-	^ pulseRequestedSemaphore ifNil: [ pulseRequestedSemaphore := Semaphore new ]
-]
-
 { #category : #period }
 BlHostPulseLoop >> requestPulse [
 	"Signal the loop to wake up and perform a pulse immediately without waiting for the next scheduled tick."
 
-	self pulseRequestedSemaphore signal
+	pulseRequestedSemaphore signal
 ]
 
 { #category : #lifecycle }
@@ -235,5 +229,5 @@ BlHostPulseLoop >> waitUntilNextPulse [
 	msToWait <= 0 ifTrue: [ ^ Processor yield ].
 
 	"Wait until the next scheduled pulse period or until a pulse is requested explicitly"
-	self pulseRequestedSemaphore waitTimeoutMilliseconds: msToWait
+	pulseRequestedSemaphore waitTimeoutMilliseconds: msToWait
 ]
