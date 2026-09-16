@@ -199,8 +199,9 @@ BlHost >> label [
 ]
 
 { #category : #'api - lifecycle' }
-BlHost >> markStopped [
-	"Subclasses with pulse loops implement this to mark stopped without self-termination."
+BlHost >> requestStop [
+	"Request the host to stop its pulse loop gracefully without terminating the active process.
+	Subclasses with background loops should override to implement cooperative stopping."
 
 ]
 

@@ -32,10 +32,10 @@ BlPulseLoopHost >> isRunning [
 ]
 
 { #category : #'api - lifecycle' }
-BlPulseLoopHost >> markStopped [
-	"Mark the pulse loop as stopped without terminating the active process."
+BlPulseLoopHost >> requestStop [
+	"Request the pulse loop to stop without terminating the active process."
 
-	pulseLoop markStopped
+	pulseLoop requestStop
 ]
 
 { #category : #accessing }
@@ -78,7 +78,7 @@ BlPulseLoopHost >> pulseProcessDo: aBlock [
 BlPulseLoopHost >> requestPulse [
 	"Request an immediate pulse cycle from the pulse loop."
 
-	pulseLoop requestPulse
+	pulseLoop wakeUp
 ]
 
 { #category : #'api - lifecycle' }

@@ -133,8 +133,8 @@ BlHostPulseLoop >> loopProcess [
 ]
 
 { #category : #lifecycle }
-BlHostPulseLoop >> markStopped [
-	"Mark the loop process as stopped without terminating the active process."
+BlHostPulseLoop >> requestStop [
+	"Request the loop process to stop gracefully at the end of the current iteration."
 
 	loopProcess := nil
 ]
@@ -187,8 +187,8 @@ BlHostPulseLoop >> pulseProcess [
 ]
 
 { #category : #period }
-BlHostPulseLoop >> requestPulse [
-	"Signal the loop to wake up and perform a pulse immediately without waiting for the next scheduled tick."
+BlHostPulseLoop >> wakeUp [
+	"Wake up the loop process immediately if sleeping between frames."
 
 	pulseRequestedSemaphore signal
 ]

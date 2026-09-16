@@ -382,7 +382,7 @@ BlParallelUniverse >> pulse [
 	] ensure: [
 		isPulsing := false.
 		(spaces isEmpty and: [ self isSettled ]) ifTrue: [
-			host markStopped ].
+			host requestStop ].
 		pulseSemaphoresMutex critical: [
 			semaphoresToSignal := pulseSemaphores copy ].
 		semaphoresToSignal do: [ :each | each signal ] ]
