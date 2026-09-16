@@ -31,6 +31,13 @@ BlPulseLoopHost >> isRunning [
 	^ pulseLoop isRunning
 ]
 
+{ #category : #'api - lifecycle' }
+BlPulseLoopHost >> markStopped [
+	"Mark the pulse loop as stopped without terminating the active process."
+
+	pulseLoop markStopped
+]
+
 { #category : #accessing }
 BlPulseLoopHost >> pulseLoop [
 
@@ -65,13 +72,6 @@ BlPulseLoopHost >> pulseProcessDo: aBlock [
 		transformWith: '`@receiver pulseProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
 
 	^ self pulseProcess ifNotNil: aBlock
-]
-
-{ #category : #'api - lifecycle' }
-BlPulseLoopHost >> markStopped [
-	"Mark the pulse loop as stopped without terminating the active process."
-
-	pulseLoop markStopped
 ]
 
 { #category : #'api - lifecycle' }

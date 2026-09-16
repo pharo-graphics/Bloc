@@ -72,12 +72,6 @@ BlHostPulseLoop >> host [
 	^ host
 ]
 
-{ #category : #accessing }
-BlHostPulseLoop >> pulseRequestedSemaphore [
-
-	^ pulseRequestedSemaphore ifNil: [ pulseRequestedSemaphore := Semaphore new ]
-]
-
 { #category : #initialization }
 BlHostPulseLoop >> initializeWithHost: aBlHost [
 
@@ -138,6 +132,13 @@ BlHostPulseLoop >> loopProcess [
 	^ loopProcess
 ]
 
+{ #category : #lifecycle }
+BlHostPulseLoop >> markStopped [
+	"Mark the loop process as stopped without terminating the active process."
+
+	loopProcess := nil
+]
+
 { #category : #'loop process' }
 BlHostPulseLoop >> newLoopProcess [
 
@@ -185,19 +186,10 @@ BlHostPulseLoop >> pulseProcess [
 	^ loopProcess
 ]
 
-{ #category : #lifecycle }
-BlHostPulseLoop >> start [
+{ #category : #accessing }
+BlHostPulseLoop >> pulseRequestedSemaphore [
 
-	self isRunning ifTrue: [ ^ self ].
-
-	self basicStart
-]
-
-{ #category : #lifecycle }
-BlHostPulseLoop >> markStopped [
-	"Mark the loop process as stopped without terminating the active process."
-
-	loopProcess := nil
+	^ pulseRequestedSemaphore ifNil: [ pulseRequestedSemaphore := Semaphore new ]
 ]
 
 { #category : #period }
@@ -205,6 +197,14 @@ BlHostPulseLoop >> requestPulse [
 	"Signal the loop to wake up and perform a pulse immediately without waiting for the next scheduled tick."
 
 	self pulseRequestedSemaphore signal
+]
+
+{ #category : #lifecycle }
+BlHostPulseLoop >> start [
+
+	self isRunning ifTrue: [ ^ self ].
+
+	self basicStart
 ]
 
 { #category : #lifecycle }

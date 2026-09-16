@@ -130,7 +130,7 @@ BlSpace >> close [
 	"Request closing this space. This might happen in a host process (async). 
 	This space can be reopened via `open`, either with current host or with another host."
 	
-	self host closeSpace: self
+	host closeSpace: self
 ]
 
 { #category : #'cursor managing' }
@@ -671,16 +671,6 @@ BlSpace >> host: aHost [
 ]
 
 { #category : #'host space - accessing' }
-BlSpace >> migrateToHost: aHost [
-	"Migrate this space to a new host cleanly by closing, settling, re-assigning, and reopening."
-
-	self close.
-	self settle.
-	self host: aHost.
-	self show
-]
-
-{ #category : #'host space - accessing' }
 BlSpace >> hostSpace [
 	^ hostSpace
 ]
@@ -852,6 +842,20 @@ BlSpace >> isBorderless [
 		  ifAbsent: [ borderless ]
 ]
 
+{ #category : #testing }
+BlSpace >> isClosed [
+	"Return true if the space is completely closed (not open, not opening, not closing)."
+
+	^ (host hasSpace: self) not and: [ self isOpening not and: [ self isClosing not ] ]
+]
+
+{ #category : #testing }
+BlSpace >> isClosing [
+	"Return true if this space is currently queued to be closed, false otherwise."
+
+	^ host isSpaceClosing: self
+]
+
 { #category : #'window - properties' }
 BlSpace >> isFocused [
 
@@ -885,38 +889,24 @@ BlSpace >> isLayoutRequested [
 ]
 
 { #category : #testing }
-BlSpace >> isClosed [
-	"Return true if the space is completely closed (not open, not opening, not closing)."
-
-	^ (self host hasSpace: self) not and: [ self isOpening not and: [ self isClosing not ] ]
-]
-
-{ #category : #testing }
-BlSpace >> isClosing [
-	"Return true if this space is currently queued to be closed, false otherwise."
-
-	^ self host isSpaceClosing: self
-]
-
-{ #category : #testing }
 BlSpace >> isOpened [
 	"Return true if the space is opened or currently opening, and not closing."
 
-	^ (self host hasSpace: self) and: [ self isClosing not ]
+	^ (host hasSpace: self) and: [ self isClosing not ]
 ]
 
 { #category : #testing }
 BlSpace >> isOpening [
 	"Return true if this space is currently queued to be opened, false otherwise."
 
-	^ self host isSpaceOpening: self
+	^ host isSpaceOpening: self
 ]
 
 { #category : #pulse }
 BlSpace >> isPulseProcessActive [
 	"Return true if the active process is the pulse loop process for this space"
 
-	^ self host isPulseProcessActive
+	^ host isPulseProcessActive
 ]
 
 { #category : #pulse }
@@ -929,7 +919,7 @@ BlSpace >> isPulseRequested [
 { #category : #testing }
 BlSpace >> isPulsing [
 
-	^ self host isPulsing
+	^ host isPulsing
 ]
 
 { #category : #'window - properties' }
@@ -945,7 +935,7 @@ BlSpace >> isResizable [
 BlSpace >> isSettled [
 	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space, and there are no pending universe lifecycle actions."
 
-	self host isSettled ifFalse: [ ^ false ].
+	host isSettled ifFalse: [ ^ false ].
 	self isOpened ifFalse: [ ^ true ].
 	^ frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
 ]
@@ -1025,6 +1015,16 @@ BlSpace >> measureTextParagraph: aBlTextParagraph [
 	host offscreenMeasureTextParagraph: aBlTextParagraph
 ]
 
+{ #category : #'host space - accessing' }
+BlSpace >> migrateToHost: aHost [
+	"Migrate this space to a new host cleanly by closing, settling, re-assigning, and reopening."
+
+	self close.
+	self settle.
+	self host: aHost.
+	self show
+]
+
 { #category : #'api - displaying' }
 BlSpace >> minimize [
 	self hostSpaceDo: [ :hw | hw minimize ]
@@ -1070,7 +1070,7 @@ BlSpace >> onSessionChanged: aNewSession [
 BlSpace >> open [
 	"Open this space on my host."
 
-	self host openSpace: self
+	host openSpace: self
 ]
 
 { #category : #'window - properties' }
@@ -1125,7 +1125,7 @@ BlSpace >> pulse [
 BlSpace >> pulseProcess [
 	"Return the pulse loop Process if running, or nil."
 
-	^ self host pulseProcess
+	^ host pulseProcess
 ]
 
 { #category : #pulse }
@@ -1188,7 +1188,7 @@ BlSpace >> requestNextPulse [
 BlSpace >> requestPulse [
 
 	pulseRequested := true.
-	self host ifNotNil: [ :h | h requestPulse ]
+	host requestPulse
 ]
 
 { #category : #'window - properties' }
@@ -1289,7 +1289,7 @@ BlSpace >> settleFor: aTimeoutValuable [
 
 	| finished |
 	finished := false.
-	self host
+	host
 		waitUntil: [ self isSettled ]
 		timeOutIf: aTimeoutValuable
 		onCompletion: [ finished := true ]
@@ -1424,7 +1424,7 @@ BlSpace >> universe [
 		deprecated: 'Use self host universe instead'
 		transformWith: '`@receiver universe' -> '`@receiver host universe'.
 
-	^ self host universe
+	^ host universe
 ]
 
 { #category : #'cursor managing' }
@@ -1464,7 +1464,7 @@ BlSpace >> waitUntilTrue: aConditionValuable [
 	"Wait until the given condition block evaluates to true, synchronized with the space pulses.
 	Blocks the calling process on the host's pulse semaphore, waking up on each frame to check the condition."
 
-	self host
+	host
 		waitUntil: aConditionValuable
 		timeOutIf: [ false ]
 		onCompletion: [ ]
@@ -1478,7 +1478,7 @@ BlSpace >> waitUntilTrue: aConditionValuable forDuration: aDuration [
 
 	| deadlineInMicroseconds |
 	deadlineInMicroseconds := time nowInUTCMicroseconds + (aDuration asMilliSeconds * 1000).
-	self host
+	host
 		waitUntil: aConditionValuable
 		timeOutIf: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
 		onCompletion: [ ]

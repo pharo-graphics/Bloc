@@ -207,24 +207,6 @@ BlParallelUniverse >> host [
 ]
 
 { #category : #accessing }
-BlParallelUniverse >> lifecycleMutex [
-
-	^ lifecycleMutex
-]
-
-{ #category : #accessing }
-BlParallelUniverse >> spacesToClose [
-
-	^ spacesToClose
-]
-
-{ #category : #accessing }
-BlParallelUniverse >> spacesToOpen [
-
-	^ spacesToOpen
-]
-
-{ #category : #accessing }
 BlParallelUniverse >> hostClass [
 
 	self deprecated: 'Access the #host instance'.
@@ -288,6 +270,12 @@ BlParallelUniverse >> isSpaceClosing: aSpace [
 BlParallelUniverse >> isSpaceOpening: aSpace [
 
 	^ lifecycleMutex critical: [ spacesToOpen includes: aSpace ]
+]
+
+{ #category : #accessing }
+BlParallelUniverse >> lifecycleMutex [
+
+	^ lifecycleMutex
 ]
 
 { #category : #'api - spaces' }
@@ -436,6 +424,18 @@ BlParallelUniverse >> snapshot: save andQuit: quit [
 BlParallelUniverse >> spaces [
 
 	^ spaces
+]
+
+{ #category : #accessing }
+BlParallelUniverse >> spacesToClose [
+
+	^ spacesToClose
+]
+
+{ #category : #accessing }
+BlParallelUniverse >> spacesToOpen [
+
+	^ spacesToOpen
 ]
 
 { #category : #'private - lifecycle' }

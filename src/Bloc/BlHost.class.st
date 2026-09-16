@@ -191,6 +191,12 @@ BlHost >> label [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'api - lifecycle' }
+BlHost >> markStopped [
+	"Subclasses with pulse loops implement this to mark stopped without self-termination."
+
+]
+
 { #category : #'host space - accessing' }
 BlHost >> newHostRenderer [
 
@@ -231,12 +237,6 @@ BlHost >> pulse [
 	self hasUniverse ifTrue: [ self universe pulse ]
 ]
 
-{ #category : #'api - pulse' }
-BlHost >> requestPulse [
-	"Request a pulse cycle from this host. Subclasses with pulse loops implement this to wake the loop."
-
-]
-
 { #category : #'api - pulse process' }
 BlHost >> pulseProcess [
 	"Return the pulse loop Process if running, or nil."
@@ -253,6 +253,12 @@ BlHost >> pulseProcessDo: aBlock [
 		transformWith: '`@receiver pulseProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
 
 	^ self pulseProcess ifNotNil: aBlock
+]
+
+{ #category : #'api - pulse' }
+BlHost >> requestPulse [
+	"Request a pulse cycle from this host. Subclasses with pulse loops implement this to wake the loop."
+
 ]
 
 { #category : #'api - spaces' }
@@ -302,12 +308,6 @@ BlHost >> startUp: isResuming [
 	"Handle system startup / session resume."
 
 	self hasUniverse ifTrue: [ self universe start ]
-]
-
-{ #category : #'api - lifecycle' }
-BlHost >> markStopped [
-	"Subclasses with pulse loops implement this to mark stopped without self-termination."
-
 ]
 
 { #category : #'api - lifecycle' }
