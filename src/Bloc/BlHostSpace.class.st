@@ -259,19 +259,6 @@ BlHostSpace >> toFront [
 	self subclassResponsibility
 ]
 
-{ #category : #'host space - accessing' }
-BlHostSpace >> universe [
-
-	^ self host ifNotNil: [ :h | h universe ]
-]
-
-{ #category : #'host space - accessing' }
-BlHostSpace >> universe: aBlUniverse [
-
-	self
-		deprecated: 'HostSpace derives universe from host'
-		transformWith: '`@receiver universe: `@arg' -> '`@receiver host: `@arg host'.
-]
 
 { #category : #'host space - geometry' }
 BlHostSpace >> windowExtent: anExtent [

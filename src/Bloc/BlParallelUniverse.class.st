@@ -104,7 +104,11 @@ BlParallelUniverse >> hasPostponedActions [
 { #category : #'api - pulse process' }
 BlParallelUniverse >> hasPulseProcess [
 
-	^ self pulseProcess isNotNil
+	self
+		deprecated: 'Check host pulseProcess isNotNil instead'
+		transformWith: '`@receiver hasPulseProcess' -> '`@receiver host pulseProcess isNotNil'.
+
+	^ host pulseProcess isNotNil
 ]
 
 { #category : #'api - spaces' }
@@ -125,10 +129,10 @@ BlParallelUniverse >> hasSpaces [
 BlParallelUniverse >> hasUIProcess [
 
 	self
-		deprecated: 'Use #hasPulseProcess instead'
-		transformWith: '`@receiver hasUIProcess' -> '`@receiver hasPulseProcess'.
+		deprecated: 'Check host pulseProcess isNotNil instead'
+		transformWith: '`@receiver hasUIProcess' -> '`@receiver host pulseProcess isNotNil'.
 
-	^ self hasPulseProcess
+	^ host pulseProcess isNotNil
 ]
 
 { #category : #accessing }
@@ -298,6 +302,10 @@ BlParallelUniverse >> pulse [
 { #category : #'api - pulse process' }
 BlParallelUniverse >> pulseProcess [
 
+	self
+		deprecated: 'Use host pulseProcess instead'
+		transformWith: '`@receiver pulseProcess' -> '`@receiver host pulseProcess'.
+
 	^ host pulseProcess
 ]
 
@@ -305,10 +313,10 @@ BlParallelUniverse >> pulseProcess [
 BlParallelUniverse >> pulseProcessDo: aBlock [
 
 	self
-		deprecated: 'Use #pulseProcess ifNotNil: instead'
-		transformWith: '`@receiver pulseProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
+		deprecated: 'Use host pulseProcess ifNotNil: instead'
+		transformWith: '`@receiver pulseProcessDo: `@arg' -> '`@receiver host pulseProcess ifNotNil: `@arg'.
 
-	^ self pulseProcess ifNotNil: aBlock
+	^ host pulseProcess ifNotNil: aBlock
 ]
 
 { #category : #'private - spaces' }
@@ -429,10 +437,10 @@ BlParallelUniverse >> tryToRunPostponedActions [
 BlParallelUniverse >> uiProcessDo: aBlock [
 
 	self
-		deprecated: 'Use #pulseProcess ifNotNil: instead'
-		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
+		deprecated: 'Use host pulseProcess ifNotNil: instead'
+		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver host pulseProcess ifNotNil: `@arg'.
 
-	^ self pulseProcess ifNotNil: aBlock
+	^ host pulseProcess ifNotNil: aBlock
 ]
 
 { #category : #'api - pulse' }
