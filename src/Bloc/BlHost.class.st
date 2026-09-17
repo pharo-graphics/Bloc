@@ -12,9 +12,6 @@ Key Responsibilities:
 Class {
 	#name : #BlHost,
 	#superclass : #Object,
-	#instVars : [
-		'universe'
-	],
 	#category : #'Bloc-Universe - Host'
 }
 
@@ -94,25 +91,14 @@ BlHost class >> supportedHostClasses [
 BlHost >> closeSpace: aSpace [
 	"Close aSpace managed by this host."
 
-	self universe closeSpace: aSpace.
-	self requestPulse
+	self subclassResponsibility
 ]
 
 { #category : #'api - spaces' }
 BlHost >> closeSpaces [
 	"Close all spaces managed by this host."
 
-	self hasUniverse ifTrue: [
-		self universe closeSpaces ]
-]
-
-{ #category : #'api - ui process' }
-BlHost >> defer: aValuable [
-	"Enqueue a valuable from any process to be executed in the UI process at the beginning of the next pulse."
-
-	self deprecated: 'You should send #defer: to an opened space instead of a host.'.
-
-	self universe defer: aValuable
+	self subclassResponsibility
 ]
 
 { #category : #'error handling' }
@@ -128,13 +114,14 @@ BlHost >> denyPulseProcess [
 BlHost >> hasSpace: aSpace [
 	"Return true if a given space is registered with this host, false otherwise."
 
-	^ self hasUniverse and: [ self universe hasSpace: aSpace ]
+	^ self spaces includes: aSpace
 ]
 
 { #category : #testing }
 BlHost >> hasUniverse [
+	"Return true if this host uses an internal universe to coordinate spaces."
 
-	^ universe isNotNil
+	^ false
 ]
 
 { #category : #'host - testing' }
@@ -155,28 +142,28 @@ BlHost >> isRunning [
 BlHost >> isSettled [
 	"Return true if there are no deferred actions waiting to be executed on this host."
 
-	^ self hasUniverse not or: [ self universe isSettled ]
+	^ true
 ]
 
 { #category : #testing }
 BlHost >> isSpaceClosing: aSpace [
 	"Return true if a given space is currently queued to be closed on this host, false otherwise."
 
-	^ self hasUniverse and: [ self universe isSpaceClosing: aSpace ]
+	^ false
 ]
 
 { #category : #testing }
 BlHost >> isSpaceOpening: aSpace [
 	"Return true if a space is currently queued to be opened on this host, false otherwise."
 
-	^ self hasUniverse and: [ universe isSpaceOpening: aSpace ]
+	^ false
 ]
 
 { #category : #testing }
 BlHost >> isSpaceSettled: aSpace [
 	"Return true if there are no pending lifecycle actions for aSpace and, if opened, all its frame phases are settled."
 
-	^ self hasUniverse not or: [ universe isSpaceSettled: aSpace ]
+	^ aSpace isOpened not or: [ aSpace isSettled ]
 ]
 
 { #category : #testing }
@@ -216,8 +203,7 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 BlHost >> openSpace: aSpace [
 	"Open aSpace on this host."
 
-	self universe openSpace: aSpace.
-	self requestPulse
+	self subclassResponsibility
 ]
 
 { #category : #accessing }
@@ -228,9 +214,7 @@ BlHost >> priority [
 
 { #category : #'api - pulse' }
 BlHost >> pulse [
-	"Execute a single pulse cycle across all spaces managed by this host."
-
-	self hasUniverse ifTrue: [ self universe pulse ]
+	"Execute a single pulse cycle across all spaces managed by this host. Subclasses may override."
 ]
 
 { #category : #'api - pulse process' }
@@ -279,14 +263,14 @@ BlHost >> settle [
 BlHost >> shutDown: isQuitting [
 	"Handle system shutdown / session suspend."
 
-	self hasUniverse ifTrue: [ self universe stop ]
+	self stop
 ]
 
 { #category : #'host space - accessing' }
 BlHost >> spaces [
 	"Answer the collection of spaces managed by this host."
 
-	^ self universe spaces
+	self subclassResponsibility
 ]
 
 { #category : #'api - lifecycle' }
@@ -298,7 +282,7 @@ BlHost >> start [
 BlHost >> startUp: isResuming [
 	"Handle system startup / session resume."
 
-	self hasUniverse ifTrue: [ self universe start ]
+	self start
 ]
 
 { #category : #'api - lifecycle' }
@@ -314,23 +298,4 @@ BlHost >> uiProcessDo: aBlock [
 		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
 
 	^ self pulseProcess ifNotNil: aBlock
-]
-
-{ #category : #'host space - accessing' }
-BlHost >> universe [
-
-	^ universe ifNil: [ universe := BlParallelUniverse host: self ]
-]
-
-{ #category : #'host - testing' }
-BlHost >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion: completionBlock onTimeout: timeoutBlock [
-	"Evaluate aConditionValuable repeatedly until it answers true. If aTimeoutValuable answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
-
-	self denyPulseProcess.
-
-	^ self universe
-		  waitUntil: aConditionValuable
-		  timeOutIf: aTimeoutValuable
-		  onCompletion: completionBlock
-		  onTimeout: timeoutBlock
 ]
