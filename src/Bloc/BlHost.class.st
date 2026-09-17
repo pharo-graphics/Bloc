@@ -144,13 +144,6 @@ BlHost >> isPulseProcessActive [
 	^ false
 ]
 
-{ #category : #testing }
-BlHost >> isPulsing [
-	"Return true if this host's universe is currently pulsing, false otherwise."
-
-	^ self hasUniverse and: [ self universe isPulsing ]
-]
-
 { #category : #'api - lifecycle' }
 BlHost >> isRunning [
 	"Return true if host is initialized and running"

@@ -916,12 +916,6 @@ BlSpace >> isPulseRequested [
 	^ pulseRequested
 ]
 
-{ #category : #testing }
-BlSpace >> isPulsing [
-
-	^ host isPulsing
-]
-
 { #category : #'window - properties' }
 BlSpace >> isResizable [
 	"Return true if underlying window is resizable, false otherwise"

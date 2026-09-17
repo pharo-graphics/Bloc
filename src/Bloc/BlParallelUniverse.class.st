@@ -101,12 +101,6 @@ BlParallelUniverse >> hasPostponedActions [
 	^ self hasDeferredActions
 ]
 
-{ #category : #'api - pulse process' }
-BlParallelUniverse >> hasPulseProcess [
-
-	^ self pulseProcess isNotNil
-]
-
 { #category : #'api - spaces' }
 BlParallelUniverse >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"
