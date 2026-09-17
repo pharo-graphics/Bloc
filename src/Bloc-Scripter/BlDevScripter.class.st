@@ -191,14 +191,20 @@ BlDevScripter >> root [
 	^ self space root
 ]
 
+{ #category : #execution }
+BlDevScripter >> settle [
+	self space settle
+]
+
 { #category : #accessing }
 BlDevScripter >> showSpace [
 	"I can be only used after Scripter execution."
 
-	self space close.
-	self space settle.
-	self space host: Bloc preferredHost.
-	self space show
+	self space
+		close;
+		settle;
+		host: Bloc preferredHost;
+		show
 ]
 
 { #category : #'accessing - space' }
@@ -261,9 +267,4 @@ BlDevScripter >> time [
 BlDevScripter >> userData [
 	<return: #BlDevScripterUserData>
 	^ self space root devScripterData
-]
-
-{ #category : #execution }
-BlDevScripter >> settle [
-	self space settle
 ]
