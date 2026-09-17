@@ -214,8 +214,12 @@ BlParallelUniverse >> openSpace: aSpace [
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> openSpaceNow: aSpace [
+	"If it has been already opened, just unhide it"
 
-	(spaces includes: aSpace) ifTrue: [ ^ self ].
+	(spaces includes: aSpace) ifTrue: [
+		aSpace hasHostSpace ifTrue: [
+			aSpace becomeVisible.
+			^ aSpace hostSpace show ] ].
 
 	spaces add: aSpace.
 	[ aSpace hostSpaceOpen ] on: Exception do: [ :exception |
