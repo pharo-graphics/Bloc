@@ -324,18 +324,6 @@ BlParallelUniverse >> spaces [
 	^ spaces
 ]
 
-{ #category : #accessing }
-BlParallelUniverse >> spacesToClose [
-
-	^ spacesToClose
-]
-
-{ #category : #accessing }
-BlParallelUniverse >> spacesToOpen [
-
-	^ spacesToOpen
-]
-
 { #category : #'private - lifecycle' }
 BlParallelUniverse >> start [
 	"A universe must not be running here.
