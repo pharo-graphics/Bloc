@@ -18,10 +18,10 @@ Class {
 		'pulseSemaphores',
 		'mutex',
 		'host',
-		'isPulsing',
 		'visibleSpacesOnShutdown',
 		'spacesToOpen',
-		'spacesToClose'
+		'spacesToClose',
+		'pulsing'
 	],
 	#category : #'Bloc-Universe - Parallel'
 }
@@ -169,13 +169,14 @@ BlParallelUniverse >> initializeWithHost: aHost [
 	spacesToClose := IdentitySet new.
 	mutex := Mutex new.
 	deferredActions := WaitfreeQueue new.
-	pulseSemaphores := OrderedCollection new
+	pulseSemaphores := OrderedCollection new.
+	pulsing := false
 ]
 
 { #category : #testing }
 BlParallelUniverse >> isPulsing [
 
-	^ isPulsing ifNil: [ false ]
+	^ pulsing
 ]
 
 { #category : #testing }
@@ -272,7 +273,7 @@ BlParallelUniverse >> pulse [
 	"Execute a complete frame pulse for all managed spaces, processing pending lifecycle changes and deferred actions."
 
 	| toClose toOpen semaphoresToSignal |
-	isPulsing := true.
+	pulsing := true.
 	[
 		mutex critical: [
 			toOpen := spacesToOpen asArray.
@@ -291,7 +292,7 @@ BlParallelUniverse >> pulse [
 				spacesToClose addAll: (toClose reject: [ :s | (spaces includes: s) not ]).
 				spacesToOpen addAll: (toOpen reject: [ :s | spaces includes: s ]) ] ]
 	] ensure: [
-		isPulsing := false.
+		pulsing := false.
 		(spaces isEmpty and: [ self isSettled ]) ifTrue: [
 			host requestStop ].
 		mutex critical: [
