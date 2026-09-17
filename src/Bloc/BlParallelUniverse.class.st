@@ -101,16 +101,6 @@ BlParallelUniverse >> hasPostponedActions [
 	^ self hasDeferredActions
 ]
 
-{ #category : #'api - pulse process' }
-BlParallelUniverse >> hasPulseProcess [
-
-	self
-		deprecated: 'Check host pulseProcess isNotNil instead'
-		transformWith: '`@receiver hasPulseProcess' -> '`@receiver host pulseProcess isNotNil'.
-
-	^ host pulseProcess isNotNil
-]
-
 { #category : #'api - spaces' }
 BlParallelUniverse >> hasSpace: aSpace [
 	"Return true if a given space is registered, false otherwise"
@@ -293,10 +283,8 @@ BlParallelUniverse >> pulse [
 				spacesToOpen addAll: (toOpen reject: [ :s | spaces includes: s ]) ] ]
 	] ensure: [
 		pulsing := false.
-		(spaces isEmpty and: [ self isSettled ]) ifTrue: [
-			host requestStop ].
-		mutex critical: [
-			semaphoresToSignal := pulseSemaphores copy ].
+		(spaces isEmpty and: [ self isSettled ]) ifTrue: [ host requestStop ].
+		mutex critical: [ semaphoresToSignal := pulseSemaphores copy ].
 		semaphoresToSignal do: [ :each | each signal ] ]
 ]
 
