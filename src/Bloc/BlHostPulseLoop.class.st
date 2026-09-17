@@ -107,7 +107,7 @@ BlHostPulseLoop >> loop [
 { #category : #'loop process' }
 BlHostPulseLoop >> loopIteration [
 
-	host isRunning ifFalse: [ ^ false ].
+	self isRunning ifFalse: [ ^ false ].
 
 	[
 		| pulseStartMS |
@@ -116,7 +116,7 @@ BlHostPulseLoop >> loopIteration [
 		host pulse.
 		pulseDurationMS := Time millisecondClockValue - pulseStartMS.
 
-		host isRunning ifFalse: [ ^ false ].
+		self isRunning ifFalse: [ ^ false ].
 
 		self waitUntilNextPulse ]
 		on: Exception
