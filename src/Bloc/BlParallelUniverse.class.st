@@ -23,7 +23,7 @@ Class {
 		'spacesToClose',
 		'pulsing'
 	],
-	#category : #'Bloc-Universe - Parallel'
+	#category : #'Bloc-Universe - Host'
 }
 
 { #category : #'instance creation' }
