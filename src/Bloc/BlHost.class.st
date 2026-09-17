@@ -299,3 +299,10 @@ BlHost >> uiProcessDo: aBlock [
 
 	^ self pulseProcess ifNotNil: aBlock
 ]
+
+{ #category : #'api - spaces' }
+BlHost >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion: completionBlock onTimeout: timeoutBlock [
+	"Evaluate aConditionValuable repeatedly until it answers true. If aTimeoutValuable answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
+
+	self subclassResponsibility
+]
