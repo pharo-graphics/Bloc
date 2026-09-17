@@ -101,6 +101,13 @@ BlHost >> closeSpaces [
 	self subclassResponsibility
 ]
 
+{ #category : #'api - spaces' }
+BlHost >> defer: aValuable [
+	"Enqueue a valuable from any process to be executed in the host UI process at the beginning of the next pulse cycle."
+
+	self subclassResponsibility
+]
+
 { #category : #'error handling' }
 BlHost >> denyPulseProcess [
 	"Signal an error if the active process is the pulse loop process of this host.

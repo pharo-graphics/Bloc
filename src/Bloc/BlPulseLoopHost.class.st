@@ -120,13 +120,12 @@ BlPulseLoopHost >> closeSpaces [
 		self universe closeSpaces ]
 ]
 
-{ #category : #'api - ui process' }
+{ #category : #'api - spaces' }
 BlPulseLoopHost >> defer: aValuable [
-	"Enqueue a valuable from any process to be executed in the UI process at the beginning of the next pulse."
+	"Enqueue a valuable from any process to be executed in the host UI process at the beginning of the next pulse cycle."
 
-	self deprecated: 'You should send #defer: to an opened space instead of a host.'.
-
-	self universe defer: aValuable
+	self universe defer: aValuable.
+	self requestPulse
 ]
 
 { #category : #testing }
