@@ -259,7 +259,6 @@ BlHostSpace >> toFront [
 	self subclassResponsibility
 ]
 
-
 { #category : #'host space - geometry' }
 BlHostSpace >> windowExtent: anExtent [
 
