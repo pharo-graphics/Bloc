@@ -68,6 +68,13 @@ BlPulseLoopHost >> pulseProcessDo: aBlock [
 ]
 
 { #category : #'api - lifecycle' }
+BlPulseLoopHost >> requestStop [
+	"Request the pulse loop to stop without terminating the active process."
+
+	pulseLoop requestStop
+]
+
+{ #category : #'api - lifecycle' }
 BlPulseLoopHost >> start [
 
 	pulseLoop start

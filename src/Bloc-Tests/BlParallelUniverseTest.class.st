@@ -5,24 +5,26 @@ Class {
 }
 
 { #category : #tests }
-BlParallelUniverseTest >> testErrorDuringPulseSignal [
+BlParallelUniverseTest >> testErrorDuringPulsePropagatesAndSignalsSemaphores [
 
-	| aUniverse logger expectedError caughtError |
-	aUniverse := BlParallelUniverse new.
+	| aUniverse expectedError caughtError aSemaphore semaphoreSignaled |
+	aUniverse := BlParallelUniverse host: BlHeadlessHost default.
 	expectedError := Error new messageText: 'Pulse test error'.
 	aUniverse defer: [ expectedError signal ].
-	logger := MemoryLogger new.
-	logger runFor: BlParallelUniverseErrorDuringPulseSignal during: [
-		[ aUniverse pulse ] on: Error do: [ :err | caughtError := err ] ].
+	aSemaphore := Semaphore new.
+	aUniverse registerPulseSemaphore: aSemaphore.
+	[ aUniverse pulse ] on: Error do: [ :err | caughtError := err ].
+	semaphoreSignaled := aSemaphore waitTimeoutMilliseconds: 50.
 	self assert: caughtError equals: expectedError.
-	self assert: (logger entries anySatisfy: [ :each | each signaledError == expectedError ])
+	self deny: semaphoreSignaled.
+	self deny: aUniverse isPulsing
 ]
 
 { #category : #tests }
 BlParallelUniverseTest >> testEvaluateDeferredActions [
 
 	| aUniverse evaluated |
-	aUniverse := BlParallelUniverse new.
+	aUniverse := BlParallelUniverse host: BlHeadlessHost default.
 	evaluated := false.
 	aUniverse defer: [ evaluated := true ].
 	self assert: aUniverse hasDeferredActions.
