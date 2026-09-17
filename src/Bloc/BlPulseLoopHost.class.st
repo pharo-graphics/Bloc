@@ -1,6 +1,18 @@
 "
-I am an abstract host for loop-based pulse loops.
-I define the class-side instance variable `pulseLoop` and delegate standard lifecycle methods to it.
+I am an abstract host for in-image, loop-driven Bloc environments.
+
+I combine a background pulse loop thread (`BlHostPulseLoop`) with a local space coordinator (`BlParallelUniverse`) to execute and render spaces within the current Pharo image.
+
+### How I Work
+- **Pulse loop**: My `pulseLoop` runs a dedicated high-priority process that periodically sends `#pulse` to me according to `pulsePeriod`.
+- **Universe pulsing**: When I receive `#pulse`, I forward it to my `universe`. The universe executes deferred tasks (`defer:`) and triggers frame phases (events, layout, redraw) across all registered spaces.
+- **On-demand pulsing**: Senders can call `requestPulse` from any thread (e.g. when enqueueing a task or invalidating geometry) to wake up the loop immediately.
+
+### Collaborators
+- `BlParallelUniverse` (`universe`): Manages the collection of open, opening, and closing spaces (`BlSpace`), the deferred action queue, and pulse synchronization semaphores.
+- `BlHostPulseLoop` (`pulseLoop`): The background looping process driving periodic frame pulses and cooperative idling.
+- `BlSpace`: The spaces opened and managed on this host.
+- Subclasses (`BlOSSDL3Host`, `BlOSWindowSDL2Host`, `BlMorphicWindowHost`, `BlHeadlessHost`): Concrete drivers implementing native window creation (`newHostSpaceFor:`) and renderer instantiation (`newHostRenderer`).
 "
 Class {
 	#name : #BlPulseLoopHost,

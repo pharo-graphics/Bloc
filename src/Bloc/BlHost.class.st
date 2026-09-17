@@ -1,13 +1,20 @@
 "
-I am the abstract base class for Bloc Hosts. 
+I am the abstract base class and public facade for Bloc Hosts.
 
-A host acts as a driver interface communicating with the underlying operating system and native window/rendering APIs (such as OSWindow with SDL2/SDL3, Morphic, or a headless host for testing).
+A host connects logical Bloc spaces (`BlSpace`) to their execution environment, event loops, and underlying display or window drivers (such as OSWindow with SDL2/SDL3, Morphic, or headless testing environments).
 
-Key Responsibilities:
-- **Universe execution**: Manages the running loop process (thread) that pulses the universe (using subclass `BlPulseLoopHost` or custom stepping loops).
-- **Space rendering and windows**: Responsible for instantiating the native windows and OS renderer for spaces (`newHostSpaceFor:`).
-- **Thread/Process management**: Provides hooks to run code on the UI process (`uiProcessDo:`) and controls starting/stopping of background pulse loop processes (`start`, `stop`).
-- **Synchronization**: Implements thread-safe wait loops (`waitUntil:timeout:onCompletion:onTimeout:`) to allow tests and senders to block until specific conditions or animations complete in a running host space.
+### Architecture
+`BlHost` is an abstract facade defining the universal protocol through which spaces interact with their host, regardless of the host's underlying execution model:
+- **In-process loop hosts** (`BlPulseLoopHost`): Run spaces locally within the current Pharo image using an internal `BlHostPulseLoop` process and a `BlParallelUniverse`.
+- **Out-of-process / remote hosts** (e.g. Subprocess / IPC hosts): Delegate space execution and window rendering to a separate process or external display server.
+- **Embedded / stepping hosts**: Driven manually or embedded inside foreign event loops without a dedicated thread.
+
+### Key Responsibilities
+- **Space lifecycle**: Managing the opening and closing of spaces (`openSpace:`, `closeSpace:`, `spaces`, `closeSpaces`, `hasSpace:`).
+- **Task scheduling & pulsing**: Providing hooks to run code on the host UI thread (`defer:`), triggering frame updates (`pulse`, `requestPulse`), and querying settlement state (`isSettled`, `settle`, `isSpaceSettled:`).
+- **Window & driver factory**: Creating native window wrappers (`newHostSpaceFor:`) and canvas renderers (`newHostRenderer`).
+- **Host lifecycle**: Handling startup and shutdown hooks (`start`, `stop`, `startUp:`, `shutDown:`).
+- **Synchronization**: Thread-safe waiting for conditions or animations to settle (`waitUntil:timeOutIf:onCompletion:onTimeout:`).
 "
 Class {
 	#name : #BlHost,
