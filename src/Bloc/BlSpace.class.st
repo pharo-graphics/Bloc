@@ -70,6 +70,13 @@ BlSpace class >> extractRoots: aSetOfElements [
 	^ BlElementBoundsUpdater new extractRoots: aSetOfElements
 ]
 
+{ #category : #pulse }
+BlSpace >> areFramePhasesSettled [
+	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space."
+
+	^ frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
+]
+
 { #category : #accessing }
 BlSpace >> asReference [
 	<return: #BlSpaceReference>
@@ -662,20 +669,12 @@ BlSpace >> host [
 
 { #category : #'host space - accessing' }
 BlSpace >> host: aHost [
-	"Change the host of this space. Asynchronous. If the space is opened, first destroy the host window and then open the space with a new host"
+	"Change the host of this space. The space must be closed and settled first."
 
-	self isOpened
-		ifFalse: [ host := aHost ]
-		ifTrue: [
-			| currentHost |
-			currentHost := host.
-			self
-				addEventHandlerOn: BlSpaceDetachedEvent
-				doOnce: [
-					host := aHost.
-					aHost openSpace: self ].
+	(self isOpened or: [ self isOpening or: [ self isClosing ] ]) ifTrue: [
+		self error: 'Cannot change host while space is opened, opening, or closing. Close and settle the space first.' ].
 
-			currentHost closeSpace: self ]
+	host := aHost
 ]
 
 { #category : #'host space - accessing' }
@@ -850,6 +849,13 @@ BlSpace >> isBorderless [
 		  ifAbsent: [ borderless ]
 ]
 
+{ #category : #testing }
+BlSpace >> isClosing [
+	"Return true if this space is currently queued to be closed, false otherwise."
+
+	^ host isSpaceClosing: self
+]
+
 { #category : #'window - properties' }
 BlSpace >> isFocused [
 
@@ -884,10 +890,16 @@ BlSpace >> isLayoutRequested [
 
 { #category : #testing }
 BlSpace >> isOpened [
-	"Return true if the space was shown (by sending #show or #open message), false otherwise.
-	Please note, that an opened space can be hidden which does not influence the result of #isOpened"
+	"Return true if the space is currently opened on its host."
 
 	^ host hasSpace: self
+]
+
+{ #category : #testing }
+BlSpace >> isOpening [
+	"Return true if this space is currently queued to be opened, false otherwise."
+
+	^ host isSpaceOpening: self
 ]
 
 { #category : #pulse }
@@ -904,12 +916,6 @@ BlSpace >> isPulseRequested [
 	^ pulseRequested
 ]
 
-{ #category : #testing }
-BlSpace >> isPulsing [
-
-	^ host isPulsing
-]
-
 { #category : #'window - properties' }
 BlSpace >> isResizable [
 	"Return true if underlying window is resizable, false otherwise"
@@ -921,11 +927,9 @@ BlSpace >> isResizable [
 
 { #category : #pulse }
 BlSpace >> isSettled [
-	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space, and there are no pending universe lifecycle actions."
+	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space, and there are no pending host lifecycle actions for this space."
 
-	host isSettled ifFalse: [ ^ false ].
-	self isOpened ifFalse: [ ^ true ].
-	^ frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
+	^ host isSpaceSettled: self
 ]
 
 { #category : #'host space - text input' }
@@ -1165,7 +1169,8 @@ BlSpace >> requestNextPulse [
 { #category : #pulse }
 BlSpace >> requestPulse [
 
-	pulseRequested := true
+	pulseRequested := true.
+	host requestPulse
 ]
 
 { #category : #'window - properties' }
@@ -1266,7 +1271,7 @@ BlSpace >> settleFor: aTimeoutValuable [
 
 	| finished |
 	finished := false.
-	self host
+	host
 		waitUntil: [ self isSettled ]
 		timeOutIf: aTimeoutValuable
 		onCompletion: [ finished := true ]
@@ -1454,7 +1459,7 @@ BlSpace >> waitUntilTrue: aConditionValuable forDuration: aDuration [
 	Blocks the sender process on the host's pulse semaphore, waking up on each frame to check the condition."
 
 	| deadlineInMicroseconds |
-	deadlineInMicroseconds := time nowInUTCMicroseconds + (aDuration asMilliSeconds * 1000).
+	deadlineInMicroseconds := time nowInUTCMicroseconds + aDuration asMicroseconds.
 	host
 		waitUntil: aConditionValuable
 		timeOutIf: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]

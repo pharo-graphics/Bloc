@@ -111,8 +111,7 @@ BlHostRegistry >> refreshAvailableHosts [
 	"First: Prune hosts that are no longer supported in the current session"
 	availableHosts
 		select: [ :eachHost | eachHost isSupported not ]
-		thenDo: [ :eachHost |
-			eachHost hasUniverse ifTrue: [ eachHost universe stop ] ].
+		thenDo: [ :eachHost | eachHost stop ].
 	availableHosts removeAllSuchThat: [ :eachHost | eachHost isSupported not ].
 
 	"Second: Ensure all supported singleton hosts are registered"
