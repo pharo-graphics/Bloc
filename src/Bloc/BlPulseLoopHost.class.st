@@ -67,6 +67,13 @@ BlPulseLoopHost >> pulseProcessDo: aBlock [
 	^ self pulseProcess ifNotNil: aBlock
 ]
 
+{ #category : #'api - pulse' }
+BlPulseLoopHost >> requestPulse [
+	"Request an immediate pulse cycle from the pulse loop."
+
+	pulseLoop wakeUp
+]
+
 { #category : #'api - lifecycle' }
 BlPulseLoopHost >> requestStop [
 	"Request the pulse loop to stop without terminating the active process."
