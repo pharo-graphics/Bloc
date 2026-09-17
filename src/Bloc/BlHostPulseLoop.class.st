@@ -1,12 +1,14 @@
 "
-I represent the main loop of a host class, that sends it #pulse regularly.
+I represent the background loop process for a `BlPulseLoopHost`, sending it `#pulse` periodically.
 
-My loop follows the next rules:
-- The #pulsePeriod duration is the minimum amount of time between two subsequent sends of #pulse.
-- If a pulse took more time than #pulsePeriod, then the next pulse may either send the next #pulse immediately, or do a small wait before if another process with lower priority is suspended (and may be starving).
+### Loop Timing & Rules
+- `pulsePeriodMS`: The minimum duration between two consecutive pulses (framerate limit).
+- If a pulse took longer than `pulsePeriodMS`, the loop either pulses again immediately or performs a brief yield if lower-priority processes may be starving.
+- Senders can wake the loop process immediately via `wakeUp` (signaling `pulseRequestedSemaphore`).
 
-The opened spaces listen the pulse to be synchronized and to update their state when it is needed.
-
+### Collaborators
+- `BlPulseLoopHost` (`host`): The host driven by this loop.
+- `Process` (`loopProcess`): The high-priority Pharo process running the pulse loop.
 "
 Class {
 	#name : #BlHostPulseLoop,

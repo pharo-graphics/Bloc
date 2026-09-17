@@ -1,13 +1,18 @@
 "
-I represent a self-contained environment (a ""universe"") managing a collection of open spaces (`BlSpace`), a pipeline for deferred actions, and a synchronization mechanism for frame pulses. 
+I represent a self-contained in-image environment (a ""universe"") managing a collection of open spaces (`BlSpace`), a pipeline for deferred actions, and synchronization semaphores for frame pulses.
 
-There can exist multiple universes running concurrently, each owned and run by a specific host (`BlHost`).
+I am owned and coordinated by an in-image loop host (`BlPulseLoopHost`), which forwards `#pulse` to me from its pulse loop.
 
-Key Responsibilities:
-- **Space management**: Holds the collection of open spaces (`spaces`) that belong to this universe.
-- **Action deferral**: Queues deferred block closures to be processed in a thread-safe manner before each frame pulse.
-- **Pulsing lifecycle**: Implements `pulse` which runs layout, event, task, and drawing passes for all spaces in the universe, and executes deferred actions.
-- **Synchronization**: Manages a list of registered pulse semaphores (`pulseSemaphores`). When a pulse completes, it signals these semaphores to wake up any threads waiting for state changes or animations (e.g. during `waitUntil:`).
+### Key Responsibilities
+- **Space coordination**: Manages active `spaces` as well as queues for spaces being opened (`spacesToOpen`) or closed (`spacesToClose`) across pulse cycles under mutex protection.
+- **Action deferral**: Queues block closures (`defer:`) from any thread and runs them safely at the beginning of the pulse cycle before frame phases execute.
+- **Pulse execution**: Advances the frame lifecycle (`pulse`) across all open spaces, running tasks, layout, and rendering.
+- **Synchronization**: Manages registered pulse semaphores (`pulseSemaphores`) signaled upon pulse completion, enabling thread-safe blocking waits (`waitUntil:timeOutIf:onCompletion:onTimeout:`).
+- **Session management**: Coordinates space restoration (`start`, `stop`) across Pharo image snapshot and resume.
+
+### Collaborators
+- `BlPulseLoopHost` (`host`): The host that owns me and routes pulses to me.
+- `BlSpace`: The visual spaces managed within this universe.
 "
 Class {
 	#name : #BlParallelUniverse,
@@ -45,10 +50,8 @@ BlParallelUniverse >> closeSpace: aSpace [
 { #category : #'private - spaces' }
 BlParallelUniverse >> closeSpaceNow: aSpace [
 
-	"If space is not even opened we should do nothing"
-	(spaces includes: aSpace) ifFalse: [ ^ self ].
+	spaces remove: aSpace ifAbsent: [ ^ self ].
 
-	spaces remove: aSpace.
 	aSpace hostSpaceClose.
 	aSpace dispatchRemovedFromSceneGraph.
 	aSpace dispatchEventWithTimestamp: BlSpaceClosedEvent new
@@ -211,8 +214,8 @@ BlParallelUniverse >> openSpace: aSpace [
 
 { #category : #'private - spaces' }
 BlParallelUniverse >> openSpaceNow: aSpace [
-
 	"If it has been already opened, just unhide it"
+
 	(spaces includes: aSpace) ifTrue: [
 		aSpace hasHostSpace ifTrue: [
 			aSpace becomeVisible.
@@ -288,22 +291,6 @@ BlParallelUniverse >> pulse [
 		semaphoresToSignal do: [ :each | each signal ] ]
 ]
 
-{ #category : #'api - pulse process' }
-BlParallelUniverse >> pulseProcess [
-
-	^ host pulseProcess
-]
-
-{ #category : #'api - pulse process' }
-BlParallelUniverse >> pulseProcessDo: aBlock [
-
-	self
-		deprecated: 'Use host pulseProcess ifNotNil: instead'
-		transformWith: '`@receiver pulseProcessDo: `@arg' -> '`@receiver host pulseProcess ifNotNil: `@arg'.
-
-	^ host pulseProcess ifNotNil: aBlock
-]
-
 { #category : #'private - spaces' }
 BlParallelUniverse >> pulseSynchronously [
 
@@ -340,7 +327,7 @@ BlParallelUniverse >> spaces [
 { #category : #'private - lifecycle' }
 BlParallelUniverse >> start [
 	"A universe must not be running here.
-	Sent outside of the UI loop (there is no UI loop yet)."
+	Sent outside of the Pulse Loop (there is no Pulse Loop yet)."
 
 	| visibleSpaces |
 	host start.
