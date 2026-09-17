@@ -170,7 +170,10 @@ BlHost >> isSpaceOpening: aSpace [
 BlHost >> isSpaceSettled: aSpace [
 	"Return true if there are no pending lifecycle actions for aSpace and, if opened, all its frame phases are settled."
 
-	^ aSpace isOpened not or: [ aSpace isSettled ]
+	^ (self isSpaceOpening: aSpace) not and: [
+		(self isSpaceClosing: aSpace) not and: [
+			aSpace isOpened not or: [
+				aSpace areFramePhasesSettled ] ] ]
 ]
 
 { #category : #testing }
