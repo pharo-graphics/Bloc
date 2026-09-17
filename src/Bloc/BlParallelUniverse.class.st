@@ -50,10 +50,8 @@ BlParallelUniverse >> closeSpace: aSpace [
 { #category : #'private - spaces' }
 BlParallelUniverse >> closeSpaceNow: aSpace [
 
-	"If space is not even opened we should do nothing"
-	(spaces includes: aSpace) ifFalse: [ ^ self ].
+	spaces remove: aSpace ifAbsent: [ ^ self ].
 
-	spaces remove: aSpace.
 	aSpace hostSpaceClose.
 	aSpace dispatchRemovedFromSceneGraph.
 	aSpace dispatchEventWithTimestamp: BlSpaceClosedEvent new
@@ -217,11 +215,7 @@ BlParallelUniverse >> openSpace: aSpace [
 { #category : #'private - spaces' }
 BlParallelUniverse >> openSpaceNow: aSpace [
 
-	"If it has been already opened, just unhide it"
-	(spaces includes: aSpace) ifTrue: [
-		aSpace hasHostSpace ifTrue: [
-			aSpace becomeVisible.
-			^ aSpace hostSpace show ] ].
+	(spaces includes: aSpace) ifTrue: [ ^ self ].
 
 	spaces add: aSpace.
 	[ aSpace hostSpaceOpen ] on: Exception do: [ :exception |
@@ -293,26 +287,6 @@ BlParallelUniverse >> pulse [
 		semaphoresToSignal do: [ :each | each signal ] ]
 ]
 
-{ #category : #'api - pulse process' }
-BlParallelUniverse >> pulseProcess [
-
-	self
-		deprecated: 'Use host pulseProcess instead'
-		transformWith: '`@receiver pulseProcess' -> '`@receiver host pulseProcess'.
-
-	^ host pulseProcess
-]
-
-{ #category : #'api - pulse process' }
-BlParallelUniverse >> pulseProcessDo: aBlock [
-
-	self
-		deprecated: 'Use host pulseProcess ifNotNil: instead'
-		transformWith: '`@receiver pulseProcessDo: `@arg' -> '`@receiver host pulseProcess ifNotNil: `@arg'.
-
-	^ host pulseProcess ifNotNil: aBlock
-]
-
 { #category : #'private - spaces' }
 BlParallelUniverse >> pulseSynchronously [
 
@@ -361,7 +335,7 @@ BlParallelUniverse >> spacesToOpen [
 { #category : #'private - lifecycle' }
 BlParallelUniverse >> start [
 	"A universe must not be running here.
-	Sent outside of the UI loop (there is no UI loop yet)."
+	Sent outside of the Pulse Loop (there is no Pulse Loop yet)."
 
 	| visibleSpaces |
 	host start.

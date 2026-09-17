@@ -24,6 +24,36 @@ Class {
 	#category : #'Bloc-Universe - Host'
 }
 
+{ #category : #'api - spaces' }
+BlPulseLoopHost >> closeSpace: aSpace [
+	"Close aSpace managed by this host."
+
+	self universe closeSpace: aSpace.
+	self requestPulse
+]
+
+{ #category : #'api - spaces' }
+BlPulseLoopHost >> closeSpaces [
+	"Close all spaces managed by this host."
+
+	self hasUniverse ifTrue: [
+		self universe closeSpaces ]
+]
+
+{ #category : #'api - spaces' }
+BlPulseLoopHost >> defer: aValuable [
+	"Enqueue a valuable from any process to be executed in the host UI process at the beginning of the next pulse cycle."
+
+	self universe defer: aValuable.
+	self requestPulse
+]
+
+{ #category : #testing }
+BlPulseLoopHost >> hasUniverse [
+
+	^ universe isNotNil
+]
+
 { #category : #initialization }
 BlPulseLoopHost >> initialize [
 
@@ -42,6 +72,49 @@ BlPulseLoopHost >> isPulseProcessActive [
 BlPulseLoopHost >> isRunning [
 
 	^ pulseLoop isRunning
+]
+
+{ #category : #testing }
+BlPulseLoopHost >> isSettled [
+	"Return true if there are no deferred actions waiting to be executed on this host."
+
+	^ self hasUniverse not or: [ self universe isSettled ]
+]
+
+{ #category : #testing }
+BlPulseLoopHost >> isSpaceClosing: aSpace [
+	"Return true if a given space is currently queued to be closed on this host, false otherwise."
+
+	^ self hasUniverse and: [ self universe isSpaceClosing: aSpace ]
+]
+
+{ #category : #testing }
+BlPulseLoopHost >> isSpaceOpening: aSpace [
+	"Return true if a space is currently queued to be opened on this host, false otherwise."
+
+	^ self hasUniverse and: [ self universe isSpaceOpening: aSpace ]
+]
+
+{ #category : #testing }
+BlPulseLoopHost >> isSpaceSettled: aSpace [
+	"Return true if there are no pending lifecycle actions for aSpace and, if opened, all its frame phases are settled."
+
+	^ self hasUniverse not or: [ self universe isSpaceSettled: aSpace ]
+]
+
+{ #category : #'api - spaces' }
+BlPulseLoopHost >> openSpace: aSpace [
+	"Open aSpace on this host."
+
+	self universe openSpace: aSpace.
+	self requestPulse
+]
+
+{ #category : #'api - pulse' }
+BlPulseLoopHost >> pulse [
+	"Execute a single pulse cycle across all spaces managed by this host."
+
+	self hasUniverse ifTrue: [ self universe pulse ]
 ]
 
 { #category : #accessing }
@@ -94,101 +167,6 @@ BlPulseLoopHost >> requestStop [
 	pulseLoop requestStop
 ]
 
-{ #category : #'api - lifecycle' }
-BlPulseLoopHost >> start [
-
-	pulseLoop start
-]
-
-{ #category : #'api - lifecycle' }
-BlPulseLoopHost >> stop [
-
-	pulseLoop stop
-]
-
-{ #category : #enumerating }
-BlPulseLoopHost >> uiProcessDo: aBlock [
-
-	self
-		deprecated: 'Use #pulseProcess ifNotNil: instead'
-		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
-
-	^ self pulseProcess ifNotNil: aBlock
-]
-
-{ #category : #'api - spaces' }
-BlPulseLoopHost >> closeSpace: aSpace [
-	"Close aSpace managed by this host."
-
-	self universe closeSpace: aSpace.
-	self requestPulse
-]
-
-{ #category : #'api - spaces' }
-BlPulseLoopHost >> closeSpaces [
-	"Close all spaces managed by this host."
-
-	self hasUniverse ifTrue: [
-		self universe closeSpaces ]
-]
-
-{ #category : #'api - spaces' }
-BlPulseLoopHost >> defer: aValuable [
-	"Enqueue a valuable from any process to be executed in the host UI process at the beginning of the next pulse cycle."
-
-	self universe defer: aValuable.
-	self requestPulse
-]
-
-{ #category : #testing }
-BlPulseLoopHost >> hasUniverse [
-
-	^ universe isNotNil
-]
-
-{ #category : #testing }
-BlPulseLoopHost >> isSettled [
-	"Return true if there are no deferred actions waiting to be executed on this host."
-
-	^ self hasUniverse not or: [ self universe isSettled ]
-]
-
-{ #category : #testing }
-BlPulseLoopHost >> isSpaceClosing: aSpace [
-	"Return true if a given space is currently queued to be closed on this host, false otherwise."
-
-	^ self hasUniverse and: [ self universe isSpaceClosing: aSpace ]
-]
-
-{ #category : #testing }
-BlPulseLoopHost >> isSpaceOpening: aSpace [
-	"Return true if a space is currently queued to be opened on this host, false otherwise."
-
-	^ self hasUniverse and: [ self universe isSpaceOpening: aSpace ]
-]
-
-{ #category : #testing }
-BlPulseLoopHost >> isSpaceSettled: aSpace [
-	"Return true if there are no pending lifecycle actions for aSpace and, if opened, all its frame phases are settled."
-
-	^ self hasUniverse not or: [ self universe isSpaceSettled: aSpace ]
-]
-
-{ #category : #'api - spaces' }
-BlPulseLoopHost >> openSpace: aSpace [
-	"Open aSpace on this host."
-
-	self universe openSpace: aSpace.
-	self requestPulse
-]
-
-{ #category : #'api - pulse' }
-BlPulseLoopHost >> pulse [
-	"Execute a single pulse cycle across all spaces managed by this host."
-
-	self hasUniverse ifTrue: [ self universe pulse ]
-]
-
 { #category : #'system startup' }
 BlPulseLoopHost >> shutDown: isQuitting [
 	"Handle system shutdown / session suspend."
@@ -205,11 +183,33 @@ BlPulseLoopHost >> spaces [
 		ifFalse: [ #() ]
 ]
 
+{ #category : #'api - lifecycle' }
+BlPulseLoopHost >> start [
+
+	pulseLoop start
+]
+
 { #category : #'system startup' }
 BlPulseLoopHost >> startUp: isResuming [
 	"Handle system startup / session resume."
 
 	self hasUniverse ifTrue: [ self universe start ]
+]
+
+{ #category : #'api - lifecycle' }
+BlPulseLoopHost >> stop [
+
+	pulseLoop stop
+]
+
+{ #category : #enumerating }
+BlPulseLoopHost >> uiProcessDo: aBlock [
+
+	self
+		deprecated: 'Use #pulseProcess ifNotNil: instead'
+		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
+
+	^ self pulseProcess ifNotNil: aBlock
 ]
 
 { #category : #accessing }
