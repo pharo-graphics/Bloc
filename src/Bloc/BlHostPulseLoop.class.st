@@ -227,7 +227,8 @@ BlHostPulseLoop >> waitUntilNextPulse [
 
 { #category : #period }
 BlHostPulseLoop >> wakeUp [
-	"Wake up the loop process immediately if sleeping between frames."
+	"Wake up the loop process immediately if sleeping between frames, or start it if not running."
 
+	self isRunning ifFalse: [ ^ self start ].
 	pulseRequestedSemaphore signal
 ]

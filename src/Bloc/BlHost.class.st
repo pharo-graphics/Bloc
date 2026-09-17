@@ -95,8 +95,6 @@ BlHost >> closeSpace: aSpace [
 	"Close aSpace managed by this host."
 
 	self universe closeSpace: aSpace.
-
-	self isRunning ifFalse: [ self start ].
 	self requestPulse
 ]
 
@@ -219,8 +217,6 @@ BlHost >> openSpace: aSpace [
 	"Open aSpace on this host."
 
 	self universe openSpace: aSpace.
-
-	self isRunning ifFalse: [ self start ].
 	self requestPulse
 ]
 
@@ -295,9 +291,7 @@ BlHost >> spaces [
 
 { #category : #'api - lifecycle' }
 BlHost >> start [
-	"Start this host."
-
-	self subclassResponsibility
+	"Start background loops, workers, or native resources for this host. Subclasses may override."
 ]
 
 { #category : #'system startup' }
@@ -309,9 +303,7 @@ BlHost >> startUp: isResuming [
 
 { #category : #'api - lifecycle' }
 BlHost >> stop [
-	"Stop this host."
-
-	self subclassResponsibility
+	"Stop background loops, workers, or native resources for this host. Subclasses may override."
 ]
 
 { #category : #enumerating }
