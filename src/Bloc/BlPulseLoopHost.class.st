@@ -10,7 +10,7 @@ I combine a background pulse loop thread (`BlHostPulseLoop`) with a local space 
 
 ### Collaborators
 - `BlParallelUniverse` (`universe`): Manages the collection of open, opening, and closing spaces (`BlSpace`), the deferred action queue, and pulse synchronization semaphores.
-- `BlHostPulseLoop` (`pulseLoop`): The background looping process driving periodic frame pulses and cooperative idling.
+- `BlValueLoop` (`pulseLoop`): The background looping process driving periodic frame pulses and cooperative idling.
 - `BlSpace`: The spaces opened and managed on this host.
 - Subclasses (`BlOSSDL3Host`, `BlOSWindowSDL2Host`, `BlMorphicWindowHost`, `BlHeadlessHost`): Concrete drivers implementing native window creation (`newHostSpaceFor:`) and renderer instantiation (`newHostRenderer`).
 "
@@ -58,7 +58,9 @@ BlPulseLoopHost >> hasUniverse [
 BlPulseLoopHost >> initialize [
 
 	super initialize.
-	pulseLoop := BlHostPulseLoop host: self
+	pulseLoop := (BlValueLoop action: [ self pulse ])
+		processName: ('Bloc Host Pulse Loop ({1})' format: { self label });
+		yourself
 ]
 
 { #category : #'host - testing' }
