@@ -1459,7 +1459,7 @@ BlSpace >> waitUntilTrue: aConditionValuable forDuration: aDuration [
 	Blocks the sender process on the host's pulse semaphore, waking up on each frame to check the condition."
 
 	| deadlineInMicroseconds |
-	deadlineInMicroseconds := time nowInUTCMicroseconds + (aDuration asMilliSeconds * 1000).
+	deadlineInMicroseconds := time nowInUTCMicroseconds + aDuration asMicroseconds.
 	host
 		waitUntil: aConditionValuable
 		timeOutIf: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
