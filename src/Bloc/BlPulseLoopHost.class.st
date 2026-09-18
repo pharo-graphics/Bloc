@@ -62,7 +62,7 @@ BlPulseLoopHost >> initialize [
 	pulseLoop :=
 		BlHostPulseLoop new
 			valuable: [ self pulse ];
-			processName: ('Bloc Pulse Loop ({1})' format: { self label });
+			processName: ('Bloc Host Pulse Loop ({1})' format: { self label });
 			yourself
 ]
 
@@ -70,7 +70,7 @@ BlPulseLoopHost >> initialize [
 BlPulseLoopHost >> isPulseProcessActive [
 	"Return true if the active process is the pulse loop process of this host"
 
-	^ pulseLoop isNotNil and: [ pulseLoop isPulseProcessActive ]
+	^ pulseLoop isNotNil and: [ pulseLoop ownsActiveProcess ]
 ]
 
 { #category : #'api - lifecycle' }

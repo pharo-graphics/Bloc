@@ -76,20 +76,8 @@ BlHostPulseLoop >> initialize [
 	valuable := [ "noop" ].
 	wakeUpSemaphore := Semaphore new.
 	processPriority := Processor userSchedulingPriority.
-	processName := 'Bloc Pulse Loop'.
+	processName := 'Bloc Host Pulse Loop'.
 	stopRequested := false
-]
-
-{ #category : #testing }
-BlHostPulseLoop >> isLoopProcessActive [
-
-	^ Processor activeProcess == loopProcess
-]
-
-{ #category : #testing }
-BlHostPulseLoop >> isPulseProcessActive [
-
-	^ self isLoopProcessActive
 ]
 
 { #category : #testing }
@@ -126,7 +114,13 @@ BlHostPulseLoop >> loopIteration [
 		self basicStart.
 		e pass ].
 
-	^ self isLoopProcessActive
+	^ self ownsActiveProcess
+]
+
+{ #category : #testing }
+BlHostPulseLoop >> ownsActiveProcess [
+
+	^ Processor activeProcess == loopProcess
 ]
 
 { #category : #accessing }
@@ -224,7 +218,7 @@ BlHostPulseLoop >> stop [
 	self isRunning ifFalse: [ ^ self ].
 
 	stopRequested := true.
-	isCurrentActive := self isLoopProcessActive.
+	isCurrentActive := self ownsActiveProcess.
 	currentProcess := loopProcess.
 	loopProcess := nil.
 
