@@ -139,9 +139,9 @@ BlHostPulseLoop >> loopProcess [
 BlHostPulseLoop >> newLoopProcess [
 
 	^ [ self loop ] newProcess
-		priority: self processPriority;
-		name: self processName;
-		yourself
+		  priority: self processPriority;
+		  name: self processName;
+		  yourself
 ]
 
 { #category : #period }
@@ -154,12 +154,6 @@ BlHostPulseLoop >> period [
 BlHostPulseLoop >> period: aDuration [
 
 	periodUS := aDuration asMicroseconds max: 1
-]
-
-{ #category : #period }
-BlHostPulseLoop >> periodAsSeconds [
-
-	^ periodUS / 1000000.0
 ]
 
 { #category : #'loop process' }
