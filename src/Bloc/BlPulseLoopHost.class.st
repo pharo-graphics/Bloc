@@ -1,7 +1,7 @@
 "
 I am an abstract host for in-image, loop-driven Bloc environments.
 
-I combine a background pulse loop thread (`BlValueLoop`) with a local space coordinator (`BlParallelUniverse`) to execute and render spaces within the current Pharo image.
+I combine a background pulse loop thread (`BlHostPulseLoop`) with a local space coordinator (`BlParallelUniverse`) to execute and render spaces within the current Pharo image.
 
 ### How I Work
 - **Pulse loop**: My `pulseLoop` runs a dedicated high-priority process that periodically sends `#pulse` to me according to `pulsePeriod`.
@@ -10,9 +10,9 @@ I combine a background pulse loop thread (`BlValueLoop`) with a local space coor
 
 ### Collaborators
 - `BlParallelUniverse` (`universe`): Manages the collection of open, opening, and closing spaces (`BlSpace`), the deferred action queue, and pulse synchronization semaphores.
-- `BlValueLoop` (`pulseLoop`): The background looping process driving periodic frame pulses and cooperative idling.
+- `BlHostPulseLoop` (`pulseLoop`): The background looping process driving periodic frame pulses and cooperative idling.
 - `BlSpace`: The spaces opened and managed on this host.
-- Subclasses (`BlOSSDL3Host`, `BlOSWindowSDL2Host`, `BlMorphicWindowHost`, `BlHeadlessHost`): Concrete drivers implementing native window creation (`newHostSpaceFor:`) and renderer instantiation (`newHostRenderer`).
+- My subclasses implement window creation (`newHostSpaceFor:`) and renderer instantiation (`newHostRenderer`).
 "
 Class {
 	#name : #BlPulseLoopHost,
@@ -58,9 +58,12 @@ BlPulseLoopHost >> hasUniverse [
 BlPulseLoopHost >> initialize [
 
 	super initialize.
-	pulseLoop := (BlValueLoop action: [ self pulse ])
-		processName: ('Bloc Host Pulse Loop ({1})' format: { self label });
-		yourself
+
+	pulseLoop :=
+		BlHostPulseLoop new
+			valuable: [ self pulse ];
+			processName: ('Bloc Pulse Loop ({1})' format: { self label });
+			yourself
 ]
 
 { #category : #'host - testing' }
@@ -155,7 +158,7 @@ BlPulseLoopHost >> pulseProcessDo: aBlock [
 	^ self pulseProcess ifNotNil: aBlock
 ]
 
-{ #category : #'api - lifecycle' }
+{ #category : #'api - pulse' }
 BlPulseLoopHost >> requestPulse [
 	"Request an immediate pulse cycle from the pulse loop."
 
@@ -220,7 +223,7 @@ BlPulseLoopHost >> universe [
 	^ universe ifNil: [ universe := BlParallelUniverse host: self ]
 ]
 
-{ #category : #'host - testing' }
+{ #category : #'api - spaces' }
 BlPulseLoopHost >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion: completionBlock onTimeout: timeoutBlock [
 	"Evaluate aConditionValuable repeatedly until it answers true. If aTimeoutValuable answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
 

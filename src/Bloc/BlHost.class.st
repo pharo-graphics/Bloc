@@ -4,10 +4,7 @@ I am the abstract base class and public facade for Bloc Hosts.
 A host connects logical Bloc spaces (`BlSpace`) to their execution environment, event loops, and underlying display or window drivers (such as OSWindow with SDL2/SDL3, Morphic, or headless testing environments).
 
 ### Architecture
-`BlHost` is an abstract facade defining the universal protocol through which spaces interact with their host, regardless of the host's underlying execution model:
-- **In-process loop hosts** (`BlPulseLoopHost`): Run spaces locally within the current Pharo image using an internal `BlValueLoop` process and a `BlParallelUniverse`.
-- **Out-of-process / remote hosts** (e.g. Subprocess / IPC hosts): Delegate space execution and window rendering to a separate process or external display server.
-- **Embedded / stepping hosts**: Driven manually or embedded inside foreign event loops without a dedicated thread.
+`BlHost` is an abstract facade defining the universal protocol through which spaces interact with their host, regardless of the host's underlying execution model.
 
 ### Key Responsibilities
 - **Space lifecycle**: Managing the opening and closing of spaces (`openSpace:`, `closeSpace:`, `spaces`, `closeSpaces`, `hasSpace:`).

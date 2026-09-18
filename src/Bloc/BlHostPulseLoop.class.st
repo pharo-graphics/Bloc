@@ -13,10 +13,9 @@ I can run synchronously on the calling process (#run, #step) or manage a dedicat
 - I track my designated process; if replaced during debugging or retired via #requestStop, the retired process exits cleanly.
 "
 Class {
-	#name : #BlValueLoop,
+	#name : #BlHostPulseLoop,
 	#superclass : #Object,
 	#instVars : [
-		'action',
 		'periodUS',
 		'lastUS',
 		'durationUS',
@@ -24,61 +23,30 @@ Class {
 		'loopProcess',
 		'processPriority',
 		'processName',
-		'running'
+		'running',
+		'valuable'
 	],
 	#category : #'Bloc-Universe - Host'
 }
 
-{ #category : 'instance creation' }
-BlValueLoop class >> action: aValuable [
-
-	^ self basicNew
-		initialize;
-		action: aValuable;
-		yourself
-]
-
-{ #category : 'instance creation' }
-BlValueLoop class >> host: aHost [
-
-	self
-		deprecated: 'Use #action: instead'
-		transformWith: '`@receiver host: `@arg' -> '`@receiver action: [ `@arg pulse ]'.
-
-	^ (self action: [ aHost pulse ])
-		processName: ('Bloc Value Loop ({1})' format: { aHost label });
-		yourself
-]
-
-{ #category : 'accessing' }
-BlValueLoop >> action [
-
-	^ action
-]
-
-{ #category : 'accessing' }
-BlValueLoop >> action: aValuable [
-
-	action := aValuable
-]
-
-{ #category : 'lifecycle' }
-BlValueLoop >> basicStart [
+{ #category : #lifecycle }
+BlHostPulseLoop >> basicStart [
 	"Start a new loop process unguardedly without checking if already running."
 
 	self basicStart: self newLoopProcess
 ]
 
-{ #category : 'lifecycle' }
-BlValueLoop >> basicStart: aProcess [
+{ #category : #lifecycle }
+BlHostPulseLoop >> basicStart: aProcess [
 	"Install and resume the given loop process unguardedly."
 
 	loopProcess := aProcess.
 	loopProcess resume
 ]
 
-{ #category : 'debug' }
-BlValueLoop >> forceStartNewUIProcess [
+{ #category : #debug }
+BlHostPulseLoop >> forceStartNewUIProcess [
+
 	self
 		deprecated: 'Use #basicStart instead'
 		transformWith: '`@receiver forceStartNewUIProcess' -> '`@receiver basicStart'.
@@ -86,8 +54,9 @@ BlValueLoop >> forceStartNewUIProcess [
 	^ self basicStart
 ]
 
-{ #category : 'debug' }
-BlValueLoop >> forceStartOfUIProcess: aProcess [
+{ #category : #debug }
+BlHostPulseLoop >> forceStartOfUIProcess: aProcess [
+
 	self
 		deprecated: 'Use #basicStart: instead'
 		transformWith: '`@receiver forceStartOfUIProcess: `@arg' -> '`@receiver basicStart: `@arg'.
@@ -95,50 +64,50 @@ BlValueLoop >> forceStartOfUIProcess: aProcess [
 	^ self basicStart: aProcess
 ]
 
-{ #category : 'period' }
-BlValueLoop >> hertz: aNumber [
+{ #category : #period }
+BlHostPulseLoop >> hertz: aNumber [
 
 	periodUS := (1000000.0 / aNumber) rounded
 ]
 
-{ #category : 'initialization' }
-BlValueLoop >> initialize [
+{ #category : #initialization }
+BlHostPulseLoop >> initialize [
 
 	super initialize.
 	self hertz: 60.
-	action := [ "noop" ].
+	valuable := [ "noop" ].
 	wakeUpSemaphore := Semaphore new.
 	processPriority := Processor userSchedulingPriority.
 	processName := 'Bloc Value Loop'.
 	running := false
 ]
 
-{ #category : 'testing' }
-BlValueLoop >> isLoopProcessActive [
+{ #category : #testing }
+BlHostPulseLoop >> isLoopProcessActive [
 
 	^ Processor activeProcess == loopProcess
 ]
 
-{ #category : 'testing' }
-BlValueLoop >> isPulseProcessActive [
+{ #category : #testing }
+BlHostPulseLoop >> isPulseProcessActive [
 
 	^ self isLoopProcessActive
 ]
 
-{ #category : 'testing' }
-BlValueLoop >> isRunning [
+{ #category : #testing }
+BlHostPulseLoop >> isRunning [
 
 	^ running and: [ loopProcess isNotNil and: [ loopProcess isTerminated not ] ]
 ]
 
-{ #category : 'loop process' }
-BlValueLoop >> loop [
+{ #category : #'loop process' }
+BlHostPulseLoop >> loop [
 
 	[ self loopIteration ] whileTrue
 ]
 
-{ #category : 'loop process' }
-BlValueLoop >> loopIteration [
+{ #category : #'loop process' }
+BlHostPulseLoop >> loopIteration [
 
 	self isRunning ifFalse: [ ^ false ].
 
@@ -152,14 +121,14 @@ BlValueLoop >> loopIteration [
 	^ self isLoopProcessActive
 ]
 
-{ #category : 'accessing' }
-BlValueLoop >> loopProcess [
+{ #category : #accessing }
+BlHostPulseLoop >> loopProcess [
 
 	^ loopProcess
 ]
 
-{ #category : 'loop process' }
-BlValueLoop >> newLoopProcess [
+{ #category : #'loop process' }
+BlHostPulseLoop >> newLoopProcess [
 
 	^ [ self loop ] newProcess
 		priority: self processPriority;
@@ -167,84 +136,85 @@ BlValueLoop >> newLoopProcess [
 		yourself
 ]
 
-{ #category : 'period' }
-BlValueLoop >> period [
+{ #category : #period }
+BlHostPulseLoop >> period [
 
 	^ periodUS microSeconds
 ]
 
-{ #category : 'period' }
-BlValueLoop >> period: aDuration [
+{ #category : #period }
+BlHostPulseLoop >> period: aDuration [
 
 	periodUS := aDuration asMicroseconds max: 1
 ]
 
-{ #category : 'period' }
-BlValueLoop >> periodAsSeconds [
+{ #category : #period }
+BlHostPulseLoop >> periodAsSeconds [
 
 	^ periodUS / 1000000.0
 ]
 
-{ #category : 'loop process' }
-BlValueLoop >> processName [
+{ #category : #'loop process' }
+BlHostPulseLoop >> processName [
 
 	^ processName
 ]
 
-{ #category : 'loop process' }
-BlValueLoop >> processName: aString [
+{ #category : #'loop process' }
+BlHostPulseLoop >> processName: aString [
 
 	processName := aString
 ]
 
-{ #category : 'loop process' }
-BlValueLoop >> processPriority [
+{ #category : #'loop process' }
+BlHostPulseLoop >> processPriority [
 
 	^ processPriority ifNil: [ Processor userSchedulingPriority ]
 ]
 
-{ #category : 'loop process' }
-BlValueLoop >> processPriority: aNumber [
+{ #category : #'loop process' }
+BlHostPulseLoop >> processPriority: aNumber [
+	"Change the Process priority (takes effect on next #start)"
 
 	processPriority := aNumber
 ]
 
-{ #category : 'period' }
-BlValueLoop >> pulsePeriod [
+{ #category : #period }
+BlHostPulseLoop >> pulsePeriod [
 
 	^ self period
 ]
 
-{ #category : 'period' }
-BlValueLoop >> pulsePeriod: aDuration [
+{ #category : #period }
+BlHostPulseLoop >> pulsePeriod: aDuration [
 
 	self period: aDuration
 ]
 
-{ #category : 'accessing' }
-BlValueLoop >> pulseProcess [
+{ #category : #accessing }
+BlHostPulseLoop >> pulseProcess [
 
 	^ loopProcess
 ]
 
-{ #category : 'lifecycle' }
-BlValueLoop >> requestStop [
+{ #category : #lifecycle }
+BlHostPulseLoop >> requestStop [
 	"Request the loop process to stop gracefully at the end of the current iteration."
 
 	running := false.
 	loopProcess := nil
 ]
 
-{ #category : 'running' }
-BlValueLoop >> run [
+{ #category : #running }
+BlHostPulseLoop >> run [
 	"Synchronous execution on the current process"
 
 	running := true.
 	[ self step ] doWhileTrue: [ running ]
 ]
 
-{ #category : 'lifecycle' }
-BlValueLoop >> start [
+{ #category : #lifecycle }
+BlHostPulseLoop >> start [
 
 	self isRunning ifTrue: [ ^ self ].
 
@@ -252,14 +222,14 @@ BlValueLoop >> start [
 	self basicStart
 ]
 
-{ #category : 'loop process' }
-BlValueLoop >> step [
+{ #category : #'loop process' }
+BlHostPulseLoop >> step [
 
 	| startUS waitUS waitMS |
 	wakeUpSemaphore consumeAllSignals.
 	startUS := Time microsecondClockValue.
 
-	action value.
+	valuable value.
 
 	lastUS := Time microsecondClockValue.
 	durationUS := lastUS - startUS.
@@ -272,8 +242,8 @@ BlValueLoop >> step [
 		wakeUpSemaphore waitTimeoutMilliseconds: waitMS ]
 ]
 
-{ #category : 'lifecycle' }
-BlValueLoop >> stop [
+{ #category : #lifecycle }
+BlHostPulseLoop >> stop [
 	"Stop the loop process. Can be safely sent from any process, including the loop process itself."
 
 	| currentProcess isCurrentActive |
@@ -288,14 +258,20 @@ BlValueLoop >> stop [
 		currentProcess ifNotNil: [ currentProcess terminate ] ]
 ]
 
-{ #category : 'accessing' }
-BlValueLoop >> target: anObject selector: aSymbol [
+{ #category : #accessing }
+BlHostPulseLoop >> valuable [
 
-	action := MessageSend receiver: anObject selector: aSymbol
+	^ valuable
 ]
 
-{ #category : 'lifecycle' }
-BlValueLoop >> wakeUp [
+{ #category : #accessing }
+BlHostPulseLoop >> valuable: aValuable [
+
+	valuable := aValuable
+]
+
+{ #category : #lifecycle }
+BlHostPulseLoop >> wakeUp [
 	"Wake up the loop process immediately if sleeping between frames, or start it if not running."
 
 	self isRunning ifFalse: [ ^ self start ].
