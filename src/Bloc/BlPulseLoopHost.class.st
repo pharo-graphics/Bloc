@@ -1,7 +1,7 @@
 "
 I am an abstract host for in-image, loop-driven Bloc environments.
 
-I combine a background pulse loop thread (`BlHostPulseLoop`) with a local space coordinator (`BlParallelUniverse`) to execute and render spaces within the current Pharo image.
+I combine a background pulse loop thread (`BlValueLoop`) with a local space coordinator (`BlParallelUniverse`) to execute and render spaces within the current Pharo image.
 
 ### How I Work
 - **Pulse loop**: My `pulseLoop` runs a dedicated high-priority process that periodically sends `#pulse` to me according to `pulsePeriod`.
