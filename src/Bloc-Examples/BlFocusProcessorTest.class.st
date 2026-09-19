@@ -179,7 +179,8 @@ BlFocusProcessorTest >> setUp [
 
 	super setUp.
 	scripter := BlDevScripter new.
-	scripter element: self newScripterElement
+	scripter space deferAndSettle: [
+		scripter element: self newScripterElement ]
 ]
 
 { #category : #running }
@@ -941,12 +942,12 @@ BlFocusProcessorTest >> testRequestFocus06Container1 [
 			onChildNamed: #'container-2'.
 
 		aStep check
-			label: 'Check focus-out fired on conatiner-1';
+			label: 'Check focus-out fired on container-2';
 			value: [ :anElement | anElement focusOutCount ] equals: 2;
 			onChildNamed: #'container-2'.
 
 		aStep check
-			label: 'Check blur not fired on container-1';
+			label: 'Check blur not fired on container-2';
 			value: [ :anElement | anElement blurCount ] equals: 1;
 			onChildNamed: #'container-2'.
 
@@ -961,7 +962,7 @@ BlFocusProcessorTest >> testRequestFocus06Container1 [
 			onChildNamed: #'container-1'.
 
 		aStep check
-			label: 'Check focus-out not fired on conatiner-1';
+			label: 'Check focus-out not fired on container-1';
 			value: [ :anElement | anElement focusOutCount ] equals: 2;
 			onChildNamed: #'container-1'.
 

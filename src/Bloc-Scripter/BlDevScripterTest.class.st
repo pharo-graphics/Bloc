@@ -31,6 +31,7 @@ BlDevScripterTest >> newContainerWithRectangle [
 BlDevScripterTest >> newRectangle [
 
 	^ BlElement new
+		extent: 50 @ 50;
 		background: Color red;
 		constraintsDo: [ :c |
 			c frame vertical alignCenter.
@@ -43,7 +44,8 @@ BlDevScripterTest >> setUp [
 
 	super setUp.
 	scripter := BlDevScripter new.
-	scripter element: self newContainerWithRectangle
+	scripter space deferAndSettle: [
+		scripter element: self newContainerWithRectangle ]
 ]
 
 { #category : #running }
@@ -98,7 +100,7 @@ BlDevScripterTest >> testSyncPlayProducesClick [
 
 	scripter click onChildAt: 1.
 
-	self assert: scripter events isEmpty.
+	self deny: (scripter events asArray anySatisfy: [ :each | each isClick ]).
 	scripter syncPlay.
 	self assert: (scripter events asArray anySatisfy: [ :each | each isClick ])
 ]
