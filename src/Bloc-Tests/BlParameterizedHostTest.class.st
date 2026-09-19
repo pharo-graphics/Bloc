@@ -108,9 +108,12 @@ BlParameterizedHostTest >> newTestingSpace [
 	| aSpace |
 	aSpace := BlSpace new.
 	aSpace
+		title: self asString;
 		host: host;
 		show;
 		settle.
+
+	aSpace userData at: #testCase put: self asString.
 
 	testingSpaces add: aSpace.
 
