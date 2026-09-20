@@ -103,18 +103,17 @@ BlAlphaSlider >> initializeChessBackground [
 BlAlphaSlider >> initializeCursor [
 
 	cursor := BlElement new
-		               extent: 20 asPoint;
-		               background: Color transparent;
-		               geometry: BlCircleGeometry new;
-		               border: (BlBorder paint: Color white width: 2);
-		               constraintsDo: [ :c | c ignoredByLayout ];
-		               yourself.
+		          extent: 20 @ 20;
+		          background: Color transparent;
+		          geometry: BlCircleGeometry new;
+		          border: (BlBorder paint: Color white width: 2);
+		          constraintsDo: [ :c | c ignoredByLayout ];
+		          yourself.
 
-	self whenLayoutedDoOnce: [
-		cursor position: self width @ (self height / 2) ].
+	self whenLayoutedDoOnce: [ cursor position: self width @ (self height / 2) ].
 
 
-	cursor transformDo: [ :t | t translateBy: -10 asPoint ].
+	cursor transformDo: [ :t | t translateBy: -10 @ -10 ].
 
 	self addChild: cursor
 ]

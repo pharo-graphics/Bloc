@@ -359,18 +359,20 @@ BlGeometryVisualAndLayoutBoundsExamples >> rectangleWithSmallerGeometryOutside [
 
 { #category : #geometries }
 BlGeometryVisualAndLayoutBoundsExamples >> sigmoid [
-	<sampleInstance>
 
+	<sampleInstance>
 	| geometry |
-	geometry := BlSigmoidGeometry new from: 0 asPoint to: 100 asPoint; yourself.
+	geometry := BlSigmoidGeometry new
+		            from: 0 @ 0 to: 100 @ 100;
+		            yourself.
 	geometry beVertical.
 
 	^ BlElement new
-		geometry: geometry;
-		border: (BlBorder paint: Color blue width: 3);
-		beOutskirtsCentered;
-		extent: 100 asPoint;
-		yourself
+		  geometry: geometry;
+		  border: (BlBorder paint: Color blue width: 3);
+		  beOutskirtsCentered;
+		  extent: 100 @ 100;
+		  yourself
 ]
 
 { #category : #geometries }

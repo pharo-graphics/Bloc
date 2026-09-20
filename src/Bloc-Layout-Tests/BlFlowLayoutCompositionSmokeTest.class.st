@@ -9,42 +9,47 @@ Class {
 
 { #category : #examples }
 BlFlowLayoutCompositionSmokeTest class >> exampleHorizontalList [
+
 	<gtExample>
 	| e1 e2 e3 e4 el space e5 |
-
 	e1 := BlElement new
-		constraintsDo: [ :c | 
-			c horizontal exact: 50.
-			c vertical exact: 150 ];
-		background: Color red.
+		      constraintsDo: [ :c |
+				      c horizontal exact: 50.
+				      c vertical exact: 150 ];
+		      background: Color red.
 
 	e2 := BlElement new
-		constraintsDo: [ :c | 
-			c horizontal exact: 100.
-			c vertical exact: 50 ];
-		background: Color green.
-	
+		      constraintsDo: [ :c |
+				      c horizontal exact: 100.
+				      c vertical exact: 50 ];
+		      background: Color green.
+
 	e3 := BlElement new
-		extent: 50 asPoint;
-		background: Color yellow.
+		      extent: 50 @ 50;
+		      background: Color yellow.
 
 	e4 := BlElement new
-		extent: 50 asPoint;
-		background: Color magenta.
-	
+		      extent: 50 @ 50;
+		      background: Color magenta.
+
 	e5 := BlElement new
-		extent: 50 asPoint;
-		geometry: BlEllipseGeometry new;
-		background: Color orange.
+		      extent: 50 @ 50;
+		      geometry: BlEllipseGeometry new;
+		      background: Color orange.
 
 	el := BlElement new
-		layout: BlFlowLayout new horizontal;
-		extent: 166@300;
-		position: 200 @ 100;
-		background: Color veryLightGray;
-		border: (BlBorder paint: Color lightGray width: 8);
-		padding: (BlInsets all: 8);
-		addChildren: { e1. e2. e3. e4 . e5 }.
+		      layout: BlFlowLayout new horizontal;
+		      extent: 166 @ 300;
+		      position: 200 @ 100;
+		      background: Color veryLightGray;
+		      border: (BlBorder paint: Color lightGray width: 8);
+		      padding: (BlInsets all: 8);
+		      addChildren: {
+				      e1.
+				      e2.
+				      e3.
+				      e4.
+				      e5 }.
 	^ el
 ]
 

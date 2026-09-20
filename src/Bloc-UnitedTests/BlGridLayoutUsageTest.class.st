@@ -141,11 +141,11 @@ BlGridLayoutUsageTest >> testExampleHorizontal2x1Grid [
 	<sampleInstance>
 	| e1 e2 el |
 	e1 := BlElement new
-		      extent: 150 asPoint;
+		      extent: 150 @ 150;
 		      background: Color red.
 
 	e2 := BlElement new
-		      extent: 150 asPoint;
+		      extent: 150 @ 150;
 		      background: Color yellow.
 
 	el := BlElement new
@@ -287,19 +287,19 @@ BlGridLayoutUsageTest >> testExampleSimple2x2Grid [
 	<sampleInstance>
 	| e1 e2 e3 e4 el |
 	e1 := BlElement new
-		      extent: 150 asPoint;
+		      extent: 150 @ 150;
 		      background: Color pink.
 
 	e2 := BlElement new
-		      extent: 150 asPoint;
+		      extent: 150 @ 150;
 		      background: Color green.
 
 	e3 := BlElement new
-		      extent: 150 asPoint;
+		      extent: 150 @ 150;
 		      background: Color red.
 
 	e4 := BlElement new
-		      extent: 150 asPoint;
+		      extent: 150 @ 150;
 		      background: Color yellow.
 
 	el := BlElement new
@@ -353,11 +353,11 @@ BlGridLayoutUsageTest >> testExampleVertical1x2Grid [
 	<sampleInstance>
 	| e1 e2 el |
 	e1 := BlElement new
-		      extent: 150 asPoint;
+		      extent: 150 @ 150;
 		      background: Color red.
 
 	e2 := BlElement new
-		      extent: 150 asPoint;
+		      extent: 150 @ 150;
 		      background: Color yellow.
 
 	el := BlElement new

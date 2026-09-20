@@ -56,14 +56,15 @@ BlColorSlider >> initialize [
 BlColorSlider >> initializeCursor [
 
 	cursor := BlElement new
-		               extent: 20 asPoint;
-		               background: Color red;
-		               geometry: BlCircleGeometry new;
-		               border: (BlBorder paint: Color white width: 2); yourself.
-	self whenLayoutedDoOnce: [ cursor position: 0 @ (self height / 2) ].	
-	
+		          extent: 20 @ 20;
+		          background: Color red;
+		          geometry: BlCircleGeometry new;
+		          border: (BlBorder paint: Color white width: 2);
+		          yourself.
+	self whenLayoutedDoOnce: [ cursor position: 0 @ (self height / 2) ].
 
-	cursor transformDo: [ :t | t translateBy: -10 asPoint ].
+
+	cursor transformDo: [ :t | t translateBy: -10 @ -10 ].
 
 	self addChild: cursor
 ]

@@ -12,55 +12,48 @@ BlHalosScriptExperiments class >> experimentHoverToSeeHalosDecription [
 	elt := BlElement new
 		       background: Color lightRed;
 		       clipChildren: false;
-		       extent: 150 asPoint;
-		       position: 100 asPoint.
+		       extent: 150 @ 150;
+		       position: 100 @ 100.
 	haloContainer := BlElement new
 		                 background: Color lightGreen;
 		                 layout: BlLinearLayout horizontal;
 		                 constraintsDo: [ :c |
-			                 c vertical fitContent.
-			                 c horizontal fitContent.
-			                 c padding: (BlInsets all: 5) ];
+				                 c vertical fitContent.
+				                 c horizontal fitContent.
+				                 c padding: (BlInsets all: 5) ];
 		                 position: 0 @ -30;
 		                 clipChildren: false.
 
-	elt addEventHandlerOn: BlDragEvent do: [ :e | 'drag' traceCr].
+	elt addEventHandlerOn: BlDragEvent do: [ :e | 'drag' traceCr ].
 
 	elt addEventHandlerOn: BlDragEvent do: [ :e | elt inspect ].
 
 	elt addEventHandlerOn: BlDragStartEvent do: [ :e | elt inspect ].
 
 	elt addEventHandlerOn: BlClickEvent do: [ :event |
-		(event modifiers isCtrl and: event modifiers isShift) ifTrue: [
-			(elt hasChild: haloContainer)
-				ifFalse: [
-					haloContainer removeChildren.
-					elt eventDispatcher handlersDo: [ :handler |
-						| handlerElt textElt |
-						handlerElt := BlElement new
-							              extent: 20 asPoint;
-							              background: Color random;
-							              clipChildren: false;
-							              constraintsDo: [ :c |
-								              c margin: (BlInsets all: 2) ].
-						handlerElt
-							addEventHandlerOn: BlClickEvent
-							do: [ :e | handlerElt inspect ].
-						textElt := BlTextElement new
-							           text: handler action asText asRopedText;
-							           background: Color lightYellow;
-							           position: 0 @ 20.
-						textElt text fontSize: 15.
-						handlerElt
-							addEventHandlerOn: BlMouseEnterEvent
-							do: [ :e | handlerElt addChild: textElt ].
-						handlerElt
-							addEventHandlerOn: BlMouseLeaveEvent
-							do: [ :e | handlerElt removeChild: textElt ].
+			(event modifiers isCtrl and: event modifiers isShift) ifTrue: [
+					(elt hasChild: haloContainer)
+						ifFalse: [
+								haloContainer removeChildren.
+								elt eventDispatcher handlersDo: [ :handler |
+										| handlerElt textElt |
+										handlerElt := BlElement new
+											              extent: 20 @ 20;
+											              background: Color random;
+											              clipChildren: false;
+											              constraintsDo: [ :c | c margin: (BlInsets all: 2) ].
+										handlerElt addEventHandlerOn: BlClickEvent do: [ :e | handlerElt inspect ].
+										textElt := BlTextElement new
+											           text: handler action asText asRopedText;
+											           background: Color lightYellow;
+											           position: 0 @ 20.
+										textElt text fontSize: 15.
+										handlerElt addEventHandlerOn: BlMouseEnterEvent do: [ :e | handlerElt addChild: textElt ].
+										handlerElt addEventHandlerOn: BlMouseLeaveEvent do: [ :e | handlerElt removeChild: textElt ].
 
-						haloContainer addChild: handlerElt ].
-					elt addChild: haloContainer ]
-				ifTrue: [ elt removeChild: haloContainer ] ] ].
+										haloContainer addChild: handlerElt ].
+								elt addChild: haloContainer ]
+						ifTrue: [ elt removeChild: haloContainer ] ] ].
 
 
 
@@ -85,17 +78,16 @@ BlHalosScriptExperiments class >> experimentInspectOnCtrlShift [
 BlHalosScriptExperiments class >> experimentNewHalosOnShiftAltClick [
 
 	<script>
-
 	| aContainer aSpace aPosition anEvent child |
 	"shift+alt+click on the element shows the halo"
 	aContainer := BlElement new
 		              background: Color lightRed;
-		              extent: 300 asPoint;
-		              position: 50 asPoint.
+		              extent: 300 @ 300;
+		              position: 50 @ 50.
 	child := BlElement new
 		         background: Color lightBlue;
-		         extent: 100 asPoint;
-		         position: 10 asPoint.
+		         extent: 100 @ 100;
+		         position: 10 @ 10.
 
 	aContainer addChild: child.
 

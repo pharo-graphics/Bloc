@@ -57,12 +57,11 @@ BAOffscreen >> ensureReady [
 
 	(aeCanvas notNil and: [ aeCanvas isValid ]) ifTrue: [ ^ self ].
 
-	aeCanvas := AeCanvas extent: 1 asPoint.
+	aeCanvas := AeCanvas extent: 1 @ 1.
 
-	textMeasurer :=
-		BATextMeasurer new
-			canvas: aeCanvas;
-			yourself
+	textMeasurer := BATextMeasurer new
+		                canvas: aeCanvas;
+		                yourself
 ]
 
 { #category : #api }
