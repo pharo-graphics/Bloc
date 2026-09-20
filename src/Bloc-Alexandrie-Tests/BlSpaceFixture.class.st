@@ -468,7 +468,7 @@ BlSpaceFixture >> buildGaussianShadowsByGeometry [
 		                   builder addToRoot
 			                   geometry: aGeometry;
 			                   position: positionGenerator next;
-			                   extent: elementSize asPoint;
+			                   extent: elementSize @ elementSize;
 			                   background: (Color blue alpha: backgroundAlpha);
 			                   effect: (BlGaussianShadowEffect color: (Color orange alpha: shadowAlpha) width: 4 offset: shadowOffset);
 			                   yourself ].
@@ -1068,7 +1068,7 @@ BlSpaceFixture >> buildSimpleShadowsByGeometry [
 		                   builder addToRoot
 			                   geometry: aGeometry;
 			                   position: positionGenerator next;
-			                   extent: elementSize asPoint;
+			                   extent: elementSize @ elementSize;
 			                   background: (Color blue alpha: backgroundAlpha);
 			                   effect: (BlSimpleShadowEffect color: (Color orange alpha: shadowAlpha) offset: shadowOffset);
 			                   yourself ].
@@ -1683,7 +1683,7 @@ BlSpaceFixture >> buildVariantsOfAnnulusSectorAngles [
 					                    outerRadius: outerRadius);
 			                   position: positionGenerator next;
 			                   background: Color black;
-			                   extent: pixelSize asPoint;
+			                   extent: pixelSize @ pixelSize;
 			                   yourself ].
 
 	addAnnulusVariationsForAnglesBlock := [ :anAngle :anotherAngle | "		addElementBlock
@@ -1800,7 +1800,7 @@ BlSpaceFixture >> buildVariantsOfCircleSectorAngles [
 					                    outerRadius: outerRadius);
 			                   position: positionGenerator next;
 			                   background: Color black;
-			                   extent: pixelSize asPoint;
+			                   extent: pixelSize @ pixelSize;
 			                   yourself ].
 
 	addAnnulusVariationsForAnglesBlock := [ :anAngle :anotherAngle |
@@ -2096,12 +2096,13 @@ BlSpaceFixture >> buildVariantsOfStadium [
 
 { #category : #private }
 BlSpaceFixture >> diagonalPositionGeneratorStartingAt: aPoint by: by [
-	
-	^ Generator on: [ :g | 
-		| index |
-		index := 0.
-		[ 	g yield: aPoint + index asPoint.
-			index := index + by ] repeat ]
+
+	^ Generator on: [ :g |
+			  | index |
+			  index := 0.
+			  [
+				  g yield: aPoint + (index @ index).
+				  index := index + by ] repeat ]
 ]
 
 { #category : #private }

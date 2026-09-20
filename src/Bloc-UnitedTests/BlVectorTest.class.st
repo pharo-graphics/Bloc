@@ -39,14 +39,14 @@ BlVectorTest >> testAsBlocVectorPoint [
 ]
 
 { #category : #'tests - maths' }
-BlVectorTest >> testNormal [ 
+BlVectorTest >> testNormal [
 
 	| v norm |
-	v := (1@0) asBlocVector.
+	v := (1 @ 0) asBlocVector.
 	norm := v normal.
 	self assert: norm x equals: 0.
 	self assert: norm y equals: 1.
-	self assert: (v asPoint crossProduct: norm asPoint) equals: 1
+	self assert: (v @ v crossProduct: norm @ norm) equals: 1
 ]
 
 { #category : #'tests - conversions' }
