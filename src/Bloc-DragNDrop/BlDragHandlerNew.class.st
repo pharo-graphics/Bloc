@@ -1,5 +1,5 @@
 "
-This class is the beginning of a prototype
+This class is a first version of an new drag handler supporting the change of strategy during execution.
 "
 Class {
 	#name : #BlDragHandlerNew,

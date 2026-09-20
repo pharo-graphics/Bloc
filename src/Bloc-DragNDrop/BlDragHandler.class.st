@@ -1,8 +1,9 @@
 "
-specify behavior on how to handle the event to drag an element
-Current event being managed:
-- BlDragStartEvent
-Real behavior is delegated to `BlDragDelegate`
+Specify behavior on how to handle the event to drag an element
+
+Current event being managed is only `BlDragStartEvent`.
+The real behavior of the drag is delegated to `BlDragDelegate`. 
+Finally I raise a lift event (`BlSpaceDragLiftEvent`) when the object is grabbed. 
 "
 Class {
 	#name : #BlDragHandler,
@@ -16,7 +17,8 @@ Class {
 
 { #category : #'dnd handlers' }
 BlDragHandler >> createDragItemFor: aSourceElement [
-	<return: #BlDragItem>
+	"Return a `BlDragItem` holding aSourceElement, 
+	if liftItemBlock has been defined apply the block in the source element"
 
 	^ liftItemBlock
 		ifNil: [
@@ -33,8 +35,10 @@ BlDragHandler >> dragArea: aBlock [
 
 { #category : #'dnd handlers' }
 BlDragHandler >> dragStartEvent: anEvent [
+	"Create and configure a DragDelegate object and pass it 
+	to a drag lift event that the space will dispatch."
+	
 	| aDragDelegate |
-
 	anEvent consumed: true.
 
 	aDragDelegate := BlDragDelegate new.
