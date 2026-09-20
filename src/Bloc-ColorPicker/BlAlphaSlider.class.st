@@ -40,7 +40,7 @@ BlAlphaSlider class >> chessBackgroundFor: aPoint squareSize: squareSize [
 	1 to: aPoint x // squareSize * (aPoint y // squareSize + offset) do: [ :i |
 		| square |
 		square := BlElement new
-			          extent: squareSize asPoint;
+			          extent: squareSize @ squareSize;
 			          background: (i even
 					           ifTrue: [ Color white ]
 					           ifFalse: [ Color gray ]);

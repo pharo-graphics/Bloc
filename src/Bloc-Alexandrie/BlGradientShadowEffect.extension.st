@@ -46,7 +46,7 @@ BlGradientShadowEffect >> setUpPolygon: aCollection extent: aPoint [
 
 	AePolygonGradientBlurFilter new
 		blurRadius: blurRadius color: color;
-		vertices: aCollection + blurRadius asPoint;
+		vertices: aCollection + (blurRadius @ blurRadius);
 		drawOn: shadowSurface newContext
 ]
 
@@ -55,7 +55,7 @@ BlGradientShadowEffect >> setUpRectangleExtent: aPoint [
 
 	AeRectangleGradientBlurFilter new
 		blurRadius: blurRadius color: color;
-		rectangle: (blurRadius asPoint extent: aPoint);
+		rectangle: (blurRadius@blurRadius extent: aPoint);
 		drawOn: shadowSurface newContext
 ]
 
