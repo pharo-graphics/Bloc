@@ -64,7 +64,7 @@ BlGradientShadowEffect >> setUpRoundedRectangleExtent: aPoint radii: aBlCornerRa
 
 	AeRoundedRectangleGradientBlurFilter new
 		blurRadius: blurRadius color: color;
-		rectangle: (blurRadius asPoint extent: aPoint) radii: {
+		rectangle: (blurRadius @ blurRadius extent: aPoint) radii: {
 				aBlCornerRadii topLeft.
 				aBlCornerRadii topRight.
 				aBlCornerRadii bottomRight.
