@@ -5,20 +5,22 @@ Class {
 }
 
 { #category : #experimentations }
-BlDragAndDropExamples class >> experimentDragChangesScale [
+BlDragAndDropExamples class >> exampleDraggingChangesSize [
 	"Dragging the element changes its size, revert it when dropping"
+	
 	<script>
+	
 	| child scaleUpAnimation scaleDownAnimation |
 	child := BlElement new
-		         background: Color lightRed;
-		         extent: 50 asPoint;
-		         addEventHandler: BlDragHandlerNew new.
+		background: Color lightRed;
+		extent: 100@100;
+		addEventHandler: BlDragHandlerNew new.
 
-	scaleUpAnimation := (BlTransformAnimation scale: 1.3)
-		                    duration: 0.3 seconds;
+	scaleUpAnimation := (BlTransformAnimation scale: 2)
+		                    duration: (Duration milliSeconds: 500);
 		                    easing: BlEasingBounceIn new.
-	scaleDownAnimation := (BlTransformAnimation scale: 1 / 1.3)
-		                      duration: 0.3 seconds;
+	scaleDownAnimation := (BlTransformAnimation scale: 1 / 2)
+		                      duration: (Duration milliSeconds: 500);
 		                      easing: BlEasingBounceOut new.
 
 	child
