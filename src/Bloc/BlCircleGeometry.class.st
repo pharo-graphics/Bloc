@@ -29,9 +29,11 @@ BlCircleGeometry >> geometryBounds: aBlBounds [
 	"Load my bounds in mutable rectangle.
 	@see #geometryBounds for more info"
 
+	| ext |
+	ext := (self radius * 2.0).
 	^ aBlBounds
 		origin: self origin
-		extent: (self radius * 2.0) asPoint
+		extent: ext @ ext
 ]
 
 { #category : #testing }
