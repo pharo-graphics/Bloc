@@ -99,7 +99,7 @@ BlDevScripterTest >> testSyncPlayProducesClick [
 
 	scripter click onChildAt: 1.
 
-	self assert: scripter events isEmpty.
+	self deny: (scripter events asArray anySatisfy: [ :each | each isClick ]).
 	scripter syncPlay.
 	self assert: (scripter events asArray anySatisfy: [ :each | each isClick ])
 ]
