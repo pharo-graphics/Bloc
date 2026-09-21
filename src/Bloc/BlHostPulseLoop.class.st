@@ -117,12 +117,6 @@ BlHostPulseLoop >> loopIteration [
 	^ self ownsActiveProcess
 ]
 
-{ #category : #testing }
-BlHostPulseLoop >> ownsActiveProcess [
-
-	^ Processor activeProcess == loopProcess
-]
-
 { #category : #accessing }
 BlHostPulseLoop >> loopProcess [
 
@@ -136,6 +130,12 @@ BlHostPulseLoop >> newLoopProcess [
 		  priority: self processPriority;
 		  name: self processName;
 		  yourself
+]
+
+{ #category : #testing }
+BlHostPulseLoop >> ownsActiveProcess [
+
+	^ Processor activeProcess == loopProcess
 ]
 
 { #category : #period }
