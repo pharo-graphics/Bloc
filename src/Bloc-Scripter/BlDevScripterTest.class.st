@@ -31,7 +31,6 @@ BlDevScripterTest >> newContainerWithRectangle [
 BlDevScripterTest >> newRectangle [
 
 	^ BlElement new
-		extent: 50 @ 50;
 		background: Color red;
 		constraintsDo: [ :c |
 			c frame vertical alignCenter.

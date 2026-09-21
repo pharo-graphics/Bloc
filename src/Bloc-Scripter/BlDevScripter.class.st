@@ -129,7 +129,7 @@ BlDevScripter >> events [
 
 { #category : #'accessing - space' }
 BlDevScripter >> extent [
-	<return: #Point>
+
 	^ space extent
 ]
 
