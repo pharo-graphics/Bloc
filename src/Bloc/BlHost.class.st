@@ -1,20 +1,21 @@
 "
-I am the abstract base class for Bloc Hosts. 
+I am the abstract base class and public facade for Bloc Hosts.
 
-A host acts as a driver interface communicating with the underlying operating system and native window/rendering APIs (such as OSWindow with SDL2/SDL3, Morphic, or a headless host for testing).
+A host connects logical Bloc spaces (`BlSpace`) to their execution environment, event loops, and underlying display or window drivers (such as OSWindow with SDL2/SDL3, Morphic, or headless testing environments).
 
-Key Responsibilities:
-- **Universe execution**: Manages the running loop process (thread) that pulses the universe (using subclass `BlPulseLoopHost` or custom stepping loops).
-- **Space rendering and windows**: Responsible for instantiating the native windows and OS renderer for spaces (`newHostSpaceFor:`).
-- **Thread/Process management**: Provides hooks to run code on the UI process (`uiProcessDo:`) and controls starting/stopping of background pulse loop processes (`start`, `stop`).
-- **Synchronization**: Implements thread-safe wait loops (`waitUntil:timeout:onCompletion:onTimeout:`) to allow tests and senders to block until specific conditions or animations complete in a running host space.
+### Architecture
+`BlHost` is an abstract facade defining the universal protocol through which spaces interact with their host, regardless of the host's underlying execution model.
+
+### Key Responsibilities
+- **Space lifecycle**: Managing the opening and closing of spaces (`openSpace:`, `closeSpace:`, `spaces`, `closeSpaces`, `hasSpace:`).
+- **Task scheduling & pulsing**: Providing hooks to run code on the host UI thread (`defer:`), triggering frame updates (`pulse`, `requestPulse`), and querying settlement state (`isSettled`, `settle`, `isSpaceSettled:`).
+- **Window & driver factory**: Creating native window wrappers (`newHostSpaceFor:`) and canvas renderers (`newHostRenderer`).
+- **Host lifecycle**: Handling startup and shutdown hooks (`start`, `stop`, `startUp:`, `shutDown:`).
+- **Synchronization**: Thread-safe waiting for conditions or animations to settle (`waitUntil:timeOutIf:onCompletion:onTimeout:`).
 "
 Class {
 	#name : #BlHost,
 	#superclass : #Object,
-	#instVars : [
-		'universe'
-	],
 	#category : #'Bloc-Universe - Host'
 }
 
@@ -92,29 +93,23 @@ BlHost class >> supportedHostClasses [
 
 { #category : #'api - spaces' }
 BlHost >> closeSpace: aSpace [
+	"Close aSpace managed by this host."
 
-	"Return early if space was never opened and host is idle"
-	(self isRunning or: [ self hasSpace: aSpace ]) ifFalse: [ ^ self ].
-
-	self universe defer: [ self universe closeSpace: aSpace ].
-	self isRunning ifFalse: [ self start ]
+	self subclassResponsibility
 ]
 
 { #category : #'api - spaces' }
 BlHost >> closeSpaces [
 	"Close all spaces managed by this host."
 
-	self hasUniverse ifTrue: [
-		self universe closeSpaces ]
+	self subclassResponsibility
 ]
 
-{ #category : #'api - ui process' }
+{ #category : #'api - spaces' }
 BlHost >> defer: aValuable [
-	"Enqueue a valuable from any process to be executed in the UI process at the beginning of the next pulse."
+	"Enqueue a valuable from any process to be executed in the host UI process at the beginning of the next pulse cycle."
 
-	self deprecated: 'You should send #defer: to an opened space instead of a host.'.
-
-	self universe defer: aValuable
+	self subclassResponsibility
 ]
 
 { #category : #'error handling' }
@@ -130,13 +125,14 @@ BlHost >> denyPulseProcess [
 BlHost >> hasSpace: aSpace [
 	"Return true if a given space is registered with this host, false otherwise."
 
-	^ self hasUniverse and: [ self universe hasSpace: aSpace ]
+	^ self spaces includes: aSpace
 ]
 
 { #category : #testing }
 BlHost >> hasUniverse [
+	"Return true if this host uses an internal universe to coordinate spaces."
 
-	^ universe isNotNil
+	^ false
 ]
 
 { #category : #'host - testing' }
@@ -144,13 +140,6 @@ BlHost >> isPulseProcessActive [
 	"Return true if the active process is the pulse loop process of this host"
 
 	^ false
-]
-
-{ #category : #testing }
-BlHost >> isPulsing [
-	"Return true if this host's universe is currently pulsing, false otherwise."
-
-	^ self hasUniverse and: [ self universe isPulsing ]
 ]
 
 { #category : #'api - lifecycle' }
@@ -164,7 +153,31 @@ BlHost >> isRunning [
 BlHost >> isSettled [
 	"Return true if there are no deferred actions waiting to be executed on this host."
 
-	^ self hasUniverse not or: [ self universe isSettled ]
+	^ true
+]
+
+{ #category : #testing }
+BlHost >> isSpaceClosing: aSpace [
+	"Return true if a given space is currently queued to be closed on this host, false otherwise."
+
+	^ false
+]
+
+{ #category : #testing }
+BlHost >> isSpaceOpening: aSpace [
+	"Return true if a space is currently queued to be opened on this host, false otherwise."
+
+	^ false
+]
+
+{ #category : #testing }
+BlHost >> isSpaceSettled: aSpace [
+	"Return true if there are no pending lifecycle actions for aSpace and, if opened, all its frame phases are settled."
+
+	^ (self isSpaceOpening: aSpace) not and: [
+		(self isSpaceClosing: aSpace) not and: [
+			aSpace isOpened not or: [
+				aSpace areFramePhasesSettled ] ] ]
 ]
 
 { #category : #testing }
@@ -202,9 +215,9 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 
 { #category : #'api - spaces' }
 BlHost >> openSpace: aSpace [
+	"Open aSpace on this host."
 
-	self universe defer: [ self universe openSpace: aSpace ].
-	self isRunning ifFalse: [ self start ]
+	self subclassResponsibility
 ]
 
 { #category : #accessing }
@@ -215,9 +228,7 @@ BlHost >> priority [
 
 { #category : #'api - pulse' }
 BlHost >> pulse [
-	"Execute a single pulse cycle across all spaces managed by this host."
-
-	self hasUniverse ifTrue: [ self universe pulse ]
+	"Execute a single pulse cycle across all spaces managed by this host. Subclasses may override."
 ]
 
 { #category : #'api - pulse process' }
@@ -238,6 +249,19 @@ BlHost >> pulseProcessDo: aBlock [
 	^ self pulseProcess ifNotNil: aBlock
 ]
 
+{ #category : #'api - pulse' }
+BlHost >> requestPulse [
+	"Request a pulse cycle from this host. Subclasses with pulse loops implement this to wake the loop."
+
+]
+
+{ #category : #'api - lifecycle' }
+BlHost >> requestStop [
+	"Request the host to stop its pulse loop gracefully without terminating the active process.
+	Subclasses with background loops should override to implement cooperative stopping."
+
+]
+
 { #category : #'api - spaces' }
 BlHost >> settle [
 	"Wait until this host has executed all pending deferred actions and reached equilibrium."
@@ -253,45 +277,31 @@ BlHost >> settle [
 BlHost >> shutDown: isQuitting [
 	"Handle system shutdown / session suspend."
 
-	self hasUniverse ifTrue: [ self universe stop ]
-]
-
-{ #category : #'private - spaces' }
-BlHost >> spaceDetached: aSpace [
-	"A space has been detached from this host. If no spaces remain, cleanly shut down the host loop on the next frame."
-
-	(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
-		self universe defer: [
-			(self spaces isEmpty and: [ self isRunning ]) ifTrue: [
-				self stop ] ] ]
+	self stop
 ]
 
 { #category : #'host space - accessing' }
 BlHost >> spaces [
 	"Answer the collection of spaces managed by this host."
 
-	^ self universe spaces
+	self subclassResponsibility
 ]
 
 { #category : #'api - lifecycle' }
 BlHost >> start [
-	"Start this host."
-
-	self subclassResponsibility
+	"Start background loops, workers, or native resources for this host. Subclasses may override."
 ]
 
 { #category : #'system startup' }
 BlHost >> startUp: isResuming [
 	"Handle system startup / session resume."
 
-	self hasUniverse ifTrue: [ self universe start ]
+	self start
 ]
 
 { #category : #'api - lifecycle' }
 BlHost >> stop [
-	"Stop this host."
-
-	self subclassResponsibility
+	"Stop background loops, workers, or native resources for this host. Subclasses may override."
 ]
 
 { #category : #enumerating }
@@ -304,19 +314,9 @@ BlHost >> uiProcessDo: aBlock [
 	^ self pulseProcess ifNotNil: aBlock
 ]
 
-{ #category : #'host space - accessing' }
-BlHost >> universe [
-
-	^ universe ifNil: [ universe := BlParallelUniverse host: self ]
-]
-
-{ #category : #'host - testing' }
+{ #category : #'api - spaces' }
 BlHost >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion: completionBlock onTimeout: timeoutBlock [
 	"Evaluate aConditionValuable repeatedly until it answers true. If aTimeoutValuable answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
 
-	^ self universe
-		  waitUntil: aConditionValuable
-		  timeOutIf: aTimeoutValuable
-		  onCompletion: completionBlock
-		  onTimeout: timeoutBlock
+	self subclassResponsibility
 ]
