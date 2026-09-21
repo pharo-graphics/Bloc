@@ -58,14 +58,19 @@ BlPulseLoopHost >> hasUniverse [
 BlPulseLoopHost >> initialize [
 
 	super initialize.
-	pulseLoop := BlHostPulseLoop host: self
+
+	pulseLoop :=
+		BlHostPulseLoop new
+			valuable: [ self pulse ];
+			processName: ('Bloc Host Pulse Loop ({1})' format: { self label });
+			yourself
 ]
 
 { #category : #'host - testing' }
 BlPulseLoopHost >> isPulseProcessActive [
 	"Return true if the active process is the pulse loop process of this host"
 
-	^ pulseLoop isNotNil and: [ pulseLoop isPulseProcessActive ]
+	^ pulseLoop isNotNil and: [ pulseLoop ownsActiveProcess ]
 ]
 
 { #category : #'api - lifecycle' }
