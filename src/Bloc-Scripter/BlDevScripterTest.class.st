@@ -43,8 +43,8 @@ BlDevScripterTest >> setUp [
 
 	super setUp.
 	scripter := BlDevScripter new.
-	scripter space deferAndSettle: [
-		scripter element: self newContainerWithRectangle ]
+	scripter element: self newContainerWithRectangle.
+	scripter settle
 ]
 
 { #category : #running }

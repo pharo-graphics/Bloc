@@ -179,8 +179,8 @@ BlFocusProcessorTest >> setUp [
 
 	super setUp.
 	scripter := BlDevScripter new.
-	scripter space deferAndSettle: [
-		scripter element: self newScripterElement ]
+	scripter element: self newScripterElement.
+	scripter settle
 ]
 
 { #category : #running }

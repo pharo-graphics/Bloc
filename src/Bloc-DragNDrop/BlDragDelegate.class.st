@@ -53,8 +53,7 @@ BlDragDelegate >> cancel: aDraggedContainer at: aPoint in: aParentElement [
 BlDragDelegate >> drag: aDraggedContainer to: aPoint [
 	"Drag a container with all previews to a given point in the parent coordinate of the container"
 
-	"horizontal drag&drop, used by GToolkit to reorder tabs on top of its interface"
-
+	"horizontal drag&drop to reorder tabs on top of its interface"
 	"aDraggedContainer position:
 		(aPoint - offset) x @ aDraggedContainer measuredBounds position y"
 
@@ -88,7 +87,6 @@ BlDragDelegate >> hasDragArea [
 BlDragDelegate >> initialize [
 
 	super initialize.
-
 	items := { }
 ]
 
@@ -106,19 +104,17 @@ BlDragDelegate >> items: aCollectionOfDragItems [
 
 { #category : #'drag and drop' }
 BlDragDelegate >> lift [
-	"Lift previews at a given point in space coordinates"
+	"Lift at a given point in space coordinates"
 
 	| aContainer |
 	aContainer := BlElement new
 		              layout: BlFrameLayout new;
 		              clipChildren: false;
-		              "beInSingleCompositionLayer;"
 		              constraintsDo: [ :c |
 			              c ignoreByLayout.
 			              c horizontal fitContent.
 			              c vertical fitContent ].
 
-	"aContainer addChildren: (self items collect: [ :aDragItem | aDragItem previewElement ])."
 	aContainer addChildren: (self items collect: [ :aDragItem |
 			 aDragItem sourceElement removeFromParent.
 			 aDragItem sourceElement ]).
