@@ -1,14 +1,14 @@
 "
-I am a rate-capped execution loop that periodically evaluates an action valuable in a dedicated background process (#start, #stop, #basicStart).
+I am a rate-capped execution loop that periodically evaluates a valuable in a dedicated process (#start, #stop, #basicStart).
 
-### Pacing & Timing
+Loop execution:
 - `periodUS`: Minimum duration in microseconds between consecutive evaluations (configured via #hertz: or #period:).
 - If an evaluation takes longer than the period, I yield cooperatively to processes of the same priority.
 - If spare time remains, I wait on `wakeUpSemaphore` with a timeout, allowing external callers to wake the loop immediately on demand (#wakeUp).
 
-### Debugger Safety & Concurrency
-- In background mode, unhandled exceptions during execution automatically spawn a successor process before opening the debugger, preventing the system UI from freezing.
-- I track my designated process; if replaced during debugging or retired via #requestStop, the retired process exits cleanly.
+Error handling:
+- Unhandled exceptions automatically spawn a successor process before opening the debugger, preventing the UI from freezing.
+- I track my designated process; if replaced during debugging or retired via #requestStop, the retired process terminates cleanly.
 "
 Class {
 	#name : #BlHostPulseLoop,
@@ -141,7 +141,7 @@ BlHostPulseLoop >> ownsActiveProcess [
 { #category : #period }
 BlHostPulseLoop >> period [
 
-	^ periodUS microSeconds
+	^ Duration microSeconds: periodUS
 ]
 
 { #category : #period }
