@@ -29,55 +29,48 @@ BlHaloContainer class >> exampleDisplayEventHandlersAsHalos [
 	elt := BlElement new
 		       background: Color lightRed;
 		       clipChildren: false;
-		       extent: 150 asPoint;
-		       position: 100 asPoint.
+		       extent: 150 @ 150;
+		       position: 100 @ 100.
 	haloContainer := BlElement new
 		                 background: Color lightGreen;
 		                 layout: BlLinearLayout horizontal;
 		                 constraintsDo: [ :c |
-			                 c vertical fitContent.
-			                 c horizontal fitContent.
-			                 c padding: (BlInsets all: 5) ];
+				                 c vertical fitContent.
+				                 c horizontal fitContent.
+				                 c padding: (BlInsets all: 5) ];
 		                 position: 0 @ -30;
 		                 clipChildren: false.
 
-	elt addEventHandlerOn: BlDragEvent do: [ :e | 'drag' traceCr].
+	elt addEventHandlerOn: BlDragEvent do: [ :e | 'drag' traceCr ].
 
 	elt addEventHandlerOn: BlDragEvent do: [ :e | elt inspect ].
 
 	elt addEventHandlerOn: BlDragStartEvent do: [ :e | elt inspect ].
 
 	elt addEventHandlerOn: BlClickEvent do: [ :event |
-		(event modifiers isAlt and: event modifiers isShift) ifTrue: [
-			(elt hasChild: haloContainer)
-				ifFalse: [
-					haloContainer removeChildren.
-					elt eventDispatcher handlersDo: [ :handler |
-						| handlerElt textElt |
-						handlerElt := BlElement new
-							              extent: 20 asPoint;
-							              background: Color random;
-							              clipChildren: false;
-							              constraintsDo: [ :c |
-								              c margin: (BlInsets all: 2) ].
-						handlerElt
-							addEventHandlerOn: BlClickEvent
-							do: [ :e | handlerElt inspect ].
-						textElt := BlTextElement new
-							           text: handler action asText asRopedText;
-							           background: Color lightYellow;
-							           position: 0 @ 20.
-						textElt text fontSize: 15.
-						handlerElt
-							addEventHandlerOn: BlMouseEnterEvent
-							do: [ :e | handlerElt addChild: textElt ].
-						handlerElt
-							addEventHandlerOn: BlMouseLeaveEvent
-							do: [ :e | handlerElt removeChild: textElt ].
+			(event modifiers isAlt and: event modifiers isShift) ifTrue: [
+					(elt hasChild: haloContainer)
+						ifFalse: [
+								haloContainer removeChildren.
+								elt eventDispatcher handlersDo: [ :handler |
+										| handlerElt textElt |
+										handlerElt := BlElement new
+											              extent: 20 @ 20;
+											              background: Color random;
+											              clipChildren: false;
+											              constraintsDo: [ :c | c margin: (BlInsets all: 2) ].
+										handlerElt addEventHandlerOn: BlClickEvent do: [ :e | handlerElt inspect ].
+										textElt := BlTextElement new
+											           text: handler action asText asRopedText;
+											           background: Color lightYellow;
+											           position: 0 @ 20.
+										textElt text fontSize: 15.
+										handlerElt addEventHandlerOn: BlMouseEnterEvent do: [ :e | handlerElt addChild: textElt ].
+										handlerElt addEventHandlerOn: BlMouseLeaveEvent do: [ :e | handlerElt removeChild: textElt ].
 
-						haloContainer addChild: handlerElt ].
-					elt addChild: haloContainer ]
-				ifTrue: [ elt removeChild: haloContainer ] ] ].
+										haloContainer addChild: handlerElt ].
+								elt addChild: haloContainer ]
+						ifTrue: [ elt removeChild: haloContainer ] ] ].
 
 
 
@@ -89,16 +82,15 @@ BlHaloContainer class >> exampleHalosAvailableAndCanDive [
 
 	<script>
 	| aContainer aSpace child |
-	"shift+alt+click on the element shows the halo"
-	"shift+click can make the halos dive to the parent on the decorated element"
+	"shift+alt+click on the element shows the halo""shift+click can make the halos dive to the parent on the decorated element"
 	aContainer := BlElement new
 		              background: Color lightRed;
-		              extent: 300 asPoint;
-		              position: 50 asPoint.
+		              extent: 300 @ 300;
+		              position: 50 @ 50.
 	child := BlElement new
 		         background: Color lightBlue;
-		         extent: 100 asPoint;
-		         position: 10 asPoint.
+		         extent: 100 @ 100;
+		         position: 10 @ 10.
 
 	aContainer addChild: child.
 
@@ -114,24 +106,24 @@ BlHaloContainer class >> exampleHalosAvailableAndCanDive [
 BlHaloContainer class >> exampleHalosDisplayedAboveWithFrameLayout [
 	"This basic example simply tries to display children around an element using a FrameLayout and playing with margins to display them around the element and not 'inside'.
 	The example doesn't use the BlHaloContainer class"
-	
+
 	<script>
 	| container elt1 elt2 elt3 elements marginOffset |
 	container := BlElement new
-		             extent: 100 asPoint;
-		             position: 100 asPoint;
+		             extent: 100 @ 100;
+		             position: 100 @ 100;
 		             background: Color lightRed;
 		             layout: BlFrameLayout new;
 		             clipChildren: false.
 
 	elt1 := BlElement new
-		        extent: 20 asPoint;
+		        extent: 20 @ 20;
 		        background: Color lightBlue.
 	elt2 := BlElement new
-		        extent: 20 asPoint;
+		        extent: 20 @ 20;
 		        background: Color lightGreen.
 	elt3 := BlElement new
-		        extent: 20 asPoint;
+		        extent: 20 @ 20;
 		        background: Color lightOrange.
 
 	elements := {
@@ -142,21 +134,18 @@ BlHaloContainer class >> exampleHalosDisplayedAboveWithFrameLayout [
 	marginOffset := 2.
 
 	elt1 constraintsDo: [ :c |
-		c frame vertical alignTop.
-		c frame horizontal alignLeft ].
+			c frame vertical alignTop.
+			c frame horizontal alignLeft ].
 	elt2 constraintsDo: [ :c |
-		c frame vertical alignTop.
-		c frame horizontal alignRight ].
+			c frame vertical alignTop.
+			c frame horizontal alignRight ].
 	elt3 constraintsDo: [ :c |
-		c frame vertical alignTop.
-		c frame horizontal alignCenter ].
+			c frame vertical alignTop.
+			c frame horizontal alignCenter ].
 
-	elt1 whenLayoutedDoOnce: [
-		elt1 margin: (BlInsets all: 0 - (elt1 width + marginOffset)) ].
-	elt2 whenLayoutedDoOnce: [
-		elt2 margin: (BlInsets all: 0 - (elt2 width + marginOffset)) ].
-	elt3 whenLayoutedDoOnce: [
-		elt3 margin: (BlInsets all: 0 - (elt3 width + marginOffset)) ].
+	elt1 whenLayoutedDoOnce: [ elt1 margin: (BlInsets all: 0 - (elt1 width + marginOffset)) ].
+	elt2 whenLayoutedDoOnce: [ elt2 margin: (BlInsets all: 0 - (elt2 width + marginOffset)) ].
+	elt3 whenLayoutedDoOnce: [ elt3 margin: (BlInsets all: 0 - (elt3 width + marginOffset)) ].
 
 	container addChildren: elements.
 

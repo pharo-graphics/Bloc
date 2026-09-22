@@ -37,6 +37,6 @@ BlGaussianShadowEffect >> ensureValidAlphaSurfaceFor: aBlElement on: aeCanvas [
 			newSurfaceWithGaussianShadow: visualBounds extent + (shadowSpace * 2)
 			width: width
 			canvasDo: [ :alphaCanvas |
-				alphaCanvas pathTranslate: shadowSpace asPoint.
+				alphaCanvas pathTranslate: shadowSpace @shadowSpace.
 				aBlElement aeDrawGeometryOn: alphaCanvas ]
 ]

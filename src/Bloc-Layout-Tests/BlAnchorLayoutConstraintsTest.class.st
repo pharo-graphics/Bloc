@@ -30,19 +30,10 @@ BlAnchorLayoutConstraintsTest >> testActionAnchor [
 
 	anchor := child actionAnchor: [ :v :e | e position ].
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 10 @ 20.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 10 @ 20.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 10 @ 20.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 10 @ 20.
 
-	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 100 asPoint)
-		equals: (10 @ 20 corner: 110 @ 140)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 100 @ 100) equals: (10 @ 20 corner: 110 @ 140)
 ]
 
 { #category : #tests }
@@ -58,19 +49,10 @@ BlAnchorLayoutConstraintsTest >> testBottomAnchor [
 		          element: child;
 		          yourself.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 120.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 0.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 120.
 	" the result is the element bounds with an height of 120"
-	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10)
-		equals: (0 @ -110 corner: 100 @ 10)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10) equals: (0 @ -110 corner: 100 @ 10)
 ]
 
 { #category : #tests }
@@ -86,20 +68,10 @@ BlAnchorLayoutConstraintsTest >> testBottomLeftAnchor [
 		          element: child;
 		          yourself.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0 @ 0.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 110 @ 140.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 0 @ 0.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 110 @ 140.
 	" the result is the element bounds with an height of 120"
-	self
-		assert: (anchor
-				 appliedOnRectangle: child bounds asRectangle
-				 withValue: 10 @ 20)
-		equals: (10 @ -100 corner: 110 @ 20)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10 @ 20) equals: (10 @ -100 corner: 110 @ 20)
 ]
 
 { #category : #tests }
@@ -115,20 +87,10 @@ BlAnchorLayoutConstraintsTest >> testBottomRightAnchor [
 		          element: child;
 		          yourself.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0 @ 0.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 210 @ 140.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 0 @ 0.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 210 @ 140.
 	" the result is the element bounds with an height of 10"
-	self
-		assert: (anchor
-				 appliedOnRectangle: child bounds asRectangle
-				 withValue: 10 @ 20)
-		equals: (-90 @ -100 corner: 10 @ 20)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10 @ 20) equals: (-90 @ -100 corner: 10 @ 20)
 ]
 
 { #category : #tests }
@@ -144,20 +106,10 @@ BlAnchorLayoutConstraintsTest >> testExtentAnchor [
 		          element: child;
 		          yourself.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0 @ 0.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 100 @ 120.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 0 @ 0.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 100 @ 120.
 	" the result is the element bounds with an height of 10"
-	self
-		assert: (anchor
-				 appliedOnRectangle: child bounds asRectangle
-				 withValue: 10 @ 20)
-		equals: (110 @ 20 corner: 120 @ 40)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10 @ 20) equals: (110 @ 20 corner: 120 @ 40)
 ]
 
 { #category : #tests }
@@ -173,19 +125,10 @@ BlAnchorLayoutConstraintsTest >> testHeightAnchor [
 		          element: child;
 		          yourself.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 120.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 0.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 120.
 	" the result is the element bounds with an height of 10"
-	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10)
-		equals: (10 @ 20 corner: 110 @ 30)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10) equals: (10 @ 20 corner: 110 @ 30)
 ]
 
 { #category : #tests }
@@ -201,19 +144,10 @@ BlAnchorLayoutConstraintsTest >> testHorizontalCenterAnchor [
 		          element: child;
 		          yourself.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 60.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 0.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 60.
 	" the result is the element bounds with an height of 10"
-	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10)
-		equals: (-40 @ 20 corner: 60.0 @ 140.0)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10) equals: (-40 @ 20 corner: 60.0 @ 140.0)
 ]
 
 { #category : #tests }
@@ -229,19 +163,10 @@ BlAnchorLayoutConstraintsTest >> testLeftAnchor [
 		          element: child;
 		          yourself.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 10.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 0.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 10.
 	" the result is the element bounds with an height of 10"
-	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10)
-		equals: (10 @ 20 corner: 110 @ 140)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10) equals: (10 @ 20 corner: 110 @ 140)
 ]
 
 { #category : #tests }
@@ -255,19 +180,10 @@ BlAnchorLayoutConstraintsTest >> testNeutralAnchor [
 
 	anchor := child neutralAnchor: 0.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 0.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 0.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 0.
 	" the result is the element bounds with an height of 10"
-	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10)
-		equals: (10 @ 20 corner: 110 @ 140)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10) equals: (10 @ 20 corner: 110 @ 140)
 ]
 
 { #category : #tests }
@@ -281,19 +197,10 @@ BlAnchorLayoutConstraintsTest >> testNilAnchor [
 
 	anchor := child nilAnchor.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: nil.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: nil.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: nil.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: nil.
 	" the result is the element bounds with an height of 10"
-	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10)
-		equals: (10 @ 20 corner: 110 @ 140)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10) equals: (10 @ 20 corner: 110 @ 140)
 ]
 
 { #category : #tests }
@@ -309,19 +216,10 @@ BlAnchorLayoutConstraintsTest >> testRightAnchor [
 		          element: child;
 		          yourself.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 210.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 0.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 210.
 	" the result is the element bounds with an height of 10"
-	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10)
-		equals: (-90 @ 20 corner: 10 @ 140)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10) equals: (-90 @ 20 corner: 10 @ 140)
 ]
 
 { #category : #tests }
@@ -337,19 +235,10 @@ BlAnchorLayoutConstraintsTest >> testTopAnchor [
 		          element: child;
 		          yourself.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 20.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 0.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 20.
 	" the result is the element bounds with an height of 10"
-	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10)
-		equals: (10 @ 10 corner: 110 @ 130)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10) equals: (10 @ 10 corner: 110 @ 130)
 ]
 
 { #category : #tests }
@@ -365,20 +254,10 @@ BlAnchorLayoutConstraintsTest >> testTopLeftAnchor [
 		          element: child;
 		          yourself.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0 @ 0.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 110 @ 20.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 0 @ 0.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 110 @ 20.
 	" the result is the element bounds with an height of 10"
-	self
-		assert: (anchor
-				 appliedOnRectangle: child bounds asRectangle
-				 withValue: 10 @ 20)
-		equals: (10 @ 20 corner: 110 @ 140)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10 @ 20) equals: (10 @ 20 corner: 110 @ 140)
 ]
 
 { #category : #tests }
@@ -394,20 +273,10 @@ BlAnchorLayoutConstraintsTest >> testTopRightAnchor [
 		          element: child;
 		          yourself.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0 @ 0.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 210 @ 20.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 0 @ 0.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 210 @ 20.
 	" the result is the element bounds with an height of 10"
-	self
-		assert: (anchor
-				 appliedOnRectangle: child bounds asRectangle
-				 withValue: 10 @ 20)
-		equals: (-90 @ 20 corner: 10 @ 140)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10 @ 20) equals: (-90 @ 20 corner: 10 @ 140)
 ]
 
 { #category : #tests }
@@ -423,19 +292,10 @@ BlAnchorLayoutConstraintsTest >> testVerticalCenterAnchor [
 		          element: child;
 		          yourself.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 80.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 0.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 80.
 	" the result is the element bounds with an height of 10"
-	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10)
-		equals: (10 @ -50 corner: 110 @ 70)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10) equals: (10 @ -50 corner: 110 @ 70)
 ]
 
 { #category : #tests }
@@ -451,17 +311,8 @@ BlAnchorLayoutConstraintsTest >> testWidthAnchor [
 		          element: child;
 		          yourself.
 
-	self
-		assert:
-		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
-		equals: 0.
-	self
-		assert: (anchor valueInBounds: child bounds asRectangle)
-		equals: 100.
+	self assert: (anchor valueInBounds: (Rectangle origin: 0 @ 0 corner: 0 @ 0)) equals: 0.
+	self assert: (anchor valueInBounds: child bounds asRectangle) equals: 100.
 	" the result is the element bounds with an height of 10"
-	self
-		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 10)
-		equals: (10 @ 20 corner: 20 @ 140)
+	self assert: (anchor appliedOnRectangle: child bounds asRectangle withValue: 10) equals: (10 @ 20 corner: 20 @ 140)
 ]

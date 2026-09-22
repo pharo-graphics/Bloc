@@ -14,26 +14,26 @@ BlElementTest >> new3LevelsTreeRoot [
 	<sampleInstance>
 	| parent child1 child2 subChild1 subChild2 |
 	parent := BlElement new id: #parent.
-	parent extent: 500 asPoint.
+	parent extent: 500 @ 500.
 	parent background: Color veryLightGray.
-	
+
 	child1 := BlElement new id: #child1.
 	child1 background: Color red.
-	child1 extent: 200 asPoint.
+	child1 extent: 200 @ 200.
 	child1 position: 5 @ 5.
 	child2 := BlElement new id: #child2.
 	child2 background: Color blue.
-	child2 extent: 200 asPoint.
+	child2 extent: 200 @ 200.
 	child2 position: 5 @ 210.
 
 	subChild1 := BlElement new id: #subChild1_1.
 	subChild1 background: Color yellow.
-	subChild1 extent: 50 asPoint.
+	subChild1 extent: 50 @ 50.
 	subChild1 position: 5 @ 5.
 
 	subChild2 := BlElement new id: #subChild1_2.
 	subChild2 background: Color pink.
-	subChild2 extent: 50 asPoint.
+	subChild2 extent: 50 @ 50.
 	subChild2 position: 5 @ 110.
 
 	child1 addChildren: {
@@ -42,12 +42,12 @@ BlElementTest >> new3LevelsTreeRoot [
 
 	subChild1 := BlElement new id: #subChild2_1.
 	subChild1 background: Color yellow.
-	subChild1 extent: 50 asPoint.
+	subChild1 extent: 50 @ 50.
 	subChild1 position: 5 @ 5.
 
 	subChild2 := BlElement new id: #subChild2_2.
 	subChild2 background: Color pink.
-	subChild2 extent: 50 asPoint.
+	subChild2 extent: 50 @ 50.
 	subChild2 position: 5 @ 110.
 
 	child2 addChildren: {

@@ -12,7 +12,7 @@ BlMorphicHostTest >> setUp [
 
 	super setUp.
 	containerMorph := Morph new.
-	containerMorph extent: 400 asPoint.
+	containerMorph extent: 400 @ 400.
 	containerMorph layoutPolicy: TableLayout new.
 	containerMorph openInWindowLabeled: 'Morphic Host Test'
 ]

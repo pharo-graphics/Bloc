@@ -132,15 +132,13 @@ BlHalo >> initialize [
 	super initialize.
 	self
 		geometry: BlEllipseGeometry new;
-		extent: 20 asPoint;
+		extent: 20 @ 20;
 		background: Color white;
 		opacity: 0.8.
 	self name: 'Unnamed'.
 	self description: 'No description yet'.
 
-	self
-		addEventHandlerOn: BlClickEvent
-		do: [ :evt | self actionBlock value: evt].
+	self addEventHandlerOn: BlClickEvent do: [ :evt | self actionBlock value: evt ].
 
 	self constraintsDo: [ :c | c margin: (BlInsets all: -22) ]
 ]
