@@ -707,9 +707,9 @@ BlSpace >> hostSpaceClose [
 
 	hostSpace ifNil: [ ^ self ].
 
-	hostSpace tearDown.
-	hostSpace := nil.
-	eventQueue removeAll
+	[ hostSpace tearDown ] ensure: [
+		hostSpace := nil.
+		eventQueue removeAll ]
 ]
 
 { #category : #'host space - accessing' }
