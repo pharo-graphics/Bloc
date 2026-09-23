@@ -221,12 +221,15 @@ BlParallelUniverse >> openSpaceNow: aSpace [
 			aSpace becomeVisible.
 			^ aSpace hostSpace show ] ].
 
-	spaces add: aSpace.
-	[ aSpace hostSpaceOpen ] on: Exception do: [ :exception |
-		spaces remove: aSpace ifAbsent: [ ].
-		aSpace hostSpaceClose.
-		exception pass ].
+	[ aSpace hostSpaceOpen ]
+		on: Error
+		do: [ :anError |
+			[ aSpace hostSpaceClose ]
+				on: Error
+				do: [ :closeError | "ignore cleanup failure to preserve original error" ].
+			anError pass ].
 
+	spaces add: aSpace.
 	aSpace becomeVisible.
 	aSpace dispatchAddedToSceneGraph.
 	aSpace dispatchEventWithTimestamp: BlSpaceShownEvent new
