@@ -14,9 +14,7 @@ BlDisplayPositionsTest >> testAsLogicalFromPhysical [
 	| aLogicalPosition |
 	aLogicalPosition := ((BlLogicalDisplayPosition fromPoint: 100 @ 200) asPhysical: 2)
 		asLogical: 2.
-	self 
-		assert: aLogicalPosition asPoint  
-		equals: 100 @ 200.
+	self assert: aLogicalPosition asPoint equals: 100 @ 200.
 
 ]
 
@@ -26,9 +24,7 @@ BlDisplayPositionsTest >> testAsPhysical [
 	| aLogicalPosition aPhysicalPosition |
 	aLogicalPosition := BlLogicalDisplayPosition fromPoint: 100 @ 200.
 	aPhysicalPosition := aLogicalPosition asPhysical: 2.
-	self 
-		assert: aPhysicalPosition asPoint
-		equals: 200 @ 400.
+	self assert: aPhysicalPosition asPoint equals: 200 @ 400.
 
 ]
 

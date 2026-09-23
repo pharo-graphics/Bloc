@@ -56,11 +56,10 @@ BlColorSlider >> initialize [
 BlColorSlider >> initializeCursor [
 
 	cursor := BlElement new
-		          extent: 20 @ 20;
-		          background: Color red;
-		          geometry: BlCircleGeometry new;
-		          border: (BlBorder paint: Color white width: 2);
-		          yourself.
+		               extent: 20 @ 20;
+		               background: Color red;
+		               geometry: BlCircleGeometry new;
+		               border: (BlBorder paint: Color white width: 2); yourself.
 	self whenLayoutedDoOnce: [ cursor position: 0 @ (self height / 2) ].
 
 

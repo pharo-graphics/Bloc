@@ -30,7 +30,7 @@ BlCircleGeometry >> geometryBounds: aBlBounds [
 	@see #geometryBounds for more info"
 
 	| ext |
-	ext := (self radius * 2.0).
+	ext := self radius * 2.0.
 	^ aBlBounds
 		origin: self origin
 		extent: ext @ ext

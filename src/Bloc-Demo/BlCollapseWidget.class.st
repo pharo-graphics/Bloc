@@ -17,7 +17,9 @@ BlCollapseWidget class >> exampleSimpleCollapse [
 	collapse := self new.
 	collapse position: 50 @ 50.
 
-	bgPaint := BlLinearGradientPaint vertical from: Color lightGreen to: Color lightRed.
+	bgPaint := BlLinearGradientPaint vertical
+		           from: Color lightGreen
+		           to: Color lightRed.
 
 	collapsed := BlElement new
 		             background: bgPaint;

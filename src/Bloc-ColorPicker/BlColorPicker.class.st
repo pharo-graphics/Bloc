@@ -179,21 +179,27 @@ BlColorPicker >> initializePreviewElement [
 	| previewElementParent |
 	previewElementParent := BlElement new
 		                        extent: 50 @ 50;
-		                        geometry: (BlRoundedRectangleGeometry cornerRadius: 10);
-		                        constraintsDo: [ :c | c margin: (BlInsets all: 10) ];
-		                        border: (BlBorder paint: Color black width: 2).
+		                        geometry:
+			                        (BlRoundedRectangleGeometry cornerRadius:
+					                         10);
+		                        constraintsDo: [ :c |
+			                        c margin: (BlInsets all: 10) ];
+		                        border:
+			                        (BlBorder paint: Color black width: 2).
 
-	previewElementParent addChild: (BlAlphaSlider chessBackgroundFor: 50 @ 50 squareSize: 10).
+	previewElementParent addChild:
+		(BlAlphaSlider chessBackgroundFor: 50 @ 50 squareSize: 10).
 
 	previewElement := BlElement new
 		                  constraintsDo: [ :c |
-				                  c vertical matchParent.
-				                  c horizontal matchParent ];
+			                  c vertical matchParent.
+			                  c horizontal matchParent ];
 		                  background: self colorWithAlpha;
 		                  yourself.
 
-	previewElement addEventHandlerOn: BlClickEvent do: [ :e |
-			self inform: 'Color copied to clipboard'.
+	previewElement
+		addEventHandlerOn: BlClickEvent
+		do: [ :e | self inform: 'Color copied to clipboard'.
 			Clipboard clipboardText: self colorWithAlpha asString ].
 	previewElementParent addChild: previewElement.
 	^ previewElementParent

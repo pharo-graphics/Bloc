@@ -138,7 +138,9 @@ BlHalo >> initialize [
 	self name: 'Unnamed'.
 	self description: 'No description yet'.
 
-	self addEventHandlerOn: BlClickEvent do: [ :evt | self actionBlock value: evt ].
+	self
+		addEventHandlerOn: BlClickEvent
+		do: [ :evt | self actionBlock value: evt].
 
 	self constraintsDo: [ :c | c margin: (BlInsets all: -22) ]
 ]
