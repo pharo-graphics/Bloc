@@ -109,10 +109,11 @@ BlHostPulseLoop >> loopIteration [
 
 		self isRunning ifFalse: [ ^ false ].
 
-		self waitUntilNextPulse
-	] on: Exception do: [ :e |
-		self basicStart.
-		e pass ].
+		self waitUntilNextPulse ]
+		on: UnhandledException
+		do: [ :e |
+				self basicStart.
+				e pass ].
 
 	^ self ownsActiveProcess
 ]
