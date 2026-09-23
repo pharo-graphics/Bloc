@@ -23,7 +23,7 @@ BlElementChildrenTest >> hierarchyChildren [
 	1 to: 10 do: [ :i |
 			| son |
 			son := BlElement new
-				       extent: 10 - i * (40 @ 40);
+				       extent: (10 - i) * (40 @ 40);
 				       position: 10 @ 10;
 				       background: (Color h: i * 360 / 10 s: 1.0 v: 1.0);
 				       id: ('shape' asBlocElementId indexed: i);
@@ -81,15 +81,15 @@ BlElementChildrenTest >> multipleChildrenIn: aContainer depth: aDepth [
 
 	aDepth = 0 ifTrue: [ ^ self ].
 	1 to: 10 do: [ :i |
-			| son |
-			son := BlElement new
-				       extent: 10 - i * (40 @ 40);
-				       position: 10 @ 10;
-				       background: (Color h: i * 360 / 10 s: 1.0 v: 1.0);
-				       id: ('shape' asBlocElementId indexed: i);
-				       yourself.
-			aContainer addChild: son.
-			self multipleChildrenIn: son depth: aDepth - 1 ].
+		| son |
+		son := BlElement new
+			       extent: (10 - i) * (40 @ 40);
+			       position: 10 @ 10;
+			       background: (Color h: i * 360 / 10 s: 1.0 v: 1.0);
+			       id: ('shape' asBlocElementId indexed: i);
+			yourself.
+		aContainer addChild: son.
+		self multipleChildrenIn: son depth: aDepth - 1 ].
 
 	^ aContainer
 ]

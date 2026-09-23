@@ -66,7 +66,8 @@ BlAnchorExamples class >> example_AnchorBottomRightOnPointAnchor [
 	blue := self blueRectangle.
 	blue constraintsDo: [ :c |
 			c ignoreByLayout.
-			c anchors add: (c anchors bottomRightAnchor on: (c anchors parent pointAnchor point: 41 @ 41)) ].
+			c anchors add: (c anchors bottomRightAnchor on:
+					 (c anchors parent pointAnchor point: 41 @ 41)) ].
 	pane addChild: blue.
 	pane openInSpace.
 	^ pane
@@ -195,7 +196,8 @@ BlAnchorExamples class >> example_AnchorsAroundRectangle [
 	blue margin: (BlInsets horizontal: 40 vertical: 40).
 	blue constraintsDo: [ :c |
 			c ignoreByLayout.
-			c anchors add: (c anchors extentAnchor on: c anchors parent extentAnchor - (400 @ 400)).
+			c anchors add:
+				(c anchors extentAnchor on: c anchors parent extentAnchor - (400 @ 400)).
 			c anchors add: (c anchors centerAnchor on: c anchors parent centerAnchor) ].
 
 	pane addChild: blue.
@@ -206,7 +208,8 @@ BlAnchorExamples class >> example_AnchorsAroundRectangle [
 				       id: degrees asString asSymbol;
 				       layout: BlFrameLayout new;
 				       yourself.
-			lab := BlAttributedTextElement text: (degrees asString , '°') asRopedText.
+			lab := BlAttributedTextElement text:
+				       (degrees asString , '°') asRopedText.
 			lab foreground: Color white.
 			lab constraintsDo: [ :c |
 					c frame horizontal alignCenter.
@@ -216,7 +219,8 @@ BlAnchorExamples class >> example_AnchorsAroundRectangle [
 			deg extent: 24 @ 22.
 			deg constraintsDo: [ :c |
 					c ignoreByLayout.
-					c anchors add: (c anchors centerAnchor on: (blue perimeterAnchor degrees: degrees)) ].
+					c anchors add:
+						(c anchors centerAnchor on: (blue perimeterAnchor degrees: degrees)) ].
 			pane addChild: deg ].
 
 	pane openInSpace.

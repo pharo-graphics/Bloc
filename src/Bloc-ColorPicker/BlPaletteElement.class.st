@@ -15,17 +15,21 @@ Class {
 { #category : #adding }
 BlPaletteElement >> addColor: aColor [
 
-	| newElt |
-	newElt := BlElement new
-		          extent: 20 @ 20;
-		          geometry: (BlRoundedRectangleGeometry cornerRadius: 5);
-		          margin: (BlInsets all: 5);
-		          background: aColor;
-		          yourself.
-	newElt addEventHandlerOn: BlClickEvent do: [ :e |
+	| anElement |
+	anElement :=
+		BlElement new
+			extent: 20 @ 20;
+			geometry: (BlRoundedRectangleGeometry cornerRadius: 5);
+			margin: (BlInsets all: 5);
+			background: aColor;
+			yourself.
+	anElement
+		addEventHandlerOn: BlClickEvent
+		do: [ :e |
 			e consume.
 			owner setColor: aColor ].
-	self addChild: newElt
+
+	self addChild: anElement
 ]
 
 { #category : #initialization }

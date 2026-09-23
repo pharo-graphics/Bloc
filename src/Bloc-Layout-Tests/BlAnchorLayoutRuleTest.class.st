@@ -21,9 +21,16 @@ BlAnchorLayoutRuleTest >> testAppliedOnChildBoundsInParentForChild [
 	rule rightHandSideAnchor: parent extentAnchor.
 	parent forceLayout.
 	child forceLayout.
-	resultBounds := rule appliedOnChildBounds: (0 @ 0 extent: 10 @ 10) inParent: parent forChild: child.
-	self assert: parent measuredBounds asRectangle equals: (0.0 @ 0.0 extent: 70 @ 70).
-	self assert: child measuredBounds asRectangle equals: (0.0 @ 0.0 extent: 30 @ 30).
+	resultBounds := rule
+		                appliedOnChildBounds: (0 @ 0 extent: 10 @ 10)
+		                inParent: parent
+		                forChild: child.
+	self
+		assert: parent measuredBounds asRectangle
+		equals: (0.0 @ 0.0 extent: 70 @ 70 ).
+	self
+		assert: child measuredBounds asRectangle
+		equals: (0.0 @ 0.0 extent: 30 @ 30 ).
 	self assert: resultBounds equals: (0 @ 0 extent: 70 @ 70)
 ]
 

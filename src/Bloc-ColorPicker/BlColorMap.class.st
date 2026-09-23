@@ -76,10 +76,10 @@ BlColorMap >> initializeBrightnessMap [
 BlColorMap >> initializeCursor [
 
 	cursor := BlElement new
-		          extent: 20 @ 20;
-		          background: Color red;
-		          geometry: BlCircleGeometry new;
-		          border: (BlBorder paint: Color white width: 2).
+		               extent: 20 @ 20;
+		               background: Color red;
+		               geometry: BlCircleGeometry new;
+		               border: (BlBorder paint: Color white width: 2).
 
 	cursor transformDo: [ :t | t translateBy: -10 @ -10 ].
 	self whenLayoutedDoOnce: [ cursor position: self width @ 0 ].

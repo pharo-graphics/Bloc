@@ -11,8 +11,7 @@ Class {
 
 { #category : #geometry }
 BlInfiniteDecoration >> computedBounds [
-
-	^ computedBounds ifNil: [ Rectangle origin: 0 @ 0 corner: 0 @ 0 ]
+	^ computedBounds ifNil: [ Rectangle origin: 0 @ 0 corner: 0 @ 0]
 ]
 
 { #category : #geometry }

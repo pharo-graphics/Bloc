@@ -26,7 +26,7 @@ BlAlphaSlider class >> chessBackgroundFor: aPoint [
 BlAlphaSlider class >> chessBackgroundFor: aPoint squareSize: squareSize [
 
 	| chess offset|
-	offset := (aPoint x // squareSize) even ifTrue: [ 1 ] ifFalse: [ 0 ]. 
+	offset := (aPoint x // squareSize) even ifTrue: [ 1 ] ifFalse: [ 0 ].
 	chess := BlElement new
 		         geometry: (BlRoundedRectangleGeometry cornerRadius: 10);
 		         constraintsDo: [ :c |
@@ -103,14 +103,15 @@ BlAlphaSlider >> initializeChessBackground [
 BlAlphaSlider >> initializeCursor [
 
 	cursor := BlElement new
-		          extent: 20 @ 20;
-		          background: Color transparent;
-		          geometry: BlCircleGeometry new;
-		          border: (BlBorder paint: Color white width: 2);
-		          constraintsDo: [ :c | c ignoredByLayout ];
-		          yourself.
+		               extent: 20 @ 20;
+		               background: Color transparent;
+		               geometry: BlCircleGeometry new;
+		               border: (BlBorder paint: Color white width: 2);
+		               constraintsDo: [ :c | c ignoredByLayout ];
+		               yourself.
 
-	self whenLayoutedDoOnce: [ cursor position: self width @ (self height / 2) ].
+	self whenLayoutedDoOnce: [
+		cursor position: self width @ (self height / 2) ].
 
 
 	cursor transformDo: [ :t | t translateBy: -10 @ -10 ].
