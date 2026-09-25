@@ -79,12 +79,15 @@ BlDevScripter >> continue [
 { #category : #initialization }
 BlDevScripter >> defaultSpace [
 
-	^ BlSpace new
-		  title: 'Scripter';
-		  extent: 800 @ 600;
-		  host: BlHeadlessHost default;
-		  show;
-		  yourself
+	| newSpace |
+	newSpace := BlSpace new
+		title: 'Scripter';
+		extent: 800 @ 600;
+		host: BlHeadlessHost default;
+		yourself.
+	newSpace root focusability: BlFocusability ignore.
+	newSpace show.
+	^ newSpace
 ]
 
 { #category : #'accessing - element' }
