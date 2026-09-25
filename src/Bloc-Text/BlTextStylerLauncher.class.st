@@ -30,12 +30,15 @@ BlTextStylerLauncher class >> minTextSizeForStylingInBackground: anInteger [
 
 { #category : #accessing }
 BlTextStylerLauncher class >> settingsOn: aBuilder [
+
 	<systemsettings>
 	(aBuilder setting: #minTextSizeForStylingInBackground)
 		target: self;
 		parent: #Bloc;
 		default: 4000;
-		description: 'Set the minimum text size imposed to allow background styling';
+		order: 8;
+		description:
+			'Set the minimum text size imposed to allow background styling';
 		label: 'Min text size for background styling'
 ]
 

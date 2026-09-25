@@ -1,8 +1,22 @@
 "
-I represent bloc setting that can be customised from Menu > Settings.
+I represent bloc settings and world menu.
 
+# Settings
+The settings can accessible from Pharo > Settings.
 I allow users to:
  - manually select preferable BlHost
+ - manually select a renderer
+ - manually select an event handler registery type
+ - manually select a children data structure type
+ - enable or disable the Bloc's Assertions
+ - enable or disable the Debug Mode for Album and BlInfiniteElement
+ - manually set the minimum text size imposed to allow background styling
+
+# World Menu
+The world menu can be accessible from Library > Bloc.
+I allow users to:
+ - open the Bloc demo browser
+ - open the github page
 
 "
 Class {
