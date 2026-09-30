@@ -136,7 +136,7 @@ BlDemoPresenter >> executeCode [
 { #category : #initialization }
 BlDemoPresenter >> initializeCanvasPresenter [ 
 	
-	canvas := SpBlSpaceInMorphPresenter new
+	canvas := self instantiate: SpBlSpaceInMorphPresenter
 ]
 
 { #category : #initialization }
@@ -176,7 +176,7 @@ BlDemoPresenter >> initializePresenters [
 BlDemoPresenter >> initializeTreePresenter [
 
 	| pathArray |
-	tree := SpTreePresenter new
+	tree := self newTree
 		        roots: self collector packages;
 		        children: [ :aPackageNode | aPackageNode children ];
 		        displayIcon: [ :aNode | self iconNamed: aNode icon ];
@@ -200,7 +200,7 @@ BlDemoPresenter >> packagesToCollect [
 	| suffixes |
 	suffixes := #('Bloc' 'Album' 'Toplo').
 	
-	^ self class packageOrganizer packages select: [ :package |
+	^ self packageOrganizer packages select: [ :package |
 		suffixes anySatisfy: [ :each | package name includesSubstring: each ]]
 ]
 

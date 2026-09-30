@@ -53,7 +53,7 @@ BlDemoCollector >> collectPackage: aPackage [
 { #category : #'as yet unclassified' }
 BlDemoCollector >> collectPackageNamed: aString [
 
-	self collectPackage: (self class packageOrganizer packageNamed: aString)
+	self collectPackage: (self packageOrganizer packageNamed: aString)
 ]
 
 { #category : #collection }
