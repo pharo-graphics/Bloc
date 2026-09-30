@@ -200,7 +200,7 @@ BlDemoPresenter >> packagesToCollect [
 	| suffixes |
 	suffixes := #('Bloc' 'Album' 'Toplo').
 	
-	^ self class packageOrganizer packages select: [ :package |
+	^ self packageOrganizer packages select: [ :package |
 		suffixes anySatisfy: [ :each | package name includesSubstring: each ]]
 ]
 
