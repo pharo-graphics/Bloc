@@ -278,9 +278,9 @@ BlFocusProcessorTest >> testLoseFocus01GiveFocusToChild1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
+			value: [ :aSpace | aSpace focusOwner ]
 			equals: [ scripter element childWithId: #'child-1' ];
-			onFocusProcessor ].
+			onSpace ].
 
 	scripter syncContinue
 ]
@@ -386,9 +386,9 @@ BlFocusProcessorTest >> testLoseFocus02RemoveChild1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
+			value: [ :aSpace | aSpace focusOwner ]
 			equals: [ scripter element childWithId: #'container-1' ];
-			onFocusProcessor ].
+			onSpace ].
 
 	scripter syncContinue
 ]
@@ -493,9 +493,9 @@ BlFocusProcessorTest >> testLoseFocus03AddBackChild1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
+			value: [ :aSpace | aSpace focusOwner ]
 			equals: [ scripter element childWithId: #'child-1' ];
-			onFocusProcessor ].
+			onSpace ].
 
 	scripter syncContinue
 ]
@@ -528,9 +528,9 @@ BlFocusProcessorTest >> testRequestFocus01Parent [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
+			value: [ :aSpace | aSpace focusOwner ]
 			equals: [ scripter element ];
-			onFocusProcessor ].
+			onSpace ].
 
 	scripter syncContinue
 ]
@@ -585,9 +585,9 @@ BlFocusProcessorTest >> testRequestFocus02Container1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
+			value: [ :aSpace | aSpace focusOwner ]
 			equals: [ scripter element childWithId: #'container-1' ];
-			onFocusProcessor ].
+			onSpace ].
 
 	scripter syncContinue
 ]
@@ -662,9 +662,9 @@ BlFocusProcessorTest >> testRequestFocus03Container2 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
+			value: [ :aSpace | aSpace focusOwner ]
 			equals: [ scripter element childWithId: #'container-2' ];
-			onFocusProcessor ].
+			onSpace ].
 
 	scripter syncContinue
 ]
@@ -759,9 +759,9 @@ BlFocusProcessorTest >> testRequestFocus04Child1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
+			value: [ :aSpace | aSpace focusOwner ]
 			equals: [ scripter element childWithId: #'child-1' ];
-			onFocusProcessor ].
+			onSpace ].
 
 	scripter syncContinue
 ]
@@ -876,9 +876,9 @@ BlFocusProcessorTest >> testRequestFocus05Child4 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
+			value: [ :aSpace | aSpace focusOwner ]
 			equals: [ scripter element childWithId: #'child-4' ];
-			onFocusProcessor ].
+			onSpace ].
 
 	scripter syncContinue
 ]
@@ -993,9 +993,9 @@ BlFocusProcessorTest >> testRequestFocus06Container1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
+			value: [ :aSpace | aSpace focusOwner ]
 			equals: [ scripter element childWithId: #'container-1' ];
-			onFocusProcessor ].
+			onSpace ].
 
 	scripter syncContinue
 ]
