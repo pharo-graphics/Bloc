@@ -623,7 +623,7 @@ BlElement >> attachSpace [
 	self isFocused
 		ifTrue: [ self requestFocus: self ]
 		ifFalse: [
-			self space focusOwner == self focusHolder
+			self space focusOwner == self focusDelegate
 				ifTrue: [ self loseFocus: self ] ].
 
 	self taskQueue isEmpty
@@ -1652,10 +1652,19 @@ BlElement >> firstCommonParent: anElement ifFound: aFoundBlock ifNone: aNoneBloc
 ]
 
 { #category : #'focus requesting' }
-BlElement >> focusHolder [
-	"Answer the element that will be actually focused when #requestFocus is sent."
+BlElement >> focusDelegate [
+	"Answer the element that should receive focus when #requestFocus is sent to me.
+	By default I answer myself. Subclasses may override this to delegate
+	focus to a descendant element."
 
 	^ self
+]
+
+{ #category : #'focus requesting' }
+BlElement >> focusHolder [
+	"Backward compatibility: forwards to #focusDelegate."
+
+	^ self focusDelegate
 ]
 
 { #category : #accessing }
@@ -1684,10 +1693,12 @@ BlElement >> focusables: aBlFocusFinderCandidates along: aBlFocusSearchDirection
 		of: self
 ]
 
-{ #category : #'private - accessing' }
+{ #category : #'focus testing' }
 BlElement >> focused [
 
-	^ visuals isFocused
+	self deprecated: 'Use #isFocused or #isFocusOwner instead' transformWith: '`@receiver focused' -> '`@receiver isFocused'.
+
+	^ self isFocused
 ]
 
 { #category : #'private - accessing' }
@@ -1927,6 +1938,9 @@ BlElement >> hasCompositionLayer [
 { #category : #'focus testing' }
 BlElement >> hasFocus [
 	"Return true if an element is focused or contains a focused element, false otherwise"
+
+	self isAttachedToSceneGraph
+		ifTrue: [ ^ self space hasFocus: self ].
 
 	^ self isFocused or: [
 		self children anySatisfy: [ :anElement | anElement hasFocus ] ]
@@ -2265,6 +2279,13 @@ BlElement >> isFirstChild [
 ]
 
 { #category : #'focus testing' }
+BlElement >> isFocusOwner [
+	"Return true if I am the element that currently owns focus in my space."
+
+	^ self isAttachedToSceneGraph and: [ self space focusOwner == self ]
+]
+
+{ #category : #'focus testing' }
 BlElement >> isFocusable [
 	"Return true if I am able to take focus, false otherwise"
 	<return: #Boolean>
@@ -2275,14 +2296,14 @@ BlElement >> isFocusable [
 				and: [ self focusability ~= BlFocusability ignore ] ] ]
 ]
 
-{ #category : #'private - accessing' }
+{ #category : #'focus testing' }
 BlElement >> isFocused [
 	"Returns true if I am focused, false otherwise.
 	Note: It is possible that an element has focus but is not focused by itself."
 
-	^ self focusHolder = self
+	^ self focusDelegate == self
 		  ifTrue: [ visuals isFocused ]
-		  ifFalse: [ self focusHolder isFocused ]
+		  ifFalse: [ self focusDelegate isFocused ]
 ]
 
 { #category : #testing }
@@ -2591,9 +2612,9 @@ BlElement >> loseFocus [
 	| anElementToLooseFocus |
 
 	anElementToLooseFocus := self isFocused
-		ifTrue: [ self focusHolder ]
+		ifTrue: [ self focusDelegate ]
 		ifFalse: [ self deepestFocusedChild
-			ifNil: [ self focusHolder ] ].
+			ifNil: [ self focusDelegate ] ].
 
 	anElementToLooseFocus isFocused
 		ifFalse: [ ^ self ].
@@ -3727,7 +3748,7 @@ BlElement >> requestFocusDueToRemoval: aBoolean [
 
 	self isAttachedToSceneGraph
 		ifTrue: [ self requestFocus: self dueToRemoval: aBoolean ]
-		ifFalse: [ self focusHolder focused: true ]
+		ifFalse: [ self focusDelegate focused: true ]
 ]
 
 { #category : #layout }

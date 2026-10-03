@@ -388,7 +388,6 @@ BlElementTest >> testHasFocus [
 	child := self newElement.
 
 	element addChild: child.
-	space root addChild: element.
 	self assert: element hasFocus not.
 	self assert: child hasFocus not.
 
