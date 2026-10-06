@@ -28,8 +28,8 @@ BlMorphicHost class >> isSupported [
 ]
 
 { #category : #'driver selection' }
-BlMorphicHost class >> priority [
-	"I have the lowest possible priority (I am also not supported)"
+BlMorphicHost class >> order [
+	"I have the lowest possible precedence (I am also not supported)"
 
 	^ Float infinity
 ]

@@ -16,8 +16,8 @@ BlOSSDL3Host class >> isSupported [
 ]
 
 { #category : #'driver selection' }
-BlOSSDL3Host class >> priority [
-	
+BlOSSDL3Host class >> order [
+
 	^ 10
 ]
 

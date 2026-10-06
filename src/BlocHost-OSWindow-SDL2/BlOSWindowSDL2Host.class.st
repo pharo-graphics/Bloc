@@ -16,8 +16,8 @@ BlOSWindowSDL2Host class >> isSupported [
 ]
 
 { #category : #'driver selection' }
-BlOSWindowSDL2Host class >> priority [
-	
+BlOSWindowSDL2Host class >> order [
+
 	^ 10
 ]
 
