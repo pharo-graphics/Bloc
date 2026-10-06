@@ -26,6 +26,14 @@ BlHost class >> isSupported [
 ]
 
 { #category : #'driver selection' }
+BlHost class >> order [
+	"Return host order as positive number which influences host order and selection of a default host.
+	A lower value is more likely to become the default host."
+
+	^ self subclassResponsibility
+]
+
+{ #category : #'driver selection' }
 BlHost class >> pickHost [
 	self
 		deprecated: 'Use Bloc preferredHost instead'
@@ -73,11 +81,12 @@ BlHost class >> prioritaryHostClass [
 
 { #category : #'driver selection' }
 BlHost class >> priority [
-	"Return host priority as positive number which influences host order
-	and selection of a default host.
-	A lower value is more likely to become the default host."
-	
-	^ self subclassResponsibility
+
+	self
+		deprecated: 'Use #order instead'
+		transformWith: '`@receiver priority' -> '`@receiver order'.
+
+	^ self order
 ]
 
 { #category : #'driver selection' }
@@ -221,9 +230,19 @@ BlHost >> openSpace: aSpace [
 ]
 
 { #category : #accessing }
+BlHost >> order [
+
+	^ self class order
+]
+
+{ #category : #accessing }
 BlHost >> priority [
 
-	^ self class priority
+	self
+		deprecated: 'Use #order instead'
+		transformWith: '`@receiver priority' -> '`@receiver order'.
+
+	^ self order
 ]
 
 { #category : #'api - pulse' }

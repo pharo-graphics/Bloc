@@ -17,8 +17,8 @@ BlHeadlessHost class >> isSupported [
 ]
 
 { #category : #'driver selection' }
-BlHeadlessHost class >> priority [
-	"Lowest priority (highest value) so that GUI window hosts take precedence when available."
+BlHeadlessHost class >> order [
+	"Lowest precedence (highest value) so that GUI window hosts take precedence when available."
 
 	^ 1000
 ]

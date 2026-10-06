@@ -56,11 +56,11 @@ BlOSSDL3HostTest >> testUseSDL3Host [
 	space := BlSpace new.
 	space useSDL3Host.
 	self assert: space host class equals: BlOSSDL3Host.
-	
+
 	host := space host.
 	host start.
 	self assert: host isRunning.
 	self assert: host label equals: 'SDL3'.
-	self assert: host class priority equals: 10.
+	self assert: host class order equals: 10.
 	self assert: host class isSupported.
 ]

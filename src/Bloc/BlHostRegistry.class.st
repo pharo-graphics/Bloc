@@ -84,6 +84,15 @@ BlHostRegistry >> closeSpaces [
 	self availableHosts do: [ :eachHost | eachHost closeSpaces ]
 ]
 
+{ #category : #accessing }
+BlHostRegistry >> defaultHost [
+	"Answer the available host with lowest order, or nil if no host is available."
+
+	^ availableHosts
+		ifNotEmpty: [ availableHosts first ]
+		ifEmpty: [ nil ]
+]
+
 { #category : #initialization }
 BlHostRegistry >> initialize [
 
@@ -94,8 +103,11 @@ BlHostRegistry >> initialize [
 
 { #category : #accessing }
 BlHostRegistry >> preferredHost [
+	"Answer the explicitly preferred host if valid, or fallback to the default host."
 
-	^ preferredHost
+	(availableHosts includes: preferredHost) ifFalse: [
+		preferredHost := nil ].
+	^ preferredHost ifNil: [ self defaultHost ]
 ]
 
 { #category : #accessing }
@@ -121,19 +133,16 @@ BlHostRegistry >> refreshAvailableHosts [
 
 	"Third: Ensure preferredHost is valid and present"
 	(availableHosts includes: preferredHost) ifFalse: [
-		preferredHost :=
-			availableHosts
-				ifNotEmpty: [ availableHosts first ]
-				ifEmpty: [ nil ] ]
+		preferredHost := nil ]
 ]
 
 { #category : #registration }
 BlHostRegistry >> registerHost: aHost [
 
+	aHost isSupported ifFalse: [ ^ self ].
 	(availableHosts includes: aHost) ifTrue: [ ^ self ].
 	availableHosts add: aHost.
-	availableHosts sort: [ :a :b | a priority < b priority ].
-	preferredHost ifNil: [ preferredHost := availableHosts first ]
+	availableHosts sort: [ :a :b | a order < b order ]
 ]
 
 { #category : #registration }
@@ -142,8 +151,5 @@ BlHostRegistry >> unregisterHost: aHost [
 	availableHosts remove: aHost ifAbsent: [].
 
 	preferredHost = aHost ifTrue: [
-		preferredHost :=
-			availableHosts
-				ifEmpty: [ nil ]
-				ifNotEmpty: [ :hosts | hosts first ] ]
+		preferredHost := nil ]
 ]

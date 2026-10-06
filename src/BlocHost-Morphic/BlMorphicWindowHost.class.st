@@ -16,7 +16,7 @@ BlMorphicWindowHost class >> isSupported [
 ]
 
 { #category : #'driver selection' }
-BlMorphicWindowHost class >> priority [
+BlMorphicWindowHost class >> order [
 
 	^ 20
 ]
