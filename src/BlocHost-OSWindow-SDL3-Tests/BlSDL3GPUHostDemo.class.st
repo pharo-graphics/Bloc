@@ -25,7 +25,7 @@ BlSDL3GPUHostDemo class >> openGPURendererSpace [
 		yourself.
 
 	text := BlTextElement new
-		text: ('Hello SDL3 GPU Host' asRopedText
+		text: ('Click here!' asRopedText
 			fontSize: 24;
 			foreground: Color white);
 		position: 20 @ 20.
@@ -72,7 +72,7 @@ BlSDL3GPUHostDemo class >> openSimpleSpace [
 		yourself.
 
 	text := BlTextElement new
-		text: ('Hello SDL3 GPU Host' asRopedText
+		text: ('Click here!' asRopedText
 			fontSize: 24;
 			foreground: Color white);
 		position: 20 @ 20.

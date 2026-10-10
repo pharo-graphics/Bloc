@@ -111,6 +111,8 @@ BlPulseLoopHost >> isSpaceSettled: aSpace [
 BlPulseLoopHost >> openSpace: aSpace [
 	"Open aSpace on this host."
 
+	self assert: [ self isSupported ].
+
 	self universe openSpace: aSpace.
 	self requestPulse
 ]

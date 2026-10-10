@@ -91,6 +91,9 @@ BlOSWindowSDL2HostSpace >> initializeRenderer [
 { #category : #initialization }
 BlOSWindowSDL2HostSpace >> initializeWithAttributes: initialAttributes [
 
+	"We assume that current driver is the right SDL2 driver"
+	OSWindowDriver current ensureEventLoop.
+
 	window := OSWindow createWithAttributes: initialAttributes.
 	window eventHandler:
 		(BlOSWindowEventHandler
@@ -252,7 +255,10 @@ BlOSWindowSDL2HostSpace >> resizable: aBoolean [
 
 { #category : #'host space - displaying' }
 BlOSWindowSDL2HostSpace >> show [
-	window show
+
+	window
+		show;
+		focus
 ]
 
 { #category : #'window - text input' }

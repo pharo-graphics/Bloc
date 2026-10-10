@@ -27,7 +27,7 @@ BlOSSDL3SimpleHostSpace >> initializeRenderer [
 
 	textureExtent := osWindow canvasExtent.
 	sdlTexture := sdlRenderer
-		newTextureFormat: SDL_PIXELFORMAT_XRGB8888
+		unownedNewTextureFormat: SDL_PIXELFORMAT_XRGB8888
 		access: SDL_TEXTUREACCESS_STREAMING
 		width: textureExtent x
 		height: textureExtent y
@@ -63,8 +63,8 @@ BlOSSDL3SimpleHostSpace >> lockSurfaceFor: logicalDamagedRectangle scaleFactor: 
 	sdlTexture unlock.
 
 	sdlRenderer
-"		renderDrawColorR: 0 g: 0 b: 0 a: 0;
-		renderClear;"
+		renderDrawColorR: 0 g: 0 b: 0 a: 0;
+		renderClear;
 		renderTexture: sdlTexture srcrect: nil dstrect: nil;
 		renderPresent
 ]
