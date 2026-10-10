@@ -57,7 +57,7 @@ BlMorphicHost >> initialize [
 { #category : #testing }
 BlMorphicHost >> isSupported [
 
-	^ containerMorph isNotNil and: [ containerMorph isInWorld ]
+	^ containerMorph isNotNil
 ]
 
 { #category : #accessing }

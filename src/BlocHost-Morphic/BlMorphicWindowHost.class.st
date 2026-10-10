@@ -21,6 +21,12 @@ BlMorphicWindowHost class >> order [
 	^ 20
 ]
 
+{ #category : #testing }
+BlMorphicWindowHost >> isSupported [
+
+	^ true
+]
+
 { #category : #accessing }
 BlMorphicWindowHost >> label [
 
