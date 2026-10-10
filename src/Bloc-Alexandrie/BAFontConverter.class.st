@@ -1,10 +1,13 @@
+"
+I convert from a BlFont to a Cairo font.
+"
 Class {
 	#name : #BAFontConverter,
 	#superclass : #Object,
 	#instVars : [
-		'slantTranslator',
-		'stretchTranslator',
-		'weightTranslator'
+		'slantConverter',
+		'weightConverter',
+		'stretchConverter'
 	],
 	#classInstVars : [
 		'uniqueInstance'
@@ -13,9 +16,34 @@ Class {
 }
 
 { #category : #accessing }
+BAFontConverter class >> reset [
+	<script>
+
+	uniqueInstance := nil
+]
+
+{ #category : #accessing }
 BAFontConverter class >> uniqueInstance [
 
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
+]
+
+{ #category : #initialization }
+BAFontConverter >> aeSlantAt: fontSlant [
+
+	^ slantConverter at: fontSlant
+]
+
+{ #category : #initialization }
+BAFontConverter >> aeStretchAt: fontStretch [
+
+	^ stretchConverter at: fontStretch
+]
+
+{ #category : #initialization }
+BAFontConverter >> aeWeightAt: fontWeight [
+
+	^ weightConverter at: fontWeight
 ]
 
 { #category : #initialization }
@@ -23,11 +51,10 @@ BAFontConverter >> faceFor: aBlFont [
 
 	^ AeFontManager globalInstance
 		detectFamilyName: aBlFont familyName
-		slant: (slantTranslator at: aBlFont fontSlant)
-		weight: (weightTranslator at: aBlFont fontWeight)
-		stretch: (stretchTranslator at: aBlFont fontStretch)
+		slant: (self aeSlantAt: aBlFont fontSlant)
+		weight: (self aeWeightAt: aBlFont fontWeight)
+		stretch: (self aeStretchAt: aBlFont fontStretch)
 		ifNone: [ AeFontManager globalInstance defaultFace ]
-
 ]
 
 { #category : #initialization }
@@ -35,12 +62,12 @@ BAFontConverter >> initialize [
 
 	super initialize.
 
-	slantTranslator := IdentityDictionary new
+	slantConverter := IdentityDictionary new
 		at: BlFontSlant normal put: AeFontSlant normal;
 		at: BlFontSlant italic put: AeFontSlant italic;
 		at: BlFontSlant oblique put: AeFontSlant oblique;
 		yourself.
-	stretchTranslator := IdentityDictionary new
+	stretchConverter := IdentityDictionary new
 		at: BlFontStretch ultraCondensed put: AeFontStretch ultraCondensed;
 		at: BlFontStretch extraCondensed put: AeFontStretch extraCondensed;
 		at: BlFontStretch condensed put: AeFontStretch condensed;
@@ -51,7 +78,7 @@ BAFontConverter >> initialize [
 		at: BlFontStretch extraExpanded put: AeFontStretch extraExpanded;
 		at: BlFontStretch ultraExpanded put: AeFontStretch ultraExpanded;
 		yourself.
-	weightTranslator := IdentityDictionary new
+	weightConverter := IdentityDictionary new
 		at: BlFontWeight thin put: AeFontWeight thin;
 		at: BlFontWeight extraLight put: AeFontWeight extraLight;
 		at: BlFontWeight light put: AeFontWeight light;
@@ -61,6 +88,5 @@ BAFontConverter >> initialize [
 		at: BlFontWeight bold put: AeFontWeight bold;
 		at: BlFontWeight extraBold put: AeFontWeight extraBold;
 		at: BlFontWeight black put: AeFontWeight black;
-		yourself.
-
+		yourself
 ]

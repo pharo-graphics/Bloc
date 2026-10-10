@@ -13,8 +13,9 @@ BATextParagraphSpan >> aeDrawOn: aeCanvas [
 	self span ifNil: [ ^ self ].
 	aeCanvas restoreContextAfter: [
 		aeCanvas pathTranslate: self baseline.
-		self flag: #todo. "Default color?"
-		aeCanvas setSourceColor: (fontAndStyleBuilder hasCustomColor
+
+		aeCanvas setSourceColor:
+			(fontAndStyleBuilder hasCustomColor
 				 ifTrue: [ fontAndStyleBuilder color ]
 				 ifFalse: [ Color black ]).
 
@@ -35,26 +36,15 @@ BATextParagraphSpan >> appendPathOn: aeCanvas [
 
 { #category : #building }
 BATextParagraphSpan >> measure [
-
 	"build an abstract font and resolve not yet resolved properties"
 
-	| metrics canvas font usedSpan fontSize face |
+	| metrics canvas  usedSpan |
 	canvas := hostMeasurer canvas.
 
-	usedSpan := self span isTabulation
-		            ifTrue: [ '' ]
-		            ifFalse: [ self span ].
+	usedSpan := self span isTabulation ifTrue: [ '' ] ifFalse: [ self span ].
 
-	font := fontAndStyleBuilder font.
-	fontSize := font fontSize value.
-	face := font asAeFTFace.
-	cairoScaledFont := canvas scaledFontForFace: face size: fontSize.
-
-	"Without Harfbuzz:"
+	cairoScaledFont := fontAndStyleBuilder aeCairoScaledFontOn: canvas.
 	cairoGlyphsArray := cairoScaledFont glyphArrayForString: usedSpan.
-
-	"With Harfbuzz:"
-	"cairoGlyphsArray := AeHbBuffer defaultCairoGlyphArrayFor: usedSpan face: face size: fontSize."
 
 	metrics := canvas metricsFor: cairoGlyphsArray font: cairoScaledFont.
 	baseline := 0 @ 0.
