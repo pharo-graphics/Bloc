@@ -3,7 +3,7 @@ I am a host that opens spaces as OSWindow SDL3 windows.
 "
 Class {
 	#name : #BlOSSDL3Host,
-	#superclass : #BlPulseLoopHost,
+	#superclass : #BlSDLHost,
 	#traits : 'TBlSingletonHost',
 	#classTraits : 'TBlSingletonHost classTrait',
 	#category : #'BlocHost-OSWindow-SDL3'
@@ -43,7 +43,8 @@ BlOSSDL3Host >> newAttributesFor: aSpace [
 		resizable: aSpace isResizable;
 		borderless: aSpace isBorderless;
 		fullscreen: aSpace isFullscreen;
-		visible: false; "There is a race before opening a window and setting the event handler."
+		visible: false; "Start hidden so the OS does not dispatch expose/focus
+		events before the event handler and renderer are attached."
 		yourself.
 
 	aSpace knowsPosition

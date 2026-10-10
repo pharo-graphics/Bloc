@@ -67,6 +67,9 @@ BlOSSDL3HostSpace >> hide [
 { #category : #initialization }
 BlOSSDL3HostSpace >> initializeWithAttributes: initialAttributes [
 
+	"We assume that current driver is the right SDL3 driver"
+	OSWindowDriver current ensureEventLoop.
+
 	osWindow := OSWindow createWithAttributes: initialAttributes.
 	osWindow eventHandler:
 		(BlOSWindowEventHandler
@@ -202,7 +205,9 @@ BlOSSDL3HostSpace >> resizable: aBoolean [
 { #category : #'host space - displaying' }
 BlOSSDL3HostSpace >> show [
 
-	osWindow show
+	osWindow
+		show;
+		focus
 ]
 
 { #category : #'window - text input' }

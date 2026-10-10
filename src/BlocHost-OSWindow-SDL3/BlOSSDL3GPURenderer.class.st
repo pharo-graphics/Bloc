@@ -54,6 +54,12 @@ BlOSSDL3GPURenderer >> initializeWith: aSDL3BackendWindow [
 	self form: (Form extent: aSDL3BackendWindow canvasExtent depth: 32)
 ]
 
+{ #category : #testing }
+BlOSSDL3GPURenderer >> needsFlush [
+
+	^ formRenderer needsFlush
+]
+
 { #category : #'updating screen' }
 BlOSSDL3GPURenderer >> present [
 

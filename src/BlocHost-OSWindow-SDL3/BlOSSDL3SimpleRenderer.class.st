@@ -8,7 +8,7 @@ Class {
 		'sdlRenderer'
 	],
 	#pools : [
-		'SDL3Typedef'
+		'SDL3Aliases'
 	],
 	#category : #'BlocHost-OSWindow-SDL3'
 }
@@ -38,7 +38,7 @@ BlOSSDL3SimpleRenderer >> initializeWith: aSDL3BackendWindow [
 
 	super initializeWith: aSDL3BackendWindow.
 
-	sdlRenderer := aSDL3BackendWindow sdlWindow newRenderer
+	sdlRenderer := aSDL3BackendWindow sdlWindow unownedNewRenderer
 ]
 
 { #category : #accessing }
