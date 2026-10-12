@@ -1,7 +1,7 @@
-Extension { #name : #OSSDL3Driver }
+Extension { #name : #OSSDL3AbstractDriver }
 
 { #category : #'*BlocHost-OSWindow-SDL3' }
-OSSDL3Driver >> reset [
+OSSDL3AbstractDriver >> reset [
 
 	super reset.
 	self shutDownEventLoop

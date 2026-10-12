@@ -4,6 +4,12 @@ Class {
 	#category : #'BlocHost-OSWindow-SDL3'
 }
 
+{ #category : #initialization }
+BlOSSDL3GPUHostSpace >> initializeWindowRenderer [
+
+	osWindow renderer: (BlOSSDL3GPURenderer for: osWindow backendWindow)
+]
+
 { #category : #rendering }
 BlOSSDL3GPUHostSpace >> lockSurfaceFor: logicalDamagedRectangle scaleFactor: scaleFactor during: aBlock [
 

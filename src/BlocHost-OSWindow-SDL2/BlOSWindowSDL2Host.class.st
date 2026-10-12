@@ -10,15 +10,15 @@ Class {
 }
 
 { #category : #'driver selection' }
-BlOSWindowSDL2Host class >> isSupported [
+BlOSWindowSDL2Host class >> driverClassName [
 
-	^ OSWindowDriver current className = #OSSDL2Driver
+	^ #OSSDL2Driver
 ]
 
-{ #category : #'driver selection' }
-BlOSWindowSDL2Host class >> order [
+{ #category : #initialization }
+BlOSWindowSDL2Host >> hostSpaceClass [
 
-	^ 10
+	^ BlOSWindowSDL2HostSpace
 ]
 
 { #category : #initialization }
@@ -37,20 +37,7 @@ BlOSWindowSDL2Host >> label [
 BlOSWindowSDL2Host >> newAttributesFor: aSpace [
 
 	| theAttributes |
-	theAttributes := OSWindowAttributes new
-		title: aSpace title;
-		extent: aSpace extent;
-		resizable: aSpace isResizable;
-		borderless: aSpace isBorderless;
-		fullscreen: aSpace isFullscreen;
-		visible: false; "Start hidden so the OS does not dispatch expose/focus
-		events before the event handler and renderer are attached."
-		yourself.
-
-	aSpace knowsPosition
-		ifTrue: [ theAttributes position: aSpace position ]
-		ifFalse: [ theAttributes windowCentered: true ].
-
+	theAttributes := super newAttributesFor: aSpace.
 	theAttributes glAttributes:
 		(OSWindowGLAttributes new
 			redSize: 8;
@@ -60,19 +47,4 @@ BlOSWindowSDL2Host >> newAttributesFor: aSpace [
 			yourself).
 
 	^ theAttributes
-]
-
-{ #category : #'host - api' }
-BlOSWindowSDL2Host >> newHostSpaceFor: aSpace [
-	"Create and assign a new host space for given Bloc space"
-	"Note, that I use given space only to find out what window properties to use for created window.
-	I do not create any strong or weak references to provided space."
-
-	^ BlOSWindowSDL2HostSpace new
-		keyboardKeyTable: self keyboardKeyTable;
-		host: self;
-		space: aSpace;
-		initializeWithAttributes: (self newAttributesFor: aSpace);
-		renderer: self newHostRenderer;
-		yourself
 ]

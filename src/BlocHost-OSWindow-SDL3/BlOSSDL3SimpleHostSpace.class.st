@@ -33,6 +33,12 @@ BlOSSDL3SimpleHostSpace >> initializeRenderer [
 		height: textureExtent y
 ]
 
+{ #category : #initialization }
+BlOSSDL3SimpleHostSpace >> initializeWindowRenderer [
+
+	osWindow renderer: (BlOSSDL3SimpleRenderer for: osWindow backendWindow)
+]
+
 { #category : #rendering }
 BlOSSDL3SimpleHostSpace >> lockSurfaceFor: logicalDamagedRectangle scaleFactor: aNumber during: aBlock [
 

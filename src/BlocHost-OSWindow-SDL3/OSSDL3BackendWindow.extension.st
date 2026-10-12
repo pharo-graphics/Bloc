@@ -29,9 +29,3 @@ OSSDL3BackendWindow >> minimized [
 
 	^ sdlWindow isMinimized
 ]
-
-{ #category : #'*BlocHost-OSWindow-SDL3' }
-OSSDL3BackendWindow >> newBlocRenderer [
-
-	^ renderer := BlOSSDL3Renderer defaultClass for: self
-]
