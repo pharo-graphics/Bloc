@@ -345,7 +345,7 @@ BlSpace >> doUpdateFocus [
 		focusChain
 			deepestAttachedElementDo: [ :aNewFocusOwner |
 				aNewFocusOwner requestFocusDueToRemoval: true ]
-			ifAbsent: [ self focusProcessor focusOwner: nil ] ].
+			ifAbsent: [ self focusOwner: nil ] ].
 
 	self focusOwner ifNil: [ self initializeFocus ]
 ]
