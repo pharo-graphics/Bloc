@@ -19,6 +19,14 @@ BlOSSDL3GPURenderer >> canvasExtent [
 	^ formRenderer outputExtent
 ]
 
+{ #category : #deleting }
+BlOSSDL3GPURenderer >> destroy [
+
+	formRenderer destroy.
+
+	super destroy
+]
+
 { #category : #'updating screen' }
 BlOSSDL3GPURenderer >> flush [
 
@@ -48,10 +56,11 @@ BlOSSDL3GPURenderer >> formRenderer [
 BlOSSDL3GPURenderer >> initializeWith: aSDL3BackendWindow [
 
 	super initializeWith: aSDL3BackendWindow.
-	formRenderer := OSSDL3GPUFormRenderer new.
-	formRenderer backendWindow: aSDL3BackendWindow.
-	"Use canvasExtent (physical pixels) for the backing Form on High-DPI"
-	self form: (Form extent: aSDL3BackendWindow canvasExtent depth: 32)
+	form := Form extent: aSDL3BackendWindow canvasExtent depth: 32.
+	formRenderer :=
+		OSSDL3AbstractDriver current
+			newFormRenderer: form
+			backendWindow: aSDL3BackendWindow
 ]
 
 { #category : #testing }

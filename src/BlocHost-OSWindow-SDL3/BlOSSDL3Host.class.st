@@ -10,15 +10,15 @@ Class {
 }
 
 { #category : #'driver selection' }
-BlOSSDL3Host class >> isSupported [
+BlOSSDL3Host class >> driverClassName [
 
-	^ OSWindowDriver current className = #OSSDL3Driver
+	^ #OSSDL3Driver
 ]
 
-{ #category : #'driver selection' }
-BlOSSDL3Host class >> order [
+{ #category : #initialization }
+BlOSSDL3Host >> hostSpaceClass [
 
-	^ 10
+	^ BlOSSDL3SimpleHostSpace
 ]
 
 { #category : #initialization }
@@ -31,40 +31,4 @@ BlOSSDL3Host >> keyboardKeyTable [
 BlOSSDL3Host >> label [
 
 	^ 'SDL3'
-]
-
-{ #category : #private }
-BlOSSDL3Host >> newAttributesFor: aSpace [
-
-	| theAttributes |
-	theAttributes := OSWindowAttributes new
-		title: aSpace title;
-		extent: aSpace extent;
-		resizable: aSpace isResizable;
-		borderless: aSpace isBorderless;
-		fullscreen: aSpace isFullscreen;
-		visible: false; "Start hidden so the OS does not dispatch expose/focus
-		events before the event handler and renderer are attached."
-		yourself.
-
-	aSpace knowsPosition
-		ifTrue: [ theAttributes position: aSpace position ]
-		ifFalse: [ theAttributes windowCentered: true ].
-
-	^ theAttributes
-]
-
-{ #category : #'host - api' }
-BlOSSDL3Host >> newHostSpaceFor: aSpace [
-	"Create and assign a new host space for given Bloc space"
-	"Note, that I use given space only to find out what window properties to use for created window.
-	I do not create any strong or weak references to provided space."
-
-	^ BlOSSDL3Renderer defaultClass hostSpaceClass new
-		keyboardKeyTable: self keyboardKeyTable;
-		host: self;
-		space: aSpace;
-		initializeWithAttributes: (self newAttributesFor: aSpace);
-		renderer: self newHostRenderer;
-		yourself
 ]

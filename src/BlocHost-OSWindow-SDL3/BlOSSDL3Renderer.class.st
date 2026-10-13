@@ -1,23 +1,8 @@
 Class {
 	#name : #BlOSSDL3Renderer,
 	#superclass : #OSWindowRenderer,
-	#classVars : [
-		'DefaultClass'
-	],
 	#category : #'BlocHost-OSWindow-SDL3'
 }
-
-{ #category : #accessing }
-BlOSSDL3Renderer class >> defaultClass [
-
-	^ DefaultClass
-]
-
-{ #category : #accessing }
-BlOSSDL3Renderer class >> defaultClass: aClass [
-
-	DefaultClass := aClass
-]
 
 { #category : #'instance creation' }
 BlOSSDL3Renderer class >> for: aSDL3BackendWindow [
@@ -33,21 +18,14 @@ BlOSSDL3Renderer class >> hostSpaceClass [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'class initialization' }
-BlOSSDL3Renderer class >> initialize [
-
-	DefaultClass := BlOSSDL3SimpleRenderer
-]
-
 { #category : #'instance creation' }
-BlOSSDL3Renderer class >> new [ 
+BlOSSDL3Renderer class >> new [
+
 	self error: 'Use #for:'
 ]
 
 { #category : #'updating screen' }
 BlOSSDL3Renderer >> exposed [
-
-
 ]
 
 { #category : #'updating screen' }
@@ -67,7 +45,6 @@ BlOSSDL3Renderer >> present [
 
 { #category : #'updating screen' }
 BlOSSDL3Renderer >> resized [
-	
 ]
 
 { #category : #'updating screen' }

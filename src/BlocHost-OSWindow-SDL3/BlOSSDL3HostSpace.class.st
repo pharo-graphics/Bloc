@@ -65,6 +65,12 @@ BlOSSDL3HostSpace >> hide [
 ]
 
 { #category : #initialization }
+BlOSSDL3HostSpace >> initializeWindowRenderer [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #initialization }
 BlOSSDL3HostSpace >> initializeWithAttributes: initialAttributes [
 
 	"We assume that current driver is the right SDL3 driver"
@@ -77,7 +83,7 @@ BlOSSDL3HostSpace >> initializeWithAttributes: initialAttributes [
 			time: space time
 			keyboardKeyTable: keyboardKeyTable).
 	osWindow startTextInput.
-	osWindow newBlocRenderer
+	self initializeWindowRenderer
 ]
 
 { #category : #'dirty areas' }
