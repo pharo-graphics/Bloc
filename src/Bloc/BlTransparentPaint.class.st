@@ -1,57 +1,36 @@
 "
-I am a special transparent case of a color paint.
-
-Most of the elements have transparent backgrounds or stroke.
-It is prefereable to refer my unique instance, since I am stateless
-
+I am deprecated. Use `BlPaint transparent` (or `BlColorPaint transparent`) instead.
 "
 Class {
 	#name : #BlTransparentPaint,
 	#superclass : #BlColorPaint,
-	#classInstVars : [
-		'uniqueInstance'
-	],
 	#category : #'Bloc-Paint'
 }
 
-{ #category : #cleanup }
-BlTransparentPaint class >> cleanUp [
+{ #category : #testing }
+BlTransparentPaint class >> isDeprecated [
 
-	super cleanUp.
-
-	uniqueInstance := nil
+	^ true
 ]
 
 { #category : #'instance creation' }
-BlTransparentPaint class >> color: aColor [
+BlTransparentPaint class >> new [
 
-	self shouldNotImplement
-]
+	self
+		deprecated: 'Use BlPaint transparent instead'
+		transformWith: '`@receiver new' -> 'BlPaint transparent'.
 
-{ #category : #'instance creation' }
-BlTransparentPaint class >> transparent [
-	self shouldNotImplement
+	^ BlColorPaint transparent
 ]
 
 { #category : #accessing }
 BlTransparentPaint class >> uniqueInstance [
-	"Return a unique instance of transparent paint.
-	It is preferable to use unique instance than create a new every time"
 
-	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
-]
+	self
+		deprecated: 'Use BlPaint transparent instead'
+		transformWith: '`@receiver uniqueInstance' -> 'BlPaint transparent'.
 
-{ #category : #comparing }
-BlTransparentPaint >> = anotherObject [
-
-	self == anotherObject ifTrue: [ ^ true ].
-	^ (anotherObject isKindOf: self class)
-]
-
-{ #category : #accessing }
-BlTransparentPaint >> color: aColor [
-
-	self shouldNotImplement
+	^ BlColorPaint transparent
 ]
 
 { #category : #initialization }
@@ -60,18 +39,4 @@ BlTransparentPaint >> initialize [
 	super initialize.
 
 	color := Color transparent
-]
-
-{ #category : #testing }
-BlTransparentPaint >> isOpaque [
-	"I am transparent by definition and therefore always return false"
-
-	^ false
-]
-
-{ #category : #testing }
-BlTransparentPaint >> isTransparent [
-	"I am transparent by definition and therefore always return true"
-
-	^ true
 ]

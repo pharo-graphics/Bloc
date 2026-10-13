@@ -31,6 +31,12 @@ BlPaint >> asBlPaint [
 	^ self
 ]
 
+{ #category : #comparing }
+BlPaint >> hash [
+
+	^ self class hash
+]
+
 { #category : #testing }
 BlPaint >> isColorPaint [
 
@@ -41,7 +47,7 @@ BlPaint >> isColorPaint [
 BlPaint >> isOpaque [
 	"Return true if I am opaque, false otherwise.
 	It is important to implement paint specific logic in subclasses.
-	If paint is opeque we don't have to render elements behind it"
+	If paint is opaque we don't have to render elements behind it"
 
 	^ false
 ]

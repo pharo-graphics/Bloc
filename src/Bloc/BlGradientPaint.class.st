@@ -1,3 +1,8 @@
+"
+My subclasses represent gradient paints.
+
+The stops is a collection of associations where keys are numbers between 0.0 and 1.0, and values are instances of `Color`.
+"
 Class {
 	#name : #BlGradientPaint,
 	#superclass : #BlPaint,
@@ -23,6 +28,12 @@ BlGradientPaint >> from: aStartColor to: anEndColor [
 		0 -> aStartColor.
 		1 -> anEndColor
 	}
+]
+
+{ #category : #comparing }
+BlGradientPaint >> hash [
+
+	^ super hash bitXor: stops hash
 ]
 
 { #category : #accessing }

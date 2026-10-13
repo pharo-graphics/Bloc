@@ -35,7 +35,7 @@ BlPaintBackground >> = anotherObject [
 { #category : #comparing }
 BlPaintBackground >> hash [
 
-	^ self paint hash bitXor: self class hash
+	^ super hash bitXor: self paint hash
 ]
 
 { #category : #testing }
