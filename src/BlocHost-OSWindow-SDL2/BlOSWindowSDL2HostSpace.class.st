@@ -307,6 +307,12 @@ BlOSWindowSDL2HostSpace >> title: aString [
 	window title: aString
 ]
 
+{ #category : #'host space - displaying' }
+BlOSWindowSDL2HostSpace >> toFront [
+
+	window focus
+]
+
 { #category : #'host space - geometry' }
 BlOSWindowSDL2HostSpace >> windowExtent: newExtent [
 	"Change window size to a newExtent"

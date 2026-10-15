@@ -105,13 +105,20 @@ BlParameterizedHostTest >> host: aHost [
 { #category : #'instance creation' }
 BlParameterizedHostTest >> newTestingSpace [
 
+	^ self newUnopenedTestingSpace
+		  show;
+		  settle;
+		  yourself
+]
+
+{ #category : #'instance creation' }
+BlParameterizedHostTest >> newUnopenedTestingSpace [
+
 	| aSpace |
 	aSpace := BlSpace new.
 	aSpace
 		title: self asString;
-		host: host;
-		show;
-		settle.
+		host: host.
 
 	aSpace userData at: #testCase put: self asString.
 

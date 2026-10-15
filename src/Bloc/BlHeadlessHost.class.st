@@ -32,11 +32,23 @@ BlHeadlessHost >> label [
 { #category : #'host - api' }
 BlHeadlessHost >> newHostSpaceFor: aSpace [
 
-	^ BlHeadlessHostSpace new
-		host: self;
-		space: aSpace;
-		renderer: self newHostRenderer;
-		windowExtent: aSpace extent;
-		canvasExtent: aSpace extent;
-		yourself
+	| aHostSpace |
+	aHostSpace :=
+		BlHeadlessHostSpace new
+			host: self;
+			space: aSpace;
+			renderer: self newHostRenderer;
+			windowExtent: aSpace extent;
+			canvasExtent: aSpace extent;
+			borderless: aSpace isBorderless;
+			fullscreen: aSpace isFullscreen;
+			fullsize: aSpace isFullsize;
+			resizable: aSpace isResizable;
+			title: aSpace title;
+			yourself.
+
+	aSpace knowsPosition ifTrue: [
+		aHostSpace position: aSpace position ].
+
+	^ aHostSpace
 ]

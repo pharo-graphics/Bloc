@@ -258,6 +258,12 @@ BlOSSDL3HostSpace >> title: aString [
 	osWindow title: aString
 ]
 
+{ #category : #'host space - displaying' }
+BlOSSDL3HostSpace >> toFront [
+
+	osWindow focus
+]
+
 { #category : #'host space - geometry' }
 BlOSSDL3HostSpace >> windowExtent: newExtent [
 

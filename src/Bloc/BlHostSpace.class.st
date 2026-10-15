@@ -250,7 +250,7 @@ BlHostSpace >> tearDown [
 { #category : #'host space - displaying' }
 BlHostSpace >> toBack [
 
-	self subclassResponsibility
+	self deprecated: 'Sending a window to back is not supported by modern display servers and will be removed in the future.'
 ]
 
 { #category : #'host space - displaying' }
