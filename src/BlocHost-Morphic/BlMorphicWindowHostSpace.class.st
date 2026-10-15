@@ -271,6 +271,12 @@ BlMorphicWindowHostSpace >> title: aString [
 	morphicWindow title: aString
 ]
 
+{ #category : #'host space - displaying' }
+BlMorphicWindowHostSpace >> toFront [
+
+	morphicWindow ifNotNil: [ :w | w activate ]
+]
+
 { #category : #'host space - geometry' }
 BlMorphicWindowHostSpace >> windowExtent: anExtent [
 

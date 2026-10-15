@@ -165,6 +165,12 @@ BlMorphicHostSpace >> title: aString [
 	"Change window's title"
 ]
 
+{ #category : #'host space - displaying' }
+BlMorphicHostSpace >> toFront [
+
+	spaceHostMorph ifNotNil: [ :m | m comeToFront ]
+]
+
 { #category : #'host space - geometry' }
 BlMorphicHostSpace >> windowExtent: anExtent [
 

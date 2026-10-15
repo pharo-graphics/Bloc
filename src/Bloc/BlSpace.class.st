@@ -1385,11 +1385,13 @@ BlSpace >> title: aString [
 
 { #category : #'api - displaying' }
 BlSpace >> toBack [
-	self hostSpaceDo: [ :hs | hs toBack ]
+
+	self deprecated: 'Sending a window to back is not supported by modern display servers and will be removed in the future.'
 ]
 
 { #category : #'api - displaying' }
 BlSpace >> toFront [
+
 	self hostSpaceDo: [ :hs | hs toFront ]
 ]
 

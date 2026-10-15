@@ -19,7 +19,8 @@ Class {
 		'opened',
 		'cursor',
 		'renderCount',
-		'visible'
+		'visible',
+		'resizable'
 	],
 	#category : #'Bloc-Universe - Host Headless'
 }
@@ -117,6 +118,7 @@ BlHeadlessHostSpace >> initialize [
 	minimized := false.
 	maximized := false.
 	borderless := false.
+	resizable := true.
 	opened := false.
 
 	physicalSize := self defaultPhysicalSize.
@@ -148,6 +150,12 @@ BlHeadlessHostSpace >> isFullsize [
 	"Return true if the underlying window is in fullsize mode, false otherwise."
 
 	^ isFullsize
+]
+
+{ #category : #'window - properties' }
+BlHeadlessHostSpace >> isResizable [
+
+	^ resizable
 ]
 
 { #category : #'host space - testing' }
@@ -239,6 +247,12 @@ BlHeadlessHostSpace >> renderCount [
 	^ renderCount
 ]
 
+{ #category : #'window - properties' }
+BlHeadlessHostSpace >> resizable: aBoolean [
+
+	resizable := aBoolean
+]
+
 { #category : #'host space - displaying' }
 BlHeadlessHostSpace >> show [
 	visible := true
@@ -256,6 +270,12 @@ BlHeadlessHostSpace >> title: aString [
 	"Change window's title"
 
 	title := aString
+]
+
+{ #category : #'host space - displaying' }
+BlHeadlessHostSpace >> toFront [
+
+	
 ]
 
 { #category : #'host space - geometry' }
