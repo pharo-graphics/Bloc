@@ -568,7 +568,7 @@ BlText >> notifyStringsInserted: aCollectionOfStrings atAll: aCollectionOfFinalI
 		anAnnouncer
 			announce: (BlTextStringsInserted new
 				strings: aNonEmptyCollectionOfStrings;
-				requestedIndices: aNonEmptyCollectionOfFinalIndices ;
+				requestedIndices: aCollectionOfRequestedIndices ;
 				finalIndices: aNonEmptyCollectionOfFinalIndices) ]
 ]
 
