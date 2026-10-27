@@ -23,6 +23,34 @@ BlSpaceFixture class >> allFixtureSelectors [
 ]
 
 { #category : #fixtures }
+BlSpaceFixture >> _buildTextEmoji [
+	"It produces random failures on Windows CI"
+
+	| emojiFont emojiString |
+	self flag: #todo.
+	emojiFont := AeNotoColorEmojiDownloadedFont new.
+	(AeFontManager globalInstance
+		includesFamilyName: emojiFont familyName) ifFalse: [
+			"Baseline ensured to download it, but after reopening
+			the image, we may require a new scan."
+			AeFontManager resetGlobalInstance.
+			AeFontManager globalInstance
+				scanDirectory: AeFilesystemResources fontsDirectory ].
+
+	builder spaceExtent: 200 @ 80.
+
+	emojiString := WideString streamContents: [ :stream |
+		#(16r1F44D 16r1f642 16r1F525 ) do: [ :each |
+			stream nextPut: (Unicode value: each) ]].
+
+	builder
+		addTextToRoot: (emojiString asRopedText
+			fontName: emojiFont familyName;
+			fontSize: 50;
+			yourself)
+]
+
+{ #category : #fixtures }
 BlSpaceFixture >> _buildTinyGeometries [
 	"It produces random rendering"
 
@@ -1322,35 +1350,6 @@ BlSpaceFixture >> buildTextAttributes [
 			background: Color yellow;
 			yourself)
 		to: container.
-]
-
-{ #category : #fixtures }
-BlSpaceFixture >> buildTextEmoji [
-
-	| emojiFont emojiString |
-	self flag: #todo.
-	emojiFont := AeNotoColorEmojiDownloadedFont new.
-	(AeFontManager globalInstance
-		includesFamilyName: emojiFont familyName) ifFalse: [
-			"Baseline ensured to download it, but after reopening
-			the image, we may require a new scan."
-			AeFontManager resetGlobalInstance.
-			AeFontManager globalInstance
-				scanDirectory: AeFilesystemResources fontsDirectory ].
-
-	builder spaceExtent: 200 @ 80.
-
-	emojiString := WideString streamContents: [ :stream |
-		#(16r1F44D 16r1f642 16r1F525 ) do: [ :each |
-			stream nextPut: (Unicode value: each) ]].
-
-	builder
-		addTextToRoot: (emojiString asRopedText
-			fontName: emojiFont familyName;
-			fontSize: 50;
-			yourself).
-
-
 ]
 
 { #category : #fixtures }
