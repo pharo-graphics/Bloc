@@ -1505,5 +1505,5 @@ BlSpace >> windowScale [
 
 	^ self
 		hostSpaceDo: [ :aHostSpace | aHostSpace scaleFactor ]
-		ifAbsent: [ 1.0 asPoint ]
+		ifAbsent: [ 1.0 @ 1.0 ]
 ]

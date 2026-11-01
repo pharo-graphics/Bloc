@@ -25,14 +25,14 @@ BlLinearGradientPaint class >> direction: aPoint [
 		ifTrue: [ 1@0 ]
 		ifFalse: [ aDirection normalized].
 
-	aStart := 0 asPoint.
+	aStart := 0 @ 0.
 	anEnd := aStart + aDirection.	
 	aDelta := aStart min: anEnd.
 
 	^ self new
 		start: aStart - aDelta;
 		end: anEnd - aDelta;
-		matchExtent: 1.0 asPoint;
+		matchExtent: 1.0 @ 1.0;
 		yourself
 ]
 
