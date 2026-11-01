@@ -32,6 +32,7 @@ parent addChild: child
 Users may also choose to add an element as the first child, for that purpose Bloc provides `BlElement>>#addChildFirst:`.
 ## Geometry and bounds
 Every element is responsible for drawing itself. At the same time, every element has a `BlElementGeometry` that defines the bounds and the clipping. There are many types of geometry available:
+
 ```
 BlElementGeometry allSubclasses
 ```
@@ -39,8 +40,9 @@ BlElementGeometry allSubclasses
 See `BlGeometryVisualAndLayoutBoundsExamples` for concrete details.
 ## Layout
 There are many built-in `BlLayout` strategies available, or you can create your own.
+
 ## Tutorial
-You can learn Bloc following a memory game tutorial: [00-memory-game.pillar](fileLocator://gtResource/feenkcom/Bloc/doc/tutorial-memory-game/00-memory-game.pillar).
+You can learn Bloc following a memory game tutorial available at https://books.pharo.org and the graphics book at https://github.com/squareBracketAssociates/
 
 "
 Class {

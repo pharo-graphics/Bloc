@@ -1,16 +1,35 @@
 "
-I'm the counterpart of the `BlDefaultVisuals`. I'm usually stored in place of `BlDefaultVisuals` singleton to accumulate modifications of the default. I accumulate modifications because contrary to `BlDefaultVisuals` my setters modify myself.
+I hold the visual properties of one element that has changed at least one of them.
+I am created by a `BlDefaultVisuals` setter the first time a property of the element changes,
+and I then replace the shared default visuals in that element.
 
-To use me correctly my users should always store the result of the setters sent to a visuals as shown in the example below.
+### Responsibility
 
-```
-BlElement >> effect: anEffect
-	""Change my effect to a given one requesting draw area invalidations.
-	anEffect must not be nil""
+- Store the properties that were set. My setters modify me (and answer me), so after the first change
+  the element keeps the same instance.
+- Answer the default value for any property that was not set: each instance variable is nil until set,
+  and my getters fall back to `self default…` (e.g. `^ opacity ifNil: [ self defaultOpacity ]`).
 
-	visuals := visuals effect: anEffect.
-	self invalidate
-```
+### Collaborators
+
+- `BlDefaultVisuals`, which creates me.
+- `BlElement`, which stores me and must still store the result of my setters,
+  to respect the `BlElementVisuals` contract.
+
+### Public API
+
+The same as `BlElementVisuals`. Run `BlCustomVisuals class >> #scriptElementVisuals` to see how an element
+switches from the shared default visuals to its own; `#exampleTranslucentRounded` answers such visuals.
+
+### Internal Representation and Key Implementation Points
+
+**Instance Variables**
+- background, border, geometry, outskirts, effect, opacity, visibility, clipChildren,
+  compositingMode, elevation, focusability, focused, mouseCursor: the value set for each property,
+  or nil when it was not set (the default is then used).
+
+Setting a property back to its default value does not turn the element back to the shared
+`BlDefaultVisuals`: the element keeps its `BlCustomVisuals`.
 "
 Class {
 	#name : #BlCustomVisuals,
@@ -32,6 +51,73 @@ Class {
 	],
 	#category : #'Bloc-Basic'
 }
+
+{ #category : #'private - demo' }
+BlCustomVisuals class >> demoCellFor: anElement [
+	"Answer a cell showing anElement in a gray frame, above the name of its visuals class.
+	The visuals are read with #instVarNamed: only to display them: client code never accesses them."
+
+	| frame label |
+	frame := BlElement new
+		         extent: 80 @ 80;
+		         border: (BlBorder paint: Color gray width: 1);
+		         yourself.
+	frame addChild: anElement.
+	label := BlTextElement new text: (anElement instVarNamed: #visuals) class name asRopedText.
+	^ BlElement new
+		  layout: (BlLinearLayout vertical interspace: 10);
+		  constraintsDo: [ :c |
+				  c horizontal fitContent.
+				  c vertical fitContent ];
+		  addChildren: {
+				  frame.
+				  label };
+		  yourself
+]
+
+{ #category : #examples }
+BlCustomVisuals class >> exampleTranslucentRounded [
+	"Answer the visuals of an element after it changed three properties.
+	The first setter, sent to the shared default visuals, answers a new instance of me.
+	Users don't build visuals themselves: see #scriptElementVisuals for how an element gets them."
+
+	<sampleInstance>
+	^ (BlDefaultVisuals uniqueInstance opacity: 0.5)
+		  background: (BlBackground paint: Color blue);
+		  geometry: (BlRoundedRectangleGeometry cornerRadius: 8);
+		  yourself
+]
+
+{ #category : #script }
+BlCustomVisuals class >> scriptElementVisuals [
+	"Show how an element gets its visuals. You never create or change visuals yourself:
+	you send the visual messages (opacity:, background:, geometry:, ...) to the element,
+	which stores the visuals they answer.
+	Left, an untouched element shares the default visuals.
+	Right, an element that received the properties of #exampleTranslucentRounded
+	through the element API now has its own custom visuals."
+
+	<script>
+	| example untouched configured container |
+	example := self exampleTranslucentRounded.
+	untouched := BlElement new extent: 80 @ 80.
+	configured := BlElement new extent: 80 @ 80.
+	configured
+		opacity: example opacity;
+		background: example background;
+		geometry: example geometry.
+	container := BlElement new
+		             layout: (BlLinearLayout horizontal interspace: 40);
+		             padding: (BlInsets all: 40);
+		             constraintsDo: [ :c |
+				             c horizontal fitContent.
+				             c vertical fitContent ];
+		             yourself.
+	{
+		untouched.
+		configured } do: [ :each | container addChild: (self demoCellFor: each) ].
+	container openInSpace
+]
 
 { #category : #accessing }
 BlCustomVisuals >> background [
