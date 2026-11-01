@@ -20,6 +20,13 @@ Class {
 	#category : #'Bloc-Basic-Transformations'
 }
 
+{ #category : #examples }
+BlReflectionTransformation class >> exampleTransformation [
+
+	<sampleInstance>
+	^ self horizontal
+]
+
 { #category : #'instance creation' }
 BlReflectionTransformation class >> horizontal [
 

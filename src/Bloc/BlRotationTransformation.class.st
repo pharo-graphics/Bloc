@@ -15,6 +15,15 @@ Class {
 	#category : #'Bloc-Basic-Transformations'
 }
 
+{ #category : #examples }
+BlRotationTransformation class >> exampleTransformation [
+
+	<sampleInstance>
+	^ self new
+		  angle: 30;
+		  yourself
+]
+
 { #category : #comparing }
 BlRotationTransformation >> = anObject [
 

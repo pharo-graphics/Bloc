@@ -38,6 +38,8 @@ element transformDo: [ :t |
 
 The same transformation gives a different result depending on its origin. Run `BlAffineTransformation class >> #scriptRotationOrigins` to see a 30 degree rotation applied around three different origins.
 
+Run `BlAffineTransformation class >> #scriptDemo` to see every concrete transformation next to an untransformed square, or send `scriptDemo` to one subclass (e.g. `BlRotationTransformation scriptDemo`) to see only that one. Each subclass provides the instance shown through its class-side `#exampleTransformation`.
+
 ## Internal Representation
 
 - `origin`: a `BlAffineTransformationOrigin`, resolved against the bounds of the transformed element when the matrix is computed.
@@ -56,6 +58,106 @@ Class {
 	#category : #'Bloc-Basic-Transformations'
 }
 
+{ #category : #'private - demo' }
+BlAffineTransformation class >> demoClasses [
+	"Answer the classes shown by #scriptDemo: the receiver when it is concrete, every concrete subclass otherwise"
+
+	^ self isAbstract
+		  ifTrue: [ self allSubclasses reject: [ :each | each isAbstract ] ]
+		  ifFalse: [ { self } ]
+]
+
+{ #category : #'private - demo' }
+BlAffineTransformation class >> demoRow [
+	"Answer an element showing my name, the reference square without any transformation, and the same square transformed by my #exampleTransformation.
+	3D transformations cannot be drawn by the Alexandrie backend yet (see BACKLOG.md), so I show a note instead of the transformed square."
+
+	| transformation row |
+	transformation := self exampleTransformation.
+	row := BlElement new
+		       layout: (BlLinearLayout horizontal interspace: 40);
+		       constraintsDo: [ :c |
+				       c horizontal fitContent.
+				       c vertical fitContent ];
+		       clipChildren: false;
+		       addChild: (BlTextElement new
+				        text: self name asRopedText;
+				        constraintsDo: [ :c | c horizontal exact: 260 ];
+				        yourself);
+		       addChild: (self demoSquareTransformedBy: nil);
+		       yourself.
+	row addChild: (transformation is2D
+			 ifTrue: [ self demoSquareTransformedBy: transformation ]
+			 ifFalse: [
+					 BlTextElement new
+						 text: '3D transformation: not drawable yet' asRopedText;
+						 yourself ]).
+	^ row
+]
+
+{ #category : #'private - demo' }
+BlAffineTransformation class >> demoSquareTransformedBy: anAffineTransformationOrNil [
+	"Answer a gray frame showing where a square is without transformation, containing that square transformed by the argument (or not transformed when it is nil).
+	The red marker in the top-left corner of the square makes reflections and rotations visible.
+	The frame does not clip, so the whole transformed square stays visible."
+
+	| square |
+	square := BlElement new
+		          extent: 60 @ 60;
+		          background: (Color blue alpha: 0.4);
+		          addChild: (BlElement new
+				           extent: 15 @ 15;
+				           background: Color red;
+				           yourself);
+		          yourself.
+	anAffineTransformationOrNil ifNotNil: [ :aTransformation |
+		square transformation: (BlElementLocalTransformation newWith: aTransformation) ].
+
+	^ BlElement new
+		  extent: 60 @ 60;
+		  border: (BlBorder paint: Color gray width: 1);
+		  clipChildren: false;
+		  addChild: square;
+		  yourself
+]
+
+{ #category : #examples }
+BlAffineTransformation class >> exampleTransformation [
+	"Answer a configured transformation, shown by #scriptDemo.
+	Concrete subclasses must override me. I am abstract and cannot be instantiated,
+	so on me I answer a composite transformation, which is also an affine transformation."
+
+	<sampleInstance>
+	self isAbstract ifFalse: [ ^ self subclassResponsibility ].
+	^ BlAffineCompositeTransformation exampleTransformation
+]
+
+{ #category : #testing }
+BlAffineTransformation class >> isAbstract [
+
+	^ self == BlAffineTransformation
+]
+
+{ #category : #script }
+BlAffineTransformation class >> scriptDemo [
+	"Show a square displayed without any transformation next to the same square transformed by #exampleTransformation.
+	Sent to a concrete subclass (e.g. `BlRotationTransformation scriptDemo`), I show that transformation only.
+	Sent to me, the abstract class, I show one row per concrete subclass.
+	Subclasses customize the demo by overriding #exampleTransformation."
+
+	<script>
+	| container |
+	container := BlElement new
+		             layout: (BlLinearLayout vertical interspace: 40);
+		             padding: (BlInsets all: 40);
+		             constraintsDo: [ :c |
+				             c horizontal fitContent.
+				             c vertical fitContent ];
+		             yourself.
+	self demoClasses do: [ :aClass | container addChild: aClass demoRow ].
+	container openInSpace
+]
+
 { #category : #script }
 BlAffineTransformation class >> scriptRotationOrigins [
 	"The same 30 degree rotation applied with three different origins:
@@ -64,10 +166,9 @@ BlAffineTransformation class >> scriptRotationOrigins [
 	Each gray frame shows where the square would be without the transformation."
 
 	<script>
-	| container squareExtent |
-	squareExtent := 60 @ 60.
+	| container |
 	container := BlElement new
-		             layout: (BlLinearLayout horizontal cellSpacing: 40);
+		             layout: (BlLinearLayout horizontal interspace: 40);
 		             padding: (BlInsets all: 40);
 		             constraintsDo: [ :c |
 				             c horizontal fitContent.
@@ -79,23 +180,12 @@ BlAffineTransformation class >> scriptRotationOrigins [
 		BlAffineTransformationCenterOrigin defaultInstance.
 		BlAffineTransformationTopLeftOrigin new.
 		BlAffineTransformationRightCenterOrigin new } do: [ :anOriginOrNil |
-			| frame square |
-			frame := BlElement new
-				         extent: squareExtent;
-				         border: (BlBorder paint: Color gray width: 1);
-				         yourself.
-			square := BlElement new
-				          extent: squareExtent;
-				          background: (Color blue alpha: 0.4);
-				          yourself.
-			anOriginOrNil ifNotNil: [ :anOrigin |
-					square transformation: (BlElementLocalTransformation newWith: (BlRotationTransformation new
+			container addChild: (self demoSquareTransformedBy: (anOriginOrNil ifNotNil: [ :anOrigin |
+							  BlRotationTransformation new
 								  angle: 30;
 								  axis: BlVector zAxis;
 								  origin: anOrigin;
-								  yourself)) ].
-			frame addChild: square.
-			container addChild: frame ].
+								  yourself ])) ].
 
 	container openInSpace
 ]

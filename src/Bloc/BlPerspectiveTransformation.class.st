@@ -15,6 +15,14 @@ BlPerspectiveTransformation class >> depth: aNumber [
 		  yourself
 ]
 
+{ #category : #examples }
+BlPerspectiveTransformation class >> exampleTransformation [
+	"A perspective alone has no visible effect on a flat element: it only changes how depth is projected, so it shows once combined with a 3D transformation."
+
+	<sampleInstance>
+	^ self depth: 300
+]
+
 { #category : #comparing }
 BlPerspectiveTransformation >> = anObject [
 
