@@ -9,7 +9,7 @@ Class {
 
 { #category : #examples }
 BlFlowLayoutCompositionSmokeTest class >> exampleHorizontalList [
-	<gtExample>
+	<sampleInstance>
 	| e1 e2 e3 e4 el space e5 |
 
 	e1 := BlElement new
@@ -50,7 +50,7 @@ BlFlowLayoutCompositionSmokeTest class >> exampleHorizontalList [
 
 { #category : #examples }
 BlFlowLayoutCompositionSmokeTest class >> exampleText [
-	<gtExample>
+	<sampleInstance>
 	| aText aLineIterator  theWords aParent aSpace floatA aFloatIndex |
 
 	theWords := OrderedCollection new.
