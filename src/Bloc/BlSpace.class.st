@@ -1270,6 +1270,7 @@ BlSpace >> settleFor: aTimeoutValuable [
 	"Wait until the space is settled, or until aTimeoutValuable evaluates to true."
 
 	| finished |
+	self requestPulse.
 	finished := false.
 	host
 		waitUntil: [ self isSettled ]
