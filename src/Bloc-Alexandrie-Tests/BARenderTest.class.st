@@ -33,13 +33,16 @@ BARenderTest class >> inspectMismatches [
 
 { #category : #hooks }
 BARenderTest >> actualForm [
-		
-	| aSpace |
+
+	| aSpace form |
 	aSpace := self formBehavior
-		host: BlOSWindowSDL2Host new; 
-		perform: formSelector;
-		space.
-	^ aSpace root aeAsForm
+		          host: BlHeadlessHost default;
+		          perform: formSelector;
+		          space.
+	aSpace show; settle.
+	form := aSpace root aeAsForm.
+	aSpace close; settle.
+	^ form
 ]
 
 { #category : #tests }

@@ -39,10 +39,10 @@ BlVectorTest >> testAsBlocVectorPoint [
 ]
 
 { #category : #'tests - maths' }
-BlVectorTest >> testNormal [ 
+BlVectorTest >> testNormal [
 
 	| v norm |
-	v := (1@0) asBlocVector.
+	v := (1 @ 0) asBlocVector.
 	norm := v normal.
 	self assert: norm x equals: 0.
 	self assert: norm y equals: 1.

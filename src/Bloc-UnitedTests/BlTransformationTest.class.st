@@ -122,9 +122,8 @@ BlTransformationTest >> testRotate [
 	self
 		assert:
 			(element bounds inParent bounds
-				closeTo: (expectedOrigin + self position extent: expectedExtent)).
+				closeTo: (expectedOrigin + self position extent: expectedExtent))
 	"bounds in parent are transformed bounds additionally translated by #position in parent"
-	^ element
 ]
 
 { #category : #tests }
@@ -145,9 +144,8 @@ BlTransformationTest >> testScale [
 	self
 		assert:
 			(element bounds inParent bounds
-				closeTo: (expectedOrigin + self position extent: expectedExtent)).
+				closeTo: (expectedOrigin + self position extent: expectedExtent))
 	"bounds in parent are transformed bounds additionally translated by #position in parent"
-	^ element
 ]
 
 { #category : #tests }
@@ -222,9 +220,8 @@ BlTransformationTest >> testTranslate [
 	self
 		assert:
 			(element bounds inParent bounds
-				closeTo: (expectedOrigin + self position extent: expectedExtent)).
+				closeTo: (expectedOrigin + self position extent: expectedExtent))
 	"bounds in parent are transformed bounds additionally translated by #position in parent"
-	^ element
 ]
 
 { #category : #tests }

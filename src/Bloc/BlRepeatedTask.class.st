@@ -74,6 +74,13 @@ BlRepeatedTask >> isRunning [
 	^ isRunning
 ]
 
+{ #category : #testing }
+BlRepeatedTask >> isSettled [
+	"Repeated tasks run indefinitely, so they are considered settled once they have run for the first time."
+
+	^ previousRunTime isNotNil
+]
+
 { #category : #hooks }
 BlRepeatedTask >> onEnqueued: aBlSpace [
 

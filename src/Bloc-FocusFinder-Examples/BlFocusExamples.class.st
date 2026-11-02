@@ -53,14 +53,10 @@ BlFocusExamples class >> openInWindow: anElement named: aTitleString [
 	| aSpace |
 
 	aSpace := BlSpace new
-		title: aTitleString.
+		title: aTitleString;
+		extent: anElement extent.
 
-	aSpace root
-		addChild: anElement;
-		yourself.
-
-	aSpace pulse.
-	aSpace extent: anElement extent.
+	aSpace root addChild: anElement.
 	
 	aSpace show
 ]

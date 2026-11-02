@@ -303,10 +303,19 @@ BlElement >> allChildrenBreadthFirstDetect: aBlock ifFound: ifFoundBlock ifNone:
 
 { #category : #'api - children enumeration' }
 BlElement >> allChildrenBreadthFirstDo: aBlock [ 
-	" run the block for all children breadth first "
 
-	self childrenDo: aBlock.
-	self childrenDo: [ :each | each allChildrenBreadthFirstDo: aBlock ]
+	| queue |
+	queue := OrderedCollection new.
+	
+	"Add all direct children to queue"
+	self childrenDo: [ :each | queue addLast: each ].
+	
+	"Visit element, then add its children"
+	[ queue isEmpty ] whileFalse: [
+		| current |
+		current := queue removeFirst.
+		aBlock value: current.
+		current childrenDo: [ :each | queue addLast: each ] ]
 ]
 
 { #category : #'api - children enumeration' }
@@ -614,7 +623,7 @@ BlElement >> attachSpace [
 	self isFocused
 		ifTrue: [ self requestFocus: self ]
 		ifFalse: [
-			self space focusOwner == self focusHolder
+			self space focusOwner == self focusDelegate
 				ifTrue: [ self loseFocus: self ] ].
 
 	self taskQueue isEmpty
@@ -1230,6 +1239,15 @@ BlElement >> defaultVisibility [
 	^ BlVisibility visible
 ]
 
+{ #category : #processing }
+BlElement >> deferOrValue: aBlock [
+	"Evaluate aBlock immediately if the active process is already the pulse process.
+	Otherwise, defer execution by enqueuing a task on this element."
+
+	self ifPulseProcessActive: aBlock else: [
+		self enqueueTask: (BlTaskAction with: aBlock) ]
+]
+
 { #category : #'api - tasks' }
 BlElement >> dequeueTask: aBlTask [
 
@@ -1523,7 +1541,7 @@ BlElement >> elevation: aBlElevation [
 { #category : #'api - tasks' }
 BlElement >> enqueueTask: aBlTask [
 	"Queue the supplied task to be executed in the next frame.
-	If you want the task executed in the UI process as soon as possible, use #inUIProcessDo:.
+	If you want the block executed in the pulse process without deferring if already on the UI process, use #deferOrValue:.
 	Note that the task is not guaranteed to be executed (if the element is never attached to a scene)."
 
 	aBlTask onEnqueuedInElement: self.
@@ -1637,10 +1655,19 @@ BlElement >> firstCommonParent: anElement ifFound: aFoundBlock ifNone: aNoneBloc
 ]
 
 { #category : #'focus requesting' }
-BlElement >> focusHolder [
-	"Answer the element that will be actually focused when #requestFocus is sent."
+BlElement >> focusDelegate [
+	"Answer the element that should receive focus when #requestFocus is sent to me.
+	By default I answer myself. Subclasses may override this to delegate
+	focus to a descendant element."
 
 	^ self
+]
+
+{ #category : #'focus requesting' }
+BlElement >> focusHolder [
+	"Backward compatibility: forwards to #focusDelegate."
+
+	^ self focusDelegate
 ]
 
 { #category : #accessing }
@@ -1669,10 +1696,12 @@ BlElement >> focusables: aBlFocusFinderCandidates along: aBlFocusSearchDirection
 		of: self
 ]
 
-{ #category : #'private - accessing' }
+{ #category : #'focus testing' }
 BlElement >> focused [
 
-	^ visuals isFocused
+	self deprecated: 'Use #isFocused or #isFocusOwner instead' transformWith: '`@receiver focused' -> '`@receiver isFocused'.
+
+	^ self isFocused
 ]
 
 { #category : #'private - accessing' }
@@ -1709,11 +1738,11 @@ BlElement >> focusedChild [
 
 { #category : #'layout utilities' }
 BlElement >> forceLayout [
-	"Do not use me, I am a private / debug utility method to force layout computation.
-	The main usage of this method is for testing purposes where we want to update layout
-	without the need to create a separate space and add an element to it in order to test bounds or position.
-	Note: because layout measurement may depend on other element it is mandatory to compute
-	layout going down from the top most parent, otherwise layout will not be valid"
+	"Compute layout synchronously for this detached element tree.
+	Raise an error if attached to a space: attached elements must be settled via their space."
+
+	self isAttachedToSceneGraph ifTrue: [
+		self error: 'Cannot force layout on an element attached to a space. Settle the space instead (e.g. space settle or space deferAndSettle:).' ].
 
 	self requestLayout.
 	self topMostParent computeLayout
@@ -1915,6 +1944,9 @@ BlElement >> hasCompositionLayer [
 BlElement >> hasFocus [
 	"Return true if an element is focused or contains a focused element, false otherwise"
 
+	self isAttachedToSceneGraph
+		ifTrue: [ ^ self space hasFocus: self ].
+
 	^ self isFocused or: [
 		self children anySatisfy: [ :anElement | anElement hasFocus ] ]
 ]
@@ -2026,6 +2058,16 @@ BlElement >> id: aStringOrSymbol [
 	self elementId: aStringOrSymbol asBlocElementId
 ]
 
+{ #category : #processing }
+BlElement >> ifPulseProcessActive: aBlock else: altBlock [
+	"Evaluate aBlock if the active process is the pulse process of this element's space,
+	otherwise evaluate altBlock."
+
+	^ self isAttachedToSceneGraph
+		ifTrue: [ self space ifPulseProcessActive: aBlock else: altBlock ]
+		ifFalse: altBlock
+]
+
 { #category : #layout }
 BlElement >> ignoreRequestLayoutDuring: aBlock [
 	| wasIgnored |
@@ -2036,6 +2078,28 @@ BlElement >> ignoreRequestLayoutDuring: aBlock [
 		wasIgnored
 			ifTrue: [ flags addShouldIgnoreLayoutRequests ]
 			ifFalse: [ flags clearShouldIgnoreLayoutRequests ] ]
+]
+
+{ #category : #convenience }
+BlElement >> inNewHeadlessSpaceDo: aBlock [
+	"Open the receiver in a new headless space, settle it, evaluate aBlock with the space (and the receiver), and ensure the space is closed and settled upon completion. Answer the result of evaluating aBlock."
+
+	| aSpace |
+	aSpace := self inSpace.
+	aSpace host: BlHeadlessHost default.
+	^ [
+		aSpace show; settle.
+		aBlock cull: aSpace cull: self
+	] ensure: [
+		aSpace close; settle.
+		self removeFromParent ]
+]
+
+{ #category : #convenience }
+BlElement >> inNewSpace [
+	"Add self to a new BlSpace. Answer such space without opening it."
+
+	^ self inSpace
 ]
 
 { #category : #'api - space' }
@@ -2050,29 +2114,22 @@ BlElement >> inSpace [
 
 { #category : #processing }
 BlElement >> inUIProcessDo: aBlock [
-	"Run the supplied block in the UI process.
-	If the active process is already the UI process, evaluate immediately. 
-	Otherwise, queue up for the next frame."
 
-	self inUIProcessDo: aBlock elseDo: [
-			self enqueueTask: (BlTaskAction new
-					 action: aBlock;
-					 yourself) ]
+	self
+		deprecated: 'Use #deferOrValue: instead'
+		transformWith: '`@receiver inUIProcessDo: `@arg' -> '`@receiver deferOrValue: `@arg'.
+
+	^ self deferOrValue: aBlock
 ]
 
 { #category : #processing }
 BlElement >> inUIProcessDo: aBlock elseDo: altBlock [
-	"Run the supplied block in the UI process else run the alternative block
-	If the active process is already the UI process, evaluate immediately. 
-	Otherwise, queue up for the next frame."
 
-	| uiProcess |
-	self isAttachedToSceneGraph ifTrue: [ 
-		self space host uiProcessDo: [ :uiProc | uiProcess := uiProc ] ].
+	self
+		deprecated: 'Use #ifPulseProcessActive:else: instead'
+		transformWith: '`@receiver inUIProcessDo: `@arg1 elseDo: `@arg2' -> '`@receiver ifPulseProcessActive: `@arg1 else: `@arg2'.
 
-	uiProcess = Processor activeProcess
-		ifTrue: aBlock 
-		ifFalse: altBlock
+	^ self ifPulseProcessActive: aBlock else: altBlock
 ]
 
 { #category : #initialization }
@@ -2227,6 +2284,13 @@ BlElement >> isFirstChild [
 ]
 
 { #category : #'focus testing' }
+BlElement >> isFocusOwner [
+	"Return true if I am the element that currently owns focus in my space."
+
+	^ self isAttachedToSceneGraph and: [ self space focusOwner == self ]
+]
+
+{ #category : #'focus testing' }
 BlElement >> isFocusable [
 	"Return true if I am able to take focus, false otherwise"
 	<return: #Boolean>
@@ -2237,14 +2301,14 @@ BlElement >> isFocusable [
 				and: [ self focusability ~= BlFocusability ignore ] ] ]
 ]
 
-{ #category : #'private - accessing' }
+{ #category : #'focus testing' }
 BlElement >> isFocused [
 	"Returns true if I am focused, false otherwise.
 	Note: It is possible that an element has focus but is not focused by itself."
 
-	^ self focusHolder = self
+	^ self focusDelegate == self
 		  ifTrue: [ visuals isFocused ]
-		  ifFalse: [ self focusHolder isFocused ]
+		  ifFalse: [ self focusDelegate isFocused ]
 ]
 
 { #category : #testing }
@@ -2306,7 +2370,6 @@ BlElement >> isRemovedFromSceneGraph [
 { #category : #testing }
 BlElement >> isRoot [
 	"Return true if I am a root element of a space, false otherwise"
-	<return: #Boolean>
 
 	^ self isAttachedToSceneGraph and: [ self space root = self ]
 ]
@@ -2554,9 +2617,9 @@ BlElement >> loseFocus [
 	| anElementToLooseFocus |
 
 	anElementToLooseFocus := self isFocused
-		ifTrue: [ self focusHolder ]
+		ifTrue: [ self focusDelegate ]
 		ifFalse: [ self deepestFocusedChild
-			ifNil: [ self focusHolder ] ].
+			ifNil: [ self focusDelegate ] ].
 
 	anElementToLooseFocus isFocused
 		ifFalse: [ ^ self ].
@@ -3155,12 +3218,8 @@ BlElement >> opacity: aNumber [
 { #category : #convenience }
 BlElement >> openInNewSpace [
 	"Add self to a new BlSpace and show it. Answer such space."
-	
-	| aSpace |
-	aSpace := BlSpace new.
-	aSpace root addChild: self.
-	aSpace show.
-	^ aSpace
+
+	^ self openInSpace
 ]
 
 { #category : #convenience }
@@ -3695,7 +3754,7 @@ BlElement >> requestFocusDueToRemoval: aBoolean [
 
 	self isAttachedToSceneGraph
 		ifTrue: [ self requestFocus: self dueToRemoval: aBoolean ]
-		ifFalse: [ self focusHolder focused: true ]
+		ifFalse: [ self focusDelegate focused: true ]
 ]
 
 { #category : #layout }
@@ -3737,7 +3796,7 @@ BlElement >> requestLayout: aSourceElement [
 		"There is no parent, probably I am a root element, let's check Space"
 		ifNil: [ self space
 			"If my parent is nil, but I am added to space, we need to let it know that we requested a layout by asking for a next pulse"
-			ifNotNil: [ :aSpace | aSpace requestNextPulse ] ]
+			ifNotNil: [ :aSpace | aSpace requestPulse ] ]
 ]
 
 { #category : #layout }

@@ -11,6 +11,12 @@ Class {
 	#category : #'Bloc-Universe - Parallel'
 }
 
+{ #category : #testing }
+BlParallelUniverseErrorDuringPulseSignal class >> isDeprecated [
+
+	^ true
+]
+
 { #category : #accessing }
 BlParallelUniverseErrorDuringPulseSignal >> signaledError [
 

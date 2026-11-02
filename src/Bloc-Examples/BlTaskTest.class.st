@@ -9,13 +9,31 @@ Class {
 }
 
 { #category : #tests }
+BlTaskTest >> newDetachedElementWithTaskAction [
+
+	| anElement aTask |
+	aTask := BlTaskAction new.
+	aTask action: [ aTask action: #done ].
+
+	anElement := BlElement new.
+	anElement enqueueTask: aTask.
+
+	^ anElement
+]
+
+{ #category : #tests }
 BlTaskTest >> testAddElementWithTaskToSpace [
-	<sampleInstance>
 	
-	| anElement aSpace aTask |
-	anElement := self testAddTaskToTheElementWithoutSpace.
-	aSpace := BlSpace new.
-	aSpace root addChild: anElement.
+	| anElement aTask aSpace |
+	aTask := BlTaskAction new.
+	aTask action: [ aTask action: #done ].
+
+	anElement := BlElement new.
+	anElement enqueueTask: aTask.
+
+	aSpace := anElement inSpace.
+	aSpace host: BlHeadlessHost default.
+	
 	"task were moved to the space"
 	self assert: anElement taskQueue tasks isEmpty.
 	self assert: aSpace taskQueue tasks size equals: 1.
@@ -23,15 +41,12 @@ BlTaskTest >> testAddElementWithTaskToSpace [
 	"it was not executed yet"
 	aTask := aSpace taskQueue tasks first.
 	self assert: aTask action ~~ #done.
-	self assert: aTask isQueued.
-
-	^ aSpace
+	self assert: aTask isQueued
 ]
 
 { #category : #tests }
 BlTaskTest >> testAddTaskToTheElementWithoutSpace [
 
-	<sampleInstance>
 	| anElement aTask anAction |
 	anElement := BlElement new.
 	aTask := BlTaskAction new.
@@ -46,24 +61,25 @@ BlTaskTest >> testAddTaskToTheElementWithoutSpace [
 	self assert: anElement taskQueue tasks asArray equals: { aTask }.
 	"it was not executed"
 	self assert: aTask action equals: anAction.
-	self assert: aTask isQueued.
-
-	^ anElement
+	self assert: aTask isQueued
 ]
 
 { #category : #tests }
 BlTaskTest >> testPulseSpaceWithTask [
 
-	<sampleInstance>
-	| aSpace aTask |
-	aSpace := self testAddElementWithTaskToSpace.
-	aTask := aSpace taskQueue tasks first.
-	aSpace pulse.
-	"task was run and queue is empty now"
-	self assert: aSpace taskQueue tasks isEmpty.
+	| anElement aTask |
+	aTask := BlTaskAction new.
+	aTask action: [ aTask action: #done ].
 
-	"action was executed"
-	self assert: aTask action equals: #done.
+	anElement := BlElement new.
+	anElement enqueueTask: aTask.
 
-	^ aSpace
+	aTask := anElement taskQueue tasks first.
+
+	anElement inNewHeadlessSpaceDo: [ :aSpace |
+		"task was run and queue is empty now"
+		self assert: aSpace taskQueue tasks isEmpty.
+
+		"action was executed"
+		self assert: aTask action equals: #done ]
 ]

@@ -7,6 +7,15 @@ Class {
 	#category : #'Bloc-UnitedTests-Selection'
 }
 
+{ #category : #helpers }
+BlCompositeSelectionTest >> boundsOf: aCompositeSelection [
+
+	| theBounds |
+	theBounds := OrderedCollection new.
+	aCompositeSelection do: [ :each | theBounds add: each from -> each to ].
+	^ theBounds asArray
+]
+
 { #category : #tests }
 BlCompositeSelectionTest >> deselectedIndexesIn: aCompositeSelection among: selectedIndexes [
 
@@ -27,7 +36,6 @@ BlCompositeSelectionTest >> testDeselectAndDeselectedIndex [
 
 { #category : #tests }
 BlCompositeSelectionTest >> testDeselectAndDeselectedIndex2 [
-	<expectedFailure>
 
 	| s |
 	s := BlCompositeSelection new.
@@ -45,7 +53,6 @@ BlCompositeSelectionTest >> testDeselectAndDeselectedIndex2 [
 
 { #category : #tests }
 BlCompositeSelectionTest >> testDeselectAndDeselectedIndex3 [
-	<expectedFailure>
 
 	| s |
 	s := BlCompositeSelection new.
@@ -55,6 +62,35 @@ BlCompositeSelectionTest >> testDeselectAndDeselectedIndex3 [
 	self assert: s indices equals: #( 1 3 5 7 8 ).
 	s deselectIndexes: #( 2 4 6 ).
 	self assert: s indices equals: #( 1 3 5 7 8 )
+]
+
+{ #category : #tests }
+BlCompositeSelectionTest >> testDeselectInsideTheRootSplitsIt [
+	"Selecting the middle range first makes it the root of the selection tree, with two children"
+
+	| aSelection |
+	aSelection := BlCompositeSelection new.
+	aSelection
+		select: 5 to: 8;
+		select: 1 to: 2;
+		select: 9 to: 10.
+	aSelection deselect: 6 to: 7.
+	self assert: (self boundsOf: aSelection) equals: { 1 -> 2. 5 -> 6. 7 -> 8. 9 -> 10 }
+]
+
+{ #category : #tests }
+BlCompositeSelectionTest >> testDeselectTouchingTheRootKeepsIt [
+	"Selecting the middle range first makes it the root of the selection tree, with two children.
+	Deleting a node with two children used to lose its own selection"
+
+	| aSelection |
+	aSelection := BlCompositeSelection new.
+	aSelection
+		select: 5 to: 6;
+		select: 1 to: 2;
+		select: 9 to: 10.
+	aSelection deselect: 4 to: 5.
+	self assert: (self boundsOf: aSelection) equals: { 1 -> 2. 5 -> 6. 9 -> 10 }
 ]
 
 { #category : #tests }
@@ -96,7 +132,6 @@ BlCompositeSelectionTest >> testEquals2 [
 
 { #category : #tests }
 BlCompositeSelectionTest >> testSelectAllThenDeselectOneByOne [
-	<expectedFailure>
 
 	| s all |
 	s := BlCompositeSelection new.

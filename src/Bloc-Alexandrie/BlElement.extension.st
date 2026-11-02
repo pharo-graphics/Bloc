@@ -17,12 +17,16 @@ BlElement >> aeApplyClippingWithAllParentsOn: aCanvas [
 BlElement >> aeAsForm [
 
 	| topMostBounds transformedGeometryBounds aCanvas matrix |
-	self isLayoutRequested ifTrue: [ self forceLayout ]. "We want to consider our border, effect, as well as children's."
+	self isLayoutRequested ifTrue: [
+		self isAttachedToSceneGraph
+			ifTrue: [ self space settle ]
+			ifFalse: [ self forceLayout ] ].
+
 	topMostBounds := self topMostParent bounds asRectangle.
 
 	matrix := BlMatrix2D new.
 	self allParentsReverseDo: [ :e | matrix := e transformation matrix copy multiplyBy: matrix ].
-	
+
 	self transformation asElementTransformation class = BlElementAbsoluteTransformation 
 		ifFalse: [ matrix := self transformation matrix copy multiplyBy: matrix ].
 
@@ -35,14 +39,13 @@ BlElement >> aeAsForm [
 	aCanvas privateAeCairoSurface deviceOffset: transformedGeometryBounds origin negated.
 	aCanvas clippingRectangle: topMostBounds.
 
-	
 	aCanvas restoreContextAfter: [ 
 		self allParentsReverseDo: [ :e | 
 			aCanvas pathTranslate: e position.
-			e transformation aeApplyTo: aCanvas. ].
+			e transformation aeApplyTo: aCanvas ].
 		self aeFullDrawOn: aCanvas ].
-	
-	^ aCanvas asForm 
+
+	^ aCanvas asForm
 ]
 
 { #category : #'*Bloc-Alexandrie' }

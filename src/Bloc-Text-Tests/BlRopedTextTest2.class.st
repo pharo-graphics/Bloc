@@ -74,6 +74,24 @@ BlRopedTextTest2 >> testInsertEmptyStrings [
 ]
 
 { #category : #tests }
+BlRopedTextTest2 >> testInsertStringsAtAllAnnouncesRequestedAndFinalIndices [
+
+	"Requested indices are given in the coordinates of the text before insertion,
+	final indices in the coordinates of the text after insertion"
+
+	| aText anInsertedEvent |
+	aText := 'abcdef' asRopedText.
+	aText
+		when: BlTextStringsInserted
+		do: [ :anAnnouncement | anInsertedEvent := anAnnouncement ]
+		for: self.
+	aText insertStrings: { 'X'. 'Y' } atAll: { 1. 3 }.
+	self assert: aText asString equals: 'aXbcYdef'.
+	self assert: anInsertedEvent requestedIndices asArray equals: #( 1 3 ).
+	self assert: anInsertedEvent finalIndices asArray equals: #( 1 4 )
+]
+
+{ #category : #tests }
 BlRopedTextTest2 >> testNextSpanFontColorOnHelloWorldWithColor [
 
 	<sampleInstance>

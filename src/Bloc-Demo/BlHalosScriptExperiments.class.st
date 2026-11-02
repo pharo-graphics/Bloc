@@ -12,8 +12,8 @@ BlHalosScriptExperiments class >> experimentHoverToSeeHalosDecription [
 	elt := BlElement new
 		       background: Color lightRed;
 		       clipChildren: false;
-		       extent: 150 asPoint;
-		       position: 100 asPoint.
+		       extent: 150 @ 150;
+		       position: 100 @ 100.
 	haloContainer := BlElement new
 		                 background: Color lightGreen;
 		                 layout: BlLinearLayout horizontal;
@@ -38,7 +38,7 @@ BlHalosScriptExperiments class >> experimentHoverToSeeHalosDecription [
 					elt eventDispatcher handlersDo: [ :handler |
 						| handlerElt textElt |
 						handlerElt := BlElement new
-							              extent: 20 asPoint;
+							              extent: 20 @ 20;
 							              background: Color random;
 							              clipChildren: false;
 							              constraintsDo: [ :c |
@@ -90,12 +90,12 @@ BlHalosScriptExperiments class >> experimentNewHalosOnShiftAltClick [
 	"shift+alt+click on the element shows the halo"
 	aContainer := BlElement new
 		              background: Color lightRed;
-		              extent: 300 asPoint;
-		              position: 50 asPoint.
+		              extent: 300 @ 300;
+		              position: 50 @ 50.
 	child := BlElement new
 		         background: Color lightBlue;
-		         extent: 100 asPoint;
-		         position: 10 asPoint.
+		         extent: 100 @ 100;
+		         position: 10 @ 10.
 
 	aContainer addChild: child.
 

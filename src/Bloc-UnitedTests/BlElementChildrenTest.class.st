@@ -23,8 +23,8 @@ BlElementChildrenTest >> hierarchyChildren [
 	1 to: 10 do: [ :i |
 			| son |
 			son := BlElement new
-				       extent: (10 - i) * 40 asPoint;
-				       position: 10 asPoint;
+				       extent: (10 - i) * (40 @ 40);
+				       position: 10 @ 10;
 				       background: (Color h: i * 360 / 10 s: 1.0 v: 1.0);
 				       id: ('shape' asBlocElementId indexed: i);
 				       yourself.
@@ -83,8 +83,8 @@ BlElementChildrenTest >> multipleChildrenIn: aContainer depth: aDepth [
 	1 to: 10 do: [ :i |
 		| son |
 		son := BlElement new
-			       extent: 10 - i * 40 asPoint;
-			       position: 10 asPoint;
+			       extent: (10 - i) * (40 @ 40);
+			       position: 10 @ 10;
 			       background: (Color h: i * 360 / 10 s: 1.0 v: 1.0);
 			       id: ('shape' asBlocElementId indexed: i);
 			yourself.
@@ -158,8 +158,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt100200 [
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
 	theChildren := aContainer withAllLeafChildrenAt: 100 @ 200.
-	self assert: theChildren equals: { (aContainer childWithId: #red) }.
-	^ theChildren
+	self assert: theChildren equals: { (aContainer childWithId: #red) }
 ]
 
 { #category : #tests }
@@ -168,8 +167,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt200100 [
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
 	theChildren := aContainer withAllLeafChildrenAt: 200 @ 100.
-	self assert: theChildren equals: { (aContainer childWithId: #blue) }.
-	^ theChildren
+	self assert: theChildren equals: { (aContainer childWithId: #blue) }
 ]
 
 { #category : #tests }
@@ -180,8 +178,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt200200 [
 	theChildren := aContainer withAllLeafChildrenAt: 200 @ 200.
 	self assert: theChildren equals: {
 			(aContainer childWithId: #blue).
-			(aContainer childWithId: #red) }.
-	^ theChildren
+			(aContainer childWithId: #red) }
 ]
 
 { #category : #tests }
@@ -190,8 +187,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt5050 [
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
 	theChildren := aContainer withAllLeafChildrenAt: 50 @ 50.
-	self assert: theChildren equals: { aContainer }.
-	^ theChildren
+	self assert: theChildren equals: { aContainer }
 ]
 
 { #category : #tests }
@@ -200,8 +196,7 @@ BlElementChildrenTest >> testAllLeafChildrenAt600600 [
 	| aContainer theChildren |
 	aContainer := self overlappingChildren.
 	theChildren := aContainer withAllLeafChildrenAt: 600 @ 600.
-	self assert: theChildren equals: {  }.
-	^ theChildren
+	self assert: theChildren equals: {  }
 ]
 
 { #category : #tests }

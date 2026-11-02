@@ -40,9 +40,6 @@ BlElementPositionChangeTest >> testParentPositionChanged [
 	parent := self newElementTree.
 	parent forceLayout.
 
-	child := parent children first.
-	subChild := child children first.
-
 	parentPositionChangedListener := BlEventHandler
 		                                 on: BlElementPositionChangedEvent
 		                                 do: [
@@ -56,6 +53,7 @@ BlElementPositionChangeTest >> testParentPositionChanged [
 		                                                                        +
 		                                                                        1 ].
 
+	child := parent children first.
 	childPositionChangedListener := BlEventHandler
 		                                on: BlElementPositionChangedEvent
 		                                do: [
@@ -69,6 +67,7 @@ BlElementPositionChangeTest >> testParentPositionChanged [
 		                                                                      +
 		                                                                      1 ].
 
+	subChild := child children first.
 	subChildPositionChangedListener := BlEventHandler
 		                                   on: BlElementPositionChangedEvent
 		                                   do: [
@@ -96,7 +95,7 @@ BlElementPositionChangeTest >> testParentPositionChanged [
 	subChild addEventHandler: subChildPositionInSpaceChangedListener.
 
 	anUpdater := BlElementBoundsUpdater new.
-	"change parent's position directy directly"
+	"change parent's position directly"
 	parent position: 50 @ 50 extent: parent extent context: anUpdater.
 
 	"notify changed"
@@ -123,9 +122,7 @@ BlElementPositionChangeTest >> testParentPositionChanged [
 	subChild removeEventHandler: subChildPositionChangedListener.
 	subChild removeEventHandler: subChildPositionInSpaceChangedListener.
 
-	parent position: 0 @ 0 extent: parent extent context: anUpdater.
-
-	^ parent
+	parent position: 0 @ 0 extent: parent extent context: anUpdater
 ]
 
 { #category : #tests }
@@ -167,9 +164,7 @@ BlElementPositionChangeTest >> testPositionChangeBoundsChange [
 	self assert: element boundsInLocal equals: (0 @ 0 extent: 100 @ 100).
 	self
 		assert: element bounds inParent asRectangle
-		equals: (0 @ 0 extent: 100 @ 100).
-
-	^ element
+		equals: (0 @ 0 extent: 100 @ 100)
 ]
 
 { #category : #tests }
@@ -211,7 +206,5 @@ BlElementPositionChangeTest >> testPositionChangeLoop [
 	anUpdater commitChanges.
 
 	self assert: positionChanged equals: 0.
-	self assert: positionInSpaceChanged equals: 0.
-
-	^ element
+	self assert: positionInSpaceChanged equals: 0
 ]

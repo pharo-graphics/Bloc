@@ -275,7 +275,6 @@ BlGeometryVisualAndLayoutBoundsExamples >> misalignedIcon [
 BlGeometryVisualAndLayoutBoundsExamples >> misalignedTrianglePolygon [
 	"Triangle polygon"
 
-	<sampleInstance>
 	^ BlPolygonGeometry vertices: {
 			  (0 @ 3).
 			  (8 @ 7.5).
@@ -299,7 +298,6 @@ BlGeometryVisualAndLayoutBoundsExamples >> outsideOutskirts [
 BlGeometryVisualAndLayoutBoundsExamples >> rectanglePolygon [
 	"Rectangle polygon"
 
-	<sampleInstance>
 	^ BlPolygonGeometry vertices: {
 			  (50 @ 50).
 			  (150 @ 50).
@@ -364,14 +362,14 @@ BlGeometryVisualAndLayoutBoundsExamples >> sigmoid [
 	<sampleInstance>
 
 	| geometry |
-	geometry := BlSigmoidGeometry new from: 0 asPoint to: 100 asPoint; yourself.
+	geometry := BlSigmoidGeometry new from: 0 @ 0 to: 100 @ 100; yourself.
 	geometry beVertical.
 
 	^ BlElement new
 		geometry: geometry;
 		border: (BlBorder paint: Color blue width: 3);
 		beOutskirtsCentered;
-		extent: 100 asPoint;
+		extent: 100 @ 100;
 		yourself
 ]
 
@@ -406,7 +404,6 @@ BlGeometryVisualAndLayoutBoundsExamples >> stadium [
 BlGeometryVisualAndLayoutBoundsExamples >> starPolygon [
 	"Star polygon"
 
-	<sampleInstance>
 	^ BlPolygonGeometry vertices: {
 			  (100 @ 50).
 			  (115 @ 90).
@@ -482,7 +479,6 @@ BlGeometryVisualAndLayoutBoundsExamples >> textElementWithRunText [
 BlGeometryVisualAndLayoutBoundsExamples >> trianglePolygon [
 	"Triangle polygon"
 
-	<sampleInstance>
 	^ BlPolygonGeometry vertices: {
 			  (0 @ 0).
 			  (8 @ 6).

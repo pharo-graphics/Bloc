@@ -21,7 +21,7 @@ BlTransparentBackground class >> cleanUp [
 
 { #category : #accessing }
 BlTransparentBackground class >> uniqueInstance [
-	"Return a unique instance of transparent backgrond.
+	"Return a unique instance of transparent background.
 	It is preferable to use unique instance than create a new every time"
 	<return: #BlBackground>
 
@@ -46,4 +46,15 @@ BlTransparentBackground >> isTransparent [
 { #category : #geometry }
 BlTransparentBackground >> matchExtent: anExtent [
 	"Do nothing for the transparent background"
+]
+
+{ #category : #accessing }
+BlTransparentBackground >> opacity [
+
+	^ 0.0
+]
+
+{ #category : #accessing }
+BlTransparentBackground >> opacity: aNumber [
+	"Ignore: I'm transparent."
 ]

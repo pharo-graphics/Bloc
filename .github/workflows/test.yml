@@ -13,12 +13,12 @@ jobs:
       # Default value means that a failure in one OS cancels all 
       fail-fast: false
       matrix:
-        smalltalk: [ Pharo64-13, Pharo64-14 ]
-        os: [ macos-latest, windows-latest ]
+        smalltalk: [ Pharo64-13, Pharo64-14, Pharo64-15 ]
+        os: [ windows-latest ] # macos-latest See https://github.com/pharo-graphics/Bloc/issues/872
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.smalltalk }} on ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Setup smalltalkCI
@@ -28,12 +28,12 @@ jobs:
       - name: Load in New Image and Run Tests
         run: smalltalkci -s ${{ matrix.smalltalk }} .ci.ston
         shell: bash
-        timeout-minutes: 10
+        timeout-minutes: 15
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload logs
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Logs_${{ matrix.smalltalk }}_${{ matrix.os }}
           path: |

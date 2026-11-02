@@ -42,20 +42,20 @@ BlGradientShadowEffect >> setUpCircle: circleRadius [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlGradientShadowEffect >> setUpPolygon: aCollection extent: aPoint [ 
+BlGradientShadowEffect >> setUpPolygon: aCollection extent: aPoint [
 
 	AePolygonGradientBlurFilter new
 		blurRadius: blurRadius color: color;
-		vertices: aCollection + blurRadius asPoint;
+		vertices: aCollection + (blurRadius @ blurRadius);
 		drawOn: shadowSurface newContext
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlGradientShadowEffect >> setUpRectangleExtent: aPoint [ 
+BlGradientShadowEffect >> setUpRectangleExtent: aPoint [
 
 	AeRectangleGradientBlurFilter new
 		blurRadius: blurRadius color: color;
-		rectangle: (blurRadius asPoint extent: aPoint);
+		rectangle: (blurRadius @ blurRadius extent: aPoint);
 		drawOn: shadowSurface newContext
 ]
 
@@ -64,7 +64,7 @@ BlGradientShadowEffect >> setUpRoundedRectangleExtent: aPoint radii: aBlCornerRa
 
 	AeRoundedRectangleGradientBlurFilter new
 		blurRadius: blurRadius color: color;
-		rectangle: (blurRadius asPoint extent: aPoint) radii: {
+		rectangle: (blurRadius @ blurRadius extent: aPoint) radii: {
 				aBlCornerRadii topLeft.
 				aBlCornerRadii topRight.
 				aBlCornerRadii bottomRight.

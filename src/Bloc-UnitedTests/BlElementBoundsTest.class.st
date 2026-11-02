@@ -406,7 +406,7 @@ BlElementBoundsTest >> testBoundsInSpecificParentInSpecificChild [
 
 { #category : #tests }
 BlElementBoundsTest >> testShadowEffectBoundsWithoutOffset [
-	
+
 	<sampleInstance>
 	| parent child shadowWidth shadowMultiplier |
 	shadowWidth := 20.
@@ -422,14 +422,14 @@ BlElementBoundsTest >> testShadowEffectBoundsWithoutOffset [
 	self
 		assert: child effectBounds
 		equals:
-			(shadowWidth * shadowMultiplier asPoint negated
-				corner: self childExtent + (shadowWidth * shadowMultiplier asPoint)).
+			(shadowWidth * (shadowMultiplier @ shadowMultiplier) negated
+				corner: self childExtent + (shadowWidth * (shadowMultiplier @ shadowMultiplier))).
 	child extent: self childExtent * 2.
 	child forceLayout.
 	self
 		assert: child effectBounds
 		equals:
-			(shadowWidth * shadowMultiplier asPoint negated
-				corner: self childExtent * 2 + (shadowWidth * shadowMultiplier asPoint)).
+			(shadowWidth * (shadowMultiplier @ shadowMultiplier) negated
+				corner: self childExtent * 2 + (shadowWidth * (shadowMultiplier @ shadowMultiplier))).
 	^ parent
 ]

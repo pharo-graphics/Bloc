@@ -18,12 +18,12 @@ BlDevScripterWaitStep >> forEmptySpaceTaskQueue [
 	self label: 'Wait for empty task queue'.
 	self onSpace.
 	self waitingBlock: [ :aSpace |
-		aSpace pulse.
+		aSpace settle.
 		self increaseCycle.
 		aSpace time 
 			every: 20 milliSeconds 
 			while: [ aSpace taskQueue tasks isNotEmpty ] 
-			do: [ aSpace pulse. self increaseCycle ] ]
+			do: [ aSpace settle. self increaseCycle ] ]
 ]
 
 { #category : #initialization }
@@ -36,7 +36,7 @@ BlDevScripterWaitStep >> forEmptySpaceTaskQueueTimeout: aDuration [
 		aSpace time 
 			every: 100 milliSeconds 
 			while: [ (aSpace time now < (aStartTime + aDuration)) and: [ aSpace taskQueue tasks isNotEmpty ] ] 
-			do: [ aSpace pulse ] ]
+			do: [ aSpace settle ] ]
 ]
 
 { #category : #initialization }
@@ -44,12 +44,12 @@ BlDevScripterWaitStep >> forEnqueuedSpaceTask [
 	self label: 'Wait for enqueued space task'.
 	self onSpace.
 	self waitingBlock: [ :aSpace |
-		aSpace pulse.
+		aSpace settle.
 		self increaseCycle.
 		aSpace time 
 			every: 20 milliSeconds 
 			while: [ aSpace taskQueue tasks isEmpty ] 
-			do: [ aSpace pulse. self increaseCycle ] ]
+			do: [ aSpace settle. self increaseCycle ] ]
 ]
 
 { #category : #initialization }

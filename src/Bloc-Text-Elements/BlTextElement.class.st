@@ -440,10 +440,15 @@ BlTextElement >> onPostMeasure: anExtentMeasurementSpec [
 	"If I am executed it means that measurement specification changed.
 	We have to recreate a text layout with new parameters"
 
-	| measuredWidth measuredHeight maxWidth maxHeight widthSpec heightSpec padding paragraphBounds |
+	| measuredWidth measuredHeight maxWidth maxHeight widthSpec heightSpec padding paragraphBounds localParagraph |
+	localParagraph := paragraph.
+	localParagraph ifNil: [
+		self measuredExtent: 0@0.
+		^ self ].
+
 	widthSpec := anExtentMeasurementSpec widthSpec.
 	heightSpec := anExtentMeasurementSpec heightSpec.
-	paragraphBounds := measurement boundsOf: paragraph.
+	paragraphBounds := measurement boundsOf: localParagraph.
 
 	"If measurement spec is exact I must ignore size measured by textLayout"
 	widthSpec isExact

@@ -21,7 +21,7 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 	characterHeight := self height.
 
 	" Draw each character one by one"
-	self span asString withIndexDo: [ :c :index | 
+	self span asString withIndexDo: [ :c :index |
 		| metrics bounds measuredWidth heightScale measuredHeight eachBaseline fixedBounds |
 		eachBaseline := (self baseline + ((index - 1) * (characterWidth @ 0))) x @ 0.
 		"Get glyphs for the text"
@@ -39,41 +39,41 @@ BAMockedTextParagraphSpan >> aeDrawOn: aeCanvas [
 				 ifFalse: [ Color black ]).
 
 		"Draw the border around the character"
-		aeCanvas restoreContextAfter: [ 
+		aeCanvas restoreContextAfter: [
 			"aeCanvas setBackgroundOff."
 			" setOutskirtsInside otherwise the cursor is hidden"
 			aeCanvas pathFactory: [ :cairoContext |
 				cairoContext rectangle: fixedBounds ].
 			Color random asBlPaint aeApplyAsBackgroundTo: aeCanvas opacity: 0.4.
 			aeCanvas setOutskirtsInside.
-			aeCanvas setBorderBlock: [ 
+			aeCanvas setBorderBlock: [
 				aeCanvas setSourceColor: Color veryVeryLightGray lighter.
 				aeCanvas setBorderWidth: 1.0 ].
 			aeCanvas drawFigure ].
 
 		"Draw the current character"
-		aeCanvas restoreContextAfter: [ 
+		aeCanvas restoreContextAfter: [
 			aeCanvas pathTranslate: eachBaseline.
-			aeCanvas pathScale: heightScale asPoint.
+			aeCanvas pathScale: heightScale @ heightScale.
 			aeCanvas pathTranslate:
 				bounds origin x negated @ metrics ascent abs + (characterWidth / heightScale - bounds width / 2.0 @ 0).
 			self attributes do: [ :anAttribute | anAttribute aeDrawBelowOn: aeCanvas span: self ].
 			aeCanvas drawGlyphs: cairoGlyphsArray font: cairoScaledFont ].
 
 		"Draw the textOffset "
-		aeCanvas restoreContextAfter: [ 
+		aeCanvas restoreContextAfter: [
 			| idxScaledFont idxGlyphsArray |
 			aeCanvas setSourceColor: Color gray.
 			idxScaledFont := aeCanvas
 				scaledFontForFace: aFace
 				size: characterHeight * 0.32.
 			idxGlyphsArray := idxScaledFont glyphArrayForString: (index + hostMeasurer textOffset - 1) asString.
-			index = 1 ifTrue: [ 
-				aeCanvas restoreContextAfter: [ 
+			index = 1 ifTrue: [
+				aeCanvas restoreContextAfter: [
 					aeCanvas pathTranslate: eachBaseline x + 1 @ (self height - 1).
 					aeCanvas drawGlyphs: idxGlyphsArray font: idxScaledFont ] ].
 			idxGlyphsArray := idxScaledFont glyphArrayForString: (index + hostMeasurer textOffset) asString.
-			aeCanvas restoreContextAfter: [ 
+			aeCanvas restoreContextAfter: [
 				aeCanvas pathTranslate: eachBaseline x + characterWidth + 1 @ (self height - 1).
 				aeCanvas drawGlyphs: idxGlyphsArray font: idxScaledFont ] ] ].
 

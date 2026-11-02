@@ -69,6 +69,8 @@ BlOSWindowEventHandler >> enqueueSpaceResized: aBlSpaceResizedEvent extent: aPoi
 
 { #category : #events }
 BlOSWindowEventHandler >> handleEvent: anEvent [
+
+	window isValid ifFalse: [ ^ self ].
 	anEvent accept: self
 ]
 

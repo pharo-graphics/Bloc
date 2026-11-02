@@ -113,7 +113,9 @@ BlInfiniteRecycler >> fetchElementFor: aPosition in: anInfiniteElement [
 
 	fetchers do: [ :f |
 		(f elementFor: aPosition in: anInfiniteElement) ifNotNil: [ :element |
-			^ element ] ]
+			^ element ] ].
+
+	Error signal: 'No holder fetched for position: ', aPosition asString
 ]
 
 { #category : #private }

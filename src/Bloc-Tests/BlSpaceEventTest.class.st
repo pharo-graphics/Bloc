@@ -13,12 +13,46 @@ Class {
 
 { #category : #running }
 BlSpaceEventTest >> setUp [
+
 	super setUp.
 
 	space :=
 		BlSpace new
-		  host: BlHeadlessHost new;
+		  host: BlHeadlessHost default;
 		  yourself
+]
+
+{ #category : #running }
+BlSpaceEventTest >> tearDown [
+
+	space ifNotNil: [ space close; settle ].
+
+	super tearDown
+]
+
+{ #category : #tests }
+BlSpaceEventTest >> testEnqueueEventAndDequeue [
+	| event dequeued |
+	self deny: space hasEvents.
+
+	event := BlMouseDownEvent new.
+	space enqueueEvent: event.
+	self assert: space hasEvents.
+
+	dequeued := space dequeuedEvents.
+	self deny: space hasEvents.
+	self assert: dequeued size equals: 1.
+	self assert: dequeued first == event
+]
+
+{ #category : #tests }
+BlSpaceEventTest >> testEventsClearedOnHostSpaceClose [
+	space show; settle.
+	space enqueueEvent: BlMouseDownEvent new.
+	self assert: space hasEvents.
+
+	space close; settle.
+	self deny: space hasEvents
 ]
 
 { #category : #tests }
@@ -31,12 +65,10 @@ BlSpaceEventTest >> testSpaceClosed [
 		addEventHandlerOn: BlSpaceClosedEvent
 		do: [ count := count + 1 ].
 
-	space show.
-	self waitPulses.
+	space show; settle.
 	self assert: count equals: 0.
 
-	space close.
-	self waitPulses.
+	space close; settle.
 	self assert: count equals: 1
 ]
 
@@ -50,17 +82,9 @@ BlSpaceEventTest >> testSpaceShown [
 		addEventHandlerOn: BlSpaceShownEvent
 		do: [ count := count + 1 ].
 
-	space show.
-	self waitPulses.
+	space show; settle.
 	self assert: count equals: 1.
 
-	space close.
-	self waitPulses.
+	space close; settle.
 	self assert: count equals: 1
-]
-
-{ #category : #running }
-BlSpaceEventTest >> waitPulses [
-
-	BlSpace pulseUntilEmptyTaskQueue: space timeout: 50 milliSeconds
 ]

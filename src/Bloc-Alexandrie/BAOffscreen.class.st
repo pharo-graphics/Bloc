@@ -19,7 +19,9 @@ Class {
 { #category : #'class initialization' }
 BAOffscreen class >> initialize [
 
-	SessionManager default registerUserClassNamed: self name
+	SessionManager default
+		registerGuiClassNamed: self name
+		atPriority: 150
 ]
 
 { #category : #accessing }
@@ -55,7 +57,7 @@ BAOffscreen >> ensureReady [
 
 	(aeCanvas notNil and: [ aeCanvas isValid ]) ifTrue: [ ^ self ].
 
-	aeCanvas := AeCanvas extent: 1 asPoint.
+	aeCanvas := AeCanvas extent: 1 @ 1.
 
 	textMeasurer :=
 		BATextMeasurer new

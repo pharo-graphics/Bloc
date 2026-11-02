@@ -28,7 +28,7 @@ TKTBlocTest >> testRunner [
 		assert: space root background paint color
 		equals: Color green.
 	"Check again after pulse"
-	self waitTestingSpaces.
+	space settle.
 	self
 		assert: space root background paint color
 		equals: Color red
@@ -37,7 +37,7 @@ TKTBlocTest >> testRunner [
 { #category : #tests }
 TKTBlocTest >> testService [
 
-	| space service count |
+	| space service count stopTime |
 	space := self newTestingSpace.
 	space show.
 
@@ -49,7 +49,10 @@ TKTBlocTest >> testService [
 	service stepDelay: 50 milliSeconds.
 	service start.
 
-	0.5 seconds wait.
+	stopTime := Time millisecondClockValue + 500.
+	[ Time millisecondClockValue < stopTime ] whileTrue: [
+		(Delay forMilliseconds: 10) wait.
+		space settle ].
 	service stop waitForCompletion: 1 second.
 	
 	self assert: count > 1

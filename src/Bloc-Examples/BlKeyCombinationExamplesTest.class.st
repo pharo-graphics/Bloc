@@ -11,21 +11,18 @@ Class {
 { #category : #'instance creation' }
 BlKeyCombinationExamplesTest >> alternativeCombination [
 
-	<sampleInstance>
 	^ BlAlternativeCombination new
 ]
 
 { #category : #'instance creation' }
 BlKeyCombinationExamplesTest >> arrowLeft [
 
-	<sampleInstance>
 	^ KeyboardKey left
 ]
 
 { #category : #'instance creation' }
 BlKeyCombinationExamplesTest >> compulsoryCombination [
 
-	<sampleInstance>
 	^ BlCompulsoryCombination new
 ]
 
@@ -35,57 +32,59 @@ BlKeyCombinationExamplesTest >> keyLogger [
 	<sampleInstance>
 	<demo>
 	^ BlElement new
-		  extent: 200 @ 200;
-		  background: Color red;
-		  addEventHandler: (BlEventHandler
-				   on: BlTextInputEvent
-				   do: [ :anEvent | self inform: 'Text input: ' , anEvent text ]);
-		  addEventHandler: (BlEventHandler
-				   on: BlKeyDownEvent
-				   do: [ :anEvent |
-					   self inform: 'Key down: ' , anEvent key asString ]);
-		  addShortcut: (BlShortcutWithAction new
-				   combination: (BlKeyCombination builder
-						    shift;
-						    meta;
-						    key: KeyboardKey left;
-						    build);
-				   action: [ :anEvent :aShortcut |
-					   self inform: 'Triggered ' , aShortcut combination asString ]);
-		  addShortcut: (BlShortcutWithAction new
-				   combination: (BlSingleKeyCombination key: KeyboardKey A);
-				   action: [ self inform: 'Shortcut: a' ]);
-		  addShortcut: (BlShortcutWithAction new
-				   combination: (BlSingleKeyCombination key: KeyboardKey up);
-				   action: [ self inform: 'Shortcut: arrowUp' ]);
-		  addShortcut: (BlShortcutWithAction new
-				   combination: (BlKeyCombination builder
-						    meta;
-						    key: KeyboardKey up;
-						    build);
-				   action: [ self inform: 'Shortcut: meta + arrowUp' ]);
-		  addShortcut: (BlShortcutWithAction new
-				   combination: (BlKeyCombination builder
-						    shift;
-						    meta;
-						    key: KeyboardKey up;
-						    build);
-				   action: [ self inform: 'Shortcut: meta + shift + arrowUp' ]);
-		  requestFocus;
-		  yourself
+			extent: 200 @ 200;
+			background: Color red;
+			addEventHandlerOn: BlTextInputEvent do: [ :anEvent |
+				self inform: 'Text input: ' , anEvent text ];
+			addEventHandlerOn: BlKeyDownEvent do: [ :anEvent |
+				self inform: 'Key down: ' , anEvent key asString ];
+			addShortcut:
+				(BlShortcutWithAction new
+					combination:
+						(BlKeyCombination builder
+							shift;
+							meta;
+							key: KeyboardKey left;
+							build);
+					action: [ :anEvent :aShortcut |
+						self inform: 'Triggered ' , aShortcut combination asString ]);
+			addShortcut:
+				(BlShortcutWithAction new
+					combination: (BlSingleKeyCombination key: KeyboardKey A);
+					action: [ self inform: 'Shortcut: a' ]);
+			addShortcut:
+				(BlShortcutWithAction new
+					combination: (BlSingleKeyCombination key: KeyboardKey up);
+					action: [ self inform: 'Shortcut: arrowUp' ]);
+			addShortcut:
+				(BlShortcutWithAction new
+					combination:
+						(BlKeyCombination builder
+							meta;
+							key: KeyboardKey up;
+							build);
+					action: [ self inform: 'Shortcut: meta + arrowUp' ]);
+			addShortcut: (BlShortcutWithAction new
+					combination:
+						(BlKeyCombination builder
+							shift;
+							meta;
+							key: KeyboardKey up;
+							build);
+					action: [ self inform: 'Shortcut: meta + shift + arrowUp' ]);
+			requestFocus;
+			yourself
 ]
 
 { #category : #'instance creation' }
 BlKeyCombinationExamplesTest >> leftMeta [
 
-	<sampleInstance>
 	^ KeyboardKey metaLeft
 ]
 
 { #category : #'instance creation' }
 BlKeyCombinationExamplesTest >> leftShift [
 
-	<sampleInstance>
 	^ KeyboardKey shiftLeft
 ]
 
@@ -101,14 +100,12 @@ BlKeyCombinationExamplesTest >> meta: aKeyAlternative left: aLeftMeta right: aRi
 { #category : #'instance creation' }
 BlKeyCombinationExamplesTest >> rightMeta [
 
-	<sampleInstance>
 	^ KeyboardKey metaRight
 ]
 
 { #category : #'instance creation' }
 BlKeyCombinationExamplesTest >> rightShift [
 
-	<sampleInstance>
 	^ KeyboardKey shiftLeft
 ]
 

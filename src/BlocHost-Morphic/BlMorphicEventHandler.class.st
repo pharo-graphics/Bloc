@@ -98,7 +98,7 @@ BlMorphicEventHandler >> enqueue: aBlEvent [
 
 	windowMorph hostSpace enqueueEvent: aBlEvent.
 	self flag: 'ugly code to force the space to dequeue the event '.
-	windowMorph hostSpace space ifNotNil: [ :aSpace | aSpace requestNextPulse ]
+	windowMorph hostSpace space ifNotNil: [ :aSpace | aSpace requestPulse ]
 ]
 
 { #category : #converting }

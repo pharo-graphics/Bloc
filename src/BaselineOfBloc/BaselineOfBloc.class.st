@@ -30,6 +30,10 @@ BaselineOfBloc >> baseline: spec [
 				with: [ spec requires: #('Bloc-Display') ].
 
 			spec
+				package: 'Bloc-Simulation'
+				with: [ spec requires: #('Bloc') ].
+
+			spec
 				package: 'Bloc-Animation'
 				with: [ spec requires: #('Bloc') ].
 
@@ -120,7 +124,7 @@ BaselineOfBloc >> baseline: spec [
 
 			spec
 				package: 'Bloc-Layout-Examples'
-				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Text-Elements') ].
+				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'Bloc-Tests' 'Bloc-Text-Elements') ].
 
 			spec
 				package: 'Bloc-SVG'
@@ -148,12 +152,8 @@ BaselineOfBloc >> baseline: spec [
 				with: [ spec requires: #('Bloc' 'Bloc-Text') ].
 
 			spec
-				package: 'BlocHost-Mock'
-				with: [ spec requires: #('Bloc') ].
-
-			spec
 				package: 'Bloc-Scripter'
-				with: [ spec requires: #('Bloc' 'Bloc-Layout' 'BlocHost-Mock') ].
+				with: [ spec requires: #('Bloc' 'Bloc-Simulation' 'Bloc-Layout') ].
 
 			spec
 				package: 'BlocHost-Morphic'
@@ -206,8 +206,8 @@ BaselineOfBloc >> baseline: spec [
 				package: 'Bloc-Tests'
 				with: [ spec requires: #(
 					'Bloc'
+					'Bloc-Simulation'
 					'Bloc-Text-Elements'
-					'BlocHost-Mock'
 					'BlocHost-Morphic'
 					'BlocHost-OSWindow-SDL2') ].
 

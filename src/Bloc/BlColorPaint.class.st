@@ -10,8 +10,19 @@ Class {
 	#instVars : [
 		'color'
 	],
+	#classInstVars : [
+		'transparent'
+	],
 	#category : #'Bloc-Paint'
 }
+
+{ #category : #cleanup }
+BlColorPaint class >> cleanUp [
+
+	super cleanUp.
+
+	transparent := nil
+]
 
 { #category : #'instance creation' }
 BlColorPaint class >> color: aColor [
@@ -23,18 +34,17 @@ BlColorPaint class >> color: aColor [
 
 { #category : #'instance creation' }
 BlColorPaint class >> transparent [
-	"Return an instance of a paint with transparent color"
-	
-	^ BlTransparentPaint uniqueInstance
+	"Return a unique instance of a paint with transparent color."
+
+	^ transparent ifNil: [ transparent := self color: Color transparent ]
 ]
 
 { #category : #comparing }
 BlColorPaint >> = anotherObject [
-	self == anotherObject
-		ifTrue: [ ^ true ].
-	(anotherObject isKindOf: self class)
-		ifFalse: [ ^ false ].
-	
+
+	self == anotherObject ifTrue: [ ^ true ].
+	anotherObject class = self class ifFalse: [ ^ false ].
+
 	^ anotherObject color = self color
 ]
 
@@ -63,7 +73,8 @@ BlColorPaint >> color: aColor [
 
 { #category : #comparing }
 BlColorPaint >> hash [
-	^ self color hash
+
+	^ super hash bitXor: color hash
 ]
 
 { #category : #testing }

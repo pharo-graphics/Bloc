@@ -1,7 +1,10 @@
 Class {
 	#name : #BlFocusProcessorTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-Examples-Event-Scripter'
+	#instVars : [
+		'scripter'
+	],
+	#category : #'Bloc-Examples-EventHandling'
 }
 
 { #category : #running }
@@ -171,14 +174,26 @@ BlFocusProcessorTest >> newScripterElement [
 			yourself
 ]
 
+{ #category : #running }
+BlFocusProcessorTest >> setUp [
+
+	super setUp.
+	scripter := BlDevScripter new.
+	scripter element: self newScripterElement.
+	scripter settle
+]
+
+{ #category : #running }
+BlFocusProcessorTest >> tearDown [
+
+	scripter close.
+	super tearDown
+]
+
 { #category : #'tests - lose focus' }
 BlFocusProcessorTest >> testLoseFocus01GiveFocusToChild1 [
 
-	| aScripter |
-	aScripter := BlDevScripter new.
-	aScripter element: self newScripterElement.
-
-	aScripter substeps: 'Give focus to child-1' do: [ :aStep |
+	scripter substeps: 'Give focus to child-1' do: [ :aStep |
 		aStep requestFocus onChildNamed: #'child-1'.
 
 		aStep check
@@ -263,23 +278,23 @@ BlFocusProcessorTest >> testLoseFocus01GiveFocusToChild1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
-			equals: [ aScripter element childWithId: #'child-1' ];
-			onFocusProcessor ].
+			value: [ :aSpace | aSpace focusOwner ]
+			equals: [ scripter element childWithId: #'child-1' ];
+			onSpace ].
 
-	^ aScripter syncContinue
+	scripter syncContinue
 ]
 
 { #category : #'tests - lose focus' }
 BlFocusProcessorTest >> testLoseFocus02RemoveChild1 [
 
-	| aScripter aChild1 |
-	aScripter := self testLoseFocus01GiveFocusToChild1.
+	| aChild1 |
+	self testLoseFocus01GiveFocusToChild1.
 
-	aChild1 := aScripter root childWithId: #'child-1'.
-	aScripter set key: #'child-1' value: [ aChild1 ].
+	aChild1 := scripter root childWithId: #'child-1'.
+	scripter set key: #'child-1' value: [ aChild1 ].
 
-	aScripter substeps: 'Remove child-1' do: [ :aStep |
+	scripter substeps: 'Remove child-1' do: [ :aStep |
 		aStep do
 			action: [ :anElement | anElement removeFromParent ];
 			id: #'child-1'.
@@ -371,22 +386,22 @@ BlFocusProcessorTest >> testLoseFocus02RemoveChild1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
-			equals: [ aScripter element childWithId: #'container-1' ];
-			onFocusProcessor ].
+			value: [ :aSpace | aSpace focusOwner ]
+			equals: [ scripter element childWithId: #'container-1' ];
+			onSpace ].
 
-	^ aScripter syncContinue
+	scripter syncContinue
 ]
 
 { #category : #'tests - lose focus' }
 BlFocusProcessorTest >> testLoseFocus03AddBackChild1 [
 
-	| aScripter aChild1 |
-	aScripter := self testLoseFocus02RemoveChild1.
+	| aChild1 |
+	self testLoseFocus02RemoveChild1.
 
-	aChild1 := aScripter userData at: #'child-1'.
+	aChild1 := scripter userData at: #'child-1'.
 
-	aScripter substeps: 'Add child-1 back' do: [ :aStep |
+	scripter substeps: 'Add child-1 back' do: [ :aStep |
 		aStep do
 			action: [ :anElement | anElement addChild: aChild1 ];
 			id: #'container-1'.
@@ -478,21 +493,17 @@ BlFocusProcessorTest >> testLoseFocus03AddBackChild1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
-			equals: [ aScripter element childWithId: #'child-1' ];
-			onFocusProcessor ].
+			value: [ :aSpace | aSpace focusOwner ]
+			equals: [ scripter element childWithId: #'child-1' ];
+			onSpace ].
 
-	^ aScripter syncContinue
+	scripter syncContinue
 ]
 
 { #category : #'tests - request focus' }
 BlFocusProcessorTest >> testRequestFocus01Parent [
 
-	| aScripter |
-	aScripter := BlDevScripter new.
-	aScripter element: self newScripterElement.
-
-	aScripter substeps: 'Request focus on parent' do: [ :aStep |
+	scripter substeps: 'Request focus on parent' do: [ :aStep |
 		aStep requestFocus.
 
 		aStep check
@@ -517,20 +528,19 @@ BlFocusProcessorTest >> testRequestFocus01Parent [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
-			equals: [ aScripter element ];
-			onFocusProcessor ].
+			value: [ :aSpace | aSpace focusOwner ]
+			equals: [ scripter element ];
+			onSpace ].
 
-	^ aScripter syncContinue
+	scripter syncContinue
 ]
 
 { #category : #'tests - request focus' }
 BlFocusProcessorTest >> testRequestFocus02Container1 [
 
-	| aScripter |
-	aScripter := self testRequestFocus01Parent.
+	self testRequestFocus01Parent.
 
-	aScripter substeps: 'Request focus on container-1' do: [ :aStep |
+	scripter substeps: 'Request focus on container-1' do: [ :aStep |
 		aStep requestFocus onChildNamed: #'container-1'.
 
 		aStep check
@@ -575,20 +585,19 @@ BlFocusProcessorTest >> testRequestFocus02Container1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
-			equals: [ aScripter element childWithId: #'container-1' ];
-			onFocusProcessor ].
+			value: [ :aSpace | aSpace focusOwner ]
+			equals: [ scripter element childWithId: #'container-1' ];
+			onSpace ].
 
-	^ aScripter syncContinue
+	scripter syncContinue
 ]
 
 { #category : #'tests - request focus' }
 BlFocusProcessorTest >> testRequestFocus03Container2 [
 
-	| aScripter |
-	aScripter := self testRequestFocus02Container1.
+	self testRequestFocus02Container1.
 
-	aScripter substeps: 'Request focus on container-2' do: [ :aStep |
+	scripter substeps: 'Request focus on container-2' do: [ :aStep |
 		aStep requestFocus onChildNamed: #'container-2'.
 
 		aStep check
@@ -653,20 +662,19 @@ BlFocusProcessorTest >> testRequestFocus03Container2 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
-			equals: [ aScripter element childWithId: #'container-2' ];
-			onFocusProcessor ].
+			value: [ :aSpace | aSpace focusOwner ]
+			equals: [ scripter element childWithId: #'container-2' ];
+			onSpace ].
 
-	^ aScripter syncContinue
+	scripter syncContinue
 ]
 
 { #category : #'tests - request focus' }
 BlFocusProcessorTest >> testRequestFocus04Child1 [
 
-	| aScripter |
-	aScripter := self testRequestFocus03Container2.
+	self testRequestFocus03Container2.
 
-	aScripter substeps: 'Request focus on child-1' do: [ :aStep |
+	scripter substeps: 'Request focus on child-1' do: [ :aStep |
 		aStep requestFocus onChildNamed: #'child-1'.
 
 		aStep check
@@ -751,20 +759,19 @@ BlFocusProcessorTest >> testRequestFocus04Child1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
-			equals: [ aScripter element childWithId: #'child-1' ];
-			onFocusProcessor ].
+			value: [ :aSpace | aSpace focusOwner ]
+			equals: [ scripter element childWithId: #'child-1' ];
+			onSpace ].
 
-	^ aScripter syncContinue
+	scripter syncContinue
 ]
 
 { #category : #'tests - request focus' }
 BlFocusProcessorTest >> testRequestFocus05Child4 [
 
-	| aScripter |
-	aScripter := self testRequestFocus04Child1.
+	self testRequestFocus04Child1.
 
-	aScripter substeps: 'Request focus on child-4' do: [ :aStep |
+	scripter substeps: 'Request focus on child-4' do: [ :aStep |
 		aStep requestFocus onChildNamed: #'child-4'.
 
 		aStep check
@@ -869,20 +876,19 @@ BlFocusProcessorTest >> testRequestFocus05Child4 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
-			equals: [ aScripter element childWithId: #'child-4' ];
-			onFocusProcessor ].
+			value: [ :aSpace | aSpace focusOwner ]
+			equals: [ scripter element childWithId: #'child-4' ];
+			onSpace ].
 
-	^ aScripter syncContinue
+	scripter syncContinue
 ]
 
 { #category : #'tests - request focus' }
 BlFocusProcessorTest >> testRequestFocus06Container1 [
 
-	| aScripter |
-	aScripter := self testRequestFocus05Child4.
+	self testRequestFocus05Child4.
 
-	aScripter substeps: 'Request focus on container-1' do: [ :aStep |
+	scripter substeps: 'Request focus on container-1' do: [ :aStep |
 		aStep requestFocus onChildNamed: #'container-1'.
 
 		aStep check
@@ -936,12 +942,12 @@ BlFocusProcessorTest >> testRequestFocus06Container1 [
 			onChildNamed: #'container-2'.
 
 		aStep check
-			label: 'Check focus-out fired on conatiner-1';
+			label: 'Check focus-out fired on container-2';
 			value: [ :anElement | anElement focusOutCount ] equals: 2;
 			onChildNamed: #'container-2'.
 
 		aStep check
-			label: 'Check blur not fired on container-1';
+			label: 'Check blur not fired on container-2';
 			value: [ :anElement | anElement blurCount ] equals: 1;
 			onChildNamed: #'container-2'.
 
@@ -956,7 +962,7 @@ BlFocusProcessorTest >> testRequestFocus06Container1 [
 			onChildNamed: #'container-1'.
 
 		aStep check
-			label: 'Check focus-out not fired on conatiner-1';
+			label: 'Check focus-out not fired on container-1';
 			value: [ :anElement | anElement focusOutCount ] equals: 2;
 			onChildNamed: #'container-1'.
 
@@ -987,9 +993,9 @@ BlFocusProcessorTest >> testRequestFocus06Container1 [
 
 		aStep check
 			label: 'Check focus owner';
-			value: [ :aFocusProcessor | aFocusProcessor focusOwner ]
-			equals: [ aScripter element childWithId: #'container-1' ];
-			onFocusProcessor ].
+			value: [ :aSpace | aSpace focusOwner ]
+			equals: [ scripter element childWithId: #'container-1' ];
+			onSpace ].
 
-	^ aScripter syncContinue
+	scripter syncContinue
 ]

@@ -1,28 +1,23 @@
 "
-I am the abstract class for a Host.
-I define an environment that can be used to provide actual screen spaces and rendering.
-A Host can be compared to a driver that communicates with the native multimedia API.
+I am the abstract base class and public facade for Bloc Hosts.
 
+A host connects logical Bloc spaces (`BlSpace`) to their execution environment, event loops, and underlying display or window drivers (such as OSWindow with SDL2/SDL3, Morphic, or headless testing environments).
+
+### Architecture
+`BlHost` is an abstract facade defining the universal protocol through which spaces interact with their host, regardless of the host's underlying execution model.
+
+### Key Responsibilities
+- **Space lifecycle**: Managing the opening and closing of spaces (`openSpace:`, `closeSpace:`, `spaces`, `closeSpaces`, `hasSpace:`).
+- **Task scheduling & pulsing**: Providing hooks to run code on the host UI thread (`defer:`), triggering frame updates (`pulse`, `requestPulse`), and querying settlement state (`isSettled`, `settle`, `isSpaceSettled:`).
+- **Window & driver factory**: Creating native window wrappers (`newHostSpaceFor:`) and canvas renderers (`newHostRenderer`).
+- **Host lifecycle**: Handling startup and shutdown hooks (`start`, `stop`, `startUp:`, `shutDown:`).
+- **Synchronization**: Thread-safe waiting for conditions or animations to settle (`waitUntil:timeOutIf:onCompletion:onTimeout:`).
 "
 Class {
 	#name : #BlHost,
 	#superclass : #Object,
-	#classVars : [
-		'PreferableHostClass'
-	],
 	#category : #'Bloc-Universe - Host'
 }
-
-{ #category : #testing }
-BlHost class >> hasUniverse [
-
-	^ BlParallelUniverse existsForHost: self
-]
-
-{ #category : #'api - lifecycle' }
-BlHost class >> isRunning [
-	^ self subclassResponsibility
-]
 
 { #category : #'driver selection' }
 BlHost class >> isSupported [
@@ -31,104 +26,180 @@ BlHost class >> isSupported [
 ]
 
 { #category : #'driver selection' }
-BlHost class >> label [
-	"Return a human readable title to identify myself."
+BlHost class >> order [
+	"Return host order as positive number which influences host order and selection of a default host.
+	A lower value is more likely to become the default host."
 
 	^ self subclassResponsibility
 ]
 
 { #category : #'driver selection' }
 BlHost class >> pickHost [
-	"Answer a new instance of the preferable host."
-	
-	^ self preferableHostClass new
+	self
+		deprecated: 'Use Bloc preferredHost instead'
+		transformWith: '`@receiver pickHost' -> 'Bloc preferredHost'.
+
+	^ Bloc preferredHost
 ]
 
 { #category : #settings }
 BlHost class >> preferableHostClass [
+	self
+		deprecated: 'Use BlHostRegistry default preferredHost class instead'
+		transformWith: '`@receiver preferableHostClass' -> 'BlHostRegistry default preferredHost class'.
 
-	^ PreferableHostClass ifNil: [
-		PreferableHostClass := self prioritaryHostClass ]
+	^ BlHostRegistry default preferredHost class
 ]
 
 { #category : #settings }
 BlHost class >> preferableHostClass: aHostClass [
-	
-	PreferableHostClass := aHostClass
+	| matchingHost |
+	self
+		deprecated: 'Use BlHostRegistry default preferredHost: instead'
+		transformWith: '`@receiver preferableHostClass: `@arg' -> 'BlHostRegistry default preferredHost: (`@arg default)'.
 
+	matchingHost := BlHostRegistry default availableHosts 
+		detect: [ :each | each class = aHostClass ]
+		ifNone: [ 
+			| newHost |
+			newHost := aHostClass default.
+			BlHostRegistry default registerHost: newHost.
+			newHost ].
+	BlHostRegistry default preferredHost: matchingHost
 ]
 
 { #category : #'driver selection' }
 BlHost class >> prioritaryHostClass [
-	"Answer either the supported host with the lowest priority, or
-	`BlHeadlessHost` if there isn't any supported host."
+	"Answer the supported host with the lowest priority."
 
-	^ self supportedHostClasses
-		ifEmpty: [ BlHeadlessHost ]
-		ifNotEmpty: [ :theHostClasses | theHostClasses first ]
+	self
+		deprecated: 'Use BlHostRegistry default preferredHost class instead'
+		transformWith: '`@receiver prioritaryHostClass' -> 'BlHostRegistry default preferredHost class'.
+
+	^ BlHostRegistry default preferredHost class
 ]
 
 { #category : #'driver selection' }
 BlHost class >> priority [
-	"Return host priority as positive number which influences host order
-	and selection of a default host.
-	A lower value is more likely to become the default host."
-	
-	^ self subclassResponsibility
-]
 
-{ #category : #settings }
-BlHost class >> settingsOn: aBuilder [
-	<systemsettings>
+	self
+		deprecated: 'Use #order instead'
+		transformWith: '`@receiver priority' -> '`@receiver order'.
 
-	(aBuilder pickOne: #preferableHostClass)
-		parent: Bloc groupSymbolForBloc;
-		target: self;
-		order: 1;
-		label: 'Preferable host';
-		domainValues: (self supportedHostClasses
-			collect: [ :aHostClass | aHostClass label -> aHostClass ]);
-		description: 'Choose the option that spaces will use to open, unless they have a particular host.'.
-
-]
-
-{ #category : #'api - lifecycle' }
-BlHost class >> start [
-
-	self subclassResponsibility
-]
-
-{ #category : #'api - lifecycle' }
-BlHost class >> stop [
-
-	self subclassResponsibility
+	^ self order
 ]
 
 { #category : #'driver selection' }
 BlHost class >> supportedHostClasses [
 	"Return all supported Bloc host classes, sorted by priority (lowest first)."
 
-	^ (self allSubclasses
-			select: [ :aHostClass | aHostClass isSupported ])
-			sort: [ :a :b | a priority < b priority ]
+	self
+		deprecated: 'Use BlHostRegistry default availableHostClasses instead'
+		transformWith: '`@receiver supportedHostClasses' -> 'BlHostRegistry default availableHostClasses'.
+
+	^ BlHostRegistry default availableHostClasses
 ]
 
-{ #category : #'api - ui process' }
-BlHost class >> uiProcessDo: aBlock [
-	"Evaluate aBlock with the running UI Process of this host if any"
+{ #category : #'api - spaces' }
+BlHost >> closeSpace: aSpace [
+	"Close aSpace managed by this host."
+
+	self subclassResponsibility
 ]
 
-{ #category : #'host space - accessing' }
-BlHost class >> universe [
+{ #category : #'api - spaces' }
+BlHost >> closeSpaces [
+	"Close all spaces managed by this host."
 
-	^ BlParallelUniverse forHost: self
+	self subclassResponsibility
+]
+
+{ #category : #'api - spaces' }
+BlHost >> defer: aValuable [
+	"Enqueue a valuable from any process to be executed in the host UI process at the beginning of the next pulse cycle."
+
+	self subclassResponsibility
+]
+
+{ #category : #'error handling' }
+BlHost >> denyPulseProcess [
+	"Signal an error if the active process is the pulse loop process of this host.
+	Blocking synchronization from the pulse loop process would deadlock the host loop."
+
+	self isPulseProcessActive ifTrue: [
+		self error: 'Cannot perform blocking synchronization from the pulse process as it would deadlock the host loop.' ]
+]
+
+{ #category : #testing }
+BlHost >> hasSpace: aSpace [
+	"Return true if a given space is registered with this host, false otherwise."
+
+	^ self spaces includes: aSpace
+]
+
+{ #category : #testing }
+BlHost >> hasUniverse [
+	"Return true if this host uses an internal universe to coordinate spaces."
+
+	^ false
+]
+
+{ #category : #'host - testing' }
+BlHost >> isPulseProcessActive [
+	"Return true if the active process is the pulse loop process of this host"
+
+	^ false
 ]
 
 { #category : #'api - lifecycle' }
 BlHost >> isRunning [
 	"Return true if host is initialized and running"
 
-	^ self class isRunning
+	^ false
+]
+
+{ #category : #testing }
+BlHost >> isSettled [
+	"Return true if there are no deferred actions waiting to be executed on this host."
+
+	^ true
+]
+
+{ #category : #testing }
+BlHost >> isSpaceClosing: aSpace [
+	"Return true if a given space is currently queued to be closed on this host, false otherwise."
+
+	^ false
+]
+
+{ #category : #testing }
+BlHost >> isSpaceOpening: aSpace [
+	"Return true if a space is currently queued to be opened on this host, false otherwise."
+
+	^ false
+]
+
+{ #category : #testing }
+BlHost >> isSpaceSettled: aSpace [
+	"Return true if there are no pending lifecycle actions for aSpace and, if opened, all its frame phases are settled."
+
+	^ (self isSpaceOpening: aSpace) not and: [
+		(self isSpaceClosing: aSpace) not and: [
+			aSpace isOpened not or: [
+				aSpace areFramePhasesSettled ] ] ]
+]
+
+{ #category : #testing }
+BlHost >> isSupported [
+
+	^ self class isSupported
+]
+
+{ #category : #accessing }
+BlHost >> label [
+	"Return a human readable title to identify myself."
+
+	^ self subclassResponsibility
 ]
 
 { #category : #'host space - accessing' }
@@ -151,32 +222,120 @@ BlHost >> offscreenMeasureTextParagraph: aBlTextParagraph [
 	BlHostRenderer preferableClass offscreenMeasureTextParagraph: aBlTextParagraph
 ]
 
-{ #category : #'host - testing' }
-BlHost >> runOneCycle [
-	
-	"The host can do something while waiting for the pulse to happen. Useful for Morphic when the test run in the UI thread"
+{ #category : #'api - spaces' }
+BlHost >> openSpace: aSpace [
+	"Open aSpace on this host."
+
+	self subclassResponsibility
+]
+
+{ #category : #accessing }
+BlHost >> order [
+
+	^ self class order
+]
+
+{ #category : #accessing }
+BlHost >> priority [
+
+	self
+		deprecated: 'Use #order instead'
+		transformWith: '`@receiver priority' -> '`@receiver order'.
+
+	^ self order
+]
+
+{ #category : #'api - pulse' }
+BlHost >> pulse [
+	"Execute a single pulse cycle across all spaces managed by this host. Subclasses may override."
+]
+
+{ #category : #'api - pulse process' }
+BlHost >> pulseProcess [
+	"Return the pulse loop Process if running, or nil."
+
+	^ nil
+]
+
+{ #category : #enumerating }
+BlHost >> pulseProcessDo: aBlock [
+	"Evaluate aBlock with the running pulse Process of this host if any"
+
+	self
+		deprecated: 'Use #pulseProcess ifNotNil: instead'
+		transformWith: '`@receiver pulseProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
+
+	^ self pulseProcess ifNotNil: aBlock
+]
+
+{ #category : #'api - pulse' }
+BlHost >> requestPulse [
+	"Request a pulse cycle from this host. Subclasses with pulse loops implement this to wake the loop."
+
+]
+
+{ #category : #'api - lifecycle' }
+BlHost >> requestStop [
+	"Request the host to stop its pulse loop gracefully without terminating the active process.
+	Subclasses with background loops should override to implement cooperative stopping."
+
+]
+
+{ #category : #'api - spaces' }
+BlHost >> settle [
+	"Wait until this host has executed all pending deferred actions and reached equilibrium."
+
+	self
+		waitUntil: [ self isSettled ]
+		timeOutIf: [ false ]
+		onCompletion: [ ]
+		onTimeout: [ ]
+]
+
+{ #category : #'system startup' }
+BlHost >> shutDown: isQuitting [
+	"Handle system shutdown / session suspend."
+
+	self stop
+]
+
+{ #category : #'host space - accessing' }
+BlHost >> spaces [
+	"Answer the collection of spaces managed by this host."
+
+	self subclassResponsibility
 ]
 
 { #category : #'api - lifecycle' }
 BlHost >> start [
+	"Start background loops, workers, or native resources for this host. Subclasses may override."
+]
 
-	self class start
+{ #category : #'system startup' }
+BlHost >> startUp: isResuming [
+	"Handle system startup / session resume."
+
+	self start
 ]
 
 { #category : #'api - lifecycle' }
 BlHost >> stop [
-
-	self class stop
+	"Stop background loops, workers, or native resources for this host. Subclasses may override."
 ]
 
 { #category : #enumerating }
 BlHost >> uiProcessDo: aBlock [
 
-	self class uiProcessDo: aBlock
+	self
+		deprecated: 'Use #pulseProcess ifNotNil: instead'
+		transformWith: '`@receiver uiProcessDo: `@arg' -> '`@receiver pulseProcess ifNotNil: `@arg'.
+
+	^ self pulseProcess ifNotNil: aBlock
 ]
 
-{ #category : #'host space - accessing' }
-BlHost >> universe [
-	
-	^ self class universe
+{ #category : #'api - spaces' }
+BlHost >> waitUntil: aConditionValuable timeOutIf: aTimeoutValuable onCompletion: completionBlock onTimeout: timeoutBlock [
+	"Evaluate aConditionValuable repeatedly until it answers true. If aTimeoutValuable answers true first, evaluate timeoutBlock. Otherwise, evaluate completionBlock."
+
+	self subclassResponsibility
 ]

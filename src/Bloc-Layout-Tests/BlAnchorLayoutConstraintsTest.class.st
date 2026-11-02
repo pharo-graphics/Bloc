@@ -1,26 +1,20 @@
-"
-A BlAnchorLayoutTest is a test class for testing the behavior of BlAnchorLayout
-"
 Class {
 	#name : #BlAnchorLayoutConstraintsTest,
-	#superclass : #BlParameterizedHostTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'parent',
-		'space',
 		'child'
 	],
 	#category : #'Bloc-Layout-Tests-Anchor'
 }
 
 { #category : #running }
-BlAnchorLayoutConstraintsTest >> setUp [ 
+BlAnchorLayoutConstraintsTest >> setUp [
 
 	super setUp.
-	space := self newTestingSpace. 
-	parent := BlElement new. 
-	parent constraintsDo: [:c | c horizontal matchParent. c vertical matchParent ].
+	parent := BlElement new.
+	parent extent: 500 @ 500.
 	parent layout: BlAnchorLayout new.
-	space root addChild: parent.
 	child := BlElement new.
 	parent addChild: child
 ]
@@ -32,14 +26,14 @@ BlAnchorLayoutConstraintsTest >> testActionAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := child actionAnchor: [ :v :e | e position ].
-	self waitTestingSpaces.
 
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 10 @ 20.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -47,7 +41,7 @@ BlAnchorLayoutConstraintsTest >> testActionAnchor [
 
 	self
 		assert:
-		(anchor appliedOnRectangle: child bounds asRectangle withValue: 100 asPoint)
+		(anchor appliedOnRectangle: child bounds asRectangle withValue: 100 @ 100)
 		equals: (10 @ 20 corner: 110 @ 140)
 ]
 
@@ -58,17 +52,16 @@ BlAnchorLayoutConstraintsTest >> testBottomAnchor [
 	| anchor |
 	child position: 0 @ 0.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementBottomAnchor new
 		          element: child;
 		          yourself.
 
-	self waitTestingSpaces.
-
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -87,17 +80,16 @@ BlAnchorLayoutConstraintsTest >> testBottomLeftAnchor [
 	| anchor |
 	child position: 110 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementBottomLeftAnchor new
 		          element: child;
 		          yourself.
 
-	self waitTestingSpaces.
-
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 0 @ 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -117,17 +109,16 @@ BlAnchorLayoutConstraintsTest >> testBottomRightAnchor [
 	| anchor |
 	child position: 110 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementBottomRightAnchor new
 		          element: child;
 		          yourself.
 
-	self waitTestingSpaces.
-
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 0 @ 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -147,17 +138,16 @@ BlAnchorLayoutConstraintsTest >> testExtentAnchor [
 	| anchor |
 	child position: 110 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementExtentAnchor new
 		          element: child;
 		          yourself.
 
-	self waitTestingSpaces.
-
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 0 @ 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -177,17 +167,16 @@ BlAnchorLayoutConstraintsTest >> testHeightAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementHeightAnchor new
 		          element: child;
 		          yourself.
 
-	self waitTestingSpaces.
-
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -206,17 +195,16 @@ BlAnchorLayoutConstraintsTest >> testHorizontalCenterAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementHorizontalCenterAnchor new
 		          element: child;
 		          yourself.
 
-	self waitTestingSpaces.
-
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -235,17 +223,16 @@ BlAnchorLayoutConstraintsTest >> testLeftAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementLeftAnchor new
 		          element: child;
 		          yourself.
 
-	self waitTestingSpaces.
-
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -264,14 +251,14 @@ BlAnchorLayoutConstraintsTest >> testNeutralAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := child neutralAnchor: 0.
-	self waitTestingSpaces.
 
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -290,14 +277,14 @@ BlAnchorLayoutConstraintsTest >> testNilAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := child nilAnchor.
-	self waitTestingSpaces.
 
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: nil.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -316,17 +303,16 @@ BlAnchorLayoutConstraintsTest >> testRightAnchor [
 	| anchor |
 	child position: 110 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementRightAnchor new
 		          element: child;
 		          yourself.
 
-	self waitTestingSpaces.
-
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -345,17 +331,16 @@ BlAnchorLayoutConstraintsTest >> testTopAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementTopAnchor new
 		          element: child;
 		          yourself.
 
-	self waitTestingSpaces.
-
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -374,17 +359,16 @@ BlAnchorLayoutConstraintsTest >> testTopLeftAnchor [
 	| anchor |
 	child position: 110 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementTopLeftAnchor new
 		          element: child;
 		          yourself.
 
-	self waitTestingSpaces.
-
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 0 @ 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -404,17 +388,16 @@ BlAnchorLayoutConstraintsTest >> testTopRightAnchor [
 	| anchor |
 	child position: 110 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementTopRightAnchor new
 		          element: child;
 		          yourself.
 
-	self waitTestingSpaces.
-
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 0 @ 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -434,17 +417,16 @@ BlAnchorLayoutConstraintsTest >> testVerticalCenterAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementVerticalCenterAnchor new
 		          element: child;
 		          yourself.
 
-	self waitTestingSpaces.
-
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)
@@ -463,17 +445,16 @@ BlAnchorLayoutConstraintsTest >> testWidthAnchor [
 	| anchor |
 	child position: 10 @ 20.
 	child extent: 100 @ 120.
+	parent forceLayout.
 
 	anchor := BlElementWidthAnchor new
 		          element: child;
 		          yourself.
 
-	self waitTestingSpaces.
-
 	self
 		assert:
 		(anchor valueInBounds:
-			 (Rectangle origin: 0 asPoint corner: 0 asPoint))
+			 (Rectangle origin: 0 @ 0 corner: 0 @ 0))
 		equals: 0.
 	self
 		assert: (anchor valueInBounds: child bounds asRectangle)

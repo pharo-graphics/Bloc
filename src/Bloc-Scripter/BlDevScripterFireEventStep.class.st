@@ -76,7 +76,7 @@ BlDevScripterFireEventStep >> playOn: aScripter [
 	aTarget := self target findTargetStartingInScripter: aScripter.
 	self position updateEventPosition: self event in: aTarget.
 	BlEvent fireEvent: self event target: aTarget.
-	aScripter pulse.
+	aScripter settle.
 ]
 
 { #category : #'accessing - position' }

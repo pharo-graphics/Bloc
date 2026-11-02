@@ -13,13 +13,21 @@ Class {
 { #category : #accessing }
 BlFocusProcessor >> focusOwner [
 
-	^ self space focusOwner
+	self
+		deprecated: 'Use space focusOwner instead'
+		transformWith: '`@receiver focusOwner' -> '`@receiver space focusOwner'.
+
+	^ space focusOwner
 ]
 
 { #category : #accessing }
 BlFocusProcessor >> focusOwner: anElement [
 
-	self space focusOwner: anElement
+	self
+		deprecated: 'Use space focusOwner: instead'
+		transformWith: '`@receiver focusOwner: `@arg' -> '`@receiver space focusOwner: `@arg'.
+
+	space focusOwner: anElement
 ]
 
 { #category : #'focus - processing' }
@@ -29,29 +37,29 @@ BlFocusProcessor >> handleMouseDown: anEvent [
 
 { #category : #testing }
 BlFocusProcessor >> hasFocusOwner [
-	"Return true if there is an element holding focus, false otherwise.
+	"Return true if there is an element owning focus in my space, false otherwise.
 	When there are no elements interested in focus it is given to the root element.
 	Note: focus owner may not exist during space initialization or inbetween blur and focus events"
 
-	^ self focusOwner notNil
+	^ space focusOwner notNil
 ]
 
 { #category : #'focus - requesting' }
 BlFocusProcessor >> loseFor: anElement [
 
-	| focusHolder |
-	focusHolder := anElement focusHolder.
-	self focusOwner ~= focusHolder ifTrue: [ ^ self ].
+	| focusDelegate |
+	focusDelegate := anElement focusDelegate.
+	space focusOwner ~= focusDelegate ifTrue: [ ^ self ].
 
-	self processBlur: focusHolder.
+	self processBlur: focusDelegate.
 	"don't forget to forget focused element"
-	self focusOwner: nil
+	space focusOwner: nil
 ]
 
 { #category : #'initialize-release' }
 BlFocusProcessor >> onSpaceClosed [
 
-	self focusOwner: nil.
+	space focusOwner: nil.
 	focusChain := nil
 ]
 
@@ -60,7 +68,7 @@ BlFocusProcessor >> processBlur: anElement [
 	"Process and fire the corresponding blur events that occurs when an element looses focus."
 
 	"First, mark the received element as unfocused, then send events"
-	self space focusOwner: nil.
+	space focusOwner: nil.
 	anElement focused: false.
 	
 	"Fire events. Blur doesn't bubble; FocusOut does bubble."
@@ -85,8 +93,7 @@ BlFocusProcessor >> processBlur: anElement dueToFocus: aNewFocusedElement dueToR
 	"Process and fire the corresponding blur events that occurs when an element looses focus."
 
 	"First, mark the received element as unfocused, then send events"
-
-	self space focusOwner: nil.
+	space focusOwner: nil.
 	anElement focused: false.
 
 	"Fire Blur; it doesn't bubble"
@@ -119,8 +126,8 @@ BlFocusProcessor >> processFocus: anElement [
 	occurs when an element gains focus."
 
 	"First, mark the element as focused"
-	self focusOwner: anElement.
-	focusChain := BlFocusChain of: self focusOwner.
+	space focusOwner: anElement.
+	focusChain := BlFocusChain of: space focusOwner.
 	anElement focused: true.
 
 	"Fire events. Focus doesn't bubble; FocusIn does bubble."
@@ -143,8 +150,8 @@ BlFocusProcessor >> processFocus: anElement dueToTransferFrom: aPreviousFocus [
 
 	"First, mark the element as focused"
 
-	self focusOwner: anElement.
-	focusChain := BlFocusChain of: self focusOwner.
+	space focusOwner: anElement.
+	focusChain := BlFocusChain of: space focusOwner.
 	anElement focused: true.
 
 	"Fire Focus; it doesn't bubble"
@@ -178,25 +185,25 @@ BlFocusProcessor >> processFocus: anElement dueToTransferFrom: aPreviousFocus [
 { #category : #'focus - processing' }
 BlFocusProcessor >> processWindowFocusIn: anEvent [
 
-	self space grabFocus
+	space grabFocus
 ]
 
 { #category : #'focus - processing' }
 BlFocusProcessor >> processWindowFocusOut: anEvent [
 
-	self space ungrabFocus
+	space ungrabFocus
 ]
 
 { #category : #'focus - requesting' }
 BlFocusProcessor >> requestFor: anElement dueToRemoval: aBoolean [
 
-	| aPreviousFocusOwner focusHolder |
-	focusHolder := anElement focusHolder.
-	self focusOwner = focusHolder ifTrue: [ ^ self ].
-	focusHolder isFocusable ifFalse: [ ^ self ].
+	| aPreviousFocusOwner focusDelegate |
+	focusDelegate := anElement focusDelegate.
+	space focusOwner = focusDelegate ifTrue: [ ^ self ].
+	focusDelegate isFocusable ifFalse: [ ^ self ].
 
 	"keep reference to the previous focus owner"
-	aPreviousFocusOwner := self focusOwner.
+	aPreviousFocusOwner := space focusOwner.
 
 	"we should only process blur event when there is a
 	focused element; otherwise, skip it."
@@ -205,13 +212,13 @@ BlFocusProcessor >> requestFor: anElement dueToRemoval: aBoolean [
 			processBlur: aPreviousFocusOwner
 			dueToFocus: anElement
 			dueToRemoval: aBoolean ].
-	self focusOwner: nil.
+	space focusOwner: nil.
 
 	"focus is processed with new requested focus owner"
 	aPreviousFocusOwner
-		ifNil: [ self processFocus: focusHolder ]
+		ifNil: [ self processFocus: focusDelegate ]
 		ifNotNil: [
 			self
-				processFocus: focusHolder
+				processFocus: focusDelegate
 				dueToTransferFrom: aPreviousFocusOwner ]
 ]

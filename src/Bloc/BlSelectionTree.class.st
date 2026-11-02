@@ -67,20 +67,22 @@ BlSelectionTree >> containsMonotoneSelection: aSelection [
 
 { #category : #'tree - deletion' }
 BlSelectionTree >> delete: aMonotoneTextSelection [
-	| theOverlapping |
+	"Remove aMonotoneTextSelection: delete every overlapping node, then insert back
+	the parts of their selections that lie outside of aMonotoneTextSelection"
+
+	| theOverlappingSelections theOverlapping |
 	self hasRoot
 		ifFalse: [ ^ self ].
-		
-	theOverlapping := self findOverlapping: aMonotoneTextSelection.
-	theOverlapping
+	theOverlappingSelections := (self findOverlapping: aMonotoneTextSelection) collect: [ :aSelectionNode | aSelectionNode selection ].
+	theOverlappingSelections
 		ifEmpty: [ ^ self ].
-	
-	theOverlapping reverseDo: #delete.
-	
-	theOverlapping
-		collect: [ :aSelectionNode | aSelectionNode selection complement: aMonotoneTextSelection ]
-		thenDo: [ :aComplementSelection | aComplementSelection
-			do: [ :aSelection | aSelection isNotEmpty ifTrue: [ self insert: aSelection ] ] ]
+	"Delete one node at a time, searching again after every deletion: deleting a node with two children
+	moves the selection of its successor into it, so previously found nodes may no longer hold their selection"
+	[ self hasRoot and: [ (theOverlapping := self findOverlapping: aMonotoneTextSelection) isNotEmpty ] ]
+		whileTrue: [ theOverlapping first delete ].
+	theOverlappingSelections do: [ :aSelection |
+		(aSelection complement: aMonotoneTextSelection) do: [ :aComplementSelection |
+			aComplementSelection isNotEmpty ifTrue: [ self insert: aComplementSelection ] ] ]
 ]
 
 { #category : #'tree - enumerating' }

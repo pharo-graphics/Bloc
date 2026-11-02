@@ -15,7 +15,7 @@ BlCollapseWidget class >> exampleSimpleCollapse [
 	<script>
 	| collapse bgPaint collapsed collapsedChild |
 	collapse := self new.
-	collapse position: 50 asPoint.
+	collapse position: 50 @ 50.
 
 	bgPaint := BlLinearGradientPaint vertical
 		           from: Color lightGreen
@@ -35,7 +35,7 @@ BlCollapseWidget class >> exampleSimpleCollapse [
 	collapsedChild := BlElement new
 		                  background: Color purple;
 		                  extent: 50 @ 100;
-		                  position: 50 asPoint;
+		                  position: 50 @ 50;
 		                  yourself.
 
 	collapsed addChild: collapsedChild.

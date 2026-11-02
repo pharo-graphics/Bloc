@@ -10,7 +10,7 @@ Class {
 { #category : #testing }
 BlDevScripterSelectFilterEventTarget class >> matchesWithInput: anObject [
 	<return: #Boolean>
-	^ anObject isKindOf: BlockClosure
+	^ anObject isBlock
 ]
 
 { #category : #'instance creation' }

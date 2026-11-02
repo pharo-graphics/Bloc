@@ -132,7 +132,7 @@ BlHalo >> initialize [
 	super initialize.
 	self
 		geometry: BlEllipseGeometry new;
-		extent: 20 asPoint;
+		extent: 20 @ 20;
 		background: Color white;
 		opacity: 0.8.
 	self name: 'Unnamed'.

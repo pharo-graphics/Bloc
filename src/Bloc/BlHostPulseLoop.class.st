@@ -1,106 +1,89 @@
 "
-I represent the main loop of a host class, that sends it #pulse regularly.
+I am a rate-capped execution loop that periodically evaluates a valuable in a dedicated process (#start, #stop, #basicStart).
 
-My loop follows the next rules:
-- The #pulsePeriod duration is the minimum amount of time between two subsequent sends of #pulse.
-- If a pulse took more time than #pulsePeriod, then the next pulse may either send the next #pulse immediately, or do a small wait before if another process with lower priority is suspended (and may be starving).
+Loop execution:
+- `periodUS`: Minimum duration in microseconds between consecutive evaluations (configured via #hertz: or #period:).
+- If an evaluation takes longer than the period, I yield cooperatively to processes of the same priority.
+- If spare time remains, I wait on `wakeUpSemaphore` with a timeout, allowing external callers to wake the loop immediately on demand (#wakeUp).
 
-The opened spaces listen the pulse to be synchronized and to update their state when it is needed.
-
+Error handling:
+- Unhandled exceptions automatically spawn a successor process before opening the debugger, preventing the UI from freezing.
+- I track my designated process; if replaced during debugging or retired via #requestStop, the retired process terminates cleanly.
 "
 Class {
 	#name : #BlHostPulseLoop,
 	#superclass : #Object,
 	#instVars : [
-		'hostClass',
+		'periodUS',
+		'lastUS',
+		'durationUS',
+		'wakeUpSemaphore',
 		'loopProcess',
-		'pulsePeriodMS',
-		'msToWaitForBackgroundProcess',
-		'pulseStartMS',
-		'pulseDurationMS'
+		'processPriority',
+		'processName',
+		'stopRequested',
+		'valuable'
 	],
 	#category : #'Bloc-Universe - Host'
 }
 
-{ #category : #'instance creation' }
-BlHostPulseLoop class >> forHost: aHostClass [
+{ #category : #lifecycle }
+BlHostPulseLoop >> basicStart [
+	"Start a new loop process unguardedly without checking if already running."
 
-	^ self basicNew
-		  initialize;
-		  hostClass: aHostClass;
-		  yourself
+	self basicStart: self newLoopProcess
 ]
 
-{ #category : #'instance creation' }
-BlHostPulseLoop class >> new [
+{ #category : #lifecycle }
+BlHostPulseLoop >> basicStart: aProcess [
+	"Install and resume the given loop process unguardedly."
 
-	self error: 'Use #forHost: instead'
-]
-
-{ #category : #accessing }
-BlHostPulseLoop class >> processId [
-
-	^ 'Bloc Main Loop'
-]
-
-{ #category : #period }
-BlHostPulseLoop >> defaultPulsePeriod [
-
-	^ 15 milliSeconds
+	loopProcess := aProcess.
+	loopProcess resume
 ]
 
 { #category : #debug }
 BlHostPulseLoop >> forceStartNewUIProcess [
-	"I should only be used by the logic for opening the debugger.
-	
-	I create and start a new UI thread without stopping the previous one.
-	Normally this leads to incorrect behaviou in Bloc UI process. However 
-	if I am called from the current Bloc UI process when an error happened in 
-	the actual process, and after calling me my sender terminates or suspends 
-	the process my usage should be safe."
-	
-	loopProcess := self newLoopProcess.
-	loopProcess resume.
+
+	self
+		deprecated: 'Use #basicStart instead'
+		transformWith: '`@receiver forceStartNewUIProcess' -> '`@receiver basicStart'.
+
+	^ self basicStart
 ]
 
 { #category : #debug }
-BlHostPulseLoop >> forceStartOfUIProcess: aProces [
-	"I should only be used by the logic for closing the debugger."
-	
-	loopProcess := aProces.
-	loopProcess resume.
+BlHostPulseLoop >> forceStartOfUIProcess: aProcess [
+
+	self
+		deprecated: 'Use #basicStart: instead'
+		transformWith: '`@receiver forceStartOfUIProcess: `@arg' -> '`@receiver basicStart: `@arg'.
+
+	^ self basicStart: aProcess
 ]
 
-{ #category : #accessing }
-BlHostPulseLoop >> hostClass [
+{ #category : #period }
+BlHostPulseLoop >> hertz: aNumber [
 
-	^ hostClass
-]
-
-{ #category : #accessing }
-BlHostPulseLoop >> hostClass: aHostClass [
-
-	hostClass := aHostClass
+	periodUS := (1000000.0 / aNumber) rounded
 ]
 
 { #category : #initialization }
 BlHostPulseLoop >> initialize [
 
 	super initialize.
-
-	self pulsePeriod: self defaultPulsePeriod
+	self hertz: 60.
+	valuable := [ "noop" ].
+	wakeUpSemaphore := Semaphore new.
+	processPriority := Processor userSchedulingPriority.
+	processName := 'Bloc Host Pulse Loop'.
+	stopRequested := false
 ]
 
 { #category : #testing }
 BlHostPulseLoop >> isRunning [
 
-	^ loopProcess isNotNil and: [ loopProcess isTerminated not ]
-]
-
-{ #category : #testing }
-BlHostPulseLoop >> isRunningInTheSameProcess [
-
-	^ Processor activeProcess effectiveProcess == loopProcess
+	^ stopRequested not and: [ loopProcess isNotNil and: [ loopProcess isTerminated not ] ]
 ]
 
 { #category : #'loop process' }
@@ -112,21 +95,26 @@ BlHostPulseLoop >> loop [
 { #category : #'loop process' }
 BlHostPulseLoop >> loopIteration [
 
-	| universe |
+	self isRunning ifFalse: [ ^ false ].
 
 	[
-		pulseStartMS := Time millisecondClockValue.
-		universe := hostClass universe.
-		universe pulse.
-		pulseDurationMS := Time millisecondClockValue - pulseStartMS.
-		self waitUntilNextPulse. ]
-	on: Exception
-	do: [ :e |
-		self forceStartNewUIProcess.
+		| startUS |
+		wakeUpSemaphore consumeAllSignals.
+		startUS := Time microsecondClockValue.
+
+		valuable value.
+
+		lastUS := Time microsecondClockValue.
+		durationUS := lastUS - startUS.
+
+		self isRunning ifFalse: [ ^ false ].
+
+		self waitUntilNextPulse
+	] on: UnhandledException do: [ :e |
+		self basicStart.
 		e pass ].
 
-	"Returns true to continue looping"
-	^ self isRunningInTheSameProcess 
+	^ self ownsActiveProcess
 ]
 
 { #category : #accessing }
@@ -140,33 +128,77 @@ BlHostPulseLoop >> newLoopProcess [
 
 	^ [ self loop ] newProcess
 		  priority: self processPriority;
-		  name: self processId;
+		  name: self processName;
 		  yourself
 ]
 
-{ #category : #'loop process' }
-BlHostPulseLoop >> processId [
+{ #category : #testing }
+BlHostPulseLoop >> ownsActiveProcess [
 
-	^ self class processId
+	^ Processor activeProcess == loopProcess
+]
+
+{ #category : #period }
+BlHostPulseLoop >> period [
+
+	^ Duration microSeconds: periodUS
+]
+
+{ #category : #period }
+BlHostPulseLoop >> period: aDuration [
+
+	periodUS := aDuration asMicroseconds max: 1
+]
+
+{ #category : #'loop process' }
+BlHostPulseLoop >> processName [
+
+	^ processName
+]
+
+{ #category : #'loop process' }
+BlHostPulseLoop >> processName: aString [
+
+	processName := aString
 ]
 
 { #category : #'loop process' }
 BlHostPulseLoop >> processPriority [
 
-	^ 40
+	^ processPriority ifNil: [ Processor userSchedulingPriority ]
+]
+
+{ #category : #'loop process' }
+BlHostPulseLoop >> processPriority: aNumber [
+	"Change the Process priority (takes effect on next #start)"
+
+	processPriority := aNumber
 ]
 
 { #category : #period }
 BlHostPulseLoop >> pulsePeriod [
 
-	^ pulsePeriodMS milliSeconds
+	^ self period
 ]
 
 { #category : #period }
 BlHostPulseLoop >> pulsePeriod: aDuration [
 
-	pulsePeriodMS := aDuration asMilliSeconds.
-	msToWaitForBackgroundProcess := (pulsePeriodMS // 2) min: 1.
+	self period: aDuration
+]
+
+{ #category : #accessing }
+BlHostPulseLoop >> pulseProcess [
+
+	^ loopProcess
+]
+
+{ #category : #lifecycle }
+BlHostPulseLoop >> requestStop [
+	"Request the loop process to stop gracefully at the end of the current iteration."
+
+	stopRequested := true.
+	loopProcess := nil
 ]
 
 { #category : #lifecycle }
@@ -174,35 +206,61 @@ BlHostPulseLoop >> start [
 
 	self isRunning ifTrue: [ ^ self ].
 
-	loopProcess := self newLoopProcess.
-	loopProcess resume
+	stopRequested := false.
+	self basicStart
 ]
 
 { #category : #lifecycle }
 BlHostPulseLoop >> stop [
+	"Stop the loop process. Can be safely sent from any process, including the loop process itself."
 
-	| currentProcess |
-
+	| currentProcess isCurrentActive |
 	self isRunning ifFalse: [ ^ self ].
-	
+
+	stopRequested := true.
+	isCurrentActive := self ownsActiveProcess.
 	currentProcess := loopProcess.
 	loopProcess := nil.
-	currentProcess terminate
+
+	isCurrentActive ifFalse: [
+		currentProcess ifNotNil: [ currentProcess terminate ] ]
+]
+
+{ #category : #accessing }
+BlHostPulseLoop >> stopRequested [
+
+	^ stopRequested
+]
+
+{ #category : #accessing }
+BlHostPulseLoop >> valuable [
+
+	^ valuable
+]
+
+{ #category : #accessing }
+BlHostPulseLoop >> valuable: aValuable [
+
+	valuable := aValuable
 ]
 
 { #category : #period }
 BlHostPulseLoop >> waitUntilNextPulse [
-	"Wait the appropriate amount of time for the next pulse"
+	"Wait the appropriate amount of time for the next pulse."
 
-	| msToWait |
-	"Since a pulse can take longer than #pulsePeriod, msToWait may be negative here
-	(meaning that we shouldn't wait for the next pulse)"
+	| waitUS waitMS |
+	waitUS := periodUS - durationUS.
+	waitUS <= 0 ifTrue: [ ^ Processor yield ].
 
-	"No need to wait"	
-	pulseDurationMS >= pulsePeriodMS ifTrue: [
-		"Processor yield. maybe?" ^ self ].
-	
-	"Need to wait"
-	msToWait := pulsePeriodMS - pulseDurationMS.
-	(Delay forMilliseconds: msToWait) wait
+	waitMS := (waitUS + 500) // 1000.
+	waitMS > 0 ifTrue: [
+		wakeUpSemaphore waitTimeoutMilliseconds: waitMS ]
+]
+
+{ #category : #lifecycle }
+BlHostPulseLoop >> wakeUp [
+	"Wake up the loop process immediately if sleeping between frames, or start it if not running."
+
+	self isRunning ifFalse: [ ^ self start ].
+	wakeUpSemaphore signal
 ]

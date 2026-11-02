@@ -9,7 +9,6 @@ Class {
 	#classTraits : 'TBlSpaceProperties classTrait',
 	#instVars : [
 		'window',
-		'eventFetcher',
 		'keyboardKeyTable',
 		'sdlRenderer',
 		'texture',
@@ -55,28 +54,6 @@ BlOSWindowSDL2HostSpace >> densityDpi [
 	^ 96.0
 ]
 
-{ #category : #'host space - events' }
-BlOSWindowSDL2HostSpace >> enqueueEvent: aBlEvent [
-	"I put events in a queue to be processed later"
-
-	self eventFetcher enqueueEvent: aBlEvent
-]
-
-{ #category : #'host space - accessing' }
-BlOSWindowSDL2HostSpace >> eventFetcher [
-	"Return event fetcher used to enqueue events that should be
-	processed in the beginning of every frame"
-
-	^ eventFetcher
-]
-
-{ #category : #'host space - events' }
-BlOSWindowSDL2HostSpace >> fetchedEventsDo: aBlock [
-	"Flush event queue and evaluate a given block with every queued event as argument"
-	
-	self eventFetcher fetchedEventsDo: aBlock
-]
-
 { #category : #'window - properties' }
 BlOSWindowSDL2HostSpace >> fullscreen: aBoolean [
 	"Switch underlying window to fullscreen if true is given
@@ -88,14 +65,6 @@ BlOSWindowSDL2HostSpace >> fullscreen: aBoolean [
 { #category : #'host space - displaying' }
 BlOSWindowSDL2HostSpace >> hide [
 	window hide
-]
-
-{ #category : #initialization }
-BlOSWindowSDL2HostSpace >> initialize [
-
-	super initialize.
-
-	eventFetcher := BlHostEventFetcher hostSpace: self
 ]
 
 { #category : #initialization }
@@ -121,6 +90,9 @@ BlOSWindowSDL2HostSpace >> initializeRenderer [
 
 { #category : #initialization }
 BlOSWindowSDL2HostSpace >> initializeWithAttributes: initialAttributes [
+
+	"We assume that current driver is the right SDL2 driver"
+	OSWindowDriver current ensureEventLoop.
 
 	window := OSWindow createWithAttributes: initialAttributes.
 	window eventHandler:
@@ -261,7 +233,7 @@ BlOSWindowSDL2HostSpace >> position [
 	"Return window's position in screen coordinates"
 	<return: #Point>
 
-	^ window position
+	^ window ifNotNil: [ :w | w position ] ifNil: [ 0@0 ]
 ]
 
 { #category : #'host space - geometry' }
@@ -283,7 +255,10 @@ BlOSWindowSDL2HostSpace >> resizable: aBoolean [
 
 { #category : #'host space - displaying' }
 BlOSWindowSDL2HostSpace >> show [
-	window show
+
+	window
+		show;
+		focus
 ]
 
 { #category : #'window - text input' }
@@ -330,6 +305,12 @@ BlOSWindowSDL2HostSpace >> title: aString [
 	"Change window's title"
 
 	window title: aString
+]
+
+{ #category : #'host space - displaying' }
+BlOSWindowSDL2HostSpace >> toFront [
+
+	window focus
 ]
 
 { #category : #'host space - geometry' }

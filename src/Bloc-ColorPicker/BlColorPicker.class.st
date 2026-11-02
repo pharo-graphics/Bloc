@@ -178,7 +178,7 @@ BlColorPicker >> initializePreviewElement [
 
 	| previewElementParent |
 	previewElementParent := BlElement new
-		                        extent: 50 asPoint;
+		                        extent: 50 @ 50;
 		                        geometry:
 			                        (BlRoundedRectangleGeometry cornerRadius:
 					                         10);
@@ -188,7 +188,7 @@ BlColorPicker >> initializePreviewElement [
 			                        (BlBorder paint: Color black width: 2).
 
 	previewElementParent addChild:
-		(BlAlphaSlider chessBackgroundFor: 50 asPoint squareSize: 10).
+		(BlAlphaSlider chessBackgroundFor: 50 @ 50 squareSize: 10).
 
 	previewElement := BlElement new
 		                  constraintsDo: [ :c |

@@ -24,6 +24,7 @@ Class {
 	#instVars : [
 		'host',
 		'hostSpace',
+		'eventQueue',
 		'extent',
 		'position',
 		'resizable',
@@ -36,7 +37,6 @@ Class {
 		'focusChain',
 		'pulseRequested',
 		'currentCursor',
-		'session',
 		'focused',
 		'title',
 		'fullscreen',
@@ -50,8 +50,7 @@ Class {
 		'reference',
 		'iconStencil',
 		'rootElement',
-		'userData',
-		'previousVisibleStatus'
+		'userData'
 	],
 	#category : #'Bloc-Space'
 }
@@ -64,446 +63,18 @@ BlSpace class >> defaultRootLabel [
 
 { #category : #'private - change' }
 BlSpace class >> extractRoots: aSetOfElements [
-	| roots |
-	" feenk version 2022-02-01 that eliminate recursion from allParentsDo: "
-	
-	roots := IdentitySet withAll: aSetOfElements.
-	aSetOfElements
-		do:
-			[ :each | 
-			| current |
-			current := each parent.
-			[ current isNil ]
-				whileFalse:
-					[ (roots includes: current)
-						ifTrue:
-							[ roots remove: each ifAbsent: [  ].
-							current := nil ]
-						ifFalse: [ current := current parent ] ] ].
-	^ roots
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> locationInside: anElement [
-	"Return a random space location outside of element bounds"	
-	| theBounds aPosition |
-	
-	anElement topMostParent forceLayout.
-	theBounds := anElement bounds inSpace bounds.
-	aPosition := theBounds atRandom.
-		
 	self
-		assert: [ theBounds containsPoint: aPosition ]
-		description: [ 'Point({1}) must be inside of the bounds({2})' format: { aPosition . theBounds } ].
-		
-	^ aPosition
+		deprecated: 'Use BlElementBoundsUpdater >> #extractRoots: instead'
+		transformWith: '`@receiver extractRoots: `@arg' -> 'BlElementBoundsUpdater new extractRoots: `@arg'.
+
+	^ BlElementBoundsUpdater new extractRoots: aSetOfElements
 ]
 
-{ #category : #'debug - simulation' }
-BlSpace class >> locationOutside: anElement [
-	"Return a random space location outside of element bounds"	
-	| theBounds aPosition |
-	
-	anElement topMostParent forceLayout.
-	theBounds := anElement bounds inSpace bounds.
-	aPosition := {
-		theBounds topRight - (theBounds width asInteger atRandom @ 100 atRandom).
-		theBounds topRight + (100 atRandom @ theBounds height asInteger atRandom).
-		theBounds bottomLeft + (theBounds width asInteger atRandom @ 100 atRandom).
-		theBounds bottomLeft - (100 atRandom @ theBounds height asInteger atRandom).
-	}	atRandom.
-		
-	self
-		assert: [ (theBounds containsPoint: aPosition) not ]
-		description: [ 'Point must be outside of the bounds' ].
-		
-	^ aPosition
-]
+{ #category : #pulse }
+BlSpace >> areFramePhasesSettled [
+	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space."
 
-{ #category : #'debug - simulation' }
-BlSpace class >> pulseUntilEmptyTaskQueue: aSpace timeout: aDuration [
-	"Wait until a BlSpace doesn't have available tasks to execute. 
-	
-	Inspired on BlDevScripterWaitStep>>#forEmptySpaceTaskQueueTimeout:"
-
-	| deadline |
-	deadline := aSpace time now + aDuration.
-	
-	aSpace time
-		every: 5 milliSeconds
-		while: [
-			aSpace universe hasDeferredActions or: [
-				(aSpace taskQueue isEmpty or: [
-					aSpace time now >= deadline ]) not ] ]
-		do: [
-			"We delegate to the host class also to run a cycle, it is needed when using morphic host, as this can run in the same UI thread blocking everything."
-			aSpace host runOneCycle. 
-			aSpace pulse ].
-
-	aSpace pulse.
-
-	^ aSpace taskQueue isEmpty
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> pulseUntilSpaceOpenedAndEmptyTaskQueue: aSpace timeout: aDuration [
-	"Wait until a BlSpace doesn't have available tasks to execute. 
-	
-	Inspired on BlDevScripterWaitStep>>#forEmptySpaceTaskQueueTimeout:"
-
-	| deadline |
-	deadline := aSpace time now + aDuration.
-
-	"A non-opened space needs a special wait."
-	aSpace isOpened ifFalse: [
-		| aSemaphore |
-		aSemaphore := Semaphore new.
-		aSpace
-			addEventHandlerOn: BlSpaceShownEvent
-			doOnce: [ :event | aSemaphore signal ].
-		aSemaphore waitTimeoutMilliseconds: aDuration asMilliSeconds ].
-
-	^ self pulseUntilEmptyTaskQueue: aSpace timeout: aDuration
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateClickOn: anElement [
-	"Simulate a click event in the middle of a given element by
-	performing mouse down and mouse up events in a sequence"
-
-	^ self simulateClickOn: anElement button: BlMouseButton primary
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateClickOn: anElement button: aButton [
-	"Simulate a click event in the middle of a given element by
-	performing mouse down and mouse up events in a sequence."
-
-	| aPosition |
-
-	"we never know if an element was already layered out"
-	anElement topMostParent forceLayout.
-	aPosition := anElement bounds inSpace center.
-	
-	"we simulate a click with a sequence of low level mouse down/up events"
-	self
-		simulateEvents: {
-			(BlMouseDownEvent button: aButton) position: aPosition; yourself.
-			(BlMouseUpEvent button: aButton) position: aPosition; yourself }
-		on: anElement.
-		
-	^ aPosition
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateClickOutside: anElement [
-	"Simulate a click event in outside of a given element by
-	performing mouse down and mouse up events in a sequence"
-
-	| aPosition |
-	aPosition := self locationOutside: anElement.
-	"we simulate a click with a sequence of low level mouse down/up events"
-	self
-		simulateEvents: {
-				(BlMouseDownEvent primary
-					 position: aPosition;
-					 yourself).
-				(BlMouseUpEvent primary
-					 position: aPosition;
-					 yourself) }
-		on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateDoubleClickOn: anElement [
-	"Simulate a double click event in the middle of a given element by
-	performing mouse down and mouse up events in a sequence"
-
-	| aPosition |
-	"we never know if an element was already layered out"
-	anElement topMostParent forceLayout.
-	aPosition := anElement bounds inSpace center.
-
-	"we simulate a double click with a sequence of low level mouse down/up events"
-	self
-		simulateEvents: {
-				(BlMouseDownEvent primary
-					 position: aPosition;
-					 yourself).
-				(BlMouseUpEvent primary
-					 position: aPosition;
-					 yourself).
-				(BlMouseDownEvent primary
-					 position: aPosition;
-					 yourself).
-				(BlMouseUpEvent primary
-					 position: aPosition;
-					 yourself) }
-		on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateDragOn: anElement by: aBlVector [
-	"Simulate a click event in the middle of a given element by
-	performing mouse down and mouse up events in a sequence"
-
-	| aPosition aDelta |
-	"we never know if an element was already layered out"
-	anElement topMostParent forceLayout.
-	aPosition := anElement bounds inSpace center.
-
-	aDelta :=
-		(anElement localBoundsToGlobal:
-			(BlBounds origin: 0.0 @ 0.0 extent: aBlVector)) extent.
-
-	"we simulate a click with a sequence of low level mouse down/up events"
-	self
-		simulateEvents: {
-				(BlMouseDownEvent primary
-					 position: aPosition;
-					 yourself).
-				(BlMouseMoveEvent primary
-					 position: aPosition + aDelta;
-					 delta: aDelta;
-					 yourself).
-				(BlMouseUpEvent primary
-					 position: aPosition + aDelta;
-					 yourself) }
-		on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateDragOn: anElement byAll: aSequenceOfBlVectors [
-	"Simulate a drag in the center of a given element by
-	performing mouse down, mouse move, and mouse up events."
-
-	| aPosition aDelta |
-	anElement forceLayout.
-	aPosition := anElement bounds inSpace center.
-
-	self
-		simulateEvent:
-			(BlMouseDownEvent primary
-				position: aPosition;
-				yourself)
-		on: anElement.
-
-	aSequenceOfBlVectors do: [ :each |
-		aDelta := (anElement localBoundsToGlobal:
-			(BlBounds origin: 0.0@0.0 extent: each)) extent.
-		aPosition := aPosition + aDelta.
-		self
-			simulateEvent:
-				(BlMouseMoveEvent primary
-					position: aPosition "+ aDelta";
-					delta: aDelta;
-					yourself)
-			on: anElement ].
-
-	self
-		simulateEvent:
-			(BlMouseUpEvent primary
-				position: aPosition "+ aDelta";
-				delta: aDelta;
-				yourself)
-		on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateEvent: anEvent on: anElement [
-	"I simulate a given low level space UI event such as MouseUp/MouseDown or keyboard.
-	If you would like to simulate a higher level event you could directly fire or dispatch them
-	by asking any element to #fireEvent: or #dispatchEvent:
-	Note: UI mouse events require to set #position: given in space coordinates or in root most parent
-	coordinates of the provided element.
-	Note: I create a temporary space if provided element does not have one. if you need to simulate
-	a sequence of dependent events it is better to use #simulateEvents:on: directy"
-
-	self simulateEvents: { anEvent } on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateEvents: aCollectionOfEvents on: anElement [
-	"I simulate a given sequence of low level space UI events such as MouseUp/MouseDown or keyboard.
-	If you would like to simulate a higher level event you could directly fire or dispatch them
-	by asking any element to #fireEvent: or #dispatchEvent:
-	Note: UI mouse events require to set #position: given in space coordinates or in root most parent
-	coordinates of the provided element"
-
-	| aSpace topMostElement |
-	anElement isAttachedToSceneGraph
-		ifTrue: [ aSpace := anElement space ]
-		ifFalse: [
-			topMostElement := anElement topMostParent.
-			aSpace := self new.
-			aSpace root addChild: topMostElement ].
-
-	aCollectionOfEvents do: [ :anEvent |
-		anEvent fillFromTime: aSpace time ].
-
-	aSpace pulse.
-	aSpace
-		dispatchTimeEvent: BlSpaceEventsProcessedEvent
-		during: [
-			aCollectionOfEvents do: [ :anEvent |
-				aSpace dispatchEvent: anEvent ] ].
-	aSpace pulse.
-
-	topMostElement ifNotNil: [ topMostElement removeFromParent ]
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateKeyDownOn: anElement key: aKeyboardKey [
-	"Simulate a key down event"
-
-	self
-		simulateEvents: { BlKeyDownEvent new key: aKeyboardKey; yourself }
-		on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateKeyUpOn: anElement key: aKeyboardKey [
-	"Simulate a key up event"
-
-	self
-		simulateEvents: { BlKeyUpEvent new key: aKeyboardKey; yourself }
-		on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateMouseDownOn: anElement [
-	"Simulate a mouse down event in the middle of a given element"
-	| aPosition |
-	
-	"we never know if an element was already layered out"
-	anElement topMostParent forceLayout.
-	aPosition := anElement bounds inSpace center.
-
-	self
-		simulateEvents: { BlMouseDownEvent primary position: aPosition }
-		on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateMouseDownOn: anElement at: aPoint [
-	"Simulate a mouse down event at a given location in the space of the element"
-
-	self
-		simulateEvents: { BlMouseDownEvent primary position: aPoint }
-		on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateMouseMoveInside: anElement [
-	"Simulate a mouse move event at a random location within element's bounds"
-	| aPosition |
-	
-	aPosition := self locationInside: anElement.
-
-	self
-		simulateEvents: { BlMouseMoveEvent primary position: aPosition }
-		on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateMouseMoveOn: anElement at: aPoint [
-	"Simulate a mouse move event at a given location in the space of the element"
-	
-	self
-		simulateEvents: { BlMouseMoveEvent primary position: aPoint }
-		on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateMouseMoveOn: anElement from: aFromPoint to: aToPoint [
-	"Simulate a mouse move event at a given location in the space of the element"
-	
-	self
-		simulateEvents: { BlMouseMoveEvent primary
-			position: aToPoint;
-			delta: (aToPoint - aFromPoint)  }
-		on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateMouseMoveOutside: anElement [
-	"Simulate a mouse move event at a random location outside of element's bounds"
-	| aPosition |
-	
-	"we never know if an element was already layered out"
-	aPosition := self locationOutside: anElement.
-	self
-		simulateEvents: { BlMouseMoveEvent primary position: aPosition }
-		on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateMouseUpOn: anElement [
-	"Simulate a mouse up event in the middle of a given element"
-
-	| aPosition |
-	"we never know if an element was already layered out"
-	anElement topMostParent forceLayout.
-	aPosition := anElement bounds inSpace center.
-
-	self
-		simulateEvent:
-			(BlMouseUpEvent primary
-				 position: aPosition;
-				 yourself)
-		on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateMouseUpOn: anElement at: aPoint [
-	"Simulate a mouse up event at a given location in the space of the element"
-
-	self
-		simulateEvent:
-			(BlMouseUpEvent primary
-				 position: aPoint;
-				 yourself)
-		on: anElement
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateMouseWheelOn: anElement by: aBlVector [
-	"Simulate a mouse wheel event in the middle of a given element"
-	| aPosition aBlocEvent |
-
-	"we never know if an element was already layered out"
-	anElement topMostParent forceLayout.
-	aPosition := anElement bounds inSpace center.
-	
-	"Bloc event"
-	aBlocEvent := BlMouseWheelEvent new
-		isTouch: false;
-		vector: aBlVector asBlocVector;
-		position: aPosition.
-	
-	self
-		simulateEvent: aBlocEvent
-		on: anElement.
-		
-	^ aPosition
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateSecondaryClickOn: anElement [
-	"Simulate a secondary click event in the middle of a given element by
-	performing mouse down and mouse up events in a sequence"
-	
-	^ self simulateClickOn: anElement button: BlMouseButton secondary
-]
-
-{ #category : #'debug - simulation' }
-BlSpace class >> simulateTextInput: aString on: aBlElement [
-
-	self
-		simulateEvent: (BlTextInputEvent new
-				 text: aString;
-				 yourself)
-		on: aBlElement
+	^ frame phases allSatisfy: [ :eachPhase | eachPhase isSettledIn: self ]
 ]
 
 { #category : #accessing }
@@ -511,6 +82,20 @@ BlSpace >> asReference [
 	<return: #BlSpaceReference>
 
 	^ reference ifNil: [ reference := BlAttachedCachedSpaceReference forSpace: self ]
+]
+
+{ #category : #'private - pulse' }
+BlSpace >> basicPulse [
+	"Internal engine driver. Never send me directly.
+	I am driven exclusively by BlParallelUniverse during pulse loop cycles.
+	To wait for a space to reach equilibrium, send #settle or #deferAndSettle:."
+
+	pulseRequested ifFalse: [ ^ self ].
+
+	"flip to false beforehand to be able to know if the next pulse was needed during the frame"
+	pulseRequested := false.
+
+	frame runOn: self
 ]
 
 { #category : #'api - displaying' }
@@ -537,7 +122,7 @@ BlSpace >> bounds [
 BlSpace >> center [
 	"Tell host to change my position to be centered. Do nothing if host space is not present (e.g. not shown)."
 
-	self hostSpace ifNotNil: [ :hw | hw center ]
+	self hostSpaceDo: [ :hs | hs center ]
 ]
 
 { #category : #'change - rendering' }
@@ -550,9 +135,9 @@ BlSpace >> clearDirtyElements [
 { #category : #'api - displaying' }
 BlSpace >> close [
 	"Request closing this space. This might happen in a host process (async). 
-	This space can be reopened via `show`, either with current host or with another host."
+	This space can be reopened via `open`, either with current host or with another host."
 	
-	host universe closeSpace: self
+	host closeSpace: self
 ]
 
 { #category : #'cursor managing' }
@@ -639,6 +224,30 @@ BlSpace >> defaultTitle [
 	^ ''
 ]
 
+{ #category : #pulse }
+BlSpace >> defer: aBlock [
+	"Schedule aBlock to be run asynchronously during a space pulse on the host UI loop process."
+
+	self enqueueTask: (BlTaskAction with: aBlock)
+]
+
+{ #category : #pulse }
+BlSpace >> deferAndSettle: aBlock [
+	"Evaluate aBlock on the UI process and wait until the space reaches equilibrium (all cascading tasks, skins, layout, and render passes have settled)."
+
+	self defer: aBlock.
+	self settle
+]
+
+{ #category : #pulse }
+BlSpace >> deferOrValue: aBlock [
+	"Evaluate aBlock immediately if the active process is already the pulse process.
+	Otherwise, defer execution by scheduling a task for the next pulse."
+
+	self ifPulseProcessActive: aBlock else: [
+		self defer: aBlock ]
+]
+
 { #category : #'window - properties' }
 BlSpace >> densityDpi [
 	"Return the screen density expressed as dots-per-inch (a float)"
@@ -653,7 +262,15 @@ BlSpace >> densityDpi [
 { #category : #'api - tasks' }
 BlSpace >> dequeueTask: aBlTask [
 	self taskQueue dequeue: aBlTask.
-	self requestNextPulse
+	self requestPulse
+]
+
+{ #category : #'api - events' }
+BlSpace >> dequeuedEvents [
+	| theEvents |
+	theEvents := LinkedList new.
+	eventQueue flush: [ :anEvent | theEvents add: anEvent ].
+	^ theEvents
 ]
 
 { #category : #'children dispatching' }
@@ -728,7 +345,7 @@ BlSpace >> doUpdateFocus [
 		focusChain
 			deepestAttachedElementDo: [ :aNewFocusOwner |
 				aNewFocusOwner requestFocusDueToRemoval: true ]
-			ifAbsent: [ self focusProcessor focusOwner: nil ] ].
+			ifAbsent: [ self focusOwner: nil ] ].
 
 	self focusOwner ifNil: [ self initializeFocus ]
 ]
@@ -831,11 +448,18 @@ BlSpace >> elementsNeedingPaint [
 	^ elementsNeedingPaint
 ]
 
+{ #category : #'api - events' }
+BlSpace >> enqueueEvent: aBlEvent [
+
+	eventQueue nextPut: aBlEvent.
+	self requestPulse
+]
+
 { #category : #'api - tasks' }
 BlSpace >> enqueueTask: aBlTask [
 	aBlTask onEnqueued: self.
 	self taskQueue enqueue: aBlTask.
-	self requestNextPulse
+	self requestPulse
 ]
 
 { #category : #'api - tasks' }
@@ -844,26 +468,15 @@ BlSpace >> enqueueTasksFrom: aTaskQueue [
 	aTaskQueue isEmpty ifTrue: [ ^ self ].
 	aTaskQueue tasks do: [ :eachTask | eachTask onEnqueued: self ].	
 	self taskQueue enqueueFrom: aTaskQueue.
-	self requestNextPulse
+	self requestPulse
 ]
 
-{ #category : #pulse }
+{ #category : #'private - pulse' }
 BlSpace >> ensureSession [
-	"Check current session and perform required operations if it changed since last frame"
 
-	session == Smalltalk session
-		ifTrue: [ ^ self ].
-
-	self onSessionChanged: Smalltalk session
-]
-
-{ #category : #'private - display' }
-BlSpace >> ensureWindowOpen [
-
-	hostSpace ifNotNil: [
-		hostSpace isValid ifFalse: [
-			self setUpHostSpace.
-			previousVisibleStatus ifTrue: [ hostSpace open ] ] ]
+	self
+		deprecated: 'Session management is handled by BlParallelUniverse on image startup'
+		transformWith: '`@receiver ensureSession' -> ''
 ]
 
 { #category : #'event management accessing' }
@@ -897,6 +510,10 @@ BlSpace >> extent: aNewExtent [
 
 { #category : #'private - change' }
 BlSpace >> extractRoots: aSetOfElements [
+	self
+		deprecated: 'Use BlElementBoundsUpdater >> #extractRoots: instead'
+		transformWith: '`@receiver extractRoots: `@arg' -> 'BlElementBoundsUpdater new extractRoots: `@arg'.
+
 	^ self class extractRoots: aSetOfElements
 ]
 
@@ -944,7 +561,6 @@ BlSpace >> focused: aBoolean [
 
 { #category : #accessing }
 BlSpace >> frame [
-	<return: #BlSpaceFrame>
 
 	^ frame
 ]
@@ -978,6 +594,11 @@ BlSpace >> grabFocus [
 BlSpace >> hasDirtyElements [
 
 	^ elementsNeedingPaint notEmpty
+]
+
+{ #category : #'api - events' }
+BlSpace >> hasEvents [
+	^ eventQueue isEmpty not
 ]
 
 { #category : #'focus managing' }
@@ -1038,7 +659,7 @@ BlSpace >> height [
 
 { #category : #'api - displaying' }
 BlSpace >> hide [
-	self hostSpace ifNotNil: [ :hw | hw hide ]
+	self hostSpaceDo: [ :hs | hs hide ]
 ]
 
 { #category : #'host space - accessing' }
@@ -1048,18 +669,12 @@ BlSpace >> host [
 
 { #category : #'host space - accessing' }
 BlSpace >> host: aHost [
-	"Change the host of this space. Asynchronous. If the space is opened, first destroy the host window and then open the space with a new host"
+	"Change the host of this space. The space must be closed and settled first."
 
-	self isOpened
-		ifFalse: [ host := aHost ]
-		ifTrue: [
-			self
-				addEventHandlerOn: BlSpaceDetachedEvent
-				doOnce: [
-					host := aHost.
-					self universe attachSpace: self ].
+	(self isOpened or: [ self isOpening or: [ self isClosing ] ]) ifTrue: [
+		self error: 'Cannot change host while space is opened, opening, or closing. Close and settle the space first.' ].
 
-			self universe detachSpace: self ]
+	host := aHost
 ]
 
 { #category : #'host space - accessing' }
@@ -1088,6 +703,16 @@ BlSpace >> hostSpaceChanged [
 ]
 
 { #category : #'host space - accessing' }
+BlSpace >> hostSpaceClose [
+
+	hostSpace ifNil: [ ^ self ].
+
+	[ hostSpace tearDown ] ensure: [
+		hostSpace := nil.
+		eventQueue removeAll ]
+]
+
+{ #category : #'host space - accessing' }
 BlSpace >> hostSpaceDo: aBlock [
 	^ self hostSpaceDo: aBlock ifAbsent: [ self ]
 ]
@@ -1100,6 +725,13 @@ BlSpace >> hostSpaceDo: aBlock ifAbsent: anAbsentBlock [
 	self hostSpace isValid ifFalse: [ ^ anAbsentBlock value ].
 
 	^ aBlock cull: self hostSpace
+]
+
+{ #category : #'host space - accessing' }
+BlSpace >> hostSpaceOpen [
+
+	hostSpace := host newHostSpaceFor: self.
+	hostSpace open
 ]
 
 { #category : #'window - properties' }
@@ -1119,14 +751,24 @@ BlSpace >> icon: aStencil [
 	self fireEvent: (BlSpaceIconChangedEvent new iconStencil: aStencil)
 ]
 
+{ #category : #pulse }
+BlSpace >> ifPulseProcessActive: aBlock else: altBlock [
+	"Evaluate aBlock if the active process is the pulse process of this space,
+	otherwise evaluate altBlock."
+
+	^ self isPulseProcessActive
+		ifTrue: aBlock
+		ifFalse: altBlock
+]
+
 { #category : #initialization }
 BlSpace >> initialize [
 
 	super initialize.
 
-	host := BlHost pickHost.
+	host := Bloc preferredHost.
 	pulseRequested := true.
-	session := Smalltalk session.
+	eventQueue := WaitfreeQueue new.
 	elementsNeedingPaint := Set new.
 	elementsNeedingLayout := Set new.
 
@@ -1184,7 +826,7 @@ BlSpace >> invalidRect: aBlBounds from: anElement [
 	self flag: #todo. "aBlBounds is ignored. Rename selector!"
 	elementsNeedingPaint add: anElement.
 	self requestHostSpaceRedraw.
-	self requestNextPulse
+	self requestPulse
 ]
 
 { #category : #'change - rendering' }
@@ -1203,8 +845,15 @@ BlSpace >> invalidateAll [
 BlSpace >> isBorderless [
 
 	^ self
-		  hostSpaceDo: [ :aHostSpace | aHostSpace borderless ]
+		  hostSpaceDo: [ :aHostSpace | aHostSpace isBorderless ]
 		  ifAbsent: [ borderless ]
+]
+
+{ #category : #testing }
+BlSpace >> isClosing [
+	"Return true if this space is currently queued to be closed, false otherwise."
+
+	^ host isSpaceClosing: self
 ]
 
 { #category : #'window - properties' }
@@ -1228,7 +877,7 @@ BlSpace >> isFullsize [
 	Fullsize means that the content of a window is rendered underneath the title bar, which is transparent and has no window title."
 
 	^ self 
-		hostSpaceDo: [ :aHostSpace | aHostSpace fullsize ]
+		hostSpaceDo: [ :aHostSpace | aHostSpace isFullsize ]
 		ifAbsent: [ fullsize ]
 ]
 
@@ -1241,11 +890,23 @@ BlSpace >> isLayoutRequested [
 
 { #category : #testing }
 BlSpace >> isOpened [
-	"Return true if the space was shown (by sending #show message), false otherwise.
-	Please note, that an opened space can be hidden which does not influence the result of #isOpened"
+	"Return true if the space is currently opened on its host."
 
-	^ (self host class hasUniverse)
-		and: [ self universe hasSpace: self ]
+	^ host hasSpace: self
+]
+
+{ #category : #testing }
+BlSpace >> isOpening [
+	"Return true if this space is currently queued to be opened, false otherwise."
+
+	^ host isSpaceOpening: self
+]
+
+{ #category : #pulse }
+BlSpace >> isPulseProcessActive [
+	"Return true if the active process is the pulse loop process for this space"
+
+	^ host isPulseProcessActive
 ]
 
 { #category : #pulse }
@@ -1264,6 +925,13 @@ BlSpace >> isResizable [
 		ifAbsent: [ resizable ]
 ]
 
+{ #category : #pulse }
+BlSpace >> isSettled [
+	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space, and there are no pending host lifecycle actions for this space."
+
+	^ host isSpaceSettled: self
+]
+
 { #category : #'host space - text input' }
 BlSpace >> isTextInputActive [
 	"Check whether or not Unicode text input events are enabled"
@@ -1273,9 +941,7 @@ BlSpace >> isTextInputActive [
 
 { #category : #testing }
 BlSpace >> isVisible [
-	^ self hasHostSpace
-		ifTrue: [ self hostSpace isVisible ]
-		ifFalse: [ false ]
+	^ self hostSpaceDo: [ :hs | hs isVisible ] ifAbsent: [ false ]
 ]
 
 { #category : #'accessing - processors' }
@@ -1315,18 +981,17 @@ BlSpace >> markNeedsPaint: anElement from: aSourceElement [
 
 	elementsNeedingPaint add: aSourceElement.
 	self requestHostSpaceRedraw.
-	self requestNextPulse
+	self requestPulse
 ]
 
 { #category : #'api - displaying' }
 BlSpace >> maximize [
-	self hostSpace ifNotNil: [ :hw | hw maximize ]
+	self hostSpaceDo: [ :hs | hs maximize ]
 ]
 
 { #category : #'api - displaying' }
 BlSpace >> maximized [
-	self hostSpace ifNotNil: [ :hw | ^ hw maximized ].
-	^ false
+	^ self hostSpaceDo: [ :hs | hs maximized ] ifAbsent: [ false ]
 ]
 
 { #category : #dispatch }
@@ -1344,13 +1009,12 @@ BlSpace >> measureTextParagraph: aBlTextParagraph [
 
 { #category : #'api - displaying' }
 BlSpace >> minimize [
-	self hostSpace ifNotNil: [ :hw | hw minimize ]
+	self hostSpaceDo: [ :hs | hs minimize ]
 ]
 
 { #category : #'api - displaying' }
 BlSpace >> minimized [
-	self hostSpace ifNotNil: [ :hw | ^ hw minimized ].
-	^ false
+	^ self hostSpaceDo: [ :hs | hs minimized ] ifAbsent: [ false ]
 ]
 
 { #category : #'accessing - processors' }
@@ -1365,13 +1029,30 @@ BlSpace >> mouseProcessor: aMouseProcessor [
 ]
 
 { #category : #pulse }
+BlSpace >> onSessionChanged [
+
+	self invalidateAll.
+	self requestHostSpaceRedraw.
+	self requestPulse.
+
+	self root onSessionChanged: Smalltalk session
+]
+
+{ #category : #pulse }
 BlSpace >> onSessionChanged: aNewSession [
 
-	session := aNewSession.
-	self invalidateAll.
-	self requestNextPulse.
-	
-	self root onSessionChanged: aNewSession
+	self
+		deprecated: 'Use #onSessionChanged instead'
+		transformWith: '`@receiver onSessionChanged: `@arg' -> '`@receiver onSessionChanged'.
+
+	self onSessionChanged
+]
+
+{ #category : #'api - displaying' }
+BlSpace >> open [
+	"Open this space on my host."
+
+	host openSpace: self
 ]
 
 { #category : #'window - properties' }
@@ -1405,19 +1086,28 @@ BlSpace >> printOn: aStream [
 { #category : #pulse }
 BlSpace >> processPulse [
 
-	self ensureSession.
+	self
+		deprecated: 'Use #settle instead'
+		transformWith: '`@receiver processPulse' -> '`@receiver settle'.
 
-	pulseRequested ifFalse: [ ^ self ].
-
-	"flip to false beforehand to be able to know if the next pulse was needed during the frame"
-	pulseRequested := false.
-
-	self frame runOn: self
+	^ self settle
 ]
 
 { #category : #pulse }
 BlSpace >> pulse [
-	self processPulse
+
+	self
+		deprecated: 'Direct #pulse on BlSpace causes concurrency races. Use #settle or #deferAndSettle: instead'
+		transformWith: '`@receiver pulse' -> '`@receiver settle'.
+
+	^ self settle
+]
+
+{ #category : #accessing }
+BlSpace >> pulseProcess [
+	"Return the pulse loop Process if running, or nil."
+
+	^ host pulseProcess
 ]
 
 { #category : #pulse }
@@ -1431,12 +1121,6 @@ BlSpace >> pulseRequested [
 			-> '`@receiver isPulseRequested'.
 
 	^ self isPulseRequested
-]
-
-{ #category : #'startup - shutdown' }
-BlSpace >> rememberVisibleStatus [
-	
-	previousVisibleStatus := self isVisible
 ]
 
 { #category : #pulse }
@@ -1469,13 +1153,24 @@ BlSpace >> requestHostSpaceRedraw [
 BlSpace >> requestLayout: anElement [
 
 	elementsNeedingLayout add: anElement.
-	self requestNextPulse
+	self requestPulse
 ]
 
 { #category : #pulse }
 BlSpace >> requestNextPulse [
 
-	pulseRequested := true
+	self
+		deprecated: 'Use #requestPulse instead'
+		transformWith: '`@receiver requestNextPulse' -> '`@receiver requestPulse'.
+
+	self requestPulse
+]
+
+{ #category : #pulse }
+BlSpace >> requestPulse [
+
+	pulseRequested := true.
+	host requestPulse
 ]
 
 { #category : #'window - properties' }
@@ -1538,7 +1233,12 @@ BlSpace >> runTasks [
 
 { #category : #accessing }
 BlSpace >> session [
-	^ session
+
+	self
+		deprecated: 'Use `Smalltalk session` directly instead.'
+		transformWith: '`@receiver session' -> 'Smalltalk session'.
+
+	^ Smalltalk session
 ]
 
 { #category : #'private - accessing' }
@@ -1556,17 +1256,52 @@ BlSpace >> setPosition: aPoint [
 	position := aPoint
 ]
 
-{ #category : #'host space - accessing' }
-BlSpace >> setUpHostSpace [
+{ #category : #pulse }
+BlSpace >> settle [
+	"Wait until the space reaches equilibrium (all deferred actions, tasks, skins, and layout requests have settled).
+	Blocks the active process on the host pulse semaphore until #isSettled answers true."
 
-	hostSpace := host newHostSpaceFor: self
+	self requestPulse.
+	^ self waitUntilTrue: [ self isSettled ]
+]
+
+{ #category : #pulse }
+BlSpace >> settleFor: aTimeoutValuable [
+	"Wait until the space is settled, or until aTimeoutValuable evaluates to true."
+
+	| finished |
+	finished := false.
+	host
+		waitUntil: [ self isSettled ]
+		timeOutIf: aTimeoutValuable
+		onCompletion: [ finished := true ]
+		onTimeout: [ finished := false ].
+	^ finished
+]
+
+{ #category : #pulse }
+BlSpace >> settleForDuration: aDuration [
+	"Wait for this space task queue to be empty until a given duration has passed.
+	Forwards to #settleForMilliseconds: converting the duration to milliseconds."
+
+	^ self settleForMilliseconds: aDuration asMilliSeconds
+]
+
+{ #category : #pulse }
+BlSpace >> settleForMilliseconds: aNumber [
+	"Wait until the space is settled, or until the timeout in milliseconds has passed.
+	Uses #nowInUTCMicroseconds for a monotonic, high-resolution deadline to avoid clock-skew issues."
+
+	| deadlineInMicroseconds |
+	deadlineInMicroseconds := time nowInUTCMicroseconds + (aNumber * 1000).
+	^ self settleFor: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
 ]
 
 { #category : #'api - displaying' }
 BlSpace >> show [
 	"Show this space to the user, using current host and other parameters such as extent, title, etc."
 
-	self universe openSpace: self
+	self open
 ]
 
 { #category : #'api - displaying' }
@@ -1619,16 +1354,6 @@ BlSpace >> taskQueue [
 	^ tasks
 ]
 
-{ #category : #'host space - accessing' }
-BlSpace >> tearDownHostSpace [
-	"Detach my current host space if I have one"
-
-	hostSpace ifNil: [ ^ self ].
-
-	hostSpace tearDown.
-	hostSpace := nil
-]
-
 { #category : #accessing }
 BlSpace >> time [
 	<return: #BlTime>
@@ -1660,12 +1385,14 @@ BlSpace >> title: aString [
 
 { #category : #'api - displaying' }
 BlSpace >> toBack [
-	self hostSpace ifNotNil: [ :hw | hw toBack ]
+
+	self deprecated: 'Sending a window to back is not supported by modern display servers and will be removed in the future.'
 ]
 
 { #category : #'api - displaying' }
 BlSpace >> toFront [
-	self hostSpace ifNotNil: [ :hw | hw toFront ]
+
+	self hostSpaceDo: [ :hs | hs toFront ]
 ]
 
 { #category : #'focus managing' }
@@ -1677,7 +1404,11 @@ BlSpace >> ungrabFocus [
 { #category : #accessing }
 BlSpace >> universe [
 
-	^ self host universe
+	self
+		deprecated: 'Use host universe instead'
+		transformWith: '`@receiver universe' -> '`@receiver host universe'.
+
+	^ host universe
 ]
 
 { #category : #'cursor managing' }
@@ -1692,6 +1423,50 @@ BlSpace >> userData [
 	Be careful to limit the use of such facility and prefer clean instance variables when it is possible to define them."
 
 	^ userData ifNil: [ userData := IdentityDictionary new ]
+]
+
+{ #category : #pulse }
+BlSpace >> validateHostSpaceDrawing [
+
+	self hostSpaceDo: [ :aHostSpace |
+		aHostSpace hasResized ifTrue: [
+			self invalidateAll.
+			aHostSpace initializeRenderer ] ]
+]
+
+{ #category : #pulse }
+BlSpace >> waitForDuration: aDuration [
+	"Synchronously wait for the given duration, blocked on the host's pulse loop semaphore.
+	
+	Note: This is different from `aDuration wait` because it blocks the active process on a pulse semaphore, waking up only on space frame pulses."
+
+	self waitUntilTrue: [ false ] forDuration: aDuration
+]
+
+{ #category : #pulse }
+BlSpace >> waitUntilTrue: aConditionValuable [
+	"Wait until the given condition block evaluates to true, synchronized with the space pulses.
+	Blocks the sender process on the host's pulse semaphore, waking up on each frame to check the condition."
+
+	host
+		waitUntil: aConditionValuable
+		timeOutIf: [ false ]
+		onCompletion: [ ]
+		onTimeout: [ ]
+]
+
+{ #category : #pulse }
+BlSpace >> waitUntilTrue: aConditionValuable forDuration: aDuration [
+	"Wait until the given condition block evaluates to true, or the timeout duration has passed.
+	Blocks the sender process on the host's pulse semaphore, waking up on each frame to check the condition."
+
+	| deadlineInMicroseconds |
+	deadlineInMicroseconds := time nowInUTCMicroseconds + aDuration asMicroseconds.
+	host
+		waitUntil: aConditionValuable
+		timeOutIf: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
+		onCompletion: [ ]
+		onTimeout: [ ]
 ]
 
 { #category : #'window - properties' }
