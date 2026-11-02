@@ -242,6 +242,22 @@ BlSpaceSettleTest >> testSettleFromPulseProcessRaisesError [
 ]
 
 { #category : #tests }
+BlSpaceSettleTest >> testSpaceSettleForRequestsPulse [
+
+	| aSpace |
+	aSpace := self newTestingSpace.
+	aSpace host
+		waitUntil: [ aSpace isPulseRequested not ]
+		timeOutIf: [ false ]
+		onCompletion: [ ]
+		onTimeout: [ ].
+	self deny: aSpace isPulseRequested.
+
+	aSpace settleFor: [ false ].
+	self assert: aSpace isPulseRequested
+]
+
+{ #category : #tests }
 BlSpaceSettleTest >> testSpaceSettledIsIndependentOfOtherSpaces [
 
 	| space1 space2 |
