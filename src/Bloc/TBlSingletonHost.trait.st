@@ -47,7 +47,10 @@ TBlSingletonHost classSide >> label [
 
 { #category : #'instance creation' }
 TBlSingletonHost classSide >> new [
-	self error: 'Use #default instead'
+
+	self deprecated: 'Use #default instead' transformWith: '`@receiver new' -> '`@receiver default'.
+
+	^ self default
 ]
 
 { #category : #'api - pulse process' }
