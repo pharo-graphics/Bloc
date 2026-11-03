@@ -349,6 +349,50 @@ BlElementTest >> testDefault [
 ]
 
 { #category : #tests }
+BlElementTest >> testDeferIfAttachedToSceneGraphExecutesOnSpaceSettle [
+
+	| element executed |
+	element := BlElement new.
+	executed := false.
+
+	element inNewHeadlessSpaceDo: [ :aSpace |
+			element deferIfAttachedToSceneGraph: [ executed := true ].
+			self deny: executed.
+
+			aSpace settle.
+			self assert: executed ]
+]
+
+{ #category : #tests }
+BlElementTest >> testDeferIfAttachedToSceneGraphWhenDetachedBeforeSettleDoesNothing [
+
+	| element executed |
+	element := BlElement new.
+	executed := false.
+
+	element inNewHeadlessSpaceDo: [ :aSpace |
+			element deferIfAttachedToSceneGraph: [ executed := true ].
+			element removeFromParent.
+
+			aSpace settle.
+			self deny: executed ]
+]
+
+{ #category : #tests }
+BlElementTest >> testDeferIfAttachedToSceneGraphWhenDetachedDoesNothing [
+
+	| element executed |
+	element := BlElement new.
+	executed := false.
+
+	self deny: element isAttachedToSceneGraph.
+
+	element deferIfAttachedToSceneGraph: [ executed := true ].
+	self deny: executed.
+	self assert: element taskQueue tasks isEmpty
+]
+
+{ #category : #tests }
 BlElementTest >> testForceLayout [
 
 	| element child |

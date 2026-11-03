@@ -1240,6 +1240,17 @@ BlElement >> defaultVisibility [
 ]
 
 { #category : #processing }
+BlElement >> deferIfAttachedToSceneGraph: aBlock [
+	"Defer execution of aBlock to the pulse process of the space to which I am attached.
+	If I am not attached to a scene graph when scheduled, or if I become detached before
+	the pulse process runs this task, do nothing."
+
+	self isAttachedToSceneGraph ifFalse: [ ^ self ].
+
+	self space defer: [ self isAttachedToSceneGraph ifTrue: [ aBlock value ] ]
+]
+
+{ #category : #processing }
 BlElement >> deferOrValue: aBlock [
 	"Evaluate aBlock immediately if the active process is already the pulse process.
 	Otherwise, defer execution by enqueuing a task on this element."
