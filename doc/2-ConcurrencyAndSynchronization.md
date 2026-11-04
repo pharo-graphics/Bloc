@@ -96,9 +96,9 @@ Bloc maintains a clear separation between elements that are attached to a live s
 ## 6. Writing unit tests
 
 When writing tests in Bloc:
-- Subclass `BlSpaceTestCase` or `BlParameterizedHostTest`.
-- Use `self newTestingSpace` to get a clean space that is opened, settled, and automatically cleaned up in `tearDown`.
-- Structure test assertions with `deferAndSettle:`:
+- Subclass `BlSpaceTestCase`: its `setUp` creates a `space` on the headless host, opens it and settles it, and its `tearDown` closes it. The space is available with `self space`.
+- Or subclass `BlParameterizedHostTest` to run the same tests on several hosts (see below). Use `self newTestingSpace` to get a clean space that is opened, settled, and automatically cleaned up in `tearDown`. `newTestingSpace` is defined by `BlParameterizedHostTest` only.
+- Structure test assertions with `deferAndSettle:` (the example below is a `BlParameterizedHostTest`):
 
 ```smalltalk
 testElementWidthChange
@@ -128,6 +128,8 @@ BlParameterizedHostTest testHostsMode: #headlessOnly.
 "or"
 BlParameterizedHostTest testHostsMode: #allAvailable.
 ```
+
+To test the interactions of your own project (headless host, synthetic mouse events, checking what is drawn), see [Testing Interactions and Drawing](TestingInteractions.md).
 
 ---
 

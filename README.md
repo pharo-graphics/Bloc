@@ -67,6 +67,12 @@ The guides are arranged in recommended reading order:
 3. [Building Non-Blocking UIs](doc/3-BuildingNonBlockingUIs.md) — Practical patterns for background workers, futures, progress feedback, and data streams.
 
 ### Topic Guides & Reference
+- [Layout and Constraints](doc/LayoutAndConstraints.md) — Size policies, layout facets, why `position:` is a request, and reacting to a layout without looping.
+- [Working with Text](doc/Text.md) — `BlTextElement`, what it does not do (wrapping, line breaks), and recipes: lines, wrapping, ellipsis.
+- [Graphical Patterns: Zoom, Pan and Fit](doc/GraphicalPatterns.md) — Transformations and the patterns to zoom around the mouse, pan with the mouse and fit a content in a window.
+- [Testing Interactions and Drawing](doc/TestingInteractions.md) — Headless host, synthetic mouse events (`fireEvent:` vs `dispatchEvent:`) and checking pixels.
+- [Troubleshooting](doc/Troubleshooting.md) — Symptoms and explanations, including the debugger that freezes the windows.
+- [Using Bloc in a Spec Presenter](doc/SpecIntegration.md) — Showing a Bloc space in a Spec window with `SpBlSpaceInMorphPresenter`.
 - [About Mouse Events](doc/MouseEvent.md) — Event dispatching: enter/leave vs over/out bubbling.
 - [Understanding Scene Graph Attachment](doc/ElementAddedToSceneGraph.md) — Working with `BlElement >> #onAddedToSceneGraph`.
 - [History and Presentations](doc/History.md) — Evolution of Bloc and recorded talks.
