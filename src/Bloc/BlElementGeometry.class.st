@@ -26,6 +26,8 @@ aGeometry asElement. ""an element with me as geometry and a default look, handy 
 ```
 Run `BlElementGeometry class >> #scriptGeometryKinds` to see all the geometries of Bloc side by side.
 Each concrete geometry has an `example...` class method (`<sampleInstance>`), and most have a `script...` one.
+Inspecting a geometry shows a ""Geometry"" pane: a preview of a copy of it on an element (`inspectionGeometry:`).
+The extent of that element is `inspectionExtent`: 150 x 100, or the extent of a vector geometry.
 
 ### Implementation Points
 - My subclasses implement `aeApplyTo:element:`, `matchElement:`, `geometryBounds:of:`, `strokedBounds:of:`,
