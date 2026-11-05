@@ -35,6 +35,20 @@ Class {
 	#category : #'Bloc-Basic-Background'
 }
 
+{ #category : #'private - demo' }
+BlAbstractImageBackground class >> demoFormAtScale: aScale [
+	"Answer the Pharo logo on an opaque light blue rectangle of (100 x 50) * aScale pixels."
+
+	| form |
+	form := (Form extent: 100 @ 50 * aScale depth: 32)
+		        fillColor: (Color r: 0.85 g: 0.92 b: 1.0);
+		        yourself.
+	form getCanvas
+		translucentImage: (PolymorphSystemSettings pharoLogoForm scaledToSize: 100 @ 34 * aScale)
+		at: 0 @ 8 * aScale.
+	^ form
+]
+
 { #category : #testing }
 BlAbstractImageBackground class >> isAbstract [
 

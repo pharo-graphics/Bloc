@@ -45,20 +45,6 @@ Class {
 }
 
 { #category : #'private - demo' }
-BlFormSetBackground class >> demoFormAtScale: aScale [
-	"Answer the Pharo logo on an opaque light blue rectangle of (100 x 50) * aScale pixels."
-
-	| form |
-	form := (Form extent: 100 @ 50 * aScale depth: 32)
-		        fillColor: (Color r: 0.85 g: 0.92 b: 1.0);
-		        yourself.
-	form getCanvas
-		translucentImage: (PolymorphSystemSettings pharoLogoForm scaledToSize: 100 @ 34 * aScale)
-		at: 0 @ 8 * aScale.
-	^ form
-]
-
-{ #category : #'private - demo' }
 BlFormSetBackground class >> demoFormSet [
 	"Answer a 100 x 50 form set: the Pharo logo on an opaque light blue rectangle,
 	with a form for scale 1 (100 x 50 pixels) and one for scale 2 (200 x 100 pixels).
