@@ -47,6 +47,19 @@ BlRopeableCollectionFileTest >> ropeableCollection [
 ]
 
 { #category : #tests }
+BlRopeableCollectionFileTest >> testApproximateSizeEqualsSizeOnceKnown [
+	"Once the whole file has been scanned, the approximate size must be the exact size"
+
+	| collection |
+	collection := self ropeableCollection.
+	collection ensureBuffered: 1000000.
+	self assert: collection haveSize.
+	self assert: collection size equals: 1000000.
+	self assert: collection approximateSize equals: collection size.
+	self deleteLargeFile
+]
+
+{ #category : #tests }
 BlRopeableCollectionFileTest >> testAt [
 
 	self 
@@ -77,6 +90,19 @@ BlRopeableCollectionFileTest >> testCopyFromTo [
 		assert: (self ropeableCollection copyFrom: 199995 to: 200005)
 		equals: expected.
 
+]
+
+{ #category : #tests }
+BlRopeableCollectionFileTest >> testCopyToEndFromAfterSizeKnown [
+	"Copying the last line once the size is known must not read past the end of the file"
+
+	| collection tail |
+	collection := self ropeableCollection.
+	collection ensureBuffered: 1000000.
+	tail := collection copyToEndFrom: 999901.
+	self assert: tail size equals: 100.
+	self assert: tail last equals: Character lf.
+	self deleteLargeFile
 ]
 
 { #category : #tests }
