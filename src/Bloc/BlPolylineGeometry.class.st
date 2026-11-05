@@ -17,7 +17,7 @@ BlPolylineGeometry vertices: { 10 @ 60. 30 @ 10. 50 @ 60. 70 @ 10. 90 @ 60 }.
 See `BlPolylineGeometry class >> #exampleZigZag`, and run `BlPolylineGeometry class >> #scriptOpenVersusClosed`.
 
 ### Implementation Points
-- `vertices:` sets my extent to the largest coordinates of the vertices (`vertices max`), and does not release the path cache.
+- `vertices:` sets my extent to the largest coordinates of the vertices (`vertices max`) and releases the path cache.
 - Two polylines are equal when they have the same vertices.
 
 **Instance Variables**
@@ -126,4 +126,5 @@ BlPolylineGeometry >> vertices: aCollectionOfPoints [
 
 	vertices := aCollectionOfPoints.
 	extent := vertices max.
+	self releaseCache
 ]

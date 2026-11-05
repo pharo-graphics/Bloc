@@ -17,7 +17,7 @@ See `BlRoundedPolygonGeometry class >> #exampleRoundedTriangle`, and run `BlRoun
 
 ### Implementation Points
 - The radius of a corner is reduced when its arc would need more than half of one of its two segments.
-- `radius:` does not release the path cache. `=` is inherited: the radius is not compared.
+- `radius:` releases the path cache. `=` is inherited: the radius is not compared.
 - The drawing is based on `RSAthensRenderer>>#applyRadius:on:from:to:` from Roassal.
 
 **Instance Variables**
@@ -74,7 +74,8 @@ BlRoundedPolygonGeometry >> radius [
 ]
 
 { #category : #accessing }
-BlRoundedPolygonGeometry >> radius: anInteger [
+BlRoundedPolygonGeometry >> radius: aNumber [
 
-	radius := anInteger
+	radius := aNumber.
+	self releaseCache
 ]
