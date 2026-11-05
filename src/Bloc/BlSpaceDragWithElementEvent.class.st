@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'element'
 	],
-	#category : #Bloc
+	#category : #'Bloc-Events'
 }
 
 { #category : #accessing }

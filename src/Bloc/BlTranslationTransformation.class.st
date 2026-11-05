@@ -14,6 +14,13 @@ Class {
 	#category : #'Bloc-Basic-Transformations'
 }
 
+{ #category : #examples }
+BlTranslationTransformation class >> exampleTransformation [
+
+	<sampleInstance>
+	^ self x: 20 y: 10 z: 0
+]
+
 { #category : #'instance creation' }
 BlTranslationTransformation class >> translation: aBlVector [
 

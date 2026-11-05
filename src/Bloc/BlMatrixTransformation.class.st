@@ -11,6 +11,13 @@ Class {
 	#category : #'Bloc-Basic-Transformations'
 }
 
+{ #category : #examples }
+BlMatrixTransformation class >> exampleTransformation [
+
+	<sampleInstance>
+	^ self matrix: (BlMatrix2D shear: 0.3 @ 0)
+]
+
 { #category : #'instance creation' }
 BlMatrixTransformation class >> matrix: aBlMatrix [
 

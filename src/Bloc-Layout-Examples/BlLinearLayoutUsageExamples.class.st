@@ -11,7 +11,7 @@ Class {
 
 { #category : #'layout - space equalization' }
 BlLinearLayoutUsageExamples >> equalizingHeighAndWidth [
-	<gtExample>		
+	<sampleInstance>		
 	| parent |
 
 	parent := self twoChildrenMatchParentInFitContent.
@@ -22,7 +22,7 @@ BlLinearLayoutUsageExamples >> equalizingHeighAndWidth [
 
 { #category : #'layout - space equalization' }
 BlLinearLayoutUsageExamples >> equalizingWidth [
-	<gtExample>		
+	<sampleInstance>		
 	| parent |
 
 	"width is by default equalized"
@@ -33,8 +33,8 @@ BlLinearLayoutUsageExamples >> equalizingWidth [
 
 { #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalListFixedWidthLTR [
-	<gtExample>
-	| e1 e2 e3 el space |
+	<sampleInstance>
+	| e1 e2 e3 el |
 	e1 := BlElement new
 		border: (BlBorder paint: Color darkGray width: 4);
 		constraintsDo: [ :c |
@@ -68,8 +68,8 @@ BlLinearLayoutUsageExamples >> exampleHorizontalListFixedWidthLTR [
 
 { #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalListFixedWidthRTL [
-	<gtExample>
-	| e1 e2 e3 el space |
+	<sampleInstance>
+	| e1 e2 e3 el |
 	e1 := BlElement new
 		border: (BlBorder paint: Color darkGray width: 4);
 		constraintsDo: [ :c |
@@ -103,8 +103,8 @@ BlLinearLayoutUsageExamples >> exampleHorizontalListFixedWidthRTL [
 
 { #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalListLTR [
-	<gtExample>
-	| e1 e2 e3 el space|
+	<sampleInstance>
+	| e1 e2 e3 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -135,8 +135,8 @@ BlLinearLayoutUsageExamples >> exampleHorizontalListLTR [
 
 { #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalListRTL [
-	<gtExample>
-	| e1 e2 e3 el space|
+	<sampleInstance>
+	| e1 e2 e3 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -167,8 +167,8 @@ BlLinearLayoutUsageExamples >> exampleHorizontalListRTL [
 
 { #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalTopCenterBottomLTR [
-	<gtExample>
-	| e1 e2 e3 el space|
+	<sampleInstance>
+	| e1 e2 e3 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -196,8 +196,8 @@ BlLinearLayoutUsageExamples >> exampleHorizontalTopCenterBottomLTR [
 
 { #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalTopCenterBottomRTL [
-	<gtExample>
-	| e1 e2 e3 el space|
+	<sampleInstance>
+	| e1 e2 e3 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -225,8 +225,8 @@ BlLinearLayoutUsageExamples >> exampleHorizontalTopCenterBottomRTL [
 
 { #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalUsingWeightLTR [
-	<gtExample>
-	| e1 e2 e3 el space|
+	<sampleInstance>
+	| e1 e2 e3 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -260,8 +260,8 @@ BlLinearLayoutUsageExamples >> exampleHorizontalUsingWeightLTR [
 
 { #category : #examples }
 BlLinearLayoutUsageExamples >> exampleHorizontalUsingWeightRTL [
-	<gtExample>
-	| e1 e2 e3 el space|
+	<sampleInstance>
+	| e1 e2 e3 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -295,8 +295,8 @@ BlLinearLayoutUsageExamples >> exampleHorizontalUsingWeightRTL [
 
 { #category : #examples }
 BlLinearLayoutUsageExamples >> exampleVerticalLeftCenterRightLRT [
-	<gtExample>
-	| e1 e2 e3 el space|
+	<sampleInstance>
+	| e1 e2 e3 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -327,8 +327,8 @@ BlLinearLayoutUsageExamples >> exampleVerticalLeftCenterRightLRT [
 
 { #category : #examples }
 BlLinearLayoutUsageExamples >> exampleVerticalLeftCenterRightRTL [
-	<gtExample>
-	| e1 e2 e3 el space|
+	<sampleInstance>
+	| e1 e2 e3 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -359,8 +359,8 @@ BlLinearLayoutUsageExamples >> exampleVerticalLeftCenterRightRTL [
 
 { #category : #examples }
 BlLinearLayoutUsageExamples >> exampleVerticalList [
-	<gtExample>
-	| e1 e2 e3 el space|
+	<sampleInstance>
+	| e1 e2 e3 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c |
@@ -395,8 +395,8 @@ BlLinearLayoutUsageExamples >> exampleVerticalList [
 
 { #category : #examples }
 BlLinearLayoutUsageExamples >> exampleVerticalListFixedHeight [
-	<gtExample>
-	| e1 e2 e3 el space|
+	<sampleInstance>
+	| e1 e2 e3 el |
 	
 	e1 := BlElement new
 		constraintsDo: [ :c | c horizontal matchParent ];
@@ -827,7 +827,7 @@ BlLinearLayoutUsageExamples >> oneChildWithFitContentLimitedExceedsNotAndTwoChil
 
 { #category : #'layout - space equalization' }
 BlLinearLayoutUsageExamples >> twoChildrenMatchParentInFitContent [
-	<gtExample>	
+	<sampleInstance>	
 	| parent child child2 |
 
 	parent := BlElement new.
@@ -866,7 +866,7 @@ BlLinearLayoutUsageExamples >> twoChildrenMatchParentInFitContent [
 
 { #category : #'layout - examples' }
 BlLinearLayoutUsageExamples >> twoChildrenOnOppositeSidesWithSpan [
-	<gtExample>
+	<sampleInstance>
 	| parent left span right |
 	
 	parent := BlElement new.

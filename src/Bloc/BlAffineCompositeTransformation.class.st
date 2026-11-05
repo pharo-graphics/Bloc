@@ -12,6 +12,18 @@ Class {
 	#category : #'Bloc-Basic-Transformations'
 }
 
+{ #category : #examples }
+BlAffineCompositeTransformation class >> exampleTransformation [
+
+	<sampleInstance>
+	^ self new
+		  addTransformation: (BlScalingTransformation scale: (BlVector x: 1.5 y: 0.5 z: 1));
+		  addTransformation: (BlRotationTransformation new
+				   angle: 30;
+				   yourself);
+		  yourself
+]
+
 { #category : #comparing }
 BlAffineCompositeTransformation >> = anObject [
 

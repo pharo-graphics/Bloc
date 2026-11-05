@@ -1,6 +1,45 @@
 "
-# Element's visual properties
+I am the abstract class of the objects that hold the visual properties of a `BlElement`:
+its background, border, geometry, outskirts, effect, opacity, visibility, clipping of children,
+compositing mode and elevation. I also hold a few properties that are not strictly visual:
+focusability, the focused state and the mouse cursor.
 
+### Responsibility
+
+- Define the API shared by my subclasses: one getter and one setter per property (`opacity`, `opacity:`, ...).
+- Hold the default value of each property in shared variables (`DefaultOpacity`, `DefaultBackground`, ...),
+  initialized by `BlElementVisuals class >> #initialize`, and answer them through `default…` methods.
+
+### Collaborators
+
+- `BlElement` stores me in its `visuals` instance variable and delegates its visual property accessors to me.
+- `BlDefaultVisuals`: the shared instance used by every element that has not changed any property.
+- `BlCustomVisuals`: the per-element instance that stores the changed properties.
+
+### Public API
+
+The setters follow an unusual contract: **a setter answers the visuals to use from now on**, which may be
+another object than the receiver. Callers must always store the result:
+
+```
+BlElement >> opacity: aNumber
+	...
+	visuals := visuals opacity: aNewOpacity.
+	self invalidate
+```
+
+You normally do not use me directly: send the corresponding messages to the element
+(`anElement opacity: 0.5`, `anElement background: Color red`).
+Run `BlCustomVisuals class >> #scriptElementVisuals`.
+
+### Implementation Points
+
+This design saves memory: most elements never change their visual properties, so they all share one
+`BlDefaultVisuals` instance instead of each holding a full object. Only elements that change a property
+pay for a `BlCustomVisuals`.
+
+The defaults are shared variables read at access time. Changing one (e.g. by re-running
+`BlElementVisuals class >> #initialize`) affects every element that has not set that property.
 "
 Class {
 	#name : #BlElementVisuals,

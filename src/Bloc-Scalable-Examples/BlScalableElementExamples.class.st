@@ -60,7 +60,7 @@ BlScalableElementExamples >> contentExtentSmaller [
 
 { #category : #'examples - scalable' }
 BlScalableElementExamples >> exactContentLargerInExactScalableFitAll [
-	<gtExample>
+	<sampleInstance>
 
 	| aScalable aContent |
 	aScalable := self scalableElement.
@@ -82,7 +82,7 @@ BlScalableElementExamples >> exactContentLargerInExactScalableFitAll [
 
 { #category : #'examples - scalable' }
 BlScalableElementExamples >> exactContentLargerInFitContentScalableFitAll [
-	<gtExample>
+	<sampleInstance>
 
 	| aScalable aContent |
 	aScalable := self scalableElementFitContent.
@@ -104,7 +104,7 @@ BlScalableElementExamples >> exactContentLargerInFitContentScalableFitAll [
 
 { #category : #'examples - scalable' }
 BlScalableElementExamples >> exactContentSmallerInExactScalableFitAll [
-	<gtExample>
+	<sampleInstance>
 
 	| aScalable aContent |
 	aScalable := self scalableElement.
@@ -127,7 +127,7 @@ BlScalableElementExamples >> exactContentSmallerInExactScalableFitAll [
 
 { #category : #'examples - scalable' }
 BlScalableElementExamples >> matchParentContentInExactScalableFitAll [
-	<gtExample>
+	<sampleInstance>
 
 	| aScalable aContent |
 	aScalable := self scalableElement.
@@ -149,7 +149,7 @@ BlScalableElementExamples >> matchParentContentInExactScalableFitAll [
 
 { #category : #'examples - scalable' }
 BlScalableElementExamples >> matchParentContentInMatchParentScalableFitAll [
-	<gtExample>
+	<sampleInstance>
 
 	| aScalable aContent aContainer |
 	aContainer := BlElement new.
@@ -179,7 +179,7 @@ BlScalableElementExamples >> matchParentContentInMatchParentScalableFitAll [
 
 { #category : #'examples - instance creation' }
 BlScalableElementExamples >> scalableElement [
-	<gtExample>
+	<sampleInstance>
 
 	| aScalableElement |
 	aScalableElement := BlScalableElement new.
@@ -195,7 +195,7 @@ BlScalableElementExamples >> scalableElement [
 
 { #category : #'examples - instance creation' }
 BlScalableElementExamples >> scalableElementFitContent [
-	<gtExample>
+	<sampleInstance>
 
 	^ self scalableElement
 		constraintsDo: [ :c |
@@ -206,7 +206,7 @@ BlScalableElementExamples >> scalableElementFitContent [
 
 { #category : #'examples - instance creation' }
 BlScalableElementExamples >> scalableElementMatchingParent [
-	<gtExample>
+	<sampleInstance>
 
 	^ self scalableElement
 		constraintsDo: [ :c |

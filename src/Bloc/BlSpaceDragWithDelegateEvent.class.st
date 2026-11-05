@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'delegate'
 	],
-	#category : #Bloc
+	#category : #'Bloc-Events'
 }
 
 { #category : #accessing }

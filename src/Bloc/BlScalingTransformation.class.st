@@ -16,6 +16,13 @@ Class {
 	#category : #'Bloc-Basic-Transformations'
 }
 
+{ #category : #examples }
+BlScalingTransformation class >> exampleTransformation [
+
+	<sampleInstance>
+	^ self scale: (BlVector x: 1.5 y: 0.5 z: 1)
+]
+
 { #category : #'instance creation' }
 BlScalingTransformation class >> scale: aVector [
 

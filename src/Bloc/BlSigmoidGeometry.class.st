@@ -173,10 +173,10 @@ BlSigmoidGeometry >> initialize [
 
 	super initialize.
 
-	from := 0 asPoint.
-	to := 0 asPoint.
-	fromControl := 0 asPoint.
-	toControl := 0 asPoint.
+	from := 0 @ 0.
+	to := 0 @ 0.
+	fromControl := 0 @ 0.
+	toControl := 0 @ 0.
 	bendingPoint := 0.5.
 	sharpness := 0.5.
 	orientation := AutomaticOrientation

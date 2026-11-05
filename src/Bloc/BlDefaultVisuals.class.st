@@ -1,48 +1,35 @@
 "
-I'm a singleton that holds many default values to be shared between multiples elements. 
-In addition, I'm kind of read only because when my setters are executed, they do not modify myself but 
-create and return a new instance of `BlCustomVisuals`.
+I am the visuals shared by all the elements that have not changed any visual property.
+`BlElement >> #initialize` sets `visuals` to `BlDefaultVisuals uniqueInstance`.
 
-Check for example:
+### Responsibility
 
-```
-BlDefaultVisuals >> effect: aBlElementEffect
-		""Change the effect and return new visuals to be used instead of the previous one (not necessarily a new instance)""
-		<return: #BlElementVisuals>
-
-		^ BlCustomVisuals new effect: aBlElementEffect
-```
-
-The KEY point is that in BlElement the RESULT of the setter (badly name message in fact) must be stored.
+- Answer the default value of every property (my getters answer `self default…`).
+- Never change: since I am shared, my setters do not modify me. Each one answers a new `BlCustomVisuals`
+  holding the new value, which the element then stores in place of me.
 
 ```
-BlElement >> effect: anEffect
-		""Change my effect to a given one requesting draw area invalidations.
-		anEffect must not be nil""
-
-		visuals := visuals effect: anEffect.
-		self invalidate
-```
-
-My counterpart, `BlCustomVisuals` is offering the same API but its setter are normal setters that modify the instance. 
-
-
-```
-BlCustomVisuals >> effect: aBlElementEffect
-		""Change the effect and return new visuals to be used instead of the previous one (not necessarily a new instance)""
-		<return: #BlElementVisuals>
-
-		effect := aBlElementEffect
-```
-
-### Discussion 
-The result could have been achieved by having an instance variable and a classVariable with the instance variable pointing to the classVariable by default. But this implementation would have forced to copy the customized version after each setter. 
-
-
-
-
-
+BlDefaultVisuals >> opacity: aNumber
+	""Return a <BlElementVisuals>""
 	
+	^ BlCustomVisuals new opacity: aNumber
+```
+
+### Collaborators
+
+- `BlCustomVisuals`, which I create on the first change.
+- `BlElement`, which must store the result of my setters (see `BlElementVisuals`).
+
+### Public API
+
+- `BlDefaultVisuals uniqueInstance`: the shared instance.
+- `BlDefaultVisuals cleanUp`: forget it; the next `uniqueInstance` creates a new one.
+
+### Implementation Points
+
+An alternative would be one class with an instance variable pointing to a shared default object.
+But then the shared object would have to be copied before each change. With two classes,
+the switch from shared to private happens once, on the first change, through polymorphism.
 "
 Class {
 	#name : #BlDefaultVisuals,

@@ -7,6 +7,15 @@ Class {
 	#category : #'Bloc-Basic-Transformations'
 }
 
+{ #category : #examples }
+BlShearTransformation class >> exampleTransformation [
+
+	<sampleInstance>
+	^ self new
+		  angleX: 20;
+		  yourself
+]
+
 { #category : #comparing }
 BlShearTransformation >> = anObject [
 

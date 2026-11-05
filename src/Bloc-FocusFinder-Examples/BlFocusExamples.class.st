@@ -72,7 +72,7 @@ BlFocusExamples class >> vertical [
 
 { #category : #examples }
 BlFocusExamples >> cell [
-	<gtExample>
+	<sampleInstance>
 	
 	^ BlElement new
 		extent: 50 @ 30;
@@ -89,7 +89,7 @@ BlFocusExamples >> cell [
 
 { #category : #examples }
 BlFocusExamples >> composed [
-	<gtExample>
+	<sampleInstance>
 
 	| container children |
 	children :=
@@ -135,7 +135,7 @@ BlFocusExamples >> composed [
 
 { #category : #examples }
 BlFocusExamples >> composedFlow [
-	<gtExample>
+	<sampleInstance>
 	| container children |
 
 	children := (1 to: 5) collect: [ :index |
@@ -171,7 +171,7 @@ BlFocusExamples >> composedFlow [
 
 { #category : #examples }
 BlFocusExamples >> grid [
-	<gtExample>
+	<sampleInstance>
 	| container children |
 
 	children := (1 to: 50) collect: [ :index |
@@ -193,7 +193,7 @@ BlFocusExamples >> grid [
 
 { #category : #examples }
 BlFocusExamples >> linearHorizontal [
-	<gtExample>
+	<sampleInstance>
 	| container children |
 
 	children := (1 to: 10) collect: [ :index |
@@ -213,7 +213,7 @@ BlFocusExamples >> linearHorizontal [
 
 { #category : #examples }
 BlFocusExamples >> linearVertical [
-	<gtExample>
+	<sampleInstance>
 	| container children |
 
 	children := (1 to: 10) collect: [ :index |
