@@ -1,5 +1,30 @@
 "
-I define a geometry of a straight line
+I am a straight line between two points, in the coordinates of my element.
+
+### Responsibility
+- Know my start (`from`) and end (`to`) points; they do not change when the extent of the element changes.
+- Build an open path, so I have caps and no joins: the border of the element draws me, the background has nothing to fill.
+- Answer the rectangle around my two points as my bounds, and contain the points closer to the line than half the border width.
+
+### Collaborators
+- `BlPolylineGeometry` goes through more than two points; `BlBezierCurveGeometry` and `BlSigmoidGeometry` draw curves.
+- `BlSvgConverter` uses me for the `line` elements of SVG documents.
+
+### Public API
+```
+BlLineGeometry from: 10 @ 10 to: 90 @ 60.
+aLine from: 0 @ 0; to: 100 @ 100.
+anElement geometry: (BlLineGeometry from: 0 @ 0 to: 100 @ 50); border: (BlBorder paint: Color black width: 2).
+```
+See `BlLineGeometry class >> #exampleDiagonal`.
+
+### Implementation Points
+- `matchExtent:` only stores the extent; the points stay where they are.
+- Two lines are equal when they have the same points.
+
+**Instance Variables**
+- from: my start point.
+- to: my end point.
 "
 Class {
 	#name : #BlLineGeometry,
@@ -10,6 +35,14 @@ Class {
 	],
 	#category : #'Bloc-Basic-Geometry'
 }
+
+{ #category : #examples }
+BlLineGeometry class >> exampleDiagonal [
+	"Answer a straight line from 10@10 to 90@60, in the coordinates of its element."
+
+	<sampleInstance>
+	^ self from: 10 @ 10 to: 90 @ 60
+]
 
 { #category : #'instance creation' }
 BlLineGeometry class >> from: aFromPoint to: aToPoint [

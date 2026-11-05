@@ -1,8 +1,38 @@
+"
+I am the default geometry of an element: a rectangle covering the whole element.
+
+### Responsibility
+- Build a rectangle path from 0 @ 0 to the extent of the element, with specific paths for an inside or outside border.
+- Answer the bounds of the element as my geometry bounds, and contain every point of these bounds.
+- Answer the point of my perimeter in a given direction from the center (`pointOnPerimeterOfElement:atRadians:`), used by anchors.
+
+### Collaborators
+- `BlElement` uses me when no other geometry is set.
+- `BlRoundedRectangleGeometry` adds rounded corners; `BlSquareGeometry` keeps the sides equal.
+
+### Public API
+```
+anElement geometry: BlRectangleGeometry new.
+```
+See `BlRectangleGeometry class >> #exampleRectangle`, and run `BlSquareGeometry class >> #scriptSquareVersusRectangle`.
+
+### Implementation Points
+- I keep no state: I read the extent of the element each time, so `matchElement:` does nothing. Two rectangle geometries are equal.
+- I am a direct subclass of `BlElementGeometry`, not of `BlElementVectorGeometry`: I need no extent and no path cache.
+"
 Class {
 	#name : #BlRectangleGeometry,
 	#superclass : #BlElementGeometry,
 	#category : #'Bloc-Basic-Geometry'
 }
+
+{ #category : #examples }
+BlRectangleGeometry class >> exampleRectangle [
+	"Answer a rectangle geometry, the default geometry of an element."
+
+	<sampleInstance>
+	^ self new
+]
 
 { #category : #comparing }
 BlRectangleGeometry >> = anObject [

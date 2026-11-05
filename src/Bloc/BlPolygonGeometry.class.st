@@ -1,13 +1,30 @@
 "
-Example:
+I am a closed shape made of straight segments through a list of points, in the coordinates of my element.
 
-BlPolygon vertices: { 
-	10@50.
-	50@20.
-	150@40.
-	180@150.
-	80@140
-}
+### Responsibility
+- Know my vertices, converted to float points; they do not change when the extent of the element changes.
+- Build a closed path (the last vertex is joined to the first one), so the background fills me.
+- Answer the rectangle around my vertices as my bounds, and contain the points inside the shape (`BlPolygonHitTester`).
+
+### Collaborators
+- `BlPolylineGeometry` draws the same points as an open path.
+- `BlRoundedPolygonGeometry` rounds my corners; `ToAdjacentRectanglesGeometry` computes my vertices from rectangles.
+- `BlTriangleGeometry` and `BlHistogramGeometry` compute their vertices from the extent of the element instead.
+
+### Public API
+```
+BlPolygonGeometry vertices: { 10 @ 25. 60 @ 25. 60 @ 10. 90 @ 35. 60 @ 60. 60 @ 45. 10 @ 45 }.
+anElement geometry: (BlPolygonGeometry vertices: { 0 @ 0. 50 @ 0. 25 @ 40 }).
+```
+See `BlPolygonGeometry class >> #exampleArrow`, and run `BlPolylineGeometry class >> #scriptOpenVersusClosed`.
+
+### Implementation Points
+- `vertices:` does nothing when the new vertices are equal to the current ones; otherwise it sets my extent
+  to the largest coordinates of the vertices and releases the path cache.
+- Two polygons are equal when they have the same vertices.
+
+**Instance Variables**
+- vertices: the corners of the shape, in order.
 "
 Class {
 	#name : #BlPolygonGeometry,
@@ -17,6 +34,22 @@ Class {
 	],
 	#category : #'Bloc-Basic-Geometry'
 }
+
+{ #category : #examples }
+BlPolygonGeometry class >> exampleArrow [
+	"Answer a closed arrow pointing to the right, in the coordinates of its element.
+	The class is named explicitly so that subclasses inheriting this method still answer a plain polygon."
+
+	<sampleInstance>
+	^ BlPolygonGeometry vertices: { 
+			  (10 @ 25).
+			  (60 @ 25).
+			  (60 @ 10).
+			  (90 @ 35).
+			  (60 @ 60).
+			  (60 @ 45).
+			  (10 @ 45) }
+]
 
 { #category : #'instance creation' }
 BlPolygonGeometry class >> vertices: aCollection [
