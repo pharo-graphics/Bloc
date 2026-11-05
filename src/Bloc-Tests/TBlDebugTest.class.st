@@ -2,7 +2,7 @@
 I test the assertion behavior provided by TBlDebug when assertions are enabled and disabled via Bloc enableAssertions / Bloc disableAssertions.
 "
 Class {
-	#name : #BlAssertionsTraitTest,
+	#name : #TBlDebugTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'previousAssertionsEnabled',
@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : #running }
-BlAssertionsTraitTest >> setUp [
+TBlDebugTest >> setUp [
 
 	super setUp.
 	previousAssertionsEnabled := Bloc assertionsEnabled.
@@ -20,14 +20,14 @@ BlAssertionsTraitTest >> setUp [
 ]
 
 { #category : #running }
-BlAssertionsTraitTest >> tearDown [
+TBlDebugTest >> tearDown [
 
 	Bloc assertionsEnabled: previousAssertionsEnabled.
 	super tearDown
 ]
 
 { #category : #tests }
-BlAssertionsTraitTest >> testAssertDescriptionBlockNotEvaluatedWhenDisabled [
+TBlDebugTest >> testAssertDescriptionBlockNotEvaluatedWhenDisabled [
 
 	| descriptionEvaluated |
 	descriptionEvaluated := false.
@@ -39,14 +39,14 @@ BlAssertionsTraitTest >> testAssertDescriptionBlockNotEvaluatedWhenDisabled [
 ]
 
 { #category : #tests }
-BlAssertionsTraitTest >> testAssertDescriptionWhenDisabledDoesNotSignal [
+TBlDebugTest >> testAssertDescriptionWhenDisabledDoesNotSignal [
 
 	Bloc disableAssertions.
 	self shouldnt: [ assertionObject assert: [ false ] description: 'Ignored description' ] raise: AssertionFailure
 ]
 
 { #category : #tests }
-BlAssertionsTraitTest >> testAssertDescriptionWhenEnabledFailureSignals [
+TBlDebugTest >> testAssertDescriptionWhenEnabledFailureSignals [
 
 	Bloc enableAssertions.
 	self
@@ -56,21 +56,21 @@ BlAssertionsTraitTest >> testAssertDescriptionWhenEnabledFailureSignals [
 ]
 
 { #category : #tests }
-BlAssertionsTraitTest >> testAssertDescriptionWhenEnabledSuccess [
+TBlDebugTest >> testAssertDescriptionWhenEnabledSuccess [
 
 	Bloc enableAssertions.
 	self shouldnt: [ assertionObject assert: [ true ] description: 'Should not fail' ] raise: AssertionFailure
 ]
 
 { #category : #tests }
-BlAssertionsTraitTest >> testAssertEqualsWhenDisabledDoesNotSignal [
+TBlDebugTest >> testAssertEqualsWhenDisabledDoesNotSignal [
 
 	Bloc disableAssertions.
 	self shouldnt: [ assertionObject assert: 10 equals: 20 ] raise: AssertionFailure
 ]
 
 { #category : #tests }
-BlAssertionsTraitTest >> testAssertEqualsWhenEnabledFailureSignals [
+TBlDebugTest >> testAssertEqualsWhenEnabledFailureSignals [
 
 	Bloc enableAssertions.
 	self
@@ -80,21 +80,21 @@ BlAssertionsTraitTest >> testAssertEqualsWhenEnabledFailureSignals [
 ]
 
 { #category : #tests }
-BlAssertionsTraitTest >> testAssertEqualsWhenEnabledSuccess [
+TBlDebugTest >> testAssertEqualsWhenEnabledSuccess [
 
 	Bloc enableAssertions.
 	self shouldnt: [ assertionObject assert: 42 equals: 42 ] raise: AssertionFailure
 ]
 
 { #category : #tests }
-BlAssertionsTraitTest >> testAssertWhenDisabledDoesNotSignal [
+TBlDebugTest >> testAssertWhenDisabledDoesNotSignal [
 
 	Bloc disableAssertions.
 	self shouldnt: [ assertionObject assert: [ false ] ] raise: AssertionFailure
 ]
 
 { #category : #tests }
-BlAssertionsTraitTest >> testAssertWhenEnabledFailureSignals [
+TBlDebugTest >> testAssertWhenEnabledFailureSignals [
 
 	Bloc enableAssertions.
 	self
@@ -104,14 +104,14 @@ BlAssertionsTraitTest >> testAssertWhenEnabledFailureSignals [
 ]
 
 { #category : #tests }
-BlAssertionsTraitTest >> testAssertWhenEnabledSuccess [
+TBlDebugTest >> testAssertWhenEnabledSuccess [
 
 	Bloc enableAssertions.
 	self shouldnt: [ assertionObject assert: [ true ] ] raise: AssertionFailure
 ]
 
 { #category : #tests }
-BlAssertionsTraitTest >> testClassSideAssertWhenEnabledAndDisabled [
+TBlDebugTest >> testClassSideAssertWhenEnabledAndDisabled [
 
 	Bloc enableAssertions.
 	self
