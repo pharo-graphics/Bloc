@@ -73,6 +73,25 @@ self assert: box width equals: 100.
   > Always send `#defer:` to an opened `BlSpace` (or `#enqueueTask:` to a `BlElement`), never to a `BlHost` (`BlHost >> #defer:` is deprecated).
 * **`space isSettled`**: A non-blocking query answering whether the space has reached equilibrium across all its frame phases.
 
+### Running something later on the pulse loop
+
+A block which has to run after a delay, on the pulse process and not in a process of your own, is a `BlDelayedTaskAction`:
+
+```smalltalk
+task := BlDelayedTaskAction new
+	delay: 300 milliSeconds;
+	action: [ fired := true ];
+	yourself.
+task element: space root.
+task startOrRestart.
+space settleForDuration: 100 milliSeconds.
+fired. ">>> false"
+space settleForDuration: 500 milliSeconds.
+fired. ">>> true"
+```
+
+`element:` must come before `startOrRestart`, which enqueues the task on the space of the element, and sending `startOrRestart` again restarts the delay (a tooltip which waits for the mouse to stay). `stop` cancels it: a task stopped before its delay never runs. The action runs on the pulse process, so it can change attached elements without `defer:`, and it must not wait for the space. It works on the headless host. See [Overlays](Overlays.md) for a tooltip built with it.
+
 ---
 
 ## 4. Preventing deadlocks: `#denyPulseProcess`
@@ -96,9 +115,9 @@ Bloc maintains a clear separation between elements that are attached to a live s
 ## 6. Writing unit tests
 
 When writing tests in Bloc:
-- Subclass `BlSpaceTestCase` or `BlParameterizedHostTest`.
-- Use `self newTestingSpace` to get a clean space that is opened, settled, and automatically cleaned up in `tearDown`.
-- Structure test assertions with `deferAndSettle:`:
+- Subclass `BlSpaceTestCase`: its `setUp` creates a `space` on the headless host, opens it and settles it, and its `tearDown` closes it. The space is available with `self space`.
+- Or subclass `BlParameterizedHostTest` to run the same tests on several hosts (see below). Use `self newTestingSpace` to get a clean space that is opened, settled, and automatically cleaned up in `tearDown`. `newTestingSpace` is defined by `BlParameterizedHostTest` only.
+- Structure test assertions with `deferAndSettle:` (the example below is a `BlParameterizedHostTest`):
 
 ```smalltalk
 testElementWidthChange
@@ -128,6 +147,8 @@ BlParameterizedHostTest testHostsMode: #headlessOnly.
 "or"
 BlParameterizedHostTest testHostsMode: #allAvailable.
 ```
+
+To test the interactions of your own project (headless host, synthetic mouse events, checking what is drawn), see [Testing Interactions and Drawing](TestingInteractions.md).
 
 ---
 

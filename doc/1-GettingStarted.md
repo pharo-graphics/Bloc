@@ -30,6 +30,11 @@ rectangle
 	border: (BlBorder paint: Color blue width: 10).
 ```
 
+   A border is drawn **inside** the bounds of the element by default. Choose where it is drawn with the _outskirts_: `beOutskirtsInside`, `beOutskirtsCentered` (half inside and half outside of the edge) or `beOutskirtsOutside`. The bounds of the element are the same in the three cases, only the pixels change: for a black border of 10 pixels around an element of `40 @ 40`, the rendering has 1200, 1600 and 2000 black pixels.
+```smalltalk
+rectangle beOutskirtsCentered.
+```
+
 3. Nest an element with circle _geometry_ (in `BlElementGeometry` hierarchy):
 ```smalltalk
 circle := BlElement new
