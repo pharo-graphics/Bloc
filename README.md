@@ -70,6 +70,7 @@ The guides are arranged in recommended reading order:
 - [Layout and Constraints](doc/LayoutAndConstraints.md) — Size policies, layout facets, why `position:` is a request, and reacting to a layout without looping.
 - [Working with Text](doc/Text.md) — `BlTextElement`, what it does not do (wrapping, line breaks), and recipes: lines, wrapping, ellipsis.
 - [Graphical Patterns: Zoom, Pan and Fit](doc/GraphicalPatterns.md) — Transformations and the patterns to zoom around the mouse, pan with the mouse and fit a content in a window.
+- [Overlays: Toolbars, Legends, Tooltips and Pop-ups](doc/Overlays.md) — Elements above the content: anchoring to a corner, a tooltip after a delay, a pop-up kept inside the window, and not taking the mouse.
 - [Testing Interactions and Drawing](doc/TestingInteractions.md) — Headless host, synthetic mouse events (`fireEvent:` vs `dispatchEvent:`) and checking pixels.
 - [Troubleshooting](doc/Troubleshooting.md) — Symptoms and explanations, including the debugger that freezes the windows.
 - [Using Bloc in a Spec Presenter](doc/SpecIntegration.md) — Showing a Bloc space in a Spec window with `SpBlSpaceInMorphPresenter`.

@@ -73,6 +73,25 @@ self assert: box width equals: 100.
   > Always send `#defer:` to an opened `BlSpace` (or `#enqueueTask:` to a `BlElement`), never to a `BlHost` (`BlHost >> #defer:` is deprecated).
 * **`space isSettled`**: A non-blocking query answering whether the space has reached equilibrium across all its frame phases.
 
+### Running something later on the pulse loop
+
+A block which has to run after a delay, on the pulse process and not in a process of your own, is a `BlDelayedTaskAction`:
+
+```smalltalk
+task := BlDelayedTaskAction new
+	delay: 300 milliSeconds;
+	action: [ fired := true ];
+	yourself.
+task element: space root.
+task startOrRestart.
+space settleForDuration: 100 milliSeconds.
+fired. ">>> false"
+space settleForDuration: 500 milliSeconds.
+fired. ">>> true"
+```
+
+`element:` must come before `startOrRestart`, which enqueues the task on the space of the element, and sending `startOrRestart` again restarts the delay (a tooltip which waits for the mouse to stay). `stop` cancels it: a task stopped before its delay never runs. The action runs on the pulse process, so it can change attached elements without `defer:`, and it must not wait for the space. It works on the headless host. See [Overlays](Overlays.md) for a tooltip built with it.
+
 ---
 
 ## 4. Preventing deadlocks: `#denyPulseProcess`

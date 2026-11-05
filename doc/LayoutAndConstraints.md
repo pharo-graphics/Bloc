@@ -81,3 +81,51 @@ parent clipChildren: false
 ```
 
 The window also clips: nothing is drawn outside of the root of the space. See [Graphical Patterns](GraphicalPatterns.md) for content bigger than the window.
+
+## 7. Sizes before the first layout
+
+`extent`, `width` and `height` answer the size measured by the last layout. Before the first one they answer `0 @ 0`, even when the extent was requested:
+
+```smalltalk
+element := BlElement new extent: 30 @ 20.
+element extent. ">>> 0 @ 0"
+space root addChild: element.
+space settle.
+element extent. ">>> 30 @ 20"
+```
+
+`measuredBounds extent` answers `0 @ 0` too: it only gets the extent once the layout computed it (the position, in contrast, is recorded at once, see section 4).
+
+Code which needs a size before the layout, such as another library asking `node width` while it places the nodes, must not read it from the element. Keep the requested size in your own model (a `dimension` instance variable which `extent:` is sent from), and answer it. Bloc advises against redefining `width` and `height` (a lint rule checks it): doing it is only safe when the extent of the element is always its model's dimension, so that Bloc and the other library see the same size.
+
+## 8. Computations which depend on measured children
+
+The text of a label is measured by the layout, and its position is requested by a handler of `BlElementLayoutComputedEvent`, which requests another layout. A computation made from the bounds of such children, for example the route of a line around the nodes and their labels, is therefore wrong when it is made before the layouts are done, and it can be wrong after the first one.
+
+A pattern which works: make the computation when the content changes, remember the bounds it used, and make it again after each following layout until these bounds were the same for a few layouts in a row. A one-shot hook sent to the element, which runs the next time it is laid out, is enough to build it:
+
+```smalltalk
+watch := nil.
+watch := [
+	element doAfterNextLayout: [
+		current := self boundsOfTheNodesAndTheirLabels.
+		current = used
+			ifTrue: [ stable := stable + 1 ]
+			ifFalse: [ used := current. stable := 0. self computeTheRoutes ].
+		stable < 4 ifTrue: [ watch value ] ] ].
+```
+
+`doAfterNextLayout:` is not part of Bloc: keep a collection of blocks, and evaluate and empty it in a handler of `BlElementLayoutComputedEvent` of the element. The bounds must be computed from sizes, not read from positions, which are the ones of the previous layout: the place of a label next to its node is its size and its placement rule, not `label position`.
+
+## 9. Moving a child to another parent
+
+`addChild:` raises `BlAlreadyAddedAsChildError` when the element already has a parent, even another one (the error has no message). Remove it first:
+
+```smalltalk
+child removeFromParent.
+newParent addChild: child.
+"or, for all the children of a parent"
+oldParent removeChildren.
+```
+
+To move all the children, take them first (`children := oldParent children asArray`), then `removeChildren`, then add them one by one. Elements which were children of the old parent have no parent after `removeChildren`.

@@ -59,6 +59,34 @@ To recover:
 
 An error that you raise in your own process, such as an assertion in a test, does not do this: only the errors raised in the pulse process do. The headless host is not protected: a layout error left a space of the headless host suspended in the same way. See [Testing Interactions and Drawing](TestingInteractions.md) for the headless host.
 
+## Every window is blank or has an extent of `0 @ 0` after I added an instance variable to a class of elements
+
+Adding an instance variable (a slot) to a class whose instances are in open spaces gives these instances `nil` in the new slot. Their next layout or event raises an error in the pulse process, a debugger suspends it as described above, and the other windows of the same host stay frozen: the extents of new elements stay `0 @ 0`, `settle` times out, and the tests which follow fail for a reason which is not in their code.
+
+Before looking at the new code, look for suspended pulse processes (see the code above) and read the stack of one: the first error is the one to fix. To recover:
+
+1. Set the new slot on the live instances (`SomeElementClass allInstances do: [ :each | each instVarNamed: 'slot' put: value ]`), or close the spaces which hold them (`Bloc closeSpaces`).
+2. Terminate the suspended pulse processes and close their debuggers.
+3. Restart the host: `BlHeadlessHost default stop; start`.
+
+When you work on a class of elements, close the windows of your tests before adding a slot to it.
+
+## `BlAlreadyAddedAsChildError` when I add a child
+
+`addChild:` raises it, with an empty message, when the element already has a parent, even when it is another parent. Remove the element first (`removeFromParent`, or `removeChildren` on the old parent). See [Layout and Constraints](LayoutAndConstraints.md).
+
+## A tooltip or a pop-up blinks
+
+It is under the mouse, so the mouse leaves the element it is for, which hides it, and enters the element again. Send `preventMeAndChildrenMouseEvents` to the pop-up. See [Overlays](Overlays.md).
+
+## A click arrives at the end of a drag, or at the parent of the element I clicked
+
+A press, moves and a release on the same element are a click, and a click arrives at the handlers of the parents of the element too. See [About Mouse Events](MouseEvent.md).
+
+## A zoom or a pan is wrong when the window is not at the corner of the screen
+
+The handler reads `screenPosition`, the position on the desktop. Use `position`, the position in the space. See [Graphical Patterns](GraphicalPatterns.md).
+
 ## `space pulse` is deprecated
 
 `BlSpace >> #pulse` is deprecated: sent directly it causes concurrency races. Use `settle`, `settleForDuration:` or `deferAndSettle:`. See [Concurrency and Synchronization](2-ConcurrencyAndSynchronization.md).
