@@ -36,6 +36,13 @@ BlTransparentBackground >> = anotherObject [
 	^ anotherObject class = self class
 ]
 
+{ #category : #comparing }
+BlTransparentBackground >> hash [
+	"I do not take opacity into account, like #="
+
+	^ self class hash
+]
+
 { #category : #testing }
 BlTransparentBackground >> isTransparent [
 	"I am transparent by definition"
