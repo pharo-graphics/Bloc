@@ -18,7 +18,7 @@ BlSvgPath pathString: 'M50,65 C20,45 5,30 15,15 C25,0 45,5 50,20 C55,5 75,0 85,1
 aPath useEvenOddFillRule.
 aPath asElement. ""black fill and no border, the default style of SVG""
 ```
-See `BlSvgPath class >> #exampleHeart`, and run `BlSvgPath class >> #scriptFillRules`.
+See `BlSvgPath class >> #exampleHeart`, and run `BlSvgPath class >> #scriptFilledAndStroked` and `BlSvgPath class >> #scriptFillRules`.
 
 ### Implementation Points
 - `matchExtent:` is ignored: the path keeps its coordinates. My extent stays the default one (150 x 100), so set the extent of the element yourself.
@@ -87,6 +87,32 @@ BlSvgPath class >> scriptFillRules [
 								   yourself)
 						  extent: 100 @ 70)
 				 caption: 'useEvenOddFillRule') }
+]
+
+{ #category : #script }
+BlSvgPath class >> scriptFilledAndStroked [
+	"Show the heart of `exampleHeart` filled in black with no border, the default style of SVG given by `asElement`,
+	then only stroked, then both filled and stroked. The path keeps its coordinates whatever the element extent."
+
+	<script>
+	| heart |
+	heart := self exampleHeart.
+	self demoOpen: { 
+			(self
+				 demoCellFor: (self demoElementFor: heart copy extent: 100 @ 70)
+				 caption: 'filled (SVG default)').
+			(self
+				 demoCellFor: ((self demoElementFor: heart copy extent: 100 @ 70)
+						  background: Color transparent;
+						  border: (BlBorder paint: Color red width: 2);
+						  yourself)
+				 caption: 'stroked').
+			(self
+				 demoCellFor: ((self demoElementFor: heart copy extent: 100 @ 70)
+						  background: Color pink;
+						  border: (BlBorder paint: Color red width: 2);
+						  yourself)
+				 caption: 'filled and stroked') }
 ]
 
 { #category : #converting }
