@@ -556,6 +556,31 @@ BlBackgroundTest >> testEqualityOfTransparentPaintBackground [
 ]
 
 { #category : #testing }
+BlBackgroundTest >> testHashOfFormSetBackgroundDependsOnFormSet [
+	"Two form set backgrounds with different form sets are different, so their hashes should differ too."
+
+	| first second |
+	first := BlFormSetBackground formSet: (FormSet form: self newOpaqueSquaredForm).
+	second := BlFormSetBackground formSet: (FormSet form: self newOpaqueSquaredForm).
+	self deny: first equals: second.
+	self deny: first hash equals: second hash
+]
+
+{ #category : #testing }
+BlBackgroundTest >> testHashOfTransparentBackgroundIgnoresOpacity [
+	"Transparent backgrounds are all equal, whatever opacity they were given, so they must all have the same hash
+	and be found in hashed collections."
+
+	| background halfOpaque |
+	background := BlTransparentBackground new.
+	halfOpaque := BlTransparentBackground new opacity: 0.5; yourself.
+	self assert: background equals: halfOpaque.
+	self assert: background hash equals: halfOpaque hash.
+	self assert: background hash equals: BlBackground transparent hash.
+	self assert: ((Set with: background) includes: halfOpaque)
+]
+
+{ #category : #testing }
 BlBackgroundTest >> testTransparentBackground [
 
 	| aBackground |

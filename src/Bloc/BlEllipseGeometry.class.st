@@ -1,20 +1,37 @@
 "
-I am an ellipse geometry.
+I am an ellipse filling the extent of my element.
 
-I can play a role of a circle if both width and height are equal. In this case can be created using a predefined factory method:
+### Responsibility
+- Build an ellipse path inscribed in my extent; I am a circle when the element is square.
+- Contain the points inside this ellipse.
+- Answer the point of my perimeter in a given direction from the center (`pointOnPerimeterOfElement:atRadians:`), used by anchors.
 
-	BlEllipseGeometry radius: 20 ""creates a circle with radius 20""
-	BlEllipseGeometry diameter: 40 ""creates a circle with diameter 40 or radius 20""
-	
-In order to explicitely create an ellipse use extent:
+### Collaborators
+- `BlCircleGeometry` stays a circle, centered in the element, whatever its extent.
 
-	BlEllipseGeometry extent: 50@30 ""create an ellipse with width 50 and height 30""
+### Public API
+```
+anElement geometry: BlEllipseGeometry new.
+BlEllipseGeometry new extent: 50 @ 30; yourself. ""the element sets my extent anyway""
+```
+See `BlEllipseGeometry class >> #exampleEllipse`, and run `BlCircleGeometry class >> #scriptCircleVersusEllipse`.
+
+### Implementation Points
+- I have no state besides my extent, so two ellipse geometries are equal.
 "
 Class {
 	#name : #BlEllipseGeometry,
 	#superclass : #BlElementVectorGeometry,
 	#category : #'Bloc-Basic-Geometry'
 }
+
+{ #category : #examples }
+BlEllipseGeometry class >> exampleEllipse [
+	"Answer an ellipse geometry; it fills the extent of its element."
+
+	<sampleInstance>
+	^ self new
+]
 
 { #category : #comparing }
 BlEllipseGeometry >> = anObject [

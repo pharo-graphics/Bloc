@@ -1,13 +1,28 @@
 "
-I am a rectangular geometry with support of rounded corners.
+I am a rectangle with rounded corners, filling the extent of my element.
 
-I can play a role of a square if both width and height are equal. In this case can be created using a predefined factory method:
+### Responsibility
+- Build a rounded rectangle path, with one radius per corner (top left, top right, bottom right, bottom left).
+- Reduce the radii when they are too large for the extent, so that the corners do not overlap
+  (`nonOverlappingCornersForBorderWidth:`).
+- Build specific paths for an inside or outside border, so the border follows the rounded corners.
 
-	BlRectangle length: 20 ""creates a square with side length of 20""
-	
-In order to explicitely create a rectangle use extent:
+### Collaborators
+- `BlCornerRadii` holds my four radii.
+- `BlRectangleGeometry`, the same shape with square corners.
 
-	BlRectangle extent: 50@30 ""create a rectangle with width 50 and height 30""
+### Public API
+```
+BlRoundedRectangleGeometry cornerRadius: 8.
+BlRoundedRectangleGeometry cornerRadii: (BlCornerRadii new topLeft: 10; topRight: 0; bottomRight: 10; bottomLeft: 0; yourself).
+BlRoundedRectangleGeometry new. ""no rounding""
+anElement geometry: (BlRoundedRectangleGeometry cornerRadius: 8).
+```
+See `BlRoundedRectangleGeometry class >> #exampleRoundedRectangle`, and run `BlRoundedRectangleGeometry class >> #scriptCornerRadii`.
+
+**Instance Variables**
+- cornerRadii: the `BlCornerRadii` of my four corners.
+- center: the center of my extent, updated by `matchExtent:`.
 "
 Class {
 	#name : #BlRoundedRectangleGeometry,
@@ -39,12 +54,45 @@ BlRoundedRectangleGeometry class >> cornerRadius: aNumber [
 		yourself
 ]
 
+{ #category : #examples }
+BlRoundedRectangleGeometry class >> exampleRoundedRectangle [
+	"Answer a rectangle geometry with all its corners rounded with a radius of 12."
+
+	<sampleInstance>
+	^ self cornerRadius: 12
+]
+
 { #category : #factory }
 BlRoundedRectangleGeometry class >> new [
 
 	^ self basicNew
 		  initializeWith: BlCornerRadii empty;
 		  yourself
+]
+
+{ #category : #script }
+BlRoundedRectangleGeometry class >> scriptCornerRadii [
+	"Show rounded rectangles: the same radius on all corners, a different radius on each corner,
+	and a radius larger than the element, which is reduced so that the corners do not overlap."
+
+	<script>
+	self demoOpen: { 
+			(self
+				 demoCellFor: (self demoElementFor: (self cornerRadius: 12) extent: 100 @ 70)
+				 caption: 'cornerRadius: 12').
+			(self
+				 demoCellFor: (self
+						  demoElementFor: (self cornerRadii: (BlCornerRadii new
+									    topLeft: 0;
+									    topRight: 30;
+									    bottomRight: 0;
+									    bottomLeft: 10;
+									    yourself))
+						  extent: 100 @ 70)
+				 caption: 'one radius per corner').
+			(self
+				 demoCellFor: (self demoElementFor: (self cornerRadius: 100) extent: 100 @ 70)
+				 caption: 'cornerRadius: 100') }
 ]
 
 { #category : #comparing }

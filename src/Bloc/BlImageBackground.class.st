@@ -44,25 +44,12 @@ Class {
 	#category : #'Bloc-Basic-Background'
 }
 
-{ #category : #'private - demo' }
-BlImageBackground class >> demoForm [
-	"Answer a 100 x 50 form: the Pharo logo on an opaque light blue rectangle,
-	so that the extent of the image is visible."
-
-	| form |
-	form := (Form extent: 100 @ 50 depth: 32)
-		        fillColor: (Color r: 0.85 g: 0.92 b: 1.0);
-		        yourself.
-	form getCanvas translucentImage: (PolymorphSystemSettings pharoLogoForm scaledToSize: 100 @ 34) at: 0 @ 8.
-	^ form
-]
-
 { #category : #examples }
 BlImageBackground class >> exampleImage [
 	"Answer an image background showing the Pharo logo on a light blue rectangle of 100 x 50 pixels."
 
 	<sampleInstance>
-	^ self image: self demoForm
+	^ self image: (self demoFormAtScale: 1)
 ]
 
 { #category : #'instance creation' }
