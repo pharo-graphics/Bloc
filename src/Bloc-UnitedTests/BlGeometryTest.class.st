@@ -470,6 +470,39 @@ BlGeometryTest >> testSvgPathContainsPointsOnItsStroke [
 ]
 
 { #category : #tests }
+BlGeometryTest >> testSvgPathIsParsedOnce [
+	"The first use of the path string parses it and caches the Cairo path; later uses reuse it."
+	| geometry element path |
+	geometry := BlSvgPath new pathString: 'M 10 10 L 90 10 L 90 90 L 10 90 Z'.
+	element := BlElement new
+		geometry: geometry;
+		extent: 100 @ 100;
+		yourself.
+	self assert: geometry pathCache geometryPath isNil.
+	geometry containsPoint: 50 @ 50 alreadyInGeometryBoundsOf: element.
+	path := geometry pathCache geometryPath.
+	self assert: path isNotNil.
+	geometry containsPoint: 5 @ 5 alreadyInGeometryBoundsOf: element.
+	self assert: geometry pathCache geometryPath identicalTo: path
+]
+
+{ #category : #tests }
+BlGeometryTest >> testSvgPathStringChangeReleasesCachedPath [
+	"Changing the path string releases the cached Cairo path, so the new path is the one hit tested."
+	| geometry element |
+	geometry := BlSvgPath new pathString: 'M 10 10 L 40 10 L 40 40 L 10 40 Z'.
+	element := BlElement new
+		geometry: geometry;
+		extent: 100 @ 100;
+		yourself.
+	self assert: (geometry containsPoint: 25 @ 25 alreadyInGeometryBoundsOf: element).
+	geometry pathString: 'M 60 60 L 90 60 L 90 90 L 60 90 Z'.
+	self assert: geometry pathCache geometryPath isNil.
+	self assert: (geometry containsPoint: 75 @ 75 alreadyInGeometryBoundsOf: element).
+	self deny: (geometry containsPoint: 25 @ 25 alreadyInGeometryBoundsOf: element)
+]
+
+{ #category : #tests }
 BlGeometryTest >> testSvgPathUsesItsFillRule [
 	"With the even-odd rule the inner square of two nested squares is a hole; with the winding rule it is not."
 	| geometry element |

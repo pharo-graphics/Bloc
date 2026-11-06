@@ -8,16 +8,30 @@ BlSvgPath >> aeApplyTo: aeCanvas element: aBlElement [
 
 { #category : #'*Bloc-Alexandrie-SVG' }
 BlSvgPath >> aeBuildPathOn: cairoContext [
-	"Build my path, with my fill rule, on cairoContext. Used both to draw me and to hit test me."
+	"Append my path, with my fill rule, onto cairoContext. Used both to draw me and to hit test me."
 
 	fillRule = Winding
 		ifTrue: [ cairoContext useFillRuleWinding ]
 		ifFalse: [ cairoContext useFillRuleEvenOdd ].
-	self flag: #todo. "Don't parse again each time"
-	(BlSvgPathParser
-		on: pathString readStream
-		handler: (BASvgPathDrawHandler on: cairoContext))
-		readUpToEnd
+	cairoContext appendPath: self aeCachedPath
+]
+
+{ #category : #'*Bloc-Alexandrie-SVG' }
+BlSvgPath >> aeCachedPath [
+	"Answer my path as a Cairo path. My path string is parsed only the first time; the resulting
+	path is kept in my path cache, which pathString: and a new image session release."
+
+	pathCache checkSession.
+	^ pathCache geometryPath ifNil: [
+		| context path |
+		context := (AeCairoImageSurface extent: 1 @ 1) newContext.
+		(BlSvgPathParser
+			on: pathString readStream
+			handler: (BASvgPathDrawHandler on: context))
+			readUpToEnd.
+		path := context currentPath.
+		pathCache geometryPath: path.
+		path ]
 ]
 
 { #category : #'*Bloc-Alexandrie-SVG' }
