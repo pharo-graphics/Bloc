@@ -16,6 +16,8 @@ aButton eventSimulator click.
 aButton eventSimulator doubleClick.
 aButton eventSimulator secondaryClick.
 aButton eventSimulator mouseMoveAt: 50 @ 50.
+aButton eventSimulator clickAt: 30 @ 40.
+aButton eventSimulator mouseWheelBy: (BlVector x: 0 y: 1) at: 30 @ 40.
 aButton eventSimulator dragBy: 100 @ 0.
 
 ""2. Keyboard & Text Input""
@@ -75,14 +77,30 @@ BlEventSimulator >> click [
 ]
 
 { #category : #simulation }
+BlEventSimulator >> clickAt: aPoint [
+	"Perform a primary click at the given space position, which does not have to be the center of the target element."
+
+	self clickButton: BlMouseButton primary at: aPoint
+]
+
+{ #category : #simulation }
 BlEventSimulator >> clickButton: aButton [
 	"Perform a click (mouse down and mouse up) with the specified button at the center of the target element."
 
-	| aPosition |
-	aPosition := self positionInside.
+	self clickButton: aButton at: self positionInside
+]
+
+{ #category : #simulation }
+BlEventSimulator >> clickButton: aButton at: aPoint [
+	"Perform a click (mouse down and mouse up) with the specified button at the given space position."
+
 	self events: {
-		((BlMouseDownEvent button: aButton) position: aPosition; yourself).
-		((BlMouseUpEvent button: aButton) position: aPosition; yourself) }
+			((BlMouseDownEvent button: aButton)
+				 position: aPoint;
+				 yourself).
+			((BlMouseUpEvent button: aButton)
+				 position: aPoint;
+				 yourself) }
 ]
 
 { #category : #simulation }
@@ -194,30 +212,21 @@ BlEventSimulator >> event: anEvent [
 { #category : #simulation }
 BlEventSimulator >> events: aCollectionOfEvents [
 	"I simulate a given sequence of low-level space UI events such as MouseUp/MouseDown or keyboard.
-	Events are enqueued into the host space and synchronized with the space's pulse loop."
+	Events are enqueued into the host space and synchronized with the space's pulse loop.
+	The screen position of a mouse event is the position of the window of the space on the desktop plus the position of the event in the space: the constructors of the events set it to 0@0 whatever the position."
 
 	| aSpace |
-	self 
-		assert: [ target isAttachedToSceneGraph ]
-		description: [ 'Elements must be attached to a space before simulating events.' ].
-	
+	self assert: [ target isAttachedToSceneGraph ] description: [ 'Elements must be attached to a space before simulating events.' ].
 	aSpace := target space.
 	aSpace host denyPulseProcess.
-
 	aCollectionOfEvents do: [ :anEvent |
-		anEvent fillFromTime: aSpace time.
-		anEvent isUIEvent ifTrue: [
-			modifiers isEmpty ifFalse: [
-				anEvent modifiers: modifiers copy ] ] ].
-
+			anEvent fillFromTime: aSpace time.
+			anEvent isUIEvent ifTrue: [ modifiers isEmpty ifFalse: [ anEvent modifiers: modifiers copy ] ].
+			(anEvent isMouse and: [ anEvent position isNotNil ]) ifTrue: [ anEvent screenPosition: (aSpace position ifNil: [ 0 @ 0 ]) + anEvent position ] ].
 	aSpace isOpened ifFalse: [
-		aSpace settle.
-		aSpace isOpened ifFalse: [
-			self error: 'You can''t simulate events if you didn''t add the element to a space and sent #show to it.' ] ].
-
-	aCollectionOfEvents do: [ :anEvent |
-		aSpace enqueueEvent: anEvent ].
-
+			aSpace settle.
+			aSpace isOpened ifFalse: [ self error: 'You can''t simulate events if you didn''t add the element to a space and sent #show to it.' ] ].
+	aCollectionOfEvents do: [ :anEvent | aSpace enqueueEvent: anEvent ].
 	aSpace settle
 ]
 
@@ -371,14 +380,18 @@ BlEventSimulator >> mouseUpButton: aButton [
 BlEventSimulator >> mouseWheelBy: aBlVector [
 	"Simulate a mouse wheel scroll event centered on the target element by the specified vector."
 
-	| aPosition aBlocEvent |
-	aPosition := self positionInside.
-	aBlocEvent := BlMouseWheelEvent new
-		isTouch: false;
-		vector: aBlVector asBlocVector;
-		position: aPosition.
+	self mouseWheelBy: aBlVector at: self positionInside
+]
 
-	self event: aBlocEvent
+{ #category : #simulation }
+BlEventSimulator >> mouseWheelBy: aBlVector at: aPoint [
+	"Simulate a mouse wheel scroll event by the specified vector at the given space position, for example to zoom around a point."
+
+	self event: (BlMouseWheelEvent new
+			 isTouch: false;
+			 vector: aBlVector asBlocVector;
+			 position: aPoint;
+			 yourself)
 ]
 
 { #category : #simulation }
