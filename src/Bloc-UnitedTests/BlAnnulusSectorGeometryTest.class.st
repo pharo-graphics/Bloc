@@ -177,6 +177,34 @@ BlAnnulusSectorGeometryTest >> testDefault [
 ]
 
 { #category : #tests }
+BlAnnulusSectorGeometryTest >> testFullDiskDrawsNoRadialLine [
+	"A 0 to 360 degree sector without inner radius is a closed disk: its border must not draw a line from the centre to the start angle."
+	| element form |
+	element := BlElement new
+		geometry: (BlAnnulusSectorGeometry new startAngle: 0; endAngle: 360; innerRadius: 0; outerRadius: 1.0; yourself);
+		extent: 100 @ 100;
+		border: (BlBorder paint: Color black width: 2);
+		yourself.
+	form := element asForm.
+	self assert: (form colorAt: 75 @ 50) equals: Color transparent.
+	self assert: (form colorAt: 25 @ 50) equals: Color transparent
+]
+
+{ #category : #tests }
+BlAnnulusSectorGeometryTest >> testFullRingDrawsNoRadialLine [
+	"A 0 to 360 degree annulus is a closed ring: its border must not draw a radial segment at the start angle."
+	| element form |
+	element := BlElement new
+		geometry: (BlAnnulusSectorGeometry new startAngle: 0; endAngle: 360; innerRadius: 0.5; outerRadius: 1.0; yourself);
+		extent: 100 @ 100;
+		border: (BlBorder paint: Color black width: 2);
+		yourself.
+	form := element asForm.
+	self assert: (form colorAt: 87 @ 50) equals: Color transparent.
+	self assert: (form colorAt: 13 @ 50) equals: Color transparent
+]
+
+{ #category : #tests }
 BlAnnulusSectorGeometryTest >> testOuterRadiusSmallerThanInner [
 
 	<sampleInstance>

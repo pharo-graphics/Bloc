@@ -122,6 +122,13 @@ BlAnnulusSectorGeometry >> innerRadius: aNumber [
 	self releaseCache
 ]
 
+{ #category : #testing }
+BlAnnulusSectorGeometry >> isFullTurn [
+	"Answer whether I sweep a whole turn or more, so that I am a full ring or disk."
+
+	^ (self endAngle - self startAngle) abs >= 360
+]
+
 { #category : #geometry }
 BlAnnulusSectorGeometry >> matchExtent: aPoint [
 	"Resize geometry to exactly match provided extent as a Point"
