@@ -262,5 +262,8 @@ BlHostPulseLoop >> wakeUp [
 	"Wake up the loop process immediately if sleeping between frames, or start it if not running."
 
 	self isRunning ifFalse: [ ^ self start ].
+	
+	"A wake up requested by the loop process itself, for example by a pulse which asks for the next one, is ignored: the next pulse comes at the rate of the loop, otherwise an animation would make it run without any pause"
+	self ownsActiveProcess ifTrue: [ ^ self ].
 	wakeUpSemaphore signal
 ]
