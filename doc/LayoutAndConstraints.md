@@ -106,7 +106,9 @@ The window also clips: nothing is drawn outside of the root of the space. See [G
 `extent`, `width` and `height` answer the size measured by the last layout. Before the first one they answer `0 @ 0`, even when the extent was requested:
 
 ```smalltalk
-element := BlElement new extent: 30 @ 20.
+element := BlElement new
+				extent: 30 @ 20;
+				yourself.
 element extent. ">>> 0 @ 0"
 space root addChild: element.
 space settle.
@@ -118,7 +120,9 @@ element extent. ">>> 30 @ 20"
 When the size is exact (`extent:` or `exact:`), `requestedExtent` answers it at once, before any layout:
 
 ```smalltalk
-element := BlElement new extent: 30 @ 20.
+element := BlElement new
+				extent: 30 @ 20;
+				yourself.
 element requestedExtent. ">>> 30 @ 20"
 ```
 
