@@ -127,12 +127,13 @@ BlSigmoidGeometry >> computeToControlPoint [
 
 { #category : #'geometry testing' }
 BlSigmoidGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
-	"Answer whether aPoint is contained by this geometry.
-	Assume aPoint is already inside the geometry bounds rectangle."
-	
-	self flag: #todo. "refine as in bezier geometry"
-	
-	^ true
+	"Answer whether aPoint is on my curve, within half the border width of aBlElement.
+	I am drawn as the cubic Bezier curve from, fromControl, toControl, to, so hit testing is
+	delegated to the Bezier geometry, which follows the drawn curve within one pixel."
+
+	^ (BlBezierCurveGeometry controlPoints: { from. fromControl. toControl. to })
+		containsPoint: aPoint
+		alreadyInGeometryBoundsOf: aBlElement
 ]
 
 { #category : #'instance creation' }
