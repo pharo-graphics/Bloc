@@ -1,3 +1,29 @@
+"
+I am a circle centered in my element, with the largest radius that fits in it.
+
+### Responsibility
+- Compute my radius (half the smallest side of the element) and the origin that centers me, in `matchExtent:`.
+- Build a circle path, and specific paths for an inside or outside border.
+- Answer my bounds (the square around the circle), contain the points inside the circle,
+  and answer the point of my perimeter in a given direction (`pointOnPerimeterOfElement:atRadians:`).
+
+### Collaborators
+- `BlEllipseGeometry` fills the whole element instead, so it is a circle only in a square element.
+
+### Public API
+```
+anElement geometry: BlCircleGeometry new.
+```
+See `BlCircleGeometry class >> #exampleCircle`, and run `BlCircleGeometry class >> #scriptCircleVersusEllipse`.
+
+### Implementation Points
+- My radius and origin are computed from the extent; they cannot be set directly.
+- Two circle geometries are equal, whatever their radius: the element gives them their size.
+
+**Instance Variables**
+- radius: half the smallest side of my extent.
+- origin: the top-left corner of the square around me, so that I am centered.
+"
 Class {
 	#name : #BlCircleGeometry,
 	#superclass : #BlElementVectorGeometry,
@@ -7,6 +33,29 @@ Class {
 	],
 	#category : #'Bloc-Basic-Geometry'
 }
+
+{ #category : #examples }
+BlCircleGeometry class >> exampleCircle [
+	"Answer a circle geometry; it is centered in its element, with the largest radius that fits."
+
+	<sampleInstance>
+	^ self new
+]
+
+{ #category : #script }
+BlCircleGeometry class >> scriptCircleVersusEllipse [
+	"Show that in an element that is not square, a circle is centered with the diameter of the
+	smallest side, while an ellipse fills the whole element."
+
+	<script>
+	self demoOpen: { 
+			(self
+				 demoCellFor: (self demoElementFor: self new extent: 120 @ 60)
+				 caption: 'circle in 120 x 60').
+			(self
+				 demoCellFor: (self demoElementFor: BlEllipseGeometry new extent: 120 @ 60)
+				 caption: 'ellipse in 120 x 60') }
+]
 
 { #category : #comparing }
 BlCircleGeometry >> = anObject [

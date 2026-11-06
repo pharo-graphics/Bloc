@@ -33,6 +33,15 @@ BlEventSimulatorTest >> testClick [
 ]
 
 { #category : #tests }
+BlEventSimulatorTest >> testClickAtPosition [
+
+	| clickPosition |
+	element addEventHandlerOn: BlClickEvent do: [ :event | clickPosition := event position ].
+	element eventSimulator clickAt: 30 @ 40.
+	self assert: clickPosition equals: 30 @ 40
+]
+
+{ #category : #tests }
 BlEventSimulatorTest >> testDoubleClick [
 	| doubleClicked |
 	doubleClicked := false.
@@ -129,6 +138,18 @@ BlEventSimulatorTest >> testMouseWheel [
 ]
 
 { #category : #tests }
+BlEventSimulatorTest >> testMouseWheelAtPosition [
+
+	| wheelPosition wheelVector |
+	element addEventHandlerOn: BlMouseWheelEvent do: [ :event |
+			wheelPosition := event position.
+			wheelVector := event vector ].
+	element eventSimulator mouseWheelBy: (BlVector x: 0 y: 3) at: 30 @ 40.
+	self assert: wheelPosition equals: 30 @ 40.
+	self assert: wheelVector equals: (BlVector x: 0 y: 3) asBlocVector
+]
+
+{ #category : #tests }
 BlEventSimulatorTest >> testPositionInsideAndOutside [
 	| simulator inside outside |
 	simulator := element eventSimulator.
@@ -166,6 +187,23 @@ BlEventSimulatorTest >> testSimulateOnDetachedElement [
 		detached eventSimulator click ].
 	self assert: clicked.
 	self deny: detached isAttachedToSceneGraph
+]
+
+{ #category : #tests }
+BlEventSimulatorTest >> testSimulatedMouseEventsHaveAScreenPosition [
+
+	| screenPositions |
+	screenPositions := OrderedCollection new.
+	element
+		addEventHandlerOn: BlMouseWheelEvent do: [ :event | screenPositions add: event screenPosition ];
+		addEventHandlerOn: BlMouseDownEvent do: [ :event | screenPositions add: event screenPosition ];
+		addEventHandlerOn: BlMouseMoveEvent do: [ :event | screenPositions add: event screenPosition ].
+	element eventSimulator
+		mouseWheelBy: (BlVector x: 0 y: 1) at: 30 @ 40;
+		mouseDownAt: 30 @ 40;
+		mouseMoveAt: 30 @ 40.
+	self assert: screenPositions size equals: 3.
+	screenPositions do: [ :screenPosition | self assert: screenPosition equals: (space position ifNil: [ 0 @ 0 ]) + (30 @ 40) ]
 ]
 
 { #category : #tests }

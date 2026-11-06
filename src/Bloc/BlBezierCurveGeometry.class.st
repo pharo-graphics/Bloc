@@ -1,6 +1,32 @@
 "
-I define a geometry of a bezier curve with N control points (of order N)
+I am a Bezier curve defined by 2, 3 or 4 control points, in the coordinates of my element.
 
+### Responsibility
+- Know my control points; they do not change when the extent of the element changes.
+  The curve starts at the first point and ends at the last one; the points in between pull it towards them.
+- Build an open path, so I have caps: the border of the element draws me, the background has nothing to fill.
+  With 2 points I am a straight line, with 3 a quadratic curve and with 4 a cubic curve.
+- Answer the rectangle around my control points as my bounds, and contain the points closer to the curve than half the border width.
+
+### Collaborators
+- `BlSigmoidGeometry` computes the control points of an S-shaped cubic curve from its two ends.
+- `BlLineGeometry` and `BlPolylineGeometry` draw straight segments.
+
+### Public API
+```
+BlBezierCurveGeometry controlPoints: { 10 @ 60. 30 @ -10. 70 @ 80. 90 @ 10 }.
+aCurve order. ""the number of control points""
+```
+See `BlBezierCurveGeometry class >> #exampleCubicCurve`, and run `BlBezierCurveGeometry class >> #scriptControlPointCounts`.
+
+### Implementation Points
+- My bounds enclose the control points, not only the curve, so they can be larger than what is drawn.
+- For hit testing, the cubic curve is flattened into segments (De Casteljau subdivision, about one pixel of tolerance)
+  and the result is cached in the path cache; the quadratic curve is approximated by a cubic one sampled at 6 points, so hit testing near it is less precise.
+- Two curves are equal when they have the same control points.
+
+**Instance Variables**
+- controlPoints: my 2 to 4 points; the first and last are the ends of the curve.
 "
 Class {
 	#name : #BlBezierCurveGeometry,
@@ -14,6 +40,43 @@ Class {
 { #category : #'instance creation' }
 BlBezierCurveGeometry class >> controlPoints: aCollection [
 	^ self new controlPoints: aCollection
+]
+
+{ #category : #examples }
+BlBezierCurveGeometry class >> exampleCubicCurve [
+	"Answer a cubic Bezier curve: from 10@60 to 90@10, pulled by the control points 30@-10 and 70@80."
+
+	<sampleInstance>
+	^ self controlPoints: { 
+			  (10 @ 60).
+			  (30 @ -10).
+			  (70 @ 80).
+			  (90 @ 10) }
+]
+
+{ #category : #script }
+BlBezierCurveGeometry class >> scriptControlPointCounts [
+	"Show Bezier curves with 2 control points (a straight line), 3 (a quadratic curve)
+	and 4 (a cubic curve). The control points are shown as small red dots."
+
+	<script>
+	self demoOpen: ({ 
+			 { (10 @ 60). (90 @ 10) }.
+			 { (10 @ 60). (50 @ -20). (90 @ 60) }.
+			 BlBezierCurveGeometry exampleCubicCurve controlPoints } collect: [ :points | 
+			 | curve |
+			 curve := self demoElementFor: (self controlPoints: points) extent: 100 @ 70.
+			 curve clipChildren: false.
+			 points do: [ :each | 
+				 curve addChild: (BlElement new
+						  geometry: BlCircleGeometry new;
+						  background: Color red;
+						  extent: 6 @ 6;
+						  position: each - 3;
+						  yourself) ].
+			 self
+				 demoCellFor: curve
+				 caption: points size printString , ' control points' ])
 ]
 
 { #category : #comparing }

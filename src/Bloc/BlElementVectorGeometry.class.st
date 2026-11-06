@@ -1,5 +1,37 @@
 "
-The geometry is used to define the geometry to be drawn and the interaction area.
+I am the abstract class of the geometries that keep their own extent and cache their path.
+
+### Responsibility
+- Remember the extent I must fill (150 x 100 by default, see `DefaultExtent`), set by `matchExtent:`
+  when the extent of the element changes.
+- Answer my geometry bounds from my extent (`geometryBounds:`), unless my subclass computes them from its points.
+- Cache my path and my stroked bounds in a `BlPathCache`; `releaseCache` empties it when one of my properties changes.
+
+### Collaborators
+- `BlElement` sends me `matchElement:` (and so `matchExtent:`) when its extent changes.
+- `BlPathCache` keeps my stroked bounds and, for some subclasses, my computed vertices.
+- My subclasses fall in two families:
+  - the shapes that fill the extent of the element: `BlEllipseGeometry`, `BlCircleGeometry`, `BlSquareGeometry`,
+    `BlRoundedRectangleGeometry`, `BlStadiumGeometry`, `BlTriangleGeometry`, `BlAnnulusSectorGeometry`, `BlHistogramGeometry`;
+  - the shapes defined by points in the coordinates of the element, which keep their points when the extent changes:
+    `BlLineGeometry`, `BlPolylineGeometry`, `BlPolygonGeometry`, `BlBezierCurveGeometry`, `BlSigmoidGeometry`, `BlSvgPath`.
+
+### Public API
+I am abstract: use my subclasses.
+```
+(BlEllipseGeometry new matchExtent: 100 @ 50; yourself) geometryBounds.
+aGeometry asElement. ""an element with my extent and a default look""
+```
+Run `BlElementVectorGeometry class >> #scriptMatchExtent`.
+
+### Implementation Points
+- My subclasses implement `matchExtent:` and `aeApplyTo:element:`, and send `releaseCache` after changing what defines their path.
+- `extent:` expects a positive point of integers or floats, not fractions.
+- `postCopy` gives the copy its own path cache.
+
+**Instance Variables**
+- extent: the `Point` I fill.
+- pathCache: the `BlPathCache` of my path and stroked bounds.
 "
 Class {
 	#name : #BlElementVectorGeometry,
@@ -18,6 +50,26 @@ Class {
 BlElementVectorGeometry class >> initialize [
 
 	DefaultExtent := 150@100
+]
+
+{ #category : #script }
+BlElementVectorGeometry class >> scriptMatchExtent [
+	"Show that a vector geometry follows the extent of its element: the same kinds of geometry
+	on elements of 60 x 60, 120 x 60 and 60 x 90. The element sends `matchExtent:` to its geometry
+	whenever its extent changes. Geometries defined by points, like polygons, keep their points."
+
+	<script>
+	| extents |
+	extents := { 60 @ 60. 120 @ 60. 60 @ 90 }.
+	self demoOpen: (({ 
+			  BlEllipseGeometry new.
+			  BlTriangleGeometry new.
+			  BlStadiumGeometry new.
+			  BlPolygonGeometry exampleArrow } collect: [ :geometry | 
+			 extents collect: [ :extent | 
+				 self
+					 demoCellFor: (self demoElementFor: geometry copy extent: extent)
+					 caption: extent printString ] ]) flatCollect: [ :each | each ])
 ]
 
 { #category : #converting }

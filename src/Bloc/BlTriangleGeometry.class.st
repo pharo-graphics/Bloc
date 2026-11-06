@@ -1,3 +1,29 @@
+"
+I am an isosceles triangle filling the extent of my element, pointing to one of its sides.
+
+### Responsibility
+- Know my orientation: I point to the top, the right (the default), the bottom or the left.
+- Compute my three vertices from my extent and my orientation, and build the closed path through them.
+- Contain the points inside the triangle.
+
+### Collaborators
+- `BlPolygonGeometry` draws any closed shape from explicit points.
+
+### Public API
+```
+anElement geometry: (BlTriangleGeometry new beTop; yourself).
+BlTriangleGeometry new beRight; beBottom; beLeft.
+BlTriangleGeometry new isTop.
+```
+See `BlTriangleGeometry class >> #exampleTriangleTop`, and run `BlTriangleGeometry class >> #scriptOrientations`.
+
+### Implementation Points
+- The orientation is one of the symbols held by the class variables `Top`, `Right`, `Bottom` and `Left`.
+- Two triangle geometries are equal when they have the same orientation.
+
+**Instance Variables**
+- orientation: the side I point to.
+"
 Class {
 	#name : #BlTriangleGeometry,
 	#superclass : #BlElementVectorGeometry,
@@ -13,12 +39,37 @@ Class {
 	#category : #'Bloc-Basic-Geometry'
 }
 
+{ #category : #examples }
+BlTriangleGeometry class >> exampleTriangleTop [
+	"Answer a triangle geometry pointing to the top."
+
+	<sampleInstance>
+	^ self new
+		  beTop;
+		  yourself
+]
+
 { #category : #'class initialization' }
 BlTriangleGeometry class >> initialize [
 	Top := #top.
 	Right := #right.
 	Bottom := #bottom.
 	Left := #left
+]
+
+{ #category : #script }
+BlTriangleGeometry class >> scriptOrientations [
+	"Show the four orientations of a triangle: it points to the top, right (the default), bottom or left."
+
+	<script>
+	self demoOpen: (#( #beTop #beRight #beBottom #beLeft ) collect: [ :selector | 
+			 self
+				 demoCellFor: (self
+						  demoElementFor: (self new
+								   perform: selector;
+								   yourself)
+						  extent: 80 @ 60)
+				 caption: selector ])
 ]
 
 { #category : #comparing }

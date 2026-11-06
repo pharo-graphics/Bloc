@@ -1,3 +1,39 @@
+"
+I am an S-shaped curve between two points, in the coordinates of my element:
+a cubic Bezier curve whose control points I compute.
+
+### Responsibility
+- Know my two ends (`from:to:`); they do not change when the extent of the element changes.
+- Know my sharpness (between 0 and 1, 0.5 by default): the larger it is, the steeper the middle of the S.
+- Know my bending point (between 0 and 1, 0.5 by default): where along the curve the S bends.
+- Know my orientation: the curve leaves and reaches its ends horizontally, vertically, or automatically along the largest distance between them (the default).
+- Compute my two control points from these properties, and build an open path, so I have caps.
+
+### Collaborators
+- `BlBezierCurveGeometry` draws a curve from explicit control points.
+
+### Public API
+```
+BlSigmoidGeometry from: 10 @ 10 to: 90 @ 60.
+(BlSigmoidGeometry from: 10 @ 10 to: 90 @ 60)
+	sharpness: 0.8;
+	bendingPoint: 0.3;
+	beVertical;
+	yourself.
+```
+See `BlSigmoidGeometry class >> #exampleSigmoid`, and run `BlSigmoidGeometry class >> #scriptSharpnessAndBendingPoint`.
+
+### Implementation Points
+- `sharpness:` and `bendingPoint:` clamp their argument between 0 and 1.
+- `containsPoint:alreadyInGeometryBoundsOf:` answers true for every point of my bounds: hit testing is not precise yet.
+- I do not redefine `=`.
+
+**Instance Variables**
+- from, to: my two ends.
+- fromControl, toControl: the computed control points of the cubic curve.
+- sharpness, bendingPoint: numbers between 0 and 1.
+- orientation: one of the symbols held by `AutomaticOrientation`, `HorizontalOrientation` and `VerticalOrientation`.
+"
 Class {
 	#name : #BlSigmoidGeometry,
 	#superclass : #BlElementVectorGeometry,
@@ -18,6 +54,14 @@ Class {
 	#category : #'Bloc-Basic-Geometry'
 }
 
+{ #category : #examples }
+BlSigmoidGeometry class >> exampleSigmoid [
+	"Answer an S-shaped curve from 10@10 to 90@60, with the default sharpness and bending point (0.5)."
+
+	<sampleInstance>
+	^ self from: 10 @ 10 to: 90 @ 60
+]
+
 { #category : #'instance creation' }
 BlSigmoidGeometry class >> from: aPoint to: anotherPoint [
 
@@ -32,6 +76,28 @@ BlSigmoidGeometry class >> initialize [
 	AutomaticOrientation := #automatic.
 	VerticalOrientation := #vertical.
 	HorizontalOrientation := #horizontal
+]
+
+{ #category : #script }
+BlSigmoidGeometry class >> scriptSharpnessAndBendingPoint [
+	"Show S-shaped curves between the same two points: the default one, a sharper one,
+	one bending close to its start, and one forced to be vertical."
+
+	<script>
+	self demoOpen: ({ 
+			 ('default' -> self exampleSigmoid).
+			 ('sharpness: 1' -> (self exampleSigmoid
+				   sharpness: 1;
+				   yourself)).
+			 ('bendingPoint: 0.2' -> (self exampleSigmoid
+				   bendingPoint: 0.2;
+				   yourself)).
+			 ('beVertical' -> (self exampleSigmoid
+				   beVertical;
+				   yourself)) } collect: [ :each | 
+			 self
+				 demoCellFor: (self demoElementFor: each value extent: 100 @ 70)
+				 caption: each key ])
 ]
 
 { #category : #accessing }

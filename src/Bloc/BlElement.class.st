@@ -72,6 +72,9 @@ Class {
 
 { #category : #'instance creation' }
 BlElement class >> epsilon [
+	"The distance in pixels under which a layout does not move or resize an element: it is not worth invalidating and drawing again for it. See BlElement>>#position:extent:context:.
+	As a consequence, the position and the extent of an element can differ from the requested ones by less than this value"
+
 	^ 0.01
 ]
 
@@ -3367,8 +3370,11 @@ BlElement >> pointAnchor [
 
 { #category : #'geometry position' }
 BlElement >> position [
-	<return: #Point>
+	"Return the position of my top left corner in the coordinates of my parent, as the last layout placed me. My transformation does not change it, but it is part of #positionInSpace.
+	It can differ from the requested position (#position: or my constraints) by less than BlElement class>>#epsilon (0.01): a layout does not move an element for a smaller distance, and #constraints keeps the exact request.
+	See BlMouseEvent>>#position and #screenPosition for the positions of the pointer"
 
+	<return: #Point>
 	^ self bounds position
 ]
 
@@ -3380,12 +3386,11 @@ BlElement >> position: aPoint [
 	I only register an update request and ask my parent (if there is one) to recompute
 	layout. Do nothing if previous #relocate request was performed with the same coordinates.
 	Note: We can not guarantee that new element's position will be equal to requested one,
-	since it depends on the applied layout.
+	since it depends on the applied layout, and a layout ignores a move smaller than BlElement class>>#epsilon (see #position).
 	Raises `BlElementPositionChangedEvent` and `BlElementPositionInSpaceChangedEvent`
 	aPoint must not be nil"
 
-	self measuredBounds position = aPoint
-		ifTrue: [ ^ self ].
+	self measuredBounds position = aPoint ifTrue: [ ^ self ].
 
 	self constraints position: aPoint.
 	self measuredBounds position: aPoint.
@@ -3394,8 +3399,8 @@ BlElement >> position: aPoint [
 
 { #category : #accessing }
 BlElement >> position: aPosition extent: anExtent context: aBlElementBoundsUpdater [
-
 	"I do the hard work of changing my position and extent.
+	A change of the position or of the extent smaller than BlElement class>>#epsilon is ignored: the bounds keep their previous values, so they can differ from the requested ones by less than that.
 	This action must be very optimized in the sense of invalidation.
 	For example if element becomes smaller in both axis (horizontal and vertical)
 	it is enough to invalidate damaged area only once within old bounds,
@@ -3403,34 +3408,23 @@ BlElement >> position: aPosition extent: anExtent context: aBlElementBoundsUpdat
 	Note, I do not request layout update and do not send invalidate to myself if only
 	position changes, instead I send invalidate with my effect bounds in parent coordinates
 	to my parent. It allows developers to implement drawing cache"
-	
-	| isPositionChanged isExtentChanged aPreviousExtent aPreviousPosition |
 
+	| isPositionChanged isExtentChanged aPreviousExtent aPreviousPosition |
 	aPreviousPosition := self position.
 	aPreviousExtent := self extent.
-	isPositionChanged := (aPreviousPosition
-		                      closeTo: aPosition
-		                      epsilon: self class epsilon) not.
-	isExtentChanged := (aPreviousExtent
-		                    closeTo: anExtent
-		                    epsilon: self class epsilon) not.
+	isPositionChanged := (aPreviousPosition closeTo: aPosition epsilon: self class epsilon) not.
+	isExtentChanged := (aPreviousExtent closeTo: anExtent epsilon: self class epsilon) not.
 
 	(isPositionChanged or: [ isExtentChanged ]) ifFalse: [ ^ self ].
-	
+
 	isPositionChanged ifTrue: [
-		self bounds position: aPosition.
-		aBlElementBoundsUpdater
-			changePositionFrom: aPreviousPosition
-			to: aPosition
-			of: self.
-		isExtentChanged ifFalse: [ boundsCache invalidateParentBounds ] ].
+			self bounds position: aPosition.
+			aBlElementBoundsUpdater changePositionFrom: aPreviousPosition to: aPosition of: self.
+			isExtentChanged ifFalse: [ boundsCache invalidateParentBounds ] ].
 
 	isExtentChanged ifFalse: [ ^ self ].
 	self bounds extent: anExtent.
-	aBlElementBoundsUpdater
-		changeExtentFrom: aPreviousExtent
-		to: anExtent
-		of: self.
+	aBlElementBoundsUpdater changeExtentFrom: aPreviousExtent to: anExtent of: self.
 	boundsCache invalidateLocalBounds
 ]
 

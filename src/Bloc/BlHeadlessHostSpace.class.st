@@ -121,6 +121,7 @@ BlHeadlessHostSpace >> initialize [
 	resizable := true.
 	opened := false.
 
+	position := 0 @ 0.
 	physicalSize := self defaultPhysicalSize.
 	logicalSize := self defaultLogicalSize.
 	renderCount := 0

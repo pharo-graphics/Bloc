@@ -7,12 +7,11 @@ Class {
 { #category : #'instance creation' }
 BlMouseUpEvent class >> button: aMouseButton [
 	"Create a sample button up event for a given button for testing purposes"
-	
+
 	^ aMouseButton mouseUpEventClass new
-		button: aMouseButton;
-		position: 0@0;
-		screenPosition: 0@0;
-		yourself
+		  button: aMouseButton;
+		  position: 0 @ 0;
+		  yourself
 ]
 
 { #category : #'instance creation' }

@@ -426,6 +426,22 @@ BlGeometryTest >> testEqualityBlTriangleGeometry [
 		equals: BlTriangleGeometry new beBottom
 ]
 
+BlGeometryTest >> testPolylineVerticesReleaseStrokedBounds [
+	"Changing the vertices of a polyline must forget the stroked bounds computed for the previous vertices."
+
+	| geometry element |
+	geometry := BlPolylineGeometry vertices: { 10 @ 10. 50 @ 10 }.
+	element := BlElement new
+		           geometry: geometry;
+		           extent: 100 @ 100;
+		           border: (BlBorder paint: Color black width: 2);
+		           yourself.
+	element forceLayout.
+	self assert: (geometry strokedBounds: BlBounds new of: element) asRectangle equals: (10 @ 10 corner: 50 @ 10).
+	geometry vertices: { 10 @ 10. 90 @ 90 }.
+	self assert: (geometry strokedBounds: BlBounds new of: element) asRectangle equals: (10 @ 10 corner: 90 @ 90)
+]
+
 { #category : #tests }
 BlGeometryTest >> testSigmoidContainsOnlyPointsNearTheCurve [
 	"A sigmoid is an open curve: hit testing accepts points on the stroke and rejects the rest of its bounds."

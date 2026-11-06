@@ -1,8 +1,36 @@
+"
+I am a geometry with no path: an element with me draws neither background nor border, and contains no point.
+
+### Responsibility
+- Build an empty path, so nothing is filled or stroked.
+- Answer `false` to `containsPoint:alreadyInGeometryBoundsOf:`, so the element receives no mouse events.
+- Answer the bounds of the element as my geometry and stroked bounds.
+
+### Collaborators
+- `BlElement >> #geometry:` installs me.
+
+### Public API
+```
+anElement geometry: BlEmptyGeometry new.
+```
+See `BlEmptyGeometry class >> #exampleEmpty`, and the last cell of `BlElementGeometry class >> #scriptGeometryKinds`.
+
+### Implementation Points
+- I keep no state and ignore `matchElement:`. Two empty geometries are equal.
+"
 Class {
 	#name : #BlEmptyGeometry,
 	#superclass : #BlElementGeometry,
 	#category : #'Bloc-Basic-Geometry'
 }
+
+{ #category : #examples }
+BlEmptyGeometry class >> exampleEmpty [
+	"Answer an empty geometry: an element with it draws nothing and receives no mouse events."
+
+	<sampleInstance>
+	^ self new
+]
 
 { #category : #comparing }
 BlEmptyGeometry >> = anObject [
