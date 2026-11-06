@@ -11,9 +11,9 @@ BlSpaceFrameLayoutPhase >> isLayoutPhase [
 
 { #category : #testing }
 BlSpaceFrameLayoutPhase >> isSettledIn: aSpace [
-	"Return true if aSpace does not have any pending layout requests"
+	"Return true if aSpace does not have any pending layout requests, and no block waits for the layouts to be done"
 
-	^ aSpace isLayoutRequested not
+	^ aSpace isLayoutRequested not and: [ aSpace hasLayoutSettledActions not ]
 ]
 
 { #category : #accessing }
