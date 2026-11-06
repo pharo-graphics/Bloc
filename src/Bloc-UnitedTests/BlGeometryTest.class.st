@@ -46,6 +46,22 @@ BlGeometryTest >> test3ElContainsPoint [
 	self assert: (c1 containsPoint: 50 @ 50)
 ]
 
+{ #category : #tests }
+BlGeometryTest >> testBezierQuadraticContainsPointsOnTheDrawnCurve [
+	"With three control points the curve is drawn as a true quadratic; hit testing must accept points lying on it."
+	| geometry element |
+	geometry := BlBezierCurveGeometry controlPoints: { 0 @ 0. 50 @ 100. 100 @ 0 }.
+	element := BlElement new
+		geometry: geometry;
+		extent: 100 @ 100;
+		border: (BlBorder paint: Color black width: 2);
+		yourself.
+	#( 0.25 0.5 0.75 ) do: [ :t |
+		| pointOnCurve |
+		pointOnCurve := ((1 - t) squared * (0 @ 0)) + (2 * (1 - t) * t * (50 @ 100)) + (t squared * (100 @ 0)).
+		self assert: (geometry containsPoint: pointOnCurve alreadyInGeometryBoundsOf: element) ]
+]
+
 { #category : #'any bounds tests' }
 BlGeometryTest >> testElAnyBounds [
 
