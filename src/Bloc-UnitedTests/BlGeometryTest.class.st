@@ -425,3 +425,62 @@ BlGeometryTest >> testEqualityBlTriangleGeometry [
 		deny: BlTriangleGeometry new beTop
 		equals: BlTriangleGeometry new beBottom
 ]
+
+{ #category : #tests }
+BlGeometryTest >> testSigmoidContainsOnlyPointsNearTheCurve [
+	"A sigmoid is an open curve: hit testing accepts points on the stroke and rejects the rest of its bounds."
+	| geometry element |
+	geometry := BlSigmoidGeometry new from: 0 @ 0 to: 100 @ 100.
+	element := BlElement new
+		geometry: geometry;
+		extent: 100 @ 100;
+		border: (BlBorder paint: Color black width: 4);
+		yourself.
+	self assert: (geometry containsPoint: 50 @ 50 alreadyInGeometryBoundsOf: element).
+	self deny: (geometry containsPoint: 90 @ 10 alreadyInGeometryBoundsOf: element).
+	self deny: (geometry containsPoint: 10 @ 90 alreadyInGeometryBoundsOf: element)
+]
+
+{ #category : #tests }
+BlGeometryTest >> testSvgPathContainsPointsInsideItsFill [
+	"A closed SVG path contains the points of its filled area and not the points outside it."
+	| geometry element |
+	geometry := BlSvgPath new pathString: 'M 10 10 L 90 10 L 90 90 L 10 90 Z'.
+	element := BlElement new
+		geometry: geometry;
+		extent: 100 @ 100;
+		yourself.
+	self assert: (geometry containsPoint: 50 @ 50 alreadyInGeometryBoundsOf: element).
+	self deny: (geometry containsPoint: 5 @ 50 alreadyInGeometryBoundsOf: element).
+	self deny: (geometry containsPoint: 95 @ 95 alreadyInGeometryBoundsOf: element)
+]
+
+{ #category : #tests }
+BlGeometryTest >> testSvgPathContainsPointsOnItsStroke [
+	"An open SVG path has no area: it contains only the points covered by the element border."
+	| geometry element |
+	geometry := BlSvgPath new pathString: 'M 10 50 L 90 50'.
+	element := BlElement new
+		geometry: geometry;
+		extent: 100 @ 100;
+		border: (BlBorder paint: Color black width: 4);
+		yourself.
+	self assert: (geometry containsPoint: 50 @ 51 alreadyInGeometryBoundsOf: element).
+	self deny: (geometry containsPoint: 50 @ 70 alreadyInGeometryBoundsOf: element)
+]
+
+{ #category : #tests }
+BlGeometryTest >> testSvgPathUsesItsFillRule [
+	"With the even-odd rule the inner square of two nested squares is a hole; with the winding rule it is not."
+	| geometry element |
+	geometry := BlSvgPath new pathString: 'M 0 0 L 100 0 L 100 100 L 0 100 Z M 25 25 L 75 25 L 75 75 L 25 75 Z'.
+	element := BlElement new
+		geometry: geometry;
+		extent: 100 @ 100;
+		yourself.
+	geometry useWindingFillRule.
+	self assert: (geometry containsPoint: 50 @ 50 alreadyInGeometryBoundsOf: element).
+	geometry useEvenOddFillRule.
+	self deny: (geometry containsPoint: 50 @ 50 alreadyInGeometryBoundsOf: element).
+	self assert: (geometry containsPoint: 10 @ 10 alreadyInGeometryBoundsOf: element)
+]

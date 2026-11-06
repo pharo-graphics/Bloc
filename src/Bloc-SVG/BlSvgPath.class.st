@@ -52,10 +52,10 @@ BlSvgPath >> asElement [
 
 { #category : #'geometry testing' }
 BlSvgPath >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
-	
-	self flag: #todo. "refine! should have a boolean flag to deknow if it's filled?"
-	
-	^ true
+	"Answer whether aPoint is in my filled area (according to my fill rule) or on my outline,
+	stroked with the border width of aBlElement."
+
+	^ self aeContainsPoint: aPoint strokeWidth: aBlElement border width
 ]
 
 { #category : #initialization }
