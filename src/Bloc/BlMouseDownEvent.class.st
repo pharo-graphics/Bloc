@@ -9,10 +9,9 @@ BlMouseDownEvent class >> button: aMouseButton [
 	"Create a sample button down event for a given button for testing purposes"
 
 	^ aMouseButton mouseDownEventClass new
-		button: aMouseButton;
-		position: 0@0;
-		screenPosition: 0@0;
-		yourself
+		  button: aMouseButton;
+		  position: 0 @ 0;
+		  yourself
 ]
 
 { #category : #'instance creation' }
