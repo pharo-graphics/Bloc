@@ -140,6 +140,15 @@ BlSpace >> close [
 	host closeSpace: self
 ]
 
+{ #category : #private }
+BlSpace >> completeScreenPositionOf: aBlEvent [
+	"Give a screen position to a mouse event which has a position but no screen position, for example one made by the constructors of the events or by a test. It is the position of the window of the space on the desktop plus the position of the event in the space.
+	The events of the hosts already have one, and an explicit screen position is never replaced. The position of the window is unknown (nil) for the headless host, which is then taken as the origin of the desktop"
+
+	(aBlEvent isMouse and: [ aBlEvent screenPosition isNil and: [ aBlEvent position isNotNil ] ]) ifFalse: [ ^ self ].
+	aBlEvent screenPosition: (self position ifNil: [ 0 @ 0 ]) + aBlEvent position
+]
+
 { #category : #'cursor managing' }
 BlSpace >> currentCursor [
 	^ currentCursor 
@@ -450,7 +459,10 @@ BlSpace >> elementsNeedingPaint [
 
 { #category : #'api - events' }
 BlSpace >> enqueueEvent: aBlEvent [
+	"Enqueue the event to be dispatched in the next pulse.
+	A mouse event with a position but without screen position (such as the ones made by the constructors of the events) gets one: the position of the window on the desktop plus the position of the event"
 
+	self completeScreenPositionOf: aBlEvent.
 	eventQueue nextPut: aBlEvent.
 	self requestPulse
 ]

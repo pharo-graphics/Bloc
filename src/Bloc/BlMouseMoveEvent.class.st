@@ -15,10 +15,9 @@ BlMouseMoveEvent class >> button: aMouseButton [
 	"Create a sample button move event"
 
 	^ self new
-		button: aMouseButton;
-		position: 0@0;
-		screenPosition: 0@0;
-		yourself
+		  button: aMouseButton;
+		  position: 0 @ 0;
+		  yourself
 ]
 
 { #category : #'instance creation' }
