@@ -72,6 +72,13 @@ BlSpace class >> extractRoots: aSetOfElements [
 	^ BlElementBoundsUpdater new extractRoots: aSetOfElements
 ]
 
+{ #category : #accessing }
+BlSpace class >> maxLayoutPassesPerFrame [
+	"The number of layout passes a space computes in one frame at most: a pass can request another one, and a layout which never settles must not block the frame"
+
+	^ 100
+]
+
 { #category : #pulse }
 BlSpace >> areFramePhasesSettled [
 	"Return true if all frame phases (tasks, layout, skins, events) have reached equilibrium in this space."
@@ -313,30 +320,31 @@ BlSpace >> dispatchTimeEvent: aSpacePhaseEventClass during: aBlock [
 
 { #category : #'change - layout' }
 BlSpace >> doLayout [
+	"Compute the layouts requested in this frame, at most BlSpace class>>#maxLayoutPassesPerFrame passes, then send the blocks given to #whenLayoutSettledDo: if no layout is requested anymore.
+	An error in a layout is kept while its debugger is open, to prevent the infinite spawn of debuggers"
 
-	self isLayoutRequested ifFalse: [ ^ self ].
+	self isLayoutRequested ifFalse: [
+			layoutLoop := false.
+			self runLayoutSettledActions.
+			^ self ].
 
 	[
-	| layoutCounter maxLayoutCount |
-	layoutCounter := 0.
-	maxLayoutCount := 100.
+		| layoutCounter maxLayoutCount |
+		layoutCounter := 0.
+		maxLayoutCount := self class maxLayoutPassesPerFrame.
 
-	[
-	self hasLayoutError not and: [
-		self isLayoutRequested and: [ layoutCounter < maxLayoutCount ] ] ]
-		whileTrue: [
-			self doUpdateLayout.
-			layoutCounter := layoutCounter + 1.
-			layoutCounter = 50 ifTrue: [
-				'Warning: Layout was performed 50 times per frame!' traceCr ] ].
+		[ self hasLayoutError not and: [ self isLayoutRequested and: [ layoutCounter < maxLayoutCount ] ] ] whileTrue: [
+				self doUpdateLayout.
+				layoutCounter := layoutCounter + 1.
+				layoutCounter = 50 ifTrue: [ 'Warning: Layout was performed 50 times per frame!' traceCr ] ].
 
-	self root dispatchLayoutDone
-
-	"I prevent infinite spawn of debuggers" ]
+		self updateLayoutLoopAfter: layoutCounter limit: maxLayoutCount.
+		self root dispatchLayoutDone.
+		self isLayoutRequested ifFalse: [ self runLayoutSettledActions ] ]
 		on: Error
 		do: [ :anError |
-			layoutError := anError.
-			[ layoutError debug ] ensure: [ layoutError := nil ] ]
+				layoutError := anError.
+				[ layoutError debug ] ensure: [ layoutError := nil ] ]
 ]
 
 { #category : #'focus managing' }
@@ -636,6 +644,20 @@ BlSpace >> hasLayoutError [
 	^ layoutError isNotNil
 ]
 
+{ #category : #'change - layout' }
+BlSpace >> hasLayoutLoop [
+	"Answer true when the last layout of the space stopped at the limit of passes of a frame with the layout still requested: some element asks for a layout each time it is laid out. The layout goes on in the next frame, see #layoutLoopDescription"
+
+	^ layoutLoop == true
+]
+
+{ #category : #'change - layout' }
+BlSpace >> hasLayoutSettledActions [
+	"Answer true when some blocks given to #whenLayoutSettledDo: still wait for the layouts of the space to be done"
+
+	^ layoutSettledActions isNotEmpty
+]
+
 { #category : #testing }
 BlSpace >> hasOwner [
 
@@ -773,6 +795,8 @@ BlSpace >> initialize [
 	eventQueue := WaitfreeQueue new.
 	elementsNeedingPaint := Set new.
 	elementsNeedingLayout := Set new.
+	layoutLoop := false.
+	layoutSettledActions := OrderedCollection new.
 
 	tasks := BlSpaceTaskQueue space: self.
 	time := BlTime real.
@@ -964,6 +988,28 @@ BlSpace >> knowsPosition [
 	Setting an explicit position during space creation will result in a window created at a specified position"
 
 	^ position notNil
+]
+
+{ #category : #'change - layout' }
+BlSpace >> layoutLoopDescription [
+	"Say what to look at when the layout does not settle: the limit of passes and the elements which still request a layout, from the root"
+
+	| requesting |
+	requesting := OrderedCollection new.
+	self root withAllChildrenDepthFirstDo: [ :element | element isLayoutRequested ifTrue: [ requesting add: element ] ].
+	^ String streamContents: [ :stream |
+			  stream
+				  nextPutAll: 'Warning: the layout of ';
+				  print: self;
+				  nextPutAll: ' did not settle after ';
+				  print: self class maxLayoutPassesPerFrame;
+				  nextPutAll: ' passes in one frame, and goes on in the next one. Elements requesting a layout: '.
+			  (requesting first: (requesting size min: 5)) do: [ :element | stream print: element ] separatedBy: [ stream nextPutAll: ', ' ].
+			  requesting size > 5 ifTrue: [
+					  stream
+						  nextPutAll: ' and ';
+						  print: requesting size - 5;
+						  nextPutAll: ' more' ] ]
 ]
 
 { #category : #'focus managing' }
@@ -1226,6 +1272,22 @@ BlSpace >> rootDo: aBlock [
 	aBlock value: self root
 ]
 
+{ #category : #'private - layout' }
+BlSpace >> runLayoutSettledActions [
+	"Evaluate the blocks given to #whenLayoutSettledDo:, each once. An error in one of them does not prevent the following ones, and opens a debugger like an error in a layout"
+
+	| actions |
+	layoutSettledActions isEmpty ifTrue: [ ^ self ].
+	actions := layoutSettledActions copy.
+	layoutSettledActions removeAll.
+	actions do: [ :action |
+			[ action value ]
+				on: Error
+				do: [ :anError |
+						layoutError := anError.
+						[ layoutError debug ] ensure: [ layoutError := nil ] ] ]
+]
+
 { #category : #pulse }
 BlSpace >> runTasks [
 	"Run animations and other runnable tasks"
@@ -1420,6 +1482,16 @@ BlSpace >> updateCursor: aCursor [
 	self hostSpaceDo: [ :aHostSpace | aHostSpace cursor: aCursor ]
 ]
 
+{ #category : #'private - layout' }
+BlSpace >> updateLayoutLoopAfter: aPassCount limit: aLimit [
+	"Remember whether the layout stopped at the limit with a layout still requested, and say it once each time a loop starts: the layout would otherwise go on without a word in each frame"
+
+	| isLooping |
+	isLooping := aPassCount >= aLimit and: [ self isLayoutRequested ].
+	(isLooping and: [ self hasLayoutLoop not ]) ifTrue: [ self layoutLoopDescription traceCr ].
+	layoutLoop := isLooping
+]
+
 { #category : #accessing }
 BlSpace >> userData [
 	"Returns a Dictionary that holds application dependent and temporary objects.
@@ -1470,6 +1542,16 @@ BlSpace >> waitUntilTrue: aConditionValuable forDuration: aDuration [
 		timeOutIf: [ time nowInUTCMicroseconds >= deadlineInMicroseconds ]
 		onCompletion: [ ]
 		onTimeout: [ ]
+]
+
+{ #category : #'change - layout' }
+BlSpace >> whenLayoutSettledDo: aBlock [
+	"Evaluate aBlock once, in the frame in which the layouts of the space are done and no element requests another layout: the sizes of the elements, such as the ones of the texts, are final then.
+	The handlers of BlElementLayoutComputedEvent which change an element request another layout, and the block waits for it. It is evaluated in the next frame at the earliest, and the space is not settled (see #settle) until it was evaluated.
+	The blocks are evaluated in the order they were added. A block added by a block is evaluated after the next layout"
+
+	layoutSettledActions add: aBlock.
+	self requestPulse
 ]
 
 { #category : #'window - properties' }
