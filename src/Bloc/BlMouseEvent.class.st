@@ -161,9 +161,9 @@ BlMouseEvent >> isMouse [
 
 { #category : #'api - geometry' }
 BlMouseEvent >> localPosition [
-	"Return an event position in local coordinates of a #currentTarget"
+	"Return an event position in local coordinates of a #currentTarget, that is, relative to the top left corner of the element handling the event (see #position for the position in the space and #parentPosition for the one in the parent of the element)"
+
 	<return: #Point>
-	
 	^ self currentTarget globalPointToLocal: self position
 ]
 
@@ -174,14 +174,18 @@ BlMouseEvent >> middleButtonPressed [
 
 { #category : #'api - geometry' }
 BlMouseEvent >> parentPosition [
-	"Return an event position in parent coordinates of a #currentTarget"
+	"Return an event position in parent coordinates of a #currentTarget, that is, in the coordinate system in which #position of the element is expressed (see #position for the position in the space and #localPosition for the one in the element)"
+
 	<return: #Point>
-	
 	^ self currentTarget globalPointToParent: self position
 ]
 
 { #category : #'api - geometry' }
 BlMouseEvent >> position [
+	"Return the position of the pointer in the coordinates of the space (the window), whose origin is the top left corner of its content.
+	This is the position to use to find the elements under the pointer or to place an element where the user clicked, for example with #localPointToGlobal: and #globalPointToLocal:.
+	It is not a position on the desktop: see #screenPosition for that"
+
 	^ position
 ]
 
@@ -213,6 +217,9 @@ BlMouseEvent >> printOn: aStream [
 
 { #category : #'api - geometry' }
 BlMouseEvent >> screenPosition [
+	"Return the position of the pointer in the coordinates of the desktop (the screen), as opposed to #position which is relative to the window of the space.
+	It changes when the window is moved, even if the pointer stays at the same place in the window, so it is almost never what is needed to interact with elements: use #position or #localPosition instead"
+
 	^ screenPosition
 ]
 

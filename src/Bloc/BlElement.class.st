@@ -3367,8 +3367,10 @@ BlElement >> pointAnchor [
 
 { #category : #'geometry position' }
 BlElement >> position [
-	<return: #Point>
+	"Return the position of my top left corner in the coordinates of my parent, after my transformations (it is derived from my #bounds).
+	See #positionInSpace for the position in the space (the window) and BlMouseEvent>>#position and #screenPosition for the positions of the pointer"
 
+	<return: #Point>
 	^ self bounds position
 ]
 
