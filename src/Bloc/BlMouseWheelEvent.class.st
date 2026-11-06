@@ -20,38 +20,6 @@ Class {
 	#category : #'Bloc-Events'
 }
 
-{ #category : #'instance creation' }
-BlMouseWheelEvent class >> down [
-	^ self new
-		position: 0@0;
-		screenPosition: 0@0;
-		direction: Character arrowDown
-]
-
-{ #category : #'instance creation' }
-BlMouseWheelEvent class >> left [
-	^ self new
-		position: 0@0;
-		screenPosition: 0@0;
-		direction: Character arrowLeft
-]
-
-{ #category : #'instance creation' }
-BlMouseWheelEvent class >> right [
-	^ self new
-		position: 0@0;
-		screenPosition: 0@0;
-		direction: Character arrowRight
-]
-
-{ #category : #'instance creation' }
-BlMouseWheelEvent class >> up [
-	^ self new
-		position: 0@0;
-		screenPosition: 0@0;
-		direction: Character arrowUp
-]
-
 { #category : #initialization }
 BlMouseWheelEvent >> initialize [
 	super initialize.
