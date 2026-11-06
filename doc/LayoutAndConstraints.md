@@ -70,7 +70,15 @@ element addEventHandlerOn: BlElementLayoutComputedEvent do: [ :event |
 > [!IMPORTANT]
 > Anything that changes the constraints, the position or the content of an element requests a new layout, which sends the event again. A handler must change something only when it differs from what is already there, so that the second layout finds nothing to do. See the recipes in [Working with Text](Text.md), which correct one thing per layout.
 
+`whenLayoutedDo:` installs such a handler for every layout, and `whenLayoutedDoOnce:` for the next one only. The block of the second one can register itself again to follow the following layouts.
+
+```smalltalk
+element whenLayoutedDoOnce: [ element extent ">>> the size computed by the layout" ].
+```
+
 The handler runs on the pulse process. An error in it opens a debugger that blocks the host (see [Troubleshooting](Troubleshooting.md)).
+
+A space computes at most 100 layouts per frame, and writes `Warning: Layout was performed 50 times per frame!` in the Transcript at the 50th. A handler which changes something at each layout raises no error: the layout is still requested at the end of the frame, and the work starts again in the next one. If a window becomes slow after you added a handler, look at the Transcript.
 
 ## 6. Clipping
 
@@ -96,18 +104,27 @@ element extent. ">>> 30 @ 20"
 
 `measuredBounds extent` answers `0 @ 0` too: it only gets the extent once the layout computed it (the position, in contrast, is recorded at once, see section 4).
 
-Code which needs a size before the layout, such as another library asking `node width` while it places the nodes, must not read it from the element. Keep the requested size in your own model (a `dimension` instance variable which `extent:` is sent from), and answer it. Bloc advises against redefining `width` and `height` (a lint rule checks it): doing it is only safe when the extent of the element is always its model's dimension, so that Bloc and the other library see the same size.
+When the size is exact (`extent:` or `exact:`), `requestedExtent` answers it at once, before any layout:
+
+```smalltalk
+element := BlElement new extent: 30 @ 20.
+element requestedExtent. ">>> 30 @ 20"
+```
+
+Only an exact size can be known before the layout: for a `fitContent` element, `requestedExtent` answers `0 @ 0`, as its comment warns.
+
+Code which needs a size before the layout, such as another library asking `node width` while it places the nodes, must not read it from `extent`. If the size is exact, ask `requestedExtent`. Otherwise keep the requested size in your own model (a `dimension` instance variable which `extent:` is sent from), and answer it. A library which sends `width` to the element itself needs it redefined: Bloc advises against redefining `width` and `height` (a lint rule checks it), and doing it is only safe when the extent of the element is always its model's dimension, so that Bloc and the other library see the same size.
 
 ## 8. Computations which depend on measured children
 
 The text of a label is measured by the layout, and its position is requested by a handler of `BlElementLayoutComputedEvent`, which requests another layout. A computation made from the bounds of such children, for example the route of a line around the nodes and their labels, is therefore wrong when it is made before the layouts are done, and it can be wrong after the first one.
 
-A pattern which works: make the computation when the content changes, remember the bounds it used, and make it again after each following layout until these bounds were the same for a few layouts in a row. A one-shot hook sent to the element, which runs the next time it is laid out, is enough to build it:
+A pattern which works: make the computation when the content changes, remember the bounds it used, and make it again after each following layout until these bounds were the same for a few layouts in a row. `whenLayoutedDoOnce:` (see section 5), registered again from its own block, is enough to build it:
 
 ```smalltalk
 watch := nil.
 watch := [
-	element doAfterNextLayout: [
+	element whenLayoutedDoOnce: [
 		current := self boundsOfTheNodesAndTheirLabels.
 		current = used
 			ifTrue: [ stable := stable + 1 ]
@@ -115,7 +132,7 @@ watch := [
 		stable < 4 ifTrue: [ watch value ] ] ].
 ```
 
-`doAfterNextLayout:` is not part of Bloc: keep a collection of blocks, and evaluate and empty it in a handler of `BlElementLayoutComputedEvent` of the element. The bounds must be computed from sizes, not read from positions, which are the ones of the previous layout: the place of a label next to its node is its size and its placement rule, not `label position`.
+The bounds must be computed from sizes, not read from positions, which are the ones of the previous layout: the place of a label next to its node is its size and its placement rule, not `label position`.
 
 ## 9. Moving a child to another parent
 
