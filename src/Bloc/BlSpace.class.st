@@ -50,7 +50,9 @@ Class {
 		'reference',
 		'iconStencil',
 		'rootElement',
-		'userData'
+		'userData',
+		'layoutLoop',
+		'layoutSettledActions'
 	],
 	#category : #'Bloc-Space'
 }
