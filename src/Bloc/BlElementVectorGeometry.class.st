@@ -145,6 +145,12 @@ BlElementVectorGeometry >> matchExtent: aPoint [
 	self subclassResponsibility
 ]
 
+{ #category : #accessing }
+BlElementVectorGeometry >> pathCache [
+
+	^ pathCache
+]
+
 { #category : #copying }
 BlElementVectorGeometry >> postCopy [
 

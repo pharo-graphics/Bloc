@@ -91,38 +91,18 @@ BlBezierCurveGeometry >> = anObject [
 { #category : #geometry }
 BlBezierCurveGeometry >> asPolylineVertices [
 	"Answer an Array of Points approximating the curve, for hit-testing.
+	The quadratic (3-point) and cubic (4-point) cases reuse the De Casteljau-flattened
+	cache that the renderer uses for cubics, so the vertices follow the drawn curve
+	within one pixel."
 
-	For the cubic (4-point) case this reuses the same De Casteljau-flattened
-	cache that the renderer uses, so both share a single computation and a
-	single allocation.
-
-	For the quadratic (3-point) case a coarse uniform sample is sufficient
-	for hit-testing purposes."
-
-	| c b a via1 via2 start end |
-
+	| result |
 	controlPoints size = 2 ifTrue: [
 		^ Array
 			with: controlPoints first
 			with: controlPoints second ].
-
-	controlPoints size = 4 ifTrue: [
-		| result |
-		result := OrderedCollection new.
-		self flattenedCubicVerticesDo: [ :x :y | result add: x @ y ].
-		^ result asArray ].
-
-	"size = 3: treat as degenerate cubic (CP2 = CP3) and sample uniformly."
-	start := controlPoints first.
-	via1 := controlPoints second.
-	via2 := controlPoints third.
-	end := via2.
-	c := 3 * (via1 - start).
-	b := 3 * (via2 - via1) - c.
-	a := end - start - c - b.
-
-	^ #(0.0 0.2 0.4 0.6 0.8 1.0) collect: [ :t |
-		a * (t raisedTo: 3) + (b * (t * t)) + (c * t) + start ]
+	result := OrderedCollection new.
+	self flattenedCubicVerticesDo: [ :x :y | result add: x @ y ].
+	^ result asArray
 ]
 
 { #category : #'geometry testing' }
@@ -155,6 +135,31 @@ BlBezierCurveGeometry >> controlPoints: aCollection [
 
 	controlPoints := aCollection.
 	self releaseCache
+]
+
+{ #category : #geometry }
+BlBezierCurveGeometry >> cubicControlPoints [
+	"Answer the four control points of the cubic Bezier tracing exactly my curve.
+	 They feed flattenedCubicVerticesDo:, so that hit testing (asPolylineVertices) and the cubic
+	 rendering share one flattening, which follows the curve within one pixel.
+
+	 For a cubic (4 points) these are my control points.
+	 For a quadratic (3 points) this is the degree elevation of the quadratic: a quadratic with
+	 start P0, control point P1 and end P2 is exactly the cubic with control points
+	 P0, P0 + 2/3 (P1 - P0), P2 + 2/3 (P1 - P2), P2.
+	 Treating P2 as the second cubic control point instead (P0, P1, P2, P2) would describe another
+	 curve than the one drawn, and points on the drawn curve would then be missed by hit testing."
+
+	| start via end |
+	controlPoints size = 4 ifTrue: [ ^ controlPoints ].
+	start := controlPoints first.
+	via := controlPoints second.
+	end := controlPoints third.
+	^ Array
+		with: start
+		with: start + ((via - start) * (2 / 3))
+		with: end + ((via - end) * (2 / 3))
+		with: end
 ]
 
 { #category : #private }
@@ -219,31 +224,29 @@ BlBezierCurveGeometry >> flattenCubicFrom: p0 cp1: p1 cp2: p2 to: p3 into: aColl
 { #category : #geometry }
 BlBezierCurveGeometry >> flattenedCubicVerticesDo: aBlock [
 	"Evaluate aBlock with (x, y) for each vertex of the De Casteljau-flattened
-	cubic Bezier path, including the start point p0.
-
+	cubic Bezier path (see cubicControlPoints), including the start point p0.
 	The flattened vertex array is computed lazily on first call and stored in
 	pathCache geometryPath.  The cache is cleared automatically whenever
 	releaseCache is called (e.g. from controlPoints:), which also clears the
 	inherited strokedBounds cache.
-
 	Usage:
 	  self flattenedCubicVerticesDo: [:x :y | canvas lineToX: x y: y]"
 
 	| vertices |
 	vertices := pathCache geometryPath ifNil: [
-		| result |
-		result := OrderedCollection with: controlPoints first.
+		| points result |
+		points := self cubicControlPoints.
+		result := OrderedCollection with: points first.
 		self
-			flattenCubicFrom: controlPoints first
-			cp1: controlPoints second
-			cp2: controlPoints third
-			to: controlPoints fourth
+			flattenCubicFrom: points first
+			cp1: points second
+			cp2: points third
+			to: points fourth
 			into: result
 			depth: 0.
 		result := result asArray.
 		pathCache geometryPath: result.
 		result ].
-
 	vertices do: [ :each | aBlock value: each x value: each y ]
 ]
 
