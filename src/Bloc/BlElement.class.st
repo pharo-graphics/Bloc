@@ -2212,14 +2212,11 @@ BlElement >> invalidate [
 
 { #category : #'change reporting' }
 BlElement >> invalidateAfterRelocateFrom: aPreviousPosition to: aNewPosition [
-	"Invalidate due to relocation by a given offset"
+	"Invalidate due to relocation by a given offset.
+	Only the place where I was last drawn and the one where I am now are damaged (see BlBoundsCache>>#damagedBoundsInSpace): a host draws again what is in them, my parent and my siblings included. Invalidating my parent would damage all of it, which makes a move among many siblings draw all of them again"
 
-	(self wantsSeparateCompositingLayer and: [
-		self hasCompositionLayer and: [
-			self isAttachedToSceneGraph ] ]) ifTrue: [
-				^ self space markNeedsCompositionPaint: self from: self ].
-
-	self hasParent ifTrue: [ self parent invalidate ]
+	(self wantsSeparateCompositingLayer and: [ self hasCompositionLayer and: [ self isAttachedToSceneGraph ] ]) ifTrue: [ ^ self space markNeedsCompositionPaint: self from: self ].
+	self invalidate
 ]
 
 { #category : #'api - look' }
