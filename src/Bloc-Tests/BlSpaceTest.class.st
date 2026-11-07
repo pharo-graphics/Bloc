@@ -142,6 +142,14 @@ BlSpaceTest >> testPosition [
 ]
 
 { #category : #tests }
+BlSpaceTest >> testPositionOfAShownSpaceIsKnown [
+
+	| aSpace |
+	aSpace := self newTestingSpace.
+	self assert: aSpace position isPoint
+]
+
+{ #category : #tests }
 BlSpaceTest >> testResizable [
 
 	| aSpace |
