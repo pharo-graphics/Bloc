@@ -1,60 +1,17 @@
 Class {
 	#name : #BARenderTest,
-	#superclass : #AePixelMatchTest,
-	#category : #'Bloc-Alexandrie-Tests-Base'
+	#superclass : #BAImageMatchTest,
+	#category : #'Bloc-Alexandrie-Tests'
 }
 
-{ #category : #exporting }
-BARenderTest class >> allFormSelectors [
+{ #category : #accessing }
+BARenderTest >> actual [
 
-	^ BlSpaceFixture allFixtureSelectors
-]
-
-{ #category : #convenience }
-BARenderTest class >> exportAll [
-	<script: 'super exportAll' >
-
-	super exportAll
-]
-
-{ #category : #convenience }
-BARenderTest class >> inspectAll [
-	<script: 'super inspectAll'>
-	
-	super inspectAll
-]
-
-{ #category : #convenience }
-BARenderTest class >> inspectMismatches [
-	<script: 'super inspectMismatches'>
-	
-	super inspectMismatches
+	^ self surfaceForSpace: [ :aSpace | aSpace root aeAsCairoSurface ]
 ]
 
 { #category : #hooks }
-BARenderTest >> actualForm [
+BARenderTest >> expectedImagesSubdirectory [
 
-	| aSpace form |
-	aSpace := self formBehavior
-		          host: BlHeadlessHost default;
-		          perform: formSelector;
-		          space.
-	aSpace show; settle.
-	form := aSpace root aeAsForm.
-	aSpace close; settle.
-	^ form
-]
-
-{ #category : #tests }
-BARenderTest >> expectedFormsDirectory [
-
-	| repo |
-	repo := IceRepository registry detect: [ :each | each name asLowercase = 'bloc' ].
-	^ repo location / 'tests' / 'render'
-]
-
-{ #category : #tests }
-BARenderTest >> formBehavior [
-
-	^ BlSpaceFixture new
+	^ 'render'
 ]
