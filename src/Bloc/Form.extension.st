@@ -12,8 +12,3 @@ Form >> asElement [
 		background: self;
 		yourself
 ]
-
-{ #category : #'*Bloc' }
-Form >> asForm [
-	^ self
-]
