@@ -3,10 +3,11 @@ Extension { #name : #BlSideBackgroundDecoration }
 { #category : #'*Bloc-Alexandrie' }
 BlSideBackgroundDecoration >> aeCairoScaledFontOn: aeCanvas in: anInfiniteElement [
 
-	| fontAndStyleBuilder freeTypeFont |
+	| fontAndStyleBuilder |
 	fontAndStyleBuilder := BlTextFontAndStyleBuilder new.
-	freeTypeFont := fontAndStyleBuilder font asAeFTFace.
-	^ aeCanvas scaledFontForFace: freeTypeFont size: 12
+	fontAndStyleBuilder fontSize: 12.
+
+	^ fontAndStyleBuilder aeCairoScaledFontOn: aeCanvas
 ]
 
 { #category : #'*Bloc-Alexandrie' }
