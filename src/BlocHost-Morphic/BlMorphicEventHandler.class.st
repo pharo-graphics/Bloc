@@ -111,13 +111,17 @@ BlMorphicEventHandler >> globalMousePositionForEvent: anEvent [
 BlMorphicEventHandler >> handleBackspaceDown: aMorphicEvent [
 
 	| aBlEvent |
-	aBlEvent := BlKeyDownEvent new
-		key: KeyboardKey backspace;
-		scanCode: aMorphicEvent scanCode;
-		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		yourself.
+	aBlEvent :=
+		BlKeyDownEvent new
+			key: KeyboardKey backspace;
+			scanCode: aMorphicEvent scanCode;
+			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
+			isRepeated: aMorphicEvent isRepeat;
+			yourself.
 
-	self registerPressedKey: KeyboardKey backspace.
+	"Only register key state on initial press; key is already tracked during repeats"
+	aMorphicEvent isRepeat ifFalse: [ self registerPressedKey: KeyboardKey backspace ].
+
 	self enqueue: aBlEvent
 ]
 
@@ -139,13 +143,17 @@ BlMorphicEventHandler >> handleBackspaceUp: aMorphicEvent [
 BlMorphicEventHandler >> handleDeleteDown: aMorphicEvent [
 
 	| aBlEvent |
-	aBlEvent := BlKeyDownEvent new
-		key: KeyboardKey delete;
-		scanCode: aMorphicEvent scanCode;
-		modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
-		yourself.
+	aBlEvent :=
+		BlKeyDownEvent new
+			key: KeyboardKey delete;
+			scanCode: aMorphicEvent scanCode;
+			modifiers: (self convertKeyModifiersFromEvent: aMorphicEvent);
+			isRepeated: aMorphicEvent isRepeat;
+			yourself.
 
-	self registerPressedKey: KeyboardKey delete.
+	"Only register key state on initial press; key is already tracked during repeats"
+	aMorphicEvent isRepeat ifFalse: [ self registerPressedKey: KeyboardKey delete ].
+
 	self enqueue: aBlEvent
 ]
 
@@ -153,9 +161,10 @@ BlMorphicEventHandler >> handleDeleteDown: aMorphicEvent [
 BlMorphicEventHandler >> handleDeleteOrBackspaceDown: aMorphicEvent [
 	"we only allow either delete or backspace key"
 
-	(self hasPressedKey: KeyboardKey backspace) ifTrue: [ ^ self ].
-
-	(self hasPressedKey: KeyboardKey delete) ifTrue: [ ^ self ].
+	"Allow repeats through; only drop duplicate events on the initial key press"
+	aMorphicEvent isRepeat ifFalse: [
+		(self hasPressedKey: KeyboardKey backspace) ifTrue: [ ^ self ].
+		(self hasPressedKey: KeyboardKey delete) ifTrue: [ ^ self ] ].
 
 	aMorphicEvent keyCharacter = Character delete ifTrue: [
 		^ self handleDeleteDown: aMorphicEvent ].
@@ -218,8 +227,7 @@ BlMorphicEventHandler >> handleExtentChanged: aMorphicEvent [
 { #category : #'events - keyboard' }
 BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 
-	| aBlEvent aKey theModifiers |
-
+	| aBlEvent aKey theModifiers isRepeated |
 	(self isScrollEvent: aMorphicEvent) ifTrue: [ ^ self ].
 
 	aKey := self convertKeyFromEvent: aMorphicEvent.
@@ -230,18 +238,20 @@ BlMorphicEventHandler >> handleKeyDown: aMorphicEvent [
 		self toggleHorizontalScrolling.
 		^ self ].
 
-	"we ignore already pressed keys"
-	(self hasPressedKey: aKey) ifTrue: [ ^ self ].
-	
+	isRepeated := aMorphicEvent isRepeat.
+	isRepeated ifFalse: [
+		(self hasPressedKey: aKey) ifTrue: [ ^ self ].
+		self registerPressedKey: aKey ].
+
 	theModifiers := self convertKeyModifiersFromEvent: aMorphicEvent.
-	
-	aBlEvent := BlKeyDownEvent new
-		key: aKey;
-		scanCode: aMorphicEvent scanCode;
-		modifiers: theModifiers;
-		yourself.
-	
-	self registerPressedKey: aKey.
+
+	aBlEvent :=
+		BlKeyDownEvent new
+			key: aKey;
+			scanCode: aMorphicEvent scanCode;
+			modifiers: theModifiers;
+			isRepeated: isRepeated;
+			yourself.
 
 	self enqueue: aBlEvent
 ]

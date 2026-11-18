@@ -27,7 +27,12 @@ Class {
 
 { #category : #accessing }
 BlShortcutEvent >> beRepeated [
-	isRepeated := true
+
+	self
+		deprecated: 'Use #isRepeated: instead'
+		transformWith: '`@receiver beRepeated' -> '`@receiver isRepeated: true'.
+
+	self isRepeated: true
 ]
 
 { #category : #accessing }
@@ -52,9 +57,14 @@ BlShortcutEvent >> initialize [
 { #category : #accessing }
 BlShortcutEvent >> isRepeated [
 	"Return true if this shortcut is a repeated event giving handlers a chance to ignore such shortcuts"
-	<return: #Boolean>
 
 	^ isRepeated
+]
+
+{ #category : #accessing }
+BlShortcutEvent >> isRepeated: aBoolean [
+
+	isRepeated := aBoolean
 ]
 
 { #category : #sending }

@@ -3,7 +3,7 @@ I am a OSWindow event handler for Bloc host spaces.
 "
 Class {
 	#name : #BlOSWindowEventHandler,
-	#superclass : #OSWindowGestureHandler,
+	#superclass : #OSWindowEventVisitor,
 	#instVars : [
 		'window',
 		'time',
@@ -81,10 +81,7 @@ BlOSWindowEventHandler >> initializeWithWindow: aOSWindow time: aBlTime keyboard
 
 	window := aOSWindow.
 	time := aBlTime.
-	keyboardKeyTable := aKeyboardKeyTable.
-
-	self registerGesture: OSTouchTwoFingersScrollDetector new.
-	self registerGesture: OSTouchTwoFingersPinchDetector new
+	keyboardKeyTable := aKeyboardKeyTable
 ]
 
 { #category : #'api - accessing' }
@@ -112,12 +109,16 @@ BlOSWindowEventHandler >> time: aBlTime [
 { #category : #visiting }
 BlOSWindowEventHandler >> visitKeyDownEvent: anEvent [
 
-	| aBlEvent |
-	aBlEvent := BlKeyDownEvent new
-		key: (self convertKeyFromEvent: anEvent);
-		scanCode: anEvent scanCode;
-		modifiers: (self convertKeyModifiers: anEvent modifiers);
-		yourself.
+	| aBlEvent isRepeated |
+	isRepeated := anEvent repeat > 0.
+
+	aBlEvent :=
+		BlKeyDownEvent new
+			key: (self convertKeyFromEvent: anEvent);
+			scanCode: anEvent scanCode;
+			modifiers: (self convertKeyModifiers: anEvent modifiers);
+			isRepeated: isRepeated;
+			yourself.
 
 	self enqueue: aBlEvent
 ]
@@ -215,40 +216,6 @@ BlOSWindowEventHandler >> visitTextInputEvent: anEvent [
 	self enqueue: aBlocEvent
 ]
 
-{ #category : #'visiting - touch' }
-BlOSWindowEventHandler >> visitTouchActionPointerDownEvent: anEvent [
-
-]
-
-{ #category : #'visiting - touch' }
-BlOSWindowEventHandler >> visitTouchActionPointerMoveEvent: anEvent [
-
-]
-
-{ #category : #'visiting - touch' }
-BlOSWindowEventHandler >> visitTouchActionPointerUpEvent: anEvent [
-
-]
-
-{ #category : #'visiting - gestures' }
-BlOSWindowEventHandler >> visitTouchTwoFingersPinchBeginEvent: anEvent [
-
-]
-
-{ #category : #'visiting - gestures' }
-BlOSWindowEventHandler >> visitTouchTwoFingersPinchMoveEvent: anEvent [
-
-]
-
-{ #category : #'visiting - gestures' }
-BlOSWindowEventHandler >> visitTouchTwoFingersScrollBeginEvent: anEvent [
-]
-
-{ #category : #'visiting - gestures' }
-BlOSWindowEventHandler >> visitTouchTwoFingersScrollMoveEvent: anEvent [
-
-]
-
 { #category : #visiting }
 BlOSWindowEventHandler >> visitUnknownEvent: anEvent [
 	Transcript
@@ -328,6 +295,14 @@ BlOSWindowEventHandler >> visitWindowResizeEvent: anEvent [
 	self
 		enqueueSpaceResized: BlSpaceResizedEvent new
 		extent: anEvent width @ anEvent height
+]
+
+{ #category : #'visiting - window' }
+BlOSWindowEventHandler >> visitWindowResolutionChangeEvent: anEvent [
+
+	self
+		enqueueSpaceResized: BlSpaceResizedEvent new
+		extent: self window logicalSize asPoint
 ]
 
 { #category : #'api - accessing' }
