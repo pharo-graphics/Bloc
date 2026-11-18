@@ -96,7 +96,7 @@ BlOSWindowSDL2HostSpace >> initializeWithAttributes: initialAttributes [
 
 	window := OSWindow createWithAttributes: initialAttributes.
 	window eventHandler:
-		(BlOSWindowEventHandler
+		(BlOSWindowSDL2EventHandler
 			window: self
 			time: space time
 			keyboardKeyTable: keyboardKeyTable).

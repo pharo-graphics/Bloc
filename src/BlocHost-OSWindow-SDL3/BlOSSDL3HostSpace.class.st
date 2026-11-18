@@ -78,7 +78,7 @@ BlOSSDL3HostSpace >> initializeWithAttributes: initialAttributes [
 
 	osWindow := OSWindow createWithAttributes: initialAttributes.
 	osWindow eventHandler:
-		(BlOSWindowEventHandler
+		(BlOSSDL3EventHandler
 			window: self
 			time: space time
 			keyboardKeyTable: keyboardKeyTable).
