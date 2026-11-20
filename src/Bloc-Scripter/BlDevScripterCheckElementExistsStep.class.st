@@ -10,6 +10,6 @@ BlDevScripterCheckElementExistsStep >> playOn: aScripter [
 
 	anElement := [ self target findTargetStartingInScripter: aScripter] on: Error do: [ nil ].
 	self 
-		assert: [ anElement notNil ]
+		assert: [ anElement isNotNil ]
 		description: [ 'Element should exist' ].
 ]

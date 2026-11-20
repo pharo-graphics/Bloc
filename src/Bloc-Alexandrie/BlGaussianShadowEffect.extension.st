@@ -27,7 +27,7 @@ BlGaussianShadowEffect >> ensureValidAlphaSurfaceFor: aBlElement on: aeCanvas [
 	visualBounds := aBlElement visualBounds.
 	newElementHash := self elementHashFor: aBlElement.
 
-	(alphaSurface notNil and: [
+	(alphaSurface isNotNil and: [
 		 alphaSurface isNull not and: [
 			 alphaSurfaceElementHash = newElementHash ] ]) ifTrue: [ ^ self ].
 

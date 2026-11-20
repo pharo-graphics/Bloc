@@ -792,7 +792,7 @@ BlInfiniteLinearLayout >> layoutCompleted [
 
 	super layoutCompleted.
 
-	(infiniteElement notNil
+	(infiniteElement isNotNil
 		and: [ infiniteElement bounds extent > (0 @ 0) ])
 		ifTrue: [
 			pendingScrollPosition := NoPosition.

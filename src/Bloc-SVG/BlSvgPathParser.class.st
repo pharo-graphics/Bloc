@@ -194,7 +194,7 @@ read fraction, what is after the decimal point:
 	
 	mul := 1/10. 
 	result := 0.
-	[ stream peek notNil and: [ stream peek isDigit ] ] whileTrue: [
+	[ stream peek isNotNil and: [ stream peek isDigit ] ] whileTrue: [
 		result := result + ( (stream next digitValue) * mul ).
 		mul := mul / 10
 	].
@@ -211,7 +211,7 @@ BlSvgPathParser >> readHorizontalLine [
 	
 	handler horizontalLineTo: x.
 	
-	[ self skipBlanks. x := self nextNumber. x notNil ]
+	[ self skipBlanks. x := self nextNumber. x isNotNil ]
 		whileTrue: [ handler horizontalLineTo: x ]
 ]
 
@@ -222,7 +222,7 @@ BlSvgPathParser >> readInteger [
 	(stream atEnd or: [ stream peek isDigit not ]) ifTrue: [ ^ nil ].
 	
 	result := 0.
-	[ stream peek notNil and: [ stream peek isDigit ] ] whileTrue: [
+	[ stream peek isNotNil and: [ stream peek isDigit ] ] whileTrue: [
 		result := result * 10 + (stream next digitValue) ].
 	^ result
 ]
@@ -238,7 +238,7 @@ BlSvgPathParser >> readLine [
 	
 	handler lineTo: pt.
 	
-	[ pt := self readPoint. pt notNil ] whileTrue: [ handler lineTo: pt ]
+	[ pt := self readPoint. pt isNotNil ] whileTrue: [ handler lineTo: pt ]
 ]
 
 { #category : #'private - commands' }
@@ -251,7 +251,7 @@ BlSvgPathParser >> readMove [
 	
 	handler moveTo: pt.
 	
-	[ pt := self readPoint. pt notNil ] whileTrue: [ handler lineTo: pt ]
+	[ pt := self readPoint. pt isNotNil ] whileTrue: [ handler lineTo: pt ]
 ]
 
 { #category : #'private - parsing' }
@@ -350,7 +350,7 @@ BlSvgPathParser >> readVerticalLine [
 	
 	handler verticalLineTo: y.
 	
-	[ self skipBlanks. y := self nextNumber. y notNil ]
+	[ self skipBlanks. y := self nextNumber. y isNotNil ]
 		whileTrue: [ handler verticalLineTo: y ]
 ]
 

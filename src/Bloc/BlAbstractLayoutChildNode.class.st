@@ -74,7 +74,7 @@ BlAbstractLayoutChildNode >> popActions [
 	
 	^ Array streamContents: [ :aStream |
 		| eachAction |
-		[ (eachAction := self popAction) notNil ] whileTrue: [ aStream nextPut: eachAction ] ]
+		[ (eachAction := self popAction) isNotNil ] whileTrue: [ aStream nextPut: eachAction ] ]
 ]
 
 { #category : #'api - geometry' }

@@ -64,7 +64,7 @@ BlLayoutChildNodeWithTransformation >> measurement: aBlLayoutNodeMeasurement [
 	childNode measurement: aBlLayoutNodeMeasurement.
 
 	self
-		assert: [ transformation notNil ]
+		assert: [ transformation isNotNil ]
 		description: [ 'Transformation should be set before measurement' ].
 
 	self transformation bounds:

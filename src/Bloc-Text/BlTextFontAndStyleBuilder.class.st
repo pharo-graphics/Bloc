@@ -76,32 +76,32 @@ BlTextFontAndStyleBuilder >> fontPropertiesTarget [
 
 { #category : #testing }
 BlTextFontAndStyleBuilder >> hasCustomColor [
-	^ color notNil
+	^ color isNotNil
 ]
 
 { #category : #testing }
 BlTextFontAndStyleBuilder >> hasCustomDecoration [
-	^ decoration notNil
+	^ decoration isNotNil
 ]
 
 { #category : #testing }
 BlTextFontAndStyleBuilder >> hasCustomFamilyName [
-	^ fontFamilyName notNil or: [ defaultFontFamilyName notNil ]
+	^ fontFamilyName isNotNil or: [ defaultFontFamilyName isNotNil ]
 ]
 
 { #category : #testing }
 BlTextFontAndStyleBuilder >> hasCustomFontSize [
-	^ fontSize notNil or: [ defaultFontSize notNil ]
+	^ fontSize isNotNil or: [ defaultFontSize isNotNil ]
 ]
 
 { #category : #testing }
 BlTextFontAndStyleBuilder >> hasCustomFontSlant [
-	^ fontSlant notNil
+	^ fontSlant isNotNil
 ]
 
 { #category : #testing }
 BlTextFontAndStyleBuilder >> hasCustomFontStretch [
-	^ fontStretch notNil
+	^ fontStretch isNotNil
 ]
 
 { #category : #testing }
@@ -111,7 +111,7 @@ BlTextFontAndStyleBuilder >> hasCustomFontStyle [
 
 { #category : #testing }
 BlTextFontAndStyleBuilder >> hasCustomFontWeight [
-	^ fontWeight notNil
+	^ fontWeight isNotNil
 ]
 
 { #category : #'font - name' }

@@ -3778,7 +3778,7 @@ BlElement >> requestLayout: aSourceElement [
 
 	(self ~~ aSourceElement and: [
 		self isAttachedToSceneGraph and: [
-			self privatePreviousMeasurementSpec notNil and: [
+			self privatePreviousMeasurementSpec isNotNil and: [
 				self isLayoutBoundary and: [
 					self hasParent and: [
 						self parent isLayoutRequested not ] ] ] ] ])

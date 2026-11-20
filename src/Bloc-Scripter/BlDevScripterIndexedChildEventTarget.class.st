@@ -23,7 +23,7 @@ BlDevScripterIndexedChildEventTarget >> findTargetIn: anElement [
 	<return: #BlElement>
 
 	self
-		assert: [ anElement notNil ]
+		assert: [ anElement isNotNil ]
 		description: [ 'Element must not be nil' ].
 
 	self 

@@ -74,7 +74,7 @@ BAAxisAlignedCompositionLayer >> initializeFor: aBlElement [
 { #category : #testing }
 BAAxisAlignedCompositionLayer >> isValid [
 
-	^ surface notNil and: [ surface isNull not ]
+	^ surface isNotNil and: [ surface isNull not ]
 ]
 
 { #category : #accessing }

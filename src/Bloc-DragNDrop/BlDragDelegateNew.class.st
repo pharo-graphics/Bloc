@@ -100,7 +100,7 @@ BlDragDelegateNew >> dragStrategy: aBlDragStrategy [
 
 { #category : #testing }
 BlDragDelegateNew >> hasDragArea [
-	^ dragArea notNil
+	^ dragArea isNotNil
 ]
 
 { #category : #initialization }

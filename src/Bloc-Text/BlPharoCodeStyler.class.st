@@ -73,7 +73,7 @@ BlPharoCodeStyler >> isForWorkspace: aBoolean [
 { #category : #testing }
 BlPharoCodeStyler >> isScripting [
 
-	^ isScripting ifNil: [ workspace notNil ]
+	^ isScripting ifNil: [ workspace isNotNil ]
 ]
 
 { #category : #testing }

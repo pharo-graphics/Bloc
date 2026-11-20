@@ -359,7 +359,7 @@ BlSpace >> doLayout [
 { #category : #'focus managing' }
 BlSpace >> doUpdateFocus [
 
-	(self focusOwner notNil and: [
+	(self focusOwner isNotNil and: [
 		self focusOwner isAttachedToSceneGraph not ]) ifTrue: [
 		focusChain
 			deepestAttachedElementDo: [ :aNewFocusOwner |
@@ -999,7 +999,7 @@ BlSpace >> knowsPosition [
 	By default, spaces don't know their position and allow the window manager to choose one.
 	Setting an explicit position during space creation will result in a window created at a specified position"
 
-	^ position notNil
+	^ position isNotNil
 ]
 
 { #category : #'change - layout' }

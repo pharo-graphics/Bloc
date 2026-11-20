@@ -80,7 +80,7 @@ BlDragDelegate >> dragArea: anObject [
 { #category : #testing }
 BlDragDelegate >> hasDragArea [
 
-	^ dragArea notNil
+	^ dragArea isNotNil
 ]
 
 { #category : #initialization }
