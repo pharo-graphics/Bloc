@@ -7,7 +7,7 @@ BlAnnulusSectorGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 		self isFullTurn
 			ifTrue: [ self aeBuildFullTurnOn: cairoContext ]
 			ifFalse: [
-				self innerRadius = 0.0
+				self innerRadius isZero
 					ifTrue: [
 						cairoContext
 							circleSectorCenter: self center
