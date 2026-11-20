@@ -32,7 +32,7 @@ BlKeyboardProcessor >> detectTarget [
 	or space's root element otherwise.
 	Note: target can not be nil"
 
-	^ (self space focusOwner notNil and: [
+	^ (self space focusOwner isNotNil and: [
 		self space focusOwner isAttachedToSceneGraph ])
 			ifTrue: [ self space focusOwner ]
 			ifFalse: [ self space root ]

@@ -27,7 +27,7 @@ BlCommandApplicationTask >> applyAll [
 { #category : #'api - running' }
 BlCommandApplicationTask >> canApplyCommands [
 	
-	^ element notNil and: [ element isAttachedToSceneGraph ]
+	^ element isNotNil and: [ element isAttachedToSceneGraph ]
 ]
 
 { #category : #initialization }

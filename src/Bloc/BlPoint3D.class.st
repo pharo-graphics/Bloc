@@ -70,13 +70,13 @@ BlPoint3D >> printOn: aStream [
 	aStream nextPut: $(.
 	x printOn: aStream.
 	aStream nextPut: $@.
-	(y notNil and: [y negative])
+	(y isNotNil and: [y negative])
 		ifTrue: [
 			"Avoid ambiguous @- construct"
 			aStream space].
 	y printOn: aStream.
 	aStream nextPut: $@.
-	(z notNil and: [z negative])
+	(z isNotNil and: [z negative])
 		ifTrue: [
 			"Avoid ambiguous @- construct"
 			aStream space].

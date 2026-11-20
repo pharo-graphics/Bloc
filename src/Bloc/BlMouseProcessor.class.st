@@ -272,7 +272,7 @@ BlMouseProcessor >> generateEvents [
 	lastEnteredTargets := lastEnteredTargets select: [ :eachElement |
 		                      eachElement isAttachedToSceneGraph ].
 
-	(lastOverTarget notNil and: [ lastOverTarget space ~~ self space ])
+	(lastOverTarget isNotNil and: [ lastOverTarget space ~~ self space ])
 		ifTrue: [ lastOverTarget := nil ].
 
 	(self isMouseEventValid: lastMouseDownEvent) ifFalse: [
