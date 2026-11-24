@@ -18,6 +18,11 @@ BlOSSDL3SimpleHostSpace >> initializeRenderer [
 	| textureExtent |
 	super initializeRenderer.
 
+	"Release the previous texture before creating a resized one."
+	sdlTexture ifNotNil: [
+		sdlTexture isNull ifFalse: [ sdlTexture destroy ].
+		sdlTexture := nil ].
+
 	pitchHolder := FFIInt32 newValueHolder.
 	pixelsAddress := ExternalAddress newPointer.
 	sdlRect := SDL_Rect new.
@@ -26,6 +31,8 @@ BlOSSDL3SimpleHostSpace >> initializeRenderer [
 	logicalWindowRectangle := 0@0 extent: osWindow extent.
 
 	textureExtent := osWindow canvasExtent.
+	"Skip zero-sized extents (for example, while a window is minimized)."
+	(textureExtent x <= 0 or: [ textureExtent y <= 0 ]) ifTrue: [ ^ self ].
 	sdlTexture := sdlRenderer
 		unownedNewTextureFormat: SDL_PIXELFORMAT_XRGB8888
 		access: SDL_TEXTUREACCESS_STREAMING
@@ -43,6 +50,7 @@ BlOSSDL3SimpleHostSpace >> initializeWindowRenderer [
 BlOSSDL3SimpleHostSpace >> lockSurfaceFor: logicalDamagedRectangle scaleFactor: aNumber during: aBlock [
 
 	| physicalDamagedRectangle |
+	sdlTexture ifNil: [ ^ self ].
 	"Return early if damages fall outside of the space"
 	physicalDamagedRectangle :=
 		logicalDamagedRectangle intersect: logicalWindowRectangle ifNone: [ ^ self ].

@@ -77,8 +77,15 @@ BlOSSDL3GPURenderer >> present [
 
 { #category : #'updating screen' }
 BlOSSDL3GPURenderer >> resized [
-	"Recreate the backing form when the window is resized"
-	self form: (Form extent: backendWindow canvasExtent depth: 32).
+	"Recreate the backing form when the window pixel extent changes."
+
+	| newExtent |
+	newExtent := backendWindow canvasExtent.
+	"Skip zero-sized extents (for example, while a window is minimized)."
+	(newExtent x <= 0 or: [ newExtent y <= 0 ]) ifTrue: [ ^ self ].
+	"Keep the current form when the extent did not change (for example, on the first frame)."
+	(form isNotNil and: [ form extent = newExtent ]) ifTrue: [ ^ self ].
+	self form: (Form extent: newExtent depth: 32).
 	formRenderer updateToNewResolution
 ]
 

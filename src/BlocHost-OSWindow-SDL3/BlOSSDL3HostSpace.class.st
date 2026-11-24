@@ -173,6 +173,12 @@ BlOSSDL3HostSpace >> minimized [
 	^ osWindow minimized
 ]
 
+{ #category : #accessing }
+BlOSSDL3HostSpace >> osWindow [
+
+	^ osWindow
+]
+
 { #category : #'host space - geometry' }
 BlOSSDL3HostSpace >> physicalSize [
 	"Return a physical host size which is what the framebuffer size should be.
