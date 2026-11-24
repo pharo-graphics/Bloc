@@ -73,7 +73,7 @@ The guides are arranged in recommended reading order:
 - [Overlays: Toolbars, Legends, Tooltips and Pop-ups](doc/Overlays.md) — Elements above the content: anchoring to a corner, a tooltip after a delay, a pop-up kept inside the window, and not taking the mouse.
 - [Testing Interactions and Drawing](doc/TestingInteractions.md) — Headless host, synthetic mouse events (`fireEvent:` vs `dispatchEvent:`) and checking pixels.
 - [Troubleshooting](doc/Troubleshooting.md) — Symptoms and explanations, including the debugger that freezes the windows.
-- [Using Bloc in a Spec Presenter](doc/SpecIntegration.md) — Showing a Bloc space in a Spec window with `SpBlSpaceInMorphPresenter`.
+- [Using Bloc in a Spec Presenter](doc/SpecIntegration.md) — Embedding a Bloc element in a Spec window with `SpBlocPresenter`.
 - [About Mouse Events](doc/MouseEvent.md) — Event dispatching: enter/leave vs over/out bubbling.
 - [Understanding Scene Graph Attachment](doc/ElementAddedToSceneGraph.md) — Working with `BlElement >> #onAddedToSceneGraph`.
 - [History and Presentations](doc/History.md) — Evolution of Bloc and recorded talks.
