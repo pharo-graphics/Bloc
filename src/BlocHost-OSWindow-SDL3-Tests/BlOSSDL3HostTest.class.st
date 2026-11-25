@@ -57,6 +57,34 @@ BlOSSDL3HostTest >> testGPUHostNewHostSpaceFor [
 ]
 
 { #category : #tests }
+BlOSSDL3HostTest >> testGPUHostRendererForwardsUpdateGPUDevice [
+
+	| space backendWindow formRenderer originalDevice |
+	BlOSSDL3GPUHost isSupported ifFalse: [ ^ self skip ].
+
+	space := BlSpace new.
+	space useSDLHost.
+	space extent: 300 @ 200.
+	[
+		space open; settle.
+		backendWindow := space hostSpace osWindow backendWindow.
+		formRenderer := space hostSpace osWindow renderer formRenderer.
+		originalDevice := formRenderer gpuDevice.
+		self assert: originalDevice == backendWindow driver gpuDevice.
+
+		backendWindow gpuDevice: nil.
+		self assert: formRenderer gpuDevice isNil.
+		self deny: formRenderer needsFlush.
+
+		backendWindow gpuDevice: originalDevice.
+		self assert: formRenderer gpuDevice == originalDevice
+	] ensure: [
+		(backendWindow isNotNil and: [ originalDevice isNotNil and: [ formRenderer gpuDevice isNil ] ]) ifTrue: [
+			backendWindow gpuDevice: originalDevice ].
+		space close; settle ]
+]
+
+{ #category : #tests }
 BlOSSDL3HostTest >> testGPUHostRendererResetsNeedsFlushAndHandlesZeroExtent [
 
 	| space formRenderer resizedForm |

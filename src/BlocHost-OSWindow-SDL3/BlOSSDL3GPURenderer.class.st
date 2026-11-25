@@ -58,7 +58,7 @@ BlOSSDL3GPURenderer >> initializeWith: aSDL3BackendWindow [
 	super initializeWith: aSDL3BackendWindow.
 	form := Form extent: aSDL3BackendWindow canvasExtent depth: 32.
 	formRenderer :=
-		OSSDL3AbstractDriver current
+		aSDL3BackendWindow driver
 			newFormRenderer: form
 			backendWindow: aSDL3BackendWindow
 ]
@@ -87,6 +87,13 @@ BlOSSDL3GPURenderer >> resized [
 	(form isNotNil and: [ form extent = newExtent ]) ifTrue: [ ^ self ].
 	self form: (Form extent: newExtent depth: 32).
 	formRenderer updateToNewResolution
+]
+
+{ #category : #updating }
+BlOSSDL3GPURenderer >> updateGPUDevice: aGPUDevice [
+	"Forward GPU device lifecycle updates (such as driver shutdown or restart) to formRenderer."
+
+	formRenderer ifNotNil: [ formRenderer updateGPUDevice: aGPUDevice ]
 ]
 
 { #category : #'updating screen' }
