@@ -119,7 +119,7 @@ BlLayoutCommonConstraints >> hasConstraintsForLayout: aLayoutClass [
 	We can optimize lookup for this particular case by storing a type of previously accessed constraint"
 
 	previouslyAccessedConstraintsType == aLayoutClass ifTrue: [ ^ true ].
-	^ constraints notNil and: [ constraints includesKey: aLayoutClass ]
+	^ constraints isNotNil and: [ constraints includesKey: aLayoutClass ]
 ]
 
 { #category : #'api - constraints' }

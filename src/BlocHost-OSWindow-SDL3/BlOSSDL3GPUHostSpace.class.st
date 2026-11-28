@@ -5,6 +5,16 @@ Class {
 }
 
 { #category : #initialization }
+BlOSSDL3GPUHostSpace >> initializeRenderer [
+	"Resize the backing Form and GPU texture when the window size or scale changes."
+
+	super initializeRenderer.
+	self isValid ifFalse: [ ^ self ].
+	OSWindowRenderThread uniqueInstance critical: [
+		osWindow renderer ifNotNil: [ :aRenderer | aRenderer resized ] ]
+]
+
+{ #category : #initialization }
 BlOSSDL3GPUHostSpace >> initializeWindowRenderer [
 
 	osWindow renderer: (BlOSSDL3GPURenderer for: osWindow backendWindow)
@@ -15,7 +25,7 @@ BlOSSDL3GPUHostSpace >> lockSurfaceFor: logicalDamagedRectangle scaleFactor: sca
 
 	| form physicalDamagedRectangle |
 	form := osWindow renderer form.
-	form ifNil: [ ^ self ].
+	(form isNil or: [ form width <= 0 or: [ form height <= 0 ] ]) ifTrue: [ ^ self ].
 
 	physicalDamagedRectangle :=
 		((logicalDamagedRectangle

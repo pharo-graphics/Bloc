@@ -78,7 +78,7 @@ BlOSSDL3HostSpace >> initializeWithAttributes: initialAttributes [
 
 	osWindow := OSWindow createWithAttributes: initialAttributes.
 	osWindow eventHandler:
-		(BlOSWindowEventHandler
+		(BlOSSDL3EventHandler
 			window: self
 			time: space time
 			keyboardKeyTable: keyboardKeyTable).
@@ -171,6 +171,12 @@ BlOSSDL3HostSpace >> minimize [
 BlOSSDL3HostSpace >> minimized [
 
 	^ osWindow minimized
+]
+
+{ #category : #accessing }
+BlOSSDL3HostSpace >> osWindow [
+
+	^ osWindow
 ]
 
 { #category : #'host space - geometry' }

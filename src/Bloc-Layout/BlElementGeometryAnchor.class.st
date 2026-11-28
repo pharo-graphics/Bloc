@@ -15,7 +15,7 @@ BlElementGeometryAnchor >> checkInParent: anElement forChild: aChild [
 
 { #category : #accessing }
 BlElementGeometryAnchor >> element [
-	self assert: receiver element notNil.
+	self assert: receiver element isNotNil.
 	^ receiver element
 ]
 

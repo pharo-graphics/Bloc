@@ -419,14 +419,14 @@ BlBaseAnimation >> step [
 			ifTrue: [ self step ]
 ]
 
-{ #category : #'api - running' }
+{ #category : #running }
 BlBaseAnimation >> stop [
-
-	"Ignore if it's already stopped"
-	isRunning ifFalse: [ ^ self ].
+	"Stopping an animation which was not started yet cancels it: it will not start when its turn comes. Ignore if it is already stopped"
+	isRunning ifFalse: [
+		isStarted := true.
+		^ self ].
 
 	isRunning := false.
-
 	"We have done an animation, notify listeners"
 	self notifyOnFinishedHandlers
 ]

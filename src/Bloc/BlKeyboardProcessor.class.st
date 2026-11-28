@@ -7,11 +7,7 @@ Class {
 	#instVars : [
 		'buffer',
 		'textInputBuffer',
-		'preventKeystrokes',
-		'shortcutRepeatDelay',
-		'shortcutRepeatInterval',
-		'previousShortcutTime',
-		'previousShortcutRepeatTime'
+		'preventKeystrokes'
 	],
 	#category : #'Bloc-Space - Events'
 }
@@ -36,7 +32,7 @@ BlKeyboardProcessor >> detectTarget [
 	or space's root element otherwise.
 	Note: target can not be nil"
 
-	^ (self space focusOwner notNil and: [
+	^ (self space focusOwner isNotNil and: [
 		self space focusOwner isAttachedToSceneGraph ])
 			ifTrue: [ self space focusOwner ]
 			ifFalse: [ self space root ]
@@ -44,51 +40,6 @@ BlKeyboardProcessor >> detectTarget [
 
 { #category : #'event processing' }
 BlKeyboardProcessor >> handleSpaceEventProcessedEvent: anEvent [
-
-	| aShortcutEvent aTimeNow |
-	self processBufferedTextInput.
-
-	buffer isEmpty ifTrue: [ ^ self ].
-
-	aTimeNow := self space time now.
-
-	aTimeNow - previousShortcutTime < shortcutRepeatDelay
-		ifTrue: [ ^ self ].
-
-	aTimeNow - previousShortcutRepeatTime < shortcutRepeatInterval
-		ifTrue: [ ^ self ].
-
-	aShortcutEvent := BlShortcutEvent new.
-	aShortcutEvent beRepeated.
-	aShortcutEvent buffer: buffer.
-	aShortcutEvent target: self detectTarget.
-	self fireEvent: aShortcutEvent.
-
-	previousShortcutRepeatTime := self space time now
-]
-
-{ #category : #initialization }
-BlKeyboardProcessor >> initialize [
-
-	super initialize.
-
-	buffer := BlKeyboardBuffer new.
-	textInputBuffer := BlTextInputBuffer new.
-	preventKeystrokes := false.
-
-	"how often a shortcut even should be sent while user still presses keys"
-	shortcutRepeatInterval := 100 milliSeconds.
-	"how much we should wait until starting to repeat a shortcut"
-	shortcutRepeatDelay := 500 milliSeconds.
-
-	"when the previous main shortcut event was sent"
-	previousShortcutTime := space time now. 
-	"when the last repeated shortcut was sent"
-	previousShortcutRepeatTime := space time now
-]
-
-{ #category : #'event processing' }
-BlKeyboardProcessor >> processBufferedTextInput [
 
 	| aTarget |
 	aTarget := nil.
@@ -102,11 +53,21 @@ BlKeyboardProcessor >> processBufferedTextInput [
 	textInputBuffer reset
 ]
 
+{ #category : #initialization }
+BlKeyboardProcessor >> initialize [
+
+	super initialize.
+
+	buffer := BlKeyboardBuffer new.
+	textInputBuffer := BlTextInputBuffer new.
+	preventKeystrokes := false
+]
+
 { #category : #'event processing' }
 BlKeyboardProcessor >> processKeyDown: anEvent [
 
 	| aTarget aShortcutEvent |
-	(buffer hasEvent: anEvent key) ifTrue: [ ^ self ].
+	(anEvent isRepeated not and: [ buffer hasEvent: anEvent key ]) ifTrue: [ ^ self ].
 
 	buffer add: anEvent.
 
@@ -114,14 +75,15 @@ BlKeyboardProcessor >> processKeyDown: anEvent [
 	anEvent target: aTarget.
 	self fireEvent: anEvent.
 
-	aShortcutEvent := BlShortcutEvent new.
-	aShortcutEvent buffer: buffer.
-	aShortcutEvent target: aTarget.
-	aShortcutEvent modifiers: anEvent modifiers.
+	aShortcutEvent :=
+		BlShortcutEvent new
+			buffer: buffer;
+			target: aTarget;
+			modifiers: anEvent modifiers;
+			isRepeated: anEvent isRepeated;
+			yourself.
 
 	self fireEvent: aShortcutEvent.
-
-	previousShortcutTime := self space time now.
 
 	preventKeystrokes := aShortcutEvent isConsumed
 ]

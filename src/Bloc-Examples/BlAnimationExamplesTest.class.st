@@ -292,6 +292,18 @@ BlAnimationExamplesTest >> sequential [
 	^ element
 ]
 
+{ #category : #tests }
+BlAnimationExamplesTest >> testAnimationStoppedBeforeRunningNeverRuns [
+	| animation steps |
+	steps := 0.
+	animation := BlNumberTransition new.
+	animation from: 0; to: 1; duration: 1 second; onStepDo: [ :progress | steps := steps + 1 ].
+	animation stop.
+	animation run.
+	self deny: animation isRunning.
+	self assert: steps equals: 0
+]
+
 { #category : #'examples - base animation' }
 BlAnimationExamplesTest >> testBaseAnimation [
 

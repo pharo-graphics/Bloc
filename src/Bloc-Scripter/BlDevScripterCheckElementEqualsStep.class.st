@@ -30,7 +30,7 @@ BlDevScripterCheckElementEqualsStep >> playOn: aScripter [
 
 	anElement := self target findTargetStartingInScripter: aScripter.
 	self 
-		assert: [ self equalsBlock notNil ]
+		assert: [ self equalsBlock isNotNil ]
 		description: [ 'Equals block must be defined' ].
 		
 	self

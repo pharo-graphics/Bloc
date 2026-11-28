@@ -14,7 +14,7 @@ BlElement >> aeApplyClippingWithAllParentsOn: aCanvas [
 ]
 
 { #category : #'*Bloc-Alexandrie' }
-BlElement >> aeAsForm [
+BlElement >> aeAsCairoSurface [
 
 	| topMostBounds transformedGeometryBounds aCanvas matrix |
 	self isLayoutRequested ifTrue: [
@@ -27,10 +27,10 @@ BlElement >> aeAsForm [
 	matrix := BlMatrix2D new.
 	self allParentsReverseDo: [ :e | matrix := e transformation matrix copy multiplyBy: matrix ].
 
-	self transformation asElementTransformation class = BlElementAbsoluteTransformation 
+	self transformation asElementTransformation class = BlElementAbsoluteTransformation
 		ifFalse: [ matrix := self transformation matrix copy multiplyBy: matrix ].
 
-	transformedGeometryBounds := self geometryBounds copy.	
+	transformedGeometryBounds := self geometryBounds copy.
 	matrix transformBounds: transformedGeometryBounds.
 
 	self withAllParentsReverseDo: [ :e | transformedGeometryBounds translateBy: e position ].
@@ -39,13 +39,19 @@ BlElement >> aeAsForm [
 	aCanvas privateAeCairoSurface deviceOffset: transformedGeometryBounds origin negated.
 	aCanvas clippingRectangle: topMostBounds.
 
-	aCanvas restoreContextAfter: [ 
-		self allParentsReverseDo: [ :e | 
+	aCanvas restoreContextAfter: [
+		self allParentsReverseDo: [ :e |
 			aCanvas pathTranslate: e position.
 			e transformation aeApplyTo: aCanvas ].
 		self aeFullDrawOn: aCanvas ].
 
-	^ aCanvas asForm
+	^ aCanvas privateAeCairoSurface
+]
+
+{ #category : #'*Bloc-Alexandrie' }
+BlElement >> aeAsForm [
+
+	^ self aeAsCairoSurface asForm
 ]
 
 { #category : #'*Bloc-Alexandrie' }

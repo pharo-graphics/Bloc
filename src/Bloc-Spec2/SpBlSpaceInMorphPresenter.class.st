@@ -1,9 +1,7 @@
 "
-I'm a Spec2 presenter with a Bloc space ready to work.
+I am deprecated. Use `SpBlocPresenter` instead.
 
-I provide a space that is already shown using a `BlMorphicHost` to embed it in a `Morph`, which is added via `SpMorphPresenter`.
-
-See class-side for an example.
+I was a Morphic-only Spec2 presenter embedding a `BlSpace` hosted by `BlMorphicHost` inside a `SpMorphPresenter`. `SpBlocPresenter` replaces me with a backend-agnostic widget presenter that works on both Morphic (`SpMorphicBlocAdapter`) and Toplo (`SpToploBlocAdapter`).
 "
 Class {
 	#name : #SpBlSpaceInMorphPresenter,
@@ -50,26 +48,35 @@ SpBlSpaceInMorphPresenter class >> example [
 	^ spacePresenter
 ]
 
+{ #category : #testing }
+SpBlSpaceInMorphPresenter class >> isDeprecated [
+
+	^ true
+]
+
 { #category : #initialization }
 SpBlSpaceInMorphPresenter >> initializePresenters [
 
+	self deprecated: 'Use SpBlocPresenter instead.'.
 	super initializePresenters.
-	
-	morphPresenter := self newMorph
-		morph:
-			(Morph new
-				color: Color transparent;
-				layoutPolicy: TableLayout new;
-				yourself);
-		yourself.
 
-	space := BlSpace new
-		host: (BlMorphicHost new
-			containerMorph: morphPresenter morph;
-			yourself);
-		show;
-		yourself.
+	morphPresenter :=
+		self newMorph
+			morph:
+				(Morph new
+					color: Color transparent;
+					layoutPolicy: TableLayout new;
+					yourself);
+			yourself.
 
+	space :=
+		BlSpace new
+			host:
+				(BlMorphicHost new
+					containerMorph: morphPresenter morph;
+					yourself);
+			show;
+			yourself
 ]
 
 { #category : #accessing }

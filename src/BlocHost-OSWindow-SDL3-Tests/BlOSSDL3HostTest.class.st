@@ -57,6 +57,121 @@ BlOSSDL3HostTest >> testGPUHostNewHostSpaceFor [
 ]
 
 { #category : #tests }
+BlOSSDL3HostTest >> testGPUHostRendererForwardsUpdateGPUDevice [
+
+	| space backendWindow formRenderer originalDevice |
+	BlOSSDL3GPUHost isSupported ifFalse: [ ^ self skip ].
+
+	space := BlSpace new.
+	space useSDLHost.
+	space extent: 300 @ 200.
+	[
+		space open; settle.
+		backendWindow := space hostSpace osWindow backendWindow.
+		formRenderer := space hostSpace osWindow renderer formRenderer.
+		originalDevice := formRenderer gpuDevice.
+		self assert: originalDevice == backendWindow driver gpuDevice.
+
+		backendWindow gpuDevice: nil.
+		self assert: formRenderer gpuDevice isNil.
+		self deny: formRenderer needsFlush.
+
+		backendWindow gpuDevice: originalDevice.
+		self assert: formRenderer gpuDevice == originalDevice
+	] ensure: [
+		(backendWindow isNotNil and: [ originalDevice isNotNil and: [ formRenderer gpuDevice isNil ] ]) ifTrue: [
+			backendWindow gpuDevice: originalDevice ].
+		space close; settle ]
+]
+
+{ #category : #tests }
+BlOSSDL3HostTest >> testGPUHostRendererResetsNeedsFlushAndHandlesZeroExtent [
+
+	| space formRenderer resizedForm |
+	BlOSSDL3GPUHost isSupported ifFalse: [ ^ self skip ].
+
+	space := BlSpace new.
+	space useSDLHost.
+	space extent: 300 @ 200.
+	[
+		space open; settle.
+		formRenderer := space hostSpace osWindow renderer formRenderer.
+		resizedForm := Form extent: 360 @ 240 depth: 32.
+		formRenderer form: resizedForm.
+		formRenderer updateToNewResolution.
+		self assert: formRenderer extent equals: 360 @ 240.
+		self deny: formRenderer needsFlush.
+
+		formRenderer form: (Form extent: 0 @ 0 depth: 32).
+		formRenderer updateToNewResolution.
+		formRenderer flush.
+		self assert: formRenderer extent equals: 360 @ 240.
+		self deny: formRenderer needsFlush
+	] ensure: [
+		space close; settle ]
+]
+
+{ #category : #tests }
+BlOSSDL3HostTest >> testGPUHostResizeUpdatesBackingFormAndTexture [
+
+	| space child osWindow gpuRenderer initialForm attempts expandedPixel |
+	BlOSSDL3GPUHost isSupported ifFalse: [ ^ self skip ].
+
+	space := BlSpace new.
+	space useSDLHost.
+	space extent: 400 @ 300.
+	child :=
+		BlElement new
+			background: Color red;
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical matchParent ];
+			yourself.
+	space root addChild: child.
+	[
+		space open; settle.
+		osWindow := space hostSpace osWindow.
+		gpuRenderer := osWindow renderer.
+		initialForm := gpuRenderer form.
+		self assert: initialForm extent equals: osWindow canvasExtent.
+		self assert: gpuRenderer formRenderer extent equals: osWindow canvasExtent.
+		self assert: child extent equals: 400.0 @ 300.0.
+
+		gpuRenderer resized.
+		self assert: gpuRenderer form == initialForm.
+
+		attempts := 0.
+		osWindow extent: 640 @ 420.
+		[ (space root extent ~= (640.0 @ 420.0) or: [ gpuRenderer form extent ~= osWindow canvasExtent ]) and: [ attempts < 100 ] ]
+			whileTrue: [
+				attempts := attempts + 1.
+				(Delay forMilliseconds: 20) wait ].
+		space settle.
+		self assert: space extent equals: 640 @ 420.
+		self assert: child extent equals: 640.0 @ 420.0.
+		self assert: gpuRenderer form extent equals: osWindow canvasExtent.
+		self assert: gpuRenderer formRenderer extent equals: osWindow canvasExtent.
+		expandedPixel := gpuRenderer form colorAt: gpuRenderer form extent - (10 @ 10).
+		self assert: expandedPixel red > 0.9.
+		self assert: expandedPixel green < 0.1.
+		self assert: expandedPixel blue < 0.1.
+
+		attempts := 0.
+		space extent: 320 @ 240.
+		[ (osWindow extent ~= (320 @ 240) or: [ space root extent ~= (320.0 @ 240.0) ]) and: [ attempts < 100 ] ]
+			whileTrue: [
+				attempts := attempts + 1.
+				(Delay forMilliseconds: 20) wait ].
+		space settle.
+		self assert: space extent equals: 320 @ 240.
+		self assert: child extent equals: 320.0 @ 240.0.
+		self assert: gpuRenderer form extent equals: osWindow canvasExtent.
+		self assert: gpuRenderer formRenderer extent equals: osWindow canvasExtent
+	] ensure: [
+		space close; settle ]
+]
+
+{ #category : #tests }
 BlOSSDL3HostTest >> testGPUHostUseSDLHost [
 
 	| space |

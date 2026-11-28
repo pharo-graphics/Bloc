@@ -231,12 +231,12 @@ BlElementTest >> testChildWithId [
 	"Test with nil key (simulate an malfunction)"
 	error := nil.
 	[ blElement childWithId: nil ] onErrorDo: [ :e | error := e ].
-	self assert: error notNil.
+	self assert: error isNotNil.
 
 	"Test with no-existing child key"
 	error := nil.
 	[ blElement childWithId: #aChild ] onErrorDo: [ :e | error := e ].
-	self assert: error notNil.
+	self assert: error isNotNil.
 
 	"Test with existing child key"
 	blChild := BlElement id: #aChild.

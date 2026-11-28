@@ -94,12 +94,10 @@ BlDemoPresenter >> defaultLayout [
 { #category : #drawing }
 BlDemoPresenter >> drawOnCanvas: anElement [
 
-	canvas space root
-		removeChildren;
-		addChild: 
-			((anElement isKindOf: BlElement)
-				ifTrue: [ anElement ]
-				ifFalse: [ self notABlElementErrorMessage ])
+	canvas blocElement:
+		((anElement isKindOf: BlElement)
+			ifTrue: [ anElement ]
+			ifFalse: [ self notABlElementErrorMessage ])
 ]
 
 { #category : #errors }
@@ -123,20 +121,19 @@ BlDemoPresenter >> errorMessage: aString [
 { #category : #operations }
 BlDemoPresenter >> executeCode [
 
-	| item  |
+	| item |
 	item := tree selectedItem.
-	[ self drawOnCanvas: item execute ] 
-		on: Error 
+	[ self drawOnCanvas: item execute ]
+		on: Error
 		do: [ :ex |
-			canvas space root
-				removeChildren;
-				addChild: (self errorMessage: 'Execution of ', item item printString, ' led to an error') ]
+			canvas blocElement:
+				(self errorMessage: 'Execution of ' , item item printString , ' led to an error') ]
 ]
 
 { #category : #initialization }
-BlDemoPresenter >> initializeCanvasPresenter [ 
-	
-	canvas := self instantiate: SpBlSpaceInMorphPresenter
+BlDemoPresenter >> initializeCanvasPresenter [
+
+	canvas := self instantiate: SpBlocPresenter
 ]
 
 { #category : #initialization }

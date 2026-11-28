@@ -27,7 +27,7 @@ BlDevScripterElementClassEventTarget >> elementClass [
 { #category : #accessing }
 BlDevScripterElementClassEventTarget >> elementClass: aClass [
 	self
-		assert: [ aClass notNil ]
+		assert: [ aClass isNotNil ]
 		description: [ 'Element class must not be nil' ].
 
 	self 

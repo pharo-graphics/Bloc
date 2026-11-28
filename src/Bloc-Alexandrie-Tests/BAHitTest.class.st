@@ -1,115 +1,46 @@
 Class {
 	#name : #BAHitTest,
-	#superclass : #AePixelMatchTest,
-	#category : #'Bloc-Alexandrie-Tests-Base'
+	#superclass : #BAImageMatchTest,
+	#category : #'Bloc-Alexandrie-Tests'
 }
 
-{ #category : #exporting }
-BAHitTest class >> allFormSelectors [
+{ #category : #accessing }
+BAHitTest >> actual [
 
-	^ BlSpaceFixture allFixtureSelectors
-]
-
-{ #category : #convenience }
-BAHitTest class >> exportAll [
-	<script: 'super exportAll' >
-
-	super exportAll
-]
-
-{ #category : #convenience }
-BAHitTest class >> inspectAll [
-	<script: 'super inspectAll'>
-	
-	super inspectAll
-]
-
-{ #category : #convenience }
-BAHitTest class >> inspectMismatches [
-	<script: 'super inspectMismatches'>
-	
-	super inspectMismatches
+	^ self surfaceForSpace: [ :aSpace | self newHitSurfaceFor: aSpace root ]
 ]
 
 { #category : #hooks }
-BAHitTest >> actualForm [
+BAHitTest >> expectedImagesSubdirectory [
 
-	^ self hitFormFor: formSelector
+	^ 'hit'
 ]
 
-{ #category : #tests }
-BAHitTest >> expectedFormsDirectory [
+{ #category : #hooks }
+BAHitTest >> newHitSurfaceFor: anElement [
 
-	| repo |
-	repo := IceRepository registry detect: [ :each | each name asLowercase = 'bloc' ].
-	^ repo location / 'tests' / 'hit'
-]
-
-{ #category : #tests }
-BAHitTest >> formBehavior [
-
-	^ BlSpaceFixture new
-]
-
-{ #category : #tests }
-BAHitTest >> hitFormFor: aSymbol [
-		
-	| aSpace aForm |
-	aSpace := self formBehavior
-		host: BlHeadlessHost default;
-		perform: aSymbol;
-		space.
-	aSpace show.
-	aSpace settle.
-	aForm := [ self newHitFormFor: aSpace root ] ensure: [ aSpace close ].
-	aSpace settle.
-	^ aForm
-]
-
-{ #category : #tests }
-BAHitTest >> newHitFormFor: anElement [
-
-	| allElements colors colorByElement aForm |
+	| allElements colors wordByElement surface extent data stride maxX maxY |
 	allElements := anElement withAllChildrenBreadthFirst.
-
 	colors := { Color white }, (Color wheel: allElements size - 1).
-	colorByElement := IdentityDictionary newFromKeys: allElements andValues: colors.
-	aForm := Form extent: anElement extent depth: 32.
-	
-	1 to: anElement extent x do: [ :x |
-		1 to: anElement extent y do: [ :y |
-			| eachPosition hittedElementOrNil hittedColor |
-			eachPosition := x@y.
-			hittedElementOrNil := anElement findMouseEventTargetAt: eachPosition.
-			hittedColor := colorByElement
-				at: hittedElementOrNil
-				ifAbsent: [ Color black ].
-			aForm colorAt: eachPosition put: hittedColor ] ].
+	wordByElement := IdentityDictionary new: allElements size.
+	allElements with: colors do: [ :elem :col | wordByElement at: elem put: (col pixelWordForDepth: 32) ].
 
-	^ aForm
-]
+	extent := anElement extent asIntegerPoint.
+	surface := AeCairoImageSurface extent: extent format: AeCairoSurfaceFormat argb32.
+	data := surface data.
+	stride := surface stride.
+	maxX := extent x - 1.
+	maxY := extent y - 1.
 
-{ #category : #tests }
-BAHitTest >> testFormSelector [
+	1 to: maxX do: [ :x |
+		1 to: maxY do: [ :y |
+			| target elementWord offset |
+			target := anElement findMouseEventTargetAt: x @ y.
+			elementWord := wordByElement at: target ifAbsent: [ 16rFF000000 ].
+			offset := (x bitShift: 2) + (y * stride).
+			data uint32AtOffset: offset put: elementWord ] ].
 
-	| aPixelComparison tolerance |
-	aPixelComparison := self newPixelComparison.
-	tolerance := 0.001.
-	
-	aPixelComparison mismatchingPixelRatio <= tolerance ifFalse: [
-		self fuelOutMismatch: aPixelComparison ].
-	
-	self
-		assert: aPixelComparison isMatch
-		description: 'Pixel mismatch: #', formSelector.
-	
-"DEBUG?
-
-		aPixelComparison inspect.
-
-		self formMethod browse.
-		
-		self exportAsExpected.
-"
-
+	surface markDirty.
+	surface flush.
+	^ surface
 ]

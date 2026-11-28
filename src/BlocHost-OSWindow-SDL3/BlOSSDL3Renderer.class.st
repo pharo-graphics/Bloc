@@ -53,6 +53,11 @@ BlOSSDL3Renderer >> updateAll [
 	self shouldNotImplement
 ]
 
+{ #category : #updating }
+BlOSSDL3Renderer >> updateGPUDevice: aGPUDevice [
+	"No-op by default. Subclasses that use an SDL3 GPU device override this."
+]
+
 { #category : #'updating screen' }
 BlOSSDL3Renderer >> updateRectangle: aRectangle [
 

@@ -55,7 +55,7 @@ BAOffscreen >> canvas [
 { #category : #api }
 BAOffscreen >> ensureReady [
 
-	(aeCanvas notNil and: [ aeCanvas isValid ]) ifTrue: [ ^ self ].
+	(aeCanvas isNotNil and: [ aeCanvas isValid ]) ifTrue: [ ^ self ].
 
 	aeCanvas := AeCanvas extent: 1 @ 1.
 
