@@ -92,7 +92,7 @@ BlOSWindowSDL2HostSpace >> initializeRenderer [
 BlOSWindowSDL2HostSpace >> initializeWithAttributes: initialAttributes [
 
 	"We assume that current driver is the right SDL2 driver"
-	OSWindowDriver current ensureEventLoop.
+	"OSWindowDriver current ensureEventLoop. See: https://github.com/pharo-graphics/Bloc/issues/923"
 
 	window := OSWindow createWithAttributes: initialAttributes.
 	window eventHandler:
