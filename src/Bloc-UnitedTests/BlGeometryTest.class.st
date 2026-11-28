@@ -46,6 +46,22 @@ BlGeometryTest >> test3ElContainsPoint [
 	self assert: (c1 containsPoint: 50 @ 50)
 ]
 
+{ #category : #tests }
+BlGeometryTest >> testBezierQuadraticContainsPointsOnTheDrawnCurve [
+	"With three control points the curve is drawn as a true quadratic; hit testing must accept points lying on it."
+	| geometry element |
+	geometry := BlBezierCurveGeometry controlPoints: { 0 @ 0. 50 @ 100. 100 @ 0 }.
+	element := BlElement new
+		geometry: geometry;
+		extent: 100 @ 100;
+		border: (BlBorder paint: Color black width: 2);
+		yourself.
+	#( 0.25 0.5 0.75 ) do: [ :t |
+		| pointOnCurve |
+		pointOnCurve := ((1 - t) squared * (0 @ 0)) + (2 * (1 - t) * t * (50 @ 100)) + (t squared * (100 @ 0)).
+		self assert: (geometry containsPoint: pointOnCurve alreadyInGeometryBoundsOf: element) ]
+]
+
 { #category : #'any bounds tests' }
 BlGeometryTest >> testElAnyBounds [
 
@@ -410,7 +426,6 @@ BlGeometryTest >> testEqualityBlTriangleGeometry [
 		equals: BlTriangleGeometry new beBottom
 ]
 
-{ #category : #tests }
 BlGeometryTest >> testPolylineVerticesReleaseStrokedBounds [
 	"Changing the vertices of a polyline must forget the stroked bounds computed for the previous vertices."
 
@@ -425,4 +440,96 @@ BlGeometryTest >> testPolylineVerticesReleaseStrokedBounds [
 	self assert: (geometry strokedBounds: BlBounds new of: element) asRectangle equals: (10 @ 10 corner: 50 @ 10).
 	geometry vertices: { 10 @ 10. 90 @ 90 }.
 	self assert: (geometry strokedBounds: BlBounds new of: element) asRectangle equals: (10 @ 10 corner: 90 @ 90)
+]
+
+{ #category : #tests }
+BlGeometryTest >> testSigmoidContainsOnlyPointsNearTheCurve [
+	"A sigmoid is an open curve: hit testing accepts points on the stroke and rejects the rest of its bounds."
+	| geometry element |
+	geometry := BlSigmoidGeometry new from: 0 @ 0 to: 100 @ 100.
+	element := BlElement new
+		geometry: geometry;
+		extent: 100 @ 100;
+		border: (BlBorder paint: Color black width: 4);
+		yourself.
+	self assert: (geometry containsPoint: 50 @ 50 alreadyInGeometryBoundsOf: element).
+	self deny: (geometry containsPoint: 90 @ 10 alreadyInGeometryBoundsOf: element).
+	self deny: (geometry containsPoint: 10 @ 90 alreadyInGeometryBoundsOf: element)
+]
+
+{ #category : #tests }
+BlGeometryTest >> testSvgPathContainsPointsInsideItsFill [
+	"A closed SVG path contains the points of its filled area and not the points outside it."
+	| geometry element |
+	geometry := BlSvgPath new pathString: 'M 10 10 L 90 10 L 90 90 L 10 90 Z'.
+	element := BlElement new
+		geometry: geometry;
+		extent: 100 @ 100;
+		yourself.
+	self assert: (geometry containsPoint: 50 @ 50 alreadyInGeometryBoundsOf: element).
+	self deny: (geometry containsPoint: 5 @ 50 alreadyInGeometryBoundsOf: element).
+	self deny: (geometry containsPoint: 95 @ 95 alreadyInGeometryBoundsOf: element)
+]
+
+{ #category : #tests }
+BlGeometryTest >> testSvgPathContainsPointsOnItsStroke [
+	"An open SVG path has no area: it contains only the points covered by the element border."
+	| geometry element |
+	geometry := BlSvgPath new pathString: 'M 10 50 L 90 50'.
+	element := BlElement new
+		geometry: geometry;
+		extent: 100 @ 100;
+		border: (BlBorder paint: Color black width: 4);
+		yourself.
+	self assert: (geometry containsPoint: 50 @ 51 alreadyInGeometryBoundsOf: element).
+	self deny: (geometry containsPoint: 50 @ 70 alreadyInGeometryBoundsOf: element)
+]
+
+{ #category : #tests }
+BlGeometryTest >> testSvgPathIsParsedOnce [
+	"The first use of the path string parses it and caches the Cairo path; later uses reuse it."
+	| geometry element path |
+	geometry := BlSvgPath new pathString: 'M 10 10 L 90 10 L 90 90 L 10 90 Z'.
+	element := BlElement new
+		geometry: geometry;
+		extent: 100 @ 100;
+		yourself.
+	self assert: geometry pathCache geometryPath isNil.
+	geometry containsPoint: 50 @ 50 alreadyInGeometryBoundsOf: element.
+	path := geometry pathCache geometryPath.
+	self assert: path isNotNil.
+	geometry containsPoint: 5 @ 5 alreadyInGeometryBoundsOf: element.
+	self assert: geometry pathCache geometryPath identicalTo: path
+]
+
+{ #category : #tests }
+BlGeometryTest >> testSvgPathStringChangeReleasesCachedPath [
+	"Changing the path string releases the cached Cairo path, so the new path is the one hit tested."
+	| geometry element |
+	geometry := BlSvgPath new pathString: 'M 10 10 L 40 10 L 40 40 L 10 40 Z'.
+	element := BlElement new
+		geometry: geometry;
+		extent: 100 @ 100;
+		yourself.
+	self assert: (geometry containsPoint: 25 @ 25 alreadyInGeometryBoundsOf: element).
+	geometry pathString: 'M 60 60 L 90 60 L 90 90 L 60 90 Z'.
+	self assert: geometry pathCache geometryPath isNil.
+	self assert: (geometry containsPoint: 75 @ 75 alreadyInGeometryBoundsOf: element).
+	self deny: (geometry containsPoint: 25 @ 25 alreadyInGeometryBoundsOf: element)
+]
+
+{ #category : #tests }
+BlGeometryTest >> testSvgPathUsesItsFillRule [
+	"With the even-odd rule the inner square of two nested squares is a hole; with the winding rule it is not."
+	| geometry element |
+	geometry := BlSvgPath new pathString: 'M 0 0 L 100 0 L 100 100 L 0 100 Z M 25 25 L 75 25 L 75 75 L 25 75 Z'.
+	element := BlElement new
+		geometry: geometry;
+		extent: 100 @ 100;
+		yourself.
+	geometry useWindingFillRule.
+	self assert: (geometry containsPoint: 50 @ 50 alreadyInGeometryBoundsOf: element).
+	geometry useEvenOddFillRule.
+	self deny: (geometry containsPoint: 50 @ 50 alreadyInGeometryBoundsOf: element).
+	self assert: (geometry containsPoint: 10 @ 10 alreadyInGeometryBoundsOf: element)
 ]

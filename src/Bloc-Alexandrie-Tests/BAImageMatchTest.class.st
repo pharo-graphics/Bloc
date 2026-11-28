@@ -62,8 +62,8 @@ BAImageMatchTest >> imageBehavior [
 
 { #category : #hooks }
 BAImageMatchTest >> settings [
-	"Allow 1.5% ratio for vertical 1-pixel text baseline shifts across platform font metrics."
 
+	"Allow 1.5% ratio for vertical 1-pixel text baseline shifts across platform font metrics."
 	imageSelector = #buildTextAttributes ifTrue: [
 		^ AeImageMatchSettings colorTolerance: 0.01 maxMismatchCount: 0 maxMismatchRatio: 0.015 ].
 
